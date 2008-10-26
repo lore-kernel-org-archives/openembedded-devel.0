@@ -1,31 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ku7DE-00089C-JH
-	for openembedded-devel@openembedded.org; Sun, 26 Oct 2008 16:07:28 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ku7CW-0007Fe-MH
-	for openembedded-devel@openembedded.org; Sun, 26 Oct 2008 15:06:44 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 26 Oct 2008 15:06:44 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 26 Oct 2008 15:06:44 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 26 Oct 2008 16:06:38 +0100
-Message-ID: <ge211u$h4r$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081023 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: Reverting recent openmoko commit
+	(envelope-from <zecke@selfish.org>) id 1Ku7WH-0001av-Ma
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 26 Oct 2008 16:27:09 +0100
+Received: from [92.116.109.185] (helo=tamarin.localnet)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Ku7VX-0004Dh-VF
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 26 Oct 2008 16:26:25 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 26 Oct 2008 16:26:08 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200810261626.09315.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.109.185
+Subject: Randomly and massively reverting commits
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,19 +30,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Oct 2008 15:07:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 26 Oct 2008 15:27:10 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Hey Koen,
 
-I'm going to revert all recent openmoko commits till these guys learn 
-how to write a commit message. You have been warned before.
+could you please explain why you feel forced to revert anything I have merged 
+the last two hours? This looks like a hostile action and would qualify to 
+disable your account.
 
-In case you missed it, this wrong:
+Please explain your behavior!
 
-[foo] something
-
-
+z.
 
 
