@@ -1,13 +1,13 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1KuPWG-0000CK-4k
-	for openembedded-devel@openembedded.org; Mon, 27 Oct 2008 11:40:20 +0100
-Received: (qmail 27621 invoked by uid 1003); 27 Oct 2008 10:39:30 -0000
+	(envelope-from <philip@balister.org>) id 1KuPWU-0000D1-CT
+	for openembedded-devel@openembedded.org; Mon, 27 Oct 2008 11:40:35 +0100
+Received: (qmail 29369 invoked by uid 1003); 27 Oct 2008 10:39:44 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 27 Oct 2008 10:39:29 -0000
-Message-ID: <49059A61.80201@balister.org>
-Date: Mon, 27 Oct 2008 06:39:29 -0400
+	by mail.geekisp.com with SMTP; 27 Oct 2008 10:37:58 -0000
+Message-ID: <490599E4.5090409@balister.org>
+Date: Mon, 27 Oct 2008 06:37:24 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 10:40:20 -0000
-X-Groupsio-MsgNum: 6391
+X-List-Received-Date: Mon, 27 Oct 2008 10:40:36 -0000
+X-Groupsio-MsgNum: 6392
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040208050301020606000208"
+	micalg=sha1; boundary="------------ms080904060400000402090800"
 
---------------ms040208050301020606000208
+--------------ms080904060400000402090800
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -120,7 +120,7 @@ Philip
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 > 
 
---------------ms040208050301020606000208
+--------------ms080904060400000402090800
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -172,17 +172,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNzEw
-MzkyOVowIwYJKoZIhvcNAQkEMRYEFIpjWY4MxVKz1xUlA8biemjCMy7BMFIGCSqGSIb3DQEJDzFF
+MzcyNFowIwYJKoZIhvcNAQkEMRYEFIpjWY4MxVKz1xUlA8biemjCMy7BMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQAEIuxyIMAeVD7b8mtLkJfs3lYg3RO60fTRUFkAYdTEJ6rZBWJm
-D2Yxexwk3BpmHVakt+bwJ4RR1AoDNbGuClBerZksOMY09QvHYVdNKBHgQdIjQkgvXWtunqHKnw8Z
-rY869RdIDHb0RK6GTV0cogEibfcbRnCAub7ne8L5KoRylWBjGDgZfG0JvLtHyKYYtO1RErncoTol
-M8RBah7QyLoOhoO1rahGAKIoMSlur/55fmHxs6TY9CTz42NMbciRe1Nc9gXm70BwvjQAf/I9z1+3
-Muu6zfYpZkcKg0qt6cNiovVfqTMitXs3UEIc9oxJ9mgA3Ar2M54U2W7ulNJO+BU1AAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQA669L5uuYxguQlmdXiXqTZSeLWhDhsWDUW9ouHCwtQ5wdas/4B
+cd0FHkqKF7BGnBPRtYI030yUFZzeWjHZY0yQMhZgYJrhzti5u6ZdalqP46xaxVVKHtJ3cmwLBv+U
+HtuQItcrEHF9NwWm9s/mZ22yyvKOp5s9hJrRopcDES0s5WziJH2UxUz0iHARWymm70FsSOkTNOaS
+xiimELdefUciMvzwVDFN/76sdLRHdk57o/Wxenjk5ESe33a/GV28yJg/3OnxEQ8zLoNh57jK6HLX
+cFpdrseuUtk9vtM6hnpDXlG9TDAra3ECn5lRYCqDAj/XilgoYOGlVdj11Qz08RaUAAAAAAAA
 
---------------ms040208050301020606000208--
+--------------ms080904060400000402090800--
