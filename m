@@ -1,21 +1,21 @@
-Received: from [75.125.193.18] (helo=alpha.vfshosting.net)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gremlin@gremlin.it>) id 1KuSS7-0006lF-Tu
-	for openembedded-devel@openembedded.org; Mon, 27 Oct 2008 14:48:16 +0100
-X-ClientAddr: 127.0.0.1
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by alpha.vfshosting.net (8.13.8/8.13.8) with ESMTP id m9RDlJ8O017665
-	for <openembedded-devel@openembedded.org>;
-	Mon, 27 Oct 2008 14:47:19 +0100
-Message-ID: <4905C665.7070509@gremlin.it>
-Date: Mon, 27 Oct 2008 14:47:17 +0100
-From: Alessandro GARDICH <gremlin@gremlin.it>
-User-Agent: Thunderbird 1.5.0.12 (X11/20071019)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <f96d234e0810270640i3bbb068fx2d8b8b0855ee0e22@mail.gmail.com>
-In-Reply-To: <f96d234e0810270640i3bbb068fx2d8b8b0855ee0e22@mail.gmail.com>
-Subject: Re: OE weekly changelog 2008-10-20 to 2008-10-27
+	(envelope-from <utx@penguin.cz>) id 1KuUSx-0004ao-F1
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Oct 2008 16:57:15 +0100
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id 2212C628084
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Oct 2008 16:56:27 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <NGBBLNEOGLJIIJKLFLPFOEAEDKAA.linux@hf-electronics.com>
+References: <NGBBLNEOGLJIIJKLFLPFOEAEDKAA.linux@hf-electronics.com>
+Date: Mon, 27 Oct 2008 16:56:26 +0100
+Message-Id: <1225122986.5129.41.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.0 
+Subject: Re: Problems building a kernelmodule for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,29 +29,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 13:48:16 -0000
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Oct 2008 15:57:15 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-Cliff Brake wrote:
-> OE weekly changelog 2008-10-20 to 2008-10-27
->   
-> [...]
+Henk Geraads wrote:
 
+> when I try to make the module, following error message is produced!
 
-WOW ... we will have it all week ?
+It seems, that source code is a bit outdated (intended for older kernel
+that you have) or you are compiling it in a bad way.
 
+> 	include/linux/calc64.h:25: error: '__LINUX_ARM_ARCH__' undeclared (fir=
+st use in this function)
 
+Strange. It should be defined.
 
+> 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning: implicit decl=
+aration of function 'GPLR'
+> 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning: implicit decl=
+aration of function 'GPIO_bit'
+> 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c: In function 'cfi_init':
+> 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:204: error: 'GPIO_IN' unde=
+clared (first use in this function)
+> 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:208: error: 'MSC1' undecla=
+red (first use in this function)
+> 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:209: error: 'GPIO79_nCS_3_=
+MD' undeclared (first use in this function)
 
--- 
- /-------------------------------------------------------------\
-|           Alessandro Gardich : gremlin@gremlin.it             |
- >-------------------------------------------------------------<
-|  I never saw a wild thing sorry for itself.                   |
-|  A small bird will drop frozen dead from a bough              |
-|  without ever having felt sorry for itself.                   |
- \-------------------------------------------------------------/
+It indicates that you need to include asm/arch/pxa2xx-regs.h and
+asm/arch/pxa2xx-gpio.h.
+
+--=20
+Best Regards / S pozdravem,
+
+Stanislav Brabec
+software developer
+---------------------------------------------------------------------
+SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
+Lihovarsk=E1 1060/12           tel: +420 284 028 966, +49 911 740538747
+190 00 Praha 9                                  fax: +420 284 028 951
+Czech Republic                                    http://www.suse.cz/
 
 
 
