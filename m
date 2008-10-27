@@ -1,25 +1,26 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [208.84.147.47] (helo=rhodos.klever.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1KuRpE-0008WB-1j
+	(envelope-from <hacker@klever.net>) id 1KuRuc-0000KC-5j
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 14:08:04 +0100
-Received: from andromeda.vanille.de (e180160026.adsl.alicedsl.de
-	[85.180.160.26])
-	by drlauer-research.com (Postfix) with ESMTP id A8D70584BC9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2008 14:21:07 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Oct 2008 14:07:14 +0100
-User-Agent: KMail/1.9.10
-References: <bdb0025f0810222159ka9b7ab7q4088bd6a241e477a@mail.gmail.com>
-	<20081023231631.GB21151@denix.org>
-	<ae9c9a1c0810232040k4af9b61sed0522a203291a54@mail.gmail.com>
-In-Reply-To: <ae9c9a1c0810232040k4af9b61sed0522a203291a54@mail.gmail.com>
+	Mon, 27 Oct 2008 14:13:38 +0100
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=rhodos; d=klever.net;
+	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:References:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	b=FBBEfJqn+ZpXFeBTzUK7FjeRmKVWubLHgL9Pox5qYt8vZ3PyS5l9ZpeCcaeHb++qCKz3JSQO0gdv1vl+ZvREEosXC1ZjkJK94VMfIWkjoYdfu8TrGb/eC453T14zuf4b;
+Received: from [85.183.207.43] (helo=[192.168.150.156])
+	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KuRtp-0001tO-MA
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Oct 2008 14:12:49 +0100
+Message-ID: <4905BE48.7020001@klever.net>
+Date: Mon, 27 Oct 2008 14:12:40 +0100
+From: Michael Krelin <hacker@klever.net>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
 MIME-Version: 1.0
-Message-Id: <200810271407.14178.mickey@vanille-media.de>
-Subject: Re: pushing mamona things upstream
+To: openembedded-devel@lists.openembedded.org
+References: <ge211u$h4r$1@ger.gmane.org>	<1225098642.4235.371.camel@lenovo.internal.reciva.com>	<490599E4.5090409@balister.org>
+	<200810271345.22194.zecke@selfish.org>
+In-Reply-To: <200810271345.22194.zecke@selfish.org>
+Subject: Re: Reverting recent openmoko commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 13:08:04 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 27 Oct 2008 13:13:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Am Friday 24 October 2008 05:40:05 schrieb Ricardo Salveti:
-> Probably we'll need some kind of Mamona branch at OE for the patches
-> that needs review, like ones that touch any bbclass.
+> 	- I will ask our OM developers to use a different style in the commit message 
+> (even if this is not mandated) to not use braces but colons. And yes I think I 
+> asked them to use [] as I'm used to this from various other projects, I will 
+> ask them to change and change it myself.
 
-Agreed, please commit to a branch for the things that
-a) do not apply cleanly, or
-b) touch "core" packages and/or classes.
+I think the problem was not purely syntactical, the problem is that the 
+commit subject did not always mention the recipe in question, but rather 
+"Description", "alias name", etc.
 
-Thanks,
 
-:M:
+Love,
+H
 
 
