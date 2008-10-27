@@ -1,26 +1,25 @@
-Received: from [208.84.147.47] (helo=rhodos.klever.net)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hacker@klever.net>) id 1KuQZM-0007v5-6P
+	(envelope-from <zecke@selfish.org>) id 1KuRU2-0007kQ-A6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 12:47:36 +0100
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=rhodos; d=klever.net;
-	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:References:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	b=ZRI7Xv8W8nT5p97eRgDrsBNNISxvfhtzExEq4VnY+fPYbXaPVqgWD5Hh2d4AlvecXOwyTMWRa0Sp2rpFL4Wrx6/BiQPuVDiMEQmgWecEfGsOdh7JAC4YQQO4K04hr0r8;
-Received: from [85.183.207.43] (helo=[192.168.150.156])
-	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KuQYa-00020O-4Z
+	Mon, 27 Oct 2008 13:46:10 +0100
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244]
+	helo=tamarin.localnet) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KuRTG-00052D-Ho
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 12:46:48 +0100
-Message-ID: <4905AA27.6010600@klever.net>
-Date: Mon, 27 Oct 2008 12:46:47 +0100
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Mon, 27 Oct 2008 13:45:22 +0100
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-References: <ge211u$h4r$1@ger.gmane.org> <4905A264.9050509@klever.net>
-	<200810271230.56134.mickey@vanille-media.de>
-In-Reply-To: <200810271230.56134.mickey@vanille-media.de>
-Subject: Re: Policies vs. Guidelines vs. Requirements
+Date: Mon, 27 Oct 2008 13:45:21 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+References: <ge211u$h4r$1@ger.gmane.org>
+	<1225098642.4235.371.camel@lenovo.internal.reciva.com>
+	<490599E4.5090409@balister.org>
+In-Reply-To: <490599E4.5090409@balister.org>
+MIME-Version: 1.0
+Message-Id: <200810271345.22194.zecke@selfish.org>
+Subject: Re: Reverting recent openmoko commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +33,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 11:47:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 27 Oct 2008 12:46:10 -0000
+Content-Type: text/plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> to me these "policies" were always more guidelines than strict requirements. 
-> We are not a beaurocratic institute here or a closed company (where you can 
-> feel free to impose them if you want), but rather a bunch people working 
-> together on a somewhat common goal.
+On Monday 27 October 2008 11:37:24 Philip Balister wrote:
 
-I think this is very important statement. Because it really feels weird 
-in the *free* as in freedom world to be forced into any requirements 
-like that. Especially now that we have git, which may also benefit from 
-'pull model' and the very idea of having not to pull branches for the 
-sole reason that weeks ago they've *commented* on something the way we 
-wouldn't.
+> I agree the reversion is an overreaction, but also understand this is
+> not the first time this has happened. The messages I noticed that raised
+> my eyebrows where some simple changes of description tags. The commit
+> message was of the from "[description] Change package description". I
+> try (when I have time" to inspect commits that impact stuff I care
+> about. Messages of this form force me to read the diff to see what was
+> impacted.
 
-> As such it's _completely unacceptable_ to revert a whole lot of valuable work 
-> just because some of the guidelines were not enforced 100%. Completely 
-> unacceptable. Also unacceptable is a one-man-show revertion without a 
-> consensus, but that's something the core team has to discuss.
+The difficulty is. The original above commit touched ~40 recipes, now many of 
+these changes do not apply because the recipes that are touched changed, are 
+not there any more, or not yet merged.
 
-I think Koen is smart enough to understand that these reverts do not 
-improve history in any way, so I'd say that it's the result of 
-frustration with these messages. While I do not approve of it, you 
-should keep in mind that behind the name "Koen" there is also a 
-breathing person.
+I'm basically in this dilemma:
+	- Copy everything from OM over and have one commit... I personally hate this 
+as we lose the history of the changes, I don't credit the creators properly. I 
+hope there is an agreement.
 
-> In the meantime I'd be very happy if Holger would reapply his changes.
+       - I could rewrite every commit message. I have to admit I'm too lazy to 
+spend two weeks in rewriting every single commit message. I would have to 
+resort to the above which I think is  a bad idea.
 
-Why not angrily revert the reverts? ;-)
+      -  I can merge as I did. The changes (at least at the end of the chain) 
+are sensible and should follow common practices. The commit messages are not 
+perfect (in the case that they use [] instead of :). From the possible options 
+I see this is the best. As this is crediting people properly (encouraging them 
+to do more work), it is preserving history (the distance between commits, the 
+authors, the reasoning is still there) and it is not doing any damage.
 
-Love,
-H
+Where from here?
+	- I will merge yesterday's work again as is?
+	- I will ask our OM developers to use a different style in the commit message 
+(even if this is not mandated) to not use braces but colons. And yes I think I 
+asked them to use [] as I'm used to this from various other projects, I will 
+ask them to change and change it myself.
+
+
+z.
+
 
 
