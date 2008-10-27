@@ -1,26 +1,22 @@
-Received: from [62.250.3.53] (helo=relay.versatel.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1KuNFA-0005jG-1b
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 09:14:32 +0100
-Received: from [62.58.160.127] (helo=hf-electronics.com)
-	by relay.versatel.net with smtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1KuNEO-0000rm-Dr
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 09:13:44 +0100
-Received: from <linux@hf-electronics.com> with PostMaster 4.3.2 (MPS);
-	Mon, 27 Oct 2008 09:12:37 +100
-From: "Henk Geraads" <linux@hf-electronics.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Oct 2008 09:13:04 +0100
-Message-ID: <NGBBLNEOGLJIIJKLFLPFOEAEDKAA.linux@hf-electronics.com>
-MIME-Version: 1.0
-X-Priority: 1 (Highest)
-X-MSMail-Priority: High
-X-Mailer: Microsoft Outlook IMO, Build 9.0.6604 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-Importance: High
-Subject: Problems building a kernelmodule for OE
+	(envelope-from <pb@reciva.com>)
+	id 1KuO8N-0003vZ-Hd; Mon, 27 Oct 2008 10:11:35 +0100
+Received: from 88-111-134-150.dynamic.dsl.as9105.com ([88.111.134.150]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1KuO7Y-00056c-Sj; Mon, 27 Oct 2008 09:10:45 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ge211u$h4r$1@ger.gmane.org>
+References: <ge211u$h4r$1@ger.gmane.org>
+Date: Mon, 27 Oct 2008 09:10:42 +0000
+Message-Id: <1225098642.4235.371.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Reverting recent openmoko commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,105 +30,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 08:14:32 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Oct 2008 09:11:35 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On Sun, 2008-10-26 at 16:06 +0100, Koen Kooi wrote:
+> I'm going to revert all recent openmoko commits till these guys learn 
+> how to write a commit message. You have been warned before.
+> 
+> In case you missed it, this wrong:
+> 
+> [foo] something
 
-I am not sure if i posted it in the correct mailing list!
-But I am trying to make a kernel module for the OE distro angstrom 200=
-7-12 for machine CM-X270.
+This seems like an absurd over-reaction to something that is, at most, a
+trivial and merely technical breach of the checkin rules.  
 
-when I try to make the module, following error message is produced!
+Indeed, it is not even obvious that the original checkin breached any
+rule at all.  Where exactly is this strict format for commit messages
+documented?  The policy page at
+http://wiki.openembedded.net/index.php/Commit_Policy doesn't seem to
+make mention of this.  The closest I could find was, under "other tips
+for making good commits":
 
-	In file included from include/linux/jiffies.h:4,
-     	      	     from include/linux/sched.h:54,
-      	           from include/asm/uaccess.h:14,
-                 	     from /home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.=
-c:10:
-	include/linux/calc64.h: In function 'do_div_llr':
-	include/linux/calc64.h:25: error: '__LINUX_ARM_ARCH__' undeclared (fi=
-rst use in this function)
-	include/linux/calc64.h:25: error: (Each undeclared identifier is repo=
-rted only once
-	include/linux/calc64.h:25: error: for each function it appears in.)
-	/home/henk/cm270/fifodrv../cfi-ktst/cfi-mod.c: In function 'cfi_ioctl=
-':
-	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning: implicit dec=
-laration of function 'GPLR'
-	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning: implicit dec=
-laration of function 'GPIO_bit'
-	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c: In function 'cfi_init':
-	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:204: error: 'GPIO_IN' und=
-eclared (first use in this function)
-	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:208: error: 'MSC1' undecl=
-ared (first use in this function)
-	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:209: error: 'GPIO79_nCS_3=
-_MD' undeclared (first use in this function)
-	make[2]: *** [/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.o] Error 1
-	make[1]: *** [_module_/home/henk/cm270/fifodrv/cfi-ktst] Error 2
-	make: *** [default] Error 2
+* Have a clear commit message (example):
+    - The first line of commit is a summary of the changes.
+    - The first line should start with the name of the recipe the change affects.
 
-My source for the module cfi-kernel is located in the
-path: /home/henk/cm270/fifodrv
+and, as far as I can tell, the message that you quoted does indeed
+comply with these two guidelines, i.e. it contains the name of the
+recipe follows by a summary of the changes.  Nowhere on this page, or
+any other policy page that I found on quick inspection, were any further
+rules about what exactly constitutes an acceptable or unacceptable
+message.  In any case, further down the page is stated that "the above
+rules are not hard and fast rules": there is no indication that a
+non-conformant checkin message should lead to summary reversion of your
+changes.
 
-I create with "bitbake linux -c defshell -f" an enviroment with the
-"correct" path's and env.var's.
+The GitPhrasebook page does mention a more prescriptive format for
+checkin messages, but there is no indication that this is normative or
+forms a core part of OE policy.  (If it were, I would have expected to
+see it on the Commit Policy page, and/or to carry the imprimatur of the
+core team.)
 
-Makefile:
-	# Makefile for external CFI kernel module
-	CFLAGS =3D -march=3Darmv5t -Wall -D_GNU_SOURCE=20
+All in all then, this whole episode appears rather like you have decided
+to enforce some arbitrary (and perhaps self-invented) rule for its own
+sake, rather than because there is actually an important point at issue.
+If true, that seems like inappropriate behaviour and, frankly, not
+something that is likely to enhance OE's reputation as a
+professionally-maintained tool for users to build their systems around.
 
-	ifneq ($(KERNELRELEASE),)
-	# we are inside the kernel tree and called from kernel build system
+So, please explain in more detail why you felt it was necessary to
+revert these changes without further discussion.  Was this a core team
+decision or did you act unilaterally?
 
-	obj-m   :=3D cfi-mod.o
-	else
-	# we are a separate module and start the kernel make and give it our =
-directory
-	KERNELDIR =3D /home/henk/oe/build/tmp/angstrom/work/cm-x270-angstrom-lin=
-ux-gnueabi/linux-2.6.23-r8/linux-2.6.23
-
-	#KERNELDIR =3D ../linux-26
-	PWD       :=3D $(shell pwd)
-
-	default:
-		$(MAKE) -C $(KERNELDIR) M=3D$(PWD) modules
-	endif
-
-	clean::
-		$(RM) -rf *.o .depend .*.cmd *.ko *.mod.c .tmp_versions *~
-
-	.PHONY: clean
-
-	depend .depend dep:
-		$(CC) $(CFLAGS) -M *.c > .depend
-
-	ifeq (.depend,$(wildcard .depend))
-	include .depend
-	endif
-
-
-start op the module sourcecode:
-
-	#include <linux/module.h>
-	#include <linux/kernel.h>
-	#include <linux/ioport.h>
-	#include <linux/fs.h>
-	#include <asm/uaccess.h>
-	#include <asm/io.h>
-
-	MODULE_AUTHOR("Henk"); =20
-	......
-
-
-What is my mistake??
-
-Thanks in advance for any reaction!
-
-Henk
+p.
 
 
 
