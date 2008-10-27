@@ -1,34 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [62.250.3.53] (helo=relay.versatel.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KuBab-00087W-B6
-	for openembedded-devel@openembedded.org; Sun, 26 Oct 2008 20:47:53 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KuBZq-0001PG-FP
-	for openembedded-devel@openembedded.org; Sun, 26 Oct 2008 19:47:06 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 26 Oct 2008 19:47:06 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 26 Oct 2008 19:47:06 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 26 Oct 2008 20:46:57 +0100
-Message-ID: <ge2hfh$3pq$1@ger.gmane.org>
-References: <gdv0a2$u5k$1@ger.gmane.org>
-	<1225048399.4235.340.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081023 Shredder/3.0b1pre
-In-Reply-To: <1225048399.4235.340.camel@lenovo.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Making thumb builds easier in OE
+	(envelope-from <linux@hf-electronics.com>) id 1KuNFA-0005jG-1b
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Oct 2008 09:14:32 +0100
+Received: from [62.58.160.127] (helo=hf-electronics.com)
+	by relay.versatel.net with smtp (Exim 4.69)
+	(envelope-from <linux@hf-electronics.com>) id 1KuNEO-0000rm-Dr
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Oct 2008 09:13:44 +0100
+Received: from <linux@hf-electronics.com> with PostMaster 4.3.2 (MPS);
+	Mon, 27 Oct 2008 09:12:37 +100
+From: "Henk Geraads" <linux@hf-electronics.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 27 Oct 2008 09:13:04 +0100
+Message-ID: <NGBBLNEOGLJIIJKLFLPFOEAEDKAA.linux@hf-electronics.com>
+MIME-Version: 1.0
+X-Priority: 1 (Highest)
+X-MSMail-Priority: High
+X-Mailer: Microsoft Outlook IMO, Build 9.0.6604 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+Importance: High
+Subject: Problems building a kernelmodule for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,64 +34,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Oct 2008 19:47:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Oct 2008 08:14:32 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 26-10-2008 20:13, Phil Blundell wrote:
-> On Sat, 2008-10-25 at 13:35 +0200, Koen Kooi wrote:
->> Hi,
->>
->> I noticed that Phil fixed thumb interworking in glibc for armv4t which
->> spurred me to do this:
->>
->> arm tune files: include tune-thumb by default
->> * it defaults to non-thumb, so no functional change
->
-> Sadly it is not true to say that there is no functional change.
-> Including tune-thumb.inc with no further changes will set interworking
-> on by default: this is fairly transparent at ARMv5 and higher, but not
-> for ARMv4T.  It is probably not a good idea to default interworking on
-> for the latter architecture, which is to say that I think your changes
-> to tune-arm920t.inc and tune-arm9tdmi.inc should probably be undone.
-> (The same might be true for others: for example, I'm not sure offhand
-> what architecture ep9312 uses.)
+Hi,
 
-Right, I made interworking opt-in as well, I got thrown off by the 
-ARM_INSTRUCTION set on top. ep9312 uses an arm920t core + maverick FPU.
+I am not sure if i posted it in the correct mailing list!
+But I am trying to make a kernel module for the OE distro angstrom 200=
+7-12 for machine CM-X270.
 
-regards,
+when I try to make the module, following error message is produced!
 
-Koen
+	In file included from include/linux/jiffies.h:4,
+     	      	     from include/linux/sched.h:54,
+      	           from include/asm/uaccess.h:14,
+                 	     from /home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.=
+c:10:
+	include/linux/calc64.h: In function 'do_div_llr':
+	include/linux/calc64.h:25: error: '__LINUX_ARM_ARCH__' undeclared (fi=
+rst use in this function)
+	include/linux/calc64.h:25: error: (Each undeclared identifier is repo=
+rted only once
+	include/linux/calc64.h:25: error: for each function it appears in.)
+	/home/henk/cm270/fifodrv../cfi-ktst/cfi-mod.c: In function 'cfi_ioctl=
+':
+	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning: implicit dec=
+laration of function 'GPLR'
+	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning: implicit dec=
+laration of function 'GPIO_bit'
+	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c: In function 'cfi_init':
+	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:204: error: 'GPIO_IN' und=
+eclared (first use in this function)
+	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:208: error: 'MSC1' undecl=
+ared (first use in this function)
+	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:209: error: 'GPIO79_nCS_3=
+_MD' undeclared (first use in this function)
+	make[2]: *** [/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.o] Error 1
+	make[1]: *** [_module_/home/henk/cm270/fifodrv/cfi-ktst] Error 2
+	make: *** [default] Error 2
+
+My source for the module cfi-kernel is located in the
+path: /home/henk/cm270/fifodrv
+
+I create with "bitbake linux -c defshell -f" an enviroment with the
+"correct" path's and env.var's.
+
+Makefile:
+	# Makefile for external CFI kernel module
+	CFLAGS =3D -march=3Darmv5t -Wall -D_GNU_SOURCE=20
+
+	ifneq ($(KERNELRELEASE),)
+	# we are inside the kernel tree and called from kernel build system
+
+	obj-m   :=3D cfi-mod.o
+	else
+	# we are a separate module and start the kernel make and give it our =
+directory
+	KERNELDIR =3D /home/henk/oe/build/tmp/angstrom/work/cm-x270-angstrom-lin=
+ux-gnueabi/linux-2.6.23-r8/linux-2.6.23
+
+	#KERNELDIR =3D ../linux-26
+	PWD       :=3D $(shell pwd)
+
+	default:
+		$(MAKE) -C $(KERNELDIR) M=3D$(PWD) modules
+	endif
+
+	clean::
+		$(RM) -rf *.o .depend .*.cmd *.ko *.mod.c .tmp_versions *~
+
+	.PHONY: clean
+
+	depend .depend dep:
+		$(CC) $(CFLAGS) -M *.c > .depend
+
+	ifeq (.depend,$(wildcard .depend))
+	include .depend
+	endif
 
 
->
->> So people can now set ARM_INSTRUCTION_SET = "thumb" and resulting ARM
->> builds will be in thumb mode.
->>
->> This does raise a few issues:
->>
->>    1) How can we handle thumb2? I only changed the arm9 and arm11 tune
->> files, how should we do the arm1176 and cortex ones?
->
-> I'm not really sure what sort of 'handling' you are thinking of here.
-> Can you elaborate?
->
->>    2) Since thumb packages are compatible with non-thumb ones we don't
->> really need a seperate arch, but keeping them same feels wrong and is a
->> QA nightmare.
->
-> I'm not sure that this is any worse than, say, -O2 vs -Os vs -O0, or
-> using different compilers.  There are already plenty of ways you can get
-> different output binaries in a way that isn't reflected in PACKAGE_ARCH,
-> and I have no real desire to see PACKAGE_ARCH become a sort of sha1 hash
-> of everything that went into the build environment.  Ultimately, I think
-> this is just something that DISTROs need to be grown-up about: they
-> should pick a set of policies for each nominal architecture, stick to
-> them, and be responsible for QAing any interoperability issues that
-> arise if they decide to change.
->
-> p.
+start op the module sourcecode:
+
+	#include <linux/module.h>
+	#include <linux/kernel.h>
+	#include <linux/ioport.h>
+	#include <linux/fs.h>
+	#include <asm/uaccess.h>
+	#include <asm/io.h>
+
+	MODULE_AUTHOR("Henk"); =20
+	......
+
+
+What is my mistake??
+
+Thanks in advance for any reaction!
+
+Henk
 
 
 
