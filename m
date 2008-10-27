@@ -1,26 +1,25 @@
-Received: from [208.84.147.47] (helo=rhodos.klever.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hacker@klever.net>) id 1KuRuc-0000KC-5j
+	(envelope-from <mickey@vanille-media.de>) id 1KuS8C-0005vU-16
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 14:13:38 +0100
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=rhodos; d=klever.net;
-	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:References:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	b=FBBEfJqn+ZpXFeBTzUK7FjeRmKVWubLHgL9Pox5qYt8vZ3PyS5l9ZpeCcaeHb++qCKz3JSQO0gdv1vl+ZvREEosXC1ZjkJK94VMfIWkjoYdfu8TrGb/eC453T14zuf4b;
-Received: from [85.183.207.43] (helo=[192.168.150.156])
-	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KuRtp-0001tO-MA
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 14:12:49 +0100
-Message-ID: <4905BE48.7020001@klever.net>
-Date: Mon, 27 Oct 2008 14:12:40 +0100
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
-MIME-Version: 1.0
+	Mon, 27 Oct 2008 14:27:40 +0100
+Received: from andromeda.vanille.de (e180160026.adsl.alicedsl.de
+	[85.180.160.26])
+	by drlauer-research.com (Postfix) with ESMTP id A58C4584BCD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Oct 2008 14:40:43 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-References: <ge211u$h4r$1@ger.gmane.org>	<1225098642.4235.371.camel@lenovo.internal.reciva.com>	<490599E4.5090409@balister.org>
-	<200810271345.22194.zecke@selfish.org>
-In-Reply-To: <200810271345.22194.zecke@selfish.org>
-Subject: Re: Reverting recent openmoko commit
+Date: Mon, 27 Oct 2008 14:26:50 +0100
+User-Agent: KMail/1.9.10
+References: <gdfm8d$apg$1@ger.gmane.org>
+	<1224438415.4235.266.camel@lenovo.internal.reciva.com>
+	<4900464A.9090009@kernelconcepts.de>
+In-Reply-To: <4900464A.9090009@kernelconcepts.de>
+MIME-Version: 1.0
+Message-Id: <200810271426.50371.mickey@vanille-media.de>
+Subject: Re: busybox recipe isappearances
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,21 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 13:13:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 27 Oct 2008 13:27:40 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> 	- I will ask our OM developers to use a different style in the commit message 
-> (even if this is not mandated) to not use braces but colons. And yes I think I 
-> asked them to use [] as I'm used to this from various other projects, I will 
-> ask them to change and change it myself.
+Am Thursday 23 October 2008 11:39:22 schrieb Florian Boor:
+> Phil Blundell schrieb:
+> > It's long been my view that we should just add newer ones and leave the
+> > old ones alone.  There's really no reason to delete old recipes and,
+> > even if you check for PREFERRED_VERSIONs in the git tree, there is no
+> > real way to know who else might be relying on the version you are about
+> > to delete.
+>
+> I share this opinion. Since we do not know what people are doing with OE
+> there is no way to find out if a recipe is used or not. In fact I can
+> imagine a lot of situations in which you might want to use an older recipe.
+>
+> Why do we delete old recipes? We do not do this with old software releases.
 
-I think the problem was not purely syntactical, the problem is that the 
-commit subject did not always mention the recipe in question, but rather 
-"Description", "alias name", etc.
+I think it's really messy and confusing to keep all version of recipes we ever 
+had. I'd rather keep only major releases. I know, most of that is taste.
 
-
-Love,
-H
+-- 
+:M:
 
 
