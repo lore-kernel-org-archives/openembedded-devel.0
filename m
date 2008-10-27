@@ -1,25 +1,23 @@
-Received: from [208.84.147.47] (helo=rhodos.klever.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hacker@klever.net>) id 1KuQ3J-00026l-Pl
+	(envelope-from <mickey@vanille-media.de>) id 1KuQK1-0002jn-GD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 12:14:30 +0100
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=rhodos; d=klever.net;
-	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:References:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	b=K/71ZQNecHunY+AdsFs2XhZrRTLQWVFlDPJKkg2vOzsF6ybl+UznLAHPlC/q/ePYKDKO7Rut5RqbR2q8hvZkafefBe3xq2fAjmQ7PAv4SVrNces961/z9l6uRq3zamFj;
-Received: from [85.183.207.43] (helo=[192.168.150.156])
-	by rhodos.klever.net with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hacker@klever.net>) id 1KuQ2X-0007mj-QA
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Oct 2008 12:13:41 +0100
-Message-ID: <4905A264.9050509@klever.net>
-Date: Mon, 27 Oct 2008 12:13:40 +0100
-From: Michael Krelin <hacker@klever.net>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080724)
-MIME-Version: 1.0
+	Mon, 27 Oct 2008 12:31:45 +0100
+Received: from andromeda.vanille.de (e180160026.adsl.alicedsl.de
+	[85.180.160.26])
+	by drlauer-research.com (Postfix) with ESMTP id 1594D584BB8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Oct 2008 12:44:49 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-References: <ge211u$h4r$1@ger.gmane.org>
-In-Reply-To: <ge211u$h4r$1@ger.gmane.org>
-Subject: Re: Reverting recent openmoko commit
+Date: Mon, 27 Oct 2008 12:30:55 +0100
+User-Agent: KMail/1.9.10
+References: <ge211u$h4r$1@ger.gmane.org> <4905A264.9050509@klever.net>
+In-Reply-To: <4905A264.9050509@klever.net>
+MIME-Version: 1.0
+Message-Id: <200810271230.56134.mickey@vanille-media.de>
+Subject: Policies vs. Guidelines vs. Requirements (was: Reverting recent openmoko commit)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,34 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 11:14:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 27 Oct 2008 11:31:45 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-What I fail to see is how does reverting commits improve history.
+Guys,
 
-What I do see is that the reverting commits do not adhere to the policy 
-in question ;-)
+to me these "policies" were always more guidelines than strict requirements. 
+We are not a beaurocratic institute here or a closed company (where you can 
+feel free to impose them if you want), but rather a bunch people working 
+together on a somewhat common goal.
 
-Love,
-H
+As such it's _completely unacceptable_ to revert a whole lot of valuable work 
+just because some of the guidelines were not enforced 100%. Completely 
+unacceptable. Also unacceptable is a one-man-show revertion without a 
+consensus, but that's something the core team has to discuss.
 
-Koen Kooi wrote:
-> Hi,
-> 
-> I'm going to revert all recent openmoko commits till these guys learn 
-> how to write a commit message. You have been warned before.
-> 
-> In case you missed it, this wrong:
-> 
-> [foo] something
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Nearbye, _if_ the core team can find a majority to make these kind of policies 
+strict requirements, then the ones in favour of this solution should come up 
+with git commit hooks, so that the commits violating the policy can not be 
+commited in the first place.
 
+In the meantime I'd be very happy if Holger would reapply his changes.
+-- 
+:M:
 
 
