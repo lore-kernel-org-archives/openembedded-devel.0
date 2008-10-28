@@ -1,27 +1,25 @@
-Received: from [62.250.3.53] (helo=relay.versatel.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1Kun8G-0001bV-Sm
+	(envelope-from <pb@reciva.com>) id 1KunPj-0002Hd-5k
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Oct 2008 12:53:08 +0100
-Received: from [62.58.160.127] (helo=hf-electronics.com)
-	by relay.versatel.net with smtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1Kun7Q-0002wk-MZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Oct 2008 12:52:16 +0100
-Received: from <linux@hf-electronics.com> with PostMaster 4.3.2 (MPS);
-	Tue, 28 Oct 2008 12:48:24 +100
-From: "Henk Geraads" <linux@hf-electronics.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Oct 2008 12:51:30 +0100
-Message-ID: <NGBBLNEOGLJIIJKLFLPFEEAMDKAA.linux@hf-electronics.com>
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.6604 (9.0.2911.0)
-Importance: Normal
-In-Reply-To: <NGBBLNEOGLJIIJKLFLPFMEAKDKAA.linux@hf-electronics.com>
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-Subject: Re: Problems building a kernelmodule for OE
+	Tue, 28 Oct 2008 13:11:11 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1KunOo-0000W3-AF; Tue, 28 Oct 2008 12:10:14 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87])
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>)
+	id 1KunOo-000467-8V; Tue, 28 Oct 2008 12:10:14 +0000
+From: Phil Blundell <pb@reciva.com>
+To: otavio@ossystems.com.br
+Date: Tue, 28 Oct 2008 12:10:13 +0000
+Message-Id: <1225195813.9866.33.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] Otavio Salvador : xorg-xserver-common.inc: set	userid to allow Xorg to be run by users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,117 +33,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Oct 2008 11:53:09 -0000
-Content-Type: text/plain;
-	charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 28 Oct 2008 12:11:11 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi Stanislav,
+> +	chmod u+s ${D}/usr/bin/Xorg
 
-Found the problem with __LINUX_ARM_ARCH__!
-the "-march=3Darmv5t"  in the makefie compiler line did mess up things!!
-the include of the "pxa-regs.h" and "gpio.h" solved the other problem.
+Xorg is a pretty large and scary binary to make setuid root, not least
+because I think you can run more-or-less arbitrary code if you specify a
+custom config file which loads modules of your own devising.  
 
-Now I've got strange error's from the linker;
-	make[2]: *** [/home/henk/SystemDev/module/cfi-ktst/cfi-mod.ko] Error =
-1
-	make[1]: *** [modules] Error 2
-	make: *** [default] Error 2
-	arm-angstrom-linux-gnueabi-ld: unrecognized option '-Wl,-rpath-link,/=
-home/armcore/oe/build/tmp/angstrom/staging/arm-angstrom-linux-gnueabi/=
-lib'
-	arm-angstrom-linux-gnueabi-ld: use the --help option for usage inform=
-ation
-	make[2]: *** [/home/henk/SystemDev/module/cfi-ktst/cfi-mod.ko] Error =
-1
-	make[1]: *** [modules] Error 2
-	make: *** [default] Error 2
+I'm not sure this is a good idea to have as standard policy: it seems
+like the kind of thing that ought to be an opt-in choice by DISTROs if
+we do it at all.  A better idea still is probably to provide a setuid
+wrapper which invokes X under controlled conditions and doesn't allow
+the user to modify the parameters.
 
-I thought linker option's are very common?
-
-Henk
-
-
-
-> -----Oorspronkelijk bericht-----
-> Van: Henk Geraads [mailto:linux@hf-electronics.com]
-> Verzonden: dinsdag 28 oktober 2008 10:16
-> Aan: openembedded-devel@lists.openembedded.org
-> Onderwerp: RE: [oe] Problems building a kernelmodule for OE
->=20
->=20
-> Hi Stanislav
->=20
-> questions,
->=20
-> > -----Oorspronkelijk bericht-----
-> > Van: openembedded-devel-bounces@lists.openembedded.org=20
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org]Namens=
-=20
-> > Stanislav Brabec
-> > Verzonden: maandag 27 oktober 2008 16:56
-> > Aan: openembedded-devel@lists.openembedded.org
-> > Onderwerp: Re: [oe] Problems building a kernelmodule for OE
-> >=20
-> >=20
-> > Henk Geraads wrote:
-> >=20
-> > > when I try to make the module, following error message is produc=
-ed!
-> >=20
-> > It seems, that source code is a bit outdated (intended for older k=
-ernel
-> > that you have) or you are compiling it in a bad way.
-> >=20
-> > > 	include/linux/calc64.h:25: error: '__LINUX_ARM_ARCH__'=20
-> > undeclared (first use in this function)
-> >=20
-> > Strange. It should be defined.
->=20
-> Where should it be defined?
->=20
-> >=20
-> > > 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning:=20
-> > implicit declaration of function 'GPLR'
-> > > 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:67: warning:=20
-> > implicit declaration of function 'GPIO_bit'
-> > > 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c: In function 'cfi_i=
-nit':
-> > > 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:204: error:=20
-> > 'GPIO_IN' undeclared (first use in this function)
-> > > 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:208: error:=20
-> > 'MSC1' undeclared (first use in this function)
-> > > 	/home/henk/cm270/fifodrv/cfi-ktst/cfi-mod.c:209: error:=20
-> > 'GPIO79_nCS_3_MD' undeclared (first use in this function)
-> >=20
-> > It indicates that you need to include asm/arch/pxa2xx-regs.h and
-> > asm/arch/pxa2xx-gpio.h.
->=20
-> Are these not covered by including "asm/uaccess.h" and "asm/io.h" ?
->=20
-> >=20
-> > --=20
-> > Best Regards / S pozdravem,
-> >=20
-> > Stanislav Brabec
-> > software developer
-> > ------------------------------------------------------------------=
----
-> > SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse=
-=2Ecz
-> > Lihovarsk=E1 1060/12           tel: +420 284 028 966, +49 911 7405387=
-47
-> > 190 00 Praha 9                                  fax: +420 284 028 =
-951
-> > Czech Republic                                    http://www.suse.=
-cz/
-> >=20
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-d=
-evel
+p.
 
 
 
