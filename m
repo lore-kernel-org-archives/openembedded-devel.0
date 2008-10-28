@@ -1,27 +1,22 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Kv5uO-000083-OE
-	for openembedded-devel@openembedded.org; Wed, 29 Oct 2008 08:56:04 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id CCF5E16DF7F
-	for <openembedded-devel@openembedded.org>;
-	Wed, 29 Oct 2008 09:03:00 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 649E52A4231
-	for <openembedded-devel@openembedded.org>;
-	Wed, 29 Oct 2008 09:04:09 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <zecke@selfish.org>) id 1Kv8pu-0005ZX-Hm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Oct 2008 12:03:38 +0100
+Received: from [92.116.133.247] (helo=tamarin.localnet)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Kv8oz-0008O3-7b
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Oct 2008 12:02:42 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Oct 2008 22:27:45 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
 MIME-Version: 1.0
-Date: Wed, 29 Oct 2008 08:55:08 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF4B1@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: checksums.ini again
-Thread-Index: Ack5m6nIwFE1gAsCSAe0DwTYUuVuuA==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@openembedded.org>
-Subject: checksums.ini again
+Message-Id: <200810282227.45943.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.116.133.247
+Subject: [sanity.bbclass] Make the mmap min_addr check not depend on arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,39 +30,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2008 07:56:05 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Wed, 29 Oct 2008 11:03:38 -0000
+X-Groupsio-MsgNum: 6419
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_RP4BJ+4XLIARKTy"
+
+--Boundary-00=_RP4BJ+4XLIARKTy
 Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-SGVyZSBpcyBhbm90aGVyIHBhdGNoIGZvciBjb25mL2NoZWNrc3Vtcy5pbmk6DQoNCmRpZmYgLS1n
-aXQgYS9jb25mL2NoZWNrc3Vtcy5pbmkgYi9jb25mL2NoZWNrc3Vtcy5pbmkNCmluZGV4IDNmNjZl
-ZjMuLmNmMWI4YjQgMTAwNjQ0DQotLS0gYS9jb25mL2NoZWNrc3Vtcy5pbmkNCisrKyBiL2NvbmYv
-Y2hlY2tzdW1zLmluaQ0KQEAgLTE1MDQ2LDYgKzE1MDQ2LDEwIEBAIHNoYTI1Nj02MzNkNzY2MTJk
-NzNhN2FkZDQxYTNiOTBmZTU3MjFlYTVmNDI4MmQ1MmJkODQwOGI5ZDRmYWIyNjE0NDNhYTZjDQog
-bWQ1PThiNzY2YmI4MDdjMWY3YzBjMDJmZjc5OGVhNWRiODBlDQogc2hhMjU2PWI0YzYzNjdhYjg1
-ZGU4ZjE0OGM5MDNiYjI1ZGM2OWRlN2E3ZDdkMDVmMjA0ZjU4ODgwYTE2YThiODFiZjkzZGUNCiAN
-CitbZnRwOi8vZnRwLmRlbnguZGUvcHViL3UtYm9vdC91LWJvb3QtMS4xLjIudGFyLmJ6Ml0NCitt
-ZDU9ZjEwYjY5NTQ0OThiYWI1ZDA4ZDBmNTBkZTM4MWFmNTANCitzaGEyNTY9NGYzMmNmZDAxZjA2
-NzgwODBmOGU5ODAwOWJhOTljZTM3ZjEyNjFkODQyZTNhZjlhNmIzYWRkMjIwMDVhODBjYQ0KKw0K
-IFtodHRwOi8vZG93bmxvYWRzLnNvdXJjZWZvcmdlLm5ldC91LWJvb3QvdS1ib290LTEuMS4yLnRh
-ci5iejJdDQogbWQ1PWYxMGI2OTU0NDk4YmFiNWQwOGQwZjUwZGUzODFhZjUwDQogc2hhMjU2PTRm
-MzJjZmQwMWYwNjc4MDgwZjhlOTgwMDliYTk5Y2UzN2YxMjYxZDg0MmUzYWY5YTZiM2FkZDIyMDA1
-YTgwY2ENCkBAIC0xNTA3MCw2ICsxNTA3NCwxNCBAQCBzaGEyNTY9NjIxOTJkZGYwMTljNWQyNGY2
-NTM4YjMzYzllNjliNmU1NzkyYmY1YjBmNDY0YzAxNDkwNjFlMmYwODcxMTA4Yg0KIG1kNT0xN2Fl
-ZWU3NmNhNGMwNzg4N2JiZmVhOGE1MmQ0MDg4NA0KIHNoYTI1Nj02MjE5MmRkZjAxOWM1ZDI0ZjY1
-MzhiMzNjOWU2OWI2ZTU3OTJiZjViMGY0NjRjMDE0OTA2MWUyZjA4NzExMDhiDQogDQorW2Z0cDov
-L2Z0cC5kZW54LmRlL3B1Yi91LWJvb3QvdS1ib290LTEuMy4wLnRhci5iejJdDQorbWQ1PTIyOThm
-NmQ2ZDVjNTJkNDJhOTBjNDQ3NzRlZDA3NzUxDQorc2hhMjU2PWE1NWQ2ZDQ2MTIwZWE3NjI1YTlk
-MmZlNTk0ZjY3NzY5MGU3ZGM5ZTliMzE1MWE2YWYwZWJlMjU5Nzg0NTg2MDgNCisNCitbZnRwOi8v
-ZnRwLmRlbnguZGUvcHViL3UtYm9vdC91LWJvb3QtMS4zLjEudGFyLmJ6Ml0NCittZDU9OGZiZDI5
-YzdlNzBjNTI0YTQyZDE4YjljM2YzYTRhYTENCitzaGEyNTY9NjQ4MTFiNGFiNGNhMzYyYjAxYTNk
-MDhmNTNhMmRiYmYwNTllMTg0ODRiOTBjYjVlMjFjMDM2NWQ1M2I4N2Y3Nw0KKw0KIFtmdHA6Ly9m
-dHAuZGVueC5kZS9wdWIvdS1ib290L3UtYm9vdC0xLjMuMi50YXIuYnoyXQ0KIG1kNT03OGIxYzI3
-MjJkMzkwN2I1ZmFlMmNkMjE5ZGJhZjkyNw0KIHNoYTI1Nj04YWIwN2NkNzU4YTE3NzU2NDI2Mjll
-NjI0ZjcwZTM3NmZhOGU4NGEyZjg3OWRlZTQ1NDQxNThkOWM5MGNkZTJhDQoNClN0ZWZmZW4NCg0K
-UFM6IFNob3VsZCBzdWNoIHBhdGNoZXMgYmUgcG9zdGVkIGhlcmUgaW4gdGhlIG1haWxpbmcgbGlz
-dCBvciB1c2luZyB0aGUgYnVnIHRyYWNrZXI/DQo=
+Hey,
 
+I have the following in the OM git tree that was needed to build ecj-initial. 
+Robert I would appreciate if you could comment if that is still needed and 
+Richard can you agree to such a change?
 
+z.
+
+--Boundary-00=_RP4BJ+4XLIARKTy
+Content-Type: text/plain;
+  charset="us-ascii";
+  name="sanity.bbclass"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="sanity.bbclass"
+
+commit 6f11296d1bdf022443763a02b0cf2d808cbad19a
+Author: Holger Hans Peter Freyther <zecke@openmoko.org>
+Date:   Mon Jul 21 10:27:57 2008 +0200
+
+    [sanity] Move the mmap_min_addr check out of arch == arm as ecj-initial fails
+        This check is not arm specific. An ordinary ecj-initial will fail with
+        mmap'ing and classpath-native can not be build then.
+
+diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
+index 883c0e5..4e33616 100644
+--- a/classes/sanity.bbclass
++++ b/classes/sanity.bbclass
+@@ -98,11 +98,11 @@ def check_sanity(e):
+ 			if not check_app_exists("qemu-arm", e.data):
+ 				messages = messages + "qemu-native was in ASSUME_PROVIDED but the QEMU binaries (qemu-arm) can't be found in PATH"
+ 
+-		if os.path.exists("/proc/sys/vm/mmap_min_addr"):
+-			f = file("/proc/sys/vm/mmap_min_addr", "r")
+-			if (f.read().strip() != "0"):
+-				messages = messages + "/proc/sys/vm/mmap_min_addr is not 0. This will cause problems with qemu so please fix the value (as root).\n"
+-			f.close()
++	if os.path.exists("/proc/sys/vm/mmap_min_addr"):
++		f = file("/proc/sys/vm/mmap_min_addr", "r")
++		if (f.read().strip() != "0"):
++			messages = messages + "/proc/sys/vm/mmap_min_addr is not 0. This will cause problems with qemu and ecj so please fix the value (as root).\n"
++		f.close()
+ 
+ 	for util in required_utilities.split():
+ 		if not check_app_exists( util, e.data ):
+
+--Boundary-00=_RP4BJ+4XLIARKTy--
