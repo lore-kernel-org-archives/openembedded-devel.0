@@ -1,27 +1,28 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KuoOZ-0000Y9-8w
-	for openembedded-devel@openembedded.org; Tue, 28 Oct 2008 14:14:03 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 9CA0516DF7B
-	for <openembedded-devel@openembedded.org>;
-	Tue, 28 Oct 2008 14:21:00 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id CBFBE2A4229
-	for <openembedded-devel@openembedded.org>;
-	Tue, 28 Oct 2008 14:22:08 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Tue, 28 Oct 2008 14:12:54 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF4AD@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Building u-boot?
-Thread-Index: Ack4/u0XT34uBXyJTBu8fy+aYJndfQ==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@openembedded.org>
-Subject: Building u-boot?
+	(envelope-from <pb@reciva.com>) id 1Kuqce-0001pQ-77
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Oct 2008 16:36:44 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1Kuqbg-0003qm-Se; Tue, 28 Oct 2008 15:35:45 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87])
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>)
+	id 1Kuqbg-0000I6-MT; Tue, 28 Oct 2008 15:35:44 +0000
+From: Phil Blundell <pb@reciva.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+In-Reply-To: <87skqgq1xf.fsf@neumann.lab.ossystems.com.br>
+References: <1225195813.9866.33.camel@mill.internal.reciva.com>
+	<87skqgq1xf.fsf@neumann.lab.ossystems.com.br>
+Date: Tue, 28 Oct 2008 15:35:43 +0000
+Message-Id: <1225208144.9866.44.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] Otavio Salvador : xorg-xserver-common.inc: set	userid to allow Xorg to be run by users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,15 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Oct 2008 13:14:03 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 28 Oct 2008 15:36:44 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-TXkgd29ya3MgZm9yIE9YRTgxMChEKVNFIGFyZSBuZWFybHkgY29tcGxldGUuIEJ1dCB0aGVyZSBp
-cyBvbmUgbW9yZSBxdWVzdGlvbi4gSXMgaXQgcG9zc2libGUgdG8gYnVpbGQgdS1ib290IGFuZC9v
-ciBvdGhlciBsb2FkZXJzICh0aGUgT1hFIGJvYXJkcyB1c2VzIGFub3RoZXIgc3RhZ2UxIGxvYWRl
-ciBpZiBib290aW5nIGZyb20gU0FUQSkgd2l0aCBPRT8NCg0KU3RlZmZlbg0K
+On Tue, 2008-10-28 at 11:33 -0200, Otavio Salvador wrote:
+> I somewhat understand your complains. Debian usea a wrapper for that
+> propouse. I like this idea and I believe it might be a way to go.
+> 
+> http://git.debian.org/?p=pkg-xorg/debian/xorg.git;a=blob;f=debian/local/xserver-wrapper.c;hb=HEAD
+> 
+> What do you think about it?
+
+Yes, this sounds like the right solution to that problem.  However, I
+think even this ought to be a DISTRO opt-in rather than the default,
+since for many people it will probably be unnecessary.
+
+p.
+
+
 
 
