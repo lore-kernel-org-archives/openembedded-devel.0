@@ -1,38 +1,25 @@
-Received: from [209.85.200.168] (helo=wf-out-1314.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KuVGd-0005Tc-1C
-	for openembedded-devel@openembedded.org; Mon, 27 Oct 2008 17:48:35 +0100
-Received: by wf-out-1314.google.com with SMTP id 25so2356524wfc.6
-	for <openembedded-devel@openembedded.org>;
-	Mon, 27 Oct 2008 09:47:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=nUxkTztHa6crOdsuSIV0XauIjcw5p7jbmxKKBztkmrE=;
-	b=iDrfwmMKkzBPtsX8L7EobAMMYaC+1wVueuUJgKh/25xpzRjKlyaZBaJ7Mx03TIb3i+
-	nR5RHgFRy6ZH7if3/Z7gG4bMTpm3hrStJVAau6pvMTIf9HnwQ5wP7q4hbix8cDHbQ41d
-	lQPrkBervqVrFtqYgVrIUYwLNN1PB7RzDIPOE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=e6WURn5Zj26I4zjbxGDGiVTlCtucyFpzcjXhJHobhSH1ps3igwSE4f/Yzkh8ru1quD
-	K/6XAYGXn1mjsKyyGbzz3tRjpqTflNEt5cYPMjq/NiZOdbc77RrrgGdUvAUCpUE/DjRS
-	SiFXbSANLFawyXBwfYRgvUkeVrh0oLxA1dZk8=
-Received: by 10.140.125.4 with SMTP id x4mr3357659rvc.229.1225126065688;
-	Mon, 27 Oct 2008 09:47:45 -0700 (PDT)
-Received: by 10.141.129.13 with HTTP; Mon, 27 Oct 2008 09:47:45 -0700 (PDT)
-Message-ID: <f96d234e0810270947o12549f96i741deecda093c614@mail.gmail.com>
-Date: Mon, 27 Oct 2008 12:47:45 -0400
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	(envelope-from <mickey@vanille-media.de>) id 1Kui6t-0004vt-Pf
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Oct 2008 07:31:23 +0100
+Received: from andromeda.vanille.de (e180142171.adsl.alicedsl.de
+	[85.180.142.171])
+	by drlauer-research.com (Postfix) with ESMTP id DC286584D0F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Oct 2008 07:44:27 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4905C665.7070509@gremlin.it>
+Date: Tue, 28 Oct 2008 07:30:30 +0100
+User-Agent: KMail/1.9.10
+References: <49019671.10108@gmx.net>
+	<200810271404.00230.mickey@vanille-media.de>
+	<c384c5ea0810270646o3ba04f1cgd777663ad6e98590@mail.gmail.com>
+In-Reply-To: <c384c5ea0810270646o3ba04f1cgd777663ad6e98590@mail.gmail.com>
 MIME-Version: 1.0
-References: <f96d234e0810270640i3bbb068fx2d8b8b0855ee0e22@mail.gmail.com>
-	<4905C665.7070509@gremlin.it>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: OE weekly changelog 2008-10-20 to 2008-10-27
+Message-Id: <200810280730.30945.mickey@vanille-media.de>
+Subject: Re: OE write access for Elena Grandi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2008 16:48:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 28 Oct 2008 06:31:24 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Oct 27, 2008 at 9:47 AM, Alessandro GARDICH <gremlin@gremlin.it> wrote:
-> Cliff Brake wrote:
->>
->> OE weekly changelog 2008-10-20 to 2008-10-27
->>  [...]
+Am Monday 27 October 2008 14:46:38 schrieb Leon Woestenberg:
+> Hello,
 >
+> On Mon, Oct 27, 2008 at 2:04 PM, Michael 'Mickey' Lauer
 >
-> WOW ... we will have it all week ?
+> <mickey@vanille-media.de> wrote:
+> > Am Friday 24 October 2008 11:33:37 schrieb Robert Schuster:
+> >> Hi,
+> >> I propose giving OE repository write access to Elena Grandi.
+> >
+> > +1
+>
+> +1, the bug track issues and solutions look good.
 
-Every Mon is the current plans.
-
-Cliff
+Cool. Elena, please send your ssh key to me.
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+:M:
 
 
