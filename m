@@ -1,25 +1,27 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1KunPj-0002Hd-5k
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Oct 2008 13:11:11 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1KunOo-0000W3-AF; Tue, 28 Oct 2008 12:10:14 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87])
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1KunOo-000467-8V; Tue, 28 Oct 2008 12:10:14 +0000
-From: Phil Blundell <pb@reciva.com>
-To: otavio@ossystems.com.br
-Date: Tue, 28 Oct 2008 12:10:13 +0000
-Message-Id: <1225195813.9866.33.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Otavio Salvador : xorg-xserver-common.inc: set	userid to allow Xorg to be run by users
+	(envelope-from <sledz@DResearch.DE>) id 1KuoOZ-0000Y9-8w
+	for openembedded-devel@openembedded.org; Tue, 28 Oct 2008 14:14:03 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 9CA0516DF7B
+	for <openembedded-devel@openembedded.org>;
+	Tue, 28 Oct 2008 14:21:00 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id CBFBE2A4229
+	for <openembedded-devel@openembedded.org>;
+	Tue, 28 Oct 2008 14:22:08 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Tue, 28 Oct 2008 14:12:54 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF4AD@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Building u-boot?
+Thread-Index: Ack4/u0XT34uBXyJTBu8fy+aYJndfQ==
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@openembedded.org>
+Subject: Building u-boot?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,24 +35,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Oct 2008 12:11:11 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Oct 2008 13:14:03 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-> +	chmod u+s ${D}/usr/bin/Xorg
-
-Xorg is a pretty large and scary binary to make setuid root, not least
-because I think you can run more-or-less arbitrary code if you specify a
-custom config file which loads modules of your own devising.  
-
-I'm not sure this is a good idea to have as standard policy: it seems
-like the kind of thing that ought to be an opt-in choice by DISTROs if
-we do it at all.  A better idea still is probably to provide a setuid
-wrapper which invokes X under controlled conditions and doesn't allow
-the user to modify the parameters.
-
-p.
-
-
+TXkgd29ya3MgZm9yIE9YRTgxMChEKVNFIGFyZSBuZWFybHkgY29tcGxldGUuIEJ1dCB0aGVyZSBp
+cyBvbmUgbW9yZSBxdWVzdGlvbi4gSXMgaXQgcG9zc2libGUgdG8gYnVpbGQgdS1ib290IGFuZC9v
+ciBvdGhlciBsb2FkZXJzICh0aGUgT1hFIGJvYXJkcyB1c2VzIGFub3RoZXIgc3RhZ2UxIGxvYWRl
+ciBpZiBib290aW5nIGZyb20gU0FUQSkgd2l0aCBPRT8NCg0KU3RlZmZlbg0K
 
 
