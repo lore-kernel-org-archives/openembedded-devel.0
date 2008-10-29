@@ -1,21 +1,34 @@
-Received: from [143.182.124.36] (helo=azsmga102.ch.intel.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <josh@linux.intel.com>) id 1KvEJX-0000kp-UU
+	(envelope-from <stefan@datenfreihafen.org>) id 1KvGYm-0007nd-Kk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Oct 2008 17:54:36 +0100
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga102.ch.intel.com with ESMTP; 29 Oct 2008 09:53:35 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.33,507,1220252400"; d="scan'208";a="67130047"
-Received: from unknown (HELO [143.185.76.216]) ([143.185.76.216])
-	by azsmga001.ch.intel.com with ESMTP; 29 Oct 2008 09:53:34 -0700
-Message-ID: <4908950C.6030406@linux.intel.com>
-Date: Wed, 29 Oct 2008 16:53:32 +0000
-From: Joshua Lock <josh@linux.intel.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
-MIME-Version: 1.0
+	Wed, 29 Oct 2008 20:18:33 +0100
+Received: from p5b035f05.dip.t-dialin.net ([91.3.95.5]
+	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1KvGXo-0007tC-3k by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Oct 2008 20:17:30 +0100
+Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1KvGYR-000510-Fz for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Oct 2008 20:18:09 +0100
+Date: Wed, 29 Oct 2008 20:18:07 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Small url fix for xerces-c
+Message-ID: <20081029191807.GA7080@dodger.lab.datenfreihafen.org>
+References: <4908950C.6030406@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <4908950C.6030406@linux.intel.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: Small url fix for xerces-c
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,43 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2008 16:54:36 -0000
-Content-Type: multipart/mixed; boundary="------------050807090605010200010907"
+X-List-Received-Date: Wed, 29 Oct 2008 19:18:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------050807090605010200010907
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Hello.
 
-Hi there,
+On Wed, 2008-10-29 at 16:53, Joshua Lock wrote:
+> 
+> I noticed the url in the xerces-c recipe is incorrect. Patch attached.
 
-I noticed the url in the xerces-c recipe is incorrect. Patch attached.
+I checked and commited it:
+http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=714e2cace5819ff64b04f870506dbfca9bd1c557
 
-Cheers,
+I also added a follow up patch with the needed checksums for this new location.
 
-- J
--- 
-	Joshua Lock
-	       Intel Open Source Technology Centre
+Thanks for your contribution.
 
---------------050807090605010200010907
-Content-Type: text/x-patch;
- name="oe_xerces_url.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="oe_xerces_url.patch"
+regards
+Stefan Schmidt
 
-diff --git a/packages/xerces-c/xerces-c_2.8.0.bb b/packages/xerces-c/xerces-c_2.8.0.bb
-index 4f72e9d..d78bb22 100644
---- a/packages/xerces-c/xerces-c_2.8.0.bb
-+++ b/packages/xerces-c/xerces-c_2.8.0.bb
-@@ -5,7 +5,7 @@ PRIORITY = "optional"
- LICENSE = "MIT"
- PR = "r1"
- 
--SRC_URI = "http://mirror.serversupportforum.de/apache/xerces/c/sources/xerces-c-src_2_8_0.tar.gz"
-+SRC_URI = "http://mirror.serversupportforum.de/apache/xerces/c/2/sources/xerces-c-src_2_8_0.tar.gz"
- S = "${WORKDIR}/xerces-c-src_2_8_0/src/xercesc"
- 
- inherit autotools pkgconfig
 
---------------050807090605010200010907--
