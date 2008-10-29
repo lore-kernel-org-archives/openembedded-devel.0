@@ -1,28 +1,25 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1Kv93r-0006I5-Q9
+	(envelope-from <mickey@vanille-media.de>) id 1KvAC8-0001m9-4v
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Oct 2008 12:18:03 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Kv92v-00081x-A7
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Oct 2008 11:17:05 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1Kv92u-0007i0-K3
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Oct 2008 11:17:04 +0000
-From: Phil Blundell <pb@reciva.com>
+	Wed, 29 Oct 2008 13:30:40 +0100
+Received: from andromeda.vanille.de (e180189017.adsl.alicedsl.de
+	[85.180.189.17])
+	by drlauer-research.com (Postfix) with ESMTP id 24A4E584C7E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Oct 2008 13:43:45 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200810282333.49881.zecke@selfish.org>
-References: <200810282333.49881.zecke@selfish.org>
-Date: Wed, 29 Oct 2008 11:17:04 +0000
-Message-Id: <1225279024.3822.22.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: FYI: Openmoko merge status
+Date: Wed, 29 Oct 2008 13:29:41 +0100
+User-Agent: KMail/1.9.10
+References: <1225195813.9866.33.camel@mill.internal.reciva.com>
+	<87skqgq1xf.fsf@neumann.lab.ossystems.com.br>
+	<1225208144.9866.44.camel@mill.internal.reciva.com>
+In-Reply-To: <1225208144.9866.44.camel@mill.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <200810291329.41929.mickey@vanille-media.de>
+Subject: Re: [oe-commits] Otavio Salvador : xorg-xserver-common.inc: set	userid to allow Xorg to be run by users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,28 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2008 11:18:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 Oct 2008 12:30:40 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 2008-10-28 at 23:33 +0100, Holger Freyther wrote:
-> One funny thing is diverting PRs. In order to merge OE=>OM we need to bump the 
-> PR/PE of some packages and I would like to do this in the OE tree. I wonder if 
-> we have some kind of policy for that.
+Am Tuesday 28 October 2008 16:35:43 schrieb Phil Blundell:
+> On Tue, 2008-10-28 at 11:33 -0200, Otavio Salvador wrote:
+> > I somewhat understand your complains. Debian usea a wrapper for that
+> > propouse. I like this idea and I believe it might be a way to go.
+> >
+> > http://git.debian.org/?p=pkg-xorg/debian/xorg.git;a=blob;f=debian/local/x
+> >server-wrapper.c;hb=HEAD
+> >
+> > What do you think about it?
+>
+> Yes, this sounds like the right solution to that problem.  However, I
+> think even this ought to be a DISTRO opt-in rather than the default,
+> since for many people it will probably be unnecessary.
 
-Can you explain in more detail what exactly is the issue?
+I agree. I'd rather have it opt-in as well.
 
-Regarding PE, if OM has epoched some packages that other distros
-haven't, I am inclined to say that you should just put "PE_mypackage =
-999" in your distro config file for the affected packages.  I would
-certainly not be in favour of introducing a new epoch for all distros
-just to get in sync with OM.
-
-Regarding PR, the right answer probably depends on the specifics of the
-situation and it might be different for each package.
-
-p.
-
-
+-- 
+:M:
 
 
