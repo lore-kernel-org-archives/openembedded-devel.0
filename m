@@ -1,32 +1,27 @@
-Received: from [200.154.152.45] (helo=sr03-06.mta.terra.com.br)
+Received: from [62.250.3.53] (helo=relay.versatel.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ramon@instramed.com.br>) id 1KvBIW-0001rf-OO
+	(envelope-from <linux@hf-electronics.com>) id 1KvBPa-0002FA-79
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Oct 2008 14:41:21 +0100
-Received: from ponpeli.hst.terra.com.br (ponpeli.hst.terra.com.br
-	[200.176.10.21])
-	by bungunia.hst.terra.com.br (Postfix) with ESMTP id EB894600023C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2008 13:40:22 +0000 (UTC)
-X-Terra-Karma: -2%
-X-Terra-Hash: b935668da6bd342d89daffdf39575e9d
-Received-SPF: none (ponpeli.hst.terra.com.br: 200.176.10.21 is neither
-	permitted nor denied by domain of instramed.com.br)
-	client-ip=200.176.10.21; envelope-from=ramon@instramed.com.br;
-	helo=[192.168.1.105]; 
-Received: from [192.168.1.105] (unknown [201.21.243.40])
-	(authenticated user ramoninstramed@terra.com.br)
-	by ponpeli.hst.terra.com.br (Postfix) with ESMTP id C4D19800012B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2008 13:40:22 +0000 (UTC)
-Message-ID: <490867C7.9060809@instramed.com.br>
-Date: Wed, 29 Oct 2008 11:40:23 -0200
-From: =?ISO-8859-1?Q?Ram=F3n_Finger_Lilienthal?= <ramon@instramed.com.br>
-Organization: Instramed Ltda.
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
+	Wed, 29 Oct 2008 14:48:39 +0100
+Received: from [62.58.160.127] (helo=hf-electronics.com)
+	by relay.versatel.net with smtp (Exim 4.69)
+	(envelope-from <linux@hf-electronics.com>) id 1KvBOf-00016T-3d
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Oct 2008 14:47:41 +0100
+Received: from <linux@hf-electronics.com> with PostMaster 4.3.2 (MPS);
+	Wed, 29 Oct 2008 14:45:09 +100
+From: "Henk Geraads" <linux@hf-electronics.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 29 Oct 2008 14:46:31 +0100
+Message-ID: <NGBBLNEOGLJIIJKLFLPFOEBADKAA.linux@hf-electronics.com>
 MIME-Version: 1.0
-To: OpenEmbedded - DEV <openembedded-devel@lists.openembedded.org>
-Subject: Problems on bitbaking base-image
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.6604 (9.0.2911.0)
+Importance: Normal
+In-Reply-To: <1225235412.9331.13.camel@utx.utx.cz>
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+Subject: Re: Problems building a kernelmodule for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,140 +35,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2008 13:41:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Oct 2008 13:48:40 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Fellows,
+Hi Stanislav,
 
-I was trying to bitbake base-image by the first time and I get the 
-following error:
+Thanks for the remarks, ideed it seems the .config file was messed up.
+I did repopulate the kernel source tree again. Did "make ARCH=3Darm menuc=
+onfig"
+Created a new kernel and also did use this new tree to succesfully bui=
+ld my own kernel module.
 
----
-NOTE: Handling BitBake files: \ (6121/6122) [99 %]
-NOTE: Parsing finished. 5864 cached, 0 parsed, 258 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: build 200810281535: started
+Best regards,
 
-OE Build Configuration:
-BB_VERSION        = "1.8.11"
-METADATA_BRANCH   = "org.openembedded.dev"
-METADATA_REVISION = "83176ca41497b63eab25babf275eb09b5de55a8d"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "omap5912osk"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "2008.1-test-20081028"
-TARGET_FPU        = "soft"
+Henk
 
-NOTE: Resolving any missing task queue dependencies
-ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime 
-entity 'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' but it wasn't found 
-in any PACKAGE or RPROVIDES variables
-NOTE: Runtime target 'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' is 
-unbuildable, removing...
-Missing or unbuildable dependency chain was: 
-['virtual/arm-angstrom-linux-gnueabi-gcc-2.95']
-ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime 
-entity 'openzaurus-sa' but it wasn't found in any PACKAGE or RPROVIDES 
-variables
-NOTE: Runtime target 'openzaurus-sa' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['openzaurus-sa']
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 749 of 2118 (ID: 2085, 
-/home/work/openembedded/openembedded/packages/shared-mime-info/shared-mime-info-native_0.51.bb, 
-do_compile)
-NOTE: package shared-mime-info-native-0.51: started
-NOTE: package shared-mime-info-native-0.51-r0: task do_compile: started
-ERROR: function do_compile failed
-ERROR: log data follows 
-(/home/work/openembedded/tmp/work/x86_64-linux/shared-mime-info-native-0.51-r0/temp/log.do_compile.24240) 
 
-| NOTE: make -j 4
-| Making check in po
-| make[1]: Entering directory 
-`/home/work/openembedded/tmp/work/x86_64-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51/po' 
-
-| rm -f missing notexist
-| srcdir=. 
-/home/work/openembedded/tmp/staging/x86_64-linux/usr/bin/intltool-update -m
-| if [ -r missing -o -r notexist ]; then \
-|       exit 1; \
-|     fi
-| make[1]: Leaving directory 
-`/home/work/openembedded/tmp/work/x86_64-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51/po' 
-
-| make[1]: Entering directory 
-`/home/work/openembedded/tmp/work/x86_64-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51' 
-
-| gcc 
--I/home/work/openembedded/tmp/staging/x86_64-linux/usr/include/libxml2 
--I/home/work/openembedded/tmp/staging/x86_64-linux/usr/include/glib-2.0 
--I/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib/glib-2.0/include   
--isystem/home/work/openembedded/tmp/staging/x86_64-linux/usr/include -O2 
--Wall -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings  
--L/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib 
--Wl,-rpath-link,/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib 
--Wl,-rpath,/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib 
--Wl,-O1 -o update-mime-database 
-update_mime_database-update-mime-database.o 
--L/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib -lxml2 
--lglib-2.0
-| gcc 
--I/home/work/openembedded/tmp/staging/x86_64-linux/usr/include/glib-2.0 
--I/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib/glib-2.0/include   
--isystem/home/work/openembedded/tmp/staging/x86_64-linux/usr/include -O2 
--Wall -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings  
--L/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib 
--Wl,-rpath-link,/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib 
--Wl,-rpath,/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib 
--Wl,-O1 -o test-tree-magic test_tree_magic-test-tree-magic.o 
--L/home/work/openembedded/tmp/staging/x86_64-linux/usr/lib -lgio-2.0 
--lgobject-2.0 -lgmodule-2.0 -lglib-2.0
-| /usr/bin/ld: cannot find -lgio-2.0
-| collect2: ld returned 1 exit status
-| make[1]: *** [test-tree-magic] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-| make[1]: Leaving directory 
-`/home/work/openembedded/tmp/work/x86_64-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51' 
-
-| make: *** [check-recursive] Error 1
-| FATAL: oe_runmake failed
-NOTE: Task failed: 
-/home/work/openembedded/tmp/work/x86_64-linux/shared-mime-info-native-0.51-r0/temp/log.do_compile.24240 
-
-NOTE: package shared-mime-info-native-0.51-r0: task do_compile: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package shared-mime-info-native-0.51: failed
-ERROR: Build of 
-/home/work/openembedded/openembedded/packages/shared-mime-info/shared-mime-info-native_0.51.bb 
-do_compile failed
-ERROR: Task 2085 
-(/home/work/openembedded/openembedded/packages/shared-mime-info/shared-mime-info-native_0.51.bb, 
-do_compile) failed
-NOTE: Tasks Summary: Attempted 748 tasks of which 748 didn't need to be 
-rerun and 1 failed.
-ERROR: 
-'/home/work/openembedded/openembedded/packages/shared-mime-info/shared-mime-info-native_0.51.bb' 
-failed
-NOTE: build 200810281535: completed
-
----
-
-To install Bitbake and OpenEmbeded, I followed the instruction in 
-Getting Started on openembedded site.
-
-I am trying to compile under Linux Ubuntu 8.4 64bits.
-
-Any help will be welcome.
-
--- 
-Regards,
-Eng. Ramon F. Lilienthal
-Project Engineer
-Instramed Ltda. - www.instramed.com.br
-+55 (51) 33344199 ext. 213
+> -----Oorspronkelijk bericht-----
+> Van: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org]Namens
+> Stanislav Brabec
+> Verzonden: woensdag 29 oktober 2008 0:10
+> Aan: openembedded-devel@lists.openembedded.org
+> Onderwerp: Re: [oe] Problems building a kernelmodule for OE
+>=20
+>=20
+> Henk Geraads wrote:
+>=20
+> > Found the problem with __LINUX_ARM_ARCH__!
+> > the "-march=3Darmv5t"  in the makefie compiler line did mess up thing=
+s!!
+>=20
+> It is very probably still not correct. When cross compiling the kern=
+el,
+> you need to pass "ARCH=3Darm" to make (and set CPU type in .config.
+> Otherwise compile options may be invalid (and you can even corrupt
+> your .config file) and then correct -march should be generated by ma=
+ke.
+>=20
+> > the include of the "pxa-regs.h" and "gpio.h" solved the other prob=
+lem.
+> >=20
+> > Now I've got strange error's from the linker;
+> > 	make[2]: ***=20
+> [/home/henk/SystemDev/module/cfi-ktst/cfi-mod.ko] Error 1
+> > 	make[1]: *** [modules] Error 2
+> > 	make: *** [default] Error 2
+> > 	arm-angstrom-linux-gnueabi-ld: unrecognized option=20
+> '-Wl,-rpath-link,/home/armcore/oe/build/tmp/angstrom/staging/arm-a
+> ngstrom-linux-gnueabi/lib'
+> > 	arm-angstrom-linux-gnueabi-ld: use the --help option for=20
+> usage information
+> > 	make[2]: ***=20
+> [/home/henk/SystemDev/module/cfi-ktst/cfi-mod.ko] Error 1
+> > 	make[1]: *** [modules] Error 2
+> > 	make: *** [default] Error 2
+> >=20
+> > I thought linker option's are very common?
+>=20
+> -Wl is not an option for linker, but cor compiler. Linker should get
+> only parameters of -Wl. Additionally -rpath-link is not useful for
+> kernel (dynamic linking is an user space issue). Something went wron=
+g
+> and make passed bad arguments to the linker.
+>=20
+> Here is a make syntax I am using for kernel cross compilation:
+> make ARCH=3Darm CC=3Darm-angstrom-linux-gnueabi-gcc=20
+> LD=3Darm-angstrom-linux-gnueabi-ld INSTALL_PATH=3D$PWD/INSTALL/boot=20
+> INSTALL_MOD_PATH=3D$PWD/INSTALL
+> You may need to add target (e. g. zImage, install, zinstall,
+> modules_install).
+>=20
+>=20
+> ____________________________________________________________________=
+____
+> Stanislav Brabec
+> http://www.penguin.cz/~utx/zaurus
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev=
+el
 
 
 
