@@ -1,27 +1,26 @@
-Received: from [62.250.3.53] (helo=relay.versatel.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1KvBPa-0002FA-79
+	(envelope-from <pb@reciva.com>) id 1KvDDk-00082s-57
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Oct 2008 14:48:39 +0100
-Received: from [62.58.160.127] (helo=hf-electronics.com)
-	by relay.versatel.net with smtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1KvBOf-00016T-3d
+	Wed, 29 Oct 2008 16:46:10 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KvCwi-0004Go-JH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Oct 2008 14:47:41 +0100
-Received: from <linux@hf-electronics.com> with PostMaster 4.3.2 (MPS);
-	Wed, 29 Oct 2008 14:45:09 +100
-From: "Henk Geraads" <linux@hf-electronics.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Oct 2008 14:46:31 +0100
-Message-ID: <NGBBLNEOGLJIIJKLFLPFOEBADKAA.linux@hf-electronics.com>
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.6604 (9.0.2911.0)
-Importance: Normal
-In-Reply-To: <1225235412.9331.13.camel@utx.utx.cz>
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-Subject: Re: Problems building a kernelmodule for OE
+	Wed, 29 Oct 2008 15:26:56 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1KvCwi-0004E2-BG
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Oct 2008 15:26:56 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Oct 2008 15:26:55 +0000
+Message-Id: <1225294016.3822.81.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: arm kernel configurations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,91 +34,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2008 13:48:40 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 29 Oct 2008 15:49:01 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi Stanislav,
+On the subject of gta01 performance I thought it might be worth pointing
+out a couple of common kernel inefficiencies:
 
-Thanks for the remarks, ideed it seems the .config file was messed up.
-I did repopulate the kernel source tree again. Did "make ARCH=3Darm menuc=
-onfig"
-Created a new kernel and also did use this new tree to succesfully bui=
-ld my own kernel module.
+- out of the box, the arm kernel always compiles itself with APCS-style
+frame pointers enabled.  This means that you lose a general purpose
+register, and makes the function prologue and epilogue sequences more
+heavyweight.  For production use I would always recommend turning off
+frame pointers (which involves patching arch/arm/Kconfig.debug) in order
+to get a smaller and faster kernel.
 
-Best regards,
+- if your userspace is pure EABI, make sure that you have
+CONFIG_OABI_COMPAT turned off.  With this option enabled, the kernel
+needs to inspect all SWI instructions to see if they might be OABI
+syscalls: on machines with Harvard caches, this will almost certainly
+involve hauling a cacheline in from main memory, which is slow and leads
+to poor dcache utilisation (since you are loading eight words of which
+only one is likely to be any use).
 
-Henk
+- if your userspace doesn't depend on load-rotate (most doesn't
+nowadays) then you can hard-wire the alignment trap behaviour to be
+SIGBUS and avoid reloading cp15 on every kernel entry.  This saves
+another two lines in the dcache.  I don't have a pretty patch for this
+yet but contributions would be welcome :-)
 
+These three changes make a measurable difference to the kernel benchmark
+results.  For example, syscall entry/exit drops from about 490ns to
+about 390ns on my gta01, an improvement of more than 20%.  The cost of
+stat() drops from 36.8us to 33.2us, an improvement of 14%.
 
-> -----Oorspronkelijk bericht-----
-> Van: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org]Namens
-> Stanislav Brabec
-> Verzonden: woensdag 29 oktober 2008 0:10
-> Aan: openembedded-devel@lists.openembedded.org
-> Onderwerp: Re: [oe] Problems building a kernelmodule for OE
->=20
->=20
-> Henk Geraads wrote:
->=20
-> > Found the problem with __LINUX_ARM_ARCH__!
-> > the "-march=3Darmv5t"  in the makefie compiler line did mess up thing=
-s!!
->=20
-> It is very probably still not correct. When cross compiling the kern=
-el,
-> you need to pass "ARCH=3Darm" to make (and set CPU type in .config.
-> Otherwise compile options may be invalid (and you can even corrupt
-> your .config file) and then correct -march should be generated by ma=
-ke.
->=20
-> > the include of the "pxa-regs.h" and "gpio.h" solved the other prob=
-lem.
-> >=20
-> > Now I've got strange error's from the linker;
-> > 	make[2]: ***=20
-> [/home/henk/SystemDev/module/cfi-ktst/cfi-mod.ko] Error 1
-> > 	make[1]: *** [modules] Error 2
-> > 	make: *** [default] Error 2
-> > 	arm-angstrom-linux-gnueabi-ld: unrecognized option=20
-> '-Wl,-rpath-link,/home/armcore/oe/build/tmp/angstrom/staging/arm-a
-> ngstrom-linux-gnueabi/lib'
-> > 	arm-angstrom-linux-gnueabi-ld: use the --help option for=20
-> usage information
-> > 	make[2]: ***=20
-> [/home/henk/SystemDev/module/cfi-ktst/cfi-mod.ko] Error 1
-> > 	make[1]: *** [modules] Error 2
-> > 	make: *** [default] Error 2
-> >=20
-> > I thought linker option's are very common?
->=20
-> -Wl is not an option for linker, but cor compiler. Linker should get
-> only parameters of -Wl. Additionally -rpath-link is not useful for
-> kernel (dynamic linking is an user space issue). Something went wron=
-g
-> and make passed bad arguments to the linker.
->=20
-> Here is a make syntax I am using for kernel cross compilation:
-> make ARCH=3Darm CC=3Darm-angstrom-linux-gnueabi-gcc=20
-> LD=3Darm-angstrom-linux-gnueabi-ld INSTALL_PATH=3D$PWD/INSTALL/boot=20
-> INSTALL_MOD_PATH=3D$PWD/INSTALL
-> You may need to add target (e. g. zImage, install, zinstall,
-> modules_install).
->=20
->=20
-> ____________________________________________________________________=
-____
-> Stanislav Brabec
-> http://www.penguin.cz/~utx/zaurus
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev=
-el
+share and enjoy
+
+p.
 
 
 
