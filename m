@@ -1,33 +1,48 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <daierxin@gmail.com>) id 1KvTZq-00018C-MX
+	(envelope-from <otavio@freedom.ind.br>) id 1KvV1b-0005Qo-36
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Oct 2008 10:12:26 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so451775fgb.20
+	Thu, 30 Oct 2008 11:45:11 +0100
+Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id 1741E336C77
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2008 02:11:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type;
-	bh=DGbhz0D6qOHV2T4t+d9TkxaPYw2gpYXU8vhCBxY9VMU=;
-	b=Jpo34cJ14+dpnnFoLZbpxGu8pDaMLec/ixYwk8uL/6ab8jgZYBAPfyriyrpbdPc4ky
-	CM25dRt+AV8ZE9hnt4aJFMwEmpLAMW3BGv2wEqJwwENKtsmm7IQ4M8rA4+wEB7k+plVD
-	iu+DwiSHJmphbqfIImwBOzQY8eAoQQLRmqbxU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type;
-	b=GyjD4lSu9jjXJRLloza1SCYgJgey7Dpsk76HNBfOF3B/LxS1r1fgNwkJBq28YR8ki9
-	X7JszLA2v8a2GyyiaeVee9+GqOVCwy/n9C9/uTY1ndzWhwH5V5ouNKVV7a9bP3811EX1
-	UAov1nogfdWaPO/uQiv168AqnGwbeNbdS4kg4=
-Received: by 10.86.79.19 with SMTP id c19mr6821148fgb.31.1225357886421;
-	Thu, 30 Oct 2008 02:11:26 -0700 (PDT)
-Received: by 10.86.58.17 with HTTP; Thu, 30 Oct 2008 02:11:26 -0700 (PDT)
-Message-ID: <8f4584b50810300211y34885e4ap9e9251ffa08d438d@mail.gmail.com>
-Date: Thu, 30 Oct 2008 17:11:26 +0800
-From: "=?GB2312?B?tPq2+9DA?=" <daierxin@gmail.com>
+	Thu, 30 Oct 2008 08:44:08 -0200 (BRST)
+Received: from mail.freedom.ind.br (localhost [127.0.0.1])
+	by hostdime.freedom.ind.br (Postfix) with ESMTP id E2391336C35
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Oct 2008 08:44:06 -0200 (BRST)
+Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
+	by mail.freedom.ind.br; 30 Oct 2008 08:44:05 -0200
+Received: from mail.freedom.ind.br (localhost [127.0.0.1])
+	by mail.freedom.ind.br (Postfix) with ESMTP id 50BB68D7B10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Oct 2008 08:44:01 -0200 (BRST)
+Received: from internet.ossystems.com.br (localhost [127.0.0.1])
+	by mail.freedom.ind.br (Postfix) with ESMTP id 9457E8B2BB1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Oct 2008 08:43:59 -0200 (BRST)
+Received: from internet.ossystems.com.br ([201.40.162.47]
+	helo=internet.ossystems.com.br)
+	by mail.freedom.ind.br; 30 Oct 2008 08:43:55 -0200
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 2E5A0C2F8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Oct 2008 08:43:51 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id D087461006C; Thu, 30 Oct 2008 08:40:34 -0200 (BRST)
 To: openembedded-devel@lists.openembedded.org
+References: <20081030101903.GA8716@walkingice>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Thu, 30 Oct 2008 08:40:34 -0200
+In-Reply-To: <20081030101903.GA8716@walkingice> (Julian Chu's message of "Thu\,
+	30 Oct 2008 18\:19\:04 +0800")
+Message-ID: <87vdvaxt5p.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Why can't find preferred version?
+Subject: Re: A patch for autotools.bbclas which correct .la file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,17 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2008 09:12:28 -0000
-Content-Type: text/plain; charset=GB2312
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Oct 2008 10:45:11 -0000
+Content-Type: text/plain; charset=us-ascii
 
-SGVsbG8mIzY1NTMzOyYjNjU1MzM7CiAgICAgIE1ldCBiZWxvdyBwcm9ibGVtcyYjNjU1MzM7JiM2
-NTUzMzsKICAgICAgRm9sZGVyICJwYWNrYWdlcy9saWJubCIgaGF2ZSAzIGJiIGZpbGVzOgogICAg
-ICBsaWJubF8xLjAtcHJlNi5iYiAvIGxpYm5sXzEuMC1wcmU4LmJiIC8gbGlibmxfMC41LjAuYmIK
-CiAgICAgIEkgd2FudCB0byB1c2UgbGlibmxfMS4wLXByZTYuYmIuIEkgYWRkIGJlbG93IGxpbmUg
-aW50byAuY29uZiBmaWxlOgogICAgICBQUkVGRVJSRURfVkVSU0lPTl9saWJubCA/PSAiMS4wLXBy
-ZTYiCgogICAgIEJ1dCB3aGVuIGNvbXBpbGUsIHRoZSBtZXNzYWdlJiM2NTUzMzsmIzY1NTMzOwog
-ICAgIE5PVEU6IHByZWZlcnJlZCB2ZXJzaW9uIDEuMC1wcmU2IG9mIGxpYm5sIG5vdCBhdmFpbGFi
-bGUgKGZvciBpdGVtCmxpYm5sKQoKICAgICBwb3AsIGFuZCB0aGUgT0UgdXNlIGxpYm5sXzEuMC1w
-cmU4LmJiLiBXaHk/CgogICAgIFRoYW5rcyEKFiYjNjU1MzM7Jg==
+Julian Chu <julian_chu@openmoko.com> writes:
+
+>         The attachment is a patch which works for me. Hopes it help.
+
+Please fix indentation; it doesn't follow the code style.
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
+
+
