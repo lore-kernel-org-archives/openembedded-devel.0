@@ -1,47 +1,29 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [91.198.206.2] (helo=mail.smartlink.ee)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KvV1b-0005Qo-36
+	(envelope-from <kalev@smartlink.ee>) id 1KvVEQ-0005gL-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Oct 2008 11:45:11 +0100
-Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 1741E336C77
+	Thu, 30 Oct 2008 11:58:26 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.smartlink.ee (Postfix) with ESMTP id 9D394311AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2008 08:44:08 -0200 (BRST)
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id E2391336C35
+	Thu, 30 Oct 2008 12:57:25 +0200 (EET)
+Received: from mail.smartlink.ee ([127.0.0.1])
+	by localhost (mail.smartlink.ee [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CoDgTcpJdJAQ
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2008 08:44:06 -0200 (BRST)
-Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
-	by mail.freedom.ind.br; 30 Oct 2008 08:44:05 -0200
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 50BB68D7B10
+	Thu, 30 Oct 2008 12:57:25 +0200 (EET)
+Received: from [192.168.2.59] (wumpus.smartlink [192.168.2.245])
+	by mail.smartlink.ee (Postfix) with ESMTP id 43F9530A13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2008 08:44:01 -0200 (BRST)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 9457E8B2BB1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2008 08:43:59 -0200 (BRST)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 30 Oct 2008 08:43:55 -0200
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 2E5A0C2F8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2008 08:43:51 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id D087461006C; Thu, 30 Oct 2008 08:40:34 -0200 (BRST)
+	Thu, 30 Oct 2008 12:57:25 +0200 (EET)
+Message-ID: <49099314.5030909@smartlink.ee>
+Date: Thu, 30 Oct 2008 12:57:24 +0200
+From: Kalev Lember <kalev@smartlink.ee>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080926)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <20081030101903.GA8716@walkingice>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Thu, 30 Oct 2008 08:40:34 -0200
-In-Reply-To: <20081030101903.GA8716@walkingice> (Julian Chu's message of "Thu\,
-	30 Oct 2008 18\:19\:04 +0800")
-Message-ID: <87vdvaxt5p.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
-MIME-Version: 1.0
+In-Reply-To: <20081030101903.GA8716@walkingice>
 Subject: Re: A patch for autotools.bbclas which correct .la file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -56,23 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2008 10:45:11 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 30 Oct 2008 10:58:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Julian Chu <julian_chu@openmoko.com> writes:
+Julian Chu wrote:
+>         It supposed to be replaced by autotools.bbclass. However, it
+>         doesn't work when a recipe inherit autotools and overwrite do_install.
+>   
 
->         The attachment is a patch which works for me. Hopes it help.
+Hello,
 
-Please fix indentation; it doesn't follow the code style.
+I think it might not be a good idea to do it in do_install_append(),
+because lots of recipes which inherit autotools bbclass also define
+do_install_append(). So the current approach would fix some, but break a
+set of other packages.
+
 
 -- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Kalev
 
 
