@@ -1,26 +1,30 @@
-Received: from [76.96.30.17] (helo=QMTA10.emeryville.ca.mail.comcast.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tmtalpey@rcn.com>) id 1Kvag4-00019S-HV
+	(envelope-from <pb@reciva.com>) id 1Kvb6r-0002jX-4F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Oct 2008 17:47:21 +0100
-Received: from OMTA11.emeryville.ca.mail.comcast.net ([76.96.30.36])
-	by QMTA10.emeryville.ca.mail.comcast.net with comcast
-	id YyF01a0020mlR8UAA4mFsu; Thu, 30 Oct 2008 16:46:15 +0000
-Received: from tmt.rcn.com ([98.229.118.72])
-	by OMTA11.emeryville.ca.mail.comcast.net with comcast
-	id Z4mD1a0051ZoUlN8X4mEzn; Thu, 30 Oct 2008 16:46:15 +0000
-X-Authority-Analysis: v=1.0 c=1 a=DJk50H63dC_OMaPMB0AA:9
-	a=mso7PQLGC34dHUxECz4A:7 a=G1egdhCFjpGr-umQXzuommLjphkA:4
-	a=h9s5Ru71U4oA:10
-X-Mailer: QUALCOMM Windows Eudora Version 7.1.0.9
-Date: Thu, 30 Oct 2008 12:45:58 -0400
+	Thu, 30 Oct 2008 18:15:01 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Kvb5n-0001id-Nf
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Oct 2008 17:13:57 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1Kvb5k-00010z-E0
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Oct 2008 17:13:55 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-From: Tom Talpey <tmtalpey@rcn.com>
-In-Reply-To: <1225379284.3822.154.camel@mill.internal.reciva.com>
+In-Reply-To: <E1Kvahy-0001AR-Sj@linuxtogo.org>
 References: <1225294016.3822.81.camel@mill.internal.reciva.com>
 	<E1KvYmj-0007s2-Og@linuxtogo.org>
 	<1225379284.3822.154.camel@mill.internal.reciva.com>
+	<E1Kvahy-0001AR-Sj@linuxtogo.org>
+Date: Thu, 30 Oct 2008 17:13:51 +0000
+Message-Id: <1225386831.17961.15.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: arm kernel configurations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,88 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2008 16:47:21 -0000
-Message-ID: <MADEUP.15FE1A15EFDA8F40.13558@groups.io>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 30 Oct 2008 17:15:01 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-At 11:08 AM 10/30/2008, Phil Blundell wrote:
->On Thu, 2008-10-30 at 10:40 -0400, Tom Talpey wrote:
->> At 11:26 AM 10/29/2008, Phil Blundell wrote:
->> >- if your userspace is pure EABI, make sure that you have
->> >CONFIG_OABI_COMPAT turned off.
->>=20
->> My kernel(s) have all hung during exec of init when trying this.
->> Are you able to turn this off with non-thumb userspace?
->
->Yes, it doesn't require Thumb.  Are you sure that your userspace really
->is compiled for EABI and not OABI?
+On Thu, 2008-10-30 at 12:45 -0400, Tom Talpey wrote:
+> As above - the specs do include "--with-float=soft". I guess I'll have to
+> dig some more. Do I also need -mfloat-abi=softfp in the machine.conf like
+> some of the other arm's?
 
-Yes:
+I don't think so.  If I remember right, -mfloat-abi=softfp is for the
+case where you want to use hard floating point instructions (for speed)
+but still want to retain compatibility with a soft-float ABI.
 
->>[tmt@tmt bin]$ ./arm-angstrom-linux-gnueabi-gcc -v
->>Using built-in specs.
->>Target: arm-angstrom-linux-gnueabi
->>Configured with:=
- /home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/work/armv4t-angstrom-linux-gn=
-ueabi/gcc-cross-4.2.4-r1/gcc-4.2.4/configure --build=3Di686-linux=
- --host=3Di686-linux --target=3Darm-angstrom-linux-gnueabi=
- --prefix=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross=
- --exec_prefix=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross=
- --bindir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/bin=
- --sbindir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/bin=
- --libexecdir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/libexec=
- --datadir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/share=
- --sysconfdir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/etc=
- --sharedstatedir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/com=
- --localstatedir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/var=
- --libdir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/lib=
- --includedir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/include=
- --oldincludedir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/inclu=
-de --infodir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/share/inf=
-o --mandir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/cross/share/man=
- --with-gnu-ld --enable-shared --enable-target-optspace=
- --enable-languages=3Dc,c++,fortran --enable-threads=3Dposix=
- --enable-multilib --enable-c99 --enable-long-long --enable-symvers=3Dgnu=
- --enable-libstdcxx-pch --program-prefix=3Darm-angstrom-linux-gnueabi-=
- --enable-libssp --disable-bootstrap --disable-libgomp --disable-libmudflap=
- --with-float=3Dsoft=
- --with-local-prefix=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/staging=
-/arm-angstrom-linux-gnueabi/usr=
- --with-gxx-include-dir=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/stag=
-ing/arm-angstrom-linux-gnueabi//usr/include/c++=
- --with-sysroot=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/staging/arm-=
-angstrom-linux-gnueabi=
- --with-build-sysroot=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/stagin=
-g/arm-angstrom-linux-gnueabi --disable-libunwind-exceptions=
- --with-mpfr=3D/home/tmt/armdev/H1940/oe/build-h1940-gpe/tmp/staging/i686-li=
-nux/usr --enable-__cxa_atexit
->>Thread model: posix
->>gcc version 4.2.4
->>[tmt@tmt bin]$=20
+I wonder if something has gone wrong with your glibc configuration.  Try
+disassembling one of your binaries and see if you can find any reference
+to "wfs" or "rfs" instructions.  Also have a look in libc.so.6 itself to
+see what the syscall instructions look like: for OABI you will see
+something like "swi 0x900004", whereas for EABI it will look more like
+"mov ip, r7; mov r7, #4; swi 0; mov r7, ip".
 
->> One side effect of turning off OABI_COMPAT is that the floating
->> point emulation also vanishes. I get the same behavior if I leave
->> OABI_COMPAT on and play with fp settings.
->
->That sounds rather like some part of your userspace has been built with
->hard-fpa floating point.  FPA is basically incompatible with EABI (and I
->think all extant EABI configs in OE are soft-float) so this would also
->indicate that you are actually using OABI.
+> But the Kconfig comment does warn that RMK will kill us! ;-)
 
-As above - the specs do include "--with-float=3Dsoft". I guess I'll have to
-dig some more. Do I also need -mfloat-abi=3Dsoftfp in the machine.conf like
-some of the other arm's?
+Heh.  True, but only if he finds out :-)
 
-BTW, on the subject of turning off the kernel frame pointer, I certainly=
- agree
-it's worth it. For one thing, the tiny screen never manages to show me=
- enough
-of a backtrace on oops anyway.
+p.
 
-But the Kconfig comment does warn that RMK will kill us! ;-)
-
-Tom. =20
 
 
 
