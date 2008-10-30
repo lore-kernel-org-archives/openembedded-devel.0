@@ -1,41 +1,31 @@
-Received: from [209.85.200.170] (helo=wf-out-1314.google.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1KvQry-0007fZ-P5
+	(envelope-from <sledz@DResearch.DE>) id 1KvRvM-0000Rn-0d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Oct 2008 07:18:58 +0100
-Received: by wf-out-1314.google.com with SMTP id 29so447097wff.3
+	Thu, 30 Oct 2008 08:26:32 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 863A816DF7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2008 23:17:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=wlavYTzTiYAe3jc/6f3jYhafT/mrOC5UpUmgfBnJxNY=;
-	b=mGk9xSvD1DtFAI5r0YXIoTNkkDK0aiClCiP+Q8WekEjvCUXt3+3NhRQgPWebbhffeU
-	iHmVJEiKYu1UPldRo+QVMUTiY+9p+5gGc504u+FwbGEZAMK8qO2Mq3EnPoLOlfeYUh2A
-	jEJJyPfgj4rBpuxi081a7ExTEYKYZ3pEn0tA8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=H1t67eqrcrrfcTLTo96ixzNA0xEBWsRUsnkUHlNDQ95WyiJNqXMGAi2R6yXQApCMop
-	Vu2WSZw+LLTStNpc+JUWilUfCJlkTyrR1e4sJvKGLGDNbUqcWl8+/cp8HiUwN59FAOzS
-	dNYME/OTJjlswb6GxTF1dMGQjScTSHAhNm8jM=
-Received: by 10.142.109.8 with SMTP id h8mr4463066wfc.150.1225347478113;
-	Wed, 29 Oct 2008 23:17:58 -0700 (PDT)
-Received: from localhost (adsl-71-146-26-221.dsl.pltn13.sbcglobal.net
-	[71.146.26.221])
-	by mx.google.com with ESMTPS id 30sm1729722wfa.10.2008.10.29.23.17.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 29 Oct 2008 23:17:57 -0700 (PDT)
-Date: Wed, 29 Oct 2008 23:17:56 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081030061756.GB19310@gmail.com>
-References: <200810291730.49558.zecke@selfish.org>
+	Thu, 30 Oct 2008 08:33:26 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id A1B3A2A4232
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Oct 2008 08:34:35 +0100 (CET)
 MIME-Version: 1.0
-In-Reply-To: <200810291730.49558.zecke@selfish.org>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: Packages not honoring our LDFLAGS
+Date: Thu, 30 Oct 2008 08:25:32 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF4B5@hiob.intern.dresearch.de>
+In-Reply-To: <20081028224147.GA23369@denix.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Building u-boot?
+Thread-Index: Ack5UJ/p4bfTaz2VSE+oGzPYdZqhFABD6ZEg
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF4AD@hiob.intern.dresearch.de>
+	<20081028224147.GA23369@denix.org>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: Building u-boot?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +39,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2008 06:18:59 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Oct 2008 07:26:32 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On (29/10/08 17:30), Holger Freyther wrote:
-> Hey,
-> 
-> I have enabled --hash-style=gnu some time ago but some packages do not honor 
-> this and I could need your help.
-> 
-> The attached list is a list of binaries and libraries not honoring our LDFLAGS 
-> and this list was compiled from a run of bitbake fso-image.
-> 
-> help would be appreciated.
+> There are many versions and variations of u-boot, as well as=20
+> some first stage bootloaders, like x-load for OMAP...
+>=20
+> $ bitbake u-boot
 
-We could modify gcc LINK_SPEC and add --hash-style=gnu or
---hash-style=both then you dont need the LDFLAGS at all it will happen
-automatically.
-
-But this would need binutils/ld supporting this otherwise links would
-fail. 
-
-I can prepare a gcc patch if this is interesting approach
-
-Thx
-
--Khem
-
+Sometimes things are much more easy than expected. Sorry for the =
+annoyance.  ;-)
 
 
