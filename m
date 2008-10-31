@@ -1,24 +1,22 @@
 Received: from [202.4.237.240] (helo=kirsty.vergenet.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raster@vergenet.net>) id 1Kvtht-0006rI-V6
+	(envelope-from <raster@vergenet.net>) id 1Kvthu-0006rJ-1y
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 31 Oct 2008 14:06:30 +0100
 Received: by kirsty.vergenet.net (Postfix, from userid 1001)
-	id C5F1E240A0; Fri, 31 Oct 2008 23:38:02 +1100 (EST)
-Date: Fri, 31 Oct 2008 23:35:57 +1100
+	id 0CAD1240A3; Fri, 31 Oct 2008 23:38:04 +1100 (EST)
+Date: Fri, 31 Oct 2008 23:37:53 +1100
 From: Carsten Haitzler (The Rasterman) <raster@rasterman.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20081031233557.abe7e561.raster@rasterman.com>
-In-Reply-To: <20081031091304.GA6818@jama>
-References: <20081031013837.F2AD4189330@amethyst.openembedded.net>
-	<200810310749.55874.openembedded@haerwu.biz>
-	<20081031091304.GA6818@jama>
+Message-Id: <20081031233753.43f5f09d.raster@rasterman.com>
+In-Reply-To: <20081031110045.7EF89189333@amethyst.openembedded.net>
+References: <20081031110045.7EF89189333@amethyst.openembedded.net>
 Organization: You expect me to be organized?
 X-Mailer: Sylpheed 2.4.8 (GTK+ 2.12.9; i486-pc-linux-gnu)
 X-Pants: on
 X-Cluestick: Get jiggy with it!
 Mime-Version: 1.0
-Subject: Re: [oe-commits] Carsten Haitzler (Raster) : qemu: seems the move to the svn rev of qemu broke as there are compiler bugs
+Subject: Re: [oe-commits] Koen Kooi : initscripts: only run ldconfig on boot when ld.so. conf is present
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,22 +34,71 @@ X-List-Received-Date: Fri, 31 Oct 2008 13:06:30 -0000
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Fri, 31 Oct 2008 10:13:04 +0100 Martin Jansa <Martin.Jansa@mk.cvut.cz>
-babbled:
+On Fri, 31 Oct 2008 12:00:45 +0100 (CET) git@amethyst.openembedded.net (GIT
+User account) babbled:
 
-> On Fri, Oct 31, 2008 at 07:49:53AM +0100, Marcin Juszkiewicz wrote:
-> > Can you send me error output? I built that qemu version on Ubuntu 8.04 
-> > many times.
-> > 
-> > Regards, 
-> 
-> Same problem here. Gentoo ~amd64
-> 
-> error output:
-> http://rafb.net/p/xJyljp35.html
+is there any reason to run ldconfig on boot? this should be handled by opkg on
+package install/upgrade or by the flash image creation (this slows boot
+significantly and i've patched out/disabled ldconfig run in bootmisc.sh with no
+ill effects).
 
-totally different bug here - mine's a deep compiler unhappiness with asm.
-you're is more straightforward :)
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 6628886e858d77a8f9f94dd3229143e144d39f0e
+> URL:
+> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=6628886e858d77a8f9f94dd3229143e144d39f0e
+> 
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Fri Oct 31 11:57:54 2008 +0100
+> 
+> initscripts: only run ldconfig on boot when ld.so.conf is present
+> 
+> ---
+> 
+>  packages/initscripts/initscripts-1.0/bootmisc.sh |    6 ++++--
+>  packages/initscripts/initscripts_1.0.bb          |    2 +-
+>  2 files changed, 5 insertions(+), 3 deletions(-)
+> 
+> diff --git a/packages/initscripts/initscripts-1.0/bootmisc.sh
+> b/packages/initscripts/initscripts-1.0/bootmisc.sh index 2a40e0c..dde1209
+> 100755
+> --- a/packages/initscripts/initscripts-1.0/bootmisc.sh
+> +++ b/packages/initscripts/initscripts-1.0/bootmisc.sh
+> @@ -57,9 +57,11 @@ then
+>  fi
+>  
+>  #
+> -# Update dynamic library cache
+> +# Update dynamic library cache, but only if ld.so.conf is present
+>  #
+> -/sbin/ldconfig
+> +if [ -e /etc/ld.so.conf ] ; then
+> +	/sbin/ldconfig
+> +fi
+>  
+>  # Set the system clock from hardware clock
+>  # If the timestamp is 1 day or more recent than the current time,
+> diff --git a/packages/initscripts/initscripts_1.0.bb
+> b/packages/initscripts/initscripts_1.0.bb index b1c4317..8daefc5 100644
+> --- a/packages/initscripts/initscripts_1.0.bb
+> +++ b/packages/initscripts/initscripts_1.0.bb
+> @@ -4,7 +4,7 @@ PRIORITY = "required"
+>  DEPENDS = "makedevs"
+>  RDEPENDS = "makedevs"
+>  LICENSE = "GPL"
+> -PR = "r109"
+> +PR = "r110"
+>  
+>  SRC_URI = "file://functions \
+>             file://halt \
+> 
+> 
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+> 
+
 
 -- 
 ------------- Codito, ergo sum - "I code, therefore I am" --------------
