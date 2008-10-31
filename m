@@ -1,28 +1,24 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [202.4.237.240] (helo=kirsty.vergenet.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Kvt2K-00064n-O7
+	(envelope-from <raster@vergenet.net>) id 1Kvtht-0006rI-V6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Oct 2008 13:23:32 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 9237416E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2008 13:02:23 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 6041F2A4232
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2008 13:03:33 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 31 Oct 2008 12:54:09 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF4C4@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: package structure for some boot tools?
-Thread-Index: Ack7T2wcbe46WxklR3if/VrvMWf3Pw==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: package structure for some boot tools?
+	Fri, 31 Oct 2008 14:06:30 +0100
+Received: by kirsty.vergenet.net (Postfix, from userid 1001)
+	id C5F1E240A0; Fri, 31 Oct 2008 23:38:02 +1100 (EST)
+Date: Fri, 31 Oct 2008 23:35:57 +1100
+From: Carsten Haitzler (The Rasterman) <raster@rasterman.com>
+To: openembedded-devel@lists.openembedded.org
+Message-Id: <20081031233557.abe7e561.raster@rasterman.com>
+In-Reply-To: <20081031091304.GA6818@jama>
+References: <20081031013837.F2AD4189330@amethyst.openembedded.net>
+	<200810310749.55874.openembedded@haerwu.biz>
+	<20081031091304.GA6818@jama>
+Organization: You expect me to be organized?
+X-Mailer: Sylpheed 2.4.8 (GTK+ 2.12.9; i486-pc-linux-gnu)
+X-Pants: on
+X-Cluestick: Get jiggy with it!
+Mime-Version: 1.0
+Subject: Re: [oe-commits] Carsten Haitzler (Raster) : qemu: seems the move to the svn rev of qemu broke as there are compiler bugs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,26 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Oct 2008 12:23:32 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 31 Oct 2008 13:06:30 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Rm9yIHRoZSBPWEU4MTAgaSdtIHdvcmtpbmcgb24gc29tZSBib290IHRvb2xzIGFyZSBuZWVkZWQu
-DQoNCkZpcnN0IHRoZXJlIGlzIGFuIHUtYm9vdC4gRmluZSwgdGhhdCB3b3Jrcy4NCg0KU2Vjb25k
-IHRoZXJlIGlzIGEgc3RhZ2UxIGxvYWRlci4gQnVpbGRpbmcgc2hvdWxkIGJlIHNpbWlsYXIgdG8g
-dS1ib290IGkgYmVsaWV2ZS4NCg0KVGhpcmQgdGhlcmUgaXMgYSB0aW55IGhlYWRlciBwYXJ0IGdl
-bmVyYXRlZCBmcm9tIGEgc2ltcGxlIGFzc2VtYmxlciBzb3VyY2UgZmlsZS4gVGhpcyBvbmUgaXMg
-cHJlcGVuZGVkIHRvIHN0YWdlMSBsb2FkZXIgcmVzcC4gdS1ib290IGltYWdlLg0KDQpGb3VydGgg
-dGhlcmUgaXMgYSBzaW1wbGUgdXRpbGl0eSBjb21waWxlZCBmcm9tIGEgQyBmaWxlIGFuZCBydW5u
-aW5nIG9uIHRoZSBidWlsZCBob3N0LCBwYXRjaGluZyB0aGUgaW1hZ2VzIG1hZGUgZnJvbSBoZWFk
-ZXIgYW5kIHN0YWdlMSBsb2FkZXIgcmVzcC4gdS1ib290IGltYWdlLg0KDQpXaGF0IGlzIHRoZSBm
-YXZvcmVkIHBhY2thZ2Ugc3RydWN0dXJlIHRvIGJ1aWxkIHN1Y2ggdGhpbmcgaW4gT0UgYW5kIHdo
-aWNoIGRlcGVuZGVuY2llcyBuZWVkIHRvIGJlIGRlZmluZWQ/IE9uZSBwYWNrYWdlIGZvciBlYWNo
-IHBhcnQgKHUtYm9vdCwgc3RhZ2UxIGxvYWRlciwgaGVhZGVyIGFuZCBwYXRjaC11dGlsaXR5KT8g
-T3Igc2hvdWxkIHRoZSBsYXN0IHRyZWUgcmVzaWRlIGluIHRoZSBzYW1lIHBhY2thZ2U/IE9yIHNv
-bWV0aGluZyBlbHNlPw0KDQpBcmUgdGhlcmUgc29tZSBuYW1pbmcgY29udmVudGlvbnMgb3Igc3Vn
-Z2VzdGlvbnMgZm9yIHRoZSBwYWNrYWdlcz8NCg0KU3RlZmZlbg0K
+On Fri, 31 Oct 2008 10:13:04 +0100 Martin Jansa <Martin.Jansa@mk.cvut.cz>
+babbled:
+
+> On Fri, Oct 31, 2008 at 07:49:53AM +0100, Marcin Juszkiewicz wrote:
+> > Can you send me error output? I built that qemu version on Ubuntu 8.04 
+> > many times.
+> > 
+> > Regards, 
+> 
+> Same problem here. Gentoo ~amd64
+> 
+> error output:
+> http://rafb.net/p/xJyljp35.html
+
+totally different bug here - mine's a deep compiler unhappiness with asm.
+you're is more straightforward :)
+
+-- 
+------------- Codito, ergo sum - "I code, therefore I am" --------------
+The Rasterman (Carsten Haitzler)    raster@rasterman.com
+
 
 
