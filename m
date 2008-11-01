@@ -1,21 +1,32 @@
-Received: from [216.145.245.198] (helo=mx02.dls.net)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1KwCNA-0002GV-Mf
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Nov 2008 10:02:21 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx02.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Kw9hd-0000nL-SW
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Nov 2008 01:11:17 -0500
-Message-ID: <490BF303.1030701@dls.net>
-Date: Sat, 01 Nov 2008 01:11:15 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.17) Gecko/20080914 Thunderbird/2.0.0.17 Mnenhy/0.7.5.666
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: DISTRO_PR, ipkg dependencies, and meta toolchains...
+	(envelope-from <utx@penguin.cz>) id 1KwFDg-00031q-SI
+	for openembedded-devel@openembedded.org; Sat, 01 Nov 2008 13:04:44 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 0FF251405338
+	for <openembedded-devel@openembedded.org>;
+	Sat,  1 Nov 2008 12:39:09 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cwgXh4vUZyQi for <openembedded-devel@openembedded.org>;
+	Sat,  1 Nov 2008 12:39:08 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id C95261416BA2
+	for <openembedded-devel@openembedded.org>;
+	Sat,  1 Nov 2008 12:39:08 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <geh3kt$bp7$1@ger.gmane.org>
+References: <20081031110045.7EF89189333@amethyst.openembedded.net>
+	<20081031233753.43f5f09d.raster@rasterman.com>	<gef9q7$o65$1@ger.gmane.org>
+	<20081101085334.8afcd730.raster@rasterman.com>
+	<geh3kt$bp7$1@ger.gmane.org>
+Date: Sat, 01 Nov 2008 12:38:16 +0100
+Message-Id: <1225539496.4090.6.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: [oe-commits] Koen Kooi : initscripts: only run ldconfig	on boot when ld.so. conf is present
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,42 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Nov 2008 09:02:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 01 Nov 2008 12:04:45 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Consider the control data for openssl-dev (exerpts):
+Koen Kooi wrote:
 
-Package: openssl-dev
-Version: 0.9.7g-r7.1
-...
-Depends: openssl (= 0.9.7g-r7), libcrypto0.9.7, libssl0.9.7
-Recommends: libc6-dev, libgcc-dev, libcrypto-dev...
+> I don't have a strong opinion on that :) People more knowledgable about 
+> ldconfig should chip in on this topic.
 
-Note in particular the openssl-dev version number, which has the
-DISTRO_PR appended to make it "-r7.1" instead of just "-r7".
+And what about something like:
+if ..../ld.so.cache -ot /usr/lib -o /etc/ld.so.cache -ot /lib ; then
+    /sbin/ldconfig
+fi
 
-But in the dependencies, it lists the specific version of the
-corresponding runtime -- without the DISTRO_PR.  And of course, that
-specific version doesn't exist (or rather, if it exists in someone's
-environment, it would be a left-over ipkg from before the DISTRO_PR was
-added).
+Call ldconfig only if ld.so cache is outdated. Fast for users of package
+managers, working for others, fast in subsequent reboots.
 
-One place this bites us is in the SDK assembling (bitbake
-meta-toolchain-<whatever>):
+I guess that all package managers use method "fill new file in target
+directory, then replace existing", so timestamp of library directory is
+updated on any change.
 
-| Collected errors:
-|  * ERROR: Cannot satisfy the following dependencies for
-task-fso-toolchain-target:
-|        *  openssl (= 0.9.7g-r7) *
+Note that /etc/ld.so.conf contain also /usr/local/lib (not exists by
+default, but defined by FHS) and /usr/X11R6/lib (obsolete).
 
-Poking about I can find a place in the appropriate bbclass files to hack
-things up so that my specific problem will be resolved -- but I'd prefer
-that someone who understands just how much of the rdepends/rrecommends
-needs this treatment offer some advice first.  (And of course, I should
-warn anyone who cares that I know Perl far better than Python, a fact
-that would almost certainly end up reflected in the patch I would write!)
 
-Mike (mwester)
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
