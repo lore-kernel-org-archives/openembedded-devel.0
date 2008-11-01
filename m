@@ -1,24 +1,25 @@
-Received: from [209.85.198.243] (helo=rv-out-0708.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1KwJ8t-0006ep-9I
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Nov 2008 17:16:03 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so2146057rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Nov 2008 09:14:52 -0700 (PDT)
-Received: by 10.142.44.13 with SMTP id r13mr6080794wfr.230.1225550952878;
-	Sat, 01 Nov 2008 07:49:12 -0700 (PDT)
-Received: by 10.142.173.21 with HTTP; Sat, 1 Nov 2008 07:49:12 -0700 (PDT)
-Message-ID: <b6ebd0a50811010749h1234f048m99eed54a29529f34@mail.gmail.com>
-Date: Sat, 1 Nov 2008 07:49:12 -0700
-From: "Chris Larson" <clarson@kergoth.com>
-Sender: kergoth@gmail.com
+	(envelope-from <pb@reciva.com>)
+	id 1KwMHp-0004Il-2p; Sat, 01 Nov 2008 20:37:29 +0100
+Received: from 88-111-134-150.dynamic.dsl.as9105.com ([88.111.134.150]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1KwM1b-0006jD-QD; Sat, 01 Nov 2008 19:20:44 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200811011502.53124.zecke@selfish.org>
-MIME-Version: 1.0
-References: <200811011502.53124.zecke@selfish.org>
-X-Google-Sender-Auth: e1a58711c6685394
-Subject: Re: [RFC] I would like to merge holger/enterprise into oe.dev
+In-Reply-To: <1225539496.4090.6.camel@utx.utx.cz>
+References: <20081031110045.7EF89189333@amethyst.openembedded.net>
+	<20081031233753.43f5f09d.raster@rasterman.com>	<gef9q7$o65$1@ger.gmane.org>
+	<20081101085334.8afcd730.raster@rasterman.com>
+	<geh3kt$bp7$1@ger.gmane.org> <1225539496.4090.6.camel@utx.utx.cz>
+Date: Sat, 01 Nov 2008 19:20:42 +0000
+Message-Id: <1225567242.4235.471.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : initscripts: only run	ldconfig	on boot when ld.so. conf is present
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,27 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Nov 2008 16:16:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+X-List-Received-Date: Sat, 01 Nov 2008 19:37:29 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-T24gU2F0LCBOb3YgMSwgMjAwOCBhdCA3OjAyIEFNLCBIb2xnZXIgRnJleXRoZXIgPHplY2tlQHNl
-bGZpc2gub3JnPiB3cm90ZToKPiBIZXkgZ3V5cywKPgo+IEluIHRoZSBHU3RyZWFtZXIgd29ybGQg
-dGhlcmUgYXJlIHRoZSB0ZXJtcyBsaWtlICJHb29kIiwgIkJhZCIgYW5kICJVZ2x5IiB0bwo+IHF1
-YWxpZnkgcGx1Z2lucy4gV2hpbGUgIkdvb2QiIGFuZCAiQmFkIiBvbmx5IHJlZmVyIHRvIHRoZSBx
-dWFsaXR5IG9mIHRoZSBjb2RlLAo+ICJVZ2x5IiBpcyByZWZlcnJpbmcgdG8gdGhlIGFidXNlIG9m
-IHRlY2hub2xvZ3kuCj4KPiBTb21ldGltZXMgcGVvcGxlIGZpbmQgdGhlbSBpbiBhIHNpdHVhdGlv
-biB0aGF0IHRoZXkgZG8gbm90IHdhbnQgdG8KPiBkaXN0cmlidXRlL3Byb3ZpZGUgIlVnbHkiIHBs
-dWdpbnMsIGUuZyBmb3IgcG9saXRpY2FsIHJlYXNvbnMgKGxpa2UgRmVkb3JhIGFuZAo+IG1wMyks
-IHNvbWV0aW1lcyBmb3Igb3RoZXIgcmVhc29ucy4uLgo+Cj4gSW4gbXkgaG9sZ2VyL2VudGVycHJp
-c2UgYnJhbmNoIEkgaGF2ZSBhZGRlZCBhbiBlbnRlcnByaXNlLmNvbmYgd2hpY2ggaXMKPiBtYXNr
-aW5nIChCQk1BU0spIHRoZSB1Z2x5IHBhY2thZ2VzIGFuZCBpcyBjaGFuZ2luZyB0aGUgYmIgdG8g
-bm90IGRlcGVuZCBvbgo+IHVnbHkgcGFja2FnZXMgaW4uIEkgd291bGQgbGlrZSB0byBtZXJnZSB0
-aGlzLgoKU3BlYWtpbmcgYXMgc29tZW9uZSB3aG8ncyB1c2VkIE9FIGluIGNvbXBhbmllcyBiZWZv
-cmUsIHRoaXMgc291bmRzCmxpa2UgYSB2ZXJ5IEdvb2QgVGhpbmfihKIuCi0tIApDaHJpcyBMYXJz
-b24KY2xhcnNvbiBhdCBrZXJnb3RoIGRvdCBjb20KY2xhcnNvbiBhdCBtdmlzdGEgZG90IGNvbQpG
-b3VuZGVyIC0gQml0QmFrZSwgT3BlbkVtYmVkZGVkLCBPcGVuWmF1cnVzCk1haW50YWluZXIgLSBU
-c2xpYgpTb2Z0d2FyZSBFbmdpbmVlcgpNb250YVZpc3RhIFNvZnR3YXJlLCBJbmMuCg==
+On Sat, 2008-11-01 at 12:38 +0100, Stanislav Brabec wrote:
+> And what about something like:
+> if ..../ld.so.cache -ot /usr/lib -o /etc/ld.so.cache -ot /lib ; then
+>     /sbin/ldconfig
+> fi
+
+That would work fine for DISTROs which only put libraries in those two
+directories.  But, frankly, if you only have those two library paths you
+are probably better off not using ldconfig and ld.so.conf at all.
+
+Even in the simple case I think a better solution would probably be to
+teach ldconfig to do this checking of mtimes, rather than having to wrap
+every call to it in a shell conditional.
+
+> Call ldconfig only if ld.so cache is outdated. Fast for users of package
+> managers, working for others, fast in subsequent reboots.
+
+Just as an aside, there isn't really any need to have complicated
+runtime logic to handle all possible combinations of DISTRO policy.  Any
+single DISTRO would clearly have only one policy (for example, either it
+uses a package manager or it doesn't) and hence it can make these
+determinations at build time.  As an example of that, DISTROs which use
+package management but don't require ldconfig can just set
+USE_LDCONFIG=0 and suppress all those postinsts altogether, rather than
+emitting a postinst with convoluted tests for file existence that ends
+up doing nothing.
+
+p.
+
+
 
 
