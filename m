@@ -1,32 +1,22 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1KwFDg-00031q-SI
-	for openembedded-devel@openembedded.org; Sat, 01 Nov 2008 13:04:44 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 0FF251405338
-	for <openembedded-devel@openembedded.org>;
-	Sat,  1 Nov 2008 12:39:09 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id cwgXh4vUZyQi for <openembedded-devel@openembedded.org>;
-	Sat,  1 Nov 2008 12:39:08 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id C95261416BA2
-	for <openembedded-devel@openembedded.org>;
-	Sat,  1 Nov 2008 12:39:08 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <geh3kt$bp7$1@ger.gmane.org>
-References: <20081031110045.7EF89189333@amethyst.openembedded.net>
-	<20081031233753.43f5f09d.raster@rasterman.com>	<gef9q7$o65$1@ger.gmane.org>
-	<20081101085334.8afcd730.raster@rasterman.com>
-	<geh3kt$bp7$1@ger.gmane.org>
-Date: Sat, 01 Nov 2008 12:38:16 +0100
-Message-Id: <1225539496.4090.6.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: [oe-commits] Koen Kooi : initscripts: only run ldconfig	on boot when ld.so. conf is present
+	(envelope-from <zecke@selfish.org>) id 1KwHhh-0003bL-Ex
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 01 Nov 2008 15:43:53 +0100
+Received: from [92.117.139.190] (helo=tamarin.localnet)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KwH4J-0005RU-UI
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 01 Nov 2008 15:03:12 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 1 Nov 2008 15:02:51 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200811011502.53124.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.117.139.190
+Subject: [RFC] I would like to merge holger/enterprise into oe.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +30,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Nov 2008 12:04:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 01 Nov 2008 14:43:54 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi wrote:
+Hey guys,
 
-> I don't have a strong opinion on that :) People more knowledgable about 
-> ldconfig should chip in on this topic.
+In the GStreamer world there are the terms like "Good", "Bad" and "Ugly" to 
+qualify plugins. While "Good" and "Bad" only refer to the quality of the code, 
+"Ugly" is referring to the abuse of technology.
 
-And what about something like:
-if ..../ld.so.cache -ot /usr/lib -o /etc/ld.so.cache -ot /lib ; then
-    /sbin/ldconfig
-fi
+Sometimes people find them in a situation that they do not want to 
+distribute/provide "Ugly" plugins, e.g for political reasons (like Fedora and 
+mp3), sometimes for other reasons...
 
-Call ldconfig only if ld.so cache is outdated. Fast for users of package
-managers, working for others, fast in subsequent reboots.
+In my holger/enterprise branch I have added an enterprise.conf which is 
+masking (BBMASK) the ugly packages and is changing the bb to not depend on 
+ugly packages in. I would like to merge this.
 
-I guess that all package managers use method "fill new file in target
-directory, then replace existing", so timestamp of library directory is
-updated on any change.
-
-Note that /etc/ld.so.conf contain also /usr/local/lib (not exists by
-default, but defined by FHS) and /usr/X11R6/lib (obsolete).
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+comments welcome
+	z.
 
 
 
