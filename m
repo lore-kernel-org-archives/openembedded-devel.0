@@ -1,34 +1,23 @@
-Received: from [67.43.13.2] (helo=oceanus.site5.com)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mike@compulab.co.il>) id 1Kx0uj-00056D-B3
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Nov 2008 16:00:21 +0100
-Received: from [192.114.83.142] (helo=mail.linux-boards.com)
-	by oceanus.site5.com with esmtpsa (TLSv1:DES-CBC3-SHA:168)
-	(Exim 4.69) (envelope-from <mike@compulab.co.il>)
-	id 1Kx0So-0002C9-FP; Mon, 03 Nov 2008 09:31:31 -0500
-Received: from [10.1.1.95] (mike-pc.compulab.local [10.1.1.95])
-	by mail.linux-boards.com (8.12.5/8.12.8) with ESMTP id mA3EVOFM003323; 
-	Mon, 3 Nov 2008 16:31:24 +0200
-Message-ID: <490F0B3D.4040003@compulab.co.il>
-Date: Mon, 03 Nov 2008 16:31:25 +0200
-From: Mike Rapoport <mike@compulab.co.il>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080907)
+	(envelope-from <mwester@dls.net>) id 1Kx2Kf-00055t-3C
+	for openembedded-devel@openembedded.org; Mon, 03 Nov 2008 17:31:13 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx01.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1Kx0gh-0005ok-JQ
+	for openembedded-devel@openembedded.org; Mon, 03 Nov 2008 08:45:52 -0600
+Message-ID: <490F0E99.6030401@dls.net>
+Date: Mon, 03 Nov 2008 08:45:45 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.17) Gecko/20080914 Thunderbird/2.0.0.17 Mnenhy/0.7.5.666
 MIME-Version: 1.0
-To: Henk Geraads <linux@hf-electronics.com>
-References: <NGBBLNEOGLJIIJKLFLPFMECBDKAA.linux@hf-electronics.com>
-In-Reply-To: <NGBBLNEOGLJIIJKLFLPFMECBDKAA.linux@hf-electronics.com>
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - oceanus.site5.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - compulab.co.il
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Problems touchscreen on CM-X270
+To: openembedded-devel@openembedded.org
+References: <490BF303.1030701@dls.net>
+	<490E5FAA.9070206@dls.net>	<200811031347.08952.zecke@selfish.org>
+	<87ljw1ey5l.fsf@neumann.lab.ossystems.com.br>
+In-Reply-To: <87ljw1ey5l.fsf@neumann.lab.ossystems.com.br>
+Subject: Re: [RFC] Re: DISTRO_PR, ipkg dependencies, and meta toolchains...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,59 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Nov 2008 15:00:21 -0000
+X-List-Received-Date: Mon, 03 Nov 2008 16:31:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Otavio Salvador wrote:
+> Holger Freyther <zecke@selfish.org> writes:
+> 
+>> On Monday 03 November 2008 03:19:22 Mike (mwester) wrote:
+>>> Mike (mwester) wrote:
+>>>
+>>> (Replying to my own email, and what's worse -- I'm top-posting!)
+>>> (And I changed the subject line to add [RFC] to get your attention.)
+>>>
+>>> I found the problem.  Here's a fix:
+>> eek, otavios and richard went over it. could you please comment?
+> 
+> It is fixed in current GIT and works fine for me since then... 
 
-Henk Geraads wrote:
-> Hi,
-> 
-> I did enable the event debuging in the kernel, when i touch the touchscreen i've got:
-> 
-> system log:
-> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 0, Value: 354
-> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 1, Value: 479
-> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 24, Value: 228
-> 	<7>evbug.c: Event. Dev: <NULL>, Type: 0, Code: 0, Value: 0
-> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 24, Value: 0
-> 	<7>evbug.c: Event. Dev: <NULL>, Type: 0, Code: 0, Value: 0 
-> 
-> Why is the device string <NULL>, in case of the mouse is the correct mouse specified.
+I'm not sure what you are saying here -- I'm using the GIT tip, and the
+patches I posted are required.  It's really quite easy to see -- just do
+"ar x something-dev.ipk", extract the control file, and look at the
+dependency -- without the patch I posted, the dependency on package
+"something" is written with an explicit version number that does not
+exist, because it does not have the DISTRO_PR on it.
 
-The UCB1400 driver does not set dev->phys, so that's why you see <NULL> in evbug
-reports.
-Try "hexdump /dev/input/eventX" and touch the touchscreen
-
-> Part of the kernel bootmessages indicating that there is a touchscreen:
-> 	input: Logitech USB-PS/2 Optical Mouse as /class/input/input0
-> 	input: USB HID v1.10 Mouse [Logitech USB-PS/2 Optical Mouse] on usb-pxa27x-1
-> 	usbcore: registered new interface driver usbhid
-> 	drivers/hid/usbhid/hid-core.c: v2.6:USB HID core driver
-> 	Advanced Linux Sound Architecture Driver Version 1.0.14 (Fri Jul 20 09:12:58 2007 UTC).
-> 	pxa2xx_ac97_reset: cold reset timeout (GSR=0x0)
-> 	input: UCB1400 touchscreen interface as /class/input/input1
-> 	ALSA device list:
->   #0: pxa2xx-ac97 (Philips UCB1400)
-> 
-> Thanks for any remarks!
-> 
-> Best regards,
-> 
-> Henk
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
--- 
-Sincerely yours,
-Mike.
+Mike (mwester)
 
 
 
