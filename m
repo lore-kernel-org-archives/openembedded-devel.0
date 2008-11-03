@@ -1,27 +1,23 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KwxdS-0003YP-Ew
-	for openembedded-devel@openembedded.org; Mon, 03 Nov 2008 12:30:21 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 9279F16DF7B
-	for <openembedded-devel@openembedded.org>;
-	Mon,  3 Nov 2008 12:17:02 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 72EA12A4239
-	for <openembedded-devel@openembedded.org>;
-	Mon,  3 Nov 2008 12:18:14 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <zecke@selfish.org>) id 1KwyrR-00018I-Kc
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Nov 2008 13:48:49 +0100
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244]
+	helo=tamarin.localnet) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KwyqA-0003ah-PV
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Nov 2008 13:47:31 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 3 Nov 2008 13:47:08 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+References: <490BF303.1030701@dls.net> <490E5FAA.9070206@dls.net>
+In-Reply-To: <490E5FAA.9070206@dls.net>
 MIME-Version: 1.0
-Date: Mon, 3 Nov 2008 12:08:40 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF4CE@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: OXE810 support is coming soon
-Thread-Index: Ack9pJDr0Yfy41TdSNatwJY/6wydpA==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@openembedded.org>
-Subject: OXE810 support is coming soon
+Message-Id: <200811031347.08952.zecke@selfish.org>
+Subject: Re: [RFC] Re: DISTRO_PR, ipkg dependencies, and meta toolchains...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,34 +31,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Nov 2008 11:30:30 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Mon, 03 Nov 2008 12:48:49 -0000
 Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-SSdtIHBsYW5uaW5nIHRvIG1ha2UgT1hFODEwIG1hY2hpbmUgc3VwcG9ydCBhdmFpbGFibGUgZm9y
-IHRoZSBjb21tdW5pdHkgaW4gYSBmZXcgZGF5cyAoaSdtIHdhaXRpbmcgZm9yIHNvbWUgZmVlZGJh
-Y2sgZnJvbSBPeGZvcmQgU2VtaWNvbmR1Y3RvcnMgYmVmb3JlKS4NCg0KTm93IG15IHF1ZXN0aW9u
-IGlzLCB3aGF0J3MgdGhlIHByZWZlcnJlZCB3YXkgdG8gZG8gdGhpcyAoaSd2ZSBubyBnaXQgY29t
-bWl0IGFjY2VzcyB5ZXQpPw0KDQpUaGUgd2lraSBzYXlzICJBc3BpcmluZyBkZXZlbG9wZXJzIGFy
-ZSBlbmNvdXJhZ2VkIHRvIHJlcXVlc3QgYSBwZXJzb25hbCBnaXQgdHJlZSB3aGVyZSB0aGV5IGNh
-biBzdG9yZSBhbmQgc2hhcmUgY2hhbmdlcy4gVGhleSBjYW4gdGhlbiBzdWJtaXQgdGhlc2UgcGF0
-Y2hlcyBmb3IgcmV2aWV3IG9uIHRoZSBtYWlsaW5nIGxpc3QgYW5kIHdoZW4gcmVhZHksIHNvbWVv
-bmUgd2l0aCBjb21taXQgcmlnaHRzIGNhbiBtZXJnZSBvciBpZiBuZWVkZWQgY2hlcnJ5IHBpY2sg
-dGhlIGNoYW5nZXMgaW50byB0aGUgbWFpbiBkZXZlbG9wbWVudCBicmFuY2guIg0KDQpUaGF0IHNv
-dW5kcyBPSyBmb3IgbWUuIEJ1dCBpIG1pc3MgYSBkZXNjcmlwdGlvbiAqaG93KiB0byBkbyBhbGwg
-dGhhdCAoc29ycnksIGknbSBhIENWUywgU1ZOICYgQ28uIHVzZXIvYWRtaW4gZm9yIGEgbG9uZyB0
-aW1lLCBidXQgaSdtIG5vdCB0aGF0IGZhbWlsaWFyIHdpdGggdGhlIGdpdCBwaGlsb3NvcGh5KS4g
-SG93IHRvIGNyZWF0ZSB0aGlzIHBlcnNvbmFsIHRyZWU/IE9yIG1lYW5zICJ0cmVlIiBhICJicmFu
-Y2giIGhlcmU/IEhvdyB0byBrZWVwIHRoaXMgdHJlZS9icmFuY2ggdXAgdG8gZGF0ZSBmcm9tIHRo
-ZSBkZXYgYnJhbmNoPyBIb3cgdG8gc3VibWl0IHRoZSBwYXRjaGVzIHRvIHRoZSBtYWlsaW5nIGxp
-c3Q/IC4uLj8NCg0KU3RlZmZlbg0KDQotLSANClN0ZWZmZW4gU2xlZHoNCkRSZXNlYXJjaCBEaWdp
-dGFsIE1lZGlhIFN5c3RlbXMgR21iSA0KT3R0by1TY2htaXJnYWwtU3RyLjMsIEQtMTAzMTkgQmVy
-bGluLCBHZXJtYW55DQpUZWw6ICs0OSAoMzApIDUxNTkzMjIzNyBtYWlsdG86c2xlZHpARFJlc2Vh
-cmNoLkRFDQpGYXg6ICs0OSAoMzApIDUxNTkzMjI5OSBodHRwOi8vd3d3LkRSZXNlYXJjaC5ERQ0K
-R2VzY2jDpGZ0c2bDvGhyZXI6IERyLiBNaWNoYWVsIFdlYmVyLCBXZXJuZXIgTcO2Z2xlOyANCkFt
-dHNnZXJpY2h0IEJlcmxpbiBDaGFybG90dGVuYnVyZzsgSFJCIDU0NDEyOyANClVzdC4tSUROci4g
-REUxNjkwMTM4MjU7IFdFRUUgUmVnLi1Oci4gREUgODU5OTU2NDINCg0K
+On Monday 03 November 2008 03:19:22 Mike (mwester) wrote:
+> Mike (mwester) wrote:
+>
+> (Replying to my own email, and what's worse -- I'm top-posting!)
+> (And I changed the subject line to add [RFC] to get your attention.)
+>
+> I found the problem.  Here's a fix:
+
+eek, otavios and richard went over it. could you please comment?
+
+z.
 
 
