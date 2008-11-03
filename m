@@ -1,49 +1,34 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [67.43.13.2] (helo=oceanus.site5.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1Kwzu6-00079L-1W
+	(envelope-from <mike@compulab.co.il>) id 1Kx0uj-00056D-B3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Nov 2008 14:55:39 +0100
-Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 3E39633700D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2008 11:32:25 -0200 (BRST)
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 2714033688E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2008 11:32:23 -0200 (BRST)
-Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
-	by mail.freedom.ind.br; 3 Nov 2008 11:32:22 -0200
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 9C9118E30AE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2008 11:32:23 -0200 (BRST)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 449F08CE28E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2008 11:32:23 -0200 (BRST)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 3 Nov 2008 11:32:22 -0200
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 03E77C1F9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2008 11:32:22 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id E346CC48CBC; Mon,  3 Nov 2008 11:28:54 -0200 (BRST)
-To: openembedded-devel@lists.openembedded.org
-References: <490BF303.1030701@dls.net> <490E5FAA.9070206@dls.net>
-	<200811031347.08952.zecke@selfish.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Mon, 03 Nov 2008 11:28:54 -0200
-In-Reply-To: <200811031347.08952.zecke@selfish.org> (Holger Freyther's message
-	of "Mon\, 3 Nov 2008 13\:47\:08 +0100")
-Message-ID: <87ljw1ey5l.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+	Mon, 03 Nov 2008 16:00:21 +0100
+Received: from [192.114.83.142] (helo=mail.linux-boards.com)
+	by oceanus.site5.com with esmtpsa (TLSv1:DES-CBC3-SHA:168)
+	(Exim 4.69) (envelope-from <mike@compulab.co.il>)
+	id 1Kx0So-0002C9-FP; Mon, 03 Nov 2008 09:31:31 -0500
+Received: from [10.1.1.95] (mike-pc.compulab.local [10.1.1.95])
+	by mail.linux-boards.com (8.12.5/8.12.8) with ESMTP id mA3EVOFM003323; 
+	Mon, 3 Nov 2008 16:31:24 +0200
+Message-ID: <490F0B3D.4040003@compulab.co.il>
+Date: Mon, 03 Nov 2008 16:31:25 +0200
+From: Mike Rapoport <mike@compulab.co.il>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080907)
 MIME-Version: 1.0
-Subject: Re: [RFC] Re: DISTRO_PR, ipkg dependencies, and meta toolchains...
+To: Henk Geraads <linux@hf-electronics.com>
+References: <NGBBLNEOGLJIIJKLFLPFMECBDKAA.linux@hf-electronics.com>
+In-Reply-To: <NGBBLNEOGLJIIJKLFLPFMECBDKAA.linux@hf-electronics.com>
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - oceanus.site5.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - compulab.co.il
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Problems touchscreen on CM-X270
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,31 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Nov 2008 13:55:44 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 03 Nov 2008 15:00:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Holger Freyther <zecke@selfish.org> writes:
+Hi,
 
-> On Monday 03 November 2008 03:19:22 Mike (mwester) wrote:
->> Mike (mwester) wrote:
->>
->> (Replying to my own email, and what's worse -- I'm top-posting!)
->> (And I changed the subject line to add [RFC] to get your attention.)
->>
->> I found the problem.  Here's a fix:
->
-> eek, otavios and richard went over it. could you please comment?
+Henk Geraads wrote:
+> Hi,
+> 
+> I did enable the event debuging in the kernel, when i touch the touchscreen i've got:
+> 
+> system log:
+> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 0, Value: 354
+> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 1, Value: 479
+> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 24, Value: 228
+> 	<7>evbug.c: Event. Dev: <NULL>, Type: 0, Code: 0, Value: 0
+> 	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 24, Value: 0
+> 	<7>evbug.c: Event. Dev: <NULL>, Type: 0, Code: 0, Value: 0 
+> 
+> Why is the device string <NULL>, in case of the mouse is the correct mouse specified.
 
-It is fixed in current GIT and works fine for me since then... 
+The UCB1400 driver does not set dev->phys, so that's why you see <NULL> in evbug
+reports.
+Try "hexdump /dev/input/eventX" and touch the touchscreen
+
+> Part of the kernel bootmessages indicating that there is a touchscreen:
+> 	input: Logitech USB-PS/2 Optical Mouse as /class/input/input0
+> 	input: USB HID v1.10 Mouse [Logitech USB-PS/2 Optical Mouse] on usb-pxa27x-1
+> 	usbcore: registered new interface driver usbhid
+> 	drivers/hid/usbhid/hid-core.c: v2.6:USB HID core driver
+> 	Advanced Linux Sound Architecture Driver Version 1.0.14 (Fri Jul 20 09:12:58 2007 UTC).
+> 	pxa2xx_ac97_reset: cold reset timeout (GSR=0x0)
+> 	input: UCB1400 touchscreen interface as /class/input/input1
+> 	ALSA device list:
+>   #0: pxa2xx-ac97 (Philips UCB1400)
+> 
+> Thanks for any remarks!
+> 
+> Best regards,
+> 
+> Henk
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 -- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Sincerely yours,
+Mike.
+
 
 
