@@ -1,28 +1,24 @@
-Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
+Received: from [62.250.3.53] (helo=relay.versatel.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Kwt3N-00085R-Uw
-	for openembedded-devel@openembedded.org; Mon, 03 Nov 2008 07:36:46 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20081103043015.IPRT23774.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Sun, 2 Nov 2008 23:30:15 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
-	id aUWC1a00G1E665w04UWD36; Sun, 02 Nov 2008 23:30:15 -0500
-X-Authority-Analysis: v=1.0 c=1 a=GwTaWOckg3YA:10 a=yfBNVpTcCFIA:10
-	a=E8AFcrTznjBedTch9pQA:9 a=5yOXf77S5KBQHppzSeYA:7
-	a=MRaCHhyTdB0WjNSxSv3leF3LxXsA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Sun, 2 Nov 2008 21:30:12 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20081103043012.GC5568@smtp.west.cox.net>
-References: <490BF303.1030701@dls.net> <490E5FAA.9070206@dls.net>
+	(envelope-from <linux@hf-electronics.com>) id 1KwtZ2-0004uq-J8
+	for openembedded-devel@openembedded.org; Mon, 03 Nov 2008 08:09:29 +0100
+Received: from [62.58.160.127] (helo=hf-electronics.com)
+	by relay.versatel.net with smtp (Exim 4.69)
+	(envelope-from <linux@hf-electronics.com>) id 1KwtDL-0005jd-6N
+	for openembedded-devel@openembedded.org; Mon, 03 Nov 2008 07:47:03 +0100
+Received: from <linux@hf-electronics.com> with PostMaster 4.3.2 (MPS);
+	Mon, 03 Nov 2008 07:43:40 +100
+From: "Henk Geraads" <linux@hf-electronics.com>
+To: <openembedded-devel@openembedded.org>
+Date: Mon, 3 Nov 2008 07:46:21 +0100
+Message-ID: <NGBBLNEOGLJIIJKLFLPFMECBDKAA.linux@hf-electronics.com>
 MIME-Version: 1.0
-In-Reply-To: <490E5FAA.9070206@dls.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] Re: DISTRO_PR, ipkg dependencies, and meta	toolchains...
+X-Priority: 3 (Normal)
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook IMO, Build 9.0.6604 (9.0.2911.0)
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+Importance: Normal
+Subject: Problems touchscreen on CM-X270
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,42 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Nov 2008 06:36:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 03 Nov 2008 07:09:30 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 02, 2008 at 08:19:22PM -0600, Mike (mwester) wrote:
-> Mike (mwester) wrote:
-> 
-> (Replying to my own email, and what's worse -- I'm top-posting!)
-> (And I changed the subject line to add [RFC] to get your attention.)
-> 
-> I found the problem.  Here's a fix:
+Hi,
 
-And this would explain why the problem wasn't seen before, 
-<sarcasm>
-All of you, me and poky use the SDK stuff
-</sarcam>
+I did enable the event debuging in the kernel, when i touch the touchs=
+creen i've got:
 
-:)
+system log:
+	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 0, Value: 354
+	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 1, Value: 479
+	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 24, Value: 228
+	<7>evbug.c: Event. Dev: <NULL>, Type: 0, Code: 0, Value: 0
+	<7>evbug.c: Event. Dev: <NULL>, Type: 3, Code: 24, Value: 0
+	<7>evbug.c: Event. Dev: <NULL>, Type: 0, Code: 0, Value: 0=20
 
-As the area in question came from me, that looks good to me.  That's
-where we remove the dep the -dev package has on the main package, if the
-main package doesn't exist.
+Why is the device string <NULL>, in case of the mouse is the correct m=
+ouse specified.
 
-[snip]
-> This changes the dependencies written into the "-dev" packages so that
-> they include the DISTRO_PR suffix correctly.
+Part of the kernel bootmessages indicating that there is a touchscreen=
+:
+	input: Logitech USB-PS/2 Optical Mouse as /class/input/input0
+	input: USB HID v1.10 Mouse [Logitech USB-PS/2 Optical Mouse] on usb-p=
+xa27x-1
+	usbcore: registered new interface driver usbhid
+	drivers/hid/usbhid/hid-core.c: v2.6:USB HID core driver
+	Advanced Linux Sound Architecture Driver Version 1.0.14 (Fri Jul 20 0=
+9:12:58 2007 UTC).
+	pxa2xx_ac97_reset: cold reset timeout (GSR=3D0x0)
+	input: UCB1400 touchscreen interface as /class/input/input1
+	ALSA device list:
+  #0: pxa2xx-ac97 (Philips UCB1400)
 
-Actually, as I think more, why isn't ${DISTRO_PR} part of ${DEBPV} ?
-That seems to be the real bug..
+Thanks for any remarks!
 
-> (By-the-way, another solution might be to set DEBPV to include the
-> DISTRO_PR, but grep was unable to tell me where that variable is set.)
+Best regards,
 
-... as you suggest.
+Henk
 
--- 
-Tom Rini
+
 
 
