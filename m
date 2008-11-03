@@ -1,35 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Kwb6e-0003v3-HN
-	for openembedded-devel@openembedded.org; Sun, 02 Nov 2008 12:26:56 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Kwb5P-0008JQ-4k
-	for openembedded-devel@openembedded.org; Sun, 02 Nov 2008 11:25:39 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 02 Nov 2008 11:25:39 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 02 Nov 2008 11:25:39 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <mwester@dls.net>) id 1KwqyN-00051B-NB
+	for openembedded-devel@openembedded.org; Mon, 03 Nov 2008 05:23:27 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx02.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1Kwp2O-0007HB-C6
+	for openembedded-devel@openembedded.org; Sun, 02 Nov 2008 20:19:28 -0600
+Message-ID: <490E5FAA.9070206@dls.net>
+Date: Sun, 02 Nov 2008 20:19:22 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.17) Gecko/20080914 Thunderbird/2.0.0.17 Mnenhy/0.7.5.666
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 02 Nov 2008 12:25:31 +0100
-Message-ID: <gek2nb$gjo$1@ger.gmane.org>
-References: <20081031110045.7EF89189333@amethyst.openembedded.net>	<20081031233753.43f5f09d.raster@rasterman.com>	<gef9q7$o65$1@ger.gmane.org>	<20081101085334.8afcd730.raster@rasterman.com>	<geh3kt$bp7$1@ger.gmane.org>
-	<1225539496.4090.6.camel@utx.utx.cz>	<20081102100819.ebdb2ce9.raster@rasterman.com>
-	<1225623174.3749.24.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081025 Shredder/3.0b1pre
-In-Reply-To: <1225623174.3749.24.camel@utx.utx.cz>
-Sender: news <news@ger.gmane.org>
-Subject: Running one-off target binaries, was: Re: [oe-commits] Koen Kooi : initscripts: only run ldconfig on boot when ld.so. conf is present
+References: <490BF303.1030701@dls.net>
+In-Reply-To: <490BF303.1030701@dls.net>
+Subject: [RFC] Re: DISTRO_PR, ipkg dependencies, and meta toolchains...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,36 +29,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Nov 2008 11:26:57 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 03 Nov 2008 04:23:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On 02-11-2008 11:52, Stanislav Brabec wrote:
+Mike (mwester) wrote:
 
-> Being inspired by DejaGnu, I can also imagine a native host as an
-> alternative solution for platforms without qemu support.
->
-> - Build (minimal) environment not needing any native run and being able
->    to run on target.
-> - Mount a target root as a chroot on native host via a NFS.
-> - Using a ssh and chroot command, execute required code and get result
->    back.
->
-> ﻿(Well, it would complicate life to Koen a bit.)
->
-> It could perform any task﻿ not possible on build system:
-> - run ldconfig
-> - generate locales (may need swap on native host)
-> - compile emacs macros
+(Replying to my own email, and what's worse -- I'm top-posting!)
+(And I changed the subject line to add [RFC] to get your attention.)
+
+I found the problem.  Here's a fix:
+--------------------------------------------
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 8db000b..a1cbe61 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -459,7 +459,7 @@ python populate_packages () {
+        for pkg in package_list:
+                rdepends = explode_deps(bb.data.getVar('RDEPENDS_' +
+pkg, d, 0) or bb.data.getVar('RDEPENDS', d, 0) or "
+
+-               remstr = "${PN} (= ${DEBPV})"
++               remstr = "${PN} (= ${DEBPV}${DISTRO_PR})"
+                if main_is_empty and remstr in rdepends:
+                        rdepends.remove(remstr)
+                for l in dangling_links[pkg]:
+--------------------------------------------
+
+This changes the dependencies written into the "-dev" packages so that
+they include the DISTRO_PR suffix correctly.
+
+Note that this change will require a full rebuild of every -dev package
+in order to correct the dependencies listed therein.
+
+In addition, there are a couple of recipes that use DEBPV directly -- if
+nobody  objects, I'll add DISTRO_PR to these as well:
+
+linux-libc-headers/linux-libc-headers.inc
+net-snmp/net-snmp_5.4.1.bb
+
+(By-the-way, another solution might be to set DEBPV to include the
+DISTRO_PR, but grep was unable to tell me where that variable is set.)
+
+If nobody objects I'll commit this fix.
+
+Mike (mwester)
+
+> Consider the control data for openssl-dev (exerpts):
+> 
+> Package: openssl-dev
+> Version: 0.9.7g-r7.1
 > ...
-
-We do have sbrsh (from scratchbox fame) in OE, so one could write a 
-class reusing scratchbox code to run such binaries on a network-attached 
-target. Any volunteers for doing a proof-of-concept bbclass?
-
-regards,
-
-Koen
-
+> Depends: openssl (= 0.9.7g-r7), libcrypto0.9.7, libssl0.9.7
+> Recommends: libc6-dev, libgcc-dev, libcrypto-dev...
+> 
+> Note in particular the openssl-dev version number, which has the
+> DISTRO_PR appended to make it "-r7.1" instead of just "-r7".
+> 
+> But in the dependencies, it lists the specific version of the
+> corresponding runtime -- without the DISTRO_PR.  And of course, that
+> specific version doesn't exist (or rather, if it exists in someone's
+> environment, it would be a left-over ipkg from before the DISTRO_PR was
+> added).
+> 
+> One place this bites us is in the SDK assembling (bitbake
+> meta-toolchain-<whatever>):
+> 
+> | Collected errors:
+> |  * ERROR: Cannot satisfy the following dependencies for
+> task-fso-toolchain-target:
+> |        *  openssl (= 0.9.7g-r7) *
+> 
+> Poking about I can find a place in the appropriate bbclass files to hack
+> things up so that my specific problem will be resolved -- but I'd prefer
+> that someone who understands just how much of the rdepends/rrecommends
+> needs this treatment offer some advice first.  (And of course, I should
+> warn anyone who cares that I know Perl far better than Python, a fact
+> that would almost certainly end up reflected in the patch I would write!)
+> 
+> Mike (mwester)
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
