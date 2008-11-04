@@ -1,30 +1,23 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KxH0Z-0001Fy-2z
+	(envelope-from <zecke@selfish.org>) id 1KxJsM-00088W-Aa
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Nov 2008 09:11:27 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 6527516DEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Nov 2008 09:18:12 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id D39FA2A423D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Nov 2008 09:19:24 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Tue, 04 Nov 2008 12:15:10 +0100
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244]
+	helo=tamarin.localnet) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1KxJr1-0004V1-Q3
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Nov 2008 12:13:47 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 4 Nov 2008 12:13:24 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+References: <20081104005512.GA12988@denix.org>
+In-Reply-To: <20081104005512.GA12988@denix.org>
 MIME-Version: 1.0
-Date: Tue, 4 Nov 2008 09:10:05 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF4D9@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF4C4@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] package structure for some boot tools?
-Thread-Index: Ack7T2wcbe46WxklR3if/VrvMWf3PwDBSj6A
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF4C4@hiob.intern.dresearch.de>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: package structure for some boot tools?
+Message-Id: <200811041213.25205.zecke@selfish.org>
+Subject: Re: hal-0.5.11 fails with external toolchain/SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,21 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Nov 2008 08:11:27 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Tue, 04 Nov 2008 11:15:10 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> ...
-> What is the favored package structure to build such thing in=20
-> OE and which dependencies need to be defined? One package for=20
-> each part (u-boot, stage1 loader, header and patch-utility)?=20
-> Or should the last tree reside in the same package? Or something else?
->=20
-> Are there some naming conventions or suggestions for the packages?
+On Tuesday 04 November 2008 01:55:12 Denys Dmytriyenko wrote:
+> Hi,
+>
+> New hal-0.5.11 from OpenMoko breaks builds with external-toolchain/SDK, as
+> it hardcodes linux/input.h like this:
 
-No suggestions here? :(
+It is Openmoko, and I did add it.
 
+what about something among the lines of?
+
+echo "#include <linux/input.h>" | cpp | less | grep "linux\/input.h"
+
+
+z.
 
 
