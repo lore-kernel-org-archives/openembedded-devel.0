@@ -1,43 +1,27 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [207.172.157.102] (helo=smtp02.lnh.mail.rcn.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KyTUV-0003f3-7m
-	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 16:43:19 +0100
-Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 229F13366AE;
-	Fri,  7 Nov 2008 13:41:39 -0200 (BRST)
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 671E3335EEB;
-	Fri,  7 Nov 2008 13:41:36 -0200 (BRST)
-Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
-	by mail.freedom.ind.br; 7 Nov 2008 13:41:35 -0200
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 9D87D8D05B0;
-	Fri,  7 Nov 2008 13:41:37 -0200 (BRST)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 667268CAFB8;
-	Fri,  7 Nov 2008 13:41:37 -0200 (BRST)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 7 Nov 2008 13:41:37 -0200
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 6F7EAC329;
-	Fri,  7 Nov 2008 13:41:36 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 3A2ED610058; Fri,  7 Nov 2008 13:38:01 -0200 (BRST)
+	(envelope-from <tmtalpey@rcn.com>) id 1KyUEN-0000Ma-9K
+	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 17:30:43 +0100
+Received: from mr02.lnh.mail.rcn.net ([207.172.157.22])
+	by smtp02.lnh.mail.rcn.net with ESMTP; 07 Nov 2008 11:00:18 -0500
+Received: from smtp01.lnh.mail.rcn.net (smtp01.lnh.mail.rcn.net [207.172.4.11])
+	by mr02.lnh.mail.rcn.net (MOS 3.8.6-GA) with ESMTP id PFJ60778;
+	Fri, 7 Nov 2008 11:00:17 -0500 (EST)
+Message-Id: <77ts5u$k3jnhh@smtp01.lnh.mail.rcn.net>
+Received: from unknown (HELO tmt.rcn.com) ([216.240.30.23])
+	by smtp01.lnh.mail.rcn.net with ESMTP; 07 Nov 2008 11:00:17 -0500
+Date: Fri, 07 Nov 2008 10:59:28 -0500
 To: openembedded-devel@lists.openembedded.org
-References: <1226054458.7175.3.camel@aquilonia>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Fri, 07 Nov 2008 13:38:01 -0200
-In-Reply-To: <1226054458.7175.3.camel@aquilonia> (Graeme Gregory's message of
-	"Fri\, 07 Nov 2008 10\:40\:58 +0000")
-Message-ID: <87iqqz1r8m.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
-MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Xorg X11R7.4 updates
+From: Tom Talpey <tmtalpey@rcn.com>
+In-Reply-To: <77ts5u$jhr010@smtp01.lnh.mail.rcn.net>
+References: <48DCF3ED.1060809@gmx.net> <gbjhln$8nr$1@ger.gmane.org>
+	<gc0eck$64q$1@ger.gmane.org>
+	<77ts5u$jhlo1v@smtp01.lnh.mail.rcn.net>
+	<48E42F7E.3040802@balister.org>
+	<77ts5u$jhr010@smtp01.lnh.mail.rcn.net>
+Mime-Version: 1.0
+X-Junkmail-Whitelist: YES (by domain whitelist at mr02.lnh.mail.rcn.net)
+Subject: gnome-games recipe update was Re: Another low-hanging fruit: aisleriot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,28 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2008 15:43:19 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 07 Nov 2008 16:30:44 -0000
+Content-Type: text/plain; charset="us-ascii"
 
-Graeme Gregory <dp@xora.org.uk> writes:
+At 08:27 AM 10/2/2008, Tom Talpey wrote:
+>At 10:18 PM 10/1/2008, Philip Balister wrote:
+>>Tom Talpey wrote:
+>>> I broke out the individual games as packages, and (I think) have most of
+>>> the rdepends down too. How would I send my recipe for comments, just
+>>> post it on this list?
+>>
+>>Please add the recipe to bugs.openembedded.org (typed from memory) and I 
+>>will try and commit it, provided it worlks for me :)
+>
+>Ok, will do, soon. 
 
-> So I would like people with an interest to please review the changes on
-> the shared/xorg-7.4-update branch. Especially x86 guys who can actually
-> use some of the drivers. Id like to get any problems ironed out now
-> ready for merging into OE mainline.
+Any further interest in this? I've done the above and tested, a month ago
+now and wondering if more is needed.
+	http://bugs.openembedded.net/show_bug.cgi?id=4607
 
-I'll merge it in our daily build branch and give it a try.
+Thanks,
+Tom.
 
-Thanks a lot by all this work :-)
-
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
 
 
