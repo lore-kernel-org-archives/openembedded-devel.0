@@ -1,27 +1,34 @@
-Received: from [207.172.157.102] (helo=smtp02.lnh.mail.rcn.net)
+Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tmtalpey@rcn.com>) id 1KyUEN-0000Ma-9K
-	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 17:30:43 +0100
-Received: from mr02.lnh.mail.rcn.net ([207.172.157.22])
-	by smtp02.lnh.mail.rcn.net with ESMTP; 07 Nov 2008 11:00:18 -0500
-Received: from smtp01.lnh.mail.rcn.net (smtp01.lnh.mail.rcn.net [207.172.4.11])
-	by mr02.lnh.mail.rcn.net (MOS 3.8.6-GA) with ESMTP id PFJ60778;
-	Fri, 7 Nov 2008 11:00:17 -0500 (EST)
-Message-Id: <77ts5u$k3jnhh@smtp01.lnh.mail.rcn.net>
-Received: from unknown (HELO tmt.rcn.com) ([216.240.30.23])
-	by smtp01.lnh.mail.rcn.net with ESMTP; 07 Nov 2008 11:00:17 -0500
-Date: Fri, 07 Nov 2008 10:59:28 -0500
-To: openembedded-devel@lists.openembedded.org
-From: Tom Talpey <tmtalpey@rcn.com>
-In-Reply-To: <77ts5u$jhr010@smtp01.lnh.mail.rcn.net>
-References: <48DCF3ED.1060809@gmx.net> <gbjhln$8nr$1@ger.gmane.org>
-	<gc0eck$64q$1@ger.gmane.org>
-	<77ts5u$jhlo1v@smtp01.lnh.mail.rcn.net>
-	<48E42F7E.3040802@balister.org>
-	<77ts5u$jhr010@smtp01.lnh.mail.rcn.net>
-Mime-Version: 1.0
-X-Junkmail-Whitelist: YES (by domain whitelist at mr02.lnh.mail.rcn.net)
-Subject: gnome-games recipe update was Re: Another low-hanging fruit: aisleriot
+	(envelope-from <cliff.brake@gmail.com>) id 1KyVob-0006rn-CK
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Nov 2008 19:12:13 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so1515363rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Nov 2008 10:10:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=HttfvXOfC+uXzKKdMhC3yBekMM6ro+fNwFiFaEdb8Yw=;
+	b=LY/mNu/O0illK38+RkBqm9XYkcGxLjdAB6WHOdYW+7lcSebtaAPRe6AFPYZ0Q70xgV
+	IMJaa9HMJXTbMOzetrSRnrzTYlwZ4q4JaZUY8Eh1NEAL3rh1Jd9QzHCP3im6nNDaF6yF
+	RGzKqoKnjoyo2uy1EdnRczmK4PPQbhOQleWR4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=DczEu259naTKN+1sAuu3FIF/Phwf9F2GTjdWGkX039CjHf/dCT+m8YGfagMQvP7Cah
+	ijf65tDZhogAvm65OpJeywiMsjbRRNKMMYmpmQ039jeUUCXz1140Ne5RKLiHPqBlM0p9
+	Joj2gU5Alu8pMSYNI8ZqUsg5Zm0uxe5EqoPFM=
+Received: by 10.140.193.15 with SMTP id q15mr1893179rvf.274.1226077378130;
+	Fri, 07 Nov 2008 09:02:58 -0800 (PST)
+Received: by 10.141.193.4 with HTTP; Fri, 7 Nov 2008 09:02:58 -0800 (PST)
+Message-ID: <f96d234e0811070902y7bc14e8bu13b87ba81f01d330@mail.gmail.com>
+Date: Fri, 7 Nov 2008 12:02:58 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+Subject: merging bitbake changes from poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,27 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2008 16:30:44 -0000
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 07 Nov 2008 18:12:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-At 08:27 AM 10/2/2008, Tom Talpey wrote:
->At 10:18 PM 10/1/2008, Philip Balister wrote:
->>Tom Talpey wrote:
->>> I broke out the individual games as packages, and (I think) have most of
->>> the rdepends down too. How would I send my recipe for comments, just
->>> post it on this list?
->>
->>Please add the recipe to bugs.openembedded.org (typed from memory) and I 
->>will try and commit it, provided it worlks for me :)
->
->Ok, will do, soon. 
+I am experimenting with merging some bitbake changes from poky and
+they are available:
 
-Any further interest in this? I've done the above and tested, a month ago
-now and wondering if more is needed.
-	http://bugs.openembedded.net/show_bug.cgi?id=4607
+  URL: git://dev.bec-systems.com/bitbake.git
+  Tracked remote branches
+    bitbake-1.8 bitbake-1.8-poky-fixes master
+
+Can we consider moving bitbake to git?  It would make activities like
+this a little easier.  It would also be easier for users to manage
+their own bitbake repositories which has been necessary for me several
+times in the past to include fixes.  Note, I am not suggested we merge
+bitbake with the OE source, but I don't see any problem with putting
+it in a separate repo on git.openembedded.net.
 
 Thanks,
-Tom.
+Cliff
 
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
