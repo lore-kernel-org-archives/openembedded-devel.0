@@ -1,34 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KyNP4-00041Y-D5
-	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 10:13:18 +0100
+	id 1KyOS9-0001dZ-9a
+	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 11:20:33 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KyNNR-0006Tf-Vs
-	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 09:11:37 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1KyOQb-0000ha-5b
+	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 10:18:57 +0000
+Received: from p5483b70e.dip0.t-ipconnect.de ([84.131.183.14])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 07 Nov 2008 09:11:37 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Fri, 07 Nov 2008 10:18:57 +0000
+Received: from vjensen by p5483b70e.dip0.t-ipconnect.de with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 07 Nov 2008 09:11:37 +0000
+	Fri, 07 Nov 2008 10:18:57 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 07 Nov 2008 10:11:30 +0100
-Message-ID: <gf10o2$hip$1@ger.gmane.org>
-References: <20081104005512.GA12988@denix.org>	<200811041213.25205.zecke@selfish.org>	<20081104194812.GA18457@denix.org>
-	<20081106231210.GB32229@denix.org>
+From: Vitus Jensen <vjensen@gmx.de>
+Date: Fri, 7 Nov 2008 10:18:45 +0000 (UTC)
+Message-ID: <gf14m5$sdl$1@ger.gmane.org>
+References: <200811060040.45197.vjensen@gmx.de>
+	<b6ebd0a50811051833l4fb50bb3v973618c9f722ac65@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081025 Shredder/3.0b1pre
-In-Reply-To: <20081106231210.GB32229@denix.org>
+X-Gmane-NNTP-Posting-Host: p5483b70e.dip0.t-ipconnect.de
+User-Agent: Pan/0.133 (House of Butterflies)
 Sender: news <news@ger.gmane.org>
-Subject: Re: hal-0.5.11 fails with external toolchain/SDK
+Subject: Re: htmldoc 1.8.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,47 +40,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2008 09:13:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Nov 2008 10:20:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 07-11-2008 00:12, Denys Dmytriyenko wrote:
-> On Tue, Nov 04, 2008 at 02:48:12PM -0500, Denys Dmytriyenko wrote:
->> On Tue, Nov 04, 2008 at 12:13:24PM +0100, Holger Freyther wrote:
->>> On Tuesday 04 November 2008 01:55:12 Denys Dmytriyenko wrote:
->>>> Hi,
->>>>
->>>> New hal-0.5.11 from OpenMoko breaks builds with external-toolchain/SDK, as
->>>> it hardcodes linux/input.h like this:
->>> It is Openmoko, and I did add it.
->>>
->>> what about something among the lines of?
->>>
->>> echo "#include<linux/input.h>" | cpp | less | grep "linux\/input.h"
->> Thanks for the hint. I was able to fix it, so it finds the right linux/input.h
->> file even with external-toolchain/SDK.
+Am Wed, 05 Nov 2008 19:33:01 -0700 schrieb Chris Larson:
+
+> On Wed, Nov 5, 2008 at 4:40 PM, Vitus Jensen <vjensen@gmx.de> wrote:
+>> I need htmldoc for ARM and as this isn't available in OpenEmbedded I
+>> cooked up my own receipt.  But htmldoc has some specialities:
 >>
->> The patch is attached to the ticket #4799 and this email. I was not able to
->> call autoreconf, as it was giving too many problems. autotools_do_configure
->> worked fine, but unfortunately, it doesn't take parameters to pass to the
->> oe_runconf, so I had to call it again with the correct --with flag. Let me
->> know if it's Ok or not. Thanks.
->
-> What about this patch? Does it look good? Any comments/suggestions?
+>> - it does build it's own documentation by using the generated excutable
+> 
+> Build a -native and use that to build the main package.
 
-I was about to propose somethine like:
+Just to build the documentation as HTML, PDF and PS?  I seriously doubt 
+that anyone wants to install this big thing to his device but you're 
+probably right, one never knows.
 
-do_configure_prepend() {
-linux_input_h=$(echo "#include <linux/input.h>" | ${CPP} - | \
-	grep "linux\/input.h" | head -n 1 | awk -F '"' '{print $2}')	
-}
-EXTRA_OECONF += "--with-linux-input-header=${linux_input_h}"
 
-But I then I realized that probably won't work as I expect it to work :)
+>> - it contains an optional GUI component
+>> - there are defines in config.h.in not duplicated
+>>   in configure.in
+> 
+> configure.in does not replace config.h.in.  config.h.in is either
+> hardcoded, as in old buildsystems, or is generated by autoheader.
 
-regards,
+Thank you for your hint.  I have now found 
+EXTRA_AUTORECONF += "--exclude=autoheader"
 
-Koen
+to disable autoheader.  The ugly patch is gone.
+
+
+>> I guess the complete solution would be several receipts (-native, -doc,
+>> -console, -gui), right?  But as I want it for a NAS would the attached
+>> console-type receipt be enough?
+> 
+> Two recipes, one with gui and one without, is probably best, to avoid
+> building any gui deps for distros that don't need it.
+
+And the documentation in HTML, PS and PDF would go to a -doc.ipk by means 
+of some FILES_xxx variable?
+
+I will do this for 1.9.x-r1571.
+
+BTW: htmldoc.org uses a mirror select mechanismen for downloads (http://
+www.htmldoc.org/software.php?VERSION=1.9.x-r1586&FILE=htmldoc/snapshots/
+htmldoc-1.9.x-r1586.tar.bz2), I have hardcoded one mirror in my receipt.  
+Is there a better way?
+
+By[t]e,
+   Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
 
 
 
