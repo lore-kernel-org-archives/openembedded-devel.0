@@ -1,40 +1,29 @@
-Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1KyXtz-0006YV-JC
+	(envelope-from <utx@penguin.cz>) id 1Kyauy-0005Cu-Mm
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Nov 2008 21:25:55 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so1591183rvb.12
+	Sat, 08 Nov 2008 00:39:08 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id D1C3F1405348
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Nov 2008 12:24:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=mSJucY+ppHvFusWNgjyZ1hJ5XHsEmyNA451Cw3IVd4Q=;
-	b=kJplVU4dedBADR66F3ee6BjJKxjJDHG51qNAAhDDqYPoz7nHDc8BNDrk0RR/qbQkDz
-	YDYPDvaARDEGPTlnfRCruFqZ8evlaeRIoAkgAxnl3OUEBHI32jhVC23XU46i3gAcxn3H
-	nQjgwXseBLF9TMMzCX8DaS1DT7YDX1RMlke4I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=C7ElirvUCxFqlNtbOQ4tGYTfeWyVmG1qZDtvOq1922zqHF7H7CLAd+H/d4bIjf5dWe
-	g1dYXk2pD1TDSUP/cuLUnf+/T8Nzyu/8Fg7RdcngCN93YlFumtYO2+bKYYdpFHZxO+tY
-	iJZfKiMRNTcsHlttofi90EjbrZ/StHxfnoMC8=
-Received: by 10.141.115.16 with SMTP id s16mr1995990rvm.209.1226089457472;
-	Fri, 07 Nov 2008 12:24:17 -0800 (PST)
-Received: by 10.141.193.4 with HTTP; Fri, 7 Nov 2008 12:24:17 -0800 (PST)
-Message-ID: <f96d234e0811071224wf7725d5gfae5238691cf5a42@mail.gmail.com>
-Date: Fri, 7 Nov 2008 15:24:17 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Sat,  8 Nov 2008 00:03:43 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EeWE3+eZtduP
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  8 Nov 2008 00:03:43 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 99A2C1422AA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  8 Nov 2008 00:03:43 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <f96d234e0811071157j71bc59bbjf71e865c32e40a81@mail.gmail.com>
-MIME-Version: 1.0
-References: <20081023230928.GA21151@denix.org>
-	<f96d234e0810240638u1026aec9y6b258bba5708315f@mail.gmail.com>
-	<1224861430.6356.20.camel@dax.rpnet.com>
-	<f96d234e0811071157j71bc59bbjf71e865c32e40a81@mail.gmail.com>
-Subject: Re: RFC: Add http_proxy and ftp_proxy to BitBake white list
+Date: Sat, 08 Nov 2008 00:05:01 +0100
+Message-Id: <1226099101.6034.5.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: [patch review] bitbake.conf: Introduce STAGING_BINDIR_CROSS_BASEPKG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +37,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2008 20:25:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 Nov 2008 23:39:08 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Fri, Nov 7, 2008 at 2:57 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+Hallo core developers.
 
-One additional note,
+Please approve or comment following patch of bitbake.conf.
 
-If http_proxy is in BB_ENV_EXTRAWHITE, the value of http_proxy from
-the env does _not_ get passed to wget.  If I set BB_PRESERVE_ENV, it
-does.  This is a bit puzzling as looking at the code in utils.py --
-with both methods, the environment includes http_proxy after
-clean_environment() is called, and this is the only place
-BB_ENV_EXTRAWHITE is used -- very interesting.  And in both cases
-"bitbake -e" lists it in the environment.
+It introduces STAGING_BINDIR_CROSS_BASEPKG pointing to
+STAGING_BINDIR_CROSS of base packages and adds it to PATH (after
+STAGING_BINDIR_CROSS).
 
-Cliff
+It fixes highly base package cross bindir lookup while compiling highly
+optimized packages. Actually it's mplayer and sdl-config lookup.
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Note that similar patch adding highly optimized pkgconfig dir to
+PKG_CONFIG_PATH may be needed in future.
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 4273152..678062a 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -245,6 +245,7 @@ STAGING_DIR = "${TMPDIR}/staging"
+ STAGING_DIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}"
+ STAGING_BINDIR_NATIVE = "${STAGING_DIR_NATIVE}${layout_bindir}"
+ STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${layout_bindir}/${MULTIMACH_HOST_SYS}"
++STAGING_BINDIR_CROSS_BASEPKG = "${STAGING_DIR_NATIVE}${layout_bindir}/${BASEPKG_TARGET_SYS}"
+ STAGING_LIBDIR_NATIVE = "${STAGING_DIR_NATIVE}${layout_libdir}"
+ STAGING_INCDIR_NATIVE = "${STAGING_DIR_NATIVE}${layout_includedir}"
+ STAGING_ETCDIR_NATIVE = "${STAGING_DIR_NATIVE}${layout_sysconfdir}"
+@@ -337,7 +338,7 @@ EXTRA_IMAGEDEPENDS = ""
+ 
+ CROSS_DIR = "${TMPDIR}/cross/${BASE_PACKAGE_ARCH}"
+ CROSS_DATADIR = "${CROSS_DIR}/share"
+-PATH_prepend = "${STAGING_BINDIR_CROSS}:${STAGING_DIR_NATIVE}${layout_sbindir}:${STAGING_BINDIR_NATIVE}:${CROSS_DIR}/bin:${STAGING_DIR_NATIVE}${layout_base_sbindir}:${STAGING_DIR_NATIVE}${layout_base_bindir}:"
++PATH_prepend = "${STAGING_BINDIR_CROSS}:${STAGING_BINDIR_CROSS_BASEPKG}:${STAGING_DIR_NATIVE}${layout_sbindir}:${STAGING_BINDIR_NATIVE}:${CROSS_DIR}/bin:${STAGING_DIR_NATIVE}${layout_base_sbindir}:${STAGING_DIR_NATIVE}${layout_base_bindir}:"
+ export PATH
+ 
+ ##################################################################
+
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
