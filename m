@@ -1,24 +1,34 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1KyHpz-0001Oi-VQ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Nov 2008 04:16:44 +0100
-Received: from gandalf.denix.org ([71.255.226.167]) by vms173005.mailsrvcs.net
-	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
-	with ESMTPA id <0K9X00BUTPPOR0H0@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	06 Nov 2008 17:10:44 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 045876B83A8; Thu,
-	06 Nov 2008 18:10:35 -0500 (EST)
-Date: Thu, 06 Nov 2008 18:10:34 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <20081103202204.GA11663@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20081106231034.GA32229@denix.org>
-MIME-version: 1.0
-References: <20081103202204.GA11663@denix.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [RFC] glibc fails with -march=i686 or pentiumpro or	pentium3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1KyNP4-00041Y-D5
+	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 10:13:18 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1KyNNR-0006Tf-Vs
+	for openembedded-devel@openembedded.org; Fri, 07 Nov 2008 09:11:37 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 07 Nov 2008 09:11:37 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 07 Nov 2008 09:11:37 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 07 Nov 2008 10:11:30 +0100
+Message-ID: <gf10o2$hip$1@ger.gmane.org>
+References: <20081104005512.GA12988@denix.org>	<200811041213.25205.zecke@selfish.org>	<20081104194812.GA18457@denix.org>
+	<20081106231210.GB32229@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081025 Shredder/3.0b1pre
+In-Reply-To: <20081106231210.GB32229@denix.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: hal-0.5.11 fails with external toolchain/SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2008 03:16:44 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 07 Nov 2008 09:13:18 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 03, 2008 at 03:22:04PM -0500, Denys Dmytriyenko wrote:
-> glibc fails with -march=i686 or pentiumpro or pentium3 - it's a known issue
-> with glibc and has been discussed for long time, but glibc team refuses to fix
-> it. eglibc has been fixed by Khem Raj:
-> 
-> http://www.eglibc.org/archives/patches/msg00073.html
-> 
-> The same patch works for glibc. See Bug #4798:
-> 
-> http://bugs.openembedded.net/show_bug.cgi?id=4798
+On 07-11-2008 00:12, Denys Dmytriyenko wrote:
+> On Tue, Nov 04, 2008 at 02:48:12PM -0500, Denys Dmytriyenko wrote:
+>> On Tue, Nov 04, 2008 at 12:13:24PM +0100, Holger Freyther wrote:
+>>> On Tuesday 04 November 2008 01:55:12 Denys Dmytriyenko wrote:
+>>>> Hi,
+>>>>
+>>>> New hal-0.5.11 from OpenMoko breaks builds with external-toolchain/SDK, as
+>>>> it hardcodes linux/input.h like this:
+>>> It is Openmoko, and I did add it.
+>>>
+>>> what about something among the lines of?
+>>>
+>>> echo "#include<linux/input.h>" | cpp | less | grep "linux\/input.h"
+>> Thanks for the hint. I was able to fix it, so it finds the right linux/input.h
+>> file even with external-toolchain/SDK.
+>>
+>> The patch is attached to the ticket #4799 and this email. I was not able to
+>> call autoreconf, as it was giving too many problems. autotools_do_configure
+>> worked fine, but unfortunately, it doesn't take parameters to pass to the
+>> oe_runconf, so I had to call it again with the correct --with flag. Let me
+>> know if it's Ok or not. Thanks.
+>
+> What about this patch? Does it look good? Any comments/suggestions?
 
-Hi,
+I was about to propose somethine like:
 
-Any comments for the patch? Can somebody please push it in? Thanks.
+do_configure_prepend() {
+linux_input_h=$(echo "#include <linux/input.h>" | ${CPP} - | \
+	grep "linux\/input.h" | head -n 1 | awk -F '"' '{print $2}')	
+}
+EXTRA_OECONF += "--with-linux-input-header=${linux_input_h}"
 
--- 
-Denys
+But I then I realized that probably won't work as I expect it to work :)
+
+regards,
+
+Koen
+
 
 
