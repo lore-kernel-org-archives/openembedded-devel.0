@@ -1,34 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Kyutl-0001OK-HD
-	for openembedded-devel@openembedded.org; Sat, 08 Nov 2008 21:59:13 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Kyus7-0006Al-Mg
-	for openembedded-devel@openembedded.org; Sat, 08 Nov 2008 20:57:31 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 08 Nov 2008 20:57:31 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 08 Nov 2008 20:57:31 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 08 Nov 2008 21:57:24 +0100
-Message-ID: <gf4ufl$8sj$1@ger.gmane.org>
-References: <1226099101.6034.5.camel@utx.utx.cz>
-	<c384c5ea0811081204j6edb237aw69afe7163277a84e@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081025 Shredder/3.0b1pre
-In-Reply-To: <c384c5ea0811081204j6edb237aw69afe7163277a84e@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [patch review] bitbake.conf: Introduce STAGING_BINDIR_CROSS_BASEPKG
+	(envelope-from <stefan@datenfreihafen.org>) id 1Kyuwd-0001R0-Rm
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 08 Nov 2008 22:02:12 +0100
+Received: from p5b034852.dip.t-dialin.net ([91.3.72.82]
+	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Kyuuu-0002gc-MZ by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 08 Nov 2008 22:00:30 +0100
+Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1Kyuw7-0003Zr-AX for openembedded-devel@lists.openembedded.org;
+	Sat, 08 Nov 2008 22:01:39 +0100
+Date: Sat, 8 Nov 2008 22:01:38 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081108210138.GA7205@dodger.lab.datenfreihafen.org>
+References: <20081105202153.GB5836@dodger.lab.datenfreihafen.org>
+MIME-Version: 1.0
+In-Reply-To: <20081105202153.GB5836@dodger.lab.datenfreihafen.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00,
+	NORMAL_HTTP_TO_IP autolearn=ham version=3.2.3
+Subject: Re: Broken update-mime-database due to recent changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Nov 2008 20:59:13 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 08 Nov 2008 21:02:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 08-11-2008 21:04, Leon Woestenberg wrote:
-> Hello,
->
-> On Sat, Nov 8, 2008 at 12:05 AM, Stanislav Brabec<utx@penguin.cz>  wrote:
->> It introduces STAGING_BINDIR_CROSS_BASEPKG pointing to
->> STAGING_BINDIR_CROSS of base packages and adds it to PATH (after
->> STAGING_BINDIR_CROSS).
->>
->> It fixes highly base package cross bindir lookup while compiling highly
->> optimized packages. Actually it's mplayer and sdl-config lookup.
->>
-> I do not understand what exactly you fix.
->
-> Could you explain more elaborately?
+Hello.
 
-For pxa270 CPUs mplayer will enable iwmmxt extensions and do 
-PACKAGE_ARCH = "iwmmxt", while other packages in the same build retain 
-their default PACKAGE_ARCH (armv5te). So the sdl-config script wouldn't 
-be in staging/iwmmxt-foo-linux, but in staging/armv5te-foo-linux. Since 
-STAGING_BINDIR_CROSS is composed using PACKAGE_ARCH we need to point it 
-'manually' to the armv5te one.
+Seems not to be a topic much people are interested in. :)
 
-regards,
+On Wed, 2008-11-05 at 21:21, Stefan Schmidt wrote:
+> 
+> The option to fix this how I see it (personal priority ordered):
+> 
+> 1) Put the known working pkg_postinst() back into the 0.20 and 0.22 recipes
 
-Koen
+I put the postint back into the recipes. Not the inc file as 0.51 does not need
+it. Tested and worked fine for me again.
 
+> 2) Make the old versions also work with the build-on-host method
+
+No plan from my side.
+
+> 3) Remove all but 0.51 and teach distros to use the new one.
+
+For this one shared-mime-info-native_0.51.bb is needed. Sadly this one fails for
+me on one machine:
+
+| /usr/bin/ld: cannot find -lgio-2.0
+
+http://134.169.172.106/~sschmidt/log.do_compile.28587.txt
+
+Therefor I did not bump it for OM yet. People like to investigate are welcome.
+
+regards
+Stefan Schmidt
 
 
