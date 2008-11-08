@@ -1,34 +1,27 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Kyuwd-0001R0-Rm
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 Nov 2008 22:02:12 +0100
-Received: from p5b034852.dip.t-dialin.net ([91.3.72.82]
-	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Kyuuu-0002gc-MZ by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Nov 2008 22:00:30 +0100
-Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
-	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
-	id 1Kyuw7-0003Zr-AX for openembedded-devel@lists.openembedded.org;
-	Sat, 08 Nov 2008 22:01:39 +0100
-Date: Sat, 8 Nov 2008 22:01:38 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081108210138.GA7205@dodger.lab.datenfreihafen.org>
-References: <20081105202153.GB5836@dodger.lab.datenfreihafen.org>
-MIME-Version: 1.0
-In-Reply-To: <20081105202153.GB5836@dodger.lab.datenfreihafen.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00,
-	NORMAL_HTTP_TO_IP autolearn=ham version=3.2.3
-Subject: Re: Broken update-mime-database due to recent changes
+	(envelope-from <utx@penguin.cz>) id 1Kyxg8-00083s-MA
+	for openembedded-devel@openembedded.org; Sun, 09 Nov 2008 00:57:20 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 0036F1417191
+	for <openembedded-devel@openembedded.org>;
+	Sun,  9 Nov 2008 00:54:14 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bm21xAv7q7De for <openembedded-devel@openembedded.org>;
+	Sun,  9 Nov 2008 00:54:13 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id A45751416BCE
+	for <openembedded-devel@openembedded.org>;
+	Sun,  9 Nov 2008 00:54:13 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@openembedded.org
+Date: Sun, 09 Nov 2008 00:55:36 +0100
+Message-Id: <1226188536.12854.25.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: [patch review] cpan.class and perl: Fix MakeMaker paths to prevent	path clashes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,39 +35,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Nov 2008 21:02:12 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 08 Nov 2008 23:57:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+Hallo core developers.
 
-Seems not to be a topic much people are interested in. :)
+Here is next patch. It affects classes =3D> requires core team review.
 
-On Wed, 2008-11-05 at 21:21, Stefan Schmidt wrote:
-> 
-> The option to fix this how I see it (personal priority ordered):
-> 
-> 1) Put the known working pkg_postinst() back into the 0.20 and 0.22 recipes
+Please approve or comment following patch of cpan.class.
 
-I put the postint back into the recipes. Not the inc file as 0.51 does not need
-it. Tested and worked fine for me again.
+The patch tries to prevent mixing of host, native and target perl
+instances.
 
-> 2) Make the old versions also work with the build-on-host method
+=EF=BB=BFExample of failing package: Compilation of libxml-parser-perl on=
+ host
+system that has perl !=3D 5.8.8.
 
-No plan from my side.
+That mixing may causes build failure and probably also miscompilation
+(if Config.pm is mistakenly referenced during target build).
 
-> 3) Remove all but 0.51 and teach distros to use the new one.
+Patch prevents references to /usr/share/perl/{version}/ExtUtils/typemap
+and /usr/lib/perl/{version}/Config.pm on host system and installs both
+native and target files needed by MakeMaker.
 
-For this one shared-mime-info-native_0.51.bb is needed. Sadly this one fails for
-me on one machine:
 
-| /usr/bin/ld: cannot find -lgio-2.0
+diff --git a/classes/cpan.bbclass b/classes/cpan.bbclass
+index 3ff3f30..7b3faa2 100644
+--- a/classes/cpan.bbclass
++++ b/classes/cpan.bbclass
+@@ -10,7 +10,8 @@ export PERLCONFIGTARGET =3D "${@is_target(d)}"
+=20
+ # Env var which tells perl where the perl include files are
+ export PERL_INC =3D "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}/CORE=
+"
+-export PERL_ARCHLIB =3D "${STAGING_LIBDIR_NATIVE}/perl/${@get_perl_versi=
+on(d)}"
++export PERL_LIB =3D "${STAGING_DATADIR}/perl/${@get_perl_version(d)}"
++export PERL_ARCHLIB =3D "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}"
+=20
+ cpan_do_configure () {
+ 	yes '' | perl Makefile.PL ${EXTRA_CPANFLAGS}
+diff --git a/packages/perl/perl-5.8.8/native-perlinc.patch b/packages/per=
+l/perl-5.8.8/native-perlinc.patch
+index aea38a0..6dc4b95 100644
+--- a/packages/perl/perl-5.8.8/native-perlinc.patch
++++ b/packages/perl/perl-5.8.8/native-perlinc.patch
+@@ -1,12 +1,20 @@
+ Index: perl-5.8.8/lib/ExtUtils/MM_Unix.pm
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+---- perl-5.8.8.orig/lib/ExtUtils/MM_Unix.pm	2007-05-30 15:16:47.00000000=
+0 +1000
+-+++ perl-5.8.8/lib/ExtUtils/MM_Unix.pm	2007-05-30 15:18:12.000000000 +10=
+00
+-@@ -1597,6 +1597,11 @@
++--- perl-5.8.8.orig/lib/ExtUtils/MM_Unix.pm	2008-10-31 22:01:35.00000000=
+0 +0000
+++++ perl-5.8.8/lib/ExtUtils/MM_Unix.pm	2008-11-08 16:01:12.000000000 +00=
+00
++@@ -1597,6 +1597,19 @@
+  	$self->{PERL_LIB}     ||=3D $Config{privlibexp};
+  	$self->{PERL_ARCHLIB} ||=3D $Config{archlibexp};
+  	$self->{PERL_INC}     =3D $self->catdir("$self->{PERL_ARCHLIB}","CORE"=
+); # wild guess for now
+ +	# Check for environment override so we'll find the headers in the corr=
+ect place
+++        if (defined $ENV{PERL_LIB})
+++        {
+++            $self->{PERL_LIB} =3D $ENV{PERL_LIB};
+++        }
+++        if (defined $ENV{PERL_ARCHLIB})
+++        {
+++            $self->{PERL_ARCHLIB} =3D $ENV{PERL_ARCHLIB};
+++        }
+ +        if (defined $ENV{PERL_INC})
+ +        {
+ +            $self->{PERL_INC} =3D $ENV{PERL_INC};
+diff --git a/packages/perl/perl-native_5.8.8.bb b/packages/perl/perl-nati=
+ve_5.8.8.bb
+index c58f828..e3d7384 100644
+--- a/packages/perl/perl-native_5.8.8.bb
++++ b/packages/perl/perl-native_5.8.8.bb
+@@ -65,8 +65,25 @@ do_stage_append() {
+         # We need a hostperl link for building perl
+         ln -sf ${STAGING_BINDIR_NATIVE}/perl${PV} ${STAGING_BINDIR_NATIV=
+E}/hostperl
+         # Store native config in non-versioned directory
+-        install -d ${STAGING_DIR_HOST}/perl
++        install -d ${STAGING_DIR_HOST}/perl \
++                   ${STAGING_LIBDIR_NATIVE}/perl/${PV}/CORE \
++                   ${STAGING_DATADIR_NATIVE}/perl/${PV}/ExtUtils
+         install config.sh ${STAGING_DIR_HOST}/perl
++	# target configuration
++        install lib/Config.pm       ${STAGING_LIBDIR_NATIVE}/perl/${PV}/
++	install lib/ExtUtils/typemap ${STAGING_DATADIR_NATIVE}/perl/${PV}/ExtUt=
+ils/
++        # perl shared library headers
++        for i in av.h embed.h gv.h keywords.h op.h perlio.h pp.h regexp.=
+h \
++                 uconfig.h XSUB.h cc_runtime.h embedvar.h handy.h opname=
+s.h \
++                 perliol.h pp_proto.h regnodes.h unixish.h config.h EXTE=
+RN.h \
++                 hv.h malloc_ctl.h pad.h perlsdio.h proto.h scope.h utf8=
+.h \
++                 cop.h fakesdio.h INTERN.h mg.h patchlevel.h perlsfio.h =
+\
++                 reentr.h sv.h utfebcdic.h cv.h fakethr.h intrpvar.h \
++                 nostdio.h perlapi.h perlvars.h reentr.inc thrdvar.h uti=
+l.h \
++                 dosish.h form.h iperlsys.h opcode.h perl.h perly.h regc=
+omp.h \
++                 thread.h warnings.h; do
++            install $i ${STAGING_LIBDIR_NATIVE}/perl/${PV}/CORE
++        done
+ }
+=20
+ PARALLEL_MAKE =3D ""
+diff --git a/packages/perl/perl_5.8.8.bb b/packages/perl/perl_5.8.8.bb
+index 8c00a61..2118bba 100644
+--- a/packages/perl/perl_5.8.8.bb
++++ b/packages/perl/perl_5.8.8.bb
+@@ -139,11 +139,15 @@ do_install() {
+ do_stage() {
+         install -d ${STAGING_DIR_HOST}/perl \
+                    ${STAGING_LIBDIR_NATIVE}/perl/${PV} \
+-                   ${STAGING_LIBDIR}/perl/${PV}/CORE
++                   ${STAGING_LIBDIR}/perl/${PV}/CORE \
++                   ${STAGING_DATADIR}/perl/${PV}/ExtUtils
+         # target config, used by cpan.bbclass to extract version informa=
+tion
+         install config.sh ${STAGING_DIR_HOST}/perl/
+         # target configuration, used by native perl when cross-compiling
+         install lib/Config_heavy.pl ${STAGING_LIBDIR_NATIVE}/perl/${PV}/=
+Config_heavy-target.pl
++	# target configuration
++        install lib/Config.pm       ${STAGING_LIBDIR}/perl/${PV}/
++	install lib/ExtUtils/typemap ${STAGING_DATADIR}/perl/${PV}/ExtUtils/
+         # perl shared library headers
+         for i in av.h embed.h gv.h keywords.h op.h perlio.h pp.h regexp.=
+h \
+                  uconfig.h XSUB.h cc_runtime.h embedvar.h handy.h opname=
+s.h \
 
-http://134.169.172.106/~sschmidt/log.do_compile.28587.txt
 
-Therefor I did not bump it for OM yet. People like to investigate are welcome.
 
-regards
-Stefan Schmidt
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
