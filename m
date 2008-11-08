@@ -1,43 +1,37 @@
-Received: from [66.7.219.172] (helo=hostdime.freedom.ind.br)
+Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KyeqB-00032c-4A
-	for openembedded-devel@openembedded.org; Sat, 08 Nov 2008 04:50:27 +0100
-Received: from hostdime.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id 8354F337DC6;
-	Sat,  8 Nov 2008 01:48:43 -0200 (BRST)
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by hostdime.freedom.ind.br (Postfix) with ESMTP id C96A2337DC4;
-	Sat,  8 Nov 2008 01:48:42 -0200 (BRST)
-Received: from mail.freedom.ind.br ([201.35.65.91] helo=mail.freedom.ind.br)
-	by mail.freedom.ind.br; 8 Nov 2008 01:48:41 -0200
-Received: from mail.freedom.ind.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id 2374D8E5F5D;
-	Sat,  8 Nov 2008 01:48:48 -0200 (BRST)
-Received: from internet.ossystems.com.br (localhost [127.0.0.1])
-	by mail.freedom.ind.br (Postfix) with ESMTP id DEA488BA7FC;
-	Sat,  8 Nov 2008 01:48:47 -0200 (BRST)
-Received: from internet.ossystems.com.br ([201.40.162.47]
-	helo=internet.ossystems.com.br)
-	by mail.freedom.ind.br; 8 Nov 2008 01:48:47 -0200
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 664BAC329;
-	Sat,  8 Nov 2008 01:48:44 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 4396A610058; Sat,  8 Nov 2008 01:45:08 -0200 (BRST)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1KyuOJ-00010e-PU
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 08 Nov 2008 21:26:43 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so1023422qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 08 Nov 2008 12:25:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=OnSzfLyFclE+otBKl+NvxEF5gCHG8rIXMa4xaUCzhuI=;
+	b=jBneuuR9T3a7Phv+sJkBR08w5lz3CQhCCxQgeFHLXZ0UzwITP4AbfVWl/FjK/NQLXv
+	vktO0Nt5yO1gKk80vDvoa0NCSlz0GnHsflnA3DNa0SCmnQ6rLeN0FdmU/Hey9VGu6Pdl
+	WX2Oau+rj4ivkgZ3/mOwF9V/5nE4NJNzNEqOw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=q7HauAimkFJZ2R4KsPOXWGJ0UqOctyXy0YPpTOE5xS9sT50qaJzJevTwSSK+cCLWOC
+	i9vPnh2q5h4P81/Vlc23d56yrb8PXDtQMaec3VagjZHKsGCRpsxCJRxOQjMawb8rzN7E
+	d2jimK58/DUA7hCcJtFoH2nS7dXRmx6L0k5nA=
+Received: by 10.214.113.11 with SMTP id l11mr5417950qac.190.1226174661474;
+	Sat, 08 Nov 2008 12:04:21 -0800 (PST)
+Received: by 10.214.12.10 with HTTP; Sat, 8 Nov 2008 12:04:21 -0800 (PST)
+Message-ID: <c384c5ea0811081204j6edb237aw69afe7163277a84e@mail.gmail.com>
+Date: Sat, 8 Nov 2008 21:04:21 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1226054458.7175.3.camel@aquilonia>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Sat, 08 Nov 2008 01:45:08 -0200
-In-Reply-To: <1226054458.7175.3.camel@aquilonia> (Graeme Gregory's message of
-	"Fri\, 07 Nov 2008 10\:40\:58 +0000")
-Message-ID: <87mygarid7.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+In-Reply-To: <1226099101.6034.5.camel@utx.utx.cz>
 MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Xorg X11R7.4 updates
+References: <1226099101.6034.5.camel@utx.utx.cz>
+Subject: Re: [patch review] bitbake.conf: Introduce STAGING_BINDIR_CROSS_BASEPKG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,46 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Nov 2008 03:50:27 -0000
-Content-Type: text/plain; charset=us-ascii
-
-Graeme Gregory <dp@xora.org.uk> writes:
-
-> So I would like people with an interest to please review the changes on
-> the shared/xorg-7.4-update branch. Especially x86 guys who can actually
-> use some of the drivers. Id like to get any problems ironed out now
-> ready for merging into OE mainline.
+X-List-Received-Date: Sat, 08 Nov 2008 20:26:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 Hello,
 
-I've gave it a try and xserver fails to build here with:
+On Sat, Nov 8, 2008 at 12:05 AM, Stanislav Brabec <utx@penguin.cz> wrote:
+> It introduces STAGING_BINDIR_CROSS_BASEPKG pointing to
+> STAGING_BINDIR_CROSS of base packages and adds it to PATH (after
+> STAGING_BINDIR_CROSS).
+>
+> It fixes highly base package cross bindir lookup while compiling highly
+> optimized packages. Actually it's mplayer and sdl-config lookup.
+>
+I do not understand what exactly you fix.
 
-| checking for XLIB... yes
-| checking for GL... configure: error: Package requirements (glproto >= 1.4.9 gl >= 7.1.0) were not met:
-| 
-| No package 'gl' found
-| 
-| Consider adjusting the PKG_CONFIG_PATH environment variable if you
-| installed software in a non-standard prefix.
-| 
-| Alternatively, you may set the environment variables GL_CFLAGS
-| and GL_LIBS to avoid the need to call pkg-config.
-| See the pkg-config man page for more details.
-| 
-| FATAL: oe_runconf failed
-NOTE: Task failed: /home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/xserver-xorg-1_1.5.1-r0/temp/log.do_configure.21623
-NOTE: package xserver-xorg-1_1.5.1-r0: task do_configure: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package xserver-xorg-1.5.1: failed
+Could you explain more elaborately?
 
+Thanks,
 -- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Leon
 
 
