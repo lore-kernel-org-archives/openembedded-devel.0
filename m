@@ -1,33 +1,40 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [72.14.220.153] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1KzARa-0001Mc-8K
-	for openembedded-devel@openembedded.org; Sun, 09 Nov 2008 14:35:10 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mA9DMMnL016196
-	for <openembedded-devel@openembedded.org>; Sun, 9 Nov 2008 13:22:22 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16051-04 for <openembedded-devel@openembedded.org>;
-	Sun,  9 Nov 2008 13:22:19 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mA9DME1S016188
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 9 Nov 2008 13:22:14 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <f96d234e0811071157j71bc59bbjf71e865c32e40a81@mail.gmail.com>
-References: <20081023230928.GA21151@denix.org>
-	<f96d234e0810240638u1026aec9y6b258bba5708315f@mail.gmail.com>
-	<1224861430.6356.20.camel@dax.rpnet.com>
-	<f96d234e0811071157j71bc59bbjf71e865c32e40a81@mail.gmail.com>
-Date: Sun, 09 Nov 2008 13:22:14 +0000
-Message-Id: <1226236934.5378.7.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RFC: Add http_proxy and ftp_proxy to BitBake white list
+	(envelope-from <dbaryshkov@gmail.com>) id 1KzAgp-0001Zf-Hj
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Nov 2008 14:50:55 +0100
+Received: by fg-out-1718.google.com with SMTP id l26so2044586fgb.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Nov 2008 05:49:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=KyCbFm7RFivHtrEVx5ar70pUoKF3MtrLcodZPeHoZ9k=;
+	b=VJYiDPPy6ZqxYBBDrM1ZLS1eznccO6z0RFVslb7TLhjMWa/+gALRwR+XTljLfHrurZ
+	bfN9paejmHKMg6Ig5XiOYCeYsIqJkmChY/0O+I6L0pSSIqBDT3jB/v0tCowhXhqyiGCV
+	xZy+RF21nfIzgzYilfaQ10gVZxsM3x9XraCNs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=bjMHi+9Aca4xD6pjXSlwgsCiRiwwTYZExtoLKBoXrSvkA4OB4JbuC7QMvuz7TALjuG
+	2WXAQ9Yi3c9235ALaXYW3XJxdpIVbD+VM0IrkD+RaeyqJyrVp4NnEpETD1Lm8YohkrES
+	iUQ7vgantnOo4ZZ2F5HuvNy18+wubXb77o8D0=
+Received: by 10.86.99.9 with SMTP id w9mr6174690fgb.38.1226237342833;
+	Sun, 09 Nov 2008 05:29:02 -0800 (PST)
+Received: from localhost.localdomain (ppp89-110-5-254.pppoe.avangarddsl.ru
+	[89.110.5.254])
+	by mx.google.com with ESMTPS id l12sm8088339fgb.6.2008.11.09.05.29.00
+	(version=SSLv3 cipher=RC4-MD5); Sun, 09 Nov 2008 05:29:01 -0800 (PST)
+From: Dmitry Baryshkov <dbaryshkov@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  9 Nov 2008 16:28:04 +0300
+Message-Id: <1226237296-11012-4-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: git-send-email 1.5.6.5
+In-Reply-To: <1226237296-11012-3-git-send-email-dbaryshkov@gmail.com>
+References: <1226237296-11012-1-git-send-email-dbaryshkov@gmail.com>
+	<1226237296-11012-2-git-send-email-dbaryshkov@gmail.com>
+	<1226237296-11012-3-git-send-email-dbaryshkov@gmail.com>
+Cc: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Subject: [PATCH] opie-cardapplet: add 1.2.4 version recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,56 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Nov 2008 13:35:10 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 09 Nov 2008 13:50:55 -0000
 
-Hi Cliff,
+Signed-off-by: Dmitry Baryshkov <dbaryshkov@gmail.com>
+---
+ packages/opie-cardapplet/opie-cardapplet_1.2.4.bb |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
+ create mode 100644 packages/opie-cardapplet/opie-cardapplet_1.2.4.bb
 
-On Fri, 2008-11-07 at 14:57 -0500, Cliff Brake wrote:
-> I've attempted to merge your patches and test, but the http_proxy is
-> still not preserved for wget.  A few notes:
-> 
-> wget does not pass through runfetchcmd() so exportvars stuff never
-> gets called there.
-> 
-> try_mirror also has some http_proxy stuff, but it does not appear to
-> be used by wget.
-> 
-> wget.py looks at HTTP_PROXY, but why HTTP_PROXY vs http_proxy?  If I
-> set HTTP_PROXY in local.conf, it then works.
-
-For various reasons I've now had some experience of using bitbake behind
-some pretty strict proxy setups. The problem is that its not as simple
-as just setting http_proxy since some addresses need to go through the
-proxy but things like a local source mirror might be on an internal
-network and therefore shouldn't go through the proxy.
-
-I hence reworked things so you set HTTP_PROXY but can also set
-HTTP_PROXY_IGNORE which is a list of base urls which should not use the
-proxy. The fetcher code will only set http_proxy to HTTP_PROXY if the
-url is not in the ignore list.
-
-FTP_PROXY and ftp_proxy works in a similar way.
-
-> So, is the idea the user has to set HTTP_PROXY in a conf file for wget
-> proxy to work?  What are the downsides to using http_proxy from the
-> environment?  At any rate, it seems like we have some inconsistencies
-> in the various fetcher methods.
-
-The idea is the user sets HTTP_PROXY and optionally HTTP_PROXY_IGNORE to
-make http proxying work. I'm planning to make bitbake ignore http_proxy
-from the environment due to the problems is causes with mirror servers
-behind the proxy.
-
-Hopefully this clears up the intent of the patches, the improvements are
-based on real world usage problems.
-
-Cheers,
-
-Richard
-
-
+diff --git a/packages/opie-cardapplet/opie-cardapplet_1.2.4.bb b/packages/opie-cardapplet/opie-cardapplet_1.2.4.bb
+new file mode 100644
+index 0000000..6c4d3c1
+--- /dev/null
++++ b/packages/opie-cardapplet/opie-cardapplet_1.2.4.bb
+@@ -0,0 +1,10 @@
++require ${PN}.inc
++
++PR = "r0"
++
++SRC_URI = "${HANDHELDS_CVS};tag=${TAG};module=opie/noncore/applets/cardapplet \
++           ${HANDHELDS_CVS};tag=${TAG};module=opie/pics \
++           ${HANDHELDS_CVS};tag=${TAG};module=opie/sounds \
++           ${HANDHELDS_CVS};tag=${TAG};module=opie/apps \
++           ${HANDHELDS_CVS};tag=${TAG};module=opie/etc"
++
+-- 
+1.5.6.5
 
 
 
