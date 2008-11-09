@@ -1,37 +1,33 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1KzAMw-0001Gk-FB
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Nov 2008 14:30:22 +0100
-Received: from p5b03689a.dip.t-dialin.net ([91.3.104.154]
-	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1KzALD-0008N3-8A by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Nov 2008 14:28:37 +0100
-Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
-	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
-	id 1KzAMQ-0001et-8Z for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Nov 2008 14:29:50 +0100
-Date: Sun, 9 Nov 2008 14:29:50 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081109132950.GC19668@dodger.lab.datenfreihafen.org>
-References: <20081105202153.GB5836@dodger.lab.datenfreihafen.org>
-	<20081108210138.GA7205@dodger.lab.datenfreihafen.org>
-	<gf69j0$623$1@ger.gmane.org>
-	<20081109130457.GB19668@dodger.lab.datenfreihafen.org>
-MIME-Version: 1.0
-In-Reply-To: <20081109130457.GB19668@dodger.lab.datenfreihafen.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00,
-	NORMAL_HTTP_TO_IP autolearn=ham version=3.2.3
-Subject: Re: Broken update-mime-database due to recent changes
+	(envelope-from <rpurdie@rpsys.net>) id 1KzARa-0001Mc-8K
+	for openembedded-devel@openembedded.org; Sun, 09 Nov 2008 14:35:10 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mA9DMMnL016196
+	for <openembedded-devel@openembedded.org>; Sun, 9 Nov 2008 13:22:22 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 16051-04 for <openembedded-devel@openembedded.org>;
+	Sun,  9 Nov 2008 13:22:19 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mA9DME1S016188
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Sun, 9 Nov 2008 13:22:14 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <f96d234e0811071157j71bc59bbjf71e865c32e40a81@mail.gmail.com>
+References: <20081023230928.GA21151@denix.org>
+	<f96d234e0810240638u1026aec9y6b258bba5708315f@mail.gmail.com>
+	<1224861430.6356.20.camel@dax.rpnet.com>
+	<f96d234e0811071157j71bc59bbjf71e865c32e40a81@mail.gmail.com>
+Date: Sun, 09 Nov 2008 13:22:14 +0000
+Message-Id: <1226236934.5378.7.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RFC: Add http_proxy and ftp_proxy to BitBake white list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,37 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Nov 2008 13:30:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 09 Nov 2008 13:35:10 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hello.
+Hi Cliff,
 
-This time the full mail.
-
-On Sun, 2008-11-09 at 14:04, Stefan Schmidt wrote:
+On Fri, 2008-11-07 at 14:57 -0500, Cliff Brake wrote:
+> I've attempted to merge your patches and test, but the http_proxy is
+> still not preserved for wget.  A few notes:
 > 
-> On Sun, 2008-11-09 at 10:13, Koen Kooi wrote:
-> > On 08-11-2008 22:01, Stefan Schmidt wrote:
-> >> For this one shared-mime-info-native_0.51.bb is needed. Sadly this one 
-> > fails for
-> >> me on one machine:
-> >>
-> >> | /usr/bin/ld: cannot find -lgio-2.0
-> >>
-> >> http://134.169.172.106/~sschmidt/log.do_compile.28587.txt
-> >
-> > http://gitweb.openembedded.net/?p=openembedded.git;a=commit;h=bfa489ee37aa8c752bb5a7981caae1972fbb4329
+> wget does not pass through runfetchcmd() so exportvars stuff never
+> gets called there.
 > 
-> Odd, I could swear I did a rebuild from scratch after this date and had the
-> problem. 
+> try_mirror also has some http_proxy stuff, but it does not appear to
+> be used by wget.
+> 
+> wget.py looks at HTTP_PROXY, but why HTTP_PROXY vs http_proxy?  If I
+> set HTTP_PROXY in local.conf, it then works.
 
-And I just tested it again. Build from scratch yesterday, with newest meta data
-from this time. Failed again. Same problem.
+For various reasons I've now had some experience of using bitbake behind
+some pretty strict proxy setups. The problem is that its not as simple
+as just setting http_proxy since some addresses need to go through the
+proxy but things like a local source mirror might be on an internal
+network and therefore shouldn't go through the proxy.
 
-I may look into this later, but it is rather low prio for me at the moment.
+I hence reworked things so you set HTTP_PROXY but can also set
+HTTP_PROXY_IGNORE which is a list of base urls which should not use the
+proxy. The fetcher code will only set http_proxy to HTTP_PROXY if the
+url is not in the ignore list.
 
-regards
-Stefan Schmidt
+FTP_PROXY and ftp_proxy works in a similar way.
+
+> So, is the idea the user has to set HTTP_PROXY in a conf file for wget
+> proxy to work?  What are the downsides to using http_proxy from the
+> environment?  At any rate, it seems like we have some inconsistencies
+> in the various fetcher methods.
+
+The idea is the user sets HTTP_PROXY and optionally HTTP_PROXY_IGNORE to
+make http proxying work. I'm planning to make bitbake ignore http_proxy
+from the environment due to the problems is causes with mirror servers
+behind the proxy.
+
+Hopefully this clears up the intent of the patches, the improvements are
+based on real world usage problems.
+
+Cheers,
+
+Richard
+
+
+
 
 
