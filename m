@@ -1,34 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1KzEAO-0001lZ-9n
-	for openembedded-devel@openembedded.org; Sun, 09 Nov 2008 18:33:40 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1KzE8g-000516-9v
-	for openembedded-devel@openembedded.org; Sun, 09 Nov 2008 17:31:54 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 09 Nov 2008 17:31:54 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 09 Nov 2008 17:31:54 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 09 Nov 2008 18:31:46 +0100
-Message-ID: <gf76q2$le2$1@ger.gmane.org>
-References: <1226237296-11012-1-git-send-email-dbaryshkov@gmail.com>	<1226237296-11012-2-git-send-email-dbaryshkov@gmail.com>
-	<1226249673.4235.671.camel@lenovo.internal.reciva.com>
+	(envelope-from <dp@xora.org.uk>) id 1KzFxg-0005Db-58
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Nov 2008 20:28:40 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so1172669qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Nov 2008 11:26:53 -0800 (PST)
+Received: by 10.214.216.7 with SMTP id o7mr5809756qag.155.1226256829721;
+	Sun, 09 Nov 2008 10:53:49 -0800 (PST)
+Received: from ?192.168.1.10? ([78.86.128.56])
+	by mx.google.com with ESMTPS id 4sm3357505qyk.90.2008.11.09.10.53.47
+	(version=SSLv3 cipher=RC4-MD5); Sun, 09 Nov 2008 10:53:48 -0800 (PST)
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <87mygarid7.fsf@neumann.lab.ossystems.com.br>
+References: <1226054458.7175.3.camel@aquilonia>
+	<87mygarid7.fsf@neumann.lab.ossystems.com.br>
+Date: Sun, 09 Nov 2008 18:53:45 +0000
+Message-Id: <1226256825.6785.0.camel@aquilonia>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081025 Shredder/3.0b1pre
-In-Reply-To: <1226249673.4235.671.camel@lenovo.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] checksums.ini: correct wrong checksums
+X-Mailer: Evolution 2.24.1 
+Subject: Re: Xorg X11R7.4 updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Nov 2008 17:33:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 09 Nov 2008 19:28:40 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 09-11-2008 17:54, Phil Blundell wrote:
-> On Sun, 2008-11-09 at 16:28 +0300, Dmitry Baryshkov wrote:
->>   [http://gpephone.linuxtogo.org/download/gpephone/libchenabler-0.1/libchenabler-0.1.tar.gz]
->> -md5=f29e1e63fcc55e3ae4e81f5ee9dd7bdd
->> -sha256=448a3ab76109664bb6bd8bcc2c62d957c7d44b52e39c37d91b3b73b5cfe35a3f
->> +md5=866fd13611a8de946428db1df9be8468
->> +sha256=74def55ba6a61e966e0873a4081fd3dd65089b94b837810d3bc056221d7e41c7
->
-> How did these wrong checksums get in there?  It seems to defeat the
-> point of checksums.ini if the data isn't trustworthy.
+On Sat, 2008-11-08 at 01:45 -0200, Otavio Salvador wrote:
 
-The gpephone people are in a habit of replacing the tarballs to get 
-bugfixes to people instead of doing a new release. So the problem here 
-is that _upstream_ is making a mess of things.
-This also highlights why OE is now strictly enforcing checksums.
+> I've gave it a try and xserver fails to build here with:
+> 
+> | checking for XLIB... yes
+> | checking for GL... configure: error: Package requirements (glproto >= 1.4.9 gl >= 7.1.0) were not met:
+> | 
+> | No package 'gl' found
+> | 
+> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> | installed software in a non-standard prefix.
+> | 
+> | Alternatively, you may set the environment variables GL_CFLAGS
+> | and GL_LIBS to avoid the need to call pkg-config.
+> | See the pkg-config man page for more details.
+> | 
+> | FATAL: oe_runconf failed
+> NOTE: Task failed: /home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/xserver-xorg-1_1.5.1-r0/temp/log.do_configure.21623
+> NOTE: package xserver-xorg-1_1.5.1-r0: task do_configure: failed
+> ERROR: TaskFailed event exception, aborting
+> NOTE: package xserver-xorg-1.5.1: failed
+> 
+Hi, I tried a build from scatch of xserver-xorg, found 2 missing
+dependencies in the tree, but I am unable to repeat this problem.
+
+Graeme
+
 
 
 
