@@ -1,45 +1,24 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dbaryshkov@gmail.com>) id 1KzB8Q-0002qt-Ev
+	(envelope-from <pb@reciva.com>) id 1KzDaJ-0004k5-74
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Nov 2008 15:19:26 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so2053450fgb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Nov 2008 06:17:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=wzeDljR0iBLr9gU5L0OmiZX9SU6cuA3rMx3BPnT7mNk=;
-	b=ZLpgsHQ5B8Z9GRrdPoAL8oI6ZCSGHjpJNDyKe4RzqMQ9B4usGd9BZONjJeklpZpIBc
-	QVTE7k46DpKuDwTXiVleiCDenWoFsKE4EsxaSPN0hg5bXcXy3FDVy1VDTf7/C+kr3jcI
-	2e0USv8BqbQGFqKy3CwjIM6RvymRLSIGdT3GQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=uPMMftewZlXvkKRKliy8Y4sAGIedGVFyFTbUgxvvSgb7DV/1Kf1PFIVM7vOl7ntpjN
-	IQ5Y9YHNVnfYPrykUvK2NU7IMBRrRQx6ambcG8QafqYYklNJeXxWiUzj9L3Lt8+oamOk
-	xkFEtpsOSsv0Rvwkl7x1NG7tyGrssqy2evKr8=
-Received: by 10.181.134.12 with SMTP id l12mr1731281bkn.80.1226237352862;
-	Sun, 09 Nov 2008 05:29:12 -0800 (PST)
-Received: from localhost.localdomain (ppp89-110-5-254.pppoe.avangarddsl.ru
-	[89.110.5.254])
-	by mx.google.com with ESMTPS id l12sm8088339fgb.6.2008.11.09.05.29.10
-	(version=SSLv3 cipher=RC4-MD5); Sun, 09 Nov 2008 05:29:11 -0800 (PST)
-From: Dmitry Baryshkov <dbaryshkov@gmail.com>
+	Sun, 09 Nov 2008 17:56:23 +0100
+Received: from 89-168-188-212.dynamic.dsl.as9105.com ([89.168.188.212]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1KzDYY-0004Mj-Dn; Sun, 09 Nov 2008 16:54:35 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Nov 2008 16:28:09 +0300
-Message-Id: <1226237296-11012-9-git-send-email-dbaryshkov@gmail.com>
-X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <1226237296-11012-8-git-send-email-dbaryshkov@gmail.com>
+In-Reply-To: <1226237296-11012-2-git-send-email-dbaryshkov@gmail.com>
 References: <1226237296-11012-1-git-send-email-dbaryshkov@gmail.com>
 	<1226237296-11012-2-git-send-email-dbaryshkov@gmail.com>
-	<1226237296-11012-3-git-send-email-dbaryshkov@gmail.com>
-	<1226237296-11012-4-git-send-email-dbaryshkov@gmail.com>
-	<1226237296-11012-5-git-send-email-dbaryshkov@gmail.com>
-	<1226237296-11012-6-git-send-email-dbaryshkov@gmail.com>
-	<1226237296-11012-7-git-send-email-dbaryshkov@gmail.com>
-	<1226237296-11012-8-git-send-email-dbaryshkov@gmail.com>
+Date: Sun, 09 Nov 2008 16:54:33 +0000
+Message-Id: <1226249673.4235.671.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Cc: Dmitry Baryshkov <dbaryshkov@gmail.com>
-Subject: [PATCH] task-sdk-extra: use randrproto-dev instead of randrext-dev
+Subject: Re: [PATCH] checksums.ini: correct wrong checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,28 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Nov 2008 14:19:26 -0000
+X-List-Received-Date: Sun, 09 Nov 2008 16:56:23 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Dmitry Baryshkov <dbaryshkov@gmail.com>
----
- packages/tasks/task-sdk-extra.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Sun, 2008-11-09 at 16:28 +0300, Dmitry Baryshkov wrote:
+>  [http://gpephone.linuxtogo.org/download/gpephone/libchenabler-0.1/libchenabler-0.1.tar.gz]
+> -md5=f29e1e63fcc55e3ae4e81f5ee9dd7bdd
+> -sha256=448a3ab76109664bb6bd8bcc2c62d957c7d44b52e39c37d91b3b73b5cfe35a3f
+> +md5=866fd13611a8de946428db1df9be8468
+> +sha256=74def55ba6a61e966e0873a4081fd3dd65089b94b837810d3bc056221d7e41c7
 
-diff --git a/packages/tasks/task-sdk-extra.bb b/packages/tasks/task-sdk-extra.bb
-index efb12c3..c4414db 100644
---- a/packages/tasks/task-sdk-extra.bb
-+++ b/packages/tasks/task-sdk-extra.bb
-@@ -28,7 +28,7 @@ RDEPENDS_task-sdk-x11-ext = "\
-     libxrandr-dev \
-     libxrender-dev \
-     libxsettings-client-dev \
--    randrext-dev \
-+    randrproto-dev \
-     libxau-dev \
-     xcalibrateext-dev \
-     libxcomposite-dev \
--- 
-1.5.6.5
+How did these wrong checksums get in there?  It seems to defeat the
+point of checksums.ini if the data isn't trustworthy.
+
+p.
+
 
 
 
