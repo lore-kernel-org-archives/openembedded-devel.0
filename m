@@ -1,30 +1,22 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [82.182.55.65] (helo=pcjr2.rosbacke.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1KzZGM-0008Dz-Rj
+	(envelope-from <mikael@rosbacke.org>) id 1KzZtH-0002pi-CH
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Nov 2008 17:05:15 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1KzZEa-0003qZ-4e
+	Mon, 10 Nov 2008 17:45:27 +0100
+Received: from [192.168.0.195] by pcjr2.rosbacke.org with esmtp (Exim 4.63)
+	(envelope-from <mikael@rosbacke.org>) id 1KzZrR-0001Av-Up
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Nov 2008 16:03:24 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1KzZEZ-0002eF-Tc
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Nov 2008 16:03:24 +0000
-From: Phil Blundell <pb@reciva.com>
+	Mon, 10 Nov 2008 17:43:34 +0100
+From: Mikael Rosbacke <mikael@rosbacke.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49184234.3070308@balister.org>
-References: <49179A86.8000401@balister.org>
-	<1226326248.17085.41.camel@mill.internal.reciva.com>
-	<49184234.3070308@balister.org>
-Date: Mon, 10 Nov 2008 16:03:23 +0000
-Message-Id: <1226333003.17085.71.camel@mill.internal.reciva.com>
+Date: Mon, 10 Nov 2008 17:43:33 +0100
+Message-Id: <1226335413.6685.13.camel@akaza1>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: Stand at FOSDEM
+X-Mailer: Evolution 2.24.1 
+X-SA-Exim-Connect-IP: 192.168.0.195
+X-SA-Exim-Mail-From: mikael@rosbacke.org
+X-SA-Exim-Scanned: No (on pcjr2.rosbacke.org); SAEximRunCond expanded to false
+Subject: Building x86 on Ubuntu 8.10/x86_64 host with bugreport.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,22 +30,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2008 16:05:16 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 10 Nov 2008 16:45:28 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, 2008-11-10 at 07:16 -0700, Philip Balister wrote:
-> So you are suggesting we request a devroom for some grooup hacking? Last=20
-> year the stand was a mini devroom :)
+Thanks for the suggestion of image and machine settings. :-)
 
-Not necessarily for hacking as such, but yes: I think a devroom (either
-dedicated, or as some kind of splinter faction of the embedded track)
-would probably be more productive than a stand.
 
-Alternatively we could set up an unofficial OE track in, say, the Cafe
-de l'Universit=C3=A9. :-)  Of course, downside there is no internet access.
+I tried again with a clean checkout and building of an image.
+I used distribution 'angstrom-2008.1', machine 'x86' and target
+'minimal-image'. I'm still on my Ubuntu 8.10 x86_64 host.
 
-p.
+I managed to create an image, but there where 1 compile error:
+Build of/home/mikaelr/stuff/openembedded/packages/linux/linux_2.6.21.bb
+do_compile failed.
+
+From the log message:
+...
+Entering directory
+`/home/mikaelr/stuff/tmp/work/x86-angstrom-linux/linux-2.6.21-r12/linux-2.6.21'
+  CC      scripts/mod/empty.o
+  HOSTCC  scripts/mod/mk_elfconfig
+  MKELF   scripts/mod/elfconfig.h
+  HOSTCC  scripts/mod/file2alias.o
+  HOSTCC  scripts/mod/modpost.o
+  HOSTCC  scripts/mod/sumversion.o
+scripts/mod/sumversion.c: In function 'get_src_version':
+scripts/mod/sumversion.c:384: error: 'PATH_MAX' undeclared (first use in
+this function)
+scripts/mod/sumversion.c:384: error: (Each undeclared identifier is
+reported only once
+scripts/mod/sumversion.c:384: error: for each function it appears in.)
+scripts/mod/sumversion.c:384: warning: unused variable 'filelist'
+make[2]: *** [scripts/mod/sumversion.o] Error 1
+make[2]: Leaving directory
+`/home/mikaelr/stuff/tmp/work/x86-angstrom-linux/linux-2.6.21-r12/linux-2.6.21'
+make[1]: *** [scripts/mod] Error 2
+make[1]: Leaving directory
+`/home/mikaelr/stuff/tmp/work/x86-angstrom-linux/linux-2.6.21-r12/linux-2.6.21'
+make: *** [scripts] Error 2
+FATAL: oe_runmake failed
+
+By inserting: '#include <limits.h>' in 
+tmp/work/x86-angstrom-linux/linux-2.6.21-r12/linux-2.6.21/scripts/mod/sumversion.c
+the compilation could be restarted without a problem.
+
+Google will give you that this is a known problem and it has been fixed
+in recent kernels. 
+I'm not to familiar with oe patching policies but this description
+should be enough to create a patch for the kernel if needed.
+
+--- Mikael R
+
 
 
 
