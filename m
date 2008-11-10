@@ -1,32 +1,34 @@
-Received: from [62.142.5.107] (helo=emh01.mail.saunalahti.fi)
+Received: from [212.74.100.53] (helo=mk-filter-2-a-1.mail.uk.tiscali.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philippedeswert@scarlet.be>) id 1Kzf1N-0007Lr-Vi
-	for openembedded-devel@openembedded.org; Mon, 10 Nov 2008 23:14:10 +0100
-Received: from saunalahti-vams (vs3-10.mail.saunalahti.fi [62.142.5.94])
-	by emh01-2.mail.saunalahti.fi (Postfix) with SMTP id 49A161A98B
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Nov 2008 23:54:17 +0200 (EET)
-Received: from emh03.mail.saunalahti.fi ([62.142.5.109])
-	by vs3-10.mail.saunalahti.fi ([62.142.5.94])
-	with SMTP (gateway) id A05C6E44FCC; Mon, 10 Nov 2008 23:54:17 +0200
-Received: from [192.168.11.67] (a83-245-252-47.elisa-laajakaista.fi
-	[83.245.252.47])
-	by emh03.mail.saunalahti.fi (Postfix) with ESMTP id 337BC158A6B
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Nov 2008 23:54:15 +0200 (EET)
-From: Philippe De Swert <philippedeswert@scarlet.be>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <1226333003.17085.71.camel@mill.internal.reciva.com>
-References: <49179A86.8000401@balister.org>
-	<1226326248.17085.41.camel@mill.internal.reciva.com>
-	<49184234.3070308@balister.org>
-	<1226333003.17085.71.camel@mill.internal.reciva.com>
-Date: Mon, 10 Nov 2008 23:53:28 +0200
-Message-Id: <1226354008.29970.7.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 
-X-Antivirus: VAMS
-Subject: Re: Stand at FOSDEM
+	(envelope-from <bluelightning@bluelightning.org>) id 1KzgpD-0001hd-Ov
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Nov 2008 01:09:43 +0100
+X-Trace: 105523612/mk-filter-2.mail.uk.tiscali.com/B2C/$b2c-THROTTLED-DYNAMIC/b2c-CUSTOMER-DYNAMIC-IP/79.75.116.111/None/bluelightning@bluelightning.org
+X-SBRS: None
+X-RemoteIP: 79.75.116.111
+X-IP-MAIL-FROM: bluelightning@bluelightning.org
+X-MUA: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+X-IP-BHB: Once
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AtAEAORUGElPS3Rv/2dsb2JhbACBdlkqyDyDWA
+X-IronPort-AV: E=Sophos;i="4.33,579,1220223600"; 
+	d="scan'208,217";a="105523612"
+Received: from 79-75-116-111.dynamic.dsl.as9105.com (HELO shodan.localnet)
+	([79.75.116.111])
+	by smtp.tiscali.co.uk with ESMTP; 10 Nov 2008 23:37:59 +0000
+From: Paul Eggleton <bluelightning@bluelightning.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Nov 2008 23:37:57 +0000
+User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+References: <1226237296-11012-1-git-send-email-dbaryshkov@gmail.com>
+	<1226237296-11012-5-git-send-email-dbaryshkov@gmail.com>
+	<1226237296-11012-6-git-send-email-dbaryshkov@gmail.com>
+In-Reply-To: <1226237296-11012-6-git-send-email-dbaryshkov@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200811102337.57972.bluelightning@bluelightning.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Subject: Re: [PATCH] task-sdk-opie: correctly select qte or qte-mt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,37 +42,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2008 22:14:10 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 Nov 2008 00:09:44 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Hi peeps,
-
-On Mon, 2008-11-10 at 16:03 +0000, Phil Blundell wrote:
-> On Mon, 2008-11-10 at 07:16 -0700, Philip Balister wrote:
-> > So you are suggesting we request a devroom for some grooup hacking? L=
-ast=20
-> > year the stand was a mini devroom :)
->=20
-> Not necessarily for hacking as such, but yes: I think a devroom (either
-> dedicated, or as some kind of splinter faction of the embedded track)
-> would probably be more productive than a stand.
-
-Depending on the quality and amount of presentations in the embedded
-devroom, I could always try to make some room on Sunday morning for OE.
-Of course I am not the only one to decide on this, so I cannot make any
-promises. But given a decent proposal this could be considered.
-
-> Alternatively we could set up an unofficial OE track in, say, the Cafe
-> de l'Universit=E9. :-)  Of course, downside there is no internet access=
-.
-
-It should be possible to track down a pub/bar/brasserie with Wifi in
-Brussels.
+All opie-related patches commited. Thanks!
 
 Cheers,
-
-Philippe
-
-
+Paul
 
