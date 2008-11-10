@@ -1,30 +1,21 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1KzUkF-0001zX-Gq
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Nov 2008 12:15:47 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id E947116DEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2008 12:22:22 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id E49452A4212
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2008 12:13:58 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <openembedded@haerwu.biz>) id 1KzV1R-0007HB-Bx
+	for openembedded-devel@openembedded.org; Mon, 10 Nov 2008 12:33:33 +0100
+Received: (qmail 29453 invoked by uid 813007); 10 Nov 2008 11:05:03 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 10 Nov 2008 11:05:03 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Nov 2008 12:05:04 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27; KDE/4.1.2; x86_64; ; )
+References: <1226276181.4758.14.camel@utx.utx.cz>
+In-Reply-To: <1226276181.4758.14.camel@utx.utx.cz>
 MIME-Version: 1.0
-Date: Mon, 10 Nov 2008 12:13:59 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF50A@hiob.intern.dresearch.de>
-In-Reply-To: <1226302647.2015.24.camel@akaza1>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Building x86 base image.
-Thread-Index: AclDJEQHIvjHWuF+Sw+c27gVQqc92wAAKHRw
-References: <1226302647.2015.24.camel@akaza1>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Building x86 base image.
+Message-Id: <200811101205.04763.openembedded@haerwu.biz>
+Subject: Re: OE write access for Dmitry Baryshkov
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2008 11:15:47 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Mon, 10 Nov 2008 11:33:34 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-I've build and run minimal-image from the dev branch without any =
-problems some weeks before.
+Monday 10 of November 2008 01:16:21 Stanislav Brabec napisa=C5=82(a):
+> Hallo.
+>
+> I would like to propose write access for Dmitry Baryshkov.
+>
+> He is an active kernel developer of pxa270 based devices, especially
+> Zaurus. He also works on recipe updates and fixes.
+>
+> Granting access would simplify his work on OE improvement.
 
-MACHINE =3D "x86"
-DISTRO =3D "angstrom-2008.1"
++1 from me
 
-For other useful targets see =
-<http://wiki.openembedded.net/index.php/Useful_Targets>.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://blog.haerwu.biz/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
