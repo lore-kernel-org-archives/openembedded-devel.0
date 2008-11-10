@@ -1,21 +1,24 @@
-Received: from [75.125.193.18] (helo=alpha.vfshosting.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gremlin@gremlin.it>) id 1KzVOZ-0007cF-Q3
-	for openembedded-devel@openembedded.org; Mon, 10 Nov 2008 12:57:28 +0100
-X-ClientAddr: 127.0.0.1
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by alpha.vfshosting.net (8.13.8/8.13.8) with ESMTP id mAABaS1R027783
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Nov 2008 12:36:29 +0100
-Message-ID: <49181CBB.1060108@gremlin.it>
-Date: Mon, 10 Nov 2008 12:36:27 +0100
-From: Alessandro GARDICH <gremlin@gremlin.it>
-User-Agent: Thunderbird 1.5.0.12 (X11/20071019)
+	(envelope-from <mickey@vanille-media.de>) id 1KzWVB-0004sD-JW
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Nov 2008 14:08:21 +0100
+Received: from andromeda.vanille.de (e180179026.adsl.alicedsl.de
+	[85.180.179.26])
+	by drlauer-research.com (Postfix) with ESMTP id D446F58416C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Nov 2008 14:21:34 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Nov 2008 14:06:30 +0100
+User-Agent: KMail/1.9.10
+References: <1226302647.2015.24.camel@akaza1>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF50A@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF50A@hiob.intern.dresearch.de>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <49179A86.8000401@balister.org>
-In-Reply-To: <49179A86.8000401@balister.org>
-Subject: Re: Stand at FOSDEM
+Message-Id: <200811101406.30795.mickey@vanille-media.de>
+Subject: Re: Building x86 base image.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,38 +32,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2008 11:57:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 10 Nov 2008 13:08:21 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Philip Balister wrote:
-> It looks like FOSDEM is Feb 7-8 this year.
+Am Monday 10 November 2008 12:13:59 schrieb Sledz, Steffen:
+> I've build and run minimal-image from the dev branch without any problems
+> some weeks before.
 >
-> Do we want to do a stand again this year? Who would be interested in 
-> working on the stand?
->
-> Philip
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->   
-mhhh really early this year ...
-my intention is to attend at fosdem this year too
-and if we have a stand I can help on it.
+> MACHINE = "x86"
+> DISTRO = "angstrom-2008.1"
 
-
+We should backport the minimal amount of things necessary to get the minimal 
+DISTRO working on x86 as well.
 
 -- 
- /-------------------------------------------------------------\
-|           Alessandro Gardich : gremlin#gremlin!it             |
- >-------------------------------------------------------------<
-|  I never saw a wild thing sorry for itself.                   |
-|  A small bird will drop frozen dead from a bough              |
-|  without ever having felt sorry for itself.                   |
- \-------------------------------------------------------------/
-
+:M:
 
 
