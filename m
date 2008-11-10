@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1KzXYK-0002Py-JH
-	for openembedded-devel@openembedded.org; Mon, 10 Nov 2008 15:15:40 +0100
-Received: (qmail 4720 invoked by uid 1003); 10 Nov 2008 14:13:48 -0000
+	(envelope-from <philip@balister.org>) id 1KzXao-0002Yz-Os
+	for openembedded-devel@openembedded.org; Mon, 10 Nov 2008 15:18:15 +0100
+Received: (qmail 27198 invoked by uid 1003); 10 Nov 2008 14:16:22 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 10 Nov 2008 14:13:48 -0000
-Message-ID: <49184199.90100@balister.org>
-Date: Mon, 10 Nov 2008 07:13:45 -0700
+	by mail.geekisp.com with SMTP; 10 Nov 2008 14:16:22 -0000
+Message-ID: <49184234.3070308@balister.org>
+Date: Mon, 10 Nov 2008 07:16:20 -0700
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1226237296-11012-1-git-send-email-dbaryshkov@gmail.com>	<1226237296-11012-2-git-send-email-dbaryshkov@gmail.com>	<1226249673.4235.671.camel@lenovo.internal.reciva.com>
-	<gf76q2$le2$1@ger.gmane.org>
-In-Reply-To: <gf76q2$le2$1@ger.gmane.org>
-Subject: Re: [PATCH] checksums.ini: correct wrong checksums
+References: <49179A86.8000401@balister.org>
+	<1226326248.17085.41.camel@mill.internal.reciva.com>
+In-Reply-To: <1226326248.17085.41.camel@mill.internal.reciva.com>
+Subject: Re: Stand at FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,46 +29,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2008 14:15:41 -0000
-X-Groupsio-MsgNum: 6548
+X-List-Received-Date: Mon, 10 Nov 2008 14:18:15 -0000
+X-Groupsio-MsgNum: 6549
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020701010305080708040802"
+	micalg=sha1; boundary="------------ms050302010902050401090009"
 
---------------ms020701010305080708040802
+--------------ms050302010902050401090009
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> On 09-11-2008 17:54, Phil Blundell wrote:
->> On Sun, 2008-11-09 at 16:28 +0300, Dmitry Baryshkov wrote:
->>>   
->>> [http://gpephone.linuxtogo.org/download/gpephone/libchenabler-0.1/libchenabler-0.1.tar.gz] 
->>>
->>> -md5=f29e1e63fcc55e3ae4e81f5ee9dd7bdd
->>> -sha256=448a3ab76109664bb6bd8bcc2c62d957c7d44b52e39c37d91b3b73b5cfe35a3f
->>> +md5=866fd13611a8de946428db1df9be8468
->>> +sha256=74def55ba6a61e966e0873a4081fd3dd65089b94b837810d3bc056221d7e41c7
+Phil Blundell wrote:
+> On Sun, 2008-11-09 at 19:20 -0700, Philip Balister wrote:
+>> It looks like FOSDEM is Feb 7-8 this year.
 >>
->> How did these wrong checksums get in there?  It seems to defeat the
->> point of checksums.ini if the data isn't trustworthy.
+>> Do we want to do a stand again this year? Who would be interested in 
+>> working on the stand?
 > 
-> The gpephone people are in a habit of replacing the tarballs to get 
-> bugfixes to people instead of doing a new release. So the problem here 
-> is that _upstream_ is making a mess of things.
-> This also highlights why OE is now strictly enforcing checksums.
+> Not that I want to pour cold water on any such plan, but personally I'm
+> not terribly convinced that a stand is very good value in terms of
+> benefits that it brings compared to the time taken to man it.  FOSDEM
+> represents one of the fairly rare occasions when you have a significant
+> number of developers all in one place and, face-to-face time being such
+> a scarce resource, I can't help thinking that there are probably better
+> things to do with it.
 
-I'd like to see one commit per checksum change with the details in the 
-commit message. This we we can easily find when I package checksum 
-changed. This way we can easily identifu when the source changed but the 
-version number did not.
-
-This might be useful in the future for debugging the package. As in 
-feature X used to work, but all of a sudden broke, even though the 
-version did not change.
+So you are suggesting we request a devroom for some grooup hacking? Last 
+year the stand was a mini devroom :)
 
 Philip
 
---------------ms020701010305080708040802
+--------------ms050302010902050401090009
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -120,17 +110,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTExMDE0
-MTM0NVowIwYJKoZIhvcNAQkEMRYEFC9TaTUv/CujSCzxdgazY2xnua3BMFIGCSqGSIb3DQEJDzFF
+MTYyMFowIwYJKoZIhvcNAQkEMRYEFHkr7mdqWt/iWmiFzAQJbJ5YR2FjMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQASwdNHY8iC8E2953bLbhakATLPgWohtuuCL9pI4Ev/5U9xy2V8
-g5PCIYAvomHiqxS98rMITEBVNegbzcVaDf6i0cVQWQmqOu+xN9cHiq60nN08jXr/3hGvZavEvxw1
-x1Tbt19z5NQEEcemaRvglSjxwW82ip3MJI7+0dAe0iC7PQjxEq2jSIlGFvjA7EsbfJaocjipLS6z
-JOuvn56dU7Kq2J3D8UG1QF0wwf1flwJJH07ffS42kiigHY09cqy6pnqYxrbGM/rBtXg/p/0Wn6Y0
-n7MvQ1G3/horp1B/gqF5QppWWZ7HLjSmhGTrj6aeEOe7y0h1QcXZ6+216THSfbY3AAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQBlJptdBNsXLQHLbAkNS0C1ez+niMsXDgvDgm7+Ge1hp9zlGZm4
+FNFwfJTW0KWTLkZw4yys1+rCrRJDz5lkoIoMHP7N+FLhgjj6a9+smhQzqo4i1zgSvUiLbK3Ymc3z
+Mm79Mu0YlD/hloyWT1ymkg6Xo+n4tiUVISuT80m1TSYSt4uJjuQHnfjml7HUxnXhtmtTQFqMVypF
+91J1HZrXTTKMcpcPq1qBPSMyGAs6sR5Cmj2Jen62abqup8YIS9o7f5Bm0yMDMcR7VZ5H/Dhg/SBS
+TZwtBSkbjB/F6OmO14B/nVI/oIi9EvwXmQFJJJw5qk/9UksW/mNh9UCD9kkQ0numAAAAAAAA
 
---------------ms020701010305080708040802--
+--------------ms050302010902050401090009--
