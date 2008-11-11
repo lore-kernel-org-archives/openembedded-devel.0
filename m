@@ -1,27 +1,33 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1KziE0-0004wC-Hl
+	(envelope-from <otavio@freedom.ind.br>) id 1KziKC-00052T-Bd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Nov 2008 02:39:24 +0100
-Received: from gandalf.denix.org ([71.255.226.167]) by vms173003.mailsrvcs.net
-	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
-	with ESMTPA id <0KA500793B65LNY2@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	10 Nov 2008 19:37:18 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BE4E86B83B5; Mon,
-	10 Nov 2008 20:37:16 -0500 (EST)
-Date: Mon, 10 Nov 2008 20:37:16 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <gf10o2$hip$1@ger.gmane.org>
+	Tue, 11 Nov 2008 02:45:48 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 6D317402C8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Nov 2008 21:18:03 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id B0FB0C1AC
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Nov 2008 23:17:19 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 7928D610058; Mon, 10 Nov 2008 23:13:36 -0200 (BRST)
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20081111013716.GA25909@denix.org>
-MIME-version: 1.0
-References: <20081104005512.GA12988@denix.org>
-	<200811041213.25205.zecke@selfish.org>
-	<20081104194812.GA18457@denix.org>
-	<20081106231210.GB32229@denix.org> <gf10o2$hip$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: hal-0.5.11 fails with external toolchain/SDK
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Mon, 10 Nov 2008 23:13:36 -0200
+In-Reply-To: <200806061502.02821.mickey@vanille-media.de> (Michael Lauer's
+	message of "Fri\, 6 Jun 2008 15\:02\:02 +0200")
+Message-ID: <87iqqvvzcv.fsf_-_@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+References: <48486D5B.4060000@nospam.arcornews.de>
+	<200806061502.02821.mickey@vanille-media.de>
+MIME-Version: 1.0
+Subject: Weird build failures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,131 +41,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2008 01:39:24 -0000
-X-Groupsio-MsgNum: 6558
-Content-type: multipart/mixed; boundary=dDRMvlgZJXvWKvBx
-Content-disposition: inline
-
---dDRMvlgZJXvWKvBx
+X-List-Received-Date: Tue, 11 Nov 2008 01:45:48 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 
-On Fri, Nov 07, 2008 at 10:11:30AM +0100, Koen Kooi wrote:
-> On 07-11-2008 00:12, Denys Dmytriyenko wrote:
->> On Tue, Nov 04, 2008 at 02:48:12PM -0500, Denys Dmytriyenko wrote:
->>> On Tue, Nov 04, 2008 at 12:13:24PM +0100, Holger Freyther wrote:
->>>> On Tuesday 04 November 2008 01:55:12 Denys Dmytriyenko wrote:
->>>>> Hi,
->>>>>
->>>>> New hal-0.5.11 from OpenMoko breaks builds with external-toolchain/SDK, 
->>>>> as
->>>>> it hardcodes linux/input.h like this:
->>>> It is Openmoko, and I did add it.
->>>>
->>>> what about something among the lines of?
->>>>
->>>> echo "#include<linux/input.h>" | cpp | less | grep "linux\/input.h"
->>> Thanks for the hint. I was able to fix it, so it finds the right 
->>> linux/input.h
->>> file even with external-toolchain/SDK.
->>>
->>> The patch is attached to the ticket #4799 and this email. I was not able 
->>> to
->>> call autoreconf, as it was giving too many problems. 
->>> autotools_do_configure
->>> worked fine, but unfortunately, it doesn't take parameters to pass to the
->>> oe_runconf, so I had to call it again with the correct --with flag. Let 
->>> me
->>> know if it's Ok or not. Thanks.
->>
->> What about this patch? Does it look good? Any comments/suggestions?
->
-> I was about to propose somethine like:
->
-> do_configure_prepend() {
-> linux_input_h=$(echo "#include <linux/input.h>" | ${CPP} - | \
-> 	grep "linux\/input.h" | head -n 1 | awk -F '"' '{print $2}')	
-> }
-> EXTRA_OECONF += "--with-linux-input-header=${linux_input_h}"
->
-> But I then I realized that probably won't work as I expect it to work :)
+Hello,
 
-Ok, what if we change autotools_do_configure to accept parameters and pass 
-them to oe_runconf? It's quite a trivial change - see two patches attached.
+Bellow goes a weird build failure that I see no reason for it. It
+fails but if I rebuild the package it works. It has happened to many
+packages while I were building my image and I would like to know if
+someone has a tip where the problem is.
+
+,----
+| otavio@neumann:~/hacking/ossystems/oe$ ../../bitbake/bin/bitbake angstrom-version
+| NOTE: Handling BitBake files: | (6168/6168) [100 %]
+| NOTE: Parsing finished. 5911 cached, 0 parsed, 257 skipped, 0 masked.
+| NOTE: Cache is clean, not saving.
+| NOTE: build 200811102310: started
+| 
+| OE Build Configuration:
+| BB_VERSION        = "1.8.11"
+| METADATA_BRANCH   = "master"
+| METADATA_REVISION = "0e42d3070e612a4c90f0f13ccd7e20bf0e823863"
+| TARGET_ARCH       = "i586"
+| TARGET_OS         = "linux"
+| MACHINE           = "oppitz-lx800"
+| DISTRO            = "ossystems"
+| DISTRO_VERSION    = "7.1-20081111"
+| TARGET_FPU        = ""
+| 
+| NOTE: Resolving any missing task queue dependencies
+| NOTE: Preparing runqueue
+| NOTE: Executing runqueue
+| NOTE: Running task 333 of 460 (ID: 9, /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_populate_staging)
+| NOTE: Running task 335 of 460 (ID: 15, /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_package_write_ipk)
+| NOTE: package angstrom-version-7.1-20081111: started
+| NOTE: package angstrom-version-1_7.1-20081111-r1: task do_populate_staging: started
+| NOTE: package angstrom-version-7.1-20081111: started
+| NOTE: package angstrom-version-1_7.1-20081111-r1: task do_package_write_ipk: started
+| ERROR: Error in executing: /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb
+| ERROR: Exception:<type 'exceptions.IOError'> Message:[Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/angstrom-version-1_7.1-20081111-r1/install/angstrom-version.lock'
+| ERROR: Printing the environment of the function
+| ERROR: Error in executing: /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb
+| ERROR: Exception:<type 'exceptions.IOError'> Message:[Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/angstrom-version-1_7.1-20081111-r1/install/angstrom-version.lock'
+| ERROR: Printing the environment of the function
+| ERROR: Build of /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb do_package_write_ipk failed
+| Traceback (most recent call last):
+|   File "/home/otavio/hacking/bitbake/bin/bitbake", line 136, in <module>
+|     main()
+|   File "/home/otavio/hacking/bitbake/bin/bitbake", line 133, in main
+|     cooker.cook()
+|   File "../../bitbake/lib/bb/cooker.py", line 641, in cook
+|   File "../../bitbake/lib/bb/cooker.py", line 551, in buildTargets
+|   File "../../bitbake/lib/bb/runqueue.py", line 842, in execute_runqueue
+|   File "../../bitbake/lib/bb/runqueue.py", line 951, in execute_runqueue_internal
+|   File "../../bitbake/lib/bb/cooker.py", line 137, in tryBuild
+|   File "../../bitbake/lib/bb/cooker.py", line 111, in tryBuildPackage
+|   File "../../bitbake/lib/bb/build.py", line 278, in exec_task
+|   File "../../bitbake/lib/bb/build.py", line 113, in exec_func
+|   File "../../bitbake/lib/bb/build.py", line 136, in exec_func_python
+|   File "../../bitbake/lib/bb/utils.py", line 171, in better_exec
+|   File "do_package_write_ipk", line 11, in <module>
+|   File "do_package_write_ipk", line 9, in do_package_write_ipk
+|   File "../../bitbake/lib/bb/build.py", line 113, in exec_func
+|   File "../../bitbake/lib/bb/build.py", line 136, in exec_func_python
+|   File "../../bitbake/lib/bb/utils.py", line 171, in better_exec
+|   File "do_package_ipk", line 182, in <module>
+|   File "do_package_ipk", line 32, in do_package_ipk
+|   File "../../bitbake/lib/bb/utils.py", line 249, in lockfile
+| IOError: [Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/angstrom-version-1_7.1-20081111-r1/install/angstrom-version.lock'
+| ERROR: Task 15 (/home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_package_write_ipk) failed
+| NOTE: Waiting for 1 active tasks to finish
+| NOTE: 1: /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_populate_staging (24297)
+| NOTE: package angstrom-version-1_7.1-20081111-r1: task do_populate_staging: completed
+| NOTE: package angstrom-version-7.1-20081111: completed
+| NOTE: Tasks Summary: Attempted 453 tasks of which 453 didn't need to be rerun and 1 failed.
+| ERROR: '/home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb' failed
+| NOTE: build 200811102310: completed
+`----
+
+Cheers,
 
 -- 
-Denys
-
---dDRMvlgZJXvWKvBx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename="autotools_do_configure-accept-parameters.patch"
-
-From 507ee230617603258736ecbcf4895de5429f8672 Mon Sep 17 00:00:00 2001
-From: Denys Dmytriyenko <denis@denix.org>
-Date: Mon, 10 Nov 2008 20:13:22 -0500
-Subject: [PATCH] autotools.bbclass: allow autotools_do_configure to accept parameters and pass to oe_runconf
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- classes/autotools.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
-index 82b5311..adb57f6 100644
---- a/classes/autotools.bbclass
-+++ b/classes/autotools.bbclass
-@@ -134,7 +134,7 @@ autotools_do_configure() {
- 	;;
- 	esac
- 	if [ -e ${S}/configure ]; then
--		oe_runconf
-+		oe_runconf $@
- 	else
- 		oenote "nothing to configure"
- 	fi
--- 
-1.5.6.4
-
-
---dDRMvlgZJXvWKvBx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename="hal-0.5.11-fix-sdk-linux-input-h.patch"
-
-From 1a568f9490eb7bfd1060f47e2584d3ce41820b6b Mon Sep 17 00:00:00 2001
-From: Denys Dmytriyenko <denis@denix.org>
-Date: Mon, 10 Nov 2008 20:17:02 -0500
-Subject: [PATCH] hal: Find and use the right linux/input.h to work with external toolchain
-
-
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- packages/hal/hal_0.5.11.bb |   10 ++++++++--
- 1 files changed, 8 insertions(+), 2 deletions(-)
-
-diff --git a/packages/hal/hal_0.5.11.bb b/packages/hal/hal_0.5.11.bb
-index e93ad64..2b56fdf 100644
---- a/packages/hal/hal_0.5.11.bb
-+++ b/packages/hal/hal_0.5.11.bb
-@@ -1,8 +1,14 @@
- require hal.inc
- 
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI += " file://hal-right-input-h.patch;patch=1 \
-              file://fix-configure.diff;patch=1"
- 
--EXTRA_OECONF += "--with-linux-input-header=${STAGING_INCDIR}/linux/input.h"
-+# The following code finds the right linux/input.h,
-+# which also works with external-toolchain/SDK
-+do_configure() {
-+	linux_input_h=`echo "#include <linux/input.h>" | ${CPP} - | \
-+		grep "linux\/input.h" | head -n 1 | awk -F '"' '{print $2}'`
-+	autotools_do_configure --with-linux-input-header=${linux_input_h}
-+}
--- 
-1.5.6.4
-
-
---dDRMvlgZJXvWKvBx--
