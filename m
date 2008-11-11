@@ -1,25 +1,21 @@
-Received: from [80.68.91.202] (helo=xora.org.uk)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1KzuFK-0000Q7-Mz
+	(envelope-from <zecke@selfish.org>) id 1Kzwfz-0006Sg-I3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Nov 2008 15:29:34 +0100
-Received: from [192.168.1.10] ([::ffff:78.86.128.56])
-	(AUTH: PLAIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by xora.org.uk with esmtp; Tue, 11 Nov 2008 14:27:39 +0000
-	id 00034E64.4919965B.00001C35
-From: Graeme Gregory <dp@xora.org.uk>
+	Tue, 11 Nov 2008 18:05:15 +0100
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244])
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:RSA_AES_128_CBC_SHA1:16) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1Kzw8z-0001Rw-SC
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Nov 2008 17:31:09 +0100
+Message-Id: <0F152AAD-A72B-4CFD-8DC2-8C74F21290FA@selfish.org>
+From: Holger Freyther <zecke@selfish.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1226337300.6989.2.camel@aquilonia>
-References: <1226054458.7175.3.camel@aquilonia>
-	<87mygarid7.fsf@neumann.lab.ossystems.com.br>
-	<1226256825.6785.0.camel@aquilonia>
-	<87wsfbhkel.fsf@neumann.lab.ossystems.com.br>
-	<1226337300.6989.2.camel@aquilonia>
-Date: Tue, 11 Nov 2008 14:27:38 +0000
-Message-Id: <1226413658.6978.2.camel@aquilonia>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.1 
-Subject: Re: Xorg X11R7.4 updates
+Mime-Version: 1.0 (Apple Message framework v929.2)
+Date: Tue, 11 Nov 2008 17:31:08 +0100
+X-Mailer: Apple Mail (2.929.2)
+Subject: Push access for some of the Openmoko folks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,30 +29,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2008 14:29:34 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Tue, 11 Nov 2008 17:05:16 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2008-11-10 at 17:15 +0000, Graeme Gregory wrote:
-> Ok, just to prove this acutally runs and using tslib driver for
-> touchscreen here is a scap picture of x11-image running using Xorg
-> X11R7.4 (server version 1.5.1)
-> 
-> http://scap.linuxtogo.org/files/e4d83971b3de72c0953046cdc508fd44.png
-> 
-> Graeme
-> 
+Hey,
 
-And another update, with some help from koen I managed to beat
-xf86-input-tslib up a little so it no longer needs hard coded
-resolutions.
+over the last six month I have worked with John Lee, Julian Chu, Chen  
+I-Fan(tick), Chia-I Wu (olv) and all of them have done work on the  
+distribution. They work with great care and know what they do and if  
+that is not the case communicate.
 
-http://scap.linuxtogo.org/files/ddb1bbb5ccc99bc8d3d3e36dba2673d9.png
+With my OE hat on I want them to commit their fixes to the  
+OpenEmbedded repository before pushing things to the org.openmoko.dev  
+branch.
 
-Is Xorg running on a freerunner without an xorg.conf
+I would like to propose the following:
+	- Grant push access to Julian, tick and olv
+	- Tick's and Olv' area of responsible is likely to be limited to the  
+openmoko-projects directory (and opkg)
+	- Julian was the lead of the distro team and touched stuff all over  
+the place, I'm sure he will propose his work in branches, etc. when  
+discussion is needed.
 
-Graeme
+I don't assume there will be any issues with them, if I'm wrong, I'm  
+happy to fix whatever damage they have done to the repository and sort  
+the issue out. They will seek review and only push changes they are  
+confident with, or create branches for review.
 
+What do you think about this experiment?
 
+	z.
 
 
