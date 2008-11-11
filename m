@@ -1,33 +1,25 @@
-Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+Received: from [80.68.91.202] (helo=xora.org.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1KziKC-00052T-Bd
+	(envelope-from <dp@xora.org.uk>) id 1KzuFK-0000Q7-Mz
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Nov 2008 02:45:48 +0100
-Received: from internet.ossystems.com.br
-	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
-	by listas.ossystems.com.br (Postfix) with ESMTP id 6D317402C8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2008 21:18:03 -0200 (BRST)
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id B0FB0C1AC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2008 23:17:19 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 7928D610058; Mon, 10 Nov 2008 23:13:36 -0200 (BRST)
+	Tue, 11 Nov 2008 15:29:34 +0100
+Received: from [192.168.1.10] ([::ffff:78.86.128.56])
+	(AUTH: PLAIN dp, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by xora.org.uk with esmtp; Tue, 11 Nov 2008 14:27:39 +0000
+	id 00034E64.4919965B.00001C35
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Mon, 10 Nov 2008 23:13:36 -0200
-In-Reply-To: <200806061502.02821.mickey@vanille-media.de> (Michael Lauer's
-	message of "Fri\, 6 Jun 2008 15\:02\:02 +0200")
-Message-ID: <87iqqvvzcv.fsf_-_@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
-References: <48486D5B.4060000@nospam.arcornews.de>
-	<200806061502.02821.mickey@vanille-media.de>
-MIME-Version: 1.0
-Subject: Weird build failures
+In-Reply-To: <1226337300.6989.2.camel@aquilonia>
+References: <1226054458.7175.3.camel@aquilonia>
+	<87mygarid7.fsf@neumann.lab.ossystems.com.br>
+	<1226256825.6785.0.camel@aquilonia>
+	<87wsfbhkel.fsf@neumann.lab.ossystems.com.br>
+	<1226337300.6989.2.camel@aquilonia>
+Date: Tue, 11 Nov 2008 14:27:38 +0000
+Message-Id: <1226413658.6978.2.camel@aquilonia>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.1 
+Subject: Re: Xorg X11R7.4 updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,94 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2008 01:45:48 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 11 Nov 2008 14:29:34 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On Mon, 2008-11-10 at 17:15 +0000, Graeme Gregory wrote:
+> Ok, just to prove this acutally runs and using tslib driver for
+> touchscreen here is a scap picture of x11-image running using Xorg
+> X11R7.4 (server version 1.5.1)
+> 
+> http://scap.linuxtogo.org/files/e4d83971b3de72c0953046cdc508fd44.png
+> 
+> Graeme
+> 
 
-Bellow goes a weird build failure that I see no reason for it. It
-fails but if I rebuild the package it works. It has happened to many
-packages while I were building my image and I would like to know if
-someone has a tip where the problem is.
+And another update, with some help from koen I managed to beat
+xf86-input-tslib up a little so it no longer needs hard coded
+resolutions.
 
-,----
-| otavio@neumann:~/hacking/ossystems/oe$ ../../bitbake/bin/bitbake angstrom-version
-| NOTE: Handling BitBake files: | (6168/6168) [100 %]
-| NOTE: Parsing finished. 5911 cached, 0 parsed, 257 skipped, 0 masked.
-| NOTE: Cache is clean, not saving.
-| NOTE: build 200811102310: started
-| 
-| OE Build Configuration:
-| BB_VERSION        = "1.8.11"
-| METADATA_BRANCH   = "master"
-| METADATA_REVISION = "0e42d3070e612a4c90f0f13ccd7e20bf0e823863"
-| TARGET_ARCH       = "i586"
-| TARGET_OS         = "linux"
-| MACHINE           = "oppitz-lx800"
-| DISTRO            = "ossystems"
-| DISTRO_VERSION    = "7.1-20081111"
-| TARGET_FPU        = ""
-| 
-| NOTE: Resolving any missing task queue dependencies
-| NOTE: Preparing runqueue
-| NOTE: Executing runqueue
-| NOTE: Running task 333 of 460 (ID: 9, /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_populate_staging)
-| NOTE: Running task 335 of 460 (ID: 15, /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_package_write_ipk)
-| NOTE: package angstrom-version-7.1-20081111: started
-| NOTE: package angstrom-version-1_7.1-20081111-r1: task do_populate_staging: started
-| NOTE: package angstrom-version-7.1-20081111: started
-| NOTE: package angstrom-version-1_7.1-20081111-r1: task do_package_write_ipk: started
-| ERROR: Error in executing: /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb
-| ERROR: Exception:<type 'exceptions.IOError'> Message:[Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/angstrom-version-1_7.1-20081111-r1/install/angstrom-version.lock'
-| ERROR: Printing the environment of the function
-| ERROR: Error in executing: /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb
-| ERROR: Exception:<type 'exceptions.IOError'> Message:[Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/angstrom-version-1_7.1-20081111-r1/install/angstrom-version.lock'
-| ERROR: Printing the environment of the function
-| ERROR: Build of /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb do_package_write_ipk failed
-| Traceback (most recent call last):
-|   File "/home/otavio/hacking/bitbake/bin/bitbake", line 136, in <module>
-|     main()
-|   File "/home/otavio/hacking/bitbake/bin/bitbake", line 133, in main
-|     cooker.cook()
-|   File "../../bitbake/lib/bb/cooker.py", line 641, in cook
-|   File "../../bitbake/lib/bb/cooker.py", line 551, in buildTargets
-|   File "../../bitbake/lib/bb/runqueue.py", line 842, in execute_runqueue
-|   File "../../bitbake/lib/bb/runqueue.py", line 951, in execute_runqueue_internal
-|   File "../../bitbake/lib/bb/cooker.py", line 137, in tryBuild
-|   File "../../bitbake/lib/bb/cooker.py", line 111, in tryBuildPackage
-|   File "../../bitbake/lib/bb/build.py", line 278, in exec_task
-|   File "../../bitbake/lib/bb/build.py", line 113, in exec_func
-|   File "../../bitbake/lib/bb/build.py", line 136, in exec_func_python
-|   File "../../bitbake/lib/bb/utils.py", line 171, in better_exec
-|   File "do_package_write_ipk", line 11, in <module>
-|   File "do_package_write_ipk", line 9, in do_package_write_ipk
-|   File "../../bitbake/lib/bb/build.py", line 113, in exec_func
-|   File "../../bitbake/lib/bb/build.py", line 136, in exec_func_python
-|   File "../../bitbake/lib/bb/utils.py", line 171, in better_exec
-|   File "do_package_ipk", line 182, in <module>
-|   File "do_package_ipk", line 32, in do_package_ipk
-|   File "../../bitbake/lib/bb/utils.py", line 249, in lockfile
-| IOError: [Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/oppitz-lx800-ossystems-linux/angstrom-version-1_7.1-20081111-r1/install/angstrom-version.lock'
-| ERROR: Task 15 (/home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_package_write_ipk) failed
-| NOTE: Waiting for 1 active tasks to finish
-| NOTE: 1: /home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb, do_populate_staging (24297)
-| NOTE: package angstrom-version-1_7.1-20081111-r1: task do_populate_staging: completed
-| NOTE: package angstrom-version-7.1-20081111: completed
-| NOTE: Tasks Summary: Attempted 453 tasks of which 453 didn't need to be rerun and 1 failed.
-| ERROR: '/home/otavio/hacking/ossystems/oe/packages/angstrom/angstrom-version.bb' failed
-| NOTE: build 200811102310: completed
-`----
+http://scap.linuxtogo.org/files/ddb1bbb5ccc99bc8d3d3e36dba2673d9.png
 
-Cheers,
+Is Xorg running on a freerunner without an xorg.conf
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Graeme
+
+
 
 
