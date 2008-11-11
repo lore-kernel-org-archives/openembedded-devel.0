@@ -1,38 +1,29 @@
-Received: from [64.233.178.249] (helo=hs-out-0708.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rodrigo.vivi@gmail.com>) id 1KzzCs-000118-2Y
+	(envelope-from <utx@penguin.cz>) id 1KzzMZ-0001JJ-AG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Nov 2008 20:47:22 +0100
-Received: by hs-out-0708.google.com with SMTP id 23so33837hsn.12
+	Tue, 11 Nov 2008 20:57:23 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 77E59140533D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2008 11:45:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=WHIIG9P4r/7xxj+UzYzpXD64KYDGdmIlzT1oouIcnq0=;
-	b=c5E8OKKtbAkj4pwFFjo6uBcAxmkHv/d4UrV6YgwvYqTs5FRwrRA1xqGNFt3O1ALSZK
-	Z+ePmedgGKyJ3owwH/mYFZbft2SIkCfnBeqov0v1NHGwOZEg3b8wLLUQfVkHE7F94xqG
-	SXyyBAxpvx6ikph9Xjrt3Fk3Bu8DZCXCQk9wg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=Xzqp9v7pLrgiFZmdOuOFus+sm7fNNcbo3j4oahphoA2XwWhV5vwogQq+R/OrNNmbH7
-	JlXHXrJI13UMHTCtVZ7HUq2/nzL10XLPovjqVw0Qp7kZ1ZGtUUzAvUJu0Pm5W1Ma+X+D
-	RDZuDBIbIPL0pBeCJIx1BWpkRuwiG9MVVvDNQ=
-Received: by 10.100.142.19 with SMTP id p19mr3416190and.61.1226432726814;
-	Tue, 11 Nov 2008 11:45:26 -0800 (PST)
-Received: by 10.100.202.19 with HTTP; Tue, 11 Nov 2008 11:45:26 -0800 (PST)
-Message-ID: <bdb0025f0811111145w525e8f77gd491328862ecbc3b@mail.gmail.com>
-Date: Tue, 11 Nov 2008 16:45:26 -0300
-From: "Rodrigo Vivi" <rodrigo.vivi@gmail.com>
+	Tue, 11 Nov 2008 20:53:49 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id yyiDo-KL2beH
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Nov 2008 20:53:49 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 43A9B1422AA6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Nov 2008 20:53:49 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1226430221.4235.712.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-References: <0F152AAD-A72B-4CFD-8DC2-8C74F21290FA@selfish.org>
-	<1226430221.4235.712.camel@lenovo.internal.reciva.com>
-Subject: Re: Push access for some of the Openmoko folks
+Date: Tue, 11 Nov 2008 20:55:27 +0100
+Message-Id: <1226433327.4417.10.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: openmoko OE devs: update claws-mail and libetpan?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2008 19:47:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 11 Nov 2008 19:57:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-+1
+Hallo Openmoko OE developers.
 
-On Tue, Nov 11, 2008 at 4:03 PM, Phil Blundell <pb@reciva.com> wrote:
-> On Tue, 2008-11-11 at 17:31 +0100, Holger Freyther wrote:
->> What do you think about this experiment?
->
-> I think this is a splendid idea.
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I am just working on an update of claws-mail (the version in repo does
+not start in some locales). New version of of claws-mail requires an
+update of libetpan.
 
+The update could actually break claws-mail build in OM. Please let me
+know, what is your preferred solution:
+1) Add old claws-mail version to preferred-om-2008-versions.inc
+2) Remove preferred libetpan version.
+3) Add new versions to preferred-om-2008-versions.inc
+
+In case of no reply I will apply 1) keeping OM build exactly as is: with
+claws-mail =EF=BB=BFbroken in some locales.
+
+I will test both package on my spitz before push (well, with IMAPs
+only), so OM build will probably will have the same test result.
 
 
--- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
