@@ -1,23 +1,28 @@
-Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1L0CMr-0007hE-84
+	(envelope-from <pb@reciva.com>) id 1L0CY8-0007u3-DK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Nov 2008 10:50:33 +0100
-Received: by ug-out-1314.google.com with SMTP id k3so1050192ugf.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Nov 2008 01:48:35 -0800 (PST)
-Received: by 10.67.116.16 with SMTP id t16mr3446190ugm.51.1226483315617;
-	Wed, 12 Nov 2008 01:48:35 -0800 (PST)
-Received: from ?192.168.1.10? ([78.86.128.56])
-	by mx.google.com with ESMTPS id y6sm455243uge.28.2008.11.12.01.48.34
-	(version=SSLv3 cipher=RC4-MD5); Wed, 12 Nov 2008 01:48:35 -0800 (PST)
-From: Graeme Gregory <dp@xora.org.uk>
+	Wed, 12 Nov 2008 11:02:13 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1L0CWA-00029q-1H
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Nov 2008 10:00:10 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1L0CW7-000171-TX
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Nov 2008 10:00:08 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Nov 2008 09:48:33 +0000
-Message-Id: <1226483313.7474.5.camel@aquilonia>
+In-Reply-To: <1226483313.7474.5.camel@aquilonia>
+References: <1226483313.7474.5.camel@aquilonia>
+Date: Wed, 12 Nov 2008 10:00:07 +0000
+Message-Id: <1226484007.17085.150.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.1 
-Subject: [RFC] Moving xorg.conf to seperate .bb file/package
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [RFC] Moving xorg.conf to seperate .bb file/package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,21 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Nov 2008 09:50:33 -0000
+X-List-Received-Date: Wed, 12 Nov 2008 10:02:13 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-At the moment xorg.conf is handled within the xserver-xorg .bb file.
+On Wed, 2008-11-12 at 09:48 +0000, Graeme Gregory wrote:
+> At the moment xorg.conf is handled within the xserver-xorg .bb file.
+> 
+> As xorg.conf varies per machine this will effectively make xserver-xorg
+> machine specific which sort of defeats the purpose of a module xorg.
+> 
+> My suggestion is to move xorg.conf out of xserver-xorg. Then add a
+> RRECOMMEND_${PN} = "xserver-xorg-conf" to xserver-xorg.
+> 
+> Is this a sane plan?
 
-As xorg.conf varies per machine this will effectively make xserver-xorg
-machine specific which sort of defeats the purpose of a module xorg.
+Yes, that sounds like a splendid plan.  I would even hope that some
+(maybe most) machines can cope without having an xorg.conf at all
+nowadays.
 
-My suggestion is to move xorg.conf out of xserver-xorg. Then add a
-RRECOMMEND_${PN} = "xserver-xorg-conf" to xserver-xorg.
-
-Is this a sane plan?
-
-Graeme
+p.
 
 
 
