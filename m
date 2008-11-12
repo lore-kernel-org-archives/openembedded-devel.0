@@ -1,27 +1,23 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [66.249.92.175] (helo=ug-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1L0Bjq-00016m-M5
+	(envelope-from <dp@xora.org.uk>) id 1L0CMr-0007hE-84
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Nov 2008 10:10:16 +0100
-Received: from 89-168-188-212.dynamic.dsl.as9105.com ([89.168.188.212]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1L0Bhv-0000ox-Sb
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Nov 2008 09:08:16 +0000
-From: Phil Blundell <pb@reciva.com>
+	Wed, 12 Nov 2008 10:50:33 +0100
+Received: by ug-out-1314.google.com with SMTP id k3so1050192ugf.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Nov 2008 01:48:35 -0800 (PST)
+Received: by 10.67.116.16 with SMTP id t16mr3446190ugm.51.1226483315617;
+	Wed, 12 Nov 2008 01:48:35 -0800 (PST)
+Received: from ?192.168.1.10? ([78.86.128.56])
+	by mx.google.com with ESMTPS id y6sm455243uge.28.2008.11.12.01.48.34
+	(version=SSLv3 cipher=RC4-MD5); Wed, 12 Nov 2008 01:48:35 -0800 (PST)
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1226478974.7474.1.camel@aquilonia>
-References: <1226054458.7175.3.camel@aquilonia>
-	<87mygarid7.fsf@neumann.lab.ossystems.com.br>
-	<1226256825.6785.0.camel@aquilonia>
-	<874p2d93tg.fsf@neumann.lab.ossystems.com.br>
-	<1226478974.7474.1.camel@aquilonia>
-Date: Wed, 12 Nov 2008 09:08:14 +0000
-Message-Id: <1226480894.4235.747.camel@lenovo.internal.reciva.com>
+Date: Wed, 12 Nov 2008 09:48:33 +0000
+Message-Id: <1226483313.7474.5.camel@aquilonia>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: Xorg X11R7.4 updates
+X-Mailer: Evolution 2.24.1 
+Subject: [RFC] Moving xorg.conf to seperate .bb file/package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,18 +31,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Nov 2008 09:10:43 -0000
+X-List-Received-Date: Wed, 12 Nov 2008 09:50:33 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2008-11-12 at 08:36 +0000, Graeme Gregory wrote:
-> Ah excellent, but I'm not sure about your patch, I was trying to keep
-> the pref-xorg-7.4 file to only list 7.4 release components which mesa is
-> not one of.
+At the moment xorg.conf is handled within the xserver-xorg .bb file.
 
-Sounds like you should fix support for versioned DEPENDS in bitbake. :-}
+As xorg.conf varies per machine this will effectively make xserver-xorg
+machine specific which sort of defeats the purpose of a module xorg.
 
-p.
+My suggestion is to move xorg.conf out of xserver-xorg. Then add a
+RRECOMMEND_${PN} = "xserver-xorg-conf" to xserver-xorg.
+
+Is this a sane plan?
+
+Graeme
 
 
 
