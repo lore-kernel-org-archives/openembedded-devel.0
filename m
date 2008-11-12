@@ -1,33 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.121.247.32] (helo=psmtp30.wxs.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L0HTQ-0004GM-4F
-	for openembedded-devel@openembedded.org; Wed, 12 Nov 2008 16:17:40 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L0HRT-0001Np-39
-	for openembedded-devel@openembedded.org; Wed, 12 Nov 2008 15:15:39 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 12 Nov 2008 15:15:39 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 12 Nov 2008 15:15:39 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 12 Nov 2008 16:15:31 +0100
-Message-ID: <gferuj$6rj$1@ger.gmane.org>
-References: <1226054458.7175.3.camel@aquilonia>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081106 Shredder/3.0b1pre
-In-Reply-To: <1226054458.7175.3.camel@aquilonia>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Xorg X11R7.4 updates
+	(envelope-from <gerwin@vanderkruis.net>) id 1L0IhD-0000LM-QE
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Nov 2008 17:35:59 +0100
+Received: from ubuntu.lan (ip5457b30e.direct-adsl.nl [84.87.179.14])
+	by psmtp30.wxs.nl
+	(iPlanet Messaging Server 5.2 HotFix 2.15 (built Nov 14 2006))
+	with ESMTP id <0KA80011CBCNBP@psmtp30.wxs.nl> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	12 Nov 2008 17:33:59 +0100 (MET)
+Date: Wed, 12 Nov 2008 17:33:59 +0100
+From: Gerwin van der Kruis <gerwin@vanderkruis.net>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <200811121733.59749.gerwin@vanderkruis.net>
+Organization: GO-2K
+MIME-version: 1.0
+User-Agent: KMail/1.9.10
+Subject: Transferring images to flash avr32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +30,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Nov 2008 15:17:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Nov 2008 16:35:59 -0000
+Content-type: text/plain; charset=us-ascii
+Content-transfer-encoding: 7BIT
+Content-disposition: inline
 
-On 07-11-2008 11:40, Graeme Gregory wrote:
-> Hi, sponsored by Openmoko I have been working on bring Xorg 7.4 to OE. I
-> have now reached the point where all the right versions of the packages
-> are now in and I have even checked that they compile to the extent I can
-> on arm (some are obviously x86 or exotic machine only).
->
-> So I would like people with an interest to please review the changes on
-> the shared/xorg-7.4-update branch. Especially x86 guys who can actually
-> use some of the drivers. Id like to get any problems ironed out now
-> ready for merging into OE mainline.
+Dear All, 
 
-It works great for the platforms I tested it on, so you get my vote for 
-merging it now.
+I managed to succesfully compile the images for avr32 . 
 
-regards,
+I want to use tftp and u-boot to boot the images on my ATNGW100 board. 
 
-Koen
+Is there somewhere a manual how to put the images on the board ?
 
+Or can somebody sent me the steps necessary ?
+
+
+Regards, 
+
+Gerwin
 
 
