@@ -1,30 +1,30 @@
-Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1L0WfE-0003zI-Sc
+	(envelope-from <sledz@DResearch.DE>) id 1L0YfM-0008SL-Cc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Nov 2008 08:30:53 +0100
-Received: from gandalf.denix.org ([71.255.226.167])
-	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
-	(built Apr
-	3 2006)) with ESMTPA id <0KA90070WGS019C2@vms042.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	13 Nov 2008 01:28:49 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 072536B83A8; Thu,
-	13 Nov 2008 02:28:48 -0500 (EST)
-Date: Thu, 13 Nov 2008 02:28:47 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <20081112184416.GA6234@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20081113072847.GA9523@denix.org>
-MIME-version: 1.0
-References: <20081023230928.GA21151@denix.org>
-	<f96d234e0810240638u1026aec9y6b258bba5708315f@mail.gmail.com>
-	<1224861430.6356.20.camel@dax.rpnet.com>
-	<f96d234e0811071157j71bc59bbjf71e865c32e40a81@mail.gmail.com>
-	<1226236934.5378.7.camel@dax.rpnet.com>
-	<20081112184416.GA6234@denix.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: RFC: Add http_proxy and ftp_proxy to BitBake white list
+	Thu, 13 Nov 2008 10:39:08 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 3C19C16DF7B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2008 10:45:39 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 05B2A2A41A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2008 10:37:07 +0100 (CET)
+MIME-Version: 1.0
+Date: Thu, 13 Nov 2008 10:37:06 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF524@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF4CE@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] OXE810 support is coming soon
+Thread-Index: Ack9pJDr0Yfy41TdSNatwJY/6wydpAHzV+CA
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF4CE@hiob.intern.dresearch.de>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: OXE810 support is coming soon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,56 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2008 07:30:53 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 13 Nov 2008 09:39:08 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Nov 12, 2008 at 01:44:16PM -0500, Denys Dmytriyenko wrote:
-> On Sun, Nov 09, 2008 at 01:22:14PM +0000, Richard Purdie wrote:
-> > For various reasons I've now had some experience of using bitbake behind
-> > some pretty strict proxy setups. The problem is that its not as simple
-> > as just setting http_proxy since some addresses need to go through the
-> > proxy but things like a local source mirror might be on an internal
-> > network and therefore shouldn't go through the proxy.
-> 
-> Why not use the standard $no_proxy environment variable to list addresses 
-> inside the firewall?
-> 
-> > I hence reworked things so you set HTTP_PROXY but can also set
-> > HTTP_PROXY_IGNORE which is a list of base urls which should not use the
-> > proxy. The fetcher code will only set http_proxy to HTTP_PROXY if the
-> > url is not in the ignore list.
-> > 
-> > FTP_PROXY and ftp_proxy works in a similar way.
-> 
-> Looks redundant, as it can be achieved like this:
-> 
-> $ export http_proxy=proxy.company.com:80
-> $ export no_proxy=company.com,interweb.net
-> 
-> > > So, is the idea the user has to set HTTP_PROXY in a conf file for wget
-> > > proxy to work?  What are the downsides to using http_proxy from the
-> > > environment?  At any rate, it seems like we have some inconsistencies
-> > > in the various fetcher methods.
-> > 
-> > The idea is the user sets HTTP_PROXY and optionally HTTP_PROXY_IGNORE to
-> > make http proxying work. I'm planning to make bitbake ignore http_proxy
-> > from the environment due to the problems is causes with mirror servers
-> > behind the proxy.
-> > 
-> > Hopefully this clears up the intent of the patches, the improvements are
-> > based on real world usage problems.
-> 
-> Even though I'd prefer it to be fixed properly with 15-year-old http_proxy and 
-> no_proxy environment variables, it does not matter too much, as long as any 
-> kind of http/ftp proxy support is merged into upstream BitBake, please. :) 
-> Thanks.
-
-And speaking of proxies - since recently you removed GIT_PROXY_COMMAND from 
-the list of exported variables, what's the correct method of using Git behind 
-the proxy with BitBake?
-
--- 
-Denys
+PiBJJ20gcGxhbm5pbmcgdG8gbWFrZSBPWEU4MTAgbWFjaGluZSBzdXBwb3J0IGF2YWlsYWJsZSBm
+b3IgdGhlIA0KPiBjb21tdW5pdHkgaW4gYSBmZXcgZGF5cyAoaSdtIHdhaXRpbmcgZm9yIHNvbWUg
+ZmVlZGJhY2sgZnJvbSANCj4gT3hmb3JkIFNlbWljb25kdWN0b3JzIGJlZm9yZSkuDQoNCkV2ZXJ5
+dGhpbmcgaXMgcmVhZHkgbm93IGZvciB0aGUgY29tbXVuaXR5LiA6KQ0KDQo+IE5vdyBteSBxdWVz
+dGlvbiBpcywgd2hhdCdzIHRoZSBwcmVmZXJyZWQgd2F5IHRvIGRvIHRoaXMgKGkndmUgDQo+IG5v
+IGdpdCBjb21taXQgYWNjZXNzIHlldCk/DQo+IA0KPiBUaGUgd2lraSBzYXlzICJBc3BpcmluZyBk
+ZXZlbG9wZXJzIGFyZSBlbmNvdXJhZ2VkIHRvIHJlcXVlc3QgDQo+IGEgcGVyc29uYWwgZ2l0IHRy
+ZWUgd2hlcmUgdGhleSBjYW4gc3RvcmUgYW5kIHNoYXJlIGNoYW5nZXMuIA0KPiBUaGV5IGNhbiB0
+aGVuIHN1Ym1pdCB0aGVzZSBwYXRjaGVzIGZvciByZXZpZXcgb24gdGhlIG1haWxpbmcgDQo+IGxp
+c3QgYW5kIHdoZW4gcmVhZHksIHNvbWVvbmUgd2l0aCBjb21taXQgcmlnaHRzIGNhbiBtZXJnZSBv
+ciANCj4gaWYgbmVlZGVkIGNoZXJyeSBwaWNrIHRoZSBjaGFuZ2VzIGludG8gdGhlIG1haW4gZGV2
+ZWxvcG1lbnQgYnJhbmNoLiINCj4gDQo+IFRoYXQgc291bmRzIE9LIGZvciBtZS4gQnV0IGkgbWlz
+cyBhIGRlc2NyaXB0aW9uICpob3cqIHRvIGRvIA0KPiBhbGwgdGhhdCAoc29ycnksIGknbSBhIENW
+UywgU1ZOICYgQ28uIHVzZXIvYWRtaW4gZm9yIGEgbG9uZyANCj4gdGltZSwgYnV0IGknbSBub3Qg
+dGhhdCBmYW1pbGlhciB3aXRoIHRoZSBnaXQgcGhpbG9zb3BoeSkuIEhvdyANCj4gdG8gY3JlYXRl
+IHRoaXMgcGVyc29uYWwgdHJlZT8gT3IgbWVhbnMgInRyZWUiIGEgImJyYW5jaCIgDQo+IGhlcmU/
+IEhvdyB0byBrZWVwIHRoaXMgdHJlZS9icmFuY2ggdXAgdG8gZGF0ZSBmcm9tIHRoZSBkZXYgDQo+
+IGJyYW5jaD8gSG93IHRvIHN1Ym1pdCB0aGUgcGF0Y2hlcyB0byB0aGUgbWFpbGluZyBsaXN0PyAu
+Li4/DQoNClNvIGhlcmV3aXRoIGkgcmVxdWVzdCAiYSBwZXJzb25hbCBnaXQgdHJlZSIgKGNvdWxk
+IGJlIG5hbWVkIG94ZTgxMCkgZm9yIHRoaXMgc3R1ZmYgb3IgYW4gYWx0ZXJuYXRpdmUgaW5zdHJ1
+Y3Rpb24gaG93IHRvIGNvbnRpbnVlLg0KDQpTdGVmZmVuDQo=
 
 
