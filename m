@@ -1,26 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1L0hmU-0004Nh-6F
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <otavio@freedom.ind.br>) id 1L0ind-0002EC-B2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Nov 2008 20:23:06 +0100
-Received: (qmail invoked by alias); 13 Nov 2008 19:21:00 -0000
-Received: from p54BD81C9.dip0.t-ipconnect.de (EHLO [192.168.178.34])
-	[84.189.129.201]
-	by mail.gmx.net (mp055) with SMTP; 13 Nov 2008 20:21:00 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX19xgGhTq+Fx2Ao5xda/u1FM+mLSY86w/qcKtiMSJX
-	dauNAe+ZToTElZ
-Message-ID: <491C7E1A.2020308@gmx.de>
-Date: Thu, 13 Nov 2008 20:20:58 +0100
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
-MIME-Version: 1.0
+	Thu, 13 Nov 2008 21:28:21 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id DDA23401F3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2008 16:27:06 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 3FC7AC1F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2008 18:26:16 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id ABCEA61005E; Thu, 13 Nov 2008 18:22:30 -0200 (BRST)
 To: openembedded-devel@lists.openembedded.org
-References: <49251.80.246.32.33.1226575168.squirrel@intern.netexpress.de>	<491C1379.2090404@gmx.de>
-	<87hc6b4njt.fsf@neumann.lab.ossystems.com.br>
-In-Reply-To: <87hc6b4njt.fsf@neumann.lab.ossystems.com.br>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.73
+References: <49251.80.246.32.33.1226575168.squirrel@intern.netexpress.de>
+	<491C1379.2090404@gmx.de> <87hc6b4njt.fsf@neumann.lab.ossystems.com.br>
+	<491C7E1A.2020308@gmx.de>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Thu, 13 Nov 2008 18:22:30 -0200
+In-Reply-To: <491C7E1A.2020308@gmx.de> (Thomas Kunze's message of "Thu\,
+	13 Nov 2008 20\:20\:58 +0100")
+Message-ID: <87od0jxto9.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+MIME-Version: 1.0
 Subject: Re: Issues with the system startup when the IMAGE_TYPE is	squashfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,32 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2008 19:23:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Nov 2008 20:28:21 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Otavio Salvador schrieb:
-> Thomas Kunze <thommycheck@gmx.de> writes:
->
->   
->> I did this some time ago: http://bugs.openembedded.net/show_bug.cgi?id=3714
->> I guess you can do something like this with /etc/volatile.cache too.
->>     
->
->   
-I don't have time for working on OE atm.
-> Are you interested in making the changes that were suggest in the bug
-> report to allow us to merge it?
->
->  - move it to update-modules-cross
->   
-This is just a simple rename.
->  - make it a distro option; not a requirement
->
->   
-I don't agree with that. It really don't see how this patch could break 
-images. If it works I see no reason why any distro doesn't want to have 
-this.
+Thomas Kunze <thommycheck@gmx.de> writes:
 
+> This is just a simple rename.
+>>  - make it a distro option; not a requirement
+>>
+>>   
+> I don't agree with that. It really don't see how this patch could
+> break images. If it works I see no reason why any distro doesn't want
+> to have this.
+
+This is a behaviour change and before making it a requirement it needs
+to be tested.
+
+Personally I also see no reason for it to break images but it is
+always better be safe then sorry.
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
