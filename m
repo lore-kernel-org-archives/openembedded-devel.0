@@ -1,22 +1,34 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1L0fwb-0000Lo-07
-	for openembedded-devel@openembedded.org; Thu, 13 Nov 2008 18:25:25 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx01.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1L0fua-0006is-9C
-	for openembedded-devel@openembedded.org; Thu, 13 Nov 2008 11:23:20 -0600
-Message-ID: <491C626D.3040703@dls.net>
-Date: Thu, 13 Nov 2008 11:22:53 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.17) Gecko/20080914 Thunderbird/2.0.0.17 Mnenhy/0.7.5.666
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L0gWB-00018F-UK
+	for openembedded-devel@openembedded.org; Thu, 13 Nov 2008 19:02:11 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L0gU9-0000Ah-6x
+	for openembedded-devel@openembedded.org; Thu, 13 Nov 2008 18:00:05 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 13 Nov 2008 18:00:05 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 13 Nov 2008 18:00:05 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 13 Nov 2008 18:59:54 +0100
+Message-ID: <gfhpuq$ntq$1@ger.gmane.org>
 References: <1226237296-11012-1-git-send-email-dbaryshkov@gmail.com>	<gf76q2$le2$1@ger.gmane.org>
 	<49184199.90100@balister.org>
 	<200811131743.18880.openembedded@haerwu.biz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081112 Shredder/3.0b1pre
 In-Reply-To: <200811131743.18880.openembedded@haerwu.biz>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [PATCH] checksums.ini: correct wrong checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,22 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2008 17:25:25 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Nov 2008 18:02:12 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Marcin Juszkiewicz wrote:
-> I have 1212 new entries for checksums.ini file. Do you want 1212 commits 
+On 13-11-2008 17:43, Marcin Juszkiewicz wrote:
+> Monday 10 of November 2008 15:13:45 Philip Balister napisał(a):
+>
+>> I'd like to see one commit per checksum change with the details in
+>> the commit message. This we we can easily find when I package
+>> checksum changed. This way we can easily identifu when the source
+>> changed but the version number did not.
+>
+> I have 1212 new entries for checksums.ini file. Do you want 1212 commits
 > or just one?
+>
+> How I got such amount? Simple - account on machine with FastEthernet
+> hooked to the Internet + some hours of shell/bitbake work:
 
-Thanks for doing this work!  Committing this will dramatically cut down
-the frequency of commits to the checksums.ini file going forward.
+It got upgraded to gigabit a while ago :)
 
-My opinion is that this is the sort of situation where the rules have to
-bend to suit the size of the change.
+regards,
 
-I vote this commits directly to the dev branch in a single commit.
+Koen
 
-Mike (mwester)
 
 
