@@ -1,25 +1,37 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1L0agH-00033t-QN
+Received: from [74.125.92.150] (helo=qw-out-1920.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1L0cto-0007PM-5e
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Nov 2008 12:48:13 +0100
-Received: (qmail invoked by alias); 13 Nov 2008 11:46:09 -0000
-Received: from p57BB7BEA.dip.t-dialin.net (EHLO [192.168.2.3]) [87.187.123.234]
-	by mail.gmx.net (mp026) with SMTP; 13 Nov 2008 12:46:09 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX18t9LZaFK4t/DKfziLbItH1WRy/Iz0fwcN43dSAWj
-	t3WPSudSZ2kPAe
-Message-ID: <491C1379.2090404@gmx.de>
-Date: Thu, 13 Nov 2008 12:46:01 +0100
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
-MIME-Version: 1.0
+	Thu, 13 Nov 2008 15:10:20 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so550519qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2008 06:08:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=JL6Zblo5MkUcsD1XPIlQWrHUHmCWxBMM3WWZCk0Di2k=;
+	b=NiDqTMgXsTT5vACsiBYP0qxFz1IOJGKp4oxYIq8F2rGiarSp/9tLRfyAkwXmMKyyf2
+	O84G5p/3alBuNsgdDCn5wMHIgbWisyFMqMALgPFhS8a97+31jFZcNw0iU816CVB7yXGM
+	szJP4Jpux2KpLWYqr1r8eLNhBGxHroSXKsB6E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=DpmnYyk606yaDvP0/MHAFtjaKbqks7OOcQOzkaOE6PWe91HqAHch5a4QHMMWwSjys2
+	t1gnqSjb6heTixTF4RtDqQQ/e7CSiZedOB+WKOfenfRqFath7eX45FuqiDX/Be/3lWq4
+	u9CWe6XijxLKCP5aQLLRvRtaj23I/MztH6PlY=
+Received: by 10.214.241.8 with SMTP id o8mr11087946qah.360.1226585297282;
+	Thu, 13 Nov 2008 06:08:17 -0800 (PST)
+Received: by 10.214.12.10 with HTTP; Thu, 13 Nov 2008 06:08:17 -0800 (PST)
+Message-ID: <c384c5ea0811130608v47862518j845053b4f3291958@mail.gmail.com>
+Date: Thu, 13 Nov 2008 15:08:17 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <49251.80.246.32.33.1226575168.squirrel@intern.netexpress.de>
-In-Reply-To: <49251.80.246.32.33.1226575168.squirrel@intern.netexpress.de>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.6
-Subject: Re: Issues with the system startup when the IMAGE_TYPE is squashfs
+In-Reply-To: <200811121733.59749.gerwin@vanderkruis.net>
+MIME-Version: 1.0
+References: <200811121733.59749.gerwin@vanderkruis.net>
+Subject: Re: Transferring images to flash avr32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,54 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2008 11:48:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 13 Nov 2008 14:10:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Christian Pössinger schrieb:
-> Hello,
->
-> I'm currently building a rootfs that will be stored in a squashfs
-> container. The file is properly created by OpenEmbedded, but I noticed
-> some issues:
->
-> First of all, when I boot an OE generated rootfs for the first time, a
-> file called /etc/volatile.cache will be generated. As of the fact that
-> squashfs is read-only this file can't be created.
->
-> The second issue comes with the kernel modules. Again, the first system
-> startup will create the modules.dep file inside the /lib/modules/$(uname
-> -a) directory. But as stated before, this is not possible on a read-only
-> filesystem.
->
->   
-I did this some time ago: http://bugs.openembedded.net/show_bug.cgi?id=3714
-I guess you can do something like this with /etc/volatile.cache too.
-> Is there any way within OpenEmbedded to create those files before the
-> actual rootfs image is packed?
->
->
-> Best regards,
->
-> Christian Pössinger
-> Software Development
->
-> Mixed Mode GmbH
-> Lochhamer Schlag 17
-> D-82166 Gräfelfing/München
-> Tel.        +49 / 89 / 89 86 8-200
-> Fax        +49 / 89 / 89 86 8-222
-> Mobil        +49 / 172 /
-> http://www.mixed-mode.de
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->   
+Gerwin,
 
+On Wed, Nov 12, 2008 at 5:33 PM, Gerwin van der Kruis
+<gerwin@vanderkruis.net> wrote:
+> I managed to succesfully compile the images for avr32 .
+>
+> I want to use tftp and u-boot to boot the images on my ATNGW100 board.
+>
+> Is there somewhere a manual how to put the images on the board ?
+>
+What is your starting point?
+
+Do you have an existing u-boot in FlashROM?
+Do you have a JTAG programmer (the Atmel specific programming device,
+cannot remember its name, it's blue-ish).
+
+Regards,
+-- 
+Leon
 
 
