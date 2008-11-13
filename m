@@ -1,30 +1,46 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [145.253.133.146] (helo=miraculix.pixel.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1L0YfM-0008SL-Cc
+	(envelope-from <poessinger@mixed-mode.de>) id 1L0aGx-0002H2-Dz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Nov 2008 10:39:08 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 3C19C16DF7B
+	Thu, 13 Nov 2008 12:22:03 +0100
+Received: from encryptix.pixel.de ([145.253.132.115])
+	by miraculix.pixel.de with smtp (Exim 4.50) id 1L0aEx-0001ax-ON
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Nov 2008 12:19:59 +0100
+Received: from encryptix.pixel.de (localhost [127.0.0.1])
+	by encryptix.pixel.de (Postfix) with ESMTP id A0F2887825
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2008 10:45:39 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 05B2A2A41A0
+	Thu, 13 Nov 2008 12:19:29 +0100 (CET)
+Received: from verleihnix.pixel.de (verleihnix.pixel.de [145.253.132.195])
+	by encryptix.pixel.de (Postfix) with ESMTP id 799CE87824
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2008 10:37:07 +0100 (CET)
+	Thu, 13 Nov 2008 12:19:29 +0100 (CET)
+Received: from verleihnix (verleihnix.pixel.de [145.253.132.195])
+	by verleihnix.pixel.de (Postfix) with ESMTP id 8C2BD8013C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2008 12:19:28 +0100 (CET)
+Received: from automatix.pixel.de (145.253.132.220)
+	by verleihnix (F-Secure/fsigk_smtp/549/verleihnix);
+	Thu, 13 Nov 2008 12:19:28 +0100 (CET)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/549/verleihnix)
+Received: from 80.246.32.33 (SquirrelMail authenticated user cpo)
+	by intern.netexpress.de with HTTP;
+	Thu, 13 Nov 2008 12:19:28 +0100 (CET)
+Message-ID: <49251.80.246.32.33.1226575168.squirrel@intern.netexpress.de>
+Date: Thu, 13 Nov 2008 12:19:28 +0100 (CET)
+From: Christian =?iso-8859-1?Q?P=F6ssinger?= <poessinger@mixed-mode.de>
+To: openembedded-devel@lists.openembedded.org
+User-Agent: SquirrelMail/1.4.4
 MIME-Version: 1.0
-Date: Thu, 13 Nov 2008 10:37:06 +0100
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF524@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF4CE@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] OXE810 support is coming soon
-Thread-Index: Ack9pJDr0Yfy41TdSNatwJY/6wydpAHzV+CA
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF4CE@hiob.intern.dresearch.de>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: OXE810 support is coming soon
+X-Priority: 3 (Normal)
+Importance: Normal
+X-TBoneOriginalFrom: Christian =?iso-8859-1?Q?P=F6ssinger?=
+	<poessinger@mixed-mode.de>
+X-TBoneOriginalTo: openembedded-devel@lists.openembedded.org
+X-TBoneDomainSigned: false
+X-SA-Do-Not-Run: Yes
+X-SA-Exim-Scanned: No (on miraculix.pixel.de); SAEximRunCond expanded to false
+Subject: Issues with the system startup when the IMAGE_TYPE is squashfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,32 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2008 09:39:08 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 13 Nov 2008 11:22:04 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-PiBJJ20gcGxhbm5pbmcgdG8gbWFrZSBPWEU4MTAgbWFjaGluZSBzdXBwb3J0IGF2YWlsYWJsZSBm
-b3IgdGhlIA0KPiBjb21tdW5pdHkgaW4gYSBmZXcgZGF5cyAoaSdtIHdhaXRpbmcgZm9yIHNvbWUg
-ZmVlZGJhY2sgZnJvbSANCj4gT3hmb3JkIFNlbWljb25kdWN0b3JzIGJlZm9yZSkuDQoNCkV2ZXJ5
-dGhpbmcgaXMgcmVhZHkgbm93IGZvciB0aGUgY29tbXVuaXR5LiA6KQ0KDQo+IE5vdyBteSBxdWVz
-dGlvbiBpcywgd2hhdCdzIHRoZSBwcmVmZXJyZWQgd2F5IHRvIGRvIHRoaXMgKGkndmUgDQo+IG5v
-IGdpdCBjb21taXQgYWNjZXNzIHlldCk/DQo+IA0KPiBUaGUgd2lraSBzYXlzICJBc3BpcmluZyBk
-ZXZlbG9wZXJzIGFyZSBlbmNvdXJhZ2VkIHRvIHJlcXVlc3QgDQo+IGEgcGVyc29uYWwgZ2l0IHRy
-ZWUgd2hlcmUgdGhleSBjYW4gc3RvcmUgYW5kIHNoYXJlIGNoYW5nZXMuIA0KPiBUaGV5IGNhbiB0
-aGVuIHN1Ym1pdCB0aGVzZSBwYXRjaGVzIGZvciByZXZpZXcgb24gdGhlIG1haWxpbmcgDQo+IGxp
-c3QgYW5kIHdoZW4gcmVhZHksIHNvbWVvbmUgd2l0aCBjb21taXQgcmlnaHRzIGNhbiBtZXJnZSBv
-ciANCj4gaWYgbmVlZGVkIGNoZXJyeSBwaWNrIHRoZSBjaGFuZ2VzIGludG8gdGhlIG1haW4gZGV2
-ZWxvcG1lbnQgYnJhbmNoLiINCj4gDQo+IFRoYXQgc291bmRzIE9LIGZvciBtZS4gQnV0IGkgbWlz
-cyBhIGRlc2NyaXB0aW9uICpob3cqIHRvIGRvIA0KPiBhbGwgdGhhdCAoc29ycnksIGknbSBhIENW
-UywgU1ZOICYgQ28uIHVzZXIvYWRtaW4gZm9yIGEgbG9uZyANCj4gdGltZSwgYnV0IGknbSBub3Qg
-dGhhdCBmYW1pbGlhciB3aXRoIHRoZSBnaXQgcGhpbG9zb3BoeSkuIEhvdyANCj4gdG8gY3JlYXRl
-IHRoaXMgcGVyc29uYWwgdHJlZT8gT3IgbWVhbnMgInRyZWUiIGEgImJyYW5jaCIgDQo+IGhlcmU/
-IEhvdyB0byBrZWVwIHRoaXMgdHJlZS9icmFuY2ggdXAgdG8gZGF0ZSBmcm9tIHRoZSBkZXYgDQo+
-IGJyYW5jaD8gSG93IHRvIHN1Ym1pdCB0aGUgcGF0Y2hlcyB0byB0aGUgbWFpbGluZyBsaXN0PyAu
-Li4/DQoNClNvIGhlcmV3aXRoIGkgcmVxdWVzdCAiYSBwZXJzb25hbCBnaXQgdHJlZSIgKGNvdWxk
-IGJlIG5hbWVkIG94ZTgxMCkgZm9yIHRoaXMgc3R1ZmYgb3IgYW4gYWx0ZXJuYXRpdmUgaW5zdHJ1
-Y3Rpb24gaG93IHRvIGNvbnRpbnVlLg0KDQpTdGVmZmVuDQo=
+
+Hello,
+
+I'm currently building a rootfs that will be stored in a squashfs
+container. The file is properly created by OpenEmbedded, but I noticed
+some issues:
+
+First of all, when I boot an OE generated rootfs for the first time, a
+file called /etc/volatile.cache will be generated. As of the fact that
+squashfs is read-only this file can't be created.
+
+The second issue comes with the kernel modules. Again, the first system
+startup will create the modules.dep file inside the /lib/modules/$(uname
+-a) directory. But as stated before, this is not possible on a read-only
+filesystem.
+
+Is there any way within OpenEmbedded to create those files before the
+actual rootfs image is packed?
+
+
+Best regards,
+
+Christian P=F6ssinger
+Software Development
+
+Mixed Mode GmbH
+Lochhamer Schlag 17
+D-82166 Gr=E4felfing/M=FCnchen
+Tel.        +49 / 89 / 89 86 8-200
+Fax        +49 / 89 / 89 86 8-222
+Mobil        +49 / 172 /
+http://www.mixed-mode.de
+
+
+
 
 
