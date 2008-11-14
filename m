@@ -1,31 +1,21 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1L0vFe-0002tQ-Rs
+	(envelope-from <daniel@totalueberwachung.de>) id 1L0ylk-0003P9-Mf
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Nov 2008 10:46:06 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 155D316E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2008 10:52:36 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 1CCF12A41E8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2008 10:44:01 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 14 Nov 2008 10:44:01 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF52B@hiob.intern.dresearch.de>
-In-Reply-To: <491D3DA5.5070503@gmx.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] OXE810 support
-Thread-Index: AclGN9BjF/SJofFKRDa4KucS2whj2AABZ0aw
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF52A@hiob.intern.dresearch.de>
-	<491D3DA5.5070503@gmx.net>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: OXE810 support
+	Fri, 14 Nov 2008 14:31:28 +0100
+Received: from elara.dyn.totalueberwachung.de (unknown [192.168.0.61])
+	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by thebe.totalueberwachung.de (Postfix) with ESMTP id 0511BD82B1;
+	Fri, 14 Nov 2008 14:29:22 +0100 (CET)
+Date: Fri, 14 Nov 2008 14:29:17 +0100
+From: Daniel Willmann <daniel@totalueberwachung.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>
+X-Mailer: Claws Mail 3.5.0 (GTK+ 2.12.11; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Cc: niklas.coding@gmail.com, Julien Cassignol <ainulindale@gmail.com>
+Subject: Commit access for SHR guys
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,15 +29,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Nov 2008 09:46:07 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Fri, 14 Nov 2008 13:31:28 -0000
+X-Groupsio-MsgNum: 6596
+Content-Type: multipart/signed; boundary="Sig_/T/jvUrLwVv=tny6z/ilYy38";
+	protocol="application/pgp-signature"; micalg=PGP-SHA1
+
+--Sig_/T/jvUrLwVv=tny6z/ilYy38
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
-> please open a bug report and attach some of your files there. E.g.
-> the machine configuration.
+Hi,
 
-I did, see http://bugs.openembedded.net/show_bug.cgi?id=3D4827
+I want to propose that the SHR guys (Ainulindale, quickdev) get commit
+access to OE. They already manage their SHR recipes on an overlay here:
+http://shr.bearstech.com/git/?p=3Dshr-overlay.git;a=3Dsummary
+and it would be nice to get the recipies into OE directly.
 
+Regards,
+Daniel Willmann
 
+--Sig_/T/jvUrLwVv=tny6z/ilYy38
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.9 (GNU/Linux)
+
+iEYEARECAAYFAkkdfS8ACgkQZ2fhlIqbZ1gsGQCeKvPjkWGaQ5T4D384Am0CILmi
+m24An13pokyXsG69R+7p3Joy9LzLFD+d
+=u4Su
+-----END PGP SIGNATURE-----
+
+--Sig_/T/jvUrLwVv=tny6z/ilYy38--
