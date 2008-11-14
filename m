@@ -1,22 +1,37 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [209.85.221.10] (helo=mail-qy0-f10.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1L17sz-0005G0-P8
+	(envelope-from <leon.woestenberg@gmail.com>) id 1L1830-000090-H5
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Nov 2008 00:15:34 +0100
-Received: from [92.117.2.142] (helo=tamarin.localnet)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1L17qu-0003XH-Q7
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Nov 2008 00:13:25 +0100
-From: Holger Freyther <zecke@selfish.org>
+	Sat, 15 Nov 2008 00:25:54 +0100
+Received: by qyk3 with SMTP id 3so84199qyk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Nov 2008 15:23:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=1n6mshrr1SQK2oAlfvzdLhP1cWJ1NhslIiOJZDoXQN8=;
+	b=cQ+GL9OFm70d4jJkQgaCTXaAkmpyzWYOfaju7u1/+2UpvzJtl70kiWpOwiXunROYnP
+	ScpxNh7mzBehOnSovKrXlIEVypeL9bnDkEeKejyxwKVGM3PsNuAVkohzTVTZtsuiSoR0
+	9cAG0Z1n0LcpY/xErti1wLEaiXsTCD2tZ7bFM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=PATVr+zHzFdnXhBtsR5upiGNHMMt+xxzN1/FMkKUADEw8cJhja6E82LvdiLRWX7QUZ
+	qPpPkEoLRC3aHY9kcQ6SBsA9F2l3f/zeor8xbKNr2lR0B0RRpm+ERpBtvLfZwrFsYQqL
+	LQnaplkH5WChbOi4gQ89fdHPvehaJSO0nm48k=
+Received: by 10.214.79.7 with SMTP id c7mr1581763qab.357.1226705021736;
+	Fri, 14 Nov 2008 15:23:41 -0800 (PST)
+Received: by 10.214.12.10 with HTTP; Fri, 14 Nov 2008 15:23:41 -0800 (PST)
+Message-ID: <c384c5ea0811141523t57c346f4o87bd43c623f2f892@mail.gmail.com>
+Date: Sat, 15 Nov 2008 00:23:41 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Nov 2008 00:04:50 +0100
-User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
+In-Reply-To: <200811150004.50508.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200811150004.50508.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.117.2.142
-Subject: [gstreamer] Enabling binary cache (instead of the xml one)
+References: <200811150004.50508.zecke@selfish.org>
+Subject: Re: [gstreamer] Enabling binary cache (instead of the xml one)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,62 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Nov 2008 23:15:34 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Fri, 14 Nov 2008 23:25:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hey Guys,
+Hey,
 
-I wonder if we have ever considered in using the experimental gstreamer 
-feature to build it with "--enable-binary-registry".
+On Sat, Nov 15, 2008 at 12:04 AM, Holger Freyther <zecke@selfish.org> wrote:
+> I wonder if we have ever considered in using the experimental gstreamer
+> feature to build it with "--enable-binary-registry".
+>
+Good find.
 
-This is not changing the way the registry is working, the result is simply 
-stored in binary and not xml. This avoids parsing on start.
+> what do you think? Risk and use an experimental feature (it is using mmap so
+> the risk of SIGBUS is there)
+>
+Should work, or be fixed elsewhere(tm).
 
-For devices like the neo (with incredible slow flash speed) avoiding stating 
-all plugins would (changing the way the registry is working) would be a lot 
-better...
++1
 
-what do you think? Risk and use an experimental feature (it is using mmap so 
-the risk of SIGBUS is there)
-
-	z.
-
-
-
-Results of micro benchmark on my neo:
-
-Binary cache:
-
-# Building cache
-Total count: 119 plugins, 351 features
-real    0m 12.36s
-user    0m 5.71s
-sys 0m 5.72s
-
-# Cached
-Total count: 119 plugins, 351 features
-real    0m 1.74s
-user    0m 1.03s
-sys 0m 0.35s
-
-
-XML Cache:
-# Building cache
-Total count: 119 plugins, 351 features
-real    0m 16.42s
-user    0m 6.94s
-sys 0m 9.19s
-
-
-# Cached
-Total count: 119 plugins, 351 features
-real    0m 1.87s
-user    0m 1.28s
-sys 0m 0.41s
-root@om-gta02:~# 
-
+Regards,
+-- 
+Leon
 
 
