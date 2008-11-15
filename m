@@ -1,33 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L1J0n-0001mb-7u
-	for openembedded-devel@openembedded.org; Sat, 15 Nov 2008 12:08:21 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L1Iyg-0006Rj-12
-	for openembedded-devel@openembedded.org; Sat, 15 Nov 2008 11:06:10 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 15 Nov 2008 11:06:10 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 15 Nov 2008 11:06:10 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 15 Nov 2008 12:06:02 +0100
-Message-ID: <gfmaeq$mr9$1@ger.gmane.org>
-References: <200811150004.50508.zecke@selfish.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081113 Shredder/3.0b1pre
-In-Reply-To: <200811150004.50508.zecke@selfish.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [gstreamer] Enabling binary cache (instead of the xml one)
+	(envelope-from <mickey@vanille-media.de>) id 1L1JcL-0002Dt-P1
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Nov 2008 12:47:09 +0100
+Received: from andromeda.vanille.de (e180149158.adsl.alicedsl.de
+	[85.180.149.158])
+	by drlauer-research.com (Postfix) with ESMTP id 3F45258414C;
+	Sat, 15 Nov 2008 13:00:26 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 15 Nov 2008 12:44:54 +0100
+User-Agent: KMail/1.9.10
+References: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>
+In-Reply-To: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>
+MIME-Version: 1.0
+Message-Id: <200811151244.55149.mickey@vanille-media.de>
+Cc: niklas.coding@gmail.com, Julien Cassignol <ainulindale@gmail.com>
+Subject: Re: Commit access for SHR guys
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,70 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Nov 2008 11:08:21 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 15 Nov 2008 11:47:09 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 15-11-08 00:04, Holger Freyther wrote:
-> Hey Guys,
+Am Friday 14 November 2008 14:29:17 schrieb Daniel Willmann:
+> Hi,
 >
-> I wonder if we have ever considered in using the experimental gstreamer
-> feature to build it with "--enable-binary-registry".
->
-> This is not changing the way the registry is working, the result is simply
-> stored in binary and not xml. This avoids parsing on start.
->
-> For devices like the neo (with incredible slow flash speed) avoiding stating
-> all plugins would (changing the way the registry is working) would be a lot
-> better...
->
-> what do you think? Risk and use an experimental feature (it is using mmap so
-> the risk of SIGBUS is there)
+> I want to propose that the SHR guys (Ainulindale, quickdev) get commit
+> access to OE. They already manage their SHR recipes on an overlay here:
+> http://shr.bearstech.com/git/?p=shr-overlay.git;a=summary
+> and it would be nice to get the recipies into OE directly.
 
-Is it using read-only mmap or read-write mmap? If it's the latter then 
-people using jffs2 are out of luck :(
++1. It looks like they know what they're doing. Quite a number of platforms 
+could benefit from their work on SHR.
 
-regards,
+Cheers,
 
-Koen
-
->
-> 	z.
->
->
->
-> Results of micro benchmark on my neo:
->
-> Binary cache:
->
-> # Building cache
-> Total count: 119 plugins, 351 features
-> real    0m 12.36s
-> user    0m 5.71s
-> sys 0m 5.72s
->
-> # Cached
-> Total count: 119 plugins, 351 features
-> real    0m 1.74s
-> user    0m 1.03s
-> sys 0m 0.35s
->
->
-> XML Cache:
-> # Building cache
-> Total count: 119 plugins, 351 features
-> real    0m 16.42s
-> user    0m 6.94s
-> sys 0m 9.19s
->
->
-> # Cached
-> Total count: 119 plugins, 351 features
-> real    0m 1.87s
-> user    0m 1.28s
-> sys 0m 0.41s
-> root@om-gta02:~#
-
-
+:M:
 
 
