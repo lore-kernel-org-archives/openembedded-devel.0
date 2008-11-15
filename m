@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1L1MYN-0006DM-48
-	for openembedded-devel@openembedded.org; Sat, 15 Nov 2008 15:55:15 +0100
-Received: (qmail 16683 invoked by uid 1003); 15 Nov 2008 14:53:01 -0000
+	(envelope-from <philip@balister.org>) id 1L1MYp-0006Do-Sj
+	for openembedded-devel@openembedded.org; Sat, 15 Nov 2008 15:55:44 +0100
+Received: (qmail 15126 invoked by uid 1003); 15 Nov 2008 14:53:30 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 15 Nov 2008 14:53:00 -0000
-Message-ID: <491EE24B.20809@balister.org>
-Date: Sat, 15 Nov 2008 09:52:59 -0500
+	by mail.geekisp.com with SMTP; 15 Nov 2008 14:53:29 -0000
+Message-ID: <491EE268.40000@balister.org>
+Date: Sat, 15 Nov 2008 09:53:28 -0500
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>
-	<200811151244.55149.mickey@vanille-media.de>
-In-Reply-To: <200811151244.55149.mickey@vanille-media.de>
-Subject: Re: Commit access for SHR guys
+References: <20081104005512.GA12988@denix.org> <gfktqs$nbt$1@ger.gmane.org>
+	<200811151245.39960.mickey@vanille-media.de>
+In-Reply-To: <200811151245.39960.mickey@vanille-media.de>
+Subject: Re: hal-0.5.11 fails with external toolchain/SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,49 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Nov 2008 14:55:15 -0000
-X-Groupsio-MsgNum: 6608
+X-List-Received-Date: Sat, 15 Nov 2008 14:55:44 -0000
+X-Groupsio-MsgNum: 6609
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms070600010501020601050107"
+	micalg=sha1; boundary="------------ms060301000304040501000009"
 
---------------ms070600010501020601050107
+--------------ms060301000304040501000009
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Michael 'Mickey' Lauer wrote:
-> Am Friday 14 November 2008 14:29:17 schrieb Daniel Willmann:
->> Hi,
->>
->> I want to propose that the SHR guys (Ainulindale, quickdev) get commit
->> access to OE. They already manage their SHR recipes on an overlay here:
->> http://shr.bearstech.com/git/?p=shr-overlay.git;a=summary
->> and it would be nice to get the recipies into OE directly.
+> Am Friday 14 November 2008 23:24:28 schrieb Koen Kooi:
+>> On 04-11-08 01:55, Denys Dmytriyenko wrote:
+>>> Hi,
+>> Can't we give Denys commit access? I've been fairly impressed with his
+>> work to get angstrom building using an external SDK.
 > 
-> +1. It looks like they know what they're doing. Quite a number of platforms 
-> could benefit from their work on SHR.
-
-What is SHR?
-
-I'm fine with them, provided the commit messages match the OE format :)
-
-Also, do you know if the follow the oe-dev list? I think people with 
-commit access should at least read the list to understand to group's 
-thinking as various issues come up.
-
-Philip
-
-> 
-> Cheers,
-> 
-> :M:
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> +1
 > 
 
---------------ms070600010501020601050107
++1
+
+--------------ms060301000304040501000009
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -123,17 +102,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTExNTE0
-NTI1OVowIwYJKoZIhvcNAQkEMRYEFGx3i8njSnKGtMD6YdZehrFKWOFoMFIGCSqGSIb3DQEJDzFF
+NTMyOFowIwYJKoZIhvcNAQkEMRYEFOONn2i5Bn0bdFhu+8aoMXivBiIBMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQApVkrqJi0GDF2VLObnohIAUq3j5khg8eV054YcEhmakt+xGh0c
-q7H1Zta0Ue4J3Cn0mFNb1csRqhX6vBzNusPe7hvQROePDPNiAz21nm+5XBiPpwe5+hfMTC8MpD3X
-xnXDhJRsvy59XkJFaPMEnpSysNlx34jJDLxcp1Q4WTgNW5Dx8P3BeJy59x1RsytEFtb+L6RBrYyo
-q5oozPSGNBtsuiOoXJnhYUHfviQQKup7ZsVxQZEDTnJrkU7drjChE5NDIRq9aQoYsBxkoE3IBqYR
-6o6GxExtrxUG2m41NaCFq9mpJ+7GINLkxEjc1mqPtKkM1PqTjYDVakT7uPC5I9SpAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQB/u9RuqGvL2rG2yNuyrDsRhsJsF91aZfj2cACt3beUOt2x89ES
+iusrAvvz2yM90U9ig+l2zhmtup4YA4EuqYJhI/9LqoXZekDbs67Jc40acIsDsfbKEScTZES8C2YV
+qHPagNC1tOyTr6o8gzDJwqUkjL9EP2Thi2Ztdh6lXNmO+cdGozLknCDzGmCMUI6lxfliMnSK/DgS
+2kg8qA+LirZCJZKFytJ7MA+xRNWk5oa05BN8kQDb/LSbLgqtKb20rfLrjK+vqE0/PgqJyoji2eEy
+gRIQMQU5RYhHKT83sRQBxlGGPqHojpjFPTbo3lKYRhbJvsFxUqD7r88DE7YRuVMTAAAAAAAA
 
---------------ms070600010501020601050107--
+--------------ms060301000304040501000009--
