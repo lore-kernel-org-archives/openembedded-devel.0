@@ -1,32 +1,33 @@
-Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1L1B1e-0003eu-9x
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Nov 2008 03:36:42 +0100
-Received: from internet.ossystems.com.br
-	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
-	by listas.ossystems.com.br (Postfix) with ESMTP id 961B1401F9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2008 22:35:25 -0200 (BRST)
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 2F3CEC275
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Nov 2008 00:34:31 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 2BDE861005E; Sat, 15 Nov 2008 00:30:45 -0200 (BRST)
-To: openembedded-devel@lists.openembedded.org
-References: <20081115005654.GA20517@denix.org>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Sat, 15 Nov 2008 00:30:44 -0200
-In-Reply-To: <20081115005654.GA20517@denix.org> (Denys Dmytriyenko's message
-	of "Fri\, 14 Nov 2008 19\:56\:54 -0500")
-Message-ID: <87myg1g1pn.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
-MIME-Version: 1.0
-Subject: Re: [RFC] Update git/git-native
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L1J0n-0001mb-7u
+	for openembedded-devel@openembedded.org; Sat, 15 Nov 2008 12:08:21 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L1Iyg-0006Rj-12
+	for openembedded-devel@openembedded.org; Sat, 15 Nov 2008 11:06:10 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 15 Nov 2008 11:06:10 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 15 Nov 2008 11:06:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 15 Nov 2008 12:06:02 +0100
+Message-ID: <gfmaeq$mr9$1@ger.gmane.org>
+References: <200811150004.50508.zecke@selfish.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081113 Shredder/3.0b1pre
+In-Reply-To: <200811150004.50508.zecke@selfish.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [gstreamer] Enabling binary cache (instead of the xml one)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +41,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Nov 2008 02:36:42 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 15 Nov 2008 11:08:21 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Denys Dmytriyenko <denis@denix.org> writes:
-
-> I'm not sure if there is some requirement to stick with 1.5.x version of git, 
-> if not the latest stable version is 1.6.0.4 - I am attaching patches for both 
-> just in case, with corresponding ticket #4835.
+On 15-11-08 00:04, Holger Freyther wrote:
+> Hey Guys,
 >
-> Please provide any comments.
+> I wonder if we have ever considered in using the experimental gstreamer
+> feature to build it with "--enable-binary-registry".
+>
+> This is not changing the way the registry is working, the result is simply
+> stored in binary and not xml. This avoids parsing on start.
+>
+> For devices like the neo (with incredible slow flash speed) avoiding stating
+> all plugins would (changing the way the registry is working) would be a lot
+> better...
+>
+> what do you think? Risk and use an experimental feature (it is using mmap so
+> the risk of SIGBUS is there)
 
-Well I'm more up to go with 1.6.0.4 for it so we have the latest
-version with all the latest bug fixes on it.
+Is it using read-only mmap or read-write mmap? If it's the latter then 
+people using jffs2 are out of luck :(
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+regards,
+
+Koen
+
+>
+> 	z.
+>
+>
+>
+> Results of micro benchmark on my neo:
+>
+> Binary cache:
+>
+> # Building cache
+> Total count: 119 plugins, 351 features
+> real    0m 12.36s
+> user    0m 5.71s
+> sys 0m 5.72s
+>
+> # Cached
+> Total count: 119 plugins, 351 features
+> real    0m 1.74s
+> user    0m 1.03s
+> sys 0m 0.35s
+>
+>
+> XML Cache:
+> # Building cache
+> Total count: 119 plugins, 351 features
+> real    0m 16.42s
+> user    0m 6.94s
+> sys 0m 9.19s
+>
+>
+> # Cached
+> Total count: 119 plugins, 351 features
+> real    0m 1.87s
+> user    0m 1.28s
+> sys 0m 0.41s
+> root@om-gta02:~#
+
+
 
 
