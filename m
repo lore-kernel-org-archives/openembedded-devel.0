@@ -1,33 +1,34 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1L1htw-0006Qk-JG
+	(envelope-from <stefan@datenfreihafen.org>) id 1L1j6N-0004TD-OP
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Nov 2008 14:42:56 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 4CF7A1417184
+	Sun, 16 Nov 2008 15:59:51 +0100
+Received: from p5b0350b7.dip.t-dialin.net ([91.3.80.183]
+	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1L1j49-0004mf-G2 by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Nov 2008 14:38:37 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vMnBZzPQRsjw
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Nov 2008 14:38:37 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 0F2431416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Nov 2008 14:38:36 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Sun, 16 Nov 2008 15:57:36 +0100
+Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1L1j5j-0007QZ-J2 for openembedded-devel@lists.openembedded.org;
+	Sun, 16 Nov 2008 15:59:11 +0100
+Date: Sun, 16 Nov 2008 15:59:11 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1226475337.4118.32.camel@utx.utx.cz>
-References: <1226433327.4417.10.camel@utx.utx.cz>
-	<1226442540.29923.0.camel@aquilonia>
-	<1226475337.4118.32.camel@utx.utx.cz>
-Date: Sun, 16 Nov 2008 14:40:38 +0100
-Message-Id: <1226842838.4912.13.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: glibc LC_COLLATE bug (was: openmoko OE devs: update	claws-mail and libetpan?)
+Message-ID: <20081116145911.GB14299@dodger.lab.datenfreihafen.org>
+References: <gfnf5u$r3j$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gfnf5u$r3j$1@ger.gmane.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: e-wm broken after yesterdays upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +42,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Nov 2008 13:42:56 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 16 Nov 2008 14:59:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Stanislav Brabec wrote:
-> Graeme Gregory wrote:
-> > On Tue, 2008-11-11 at 20:55 +0100, Stanislav Brabec wrote:
-> > 
-> > > 3) Add new versions to preferred-om-2008-versions.inc
-> > > 
-> > As claws maintainer and OM person please do this version.
-> 
-> Well, I naively expected that the latest version will work better.
+Hello.
 
-Updated in OE. claws-mail-3.6.1 should now build and work.
+Sorry for the delay. Having a cold I decided to have a releaxed weekend. Will
+take a deeper look next days if the stuff below does not help.
 
-The crash disappeared with
-http://www.thewildbeast.co.uk/claws-mail/bugzilla/show_bug.cgi?id=1773
+On Sat, 2008-11-15 at 22:32, Koen Kooi wrote:
+>
+> I just built and installed the updated e-wm and it refuses to start:
 
-I have also updated translation to the new menu system:
-http://www.thewildbeast.co.uk/claws-mail/bugzilla/show_bug.cgi?id=1774
+Installed means from the updated angstrom feed I guess?
 
-> And why it depends on LC_COLLATE? I have no idea.
+> [..]
+> ESTART: 0.20785 [0.00140] - ipc
+> INFO: E_IPC_SOCKET=/tmp/enlightenment-root/disp-:0.0-4494
+> ESTART: 0.21292 [0.00507] - font
+> ESTART: 0.21494 [0.00202] - theme
+> ESTART: 0.25406 [0.03912] - splash
+> ESTART: 0.25430 [0.00024] - test file format support
+> <<<< Enlightenment Error >>>>
+> Enlightenment found Evas can't load PNG files. Check Evas has PNG
+> loader support.
+>
+> E17: Begin shutdown procedure!
+>
+> But I have:
 
-The real bug is located deeply inside glibc:
+The only thing I could think about bringing such serious breakage could be the
+new dependency of all kind of e libs on eina. Can you please check if the lib is
+installed?
 
-g_utf8_collate("text", "file") returns 0 ("strings are equal").
+> Could the people that touched e-wm please make it work again?
 
-It happens only inside claws-mail context (e. g. toolbar_parse_item())
-and cannot be reproduced in a simple test case.
+Sure.
 
-Picking old LC_COLLATE file in my locale in /usr/lib/locale makes it
-working again => probably localedef tool is broken.
+As a sidenote. This was not rushed in without testing or review. I spent some
+good hours on reviewing it together with mickey, in his role as E maintainer in
+OE. We also decided to keep some more patches out until there is more time for
+review.
 
+And I of course tested it before pushing. Building and actually using it. No
+breakage here. But as I only tested with a complete new image and not with
+updating from a feed I may have messed up here. Should not happen though :(
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+If eina is installed in a matching version I would need the foolowing to track
+this down as I don't have the problem here:
 
+- Full x.log
+- Full strace
+- Full list of installed packages
+
+Thanks forthe time to look into this problem and let me know.
+
+regards
+Stefan Schmidt
 
 
