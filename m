@@ -1,25 +1,51 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [145.253.133.146] (helo=miraculix.pixel.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1L1xO6-0004zh-VL
+	(envelope-from <poessinger@mixed-mode.de>) id 1L1zp2-0005Xw-P0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 07:15:10 +0100
-Received: from gandalf.denix.org ([71.255.226.167]) by vms173003.mailsrvcs.net
-	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
-	with ESMTPA id <0KAG003V2RX0J1KA@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	17 Nov 2008 00:12:37 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id CBF3B6B83B5; Mon,
-	17 Nov 2008 01:12:35 -0500 (EST)
-Date: Mon, 17 Nov 2008 01:12:35 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <59e7e6f90811162118o68610184x6103071ebed9405d@mail.gmail.com>
+	Mon, 17 Nov 2008 09:51:04 +0100
+Received: from encryptix.pixel.de ([145.253.132.115])
+	by miraculix.pixel.de with smtp (Exim 4.50) id 1L1zml-0005Lq-Uz
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Nov 2008 09:48:43 +0100
+Received: from encryptix.pixel.de (localhost [127.0.0.1])
+	by encryptix.pixel.de (Postfix) with ESMTP id D5DD38782A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 09:48:13 +0100 (CET)
+Received: from verleihnix.pixel.de (verleihnix.pixel.de [145.253.132.195])
+	by encryptix.pixel.de (Postfix) with ESMTP id AEE6687829
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 09:48:13 +0100 (CET)
+Received: from verleihnix (verleihnix.pixel.de [145.253.132.195])
+	by verleihnix.pixel.de (Postfix) with ESMTP id 68CF480146
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 09:48:13 +0100 (CET)
+Received: from automatix.pixel.de (145.253.132.220)
+	by verleihnix (F-Secure/fsigk_smtp/549/verleihnix);
+	Mon, 17 Nov 2008 09:48:13 +0100 (CET)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/549/verleihnix)
+Received: from 80.246.32.33 (SquirrelMail authenticated user cpo)
+	by intern.netexpress.de with HTTP;
+	Mon, 17 Nov 2008 09:48:13 +0100 (CET)
+Message-ID: <30675.80.246.32.33.1226911693.squirrel@intern.netexpress.de>
+In-Reply-To: <87od0jxto9.fsf@neumann.lab.ossystems.com.br>
+References: <49251.80.246.32.33.1226575168.squirrel@intern.netexpress.de>
+	<491C1379.2090404@gmx.de> <87hc6b4njt.fsf@neumann.lab.ossystems.com.br>
+	<491C7E1A.2020308@gmx.de>
+	<87od0jxto9.fsf@neumann.lab.ossystems.com.br>
+Date: Mon, 17 Nov 2008 09:48:13 +0100 (CET)
+From: Christian =?iso-8859-1?Q?P=F6ssinger?= <poessinger@mixed-mode.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20081117061235.GA2741@denix.org>
-MIME-version: 1.0
-References: <59e7e6f90811161949k4020d983kf32263237b20bf9b@mail.gmail.com>
-	<59e7e6f90811162118o68610184x6103071ebed9405d@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: libgcrypt tries to link with host libc
+User-Agent: SquirrelMail/1.4.4
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+Importance: Normal
+X-TBoneOriginalFrom: Christian =?iso-8859-1?Q?P=F6ssinger?=
+	<poessinger@mixed-mode.de>
+X-TBoneOriginalTo: openembedded-devel@lists.openembedded.org
+X-TBoneDomainSigned: false
+X-SA-Do-Not-Run: Yes
+X-SA-Exim-Scanned: No (on miraculix.pixel.de); SAEximRunCond expanded to false
+Subject: Re: Issues with the system startup when the IMAGE_TYPE is	squashfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,42 +59,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 06:15:19 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 17 Nov 2008 08:51:04 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 16, 2008 at 11:18:49PM -0600, Mike Turquette wrote:
-> Hi all,
-> 
-> I'm attempting to write an external-csl-toolchain_2007q3-51 recipe for
-> Poky.  This uses Poky's POKYMODE mechanism which is why I've copied
-> the poky list on this email, however I think my error isn't
-> necessarily Poky-specific as it has wider applications for anyone
-> using an external toolchain.
-> 
-> Attached is external-csl-toolchain_2007q3-51.bb.  It is basically a
-> clone of Poky's external-csl-toolchain_2006q3-27.bb except that
-> do_stage adds more stuff.  ${STAGING_DIR_TARGET}${base_libdir} does
-> have libc.so.6 in it but libtool doesn't seem to be picking it up and
-> instead tries (and fails) to link against my host /lib/libc.so.6,
-> which seems like a Very Bad Thing to me.
-> 
-> Why can't libtool find and use the libc I have in staging?  What do
-> the normal compiled toolchains provide that I am not?  Also, does
-> binconfig.bbclass know the difference between *-native packages and
-> cross-compiled ones?  I know prebuilt toolchains aren't all the rage
-> with OE devs, but some customers refuse to use toolchains built from
-> source :(
 
-Mike,
+On Do, 13.11.2008, 21:22, Otavio Salvador wrote:
+> This is a behaviour change and before making it a requirement it needs
+> to be tested.
+>
+> Personally I also see no reason for it to break images but it is
+> always better be safe then sorry.
 
-I'm sorry I'm not that familiar with Poky and the way it works with external 
-toolchains. But after numerous fixes (many of which are commited to OE .dev 
-branch) and several lines of additional configuration in my local.conf, I was 
-able to use pre-built binary CodeSourcery 2007q3 toolchain, as well as 
-MontaVista Pro 5, by using the standard meta/external-toolchain.bb recipe.
+I tested the patch and it worked quiet well for me on the stable tree.
+Seeing this build into OpenEmbedded would be great.
 
--- 
-Denys
+
+Best regards,
+Christian
+
+
 
 
