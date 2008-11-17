@@ -1,39 +1,33 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1L23vH-0005eV-Ug
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 14:13:48 +0100
-Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=localhost)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1L23sy-0006eh-DD by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Nov 2008 14:11:28 +0100
-Received: from stefan by localhost with local (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1L23sx-0004ji-7i
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 14:11:23 +0100
-Date: Mon, 17 Nov 2008 14:11:23 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081117131123.GB11401@datenfreihafen.org>
-References: <gfnf5u$r3j$1@ger.gmane.org>
-	<20081116145911.GB14299@dodger.lab.datenfreihafen.org>
-	<gfpdr0$6vm$1@ger.gmane.org>
-	<20081117094617.9a4ad7a9.raster@rasterman.com>
-	<gfrbvd$8h9$1@ger.gmane.org>
-	<20081117114057.GA11401@datenfreihafen.org>
-	<gfroqv$hd5$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <gfroqv$hd5$1@ger.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L245u-0006z9-7D
+	for openembedded-devel@openembedded.org; Mon, 17 Nov 2008 14:24:46 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L243e-0005cS-0y
+	for openembedded-devel@openembedded.org; Mon, 17 Nov 2008 13:22:26 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 17 Nov 2008 13:22:26 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 17 Nov 2008 13:22:26 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 17 Nov 2008 14:22:18 +0100
+Message-ID: <gfrr6a$p4c$1@ger.gmane.org>
+References: <gfnf5u$r3j$1@ger.gmane.org>	<20081116145911.GB14299@dodger.lab.datenfreihafen.org>	<gfpdr0$6vm$1@ger.gmane.org>	<20081117094617.9a4ad7a9.raster@rasterman.com>	<gfrbvd$8h9$1@ger.gmane.org>	<20081117114057.GA11401@datenfreihafen.org>	<gfroqv$hd5$1@ger.gmane.org>
+	<20081117131123.GB11401@datenfreihafen.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081114 Shredder/3.0b1pre
+In-Reply-To: <20081117131123.GB11401@datenfreihafen.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: e-wm broken after yesterdays upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,39 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 13:13:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Nov 2008 13:24:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
-
-On Mon, 2008-11-17 at 13:42, Koen Kooi wrote:
-> On 17-11-08 12:40, Stefan Schmidt wrote:
->> Hello.
->>
->> On Mon, 2008-11-17 at 10:02, Koen Kooi wrote:
->>> opkg doesn't install all files from a package on upgrade. I noticed this
->>> before, but haven't been able to reproduce this.
->>>
->>> So there was indeed a bug in upgrading, but not in e :)
->>
->> Nice work guys. I already opened the mail, downloaded the logs and was ready to
->> dive into it. Good that I checked mails once a gain before. :)
->>
->> We should file a bug about this for opkg I guess. Koen, will you do this?
+On 17-11-08 14:11, Stefan Schmidt wrote:
+> Hello.
 >
-> Where does opkg bugzilla live nowadays?
+> On Mon, 2008-11-17 at 13:42, Koen Kooi wrote:
+>> On 17-11-08 12:40, Stefan Schmidt wrote:
+>>> Hello.
+>>>
+>>> On Mon, 2008-11-17 at 10:02, Koen Kooi wrote:
+>>>> opkg doesn't install all files from a package on upgrade. I noticed this
+>>>> before, but haven't been able to reproduce this.
+>>>>
+>>>> So there was indeed a bug in upgrading, but not in e :)
+>>> Nice work guys. I already opened the mail, downloaded the logs and was ready to
+>>> dive into it. Good that I checked mails once a gain before. :)
+>>>
+>>> We should file a bug about this for opkg I guess. Koen, will you do this?
+>> Where does opkg bugzilla live nowadays?
+>
+> If one think about OM as maintainer of opkg the here:
+> https://docs.openmoko.org/trac/newticket
+>
+> Component: opkg
+>
+> You need to register to create new tickets IIRC.
+>
+> Not sure if other people working on opkg and if there are other places for bugs.
 
-If one think about OM as maintainer of opkg the here:
-https://docs.openmoko.org/trac/newticket
+There you go: https://docs.openmoko.org/trac/ticket/2120
 
-Component: opkg
+regards,
 
-You need to register to create new tickets IIRC.
+Koen
 
-Not sure if other people working on opkg and if there are other places for bugs.
-
-regards
-Stefan Schmidt
 
 
