@@ -1,26 +1,37 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [64.233.170.185] (helo=rn-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L29MM-0005LA-Ld
-	for openembedded-devel@openembedded.org; Mon, 17 Nov 2008 20:02:07 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20081117185942.IJEA23774.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 17 Nov 2008 13:59:42 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id gJzi1a00P1E665w04Jzi5w; Mon, 17 Nov 2008 13:59:43 -0500
-X-Authority-Analysis: v=1.0 c=1 a=PfJKAhaLNuEA:10 a=09wlrRp3oBwA:10
-	a=HM_2q3QZwszI4YwK7DIA:9 a=2vX9VYTEHTma5cNk8nH2uUvB94kA:4
-	a=k-kO48AawpMA:10 a=e0fhMjvlNPMA:10
-X-CM-Score: 0.00
-Date: Mon, 17 Nov 2008 11:59:42 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20081117185942.GN15695@smtp.west.cox.net>
+	(envelope-from <mturquette@gmail.com>) id 1L2BAU-0004GK-IM
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Nov 2008 21:57:58 +0100
+Received: by rn-out-0910.google.com with SMTP id j66so2395292rne.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 12:55:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type:references;
+	bh=gZIWmpaGjVZ4Jw3PjW9yoOmB79KsvJXbomFPrXbqKYY=;
+	b=d7+1/GZJptmQ3MTOYhTsRF0AXuiRpgT/LLJSe51EBA8E2/voDDRdWQ9n3tUWZUAK77
+	1mG9f6M6GGMt6pBUH6ltcV8bsWfO8c2wUBfluF2u8rxs87vJoFagtN+gUz3QXTFprfE6
+	ywsACCKxFtK6OAk2Pr/hALN/Yphm02wKUNOcY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:references;
+	b=qxD0+YyF0HCjToSkbonnj9ZYuzaIHyy4rIrzgmdgI4HZH5RBBesBuq5K/EHXVQClkg
+	fDqqNLS3EIATiPO16UgaZZ3MaEpN2LkzPgE67+x/4N+DCuXz3v481Q+kdAsO0Ft1LbA2
+	BeALZ2TXzXF/Z91RoATd45rGpTGD32HMoWRbY=
+Received: by 10.151.112.10 with SMTP id p10mr8646277ybm.17.1226955336641;
+	Mon, 17 Nov 2008 12:55:36 -0800 (PST)
+Received: by 10.150.205.14 with HTTP; Mon, 17 Nov 2008 12:55:36 -0800 (PST)
+Message-ID: <59e7e6f90811171255j262492ebx71988554fc3532a@mail.gmail.com>
+Date: Mon, 17 Nov 2008 14:55:36 -0600
+From: "Mike Turquette" <mturquette@gmail.com>
+To: openembedded-devel@lists.openembedded.org, poky@o-hand.com
+In-Reply-To: <20081117061235.GA2741@denix.org>
 MIME-Version: 1.0
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: [BUG 4797] task-sdk.bb and task-sdk-bare.bb duplicate some	functionality
+References: <59e7e6f90811161949k4020d983kf32263237b20bf9b@mail.gmail.com>
+	<59e7e6f90811162118o68610184x6103071ebed9405d@mail.gmail.com>
+	<20081117061235.GA2741@denix.org>
+Subject: Re: libgcrypt tries to link with host libc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,107 +45,276 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 19:02:08 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 17 Nov 2008 20:57:59 -0000
+X-Groupsio-MsgNum: 6654
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_26841_25147532.1226955336600"
+
+------=_Part_26841_25147532.1226955336600
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-[ Both patches are also attached to bug 4797 ]
+On Mon, Nov 17, 2008 at 12:12 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Sun, Nov 16, 2008 at 11:18:49PM -0600, Mike Turquette wrote:
+>> Hi all,
+>>
+>> I'm attempting to write an external-csl-toolchain_2007q3-51 recipe for
+>> Poky.  This uses Poky's POKYMODE mechanism which is why I've copied
+>> the poky list on this email, however I think my error isn't
+>> necessarily Poky-specific as it has wider applications for anyone
+>> using an external toolchain.
+>>
+>> Attached is external-csl-toolchain_2007q3-51.bb.  It is basically a
+>> clone of Poky's external-csl-toolchain_2006q3-27.bb except that
+>> do_stage adds more stuff.  ${STAGING_DIR_TARGET}${base_libdir} does
+>> have libc.so.6 in it but libtool doesn't seem to be picking it up and
+>> instead tries (and fails) to link against my host /lib/libc.so.6,
+>> which seems like a Very Bad Thing to me.
+>>
+>> Why can't libtool find and use the libc I have in staging?  What do
+>> the normal compiled toolchains provide that I am not?  Also, does
+>> binconfig.bbclass know the difference between *-native packages and
+>> cross-compiled ones?  I know prebuilt toolchains aren't all the rage
+>> with OE devs, but some customers refuse to use toolchains built from
+>> source :(
+>
+> Mike,
+>
+> I'm sorry I'm not that familiar with Poky and the way it works with external
+> toolchains. But after numerous fixes (many of which are commited to OE .dev
+> branch) and several lines of additional configuration in my local.conf, I was
+> able to use pre-built binary CodeSourcery 2007q3 toolchain, as well as
+> MontaVista Pro 5, by using the standard meta/external-toolchain.bb recipe.
 
-Currently, we have task-sdk.bb, which provides task-sdk-bare, and will
-bring in just abstracted ${LIBC}, $[LIBC}-dev and libgcc-dev.  We also
-have task-sdk-bare.bb which brings in a number of glibc packages, libgcc
-and libstdc++/libstdc++-dev and as far as I can tell is the only
-task-sdk-bare actually used.  The attached patch consolidates both so
-that task-sdk-bare.bb will be useful on both glibc and uclibc.
+Denys,
 
-Signed-off-by: Tom Rini <trini@embeddedalley.com>
+Thanks for your reply.  I was looking for info on how to accomplish
+that same thing using POKYMODE and last night I got it working.  The
+two attached files make the most sense with respect to Poky, but can
+be generalize to OE if needed.
 
-task-sdk-bare: Update and abstract to support uclibc
-task-sdk.bb provided a task-sdk-bare version that supported uclibc, but
-this wasn't used anymore.  Update task-sdk-bare.bb to have glibc / uclibc
-abstractions and delete the unused file.
+Hopefully someone will benefit from them.  I'll stop cross-posting to
+the lists now ;)
 
-diff --git a/packages/tasks/task-sdk-bare.bb b/packages/tasks/task-sdk-bare.bb
-index d2d40f6..ea0ab31 100644
---- a/packages/tasks/task-sdk-bare.bb
-+++ b/packages/tasks/task-sdk-bare.bb
-@@ -5,7 +5,7 @@ ALLOW_EMPTY = "1"
- 
- PACKAGES = "${PN}"
- 
--RDEPENDS_${PN} = "\
-+GLIBC_PKGS = "\
-     glibc \
-     glibc-dbg \
-     glibc-dev \
-@@ -18,6 +18,16 @@ RDEPENDS_${PN} = "\
-     glibc-gconv-iso8859-1 \
-     glibc-gconv-iso8859-15 \
-     locale-base-en-gb \
-+    "
-+
-+LIBC_PKGS_linux = "${GLIBC_PKGS}"
-+LIBC_PKGS_linux-gnueabi = "${GLIBC_PKGS}"
-+LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev"
-+LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev"
-+
-+RDEPENDS_${PN} = "\
-+    ${LIBC_PKGS} \
-     libgcc \
-     libstdc++ \
-+    libstdc++-dev \
- "
-diff --git a/packages/tasks/task-sdk.bb b/packages/tasks/task-sdk.bb
-deleted file mode 100644
-index 79e9fef..0000000
---- a/packages/tasks/task-sdk.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION = "SDK packages"
--PR = "r8"
--LICENSE = "MIT"
--ALLOW_EMPTY = "1"
--
--PACKAGES = "\
--    task-sdk-bare \
--    "
--
--DEPENDS = "virtual/libc"
--
--LIBC_linux = "glibc"
--LIBC_linux-uclibc = "uclibc"
--LIBC_linux-gnueabi = "glibc"
--LIBC_linux-uclibcgnueabi = "uclibc"
--
--
--RDEPENDS_task-sdk-bare = "\
--    ${LIBC} \
--    ${LIBC}-dev \
--    libgcc \
--    "
--- 
-1.5.2.5
+Mike
 
-As an addition to the previous patch, add uclibc-thread-db to the list
-of uclibc packages to install, based on glibc bringing in
-glibc-thread-db.
-diff --git a/packages/tasks/task-sdk-bare.bb b/packages/tasks/task-sdk-bare.bb
-index ea0ab31..ab338e6 100644
---- a/packages/tasks/task-sdk-bare.bb
-+++ b/packages/tasks/task-sdk-bare.bb
-@@ -22,8 +22,8 @@ GLIBC_PKGS = "\
- 
- LIBC_PKGS_linux = "${GLIBC_PKGS}"
- LIBC_PKGS_linux-gnueabi = "${GLIBC_PKGS}"
--LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev"
--LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev"
-+LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev uclibc-thread-db"
-+LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev uclibc-thread-db"
- 
- RDEPENDS_${PN} = "\
-     ${LIBC_PKGS} \
+------=_Part_26841_25147532.1226955336600
+Content-Type: application/octet-stream;
+ name=external-csl-toolchain_2007q3-51.bb
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_fnnlczpd0
+Content-Disposition: attachment;
+ filename=external-csl-toolchain_2007q3-51.bb
 
--- 
-Tom Rini
+SU5ISUJJVF9ERUZBVUxUX0RFUFMgPSAiMSIKClBST1ZJREVTID0gIlwKICAgIGxpbnV4LWxpYmMt
+aGVhZGVycyBcCiAgICB2aXJ0dWFsL2FybS1ub25lLWxpbnV4LWdudWVhYmktZ2NjIFwKICAgIHZp
+cnR1YWwvYXJtLW5vbmUtbGludXgtZ251ZWFiaS1nKysgXAogICAgdmlydHVhbC9hcm0tbm9uZS1s
+aW51eC1nbnVlYWJpLWdjYy1pbml0aWFsIFwKICAgIHZpcnR1YWwvYXJtLW5vbmUtbGludXgtZ251
+ZWFiaS1iaW51dGlscyBcCiAgICB2aXJ0dWFsL2FybS1ub25lLWxpbnV4LWdudWVhYmktbGliYy1m
+b3ItZ2NjIFwKICAgIHZpcnR1YWwvbGliYyBcCiAgICB2aXJ0dWFsL2xpYmludGwgXAogICAgdmly
+dHVhbC9saWJpY29udiBcCiAgICBnbGliYy10aHJlYWQtZGIgXAogICAgdmlydHVhbC9saW51eC1s
+aWJjLWhlYWRlcnMgIgpSUFJPVklERVMgPSAiZ2xpYmMtdXRpbHMgbGlic2VnZmF1bHQgZ2xpYmMt
+dGhyZWFkLWRiIgpQQUNLQUdFU19EWU5BTUlDID0gImdsaWJjLWdjb252LSoiClBSID0gInIxIgoK
+U1JDX1VSSSA9ICJodHRwOi8vd3d3LmNvZGVzb3VyY2VyeS5jb20vcHVibGljL2dudV90b29sY2hh
+aW4vYXJtLW5vbmUtbGludXgtZ251ZWFiaS9hcm0tJHtQVn0tYXJtLW5vbmUtbGludXgtZ251ZWFi
+aS1pNjg2LXBjLWxpbnV4LWdudS50YXIuYnoyIFwKZmlsZTovL1NVUFBPUlRFRCIKClMgPSAiJHtX
+T1JLRElSfS9hcm0tMjAwN3EzIgoKZG9faW5zdGFsbCgpIHsKICAgIGluc3RhbGwgLWQgJHtEfSR7
+c3lzY29uZmRpcn0gJHtEfSR7YmluZGlyfSAke0R9JHtzYmluZGlyfSAke0R9JHtiYXNlX2JpbmRp
+cn0gJHtEfSR7bGliZGlyfQogICAgaW5zdGFsbCAtZCAke0R9JHtiYXNlX2xpYmRpcn0gJHtEfSR7
+YmFzZV9zYmluZGlyfSAke0R9JHtkYXRhZGlyfQoKICAgIGNwIC1hICR7U30vYXJtLW5vbmUtbGlu
+dXgtZ251ZWFiaS9saWJjL2xpYi8qICAke0R9JHtiYXNlX2xpYmRpcn0KICAgIGNwIC1hICR7U30v
+YXJtLW5vbmUtbGludXgtZ251ZWFiaS9saWJjL2V0Yy8qICAke0R9JHtzeXNjb25mZGlyfQogICAg
+Y3AgLWEgJHtTfS9hcm0tbm9uZS1saW51eC1nbnVlYWJpL2xpYmMvc2Jpbi8qICR7RH0ke2Jhc2Vf
+c2JpbmRpcn0KICAgIGNwIC1hICR7U30vYXJtLW5vbmUtbGludXgtZ251ZWFiaS9saWJjL3Vzci8q
+ICAke0R9L3Vzcgp9Cgpkb19zdGFnZSgpIHsKCWluc3RhbGwgLWQgJHtTVEFHSU5HX0lOQ0RJUn0K
+CWNwIC1hICR7U30vYXJtLW5vbmUtbGludXgtZ251ZWFiaS9saWJjL3Vzci9pbmNsdWRlLyogJHtT
+VEFHSU5HX0lOQ0RJUn0KCglpbnN0YWxsIC1kICR7U1RBR0lOR19MSUJESVJ9CgljcCAtYSAke1N9
+L2FybS1ub25lLWxpbnV4LWdudWVhYmkvbGliYy91c3IvbGliLyogJHtTVEFHSU5HX0xJQkRJUn0K
+CglpbnN0YWxsIC1kICR7U1RBR0lOR19ESVJfVEFSR0VUfSR7bGF5b3V0X2Jhc2VfbGliZGlyfQoJ
+Y3AgLWEgJHtTfS9hcm0tbm9uZS1saW51eC1nbnVlYWJpL2xpYmMvbGliLyogJHtTVEFHSU5HX0RJ
+Ul9UQVJHRVR9JHtiYXNlX2xpYmRpcn0KfQoKUEFDS0FHRVMgPSAibGliZ2NjIGxpYmdjYy1kZXYg
+bGlic3RkYysrIGxpYnN0ZGMrKy1kZXYgbGludXgtbGliYy1oZWFkZXJzIgpGSUxFU19saWJnY2Mg
+PSAiJHtiYXNlX2xpYmRpcn0vbGliZ2NjX3Muc28uMSIKRklMRVNfbGliZ2NjLWRldiA9ICIke2Jh
+c2VfbGliZGlyfS9saWJnY2Nfcy5zbyIKRklMRVNfbGlic3RkYysrID0gIiR7bGliZGlyfS9saWJz
+dGRjKysuc28uKiIKRklMRVNfbGlic3RkYysrLWRldiA9ICIke2luY2x1ZGVkaXJ9L2MrKy8ke1BW
+fSBcCgkJICAgICAgICR7bGliZGlyfS9saWJzdGRjKysuc28gXAoJCSAgICAgICAke2xpYmRpcn0v
+bGlic3RkYysrLmxhIFwKCQkgICAgICAgJHtsaWJkaXJ9L2xpYnN0ZGMrKy5hIFwKCQkgICAgICAg
+JHtsaWJkaXJ9L2xpYnN1cGMrKy5sYSBcCgkJICAgICAgICR7bGliZGlyfS9saWJzdXBjKysuYSIK
+RklMRVNfbGludXgtbGliYy1oZWFkZXJzID0gIiR7aW5jbHVkZWRpcn0vYXNtKiBcCiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAke2luY2x1ZGVkaXJ9L2xpbnV4IFwKICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICR7aW5jbHVkZWRpcn0vbXRkIFwKICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICR7aW5jbHVkZWRpcn0vcmRtYSBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAke2lu
+Y2x1ZGVkaXJ9L3Njc2kgXAogICAgICAgICAgICAgICAgICAgICAgICAgICAgJHtpbmNsdWRlZGly
+fS9zb3VuZCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAke2luY2x1ZGVkaXJ9L3ZpZGVv
+IFwKIgoKUEFDS0FHRVMgKz0gImdsaWJjLWRiZyBnbGliYyBjYXRjaHNlZ3Ygc2xuIG5zY2QgbGRk
+IGxvY2FsZWRlZiBnbGliYy11dGlscyBnbGliYy1kZXYgZ2xpYmMtZG9jIGdsaWJjLWxvY2FsZSBs
+aWJzZWdmYXVsdCBnbGliYy1leHRyYS1uc3MgZ2xpYmMtdGhyZWFkLWRiIGdsaWJjLXBjcHJvZmls
+ZSIKCmxpYmNfYmFzZWxpYnMgPSAiL2xpYi9saWJjKiAvbGliL2xpYm0qIC9saWIvbGQqIC9saWIv
+bGlicHRocmVhZCogL2xpYi9saWJyZXNvbHYqIC9saWIvbGlicnQqIC9saWIvbGlidXRpbCogL2xp
+Yi9saWJuc2wqIC9saWIvbGlibnNzX2ZpbGVzKiAvbGliL2xpYm5zc19jb21wYXQqIC9saWIvbGli
+bnNzX2RucyogL2xpYi9saWJkbCogL2xpYi9saWJhbmwqIC9saWIvbGliQnJva2VuTG9jYWxlKiIK
+CkZJTEVTX2dsaWJjID0gIiR7c3lzY29uZmRpcn0gJHtsaWJjX2Jhc2VsaWJzfSAvc2Jpbi9sZGNv
+bmZpZyAke2xpYmV4ZWNkaXJ9LyogJHtkYXRhZGlyfS96b25laW5mbyIKRklMRVNfZ2xpYmMtZGV2
+ID0gIiR7aW5jbHVkZWRpcn0iCkZJTEVTX2xkZCA9ICIke2JpbmRpcn0vbGRkIgpGSUxFU19saWJz
+ZWdmYXVsdCA9ICIvbGliL2xpYlNlZ0ZhdWx0KiIKRklMRVNfZ2xpYmMtZXh0cmEtbnNzID0gIi9s
+aWIvbGlibnNzKiIKRklMRVNfZ2xpYmMtZGV2X2FwcGVuZCA9ICIgJHtsaWJkaXJ9LyoubyAke2Jp
+bmRpcn0vcnBjZ2VuICR7bGliZGlyfS8qLnNvIgpGSUxFU19uc2NkID0gIiR7c2JpbmRpcn0vbnNj
+ZCoiCkZJTEVTX2dsaWJjLXV0aWxzID0gIiR7YmluZGlyfS8qICR7c2JpbmRpcn0vKiIKRklMRVNf
+Z2xpYmMtZ2NvbnYgPSAiJHtsaWJkaXJ9L2djb252LyoiCkZJTEVTX2dsaWJjLWRiZyArPSAiICR7
+bGliZGlyfS9nY29udi8uZGVidWcgJHtsaWJleGVjZGlyfS8qLy5kZWJ1ZyAke2Jhc2VfbGliZGly
+fS8uZGVidWcgJHtsaWJkaXJ9Ly5kZWJ1ZyIKRklMRVNfY2F0Y2hzZWd2ID0gIiR7YmluZGlyfS9j
+YXRjaHNlZ3YiClJERVBFTkRTX2NhdGNoc2VndiA9ICJsaWJzZWdmYXVsdCIKRklMRVNfZ2xpYmMt
+cGNwcm9maWxlID0gIi9saWIvbGlicGNwcm9maWxlLnNvIgpGSUxFU19nbGliYy10aHJlYWQtZGIg
+PSAiL2xpYi9saWJ0aHJlYWRfZGIqIgpSUFJPVklERVNfZ2xpYmMtZGV2ICs9ICJsaWJjLWRldiIK
+TEVBRF9TT05BTUUgPSAibGliYy5zby42IgoKREVTQ1JJUFRJT05fc2xuID0gImdsaWJjOiBjcmVh
+dGUgc3ltYm9saWMgbGlua3MgYmV0d2VlbiBmaWxlcyIKREVTQ1JJUFRJT05fbnNjZCA9ICJnbGli
+YzogbmFtZSBzZXJ2aWNlIGNhY2hlIGRhZW1vbiBmb3IgcGFzc3dkLCBncm91cCwgYW5kIGhvc3Rz
+IgpERVNDUklQVElPTl9nbGliYy1leHRyYS1uc3MgPSAiZ2xpYmM6IG5pcywgbmlzcGx1cyBhbmQg
+aGVzaW9kIHNlYXJjaCBzZXJ2aWNlcyIKREVTQ1JJUFRJT05fbGRkID0gImdsaWJjOiBwcmludCBz
+aGFyZWQgbGlicmFyeSBkZXBlbmRlbmNpZXMiCkRFU0NSSVBUSU9OX2xvY2FsZWRlZiA9ICJnbGli
+YzogY29tcGlsZSBsb2NhbGUgZGVmaW5pdGlvbiBmaWxlcyIKREVTQ1JJUFRJT05fZ2xpYmMtdXRp
+bHMgPSAiZ2xpYmM6IG1pc2MgdXRpbGl0aWVzIGxpa2UgaWNvbmYsIGxvY2FsLCBnZW5jYXQsIHR6
+c2VsZWN0LCBycGNpbmZvLCAuLi4iCgpGSUxFU19zbG4gPSAiJHtiYXNlX3NiaW5kaXJ9L3NsbiIK
+RklMRVNfbG9jYWxlZGVmID0gIiR7YmluZGlyfS9sb2NhbGVkZWYiCgoKVE1QX0xPQ0FMRT0iL3Rt
+cC9sb2NhbGUke2xpYmRpcn0vbG9jYWxlIgoKbG9jYWxlX2Jhc2VfcG9zdGluc3QoKSB7CiMhL2Jp
+bi9zaAoKaWYgWyAieCREIiAhPSAieCIgXTsgdGhlbgogIGV4aXQgMQpmaQoKcm0gLXJmICR7VE1Q
+X0xPQ0FMRX0KbWtkaXIgLXAgJHtUTVBfTE9DQUxFfQppZiBbIC1mICR7bGliZGlyfS9sb2NhbGUv
+bG9jYWxlLWFyY2hpdmUgXTsgdGhlbgogICAgICAgIGNwICR7bGliZGlyfS9sb2NhbGUvbG9jYWxl
+LWFyY2hpdmUgJHtUTVBfTE9DQUxFfS8KZmkKbG9jYWxlZGVmIC0taW5wdXRmaWxlPSR7ZGF0YWRp
+cn0vaTE4bi9sb2NhbGVzLyVzIC0tY2hhcm1hcD0lcyAtLXByZWZpeD0vdG1wL2xvY2FsZSAlcwpt
+a2RpciAtcCAke2xpYmRpcn0vbG9jYWxlLwptdiAke1RNUF9MT0NBTEV9L2xvY2FsZS1hcmNoaXZl
+ICR7bGliZGlyfS9sb2NhbGUvCnJtIC1yZiAke1RNUF9MT0NBTEV9Cn0KCmxvY2FsZV9iYXNlX3Bv
+c3RybSgpIHsKIyEvYmluL3NoCgpybSAtcmYgJHtUTVBfTE9DQUxFfQpta2RpciAtcCAke1RNUF9M
+T0NBTEV9CmlmIFsgLWYgJHtsaWJkaXJ9L2xvY2FsZS9sb2NhbGUtYXJjaGl2ZSBdOyB0aGVuCglj
+cCAke2xpYmRpcn0vbG9jYWxlL2xvY2FsZS1hcmNoaXZlICR7VE1QX0xPQ0FMRX0vCmZpCmxvY2Fs
+ZWRlZiAtLWRlbGV0ZS1mcm9tLWFyY2hpdmUgLS1pbnB1dGZpbGU9JHtkYXRhZGlyfS9sb2NhbGVz
+LyVzIC0tY2hhcm1hcD0lcyAtLXByZWZpeD0vdG1wL2xvY2FsZSAlcwptdiAke1RNUF9MT0NBTEV9
+L2xvY2FsZS1hcmNoaXZlICR7bGliZGlyfS9sb2NhbGUvCnJtIC1yZiAke1RNUF9MT0NBTEV9Cn0K
+CnB5dGhvbiBwYWNrYWdlX2RvX3NwbGl0X2djb252cyAoKSB7CglpbXBvcnQgb3MsIHJlCglpZiAo
+YmIuZGF0YS5nZXRWYXIoJ1BBQ0tBR0VfTk9fR0NPTlYnLCBkLCAxKSA9PSAnMScpOgoJCWJiLm5v
+dGUoInBhY2thZ2UgcmVxdWVzdGVkIG5vdCBzcGxpdHRpbmcgZ2NvbnZzIikKCQlyZXR1cm4KCglp
+ZiBub3QgYmIuZGF0YS5nZXRWYXIoJ1BBQ0tBR0VTJywgZCwgMSk6CgkJcmV0dXJuCgoJbGliZGly
+ID0gYmIuZGF0YS5nZXRWYXIoJ2xpYmRpcicsIGQsIDEpCglpZiBub3QgbGliZGlyOgoJCWJiLmVy
+cm9yKCJsaWJkaXIgbm90IGRlZmluZWQiKQoJCXJldHVybgoJZGF0YWRpciA9IGJiLmRhdGEuZ2V0
+VmFyKCdkYXRhZGlyJywgZCwgMSkKCWlmIG5vdCBkYXRhZGlyOgoJCWJiLmVycm9yKCJkYXRhZGly
+IG5vdCBkZWZpbmVkIikKCQlyZXR1cm4KCglnY29udl9saWJkaXIgPSBvcy5wYXRoLmpvaW4obGli
+ZGlyLCAiZ2NvbnYiKQoJY2hhcm1hcF9kaXIgPSBvcy5wYXRoLmpvaW4oZGF0YWRpciwgImkxOG4i
+LCAiY2hhcm1hcHMiKQoJbG9jYWxlc19kaXIgPSBvcy5wYXRoLmpvaW4oZGF0YWRpciwgImkxOG4i
+LCAibG9jYWxlcyIpCgliaW5hcnlfbG9jYWxlc19kaXIgPSBvcy5wYXRoLmpvaW4obGliZGlyLCAi
+bG9jYWxlIikKCglkb19zcGxpdF9wYWNrYWdlcyhkLCBnY29udl9saWJkaXIsIGZpbGVfcmVnZXg9
+J14oLiopXC5zbyQnLCBvdXRwdXRfcGF0dGVybj0nZ2xpYmMtZ2NvbnYtJXMnLCBkZXNjcmlwdGlv
+bj0nZ2NvbnYgbW9kdWxlIGZvciBjaGFyYWN0ZXIgc2V0ICVzJywgZXh0cmFfZGVwZW5kcz0nZ2xp
+YmMtZ2NvbnYnKQoKCWRvX3NwbGl0X3BhY2thZ2VzKGQsIGNoYXJtYXBfZGlyLCBmaWxlX3JlZ2V4
+PSdeKC4qKVwuZ3okJywgb3V0cHV0X3BhdHRlcm49J2dsaWJjLWNoYXJtYXAtJXMnLCBkZXNjcmlw
+dGlvbj0nY2hhcmFjdGVyIG1hcCBmb3IgJXMgZW5jb2RpbmcnLCBleHRyYV9kZXBlbmRzPScnKQoK
+CWRlZiBjYWxjX2xvY2FsZV9kZXBzKGZuLCBwa2csIGZpbGVfcmVnZXgsIG91dHB1dF9wYXR0ZXJu
+LCBncm91cCk6CgkJZGVwcyA9IFtdCgkJZiA9IG9wZW4oZm4sICJyIikKCQljX3JlID0gcmUuY29t
+cGlsZSgnXmNvcHkgIiguKikiJykKCQlpX3JlID0gcmUuY29tcGlsZSgnXmluY2x1ZGUgIihcdysp
+Ii4qJykKCQlmb3IgbCBpbiBmLnJlYWRsaW5lcygpOgoJCQltID0gY19yZS5tYXRjaChsKSBvciBp
+X3JlLm1hdGNoKGwpCgkJCWlmIG06CgkJCQlkcCA9IGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKCdn
+bGliYy1sb2NhbGVkYXRhLSVzJyAlIG0uZ3JvdXAoMSkpCgkJCQlpZiBub3QgZHAgaW4gZGVwczoK
+CQkJCQlkZXBzLmFwcGVuZChkcCkKCQlmLmNsb3NlKCkKCQlpZiBkZXBzICE9IFtdOgoJCQliYi5k
+YXRhLnNldFZhcignUkRFUEVORFNfJXMnICUgcGtnLCAiICIuam9pbihkZXBzKSwgZCkKCglkb19z
+cGxpdF9wYWNrYWdlcyhkLCBsb2NhbGVzX2RpciwgZmlsZV9yZWdleD0nKC4qKScsIG91dHB1dF9w
+YXR0ZXJuPSdnbGliYy1sb2NhbGVkYXRhLSVzJywgZGVzY3JpcHRpb249J2xvY2FsZSBkZWZpbml0
+aW9uIGZvciAlcycsIGhvb2s9Y2FsY19sb2NhbGVfZGVwcywgZXh0cmFfZGVwZW5kcz0nJykKCWJi
+LmRhdGEuc2V0VmFyKCdQQUNLQUdFUycsIGJiLmRhdGEuZ2V0VmFyKCdQQUNLQUdFUycsIGQpICsg
+JyBnbGliYy1nY29udicsIGQpCgoJZiA9IG9wZW4ob3MucGF0aC5qb2luKGJiLmRhdGEuZ2V0VmFy
+KCdXT1JLRElSJywgZCwgMSksICJTVVBQT1JURUQiKSwgInIiKQoJc3VwcG9ydGVkID0gZi5yZWFk
+bGluZXMoKQoJZi5jbG9zZSgpCgoJZG90X3JlID0gcmUuY29tcGlsZSgiKC4qKVwuKC4qKSIpCgoJ
+IyBDb2xsYXRlIHRoZSBsb2NhbGVzIGJ5IGJhc2UgYW5kIGVuY29kaW5nCgllbmNvZGluZ3MgPSB7
+fQoJZm9yIGwgaW4gc3VwcG9ydGVkOgoJCWwgPSBsWzotMV0KCQkobG9jYWxlLCBjaGFyc2V0KSA9
+IGwuc3BsaXQoIiAiKQoJCW0gPSBkb3RfcmUubWF0Y2gobG9jYWxlKQoJCWlmIG06CgkJCWxvY2Fs
+ZSA9IG0uZ3JvdXAoMSkKCQlpZiBub3QgZW5jb2RpbmdzLmhhc19rZXkobG9jYWxlKToKCQkJZW5j
+b2RpbmdzW2xvY2FsZV0gPSBbXQoJCWVuY29kaW5nc1tsb2NhbGVdLmFwcGVuZChjaGFyc2V0KQoK
+CWRlZiBvdXRwdXRfbG9jYWxlX3NvdXJjZShuYW1lLCBsb2NhbGUsIGVuY29kaW5nKToKCQlwa2du
+YW1lID0gJ2xvY2FsZS1iYXNlLScgKyBsZWdpdGltaXplX3BhY2thZ2VfbmFtZShuYW1lKQoKCQli
+Yi5kYXRhLnNldFZhcignUkRFUEVORFNfJXMnICUgcGtnbmFtZSwgJ2xvY2FsZWRlZiBnbGliYy1s
+b2NhbGVkYXRhLSVzIGdsaWJjLWNoYXJtYXAtJXMnICUgKGxlZ2l0aW1pemVfcGFja2FnZV9uYW1l
+KGxvY2FsZSksIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKGVuY29kaW5nKSksIGQpCgkJcnByb3Zp
+ZGVzID0gJ3ZpcnR1YWwtbG9jYWxlLSVzJyAlIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKG5hbWUp
+CgkJbSA9IHJlLm1hdGNoKCIoLiopXyguKikiLCBuYW1lKQoJCWlmIG06CgkJCXJwcm92aWRlcyAr
+PSAnIHZpcnR1YWwtbG9jYWxlLSVzJyAlIG0uZ3JvdXAoMSkKCQliYi5kYXRhLnNldFZhcignUlBS
+T1ZJREVTXyVzJyAlIHBrZ25hbWUsIHJwcm92aWRlcywgZCkKCQliYi5kYXRhLnNldFZhcignUEFD
+S0FHRVMnLCAnJXMgJXMnICUgKHBrZ25hbWUsIGJiLmRhdGEuZ2V0VmFyKCdQQUNLQUdFUycsIGQs
+IDEpKSwgZCkKCQliYi5kYXRhLnNldFZhcignQUxMT1dfRU1QVFlfJXMnICUgcGtnbmFtZSwgJzEn
+LCBkKQoJCWJiLmRhdGEuc2V0VmFyKCdwa2dfcG9zdGluc3RfJXMnICUgcGtnbmFtZSwgYmIuZGF0
+YS5nZXRWYXIoJ2xvY2FsZV9iYXNlX3Bvc3RpbnN0JywgZCwgMSkgJSAobG9jYWxlLCBlbmNvZGlu
+ZywgbG9jYWxlKSwgZCkKCQliYi5kYXRhLnNldFZhcigncGtnX3Bvc3RybV8lcycgJSBwa2duYW1l
+LCBiYi5kYXRhLmdldFZhcignbG9jYWxlX2Jhc2VfcG9zdHJtJywgZCwgMSkgJSAobG9jYWxlLCBl
+bmNvZGluZywgbG9jYWxlKSwgZCkKCglkZWYgb3V0cHV0X2xvY2FsZV9iaW5hcnkobmFtZSwgbG9j
+YWxlLCBlbmNvZGluZyk6CgkJdGFyZ2V0X2FyY2ggPSBiYi5kYXRhLmdldFZhcigiVEFSR0VUX0FS
+Q0giLCBkLCAxKQoJCXFlbXUgPSAicWVtdS0lcyIgJSB0YXJnZXRfYXJjaAoJCXBrZ25hbWUgPSAn
+bG9jYWxlLWJhc2UtJyArIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKG5hbWUpCgkJbSA9IHJlLm1h
+dGNoKCIoLiopXC4oLiopIiwgbmFtZSkKCQlpZiBtOgoJCQlnbGliY19uYW1lID0gIiVzLiVzIiAl
+IChtLmdyb3VwKDEpLCBtLmdyb3VwKDIpLmxvd2VyKCkucmVwbGFjZSgiLSIsIiIpKQoJCWVsc2U6
+CgkJCWdsaWJjX25hbWUgPSBuYW1lCgkJYmIuZGF0YS5zZXRWYXIoJ1JERVBFTkRTXyVzJyAlIHBr
+Z25hbWUsIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKCdnbGliYy1iaW5hcnktbG9jYWxlZGF0YS0l
+cycgJSBnbGliY19uYW1lKSwgZCkKCQlycHJvdmlkZXMgPSAndmlydHVhbC1sb2NhbGUtJXMnICUg
+bGVnaXRpbWl6ZV9wYWNrYWdlX25hbWUobmFtZSkKCQltID0gcmUubWF0Y2goIiguKilfKC4qKSIs
+IG5hbWUpCgkJaWYgbToKCQkJcnByb3ZpZGVzICs9ICcgdmlydHVhbC1sb2NhbGUtJXMnICUgbS5n
+cm91cCgxKQoJCWJiLmRhdGEuc2V0VmFyKCdSUFJPVklERVNfJXMnICUgcGtnbmFtZSwgcnByb3Zp
+ZGVzLCBkKQoJCWJiLmRhdGEuc2V0VmFyKCdBTExPV19FTVBUWV8lcycgJSBwa2duYW1lLCAnMScs
+IGQpCgkJYmIuZGF0YS5zZXRWYXIoJ1BBQ0tBR0VTJywgJyVzICVzJyAlIChwa2duYW1lLCBiYi5k
+YXRhLmdldFZhcignUEFDS0FHRVMnLCBkLCAxKSksIGQpCgoJCXRyZWVkaXIgPSBvcy5wYXRoLmpv
+aW4oYmIuZGF0YS5nZXRWYXIoIldPUktESVIiLCBkLCAxKSwgImxvY2FsZS10cmVlIikKCQlwYXRo
+ID0gYmIuZGF0YS5nZXRWYXIoIlBBVEgiLCBkLCAxKQoJCWkxOG5wYXRoID0gb3MucGF0aC5qb2lu
+KHRyZWVkaXIsIGRhdGFkaXIsICJpMThuIikKCgkJbG9jYWxlZGVmX29wdHMgPSAiLS1mb3JjZSAt
+LW9sZC1zdHlsZSAtLW5vLWFyY2hpdmUgLS1wcmVmaXg9JXMgLS1pbnB1dGZpbGU9JXMvaTE4bi9s
+b2NhbGVzLyVzIC0tY2hhcm1hcD0lcyAlcyIgJSAodHJlZWRpciwgZGF0YWRpciwgbG9jYWxlLCBl
+bmNvZGluZywgbmFtZSkKCQljbWQgPSAiUEFUSD1cIiVzXCIgSTE4TlBBVEg9XCIlc1wiICVzIC1M
+ICVzICVzL2Jpbi9sb2NhbGVkZWYgJXMiICUgKHBhdGgsIGkxOG5wYXRoLCBxZW11LCB0cmVlZGly
+LCB0cmVlZGlyLCBsb2NhbGVkZWZfb3B0cykKCQliYi5ub3RlKCJnZW5lcmF0aW5nIGxvY2FsZSAl
+cyAoJXMpIiAlIChsb2NhbGUsIGVuY29kaW5nKSkKCQlpZiBvcy5zeXN0ZW0oY21kKToKCQkJcmFp
+c2UgYmIuYnVpbGQuRnVuY0ZhaWxlZCgibG9jYWxlZGVmIHJldHVybmVkIGFuIGVycm9yIChjb21t
+YW5kIHdhcyAlcykuIiAlIGNtZCkKCglkZWYgb3V0cHV0X2xvY2FsZShuYW1lLCBsb2NhbGUsIGVu
+Y29kaW5nKToKCQlvdXRwdXRfbG9jYWxlX3NvdXJjZShuYW1lLCBsb2NhbGUsIGVuY29kaW5nKQoK
+CSMgUmVzaHVmZmxlIG5hbWVzIHNvIHRoYXQgVVRGLTggaXMgcHJlZmVycmVkIG92ZXIgb3RoZXIg
+ZW5jb2RpbmdzCglub25fdXRmOCA9IFtdCglmb3IgbCBpbiBlbmNvZGluZ3Mua2V5cygpOgoJCWlm
+IGxlbihlbmNvZGluZ3NbbF0pID09IDE6CgkJCW91dHB1dF9sb2NhbGUobCwgbCwgZW5jb2Rpbmdz
+W2xdWzBdKQoJCQlpZiBlbmNvZGluZ3NbbF1bMF0gIT0gIlVURi04IjoKCQkJCW5vbl91dGY4LmFw
+cGVuZChsKQoJCWVsc2U6CgkJCWlmICJVVEYtOCIgaW4gZW5jb2RpbmdzW2xdOgoJCQkJb3V0cHV0
+X2xvY2FsZShsLCBsLCAiVVRGLTgiKQoJCQkJZW5jb2RpbmdzW2xdLnJlbW92ZSgiVVRGLTgiKQoJ
+CQllbHNlOgoJCQkJbm9uX3V0ZjguYXBwZW5kKGwpCgkJCWZvciBlIGluIGVuY29kaW5nc1tsXToK
+CQkJCW91dHB1dF9sb2NhbGUoJyVzLiVzJyAlIChsLCBlKSwgbCwgZSkKCglpZiBub25fdXRmOCAh
+PSBbXToKCQliYi5ub3RlKCJ0aGUgZm9sbG93aW5nIGxvY2FsZXMgYXJlIHN1cHBvcnRlZCBvbmx5
+IGluIGxlZ2FjeSBlbmNvZGluZ3M6IikKCQliYi5ub3RlKCIgICIgKyAiICIuam9pbihub25fdXRm
+OCkpCn0KCiMgV2Ugd2FudCB0byBkbyB0aGlzIGluZGlyZWN0aW9uIHNvIHRoYXQgd2UgY2FuIHNh
+ZmVseSAncmV0dXJuJwojIGZyb20gdGhlIGNhbGxlZCBmdW5jdGlvbiBldmVuIHRob3VnaCB3ZSdy
+ZSBwcmVwZW5kaW5nCnB5dGhvbiBwb3B1bGF0ZV9wYWNrYWdlc19wcmVwZW5kICgpIHsKCWlmIGJi
+LmRhdGEuZ2V0VmFyKCdERUJJQU5fTkFNRVMnLCBkLCAxKToKCQliYi5kYXRhLnNldFZhcignUEtH
+X2dsaWJjJywgJ2xpYmM2JywgZCkKCQliYi5kYXRhLnNldFZhcignUEtHX2dsaWJjLWRldicsICds
+aWJjNi1kZXYnLCBkKQoJYmIuYnVpbGQuZXhlY19mdW5jKCdwYWNrYWdlX2RvX3NwbGl0X2djb252
+cycsIGQpCn0K
 
+------=_Part_26841_25147532.1226955336600
+Content-Type: application/octet-stream; name=poky-external-csl2007q3.inc
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_fnnlgsyp1
+Content-Disposition: attachment; filename=poky-external-csl2007q3.inc
 
+IwojIFBva3kgY29uZmlndXJhdGlvbiB0byB1c2UgZXh0ZXJuYWwgQ1NMIDIwMDdxMy01MSB0b29s
+Y2hhaW4gKEFSTSBFQUJJKQojCgpUQVJHRVRfVkVORE9SID0gIi1ub25lIgoKRVhURVJOQUxfVE9P
+TENIQUlOID0gIi91c3IvbG9jYWwvY3NsL2FybS0yMDA3cTMiCgpQQVRIID0uICIke0VYVEVSTkFM
+X1RPT0xDSEFJTn0vYmluOiIKClBSRUZFUlJFRF9QUk9WSURFUl9saW51eC1saWJjLWhlYWRlcnMg
+PSAiZXh0ZXJuYWwtY3NsLXRvb2xjaGFpbiIKUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvYXJt
+LW5vbmUtbGludXgtZ251ZWFiaS1nY2MgPSAiZXh0ZXJuYWwtY3NsLXRvb2xjaGFpbiIKUFJFRkVS
+UkVEX1BST1ZJREVSX3ZpcnR1YWwvYXJtLW5vbmUtbGludXgtZ251ZWFiaS1nY2MtaW5pdGlhbCA9
+ICJleHRlcm5hbC1jc2wtdG9vbGNoYWluIgpQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9hcm0t
+bm9uZS1saW51eC1nbnVlYWJpLWJpbnV0aWxzID0gImV4dGVybmFsLWNzbC10b29sY2hhaW4iClBS
+RUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsL2FybS1ub25lLWxpbnV4LWdudWVhYmktbGliYy1mb3It
+Z2NjID0gImV4dGVybmFsLWNzbC10b29sY2hhaW4iClBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFs
+L2xpYmMgPSAiZXh0ZXJuYWwtY3NsLXRvb2xjaGFpbiIKUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1
+YWwvbGliaW50bCA9ICJleHRlcm5hbC1jc2wtdG9vbGNoYWluIgpQUkVGRVJSRURfUFJPVklERVJf
+dmlydHVhbC9saWJpY29udiA9ICJleHRlcm5hbC1jc2wtdG9vbGNoYWluIgpQUkVGRVJSRURfUFJP
+VklERVJfZ2xpYmMtdGhyZWFkLWRiID0gImV4dGVybmFsLWNzbC10b29sY2hhaW4iClBSRUZFUlJF
+RF9QUk9WSURFUl92aXJ0dWFsL2xpbnV4LWxpYmMtaGVhZGVycyA9ICJleHRlcm5hbC1jc2wtdG9v
+bGNoYWluIgoKUFJFRkVSUkVEX1ZFUlNJT05fZXh0ZXJuYWwtY3NsLXRvb2xjaGFpbiA9ICIyMDA3
+cTMtNTEiCgpUQVJHRVRfQ1BQRkxBR1NfcHJlcGVuZCA9ICIgLWlzeXN0ZW0ke0VYVEVSTkFMX1RP
+T0xDSEFJTn0vJHtUQVJHRVRfU1lTfS9pbmNsdWRlICIKVEFSR0VUX0xERkxBR1NfcHJlcGVuZCA9
+ICIgLUwke0VYVEVSTkFMX1RPT0xDSEFJTn0vJHtUQVJHRVRfU1lTfS9saWIgLVdsLC1ycGF0aC1s
+aW5rLCR7RVhURVJOQUxfVE9PTENIQUlOfS8ke1RBUkdFVF9TWVN9L2xpYiAiCgpUT09MQ0hBSU5f
+T1BUSU9OUyA9ICIgLS1zeXNyb290PSR7U1RBR0lOR19ESVJfSE9TVH0iCg==
+
+------=_Part_26841_25147532.1226955336600--
