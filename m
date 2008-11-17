@@ -1,24 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1L24d9-00031p-1B
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <stefan@datenfreihafen.org>) id 1L25uv-0007j4-CC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 14:59:07 +0100
-Received: (qmail invoked by alias); 17 Nov 2008 13:56:44 -0000
-Received: from p579E19C6.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.25.198]
-	by mail.gmx.net (mp006) with SMTP; 17 Nov 2008 14:56:44 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+OPQp4q6OOlYQeHs3uHte+r5Ga4TVWmE+t7iYWL3
-	BKZNiPkVm5bjy7
-Message-ID: <49217818.5080109@gmx.net>
-Date: Mon, 17 Nov 2008 14:56:40 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
-MIME-Version: 1.0
+	Mon, 17 Nov 2008 16:21:40 +0100
+Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=localhost)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1L25sc-0000xj-SR by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 16:19:13 +0100
+Received: from stefan by localhost with local (Exim 4.69)
+	(envelope-from <stefan@datenfreihafen.org>) id 1L25sc-00067v-0O
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Nov 2008 16:19:10 +0100
+Date: Mon, 17 Nov 2008 16:19:09 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.75
-Subject: RFC: add Steffen Sledz to contributor
+Message-ID: <20081117151909.GG11401@datenfreihafen.org>
+MIME-Version: 1.0
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Moving fontconfig cache out of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,40 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 13:59:07 -0000
-X-Groupsio-MsgNum: 6644
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigA77763D6D1573A738FC0E102"
+X-List-Received-Date: Mon, 17 Nov 2008 15:22:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------enigA77763D6D1573A738FC0E102
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+Hello.
 
-Hi,
-Steffen Sledz made some bug reports in the last time and just added a
-new machine configuration (OXE810).
+Raster found out a pretty interestesting optimization option.
 
-I think it makes sense to give Steffen write access so he can fix issues
- for the new machines more quickly and generally contribute to OE, of
-course.
+At the moment we refer to the fontconfig cahc elike this in
+/etc/fonts/fonts.conf:
 
-Regards
-Robert
+<cachedir>/var/cache/fontconfig</cachedir>
+
+/var/cache is a symlink to var/volatile/cache which is mounted as tmpfs.
+
+This means that the cache has to regenerated on every boot. This can cost up to
+20s.
+
+What do people think about pointing this to something not mounted as tmpfs? Any
+problems I'm not aware of?
+
+regards
+Stefan Schmidt
 
 
---------------enigA77763D6D1573A738FC0E102
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkkheBkACgkQG9cfwmwwEtqpAQCeJi0lXiM+3u+mSTEzbQRTdify
-5LUAnjjw0yNLKB4kzAQEu49hUctRJX3z
-=csiw
------END PGP SIGNATURE-----
-
---------------enigA77763D6D1573A738FC0E102--
