@@ -1,34 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L202a-0005rx-HQ
-	for openembedded-devel@openembedded.org; Mon, 17 Nov 2008 10:05:22 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L200K-0005LP-Os
-	for openembedded-devel@openembedded.org; Mon, 17 Nov 2008 09:02:44 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 17 Nov 2008 09:02:44 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 17 Nov 2008 09:02:44 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 17 Nov 2008 10:02:36 +0100
-Message-ID: <gfrbvd$8h9$1@ger.gmane.org>
-References: <gfnf5u$r3j$1@ger.gmane.org>	<20081116145911.GB14299@dodger.lab.datenfreihafen.org>	<gfpdr0$6vm$1@ger.gmane.org>
-	<20081117094617.9a4ad7a9.raster@rasterman.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081114 Shredder/3.0b1pre
-In-Reply-To: <20081117094617.9a4ad7a9.raster@rasterman.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: e-wm broken after yesterdays upgrade
+	(envelope-from <sledz@DResearch.DE>) id 1L20lq-00036T-10
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Nov 2008 10:51:50 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 47FC916DF7D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 10:58:14 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 1F0AD2A420A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 10:49:31 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Mon, 17 Nov 2008 10:49:31 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF535@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF52B@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] OXE810 support
+Thread-Index: AclGN9BjF/SJofFKRDa4KucS2whj2AABZ0awAJb0OoA=
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF52A@hiob.intern.dresearch.de><491D3DA5.5070503@gmx.net>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF52B@hiob.intern.dresearch.de>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: OXE810 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,88 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 09:05:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Nov 2008 09:51:50 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 16-11-08 23:46, Carsten Haitzler (The Rasterman) wrote:
-> On Sun, 16 Nov 2008 16:22:07 +0100 Koen Kooi<k.kooi@student.utwente.nl>
-> babbled:
+> > please open a bug report and attach some of your files there. E.g.
+> > the machine configuration.
+>=20
+> I did, see http://bugs.openembedded.net/show_bug.cgi?id=3D4827
 
-> aha! that's the one. that SHOULD be in the e-wm-images package missing!
->
-> opkg search /usr/share/enlightenment/data/images/test.png
-> e-wm-images - 0.16.999.043+svnr37468-r17.1
-> - /usr/share/enlightenment/data/images/test.png
->
-> (yes different svnrev - but that shouldn't make a difference - i'm just a little
-> head locally of my public patchset. i am sure stefan can confirm that test.png
-> is in the images package for the oe svnrev int he images he built)
+What's the next step now?
 
-Based on your hints, I found the problem, it's a bug in opkg that gets 
-triggered now and again:
-
-root@omap3evm:~# opkg install e-wm-images
-Package e-wm-images (0.16.999.043+svnr37324-r17.1) installed in root is 
-up to date.
-
-root@omap3evm:~# opkg search /usr/share/enlightenment/data/images/test.png
-e-wm-images - 0.16.999.043+svnr37324-r17.1 - 
-/usr/share/enlightenment/data/images/test.png
-
-root@omap3evm:~# file /usr/share/enlightenment/data/images/test.png
-/usr/share/enlightenment/data/images/test.png: cannot open 
-`/usr/share/enlightenment/data/images/test.png' (No such file or directory)
-
-root@omap3evm:~# opkg install e-wm-images -force-reinstall
-Reinstalling e-wm-images (0.16.999.043+svnr37324-r17.1) on root...
-Downloading 
-http://www.angstrom-distribution.org/feeds/2008/ipk/glibc//all/e-wm-images_0.16.999.043+svnr37324-r17.1_all.ipk
-Configuring e-wm-images
-
-root@omap3evm:~# !file
-file /usr/share/enlightenment/data/images/test.png
-/usr/share/enlightenment/data/images/test.png: PNG image data, 16 x 16, 
-8-bit/color RGBA, non-interlaced
-root@omap3evm:~#
-
-opkg doesn't install all files from a package on upgrade. I noticed this 
-before, but haven't been able to reproduce this.
-
-So there was indeed a bug in upgrading, but not in e :)
-
-Thanks for helping to debug this!
-
-regards,
-
-Koen
-
-
->
->>> - Full list of installed packages
->> http://dominion.thruhere.net/koen/OE/e17/e-installed-packages.txt
->>
->> Thanks for looking into this, let me know if you need more info.
->
-> strange - all the libs and e-wm etc. seem to be in sync (except etk - but that
-> wont affect e). how it should be. odd that u have the tiff saver module and not
-> the loader!
->
->> regards,
->>
->> Koen
->>
->> [1] modulo bugs due to not running image_post_process commands
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
-
-
+Steffen
 
 
