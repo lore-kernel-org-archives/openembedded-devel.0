@@ -1,26 +1,27 @@
-Received: from [202.4.237.240] (helo=kirsty.vergenet.net ident=postfix)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raster@vergenet.net>) id 1L20mC-00036q-HU
-	for openembedded-devel@openembedded.org; Mon, 17 Nov 2008 10:52:13 +0100
-Received: by kirsty.vergenet.net (Postfix, from userid 1001)
-	id 98FCA24082; Mon, 17 Nov 2008 20:49:51 +1100 (EST)
-Date: Mon, 17 Nov 2008 20:17:23 +1100
-From: Carsten Haitzler (The Rasterman) <raster@rasterman.com>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1L21TJ-0000V9-Pm
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Nov 2008 11:36:45 +0100
+Received: (qmail invoked by alias); 17 Nov 2008 10:34:24 -0000
+Received: from p579E19C6.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.25.198]
+	by mail.gmx.net (mp003) with SMTP; 17 Nov 2008 11:34:24 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/dch53T8zdSolXDpSKlviCcK+VCW1E93YAxd/Fck
+	eM1LmUsnrbqQYX
+Message-ID: <492148AA.3040908@gmx.net>
+Date: Mon, 17 Nov 2008 11:34:18 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20081117201723.460f8aab.raster@rasterman.com>
-In-Reply-To: <gfrbvd$8h9$1@ger.gmane.org>
-References: <gfnf5u$r3j$1@ger.gmane.org>
-	<20081116145911.GB14299@dodger.lab.datenfreihafen.org>
-	<gfpdr0$6vm$1@ger.gmane.org>
-	<20081117094617.9a4ad7a9.raster@rasterman.com>
-	<gfrbvd$8h9$1@ger.gmane.org>
-Organization: You expect me to be organized?
-X-Mailer: Sylpheed 2.4.8 (GTK+ 2.12.9; i486-pc-linux-gnu)
-X-Pants: on
-X-Cluestick: Get jiggy with it!
-Mime-Version: 1.0
-Cc: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: e-wm broken after yesterdays upgrade
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF52A@hiob.intern.dresearch.de><491D3DA5.5070503@gmx.net>	<69E6C70090A0A14498CC98FAE5E06B6E3CF52B@hiob.intern.dresearch.de>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF535@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF535@hiob.intern.dresearch.de>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.73
+Subject: Re: OXE810 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,108 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 09:52:13 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Nov 2008 10:36:45 -0000
+X-Groupsio-MsgNum: 6632
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig2E67186E2C741705A8C6E35E"
 
-On Mon, 17 Nov 2008 10:02:36 +0100 Koen Kooi <k.kooi@student.utwente.nl>
-babbled:
+--------------enig2E67186E2C741705A8C6E35E
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-> On 16-11-08 23:46, Carsten Haitzler (The Rasterman) wrote:
-> > On Sun, 16 Nov 2008 16:22:07 +0100 Koen Kooi<k.kooi@student.utwente.nl>
-> > babbled:
-> 
-> > aha! that's the one. that SHOULD be in the e-wm-images package missing!
-> >
-> > opkg search /usr/share/enlightenment/data/images/test.png
-> > e-wm-images - 0.16.999.043+svnr37468-r17.1
-> > - /usr/share/enlightenment/data/images/test.png
-> >
-> > (yes different svnrev - but that shouldn't make a difference - i'm just a
-> > little head locally of my public patchset. i am sure stefan can confirm
-> > that test.png is in the images package for the oe svnrev int he images he
-> > built)
-> 
-> Based on your hints, I found the problem, it's a bug in opkg that gets 
-> triggered now and again:
-> 
-> root@omap3evm:~# opkg install e-wm-images
-> Package e-wm-images (0.16.999.043+svnr37324-r17.1) installed in root is 
-> up to date.
-> 
-> root@omap3evm:~# opkg search /usr/share/enlightenment/data/images/test.png
-> e-wm-images - 0.16.999.043+svnr37324-r17.1 - 
-> /usr/share/enlightenment/data/images/test.png
-> 
-> root@omap3evm:~# file /usr/share/enlightenment/data/images/test.png
-> /usr/share/enlightenment/data/images/test.png: cannot open 
-> `/usr/share/enlightenment/data/images/test.png' (No such file or directory)
-> 
-> root@omap3evm:~# opkg install e-wm-images -force-reinstall
-> Reinstalling e-wm-images (0.16.999.043+svnr37324-r17.1) on root...
-> Downloading 
-> http://www.angstrom-distribution.org/feeds/2008/ipk/glibc//all/e-wm-images_0.16.999.043+svnr37324-r17.1_all.ipk
-> Configuring e-wm-images
-> 
-> root@omap3evm:~# !file
-> file /usr/share/enlightenment/data/images/test.png
-> /usr/share/enlightenment/data/images/test.png: PNG image data, 16 x 16, 
-> 8-bit/color RGBA, non-interlaced
-> root@omap3evm:~#
-> 
-> opkg doesn't install all files from a package on upgrade. I noticed this 
-> before, but haven't been able to reproduce this.
-> 
-> So there was indeed a bug in upgrading, but not in e :)
+Hi Steffen,
 
-oooh! aha! totally bizarre! well... at least i found a small buglet and fixes
-it (missing AUTHORS)... but this one was definitely a strange one that you got
-hit with and not others :(
+Sledz, Steffen schrieb:
+>>> please open a bug report and attach some of your files there. E.g.
+>>> the machine configuration.
+>> I did, see http://bugs.openembedded.net/show_bug.cgi?id=3D4827
+>=20
+> What's the next step now?
+sorry for the delay. As it seems no one else bothers testing,
+so I am doing it. :)
 
-> Thanks for helping to debug this!
-> 
-> regards,
-> 
-> Koen
-> 
-> 
-> >
-> >>> - Full list of installed packages
-> >> http://dominion.thruhere.net/koen/OE/e17/e-installed-packages.txt
-> >>
-> >> Thanks for looking into this, let me know if you need more info.
-> >
-> > strange - all the libs and e-wm etc. seem to be in sync (except etk - but
-> > that wont affect e). how it should be. odd that u have the tiff saver
-> > module and not the loader!
-> >
-> >> regards,
-> >>
-> >> Koen
-> >>
-> >> [1] modulo bugs due to not running image_post_process commands
-> >>
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >>
-> >
-> >
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+I applied your patches, will build a minimal image and if everything
+goes well I will push your changes.
+
+Afterwards I will propose you for rw access since it would make no sense
+if a machine maintainer needs people in between to fix problems for his
+own machine.
 
 
--- 
-------------- Codito, ergo sum - "I code, therefore I am" --------------
-The Rasterman (Carsten Haitzler)    raster@rasterman.com
+Regards
+Robert
 
 
+--------------enig2E67186E2C741705A8C6E35E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkkhSKsACgkQG9cfwmwwEtphWwCfeo6MlNlb5sXreP6xF5fDak5T
+6vMAn3YVrjIAoKydGcvbwlF7F/ZjVdln
+=MpU/
+-----END PGP SIGNATURE-----
+
+--------------enig2E67186E2C741705A8C6E35E--
