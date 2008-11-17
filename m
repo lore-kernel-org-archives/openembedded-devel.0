@@ -1,24 +1,40 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1L23t1-0005YI-Iw
+	(envelope-from <stefan@datenfreihafen.org>) id 1L23vH-0005eV-Ug
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 14:11:27 +0100
-Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244]
-	helo=tamarin.localnet) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1L23ql-0003cn-UD
+	Mon, 17 Nov 2008 14:13:48 +0100
+Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=localhost)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1L23sy-0006eh-DD by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Nov 2008 14:11:28 +0100
+Received: from stefan by localhost with local (Exim 4.69)
+	(envelope-from <stefan@datenfreihafen.org>) id 1L23sx-0004ji-7i
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 14:09:07 +0100
-From: Holger Freyther <zecke@selfish.org>
+	Mon, 17 Nov 2008 14:11:23 +0100
+Date: Mon, 17 Nov 2008 14:11:23 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Nov 2008 14:08:26 +0100
-User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
-References: <20081115233908.1158D189341@amethyst.openembedded.net>
-	<200811160133.01482.mickey@vanille-media.de>
-In-Reply-To: <200811160133.01482.mickey@vanille-media.de>
+Message-ID: <20081117131123.GB11401@datenfreihafen.org>
+References: <gfnf5u$r3j$1@ger.gmane.org>
+	<20081116145911.GB14299@dodger.lab.datenfreihafen.org>
+	<gfpdr0$6vm$1@ger.gmane.org>
+	<20081117094617.9a4ad7a9.raster@rasterman.com>
+	<gfrbvd$8h9$1@ger.gmane.org>
+	<20081117114057.GA11401@datenfreihafen.org>
+	<gfroqv$hd5$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200811171408.26298.zecke@selfish.org>
-Subject: Re: [oe-commits] Holger Hans Peter Freyther : u-boot-openmoko: Remove AUTHOR line, this was meant to be the recipe author line
+In-Reply-To: <gfroqv$hd5$1@ger.gmane.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: e-wm broken after yesterdays upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,25 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 13:11:27 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Nov 2008 13:13:48 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
+Hello.
 
+On Mon, 2008-11-17 at 13:42, Koen Kooi wrote:
+> On 17-11-08 12:40, Stefan Schmidt wrote:
+>> Hello.
+>>
+>> On Mon, 2008-11-17 at 10:02, Koen Kooi wrote:
+>>> opkg doesn't install all files from a package on upgrade. I noticed this
+>>> before, but haven't been able to reproduce this.
+>>>
+>>> So there was indeed a bug in upgrading, but not in e :)
+>>
+>> Nice work guys. I already opened the mail, downloaded the logs and was ready to
+>> dive into it. Good that I checked mails once a gain before. :)
+>>
+>> We should file a bug about this for opkg I guess. Koen, will you do this?
 >
-> No, that's wrong. AUTHOR refers to the package author -- since day one of
-> OE :)
+> Where does opkg bugzilla live nowadays?
 
-Mental note: AUTHOR != MAINTAINER :)
+If one think about OM as maintainer of opkg the here:
+https://docs.openmoko.org/trac/newticket
 
-still the AUTHOR line is most of the time not correct. The best example is 
-OpenStreetmap and and the creative commons license. It is not practicable to 
-list all authors.
+Component: opkg
 
-did you already revert that particual commit? or should i?
+You need to register to create new tickets IIRC.
 
-z. 
+Not sure if other people working on opkg and if there are other places for bugs.
+
+regards
+Stefan Schmidt
 
 
