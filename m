@@ -1,32 +1,37 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [74.125.44.158] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1L25uv-0007j4-CC
+	(envelope-from <ainulindale@gmail.com>) id 1L268g-0004fr-MP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 16:21:40 +0100
-Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=localhost)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1L25sc-0000xj-SR by authid <stefan@sostec.de> with cram_md5
+	Mon, 17 Nov 2008 16:35:46 +0100
+Received: by yx-out-1718.google.com with SMTP id 4so1074064yxp.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Nov 2008 16:19:13 +0100
-Received: from stefan by localhost with local (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1L25sc-00067v-0O
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 16:19:10 +0100
-Date: Mon, 17 Nov 2008 16:19:09 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Mon, 17 Nov 2008 07:33:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=AYDP5SDvuYtgd0zguZKMNl4sMmhLFqqZiilK3fJnf28=;
+	b=gUj3BUkKFkj144qBbcKEABMTdwwPuubwl8nO7A3m43wRT10YQhJOb1jRQeitTOa5rA
+	J8w4H8qm4zQ1bTb8ArJlFUHReokb8UUnPcN03SKO9WYEdV/9M2FImvLHpkZ8CP24+jTs
+	VKVyyZCD/vJbY4p3em71X8BUyXgAymLDFrjEQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=TXvEJsj5xh5Y5ZEvQU2ukFesoDABf4gQSeBjG8tR0gyE43hgU5Gbc4JS+sh1tt3TR6
+	G5tskekAU2lmoR5lEVZSxcFup8bsWCXojDavXwtiH9erzaWjV5BeCqV1DCyaE6kznKwx
+	aUerNptgH/oo+glhlgJpg72sjBGKB9xoH7u2s=
+Received: by 10.90.118.8 with SMTP id q8mr2760206agc.67.1226936005724;
+	Mon, 17 Nov 2008 07:33:25 -0800 (PST)
+Received: by 10.90.95.19 with HTTP; Mon, 17 Nov 2008 07:33:25 -0800 (PST)
+Message-ID: <76a8cde90811170733v7207ee89ucc5e9195fc4979c7@mail.gmail.com>
+Date: Mon, 17 Nov 2008 16:33:25 +0100
+From: "Julien Cassignol" <ainulindale@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081117151909.GG11401@datenfreihafen.org>
+In-Reply-To: <20081117151909.GG11401@datenfreihafen.org>
 MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Moving fontconfig cache out of tmpfs
+References: <20081117151909.GG11401@datenfreihafen.org>
+Subject: Re: Moving fontconfig cache out of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 15:22:13 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 17 Nov 2008 15:35:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello.
+On Mon, Nov 17, 2008 at 4:19 PM, Stefan Schmidt
+<stefan@datenfreihafen.org> wrote:
 
-Raster found out a pretty interestesting optimization option.
+> What do people think about pointing this to something not mounted as tmpfs? Any
+> problems I'm not aware of?
 
-At the moment we refer to the fontconfig cahc elike this in
-/etc/fonts/fonts.conf:
+As I just told Stefan, we already applied this tiny hack to SHR
+postrootfs (even if I'd like to do that any other "proper" way), and
+it's quite handy.
 
-<cachedir>/var/cache/fontconfig</cachedir>
-
-/var/cache is a symlink to var/volatile/cache which is mounted as tmpfs.
-
-This means that the cache has to regenerated on every boot. This can cost up to
-20s.
-
-What do people think about pointing this to something not mounted as tmpfs? Any
-problems I'm not aware of?
-
-regards
-Stefan Schmidt
+-- 
+Julien Cassignol
+http://www.ainulindale.net
 
 
