@@ -1,37 +1,26 @@
-Received: from [209.85.221.10] (helo=mail-qy0-f10.google.com)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1L29AN-0004Fw-8A
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Nov 2008 19:49:43 +0100
-Received: by qyk3 with SMTP id 3so529313qyk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Nov 2008 10:47:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=BdcKjozJgKCcfspSTDJC2m1Z45QavHtz+ygpN4YPfPs=;
-	b=hPtfQL6NVG5HxZfIE2/cJ35TUolLiugpazuOpDFavup7gEBgmhb2xzrTOpkpr3G2k1
-	73dW5FvaOnCxLWTdmndH+LMe9TjDWnl58fDHMxIRWPFpBdG5PbbogIZvRKhZLZIsS9ca
-	UltCyrmef54hH/gCQjXhEjCwbn3nxH0qcEv10=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=J/uhIS88EOwooLNyUNYegCk8eqxNxIgjOEyXl7wIUjLolgFQPqng0OmeusrUYOmPTF
-	pRtHOhkEpN2vpbwENLChpnPa4VX89eWWsW0UlONBMw+AzgMsKu3abNBqSdrpwwluQFqF
-	9eS/EzAubzT6J0Fv8inL02srbspM4gIWorJsw=
-Received: by 10.214.181.1 with SMTP id d1mr2844235qaf.376.1226947634967;
-	Mon, 17 Nov 2008 10:47:14 -0800 (PST)
-Received: by 10.214.12.10 with HTTP; Mon, 17 Nov 2008 10:47:14 -0800 (PST)
-Message-ID: <c384c5ea0811171047oa367b5bg25d01e3f50a9592f@mail.gmail.com>
-Date: Mon, 17 Nov 2008 19:47:14 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20081117151909.GG11401@datenfreihafen.org>
+	(envelope-from <trini@kernel.crashing.org>) id 1L29MM-0005LA-Ld
+	for openembedded-devel@openembedded.org; Mon, 17 Nov 2008 20:02:07 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20081117185942.IJEA23774.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 17 Nov 2008 13:59:42 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id gJzi1a00P1E665w04Jzi5w; Mon, 17 Nov 2008 13:59:43 -0500
+X-Authority-Analysis: v=1.0 c=1 a=PfJKAhaLNuEA:10 a=09wlrRp3oBwA:10
+	a=HM_2q3QZwszI4YwK7DIA:9 a=2vX9VYTEHTma5cNk8nH2uUvB94kA:4
+	a=k-kO48AawpMA:10 a=e0fhMjvlNPMA:10
+X-CM-Score: 0.00
+Date: Mon, 17 Nov 2008 11:59:42 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20081117185942.GN15695@smtp.west.cox.net>
 MIME-Version: 1.0
-References: <20081117151909.GG11401@datenfreihafen.org>
-Subject: Re: Moving fontconfig cache out of tmpfs
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: [BUG 4797] task-sdk.bb and task-sdk-bare.bb duplicate some	functionality
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +34,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Nov 2008 18:49:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Nov 2008 19:02:08 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello,
+[ Both patches are also attached to bug 4797 ]
 
-On Mon, Nov 17, 2008 at 4:19 PM, Stefan Schmidt
-<stefan@datenfreihafen.org> wrote:
-> What do people think about pointing this to something not mounted as tmpfs?
+Currently, we have task-sdk.bb, which provides task-sdk-bare, and will
+bring in just abstracted ${LIBC}, $[LIBC}-dev and libgcc-dev.  We also
+have task-sdk-bare.bb which brings in a number of glibc packages, libgcc
+and libstdc++/libstdc++-dev and as far as I can tell is the only
+task-sdk-bare actually used.  The attached patch consolidates both so
+that task-sdk-bare.bb will be useful on both glibc and uclibc.
 
-> Any problems I'm not aware of?
->
-Read-only filesystems :-) But let's check www.fhs.org:
+Signed-off-by: Tom Rini <trini@embeddedalley.com>
 
-/var/lib/: "State information should generally remain valid after a reboot,"
-/var/cache/: "Files located under /var/cache may be expired in an
-application specific manner, by the system administrator, or both. The
-application must always be able to recover from manual deletion of
-these files (generally because of a disk space shortage)"
+task-sdk-bare: Update and abstract to support uclibc
+task-sdk.bb provided a task-sdk-bare version that supported uclibc, but
+this wasn't used anymore.  Update task-sdk-bare.bb to have glibc / uclibc
+abstractions and delete the unused file.
 
-/var/lib/ looks fine to me.
-
-Read-only systems without nv storage should probably copy/mount
-/var/lib/ to volatile upon boot.
-
-Regards,
+diff --git a/packages/tasks/task-sdk-bare.bb b/packages/tasks/task-sdk-bare.bb
+index d2d40f6..ea0ab31 100644
+--- a/packages/tasks/task-sdk-bare.bb
++++ b/packages/tasks/task-sdk-bare.bb
+@@ -5,7 +5,7 @@ ALLOW_EMPTY = "1"
+ 
+ PACKAGES = "${PN}"
+ 
+-RDEPENDS_${PN} = "\
++GLIBC_PKGS = "\
+     glibc \
+     glibc-dbg \
+     glibc-dev \
+@@ -18,6 +18,16 @@ RDEPENDS_${PN} = "\
+     glibc-gconv-iso8859-1 \
+     glibc-gconv-iso8859-15 \
+     locale-base-en-gb \
++    "
++
++LIBC_PKGS_linux = "${GLIBC_PKGS}"
++LIBC_PKGS_linux-gnueabi = "${GLIBC_PKGS}"
++LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev"
++LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev"
++
++RDEPENDS_${PN} = "\
++    ${LIBC_PKGS} \
+     libgcc \
+     libstdc++ \
++    libstdc++-dev \
+ "
+diff --git a/packages/tasks/task-sdk.bb b/packages/tasks/task-sdk.bb
+deleted file mode 100644
+index 79e9fef..0000000
+--- a/packages/tasks/task-sdk.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "SDK packages"
+-PR = "r8"
+-LICENSE = "MIT"
+-ALLOW_EMPTY = "1"
+-
+-PACKAGES = "\
+-    task-sdk-bare \
+-    "
+-
+-DEPENDS = "virtual/libc"
+-
+-LIBC_linux = "glibc"
+-LIBC_linux-uclibc = "uclibc"
+-LIBC_linux-gnueabi = "glibc"
+-LIBC_linux-uclibcgnueabi = "uclibc"
+-
+-
+-RDEPENDS_task-sdk-bare = "\
+-    ${LIBC} \
+-    ${LIBC}-dev \
+-    libgcc \
+-    "
 -- 
-Leon
+1.5.2.5
+
+As an addition to the previous patch, add uclibc-thread-db to the list
+of uclibc packages to install, based on glibc bringing in
+glibc-thread-db.
+diff --git a/packages/tasks/task-sdk-bare.bb b/packages/tasks/task-sdk-bare.bb
+index ea0ab31..ab338e6 100644
+--- a/packages/tasks/task-sdk-bare.bb
++++ b/packages/tasks/task-sdk-bare.bb
+@@ -22,8 +22,8 @@ GLIBC_PKGS = "\
+ 
+ LIBC_PKGS_linux = "${GLIBC_PKGS}"
+ LIBC_PKGS_linux-gnueabi = "${GLIBC_PKGS}"
+-LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev"
+-LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev"
++LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev uclibc-thread-db"
++LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev uclibc-thread-db"
+ 
+ RDEPENDS_${PN} = "\
+     ${LIBC_PKGS} \
+
+-- 
+Tom Rini
 
 
