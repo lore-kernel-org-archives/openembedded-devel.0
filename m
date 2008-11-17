@@ -1,25 +1,35 @@
-Received: from [202.4.237.240] (helo=kirsty.vergenet.net ident=postfix)
+Received: from [209.85.217.15] (helo=mail-gx0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raster@vergenet.net>) id 1L1qQB-0000Wg-2V
+	(envelope-from <mturquette@gmail.com>) id 1L1wXu-0007K2-Gy
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Nov 2008 23:48:48 +0100
-Received: by kirsty.vergenet.net (Postfix, from userid 1001)
-	id 466FB24097; Mon, 17 Nov 2008 09:46:28 +1100 (EST)
-Date: Mon, 17 Nov 2008 09:46:17 +1100
-From: Carsten Haitzler (The Rasterman) <raster@rasterman.com>
+	Mon, 17 Nov 2008 06:21:11 +0100
+Received: by gxk8 with SMTP id 8so1642892gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Nov 2008 21:18:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type:references;
+	bh=1+HsTPQDTOE6L4MKymJH4DxxVMwNgjN8PWW1KCXHQlY=;
+	b=rUof8jmqceeCA+VKInh3bffTnRXdVj+wer7tmLq4MVGzpekx5W+7DeJs0hDPoQywYy
+	S2mnOfNEJKhlmlluK5ry4rDfdNVobcj3LdeQIJyjHzBhGAmMW5jlHjgiUblonAe7hpgK
+	+enN0OZHdL6t77LiKJNdkpx2r58xAcaX0F6IE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:references;
+	b=TAkAJqcIHlbehV92YEEy7xmjsEVAPibs2A1h8vYOAjpsmilFH9/YVVb6Qzuo2dnPuG
+	iyOvWfQJd9jCgJrnuIybxP1NDdEyIyYL4tr43NB1ADBe5gDCYXccT3P2LFwiRrqqCd0M
+	Vh1kG9tE77TWvA31CktGSllyGfDEZ1LXCldkQ=
+Received: by 10.90.84.17 with SMTP id h17mr2450297agb.86.1226899129749;
+	Sun, 16 Nov 2008 21:18:49 -0800 (PST)
+Received: by 10.90.73.3 with HTTP; Sun, 16 Nov 2008 21:18:49 -0800 (PST)
+Message-ID: <59e7e6f90811162118o68610184x6103071ebed9405d@mail.gmail.com>
+Date: Sun, 16 Nov 2008 23:18:49 -0600
+From: "Mike Turquette" <mturquette@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20081117094617.9a4ad7a9.raster@rasterman.com>
-In-Reply-To: <gfpdr0$6vm$1@ger.gmane.org>
-References: <gfnf5u$r3j$1@ger.gmane.org>
-	<20081116145911.GB14299@dodger.lab.datenfreihafen.org>
-	<gfpdr0$6vm$1@ger.gmane.org>
-Organization: You expect me to be organized?
-X-Mailer: Sylpheed 2.4.8 (GTK+ 2.12.9; i486-pc-linux-gnu)
-X-Pants: on
-X-Cluestick: Get jiggy with it!
-Mime-Version: 1.0
-Cc: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: e-wm broken after yesterdays upgrade
+In-Reply-To: <59e7e6f90811161949k4020d983kf32263237b20bf9b@mail.gmail.com>
+MIME-Version: 1.0
+References: <59e7e6f90811161949k4020d983kf32263237b20bf9b@mail.gmail.com>
+Subject: libgcrypt tries to link with host libc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,191 +43,257 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Nov 2008 22:48:48 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Mon, 17 Nov 2008 05:21:11 -0000
+X-Groupsio-MsgNum: 6624
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_40550_13251091.1226899129639"
+
+------=_Part_40550_13251091.1226899129639
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Sun, 16 Nov 2008 16:22:07 +0100 Koen Kooi <k.kooi@student.utwente.nl>
-babbled:
+Hi all,
 
-> On 16-11-08 15:59, Stefan Schmidt wrote:
-> > Hello.
-> >
-> > Sorry for the delay. Having a cold I decided to have a releaxed weekend.
-> > Will take a deeper look next days if the stuff below does not help.
-> >
-> > On Sat, 2008-11-15 at 22:32, Koen Kooi wrote:
-> >> I just built and installed the updated e-wm and it refuses to start:
-> >
-> > Installed means from the updated angstrom feed I guess?
-> 
-> Yes, I did 'bitbake e-wm', synced the new packages to the feeds and did 
-> 'opkg update ; opkg upgrade' on the device (an omap3evm board).
-> On the omap3evm board I'd like to test illume to see if it is fit to 
-> replace mb-wm in angstrom pda images, on the beagleboard I'd like to run 
-> a 'regular' e-wm. The omap3evm was running the 'regular' e-wm at the 
-> time of the upgrade.
+I'm attempting to write an external-csl-toolchain_2007q3-51 recipe for
+Poky.  This uses Poky's POKYMODE mechanism which is why I've copied
+the poky list on this email, however I think my error isn't
+necessarily Poky-specific as it has wider applications for anyone
+using an external toolchain.
 
-hmmm. i wonder... did this actually rebuild and upgrade all the dependencies?
-that could be the problem. right now the efl .bb's SHOULD have a dependency on
-the SAME svnrev (ie e-wm svnr37568 should depend on svnr37568 of evas, edje
-etc. etc.). but they don't. are: eet, evas, edje, ecore, eina, efreet, embryo,
-edje, e-wm in-sync with their version?
+When building libgcrypt-1.2.4-r5 I get the following error,
+| arm-none-linux-gnueabi-libtool: link: arm-none-linux-gnueabi-gcc
+-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -shared
+.libs/libgcrypt_la-misc.o .libs/libgcrypt_la-global.o
+.libs/libgcrypt_la-sexp.o .libs/libgcrypt_la-stdmem.o
+.libs/libgcrypt_la-secmem.o .libs/libgcrypt_la-missing-string.o
+.libs/libgcrypt_la-module.o .libs/libgcrypt_la-ath.o
+-Wl,--whole-archive ../cipher/.libs/libcipher.a ../mpi/.libs/libmpi.a
+-Wl,--no-whole-archive  -Wl,-rpath
+-Wl,/home/mturquette/src/ext/build/tmp/staging/armv7a-none-linux-gnueabi/usr/lib
+-L/usr/local/csl/arm-2007q3/arm-none-linux-gnueabi/lib
+-L/home/mturquette/src/ext/build/tmp/staging/armv7a-none-linux-gnueabi/usr/lib
+/home/mturquette/src/ext/build/tmp/staging/armv7a-none-linux-gnueabi/usr/lib/libgpg-error.so
+-lnsl  -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+-Wl,--version-script=./libgcrypt.vers -Wl,-rpath-link
+-Wl,/usr/local/csl/arm-2007q3/arm-none-linux-gnueabi/lib   -Wl,-soname
+-Wl,libgcrypt.so.11 -o .libs/libgcrypt.so.11.2.3
+| /home/mturquette/data/toolchains/arm-2007q3/bin/../lib/gcc/arm-none-linux-gnueabi/4.2.1/../../../../arm-none-linux-gnueabi/bin/ld:
+skipping incompatible /lib/libc.so.6 when searching for /lib/libc.so.6
+| /home/mturquette/data/toolchains/arm-2007q3/bin/../lib/gcc/arm-none-linux-gnueabi/4.2.1/../../../../arm-none-linux-gnueabi/bin/ld:
+cannot find /lib/libc.so.6
+| collect2: ld returned 1 exit status
+| make[2]: *** [libgcrypt.la] Error 1
 
-> > As a sidenote. This was not rushed in without testing or review. I spent
-> > some good hours on reviewing it together with mickey, in his role as E
-> > maintainer in OE. We also decided to keep some more patches out until there
-> > is more time for review.
-> >
-> > And I of course tested it before pushing. Building and actually using it. No
-> > breakage here. But as I only tested with a complete new image and not with
-> > updating from a feed I may have messed up here. Should not happen though :(
-> 
-> It seems that almost no OE developer is tracking upgrade paths for such 
-> intrusive changes, which is a pity. You'd be suprised how much bugs 
-> there are when you try to build an image from the feeds[1] instead of 
-> from a pristine deploy/. Anyway, mistakes happen :)
-> 
-> > If eina is installed in a matching version I would need the following to
-> > track this down as I don't have the problem here:
-> 
-> libeina0 - 2:0.0.1+svnr37324-r0.1 -
-> 
-> > - Full x.log
-> 
-> http://dominion.thruhere.net/koen/OE/e17/e-log.txt
-> 
-> It has scary messages about missing vars, but it *does* find the evas 
-> engines. However:
+Attached is external-csl-toolchain_2007q3-51.bb.  It is basically a
+clone of Poky's external-csl-toolchain_2006q3-27.bb except that
+do_stage adds more stuff.  ${STAGING_DIR_TARGET}${base_libdir} does
+have libc.so.6 in it but libtool doesn't seem to be picking it up and
+instead tries (and fails) to link against my host /lib/libc.so.6,
+which seems like a Very Bad Thing to me.
 
-oooooh! thaqt's bad. well ok - the scary stuff. e is actually marginally smart.
-it doesnt just rely on knowing its installed location at compile time. you can
-actually relocate e and efl on the fly at runtime. even if you build with a
-prefix of --prefix=/usr or /usr/local or /opt/e17 - just mv all the
-PREFIX/lib/.so's, PREFIX/bin/binaries and PREFIX/share/* dirs and PREFIX/lib/*
-dirs of the respective app (in this case - same applies to evas or edje etc.)
-and they will figure out their new home (as long as they retain a common PREFIX
-for that package - ie share/* stuff moves to the same PREFIX as libs and bins).
-it tries to figure this out many ways. first it checks /proc/self/maps. it
-looks for a function inside the process (or lib) to see where it's mapped and
-if the address is int he mapping range for anything in /proc/self/maps - if it
-finds it the full path is there (well - should be unless its deleted or stack
-or heap...) if this fails it looks at argv[0] - if its a full path.. well..
-thats the binary - if its not - it checks for the binary in $PATH and when
-found knows the full path. if this fails... it falls back to the good old
-"compiled in prefix" like everyone else - it also allows you to set environment
-variables to tell it what its prefix should be, if you moved it. these always
-take precedence if set, even over auto-finding. what is most odd... is that
-it's failing for you. on a linux host i can't imagine it failing
-- /proc/self/maps is the first port of call and that should work! something
-strange is up here... maybe its the missing AUTHORS
-file? /usr/share/enlightenment/AUTHORS - thats uses as a "is it there" file
-detect for the prefix search. it's an extra check (it's also used by e's about
-box). ok checked - yes. AUTHORS missing from packaging. fixed:
---------
-diff --git a/packages/e17/e-wm_svn.bb b/packages/e17/e-wm_svn.bb
-index a2fabc7..7734bf2 100644
---- a/packages/e17/e-wm_svn.bb
-+++ b/packages/e17/e-wm_svn.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "The Enlightenment Window Manager Version 17"
- DEPENDS = "eet evas ecore edje efreet edbus"
- LICENSE = "MIT BSD"
- PV = "0.16.999.043+svnr${SRCREV}"
--PR = "r17"
-+PR = "r18"
- 
- inherit e update-alternatives
- 
-@@ -92,6 +92,8 @@ FILES_${PN} = "\
-   ${datadir}/enlightenment/data/icons \
-   ${datadir}/enlightenment/data/input_methods \
-   ${datadir}/enlightenment/data/config/profile.cfg \
-+  ${datadir}/enlightenment/AUTHORS \
-+  ${datadir}/enlightenment/COPYING \
-   ${sysconfdir} \
- "
- FILES_${PN}-config-default = "${datadir}/enlightenment/data/config/default"
---------
-this will fix the scary output :) e's own fallbacks to the old-school "compiled
-in path" saved it from ever breaking... hooray for multiple levels of
-redundancy :) thanks for that catch!
+Why can't libtool find and use the libc I have in staging?  What do
+the normal compiled toolchains provide that I am not?  Also, does
+binconfig.bbclass know the difference between *-native packages and
+cross-compiled ones?  I know prebuilt toolchains aren't all the rage
+with OE devs, but some customers refuse to use toolchains built from
+source :(
 
-> root@omap3evm:~# cat /usr/bin/enlightenment_start.oe
-> #!/bin/sh
-> 
-> E_PROFILE=""
-> if [ -r /etc/enlightenment/default_profile ]; then
->    . /etc/enlightenment/default_profile
-> fi
-> 
-> renice -10 -p $$
-> exec enlightenment_start $E_PROFILE
-> 
-> root@omap3evm:~# ls /etc/enlightenment/
-> sysactions.conf
-> root@omap3evm:~#
-> 
-> Do I need an extra package to get the default_profile?
+Thanks much,
+Mike
 
-hmm the above is a bit of legacy before e had proper default profile settings.
-the default profile.. is "default" if its not set
-there. /usr/share/enlightenment/data/config/profile.cfg contains it (eet -l to
-list keys, eet -x config profile.cfg profile-name; cat profile-name  to extract
-- u can insert with eet too).
+p.s: sorry if this is a resend.  I subscribed to the list AFTER
+sending it the firs time.  The original mail did not bounce, but it
+also did not show up in the archives so I'm resending after my
+subscription.
 
-i wouldn't recommend using the default_profile file thing. this is only here to
-keep openmoko's previous setup happy. you can always change profiles on the fly
-runtime and to go back to default is a few clicks away (default will always run
-the install wizard as e comes out of the box). so yes - you need another package
-to provide that default_profile, (which is just a test file that has "-profile
-PROFILENAME" in it). once you have this you are stuck in that profile though -
-no escape (without a restart of your x session entirely after
-removing/changing the package).
+------=_Part_40550_13251091.1226899129639
+Content-Type: application/octet-stream;
+ name=external-csl-toolchain_2007q3-51.bb
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_fnmkr1vq0
+Content-Disposition: attachment;
+ filename=external-csl-toolchain_2007q3-51.bb
 
-> > - Full strace
-> 
-> http://dominion.thruhere.net/koen/OE/e17/e-strace.txt
+SU5ISUJJVF9ERUZBVUxUX0RFUFMgPSAiMSIKClBST1ZJREVTID0gIlwKICAgIGxpbnV4LWxpYmMt
+aGVhZGVycyBcCiAgICB2aXJ0dWFsL2FybS1ub25lLWxpbnV4LWdudWVhYmktZ2NjIFwKICAgIHZp
+cnR1YWwvYXJtLW5vbmUtbGludXgtZ251ZWFiaS1nKysgXAogICAgdmlydHVhbC9hcm0tbm9uZS1s
+aW51eC1nbnVlYWJpLWdjYy1pbml0aWFsIFwKICAgIHZpcnR1YWwvYXJtLW5vbmUtbGludXgtZ251
+ZWFiaS1iaW51dGlscyBcCiAgICB2aXJ0dWFsL2FybS1ub25lLWxpbnV4LWdudWVhYmktbGliYy1m
+b3ItZ2NjIFwKICAgIHZpcnR1YWwvbGliYyBcCiAgICB2aXJ0dWFsL2xpYmludGwgXAogICAgdmly
+dHVhbC9saWJpY29udiBcCiAgICBnbGliYy10aHJlYWQtZGIgXAogICAgdmlydHVhbC9saW51eC1s
+aWJjLWhlYWRlcnMgIgpSUFJPVklERVMgPSAiZ2xpYmMtdXRpbHMgbGlic2VnZmF1bHQgZ2xpYmMt
+dGhyZWFkLWRiIgpQQUNLQUdFU19EWU5BTUlDID0gImdsaWJjLWdjb252LSoiClBSID0gInIxIgoK
+U1JDX1VSSSA9ICJodHRwOi8vd3d3LmNvZGVzb3VyY2VyeS5jb20vcHVibGljL2dudV90b29sY2hh
+aW4vYXJtLW5vbmUtbGludXgtZ251ZWFiaS9hcm0tJHtQVn0tYXJtLW5vbmUtbGludXgtZ251ZWFi
+aS1pNjg2LXBjLWxpbnV4LWdudS50YXIuYnoyIFwKZmlsZTovL1NVUFBPUlRFRCIKClMgPSAiJHtX
+T1JLRElSfS9hcm0tMjAwN3EzIgoKZG9faW5zdGFsbCgpIHsKICAgIGluc3RhbGwgLWQgJHtEfSR7
+c3lzY29uZmRpcn0gJHtEfSR7YmluZGlyfSAke0R9JHtzYmluZGlyfSAke0R9JHtiYXNlX2JpbmRp
+cn0gJHtEfSR7bGliZGlyfQogICAgaW5zdGFsbCAtZCAke0R9JHtiYXNlX2xpYmRpcn0gJHtEfSR7
+YmFzZV9zYmluZGlyfSAke0R9JHtkYXRhZGlyfQoKICAgIGNwIC1hICR7U30vYXJtLW5vbmUtbGlu
+dXgtZ251ZWFiaS9saWJjL2xpYi8qICAke0R9JHtiYXNlX2xpYmRpcn0KICAgIGNwIC1hICR7U30v
+YXJtLW5vbmUtbGludXgtZ251ZWFiaS9saWJjL2V0Yy8qICAke0R9JHtzeXNjb25mZGlyfQogICAg
+Y3AgLWEgJHtTfS9hcm0tbm9uZS1saW51eC1nbnVlYWJpL2xpYmMvc2Jpbi8qICR7RH0ke2Jhc2Vf
+c2JpbmRpcn0KICAgIGNwIC1hICR7U30vYXJtLW5vbmUtbGludXgtZ251ZWFiaS9saWJjL3Vzci8q
+ICAke0R9L3Vzcgp9Cgpkb19zdGFnZSgpIHsKCWluc3RhbGwgLWQgJHtTVEFHSU5HX0lOQ0RJUn0K
+CWNwIC1hICR7U30vYXJtLW5vbmUtbGludXgtZ251ZWFiaS9saWJjL3Vzci9pbmNsdWRlLyogJHtT
+VEFHSU5HX0lOQ0RJUn0KCglpbnN0YWxsIC1kICR7U1RBR0lOR19MSUJESVJ9CgljcCAtYSAke1N9
+L2FybS1ub25lLWxpbnV4LWdudWVhYmkvbGliYy91c3IvbGliLyogJHtTVEFHSU5HX0xJQkRJUn0K
+CglpbnN0YWxsIC1kICR7U1RBR0lOR19ESVJfVEFSR0VUfSR7bGF5b3V0X2Jhc2VfbGliZGlyfQoJ
+Y3AgLWEgJHtTfS9hcm0tbm9uZS1saW51eC1nbnVlYWJpL2xpYmMvbGliLyogJHtTVEFHSU5HX0RJ
+Ul9UQVJHRVR9JHtiYXNlX2xpYmRpcn0KfQoKUEFDS0FHRVMgPSAibGliZ2NjIGxpYmdjYy1kZXYg
+bGlic3RkYysrIGxpYnN0ZGMrKy1kZXYgbGludXgtbGliYy1oZWFkZXJzIgpGSUxFU19saWJnY2Mg
+PSAiJHtiYXNlX2xpYmRpcn0vbGliZ2NjX3Muc28uMSIKRklMRVNfbGliZ2NjLWRldiA9ICIke2Jh
+c2VfbGliZGlyfS9saWJnY2Nfcy5zbyIKRklMRVNfbGlic3RkYysrID0gIiR7bGliZGlyfS9saWJz
+dGRjKysuc28uKiIKRklMRVNfbGlic3RkYysrLWRldiA9ICIke2luY2x1ZGVkaXJ9L2MrKy8ke1BW
+fSBcCgkJICAgICAgICR7bGliZGlyfS9saWJzdGRjKysuc28gXAoJCSAgICAgICAke2xpYmRpcn0v
+bGlic3RkYysrLmxhIFwKCQkgICAgICAgJHtsaWJkaXJ9L2xpYnN0ZGMrKy5hIFwKCQkgICAgICAg
+JHtsaWJkaXJ9L2xpYnN1cGMrKy5sYSBcCgkJICAgICAgICR7bGliZGlyfS9saWJzdXBjKysuYSIK
+RklMRVNfbGludXgtbGliYy1oZWFkZXJzID0gIiR7aW5jbHVkZWRpcn0vYXNtKiBcCiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAke2luY2x1ZGVkaXJ9L2xpbnV4IFwKICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICR7aW5jbHVkZWRpcn0vbXRkIFwKICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICR7aW5jbHVkZWRpcn0vcmRtYSBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAke2lu
+Y2x1ZGVkaXJ9L3Njc2kgXAogICAgICAgICAgICAgICAgICAgICAgICAgICAgJHtpbmNsdWRlZGly
+fS9zb3VuZCBcCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAke2luY2x1ZGVkaXJ9L3ZpZGVv
+IFwKIgoKUEFDS0FHRVMgKz0gImdsaWJjLWRiZyBnbGliYyBjYXRjaHNlZ3Ygc2xuIG5zY2QgbGRk
+IGxvY2FsZWRlZiBnbGliYy11dGlscyBnbGliYy1kZXYgZ2xpYmMtZG9jIGdsaWJjLWxvY2FsZSBs
+aWJzZWdmYXVsdCBnbGliYy1leHRyYS1uc3MgZ2xpYmMtdGhyZWFkLWRiIGdsaWJjLXBjcHJvZmls
+ZSIKCmxpYmNfYmFzZWxpYnMgPSAiL2xpYi9saWJjKiAvbGliL2xpYm0qIC9saWIvbGQqIC9saWIv
+bGlicHRocmVhZCogL2xpYi9saWJyZXNvbHYqIC9saWIvbGlicnQqIC9saWIvbGlidXRpbCogL2xp
+Yi9saWJuc2wqIC9saWIvbGlibnNzX2ZpbGVzKiAvbGliL2xpYm5zc19jb21wYXQqIC9saWIvbGli
+bnNzX2RucyogL2xpYi9saWJkbCogL2xpYi9saWJhbmwqIC9saWIvbGliQnJva2VuTG9jYWxlKiIK
+CkZJTEVTX2dsaWJjID0gIiR7c3lzY29uZmRpcn0gJHtsaWJjX2Jhc2VsaWJzfSAvc2Jpbi9sZGNv
+bmZpZyAke2xpYmV4ZWNkaXJ9LyogJHtkYXRhZGlyfS96b25laW5mbyIKRklMRVNfZ2xpYmMtZGV2
+ID0gIiR7aW5jbHVkZWRpcn0iCkZJTEVTX2xkZCA9ICIke2JpbmRpcn0vbGRkIgpGSUxFU19saWJz
+ZWdmYXVsdCA9ICIvbGliL2xpYlNlZ0ZhdWx0KiIKRklMRVNfZ2xpYmMtZXh0cmEtbnNzID0gIi9s
+aWIvbGlibnNzKiIKRklMRVNfZ2xpYmMtZGV2X2FwcGVuZCA9ICIgJHtsaWJkaXJ9LyoubyAke2Jp
+bmRpcn0vcnBjZ2VuICR7bGliZGlyfS8qLnNvIgpGSUxFU19uc2NkID0gIiR7c2JpbmRpcn0vbnNj
+ZCoiCkZJTEVTX2dsaWJjLXV0aWxzID0gIiR7YmluZGlyfS8qICR7c2JpbmRpcn0vKiIKRklMRVNf
+Z2xpYmMtZ2NvbnYgPSAiJHtsaWJkaXJ9L2djb252LyoiCkZJTEVTX2dsaWJjLWRiZyArPSAiICR7
+bGliZGlyfS9nY29udi8uZGVidWcgJHtsaWJleGVjZGlyfS8qLy5kZWJ1ZyAke2Jhc2VfbGliZGly
+fS8uZGVidWcgJHtsaWJkaXJ9Ly5kZWJ1ZyIKRklMRVNfY2F0Y2hzZWd2ID0gIiR7YmluZGlyfS9j
+YXRjaHNlZ3YiClJERVBFTkRTX2NhdGNoc2VndiA9ICJsaWJzZWdmYXVsdCIKRklMRVNfZ2xpYmMt
+cGNwcm9maWxlID0gIi9saWIvbGlicGNwcm9maWxlLnNvIgpGSUxFU19nbGliYy10aHJlYWQtZGIg
+PSAiL2xpYi9saWJ0aHJlYWRfZGIqIgpSUFJPVklERVNfZ2xpYmMtZGV2ICs9ICJsaWJjLWRldiIK
+TEVBRF9TT05BTUUgPSAibGliYy5zby42IgoKREVTQ1JJUFRJT05fc2xuID0gImdsaWJjOiBjcmVh
+dGUgc3ltYm9saWMgbGlua3MgYmV0d2VlbiBmaWxlcyIKREVTQ1JJUFRJT05fbnNjZCA9ICJnbGli
+YzogbmFtZSBzZXJ2aWNlIGNhY2hlIGRhZW1vbiBmb3IgcGFzc3dkLCBncm91cCwgYW5kIGhvc3Rz
+IgpERVNDUklQVElPTl9nbGliYy1leHRyYS1uc3MgPSAiZ2xpYmM6IG5pcywgbmlzcGx1cyBhbmQg
+aGVzaW9kIHNlYXJjaCBzZXJ2aWNlcyIKREVTQ1JJUFRJT05fbGRkID0gImdsaWJjOiBwcmludCBz
+aGFyZWQgbGlicmFyeSBkZXBlbmRlbmNpZXMiCkRFU0NSSVBUSU9OX2xvY2FsZWRlZiA9ICJnbGli
+YzogY29tcGlsZSBsb2NhbGUgZGVmaW5pdGlvbiBmaWxlcyIKREVTQ1JJUFRJT05fZ2xpYmMtdXRp
+bHMgPSAiZ2xpYmM6IG1pc2MgdXRpbGl0aWVzIGxpa2UgaWNvbmYsIGxvY2FsLCBnZW5jYXQsIHR6
+c2VsZWN0LCBycGNpbmZvLCAuLi4iCgpGSUxFU19zbG4gPSAiJHtiYXNlX3NiaW5kaXJ9L3NsbiIK
+RklMRVNfbG9jYWxlZGVmID0gIiR7YmluZGlyfS9sb2NhbGVkZWYiCgoKVE1QX0xPQ0FMRT0iL3Rt
+cC9sb2NhbGUke2xpYmRpcn0vbG9jYWxlIgoKbG9jYWxlX2Jhc2VfcG9zdGluc3QoKSB7CiMhL2Jp
+bi9zaAoKaWYgWyAieCREIiAhPSAieCIgXTsgdGhlbgogIGV4aXQgMQpmaQoKcm0gLXJmICR7VE1Q
+X0xPQ0FMRX0KbWtkaXIgLXAgJHtUTVBfTE9DQUxFfQppZiBbIC1mICR7bGliZGlyfS9sb2NhbGUv
+bG9jYWxlLWFyY2hpdmUgXTsgdGhlbgogICAgICAgIGNwICR7bGliZGlyfS9sb2NhbGUvbG9jYWxl
+LWFyY2hpdmUgJHtUTVBfTE9DQUxFfS8KZmkKbG9jYWxlZGVmIC0taW5wdXRmaWxlPSR7ZGF0YWRp
+cn0vaTE4bi9sb2NhbGVzLyVzIC0tY2hhcm1hcD0lcyAtLXByZWZpeD0vdG1wL2xvY2FsZSAlcwpt
+a2RpciAtcCAke2xpYmRpcn0vbG9jYWxlLwptdiAke1RNUF9MT0NBTEV9L2xvY2FsZS1hcmNoaXZl
+ICR7bGliZGlyfS9sb2NhbGUvCnJtIC1yZiAke1RNUF9MT0NBTEV9Cn0KCmxvY2FsZV9iYXNlX3Bv
+c3RybSgpIHsKIyEvYmluL3NoCgpybSAtcmYgJHtUTVBfTE9DQUxFfQpta2RpciAtcCAke1RNUF9M
+T0NBTEV9CmlmIFsgLWYgJHtsaWJkaXJ9L2xvY2FsZS9sb2NhbGUtYXJjaGl2ZSBdOyB0aGVuCglj
+cCAke2xpYmRpcn0vbG9jYWxlL2xvY2FsZS1hcmNoaXZlICR7VE1QX0xPQ0FMRX0vCmZpCmxvY2Fs
+ZWRlZiAtLWRlbGV0ZS1mcm9tLWFyY2hpdmUgLS1pbnB1dGZpbGU9JHtkYXRhZGlyfS9sb2NhbGVz
+LyVzIC0tY2hhcm1hcD0lcyAtLXByZWZpeD0vdG1wL2xvY2FsZSAlcwptdiAke1RNUF9MT0NBTEV9
+L2xvY2FsZS1hcmNoaXZlICR7bGliZGlyfS9sb2NhbGUvCnJtIC1yZiAke1RNUF9MT0NBTEV9Cn0K
+CnB5dGhvbiBwYWNrYWdlX2RvX3NwbGl0X2djb252cyAoKSB7CglpbXBvcnQgb3MsIHJlCglpZiAo
+YmIuZGF0YS5nZXRWYXIoJ1BBQ0tBR0VfTk9fR0NPTlYnLCBkLCAxKSA9PSAnMScpOgoJCWJiLm5v
+dGUoInBhY2thZ2UgcmVxdWVzdGVkIG5vdCBzcGxpdHRpbmcgZ2NvbnZzIikKCQlyZXR1cm4KCglp
+ZiBub3QgYmIuZGF0YS5nZXRWYXIoJ1BBQ0tBR0VTJywgZCwgMSk6CgkJcmV0dXJuCgoJbGliZGly
+ID0gYmIuZGF0YS5nZXRWYXIoJ2xpYmRpcicsIGQsIDEpCglpZiBub3QgbGliZGlyOgoJCWJiLmVy
+cm9yKCJsaWJkaXIgbm90IGRlZmluZWQiKQoJCXJldHVybgoJZGF0YWRpciA9IGJiLmRhdGEuZ2V0
+VmFyKCdkYXRhZGlyJywgZCwgMSkKCWlmIG5vdCBkYXRhZGlyOgoJCWJiLmVycm9yKCJkYXRhZGly
+IG5vdCBkZWZpbmVkIikKCQlyZXR1cm4KCglnY29udl9saWJkaXIgPSBvcy5wYXRoLmpvaW4obGli
+ZGlyLCAiZ2NvbnYiKQoJY2hhcm1hcF9kaXIgPSBvcy5wYXRoLmpvaW4oZGF0YWRpciwgImkxOG4i
+LCAiY2hhcm1hcHMiKQoJbG9jYWxlc19kaXIgPSBvcy5wYXRoLmpvaW4oZGF0YWRpciwgImkxOG4i
+LCAibG9jYWxlcyIpCgliaW5hcnlfbG9jYWxlc19kaXIgPSBvcy5wYXRoLmpvaW4obGliZGlyLCAi
+bG9jYWxlIikKCglkb19zcGxpdF9wYWNrYWdlcyhkLCBnY29udl9saWJkaXIsIGZpbGVfcmVnZXg9
+J14oLiopXC5zbyQnLCBvdXRwdXRfcGF0dGVybj0nZ2xpYmMtZ2NvbnYtJXMnLCBkZXNjcmlwdGlv
+bj0nZ2NvbnYgbW9kdWxlIGZvciBjaGFyYWN0ZXIgc2V0ICVzJywgZXh0cmFfZGVwZW5kcz0nZ2xp
+YmMtZ2NvbnYnKQoKCWRvX3NwbGl0X3BhY2thZ2VzKGQsIGNoYXJtYXBfZGlyLCBmaWxlX3JlZ2V4
+PSdeKC4qKVwuZ3okJywgb3V0cHV0X3BhdHRlcm49J2dsaWJjLWNoYXJtYXAtJXMnLCBkZXNjcmlw
+dGlvbj0nY2hhcmFjdGVyIG1hcCBmb3IgJXMgZW5jb2RpbmcnLCBleHRyYV9kZXBlbmRzPScnKQoK
+CWRlZiBjYWxjX2xvY2FsZV9kZXBzKGZuLCBwa2csIGZpbGVfcmVnZXgsIG91dHB1dF9wYXR0ZXJu
+LCBncm91cCk6CgkJZGVwcyA9IFtdCgkJZiA9IG9wZW4oZm4sICJyIikKCQljX3JlID0gcmUuY29t
+cGlsZSgnXmNvcHkgIiguKikiJykKCQlpX3JlID0gcmUuY29tcGlsZSgnXmluY2x1ZGUgIihcdysp
+Ii4qJykKCQlmb3IgbCBpbiBmLnJlYWRsaW5lcygpOgoJCQltID0gY19yZS5tYXRjaChsKSBvciBp
+X3JlLm1hdGNoKGwpCgkJCWlmIG06CgkJCQlkcCA9IGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKCdn
+bGliYy1sb2NhbGVkYXRhLSVzJyAlIG0uZ3JvdXAoMSkpCgkJCQlpZiBub3QgZHAgaW4gZGVwczoK
+CQkJCQlkZXBzLmFwcGVuZChkcCkKCQlmLmNsb3NlKCkKCQlpZiBkZXBzICE9IFtdOgoJCQliYi5k
+YXRhLnNldFZhcignUkRFUEVORFNfJXMnICUgcGtnLCAiICIuam9pbihkZXBzKSwgZCkKCglkb19z
+cGxpdF9wYWNrYWdlcyhkLCBsb2NhbGVzX2RpciwgZmlsZV9yZWdleD0nKC4qKScsIG91dHB1dF9w
+YXR0ZXJuPSdnbGliYy1sb2NhbGVkYXRhLSVzJywgZGVzY3JpcHRpb249J2xvY2FsZSBkZWZpbml0
+aW9uIGZvciAlcycsIGhvb2s9Y2FsY19sb2NhbGVfZGVwcywgZXh0cmFfZGVwZW5kcz0nJykKCWJi
+LmRhdGEuc2V0VmFyKCdQQUNLQUdFUycsIGJiLmRhdGEuZ2V0VmFyKCdQQUNLQUdFUycsIGQpICsg
+JyBnbGliYy1nY29udicsIGQpCgoJZiA9IG9wZW4ob3MucGF0aC5qb2luKGJiLmRhdGEuZ2V0VmFy
+KCdXT1JLRElSJywgZCwgMSksICJTVVBQT1JURUQiKSwgInIiKQoJc3VwcG9ydGVkID0gZi5yZWFk
+bGluZXMoKQoJZi5jbG9zZSgpCgoJZG90X3JlID0gcmUuY29tcGlsZSgiKC4qKVwuKC4qKSIpCgoJ
+IyBDb2xsYXRlIHRoZSBsb2NhbGVzIGJ5IGJhc2UgYW5kIGVuY29kaW5nCgllbmNvZGluZ3MgPSB7
+fQoJZm9yIGwgaW4gc3VwcG9ydGVkOgoJCWwgPSBsWzotMV0KCQkobG9jYWxlLCBjaGFyc2V0KSA9
+IGwuc3BsaXQoIiAiKQoJCW0gPSBkb3RfcmUubWF0Y2gobG9jYWxlKQoJCWlmIG06CgkJCWxvY2Fs
+ZSA9IG0uZ3JvdXAoMSkKCQlpZiBub3QgZW5jb2RpbmdzLmhhc19rZXkobG9jYWxlKToKCQkJZW5j
+b2RpbmdzW2xvY2FsZV0gPSBbXQoJCWVuY29kaW5nc1tsb2NhbGVdLmFwcGVuZChjaGFyc2V0KQoK
+CWRlZiBvdXRwdXRfbG9jYWxlX3NvdXJjZShuYW1lLCBsb2NhbGUsIGVuY29kaW5nKToKCQlwa2du
+YW1lID0gJ2xvY2FsZS1iYXNlLScgKyBsZWdpdGltaXplX3BhY2thZ2VfbmFtZShuYW1lKQoKCQli
+Yi5kYXRhLnNldFZhcignUkRFUEVORFNfJXMnICUgcGtnbmFtZSwgJ2xvY2FsZWRlZiBnbGliYy1s
+b2NhbGVkYXRhLSVzIGdsaWJjLWNoYXJtYXAtJXMnICUgKGxlZ2l0aW1pemVfcGFja2FnZV9uYW1l
+KGxvY2FsZSksIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKGVuY29kaW5nKSksIGQpCgkJcnByb3Zp
+ZGVzID0gJ3ZpcnR1YWwtbG9jYWxlLSVzJyAlIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKG5hbWUp
+CgkJbSA9IHJlLm1hdGNoKCIoLiopXyguKikiLCBuYW1lKQoJCWlmIG06CgkJCXJwcm92aWRlcyAr
+PSAnIHZpcnR1YWwtbG9jYWxlLSVzJyAlIG0uZ3JvdXAoMSkKCQliYi5kYXRhLnNldFZhcignUlBS
+T1ZJREVTXyVzJyAlIHBrZ25hbWUsIHJwcm92aWRlcywgZCkKCQliYi5kYXRhLnNldFZhcignUEFD
+S0FHRVMnLCAnJXMgJXMnICUgKHBrZ25hbWUsIGJiLmRhdGEuZ2V0VmFyKCdQQUNLQUdFUycsIGQs
+IDEpKSwgZCkKCQliYi5kYXRhLnNldFZhcignQUxMT1dfRU1QVFlfJXMnICUgcGtnbmFtZSwgJzEn
+LCBkKQoJCWJiLmRhdGEuc2V0VmFyKCdwa2dfcG9zdGluc3RfJXMnICUgcGtnbmFtZSwgYmIuZGF0
+YS5nZXRWYXIoJ2xvY2FsZV9iYXNlX3Bvc3RpbnN0JywgZCwgMSkgJSAobG9jYWxlLCBlbmNvZGlu
+ZywgbG9jYWxlKSwgZCkKCQliYi5kYXRhLnNldFZhcigncGtnX3Bvc3RybV8lcycgJSBwa2duYW1l
+LCBiYi5kYXRhLmdldFZhcignbG9jYWxlX2Jhc2VfcG9zdHJtJywgZCwgMSkgJSAobG9jYWxlLCBl
+bmNvZGluZywgbG9jYWxlKSwgZCkKCglkZWYgb3V0cHV0X2xvY2FsZV9iaW5hcnkobmFtZSwgbG9j
+YWxlLCBlbmNvZGluZyk6CgkJdGFyZ2V0X2FyY2ggPSBiYi5kYXRhLmdldFZhcigiVEFSR0VUX0FS
+Q0giLCBkLCAxKQoJCXFlbXUgPSAicWVtdS0lcyIgJSB0YXJnZXRfYXJjaAoJCXBrZ25hbWUgPSAn
+bG9jYWxlLWJhc2UtJyArIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKG5hbWUpCgkJbSA9IHJlLm1h
+dGNoKCIoLiopXC4oLiopIiwgbmFtZSkKCQlpZiBtOgoJCQlnbGliY19uYW1lID0gIiVzLiVzIiAl
+IChtLmdyb3VwKDEpLCBtLmdyb3VwKDIpLmxvd2VyKCkucmVwbGFjZSgiLSIsIiIpKQoJCWVsc2U6
+CgkJCWdsaWJjX25hbWUgPSBuYW1lCgkJYmIuZGF0YS5zZXRWYXIoJ1JERVBFTkRTXyVzJyAlIHBr
+Z25hbWUsIGxlZ2l0aW1pemVfcGFja2FnZV9uYW1lKCdnbGliYy1iaW5hcnktbG9jYWxlZGF0YS0l
+cycgJSBnbGliY19uYW1lKSwgZCkKCQlycHJvdmlkZXMgPSAndmlydHVhbC1sb2NhbGUtJXMnICUg
+bGVnaXRpbWl6ZV9wYWNrYWdlX25hbWUobmFtZSkKCQltID0gcmUubWF0Y2goIiguKilfKC4qKSIs
+IG5hbWUpCgkJaWYgbToKCQkJcnByb3ZpZGVzICs9ICcgdmlydHVhbC1sb2NhbGUtJXMnICUgbS5n
+cm91cCgxKQoJCWJiLmRhdGEuc2V0VmFyKCdSUFJPVklERVNfJXMnICUgcGtnbmFtZSwgcnByb3Zp
+ZGVzLCBkKQoJCWJiLmRhdGEuc2V0VmFyKCdBTExPV19FTVBUWV8lcycgJSBwa2duYW1lLCAnMScs
+IGQpCgkJYmIuZGF0YS5zZXRWYXIoJ1BBQ0tBR0VTJywgJyVzICVzJyAlIChwa2duYW1lLCBiYi5k
+YXRhLmdldFZhcignUEFDS0FHRVMnLCBkLCAxKSksIGQpCgoJCXRyZWVkaXIgPSBvcy5wYXRoLmpv
+aW4oYmIuZGF0YS5nZXRWYXIoIldPUktESVIiLCBkLCAxKSwgImxvY2FsZS10cmVlIikKCQlwYXRo
+ID0gYmIuZGF0YS5nZXRWYXIoIlBBVEgiLCBkLCAxKQoJCWkxOG5wYXRoID0gb3MucGF0aC5qb2lu
+KHRyZWVkaXIsIGRhdGFkaXIsICJpMThuIikKCgkJbG9jYWxlZGVmX29wdHMgPSAiLS1mb3JjZSAt
+LW9sZC1zdHlsZSAtLW5vLWFyY2hpdmUgLS1wcmVmaXg9JXMgLS1pbnB1dGZpbGU9JXMvaTE4bi9s
+b2NhbGVzLyVzIC0tY2hhcm1hcD0lcyAlcyIgJSAodHJlZWRpciwgZGF0YWRpciwgbG9jYWxlLCBl
+bmNvZGluZywgbmFtZSkKCQljbWQgPSAiUEFUSD1cIiVzXCIgSTE4TlBBVEg9XCIlc1wiICVzIC1M
+ICVzICVzL2Jpbi9sb2NhbGVkZWYgJXMiICUgKHBhdGgsIGkxOG5wYXRoLCBxZW11LCB0cmVlZGly
+LCB0cmVlZGlyLCBsb2NhbGVkZWZfb3B0cykKCQliYi5ub3RlKCJnZW5lcmF0aW5nIGxvY2FsZSAl
+cyAoJXMpIiAlIChsb2NhbGUsIGVuY29kaW5nKSkKCQlpZiBvcy5zeXN0ZW0oY21kKToKCQkJcmFp
+c2UgYmIuYnVpbGQuRnVuY0ZhaWxlZCgibG9jYWxlZGVmIHJldHVybmVkIGFuIGVycm9yIChjb21t
+YW5kIHdhcyAlcykuIiAlIGNtZCkKCglkZWYgb3V0cHV0X2xvY2FsZShuYW1lLCBsb2NhbGUsIGVu
+Y29kaW5nKToKCQlvdXRwdXRfbG9jYWxlX3NvdXJjZShuYW1lLCBsb2NhbGUsIGVuY29kaW5nKQoK
+CSMgUmVzaHVmZmxlIG5hbWVzIHNvIHRoYXQgVVRGLTggaXMgcHJlZmVycmVkIG92ZXIgb3RoZXIg
+ZW5jb2RpbmdzCglub25fdXRmOCA9IFtdCglmb3IgbCBpbiBlbmNvZGluZ3Mua2V5cygpOgoJCWlm
+IGxlbihlbmNvZGluZ3NbbF0pID09IDE6CgkJCW91dHB1dF9sb2NhbGUobCwgbCwgZW5jb2Rpbmdz
+W2xdWzBdKQoJCQlpZiBlbmNvZGluZ3NbbF1bMF0gIT0gIlVURi04IjoKCQkJCW5vbl91dGY4LmFw
+cGVuZChsKQoJCWVsc2U6CgkJCWlmICJVVEYtOCIgaW4gZW5jb2RpbmdzW2xdOgoJCQkJb3V0cHV0
+X2xvY2FsZShsLCBsLCAiVVRGLTgiKQoJCQkJZW5jb2RpbmdzW2xdLnJlbW92ZSgiVVRGLTgiKQoJ
+CQllbHNlOgoJCQkJbm9uX3V0ZjguYXBwZW5kKGwpCgkJCWZvciBlIGluIGVuY29kaW5nc1tsXToK
+CQkJCW91dHB1dF9sb2NhbGUoJyVzLiVzJyAlIChsLCBlKSwgbCwgZSkKCglpZiBub25fdXRmOCAh
+PSBbXToKCQliYi5ub3RlKCJ0aGUgZm9sbG93aW5nIGxvY2FsZXMgYXJlIHN1cHBvcnRlZCBvbmx5
+IGluIGxlZ2FjeSBlbmNvZGluZ3M6IikKCQliYi5ub3RlKCIgICIgKyAiICIuam9pbihub25fdXRm
+OCkpCn0KCiMgV2Ugd2FudCB0byBkbyB0aGlzIGluZGlyZWN0aW9uIHNvIHRoYXQgd2UgY2FuIHNh
+ZmVseSAncmV0dXJuJwojIGZyb20gdGhlIGNhbGxlZCBmdW5jdGlvbiBldmVuIHRob3VnaCB3ZSdy
+ZSBwcmVwZW5kaW5nCnB5dGhvbiBwb3B1bGF0ZV9wYWNrYWdlc19wcmVwZW5kICgpIHsKCWlmIGJi
+LmRhdGEuZ2V0VmFyKCdERUJJQU5fTkFNRVMnLCBkLCAxKToKCQliYi5kYXRhLnNldFZhcignUEtH
+X2dsaWJjJywgJ2xpYmM2JywgZCkKCQliYi5kYXRhLnNldFZhcignUEtHX2dsaWJjLWRldicsICds
+aWJjNi1kZXYnLCBkKQoJYmIuYnVpbGQuZXhlY19mdW5jKCdwYWNrYWdlX2RvX3NwbGl0X2djb252
+cycsIGQpCn0K
 
-stat64("/usr/share/eenlightenment/data/images/test.png", 0x398dca0) = -1 ENOENT
-(No such file or directory)
-
-aha! that's the one. that SHOULD be in the e-wm-images package missing!
-
-opkg search /usr/share/enlightenment/data/images/test.png
-e-wm-images - 0.16.999.043+svnr37468-r17.1
-- /usr/share/enlightenment/data/images/test.png
-
-(yes different svnrev - but that shouldn't make a difference - i'm just a little
-head locally of my public patchset. i am sure stefan can confirm that test.png
-is in the images package for the oe svnrev int he images he built)
-
-> > - Full list of installed packages
-> 
-> http://dominion.thruhere.net/koen/OE/e17/e-installed-packages.txt
-> 
-> Thanks for looking into this, let me know if you need more info.
-
-strange - all the libs and e-wm etc. seem to be in sync (except etk - but that
-wont affect e). how it should be. odd that u have the tiff saver module and not
-the loader!
-
-> regards,
-> 
-> Koen
-> 
-> [1] modulo bugs due to not running image_post_process commands
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
-
--- 
-------------- Codito, ergo sum - "I code, therefore I am" --------------
-The Rasterman (Carsten Haitzler)    raster@rasterman.com
-
-
-
+------=_Part_40550_13251091.1226899129639--
