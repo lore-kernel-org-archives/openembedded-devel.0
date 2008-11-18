@@ -1,33 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.182.55.65] (helo=pcjr2.rosbacke.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L2SOX-0003Kd-O8
-	for openembedded-devel@openembedded.org; Tue, 18 Nov 2008 16:21:38 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L2SMA-0001DB-Ms
-	for openembedded-devel@openembedded.org; Tue, 18 Nov 2008 15:19:10 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 18 Nov 2008 15:19:10 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 18 Nov 2008 15:19:10 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 18 Nov 2008 16:19:02 +0100
-Message-ID: <gfumd6$ki2$1@ger.gmane.org>
-References: <20081115005654.GA20517@denix.org>
+	(envelope-from <mikael@rosbacke.org>) id 1L2Syv-00042B-3H
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Nov 2008 16:59:13 +0100
+Received: from [192.168.0.195] by pcjr2.rosbacke.org with esmtp (Exim 4.63)
+	(envelope-from <mikael@rosbacke.org>) id 1L2SwW-0003Hd-LD
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Nov 2008 16:56:45 +0100
+From: Mikael Rosbacke <mikael@rosbacke.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <gfrr9a$p4c$2@ger.gmane.org>
+References: <1226923118.6891.54.camel@akaza1> <gfrnrh$e05$1@ger.gmane.org>
+	<1226925784.6891.58.camel@akaza1>  <gfrr9a$p4c$2@ger.gmane.org>
+Date: Tue, 18 Nov 2008 15:56:44 +0100
+Message-Id: <1227020204.4137.41.camel@akaza1>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081114 Shredder/3.0b1pre
-In-Reply-To: <20081115005654.GA20517@denix.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Update git/git-native
+X-Mailer: Evolution 2.24.1 
+X-SA-Exim-Connect-IP: 192.168.0.195
+X-SA-Exim-Mail-From: mikael@rosbacke.org
+X-SA-Exim-Scanned: No (on pcjr2.rosbacke.org); SAEximRunCond expanded to false
+Subject: Re: KERNEL_INCLUDES in uClibc.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,55 +33,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Nov 2008 15:21:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Nov 2008 15:59:13 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 15-11-08 01:56, Denys Dmytriyenko wrote:
-> Hi,
->
-> I'd like to propose to update the git recipe (specifically, the native one) to
-> something newer than 1.5.3, currently used. The problem with that particular
-> version is that it does not work reliably through the proxy. Here is the
-> symptom:
->
-> $ GIT_PROXY_COMMAND=~/git-proxy.sh /OE/tmp/staging/i686-linux/usr/bin/git --version
-> git version 1.5.3
->
-> $ GIT_PROXY_COMMAND=~/git-proxy.sh /OE/tmp/staging/i686-linux/usr/bin/git clone git://git.infradead.org/mtd-utils.git
-> Initialized empty Git repository in /tmp/mtd-utils/.git/
-> fatal: The remote end hung up unexpectedly
-> fatal: early EOF
-> fatal: index-pack died with error code 128
-> fetch-pack from 'git://git.infradead.org/mtd-utils.git' failed.
->
-> The first version to work reliably with GIT_PROXY_COMMAND is 1.5.4:
->
-> $ GIT_PROXY_COMMAND=~/git-proxy.sh /OE/tmp/staging/i686-linux/usr/bin/git --version
-> git version 1.5.4
->
-> $ GIT_PROXY_COMMAND=~/git-proxy.sh /OE/tmp/staging/i686-linux/usr/bin/git clone git://git.infradead.org/mtd-utils.git
-> Initialized empty Git repository in /tmp/mtd-utils/.git/
-> remote: Counting objects: 2308, done.
-> remote: Compressing objeremote: cts: 100% (676/676), done.
-> remote: Total 2308 (delta 1592), reused 2308 (delta 1592)
-> Receiving objects: 100% (2308/2308), 942.42 KiB | 595 KiB/s, done.
-> Resolving deltas: 100% (1592/1592), done.
->
-> I'm not sure if there is some requirement to stick with 1.5.x version of git,
-> if not the latest stable version is 1.6.0.4 - I am attaching patches for both
-> just in case, with corresponding ticket #4835.
->
-> Please provide any comments.
+Tnx, good to have a recommended way to do it.
 
-git (for the target) fails to build for arm: 
-http://tinderbox.openembedded.net/packages/233747/
+Tried it but failed on the same spot. Checked bugzilla and found bug
+#4289 which seems to be the same behaviour as I see, but on another
+target. I've added my findings to that bug-report.
 
-could you have a look at it?
+I'll think I'll wait a bit with the uclibc version until that bug can be
+fixed or otherwise worked around.
 
-regards,
+Thank you for your time,
 
-Koen
+--- Mikael R=20
+
+
+m=C3=A5n 2008-11-17 klockan 14:23 +0100 skrev Koen Kooi:
+> On 17-11-08 13:43, Mikael Rosbacke wrote:
+> > m=C3=A5n 2008-11-17 klockan 13:25 +0100 skrev Koen Kooi:
+> >> On 17-11-08 12:58, Mikael Rosbacke wrote:
+> >>> Good day.
+> >>>
+> >>> I'm currently trying to get a uClibc based minimal image for x86 to
+> >>> build and have some problems with it. I'm using DISTRO=3D'minimal-ucl=
+ibc'
+> >>> and MACHINE=3D'x86' and trying to build the target 'minimal-image'.
+> >> Try using the angstrom distribution, since minima-uclibc isn't really
+> >> support or working currently.
+> >>
+> > I've managed to get Angstrom working with glibc some days ago. But I
+> > would like to have something smaller.
+>=20
+> Images tell what goes into a rootfs, not a distro, so 'smaller' isn't a=20
+> criterium for switching distro.
+>=20
+> > I scanned the distro folder but
+> > couldn't find a uClibc variant of it. Is there some other way to make
+> > angstrom use the uclibc?
+>=20
+> ANGSTROM_MODE =3D "uclibc" in local.conf or 'ANGSTROM_MODE=3Duclibc bitba=
+ke=20
+> <foo>"
+>=20
+> regards,
+>=20
+> Koen
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
