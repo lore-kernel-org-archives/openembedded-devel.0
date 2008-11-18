@@ -1,23 +1,36 @@
-Received: from [202.4.237.240] (helo=kirsty.vergenet.net ident=postfix)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raster@vergenet.net>) id 1L2Yll-0003mW-5a
+	(envelope-from <stefan@datenfreihafen.org>) id 1L2ZuR-0001G0-OX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Nov 2008 23:10:02 +0100
-Received: by kirsty.vergenet.net (Postfix, from userid 1001)
-	id A0BE824075; Wed, 19 Nov 2008 09:07:33 +1100 (EST)
-Date: Wed, 19 Nov 2008 08:52:31 +1100
-From: Carsten Haitzler (The Rasterman) <raster@rasterman.com>
+	Wed, 19 Nov 2008 00:23:04 +0100
+Received: from p5b036248.dip.t-dialin.net ([91.3.98.72]
+	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1L2Zs3-0006Hb-Eo by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Nov 2008 00:20:37 +0100
+Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1L2Ztp-00017E-8b for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Nov 2008 00:22:25 +0100
+Date: Wed, 19 Nov 2008 00:22:25 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20081119085231.45d162ae.raster@rasterman.com>
-In-Reply-To: <20081118210044.GA2528@dodger.lab.datenfreihafen.org>
+Message-ID: <20081118232225.GB2528@dodger.lab.datenfreihafen.org>
 References: <20081117151909.GG11401@datenfreihafen.org>
 	<c384c5ea0811171047oa367b5bg25d01e3f50a9592f@mail.gmail.com>
 	<20081118210044.GA2528@dodger.lab.datenfreihafen.org>
-Organization: You expect me to be organized?
-X-Mailer: Sylpheed 2.4.8 (GTK+ 2.12.9; i486-pc-linux-gnu)
-X-Pants: on
-X-Cluestick: Get jiggy with it!
-Mime-Version: 1.0
+	<gfvd0o$9h1$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gfvd0o$9h1$1@ger.gmane.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
 Subject: Re: Moving fontconfig cache out of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,66 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Nov 2008 22:10:02 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Nov 2008 23:23:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, 18 Nov 2008 22:00:44 +0100 Stefan Schmidt <stefan@datenfreihafen.org>
-babbled:
+Hello.
 
-> Hello.
-> 
-> On Mon, 2008-11-17 at 19:47, Leon Woestenberg wrote:
-> > 
-> > /var/lib/ looks fine to me.
-> 
-> Luckily fontconfig already has a configure option for the cache dir. Only some
-> small EXTRA_OECONF fiddeling was needed.
-> 
-> People are fine with this?
+On Tue, 2008-11-18 at 22:44, Koen Kooi wrote:
+> On 18-11-08 22:00, Stefan Schmidt wrote:
+>>
+>> On Mon, 2008-11-17 at 19:47, Leon Woestenberg wrote:
+>>> /var/lib/ looks fine to me.
+>>
+>> Luckily fontconfig already has a configure option for the cache dir. Only some
+>> small EXTRA_OECONF fiddeling was needed.
+>
+> Does it create the dir at runtime, or do we have to package it?
 
-thumbsup++ :)
+I tested it with an updated package and without the dir prepared. It got created
+at runtime.
 
-> diff --git a/packages/fontconfig/fontconfig.inc
-> b/packages/fontconfig/fontconfig.inc index 252b843..9af3540 100644
-> --- a/packages/fontconfig/fontconfig.inc
-> +++ b/packages/fontconfig/fontconfig.inc
-> @@ -18,7 +18,7 @@ inherit autotools pkgconfig
->  
->  export HASDOCBOOK="no"
->  
-> -EXTRA_OECONF = " --disable-docs"
-> +EXTRA_OECONF = " --disable-docs --with-cache-dir=/var/lib/fontconfig"
->  EXTRA_OEMAKE = "FC_LANG=fc-lang FC_GLYPHNAME=fc-glyphname"
->  
->  # The tarball has some of the patched files as read only, which
-> diff --git a/packages/fontconfig/fontconfig_2.6.0.bb
-> b/packages/fontconfig/fontconfig_2.6.0.bb index 3f7eca4..d6c1019 100644
-> --- a/packages/fontconfig/fontconfig_2.6.0.bb
-> +++ b/packages/fontconfig/fontconfig_2.6.0.bb
-> @@ -24,7 +24,7 @@ inherit autotools pkgconfig
->  
->  export HASDOCBOOK="no"
->  
-> -EXTRA_OECONF = " --disable-docs --with-arch=${HOST_ARCH}"
-> +EXTRA_OECONF = " --disable-docs --with-arch=${HOST_ARCH}
-> --with-cache-dir=/var/lib/fontconfig" EXTRA_OEMAKE = "FC_LANG=fc-lang
-> FC_GLYPHNAME=fc-glyphname" 
->  # The tarball has some of the patched files as read only, which
-> 
-> regards
-> Stefan Schmidt
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
-
--- 
-------------- Codito, ergo sum - "I code, therefore I am" --------------
-The Rasterman (Carsten Haitzler)    raster@rasterman.com
-
+regards
+Stefan Schmidt
 
 
