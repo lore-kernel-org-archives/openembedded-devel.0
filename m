@@ -1,34 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L2WHc-0007hm-Jf
-	for openembedded-devel@openembedded.org; Tue, 18 Nov 2008 20:30:48 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L2WFE-0005IH-Dm
-	for openembedded-devel@openembedded.org; Tue, 18 Nov 2008 19:28:16 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 18 Nov 2008 19:28:16 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 18 Nov 2008 19:28:16 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 18 Nov 2008 20:28:05 +0100
-Message-ID: <gfv505$c9t$1@ger.gmane.org>
-References: <20081118155949.GA2279@datenfreihafen.org>	<gfus5g$aep$1@ger.gmane.org>
-	<20081118184433.GA12762@dodger.lab.datenfreihafen.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081114 Shredder/3.0b1pre
-In-Reply-To: <20081118184433.GA12762@dodger.lab.datenfreihafen.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: E-Ten Glofiish M800 support
+	(envelope-from <stefan@datenfreihafen.org>) id 1L2XhK-0005pB-Ux
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Nov 2008 22:01:23 +0100
+Received: from p5b036248.dip.t-dialin.net ([91.3.98.72]
+	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1L2Xew-0003Qb-A1 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Nov 2008 21:58:57 +0100
+Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1L2Xgi-0000fJ-9H for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Nov 2008 22:00:44 +0100
+Date: Tue, 18 Nov 2008 22:00:44 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081118210044.GA2528@dodger.lab.datenfreihafen.org>
+References: <20081117151909.GG11401@datenfreihafen.org>
+	<c384c5ea0811171047oa367b5bg25d01e3f50a9592f@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <c384c5ea0811171047oa367b5bg25d01e3f50a9592f@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: Moving fontconfig cache out of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,63 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Nov 2008 19:30:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Nov 2008 21:01:23 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 18-11-08 19:44, Stefan Schmidt wrote:
-> Hello.
->
-> On Tue, 2008-11-18 at 17:57, Koen Kooi wrote:
->> On 18-11-08 16:59, Stefan Schmidt wrote:
->>> I just pushed a branch with basic machine and kernel support for the M800 from
->>> E-Ten. Normally Winodws Mobile based device. Linux support is ongoing.
->>>
->>> http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=0ea0875a3e5456f701df08e0974821a4e8852f55
->>>
->>> As it is just machine, kernel recipe and sane-srcrev it should not break
->>> anything. Still I would like to ask for review before pushing it in.
->>>
->>> How does folks feel about it?
->> Only some small comments:
->>
->> conf/machine/eten-m800.conf:
->> IMAGE_FSTYPES ?= "tar.gz"
->>
->> change that to += so people don't shoot themselves in the foot too easily
->
-> Good point. Changed.
->
->> linux-eten_2.6.24+git.bb:
->> git://git.openmoko.org/git/kernel.git;protocol=git;branch=stable \
->>
->> Would it make sense to merge this into the openmoko kernel recipe since
->> it's building from the same tree? I'm trying to cut down the number of
->> linux-foo recipes whenever possible, but it a seperate recipe is easier,
->> go for it.
->
-> I thought about this. My point about not doing it is that it could easily be
-> that I switch the git repo soon. We just sat up a git tree with WIP stuff. Not
-> sure which one I like to have in OE in the long run. I would go for keeping it
-> and think about how it turns out.
+Hello.
 
-Do whatever makes you happy :)
+On Mon, 2008-11-17 at 19:47, Leon Woestenberg wrote:
+> 
+> /var/lib/ looks fine to me.
 
-> PS: Any people prefer to have patches inlined for easier review, or are all fine
-> with a link to webgit here?
+Luckily fontconfig already has a configure option for the cache dir. Only some
+small EXTRA_OECONF fiddeling was needed.
 
-Having the patches inline would make it slightly easier to review, but 
-people would need to use git send-email properly to avoid e.g .spurious 
-nesting.
-For small patchsets like this I don't find pasting from gitweb too much 
-work, but I can see it getting tedious when >5 points need addressing.
-Another option would be to use something like reviewboard or gerrit to 
-make pointing out dubious hunks and fixing them easier, but atm we sadly 
-don't get enough stuff to review to install such infrastructure.
+People are fine with this?
 
-regards,
+diff --git a/packages/fontconfig/fontconfig.inc b/packages/fontconfig/fontconfig.inc
+index 252b843..9af3540 100644
+--- a/packages/fontconfig/fontconfig.inc
++++ b/packages/fontconfig/fontconfig.inc
+@@ -18,7 +18,7 @@ inherit autotools pkgconfig
+ 
+ export HASDOCBOOK="no"
+ 
+-EXTRA_OECONF = " --disable-docs"
++EXTRA_OECONF = " --disable-docs --with-cache-dir=/var/lib/fontconfig"
+ EXTRA_OEMAKE = "FC_LANG=fc-lang FC_GLYPHNAME=fc-glyphname"
+ 
+ # The tarball has some of the patched files as read only, which
+diff --git a/packages/fontconfig/fontconfig_2.6.0.bb b/packages/fontconfig/fontconfig_2.6.0.bb
+index 3f7eca4..d6c1019 100644
+--- a/packages/fontconfig/fontconfig_2.6.0.bb
++++ b/packages/fontconfig/fontconfig_2.6.0.bb
+@@ -24,7 +24,7 @@ inherit autotools pkgconfig
+ 
+ export HASDOCBOOK="no"
+ 
+-EXTRA_OECONF = " --disable-docs --with-arch=${HOST_ARCH}"
++EXTRA_OECONF = " --disable-docs --with-arch=${HOST_ARCH} --with-cache-dir=/var/lib/fontconfig"
+ EXTRA_OEMAKE = "FC_LANG=fc-lang FC_GLYPHNAME=fc-glyphname"
+ 
+ # The tarball has some of the patched files as read only, which
 
-Koen
-
+regards
+Stefan Schmidt
 
 
