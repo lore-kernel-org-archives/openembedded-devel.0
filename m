@@ -1,33 +1,29 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.204.227.171] (helo=mail.3v8.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L2mxM-00069s-N4
-	for openembedded-devel@openembedded.org; Wed, 19 Nov 2008 14:18:56 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L2muw-00086l-Tg
-	for openembedded-devel@openembedded.org; Wed, 19 Nov 2008 13:16:27 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 19 Nov 2008 13:16:26 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sander@3v8.net>) id 1L2pWb-000248-Di
+	for openembedded-devel@openembedded.org; Wed, 19 Nov 2008 17:03:29 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.3v8.net (Postfix) with ESMTP id 8F170BFE72
 	for <openembedded-devel@openembedded.org>;
-	Wed, 19 Nov 2008 13:16:26 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 19 Nov 2008 17:00:33 +0100 (CET)
+X-Virus-Scanned: amavisd-new at 3v8.net
+Received: from mail.3v8.net ([127.0.0.1])
+	by localhost (pillbox.3v8.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vykAQ0GwPFSo for <openembedded-devel@openembedded.org>;
+	Wed, 19 Nov 2008 17:00:32 +0100 (CET)
+Received: from skunk.localnet (195-240-237-161.ip.telfort.nl [195.240.237.161])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.3v8.net (Postfix) with ESMTP id 6B632BE763
+	for <openembedded-devel@openembedded.org>;
+	Wed, 19 Nov 2008 17:00:32 +0100 (CET)
+From: Sander van Grieken <sander@3v8.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 19 Nov 2008 14:16:19 +0100
-Message-ID: <gg13j3$tbf$1@ger.gmane.org>
-References: <200811191237.23958.openembedded@haerwu.biz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081114 Shredder/3.0b1pre
-In-Reply-To: <200811191237.23958.openembedded@haerwu.biz>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [Review] RPM support from Poky
+Date: Wed, 19 Nov 2008 17:00:56 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.27-7-generic; KDE/4.1.3; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200811191700.57645.sander@3v8.net>
+Subject: [FSO] illume fails to start
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,35 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2008 13:18:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 19 Nov 2008 16:03:29 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 19-11-08 12:37, Marcin Juszkiewicz wrote:
-> Hi
->
-> Few years ago we got partially working RPM support (which no one used).
-> When Intel acquired OpenedHand there was lot of work put in getting RPM
-> support really working. We got:
->
-> - creating of RPM packages (with deps, recommends)
-> - creating images from RPM packages
-> - creating images from feeds with RPM packages
-> - installing packages on devices (from file or feeds)
->
-> Thanks to the fact that OpenEmbedded uses git I was able to extract all
-> required patches to get it imported from Poky. Result is available as
-> 'hrw/poky-rpm' branch on OE git server.
->
-> It is not tested yet (build in progress). Any testers/reviewers are
-> welcome.
+Hi,
 
-The non RPM bits look ok to me, I don't know anything about RPM so I 
-won't comment about that.
+Yesterday, after building the latest org.openembedded.dev and upgrading my 
+GTA02, illume/e does not start anymore.
 
-regards,
+I get this: 
 
-Koen
+ESTART: 0.93536 [0.61815] - test file format support
+<<<< Enlightenment Error >>>>
+Enlightenment found Evas can't load PNG files. Check Evas has PNG
+loader support.
+
+stracing releaved that it is looking for test.png (and jpg, and eet) in 
+/usr/share/enlightenment/data/images, but these files do not exist.
+
+The relevant loader plugins are installed.
+
+Also, the upgrade complained about same-file conflicts between illume and e-
+wm. The problem above manifests regardless of a -force-overwrite upgrade.
+
+grtz,
+Sander
 
 
 
