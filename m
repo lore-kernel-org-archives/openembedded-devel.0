@@ -1,24 +1,25 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1L2wdt-0002yr-3x
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1L33aa-0004lU-G8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Nov 2008 00:39:29 +0100
-Received: from andromeda.vanille.de (e180149243.adsl.alicedsl.de
-	[85.180.149.243])
-	by drlauer-research.com (Postfix) with ESMTP id D1D32584137
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Nov 2008 00:52:48 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Nov 2008 00:36:57 +0100
-User-Agent: KMail/1.9.10
-References: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>
-	<491EE24B.20809@balister.org>
-	<200811151630.31515.mickey@vanille-media.de>
-In-Reply-To: <200811151630.31515.mickey@vanille-media.de>
+	Thu, 20 Nov 2008 08:04:37 +0100
+Received: (qmail invoked by alias); 20 Nov 2008 07:01:58 -0000
+Received: from p57BB3E36.dip.t-dialin.net (EHLO [192.168.2.2]) [87.187.62.54]
+	by mail.gmx.net (mp008) with SMTP; 20 Nov 2008 08:01:58 +0100
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX19i1z1S/R5iI1hp6aQ48rUI2c5CZHQtb20/NboiJJ
+	2I6G6VeHz7ehTI
+Message-ID: <49250B60.90706@gmx.de>
+Date: Thu, 20 Nov 2008 08:01:52 +0100
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Thunderbird 2.0.0.17 (Windows/20080914)
 MIME-Version: 1.0
-Message-Id: <200811200036.57807.mickey@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+References: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>	<491EE24B.20809@balister.org>	<200811151630.31515.mickey@vanille-media.de>
+	<200811200036.57807.mickey@vanille-media.de>
+In-Reply-To: <200811200036.57807.mickey@vanille-media.de>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.84
 Subject: Re: Commit access for SHR guys
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,15 +34,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2008 23:39:29 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 20 Nov 2008 07:04:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Let's not stall the issue -- any more votes?
-
--- 
-:M:
+Michael 'Mickey' Lauer schrieb:
+> Let's not stall the issue -- any more votes?
+>
+>   
++1 from me.
 
 
