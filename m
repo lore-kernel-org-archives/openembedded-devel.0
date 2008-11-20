@@ -1,25 +1,25 @@
 Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1L38FX-0003cC-OS
+	(envelope-from <mickey@vanille-media.de>) id 1L38GY-0005QK-RT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Nov 2008 13:03:07 +0100
+	Thu, 20 Nov 2008 13:04:10 +0100
 Received: from andromeda.vanille.de (e180191208.adsl.alicedsl.de
 	[85.180.191.208])
-	by drlauer-research.com (Postfix) with ESMTP id D178858413E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Nov 2008 13:16:27 +0100 (CET)
+	by drlauer-research.com (Postfix) with ESMTP id E610E58413E;
+	Thu, 20 Nov 2008 13:17:30 +0100 (CET)
 From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
 Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Nov 2008 13:00:33 +0100
+Date: Thu, 20 Nov 2008 13:01:36 +0100
 User-Agent: KMail/1.9.10
-References: <49217818.5080109@gmx.net>
-	<200811200036.26593.mickey@vanille-media.de>
-	<49250B77.2020407@gmx.de>
-In-Reply-To: <49250B77.2020407@gmx.de>
+References: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>
+	<200811200036.57807.mickey@vanille-media.de>
+	<200811200911.36299.openembedded@haerwu.biz>
+In-Reply-To: <200811200911.36299.openembedded@haerwu.biz>
 MIME-Version: 1.0
-Message-Id: <200811201300.34017.mickey@vanille-media.de>
-Subject: Re: RFC: add Steffen Sledz to contributor
+Message-Id: <200811201301.36380.mickey@vanille-media.de>
+Cc: shr-devel@projects.openmoko.org
+Subject: Re: Commit access for SHR guys
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,13 +33,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Nov 2008 12:03:07 -0000
+X-List-Received-Date: Thu, 20 Nov 2008 12:04:11 -0000
 Content-Type: text/plain;
-  charset="iso-8859-1"
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Steffen, please send me your ssh key.
+Ainulindale, quickdev,
+
+please send me your ssh keys.
 -- 
 :M:
 
