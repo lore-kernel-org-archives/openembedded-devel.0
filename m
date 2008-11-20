@@ -1,40 +1,36 @@
-Received: from [66.249.92.171] (helo=ug-out-1314.google.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ainulindale@gmail.com>) id 1L38oC-00070l-V2
+	(envelope-from <stefan@datenfreihafen.org>) id 1L39yq-00089v-TP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Nov 2008 13:38:56 +0100
-Received: by ug-out-1314.google.com with SMTP id k3so268103ugf.4
+	Thu, 20 Nov 2008 14:54:01 +0100
+Received: from p5b036095.dip.t-dialin.net ([91.3.96.149]
+	helo=dodger.lab.datenfreihafen.org) by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1L39wL-0002lN-BD by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Nov 2008 04:36:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=fb7p1fFTit+uvKbS8IX3bbtcXObWiqdpd1HPb8RWp5A=;
-	b=Efz0XkdA75ct5EC3aARc1elfli8zLrcc/h5exsFdmBYJzbRZRE62R2OGti5roulecf
-	McPh4fDLttlfM7PojPwrkgwg7qpi1/iGb77pr4hfJ6MsnUFl0Rn5jVEnaqNnAbadA95h
-	hh+P3R4ysydCivU+xuvRT+ZtfelLMCKnpfiZI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=dkNpgg83LQVim4QLtFGJWav2iLHSpkIxVRHt88HKFiSyaagNAE5Ddvge2H793QnEfG
-	+Szl2vO2ZeAl9eHcdqghtF+kJRqgWhAlKXqekW4eqBtHRoKAXzxVFX8Y+DTmxhbb2oUt
-	YxvOz2yDE72rYLMrFHSycj/7qjj7SEj62CGrc=
-Received: by 10.86.63.19 with SMTP id l19mr1541239fga.40.1227184583664;
-	Thu, 20 Nov 2008 04:36:23 -0800 (PST)
-Received: by 10.86.74.2 with HTTP; Thu, 20 Nov 2008 04:36:23 -0800 (PST)
-Message-ID: <76a8cde90811200436o7269bcd5ke62a11be25b30ac@mail.gmail.com>
-Date: Thu, 20 Nov 2008 13:36:23 +0100
-From: "Julien Cassignol" <ainulindale@gmail.com>
+	Thu, 20 Nov 2008 14:51:27 +0100
+Received: from stefan by dodger.lab.datenfreihafen.org with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1L39yE-0001t0-A2 for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Nov 2008 14:53:22 +0100
+Date: Thu, 20 Nov 2008 14:53:22 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200811201301.36380.mickey@vanille-media.de>
+Message-ID: <20081120135322.GC5837@dodger.lab.datenfreihafen.org>
+References: <20081117151909.GG11401@datenfreihafen.org>
+	<c384c5ea0811171047oa367b5bg25d01e3f50a9592f@mail.gmail.com>
+	<20081118210044.GA2528@dodger.lab.datenfreihafen.org>
 MIME-Version: 1.0
-References: <20081114142917.7ea1d6a5@elara.dyn.totalueberwachung.de>
-	<200811200036.57807.mickey@vanille-media.de>
-	<200811200911.36299.openembedded@haerwu.biz>
-	<200811201301.36380.mickey@vanille-media.de>
-Subject: Re: Commit access for SHR guys
+In-Reply-To: <20081118210044.GA2528@dodger.lab.datenfreihafen.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: Moving fontconfig cache out of tmpfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,23 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Nov 2008 12:38:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Nov 2008 13:54:01 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, Nov 20, 2008 at 1:01 PM, Michael 'Mickey' Lauer
-<mickey@vanille-media.de> wrote:
-> Ainulindale, quickdev,
->
-> please send me your ssh keys.
+Hello.
 
-Mine is already on FSO.
-Will send it again if necessary, but I'd rather avoid spending pape...
-oh, never mind :-)
+On Tue, 2008-11-18 at 22:00, Stefan Schmidt wrote:
+> 
+> On Mon, 2008-11-17 at 19:47, Leon Woestenberg wrote:
+> > 
+> > /var/lib/ looks fine to me.
+> 
+> Luckily fontconfig already has a configure option for the cache dir. Only some
+> small EXTRA_OECONF fiddeling was needed.
+> 
+> People are fine with this?
 
--- 
-Julien Cassignol
-http://www.ainulindale.net
+Pushed:
+
+http://git.openembedded.net/?p=openembedded.git;a=commitdiff;h=94c3438f511b4faa735064be8c563da8631b34c7
+
+regards
+Stefan Schmidt
 
 
