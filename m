@@ -1,28 +1,26 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1L3YXS-0002HI-Nh
+	(envelope-from <dp@xora.org.uk>) id 1L3YgV-00051s-U6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Nov 2008 17:07:22 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id B4CBD16E122
+	Fri, 21 Nov 2008 17:16:43 +0100
+Received: by nf-out-0910.google.com with SMTP id d21so517776nfb.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2008 17:13:39 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id E02782A4145
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2008 17:04:44 +0100 (CET)
-Received: from [10.24.0.58] ([10.24.0.58]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 21 Nov 2008 17:04:46 +0100
-Message-ID: <4926DC15.5070206@dresearch.de>
-Date: Fri, 21 Nov 2008 17:04:37 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080922)
-MIME-Version: 1.0
+	Fri, 21 Nov 2008 08:14:06 -0800 (PST)
+Received: by 10.210.104.20 with SMTP id b20mr691704ebc.93.1227284045860;
+	Fri, 21 Nov 2008 08:14:05 -0800 (PST)
+Received: from ?192.168.1.10? ([78.86.128.56])
+	by mx.google.com with ESMTPS id 32sm543989nfu.10.2008.11.21.08.14.04
+	(version=SSLv3 cipher=RC4-MD5); Fri, 21 Nov 2008 08:14:05 -0800 (PST)
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 21 Nov 2008 16:04:46.0456 (UTC)
-	FILETIME=[DFBBB780:01C94BF2]
-Subject: [patch review] uclibc-initial_0.9.30.bb and avr32
+In-Reply-To: <gg6km4$c2d$1@ger.gmane.org>
+References: <gg6aes$5vf$1@ger.gmane.org> <4926D1D1.6030204@dresearch.de>
+	<gg6km4$c2d$1@ger.gmane.org>
+Date: Fri, 21 Nov 2008 16:14:03 +0000
+Message-Id: <1227284043.6981.3.camel@aquilonia>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.1 
+Subject: Re: Revert "busybox: Disable busybox shadow support for Angstrom"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,28 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2008 16:07:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Nov 2008 16:16:44 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello uclibc maintainers,
 
-please approve or comment following patch of uclibc-initial_0.9.30.bb.
+> > 2. install /etc/shadow and fully support it (i believe ther is something more to do here)
+> 
+> 2) is what is wanted for the angstrom 2008 release.
+> 
+> regards,
+> 
 
-It fixes a compile problem for the avr32 machine in the same way like for the other arm architectures.
+Yes it seems the devices we are using Angstrom on now are becoming more
+like laptops every day. So we should be following security procedures
+for big machines much more.
 
-diff --git a/packages/uclibc/uclibc_0.9.30.bb b/packages/uclibc/uclibc_0.9.30.bb
-index faeaeca..e6c2318 100644
---- a/packages/uclibc/uclibc_0.9.30.bb
-+++ b/packages/uclibc/uclibc_0.9.30.bb
-@@ -20,6 +20,7 @@ SRC_URI += "file://uClibc.machine file://uClibc.distro \
-           "
- SRC_URI_append_arm = " file://ldso_hash_arm.patch;patch=1 "
- SRC_URI_append_armeb = " file://ldso_hash_arm.patch;patch=1 "
-+SRC_URI_append_avr32 = " file://ldso_hash_arm.patch;patch=1 "
- 
- #recent versions uclibc require real kernel headers
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+I mean the latest set of omap3 devices are quite defineately eeePC
+competitors.
+
+Graeme
+
 
 
 
