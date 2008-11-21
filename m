@@ -1,25 +1,34 @@
-Received: from [64.233.182.189] (helo=nf-out-0910.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1L3YgV-00051s-U6
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Nov 2008 17:16:43 +0100
-Received: by nf-out-0910.google.com with SMTP id d21so517776nfb.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2008 08:14:06 -0800 (PST)
-Received: by 10.210.104.20 with SMTP id b20mr691704ebc.93.1227284045860;
-	Fri, 21 Nov 2008 08:14:05 -0800 (PST)
-Received: from ?192.168.1.10? ([78.86.128.56])
-	by mx.google.com with ESMTPS id 32sm543989nfu.10.2008.11.21.08.14.04
-	(version=SSLv3 cipher=RC4-MD5); Fri, 21 Nov 2008 08:14:05 -0800 (PST)
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gg6km4$c2d$1@ger.gmane.org>
-References: <gg6aes$5vf$1@ger.gmane.org> <4926D1D1.6030204@dresearch.de>
-	<gg6km4$c2d$1@ger.gmane.org>
-Date: Fri, 21 Nov 2008 16:14:03 +0000
-Message-Id: <1227284043.6981.3.camel@aquilonia>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L3Z4T-0001Po-2x
+	for openembedded-devel@openembedded.org; Fri, 21 Nov 2008 17:41:29 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L3Z1u-0007Ui-F4
+	for openembedded-devel@openembedded.org; Fri, 21 Nov 2008 16:38:50 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 21 Nov 2008 16:38:50 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 21 Nov 2008 16:38:50 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 21 Nov 2008 17:38:41 +0100
+Message-ID: <gg6o6h$pqd$1@ger.gmane.org>
+References: <gg6aes$5vf$1@ger.gmane.org>
+	<4926D1D1.6030204@dresearch.de>	<gg6km4$c2d$1@ger.gmane.org>
+	<1227284043.6981.3.camel@aquilonia>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.1 
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
+In-Reply-To: <1227284043.6981.3.camel@aquilonia>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Revert "busybox: Disable busybox shadow support for Angstrom"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,27 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2008 16:16:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Nov 2008 16:41:29 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
+On 21-11-08 17:14, Graeme Gregory wrote:
+>>> 2. install /etc/shadow and fully support it (i believe ther is something more to do here)
+>> 2) is what is wanted for the angstrom 2008 release.
+>>
+>> regards,
+>>
+>
+> Yes it seems the devices we are using Angstrom on now are becoming more
+> like laptops every day. So we should be following security procedures
+> for big machines much more.
+>
+> I mean the latest set of omap3 devices are quite defineately eeePC
+> competitors.
 
-> > 2. install /etc/shadow and fully support it (i believe ther is something more to do here)
-> 
-> 2) is what is wanted for the angstrom 2008 release.
-> 
-> regards,
-> 
+It's scary that something as big and fat like a standard ubuntu desktop 
+is now a serious competitor in the omap3 space.
+But regardless of that, shadow passwords and PAM give better security 
+that is transaparent for the user, so if for images >8MB we can support 
+things like shadow passwds, PAM, encrypted homedirs, etc.
 
-Yes it seems the devices we are using Angstrom on now are becoming more
-like laptops every day. So we should be following security procedures
-for big machines much more.
+regards,
 
-I mean the latest set of omap3 devices are quite defineately eeePC
-competitors.
-
-Graeme
-
+KOen
 
 
 
