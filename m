@@ -1,23 +1,31 @@
-Received: from [66.80.197.243] (helo=firebug.buglabs.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@buglabs.net>) id 1L3N35-0001Hy-Sm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Nov 2008 04:51:16 +0100
-Received: from [195.58.126.131] (port=41552 helo=[10.188.144.39])
-	by firebug.buglabs.net with esmtpsa (SSLv3:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <ken@buglabs.net>) id 1L3N1g-0001c8-1g
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Nov 2008 22:49:50 -0500
-From: Ken Gilmer <ken@buglabs.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4925FDA9.9030506@gmx.net>
-References: <492102B6.3050605@gmx.net>  <4925FDA9.9030506@gmx.net>
-Organization: Bug Labs, Inc.
-Date: Wed, 19 Nov 2008 21:48:31 -0500
-Message-Id: <1227149311.10519.42.camel@t61.buglabs.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L3VPW-0004bx-67
+	for openembedded-devel@openembedded.org; Fri, 21 Nov 2008 13:46:58 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L3VMz-0007E9-3N
+	for openembedded-devel@openembedded.org; Fri, 21 Nov 2008 12:44:21 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 21 Nov 2008 12:44:21 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 21 Nov 2008 12:44:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 21 Nov 2008 13:44:11 +0100
+Message-ID: <gg6aes$5vf$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [Fwd: [Openembedded-private] URGENT: FOSDEM devroom and	stand	requests]
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
+Sender: news <news@ger.gmane.org>
+Subject: Revert "busybox: Disable busybox shadow support for Angstrom"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,196 +39,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2008 03:51:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Nov 2008 12:46:58 -0000
+X-Groupsio-MsgNum: 6694
+Content-Type: multipart/mixed; boundary="------------030704040207060800070102"
+
+--------------030704040207060800070102
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Robert, 
+Hi,
 
-  That's great news!  Thanks for mentioning us again and in addition to
-the BUG talk I plan on having an initial '1.0' version of BitBake
-Commander in time for fosdem (see
-http://community.buglabs.net/kgilmer/posts/6-OpenEmbedded-Tools-for-Eclipse-4-).  Assuming that happens, it might be a good opportunity to discuss the current state of eclipse in general and bbc in particular to OE and other embedded people.  
+Graeme and I reverted "busybox: Disable busybox shadow support for 
+Angstrom", the commit message explains it:
 
-cheers
-ken
+"Revert "busybox: Disable busybox shadow support for Angstrom"
+* Do NOT, I repeat NOT touch such core distro files without approval of 
+distro maintainters
+* This is the wrong solution to the problem, please raise a discussion 
+on email list!
 
-On Fri, 2008-11-21 at 01:15 +0100, Robert Schuster wrote:
-> Hi,
-> another update!
-> 
-> I got in contact with the OpenWRT guys and we agree on sharing a devroom
-> at the next FOSDEM.
-> 
-> In case we get a room we need to provide talks for it.
-> 
-> Possible topics:
-> - general OpenEmbedded presenting talk
-> - Bitbake future
-> - U-Boot
-> - Qi
-> - Beagleboard, Gumstix Overo
-> - BugLabs Bugboards
-> - <your favorite embedded Linux topic here>
-> 
-> If you feel in the mood for doing a talk (short ones please: 10-20
-> minutes) please speak out loudly.
-> 
-> We need to provide a plan of our talks sometime in January so please
-> start thinking about this soon. :)
-> 
-> Regards
-> Robert
-> 
-> Robert Schuster schrieb:
-> > Hi,
-> > by request I forward this to the dev list. We are currently in need of
-> > 5-6 volunteers who are willing to help at the booth.
-> > 
-> > At the moment we have:
-> > Leon Woestenberg
-> > Robert Schuster
-> > 
-> > Regards
-> > Robert
-> > 
-> > 
-> > ------------------------------------------------------------------------
-> > 
-> > Betreff:
-> > [Openembedded-private] URGENT: FOSDEM devroom and stand requests
-> > Von:
-> > Robert Schuster <theBohemian@gmx.net>
-> > Datum:
-> > Wed, 12 Nov 2008 10:48:38 +0100
-> > An:
-> > openembedded-private@lists.openembedded.org
-> > 
-> > An:
-> > openembedded-private@lists.openembedded.org
-> > 
-> > 
-> > Hi,
-> > the hunting season has begun: FOSDEM organisers accept requests for
-> > devrooms and stands. The stuff I prepared below should be sent
-> > (literally or modified) to devrooms@fosdem.org before Saturday
-> > 2008-11-22, 23:59 CET.
-> > 
-> > All details can be found here:
-> > http://fosdem.org/2009/call_for_devrooms_and_stands
-> > 
-> > The most important bit is IMHO finding one or two volunteers who want to
-> > take the role of the devroom and/or stand responsible.
-> > 
-> > Devroom request:
-> > 
-> > Project Name	: OpenEmbedded
-> > Website		: http://openembedded.net
-> > 
-> > Description	: OpenEmbedded is a sophisticated environment for
-> > cross-compiling software. It supports the generation of complete
-> > Linux-based operating system images for various architectures and builds
-> > ~6000 software packages. The project forms the base for distributions
-> > like Angstrom, OpenMoko and SlugOS.
-> > 
-> > Devroom Responsible:
-> > 
-> > As a project dealing with embedded Linux we are happy to cooperate with
-> > other projects from that area.
-> > 
-> > ----------------------------
-> > 
-> > Stand request:
-> > 
-> > Project Name	: OpenEmbedded
-> > Website		: http://openembedded.net
-> > 
-> > Description	: See above.
-> > 
-> > Planned activities:
-> > 	* demonstrate embedded hardware running OE-derived OS
-> > 	* hand out flyers
-> > 	* explain OE
-> > 
-> > Stand Responsible:
-> > 
-> > 
-> > 
-> > Regards
-> > Robert
-> > 
-> > Philip Balister schrieb:
-> >> Florian Boor wrote:
-> >>> Hi,
-> >>>
-> >>> Robert Schuster schrieb:
-> >>>> the planning for FOSDEM 2009 will start soon and as such I think we
-> >>>> should be prepared for this.
-> >>> did they finally manage to decide when FOSDEM should take place?
-> >> Yes. Feb 7-8.
-> >>
-> >>>> a) Do we want a developer room to present talks and organise discussions
-> >>>>  about all things OE?
-> >>> That would be pretty nice. Its quite likely that we have quite some OE
-> >>> people
-> >>> there. If we can arrange this we could have some kind of booth in
-> >>> there for
-> >>> spreading information about OE and a bunch of hacking OE developers
-> >>> for some
-> >>> room 'decoration' around it.
-> >>>
-> >>>> Maybe OE-only is a bit to strict in this regard and we can make it a
-> >>>> "Embedded FOSS" developer room instead. This also depends on the amount
-> >>>> of rooms being made available by the organisers, of course.
-> >>> Yes that would be the way to go. We might look around and invite some
-> >>> other
-> >>> projects to join.
-> >> I like the idea of an embedded hacking room in addition to the regular
-> >> embedded talks. I suppose we should put in a request. We should
-> >> coordinate our request with the guy who organizes the embedded talks.
-> >> Maybe, moving the weekend has created more room ....
-> >>
-> >> Philip
-> >>
-> >>>> b) Do we want a booth for OE like last year? Do we have flyers left? Is
-> >>>> anyone willing to make new ones?
-> >>> Yes we have some flyers left and I can make some new ones. We still
-> >>> have the
-> >>> poster from LinuxTag as well.
-> >>>
-> >>> Greetings
-> >>>
-> >>> Florian
-> >>>
-> >> ------------------------------------------------------------------------
-> >>
-> >> _______________________________________________
-> >> Openembedded-private mailing list
-> >> Openembedded-private@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-private
-> > 
-> > 
-> > 
-> > ------------------------------------------------------------------------
-> > 
-> > _______________________________________________
-> > Openembedded-private mailing list
-> > Openembedded-private@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-private
-> > 
-> > 
-> > ------------------------------------------------------------------------
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+Signed-off-by: Graeme 'XorA' Gregory <<dp@xora.org.uk>
+
+This reverts commit 4339d706baf166732d6b7d3b2bedb0c54ce76cbf."
+
+I looked at the instructions new commiters get sent, and it says:
+
+"1) Everything outside org.openembedded.dev/packages/ should be treated 
+with extreme care. Please communicate with other developers first if you 
+want to touch that area. If you are a distro maintainer you are of 
+course free to touch your distro config files without asking. If you are 
+a machine maintainer, please communicate first, since it's easy to get 
+things wrong and not all machines are good examples to copy from."
+
+Maybe that is a bit unclear since it implies that packages/ is clear of 
+distro files, which it isn't. Attached is the full version of the 
+welcome message so people can suggest improvements.
+
+regards,
+
+Koen
 
 
 
+
+--------------030704040207060800070102
+Content-Type: text/plain;
+ name="welcome.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="welcome.txt"
+
+SGksCgpJZiB5b3UgYXJlIHJlYWRpbmcgdGhpcywgeW91IGhhdmUgYmVlbiBncmFudGVkIGNvbW1p
+dCBhY2Nlc3MgdG8gdGhlIGF3YXJkIHdpbm5pbmcgT3BlbkVtYmVkZGVkIFByb2plY3QuIFRvIG1h
+a2UgdGhpbmdzIGdvIHNtb290aGx5IHdlIGhhdmUgc29tZSBiYXNpYyBydWxlczoKCiAxKSBFdmVy
+eXRoaW5nIG91dHNpZGUgb3JnLm9wZW5lbWJlZGRlZC5kZXYvcGFja2FnZXMvIHNob3VsZCBiZSB0
+cmVhdGVkIHdpdGggZXh0cmVtZSBjYXJlLiBQbGVhc2UgY29tbXVuaWNhdGUgd2l0aCBvdGhlciBk
+ZXZlbG9wZXJzIGZpcnN0IGlmIHlvdSB3YW50IHRvIHRvdWNoIHRoYXQgYXJlYS4gSWYgeW91IGFy
+ZSBhIGRpc3RybyBtYWludGFpbmVyIHlvdSBhcmUgb2YgY291cnNlIGZyZWUgdG8gdG91Y2ggeW91
+ciBkaXN0cm8gY29uZmlnIGZpbGVzIHdpdGhvdXQgYXNraW5nLiBJZiB5b3UgYXJlIGEgbWFjaGlu
+ZSBtYWludGFpbmVyLCBwbGVhc2UgY29tbXVuaWNhdGUgZmlyc3QsIHNpbmNlIGl0J3MgZWFzeSB0
+byBnZXQgdGhpbmdzIHdyb25nIGFuZCBub3QgYWxsIG1hY2hpbmVzIGFyZSBnb29kIGV4YW1wbGVz
+IHRvIGNvcHkgZnJvbS4KCiAyKSBUaGluayB0d2ljZSBiZWZvcmUgdXNpbmcgYW4gb3ZlcnJpZGUs
+IHVzdWFsbHkgb3ZlcnJpZGVzIGNhbiBiZSBhdm9pZGVkLCBlc3BlY2lhbGx5IG9uZXMgbGlrZSB0
+aGVzZToKCiAgICAgZG9fY29tcGlsZSgpIHsKICAgICAgICAgb2VfcnVubWFrZSAKICAgICB9CQoK
+ICAgICBkb19jb21waWxlX215Zmlyc3RkaXN0bygpIHsKICAgICAgICAgb2VfcnVubWFrZSAtRF9H
+TlVfU09VUkNFCiAgICAgfQogICAgCiAgICBZb3UgbWF5IHRoaW5rICJJIGRvbid0IHdhbnQgdG8g
+YnJlYWsgb3RoZXIgZGlzdHJpYnV0aW9ucyIsIGJ1dCBpbiA5OSUgb2YgdGhlIGNhc2VzIHlvdXIg
+Zml4IHdpbGwgdW5icmVhayBvdGhlciBkaXN0cm9zIGFzIHdlbGwsIHNvIHVzaW5nIGFuIG92ZXJy
+aWRlIHdpbGwgY2F1c2UgbW9yZSB3b3JrIGZvciBvdGhlciBkZXZlbG9wZXJzLCBzaW5jZSB0aGV5
+IGhhdmUgdG8gd29yayBvdXQgdGhlIGZpeCBieSB0aGVtc2VsdmVzLiBZb3UgZG9uJ3Qgd2FudCBv
+dGhlciBwZW9wbGUgdG8gc3BlbmQgd2Vla3MgdHJ5aW5nIHRvIHNvbHZlIGEgcHJvYmxlbSB3aGlj
+aCBzb2x1dGlvbiBpcyBtYXNrZWQgYnkgYSBib2d1cyBvdmVycmlkZS4KCiAzKSBJdCdzIGZpbmUg
+dG8gZml4IGEgcmVjaXBlIHlvdSBkb24ndCBtYWludGFpbiwgYnV0IGlmIHlvdSBhcmUgdW5zdXJl
+IG9mIHlvdXIgY2hhbmdlLCB0cnkgdG8gY29udGFjdCB0aGUgbWFpbnRhaW5lciBvciwgaWYgbm8g
+bWFpbnRhaW5lciBpcyBsaXN0ZWQsIHNlbmQgYSBub3RlIHRvIHRoZSBPRSBkZXZlbG9wZXIgbWFp
+bGluZ2xpc3QuIAoKIDQpIFNwbGl0IHlvdXIgY2hhbmdlcyBpbnRvIHRoZWlyIGxvZ2ljYWwgc3Vi
+cGFydHMuIEl0J3MgZWFzaWVyIHRvIHRyYWNrIGRvd24gcHJvYmxlbXMgYWZ0ZXJ3YXJkcyB3aXRo
+IGEgYmluYXJ5IHNlYXJjaC4KCiA1KSBIYXZlIGEgY2xlYXIgY29tbWl0IG1lc3NhZ2VzLCBhbmQg
+bWVudGlvbiB0aGUgYWZmZWN0ZWQgYnVnbnVtYmVycyBpZiBhcHByb3ByaWF0ZS4KCiA2KSBTeW5j
+IGVhcmx5LCBzeW5jIG9mdGVuLiBOb2JvZHkgbGlrZXMgdG8gcmVpbnZlbnQgdGhlIHdoZWVsLiBN
+ZXJnaW5nIGlzIGVhc3kgd2l0aCBtb25vdG9uZSwgc28gZG9uJ3QgaGVzaXRhdGUgdG8gcnVuIHN5
+bmMganVzdCBiZWZvcmUgeW91ciBwbGFuZSB0YWtlcyBvZmYgYW5kIHlvdXIgd2lmaSBnZXRzIGRp
+c2Nvbm5lY3RlZC4KCllvdSBjYW4gdmlldyBvdXIgcG9saWNpZXMgYW5kIGNoZWF0c2hlZXRzIGF0
+OgogCiAqIGh0dHA6Ly93d3cub3BlbmVtYmVkZGVkLm9yZy93aWtpL1BvbGljaWVzCiAqIGh0dHA6
+Ly93d3cub3BlbmVtYmVkZGVkLm9yZy93aWtpL01vbm90b25lUGhyYXNlYm9vawo=
+
+--------------030704040207060800070102--
