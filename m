@@ -1,40 +1,28 @@
-Received: from [66.249.92.168] (helo=ug-out-1314.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dbaryshkov@gmail.com>) id 1L3X6g-00007I-Nn
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1L3Xb2-0001Ns-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Nov 2008 15:35:38 +0100
-Received: by ug-out-1314.google.com with SMTP id k3so126119ugf.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2008 06:33:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=+UqWdnxSsGf2Ci0ncnDv6T2WwQmR+UrTbAACA3mDsQc=;
-	b=MjvkPInQpuC74QLRys+8f+biA/OzLrkdIcSOnMjSQTwuAf+S1ZUj9SiWs6R45C8bxB
-	4QOnSPr7dh6QvaYYwn82eb2b4Is06npcbOH+IC1Iunk2ZIj9QmfWbMhG2P8rs/sjEp4l
-	17HwiOO3fui4lIfgme5Qj3Sw5PBsEhwShXj24=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=NHju/iKSwMZxTBIbLkWaiiyYS6DQXLHZ+KvKCg1d+2Lj6tApZU9EIRH9TZLOFfvDNp
-	WSI5pO/UmxAJXQwYx1f3iBFiwoIWRqXzfdPJEFKMXP494XilW3vPN5LbM/069h53jeVa
-	9uGR5vCwnReP/yTUJUu25lg5h/1qOctLs/nN0=
-Received: by 10.86.91.12 with SMTP id o12mr425770fgb.16.1227277981035;
-	Fri, 21 Nov 2008 06:33:01 -0800 (PST)
-Received: from doriath.ww600.siemens.net (iap-pxy-mow1.siemens.ru
-	[212.248.25.26])
-	by mx.google.com with ESMTPS id 12sm4053842fgg.0.2008.11.21.06.32.58
-	(version=SSLv3 cipher=RC4-MD5); Fri, 21 Nov 2008 06:32:59 -0800 (PST)
-Date: Fri, 21 Nov 2008 17:32:39 +0300
-From: Dmitry Baryshkov <dbaryshkov@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081121143239.GA10815@doriath.ww600.siemens.net>
-References: <1226989020-23551-1-git-send-email-dbaryshkov@gmail.com>
+	Fri, 21 Nov 2008 16:07:01 +0100
+Received: (qmail invoked by alias); 21 Nov 2008 15:04:20 -0000
+Received: from e178083050.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.83.50]
+	by mail.gmx.net (mp043) with SMTP; 21 Nov 2008 16:04:20 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/WTuRvY/XWbj3z+kUnFimdTnoWUJza78OApFOFlX
+	Ry2kU7fvHz43wk
+Message-ID: <4926CE0E.9060907@gmx.net>
+Date: Fri, 21 Nov 2008 16:04:46 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
 MIME-Version: 1.0
-In-Reply-To: <1226989020-23551-1-git-send-email-dbaryshkov@gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] sharprom-compatible: update to reflect current	toolchain classes
+To: openembedded-devel@lists.openembedded.org
+References: <492102B6.3050605@gmx.net> <4925FDA9.9030506@gmx.net>
+	<1227149311.10519.42.camel@t61.buglabs.net>
+In-Reply-To: <1227149311.10519.42.camel@t61.buglabs.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.65
+Subject: Re: [Fwd: [Openembedded-private] URGENT: FOSDEM devroom	and stand	requests]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,64 +36,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2008 14:35:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 21 Nov 2008 15:07:01 -0000
+X-Groupsio-MsgNum: 6698
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig687EDB98059B8B97CDA86EBE"
 
-On Tue, Nov 18, 2008 at 09:17:00AM +0300, Dmitry Baryshkov wrote:
-> Current toolchain classes want  to also have virtual/arm-linux-libc-initial
-> So, add it to sharprom-toolchain-native PROVIDES and to PREFERRED_PROVIDER of
-> sharprom-compatible.
-> 
-> Signed-off-by: Dmitry Baryshkov <dbaryshkov@gmail.com>
-> ---
->  conf/distro/sharprom-compatible.conf               |    1 +
->  .../sharprom-toolchain-native_1.0.bb               |    3 ++-
->  2 files changed, 3 insertions(+), 1 deletions(-)
+--------------enig687EDB98059B8B97CDA86EBE
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-What's about this patch? If noone objects, I'll push it tomorrow.
+Hi Ken,
 
-> 
-> diff --git a/conf/distro/sharprom-compatible.conf b/conf/distro/sharprom-compatible.conf
-> index ef198ac..93077e1 100644
-> --- a/conf/distro/sharprom-compatible.conf
-> +++ b/conf/distro/sharprom-compatible.conf
-> @@ -34,6 +34,7 @@ DISTRO_TYPE = "debug"
->  
->  PREFERRED_PROVIDER_virtual/arm-linux-gcc-2.95 = "sharprom-toolchain-native" 
->  PREFERRED_PROVIDER_virtual/arm-linux-libc-for-gcc = "sharprom-toolchain-native" 
-> +PREFERRED_PROVIDER_virtual/arm-linux-libc-initial = "sharprom-toolchain-native"
->  PREFERRED_PROVIDER_virtual/arm-linux-binutils = "sharprom-toolchain-native"
->  PREFERRED_PROVIDER_virtual/libc = "sharprom-toolchain-native"
->  PREFERRED_PROVIDER_virtual/libiconv = "sharprom-toolchain-native"
-> diff --git a/packages/sharprom-toolchain/sharprom-toolchain-native_1.0.bb b/packages/sharprom-toolchain/sharprom-toolchain-native_1.0.bb
-> index 8870bcc..c391c36 100644
-> --- a/packages/sharprom-toolchain/sharprom-toolchain-native_1.0.bb
-> +++ b/packages/sharprom-toolchain/sharprom-toolchain-native_1.0.bb
-> @@ -6,6 +6,7 @@ DEPENDS = "linux-libc-headers cross-linkage staging-linkage"
->  PROVIDES_sharprom-compatible = "\
->    virtual/arm-linux-gcc-2.95 \
->    virtual/arm-linux-libc-for-gcc \
-> +  virtual/arm-linux-libc-initial \
->    virtual/arm-linux-binutils \
->    virtual/libc \
->    virtual/libintl \
-> @@ -14,7 +15,7 @@ PROVIDES_sharprom-compatible = "\
->    virtual/arm-linux-libc-for-gcc \
->    virtual/arm-linux-gcc-intermediate \
->    virtual/arm-linux-gcc-initial "
-> -PR = "r2"
-> +PR = "r3"
->  
->  RPROVIDES = "glibc-utils libsegfault glibc-thread-db libgcc-dev libstdc++-dev libstdc++"
->  PACKAGES_DYNAMIC = "glibc-gconv-*"
-> -- 
-> 1.5.6.5
-> 
+Ken Gilmer schrieb:
+> Robert,=20
+>=20
+>   That's great news!  Thanks for mentioning us again and in addition to=
 
--- 
-With best wishes
-Dmitry
+> the BUG talk I plan on having an initial '1.0' version of BitBake
+> Commander in time for fosdem (see
+> http://community.buglabs.net/kgilmer/posts/6-OpenEmbedded-Tools-for-Ecl=
+ipse-4-).
+> Assuming that happens, it might be a good opportunity to discuss the
+current state of eclipse in general and bbc in particular to OE and
+other embedded people.
+It doesn't need to 1.0 to be presented at FOSDEM. A talk about your
+project should basically help making visible what is happening and
+spur interest contributors and also users.
+
+Apart from that I think there would also be interest in seeing live
+BUG hardware.
+
+Regards
+Robert
 
 
+--------------enig687EDB98059B8B97CDA86EBE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkkmzg4ACgkQG9cfwmwwEtrQ6gCeICUmkPPHQmVNRfuTKZ2hS1Fe
+XtoAn11p6Qr4emcct6mxkOC1tL/bYtXM
+=53kV
+-----END PGP SIGNATURE-----
+
+--------------enig687EDB98059B8B97CDA86EBE--
