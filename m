@@ -1,22 +1,31 @@
-Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1L4BuM-00076K-7m
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Nov 2008 11:09:38 +0100
-Received: from [192.168.1.103] (unknown [77.21.130.4])
-	by dd20204.kasserver.com (Postfix) with ESMTP id CE3B118044E34
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Nov 2008 11:06:54 +0100 (CET)
-Message-ID: <49292B3B.7080407@opensimpad.org>
-Date: Sun, 23 Nov 2008 11:06:51 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Thunderbird 2.0.0.17 (X11/20080925)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <48E6624C.7000409@opensimpad.org>	<gc72hu$i8f$1@ger.gmane.org>	<48E758CB.7040209@opensimpad.org>	<48EB45F0.8080809@opensimpad.org>	<gcfi87$g4t$1@ger.gmane.org>	<48EB5730.8030700@opensimpad.org>	<gcflhq$rfu$1@ger.gmane.org>
-	<4926F095.8030007@opensimpad.org>
-In-Reply-To: <4926F095.8030007@opensimpad.org>
-Subject: Re: X/Qt2 opie integration (patches included)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L4I1c-0007Tp-Gb
+	for openembedded-devel@openembedded.org; Sun, 23 Nov 2008 17:41:32 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L4Hyt-0002Rw-DI
+	for openembedded-devel@openembedded.org; Sun, 23 Nov 2008 16:38:43 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 23 Nov 2008 16:38:43 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 23 Nov 2008 16:38:43 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 23 Nov 2008 17:38:36 +0100
+Message-ID: <ggc0uc$kvv$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
+Sender: news <news@ger.gmane.org>
+Subject: Versioning and upgrade paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,25 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Nov 2008 10:09:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 23 Nov 2008 16:41:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Bernhard Guillon schrieb:
-> It took a while but here [1] it is :)
->
-> Please have a look at it and comment.
->
-Any obstacles left? Else I would like to ask if some of you can please 
-commit it [1] [2] [3] to .dev branch.
+Hi,
 
-best regards
-Bernhard Guillon
+I noticed people adding recipes with PVs in the form of '2.6.28rc4', 
+which is wrong:
 
->
-> [1] http://bugs.openembedded.net/show_bug.cgi?id=4603
-> [2] http://bugs.openembedded.net/show_bug.cgi?id=4582
-> [3] http://bugs.openembedded.net/show_bug.cgi?id=4861
+'2.6.28rc4' will sort higher than '2.6.28', so upgrading to the release 
+from the RC will be impossible.
+
+Now some people will start arguing that kernel upgrades using a package 
+manager shouldn't be done, but that's not the point. An upgrade path 
+should always be provided, even if the distro/user/developer will choose 
+to not use it.
+
+The wiki page about the OE versioning policy has background information 
+and samples on how to contruct a proper PV:
+
+http://wiki.openembedded.net/index.php/Versioning_Policy
+
+regards,
+
+Koen
 
 
 
