@@ -1,33 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L4Uyk-0000fl-UM
-	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 07:31:26 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L4Uw0-0002cU-PJ
-	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 06:28:36 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 06:28:36 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 06:28:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 24 Nov 2008 07:28:25 +0100
-Message-ID: <ggdhia$cv4$1@ger.gmane.org>
-References: <ggd81q$re5$1@ger.gmane.org> <492A3368.4070302@dls.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
-In-Reply-To: <492A3368.4070302@dls.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Bitbake r1090 (env hiding) makes my build fail.
+	(envelope-from <john_lee@openmoko.com>) id 1L4XUj-0001a1-CT
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Nov 2008 10:12:37 +0100
+Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com)
+	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
+	id 1L4XRo-0007Fm-CR for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Nov 2008 17:09:45 +0800
+Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
+	(envelope-from <john_lee@openmoko.com>) id 1L4XP6-0005rG-E9
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Nov 2008 17:06:48 +0800
+Date: Mon, 24 Nov 2008 17:06:48 +0800
+From: John Lee <john_lee@openmoko.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20081124090648.GU2475@buddha.tw.openmoko.com>
+Mail-Followup-To: openembedded-devel
+	<openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 172.16.23.192
+X-SA-Exim-Mail-From: john_lee@openmoko.com
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: What to do with obsolete kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2008 06:31:27 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 24 Nov 2008 09:12:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 24-11-08 05:54, Mike (mwester) wrote:
-> Rob Kramer wrote:
->> Hia,
->>
->> I'm tracking the stable branch and recently updated bitbake to HEAD. When
->> trying a build-from-scratch, I noticed BB quickly failed in shasum-native.
->> Some manual svn disecting pointed to r1090 as the one that caused the fail.
->> I tried adding a BB_PRESERVE_ENV, but no difference.
->>
->> Output is at http://pastebin.com/m65e66603. There is no log.do_compile
->> generated for some reason, and a build with -D shows nothing much. The gcc
->> invoke actually works OK and produces the oe_shasum256 executable.
->>
->> Any ideas what could be wrong with my setup?
->
-> You've gotten further than I have in tracking this down!  Good find in
-> pointing the finger of suspicion on the env hiding stuff.
->
-> There have been a number of folks who have encountered this problem --
-> including me, at one point.  I struggled with it, determined it was
-> ccache that was messing up, and at that point I took the easy way out
-> and just renamed the /usr/bin/ccache binary to get my builds running again.
+Hi,
 
-Why not put
+If kernel-module-foobar exists in an old rootfs, but in later version
+we disabled module foobar in kernel config, how can we remove the
+obsolete module from the old rootfs after opkg upgrade ?
 
-CCACHE=""
 
-in local.conf?
-
-regards,
-
-Koen
-
-PS: Is that on a RH (derived) buildhost?
-
+Regards,
+John
 
 
