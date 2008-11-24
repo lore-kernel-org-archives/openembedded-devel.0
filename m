@@ -1,33 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.145.245.200] (helo=mx04.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L4fcH-0001bR-IY
-	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 18:52:57 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1L4fZS-00017v-Gf
-	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 17:50:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 17:50:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 17:50:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <mwester@dls.net>) id 1L4fjs-0001lD-29
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 19:00:48 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx04.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1L4fh5-00052A-U2
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 11:57:55 -0600
+Message-ID: <492AEB0F.9050209@dls.net>
+Date: Mon, 24 Nov 2008 11:57:35 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.18) Gecko/20081105 Thunderbird/2.0.0.18 Mnenhy/0.7.5.666
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 24 Nov 2008 18:48:48 +0100
-Message-ID: <ggepe0$f3b$2@ger.gmane.org>
-References: <f96d234e0811240758l7ac33a24m1d2f90f4f5153346@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
-In-Reply-To: <f96d234e0811240758l7ac33a24m1d2f90f4f5153346@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Error, DISTRO_PR has changed (.1 to ) when switching from Angstrom glibc to uclibc
+References: <ggd81q$re5$1@ger.gmane.org> <492A3368.4070302@dls.net>
+	<ggdhia$cv4$1@ger.gmane.org>
+In-Reply-To: <ggdhia$cv4$1@ger.gmane.org>
+Subject: Re: Bitbake r1090 (env hiding) makes my build fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2008 17:52:57 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 24 Nov 2008 18:00:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 24-11-08 16:58, Cliff Brake wrote:
-> I get this when I set ANGSTROM_MODE="uclibc" and restart a build with
-> an existing tmp directory created for a glibc build.  I like re-using
-> the same tmp directory for mixed glibc/uclibc builds to save
-> rebuilding a few packages, but the savings is probably negligible.
-> This obviously requires DISTRO_PR to track in glibc and uclibc conf
-> files, IE:
->
-> diff --git a/conf/distro/include/angstrom-uclibc.inc
-> b/conf/distro/include/angstrom-uclibc.inc
-> index c26613b..29a50cd 100644
-> --- a/conf/distro/include/angstrom-uclibc.inc
-> +++ b/conf/distro/include/angstrom-uclibc.inc
-> @@ -36,3 +36,5 @@ TARGET_LINK_HASH_STYLE = "-Wl,--hash-style=gnu"
->
->   CXXFLAGS += "-fvisibility-inlines-hidden"
->
-> +DISTRO_PR = ".1"
-> +
->
-> As I not aware how DISTRO_PR is intended to be used, which way do we want to go:
->
-> 1) force separate tmp dirs for glibc and uclibc builds?
-> 2) keep DISTRO_PR in sync for Angstrom glibc, uclibc, eglibc distros?
+Koen Kooi wrote:
 
-3) put DISTRO_PR in angstrom-2008.conf
+> Why not put
+> 
+> CCACHE=""
+> 
+> in local.conf?
 
-regards,
+:-)  Because I dislike the concept of ccache for one thing, but to be
+honest, at the time I did that, I rather suspect that I didn't edit
+local.conf because I didn't want to take the time to re-parse everything. :)
 
-Koen
+> regards,
+> 
+> Koen
+> 
+> PS: Is that on a RH (derived) buildhost?
 
+Yes (RHEL 4, and CentOS 5.1).
+
+
+Mike (mwester)
 
 
