@@ -1,39 +1,21 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1L4ayc-0001ba-4o
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Nov 2008 13:55:42 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
-	id 1L4avg-0004ao-FC for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Nov 2008 20:52:50 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1L4asx-0000RD-PB
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Nov 2008 20:49:51 +0800
-Date: Mon, 24 Nov 2008 20:49:51 +0800
-From: John Lee <john_lee@openmoko.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081124124951.GZ2475@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <20081124090648.GU2475@buddha.tw.openmoko.com>
-	<1227522398.31396.4.camel@mill.internal.reciva.com>
-	<20081124114052.GX2475@buddha.tw.openmoko.com>
-	<1227529401.31396.26.camel@mill.internal.reciva.com>
+	(envelope-from <philip@balister.org>) id 1L4b1b-0001gq-R0
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 13:58:48 +0100
+Received: (qmail 25356 invoked by uid 1003); 24 Nov 2008 12:55:54 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 24 Nov 2008 12:55:54 -0000
+Message-ID: <492AA454.20009@balister.org>
+Date: Mon, 24 Nov 2008 07:55:48 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-In-Reply-To: <1227529401.31396.26.camel@mill.internal.reciva.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.com
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Re: What to do with obsolete kernel modules
+To: openembedded-devel@lists.openembedded.org
+References: <ggd81q$re5$1@ger.gmane.org> <492A3368.4070302@dls.net>
+	<ggdhia$cv4$1@ger.gmane.org>
+In-Reply-To: <ggdhia$cv4$1@ger.gmane.org>
+Subject: Re: Bitbake r1090 (env hiding) makes my build fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,62 +29,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2008 12:55:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 24 Nov 2008 12:58:48 -0000
+X-Groupsio-MsgNum: 6718
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020705010503020803080706"
 
-On Mon, Nov 24, 2008 at 12:23:21PM +0000, Phil Blundell wrote:
-> On Mon, 2008-11-24 at 19:40 +0800, John Lee wrote:
-> > but that will only happen if you changed from, say, 2.6.24 to 2.6.26.
-> > 
-> > if just the git rev changed such as
-> > a1e97c611253511ffc2d8c45e3e6d6894fa03fa3 to
-> > 6e2a723ef54ee2e739c34786981b2c508db803c1
-> > 
-> > then opkg wouldn't know about it.
+--------------ms020705010503020803080706
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Koen Kooi wrote:
+> On 24-11-08 05:54, Mike (mwester) wrote:
+>> Rob Kramer wrote:
+>>> Hia,
+>>>
+>>> I'm tracking the stable branch and recently updated bitbake to HEAD. 
+>>> When
+>>> trying a build-from-scratch, I noticed BB quickly failed in 
+>>> shasum-native.
+>>> Some manual svn disecting pointed to r1090 as the one that caused the 
+>>> fail.
+>>> I tried adding a BB_PRESERVE_ENV, but no difference.
+>>>
+>>> Output is at http://pastebin.com/m65e66603. There is no log.do_compile
+>>> generated for some reason, and a build with -D shows nothing much. 
+>>> The gcc
+>>> invoke actually works OK and produces the oe_shasum256 executable.
+>>>
+>>> Any ideas what could be wrong with my setup?
+>>
+>> You've gotten further than I have in tracking this down!  Good find in
+>> pointing the finger of suspicion on the env hiding stuff.
+>>
+>> There have been a number of folks who have encountered this problem --
+>> including me, at one point.  I struggled with it, determined it was
+>> ccache that was messing up, and at that point I took the easy way out
+>> and just renamed the /usr/bin/ccache binary to get my builds running 
+>> again.
 > 
-> This is a packaging problem.  If you want opkg to be able to
-> discriminate kernel versions at this level then you need to specify the
-> version in the Depends.  Like:
+> Why not put
 > 
-> Depends: update-modules, kernel-2.6.24 (= 2:2.6.24+git75969+a1e97c611253511ffc2d8c45e3e6d6894fa03fa3-r1.01), kernel-module-x-tables
-
-Thanks for your reply.
-
-These dependencies actually come from kernel.bbclass, where it sets
-the RDEPENDS of each kernel-module-*.
-
-It seems I need to modify kernel.bbclass to get what I want, so I
-asked here first.
-
-> > my problem looks like this:
-> > 
-> > 
-> > root@om-gta02:~# opkg status kernel-module-xt-physdev
-> > Package: kernel-module-xt-physdev
-> > Version: 2:2.6.24+git75969+a1e97c611253511ffc2d8c45e3e6d6894fa03fa3-r1.01
-> > Depends: update-modules, kernel-2.6.24, kernel-module-x-tables
-> > Status: install ok installed
-> > Architecture: neo1973
-> > Installed-Time: 1226894980
-> > 
-> > root@om-gta02:~# opkg status kernel-module-xt-tcpudp
-> > Package: kernel-module-xt-tcpudp
-> > Version: 3:2.6.24+gitr1+6e2a723ef54ee2e739c34786981b2c508db803c1-r2
-> > Depends: update-modules, kernel-2.6.24, kernel-module-x-tables
-> > Status: install user installed
-> > Architecture: om-gta02
+> CCACHE=""
 > 
-> To be honest I am not exactly sure what you are trying to say here.  I
-> guess you want kernel-module-xt-physdev uninstalled in favour of
-> kernel-module-xt-tcpudp, right?
+> in local.conf?
+> 
+> regards,
+> 
+> Koen
+> 
+> PS: Is that on a RH (derived) buildhost?
 
-I use these 2 packages as example because this situation actually
-should not happen.  I installed a new set of kernel  (3:xxx) but some
-of the old modules are still there. (2:xxx)  These two packages are
-unrelated to each other so one cannot relace the other.
+I had this problem on a RHEL4 machine.
 
+Philip
 
-- John
+--------------ms020705010503020803080706
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTEyNDEy
+NTU0OFowIwYJKoZIhvcNAQkEMRYEFJ5h2PusHnzmpH1jThmKzu77WwSLMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQBz1BlJkNAhlmmCuBX0s8xPRKLj5FY97ZjUBWKcOmAiuz6AfQjh
+/POa9SDpWdeWALiATQ3XthHz35e1C8rljTpI+sVnVT9blkuc0pdhzcu/R3HZkzdZ52m4xT5QC4uO
++QF26a8MZvgRO5N5c+wSpllpnaVtl8hTqOk+nzsX1/Lj/dVBsMC1OvUDhe3hcx9vs6vfKpyr3mRq
+4f/ovEJIX+FLRTuFeoNXbhxPKk9prqBnQE9SY52ZakibhlP5RuuRMdJQRIqqnptspcCo9jTfTgQC
+NId+hsOH945U7hGcf/MgY8Wp6I6YhuTROgsP7tBe6UR02aZ6OkSEI8gtdv3ir+z+AAAAAAAA
 
+--------------ms020705010503020803080706--
