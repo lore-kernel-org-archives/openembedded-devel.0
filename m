@@ -1,29 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L4SRg-0008LX-0r
-	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 04:49:08 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L4SOq-0006Ns-SL
-	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 03:46:13 +0000
-Received: from 203.117.215.163 ([203.117.215.163])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 03:46:12 +0000
-Received: from robk by 203.117.215.163 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 03:46:12 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <mwester@dls.net>) id 1L4TVX-0005xv-BJ
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 05:57:11 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx02.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1L4TSl-00050d-R7
+	for openembedded-devel@openembedded.org; Sun, 23 Nov 2008 22:54:20 -0600
+Message-ID: <492A3368.4070302@dls.net>
+Date: Sun, 23 Nov 2008 22:54:00 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.18) Gecko/20081105 Thunderbird/2.0.0.18 Mnenhy/0.7.5.666
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Rob Kramer <robk@starhub.net.sg>
-Date: Mon, 24 Nov 2008 11:45:55 +0800
-Message-ID: <ggd81q$re5$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: 203.117.215.163
-User-Agent: KNode/0.10.9
-Sender: news <news@ger.gmane.org>
-Subject: Bitbake r1090 (env hiding) makes my build fail.
+References: <ggd81q$re5$1@ger.gmane.org>
+In-Reply-To: <ggd81q$re5$1@ger.gmane.org>
+Subject: Re: Bitbake r1090 (env hiding) makes my build fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +29,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2008 03:49:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7Bit
+X-List-Received-Date: Mon, 24 Nov 2008 04:57:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hia,
+Rob Kramer wrote:
+> Hia,
+> 
+> I'm tracking the stable branch and recently updated bitbake to HEAD. When
+> trying a build-from-scratch, I noticed BB quickly failed in shasum-native.
+> Some manual svn disecting pointed to r1090 as the one that caused the fail.
+> I tried adding a BB_PRESERVE_ENV, but no difference.
+> 
+> Output is at http://pastebin.com/m65e66603. There is no log.do_compile
+> generated for some reason, and a build with -D shows nothing much. The gcc
+> invoke actually works OK and produces the oe_shasum256 executable.
+> 
+> Any ideas what could be wrong with my setup?
 
-I'm tracking the stable branch and recently updated bitbake to HEAD. When
-trying a build-from-scratch, I noticed BB quickly failed in shasum-native.
-Some manual svn disecting pointed to r1090 as the one that caused the fail.
-I tried adding a BB_PRESERVE_ENV, but no difference.
+You've gotten further than I have in tracking this down!  Good find in
+pointing the finger of suspicion on the env hiding stuff.
 
-Output is at http://pastebin.com/m65e66603. There is no log.do_compile
-generated for some reason, and a build with -D shows nothing much. The gcc
-invoke actually works OK and produces the oe_shasum256 executable.
+There have been a number of folks who have encountered this problem --
+including me, at one point.  I struggled with it, determined it was
+ccache that was messing up, and at that point I took the easy way out
+and just renamed the /usr/bin/ccache binary to get my builds running again.
 
-Any ideas what could be wrong with my setup?
+Oddly enough, now ccache seems to work fine, and I can troubleshoot no
+further.
 
-Cheers!
+Try messing about with ccache -- disable it, or clean the caches out,
+and see if anything will help.  Or you can just do what I did, and
+disable it by brute force (rename the hosts' ccache binary).
 
-    Rob
-
+Mike (mwester)
 
 
