@@ -1,28 +1,33 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L4eW6-0003P1-VM
-	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 17:42:31 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20081124163938.IVYN19493.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L4fcH-0001bR-IY
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 18:52:57 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1L4fZS-00017v-Gf
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 17:50:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 24 Nov 2008 17:50:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 11:39:38 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id j4fb1a0011E665w034fbp4; Mon, 24 Nov 2008 11:39:37 -0500
-X-Authority-Analysis: v=1.0 c=1 a=PBY8_9XBilAA:10 a=ztTzf0O7bsoA:10
-	a=22pK5S-mAAAA:8 a=Q7LJAJhjXI2AUT_k0LMA:9 a=TQyj4TtIcEfxEtfMAVkA:7
-	a=vH2nVZL2-1FHmLntYmOKfbdw7YgA:4 a=k-kO48AawpMA:10 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 24 Nov 2008 09:39:38 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20081124163938.GB4535@smtp.west.cox.net>
-References: <20081117185942.GN15695@smtp.west.cox.net>
-MIME-Version: 1.0
-In-Reply-To: <20081117185942.GN15695@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [BUG 4797] task-sdk.bb and task-sdk-bare.bb duplicate	some functionality
+	Mon, 24 Nov 2008 17:50:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 24 Nov 2008 18:48:48 +0100
+Message-ID: <ggepe0$f3b$2@ger.gmane.org>
+References: <f96d234e0811240758l7ac33a24m1d2f90f4f5153346@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
+In-Reply-To: <f96d234e0811240758l7ac33a24m1d2f90f4f5153346@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Error, DISTRO_PR has changed (.1 to ) when switching from Angstrom glibc to uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,119 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2008 16:42:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 24 Nov 2008 17:52:57 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 17, 2008 at 11:59:42AM -0700, Tom Rini wrote:
-
-> [ Both patches are also attached to bug 4797 ]
-> 
-> Currently, we have task-sdk.bb, which provides task-sdk-bare, and will
-> bring in just abstracted ${LIBC}, $[LIBC}-dev and libgcc-dev.  We also
-> have task-sdk-bare.bb which brings in a number of glibc packages, libgcc
-> and libstdc++/libstdc++-dev and as far as I can tell is the only
-> task-sdk-bare actually used.  The attached patch consolidates both so
-> that task-sdk-bare.bb will be useful on both glibc and uclibc.
-> 
-> Signed-off-by: Tom Rini <trini@embeddedalley.com>
-
-Anyone?
-
-> task-sdk-bare: Update and abstract to support uclibc
-> task-sdk.bb provided a task-sdk-bare version that supported uclibc, but
-> this wasn't used anymore.  Update task-sdk-bare.bb to have glibc / uclibc
-> abstractions and delete the unused file.
-> 
-> diff --git a/packages/tasks/task-sdk-bare.bb b/packages/tasks/task-sdk-bare.bb
-> index d2d40f6..ea0ab31 100644
-> --- a/packages/tasks/task-sdk-bare.bb
-> +++ b/packages/tasks/task-sdk-bare.bb
-> @@ -5,7 +5,7 @@ ALLOW_EMPTY = "1"
->  
->  PACKAGES = "${PN}"
->  
-> -RDEPENDS_${PN} = "\
-> +GLIBC_PKGS = "\
->      glibc \
->      glibc-dbg \
->      glibc-dev \
-> @@ -18,6 +18,16 @@ RDEPENDS_${PN} = "\
->      glibc-gconv-iso8859-1 \
->      glibc-gconv-iso8859-15 \
->      locale-base-en-gb \
-> +    "
+On 24-11-08 16:58, Cliff Brake wrote:
+> I get this when I set ANGSTROM_MODE="uclibc" and restart a build with
+> an existing tmp directory created for a glibc build.  I like re-using
+> the same tmp directory for mixed glibc/uclibc builds to save
+> rebuilding a few packages, but the savings is probably negligible.
+> This obviously requires DISTRO_PR to track in glibc and uclibc conf
+> files, IE:
+>
+> diff --git a/conf/distro/include/angstrom-uclibc.inc
+> b/conf/distro/include/angstrom-uclibc.inc
+> index c26613b..29a50cd 100644
+> --- a/conf/distro/include/angstrom-uclibc.inc
+> +++ b/conf/distro/include/angstrom-uclibc.inc
+> @@ -36,3 +36,5 @@ TARGET_LINK_HASH_STYLE = "-Wl,--hash-style=gnu"
+>
+>   CXXFLAGS += "-fvisibility-inlines-hidden"
+>
+> +DISTRO_PR = ".1"
 > +
-> +LIBC_PKGS_linux = "${GLIBC_PKGS}"
-> +LIBC_PKGS_linux-gnueabi = "${GLIBC_PKGS}"
-> +LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev"
-> +LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev"
-> +
-> +RDEPENDS_${PN} = "\
-> +    ${LIBC_PKGS} \
->      libgcc \
->      libstdc++ \
-> +    libstdc++-dev \
->  "
-> diff --git a/packages/tasks/task-sdk.bb b/packages/tasks/task-sdk.bb
-> deleted file mode 100644
-> index 79e9fef..0000000
-> --- a/packages/tasks/task-sdk.bb
-> +++ /dev/null
-> @@ -1,22 +0,0 @@
-> -DESCRIPTION = "SDK packages"
-> -PR = "r8"
-> -LICENSE = "MIT"
-> -ALLOW_EMPTY = "1"
-> -
-> -PACKAGES = "\
-> -    task-sdk-bare \
-> -    "
-> -
-> -DEPENDS = "virtual/libc"
-> -
-> -LIBC_linux = "glibc"
-> -LIBC_linux-uclibc = "uclibc"
-> -LIBC_linux-gnueabi = "glibc"
-> -LIBC_linux-uclibcgnueabi = "uclibc"
-> -
-> -
-> -RDEPENDS_task-sdk-bare = "\
-> -    ${LIBC} \
-> -    ${LIBC}-dev \
-> -    libgcc \
-> -    "
-> -- 
-> 1.5.2.5
-> 
-> As an addition to the previous patch, add uclibc-thread-db to the list
-> of uclibc packages to install, based on glibc bringing in
-> glibc-thread-db.
-> diff --git a/packages/tasks/task-sdk-bare.bb b/packages/tasks/task-sdk-bare.bb
-> index ea0ab31..ab338e6 100644
-> --- a/packages/tasks/task-sdk-bare.bb
-> +++ b/packages/tasks/task-sdk-bare.bb
-> @@ -22,8 +22,8 @@ GLIBC_PKGS = "\
->  
->  LIBC_PKGS_linux = "${GLIBC_PKGS}"
->  LIBC_PKGS_linux-gnueabi = "${GLIBC_PKGS}"
-> -LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev"
-> -LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev"
-> +LIBC_PKGS_linux-uclibc = "uclibc uclibc-dev uclibc-thread-db"
-> +LIBC_PKGS_linux-uclibcgnueabi = "uclibc uclibc-dev uclibc-thread-db"
->  
->  RDEPENDS_${PN} = "\
->      ${LIBC_PKGS} \
-> 
-> -- 
-> Tom Rini
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> As I not aware how DISTRO_PR is intended to be used, which way do we want to go:
+>
+> 1) force separate tmp dirs for glibc and uclibc builds?
+> 2) keep DISTRO_PR in sync for Angstrom glibc, uclibc, eglibc distros?
 
--- 
-Tom Rini
+3) put DISTRO_PR in angstrom-2008.conf
+
+regards,
+
+Koen
+
 
 
