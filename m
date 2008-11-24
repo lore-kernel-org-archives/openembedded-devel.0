@@ -1,37 +1,33 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [74.54.107.137] (helo=cathcart.site5.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1L4Ztr-0002vG-Tu
+	(envelope-from <mike@compulab.co.il>) id 1L4Zwt-0002zQ-6a
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Nov 2008 12:46:44 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.com>)
-	id 1L4Zqv-0002rT-KZ for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Nov 2008 19:43:52 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.com>) id 1L4ZoD-0008Qs-7W
+	Mon, 24 Nov 2008 12:49:51 +0100
+Received: from mail.linux-boards.com ([192.114.83.142])
+	by cathcart.site5.com with esmtpsa (TLSv1:DES-CBC3-SHA:168)
+	(Exim 4.69) (envelope-from <mike@compulab.co.il>) id 1L4Zu1-0000XW-46
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Nov 2008 19:40:53 +0800
-Date: Mon, 24 Nov 2008 19:40:53 +0800
-From: John Lee <john_lee@openmoko.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081124114052.GX2475@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <20081124090648.GU2475@buddha.tw.openmoko.com>
-	<1227522398.31396.4.camel@mill.internal.reciva.com>
+	Mon, 24 Nov 2008 05:46:53 -0600
+Received: from [10.1.1.95] (mike-pc.compulab.local [10.1.1.95])
+	by mail.linux-boards.com (8.12.5/8.12.8) with ESMTP id mAOBksUp016650
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Nov 2008 13:46:54 +0200
+Message-ID: <492A942F.80309@compulab.co.il>
+Date: Mon, 24 Nov 2008 13:46:55 +0200
+From: Mike Rapoport <mike@compulab.co.il>
+User-Agent: Thunderbird 2.0.0.16 (X11/20080907)
 MIME-Version: 1.0
-In-Reply-To: <1227522398.31396.4.camel@mill.internal.reciva.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.com
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Re: What to do with obsolete kernel modules
+To: openembedded-devel@lists.openembedded.org
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cathcart.site5.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - compulab.co.il
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: Using Bluetooth headset with Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,54 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2008 11:46:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 24 Nov 2008 11:49:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 24, 2008 at 10:26:38AM +0000, Phil Blundell wrote:
-> On Mon, 2008-11-24 at 17:06 +0800, John Lee wrote:
-> > If kernel-module-foobar exists in an old rootfs, but in later version
-> > we disabled module foobar in kernel config, how can we remove the
-> > obsolete module from the old rootfs after opkg upgrade ?
-> 
-> Assuming the old module has a correctly versioned dependency on its
-> corresponding kernel version, opkg should automatically tear out the
-> module package when the kernel is upgraded since its dependencies will
-> no longer be met.  If that isn't working, I think it would be an opkg
-> bug.
-> 
-> p.
-
-but that will only happen if you changed from, say, 2.6.24 to 2.6.26.
-
-if just the git rev changed such as
-a1e97c611253511ffc2d8c45e3e6d6894fa03fa3 to
-6e2a723ef54ee2e739c34786981b2c508db803c1
-
-then opkg wouldn't know about it.
-
-my problem looks like this:
+Hi all,
+I was trying to enable Bluetooth headset in Angstrom and faced a complete fiasco.
+I've installed bluez-utils and bluez-utils-alsa, updated configuration files,
+and I see that pairing is successfull. Moreover, aplay/mplayer are able to use
+bluetooth audio device, but there's no sound coming out...
+Has anybody got a clue what am I missing?
 
 
-root@om-gta02:~# opkg status kernel-module-xt-physdev
-Package: kernel-module-xt-physdev
-Version: 2:2.6.24+git75969+a1e97c611253511ffc2d8c45e3e6d6894fa03fa3-r1.01
-Depends: update-modules, kernel-2.6.24, kernel-module-x-tables
-Status: install ok installed
-Architecture: neo1973
-Installed-Time: 1226894980
+-- 
+Sincerely yours,
+Mike.
 
-root@om-gta02:~# opkg status kernel-module-xt-tcpudp
-Package: kernel-module-xt-tcpudp
-Version: 3:2.6.24+gitr1+6e2a723ef54ee2e739c34786981b2c508db803c1-r2
-Depends: update-modules, kernel-2.6.24, kernel-module-x-tables
-Status: install user installed
-Architecture: om-gta02
-
-
-these 2 packages coexist on the same rootfs after opkg upgrade.
-
-
-- John
 
 
