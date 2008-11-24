@@ -1,34 +1,29 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1L4IQu-00089c-8j
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Nov 2008 18:07:40 +0100
-Received: from p5b037722.dip.t-dialin.net ([91.3.119.34] helo=localhost)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1L4IOB-0006L9-8P by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Nov 2008 18:04:53 +0100
-Received: from stefan by localhost with local (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1L4IOA-0002hg-5D
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Nov 2008 18:04:50 +0100
-Date: Sun, 23 Nov 2008 18:04:50 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081123170450.GB10050@datenfreihafen.org>
-References: <ggc0uc$kvv$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <ggc0uc$kvv$1@ger.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.3 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: Versioning and upgrade paths
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L4SRg-0008LX-0r
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 04:49:08 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L4SOq-0006Ns-SL
+	for openembedded-devel@openembedded.org; Mon, 24 Nov 2008 03:46:13 +0000
+Received: from 203.117.215.163 ([203.117.215.163])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 24 Nov 2008 03:46:12 +0000
+Received: from robk by 203.117.215.163 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 24 Nov 2008 03:46:12 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Mon, 24 Nov 2008 11:45:55 +0800
+Message-ID: <ggd81q$re5$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: 203.117.215.163
+User-Agent: KNode/0.10.9
+Sender: news <news@ger.gmane.org>
+Subject: Bitbake r1090 (env hiding) makes my build fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Nov 2008 17:07:40 -0000
+X-List-Received-Date: Mon, 24 Nov 2008 03:49:08 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7Bit
 
-Hello.
+Hia,
 
-On Sun, 2008-11-23 at 17:38, Koen Kooi wrote:
->
-> I noticed people adding recipes with PVs in the form of '2.6.28rc4',  
-> which is wrong:
->
-> '2.6.28rc4' will sort higher than '2.6.28', so upgrading to the release  
-> from the RC will be impossible.
+I'm tracking the stable branch and recently updated bitbake to HEAD. When
+trying a build-from-scratch, I noticed BB quickly failed in shasum-native.
+Some manual svn disecting pointed to r1090 as the one that caused the fail.
+I tried adding a BB_PRESERVE_ENV, but no difference.
 
-Yeah, that was me. :)
+Output is at http://pastebin.com/m65e66603. There is no log.do_compile
+generated for some reason, and a build with -D shows nothing much. The gcc
+invoke actually works OK and produces the oe_shasum256 executable.
 
-Thanks for fixing. Read and understand the versioning policy now.
+Any ideas what could be wrong with my setup?
 
-regards
-Stefan Schmidt
+Cheers!
+
+    Rob
+
 
 
