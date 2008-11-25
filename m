@@ -1,24 +1,25 @@
 Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1L57dm-0000Ts-3z
+	(envelope-from <mickey@vanille-media.de>) id 1L57e8-000188-MM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 00:48:22 +0100
+	Wed, 26 Nov 2008 00:48:44 +0100
 Received: from andromeda.vanille.de (e180141000.adsl.alicedsl.de
 	[85.180.141.0])
-	by drlauer-research.com (Postfix) with ESMTP id C7BEE584125
+	by drlauer-research.com (Postfix) with ESMTP id 812E8584125
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2008 01:01:45 +0100 (CET)
+	Wed, 26 Nov 2008 01:02:08 +0100 (CET)
 From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
 Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Nov 2008 00:45:23 +0100
+Date: Wed, 26 Nov 2008 00:45:46 +0100
 User-Agent: KMail/1.9.10
-References: <48D17F33.90805@gmail.com> <492C33B4.8050201@gmx.de>
-	<200811252028.21739.openembedded@haerwu.biz>
-In-Reply-To: <200811252028.21739.openembedded@haerwu.biz>
+References: <20081117185942.GN15695@smtp.west.cox.net>
+	<20081124222413.GA5591@rhein.zuhause.netz>
+	<200811252001.13879.zecke@selfish.org>
+In-Reply-To: <200811252001.13879.zecke@selfish.org>
 MIME-Version: 1.0
-Message-Id: <200811260045.24027.mickey@vanille-media.de>
-Subject: Re: Granting r/w access for Bernhard Guillon
+Message-Id: <200811260045.47133.mickey@vanille-media.de>
+Subject: Re: Commit access for Tim Rini (Was: Re: [BUG 4797] task-sdk.bb and task-sdk-bare.bb duplicate some	functionality )
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,17 +33,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2008 23:48:22 -0000
+X-List-Received-Date: Tue, 25 Nov 2008 23:48:44 -0000
 Content-Type: text/plain;
-  charset="utf-8"
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Bernhard, 
++1
+
+Tom,
 
 send me your ssh key.
 
-Cheers,
 -- 
 :M:
 
