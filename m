@@ -1,29 +1,20 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1L5427-0003NK-D8
-	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 20:57:15 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mAPJsHt7024079
-	for <openembedded-devel@openembedded.org>; Tue, 25 Nov 2008 19:54:17 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 23727-10 for <openembedded-devel@openembedded.org>;
-	Tue, 25 Nov 2008 19:54:13 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mAPJsDS5024073
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Tue, 25 Nov 2008 19:54:13 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <gghjh1$dg1$1@ger.gmane.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1L54Kp-0004FA-AU
+	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 21:16:35 +0100
+Received: (qmail 29816 invoked by uid 813007); 25 Nov 2008 20:13:39 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 25 Nov 2008 20:13:39 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Nov 2008 21:13:49 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.28-rc4; KDE/4.1.3; x86_64; ; )
 References: <gghjh1$dg1$1@ger.gmane.org>
-Date: Tue, 25 Nov 2008 19:54:14 +0000
-Message-Id: <1227642854.5377.17.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+In-Reply-To: <gghjh1$dg1$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200811252113.50363.openembedded@haerwu.biz>
 Subject: Re: [RFC] LICENSE fields and packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,39 +29,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2008 19:57:15 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Nov 2008 20:16:35 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Tuesday 25 of November 2008 20:26:24 Koen Kooi napisa=C5=82(a):
 
-On Tue, 2008-11-25 at 20:26 +0100, Koen Kooi wrote:
-> Jason Kridner pointed out that we don't actually put the license in the 
-> resulting packages, making it hard for finding the license if you only 
-> have a bunch or packages.
-> 
-> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=e35d1ffad1553f259b084578992f15d10f590f98
-> 
+> Jason Kridner pointed out that we don't actually put the license in
+> the resulting packages, making it hard for finding the license if you
+> only have a bunch or packages.
+
+Ugly we are.
+
 > Now the RFC part:
-> 
-> Allow URLs in the LICENSE field for lesser know licenses and/or 
+>
+> Allow URLs in the LICENSE field for lesser know licenses and/or
 > click-through licenses.
-> 
-> Related to that: a class that would take a text file and generate a 
-> preinsts that shows the textfile and prompts to accept it (or not) would 
-> be awesome as well.
-> 
-> Back to the point: what do you think of allowing URLs in the LICENSE field?
 
-I don't like the idea of urls in the field itself. I would however love
-to see a class file with a list of valid field entries and corresponding
-urls to the appropriate licence along with other information like
-distributability. In due course I'd like to see that being mandatory for
-new .bb files.
+> Related to that: a class that would take a text file and generate a
+> preinsts that shows the textfile and prompts to accept it (or not)
+> would be awesome as well.
 
-Cheers,
+Only if there will be a place on storage where informations which=20
+licenses user accepted would be kept - I do not like to click "Yes, I=20
+accept this license" 6 times on each system update.
 
-Richard
+You also have to think about graphical package managers here.
+
+> Back to the point: what do you think of allowing URLs in the LICENSE
+> field?
+
+Show me code which will make use of it first? Why not add license to=20
+SRC_URI?
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://blog.haerwu.biz/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
