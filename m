@@ -1,25 +1,37 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.198.251] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1L57e8-000188-MM
+	(envelope-from <raj.khem@gmail.com>) id 1L57kT-0001jc-7I
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 00:48:44 +0100
-Received: from andromeda.vanille.de (e180141000.adsl.alicedsl.de
-	[85.180.141.0])
-	by drlauer-research.com (Postfix) with ESMTP id 812E8584125
+	Wed, 26 Nov 2008 00:55:17 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so208014rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2008 01:02:08 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Tue, 25 Nov 2008 15:52:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=EVOstIDARMlFhQBqkvdTv0JLMsGSL+bY3bhxdXnPi3A=;
+	b=jIock4fO+106sRn4pApiSKGbr/zj0MNET45LzOu6bNNj+bfInwO6nGNlksyIJA9cb6
+	ekUaVfFLDGTY/wocW6/PO8zUEGRWC5nxpAJ+wr/qjnBqSENmpDXcbFEVfco4oJyjHjl5
+	yTnwoM4r4lVg9oKUghVCJoHXB02tUVCd+c8BI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=me0sibM0lV4AAPqvv1+Zkg9n+0MafZRLLeLIbH1zKSNVu36VAeN9Q0Svl6cYU0wYKq
+	uuXPHY6wI4OpdgemE0jsK57Vob36/IWOlFrrrFMEbl9pWa+W1ebBqlOfC+FW+BtCw07M
+	YdKjSzPLuaiYoJ9zLu8i2ZWfkyiCgwPN15Kdk=
+Received: by 10.140.248.15 with SMTP id v15mr2610972rvh.295.1227657138286;
+	Tue, 25 Nov 2008 15:52:18 -0800 (PST)
+Received: by 10.141.86.3 with HTTP; Tue, 25 Nov 2008 15:52:18 -0800 (PST)
+Message-ID: <19c1b8a90811251552w125189b5wc43cbb595d6fc3dc@mail.gmail.com>
+Date: Tue, 25 Nov 2008 15:52:18 -0800
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Nov 2008 00:45:46 +0100
-User-Agent: KMail/1.9.10
-References: <20081117185942.GN15695@smtp.west.cox.net>
-	<20081124222413.GA5591@rhein.zuhause.netz>
-	<200811252001.13879.zecke@selfish.org>
-In-Reply-To: <200811252001.13879.zecke@selfish.org>
+In-Reply-To: <1227628013.10122.37.camel@akaza1>
 MIME-Version: 1.0
-Message-Id: <200811260045.47133.mickey@vanille-media.de>
-Subject: Re: Commit access for Tim Rini (Was: Re: [BUG 4797] task-sdk.bb and task-sdk-bare.bb duplicate some	functionality )
+References: <1227628013.10122.37.camel@akaza1>
+Subject: Re: uclibc support for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,19 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2008 23:48:44 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 25 Nov 2008 23:55:17 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-+1
+Looks sane to me. Have you tried to build a distro with this change ?
 
-Tom,
+Thx
 
-send me your ssh key.
+-Khem
 
--- 
-:M:
+On Tue, Nov 25, 2008 at 7:46 AM, Mikael Rosbacke <mikael@rosbacke.org> wrote:
+> Hello!
+>
+> Seems I'm the only one crazy enough to try to run a uClibc based
+> distribution on x86. (I can see the response, What's the point?)
+>
+> Anyway, it turns out uClibc is currently lacking support for x86.
+> I've added the folder openembedded/packages/uclibc/uclibc-0.9.30/x86
+> and created the file uClibc.machine in this folder. (See attachment)
+>
+> Is there some way to get this into the git tree? Should I file a bug
+> report or could some maintainer give feedback on things to fix before
+> inclusion? I've tried to keep the config file in style with similar
+> config files for other machines.
+>
+> Thanks in advance,
+>
+>
+> --- Mikael Rosbacke
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
