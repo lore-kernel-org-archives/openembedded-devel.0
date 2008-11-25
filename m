@@ -1,26 +1,31 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1L53Do-0004oW-F4
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Nov 2008 20:05:17 +0100
-Received: from [92.116.152.108] (helo=tamarin.localnet)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1L53Av-0004Sw-3F
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Nov 2008 20:02:20 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Nov 2008 20:01:13 +0100
-User-Agent: KMail/1.10.1 (Linux/2.6.27-7-generic; KDE/4.1.2; i686; ; )
-References: <20081117185942.GN15695@smtp.west.cox.net>
-	<20081124163938.GB4535@smtp.west.cox.net>
-	<20081124222413.GA5591@rhein.zuhause.netz>
-In-Reply-To: <20081124222413.GA5591@rhein.zuhause.netz>
-MIME-Version: 1.0
-Message-Id: <200811252001.13879.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.152.108
-Subject: Commit access for Tim Rini (Was: Re: [BUG 4797] task-sdk.bb and task-sdk-bare.bb duplicate some	functionality )
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L53bI-0002De-Kj
+	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 20:29:32 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L53YQ-0004QK-1n
+	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 19:26:34 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 25 Nov 2008 19:26:34 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 25 Nov 2008 19:26:34 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 25 Nov 2008 20:26:24 +0100
+Message-ID: <gghjh1$dg1$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
+Sender: news <news@ger.gmane.org>
+Subject: [RFC] LICENSE fields and packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,25 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2008 19:05:22 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 25 Nov 2008 19:29:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Monday 24 November 2008 23:24:13 Henning Heinold wrote:
-> On Mon, Nov 24, 2008 at 09:39:38AM -0700, Tom Rini wrote:
+Hi,
 
-> > Tom Rini
->
-> Hm,
->
-> is this a core change or not? If yes +1 from and by the way if Tom Rini
-> wants it, I suggest he gets git rw status, because he submitted a lot
-> of good patches.
+Jason Kridner pointed out that we don't actually put the license in the 
+resulting packages, making it hard for finding the license if you only 
+have a bunch or packages.
 
-I second that.
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=e35d1ffad1553f259b084578992f15d10f590f98
 
-z.
+Now the RFC part:
+
+Allow URLs in the LICENSE field for lesser know licenses and/or 
+click-through licenses.
+
+Related to that: a class that would take a text file and generate a 
+preinsts that shows the textfile and prompts to accept it (or not) would 
+be awesome as well.
+
+Back to the point: what do you think of allowing URLs in the LICENSE field?
+
+regards,
+
+Koen
+
 
 
