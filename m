@@ -1,33 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L555r-000271-DF
-	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 22:05:11 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L552y-0007tJ-9x
-	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 21:02:12 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 25 Nov 2008 21:02:12 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 25 Nov 2008 21:02:12 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 25 Nov 2008 22:02:00 +0100
-Message-ID: <gghp49$76g$1@ger.gmane.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1L55iM-00087B-Kz
+	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 22:44:58 +0100
+Received: (qmail 23500 invoked by uid 813007); 25 Nov 2008 21:42:01 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 25 Nov 2008 21:42:01 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Nov 2008 22:42:05 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.28-rc4; KDE/4.1.3; x86_64; ; )
 References: <gghjh1$dg1$1@ger.gmane.org>
 	<200811252113.50363.openembedded@haerwu.biz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
-In-Reply-To: <200811252113.50363.openembedded@haerwu.biz>
-Sender: news <news@ger.gmane.org>
+	<gghp49$76g$1@ger.gmane.org>
+In-Reply-To: <gghp49$76g$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200811252242.05674.openembedded@haerwu.biz>
 Subject: Re: [RFC] LICENSE fields and packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,42 +31,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2008 21:05:11 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 25 Nov 2008 21:44:58 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 25-11-08 21:13, Marcin Juszkiewicz wrote:
-> Tuesday 25 of November 2008 20:26:24 Koen Kooi napisał(a):
+Tuesday 25 of November 2008 22:02:00 Koen Kooi napisa=C5=82(a):
 
->> Back to the point: what do you think of allowing URLs in the LICENSE
->> field?
+> How would a non-OE user know that http://openembedded.org/dl/ICA2.txt
+> is the license? Shipping the license itself in the packages would be
+> better, but that will need a lot of thought,=20
+
+> since we can't have a 1000 packages shipping=20
+> /usr/share/licenses/GPLv2, and *all* packages from a recipe need a
+> license, even -doc, -dev -and -dbg.
+
+/usr/share/common-licenses/ is part of base-files-doc now and consists=20
+GPL, LGPL, BSD, Artistic and few other licenses. We can extend this list=20
+and create 'common-licenses' package which would be installed in each=20
+image.
+
+> The concrete problem I have is that I have a bunch of licenses that
+> don't have a name (not even inside the company that wrote them), so
+> my recipes have things like
 >
-> Show me code which will make use of it first? Why not add license to
-> SRC_URI?
+> LICENSE =3D "proprietary binary"
+> LICENSE =3D "evil binary"
 
-At this point it's not about code, it's about being able to show a legal 
-department that the license is referenced in the package.
+So add license.txt into /usr/share/doc/${PN}/ with content of that=20
+package license. I have done few such packages during last year as some=20
+copyright holders gave permissions to distribute their stuff *ONLY* with=20
+attached license. This kind of stuff does not even need nothing new - it=20
+is just another file in SRC_URI.
 
-How would a non-OE user know that http://openembedded.org/dl/ICA2.txt is 
-the license? Shipping the license itself in the packages would be 
-better, but that will need a lot of thought, since we can't have a 1000 
-packages shipping /usr/share/licenses/GPLv2, and *all* packages from a 
-recipe need a license, even -doc, -dev -and -dbg.
+> So as short term solution I'd like to be able to point to a url for
+> the 'licenses without a proper name'=20
 
-The concrete problem I have is that I have a bunch of licenses that 
-don't have a name (not even inside the company that wrote them), so my 
-recipes have things like
+Yeah.. especially when license contents is available only in restricted=20
+area for which simple person can not get access (for example Marvell=20
+extranet). If there are packages which have own license then such=20
+license should be inside of package.
 
-LICENSE = "proprietary binary"
-LICENSE = "evil binary"
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://blog.haerwu.biz/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-So as short term solution I'd like to be able to point to a url for the 
-'licenses without a proper name' and for the long term have a proper, 
-package format independant solution.
-
-regards,
-
-Koen
 
 
 
