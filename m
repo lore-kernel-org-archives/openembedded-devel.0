@@ -1,31 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L53bI-0002De-Kj
-	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 20:29:32 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L53YQ-0004QK-1n
-	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 19:26:34 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 25 Nov 2008 19:26:34 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 25 Nov 2008 19:26:34 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 25 Nov 2008 20:26:24 +0100
-Message-ID: <gghjh1$dg1$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: [RFC] LICENSE fields and packages
+	(envelope-from <openembedded@haerwu.biz>) id 1L53cp-0002H4-15
+	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 20:31:07 +0100
+Received: (qmail 26489 invoked by uid 813007); 25 Nov 2008 19:28:10 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 25 Nov 2008 19:28:10 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Nov 2008 20:28:17 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.28-rc4; KDE/4.1.3; x86_64; ; )
+References: <48D17F33.90805@gmail.com> <48D62D20.5050407@gmx.de>
+	<492C33B4.8050201@gmx.de>
+In-Reply-To: <492C33B4.8050201@gmx.de>
+MIME-Version: 1.0
+Message-Id: <200811252028.21739.openembedded@haerwu.biz>
+Subject: Re: Granting r/w access for Bernhard Guillon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2008 19:29:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 25 Nov 2008 19:31:07 -0000
+X-Groupsio-MsgNum: 6734
+Content-Type: multipart/signed; boundary="nextPart2102177.UZHnjUdIKH";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Hi,
-
-Jason Kridner pointed out that we don't actually put the license in the 
-resulting packages, making it hard for finding the license if you only 
-have a bunch or packages.
-
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=e35d1ffad1553f259b084578992f15d10f590f98
-
-Now the RFC part:
-
-Allow URLs in the LICENSE field for lesser know licenses and/or 
-click-through licenses.
-
-Related to that: a class that would take a text file and generate a 
-preinsts that shows the textfile and prompts to accept it (or not) would 
-be awesome as well.
-
-Back to the point: what do you think of allowing URLs in the LICENSE field?
-
-regards,
-
-Koen
+--nextPart2102177.UZHnjUdIKH
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
 
++1
 
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://blog.haerwu.biz/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+--nextPart2102177.UZHnjUdIKH
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAkksUdIACgkQeQ6MlGH/2qs0XQCdF/GThUYiDC6DngrRyU9vSKOj
+rcMAn3qrGTUhdPAi0aCR6g417HPgN77n
+=ghZq
+-----END PGP SIGNATURE-----
+
+--nextPart2102177.UZHnjUdIKH--
