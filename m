@@ -1,30 +1,31 @@
-Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L4khj-0002ar-78
-	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 00:19:03 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao106.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20081124231600.KGZM8615.fed1rmmtao106.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 24 Nov 2008 18:16:00 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
-	id jBFz1a00k1E665w04BG0mY; Mon, 24 Nov 2008 18:16:00 -0500
-X-Authority-Analysis: v=1.0 c=1 a=PBY8_9XBilAA:10 a=ztTzf0O7bsoA:10
-	a=cN_WEqIEQtNfXaMQK-MA:9 a=Y__sCvvAijfortHdw3wnNOV-sE4A:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 24 Nov 2008 16:16:03 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L4mqp-00024V-9j
+	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 02:36:27 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L4mo1-0000nx-F2
+	for openembedded-devel@openembedded.org; Tue, 25 Nov 2008 01:33:34 +0000
+Received: from 203.117.215.163 ([203.117.215.163])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 25 Nov 2008 01:33:33 +0000
+Received: from robk by 203.117.215.163 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 25 Nov 2008 01:33:33 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20081124231603.GD4535@smtp.west.cox.net>
-References: <20081117185942.GN15695@smtp.west.cox.net>
-	<20081124163938.GB4535@smtp.west.cox.net>
-	<20081124222413.GA5591@rhein.zuhause.netz>
-MIME-Version: 1.0
-In-Reply-To: <20081124222413.GA5591@rhein.zuhause.netz>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [BUG 4797] task-sdk.bb and task-sdk-bare.bb duplicate	some functionality
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Tue, 25 Nov 2008 09:35:43 +0800
+Message-ID: <ggfkl5$bup$1@ger.gmane.org>
+References: <ggd81q$re5$1@ger.gmane.org> <492A3368.4070302@dls.net>
+	<ggdhia$cv4$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: 203.117.215.163
+User-Agent: KNode/0.10.9
+Sender: news <news@ger.gmane.org>
+Subject: Re: Bitbake r1090 (env hiding) makes my build fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,22 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2008 23:19:11 -0000
+X-List-Received-Date: Tue, 25 Nov 2008 01:36:27 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7Bit
 
-On Mon, Nov 24, 2008 at 11:24:13PM +0100, Henning Heinold wrote:
-[snip]
-> Hm,
+[Re-posted with lines trimmed, sorry if this arrives twice]
+
+Koen Kooi wrote:
+> Why not put
 > 
-> is this a core change or not? If yes +1 from and by the way if Tom Rini
-> wants it, I suggest he gets git rw status, because he submitted a lot
-> of good patches.
+> CCACHE=""
+> 
+> in local.conf?
 
-If that means I can get some of my still outstand changes in bugzilla
-in, sure :)
+I just commented out the CCACHE line in bitbake.conf for testing. The result
+then is a bit more interesting:
 
--- 
-Tom Rini
+| + do_compile
+| +
+gcc -isystem/bulk/opt/oe/stable/build-ble-i586/tmp/staging/\
+x86_64-linux/include  -O2 -isystem/bulk/opt/oe/stable/build\
+-ble-i586/tmp/staging/x86_64-linux/include -o
+oe_sha256sum main.c sha256.c
+| gcc: error trying to exec 'cc1': execvp: No such file or directory
+| gcc: error trying to exec 'cc1': execvp: No such file or directory
+NOTE: Task
+failed: /bulk/opt/oe/stable/build-ble-i586/tmp/work/\
+shasum-native-1.0-r1/temp/log.do_compile.32323
+
+I.e. gcc can't find its backend (which should be
+at /usr/lib64/gcc/x86_64-suse-linux/4.3/cc1 on my machine). I can't see in
+r1090 what could cause that. "export BB_PRESERVE_ENV=1" doesn't help.
+
+> PS: Is that on a RH (derived) buildhost?
+
+OpenSuse 11, x86_64, building i586..
+
+Cheers!
+
+    Rob
+
 
 
