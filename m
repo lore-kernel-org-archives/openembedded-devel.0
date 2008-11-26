@@ -1,37 +1,23 @@
-Received: from [209.85.198.251] (helo=rv-out-0708.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1L57kT-0001jc-7I
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 00:55:17 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so208014rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2008 15:52:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=EVOstIDARMlFhQBqkvdTv0JLMsGSL+bY3bhxdXnPi3A=;
-	b=jIock4fO+106sRn4pApiSKGbr/zj0MNET45LzOu6bNNj+bfInwO6nGNlksyIJA9cb6
-	ekUaVfFLDGTY/wocW6/PO8zUEGRWC5nxpAJ+wr/qjnBqSENmpDXcbFEVfco4oJyjHjl5
-	yTnwoM4r4lVg9oKUghVCJoHXB02tUVCd+c8BI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=me0sibM0lV4AAPqvv1+Zkg9n+0MafZRLLeLIbH1zKSNVu36VAeN9Q0Svl6cYU0wYKq
-	uuXPHY6wI4OpdgemE0jsK57Vob36/IWOlFrrrFMEbl9pWa+W1ebBqlOfC+FW+BtCw07M
-	YdKjSzPLuaiYoJ9zLu8i2ZWfkyiCgwPN15Kdk=
-Received: by 10.140.248.15 with SMTP id v15mr2610972rvh.295.1227657138286;
-	Tue, 25 Nov 2008 15:52:18 -0800 (PST)
-Received: by 10.141.86.3 with HTTP; Tue, 25 Nov 2008 15:52:18 -0800 (PST)
-Message-ID: <19c1b8a90811251552w125189b5wc43cbb595d6fc3dc@mail.gmail.com>
-Date: Tue, 25 Nov 2008 15:52:18 -0800
-From: "Khem Raj" <raj.khem@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1L5GT6-0005BU-Tq
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 10:13:57 +0100
+Received: (qmail 23391 invoked by uid 813007); 26 Nov 2008 09:10:57 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 26 Nov 2008 09:10:56 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1227628013.10122.37.camel@akaza1>
+Date: Wed, 26 Nov 2008 10:11:09 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.28-rc4; KDE/4.1.3; x86_64; ; )
+References: <gghjh1$dg1$1@ger.gmane.org>
+	<200811252242.05674.openembedded@haerwu.biz>
+	<gghsc8$jot$1@ger.gmane.org>
+In-Reply-To: <gghsc8$jot$1@ger.gmane.org>
 MIME-Version: 1.0
-References: <1227628013.10122.37.camel@akaza1>
-Subject: Re: uclibc support for x86
+Message-Id: <200811261011.09918.openembedded@haerwu.biz>
+Subject: Re: [RFC] LICENSE fields and packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,42 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2008 23:55:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Nov 2008 09:13:57 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Looks sane to me. Have you tried to build a distro with this change ?
+Tuesday 25 of November 2008 22:57:27 Koen Kooi napisa=C5=82(a):
+> On 25-11-08 22:42, Marcin Juszkiewicz wrote:
+> > Tuesday 25 of November 2008 22:02:00 Koen Kooi napisa=C5=82(a):
 
-Thx
+> >> The concrete problem I have is that I have a bunch of licenses
+> >> that don't have a name (not even inside the company that wrote
+> >> them), so my recipes have things like
+> >>
+> >> LICENSE =3D "proprietary binary"
+> >> LICENSE =3D "evil binary"
+> >
+> > So add license.txt into /usr/share/doc/${PN}/ with content of that
+> > package license. I have done few such packages during last year as
+> > some copyright holders gave permissions to distribute their stuff
+> > *ONLY* with attached license. This kind of stuff does not even need
+> > nothing new - it is just another file in SRC_URI.
 
--Khem
+> I like that idea very much, but the license file will have to be in
+> every entry in PACKAGES, so ${PN} won't work. Do you have a
+> suggestion on how to handle that?
 
-On Tue, Nov 25, 2008 at 7:46 AM, Mikael Rosbacke <mikael@rosbacke.org> wrote:
-> Hello!
+${PN}-license package on which all entries from PACKAGES will RDEPEND?
+
+> >> So as short term solution I'd like to be able to point to a url
+> >> for the 'licenses without a proper name'
+> >
+> > Yeah.. especially when license contents is available only in
+> > restricted area for which simple person can not get access (for
+> > example Marvell extranet). If there are packages which have own
+> > license then such license should be inside of package.
 >
-> Seems I'm the only one crazy enough to try to run a uClibc based
-> distribution on x86. (I can see the response, What's the point?)
->
-> Anyway, it turns out uClibc is currently lacking support for x86.
-> I've added the folder openembedded/packages/uclibc/uclibc-0.9.30/x86
-> and created the file uClibc.machine in this folder. (See attachment)
->
-> Is there some way to get this into the git tree? Should I file a bug
-> report or could some maintainer give feedback on things to fix before
-> inclusion? I've tried to keep the config file in style with similar
-> config files for other machines.
->
-> Thanks in advance,
->
->
-> --- Mikael Rosbacke
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+> So you agree that in those situations we can point to an URL, but in
+> other cases either use the name or include it in the package?
+
+No, I mean that if license is not one of popular ones covered by=20
+base-files-doc or common-licenses package it should be added into OE=20
+metadata. Ok, it can be a bit of overkill adding all those 'povray',=20
+'openssl' etc licenses but when we will end then it will be clear how=20
+each recipe is licensed.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://blog.haerwu.biz/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
