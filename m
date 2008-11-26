@@ -1,29 +1,26 @@
-Received: from [206.46.252.44] (helo=vms044pub.verizon.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1L5PRa-0003hC-Up
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 19:48:59 +0100
-Received: from gandalf.denix.org ([71.255.226.167])
-	by vms044.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
-	(built Apr
-	3 2006)) with ESMTPA id <0KAY004V7ESCAAC4@vms044.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	26 Nov 2008 12:45:49 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D55936B83B5; Wed,
-	26 Nov 2008 13:45:47 -0500 (EST)
-Date: Wed, 26 Nov 2008 13:45:47 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <ggk4pp$c9e$1@ger.gmane.org>
+	(envelope-from <pb@reciva.com>)
+	id 1L5Pfc-0003xg-36; Wed, 26 Nov 2008 20:03:28 +0100
+Received: from 79-71-239-31.dynamic.dsl.as9105.com ([79.71.239.31]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1L5Pch-0005eu-Gz; Wed, 26 Nov 2008 19:00:27 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20081126184547.GB27631@denix.org>
-MIME-version: 1.0
+In-Reply-To: <ggk56j$dtn$1@ger.gmane.org>
 References: <ggjnpc$qhg$1@ger.gmane.org>
 	<200811261755.53197.mickey@vanille-media.de>
 	<1227721214.19934.33.camel@mill.internal.reciva.com>
 	<ggk26f$30a$1@ger.gmane.org>
-	<48239d390811261012w26eb9a9fva6c7eacf4aff0a50@mail.gmail.com>
-	<20081126182400.GA27631@denix.org> <ggk4pp$c9e$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+	<1227722637.19934.36.camel@mill.internal.reciva.com>
+	<ggk56j$dtn$1@ger.gmane.org>
+Date: Wed, 26 Nov 2008 19:00:26 +0000
+Message-Id: <1227726026.23391.245.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
 Subject: Re: preferred-provider at the image level a.k.a why is all	this fso stuff in my non-fso image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,31 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2008 18:49:01 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 26 Nov 2008 19:03:35 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Nov 26, 2008 at 07:33:29PM +0100, Koen Kooi wrote:
-> On 26-11-08 19:24, Denys Dmytriyenko wrote:
->> On Wed, Nov 26, 2008 at 09:12:34PM +0300, Sergey Lapin wrote:
->>> I just need to mention we have same kind of problems with mplayer vs
->>> mplayer-maemo recipe,
->>> when you try to put e.g. mencoder into IMAGE_INSTALL, mplayer-maemo
->>> recipe is used instead of mplayer one.
->>> Also, which is weird, I was able to reproduce this lots of times on
->>> one my setup even with build from scratch,
->>> and was unable to do so with my another setup.
->>
->> Sorry for my naive question, but why can't it be specified with
->>
->> PREFERRED_PROVIDER_mplayer = "mplayer"
->
-> That works at buildtime, opkg doesn't know about preferred_provider.
+On Wed, 2008-11-26 at 19:40 +0100, Koen Kooi wrote:
+> if fso-foo has
+> 
+> Conflicts: foo
+> Replaces: foo
+> 
+> but not
+> 
+> Provides: foo
+> 
+> opkg will always pick fso-foo when it's present in deploy, while you 
+> want an image with foo.
 
-Thanks, that makes sense. Sergey's email above made me believe he was having 
-build issues though.
+Are you sure that your package fso-foo really wants to Conflict: with
+and Replace: foo without also Providing: it?  Although I don't think
+there is any reason why this is inherently illegitimate, it is certainly
+something of a fringe case and my first suspicion would be that this is
+a packaging bug which is just happening to tickle an opkg bug and/or
+misfeature.  I suspect opkg is taking a slightly harder line on this,
+deciding that lack of Provides: in this case must certainly be a
+packaging error, and proceeding as if that Provides: was present.  It's
+debatable whether this is a desirable thing for it to be doing but,
+irrespective of that, at least a part of the right answer is probably to
+fix the offending packages.
 
--- 
-Denys
+p.
+
+
 
 
