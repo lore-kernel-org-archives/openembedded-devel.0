@@ -1,31 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L5Lmq-0002PQ-GX
-	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 15:54:40 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L5Ljs-0001sm-Bv
-	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 14:51:36 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 26 Nov 2008 14:51:36 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 26 Nov 2008 14:51:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 26 Nov 2008 15:51:24 +0100
-Message-ID: <ggjnpc$qhg$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
-Sender: news <news@ger.gmane.org>
-Subject: preferred-provider at the image level a.k.a why is all this fso stuff in my non-fso image
+	(envelope-from <leon.woestenberg@gmail.com>) id 1L5MEo-0003uN-4W
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Nov 2008 16:23:34 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so123795qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Nov 2008 07:20:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=hArdl2MEA6ownuBzDqXkQoeZ3xh3EVBhX0MJk96vuag=;
+	b=QimuX51HNlx6meoyvhB58b7ueRy6vDcTsmkE0ICG8B23UEXEiS8NacNpMkmx+iYEEx
+	WUV4O8gaBnV1HMAlxyocc2o46QMMhCdiBOxKKOTmgFrn7Kk8Mub1fb1kpjKj4et8BJzd
+	oCSLZAqtEOW8C0hoCn5eQHeX4hmylW9qtoCew=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=nww0WWcGHBdEcdjOKJ9id5EmMl6Tx2wFaa522JDFKiPB0gq9R3Uxax3I+Fpp/FVkZS
+	EgcIdt3/aJhMnzh0hleV784B5MUTTNEdEKDYRL8W9kvTNYYdr3kp264AICuiXiqsQjYN
+	W9xgrRu4roxzJopku/MvhRMi23G+k1NhtZvBc=
+Received: by 10.214.45.14 with SMTP id s14mr5370268qas.343.1227712834210;
+	Wed, 26 Nov 2008 07:20:34 -0800 (PST)
+Received: by 10.214.12.10 with HTTP; Wed, 26 Nov 2008 07:20:34 -0800 (PST)
+Message-ID: <c384c5ea0811260720u47e1a9edk67208845cd2005d@mail.gmail.com>
+Date: Wed, 26 Nov 2008 16:20:34 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1227628013.10122.37.camel@akaza1>
+MIME-Version: 1.0
+References: <1227628013.10122.37.camel@akaza1>
+Subject: Re: uclibc support for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,38 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2008 14:54:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 26 Nov 2008 15:23:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Hello Mikael,
 
-Recently the FSO developers discovered that they can put
+On Tue, Nov 25, 2008 at 4:46 PM, Mikael Rosbacke <mikael@rosbacke.org> wrote:
+> Seems I'm the only one crazy enough to try to run a uClibc based
+> distribution on x86. (I can see the response, What's the point?)
+>
+No, very good:
 
-RPROVIDES = "foo"
-RCONFLICTS = "foo"
+- Adding more x86 support allows OE to be remain more clean and
+architecture-independent.
+- Not everything is ARM.
+- We have seen adding powerpc support fix some generic OE issues,
+adding more x86 support will fix additional issues I'm sure.
+- Although x86 might not always be resource limited platforms, it
+doesn't mean you shouldn't use OE, or uclibc.
 
-in their fso-foo recipe to have OE install fso-foo instead of foo in 
-their fso-image. Great.
-
-The downside: people can't get 'foo' anymore in their image since 
-'fso-foo' will _always_ get choosen over 'foo'. Not so great.
-
-Normally it would be just a matter of putting PREFERRED_PROVIDER_foo = 
-"foo" in the distro.conf, but that is not an option in this case, since 
-when building 'fso-image' I actually want 'fso-foo' instead of 'foo'
-
-My proposal is:
-
-* remove the RPROVIDES, leave the RCONFLICTS
-* put 'fso-foo' in IMAGE_INSTALL in fso-images instead of 'foo'
-* educate people using RPROVIDES, RCONFLICTS and RREPLACES in recipes
-
-objections?
-
-regards,
-
-Koen
-
+Kudos,
+-- 
+Leon
 
 
