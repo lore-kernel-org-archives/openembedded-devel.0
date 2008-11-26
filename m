@@ -1,31 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L5HqP-0000U2-44
-	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 11:42:05 +0100
+	id 1L5IVU-0006dq-Qz
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 12:24:32 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L5HnV-0000pN-VV
-	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 10:39:06 +0000
+	id 1L5ISa-0002Lp-8i
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 11:21:32 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 26 Nov 2008 10:39:05 +0000
+	Wed, 26 Nov 2008 11:21:32 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 26 Nov 2008 10:39:05 +0000
+	Wed, 26 Nov 2008 11:21:32 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 26 Nov 2008 11:38:58 +0100
-Message-ID: <ggj902$7j2$1@ger.gmane.org>
+Date: Wed, 26 Nov 2008 12:21:25 +0100
+Message-ID: <ggjbfl$fgh$1@ger.gmane.org>
 References: <gghjh1$dg1$1@ger.gmane.org>	<200811252242.05674.openembedded@haerwu.biz>	<gghsc8$jot$1@ger.gmane.org>
 	<200811261011.09918.openembedded@haerwu.biz>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
+	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
 In-Reply-To: <200811261011.09918.openembedded@haerwu.biz>
 Sender: news <news@ger.gmane.org>
 Subject: Re: [RFC] LICENSE fields and packages
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2008 10:42:05 -0000
+X-List-Received-Date: Wed, 26 Nov 2008 11:24:33 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
@@ -69,17 +69,14 @@ On 26-11-08 10:11, Marcin Juszkiewicz wrote:
 >
 > ${PN}-license package on which all entries from PACKAGES will RDEPEND?
 
-That doesn't put the license in the packages itself, so if I give you 
-evil-binary_1.0_armv7a.ipk you still don't know what the license is.
-
-What about a bbclass that iterates over every entry in PACKAGES and puts 
-the license in ${datadir}/<pkgname>/LICENSE.txt?
+Any objections to doing it this way till we have a proper bbclass?
 
 regards,
 
 Koen
 
 
+>
 >>>> So as short term solution I'd like to be able to point to a url
 >>>> for the 'licenses without a proper name'
 >>> Yeah.. especially when license contents is available only in
