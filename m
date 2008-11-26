@@ -1,28 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1L5PHo-0003HK-Ah
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 19:38:52 +0100
-Received: from 79-71-239-31.dynamic.dsl.as9105.com ([79.71.239.31]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1L5PEt-0004tV-VP
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 18:35:52 +0000
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20081126182400.GA27631@denix.org>
-References: <ggjnpc$qhg$1@ger.gmane.org>
-	<200811261755.53197.mickey@vanille-media.de>
-	<1227721214.19934.33.camel@mill.internal.reciva.com>
-	<ggk26f$30a$1@ger.gmane.org>
-	<48239d390811261012w26eb9a9fva6c7eacf4aff0a50@mail.gmail.com>
-	<20081126182400.GA27631@denix.org>
-Date: Wed, 26 Nov 2008 18:35:50 +0000
-Message-Id: <1227724550.23391.235.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L5PME-0003Vs-Ng
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 19:43:26 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L5PJJ-0002Bg-Qz
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 18:40:26 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 26 Nov 2008 18:40:25 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 26 Nov 2008 18:40:25 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 26 Nov 2008 19:40:19 +0100
+Message-ID: <ggk56j$dtn$1@ger.gmane.org>
+References: <ggjnpc$qhg$1@ger.gmane.org>	<200811261755.53197.mickey@vanille-media.de>	<1227721214.19934.33.camel@mill.internal.reciva.com>	<ggk26f$30a$1@ger.gmane.org>
+	<1227722637.19934.36.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: preferred-provider at the image level a.k.a why is	all	this fso stuff in my non-fso image
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
+In-Reply-To: <1227722637.19934.36.camel@mill.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: preferred-provider at the image level a.k.a why is all this fso stuff in my non-fso image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,29 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2008 18:38:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Nov 2008 18:43:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2008-11-26 at 13:24 -0500, Denys Dmytriyenko wrote:
-> On Wed, Nov 26, 2008 at 09:12:34PM +0300, Sergey Lapin wrote:
-> > I just need to mention we have same kind of problems with mplayer vs
-> > mplayer-maemo recipe,
-> > when you try to put e.g. mencoder into IMAGE_INSTALL, mplayer-maemo
-> > recipe is used instead of mplayer one.
-> > Also, which is weird, I was able to reproduce this lots of times on
-> > one my setup even with build from scratch,
-> > and was unable to do so with my another setup.
-> 
-> Sorry for my naive question, but why can't it be specified with
-> 
-> PREFERRED_PROVIDER_mplayer = "mplayer"
+On 26-11-08 19:03, Phil Blundell wrote:
+> On Wed, 2008-11-26 at 18:49 +0100, Koen Kooi wrote:
+>> Conflicts: + Replaces: hits another bug in opkg, it will silently pick
+>> 'fso-foo' over 'foo' when both are in deploy (e.g. build fso-image for
+>> om-gta02 and x11-image-with-gpsd for om-gta01). We hit this problem when
+>> the matchbox-*2 was added from poky.
+>
+> I'm not quite sure what you're saying here.  If fso-foo Conflicts,
+> Replaces, and Provides foo, opkg would be basically correct to install
+> the former rather than the latter package.  What exactly is the
+> behaviour you're observing?
 
-That only sets the build-time preference.  It won't have any effect on
-what happens at opkg run time if both binary packages are available.
+if fso-foo has
 
-p.
+Conflicts: foo
+Replaces: foo
 
+but not
+
+Provides: foo
+
+opkg will always pick fso-foo when it's present in deploy, while you 
+want an image with foo.
+
+The whole problem is that for some images I do *not* want to drag in 
+python, frameworkd and other things when I just want /usr/bin/apm or 
+/usr/bin/gpsd. But for fso-*-image I *do* want fso-gpsd and fso-apm.
+
+If the fso stuff was API+ABI compatible and about the same size I 
+wouldn't care about this, but right now it's a ~5MiB difference, not to 
+mention the runtime speed penalty of needing a python interpreter.
+
+regards,
+
+Koen
 
 
 
