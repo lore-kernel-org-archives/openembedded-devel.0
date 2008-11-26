@@ -1,22 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1L5GT6-0005BU-Tq
-	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 10:13:57 +0100
-Received: (qmail 23391 invoked by uid 813007); 26 Nov 2008 09:10:57 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 26 Nov 2008 09:10:56 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Nov 2008 10:11:09 +0100
-User-Agent: KMail/1.10.3 (Linux/2.6.28-rc4; KDE/4.1.3; x86_64; ; )
-References: <gghjh1$dg1$1@ger.gmane.org>
-	<200811252242.05674.openembedded@haerwu.biz>
-	<gghsc8$jot$1@ger.gmane.org>
-In-Reply-To: <gghsc8$jot$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200811261011.09918.openembedded@haerwu.biz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L5HqP-0000U2-44
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 11:42:05 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L5HnV-0000pN-VV
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 10:39:06 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 26 Nov 2008 10:39:05 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 26 Nov 2008 10:39:05 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 26 Nov 2008 11:38:58 +0100
+Message-ID: <ggj902$7j2$1@ger.gmane.org>
+References: <gghjh1$dg1$1@ger.gmane.org>	<200811252242.05674.openembedded@haerwu.biz>	<gghsc8$jot$1@ger.gmane.org>
+	<200811261011.09918.openembedded@haerwu.biz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081116 Shredder/3.0b1pre
+In-Reply-To: <200811261011.09918.openembedded@haerwu.biz>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [RFC] LICENSE fields and packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,57 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2008 09:13:57 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 26 Nov 2008 10:42:05 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Tuesday 25 of November 2008 22:57:27 Koen Kooi napisa=C5=82(a):
-> On 25-11-08 22:42, Marcin Juszkiewicz wrote:
-> > Tuesday 25 of November 2008 22:02:00 Koen Kooi napisa=C5=82(a):
-
-> >> The concrete problem I have is that I have a bunch of licenses
-> >> that don't have a name (not even inside the company that wrote
-> >> them), so my recipes have things like
-> >>
-> >> LICENSE =3D "proprietary binary"
-> >> LICENSE =3D "evil binary"
-> >
-> > So add license.txt into /usr/share/doc/${PN}/ with content of that
-> > package license. I have done few such packages during last year as
-> > some copyright holders gave permissions to distribute their stuff
-> > *ONLY* with attached license. This kind of stuff does not even need
-> > nothing new - it is just another file in SRC_URI.
-
-> I like that idea very much, but the license file will have to be in
-> every entry in PACKAGES, so ${PN} won't work. Do you have a
-> suggestion on how to handle that?
-
-${PN}-license package on which all entries from PACKAGES will RDEPEND?
-
-> >> So as short term solution I'd like to be able to point to a url
-> >> for the 'licenses without a proper name'
-> >
-> > Yeah.. especially when license contents is available only in
-> > restricted area for which simple person can not get access (for
-> > example Marvell extranet). If there are packages which have own
-> > license then such license should be inside of package.
+On 26-11-08 10:11, Marcin Juszkiewicz wrote:
+> Tuesday 25 of November 2008 22:57:27 Koen Kooi napisał(a):
+>> On 25-11-08 22:42, Marcin Juszkiewicz wrote:
+>>> Tuesday 25 of November 2008 22:02:00 Koen Kooi napisał(a):
 >
-> So you agree that in those situations we can point to an URL, but in
-> other cases either use the name or include it in the package?
+>>>> The concrete problem I have is that I have a bunch of licenses
+>>>> that don't have a name (not even inside the company that wrote
+>>>> them), so my recipes have things like
+>>>>
+>>>> LICENSE = "proprietary binary"
+>>>> LICENSE = "evil binary"
+>>> So add license.txt into /usr/share/doc/${PN}/ with content of that
+>>> package license. I have done few such packages during last year as
+>>> some copyright holders gave permissions to distribute their stuff
+>>> *ONLY* with attached license. This kind of stuff does not even need
+>>> nothing new - it is just another file in SRC_URI.
+>
+>> I like that idea very much, but the license file will have to be in
+>> every entry in PACKAGES, so ${PN} won't work. Do you have a
+>> suggestion on how to handle that?
+>
+> ${PN}-license package on which all entries from PACKAGES will RDEPEND?
 
-No, I mean that if license is not one of popular ones covered by=20
-base-files-doc or common-licenses package it should be added into OE=20
-metadata. Ok, it can be a bit of overkill adding all those 'povray',=20
-'openssl' etc licenses but when we will end then it will be clear how=20
-each recipe is licensed.
+That doesn't put the license in the packages itself, so if I give you 
+evil-binary_1.0_armv7a.ipk you still don't know what the license is.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://blog.haerwu.biz/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+What about a bbclass that iterates over every entry in PACKAGES and puts 
+the license in ${datadir}/<pkgname>/LICENSE.txt?
+
+regards,
+
+Koen
+
+
+>>>> So as short term solution I'd like to be able to point to a url
+>>>> for the 'licenses without a proper name'
+>>> Yeah.. especially when license contents is available only in
+>>> restricted area for which simple person can not get access (for
+>>> example Marvell extranet). If there are packages which have own
+>>> license then such license should be inside of package.
+>> So you agree that in those situations we can point to an URL, but in
+>> other cases either use the name or include it in the package?
+>
+> No, I mean that if license is not one of popular ones covered by
+> base-files-doc or common-licenses package it should be added into OE
+> metadata. Ok, it can be a bit of overkill adding all those 'povray',
+> 'openssl' etc licenses but when we will end then it will be clear how
+> each recipe is licensed.
+>
+> Regards,
 
 
 
