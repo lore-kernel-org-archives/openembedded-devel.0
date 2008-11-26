@@ -1,25 +1,31 @@
-Received: from [82.182.55.65] (helo=pcjr2.rosbacke.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mikael@rosbacke.org>) id 1L5LUK-0001zP-QQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 15:35:32 +0100
-Received: from [192.168.0.199] by pcjr2.rosbacke.org with esmtp (Exim 4.63)
-	(envelope-from <mikael@rosbacke.org>) id 1L5LRM-0005PW-Mh
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2008 15:32:29 +0100
-From: Mikael Rosbacke <mikael@rosbacke.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90811251552w125189b5wc43cbb595d6fc3dc@mail.gmail.com>
-References: <1227628013.10122.37.camel@akaza1>
-	<19c1b8a90811251552w125189b5wc43cbb595d6fc3dc@mail.gmail.com>
-Date: Wed, 26 Nov 2008 13:27:29 +0100
-Message-Id: <1227702449.6790.9.camel@akaza1>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L5Lmq-0002PQ-GX
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 15:54:40 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L5Ljs-0001sm-Bv
+	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 14:51:36 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 26 Nov 2008 14:51:36 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 26 Nov 2008 14:51:36 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 26 Nov 2008 15:51:24 +0100
+Message-ID: <ggjnpc$qhg$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.1 
-X-SA-Exim-Connect-IP: 192.168.0.199
-X-SA-Exim-Mail-From: mikael@rosbacke.org
-X-SA-Exim-Scanned: No (on pcjr2.rosbacke.org); SAEximRunCond expanded to false
-Subject: Re: uclibc support for x86
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
+Sender: news <news@ger.gmane.org>
+Subject: preferred-provider at the image level a.k.a why is all this fso stuff in my non-fso image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,82 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2008 14:35:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Nov 2008 14:54:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I did:
+Hi,
 
-rm -rf tmp
-bitbake console-image
+Recently the FSO developers discovered that they can put
 
-with this in my local.conf:
+RPROVIDES = "foo"
+RCONFLICTS = "foo"
 
-BBFILES = "/home/mikaelr/oe/openembedded/packages/*/*.bb"
-CCACHE=""
-DISTRO = "angstrom-2008.1"
-MACHINE = "x86"
-ANGSTROM_MODE = "uclibc"
-BB_NUMBER_THREADS = "3"
-IMAGE_FSTYPES += "tar.bz2"
+in their fso-foo recipe to have OE install fso-foo instead of foo in 
+their fso-image. Great.
 
-There was 1 additional issue, as reported before. I had to insert:
-'#include <limits.h>' in: 
+The downside: people can't get 'foo' anymore in their image since 
+'fso-foo' will _always_ get choosen over 'foo'. Not so great.
 
-tmp/work/x86-angstrom-linux-uclibc/linux-2.6.21-r12/linux-2.6.21/scripts/mod/sumversion.c
+Normally it would be just a matter of putting PREFERRED_PROVIDER_foo = 
+"foo" in the distro.conf, but that is not an option in this case, since 
+when building 'fso-image' I actually want 'fso-foo' instead of 'foo'
 
-and restart the build process. This is the same for a glibc build and
-should be unrelated to the uclibc change.
+My proposal is:
 
-After the build finished, I made a bootable CF card and booted a SiS550
-based system (x86 compatible). I got to the Angstrom login prompt.
+* remove the RPROVIDES, leave the RCONFLICTS
+* put 'fso-foo' in IMAGE_INSTALL in fso-images instead of 'foo'
+* educate people using RPROVIDES, RCONFLICTS and RREPLACES in recipes
 
-With my initial test ucLibc seems to work so far.
+objections?
 
-tnx,
+regards,
 
---- Mikael R 
-
-
-
-tis 2008-11-25 klockan 15:52 -0800 skrev Khem Raj:
-> Looks sane to me. Have you tried to build a distro with this change ?
-> 
-> Thx
-> 
-> -Khem
-> 
-> On Tue, Nov 25, 2008 at 7:46 AM, Mikael Rosbacke <mikael@rosbacke.org> wrote:
-> > Hello!
-> >
-> > Seems I'm the only one crazy enough to try to run a uClibc based
-> > distribution on x86. (I can see the response, What's the point?)
-> >
-> > Anyway, it turns out uClibc is currently lacking support for x86.
-> > I've added the folder openembedded/packages/uclibc/uclibc-0.9.30/x86
-> > and created the file uClibc.machine in this folder. (See attachment)
-> >
-> > Is there some way to get this into the git tree? Should I file a bug
-> > report or could some maintainer give feedback on things to fix before
-> > inclusion? I've tried to keep the config file in style with similar
-> > config files for other machines.
-> >
-> > Thanks in advance,
-> >
-> >
-> > --- Mikael Rosbacke
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> >
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Koen
 
 
 
