@@ -1,33 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L5IVU-0006dq-Qz
-	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 12:24:32 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L5ISa-0002Lp-8i
-	for openembedded-devel@openembedded.org; Wed, 26 Nov 2008 11:21:32 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 26 Nov 2008 11:21:32 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 26 Nov 2008 11:21:32 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 26 Nov 2008 12:21:25 +0100
-Message-ID: <ggjbfl$fgh$1@ger.gmane.org>
-References: <gghjh1$dg1$1@ger.gmane.org>	<200811252242.05674.openembedded@haerwu.biz>	<gghsc8$jot$1@ger.gmane.org>
+	(envelope-from <pb@reciva.com>)
+	id 1L5IfJ-0006se-Cr; Wed, 26 Nov 2008 12:34:41 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1L5IcN-00077h-6E; Wed, 26 Nov 2008 11:31:39 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>)
+	id 1L5IcM-0000iA-2s; Wed, 26 Nov 2008 11:31:38 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ggjbfl$fgh$1@ger.gmane.org>
+References: <gghjh1$dg1$1@ger.gmane.org>
+	<200811252242.05674.openembedded@haerwu.biz>	<gghsc8$jot$1@ger.gmane.org>
 	<200811261011.09918.openembedded@haerwu.biz>
+	<ggjbfl$fgh$1@ger.gmane.org>
+Date: Wed, 26 Nov 2008 11:31:37 +0000
+Message-Id: <1227699097.15601.28.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
-In-Reply-To: <200811261011.09918.openembedded@haerwu.biz>
-Sender: news <news@ger.gmane.org>
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
 Subject: Re: [RFC] LICENSE fields and packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,57 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2008 11:24:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 26 Nov 2008 11:34:41 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On 26-11-08 10:11, Marcin Juszkiewicz wrote:
-> Tuesday 25 of November 2008 22:57:27 Koen Kooi napisał(a):
->> On 25-11-08 22:42, Marcin Juszkiewicz wrote:
->>> Tuesday 25 of November 2008 22:02:00 Koen Kooi napisał(a):
->
->>>> The concrete problem I have is that I have a bunch of licenses
->>>> that don't have a name (not even inside the company that wrote
->>>> them), so my recipes have things like
->>>>
->>>> LICENSE = "proprietary binary"
->>>> LICENSE = "evil binary"
->>> So add license.txt into /usr/share/doc/${PN}/ with content of that
->>> package license. I have done few such packages during last year as
->>> some copyright holders gave permissions to distribute their stuff
->>> *ONLY* with attached license. This kind of stuff does not even need
->>> nothing new - it is just another file in SRC_URI.
->
->> I like that idea very much, but the license file will have to be in
->> every entry in PACKAGES, so ${PN} won't work. Do you have a
->> suggestion on how to handle that?
->
-> ${PN}-license package on which all entries from PACKAGES will RDEPEND?
+On Wed, 2008-11-26 at 12:21 +0100, Koen Kooi wrote:
+> > ${PN}-license package on which all entries from PACKAGES will RDEPEND?
+> 
+> Any objections to doing it this way till we have a proper bbclass?
 
-Any objections to doing it this way till we have a proper bbclass?
+I think this is a fine idea.  It should be a DISTRO opt-in choice, of
+course, but I can't see any reason not to provide the facility.
 
-regards,
-
-Koen
-
-
->
->>>> So as short term solution I'd like to be able to point to a url
->>>> for the 'licenses without a proper name'
->>> Yeah.. especially when license contents is available only in
->>> restricted area for which simple person can not get access (for
->>> example Marvell extranet). If there are packages which have own
->>> license then such license should be inside of package.
->> So you agree that in those situations we can point to an URL, but in
->> other cases either use the name or include it in the package?
->
-> No, I mean that if license is not one of popular ones covered by
-> base-files-doc or common-licenses package it should be added into OE
-> metadata. Ok, it can be a bit of overkill adding all those 'povray',
-> 'openssl' etc licenses but when we will end then it will be clear how
-> each recipe is licensed.
->
-> Regards,
+p.
 
 
 
