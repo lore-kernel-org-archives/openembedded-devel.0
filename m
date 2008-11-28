@@ -1,28 +1,23 @@
-Received: from [128.178.50.22] (helo=smtp1.epfl.ch)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1L63sM-00018x-JQ
-	for openembedded-devel@openembedded.org; Fri, 28 Nov 2008 14:59:18 +0100
-Received: (qmail 19180 invoked by uid 107); 28 Nov 2008 13:56:08 -0000
-Received: from mailav1.epfl.ch (128.178.50.190)
-	by smtp1.epfl.ch with SMTP; 28 Nov 2008 13:56:08 -0000
-Received: from (unknown [128.178.224.226]) by mailav1.epfl.ch with smtp
-	id 6f4e_4e55e7ba_bd54_11dd_ba12_001143d18479;
-	Fri, 28 Nov 2008 14:56:07 +0100
-Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
-	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Fri, 28 Nov 2008 14:56:08 +0100
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Nov 2008 14:56:06 +0100
-User-Agent: KMail/1.10.3 (Linux/2.6.27-7-generic; KDE/4.1.3; i686; ; )
-References: <200811271142.31596.valentin.longchamp@epfl.ch>
-	<200811271553.34260.valentin.longchamp@epfl.ch>
-	<1227811592.15027.327.camel@hammer.suse.cz>
-In-Reply-To: <1227811592.15027.327.camel@hammer.suse.cz>
-MIME-Version: 1.0
-Message-Id: <200811281456.07141.valentin.longchamp@epfl.ch>
-Subject: Re: sanity test problems at end of build
+Received: from [202.4.237.240] (helo=kirsty.vergenet.net ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raster@vergenet.net>) id 1L640M-0001IX-1A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 Nov 2008 15:07:34 +0100
+Received: by kirsty.vergenet.net (Postfix, from userid 1001)
+	id 6ED0724067; Sat, 29 Nov 2008 01:04:24 +1100 (EST)
+Date: Sat, 29 Nov 2008 01:04:22 +1100
+From: Carsten Haitzler (The Rasterman) <raster@rasterman.com>
+To: openembedded-devel@lists.openembedded.org
+Message-Id: <20081129010422.ecd2adb6.raster@rasterman.com>
+In-Reply-To: <ggonls$p8a$1@ger.gmane.org>
+References: <ggonls$p8a$1@ger.gmane.org>
+Organization: You expect me to be organized?
+X-Mailer: Sylpheed 2.4.8 (GTK+ 2.12.9; i486-pc-linux-gnu)
+X-Pants: on
+X-Cluestick: Get jiggy with it!
+Mime-Version: 1.0
+Cc: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: Requiring root access for windowmanagers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,51 +31,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Nov 2008 13:59:18 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 28 Nov 2008 14:07:36 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thursday 27 November 2008 19:46:32 Stanislav Brabec wrote:
-> Valentin Longchamp wrote:
-> > > > Could you comment TMPDIR out and then rebuild your image from
-> > > > scratch?
-> > >
-> > > That theory has already been debunked. Not setting TMPDIR opens up a
-> > > whole other can of worms.
-> >
-> > Well, maybe it has been debunked, but it did the trick for me ... but I
-> > really don't understand why.
->
-> Do you have a copy of the build dir of ncurses of failed build? Can you
-> compare them? Are files in image and install subdirs correct (i. e. no
-> reference to staging dir)? Does temp/run.do_install correct code to fix
-> la files? Recipe seems to call autotools_do_install, which should fix
-> it.
+On Fri, 28 Nov 2008 13:20:12 +0100 Koen Kooi <k.kooi@student.utwente.nl>
+babbled:
 
-Yes I do have a copy of the both builds and I have tried to compare their 
-logs. However I have not found something fundamentally different for both 
-builds in the logs, they look identical except for the paths for work 
-directory (but I haven't proofed all the log files precisely, would take me 
-ages and don't have time for this now).
+> Hi,
+> 
+> What's the consensus on requiring root access for running an OE built 
+> windowmanager?
+> 
+> Case in point: e-wm does 'renice -10', which only root is allow to do.
+> 
+> Proposal: remove the 'renice' so regular users can start a window 
+> manager as well.
 
-The files of the succeeding build are correct in both image and install (no 
-more references):
-- wrong build (libncurses.la snip):
-# Libraries that this one depends upon.
-dependency_libs=' -L/home/valentin/OE/angstrom/work/armv6-angstrom-linux-
-gnueabi/ncurses-5.4-r15/ncurses-5.4/lib'
+i did this specifically for performance. basically it makes things MUCH
+smoother. the problem is thngs like frameworkd (python blob) in the background
+eats a mountainload of cpu slowing startup down, making the system pretty bad
+responsiveness-wise etc. i thought about it a bit and went "hey. on devices
+the USER is king. the USER should always be obeyed ASAP and as smoothly as
+possible". if some system daemon wants to eat cpu - it can take a back seat to
+the user being obeyed. so upping e's priority helped immensely. suddenly
+animations didn't stutter when launching apps or when background daemons decided
+to chug along and eat lots of cpu etc.
 
-- correct build (libncurses.la snip):
-# Libraries that this one depends upon.
-dependency_libs='
+as such you either lower the priority of all daemon procs - or raise (reduce
+niceness) of the procs you want obeying the user asap.
 
-I don't really know where to look at more precisely, if you point me to 
-somewhere, I'll have a look.
+so unless you have a better way to do this... (a normal user can still run -
+the command just fails but the script marches on and you dont get a "less
+nice" (higher priority) wm). so as such it wont stop a normal user. they just
+lose smoothness.
 
-Regards
+of course i'm open to suggestions (note i do think you could have a much more
+complex system but what i did was really simple and got the task done with no
+breakage) :)
 
-Valentin
+-- 
+------------- Codito, ergo sum - "I code, therefore I am" --------------
+The Rasterman (Carsten Haitzler)    raster@rasterman.com
+
 
 
