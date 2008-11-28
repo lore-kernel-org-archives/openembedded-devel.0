@@ -1,33 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L63Pb-0000Lq-LV
-	for openembedded-devel@openembedded.org; Fri, 28 Nov 2008 14:29:35 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L63MW-000065-Sl
-	for openembedded-devel@openembedded.org; Fri, 28 Nov 2008 13:26:24 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 28 Nov 2008 13:26:24 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 28 Nov 2008 13:26:24 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 28 Nov 2008 14:26:18 +0100
-Message-ID: <ggorhq$6fc$1@ger.gmane.org>
-References: <ggonls$p8a$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
-In-Reply-To: <ggonls$p8a$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Requiring root access for windowmanagers?
+Received: from [128.178.50.22] (helo=smtp1.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1L63sM-00018x-JQ
+	for openembedded-devel@openembedded.org; Fri, 28 Nov 2008 14:59:18 +0100
+Received: (qmail 19180 invoked by uid 107); 28 Nov 2008 13:56:08 -0000
+Received: from mailav1.epfl.ch (128.178.50.190)
+	by smtp1.epfl.ch with SMTP; 28 Nov 2008 13:56:08 -0000
+Received: from (unknown [128.178.224.226]) by mailav1.epfl.ch with smtp
+	id 6f4e_4e55e7ba_bd54_11dd_ba12_001143d18479;
+	Fri, 28 Nov 2008 14:56:07 +0100
+Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
+	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Fri, 28 Nov 2008 14:56:08 +0100
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 28 Nov 2008 14:56:06 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.27-7-generic; KDE/4.1.3; i686; ; )
+References: <200811271142.31596.valentin.longchamp@epfl.ch>
+	<200811271553.34260.valentin.longchamp@epfl.ch>
+	<1227811592.15027.327.camel@hammer.suse.cz>
+In-Reply-To: <1227811592.15027.327.camel@hammer.suse.cz>
+MIME-Version: 1.0
+Message-Id: <200811281456.07141.valentin.longchamp@epfl.ch>
+Subject: Re: sanity test problems at end of build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +36,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Nov 2008 13:29:35 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 28 Nov 2008 13:59:18 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 28-11-08 13:20, Koen Kooi wrote:
-> Hi,
+On Thursday 27 November 2008 19:46:32 Stanislav Brabec wrote:
+> Valentin Longchamp wrote:
+> > > > Could you comment TMPDIR out and then rebuild your image from
+> > > > scratch?
+> > >
+> > > That theory has already been debunked. Not setting TMPDIR opens up a
+> > > whole other can of worms.
+> >
+> > Well, maybe it has been debunked, but it did the trick for me ... but I
+> > really don't understand why.
 >
-> What's the consensus on requiring root access for running an OE built
-> windowmanager?
->
-> Case in point: e-wm does 'renice -10', which only root is allow to do.
->
-> Proposal: remove the 'renice' so regular users can start a window
-> manager as well.
+> Do you have a copy of the build dir of ncurses of failed build? Can you
+> compare them? Are files in image and install subdirs correct (i. e. no
+> reference to staging dir)? Does temp/run.do_install correct code to fix
+> la files? Recipe seems to call autotools_do_install, which should fix
+> it.
 
-The patch:
+Yes I do have a copy of the both builds and I have tried to compare their 
+logs. However I have not found something fundamentally different for both 
+builds in the logs, they look identical except for the paths for work 
+directory (but I haven't proofed all the log files precisely, would take me 
+ages and don't have time for this now).
 
-index e5a6502..7d472fa 100644
---- a/packages/e17/e-wm/enlightenment_start.oe
-+++ b/packages/e17/e-wm/enlightenment_start.oe
-@@ -5,5 +5,4 @@ if [ -r /etc/enlightenment/default_profile ]; then
-    . /etc/enlightenment/default_profile
-  fi
+The files of the succeeding build are correct in both image and install (no 
+more references):
+- wrong build (libncurses.la snip):
+# Libraries that this one depends upon.
+dependency_libs=' -L/home/valentin/OE/angstrom/work/armv6-angstrom-linux-
+gnueabi/ncurses-5.4-r15/ncurses-5.4/lib'
 
--renice -10 -p $$
-  exec enlightenment_start $E_PROFILE
-diff --git a/packages/e17/e-wm_svn.bb b/packages/e17/e-wm_svn.bb
-index 1000ebf..1aff958 100644
---- a/packages/e17/e-wm_svn.bb
-+++ b/packages/e17/e-wm_svn.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "The Enlightenment Window Manager Version 17"
-  DEPENDS = "eet evas ecore edje efreet edbus"
-  LICENSE = "MIT BSD"
-  PV = "0.16.999.043+svnr${SRCREV}"
--PR = "r21"
-+PR = "r22"
+- correct build (libncurses.la snip):
+# Libraries that this one depends upon.
+dependency_libs='
 
+I don't really know where to look at more precisely, if you point me to 
+somewhere, I'll have a look.
 
+Regards
+
+Valentin
 
 
