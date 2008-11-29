@@ -1,33 +1,30 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L68p8-0004L5-Bz
-	for openembedded-devel@openembedded.org; Fri, 28 Nov 2008 20:16:18 +0100
+	id 1L6DZw-0008Um-Nb
+	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 01:20:56 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L68m4-0003k8-R7
-	for openembedded-devel@openembedded.org; Fri, 28 Nov 2008 19:13:08 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1L6DWp-0004hJ-Fq
+	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 00:17:43 +0000
+Received: from ppp89-110-22-67.pppoe.avangarddsl.ru ([89.110.22.67])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 28 Nov 2008 19:13:08 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sat, 29 Nov 2008 00:17:43 +0000
+Received: from dbaryshkov by ppp89-110-22-67.pppoe.avangarddsl.ru with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 28 Nov 2008 19:13:08 +0000
+	Sat, 29 Nov 2008 00:17:43 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 28 Nov 2008 20:13:01 +0100
-Message-ID: <ggpfrt$b8u$1@ger.gmane.org>
-References: <49303ABA.4060401@gmx.net>
+From: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Date: Sat, 29 Nov 2008 00:17:37 +0000 (UTC)
+Message-ID: <ggq1n1$85a$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
-In-Reply-To: <49303ABA.4060401@gmx.net>
+X-Gmane-NNTP-Posting-Host: ppp89-110-22-67.pppoe.avangarddsl.ru
+User-Agent: Pan/0.132 (Waxed in Black)
 Sender: news <news@ger.gmane.org>
-Subject: Re: can use x86_64 as an override
+Subject: packaging question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,50 +38,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Nov 2008 19:16:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Nov 2008 00:20:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 28-11-08 19:38, Robert Schuster wrote:
-> Hi,
-> it seems to be impossible to use x86_64 as an override. I want to
-> do this:
->
-> DEPENDS = "zlib-native classpath-initial jikes-initial"
-> DEPENDS_x86_64 += "libffi-native"
+Hi,
 
-What happens it you do
+To make suspend work on tosa w/o problems, I have to put several files into
+apm hooks directories. The question is: into which OE package should I put them?
 
-DEPENDS = "zlib-native classpath-initial jikes-initial libffi-native" ?
-
-regards,
-
-Koen
-
-
->
-> However when wvaluting this with "bitbake -i" libffi-native is not part
-> of the DEPENDS variable.
->
-> I guess it has something to do with the underscore in x86_64, right?
->
-> Perhaps we can fix this by sanitizing OVERRIDES by replacing all
-> underscores in its entries with a hyphen. At least for the above case
-> this would not be to bad.
->
-> Ideas?
->
-> Regards
-> Robert
->
->
->
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+With best wishes
+Dmitry
 
 
 
