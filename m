@@ -1,28 +1,29 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L6W0Z-0004IT-BT
-	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 21:01:39 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20081129195823.WSNY23516.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Sat, 29 Nov 2008 14:58:23 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id l7yL1a00H1E665w037yL9y; Sat, 29 Nov 2008 14:58:23 -0500
-X-Authority-Analysis: v=1.0 c=1 a=r7o_OpycDEEA:10 a=0FpxSxkeKBAA:10
-	a=oB1BIEN3iRBY21r8i-0A:9 a=jWifAjJ9zyHAIV9pH09a5RSgG34A:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Sat, 29 Nov 2008 12:58:27 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20081129195826.GT27432@smtp.west.cox.net>
-References: <c384c5ea0811291149s5c02d3c8haad5995ce1ad1522@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <c384c5ea0811291149s5c02d3c8haad5995ce1ad1522@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Building u-boot images in both kernel.bbclass:do_deploy()	and linux.inc:do_compile_append()
+	(envelope-from <utx@penguin.cz>) id 1L6WWt-0000Bd-G1
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Nov 2008 21:35:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 0AB8B1405334;
+	Sat, 29 Nov 2008 21:28:37 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id qbpgXvNhRSjV; Sat, 29 Nov 2008 21:28:36 +0100 (CET)
+Received: from zaurus (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id B79CD1405326;
+	Sat, 29 Nov 2008 21:28:35 +0100 (CET)
+Date: Sat, 29 Nov 2008 21:32:01 +0100
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081129213201.21d91e2d@zaurus>
+In-Reply-To: <1227919728-4878-1-git-send-email-dbaryshkov@gmail.com>
+References: <1227919728-4878-1-git-send-email-dbaryshkov@gmail.com>
+X-Mailer: Claws Mail 3.6.1 (GTK+ 2.14.2; arm-angstrom-linux-gnueabi)
+Mime-Version: 1.0
+Cc: dbaryshkov@gmail.com
+Subject: Re: [PATCH] zaurus-updater: add support for home partition reflashing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,23 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Nov 2008 20:01:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 29 Nov 2008 20:35:03 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Sat, Nov 29, 2008 at 08:49:37PM +0100, Leon Woestenberg wrote:
+Dne Sat, 29 Nov 2008 03:48:48 +0300
+Dmitry Baryshkov <dbaryshkov@gmail.com> napsal(a):
 
-> Building u-boot images using mkimage is present in both
-> kernel.bbclass:do_deploy() as well as in
-> linux.inc:do_compile_append().
-> 
-> Which one has preference in the long run, and why?
+> Sometimes one needs to clean/reflash the home partition.
+> Add support for flashing home.bin/HOME.BIN files onto "home" mtd
+> device.
 
-Um, why are either doing it when you can get it from
-KERNEL_IMAGETYPE=uImage, at least on 2.6.  2.4 might depend on the
-arch in question.
+Somebody may found it useful (e. g. for initial setup).
+
+Note that on models with HDD it will not do what is expected.
+It will format 2nd NAND partition, but /home is on /dev/hda2.
+
+When you are discussing updater, I would like to discuss few additional
+changes:
+
+1. Decrease number of reserved sectors while formatting the HDD. 5% is
+far too much of space unusable for packages installation. I have 5%
+free, but unable to run applications using /tmp. I propose 0% (or only
+a few blocks).
+
+2. Support for langpacks. OE does not create langpack yet, but it would
+be nice to be able to flash localized system.
+
+3. I am using post-flash customization using a combination of additional
+files and patches. It would be nice to have something like that
+directly as an updater feature.
 
 -- 
-Tom Rini
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
