@@ -1,34 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.92.150] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L6Uas-0000rI-2D
-	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 19:31:02 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L6UXg-0002vs-Jf
-	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 18:27:44 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 29 Nov 2008 18:27:44 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 29 Nov 2008 18:27:44 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 29 Nov 2008 19:27:37 +0100
-Message-ID: <ggs1ip$38h$1@ger.gmane.org>
-References: <ggrstm$eh8$1@ger.gmane.org>
-	<1227982104.23391.314.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
-In-Reply-To: <1227982104.23391.314.camel@lenovo.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: adduser question
+	(envelope-from <leon.woestenberg@gmail.com>) id 1L6Vs3-0000Np-6q
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Nov 2008 20:52:51 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so392548qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Nov 2008 11:49:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=R8Xrg3Jma6VYpunRosUDZgUNTLmGcmQh027HwxgsbF0=;
+	b=HxEwe0ddlY2rJ2SQgT95HVYjLi6XvuyL72Be0eSk6of92lwm19JUehNYa/ck68HyO/
+	fZgZNeyttlAnHrvAmOqopBqsEXwjmB4/sybO1RY07o6V8HJh612SOMWghvbR9U9AhsdM
+	neqshOE6H+/55FA+B3J2/9bIF9PGgWedNToDI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=LbDws8rx9swT5l1jeaentRS7fThE34Xx95bzsc1DqOgUqy+qz71jFH/2gsd2d3N74s
+	mmFFW0sFv6tO7lflSuz10BVtsSZVRdvS98Ygz180MUZ1kWVCnCmJMQ2LTjjOhvISqN8O
+	Bq8jDIM6pLp2O4n2nDZ0l7ad/9mNJJea3DA6A=
+Received: by 10.214.114.10 with SMTP id m10mr8659048qac.306.1227988177273;
+	Sat, 29 Nov 2008 11:49:37 -0800 (PST)
+Received: by 10.214.12.10 with HTTP; Sat, 29 Nov 2008 11:49:37 -0800 (PST)
+Message-ID: <c384c5ea0811291149s5c02d3c8haad5995ce1ad1522@mail.gmail.com>
+Date: Sat, 29 Nov 2008 20:49:37 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+Subject: Building u-boot images in both kernel.bbclass:do_deploy() and linux.inc:do_compile_append()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Nov 2008 18:31:02 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 29 Nov 2008 19:52:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 29-11-08 19:08, Phil Blundell wrote:
-> On Sat, 2008-11-29 at 18:08 +0100, Koen Kooi wrote:
->> adduser --system adds UIDs<100 to /etc/passwd, which 'update-passwd'
->> will blow away, since they aren't in /usr/share/base-passwd/passwd.master
->>
->> Is this intended behaviour, and if not, how should it get fixed?
->
-> Whether or not to use passwd.master and update-passwd is clearly a
-> distribution choice.  Any distro which does want to use a
-> centrally-administered master password file should, presumably, also
-> configure adduser with an appropriate system UID range (for example,
-> 100-999).  Depending on what implementation of adduser you are using,
-> this might just be a case of adjusting adduser.conf or it might involve
-> a recompile.
->
-> For distros which don't desire to use passwd.master, the right solution
-> is simply to refrain from installing or running update-passwd.  In this
-> case it doesn't matter what UID range adduser is set up for.
+Building u-boot images using mkimage is present in both
+kernel.bbclass:do_deploy() as well as in
+linux.inc:do_compile_append().
 
-Thanks for the explanation, I'll have a stab at adding a proper adduser 
-since we only have the busybox one in OE. The busybox adduser doesn't 
-seem to support adduser.conf nor UID ranges.
+Which one has preference in the long run, and why?
 
-regards,
-
-Koen
-
+Regards,
+-- 
+Leon
 
 
