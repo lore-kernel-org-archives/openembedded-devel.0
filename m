@@ -1,40 +1,31 @@
-Received: from [64.233.182.185] (helo=nf-out-0910.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pmiscml@gmail.com>) id 1L6SS8-0008Hk-K2
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Nov 2008 17:13:52 +0100
-Received: by nf-out-0910.google.com with SMTP id d21so948807nfb.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Nov 2008 08:10:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:in-reply-to:references:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=k6A2mNKsM72tRNWrEbZkg1Ee9PO2WeU3U+O0Hxfrij0=;
-	b=oFe9YH+t/4y5018KgS/b41mkY5noJQyq0jg6Y/SANh2fsbbTiGLeO8IV8Y5CjxwHTz
-	N3cyUr9g9p2QFJPpwDy3EcoI/nbdE7rrRXuFcOITswOF+rLS6qy3XqgdXwYs91fc1e3Q
-	WoI6RQOzJdUTA4LFxN72UoPpCTTamenT8wx0A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:in-reply-to:references:x-mailer
-	:mime-version:content-type:content-transfer-encoding;
-	b=G7LwHjCCTKzG14Wpr3cT9BmQGGHsqrt4FvIXRlP8mmsaNrWqA7ljpZ1wLADkvapdIH
-	o7fKr4QGm7Ii+E/KRn9qce+gl9pADdIjbveQTIioUkXqoz2fPXzbajQW5aywEgyYk0yT
-	AEZvEBEMn9GxPdWpKhsb6s9y7bdK9zX5n7oeQ=
-Received: by 10.103.175.9 with SMTP id c9mr3667576mup.3.1227975039629;
-	Sat, 29 Nov 2008 08:10:39 -0800 (PST)
-Received: from widy.localdomain (nat-users-50.is.ua [194.79.8.50])
-	by mx.google.com with ESMTPS id u9sm2754254muf.4.2008.11.29.08.10.38
-	(version=SSLv3 cipher=RC4-MD5); Sat, 29 Nov 2008 08:10:38 -0800 (PST)
-Date: Sat, 29 Nov 2008 18:13:39 +0200
-From: Paul Sokolovsky <pmiscml@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081129181339.7152fdd4@widy.localdomain>
-In-Reply-To: <ggq1n1$85a$1@ger.gmane.org>
-References: <ggq1n1$85a$1@ger.gmane.org>
-X-Mailer: Claws Mail 3.5.0 (GTK+ 2.12.11; i686-pc-linux-gnu)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L6TLs-0006C8-K1
+	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 18:11:28 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L6TIl-0000FH-Kf
+	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 17:08:15 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 29 Nov 2008 17:08:15 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 29 Nov 2008 17:08:15 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 29 Nov 2008 18:08:05 +0100
+Message-ID: <ggrstm$eh8$1@ger.gmane.org>
 Mime-Version: 1.0
-Cc: dbaryshkov@gmail.com, openembedded-devel@openembedded.org
-Subject: Re: packaging question
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
+Sender: news <news@ger.gmane.org>
+Subject: adduser question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Nov 2008 16:13:52 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sat, 29 Nov 2008 17:11:28 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi,
 
-On Sat, 29 Nov 2008 00:17:37 +0000 (UTC)
-Dmitry Baryshkov <dbaryshkov@gmail.com> wrote:
+adduser --system adds UIDs <100 to /etc/passwd, which 'update-passwd' 
+will blow away, since they aren't in /usr/share/base-passwd/passwd.master
 
-> Hi,
-> 
-> To make suspend work on tosa w/o problems, I have to put several
-> files into apm hooks directories. The question is: into which OE
-> package should I put them?
+Is this intended behaviour, and if not, how should it get fixed?
 
-This was discussed well once - please put all machine- and device-
-specific hacks and workarounds into separate package(s), to not
-contaminate the main device-independent package with them, which would
-either cast the main package machine-specific (QA nightmare), or affect
-other devices unexpectedly (even bigger QA nightmare). There're few
-examples of this idea already, see apm-wifi-suspendfix,
-bluez-dtl1-workaround packages.
+regards,
 
-If such a package is machine specific, it's obvious where it should go
-- into MACHINE_EXTRA_RDEPENDS. If it's however a workaround for
-a particular device, especially pluggable, it makes sense to make it
-more flexible and automagical and associate with the corresponding
-kernel driver. See kernel.bbclass for how the packages above are
-handled.
+Koen
 
-> 
-> -- 
-> With best wishes
-> Dmitry
-
-[]
-
--- 
-Best regards,
- Paul                          mailto:pmiscml@gmail.com
 
 
