@@ -1,31 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L6X3D-0000mC-Jl
-	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 22:08:27 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L6X01-0007o3-0S
-	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 21:05:09 +0000
+	id 1L6XCi-00011V-OR
+	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 22:18:16 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1L6X9a-00086f-8U
+	for openembedded-devel@openembedded.org; Sat, 29 Nov 2008 21:15:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 29 Nov 2008 21:05:09 +0000
+	Sat, 29 Nov 2008 21:15:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sat, 29 Nov 2008 21:05:09 +0000
+	Sat, 29 Nov 2008 21:15:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 29 Nov 2008 22:05:00 +0100
-Message-ID: <ggsaps$uch$1@ger.gmane.org>
+Date: Sat, 29 Nov 2008 22:10:00 +0100
+Message-ID: <ggsb38$vjq$1@ger.gmane.org>
 References: <c384c5ea0811291149s5c02d3c8haad5995ce1ad1522@mail.gmail.com>
+	<ggsaps$uch$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b2pre) Gecko/20081120 Shredder/3.0b1pre
-In-Reply-To: <c384c5ea0811291149s5c02d3c8haad5995ce1ad1522@mail.gmail.com>
+In-Reply-To: <ggsaps$uch$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
 Subject: Re: Building u-boot images in both kernel.bbclass:do_deploy() and linux.inc:do_compile_append()
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -41,28 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Nov 2008 21:08:27 -0000
+X-List-Received-Date: Sat, 29 Nov 2008 21:18:16 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 29-11-08 20:49, Leon Woestenberg wrote:
-> Building u-boot images using mkimage is present in both
-> kernel.bbclass:do_deploy() as well as in
-> linux.inc:do_compile_append().
+On 29-11-08 22:05, Koen Kooi wrote:
+> On 29-11-08 20:49, Leon Woestenberg wrote:
+>> Building u-boot images using mkimage is present in both
+>> kernel.bbclass:do_deploy() as well as in
+>> linux.inc:do_compile_append().
+>>
+>> Which one has preference in the long run, and why?
 >
-> Which one has preference in the long run, and why?
+> The one in do_deploy has more fancy features IIRC, but that should be
+> moved to do_compile, since we want to package the fancy one :)
 
-The one in do_deploy has more fancy features IIRC, but that should be 
-moved to do_compile, since we want to package the fancy one :)
-
-The uImage that the kernel makefile generated should _not_ be used, 
-since in OE we generally know better which start & load address to use 
-and which compression method works best for us. Incidentally RMK agrees 
-with me on that for a change :)
+I just checked kernel.bbclass and the uImage generation needs to get 
+moved to do_compile, but the copying to deploy/ should be left in do_deploy.
 
 regards,
 
 Koen
+
+
+> The uImage that the kernel makefile generated should _not_ be used,
+> since in OE we generally know better which start & load address to use
+> and which compression method works best for us. Incidentally RMK agrees
+> with me on that for a change :)
 
 
 
