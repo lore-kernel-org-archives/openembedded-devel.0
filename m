@@ -1,39 +1,24 @@
-Received: from [209.85.132.248] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dbaryshkov@gmail.com>) id 1L6yIk-00082o-B1
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1L72Tz-0005zl-4Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Dec 2008 03:14:18 +0100
-Received: by an-out-0708.google.com with SMTP id d40so1207426and.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Nov 2008 18:10:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=LO4QGpcbEwSW0L92hhQm2PR5eHACApqEuajm4iwEI2s=;
-	b=ocJQiA4Fr7/Y2OeL+IhRZnYRk/Rhv3lgxBXoTFHx2gRAnaTq/godNCVN2PDLWDEYMw
-	04475zAFjYPiaxvHLwPxXtEb3CpmP1uUoYVJj77kuBNc3okjLY0TMunim9h0WiM8/ICB
-	gy8PJG8EV2zP/qQosnNIcaos92+EY+FzpUZuk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=iGzYXPiGIEFwncrQppsw26xOIKICuBA3ZH1uZbJtNR/jbOqffW3xW7H8eIEcapNbs3
-	71tTXuixpGRE9/1AoF8Hm701f5gGVFIj8bf0PkoQB81NlOSs6DPPmxIn6PaoFYmSsY2f
-	bVHZGHbdgRwIX0eWqesv7Td/eZH9UBgOchZow=
-Received: by 10.100.31.10 with SMTP id e10mr5445905ane.12.1228097458877;
-	Sun, 30 Nov 2008 18:10:58 -0800 (PST)
-Received: by 10.100.197.9 with HTTP; Sun, 30 Nov 2008 18:10:58 -0800 (PST)
-Message-ID: <bc64b4640811301810y1f4fa910p704d089b40be1278@mail.gmail.com>
-Date: Mon, 1 Dec 2008 05:10:58 +0300
-From: Dmitry <dbaryshkov@gmail.com>
-To: "Stanislav Brabec" <utx@penguin.cz>
-In-Reply-To: <20081129213201.21d91e2d@zaurus>
+	Mon, 01 Dec 2008 07:42:11 +0100
+Received: (qmail invoked by alias); 01 Dec 2008 06:38:49 -0000
+Received: from e178116051.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.116.51]
+	by mail.gmx.net (mp065) with SMTP; 01 Dec 2008 07:38:49 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19I1P0HbBdIaBf1RLi5lhhNzvVwO4+XdvQbYX41T7
+	x09WJ9tKGrhMxf
+Message-ID: <493386A1.9090503@gmx.net>
+Date: Mon, 01 Dec 2008 07:39:29 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
 MIME-Version: 1.0
-References: <1227919728-4878-1-git-send-email-dbaryshkov@gmail.com>
-	<20081129213201.21d91e2d@zaurus>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] zaurus-updater: add support for home partition reflashing
+To: openembedded-devel@lists.openembedded.org
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.78
+Subject: [Fwd: [FOSDEM] Your devroom request has not been accepted]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,60 +32,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2008 02:14:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Dec 2008 06:42:11 -0000
+X-Groupsio-MsgNum: 6803
+Content-Type: multipart/mixed; boundary="------------070403030607000005080607"
+
+--------------070403030607000005080607
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-2008/11/29 Stanislav Brabec <utx@penguin.cz>:
-> Dne Sat, 29 Nov 2008 03:48:48 +0300
-> Dmitry Baryshkov <dbaryshkov@gmail.com> napsal(a):
->
->> Sometimes one needs to clean/reflash the home partition.
->> Add support for flashing home.bin/HOME.BIN files onto "home" mtd
->> device.
->
-> Somebody may found it useful (e. g. for initial setup).
->
-> Note that on models with HDD it will not do what is expected.
-> It will format 2nd NAND partition, but /home is on /dev/hda2.
+Hi,
+summary: There won't be a special for OpenEmbedded only. There will be
+an 'Embedded devroom' and if we ask we may get some hours for OE
+specific talks.
 
-I don't know what it will format actually. Does the NAND have the "home"-labeled
-partition on those devices?
+Regards
+Robert
 
->
-> When you are discussing updater, I would like to discuss few additional
-> changes:
->
-> 1. Decrease number of reserved sectors while formatting the HDD. 5% is
-> far too much of space unusable for packages installation. I have 5%
-> free, but unable to run applications using /tmp. I propose 0% (or only
-> a few blocks).
+--------------070403030607000005080607
+Content-Type: message/rfc822;
+ name="[FOSDEM] Your devroom request has not been accepted.eml"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="[FOSDEM] Your devroom request has not been accepted.eml"
 
-You can use tune2fs at any time, IIRC, can't you?
+Return-Path: <loki@fosdem.org>
+Received: from ikarus.tarent.de ([unix socket])
+	 by ikarus (Cyrus v2.2.12-Debian-2.2.12-4ubuntu1) with LMTPA;
+	 Mon, 01 Dec 2008 01:44:40 +0100
+X-Sieve: CMU Sieve 2.2
+Received: from localhost (localhost [127.0.0.1])
+	by ikarus.tarent.de (Postfix) with ESMTP id E22077F57E1
+	for <r.schuster@tarent.de>; Mon,  1 Dec 2008 01:44:39 +0100 (CET)
+Received: from ikarus.tarent.de ([127.0.0.1])
+	by localhost (ikarus.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 14802-06 for <r.schuster@tarent.de>;
+	Mon, 1 Dec 2008 01:44:30 +0100 (CET)
+Received: from mailrelay003.isp.belgacom.be (mailrelay003.isp.belgacom.be [195.238.6.53])
+	by ikarus.tarent.de (Postfix) with ESMTP id 36BD57F54DE
+	for <r.schuster@tarent.de>; Mon,  1 Dec 2008 01:44:29 +0100 (CET)
+X-Belgacom-Dynamic: yes
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AtgEAFHAMklXQ4in/2dsb2JhbACBbcp8gn0
+Received: from 167.136-67-87.adsl-dyn.isp.belgacom.be (HELO hera.lan) ([87.67.136.167])
+  by relay.skynet.be with ESMTP; 01 Dec 2008 01:42:16 +0100
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by hera.lan (Postfix) with ESMTP id A23C27215D8;
+	Mon,  1 Dec 2008 01:42:16 +0100 (CET)
+Message-ID: <493332E8.6050607@fosdem.org>
+Date: Mon, 01 Dec 2008 01:42:16 +0100
+From: Pascal Bleser <loki@fosdem.org>
+Reply-To: FOSDEM DevRooms <devrooms@fosdem.org>
+Organization: FOSDEM
+User-Agent: Thunderbird 2.0.0.12 (X11/20080226)
+MIME-Version: 1.0
+To: r.schuster@tarent.de, glp@openwrt.org
+CC: FOSDEM DevRooms <devrooms@fosdem.org>, 
+ Philippe De Swert <philippedeswert@scarlet.be>
+Subject: [FOSDEM] Your devroom request has not been accepted
+X-Enigmail-Version: 0.95.6
+OpenPGP: id=58857177
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Virus-Scanned: Auf Viren geprueft auf tarent.de
 
-> 2. Support for langpacks. OE does not create langpack yet, but it would
-> be nice to be able to flash localized system.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-As a Russian user, it's definitely +1.
+We're sorry to give you bad news, but your developer room request for
+FOSDEM 2009 has not been accepted.
 
-> 3. I am using post-flash customization using a combination of additional
-> files and patches. It would be nice to have something like that
-> directly as an updater feature.
+We realize that this must be disappointing news, but unfortunately we
+don't have a sufficient number of rooms to our disposal to cover all
+requests.
+Just to clarify: your request is perfectly valid, but we had to pick.
 
-It may be nice to have smth. like:
+Given the domain of your respective projects, we would recommend to get
+in touch with Philippe De Swert (in CC:), who is organizing the schedule
+of the Embedded devroom.
 
-[snip]
-if [ -x post-updater-hook.sh ]
-then
-  . post-updater-hook.sh
-fi
-[snip]
+Thanks for your interest in FOSDEM, nevertheless.
 
-However I dunno if other developers will agree on this?
+- --
+  -o) Pascal Bleser <loki@fosdem.org>    http://www.fosdem.org
+  /\\     FOSDEM 2009 :: 7 + 8 February 2009 in Brussels
+ _\_v Free and Opensource Software Developers European Meeting
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (GNU/Linux)
 
--- 
-With best wishes
-Dmitry
+iD8DBQFJMzLor3NMWliFcXcRAgeDAKCdJBs9oFsjkDIvKIObM091i2CHiACgv4zw
+kDRPorAX+ivqujzzJFuavKk=
+=6Zyd
+-----END PGP SIGNATURE-----
 
-
+--------------070403030607000005080607--
