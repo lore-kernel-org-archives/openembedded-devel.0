@@ -1,23 +1,24 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1L72Tz-0005zl-4Z
+	(envelope-from <theBohemian@gmx.net>) id 1L72Wm-0007lg-Pv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Dec 2008 07:42:11 +0100
-Received: (qmail invoked by alias); 01 Dec 2008 06:38:49 -0000
+	Mon, 01 Dec 2008 07:45:04 +0100
+Received: (qmail invoked by alias); 01 Dec 2008 06:41:42 -0000
 Received: from e178116051.adsl.alicedsl.de (EHLO [192.168.4.110])
 	[85.178.116.51]
-	by mail.gmx.net (mp065) with SMTP; 01 Dec 2008 07:38:49 +0100
+	by mail.gmx.net (mp002) with SMTP; 01 Dec 2008 07:41:42 +0100
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19I1P0HbBdIaBf1RLi5lhhNzvVwO4+XdvQbYX41T7
-	x09WJ9tKGrhMxf
-Message-ID: <493386A1.9090503@gmx.net>
-Date: Mon, 01 Dec 2008 07:39:29 +0100
-From: Robert Schuster <thebohemian@gmx.net>
+X-Provags-ID: V01U2FsdGVkX19AXS04vZ1APeyrdwXKhZBel6vDO/hG6xvhtlDGGM
+	1FazVmPAmzxQsf
+Message-ID: <4933874C.6010904@gmx.net>
+Date: Mon, 01 Dec 2008 07:42:20 +0100
+From: Robert Schuster <theBohemian@gmx.net>
 User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
 X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.78
+X-FuHaFi: 0.00
 Subject: [Fwd: [FOSDEM] Your devroom request has not been accepted]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,23 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2008 06:42:11 -0000
-X-Groupsio-MsgNum: 6803
-Content-Type: multipart/mixed; boundary="------------070403030607000005080607"
+X-List-Received-Date: Mon, 01 Dec 2008 06:45:05 -0000
+X-Groupsio-MsgNum: 6804
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig0E816F5396E4CD53080859E5"
 
---------------070403030607000005080607
+--------------enig0E816F5396E4CD53080859E5
+Content-Type: multipart/mixed;
+ boundary="------------050702040305060209040902"
+
+--------------050702040305060209040902
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
 Hi,
-summary: There won't be a special for OpenEmbedded only. There will be
-an 'Embedded devroom' and if we ask we may get some hours for OE
-specific talks.
+the answer from the FOSDEM organisers came in!
+
+Summary: There won't be a special room for OpenEmbedded only. Instead an
+'Embedded devroom' is planned in which we may get some time to do
+OE-specific talks.
+
+I get in contact with Philipe and report back.
 
 Regards
 Robert
 
---------------070403030607000005080607
+--------------050702040305060209040902
 Content-Type: message/rfc822;
  name="[FOSDEM] Your devroom request has not been accepted.eml"
 Content-Transfer-Encoding: 7bit
@@ -124,4 +135,20 @@ kDRPorAX+ivqujzzJFuavKk=
 =6Zyd
 -----END PGP SIGNATURE-----
 
---------------070403030607000005080607--
+--------------050702040305060209040902--
+
+--------------enig0E816F5396E4CD53080859E5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkkzh08ACgkQG9cfwmwwEtq5fQCgn22Ad9E/SOwc2V2BSoSKeH3B
+mmQAn2LTYBAvGyPwufU5J8xCwfEDz6fl
+=C3KK
+-----END PGP SIGNATURE-----
+
+--------------enig0E816F5396E4CD53080859E5--
