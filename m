@@ -1,31 +1,24 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [212.27.42.28] (helo=smtp2-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1L75rP-000234-Q5
+	(envelope-from <ebenard@free.fr>) id 1L75va-0003uS-VN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Dec 2008 11:18:37 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 47C651405344;
-	Mon,  1 Dec 2008 11:11:54 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jVfVTu5Emtfi; Mon,  1 Dec 2008 11:11:54 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id 17EE9140533C;
-	Mon,  1 Dec 2008 11:11:53 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Dmitry <dbaryshkov@gmail.com>
-In-Reply-To: <bc64b4640811301810y1f4fa910p704d089b40be1278@mail.gmail.com>
-References: <1227919728-4878-1-git-send-email-dbaryshkov@gmail.com>
-	<20081129213201.21d91e2d@zaurus>
-	<bc64b4640811301810y1f4fa910p704d089b40be1278@mail.gmail.com>
-Date: Mon, 01 Dec 2008 11:15:13 +0100
-Message-Id: <1228126513.3835.12.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] zaurus-updater: add support for home partition	reflashing
+	Mon, 01 Dec 2008 11:23:23 +0100
+Received: from smtp2-g19.free.fr (localhost.localdomain [127.0.0.1])
+	by smtp2-g19.free.fr (Postfix) with ESMTP id 891B512B6F7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Dec 2008 11:19:34 +0100 (CET)
+Received: from [192.168.1.15] (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71])
+	by smtp2-g19.free.fr (Postfix) with ESMTP id 665F912B6EA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Dec 2008 11:19:34 +0100 (CET)
+Message-ID: <4933BA35.5010302@free.fr>
+Date: Mon, 01 Dec 2008 11:19:33 +0100
+From: Eric BENARD <ebenard@free.fr>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081105)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: Checksum patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,69 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2008 10:19:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 Dec 2008 10:23:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Dmitry wrote:
-> 2008/11/29 Stanislav Brabec wrote:
-> >
-> > Note that on models with HDD it will not do what is expected.
-> > It will format 2nd NAND partition, but /home is on /dev/hda2.
-> 
-> I don't know what it will format actually. Does the NAND have the "home"-labeled
-> partition on those devices?
+Hi,
+here is a missing checksums.ini entry :
 
-On SL-C3000 it probably does not.
-On SL-C3100 it has and int contains Sharp ROM /home.
-On SL-C3200 it has and it is broken due to bad partitioning table in
-kernel. Not easy to fix, as kernel cannot differentiate between SL-C3100
-and SL-C3200 yet.
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -23582,3 +23582,6 @@ 
+sha256=5cc1a53bb909922596bdd0fa967b654fe1bfbe0dcf1d34608f0b7c90e0c27867
+  md5=5f7b88ebb2bcd7e8044328482d079661
+  sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
 
-Imaging tool just now creates two images: flash and HDD. HDD
-uses /dev/hda2 as /home, flash uses NAND as /home. AFAIK nobody tests
-flash image.
-
-> > 1. Decrease number of reserved sectors while formatting the HDD. 5% is
-> > far too much of space unusable for packages installation. I have 5%
-> > free, but unable to run applications using /tmp. I propose 0% (or only
-> > a few blocks).
-> 
-> You can use tune2fs at any time, IIRC, can't you?
-
-Yes, you can. This operation is possible even on mounted device. But
-tune2fs is not part of the default image, and you need additional
-reboot. I guess that reserved sectors don't have a real meaning on
-Zaurus.
-
-> > 2. Support for langpacks. OE does not create langpack yet, but it would
-> > be nice to be able to flash localized system.
-> 
-> As a Russian user, it's definitely +1.
-
-Its support would be only a first step. Creating them is a more
-complicated task.
-
-> > 3. I am using post-flash customization using a combination of additional
-> > files and patches. It would be nice to have something like that
-> > directly as an updater feature.
-> 
-> It may be nice to have smth. like:
-> 
-> [snip]
-> if [ -x post-updater-hook.sh ]
-> then
->   . post-updater-hook.sh
-> fi
-> [snip]
-
-Yes, it looks flexible. If the hook script will return 1, shell can be
-launched.
++[http://maxim.org.za/AT91RM9200/2.6/2.6.21-at91.patch.gz]
++md5=779472ae02c2a99937879a8d1d4b9b25
++sha256=cfb98e7635c985733dba0fb9c3cadee22ab70fb3b0db7eac8eacaebc65c92a59
 
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+Regards
+Eric
 
 
