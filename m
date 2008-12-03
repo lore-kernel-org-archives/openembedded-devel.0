@@ -1,25 +1,34 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1L7pxe-00033H-MP
+Received: from [209.85.221.10] (helo=mail-qy0-f10.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1L7uuz-0002Ts-1b
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Dec 2008 12:32:06 +0100
-Received: (qmail invoked by alias); 03 Dec 2008 11:28:33 -0000
-Received: from e179037034.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.179.37.34]
-	by mail.gmx.net (mp039) with SMTP; 03 Dec 2008 12:28:33 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18vd2k4dLkvS/AUyvc9ILe5+7v8Imy0l9TllvKUuG
-	viVViNlxjgqwh5
-Message-ID: <49366D87.8020701@gmx.net>
-Date: Wed, 03 Dec 2008 12:29:11 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
+	Wed, 03 Dec 2008 17:49:41 +0100
+Received: by qyk3 with SMTP id 3so2909269qyk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Dec 2008 08:46:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=BOgQ+jPVE2MCS1D6Ccqlld21gOR6OBDUZOQW77KHx8o=;
+	b=AiJcrnDb9sppuHVDZf44E/NprIjprYZ26QSgDypmRwzaX2sIRbooOKYbKddlkUdmtW
+	RLcOwUJn41GX70WAt9xnYOzWcSEj+F+JDiKlPWMGZ/frwg4iZMVHQ+cIRujq8cGfWe1v
+	REUIFr4vHigCdiB8fXl1rg09ERP/mtkRz2r28=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=hV0mPgI4ZvrXA8w8DBNFVV6mw9sr6HSZ7hXVCE9mAW+ukllVptxkpDMhjVnGVk7spA
+	2k0dNOXR8/vOUppiy1pcFIpO9TPTDdZ3GwsLcMrRhaOrxdf7bZz2IOwpB4X/7z8sydXE
+	PmNWoDxN0admRYT2HUy7DtpSFDjpNyqUSiJgM=
+Received: by 10.214.44.14 with SMTP id r14mr13584195qar.219.1228322764417;
+	Wed, 03 Dec 2008 08:46:04 -0800 (PST)
+Received: by 10.215.100.14 with HTTP; Wed, 3 Dec 2008 08:46:04 -0800 (PST)
+Message-ID: <c384c5ea0812030846n604eccf0pe47d15f7122f0435@mail.gmail.com>
+Date: Wed, 3 Dec 2008 17:46:04 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.00
-Subject: [Fwd: [FOSDEM] Accepted: stands for OpenEmbedded and OpenWrt]
+Subject: [RFC Wild Ideas Department] create soft-links from <pkg>/<src>/patches/some_local.patch to <oe.git>/packages/<pkg>/files/some_local.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,108 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Dec 2008 11:32:06 -0000
-X-Groupsio-MsgNum: 6824
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigFA4E518BBF637A357201D785"
-
---------------enigFA4E518BBF637A357201D785
-Content-Type: multipart/mixed;
- boundary="------------040600040208020108040500"
-
---------------040600040208020108040500
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-good news regarding an OE stand at FOSDEM. We got one!
-
-Regards
-Robert
-
---------------040600040208020108040500
-Content-Type: message/rfc822;
- name="[FOSDEM] Accepted: stands for OpenEmbedded and OpenWrt.eml"
+X-List-Received-Date: Wed, 03 Dec 2008 16:49:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename*0="[FOSDEM] Accepted: stands for OpenEmbedded and OpenWrt.eml"
+Content-Disposition: inline
 
-Return-Path: <loki@fosdem.org>
-Received: from ikarus.tarent.de ([unix socket])
-	 by ikarus (Cyrus v2.2.12-Debian-2.2.12-4ubuntu1) with LMTPA;
-	 Wed, 03 Dec 2008 08:01:10 +0100
-X-Sieve: CMU Sieve 2.2
-Received: from localhost (localhost [127.0.0.1])
-	by ikarus.tarent.de (Postfix) with ESMTP id 804177F54DE
-	for <r.schuster@tarent.de>; Wed,  3 Dec 2008 08:01:09 +0100 (CET)
-Received: from ikarus.tarent.de ([127.0.0.1])
-	by localhost (ikarus.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 16034-04 for <r.schuster@tarent.de>;
-	Wed, 3 Dec 2008 08:00:59 +0100 (CET)
-Received: from mailrelay007.isp.belgacom.be (mailrelay007.isp.belgacom.be [195.238.6.173])
-	by ikarus.tarent.de (Postfix) with ESMTP id ECEFD7F471C
-	for <r.schuster@tarent.de>; Wed,  3 Dec 2008 08:00:58 +0100 (CET)
-X-Belgacom-Dynamic: yes
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Au4FACO7NUlXQ4nO/2dsb2JhbACBbZJsvVOCfw
-Received: from 206.137-67-87.adsl-dyn.isp.belgacom.be (HELO hera.lan) ([87.67.137.206])
-  by relay.skynet.be with ESMTP; 03 Dec 2008 07:58:46 +0100
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by hera.lan (Postfix) with ESMTP id AB64372107E;
-	Wed,  3 Dec 2008 07:58:46 +0100 (CET)
-Message-ID: <49362E26.3040705@fosdem.org>
-Date: Wed, 03 Dec 2008 07:58:46 +0100
-From: Pascal Bleser <loki@fosdem.org>
-Reply-To: FOSDEM DevRooms <devrooms@fosdem.org>
-Organization: FOSDEM
-User-Agent: Thunderbird 2.0.0.12 (X11/20080226)
-MIME-Version: 1.0
-To: Gregers Petersen <glp@openwrt.org>, 
- Robert Schuster <r.schuster@tarent.de>
-CC: FOSDEM DevRooms <devrooms@fosdem.org>
-Subject: [FOSDEM] Accepted: stands for OpenEmbedded and OpenWrt
-X-Enigmail-Version: 0.95.6
-OpenPGP: id=58857177
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Virus-Scanned: Auf Viren geprueft auf tarent.de
+Hello,
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+during maintenance of our local set of OE patches, it would be handy
+not having to copy patches back into the repository.
 
-Your requests for a stand at FOSDEM 2009 have been accepted (1 table for
-OpenEmbedded and 1 table for OpenWrt, next to each other).
-Further details will follow shortly.
+i.e. the patch fetcher could instead of copy the patch to the work
+directory, soft-link from the repo.
 
-cheers
-- --
-  -o) Pascal Bleser <loki@fosdem.org>    http://www.fosdem.org
-  /\\     FOSDEM 2009 :: 7 + 8 February 2009 in Brussels
- _\_v Free and Opensource Software Developers European Meeting
+Does this make sense?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (GNU/Linux)
+Regards,
+-- 
+Leon
 
-iD8DBQFJNi4mr3NMWliFcXcRAoTCAJ99zUaT9Doq+CLwuRVQn0Tb4jTWhQCfefUQ
-hzMpDjp42w0Ba8lFCtCFPkc=
-=nMrK
------END PGP SIGNATURE-----
 
---------------040600040208020108040500--
-
---------------enigFA4E518BBF637A357201D785
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkk2bYoACgkQG9cfwmwwEtrmCgCfbA/9YqIPKmtaroGra3+cf64n
-/u8An1Upad606FH5ZQtX4IH3HxtZCiPQ
-=P5r7
------END PGP SIGNATURE-----
-
---------------enigFA4E518BBF637A357201D785--
