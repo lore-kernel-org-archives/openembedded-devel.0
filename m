@@ -1,32 +1,32 @@
-Received: from [209.85.198.246] (helo=rv-out-0708.google.com)
+Received: from [209.85.221.10] (helo=mail-qy0-f10.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1L7xm4-0006VG-6I
+	(envelope-from <leon.woestenberg@gmail.com>) id 1L7xxG-0006nj-Mf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Dec 2008 20:52:40 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so4313379rvb.12
+	Wed, 03 Dec 2008 21:04:14 +0100
+Received: by qyk3 with SMTP id 3so3057848qyk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Dec 2008 11:49:08 -0800 (PST)
+	Wed, 03 Dec 2008 12:00:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:cc:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:content-disposition:references;
-	bh=EwTzGfct47RFJYagI/97utzjnq4IiboMJ5tJ9u1WVeY=;
-	b=s6+1By6pJaSYJUgLu2lY4opeceQJbpTKzFutcpyqJ83YEt2ydNeA4jWqcxqVslXhte
-	X2nqSN0YnxMoNCjkZgdS3GVtrk7JrkIg8wgStjSo0mSyo/977Q8OHP2+rC20Ni1+rqZJ
-	g+8tvvMVIKgdY9lrU14ZR5IIFIWH6RKXL53KA=
+	bh=DDcsVjnY3/fUjXp3Mtx+ya6v3AMsUn8a6267RjoM0zY=;
+	b=WgEsEPT6/4AdPPfoLoZHaLcWTASMGohKh4BxnytkYDSNvkKSl8wfMLBn++9JqP7uNS
+	S5JnEN2+ctI42Z9B33YPnlQ0X1qaQialVm4g07ZV7zBQ/l3WX29Yx+lPhhzStgx0ASMB
+	rCG532W0gCz+ozt8IpS6vJs9Vef39X7P93S64=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
 	:content-type:content-transfer-encoding:content-disposition
 	:references;
-	b=QGSD6M3VE+jiHhEH78su1yEtuO9L6EqLJl+OnWv+09ZO7+jMaw4lKL0AYM3X6f9ILF
-	RL3evT5DtEfLT+ixg+q7fGma7m4GVnu5LY/E89HAkbJVlxwfh6fI0EuMfeKcU8Rl/sFQ
-	BMafhDXQGQ8+cfymH7xFJlpAstj+bZ8vsXF0M=
-Received: by 10.140.202.21 with SMTP id z21mr6462997rvf.260.1228333748239;
-	Wed, 03 Dec 2008 11:49:08 -0800 (PST)
-Received: by 10.141.86.3 with HTTP; Wed, 3 Dec 2008 11:49:08 -0800 (PST)
-Message-ID: <19c1b8a90812031149ud04ececta2b74e804961df58@mail.gmail.com>
-Date: Wed, 3 Dec 2008 11:49:08 -0800
-From: "Khem Raj" <raj.khem@gmail.com>
+	b=iut46YAFwYBNM+F7yw01RDYEIovS7MznLM/oj3Eq58W0IfvpV5fjYdZxsJoCH69Eqe
+	WHd6lmWuT1LcLuprmJGB/IuRmGSMNuLieOhl6boqgtcNQi7OTRPMhQVSFpd3UYJLvCVv
+	DQ2MvUQcbldwL2IsXM2XpWtuZLJu1SG74qsME=
+Received: by 10.214.10.12 with SMTP id 12mr13935526qaj.130.1228334440986;
+	Wed, 03 Dec 2008 12:00:40 -0800 (PST)
+Received: by 10.215.100.14 with HTTP; Wed, 3 Dec 2008 12:00:40 -0800 (PST)
+Message-ID: <c384c5ea0812031200v541ef8f6m696f3d523436ffc2@mail.gmail.com>
+Date: Wed, 3 Dec 2008 21:00:40 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <20081203175143.GK16628@smtp.west.cox.net>
 MIME-Version: 1.0
@@ -48,22 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Dec 2008 19:52:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Dec 2008 20:04:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Dec 3, 2008 at 9:51 AM, Tom Rini <trini@kernel.crashing.org> wrote:
+Hello,
+
+On Wed, Dec 3, 2008 at 6:51 PM, Tom Rini <trini@kernel.crashing.org> wrote:
 > On Wed, Dec 03, 2008 at 10:00:13AM -0700, Chris Larson wrote:
 >> On Wed, Dec 3, 2008 at 9:46 AM, Leon Woestenberg
 >> <leon.woestenberg@gmail.com> wrote:
->> > Hello,
->> >
->> > during maintenance of our local set of OE patches, it would be handy
->> > not having to copy patches back into the repository.
->> >
->> > i.e. the patch fetcher could instead of copy the patch to the work
->> > directory, soft-link from the repo.
 >>
 >> I can see why you want it.   The file:// fetcher copies everything,
 >> not just patches, they aren't fetched differently currently.  You
@@ -77,22 +72,15 @@ On Wed, Dec 3, 2008 at 9:51 AM, Tom Rini <trini@kernel.crashing.org> wrote:
 > would be a nice timesaver.  Heck, soft-linking all of the file URIs
 > would be nice here.  Perhaps a variable to control doing it always
 > (default to off) ?
+>
+Exactly what I had in mind, for the reasons mentioned.
 
-We use quilt to manage (push/pop) patches. We could use
-QUILT_PATCHES=<dir where patches are found> in .quiltrc file.One
-problem I see is that sometimes we use patches  from more than one
-location. Sometimes we develop patches on top and how do we decide
-where this patch is put if we have more
-than one locations for the patches.
+I only care about the local patches.
 
->
-> --
-> Tom Rini
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Edit source, quilt refresh, and my checkout has a modified patch.
+
+Regards,
+-- 
+Leon
 
 
