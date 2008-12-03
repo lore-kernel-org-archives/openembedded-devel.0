@@ -1,29 +1,29 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L7vwh-0001b6-Qr
-	for openembedded-devel@openembedded.org; Wed, 03 Dec 2008 18:55:32 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20081203175135.CRLC12838.fed1rmmtao103.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 3 Dec 2008 12:51:35 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id mhra1a00Q1E665w03hrapF; Wed, 03 Dec 2008 12:51:34 -0500
-X-Authority-Analysis: v=1.0 c=1 a=rIhnTQz5QLcA:10 a=AyNhsvkp5bwA:10
-	a=0cS649ZSRVXvxhylX3IA:9 a=AwkJGiG5RH_yUmfttqTY1qGNsdkA:4
-	a=ZTO6GbLbXZoA:10 a=MSl-tDqOz04A:10 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 3 Dec 2008 10:51:43 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20081203175143.GK16628@smtp.west.cox.net>
-References: <c384c5ea0812030846n604eccf0pe47d15f7122f0435@mail.gmail.com>
-	<b6ebd0a50812030900r593d6bb0me3a35316907b21ab@mail.gmail.com>
+	(envelope-from <otavio@freedom.ind.br>) id 1L7wKv-0002ao-CK
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Dec 2008 19:20:33 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 36B45401F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Dec 2008 14:17:02 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 02EB0C3AF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Dec 2008 16:16:13 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 32DD8610074; Wed,  3 Dec 2008 16:16:58 -0200 (BRST)
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 03 Dec 2008 16:16:58 -0200
+Message-ID: <87hc5lp1id.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-In-Reply-To: <b6ebd0a50812030900r593d6bb0me3a35316907b21ab@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC Wild Ideas Department] create soft-links from	<pkg>/<src>/patches/some_local.patch to	<oe.git>/packages/<pkg>/files/some_local.patch
+Subject: wierd rdepends on libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,35 +37,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Dec 2008 17:55:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Dec 2008 18:20:34 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 03, 2008 at 10:00:13AM -0700, Chris Larson wrote:
-> On Wed, Dec 3, 2008 at 9:46 AM, Leon Woestenberg
-> <leon.woestenberg@gmail.com> wrote:
-> > Hello,
-> >
-> > during maintenance of our local set of OE patches, it would be handy
-> > not having to copy patches back into the repository.
-> >
-> > i.e. the patch fetcher could instead of copy the patch to the work
-> > directory, soft-link from the repo.
-> 
-> I can see why you want it.   The file:// fetcher copies everything,
-> not just patches, they aren't fetched differently currently.  You
-> could introduce regressions if it were to affect anything but patches,
-> so you'd have to add a special case for uris with patch=1 in the
-> file:// fetcher to link instead of copy, and possibly make it optional
-> via a variable.  I take it you do a lot of patch alterations in the
-> workdir to fix problems?
+Hello,
 
-A lot? No.  But for everyone working from a fixed OE snapshot, this
-would be a nice timesaver.  Heck, soft-linking all of the file URIs
-would be nice here.  Perhaps a variable to control doing it always
-(default to off) ?
+I've noticed a very weird rdepends on libvolume-id-dev. Take a look
+bellow:
 
--- 
-Tom Rini
+otavio@neumann:~/hacking/ossystems/oe$ dpkg -I tmp/deploy/glibc/ipk/i486/ud=
+ev_*_i486.ipk=20
+ novo pacote debian, vers=C3=A3o 2.0.
+ tamanho 83462 bytes: arquivo de controle=3D 842 bytes.
+     947 bytes,    13 linhas      control=20=20=20=20=20=20=20=20=20=20=20=
+=20=20=20
+     103 bytes,     7 linhas   *  postinst             #!/bin/sh
+      37 bytes,     2 linhas   *  postrm               #!/bin/sh
+      62 bytes,     4 linhas   *  prerm                #!/bin/sh
+ Package: udev
+ Version: 124-r8.1
+ Description: udev is a daemon which dynamically creates and removes device=
+ nodes from /dev/, handles hotplug events and loads drivers at boot time. I=
+t replaces the hotplug package and requires a kernel not older than 2.6.12.
+ Section: base
+ Priority: optional
+ Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
+ License: GPL
+ Architecture: i486
+ OE: udev
+ Homepage: http://www.ossystems.com.br
+ Depends: update-rc.d, libvolume-id-dev (>=3D 124), libc6 (>=3D 2.6.1), ude=
+v-locale*
+ Provides: hotplug
+ Source: http://kernel.org/pub/linux/utils/kernel/hotplug/udev-124.tar.gz f=
+ile://noasmlinkage.patch;patch=3D1 file://flags.patch;patch=3D1 file://vol_=
+id_ld.patch;patch=3D1 file://udevtrigger_add_devname_filtering.patch;patch=
+=3D1 file://mount.blacklist file://run.rules file://udev.rules file://devfs=
+-udev.rules file://links.conf file://permissions.rules file://mount.sh file=
+://network.sh file://local.rules file://init
+
+Do someone has any idea why it has this depends?
+
+--=20
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
