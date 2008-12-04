@@ -1,21 +1,33 @@
-Received: from [216.145.245.200] (helo=mx04.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1L8HlL-00026F-GJ
-	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 18:13:15 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx04.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1L8Hhr-000079-VY
-	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 11:09:40 -0600
-Message-ID: <49380EAC.5020809@dls.net>
-Date: Thu, 04 Dec 2008 11:09:00 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.18) Gecko/20081105 Thunderbird/2.0.0.18 Mnenhy/0.7.5.666
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L8Hli-00026c-3Y
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 18:13:38 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1L8HiE-00051Q-P7
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 17:10:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 04 Dec 2008 17:10:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 04 Dec 2008 17:10:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <gh8v57$5nk$1@ger.gmane.org> <49380C4F.1050809@dls.net>
-In-Reply-To: <49380C4F.1050809@dls.net>
-Subject: Re: invalidating udev cache, how?
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 04 Dec 2008 18:06:03 +0100
+Message-ID: <gh92ls$ip9$2@ger.gmane.org>
+References: <20081204080249.GR16628@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
+In-Reply-To: <20081204080249.GR16628@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: gdb-cross-sdk hacking around gcc-4.3 warnings?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,26 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2008 17:13:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 04 Dec 2008 17:13:38 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Mike (mwester) wrote:
+On 04-12-08 09:02, Tom Rini wrote:
+> Hello, I see that in
+> http://gitweb.openembedded.net/?p=openembedded.git;a=commit;h=6348b3baf7a61fc07626a3ecb29b539d438cfb4f
+> we dropped -Werror from gdb-cross-sdk.  Was this for gcc-4.3 support?
+> If so, could we replace that by importing
+> http://patches.ubuntu.com/g/gdb/extracted/gcc-4.3-build-error.patch
+> instead?  I'll do the work, just don't want to step on anyones toes if
+> there was a different reason behind the change, thanks!
 
-> A slight improvement would be to make the dev.tar file dependent upon
-> the bootargs; i.e. invalidate /etc/dev.tar file if the boot command line
-> doesn't match the current command line.  This could be a very fast
-> operation, just "cmp /proc/cmdline /etc/dev_cmdline" or similar.
+I'm not fond of enabling -Werror in crossbuilders, since simple, 
+harmless warnings will break your build.
+If you are *completely* sure your patch removes *all* -Werror related 
+problems, then go ahead.
 
-As I consider this further, we could actually just save and compare
-/proc/atags if that's present on the device in question (falling back to
-/proc/cmdline if not present).  That would catch *any* changes passed in
-to the kernel via the bootloader.
+regards,
 
-Flashing a new kernel would seem to be another logical place to
-invalidate the cache, so adding a comparison of "uname -rv" would be a
-reasonable way to catch that.
+Koen
 
-Mike (mwester)
+
 
 
