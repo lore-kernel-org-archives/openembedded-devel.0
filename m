@@ -1,25 +1,33 @@
-Received: from [82.119.242.94] (helo=mail.suse.cz)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1L8HtW-00012G-90
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Dec 2008 18:21:42 +0100
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id A9C076280CE
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Dec 2008 18:18:07 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gh8tup$11g$1@ger.gmane.org>
-References: <1228384295.14968.63.camel@hammer.suse.cz>
-	<gh8ge9$gff$1@ger.gmane.org>	<1228396188.14968.188.camel@hammer.suse.cz>
-	<AC214253-0411-451F-9A25-04D0F6174B90@student.utwente.nl>
-	<1228404803.14968.296.camel@hammer.suse.cz>
-	<gh8tup$11g$1@ger.gmane.org>
-Date: Thu, 04 Dec 2008 18:18:06 +0100
-Message-Id: <1228411087.14968.309.camel@hammer.suse.cz>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L8I7f-0007zP-TA
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 18:36:19 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L8I4A-0005wp-SF
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 17:32:42 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 04 Dec 2008 17:32:42 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 04 Dec 2008 17:32:42 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 04 Dec 2008 18:32:33 +0100
+Message-ID: <gh947j$p59$1@ger.gmane.org>
+References: <20081204080249.GR16628@smtp.west.cox.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.1.1 
-Subject: Re: broken shared-mime-info and MIME typing
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
+In-Reply-To: <20081204080249.GR16628@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: gdb-cross-sdk hacking around gcc-4.3 warnings?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,44 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2008 17:21:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 Dec 2008 17:36:20 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
+On 04-12-08 09:02, Tom Rini wrote:
+> Hello, I see that in
+> http://gitweb.openembedded.net/?p=openembedded.git;a=commit;h=6348b3baf7a61fc07626a3ecb29b539d438cfb4f
+> we dropped -Werror from gdb-cross-sdk.  Was this for gcc-4.3 support?
+> If so, could we replace that by importing
+> http://patches.ubuntu.com/g/gdb/extracted/gcc-4.3-build-error.patch
+> instead?  I'll do the work, just don't want to step on anyones toes if
+> there was a different reason behind the change, thanks!
 
-> You want it to error out of u-m-d is not found, since the purpose of the 
-> postinst (updating the database) couldn't be done. Do you have a 
-> use-case for this non-error behaviour?
+Also: ~lart me for not stating *why* the commit was made.
 
-> I'm not sure what the above accomplished, apart from making it easier to 
-> shoot yourself in the foot. What's the usecase for allowing to install 
-> the xml files, but not the update tool (assuming you applied the changes 
-> below)?
+Maybe we should follow the cairo commit message policy that requires 
+people to add a short 'why' section in each commit message to reduce 
+confusion.
 
-These XML files are important for consumers (typically file managers of
-desktop systems), not for providers (packages providing a description
-for its own obscure file format).
+regards,
 
-If you want such packages installed on an image with the desktop systems
-that does not support shared-mime-info, you don't need shared-mime-info
-nor freedesktop-mime-info packages and you will save ~1MB.
+Koen
 
-During installation of shared-mime-info+freedesktop-mime-info the
-database will be created.
 
-> If you're going to package those together you should name the package 
-> 'update-mime-database' to avoid confusion when people want to install 
-> the utils and do 'opkg list | grep mime'.
-
-Whatever name we pick, allowing to install update-mime-database
-installed without freedesktop.org.xml is a bad combination.
-
-Having generated data files without both of them seems to be safe.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
 
 
 
