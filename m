@@ -1,40 +1,26 @@
-Received: from [209.85.221.10] (helo=mail-qy0-f10.google.com)
+Received: from [68.230.241.49] (helo=fed1rmmtai111.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1L7xxG-0006nj-Mf
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Dec 2008 21:04:14 +0100
-Received: by qyk3 with SMTP id 3so3057848qyk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Dec 2008 12:00:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=DDcsVjnY3/fUjXp3Mtx+ya6v3AMsUn8a6267RjoM0zY=;
-	b=WgEsEPT6/4AdPPfoLoZHaLcWTASMGohKh4BxnytkYDSNvkKSl8wfMLBn++9JqP7uNS
-	S5JnEN2+ctI42Z9B33YPnlQ0X1qaQialVm4g07ZV7zBQ/l3WX29Yx+lPhhzStgx0ASMB
-	rCG532W0gCz+ozt8IpS6vJs9Vef39X7P93S64=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=iut46YAFwYBNM+F7yw01RDYEIovS7MznLM/oj3Eq58W0IfvpV5fjYdZxsJoCH69Eqe
-	WHd6lmWuT1LcLuprmJGB/IuRmGSMNuLieOhl6boqgtcNQi7OTRPMhQVSFpd3UYJLvCVv
-	DQ2MvUQcbldwL2IsXM2XpWtuZLJu1SG74qsME=
-Received: by 10.214.10.12 with SMTP id 12mr13935526qaj.130.1228334440986;
-	Wed, 03 Dec 2008 12:00:40 -0800 (PST)
-Received: by 10.215.100.14 with HTTP; Wed, 3 Dec 2008 12:00:40 -0800 (PST)
-Message-ID: <c384c5ea0812031200v541ef8f6m696f3d523436ffc2@mail.gmail.com>
-Date: Wed, 3 Dec 2008 21:00:40 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20081203175143.GK16628@smtp.west.cox.net>
+	(envelope-from <trini@kernel.crashing.org>) id 1L8AHd-0002z1-0f
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 10:14:05 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20081204080241.TYXD12838.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Thu, 4 Dec 2008 03:02:41 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id mw2g1a0021E665w04w2gyq; Thu, 04 Dec 2008 03:02:40 -0500
+X-Authority-Analysis: v=1.0 c=1 a=kL8tvkp5LsMA:10 a=QAlb5sXvoO4A:10
+	a=b2ZvGRdsAAAA:8 a=fxJcL_dCAAAA:8 a=DFgnRrnfyngirpp6qvgA:9
+	a=rNqy1A60qw44IkZ8Bxxm7GRtXdwA:4 a=b8hG5vVbyAkA:10
+X-CM-Score: 0.00
+Date: Thu, 4 Dec 2008 01:02:49 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20081204080249.GR16628@smtp.west.cox.net>
 MIME-Version: 1.0
-References: <c384c5ea0812030846n604eccf0pe47d15f7122f0435@mail.gmail.com>
-	<b6ebd0a50812030900r593d6bb0me3a35316907b21ab@mail.gmail.com>
-	<20081203175143.GK16628@smtp.west.cox.net>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [RFC Wild Ideas Department] create soft-links from <pkg>/<src>/patches/some_local.patch to <oe.git>/packages/<pkg>/files/some_local.patch
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: gdb-cross-sdk hacking around gcc-4.3 warnings?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,39 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Dec 2008 20:04:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Dec 2008 09:14:07 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello,
+Hello, I see that in
+http://gitweb.openembedded.net/?p=openembedded.git;a=commit;h=6348b3baf7a61fc07626a3ecb29b539d438cfb4f
+we dropped -Werror from gdb-cross-sdk.  Was this for gcc-4.3 support?
+If so, could we replace that by importing
+http://patches.ubuntu.com/g/gdb/extracted/gcc-4.3-build-error.patch
+instead?  I'll do the work, just don't want to step on anyones toes if
+there was a different reason behind the change, thanks!
 
-On Wed, Dec 3, 2008 at 6:51 PM, Tom Rini <trini@kernel.crashing.org> wrote:
-> On Wed, Dec 03, 2008 at 10:00:13AM -0700, Chris Larson wrote:
->> On Wed, Dec 3, 2008 at 9:46 AM, Leon Woestenberg
->> <leon.woestenberg@gmail.com> wrote:
->>
->> I can see why you want it.   The file:// fetcher copies everything,
->> not just patches, they aren't fetched differently currently.  You
->> could introduce regressions if it were to affect anything but patches,
->> so you'd have to add a special case for uris with patch=1 in the
->> file:// fetcher to link instead of copy, and possibly make it optional
->> via a variable.  I take it you do a lot of patch alterations in the
->> workdir to fix problems?
->
-> A lot? No.  But for everyone working from a fixed OE snapshot, this
-> would be a nice timesaver.  Heck, soft-linking all of the file URIs
-> would be nice here.  Perhaps a variable to control doing it always
-> (default to off) ?
->
-Exactly what I had in mind, for the reasons mentioned.
-
-I only care about the local patches.
-
-Edit source, quilt refresh, and my checkout has a modified patch.
-
-Regards,
 -- 
-Leon
+Tom Rini
 
 
