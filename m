@@ -1,33 +1,34 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L8I7f-0007zP-TA
-	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 18:36:19 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L8I4A-0005wp-SF
-	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 17:32:42 +0000
+	id 1L8IEj-0008Dj-N6
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 18:43:37 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1L8IBG-0006Ey-EV
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 17:40:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 04 Dec 2008 17:32:42 +0000
+	Thu, 04 Dec 2008 17:40:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 04 Dec 2008 17:32:42 +0000
+	Thu, 04 Dec 2008 17:40:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 04 Dec 2008 18:32:33 +0100
-Message-ID: <gh947j$p59$1@ger.gmane.org>
-References: <20081204080249.GR16628@smtp.west.cox.net>
+Date: Thu, 04 Dec 2008 18:35:10 +0100
+Message-ID: <gh94cf$p59$2@ger.gmane.org>
+References: <gh8v57$5nk$1@ger.gmane.org>
+	<20081204161543.GT16628@smtp.west.cox.net>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
-In-Reply-To: <20081204080249.GR16628@smtp.west.cox.net>
+In-Reply-To: <20081204161543.GT16628@smtp.west.cox.net>
 Sender: news <news@ger.gmane.org>
-Subject: Re: gdb-cross-sdk hacking around gcc-4.3 warnings?
+Subject: Re: invalidating udev cache, how?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2008 17:36:20 -0000
+X-List-Received-Date: Thu, 04 Dec 2008 17:43:37 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 04-12-08 09:02, Tom Rini wrote:
-> Hello, I see that in
-> http://gitweb.openembedded.net/?p=openembedded.git;a=commit;h=6348b3baf7a61fc07626a3ecb29b539d438cfb4f
-> we dropped -Werror from gdb-cross-sdk.  Was this for gcc-4.3 support?
-> If so, could we replace that by importing
-> http://patches.ubuntu.com/g/gdb/extracted/gcc-4.3-build-error.patch
-> instead?  I'll do the work, just don't want to step on anyones toes if
-> there was a different reason behind the change, thanks!
+On 04-12-08 17:15, Tom Rini wrote:
+> On Thu, Dec 04, 2008 at 05:05:58PM +0100, Koen Kooi wrote:
+>> Hi,
+>>
+>> The udev 124 has cache (/etc/dev.tar) to avoid doing the coldplug udev
+>> dance that can take a few seconds to a minute depending on machine speed
+>> and kernel options. It is working a bit too well at the moment:
+>>
+>> * user boots image with 2.6.26 kernel on an omap board
+>> * user gets /dev/fb0
+>> * user fixes the bootargs in uboot to enable the overlay
+>> * user doesn't get /dev/fb1
+>>
+>> so remove /etc/dev.tar and reboot: /dev/fb1 appears.
+>>
+>> I also encountered a case where the permissions on /dev/null where wrong
+>> during first boot (it's a mystery why that happened) and udev cached
+>> those making ssh daemons fail on boot.
+>>
+>> My current ideas:
+>>
+>> 1) remove /etc/dev.tar if its>  x weeks old
+>> 2) recreate it on shutdown
+>> 3) remove it after x times
+>>
+>> option 1) breaks on systems without an RTC and/or no /etc/timestamp
+>> option 2) moves the slowness to shutdown
+>> option 3) requires extra logic and filesystem access
+>>
+>> and all options don't fix the first case I mentioned, they all take a
+>> while to make /dev/fb1 appear.
+>>
+>> The key is that it should be transparent to users, so adding a check for
+>> .e.g 'ignore_dev.tar=1' in bootargs wouldn't work, since that implies
+>> that users are aware of the problem and know how to 'fix' it.
+>>
+>> Does anyone have other ways to invalidate the cache, and if not, which
+>> option would get your vote?
+>
+> 2 is a different (and perhaps not as) slow.  Also, prepopulate the cache
+> with fb1?  Or is this all done on the live system with nothing done
+> during image creation?
 
-Also: ~lart me for not stating *why* the commit was made.
-
-Maybe we should follow the cairo commit message policy that requires 
-people to add a short 'why' section in each commit message to reduce 
-confusion.
+It's done during first boot, since as the problem points out everything 
+is highly dependant on bootloader/kernel/moonphase.
 
 regards,
 
 Koen
-
-
 
 
 
