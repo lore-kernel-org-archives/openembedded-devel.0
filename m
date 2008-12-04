@@ -1,27 +1,32 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L8Hpt-0002NB-0N
-	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 18:17:57 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20081204161534.LHYE12838.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L8HqY-0002OH-5h
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 18:18:38 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1L8Hn4-0005Cf-EG
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 17:15:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 04 Dec 2008 17:15:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 4 Dec 2008 11:15:34 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id n4Fa1a0031E665w044Fa2M; Thu, 04 Dec 2008 11:15:34 -0500
-X-Authority-Analysis: v=1.0 c=1 a=uScoJcWiD1UA:10 a=XXFRhCI6BIMA:10
-	a=vYCkHXpbDyDZeeFclBEA:9 a=FtsjZI-BWPcZy86cAoIA:7
-	a=eKv0368qwgw_0HcGfvw1Nf5KUZoA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Thu, 4 Dec 2008 09:15:43 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	Thu, 04 Dec 2008 17:15:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20081204161543.GT16628@smtp.west.cox.net>
-References: <gh8v57$5nk$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <gh8v57$5nk$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 04 Dec 2008 18:11:58 +0100
+Message-ID: <gh930v$ks4$1@ger.gmane.org>
+References: <gh8v57$5nk$1@ger.gmane.org> <49380C4F.1050809@dls.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
+In-Reply-To: <49380C4F.1050809@dls.net>
+Sender: news <news@ger.gmane.org>
 Subject: Re: invalidating udev cache, how?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,53 +41,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2008 17:17:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 04 Dec 2008 17:18:38 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 04, 2008 at 05:05:58PM +0100, Koen Kooi wrote:
-> Hi,
+On 04-12-08 17:58, Mike (mwester) wrote:
+> Koen Kooi wrote:
+> ...
+>> My current ideas:
+>>
+>> 1) remove /etc/dev.tar if its>  x weeks old
+>> 2) recreate it on shutdown
+>> 3) remove it after x times
+>>
+>> option 1) breaks on systems without an RTC and/or no /etc/timestamp
+>> option 2) moves the slowness to shutdown
+>> option 3) requires extra logic and filesystem access
+>>
+>> and all options don't fix the first case I mentioned, they all take a
+>> while to make /dev/fb1 appear.
+>>
+>> The key is that it should be transparent to users, so adding a check for
+>> .e.g 'ignore_dev.tar=1' in bootargs wouldn't work, since that implies
+>> that users are aware of the problem and know how to 'fix' it.
+>>
+>> Does anyone have other ways to invalidate the cache, and if not, which
+>> option would get your vote?
 >
-> The udev 124 has cache (/etc/dev.tar) to avoid doing the coldplug udev  
-> dance that can take a few seconds to a minute depending on machine speed  
-> and kernel options. It is working a bit too well at the moment:
->
-> * user boots image with 2.6.26 kernel on an omap board
-> * user gets /dev/fb0
-> * user fixes the bootargs in uboot to enable the overlay
-> * user doesn't get /dev/fb1
->
-> so remove /etc/dev.tar and reboot: /dev/fb1 appears.
->
-> I also encountered a case where the permissions on /dev/null where wrong  
-> during first boot (it's a mystery why that happened) and udev cached  
-> those making ssh daemons fail on boot.
->
-> My current ideas:
->
-> 1) remove /etc/dev.tar if its > x weeks old
-> 2) recreate it on shutdown
-> 3) remove it after x times
->
-> option 1) breaks on systems without an RTC and/or no /etc/timestamp
-> option 2) moves the slowness to shutdown
-> option 3) requires extra logic and filesystem access
->
-> and all options don't fix the first case I mentioned, they all take a  
-> while to make /dev/fb1 appear.
->
-> The key is that it should be transparent to users, so adding a check for  
-> .e.g 'ignore_dev.tar=1' in bootargs wouldn't work, since that implies  
-> that users are aware of the problem and know how to 'fix' it.
->
-> Does anyone have other ways to invalidate the cache, and if not, which  
-> option would get your vote?
+> A slight improvement would be to make the dev.tar file dependent upon
+> the bootargs; i.e. invalidate /etc/dev.tar file if the boot command line
+> doesn't match the current command line.  This could be a very fast
+> operation, just "cmp /proc/cmdline /etc/dev_cmdline" or similar.
 
-2 is a different (and perhaps not as) slow.  Also, prepopulate the cache
-with fb1?  Or is this all done on the live system with nothing done
-during image creation?
+That solves only part of the problem, since on omap3 we enable a 
+different fb driver that doesn't require any bootargs (and safely 
+ignores the ones for the old driver) and gives you an additional overlay 
+(/dev/fb2).
 
--- 
-Tom Rini
+But I think combining the 'cmp /proc/cmdline /etc/dev_cmdline' with 
+option 2) would solve most of the problems I'm seeing in a not-too-ugly 
+way :)
+
+Thanks for the suggestion!
+
+regards,
+
+Koen
+
 
 
