@@ -1,25 +1,38 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1L8HEF-0000ck-T4
+Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1L8HEL-0000dW-41
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Dec 2008 17:39:03 +0100
-Received: (qmail invoked by alias); 04 Dec 2008 16:35:26 -0000
-Received: from p57BB7505.dip.t-dialin.net (EHLO [192.168.2.2]) [87.187.117.5]
-	by mail.gmx.net (mp045) with SMTP; 04 Dec 2008 17:35:26 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX182KxkEhT824ylrgNHhu4ncas+yBon3Bc9ebCQAGB
-	JSZ3Mx07YdLwne
-Message-ID: <493806CD.5080808@gmx.de>
-Date: Thu, 04 Dec 2008 17:35:25 +0100
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Thunderbird 2.0.0.18 (Windows/20081105)
-MIME-Version: 1.0
+	Thu, 04 Dec 2008 17:39:09 +0100
+Received: by rv-out-0708.google.com with SMTP id k29so4229568rvb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Dec 2008 08:35:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:cc:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=jvwL+w7TKweskZYVu6zZx0I3Vx3icsSwKEFPIHLIC5I=;
+	b=HtJJ3UiNF0v9euvafbGSt0rApxifOUea+fDHBucqOW+0r4xo0WkWDJUc49fx7DFG+/
+	CkTS651zO9HJqM7qJo7tH7hTNVJOtISkC9eTa6nS2ttFFxD2fA+uObfuCx8U/dBX/0+v
+	D7HffBVx+YpoDFFyb+ieqnk2RBiQO2EqwREwY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=gUcRF2+Y0Qbuhfn1MRzl9lGHFktsc3U8teMf45s5Yia/WIBckTE4mPFb8yABA52pCc
+	x2/UgewAnaHbwpZddQXdLR3V0om3sLtUcEuW9ZBovQDOvO3Ly+TTqBrv/sVUcfQ3ycpS
+	md4SUyIzFqlvsu2Wo8OkXsb+V9/wpACgrv0zk=
+Received: by 10.141.49.6 with SMTP id b6mr7019710rvk.117.1228408533699;
+	Thu, 04 Dec 2008 08:35:33 -0800 (PST)
+Received: by 10.141.171.13 with HTTP; Thu, 4 Dec 2008 08:35:33 -0800 (PST)
+Message-ID: <19c1b8a90812040835x61227baau2713bd667306b337@mail.gmail.com>
+Date: Thu, 4 Dec 2008 08:35:33 -0800
+From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <gh8v57$5nk$1@ger.gmane.org>
-In-Reply-To: <gh8v57$5nk$1@ger.gmane.org>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.64
-Subject: Re: invalidating udev cache, how?
+In-Reply-To: <20081204080249.GR16628@smtp.west.cox.net>
+MIME-Version: 1.0
+References: <20081204080249.GR16628@smtp.west.cox.net>
+Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: Re: gdb-cross-sdk hacking around gcc-4.3 warnings?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,56 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2008 16:39:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 04 Dec 2008 16:39:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi schrieb:
-> Hi,
->
-> The udev 124 has cache (/etc/dev.tar) to avoid doing the coldplug udev 
-> dance that can take a few seconds to a minute depending on machine 
-> speed and kernel options. It is working a bit too well at the moment:
->
-> * user boots image with 2.6.26 kernel on an omap board
-> * user gets /dev/fb0
-> * user fixes the bootargs in uboot to enable the overlay
-> * user doesn't get /dev/fb1
->
-> so remove /etc/dev.tar and reboot: /dev/fb1 appears.
->
-> I also encountered a case where the permissions on /dev/null where 
-> wrong during first boot (it's a mystery why that happened) and udev 
-> cached those making ssh daemons fail on boot.
->
-> My current ideas:
->
-> 1) remove /etc/dev.tar if its > x weeks old
-> 2) recreate it on shutdown
-> 3) remove it after x times
->
-> option 1) breaks on systems without an RTC and/or no /etc/timestamp
-> option 2) moves the slowness to shutdown
-> option 3) requires extra logic and filesystem access
->
-> and all options don't fix the first case I mentioned, they all take a 
-> while to make /dev/fb1 appear.
->
-> The key is that it should be transparent to users, so adding a check 
-> for .e.g 'ignore_dev.tar=1' in bootargs wouldn't work, since that 
-> implies that users are aware of the problem and know how to 'fix' it.
->
-> Does anyone have other ways to invalidate the cache, and if not, which 
-> option would get your vote?
-I don't think it should be invalidated automagically. Problems only 
-happen if some bootloader args are changed, don't they? In this case its
-ok to let the user unvalidate the cache. (A user who changes bootloader 
-arguments should be able to do this. )
-But maybe we should add a message to udev script like:
-udev: no coldplugging, using /etc/udev.tar as cache
-to make it more obvious that udev uses a cache.
+IIRC yes. if thats the only patch needed then please go ahead and reenable it.
 
-Regards,
-Thomas
+On Thu, Dec 4, 2008 at 12:02 AM, Tom Rini <trini@kernel.crashing.org> wrote:
+> Hello, I see that in
+> http://gitweb.openembedded.net/?p=openembedded.git;a=commit;h=6348b3baf7a61fc07626a3ecb29b539d438cfb4f
+> we dropped -Werror from gdb-cross-sdk.  Was this for gcc-4.3 support?
+> If so, could we replace that by importing
+> http://patches.ubuntu.com/g/gdb/extracted/gcc-4.3-build-error.patch
+> instead?  I'll do the work, just don't want to step on anyones toes if
+> there was a different reason behind the change, thanks!
+>
+> --
+> Tom Rini
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
