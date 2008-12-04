@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L8CHb-0004TZ-K5
-	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 12:22:11 +0100
+	id 1L8Cqm-0005Rv-I1
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 12:58:32 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L8CE6-0008Pw-94
-	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 11:18:34 +0000
+	id 1L8CnI-0001Gv-MS
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 11:54:56 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 04 Dec 2008 11:18:34 +0000
+	Thu, 04 Dec 2008 11:54:56 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 04 Dec 2008 11:18:34 +0000
+	Thu, 04 Dec 2008 11:54:56 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 04 Dec 2008 12:18:27 +0100
-Message-ID: <gh8ea3$a4u$1@ger.gmane.org>
+Date: Thu, 04 Dec 2008 12:54:49 +0100
+Message-ID: <gh8ge9$gff$1@ger.gmane.org>
 References: <1228384295.14968.63.camel@hammer.suse.cz>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2008 11:22:12 -0000
+X-List-Received-Date: Thu, 04 Dec 2008 11:58:32 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -70,17 +70,40 @@ On 04-12-08 10:51, Stanislav Brabec wrote:
 > - Change mime.class:
 >    - Change scripts: First test, whether update-mime-database is
 >      installed, if yes, then call it.
-
-Done
-
+>    - mime class should not RDEPEND on shared-mime-info (now it depends,
+>      but it is missing there and may cause installation errors)
 >    - mime_prerm should be probably postrm =>  update database after
 >      package removal
+> - default to --disable-update-mimedb
 
-Done
+The current implementation is:
+
+* shared-mime-info does *NOT* include freedesktop.org.xml to save space
+* mime.bbclass *DOES* check for /usr/bin/update-mime-info
+* mime.bbclass *DOES* add rdepends to freedesktop.org.xml when needed
+
+This means that people not needing freedesktop.org.xml don't get it 
+installed and people that do need it get it installed automagically when 
+using mime.bbclass
 
 regards,
 
 Koen
+
+
+>
+> Alternatives:
+>
+> - Write update-mime-database alternative capable to build magic without
+>    freedesktop.org.xml.
+> - Patch update-mime-database to allow compressed packages/*.xml.
+> - Return to compile time and write a tool capable to create MIME
+>    database for all packages available in the feed as the part of
+>    package-index creation. It would need a special XDG_* variables
+>    settings, so applications will be able to collect magic from all
+>    repositories.
+>
+
 
 
 
