@@ -1,40 +1,31 @@
-Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1L8KCb-0004rE-90
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Dec 2008 20:49:33 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so4854213rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Dec 2008 11:45:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=Hi18tGbMV0JjivkSek9dxClkKo8y6CDSgg6U72pjASI=;
-	b=qTAwo2cTIJmlrfsiGpKdhrAjGNPyRre9GzJ5vsIcx6GWMbzifsmIjrc6tDoP268qKY
-	OwCCu+g1u4uKZXXQkw7UtBG4fO58LjDoydHtUA9+mIAhQO/1RPVEklqDvK7eRJEq+7HZ
-	UsrIkmvlX7yf/Ck4FJwepp8noPzbkKwUkzX64=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=waLLs3rTAGC5NvIXUF5OXHWco7B1m8hLAGdnD6l+io8HJMnmJeBPxbE7zp5Ahosg3+
-	aIPHI9f41omcy2UOt3np/8WgKdVID/Px0EjVCdu8U9Wh77V7msOniIaoU2zTe+KsmsFv
-	Uo9vOf8+/XKwpPC07g/B+wnAEXEgX+RW9+rd0=
-Received: by 10.141.69.1 with SMTP id w1mr7103254rvk.215.1228419957187;
-	Thu, 04 Dec 2008 11:45:57 -0800 (PST)
-Received: by 10.141.171.13 with HTTP; Thu, 4 Dec 2008 11:45:57 -0800 (PST)
-Message-ID: <19c1b8a90812041145r117fabd8hcd9b507890d77d3d@mail.gmail.com>
-Date: Thu, 4 Dec 2008 11:45:57 -0800
-From: "Khem Raj" <raj.khem@gmail.com>
+	(envelope-from <otavio@freedom.ind.br>) id 1L8Kan-0005fe-8I
+	for openembedded-devel@openembedded.org; Thu, 04 Dec 2008 21:14:33 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 7B60C401F3;
+	Thu,  4 Dec 2008 16:11:00 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 80A76C306;
+	Thu,  4 Dec 2008 18:10:09 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id AA19F61006E; Thu,  4 Dec 2008 18:10:52 -0200 (BRST)
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20081204192759.GY16628@smtp.west.cox.net>
+References: <87hc5lp1id.fsf@neumann.lab.ossystems.com.br>
+	<gh6l93$480$1@ger.gmane.org>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Thu, 04 Dec 2008 18:10:52 -0200
+In-Reply-To: <gh6l93$480$1@ger.gmane.org> (Koen Kooi's message of "Wed\,
+	03 Dec 2008 20\:05\:07 +0100")
+Message-ID: <87bpvrog4z.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-References: <20081204080249.GR16628@smtp.west.cox.net>
-	<gh92ls$ip9$2@ger.gmane.org>
-	<20081204192759.GY16628@smtp.west.cox.net>
 Cc: openembedded-devel@openembedded.org
-Subject: Re: gdb-cross-sdk hacking around gcc-4.3 warnings?
+Subject: Re: wierd rdepends on libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,16 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2008 19:49:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 04 Dec 2008 20:14:33 -0000
+Content-Type: text/plain; charset=us-ascii
 
-> Tangentally, what're a powerpc / avr32 target that should build (I'll fix
-> db1200 / MIPS if that's broken, again) ?
+Koen Kooi <k.kooi@student.utwente.nl> writes:
 
-mpc8313e-rdb is what I have used in past.
+> On 03-12-08 19:16, Otavio Salvador wrote:
+>> Hello,
+>>
+>> I've noticed a very weird rdepends on libvolume-id-dev. Take a look
+>> bellow:
+<...>
+>> Do someone has any idea why it has this depends?
+>
+> Have a look at
+> /OE/angstrom-dev/staging/i486-angstrom-linux-gnueabi/shlibs/libvolume*.list
+> to see what OE thinks the -dev package provides.
 
--Khem
+otavio@neumann:~/hacking/ossystems/oe$ cat tmp/staging/i486-ossystems-linux/shlibs/libvolume-id-dev.list 
+libvolume_id.so.0
+otavio@neumann:~/hacking/ossystems/oe$ cat tmp/staging/i486-ossystems-linux/shlibs/libvolume-id.list 
+libvolume_id.so.0
+
+Any idea how to fix it?
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
