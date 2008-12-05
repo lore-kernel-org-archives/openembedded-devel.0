@@ -1,27 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1L8Yll-00071v-Il
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Dec 2008 12:22:50 +0100
-Received: (qmail invoked by alias); 05 Dec 2008 11:19:09 -0000
-Received: from e178110213.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.178.110.213]
-	by mail.gmx.net (mp071) with SMTP; 05 Dec 2008 12:19:09 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+9DqU2sDm9vt90hQjXMHuPKlGngtmdNwlZVef/0V
-	jFskyVtyefud3w
-Message-ID: <49390E5B.5090600@gmx.net>
-Date: Fri, 05 Dec 2008 12:19:55 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49382D2D.1030504@gmx.net> <4938446B.8020100@balister.org>
-In-Reply-To: <4938446B.8020100@balister.org>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.64
-Subject: Re: RFC: remove boost-jam-native 3.1.11
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L8dXl-0004hj-Ox
+	for openembedded-devel@openembedded.org; Fri, 05 Dec 2008 17:28:42 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L8dUA-0002tU-Qh
+	for openembedded-devel@openembedded.org; Fri, 05 Dec 2008 16:24:58 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 05 Dec 2008 16:24:58 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 05 Dec 2008 16:24:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 05 Dec 2008 17:24:46 +0100
+Message-ID: <ghbkke$jfo$1@ger.gmane.org>
+References: <200812051715.45106.openembedded@haerwu.biz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
+In-Reply-To: <200812051715.45106.openembedded@haerwu.biz>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] Auto resizing ext2/ext3 images (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,58 +41,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Dec 2008 11:22:50 -0000
-X-Groupsio-MsgNum: 6870
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigD0D19F2E3DBAA8C3A9403FD9"
+X-List-Received-Date: Fri, 05 Dec 2008 16:28:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enigD0D19F2E3DBAA8C3A9403FD9
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On 05-12-08 17:15, Marcin Juszkiewicz wrote:
+> During my work for OpenedHand I wrote one usefull thing which we used for
+> ext2/ext3 images - autosizing.
+>
+> In few words: it checks how big rootfs is, adds IMAGE_EXTRA_SPACE amount
+> of kilobytes to it and gives that size to genext2fs.
+>
+> Below is a patch with code changes. Check it and say what You think about
+> it. One thing is missing - support for fixed size ext2/3 images big enough
+> to fit resulting rootfs.
 
-Hi,
+Looks good to me.
 
-Philip Balister schrieb:
->> On a related note: I invested some time to get boost 1.34.1 being buil=
-d
->> nicely including the bzip2 and gzip support. Now I see that in the 1.3=
-6
->> recipe those are disabled again. That is unfortunate because wesnoth
->> needs them.
->=20
-> I think I added the recipe. I use it on the beagle, which uses gcc 4.3,=
+regards,
 
-> which may have had some trouble with parts of boost. I'm OK with moving=
+Koen
 
-> to a newer boost, but there are some non-backward compatible changes in=
+>
+> diff --git a/classes/image.bbclass b/classes/image.bbclass
+> index e9c0ecd..901ab34 100644
+> --- a/classes/image.bbclass
+> +++ b/classes/image.bbclass
+> @@ -107,6 +107,7 @@ fakeroot do_rootfs () {
+>
+>   	${IMAGE_PREPROCESS_COMMAND}
+>
+> +	ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}|awk '{print ${IMAGE_EXTRA_SPACE} + $1}'`
+>   	${@get_imagecmds(d)}
+>
+>   	${IMAGE_POSTPROCESS_COMMAND}
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 8a754fd..159f17f 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -302,9 +302,9 @@ IMAGE_CMD = ""
+>   IMAGE_CMD_jffs2 = "mkfs.jffs2 -x lzo --root=${IMAGE_ROOTFS} --faketime --output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ${EXTRA_IMAGECMD}"
+>   IMAGE_CMD_yaffs2 = "mkyaffs2image ${EXTRA_IMAGECMD} ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.yaffs2"
+>   IMAGE_CMD_cramfs = "mkcramfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cramfs ${EXTRA_IMAGECMD}"
+> -IMAGE_CMD_ext2 = "genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}"
+> +IMAGE_CMD_ext2 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}"
+>   IMAGE_CMD_ext2.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz&&  mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS}
+> ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2; mv
+> ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
+> -IMAGE_CMD_ext3 = "genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j
+> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
+> +IMAGE_CMD_ext3 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j
+> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
+>   IMAGE_CMD_ext3.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz&&  mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS}
+> ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9
+> ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz
+> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
+>   IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
+>   IMAGE_CMD_squashfs-lzma = "mksquashfs-lzma ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend"
 
-> boost that we will need to watch out for. I needed only a couple pieces=
-
-> from boost 1.36, so I built the ones I needed and set the recipe to
-> DEFAULT_PREFERENCE=3D"-1".
-ok. I just saw that in Debian they allow installation of all kinds of
-boost versions side by side. IMHO that is reasonable since boost makes
-no promises regards backward compatibility.
-
-Do want to follow this approach?
-
-Regards
-Robert
 
 
---------------enigD0D19F2E3DBAA8C3A9403FD9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkk5Dl0ACgkQG9cfwmwwEtoztQCeIvcwsGJBSi6flq5naSZKWV8x
-8+oAoJ9FuzbL2EpfRdd4+NtbwHTBAXsm
-=CeCa
------END PGP SIGNATURE-----
-
---------------enigD0D19F2E3DBAA8C3A9403FD9--
