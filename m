@@ -1,24 +1,38 @@
-Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
+Received: from [209.85.200.169] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1L8eqP-00085N-PZ
+	(envelope-from <raj.khem@gmail.com>) id 1L8gW9-0003S8-H2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Dec 2008 18:52:02 +0100
-Received: from gandalf.denix.org ([71.255.226.167]) by vms173001.mailsrvcs.net
-	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
-	with ESMTPA id <0KBF00DGV0474H58@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	05 Dec 2008 11:48:09 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id CC8286B83A8; Fri,
-	05 Dec 2008 12:48:06 -0500 (EST)
-Date: Fri, 05 Dec 2008 12:48:06 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <200812051715.45106.openembedded@haerwu.biz>
+	Fri, 05 Dec 2008 20:39:13 +0100
+Received: by wf-out-1314.google.com with SMTP id 29so137787wff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Dec 2008 11:35:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=YCzG2sRFRZLWZJe1ENyR81/nNijlmvpbkI8ADx8PGUk=;
+	b=AyFLDkbjSpOHKMtOMJnKPRlMHAgNCWqXC+uqj4vm2CtFs+I5iASE6lRzRhwl18NfUY
+	DAH9tpPL2bIufqXU9DkfgVrrEfJd8+7t7g0d1cDIaiavYk6rg8VArb4b9vmALeItam2t
+	YOwr46tnVhkGR1GhZIpoidsLME0t+Kw9Rt774=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=LYVOxTxhywLuQHVtuJWgnoYzmzmOaQ747vfo3AwQDqF4q8lOFs8VQXQj9zZV0vFjbG
+	HBYyB9Z5HjNqStF/IUiLfg979prsNmj24wE7y41lpUl56rlC7vSEVptAEILsEvBFJfZ3
+	mRsoFV/XBJvKDPyrVn8XVMwiZxKgwQaQwbZZo=
+Received: by 10.114.192.3 with SMTP id p3mr321917waf.25.1228505733093;
+	Fri, 05 Dec 2008 11:35:33 -0800 (PST)
+Received: from localhost (adsl-71-146-4-209.dsl.pltn13.sbcglobal.net
+	[71.146.4.209])
+	by mx.google.com with ESMTPS id z15sm14449997pod.27.2008.12.05.11.35.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 05 Dec 2008 11:35:32 -0800 (PST)
+Date: Fri, 5 Dec 2008 11:35:31 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20081205174806.GA12852@denix.org>
-MIME-version: 1.0
-References: <200812051715.45106.openembedded@haerwu.biz>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] Auto resizing ext2/ext3 images (from Poky)
+Message-ID: <20081205193531.GA28189@gmail.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: disable hash-style=gnu for mips machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +46,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Dec 2008 17:52:02 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 05 Dec 2008 19:39:14 -0000
+X-Groupsio-MsgNum: 6873
+Content-Type: multipart/mixed; boundary="7AUc2qLy4jB3hD7Z"
+Content-Disposition: inline
 
-On Fri, Dec 05, 2008 at 05:15:41PM +0100, Marcin Juszkiewicz wrote:
-> 
-> During my work for OpenedHand I wrote one usefull thing which we used for
-> ext2/ext3 images - autosizing.
+--7AUc2qLy4jB3hD7Z
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Great! I often face this issue of not fitting everything in a predefined image 
-size. This patch should be very helpful!
+Hi
 
-> In few words: it checks how big rootfs is, adds IMAGE_EXTRA_SPACE amount
-> of kilobytes to it and gives that size to genext2fs.
-> 
-> Below is a patch with code changes. Check it and say what You think about
-> it. One thing is missing - support for fixed size ext2/3 images big enough
-> to fit resulting rootfs.
-> 
-> diff --git a/classes/image.bbclass b/classes/image.bbclass
-> index e9c0ecd..901ab34 100644
-> --- a/classes/image.bbclass
-> +++ b/classes/image.bbclass
-> @@ -107,6 +107,7 @@ fakeroot do_rootfs () {
->  
->  	${IMAGE_PREPROCESS_COMMAND}
->  
-> +	ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}|awk '{print ${IMAGE_EXTRA_SPACE} + $1}'`
+mips dynamic section is not compatible with gnu hash style there we need
+to disable this option when building for mips targets. Attached patch
+(tested on eglibc) fixes the problem.
 
-Can it be done like this:
+OK for dev ?
 
-ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}|awk '{size = ${IMAGE_EXTRA_SPACE} + $1; \
- print (size > ${IMAGE_ROOTFS_SIZE} ? size : ${IMAGE_ROOTFS_SIZE}) }'`
+Thanks
 
->  	${@get_imagecmds(d)}
->  
->  	${IMAGE_POSTPROCESS_COMMAND}
-
--- 
-Denys
+-Khem
 
 
+--7AUc2qLy4jB3hD7Z
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=patch
+
+diff --git a/conf/distro/include/angstrom-eglibc.inc b/conf/distro/include/angstrom-eglibc.inc
+index 1d38e5f..c0d87a4 100644
+--- a/conf/distro/include/angstrom-eglibc.inc
++++ b/conf/distro/include/angstrom-eglibc.inc
+@@ -29,7 +29,7 @@ BUILD_OPTIMIZATION = "-Os"
+ BUILD_OPTIMIZATION_pn-perl = "-O1"
+ BUILD_OPTIMIZATION_sparc = "-O2"
+ 
+-TARGET_LINK_HASH_STYLE = "-Wl,--hash-style=gnu"
++TARGET_LINK_HASH_STYLE = "${@['-Wl,--hash-style=gnu',''][bb.data.getVar('TARGET_ARCH',d,1) in ['mips', 'mipsel']]}"
+ 
+ CXXFLAGS += "-fvisibility-inlines-hidden"
+ 
+diff --git a/conf/distro/include/angstrom-glibc.inc b/conf/distro/include/angstrom-glibc.inc
+index fdb59f3..b14f880 100644
+--- a/conf/distro/include/angstrom-glibc.inc
++++ b/conf/distro/include/angstrom-glibc.inc
+@@ -33,7 +33,7 @@ BUILD_OPTIMIZATION_pn-perl = "-O1"
+ BUILD_OPTIMIZATION_pn-glibc = "-O2"
+ BUILD_OPTIMIZATION_sparc = "-O2"
+ 
+-TARGET_LINK_HASH_STYLE = "-Wl,--hash-style=gnu"
++TARGET_LINK_HASH_STYLE = "${@['-Wl,--hash-style=gnu',''][bb.data.getVar('TARGET_ARCH',d,1) in ['mips', 'mipsel']]}"
+ 
+ CXXFLAGS += "-fvisibility-inlines-hidden"
+ 
+diff --git a/conf/distro/include/angstrom-uclibc.inc b/conf/distro/include/angstrom-uclibc.inc
+index 8383ddc..71b8862 100644
+--- a/conf/distro/include/angstrom-uclibc.inc
++++ b/conf/distro/include/angstrom-uclibc.inc
+@@ -33,7 +33,7 @@ BUILD_OPTIMIZATION = "-Os"
+ #Note that this testing was done without the gcc-pr32889.patch.
+ FULL_OPTIMIZATION_avr32 = "-Os -fomit-frame-pointer"
+ 
+-TARGET_LINK_HASH_STYLE = "-Wl,--hash-style=gnu"
++TARGET_LINK_HASH_STYLE = "${@['-Wl,--hash-style=gnu',''][bb.data.getVar('TARGET_ARCH',d,1) in ['mips', 'mipsel']]}"
+ 
+ CXXFLAGS += "-fvisibility-inlines-hidden"
+ 
+
+--7AUc2qLy4jB3hD7Z--
