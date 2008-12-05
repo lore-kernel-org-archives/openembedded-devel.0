@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.228.8.83] (helo=pne-smtpout1-sn2.hy.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L8h3D-0004KX-HK
-	for openembedded-devel@openembedded.org; Fri, 05 Dec 2008 21:13:23 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1L8gzb-0003MU-Jy
-	for openembedded-devel@openembedded.org; Fri, 05 Dec 2008 20:09:39 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 05 Dec 2008 20:09:39 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 05 Dec 2008 20:09:39 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 05 Dec 2008 21:09:27 +0100
-Message-ID: <ghc1po$5bq$1@ger.gmane.org>
-References: <20081205193531.GA28189@gmail.com>
+	(envelope-from <ulf@atmel.com>) id 1L8jYN-0006Hp-Fe
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Dec 2008 23:53:43 +0100
+Received: from [10.175.196.247] (213.67.42.143) by
+	pne-smtpout1-sn2.hy.skanova.net (7.3.129) (authenticated as
+	0706224457)
+	id 48A144C501DDC8CD for openembedded-devel@lists.openembedded.org;
+	Fri, 5 Dec 2008 23:50:01 +0100
+From: Ulf Samuelsson <ulf@atmel.com>
+To: openembedded-devel@lists.openembedded.org
+Organization: Atmel Nordic AB
+Date: Fri, 05 Dec 2008 23:50:00 +0100
+Message-Id: <1228517400.14826.12.camel@aeglos.sweden.atmel.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
-In-Reply-To: <20081205193531.GA28189@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: disable hash-style=gnu for mips machines
+X-Mailer: Evolution 2.8.2 
+Subject: virtual/arm-angstrom-linux-gnueabi-gcc-2.95
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +29,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Dec 2008 20:13:23 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 05 Dec 2008 22:53:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 05-12-08 20:35, Khem Raj wrote:
-> Hi
->
-> mips dynamic section is not compatible with gnu hash style there we need
-> to disable this option when building for mips targets. Attached patch
-> (tested on eglibc) fixes the problem.
->
-> OK for dev ?
+Trying to build the gpe-image using Angstrom.
 
-Looks OK to me.
+OE Build Configuration:
+BB_VERSION        = "1.8.11"
+METADATA_BRANCH   = "org.openembedded.dev"
+METADATA_REVISION = "980c8231abf78b7ff44dc46905d62666f64d002d"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "at91sam9263ek"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "2008.1-test-20081205"
+TARGET_FPU        = "soft"
 
-regards,
+NOTE: Resolving any missing task queue dependencies
+ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime
+entity 'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' but it wasn't found
+in any PACKAGE or RPROVIDES variables
+NOTE: Runtime target 'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' is
+unbuildable, removing...
+Missing or unbuildable dependency chain was:
+['virtual/arm-angstrom-linux-gnueabi-gcc-2.95']
 
-Koen
-
->
-> Thanks
->
-> -Khem
->
->
->
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+Why is this?
+Found one entry in the mailing list, but no explanation
+ 
+-- 
+Best Regards,
+Ulf Samuelsson
 
 
 
