@@ -1,31 +1,40 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [209.85.134.185] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L951K-0005z9-IY
-	for openembedded-devel@openembedded.org; Sat, 06 Dec 2008 22:49:03 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20081206214515.ECI11567.fed1rmmtao104.cox.net@fed1rmimpo03.cox.net>;
-	Sat, 6 Dec 2008 16:45:15 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id nxlF1a0031E665w04xlF7k; Sat, 06 Dec 2008 16:45:15 -0500
-X-Authority-Analysis: v=1.0 c=1 a=0f97_RqyAAAA:8 a=RVVUVvVXJ3WJVAh6YogA:9
-	a=eIJ5Ev_8P4V17NHG7u4ffUCh20UA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Sat, 6 Dec 2008 14:45:25 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20081206214525.GJ16628@smtp.west.cox.net>
-References: <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
-	<d2b9ea600810211323y1dd1fc11i585f26f044696de9@mail.gmail.com>
-	<20081202174141.GB16628@smtp.west.cox.net>
-	<1228250322.5456.70.camel@dax.rpnet.com>
-	<20081202212155.GG16628@smtp.west.cox.net>
-MIME-Version: 1.0
-In-Reply-To: <20081202212155.GG16628@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: Esben Haabendal <esbenhaabendal@gmail.com>
-Subject: Re: Canadian SDK support
+	(envelope-from <pmiscml@gmail.com>) id 1L95Pk-0006SW-6c
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Dec 2008 23:14:16 +0100
+Received: by mu-out-0910.google.com with SMTP id w1so511484mue.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Dec 2008 14:10:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:in-reply-to:references:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	bh=w6YC1zaggxko5N3POzGW5XfK9Anmtn7vhY6Frh2sBhM=;
+	b=N4X6c7mwWcgI7+pVQgvtOWRtkIf5VqSxYAWyHOhdMFiG8BJAlsOc7BRuOGq9Uigplk
+	HICrzwTYWeL4ZZQgwTxoWQ4ZQlFC23yUTS0HexMtARmEPwfRFZeqwdjh1Ql+6n5D0Xxu
+	EV5hBFn55dPnpFXngQhBREdZbdAlF66heWBfM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:in-reply-to:references:x-mailer
+	:mime-version:content-type:content-transfer-encoding;
+	b=q8XwgKxKx9qgiAgkQuoSc/+FNAGnsv8XC1xE/kNbvToGOMhRSC4ADEbTRBChh5iVyZ
+	B5o822iO3P10sRGUWgB2JbcoSpwGv4u/5iQ/1bkGjl5owtg5Ogk/cCw92Xp+qjkOrzA4
+	74wVaJR3MyJjqkvm126LHyBDDRoWZUj2VN6Zo=
+Received: by 10.103.241.5 with SMTP id t5mr616787mur.127.1228601431405;
+	Sat, 06 Dec 2008 14:10:31 -0800 (PST)
+Received: from widy.localdomain (nat-users-50.is.ua [194.79.8.50])
+	by mx.google.com with ESMTPS id y6sm18793036mug.32.2008.12.06.14.10.30
+	(version=SSLv3 cipher=RC4-MD5); Sat, 06 Dec 2008 14:10:30 -0800 (PST)
+Date: Sun, 7 Dec 2008 00:13:58 +0200
+From: Paul Sokolovsky <pmiscml@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081207001358.17e45205@widy.localdomain>
+In-Reply-To: <ghe5v4$9hp$1@ger.gmane.org>
+References: <1228574376.5375.6.camel@dax.rpnet.com>
+	<ghe5v4$9hp$1@ger.gmane.org>
+X-Mailer: Claws Mail 3.6.1 (GTK+ 2.12.11; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: Bitbake release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,37 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Dec 2008 21:49:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 06 Dec 2008 22:14:16 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Tue, Dec 02, 2008 at 02:21:55PM -0700, Tom Rini wrote:
-> On Tue, Dec 02, 2008 at 08:38:42PM +0000, Richard Purdie wrote:
-> > On Tue, 2008-12-02 at 10:41 -0700, Tom Rini wrote:
-> > > On Tue, Oct 21, 2008 at 10:23:30PM +0200, Esben Haabendal wrote:
-> > > 
-> > > > I have rebased the canadian-sdk branch at
-> > > > 
-> > > > http://git.doredevelopment.dk/openembedded.git
-> > > > git://git.doredevelopment.dk/openembedded.git
-> > > > 
-> > > > against the new org.openembedded.dev git repo.
-> > > 
-> > > So, did anyone have any objections to this code?  Esben, is your branch
-> > > tracking the dev tree still?  Thanks!
-> > 
-> > I have been meaning to look at this in detail but so far I just haven't
-> > had a chance :(.
+Hello,
+
+On Sat, 06 Dec 2008 16:32:52 +0100
+Koen Kooi <k.kooi@student.utwente.nl> wrote:
+
+> On 06-12-08 15:39, Richard Purdie wrote:
+> > Hi,
+> >
+> > As people have probably noticed I just synced up a number of useful
+> > changes from Poky into bitbake and brought things pretty much back
+> > into sync.
+> >
+> > The current plan is to let this stabilise for 1 week and the
+> > providing no major bugs were introduced, make a new release
+> > (finally!).
 > 
-> OK.  Esben, have you had any updates?  If not, I'll take what's on the
-> bugzilla (or depending on my git-fu, pull your tree) and make a branch
-> on the main tree for this.  I really don't want to see this get lost :)
+> Not a bug, but something for people to note:
+> 
+> http://projects.linuxtogo.org/pipermail/openembedded-devel/2008-October/006289.html
 
-OK.  I've created a trini/canadian-sdk branch and am going to start a
-number of builds to make sure non-canadian SDKs are fine, before moving
-on to canadian.
+I actually wonder why these (and few other) vars are not whitelisted by
+default.
+
+> 
+> regards,
+> 
+> Koen
+[]
 
 -- 
-Tom Rini
+Best regards,
+ Paul                          mailto:pmiscml@gmail.com
 
 
