@@ -1,36 +1,21 @@
-Received: from [209.85.200.170] (helo=wf-out-1314.google.com)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1L9Qzn-0002vg-Ea
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Dec 2008 22:16:55 +0100
-Received: by wf-out-1314.google.com with SMTP id 29so966733wff.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Dec 2008 13:13:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=GvW/SrZbNiTJjpTwmVoYy0wiMoDt53YczNdMIES8BNk=;
-	b=WNc0ZhvzOceVEYwAGb5quoTlOdlStDGUQqgFEQg8C2kkUq2chVPcsb9xs7JRjv95EM
-	QAt205Az8aUqZ2kjuPbhBIvrenLGm4byUnbKuNGHpF7uExsG9Wx2ruutL4TMLYCRyH3d
-	WBcQEHQyOeEhzwv7DJD6BySG8dgHXBU/tXhw8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=gb5L265QLVKBeayoKggnMyVtlqayPxNdkk4R95lgfUIMXR1AjRs4fj3nY6zP9H/RYZ
-	fIYtCgI2GFYVm4ljm1tguaQUL6QRv85heGp/i8PRVbXDAUvy/soz/n3npDY6mlvprRvb
-	mFXXE9ZyMWqRkgdoA5n8WV0+SUbxeYR8e9C10=
-Received: by 10.142.172.12 with SMTP id u12mr1119082wfe.248.1228684386074;
-	Sun, 07 Dec 2008 13:13:06 -0800 (PST)
-Received: from localhost (adsl-71-146-4-209.dsl.pltn13.sbcglobal.net
-	[71.146.4.209])
-	by mx.google.com with ESMTPS id 22sm7083607wfd.33.2008.12.07.13.13.05
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 07 Dec 2008 13:13:05 -0800 (PST)
-Date: Sun, 7 Dec 2008 13:13:04 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081207211304.GB4642@gmail.com>
+	(envelope-from <trini@kernel.crashing.org>) id 1L9R1s-00034Y-C7
+	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 22:19:04 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20081207211512.MVEO8485.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Sun, 7 Dec 2008 16:15:12 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
+	id oMF91a00E1E665w04MFAFs; Sun, 07 Dec 2008 16:15:13 -0500
+X-Authority-Analysis: v=1.0 c=1 a=ZoX9GXKytlHtjRlZGacA:9
+	a=omGfyWGk5vHI3wPY9LieIRVoNXQA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sun, 7 Dec 2008 14:15:18 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20081207211518.GF15204@smtp.west.cox.net>
 References: <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
 	<d2b9ea600810211323y1dd1fc11i585f26f044696de9@mail.gmail.com>
 	<20081202174141.GB16628@smtp.west.cox.net>
@@ -40,10 +25,11 @@ References: <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
 	<20081207193340.GC15204@smtp.west.cox.net>
 	<ghha1f$ugd$1@ger.gmane.org>
 	<20081207201118.GD15204@smtp.west.cox.net>
+	<ghhe2j$b5p$1@ger.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <20081207201118.GD15204@smtp.west.cox.net>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Cc: openembedded-devel@openembedded.org
+In-Reply-To: <ghhe2j$b5p$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: Canadian SDK support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -58,42 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 21:16:56 -0000
+X-List-Received-Date: Sun, 07 Dec 2008 21:19:04 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (07/12/08 13:11), Tom Rini wrote:
-> On Sun, Dec 07, 2008 at 09:00:47PM +0100, Koen Kooi wrote:
-> > On 07-12-08 20:33, Tom Rini wrote:
-> >
-> >> As an aside, gcc-cross-sdk on arm(v6 only?) is blowing up in fortran,
-> >> but I've got a git bisect narrowing that down now (30 revs left).
-> >
-> > gcc-cross-sdk picks the wrong patch (from files/gfortran.patch) instead  
-> > of the correct one from gcc-4.2.4/gfortran.patch. gcc-cross *does* pick  
-> > the right patch.
-> 
-> For gcc-4.2.4.inc would it be OK to rename gfortran.patch to
-> gfortran-4.2.4.patch and fix this problem?
+On Sun, Dec 07, 2008 at 10:09:39PM +0100, Koen Kooi wrote:
+> On 07-12-08 21:11, Tom Rini wrote:
+>> On Sun, Dec 07, 2008 at 09:00:47PM +0100, Koen Kooi wrote:
+>>> On 07-12-08 20:33, Tom Rini wrote:
+>>>
+>>>> As an aside, gcc-cross-sdk on arm(v6 only?) is blowing up in fortran,
+>>>> but I've got a git bisect narrowing that down now (30 revs left).
+>>> gcc-cross-sdk picks the wrong patch (from files/gfortran.patch) instead
+>>> of the correct one from gcc-4.2.4/gfortran.patch. gcc-cross *does* pick
+>>> the right patch.
+>>
+>> For gcc-4.2.4.inc would it be OK to rename gfortran.patch to
+>> gfortran-4.2.4.patch and fix this problem?
+>
+> If 4.2.4 is the only using it (which I doubt), that would be the way to  
+> go. IIRC all gcc 4.2 variants (so also the dreaded csl 2007qX ones) need  
+> the one with '64', the 4.3.x ones (including csl 2008qX) need the one  
+> with '65'.
+> Yes, that means the current situation is broken for csl 2007qX and 4.2.!4.
 
-The patch under files is incorrect in one place and everywhere else its
-similar to gcc 4.2.4 patch. I would suggest to replace the one under
-files with the one from gcc-4.2.4 folder and delete the gcc-4.2.4 one.
-This patch applied to gcc all 4.x so make sure that it applies to all of
-them
+OK.  So files/gfortran-4.2.patch, files/gfortran-4.3.patch?
 
-
-Thx
-
--Khem
-
-> 
-> -- 
-> Tom Rini
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Tom Rini
 
 
