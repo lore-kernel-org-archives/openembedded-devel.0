@@ -1,38 +1,34 @@
-Received: from [209.85.128.188] (helo=fk-out-0910.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1L9Pmn-0005go-2j
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Dec 2008 20:59:25 +0100
-Received: by fk-out-0910.google.com with SMTP id 19so959284fkr.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Dec 2008 11:55:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=ilm0Wne91KuRoZq10buCE1uZRHaP8hHoA4Azh7ghuCU=;
-	b=mcr0L1pEGHIiHI8G+W8Jlp/M11524DJiY2mLsM2dEod5MNRLpvyWnRLzBoo7T6xtYX
-	xwOeZJZIf2jmL7Dz95wXB1V3W2kN7wjLYxQqpH9V8tgkv6JhusyXdyPiuAJSlF2DZQVj
-	Q00sIrSpLYqDrsxnzN/fcIc5y+u07yRXds9XI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=b+sgyYth50lnONHVbmtwETmuGE/qttVlmlCW3k6gLTeqeJ2lGgZj3lD4/z6pTEHDHK
-	0bvtbgcQfdn9eFfSu7xUDIe5d4PpCu+LCSVhUsd1pN3tBrSdj4CiT146qjvzcMp3EM1h
-	BAeKwlplcGSKRELmrqIvevmIRZJ1QbyvWtnhQ=
-Received: by 10.223.103.145 with SMTP id k17mr1163907fao.1.1228679736637;
-	Sun, 07 Dec 2008 11:55:36 -0800 (PST)
-Received: by 10.223.115.200 with HTTP; Sun, 7 Dec 2008 11:55:36 -0800 (PST)
-Message-ID: <c384c5ea0812071155k45880240heba43426d39a2ff6@mail.gmail.com>
-Date: Sun, 7 Dec 2008 20:55:36 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d1b08f940812070258l25a1b54cg91b2b00a5fbafcaf@mail.gmail.com>
-MIME-Version: 1.0
-References: <c384c5ea0812061551j27c4e7eagb10e01f64d9e8668@mail.gmail.com>
-	<d1b08f940812070258l25a1b54cg91b2b00a5fbafcaf@mail.gmail.com>
-Subject: Re: BUG? Some files in the build end up without read permission (mostly in .pc/)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1L9Prw-00046G-Eb
+	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 21:04:44 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1L9PoE-0008ML-OF
+	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 20:00:54 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 07 Dec 2008 20:00:54 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 07 Dec 2008 20:00:54 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 07 Dec 2008 21:00:47 +0100
+Message-ID: <ghha1f$ugd$1@ger.gmane.org>
+References: <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>	<d2b9ea600810211323y1dd1fc11i585f26f044696de9@mail.gmail.com>	<20081202174141.GB16628@smtp.west.cox.net>	<1228250322.5456.70.camel@dax.rpnet.com>	<20081202212155.GG16628@smtp.west.cox.net>	<20081206214525.GJ16628@smtp.west.cox.net>
+	<20081207193340.GC15204@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
+In-Reply-To: <20081207193340.GC15204@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Canadian SDK support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,40 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 19:59:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 07 Dec 2008 20:04:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+On 07-12-08 20:33, Tom Rini wrote:
 
-On Sun, Dec 7, 2008 at 11:58 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
->
-> yes, I noticed this trying to copy the whole tmp/angstrom dir.
->
-> permission denied   /input/keyboard/sharpsl_rc.c
-> ...input/touchscreen/tsc2101_ts.c
-> .../arm/mach-pxa/poodle_pm.c
-> ...asm-arm/arch-pxa/hx2750.h
->
-> The whole list here:
->
-> http://www.pastebin.ca/1278657
->
-> I suspect this in not intended...
->
-Thanks for the confirmation.
+> As an aside, gcc-cross-sdk on arm(v6 only?) is blowing up in fortran,
+> but I've got a git bisect narrowing that down now (30 revs left).
 
-I have no idea where the missing permissions are created, but I
-strongly suspect a missing third argument to open(path, ...O_CREAT
-..., );
-which typically gives these results.
+gcc-cross-sdk picks the wrong patch (from files/gfortran.patch) instead 
+of the correct one from gcc-4.2.4/gfortran.patch. gcc-cross *does* pick 
+the right patch.
+
+regards,
+
+Koen
 
 
-Anyone: is this quilt who writes these files there?
 
-Regards,
--- 
-Leon
 
 
