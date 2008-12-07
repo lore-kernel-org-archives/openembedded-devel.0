@@ -1,25 +1,37 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [209.85.128.188] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L99B3-0006c1-Mw
-	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 03:15:22 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20081207021134.LJLK2342.fed1rmmtao102.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Sat, 6 Dec 2008 21:11:34 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id o2BZ1a00B1E665w042BZgT; Sat, 06 Dec 2008 21:11:33 -0500
-X-Authority-Analysis: v=1.0 c=1 a=jD-By_5hrAxPVDh1QPoA:9
-	a=kjaqCOwEaIpP3G_qaof3lgLwH2sA:4 a=b8hG5vVbyAkA:10
-X-CM-Score: 0.00
-Date: Sat, 6 Dec 2008 19:11:44 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20081207021144.GL16628@smtp.west.cox.net>
+	(envelope-from <andrea.adami@gmail.com>) id 1L9HEz-0003c3-1k
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 07 Dec 2008 11:51:57 +0100
+Received: by fk-out-0910.google.com with SMTP id 19so782031fkr.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Dec 2008 02:48:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=yxOWXaB1tM9vrLEm/LSoClrCrzuSr5GOri+OrfpEjEc=;
+	b=fvzdfIQEQxjen0up6bmUOeJ3ANkzFOEJrw6mrmLqCZpPGI6SvdNKLKlVVApD3sxcw5
+	2/aVieD1nl3wY9Wt9spLdTJdEIP/f3XjSOOEz87B0mpHmuzkzn41yGN19rCojdwm9hR9
+	13tmg8tMheORlXiRZn7Y1PVh38Fk5z+4kYCeg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=UQ35ijwlYcXzKTR469OgApOjYeSqLVe7v7DGP/zW4PA55B/VXS2RITsc0Z6egZJNJp
+	LlJeBUyVH6hcs4kuyY8QXg7ggbtiXrUss469Em5rGsJw07GU85jzLuKeAKgfGy6brIPu
+	vLv9l1HaGb0+Yj/UPT9FrqAgUTfV3b0LdAUVk=
+Received: by 10.181.197.6 with SMTP id z6mr776501bkp.119.1228646890071;
+	Sun, 07 Dec 2008 02:48:10 -0800 (PST)
+Received: by 10.181.52.8 with HTTP; Sun, 7 Dec 2008 02:48:10 -0800 (PST)
+Message-ID: <d1b08f940812070248r39f1fd0brc25376bba6d3d668@mail.gmail.com>
+Date: Sun, 7 Dec 2008 11:48:10 +0100
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20081207021144.GL16628@smtp.west.cox.net>
 MIME-Version: 1.0
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Broken kernel recipes
+References: <20081207021144.GL16628@smtp.west.cox.net>
+Subject: Re: Broken kernel recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +45,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 02:15:23 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 07 Dec 2008 10:51:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello,
+For fixes pls. see bug 4784
 
-As part of testing meta-toolchain-sbox builds on different arches, I
-found that sbrsh, on ARM, brings in both the 2.6 kernel for the MACHINE
-in question, as well as a 2.4 kernel.  In the case of the 2.4 kernel, it
-first picks up poodle-kernel-2.4-embedix.bb on nokia800, which doesn't
-work as it wants gcc-2.95, which doesn't exist.  Can I move the
-following support to packages/obsolete/linux/ ?
-corgi-kernel-2.4-embedix.bb
-husky-kernel-2.4-embedix.bb
-openzaurus-pxa_2.4.18-rmk7-pxa3-embedix20031107.bb
-poodle255-kernel-2.4-embedix.bb
-poodle-kernel-2.4-embedix.bb
-shepherd-kernel-2.4-embedix.bb
-openzaurus-pxa27x_2.4.20-rmk2-embedix20050602.bb
-openzaurus-sa_2.4.18-rmk7-pxa3-embedix20030509.bb
-
--- 
-Tom Rini
+Andrea
 
 
