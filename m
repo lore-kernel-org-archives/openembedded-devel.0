@@ -1,38 +1,27 @@
-Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1L97IE-0002Gv-6M
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Dec 2008 01:14:38 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so634507rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Dec 2008 16:10:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=YDCCvK8ZI9oJPuOIqgCZaPWgJ2PKYFK4T/XkvDaJg0k=;
-	b=Tuape38ymR5VMPE0sWaihPxiqbQaSdy8DPW3qjd6tryBA/k6YgoYZF5yjznI54NQBV
-	suwq3w2vGSV1gpVancgtSieK0dYI93aRO9PQW7zS5GWt8fZPOMVyKk54podGGpLi1G5S
-	z0r2gN7tV5yguiqytUKQS5Fv+7IB7S00qyByo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=s2A4J8O+vscvpNPFKR8dvn6xhcnQJDXWNiL9WMmymTsBBKk09o/WSjzjQlwbGuweC9
-	7zKMDtU+fuH5O6C98QVF4qUj4AnoDauw0dTY/qL0fO1eQ7lYLjtrQkIRD2S7Fmr0Mbog
-	24XvrrNyyWfy/LvUuBwiYThwDozLhJSmuBtUc=
-Received: by 10.140.136.5 with SMTP id j5mr805560rvd.167.1228608652508;
-	Sat, 06 Dec 2008 16:10:52 -0800 (PST)
-Received: from localhost (adsl-71-146-4-209.dsl.pltn13.sbcglobal.net
-	[71.146.4.209])
-	by mx.google.com with ESMTPS id g14sm1539180rvb.0.2008.12.06.16.10.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 06 Dec 2008 16:10:52 -0800 (PST)
-Date: Sat, 6 Dec 2008 16:10:50 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081207001050.GA1796@gmail.com>
+	(envelope-from <trini@kernel.crashing.org>) id 1L97uF-00088t-2j
+	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 01:53:55 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20081207005006.HTVN11567.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Sat, 6 Dec 2008 19:50:06 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
+	id o0q71a0031E665w030q7CH; Sat, 06 Dec 2008 19:50:07 -0500
+X-Authority-Analysis: v=1.0 c=1 a=seiNOWtGTbNX7FweWLYA:9
+	a=mutpJc74wSA1NVgSkU9li89zFFUA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sat, 6 Dec 2008 17:50:17 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20081207005017.GK16628@smtp.west.cox.net>
+References: <20081207001050.GA1796@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: mips site files update
+In-Reply-To: <20081207001050.GA1796@gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: mips site files update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,295 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 00:14:38 -0000
-X-Groupsio-MsgNum: 6888
-Content-Type: multipart/mixed; boundary="fUYQa+Pmc3FrFX/N"
-Content-Disposition: inline
-
---fUYQa+Pmc3FrFX/N
+X-List-Received-Date: Sun, 07 Dec 2008 00:53:55 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi 
+On Sat, Dec 06, 2008 at 04:10:50PM -0800, Khem Raj wrote:
 
-Trying to build for mips based machines. I needed this patch to get the
-console-image building. 
+> Hi 
+> 
+> Trying to build for mips based machines. I needed this patch to get the
+> console-image building. 
+> 
+> OK for .dev
 
-OK for .dev
+Can we please please please start splitting things up into common-linux
+and common-glibc/uclibc instead?  That way we fix more than mips.
 
-Thx
+-- 
+Tom Rini
 
--Khem
 
-
---fUYQa+Pmc3FrFX/N
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=patch
-
-diff --git a/site/mips-common b/site/mips-common
-new file mode 100644
-index 0000000..5d3e68a
---- /dev/null
-+++ b/site/mips-common
-@@ -0,0 +1,240 @@
-+ac_cv_func_lstat_dereferences_slashed_symlink=${ac_cv_func_lstat_dereferences_slashed_symlink=yes}
-+ac_cv_func_lstat_empty_string_bug=${ac_cv_func_lstat_empty_string_bug=no}
-+ac_cv_func_stat_empty_string_bug=${ac_cv_func_stat_empty_string_bug=no}
-+ac_cv_func_stat_ignores_trailing_slash=${ac_cv_func_stat_ignores_trailing_slash=no}
-+ac_cv_header_netinet_sctp_h=${ac_cv_header_netinet_sctp_h=no}
-+ac_cv_header_netinet_sctp_uio_h=${ac_cv_header_netinet_sctp_uio_h=no}
-+ac_cv_sctp=${ac_cv_sctp=no}
-+
-+# apache
-+ac_cv_func_pthread_key_delete=${ac_cv_func_pthread_key_delete=yes}
-+apr_cv_process_shared_works=${apr_cv_process_shared_works=no}
-+ac_cv_sizeof_ssize_t=${ac_cv_sizeof_ssize_t=4}
-+apr_cv_tcp_nodelay_with_cork=${apr_cv_tcp_nodelay_with_cork=yes}
-+
-+# bash
-+ac_cv_c_long_double=${ac_cv_c_long_double=yes}
-+bash_cv_have_mbstate_t=${bash_cv_have_mbstate_t=yes}
-+bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=missing}
-+bash_cv_must_reinstall_sighandlers=${bash_cv_must_reinstall_sighandlers=no}
-+bash_cv_func_strcoll_broken=${bash_cv_func_strcoll_broken=no}
-+bash_cv_dup2_broken=${bash_cv_dup2_broken=no}
-+bash_cv_opendir_not_robust=${bash_cv_opendir_not_robust=no}
-+bash_cv_type_rlimit=${bash_cv_type_rlimit=rlim_t}
-+bash_cv_getenv_redef=${bash_cv_getenv_redef=yes}
-+bash_cv_ulimit_maxfds=${bash_cv_ulimit_maxfds=yes}
-+bash_cv_getcwd_calls_popen=${bash_cv_getcwd_calls_popen=no}
-+bash_cv_printf_a_format=${bash_cv_printf_a_format=yes}
-+bash_cv_pgrp_pipe=${bash_cv_pgrp_pipe=no}
-+bash_cv_job_control_missing=${bash_cv_job_control_missing=present}
-+bash_cv_sys_named_pipes=${bash_cv_sys_named_pipes=present}
-+bash_cv_unusable_rtsigs=${bash_cv_unusable_rtsigs=no}
-+
-+# coreutils
-+utils_cv_sys_open_max=${utils_cv_sys_open_max=1019}
-+
-+# cvs
-+cvs_cv_func_printf_ptr=${cvs_cv_func_printf_ptr=yes}
-+
-+# db (sleepycat)
-+db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
-+db_cv_sprintf_count=${db_cv_sprintf_count=yes}
-+db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
-+db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
-+db_cv_path_cp=${db_cv_path_cp=/bin/cp}
-+db_cv_path_ln=${db_cv_path_ln=/bin/ln}
-+db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
-+db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
-+db_cv_path_rm=${db_cv_path_rm=/bin/rm}
-+db_cv_path_sh=${db_cv_path_sh=/bin/sh}
-+db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
-+db_cv_align_t=${db_cv_align_t='unsigned long long'}
-+db_cv_alignp_t=${db_cv_alignp_t='unsigned long'}
-+db_cv_mutex=${db_cv_mutex=no}
-+db_cv_posixmutexes=${db_cv_posixmutexes=no}
-+db_cv_uimutexes=${db_cv_uimutexes=no}
-+
-+# D-BUS
-+ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
-+
-+# edb
-+db_cv_spinlocks=${db_cv_spinlocks=no}
-+
-+# ettercap
-+ettercap_cv_type_socklen_t=${ettercap_cv_type_socklen_t=yes}
-+
-+# fget
-+compat_cv_func_snprintf_works=${compat_cv_func_snprintf_works=yes}
-+compat_cv_func_basename_works=${compat_cv_func_basename_works=no}
-+compat_cv_func_dirname_works=${compat_cv_func_dirname_works=no}
-+
-+# fnmatch
-+ac_cv_func_fnmatch_works=${ac_cv_func_fnmatch_works=yes}
-+
-+# gettext
-+am_cv_func_working_getline=${am_cv_func_working_getline=yes}
-+
-+# gio
-+ac_cv_func_getgrgid_r=${ac_cv_func_getgrgid_r=yes}
-+
-+# glib
-+glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
-+glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
-+glib_cv_stack_grows=${glib_cv_stack_grows=no}
-+glib_cv_uscore=${glib_cv_uscore=no}
-+glib_cv_use_pid_surrogate=${glib_cv_use_pid_surrogate=yes}
-+glib_cv_has__inline=${glib_cv_has__inline=yes}
-+glib_cv_has__inline__=${glib_cv_has__inline__=yes}
-+glib_cv_hasinline=${glib_cv_hasinline=yes}
-+glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
-+glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
-+glib_cv_uscore=${glib_cv_uscore=no}
-+glib_cv_va_copy=${glib_cv_va_copy=yes}
-+glib_cv_va_val_copy=${glib_cv_va_val_copy=yes}
-+glib_cv___va_copy=${glib_cv___va_copy=yes}
-+glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=no}
-+ac_cv_func_getpwuid_r=${ac_cv_func_getpwuid_r=yes}
-+glib_cv_sys_pthread_mutex_trylock_posix=${glib_cv_sys_pthread_mutex_trylock_posix=yes}
-+glib_cv_sys_pthread_getspecific_posix=${glib_cv_sys_pthread_getspecific_posix=yes}
-+glib_cv_sys_pthread_cond_timedwait_posix=${glib_cv_sys_pthread_cond_timedwait_posix=yes}
-+
-+# glib-2.0
-+glib_cv_long_long_format=${glib_cv_long_long_format=ll}
-+glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
-+glib_cv_sizeof_intmax_t=${glib_cv_sizeof_intmax_t=8}
-+glib_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=4}
-+glib_cv_sizeof_size_t=${glib_cv_sizeof_size_t=4}
-+glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
-+glib_cv_sys_use_pid_niceness_surrogate=${glib_cv_sys_use_pid_niceness_surrogate=yes}
-+
-+#gstreamer
-+as_cv_unaligned_access=${as_cv_unaligned_access=no}
-+
-+# httppc
-+ac_cv_strerror_r_SUSv3=${ac_cv_strerror_r_SUSv3=no}
-+
-+# ipsec-tools
-+ac_cv_va_copy=${ac_cv_va_copy=yes}
-+ac_cv___va_copy=${ac_cv___va_copy=yes}
-+ac_cv_va_val_copy=${ac_cv_va_val_copy=yes}
-+racoon_cv_bug_getaddrinfo=${racoon_cv_bug_getaddrinfo=no}
-+
-+# jikes
-+ac_cv_sizeof_wchar_t=4
-+
-+# lftp
-+ac_cv_need_trio=${ac_cv_need_trio=no}
-+lftp_cv_va_copy=${lftp_cv_va_copy=yes}
-+lftp_cv_va_val_copy=${lftp_cv_va_val_copy=yes}
-+lftp_cv___va_copy=${lftp_cv___va_copy=yes}
-+
-+# libesmtp
-+acx_working_snprintf=${acx_working_snprintf=yes}
-+
-+# libidl
-+libIDL_cv_long_long_format=${libIDL_cv_long_long_format=ll}
-+
-+# libnet 
-+ac_libnet_have_packet_socket=${ac_libnet_have_packet_socket=yes}
-+
-+# libpcap
-+ac_cv_linux_vers=${ac_cv_linux_vers=2}
-+
-+# libxfce4util
-+with_broken_putenv=${with_broken_putenv=no}
-+
-+# links
-+ac_cv_lib_png_png_create_info_struct=${ac_cv_lib_png_png_create_info_struct=yes}
-+
-+# mono
-+cv_mono_sizeof_sunpath=108
-+
-+# mysql
-+mysql_cv_func_atomic_sub=${mysql_cv_func_atomic_sub=no}
-+mysql_cv_func_atomic_add=${mysql_cv_func_atomic_add=no}
-+ac_cv_conv_longlong_to_float=${ac_cv_conv_longlong_to_float=yes}
-+
-+# nano
-+ac_cv_regexec_segfault_emptystr=${ac_cv_regexec_segfault_emptystr=no}
-+nano_cv_func_regexec_segv_emptystr=${nano_cv_func_regexec_segv_emptystr=no}
-+
-+# ORBit2
-+ac_cv_alignof_CORBA_boolean=1
-+ac_cv_alignof_CORBA_char=1
-+ac_cv_alignof_CORBA_double=8
-+ac_cv_alignof_CORBA_float=4
-+ac_cv_alignof_CORBA_long=4
-+ac_cv_alignof_CORBA_long_double=8
-+ac_cv_alignof_CORBA_long_long=8
-+ac_cv_alignof_CORBA_octet=1
-+ac_cv_alignof_CORBA_pointer=4
-+ac_cv_alignof_CORBA_short=2
-+ac_cv_alignof_CORBA_struct=1
-+ac_cv_alignof_CORBA_wchar=2
-+ac_cv_func_getaddrinfo=${ac_cv_func_getaddrinfo=yes}
-+
-+# php
-+ac_cv_pread=${ac_cv_pread=no}
-+ac_cv_pwrite=${ac_cv_pwrite=no}
-+php_cv_lib_cookie_io_functions_use_off64_t=${php_cv_lib_cookie_io_functions_use_off64_t=yes}
-+
-+# rsync
-+rsync_cv_HAVE_BROKEN_LARGEFILE=${rsync_cv_HAVE_BROKEN_LARGEFILE=no}
-+rsync_cv_HAVE_SOCKETPAIR=${rsync_cv_HAVE_SOCKETPAIR=yes}
-+rsync_cv_HAVE_LONGLONG=${rsync_cv_HAVE_LONGLONG=yes}
-+rsync_cv_HAVE_OFF64_T=${rsync_cv_HAVE_OFF64_T=no}
-+rsync_cv_HAVE_SHORT_INO_T=${rsync_cv_HAVE_SHORT_INO_T=no}
-+rsync_cv_HAVE_UNSIGNED_CHAR=${rsync_cv_HAVE_UNSIGNED_CHAR=no}
-+rsync_cv_HAVE_BROKEN_READDIR=${rsync_cv_HAVE_BROKEN_READDIR=no}
-+rsync_cv_HAVE_GETTIMEOFDAY_TZ=${rsync_cv_HAVE_GETTIMEOFDAY_TZ=yes}
-+rsync_cv_HAVE_C99_VSNPRINTF=${rsync_cv_HAVE_C99_VSNPRINTF=yes}
-+rsync_cv_HAVE_SECURE_MKSTEMP=${rsync_cv_HAVE_SECURE_MKSTEMP=yes}
-+rsync_cv_REPLACE_INET_NTOA=${rsync_cv_REPLACE_INET_NTOA=no}
-+rsync_cv_REPLACE_INET_ATON=${rsync_cv_REPLACE_INET_ATON=no}
-+
-+# screen
-+screen_cv_sys_bcopy_overlap=${screen_cv_sys_bcopy_overlap=no}
-+screen_cv_sys_memcpy_overlap=${screen_cv_sys_memcpy_overlap=no}
-+screen_cv_sys_memmove_overlap=${screen_cv_sys_memmove_overlap=no}
-+screen_cv_sys_fifo_broken_impl=${screen_cv_sys_fifo_broken_impl=yes}
-+screen_cv_sys_fifo_usable=${screen_cv_sys_fifo_usable=yes}
-+screen_cv_sys_select_broken_retval=${screen_cv_sys_select_broken_retval=no}
-+screen_cv_sys_sockets_nofs=${screen_cv_sys_sockets_nofs=no}
-+screen_cv_sys_sockets_usable=${screen_cv_sys_sockets_usable=yes}
-+screen_cv_sys_terminfo_used=${screen_cv_sys_terminfo_used=yes}
-+
-+# slrn
-+slrn_cv___va_copy=${slrn_cv___va_copy=yes}
-+slrn_cv_va_copy=${slrn_cv_va_copy=yes}
-+slrn_cv_va_val_copy=${slrn_cv_va_val_copy=yes}
-+ac_cv_func_realloc_works=${ac_cv_func_realloc_works=yes}
-+ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}
-+ac_cv_func_malloc_works=${ac_cv_func_malloc_works=yes}
-+ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
-+
-+# socat
-+ac_cv_ispeed_offset=${ac_cv_ispeed_offset=13}
-+sc_cv_termios_ispeed=${sc_cv_termios_ispeed=yes}
-+
-+# ssh
-+ac_cv_have_space_d_name_in_struct_dirent=${ac_cv_dirent_have_space_d_name=yes}
-+ac_cv_have_broken_snprintf=${ac_cv_have_broken_snprintf=no}
-+ac_cv_have_accrights_in_msghdr=${ac_cv_have_accrights_in_msghdr=no}
-+ac_cv_have_control_in_msghdr=${ac_cv_have_control_in_msghdr=yes}
-+ac_cv_have_openpty_ctty_bug=${ac_cv_have_openpty_ctty_bug=yes}
-+
-+# startup-notification
-+lf_cv_sane_realloc=yes
-+
-+# sudo
-+sudo_cv_uid_t_len=${sudo_cv_uid_t_len=10}
-+
-+# xffm
-+jm_cv_func_working_readdir=yes
-+
-+# dpkg
-+dpkg_cv_va_copy=${ac_cv_va_copy=yes}
-+dpkg_cv___va_copy=${ac_cv___va_copy=yes}
-+
-+# eds-dbus
-+ac_cv_libiconv_utf8=${ac_cv_libiconv_utf8=yes}
-diff --git a/classes/siteinfo.bbclass b/classes/siteinfo.bbclass
-index 039afbb..85b034f 100644
---- a/classes/siteinfo.bbclass
-+++ b/classes/siteinfo.bbclass
-@@ -40,10 +40,10 @@ def get_siteinfo_list(d):
-                "i486-linux-uclibc":       "endian-little bit-32 common-linux common-uclibc ix86-common",\
-                "i586-linux-uclibc":       "endian-little bit-32 common-linux common-uclibc ix86-common",\
-                "i686-linux-uclibc":       "endian-little bit-32 common-linux common-uclibc ix86-common",\
--               "mipsel-linux":            "endian-little bit-32 common-linux common-glibc",\
--               "mipsel-linux-uclibc":     "endian-little bit-32 common-linux common-uclibc",\
--               "mips-linux":              "endian-big bit-32 common-linux common-glibc",\
--               "mips-linux-uclibc":       "endian-big bit-32 common-linux common-uclibc",\
-+               "mipsel-linux":            "endian-little bit-32 common-linux common-glibc mips-common",\
-+               "mipsel-linux-uclibc":     "endian-little bit-32 common-linux common-uclibc mips-common",\
-+               "mips-linux":              "endian-big bit-32 common-linux common-glibc mips-common",\
-+               "mips-linux-uclibc":       "endian-big bit-32 common-linux common-uclibc mips-common",\
-                "powerpc-darwin":          "endian-big bit-32 common-darwin",\
-                "ppc-linux":               "endian-big bit-32 common-linux common-glibc powerpc-common",\ 
- 	       "powerpc-linux":           "endian-big bit-32 common-linux common-glibc powerpc-common",\
-
---fUYQa+Pmc3FrFX/N--
