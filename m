@@ -1,31 +1,21 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1L9PRV-0004dI-2l
-	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 20:37:25 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20081207193334.SXLS2948.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>;
-	Sun, 7 Dec 2008 14:33:34 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id oKZV1a00T1E665w03KZXfd; Sun, 07 Dec 2008 14:33:34 -0500
-X-Authority-Analysis: v=1.0 c=1 a=EXJT-38Zl-vYhColrD0A:9
-	a=ejjDnJxFfUKQ6rrw3C6wHVtz9IUA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Sun, 7 Dec 2008 12:33:40 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20081207193340.GC15204@smtp.west.cox.net>
-References: <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>
-	<d2b9ea600810211323y1dd1fc11i585f26f044696de9@mail.gmail.com>
-	<20081202174141.GB16628@smtp.west.cox.net>
-	<1228250322.5456.70.camel@dax.rpnet.com>
-	<20081202212155.GG16628@smtp.west.cox.net>
-	<20081206214525.GJ16628@smtp.west.cox.net>
+	(envelope-from <openembedded@haerwu.biz>) id 1L9PXG-0003XD-PV
+	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 20:43:22 +0100
+Received: (qmail 18834 invoked by uid 813007); 7 Dec 2008 19:39:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 7 Dec 2008 19:39:33 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 7 Dec 2008 20:39:17 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.28-rc7; KDE/4.1.3; x86_64; ; )
+References: <493BE2CB.6050101@gmx.de>
+In-Reply-To: <493BE2CB.6050101@gmx.de>
 MIME-Version: 1.0
-In-Reply-To: <20081206214525.GJ16628@smtp.west.cox.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: Esben Haabendal <esbenhaabendal@gmail.com>
-Subject: Re: Canadian SDK support
+Message-Id: <200812072039.19431.openembedded@haerwu.biz>
+Subject: Re: OE Project Devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 19:37:26 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 07 Dec 2008 19:43:23 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Sat, Dec 06, 2008 at 02:45:25PM -0700, Tom Rini wrote:
-> On Tue, Dec 02, 2008 at 02:21:55PM -0700, Tom Rini wrote:
-[snip]
-> > OK.  Esben, have you had any updates?  If not, I'll take what's on the
-> > bugzilla (or depending on my git-fu, pull your tree) and make a branch
-> > on the main tree for this.  I really don't want to see this get lost :)
-> 
-> OK.  I've created a trini/canadian-sdk branch and am going to start a
-> number of builds to make sure non-canadian SDKs are fine, before moving
-> on to canadian.
+Sunday 07 of December 2008 15:50:51 Thomas Kunze napisa=C5=82(a):
+> Hi all,
+>
+> the wiki page about the project devices was missing in the new wiki.
+> So I copied the newest version I could find from www.archive.org into
+> our wiki:
+> http://wiki.openembedded.net/index.php/ProjectDevices
+> Could everbody who is listed there please look at the page an correct
+> it if necessary?=20
 
-I've got regular old meta-toolchain-sbox builds done for qemux86
-nokia800 db1200 mpc8313e-rdb nslu2le simpad now.  I tried an AVR32
-target, but it needs more than just the MACHINE being passed in.  Happy
-to include one of those if someone points me in the right direction.
-Shortly I'm going to kick off Canadian builds for these targets too.
-What other build-tests would people like to see done here?
+> I suggest that we sent one ot the tosa's to Dmitry Baryshkov. He does
+> much kernel work for tosa.
 
-As an aside, gcc-cross-sdk on arm(v6 only?) is blowing up in fortran,
-but I've got a git bisect narrowing that down now (30 revs left).
+Tosa which is in Samuel's Ortiz hands will go to Dmitry.
 
--- 
-Tom Rini
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://blog.haerwu.biz/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
