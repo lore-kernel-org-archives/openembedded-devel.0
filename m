@@ -1,31 +1,38 @@
-Received: from [195.65.72.27] (helo=bagnes.atmel.com)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1L97CJ-00023Y-1g
+	(envelope-from <raj.khem@gmail.com>) id 1L97IE-0002Gv-6M
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Dec 2008 01:08:31 +0100
-Received: from fribh01.corp.atmel.com (FRIBH01 [10.175.30.10])
-	by bagnes.atmel.com (8.13.8+Sun/8.13.8) with ESMTP id mB6NuZhB024212
+	Sun, 07 Dec 2008 01:14:38 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so634507rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 6 Dec 2008 16:00:09 -0800 (PST)
-Received: from frimb01.corp.atmel.com ([10.175.30.12]) by
-	fribh01.corp.atmel.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 7 Dec 2008 01:02:18 +0100
-Received: from palantir ([172.24.48.246]) by frimb01.corp.atmel.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Sun, 7 Dec 2008 01:02:17 +0100
-Message-ID: <002f01c957ff$09d4fc80$f8c4af0a@palantir>
-From: "Ulf Samuelsson" <ulf.samuelsson@atmel.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <1228551396.14826.31.camel@aeglos.sweden.atmel.com>
-	<19c1b8a90812061110n29618646y1d4574d96abec697@mail.gmail.com>
-Date: Sun, 7 Dec 2008 01:02:02 +0100
+	Sat, 06 Dec 2008 16:10:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=YDCCvK8ZI9oJPuOIqgCZaPWgJ2PKYFK4T/XkvDaJg0k=;
+	b=Tuape38ymR5VMPE0sWaihPxiqbQaSdy8DPW3qjd6tryBA/k6YgoYZF5yjznI54NQBV
+	suwq3w2vGSV1gpVancgtSieK0dYI93aRO9PQW7zS5GWt8fZPOMVyKk54podGGpLi1G5S
+	z0r2gN7tV5yguiqytUKQS5Fv+7IB7S00qyByo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=s2A4J8O+vscvpNPFKR8dvn6xhcnQJDXWNiL9WMmymTsBBKk09o/WSjzjQlwbGuweC9
+	7zKMDtU+fuH5O6C98QVF4qUj4AnoDauw0dTY/qL0fO1eQ7lYLjtrQkIRD2S7Fmr0Mbog
+	24XvrrNyyWfy/LvUuBwiYThwDozLhJSmuBtUc=
+Received: by 10.140.136.5 with SMTP id j5mr805560rvd.167.1228608652508;
+	Sat, 06 Dec 2008 16:10:52 -0800 (PST)
+Received: from localhost (adsl-71-146-4-209.dsl.pltn13.sbcglobal.net
+	[71.146.4.209])
+	by mx.google.com with ESMTPS id g14sm1539180rvb.0.2008.12.06.16.10.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 06 Dec 2008 16:10:52 -0800 (PST)
+Date: Sat, 6 Dec 2008 16:10:50 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081207001050.GA1796@gmail.com>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.3138
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3350
-X-OriginalArrivalTime: 07 Dec 2008 00:02:17.0732 (UTC)
-	FILETIME=[116BBC40:01C957FF]
-Subject: Re: Build of qemu-native fails.
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: mips site files update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,89 +46,295 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 00:08:31 -0000
-Content-Type: text/plain; format=flowed; charset="utf-8"; reply-type=original
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 07 Dec 2008 00:14:38 -0000
+X-Groupsio-MsgNum: 6888
+Content-Type: multipart/mixed; boundary="fUYQa+Pmc3FrFX/N"
+Content-Disposition: inline
+
+--fUYQa+Pmc3FrFX/N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hi 
+
+Trying to build for mips based machines. I needed this patch to get the
+console-image building. 
+
+OK for .dev
+
+Thx
+
+-Khem
 
 
+--fUYQa+Pmc3FrFX/N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=patch
 
+diff --git a/site/mips-common b/site/mips-common
+new file mode 100644
+index 0000000..5d3e68a
+--- /dev/null
++++ b/site/mips-common
+@@ -0,0 +1,240 @@
++ac_cv_func_lstat_dereferences_slashed_symlink=${ac_cv_func_lstat_dereferences_slashed_symlink=yes}
++ac_cv_func_lstat_empty_string_bug=${ac_cv_func_lstat_empty_string_bug=no}
++ac_cv_func_stat_empty_string_bug=${ac_cv_func_stat_empty_string_bug=no}
++ac_cv_func_stat_ignores_trailing_slash=${ac_cv_func_stat_ignores_trailing_slash=no}
++ac_cv_header_netinet_sctp_h=${ac_cv_header_netinet_sctp_h=no}
++ac_cv_header_netinet_sctp_uio_h=${ac_cv_header_netinet_sctp_uio_h=no}
++ac_cv_sctp=${ac_cv_sctp=no}
++
++# apache
++ac_cv_func_pthread_key_delete=${ac_cv_func_pthread_key_delete=yes}
++apr_cv_process_shared_works=${apr_cv_process_shared_works=no}
++ac_cv_sizeof_ssize_t=${ac_cv_sizeof_ssize_t=4}
++apr_cv_tcp_nodelay_with_cork=${apr_cv_tcp_nodelay_with_cork=yes}
++
++# bash
++ac_cv_c_long_double=${ac_cv_c_long_double=yes}
++bash_cv_have_mbstate_t=${bash_cv_have_mbstate_t=yes}
++bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=missing}
++bash_cv_must_reinstall_sighandlers=${bash_cv_must_reinstall_sighandlers=no}
++bash_cv_func_strcoll_broken=${bash_cv_func_strcoll_broken=no}
++bash_cv_dup2_broken=${bash_cv_dup2_broken=no}
++bash_cv_opendir_not_robust=${bash_cv_opendir_not_robust=no}
++bash_cv_type_rlimit=${bash_cv_type_rlimit=rlim_t}
++bash_cv_getenv_redef=${bash_cv_getenv_redef=yes}
++bash_cv_ulimit_maxfds=${bash_cv_ulimit_maxfds=yes}
++bash_cv_getcwd_calls_popen=${bash_cv_getcwd_calls_popen=no}
++bash_cv_printf_a_format=${bash_cv_printf_a_format=yes}
++bash_cv_pgrp_pipe=${bash_cv_pgrp_pipe=no}
++bash_cv_job_control_missing=${bash_cv_job_control_missing=present}
++bash_cv_sys_named_pipes=${bash_cv_sys_named_pipes=present}
++bash_cv_unusable_rtsigs=${bash_cv_unusable_rtsigs=no}
++
++# coreutils
++utils_cv_sys_open_max=${utils_cv_sys_open_max=1019}
++
++# cvs
++cvs_cv_func_printf_ptr=${cvs_cv_func_printf_ptr=yes}
++
++# db (sleepycat)
++db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
++db_cv_sprintf_count=${db_cv_sprintf_count=yes}
++db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
++db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
++db_cv_path_cp=${db_cv_path_cp=/bin/cp}
++db_cv_path_ln=${db_cv_path_ln=/bin/ln}
++db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
++db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
++db_cv_path_rm=${db_cv_path_rm=/bin/rm}
++db_cv_path_sh=${db_cv_path_sh=/bin/sh}
++db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
++db_cv_align_t=${db_cv_align_t='unsigned long long'}
++db_cv_alignp_t=${db_cv_alignp_t='unsigned long'}
++db_cv_mutex=${db_cv_mutex=no}
++db_cv_posixmutexes=${db_cv_posixmutexes=no}
++db_cv_uimutexes=${db_cv_uimutexes=no}
++
++# D-BUS
++ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
++
++# edb
++db_cv_spinlocks=${db_cv_spinlocks=no}
++
++# ettercap
++ettercap_cv_type_socklen_t=${ettercap_cv_type_socklen_t=yes}
++
++# fget
++compat_cv_func_snprintf_works=${compat_cv_func_snprintf_works=yes}
++compat_cv_func_basename_works=${compat_cv_func_basename_works=no}
++compat_cv_func_dirname_works=${compat_cv_func_dirname_works=no}
++
++# fnmatch
++ac_cv_func_fnmatch_works=${ac_cv_func_fnmatch_works=yes}
++
++# gettext
++am_cv_func_working_getline=${am_cv_func_working_getline=yes}
++
++# gio
++ac_cv_func_getgrgid_r=${ac_cv_func_getgrgid_r=yes}
++
++# glib
++glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
++glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
++glib_cv_stack_grows=${glib_cv_stack_grows=no}
++glib_cv_uscore=${glib_cv_uscore=no}
++glib_cv_use_pid_surrogate=${glib_cv_use_pid_surrogate=yes}
++glib_cv_has__inline=${glib_cv_has__inline=yes}
++glib_cv_has__inline__=${glib_cv_has__inline__=yes}
++glib_cv_hasinline=${glib_cv_hasinline=yes}
++glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
++glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
++glib_cv_uscore=${glib_cv_uscore=no}
++glib_cv_va_copy=${glib_cv_va_copy=yes}
++glib_cv_va_val_copy=${glib_cv_va_val_copy=yes}
++glib_cv___va_copy=${glib_cv___va_copy=yes}
++glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=no}
++ac_cv_func_getpwuid_r=${ac_cv_func_getpwuid_r=yes}
++glib_cv_sys_pthread_mutex_trylock_posix=${glib_cv_sys_pthread_mutex_trylock_posix=yes}
++glib_cv_sys_pthread_getspecific_posix=${glib_cv_sys_pthread_getspecific_posix=yes}
++glib_cv_sys_pthread_cond_timedwait_posix=${glib_cv_sys_pthread_cond_timedwait_posix=yes}
++
++# glib-2.0
++glib_cv_long_long_format=${glib_cv_long_long_format=ll}
++glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
++glib_cv_sizeof_intmax_t=${glib_cv_sizeof_intmax_t=8}
++glib_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=4}
++glib_cv_sizeof_size_t=${glib_cv_sizeof_size_t=4}
++glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
++glib_cv_sys_use_pid_niceness_surrogate=${glib_cv_sys_use_pid_niceness_surrogate=yes}
++
++#gstreamer
++as_cv_unaligned_access=${as_cv_unaligned_access=no}
++
++# httppc
++ac_cv_strerror_r_SUSv3=${ac_cv_strerror_r_SUSv3=no}
++
++# ipsec-tools
++ac_cv_va_copy=${ac_cv_va_copy=yes}
++ac_cv___va_copy=${ac_cv___va_copy=yes}
++ac_cv_va_val_copy=${ac_cv_va_val_copy=yes}
++racoon_cv_bug_getaddrinfo=${racoon_cv_bug_getaddrinfo=no}
++
++# jikes
++ac_cv_sizeof_wchar_t=4
++
++# lftp
++ac_cv_need_trio=${ac_cv_need_trio=no}
++lftp_cv_va_copy=${lftp_cv_va_copy=yes}
++lftp_cv_va_val_copy=${lftp_cv_va_val_copy=yes}
++lftp_cv___va_copy=${lftp_cv___va_copy=yes}
++
++# libesmtp
++acx_working_snprintf=${acx_working_snprintf=yes}
++
++# libidl
++libIDL_cv_long_long_format=${libIDL_cv_long_long_format=ll}
++
++# libnet 
++ac_libnet_have_packet_socket=${ac_libnet_have_packet_socket=yes}
++
++# libpcap
++ac_cv_linux_vers=${ac_cv_linux_vers=2}
++
++# libxfce4util
++with_broken_putenv=${with_broken_putenv=no}
++
++# links
++ac_cv_lib_png_png_create_info_struct=${ac_cv_lib_png_png_create_info_struct=yes}
++
++# mono
++cv_mono_sizeof_sunpath=108
++
++# mysql
++mysql_cv_func_atomic_sub=${mysql_cv_func_atomic_sub=no}
++mysql_cv_func_atomic_add=${mysql_cv_func_atomic_add=no}
++ac_cv_conv_longlong_to_float=${ac_cv_conv_longlong_to_float=yes}
++
++# nano
++ac_cv_regexec_segfault_emptystr=${ac_cv_regexec_segfault_emptystr=no}
++nano_cv_func_regexec_segv_emptystr=${nano_cv_func_regexec_segv_emptystr=no}
++
++# ORBit2
++ac_cv_alignof_CORBA_boolean=1
++ac_cv_alignof_CORBA_char=1
++ac_cv_alignof_CORBA_double=8
++ac_cv_alignof_CORBA_float=4
++ac_cv_alignof_CORBA_long=4
++ac_cv_alignof_CORBA_long_double=8
++ac_cv_alignof_CORBA_long_long=8
++ac_cv_alignof_CORBA_octet=1
++ac_cv_alignof_CORBA_pointer=4
++ac_cv_alignof_CORBA_short=2
++ac_cv_alignof_CORBA_struct=1
++ac_cv_alignof_CORBA_wchar=2
++ac_cv_func_getaddrinfo=${ac_cv_func_getaddrinfo=yes}
++
++# php
++ac_cv_pread=${ac_cv_pread=no}
++ac_cv_pwrite=${ac_cv_pwrite=no}
++php_cv_lib_cookie_io_functions_use_off64_t=${php_cv_lib_cookie_io_functions_use_off64_t=yes}
++
++# rsync
++rsync_cv_HAVE_BROKEN_LARGEFILE=${rsync_cv_HAVE_BROKEN_LARGEFILE=no}
++rsync_cv_HAVE_SOCKETPAIR=${rsync_cv_HAVE_SOCKETPAIR=yes}
++rsync_cv_HAVE_LONGLONG=${rsync_cv_HAVE_LONGLONG=yes}
++rsync_cv_HAVE_OFF64_T=${rsync_cv_HAVE_OFF64_T=no}
++rsync_cv_HAVE_SHORT_INO_T=${rsync_cv_HAVE_SHORT_INO_T=no}
++rsync_cv_HAVE_UNSIGNED_CHAR=${rsync_cv_HAVE_UNSIGNED_CHAR=no}
++rsync_cv_HAVE_BROKEN_READDIR=${rsync_cv_HAVE_BROKEN_READDIR=no}
++rsync_cv_HAVE_GETTIMEOFDAY_TZ=${rsync_cv_HAVE_GETTIMEOFDAY_TZ=yes}
++rsync_cv_HAVE_C99_VSNPRINTF=${rsync_cv_HAVE_C99_VSNPRINTF=yes}
++rsync_cv_HAVE_SECURE_MKSTEMP=${rsync_cv_HAVE_SECURE_MKSTEMP=yes}
++rsync_cv_REPLACE_INET_NTOA=${rsync_cv_REPLACE_INET_NTOA=no}
++rsync_cv_REPLACE_INET_ATON=${rsync_cv_REPLACE_INET_ATON=no}
++
++# screen
++screen_cv_sys_bcopy_overlap=${screen_cv_sys_bcopy_overlap=no}
++screen_cv_sys_memcpy_overlap=${screen_cv_sys_memcpy_overlap=no}
++screen_cv_sys_memmove_overlap=${screen_cv_sys_memmove_overlap=no}
++screen_cv_sys_fifo_broken_impl=${screen_cv_sys_fifo_broken_impl=yes}
++screen_cv_sys_fifo_usable=${screen_cv_sys_fifo_usable=yes}
++screen_cv_sys_select_broken_retval=${screen_cv_sys_select_broken_retval=no}
++screen_cv_sys_sockets_nofs=${screen_cv_sys_sockets_nofs=no}
++screen_cv_sys_sockets_usable=${screen_cv_sys_sockets_usable=yes}
++screen_cv_sys_terminfo_used=${screen_cv_sys_terminfo_used=yes}
++
++# slrn
++slrn_cv___va_copy=${slrn_cv___va_copy=yes}
++slrn_cv_va_copy=${slrn_cv_va_copy=yes}
++slrn_cv_va_val_copy=${slrn_cv_va_val_copy=yes}
++ac_cv_func_realloc_works=${ac_cv_func_realloc_works=yes}
++ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}
++ac_cv_func_malloc_works=${ac_cv_func_malloc_works=yes}
++ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
++
++# socat
++ac_cv_ispeed_offset=${ac_cv_ispeed_offset=13}
++sc_cv_termios_ispeed=${sc_cv_termios_ispeed=yes}
++
++# ssh
++ac_cv_have_space_d_name_in_struct_dirent=${ac_cv_dirent_have_space_d_name=yes}
++ac_cv_have_broken_snprintf=${ac_cv_have_broken_snprintf=no}
++ac_cv_have_accrights_in_msghdr=${ac_cv_have_accrights_in_msghdr=no}
++ac_cv_have_control_in_msghdr=${ac_cv_have_control_in_msghdr=yes}
++ac_cv_have_openpty_ctty_bug=${ac_cv_have_openpty_ctty_bug=yes}
++
++# startup-notification
++lf_cv_sane_realloc=yes
++
++# sudo
++sudo_cv_uid_t_len=${sudo_cv_uid_t_len=10}
++
++# xffm
++jm_cv_func_working_readdir=yes
++
++# dpkg
++dpkg_cv_va_copy=${ac_cv_va_copy=yes}
++dpkg_cv___va_copy=${ac_cv___va_copy=yes}
++
++# eds-dbus
++ac_cv_libiconv_utf8=${ac_cv_libiconv_utf8=yes}
+diff --git a/classes/siteinfo.bbclass b/classes/siteinfo.bbclass
+index 039afbb..85b034f 100644
+--- a/classes/siteinfo.bbclass
++++ b/classes/siteinfo.bbclass
+@@ -40,10 +40,10 @@ def get_siteinfo_list(d):
+                "i486-linux-uclibc":       "endian-little bit-32 common-linux common-uclibc ix86-common",\
+                "i586-linux-uclibc":       "endian-little bit-32 common-linux common-uclibc ix86-common",\
+                "i686-linux-uclibc":       "endian-little bit-32 common-linux common-uclibc ix86-common",\
+-               "mipsel-linux":            "endian-little bit-32 common-linux common-glibc",\
+-               "mipsel-linux-uclibc":     "endian-little bit-32 common-linux common-uclibc",\
+-               "mips-linux":              "endian-big bit-32 common-linux common-glibc",\
+-               "mips-linux-uclibc":       "endian-big bit-32 common-linux common-uclibc",\
++               "mipsel-linux":            "endian-little bit-32 common-linux common-glibc mips-common",\
++               "mipsel-linux-uclibc":     "endian-little bit-32 common-linux common-uclibc mips-common",\
++               "mips-linux":              "endian-big bit-32 common-linux common-glibc mips-common",\
++               "mips-linux-uclibc":       "endian-big bit-32 common-linux common-uclibc mips-common",\
+                "powerpc-darwin":          "endian-big bit-32 common-darwin",\
+                "ppc-linux":               "endian-big bit-32 common-linux common-glibc powerpc-common",\ 
+ 	       "powerpc-linux":           "endian-big bit-32 common-linux common-glibc powerpc-common",\
 
------ Original Message ----- 
-From: "Khem Raj" <raj.khem@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Sent: Saturday, December 06, 2008 8:10 PM
-Subject: Re: [oe] Build of qemu-native fails.
-
-
-> On Sat, Dec 6, 2008 at 12:16 AM, Ulf Samuelsson <ulf@atmel.com> wrote:
->> Building the Angstrom for at91sam9263ek:
->>
->> The build of qemu-native fails!
->>
->> The normal build uses qemu-native-svn which fails, then I tried
->> qemu-native-0.9.1 with the same result.
->>
->> In 
->> ./work/armv5te-angstrom-linux-gnueabi/linux-libc-headers-2.6.23-r3/linux-2.6.23/include/linux/usbdevice_fs.h
->> it looks like:
->> struct usbdevfs_ctrltransfer {
->>        __u8 bRequestType;
->>        __u8 bRequest;
->>        __u16 wValue;
->>        __u16 wIndex;
->>        __u16 wLength;
->>        __u32 timeout;  /* in milliseconds */
->>        void __user *data;
->> };
->>
->> It does not like the __user in "void __user *data"
->>
->> In 
->> ./work/armv5te-angstrom-linux-gnueabi/linux-libc-headers-2.6.23-r3/image/usr/include/linux/usbdevice_fs.h
->> it looks the same as in recent kernels:
->>
->> /* usbdevfs ioctl codes */
->>
->> struct usbdevfs_ctrltransfer {
->>        __u8 bRequestType;
->>        __u8 bRequest;
->>        __u16 wValue;
->>        __u16 wIndex;
->>        __u16 wLength;
->>        __u32 timeout;  /* in milliseconds */
->>        void *data;
->> };
->>
->>
->> If I extract linux-2.6.23 and do
->> $ make ARCH=arm INSTALL_HDR_PATH=../headers headers_install
->> I don't get the "__user" inside this header file,
->>
->> Anyone knows why?
->
-> Thats the difference between raw headers and the saniized headers. By
-> doing  make ARCH=arm INSTALL_HDR_PATH=../headers headers_install you
-> get sanitized headers.
-> problem seems to be in  /usr/include/linux/usbdevice_fs.h thats on
-> your build system. check that file and it might not be insalled
-> correctly. What are you using for a build machine.
->
-> Thx
->
-> -Khem
->
-
-Thanks.  I am using OpenSuSE 10.2
-
-I got around the problem by doing a
-
-#define __user
-
-in the file including the usbdevice_:fs.h
-but it is probably time to upgrade the machine anyway.
-
-Best Regards
-Ulf Samuelsson 
-
-
-
+--fUYQa+Pmc3FrFX/N--
