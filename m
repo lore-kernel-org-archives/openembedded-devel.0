@@ -1,21 +1,38 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.128.188] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1L9PXG-0003XD-PV
-	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 20:43:22 +0100
-Received: (qmail 18834 invoked by uid 813007); 7 Dec 2008 19:39:33 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 7 Dec 2008 19:39:33 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1L9Pmn-0005go-2j
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 07 Dec 2008 20:59:25 +0100
+Received: by fk-out-0910.google.com with SMTP id 19so959284fkr.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Dec 2008 11:55:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=ilm0Wne91KuRoZq10buCE1uZRHaP8hHoA4Azh7ghuCU=;
+	b=mcr0L1pEGHIiHI8G+W8Jlp/M11524DJiY2mLsM2dEod5MNRLpvyWnRLzBoo7T6xtYX
+	xwOeZJZIf2jmL7Dz95wXB1V3W2kN7wjLYxQqpH9V8tgkv6JhusyXdyPiuAJSlF2DZQVj
+	Q00sIrSpLYqDrsxnzN/fcIc5y+u07yRXds9XI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=b+sgyYth50lnONHVbmtwETmuGE/qttVlmlCW3k6gLTeqeJ2lGgZj3lD4/z6pTEHDHK
+	0bvtbgcQfdn9eFfSu7xUDIe5d4PpCu+LCSVhUsd1pN3tBrSdj4CiT146qjvzcMp3EM1h
+	BAeKwlplcGSKRELmrqIvevmIRZJ1QbyvWtnhQ=
+Received: by 10.223.103.145 with SMTP id k17mr1163907fao.1.1228679736637;
+	Sun, 07 Dec 2008 11:55:36 -0800 (PST)
+Received: by 10.223.115.200 with HTTP; Sun, 7 Dec 2008 11:55:36 -0800 (PST)
+Message-ID: <c384c5ea0812071155k45880240heba43426d39a2ff6@mail.gmail.com>
+Date: Sun, 7 Dec 2008 20:55:36 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 7 Dec 2008 20:39:17 +0100
-User-Agent: KMail/1.10.3 (Linux/2.6.28-rc7; KDE/4.1.3; x86_64; ; )
-References: <493BE2CB.6050101@gmx.de>
-In-Reply-To: <493BE2CB.6050101@gmx.de>
+In-Reply-To: <d1b08f940812070258l25a1b54cg91b2b00a5fbafcaf@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <200812072039.19431.openembedded@haerwu.biz>
-Subject: Re: OE Project Devices
+References: <c384c5ea0812061551j27c4e7eagb10e01f64d9e8668@mail.gmail.com>
+	<d1b08f940812070258l25a1b54cg91b2b00a5fbafcaf@mail.gmail.com>
+Subject: Re: BUG? Some files in the build end up without read permission (mostly in .pc/)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,33 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 19:43:23 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 07 Dec 2008 19:59:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Sunday 07 of December 2008 15:50:51 Thomas Kunze napisa=C5=82(a):
-> Hi all,
+Hello,
+
+On Sun, Dec 7, 2008 at 11:58 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
 >
-> the wiki page about the project devices was missing in the new wiki.
-> So I copied the newest version I could find from www.archive.org into
-> our wiki:
-> http://wiki.openembedded.net/index.php/ProjectDevices
-> Could everbody who is listed there please look at the page an correct
-> it if necessary?=20
+> yes, I noticed this trying to copy the whole tmp/angstrom dir.
+>
+> permission denied   /input/keyboard/sharpsl_rc.c
+> ...input/touchscreen/tsc2101_ts.c
+> .../arm/mach-pxa/poodle_pm.c
+> ...asm-arm/arch-pxa/hx2750.h
+>
+> The whole list here:
+>
+> http://www.pastebin.ca/1278657
+>
+> I suspect this in not intended...
+>
+Thanks for the confirmation.
 
-> I suggest that we sent one ot the tosa's to Dmitry Baryshkov. He does
-> much kernel work for tosa.
-
-Tosa which is in Samuel's Ortiz hands will go to Dmitry.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://blog.haerwu.biz/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+I have no idea where the missing permissions are created, but I
+strongly suspect a missing third argument to open(path, ...O_CREAT
+..., );
+which typically gives these results.
 
 
+Anyone: is this quilt who writes these files there?
+
+Regards,
+-- 
+Leon
 
 
