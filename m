@@ -1,30 +1,37 @@
-Received: from [194.106.48.114] (helo=tim.rpsys.net ident=0)
+Received: from [209.85.128.190] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1L9HOI-00040N-HW
-	for openembedded-devel@openembedded.org; Sun, 07 Dec 2008 12:01:34 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mB7Avmmp011794
-	for <openembedded-devel@openembedded.org>; Sun, 7 Dec 2008 10:57:48 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11563-06 for <openembedded-devel@openembedded.org>;
-	Sun,  7 Dec 2008 10:57:41 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id mB7AvbFZ011784
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 7 Dec 2008 10:57:37 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20081207021144.GL16628@smtp.west.cox.net>
-References: <20081207021144.GL16628@smtp.west.cox.net>
-Date: Sun, 07 Dec 2008 10:57:35 +0000
-Message-Id: <1228647455.5427.0.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: Broken kernel recipes
+	(envelope-from <andrea.adami@gmail.com>) id 1L9HP2-00041P-Ij
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 07 Dec 2008 12:02:20 +0100
+Received: by fk-out-0910.google.com with SMTP id 19so785002fkr.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Dec 2008 02:58:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=jXp61aJ8rQo9hbiYf+yaJNPDQuz51xY0vIxmR9jyJIY=;
+	b=HF59UN8ELXuT4hXZHjFll2CLUpozhPLwIHh25n6GnfhaZrWuNctwDtaBYrLPqG7aEZ
+	rszRw61XviXhF9eSmMEfXesmNfqPvZMcDxxJJedaxTD/zPPDVvw8aQXHmHxU71xaL9MO
+	KpUGncOXZP7q4XET+E+1NGckefjJvZJInabqM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=EMiYl41G88F8PFVYSwiGOgCgiaXaeF18AfFXVCNOk7zLGKCxqEGG8eCKGrgHaoTN+i
+	XUkcs7m2qj0YFcwLUa1CHmr855MKMcrSVoGZeW0XNvXMwcL0qxpPOLJMyXb0a0XSAI2B
+	rmqYcu91jsbB5MYaQxPIqbAo4KPqAhQfZEJ98=
+Received: by 10.181.51.14 with SMTP id d14mr784795bkk.63.1228647513344;
+	Sun, 07 Dec 2008 02:58:33 -0800 (PST)
+Received: by 10.181.52.8 with HTTP; Sun, 7 Dec 2008 02:58:33 -0800 (PST)
+Message-ID: <d1b08f940812070258l25a1b54cg91b2b00a5fbafcaf@mail.gmail.com>
+Date: Sun, 7 Dec 2008 11:58:33 +0100
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c384c5ea0812061551j27c4e7eagb10e01f64d9e8668@mail.gmail.com>
+MIME-Version: 1.0
+References: <c384c5ea0812061551j27c4e7eagb10e01f64d9e8668@mail.gmail.com>
+Subject: Re: BUG? Some files in the build end up without read permission (mostly in .pc/)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,33 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Dec 2008 11:01:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 07 Dec 2008 11:02:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Sat, 2008-12-06 at 19:11 -0700, Tom Rini wrote:
-> As part of testing meta-toolchain-sbox builds on different arches, I
-> found that sbrsh, on ARM, brings in both the 2.6 kernel for the MACHINE
-> in question, as well as a 2.4 kernel.  In the case of the 2.4 kernel, it
-> first picks up poodle-kernel-2.4-embedix.bb on nokia800, which doesn't
-> work as it wants gcc-2.95, which doesn't exist.  Can I move the
-> following support to packages/obsolete/linux/ ?
-> corgi-kernel-2.4-embedix.bb
-> husky-kernel-2.4-embedix.bb
-> openzaurus-pxa_2.4.18-rmk7-pxa3-embedix20031107.bb
-> poodle255-kernel-2.4-embedix.bb
-> poodle-kernel-2.4-embedix.bb
-> shepherd-kernel-2.4-embedix.bb
-> openzaurus-pxa27x_2.4.20-rmk2-embedix20050602.bb
-> openzaurus-sa_2.4.18-rmk7-pxa3-embedix20030509.bb
+Hi Leon,
 
-These are needed for sharprom-compat. The more interesting question is
-why they were being brought in - the 2.6 version should provide
-everything they do and have preference?
+yes, I noticed this trying to copy the whole tmp/angstrom dir.
 
-Cheers,
+permission denied   /input/keyboard/sharpsl_rc.c
+...input/touchscreen/tsc2101_ts.c
+.../arm/mach-pxa/poodle_pm.c
+...asm-arm/arch-pxa/hx2750.h
 
-Richard
+The whole list here:
 
+http://www.pastebin.ca/1278657
+
+I suspect this in not intended...
+
+Andrea
 
 
