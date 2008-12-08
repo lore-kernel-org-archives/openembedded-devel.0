@@ -1,34 +1,28 @@
-Received: from [209.85.134.189] (helo=mu-out-0910.google.com)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1L9lxK-00054w-3d
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Dec 2008 20:39:46 +0100
-Received: by mu-out-0910.google.com with SMTP id w1so1232960mue.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Dec 2008 11:35:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=vvqONEwNLFZiBfZHVdhSjwPpCxQbl0UUuekDkXWIIiE=;
-	b=FEVUDs8uPQlV2L9IYu7qKdGJwAist2ePmhyyQ27dBDq4Z/EzqjFdxHdyLJI0n0qn69
-	HvLEEw6L1bjk1+Ic0wBXndUDcw7U0CCceb0o3JtcjNuxHveG0XeHFpuR7RNpeyBKlsIF
-	QJE0SMF/oAfGKSw579A++Dg2upIF4W39n3nOQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=BVt86sPy4GjQIS5gS0y9cWoRbkkegMeBxe7hBXiZR9D29EsxDNwkcNJjvm35LWSSlV
-	GczK6gbQC4nbTu1UTAJ/xKycbHNw2Ry6qsjAY+JrsGc9zBb6Zvroz1YJ81wZ9aRbat4D
-	wz0zPu2AK5Qj4y5meZQj9Rez1MAj24xBull6o=
-Received: by 10.223.113.3 with SMTP id y3mr1556954fap.71.1228764953126;
-	Mon, 08 Dec 2008 11:35:53 -0800 (PST)
-Received: by 10.223.115.200 with HTTP; Mon, 8 Dec 2008 11:35:53 -0800 (PST)
-Message-ID: <c384c5ea0812081135l44781a3fw1a43dba861a44f0f@mail.gmail.com>
-Date: Mon, 8 Dec 2008 20:35:53 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	(envelope-from <trini@kernel.crashing.org>) id 1L9mRY-0007PU-AE
+	for openembedded-devel@openembedded.org; Mon, 08 Dec 2008 21:11:00 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20081208200705.UQDP8485.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 8 Dec 2008 15:07:05 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id ok5a1a0051E665w04k6gMv; Mon, 08 Dec 2008 15:07:04 -0500
+X-Authority-Analysis: v=1.0 c=1 a=_VIQ-ywkdO8A:10 a=ceBA5YwD84MA:10
+	a=HOtL71IXdx7QqhmA8moA:9 a=E-9oj_9f8K2mOES6NlRvdTOJdhUA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Mon, 8 Dec 2008 13:05:45 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20081208200545.GM15204@smtp.west.cox.net>
+References: <c384c5ea0812081135l44781a3fw1a43dba861a44f0f@mail.gmail.com>
 MIME-Version: 1.0
-Subject: OE buildable on headless hosts?
+In-Reply-To: <c384c5ea0812081135l44781a3fw1a43dba861a44f0f@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: OE buildable on headless hosts?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,22 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Dec 2008 19:39:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Dec 2008 20:11:01 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello,
+On Mon, Dec 08, 2008 at 08:35:53PM +0100, Leon Woestenberg wrote:
+> Hello,
+> 
+> I have come across a range of problems on non-buildable stuff lately
+> and I think we are facing host-dependencies again wrt (at least)
+> GNOME.
+> 
+> How many people are building GNOME/X stuff on non-X hosts (such as
+> Ubuntu Server)?
 
-I have come across a range of problems on non-buildable stuff lately
-and I think we are facing host-dependencies again wrt (at least)
-GNOME.
+I am, and found that libx11 has a dependency on host
+/usr/include/X11/keysymdef.h (it does a very stupid does this file exist
+test) but haven't had a chance to fix it yet.
 
-How many people are building GNOME/X stuff on non-X hosts (such as
-Ubuntu Server)?
-
-Regards,
 -- 
-Leon
+Tom Rini
 
 
