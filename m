@@ -1,32 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1L9me4-0002qy-6D
-	for openembedded-devel@openembedded.org; Mon, 08 Dec 2008 21:23:56 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1L9maI-0006a8-QW
-	for openembedded-devel@openembedded.org; Mon, 08 Dec 2008 20:20:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 08 Dec 2008 20:20:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 08 Dec 2008 20:20:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 08 Dec 2008 21:19:02 +0100
-Message-ID: <ghjvfm$opa$2@ger.gmane.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1L9mho-0003nl-Tx
+	for openembedded-devel@openembedded.org; Mon, 08 Dec 2008 21:27:49 +0100
+Received: (qmail 9602 invoked by uid 813007); 8 Dec 2008 20:23:55 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@haerwu.biz@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 8 Dec 2008 20:23:55 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 8 Dec 2008 21:23:30 +0100
+User-Agent: KMail/1.10.3 (Linux/2.6.28-rc7; KDE/4.1.3; x86_64; ; )
 References: <c384c5ea0812081135l44781a3fw1a43dba861a44f0f@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081130 Shredder/3.0b1pre
-In-Reply-To: <c384c5ea0812081135l44781a3fw1a43dba861a44f0f@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+	<20081208200545.GM15204@smtp.west.cox.net>
+In-Reply-To: <20081208200545.GM15204@smtp.west.cox.net>
+MIME-Version: 1.0
+Message-Id: <200812082123.33623.openembedded@haerwu.biz>
 Subject: Re: OE buildable on headless hosts?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,25 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Dec 2008 20:23:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Dec 2008 20:27:49 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 08-12-08 20:35, Leon Woestenberg wrote:
-> Hello,
+Monday 08 of December 2008 21:05:45 Tom Rini napisa=C5=82(a):
+> On Mon, Dec 08, 2008 at 08:35:53PM +0100, Leon Woestenberg wrote:
+
+> > How many people are building GNOME/X stuff on non-X hosts (such as
+> > Ubuntu Server)?
 >
-> I have come across a range of problems on non-buildable stuff lately
-> and I think we are facing host-dependencies again wrt (at least)
-> GNOME.
->
-> How many people are building GNOME/X stuff on non-X hosts (such as
-> Ubuntu Server)?
+> I am, and found that libx11 has a dependency on host
+> /usr/include/X11/keysymdef.h (it does a very stupid does this file
+> exist test) but haven't had a chance to fix it yet.
 
-Both my build machines are headless, but do have some x11 stuff installed.
+Check xorg-lib/libx11/keysymdef_include.patch for solution. It is used=20
+in libx11_1.1.5.bb for example.
 
-regards,
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://blog.haerwu.biz/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Koen
 
 
 
