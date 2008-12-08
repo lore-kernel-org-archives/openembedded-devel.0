@@ -1,20 +1,35 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1L9U38-0005AL-J1
-	for openembedded-devel@openembedded.org; Mon, 08 Dec 2008 01:32:34 +0100
-Received: (qmail 7856 invoked by uid 1003); 8 Dec 2008 00:28:42 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 8 Dec 2008 00:28:42 -0000
-Message-ID: <493C6A38.2060507@balister.org>
-Date: Sun, 07 Dec 2008 19:28:40 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <trini@kernel.crashing.org>) id 1L9YfM-0002t1-Sg
+	for openembedded-devel@openembedded.org; Mon, 08 Dec 2008 06:28:21 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20081208052428.OXBG131.fed1rmmtao107.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 8 Dec 2008 00:24:28 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id oVQT1a00C1E665w04VQTSt; Mon, 08 Dec 2008 00:24:28 -0500
+X-Authority-Analysis: v=1.0 c=1 a=mk8h041cCT8e2Mqdi1EA:9
+	a=88yFjsj810rTLu7UJ0UJFw2F7Y8A:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sun, 7 Dec 2008 22:24:26 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20081208052426.GI15204@smtp.west.cox.net>
+References: <d2b9ea600810211323y1dd1fc11i585f26f044696de9@mail.gmail.com>
+	<20081202174141.GB16628@smtp.west.cox.net>
+	<1228250322.5456.70.camel@dax.rpnet.com>
+	<20081202212155.GG16628@smtp.west.cox.net>
+	<20081206214525.GJ16628@smtp.west.cox.net>
+	<20081207193340.GC15204@smtp.west.cox.net>
+	<ghha1f$ugd$1@ger.gmane.org>
+	<20081207201118.GD15204@smtp.west.cox.net>
+	<ghhe2j$b5p$1@ger.gmane.org>
+	<20081207211518.GF15204@smtp.west.cox.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1223383906-4111-1-git-send-email-eha@doredevelopment.dk>	<1228250322.5456.70.camel@dax.rpnet.com>	<20081202212155.GG16628@smtp.west.cox.net>	<20081206214525.GJ16628@smtp.west.cox.net>	<20081207193340.GC15204@smtp.west.cox.net>	<ghha1f$ugd$1@ger.gmane.org>	<20081207201118.GD15204@smtp.west.cox.net>	<ghhe2j$b5p$1@ger.gmane.org>	<19c1b8a90812071340o57e4542cv8452e324445c64e@mail.gmail.com>	<ghhi04$mmo$2@ger.gmane.org>
-	<19c1b8a90812071619w67f80dd6wee1be54f3fa2dca2@mail.gmail.com>
-In-Reply-To: <19c1b8a90812071619w67f80dd6wee1be54f3fa2dca2@mail.gmail.com>
+In-Reply-To: <20081207211518.GF15204@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: Canadian SDK support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,116 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Dec 2008 00:32:35 -0000
-X-Groupsio-MsgNum: 6917
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060309020505050202060609"
+X-List-Received-Date: Mon, 08 Dec 2008 05:28:21 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------ms060309020505050202060609
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Khem Raj wrote:
->> It is wrong in a way that it check for a 128bit cpu, but I can confirm that
->> running compiled fortran programs works very well with it. Using the
->> 'correct' version with '64' would cause a regression, which is not what we
->> want.
+On Sun, Dec 07, 2008 at 02:15:18PM -0700, Tom Rini wrote:
+> On Sun, Dec 07, 2008 at 10:09:39PM +0100, Koen Kooi wrote:
+> > On 07-12-08 21:11, Tom Rini wrote:
+> >> On Sun, Dec 07, 2008 at 09:00:47PM +0100, Koen Kooi wrote:
+> >>> On 07-12-08 20:33, Tom Rini wrote:
+> >>>
+> >>>> As an aside, gcc-cross-sdk on arm(v6 only?) is blowing up in fortran,
+> >>>> but I've got a git bisect narrowing that down now (30 revs left).
+> >>> gcc-cross-sdk picks the wrong patch (from files/gfortran.patch) instead
+> >>> of the correct one from gcc-4.2.4/gfortran.patch. gcc-cross *does* pick
+> >>> the right patch.
+> >>
+> >> For gcc-4.2.4.inc would it be OK to rename gfortran.patch to
+> >> gfortran-4.2.4.patch and fix this problem?
+> >
+> > If 4.2.4 is the only using it (which I doubt), that would be the way to  
+> > go. IIRC all gcc 4.2 variants (so also the dreaded csl 2007qX ones) need  
+> > the one with '64', the 4.3.x ones (including csl 2008qX) need the one  
+> > with '65'.
+> > Yes, that means the current situation is broken for csl 2007qX and 4.2.!4.
 > 
-> I see. If you have a test program or a pointer to a testcase which
-> demos this problem it would be nice.
-> I dont see this fix in trunk. Have you checked it on trunk does your
-> case fail on trunk too ?
+> OK.  So files/gfortran-4.2.patch, files/gfortran-4.3.patch?
 
-The one thing I know that uses fortran is octave. (Well, maybe fortran 
-is used by an octave dependency)
+Well, gfortran-4.1.patch, assuming gcc-4.1.2 is including one that works
+for it right now :)
 
-Philip
+-- 
+Tom Rini
 
-> 
->> regards,
->>
->> Koen
->>
->> regards,
->>
->> Koen
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
 
---------------ms060309020505050202060609
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTIwODAw
-Mjg0MFowIwYJKoZIhvcNAQkEMRYEFOjXIkGrpcpsPxDJH63m7HgEwBumMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBryDBqbZU4ur2C82u7eVn3t3nA2mhUrG4L+5x0toHFpt2xv93f
-FwYkrIeC+sTBk/UYVbDxxEuymXC/G2MFUCMf7gRzlajcNtWYr3lHKJZ4BTza8ZlYbIlBd4fl2BuN
-VLnAGIzuLQEy3mXaB1Rv/nUuS8HwywI+0hRdZjKocJSq+yXmthHB0ZoX5DFbjsmhMuhZzujS7Qap
-fyD7l6WRGB/6LXstmn8pim857QtdRzv04k2eb2nhlmwmDhcYI5t+Hn+57MgyMmVYnVbM9igwy94T
-xkVpCgW9zeI1UOQElyuDfg7jSmln9ntSAwszfzr7QN3DIRVAJ9zq1avjIM4gkfR2AAAAAAAA
-
---------------ms060309020505050202060609--
