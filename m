@@ -1,21 +1,34 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LA3or-0006Sk-SZ
-	for openembedded-devel@openembedded.org; Tue, 09 Dec 2008 15:44:14 +0100
-Received: (qmail 14010 invoked by uid 1003); 9 Dec 2008 14:40:14 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 9 Dec 2008 14:40:14 -0000
-Message-ID: <493E834D.1000508@balister.org>
-Date: Tue, 09 Dec 2008 09:40:13 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <hvontres@gmail.com>) id 1LA5tZ-0002p8-Gk
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Dec 2008 17:57:13 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so34735rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Dec 2008 08:53:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=brHDDkVvlr0BDIB/MdJpyjjCzTs74iQ7mFd+FyI8Ayk=;
+	b=qCf6g88tY5tj9y+R9XE/GTxr88fDYkGtidQRhn5lwAsmDdy3CgfGAh2r4GWoteaNNW
+	/4d9pWnjRbXn8oi441FMO1T/HH75xA+39fdoSFzbsOoNbY77UnI44vDx5ckPB40EWh7t
+	eD1HQV7G1GCUE2C+JnN6p++jFuj9pFN2yPDtM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=VRFl0Wo2LSmR3YRbJWP9iYKjuLeP1TGQCAUPNtJrgSPgWaapgyPOapn+PAWL2o6UCR
+	IpiDu/U8imwRJXYkrzjemVsLhocZJSH7Znt5os8FmjDG8VThdJM1efMfDFuJ5evffqOK
+	L6haSVLS2Am5PToU3XzCc6C3rMrgs+PgsooC4=
+Received: by 10.141.153.16 with SMTP id f16mr134928rvo.283.1228841596161;
+	Tue, 09 Dec 2008 08:53:16 -0800 (PST)
+Received: by 10.141.51.16 with HTTP; Tue, 9 Dec 2008 08:53:16 -0800 (PST)
+Message-ID: <a7f8874a0812090853xc3d6155labc81400c4bf9372@mail.gmail.com>
+Date: Tue, 9 Dec 2008 08:53:16 -0800
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <200812082037.03626.mb@bu3sch.de>	<200812091102.29043.mickey@openmoko.org>	<ghli4j$td7$2@ger.gmane.org>
-	<200812091307.25780.mickey@vanille-media.de>
-In-Reply-To: <200812091307.25780.mickey@vanille-media.de>
-Subject: Re: [PATCH] Fix compilation of Openembedded on ppc64
+Subject: Uninstall bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,100 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2008 14:44:14 -0000
-X-Groupsio-MsgNum: 6954
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050902010102020002050106"
-
---------------ms050902010102020002050106
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 09 Dec 2008 16:57:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Michael 'Mickey' Lauer wrote:
-> Am Tuesday 09 December 2008 11:43:30 schrieb Koen Kooi:
->> On 09-12-08 11:02, Michael 'Mickey' Lauer wrote:
->>> sent to org.oe.dev, thanks.
->> Could you please fix the commit message next time?
-> 
-> Do you really think it's worth it? Not a strong opinion here, but this kind of 
-> destroys the elegant workflow with 'git am' and I think we should relax the 
-> policy for patches we receive by mail.
+Hello,
+I was wondering if there were any instructions out there on how to
+"uninstall" bitbake. I have been using setup.py install to install it
+on my machine so far, but I would like to experiment with trunk now,
+so I would like to know which files I need to remove to make this
+work. Thanks,
 
-I haven't looked at the commit in question.
+-- 
+Henry von Tresckow (hvontres)
 
-We should strive to have all the commit messages use the same format. 
-The occasional exception is OK, but I don't want to see specific 
-exceptions added to the policy. Also, if the message is really bad, it 
-should be fixed. If it is marginal, let it go, but remind the source to 
-do better next time.
 
-Does this make sense?
-
-Philip
-
---------------ms050902010102020002050106
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTIwOTE0
-NDAxM1owIwYJKoZIhvcNAQkEMRYEFN2uGW10IiBMedGTYE8MuE2oBQzkMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQDEb5TpPLnTgEirPw8K3ghPiEqoaC5V9nQzZ4qvdfMI9X1SqPXG
-i2MYIYGNIfRilY2s3mvvSgeGGsOwhLrg/K+SLsOWEDJ52usAE809jaxIMskkBikWEcXoUTDuKUQB
-VXhcgwKUp+2YaG4iGK8oSmHdi1t1ege1cXORWsijv5C2Ci7l9xBwwMCikiPRViHhmEpOXIzZ6f4x
-M9SWL7hag8Zr093AFbT+oEQL6OUzK90upWMUs/buc9U0lx5fFRR6JpFt9PKEfcE1dHb9O7Wxtpok
-iqLGi2LGF+uqHzconKUJlrSsOBVYUmGiJdCyascI9xBochI/ALY6RKBTbQVabN5iAAAAAAAA
-
---------------ms050902010102020002050106--
