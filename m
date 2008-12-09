@@ -1,34 +1,28 @@
-Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
+Received: from [130.89.2.13] (helo=mx.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1LA5tZ-0002p8-Gk
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Dec 2008 17:57:13 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so34735rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Dec 2008 08:53:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=brHDDkVvlr0BDIB/MdJpyjjCzTs74iQ7mFd+FyI8Ayk=;
-	b=qCf6g88tY5tj9y+R9XE/GTxr88fDYkGtidQRhn5lwAsmDdy3CgfGAh2r4GWoteaNNW
-	/4d9pWnjRbXn8oi441FMO1T/HH75xA+39fdoSFzbsOoNbY77UnI44vDx5ckPB40EWh7t
-	eD1HQV7G1GCUE2C+JnN6p++jFuj9pFN2yPDtM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=VRFl0Wo2LSmR3YRbJWP9iYKjuLeP1TGQCAUPNtJrgSPgWaapgyPOapn+PAWL2o6UCR
-	IpiDu/U8imwRJXYkrzjemVsLhocZJSH7Znt5os8FmjDG8VThdJM1efMfDFuJ5evffqOK
-	L6haSVLS2Am5PToU3XzCc6C3rMrgs+PgsooC4=
-Received: by 10.141.153.16 with SMTP id f16mr134928rvo.283.1228841596161;
-	Tue, 09 Dec 2008 08:53:16 -0800 (PST)
-Received: by 10.141.51.16 with HTTP; Tue, 9 Dec 2008 08:53:16 -0800 (PST)
-Message-ID: <a7f8874a0812090853xc3d6155labc81400c4bf9372@mail.gmail.com>
-Date: Tue, 9 Dec 2008 08:53:16 -0800
-From: "Hans Henry von Tresckow" <hvontres@gmail.com>
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-Subject: Uninstall bitbake
+	(envelope-from <k.kooi@student.utwente.nl>) id 1LA77T-0001Q9-3F
+	for openembedded-devel@openembedded.org; Tue, 09 Dec 2008 19:15:39 +0100
+Received: from [172.20.1.5] (vpn006010.vpn.utwente.nl [130.89.6.10])
+	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id mB9IBHCn020215; 
+	Tue, 9 Dec 2008 19:11:18 +0100
+Message-Id: <5D2FB5E8-C652-4C52-B25F-3E473355AC74@student.utwente.nl>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: Michael Buesch <mb@bu3sch.de>
+In-Reply-To: <200812091903.00950.mb@bu3sch.de>
+Mime-Version: 1.0 (Apple Message framework v929.2)
+Date: Tue, 9 Dec 2008 19:11:15 +0100
+References: <200812082037.03626.mb@bu3sch.de>
+	<200812091307.25780.mickey@vanille-media.de>
+	<ghlp2t$kjl$1@ger.gmane.org> <200812091903.00950.mb@bu3sch.de>
+X-Pgp-Agent: GPGMail d51 (Leopard)
+X-Mailer: Apple Mail (2.929.2)
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Cc: openembedded-devel@openembedded.org, devel@lists.openmoko.org
+Subject: Re: [PATCH] Fix compilation of Openembedded on ppc64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,19 +36,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2008 16:57:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 09 Dec 2008 18:15:39 -0000
+X-Groupsio-MsgNum: 6956
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg=pgp-sha1; boundary="Apple-Mail-4--716510754"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
-I was wondering if there were any instructions out there on how to
-"uninstall" bitbake. I have been using setup.py install to install it
-on my machine so far, but I would like to experiment with trunk now,
-so I would like to know which files I need to remove to make this
-work. Thanks,
-
--- 
-Henry von Tresckow (hvontres)
+--Apple-Mail-4--716510754
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
+Op 9 dec 2008, om 19:03 heeft Michael Buesch het volgende geschreven:
+
+> On Tuesday 09 December 2008 13:42:04 Koen Kooi wrote:
+>> git-am should only be used for patches that are 100% correct, if they
+>> aren't, fixup is needed.
+>
+> Could you give me some hint on what you consider 100% correct,
+> so I can do it correctly next time?
+
+http://wiki.openembedded.net/index.php/Commit_Policy
+
+regards,
+
+Koen
+>
+>
+> -- 
+> Greetings, Michael.
+>
+
+
+--Apple-Mail-4--716510754
+content-type: application/pgp-signature; x-mac-type=70674453;
+	name=PGP.sig
+content-description: This is a digitally signed message part
+content-disposition: inline; filename=PGP.sig
+content-transfer-encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFJPrTFMkyGM64RGpERArEEAJ48WcBZ/9AxdtgBhvykIFzW64p4mwCfXyMu
+RooDawJbbh+Ng2TXIFCXLGY=
+=BGgs
+-----END PGP SIGNATURE-----
+
+--Apple-Mail-4--716510754--
