@@ -1,33 +1,21 @@
-Received: from [195.65.72.27] (helo=bagnes.atmel.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1LA37F-0000AY-9t
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Dec 2008 14:59:09 +0100
-Received: from fribh01.corp.atmel.com (FRIBH01 [10.175.30.10])
-	by bagnes.atmel.com (8.13.8+Sun/8.13.8) with ESMTP id mB9DoXIU000657
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 Dec 2008 05:50:36 -0800 (PST)
-Received: from frimb01.corp.atmel.com ([10.175.30.12]) by
-	fribh01.corp.atmel.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 9 Dec 2008 14:55:10 +0100
-Received: from aeglos ([172.24.49.64]) by frimb01.corp.atmel.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 9 Dec 2008 14:55:09 +0100
-Message-ID: <28EBCEAA50D843FAA61B683FEC0FBD07@aeglos>
-From: "Ulf Samuelsson" <ulf.samuelsson@atmel.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <C41AF57F04424526AD798F542197E674@aeglos><493D1A83.1070500@balister.org><48239d390812080508p7585f22bo529c8a5ebf2f438e@mail.gmail.com><8162086526F74198823FA0003D5FA08D@aeglos>	<48239d390812080709l2051390en9ec07e495eff560e@mail.gmail.com><4B4AD5DB834948B0A7AC3D8B722645A6@aeglos>
-	<493D96C3.6070009@balister.org>
-Date: Tue, 9 Dec 2008 14:43:29 +0100
+	(envelope-from <philip@balister.org>) id 1LA3or-0006Sk-SZ
+	for openembedded-devel@openembedded.org; Tue, 09 Dec 2008 15:44:14 +0100
+Received: (qmail 14010 invoked by uid 1003); 9 Dec 2008 14:40:14 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 9 Dec 2008 14:40:14 -0000
+Message-ID: <493E834D.1000508@balister.org>
+Date: Tue, 09 Dec 2008 09:40:13 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5512
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-X-OriginalArrivalTime: 09 Dec 2008 13:55:10.0007 (UTC)
-	FILETIME=[C00B4470:01C95A05]
-X-MIME-Autoconverted: from 8bit to quoted-printable by bagnes.atmel.com id
-	mB9DoXIU000657
-Subject: Re: Request for a personal git tree for AT91/AVR32
+To: openembedded-devel@lists.openembedded.org
+References: <200812082037.03626.mb@bu3sch.de>	<200812091102.29043.mickey@openmoko.org>	<ghli4j$td7$2@ger.gmane.org>
+	<200812091307.25780.mickey@vanille-media.de>
+In-Reply-To: <200812091307.25780.mickey@vanille-media.de>
+Subject: Re: [PATCH] Fix compilation of Openembedded on ppc64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,78 +29,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2008 13:59:09 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=original
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 Dec 2008 14:44:14 -0000
+X-Groupsio-MsgNum: 6954
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms050902010102020002050106"
 
->Ulf Samuelsson wrote:
->>> On Mon, Dec 8, 2008 at 4:44 PM, Ulf Samuelsson
->>> <ulf.samuelsson@atmel.com> wrote:
->>>> I ran into a problem that linux would not build because if you
->>>> use linux and request UIMAGE, then you fail because
->>>> u-boot-mkimage is not available.
->>> Well, u-boot native tools are built perfectly now, and uImages
->>> work. Try to build for afeb9260 machine, and see for yourself.
->>> I tried that yesterday, it works perfectly.
->>>
->>
->> If you can't download the source you can't build the tools.
->> It used the backup location which does not have a git server.
->> Obviously it could be a temporary problem with the main
->> location, but it is probably a bug trying to use the backup location.
->>
->> If a "stable" version is used, then the backup location can contain th=
-e
->> same source code.
->>
->> Anyway , If it normally works, then I do not need to add it!
->>
->> If people have problem, does it hurt that u-boot-1.3.4 is supported as
->> well?
->>
->> I checked with the AT91 group and they have been spending quite
->> some time to test and verify 1.3.4 on a multitude of boards so
->> it does make sense to have this supported.
->
->I'd like to see recipes for the later stable u-boots to support HW that
->is well supported by u-boot. I've been mraning to do this but haven't
->had to do this myself. Thanks for adding 1.3.4. whrn I can type with two
->arms again ...
+--------------ms050902010102020002050106
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I usually prefer typing with fingers ;-)
+Michael 'Mickey' Lauer wrote:
+> Am Tuesday 09 December 2008 11:43:30 schrieb Koen Kooi:
+>> On 09-12-08 11:02, Michael 'Mickey' Lauer wrote:
+>>> sent to org.oe.dev, thanks.
+>> Could you please fix the commit message next time?
+> 
+> Do you really think it's worth it? Not a strong opinion here, but this kind of 
+> destroys the elegant workflow with 'git am' and I think we should relax the 
+> policy for patches we receive by mail.
 
->
->Philip
->
->If no gets to it, I'll look at i
->>
+I haven't looked at the commit in question.
 
-Thanks,
+We should strive to have all the commit messages use the same format. 
+The occasional exception is OK, but I don't want to see specific 
+exceptions added to the policy. Also, if the message is really bad, it 
+should be fixed. If it is marginal, let it go, but remind the source to 
+do better next time.
 
-The sooner I get access, the sooner I can provide the updates.
+Does this make sense?
 
+Philip
 
->> Is the "personal" git tree really personal, or can you have
->> a git tree which is available to a group?
->>
->> It makes sense for me to have an "atmel" group which I
->> could share with other interested atmel employees.
->>
->> Who is making decisions on access?
->>
->> Best Regards
->> Ulf Samuelsson
->>
+--------------ms050902010102020002050106
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-Best Regards
-Ulf Samuelsson                ulf@atmel.com
-Atmel Nordic AB
-Mail:  Box 2033, 174 02 Sundbyberg, Sweden
-Visit:  Kavalleriv=E4gen 24, 174 58 Sundbyberg, Sweden
-Phone +46 (8) 441 54 22     Fax +46 (8) 441 54 29
-GSM    +46 (706) 22 44 57
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTIwOTE0
+NDAxM1owIwYJKoZIhvcNAQkEMRYEFN2uGW10IiBMedGTYE8MuE2oBQzkMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQDEb5TpPLnTgEirPw8K3ghPiEqoaC5V9nQzZ4qvdfMI9X1SqPXG
+i2MYIYGNIfRilY2s3mvvSgeGGsOwhLrg/K+SLsOWEDJ52usAE809jaxIMskkBikWEcXoUTDuKUQB
+VXhcgwKUp+2YaG4iGK8oSmHdi1t1ege1cXORWsijv5C2Ci7l9xBwwMCikiPRViHhmEpOXIzZ6f4x
+M9SWL7hag8Zr093AFbT+oEQL6OUzK90upWMUs/buc9U0lx5fFRR6JpFt9PKEfcE1dHb9O7Wxtpok
+iqLGi2LGF+uqHzconKUJlrSsOBVYUmGiJdCyascI9xBochI/ALY6RKBTbQVabN5iAAAAAAAA
 
-
-
-
+--------------ms050902010102020002050106--
