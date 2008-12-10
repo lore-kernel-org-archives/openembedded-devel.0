@@ -1,37 +1,32 @@
-Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1LAXag-00048Y-Og
+	(envelope-from <stefan@datenfreihafen.org>) id 1LAYrq-0002Vp-Bl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Dec 2008 23:31:34 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so646694rvb.12
+	Thu, 11 Dec 2008 00:53:22 +0100
+Received: from p5b0369ce.dip.t-dialin.net ([91.3.105.206] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1LAYnt-0004ya-CY by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2008 14:27:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=j7F90i1sutRuPfZ9Igh4gOVWaydF51kEuXiT389qhZw=;
-	b=Yh1dObzrJ6x5juGPS1QTjswNkznGlyQ2pNR4pnFMQpdgC8nQaKzQQ0+9FNkwWC3aS4
-	xqpgzOmqchnH6+9+1B6ehD3oqK0ZK/J14v5yUZGi3FReWTuMniHBjp3FN6hRUmAjZzsN
-	2apmQAm5HWFdP8jUv9lpfHVcIOHB9Qn+ynqBs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=acczDFX84rmgJMLrGyRJWPATvGBv5mFGLqiiKN60rNi+uM0NkzCpPJ+TvpK+PsC5Nv
-	p4CrcE2LcYDje2rCQGtuB++0LfL6nsyR/R0dYbjeap7sEFyIhjbjMfvuVqsfoUjYejJk
-	A8Dv+xzx21BRJJbQ4UmYewUKrNabjSpqNEEWE=
-Received: by 10.140.165.21 with SMTP id n21mr564362rve.240.1228948051776;
-	Wed, 10 Dec 2008 14:27:31 -0800 (PST)
-Received: by 10.141.142.17 with HTTP; Wed, 10 Dec 2008 14:27:31 -0800 (PST)
-Message-ID: <f96d234e0812101427r4afef700t6e8ea5ae77e71a40@mail.gmail.com>
-Date: Wed, 10 Dec 2008 17:27:31 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
+	Thu, 11 Dec 2008 00:49:20 +0100
+Received: from stefan by excalibur.local with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1LAYnn-0001fB-0I
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Dec 2008 00:49:11 +0100
+Date: Thu, 11 Dec 2008 00:49:10 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1228945243.8200.16.camel@getafix>
+Message-ID: <20081210234910.GA16050@excalibur.local>
 MIME-Version: 1.0
-References: <1228945243.8200.16.camel@getafix>
-Subject: Re: Building minimal-image with kernel24
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: [RFC] Ship dbus config and dbus service activation files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +40,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Dec 2008 22:31:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Dec 2008 23:53:22 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Dec 10, 2008 at 4:40 PM, Joshua Lamorie <jpl@xiphos.ca> wrote:
+Hello.
 
-> p.s. Where is it possible to contribute to the OE manual?
+While playing to get connman 0.1 running I found that we don't ship two files in
+the wpa-supplicant that come in handy.
 
-Check the following branch out of git, and then post patch to bugzilla.
+/etc/dbus-1/system.d/dbus-wpa_supplicant.conf
 
-http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/org.openembedded.documentation
+That one is really needed. Without it a wpa-supplicant -u barks out about wrong
+security.
 
-Thanks,
-Cliff
+/usr/share/dbus-1/system-services/dbus-wpa_supplicant.service
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+This one is a nice-to-have. It allows autostart the service with the service
+activation infrastructure from dbus. If a bus name listed in such a file is
+called and not available it gets started the way described in this file.
+
+The following patch i nstalls the files correctly for me. Never used FILES_${PN}
+before so I would like to get some review before.
+
+diff --git a/packages/wpa-supplicant/wpa-supplicant-0.6.inc b/packages/wpa-supplicant/wpa-supplicant-0.6.inc
+index 6198958..779bee7 100644
+--- a/packages/wpa-supplicant/wpa-supplicant-0.6.inc
++++ b/packages/wpa-supplicant/wpa-supplicant-0.6.inc
+@@ -59,7 +59,14 @@ do_install () {
+ 	install -d ${D}${sysconfdir}/wpa_supplicant
+ 	install -m 755 ${WORKDIR}/ifupdown.sh ${D}${sysconfdir}/wpa_supplicant/
+ 	install -m 755 ${WORKDIR}/functions.sh ${D}${sysconfdir}/wpa_supplicant
+-	
++
++	install -d ${D}/${sysconfdir}/dbus-1/system.d
++	install -m 644 ${S}/dbus-wpa_supplicant.conf ${D}/${sysconfdir}/dbus-1/system.d
++	install -d ${D}/${datadir}/dbus-1/system-services
++	install -m 644 ${S}/dbus-wpa_supplicant.service ${D}/${datadir}/dbus-1/system-services
++
+ 	ln -s /etc/wpa_supplicant/ifupdown.sh ${D}${sysconfdir}/network/if-pre-up.d/wpasupplicant
+ 	ln -s /etc/wpa_supplicant/ifupdown.sh ${D}${sysconfdir}/network/if-post-down.d/wpasupplicant
+ }
++
++FILES_${PN} += "${datadir}/dbus-1/system-services/*"
+diff --git a/packages/wpa-supplicant/wpa-supplicant_0.6.0.bb b/packages/wpa-supplicant/wpa-supplicant_0.6.0.bb
+index d20ccaa..11fc774 100644
+--- a/packages/wpa-supplicant/wpa-supplicant_0.6.0.bb
++++ b/packages/wpa-supplicant/wpa-supplicant_0.6.0.bb
+@@ -1,3 +1,3 @@
+ require wpa-supplicant-0.6.inc
+ 
+-PR = "r1"
++PR = "r2"
+diff --git a/packages/wpa-supplicant/wpa-supplicant_0.6.3.bb b/packages/wpa-supplicant/wpa-supplicant_0.6.3.bb
+index d20ccaa..11fc774 100644
+--- a/packages/wpa-supplicant/wpa-supplicant_0.6.3.bb
++++ b/packages/wpa-supplicant/wpa-supplicant_0.6.3.bb
+@@ -1,3 +1,3 @@
+ require wpa-supplicant-0.6.inc
+ 
+-PR = "r1"
++PR = "r2"
+
+Anyone objections?
+
+regards
+Stefan Schmidt
 
 
