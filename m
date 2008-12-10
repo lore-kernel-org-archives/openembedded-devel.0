@@ -1,24 +1,37 @@
-Received: from [66.216.121.161] (helo=smtp161.sat.emailsrvr.com)
+Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jpl@xiphos.ca>) id 1LAWrP-0006Yk-QZ
+	(envelope-from <cliff.brake@gmail.com>) id 1LAXag-00048Y-Og
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Dec 2008 22:44:48 +0100
-Received: from relay6.relay.sat.mlsrvr.com (localhost [127.0.0.1])
-	by relay6.relay.sat.mlsrvr.com (SMTP Server) with ESMTP id C14521B4D15
+	Wed, 10 Dec 2008 23:31:34 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so646694rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2008 16:40:43 -0500 (EST)
-Received: by relay6.relay.sat.mlsrvr.com (Authenticated sender:
-	jpl-AT-xiphos.com) with ESMTPSA id 8CD681B4D3A
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2008 16:40:43 -0500 (EST)
-From: Joshua Lamorie <jpl@xiphos.ca>
+	Wed, 10 Dec 2008 14:27:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=j7F90i1sutRuPfZ9Igh4gOVWaydF51kEuXiT389qhZw=;
+	b=Yh1dObzrJ6x5juGPS1QTjswNkznGlyQ2pNR4pnFMQpdgC8nQaKzQQ0+9FNkwWC3aS4
+	xqpgzOmqchnH6+9+1B6ehD3oqK0ZK/J14v5yUZGi3FReWTuMniHBjp3FN6hRUmAjZzsN
+	2apmQAm5HWFdP8jUv9lpfHVcIOHB9Qn+ynqBs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=acczDFX84rmgJMLrGyRJWPATvGBv5mFGLqiiKN60rNi+uM0NkzCpPJ+TvpK+PsC5Nv
+	p4CrcE2LcYDje2rCQGtuB++0LfL6nsyR/R0dYbjeap7sEFyIhjbjMfvuVqsfoUjYejJk
+	A8Dv+xzx21BRJJbQ4UmYewUKrNabjSpqNEEWE=
+Received: by 10.140.165.21 with SMTP id n21mr564362rve.240.1228948051776;
+	Wed, 10 Dec 2008 14:27:31 -0800 (PST)
+Received: by 10.141.142.17 with HTTP; Wed, 10 Dec 2008 14:27:31 -0800 (PST)
+Message-ID: <f96d234e0812101427r4afef700t6e8ea5ae77e71a40@mail.gmail.com>
+Date: Wed, 10 Dec 2008 17:27:31 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Organization: Xiphos Technologies Inc.
-Date: Wed, 10 Dec 2008 16:40:43 -0500
-Message-Id: <1228945243.8200.16.camel@getafix>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.3 (2.12.3-5.fc8) 
-Subject: Building minimal-image with kernel24
+In-Reply-To: <1228945243.8200.16.camel@getafix>
+MIME-Version: 1.0
+References: <1228945243.8200.16.camel@getafix>
+Subject: Re: Building minimal-image with kernel24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,72 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Dec 2008 21:44:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Dec 2008 22:31:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Gidday there,
+On Wed, Dec 10, 2008 at 4:40 PM, Joshua Lamorie <jpl@xiphos.ca> wrote:
 
-I'm trying to move my development system from buildroot to
-openembedded.  
+> p.s. Where is it possible to contribute to the OE manual?
 
-My embedded platform is based on a Virtex-II Pro/Virtex-4 PPC405 and for
-various reasons is stuck in linux 2.4.  I've used the xilinx-ml430
-machine as an example, and the minimal distro and modified
-PREFERRED_PROVIDER_virtual/kernel to refer to a .bb file that I've made
-for my 2.4 kernel.
+Check the following branch out of git, and then post patch to bugzilla.
 
-However, when I go to bitbake minimal-image, it keeps trying to build
-kernel 2.6.
+http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/org.openembedded.documentation
 
-Are there examples of machines/distros that use 2.4?  How can I tell
-where the currently building package was commanded from?  I've tried to
-add more debugging, but is there a log somewhere which is insanely
-verbose?
-
-Is there a way to build a simple image without the kernel?
-
-Part of the output when I run 'bitbake -v minimal-image' is the
-following.
-
-NOTE: checking PREFERRED_PROVIDER_virtual/kernel
-NOTE: checking PREFERRED_PROVIDER_linux-rt-2.6.24
-NOTE: checking PREFERRED_PROVIDER_linux-rt-2.6.24-r6
-NOTE: multiple providers are available for runtime kernel-image (linux,
-gumstix-kernel, linux-rt);
-NOTE: consider defining a PREFERRED_PROVIDER entry to match runtime
-kernel-image
-
-What does this mean define a PREFERRED_PROVIDER entry to match 'runtime
-kernel-image'?  What is the 'runtime kernel-image'?
-
-When I run this interactively, (with build minimal-image) and I ask to
-display some variables, I get the following:
-
-BB>> getvar PREFERRED_PROVIDER_virtual/kernel
-linux-q5-2.4.32.2
-
-That is the kernel that I want.
-
-So, why does it do so much checking?  Where can I see some debug output that says, here
-are all the packages I'm going to build?
-
-Thanks in advance for your assistance.
-
-Joshua
-
-p.s. Where is it possible to contribute to the OE manual?
+Thanks,
+Cliff
 
 -- 
-Xiphos Technologies Inc.
-T: 514.847.9474 x 227
-F: 514.847.9474
-
-________________________________________________________________________
-The information transmitted is intended only for the person or entity to
-which it is addressed and may contain confidential and/or privileged
-material. If you have received this in error, please contact the sender
-and delete this communication and any copy immediately. Thank you.
-
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
