@@ -1,37 +1,28 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [74.125.78.148] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LAlhQ-0001va-Q3
+	(envelope-from <dp@xora.org.uk>) id 1LAloW-0002Jx-NA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 14:35:29 +0100
-Received: from p5b0369ce.dip.t-dialin.net ([91.3.105.206] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LAldR-0005OO-7w by authid <stefan@sostec.de> with cram_md5
+	Thu, 11 Dec 2008 14:42:48 +0100
+Received: by ey-out-1920.google.com with SMTP id 4so143928eyg.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2008 14:31:23 +0100
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1LAldK-00021B-Gp
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 14:31:14 +0100
-Date: Thu, 11 Dec 2008 14:31:14 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Thu, 11 Dec 2008 05:38:43 -0800 (PST)
+Received: by 10.210.104.20 with SMTP id b20mr3196014ebc.123.1229002723431;
+	Thu, 11 Dec 2008 05:38:43 -0800 (PST)
+Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id f13sm965718gvd.8.2008.12.11.05.38.41
+	(version=SSLv3 cipher=RC4-MD5); Thu, 11 Dec 2008 05:38:42 -0800 (PST)
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081211133114.GC9378@excalibur.local>
-References: <20081210234910.GA16050@excalibur.local> <49405BD7.2010801@gmx.de>
-	<200812110137.01104.mickey@vanille-media.de>
-	<4940650B.1000802@dls.net> <ghqgho$r9j$1@ger.gmane.org>
-	<49410819.6040302@dls.net>
-	<d1b08f940812110506u48443c9ek4a523695d47496dd@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <d1b08f940812110506u48443c9ek4a523695d47496dd@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
+In-Reply-To: <20081211132221.GA9378@excalibur.local>
+References: <20081210234910.GA16050@excalibur.local>
+	<49405BD7.2010801@gmx.de> <ghqjue$4fe$1@ger.gmane.org>
+	<d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
+	<20081211132221.GA9378@excalibur.local>
+Date: Thu, 11 Dec 2008 13:38:40 +0000
+Message-Id: <1229002720.7018.0.camel@aquilonia>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.2 
 Subject: Re: [RFC] Ship dbus config and dbus service activation files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,25 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 13:35:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Dec 2008 13:42:49 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hello.
+On Thu, 2008-12-11 at 14:22 +0100, Stefan Schmidt wrote:
+> Hello.
+> 
+> On Thu, 2008-12-11 at 10:37, Andrea Adami wrote:
+> > About connman, last time I built it I noticed it depends on
+> > 'resolvconf' which depends on 'bash'.
+> > 
+> > Is it right?
+> 
+> I don't remember if it was resolvconf or if it was dhclient, but one of it
+> pulled in bash. This may indeed be worth trying out the alternative Koen pointed
+> out.
+> 
+dhclient certainly used to use a script full of bashisms called when the
+IP address is discovered. I had fun patching that one for NetworkManager
 
-On Thu, 2008-12-11 at 14:06, Andrea Adami wrote:
-> Guys..don't get so rude...
+Graeme
 
-Hehe, that's ok. Getting used to rude email discussion over the years due to
-various FOSS projects. :)
 
-> Stefan, I think you have enough input to improve connman. This could
-> become a very nice proggy!
-
-I hope so. Will see what else needs fixing over the next weeks will getting it
-running on the phone.
-
-regards
-Stefan Schmidt
 
 
