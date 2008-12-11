@@ -1,24 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1LAZI7-00035I-C5
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <stefan@datenfreihafen.org>) id 1LAZZ0-0000RE-SE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 01:20:31 +0100
-Received: (qmail invoked by alias); 11 Dec 2008 00:16:26 -0000
-Received: from BAA57ca.baa.pppool.de (EHLO [192.168.178.35]) [77.128.87.202]
-	by mail.gmx.net (mp012) with SMTP; 11 Dec 2008 01:16:26 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX19r2vkPATFrjnBrDd4fzh9cut6dbnVMhOCuRE6Frh
-	7AD8F0HXK7fgKw
-Message-ID: <49405BD7.2010801@gmx.de>
-Date: Thu, 11 Dec 2008 01:16:23 +0100
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Thunderbird 2.0.0.18 (Windows/20081105)
-MIME-Version: 1.0
+	Thu, 11 Dec 2008 01:37:59 +0100
+Received: from p5b0369ce.dip.t-dialin.net ([91.3.105.206] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1LAZV4-0005sb-3e by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Dec 2008 01:33:56 +0100
+Received: from stefan by excalibur.local with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1LAZUx-0001kT-RJ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Dec 2008 01:33:47 +0100
+Date: Thu, 11 Dec 2008 01:33:47 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-References: <20081210234910.GA16050@excalibur.local>
-In-Reply-To: <20081210234910.GA16050@excalibur.local>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.71
+Message-ID: <20081211003347.GC16050@excalibur.local>
+References: <20081210234910.GA16050@excalibur.local> <49405BD7.2010801@gmx.de>
+MIME-Version: 1.0
+In-Reply-To: <49405BD7.2010801@gmx.de>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
 Subject: Re: [RFC] Ship dbus config and dbus service activation files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,35 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 00:20:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Dec 2008 00:37:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Stefan Schmidt schrieb:
-> Hello.
->
-> While playing to get connman 0.1 running I found that we don't ship two files in
-> the wpa-supplicant that come in handy.
->
-> /etc/dbus-1/system.d/dbus-wpa_supplicant.conf
->
-> That one is really needed. Without it a wpa-supplicant -u barks out about wrong
-> security.
->
-> /usr/share/dbus-1/system-services/dbus-wpa_supplicant.service
->
-> This one is a nice-to-have. It allows autostart the service with the service
-> activation infrastructure from dbus. If a bus name listed in such a file is
-> called and not available it gets started the way described in this file.
->
-> The following patch i nstalls the files correctly for me. Never used FILES_${PN}
-> before so I would like to get some review before.
->   
-Maybe its better to create a package wpasupplicant-dbus. IMO we should 
-try to split packages if we can and  the dbus
-functionallity is clearly separable from wpasupplicant core functions.
+Hello.
 
-Regards,
-Thomas
+On Thu, 2008-12-11 at 01:16, Thomas Kunze wrote:
+> Stefan Schmidt schrieb:
+
+>> The following patch i nstalls the files correctly for me. Never used FILES_${PN}
+>> before so I would like to get some review before.
+>>   
+> Maybe its better to create a package wpasupplicant-dbus. IMO we should  
+> try to split packages if we can and  the dbus
+> functionallity is clearly separable from wpasupplicant core functions.
+
+I wouldn't mind. Where would you like to draw the line for such a split? Just
+the dbus specific files or a wpa-supplicant version without and one with dbus
+enabled?
+
+If it is only about these two file it may not be worth the effort. I'm open
+about this though.
+
+regards
+Stefan Schmidt
 
 
