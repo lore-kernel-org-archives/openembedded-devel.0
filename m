@@ -1,33 +1,39 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LAl3Q-0003qe-TS
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 13:54:10 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LAkzS-0003Hf-UC
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 12:50:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 11 Dec 2008 12:50:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 11 Dec 2008 12:50:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 11 Dec 2008 13:45:50 +0100
-Message-ID: <ghr21u$ejp$1@ger.gmane.org>
-References: <20081210234910.GA16050@excalibur.local>	<49405BD7.2010801@gmx.de>	<200812110137.01104.mickey@vanille-media.de>	<4940650B.1000802@dls.net>	<ghqgho$r9j$1@ger.gmane.org>
-	<49410819.6040302@dls.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081205 Shredder/3.0b2pre
+	(envelope-from <andrea.adami@gmail.com>) id 1LAlLF-0004LG-SR
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Dec 2008 14:12:33 +0100
+Received: by bwz8 with SMTP id 8so992835bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Dec 2008 05:08:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=wMbEE8V4FoXLUYLNzMTIVqDQ9xGZbdRDCvudbJSXIqc=;
+	b=bZtG2tBBvTju+10nRj7wPWGOkhmlZTJM7D1ze2rXKH+Kx1UXXaPGNsH3+L60NVsdik
+	Cq0/ISFjxTWEBLtB62DRbJCSmpPcx7zcdaE72xPOb2aWhNxa0clDi37spyK5mQhRetYH
+	SEwhSVyAGzNYB3EoQotCMT2Bp5/exSFyur658=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=xy501V0IaZXra3oCDoMUJLbrWAwkCouMc5qk63De97antBAqUNcy8v4jMhnQFxohvH
+	tKmJSnvdcArO8J3E2cxzQXY73zKBxJAbqC1cYFzsRwg+apdEDYZBhOW/TTIGiiCJhNO3
+	NvLJtOKie76D+QKOimH9vS70T3MaWaW4YltcU=
+Received: by 10.180.222.14 with SMTP id u14mr864198bkg.141.1229000810057;
+	Thu, 11 Dec 2008 05:06:50 -0800 (PST)
+Received: by 10.180.232.19 with HTTP; Thu, 11 Dec 2008 05:06:49 -0800 (PST)
+Message-ID: <d1b08f940812110506u48443c9ek4a523695d47496dd@mail.gmail.com>
+Date: Thu, 11 Dec 2008 14:06:49 +0100
+From: "Andrea Adami" <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <49410819.6040302@dls.net>
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+References: <20081210234910.GA16050@excalibur.local> <49405BD7.2010801@gmx.de>
+	<200812110137.01104.mickey@vanille-media.de>
+	<4940650B.1000802@dls.net> <ghqgho$r9j$1@ger.gmane.org>
+	<49410819.6040302@dls.net>
 Subject: Re: [RFC] Ship dbus config and dbus service activation files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,38 +48,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 12:54:16 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 11 Dec 2008 13:12:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 11-12-08 13:31, Mike (mwester) wrote:
-> Koen Kooi rudely writes:
->> On 11-12-08 01:55, Mike (mwester) wrote:
->>
->> http://www.angstrom-distribution.org/repo/?pkgname=dbus-1
->> http://www.angstrom-distribution.org/repo/?pkgname=libdbus-1-3
->>
->> Now where do you see it the _packages_ depending on libx11-6? Is dbus
->> going to be the new python where everybody starts screaming about
->> requiring X at runtime, when it's only a buildtime dep to build an
->> *optional* subpackage like python-tk? Please stop with the FUD.
+Guys..don't get so rude...
+
+Back to the topic:
+
+>Anyone objections?
 >
-> dbus-1 recommends dbus-x11, dbus-x11 depends libx11-6 (and other X libs).
->
-> So there you go, opkg install<anything-depending-on-dbus>  blows up your
-> flash space by pulling in numerous X libs.  No FUD - very real concern.
->   (But if it's not a concern for Angstrom, then fine -- please ignore
-> this issue; if I fix it, I'll make sure that it won't change for Angstrom.)
+>regards
+>Stefan Schmidt
 
-Angstrom actually does the right things:
+Stefan, I think you have enough input to improve connman. This could
+become a very nice proggy!
 
-packagees/angstrom/angstrom-x11-base-depends.bb:  dbus-x11 \
-
-It will drag in dbus-x11 when people want an image with an xserver in it.
-
-regards,
-
-Koen
-
+Regards
+Andrea
 
 
