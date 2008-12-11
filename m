@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LAkwX-0003ln-Gc
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 13:47:13 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LAksX-000315-0m
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 12:42:53 +0000
+	id 1LAl3Q-0003qe-TS
+	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 13:54:10 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LAkzS-0003Hf-UC
+	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 12:50:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 11 Dec 2008 12:42:48 +0000
+	Thu, 11 Dec 2008 12:50:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 11 Dec 2008 12:42:48 +0000
+	Thu, 11 Dec 2008 12:50:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 11 Dec 2008 13:42:40 +0100
-Message-ID: <ghr1s1$ebn$1@ger.gmane.org>
+Date: Thu, 11 Dec 2008 13:45:50 +0100
+Message-ID: <ghr21u$ejp$1@ger.gmane.org>
 References: <20081210234910.GA16050@excalibur.local>	<49405BD7.2010801@gmx.de>	<200812110137.01104.mickey@vanille-media.de>	<4940650B.1000802@dls.net>	<ghqgho$r9j$1@ger.gmane.org>
 	<49410819.6040302@dls.net>
 Mime-Version: 1.0
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 12:47:22 -0000
+X-List-Received-Date: Thu, 11 Dec 2008 12:54:16 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -65,18 +65,15 @@ On 11-12-08 13:31, Mike (mwester) wrote:
 >   (But if it's not a concern for Angstrom, then fine -- please ignore
 > this issue; if I fix it, I'll make sure that it won't change for Angstrom.)
 
-That rrecommends shouldn't be there specifically for the reasons you 
-mentioned. I don't notice it since I looked up the old package name 
-'dbus-1' instead of the new one 'dbus', sorry about that.
+Angstrom actually does the right things:
+
+packagees/angstrom/angstrom-x11-base-depends.bb:  dbus-x11 \
+
+It will drag in dbus-x11 when people want an image with an xserver in it.
 
 regards,
 
 Koen
-
->
-> Regards
-> Mike (mwester)
-
 
 
 
