@@ -1,36 +1,25 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LAlYq-0001aD-7F
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thommycheck@gmx.de>) id 1LAldz-0001ku-GA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 14:26:36 +0100
-Received: from p5b0369ce.dip.t-dialin.net ([91.3.105.206] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LAlUq-0005Aj-Dm by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2008 14:22:31 +0100
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1LAlUj-0001yn-LB
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 14:22:21 +0100
-Date: Thu, 11 Dec 2008 14:22:21 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081211132221.GA9378@excalibur.local>
-References: <20081210234910.GA16050@excalibur.local> <49405BD7.2010801@gmx.de>
-	<ghqjue$4fe$1@ger.gmane.org>
-	<d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
+	Thu, 11 Dec 2008 14:31:55 +0100
+Received: (qmail invoked by alias); 11 Dec 2008 13:27:48 -0000
+Received: from p57BB6B5D.dip.t-dialin.net (EHLO [192.168.2.2]) [87.187.107.93]
+	by mail.gmx.net (mp062) with SMTP; 11 Dec 2008 14:27:48 +0100
+X-Authenticated: #2218979
+X-Provags-ID: V01U2FsdGVkX1+1K9YCQ+y1p6BLwn5UJv3ghE/oHiuSZrO+hVfp8G
+	ChxKbj/kK4CtWG
+Message-ID: <49411549.6040207@gmx.de>
+Date: Thu, 11 Dec 2008 14:27:37 +0100
+From: Thomas Kunze <thommycheck@gmx.de>
+User-Agent: Thunderbird 2.0.0.18 (Windows/20081105)
 MIME-Version: 1.0
-In-Reply-To: <d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: [RFC] Ship dbus config and dbus service activation files
+To: openembedded-devel@lists.openembedded.org
+References: <4940CB67.7090107@gmx.net>
+In-Reply-To: <4940CB67.7090107@gmx.net>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.7
+Subject: Re: Write access for Ulf Samuelsson
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,26 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 13:26:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Dec 2008 13:31:55 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
+Robert Schuster schrieb:
+> Hi all,
+> I hereby ask to add Ulf Samuelsson of Atmel fame to the OpenEmbedded
+> contributors and give him write access to our Git repository.
+>
+> AFAIU Ulf is going to work on support for devices that feature Atmel
+> CPUs like the AT91SAM or AVR32 ones.
+>
+> Furthermore it is likely that Ulf by himself will propose co-workers who
+> should get write access for OpenEmbedded.
+>
+> Regards
+> Robert
+>
+>   
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
++1
 
-On Thu, 2008-12-11 at 10:37, Andrea Adami wrote:
-> About connman, last time I built it I noticed it depends on
-> 'resolvconf' which depends on 'bash'.
-> 
-> Is it right?
-
-I don't remember if it was resolvconf or if it was dhclient, but one of it
-pulled in bash. This may indeed be worth trying out the alternative Koen pointed
-out.
-
-This is low prio on my list until I get wpa-supplicant and therfor connman find
-my device at all and start doing something usefull with it.
-
-regards
-Stefan Schmidt
+Regards,
+Thomas
 
 
