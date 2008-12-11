@@ -1,21 +1,38 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LAhwZ-0007fQ-OS
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 10:34:51 +0100
-Received: (qmail 18881 invoked by uid 813007); 11 Dec 2008 09:30:46 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@haerwu.biz@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 11 Dec 2008 09:30:46 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <andrea.adami@gmail.com>) id 1LAi35-0007s4-GL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Dec 2008 10:41:36 +0100
+Received: by bwz8 with SMTP id 8so768692bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Dec 2008 01:37:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=b63MIQ769hYbxXYK2+MlavTKv+v52obDVnV01NBrGJ4=;
+	b=NntSNAHlqW9veXIttdNM7fQ/gl6+ymFXhd4iZIkVe4drUjIqUvuA4C+h3ZXejqDSe5
+	btCj0R54f41VtxHdffLFxkcyIF1Z0qy0ZkGgaAE8qED4yaV/fv/rv5eX9eZBxaXspcXg
+	Tk5YX6N+HR9eTI8OpIveAkxvqPhVafBm+LwnU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=YI3Cf4Vv2qEfRNvv6vdOr6WSFno84ehFb6rn6JkX0Tcn1RPq+A/sox4YMTgPb+Ajxs
+	JAWq8J0nJpYl4uAERy7zOY7LNHuhm3URng7H48EtLLkw21i/ZSorQy3DQ9JC9Sz1iAeT
+	QaY6NTx2r1OmOWEChcsRx1lWywYFYQqyNF0fU=
+Received: by 10.181.60.13 with SMTP id n13mr809761bkk.92.1228988245399;
+	Thu, 11 Dec 2008 01:37:25 -0800 (PST)
+Received: by 10.180.232.19 with HTTP; Thu, 11 Dec 2008 01:37:25 -0800 (PST)
+Message-ID: <d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
+Date: Thu, 11 Dec 2008 10:37:25 +0100
+From: "Andrea Adami" <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Dec 2008 10:30:19 +0100
-User-Agent: KMail/1.10.3 (Linux/2.6.28-rc7; KDE/4.1.3; x86_64; ; )
-References: <4940CB67.7090107@gmx.net>
-In-Reply-To: <4940CB67.7090107@gmx.net>
+In-Reply-To: <ghqjue$4fe$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200812111030.20028.openembedded@haerwu.biz>
-Subject: Re: Write access for Ulf Samuelsson
+References: <20081210234910.GA16050@excalibur.local> <49405BD7.2010801@gmx.de>
+	<ghqjue$4fe$1@ger.gmane.org>
+Subject: Re: [RFC] Ship dbus config and dbus service activation files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,28 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 09:34:52 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Dec 2008 09:41:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Thursday 11 of December 2008 09:12:23 Robert Schuster napisa=C5=82(a):
-> Hi all,
-> I hereby ask to add Ulf Samuelsson of Atmel fame to the OpenEmbedded
-> contributors and give him write access to our Git repository.
->
-> AFAIU Ulf is going to work on support for devices that feature Atmel
-> CPUs like the AT91SAM or AVR32 ones.
+About connman, last time I built it I noticed it depends on
+'resolvconf' which depends on 'bash'.
 
-+1
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://blog.haerwu.biz/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Is it right?
 
 
+TIA
+
+Andrea
 
 
