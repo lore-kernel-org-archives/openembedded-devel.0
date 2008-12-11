@@ -1,26 +1,29 @@
 Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LAlfN-0001ox-T3
+	(envelope-from <stefan@datenfreihafen.org>) id 1LAlhQ-0001va-Q3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 14:33:22 +0100
+	Thu, 11 Dec 2008 14:35:29 +0100
 Received: from p5b0369ce.dip.t-dialin.net ([91.3.105.206] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LAlbN-0005Id-Fp by authid <stefan@sostec.de> with cram_md5
+	id 1LAldR-0005OO-7w by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2008 14:29:17 +0100
+	Thu, 11 Dec 2008 14:31:23 +0100
 Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1LAlbG-00020T-Tt
+	(envelope-from <stefan@excalibur.local>) id 1LAldK-00021B-Gp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 14:29:06 +0100
-Date: Thu, 11 Dec 2008 14:29:06 +0100
+	Thu, 11 Dec 2008 14:31:14 +0100
+Date: Thu, 11 Dec 2008 14:31:14 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081211132906.GB9378@excalibur.local>
+Message-ID: <20081211133114.GC9378@excalibur.local>
 References: <20081210234910.GA16050@excalibur.local> <49405BD7.2010801@gmx.de>
-	<20081211003347.GC16050@excalibur.local>
+	<200812110137.01104.mickey@vanille-media.de>
+	<4940650B.1000802@dls.net> <ghqgho$r9j$1@ger.gmane.org>
+	<49410819.6040302@dls.net>
+	<d1b08f940812110506u48443c9ek4a523695d47496dd@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20081211003347.GC16050@excalibur.local>
+In-Reply-To: <d1b08f940812110506u48443c9ek4a523695d47496dd@mail.gmail.com>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -43,40 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 13:33:22 -0000
+X-List-Received-Date: Thu, 11 Dec 2008 13:35:29 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Thu, 2008-12-11 at 01:33, Stefan Schmidt wrote:
-> 
-> On Thu, 2008-12-11 at 01:16, Thomas Kunze wrote:
-> > Stefan Schmidt schrieb:
-> 
-> >> The following patch i nstalls the files correctly for me. Never used FILES_${PN}
-> >> before so I would like to get some review before.
-> >>   
-> > Maybe its better to create a package wpasupplicant-dbus. IMO we should  
-> > try to split packages if we can and  the dbus
-> > functionallity is clearly separable from wpasupplicant core functions.
-> 
-> I wouldn't mind. Where would you like to draw the line for such a split? Just
-> the dbus specific files or a wpa-supplicant version without and one with dbus
-> enabled?
+On Thu, 2008-12-11 at 14:06, Andrea Adami wrote:
+> Guys..don't get so rude...
 
-As we have sorted out the dbus depends on libX11 now it would be interesting if
-people still think that separate version for wpa-supplicant, one with dbus and
-one without, are still something to aim for?
+Hehe, that's ok. Getting used to rude email discussion over the years due to
+various FOSS projects. :)
 
-The two files my patch adds are for sure not the problem here. I think nobody
-will scream if I commit them.
+> Stefan, I think you have enough input to improve connman. This could
+> become a very nice proggy!
 
-Personally I would not step to do sucha package split as I don't have a system
-that does not run dbus. (Which makes me abviously totally biased anyway. :) )
-
-I'm fine on the other hand to test such a patch on the aspect if it still works
-the way for us as before.
+I hope so. Will see what else needs fixing over the next weeks will getting it
+running on the phone.
 
 regards
 Stefan Schmidt
