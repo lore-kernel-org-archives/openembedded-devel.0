@@ -1,39 +1,35 @@
-Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LAlLF-0004LG-SR
+	(envelope-from <stefan@datenfreihafen.org>) id 1LAlYq-0001aD-7F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2008 14:12:33 +0100
-Received: by bwz8 with SMTP id 8so992835bwz.12
+	Thu, 11 Dec 2008 14:26:36 +0100
+Received: from p5b0369ce.dip.t-dialin.net ([91.3.105.206] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1LAlUq-0005Aj-Dm by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2008 05:08:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=wMbEE8V4FoXLUYLNzMTIVqDQ9xGZbdRDCvudbJSXIqc=;
-	b=bZtG2tBBvTju+10nRj7wPWGOkhmlZTJM7D1ze2rXKH+Kx1UXXaPGNsH3+L60NVsdik
-	Cq0/ISFjxTWEBLtB62DRbJCSmpPcx7zcdaE72xPOb2aWhNxa0clDi37spyK5mQhRetYH
-	SEwhSVyAGzNYB3EoQotCMT2Bp5/exSFyur658=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=xy501V0IaZXra3oCDoMUJLbrWAwkCouMc5qk63De97antBAqUNcy8v4jMhnQFxohvH
-	tKmJSnvdcArO8J3E2cxzQXY73zKBxJAbqC1cYFzsRwg+apdEDYZBhOW/TTIGiiCJhNO3
-	NvLJtOKie76D+QKOimH9vS70T3MaWaW4YltcU=
-Received: by 10.180.222.14 with SMTP id u14mr864198bkg.141.1229000810057;
-	Thu, 11 Dec 2008 05:06:50 -0800 (PST)
-Received: by 10.180.232.19 with HTTP; Thu, 11 Dec 2008 05:06:49 -0800 (PST)
-Message-ID: <d1b08f940812110506u48443c9ek4a523695d47496dd@mail.gmail.com>
-Date: Thu, 11 Dec 2008 14:06:49 +0100
-From: "Andrea Adami" <andrea.adami@gmail.com>
+	Thu, 11 Dec 2008 14:22:31 +0100
+Received: from stefan by excalibur.local with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1LAlUj-0001yn-LB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Dec 2008 14:22:21 +0100
+Date: Thu, 11 Dec 2008 14:22:21 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49410819.6040302@dls.net>
-MIME-Version: 1.0
+Message-ID: <20081211132221.GA9378@excalibur.local>
 References: <20081210234910.GA16050@excalibur.local> <49405BD7.2010801@gmx.de>
-	<200812110137.01104.mickey@vanille-media.de>
-	<4940650B.1000802@dls.net> <ghqgho$r9j$1@ger.gmane.org>
-	<49410819.6040302@dls.net>
+	<ghqjue$4fe$1@ger.gmane.org>
+	<d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
 Subject: Re: [RFC] Ship dbus config and dbus service activation files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,24 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 13:12:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Dec 2008 13:26:36 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Guys..don't get so rude...
+Hello.
 
-Back to the topic:
+On Thu, 2008-12-11 at 10:37, Andrea Adami wrote:
+> About connman, last time I built it I noticed it depends on
+> 'resolvconf' which depends on 'bash'.
+> 
+> Is it right?
 
->Anyone objections?
->
->regards
->Stefan Schmidt
+I don't remember if it was resolvconf or if it was dhclient, but one of it
+pulled in bash. This may indeed be worth trying out the alternative Koen pointed
+out.
 
-Stefan, I think you have enough input to improve connman. This could
-become a very nice proggy!
+This is low prio on my list until I get wpa-supplicant and therfor connman find
+my device at all and start doing something usefull with it.
 
-Regards
-Andrea
+regards
+Stefan Schmidt
 
 
