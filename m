@@ -1,35 +1,30 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LAiW7-0008Vh-3p
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 11:11:35 +0100
+	id 1LAiil-0005xF-6v
+	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 11:24:39 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LAiS8-00062N-EV
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 10:07:28 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1LAieo-0006UE-0F
+	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 10:20:35 +0000
+Received: from 203.117.215.163 ([203.117.215.163])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 11 Dec 2008 10:07:28 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 11 Dec 2008 10:07:28 +0000
+	Thu, 11 Dec 2008 10:20:33 +0000
+Received: from robk by 203.117.215.163 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 11 Dec 2008 10:20:33 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 11 Dec 2008 11:07:18 +0100
-Message-ID: <ghqoon$i0u$1@ger.gmane.org>
-References: <20081210234910.GA16050@excalibur.local>
-	<49405BD7.2010801@gmx.de>	<ghqjue$4fe$1@ger.gmane.org>
-	<d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Thu, 11 Dec 2008 18:20:10 +0800
+Message-ID: <ghqphb$kt0$1@ger.gmane.org>
+References: <ggd81q$re5$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081205 Shredder/3.0b2pre
-In-Reply-To: <d1b08f940812110137g3369f156rfff59659b48b788f@mail.gmail.com>
+X-Gmane-NNTP-Posting-Host: 203.117.215.163
+User-Agent: KNode/0.10.9
 Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Ship dbus config and dbus service activation files
+Subject: Update: Bitbake r1090 (env hiding) makes my build fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 10:11:35 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Dec 2008 10:24:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7Bit
 
-On 11-12-08 10:37, Andrea Adami wrote:
-> About connman, last time I built it I noticed it depends on
-> 'resolvconf' which depends on 'bash'.
->
-> Is it right?
+Hia,
 
-It's right in so far that resolvconf is full of bashims. It would make 
-more sense to use openresolv (http://roy.marples.name/node/343) to avoid 
-dragging in bash. More to the point, OE's bash doesn't use u-a *and* 
-doesn't register itself with /etc/shells, so resolvconf is broken.
+After several hours of hunting, the problem (for stable branch) comes down
+to this: there needs to be an 'export PATH' in one of the config files,
+otherwise my host compiler fails in the previously stated manner (calling
+it explicitly as /usr/bin/gcc also works). The .dev trunk has the export in
+bitbake.conf.
 
-regards,
+Even with the export, I still get screwy ccache behaviour, but if I just add
+a CCACHE = "" then all is well.
 
-Koen
+Cheers,
+
+    Rob
 
 
->
->
-> TIA
->
-> Andrea
+Rob Kramer wrote:
+> Hia,
+> 
+> I'm tracking the stable branch and recently updated bitbake to HEAD. When
+> trying a build-from-scratch, I noticed BB quickly failed in shasum-native.
+> Some manual svn disecting pointed to r1090 as the one that caused the
+> fail. I tried adding a BB_PRESERVE_ENV, but no difference.
+> 
+> Output is at http://pastebin.com/m65e66603. There is no log.do_compile
+> generated for some reason, and a build with -D shows nothing much. The gcc
+> invoke actually works OK and produces the oe_shasum256 executable.
+> 
+> Any ideas what could be wrong with my setup?
+> 
+> Cheers!
+> 
+>     Rob
 
 
 
