@@ -1,21 +1,25 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LAoJB-00058N-Hy
-	for openembedded-devel@openembedded.org; Thu, 11 Dec 2008 17:22:37 +0100
-Received: (qmail 7327 invoked by uid 1003); 11 Dec 2008 16:18:29 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 11 Dec 2008 16:18:29 -0000
-Message-ID: <49413D54.5090908@balister.org>
-Date: Thu, 11 Dec 2008 11:18:28 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LB1em-0004PY-MF
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Dec 2008 07:37:48 +0100
+Received: (qmail invoked by alias); 12 Dec 2008 06:33:38 -0000
+Received: from e177087121.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.177.87.121]
+	by mail.gmx.net (mp042) with SMTP; 12 Dec 2008 07:33:38 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+mrpBOCbKmvvxCd2xy/5G2tcgqhOwcfiM17+OZQc
+	syo7cHExHBVssI
+Message-ID: <494205F8.2040400@gmx.net>
+Date: Fri, 12 Dec 2008 07:34:32 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <f96d234e0812101427r4afef700t6e8ea5ae77e71a40@mail.gmail.com>	<1228972095.332522828@192.168.1.70>
-	<f96d234e0812110751v47a0425ck15adb418fd4ae94a@mail.gmail.com>
-In-Reply-To: <f96d234e0812110751v47a0425ck15adb418fd4ae94a@mail.gmail.com>
-Subject: Re: Building minimal-image with kernel24
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.65
+Subject: OpenEmbedded @ FOSDEM - CfP - deadline: 2008-12-20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,120 +33,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2008 16:22:38 -0000
-X-Groupsio-MsgNum: 6990
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040404040806080104020707"
+X-List-Received-Date: Fri, 12 Dec 2008 06:37:49 -0000
+X-Groupsio-MsgNum: 6991
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig2355783E170ECC8F5438209C"
 
---------------ms040404040806080104020707
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+--------------enig2355783E170ECC8F5438209C
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Cliff Brake wrote:
-> On Thu, Dec 11, 2008 at 12:08 AM, Joshua Lamorie <jpl@xiphos.ca> wrote:
->> Gidday there,
->>
->> Sorry for this simple question, but I've been using subversion up to now, and I can't figure out how to use git to checkout/pull/clone the documentation.  I can see the results of ...
->>
->> git-ls-remote  --heads git://git.openembedded.net/openembedded.git refs/heads/org.openembedded.documentation
->>
->> Then, inside the openembedded repository that I cloned with
->>
->> git clone git://git.openemebbeded.net/openembedded.git
->>
->> I can see the other branches with
->>
->> [jpl@megatron openembedded]$ git branch -r
->>
->> However, as suggested in http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#examining-remote-branches, I do a checkout and I get the following.
->>
->> [jpl@megatron openembedded]$ git checkout -b documentation origin/org.openembedded.documentation
->> fatal: Entry 'packages/tinylogin/tinylogin_1.4.bb' not uptodate. Cannot merge.
->>
->> There is an error in that .bb file (I just added a patch to bugzilla) but shouldn't I be able to get this branch without dealing with the uncommited changes to that file?
-> 
-> You will need to commit your local changes to a temp branch first.
-> 
-> git checkout -b myfixes org.openembedded.dev
-> git add ...
-> git commit
-> 
-> Now that you have no local changes, you can check out the doc
+Hi,
+as you read in the last mail OpenEmbedded will not get it own room at
+the upcomming FOSDEM. Nevertheless you will have the chance of
+presenting your OE-related talk as part of the 'Embedded devroom'.
 
-You can also use git stash to save local changes. Then can update your 
-working copy and re-apply the changes from the "stash". This avoids the 
-need to commit stuff you are not certain about.
+The Embedded devroom is organized by Philippe de Swert. So eventually
+all organisation stuff concerning the room and your talk has to be done
+with him.
 
-Philip
+As it looks we will only have ~60 min. Normally that is the duration for
+one talk. However experiences gained in other devrooms in the preceding
+years have shown that it is more interesting for the visitors to get to
+know many topics in a short time. That is why I propose that talks
+should be around 10-15 min. That way we can present 4-6 OE-related
+topics ... it also means that less preparation time is needed for the
+one who does the talk. :)
+
+If you want to do a talk at FOSDEM please reply to this mail, describe
+your topic and the amount of time you need.
+
+In order to make it possible for Phillipe to organise the schedule for
+the Embedded devroom I want to tell him our demands at 2008-12-20. So
+this date is the deadline for talk proposals.
+
+-
+
+Regarding the hack session: Since there are only 60 minutes of
+'OpenEmbedded' time in the Embedded devroom I think we should find a
+nice location with wifi offside FOSDEM.
+
+Regards
+Robert
 
 
-> 
-> Cliff
-> 
 
---------------ms040404040806080104020707
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+--------------enig2355783E170ECC8F5438209C
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTIxMTE2
-MTgyOFowIwYJKoZIhvcNAQkEMRYEFPgsLvNsXVsENCRZyqcTEvsXDieaMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQATJENXiWjbLOGtjk9qxjZ6MPa5ceIPF3YtUqN1hZqtiiiHT2xy
-GIF0ducAEduIwiSl011Lr0K5bvr1gtbcMXDWzMRFkIScdoLVNenW1M6qkGQhIaoA9ox+ep/IlK85
-fSBov6/MluE3xBntjHgPnCNJ0EMFLaalTY57yl9RyRfn7ZVRwAT7FTAasx26g3v8ACvswxXECByS
-OuCFYdJq4iyNXmV3li6ACQbGjlV3MXX8FaqrZ0qDivrKIHQE+NztGMQWuZzzJvRZhZao1Io8y7i9
-njhZzB8EMwy1Hd2Urcc3vU4Lx+iw3mIe9KOHEP6xqZAl8aLKTMHiiVBfQGodq1TkAAAAAAAA
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
---------------ms040404040806080104020707--
+iEYEAREIAAYFAklCBfsACgkQG9cfwmwwEtrWfQCeKnRo+P/QkS6aKGMHWCZgg7mV
+OIoAn0YWVzwaSOJs8u74V+p5CSfpGBnd
+=oVM0
+-----END PGP SIGNATURE-----
+
+--------------enig2355783E170ECC8F5438209C--
