@@ -1,22 +1,67 @@
-Received: from [193.74.71.28] (helo=sif.is.scarlet.be)
+Received: from [134.245.248.209] (helo=miraculix.informatik.uni-kiel.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philippedeswert@scarlet.be>) id 1LB8pc-0002c2-9w
-	for openembedded-devel@openembedded.org; Fri, 12 Dec 2008 15:17:28 +0100
-Received: from scarlet.be (fuji.is.scarlet.be [193.74.71.41])
-	by sif.is.scarlet.be (8.14.2/8.14.2) with ESMTP id mBCEDIlv013466;
-	Fri, 12 Dec 2008 15:13:18 +0100
-Date: Fri, 12 Dec 2008 15:13:18 +0100
-Message-Id: <KBROU6$55E8AD7D1E4E57DE3DC3D188DDD59790@scarlet.be>
+	(envelope-from <haf@informatik.uni-kiel.de>) id 1LBr8z-000057-1l
+	for openembedded-devel@openembedded.org; Sun, 14 Dec 2008 14:36:25 +0100
+X-Virus-Scanned: amavisd-new at informatik.uni-kiel.de
+Received: from falbala.informatik.uni-kiel.de (falbala [134.245.248.202])
+	by miraculix.informatik.uni-kiel.de (8.14.3/8.14.3) with ESMTP id
+	mBEDVeV2020461
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=OK)
+	for <openembedded-devel@openembedded.org>;
+	Sun, 14 Dec 2008 14:31:45 +0100 (MET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=informatik.uni-kiel.de; s=ifi-200807; t=1229261505; bh=FgNwi5w/UV
+	wbQnvN93GGXKhffHXmDQJau0GbrkLVtSw=; h=Message-ID:Date:Subject:From:
+	To:MIME-Version:Content-Type:Content-Transfer-Encoding; z=Received
+	:=20from=20legendre.informatik.uni-kiel.de=20(legendre=20[134.245.2
+	48.200])=0D=0A=09by=20falbala.informatik.uni-kiel.de=20(8.13.8+Sun/
+	8.13.8)=20with=20ESMTP=20id=20mBEDVeUa018252=0D=0A=09(version=3DTLS
+	v1/SSLv3=20cipher=3DDHE-RSA-AES256-SHA=20bits=3D256=20verify=3DNO)=
+	0D=0A=09for=20<openembedded-devel@openembedded.org>=3B=20Sun,=2014=
+	20Dec=202008=2014:31:40=20+0100=20(MET)|Received:=20(from=20www@loc
+	alhost)=0D=0A=09by=20legendre.informatik.uni-kiel.de=20(8.13.8+Sun/
+	8.12.6/Submit)=20id=20mBEDVeO8014395=3B=0D=0A=09Sun,=2014=20Dec=202
+	008=2014:31:40=20+0100=20(MET)|X-Authentication-Warning:=20legendre
+	.informatik.uni-kiel.de:=20www=20set=20sender=20to=20haf@informatik
+	.uni-kiel.de=20using=20-f|Received:=20from=2082.82.137.144=0D=0A=20
+	=20=20=20=20=20=20=20(SquirrelMail=20authenticated=20user=20haf)=0D
+	=0A=20=20=20=20=20=20=20=20by=20www.informatik.uni-kiel.de=20with=2
+	0HTTP=3B=0D=0A=20=20=20=20=20=20=20=20Sun,=2014=20Dec=202008=2014:3
+	1:40=20+0100=20(MET)|Message-ID:=20<3bf8d295b93f5530b9b067526afbc30
+	7.squirrel@www.informatik.uni-kiel.de>|Date:=20Sun,=2014=20Dec=2020
+	08=2014:31:40=20+0100=20(MET)|Subject:=20md5sum=20mismatch=20for=20
+	ipkg=20packages|From:=20"Hauke=20Fuhrmann"=20<haf@informatik.uni-ki
+	el.de>|To:=20openembedded-devel@openembedded.org|User-Agent:=20Squi
+	rrelMail/1.4.17|MIME-Version:=201.0|Content-Type:=20text/plain=3Bch
+	arset=3Diso-8859-1|Content-Transfer-Encoding:=208bit|X-Priority:=20
+	3=20(Normal)|Importance:=20Normal; b=nbm9DbVaIEfL7K8SOTaBJDUO9icNPH
+	8NBB+eS97YSz1FApfvd3bVWJUPz/sNfqEM4LxQzC7wZBbt0MLRE8CUBfnP8VozpQFAY
+	Pn56Xb9d1oxAQmheUW75ExfNbX+DO9j1ur3vLdqmRSkYb9AtjpgNFoYSs3SGWd88K1a
+	vIaFxwk=
+Received: from legendre.informatik.uni-kiel.de (legendre [134.245.248.200])
+	by falbala.informatik.uni-kiel.de (8.13.8+Sun/8.13.8) with ESMTP id
+	mBEDVeUa018252
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Sun, 14 Dec 2008 14:31:40 +0100 (MET)
+Received: (from www@localhost)
+	by legendre.informatik.uni-kiel.de (8.13.8+Sun/8.12.6/Submit) id
+	mBEDVeO8014395; Sun, 14 Dec 2008 14:31:40 +0100 (MET)
+X-Authentication-Warning: legendre.informatik.uni-kiel.de: www set sender to
+	haf@informatik.uni-kiel.de using -f
+Received: from 82.82.137.144 (SquirrelMail authenticated user haf)
+	by www.informatik.uni-kiel.de with HTTP;
+	Sun, 14 Dec 2008 14:31:40 +0100 (MET)
+Message-ID: <3bf8d295b93f5530b9b067526afbc307.squirrel@www.informatik.uni-kiel.de>
+Date: Sun, 14 Dec 2008 14:31:40 +0100 (MET)
+From: "Hauke Fuhrmann" <haf@informatik.uni-kiel.de>
+To: openembedded-devel@openembedded.org
+User-Agent: SquirrelMail/1.4.17
 MIME-Version: 1.0
-X-Sensitivity: 3
-From: "Philippe De Swert" <philippedeswert@scarlet.be>
-To: "openembedded-devel" <openembedded-devel@openembedded.org>
-X-XaM3-API-Version: 4.1 (B54)
-X-type: 0
-X-SenderIP: 192.100.124.218
-X-DCC-scarlet.be-Metrics: sif; whitelist
-Cc: theBohemian <theBohemian@gmx.net>
-Subject: Re: OpenEmbedded @ FOSDEM - CfP - deadline: 2008-12-20
+X-Priority: 3 (Normal)
+Importance: Normal
+X-Null-Tag: b3c2a36d980460991550417eb6630811
+Subject: md5sum mismatch for ipkg packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,161 +75,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Dec 2008 14:17:28 -0000
-X-Groupsio-MsgNum: 6992
-Content-Type: multipart/mixed;
-	boundary="_=__=_XaM3_.1229091198.2A.867867.42.19964.52.42.007.948563458"
+X-List-Received-Date: Sun, 14 Dec 2008 13:36:25 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
 
---_=__=_XaM3_.1229091198.2A.867867.42.19964.52.42.007.948563458
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+Hi there,
 
-Hello all,
+I have encountered md5sum mismatches for ipkg packages, of which the info
+says that you are the maintainer.
+Maybe you can give me a hint how to solve this:
 
-> Hi,
-> as you read in the last mail OpenEmbedded will not get it own room at
-> the upcomming FOSDEM. Nevertheless you will have the chance of
-> presenting your OE-related talk as part of the 'Embedded devroom'.
-> 
-> The Embedded devroom is organized by Philippe de Swert. So eventually
-> all organisation stuff concerning the room and your talk has to be done=
+I try to install a raid1 array on my device. I'm trying
+to install the raid kernel modules. I get the following
+errors. Is there anything wrong with the packages? I already did that
+update several times.
+Any hints for a embedded newby?
 
-> with him.
+Hauke
 
-Corrext.
+# ipkg install kernel-module-md
+Installing kernel-module-md (2.4.22.l2.3r63-r21) to root...
+Downloading
+http://ipkg.nslu2-linux.org/feeds/unslung/modules/cross/stable/kernel-module-md_\
+2.4.22.l2.3r63-r21_nslu2be.ipk
+Nothing to be done
+Collected errors:
+Package kernel-module-md md5sum mismatch. Either the ipkg or the package
+index are corrupt. Try 'ipkg update'.
 
-> As it looks we will only have ~60 min. Normally that is the duration fo=
-r
-> one talk. However experiences gained in other devrooms in the preceding=
-
-> years have shown that it is more interesting for the visitors to get to=
-
-> know many topics in a short time. That is why I propose that talks
-> should be around 10-15 min. That way we can present 4-6 OE-related
-> topics ... it also means that less preparation time is needed for the
-> one who does the talk. :)
-
-Seems we had a miscommunication here. Of course we can give more time to
-handle OE related projects. However it might be beneficial to group a num=
-ber
-of small projects together. So feel free to submit presentations and topi=
-cs
-for a full presentation slot (1h slot, about 45min talking).
-
-Regards,
-
-Philippe
-
-PS: I attached the Fosdem call for papers, so spread it if you feel like =
-it :)
-=0A
----
-More than 2000 Scarlet customers don't pay a subscription anymore!
-Join and surf free of charge! >> http://www.scarlet.be/nl/mgm
-
---_=__=_XaM3_.1229091198.2A.867867.42.19964.52.42.007.948563458
-Content-Type: text/plain;
-	name="=?iso-8859-1?Q?fosdem-embedded-cfp-2009.txt?="
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="=?iso-8859-1?Q?fosdem-embedded-cfp-2009.txt?="
-
-For those that are interested:
-
-CALL FOR PAPERS for the 6th EMBEDDED track at FOSDEM 2009
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-
-sat 7 - sun 8 February 2009, Brussels
-
-Call for papers
-----------------
-
-The 2009 edition of FOSDEM (Free and Open Source Developers' European
-Meeting; http://www.fosdem.org) will take place in Brussels, Belgium=20
-on 7 and 8 February 2009. For the seventh time, a track on Embedded=20
-Systems and Operating Systems will be organized. The sixth edition=20
-was quite succesful and attracted up to 150 attendants for certain
-topics.
-
-For last year's program see:
-http://archive.fosdem.org/2008/schedule/tracks/embedded
-
-The use of Free Software in the infrastructure of Embedded Systems=20
-is booming, e.g. by the use of Linux, uClinux, eCos, RedBoot, RTEMS=20
-and many other Free Software components. More companies are supporting
-Embedded Free Software every day because of the reliability and cheap
-licensing. This can be confirmed from looking at some high profile
-releases of embedded GNU/Linux systems. Some examples are the Nokia N810,
-Android based smartphones, camera's and televisions. Not to=20
-forget the popular TomTom navigation system, the numerous SOHO routers=20
-and NAS devices based on linux.
-
-Operating System development has always been a very important topic in
-Free Software.
-As embedded and real-time systems typically have special OS
-requirements, we organise this Free Embedded and OS development track at
-FOSDEM to give people the opportunity to present their (or their teams)
-achievements.
-
-This track at FOSDEM provides a remarkable opportunity to present and
-discuss the ongoing work in these areas, and we invite developers to=20
-present their current projects. Technical topics of the conference=20
-include but are not limited to :
-
-* OS Development : kernel architecture and implementation, libraries, power=
-=20
-   management, TIPC, boot time and memory usage optimizations
-  (e.g. Linux, BSD, uClinux, uClibc, newlib, slob allocator,...)
-
-* Practical experiences in implementing Free Software in embedded
-  systems  (e.g. reverse engineering, porting  to (and adapting of)
-  commercial devices like the PSP, linksys WRT54G, nlsu2, Apple IPhone )
-
-* Toolchain, performance testing and build environment=20
-  (e.g. crosstool, emdebian, openembedded, PTX dist, packaging,
-scratchbox, Eclipse, Valgrind,...)
-
-* GUIs for embedded systems
-  (Gtk, Qt-(embedded), GPE, Qtopia, UI design with touchscreen,=20
-   Hildon GUI extensions, OpenMoko, OpenGL ES, ...)
-
-* Multimedia applications for embedded systems
-  (e.g. integer only decoders, Opieplayer, gstreamer... )
-
-* Real-time extensions, nanokernels and hardware virtualization software
-  (e.g. Xenomai, Adeos, KURT, L4, Qemu, ...)
-=20
-* Hard real-time OS's
-  (eCos, RTEMS, Real Time Linux,...)
-
-* Open hardware, DSP, softcores and general hardware management
-  (e.g opencores.org, Beagleboard, leonSparc, FPGA's, Arduino,
-   specific design restrictions for free systems, DSP, Power management...)
-
-* Safety and security certifications applied to Free software
-   (e.g. security measures in Embedded systems, TPM, SELinux
-    for embedded, TrustZone, ...)
-
-* Tools and techniques for programming multicore systems
-
-* Free software licenses and embedded systems
-
-Authors that wish to present a topic are requested to submit their
-abstracts online to embedded@fosdem.org before 04/01/2009. Notification
-of receipt will be sent within 48 hours. Authors wishing to submit a
-full paper (between 6 and 12 A4 pages), can do so in PS or PDF format.
-
-The Program Committee will evaluate the abstracts and consists of:
-
-* Philippe De Swert, Nokia (Maemo), Finland
-* Geert Uytterhoeven, Sony Techsoft Centre Europe, Belgium
-* Peter De Schrijver (p2), Nokia (Maemo), Finland
-* Klaas van Gend, MontaVista Software, The Netherlands
-* Michael Opdenacker, Free Electrons, France
+# ipkg install kernel-module-raid1
+Installing kernel-module-raid1 (2.4.22.l2.3r63-r21) to root...
+Downloading
+http://ipkg.nslu2-linux.org/feeds/unslung/modules/cross/stable/kernel-module-rai\
+d1_2.4.22.l2.3r63-r21_nslu2be.ipk
+Nothing to be done
+Collected errors:
+Package kernel-module-raid1 md5sum mismatch. Either the ipkg or the
+package index are corrupt. Try 'ipkg update'.
 
 
 
 
---_=__=_XaM3_.1229091198.2A.867867.42.19964.52.42.007.948563458--
