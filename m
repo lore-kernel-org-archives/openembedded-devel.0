@@ -1,29 +1,34 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [209.85.198.251] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LCBWB-00068R-Bx
-	for openembedded-devel@openembedded.org; Mon, 15 Dec 2008 12:21:43 +0100
-Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LCBRu-00077z-UL by authid <stefan@sostec.de> with cram_md5;
-	Mon, 15 Dec 2008 12:17:21 +0100
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>)
-	id 1LCBRn-0003nF-Ur; Mon, 15 Dec 2008 12:17:11 +0100
-Date: Mon, 15 Dec 2008 12:17:11 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20081215111711.GC11095@excalibur.local>
+	(envelope-from <ticktock35@gmail.com>) id 1LCEAC-0007ab-Ha
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Dec 2008 15:11:12 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so3000831rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Dec 2008 06:06:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type;
+	bh=qgurDYtTn2xyKgIGcUI70JujWq+3uE1Tlt4AOPpqrLk=;
+	b=MKha986ZgU8VL/DfN6uEU03Hk9XDpMbpPdFS+5lZHL1eXNUZFOcqOoEHLnbLov3upy
+	ymlPNmRd3ZOSZ6nNoLxzBww7q6Vu1VHHvfnN2MuUwY/PS+dNv4iwSd3fue/Q0AMlqa5a
+	zqwOOrw6IGgkxWAyi08NhWywkiWnEgfIxI+58=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type;
+	b=PPMJpw3Zh26VLxf0rbtULy5eQWLz56F/4qFZJccRjC2sSPz5w/NSv9HM+7VkXRENaw
+	685dfdzrlcxT3JAPn8IeYhpixftHrqSE7dUC8v8i7wmG5e7FoN3WIl1UtXTwr33KUBqa
+	Bv+OHc00d1gzz5cq4S/4sbxqXcNxSeZdaU7ps=
+Received: by 10.140.187.10 with SMTP id k10mr3721273rvf.264.1229350009411;
+	Mon, 15 Dec 2008 06:06:49 -0800 (PST)
+Received: by 10.140.193.20 with HTTP; Mon, 15 Dec 2008 06:06:49 -0800 (PST)
+Message-ID: <565965130812150606k7a71c258xd15232d9edf88cfe@mail.gmail.com>
+Date: Mon, 15 Dec 2008 22:06:49 +0800
+From: "I-Fan, Chen" <ticktock35@gmail.com>
+To: openembedded-devel@lists.openembedded.org, opkg-devel@lists.openmoko.org, 
+	opkg-devel@googlegroups.com
 MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: How to handle deps on different connman versions?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: I will move Opkg development from OM svn to Google code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,31 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Dec 2008 11:21:43 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 15 Dec 2008 14:11:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello.
+Hi lists,
+   After a long thinking and taking advice from some OE people.
+In order to keep improving opkg,
+I decided to move opkg upstream from OM svn to Google code,
+and keep developing opkg on the new site.
 
-I just pushed a connman-0.2 recipe into the tree. That makes three of it, as we
-also have git and 0.1.
+Project:
+http://code.google.com/p/opkg/
 
-I'm thinking about how to handle this lately. At the moment 0.1 and 0.2 have
-both default to -1. The git recipe has a fixed SCREV that points to a rev which
-matches the API used by om-settings. Since then the API changed a lot and at
-least this will break when we update the SRREV or go with the releases. Do we
-have others sonsumers of the connman API in OE yet?
+Group:
+http://groups.google.com/group/opkg-devel
+mailto: opkg-devel@googlegroups.com <opkg-devel@googlegroups.com>
 
-John, can you give us some infos from the OM perspective here? Does something
-like this not matter as you build from your own stable branch? Is om-settings
-still relevant?
+Checkout Code:
+http://code.google.com/p/opkg/source/checkout
 
-From my way to write you see that I would prefer to remove the default -1 from
-the releases based recipes. In the end the work I'm doing right now will be used
-as replacement for the wifi part in om-settinngs anyway when moving to the
-framework. I juts aks beacuse the transition may cause trouble.
+Because of I am still working on the code of upgrade and install, and trying
+to provide better data structure and algorithm.
+I recommend a older version r172 for people want a proven stable opkg now.
 
-regards
-Stefan Schmidt
+It's a pity that the committer  and commit timestamps were missed when
+moving from OM svn to Google code.
+Most of the great job are made by Thomas Wood, thank you.
 
+Any help are welcomed.
+P.S. I cannot get e-mail from my openmoko.org account for now; therefore, if
+anyone had mailed me,
+I am sorry, I cannot get those mails now.
+
+Cheers,
+Tick
 
