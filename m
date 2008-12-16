@@ -1,33 +1,23 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LCUrg-0003tZ-Du
-	for openembedded-devel@openembedded.org; Tue, 16 Dec 2008 09:01:12 +0100
-Received: from w1536.wlan.rz.tu-bs.de ([134.169.206.12] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LCUnL-0002wL-DG by authid <stefan@sostec.de> with cram_md5;
-	Tue, 16 Dec 2008 08:56:46 +0100
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>)
-	id 1LCUnE-00033u-LW; Tue, 16 Dec 2008 08:56:36 +0100
-Date: Tue, 16 Dec 2008 08:56:36 +0100
-From: Stefan Schmidt <stefan@openmoko.org>
-To: John Lee <john_lee@openmoko.org>
-Message-ID: <20081216075636.GA16231@excalibur.local>
-References: <20081215111711.GC11095@excalibur.local>
-	<20081216042140.GK3299@buddha.tw.openmoko.com>
+	(envelope-from <zecke@selfish.org>) id 1LCZso-0007x7-29
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Dec 2008 14:22:42 +0100
+Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244]
+	helo=tamarin.localnet) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1LCZoV-0006A2-Hx
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Dec 2008 14:18:15 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 16 Dec 2008 14:16:50 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-9-generic; KDE/4.1.2; i686; ; )
+References: <a7f8874a0812072146m13e56d10hcbcfe5171d27389e@mail.gmail.com>
+In-Reply-To: <a7f8874a0812072146m13e56d10hcbcfe5171d27389e@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20081216042140.GK3299@buddha.tw.openmoko.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Cc: openembedded-devel@openembedded.org, Marek Lindner <marek@openmoko.com>
-Subject: Re: How to handle deps on different connman versions?
+Message-Id: <200812161416.50581.zecke@selfish.org>
+Subject: Re: Indentation Error with latest bitbake (svn rev 1145)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,35 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Dec 2008 08:01:12 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 16 Dec 2008 13:22:42 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello.
+On Monday 08 December 2008 06:46:57 Hans Henry von Tresckow wrote:
+> Has anybody seen this error yet:
 
-On Tue, 2008-12-16 at 12:21, John Lee wrote:
-> On Mon, Dec 15, 2008 at 12:17:11PM +0100, Stefan Schmidt wrote:
-> > 
-> > I just pushed a connman-0.2 recipe into the tree. That makes three of it, as we
-> > also have git and 0.1.
-> > 
-> > I'm thinking about how to handle this lately. At the moment 0.1 and 0.2 have
-> > both default to -1. The git recipe has a fixed SCREV that points to a rev which
-> > matches the API used by om-settings. Since then the API changed a lot and at
-> > least this will break when we update the SRREV or go with the releases. Do we
-> > have others sonsumers of the connman API in OE yet?
-> > 
-> > John, can you give us some infos from the OM perspective here? Does something
-> > like this not matter as you build from your own stable branch? Is om-settings
-> > still relevant?
-> 
-> there's no wifi function in om-settings now, therefore there should
-> not be any dependency.
+any news on this? ... and general hint. Posting random parts of a log is worse 
+than not posting a log file. What you actually do when "composing" this is 
+filtering out the information and just leave the noise. From a purely 
+information theory point of view you make sure that only noise arrives at the 
+other part of the channel.
 
-Thanks for the confirmation. That means I can upgrade it in OE.dev now without
-risk of breaking stuff.
+Post a complete log.
 
-regards
-Stefan Schmidt
+
+
+z.
+
 
 
