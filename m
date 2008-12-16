@@ -1,38 +1,20 @@
-Received: from [209.85.200.172] (helo=wf-out-1314.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LCfFW-0002yC-Nc
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Dec 2008 20:06:31 +0100
-Received: by wf-out-1314.google.com with SMTP id 29so3247047wff.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Dec 2008 11:02:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=U2RCoqslWMwjha/TE6V4WMkrH9zKOpVyZfGJ3sAVXyg=;
-	b=DxEMgN9ZkcsUTJIoDPEztGfdXVF9wbFu3l6SrJcP8kcJHxWZLMczmz9DTBfgaMuDn9
-	mFbTVz8eVXANcpa2aspaEgTiihljQ64vT7CV1CJPCStPv3eoIi310pCwF5kiojyxMUVV
-	UhgASC+BxsasyWcN1j1/JgO+YurtGw8l0HR/g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=UpeeblMHGSveqmrq95ET/Wy5bYNF2hYygQhjrw8M5z/5PyQf1xQnADk5NUclic2mur
-	NXXpYnylwvyHFQVoCX/UzWJN1Eq41hKELgWEPx18qObnOKvVjXfAEiNymaMkbsammUhW
-	oW/pwoirq5fgriBOPeYaOgZBDgvZK4kYlokL8=
-Received: by 10.114.144.1 with SMTP id r1mr5947540wad.2.1229454122329;
-	Tue, 16 Dec 2008 11:02:02 -0800 (PST)
-Received: from localhost (adsl-71-146-25-70.dsl.pltn13.sbcglobal.net
-	[71.146.25.70])
-	by mx.google.com with ESMTPS id z15sm1516624pod.14.2008.12.16.11.02.01
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 16 Dec 2008 11:02:01 -0800 (PST)
-Date: Tue, 16 Dec 2008 11:02:00 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081216190159.GA9967@gmail.com>
+	(envelope-from <philip@balister.org>) id 1LCfm0-0000VH-KZ
+	for openembedded-devel@openembedded.org; Tue, 16 Dec 2008 20:40:04 +0100
+Received: (qmail 4668 invoked by uid 1003); 16 Dec 2008 19:35:34 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 16 Dec 2008 19:35:33 -0000
+Message-ID: <49480300.9080604@balister.org>
+Date: Tue, 16 Dec 2008 14:35:28 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Bump kernel version for osk5912
+To: openembedded-devel@lists.openembedded.org
+References: <20081216190159.GA9967@gmail.com>
+In-Reply-To: <20081216190159.GA9967@gmail.com>
+Subject: Re: Bump kernel version for osk5912
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,44 +28,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Dec 2008 19:06:34 -0000
-X-Groupsio-MsgNum: 7003
-Content-Type: multipart/mixed; boundary="k1lZvvs/B4yU6o8G"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Dec 2008 19:40:05 -0000
+X-Groupsio-MsgNum: 7004
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms070502070907020702020401"
 
---k1lZvvs/B4yU6o8G
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--------------ms070502070907020702020401
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi
+Khem Raj wrote:
+> Hi
+> 
+> I have tested this patch which uses linux-omap instead of linux-omap1
+> on omap5912 machine.
+> 
+> OK for .dev ?
 
-I have tested this patch which uses linux-omap instead of linux-omap1
-on omap5912 machine.
++1  from me. Did you boot test the OSK? I'll try it on mine if I get a 
+chance. We need to move to linux-omap anyway, and I rather get bug 
+reports against this recipe :)
 
-OK for .dev ?
-
-Thx
-
--Khem
+Philip
 
 
+> 
+> Thx
+> 
+> -Khem
+> 
+> 
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---k1lZvvs/B4yU6o8G
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=patch
+--------------ms070502070907020702020401
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-diff --git a/conf/machine/omap5912osk.conf b/conf/machine/omap5912osk.conf
-index d8caf93..9fcd76e 100644
---- a/conf/machine/omap5912osk.conf
-+++ b/conf/machine/omap5912osk.conf
-@@ -5,7 +5,7 @@
- TARGET_ARCH = "arm"
- 
- PREFERRED_PROVIDER_xserver = "xserver-kdrive"
--PREFERRED_PROVIDER_virtual/kernel = "linux-omap1"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
- 
- UBOOT_ENTRYPOINT="0x10c08000"
- 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTIxNjE5
+MzUyOFowIwYJKoZIhvcNAQkEMRYEFB1FDhIBy+xvpp0VsUN09ryfAjOQMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQB8MSkYPUNPOf/NMy251Jw3QShcgz/aH2cwPtNTAWv915fwDEoe
+GHNJbxGa/xGiMBeQ5AIYMT5QMxKuWcirYB0jTjdNs8qNkUtq/9upW8dfNWPBgTuUfc3OctDUbz7K
+NU+uT4Jf7e0g6u/SxRZ8iThc6Kkjpjt2h5v3nE8hoMzO6H/xF7rUjUTr/Jm0l7yrB2eUjwDsdiYR
+k9+vbU4QVisnSiThHDfAzbERUJ0H2xLSXSldaze8TKb1QhHX9k7xV8X9X9pLDUL/f6ZqE63IWpeJ
+BawCYH82ov0HEXdp/eoOiDbBlkkf+hKVgbDCgc7nVX3KwWlnDKV3o3+USZn92N2pAAAAAAAA
 
---k1lZvvs/B4yU6o8G--
+--------------ms070502070907020702020401--
