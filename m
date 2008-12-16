@@ -1,24 +1,38 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [209.85.200.172] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1LCZv4-000820-Sz
+	(envelope-from <raj.khem@gmail.com>) id 1LCfFW-0002yC-Nc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Dec 2008 14:25:02 +0100
-Received: from imp050244.vpn.mi.fu-berlin.de ([130.133.50.244]
-	helo=tamarin.localnet) by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1LCZqm-0006E6-KS
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Dec 2008 14:20:36 +0100
-From: Holger Freyther <zecke@selfish.org>
+	Tue, 16 Dec 2008 20:06:31 +0100
+Received: by wf-out-1314.google.com with SMTP id 29so3247047wff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Dec 2008 11:02:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=U2RCoqslWMwjha/TE6V4WMkrH9zKOpVyZfGJ3sAVXyg=;
+	b=DxEMgN9ZkcsUTJIoDPEztGfdXVF9wbFu3l6SrJcP8kcJHxWZLMczmz9DTBfgaMuDn9
+	mFbTVz8eVXANcpa2aspaEgTiihljQ64vT7CV1CJPCStPv3eoIi310pCwF5kiojyxMUVV
+	UhgASC+BxsasyWcN1j1/JgO+YurtGw8l0HR/g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=UpeeblMHGSveqmrq95ET/Wy5bYNF2hYygQhjrw8M5z/5PyQf1xQnADk5NUclic2mur
+	NXXpYnylwvyHFQVoCX/UzWJN1Eq41hKELgWEPx18qObnOKvVjXfAEiNymaMkbsammUhW
+	oW/pwoirq5fgriBOPeYaOgZBDgvZK4kYlokL8=
+Received: by 10.114.144.1 with SMTP id r1mr5947540wad.2.1229454122329;
+	Tue, 16 Dec 2008 11:02:02 -0800 (PST)
+Received: from localhost (adsl-71-146-25-70.dsl.pltn13.sbcglobal.net
+	[71.146.25.70])
+	by mx.google.com with ESMTPS id z15sm1516624pod.14.2008.12.16.11.02.01
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 16 Dec 2008 11:02:01 -0800 (PST)
+Date: Tue, 16 Dec 2008 11:02:00 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Dec 2008 14:19:11 +0100
-User-Agent: KMail/1.10.1 (Linux/2.6.27-9-generic; KDE/4.1.2; i686; ; )
-References: <1228574376.5375.6.camel@dax.rpnet.com>
-	<ghe5v4$9hp$1@ger.gmane.org> <ghitdk$qk7$1@ger.gmane.org>
-In-Reply-To: <ghitdk$qk7$1@ger.gmane.org>
+Message-ID: <20081216190159.GA9967@gmail.com>
 MIME-Version: 1.0
-Message-Id: <200812161419.11789.zecke@selfish.org>
-Subject: Re: Bitbake release
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: Bump kernel version for osk5912
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Dec 2008 13:25:03 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Dec 2008 19:06:34 -0000
+X-Groupsio-MsgNum: 7003
+Content-Type: multipart/mixed; boundary="k1lZvvs/B4yU6o8G"
 Content-Disposition: inline
 
-On Monday 08 December 2008 11:37:40 Koen Kooi wrote:
+--k1lZvvs/B4yU6o8G
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> > http://projects.linuxtogo.org/pipermail/openembedded-devel/2008-October/0
-> >06289.html
->
-> Hmmm, you can't pass variables containing '_' anymore:
->
-> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=325476d19
->b821623dbe151d7026c20dfd3754432
+Hi
 
-Any more information? I have tagged bitbake 1.8.12 and uploaded a tarball but 
-I don't know if I should "release" it...
+I have tested this patch which uses linux-omap instead of linux-omap1
+on omap5912 machine.
 
+OK for .dev ?
 
-z.
+Thx
+
+-Khem
 
 
+
+--k1lZvvs/B4yU6o8G
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=patch
+
+diff --git a/conf/machine/omap5912osk.conf b/conf/machine/omap5912osk.conf
+index d8caf93..9fcd76e 100644
+--- a/conf/machine/omap5912osk.conf
++++ b/conf/machine/omap5912osk.conf
+@@ -5,7 +5,7 @@
+ TARGET_ARCH = "arm"
+ 
+ PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+-PREFERRED_PROVIDER_virtual/kernel = "linux-omap1"
++PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+ 
+ UBOOT_ENTRYPOINT="0x10c08000"
+ 
+
+--k1lZvvs/B4yU6o8G--
