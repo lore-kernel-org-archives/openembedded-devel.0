@@ -1,22 +1,34 @@
-Received: from [217.146.189.75] (helo=web23305.mail.ird.yahoo.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <claudiu_fw85@yahoo.it>) id 1LCyiQ-0007V3-P6
-	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 16:53:38 +0100
-Received: (qmail 96676 invoked by uid 60001); 17 Dec 2008 15:49:05 -0000
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.it;
-	h=X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type:Message-ID;
-	b=q6vOvcVQZAU8lcyj81uuF126AK4B/Au2aqhVvMfoeFX6NpdOvHVmZnTSBsCqvF154EM3IH0cTJBw6OTZOocMx8Xl8yrVup3qlaM1m5dUaLhW2dPjuv3SCwOwMXWPAA5YbCQahnzX/XNW/fRrz0Ve4MUQYDSZWoZ5v9QiA/mAGnQ=;
-X-YMail-OSG: N_.H0aEVM1lES9vdGftOIkQ7wMKK6eHKW.LFGPsU0ASFFdidlPZ7Mmo0
-Received: from [87.9.252.243] by web23305.mail.ird.yahoo.com via HTTP;
-	Wed, 17 Dec 2008 15:49:04 GMT
-X-Mailer: YahooMailRC/1155.45 YahooMailWebService/0.7.260.1
-Date: Wed, 17 Dec 2008 15:49:04 +0000 (GMT)
-From: Claudiu mdc <claudiu_fw85@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Message-ID: <149566.95991.qm@web23305.mail.ird.yahoo.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: C compiler cannot create executables
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LCz4g-0008Hk-R7
+	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 17:16:38 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LCz0I-0003DQ-G1
+	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 16:12:06 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 17 Dec 2008 16:12:06 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 17 Dec 2008 16:12:06 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 17 Dec 2008 17:11:57 +0100
+Message-ID: <gib8cd$dkp$1@ger.gmane.org>
+References: <gib10j$i28$1@ger.gmane.org>
+	<87r6467rj6.fsf@neumann.lab.ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081211 Shredder/3.0b2pre
+In-Reply-To: <87r6467rj6.fsf@neumann.lab.ossystems.com.br>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] collapse commits in branches to easy review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,92 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Dec 2008 15:53:39 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Dec 2008 16:16:39 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-hi, I am trying to build bootstrap-image and I have this error when buildin=
-g libtool-cross:
-| checking for i686-linux-gcc... i686-linux-gcc-4.3.1 -mcpu=3Dpentiumpro
-| checking for C compiler default output file name...
-| configure: error: C compiler cannot create executables
-| See `config.log' for more details.
+On 17-12-08 16:25, Otavio Salvador wrote:
+> Koen Kooi<k.kooi@student.utwente.nl>  writes:
+>
+>> Big branches CANNOT be merged without proper review, but I don't think
+>> anyone wants to review a few hundred commits :/
+>>
+>> So, what do you think about this?
+>
+> Big branches are usually wrong. Instead of using diffsplit I'd suggest
+> that people provide the patches as patch series, as done in Linux
+> kernel, or in topic branches.
 
-I've built a custom toolchain which is in $PATH.
-~/oe$ i686-linux<TAB><TAB> gives this output:
-i686-linux-addr2line        i686-linux-gccbug                 i686-linux-r=
-anlib
-i686-linux-ar                   i686-linux-gcov                     i686-l=
-inux-readelf
-i686-linux-as                   i686-linux-gprof                    i686-l=
-inux-real-ld
-i686-linux-c++filt             i686-linux-i686-linux-gcc       i686-linux-=
-size
-i686-linux-cpp                 i686-linux-ld                          i686=
--linux-strings
-i686-linux-g++                i686-linux-nm                        i686-li=
-nux-strip
-i686-linux-gcc                 i686-linux-objcopy        
-i686-linux-gcc-4.3.1        i686-linux-objdump
+That's an implementation detail, I think we are after the same thing :)
 
-I've also tested the toolchain with hello.c program:
-# ----------------------
-#include<stdio.h>
+The thing that prompted me to write is email is this:
 
-int main(void)
-{
-    printf("Hello World!\n");
-    return 0;
-}
-# ----------------------
-~/tmpHello$ i686-linux-gcc-4.3.1 hello.c -o hello
-and it works.
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/log/&h=john_lee/openmoko-merges
 
-so, I don't understand why compile task fails with this error.
+I tried to review a portion of it, but it is too much and doing a time 
+based review ends up in going "hmm, this is wrong" and seeing it is 
+fixed a few commits later. But let's not get ahead of things, no-one has 
+asked for a review of that branch yet :)
 
+I'd love to see that branch as patch series where we will have a few 
+review rounds, but I don't know if John was enough time to do something 
+like that, so the diffsplit suggestion was there to save him a bootload 
+of time.
 
+> If the user/devel has a server where he/she can host the branches, a
+> set of small topic branches are easier to review and merge. Otherwise
+> git send-email does the work and could send the patch set to mailing
+> list.
 
-Some bits abountmy configuration:
-I use org.openembedded.stable branch
+I agree on that.
 
-Some lines from my local.conf:
-MACHINE =3D "i686-generic"
-TARGET_OS =3D "linux"
-DISTRO =3D "unmaintained/generic"
+regards,
 
-ASSUME_PROVIDED +=3D "virtual/${TARGET_PREFIX}gcc"
-ASSUME_PROVIDED +=3D "virtual/${TARGET_PREFIX}g++"
-
-PREFERRED_PROVIDERS =3D "virtual/qte:qte virtual/libqpe:libqpe-opie"
-PREFERRED_PROVIDERS +=3D " virtual/libsdl:libsdl-x11"
-PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-i=
-nitial"
-PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}gcc:gcc-cross"
-PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}g++:gcc-cross"
-
-###### stuff I added
-
-TARGET_LDFLAGS_prepend =3D ", -L/home/claudiu/oe/myToolchain/cross/lib \
--Wl,-rpath-link,/home/claudiu/oe/myToolchain/cross/lib -Wl,-rpath-link "
-
-TARGET_CPPFLAGS_append =3D ", -I/home/claudiu/oe/myToolchain/cross/include=
- "
-
-export CC=3D"${CCACHE}i686-linux-gcc-4.3.1 ${HOST_CC_ARCH}"
-export CXX=3D"${CCACHE}i686-linux-g++ ${HOST_CC_ARCH}"
-export CPP=3D"i686-linux-gcc-4.3.1 -E"
-export LD=3D"i686-linux-ld"
-export AR=3D"i686-linux-ar"
-export AS=3D"i686-linux-as"
-export RANLIB=3D"i686-linux-ranlib"
-export STRIP=3D"i686-linux-strip"
+Koen
 
 
 
-Someone can help me?
-
-
-
-  
-From gcho-openembedded-devel@m.gmane.org Wed Dec 17 17:04:34 2008
-Received: from [80.91.229.2] (helo
