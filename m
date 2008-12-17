@@ -1,25 +1,34 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LCsOf-0002Ad-Ox
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Dec 2008 10:08:49 +0100
-Received: (qmail invoked by alias); 17 Dec 2008 09:04:17 -0000
-Received: from e179038145.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.179.38.145]
-	by mail.gmx.net (mp041) with SMTP; 17 Dec 2008 10:04:17 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+rM8F8ZMqra3gDOzM1+reyLP1MFYcioLhNstKU3j
-	3FAYoopjqbCL1L
-Message-ID: <4948C0C8.7010702@gmx.net>
-Date: Wed, 17 Dec 2008 10:05:12 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.58
-Subject: How to integrate this into OE?
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LCsUg-0001ay-Jl
+	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 10:15:04 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LCsQF-0001rf-SJ
+	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 09:10:27 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 17 Dec 2008 09:10:27 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 17 Dec 2008 09:10:27 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 17 Dec 2008 10:10:19 +0100
+Message-ID: <giaflr$oj3$1@ger.gmane.org>
+References: <20081216224735.F3BC6189331@amethyst.openembedded.net>
+	<200812170034.08289.mickey@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081205 Shredder/3.0b2pre
+In-Reply-To: <200812170034.08289.mickey@vanille-media.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [oe-commits] Koen Kooi : evas: ARM_INSTRUCTION_SET = "arm"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,72 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Dec 2008 09:08:50 -0000
-X-Groupsio-MsgNum: 7008
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigC9959F37EBD27A7116A3996D"
+X-List-Received-Date: Wed, 17 Dec 2008 09:15:05 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enigC9959F37EBD27A7116A3996D
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On 17-12-08 00:34, Michael 'Mickey' Lauer wrote:
+> Am Tuesday 16 December 2008 23:47:35 schrieb GIT User account:
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: 2f94ddc3655eeed0235439beb69cabd9f2d02107
+>> URL:
+>> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=2f94ddc3655ee
+>> ed0235439beb69cabd9f2d02107
+>>
+>> Author: Koen Kooi<koen@openembedded.org>
+>> Date:   Tue Dec 16 23:43:51 2008 +0100
+>>
+>> evas: ARM_INSTRUCTION_SET = "arm"
+>
+> Just curious... why?
 
-Hi,
-get 'notify-send' for your distro (libnotify-bin in Debian/Ubuntu) and
-then try this bash script ->
+because it fails to build otherwise. The compiler chokes on the 16bit 
+engines.
 
-sd ()
-{
-  local cmd=3D$@
+regards,
 
-  local app=3D$1
-  shift
-  ($app "$@")
-
-  if [ $? =3D 0 ]
-  then
-    notify-send ":-) done: '$cmd'"
-  else
-    notify-send --urgency=3Dcritical ":'( <i>failed:</i> '$cmd'"
-  fi
-}
-
-like this:
-	sd make bla
-
-or enjoy success:
-	sd echo "Hello World"
-
-If you do not want to try this out. This script uses freedesktop.org's
-notify-send application to inform you whether the operation following sd
-failed or not. It also prints the command and paints an appropriate
-emoticon. I find this practical when I am working on OE and check my
-mail, read blogs while a build is running.
-
-At the moment I would use this for OE like this:
-
-	sd bitbake foobar
-
-and get a nice graphical notice whether my build failed or succeeded.
-My question is how could we optionally put this into OE directly?
-Ideally in some form of 'INHERIT +=3D notify-send'.
-
-Regards
-Robert
+Koen
 
 
---------------enigC9959F37EBD27A7116A3996D
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iEYEAREIAAYFAklIwMwACgkQG9cfwmwwEtruNQCgmXGyriRX4GnN1qyFqURqAmK2
-BbsAoJrizO8m80fjoSJVGL9z44SbZqan
-=xe+U
------END PGP SIGNATURE-----
-
---------------enigC9959F37EBD27A7116A3996D--
