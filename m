@@ -1,27 +1,31 @@
-Received: from [128.178.224.219] (helo=smtp0.epfl.ch)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1LCxip-0000Yv-85
-	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 15:49:59 +0100
-Received: (qmail 9050 invoked by uid 107); 17 Dec 2008 14:45:26 -0000
-Received: from mailav2.epfl.ch (128.178.50.191)
-	by smtp0.epfl.ch with SMTP; 17 Dec 2008 14:45:26 -0000
-Received: from (unknown [128.178.224.219]) by mailav2.epfl.ch with smtp
-	id 31ea_570070ca_cc49_11dd_8a01_00114337c797;
-	Wed, 17 Dec 2008 15:45:24 +0100
-Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
-	by smtp0.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Wed, 17 Dec 2008 15:45:25 +0100
-Message-ID: <49491085.1080405@epfl.ch>
-Date: Wed, 17 Dec 2008 15:45:25 +0100
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
-User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <otavio@freedom.ind.br>) id 1LCyPj-0006qg-DI
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Dec 2008 16:34:19 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id C58D3400CA;
+	Wed, 17 Dec 2008 11:29:06 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id EBEDB22552;
+	Wed, 17 Dec 2008 13:28:39 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 8C2C3610045; Wed, 17 Dec 2008 13:25:17 -0200 (BRST)
+To: openembedded-devel@lists.openembedded.org
+References: <gib10j$i28$1@ger.gmane.org>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 17 Dec 2008 13:25:17 -0200
+In-Reply-To: <gib10j$i28$1@ger.gmane.org> (Koen Kooi's message of "Wed\,
+	17 Dec 2008 15\:06\:10 +0100")
+Message-ID: <87r6467rj6.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <494907CC.2020009@epfl.ch> <gib2hb$nk2$1@ger.gmane.org>
-In-Reply-To: <gib2hb$nk2$1@ger.gmane.org>
-Cc: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-Subject: Re: Best way to tune a distro and to build a toolchain for it
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [RFC] collapse commits in branches to easy review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,54 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Dec 2008 14:49:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 17 Dec 2008 15:34:19 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Thank you for your answer Koen.
+Koen Kooi <k.kooi@student.utwente.nl> writes:
 
-Koen Kooi wrote:
-> On 17-12-08 15:08, Valentin Longchamp wrote:
->> We have designed a processor board in our laboratory that we are going
->> to use to control our robots for experiments. The board is now supported
->> in OE (mx31moboard machine) and I am very happy to be able to build a
->> Linux distro for our board thank to OE.
->>
->> Until now I have used the Angstrom distro with success. Now since my use
->> is mostly going to be for a robot with no screen (and of course no
->> PIM/agenda, games and these kinds of things) I have always built a
->> console-image. However now I would like to add some packages by default
->> in the images that I want to build for our robot (for instance hal is
->> needed by one of our softs, I would like it to be included by default).
->>
->> I could do this by adding these packages in the MACHINE_EXTRA_RDEPENDS
->> variable in the machine config file, but I think this is more a distro
->> question.
-> 
-> No, it's image question. Stuff that goes into an image is an image 
-> question. I have multiple devices without a screen and use angstrom on 
-> it without troubles. There's absolutely no need for yet another distro.
+> Big branches CANNOT be merged without proper review, but I don't think
+> anyone wants to review a few hundred commits :/
+>
+> So, what do you think about this?
 
-OK. Sorry, there are still some concepts in OE that are a little bit 
-opaque to me. But I agree, it's definitely an image question. I want an 
-image that would fit my needs.
+Big branches are usually wrong. Instead of using diffsplit I'd suggest
+that people provide the patches as patch series, as done in Linux
+kernel, or in topic branches.
 
-> 
->> To summarize: what would be the best way to create a "robotic version"
->> of angstrom in OE ?
-> 
-> Create tasks and images for it. There's absolutely no need for yet 
-> another distro.
-> 
+If the user/devel has a server where he/she can host the branches, a
+set of small topic branches are easier to review and merge. Otherwise
+git send-email does the work and could send the patch set to mailing
+list.
 
-Of course I don't want to create yet another distro. That's what I meant 
-by "tuning". But the correct concepts were tasks and an image for for 
-this task.
+My 2c.
 
 -- 
-Valentin Longchamp, PhD Student, EPFL-STI-LSRO1
-valentin.longchamp@epfl.ch, Phone: +41216937827
-http://people.epfl.ch/valentin.longchamp
-MEA3485, Station 9, CH-1015 Lausanne
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
