@@ -1,32 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.44.155] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LCxW8-00007p-1M
-	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 15:36:52 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LCxRk-000733-8p
-	for openembedded-devel@openembedded.org; Wed, 17 Dec 2008 14:32:20 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 17 Dec 2008 14:32:20 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 17 Dec 2008 14:32:20 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 17 Dec 2008 15:32:11 +0100
-Message-ID: <gib2hb$nk2$1@ger.gmane.org>
-References: <494907CC.2020009@epfl.ch>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081211 Shredder/3.0b2pre
+	(envelope-from <cliff.brake@gmail.com>) id 1LCxep-0000Ro-VR
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Dec 2008 15:45:52 +0100
+Received: by yx-out-1718.google.com with SMTP id 4so1607157yxp.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Dec 2008 06:41:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=wsSNHnOkH/wuYY+56NWRQcf85NZwdlxP90Lja0XgYEc=;
+	b=pmKpqTThwKbCSa4xwmEo9bAtrlw3owEfh2QXNjwFtXamr5M8v98vlyzl8Tncgvao4t
+	lOi6D4AAfym6R5XPEiYdPHAKQ14IuOuEb5OPcSq4ZbK2VxLi2Fnf+Abf4Yy7jOPiIFjt
+	pn4rxOr4U1pvuiLXTaIDIsEmzNcYFa6J9PVFE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=S7Qy8KVNMRLBf5dF8cq7kjGUw5iJciP2BkbDbJNpRBFL47i/IyWTwXfhJMJXNL9rwy
+	a2wpNf/n3pPlFIgeXhLw8fdYeRMwj3ZXmjOqQHwLnJMO4Pia2vsyJpakim8lGgd/BGXt
+	wiCis7bg0qBa8P69jxVMfoM5gzGn99n119XZw=
+Received: by 10.151.38.12 with SMTP id q12mr1462093ybj.149.1229524880299;
+	Wed, 17 Dec 2008 06:41:20 -0800 (PST)
+Received: by 10.151.116.4 with HTTP; Wed, 17 Dec 2008 06:41:20 -0800 (PST)
+Message-ID: <f96d234e0812170641u414f82ccs70921455c138761c@mail.gmail.com>
+Date: Wed, 17 Dec 2008 09:41:20 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <494907CC.2020009@epfl.ch>
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+References: <494907CC.2020009@epfl.ch>
 Subject: Re: Best way to tune a distro and to build a toolchain for it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,61 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Dec 2008 14:36:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 17 Dec 2008 14:45:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 17-12-08 15:08, Valentin Longchamp wrote:
+On Wed, Dec 17, 2008 at 9:08 AM, Valentin Longchamp
+<valentin.longchamp@epfl.ch> wrote:
 > Hello,
 >
-> We have designed a processor board in our laboratory that we are going
-> to use to control our robots for experiments. The board is now supported
-> in OE (mx31moboard machine) and I am very happy to be able to build a
-> Linux distro for our board thank to OE.
+> We have designed a processor board in our laboratory that we are going to
+> use to control our robots for experiments. The board is now supported in OE
+> (mx31moboard machine) and I am very happy to be able to build a Linux distro
+> for our board thank to OE.
 >
-> Until now I have used the Angstrom distro with success. Now since my use
-> is mostly going to be for a robot with no screen (and of course no
-> PIM/agenda, games and these kinds of things) I have always built a
-> console-image. However now I would like to add some packages by default
-> in the images that I want to build for our robot (for instance hal is
-> needed by one of our softs, I would like it to be included by default).
+> Until now I have used the Angstrom distro with success. Now since my use is
+> mostly going to be for a robot with no screen (and of course no PIM/agenda,
+> games and these kinds of things) I have always built a console-image.
+> However now I would like to add some packages by default in the images that
+> I want to build for our robot (for instance hal is needed by one of our
+> softs, I would like it to be included by default).
 >
 > I could do this by adding these packages in the MACHINE_EXTRA_RDEPENDS
 > variable in the machine config file, but I think this is more a distro
 > question.
-
-No, it's image question. Stuff that goes into an image is an image 
-question. I have multiple devices without a screen and use angstrom on 
-it without troubles. There's absolutely no need for yet another distro.
-
-> To summarize: what would be the best way to create a "robotic version"
-> of angstrom in OE ?
-
-Create tasks and images for it. There's absolutely no need for yet 
-another distro.
-
-> The second question is about toolchains. This platform is going to be
-> used by many other labs that are going to use our robots or at least our
-> hardware. I would like to be able to build a "sdk" for them, with all
-> the libs that we include by default in their sdk (because I already fear
-> all the mechanical engineers that would have to build OE ...). I can
-> build meta-toolchain, but how could I tune a toolchain so that it
-> includes for instance all the headers for the libs that I would add in
-> my "robotic version" of anstrom ?
-
-Have a look at meta-sdk*.bb, that shows how you can install packages 
-into a toolchain.
-
-regards,
-
-Koen
-
 >
-> Thank you for your help.
->
-> Val
->
+> To summarize: what would be the best way to create a "robotic version" of
+> angstrom in OE ?
 
+Define a custom image: http://bec-systems.com/web/content/view/79/9/
 
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
