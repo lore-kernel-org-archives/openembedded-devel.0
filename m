@@ -1,25 +1,25 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LCq8V-0005SL-9k
+	(envelope-from <theBohemian@gmx.net>) id 1LCsOf-0002Ad-Ox
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Dec 2008 07:43:59 +0100
-Received: (qmail invoked by alias); 17 Dec 2008 06:39:27 -0000
+	Wed, 17 Dec 2008 10:08:49 +0100
+Received: (qmail invoked by alias); 17 Dec 2008 09:04:17 -0000
 Received: from e179038145.adsl.alicedsl.de (EHLO [192.168.4.110])
 	[85.179.38.145]
-	by mail.gmx.net (mp071) with SMTP; 17 Dec 2008 07:39:27 +0100
+	by mail.gmx.net (mp041) with SMTP; 17 Dec 2008 10:04:17 +0100
 X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX198u6IjShJ8v34GUkxZX/DjjDUb7oAwO+cAB9HAp8
-	hi2YzZKXaQmjdA
-Message-ID: <49489ED8.4090903@gmx.net>
-Date: Wed, 17 Dec 2008 07:40:24 +0100
+X-Provags-ID: V01U2FsdGVkX1+rM8F8ZMqra3gDOzM1+reyLP1MFYcioLhNstKU3j
+	3FAYoopjqbCL1L
+Message-ID: <4948C0C8.7010702@gmx.net>
+Date: Wed, 17 Dec 2008 10:05:12 +0100
 From: Robert Schuster <theBohemian@gmx.net>
 User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 X-Enigmail-Version: 0.95.0
 X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.67
-Subject: glibc recipes and LD_LIBRARY_PATH
+X-FuHaFi: 0.58
+Subject: How to integrate this into OE?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,33 +33,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Dec 2008 06:44:00 -0000
-X-Groupsio-MsgNum: 7007
+X-List-Received-Date: Wed, 17 Dec 2008 09:08:50 -0000
+X-Groupsio-MsgNum: 7008
 Content-Type: multipart/signed; micalg=pgp-sha256;
 	protocol="application/pgp-signature";
-	boundary="------------enigA50EC3EE8B336E8AF9FE0151"
+	boundary="------------enigC9959F37EBD27A7116A3996D"
 
---------------enigA50EC3EE8B336E8AF9FE0151
+--------------enigC9959F37EBD27A7116A3996D
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Hi,
-apparently the glibc build system does not like it when LD_LIBRARY_PATH
-is set. Unfortunately on Debian for amd64 this variable points to
+get 'notify-send' for your distro (libnotify-bin in Debian/Ubuntu) and
+then try this bash script ->
 
-":/emul/ia32-linux/usr/lib"
+sd ()
+{
+  local cmd=3D$@
 
-all times. Does anything speak against adding:
+  local app=3D$1
+  shift
+  ($app "$@")
 
-LD_LIBRARY_PATH[unexport] =3D "1"
+  if [ $? =3D 0 ]
+  then
+    notify-send ":-) done: '$cmd'"
+  else
+    notify-send --urgency=3Dcritical ":'( <i>failed:</i> '$cmd'"
+  fi
+}
 
-to the recipes?
+like this:
+	sd make bla
+
+or enjoy success:
+	sd echo "Hello World"
+
+If you do not want to try this out. This script uses freedesktop.org's
+notify-send application to inform you whether the operation following sd
+failed or not. It also prints the command and paints an appropriate
+emoticon. I find this practical when I am working on OE and check my
+mail, read blogs while a build is running.
+
+At the moment I would use this for OE like this:
+
+	sd bitbake foobar
+
+and get a nice graphical notice whether my build failed or succeeded.
+My question is how could we optionally put this into OE directly?
+Ideally in some form of 'INHERIT +=3D notify-send'.
 
 Regards
 Robert
 
 
---------------enigA50EC3EE8B336E8AF9FE0151
+--------------enigC9959F37EBD27A7116A3996D
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -68,9 +96,9 @@ Content-Disposition: attachment; filename="signature.asc"
 Version: GnuPG v1.4.9 (GNU/Linux)
 Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iEYEAREIAAYFAklIntoACgkQG9cfwmwwEtqGDwCfRssHjjUDSVLWHicjYkTO6kib
-WrEAnj5nIYhs4aMqF0qTVCFvP8tbx3Hp
-=wnhn
+iEYEAREIAAYFAklIwMwACgkQG9cfwmwwEtruNQCgmXGyriRX4GnN1qyFqURqAmK2
+BbsAoJrizO8m80fjoSJVGL9z44SbZqan
+=xe+U
 -----END PGP SIGNATURE-----
 
---------------enigA50EC3EE8B336E8AF9FE0151--
+--------------enigC9959F37EBD27A7116A3996D--
