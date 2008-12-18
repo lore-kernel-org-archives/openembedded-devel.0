@@ -1,22 +1,35 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1LD7Gp-00087I-Jx
+	(envelope-from <john_lee@openmoko.org>) id 1LDDEC-000293-IR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 02:01:44 +0100
-Received: from [92.117.79.155] (helo=tamarin.localnet)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>)
-	id 1LD7CO-0003XX-ON; Thu, 18 Dec 2008 01:57:10 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: bitbake-dev@lists.berlios.de
-Date: Thu, 18 Dec 2008 01:55:31 +0100
-User-Agent: KMail/1.10.1 (Linux/2.6.27-9-generic; KDE/4.1.2; i686; ; )
+	Thu, 18 Dec 2008 08:23:24 +0100
+Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
+	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
+	id 1LDD9a-0000ma-NE for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Dec 2008 15:18:48 +0800
+Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
+	(envelope-from <john_lee@openmoko.org>) id 1LDD9x-0000fB-V5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Dec 2008 15:19:01 +0800
+Date: Thu, 18 Dec 2008 15:19:01 +0800
+From: John Lee <john_lee@openmoko.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20081218071901.GB2135@buddha.tw.openmoko.com>
+Mail-Followup-To: openembedded-devel
+	<openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-Message-Id: <200812180155.31679.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.117.79.155
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Bitbake: Switch to git?
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 172.16.23.192
+X-SA-Exim-Mail-From: john_lee@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: openmoko-merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,21 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2008 01:01:47 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Dec 2008 07:23:25 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hey Richard, all,
+Hi,
 
-I think there is broad agreement on switching Bitbake over to git? Is there 
-any striking reason to not just create a bitbake repository on 
-git.openembedded.net and use git-svn to convert the whole svn repository?
+Please review john_lee/openmoko-merges.  I started from
+holger/openmoko-merges then rebased it to oe.dev.
+
+The general principle is:
+
+1) Minimal impact: most of the big changes apply to om distro only.
+My thought is we merge this first, then apply to the general.
+
+2) Keep history: I did it the hard way by cherry-picking one by one
+since the history is different after the mtn->git switch.  Most of the
+commit messages are kept, but that creates a lot of commits to review.
+
+3) PKG_TAGS, qtopia, toolchain, om-utils and opkg stuffs are left out
+for later merge.
+
+Not sure how long it's going to take.  My plan is to merge it this
+Monday if it's okay...
 
 
-Personally I think now would be a good time.
-
-z.
+Regards,
+John
 
 
