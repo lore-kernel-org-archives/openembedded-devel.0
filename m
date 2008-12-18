@@ -1,27 +1,38 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LDLKK-0005gD-GG
-	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 17:02:16 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id CE79C16DFBD
-	for <openembedded-devel@openembedded.org>;
-	Thu, 18 Dec 2008 17:07:48 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id D20432A41E3
-	for <openembedded-devel@openembedded.org>;
-	Thu, 18 Dec 2008 16:57:40 +0100 (CET)
+	(envelope-from <john_lee@openmoko.org>) id 1LDLuZ-00049W-Iu
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Dec 2008 17:39:44 +0100
+Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
+	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
+	id 1LDLpu-0007HS-Sg for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Dec 2008 00:35:05 +0800
+Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
+	(envelope-from <john_lee@openmoko.org>) id 1LDLqI-0007fC-Du
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Dec 2008 00:35:18 +0800
+Date: Fri, 19 Dec 2008 00:35:18 +0800
+From: John Lee <john_lee@openmoko.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20081218163518.GK2135@buddha.tw.openmoko.com>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <20081218071901.GB2135@buddha.tw.openmoko.com>
+	<20081218150517.GI2135@buddha.tw.openmoko.com>
+	<gidpuk$29d$1@ger.gmane.org>
 MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Thu, 18 Dec 2008 16:57:41 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF582@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Problem fetching "lite" source
-Thread-Index: AclhKVtsUBrsbFn5Tw2kEzPCguxoiA==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@openembedded.org>
-Subject: Problem fetching "lite" source
+In-Reply-To: <gidpuk$29d$1@ger.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 172.16.23.192
+X-SA-Exim-Mail-From: john_lee@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: Re: openmoko-merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +46,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2008 16:02:16 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 18 Dec 2008 16:39:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-SSdtIG5vdCBzdXJlIHdoYXQncyB3cm9uZyBoZXJlLg0KDQpQcm9ibGVtIGluIFNSQ19VUkkgZGVm
-aW5pdG9uPw0KUHJvYmxlbSB3aXRoIGZpbGUgbmFtaW5nIG9mIGJiIGZpbGU/DQpCaXRiYWtlIGJ1
-Zz8NCg0KTk9URTogUnVubmluZyB0YXNrIDM0NSBvZiA1MjYgKElEOiAyLCAvb3B0L29wZW5lbWJl
-ZGRlZC9wYWNrYWdlcy9kaXJlY3RmYi9saXRlXzAuOS4yNitjdnMyMDA3MDIwNy5iYiwgZG9fZmV0
-Y2gpDQpOT1RFOiBwYWNrYWdlIGxpdGUtMC45LjI2K2N2czIwMDcwMjA3OiBzdGFydGVkDQpOT1RF
-OiBwYWNrYWdlIGxpdGUtMC45LjI2K2N2czIwMDcwMjA3LXIwOiB0YXNrIGRvX2ZldGNoOiBzdGFy
-dGVkDQpOT1RFOiBmZXRjaCBodHRwOi8vd3d3LmFuZ3N0cm9tLWRpc3RyaWJ1dGlvbi5vcmcvdW5z
-dGFibGUvc291cmNlcy9saXRlX2N2cy5kaXJlY3RmYi5vcmdfX3MyMDA3MDIwNy50YXIuZ3oNCi0t
-MjAwOC0xMi0xOCAxNjozMzoxNi0tICBodHRwOi8vd3d3LmFuZ3N0cm9tLWRpc3RyaWJ1dGlvbi5v
-cmcvdW5zdGFibGUvc291cmNlcy9saXRlX2N2cy5kaXJlY3RmYi5vcmdfX3MyMDA3MDIwNy50YXIu
-Z3oNClJlc29sdmluZyB3d3cuYW5nc3Ryb20tZGlzdHJpYnV0aW9uLm9yZy4uLiA4NS4yMTQuNDAu
-MjI2DQpDb25uZWN0aW5nIHRvIHd3dy5hbmdzdHJvbS1kaXN0cmlidXRpb24ub3JnfDg1LjIxNC40
-MC4yMjZ8OjgwLi4uIGNvbm5lY3RlZC4NCkhUVFAgcmVxdWVzdCBzZW50LCBhd2FpdGluZyByZXNw
-b25zZS4uLiA0MDQgTm90IEZvdW5kDQoyMDA4LTEyLTE4IDE2OjMzOjE2IEVSUk9SIDQwNDogTm90
-IEZvdW5kLg0KDQpOT1RFOiBGZXRjaCBjdnM6Ly9hbm9ueW1vdXNAY3ZzLmRpcmVjdGZiLm9yZy9j
-dnMvZGlyZWN0ZmI7bWV0aG9kPXBzZXJ2ZXI7bW9kdWxlPWxpdGU7ZGF0ZT1zMjAwNzAyMDcNCmN2
-cyBbY2hlY2tvdXQgYWJvcnRlZF06IENhbid0IHBhcnNlIGRhdGUvdGltZTogYHMyMDA3MDIwNyBV
-VEMnDQo=
+On Thu, Dec 18, 2008 at 04:24:04PM +0100, Koen Kooi wrote:
+> On 18-12-08 16:05, John Lee wrote:
+>> Okay, here is what I will do:
+>>
+>> 1) commit zero controversial part into oe.dev first.
+>
+> You don't know if it's controversial or not without it being reviewed.  
+> So no, don't commit stuff.
+
+Although I haven't committed directly upstream for quite a while, I
+think I can be the judge of that.  Feel free to revert and explain if
+anything wrong.
+
+>> 2) put fastboot related stuffs into another branch for review
+>
+> Make another branch for the stuff you thing is non-controversial so we  
+> can review that as well.
+>
+>> 3) rebase -i the rest to create a clean history, force update the
+>> openmoko-merges branch, then ask for review again.
+>
+> Try to keep every branch below approx 30 commits, otherwise it becomes  
+> to cumbersome to review.
+
+Yes sir, will do.
+
+
+- John
+
+>
+> regards,
+>
+> Koen
+>
+>>
+>>
+>> Regards,
+>> John
+>>
+>>
+>>
+>>
+>> On Thu, Dec 18, 2008 at 03:19:01PM +0800, John Lee wrote:
+>>> Hi,
+>>>
+>>> Please review john_lee/openmoko-merges.  I started from
+>>> holger/openmoko-merges then rebased it to oe.dev.
+>>>
+>>> The general principle is:
+>>>
+>>> 1) Minimal impact: most of the big changes apply to om distro only.
+>>> My thought is we merge this first, then apply to the general.
+>>>
+>>> 2) Keep history: I did it the hard way by cherry-picking one by one
+>>> since the history is different after the mtn->git switch.  Most of the
+>>> commit messages are kept, but that creates a lot of commits to review.
+>>>
+>>> 3) PKG_TAGS, qtopia, toolchain, om-utils and opkg stuffs are left out
+>>> for later merge.
+>>>
+>>> Not sure how long it's going to take.  My plan is to merge it this
+>>> Monday if it's okay...
+>>>
+>>>
+>>> Regards,
+>>> John
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
