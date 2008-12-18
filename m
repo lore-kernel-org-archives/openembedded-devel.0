@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LDNKa-0003Va-4R
-	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 19:10:40 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LDNG3-0005ra-Fy
-	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 18:05:59 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 18 Dec 2008 18:05:59 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 18 Dec 2008 18:05:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 18 Dec 2008 19:05:51 +0100
-Message-ID: <gie3e0$6th$1@ger.gmane.org>
-References: <20081218071901.GB2135@buddha.tw.openmoko.com>	<20081218150517.GI2135@buddha.tw.openmoko.com>	<gidpuk$29d$1@ger.gmane.org>
-	<1229619255.9166.66.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081211 Shredder/3.0b2pre
-In-Reply-To: <1229619255.9166.66.camel@mill.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: openmoko-merges
+	(envelope-from <zecke@selfish.org>) id 1LDQbQ-00045Z-Dd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Dec 2008 22:40:16 +0100
+Received: from [92.117.147.245] (helo=tamarin.localnet)
+	by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>) id 1LDQWu-0002MR-GW
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Dec 2008 22:35:39 +0100
+From: Holger Freyther <zecke@selfish.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Dec 2008 22:33:58 +0100
+User-Agent: KMail/1.10.1 (Linux/2.6.27-9-generic; KDE/4.1.2; i686; ; )
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF582@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF582@hiob.intern.dresearch.de>
+MIME-Version: 1.0
+Message-Id: <200812182233.58392.zecke@selfish.org>
+X-Broken-Reverse-DNS: no host name found for IP address 92.117.147.245
+Subject: Re: Problem fetching "lite" source
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,34 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2008 18:10:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 18 Dec 2008 21:40:17 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 18-12-08 17:54, Phil Blundell wrote:
-> On Thu, 2008-12-18 at 16:24 +0100, Koen Kooi wrote:
->> On 18-12-08 16:05, John Lee wrote:
->>> Okay, here is what I will do:
->>>
->>> 1) commit zero controversial part into oe.dev first.
->> You don't know if it's controversial or not without it being reviewed.
->> So no, don't commit stuff.
+On Thursday 18 December 2008 16:57:41 Sledz, Steffen wrote:
+> I'm not sure what's wrong here.
 >
-> Is there now a policy of requiring review and pre-approval for all
-> checkins to the tree?  If so, when was this instigated?  I haven't
-> noticed any discussion of that and I would not be in favour of any such
-> change.
+> Problem in SRC_URI definiton?
+> Problem with file naming of bb file?
+> Bitbake bug?
+>
+> NOTE: Running task 345 of 526 (ID: 2,
+> /opt/openembedded/packages/directfb/lite_0.9.26+cvs20070207.bb, do_fetch)
 
-No policy for checkins per se, but for merging commits for large 
-branches. In this case, a review was requested and the response was to 
-*not* commit anything.
-Asking for a review and then saying "I'll be the judge of things" is a 
-bit backwards.
-The coreteam will make a statement about merging branches soonish.
+go to that file and change the 9: to a 10: in the SRC_URI... and then send a 
+patch.
 
-regards,
 
-Koen
-
+z.
 
 
