@@ -1,36 +1,33 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDKVT-0007Qj-16
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 16:09:43 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
-	id 1LDKQo-0004ln-Nv for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 23:05:05 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDKRB-0000LK-W6
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 23:05:18 +0800
-Date: Thu, 18 Dec 2008 23:05:17 +0800
-From: John Lee <john_lee@openmoko.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20081218150517.GI2135@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LDKo0-0004j9-UO
+	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 16:28:53 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LDKjW-0007Ck-MV
+	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 15:24:14 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 18 Dec 2008 15:24:14 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 18 Dec 2008 15:24:14 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 18 Dec 2008 16:24:04 +0100
+Message-ID: <gidpuk$29d$1@ger.gmane.org>
 References: <20081218071901.GB2135@buddha.tw.openmoko.com>
-MIME-Version: 1.0
-In-Reply-To: <20081218071901.GB2135@buddha.tw.openmoko.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+	<20081218150517.GI2135@buddha.tw.openmoko.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081211 Shredder/3.0b2pre
+In-Reply-To: <20081218150517.GI2135@buddha.tw.openmoko.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: openmoko-merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,54 +42,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2008 15:09:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Dec 2008 15:28:53 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Okay, here is what I will do:
+On 18-12-08 16:05, John Lee wrote:
+> Okay, here is what I will do:
+>
+> 1) commit zero controversial part into oe.dev first.
 
-1) commit zero controversial part into oe.dev first.
+You don't know if it's controversial or not without it being reviewed. 
+So no, don't commit stuff.
 
-2) put fastboot related stuffs into another branch for review
+> 2) put fastboot related stuffs into another branch for review
 
-3) rebase -i the rest to create a clean history, force update the
-openmoko-merges branch, then ask for review again.
+Make another branch for the stuff you thing is non-controversial so we 
+can review that as well.
 
+> 3) rebase -i the rest to create a clean history, force update the
+> openmoko-merges branch, then ask for review again.
 
-Regards,
-John
+Try to keep every branch below approx 30 commits, otherwise it becomes 
+to cumbersome to review.
 
+regards,
 
+Koen
 
-
-On Thu, Dec 18, 2008 at 03:19:01PM +0800, John Lee wrote:
-> Hi,
-> 
-> Please review john_lee/openmoko-merges.  I started from
-> holger/openmoko-merges then rebased it to oe.dev.
-> 
-> The general principle is:
-> 
-> 1) Minimal impact: most of the big changes apply to om distro only.
-> My thought is we merge this first, then apply to the general.
-> 
-> 2) Keep history: I did it the hard way by cherry-picking one by one
-> since the history is different after the mtn->git switch.  Most of the
-> commit messages are kept, but that creates a lot of commits to review.
-> 
-> 3) PKG_TAGS, qtopia, toolchain, om-utils and opkg stuffs are left out
-> for later merge.
-> 
-> Not sure how long it's going to take.  My plan is to merge it this
-> Monday if it's okay...
-> 
-> 
+>
+>
 > Regards,
 > John
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
+>
+> On Thu, Dec 18, 2008 at 03:19:01PM +0800, John Lee wrote:
+>> Hi,
+>>
+>> Please review john_lee/openmoko-merges.  I started from
+>> holger/openmoko-merges then rebased it to oe.dev.
+>>
+>> The general principle is:
+>>
+>> 1) Minimal impact: most of the big changes apply to om distro only.
+>> My thought is we merge this first, then apply to the general.
+>>
+>> 2) Keep history: I did it the hard way by cherry-picking one by one
+>> since the history is different after the mtn->git switch.  Most of the
+>> commit messages are kept, but that creates a lot of commits to review.
+>>
+>> 3) PKG_TAGS, qtopia, toolchain, om-utils and opkg stuffs are left out
+>> for later merge.
+>>
+>> Not sure how long it's going to take.  My plan is to merge it this
+>> Monday if it's okay...
+>>
+>>
+>> Regards,
+>> John
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 
 
