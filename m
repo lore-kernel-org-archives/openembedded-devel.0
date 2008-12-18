@@ -1,35 +1,33 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDDEC-000293-IR
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 08:23:24 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
-	id 1LDD9a-0000ma-NE for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 15:18:48 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDD9x-0000fB-V5
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 15:19:01 +0800
-Date: Thu, 18 Dec 2008 15:19:01 +0800
-From: John Lee <john_lee@openmoko.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20081218071901.GB2135@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: openmoko-merges
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LDEr4-0001Gn-Jk
+	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 10:07:38 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LDEmb-0000Iz-2Z
+	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 09:03:01 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 18 Dec 2008 09:03:01 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 18 Dec 2008 09:03:01 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 18 Dec 2008 10:02:53 +0100
+Message-ID: <gid3jt$nr2$1@ger.gmane.org>
+References: <20081218071901.GB2135@buddha.tw.openmoko.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081211 Shredder/3.0b2pre
+In-Reply-To: <20081218071901.GB2135@buddha.tw.openmoko.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: openmoko-merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +41,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2008 07:23:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Dec 2008 09:07:38 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 18-12-08 08:19, John Lee wrote:
+> Hi,
+>
+> Please review john_lee/openmoko-merges.  I started from
+> holger/openmoko-merges then rebased it to oe.dev.
 
-Please review john_lee/openmoko-merges.  I started from
-holger/openmoko-merges then rebased it to oe.dev.
+> Not sure how long it's going to take.  My plan is to merge it this
+> Monday if it's okay...
 
-The general principle is:
+No. There's just too much in there too review in a week. Also, the stuff 
+I did review is just waaaaay to ugly to go in.
+Saying stuff will get fixed after the merge..... I've heard that before, 
+no-one actually fixes things after a merge.
 
-1) Minimal impact: most of the big changes apply to om distro only.
-My thought is we merge this first, then apply to the general.
+Most of these commits have two problems:
 
-2) Keep history: I did it the hard way by cherry-picking one by one
-since the history is different after the mtn->git switch.  Most of the
-commit messages are kept, but that creates a lot of commits to review.
-
-3) PKG_TAGS, qtopia, toolchain, om-utils and opkg stuffs are left out
-for later merge.
-
-Not sure how long it's going to take.  My plan is to merge it this
-Monday if it's okay...
+* They can be done in a much better, but still OM specific way (e.g. 
+FILESPATH)
+* They can be done in a generic way (e.g. alsa-states)
 
 
-Regards,
-John
+To give some small examples:
+
+* 
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&h=john_lee/openmoko-merges&id=c0041ba98c41b320a36cbc5a66d0c8762e52ac62
+
+--- a/packages/alsa/alsa-state.bb
++++ b/packages/alsa/alsa-state.bb
+@@ -20,6 +20,7 @@ inherit update-rc.d
+
+INITSCRIPT_PARAMS = "defaults 10"
++INITSCRIPT_PARAMS_openmoko = "start 39 S ."
+
+Distro overrides are strongly discouraged and in this case not needed, 
+since it's using 'defaults', so an optimization is welcomed. In a 
+similar vein, the change to the initscript can be done to the regular 
+one, no need to add a special openmoko version.
+
+* 
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&h=john_lee/openmoko-merges&id=64b844ec5cc0c1a6acb1a97d1ea745f15eadb38d
+this it what the device table feature is for, see org.oe/dev/files/ for 
+the device tables, machines can have multiple ones if needed.
+
+* 
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&h=john_lee/openmoko-merges&id=db77b062d51be86b946a11efcadaf8e41fd41727
+
+If you modify FILESPATH you can reuse the initscripts from the 
+initscripts packages so you don't need to copy over unchanged ones. 
+Having said that, I think this should all be merged into the initscripts 
+recipe so everyone can benefit from it.
+
+I suspect review and merging would be easier if you 'collapse' the 
+patches per recipe or per directory. Reviewing all the seperate commits 
+will take too much time :(
+
+Koen
+
 
 
