@@ -1,27 +1,34 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LDMiR-0002P5-1S
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 18:31:16 +0100
-Received: (qmail invoked by alias); 18 Dec 2008 17:26:36 -0000
-Received: from e178093009.adsl.alicedsl.de (EHLO [192.168.4.110]) [85.178.93.9]
-	by mail.gmx.net (mp011) with SMTP; 18 Dec 2008 18:26:36 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18L20BeG/sLgyGGWYxdlHnJ5HkFPinS32IqHJVmxj
-	Q38HcVsf/7kXXG
-Message-ID: <494A8809.502@gmx.net>
-Date: Thu, 18 Dec 2008 18:27:37 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20081218161337.32EA0189349@amethyst.openembedded.net>
-In-Reply-To: <20081218161337.32EA0189349@amethyst.openembedded.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.59
-Cc: John Lee <john_lee@openmoko.com>
-Subject: Re: [oe-commits] John Lee : om-gta02.conf: bring over this conf from om.dev
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LDNKa-0003Va-4R
+	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 19:10:40 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LDNG3-0005ra-Fy
+	for openembedded-devel@openembedded.org; Thu, 18 Dec 2008 18:05:59 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 18 Dec 2008 18:05:59 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 18 Dec 2008 18:05:59 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 18 Dec 2008 19:05:51 +0100
+Message-ID: <gie3e0$6th$1@ger.gmane.org>
+References: <20081218071901.GB2135@buddha.tw.openmoko.com>	<20081218150517.GI2135@buddha.tw.openmoko.com>	<gidpuk$29d$1@ger.gmane.org>
+	<1229619255.9166.66.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081211 Shredder/3.0b2pre
+In-Reply-To: <1229619255.9166.66.camel@mill.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: openmoko-merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,52 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2008 17:31:16 -0000
-X-Groupsio-MsgNum: 7037
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig903A857920C0E3E04494613D"
+X-List-Received-Date: Thu, 18 Dec 2008 18:10:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig903A857920C0E3E04494613D
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On 18-12-08 17:54, Phil Blundell wrote:
+> On Thu, 2008-12-18 at 16:24 +0100, Koen Kooi wrote:
+>> On 18-12-08 16:05, John Lee wrote:
+>>> Okay, here is what I will do:
+>>>
+>>> 1) commit zero controversial part into oe.dev first.
+>> You don't know if it's controversial or not without it being reviewed.
+>> So no, don't commit stuff.
+>
+> Is there now a policy of requiring review and pre-approval for all
+> checkins to the tree?  If so, when was this instigated?  I haven't
+> noticed any discussion of that and I would not be in favour of any such
+> change.
 
-Hi,
+No policy for checkins per se, but for merging commits for large 
+branches. In this case, a review was requested and the response was to 
+*not* commit anything.
+Asking for a review and then saying "I'll be the judge of things" is a 
+bit backwards.
+The coreteam will make a statement about merging branches soonish.
 
-GIT User account schrieb:
->  TARGET_ARCH =3D "arm"
-> -MACHINE_CLASS =3D "neo1973"
-> -PACKAGE_EXTRA_ARCHS =3D "fic-gta02 ${MACHINE_CLASS}"
-> +PACKAGE_EXTRA_ARCHS =3D "armv4t"
-Something may be missing. When the change is applied I cannot build
-anything because I get an error from the sanity checker:
+regards,
 
-ERROR:  Openembedded's config sanity checker detected a potential
-misconfiguration.
-	Either fix the cause of this error or at your own risk disable the
-checker (see sanity.conf).
-	Following is the list of potential problems / advisories:
-
-	Error, Your PACKAGE_ARCHS field contains duplicates. Perhaps you set
-EXTRA_PACKAGE_ARCHS twice accidently through some tune file?
-
-
-Regards
-Robert
+Koen
 
 
---------------enig903A857920C0E3E04494613D
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAklKiAwACgkQG9cfwmwwEtrlQgCgmFheymfVw/TMz9Eeyx0N5YtN
-seAAoIP5pq828u49Epu1PAorKNTEUzr9
-=Oy3D
------END PGP SIGNATURE-----
-
---------------enig903A857920C0E3E04494613D--
