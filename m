@@ -1,37 +1,27 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDLuZ-00049W-Iu
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Dec 2008 17:39:44 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
-	id 1LDLpu-0007HS-Sg for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2008 00:35:05 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDLqI-0007fC-Du
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2008 00:35:18 +0800
-Date: Fri, 19 Dec 2008 00:35:18 +0800
-From: John Lee <john_lee@openmoko.org>
+	(envelope-from <pb@reciva.com>)
+	id 1LDMD8-0004ic-4Q; Thu, 18 Dec 2008 17:58:54 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1LDM8e-0007XS-RY; Thu, 18 Dec 2008 16:54:17 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>)
+	id 1LDM8d-0006RL-GE; Thu, 18 Dec 2008 16:54:15 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081218163518.GK2135@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <gidpuk$29d$1@ger.gmane.org>
 References: <20081218071901.GB2135@buddha.tw.openmoko.com>
 	<20081218150517.GI2135@buddha.tw.openmoko.com>
 	<gidpuk$29d$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <gidpuk$29d$1@ger.gmane.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Date: Thu, 18 Dec 2008 16:54:15 +0000
+Message-Id: <1229619255.9166.66.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
 Subject: Re: openmoko-merges
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,87 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2008 16:39:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Dec 2008 16:58:54 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thu, Dec 18, 2008 at 04:24:04PM +0100, Koen Kooi wrote:
+On Thu, 2008-12-18 at 16:24 +0100, Koen Kooi wrote:
 > On 18-12-08 16:05, John Lee wrote:
->> Okay, here is what I will do:
->>
->> 1) commit zero controversial part into oe.dev first.
->
-> You don't know if it's controversial or not without it being reviewed.  
+> > Okay, here is what I will do:
+> >
+> > 1) commit zero controversial part into oe.dev first.
+> 
+> You don't know if it's controversial or not without it being reviewed. 
 > So no, don't commit stuff.
 
-Although I haven't committed directly upstream for quite a while, I
-think I can be the judge of that.  Feel free to revert and explain if
-anything wrong.
+Is there now a policy of requiring review and pre-approval for all
+checkins to the tree?  If so, when was this instigated?  I haven't
+noticed any discussion of that and I would not be in favour of any such
+change.
 
->> 2) put fastboot related stuffs into another branch for review
->
-> Make another branch for the stuff you thing is non-controversial so we  
-> can review that as well.
->
->> 3) rebase -i the rest to create a clean history, force update the
->> openmoko-merges branch, then ask for review again.
->
-> Try to keep every branch below approx 30 commits, otherwise it becomes  
-> to cumbersome to review.
-
-Yes sir, will do.
+p.
 
 
-- John
-
->
-> regards,
->
-> Koen
->
->>
->>
->> Regards,
->> John
->>
->>
->>
->>
->> On Thu, Dec 18, 2008 at 03:19:01PM +0800, John Lee wrote:
->>> Hi,
->>>
->>> Please review john_lee/openmoko-merges.  I started from
->>> holger/openmoko-merges then rebased it to oe.dev.
->>>
->>> The general principle is:
->>>
->>> 1) Minimal impact: most of the big changes apply to om distro only.
->>> My thought is we merge this first, then apply to the general.
->>>
->>> 2) Keep history: I did it the hard way by cherry-picking one by one
->>> since the history is different after the mtn->git switch.  Most of the
->>> commit messages are kept, but that creates a lot of commits to review.
->>>
->>> 3) PKG_TAGS, qtopia, toolchain, om-utils and opkg stuffs are left out
->>> for later merge.
->>>
->>> Not sure how long it's going to take.  My plan is to merge it this
->>> Monday if it's okay...
->>>
->>>
->>> Regards,
->>> John
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
