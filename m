@@ -1,21 +1,21 @@
 Received: from [124.219.5.209] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDX6u-0005zT-7P
+	(envelope-from <john_lee@openmoko.org>) id 1LDXgF-0006mL-Lo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2008 05:37:12 +0100
+	Fri, 19 Dec 2008 06:13:43 +0100
 Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
 	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
-	id 1LDX2C-0000jz-VL for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2008 12:32:32 +0800
+	id 1LDXbZ-0001eb-RD for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Dec 2008 13:09:03 +0800
 Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LDX2c-0007t9-Al
+	(envelope-from <john_lee@openmoko.org>) id 1LDXbz-00080u-8D
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2008 12:32:46 +0800
-Date: Fri, 19 Dec 2008 12:32:46 +0800
+	Fri, 19 Dec 2008 13:09:19 +0800
+Date: Fri, 19 Dec 2008 13:09:19 +0800
 From: John Lee <john_lee@openmoko.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081219043245.GN2135@buddha.tw.openmoko.com>
+Message-ID: <20081219050919.GP2135@buddha.tw.openmoko.com>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org
 References: <20081218161337.32EA0189349@amethyst.openembedded.net>
 	<494A8809.502@gmx.net>
@@ -45,17 +45,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Dec 2008 04:37:12 -0000
+X-List-Received-Date: Fri, 19 Dec 2008 05:13:44 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-
-
-I just shot myself in the foot do I?
-
-(checking everything over again...)
-
-
-- John
 
 On Thu, Dec 18, 2008 at 06:27:37PM +0100, Robert Schuster wrote:
 > Hi,
@@ -82,12 +74,11 @@ On Thu, Dec 18, 2008 at 06:27:37PM +0100, Robert Schuster wrote:
 > Robert
 > 
 
+I just love these new tune files.. :)
+
+fix commited.
 
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+- John
 
 
