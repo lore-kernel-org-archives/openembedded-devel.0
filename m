@@ -1,40 +1,44 @@
-Received: from [209.85.142.184] (helo=ti-out-0910.google.com)
+Received: from [198.175.154.225] (helo=us194mx04.tycoelectronics.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dangbinghoo@gmail.com>) id 1LDful-0006Jg-9w
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2008 15:01:15 +0100
-Received: by ti-out-0910.google.com with SMTP id d10so656946tib.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Dec 2008 05:56:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=JnfwlghzKS8vtc/z1AJa57k0uD3LvQSvzwayE290e1s=;
-	b=xzsQ69r5rW2mm9T3jN3GOIkS4KnXP4EJMNPImR6jOgJbCd2t8girmTKRxZh22WiuHx
-	TGE1WdHXxn1/qr+GHsmj6I4T5KXOdc/2N5cozQbs39ukK8ISYlSkdyWNDZs/Xf6mFsSe
-	GgOQU7eWEY8IPufiDcTuaTUniDi674lWQTuuY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=b1DuYUhSz6kbvdrmGTYTw+f/uueDNWlBvEfeK9BALQ7kKOYW/le8UnNrV/Us6YEFHg
-	OyJybqyQwHO3x7EjZVuEsD8E1176PWaF9iwQnkb1QWXG9pt667u6Adx71XiJNXSR6YFf
-	GbmGVl1/b6PEHMwzieNGYZ7wMbyKDO1YWYXc4=
-Received: by 10.110.53.19 with SMTP id b19mr4772478tia.38.1229694993833;
-	Fri, 19 Dec 2008 05:56:33 -0800 (PST)
-Received: from ?192.168.2.20? ([119.5.62.148])
-	by mx.google.com with ESMTPS id y3sm814798tia.20.2008.12.19.05.56.30
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 19 Dec 2008 05:56:32 -0800 (PST)
-Message-ID: <494BA831.9090405@gmail.com>
-Date: Fri, 19 Dec 2008 21:57:05 +0800
-From: Binghoo Dang <dangbinghoo@gmail.com>
-User-Agent: Thunderbird 2.0.0.16 (X11/20080807)
+	(envelope-from <john.charlton@tycoelectronics.com>)
+	id 1LDh9y-00051P-Bg for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Dec 2008 16:21:02 +0100
+Received: from usy90mx04.tycoelectronics.net ([163.241.175.14]) by
+	us194mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.2499); 
+	Fri, 19 Dec 2008 10:16:12 -0500
+Received: from us194mx11.tycoelectronics.net ([163.241.185.106]) by
+	usy90mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
+	Fri, 19 Dec 2008 10:16:10 -0500
+Received: from us194mx07.tycoelectronics.net ([163.241.185.38]) by
+	us194mx11.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
+	Fri, 19 Dec 2008 10:16:10 -0500
+Received: from us194mx002.tycoelectronics.net (163.241.202.108) by
+	us194mx07.tycoelectronics.net (163.241.185.38) with Microsoft SMTP
+	Server (TLS) id 8.1.291.1; Fri, 19 Dec 2008 10:16:10 -0500
+Received: from us194mx002.tycoelectronics.net ([163.241.202.108]) by
+	us194mx002.tycoelectronics.net ([163.241.202.108]) with mapi;
+	Fri, 19 Dec 2008 10:16:10 -0500
+From: "Charlton, John" <john.charlton@tycoelectronics.com>
+To: Xenomai help <xenomai-help@gna.org>
+Date: Fri, 19 Dec 2008 10:16:09 -0500
+Thread-Topic: Xenomai OpenEmbedded cross compile test applications
+Thread-Index: AclhOmQvD5XBQcrvSACvy7D0lM9zsQAnhxdQ
+Message-ID: <CF7FB0793253794F9F45991443E5FE2003C951B97F@us194mx002.tycoelectronics.net>
+References: <8b216e9e0812180831n6ebf4ff1gcb990864ba112eab@mail.gmail.com>
+	<494A7ED0.8090008@xenomai.org>
+	<8b216e9e0812180943v1ecc3fcasb45732cd9a58cde2@mail.gmail.com>
+	<494A8F3E.9090906@xenomai.org>
+In-Reply-To: <494A8F3E.9090906@xenomai.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <494B4E6B.6010607@mgb-tech.com>
-In-Reply-To: <494B4E6B.6010607@mgb-tech.com>
-Subject: Re: ARM - OE Linux, Java and SerialPort
+X-OriginalArrivalTime: 19 Dec 2008 15:16:10.0264 (UTC)
+	FILETIME=[B91D2180:01C961EC]
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Xenomai OpenEmbedded cross compile test applications
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +52,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Dec 2008 14:01:16 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Dec 2008 15:21:03 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Jan Pannecoeck 写道:
-> Hello everyone,
->
-> I'm not sure if this is the right mailinglist, but I'll post my 
-> question here so maybe someone could help me. I'm currently using an 
-> OE linux distribution on my ARM board, this is all working fine and 
-> I'm using jamvm to run my java programs. Now I would like to 
-> communicate with a SerialPort. But the Java Communication API provided 
-> by Sun does not support an ARM based system. Only the Linux x86 system 
-> is supported. Since Linux is using the serial port as a "file", the 
-> reading and writing part could probably be done using a simple Reader 
-> and Writer in Java, but how can I change the baudrate and other 
-> configuration settings of the serial port?
->
-> Does anybody has any experience with this?
->
-> Kind regards, and a early happy christmas!
->
-> Jan Pannecoeck
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-You can read 《linux device drivers》and found out a "way" to control the 
-SerialPort ,all operation is using a "file" interface. Good luck!
+Using the cross compile environment for OpenEmbedded i686 angstrom of xenom=
+ai-2.4.4 described below I built the xenomai test application trivial-perio=
+dic in xenomai-2.4.4/examples/native.  I copied the executable to the targe=
+t system.  Since there is no /etc/ld.so.conf.d directory in the OE root fil=
+e system, I made one and put the xenomai library path in the xenomai.conf f=
+ile.  The xenomai.conf file just has the one directory: /usr/local/lib whic=
+h does not even exist in the target file system.  I modified xenomai.conf t=
+o: /usr/xenomai/lib where the xenomai library files are actually located.  =
+I also copied xenomai.conf to /etc and set LD_LIBRARY_PATH=3D/usr/xenomai/l=
+ib.
+
+When I execute the trivail-periodic application on the target (NANO-7240) t=
+he console hangs and nothing happens.  I also ran trivial-periodic on a non=
+ cross compiled laptop build of xenomai and it runs as expected displaying =
+the times on the console output. I login to the target using ssh and it is =
+alive.  The trivial-periodic process shows up in the ps list as:
+ 3077 root            Z   [trivial-periodi]
+So it is a zombie.  I can kill it with kill -9 3077 and that releases the c=
+onsole.
+Any help on this issue is welcome.
+
+Also, how do I run the xenomai/src/testsuite applications in a target (non =
+build) environment?
+
+Background:
+I have applied the xenomai 2.4.4 patch to kernel 2.6.25.11.  I built the ke=
+rnel and installed it on a ext2 flash partition and it boots on the target =
+system. The /proc/xenomai directory shows up so xenomai seems to be running=
+.  I built the xenomai user mode with the following commands:
+
+Set the following:
+export XENOMAI_ROOT=3D/home/us075929/projects/oe/xenomai-2.4.4
+export XENOMAI_BUILD=3D/home/us075929/projects/oe/build-xenomai-2.4.4
+
+cd $XENOMAI_BUILD
+$XENOMAI_ROOT/configure --disable-x86-tsc --host=3Di686-angstrom-linux
+
+I am not sure what tsc refers to.  The only two parameters in my kernal con=
+figuration that come up are 'time stamp counter' and 'touch screen device s=
+upport' both of which are disabled.  Since TSC is enabled by default and st=
+rong binding I disabled it in the xenomai configuration.
+
+The xenomai configure goes smoothly.  I then install xenomai user support t=
+o a staging directory as follows:
+
+export DESTDIR=3D/home/us075929/projects/oe/staging-linux-2.6.25.11
+
+cd $XENOMAI_BUILD
+make install
+
+The $DESTDIR/dev and $DESDIR/usr/xenomai are installed as expected.  I copy=
+ those directories to the target root file system, boot the target and run =
+the trivial-periodic application as described above.
+
+--John
 
 
