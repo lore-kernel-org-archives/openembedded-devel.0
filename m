@@ -1,39 +1,26 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1LEo5f-00081m-RF
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Dec 2008 17:57:11 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 6142E8400A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Dec 2008 17:52:18 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id CCD7584009E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Dec 2008 17:52:17 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (e179039037.adsl.alicedsl.de
-	[85.179.39.37]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Dec 2008 17:52:17 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 496B33C09B; Mon, 22 Dec 2008 17:52:17 +0100 (CET)
-Date: Mon, 22 Dec 2008 17:52:17 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081222165216.GA5608@rhein.zuhause.netz>
-References: <d1b08f940812220656u73035a94i83aa41d4480ccf53@mail.gmail.com>
+	(envelope-from <trini@kernel.crashing.org>) id 1LEs7b-0000Qr-Tt
+	for openembedded-devel@openembedded.org; Mon, 22 Dec 2008 22:15:30 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20081222211030.BWBE8485.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 22 Dec 2008 16:10:30 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
+	id uMAW1a00C1E665w04MAWkm; Mon, 22 Dec 2008 16:10:30 -0500
+X-Authority-Analysis: v=1.0 c=1 a=Qh3QxNwTHsoA:10 a=b2ZvGRdsAAAA:8
+	a=Hpb60wQp9c0GSOyrZq0A:9 a=MBfhVvIUzjN5zca7ya1oNDgYNWkA:4
+	a=b8hG5vVbyAkA:10
+X-CM-Score: 0.00
+Date: Mon, 22 Dec 2008 14:10:49 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20081222211049.GB4287@smtp.west.cox.net>
 MIME-Version: 1.0
-In-Reply-To: <d1b08f940812220656u73035a94i83aa41d4480ccf53@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: libc and ARM_INSTRUCTION_SET
+Subject: Please review trini/canadian-sdk branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Dec 2008 16:57:12 -0000
+X-List-Received-Date: Mon, 22 Dec 2008 21:15:31 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Mon, Dec 22, 2008 at 03:56:20PM +0100, Andrea Adami wrote:
-> Hi,
-> I'm testing uclibcgnueabi on c7x0.
-> 
-> Two doubts:
-> 
-> 1) arm / thumb
-> 
-> Now armv5te machine defaults to "thumb" and uclibc fails do_compile:
-> http://tinderbox.openembedded.net/public/logs/2601805.txt
-> 
-> My solution offhand is to set ARM_INSTRUCTION_SET = "arm" in
-> uclibc.inc but perhaps someone can sort out a proper patch.
-> 
-> I checked how the settings are for glibc and well, the same string is in:
-> glibc.inc and (why?) in glibc-2.5.bb and glibc-2.7.bb which are
-> including glibc.inc...
-> 
-> 2) is it actual and correct that uclibc and klibc are machine-specific?
-> 
-> #recent versions uclibc require real kernel headers
-> PACKAGE_ARCH = "${MACHINE_ARCH}"
-> 
-> Well, for klibc I'd say yes, it's bound to the kernel but still...I ask.
-> 
-> Thanks in advance
-> 
-> Andrea
+Hey all.  Can people please review the trini/canadian-sdk branch, in
+terms of content?  If things are good at this point content-wise, I'll
+split the commits up roughly along the lines of the original patches in
+http://bugs.openembedded.net/show_bug.cgi?id=4664 but with checksums
+added in each new commit.
 
-Philipp Blundel told me that this is probably fixed in the gcc-4.4 branch,
- unfornatly I didnt test it yet my self, for now it would be okay to turn
-off thumb.
+Note that this isn't 100% just yet.  I'd like to, after getting the core
+stuff merged in, add in at least gcc-4.2.4 and think about if there's a
+good way to re-use the portions of meta-toolchain.bb that canadian-sdk.bb
+lifts.
 
-Bye Henning
+-- 
+Tom Rini
 
 
