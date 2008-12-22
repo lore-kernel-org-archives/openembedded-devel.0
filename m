@@ -1,34 +1,33 @@
-Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LEmHU-0003oy-Be
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Dec 2008 16:01:17 +0100
-Received: by bwz8 with SMTP id 8so4974768bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Dec 2008 06:56:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=Quin88VhWUnBAgpH2UWUSCVGdEtm+HfNfQWTri3EadA=;
-	b=jtgY6PfJCsS+lyvqEec/wDA2wjJF6zaFpBCg8ojzi22v1KJOP0P41t5wITwnmguups
-	QwBYptKyVBOpB0fEHQJlvYjKBIax579DEUoYZBubnxgNncUH8KegAt3Dqt59LEMEBaX0
-	mzzmbNXzFgIRjX9glETLqgzQfFNNTkq8+qvUA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=lQWyc4znuCVWBzbRBWPg2lA6xI7J9Px18H8S9A6jI+F8yKkM5Cv0bcfA+2OhzP9ZVD
-	Hkue76FniPw3C5a5AI0FqffC1rPXhLLPgR8xSC2s3szpOfbJk4p/y6hCGD+Ty1Yo2l6E
-	1S2YJ2r9G8L4xaPL9fDvCN/UJLVeezVXl2WKI=
-Received: by 10.181.214.8 with SMTP id r8mr2341964bkq.206.1229957780235;
-	Mon, 22 Dec 2008 06:56:20 -0800 (PST)
-Received: by 10.180.252.10 with HTTP; Mon, 22 Dec 2008 06:56:20 -0800 (PST)
-Message-ID: <d1b08f940812220656u73035a94i83aa41d4480ccf53@mail.gmail.com>
-Date: Mon, 22 Dec 2008 15:56:20 +0100
-From: "Andrea Adami" <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: libc and ARM_INSTRUCTION_SET
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LEmks-0001Bh-Og
+	for openembedded-devel@openembedded.org; Mon, 22 Dec 2008 16:31:39 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LEmg5-0006Jz-RH
+	for openembedded-devel@openembedded.org; Mon, 22 Dec 2008 15:26:42 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 22 Dec 2008 15:26:41 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 22 Dec 2008 15:26:41 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 22 Dec 2008 16:26:26 +0100
+Message-ID: <giobj2$m1g$1@ger.gmane.org>
+References: <d1b08f940812220656u73035a94i83aa41d4480ccf53@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081217 Shredder/3.0b2pre
+In-Reply-To: <d1b08f940812220656u73035a94i83aa41d4480ccf53@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: libc and ARM_INSTRUCTION_SET
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Dec 2008 15:01:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 22 Dec 2008 15:31:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi,
-I'm testing uclibcgnueabi on c7x0.
+On 22-12-08 15:56, Andrea Adami wrote:
+> Hi,
+> I'm testing uclibcgnueabi on c7x0.
+>
+> Two doubts:
+>
+> 1) arm / thumb
+>
+> Now armv5te machine defaults to "thumb" and uclibc fails do_compile:
+> http://tinderbox.openembedded.net/public/logs/2601805.txt
+>
+> My solution offhand is to set ARM_INSTRUCTION_SET = "arm" in
+> uclibc.inc but perhaps someone can sort out a proper patch.
 
-Two doubts:
+Having uclibc (and hence libm) in ARM mode would probably be a good thing.
 
-1) arm / thumb
 
-Now armv5te machine defaults to "thumb" and uclibc fails do_compile:
-http://tinderbox.openembedded.net/public/logs/2601805.txt
+> 2) is it actual and correct that uclibc and klibc are machine-specific?
 
-My solution offhand is to set ARM_INSTRUCTION_SET = "arm" in
-uclibc.inc but perhaps someone can sort out a proper patch.
+uclibc is machine specific since the defconfigs are machine specific, 
+because at the time OE lacked fine grained architecture overrides.
 
-I checked how the settings are for glibc and well, the same string is in:
-glibc.inc and (why?) in glibc-2.5.bb and glibc-2.7.bb which are
-including glibc.inc...
+regards,
 
-2) is it actual and correct that uclibc and klibc are machine-specific?
+Koen
 
-#recent versions uclibc require real kernel headers
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
-Well, for klibc I'd say yes, it's bound to the kernel but still...I ask.
-
-Thanks in advance
-
-Andrea
 
 
