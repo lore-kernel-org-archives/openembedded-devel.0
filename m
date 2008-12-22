@@ -1,35 +1,33 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LEhnp-0004EY-Ei
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Dec 2008 11:14:21 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
-	id 1LEhiu-000893-UE for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Dec 2008 18:09:26 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LEhjT-0003An-2L
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Dec 2008 18:09:51 +0800
-Date: Mon, 22 Dec 2008 18:09:51 +0800
-From: John Lee <john_lee@openmoko.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20081222100950.GA2135@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Please review john_lee/openmoko-merges again
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LEjeD-0000FZ-Lc
+	for openembedded-devel@openembedded.org; Mon, 22 Dec 2008 13:12:33 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LEjZQ-0007sJ-WE
+	for openembedded-devel@openembedded.org; Mon, 22 Dec 2008 12:07:37 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 22 Dec 2008 12:07:36 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 22 Dec 2008 12:07:36 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 22 Dec 2008 13:07:28 +0100
+Message-ID: <ginvu0$hg4$1@ger.gmane.org>
+References: <20081222092936.GY2135@buddha.tw.openmoko.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081217 Shredder/3.0b2pre
+In-Reply-To: <20081222092936.GY2135@buddha.tw.openmoko.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Please review john_lee/openmoko-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +41,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Dec 2008 10:14:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Dec 2008 12:12:33 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 22-12-08 10:29, John Lee wrote:
+> Hi,
+>
 
-I have reduced this to just 5 commits.  Most of them should be okay
-except I'm not sure about this one:
+>      meta-toolchain-openmoko.bb: add feed to toolchain
+>
+>      By modifying the opkg config files in the toolchain, the toolchain can
+>      expend itself by installing packages from the repository.
+>
+>
+> We need to do some modifications to the contents of toolchain before
+> the packaging complete, so we use this variable as a hook.  The
+> modification is to create an opkg config file so the toolchain knows
+> where to get new packages.  A better way might be to install
+> distro-feed-configs, but that includes several opkg config files while
+> alias 'opkg-target' uses just one: opkg.conf.
 
-commit 4d6693ebd979092a747a66cb1828b8b4af452b28
-Author: Erin Yueh <erin_yueh@openmoko.com>
-Date:   Tue Dec 2 13:57:18 2008 +0800
+Suggestions for the existing patch:
 
-    obexpush_1.0.0.bb: add opd_args file to append arguments for starting
-    opd
+* rename OPENMOKO_URI to TOOLCHAIN_FEED_URI
+* move the modify_opkg_conf () to meta-toolchain.bb
+* TOOLCHAIN_FEED_URI ? = "" in meta-toolchain.bb
+* TOOLCHAIN_FEED_URI = 
+"http://downloads.openmoko.org/repository/testing" in 
+meta-toolchain-openmoko.bb or better, conf/distro/openmoko.conf
 
-Please review and comment, thank you!
+That way more distributions can use it and each distro version can have 
+it's own SDK by setting TOOLCHAIN_FEED_URI in its distro file.
 
+As you might have noticed /etc/opkg/arch.conf isn't in any packages (not 
+unlike the initial devnodes), so you have to generate it for the SDK. I 
+ran in to the same problem with the online image creator[1] and resorted 
+to manually installing the conf files: [2]
 
-Regards,
-John
+regards,
+
+Koen
+
+[1] http://amethyst.openembedded.net/~koen/narcissus/
+[2] 
+http://dominion.thruhere.net/git/?p=narcissus.git;a=blob;f=README;h=4a6b5998b5c57dfe85b093e456b246f168cb8d2e;hb=HEAD
+
 
 
