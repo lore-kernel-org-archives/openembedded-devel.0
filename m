@@ -1,34 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.198.251] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LFE8h-0000Df-DN
-	for openembedded-devel@openembedded.org; Tue, 23 Dec 2008 21:46:03 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LFE3s-0007Wx-OF
-	for openembedded-devel@openembedded.org; Tue, 23 Dec 2008 20:41:04 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Dec 2008 20:41:04 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Dec 2008 20:41:04 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 23 Dec 2008 21:40:56 +0100
-Message-ID: <girico$qfc$1@ger.gmane.org>
-References: <20081223134143.GN2135@buddha.tw.openmoko.com>
-	<9d3a8b020812230616k2a20e2ebi8854c7f736eae285@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081217 Shredder/3.0b2pre
-In-Reply-To: <9d3a8b020812230616k2a20e2ebi8854c7f736eae285@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [k.kooi@student.utwente.nl: Re: Please review john_lee/openmoko-merges again]
+	(envelope-from <hvontres@gmail.com>) id 1LFFBE-0008Lo-6h
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Dec 2008 22:52:44 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so3057477rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Dec 2008 13:47:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=Ua2iGrxN87ePX8J0AyOZJxontmd66GfM0vDvSUe/PGI=;
+	b=il+b0dTLtfdG5otuQo0yN3x+u3+vK2URjwk7su1PnC8V1a1MS6hxMHjJICWpkiJ3J2
+	cWkgOmcGSuAG5DTAJhhJYs7b4QTFV0gCGmkxgXPTOZbyGKQyA29/+m6/1pJVRfE4OhS2
+	5r3/Mz1CtQL69dbeZH4ua8upRRvppifDvYYPQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=vOOriDWNw5yEEjRKsqVvLz4a1h5kIauuO2LhPtQSk+MMg12/lLFVaEIHLVrm6ArI1g
+	G+id4r9A3mGQnmRSX42CK68KykZcOT9DMNIylYwVVe5PxY8M/miTYXte6g+sfwl9Z0El
+	Lc7KSEaroCCPlfgGemFeTK8xGZbbbdd1y674w=
+Received: by 10.141.76.21 with SMTP id d21mr3947593rvl.34.1230068864513;
+	Tue, 23 Dec 2008 13:47:44 -0800 (PST)
+Received: by 10.141.132.3 with HTTP; Tue, 23 Dec 2008 13:47:44 -0800 (PST)
+Message-ID: <a7f8874a0812231347u5d3344f8ue79b6b037e854494@mail.gmail.com>
+Date: Tue, 23 Dec 2008 13:47:44 -0800
+From: "Hans Henry von Tresckow" <hvontres@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200812161416.50581.zecke@selfish.org>
+MIME-Version: 1.0
+References: <a7f8874a0812072146m13e56d10hcbcfe5171d27389e@mail.gmail.com>
+	<200812161416.50581.zecke@selfish.org>
+Subject: Re: Indentation Error with latest bitbake (svn rev 1145)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Dec 2008 20:46:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 23 Dec 2008 21:52:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 23-12-08 15:16, Erin Yueh wrote:
-> Hi,
+On Tue, Dec 16, 2008 at 5:16 AM, Holger Freyther <zecke@selfish.org> wrote:
+> On Monday 08 December 2008 06:46:57 Hans Henry von Tresckow wrote:
+>> Has anybody seen this error yet:
 >
-> About this patch, this argument is for storing received files via bluetooth.
-> How about using '/var/obexpush', not '/var/tmp/obexpush'?
+> any news on this? ... and general hint. Posting random parts of a log is worse
+> than not posting a log file. What you actually do when "composing" this is
+> filtering out the information and just leave the noise. From a purely
+> information theory point of view you make sure that only noise arrives at the
+> other part of the channel.
+>
+> Post a complete log.
 
-That would be ok as well.
-
-regards,
-
-Koen
-
+It seems my checkout was stuck on an old/incomplete version of the
+.dev branch.  This output happened right after starting bitbake, so
+that actually was the entire output at the time. Once I re-cloned the
+repo, the error went away.
+-- 
+Henry von Tresckow (hvontres)
+Margaret Mead  - "Always remember that you are absolutely unique. Just
+like everyone else."
 
 
