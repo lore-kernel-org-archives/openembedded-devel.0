@@ -1,37 +1,22 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LFNV7-0001je-Rj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Dec 2008 07:45:50 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
-	id 1LFNQ4-0002W7-MX for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Dec 2008 14:40:47 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LFNQh-000820-NN
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Dec 2008 14:41:15 +0800
-Date: Wed, 24 Dec 2008 14:41:15 +0800
-From: John Lee <john_lee@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20081224064114.GB29421@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <20081222092936.GY2135@buddha.tw.openmoko.com>
-	<ginvu0$hg4$1@ger.gmane.org>
+	(envelope-from <mickey@vanille-media.de>)
+	id 1LGv5v-0001ug-Qi; Sun, 28 Dec 2008 13:50:14 +0100
+Received: from andromeda.vanille.de (e180190178.adsl.alicedsl.de
+	[85.180.190.178])
+	by drlauer-research.com (Postfix) with ESMTP id E7F84584168;
+	Sun, 28 Dec 2008 14:03:57 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-commits@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Date: Sun, 28 Dec 2008 13:44:50 +0100
+User-Agent: KMail/1.9.10
+References: <20081227201345.D64E3E8406@amethyst.openembedded.net>
+In-Reply-To: <20081227201345.D64E3E8406@amethyst.openembedded.net>
 MIME-Version: 1.0
-In-Reply-To: <ginvu0$hg4$1@ger.gmane.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Re: Please review john_lee/openmoko-toolchain
+Message-Id: <200812281344.50648.mickey@vanille-media.de>
+Subject: Re: [oe-commits] Koen Kooi : gimp: add gdk-pixbuf-csource-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,56 +30,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Dec 2008 06:45:50 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 28 Dec 2008 12:50:16 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Dec 22, 2008 at 01:07:28PM +0100, Koen Kooi wrote:
-> On 22-12-08 10:29, John Lee wrote:
->> Hi,
->>
->
->>      meta-toolchain-openmoko.bb: add feed to toolchain
->>
->>      By modifying the opkg config files in the toolchain, the toolchain can
->>      expend itself by installing packages from the repository.
->>
->>
->> We need to do some modifications to the contents of toolchain before
->> the packaging complete, so we use this variable as a hook.  The
->> modification is to create an opkg config file so the toolchain knows
->> where to get new packages.  A better way might be to install
->> distro-feed-configs, but that includes several opkg config files while
->> alias 'opkg-target' uses just one: opkg.conf.
->
-> Suggestions for the existing patch:
->
-> * rename OPENMOKO_URI to TOOLCHAIN_FEED_URI
-> * move the modify_opkg_conf () to meta-toolchain.bb
-> * TOOLCHAIN_FEED_URI ? = "" in meta-toolchain.bb
-> * TOOLCHAIN_FEED_URI =  
-> "http://downloads.openmoko.org/repository/testing" in  
-> meta-toolchain-openmoko.bb or better, conf/distro/openmoko.conf
->
-> That way more distributions can use it and each distro version can have  
-> it's own SDK by setting TOOLCHAIN_FEED_URI in its distro file.
+Am Saturday 27 December 2008 21:13:45 schrieb GIT User account:
+>+DEPENDS = "gdk-pixbuf-csource-native sed-native gdk-pixbuf-csource-native 
+libart-lgpl gtk+ jpeg libpng libexif tiff"
 
-I renamed and moved TOOLCHAIN_FEED_URI into meta-toolchain.bb and make
-it default to DISTRO_FEED_URI instead of empty string, so each distro
-can use its own feed setting.
+Listed twice now, once should do.
 
-> As you might have noticed /etc/opkg/arch.conf isn't in any packages (not  
-> unlike the initial devnodes), so you have to generate it for the SDK. I  
-> ran in to the same problem with the online image creator[1] and resorted  
-> to manually installing the conf files: [2]
-
-modify_opkg_conf will add arch into the opkg conf file as well, so I
-think this is not necessary.
-
-IMHO meta-toolchain.bb looks fine now.  I'm now more concerned about
-autotools.bbclass since it's global change.
-
-
-- John
+-- 
+:M:
 
 
