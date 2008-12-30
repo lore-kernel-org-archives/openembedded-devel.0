@@ -1,34 +1,24 @@
-Received: from [209.85.198.246] (helo=rv-out-0708.google.com)
+Received: from [195.54.101.72] (helo=proxy2.bredband.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1LHLnW-0008Ey-87
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Dec 2008 18:21:06 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so5367585rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2008 09:15:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=WPkFSpav5niLbxRdX61PA9ylIXxBn8JXTalqkJvIGc0=;
-	b=FPcz/Ay2zJ5i+xzCaAMp1Lr9TH6yPZx5DC1h6WnzljbO0E1Gtla1jfSX205qXNBDxw
-	fs6STSvs+k202q2obW1+/XKBEgqIy7dYJmG+ZFzdhI5wSBvRh41gxqOwgd00G7MJts59
-	1puN0H7u8ibGNGvwqVDS8rB3MpBwjcJhxQ+a8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=ORwp2Ym2FTXWJgQEutZD1hYUZfLaagCfOT2PzbrKNLZOy8Ul5v4VWQZEH5O0Wf2Rp/
-	pVmD7iHj+eT8/ZGHC+8+RWoD92AbjcXLKE+Pw/PBVOmhKc4qIOjwzzVCWsFbhvT0evRU
-	vNt/2QvJ1uHCt1u0tzgEaQ99qVTVuN8UpmiA8=
-Received: by 10.141.69.1 with SMTP id w1mr6838320rvk.119.1230570901085;
-	Mon, 29 Dec 2008 09:15:01 -0800 (PST)
-Received: by 10.141.142.17 with HTTP; Mon, 29 Dec 2008 09:15:00 -0800 (PST)
-Message-ID: <f96d234e0812290915s572f1bb8wf8c33a5892c79051@mail.gmail.com>
-Date: Mon, 29 Dec 2008 12:15:00 -0500
-From: "Cliff Brake" <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: OE weekly changelog 2008-12-22 to 2008-12-29
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1LHYun-0003ej-CK
+	for openembedded-devel@openembedded.org; Tue, 30 Dec 2008 08:21:21 +0100
+Received: from ironport2.bredband.com (195.54.101.122) by proxy2.bredband.net
+	(7.3.127)
+	id 494BF3020027045B for openembedded-devel@openembedded.org;
+	Tue, 30 Dec 2008 08:15:52 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApANALpZWUlT4zhBPGdsb2JhbAAIk2IBAQEBNagzWIR5i0GGRA
+Received: from c-4138e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.221]) ([83.227.56.65])
+	by ironport2.bredband.com with ESMTP; 30 Dec 2008 08:15:52 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+To: openembedded-devel@openembedded.org
+Organization: Atmel Nordic AB
+Date: Tue, 30 Dec 2008 07:15:55 +0100
+Message-Id: <1230617755.15416.11.camel@linux-yrgm.site>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: =?UTF-8?B?b3BrZy9vcGtnLW5hdGl2ZV9zdm4uYmI6ICLvu79zdm4gY28gLXIgMTk0CWh0dHA6Ly9zdm4ub3Blbm1va28ub3JnL3RydW5rL3NyYy90YXJnZXQvL29wa2dAMTk0IiBmYWlscyE=?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,103 +32,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Dec 2008 17:21:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 30 Dec 2008 07:21:22 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-OE weekly changelog 2008-12-22 to 2008-12-29
-
-Gregoire Gentil (2):
-      samba: stage more libs
-      gegl: fix ffmpeg API usage
-
-Jeremy Lain=E9 (11):
-      linux-2.6.26: fix boc01 keyboard driver's repeat rate
-      linux-2.6.26: cleanup boc01 keyboard driver
-      librfid: add symlink to /dev/spidev for SPI backend
-      udev: add boc01-specific mount.sh script
-      linux-2.6.27: add support for boc01
-      librfid: cherrypick patches from http://www.nixda.biz/librfid/
-      psplash: add 1bpp support for boc01
-      vsftpd: improve default configuration
-      lftp: switch to main mirror
-      psplash: add config file to pass parameters to psplash
-
-John Lee (4):
-      update-rc.d.bbclass: honor $D as well in updatercd_postrm
-      udev_*.bb: honer $D in postinst scripts.
-      avahi: fix postinst script error
-      initscripts: remove om-gta01/inittab.  It's not used.
-
-Julian_chu (1):
-      task-openmoko-toolchain-*.bb: clean up and move some libraries.
-
-Koen Kooi (14):
-      vlc: add ARM_INSTRUCTION_SET =3D "arm", it doesn't build otherwise
-for armv5te
-      pidgin: update to 2.5.3
-      powervr-drivers: add recipe that turns an omap35x SDK into
-installable packages
-      checksums.ini: add pidgin 2.5.3
-      pico-dlpcontrol: swith to msp430 address instead of fpga address
-      e.bbclass: run make distclean in ${S}, not after to fetch where
-it will invoke a makefile in $PWD
-      angstrom feed builder: add palmt650
-      angstrom feed sorter: att palmt650 and palmt680
-      firefox.inc: forcefeed mozilla our LDFLAGS to get gnu hash working
-      fennec: update to 1.0alpha2
-      gimp: add gdk-pixbuf-csource-native to DEPENDS
-      linux-omap git: update evm defconfig
-
-Marcin Juszkiewicz (1):
-      alix: set PACKAGE_EXTRA_ARCHS only in tune-geodelx.inc - closes #4943
-
-Michael 'Mickey' Lauer (1):
-      usb-gadget-mode: remove excessive whitespace and fix PACKAGE_ARCH set=
-ting
-
-Mike Westerhof (9):
-      SlugOS: meta/slugos-packages - demote pvrusb2-mci (needs update
-for new kernel)
-      madwifi: undefine LDFLAGS env var before we do oemake
-      checksums.ini: add latest version of madwifi-ng
-      madwifi-ng: significant update to latest upstream; default only for S=
-lugOS
-      linux-ixp4xx: 2.6.27.8 kernel, Machine=3Dnslu2 defconfig changes
-      linux-ixp4xx: 2.6.27.8 kernel, Machine=3Dnslu2 defconfig - remove ar5=
-k
-      wpa-supplicant: minor edits to helper scripts for busybox compatibili=
-ty.
-      ftpd-topfield: add patch for 2.6.23 kernel headers
-      opkg_wget_nogpg: dramatically reduce memory footprint, too dodge
-OOM killer.
-
-Robert Schuster (4):
-      libice-native 1.0.4: Add proper PROVIDES.
-      libxt-native 1.0.5: New recipe.
-      llvm-native 2.4: New recipe.
-      vlc 0.9.8a: New recipe.
-
-Shane Volpe (2):
-      MAINTAINERS:
-      checksums.ini:
-
- Bugs fixed:
-
-bug_id resolution        short_desc
-4943 FIXED       Your PACKAGE_ARCHS field contains duplicates:
-alix.conf and tune-geodelx.inc
-
-Bugs opened:
-
-bug_id resolution        short_desc
-4950     base.bbclass allways overrides FILESPATH
+I downloaded a new distribution during this week and=20
+got the following error:
 
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Cliff Brake
-http://bec-systems.com
+> NOTE: Running task 2855 of 4901 (ID: 44, /home/ulf/projects/OE/openembedd=
+ed/packages/opkg/opkg-native_svn.bb, do_setscene)
+> NOTE: package opkg-native-0.1.4+svnr194: started
+> NOTE: package opkg-native-0.1.4+svnr194-r2: task do_setscene: started
+> NOTE: Checking if staging package installed
+> NOTE: No. Manually removing any installed files
+> NOTE: package opkg-native-0.1.4+svnr194-r2: task do_setscene: completed
+> NOTE: package opkg-native-0.1.4+svnr194: completed
+> NOTE: Running task 2856 of 4901 (ID: 45, /home/ulf/projects/OE/openembedd=
+ed/packages/opkg/opkg-native_svn.bb, do_fetch)
+> NOTE: package opkg-native-0.1.4+svnr194: started
+> NOTE: package opkg-native-0.1.4+svnr194-r2: task do_fetch: started
+> NOTE: fetch http://www.angstrom-distribution.org/unstable/sources/opkg_sv=
+n.openmoko.org_.trunk.src.target._194_.tar.gz
+> --2008-12-30 00:38:10--  http://www.angstrom-distribution.org/unstable/so=
+urces/opkg_svn.openmoko.org_.trunk.src.target._194_.tar.gz
+> Resolving www.angstrom-distribution.org... 85.214.40.226
+> Connecting to www.angstrom-distribution.org|85.214.40.226|:80... connecte=
+d.
+> HTTP request sent, awaiting response... 404 Not Found
+> 2008-12-30 00:38:10 ERROR 404: Not Found.
+>=20
+> NOTE: Fetch ;module=3Dopkg;proto=3Dhttp
+> svn: URL 'http://svn.openmoko.org/trunk/src/target/opkg' doesn't exist
+> NOTE: Task failed: Fetch failed: Fetch command export SSH_AUTH_SOCK=3D/tm=
+p/keyring-vcy2cd/ssh; export PATH=3D/home/ulf/projects/OE_atmel/build/tmp/s=
+taging/i686-linux/usr/bin:/home/ulf/projects/OE_atmel/build/tmp/staging/i68=
+6-linux/usr/bin/i686-linux:/home/ulf/projects/OE_atmel/build/tmp/staging/i6=
+86-linux/usr/sbin:/home/ulf/projects/OE_atmel/build/tmp/staging/i686-linux/=
+usr/bin:/home/ulf/projects/OE_atmel/build/tmp/cross/i686/bin:/home/ulf/proj=
+ects/OE_atmel/build/tmp/staging/i686-linux/sbin:/home/ulf/projects/OE_atmel=
+/build/tmp/staging/i686-linux/bin:/home/ulf/projects/OE_atmel/bitbake/bin:/=
+home/ulf/projects/OE/bitbake/bin:/home/ulf/bin:/usr/local/bin:/usr/bin:/bin=
+:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/opt/kde3/bin:/usr/lib/mit/bin:/usr=
+/lib/mit/sbin:/usr/lib/qt3/bin:/home/ulf/projects/Buildroot/20081221/buildr=
+oot-arm/build_arm/staging_dir/usr/bin:/home/ulf/projects/Buildroot/20081221=
+/buildroot-arm/build_arm/staging_dir/usr/bin; /usr/bin/env svn co -r 194 ht=
+tp://svn.openmoko.org/trunk/src/target//opkg@194 opkg failed with signal 1,=
+ output:
+> svn: URL 'http://svn.openmoko.org/trunk/src/target/opkg' doesn't exist
+>=20
+> NOTE: package opkg-native-0.1.4+svnr194-r2: task do_fetch: failed
+> ERROR: TaskFailed event exception, aborting
+> NOTE: package opkg-native-0.1.4+svnr194: failed
+> ERROR: Build of /home/ulf/projects/OE/openembedded/packages/opkg/opkg-nat=
+ive_svn.bb do_fetch failed
+> ERROR: Task 45 (/home/ulf/projects/OE/openembedded/packages/opkg/opkg-nat=
+ive_svn.bb, do_fetch) failed
+> NOTE: Tasks Summary: Attempted 2855 tasks of which 0 didn't need to be re=
+run and 1 failed.
+> ERROR: '/home/ulf/projects/OE/openembedded/packages/opkg/opkg-native_svn.=
+bb' failed
+> NOTE: build 200812291602: completed
+
+
+I.E:
+"=EF=BB=BFsvn co -r 194 http://svn.openmoko.org/trunk/src/target//opkg@194"
+failed.
+
+/conf/distro/include/sane-srcrevs.inc contains:
+
+SRCREV_pn-opkg ?=3D "194"
+SRCREV_pn-opkg-native ?=3D "194"
+SRCREV_pn-opkg-sdk ?=3D "192"
+SRCREV_pn-opkg-utils ?=3D "4578"
+SRCREV_pn-opkg-utils-native ?=3D "4595"
+
+so the svn download tries version 194.
+
+If you do an svn without specifying the revision,
+then you download revision 4880.
+A lot has happened since then, and I guess Rev 194
+has disappeared.
+
+Has tried 4880 and the build seems to continue
+past this points, but I would like to know
+if there is a reason to use another revision.
+
+
+Best Regards
+Ulf Samuelsson
+
 
 
