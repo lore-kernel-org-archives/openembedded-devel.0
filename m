@@ -1,31 +1,37 @@
-Received: from [93.97.173.237] (helo=tim.rpsys.net)
+Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1LITyN-0006C1-RP
-	for openembedded-devel@openembedded.org; Thu, 01 Jan 2009 21:16:52 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n01KBBHa018812
-	for <openembedded-devel@openembedded.org>; Thu, 1 Jan 2009 20:11:11 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18610-04 for <openembedded-devel@openembedded.org>;
-	Thu,  1 Jan 2009 20:11:07 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n01KB7gp018806
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Thu, 1 Jan 2009 20:11:07 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20090101182526.GF7040@smtp.west.cox.net>
-References: <1230827114.5320.42.camel@dax.rpnet.com>
-	<20090101182526.GF7040@smtp.west.cox.net>
-Date: Thu, 01 Jan 2009 20:11:27 +0000
-Message-Id: <1230840687.5320.56.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RFC: "Virtual" native and sdk recipes
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LIVFB-0001OX-FD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jan 2009 22:38:17 +0100
+Received: by bwz8 with SMTP id 8so14143106bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Jan 2009 13:32:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=gp6SIJmSbdHrullcGt8b0oy1hNKr1BKOAse640p2GOY=;
+	b=xFwHJXy7BiGST8skKeP6rrnYFYyhdaDmcab2NJ8b6T7l1aygoHNzUW9hdg+xR3fLgQ
+	4Kvm/z8X/O5F6vW5Orrkapgu1Z8oI0C7OEF4aISsR/JEvMyB12ADmtuiek5DCjo5kwwy
+	4JrflZaGa1rBUEvlgh1pwbD81nVlW6DQ/lJOU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=l6Mwnbp1d+9KzGUf0B7v8B0RDgM2KuSRnsd5g3eqLzTLdGadDmR1LDoqCWSMcjjFP+
+	l6cmI95zHFS7kZGFl9/IkfvpItcS/2lBV1EduA0MsRjFMOiKtcpz6qNMUOeBTa9JFCjr
+	7+XpFwNa1Ac/Spd2wKL81HbLzeaoF3A5TOyeg=
+Received: by 10.223.120.197 with SMTP id e5mr12410877far.25.1230845555767;
+	Thu, 01 Jan 2009 13:32:35 -0800 (PST)
+Received: by 10.223.115.200 with HTTP; Thu, 1 Jan 2009 13:32:35 -0800 (PST)
+Message-ID: <c384c5ea0901011332w109a42euec5bfcefb3100ca5@mail.gmail.com>
+Date: Thu, 1 Jan 2009 22:32:35 +0100
+From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20081222211049.GB4287@smtp.west.cox.net>
+MIME-Version: 1.0
+References: <20081222211049.GB4287@smtp.west.cox.net>
+Subject: Re: Please review trini/canadian-sdk branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,40 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jan 2009 20:16:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 01 Jan 2009 21:38:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+Hello Tom,
 
-On Thu, 2009-01-01 at 11:25 -0700, Tom Rini wrote:
-> On Thu, Jan 01, 2009 at 04:25:14PM +0000, Richard Purdie wrote:
-> 
-> > Its nice to try something a bit different occasionally. For a long time
-> > the mechanical repetitive nature of -native and -sdk recipes has
-> > bothered me and people have talked about getting rid of them since
-> > forever. I've had ideas floating around on how to address this for a
-> > while and I now have a proper proposal and better still a proof of
-> > concept.
-> 
-> I'll read the whole thing again later, but in working on the canadian
-> SDK stuff (*poke*) I've been thinking why don't we just build the "SDK"
-> packages for building our own stuff?  gcc/etc are relocatible if we
-> build them right...
+On Mon, Dec 22, 2008 at 10:10 PM, Tom Rini <trini@kernel.crashing.org> wrote:
+> Hey all.  Can people please review the trini/canadian-sdk branch, in
+> terms of content?  If things are good at this point content-wise, I'll
+> split the commits up roughly along the lines of the original patches in
+> http://bugs.openembedded.net/show_bug.cgi?id=4664 but with checksums
+> added in each new commit.
+>
+I noticed your *poke* but I'm new on inspecting branches with GIT.
 
-Even if gcc is relocatable, some software (quilt springs to mind) has to
-be built using the paths it will be installed to. I'll happily support
-any effort to make as much as possible support relocation but at the
-very least we'll continue having -native packages and its them this is
-primarily aimed at. I wouldn't want to miss the opportunity to kill off
-many of the -sdk packages in poky at the same time though!
+How could I easily browse through the content? I think I would like to
+see the changed and newly added content in an easy way.
 
-I've been wondering how much the canadian SDK code will benefit from
-this and perhaps you can give some input on that?
+Also, do you have any pointers on how to use the canadian sdk stuff?
 
-Cheers,
+Maybe a tested build I might reproduce?
 
-Richard
-
-
+Regards,
+-- 
+Leon
 
 
