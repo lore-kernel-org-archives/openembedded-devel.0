@@ -1,37 +1,28 @@
-Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ticktock35@gmail.com>) id 1LHZrG-0005Gp-HX
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Dec 2008 09:21:47 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so5701371rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Dec 2008 00:16:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=HI3IHtaijgiqFKNe9FNvty0fPDTH37lmdGMWdML9fDo=;
-	b=UPRMQJSpaorTGNo6HuKRLh6kyETrQkzyzZ3PspFF8eKJpDS1Ss8qMEMFJwkg5E9cc/
-	b03HlwRb5LgWI0Xm0JOaz+EHHF4Esq84VRiHf3FoZ4BM26bQlr7z5zOG2x+zAh+9/aOW
-	AxvtgoS/V293kDQDlwgrgZJUekoUOYmvXAii0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=WtTCdxr2KX4QT6FbqFjQvjedvATTZuQVfJu+Vxr8F3wPwln6cxAGk8RKM3BFQvCaxo
-	y3OBxQPfQpz8bBSq1VyloL7i1bnA+Y+QKBRdekuoNT8eZDIEpY1geOPjNf8aXEWJK5qB
-	9J80oP/xro8qETHkPSZGkP972O8hqn5zlaxSk=
-Received: by 10.141.113.3 with SMTP id q3mr7173548rvm.87.1230624978025;
-	Tue, 30 Dec 2008 00:16:18 -0800 (PST)
-Received: by 10.141.96.3 with HTTP; Tue, 30 Dec 2008 00:16:17 -0800 (PST)
-Message-ID: <565965130812300016v5dd07382j232434c91017dac4@mail.gmail.com>
-Date: Tue, 30 Dec 2008 16:16:17 +0800
-From: "Tick Chen" <ticktock35@gmail.com>
-To: openembedded-devel@lists.openembedded.org, opkg-devel@googlegroups.com
-In-Reply-To: <1230617755.15416.11.camel@linux-yrgm.site>
-MIME-Version: 1.0
-References: <1230617755.15416.11.camel@linux-yrgm.site>
-Subject: =?UTF-8?B?UmU6IG9wa2cvb3BrZy1uYXRpdmVfc3ZuLmJiOiAi77u/c3ZuIGNvIC1yIDE5NCBodHRwOi8vc3ZuLm9wZW5tb2tvLm9yZy90cnVuay9zcmMvdGFyZ2V0Ly9vcGtnQDE5NCIgZmFpbHMh?=
+	(envelope-from <rpurdie@rpsys.net>) id 1LIQRS-0002Ro-Uh
+	for openembedded-devel@openembedded.org; Thu, 01 Jan 2009 17:30:39 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n01GOxpt017425
+	for <openembedded-devel@openembedded.org>; Thu, 1 Jan 2009 16:24:59 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 16750-10 for <openembedded-devel@openembedded.org>;
+	Thu,  1 Jan 2009 16:24:55 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n01GOsDx017419
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 1 Jan 2009 16:24:54 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Date: Thu, 01 Jan 2009 16:25:14 +0000
+Message-Id: <1230827114.5320.42.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: RFC: "Virtual" native and sdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,91 +36,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Dec 2008 08:21:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Jan 2009 16:30:39 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-aGkgVWxmLAogIFdvdWxkIHlvdSBsaWtlIHRvIGNoZWNrIHlvdXIgb3BrZy5pbmMKSXQgc2hvdWxk
-IHBvaW50IHRvIHN2bjovL29wa2cuZ29vZ2xlY29kZS5jb20vc3ZuO21vZHVsZT10cnVuaztwcm90
-bz1odHRwCkl0IGxvb2tzIGxpa2UgdGhhdCB5b3VyIG9wa2cuYmIgZmlsZXMgYXJlIG9sZCBvbmVz
-LgoKaHR0cDovL2dpdC5vcGVuZW1iZWRkZWQubmV0Lz9wPW9wZW5lbWJlZGRlZC5naXQ7YT1ibG9i
-O2Y9cGFja2FnZXMvb3BrZy9vcGtnLmluYztoPWI1ODZlNzBhYjkxZjMxODBlNTczYzJhNzNhOGJm
-YjgzMzY0MzI1MmM7aGI9SEVBRAoKSWYgeW91ciBvcGtnLmluYyBpcyBjb3JyZWN0LCBtYXliZSB5
-b3Ugd2lsbCBuZWVkIHRvIHJ1bgpiaXRiYWtlIC1jIGNsZWFuIG9wa2ctbmF0aXZlOyBiaXRiYWtl
-IC1jIHJlYnVpbGQgb3BrZy1uYXRpdmUKYWdhaW4uICAoSXQgc2hvdWxkIGJlIGRvbmUgYXV0b21h
-dGljYWxseSA6LS8gKQoKQ2hlZXJzLApUaWNrCgoyMDA4LzEyLzMwIFVsZiBTYW11ZWxzc29uIDx1
-bGYuc2FtdWVsc3NvbkBhdG1lbC5jb20+Ogo+IEkgZG93bmxvYWRlZCBhIG5ldyBkaXN0cmlidXRp
-b24gZHVyaW5nIHRoaXMgd2VlayBhbmQKPiBnb3QgdGhlIGZvbGxvd2luZyBlcnJvcjoKPgo+Cj4+
-IE5PVEU6IFJ1bm5pbmcgdGFzayAyODU1IG9mIDQ5MDEgKElEOiA0NCwgL2hvbWUvdWxmL3Byb2pl
-Y3RzL09FL29wZW5lbWJlZGRlZC9wYWNrYWdlcy9vcGtnL29wa2ctbmF0aXZlX3N2bi5iYiwgZG9f
-c2V0c2NlbmUpCj4+IE5PVEU6IHBhY2thZ2Ugb3BrZy1uYXRpdmUtMC4xLjQrc3ZucjE5NDogc3Rh
-cnRlZAo+PiBOT1RFOiBwYWNrYWdlIG9wa2ctbmF0aXZlLTAuMS40K3N2bnIxOTQtcjI6IHRhc2sg
-ZG9fc2V0c2NlbmU6IHN0YXJ0ZWQKPj4gTk9URTogQ2hlY2tpbmcgaWYgc3RhZ2luZyBwYWNrYWdl
-IGluc3RhbGxlZAo+PiBOT1RFOiBOby4gTWFudWFsbHkgcmVtb3ZpbmcgYW55IGluc3RhbGxlZCBm
-aWxlcwo+PiBOT1RFOiBwYWNrYWdlIG9wa2ctbmF0aXZlLTAuMS40K3N2bnIxOTQtcjI6IHRhc2sg
-ZG9fc2V0c2NlbmU6IGNvbXBsZXRlZAo+PiBOT1RFOiBwYWNrYWdlIG9wa2ctbmF0aXZlLTAuMS40
-K3N2bnIxOTQ6IGNvbXBsZXRlZAo+PiBOT1RFOiBSdW5uaW5nIHRhc2sgMjg1NiBvZiA0OTAxIChJ
-RDogNDUsIC9ob21lL3VsZi9wcm9qZWN0cy9PRS9vcGVuZW1iZWRkZWQvcGFja2FnZXMvb3BrZy9v
-cGtnLW5hdGl2ZV9zdm4uYmIsIGRvX2ZldGNoKQo+PiBOT1RFOiBwYWNrYWdlIG9wa2ctbmF0aXZl
-LTAuMS40K3N2bnIxOTQ6IHN0YXJ0ZWQKPj4gTk9URTogcGFja2FnZSBvcGtnLW5hdGl2ZS0wLjEu
-NCtzdm5yMTk0LXIyOiB0YXNrIGRvX2ZldGNoOiBzdGFydGVkCj4+IE5PVEU6IGZldGNoIGh0dHA6
-Ly93d3cuYW5nc3Ryb20tZGlzdHJpYnV0aW9uLm9yZy91bnN0YWJsZS9zb3VyY2VzL29wa2dfc3Zu
-Lm9wZW5tb2tvLm9yZ18udHJ1bmsuc3JjLnRhcmdldC5fMTk0Xy50YXIuZ3oKPj4gLS0yMDA4LTEy
-LTMwIDAwOjM4OjEwLS0gIGh0dHA6Ly93d3cuYW5nc3Ryb20tZGlzdHJpYnV0aW9uLm9yZy91bnN0
-YWJsZS9zb3VyY2VzL29wa2dfc3ZuLm9wZW5tb2tvLm9yZ18udHJ1bmsuc3JjLnRhcmdldC5fMTk0
-Xy50YXIuZ3oKPj4gUmVzb2x2aW5nIHd3dy5hbmdzdHJvbS1kaXN0cmlidXRpb24ub3JnLi4uIDg1
-LjIxNC40MC4yMjYKPj4gQ29ubmVjdGluZyB0byB3d3cuYW5nc3Ryb20tZGlzdHJpYnV0aW9uLm9y
-Z3w4NS4yMTQuNDAuMjI2fDo4MC4uLiBjb25uZWN0ZWQuCj4+IEhUVFAgcmVxdWVzdCBzZW50LCBh
-d2FpdGluZyByZXNwb25zZS4uLiA0MDQgTm90IEZvdW5kCj4+IDIwMDgtMTItMzAgMDA6Mzg6MTAg
-RVJST1IgNDA0OiBOb3QgRm91bmQuCj4+Cj4+IE5PVEU6IEZldGNoIDttb2R1bGU9b3BrZztwcm90
-bz1odHRwCj4+IHN2bjogVVJMICdodHRwOi8vc3ZuLm9wZW5tb2tvLm9yZy90cnVuay9zcmMvdGFy
-Z2V0L29wa2cnIGRvZXNuJ3QgZXhpc3QKPj4gTk9URTogVGFzayBmYWlsZWQ6IEZldGNoIGZhaWxl
-ZDogRmV0Y2ggY29tbWFuZCBleHBvcnQgU1NIX0FVVEhfU09DSz0vdG1wL2tleXJpbmctdmN5MmNk
-L3NzaDsgZXhwb3J0IFBBVEg9L2hvbWUvdWxmL3Byb2plY3RzL09FX2F0bWVsL2J1aWxkL3RtcC9z
-dGFnaW5nL2k2ODYtbGludXgvdXNyL2JpbjovaG9tZS91bGYvcHJvamVjdHMvT0VfYXRtZWwvYnVp
-bGQvdG1wL3N0YWdpbmcvaTY4Ni1saW51eC91c3IvYmluL2k2ODYtbGludXg6L2hvbWUvdWxmL3By
-b2plY3RzL09FX2F0bWVsL2J1aWxkL3RtcC9zdGFnaW5nL2k2ODYtbGludXgvdXNyL3NiaW46L2hv
-bWUvdWxmL3Byb2plY3RzL09FX2F0bWVsL2J1aWxkL3RtcC9zdGFnaW5nL2k2ODYtbGludXgvdXNy
-L2JpbjovaG9tZS91bGYvcHJvamVjdHMvT0VfYXRtZWwvYnVpbGQvdG1wL2Nyb3NzL2k2ODYvYmlu
-Oi9ob21lL3VsZi9wcm9qZWN0cy9PRV9hdG1lbC9idWlsZC90bXAvc3RhZ2luZy9pNjg2LWxpbnV4
-L3NiaW46L2hvbWUvdWxmL3Byb2plY3RzL09FX2F0bWVsL2J1aWxkL3RtcC9zdGFnaW5nL2k2ODYt
-bGludXgvYmluOi9ob21lL3VsZi9wcm9qZWN0cy9PRV9hdG1lbC9iaXRiYWtlL2JpbjovaG9tZS91
-bGYvcHJvamVjdHMvT0UvYml0YmFrZS9iaW46L2hvbWUvdWxmL2JpbjovdXNyL2xvY2FsL2Jpbjov
-dXNyL2JpbjovYmluOi91c3IvYmluL1gxMTovdXNyL1gxMVI2L2JpbjovdXNyL2dhbWVzOi9vcHQv
-a2RlMy9iaW46L3Vzci9saWIvbWl0L2JpbjovdXNyL2xpYi9taXQvc2JpbjovdXNyL2xpYi9xdDMv
-YmluOi9ob21lL3VsZi9wcm9qZWN0cy9CdWlsZHJvb3QvMjAwODEyMjEvYnVpbGRyb290LWFybS9i
-dWlsZF9hcm0vc3RhZ2luZ19kaXIvdXNyL2JpbjovaG9tZS91bGYvcHJvamVjdHMvQnVpbGRyb290
-LzIwMDgxMjIxL2J1aWxkcm9vdC1hcm0vYnVpbGRfYXJtL3N0YWdpbmdfZGlyL3Vzci9iaW47IC91
-c3IvYmluL2VudiBzdm4gY28gLXIgMTk0IGh0dHA6Ly9zdm4ub3Blbm1va28ub3JnL3RydW5rL3Ny
-Yy90YXJnZXQvL29wa2dAMTk0IG9wa2cgZmFpbGVkIHdpdGggc2lnbmFsIDEsIG91dHB1dDoKPj4g
-c3ZuOiBVUkwgJ2h0dHA6Ly9zdm4ub3Blbm1va28ub3JnL3RydW5rL3NyYy90YXJnZXQvb3BrZycg
-ZG9lc24ndCBleGlzdAo+Pgo+PiBOT1RFOiBwYWNrYWdlIG9wa2ctbmF0aXZlLTAuMS40K3N2bnIx
-OTQtcjI6IHRhc2sgZG9fZmV0Y2g6IGZhaWxlZAo+PiBFUlJPUjogVGFza0ZhaWxlZCBldmVudCBl
-eGNlcHRpb24sIGFib3J0aW5nCj4+IE5PVEU6IHBhY2thZ2Ugb3BrZy1uYXRpdmUtMC4xLjQrc3Zu
-cjE5NDogZmFpbGVkCj4+IEVSUk9SOiBCdWlsZCBvZiAvaG9tZS91bGYvcHJvamVjdHMvT0Uvb3Bl
-bmVtYmVkZGVkL3BhY2thZ2VzL29wa2cvb3BrZy1uYXRpdmVfc3ZuLmJiIGRvX2ZldGNoIGZhaWxl
-ZAo+PiBFUlJPUjogVGFzayA0NSAoL2hvbWUvdWxmL3Byb2plY3RzL09FL29wZW5lbWJlZGRlZC9w
-YWNrYWdlcy9vcGtnL29wa2ctbmF0aXZlX3N2bi5iYiwgZG9fZmV0Y2gpIGZhaWxlZAo+PiBOT1RF
-OiBUYXNrcyBTdW1tYXJ5OiBBdHRlbXB0ZWQgMjg1NSB0YXNrcyBvZiB3aGljaCAwIGRpZG4ndCBu
-ZWVkIHRvIGJlIHJlcnVuIGFuZCAxIGZhaWxlZC4KPj4gRVJST1I6ICcvaG9tZS91bGYvcHJvamVj
-dHMvT0Uvb3BlbmVtYmVkZGVkL3BhY2thZ2VzL29wa2cvb3BrZy1uYXRpdmVfc3ZuLmJiJyBmYWls
-ZWQKPj4gTk9URTogYnVpbGQgMjAwODEyMjkxNjAyOiBjb21wbGV0ZWQKPgo+Cj4gSS5FOgo+ICLv
-u79zdm4gY28gLXIgMTk0IGh0dHA6Ly9zdm4ub3Blbm1va28ub3JnL3RydW5rL3NyYy90YXJnZXQv
-L29wa2dAMTk0Igo+IGZhaWxlZC4KPgo+IC9jb25mL2Rpc3Ryby9pbmNsdWRlL3NhbmUtc3JjcmV2
-cy5pbmMgY29udGFpbnM6Cj4KPiBTUkNSRVZfcG4tb3BrZyA/PSAiMTk0Igo+IFNSQ1JFVl9wbi1v
-cGtnLW5hdGl2ZSA/PSAiMTk0Igo+IFNSQ1JFVl9wbi1vcGtnLXNkayA/PSAiMTkyIgo+IFNSQ1JF
-Vl9wbi1vcGtnLXV0aWxzID89ICI0NTc4Igo+IFNSQ1JFVl9wbi1vcGtnLXV0aWxzLW5hdGl2ZSA/
-PSAiNDU5NSIKPgo+IHNvIHRoZSBzdm4gZG93bmxvYWQgdHJpZXMgdmVyc2lvbiAxOTQuCj4KPiBJ
-ZiB5b3UgZG8gYW4gc3ZuIHdpdGhvdXQgc3BlY2lmeWluZyB0aGUgcmV2aXNpb24sCj4gdGhlbiB5
-b3UgZG93bmxvYWQgcmV2aXNpb24gNDg4MC4KPiBBIGxvdCBoYXMgaGFwcGVuZWQgc2luY2UgdGhl
-biwgYW5kIEkgZ3Vlc3MgUmV2IDE5NAo+IGhhcyBkaXNhcHBlYXJlZC4KPgo+IEhhcyB0cmllZCA0
-ODgwIGFuZCB0aGUgYnVpbGQgc2VlbXMgdG8gY29udGludWUKPiBwYXN0IHRoaXMgcG9pbnRzLCBi
-dXQgSSB3b3VsZCBsaWtlIHRvIGtub3cKPiBpZiB0aGVyZSBpcyBhIHJlYXNvbiB0byB1c2UgYW5v
-dGhlciByZXZpc2lvbi4KPgo+Cj4gQmVzdCBSZWdhcmRzCj4gVWxmIFNhbXVlbHNzb24KPgo+Cj4g
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBPcGVuZW1i
-ZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcKPiBodHRwOi8vbGlzdHMubGludXh0b2dvLm9yZy9jZ2ktYmluL21haWxtYW4v
-bGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsCj4K
+Its nice to try something a bit different occasionally. For a long time
+the mechanical repetitive nature of -native and -sdk recipes has
+bothered me and people have talked about getting rid of them since
+forever. I've had ideas floating around on how to address this for a
+while and I now have a proper proposal and better still a proof of
+concept.
+
+Some -native recipes are already very simple, others are quite complex.
+My hypothetical foo package files contain some common constructs and
+look like:
+
+foo/foo.inc:
+
+SRC_URI = "http://somwehere/foo-${PV}.tar.bz2 \
+           file://some.patch;patch=1"
+S = "${WORKDIR}/foo-${PV}
+inherit autotools
+
+foo/foo_1.0.bb:
+
+require foo.inc
+
+foo/foo-native_1.0.bb:
+require foo_${PV}.bb
+FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/foo-${PV}"
+inherit native
+
+and foo/foo-1.0/some.patch exists.
+
+
+Proposal Step A:
+
+Having to set:
+
+FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/foo-${PV}"
+
+and
+
+S = "${WORKDIR}/foo-${PV}
+
+is fairly pointless and it would be nice the the defaults just did the
+right thing. 
+
+http://git.pokylinux.org/cgit.cgi/poky/commit/?h=experimental-virtualnative&id=b8f0510a5567f6d1b90934fe513fd40423f11086
+
+is a patch introducing BASEPN which is PN with a range of specified
+suffixes removed (-native, -cross-sdk, -cross, -sdk as specified by
+SPECIAL_PKGSUFFIX).
+
+FILESPATH and S can then be constructed with BASEPN instead of PN
+removing the need to need to hardcode them:
+
+http://git.pokylinux.org/cgit.cgi/poky/commit/?h=experimental-virtualnative&id=ed829661d51b8f23628e97404ed507c2e56d8495
+
+This reduces my hypothetical example to:
+
+foo/foo.inc:
+
+SRC_URI = "http://somwehere/${BASEPN}-${PV}.tar.bz2 \
+           file://some.patch;patch=1"
+inherit autotools
+
+foo/foo-native_1.0.bb:
+require foo_${PV}.bb
+inherit native
+
+The above proposal is worthwhile in itself alone.
+
+
+Proposal Step B:
+
+To add a new variable which is a list of classes to additionally parse
+after parsing the 'base' recipe. In the above example, foo-native-1.0.bb
+would be removed and we'd instead have:
+
+foo/foo.inc:
+
+SRC_URI = "http://somwehere/${BASEPN}-${PV}.tar.bz2 \
+           file://some.patch;patch=1"
+inherit autotools
+BBCLASSEXTEND = "native"
+
+Internally bitbake would see BBCLASSEXTEND and do something like:
+
+"""
+cls = value in BBCLASSEXTEND
+data.setVar('PN', pn + '-' + cls, based)
+inherit cls
+"""
+
+The big change here is that one .bb file can now provide multiple
+targets. This causes a few issues but as a hacked up proof of concept:
+
+http://git.pokylinux.org/cgit.cgi/poky/commit/?h=experimental-virtualnative&id=f614d1e2ff10938167ba6c29c49677a03b4a19ef
+
+where we append magic values to the "filename" and inherit the
+appropriate class when we notice the special names.
+
+
+The advantages of doing this are:
+
+* We can convert to the system incrementally
+* Simple syntax, the complexity is hidden in bitbake
+* Removes needless duplication but allows custom -native and -sdk 
+  packages to be used where automation isn't possible/desirable
+* Parsing speed should increase since the number of full recipes we 
+  parse drops and only the end stage of parsing is done for the 
+  BBCLASSEXTEND packages.
+* Even just step A simplifies recipes.
+
+The disadvantages:
+
+* More complexity in bitbake (but localised mainly to cache.py)
+* The .bb file is no longer one recipe but can run in different 
+  flavours which will be confusing to people 
+* Would require a new bitbake release and adoption of that release 
+  before OE.dev can use step B functionality. Step A functionality 
+  could be added without a new bitbake by putting the special function 
+  in base.bbclass instead of bitbake.
+* Certain recipe name extensions become "special". The values are not 
+  hardcoded in bitbake though and its already a common convention so 
+  I'm not sure this is a problem.
+
+
+I've shared my changes in a branch of Poky:
+
+http://git.pokylinux.org/cgit.cgi/poky/log/?h=experimental-virtualnative
+
+Obviously there are some heavy cleanups needed to the last bitbake
+changes but it works as a proof of concept so its time to discuss it.
+
+The main problem I currently have before being able to deploy this more
+widely is auto adjustment of DEPENDS. In most cases this consists of
+adding "-native" or "-sdk" to the values already in DEPENDS so we could
+probably add a function to native.bbclass for that. Alternatively or
+additionally, I'm considering having native.bbclass append to OVERRIDES
+so we can override DEPENDS that way instead.
+
+Comments welcome.
+
+Cheers,
+
+Richard
+
+-- 
+Richard Purdie
+Intel Open Source Technology Centre
+
 
 
