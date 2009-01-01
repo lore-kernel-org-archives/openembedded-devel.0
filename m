@@ -1,27 +1,30 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LISJf-0007BJ-Cn
-	for openembedded-devel@openembedded.org; Thu, 01 Jan 2009 19:30:43 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090101182503.ZJDJ2948.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 1 Jan 2009 13:25:03 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id yJQz1a00C1E665w03JQzhl; Thu, 01 Jan 2009 13:25:02 -0500
-X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
-	a=wXJmYLOFOOIZkOUM-7MA:9 a=rtHFwcJr-eyXTVK9h2cA:7
-	a=lEuqoOO4KcvYDvakFOwzzEm2YJwA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Thu, 1 Jan 2009 11:25:26 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	(envelope-from <rpurdie@rpsys.net>) id 1LITv4-000631-Ol
+	for openembedded-devel@openembedded.org; Thu, 01 Jan 2009 21:13:26 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n01K7jT7018781
+	for <openembedded-devel@openembedded.org>; Thu, 1 Jan 2009 20:07:45 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 18610-03 for <openembedded-devel@openembedded.org>;
+	Thu,  1 Jan 2009 20:07:41 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n01K7c1X018775
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Thu, 1 Jan 2009 20:07:38 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-Message-ID: <20090101182526.GF7040@smtp.west.cox.net>
+In-Reply-To: <gjj11d$3ne$1@ger.gmane.org>
 References: <1230827114.5320.42.camel@dax.rpnet.com>
-MIME-Version: 1.0
-In-Reply-To: <1230827114.5320.42.camel@dax.rpnet.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+	<gjj11d$3ne$1@ger.gmane.org>
+Date: Thu, 01 Jan 2009 20:07:58 +0000
+Message-Id: <1230840478.5320.51.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: RFC: "Virtual" native and sdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,25 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jan 2009 18:30:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Jan 2009 20:13:27 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 01, 2009 at 04:25:14PM +0000, Richard Purdie wrote:
+On Thu, 2009-01-01 at 19:11 +0100, Koen Kooi wrote:
+> How is the above different from the BPN used in OE?
+> 
+> # Base package name
+> # Automatically derives "foo" from "foo-native", "foo-cross" or 
+> "foo-initial"
+> # otherwise it is the same as PN and P
+> BPN = "${@base_package_name(d)}"
+> BP = "${BPN}-${PV}"
+> 
+> [..]
+> 
+> S = "${WORKDIR}/${BP}"
+> B = "${S}"
 
-> Its nice to try something a bit different occasionally. For a long time
-> the mechanical repetitive nature of -native and -sdk recipes has
-> bothered me and people have talked about getting rid of them since
-> forever. I've had ideas floating around on how to address this for a
-> while and I now have a proper proposal and better still a proof of
-> concept.
+Heh, I could have sworn I'd seen that done before, OE is obviously
+where. 
 
-I'll read the whole thing again later, but in working on the canadian
-SDK stuff (*poke*) I've been thinking why don't we just build the "SDK"
-packages for building our own stuff?  gcc/etc are relocatible if we
-build them right...
+The rest still stands though and is the interesting bit :)
 
--- 
-Tom Rini
+Cheers,
+
+Richard
+
 
 
