@@ -1,34 +1,33 @@
-Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LIjOo-00034D-39
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jan 2009 13:45:10 +0100
-Received: by bwz8 with SMTP id 8so14593720bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jan 2009 04:39:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=kofrO2i1a/I0yD1WrWt6n019djsRx0xD349e2x537u4=;
-	b=kfi/1YltqIBeyQZDplypTRUYfrgS0gysDo3eK/SDxbl6Cfrvf1n//m2HtPezeSs7g4
-	9Q2RTM1jXP2Lw7QHsWc6NocaHGWr4m+BVwYexGVyYQPUN54PITVS7ASTkwFL7UXi/5gv
-	4Y90yI0kFq1oTXGJzd/Twy+oTeSZ6x6gE0ZA4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=BhWl+7bv+Y4gN/mD1ZAfv8H/G4RnMX+Zp/8IfPJJbP9Sl1ySIYFngA7U8IlWrvYLzw
-	zwe7uftx6/EIeAMZ7J52d9c2+sw8qeGpgl7jRJB3O5zGE7Woik5MLuQq8K9aDpBA3Beq
-	ArztWyNmJuLD0zKlAu8rYo6ycVGtIKtiQWgEg=
-Received: by 10.223.122.70 with SMTP id k6mr12763682far.26.1230899965744;
-	Fri, 02 Jan 2009 04:39:25 -0800 (PST)
-Received: by 10.223.115.200 with HTTP; Fri, 2 Jan 2009 04:39:25 -0800 (PST)
-Message-ID: <c384c5ea0901020439o71ddf881t431f6e64dc2323bd@mail.gmail.com>
-Date: Fri, 2 Jan 2009 13:39:25 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-Subject: EFIKA board for sale?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LIjh4-0003i4-Vd
+	for openembedded-devel@openembedded.org; Fri, 02 Jan 2009 14:04:03 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LIjbZ-0004ML-5f
+	for openembedded-devel@openembedded.org; Fri, 02 Jan 2009 12:58:21 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 02 Jan 2009 12:58:21 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 02 Jan 2009 12:58:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 02 Jan 2009 13:58:10 +0100
+Message-ID: <gjl314$hhq$1@ger.gmane.org>
+References: <1230827114.5320.42.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081217 Shredder/3.0b2pre
+In-Reply-To: <1230827114.5320.42.camel@dax.rpnet.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: "Virtual" native and sdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +41,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jan 2009 12:45:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 02 Jan 2009 13:04:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello,
+On 01-01-09 17:25, Richard Purdie wrote:
 
-does any of the OE devs (.eu) have a *unused* EFIKA board I could buy 2nd hand?
-Or a good .eu source for a new board?
+> Proposal Step B:
+>
+> To add a new variable which is a list of classes to additionally parse
+> after parsing the 'base' recipe. In the above example, foo-native-1.0.bb
+> would be removed and we'd instead have:
+>
+> foo/foo.inc:
+>
+> SRC_URI = "http://somwehere/${BASEPN}-${PV}.tar.bz2 \
+>             file://some.patch;patch=1"
+> inherit autotools
+> BBCLASSEXTEND = "native"
+>
+> Internally bitbake would see BBCLASSEXTEND and do something like:
+>
+> """
+> cls = value in BBCLASSEXTEND
+> data.setVar('PN', pn + '-' + cls, based)
+> inherit cls
+> """
+>
 
-I want to pick up my OE work on it, mainly the real-time kernel, but I
-blew up mine (wrong PCI riser board, not sure...)
+[..]
 
-Thanks,
--- 
-Leon
+> The disadvantages:
+>
+> * More complexity in bitbake (but localised mainly to cache.py)
+> * The .bb file is no longer one recipe but can run in different
+>    flavours which will be confusing to people
+> * Would require a new bitbake release and adoption of that release
+>    before OE.dev can use step B functionality. Step A functionality
+>    could be added without a new bitbake by putting the special function
+>    in base.bbclass instead of bitbake.
+
+If you put that code into bitbake trunk *now* and do a new release in a 
+week or so people can start testing your work. OE .dev can require that 
+bitbake release when the branch with BBCLASSEXTEND lands.
+The important part is that bitbake has BBCLASSEXTEND in a release real 
+soon :)
+
+regards,
+
+Koen
+
 
 
