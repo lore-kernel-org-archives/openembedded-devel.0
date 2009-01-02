@@ -1,33 +1,32 @@
-Received: from [93.97.173.237] (helo=tim.rpsys.net)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1LIYfA-0004bb-K3
-	for openembedded-devel@openembedded.org; Fri, 02 Jan 2009 02:17:20 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n021Bd6e020941
-	for <openembedded-devel@openembedded.org>; Fri, 2 Jan 2009 01:11:39 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 20729-04 for <openembedded-devel@openembedded.org>;
-	Fri,  2 Jan 2009 01:11:32 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n021BV55020935
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 2 Jan 2009 01:11:31 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <trini@kernel.crashing.org>) id 1LIbsN-0003LZ-ML
+	for openembedded-devel@openembedded.org; Fri, 02 Jan 2009 05:43:12 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090102043729.CFCN2948.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Thu, 1 Jan 2009 23:37:29 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id yUdT1a00F1E665w04UdUu9; Thu, 01 Jan 2009 23:37:28 -0500
+X-Authority-Analysis: v=1.0 c=1 a=ZR6E0IMnSakA:10 a=KxA903fidDMA:10
+	a=2NGaf0j8IZ3pZ44fqj4A:9 a=ZhPYUrLdNigM_wKTqicA:7
+	a=Iz5fw2j01pJF8EC2nlcXPY2WYA4A:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Thu, 1 Jan 2009 21:37:55 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <20090101220229.GH7040@smtp.west.cox.net>
+Message-ID: <20090102043755.GC400@smtp.west.cox.net>
 References: <1230827114.5320.42.camel@dax.rpnet.com>
 	<20090101182526.GF7040@smtp.west.cox.net>
 	<1230840687.5320.56.camel@dax.rpnet.com>
 	<20090101220229.GH7040@smtp.west.cox.net>
-Date: Fri, 02 Jan 2009 01:11:53 +0000
-Message-Id: <1230858713.10424.4.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: RFC: "Virtual" native and sdk recipes
+	<1230858713.10424.4.camel@dax.rpnet.com>
+MIME-Version: 1.0
+In-Reply-To: <1230858713.10424.4.camel@dax.rpnet.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Native/Cross/SDK rethink (Was: Re: RFC: "Virtual" native and	sdk recipes)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,97 +40,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jan 2009 01:17:20 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Jan 2009 04:43:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Fri, Jan 02, 2009 at 01:11:53AM +0000, Richard Purdie wrote:
 
-On Thu, 2009-01-01 at 15:02 -0700, Tom Rini wrote: 
-> On Thu, Jan 01, 2009 at 08:11:27PM +0000, Richard Purdie wrote:
-> I know for quilt specifically anything you can compile in as a path you
-> can override in quiltrc, and you can pass-in --quiltrc, so... next? :)
+[snip]
+> Ideally I want to be able to generate a Linux 32 bit toolchain, a Linux
+> 64 bit toolchain and a windows one. If I can do that using canadian-sdk,
+> the current -sdk stuff can be removed.
 
-I'll have to remember that :)
+It's a theory, and not one I've tested (and I know it won't work _today_
+as there's some hard-coded C:\ paths right now.  Those can die if we
+build it properly relocatible like CodeSourcery does).
 
-> But yes, I too wouldn't mind having a few less -sdk packages in my own
-> stuff too.
+> I'm not sure the one bitbake invocation is going to work though or is
+> desirable.
+
+Well, here's my usage.  Right now, we produce an SDK for a specific
+target.  It's quite handy that I can do a 'bitbake sdk-release' and
+that builds me my Linux SDK in one file, my Windows SDK in another.  I
+could live if I had to do 'bitbake linux-sdk-release && bitbake
+windows-sdk-release' if I must.  But I'm lazy :)
+
+> I just had a look through the trini/canadian-sdk branch and there are
+> bits I like and bits I dislike. I'll try and provide some feedback in
+> due course with a view to getting the less controversial bits merged. I
+
+Great, thanks.
+
+> have some tweaks in poky to do with dynamic library extension handling
+> for example (from playing with darwin targets) where it would pay us to
+> find a common solution.
+
+Sounds good.
+
+> More fundamentally I'm actually very nervous about something here which
+> is very difficult to put into words but I'll try. To do this, I'd like
+> to take a step back and think about how this should work. Our "normal"
+> OE usage has HOST == TARGET where the value is determined by MACHINE.
+
+I think saying the current usage is "BUILD == HOST" would be more
+correct.  But I see what you're saying.  We set a machine (which sets
+our output target) and assume everything we're building will run on the
+machine that's doing the building (and only that machine, which is why
+I've switched to doing all my builds inside a minimal Ubuntu chroot.
+Hit a few dep issues I need to try and sort out properly sometime w/
+ext2 stuff).
+
+> With the introduction of Canadian where BUILD != HOST != TARGET we
+> obviously need one more input. 
+
+Yes.  We stop assuming BUILD == HOST, as it may or may not.
+
+> Correct me if I'm wrong but your approach seems to assume MACHINE is the
+> TARGET value? If so we may be missing an opportunity.
+
+Yeah.  But it seems to me that's what we always do.  It's currently
+always a "build to run on this machine" or "build to run on the target
+machine".  But I think I see what you're saying and agree.
+
+> Lets for a second make the decision that MACHINE is actually the HOST
+> value. This makes sense in that everything we usually build is to run on
+> the HOST. From here we only need to add gcc-canadian recipe which builds
+> a compiler that runs on HOST but targets a different TARGET to normal to
+> have our BUILD != HOST != TARGET.
+
+Right.  We  get that in the current Canadian stuff, just using different
+variable names, I think.  I _think_ if the new SDK_foo variables were
+set right, it would in fact kick out a working Linux SDK.
+
+> This does reverse the logic that the current sdk class we use however
+> since MACHINE is now the machine we want to run the compiler on, not the
+> machine we want to compile for. It should be simple enough to add some
+> MACHINEs and version setups which correspond to a Linux 32 bit system, a
+> Linux 64 bit system and a windows system though. Assuming the choice of
+> TARGET for gcc-canadian is controlled by a variable like SDKTARGET, to
+> run the builds I'd want, I'd run:
 > 
-> > I've been wondering how much the canadian SDK code will benefit from
-> > this and perhaps you can give some input on that?
+> MACHINE=i686-generic   SDKTARGET=armv5te-generic bitbake gcc-canadian
+> MACHINE=x86-64-generic SDKTARGET=armv5te-generic bitbake gcc-canadian
+> MACHINE=winxp-generic  SDKTARGET=armv5te-generic bitbake gcc-canadian
+
+Or 'meta-toolchain-sbox' for an existing SDK type target.
+
+> By contrast, the scheme you are aiming for (as I understand it) would
+> be:
 > 
-> Off the top of my head, it depends on if we want to allow one env to
-> make both a Linux and a Windows SDK.  The foo-canadian-sdk packages can
-> fit very easily into any reuse scheme (the gcc ones look like all of the
-> others now).  I was thinking there's no reason really (esp if we build
-> gcc correctly for relcation, which we don't now) that any 'target gcc
-> for sdk' recipe couldn't build for any one Linux or Windows target, but
-> not both.  For my needs, I want both Linux and Windows SDKs kicked out
-> from one bitbake invokation.
+> MACHINE=armv5te-generic SDKARCH=i686-generic   bitbake gcc-canadian
+> MACHINE=armv5te-generic SDKARCH=x86-64-generic bitbake gcc-canadian
+> MACHINE=armv5te-generic SDKARCH=winxp-generic  bitbake gcc-canadian
 
-Ideally I want to be able to generate a Linux 32 bit toolchain, a Linux
-64 bit toolchain and a windows one. If I can do that using canadian-sdk,
-the current -sdk stuff can be removed.
+With a "but I'm lazy and we'll just re-use current SDK recipes for
+the first choice, canadian for the second and, what? a third choice?
+la-la-la I can't hear you!".  The biggest hiccup I see here is my usage
+would be more like (using current machine.conf's):
+MACHINE=qemux86 SDKTARGET=db1200 bitbake meta-toolchain-sbox
 
-I'm not sure the one bitbake invocation is going to work though or is
-desirable.
+> Can you see the point I'm making here? If not I'll try again tomorrow
+> after some sleep! :)
 
-I just had a look through the trini/canadian-sdk branch and there are
-bits I like and bits I dislike. I'll try and provide some feedback in
-due course with a view to getting the less controversial bits merged. I
-have some tweaks in poky to do with dynamic library extension handling
-for example (from playing with darwin targets) where it would pay us to
-find a common solution.
+I think so.  Right now what's bugging me personally the most is the
+non-relocatible SDK toolchain, which once fixed could let us kill off
+much of the -cross stuff.  Build the SDK version and then use that to
+build our regular stuff, always.
 
-More fundamentally I'm actually very nervous about something here which
-is very difficult to put into words but I'll try. To do this, I'd like
-to take a step back and think about how this should work. Our "normal"
-OE usage has HOST == TARGET where the value is determined by MACHINE.
-With the introduction of Canadian where BUILD != HOST != TARGET we
-obviously need one more input. 
+> Also note why I don't see this being possible to combine into one
+> bitbake command, much the same way you can't build 10 machines with one
+> bitbake command.
 
-Correct me if I'm wrong but your approach seems to assume MACHINE is the
-TARGET value? If so we may be missing an opportunity.
-
-Lets for a second make the decision that MACHINE is actually the HOST
-value. This makes sense in that everything we usually build is to run on
-the HOST. From here we only need to add gcc-canadian recipe which builds
-a compiler that runs on HOST but targets a different TARGET to normal to
-have our BUILD != HOST != TARGET.
-
-This does reverse the logic that the current sdk class we use however
-since MACHINE is now the machine we want to run the compiler on, not the
-machine we want to compile for. It should be simple enough to add some
-MACHINEs and version setups which correspond to a Linux 32 bit system, a
-Linux 64 bit system and a windows system though. Assuming the choice of
-TARGET for gcc-canadian is controlled by a variable like SDKTARGET, to
-run the builds I'd want, I'd run:
-
-MACHINE=i686-generic   SDKTARGET=armv5te-generic bitbake gcc-canadian
-MACHINE=x86-64-generic SDKTARGET=armv5te-generic bitbake gcc-canadian
-MACHINE=winxp-generic  SDKTARGET=armv5te-generic bitbake gcc-canadian
-
-
-By contrast, the scheme you are aiming for (as I understand it) would
-be:
-
-MACHINE=armv5te-generic SDKARCH=i686-generic   bitbake gcc-canadian
-MACHINE=armv5te-generic SDKARCH=x86-64-generic bitbake gcc-canadian
-MACHINE=armv5te-generic SDKARCH=winxp-generic  bitbake gcc-canadian
-
-Can you see the point I'm making here? If not I'll try again tomorrow
-after some sleep! :)
-
-Also note why I don't see this being possible to combine into one
-bitbake command, much the same way you can't build 10 machines with one
-bitbake command.
-
-Cheers,
-
-Richard
+Trying to get more than one machine into an SDK is something else I've
+pondered, but only lightly so far.
 
 -- 
-Richard Purdie
-Intel Open Source Technology Centre
-
+Tom Rini
 
 
