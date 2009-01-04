@@ -1,30 +1,21 @@
-Received: from [93.97.173.237] (helo=tim.rpsys.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1LJUuI-0001mb-8i
-	for openembedded-devel@openembedded.org; Sun, 04 Jan 2009 16:28:51 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n04FMvex011459
-	for <openembedded-devel@openembedded.org>; Sun, 4 Jan 2009 15:22:57 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 10962-08 for <openembedded-devel@openembedded.org>;
-	Sun,  4 Jan 2009 15:22:53 +0000 (GMT)
-Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n04FMpJT011453
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Sun, 4 Jan 2009 15:22:51 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <c384c5ea0901040709h306a048bmf3fbfa0a0489d19a@mail.gmail.com>
-References: <c384c5ea0901040709h306a048bmf3fbfa0a0489d19a@mail.gmail.com>
-Date: Sun, 04 Jan 2009 15:23:18 +0000
-Message-Id: <1231082598.5309.8.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.12.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-Subject: Re: no /temp/run.do_package?
+	(envelope-from <mickey@vanille-media.de>) id 1LJVIJ-0002UK-Oq
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 04 Jan 2009 16:53:39 +0100
+Received: from andromeda.vanille.de (e180167169.adsl.alicedsl.de
+	[85.180.167.169])
+	by drlauer-research.com (Postfix) with ESMTP id DD9DF584A91
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  4 Jan 2009 17:07:27 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 4 Jan 2009 16:47:42 +0100
+User-Agent: KMail/1.9.10
+MIME-Version: 1.0
+Message-Id: <200901041647.42516.mickey@vanille-media.de>
+Subject: OE dev meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,25 +29,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jan 2009 15:28:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 04 Jan 2009 15:53:40 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+What are the odds that we can hold an OE meeting shortly after or before 
+FOSDEM?
 
-On Sun, 2009-01-04 at 16:09 +0100, Leon Woestenberg wrote:
-> I wonder, why is there no do_package run script in the temp/ directory?
-> 
-> (I'm debugging the oprofile package for improper packaging.)
+Please vote.
 
-Its a python function, not a shell one. If you use bitbake trunk it will
-make logs for both shell and python functions.
-
-Cheers,
-
-Richard
-
-
-
+-- 
+:M:
 
 
