@@ -1,34 +1,23 @@
-Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LJUgx-0004gv-Lr
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jan 2009 16:15:03 +0100
-Received: by qw-out-1920.google.com with SMTP id 14so2768559qwa.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Jan 2009 07:09:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type:content-transfer-encoding
-	:content-disposition;
-	bh=loLm5/+fJb3VkP0QLoQ8zjgDtx+UJrgWq7OVNr05XmU=;
-	b=SxBijZEZl6Qu+X3ZlwkkqNzIQ+cHIjnLk+j/ruZGNOeEqUU9ZUMTvYMpST2DmRh2/I
-	ZxsjmVIGOxCPnn993RG1a6CM2fvVSSWp1tJyx4n3j0BbcD4p8ECKUXKu2Q6ABSTtTOP+
-	3roFTVEPEav8cGaJ8caYKL0KLvAiu8YoItgIA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type
-	:content-transfer-encoding:content-disposition;
-	b=WMChrzjjPvn6V6FFms7n/EDLre+oobUnkXhHvFh8PBtDZhhy39XFNNW8daQ7Nxxd5t
-	nFJmeggGBd5SWv6/OhIHaH2xlZLNvmlJt3fuRZ99/Qy4mB7FwlUZ5+8XASAtOZhBXeew
-	0et7UhbQyEcskCgq+pObJu+xiQjn8/DfJjR6A=
-Received: by 10.214.46.11 with SMTP id t11mr15835107qat.284.1231081751913;
-	Sun, 04 Jan 2009 07:09:11 -0800 (PST)
-Received: by 10.215.66.18 with HTTP; Sun, 4 Jan 2009 07:09:11 -0800 (PST)
-Message-ID: <c384c5ea0901040709h306a048bmf3fbfa0a0489d19a@mail.gmail.com>
-Date: Sun, 4 Jan 2009 16:09:11 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	(envelope-from <mickey@vanille-media.de>)
+	id 1LJUr7-0001kT-PC; Sun, 04 Jan 2009 16:25:34 +0100
+Received: from andromeda.vanille.de (e180167169.adsl.alicedsl.de
+	[85.180.167.169])
+	by drlauer-research.com (Postfix) with ESMTP id DDF9B5847E0;
+	Sun,  4 Jan 2009 16:39:24 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 4 Jan 2009 16:19:38 +0100
+User-Agent: KMail/1.9.10
+References: <200901041337.30242.mickey@vanille-media.de>
+	<gjqfl3$97l$1@ger.gmane.org>
+In-Reply-To: <gjqfl3$97l$1@ger.gmane.org>
 MIME-Version: 1.0
-Subject: no /temp/run.do_package?
+Message-Id: <200901041619.39135.mickey@vanille-media.de>
+Cc: openembedded-users@lists.openembedded.org
+Subject: Re: ADMIN oe.net offline
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,19 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jan 2009 15:15:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 04 Jan 2009 15:25:39 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello,
+Am Sunday 04 January 2009 15:04:19 schrieb Koen Kooi:
+> On 04-01-09 13:37, Michael 'Mickey' Lauer wrote:
+> > Happy New Year!
+> >
+> > As of yesterday night, amethyst became unresponsive to any
+> > tcp-connectivity. It still seems to be reachable and alive, since it
+> > responds to pings. oe.net is therefore offline until further notice.
+> >
+> > As usually -- thanks Murphy -- it happens on weekends with Harald Welte
+> > not being in Germany.
+> >
+> > Anyways, I'll call the provider tomorrow [no reponse today, already
+> > tried] asking for a reset of the machine.
+> >
+> > In the meantime, please pull from the git mirror @
+> > repo.or.cz/r/openembedded.git.
+>
+> And where do we push to?
 
-I wonder, why is there no do_package run script in the temp/ directory?
+I have established a git mirror that developers can push/pull via
 
-(I'm debugging the oprofile package for improper packaging.)
+git@melo.nslu2-linux.org:openembedded
 
-Regards,
+There's no other infrastructure but git (no, not even gitweb).
+
+Thanks rwhitby and co for the quick action.
+
 -- 
-Leon
+:M:
 
 
