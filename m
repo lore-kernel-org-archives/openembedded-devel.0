@@ -1,20 +1,34 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1LJSKD-0007Ff-Gv; Sun, 04 Jan 2009 13:43:25 +0100
-Received: from andromeda.vanille.de (e180167169.adsl.alicedsl.de
-	[85.180.167.169])
-	by drlauer-research.com (Postfix) with ESMTP id 8E6A3584134;
-	Sun,  4 Jan 2009 13:57:16 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-users@lists.openembedded.org
-Date: Sun, 4 Jan 2009 13:37:29 +0100
-User-Agent: KMail/1.9.10
-MIME-Version: 1.0
-Message-Id: <200901041337.30242.mickey@vanille-media.de>
-Subject: ADMIN oe.net offline
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LJTgO-0006CM-F8
+	for openembedded-devel@openembedded.org; Sun, 04 Jan 2009 15:10:24 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LJTaf-0007q9-Lp
+	for openembedded-devel@openembedded.org; Sun, 04 Jan 2009 14:04:29 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 04 Jan 2009 14:04:29 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 04 Jan 2009 14:04:29 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 04 Jan 2009 15:04:19 +0100
+Message-ID: <gjqfl3$97l$1@ger.gmane.org>
+References: <200901041337.30242.mickey@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081217 Shredder/3.0b2pre
+In-Reply-To: <200901041337.30242.mickey@vanille-media.de>
+Sender: news <news@ger.gmane.org>
+Cc: openembedded-users@lists.openembedded.org
+Subject: Re: ADMIN oe.net offline
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,33 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jan 2009 12:43:25 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Sun, 04 Jan 2009 14:10:25 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Happy New Year!
+On 04-01-09 13:37, Michael 'Mickey' Lauer wrote:
+> Happy New Year!
+>
+> As of yesterday night, amethyst became unresponsive to any tcp-connectivity.
+> It still seems to be reachable and alive, since it responds to pings. oe.net
+> is therefore offline until further notice.
+>
+> As usually -- thanks Murphy -- it happens on weekends with Harald Welte not
+> being in Germany.
+>
+> Anyways, I'll call the provider tomorrow [no reponse today, already tried]
+> asking for a reset of the machine.
+>
+> In the meantime, please pull from the git mirror @
+> repo.or.cz/r/openembedded.git.
 
-As of yesterday night, amethyst became unresponsive to any tcp-connectivity. 
-It still seems to be reachable and alive, since it responds to pings. oe.net 
-is therefore offline until further notice.
+And where do we push to?
 
-As usually -- thanks Murphy -- it happens on weekends with Harald Welte not 
-being in Germany.
-
-Anyways, I'll call the provider tomorrow [no reponse today, already tried] 
-asking for a reset of the machine.
-
-In the meantime, please pull from the git mirror @  
-repo.or.cz/r/openembedded.git.
-
-If the problem persists over next week, I will switch to a backup vserver 
-which is rsynced every couple of days -- last rsync was two days ago though, 
-so I'd prefer to get amethyst back online and not switching to the vserver.
-
-Cheers,
--- 
-:M:
 
 
