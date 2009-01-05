@@ -1,34 +1,20 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LJrg5-0002V2-Oi
-	for openembedded-devel@openembedded.org; Mon, 05 Jan 2009 16:47:42 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090105154143.MKKJ11567.fed1rmmtao104.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 5 Jan 2009 10:41:43 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id zrhg1a00C1E665w04rhgMx; Mon, 05 Jan 2009 10:41:43 -0500
-X-Authority-Analysis: v=1.0 c=1 a=UA0Z595oU3QA:10 a=nvBvAxcGjs0A:10
-	a=6LRGvzUkpSJhU01C7LUA:9 a=bMMcjrz9uJ49wfXYEmSEVK1unkIA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 5 Jan 2009 08:42:10 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090105154209.GR400@smtp.west.cox.net>
-References: <1230827114.5320.42.camel@dax.rpnet.com>
-	<20090101182526.GF7040@smtp.west.cox.net>
-	<1230840687.5320.56.camel@dax.rpnet.com>
-	<20090101220229.GH7040@smtp.west.cox.net>
-	<1230858713.10424.4.camel@dax.rpnet.com>
-	<20090102043755.GC400@smtp.west.cox.net>
-	<d2b9ea600901050631h5eda6de5yee190bf0841e5b15@mail.gmail.com>
+	(envelope-from <philip@balister.org>) id 1LJs5j-0003Gf-4F
+	for openembedded-devel@openembedded.org; Mon, 05 Jan 2009 17:14:11 +0100
+Received: (qmail 19544 invoked by uid 1003); 5 Jan 2009 16:08:12 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 5 Jan 2009 16:08:12 -0000
+Message-ID: <4962306D.4060008@balister.org>
+Date: Mon, 05 Jan 2009 11:08:13 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-In-Reply-To: <d2b9ea600901050631h5eda6de5yee190bf0841e5b15@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Native/Cross/SDK rethink (Was: Re: RFC: "Virtual" native	and sdk recipes)
+To: openembedded-devel@lists.openembedded.org
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF596@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF596@hiob.intern.dresearch.de>
+Subject: Re: Problem with bitbake after update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +28,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2009 15:47:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 05 Jan 2009 16:14:11 -0000
+X-Groupsio-MsgNum: 7114
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms060105010102060804050209"
 
-On Mon, Jan 05, 2009 at 03:31:53PM +0100, Esben Haabendal wrote:
-> On Fri, Jan 2, 2009 at 5:37 AM, Tom Rini <trini@kernel.crashing.org> wrote:
-> > On Fri, Jan 02, 2009 at 01:11:53AM +0000, Richard Purdie wrote:
-> >
-> > [snip]
-> >> Ideally I want to be able to generate a Linux 32 bit toolchain, a Linux
-> >> 64 bit toolchain and a windows one. If I can do that using canadian-sdk,
-> >> the current -sdk stuff can be removed.
-> >
-> > It's a theory, and not one I've tested (and I know it won't work _today_
-> > as there's some hard-coded C:\ paths right now.  Those can die if we
-> > build it properly relocatible like CodeSourcery does).
+--------------ms060105010102060804050209
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Sledz, Steffen wrote:
+> After making an svn update from bitbake 1.8.11 (SVN r1080) to 1.8.13 (SVN r1150) i've a little problem with my environment. I use some vars to configure the it:
 > 
-> Sorry, but where would that be?
+>  export OE_HOME=$HOME/oe
+>  export OE_ROOT=/opt/openembedded
+>  export MY_OE_CONF="oxe810"
+>  export BBPATH=$OE_HOME/:$OE_HOME/$MY_OE_CONF:$OE_HOME/common:$OE_ROOT
+>  export PATH=/opt/bitbake/bin:$PATH
 > 
-> In class/canadian-sdk.bbclass:
+> In the local.conf i use some of them to setup some bbfile collections.
 > 
-> SDK_PATH_sdk-mingw32 = "/OpenEmbedded/${SDK_NAME}"
-> SDK_REALPATH = "${SDK_PATH}"
-> SDK_REALPATH_sdk-mingw32 = "C:/OpenEmbedded/${SDK_NAME}"
+>  BBFILE_COLLECTIONS = "upstream localcommon local"
+>  BBFILE_PATTERN_upstream = "^${OE_ROOT}/packages/"
+>  BBFILE_PATTERN_localcommon = "^${OE_HOME}/common/packages/"
+>  BBFILE_PATTERN_local = "^${OE_HOME}/oxe810/packages/"
+>  BBFILE_PRIORITY_upstream = "5"
+>  BBFILE_PRIORITY_localcommon = "9"
+>  BBFILE_PRIORITY_local = "10"
 > 
-> Which should only hard-code C:/ into mingw32 toolchains.  I don't
-> remember seing C:\
+> This worked fine with bitbake 1.8.11 but results in an error with the newer version. :(
+> 
+>  NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it to increase performance.
+>  ERROR: opening ${OE_ROOT}/packages/*/*.bb: file ${OE_ROOT}/packages/*/*.bb not found
+>  ERROR: opening ${OE_HOME}/oxe810/packages/*/*.bb: file ${OE_HOME}/oxe810/packages/*/*.bb not found
+>  ERROR: opening ${OE_HOME}/common/packages/*/*.bb: file ${OE_HOME}/common/packages/*/*.bb not found
+> 
+> Hmmmm? What's wrong here?
 
-Just mis-remembered.  But the big point is we should be able to compile
-everyone for /OpenEmbedded/${SDK_NAME} and it should just work.
+You need to add :
 
--- 
-Tom Rini
+export BB_ENV_EXTRAWHITE="OE_HOME"
 
+to the environment before running bitbake.
 
+Philip
+
+--------------ms060105010102060804050209
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDEwNTE2
+MDgxM1owIwYJKoZIhvcNAQkEMRYEFMkNPQW272FKlqyIFVaqsmCFHDwvMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQBJz6w6F/ypiHRAcHBQSyhDP2dwhPCKSfgxjTMKHBmU+yFhdbIe
++DMpYOSIQYAgOj83TxqWuBqkH1mLTAbfl7OkqjudirrMemb8Skc1HJVLlLQa8F2T1BaKR2YBTv9R
+3/Wq/trlvUIQO3nTJOxKuHYzRGHt505MF36aOFHjiQslQ2BGzTuiO98zyBO2eIWNgqzM+wU1B72r
+OrD5swXIIUx/QvkPqqwu/7/ew7ia+BK/jrXDggVDSbb5to3itC/53QjS8zJHRzjmHktXAWwsIX+M
+vC5E52AREFgKqDm1M4v39EDF58190ndK1bNzd/JyaFoih7EmUm6ojjbyOwR6KJssAAAAAAAA
+
+--------------ms060105010102060804050209--
