@@ -1,35 +1,32 @@
-Received: from [124.219.5.209] (helo=aakash.openmoko.org)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LJlmk-0004NG-Tu
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Jan 2009 10:30:11 +0100
-Received: from [172.16.23.192] (helo=buddha.tw.openmoko.com ident=Debian-exim)
-	by aakash.openmoko.org with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <john_lee@openmoko.org>)
-	id 1LJlgq-0002Jc-T8 for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Jan 2009 17:24:14 +0800
-Received: from john by buddha.tw.openmoko.com with local (Exim 4.69)
-	(envelope-from <john_lee@openmoko.org>) id 1LJlhz-0006Br-LB
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Jan 2009 17:25:15 +0800
-Date: Mon, 5 Jan 2009 17:25:15 +0800
-From: John Lee <john_lee@openmoko.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20090105092515.GG29421@buddha.tw.openmoko.com>
-Mail-Followup-To: openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 172.16.23.192
-X-SA-Exim-Mail-From: john_lee@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Please review john_lee/fastboot-devel
+	(envelope-from <rpurdie@rpsys.net>) id 1LJogv-00073Z-Eh
+	for openembedded-devel@openembedded.org; Mon, 05 Jan 2009 13:36:21 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n05CUQeb020318
+	for <openembedded-devel@openembedded.org>; Mon, 5 Jan 2009 12:30:26 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 19795-08 for <openembedded-devel@openembedded.org>;
+	Mon,  5 Jan 2009 12:30:22 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n05CUH8U020312
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Mon, 5 Jan 2009 12:30:17 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200901042339.31569.mickey@vanille-media.de>
+References: <200901041647.42516.mickey@vanille-media.de>
+	<4961343F.1000707@balister.org>
+	<200901042339.31569.mickey@vanille-media.de>
+Date: Mon, 05 Jan 2009 12:30:45 +0000
+Message-Id: <1231158645.5327.31.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: OE dev meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +40,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2009 09:30:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-Hi,
-
-First of all please pardon the inappropriate name 'fastboot-devel'
-since I have been using this branch to coordinate with others and I
-don't want to create another branch in git that I cannot delete later.
-
-Thanks for Koen, who alredy sent me a lot of feedbacks and we modified
-according to his suggestion.  Most of the fastboot stuffs are general
-now.  Please review it.  If it's okay, I'll commit it this Friday.
+X-List-Received-Date: Mon, 05 Jan 2009 12:36:21 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
 
-- John
+On Sun, 2009-01-04 at 23:39 +0100, Michael 'Mickey' Lauer wrote:
+> Am Sunday 04 January 2009 23:12:15 schrieb Philip Balister:
+> > How long would this meeting last? Before would be better for me. I need
+> > to work this out ASAP so I can buy a plane ticket.
+> 
+> One day would be fine. There's a number of issues that need some consensus 
+> before we can move forward. Things that come to mind include:
+
+Agreed, one day would be fine. The question is who could be there?
+
+Koen - most likely not
+Mickey - quite likely?
+Crofton - quite likely?
+RP - if we're going to meet I will aim to be there
+Marcin - ?
+Zecke - ?
+XorA - ?
+pb_ - ?
+
+> * The future of BitBake -- where to continue to develop it, in which style, 
+> and which features to concentrate on.
+
+My view on this is:
+
+ * Switch SCM to git
+ * Keep as a separate project
+ * Develop and accept features as people have need for them
+ * 1.8 continues as "stable"
+ * Trunk is the next gen branch with client/server split with UI 
+   capability.
+ * Trunk replaces 1.8 when people feel its ready/usable.
+
+> * Splitting the recipe tree.
+> 
+> * Evaluating our feedback of the first months w/ git.
+> 
+> * Streamlining Poky merges.
+> 
+> * OE and the distro situation
+> 
+> * Documentation, Website, and Hosting.
+> 
+> IIRC Richard had some additional points. RP?
+
+Most of it fits into the above categories. I also wanted to talk to
+people and find out what people are now all doing, which directions
+people are moving in (and its implications for OE) and also perhaps try
+and convey the direction Poky is going. I've lost touch with what some
+people are doing a bit and the reverse is also problem true and probably
+others are in a similar position?
+
+Perhaps the alternative is to try and have a meeting on IRC where at
+least as many of the above people are available online without other
+commitments? We could probably get through things fairly quickly?
+
+Cheers,
+
+Richard
+
+
+
+-- 
+Richard Purdie
+Intel Open Source Technology Centre
+
 
 
