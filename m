@@ -1,31 +1,27 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LK6Sz-0003Ww-Ci
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LK7WJ-0001rc-2t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jan 2009 08:35:09 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 206C016E256
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2009 08:40:11 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 81CEB2A41E8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2009 08:29:10 +0100 (CET)
-Date: Tue, 6 Jan 2009 08:28:51 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF59A@hiob.intern.dresearch.de>
+	Tue, 06 Jan 2009 09:42:39 +0100
+Received: (qmail invoked by alias); 06 Jan 2009 08:36:38 -0000
+Received: from e178071047.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.71.47]
+	by mail.gmx.net (mp039) with SMTP; 06 Jan 2009 09:36:38 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+Cqs94bVeCEmHsZqn/4aIGv4ssDofWZGjAA9FZzC
+	+fUiGTy09gcuRw
+Message-ID: <49631868.5070209@gmx.net>
+Date: Tue, 06 Jan 2009 09:38:00 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
 MIME-Version: 1.0
-In-Reply-To: <4962306D.4060008@balister.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Problem with bitbake after update
-x-mimeole: Produced By Microsoft Exchange V6.5
-Thread-Index: AclvUXRWC6DeYGjBTIq/8IhTuuu82gAfuzXw
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF596@hiob.intern.dresearch.de>
-	<4962306D.4060008@balister.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Problem with bitbake after update
+To: openembedded-devel@lists.openembedded.org
+References: <4960006E.6090706@balister.org>
+In-Reply-To: <4960006E.6090706@balister.org>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.71
+Subject: Re: Boost
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,17 +35,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2009 07:35:09 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Tue, 06 Jan 2009 08:42:39 -0000
+X-Groupsio-MsgNum: 7119
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig3F7B0B7193A5935893785FF0"
+
+--------------enig3F7B0B7193A5935893785FF0
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-class: urn:content-classes:message
 
-> export BB_ENV_EXTRAWHITE=3D"OE_HOME"
+Hi Philip,
+
+Philip Balister schrieb:
+> Last year we had some discussion of creating separate boost packages
+> based on different versions (since boost has API changes between revs).=
+
+I welcome this and am working on a recipe for 1.34. So far I still have
+a few troubles.
+
+Unfortunately this work is currently on hold. When the repo works again
+I will learn how to commit this into a user branch. Perhaps someone can
+continue it from there.
+
+> I would like to talk about this again, since I am running into this
+> issue again.
 >=20
-> to the environment before running bitbake.
+> Thoughts?
+>=20
+> Philip
+>=20
+>=20
+> -----------------------------------------------------------------------=
+-
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Thnx, export BB_ENV_EXTRAWHITE=3D"OE_HOME OE_ROOT" did it.
 
 
+--------------enig3F7B0B7193A5935893785FF0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkljGGsACgkQG9cfwmwwEto1jwCfSim/s7FkChg8UdfASIX4Czaz
+9L4AoJXaeFfdlXI8GOF+PQCcJfatNzDf
+=FIrc
+-----END PGP SIGNATURE-----
+
+--------------enig3F7B0B7193A5935893785FF0--
