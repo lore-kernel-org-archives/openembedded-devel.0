@@ -1,32 +1,44 @@
-Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1LKGnA-0001bh-VT
+	(envelope-from <esbenhaabendal@gmail.com>) id 1LKIzN-000814-1s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jan 2009 19:36:41 +0100
-Received: from internet.ossystems.com.br
-	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
-	by listas.ossystems.com.br (Postfix) with ESMTP id 32C08400CF;
-	Tue,  6 Jan 2009 14:30:54 -0200 (BRST)
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 048FD2253A;
-	Tue,  6 Jan 2009 14:30:35 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 342BA610057; Tue,  6 Jan 2009 16:25:40 -0200 (BRST)
+	Tue, 06 Jan 2009 21:57:25 +0100
+Received: by yw-out-1718.google.com with SMTP id 5so2765479ywr.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Jan 2009 12:51:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=rzeNHOd/275fjziw5G4g2nE5qudBI/EYoo8MVHkvEZM=;
+	b=xv+tHX2AUY9OzNZHiA1BYg0LfPUwt4iCmZDGCR7a2/cyvqZUUmj1ed8wsv47bjsk5y
+	uWX8jBEJJxi6QBf8h6kV8oNj915Ow31Jal9HCYu3M61mio54z0rpiyKubcbH7HPXULMd
+	3kcqYcPv0SGbGq583tW4zjIGQei5oHVXtZeo4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=L/JKZoHvWF4cU7/c9pdshvYv0OOgTKAFT3h1kITVXdksfwInCZglAUAHH9EehRiuTY
+	WtgW1n+l7AJN9Pt17c7K3HCHELtiuM13VWAEchsIhm2LxCmZZIGW6E8EQgj6PD2eOEkc
+	ksJQSVx6ltfZDvDtmKM48bt0137+Y7NlrhUNU=
+Received: by 10.100.174.13 with SMTP id w13mr11969230ane.141.1231275083505;
+	Tue, 06 Jan 2009 12:51:23 -0800 (PST)
+Received: by 10.100.106.3 with HTTP; Tue, 6 Jan 2009 12:51:23 -0800 (PST)
+Message-ID: <d2b9ea600901061251n67c641a4ie03b8a552f3c4990@mail.gmail.com>
+Date: Tue, 6 Jan 2009 21:51:23 +0100
+From: "Esben Haabendal" <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <87r63gseu6.fsf@neumann.lab.ossystems.com.br>
-	<gjvu32$7dh$1@ger.gmane.org> <1231260477.5330.21.camel@dax.rpnet.com>
-From: Otavio Salvador <otavio@debian.org>
-Organization: O.S. Systems Ltda.
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Tue, 06 Jan 2009 16:25:40 -0200
-In-Reply-To: <1231260477.5330.21.camel@dax.rpnet.com> (Richard Purdie's
-	message of "Tue\, 06 Jan 2009 16\:47\:57 +0000")
-Message-ID: <87iqosnvff.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+In-Reply-To: <gjtg1m$rsd$1@ger.gmane.org>
 MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [RFC] bitbake git fetcher fix
+References: <1230827114.5320.42.camel@dax.rpnet.com>
+	<20090101182526.GF7040@smtp.west.cox.net>
+	<1230840687.5320.56.camel@dax.rpnet.com>
+	<20090101220229.GH7040@smtp.west.cox.net>
+	<1230858713.10424.4.camel@dax.rpnet.com>
+	<20090102043755.GC400@smtp.west.cox.net>
+	<d2b9ea600901050631h5eda6de5yee190bf0841e5b15@mail.gmail.com>
+	<gjtg1m$rsd$1@ger.gmane.org>
+Subject: Re: Native/Cross/SDK rethink (Was: Re: RFC: "Virtual" native and sdk recipes)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +52,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2009 18:36:41 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 06 Jan 2009 20:57:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Richard Purdie <rpurdie@rpsys.net> writes:
+On Mon, Jan 5, 2009 at 6:29 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
 
-> How about we adopt Poky's slightly more verbose approach of SRCREV ?=
-> "INVALID" in bitbake.conf?
+>> I'm sorry, but this seems like a dangerous way of starting confusion of terms.
+>> MACHINE in how I see OE is really the _TARGET_, ie. the small device this all
+>> is targeted at.
 >
-> We check for "INVALID" in bitbake and error if we see it.
+> MACHINE is where the generated stuff will _run_ on, so MACHINE=x86
+> SDKTARGET=armv5te would be more in line with what OE expects, but I agree it
+> can be confusing if you are thinking in autotools terms.
 
-This would saved my a lot of time ;-)
+Exactly. Let's stick with the solution that applys best to the golden
+"Rule of Least Surprise",
+which I believe in the case of the average OE user would be as Koen suggests.
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+/Esben
 
 
