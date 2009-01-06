@@ -1,19 +1,29 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [212.27.42.28] (helo=smtp2-g19.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1LK9MJ-0007DE-LJ; Tue, 06 Jan 2009 11:40:30 +0100
-Received: from [192.168.0.173] (c120.apm.etc.tu-bs.de [134.169.174.120])
-	by drlauer-research.com (Postfix) with ESMTP id 79137584354;
-	Tue,  6 Jan 2009 11:54:19 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org,
-	openembedded-users@lists.openembedded.org
-Organization: Vanille-Media
-Date: Tue, 06 Jan 2009 11:34:27 +0100
-Message-Id: <1231238067.6297.4.camel@opal>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.2 
-Subject: ADMIN: Server back online
+	(envelope-from <jeremy.laine@bolloretelecom.eu>)
+	id 1LKAP4-0005jT-1v; Tue, 06 Jan 2009 12:47:22 +0100
+Received: from smtp2-g19.free.fr (localhost.localdomain [127.0.0.1])
+	by smtp2-g19.free.fr (Postfix) with ESMTP id D27B112B6D5;
+	Tue,  6 Jan 2009 12:41:22 +0100 (CET)
+Received: from sharky.jerryweb.org (vau75-7-82-234-248-119.fbx.proxad.net
+	[82.234.248.119])
+	by smtp2-g19.free.fr (Postfix) with ESMTP id BA81B12B6D3;
+	Tue,  6 Jan 2009 12:41:22 +0100 (CET)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by sharky.jerryweb.org (Postfix) with ESMTP id 5C08D184017;
+	Tue,  6 Jan 2009 12:41:24 +0100 (CET)
+Message-ID: <49634364.10606@bolloretelecom.eu>
+Date: Tue, 06 Jan 2009 12:41:24 +0100
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
+	Mnenhy/0.7.5.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1231238067.6297.4.camel@opal>
+In-Reply-To: <1231238067.6297.4.camel@opal>
+Cc: openembedded-users@lists.openembedded.org
+Subject: Re: ADMIN: Server back online
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,20 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2009 10:40:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 06 Jan 2009 11:47:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-The server has been restarted and all services seem to be running again.
-According to the logs, we suffered from the OOM-killer. I can't see
-which process actually lead to this, so I will pay more attention to the
-server in the next couple of days.
+> The server has been restarted and all services seem to be running again.
 
-Sorry for the inconvenience, thanks again to Rod Whitby who quickly
-provided infrastructure so I could setup the emergency git mirror.
+Great news!
 
-:M:
+Will the commits made to the emergency git mirror be synced back? I made a commit this
+morning (on linux-2.6.27) and it doesn't seem to show up on gitweb.
 
+Cheers,
+Jeremy
 
 
 
