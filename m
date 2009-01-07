@@ -1,33 +1,30 @@
-Received: from [209.85.218.20] (helo=mail-bw0-f20.google.com)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1LKbe4-0005za-BC
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jan 2009 17:52:40 +0100
-Received: by bwz13 with SMTP id 13so21142889bwz.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jan 2009 08:46:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:mime-version:content-type;
-	bh=x6utsYfET/GclyUMI6kRoI5j2F+4xzgLN5ResvucYEg=;
-	b=OdAebIEVGVYmt2yZ1WA/G/Mtdr694cpSr+3KcmQahsvxZn2qZc7n2NwgIdhcIhoWyT
-	poGPDCYhz1gHEzcYwuAqTIV7CnQlAm4R1ioU2HU+4r4fikWr+oW6rmgX9z/PaGHWnuFT
-	JeC57VycSfNM59E9U9iayXAm6hlFd+vaXkJKQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:mime-version:content-type;
-	b=qfUcd64A62DThmzhb5ydDpWwwCSYq0FbPm9Qf160NDZSV+QQ1hTTAYFdIKFAgjbck7
-	8Xd1vCcB/j+RBiCtUD7tKJ6NaELTXDkrfxZm8LgqXyPsJQCnM8vYQqItfdrGxtcT5aaM
-	uEcq/PvsyEaO/IXXBH8+KbSlBSpClM4swReXA=
-Received: by 10.103.121.19 with SMTP id y19mr8357642mum.56.1231346793304;
-	Wed, 07 Jan 2009 08:46:33 -0800 (PST)
-Received: by 10.103.24.16 with HTTP; Wed, 7 Jan 2009 08:46:33 -0800 (PST)
-Message-ID: <1fea892d0901070846h7e3dc5cn4263adbac0252596@mail.gmail.com>
-Date: Wed, 7 Jan 2009 21:46:33 +0500
-From: "Anatoly Shipitsin" <norguhtar@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Double defines FILESPATH
+	(envelope-from <rpurdie@rpsys.net>) id 1LKcWS-0004Zr-2U
+	for openembedded-devel@openembedded.org; Wed, 07 Jan 2009 18:48:52 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n07HgjcE012295
+	for <openembedded-devel@openembedded.org>; Wed, 7 Jan 2009 17:42:45 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11982-05 for <openembedded-devel@openembedded.org>;
+	Wed,  7 Jan 2009 17:42:41 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n07HgbKf012288
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 7 Jan 2009 17:42:38 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1fea892d0901070846h7e3dc5cn4263adbac0252596@mail.gmail.com>
+References: <1fea892d0901070846h7e3dc5cn4263adbac0252596@mail.gmail.com>
+Date: Wed, 07 Jan 2009 17:43:13 +0000
+Message-Id: <1231350193.5331.37.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Double defines FILESPATH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,13 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2009 16:52:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 Jan 2009 17:48:52 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello.
+On Wed, 2009-01-07 at 21:46 +0500, Anatoly Shipitsin wrote:
+> Why FILESPATH defines twice? I'm find define in classes/base.bbclass and
+> conf/bitbake.conf.
 
-Why FILESPATH defines twice? I'm find define in classes/base.bbclass and
-conf/bitbake.conf.
+This is actually on my list of things to clean up in OE, I already did
+in Poky. The one to remove is the one in bitbake.conf as the
+base.bbclass one always replaces it.
+
+Cheers,
+
+Richard
+
+
 
