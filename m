@@ -1,25 +1,38 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LKLBN-0004s1-Q7
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jan 2009 00:17:57 +0100
-Received: (qmail invoked by alias); 06 Jan 2009 23:11:53 -0000
-Received: from e177085050.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.177.85.50]
-	by mail.gmx.net (mp044) with SMTP; 07 Jan 2009 00:11:53 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/QL2cnLBXQU9yxCTof0QPIc1I/LQugvLki4MKUv7
-	U7f1UoCJ07e6cH
-Message-ID: <4963E58A.5080505@gmx.net>
-Date: Wed, 07 Jan 2009 00:13:14 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.48
-Subject: wrongly populated image
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1LKM9S-0002pU-RY
+	for openembedded-devel@openembedded.org; Wed, 07 Jan 2009 01:20:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n070Dx99004500
+	for <openembedded-devel@openembedded.org>; Wed, 7 Jan 2009 00:13:59 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04437-01 for <openembedded-devel@openembedded.org>;
+	Wed,  7 Jan 2009 00:13:55 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n070DqdF004482
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 7 Jan 2009 00:13:52 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <d2b9ea600901061251n67c641a4ie03b8a552f3c4990@mail.gmail.com>
+References: <1230827114.5320.42.camel@dax.rpnet.com>
+	<20090101182526.GF7040@smtp.west.cox.net>
+	<1230840687.5320.56.camel@dax.rpnet.com>
+	<20090101220229.GH7040@smtp.west.cox.net>
+	<1230858713.10424.4.camel@dax.rpnet.com>
+	<20090102043755.GC400@smtp.west.cox.net>
+	<d2b9ea600901050631h5eda6de5yee190bf0841e5b15@mail.gmail.com>
+	<gjtg1m$rsd$1@ger.gmane.org>
+	<d2b9ea600901061251n67c641a4ie03b8a552f3c4990@mail.gmail.com>
+Date: Wed, 07 Jan 2009 00:14:26 +0000
+Message-Id: <1231287266.5330.113.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: Native/Cross/SDK rethink (Was: Re: RFC: "Virtual" native	and sdk recipes)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,85 +46,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2009 23:17:57 -0000
-X-Groupsio-MsgNum: 7132
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigC3D11818429AEA79B600D582"
-
---------------enigC3D11818429AEA79B600D582
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-I have two problems with current OE. I am not sure if they are related
-so I explain both. I am using the latest revision of bitbake-1.8 from
-SVN and am building angstrom for the beagleboard.
-
-1)
-Whenever OE wants to build angstrom-feed-configs I get the following big
-python error:
-
-ERROR: Error in executing:
-/home/rob/oe/org.openembedded.dev/packages/angstrom/angstrom-feed-configs=
-=2Ebb
-ERROR: Exception:<type 'exceptions.TypeError'>
-Message:do_split_packages() got an unexpected keyword argument 'allow_lin=
-ks'
-ERROR: Printing the environment of the function
-ERROR: 	0001:def populate_packages():
-ERROR: 	0002:	etcdir =3D bb.data.expand('${sysconfdir}/opkg', d)
-ERROR: 	0003:	do_split_packages(d, etcdir, '^locale-(.*)\.conf$',
-'angstrom-locale-%s-config', 'Angstrom feed config for the %s locale',
-extra_depends=3D'', allow_links=3DTrue)
-ERROR: 	0004:	import glob, stat, errno, re
-ERROR: 	0005:
-ERROR: 	0006:	workdir =3D bb.data.getVar('WORKDIR', d, 1)
-ERROR: 	0007:	if not workdir:
-
-I am not a python expert but this looks as if the function arguments are
-used by names. However I see nothing special about 'allow_links' so I
-wonder why it fails with this one. I am running this on a Debian
-GNU/Linux amd64 box. Python is 2.5.2 if that helps.
-
-I can get around this problem by temporarily declaring allow_links=3DTrue=
-
-in package.bbclass and remove that same string from the
-do_split_packages call in angstrom-feed-configs.
-
-This brought me to the next problem:
-
-2)
-I want to build a bootable image. I chose a rather small one and
-everything looks fine when doing 'bitbake x11-image' (=3D no errors). I
-get a my .tar file and unpack it on an SD card (like I did many times
-before).
-However booting fails because there is no 'init' executable on the
-image. Upon inspection of *-x11-image-*-testlab/installed-packages.txt I
-see that there is no busybox on the image. Also other important stuff
-like the kernel and dropbear/openssh-sshd is missing. On the other hand
-my new 'openjdk-6-jre' package is on the filesystem although I have
-never asked to anyone to do this.
-
-Anyone having an idea what could have gone wrong here?
-
-Regards
-Robert
+X-List-Received-Date: Wed, 07 Jan 2009 00:20:03 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
 
+On Tue, 2009-01-06 at 21:51 +0100, Esben Haabendal wrote:
+> On Mon, Jan 5, 2009 at 6:29 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> 
+> >> I'm sorry, but this seems like a dangerous way of starting confusion of terms.
+> >> MACHINE in how I see OE is really the _TARGET_, ie. the small device this all
+> >> is targeted at.
+> >
+> > MACHINE is where the generated stuff will _run_ on, so MACHINE=x86
+> > SDKTARGET=armv5te would be more in line with what OE expects, but I agree it
+> > can be confusing if you are thinking in autotools terms.
+> 
+> Exactly. Let's stick with the solution that applys best to the golden
+> "Rule of Least Surprise",
+> which I believe in the case of the average OE user would be as Koen suggests.
 
---------------enigC3D11818429AEA79B600D582
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Well, someone has to take a step back and check whether what we're doing
+is sane, extensible and in keeping with OE's global architecture. Sadly
+I'm concluding that the sdk class does things incorrectly, even
+dangerously and that the canadian stuff just compounds the error. The
+canadian stuff is actually over complicated due to this.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+The reason OE is successful, keeps growing and is so powerful/extensible
+is down to the core architecture being clean and kept to strong
+principles.
 
-iEYEAREIAAYFAklj5YwACgkQG9cfwmwwEtpVNQCgh9N1i5WH2Byt+MDi85W2oz8F
-G0cAn3EY6hqCJ84P2RGRxxZ9DTuZgGKZ
-=+MsW
------END PGP SIGNATURE-----
+Also, for the record I've played a large part in developing the sdk and
+meta-toolchain stuff so I'm at least partially responsible for the
+current mess. I do now think I got that wrong though.
 
---------------enigC3D11818429AEA79B600D582--
+Having said this, the canadian stuff is valuable and I don't want that
+work to get lost or its developers to get demotivated. It does fill a
+current need too.
+
+So I propose we allow the canadian stuff to merge on the understanding
+that its doing things the wrong way and that we will most likely change
+to the "right" way in due course even if its less intuitive. That change
+may well break things but we're saying now this will happen and that
+people shouldn't be surprised.
+
+Is that reasonable?
+
+As for the mechanics of merging the branch, I'd like this to go in
+stages and will follow up with further email/discussion on that subject.
+I'm under time pressures at the moment so this won't be until later this
+week though. Sorry for the delay :(.
+
+Also, people keep talking about building sdks for more than one machine
+with one bitbake command and other similar things. This is a really
+tricky idea and needs a lot of careful thought so as not to pull down
+the whole architecture. It is not a trivial issue.
+
+Cheers,
+
+Richard
+
+-- 
+Richard Purdie
+Intel Open Source Technology Centre
+
+
+
