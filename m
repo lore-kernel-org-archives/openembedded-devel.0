@@ -1,27 +1,37 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LKMYy-00008K-8y
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jan 2009 01:46:24 +0100
-Received: (qmail invoked by alias); 07 Jan 2009 00:40:20 -0000
-Received: from e177085050.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.177.85.50]
-	by mail.gmx.net (mp068) with SMTP; 07 Jan 2009 01:40:20 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19nihpHYxFnAmfC5n7iOaSkdttRKTMP4Dom4ANk4H
-	TVgmC3h4uKS7pM
-Message-ID: <4963FA4A.8070001@gmx.net>
-Date: Wed, 07 Jan 2009 01:41:46 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.17 (X11/20081018)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <trini@kernel.crashing.org>) id 1LKMd8-0000EL-Lu
+	for openembedded-devel@openembedded.org; Wed, 07 Jan 2009 01:50:43 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090107004439.RYGG2948.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 6 Jan 2009 19:44:39 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
+	id 0Qke1b0031E665w04QkegT; Tue, 06 Jan 2009 19:44:38 -0500
+X-Authority-Analysis: v=1.0 c=1 a=UA0Z595oU3QA:10 a=nvBvAxcGjs0A:10
+	a=Pd6mnzqO2RWthFhH4rkA:9 a=Vj3qP28-uD-W34ItFvk5YOYK5TAA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 6 Jan 2009 17:45:08 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090107004508.GB400@smtp.west.cox.net>
+References: <1230827114.5320.42.camel@dax.rpnet.com>
+	<20090101182526.GF7040@smtp.west.cox.net>
+	<1230840687.5320.56.camel@dax.rpnet.com>
+	<20090101220229.GH7040@smtp.west.cox.net>
+	<1230858713.10424.4.camel@dax.rpnet.com>
+	<20090102043755.GC400@smtp.west.cox.net>
+	<d2b9ea600901050631h5eda6de5yee190bf0841e5b15@mail.gmail.com>
+	<gjtg1m$rsd$1@ger.gmane.org>
+	<d2b9ea600901061251n67c641a4ie03b8a552f3c4990@mail.gmail.com>
+	<1231287266.5330.113.camel@dax.rpnet.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4963E58A.5080505@gmx.net>
-In-Reply-To: <4963E58A.5080505@gmx.net>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.46
-Subject: Re: wrongly populated image
+In-Reply-To: <1231287266.5330.113.camel@dax.rpnet.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Native/Cross/SDK rethink (Was: Re: RFC: "Virtual" native	and sdk recipes)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,94 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2009 00:46:24 -0000
-X-Groupsio-MsgNum: 7134
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigFB2574CC3D8C0ED877888E77"
+X-List-Received-Date: Wed, 07 Jan 2009 00:50:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------enigFB2574CC3D8C0ED877888E77
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jan 07, 2009 at 12:14:26AM +0000, Richard Purdie wrote:
+[snip]
+> So I propose we allow the canadian stuff to merge on the understanding
+> that its doing things the wrong way and that we will most likely change
+> to the "right" way in due course even if its less intuitive. That change
+> may well break things but we're saying now this will happen and that
+> people shouldn't be surprised.
+> 
+> Is that reasonable?
+> 
+> As for the mechanics of merging the branch, I'd like this to go in
+> stages and will follow up with further email/discussion on that subject.
+> I'm under time pressures at the moment so this won't be until later this
+> week though. Sorry for the delay :(.
 
-Hi,
+Agreed and I didn't intend the current branch for merging, just review.
 
-Robert Schuster schrieb:
-> 1)
-> Whenever OE wants to build angstrom-feed-configs I get the following bi=
-g
-> python error:
->=20
-> ERROR: Error in executing:
-> /home/rob/oe/org.openembedded.dev/packages/angstrom/angstrom-feed-confi=
-gs.bb
-> ERROR: Exception:<type 'exceptions.TypeError'>
-> Message:do_split_packages() got an unexpected keyword argument 'allow_l=
-inks'
-> ERROR: Printing the environment of the function
-> ERROR: 	0001:def populate_packages():
-> ERROR: 	0002:	etcdir =3D bb.data.expand('${sysconfdir}/opkg', d)
-> ERROR: 	0003:	do_split_packages(d, etcdir, '^locale-(.*)\.conf$',
-> 'angstrom-locale-%s-config', 'Angstrom feed config for the %s locale',
-> extra_depends=3D'', allow_links=3DTrue)
-> ERROR: 	0004:	import glob, stat, errno, re
-> ERROR: 	0005:
-> ERROR: 	0006:	workdir =3D bb.data.getVar('WORKDIR', d, 1)
-> ERROR: 	0007:	if not workdir:
->=20
-> I am not a python expert but this looks as if the function arguments ar=
-e
-> used by names. However I see nothing special about 'allow_links' so I
-> wonder why it fails with this one. I am running this on a Debian
-> GNU/Linux amd64 box. Python is 2.5.2 if that helps.
->=20
-> I can get around this problem by temporarily declaring allow_links=3DTr=
-ue
-> in package.bbclass and remove that same string from the
-> do_split_packages call in angstrom-feed-configs.
->=20
-> This brought me to the next problem:
->=20
-> 2)
-> However booting fails because there is no 'init' executable on the
-> image. Upon inspection of *-x11-image-*-testlab/installed-packages.txt =
-I
-> see that there is no busybox on the image. Also other important stuff
-> like the kernel and dropbear/openssh-sshd is missing. On the other hand=
+> Also, people keep talking about building sdks for more than one machine
+> with one bitbake command and other similar things. This is a really
+> tricky idea and needs a lot of careful thought so as not to pull down
+> the whole architecture. It is not a trivial issue.
 
-> my new 'openjdk-6-jre' package is on the filesystem although I have
-> never asked to anyone to do this.
-Cool, this patch fixed problem 2:
+Yes, we need to have some sort of discussion about what's reasonable and
+what's a best design for making SDKs come out of OE.
 
-Module: openembedded.git
-Branch: org.openembedded.dev
-Commit: 9b1666b54a8474a8a95603726b634c071a1ec6ce
-URL:
-http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3D9b166=
-6b54a8474a8a95603726b634c071a1ec6ce
-
-Author: Koen Kooi <koen@openembedded.org>
-Date:   Wed Jan  7 00:46:05 2009 +0100
-
-task-base: bump PR
+-- 
+Tom Rini
 
 
-Regards
-Robert
-
-
---------------enigFB2574CC3D8C0ED877888E77
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAklj+k0ACgkQG9cfwmwwEtoSfACeJV5AENJeGVGaolpTeJ1DMhVn
-rB8AoIFi/t2OU9mW4G8r4Gqy4WC7yj5O
-=8tI3
------END PGP SIGNATURE-----
-
---------------enigFB2574CC3D8C0ED877888E77--
