@@ -1,30 +1,30 @@
 Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1LKv3o-0000N4-5i
+	(envelope-from <cliff.brake@gmail.com>) id 1LKvB4-0000aV-DY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Jan 2009 14:36:32 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so10086890rvb.12
+	Thu, 08 Jan 2009 14:44:02 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so10090262rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Jan 2009 05:30:22 -0800 (PST)
+	Thu, 08 Jan 2009 05:37:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from:to
 	:subject:mime-version:content-type:content-transfer-encoding
 	:content-disposition;
-	bh=M3x8dNaZDRbbK2vnfYeR95MdcFnED1Y2oRJwvHhPKHw=;
-	b=Cz3liT4HBmqbtOEL2jWP+59WkE5j6Am0kSjHGw3bmpRlgRPf8MPZj61cPgzPqF0A0q
-	U8NVju1q3FXAJGTgvo7iON+ATpY/J9xtwephIcc1+jx0J95mhiMFXX+zl8WDg5i4bxX9
-	HpG7lT4xLdwG6R7Mj5CtmPOyUCLaE2jcvTNjo=
+	bh=O+wshgmAIO7rfRQjusNjpuy1VpwWv6k4zYuFrQxr7xg=;
+	b=jSAhjuNCvcMIoSsAwzpKuvztzmeo9hD/GV0w+IH3s47ZFVXbSJxhtdvewb7Dg2SJ78
+	NPYzA1UuicWi3dE5liuC4Fn9P7FD0YxnVbWaIwROy6m5rX+uYc9wKXUNOY1rzs6KsphO
+	3adoYIJOjak4ao+0mbL+ivHKm+1OSuq0zziWw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:to:subject:mime-version:content-type
 	:content-transfer-encoding:content-disposition;
-	b=r0sveF4wzTtVzeptk2ivsURICpNQvgUd4la5fzrxyWyORDJcsH2pXqDQRpPPUp2m+w
-	ge/Ge0QyNl3uqdypAfdbZZIcfiwqG3bF5hihz7sEsRNt2Ki6zoNLs88ajjP6JLyLwyaN
-	uX1oBGr8aCRMZF08EuFMIofd/+QWJamfWEag0=
-Received: by 10.140.177.15 with SMTP id z15mr12145872rve.114.1231421422846;
-	Thu, 08 Jan 2009 05:30:22 -0800 (PST)
-Received: by 10.141.142.17 with HTTP; Thu, 8 Jan 2009 05:30:22 -0800 (PST)
-Message-ID: <f96d234e0901080530q179b1e3en672e224a829e0993@mail.gmail.com>
-Date: Thu, 8 Jan 2009 08:30:22 -0500
+	b=fI3NaIJ++FABP20nJ+o8Rt1uWpccNmeIspwDtqfqccDMtFkluqP4omDKZ9EL7gzOuQ
+	pYBH9bGcOHe/zX8SD7XqMA/7S5Qhk6bc0wUFPuAht1Eci4xE6eJJn02zpbW5kHUcmWYT
+	v76Mur5pIGnFwcOqkrda3rlgGmUVdURYSbFCM=
+Received: by 10.141.23.7 with SMTP id a7mr12085738rvj.238.1231421873037;
+	Thu, 08 Jan 2009 05:37:53 -0800 (PST)
+Received: by 10.141.142.17 with HTTP; Thu, 8 Jan 2009 05:37:52 -0800 (PST)
+Message-ID: <f96d234e0901080537k6c1dfa9bm77ca6c03c24f1a49@mail.gmail.com>
+Date: Thu, 8 Jan 2009 08:37:52 -0500
 From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
@@ -42,17 +42,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jan 2009 13:36:33 -0000
+X-List-Received-Date: Thu, 08 Jan 2009 13:44:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
 Has anyone else seen this?
 
-I see it with x86 target machine, but not cm-x270 machine.
+I see it with x86 machine, but not cm-x270 machine.
 
 Thanks,
 Cliff
+
 
 NOTE: package console-image-1.0: started
 NOTE: package console-image-1.0-r0: task do_rootfs: started
