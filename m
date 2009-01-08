@@ -1,24 +1,34 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LKisM-0001Q8-1E
+	(envelope-from <cliff.brake@gmail.com>) id 1LKv3o-0000N4-5i
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Jan 2009 01:35:54 +0100
-Received: from andromeda.vanille.de (e180159077.adsl.alicedsl.de
-	[85.180.159.77])
-	by drlauer-research.com (Postfix) with ESMTP id 9F407584172
+	Thu, 08 Jan 2009 14:36:32 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so10086890rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jan 2009 01:49:47 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Thu, 08 Jan 2009 05:30:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:mime-version:content-type:content-transfer-encoding
+	:content-disposition;
+	bh=M3x8dNaZDRbbK2vnfYeR95MdcFnED1Y2oRJwvHhPKHw=;
+	b=Cz3liT4HBmqbtOEL2jWP+59WkE5j6Am0kSjHGw3bmpRlgRPf8MPZj61cPgzPqF0A0q
+	U8NVju1q3FXAJGTgvo7iON+ATpY/J9xtwephIcc1+jx0J95mhiMFXX+zl8WDg5i4bxX9
+	HpG7lT4xLdwG6R7Mj5CtmPOyUCLaE2jcvTNjo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:mime-version:content-type
+	:content-transfer-encoding:content-disposition;
+	b=r0sveF4wzTtVzeptk2ivsURICpNQvgUd4la5fzrxyWyORDJcsH2pXqDQRpPPUp2m+w
+	ge/Ge0QyNl3uqdypAfdbZZIcfiwqG3bF5hihz7sEsRNt2Ki6zoNLs88ajjP6JLyLwyaN
+	uX1oBGr8aCRMZF08EuFMIofd/+QWJamfWEag0=
+Received: by 10.140.177.15 with SMTP id z15mr12145872rve.114.1231421422846;
+	Thu, 08 Jan 2009 05:30:22 -0800 (PST)
+Received: by 10.141.142.17 with HTTP; Thu, 8 Jan 2009 05:30:22 -0800 (PST)
+Message-ID: <f96d234e0901080530q179b1e3en672e224a829e0993@mail.gmail.com>
+Date: Thu, 8 Jan 2009 08:30:22 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 8 Jan 2009 01:29:46 +0100
-User-Agent: KMail/1.9.10
-References: <200901041647.42516.mickey@vanille-media.de>
-	<49620002.40708@xora.org.uk> <gjt07r$vrj$1@ger.gmane.org>
-In-Reply-To: <gjt07r$vrj$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200901080129.46910.mickey@vanille-media.de>
-Subject: Re: OE dev meeting
+Subject: opkg-cl: corrupted double-linked list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,23 +42,278 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jan 2009 00:35:54 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 08 Jan 2009 13:36:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-It looks like there's a slight majority in favour of _before_ FOSDEM, so lets 
-check who could be there on Friday.
+Has anyone else seen this?
 
-This year, I want to depart on Sunday, so Friday will work for me.
+I see it with x86 target machine, but not cm-x270 machine.
 
-Cheers,
+Thanks,
+Cliff
 
-:M:
+NOTE: package console-image-1.0: started
+NOTE: package console-image-1.0-r0: task do_rootfs: started
+*** glibc detected *** opkg-cl: corrupted double-linked list:
+0x000000000061a350 ***
+======= Backtrace: =========
+/lib/libc.so.6[0x2b33164f14b2]
+/lib/libc.so.6[0x2b33164f1b88]
+/lib/libc.so.6(realloc+0x130)[0x2b33164f3ea0]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b33159a3f88]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b33159a45b4]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b331599b4cf]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0(opkg_cmd_exec+0x26)[0x2b3315999736]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0(opkg_op+0x1b7)[0x2b3315997527]
+/lib/libc.so.6(__libc_start_main+0xf4)[0x2b331649a1c4]
+opkg-cl[0x4005d9]
+======= Memory map: ========
+00400000-00401000 r-xp 00000000 fe:01 3795028
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/opkg-cl
+00600000-00601000 rw-p 00000000 fe:01 3795028
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/opkg-cl
+00601000-008d4000 rw-p 00601000 00:00 0                                  [heap]
+2b3315569000-2b3315586000 r-xp 00000000 08:06 136585
+  /lib/ld-2.7.so
+2b3315586000-2b3315589000 rw-p 2b3315586000 00:00 0
+2b3315786000-2b3315788000 rw-p 0001d000 08:06 136585
+  /lib/ld-2.7.so
+2b3315788000-2b3315792000 r-xp 00000000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b3315792000-2b3315991000 ---p 0000a000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b3315991000-2b3315992000 rw-p 00009000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b3315992000-2b33159bc000 r-xp 00000000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b33159bc000-2b3315bbb000 ---p 0002a000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b3315bbb000-2b3315bbd000 rw-p 00029000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b3315bbd000-2b3315bbe000 rw-p 2b3315bbd000 00:00 0
+2b3315bbe000-2b3315bf8000 r-xp 00000000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b3315bf8000-2b3315df8000 ---p 0003a000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b3315df8000-2b3315dfa000 rw-p 0003a000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b3315e18000-2b3315e59000 r-xp 00000000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b3315e59000-2b3316059000 ---p 00041000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b3316059000-2b331605b000 rw-p 00041000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b331605b000-2b331605d000 rw-p 2b331605b000 00:00 0
+2b331605d000-2b3316065000 r-xp 00000000 08:06 136604
+  /lib/librt-2.7.so
+2b3316065000-2b3316264000 ---p 00008000 08:06 136604
+  /lib/librt-2.7.so
+2b3316264000-2b3316266000 rw-p 00007000 08:06 136604
+  /lib/librt-2.7.so
+2b3316266000-2b3316267000 rw-p 2b3316266000 00:00 0
+2b3316267000-2b331627c000 r-xp 00000000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b331627c000-2b331647b000 ---p 00015000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b331647b000-2b331647c000 rw-p 00014000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b331647c000-2b33165d4000 r-xp 00000000 08:06 136588
+  /lib/libc-2.7.so
+2b33165d4000-2b33167d4000 ---p 00158000 08:06 136588
+  /lib/libc-2.7.so
+2b33167d4000-2b33167d7000 r--p 00158000 08:06 136588
+  /lib/libc-2.7.so
+2b33167d7000-2b33167d9000 rw-p 0015b000 08:06 136588
+  /lib/libc-2.7.so
+2b33167d9000-2b33167de000 rw-p 2b33167d9000 00:00 0
+2b33167de000-2b33167e0000 r-xp 00000000 08:06 136591
+  /lib/libdl-2.7.so
+2b33167e0000-2b33169e0000 ---p 00002000 08:06 136591
+  /lib/libdl-2.7.so
+2b33169e0000-2b33169e2000 rw-p 00002000 08:06 136591
+  /lib/libdl-2.7.so
+2b33169e2000-2b33169e3000 rw-p 2b33169e2000 00:00 0
+2b33169e3000-2b33169f1000 r-xp 00000000 08:06 5636145
+  /usr/lib/liblber-2.4.so.2.0.5
+2b33169f1000-2b3316bf0000 ---p 0000e000 08:06 5636145
+  /usr/lib/liblber-2.4.so.2.0.5
+2b3316bf0000-2b3316bf1000 rw-p 0000d000 08:06 5636145
+  /usr/lib/liblber-2.4.so.2.0.5
+2b3316bf1000-2b3316c03000 r-xp 00000000 08:06 136603     *** glibc
+detected *** opkg-cl: corrupted double-linked list: 0x000000000061a350
+***
+======= Backtrace: =========
+/lib/libc.so.6[0x2b610f5914b2]
+/lib/libc.so.6[0x2b610f591b88]
+/lib/libc.so.6(realloc+0x130)[0x2b610f593ea0]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b610ea43f88]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b610ea445b4]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b610ea3b4cf]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0(opkg_cmd_exec+0x26)[0x2b610ea39736]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0(opkg_op+0x1b7)[0x2b610ea37527]
+/lib/libc.so.6(__libc_start_main+0xf4)[0x2b610f53a1c4]
+opkg-cl[0x4005d9]
+======= Memory map: ========
+00400000-00401000 r-xp 00000000 fe:01 3795028
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/opkg-cl
+00600000-00601000 rw-p 00000000 fe:01 3795028
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/opkg-cl
+00601000-008d4000 rw-p 00601000 00:00 0                                  [heap]
+2b610e609000-2b610e626000 r-xp 00000000 08:06 136585
+  /lib/ld-2.7.so
+2b610e626000-2b610e629000 rw-p 2b610e626000 00:00 0
+2b610e826000-2b610e828000 rw-p 0001d000 08:06 136585
+  /lib/ld-2.7.so
+2b610e828000-2b610e832000 r-xp 00000000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b610e832000-2b610ea31000 ---p 0000a000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b610ea31000-2b610ea32000 rw-p 00009000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b610ea32000-2b610ea5c000 r-xp 00000000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b610ea5c000-2b610ec5b000 ---p 0002a000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b610ec5b000-2b610ec5d000 rw-p 00029000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b610ec5d000-2b610ec5e000 rw-p 2b610ec5d000 00:00 0
+2b610ec5e000-2b610ec98000 r-xp 00000000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b610ec98000-2b610ee98000 ---p 0003a000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b610ee98000-2b610ee9a000 rw-p 0003a000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b610eeb8000-2b610eef9000 r-xp 00000000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b610eef9000-2b610f0f9000 ---p 00041000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b610f0f9000-2b610f0fb000 rw-p 00041000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b610f0fb000-2b610f0fd000 rw-p 2b610f0fb000 00:00 0
+2b610f0fd000-2b610f105000 r-xp 00000000 08:06 136604
+  /lib/librt-2.7.so
+2b610f105000-2b610f304000 ---p 00008000 08:06 136604
+  /lib/librt-2.7.so
+2b610f304000-2b610f306000 rw-p 00007000 08:06 136604
+  /lib/librt-2.7.so
+2b610f306000-2b610f307000 rw-p 2b610f306000 00:00 0
+2b610f307000-2b610f31c000 r-xp 00000000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b610f31c000-2b610f51b000 ---p 00015000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b610f51b000-2b610f51c000 rw-p 00014000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b610f51c000-2b610f674000 r-xp 00000000 08:06 136588
+  /lib/libc-2.7.so
+2b610f674000-2b610f874000 ---p 00158000 08:06 136588
+  /lib/libc-2.7.so
+2b610f874000-2b610f877000 r--p 00158000 08:06 136588
+  /lib/libc-2.7.so
+2b610f877000-2b610f879000 rw-p 0015b000 08:06 136588
+  /lib/libc-2.7.so
+2b610f879000-2b610f87e000 rw-p 2b610f879000 00:00 0
+2b610f87e000-2b610f880000 r-xp 00000000 08:06 136591
+  /lib/libdl-2.7.so
+2b610f880000-2b610fa80000 ---p 00002000 08:06 136591
+  /lib/libdl-2.7.so
+2b610fa80000-2b610fa82000 rw-p 00002000 08:06 136591
+  /lib/libdl-2.7.so
+2b610fa82000-2b610fa83000 rw-p 2b610fa82000 00:00 0
+2b610fa83000-2b610fa91000 r-xp 00000000 08:06 5636145
+  /usr/lib/liblber-2.4.so.2.0.5
+2b610fa91000-2b610fc90000 ---p 0000e000 08:06 5636145
+  /usr/lib/liblber-2.4.so.2.0.5
+2b610fc90000-2b610fc91000 rw-p 0000d000 08:06 5636145
+  /usr/lib/liblber-2.4.so.2.0.5
+2b610fc91000-2b610fca3000 r-xp 00000000 08:06 136603     *** glibc
+detected *** opkg-cl: corrupted double-linked list: 0x000000000061a350
+***
+======= Backtrace: =========
+/lib/libc.so.6[0x2b8166ec24b2]
+/lib/libc.so.6[0x2b8166ec2b88]
+/lib/libc.so.6(realloc+0x130)[0x2b8166ec4ea0]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b8166374f88]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b81663755b4]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0[0x2b816636c4cf]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0(opkg_cmd_exec+0x26)[0x2b816636a736]
+/build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0(opkg_op+0x1b7)[0x2b8166368527]
+/lib/libc.so.6(__libc_start_main+0xf4)[0x2b8166e6b1c4]
+opkg-cl[0x4005d9]
+======= Memory map: ========
+00400000-00401000 r-xp 00000000 fe:01 3795028
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/opkg-cl
+00600000-00601000 rw-p 00000000 fe:01 3795028
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bin/opkg-cl
+00601000-008d4000 rw-p 00601000 00:00 0                                  [heap]
+2b8165f3a000-2b8165f57000 r-xp 00000000 08:06 136585
+  /lib/ld-2.7.so
+2b8165f57000-2b8165f5a000 rw-p 2b8165f57000 00:00 0
+2b8166157000-2b8166159000 rw-p 0001d000 08:06 136585
+  /lib/ld-2.7.so
+2b8166159000-2b8166163000 r-xp 00000000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b8166163000-2b8166362000 ---p 0000a000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b8166362000-2b8166363000 rw-p 00009000 fe:01 10829868
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libfakeroot-0.so
+2b8166363000-2b816638d000 r-xp 00000000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b816638d000-2b816658c000 ---p 0002a000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b816658c000-2b816658e000 rw-p 00029000 fe:01 3795116
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libopkg.so.0.0.0
+2b816658e000-2b816658f000 rw-p 2b816658e000 00:00 0
+2b816658f000-2b81665c9000 r-xp 00000000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b81665c9000-2b81667c9000 ---p 0003a000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b81667c9000-2b81667cb000 rw-p 0003a000 fe:01 10829905
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libcurl.so.4.1.0
+2b81667e9000-2b816682a000 r-xp 00000000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b816682a000-2b8166a2a000 ---p 00041000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b8166a2a000-2b8166a2c000 rw-p 00041000 08:06 5636940
+  /usr/lib/libldap_r-2.4.so.2.0.5
+2b8166a2c000-2b8166a2e000 rw-p 2b8166a2c000 00:00 0
+2b8166a2e000-2b8166a36000 r-xp 00000000 08:06 136604
+  /lib/librt-2.7.so
+2b8166a36000-2b8166c35000 ---p 00008000 08:06 136604
+  /lib/librt-2.7.so
+2b8166c35000-2b8166c37000 rw-p 00007000 08:06 136604
+  /lib/librt-2.7.so
+2b8166c37000-2b8166c38000 rw-p 2b8166c37000 00:00 0
+2b8166c38000-2b8166c4d000 r-xp 00000000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b8166c4d000-2b8166e4c000 ---p 00015000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b8166e4c000-2b8166e4d000 rw-p 00014000 fe:01 10797074
+  /build/oe/build/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/lib/libz.so.1.2.3
+2b8166e4d000-2b8166fa5000 r-xp 00000000 08:06 136588
+  /lib/libc-2.7.so
+2b8166fa5000-2b81671a5000 ---p 00158000 08:06 136588
+  /lib/libc-2.7.so
+2b81671a5000-2b81671a8000 r--p 00158000 08:06 136588
+  /lib/libc-2.7.so
+2b81671a8000-2b81671aa000 rw-p 0015b000 08:06 136588
+  /lib/libc-2.7.so
+2b81671aa000-2b81671af000 rw-p 2b81671aa000 00:00 0
+2b81671af000-2b81671b1000 r-xp 00000000 08:06 136591
+  /lib/libdl-2.7.so
+2b81671b1000-2b81673b1000 ---p 00002000 08:06 136591
+  /lib/libdl-2.7.so
+2b81673b1000-2b81673b3000 rw-p 00002000 08:06 136591
+  /lib/libdl-2.7.so
+2b81673b3000-2b81673b4000 rw-p 2b81673b3000 00:00 0
+2b81673b4000-2b81673c2000 r-xp 000000NOTE: package
+console-image-1.0-r0: task do_rootfs: completed
 
-NB: With regards to the imbursements, Stelios, do you still have our invoices? 
-We need them sent to Cornelius. If you can't do that, please forward 'em to 
-me.
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
