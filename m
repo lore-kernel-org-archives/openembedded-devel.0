@@ -1,38 +1,39 @@
-Received: from [66.80.197.243] (helo=looper.buglabs.net)
+Received: from [209.85.198.226] (helo=rv-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@buglabs.net>) id 1LKwhN-0007N1-Qq
+	(envelope-from <cliff.brake@gmail.com>) id 1LKybk-0000ZE-1Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Jan 2009 16:21:49 +0100
-Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
-	by looper.buglabs.net (Postfix) with ESMTP id 804BD340A1
+	Thu, 08 Jan 2009 18:23:48 +0100
+Received: by rv-out-0506.google.com with SMTP id f9so7844550rvb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jan 2009 10:15:49 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by aphid.buglabs.net (Postfix) with ESMTP id 7679F28E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jan 2009 10:16:17 -0500 (EST)
-X-Virus-Scanned: amavisd-new at aphid.buglabs.net
-Received: from aphid.buglabs.net ([127.0.0.1])
-	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PGHXTQEKIIWq
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jan 2009 10:16:17 -0500 (EST)
-Received: from [192.168.0.120] (t61.buglabs.net [192.168.0.120])
-	by aphid.buglabs.net (Postfix) with ESMTP id 08EF628E001
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jan 2009 10:16:17 -0500 (EST)
-From: Ken Gilmer <ken@buglabs.net>
+	Thu, 08 Jan 2009 09:17:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:cc:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:references;
+	bh=TCml+xKfqRKhLSmssQ6AbnfVhAeicmJ5kMmL8+lLyR0=;
+	b=iKE4W4oHBbKL/dUZU1PRiV5ixKzhr5K52+DkMVz31BOP4jJUpnmyoHM3G6HA+iz2rG
+	hMkpBJFfUPwnii+UH6V/RIRQ1+bw3AgRXFiFIQc+5Jq3Zxd1Jz18yPrP1Rz6Emg1jS0I
+	/KOJ6lpTm64oEIG6BdEVN2syXdiUB9OzTY5B8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:references;
+	b=Uej2wBHJ4bwI2JpLphfc6D8OSBg6prumJ1hCHnnthC/79tNnqsaMkYLX5NXlrVhw+y
+	MGu73V2uX+eMSrC4RhAvWjzHKUBTwMM60wLtJDmIH2I2NerRdmISFWjidtTO7fG907Xj
+	h5/ObLFrPfH9u4siC7u+2tX7vXpyuKKBJZh1M=
+Received: by 10.141.168.2 with SMTP id v2mr12242971rvo.47.1231435058154;
+	Thu, 08 Jan 2009 09:17:38 -0800 (PST)
+Received: by 10.141.142.17 with HTTP; Thu, 8 Jan 2009 09:17:38 -0800 (PST)
+Message-ID: <f96d234e0901080917n77601f9cr1593b813b3451fab@mail.gmail.com>
+Date: Thu, 8 Jan 2009 12:17:38 -0500
+From: "Cliff Brake" <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200901042339.31569.mickey@vanille-media.de>
-References: <200901041647.42516.mickey@vanille-media.de>
-	<4961343F.1000707@balister.org>
-	<200901042339.31569.mickey@vanille-media.de>
-Organization: Bug Labs, Inc.
-Date: Thu, 08 Jan 2009 10:15:17 -0500
-Message-Id: <1231427717.22380.3.camel@t61.buglabs.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: OE dev meeting
+In-Reply-To: <565965130901080657i4789129fy971a69f0a929300c@mail.gmail.com>
+MIME-Version: 1.0
+References: <f96d234e0901080537k6c1dfa9bm77ca6c03c24f1a49@mail.gmail.com>
+	<565965130901080657i4789129fy971a69f0a929300c@mail.gmail.com>
+Cc: opkg-devel@googlegroups.com
+Subject: Re: opkg-cl: corrupted double-linked list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,40 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jan 2009 15:24:21 -0000
-X-List-Received-Date: Thu, 08 Jan 2009 15:24:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 08 Jan 2009 17:23:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+On Thu, Jan 8, 2009 at 9:57 AM, Tick Chen <ticktock35@gmail.com> wrote:
+> Hi Cliff,
+>  Would you like to compile a opkg with -g2 and test again?
 
-Maybe you also can decide on Mateo's OE logo proposal.
+Yes, will do.
 
-cheers
-ken
+> Which branch and version on OE do you used and which version of
+> opkg-native do you compiled?
 
-On Sun, 2009-01-04 at 23:39 +0100, Michael 'Mickey' Lauer wrote:
-> Am Sunday 04 January 2009 23:12:15 schrieb Philip Balister:
-> > How long would this meeting last? Before would be better for me. I need
-> > to work this out ASAP so I can buy a plane ticket.
-> 
-> One day would be fine. There's a number of issues that need some consensus 
-> before we can move forward. Things that come to mind include:
-> 
-> * The future of BitBake -- where to continue to develop it, in which style, 
-> and which features to concentrate on.
-> 
-> * Splitting the recipe tree.
-> 
-> * Evaluating our feedback of the first months w/ git.
-> 
-> * Streamlining Poky merges.
-> 
-> * OE and the distro situation
-> 
-> * Documentation, Website, and Hosting.
-> 
-> IIRC Richard had some additional points. RP?
-> 
+org.openembedded.dev f599ffebf9c4133e71fb7095612e9b59de1a83ab (from
+this morning)
 
+Its strange that it only happens with the x86 target machine.
+gesbc-9302, cm-x270, and beagleboard all built fine.
+
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
