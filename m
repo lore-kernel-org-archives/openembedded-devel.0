@@ -1,46 +1,34 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LL3wu-00018y-0P
-	for openembedded-devel@openembedded.org; Fri, 09 Jan 2009 00:06:06 +0100
-Received: by qw-out-1920.google.com with SMTP id 5so4367506qwc.6
-	for <openembedded-devel@openembedded.org>;
-	Thu, 08 Jan 2009 14:59:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:to
-	:subject:cc:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:references;
-	bh=9W/ibUuFbPY4r/VVHpM57vQrfSC89KEzSTcG1xTcU1Q=;
-	b=NlnVw++XF/KKijZaX63nKfy/2OiC1+zJoDkMwkwYsDXpxhPfdLhpzYgzWE033oBndf
-	sREU/6VsfFFgbMcUmcNd0cZg04kJTX5plDsQ9iyjVdRSiTCFcqPQfYxrr4rlQZOqnfBo
-	rNQiGKxcl4URcKdcVFa126pL0frdawAYcm6XU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:to:subject:cc:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:references;
-	b=krFYylrQKE01u6Aqj08MPdH+VXwGcV5sfBjOsraLKb2hkfFyJboyOg5Z9q8KM8FkP6
-	b7gRg/0fmUaAQnKp5HGV0If5JAMIzRqI6fnRZEoFmNibuMt2COl1aXfg+LOsTMygm2xH
-	ock71+61K1IO479mppHIjf+q/LwcjXFhvsw54=
-Received: by 10.214.150.12 with SMTP id x12mr22107563qad.95.1231455589403;
-	Thu, 08 Jan 2009 14:59:49 -0800 (PST)
-Received: by 10.215.66.18 with HTTP; Thu, 8 Jan 2009 14:59:49 -0800 (PST)
-Message-ID: <c384c5ea0901081459h64fd1bdeidbf074bd4df88ac5@mail.gmail.com>
-Date: Thu, 8 Jan 2009 23:59:49 +0100
-From: "Leon Woestenberg" <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1231287266.5330.113.camel@dax.rpnet.com>
-MIME-Version: 1.0
+	(envelope-from <rpurdie@rpsys.net>) id 1LL5jg-0005LR-AT
+	for openembedded-devel@openembedded.org; Fri, 09 Jan 2009 02:00:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n090sISb026209
+	for <openembedded-devel@openembedded.org>; Fri, 9 Jan 2009 00:54:18 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 26111-02 for <openembedded-devel@openembedded.org>;
+	Fri,  9 Jan 2009 00:54:14 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n090sCu0026203
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 9 Jan 2009 00:54:12 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1230858713.10424.4.camel@dax.rpnet.com>
 References: <1230827114.5320.42.camel@dax.rpnet.com>
 	<20090101182526.GF7040@smtp.west.cox.net>
 	<1230840687.5320.56.camel@dax.rpnet.com>
 	<20090101220229.GH7040@smtp.west.cox.net>
 	<1230858713.10424.4.camel@dax.rpnet.com>
-	<20090102043755.GC400@smtp.west.cox.net>
-	<d2b9ea600901050631h5eda6de5yee190bf0841e5b15@mail.gmail.com>
-	<gjtg1m$rsd$1@ger.gmane.org>
-	<d2b9ea600901061251n67c641a4ie03b8a552f3c4990@mail.gmail.com>
-	<1231287266.5330.113.camel@dax.rpnet.com>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Native/Cross/SDK rethink (Was: Re: RFC: "Virtual" native and sdk recipes)
+Date: Fri, 09 Jan 2009 00:54:50 +0000
+Message-Id: <1231462490.6467.85.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: RFC: "Virtual" native and sdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,29 +42,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jan 2009 23:06:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 Jan 2009 01:00:29 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Richard,
+On Fri, 2009-01-02 at 01:11 +0000, Richard Purdie wrote:
+> I just had a look through the trini/canadian-sdk branch and there are
+> bits I like and bits I dislike. I'll try and provide some feedback in
+> due course with a view to getting the less controversial bits merged. I
+> have some tweaks in poky to do with dynamic library extension handling
+> for example (from playing with darwin targets) where it would pay us to
+> find a common solution.
 
-On Wed, Jan 7, 2009 at 1:14 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Tue, 2009-01-06 at 21:51 +0100, Esben Haabendal wrote:
->> On Mon, Jan 5, 2009 at 6:29 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->>
-> Also, for the record I've played a large part in developing the sdk and
-> meta-toolchain stuff so I'm at least partially responsible for the
-> current mess. I do now think I got that wrong though.
->
-The words of a true perfectionist, always learning from daring steps
-in the past :-)
+Sorry for the delayed feedback, what I've looked at so far follows
+below. It was easiest to extract some patches from your tree and make
+some commits of my own so these are in:
 
-The core toolchain and SDK stuff bits you have contributed are very
-much appreciated, so you are kindly invited to "mess it up" again.
+http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/rpurdie/canadian-sofar
 
-Regards,
--- 
-Leon
+Basically I wanted to particularly review the changes to the existing OE
+core classes/bitbake.conf. The changes in that branch are versions I'm
+happy with. I had two concerns there:
+
+1. I don't want to see ${HOST_EXEEXT} everywhere but I know why you 
+   need it and this was something OE would inevitably face. As a 
+   compromise I propose adding:
+
+   EXEEXT = "${HOST_EXEEXT}"
+
+   and using ${EXEEXT} which is fractionally less ugly for all common 
+   uses. Could you update your patch to use ${EXEEXT} please assuming 
+   we all agree on this. Its the same dilemma as the SOLIBS stuff I 
+   have with Darwin :/
+
+2. All the bb.data.inherits_class() stuff is ugly as sin and totally 
+   unreadable. My series has a better patch.
+
+Moving on to the rest of the code, I don't see a problem merging any of
+the totally new files. How about the following merge process:
+
+a) We push my tree into OE
+
+b) You rebase onto my tree's changes and adjust the EXEEXT stuff.
+
+c) You add changes which add the EXEEXT changes only to existing 
+   recipes and commit that.
+
+d) The checksums.ini changes are a no brainer.
+
+e) You start adding the totally new files to OE directly in a logical 
+   sequence of something like:
+
+   i) Add canadian core classes (classes/canadian*)
+   ii) Add mingw new recipes
+   iii) Add misc support recipes (gmp/mprf-canadian)
+   iv) Add new binutils recipes
+   v) Add new gcc recipes
+
+f) You make a diff of the remaining changes that are needed and we 
+   review those.
+
+Hopefully this reduces the overhead of the branch, lets you make
+progress and then helps us review the remaining code.
+
+Does that seam reasonable?
+
+Things I've noticed in the rest of the patches are:
+
+* The amount of code duplication in meta-toolchain/canadian-sdk - we 
+  really need to think about refactoring that code. 
+* I'm also not keen on the SDK_PREFIX -> SDK_PATH change. Why? It 
+  breaks things for people. In fact please back this out before merging 
+  anything above, I don't see a good reason for it.
+* The choice of OVERRIDE you're using worries me as sdk- is far to much 
+  of a generic expression. You don't use the overrides much and only 
+  for DEFAULT_PREFERENCE. Can we not find a better way to do this and 
+  avoid adding overrides? The fact these are there suggests something 
+  with the PROVIDES and DEPENDS logic you're using is broken as it 
+  should be fairly magic (and a lot of effort went into that for the 
+  standard toolchains) :/
+
+Also, this is all on the understanding I've previously mentioned that we
+will need to rewrite and break this stuff at some point sooner or later.
+
+Cheers,
+
+Richard
+
+
 
 
