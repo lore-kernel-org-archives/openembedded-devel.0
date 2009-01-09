@@ -1,33 +1,22 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LL64J-0001rs-TA
-	for openembedded-devel@openembedded.org; Fri, 09 Jan 2009 02:21:48 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090109011534.QDRO2342.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 8 Jan 2009 20:15:34 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id 1DFY1b0021E665w03DFY17; Thu, 08 Jan 2009 20:15:34 -0500
-X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
-	a=b2ZvGRdsAAAA:8 a=5i58vviozciC5OdtkR4A:9
-	a=o9DZELGFnjjDDUXgJaQS2T7NeccA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Thu, 8 Jan 2009 18:16:03 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090109011603.GE400@smtp.west.cox.net>
-References: <1230827114.5320.42.camel@dax.rpnet.com>
-	<20090101182526.GF7040@smtp.west.cox.net>
-	<1230840687.5320.56.camel@dax.rpnet.com>
-	<20090101220229.GH7040@smtp.west.cox.net>
-	<1230858713.10424.4.camel@dax.rpnet.com>
-	<1231462490.6467.85.camel@dax.rpnet.com>
+	(envelope-from <philip@balister.org>) id 1LL6FE-0002fG-DN
+	for openembedded-devel@openembedded.org; Fri, 09 Jan 2009 02:33:04 +0100
+Received: (qmail 25520 invoked by uid 1003); 9 Jan 2009 01:26:51 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 9 Jan 2009 01:26:50 -0000
+Message-ID: <4966A7D6.10200@balister.org>
+Date: Thu, 08 Jan 2009 20:26:46 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-In-Reply-To: <1231462490.6467.85.camel@dax.rpnet.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: RFC: "Virtual" native and sdk recipes
+To: openembedded-devel@lists.openembedded.org
+References: <200901041647.42516.mickey@vanille-media.de>	<49620002.40708@xora.org.uk>
+	<gjt07r$vrj$1@ger.gmane.org>
+	<200901080129.46910.mickey@vanille-media.de>
+In-Reply-To: <200901080129.46910.mickey@vanille-media.de>
+Subject: Re: OE dev meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,107 +30,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jan 2009 01:21:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 Jan 2009 01:33:04 -0000
+X-Groupsio-MsgNum: 7160
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms040505030403070508020108"
 
-On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
-> On Fri, 2009-01-02 at 01:11 +0000, Richard Purdie wrote:
-> > I just had a look through the trini/canadian-sdk branch and there are
-> > bits I like and bits I dislike. I'll try and provide some feedback in
-> > due course with a view to getting the less controversial bits merged. I
-> > have some tweaks in poky to do with dynamic library extension handling
-> > for example (from playing with darwin targets) where it would pay us to
-> > find a common solution.
-> 
-> Sorry for the delayed feedback, what I've looked at so far follows
-> below. It was easiest to extract some patches from your tree and make
-> some commits of my own so these are in:
-> 
-> http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/rpurdie/canadian-sofar
-> 
-> Basically I wanted to particularly review the changes to the existing OE
-> core classes/bitbake.conf. The changes in that branch are versions I'm
-> happy with. I had two concerns there:
-> 
-> 1. I don't want to see ${HOST_EXEEXT} everywhere but I know why you 
->    need it and this was something OE would inevitably face. As a 
->    compromise I propose adding:
-> 
->    EXEEXT = "${HOST_EXEEXT}"
-> 
->    and using ${EXEEXT} which is fractionally less ugly for all common 
->    uses. Could you update your patch to use ${EXEEXT} please assuming 
->    we all agree on this. Its the same dilemma as the SOLIBS stuff I 
->    have with Darwin :/
-> 
-> 2. All the bb.data.inherits_class() stuff is ugly as sin and totally 
->    unreadable. My series has a better patch.
-> 
-> Moving on to the rest of the code, I don't see a problem merging any of
-> the totally new files. How about the following merge process:
-> 
-> a) We push my tree into OE
-> 
-> b) You rebase onto my tree's changes and adjust the EXEEXT stuff.
-> 
-> c) You add changes which add the EXEEXT changes only to existing 
->    recipes and commit that.
-> 
-> d) The checksums.ini changes are a no brainer.
-> 
-> e) You start adding the totally new files to OE directly in a logical 
->    sequence of something like:
-> 
->    i) Add canadian core classes (classes/canadian*)
->    ii) Add mingw new recipes
->    iii) Add misc support recipes (gmp/mprf-canadian)
->    iv) Add new binutils recipes
->    v) Add new gcc recipes
-> 
-> f) You make a diff of the remaining changes that are needed and we 
->    review those.
-> 
-> Hopefully this reduces the overhead of the branch, lets you make
-> progress and then helps us review the remaining code.
-> 
-> Does that seam reasonable?
+--------------ms040505030403070508020108
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Sounds good.  I'll see what I can do about finding somewhere to sit
-while borrowing someones wifi at my new place and hopefully get
-something going tomorrow.
-
-> Things I've noticed in the rest of the patches are:
+Michael 'Mickey' Lauer wrote:
+> It looks like there's a slight majority in favour of _before_ FOSDEM, so lets 
+> check who could be there on Friday.
 > 
-> * The amount of code duplication in meta-toolchain/canadian-sdk - we 
->   really need to think about refactoring that code. 
+> This year, I want to depart on Sunday, so Friday will work for me.
 
-Yes.  And for other purposes I'd like a few more hooks for the including
-bb file.  The one OpenMoko pushed (or is trying to push? haven't looked)
-is a good starting place.
+I'll be there Friday. How long should we block off for Friday? Who will 
+be able to attend? I'm assuming anyone with OE interest who will be in 
+Brussels is welcome.
 
-> * I'm also not keen on the SDK_PREFIX -> SDK_PATH change. Why? It 
->   breaks things for people. In fact please back this out before merging 
->   anything above, I don't see a good reason for it.
+I'm arriving a few days early and will impersonate a tourist until 
+Friday AM.
 
-Esben?
-
-> * The choice of OVERRIDE you're using worries me as sdk- is far to much 
->   of a generic expression. You don't use the overrides much and only 
->   for DEFAULT_PREFERENCE. Can we not find a better way to do this and 
->   avoid adding overrides? The fact these are there suggests something 
->   with the PROVIDES and DEPENDS logic you're using is broken as it 
->   should be fairly magic (and a lot of effort went into that for the 
->   standard toolchains) :/
-
-I'll see what I can do about removing that, then.
-
-> Also, this is all on the understanding I've previously mentioned that we
-> will need to rewrite and break this stuff at some point sooner or later.
-
-Right.
-
--- 
-Tom Rini
+Philip
 
 
+> 
+> Cheers,
+> 
+> :M:
+> 
+> NB: With regards to the imbursements, Stelios, do you still have our invoices? 
+> We need them sent to Cornelius. If you can't do that, please forward 'em to 
+> me.
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+
+--------------ms040505030403070508020108
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDEwOTAx
+MjY0NlowIwYJKoZIhvcNAQkEMRYEFFQSmtEO209wbJeXvHnH05XDMGrZMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQAa0wmOdcGa75Yw+KHGBc76KogEjDA6ZLSyx48jzSOm5CWubzs1
+HY3mQmP/gIgvIn++MQMbADQo+wkJOvoftE+DQPLddDz/u465WP6x0/Tv9ccyuoWdjrqHuZ1Mh3HL
+fXMLMaRkbGD7Di5Pnejkn987bf1jvRmcBDG9uqsxyjN/UT8lSqZiSmrIO+ZGE0oROx5LauQVHE8u
+muUrvz9/9B64/mllYtlMQX1aYLdRvaRl0I6yNtVPTSPLFm0iUbvN9DqYDdBS7JYbYGGXvKy+lvrB
+rJtL3Y+dFN8HwtlcoYEMeDoMYxVqsNYV7nglJW6kBEL5TxCntPG/CTZPUsC1oSuhAAAAAAAA
+
+--------------ms040505030403070508020108--
