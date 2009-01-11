@@ -1,34 +1,32 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LLjFo-0000AN-UK
-	for openembedded-devel@openembedded.org; Sat, 10 Jan 2009 20:12:17 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090110190555.XGQM2342.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Sat, 10 Jan 2009 14:05:55 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id 1v5v1b00K1E665w03v5vTu; Sat, 10 Jan 2009 14:05:55 -0500
-X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
-	a=b2ZvGRdsAAAA:8 a=75kK3m_RliEsMGiiZe0A:9
-	a=YNGGOTXZnBSnwfwglcL5L1Nb2u8A:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Sat, 10 Jan 2009 12:06:27 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090110190627.GP400@smtp.west.cox.net>
-References: <1230827114.5320.42.camel@dax.rpnet.com>
-	<20090101182526.GF7040@smtp.west.cox.net>
-	<1230840687.5320.56.camel@dax.rpnet.com>
-	<20090101220229.GH7040@smtp.west.cox.net>
-	<1230858713.10424.4.camel@dax.rpnet.com>
-	<1231462490.6467.85.camel@dax.rpnet.com>
-	<20090110153313.GM400@smtp.west.cox.net>
+	(envelope-from <stefan@datenfreihafen.org>)
+	id 1LM3sH-0002Sq-Fg; Sun, 11 Jan 2009 18:13:21 +0100
+Received: from p5b037f75.dip.t-dialin.net ([91.3.127.117] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1LM3m4-0001eK-DQ by authid <stefan@sostec.de> with cram_md5;
+	Sun, 11 Jan 2009 18:06:59 +0100
+Received: from stefan by excalibur.local with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>)
+	id 1LM3m7-0005jj-3v; Sun, 11 Jan 2009 18:06:59 +0100
+Date: Sun, 11 Jan 2009 18:06:59 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-commits@lists.openembedded.org
+Message-ID: <20090111170659.GC17627@excalibur.local>
+References: <20090111152021.47737188463@amethyst.openembedded.net>
 MIME-Version: 1.0
-In-Reply-To: <20090110153313.GM400@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
+In-Reply-To: <20090111152021.47737188463@amethyst.openembedded.net>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: RFC: "Virtual" native and sdk recipes
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : mtd-utils: add 1.2.0+git for	ubifs-support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Jan 2009 19:12:17 -0000
+X-List-Received-Date: Sun, 11 Jan 2009 17:13:22 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sat, Jan 10, 2009 at 08:33:13AM -0700, Tom Rini wrote:
-> On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
-> > On Fri, 2009-01-02 at 01:11 +0000, Richard Purdie wrote:
-> > > I just had a look through the trini/canadian-sdk branch and there are
-> > > bits I like and bits I dislike. I'll try and provide some feedback in
-> > > due course with a view to getting the less controversial bits merged. I
-> > > have some tweaks in poky to do with dynamic library extension handling
-> > > for example (from playing with darwin targets) where it would pay us to
-> > > find a common solution.
-> > 
-> > Sorry for the delayed feedback, what I've looked at so far follows
-> > below. It was easiest to extract some patches from your tree and make
-> > some commits of my own so these are in:
-> > 
-> > http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/rpurdie/canadian-sofar
+Hello.
+
+On Sun, 2009-01-11 at 16:20, GIT User account wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: f8d4b8781f2b228754a448289f5b2a97844f50bc
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=f8d4b8781f2b228754a448289f5b2a97844f50bc
 > 
-> This appears to break, DISTRO=angstrom-2008.1 MACHINE=efika bitbake
-> meta-toolchain-sbox:
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Sun Jan 11 16:19:06 2009 +0100
+> 
+> mtd-utils: add 1.2.0+git for ubifs-support
+> * no -native version added yet
 
-Found it!  The following is needed (I'll push to your branch shortly):
+Since this commit mtd-utils fails for me with:
 
-diff --git a/classes/insane.bbclass b/classes/insane.bbclass
-index 3e32830..3a2cadc 100644
---- a/classes/insane.bbclass
-+++ b/classes/insane.bbclass
-@@ -383,12 +383,11 @@ def package_qa_check_staged(path,d):
- 
-     installed = "installed=yes"
-     iscrossnative = False
-+    pkgconfigcheck = tmpdir
-     for s in ['cross', 'native', 'canadian-cross', 'canadian-native']:
-         if bb.data.inherits_class(s, d):
-             pkgconfigcheck = workdir
-             iscrossnative = True
--    else:
--        pkgconfigcheck = tmpdir
- 
-     # find all .la and .pc files
-     # read the content
+| In file included from lpt.c:23:
+| mkfs.ubifs.h:48:23: error: uuid/uuid.h: No such file or directory
 
--- 
-Tom Rini
+regards
+Stefan Schmidt
 
 
