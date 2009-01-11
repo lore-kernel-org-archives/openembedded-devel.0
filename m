@@ -1,32 +1,34 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>)
-	id 1LM3sH-0002Sq-Fg; Sun, 11 Jan 2009 18:13:21 +0100
-Received: from p5b037f75.dip.t-dialin.net ([91.3.127.117] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LM3m4-0001eK-DQ by authid <stefan@sostec.de> with cram_md5;
-	Sun, 11 Jan 2009 18:06:59 +0100
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>)
-	id 1LM3m7-0005jj-3v; Sun, 11 Jan 2009 18:06:59 +0100
-Date: Sun, 11 Jan 2009 18:06:59 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-commits@lists.openembedded.org
-Message-ID: <20090111170659.GC17627@excalibur.local>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LM4LM-0007iZ-Sn
+	for openembedded-devel@openembedded.org; Sun, 11 Jan 2009 18:43:24 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LM4FD-0008ME-NZ
+	for openembedded-devel@openembedded.org; Sun, 11 Jan 2009 17:37:03 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 11 Jan 2009 17:37:03 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 11 Jan 2009 17:37:03 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 11 Jan 2009 18:36:52 +0100
+Message-ID: <gkdanl$3ht$1@ger.gmane.org>
 References: <20090111152021.47737188463@amethyst.openembedded.net>
-MIME-Version: 1.0
-In-Reply-To: <20090111152021.47737188463@amethyst.openembedded.net>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [oe-commits] Koen Kooi : mtd-utils: add 1.2.0+git for	ubifs-support
+	<20090111170659.GC17627@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081230 Shredder/3.0b2pre
+In-Reply-To: <20090111170659.GC17627@excalibur.local>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Koen Kooi : mtd-utils: add 1.2.0+git for ubifs-support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jan 2009 17:13:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 11 Jan 2009 17:43:25 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
+On 11-01-09 18:06, Stefan Schmidt wrote:
+> Hello.
+>
+> On Sun, 2009-01-11 at 16:20, GIT User account wrote:
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: f8d4b8781f2b228754a448289f5b2a97844f50bc
+>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=f8d4b8781f2b228754a448289f5b2a97844f50bc
+>>
+>> Author: Koen Kooi<koen@openembedded.org>
+>> Date:   Sun Jan 11 16:19:06 2009 +0100
+>>
+>> mtd-utils: add 1.2.0+git for ubifs-support
+>> * no -native version added yet
+>
+> Since this commit mtd-utils fails for me with:
+>
+> | In file included from lpt.c:23:
+> | mkfs.ubifs.h:48:23: error: uuid/uuid.h: No such file or directory
 
-On Sun, 2009-01-11 at 16:20, GIT User account wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: f8d4b8781f2b228754a448289f5b2a97844f50bc
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=f8d4b8781f2b228754a448289f5b2a97844f50bc
-> 
-> Author: Koen Kooi <koen@openembedded.org>
-> Date:   Sun Jan 11 16:19:06 2009 +0100
-> 
-> mtd-utils: add 1.2.0+git for ubifs-support
-> * no -native version added yet
+Ah, I had efsprogs-libs already built, so I didn't notice that. Should 
+be fixed now. Thanks for reporting that.
 
-Since this commit mtd-utils fails for me with:
+regards,
 
-| In file included from lpt.c:23:
-| mkfs.ubifs.h:48:23: error: uuid/uuid.h: No such file or directory
+Koen
 
-regards
-Stefan Schmidt
 
 
