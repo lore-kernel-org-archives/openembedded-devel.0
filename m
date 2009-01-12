@@ -1,34 +1,27 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LMSGI-0000xO-3k
-	for openembedded-devel@openembedded.org; Mon, 12 Jan 2009 20:15:46 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(envelope-from <trini@kernel.crashing.org>) id 1LMT6m-0007Vi-4r
+	for openembedded-devel@openembedded.org; Mon, 12 Jan 2009 21:10:00 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao105.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090112190916.JDUH2948.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 12 Jan 2009 14:09:16 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id 2j9E1b0041E665w04j9Eby; Mon, 12 Jan 2009 14:09:16 -0500
-X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
-	a=VdEGk7eSNrKj4qQvQYoA:9 a=EIAjsg4qaQYsbmDRSTzi0EswZkEA:4
+	id <20090112200330.ONQ8485.fed1rmmtao105.cox.net@fed1rmimpo01.cox.net>; 
+	Mon, 12 Jan 2009 15:03:30 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
+	id 2k3W1b0031E665w03k3WWC; Mon, 12 Jan 2009 15:03:30 -0500
+X-Authority-Analysis: v=1.0 c=1 a=rINLuMDxMIoA:10 a=7OzDuaD8CwYA:10
+	a=3lOzt4MzpjnEgDxB9UYA:9 a=8KiehCiVCZcEG-TP3pi9HfGCFHEA:4
 	a=LY0hPdMaydYA:10
 X-CM-Score: 0.00
-Date: Mon, 12 Jan 2009 12:09:47 -0700
+Date: Mon, 12 Jan 2009 13:04:03 -0700
 From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090112190947.GA3342@smtp.west.cox.net>
-References: <1230827114.5320.42.camel@dax.rpnet.com>
-	<20090101182526.GF7040@smtp.west.cox.net>
-	<1230840687.5320.56.camel@dax.rpnet.com>
-	<20090101220229.GH7040@smtp.west.cox.net>
-	<1230858713.10424.4.camel@dax.rpnet.com>
-	<1231462490.6467.85.camel@dax.rpnet.com>
-	<20090109011603.GE400@smtp.west.cox.net>
+To: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
+Message-ID: <20090112200403.GB3342@smtp.west.cox.net>
+References: <f96d234e0901120802m7d4bbe48pb98a08cf04434c2e@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20090109011603.GE400@smtp.west.cox.net>
+In-Reply-To: <f96d234e0901120802m7d4bbe48pb98a08cf04434c2e@mail.gmail.com>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: RFC: "Virtual" native and sdk recipes
+Subject: Re: OE weekly changelog 2009-01-05 to 2009-01-12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jan 2009 19:15:46 -0000
+X-List-Received-Date: Mon, 12 Jan 2009 20:10:00 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, Jan 08, 2009 at 06:16:03PM -0700, Tom Rini wrote:
-> On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
+On Mon, Jan 12, 2009 at 11:02:34AM -0500, Cliff Brake wrote:
 [snip]
-> > * The choice of OVERRIDE you're using worries me as sdk- is far to much 
-> >   of a generic expression. You don't use the overrides much and only 
-> >   for DEFAULT_PREFERENCE. Can we not find a better way to do this and 
-> >   avoid adding overrides? The fact these are there suggests something 
-> >   with the PROVIDES and DEPENDS logic you're using is broken as it 
-> >   should be fairly magic (and a lot of effort went into that for the 
-> >   standard toolchains) :/
-> 
-> I'll see what I can do about removing that, then.
+> Koen Kooi (57):
+[snip]
+>       mtd-utils: add 1.2.0+git for ubifs-support
+>       mtd-utils: package *all* ubifs utils
 
-While this must have been needed at some point in development (perhaps
-before the changes I made to get the stuff built as $(target)-$(runs-on)
-not just $(runs-on)) it's no longer.  Dropped locally and building
-everything fine still.
+Anything in particular holding back on a -native version too? (and I
+haven't done a new pull yet, so forgive me if it's in already)  If not,
+I'll go and push that in shortly, along with mkfs.ubi (unless that got
+merged in, it was stand alone when I delt with it all).  Thanks!
 
 -- 
 Tom Rini
