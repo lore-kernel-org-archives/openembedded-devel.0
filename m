@@ -1,34 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LMURb-00034z-CD
-	for openembedded-devel@openembedded.org; Mon, 12 Jan 2009 22:35:36 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LMULM-0002op-Vs
-	for openembedded-devel@openembedded.org; Mon, 12 Jan 2009 21:29:09 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 12 Jan 2009 21:29:08 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 12 Jan 2009 21:29:08 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 12 Jan 2009 22:28:58 +0100
-Message-ID: <gkgcmq$red$1@ger.gmane.org>
-References: <f96d234e0901120802m7d4bbe48pb98a08cf04434c2e@mail.gmail.com>	<20090112200403.GB3342@smtp.west.cox.net>	<9AB0D1BC-C8E5-49AF-9841-8563DC76CC9B@student.utwente.nl>
-	<20090112204107.GD3342@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081230 Shredder/3.0b2pre
-In-Reply-To: <20090112204107.GD3342@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: OE weekly changelog 2009-01-05 to 2009-01-12
+	(envelope-from <rod@whitby.id.au>) id 1LMVLT-00013Y-81
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Jan 2009 23:33:19 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 639A520DDC6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jan 2009 17:26:51 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Mon, 12 Jan 2009 17:26:51 -0500
+X-Sasl-enc: 2lkVWx2SknydflW/qQBfrD/LOnLv/MmZYPBys1tGHGJ8 1231799210
+Received: from [192.168.1.11] (au2.astc-design.com [203.122.250.137])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 5FBC929B0D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jan 2009 17:26:49 -0500 (EST)
+Message-ID: <496BC3A2.3010009@whitby.id.au>
+Date: Tue, 13 Jan 2009 08:56:42 +1030
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.19 (Windows/20081209)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <089B0658-0555-45C0-9C28-EBAE9FF58EB1@foonas.org>
+In-Reply-To: <089B0658-0555-45C0-9C28-EBAE9FF58EB1@foonas.org>
+Subject: Re: git access request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +36,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jan 2009 21:35:37 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 12 Jan 2009 22:33:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 12-01-09 21:41, Tom Rini wrote:
-> On Mon, Jan 12, 2009 at 09:08:01PM +0100, Koen Kooi wrote:
->> Op 12 jan 2009, om 21:04 heeft Tom Rini het volgende geschreven:
->>
->>> On Mon, Jan 12, 2009 at 11:02:34AM -0500, Cliff Brake wrote:
->>> [snip]
->>>> Koen Kooi (57):
->>> [snip]
->>>>       mtd-utils: add 1.2.0+git for ubifs-support
->>>>       mtd-utils: package *all* ubifs utils
->>> Anything in particular holding back on a -native version too?
->> Nothing apart from a bit of testing :)
->
-> OK.  I just checked my stuff and there wasn't anything special for the
-> -native one.  I haven't pushed yet as I did my building vs
-> e2fsprogs-1.38 (and made it stage uuid) and I can't quite get a build
-> ready to test using -1.35 as quick as you could :)
+Tim Ellis wrote:
+> I took over most of the foonas work from NAiL some time ago (it can be  
+> measured in years now I believe!) and would like to request access to  
+> the various packages NAiL has committed for me so that I am able to  
+> maintain them more directly, ie fix various and keep them up to date.  
 
-It's using e2fsprogs-libs, which stages that header[1].
+I support this request.
 
-regards,
-
-Koen
-
-[1] I'm puzzled why we have both e2fsprogs.bb and e2fsprogs-libs.bb
-
+-- Rod
 
 
