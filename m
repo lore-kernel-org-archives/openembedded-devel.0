@@ -1,32 +1,22 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LMX5C-0005Om-DC
-	for openembedded-devel@openembedded.org; Tue, 13 Jan 2009 01:24:38 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090113001808.DILN131.fed1rmmtao107.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 12 Jan 2009 19:18:08 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id 2oJ51b00P1E665w03oJ5fi; Mon, 12 Jan 2009 19:18:07 -0500
-X-Authority-Analysis: v=1.0 c=1 a=rINLuMDxMIoA:10 a=7OzDuaD8CwYA:10
-	a=lZd9ap5UOs6WRpZtT0EA:9 a=xAkNsLZt3jXUiUT4H5nKWDnmrFwA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 12 Jan 2009 17:18:39 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090113001838.GF3342@smtp.west.cox.net>
-References: <f96d234e0901120802m7d4bbe48pb98a08cf04434c2e@mail.gmail.com>
-	<20090112200403.GB3342@smtp.west.cox.net>
-	<9AB0D1BC-C8E5-49AF-9841-8563DC76CC9B@student.utwente.nl>
-	<20090112204107.GD3342@smtp.west.cox.net>
-	<gkgcmq$red$1@ger.gmane.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1LMcwx-0002eD-M0
+	for openembedded-devel@openembedded.org; Tue, 13 Jan 2009 07:40:32 +0100
+Received: (qmail 1324 invoked by uid 813007); 13 Jan 2009 06:34:01 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 13 Jan 2009 06:34:01 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 13 Jan 2009 07:34:00 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
+References: <089B0658-0555-45C0-9C28-EBAE9FF58EB1@foonas.org>
+	<496BC3A2.3010009@whitby.id.au>
+In-Reply-To: <496BC3A2.3010009@whitby.id.au>
 MIME-Version: 1.0
-In-Reply-To: <gkgcmq$red$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: OE weekly changelog 2009-01-05 to 2009-01-12
+Message-Id: <200901130734.04847.openembedded@haerwu.biz>
+Subject: Re: git access request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +30,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jan 2009 00:24:38 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 13 Jan 2009 06:40:34 -0000
+X-Groupsio-MsgNum: 7187
+Content-Type: multipart/signed; boundary="nextPart4898898.X3WTvde1v8";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart4898898.X3WTvde1v8
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Mon, Jan 12, 2009 at 10:28:58PM +0100, Koen Kooi wrote:
-> On 12-01-09 21:41, Tom Rini wrote:
->> On Mon, Jan 12, 2009 at 09:08:01PM +0100, Koen Kooi wrote:
->>> Op 12 jan 2009, om 21:04 heeft Tom Rini het volgende geschreven:
->>>
->>>> On Mon, Jan 12, 2009 at 11:02:34AM -0500, Cliff Brake wrote:
->>>> [snip]
->>>>> Koen Kooi (57):
->>>> [snip]
->>>>>       mtd-utils: add 1.2.0+git for ubifs-support
->>>>>       mtd-utils: package *all* ubifs utils
->>>> Anything in particular holding back on a -native version too?
->>> Nothing apart from a bit of testing :)
->>
->> OK.  I just checked my stuff and there wasn't anything special for the
->> -native one.  I haven't pushed yet as I did my building vs
->> e2fsprogs-1.38 (and made it stage uuid) and I can't quite get a build
->> ready to test using -1.35 as quick as you could :)
+On Monday 12 of January 2009 23:26:42 Rod Whitby wrote:
+> Tim Ellis wrote:
+> > I took over most of the foonas work from NAiL some time ago (it can
+> > be measured in years now I believe!) and would like to request
+> > access to the various packages NAiL has committed for me so that I
+> > am able to maintain them more directly, ie fix various and keep
+> > them up to date.
 >
-> It's using e2fsprogs-libs, which stages that header[1].
+> I support this request.
 
-Right.  I'm just saying that mtd-utils-native needs to depend on
-e2fsprogs-libs-native for that header to be staged for the -native build
-too.
++1 then
 
-> [1] I'm puzzled why we have both e2fsprogs.bb and e2fsprogs-libs.bb
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Ditto.
+--nextPart4898898.X3WTvde1v8
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
--- 
-Tom Rini
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
+iEYEABECAAYFAklsNdkACgkQeQ6MlGH/2quI8wCfTSd9mx0Aq+eN/p+DF+hgknNs
+jEoAn3NOzmhtZt6h5xNrtSG6bs0EJJ5V
+=9g4e
+-----END PGP SIGNATURE-----
 
+--nextPart4898898.X3WTvde1v8--
