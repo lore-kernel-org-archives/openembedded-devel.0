@@ -1,20 +1,28 @@
-Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thomas@gstaedtner.net>) id 1LMmAQ-0000W9-2R
+	(envelope-from <pb@reciva.com>) id 1LMmFC-0000ix-5h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jan 2009 17:31:02 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so63765fgb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jan 2009 08:24:31 -0800 (PST)
-Received: by 10.86.25.17 with SMTP id 17mr20404fgy.6.1231863870024;
-	Tue, 13 Jan 2009 08:24:30 -0800 (PST)
-Received: by 10.86.26.6 with HTTP; Tue, 13 Jan 2009 08:24:29 -0800 (PST)
-Message-ID: <c16a574a0901130824w742cc8bera0f17d66d12c0e1@mail.gmail.com>
-Date: Tue, 13 Jan 2009 17:24:29 +0100
-From: thomasg <thomas@gstaedtner.net>
+	Tue, 13 Jan 2009 17:35:58 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LMm8d-0006Q6-Qo
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Jan 2009 16:29:24 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1LMm8c-000129-VI
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Jan 2009 16:29:11 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-Subject: Request for inclusion of euphony_0.1.1.bb to the tree
+In-Reply-To: <c16a574a0901130824w742cc8bera0f17d66d12c0e1@mail.gmail.com>
+References: <c16a574a0901130824w742cc8bera0f17d66d12c0e1@mail.gmail.com>
+Date: Tue, 13 Jan 2009 16:29:10 +0000
+Message-Id: <1231864150.2952.162.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Request for inclusion of euphony_0.1.1.bb to the tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,25 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jan 2009 16:31:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 13 Jan 2009 16:35:58 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi,
+On Tue, 2009-01-13 at 17:24 +0100, thomasg wrote:
+> I've written a small application I'd like to have added to OE.
+> It has no influence on other packages, so there shouldn't be any problems.
 
-I've written a small application I'd like to have added to OE.
-It has no influence on other packages, so there shouldn't be any problems.
-Because I don't know if the OE mailman delivers attached files
-properly I'll just add a link to the .bb.
-You can find it on: http://projects.gstaedtner.net/euphony/euphony_0.1.1.bb
-As you can see the name of the application is "Euphony" :)
-If there are any further questions, feel free to reply.
-I'm not really sure if this is the right place to ask for this, but I
-was told in #oe that oe-devel is the right place to go.
+Can you explain a bit more about the background to this program and why
+it would be a useful thing to have in OE?  Our general policy, although
+this is no means official, is that we will only add software to the tree
+if someone other than the author has requested it.
 
-Thanks in advance,
+p.
 
-Thomas Gstaedtner
+
 
 
