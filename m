@@ -1,33 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.46.188.73] (helo=mail.nondescript.info)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LMhMd-0006pG-1i
-	for openembedded-devel@openembedded.org; Tue, 13 Jan 2009 12:23:19 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LMhGH-00071S-MX
-	for openembedded-devel@openembedded.org; Tue, 13 Jan 2009 11:16:45 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 13 Jan 2009 11:16:45 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 13 Jan 2009 11:16:45 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 13 Jan 2009 12:16:33 +0100
-Message-ID: <gkht6i$2b6$1@ger.gmane.org>
-References: <d6d644b80901130305j687168fapb3fa7659f2696742@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081230 Shredder/3.0b2pre
-In-Reply-To: <d6d644b80901130305j687168fapb3fa7659f2696742@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Qt-app won't build since libQtUiTools not included in staging
+	(envelope-from <repvik@kynisk.com>) id 1LMhcv-0007XO-Et
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Jan 2009 12:40:10 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.nondescript.info (Postfix) with ESMTP id 87BDB225FA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jan 2009 12:33:39 +0100 (CET)
+X-Virus-Scanned: amavisd-new at 
+X-Spam-Flag: NO
+X-Spam-Score: -0.533
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.533 tagged_above=-10 required=6.6
+	tests=[AWL=0.184, BAYES_00=-2.599, RCVD_IN_PBL=0.905,
+	RCVD_IN_SORBS_DUL=0.877, RDNS_NONE=0.1]
+Received: from mail.nondescript.info ([127.0.0.1])
+	by localhost (mail.nondescript.info [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id PoXC9ee-Jx-M
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jan 2009 12:33:38 +0100 (CET)
+Received: from mail.nondescript.info (mail.nondescript.info [78.46.188.73])
+	by mail.nondescript.info (Postfix) with ESMTP id 5C075224D6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jan 2009 12:33:38 +0100 (CET)
+Date: Tue, 13 Jan 2009 12:33:38 +0100 (CET)
+From: =?utf-8?Q?=C3=98yvind_Repvik?= <repvik@kynisk.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <1239154081.5961231846418298.JavaMail.root@mail.nondescript.info>
+In-Reply-To: <089B0658-0555-45C0-9C28-EBAE9FF58EB1@foonas.org>
+MIME-Version: 1.0
+X-Originating-IP: [80.202.24.188]
+X-Mailer: Zimbra 5.0.10_GA_2609.UBUNTU8_64 (ZimbraWebClient - SAF3
+	(Win)/5.0.10_GA_2609.UBUNTU8_64)
+Subject: Re: git access request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,51 +46,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jan 2009 11:23:19 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 13 Jan 2009 11:40:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 13-01-09 12:05, Erik Botö wrote:
-> Hi,
->
-> I'm writing a bitbake recipe for a QT-app that tries to link against
-> libQtUiTools but it fails with:
->
-> /bin/ld: cannot find -lQtUiTools
->
-> I think this is because this file is not in the staging environment
+I also support this request
 
-Looking at qt_staging.inc:
+--
+=C3=98yvind Repvik
 
-     for i in libQtAssistantClient${QT_LIBINFIX} \
-		libQtDesignerComponents${QT_LIBINFIX} \
-		libQtUiTools${QT_LIBINFIX} \
-		libQtDesigner${QT_LIBINFIX}
-     do
-         sed -i -e "s,-L${libdir},-L${STAGING_LIBDIR},g" $i.prl || true
-         cp ${STAGE_TEMP}/${libdir}/$i.prl ${STAGING_LIBDIR} || true
-         sed -i -e 
-"/^dependency_libs=/s,-L${libdir},-L${STAGING_LIBDIR},g" $i.la || true
-         cp ${STAGE_TEMP}/${libdir}/$i.la  ${STAGING_LIBDIR} || true
-         oe_libinstall -C ${STAGE_TEMP}/${libdir} -so $i 
-${STAGING_LIBDIR} || true
-         oe_libinstall -C ${STAGE_TEMP}/${libdir} -a $i 
-${STAGING_LIBDIR} || true
-     done
 
-So it attempts to install to .so (oe_libinstall -so) and the .a 
-(oe_libinstall -a) to the staging dir.
+----- Original Message -----
+From: "Tim Ellis" <tim.ellis@foonas.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: "=C3=98yvind Repvik" <nail@nslu2-linux.org>, "Rod Whitby" <rod@whitby.i=
+d.au>
+Sent: Sunday, January 11, 2009 9:44:53 PM GMT +01:00 Amsterdam / Berlin / B=
+ern / Rome / Stockholm / Vienna
+Subject: git access request
 
-> (I'm
-> using qt-embedded-4.4.3 for building qt).
+Hi all,
+I took over most of the foonas work from NAiL some time ago (it can be =20
+measured in years now I believe!) and would like to request access to =20
+the various packages NAiL has committed for me so that I am able to =20
+maintain them more directly, ie fix various and keep them up to date. =20
+In addition to this I have various packages to add and maintain that =20
+might be useful (won't cover these in this message) however to start =20
+with we have...
 
-If you're building qt/e you should link against QtUiTools${QT_LIBINFIX} 
-(expands to QtUiToolsE in your case), not QtUiTools. AIUI 'inherit 
-qtopia4core' should take care of all that for you.
+Existing platforms that need maintaining/updating:
 
-regards,
+* lsmipsel - MIPSel Linkstation
+* lsppchg - PowerPC Linkstation
+* lsppchd - PowerPC Linkstation
+* lspro (this is what lsarm became) - New Orion/ARM Linkstations
 
-Koen
+New platforms that I can add and maintain:
 
+* Thecus N1200
+* Kurobox Pro
+* MP MV2120
+* QNAP TS109 and 209
+
+Packages in OE that originated from foonas that need maintaining that =20
+I can find:
+
+* samba
+* netatalk
+* iscsi-target
+* miconapl (this should not exist anymore anyway!)
+* micro-evtd
+* hfsplusutils
+* haserl
+* dtc (not so relevant these days!)
+
+Also there are some remenants of foonas in OE dev from >12 months ago =20
+that need cleaning up, and if foonas is to be merged with OE more =20
+closely then I think I am the best person to help here being the most =20
+active person on this project for some time.
+
+Thanks,
+
+Tim
 
 
