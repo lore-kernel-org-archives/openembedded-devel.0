@@ -1,24 +1,25 @@
-Received: from [212.27.42.5] (helo=smtp5-g21.free.fr)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jdatalog.converter@gmail.com>) id 1LMq2i-00043F-F5
+	(envelope-from <mickey@vanille-media.de>) id 1LMsEM-0001g8-2d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jan 2009 21:39:20 +0100
-Received: from smtp5-g21.free.fr (localhost [127.0.0.1])
-	by smtp5-g21.free.fr (Postfix) with ESMTP id D35E5D481C3
+	Tue, 13 Jan 2009 23:59:30 +0100
+Received: from andromeda.vanille.de (e180184168.adsl.alicedsl.de
+	[85.180.184.168])
+	by drlauer-research.com (Postfix) with ESMTP id CBA7B584186
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jan 2009 21:32:46 +0100 (CET)
-Received: from [192.168.0.5] (lns-bzn-47f-62-147-136-25.adsl.proxad.net
-	[62.147.136.25])
-	by smtp5-g21.free.fr (Postfix) with ESMTP id D54C3D48252
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jan 2009 21:32:43 +0100 (CET)
-Message-ID: <496CFA6B.5060108@gmail.com>
-Date: Tue, 13 Jan 2009 21:32:43 +0100
-From: Jdatalog converter <jdatalog.converter@gmail.com>
-User-Agent: Thunderbird 2.0.0.19 (Windows/20081209)
-MIME-Version: 1.0
+	Wed, 14 Jan 2009 00:13:27 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Subject: Ipaq 31x ...
+Date: Tue, 13 Jan 2009 23:52:56 +0100
+User-Agent: KMail/1.9.10
+References: <200901132011.00353.openembedded@haerwu.biz>
+	<200901132023.37777.mickey@vanille-media.de>
+	<gkirbu$mtt$2@ger.gmane.org>
+In-Reply-To: <gkirbu$mtt$2@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200901132352.56407.mickey@vanille-media.de>
+Subject: Re: HAL and Xserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,24 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jan 2009 20:39:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 13 Jan 2009 22:59:30 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
+Am Tuesday 13 January 2009 20:51:26 schrieb Koen Kooi:
+> On 13-01-09 20:23, Michael 'Mickey' Lauer wrote:
+> > Am Tuesday 13 January 2009 20:10:59 schrieb Marcin Juszkiewicz:
+> >> Hi
+> >>
+> >> Current x11-image depends on 'angstrom-x11-base-depends' which adds HAL.
+> >> For one customer I am building images with 1.3.0.0 xserver-kdrive so HAL
+> >> is not required at all (not to mention that it does not find any devices
+> >> when mdev is used instead of udev).
+> >>
+> >> I created patch which removes HAL from 'angstrom-x11-base-depends' and
+> >> moves it into dependencies of xserver-(kdrive,xorg) newer then 1.3.0.0.
+> >>
+> >> What do you think about it?
+> >
+> > Sounds good. I'd even welcome if we could disable it for all versions.
+>
+> You can't, it's needed to get input devices nowadays, there's a 3 month
+> long flamewar about it on the xorg mailinglists if you want some
+> background on it.
 
-Hello all,
+Thanks. That's very unfortunate, but hey... source is out there, I can patch 
+it out.
 
-I'm interested to run Linux on my Ipaq 314 based on following platform :
-http://www.sirf.com/products/SiRFtitanProductInsert.pdf
-
-I don't know how to create a new file in platform subdir.
-
-After long search on the net i need some help.
-
-Thanks
-
-  Christophe
-
-
+-- 
+:M:
 
 
