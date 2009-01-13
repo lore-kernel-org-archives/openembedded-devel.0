@@ -1,23 +1,21 @@
-Received: from [72.14.220.159] (helo=fg-out-1718.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thomas@gstaedtner.net>) id 1LMnqW-00015z-VC
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jan 2009 19:18:36 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so87923fgb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jan 2009 10:12:05 -0800 (PST)
-Received: by 10.86.82.6 with SMTP id f6mr69197fgb.42.1231870325419;
-	Tue, 13 Jan 2009 10:12:05 -0800 (PST)
-Received: by 10.86.26.6 with HTTP; Tue, 13 Jan 2009 10:12:05 -0800 (PST)
-Message-ID: <c16a574a0901131012qa4e5610vd42641879e1bef4a@mail.gmail.com>
-Date: Tue, 13 Jan 2009 19:12:05 +0100
-From: thomasg <thomas@gstaedtner.net>
+	(envelope-from <openembedded@haerwu.biz>) id 1LMoQ1-0007U1-Jx
+	for openembedded-devel@openembedded.org; Tue, 13 Jan 2009 19:55:17 +0100
+Received: (qmail 11328 invoked by uid 813007); 13 Jan 2009 18:48:45 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 13 Jan 2009 18:48:45 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gkig6q$alf$2@ger.gmane.org>
+Date: Tue, 13 Jan 2009 19:48:28 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
+References: <200901071345.43987.openembedded@haerwu.biz>
+In-Reply-To: <200901071345.43987.openembedded@haerwu.biz>
 MIME-Version: 1.0
-References: <c16a574a0901130824w742cc8bera0f17d66d12c0e1@mail.gmail.com>
-	<gkig6q$alf$2@ger.gmane.org>
-Subject: Re: Request for inclusion of euphony_0.1.1.bb to the tree
+Message-Id: <200901131948.29894.openembedded@haerwu.biz>
+Subject: Re: [REVIEW] conf/machine cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,20 +29,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jan 2009 18:18:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 13 Jan 2009 18:55:17 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Tue, Jan 13, 2009 at 5:40 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> You don't need to inherit pkgconfig if you don't stage anything. And even if
-> you did, setting AUTOTOOLS_STAGE_PKGCONFIG = "1"
->  would be preferable over pkgconfig.bbclass
->
-> regards,
->
-> Koen
+On Wednesday 07 of January 2009 13:45:43 Marcin Juszkiewicz wrote:
 
-Thank you very much for adding, koen!
+> I made cleanup in conf/machine directory today. All duplicates in
+> EXTRA_PACKAGE_ARCHS are removed now. I moved EXTRA_PACKAGES_ARCHS to
+> include/tune-* files (PPC and x86 targets), dropped it for ARM
+> targets (as tune-arm* files have them defined properly).
+
+Did someone tested that?
+
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
