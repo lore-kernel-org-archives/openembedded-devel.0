@@ -1,16 +1,16 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [72.14.220.159] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thomas@gstaedtner.net>) id 1LMmZz-0001cN-Bv
+	(envelope-from <thomas@gstaedtner.net>) id 1LMnqW-00015z-VC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jan 2009 17:57:27 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so69912fgb.20
+	Tue, 13 Jan 2009 19:18:36 +0100
+Received: by fg-out-1718.google.com with SMTP id l26so87923fgb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jan 2009 08:50:56 -0800 (PST)
-Received: by 10.86.84.18 with SMTP id h18mr28471fgb.22.1231865456335;
-	Tue, 13 Jan 2009 08:50:56 -0800 (PST)
-Received: by 10.86.26.6 with HTTP; Tue, 13 Jan 2009 08:50:56 -0800 (PST)
-Message-ID: <c16a574a0901130850l6b18cban26b21dbb20bb4004@mail.gmail.com>
-Date: Tue, 13 Jan 2009 17:50:56 +0100
+	Tue, 13 Jan 2009 10:12:05 -0800 (PST)
+Received: by 10.86.82.6 with SMTP id f6mr69197fgb.42.1231870325419;
+	Tue, 13 Jan 2009 10:12:05 -0800 (PST)
+Received: by 10.86.26.6 with HTTP; Tue, 13 Jan 2009 10:12:05 -0800 (PST)
+Message-ID: <c16a574a0901131012qa4e5610vd42641879e1bef4a@mail.gmail.com>
+Date: Tue, 13 Jan 2009 19:12:05 +0100
 From: thomasg <thomas@gstaedtner.net>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <gkig6q$alf$2@ger.gmane.org>
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jan 2009 16:57:27 -0000
+X-List-Received-Date: Tue, 13 Jan 2009 18:18:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
@@ -41,8 +41,10 @@ On Tue, Jan 13, 2009 at 5:40 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
 > you did, setting AUTOTOOLS_STAGE_PKGCONFIG = "1"
 >  would be preferable over pkgconfig.bbclass
 >
+> regards,
+>
+> Koen
 
-Ok, I removed that, link stays the same:
-http://projects.gstaedtner.net/euphony/euphony_0.1.1.bb
+Thank you very much for adding, koen!
 
 
