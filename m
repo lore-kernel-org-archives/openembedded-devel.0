@@ -1,26 +1,23 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1LN75C-0001Fi-TK
+	(envelope-from <mickey@vanille-media.de>) id 1LN786-0001MW-LX
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 15:51:13 +0100
-Received: from [81.170.61.65] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LN6yn-0003Xi-TC
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 14:44:26 +0000
-From: Phil Blundell <pb@reciva.com>
+	Wed, 14 Jan 2009 15:54:07 +0100
+Received: from andromeda.vanille.de (e180165005.adsl.alicedsl.de
+	[85.180.165.5])
+	by drlauer-research.com (Postfix) with ESMTP id D7099584134
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jan 2009 16:08:00 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <496DEDF1.9080506@gmx.net>
-References: <496D4B33.60102@gmx.net> <gkk2ut$5m8$1@ger.gmane.org>
-	<496DC520.90601@gmx.net>
-	<1231931047.2952.208.camel@mill.internal.reciva.com>
-	<496DEDF1.9080506@gmx.net>
-Date: Wed, 14 Jan 2009 14:44:20 +0000
-Message-Id: <1231944260.9499.87.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-Broken-Reverse-DNS: no host name found for IP address 81.170.61.65
-Subject: Re: "armv6" override not used
+Date: Wed, 14 Jan 2009 15:47:26 +0100
+User-Agent: KMail/1.9.10
+References: <200901120019.45621.mickey@vanille-media.de>
+In-Reply-To: <200901120019.45621.mickey@vanille-media.de>
+MIME-Version: 1.0
+Message-Id: <200901141547.26513.mickey@vanille-media.de>
+Subject: Re: python roadmap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +31,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 14:51:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 14 Jan 2009 14:54:24 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, 2009-01-14 at 14:51 +0100, Robert Schuster wrote:
-> it is related to GCC: Although -mfloat-abi=vfp is given __SOFTFP__ is
-> not defined and that is required for libffi because otherwise the sysv.S
-> assembler file uses instructions not available any more on armv6/armv7.
+Thanks to some extrashifts this work has proceeded faster than scheduled.
+I plan to merge mickey/python26 into master on friday. If you see something 
+dangerous, yell.
 
-That sounds more like libffi is to blame.  Shouldn't it be checking for
-(defined(__SOFT_FP__) || defined(__VFP_FP__))?  Or, if you really are
-using soft-float, then presumably gcc is to blame for not defining
-__SOFT_FP__.
-
-Either way, it seems like whichever package is broken should just be
-fixed, rather than trying to work around it with architecture-specific
-CFLAGS forcing.  Assuming that the problem is libffi trying to use FPA
-instructions #ifndef __SOFT_FP__, then it will break on ARMv5
-architectures as well if you happen to be using VFP.
-
-p.
-
-
+-- 
+:M:
 
 
