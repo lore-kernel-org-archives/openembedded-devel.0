@@ -1,27 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1LN6Gh-0002lg-W6
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 14:58:52 +0100
-Received: (qmail invoked by alias); 14 Jan 2009 13:52:15 -0000
-Received: from p579E16CB.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.22.203]
-	by mail.gmx.net (mp045) with SMTP; 14 Jan 2009 14:52:15 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/jlRoPenzjCfoWjjnp8onN8MMpCrnrmcZ4dZ0WGY
-	qiFBf02/1GtPqC
-Message-ID: <496DEDF1.9080506@gmx.net>
-Date: Wed, 14 Jan 2009 14:51:45 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LN72U-00019w-3C
+	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 15:48:41 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LN6w2-0003QR-KO
+	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 14:41:34 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 14 Jan 2009 14:41:34 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 Jan 2009 14:41:34 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 14 Jan 2009 15:41:20 +0100
+Message-ID: <gkktig$u44$1@ger.gmane.org>
 References: <496D4B33.60102@gmx.net>
-	<gkk2ut$5m8$1@ger.gmane.org>	<496DC520.90601@gmx.net>
-	<1231931047.2952.208.camel@mill.internal.reciva.com>
-In-Reply-To: <1231931047.2952.208.camel@mill.internal.reciva.com>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.6
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081230 Shredder/3.0b2pre
+In-Reply-To: <496D4B33.60102@gmx.net>
+Sender: news <news@ger.gmane.org>
 Subject: Re: "armv6" override not used
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,53 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 13:58:52 -0000
-X-Groupsio-MsgNum: 7228
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig16C7C7C4DD662CE0854C78E7"
+X-List-Received-Date: Wed, 14 Jan 2009 14:50:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig16C7C7C4DD662CE0854C78E7
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On 14-01-09 03:17, Robert Schuster wrote:
+> Hi,
+> I am building chinook-compat for the n800 when it comes to libffi the
+> successful build depends on this line:
+>
+> TARGET_CC_ARCH_append_armv6 =3D " -D__SOFTFP__"
 
-Hi,
+FWIW, there's a hard(v)fp branch for gcc 4.4 in svn.
 
-Phil Blundell schrieb:
-> On Wed, 2009-01-14 at 11:57 +0100, Robert Schuster wrote:
->> Is that such a controversial feature? I think this should be part of a=
-ll
->> distros.
->>
->> Without this libffi breaks (on armv6 and arm7a) and in the future this=
+regards,
 
->> means that stuff like openjdk won't be buildable on these arches. :(
->=20
-> Why exactly is this override required?  It seems a bit sad that these
-> packages need to be fed a special "-DMAKE_ME_WORK" flag by some externa=
-l
-> intelligence in order to build on newer architectures.  Can't they
-> figure it out for themselves?
-it is related to GCC: Although -mfloat-abi=3Dvfp is given __SOFTFP__ is
-not defined and that is required for libffi because otherwise the sysv.S
-assembler file uses instructions not available any more on armv6/armv7.
-
-Regards
-Robert
+Koen
 
 
---------------enig16C7C7C4DD662CE0854C78E7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAklt7fEACgkQG9cfwmwwEtoR4QCfUBqkzy0TJgC8x0cUW28RnniG
-Z5oAoJWPwELSys/Hhzg0iqMjLFAWBzRM
-=AQcg
------END PGP SIGNATURE-----
-
---------------enig16C7C7C4DD662CE0854C78E7--
