@@ -1,26 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LMtJO-0008N4-Is
-	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 01:08:46 +0100
-Received: (qmail invoked by alias); 14 Jan 2009 00:02:12 -0000
-Received: from e177084010.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.177.84.10]
-	by mail.gmx.net (mp008) with SMTP; 14 Jan 2009 01:02:12 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+cYF0tM9yc/K8Qwwgrtcgzj3qxCdY/5+/VElaFLq
-	0iBQPPftlxUha3
-Message-ID: <496D2BDB.6030603@gmx.net>
-Date: Wed, 14 Jan 2009 01:03:39 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
-To: rpurdie@rpsys.net
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <trini@kernel.crashing.org>) id 1LMuSH-0002nu-3g
+	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 02:22:01 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090114011525.NMQB8485.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 13 Jan 2009 20:15:25 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id 3DFC1b0041E665w04DFHdQ; Tue, 13 Jan 2009 20:15:25 -0500
+X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
+	a=b2ZvGRdsAAAA:8 a=Ee4E1S1o3n0iJVhKWCMA:9
+	a=IX96GUKLl7ExgfU2fZi8HMKE-yUA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 13 Jan 2009 18:15:39 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090114011539.GA2376@smtp.west.cox.net>
 References: <1230827114.5320.42.camel@dax.rpnet.com>
-In-Reply-To: <1230827114.5320.42.camel@dax.rpnet.com>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.45
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
+	<20090101182526.GF7040@smtp.west.cox.net>
+	<1230840687.5320.56.camel@dax.rpnet.com>
+	<20090101220229.GH7040@smtp.west.cox.net>
+	<1230858713.10424.4.camel@dax.rpnet.com>
+	<1231462490.6467.85.camel@dax.rpnet.com>
+MIME-Version: 1.0
+In-Reply-To: <1231462490.6467.85.camel@dax.rpnet.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: RFC: "Virtual" native and sdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,94 +41,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 00:08:46 -0000
-X-Groupsio-MsgNum: 7215
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig10CE3C6C3D3DF67E86756B97"
+X-List-Received-Date: Wed, 14 Jan 2009 01:22:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------enig10CE3C6C3D3DF67E86756B97
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
+> On Fri, 2009-01-02 at 01:11 +0000, Richard Purdie wrote:
+> > I just had a look through the trini/canadian-sdk branch and there are
+> > bits I like and bits I dislike. I'll try and provide some feedback in
+> > due course with a view to getting the less controversial bits merged. I
+> > have some tweaks in poky to do with dynamic library extension handling
+> > for example (from playing with darwin targets) where it would pay us to
+> > find a common solution.
+> 
+> Sorry for the delayed feedback, what I've looked at so far follows
+> below. It was easiest to extract some patches from your tree and make
+> some commits of my own so these are in:
+> 
+> http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/rpurdie/canadian-sofar
+> 
+> Basically I wanted to particularly review the changes to the existing OE
+> core classes/bitbake.conf. The changes in that branch are versions I'm
+> happy with. I had two concerns there:
+> 
+> 1. I don't want to see ${HOST_EXEEXT} everywhere but I know why you 
+>    need it and this was something OE would inevitably face. As a 
+>    compromise I propose adding:
+> 
+>    EXEEXT = "${HOST_EXEEXT}"
+> 
+>    and using ${EXEEXT} which is fractionally less ugly for all common 
+>    uses. Could you update your patch to use ${EXEEXT} please assuming 
+>    we all agree on this. Its the same dilemma as the SOLIBS stuff I 
+>    have with Darwin :/
+> 
+> 2. All the bb.data.inherits_class() stuff is ugly as sin and totally 
+>    unreadable. My series has a better patch.
+> 
+> Moving on to the rest of the code, I don't see a problem merging any of
+> the totally new files. How about the following merge process:
+> 
+> a) We push my tree into OE
 
-Hi Richard,
-I somehow missed this thread.
+My git-fu is weak and since we can't delete remote branches without
+bugging someone, can we do this step?  I've got...
 
-Richard Purdie schrieb:
-> Proposal Step A:
->=20
-> Having to set:
->=20
-> FILESDIR =3D "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/foo-${PV}=
-"
->=20
-> and
->=20
-> S =3D "${WORKDIR}/foo-${PV}
->=20
-> is fairly pointless and it would be nice the the defaults just did the
-> right thing.=20
->=20
-> http://git.pokylinux.org/cgit.cgi/poky/commit/?h=3Dexperimental-virtual=
-native&id=3Db8f0510a5567f6d1b90934fe513fd40423f11086
->=20
-> is a patch introducing BASEPN which is PN with a range of specified
-> suffixes removed (-native, -cross-sdk, -cross, -sdk as specified by
-> SPECIAL_PKGSUFFIX).
->=20
-> FILESPATH and S can then be constructed with BASEPN instead of PN
-> removing the need to need to hardcode them:
->=20
-> http://git.pokylinux.org/cgit.cgi/poky/commit/?h=3Dexperimental-virtual=
-native&id=3Ded829661d51b8f23628e97404ed507c2e56d8495
->=20
-> This reduces my hypothetical example to:
->=20
-> foo/foo.inc:
->=20
-> SRC_URI =3D "http://somwehere/${BASEPN}-${PV}.tar.bz2 \
->            file://some.patch;patch=3D1"
-> inherit autotools
->=20
-> foo/foo-native_1.0.bb:
-> require foo_${PV}.bb
-> inherit native
->=20
-> The above proposal is worthwhile in itself alone.
-Like koen said we have something like this in OE already but your
-implementation looks better:
+> b) You rebase onto my tree's changes and adjust the EXEEXT stuff.
+> 
+> c) You add changes which add the EXEEXT changes only to existing 
+>    recipes and commit that.
+> 
+> d) The checksums.ini changes are a no brainer.
+> 
+> e) You start adding the totally new files to OE directly in a logical 
+>    sequence of something like:
+> 
+>    i) Add canadian core classes (classes/canadian*)
+>    ii) Add mingw new recipes
+>    iii) Add misc support recipes (gmp/mprf-canadian)
+>    iv) Add new binutils recipes
+>    v) Add new gcc recipes
 
-a) BASEPN, BASEP instead of BPN, BP:
-This is less prone to be confused with "B". Furthermore I just tried to
-put the BPN code into my local Poky and it turned out that somehow BPN
-and BP are not set by the 'base_package_name' although its the same code
-as in OE's org.oe.dev. There not many packages in OE which use BPN/BP so
-we can quickly rename those that do.
+... this done locally, mostly, in quilt.
 
-I use BP/BPN more extensively in Jalimo but I already have a patch to
-fix this.
-
-b) Use of SPECIAL_PKGSUFFIX variable to define known suffixes
-In OE's implementation this is hardcoded in the function code. Not so
-nice but heck I am no python coder. :$
-
-Regards
-Robert
+-- 
+Tom Rini
 
 
-
---------------enig10CE3C6C3D3DF67E86756B97
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkltK+MACgkQG9cfwmwwEtrJWgCfYa5+AD75A3Z942MYnnR0Zr+j
-PcIAniETZbXVjvczxMjDFHqJaWbEmp9B
-=D6Z8
------END PGP SIGNATURE-----
-
---------------enig10CE3C6C3D3DF67E86756B97--
