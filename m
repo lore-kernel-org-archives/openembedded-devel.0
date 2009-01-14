@@ -1,27 +1,36 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [209.85.219.20] (helo=mail-ew0-f20.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1LN4eV-00006L-1O
-	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 13:15:19 +0100
-Received: from [172.20.1.5] (vpn006015.vpn.utwente.nl [130.89.6.15])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	n0EC8aVR025482 for <openembedded-devel@openembedded.org>;
-	Wed, 14 Jan 2009 13:08:36 +0100
-Message-Id: <5ED84125-2736-489A-94F0-1E385661D7BA@student.utwente.nl>
-From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-In-Reply-To: <20090114124842.32a3241e@adrastea.totalueberwachung.de>
-Mime-Version: 1.0 (Apple Message framework v930.3)
-Date: Wed, 14 Jan 2009 13:08:34 +0100
-References: <20090113203242.4D378189331@amethyst.openembedded.net>
-	<20090114124842.32a3241e@adrastea.totalueberwachung.de>
-X-Pgp-Agent: GPGMail d55 (v55, Leopard)
-X-Mailer: Apple Mail (2.930.3)
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: [oe-commits] Koen Kooi : mtd-utils-native: remove default-preference from 1.20+git, it shows now errors in my tests
+	(envelope-from <norguhtar@gmail.com>) id 1LN4mM-0005Pw-Uq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Jan 2009 13:23:27 +0100
+Received: by ewy13 with SMTP id 13so562338ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jan 2009 04:16:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from:to
+	:subject:in-reply-to:mime-version:content-type:references;
+	bh=DOrRyTNwZRpvZypR9a1Xi2bxcbXh8/YOCab8BRw35ZU=;
+	b=OOSqsf4JRwSiVSWRHienbCXP/gBbT7sxZisKFFQTnW1F3LZQVQwenKBCZGaz4k2gwi
+	HR0v6oIGunCyl4pU3INNiL8xn/dkR7CcUAJP7/B+8d3pQp7z1J+EVodKRvzlu3OAHh99
+	Qm7kl+t+R22xbMQHBlY/e1eOI7FV2peKYqNtk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:to:subject:in-reply-to:mime-version
+	:content-type:references;
+	b=QjbeHJWbfabo17E1N8JoVBbJWiPZOvesHvduVtVbKtvaBvgv15xH/BJBj/biBU0qY+
+	G4PkgFZISKqrloDN4tigKa+0gNe90g1rx/KnCiu2fEUNdjZL1mhKupaGq2XbFG8u5dNV
+	xeNlfKt29wTagtVrKuVWEeLMhgTv0rXDHjIQU=
+Received: by 10.210.35.10 with SMTP id i10mr8719ebi.124.1231935410199;
+	Wed, 14 Jan 2009 04:16:50 -0800 (PST)
+Received: by 10.210.11.14 with HTTP; Wed, 14 Jan 2009 04:16:50 -0800 (PST)
+Message-ID: <1fea892d0901140416p6cfcf853k742b23c24ac8a59b@mail.gmail.com>
+Date: Wed, 14 Jan 2009 17:16:50 +0500
+From: "Anatoly Shipitsin" <norguhtar@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <496CFA6B.5060108@gmail.com>
+MIME-Version: 1.0
+References: <496CFA6B.5060108@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Ipaq 31x ...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,86 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 12:15:19 -0000
-X-Groupsio-MsgNum: 7222
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg=pgp-sha1; boundary="Apple-Mail-12-224643932"
+X-List-Received-Date: Wed, 14 Jan 2009 12:23:27 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---Apple-Mail-12-224643932
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+On Wed, Jan 14, 2009 at 01:32, Jdatalog converter <
+jdatalog.converter@gmail.com> wrote:
 
-
-Op 14 jan 2009, om 12:48 heeft Daniel Willmann het volgende geschreven:
-
-> On Tue, 13 Jan 2009 21:32:42 +0100 (CET)
-> git@amethyst.openembedded.net (GIT User account) wrote:
 >
->> Module: openembedded.git
->> Branch: org.openembedded.dev
->> Commit: 78fca8ee204f310352b0bc950fd9a536a98e5d2e
->> URL:
->> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=78fca8ee204f310352b0bc950fd9a536a98e5d2e
->>
->> Author: Koen Kooi <koen@openembedded.org>
->> Date:   Tue Jan 13 21:31:16 2009 +0100
->>
->> mtd-utils-native: remove default-preference from 1.20+git, it shows
->> now errors in my tests
+> Hello all,
 >
-> mtd-utils-native fails here with:
+> I'm interested to run Linux on my Ipaq 314 based on following platform :
+> http://www.sirf.com/products/SiRFtitanProductInsert.pdf
 >
-> | make[1]: Leaving directory `/home/alphaone/oe-dev/tmp/work/x86_64- 
-> linux/mtd-ut
-> ils-native-1.2.0+git-r2/git/ubi-utils'
-> | ccache gcc  -isystem/home/alphaone/oe-dev/tmp/staging/x86_64-linux/ 
-> usr/include
-> -O2 -I/home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils- 
-> native-1.2.0+git-r2
-> /git//include -DWITHOUT_XATTR -L/home/alphaone/oe-dev/tmp/staging/ 
-> x86_64-linux/u
-> sr/lib -Wl,-rpath-link,/home/alphaone/oe-dev/tmp/staging/x86_64- 
-> linux/usr/lib -W
-> l,-rpath,/home/alphaone/oe-dev/tmp/staging/x86_64-linux/usr/lib -Wl,- 
-> O1  -g -o /
-> home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils- 
-> native-1.2.0+git-r2/git/ftl
-> _format /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils- 
-> native-1.2.0+git-r
-> 2/git/ftl_format.o
-> | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils- 
-> native-1.2.0+git-r2/git/
-> mkfs.ubifs/mkfs.ubifs.o: In function `write_super':
-> | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils- 
-> native-1.2.0+git-r2/git/mkfs.ubifs/mkfs.ubifs.c:1866: undefined  
-> reference to `uuid_unparse_upper'
-> | collect2: ld returned 1 exit status
-> | make[1]: *** [/home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd- 
-> utils-native-1.2.0+git-r2/git/mkfs.ubifs/mkfs.ubifs] Error 1
-> | rm /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils- 
-> native-1.2.0+git-r2/git/mkfs.ubifs/mkfs.ubifs.o
-> | make[1]: Leaving directory `/home/alphaone/oe-dev/tmp/work/x86_64- 
-> linux/mtd-utils-native-1.2.0+git-r2/git/mkfs.ubifs'
-> | make: *** [subdirs_mkfs.ubifs_all] Error 2
-> | make: *** Waiting for unfinished jobs....
+> I don't know how to create a new file in platform subdir.
+>
+> After long search on the net i need some help.
+>
+See conf/distro/minimal.conf
 
-Which e2fsprogs-libs-native do you have installed? Also, oe-devel is  
-subscriber only, enough with the CC:!
-
---Apple-Mail-12-224643932
-content-type: application/pgp-signature; x-mac-type=70674453;
-	name=PGP.sig
-content-description: Dit deel van het bericht is digitaal ondertekend
-content-disposition: inline; filename=PGP.sig
-content-transfer-encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFJbdXEMkyGM64RGpERAkeXAJsG8xdetraTeMYgDeAfaN2bh+pFDgCffG2V
-rZIKDkbBWU5/xJJmR+t6CQk=
-=HiWO
------END PGP SIGNATURE-----
-
---Apple-Mail-12-224643932--
