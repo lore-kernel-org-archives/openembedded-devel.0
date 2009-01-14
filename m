@@ -1,32 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LN72U-00019w-3C
-	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 15:48:41 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LN6w2-0003QR-KO
-	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 14:41:34 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 14 Jan 2009 14:41:34 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 14 Jan 2009 14:41:34 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 14 Jan 2009 15:41:20 +0100
-Message-ID: <gkktig$u44$1@ger.gmane.org>
-References: <496D4B33.60102@gmx.net>
+	(envelope-from <pb@reciva.com>) id 1LN75C-0001Fi-TK
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Jan 2009 15:51:13 +0100
+Received: from [81.170.61.65] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LN6yn-0003Xi-TC
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Jan 2009 14:44:26 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <496DEDF1.9080506@gmx.net>
+References: <496D4B33.60102@gmx.net> <gkk2ut$5m8$1@ger.gmane.org>
+	<496DC520.90601@gmx.net>
+	<1231931047.2952.208.camel@mill.internal.reciva.com>
+	<496DEDF1.9080506@gmx.net>
+Date: Wed, 14 Jan 2009 14:44:20 +0000
+Message-Id: <1231944260.9499.87.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20081230 Shredder/3.0b2pre
-In-Reply-To: <496D4B33.60102@gmx.net>
-Sender: news <news@ger.gmane.org>
+X-Mailer: Evolution 2.22.3.1 
+X-Broken-Reverse-DNS: no host name found for IP address 81.170.61.65
 Subject: Re: "armv6" override not used
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,22 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 14:50:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 14 Jan 2009 14:51:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 14-01-09 03:17, Robert Schuster wrote:
-> Hi,
-> I am building chinook-compat for the n800 when it comes to libffi the
-> successful build depends on this line:
->
-> TARGET_CC_ARCH_append_armv6 =3D " -D__SOFTFP__"
+On Wed, 2009-01-14 at 14:51 +0100, Robert Schuster wrote:
+> it is related to GCC: Although -mfloat-abi=vfp is given __SOFTFP__ is
+> not defined and that is required for libffi because otherwise the sysv.S
+> assembler file uses instructions not available any more on armv6/armv7.
 
-FWIW, there's a hard(v)fp branch for gcc 4.4 in svn.
+That sounds more like libffi is to blame.  Shouldn't it be checking for
+(defined(__SOFT_FP__) || defined(__VFP_FP__))?  Or, if you really are
+using soft-float, then presumably gcc is to blame for not defining
+__SOFT_FP__.
 
-regards,
+Either way, it seems like whichever package is broken should just be
+fixed, rather than trying to work around it with architecture-specific
+CFLAGS forcing.  Assuming that the problem is libffi trying to use FPA
+instructions #ifndef __SOFT_FP__, then it will break on ARMv5
+architectures as well if you happen to be using VFP.
 
-Koen
+p.
+
 
 
 
