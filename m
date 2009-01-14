@@ -1,34 +1,32 @@
 Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LN7pR-000854-2O
-	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 16:38:49 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao107.cox.net
+	(envelope-from <trini@kernel.crashing.org>) id 1LN8aC-0006IT-Nv
+	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 17:27:09 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090114153211.LGVS131.fed1rmmtao107.cox.net@fed1rmimpo01.cox.net>
+	id <20090114162031.NYPI131.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Wed, 14 Jan 2009 10:32:11 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id 3TY71b0061E665w03TY8U9; Wed, 14 Jan 2009 10:32:11 -0500
-X-Authority-Analysis: v=1.0 c=1 a=rINLuMDxMIoA:10 a=7OzDuaD8CwYA:10
-	a=6J3BcUmNI4tnxGHwF-oA:9 a=Na-KkJGQFCBwRu7TYLiLqEtm4X4A:4
-	a=LY0hPdMaydYA:10
+	Wed, 14 Jan 2009 11:20:31 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
+	id 3ULW1b00D1E665w04ULWZw; Wed, 14 Jan 2009 11:20:30 -0500
+X-Authority-Analysis: v=1.0 c=1 a=KpRSRYWBUXEA:10 a=ohUC8O1cjnQA:10
+	a=AaKaiR0PyOW3QHNLP1IA:9 a=iSlUVpfb8TmRO1Im4wAA:7
+	a=N2yfW-VexTPlegOVP0vD7UeayW0A:4 a=LY0hPdMaydYA:10
 X-CM-Score: 0.00
-Date: Wed, 14 Jan 2009 08:32:36 -0700
+Date: Wed, 14 Jan 2009 09:21:03 -0700
 From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-Message-ID: <20090114153236.GB2376@smtp.west.cox.net>
-References: <f96d234e0901120802m7d4bbe48pb98a08cf04434c2e@mail.gmail.com>
-	<20090112200403.GB3342@smtp.west.cox.net>
-	<9AB0D1BC-C8E5-49AF-9841-8563DC76CC9B@student.utwente.nl>
-	<20090112204107.GD3342@smtp.west.cox.net>
-	<gkgcmq$red$1@ger.gmane.org>
-	<20090113001838.GF3342@smtp.west.cox.net>
-	<gkkmig$3uf$1@ger.gmane.org>
+Message-ID: <20090114162102.GA6710@smtp.west.cox.net>
+References: <20090113203242.4D378189331@amethyst.openembedded.net>
+	<20090114124842.32a3241e@adrastea.totalueberwachung.de>
+	<5ED84125-2736-489A-94F0-1E385661D7BA@student.utwente.nl>
+	<20090114142431.7db4b26e@adrastea.totalueberwachung.de>
+	<gkkq1i$gq5$1@ger.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <gkkmig$3uf$1@ger.gmane.org>
+In-Reply-To: <gkkq1i$gq5$1@ger.gmane.org>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: OE weekly changelog 2009-01-05 to 2009-01-12
+Subject: Re: [oe-commits] Koen Kooi : mtd-utils-native: remove	default-preference from 1.20+git, it shows now errors in my tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 15:38:49 -0000
+X-List-Received-Date: Wed, 14 Jan 2009 16:27:09 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Jan 14, 2009 at 01:41:51PM +0100, Koen Kooi wrote:
-> On 13-01-09 01:18, Tom Rini wrote:
->> On Mon, Jan 12, 2009 at 10:28:58PM +0100, Koen Kooi wrote:
->>> On 12-01-09 21:41, Tom Rini wrote:
->>>> On Mon, Jan 12, 2009 at 09:08:01PM +0100, Koen Kooi wrote:
->>>>> Op 12 jan 2009, om 21:04 heeft Tom Rini het volgende geschreven:
->>>>>
->>>>>> On Mon, Jan 12, 2009 at 11:02:34AM -0500, Cliff Brake wrote:
->>>>>> [snip]
->>>>>>> Koen Kooi (57):
->>>>>> [snip]
->>>>>>>        mtd-utils: add 1.2.0+git for ubifs-support
->>>>>>>        mtd-utils: package *all* ubifs utils
->>>>>> Anything in particular holding back on a -native version too?
->>>>> Nothing apart from a bit of testing :)
->>>> OK.  I just checked my stuff and there wasn't anything special for the
->>>> -native one.  I haven't pushed yet as I did my building vs
->>>> e2fsprogs-1.38 (and made it stage uuid) and I can't quite get a build
->>>> ready to test using -1.35 as quick as you could :)
->>> It's using e2fsprogs-libs, which stages that header[1].
+On Wed, Jan 14, 2009 at 02:41:05PM +0100, Koen Kooi wrote:
+> On 14-01-09 14:24, Daniel Willmann wrote:
+>> On Wed, 14 Jan 2009 13:08:34 +0100
+>> Koen Kooi<k.kooi@student.utwente.nl>  wrote:
 >>
->> Right.  I'm just saying that mtd-utils-native needs to depend on
->> e2fsprogs-libs-native for that header to be staged for the -native build
->> too.
+>>> Op 14 jan 2009, om 12:48 heeft Daniel Willmann het volgende
+>>> geschreven:
+>>>
+>>>> mtd-utils-native fails here with:
+>>>>
+>>>> | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-
+>>>> native-1.2.0+git-r2/git/
+>>>> mkfs.ubifs/mkfs.ubifs.o: In function `write_super':
+>>>> | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-
+>>>> native-1.2.0+git-r2/git/mkfs.ubifs/mkfs.ubifs.c:1866: undefined
+>>>> reference to `uuid_unparse_upper'
+>>>> | collect2: ld returned 1 exit status
+>>> Which e2fsprogs-libs-native do you have installed? Also, oe-devel is
+>>> subscriber only, enough with the CC:!
+>>
+>> It's building e2fsprogs-libs-native-1.35-r0
 >
-> While trying to reproduce Daniels linking problem on another machine I  
-> ran into another problem: mkfs.ubifs is not picking up it's internal  
-> includes. Did you encounter such problems as well?
+> That will cause the linking problems, you need the 1.4x one.
 
-Nope, worked fine for me.
+That's because in 1.3x (or at least 35 and 38) libuuid is in a different
+spot[1]?  Perhaps we should update 1.35 and bump the PR to fix these
+problems?
+
+>> Thanks for reverting it in the mean time.
+>
+> It failed with include problems on another machine, so let's wait till  
+> Tom Rini has pushed his fixed version.
+
+I'm poking around now, but I don't see anything obvious.  Thus far just
+that e2fsprogs-libs-native should depend on gettext-native.
+
+[1]: My .38 recipe does:
+oe_libinstall -a -C lib/uuid libuuid ${STAGING_LIBDIR}/
 
 -- 
 Tom Rini
