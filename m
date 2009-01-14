@@ -1,23 +1,34 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LN786-0001MW-LX
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 15:54:07 +0100
-Received: from andromeda.vanille.de (e180165005.adsl.alicedsl.de
-	[85.180.165.5])
-	by drlauer-research.com (Postfix) with ESMTP id D7099584134
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jan 2009 16:08:00 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Jan 2009 15:47:26 +0100
-User-Agent: KMail/1.9.10
-References: <200901120019.45621.mickey@vanille-media.de>
-In-Reply-To: <200901120019.45621.mickey@vanille-media.de>
+	(envelope-from <trini@kernel.crashing.org>) id 1LN7pR-000854-2O
+	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 16:38:49 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090114153211.LGVS131.fed1rmmtao107.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 Jan 2009 10:32:11 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
+	id 3TY71b0061E665w03TY8U9; Wed, 14 Jan 2009 10:32:11 -0500
+X-Authority-Analysis: v=1.0 c=1 a=rINLuMDxMIoA:10 a=7OzDuaD8CwYA:10
+	a=6J3BcUmNI4tnxGHwF-oA:9 a=Na-KkJGQFCBwRu7TYLiLqEtm4X4A:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Wed, 14 Jan 2009 08:32:36 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090114153236.GB2376@smtp.west.cox.net>
+References: <f96d234e0901120802m7d4bbe48pb98a08cf04434c2e@mail.gmail.com>
+	<20090112200403.GB3342@smtp.west.cox.net>
+	<9AB0D1BC-C8E5-49AF-9841-8563DC76CC9B@student.utwente.nl>
+	<20090112204107.GD3342@smtp.west.cox.net>
+	<gkgcmq$red$1@ger.gmane.org>
+	<20090113001838.GF3342@smtp.west.cox.net>
+	<gkkmig$3uf$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200901141547.26513.mickey@vanille-media.de>
-Subject: Re: python roadmap
+In-Reply-To: <gkkmig$3uf$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: OE weekly changelog 2009-01-05 to 2009-01-12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,17 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 14:54:24 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Jan 2009 15:38:49 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Thanks to some extrashifts this work has proceeded faster than scheduled.
-I plan to merge mickey/python26 into master on friday. If you see something 
-dangerous, yell.
+On Wed, Jan 14, 2009 at 01:41:51PM +0100, Koen Kooi wrote:
+> On 13-01-09 01:18, Tom Rini wrote:
+>> On Mon, Jan 12, 2009 at 10:28:58PM +0100, Koen Kooi wrote:
+>>> On 12-01-09 21:41, Tom Rini wrote:
+>>>> On Mon, Jan 12, 2009 at 09:08:01PM +0100, Koen Kooi wrote:
+>>>>> Op 12 jan 2009, om 21:04 heeft Tom Rini het volgende geschreven:
+>>>>>
+>>>>>> On Mon, Jan 12, 2009 at 11:02:34AM -0500, Cliff Brake wrote:
+>>>>>> [snip]
+>>>>>>> Koen Kooi (57):
+>>>>>> [snip]
+>>>>>>>        mtd-utils: add 1.2.0+git for ubifs-support
+>>>>>>>        mtd-utils: package *all* ubifs utils
+>>>>>> Anything in particular holding back on a -native version too?
+>>>>> Nothing apart from a bit of testing :)
+>>>> OK.  I just checked my stuff and there wasn't anything special for the
+>>>> -native one.  I haven't pushed yet as I did my building vs
+>>>> e2fsprogs-1.38 (and made it stage uuid) and I can't quite get a build
+>>>> ready to test using -1.35 as quick as you could :)
+>>> It's using e2fsprogs-libs, which stages that header[1].
+>>
+>> Right.  I'm just saying that mtd-utils-native needs to depend on
+>> e2fsprogs-libs-native for that header to be staged for the -native build
+>> too.
+>
+> While trying to reproduce Daniels linking problem on another machine I  
+> ran into another problem: mkfs.ubifs is not picking up it's internal  
+> includes. Did you encounter such problems as well?
+
+Nope, worked fine for me.
 
 -- 
-:M:
+Tom Rini
 
 
