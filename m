@@ -1,25 +1,33 @@
-Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <daniel@totalueberwachung.de>) id 1LN5pv-0001Ky-W1
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 14:31:12 +0100
-Received: from adrastea.totalueberwachung.de
-	(adrastea.dyn.totalueberwachung.de [192.168.0.8])
-	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by thebe.totalueberwachung.de (Postfix) with ESMTP id 65FBFD8323
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jan 2009 14:24:37 +0100 (CET)
-Date: Wed, 14 Jan 2009 14:24:31 +0100
-From: Daniel Willmann <daniel@totalueberwachung.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090114142431.7db4b26e@adrastea.totalueberwachung.de>
-In-Reply-To: <5ED84125-2736-489A-94F0-1E385661D7BA@student.utwente.nl>
-References: <20090113203242.4D378189331@amethyst.openembedded.net>
-	<20090114124842.32a3241e@adrastea.totalueberwachung.de>
-	<5ED84125-2736-489A-94F0-1E385661D7BA@student.utwente.nl>
-X-Mailer: Claws Mail 3.6.1 (GTK+ 2.12.11; x86_64-pc-linux-gnu)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LN66C-0000tZ-Lf
+	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 14:48:00 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LN5zl-0000Xi-Tf
+	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 13:41:22 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 14 Jan 2009 13:41:21 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 Jan 2009 13:41:21 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 14 Jan 2009 14:41:05 +0100
+Message-ID: <gkkq1i$gq5$1@ger.gmane.org>
+References: <20090113203242.4D378189331@amethyst.openembedded.net>	<20090114124842.32a3241e@adrastea.totalueberwachung.de>	<5ED84125-2736-489A-94F0-1E385661D7BA@student.utwente.nl>
+	<20090114142431.7db4b26e@adrastea.totalueberwachung.de>
 Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20081230 Shredder/3.0b2pre
+In-Reply-To: <20090114142431.7db4b26e@adrastea.totalueberwachung.de>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [oe-commits] Koen Kooi : mtd-utils-native: remove default-preference from 1.20+git, it shows now errors in my tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,51 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 13:31:12 -0000
-X-Groupsio-MsgNum: 7226
-Content-Type: multipart/signed; boundary="Sig_/M674TQi=/PmimBOrNDdVqhk";
-	protocol="application/pgp-signature"; micalg=PGP-SHA1
+X-List-Received-Date: Wed, 14 Jan 2009 13:48:01 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---Sig_/M674TQi=/PmimBOrNDdVqhk
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On 14-01-09 14:24, Daniel Willmann wrote:
+> On Wed, 14 Jan 2009 13:08:34 +0100
+> Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>
+>> Op 14 jan 2009, om 12:48 heeft Daniel Willmann het volgende
+>> geschreven:
+>>
+>>> mtd-utils-native fails here with:
+>>>
+>>> | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-
+>>> native-1.2.0+git-r2/git/
+>>> mkfs.ubifs/mkfs.ubifs.o: In function `write_super':
+>>> | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-
+>>> native-1.2.0+git-r2/git/mkfs.ubifs/mkfs.ubifs.c:1866: undefined
+>>> reference to `uuid_unparse_upper'
+>>> | collect2: ld returned 1 exit status
+>> Which e2fsprogs-libs-native do you have installed? Also, oe-devel is
+>> subscriber only, enough with the CC:!
+>
+> It's building e2fsprogs-libs-native-1.35-r0
 
-On Wed, 14 Jan 2009 13:08:34 +0100
-Koen Kooi <k.kooi@student.utwente.nl> wrote:
+That will cause the linking problems, you need the 1.4x one.
 
->=20
-> Op 14 jan 2009, om 12:48 heeft Daniel Willmann het volgende
-> geschreven:
->=20
-> > mtd-utils-native fails here with:
-> >
-> > | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-=20
-> > native-1.2.0+git-r2/git/
-> > mkfs.ubifs/mkfs.ubifs.o: In function `write_super':
-> > | /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-=20
-> > native-1.2.0+git-r2/git/mkfs.ubifs/mkfs.ubifs.c:1866: undefined =20
-> > reference to `uuid_unparse_upper'
-> > | collect2: ld returned 1 exit status
->=20
-> Which e2fsprogs-libs-native do you have installed? Also, oe-devel is =20
-> subscriber only, enough with the CC:!
+> Thanks for reverting it in the mean time.
 
-It's building e2fsprogs-libs-native-1.35-r0
-Thanks for reverting it in the mean time.
+It failed with include problems on another machine, so let's wait till 
+Tom Rini has pushed his fixed version.
 
-Regards,
-Daniel Willmann
+regards,
 
---Sig_/M674TQi=/PmimBOrNDdVqhk
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Disposition: attachment; filename=signature.asc
+Koen
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.9 (GNU/Linux)
+> Regards,
+> Daniel Willmann
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-iEYEARECAAYFAklt55QACgkQZ2fhlIqbZ1jnNQCgynWOLWabdXIUZZl/DzaAypFj
-9YsAnjnk87LT3dIqpZ1d8pYgv7sCc9aT
-=t1Av
------END PGP SIGNATURE-----
 
---Sig_/M674TQi=/PmimBOrNDdVqhk--
+
+
