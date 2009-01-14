@@ -1,25 +1,34 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LNEdv-000435-CE
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 23:55:23 +0100
-Received: (qmail invoked by alias); 14 Jan 2009 22:48:44 -0000
-Received: from e179083019.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[85.179.83.19]
-	by mail.gmx.net (mp065) with SMTP; 14 Jan 2009 23:48:44 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/cX0hKGy/cSyRnYL+5s01RPMr9MToC+7W2GU85Z/
-	ExgxYbOsPLzwp9
-Message-ID: <496E6C2B.5000404@gmx.net>
-Date: Wed, 14 Jan 2009 23:50:19 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <trini@kernel.crashing.org>) id 1LNF4o-000193-Q9
+	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 00:23:11 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090114231631.TKZV11567.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 14 Jan 2009 18:16:31 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
+	id 3bGX1b0061E665w03bGXVt; Wed, 14 Jan 2009 18:16:31 -0500
+X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
+	a=b2ZvGRdsAAAA:8 a=6cVq1YZbvhrI5SNNO8YA:9
+	a=1Qnus-eqbBTibaI3y0S2mqM1eWQA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Wed, 14 Jan 2009 16:17:05 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090114231705.GG6710@smtp.west.cox.net>
+References: <1230827114.5320.42.camel@dax.rpnet.com>
+	<20090101182526.GF7040@smtp.west.cox.net>
+	<1230840687.5320.56.camel@dax.rpnet.com>
+	<20090101220229.GH7040@smtp.west.cox.net>
+	<1230858713.10424.4.camel@dax.rpnet.com>
+	<1231462490.6467.85.camel@dax.rpnet.com>
+	<20090114011539.GA2376@smtp.west.cox.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.75
-Subject: OE e.V. - update!
+In-Reply-To: <20090114011539.GA2376@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: RFC: "Virtual" native and sdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,43 +42,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 22:55:23 -0000
-X-Groupsio-MsgNum: 7242
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigCC2492A0B696A042554E200F"
+X-List-Received-Date: Wed, 14 Jan 2009 23:23:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------enigCC2492A0B696A042554E200F
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Tue, Jan 13, 2009 at 06:15:39PM -0700, Tom Rini wrote:
+> On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
+> > On Fri, 2009-01-02 at 01:11 +0000, Richard Purdie wrote:
+> > > I just had a look through the trini/canadian-sdk branch and there are
+> > > bits I like and bits I dislike. I'll try and provide some feedback in
+> > > due course with a view to getting the less controversial bits merged. I
+> > > have some tweaks in poky to do with dynamic library extension handling
+> > > for example (from playing with darwin targets) where it would pay us to
+> > > find a common solution.
+> > 
+> > Sorry for the delayed feedback, what I've looked at so far follows
+> > below. It was easiest to extract some patches from your tree and make
+> > some commits of my own so these are in:
+> > 
+> > http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/rpurdie/canadian-sofar
+> > 
+> > Basically I wanted to particularly review the changes to the existing OE
+> > core classes/bitbake.conf. The changes in that branch are versions I'm
+> > happy with. I had two concerns there:
+> > 
+> > 1. I don't want to see ${HOST_EXEEXT} everywhere but I know why you 
+> >    need it and this was something OE would inevitably face. As a 
+> >    compromise I propose adding:
+> > 
+> >    EXEEXT = "${HOST_EXEEXT}"
+> > 
+> >    and using ${EXEEXT} which is fractionally less ugly for all common 
+> >    uses. Could you update your patch to use ${EXEEXT} please assuming 
+> >    we all agree on this. Its the same dilemma as the SOLIBS stuff I 
+> >    have with Darwin :/
+> > 
+> > 2. All the bb.data.inherits_class() stuff is ugly as sin and totally 
+> >    unreadable. My series has a better patch.
+> > 
+> > Moving on to the rest of the code, I don't see a problem merging any of
+> > the totally new files. How about the following merge process:
+> > 
+> > a) We push my tree into OE
+> 
+> My git-fu is weak and since we can't delete remote branches without
+> bugging someone, can we do this step?  I've got...
+> 
+> > b) You rebase onto my tree's changes and adjust the EXEEXT stuff.
+> > 
+> > c) You add changes which add the EXEEXT changes only to existing 
+> >    recipes and commit that.
+> > 
+> > d) The checksums.ini changes are a no brainer.
+> > 
+> > e) You start adding the totally new files to OE directly in a logical 
+> >    sequence of something like:
+> > 
+> >    i) Add canadian core classes (classes/canadian*)
+> >    ii) Add mingw new recipes
+> >    iii) Add misc support recipes (gmp/mprf-canadian)
+> >    iv) Add new binutils recipes
+> >    v) Add new gcc recipes
+> 
+> ... this done locally, mostly, in quilt.
 
-Hi,
-the letter with signed changes of the statutes arrived today and I just
-prepared the letter containing a description of why OE e.V. should not
-be considered a commercial association. The latter is precondition to
-get tax exemption status.
+Making more noise as I'm thinking on Friday I'll just merge RP's branch
+to mainline.
 
-I will bring this to the post office tomorrow and am positive that by
-the time of FOSDEM we will have finished the registration.
-
-Obtaining the tax exemption is our next task. :)
-
-Regards
-Robert
+-- 
+Tom Rini
 
 
---------------enigCC2492A0B696A042554E200F
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAklubC4ACgkQG9cfwmwwEtoc+wCgnglV/c0Aqdam8U1BnZkxhwtQ
-ZDwAn0aOx6QaEBY+Bc/oGntm4cz6u/69
-=xNqD
------END PGP SIGNATURE-----
-
---------------enigCC2492A0B696A042554E200F--
