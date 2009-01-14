@@ -1,32 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.67.172.39] (helo=webmail.no-log.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LNDCh-0000aT-3I
-	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 22:23:46 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LND6B-0003zJ-DQ
-	for openembedded-devel@openembedded.org; Wed, 14 Jan 2009 21:16:27 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 14 Jan 2009 21:16:27 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 14 Jan 2009 21:16:27 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 14 Jan 2009 22:16:11 +0100
-Message-ID: <gklkms$s7t$1@ger.gmane.org>
-References: <496E4ABD.3010605@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
+	(envelope-from <GNUtoo@no-log.org>) id 1LNESY-0003qt-2I
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Jan 2009 23:43:39 +0100
+Received: by webmail.no-log.org (Postfix, from userid 33)
+	id A709A4BFCD; Wed, 14 Jan 2009 23:37:01 +0100 (CET)
+X-Squirrel-UserHash: c3wyGAAN
+X-Squirrel-FromHash: AFRWVV5aWSo=
+Message-ID: <55120.AFRWVV5aWSo=.1231972621.squirrel@webmail.no-log.org>
 In-Reply-To: <496E4ABD.3010605@gmx.net>
-Sender: news <news@ger.gmane.org>
+References: <496E4ABD.3010605@gmx.net>
+Date: Wed, 14 Jan 2009 23:37:01 +0100 (CET)
+From: GNUtoo@no-log.org
+To: openembedded-devel@lists.openembedded.org
+User-Agent: SquirrelMail/1.4.9a
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+Importance: Normal
 Subject: Re: write access for GNUtoo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,11 +31,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 21:24:19 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Jan 2009 22:43:42 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 14-01-09 21:27, Robert Schuster wrote:
 > Hi,
 > woglinde and me are proposing write access for OE user GNUtoo.
 >
@@ -54,32 +43,46 @@ On 14-01-09 21:27, Robert Schuster wrote:
 > (namely Perl).
 >
 > Opinons?
-
-A real name would be nice, we don't give access to nicknames anymore :)
-
-regards,
-
-Koen
-
 >
 > Regards
 > Robert
 >
 > [0] -
-> http://bugs.openembedded.org/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&long_desc_type=allwordssubstr&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&keywords_type=allwords&keywords=&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&resolution=FIXED&resolution=INVALID&resolution=WONTFIX&resolution=LATER&resolution=REMIND&resolution=DUPLICATE&resolution=WORKSFORME&resolution=MOVED&emailassigned_to1=1&emailreporter1=1&emailcc1=1&emaillongdesc1=1&emailtype1=substring&email1=GNUtoo&emailtype2=substring&email2=&bugidtype=include&bug_id=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&field0-0-0=product&type0-0-0=substring&value0-0-0=GNUtoo&field0-0-1=component&type0-0-1=substring&value0-0-1=GNUtoo&field0-0-2=short_desc&type0-0-2=substring&value0-0-2=GNUtoo&field0-0-3=status_whiteboard&type0-0-3=substring
-&v
+> http://bugs.openembedded.org/buglist.cgi?query_format=3Dadvanced&short_=
+desc_type=3Dallwordssubstr&short_desc=3D&long_desc_type=3Dallwordssubstr&=
+long_desc=3D&bug_file_loc_type=3Dallwordssubstr&bug_file_loc=3D&keywords_=
+type=3Dallwords&keywords=3D&bug_status=3DUNCONFIRMED&bug_status=3DNEW&bug=
+_status=3DASSIGNED&bug_status=3DREOPENED&bug_status=3DRESOLVED&bug_status=
+=3DVERIFIED&bug_status=3DCLOSED&resolution=3DFIXED&resolution=3DINVALID&r=
+esolution=3DWONTFIX&resolution=3DLATER&resolution=3DREMIND&resolution=3DD=
+UPLICATE&resolution=3DWORKSFORME&resolution=3DMOVED&emailassigned_to1=3D1=
+&emailreporter1=3D1&emailcc1=3D1&emaillongdesc1=3D1&emailtype1=3Dsubstrin=
+g&email1=3DGNUtoo&emailtype2=3Dsubstring&email2=3D&bugidtype=3Dinclude&bu=
+g_id=3D&votes=3D&chfieldfrom=3D&chfieldto=3DNow&chfieldvalue=3D&cmdtype=3D=
+doit&order=3DReuse+same+sort+as+last+time&field0-0-0=3Dproduct&type0-0-0=3D=
+substring&value0-0-0=3DGNUtoo&field0-0-1=3Dcomponent&type0-0-1=3Dsubstrin=
+g&value0-0-1=3DGNUtoo&field0-0-2=3Dshort_desc&type0-0-2=3Dsubstring&value=
+0-0-2=3DGNUtoo&field0-0-3=3Dstatus_whiteboard&type0-0-3=3Dsubstring&v
 >
-> alue0-0-3=GNUtoo&field0-0-4=longdesc&type0-0-4=substring&value0-0-4=GNUtoo
+> alue0-0-3=3DGNUtoo&field0-0-4=3Dlongdesc&type0-0-4=3Dsubstring&value0-0=
+-4=3DGNUtoo
 >
->
->
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+Some things I worked on aren't in that list because they are not FIXED
+yet,simply because nobody commited them
+a better list would be:
+*initial not-splitted recent(at the time) wesnoth recipe that remplaced
+the old one: http://bugs.openembedded.net/show_bug.cgi?id=3D3736
+*xboard_4.2.7 recipe http://bugs.openembedded.net/show_bug.cgi?id=3D4832
+*fixes for scummvm(now build the engines(a script broke it))
+http://bugs.openembedded.net/show_bug.cgi?id=3D4958
+*new frozen-bubble(2.2.0 instead of 1.x) recipe:
+http://bugs.openembedded.net/show_bug.cgi?id=3D4965 and a dependency(
+http://bugs.openembedded.net/show_bug.cgi?id=3D4966 )
+*some initial and unfinished work on boost_1.36(made it compile and
+package on my machine(didn't work before) for openmoko and angstrom(so
+with thumb support) ) but I didn't made the 3 packages installable
+together on the same target
+http://bugs.openembedded.net/show_bug.cgi?id=3D4977
+*some minor bugs(such as foo lack bar dependency)
 
 
