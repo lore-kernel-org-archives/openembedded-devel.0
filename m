@@ -1,29 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [134.169.172.64] (helo=thebe.totalueberwachung.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1LN3e8-0001v5-91
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 12:10:53 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LN3Xe-00053r-Tw
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 11:04:11 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1LN3Xc-0000aw-8I
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jan 2009 11:04:08 +0000
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <496DC520.90601@gmx.net>
-References: <496D4B33.60102@gmx.net> <gkk2ut$5m8$1@ger.gmane.org>
-	<496DC520.90601@gmx.net>
-Date: Wed, 14 Jan 2009 11:04:07 +0000
-Message-Id: <1231931047.2952.208.camel@mill.internal.reciva.com>
+	(envelope-from <daniel@totalueberwachung.de>)
+	id 1LN4LD-00084e-0z; Wed, 14 Jan 2009 12:55:23 +0100
+Received: from adrastea.totalueberwachung.de
+	(adrastea.dyn.totalueberwachung.de [192.168.0.8])
+	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by thebe.totalueberwachung.de (Postfix) with ESMTP id 71406D8323;
+	Wed, 14 Jan 2009 12:48:48 +0100 (CET)
+Date: Wed, 14 Jan 2009 12:48:42 +0100
+From: Daniel Willmann <daniel@totalueberwachung.de>
+To: openembedded-commits@lists.openembedded.org
+Message-ID: <20090114124842.32a3241e@adrastea.totalueberwachung.de>
+In-Reply-To: <20090113203242.4D378189331@amethyst.openembedded.net>
+References: <20090113203242.4D378189331@amethyst.openembedded.net>
+X-Mailer: Claws Mail 3.6.1 (GTK+ 2.12.11; x86_64-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: "armv6" override not used
+Cc: Koen Kooi <koen@openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : mtd-utils-native: remove default-preference from 1.20+git, it shows now errors in my tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +32,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 11:10:53 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Jan 2009 11:55:24 -0000
+X-Groupsio-MsgNum: 7221
+Content-Type: multipart/signed; boundary="Sig_/_uj38FXSYIBNO1Kp+QnpkTw";
+	protocol="application/pgp-signature"; micalg=PGP-SHA1
 
-On Wed, 2009-01-14 at 11:57 +0100, Robert Schuster wrote:
-> Is that such a controversial feature? I think this should be part of all
-> distros.
-> 
-> Without this libffi breaks (on armv6 and arm7a) and in the future this
-> means that stuff like openjdk won't be buildable on these arches. :(
+--Sig_/_uj38FXSYIBNO1Kp+QnpkTw
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Why exactly is this override required?  It seems a bit sad that these
-packages need to be fed a special "-DMAKE_ME_WORK" flag by some external
-intelligence in order to build on newer architectures.  Can't they
-figure it out for themselves?
+On Tue, 13 Jan 2009 21:32:42 +0100 (CET)
+git@amethyst.openembedded.net (GIT User account) wrote:
 
-p.
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 78fca8ee204f310352b0bc950fd9a536a98e5d2e
+> URL:
+> http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3D78fca=
+8ee204f310352b0bc950fd9a536a98e5d2e
+>=20
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Tue Jan 13 21:31:16 2009 +0100
+>=20
+> mtd-utils-native: remove default-preference from 1.20+git, it shows
+> now errors in my tests
 
+mtd-utils-native fails here with:
 
+| make[1]: Leaving directory `/home/alphaone/oe-dev/tmp/work/x86_64-linux/m=
+td-ut
+ils-native-1.2.0+git-r2/git/ubi-utils'
+| ccache gcc  -isystem/home/alphaone/oe-dev/tmp/staging/x86_64-linux/usr/in=
+clude
+ -O2 -I/home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-native-1.2.0+g=
+it-r2
+/git//include -DWITHOUT_XATTR -L/home/alphaone/oe-dev/tmp/staging/x86_64-li=
+nux/u
+sr/lib -Wl,-rpath-link,/home/alphaone/oe-dev/tmp/staging/x86_64-linux/usr/l=
+ib -W
+l,-rpath,/home/alphaone/oe-dev/tmp/staging/x86_64-linux/usr/lib -Wl,-O1  -g=
+ -o /
+home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-native-1.2.0+git-r2/gi=
+t/ftl
+_format /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-native-1.2.0+=
+git-r
+2/git/ftl_format.o
+| /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-native-1.2.0+git-r2=
+/git/
+mkfs.ubifs/mkfs.ubifs.o: In function `write_super':
+| /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-native-1.2.0+git-r2=
+/git/mkfs.ubifs/mkfs.ubifs.c:1866: undefined reference to `uuid_unparse_upp=
+er'
+| collect2: ld returned 1 exit status
+| make[1]: *** [/home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-nativ=
+e-1.2.0+git-r2/git/mkfs.ubifs/mkfs.ubifs] Error 1
+| rm /home/alphaone/oe-dev/tmp/work/x86_64-linux/mtd-utils-native-1.2.0+git=
+-r2/git/mkfs.ubifs/mkfs.ubifs.o
+| make[1]: Leaving directory `/home/alphaone/oe-dev/tmp/work/x86_64-linux/m=
+td-utils-native-1.2.0+git-r2/git/mkfs.ubifs'
+| make: *** [subdirs_mkfs.ubifs_all] Error 2
+| make: *** Waiting for unfinished jobs....
 
+The older version still works.
 
+Regards,
+Daniel Willmann
+
+--Sig_/_uj38FXSYIBNO1Kp+QnpkTw
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Disposition: attachment; filename=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.9 (GNU/Linux)
+
+iEYEARECAAYFAklt0RwACgkQZ2fhlIqbZ1h1hwCghXAzUaluimKq9Aj2G9OaAbpB
++vcAoKRnD7T5ojzdkvBBVQQRn15Dyr1J
+=zBfH
+-----END PGP SIGNATURE-----
+
+--Sig_/_uj38FXSYIBNO1Kp+QnpkTw--
