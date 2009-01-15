@@ -1,45 +1,22 @@
-Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
+Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LNJda-0002DD-Tt
+	(envelope-from <denis@denix.org>) id 1LNLbU-0002Ew-00
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jan 2009 05:15:23 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so978506rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jan 2009 20:08:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=fAZLtapsj9GY6F3TN5g+PUFWMEo4d9iXLo333ArUmHY=;
-	b=rcHdLNuSxBb7hklNmoxCB+DVJn7cL4Ag4Bo4GX9jfH32pJssO1BSnacvtzktZz4COv
-	rjode1TpHxsGZFzg6iU8HW8YvtX9zmBmEdr1SZtE5qQMlUvY7n2viYlusSi9T5EwRiIN
-	Io9ViU4NGluaXND7tJS0c3vDwNmd91xlcwTTI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=jHGnDixHDWUf22lYQZs8u1icKghodFSasgU6RD5X/BYd3EO9g6qRnttDEbAk16gcs8
-	edsvxWPs3q/dRT11hCRX07pq2hAfIXy0j9F2adZJb7g6UvnFtXpGvm1Da8g9Bcmx5kcm
-	cnv7N3yCTl6YuBjkc80sRhwehUCXkXKdAA1Lk=
-Received: by 10.142.237.20 with SMTP id k20mr311129wfh.218.1231992524652;
-	Wed, 14 Jan 2009 20:08:44 -0800 (PST)
-Received: from localhost (adsl-71-146-7-99.dsl.pltn13.sbcglobal.net
-	[71.146.7.99])
-	by mx.google.com with ESMTPS id 22sm55737446wfi.18.2009.01.14.20.08.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 14 Jan 2009 20:08:44 -0800 (PST)
-Date: Wed, 14 Jan 2009 20:08:40 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 15 Jan 2009 07:21:27 +0100
+Received: from gandalf.denix.org ([71.255.246.155]) by vms173001.mailsrvcs.net
+	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
+	with ESMTPA id <0KDI00EQJ1BUIH42@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	15 Jan 2009 00:14:24 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 33C906B83B5; Thu,
+	15 Jan 2009 01:14:18 -0500 (EST)
+Date: Thu, 15 Jan 2009 01:14:18 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090115040840.GA6717@gmail.com>
-References: <496D4B33.60102@gmx.net> <gkk2ut$5m8$1@ger.gmane.org>
-	<496DC520.90601@gmx.net>
-	<1231931047.2952.208.camel@mill.internal.reciva.com>
-	<496DEDF1.9080506@gmx.net>
-	<1231944260.9499.87.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-In-Reply-To: <1231944260.9499.87.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: "armv6" override not used
+Message-id: <20090115061418.GA13352@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: [RFC] Fix udev pulling in libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +30,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 04:15:23 -0000
+X-List-Received-Date: Thu, 15 Jan 2009 06:21:35 -0000
+X-Groupsio-MsgNum: 7245
+Content-type: multipart/mixed; boundary=a8Wt8u1KmwUX3Y2C
+Content-disposition: inline
+
+--a8Wt8u1KmwUX3Y2C
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (14/01/09 14:44), Phil Blundell wrote:
-> On Wed, 2009-01-14 at 14:51 +0100, Robert Schuster wrote:
-> > it is related to GCC: Although -mfloat-abi=vfp is given __SOFTFP__ is
-> > not defined and that is required for libffi because otherwise the sysv.S
-> > assembler file uses instructions not available any more on armv6/armv7.
-> 
-> That sounds more like libffi is to blame.  Shouldn't it be checking for
-> (defined(__SOFT_FP__) || defined(__VFP_FP__))?  Or, if you really are
-> using soft-float, then presumably gcc is to blame for not defining
-> __SOFT_FP__.
-> 
-> Either way, it seems like whichever package is broken should just be
-> fixed, rather than trying to work around it with architecture-specific
-> CFLAGS forcing.  Assuming that the problem is libffi trying to use FPA
-> instructions #ifndef __SOFT_FP__, then it will break on ARMv5
-> architectures as well if you happen to be using VFP.
+Hi,
 
--mfloat-abi=softfp makes sure that the calling conventions used are compatible with soft-float but gcc can generate VFP code if the architecture supports it and thats why __SOFTFP__ is not defined.
+I was debugging the strange behavior of one of my boxes pulling in libc6-dev 
+into the filesystem image and it happened to be because udev pulled in 
+libvolume-id-dev instead of libvolume-id0... It worked as expected on the 
+other box, though.
 
-GCC only defines __SOFTFP__ when float abi is soft which means there is
-no FPU of any sort.
+Several people on IRC have seen this lingering bug before, but no fix was 
+available. Koen mentioned it got fixed for him by rebuilding udev...
 
-My understanding is that this define means that code is not using FPU of
-any sort and is pure soft-fp not only the calling convention.
+After some investigation I found out that both libvolume-id packages (-dev and 
+regular) are registered to provide libvolume_id.so.0 and the one appearing 
+last in os.walk() gets pulled in by udev. The order of files provided by 
+os.walk() depends on parallel builds and phase of the Moon.
 
-by default -mfloat-abi is soft.
+libvolume-id-dev does not provide the actual .so library, but it contains a 
+symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!) 
+instead of ../../lib/ one...
 
-You should check the code in question weather it really needs to be soft
-float. If thats the case then either you should use -mfloat-abi=soft for
-this file.
+The first patch attached fixes this in udev and should be a no brainer. Unless 
+someone objects, I'll push it in in a day or two.
 
+Since I was debugging the code which actually does this shlib magic in 
+package.bbclass, I thought it might be useful to prevent this kind of issues 
+in the future by skipping symlinks while looking for SONAME/NEEDED in the 
+objdump - please see the second patch attached and provide feedback.
 
+-- 
+Denys
 
-Thx
+--a8Wt8u1KmwUX3Y2C
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="udev-124-libvolume-id-soname.patch"
 
--Khem
+diff --git a/packages/udev/udev-124/libvolume-id-soname.patch b/packages/udev/udev-124/libvolume-id-soname.patch
+new file mode 100644
+index 0000000..56365a4
+--- /dev/null
++++ b/packages/udev/udev-124/libvolume-id-soname.patch
+@@ -0,0 +1,12 @@
++diff -uNr udev-124-orig/extras/volume_id/lib/Makefile udev-124/extras/volume_id/lib/Makefile
++--- udev-124-orig/extras/volume_id/lib/Makefile	2008-06-12 01:24:30.000000000 -0400
+++++ udev-124/extras/volume_id/lib/Makefile	2009-01-14 23:32:42.000000000 -0500
++@@ -113,7 +113,7 @@
++ ifeq ($(libdir),$(usrlibdir))
++ 	ln -sf $(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
++ else
++-	ln -sf $(libdir)/$(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
+++	ln -sf ../..$(libdir)/$(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
++ endif
++ 	$(INSTALL) -d $(DESTDIR)$(usrlibdir)/pkgconfig
++ 	$(INSTALL_DATA) libvolume_id.pc $(DESTDIR)$(usrlibdir)/pkgconfig/libvolume_id.pc
+diff --git a/packages/udev/udev_124.bb b/packages/udev/udev_124.bb
+index 515debe..aa156a1 100644
+--- a/packages/udev/udev_124.bb
++++ b/packages/udev/udev_124.bb
+@@ -3,13 +3,14 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ RPROVIDES_${PN} = "hotplug"
+ 
+-PR = "r11"
++PR = "r12"
+ 
+ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+ 	   file://noasmlinkage.patch;patch=1 \
+ 	   file://flags.patch;patch=1 \
+ 	   file://vol_id_ld.patch;patch=1 \
+ 	   file://udevtrigger_add_devname_filtering.patch;patch=1 \
++	   file://libvolume-id-soname.patch;patch=1 \
+ 	   file://mount.blacklist \
+ 	   file://run.rules \
+ 	   "
 
+--a8Wt8u1KmwUX3Y2C
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="package_bbclass-do_shlibs-skip-symlinks.patch"
 
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 8b7d649..a7cdb5f 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -615,7 +615,7 @@ python package_do_shlibs() {
+ 			for file in files:
+ 				soname = None
+ 				path = os.path.join(root, file)
+-				if os.access(path, os.X_OK) or lib_re.match(file):
++				if (os.access(path, os.X_OK) or lib_re.match(file)) and not os.path.islink(path):
+ 					cmd = bb.data.getVar('OBJDUMP', d, 1) + " -p " + path + " 2>/dev/null"
+ 					cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', d, 1), cmd)
+ 					fd = os.popen(cmd)
+
+--a8Wt8u1KmwUX3Y2C--
