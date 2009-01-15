@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LNUI9-0002eE-Am
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 16:37:57 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LNUBh-0004Bo-RD
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 15:31:17 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 15:31:17 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 15:31:17 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 15 Jan 2009 16:31:08 +0100
-Message-ID: <gknkrs$el$1@ger.gmane.org>
-References: <gkn9mo$l02$1@ger.gmane.org> <496F4DDF.5000906@xora.org.uk>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
-In-Reply-To: <496F4DDF.5000906@xora.org.uk>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Write access request for a number of people
+	(envelope-from <denis@denix.org>) id 1LNUnW-0003Kn-U0
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Jan 2009 17:10:23 +0100
+Received: from gandalf.denix.org ([71.255.246.155]) by vms173007.mailsrvcs.net
+	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
+	with ESMTPA id <0KDI004AFSAWFSQ0@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	15 Jan 2009 09:57:02 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 17CE16B83B5; Thu,
+	15 Jan 2009 10:58:23 -0500 (EST)
+Date: Thu, 15 Jan 2009 10:58:23 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <gkmmn6$pmf$1@ger.gmane.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090115155823.GC15943@denix.org>
+MIME-version: 1.0
+References: <20090115061418.GA13352@denix.org> <gkmmn6$pmf$1@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,38 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 15:37:57 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Jan 2009 16:10:24 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 15-01-09 15:53, Graeme Gregory wrote:
-> Koen Kooi wrote:
->> Hi,
+On Thu, Jan 15, 2009 at 07:56:37AM +0100, Koen Kooi wrote:
+> On 15-01-09 07:14, Denys Dmytriyenko wrote:
+>
+>> libvolume-id-dev does not provide the actual .so library, but it contains 
+>> a
+>> symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!)
+>> instead of ../../lib/ one...
+>
+> That's the intended behaviours, since installing the packages will have it 
+> point to ${libdir}/libvolume.so.0 on your device. I'm not sure if we want 
+> to patch every package to use relative symlinks.
+
+So far, all other packages I looked at, have relative or same-dir symlinks in 
+corresponding -dev (libc, libpng, jpeg, gnutls etc)
+Since -dev gets run through shlib magic outside of the main package with 
+the actual .so, relative or same-dir symlinks are broken, leading to a normal 
+behavior :)
+
+>> The first patch attached fixes this in udev and should be a no brainer. 
+>> Unless
+>> someone objects, I'll push it in in a day or two.
 >>
->> I'd like to request access for the following people:
->>
->> John 'DJWillis' Willis - He's the openpandora/angstrom guru, the
->> patches he made look good an having write access makes it easier to
->> keep the openpandora machine up to date and the pandora-OE overlay small
->>
->> Andrea 'Ant' Adami - The driving force behind the kexecboot effort in
->> angstrom. Most of his patches are OK, and he's very good at pestering
->> people to look at changes he's not sure of. In the short term he will
->> start a branch to work on the kexecboot efforts.
->>
->> Yuri 'Jay7' Bushmelev - Kexecboot userspace hacker, same reasons as
->> Andrea.
->>
-> All these people are worthy in my eyes!
+>> Since I was debugging the code which actually does this shlib magic in
+>> package.bbclass, I thought it might be useful to prevent this kind of 
+>> issues
+>> in the future by skipping symlinks while looking for SONAME/NEEDED in the
+>> objdump - please see the second patch attached and provide feedback.
+>
+> The change to package.bbclass looks OK to me, if that gets applied we can 
+> leave out the udev patch.
 
-That's 2 votes from the coreteam, which should be enough[1] :) Please 
-send your ssh keys to mickey, he'll update gitosis.
+That's the goal :)
 
-regards,
-
-Koen
-
-[1] Nothing is written down about this voting business, btw
-
+-- 
+Denys
 
 
