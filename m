@@ -1,26 +1,33 @@
-Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LNUCs-0002UK-WC
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jan 2009 16:32:31 +0100
-Received: from gandalf.denix.org ([71.255.246.155])
-	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
-	(built Apr
-	3 2006)) with ESMTPA id <0KDI0049OQTOQ7P0@vms042.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	15 Jan 2009 09:25:00 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C8E9C6B83B5; Thu,
-	15 Jan 2009 10:24:59 -0500 (EST)
-Date: Thu, 15 Jan 2009 10:24:59 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <07FF17F1860B45E8953571020236997C@distantearth.home>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090115152459.GA15943@denix.org>
-MIME-version: 1.0
-References: <gkn9vn$mh4$1@ger.gmane.org>
-	<07FF17F1860B45E8953571020236997C@distantearth.home>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [RFC] Overlay hosting and mirroring on git.oe.net
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LNUI9-0002eE-Am
+	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 16:37:57 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LNUBh-0004Bo-RD
+	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 15:31:17 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 15 Jan 2009 15:31:17 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 15 Jan 2009 15:31:17 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 15 Jan 2009 16:31:08 +0100
+Message-ID: <gknkrs$el$1@ger.gmane.org>
+References: <gkn9mo$l02$1@ger.gmane.org> <496F4DDF.5000906@xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
+In-Reply-To: <496F4DDF.5000906@xora.org.uk>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Write access request for a number of people
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 15:32:31 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 15 Jan 2009 15:37:57 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 15, 2009 at 02:45:23PM -0000, John Willis wrote:
-> Hi,
-> 
-> > There are a lot of OE based projects around that use an overlay to
-> > manage their tweaks (e.g. gumstix, openpandora, arago), which has pros
-> > and cons. A while ago I was talking to John Willis (of open2x and
-> > openpandora fame) and he liked the idea of mirroring the pandora overlay
-> > on git.oe.net to make it more visible and to make it easier for OE
-> > developers to work on making pieces of it upstream safe.
-> > I think a git mirror of poky would fall in this category as well.
-> 
-> Get's my vote. As I mentioned on IRC the current OpenPandora model uses 3
-> overlays. With the 3rd one being a simple user.collection that local Pandora
-> specific recipes go into before working there way upwards.
+On 15-01-09 15:53, Graeme Gregory wrote:
+> Koen Kooi wrote:
+>> Hi,
+>>
+>> I'd like to request access for the following people:
+>>
+>> John 'DJWillis' Willis - He's the openpandora/angstrom guru, the
+>> patches he made look good an having write access makes it easier to
+>> keep the openpandora machine up to date and the pandora-OE overlay small
+>>
+>> Andrea 'Ant' Adami - The driving force behind the kexecboot effort in
+>> angstrom. Most of his patches are OK, and he's very good at pestering
+>> people to look at changes he's not sure of. In the short term he will
+>> start a branch to work on the kexecboot efforts.
+>>
+>> Yuri 'Jay7' Bushmelev - Kexecboot userspace hacker, same reasons as
+>> Andrea.
+>>
+> All these people are worthy in my eyes!
 
-From Arago perspective I'm in favor of this proposal as well. Thanks.
+That's 2 votes from the coreteam, which should be enough[1] :) Please 
+send your ssh keys to mickey, he'll update gitosis.
 
--- 
-Denys
+regards,
+
+Koen
+
+[1] Nothing is written down about this voting business, btw
+
 
 
