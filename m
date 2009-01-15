@@ -1,34 +1,45 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LNF4o-000193-Q9
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 00:23:11 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090114231631.TKZV11567.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 14 Jan 2009 18:16:31 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id 3bGX1b0061E665w03bGXVt; Wed, 14 Jan 2009 18:16:31 -0500
-X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
-	a=b2ZvGRdsAAAA:8 a=6cVq1YZbvhrI5SNNO8YA:9
-	a=1Qnus-eqbBTibaI3y0S2mqM1eWQA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 14 Jan 2009 16:17:05 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090114231705.GG6710@smtp.west.cox.net>
-References: <1230827114.5320.42.camel@dax.rpnet.com>
-	<20090101182526.GF7040@smtp.west.cox.net>
-	<1230840687.5320.56.camel@dax.rpnet.com>
-	<20090101220229.GH7040@smtp.west.cox.net>
-	<1230858713.10424.4.camel@dax.rpnet.com>
-	<1231462490.6467.85.camel@dax.rpnet.com>
-	<20090114011539.GA2376@smtp.west.cox.net>
+	(envelope-from <raj.khem@gmail.com>) id 1LNJda-0002DD-Tt
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Jan 2009 05:15:23 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so978506rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jan 2009 20:08:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=fAZLtapsj9GY6F3TN5g+PUFWMEo4d9iXLo333ArUmHY=;
+	b=rcHdLNuSxBb7hklNmoxCB+DVJn7cL4Ag4Bo4GX9jfH32pJssO1BSnacvtzktZz4COv
+	rjode1TpHxsGZFzg6iU8HW8YvtX9zmBmEdr1SZtE5qQMlUvY7n2viYlusSi9T5EwRiIN
+	Io9ViU4NGluaXND7tJS0c3vDwNmd91xlcwTTI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=jHGnDixHDWUf22lYQZs8u1icKghodFSasgU6RD5X/BYd3EO9g6qRnttDEbAk16gcs8
+	edsvxWPs3q/dRT11hCRX07pq2hAfIXy0j9F2adZJb7g6UvnFtXpGvm1Da8g9Bcmx5kcm
+	cnv7N3yCTl6YuBjkc80sRhwehUCXkXKdAA1Lk=
+Received: by 10.142.237.20 with SMTP id k20mr311129wfh.218.1231992524652;
+	Wed, 14 Jan 2009 20:08:44 -0800 (PST)
+Received: from localhost (adsl-71-146-7-99.dsl.pltn13.sbcglobal.net
+	[71.146.7.99])
+	by mx.google.com with ESMTPS id 22sm55737446wfi.18.2009.01.14.20.08.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 14 Jan 2009 20:08:44 -0800 (PST)
+Date: Wed, 14 Jan 2009 20:08:40 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090115040840.GA6717@gmail.com>
+References: <496D4B33.60102@gmx.net> <gkk2ut$5m8$1@ger.gmane.org>
+	<496DC520.90601@gmx.net>
+	<1231931047.2952.208.camel@mill.internal.reciva.com>
+	<496DEDF1.9080506@gmx.net>
+	<1231944260.9499.87.camel@lenovo.internal.reciva.com>
 MIME-Version: 1.0
-In-Reply-To: <20090114011539.GA2376@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: RFC: "Virtual" native and sdk recipes
+In-Reply-To: <1231944260.9499.87.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: Re: "armv6" override not used
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,74 +53,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2009 23:23:11 -0000
+X-List-Received-Date: Thu, 15 Jan 2009 04:15:23 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Jan 13, 2009 at 06:15:39PM -0700, Tom Rini wrote:
-> On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
-> > On Fri, 2009-01-02 at 01:11 +0000, Richard Purdie wrote:
-> > > I just had a look through the trini/canadian-sdk branch and there are
-> > > bits I like and bits I dislike. I'll try and provide some feedback in
-> > > due course with a view to getting the less controversial bits merged. I
-> > > have some tweaks in poky to do with dynamic library extension handling
-> > > for example (from playing with darwin targets) where it would pay us to
-> > > find a common solution.
-> > 
-> > Sorry for the delayed feedback, what I've looked at so far follows
-> > below. It was easiest to extract some patches from your tree and make
-> > some commits of my own so these are in:
-> > 
-> > http://git.openembedded.net/?p=openembedded.git;a=shortlog;h=refs/heads/rpurdie/canadian-sofar
-> > 
-> > Basically I wanted to particularly review the changes to the existing OE
-> > core classes/bitbake.conf. The changes in that branch are versions I'm
-> > happy with. I had two concerns there:
-> > 
-> > 1. I don't want to see ${HOST_EXEEXT} everywhere but I know why you 
-> >    need it and this was something OE would inevitably face. As a 
-> >    compromise I propose adding:
-> > 
-> >    EXEEXT = "${HOST_EXEEXT}"
-> > 
-> >    and using ${EXEEXT} which is fractionally less ugly for all common 
-> >    uses. Could you update your patch to use ${EXEEXT} please assuming 
-> >    we all agree on this. Its the same dilemma as the SOLIBS stuff I 
-> >    have with Darwin :/
-> > 
-> > 2. All the bb.data.inherits_class() stuff is ugly as sin and totally 
-> >    unreadable. My series has a better patch.
-> > 
-> > Moving on to the rest of the code, I don't see a problem merging any of
-> > the totally new files. How about the following merge process:
-> > 
-> > a) We push my tree into OE
+On (14/01/09 14:44), Phil Blundell wrote:
+> On Wed, 2009-01-14 at 14:51 +0100, Robert Schuster wrote:
+> > it is related to GCC: Although -mfloat-abi=vfp is given __SOFTFP__ is
+> > not defined and that is required for libffi because otherwise the sysv.S
+> > assembler file uses instructions not available any more on armv6/armv7.
 > 
-> My git-fu is weak and since we can't delete remote branches without
-> bugging someone, can we do this step?  I've got...
+> That sounds more like libffi is to blame.  Shouldn't it be checking for
+> (defined(__SOFT_FP__) || defined(__VFP_FP__))?  Or, if you really are
+> using soft-float, then presumably gcc is to blame for not defining
+> __SOFT_FP__.
 > 
-> > b) You rebase onto my tree's changes and adjust the EXEEXT stuff.
-> > 
-> > c) You add changes which add the EXEEXT changes only to existing 
-> >    recipes and commit that.
-> > 
-> > d) The checksums.ini changes are a no brainer.
-> > 
-> > e) You start adding the totally new files to OE directly in a logical 
-> >    sequence of something like:
-> > 
-> >    i) Add canadian core classes (classes/canadian*)
-> >    ii) Add mingw new recipes
-> >    iii) Add misc support recipes (gmp/mprf-canadian)
-> >    iv) Add new binutils recipes
-> >    v) Add new gcc recipes
-> 
-> ... this done locally, mostly, in quilt.
+> Either way, it seems like whichever package is broken should just be
+> fixed, rather than trying to work around it with architecture-specific
+> CFLAGS forcing.  Assuming that the problem is libffi trying to use FPA
+> instructions #ifndef __SOFT_FP__, then it will break on ARMv5
+> architectures as well if you happen to be using VFP.
 
-Making more noise as I'm thinking on Friday I'll just merge RP's branch
-to mainline.
+-mfloat-abi=softfp makes sure that the calling conventions used are compatible with soft-float but gcc can generate VFP code if the architecture supports it and thats why __SOFTFP__ is not defined.
 
--- 
-Tom Rini
+GCC only defines __SOFTFP__ when float abi is soft which means there is
+no FPU of any sort.
+
+My understanding is that this define means that code is not using FPU of
+any sort and is pure soft-fp not only the calling convention.
+
+by default -mfloat-abi is soft.
+
+You should check the code in question weather it really needs to be soft
+float. If thats the case then either you should use -mfloat-abi=soft for
+this file.
+
+
+
+Thx
+
+-Khem
 
 
