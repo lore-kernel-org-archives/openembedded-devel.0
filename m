@@ -1,27 +1,26 @@
-Received: from [209.85.219.20] (helo=mail-ew0-f20.google.com)
+Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1LNThS-0004cx-Kd
+	(envelope-from <denis@denix.org>) id 1LNUCs-0002UK-WC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jan 2009 16:00:04 +0100
-Received: by ewy13 with SMTP id 13so1232690ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2009 06:53:21 -0800 (PST)
-Received: by 10.210.68.17 with SMTP id q17mr1755756eba.50.1232031200854;
-	Thu, 15 Jan 2009 06:53:20 -0800 (PST)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id d23sm72071nfh.28.2009.01.15.06.53.20
-	(version=SSLv3 cipher=RC4-MD5); Thu, 15 Jan 2009 06:53:20 -0800 (PST)
-Message-ID: <496F4DDF.5000906@xora.org.uk>
-Date: Thu, 15 Jan 2009 14:53:19 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
+	Thu, 15 Jan 2009 16:32:31 +0100
+Received: from gandalf.denix.org ([71.255.246.155])
+	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
+	(built Apr
+	3 2006)) with ESMTPA id <0KDI0049OQTOQ7P0@vms042.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	15 Jan 2009 09:25:00 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C8E9C6B83B5; Thu,
+	15 Jan 2009 10:24:59 -0500 (EST)
+Date: Thu, 15 Jan 2009 10:24:59 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <07FF17F1860B45E8953571020236997C@distantearth.home>
 To: openembedded-devel@lists.openembedded.org
-References: <gkn9mo$l02$1@ger.gmane.org>
-In-Reply-To: <gkn9mo$l02$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
-Subject: Re: Write access request for a number of people
+Message-id: <20090115152459.GA15943@denix.org>
+MIME-version: 1.0
+References: <gkn9vn$mh4$1@ger.gmane.org>
+	<07FF17F1860B45E8953571020236997C@distantearth.home>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [RFC] Overlay hosting and mirroring on git.oe.net
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,30 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 15:00:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Jan 2009 15:32:31 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Koen Kooi wrote:
+On Thu, Jan 15, 2009 at 02:45:23PM -0000, John Willis wrote:
 > Hi,
->
-> I'd like to request access for the following people:
->
-> John 'DJWillis' Willis - He's the openpandora/angstrom guru, the
-> patches he made look good an having write access makes it easier to
-> keep the openpandora machine up to date and the pandora-OE overlay small
->
-> Andrea 'Ant' Adami - The driving force behind the kexecboot effort in
-> angstrom. Most of his patches are OK, and he's very good at pestering
-> people to look at changes he's not sure of. In the short term he will
-> start a branch to work on the kexecboot efforts.
->
-> Yuri 'Jay7' Bushmelev - Kexecboot userspace hacker, same reasons as
-> Andrea.
->
-All these people are worthy in my eyes!
+> 
+> > There are a lot of OE based projects around that use an overlay to
+> > manage their tweaks (e.g. gumstix, openpandora, arago), which has pros
+> > and cons. A while ago I was talking to John Willis (of open2x and
+> > openpandora fame) and he liked the idea of mirroring the pandora overlay
+> > on git.oe.net to make it more visible and to make it easier for OE
+> > developers to work on making pieces of it upstream safe.
+> > I think a git mirror of poky would fall in this category as well.
+> 
+> Get's my vote. As I mentioned on IRC the current OpenPandora model uses 3
+> overlays. With the 3rd one being a simple user.collection that local Pandora
+> specific recipes go into before working there way upwards.
 
-Graeme
+From Arago perspective I'm in favor of this proposal as well. Thanks.
 
+-- 
+Denys
 
 
