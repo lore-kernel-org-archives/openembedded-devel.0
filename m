@@ -1,24 +1,32 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LNVLX-0001Eh-7O
+	(envelope-from <andrea.adami@gmail.com>) id 1LNW7m-0007xZ-Vu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jan 2009 17:45:31 +0100
-Received: from andromeda.vanille.de (e180143110.adsl.alicedsl.de
-	[85.180.143.110])
-	by drlauer-research.com (Postfix) with ESMTP id 351535847F5
+	Thu, 15 Jan 2009 18:35:23 +0100
+Received: by bwz8 with SMTP id 8so3020212bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2009 17:59:30 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Jan 2009 17:38:50 +0100
-User-Agent: KMail/1.9.10
-References: <gkn9mo$l02$1@ger.gmane.org> <496F4DDF.5000906@xora.org.uk>
-	<gknkrs$el$1@ger.gmane.org>
-In-Reply-To: <gknkrs$el$1@ger.gmane.org>
+	Thu, 15 Jan 2009 09:28:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=bOw/eJ2UeJM86dR0jLaNAtCuxeT9rjbNHwbiqEb4Mjg=;
+	b=FmYyroWNqYISB6PnX+DQUK1I5HkWFUfBao0j96uYbhmn+k2Z4t/Fm4YcqqUyBuCYg+
+	KP8Ad9BmaIyorSQ4O6MyIfwzKmTg0petqodpPlPGwuEl9r0fedPcsv4KUYncJnwNmoKi
+	uG8RmszxVvFkRrkFd4aLoW5R8XOkgwn+JUxvY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=rYg1SyoLkLhMFhsBsgStLuDctPCozFCZ85e2XQk3CT7uvTCcTH4SUmRc9HvAIddDza
+	gwhxkiqjw+vKDZVPX70VVB19+4WJV3bJhrjQyUw+lTPsUzwE2E2E4q7cJzBkLxA3v7Vm
+	udnflGsMsty902Ob7c1hKfzcYmsNnemD5O4M0=
 MIME-Version: 1.0
-Message-Id: <200901151738.50288.mickey@vanille-media.de>
-Subject: Re: Write access request for a number of people
+Received: by 10.181.20.6 with SMTP id x6mr499256bki.167.1232040520697; Thu, 15 
+	Jan 2009 09:28:40 -0800 (PST)
+Date: Thu, 15 Jan 2009 18:28:40 +0100
+Message-ID: <d1b08f940901150928h56ede408u2d070606fbe6b7bc@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: ARM bootloaders (Zaurus) and CMDLINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,39 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 16:45:31 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 15 Jan 2009 17:35:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Am Thursday 15 January 2009 16:31:08 schrieb Koen Kooi:
-> On 15-01-09 15:53, Graeme Gregory wrote:
-> > Koen Kooi wrote:
-> >> Hi,
-> >>
-> >> I'd like to request access for the following people:
-> >>
-> >> John 'DJWillis' Willis - He's the openpandora/angstrom guru, the
-> >> patches he made look good an having write access makes it easier to
-> >> keep the openpandora machine up to date and the pandora-OE overlay small
-> >>
-> >> Andrea 'Ant' Adami - The driving force behind the kexecboot effort in
-> >> angstrom. Most of his patches are OK, and he's very good at pestering
-> >> people to look at changes he's not sure of. In the short term he will
-> >> start a branch to work on the kexecboot efforts.
-> >>
-> >> Yuri 'Jay7' Bushmelev - Kexecboot userspace hacker, same reasons as
-> >> Andrea.
-> >
-> > All these people are worthy in my eyes!
->
-> That's 2 votes from the coreteam, which should be enough[1] :) Please
-> send your ssh keys to mickey, he'll update gitosis.
+I'm trying to understand in details the boot-process and the changes
+between 2.4 and 2.6 kernels.
 
-*nod*
+The idea is to read the mtdparts passed by the Zaurus bootloader
+(angel) with a 2.6 kernel.
 
--- 
-:M:
+I found two threads which shed some light:
+
+http://lists.gnu.org/archive/html/qemu-devel/2007-07/msg00344.html
+https://kerneltrap.org/mailarchive/linux-kernel/2007/10/25/355025/thread
+
+The question is simple: is it possible to apply the
+CONFIG_SHARPSL_BOOTLDR_PARAMS patch to the 2.6 kernels?
+
+We'd need this in the kexecboot-kernel, to be able to recognize the
+mtdparts passed in /proc/cmdline. This is actually working only with
+u-boot.
+
+Other solution would be a raw read of the nand addresses and a
+subsequent edit of the CMDLINE params passed by the kexecboot kernel
+to the launched kernel.
+
+Any advice?
+
+TIA
+
+Andrea
 
 
