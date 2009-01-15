@@ -1,39 +1,34 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1LNPyd-0002S0-EE
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jan 2009 12:01:31 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id F26338400A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2009 11:54:52 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 965BB84009E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2009 11:54:52 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (e178111026.adsl.alicedsl.de
-	[85.178.111.26]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2009 11:54:52 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 1BAD93C0B8; Thu, 15 Jan 2009 11:54:52 +0100 (CET)
-Date: Thu, 15 Jan 2009 11:54:52 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090115105451.GA5591@rhein.zuhause.netz>
-References: <496E4ABD.3010605@gmx.net>
-MIME-Version: 1.0
-In-Reply-To: <496E4ABD.3010605@gmx.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: write access for GNUtoo
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LNQE6-00033n-39
+	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 12:17:30 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LNQ7c-0001yF-Ud
+	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 11:10:48 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 15 Jan 2009 11:10:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 15 Jan 2009 11:10:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 15 Jan 2009 12:10:39 +0100
+Message-ID: <gkn5jf$7gl$1@ger.gmane.org>
+References: <20090115061418.GA13352@denix.org> <gkmmn6$pmf$1@ger.gmane.org>
+	<20090115074118.GC7020@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
+In-Reply-To: <20090115074118.GC7020@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 11:01:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Jan 2009 11:17:30 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 14, 2009 at 09:27:41PM +0100, Robert Schuster wrote:
-> Hi,
-> woglinde and me are proposing write access for OE user GNUtoo.
-> 
-> He has been working with OE for a while now, contributed a few bug
-> reports[0] and recently started to work on more complicated things
-> (namely Perl).
-> 
-> Opinons?
-> 
-> Regards
-> Robert
-> 
+On 15-01-09 08:41, Khem Raj wrote:
+> On (15/01/09 07:56), Koen Kooi wrote:
+>> On 15-01-09 07:14, Denys Dmytriyenko wrote:
+>>
+>>> libvolume-id-dev does not provide the actual .so library, but it contains a
+>>> symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!)
+>>> instead of ../../lib/ one...
+>> That's the intended behaviours, since installing the packages will have
+>> it point to ${libdir}/libvolume.so.0 on your device. I'm not sure if we
+>> want to patch every package to use relative symlinks.
+>
+> We would use -dev packages on staged area normally to compile other apps
+> depending on a given packge if we do not fix the symlink I think it will
+> try to link to wrong library.
 
-+1 From me
+We don't use the -dev packages to populate staging :) I keep trying to 
+convince Richard that we should use them, but he keeps coming up with 
+good reasons not to do so :)
 
-Bye Henning
+regards,
+
+Koen
+
 
 
