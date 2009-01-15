@@ -1,33 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LNXYD-0007D2-Aj
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 20:06:46 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LNXRj-0004hq-EV
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 19:00:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 19:00:03 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <trini@kernel.crashing.org>) id 1LNXrq-0004ZD-Kk
+	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 20:27:03 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090115192019.NREL12838.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 19:00:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 15 Jan 2009 14:20:19 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id 3vLH1b00B1E665w04vLH9H; Thu, 15 Jan 2009 14:20:19 -0500
+X-Authority-Analysis: v=1.0 c=1 a=SXV9vV5SJNIA:10 a=e6x8O5mGaEsA:10
+	a=Kdko7-liitwbtSjYBPUA:9 a=j2D6ZA7kWbhB28zVfo4A:7
+	a=vVbbdM_eOO_rCakNDTyfUJqmiusA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Thu, 15 Jan 2009 12:20:17 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 15 Jan 2009 19:58:40 +0100
-Message-ID: <gko110$hqq$1@ger.gmane.org>
-References: <gkn9vn$mh4$1@ger.gmane.org> <20090115172526.GD15943@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
-In-Reply-To: <20090115172526.GD15943@denix.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Overlay hosting and mirroring on git.oe.net
+Message-ID: <20090115192017.GJ6710@smtp.west.cox.net>
+References: <20090115061418.GA13352@denix.org> <gkmmn6$pmf$1@ger.gmane.org>
+	<20090115074118.GC7020@gmail.com> <gkn5jf$7gl$1@ger.gmane.org>
+	<19c1b8a90901151053n5402dcbdle52c090fe5c94c71@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <19c1b8a90901151053n5402dcbdle52c090fe5c94c71@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +38,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 19:06:46 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Jan 2009 19:27:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 15-01-09 18:25, Denys Dmytriyenko wrote:
-> On Thu, Jan 15, 2009 at 01:25:27PM +0100, Koen Kooi wrote:
->> Hi,
->>
->> There are a lot of OE based projects around that use an overlay to manage
->> their tweaks (e.g. gumstix, openpandora, arago), which has pros and cons. A
->> while ago I was talking to John Willis (of open2x and openpandora fame) and
->> he liked the idea of mirroring the pandora overlay on git.oe.net to make it
->> more visible and to make it easier for OE developers to work on making
->> pieces of it upstream safe.
->> I think a git mirror of poky would fall in this category as well.
->>
->> What do you think of this?
->
-> Will those be read-only mirrors or read-writeable branches/forks?
+On Thu, Jan 15, 2009 at 10:53:50AM -0800, Khem Raj wrote:
+> On Thu, Jan 15, 2009 at 3:10 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> > On 15-01-09 08:41, Khem Raj wrote:
+> >>
+> >> On (15/01/09 07:56), Koen Kooi wrote:
+> >>>
+> >>> On 15-01-09 07:14, Denys Dmytriyenko wrote:
+> >>>
+> >>>> libvolume-id-dev does not provide the actual .so library, but it
+> >>>> contains a
+> >>>> symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!)
+> >>>> instead of ../../lib/ one...
+> >>>
+> >>> That's the intended behaviours, since installing the packages will have
+> >>> it point to ${libdir}/libvolume.so.0 on your device. I'm not sure if we
+> >>> want to patch every package to use relative symlinks.
+> >>
+> >> We would use -dev packages on staged area normally to compile other apps
+> >> depending on a given packge if we do not fix the symlink I think it will
+> >> try to link to wrong library.
+> >
+> > We don't use the -dev packages to populate staging :) I keep trying to
+> > convince Richard that we should use them, but he keeps coming up with good
+> > reasons not to do so :)
+> 
+> Hmm then why do we generate them ?. We do not need these packages on
+> target unless we switch to
+> native development on target.
 
-That'd be for the overlay owner(s) to decide.
+SDKs, which oddly DO let you do development vs them, so any problem
+stopping us from using them for staging is a problem here.  But that's
+all part of another thread RP and I need to start.  Or one of us does,
+at least.
 
-regards,
-
-Koen
-
-
+-- 
+Tom Rini
 
 
