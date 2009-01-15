@@ -1,22 +1,23 @@
-Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LNUnW-0003Kn-U0
+	(envelope-from <denis@denix.org>) id 1LNUpv-0003PW-EV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jan 2009 17:10:23 +0100
-Received: from gandalf.denix.org ([71.255.246.155]) by vms173007.mailsrvcs.net
+	Thu, 15 Jan 2009 17:12:51 +0100
+Received: from gandalf.denix.org ([71.255.246.155]) by vms173005.mailsrvcs.net
 	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
-	with ESMTPA id <0KDI004AFSAWFSQ0@vms173007.mailsrvcs.net> for
+	with ESMTPA id <0KDI00JE6S2P10P0@vms173005.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	15 Jan 2009 09:57:02 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 17CE16B83B5; Thu,
-	15 Jan 2009 10:58:23 -0500 (EST)
-Date: Thu, 15 Jan 2009 10:58:23 -0500
+	15 Jan 2009 09:52:16 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 99E766B83B5; Thu,
+	15 Jan 2009 10:51:59 -0500 (EST)
+Date: Thu, 15 Jan 2009 10:51:59 -0500
 From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <gkmmn6$pmf$1@ger.gmane.org>
+In-reply-to: <20090115073709.GB7020@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090115155823.GC15943@denix.org>
+Message-id: <20090115155159.GB15943@denix.org>
 MIME-version: 1.0
-References: <20090115061418.GA13352@denix.org> <gkmmn6$pmf$1@ger.gmane.org>
+References: <20090115061418.GA13352@denix.org>
+	<20090115073709.GB7020@gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
 Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -32,42 +33,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 16:10:24 -0000
+X-List-Received-Date: Thu, 15 Jan 2009 16:12:51 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Jan 15, 2009 at 07:56:37AM +0100, Koen Kooi wrote:
-> On 15-01-09 07:14, Denys Dmytriyenko wrote:
->
->> libvolume-id-dev does not provide the actual .so library, but it contains 
->> a
->> symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!)
->> instead of ../../lib/ one...
->
-> That's the intended behaviours, since installing the packages will have it 
-> point to ${libdir}/libvolume.so.0 on your device. I'm not sure if we want 
-> to patch every package to use relative symlinks.
+On Wed, Jan 14, 2009 at 11:37:10PM -0800, Khem Raj wrote:
+> On (15/01/09 01:14), Denys Dmytriyenko wrote:
+> > I was debugging the strange behavior of one of my boxes pulling in libc6-dev 
+> > into the filesystem image and it happened to be because udev pulled in 
+> > libvolume-id-dev instead of libvolume-id0... It worked as expected on the 
+> > other box, though.
+> > 
+> > Several people on IRC have seen this lingering bug before, but no fix was 
+> > available. Koen mentioned it got fixed for him by rebuilding udev...
+> > 
+> > After some investigation I found out that both libvolume-id packages (-dev and 
+> > regular) are registered to provide libvolume_id.so.0 and the one appearing 
+> 
+> I think -dev provides libvolume_id.so and libvolume-id provides
+> libvolume-id.so.* they are different. Our shlib handler should be able
+> to figure that out. I still wonder what caused it to pull libc-dev
+> though.
 
-So far, all other packages I looked at, have relative or same-dir symlinks in 
-corresponding -dev (libc, libpng, jpeg, gnutls etc)
-Since -dev gets run through shlib magic outside of the main package with 
-the actual .so, relative or same-dir symlinks are broken, leading to a normal 
-behavior :)
+The shlib handler from the package.bbclass examines every package by running 
+objdump and looking for SONAME/NEEDED sections of all the executables and 
+lib*.so files. So, the real .so library from libvolume-id gets identified as 
+a provider for libvolume_id.so.0, which is correct. Then libvolume-id-dev 
+gets examined, and it does not provide any shlibs. But since it has a symlink, 
+which points to a real host .so, objdump picks up its SONAME and -dev gets 
+also identified as a provider of libvolume_id.so.0, which is wrong.
 
->> The first patch attached fixes this in udev and should be a no brainer. 
->> Unless
->> someone objects, I'll push it in in a day or two.
->>
->> Since I was debugging the code which actually does this shlib magic in
->> package.bbclass, I thought it might be useful to prevent this kind of 
->> issues
->> in the future by skipping symlinks while looking for SONAME/NEEDED in the
->> objdump - please see the second patch attached and provide feedback.
->
-> The change to package.bbclass looks OK to me, if that gets applied we can 
-> leave out the udev patch.
+Since most of other libraries with -dev split have either relative symlinks 
+(../..) or pointing to the same directory, they never get into this issue, 
+becuase when -dev is examined, the symlink is broken, as -dev gets installed 
+into a separate directory.
 
-That's the goal :)
+That's the reason for my patch to package.bbclass to skip symlinks when 
+running objdump.
+
+libc-dev gets pulled in by libvolume-id-dev, for some reason, according to:
+libvolume_id_dev -> libc6_dev [style=dotted];
+
+> > last in os.walk() gets pulled in by udev. The order of files provided by 
+> > os.walk() depends on parallel builds and phase of the Moon.
+> > 
+> > libvolume-id-dev does not provide the actual .so library, but it contains a 
+> > symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!) 
+> > instead of ../../lib/ one...
+> > 
+> > The first patch attached fixes this in udev and should be a no brainer. Unless 
+> > someone objects, I'll push it in in a day or two.
+> 
+> Seems like we need this to work in a sysrooted env. 
+
+With the patch to package.bbclass it can be left as is.
+
+> > Since I was debugging the code which actually does this shlib magic in 
+> > package.bbclass, I thought it might be useful to prevent this kind of issues 
+> > in the future by skipping symlinks while looking for SONAME/NEEDED in the 
+> > objdump - please see the second patch attached and provide feedback.
+> 
+> But we need to process symlinks to find out package that contains target so that we can create
+> dependency on the package that contains target like in this case we need
+> to create dependency on libvolume-id for libvolume-id-dev because the
+> symlink points to a file provided by libvolume-id
+
+I'm not sure where this dependency gets built, but I believe it is not done by 
+the package_do_shlibs() code from package.bbclass I'm referring to. This code 
+populates ${STAGING_DIR_HOST}/shlibs, listing .so each pkg provides.
+
+I guess we need more Core devs to look into this issue to verify the safety of 
+this patch.
+
+> btw. nice analysis
+
+Thanks.
 
 -- 
 Denys
