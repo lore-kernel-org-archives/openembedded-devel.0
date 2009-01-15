@@ -1,29 +1,42 @@
-Received: from [62.142.5.111] (helo=emh05.mail.saunalahti.fi)
+Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philippedeswert@scarlet.be>) id 1LNMvv-0001WL-HQ
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 08:46:31 +0100
-Received: from saunalahti-vams (vs3-10.mail.saunalahti.fi [62.142.5.94])
-	by emh05-2.mail.saunalahti.fi (Postfix) with SMTP id 6759D8BEC8
-	for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 09:39:53 +0200 (EET)
-Received: from emh05.mail.saunalahti.fi ([62.142.5.111])
-	by vs3-10.mail.saunalahti.fi ([62.142.5.94])
-	with SMTP (gateway) id A054A16309C; Thu, 15 Jan 2009 09:39:53 +0200
-Received: from [192.168.11.65] (a83-245-252-47.elisa-laajakaista.fi
-	[83.245.252.47])
-	by emh05.mail.saunalahti.fi (Postfix) with ESMTP id 4BB0727D84
-	for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 09:39:52 +0200 (EET)
-From: Philippe De Swert <philippedeswert@scarlet.be>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <494205F8.2040400@gmx.net>
-References: <494205F8.2040400@gmx.net>
-Date: Thu, 15 Jan 2009 09:39:08 +0200
-Message-Id: <1232005148.2941.3.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.2 
-X-Antivirus: VAMS
-Subject: Re: OpenEmbedded @ FOSDEM - CfP - deadline: 2008-12-20
+	(envelope-from <raj.khem@gmail.com>) id 1LNMxL-0001Xn-Mf
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Jan 2009 08:48:01 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so1068597rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jan 2009 23:41:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=gW+9hFvHuxgvRs5adrB93Kbq8vK8FAGGYvP2E9LTxu0=;
+	b=igGCfaXhVXVatcDJ+UPOiw6zkdSEHxghUFY5Va0xwXj6aRXS5r6PyfURW8MtMwpDVo
+	d9x9fo793HZL2p9gv7iA8YM1A6qd3+GOVs+c+U6PWnzvg5rsL0b7Ng5pkJakGgs5RGqL
+	s7l+VazASGhBNDZHPFK3XwWzt5n+PDIVYUJYc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=BbSLwHhTVNEjirdisX1WJfFufoGcVlZwKgruqgPqjxaGpUq0A+INJZxypy7QKJGHAs
+	Yl66xF9Zco9Lk+s2dgYOQf/4Re1ROCSUiCEbWqAK1t79fAr7JidQ5cOt17FxRD0iazSk
+	jBdvA6uio+Ekkqne0HvLvb0cozfAET352qppg=
+Received: by 10.114.211.2 with SMTP id j2mr677727wag.139.1232005280812;
+	Wed, 14 Jan 2009 23:41:20 -0800 (PST)
+Received: from localhost (adsl-71-146-7-99.dsl.pltn13.sbcglobal.net
+	[71.146.7.99])
+	by mx.google.com with ESMTPS id m28sm49899943poh.25.2009.01.14.23.41.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 14 Jan 2009 23:41:20 -0800 (PST)
+Date: Wed, 14 Jan 2009 23:41:18 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090115074118.GC7020@gmail.com>
+References: <20090115061418.GA13352@denix.org> <gkmmn6$pmf$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gkmmn6$pmf$1@ger.gmane.org>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,30 +50,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 07:46:31 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Jan 2009 07:48:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi all,
+On (15/01/09 07:56), Koen Kooi wrote:
+> On 15-01-09 07:14, Denys Dmytriyenko wrote:
+>
+>> libvolume-id-dev does not provide the actual .so library, but it contains a
+>> symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!)
+>> instead of ../../lib/ one...
+>
+> That's the intended behaviours, since installing the packages will have  
+> it point to ${libdir}/libvolume.so.0 on your device. I'm not sure if we  
+> want to patch every package to use relative symlinks.
 
-On Fri, 2008-12-12 at 07:34 +0100, Robert Schuster wrote:
-> Hi,
-> as you read in the last mail OpenEmbedded will not get it own room at
-> the upcomming FOSDEM. Nevertheless you will have the chance of
-> presenting your OE-related talk as part of the 'Embedded devroom'.
-> 
-> The Embedded devroom is organized by Philippe de Swert. So eventually
-> all organisation stuff concerning the room and your talk has to be done
-> with him.
+We would use -dev packages on staged area normally to compile other apps
+depending on a given packge if we do not fix the symlink I think it will
+try to link to wrong library.
 
-Anybody having submitted anything as I have not recieved anything yet
-and really need to make the program...
 
-Please send stuff to me directly to be sure I got it.
-
-Thank you,
-
-Philippe
-
+>
+>> The first patch attached fixes this in udev and should be a no brainer. Unless
+>> someone objects, I'll push it in in a day or two.
+>>
+>> Since I was debugging the code which actually does this shlib magic in
+>> package.bbclass, I thought it might be useful to prevent this kind of issues
+>> in the future by skipping symlinks while looking for SONAME/NEEDED in the
+>> objdump - please see the second patch attached and provide feedback.
+>
+> The change to package.bbclass looks OK to me, if that gets applied we  
+> can leave out the udev patch.
+>
+> regards,
+>
+> Koen
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
