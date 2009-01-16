@@ -1,36 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LNYCd-0005Dz-1a
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 20:48:31 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LNY66-0006VJ-Mw
-	for openembedded-devel@openembedded.org; Thu, 15 Jan 2009 19:41:46 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 19:41:46 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 15 Jan 2009 19:41:46 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 15 Jan 2009 20:41:31 +0100
-Message-ID: <gko3hb$3vt$1@ger.gmane.org>
-References: <20090115061418.GA13352@denix.org>
-	<gkmmn6$pmf$1@ger.gmane.org>	<20090115074118.GC7020@gmail.com>
-	<gkn5jf$7gl$1@ger.gmane.org>	<19c1b8a90901151053n5402dcbdle52c090fe5c94c71@mail.gmail.com>
-	<20090115192017.GJ6710@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
-In-Reply-To: <20090115192017.GJ6710@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
+	(envelope-from <andrea.adami@gmail.com>) id 1LNmI4-0004AC-Lc
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Jan 2009 11:51:04 +0100
+Received: by bwz8 with SMTP id 8so3945805bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jan 2009 02:44:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ZG8dsYm4uHrVcpvD/6LrRc8y6UcmBvQajn67UQz+XE0=;
+	b=PaSnGVWCUDCEJqGgR5rp0t3rWFpvIf3+3vqSD4uv5HaSKpGPalAhTFVZxJGaMi3GcK
+	GpqYrFmOptVAKKCje80JFWVnPntMIhMXlgXOiGcEoOtGtlOQVrYL8ro8UBPVc+4Pobss
+	rE9ywyvjb5ILZAJN/Vn2pbrlBUInATmweaGnc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Kbb3W1UNFBgF4PexK1f72AKaapq665ITTngHeEpqU9FzSfUhVO2RdUTrBWSkXKuuqL
+	chKHeWW+lD3dHUPjyHEXMBsy+iizF/d2af+5kwYbXZ1YSw49+VGgFyQBmtrQtmRYeV8l
+	2zPt2gQDtjOUa52xp59RlwhZ3ef6lna5W45Bs=
+MIME-Version: 1.0
+Received: by 10.181.224.3 with SMTP id b3mr793814bkr.183.1232102659219; Fri, 
+	16 Jan 2009 02:44:19 -0800 (PST)
+In-Reply-To: <d1b08f940901150928h56ede408u2d070606fbe6b7bc@mail.gmail.com>
+References: <d1b08f940901150928h56ede408u2d070606fbe6b7bc@mail.gmail.com>
+Date: Fri, 16 Jan 2009 11:44:19 +0100
+Message-ID: <d1b08f940901160244md17fed1n2d26175561a51ec9@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: ARM bootloaders (Zaurus) and CMDLINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,46 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2009 19:48:31 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 16 Jan 2009 10:51:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 15-01-09 20:20, Tom Rini wrote:
-> On Thu, Jan 15, 2009 at 10:53:50AM -0800, Khem Raj wrote:
->> On Thu, Jan 15, 2009 at 3:10 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
->>> On 15-01-09 08:41, Khem Raj wrote:
->>>> On (15/01/09 07:56), Koen Kooi wrote:
->>>>> On 15-01-09 07:14, Denys Dmytriyenko wrote:
->>>>>
->>>>>> libvolume-id-dev does not provide the actual .so library, but it
->>>>>> contains a
->>>>>> symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!)
->>>>>> instead of ../../lib/ one...
->>>>> That's the intended behaviours, since installing the packages will have
->>>>> it point to ${libdir}/libvolume.so.0 on your device. I'm not sure if we
->>>>> want to patch every package to use relative symlinks.
->>>> We would use -dev packages on staged area normally to compile other apps
->>>> depending on a given packge if we do not fix the symlink I think it will
->>>> try to link to wrong library.
->>> We don't use the -dev packages to populate staging :) I keep trying to
->>> convince Richard that we should use them, but he keeps coming up with good
->>> reasons not to do so :)
->> Hmm then why do we generate them ?. We do not need these packages on
->> target unless we switch to
->> native development on target.
->
-> SDKs, which oddly DO let you do development vs them, so any problem
-> stopping us from using them for staging is a problem here.  But that's
-> all part of another thread RP and I need to start.  Or one of us does,
-> at least.
+An old bootlog illustrating our purposes is there:
+http://de.pastebin.ca/1309948
 
-You need things as shlib providers and stamps as well for 
-packaged-staging, so using only -dev packages is only part of the solution.
+As you see, u-boot passes the customized mtdparts via cmdline (not
+sure about ATAGs) and the 2.6.26-kexecboot-kernel finds these and does
+NOT default to the standard partitioning hardcoded in the sources.
 
-regards,
+The code in the initramfs parses then /proc/cmdline and passes the
+right arguments to the kexecbooted kernel.
 
-Koen
+We want to achieve this without u-boot...
 
+TIA
 
+Andrea
 
 
