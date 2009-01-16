@@ -1,21 +1,23 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [82.119.242.94] (helo=mail.suse.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LNqMo-0006Mn-GL
-	for openembedded-devel@openembedded.org; Fri, 16 Jan 2009 16:12:14 +0100
-Received: (qmail 31914 invoked by uid 813007); 16 Jan 2009 15:05:29 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 16 Jan 2009 15:05:29 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <utx@penguin.cz>) id 1LNrDz-0004Jo-Qo
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Jan 2009 17:07:11 +0100
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id E96B66280F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jan 2009 17:00:27 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jan 2009 16:05:24 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
-References: <20090116145500.F0BA0E8008@amethyst.openembedded.net>
-In-Reply-To: <20090116145500.F0BA0E8008@amethyst.openembedded.net>
-MIME-Version: 1.0
-Message-Id: <200901161605.25740.openembedded@haerwu.biz>
-Subject: Re: [oe-commits] Ulf Samuelsson : linux: added 2.6.28 for at91sam9263ek (based on ulf/ atmel branch)
+In-Reply-To: <d1b08f940901160534n2d204a36r43494e1a6ed855c5@mail.gmail.com>
+References: <d1b08f940901150928h56ede408u2d070606fbe6b7bc@mail.gmail.com>
+	<1232109249.4988.2686.camel@hammer.suse.cz>
+	<d1b08f940901160534n2d204a36r43494e1a6ed855c5@mail.gmail.com>
+Date: Fri, 16 Jan 2009 17:00:27 +0100
+Message-Id: <1232121627.4988.2795.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.1.1 
+Subject: Re: ARM bootloaders (Zaurus) and CMDLINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,35 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jan 2009 15:12:14 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 16 Jan 2009 16:07:12 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 16 of January 2009 15:54:55 GIT User account wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 48fb51ab6a3eab956496ce09ca3015e38f581bf8
-> Author: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-> Date:   Mon Dec 29 16:25:22 2008 +0100
+Andrea Adami wrote:
 
-> linux: added 2.6.28 for at91sam9263ek (based on ulf/atmel branch)
+> For reference I'll post the disassembled bootloader as found in this post:
+> 
+> http://www.oesf.org/forum/index.php?showtopic=3361&hl=only+root
+> 
+> This was back in 2004...preparatory work for the extended updater
+> capable to resize nand (sources in survive / fsro_resize.c).
 
-Sorry Ulf, I forgot to change author of commit. This change was result 
-of few Ulf commits and few mines - just did not wanted to pollute OE 
-with many one line changing commits which I had in my private tree.
+Thanks for the reference.
 
-I would also thank for Atmel company which donated AT91SAM9263-EK board 
-which I used for that work. It is really nice to have developer board to 
-work on misc things - I used Zaurus before for such stuff.
+> So, writing a new partition schema is possible...the problem is read
+> it with 2.6.2x kernels!
 
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+My previous mail contains a patch porting nandlogical to kernel 2.6
+userspace. Porting to kernel space may require some work.
 
+Kernel 2.4 used a trick - user space utility called writerominfo read
+some of these values and sent them to kernel.
+
+
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
