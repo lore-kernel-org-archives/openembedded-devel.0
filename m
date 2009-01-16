@@ -1,36 +1,21 @@
-Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LNox9-0007H3-Kl
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jan 2009 14:41:39 +0100
-Received: by bwz8 with SMTP id 8so4150891bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jan 2009 05:34:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=1CrJ44R65h4txYNbsiJjUUVEUooKG4ZjCy1RyaBoDAk=;
-	b=uUx8x/kHJp21xigkiR1zqzVn1n4a0iAgsl3j6cvtzc4XFNBiGwju1o9zgf5DL0rAAW
-	zeaB8wtIPjLeMSIgVZ35Ugz2CLjvJqxDkz42esTlaGW3WiVXDomD8QsJg28Mbcty8O5y
-	lg0B9T3xD0qdDNHcrtmLp2vM+wUX7OJ8xf5Ik=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Ymo2ntFdXy3CJVF3bJkp1iuQq2CaBF1ZqOIQSX2TJTeeBBjJfJy93qEHxsdclzdlsk
-	XoFo29Wj8WrU+ZDh2ap6qCxjzC8MdmBaSxMS3QSWBgw9vV/kytkHccU/Hv+Kh7yhX9as
-	zgSNpMaMpeGl7Dwd/oIxkVOkm/SijrMNQqG5o=
-MIME-Version: 1.0
-Received: by 10.181.209.5 with SMTP id l5mr594086bkq.86.1232112892772; Fri, 16 
-	Jan 2009 05:34:52 -0800 (PST)
-In-Reply-To: <1232109249.4988.2686.camel@hammer.suse.cz>
-References: <d1b08f940901150928h56ede408u2d070606fbe6b7bc@mail.gmail.com>
-	<1232109249.4988.2686.camel@hammer.suse.cz>
-Date: Fri, 16 Jan 2009 14:34:52 +0100
-Message-ID: <d1b08f940901160534n2d204a36r43494e1a6ed855c5@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1LNqMo-0006Mn-GL
+	for openembedded-devel@openembedded.org; Fri, 16 Jan 2009 16:12:14 +0100
+Received: (qmail 31914 invoked by uid 813007); 16 Jan 2009 15:05:29 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 16 Jan 2009 15:05:29 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: ARM bootloaders (Zaurus) and CMDLINE
+Date: Fri, 16 Jan 2009 16:05:24 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
+References: <20090116145500.F0BA0E8008@amethyst.openembedded.net>
+In-Reply-To: <20090116145500.F0BA0E8008@amethyst.openembedded.net>
+MIME-Version: 1.0
+Message-Id: <200901161605.25740.openembedded@haerwu.biz>
+Subject: Re: [oe-commits] Ulf Samuelsson : linux: added 2.6.28 for at91sam9263ek (based on ulf/ atmel branch)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,26 +29,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jan 2009 13:41:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Jan 2009 15:12:14 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-> other significant differences, and finally create flashing utility,
-> which would create correct checksums (now NAND diag checks fail).
-I insisted for nandlogical committed in OE when I read your post in OESF ;-)
+On Friday 16 of January 2009 15:54:55 GIT User account wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 48fb51ab6a3eab956496ce09ca3015e38f581bf8
+> Author: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+> Date:   Mon Dec 29 16:25:22 2008 +0100
 
-For reference I'll post the disassembled bootloader as found in this post:
+> linux: added 2.6.28 for at91sam9263ek (based on ulf/atmel branch)
 
-http://www.oesf.org/forum/index.php?showtopic=3361&hl=only+root
+Sorry Ulf, I forgot to change author of commit. This change was result 
+of few Ulf commits and few mines - just did not wanted to pollute OE 
+with many one line changing commits which I had in my private tree.
 
-This was back in 2004...preparatory work for the extended updater
-capable to resize nand (sources in survive / fsro_resize.c).
+I would also thank for Atmel company which donated AT91SAM9263-EK board 
+which I used for that work. It is really nice to have developer board to 
+work on misc things - I used Zaurus before for such stuff.
 
-So, writing a new partition schema is possible...the problem is read
-it with 2.6.2x kernels!
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Regards
 
-Andrea
 
 
