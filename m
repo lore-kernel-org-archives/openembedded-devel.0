@@ -1,43 +1,27 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1LNsHW-0002sV-M2
+	(envelope-from <denis@denix.org>) id 1LNvMs-0002lj-G9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jan 2009 18:14:54 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so775573fgb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jan 2009 09:08:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	bh=Ub5cs8yR4JIdWRQSjKIhVv2SvnZ5QbZXLAAv2PAYQh0=;
-	b=UN8KcXKBy/fVEJDsGI6E6zBHC50XEEukBePnn+Qa8Y/iRQXNBMRSbdHbdOImmYwA43
-	tLOrv4pgB1Fa/dgs8IH3q3pWR0dI6/HRdOqHxx2OOE35dV3SDdnXXOq2ncf4iTmtz7Te
-	E0TFF2iExlRePbX9KWrPqhwRWbUNW6k5ibNJg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:message-id;
-	b=VGsn2in1+vyyN6NhN3Lozn/59AlKCjNDmdx3QR1R30l8swe4z8lEfcoQCNJDziTrNP
-	du3iFUYfT2iARiS9bUWHJ/LeEQ/z6TZuhr5dCQkvsxzdCR+zeQKkX2QrYUNoW+p3rQr9
-	UVboUNiVz3KMiIAe4xtnE+mL6Q50xcA+zm4us=
-Received: by 10.86.4.2 with SMTP id 2mr78523fgd.4.1232125690352;
-	Fri, 16 Jan 2009 09:08:10 -0800 (PST)
-Received: from is.home (93-81-71-14.broadband.corbina.ru [93.81.71.14])
-	by mx.google.com with ESMTPS id 4sm1466640fgg.44.2009.01.16.09.08.08
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 16 Jan 2009 09:08:09 -0800 (PST)
-From: Yuri Bushmelev <jay4mail@gmail.com>
+	Fri, 16 Jan 2009 21:32:38 +0100
+Received: from gandalf.denix.org ([71.255.246.155]) by vms173005.mailsrvcs.net
+	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
+	with ESMTPA id <0KDK007C3ZE3BAO1@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	16 Jan 2009 14:25:21 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id CEC106B83B5; Fri,
+	16 Jan 2009 15:25:14 -0500 (EST)
+Date: Fri, 16 Jan 2009 15:25:14 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <20090111180741.GF17627@excalibur.local>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jan 2009 20:08:03 +0300
-User-Agent: KMail/1.9.10
-References: <d1b08f940901150928h56ede408u2d070606fbe6b7bc@mail.gmail.com>
-	<d1b08f940901160534n2d204a36r43494e1a6ed855c5@mail.gmail.com>
-	<1232121627.4988.2795.camel@hammer.suse.cz>
-In-Reply-To: <1232121627.4988.2795.camel@hammer.suse.cz>
-MIME-Version: 1.0
-Message-Id: <200901162008.03815.jay4mail@gmail.com>
-Subject: Re: ARM bootloaders (Zaurus) and CMDLINE
+Message-id: <20090116202514.GA24280@denix.org>
+MIME-version: 1.0
+References: <20090111152021.47737188463@amethyst.openembedded.net>
+	<20090111170659.GC17627@excalibur.local> <gkdanl$3ht$1@ger.gmane.org>
+	<20090111175759.GE17627@excalibur.local>
+	<20090111180741.GF17627@excalibur.local>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Koen Kooi : mtd-utils: add 1.2.0+git for ubifs-support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,18 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jan 2009 17:14:54 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Jan 2009 20:32:38 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-> Kernel 2.4 used a trick - user space utility called writerominfo read
-> some of these values and sent them to kernel.
+On Sun, Jan 11, 2009 at 07:07:41PM +0100, Stefan Schmidt wrote:
+> Hello.
+> 
+> On Sun, 2009-01-11 at 18:57, Stefan Schmidt wrote:
+> > 
+> > On Sun, 2009-01-11 at 18:36, Koen Kooi wrote:
+> > > On 11-01-09 18:06, Stefan Schmidt wrote:
+> > 
+> > Now the install of efsprogs-libs fails:
+> > 
+> > | making install-shlibs in lib/et
+> > | make[1]: Entering directory
+> > `/home/stefan/Projekte/OpenEmbedded/build/openmoko/tmp/work/armv4t-angstrom-linux-gnueabi/e2fsprogs-libs-1.39-r1/e2fsprogs-libs-1.39/lib/et'
+> > |       MKINSTALLDIRS /usr/lib /usr/lib
+> > | make[1]: MKINSTALLDIRS@: Command not found
+> > 
+> > Do you use e2fsprogs-libs-1.42.2 or e2fsprogs-libs-1.39?
+> 
+> With 1.42.2 it works fine here. Bumped preferred version for the om stuff.
 
-Stanislav, can you please explain this a bit more?
+First, the correct version is 1.41.2.
+
+Second, it looks like e2fsprogs-libs depends on gettext-native, otherwise it 
+gives this nasty error message during do_configure:
+
+configure.in:545: error: possibly undefined macro: AM_GNU_GETTEXT
+
+Not many people see this issue, as their gettext-native is built earlly on.
 
 -- 
-Yuri Bushmelev
+Denys
 
 
