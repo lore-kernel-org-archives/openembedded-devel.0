@@ -1,29 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LO46b-0000vA-N5
-	for openembedded-devel@openembedded.org; Sat, 17 Jan 2009 06:52:25 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LO400-0000GD-1z
-	for openembedded-devel@openembedded.org; Sat, 17 Jan 2009 05:45:36 +0000
-Received: from 203.117.215.163 ([203.117.215.163])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 17 Jan 2009 05:45:36 +0000
-Received: from robk by 203.117.215.163 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 17 Jan 2009 05:45:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rob Kramer <robk@starhub.net.sg>
-Date: Sat, 17 Jan 2009 13:45:08 +0800
-Message-ID: <gkrr9l$nfh$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: 203.117.215.163
-User-Agent: KNode/0.10.9
-Sender: news <news@ger.gmane.org>
-Subject: Trouble creating virtual library provider package..
+	(envelope-from <openembedded@haerwu.biz>) id 1LOHnH-0007hj-HL
+	for openembedded-devel@openembedded.org; Sat, 17 Jan 2009 21:29:23 +0100
+Received: (qmail 8430 invoked by uid 813007); 17 Jan 2009 20:22:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 17 Jan 2009 20:22:33 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 17 Jan 2009 21:22:24 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
+References: <20090117123304.79177189331@amethyst.openembedded.net>
+In-Reply-To: <20090117123304.79177189331@amethyst.openembedded.net>
+MIME-Version: 1.0
+Message-Id: <200901172122.25511.openembedded@haerwu.biz>
+Subject: Re: [oe-commits] Tim 'timtim' Ellis : linux-orion: Add kernel for Marvell Orion based devices (replaces linux-linkstationarm) , initially supporting:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,30 +29,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jan 2009 05:52:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7Bit
+X-List-Received-Date: Sat, 17 Jan 2009 20:29:23 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi all,
+On Saturday 17 of January 2009 13:33:01 GIT User account wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 5f7f10f181bdc127786fce9a43e4ca71ae4ab03c
+> URL:   
+> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=5f7f10f
+>181bdc127786fce9a43e4ca71ae4ab03c
+>
+> Author: Tim 'timtim' Ellis <tim.ellis@foonas.org>
+> Date:   Sat Jan 17 12:28:42 2009 +0000
+>
+> linux-orion: Add kernel for Marvell Orion based devices (replaces
 
-How would I go about if I'd like to have two packages that provide the same
-thing? For example, I have package freetype, and freetype-led (which has a
-device-specific hack). Or ffmpeg and ffmpeg-minimal (which builds the
-smallest possible libavcodec/format). The right package is selected by the
-image recipe, via a task. 
+Few problems:
 
-Is the normal way to do this to make a virtual/freetype and
-PREFERRED_PROVIDER? I tried to do this, but still have trouble with double
-providers etc. It gets tricky if package-name munging is involved, where
-the final package is called libfreetype6_2.3.7-r4_i586.ipk, and not
-freetype_2.3.7-r4_i586.ipk (and freetype-led_2.3.7-r4_i586.ipk).
+1. KERNEL_IMAGETYPE = "uImage" - this should be rather in machine config 
+2. You use linux-2.6.27.10.tar.bz2 - please change it to 2.6.27 tarball 
+   with 2.6.27.10 patch added. It will save bandwidth for autobuilders 
+   which usually have 2.6.27 already fetched for other devices.
 
-If this is the right way, can someone point to a good (simple) example of a
-virtual library provider?
+This also shows that we should merge linux.inc more into 
+kernel.bbclass...
 
-Cheers!
 
-    Rob
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
