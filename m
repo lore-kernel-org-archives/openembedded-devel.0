@@ -1,32 +1,34 @@
-Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LOPMP-0001pj-TT
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jan 2009 05:34:10 +0100
-Received: from gandalf.denix.org ([71.255.246.155])
-	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
-	(built Apr
-	3 2006)) with ESMTPA id <0KDN0014CGDGEKP3@vms042.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	17 Jan 2009 22:27:16 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id DEEC06B83B5; Sat,
-	17 Jan 2009 23:27:15 -0500 (EST)
-Date: Sat, 17 Jan 2009 23:27:15 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <20090116230858.GQ6710@smtp.west.cox.net>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090118042715.GB852@denix.org>
-MIME-version: 1.0
-References: <20090111152021.47737188463@amethyst.openembedded.net>
-	<20090111170659.GC17627@excalibur.local> <gkdanl$3ht$1@ger.gmane.org>
-	<20090111175759.GE17627@excalibur.local>
-	<20090111180741.GF17627@excalibur.local>
-	<20090116202514.GA24280@denix.org>
-	<gkqrif$bjr$1@ger.gmane.org> <20090116205723.GB24280@denix.org>
-	<20090116210120.GC24280@denix.org>
-	<20090116230858.GQ6710@smtp.west.cox.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Koen Kooi : mtd-utils: add 1.2.0+git for ubifs-support
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LOTSU-0005uF-D6
+	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 09:56:42 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LOTLn-0000Di-TG
+	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 08:49:47 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 18 Jan 2009 08:49:47 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 18 Jan 2009 08:49:47 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 18 Jan 2009 09:49:33 +0100
+Message-ID: <gkuqet$ncn$1@ger.gmane.org>
+References: <cover.1232244759.git.andrea.adami@gmail.com>	<b313e1d6307a63ce53bbeaffbf01d842ef6f9e27.1232244759.git.andrea.adami@gmail.com>	<98c252f0e21dc1d58f37dafe492d09b998dad5e5.1232244759.git.andrea.adami@gmail.com>	<cd9f2d057b582d2fb54e80ccc71e72ee1116bdc8.1232244759.git.andrea.adami@gmail.com>	<a75400f3e012a40bf684d0c4537e3310019c8c59.1232244759.git.andrea.adami@gmail.com>	<2c1715b769f3227f74aa46bae8c27587e5387d3e.1232244759.git.andrea.adami@gmail.com>	<45a1b453435a1f916e5540bd0845762636b0ac1f.1232244759.git.andrea.adami@gmail.com>
+	<8c1396b3add963b97e1f9f144c1bdd966ebbce02.1232244759.git.andrea.adami@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
+In-Reply-To: <8c1396b3add963b97e1f9f144c1bdd966ebbce02.1232244759.git.andrea.adami@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 07/14] kexecboot: use custom device table with mmc and event0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jan 2009 04:34:10 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 18 Jan 2009 08:56:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jan 16, 2009 at 04:08:59PM -0700, Tom Rini wrote:
-> On Fri, Jan 16, 2009 at 04:01:20PM -0500, Denys Dmytriyenko wrote:
-> > On Fri, Jan 16, 2009 at 03:57:23PM -0500, Denys Dmytriyenko wrote:
-> > > On Fri, Jan 16, 2009 at 09:43:59PM +0100, Koen Kooi wrote:
-> [snip]
-> > > > The gettext thing has been fixed for a few days now.
-> > > 
-> > > Only gettext-native was fixed.
-> > 
-> > I meant e2fsprogs-libs-native was fixed... e2fsprogs-libs was not.
-> 
-> True enough, but this is probably only one of many things needing fixing
-> for multi-threaded bitbake, which is something else on my long-term
-> list.  I didn't fix the target one for, well, no real good reason I
-> suppose, sorry.  I'll poke it in later if someone doesn't beat me to it.
+On 18-01-09 03:24, Andrea Adami wrote:
 
-It was a real good reason for me, as it was breaking my build :)
-But you are correct - I do use multi-threaded bitbake...
-And I did beat you to it - 1556c15f8aa75c0377ad9b4188276c68b2289e10
-Thanks anyway.
+> --- a/files/device_table-minimal.txt
+> +++ b/files/device_table-minimal.txt
+> @@ -29,10 +29,3 @@
+>   /dev/random	c	644	0	0	1	8	-	-	-
+>   /dev/urandom	c	644	0	0	1	9	-	-	-
+>   /dev/ptmx	c	644	0	0	5	2	-	-	-
+> -
+> -# mmc numbers are assigned dynamicly so if you have other dynamic assigned block devices it may be wrong
+> -/dev/mmcblk0	b	660	0	6	179	0	-	-	-
+> -/dev/mmcblk0p1	b	660	0	6	179	1	-	-	-
+> -/dev/mmcblk0p2	b	660	0	6	179	2	-	-	-
+> -/dev/mmcblk0p3	b	660	0	6	179	3	-	-	-
+> -/dev/event0 	c	660	0	0	13	64	-	-	-
 
--- 
-Denys
+NACK
+
 
 
