@@ -1,25 +1,32 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [206.46.252.42] (helo=vms042pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LOPDX-0001cX-Je
+	(envelope-from <denis@denix.org>) id 1LOPMP-0001pj-TT
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jan 2009 05:24:59 +0100
-Received: from gandalf.denix.org ([71.255.246.155]) by vms173003.mailsrvcs.net
-	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
-	with ESMTPA id <0KDN00FWSFY07ID1@vms173003.mailsrvcs.net> for
+	Sun, 18 Jan 2009 05:34:10 +0100
+Received: from gandalf.denix.org ([71.255.246.155])
+	by vms042.mailsrvcs.net (Sun Java System Messaging Server 6.2-6.01
+	(built Apr
+	3 2006)) with ESMTPA id <0KDN0014CGDGEKP3@vms042.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Sat,
-	17 Jan 2009 22:18:06 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 657FD6B83B5; Sat,
-	17 Jan 2009 23:18:00 -0500 (EST)
-Date: Sat, 17 Jan 2009 23:18:00 -0500
+	17 Jan 2009 22:27:16 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DEEC06B83B5; Sat,
+	17 Jan 2009 23:27:15 -0500 (EST)
+Date: Sat, 17 Jan 2009 23:27:15 -0500
 From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <20090115155159.GB15943@denix.org>
+In-reply-to: <20090116230858.GQ6710@smtp.west.cox.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090118041800.GA852@denix.org>
+Message-id: <20090118042715.GB852@denix.org>
 MIME-version: 1.0
-References: <20090115061418.GA13352@denix.org>
-	<20090115073709.GB7020@gmail.com> <20090115155159.GB15943@denix.org>
+References: <20090111152021.47737188463@amethyst.openembedded.net>
+	<20090111170659.GC17627@excalibur.local> <gkdanl$3ht$1@ger.gmane.org>
+	<20090111175759.GE17627@excalibur.local>
+	<20090111180741.GF17627@excalibur.local>
+	<20090116202514.GA24280@denix.org>
+	<gkqrif$bjr$1@ger.gmane.org> <20090116205723.GB24280@denix.org>
+	<20090116210120.GC24280@denix.org>
+	<20090116230858.GQ6710@smtp.west.cox.net>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
+Subject: Re: Koen Kooi : mtd-utils: add 1.2.0+git for ubifs-support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,85 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jan 2009 04:24:59 -0000
+X-List-Received-Date: Sun, 18 Jan 2009 04:34:10 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Jan 15, 2009 at 10:51:59AM -0500, Denys Dmytriyenko wrote:
-> On Wed, Jan 14, 2009 at 11:37:10PM -0800, Khem Raj wrote:
-> > On (15/01/09 01:14), Denys Dmytriyenko wrote:
-> > > I was debugging the strange behavior of one of my boxes pulling in libc6-dev 
-> > > into the filesystem image and it happened to be because udev pulled in 
-> > > libvolume-id-dev instead of libvolume-id0... It worked as expected on the 
-> > > other box, though.
+On Fri, Jan 16, 2009 at 04:08:59PM -0700, Tom Rini wrote:
+> On Fri, Jan 16, 2009 at 04:01:20PM -0500, Denys Dmytriyenko wrote:
+> > On Fri, Jan 16, 2009 at 03:57:23PM -0500, Denys Dmytriyenko wrote:
+> > > On Fri, Jan 16, 2009 at 09:43:59PM +0100, Koen Kooi wrote:
+> [snip]
+> > > > The gettext thing has been fixed for a few days now.
 > > > 
-> > > Several people on IRC have seen this lingering bug before, but no fix was 
-> > > available. Koen mentioned it got fixed for him by rebuilding udev...
-> > > 
-> > > After some investigation I found out that both libvolume-id packages (-dev and 
-> > > regular) are registered to provide libvolume_id.so.0 and the one appearing 
+> > > Only gettext-native was fixed.
 > > 
-> > I think -dev provides libvolume_id.so and libvolume-id provides
-> > libvolume-id.so.* they are different. Our shlib handler should be able
-> > to figure that out. I still wonder what caused it to pull libc-dev
-> > though.
+> > I meant e2fsprogs-libs-native was fixed... e2fsprogs-libs was not.
 > 
-> The shlib handler from the package.bbclass examines every package by running 
-> objdump and looking for SONAME/NEEDED sections of all the executables and 
-> lib*.so files. So, the real .so library from libvolume-id gets identified as 
-> a provider for libvolume_id.so.0, which is correct. Then libvolume-id-dev 
-> gets examined, and it does not provide any shlibs. But since it has a symlink, 
-> which points to a real host .so, objdump picks up its SONAME and -dev gets 
-> also identified as a provider of libvolume_id.so.0, which is wrong.
-> 
-> Since most of other libraries with -dev split have either relative symlinks 
-> (../..) or pointing to the same directory, they never get into this issue, 
-> becuase when -dev is examined, the symlink is broken, as -dev gets installed 
-> into a separate directory.
-> 
-> That's the reason for my patch to package.bbclass to skip symlinks when 
-> running objdump.
-> 
-> libc-dev gets pulled in by libvolume-id-dev, for some reason, according to:
-> libvolume_id_dev -> libc6_dev [style=dotted];
-> 
-> > > last in os.walk() gets pulled in by udev. The order of files provided by 
-> > > os.walk() depends on parallel builds and phase of the Moon.
-> > > 
-> > > libvolume-id-dev does not provide the actual .so library, but it contains a 
-> > > symlink in /usr/lib, which points to /lib/libvolume.so.0 (the host one!) 
-> > > instead of ../../lib/ one...
-> > > 
-> > > The first patch attached fixes this in udev and should be a no brainer. Unless 
-> > > someone objects, I'll push it in in a day or two.
-> > 
-> > Seems like we need this to work in a sysrooted env. 
-> 
-> With the patch to package.bbclass it can be left as is.
-> 
-> > > Since I was debugging the code which actually does this shlib magic in 
-> > > package.bbclass, I thought it might be useful to prevent this kind of issues 
-> > > in the future by skipping symlinks while looking for SONAME/NEEDED in the 
-> > > objdump - please see the second patch attached and provide feedback.
-> > 
-> > But we need to process symlinks to find out package that contains target so that we can create
-> > dependency on the package that contains target like in this case we need
-> > to create dependency on libvolume-id for libvolume-id-dev because the
-> > symlink points to a file provided by libvolume-id
-> 
-> I'm not sure where this dependency gets built, but I believe it is not done by 
-> the package_do_shlibs() code from package.bbclass I'm referring to. This code 
-> populates ${STAGING_DIR_HOST}/shlibs, listing .so each pkg provides.
-> 
-> I guess we need more Core devs to look into this issue to verify the safety of 
-> this patch.
+> True enough, but this is probably only one of many things needing fixing
+> for multi-threaded bitbake, which is something else on my long-term
+> list.  I didn't fix the target one for, well, no real good reason I
+> suppose, sorry.  I'll poke it in later if someone doesn't beat me to it.
 
-Otavio was using patched package.bbclass (as mentioned above) for a few days 
-and found it working fine and fixing udev issue for him.
-
-Khem, please let me know if you still disagree with the proposed fix. Or if 
-anybody else has any objections, please speak up. Otherwise I'd like to check 
-in the fix for the package.bbclass in a day or two. Thanks.
+It was a real good reason for me, as it was breaking my build :)
+But you are correct - I do use multi-threaded bitbake...
+And I did beat you to it - 1556c15f8aa75c0377ad9b4188276c68b2289e10
+Thanks anyway.
 
 -- 
 Denys
