@@ -1,40 +1,29 @@
-Received: from [85.37.17.112] (helo=smtp-out112.alice.it)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LONRk-00054Z-R1
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jan 2009 03:31:33 +0100
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out112.alice.it
-	with Microsoft SMTPSVC(6.0.3790.1830); 
-	Sun, 18 Jan 2009 03:24:45 +0100
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.1830); 
-	Sun, 18 Jan 2009 03:24:44 +0100
-Received: from localhost.localdomain ([79.30.253.111]) by
-	FBCMCL01B06.fbc.local with Microsoft SMTPSVC(6.0.3790.1830); 
-	Sun, 18 Jan 2009 03:24:38 +0100
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Jan 2009 03:24:32 +0100
-Message-Id: <be10caf1d9175ef81833424a9c6b334fd4857272.1232244759.git.andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.6.0.6
-In-Reply-To: <c1ce4054664d07c9f2a79ac7bcdf26637470aeec.1232244759.git.andrea.adami@gmail.com>
+	(envelope-from <trini@kernel.crashing.org>) id 1LONuP-0006Vc-9K
+	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 04:01:09 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090118025415.LLCR2342.fed1rmmtao102.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Sat, 17 Jan 2009 21:54:15 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id 4quD1b00G1E665w04quDGz; Sat, 17 Jan 2009 21:54:16 -0500
+X-Authority-Analysis: v=1.0 c=1 a=ajOfDFksIysA:10 a=Uk3zMMqMCUQA:10
+	a=mNIh1PUbOxkuTBsERZ8A:9 a=E_FLG01zL7JuAaRJEBfOIe3enQ8A:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sat, 17 Jan 2009 19:54:13 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090118025413.GU6710@smtp.west.cox.net>
 References: <cover.1232244759.git.andrea.adami@gmail.com>
-	<b313e1d6307a63ce53bbeaffbf01d842ef6f9e27.1232244759.git.andrea.adami@gmail.com>
-	<98c252f0e21dc1d58f37dafe492d09b998dad5e5.1232244759.git.andrea.adami@gmail.com>
-	<cd9f2d057b582d2fb54e80ccc71e72ee1116bdc8.1232244759.git.andrea.adami@gmail.com>
-	<a75400f3e012a40bf684d0c4537e3310019c8c59.1232244759.git.andrea.adami@gmail.com>
-	<2c1715b769f3227f74aa46bae8c27587e5387d3e.1232244759.git.andrea.adami@gmail.com>
-	<45a1b453435a1f916e5540bd0845762636b0ac1f.1232244759.git.andrea.adami@gmail.com>
 	<8c1396b3add963b97e1f9f144c1bdd966ebbce02.1232244759.git.andrea.adami@gmail.com>
-	<4c945c9a1076160cee628241443c8a27d8b5e1ca.1232244759.git.andrea.adami@gmail.com>
-	<ea6b4f404328c7722af631e1fcf6050a184eef42.1232244759.git.andrea.adami@gmail.com>
-	<48e10fbb365d98dff4b8086d562b339fe62e29a6.1232244759.git.andrea.adami@gmail.com>
-	<c1ce4054664d07c9f2a79ac7bcdf26637470aeec.1232244759.git.andrea.adami@gmail.com>
-In-Reply-To: <cover.1232244759.git.andrea.adami@gmail.com>
-References: <cover.1232244759.git.andrea.adami@gmail.com>
-X-OriginalArrivalTime: 18 Jan 2009 02:24:38.0908 (UTC)
-	FILETIME=[E9B543C0:01C97913]
-Subject: [PATCH 12/14] zaurus-2.6.inc: modules fixes
+MIME-Version: 1.0
+In-Reply-To: <8c1396b3add963b97e1f9f144c1bdd966ebbce02.1232244759.git.andrea.adami@gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 07/14] kexecboot: use custom device table with mmc	and event0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,33 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jan 2009 02:31:33 -0000
+X-List-Received-Date: Sun, 18 Jan 2009 03:01:09 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-- only load snd-soc-*
-- pcmcia and pxa2xx-cs are now built in kernel
----
- conf/machine/include/zaurus-2.6.inc |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+On Sun, Jan 18, 2009 at 03:24:27AM +0100, Andrea Adami wrote:
 
-diff --git a/conf/machine/include/zaurus-2.6.inc b/conf/machine/include/zaurus-2.6.inc
-index 8adb3d5..089437d 100644
---- a/conf/machine/include/zaurus-2.6.inc
-+++ b/conf/machine/include/zaurus-2.6.inc
-@@ -31,8 +31,10 @@ MACHINE_FEATURES_append_akita = " usbhost "
- MACHINE_FEATURES_append_spitz = " usbhost ext2 "
- 
- MACHINE_EXTRA_RDEPENDS = "zaurusd"
--MACHINE_EXTRA_RRECOMMENDS_c7x0   = "kernel-module-snd-soc-corgi kernel-module-pxa2xx-cs kernel-module-pcmcia"
--MACHINE_EXTRA_RRECOMMENDS_akita  = "kernel-module-snd-soc-spitz kernel-module-pxa2xx-cs kernel-module-pcmcia"
-+#MACHINE_EXTRA_RRECOMMENDS_c7x0   = "kernel-module-snd-soc-corgi kernel-module-pxa2xx-cs kernel-module-pcmcia"
-+#MACHINE_EXTRA_RRECOMMENDS_akita  = "kernel-module-snd-soc-spitz kernel-module-pxa2xx-cs kernel-module-pcmcia"
-+MACHINE_EXTRA_RRECOMMENDS_c7x0   = "kernel-module-snd-soc-corgi"
-+MACHINE_EXTRA_RRECOMMENDS_akita  = "kernel-module-snd-soc-spitz"
- MACHINE_EXTRA_RRECOMMENDS_spitz  = "kernel-module-snd-soc-spitz"
- MACHINE_EXTRA_RRECOMMENDS_poodle = "kernel-module-snd-soc-poodle kernel-module-pxa2xx-cs kernel-module-pcmcia"
- MACHINE_EXTRA_RRECOMMENDS_collie = "kernel-module-locomo-spi kernel-module-sa1100-cs kernel-module-mmc-block \
+> - revert 98e9985edab2eb072795a443e6d193fac7c048eb
+> - revert 5c1a421f73d9688341ace9c4dd4db59c3ef4b988
+> - add mmc devices mmcblk0p4 - mmcblk0p10
+> - fix 'cannot boot from logical partitions on SD'
+
+As a general thing, I have some problems with what we throw into the
+static dev and think we need to get things sorted out "better" for the
+various cases.  That said, can you please confirm that the nodes being
+removed from -minimal.txt were put there explicitly for the kexecboot
+case?
+
 -- 
-1.6.0.6
-
+Tom Rini
 
 
