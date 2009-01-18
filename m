@@ -1,34 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LOVKo-0002Sd-Ro
-	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 11:56:54 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LOVEA-0004ZT-C2
-	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 10:50:02 +0000
+	id 1LOWwA-0007C5-DM
+	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 13:39:34 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LOWpT-0008Gy-AP
+	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 12:32:39 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 18 Jan 2009 10:50:02 +0000
+	Sun, 18 Jan 2009 12:32:39 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sun, 18 Jan 2009 10:50:02 +0000
+	Sun, 18 Jan 2009 12:32:39 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 18 Jan 2009 11:47:53 +0100
-Message-ID: <gkv1cp$709$2@ger.gmane.org>
-References: <cover.1232244759.git.andrea.adami@gmail.com>	<b313e1d6307a63ce53bbeaffbf01d842ef6f9e27.1232244759.git.andrea.adami@gmail.com>	<98c252f0e21dc1d58f37dafe492d09b998dad5e5.1232244759.git.andrea.adami@gmail.com>	<cd9f2d057b582d2fb54e80ccc71e72ee1116bdc8.1232244759.git.andrea.adami@gmail.com>	<a75400f3e012a40bf684d0c4537e3310019c8c59.1232244759.git.andrea.adami@gmail.com>	<2c1715b769f3227f74aa46bae8c27587e5387d3e.1232244759.git.andrea.adami@gmail.com>	<45a1b453435a1f916e5540bd0845762636b0ac1f.1232244759.git.andrea.adami@gmail.com>	<8c1396b3add963b97e1f9f144c1bdd966ebbce02.1232244759.git.andrea.adami@gmail.com>	<gkuqet$ncn$1@ger.gmane.org>
-	<d1b08f940901180229o24ce3950l7011c2d98e5ae650@mail.gmail.com>
+Date: Sun, 18 Jan 2009 13:32:25 +0100
+Message-ID: <gkv7gp$n1v$1@ger.gmane.org>
+References: <4972660D.7070905@dls.net> <gkur78$pai$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b3pre) Gecko/20090109 Shredder/3.0b2pre
-In-Reply-To: <d1b08f940901180229o24ce3950l7011c2d98e5ae650@mail.gmail.com>
+In-Reply-To: <gkur78$pai$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 07/14] kexecboot: use custom device table with mmc and event0
+Subject: Re: mdev?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,18 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jan 2009 10:56:55 -0000
+X-List-Received-Date: Sun, 18 Jan 2009 12:39:34 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 18-01-09 11:29, Andrea Adami wrote:
->> NACK
+On 18-01-09 10:02, Koen Kooi wrote:
+> On 18-01-09 00:13, Mike (mwester) wrote:
+>> I think I missed something somewhere. It seems that recent images have
+>> mdev included in addition to udev - which doesn't work well.
+>>
+>> Poking around at the updated busybox recipes, I see no way to disable
+>> mdev. I already investigated mdev as a replacement for udev on SlugOS,
+>> and found it deficient in a number of areas -- so removing udev is not
+>> an option for me.
+>>
+>> So, how do I disable mdev?
 >
-> I did not want to bloat device_table-minimal too much...
+> The mdev symlink, config file and initscript need to get put in their
+> own package (package, not recipe!).
 
-You are removing devnodes other non-kexecboot people need. And yes, 
-non-kexecboot people exist. I think they probably outnumber kexecboot 
-people at least 1000 to 1.
+I've implemented this solution. Mike, does it solve the problem for you?
 
 regards,
 
