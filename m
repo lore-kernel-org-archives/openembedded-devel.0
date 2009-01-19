@@ -1,22 +1,34 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LOal5-00035b-0r
-	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 17:44:23 +0100
-Received: (qmail 26296 invoked by uid 813007); 18 Jan 2009 16:37:29 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 18 Jan 2009 16:37:29 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <otavio@freedom.ind.br>) id 1LOiv6-0000yO-TB
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jan 2009 02:27:17 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 3A36840A7E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Jan 2009 21:02:55 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 9D33C740BD
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Jan 2009 23:02:02 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 7A21F610047; Sun, 18 Jan 2009 22:56:47 -0200 (BRST)
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Jan 2009 17:37:18 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
-References: <4972660D.7070905@dls.net> <gkur78$pai$1@ger.gmane.org>
-	<gkv7gp$n1v$1@ger.gmane.org>
-In-Reply-To: <gkv7gp$n1v$1@ger.gmane.org>
+References: <20090115061418.GA13352@denix.org>
+	<20090115073709.GB7020@gmail.com> <20090115155159.GB15943@denix.org>
+	<20090118041800.GA852@denix.org>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Sun, 18 Jan 2009 22:56:47 -0200
+In-Reply-To: <20090118041800.GA852@denix.org> (Denys Dmytriyenko's message of
+	"Sat\, 17 Jan 2009 23\:18\:00 -0500")
+Message-ID: <87zlhoglkg.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
 MIME-Version: 1.0
-Message-Id: <200901181737.19176.openembedded@haerwu.biz>
-Subject: Re: mdev?
+Subject: Re: [RFC] Fix udev pulling in libvolume-id-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,38 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jan 2009 16:44:23 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 Jan 2009 01:27:17 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On Sunday 18 of January 2009 13:32:25 Koen Kooi wrote:
-> On 18-01-09 10:02, Koen Kooi wrote:
-> > On 18-01-09 00:13, Mike (mwester) wrote:
-> >> I think I missed something somewhere. It seems that recent images
-> >> have mdev included in addition to udev - which doesn't work well.
+Denys Dmytriyenko <denis@denix.org> writes:
 
-My fault, sorry.
+>> I guess we need more Core devs to look into this issue to verify the safety of 
+>> this patch.
+>
+> Otavio was using patched package.bbclass (as mentioned above) for a few days 
+> and found it working fine and fixing udev issue for him.
+>
+> Khem, please let me know if you still disagree with the proposed fix. Or if 
+> anybody else has any objections, please speak up. Otherwise I'd like to check 
+> in the fix for the package.bbclass in a day or two. Thanks.
 
-> >> Poking around at the updated busybox recipes, I see no way to
-> >> disable mdev. I already investigated mdev as a replacement for
-> >> udev on SlugOS, and found it deficient in a number of areas -- so
-> >> removing udev is not an option for me.
+Yes, I support this patch since it does solve the issue for me.
 
-> > The mdev symlink, config file and initscript need to get put in
-> > their own package.
-
-> I've implemented this solution.
-
-Thanks Koen, I was thinking about adding it today.
-
-Regards, 
 -- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
