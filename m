@@ -1,22 +1,32 @@
-Received: from [216.145.245.199] (helo=mx03.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LOktO-0005V5-7E
-	for openembedded-devel@openembedded.org; Mon, 19 Jan 2009 04:33:38 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx03.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LOkmg-00029I-J4
-	for openembedded-devel@openembedded.org; Sun, 18 Jan 2009 21:26:42 -0600
-Message-ID: <4973F2F4.3070908@dls.net>
-Date: Sun, 18 Jan 2009 21:26:44 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LOqrJ-0002RP-MU
+	for openembedded-devel@openembedded.org; Mon, 19 Jan 2009 10:55:53 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LOqkZ-00088G-6y
+	for openembedded-devel@openembedded.org; Mon, 19 Jan 2009 09:48:55 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 19 Jan 2009 09:48:55 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 19 Jan 2009 09:48:55 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <4972660D.7070905@dls.net> <gkur78$pai$1@ger.gmane.org>
-	<gkv7gp$n1v$1@ger.gmane.org>
-In-Reply-To: <gkv7gp$n1v$1@ger.gmane.org>
-Subject: Re: mdev?
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 19 Jan 2009 10:48:45 +0100
+Message-ID: <gl1i9t$5dv$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090114 Shredder/3.0b2pre
+Sender: news <news@ger.gmane.org>
+Cc: angstrom-distro-devel@linuxtogo.org
+Subject: Online image builder available for angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,23 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jan 2009 03:33:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 19 Jan 2009 09:55:54 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-...
->> The mdev symlink, config file and initscript need to get put in their
->> own package (package, not recipe!).
-> 
-> I've implemented this solution. Mike, does it solve the problem for you?
+Hi,
 
-Fixed.  Thanks!
+After a few weeks of hacking and testing I am proud to announce the 
+online image builder:
 
-> regards,
-> 
-> Koen
+http://amethyst.openembedded.net/~koen/narcissus
 
-Mike (mwester)
+You can select a machine and packages you want and the image builder 
+will create a tar.bz2 image using the packages available in the feeds. 
+That means you can create an up-to-date image at anytime from anywhere!
+
+The autobuilder tries to keeps the feeds populated for all machines 
+evenly, but some packages aren't in all feeds, e.g. kismet is missing 
+from the armv7a feeds since it breaks with gcc 4.3.x. When that happens 
+the image builder will display a big red X on the screen next to the 
+package that failed to install. It will continue to install the other 
+packages you selected so you can still use generated image, but without 
+the missing packages.
+
+If you have suggestions, feedback or bugreports, send a mail to the 
+angstrom-devel mailinglist.
+
+The source is available from:
+
+http://dominion.thruhere.net/git/?p=narcissus.git;a=summary
+
+Patches welcome, especially to improve the look & feel
+
+regards,
+
+Koen
+
 
 
