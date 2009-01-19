@@ -1,31 +1,39 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [209.85.218.15] (helo=mail-bw0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LOrKJ-0001L1-Tj
+	(envelope-from <andrea.adami@gmail.com>) id 1LOrcA-0002aR-Fa
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Jan 2009 11:25:52 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 146792C8A6
+	Mon, 19 Jan 2009 11:44:18 +0100
+Received: by bwz8 with SMTP id 8so6928761bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2009 10:18:51 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4MmU1+ACbQUY
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2009 10:18:45 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id D6C7F2C8A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2009 10:18:44 +0000 (UTC)
-Message-ID: <49745395.6090907@gmail.com>
-Date: Mon, 19 Jan 2009 11:19:01 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	Mon, 19 Jan 2009 02:37:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=55CTOB6MbFBaA+jpjjZMmfFQr3S/oxOCgXjKFU7rZps=;
+	b=sM1S86H6su8Utre8jYR1FY2acuYzmcdniV2mZRmTsowU1OcYtbj/Plhk3hYwYE/7EP
+	fsrkV1XR54G2Bs94cZ3bNzj8B5TQgrC2SlJBL7ZP/P/tjB9yZdR3Nf3pE8RsHIC6HtG2
+	U3ngP1DM5FAfFjXUdIJ7hmNhRJgel61GVPtZc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=hbbSSPccCPp1Jj8g4bw9EnEToDoDp1f3mrd6cKcnUHcq/0nbb5j3IUplXluPcEflXR
+	/Dhg6kQY5X0W94HFytEpCLDidHOaI4ppQrGQ46nF+0x3qj7y4W3AVpDaOQzWTmFLDaGL
+	vMqPnRglGX/7jrABhHewE14aeiIMX+PhTVMIc=
 MIME-Version: 1.0
+Received: by 10.181.218.14 with SMTP id v14mr2027914bkq.48.1232361388132; Mon, 
+	19 Jan 2009 02:36:28 -0800 (PST)
+In-Reply-To: <20090117233309.192da673@zaurus.utx.cz>
+References: <d1b08f940901150928h56ede408u2d070606fbe6b7bc@mail.gmail.com>
+	<d1b08f940901160534n2d204a36r43494e1a6ed855c5@mail.gmail.com>
+	<1232121627.4988.2795.camel@hammer.suse.cz>
+	<200901162008.03815.jay4mail@gmail.com>
+	<20090117233309.192da673@zaurus.utx.cz>
+Date: Mon, 19 Jan 2009 11:36:28 +0100
+Message-ID: <d1b08f940901190236y132993ffn6a7586b1e37b18b1@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <gl1i9t$5dv$1@ger.gmane.org>
-In-Reply-To: <gl1i9t$5dv$1@ger.gmane.org>
-Subject: Re: Online image builder available for angstrom
+Subject: Re: ARM bootloaders (Zaurus) and CMDLINE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,43 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jan 2009 10:25:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Jan 2009 10:44:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi ha scritto:
-> Hi,
-> 
-> After a few weeks of hacking and testing I am proud to announce the
-> online image builder:
-> 
-> http://amethyst.openembedded.net/~koen/narcissus
-> 
-> You can select a machine and packages you want and the image builder
-> will create a tar.bz2 image using the packages available in the feeds.
-> That means you can create an up-to-date image at anytime from anywhere!
-> 
-> The autobuilder tries to keeps the feeds populated for all machines
-> evenly, but some packages aren't in all feeds, e.g. kismet is missing
-> from the armv7a feeds since it breaks with gcc 4.3.x. When that happens
-> the image builder will display a big red X on the screen next to the
-> package that failed to install. It will continue to install the other
-> packages you selected so you can still use generated image, but without
-> the missing packages.
-> 
-> If you have suggestions, feedback or bugreports, send a mail to the
-> angstrom-devel mailinglist.
-> 
-> The source is available from:
-> 
-> http://dominion.thruhere.net/git/?p=narcissus.git;a=summary
-> 
-> Patches welcome, especially to improve the look & feel
+> If you look at Sharp system, you will find /sbin/writerominfo. I didn't
+> I didn't find source code for it, but I guess that it reads NAND config data and
 
-Definitely cool!
-Thank you
-I am sending my thoughts to angstrom-devel mailinglist.
---
-Marco Cavallini
+writerominfo.c and other sources:
+http://ftp.surfnet.nl/pub/os/Linux/distr/pdaxrom/src/survive-1.1.0.tar.bz2
+
+It seems it fixes /proc/deviceinfo/product
+
+### Check model ###
+/sbin/writerominfo
+MODEL=`cat /proc/deviceinfo/product`
+
+Regards
+
+Andrea
 
 
