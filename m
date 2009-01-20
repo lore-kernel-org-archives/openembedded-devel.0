@@ -1,28 +1,28 @@
-Received: from [195.54.101.71] (helo=proxy1.bredband.net)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1LPLQu-00012V-Mz
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jan 2009 19:34:40 +0100
-Received: from ironport2.bredband.com (195.54.101.122) by proxy1.bredband.net
-	(7.3.127)
-	id 494BF21C0091BD0B for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jan 2009 19:27:36 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AvAPAIGmdUlT4zhBPGdsb2JhbAAIiQiKbQEBAQE1qW4IjiqEOwiBMA
-Received: from c-4138e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.221]) ([83.227.56.65])
-	by ironport2.bredband.com with ESMTP; 20 Jan 2009 19:27:36 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200901161605.25740.openembedded@haerwu.biz>
-References: <20090116145500.F0BA0E8008@amethyst.openembedded.net>
-	<200901161605.25740.openembedded@haerwu.biz>
-Organization: Atmel Nordic AB
-Date: Tue, 20 Jan 2009 19:27:35 +0100
-Message-Id: <1232476055.4539.30.camel@elrond.atmel.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: [oe-commits] Ulf Samuelsson : linux: added 2.6.28 for	at91sam9263ek (based on ulf/ atmel branch)
+	(envelope-from <trini@kernel.crashing.org>) id 1LPLwd-0002O8-Og
+	for openembedded-devel@openembedded.org; Tue, 20 Jan 2009 20:07:30 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090120190022.IKUL2948.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 20 Jan 2009 14:00:22 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
+	id 5v0N1b00a1E665w03v0NhA; Tue, 20 Jan 2009 14:00:23 -0500
+X-Authority-Analysis: v=1.0 c=1 a=bCBHmsHEKwIA:10 a=7OzDuaD8CwYA:10
+	a=3phMLeMdsiXUrFYoE8IA:9 a=rsndmpnoe9itj7Xfj9SnAKHzgHgA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 20 Jan 2009 12:00:22 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090120190022.GD30203@smtp.west.cox.net>
+References: <f96d234e0901200840s4f346e3ev5f294ac0445522e8@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <f96d234e0901200840s4f346e3ev5f294ac0445522e8@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: OE weekly changelog 2009-01-12 to 2009-01-19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,37 +36,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jan 2009 18:34:40 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Jan 2009 19:07:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-fre 2009-01-16 klockan 16:05 +0100 skrev Marcin Juszkiewicz:
-> On Friday 16 of January 2009 15:54:55 GIT User account wrote:
-> > Module: openembedded.git
-> > Branch: org.openembedded.dev
-> > Commit: 48fb51ab6a3eab956496ce09ca3015e38f581bf8
-> > Author: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-> > Date:   Mon Dec 29 16:25:22 2008 +0100
-> 
-> > linux: added 2.6.28 for at91sam9263ek (based on ulf/atmel branch)
-> 
-> Sorry Ulf, I forgot to change author of commit. This change was result 
-> of few Ulf commits and few mines - just did not wanted to pollute OE 
-> with many one line changing commits which I had in my private tree.
-> 
+On Tue, Jan 20, 2009 at 11:40:03AM -0500, Cliff Brake wrote:
 
-NP, 
-Ran out of time to do it myself.
-Have some more stuff which I did not commit to the ulf/atmel
-but there is a lot to do at the moment.
-BR
-Ulf
+> OE weekly changelog 2009-01-12 to 2009-01-19
 
+Hmm, this missed pulling in rpurdie/canadian-sofar into the main branch.
 
-> I would also thank for Atmel company which donated AT91SAM9263-EK board 
-> which I used for that work. It is really nice to have developer board to 
-> work on misc things - I used Zaurus before for such stuff.
-> 
-> Regards, 
+-- 
+Tom Rini
 
 
