@@ -1,22 +1,26 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [212.27.42.4] (helo=smtp4-g21.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LPDfq-0008Op-84
+	(envelope-from <jdatalog.converter@gmail.com>) id 1LPFXf-0004rv-4d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jan 2009 11:17:37 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LPDiG-00016K-2l
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jan 2009 11:20:04 +0100
-Message-ID: <4975A314.4000006@kernelconcepts.de>
-Date: Tue, 20 Jan 2009 11:10:28 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	Tue, 20 Jan 2009 13:17:21 +0100
+Received: from smtp4-g21.free.fr (localhost [127.0.0.1])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 535FA4C8142
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jan 2009 13:10:11 +0100 (CET)
+Received: from [192.168.0.5] (lns-bzn-47f-62-147-136-25.adsl.proxad.net
+	[62.147.136.25])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 3DF7A4C811B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jan 2009 13:10:09 +0100 (CET)
+Message-ID: <4975BF20.3030600@gmail.com>
+Date: Tue, 20 Jan 2009 13:10:08 +0100
+From: Jdatalog converter <jdatalog.converter@gmail.com>
+User-Agent: Thunderbird 2.0.0.19 (Windows/20081209)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <496CFA6B.5060108@gmail.com>
-In-Reply-To: <496CFA6B.5060108@gmail.com>
-X-Enigmail-Version: 0.95.0
+References: <496CFA6B.5060108@gmail.com> <4975A314.4000006@kernelconcepts.de>
+In-Reply-To: <4975A314.4000006@kernelconcepts.de>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Ipaq 31x ...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,29 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jan 2009 10:17:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Jan 2009 12:17:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
-
-Jdatalog converter schrieb:
-> I'm interested to run Linux on my Ipaq 314 based on following platform :
-> http://www.sirf.com/products/SiRFtitanProductInsert.pdf
-> 
-> I don't know how to create a new file in platform subdir.
-
-well the most important question is: Is there a Linux port to these devices already?
-
-Greetings
 
 Florian
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+I need informations to evaluate effort needed to port linux on this devic=
+e.
+
+Thanks,
+
+  Christophe
+
+
+Florian Boor a =E9crit :
+> Hello,
+>
+> Jdatalog converter schrieb:
+>  =20
+>> I'm interested to run Linux on my Ipaq 314 based on following platform=
+ :
+>> http://www.sirf.com/products/SiRFtitanProductInsert.pdf
+>>
+>> I don't know how to create a new file in platform subdir.
+>>    =20
+>
+> well the most important question is: Is there a Linux port to these dev=
+ices already?
+>
+> Greetings
+>
+> Florian
+>
+>  =20
 
 
