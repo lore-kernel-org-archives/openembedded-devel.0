@@ -1,28 +1,26 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LPLwd-0002O8-Og
-	for openembedded-devel@openembedded.org; Tue, 20 Jan 2009 20:07:30 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090120190022.IKUL2948.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 20 Jan 2009 14:00:22 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id 5v0N1b00a1E665w03v0NhA; Tue, 20 Jan 2009 14:00:23 -0500
-X-Authority-Analysis: v=1.0 c=1 a=bCBHmsHEKwIA:10 a=7OzDuaD8CwYA:10
-	a=3phMLeMdsiXUrFYoE8IA:9 a=rsndmpnoe9itj7Xfj9SnAKHzgHgA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 20 Jan 2009 12:00:22 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090120190022.GD30203@smtp.west.cox.net>
-References: <f96d234e0901200840s4f346e3ev5f294ac0445522e8@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <f96d234e0901200840s4f346e3ev5f294ac0445522e8@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: OE weekly changelog 2009-01-12 to 2009-01-19
+	(envelope-from <denis@denix.org>) id 1LPMxM-0003Zg-Uq
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jan 2009 21:12:17 +0100
+Received: from gandalf.denix.org ([71.255.246.155]) by vms173003.mailsrvcs.net
+	(Sun Java System Messaging Server 6.2-6.01 (built Apr  3 2006))
+	with ESMTPA id <0KDS0026QD47R8L1@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	20 Jan 2009 14:05:01 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DA31A6B83A8; Tue,
+	20 Jan 2009 15:04:54 -0500 (EST)
+Date: Tue, 20 Jan 2009 15:04:54 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <200901201630.08341.openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090120200454.GA18725@denix.org>
+MIME-version: 1.0
+References: <200812051715.45106.openembedded@haerwu.biz>
+	<20081205174806.GA12852@denix.org>
+	<200901201630.08341.openembedded@haerwu.biz>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] Auto resizing ext2/ext3 images (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,17 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jan 2009 19:07:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Jan 2009 20:12:17 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Tue, Jan 20, 2009 at 11:40:03AM -0500, Cliff Brake wrote:
+On Tue, Jan 20, 2009 at 04:30:07PM +0100, Marcin Juszkiewicz wrote:
+> On Friday 05 of December 2008 18:48:06 Denys Dmytriyenko wrote:
+> > On Fri, Dec 05, 2008 at 05:15:41PM +0100, Marcin Juszkiewicz wrote:
+> > > In few words: it checks how big rootfs is, adds IMAGE_EXTRA_SPACE
+> > > amount of kilobytes to it and gives that size to genext2fs.
+> > >
+> > > Below is a patch with code changes. Check it and say what You think
+> > > about it. One thing is missing - support for fixed size ext2/3
+> > > images big enough to fit resulting rootfs.
+> 
+> > Can it be done like this:
+> >
+> > ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}|awk '{size = ${IMAGE_EXTRA_SPACE}
+> > + $1; \ print (size > ${IMAGE_ROOTFS_SIZE} ? size :
+> > ${IMAGE_ROOTFS_SIZE}) }'`
+> 
+> Yes, it can - I pushed my patch and your code went too (as separate 
+> commit).
 
-> OE weekly changelog 2009-01-12 to 2009-01-19
-
-Hmm, this missed pulling in rpurdie/canadian-sofar into the main branch.
+Thanks. I wonder why it can't be also applied to ext2.gz and ext3.gz images.
 
 -- 
-Tom Rini
+Denys
 
 
