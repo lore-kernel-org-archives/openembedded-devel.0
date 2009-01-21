@@ -1,32 +1,21 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LPb58-0002Bl-KI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jan 2009 12:17:14 +0100
-Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LPayC-0002cP-UA by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2009 12:10:09 +0100
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1LPayG-00075u-Ep
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jan 2009 12:10:08 +0100
-Date: Wed, 21 Jan 2009 12:10:08 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	(envelope-from <openembedded@haerwu.biz>) id 1LPbpS-00005S-01
+	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 13:05:07 +0100
+Received: (qmail 21376 invoked by uid 813007); 21 Jan 2009 11:57:59 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 21 Jan 2009 11:57:59 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090121111008.GB3726@excalibur.local>
+Date: Wed, 21 Jan 2009 12:57:39 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
+References: <4976D10A.9050000@gmx.net> <4976D54C.8030601@xora.org.uk>
+In-Reply-To: <4976D54C.8030601@xora.org.uk>
 MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Where to put a check if my tmp is a symlink?
+Message-Id: <200901211257.39952.openembedded@haerwu.biz>
+Subject: Re: FOSDEM OE stand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +29,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 11:17:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 21 Jan 2009 12:05:09 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Hello.
+On Wednesday 21 of January 2009 08:57:00 Graeme Gregory wrote:
+> > Who will have some time to be at the stand?
+>
+> I shall have some time for the stand during the 2 days!
 
-I spent at least 2 hours yesterday to understand why lintool-native breaks on a
-build from scratch for me now.
+I will be at FOSDEM and will find time to be at OE stand during Sat/Sun.
 
-Finally I found this bugreport:
-http://bugs.openembedded.org/show_bug.cgi?id=4904
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-And yes I thought symlinking between different tmp dirs would be a neat idea.
-Without symlink it works fine again. This leads me to the question if we should
-check for this and bail out instead of letting the first 150 tasks go through
-and then fail in libtool with "already configured use make distclean"
 
-Anything I missed?
-
-regards
-Stefan Schmidt
 
 
