@@ -1,29 +1,32 @@
-Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
+Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LPlsS-00087Y-Ar
-	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 23:48:52 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao106.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090121224136.FQYT12540.fed1rmmtao106.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 21 Jan 2009 17:41:36 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
-	id 6Nhd1b0031E665w04NhdZc; Wed, 21 Jan 2009 17:41:37 -0500
-X-Authority-Analysis: v=1.0 c=1 a=3Ti2wQrTUiQA:10 a=H0KbiYiYTioA:10
-	a=JEgeQjq9DPK14JHP4ZYA:9 a=2F2I-gMtGAStq7VephgA:7
-	a=qG9ks5E-sQxwBAgI8b-gAkO1gQYA:4 a=UcWZWmDdwLsA:10 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 21 Jan 2009 15:41:36 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090121224136.GG5233@smtp.west.cox.net>
-References: <gl7r2t$sge$1@ger.gmane.org> <49777438.8070108@balister.org>
-	<gl7tcr$55v$1@ger.gmane.org>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LPmAf-0008TX-Ia
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jan 2009 00:07:41 +0100
+Received: by fg-out-1718.google.com with SMTP id l26so1790315fgb.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Jan 2009 15:00:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=ho8AVArcQx3JN/l1cuNfTJ9kISeXghIEvWYRCFI9JK8=;
+	b=Bf7A14UfMbXyf2rsBlrWACoXQwoS2UTXvYykK5DAJkJOoC3RIJmokDUnN14pKK1JD4
+	NgJ5zQp8sRc9s4DA0hJogbgHf9uuG8CFVDHvoSYoPaB5d8AeKHfwc/9jt/MLDz8yhthr
+	NOyCzH+AYflxsxSSu4Lb+dBF+TC01ZcGUN6tY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=nRzhgBHHVLFfK4miS7Sa4Mu8LC0Nv5xBLs/AhokqthOGYE4HN/WMhLzQlH7kYvPxYZ
+	N/ZHgWdMujLWR3jcaVm7zaAi9PJu84JSmFtE4+VBFZS4bocJ+EQuyaceTtyhGU5KpiaJ
+	YbzFVZlO09Xf8k+XEJjmdFM8OtTmc3M1bxOIY=
 MIME-Version: 1.0
-In-Reply-To: <gl7tcr$55v$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] Add option for strict checksumming, was: Re:	checksums...
+Received: by 10.223.124.209 with SMTP id v17mr3068597far.6.1232578833890; Wed, 
+	21 Jan 2009 15:00:33 -0800 (PST)
+Date: Thu, 22 Jan 2009 00:00:33 +0100
+Message-ID: <c384c5ea0901211500pb038bdatbdca725f9b370db@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: OpenEmbedded Branding (introduction at FOSDEM!)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,49 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 22:48:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 21 Jan 2009 23:07:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 21, 2009 at 08:34:51PM +0100, Koen Kooi wrote:
-> On 21-01-09 20:15, Philip Balister wrote:
->> Koen Kooi wrote:
->>> Hi,
->>>
->>> Could people adding new recipe and people git-am'ing patches adding
->>> new recipes please add the corresponding checksums to checksums.ini?
->>>
->>> It's not hard:
->>>
->>> 1) bitbake <recipe>
->>> 2) watch it fail
->>> 3) cd $TMPDIR ; cat /OE/org.openembedded.dev/conf/checksums.ini >>
->>> checksums.ini ; python
->>> /OE/org.openembedded.dev/contrib/source-checker/oe-checksums-sorter.py
->>> checksums.ini > /OE/org.openembedded.dev/conf/checksums.ini
->>> 4) git commit --amend /OE/org.openembedded.dev/conf/checksums.ini
->>
->> I screwed this up once (and committed a recipe without the checksum)
->> when I left ALLOW_INSECURE_DOWNLOADS set in my local.conf. Now I have it
->> commented out and am really careful only to use it only when hacking.
->
-> What about this:
->
-> From a48ee59ac6ea569a5f88066d86de4b66d8f606c3 Mon Sep 17 00:00:00 2001
-> From: Koen Kooi <koen@openembedded.org>
-> Date: Wed, 21 Jan 2009 20:29:53 +0100
-> Subject: [PATCH] base.bbclass: only error out on missing checksums when  
-> OE_STRICT_CHECKSUMS is set
->  * we want to error out on non-matching sums, missing ones are less bad
+Hello,
 
-This will bring us back to where we started.  I think we just need to
-live with the pain a bit more and get people used to "Oops, no checksum
-in your patch" ...
+this thread is to discuss our new OpenEmbedded logo and branding.
+Thanks to Mateo for the design.
 
-And btw, git commit --amend will let you change things in the last
-commit you made.  ONLY do this if you haven't also done a push.
+Proposal:
 
+Introduce the new logo at FOSDEM, ok?
+
+Create pin name tags for everybody to wear, especially those manning the booth.
+
+Create a *simple* A0 (metric rectangular format, area 1 square meter)
+poster with the
+logo and a few key words. White paper, then...:
+
+-----------------------------
+
+OpenEmbedded Logo (colour)
+
+"build" (in dark) and underneath at an offset in light colour:
+"everything from source"
+
+embed (in dark) and underneath at an offset in lighter colour: "complete images"
+
+deploy (in dark) and underneath at an offset in lighter colour: "your product"
+
+just bake and be done!
+
+-----------------------------
+
+Will try to work on this tomorrow, to allow for visuals and subsequent feedback,
 -- 
-Tom Rini
+Leon
 
 
