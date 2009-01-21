@@ -1,18 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LPiOi-0006gl-KL
-	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 20:05:57 +0100
-Received: (qmail 27631 invoked by uid 1003); 21 Jan 2009 18:58:46 -0000
+	(envelope-from <philip@balister.org>) id 1LPieW-0003gv-4X
+	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 20:22:16 +0100
+Received: (qmail 25202 invoked by uid 1003); 21 Jan 2009 19:15:07 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 21 Jan 2009 18:58:46 -0000
-Message-ID: <49777063.8060409@balister.org>
-Date: Wed, 21 Jan 2009 11:58:43 -0700
+	by mail.geekisp.com with SMTP; 21 Jan 2009 19:15:06 -0000
+Message-ID: <49777438.8070108@balister.org>
+Date: Wed, 21 Jan 2009 12:15:04 -0700
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-Subject: alsa-util-1.0.18
+To: openembedded-devel@lists.openembedded.org
+References: <gl7r2t$sge$1@ger.gmane.org>
+In-Reply-To: <gl7r2t$sge$1@ger.gmane.org>
+Subject: Re: checksums...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,27 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 19:06:04 -0000
-X-Groupsio-MsgNum: 7356
+X-List-Received-Date: Wed, 21 Jan 2009 19:22:16 -0000
+X-Groupsio-MsgNum: 7357
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms030400020908080503020909"
+	micalg=sha1; boundary="------------ms010508090504030708080302"
 
---------------ms030400020908080503020909
+--------------ms010508090504030708080302
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-The alsa-utils-1.0.18 recipe isn't building for some build machines. On 
-my Fedora based machines I can work around the problem by installing 
-xmlto, but on some other machines, after installing xmlto, some file 
-does not download.
+Koen Kooi wrote:
+> Hi,
+> 
+> Could people adding new recipe and people git-am'ing patches adding new 
+> recipes please add the corresponding checksums to checksums.ini?
+> 
+> It's not hard:
+> 
+> 1) bitbake <recipe>
+> 2) watch it fail
+> 3) cd $TMPDIR ; cat /OE/org.openembedded.dev/conf/checksums.ini >> 
+> checksums.ini ; python 
+> /OE/org.openembedded.dev/contrib/source-checker/oe-checksums-sorter.py 
+> checksums.ini > /OE/org.openembedded.dev/conf/checksums.ini
+> 4) git commit --amend /OE/org.openembedded.dev/conf/checksums.ini
 
-Koen set DEFAULT_PREFERENCE = "-1" until it builds.
+I screwed this up once (and committed a recipe without the checksum) 
+when I left ALLOW_INSECURE_DOWNLOADS set in my local.conf. Now I have it 
+commented out and am really careful only to use it only when hacking.
 
-I tried EXTRA_OECONF="--disable-nls" but that didn't help.
+I also need to look up what "git commit --amend" does.
 
 Philip
 
---------------ms030400020908080503020909
+--------------ms010508090504030708080302
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -97,18 +112,18 @@ HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
 rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDEyMTE4
-NTg0M1owIwYJKoZIhvcNAQkEMRYEFADpBr3BW8qYqRqKH7CqJdL9edzjMFIGCSqGSIb3DQEJDzFF
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDEyMTE5
+MTUwNFowIwYJKoZIhvcNAQkEMRYEFGy6NMr4Xr641OpzItOrWVqpUfijMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBNWmyMMYPtxUAHwf/6JycIuYqtYuKPvWfI4urgcrqcIvNxcc0X
-zYvAah3HpVxiPIaMeC1SqZnQgIpQ+Kh24qNBKenBggEZ4ts4k4DGfKdLNPbIuweE5jMGL2BD7FXo
-Iykmq0iXO0zTLV4/bVV/rsxXsteELJBRIlWSZ3SRB859B0ro9MeJ62y5O1wViRPLV+scbKITUJgI
-r2GQJ5LTR5FkMgTORD+HhnA7mezMVLgLU5FLVdqF9EIqUNFbaY6rTDvzxOzIEqIulkpBhuNvMDpl
-F0+veg73T+BiGl9U570MR/RuTnOXQQ96vDcSWaeIxKTKGNJTroBjH8r7pyOKoyIZAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQAqUvdTQqUaATHA+NqmFFXnQnTmnB/dK2JmX8xrFB3rK5cCWP98
+GF5Vi7T7lHRKFxVuMj46Q6dfaq8W7MQtOzQVD7s4qEIVJBZ9umZMb1l5YslzVVBOGeNoHJkFDz6I
+/PbF3XzmbVIzq4wNpgFfWOp6D//nT0Hy38mNPS8DI6O4Ktb9B4rhxg+Ef1rAA1gL2pOR1gzBXM+o
+AZ7+9wMdIAe6KakCC60mFYsUZ6QblOs5rQXQkqP5k9pE6uzlr4n4a7+Ke0GoRZtiFkBm4QIiyP/z
+Gyq11pUKznTu7PSQSkrPY3fMd/u3ecB2YSwiiwxOPVootadnj+SDHr7VtahOghoFAAAAAAAA
 
---------------ms030400020908080503020909--
+--------------ms010508090504030708080302--
