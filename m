@@ -1,33 +1,39 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [72.14.220.157] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LPj43-0004y3-C6
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LPkkE-000123-Mj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jan 2009 20:48:39 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id EFC482C8A6
+	Wed, 21 Jan 2009 22:36:18 +0100
+Received: by fg-out-1718.google.com with SMTP id l26so1767422fgb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2009 19:41:22 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aCqgpzNIehSI
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2009 19:41:21 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id 71B7A2C8A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2009 19:41:21 +0000 (UTC)
-Message-ID: <49777A6D.8080802@gmail.com>
-Date: Wed, 21 Jan 2009 20:41:33 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	Wed, 21 Jan 2009 13:29:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=IFNoMlnQk0C5sFkO6jSUqiym7ygFcKCue6YCwu/STQo=;
+	b=aGa1zRz+nGO/e3yl+W05OfV9Pu/RvWVe3mquYAm9DS/g7WwS2TlF/c+0Md7fuM8Xx8
+	4b15qcSm9XRSkgRW1rlUPbx7rAuI9plR72Kf8epaLyBz7cIvhTFndIJeR0HlJzlBoINY
+	wu6d/MZDURwZY0hvYXoXNJeuvmhEP7y2DMjo8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Mos8dOS9Ms6PWaiaIYKA39V0/dN8KqaoA6uCYX9YGZlFi6B5wyLlX8nIQUZ/90ODu2
+	6454LeWl1mxmwob1VlOpT/sbLBYQg3J8zUaI6UmVre5JiljBHd5Yb0KJLxw35RjiXqo4
+	GmNDTezSU4NiKIDsq/PvEkYa+Fyn6lTgcL0Ns=
 MIME-Version: 1.0
+Received: by 10.223.108.210 with SMTP id g18mr1521454fap.38.1232573351104; 
+	Wed, 21 Jan 2009 13:29:11 -0800 (PST)
+In-Reply-To: <496C9858.2010901@balister.org>
+References: <200901041647.42516.mickey@vanille-media.de>
+	<49620002.40708@xora.org.uk> <gjt07r$vrj$1@ger.gmane.org>
+	<200901080129.46910.mickey@vanille-media.de>
+	<1231490412.7080.108.camel@lenovo.internal.reciva.com>
+	<496C7144.902@xora.org.uk> <496C9858.2010901@balister.org>
+Date: Wed, 21 Jan 2009 22:29:10 +0100
+Message-ID: <c384c5ea0901211329v5984a6fenae1ab43a0b123e66@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4976D10A.9050000@gmx.net>
-	<4976D54C.8030601@xora.org.uk>	<200901211257.39952.openembedded@haerwu.biz>	<497731CC.2010000@balister.org>
-	<1232565558.11888.45.camel@elrond.atmel.com>
-In-Reply-To: <1232565558.11888.45.camel@elrond.atmel.com>
-Subject: Re: FOSDEM OE stand
+Subject: Re: OE dev meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 19:48:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Jan 2009 21:36:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Ulf Samuelsson ha scritto:
+Hello all,
 
-> No hope to get my sales manager to fund a trip to FOSDEM,
-> so I did not even bother to ask...
-> Have ton's of air milage so I just booked a ticket.
->=20
-> I am trying to get some AVR32 AP7000 Network gateways
-> as encouragement to to people that feel they contributed
-> to the AVR32 open-embedded port, or in lack of that,
-> some general enthusiasm about the AVR32 might be good enough :-)
->=20
-> If I am really lucky, I might also be able to lay my hands on a STK1000
-> top board equipped with the brand new AT32AP7200.
->=20
-> See you there
-> BR
-> Ulf Samuelsson
+On Tue, Jan 13, 2009 at 2:34 PM, Philip Balister <philip@balister.org> wrote:
+> Graeme Gregory wrote:
+>>
+>> As there are no flights on the thursday, earliest I can arrive is about
+>> 4pm at Astrid :-(
+>
+> Well, at least you can make the beer event :)
+>
+Did someone try to arrange group discount as Astrid, or do we just book as-is?
 
-Good to know.
-BTW following such enthusiasm I'm starting a port for AT91SAM9G20-EK in
-OE ;-)
+I was at the beer event last year but missed most key OE ppl because
+they decided to be next-doors or so.
+So I just got drunk with the other geeks.
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+Can we exchange phone numbers ahead so that we can text message each
+other on this?
+
+Regards,
+-- 
+Leon
 
 
