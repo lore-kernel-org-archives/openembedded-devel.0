@@ -1,34 +1,31 @@
-Received: from [209.85.198.248] (helo=rv-out-0708.google.com)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1LPdFc-0008Ff-4V
-	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 14:36:12 +0100
-Received: by rv-out-0708.google.com with SMTP id k29so4481290rvb.0
-	for <openembedded-devel@openembedded.org>;
-	Wed, 21 Jan 2009 05:29:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=qONGgb2yDOYHZrUUAYm9eiMF8/n3o9/ixm1Uyk0QExU=;
-	b=aribmLE8KCbuRaHWpjbzAgNFeJmKFaJgpB9OFOgMfEqhek5CFRkPBAzPrtuvB1lQZU
-	h2RNVd136o0H73DfCG2GGLd/4euhdfO3J/kUTcEgUhRnCvsL5gP41b8JTMOKHXn0faBH
-	XwtuvZxmYDwJ8aSwSQrgn+3AH56/ct3Ap9lNs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=xaBq2nudxGFBiZhtYnq7NO40KgDan+ycKr8eoRSk1xmhJ15A4mfvIHIMN7EKi2pljr
-	L8Hu6lVv0k+7GF15IMrIXl7G1MJgEbnLsp17QDWm9TarIQqc4Y0ZwoNyQMiw/FDiiGyK
-	FHGaaYBakjepoSe7mnOCpe3SVlfJHIQWaGJ+I=
-MIME-Version: 1.0
-Received: by 10.141.69.1 with SMTP id w1mr2299774rvk.119.1232544545738; Wed, 
-	21 Jan 2009 05:29:05 -0800 (PST)
-In-Reply-To: <20090120190022.GD30203@smtp.west.cox.net>
+	(envelope-from <otavio@freedom.ind.br>) id 1LPdmo-0006Ps-SH
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Jan 2009 15:10:31 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 4A92F400E5;
+	Wed, 21 Jan 2009 10:04:18 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id A1450740BC;
+	Wed, 21 Jan 2009 12:03:21 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 6C3236101B8; Wed, 21 Jan 2009 11:58:06 -0200 (BRST)
+To: openembedded-devel@lists.openembedded.org
 References: <f96d234e0901200840s4f346e3ev5f294ac0445522e8@mail.gmail.com>
 	<20090120190022.GD30203@smtp.west.cox.net>
-Date: Wed, 21 Jan 2009 08:29:05 -0500
-Message-ID: <f96d234e0901210529q57d4abf1s98295b7160d6d2da@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<f96d234e0901210529q57d4abf1s98295b7160d6d2da@mail.gmail.com>
+From: Otavio Salvador <otavio@debian.org>
+Organization: O.S. Systems Ltda.
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 21 Jan 2009 11:58:06 -0200
+In-Reply-To: <f96d234e0901210529q57d4abf1s98295b7160d6d2da@mail.gmail.com>
+	(Cliff Brake's message of "Wed\, 21 Jan 2009 08\:29\:05 -0500")
+Message-ID: <87hc3s2235.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.2 (gnu/linux)
+MIME-Version: 1.0
 Cc: openembedded-devel@openembedded.org
 Subject: Re: OE weekly changelog 2009-01-12 to 2009-01-19
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -44,25 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 13:36:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 21 Jan 2009 14:10:31 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On Tue, Jan 20, 2009 at 2:00 PM, Tom Rini <trini@kernel.crashing.org> wrote:
-> On Tue, Jan 20, 2009 at 11:40:03AM -0500, Cliff Brake wrote:
+Cliff Brake <cliff.brake@gmail.com> writes:
+
+> On Tue, Jan 20, 2009 at 2:00 PM, Tom Rini <trini@kernel.crashing.org> wrote:
+>> On Tue, Jan 20, 2009 at 11:40:03AM -0500, Cliff Brake wrote:
+>>
+>>> OE weekly changelog 2009-01-12 to 2009-01-19
+>>
+>> Hmm, this missed pulling in rpurdie/canadian-sofar into the main branch.
 >
->> OE weekly changelog 2009-01-12 to 2009-01-19
->
-> Hmm, this missed pulling in rpurdie/canadian-sofar into the main branch.
+> Thanks for pointing that out -- I'll see if I can update the script to
+> included merges like that.
 
-Thanks for pointing that out -- I'll see if I can update the script to
-included merges like that.
+Personally I think that it is better to keep --no-merges otherwise it
+will be poluted and it won't give you the idea of what was pulled
+anyway.
 
-Cliff
+If someone wants to know where something has been introduced, it is
+much better to use gitk or similar.
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
