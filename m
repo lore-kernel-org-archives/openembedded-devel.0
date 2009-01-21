@@ -1,23 +1,31 @@
-Received: from [80.67.172.39] (helo=webmail.no-log.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1LPhaX-0008GG-1U
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jan 2009 19:14:05 +0100
-Received: by webmail.no-log.org (Postfix, from userid 33)
-	id B19D11F529E; Wed, 21 Jan 2009 19:06:58 +0100 (CET)
-X-Squirrel-UserHash: c3wyGAAN
-X-Squirrel-FromHash: AFRUX1YACig=
-Message-ID: <47406.AFRUX1YACig=.1232561218.squirrel@webmail.no-log.org>
-In-Reply-To: <34438.AFRUX1YACig=.1232560782.squirrel@webmail.no-log.org>
-References: <34438.AFRUX1YACig=.1232560782.squirrel@webmail.no-log.org>
-Date: Wed, 21 Jan 2009 19:06:58 +0100 (CET)
-From: GNUtoo@no-log.org
-To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.9a
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: Re: fixing scummvm
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LPiLh-0006b3-4U
+	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 20:02:50 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LPiEh-0001Xa-SJ
+	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 18:55:36 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 21 Jan 2009 18:55:35 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 21 Jan 2009 18:55:35 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 21 Jan 2009 19:55:24 +0100
+Message-ID: <gl7r2t$sge$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090114 Shredder/3.0b2pre
+Sender: news <news@ger.gmane.org>
+Subject: checksums...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,79 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 18:14:05 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Jan 2009 19:02:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> Hello,
-> the last scummvm(0.12) and maybe others scummvm version are broken beca=
-use
-> of that:
->
-> do_compile() {
-> oe_runmake CC=3D"${CC}" CXX=3D"${CXX}" CFLAGS=3D"${CFLAGS}" \
-> CXXFLAGS=3D"${CXXFLAGS}" \
-> LDFLAGS=3D"${LDFLAGS} ${@base_conditional('ENTERPRISE_DISTRO', '1', '',
-> '-lmpeg2', d)}" \
-> DEFINES=3D"-DUNIX -DSCUMM_NEED_ALIGNMENT -DUSE_VORBIS -DUSE_ZLIB -DUSE_=
-MPEG2
-> ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '-DUSE_MAD -DUSE_MPEG=
-2',
-> d)}"
-> }
->
-> I was told that was triggered by a script(which goal is obvious...remov=
-e
-> mp3 support because of software patents(because openmoko company had a
-> problem with patents:
-> http://lists.openmoko.org/pipermail/community/2008-November/035618.html
-> and
-> http://lists.openmoko.org/pipermail/community/2008-November/035635.html=
-))
->
-> the solution would be to remove that and to remplace it by:
-> EXTRA_OECONF =3D "--host=3D${HOST_SYS} \
-> 		--backend=3Dsdl \
-> 		--with-sdl-prefix=3D${STAGING_BINDIR_CROSS} \
-> 		--disable-alsa \
-> 		--prefix=3D${prefix} \
-> 		--with-ogg-prefix=3D${STAGING_LIBDIR}/.. \
-> 		--with-vorbis-prefix=3D${STAGING_LIBDIR}/.. \
-> 		${@base_conditional('ENTERPRISE_DISTRO', '1', '--disable-mpeg2',
-> '--with-mpeg2-prefix=3D${STAGING_LIBDIR}/..', d)} \
-> 		${@base_conditional('ENTERPRISE_DISTRO', '1', '--disable-mad',
-> '--with-mad-prefix=3D${STAGING_LIBDIR}/..', d)} \
-> 		"
-> in scummvm.inc
->
-> I contacted the maintainer but I had on response yet...
->
-> what should I do?
-> fix all recipes and commit them?
-oops I didn't told the details:
-here's the mail I sent:
+Hi,
 
->You seem to be the maintainer of scummvm in openembedded.
->The policy says to contact the maintaner and not to push changes without
->contacting him:
->* Recipe changes are less sensitive but maintainers should be consulted
->where known
->
->Here's the problem:
->you can compile scummvm fine,however when you run it you discover that
->none of the engines are built-in and so you can't play any games.
->
->here is the solution with a recipe:
->http://bugs.openembedded.net/show_bug.cgi?id=3D4958
->but:
->*I've done it only for one of the recipes
->*the PR is wrong change it before commiting
->
->should I do the necessary changes on each recipe and report to you befor=
-e
->commiting?
->
->Thanks for your work.
+Could people adding new recipe and people git-am'ing patches adding new 
+recipes please add the corresponding checksums to checksums.ini?
+
+It's not hard:
+
+1) bitbake <recipe>
+2) watch it fail
+3) cd $TMPDIR ; cat /OE/org.openembedded.dev/conf/checksums.ini >> 
+checksums.ini ; python 
+/OE/org.openembedded.dev/contrib/source-checker/oe-checksums-sorter.py 
+checksums.ini > /OE/org.openembedded.dev/conf/checksums.ini
+4) git commit --amend /OE/org.openembedded.dev/conf/checksums.ini
+
+regards,
+
+Koen
 
 
 
