@@ -1,33 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LPixn-0004kb-QJ
-	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 20:42:11 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LPiqu-0003S2-Vz
-	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 19:35:05 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 21 Jan 2009 19:35:04 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 21 Jan 2009 19:35:04 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 21 Jan 2009 20:34:51 +0100
-Message-ID: <gl7tcr$55v$1@ger.gmane.org>
-References: <gl7r2t$sge$1@ger.gmane.org> <49777438.8070108@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090114 Shredder/3.0b2pre
-In-Reply-To: <49777438.8070108@balister.org>
-Sender: news <news@ger.gmane.org>
-Subject: [RFC] Add option for strict checksumming, was: Re: checksums...
+	(envelope-from <koansoftware@gmail.com>) id 1LPj43-0004y3-C6
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Jan 2009 20:48:39 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id EFC482C8A6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Jan 2009 19:41:22 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id aCqgpzNIehSI
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Jan 2009 19:41:21 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id 71B7A2C8A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Jan 2009 19:41:21 +0000 (UTC)
+Message-ID: <49777A6D.8080802@gmail.com>
+Date: Wed, 21 Jan 2009 20:41:33 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4976D10A.9050000@gmx.net>
+	<4976D54C.8030601@xora.org.uk>	<200901211257.39952.openembedded@haerwu.biz>	<497731CC.2010000@balister.org>
+	<1232565558.11888.45.camel@elrond.atmel.com>
+In-Reply-To: <1232565558.11888.45.camel@elrond.atmel.com>
+Subject: Re: FOSDEM OE stand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,77 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 19:42:12 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 21 Jan 2009 19:48:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 21-01-09 20:15, Philip Balister wrote:
-> Koen Kooi wrote:
->> Hi,
->>
->> Could people adding new recipe and people git-am'ing patches adding
->> new recipes please add the corresponding checksums to checksums.ini?
->>
->> It's not hard:
->>
->> 1) bitbake <recipe>
->> 2) watch it fail
->> 3) cd $TMPDIR ; cat /OE/org.openembedded.dev/conf/checksums.ini >>
->> checksums.ini ; python
->> /OE/org.openembedded.dev/contrib/source-checker/oe-checksums-sorter.py
->> checksums.ini > /OE/org.openembedded.dev/conf/checksums.ini
->> 4) git commit --amend /OE/org.openembedded.dev/conf/checksums.ini
->
-> I screwed this up once (and committed a recipe without the checksum)
-> when I left ALLOW_INSECURE_DOWNLOADS set in my local.conf. Now I have it
-> commented out and am really careful only to use it only when hacking.
+Ulf Samuelsson ha scritto:
 
-What about this:
+> No hope to get my sales manager to fund a trip to FOSDEM,
+> so I did not even bother to ask...
+> Have ton's of air milage so I just booked a ticket.
+>=20
+> I am trying to get some AVR32 AP7000 Network gateways
+> as encouragement to to people that feel they contributed
+> to the AVR32 open-embedded port, or in lack of that,
+> some general enthusiasm about the AVR32 might be good enough :-)
+>=20
+> If I am really lucky, I might also be able to lay my hands on a STK1000
+> top board equipped with the brand new AT32AP7200.
+>=20
+> See you there
+> BR
+> Ulf Samuelsson
 
- From a48ee59ac6ea569a5f88066d86de4b66d8f606c3 Mon Sep 17 00:00:00 2001
-From: Koen Kooi <koen@openembedded.org>
-Date: Wed, 21 Jan 2009 20:29:53 +0100
-Subject: [PATCH] base.bbclass: only error out on missing checksums when 
-OE_STRICT_CHECKSUMS is set
-  * we want to error out on non-matching sums, missing ones are less bad
+Good to know.
+BTW following such enthusiasm I'm starting a port for AT91SAM9G20-EK in
+OE ;-)
 
----
-  classes/base.bbclass |    8 +++++++-
-  1 files changed, 7 insertions(+), 1 deletions(-)
-
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index fca0edd..411adc9 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -71,7 +71,13 @@ def base_chk_file(parser, pn, pv, src_uri, localpath, 
-data):
-
-          file.write("[%s]\nmd5=%s\nsha256=%s\n\n" % (src_uri, md5data, 
-shadata))
-          file.close()
--        return False
-+        if not bb.data.getVar("OE_STRICT_CHECKSUMS",data, True):
-+            bb.note("This package has no entry in checksums.ini, please 
-add one")
-+            bb.note("\n[%s]\nmd5=%s\nsha256=%s" % (src_uri, md5data, 
-shadata))
-+            return True
-+        else:
-+            bb.note("Missing checksum")
-+            return False
-
-      if not md5 == md5data:
-          bb.note("The MD5Sums did not match. Wanted: '%s' and Got: 
-'%s'" % (md5,md5data))
--- 
-1.5.6.3
-
-Non-mangled version at 
-http://dominion.thruhere.net/koen/OE/0001-base.bbclass-only-error-out-on-missing-checksums-wh.patch
-
-regards,
-
-Koen
-
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
 
