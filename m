@@ -1,21 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LPbpS-00005S-01
-	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 13:05:07 +0100
-Received: (qmail 21376 invoked by uid 813007); 21 Jan 2009 11:57:59 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 21 Jan 2009 11:57:59 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Jan 2009 12:57:39 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
-References: <4976D10A.9050000@gmx.net> <4976D54C.8030601@xora.org.uk>
-In-Reply-To: <4976D54C.8030601@xora.org.uk>
-MIME-Version: 1.0
-Message-Id: <200901211257.39952.openembedded@haerwu.biz>
-Subject: Re: FOSDEM OE stand
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LPcft-0004dq-Sf
+	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 13:59:18 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LPcZ3-0001Wd-Qm
+	for openembedded-devel@openembedded.org; Wed, 21 Jan 2009 12:52:13 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 21 Jan 2009 12:52:13 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 21 Jan 2009 12:52:13 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 21 Jan 2009 13:52:01 +0100
+Message-ID: <gl75ph$br9$1@ger.gmane.org>
+References: <20090121111008.GB3726@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090114 Shredder/3.0b2pre
+In-Reply-To: <20090121111008.GB3726@excalibur.local>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Where to put a check if my tmp is a symlink?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,24 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 12:05:09 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 21 Jan 2009 12:59:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 21 of January 2009 08:57:00 Graeme Gregory wrote:
-> > Who will have some time to be at the stand?
+On 21-01-09 12:10, Stefan Schmidt wrote:
+> Hello.
 >
-> I shall have some time for the stand during the 2 days!
+> I spent at least 2 hours yesterday to understand why lintool-native breaks on a
+> build from scratch for me now.
+>
+> Finally I found this bugreport:
+> http://bugs.openembedded.org/show_bug.cgi?id=4904
+>
+> And yes I thought symlinking between different tmp dirs would be a neat idea.
+> Without symlink it works fine again. This leads me to the question if we should
+> check for this and bail out instead of letting the first 150 tasks go through
+> and then fail in libtool with "already configured use make distclean"
 
-I will be at FOSDEM and will find time to be at OE stand during Sat/Sun.
+binutils will fail as well
 
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+> Anything I missed?
+
+It *is* mentioned in 
+http://wiki.openembedded.net/index.php/Getting_Started, but it does that 
+a small mental leap to apply the symlink warning to directories below 
+/stuff as well :)
+
+Anyway, checking for a symlink in sanity.bbclass would be a good idea.
+
+regards,
+
+Koen
+
 
 
 
