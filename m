@@ -1,23 +1,34 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQ2Qa-0001vN-M8
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jan 2009 17:29:12 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LPz8I-0004lE-5z
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jan 2009 13:58:06 +0100
-Message-ID: <49786B0C.4050304@kernelconcepts.de>
-Date: Thu, 22 Jan 2009 13:48:12 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	(envelope-from <trini@kernel.crashing.org>) id 1LQ47d-00035S-B1
+	for openembedded-devel@openembedded.org; Thu, 22 Jan 2009 19:17:45 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090122181027.BPKP12838.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Thu, 22 Jan 2009 13:10:27 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
+	id 6iAS1b0091E665w04iASRh; Thu, 22 Jan 2009 13:10:26 -0500
+X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
+	a=WIF8ApdZM8URWWkfWwMA:9 a=AB8ya7WsrL3iOLDjM6W3LMsYBb0A:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Thu, 22 Jan 2009 11:10:26 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090122181026.GN5233@smtp.west.cox.net>
+References: <1230827114.5320.42.camel@dax.rpnet.com>
+	<20090101182526.GF7040@smtp.west.cox.net>
+	<1230840687.5320.56.camel@dax.rpnet.com>
+	<20090101220229.GH7040@smtp.west.cox.net>
+	<1230858713.10424.4.camel@dax.rpnet.com>
+	<1231462490.6467.85.camel@dax.rpnet.com>
+	<20090117044728.GT6710@smtp.west.cox.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4976D10A.9050000@gmx.net>
-In-Reply-To: <4976D10A.9050000@gmx.net>
-X-Enigmail-Version: 0.95.0
-Subject: Re: FOSDEM OE stand
+In-Reply-To: <20090117044728.GT6710@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: RFC: "Virtual" native and sdk recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,38 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jan 2009 16:29:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Jan 2009 18:17:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
+On Fri, Jan 16, 2009 at 09:47:28PM -0700, Tom Rini wrote:
+> On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
+> [snip]
+> > a) We push my tree into OE
+> 
+> Done on your behalf now.
+> 
+> > b) You rebase onto my tree's changes and adjust the EXEEXT stuff.
+> > 
+> > c) You add changes which add the EXEEXT changes only to existing 
+> >    recipes and commit that.
+> > 
+> > d) The checksums.ini changes are a no brainer.
+> > 
+> > e) You start adding the totally new files to OE directly in a logical 
+> >    sequence of something like:
+> > 
+> >    i) Add canadian core classes (classes/canadian*)
+> >    ii) Add mingw new recipes
+> >    iii) Add misc support recipes (gmp/mprf-canadian)
+> >    iv) Add new binutils recipes
+> >    v) Add new gcc recipes
+> 
+> OK, this is the trini/canadian-merge branch.
 
-Robert Schuster schrieb:
-> I would like to remind you that we got a stand for OE at FOSDEM and as I
-> see it do not have organised anything for it yet.
-
-I will be there and bring some useful things. I can go around the office and
-collect some gadgets and other equipment we might need. :-)
-I try to select some less common devices and/or dangerous looking evaluation
-boards :-)
-
-> Who will have some time to be at the stand?
-
-I'll definitely spend some time there.
-
-> Do we have posters from previous?
-
-Yes I have the nice poster we made for LinuxTag.
-
-Greetings
-
-Florian
+I would like to merge those new recipes (not the changes to existing
+stuff) on the 26th, if no one objects.
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Tom Rini
 
 
