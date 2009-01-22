@@ -1,34 +1,35 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LQ47d-00035S-B1
-	for openembedded-devel@openembedded.org; Thu, 22 Jan 2009 19:17:45 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090122181027.BPKP12838.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
+	(envelope-from <raj.khem@gmail.com>) id 1LQ50E-0001Up-R7
+	for openembedded-devel@openembedded.org; Thu, 22 Jan 2009 20:14:11 +0100
+Received: by rv-out-0708.google.com with SMTP id k29so5285139rvb.0
 	for <openembedded-devel@openembedded.org>;
-	Thu, 22 Jan 2009 13:10:27 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id 6iAS1b0091E665w04iASRh; Thu, 22 Jan 2009 13:10:26 -0500
-X-Authority-Analysis: v=1.0 c=1 a=LLvST7gcIdsA:10 a=0G8rmy93P40A:10
-	a=WIF8ApdZM8URWWkfWwMA:9 a=AB8ya7WsrL3iOLDjM6W3LMsYBb0A:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Thu, 22 Jan 2009 11:10:26 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090122181026.GN5233@smtp.west.cox.net>
-References: <1230827114.5320.42.camel@dax.rpnet.com>
-	<20090101182526.GF7040@smtp.west.cox.net>
-	<1230840687.5320.56.camel@dax.rpnet.com>
-	<20090101220229.GH7040@smtp.west.cox.net>
-	<1230858713.10424.4.camel@dax.rpnet.com>
-	<1231462490.6467.85.camel@dax.rpnet.com>
-	<20090117044728.GT6710@smtp.west.cox.net>
+	Thu, 22 Jan 2009 11:06:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=JsISKsBHG1LXrIYamFTbNTgqO+rUfWjwtDWYCyp03sE=;
+	b=nZIFi4RXJ0B9SpsPSUFzGil8iDfzcaezp4OyrGkAtqcnxm1nvfRXPMJjiqLJRaBjBb
+	lwtD9o4/FUUWv/cA9k6D3BlatG4ly3gWCb1GUY4etIw4tp34bu/Q5cIzHNccLZktd1QZ
+	Z+XyFfBLqFklOVgAOj5gEpKvbfsY/+WSWNDR8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=K2LJPw5BPTWLKSuC0/rGfXcP8wmd1XEUMZHAdL5iAgROKKXtWPzeyH/4TRt2LDNc+J
+	rr9xEPqGGAIMR/egWEXx6b/I/RK5tmI5XbdReBG4sxS9Dh7+h1D8nq9hM4R56/hCSfGu
+	bOfb+nwPYQPbNegRD1e4nOiSsk5wUmAezApY0=
 MIME-Version: 1.0
-In-Reply-To: <20090117044728.GT6710@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: RFC: "Virtual" native and sdk recipes
+Received: by 10.141.115.6 with SMTP id s6mr1785448rvm.235.1232651219148; Thu, 
+	22 Jan 2009 11:06:59 -0800 (PST)
+In-Reply-To: <loom.20090121T171822-463@post.gmane.org>
+References: <loom.20090121T171822-463@post.gmane.org>
+Date: Thu, 22 Jan 2009 11:06:59 -0800
+Message-ID: <19c1b8a90901221106p41e019aau486c9ed258ce069a@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@openembedded.org
+Subject: Re: cannot compute suffix of object files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,39 +43,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jan 2009 18:17:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Jan 2009 19:14:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jan 16, 2009 at 09:47:28PM -0700, Tom Rini wrote:
-> On Fri, Jan 09, 2009 at 12:54:50AM +0000, Richard Purdie wrote:
-> [snip]
-> > a) We push my tree into OE
-> 
-> Done on your behalf now.
-> 
-> > b) You rebase onto my tree's changes and adjust the EXEEXT stuff.
-> > 
-> > c) You add changes which add the EXEEXT changes only to existing 
-> >    recipes and commit that.
-> > 
-> > d) The checksums.ini changes are a no brainer.
-> > 
-> > e) You start adding the totally new files to OE directly in a logical 
-> >    sequence of something like:
-> > 
-> >    i) Add canadian core classes (classes/canadian*)
-> >    ii) Add mingw new recipes
-> >    iii) Add misc support recipes (gmp/mprf-canadian)
-> >    iv) Add new binutils recipes
-> >    v) Add new gcc recipes
-> 
-> OK, this is the trini/canadian-merge branch.
+On Wed, Jan 21, 2009 at 9:47 AM, Claudiu Mdc <claudiu_fw85@yahoo.it> wrote:
+> Hi,
+>
+> I am building bootstrap-image with OpenEmbedded, but it fails on
+> glibc-2.5 configure task with this error:
+>
+> | checking whether ln -s works... yes
+> | checking for i686-angstrom-linux-gcc...
+> i686-angstrom-linux-gcc-4.3.1 -mcpu=pentiumpro
+> | checking for suffix of object files... configure: error:
+>  cannot compute suffix of object files: cannot compile
+> | See `config.log' for more details.
+>
+>
+> config.log:
+>
+> configure:2776: checking for suffix of object files
+> configure:2797: i686-angstrom-linux-gcc-4.3.1 -mcpu=pentiumpro -c
+> -I/home/claudiu/oe/oetmp/staging/i686-angstrom-linux/include,
+> -I/home/claudiu/oe/myToolchain/cross/include  -fexpensive-optimizations
+> -fomit-frame-pointer -frename-registers -Os  conftest.c >&5
+> /home/claudiu/oe/oetmp/work/i686-angstrom-linux/glibc-2.5-r10/
+> glibc-2.5/configure:
+> line 2798: i686-angstrom-linux-gcc-4.3.1: command not found
+> configure:2800: $? = 127
+> configure: failed program was:
+> | /* confdefs.h.  */
+> |
+> | #define PACKAGE_NAME "GNU C Library"
+> | #define PACKAGE_TARNAME "c-library"
+> | #define PACKAGE_VERSION "(see version.h)"
+> | #define PACKAGE_STRING "GNU C Library (see version.h)"
+> | #define PACKAGE_BUGREPORT "glibc"
+> | #define USE_REGPARMS 1
+> | /* end confdefs.h.  */
+> |
+> | int
+> | main ()
+> | {
+> |
+> |   ;
+> |   return 0;
+> | }
+> configure:2814: error:
+> cannot compute suffix of object files: cannot compile
+>
+>
+>
+> I don't understand why in config.log it says:
+> i686-angstrom-linux-gcc-4.3.1: command not found
+>
+>
+> I've built a custom toolchain and it is in PATH:
+> ~/oe$ i686-angstrom-linux<TAB><TAB> gives this output:
+>
+> i686-angstrom-linux-addr2line
+> i686-angstrom-linux-gcc
+> i686-angstrom-linux-objdump
+> i686-angstrom-linux-ar
+> i686-angstrom-linux-gcc-4.3.1
+> i686-angstrom-linux-ranlib
+> i686-angstrom-linux-as
+> i686-angstrom-linux-gccbug
+> i686-angstrom-linux-readelf
+> i686-angstrom-linux-c++
+> i686-angstrom-linux-gcov
+> i686-angstrom-linux-size
+> i686-angstrom-linux-c++filt
+> i686-angstrom-linux-ld
+> i686-angstrom-linux-strings
+> i686-angstrom-linux-cpp
+> i686-angstrom-linux-nm
+> i686-angstrom-linux-strip
+> i686-angstrom-linux-g++
+> i686-angstrom-linux-objcopy
+>
 
-I would like to merge those new recipes (not the changes to existing
-stuff) on the 26th, if no one objects.
-
--- 
-Tom Rini
+Are you certain that same path that you are using is available to bitbake ?
 
 
