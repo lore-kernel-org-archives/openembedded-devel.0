@@ -1,32 +1,37 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LPmAf-0008TX-Ia
+	(envelope-from <broonie@sirena.org.uk>) id 1LPnSn-0003Rb-6k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jan 2009 00:07:41 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so1790315fgb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2009 15:00:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=ho8AVArcQx3JN/l1cuNfTJ9kISeXghIEvWYRCFI9JK8=;
-	b=Bf7A14UfMbXyf2rsBlrWACoXQwoS2UTXvYykK5DAJkJOoC3RIJmokDUnN14pKK1JD4
-	NgJ5zQp8sRc9s4DA0hJogbgHf9uuG8CFVDHvoSYoPaB5d8AeKHfwc/9jt/MLDz8yhthr
-	NOyCzH+AYflxsxSSu4Lb+dBF+TC01ZcGUN6tY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=nRzhgBHHVLFfK4miS7Sa4Mu8LC0Nv5xBLs/AhokqthOGYE4HN/WMhLzQlH7kYvPxYZ
-	N/ZHgWdMujLWR3jcaVm7zaAi9PJu84JSmFtE4+VBFZS4bocJ+EQuyaceTtyhGU5KpiaJ
-	YbzFVZlO09Xf8k+XEJjmdFM8OtTmc3M1bxOIY=
+	Thu, 22 Jan 2009 01:30:29 +0100
+Received: from 82-41-28-43.cable.ubr04.sgyl.blueyonder.co.uk ([82.41.28.43]
+	helo=nastrond.sirena.org.uk)
+	by cassiel.sirena.org.uk with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <broonie@sirena.org.uk>)
+	id 1LPnLs-0007VQ-E6 for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jan 2009 00:23:21 +0000
+Received: from broonie by nastrond.sirena.org.uk with local (Exim 4.69)
+	(envelope-from <broonie@sirena.org.uk>) id 1LPnLm-0002Eb-3d
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jan 2009 00:23:14 +0000
+Date: Thu, 22 Jan 2009 00:23:14 +0000
+From: Mark Brown <broonie@sirena.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090122002311.GA8343@sirena.org.uk>
+References: <49777063.8060409@balister.org>
 MIME-Version: 1.0
-Received: by 10.223.124.209 with SMTP id v17mr3068597far.6.1232578833890; Wed, 
-	21 Jan 2009 15:00:33 -0800 (PST)
-Date: Thu, 22 Jan 2009 00:00:33 +0100
-Message-ID: <c384c5ea0901211500pb038bdatbdca725f9b370db@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: OpenEmbedded Branding (introduction at FOSDEM!)
+In-Reply-To: <49777063.8060409@balister.org>
+X-Cookie: Swim at your own risk.
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.41.28.43
+X-SA-Exim-Mail-From: broonie@sirena.org.uk
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on
+	cassiel.sirena.org.uk
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	TVD_RCVD_IP autolearn=no version=3.2.3
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on cassiel.sirena.org.uk)
+Subject: Re: alsa-util-1.0.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2009 23:07:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Jan 2009 00:30:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
+On Wed, Jan 21, 2009 at 11:58:43AM -0700, Philip Balister wrote:
+> The alsa-utils-1.0.18 recipe isn't building for some build machines. On  
+> my Fedora based machines I can work around the problem by installing  
+> xmlto, but on some other machines, after installing xmlto, some file  
+> does not download.
 
-this thread is to discuss our new OpenEmbedded logo and branding.
-Thanks to Mateo for the design.
+> Koen set DEFAULT_PREFERENCE = "-1" until it builds.
 
-Proposal:
+> I tried EXTRA_OECONF="--disable-nls" but that didn't help.
 
-Introduce the new logo at FOSDEM, ok?
+Should be fixed by the patch in:
 
-Create pin name tags for everybody to wear, especially those manning the booth.
+	http://bugs.openembedded.net/show_bug.cgi?id=4995
 
-Create a *simple* A0 (metric rectangular format, area 1 square meter)
-poster with the
-logo and a few key words. White paper, then...:
-
------------------------------
-
-OpenEmbedded Logo (colour)
-
-"build" (in dark) and underneath at an offset in light colour:
-"everything from source"
-
-embed (in dark) and underneath at an offset in lighter colour: "complete images"
-
-deploy (in dark) and underneath at an offset in lighter colour: "your product"
-
-just bake and be done!
-
------------------------------
-
-Will try to work on this tomorrow, to allow for visuals and subsequent feedback,
--- 
-Leon
+There's a non-optional build dep on xmlto which works fine if you have a
+working xmlto install but isn't so helpful otherwise.
 
 
