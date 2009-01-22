@@ -1,37 +1,24 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [75.125.193.18] (helo=alpha.vfshosting.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1LPnSn-0003Rb-6k
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jan 2009 01:30:29 +0100
-Received: from 82-41-28-43.cable.ubr04.sgyl.blueyonder.co.uk ([82.41.28.43]
-	helo=nastrond.sirena.org.uk)
-	by cassiel.sirena.org.uk with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <broonie@sirena.org.uk>)
-	id 1LPnLs-0007VQ-E6 for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jan 2009 00:23:21 +0000
-Received: from broonie by nastrond.sirena.org.uk with local (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1LPnLm-0002Eb-3d
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jan 2009 00:23:14 +0000
-Date: Thu, 22 Jan 2009 00:23:14 +0000
-From: Mark Brown <broonie@sirena.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090122002311.GA8343@sirena.org.uk>
-References: <49777063.8060409@balister.org>
+	(envelope-from <gremlin@gremlin.it>) id 1LPtuk-0006OT-8T
+	for openembedded-devel@openembedded.org; Thu, 22 Jan 2009 08:23:52 +0100
+X-ClientAddr: 127.0.0.1
+Received: from sesha.loc (localhost.localdomain [127.0.0.1])
+	by alpha.vfshosting.net (8.13.8/8.13.8) with ESMTP id n0M7GYGx011347
+	for <openembedded-devel@openembedded.org>;
+	Thu, 22 Jan 2009 08:16:35 +0100
+Message-ID: <49781D4F.9040309@gremlin.it>
+Date: Thu, 22 Jan 2009 08:16:31 +0100
+From: Alessandro GARDICH <gremlin@gremlin.it>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-In-Reply-To: <49777063.8060409@balister.org>
-X-Cookie: Swim at your own risk.
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.41.28.43
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on
-	cassiel.sirena.org.uk
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00,
-	TVD_RCVD_IP autolearn=no version=3.2.3
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on cassiel.sirena.org.uk)
-Subject: Re: alsa-util-1.0.18
+To: openembedded-devel@openembedded.org
+References: <200901041647.42516.mickey@vanille-media.de>	<49620002.40708@xora.org.uk>
+	<gjt07r$vrj$1@ger.gmane.org>	<200901080129.46910.mickey@vanille-media.de>	<1231490412.7080.108.camel@lenovo.internal.reciva.com>	<496C7144.902@xora.org.uk>
+	<496C9858.2010901@balister.org>
+	<c384c5ea0901211329v5984a6fenae1ab43a0b123e66@mail.gmail.com>
+In-Reply-To: <c384c5ea0901211329v5984a6fenae1ab43a0b123e66@mail.gmail.com>
+Subject: Re: OE dev meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jan 2009 00:30:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Jan 2009 07:24:34 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 21, 2009 at 11:58:43AM -0700, Philip Balister wrote:
-> The alsa-utils-1.0.18 recipe isn't building for some build machines. On  
-> my Fedora based machines I can work around the problem by installing  
-> xmlto, but on some other machines, after installing xmlto, some file  
-> does not download.
+Leon Woestenberg wrote:
+> Hello all,
+>
+> On Tue, Jan 13, 2009 at 2:34 PM, Philip Balister <philip@balister.org> wrote:
+>   
+>> Graeme Gregory wrote:
+>>     
+>>> As there are no flights on the thursday, earliest I can arrive is about
+>>> 4pm at Astrid :-(
+>>>       
+>> Well, at least you can make the beer event :)
+>>
+>>     
+> Did someone try to arrange group discount as Astrid, or do we just book as-is?
+>
+> I was at the beer event last year but missed most key OE ppl because
+> they decided to be next-doors or so.
+> So I just got drunk with the other geeks.
+>
+> Can we exchange phone numbers ahead so that we can text message each
+> other on this?
+>
+> Regards,
+>   
+I agree ...
+or we can meet at Astrid hall and then go all at the Delirium Caffe
 
-> Koen set DEFAULT_PREFERENCE = "-1" until it builds.
+I already book the room at Astrid and i think some other already did ...
 
-> I tried EXTRA_OECONF="--disable-nls" but that didn't help.
 
-Should be fixed by the patch in:
 
-	http://bugs.openembedded.net/show_bug.cgi?id=4995
+-- 
+ /-------------------------------------------------------------\
+|           Alessandro Gardich : gremlin@gremlin.it             |
+ >-------------------------------------------------------------<
+|  I never saw a wild thing sorry for itself.                   |
+|  A small bird will drop frozen dead from a bough              |
+|  without ever having felt sorry for itself.                   |
+ \-------------------------------------------------------------/
 
-There's a non-optional build dep on xmlto which works fine if you have a
-working xmlto install but isn't so helpful otherwise.
 
 
