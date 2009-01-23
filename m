@@ -1,37 +1,33 @@
-Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LQCdl-0000gs-L6
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jan 2009 04:23:30 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so5044609rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jan 2009 19:16:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=OeLHwyb9WCyukYJlU11Ve+UsLS8MB3sWADpdtXaXgpU=;
-	b=jzRPXvzESVi1vpYw/rkwK2igFAQJe4ORATHkkzgBmHMDjMsqCTFi6z+j1/3LfR8tW2
-	acQlinD8xt0WN25SsXHQppJKADsPjKJby9AcTIFBlaZSaV3MHlWgu0mUZH7Ue7aTQYqp
-	1xEMSDU+cYuGjF7n4lE5sbtG3pJLRJ7mqJPBE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Vw5Ul905c3dkCAU8Sw5xRfTCQA/yuIYhfaR49g+Axgiix7zQ9L+Y6ePj07l3XToQPm
-	up7PJpP0rd8HAAtMRu3WhtM7I3f7LV9wB9ZUVlbryRn78ylnVn+28qmFIy9iuajmuD8g
-	IjLdnm2DrX7/Ae9y+4MDLIH5xrd5KuySpC3Ns=
-MIME-Version: 1.0
-Received: by 10.141.114.15 with SMTP id r15mr733353rvm.179.1232680576431; Thu, 
-	22 Jan 2009 19:16:16 -0800 (PST)
-In-Reply-To: <8763k6okmx.fsf@neumann.lab.ossystems.com.br>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LQH08-00069L-Hu
+	for openembedded-devel@openembedded.org; Fri, 23 Jan 2009 09:02:52 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LQGt8-0004m5-Ji
+	for openembedded-devel@openembedded.org; Fri, 23 Jan 2009 07:55:38 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 23 Jan 2009 07:55:38 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 23 Jan 2009 07:55:38 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 Jan 2009 08:55:22 +0100
+Message-ID: <glbt5b$did$1@ger.gmane.org>
 References: <200901230131.09511.mickey@vanille-media.de>
 	<87wscmn8ne.fsf@neumann.lab.ossystems.com.br>
-	<49791FCA.4010502@balister.org>
-	<8763k6okmx.fsf@neumann.lab.ossystems.com.br>
-Date: Thu, 22 Jan 2009 19:16:16 -0800
-Message-ID: <19c1b8a90901221916k1d312e5yba7c339b7c4c8e77@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090114 Shredder/3.0b2pre
+In-Reply-To: <87wscmn8ne.fsf@neumann.lab.ossystems.com.br>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Bugtracker Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,44 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2009 03:23:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 Jan 2009 08:02:52 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 22, 2009 at 5:51 PM, Otavio Salvador <otavio@debian.org> wrote:
-> Philip Balister <philip@balister.org> writes:
+On 23-01-09 01:55, Otavio Salvador wrote:
+
 >
->>> "Michael 'Mickey' Lauer" <mickey@vanille-media.de> writes:
-> <...>
->>>> 2.2.) Remove all software specific bugs that have an upstream and
->>>> are not distribution-relevant, such as GPE, Opie, Kernel, etc.
->>
->> Can we at least markbugs that are upstream issues in such a way that
->> we can track when they are fixed upstream?
+> I propose to change the workflow a bit (and reuse few points you've proposed):
 >
-> I believe that the effort to track what is fixed upstream is too big
-> for low gain.
+>   1. stop using bugtracker to handle patches
+>   2. use mailing list to handle patches (comments bellow)
+>   3. drop autobuilder bug reporting (comments bellow)
+
+I agree on all points, I have been advocating 2) for a long time :)
+
+regards,
+
+Koen
+
+> Besides, I have no objection about your points 2.2 and 2.3 but I'm too
+> new in the OE environment to comment about them so let me comment
+> about my points:
 >
-> --
->        O T A V I O    S A L V A D O R
-> ---------------------------------------------
->  E-mail: otavio@debian.org      UIN: 5906116
->  GNU/Linux User: 239058     GPG ID: 49A5F855
->  Home Page: http://otavio.ossystems.com.br
-> ---------------------------------------------
-> "Microsoft sells you Windows ... Linux gives
->  you the whole house."
+>   1 and 2:
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   We're trying to get more people to review the changes to be done in
+>   OE dev tree and bugzilla UI is horrible and difficult to use (at
+>   least for me). Most people ends up redoing someone else patch since
+>   we don't watch carefully the bugtrack.
+>
+>   I propose we move to mailing list reviewing process mostly like Linux
+>   kernel does. We can use PatchWork (http://ozlabs.org/~jk/projects/patchwork/)
+>   tool to make our life easier. I see some pros for that:
+>
+>    . people will get more review into the patches
+>    . people will be aware of ongoing work and what is being prepared to
+>      be merged
+>    . less forgotten patches
+>    . less duplicated work
+>
+>   I also see a single con for that:
+>
+>    . more mailing list traffic
+>
+>   3:
+>
+>   Instead of reporting bugs, we could mail mailing list with the
+>   failure and link a log for someone to take a look. It makes us to
+>   worry more about the change since if we break something _everyone_
+>   we'll know it :-)
+>
+> My 2c :P
 >
 
-We could offloads some stuff (patches) to mailing lists and report
-real problems in bugzilla which are not yet fixed and fix is not
-available.
 
--Khem
 
 
