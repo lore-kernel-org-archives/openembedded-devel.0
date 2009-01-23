@@ -1,38 +1,25 @@
-Received: from [198.175.154.225] (helo=us194mx04.tycoelectronics.net)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john.charlton@tycoelectronics.com>)
-	id 1LQPJG-0006Zb-Bp for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jan 2009 17:55:10 +0100
-Received: from usy90mx04.tycoelectronics.net ([163.241.175.14]) by
-	us194mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.2499); 
-	Fri, 23 Jan 2009 11:47:46 -0500
-Received: from us194mx11.tycoelectronics.net ([163.241.185.106]) by
-	usy90mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
-	Fri, 23 Jan 2009 11:47:46 -0500
-Received: from us194mx07.tycoelectronics.net ([163.241.185.38]) by
-	us194mx11.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
-	Fri, 23 Jan 2009 11:47:46 -0500
-Received: from us194mx002.tycoelectronics.net (163.241.202.108) by
-	us194mx07.tycoelectronics.net (163.241.185.38) with Microsoft SMTP
-	Server (TLS) id 8.1.336.0; Fri, 23 Jan 2009 11:47:45 -0500
-Received: from us194mx002.tycoelectronics.net ([163.241.202.108]) by
-	us194mx002.tycoelectronics.net ([163.241.202.108]) with mapi;
-	Fri, 23 Jan 2009 11:47:45 -0500
-From: "Charlton, John" <john.charlton@tycoelectronics.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Jan 2009 11:47:43 -0500
-Thread-Topic: Package fetch error
-Thread-Index: Acl9ek/+RWZVxOblQ1SbhMX4zuUoeQ==
-Message-ID: <CF7FB0793253794F9F45991443E5FE2004DFC46711@us194mx002.tycoelectronics.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQPon-0004C6-Co
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jan 2009 18:27:45 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQPrQ-0003C2-CF
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jan 2009 18:30:28 +0100
+Message-ID: <4979FC5E.9040503@kernelconcepts.de>
+Date: Fri, 23 Jan 2009 18:20:30 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-X-OriginalArrivalTime: 23 Jan 2009 16:47:46.0290 (UTC)
-	FILETIME=[51756520:01C97D7A]
-Subject: Package fetch error
+To: openembedded-devel@lists.openembedded.org
+References: <4976D10A.9050000@gmx.net>
+	<4976D54C.8030601@xora.org.uk>	<200901211257.39952.openembedded@haerwu.biz>	<497731CC.2010000@balister.org>
+	<1232565558.11888.45.camel@elrond.atmel.com>
+In-Reply-To: <1232565558.11888.45.camel@elrond.atmel.com>
+X-Enigmail-Version: 0.95.0
+Subject: Re: FOSDEM OE stand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,91 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2009 16:55:10 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Jan 2009 17:27:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-I am trying to resolve a problem with bitbake package fetch.  I have a prox=
-y server and the proxydirect server works for bitbake up to the libXCursor-=
-1.1.9.tar.bz2 fetch then it times out after resolving the www.angstrom-dist=
-ribution.org to the IP address 85.214.40.226:
+Hi,
 
-OE Build Configuration:
-BB_VERSION        =3D "1.8.13"
-METADATA_BRANCH   =3D "org.openembedded.dev"
-METADATA_REVISION =3D "a84937cc8fbbe013c2671b890db69d3fb7a3fc7d"
-TARGET_ARCH       =3D "arm"                                    =20
-TARGET_OS         =3D "linux-gnueabi"                          =20
-MACHINE           =3D "at91sam9261ek"                          =20
-DISTRO            =3D "angstrom"                               =20
-DISTRO_VERSION    =3D "2009.X-test-20090123"                   =20
-TARGET_FPU        =3D "soft"                                   =20
-...
-...
+Ulf Samuelsson schrieb:
+> I am trying to get some AVR32 AP7000 Network gateways
+> as encouragement to to people that feel they contributed
+> to the AVR32 open-embedded port, or in lack of that,
+> some general enthusiasm about the AVR32 might be good enough :-)
+> 
+> If I am really lucky, I might also be able to lay my hands on a STK1000
+> top board equipped with the brand new AT32AP7200.
 
-Retrying.
---2009-01-23 11:32:07--  (try: 5)  http://www.angstrom-distribution.org/uns=
-table/sources/libXcursor-1.1.9.tar.bz2
---2009-01-23 11:32:07--  (try: 5)  http://www.angstrom-distribution.org/uns=
-table/sources/jasper-1.900.1.zip
-Connecting to www.angstrom-distribution.org|85.214.40.226|:80... Connecting=
- to www.angstrom-distribution.org|85.214.40.226|:80... failed: Connection t=
-imed out.
-failed: Connection timed out.
-Giving up.
+this both sounds pretty good. I planned to bring my NGW100 with me, but a
+STK1000 would be much more attracting. Just apart from the fact that I'd like to
+see some other architectures than ARM at our stand.
 
-Giving up.
+Greetings
 
-From another terminal:
+Florian
 
-
-[us075929@rum downloads]$ wget http://85.214.40.226/unstable/sources/libXcu=
-rsor-1.1.9.tar.bz2
---2009-01-23 11:28:21--  http://85.214.40.226/unstable/sources/libXcursor-1=
-.1.9.tar.bz2
-Resolving proxydirect.tycoelectronics.com... 163.241.128.137
-Connecting to proxydirect.tycoelectronics.com|163.241.128.137|:80... connec=
-ted.
-Proxy request sent, awaiting response... 404 Not Found
-2009-01-23 11:28:22 ERROR 404: Not Found.
-
-[us075929@rum downloads]$ ping 85.214.40.226
-PING 85.214.40.226 (85.214.40.226) 56(84) bytes of data.
-64 bytes from 85.214.40.226: icmp_seq=3D1 ttl=3D47 time=3D105 ms
-64 bytes from 85.214.40.226: icmp_seq=3D2 ttl=3D47 time=3D105 ms
-64 bytes from 85.214.40.226: icmp_seq=3D3 ttl=3D47 time=3D105 ms
-^C
---- 85.214.40.226 ping statistics ---
-3 packets transmitted, 3 received, 0% packet loss, time 2880ms
-rtt min/avg/max/mdev =3D 105.428/105.605/105.955/0.362 ms
-
-Using the url it works:
-[us075929@rum downloads]$ wget http://www.angstrom-distribution.org/unstabl=
-e/sources/libXcursor-1.1.9.tar.bz2
---2009-01-23 11:30:12--  http://www.angstrom-distribution.org/unstable/sour=
-ces/libXcursor-1.1.9.tar.bz2
-Resolving proxydirect.tycoelectronics.com... 163.241.128.137
-Connecting to proxydirect.tycoelectronics.com|163.241.128.137|:80... connec=
-ted.
-Proxy request sent, awaiting response... 200 OK
-Length: 234749 (229K) [application/x-bzip2]
-Saving to: `libXcursor-1.1.9.tar.bz2'
-
-100%[=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D>] 234,749     50.9K/s   in 4.5s
-
-2009-01-23 11:30:17 (50.9 KB/s) - `libXcursor-1.1.9.tar.bz2' saved [234749/=
-234749]
-
-
-The other question is why does it try to download at all since I did the do=
-wnload from the command line and the checksum matches the checksum in the c=
-hecksums file.
-
-
---John
- =
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
