@@ -1,32 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.134.186] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LQHVI-0003eZ-KU
-	for openembedded-devel@openembedded.org; Fri, 23 Jan 2009 09:35:10 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LQHOG-00067f-AC
-	for openembedded-devel@openembedded.org; Fri, 23 Jan 2009 08:27:48 +0000
-Received: from p5483a069.dip0.t-ipconnect.de ([84.131.160.105])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 23 Jan 2009 08:27:48 +0000
-Received: from vjensen by p5483a069.dip0.t-ipconnect.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 23 Jan 2009 08:27:48 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Vitus Jensen <vjensen@gmx.de>
-Date: Fri, 23 Jan 2009 08:27:40 +0000 (UTC)
-Message-ID: <glbv1s$au0$1@ger.gmane.org>
-References: <200901230131.09511.mickey@vanille-media.de>
-	<87wscmn8ne.fsf@neumann.lab.ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5483a069.dip0.t-ipconnect.de
-User-Agent: Pan/0.133 (House of Butterflies)
-Sender: news <news@ger.gmane.org>
-Subject: Re: Bugtracker Status
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LQHq3-00047k-Fn
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jan 2009 09:56:31 +0100
+Received: by mu-out-0910.google.com with SMTP id w1so2782771mue.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jan 2009 00:49:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=pGT9dBis0iW7RpJQ+53heaOTyRmKzeEjoY0FxcODJVM=;
+	b=KsX1eMdny71qXM5CKSqCHSETdkS8XTfM9c5e02xHF8EkyI2df5uxdkjYDx8V+f+UeK
+	V+8rIF9spPuZrQufhDSICPBFFnTdCzfns2zXdNsSIn47Y3BMygjt2rsaQhY1lD1ByuG8
+	sbkKeiLNsAhP5EiQq/KD+PHEbd/j/eNf43sEA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Fq7TMhY7NEia6h04eJdxeah1Pp15vPDAm4+Vve46vCU2KWqqPRnSiD2s0yAMvtaa+b
+	cug0QTFN/cuKbSTJOBGzY4zFXjnp1osNJZntokuSi28HRUQ6Ip+m+EWaZOlN9UOEbwGZ
+	hLuYJ/F67o05qnYEiXztKxbjEkXGWGiVfvkvg=
+MIME-Version: 1.0
+Received: by 10.223.114.135 with SMTP id e7mr570751faq.89.1232700557597; Fri, 
+	23 Jan 2009 00:49:17 -0800 (PST)
+In-Reply-To: <497904EC.6030306@balister.org>
+References: <c384c5ea0901211500pb038bdatbdca725f9b370db@mail.gmail.com>
+	<c384c5ea0901221517s16b6d6e7n706fef6394632b64@mail.gmail.com>
+	<200901230039.11442.mickey@vanille-media.de>
+	<497904EC.6030306@balister.org>
+Date: Fri, 23 Jan 2009 09:49:17 +0100
+Message-ID: <c384c5ea0901230049u682c47b9l3947529acdca1a0d@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: OpenEmbedded Branding (introduction at FOSDEM!)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,65 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2009 08:35:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Jan 2009 08:56:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Am Thu, 22 Jan 2009 22:55:17 -0200 schrieb Otavio Salvador:
+Hi all,
 
-> "Michael 'Mickey' Lauer" <mickey@vanille-media.de> writes:
-> 
->> Hi guys,
+On Fri, Jan 23, 2009 at 12:44 AM, Philip Balister <philip@balister.org> wrote:
+> Michael 'Mickey' Lauer wrote:
 >>
->> we have 1141 open bugs in the bugtracker, a couple of hundreds from
->> ancient autobuilder builds, some more hundreds application specific
->> bugs, and then some actual ones.
->>
->> I think there are two ways to deal with the mess:
->>
->> 1.) Officially close the bugtracker down.
->>
->> 2.) Attack the situation.
->>
->> I'm fine with either way, though if we'd go for 2.), I'd propose:
->>
->> 2.1.) Removing all autobuilder bugs completely (how can we script
->> that?) and stop autobuilder automatically adding bugs. It was a great
->> idea, but it didn't work out. We do not have enough manpower and it
->> just messes up the bugtracker.
->> 2.2.) Remove all software specific bugs that have an upstream and are
->> not distribution-relevant, such as GPE, Opie, Kernel, etc. 2.3.)
->> Reinstate the monthly bug squashing weekends.
->>
->> Opinions?
-> 
-> I propose to change the workflow a bit (and reuse few points you've
-> proposed):
-> 
->  1. stop using bugtracker to handle patches
->  2. use mailing list to handle patches (comments bellow)
->  3. drop autobuilder bug reporting (comments bellow)
-...
+>> Good work. It has a total different character than the one I did for last
+>> year's FOSDEM, but that's a good thing :)
+>
+> Intellectually, I like it, but I have a soft spot for Xora's rocket poster
+> :)
+>
 
-While I just occasional work with OpenEmbedded I have to remark that I 
-have two patches patches published which didn't make it into the 
-repository the last months:
+Yes, remember the point is to introduce the new logo.
 
-1. posted to this list (adds htmldoc)
-2. in bugzilla (fixes php 5 compile)
+I can accept rockets in vector format, and other good ideas.
 
-I can live with that, just using my private branch.  But having gotten no 
-comments what's wrong with those patches I think this shows that either 
-way doesn't work at the moment.
+I'm just proposing things here.
+They cost EUR 30 at the local copy shop (AFAICS) and I have to take
+time off from work to print them.
 
-And --- if you want my opinion --- it's much easier for me to monitor my 
-comments in bugzilla or search patches there.
+Or, maybe I can use the large DesignJet at work, and have our company
+logo on it.
 
-By[t]e,
-   Vitus
+Also, the Bug Labs logo will appear on it as a sponsorship thank you
+for the new logo design.
 
--- 
-Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
 
+
+Regards,
+
+Leon.
 
 
