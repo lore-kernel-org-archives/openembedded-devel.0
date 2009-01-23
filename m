@@ -1,24 +1,22 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQPon-0004C6-Co
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jan 2009 18:27:45 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQPrQ-0003C2-CF
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jan 2009 18:30:28 +0100
-Message-ID: <4979FC5E.9040503@kernelconcepts.de>
-Date: Fri, 23 Jan 2009 18:20:30 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
+	(envelope-from <openembedded@haerwu.biz>) id 1LQPuI-0004OH-15
+	for openembedded-devel@openembedded.org; Fri, 23 Jan 2009 18:33:26 +0100
+Received: (qmail 18039 invoked by uid 813007); 23 Jan 2009 17:26:10 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Jan 2009 17:26:10 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
+Date: Fri, 23 Jan 2009 18:25:42 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
 References: <4976D10A.9050000@gmx.net>
-	<4976D54C.8030601@xora.org.uk>	<200901211257.39952.openembedded@haerwu.biz>	<497731CC.2010000@balister.org>
 	<1232565558.11888.45.camel@elrond.atmel.com>
-In-Reply-To: <1232565558.11888.45.camel@elrond.atmel.com>
-X-Enigmail-Version: 0.95.0
+	<4979FC5E.9040503@kernelconcepts.de>
+In-Reply-To: <4979FC5E.9040503@kernelconcepts.de>
+MIME-Version: 1.0
+Message-Id: <200901231825.43591.openembedded@haerwu.biz>
 Subject: Re: FOSDEM OE stand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,34 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2009 17:27:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 23 Jan 2009 17:33:26 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Friday 23 of January 2009 18:20:30 Florian Boor wrote:
 
-Ulf Samuelsson schrieb:
-> I am trying to get some AVR32 AP7000 Network gateways
-> as encouragement to to people that feel they contributed
-> to the AVR32 open-embedded port, or in lack of that,
-> some general enthusiasm about the AVR32 might be good enough :-)
-> 
-> If I am really lucky, I might also be able to lay my hands on a STK1000
-> top board equipped with the brand new AT32AP7200.
+> Just apart from the fact that I'd like to see some other architectures
+> than ARM at our stand.
 
-this both sounds pretty good. I planned to bring my NGW100 with me, but a
-STK1000 would be much more attracting. Just apart from the fact that I'd like to
-see some other architectures than ARM at our stand.
+This year I will not take progear with me - it is too big and crappy to 
+show it to people. Especially when nearly no one uses this device...
 
-Greetings
-
-Florian
-
+Regards, 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
