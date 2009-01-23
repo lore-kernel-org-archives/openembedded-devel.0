@@ -1,20 +1,23 @@
-Received: from [82.208.44.173] (helo=ibawizard.net)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@ibawizard.net>) id 1LQKpE-0006rm-Jp
-	for openembedded-devel@openembedded.org; Fri, 23 Jan 2009 13:07:52 +0100
-Received: by ibawizard.net (Postfix, from userid 1002)
-	id 2591916C001; Fri, 23 Jan 2009 13:00:30 +0100 (CET)
-Date: Fri, 23 Jan 2009 13:00:30 +0100
-From: Petr Stetiar <ynezz@true.cz>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090123120029.GB19349@ibawizard.net>
-References: <200901230131.09511.mickey@vanille-media.de>
-	<87wscmn8ne.fsf@neumann.lab.ossystems.com.br>
-	<49799C30.90508@epfl.ch> <glc8ce$eoh$1@ger.gmane.org>
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQM4U-0002XO-Pj
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jan 2009 14:27:42 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQM77-0000eT-2Q
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jan 2009 14:30:25 +0100
+Message-ID: <4979C416.3060401@kernelconcepts.de>
+Date: Fri, 23 Jan 2009 14:20:22 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-In-Reply-To: <glc8ce$eoh$1@ger.gmane.org>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Subject: Re: Mailinglists, was: Re: Bugtracker Status
+To: openembedded-devel@lists.openembedded.org
+References: <200901230131.09511.mickey@vanille-media.de>
+In-Reply-To: <200901230131.09511.mickey@vanille-media.de>
+X-Enigmail-Version: 0.95.0
+Subject: Re: Bugtracker Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,31 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2009 12:07:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Jan 2009 13:27:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Koen Kooi <k.kooi@student.utwente.nl> [2009-01-23 12:06:54]:
+HI,
 
-> On 23-01-09 11:30, Valentin Longchamp wrote:
-> >I would definitely support a patch review style like on the linux kernel
-> >mailing-lists even if this implies a high-traffic list (with simple
-> >filter rules in your mail client, it's easy to handle). However, I don't
-> >think it would be a good idea to have two lists.
-> 
-> I'd go even further by saying we should reorganize the mailinglists into 
-> this:
-> 
-> * oe mailinglist for humans
-> * combined commit + autobuild log list for non-humans
-> 
-> That should reduce confusion which list to use (oe-user, oe-devel, etc) 
-> for sending mails and more people get to see patches flying by. Even if 
-> you don't review them having more code snippets on the list is usefull 
-> for newcomers.
+Michael 'Mickey' Lauer schrieb:
+> 2.1.) Removing all autobuilder bugs completely (how can we script that?) and 
+> stop autobuilder automatically adding bugs. It was a great idea, but it 
+> didn't work out. We do not have enough manpower and it just messes up the 
+> bugtracker.
 
-That would be awesome.
+that would be a good idea. Most of these have never been relevant and unless we
+have someone who volunteers tracking them down they only mess up the database.
+It should be quite easy to get rid of them with a short shell+sql script. The
+GPE 'product' and 'version' entries in the bugtracker database are created from
+a script as well.
 
--- ynezz
+> 2.2.) Remove all software specific bugs that have an upstream and are not 
+> distribution-relevant, such as GPE, Opie, Kernel, etc.
+
+Yes, but we should make sure no patches and other important information gets lost.
+
+> 2.3.) Reinstate the monthly bug squashing weekends.
+
+Yes!
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
