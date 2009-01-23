@@ -1,23 +1,21 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQMJy-0002vE-UG
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jan 2009 14:43:43 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LQMMb-0000mX-9v
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jan 2009 14:46:25 +0100
-Message-ID: <4979C7DC.4050902@kernelconcepts.de>
-Date: Fri, 23 Jan 2009 14:36:28 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
+	(envelope-from <openembedded@haerwu.biz>) id 1LQMhA-0003S8-VZ
+	for openembedded-devel@openembedded.org; Fri, 23 Jan 2009 15:07:41 +0100
+Received: (qmail 15392 invoked by uid 813007); 23 Jan 2009 14:00:24 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Jan 2009 14:00:24 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-References: <200901230131.09511.mickey@vanille-media.de>	<87wscmn8ne.fsf@neumann.lab.ossystems.com.br>
-	<glbt5b$did$1@ger.gmane.org>
-In-Reply-To: <glbt5b$did$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
+Date: Fri, 23 Jan 2009 14:59:49 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
+References: <200901230131.09511.mickey@vanille-media.de>
+	<glbt5b$did$1@ger.gmane.org> <4979C7DC.4050902@kernelconcepts.de>
+In-Reply-To: <4979C7DC.4050902@kernelconcepts.de>
+MIME-Version: 1.0
+Message-Id: <200901231459.57292.openembedded@haerwu.biz>
 Subject: Re: Bugtracker Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,30 +30,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2009 13:43:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 23 Jan 2009 14:07:41 -0000
+X-Groupsio-MsgNum: 7391
+Content-Type: multipart/signed; boundary="nextPart1923659.EpV00KDyb8";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+--nextPart1923659.EpV00KDyb8
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Koen Kooi schrieb:
+On Friday 23 of January 2009 14:36:28 Florian Boor wrote:
+> >> =A0 2. use mailing list to handle patches (comments bellow)
+> >> =A0 3. drop autobuilder bug reporting (comments bellow)
+> >
+> > I agree on all points, I have been advocating 2) for a long time :)
+>
+> +1 from me
 
->>   2. use mailing list to handle patches (comments bellow)
->>   3. drop autobuilder bug reporting (comments bellow)
-> 
-> I agree on all points, I have been advocating 2) for a long time :)
+Also +1
 
-+1 from me
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Greetings
+--nextPart1923659.EpV00KDyb8
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-Florian
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+iEYEABECAAYFAkl5zVcACgkQeQ6MlGH/2qsO3ACeL9P0z1xOim3zOJRnv3xVDHAW
+LqsAnAqYV7YZG8QgW6Svup85kwKtDi4t
+=z013
+-----END PGP SIGNATURE-----
 
-
+--nextPart1923659.EpV00KDyb8--
