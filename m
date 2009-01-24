@@ -1,21 +1,31 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [195.54.101.71] (helo=proxy1.bredband.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LQmhK-0004ao-Sa
-	for openembedded-devel@openembedded.org; Sat, 24 Jan 2009 18:53:35 +0100
-Received: (qmail 20116 invoked by uid 813007); 24 Jan 2009 17:46:14 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 24 Jan 2009 17:46:14 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1LQoCn-0000Dl-E2
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 24 Jan 2009 20:30:10 +0100
+Received: from ironport.bredband.com (195.54.101.120) by proxy1.bredband.net
+	(7.3.127)
+	id 494BF21C00ADC78A for openembedded-devel@lists.openembedded.org;
+	Sat, 24 Jan 2009 20:22:47 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AqELAPD4eklT4zhBPGdsb2JhbAAIiQqKYAEBAQE1tG6FTA
+X-IronPort-AV: E=Sophos;i="4.37,318,1231110000"; d="scan'208";a="477770115"
+Received: from c-4138e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.221]) ([83.227.56.65])
+	by ironport1.bredband.com with ESMTP; 24 Jan 2009 20:22:47 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Jan 2009 18:45:44 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.28; KDE/4.1.96; x86_64; ; )
-References: <4976D10A.9050000@gmx.net> <497B1685.20504@gmail.com>
-	<glf66f$p9u$1@ger.gmane.org>
-In-Reply-To: <glf66f$p9u$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200901241845.44831.openembedded@haerwu.biz>
+In-Reply-To: <4979FC5E.9040503@kernelconcepts.de>
+References: <4976D10A.9050000@gmx.net> <4976D54C.8030601@xora.org.uk>
+	<200901211257.39952.openembedded@haerwu.biz>
+	<497731CC.2010000@balister.org>
+	<1232565558.11888.45.camel@elrond.atmel.com>
+	<4979FC5E.9040503@kernelconcepts.de>
+Organization: Atmel Nordic AB
+Date: Sat, 24 Jan 2009 20:22:46 +0100
+Message-Id: <1232824966.5311.162.camel@elrond.atmel.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
 Subject: Re: FOSDEM OE stand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,33 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jan 2009 17:53:35 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 24 Jan 2009 19:30:12 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Saturday 24 of January 2009 14:47:58 Koen Kooi wrote:
-> On 24-01-09 14:24, Marco Cavallini wrote:
-> > Florian Boor ha scritto:
-> >> Just apart from the fact that I'd like to
-> >> see some other architectures than ARM at our stand.
-> > What about this Vortex86SX ?
+fre 2009-01-23 klockan 18:20 +0100 skrev Florian Boor:
+> Hi,
+> 
+> Ulf Samuelsson schrieb:
+> > I am trying to get some AVR32 AP7000 Network gateways
+> > as encouragement to to people that feel they contributed
+> > to the AVR32 open-embedded port, or in lack of that,
+> > some general enthusiasm about the AVR32 might be good enough :-)
+> > 
+> > If I am really lucky, I might also be able to lay my hands on a STK1000
+> > top board equipped with the brand new AT32AP7200.
+> 
+> this both sounds pretty good. I planned to bring my NGW100 with me, but a
+> STK1000 would be much more attracting. Just apart from the fact that I'd like to
+> see some other architectures than ARM at our stand.
+> 
 
-> > If someone could help me creating a configuration for this machine,
-> > we could show it FOSDEM OE stand :-)
+If I get an STK1005, It will be brand new, and nothing running on it...
 
-> Try making a copy of qemux86.conf, that builds and works.
+Didn't plan to bring a baseboard, but if someone brings one,
+the STK1005 could be fitted on top.
 
-Vortex86sx is i486 based non-FPU device so rather base on x86 + proper 
-kernel config.
+BR
+Ulf
 
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+> Greetings
+> 
+> Florian
+> 
 
 
