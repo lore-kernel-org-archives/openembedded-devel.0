@@ -1,31 +1,33 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LQibo-00024I-K8
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jan 2009 14:31:36 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 532E02C8A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jan 2009 13:24:02 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rrxY8xnWuaEs
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jan 2009 13:24:01 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id B21A82C8A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jan 2009 13:24:00 +0000 (UTC)
-Message-ID: <497B1685.20504@gmail.com>
-Date: Sat, 24 Jan 2009 14:24:21 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4976D10A.9050000@gmx.net>	<4976D54C.8030601@xora.org.uk>	<200901211257.39952.openembedded@haerwu.biz>	<497731CC.2010000@balister.org>	<1232565558.11888.45.camel@elrond.atmel.com>
-	<4979FC5E.9040503@kernelconcepts.de>
-In-Reply-To: <4979FC5E.9040503@kernelconcepts.de>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LQiys-0002bW-RB
+	for openembedded-devel@openembedded.org; Sat, 24 Jan 2009 14:55:26 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LQirn-0008Mn-Qu
+	for openembedded-devel@openembedded.org; Sat, 24 Jan 2009 13:48:08 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 24 Jan 2009 13:48:07 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 24 Jan 2009 13:48:07 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 24 Jan 2009 14:47:58 +0100
+Message-ID: <glf66f$p9u$1@ger.gmane.org>
+References: <4976D10A.9050000@gmx.net>	<4976D54C.8030601@xora.org.uk>	<200901211257.39952.openembedded@haerwu.biz>	<497731CC.2010000@balister.org>	<1232565558.11888.45.camel@elrond.atmel.com>	<4979FC5E.9040503@kernelconcepts.de>
+	<497B1685.20504@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090118 Shredder/3.0b2pre
+In-Reply-To: <497B1685.20504@gmail.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: FOSDEM OE stand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,21 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jan 2009 13:31:36 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 24 Jan 2009 13:55:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Florian Boor ha scritto:
-> Just apart from the fact that I'd like to
-> see some other architectures than ARM at our stand.
+On 24-01-09 14:24, Marco Cavallini wrote:
+> Florian Boor ha scritto:
+>> Just apart from the fact that I'd like to
+>> see some other architectures than ARM at our stand.
+>
+> What about this Vortex86SX ?
+> http://www.koala.it/it/nanopc.htm
+>
+> If someone could help me creating a configuration for this machine, we
+> could show it FOSDEM OE stand :-)
+> (Monitor, mouse, keyboard must be provided in place)
 
-What about this Vortex86SX ?
-http://www.koala.it/it/nanopc.htm
+Try making a copy of qemux86.conf, that builds and works.
 
-If someone could help me creating a configuration for this machine, we
-could show it FOSDEM OE stand :-)
-(Monitor, mouse, keyboard must be provided in place)
---
-Marco Cavallini
+regards,
+
+Koen
+
 
 
