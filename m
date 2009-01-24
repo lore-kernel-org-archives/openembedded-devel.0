@@ -1,31 +1,32 @@
-Received: from [195.54.101.71] (helo=proxy1.bredband.net)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1LQoCn-0000Dl-E2
+	(envelope-from <koansoftware@gmail.com>) id 1LQqfb-0000dp-Rl
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jan 2009 20:30:10 +0100
-Received: from ironport.bredband.com (195.54.101.120) by proxy1.bredband.net
-	(7.3.127)
-	id 494BF21C00ADC78A for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jan 2009 20:22:47 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AqELAPD4eklT4zhBPGdsb2JhbAAIiQqKYAEBAQE1tG6FTA
-X-IronPort-AV: E=Sophos;i="4.37,318,1231110000"; d="scan'208";a="477770115"
-Received: from c-4138e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.221]) ([83.227.56.65])
-	by ironport1.bredband.com with ESMTP; 24 Jan 2009 20:22:47 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+	Sat, 24 Jan 2009 23:08:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 24DDB2C8A6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Jan 2009 22:00:27 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id IQFbyZ0RQiae
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Jan 2009 22:00:25 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id 8699D2C8A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Jan 2009 22:00:25 +0000 (UTC)
+Message-ID: <497B8F8D.2090205@gmail.com>
+Date: Sat, 24 Jan 2009 23:00:45 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4979FC5E.9040503@kernelconcepts.de>
-References: <4976D10A.9050000@gmx.net> <4976D54C.8030601@xora.org.uk>
-	<200901211257.39952.openembedded@haerwu.biz>
-	<497731CC.2010000@balister.org>
-	<1232565558.11888.45.camel@elrond.atmel.com>
-	<4979FC5E.9040503@kernelconcepts.de>
-Organization: Atmel Nordic AB
-Date: Sat, 24 Jan 2009 20:22:46 +0100
-Message-Id: <1232824966.5311.162.camel@elrond.atmel.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
+References: <4976D10A.9050000@gmx.net>
+	<497B1685.20504@gmail.com>	<glf66f$p9u$1@ger.gmane.org>
+	<200901241845.44831.openembedded@haerwu.biz>
+In-Reply-To: <200901241845.44831.openembedded@haerwu.biz>
 Subject: Re: FOSDEM OE stand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,38 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jan 2009 19:30:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 24 Jan 2009 22:08:04 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-fre 2009-01-23 klockan 18:20 +0100 skrev Florian Boor:
-> Hi,
+Marcin Juszkiewicz ha scritto:
+> On Saturday 24 of January 2009 14:47:58 Koen Kooi wrote:
+>> On 24-01-09 14:24, Marco Cavallini wrote:
+>>> Florian Boor ha scritto:
+>>>> Just apart from the fact that I'd like to
+>>>> see some other architectures than ARM at our stand.
+>>> What about this Vortex86SX ?
 > 
-> Ulf Samuelsson schrieb:
-> > I am trying to get some AVR32 AP7000 Network gateways
-> > as encouragement to to people that feel they contributed
-> > to the AVR32 open-embedded port, or in lack of that,
-> > some general enthusiasm about the AVR32 might be good enough :-)
-> > 
-> > If I am really lucky, I might also be able to lay my hands on a STK1000
-> > top board equipped with the brand new AT32AP7200.
+>>> If someone could help me creating a configuration for this machine,
+>>> we could show it FOSDEM OE stand :-)
 > 
-> this both sounds pretty good. I planned to bring my NGW100 with me, but a
-> STK1000 would be much more attracting. Just apart from the fact that I'd like to
-> see some other architectures than ARM at our stand.
+>> Try making a copy of qemux86.conf, that builds and works.
 > 
+> Vortex86sx is i486 based non-FPU device so rather base on x86 + proper 
+> kernel config.
 
-If I get an STK1005, It will be brand new, and nothing running on it...
+x86 is broken, I was only able to build i586-generic :-(
 
-Didn't plan to bring a baseboard, but if someone brings one,
-the STK1005 could be fitted on top.
+--
+Marco
 
-BR
-Ulf
-
-> Greetings
-> 
-> Florian
-> 
 
 
