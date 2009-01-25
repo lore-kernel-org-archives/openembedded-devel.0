@@ -1,33 +1,31 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LQqfb-0000dp-Rl
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jan 2009 23:08:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 24DDB2C8A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jan 2009 22:00:27 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IQFbyZ0RQiae
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jan 2009 22:00:25 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id 8699D2C8A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jan 2009 22:00:25 +0000 (UTC)
-Message-ID: <497B8F8D.2090205@gmail.com>
-Date: Sat, 24 Jan 2009 23:00:45 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4976D10A.9050000@gmx.net>
-	<497B1685.20504@gmail.com>	<glf66f$p9u$1@ger.gmane.org>
-	<200901241845.44831.openembedded@haerwu.biz>
-In-Reply-To: <200901241845.44831.openembedded@haerwu.biz>
-Subject: Re: FOSDEM OE stand
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LR7Cn-0001A6-Jf
+	for openembedded-devel@openembedded.org; Sun, 25 Jan 2009 16:47:25 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LR75e-0004Pj-Mm
+	for openembedded-devel@openembedded.org; Sun, 25 Jan 2009 15:40:02 +0000
+Received: from 77-254-235-66.adsl.inetia.pl ([77.254.235.66])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 25 Jan 2009 15:40:02 +0000
+Received: from uzytkownik2 by 77-254-235-66.adsl.inetia.pl with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 25 Jan 2009 15:40:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Maciej Piechotka <uzytkownik2@gmail.com>
+Date: Sun, 25 Jan 2009 13:57:56 +0100
+Message-ID: <8763k3czl7.fsf@news.piechotka.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: 77-254-235-66.adsl.inetia.pl
+User-Agent: Gnus/5.11 (Gnus v5.11) Emacs/22.3 (gnu/linux)
+Cancel-Lock: sha1:jXnpxxYyeS93raUEXsuFBT/7qr0=
+Sender: news <news@ger.gmane.org>
+Subject: Problem with building connman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +39,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jan 2009 22:08:04 -0000
+X-List-Received-Date: Sun, 25 Jan 2009 15:47:25 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz ha scritto:
-> On Saturday 24 of January 2009 14:47:58 Koen Kooi wrote:
->> On 24-01-09 14:24, Marco Cavallini wrote:
->>> Florian Boor ha scritto:
->>>> Just apart from the fact that I'd like to
->>>> see some other architectures than ARM at our stand.
->>> What about this Vortex86SX ?
-> 
->>> If someone could help me creating a configuration for this machine,
->>> we could show it FOSDEM OE stand :-)
-> 
->> Try making a copy of qemux86.conf, that builds and works.
-> 
-> Vortex86sx is i486 based non-FPU device so rather base on x86 + proper 
-> kernel config.
+If I try to build connman using bitbake + oembedded I get the following
+errors:
+	then mv -f ".deps/main.Tpo" ".deps/main.Po"; else rm -f ".deps/main.Tpo"; exit 1; fi
+In file included from main.c:37:
+connman.h:26:26: error: connman/dbus.h: No such file or directory
+connman.h:56:25: error: connman/log.h: No such file or directory
+connman.h:63:28: error: connman/plugin.h: No such file or directory
+connman.h:68:30: error: connman/security.h: No such file or directory
+In file included from main.c:37:
+connman.h:71: warning: 'enum connman_security_privilege' declared inside parameter list
+connman.h:71: warning: its scope is only this definition or declaration, which is probably not what you want
+connman.h:73:26: error: connman/ipv4.h: No such file or directory
+connman.h:75: warning: 'enum connman_ipv4_method' declared inside parameter list
+connman.h:78:30: error: connman/resolver.h: No such file or directory
+connman.h:85:29: error: connman/storage.h: No such file or directory
+connman.h:91: warning: 'struct connman_device' declared inside parameter list
+connman.h:92: warning: 'struct connman_device' declared inside parameter list
+connman.h:94: warning: 'struct connman_network' declared inside parameter list
+connman.h:95: warning: 'struct connman_network' declared inside parameter list
+connman.h:97:28: error: connman/driver.h: No such file or directory
+connman.h:99: warning: 'struct connman_driver' declared inside parameter list
+connman.h:101:29: error: connman/element.h: No such file or directory
+connman.h:109: warning: 'struct connman_element' declared inside parameter list
+connman.h:113: warning: 'enum connman_element_type' declared inside parameter list
+connman.h:113: warning: 'struct connman_element' declared inside parameter list
+connman.h:116: warning: 'enum connman_element_type' declared inside parameter list
+connman.h:116: warning: 'struct connman_element' declared inside parameter list
+connman.h:118: warning: 'enum connman_element_type' declared inside parameter list
+connman.h:118: warning: 'struct connman_element' declared inside parameter list
+connman.h:120: warning: 'struct connman_element' declared inside parameter list
+connman.h:121: warning: 'struct connman_element' declared inside parameter list
+connman.h:123: warning: 'enum connman_element_type' declared inside parameter list
+connman.h:125: warning: 'struct connman_element' declared inside parameter list
+connman.h:129: warning: 'struct connman_element' declared inside parameter list
+connman.h:156:28: error: connman/device.h: No such file or directory
+connman.h:161: warning: 'struct connman_device' declared inside parameter list
+connman.h:162: warning: 'struct connman_device' declared inside parameter list
+connman.h:164: error: expected '=', ',', ';', 'asm' or '__attribute__' before '__connman_device_has_driver'
+connman.h:166: error: expected ')' before 'flightmode'
+connman.h:168:29: error: connman/network.h: No such file or directory
+connman.h:174: warning: 'struct connman_device' declared inside parameter list
+connman.h:174: warning: 'struct connman_network' declared inside parameter list
+connman.h:176: error: expected '=', ',', ';', 'asm' or '__attribute__' before '__connman_network_has_driver'
+connman.h:178:26: error: connman/rtnl.h: No such file or directory
+main.c: In function 'main':
+main.c:136: error: 'CONNMAN_SERVICE' undeclared (first use in this function)
+main.c:136: error: (Each undeclared identifier is reported only once
+main.c:136: error: for each function it appears in.)
+make[2]: *** [main.o] Error 1
 
-x86 is broken, I was only able to build i586-generic :-(
+What's wrong?
 
---
-Marco
+Regards
+-- 
+I've probably left my head... somewhere. Please wait untill I find it.
+Homepage (pl_PL): http://uzytkownik.jogger.pl/
+(GNU/)Linux User: #425935 (see http://counter.li.org/)
+
 
 
 
