@@ -1,27 +1,31 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1LRP9V-0003c7-C7
+	(envelope-from <koansoftware@gmail.com>) id 1LRPZV-00025v-An
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jan 2009 11:57:13 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LRP2B-0005wS-Qj
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jan 2009 10:49:39 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1LRP2A-00037i-D3
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jan 2009 10:49:38 +0000
-From: Phil Blundell <pb@reciva.com>
+	Mon, 26 Jan 2009 12:24:13 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 86E572C8A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2009 11:16:18 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MdFbYlDLjJ+C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2009 11:16:17 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id BAA162C792
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2009 11:16:16 +0000 (UTC)
+Message-ID: <497D9BAC.5070201@gmail.com>
+Date: Mon, 26 Jan 2009 12:17:00 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <497D7E2A.8050302@gmail.com>
 References: <497D7E2A.8050302@gmail.com>
-Date: Mon, 26 Jan 2009 10:49:37 +0000
-Message-Id: <1232966977.23807.3.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+	<1232966977.23807.3.camel@mill.internal.reciva.com>
+In-Reply-To: <1232966977.23807.3.camel@mill.internal.reciva.com>
 Subject: Re: Building for i486 based non-FPU device
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,28 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2009 10:57:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Jan 2009 11:24:25 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-01-26 at 10:11 +0100, Marco Cavallini wrote:
-> DISTRO = "angstrom-2008.1"
-
-It might be worth trying with "minimal" to start with, just to eliminate
-any angstrom-related uncertainties.
-
-> i486-generic uses TARGET_ARCH = "i486" : build broken
+Phil Blundell ha scritto:
+> On Mon, 2009-01-26 at 10:11 +0100, Marco Cavallini wrote:
+>> DISTRO = "angstrom-2008.1"
 > 
-> No one of the previous tested build give a useful result,
-> what could I change to get a running system?
+> It might be worth trying with "minimal" to start with, just to eliminate
+> any angstrom-related uncertainties.
 
-It's hard to say what you need to change without knowing what exactly is
-going wrong.  Can you give more details of the breakage that you
-encountered?  What image were you trying to build, what package(s)
-failed, and what were the errors?
+Ok, thanks
+I tried with bitbake minimal-image too (see pastebin)
 
-p.
+>> i486-generic uses TARGET_ARCH = "i486" : build broken
+>>
+>> No one of the previous tested build give a useful result,
+>> what could I change to get a running system?
+> 
+> It's hard to say what you need to change without knowing what exactly is
+> going wrong.  Can you give more details of the breakage that you
+> encountered?  What image were you trying to build, what package(s)
+> failed, and what were the errors?
 
+http://debian.pastebin.com/m57df2ac9
 
+TIA
+--
+Marco Cavallini
 
 
