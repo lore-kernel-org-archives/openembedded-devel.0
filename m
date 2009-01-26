@@ -1,32 +1,25 @@
-Received: from [64.233.170.190] (helo=rn-out-0910.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1LRW3M-0004ma-HB
+	(envelope-from <mickey@vanille-media.de>) id 1LRW8L-0001fL-KX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jan 2009 19:19:20 +0100
-Received: by rn-out-0910.google.com with SMTP id j42so1779324rne.20
+	Mon, 26 Jan 2009 19:24:29 +0100
+Received: from andromeda.vanille.de (e180153012.adsl.alicedsl.de
+	[85.180.153.12])
+	by drlauer-research.com (Postfix) with ESMTP id 7C685584152
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2009 10:11:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=mFa1az8n5BZkRw7Q9EUwDZ0g8WTW8TWtehvck5SvOFE=;
-	b=NAcBxkI4KuSNl03rf3mkyPZJYhL8a/njYk4pREYCNXWDFpUqJDZBEL125bWumrIKBh
-	kkhal9D1BNkvePkg32LDDmF4j6fr73zJgwSqQ2ndJIjGBfXgLMxr3kztvapSqJmM1uue
-	EuLUDVSy97858+tslbSr+8aZlXixupA7q42Sc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=W3kjrB/lVVHG4Z06ATe+eWPPy2XkdK/f7beoF03AdZPSU/uzFm5SkQ/12hpWJklSVo
-	YkkiUiN+dCEYpUqkY4FI8EN3l2ghir5TSdZQIydzUmx/oxyxQFuk/X16iA3DcKZst2kO
-	f/vOKKo894R13LTqBUdFiQUOh2OymTL/h6KMs=
-MIME-Version: 1.0
-Received: by 10.150.154.6 with SMTP id b6mr806785ybe.218.1232993511624; Mon, 
-	26 Jan 2009 10:11:51 -0800 (PST)
-Date: Mon, 26 Jan 2009 13:11:51 -0500
-Message-ID: <f96d234e0901261011x1708a5cbra3334ceb18821f08@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Mon, 26 Jan 2009 19:38:35 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Subject: rm_work and building kernel modules
+Date: Mon, 26 Jan 2009 19:16:58 +0100
+User-Agent: KMail/1.9.10
+References: <8763k3czl7.fsf@news.piechotka.com.pl>
+	<200901251759.43567.mickey@vanille-media.de>
+	<871vuqcqz9.fsf@news.piechotka.com.pl>
+In-Reply-To: <871vuqcqz9.fsf@news.piechotka.com.pl>
+MIME-Version: 1.0
+Message-Id: <200901261916.58938.mickey@vanille-media.de>
+Subject: Re: Problem with building connman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,25 +33,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2009 18:19:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 Jan 2009 18:24:29 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I'm noticed a little glitch with rm_work and building kernel modules
-with OE.  Typically, kernel module builds require the kernel source to
-be intact, which gets removed if rm_work is enabled.  I'm wondering if
-we should make a way to suppress rm_work for kernel recipes, or is
-this just one of those things people need to live with?  If so, any
-thoughts on the best way to implement?  A hackish way would be to
-check a variable in do_rm_work() and not remove directories if
-INHIBIT_RM_WORK is set.
+Am Monday 26 January 2009 11:16:10 schrieb Maciej Piechotka:
+> "Michael 'Mickey' Lauer" <mickey@vanille-media.de> writes:
+> > Which libtool version?
+>
+> libtool-cross-1.5.10-r10
+> libtool-native-1.5.10-r10
 
-Thanks,
-Cliff
+Can you retry with libtool2 and automake 1.10?
 
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+:M:
 
 
