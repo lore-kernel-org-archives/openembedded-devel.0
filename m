@@ -1,38 +1,34 @@
-Received: from [198.175.154.225] (helo=us194mx04.tycoelectronics.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john.charlton@tycoelectronics.com>)
-	id 1LRXnE-0001x6-Gv
-	for openembedded-devel@openembedded.org; Mon, 26 Jan 2009 21:10:48 +0100
-Received: from us194mx11.tycoelectronics.net ([163.241.185.106]) by
-	us194mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.2499); 
-	Mon, 26 Jan 2009 15:03:17 -0500
-Received: from us194mx07.tycoelectronics.net ([163.241.185.38]) by
-	us194mx11.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
-	Mon, 26 Jan 2009 15:03:17 -0500
-Received: from us194mx002.tycoelectronics.net (163.241.202.108) by
-	us194mx07.tycoelectronics.net (163.241.185.38) with Microsoft SMTP
-	Server (TLS) id 8.1.336.0; Mon, 26 Jan 2009 15:03:16 -0500
-Received: from us194mx002.tycoelectronics.net ([163.241.202.108]) by
-	us194mx002.tycoelectronics.net ([163.241.202.108]) with mapi;
-	Mon, 26 Jan 2009 15:03:16 -0500
-From: "Charlton, John" <john.charlton@tycoelectronics.com>
-To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-Date: Mon, 26 Jan 2009 15:03:14 -0500
-Thread-Topic: [oe] Package fetch error
-Thread-Index: Acl9sw7FULIGdx+OQvSPRCFtqh5xdQCCU/swAAoWnFA=
-Message-ID: <CF7FB0793253794F9F45991443E5FE2004E3A8C128@us194mx002.tycoelectronics.net>
-References: <CF7FB0793253794F9F45991443E5FE2004DFC46711@us194mx002.tycoelectronics.net>
-	<loom.20090123T230426-652@post.gmane.org>
-	<CF7FB0793253794F9F45991443E5FE2004E3A8BEA5@us194mx002.tycoelectronics.net>
-In-Reply-To: <CF7FB0793253794F9F45991443E5FE2004E3A8BEA5@us194mx002.tycoelectronics.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-OriginalArrivalTime: 26 Jan 2009 20:03:17.0085 (UTC)
-	FILETIME=[20CBE8D0:01C97FF1]
-Subject: Re: Package fetch error
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LRXqE-0002DJ-6J
+	for openembedded-devel@openembedded.org; Mon, 26 Jan 2009 21:13:54 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LRXix-0004o3-MV
+	for openembedded-devel@openembedded.org; Mon, 26 Jan 2009 20:06:23 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 26 Jan 2009 20:06:23 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 26 Jan 2009 20:06:23 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 26 Jan 2009 21:06:09 +0100
+Message-ID: <gll53i$5s3$1@ger.gmane.org>
+References: <f96d234e0901261011x1708a5cbra3334ceb18821f08@mail.gmail.com>	<glkvmu$gff$1@ger.gmane.org>
+	<f96d234e0901261124j4352f43ar7c8fa936a59514bf@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090118 Shredder/3.0b2pre
+In-Reply-To: <f96d234e0901261124j4352f43ar7c8fa936a59514bf@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: rm_work and building kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,140 +42,209 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2009 20:10:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 26 Jan 2009 20:13:54 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I relealized after sending the last message that when I copied the destinat=
-ion path into the wget -P option, I mistakenly put the source path for jasp=
-er_1.900.1.bb which resulted in clobbering the jasper_1.900.1.bb source and=
- causing some other build problems. Otherwise the fetch results are the sam=
-e.
+On 26-01-09 20:24, Cliff Brake wrote:
+> On Mon, Jan 26, 2009 at 1:34 PM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>> On 26-01-09 19:11, Cliff Brake wrote:
+>>> I'm noticed a little glitch with rm_work and building kernel modules
+>>> with OE.  Typically, kernel module builds require the kernel source to
+>>> be intact, which gets removed if rm_work is enabled.
+>> Which is why it's getting staged to STAGING_KERNEL_DIR, see module.bbclass.
+>
+> ok, thanks.  After digging a little more, it appears I developed this
+> recipe on an older OE snapshot that did not have support for the new
+> location of the asm/arch headers in 2.6.27.  Everything seems to work
+> now.
+>
+> Would anyone be offended if I commit the below patch?  There may be
+> some false positives, but would at least hopefully cut down on people
+> copying the use of KERNEL_SOURCE for new module recipes.
 
-The fetch problem does not occur when I put both the libXcursor-1.1.9.tar.b=
-z2 and libXcursor-1.1.9.tar.bz2.md5 in the downloads directory where I crea=
-te the .md5.  Is bitbake supposed to compute its own .md5 file or does it n=
-eed to find that on the same server as the tar archive?  I notice that the =
-.md5 files are missing for the downloads that I am having problems with.
+Looks OK to me.
 
---John
+regards,
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Charlton, John
-Sent: Monday, January 26, 2009 9:00 AM
-To: openembedded-devel@openembedded.org
-Subject: Re: [oe] Package fetch error
+Koen
 
-Jeremy,
+>
+> Thanks,
+> Cliff
+>
+> diff --git a/packages/ark3116/ark3116_0.4.1.bb
+> b/packages/ark3116/ark3116_0.4.1.bb
+> index 629c50a..33962ff 100644
+> --- a/packages/ark3116/ark3116_0.4.1.bb
+> +++ b/packages/ark3116/ark3116_0.4.1.bb
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   DESCRIPTION = "Driver for usb serial cables based upon ArkMicroChips
+> 3116s chip"
+>   HOMEPAGE = "http://avr.auctionant.de/ark3116_linux_driver/"
+>   PRIORITY = "optional"
+> diff --git a/packages/char-driver/char-driver.bb
+> b/packages/char-driver/char-driver.bb
+> index e6458b5..25245af 100644
+> --- a/packages/char-driver/char-driver.bb
+> +++ b/packages/char-driver/char-driver.bb
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   DESCRIPTION = "char-driver and userspace program"
+>   PRIORITY = "optional"
+>   SECTION = "base"
+> diff --git a/packages/dri/drm-kernel_cvs.bb b/packages/dri/drm-kernel_cvs.bb
+> index 7e0bddf..ee68bac 100644
+> --- a/packages/dri/drm-kernel_cvs.bb
+> +++ b/packages/dri/drm-kernel_cvs.bb
+> @@ -1,3 +1,6 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory.  see modules.bbclass
+> +
+>   SECTION = "x11/base"
+>   PR = "r3"
+>   LICENSE = "MIT"
+> diff --git a/packages/geode-drivers/geode-modules.inc
+> b/packages/geode-drivers/geode-modules.inc
+> index adaf885..9e78556 100644
+> --- a/packages/geode-drivers/geode-modules.inc
+> +++ b/packages/geode-drivers/geode-modules.inc
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   # Linux kernel modules OE build files for the AMD Geode GX5535/LX5536
+>   # Copyright (C) 2005-2006, Advanced Micro Devices, Inc.  All Rights Reserved
+>   # Released under the MIT license (see packages/COPYING)
+> diff --git a/packages/gpio-event/gpio-event.bb
+> b/packages/gpio-event/gpio-event.bb
+> index afb2a77..52a5414 100644
+> --- a/packages/gpio-event/gpio-event.bb
+> +++ b/packages/gpio-event/gpio-event.bb
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   DESCRIPTION = "gpio-event driver and userspace program"
+>   PRIORITY = "optional"
+>   SECTION = "base"
+> diff --git a/packages/pcmcia-cs/pcmcia-cs_3.2.8.bb
+> b/packages/pcmcia-cs/pcmcia-cs_3.2.8.bb
+> index 018f335..18a40c7 100644
+> --- a/packages/pcmcia-cs/pcmcia-cs_3.2.8.bb
+> +++ b/packages/pcmcia-cs/pcmcia-cs_3.2.8.bb
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   DESCRIPTION = "Utilities and system configuration files for the Linux
+> PCMCIA card services"
+>   SECTION = "base"
+>   PRIORITY = "required"
+> diff --git a/packages/pvrusb2-mci/pvrusb2-mci_20060903.bb
+> b/packages/pvrusb2-mci/pvrusb2-mci_20060903.bb
+> index 5bd4ea2..af877e2 100644
+> --- a/packages/pvrusb2-mci/pvrusb2-mci_20060903.bb
+> +++ b/packages/pvrusb2-mci/pvrusb2-mci_20060903.bb
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   require pvrusb2-mci2.inc
+>
+>   RRECOMMENDS = "kernel-module-tveeprom \
+> diff --git a/packages/pvrusb2-mci/pvrusb2-mci_20080210.bb
+> b/packages/pvrusb2-mci/pvrusb2-mci_20080210.bb
+> index 5bd4ea2..af877e2 100644
+> --- a/packages/pvrusb2-mci/pvrusb2-mci_20080210.bb
+> +++ b/packages/pvrusb2-mci/pvrusb2-mci_20080210.bb
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   require pvrusb2-mci2.inc
+>
+>   RRECOMMENDS = "kernel-module-tveeprom \
+> diff --git a/packages/pwc/pwc_10.0.12-rc1.bb b/packages/pwc/pwc_10.0.12-rc1.bb
+> index af1d5f5..85e6ade 100644
+> --- a/packages/pwc/pwc_10.0.12-rc1.bb
+> +++ b/packages/pwc/pwc_10.0.12-rc1.bb
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   DESCRIPTION = "Philips USB Webcam driver for Linux that supports VGA
+> resolution"
+>   HOMEPAGE = "http://www.saillard.org/linux/pwc"
+>   PRIORITY = "optional"
+> diff --git a/packages/wifistix/wifistix-modules_5.0.16.p0.bb
+> b/packages/wifistix/wifistix-modules_5.0.16.p0.bb
+> index 0eb6877..f9e8503 100644
+> --- a/packages/wifistix/wifistix-modules_5.0.16.p0.bb
+> +++ b/packages/wifistix/wifistix-modules_5.0.16.p0.bb
+> @@ -1,3 +1,6 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+>   DESCRIPTION = "Linux Driver for Marvel 88W8385 802.11b/g Wifi Module
+> used in Gumstix daughtercards"
+>   SECTION = "base"
+>   PRIORITY = "optional"
+> diff --git a/packages/wlan-ng/wlan-ng-modules.inc
+> b/packages/wlan-ng/wlan-ng-modules.inc
+> index 6dbadce..55fd026 100644
+> --- a/packages/wlan-ng/wlan-ng-modules.inc
+> +++ b/packages/wlan-ng/wlan-ng-modules.inc
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   DESCRIPTION = "linux-wlan-ng (prism2.x, prism3, pcmcia, pci, usb)
+> driver for 11Mbps wireless lan cards"
+>   HOMEPAGE = "http://www.linux-wlan.org"
+>   SECTION = "kernel/modules"
+> diff --git a/packages/wlan-ng/wlan-ng-utils.inc
+> b/packages/wlan-ng/wlan-ng-utils.inc
+> index 72976ce..92f25dc 100644
+> --- a/packages/wlan-ng/wlan-ng-utils.inc
+> +++ b/packages/wlan-ng/wlan-ng-utils.inc
+> @@ -1,3 +1,7 @@
+> +# FIXME, consider using kernel staging directory instead of
+> KERNEL_SOURCE which is
+> +# located in the work directory. see module.bbclass
+> +
+> +
+>   DESCRIPTION = "linux-wlan-ng userland utilities"
+>   HOMEPAGE = "http://www.linux-wlan.org"
+>   SECTION = "kernel/userland"
+>
+>
 
-Thank you for the tips.  If I download and create the md5 checksum files fo=
-r the two problem files http://www.angstrom-distribution.org/unstable/sourc=
-es/jasper-1.900.1.zip
-And
-http://www.angstrom-distribution.org/unstable/sources/libXcursor-1.1.9.tar.=
-bz2
 
-bitbake x11-image gets past those files but has the same problem fetching d=
-ifferent files.  Here are the results from the fetch command you asked me t=
-o try (if I use the named url as the second try it works whereas if I use t=
-he IP number it fails):
-
-[us075929@rum openembedded]$ /usr/bin/env wget -t 5 --passive-ftp -P /home/=
-us075929/projects/oe/openembedded/packages/jpeg/jasper_1.900.1.bb http://85=
-.214.40.226/unstable/sources/jasper-1.900.1.zip
---2009-01-26 08:21:12--  http://85.214.40.226/unstable/sources/jasper-1.900=
-.1.zip
-Resolving proxydirect.tycoelectronics.com... 163.241.128.137 Connecting to =
-proxydirect.tycoelectronics.com|163.241.128.137|:80... connected.
-Proxy request sent, awaiting response... 404 Not Found
-2009-01-26 08:21:13 ERROR 404: Not Found.
-
-[us075929@rum openembedded]$ /usr/bin/env wget -t 5 --passive-ftp -P /home/=
-us075929/projects/oe/openembedded/packages/jpeg/jasper_1.900.1.bb http://ww=
-w.angstrom-distribution.org/unstable/sources/jasper-1.900.1.zip
---2009-01-26 08:22:16--  http://www.angstrom-distribution.org/unstable/sour=
-ces/jasper-1.900.1.zip
-Resolving proxydirect.tycoelectronics.com... 163.241.128.137 Connecting to =
-proxydirect.tycoelectronics.com|163.241.128.137|:80... connected.
-Proxy request sent, awaiting response... 200 OK
-Length: 1415752 (1.3M) [application/zip] Saving to: `/home/us075929/project=
-s/oe/openembedded/packages/jpeg/jasper_1.900.1.bb/jasper-1.900.1.zip'
-
-100%[=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D>] 1,415,752   82.5K/s   in 18s
-
-2009-01-26 08:22:35 (76.4 KB/s) - `/home/us075929/projects/oe/openembedded/=
-packages/jpeg/jasper_1.900.1.bb/jasper-1.900.1.zip' saved [1415752/1415752]
-
-
-I don't know where the IP number gets substituted for the url in the fetch =
-command but that seems to be the problem.  It may have something to do with=
- my proxydirect configuration though I have not changed that and it has wor=
-ked up until now.
-
---John
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Jeremy Williams
-Sent: Friday, January 23, 2009 6:12 PM
-To: openembedded-devel@openembedded.org
-Subject: Re: [oe] Package fetch error
-
-Charlton, John <john.charlton <at> tycoelectronics.com> writes:
-
->=20
-> I am trying to resolve a problem with bitbake package fetch.  I have a=20
-> proxy
-server and the proxydirect server
-> works for bitbake up to the libXCursor-1.1.9.tar.bz2 fetch then it=20
-> times out
-after resolving the
-> www.angstrom-distribution.org to the IP address 85.214.40.226:
-
-There are two sites hosted at that IP:
-
->nslookup linux-to-go.org
-
-Non-authoritative answer:
-Name:    linux-to-go.org
-Address:  85.214.40.226
-
-
->nslookup angstrom-distribution.org
-
-Non-authoritative answer:
-Name:    angstrom-distribution.org
-Address:  85.214.40.226
-
-If you to http://85.214.40.226 in your browser, the default site is linux-t=
-o-go.org, which caused the failure when retrieving by IP.  This means when =
-retrieving via bitbake, for some reason the host headers are not being sent=
-.
-
-The fetch command for http:// is
-"/usr/bin/env wget -t 5 --passive-ftp -P {DEST_DIR} {url}"
-
-If you issue this from the command line using the www.angstrom-distribution=
-.org url does it fail?
-
--jeremy
-
-
-
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
