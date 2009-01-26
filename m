@@ -1,21 +1,37 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [198.175.154.225] (helo=us194mx04.tycoelectronics.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LRRqB-0001kX-K5
-	for openembedded-devel@openembedded.org; Mon, 26 Jan 2009 14:49:28 +0100
-Received: (qmail 13605 invoked by uid 1003); 26 Jan 2009 13:41:55 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 26 Jan 2009 13:41:55 -0000
-Message-ID: <497DBDA2.30205@balister.org>
-Date: Mon, 26 Jan 2009 08:41:54 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <john.charlton@tycoelectronics.com>)
+	id 1LRS8G-0002Bt-Ju
+	for openembedded-devel@openembedded.org; Mon, 26 Jan 2009 15:08:09 +0100
+Received: from us194mx11.tycoelectronics.net ([163.241.185.106]) by
+	us194mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.2499); 
+	Mon, 26 Jan 2009 09:00:23 -0500
+Received: from us194mx07.tycoelectronics.net ([163.241.185.38]) by
+	us194mx11.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
+	Mon, 26 Jan 2009 09:00:23 -0500
+Received: from us194mx002.tycoelectronics.net (163.241.202.108) by
+	us194mx07.tycoelectronics.net (163.241.185.38) with Microsoft SMTP
+	Server (TLS) id 8.1.336.0; Mon, 26 Jan 2009 09:00:22 -0500
+Received: from us194mx002.tycoelectronics.net ([163.241.202.108]) by
+	us194mx002.tycoelectronics.net ([163.241.202.108]) with mapi;
+	Mon, 26 Jan 2009 09:00:17 -0500
+From: "Charlton, John" <john.charlton@tycoelectronics.com>
+To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
+Date: Mon, 26 Jan 2009 09:00:15 -0500
+Thread-Topic: [oe] Package fetch error
+Thread-Index: Acl9sw7FULIGdx+OQvSPRCFtqh5xdQCCU/sw
+Message-ID: <CF7FB0793253794F9F45991443E5FE2004E3A8BEA5@us194mx002.tycoelectronics.net>
+References: <CF7FB0793253794F9F45991443E5FE2004DFC46711@us194mx002.tycoelectronics.net>
+	<loom.20090123T230426-652@post.gmane.org>
+In-Reply-To: <loom.20090123T230426-652@post.gmane.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <497D7E2A.8050302@gmail.com>	<1232966977.23807.3.camel@mill.internal.reciva.com>
-	<glk6k7$ks8$1@ger.gmane.org>
-In-Reply-To: <glk6k7$ks8$1@ger.gmane.org>
-Subject: Re: Building for i486 based non-FPU device
+X-OriginalArrivalTime: 26 Jan 2009 14:00:23.0974 (UTC)
+	FILETIME=[6F02D460:01C97FBE]
+Subject: Re: Package fetch error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,97 +45,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2009 13:49:28 -0000
-X-Groupsio-MsgNum: 7418
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020304080805020408020505"
+X-List-Received-Date: Mon, 26 Jan 2009 14:08:10 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
---------------ms020304080805020408020505
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Jeremy,
 
-Koen Kooi wrote:
-> On 26-01-09 11:49, Phil Blundell wrote:
->> On Mon, 2009-01-26 at 10:11 +0100, Marco Cavallini wrote:
->>> DISTRO = "angstrom-2008.1"
->>
->> It might be worth trying with "minimal" to start with, just to eliminate
->> any angstrom-related uncertainties.
-> 
-> Quite the reverse, minimal is perputually broken in OE, while angstrom 
-> has working x86 targets. Not i486sx targets, but it's straightforward to 
-> add such a target.
+Thank you for the tips.  If I download and create the md5 checksum files fo=
+r the two problem files=20
+http://www.angstrom-distribution.org/unstable/sources/jasper-1.900.1.zip
+And
+http://www.angstrom-distribution.org/unstable/sources/libXcursor-1.1.9.tar.=
+bz2
 
-One topic for a bug squashing weekend could be to de-break minimal.
+bitbake x11-image gets past those files but has the same problem fetching d=
+ifferent files.  Here are the results from the fetch command you asked me t=
+o try (if I use the named url as the second try it works whereas if I use t=
+he IP number it fails):
 
-On a related note, it seems like fakeroot is un-fetchable unless you get 
-the copy from the Angstrom source mirror. Does this seem correct?
+[us075929@rum openembedded]$ /usr/bin/env wget -t 5 --passive-ftp -P /home/=
+us075929/projects/oe/openembedded/packages/jpeg/jasper_1.900.1.bb http://85=
+.214.40.226/unstable/sources/jasper-1.900.1.zip
+--2009-01-26 08:21:12--  http://85.214.40.226/unstable/sources/jasper-1.900=
+.1.zip
+Resolving proxydirect.tycoelectronics.com... 163.241.128.137
+Connecting to proxydirect.tycoelectronics.com|163.241.128.137|:80... connec=
+ted.
+Proxy request sent, awaiting response... 404 Not Found
+2009-01-26 08:21:13 ERROR 404: Not Found.
 
-Philip
+[us075929@rum openembedded]$ /usr/bin/env wget -t 5 --passive-ftp -P /home/=
+us075929/projects/oe/openembedded/packages/jpeg/jasper_1.900.1.bb http://ww=
+w.angstrom-distribution.org/unstable/sources/jasper-1.900.1.zip
+--2009-01-26 08:22:16--  http://www.angstrom-distribution.org/unstable/sour=
+ces/jasper-1.900.1.zip
+Resolving proxydirect.tycoelectronics.com... 163.241.128.137
+Connecting to proxydirect.tycoelectronics.com|163.241.128.137|:80... connec=
+ted.
+Proxy request sent, awaiting response... 200 OK
+Length: 1415752 (1.3M) [application/zip]
+Saving to: `/home/us075929/projects/oe/openembedded/packages/jpeg/jasper_1.=
+900.1.bb/jasper-1.900.1.zip'
 
---------------ms020304080805020408020505
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+100%[=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D>] 1,415,752   82.5K/s   in 18s
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDEyNjEz
-NDE1NFowIwYJKoZIhvcNAQkEMRYEFLGUN0PIjGMpl+s7pkVH1d0EaevbMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBTq/qibuMuGqcuGcyI7xwvdDr+aQQJNIoYOs0MnrYVSDKD+vVj
-aXBRVbdO/3b8GtB94FacV6drEn9oj0h+eOhT2erUahkULoiQWoVPx35TLxru/487q+nHRgz/fF+5
-Tp97+/eqEdOHx5CoN8YAQEgm6/iOU5Eon/PJFRDA+qtTBW/RcOhINJJYXgYqgOLXr1Kim9S6zGas
-a/eDdqQnSXm9YW+MLQd0QTYEtWoDRw710EGqUrHSScgS2zchiBeKfHEiI+9htlUG0mYmG+5+/9Jh
-AbdzaIbVTtL3JChqjit11jwEFGx3M2N2DMaJCB/WBuD7T8LZ7e5Wj8mFJnS/VN0ZAAAAAAAA
+2009-01-26 08:22:35 (76.4 KB/s) - `/home/us075929/projects/oe/openembedded/=
+packages/jpeg/jasper_1.900.1.bb/jasper-1.900.1.zip' saved [1415752/1415752]
 
---------------ms020304080805020408020505--
+
+I don't know where the IP number gets substituted for the url in the fetch =
+command but that seems to be the problem.  It may have something to do with=
+ my proxydirect configuration though I have not changed that and it has wor=
+ked up until now.
+
+--John
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Jeremy Williams
+Sent: Friday, January 23, 2009 6:12 PM
+To: openembedded-devel@openembedded.org
+Subject: Re: [oe] Package fetch error
+
+Charlton, John <john.charlton <at> tycoelectronics.com> writes:
+
+>=20
+> I am trying to resolve a problem with bitbake package fetch.  I have a=20
+> proxy
+server and the proxydirect server
+> works for bitbake up to the libXCursor-1.1.9.tar.bz2 fetch then it=20
+> times out
+after resolving the
+> www.angstrom-distribution.org to the IP address 85.214.40.226:
+
+There are two sites hosted at that IP:
+
+>nslookup linux-to-go.org
+
+Non-authoritative answer:
+Name:    linux-to-go.org
+Address:  85.214.40.226
+
+
+>nslookup angstrom-distribution.org
+
+Non-authoritative answer:
+Name:    angstrom-distribution.org
+Address:  85.214.40.226
+
+If you to http://85.214.40.226 in your browser, the default site is linux-t=
+o-go.org, which caused the failure when retrieving by IP.  This means when =
+retrieving via bitbake, for some reason the host headers are not being sent=
+.
+
+The fetch command for http:// is
+"/usr/bin/env wget -t 5 --passive-ftp -P {DEST_DIR} {url}"
+
+If you issue this from the command line using the www.angstrom-distribution=
+.org url does it fail?
+
+-jeremy
+
+
+
+
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
