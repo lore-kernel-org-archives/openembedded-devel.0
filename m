@@ -1,23 +1,29 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1LRMsd-0006E6-6M
+	(envelope-from <koansoftware@gmail.com>) id 1LRNbk-0007hf-NP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jan 2009 09:31:39 +0100
-Received: from 88-110-5-187.dynamic.dsl.as9105.com ([88.110.5.187]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LRMlP-0003zp-3V
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jan 2009 08:24:11 +0000
-From: Phil Blundell <pb@reciva.com>
+	Mon, 26 Jan 2009 10:18:16 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 89DAA2C8A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2009 09:10:30 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7tz+dIJTDAoh
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2009 09:10:24 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 3AA222C792
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2009 09:10:24 +0000 (UTC)
+Message-ID: <497D7E2A.8050302@gmail.com>
+Date: Mon, 26 Jan 2009 10:11:06 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090126074953.GA26318@gmail.com>
-References: <20090126074953.GA26318@gmail.com>
-Date: Mon, 26 Jan 2009 08:24:10 +0000
-Message-Id: <1232958250.4890.104.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: fix for strl functions in alsautils
+Subject: Building for i486 based non-FPU device
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,26 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2009 08:31:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Jan 2009 09:18:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2009-01-25 at 23:49 -0800, Khem Raj wrote:
-> * These funtions are provided by C libraries like uclibc
->         Declaring them static here causes static not static declaration
->         issues reported by gcc.
-> [...]
-> + #ifdef __GLIBC__
-> +-static size_t strlcpy(char *dst, const char *src, size_t size)
-> ++size_t strlcpy(char *dst, const char *src, size_t size)
-> + {
+Hello,
+This discussion was in thread "FOSDEM OE stand"
+I'm trying to build for a machine I'd like to let at OE stand.
+http://www.koala.it/it/nanopc.htm
+It's a i486 based non-FPU device (Vortex86sx), so I tried to build
 
-Wouldn't it be better to change that "#ifdef __GLIBC__" to something
-more appropriate?  With your change it looks like you will still get
-useless copies of these functions in the resulting binaries.
+DISTRO = "angstrom-2008.1"
 
-p.
+I created my new machine copying it from
+ conf/machine/i586-generic.conf
+and changing the following settings:
+ TARGET_ARCH = "i486"
+ PACKAGE_EXTRA_ARCHS = "x86"
+ PREFERRED_VERSION_linux = "2.6.26"
+(I also changed 2.6.26 recipe)
 
+I found several problems:
+i586-generic uses TARGET_ARCH = "i586" : ok but for 586
+x86          uses TARGET_ARCH = "i586" : build broken
+qemux86      uses TARGET_ARCH = "i586" : not used
+i486-generic uses TARGET_ARCH = "i486" : build broken
 
+No one of the previous tested build give a useful result,
+what could I change to get a running system?
+
+Maybe do I have to specify TARGET_CC_ARCH = "-march=i486" ?
+Would be better to switch this discussion to IRC ?
+Any hint will be greatly appreciated.
+TIA
+--
+Marco Cavallini
 
 
