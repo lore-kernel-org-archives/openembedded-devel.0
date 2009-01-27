@@ -1,38 +1,30 @@
-Received: from [209.85.146.178] (helo=wa-out-1112.google.com)
+Received: from [209.85.198.251] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LRM8z-0008VC-TF
+	(envelope-from <jkridner@beagleboard.org>) id 1LRwUo-0004ln-NK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jan 2009 08:44:30 +0100
-Received: by wa-out-1112.google.com with SMTP id n7so449592wag.12
+	Tue, 27 Jan 2009 23:33:27 +0100
+Received: by rv-out-0708.google.com with SMTP id f25so7272218rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jan 2009 23:37:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:date:subject
-	:message-id:to;
-	bh=j6IMMPJePidB9XvcPQvuekH0Q5XFnM/5CSb3wsF3D4w=;
-	b=N6V0b08r0ctgD/KsydPZtxqg3HZ6FR5GBmO3BBlHCi0gR7J2G8WySxPKnNt9lOqWuB
-	p5Xc434iEjw+u2WpoFXVtSKUlrSblaEbB3pTA+MGximren2CHpm9FoLdQipt5IW/cTbz
-	Z84OsIs0D5mvS5XbU6d302Vw8E3JVTZscKl9s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:date:subject:message-id:to;
-	b=NrnP/L5E7Y7oKxU5GVHcwJMiEP+GkPQxxmy+EQ68ltx3t55bVJaBglD/tl3iXUiNqL
-	h4G/o3TtJ6TlbA9OIMinjzNsBqxItReyGBkxo8rXKluUxO6OlmdiCJdc8n7R4F++x/k+
-	/EP3BwgIzGuFmjKzrhhslFpFO8ZV0QwDPDjXc=
-Received: by 10.115.32.18 with SMTP id k18mr2142774waj.98.1232955422547;
-	Sun, 25 Jan 2009 23:37:02 -0800 (PST)
-Received: from isis.sakrah.homelinux.org
-	(adsl-71-146-21-217.dsl.pltn13.sbcglobal.net [71.146.21.217])
-	by mx.google.com with ESMTPS id t1sm17956255poh.7.2009.01.25.23.37.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 25 Jan 2009 23:37:02 -0800 (PST)
-Received: by isis.sakrah.homelinux.org (Postfix, from userid 1000)
-	id D4E2E3C54D4; Sun, 25 Jan 2009 23:37:00 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 25 Jan 2009 23:13:20 -0800
-Message-Id: <20090126073700.D4E2E3C54D4@isis.sakrah.homelinux.org>
-To: undisclosed-recipients:;
-X-Mailman-Approved-At: Tue, 27 Jan 2009 23:05:04 +0100
-Subject: [PATCH] alsa-utils: Do not make strl* functions as static.
+	Tue, 27 Jan 2009 14:25:52 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.142.170.6 with SMTP id s6mr770886wfe.58.1233095152238; Tue, 27 
+	Jan 2009 14:25:52 -0800 (PST)
+In-Reply-To: <E9998B7D-F3BE-484A-BDAE-75B25BEEC330@beagleboard.org>
+References: <5899DAF1-278D-43D5-8C90-BECD7FC3E4B5@beagleboard.org>
+	<f20732e90901270708t65dc4a67jfe0829bb6ca4c540@mail.gmail.com>
+	<B1B8AC48-51AB-435E-A431-AC1494B171DA@beagleboard.org>
+	<670B7A54-3C74-42FD-A6F8-DAAFD4AEC73A@beagleboard.org>
+	<A69FA2915331DC488A831521EAE36FE4012470D042@dlee06.ent.ti.com>
+	<f20732e90901271019s6f2fa8abvc596f72091decdef@mail.gmail.com>
+	<20090127210257.GA31920@denix.org> <glnvfu$1l9$1@ger.gmane.org>
+	<f20732e90901271354g703b73cfl8a2be933ead5ab41@mail.gmail.com>
+	<E9998B7D-F3BE-484A-BDAE-75B25BEEC330@beagleboard.org>
+Date: Tue, 27 Jan 2009 16:25:52 -0600
+Message-ID: <f20732e90901271425v23dca758ka6b26032c12cb7f2@mail.gmail.com>
+From: Jason Kridner <jkridner@beagleboard.org>
+To: beagleboard@googlegroups.com, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [beagleboard] Re: Beagle actions for Rev C validation software image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,64 +38,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2009 07:44:30 -0000
+X-List-Received-Date: Tue, 27 Jan 2009 22:33:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-	* These funtions are provided by C libraries like uclibc
-	Declaring them static here causes static not static declaration
-	issues reported by gcc.
----
- packages/alsa/alsa-utils_1.0.18.bb                 |    2 +
- .../files/alsa-utils-strl-funcs-non-static.patch   |   22 ++++++++++++++++++++
- 2 files changed, 24 insertions(+), 0 deletions(-)
- create mode 100644 packages/alsa/files/alsa-utils-strl-funcs-non-static.patch
+On Tue, Jan 27, 2009 at 3:55 PM, Koen Kooi <koen@beagleboard.org> wrote:
+>
+> Op 27 jan 2009, om 22:54 heeft Jason Kridner het volgende geschreven:
+>
+>>
+>> On Tue, Jan 27, 2009 at 3:48 PM, Koen Kooi <k.kooi@student.utwente.nl>
+>> wrote:
+>>>
+>>> On 27-01-09 22:02, Denys Dmytriyenko wrote:
+>>>>
+>>>> On Tue, Jan 27, 2009 at 12:19:36PM -0600, Jason Kridner wrote:
+>>>>>
+>>>>> Adding oe-dev mailing list...
+>>>>>
+>>>>> On Tue, Jan 27, 2009 at 12:10 PM, Dmytriyenko, Denys<denys@ti.com>
+>>>>> wrote:
+>>>>>>>>
+>>>>>>>> It's a bit sad that we're going to miss out on NEON and vo_omapfb by
+>>>>>>>> going armv5te :(
+>>>>>>>
+>>>>>>> Koen,
+>>>>>>> I am rebuilding 'mplayer' now with 'MACHINE=beagleboard bitbake
+>>>>>>> mplayer',
+>>>>>>> so that concern should go away.  It shouldn't matter much about this
+>>>>>>> mplayer, since it should only be used to test the hardware.
+>>>>>>> Can you consider inclusion of:
+>>>>>>> mplayer and FFmpeg dependency changes:
+>>>>>>>
+>>>>>>>
+>>>>>>> http://www.beagleboard.org/gitweb/?p=arago-oe.git;a=commitdiff_plain;h=0b53219005c8daa95bcff40742d7c807bda17eca
+>>>>>>
+>>>>>> Hmm, I like these curl-inspired *_FEATURES handlers. The only problem
+>>>>>> with
+>>>>>> those is they won't trigger automatic rebuild when the featureset in
+>>>>>> the
+>>>>>> variable changes - don't forget to run bitbake -c rebuild manually...
+>>>>>
+>>>>> Can I get a few comments on [1]?  I found there is also a dependency
+>>>>> in libtheora on x11 that doesn't seem necessary.  I find this very
+>>>>> useful to avoid making a new recipe.  Anyone have ideas to address
+>>>>> Denys' concern about needing to issue 'bitbake -c rebuild'?
+>>>>>
+>>>>> [1]
+>>>>>
+>>>>> http://www.beagleboard.org/gitweb/?p=arago-oe.git;a=commitdiff_plain;h=0b53219005c8daa95bcff40742d7c807bda17eca
+>>>>
+>>>> For some reason Koen's reply never made it to the oe-dev list... Sorry
+>>>> for
+>>>> copying it here to continue the discussion.
+>>>>
+>>>> Koen said:
+>>>>>
+>>>>> I'm against adding such 'USE flags' to OE, they basically make QA
+>>>>> impossible.
+>>>>> If people want a different mplayer, they are free to make an
+>>>>> 'mplayer-nox' or
+>>>>> 'mplayer-nosdl' recipe to fill their needs.
+>>>>
+>>>> But on the other hand it would make overlays, such as Arago, as well as
+>>>> OE
+>>>> itself, much cleaner and reduce the recipe creep.
+>>>>
+>>>> As of the rebuild issue when featureset in the variable changes, I was
+>>>> thinking about storing a hash of variable's value, in addition to the
+>>>> standard version and revision numbers, should trigger an automatic
+>>>> rebuild.
+>>>> Similar to bumping up a PR, but without modifying the recipe. Any
+>>>> thoughts?
+>>>
+>>> I'm concerned with mplayer_1.0_armv7a.ipk not being the same as
+>>> mplayer_1.0_armv7a.ipk, which is what USE flags do.
+>>
+>> Is it possible in OE to generate an ipk file name that gives some
+>> indication of the USE flags?  Perhaps the right way to do this is with
+>> a common .inc file to avoid maintenance issues.
+>
+> If it magically mangles package names, what's so different from creating
+> multiple recipes?
 
-diff --git a/packages/alsa/alsa-utils_1.0.18.bb b/packages/alsa/alsa-utils_1.0.18.bb
-index 8f43982..4de9180 100644
---- a/packages/alsa/alsa-utils_1.0.18.bb
-+++ b/packages/alsa/alsa-utils_1.0.18.bb
-@@ -3,10 +3,12 @@ HOMEPAGE = "http://www.alsa-project.org"
- SECTION = "console/utils"
- LICENSE = "GPL"
- DEPENDS = "alsa-lib ncurses"
-+PR = "r1"
- 
- SRC_URI = "ftp://ftp.alsa-project.org/pub/utils/alsa-utils-${PV}.tar.bz2 \
-            file://alsa-utils-automake.patch;patch=1 \
- 	   file://alsa-utils-remove-xmlto.patch;patch=1 \
-+	   file://alsa-utils-strl-funcs-non-static.patch;patch=1 \
- 	  "
- 
- inherit autotools
-diff --git a/packages/alsa/files/alsa-utils-strl-funcs-non-static.patch b/packages/alsa/files/alsa-utils-strl-funcs-non-static.patch
-new file mode 100644
-index 0000000..db6bacf
---- /dev/null
-+++ b/packages/alsa/files/alsa-utils-strl-funcs-non-static.patch
-@@ -0,0 +1,22 @@
-+Index: alsa-utils-1.0.18/alsactl/init_sysdeps.c
-+===================================================================
-+--- alsa-utils-1.0.18.orig/alsactl/init_sysdeps.c	2009-01-25 21:12:40.000000000 -0800
-++++ alsa-utils-1.0.18/alsactl/init_sysdeps.c	2009-01-25 21:12:56.000000000 -0800
-+@@ -18,7 +18,7 @@
-+  */
-+ 
-+ #ifdef __GLIBC__
-+-static size_t strlcpy(char *dst, const char *src, size_t size)
-++size_t strlcpy(char *dst, const char *src, size_t size)
-+ {
-+ 	size_t bytes = 0;
-+ 	char *q = dst;
-+@@ -37,7 +37,7 @@
-+ 	return bytes;
-+ }
-+ 
-+-static size_t strlcat(char *dst, const char *src, size_t size)
-++size_t strlcat(char *dst, const char *src, size_t size)
-+ {
-+ 	size_t bytes = 0;
-+ 	char *q = dst;
--- 
-1.6.0.4
-
+I think the differences are the names being sensible (based on having
+multiple recipes and using a .inc file to avoid maintenance issues)
+vs. maintaining fewer recipes.  The USE flags also give greater
+flexibility at the distribution level, but I've only seen a limited
+number of cases for which this is currently required.  As long as the
+recipes give ?= assignments, "personal" distributions could still be
+generated at the local.conf level.  The idea to add a hash to trigger
+an automatic rebuild if relevant USE flags change still seems quite
+useful (and even putting the USE flags into the control file).
 
 
