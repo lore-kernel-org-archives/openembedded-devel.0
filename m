@@ -1,30 +1,23 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LRjxV-0007bb-IU
+	(envelope-from <pb@reciva.com>) id 1LRk8D-0007zJ-0m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jan 2009 10:10:16 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id D209D2C8A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2009 09:02:20 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NuVwdJkJ6qc4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2009 09:02:19 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 1DF0C2C792
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2009 09:02:18 +0000 (UTC)
-Message-ID: <497ECDCA.3000302@gmail.com>
-Date: Tue, 27 Jan 2009 10:03:06 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
+	Tue, 27 Jan 2009 10:21:19 +0100
+Received: from 88-110-5-187.dynamic.dsl.as9105.com ([88.110.5.187]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LRk0t-0002tE-0z
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jan 2009 09:13:43 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <497ECDCA.3000302@gmail.com>
 References: <69E6C70090A0A14498CC98FAE5E06B6E3CF5FB@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF5FB@hiob.intern.dresearch.de>
+	<497ECDCA.3000302@gmail.com>
+Date: Tue, 27 Jan 2009 09:13:41 +0000
+Message-Id: <1233047621.4890.119.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: AVR XMEGA?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,22 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2009 09:10:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 27 Jan 2009 09:22:14 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Sledz, Steffen ha scritto:
-> Just a short question: Is somebody working on support for Atmel AVR XMEGA (8-bit AVR) architecture in OE?
+On Tue, 2009-01-27 at 10:03 +0100, Marco Cavallini wrote:
+> Sledz, Steffen ha scritto:
+> > Just a short question: Is somebody working on support for Atmel AVR XMEGA (8-bit AVR) architecture in OE?
+> > 
 > 
+> http://wiki.openembedded.net/index.php/Main_Page
+> Openembedded, your best-in class cross-compile environment. Openembedded
+> allows developers to create a complete Linux Distribution for embedded
+> systems
+> 
+> Linux doesn't run on 8 bit CPUs
 
-http://wiki.openembedded.net/index.php/Main_Page
-Openembedded, your best-in class cross-compile environment. Openembedded
-allows developers to create a complete Linux Distribution for embedded
-systems
+There's nothing about OpenEmbedded itself that is inherently specific to
+Linux; it just so happens that all the currently supported targets are
+Linux-based.  There's certainly no reason that one couldn't build an OE
+target system around, say, the Hurd or the BSD kernel.
 
-Linux doesn't run on 8 bit CPUs
+Likewise, it would be perfectly feasible to use OE to generate binaries
+for a 8-bit device, although the nature of those small deeply-embedded
+systems tends to be that they use single monolithic application binaries
+rather than a filesystem or "distribution" in the sense that larger,
+general-purpose machines do.  That being the case I suspect some of the
+advantages of OE would probably be negated in such an environment.
 
---
-Marco Cavallini
+As far as I know nobody is working on XMEGA support, anyway.
+
+p.
+
+
 
 
