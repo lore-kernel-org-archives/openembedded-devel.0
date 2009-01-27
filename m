@@ -1,24 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LRlsI-0003Vq-9I
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <stefan@datenfreihafen.org>) id 1LRmDd-0000kQ-6H
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jan 2009 12:12:58 +0100
-Received: (qmail invoked by alias); 27 Jan 2009 11:05:24 -0000
-Received: from unknown (EHLO [192.168.4.110]) [78.52.66.72]
-	by mail.gmx.net (mp040) with SMTP; 27 Jan 2009 12:05:24 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1+RcB0D4xuRTAOyceS81O9k3/hbBvZBBQ17sGizpE
-	qrdzFuuG1MI4B6
-Message-ID: <497EEAE6.7090904@gmx.net>
-Date: Tue, 27 Jan 2009 12:07:18 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
+	Tue, 27 Jan 2009 12:35:01 +0100
+Received: from c120.apm.etc.tu-bs.de ([134.169.174.120] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1LRm6E-00040I-Fl by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Jan 2009 12:27:29 +0100
+Received: from stefan by excalibur.local with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1LRm6K-0003z2-WE
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jan 2009 12:27:29 +0100
+Date: Tue, 27 Jan 2009 12:27:28 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.6
-Subject: RFC: thinking about DEPENDS properties
+Message-ID: <20090127112728.GA14725@excalibur.local>
+MIME-Version: 1.0
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Fix for angstrom.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,88 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2009 11:12:58 -0000
-X-Groupsio-MsgNum: 7435
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig717D12C69E536C64F790AE12"
+X-List-Received-Date: Tue, 27 Jan 2009 11:35:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------enig717D12C69E536C64F790AE12
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hello.
 
-Hi,
-today I was thinking about some missing semantics in OE's DEPENDS
-variable and had the idea of reusing the way we write SRC_URI entries
-for them.
+As there have been problems before if people touch core angstrom files here is a
+fix that may be interesting to apply.
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&h=fso/milestone5&id=6d3445928a08ee36950e91274bbe282022c4da1a
 
-The issues:
+The recipes for the openmoko kernel got renamed and the match for OABI compat
+must changed accorndingly.
 
-1) Strong dependencies
+(Sidenote: Other stuff in this release branch will come back once we have it out.
+The fastboot patches revert will bring some discussion I guess. :))
 
-Some recipes have a strong dependency on another recipe. Take llvm as an
-example. llvm puts a bunch of static libraries (.a) and object code
-files into staging which another program links to. So, if llvm is
-recompiled (e.g. changed CFLAGS or applied a patch) those having a
-dependency on llvm should be recompiled as well.
-
-In order to express this, I would write:
-
-DEPENDS +=3D "llvm;strong=3Dtrue"
-
-2) Minimum & Maximum supported versions
-Some recipes cannot be built with certain versions of other recipes.
-
-DEPENDS +=3D "automake-native;minver=3D1.10"
-
-If the distro uses a lower automake version OE should error out when
-someone tries to build that recipe:
-
-ERROR: Recipe 'foo' needs at least 'automake-native 1.10' but
-'PREFERRED_VERSION_automake-native' is set to '1.9.6'.
-
---
-
-I know this brings in a lot of complicated things to think about, e.g.
-what is the result of:
-
-foo.inc: DEPENDS =3D "bar;minver=3D0.8;maxver=3D0.9"
-
-foo_1.0: require foo.inc
-         DEPENDS +=3D "bar;minver=3D1.0"
-
-Perhaps to many components in OE already expect DEPENDS to be a
-whitespace separated list of words and we should be add another variable
-whose only purpose is to set properties for existing DEPENDS entries:
+regards
+Stefan Schmidt
 
 
-foo_1.0:
- require foo.inc
- # Replaces value from foo.inc
- DEPENDSPROPS =3D "bar;minver=3D1.0"
-
---
-
-My main concern is that the knowledge about which recipe can live in
-harmony with another is currently implicit. There is no way to express
-this except by writing a comment (which is almost never done).
-
-Regards
-Robert
-
-
---------------enig717D12C69E536C64F790AE12
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkl+6ukACgkQG9cfwmwwEtov1wCfe63CEF2PgMobLVBJrbCWXYKa
-90YAnjXYvONWZ/Ya/PPpttaQoaa2Gv7Y
-=lqHR
------END PGP SIGNATURE-----
-
---------------enig717D12C69E536C64F790AE12--
