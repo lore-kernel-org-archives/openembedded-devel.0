@@ -1,28 +1,31 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LRjgP-000788-40
+	(envelope-from <koansoftware@gmail.com>) id 1LRjxV-0007bb-IU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jan 2009 09:52:33 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id D97E216DFBD
+	Tue, 27 Jan 2009 10:10:16 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id D209D2C8A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2009 09:56:59 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 315792A41FD
+	Tue, 27 Jan 2009 09:02:20 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NuVwdJkJ6qc4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2009 09:45:02 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Tue, 27 Jan 2009 09:02:19 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 1DF0C2C792
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Jan 2009 09:02:18 +0000 (UTC)
+Message-ID: <497ECDCA.3000302@gmail.com>
+Date: Tue, 27 Jan 2009 10:03:06 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-Date: Tue, 27 Jan 2009 09:45:14 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF5FB@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: AVR XMEGA?
-Thread-Index: AcmAW4sTXHYjyK4CRTiGBhdcSje+nw==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: AVR XMEGA?
+To: openembedded-devel@lists.openembedded.org
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF5FB@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF5FB@hiob.intern.dresearch.de>
+Subject: Re: AVR XMEGA?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,14 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2009 08:52:33 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 27 Jan 2009 09:10:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-SnVzdCBhIHNob3J0IHF1ZXN0aW9uOiBJcyBzb21lYm9keSB3b3JraW5nIG9uIHN1cHBvcnQgZm9y
-IEF0bWVsIEFWUiBYTUVHQSAoOC1iaXQgQVZSKSBhcmNoaXRlY3R1cmUgaW4gT0U/DQoNClN0ZWZm
-ZW4NCg==
+Sledz, Steffen ha scritto:
+> Just a short question: Is somebody working on support for Atmel AVR XMEGA (8-bit AVR) architecture in OE?
+> 
+
+http://wiki.openembedded.net/index.php/Main_Page
+Openembedded, your best-in class cross-compile environment. Openembedded
+allows developers to create a complete Linux Distribution for embedded
+systems
+
+Linux doesn't run on 8 bit CPUs
+
+--
+Marco Cavallini
 
 
