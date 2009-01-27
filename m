@@ -1,25 +1,33 @@
-Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1LRseU-0006ZW-Ex
-	for Openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jan 2009 19:27:10 +0100
-Received: by yx-out-1718.google.com with SMTP id 4so2701588yxp.42
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2009 10:19:37 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.143.18.21 with SMTP id v21mr2291073wfi.336.1233080376515; Tue, 
-	27 Jan 2009 10:19:36 -0800 (PST)
-In-Reply-To: <A69FA2915331DC488A831521EAE36FE4012470D042@dlee06.ent.ti.com>
-References: <5899DAF1-278D-43D5-8C90-BECD7FC3E4B5@beagleboard.org>
-	<f20732e90901270708t65dc4a67jfe0829bb6ca4c540@mail.gmail.com>
-	<B1B8AC48-51AB-435E-A431-AC1494B171DA@beagleboard.org>
-	<670B7A54-3C74-42FD-A6F8-DAAFD4AEC73A@beagleboard.org>
-	<A69FA2915331DC488A831521EAE36FE4012470D042@dlee06.ent.ti.com>
-Date: Tue, 27 Jan 2009 12:19:36 -0600
-Message-ID: <f20732e90901271019s6f2fa8abvc596f72091decdef@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
-To: beagleboard@googlegroups.com, Openembedded-devel@lists.openembedded.org
-Subject: Re: [beagleboard] Re: Beagle actions for Rev C validation software image
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LRsmS-0006mg-J5
+	for openembedded-devel@openembedded.org; Tue, 27 Jan 2009 19:35:24 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LRsfA-0001C4-MJ
+	for openembedded-devel@openembedded.org; Tue, 27 Jan 2009 18:27:52 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 27 Jan 2009 18:27:52 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 27 Jan 2009 18:27:52 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 27 Jan 2009 19:27:43 +0100
+Message-ID: <glnjmv$kuc$1@ger.gmane.org>
+References: <497EEAE6.7090904@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090118 Shredder/3.0b2pre
+In-Reply-To: <497EEAE6.7090904@gmx.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: RFC: thinking about DEPENDS properties
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,34 +41,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2009 18:27:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Jan 2009 18:35:24 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Adding oe-dev mailing list...
+On 27-01-09 12:07, Robert Schuster wrote:
+> Hi,
+> today I was thinking about some missing semantics in OE's DEPENDS
+> variable and had the idea of reusing the way we write SRC_URI entries
+> for them.
+>
+> The issues:
+>
+> 1) Strong dependencies
+>
+> Some recipes have a strong dependency on another recipe. Take llvm as an
+> example. llvm puts a bunch of static libraries (.a) and object code
+> files into staging which another program links to. So, if llvm is
+> recompiled (e.g. changed CFLAGS or applied a patch) those having a
+> dependency on llvm should be recompiled as well.
 
-On Tue, Jan 27, 2009 at 12:10 PM, Dmytriyenko, Denys <denys@ti.com> wrote:
->
->>> It's a bit sad that we're going to miss out on NEON and vo_omapfb by
->>> going armv5te :(
->
->> Koen,
->
->> I am rebuilding 'mplayer' now with 'MACHINE=beagleboard bitbake mplayer', so that concern should go away.  It shouldn't matter much about this mplayer, since it should only be used to test the hardware.
->
->> Can you consider inclusion of:
->
->> mplayer and FFmpeg dependency changes:
->> http://www.beagleboard.org/gitweb/?p=arago-oe.git;a=commitdiff_plain;h=0b53219005c8daa95bcff40742d7c807bda17eca
->
-> Hmm, I like these curl-inspired *_FEATURES handlers. The only problem with those is they won't trigger automatic rebuild when the featureset in the variable changes - don't forget to run bitbake -c rebuild manually...
->
+Isn't that what BB_STAMP_POLICY=whitelist and BB_STAMP_POLICY=full 
+accomplish?
 
-Can I get a few comments on [1]?  I found there is also a dependency
-in libtheora on x11 that doesn't seem necessary.  I find this very
-useful to avoid making a new recipe.  Anyone have ideas to address
-Denys' concern about needing to issue 'bitbake -c rebuild'?
+regards,
 
-[1] http://www.beagleboard.org/gitweb/?p=arago-oe.git;a=commitdiff_plain;h=0b53219005c8daa95bcff40742d7c807bda17eca
+Koen
+
+
+>
+> In order to express this, I would write:
+>
+> DEPENDS += "llvm;strong=true"
+>
+> 2) Minimum&  Maximum supported versions
+> Some recipes cannot be built with certain versions of other recipes.
+>
+> DEPENDS += "automake-native;minver=1.10"
+>
+> If the distro uses a lower automake version OE should error out when
+> someone tries to build that recipe:
+>
+> ERROR: Recipe 'foo' needs at least 'automake-native 1.10' but
+> 'PREFERRED_VERSION_automake-native' is set to '1.9.6'.
+>
+> --
+>
+> I know this brings in a lot of complicated things to think about, e.g.
+> what is the result of:
+>
+> foo.inc: DEPENDS = "bar;minver=0.8;maxver=0.9"
+>
+> foo_1.0: require foo.inc
+>           DEPENDS += "bar;minver=1.0"
+>
+> Perhaps to many components in OE already expect DEPENDS to be a
+> whitespace separated list of words and we should be add another variable
+> whose only purpose is to set properties for existing DEPENDS entries:
+>
+>
+> foo_1.0:
+>   require foo.inc
+>   # Replaces value from foo.inc
+>   DEPENDSPROPS = "bar;minver=1.0"
+>
+> --
+>
+> My main concern is that the knowledge about which recipe can live in
+> harmony with another is currently implicit. There is no way to express
+> this except by writing a comment (which is almost never done).
+>
+> Regards
+> Robert
+>
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 
 
