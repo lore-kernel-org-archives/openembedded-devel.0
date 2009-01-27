@@ -1,24 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1LRk8D-0007zJ-0m
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LRlsI-0003Vq-9I
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jan 2009 10:21:19 +0100
-Received: from 88-110-5-187.dynamic.dsl.as9105.com ([88.110.5.187]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LRk0t-0002tE-0z
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jan 2009 09:13:43 +0000
-From: Phil Blundell <pb@reciva.com>
+	Tue, 27 Jan 2009 12:12:58 +0100
+Received: (qmail invoked by alias); 27 Jan 2009 11:05:24 -0000
+Received: from unknown (EHLO [192.168.4.110]) [78.52.66.72]
+	by mail.gmx.net (mp040) with SMTP; 27 Jan 2009 12:05:24 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+RcB0D4xuRTAOyceS81O9k3/hbBvZBBQ17sGizpE
+	qrdzFuuG1MI4B6
+Message-ID: <497EEAE6.7090904@gmx.net>
+Date: Tue, 27 Jan 2009 12:07:18 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <497ECDCA.3000302@gmail.com>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF5FB@hiob.intern.dresearch.de>
-	<497ECDCA.3000302@gmail.com>
-Date: Tue, 27 Jan 2009 09:13:41 +0000
-Message-Id: <1233047621.4890.119.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: AVR XMEGA?
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.6
+Subject: RFC: thinking about DEPENDS properties
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,38 +32,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2009 09:22:14 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Jan 2009 11:12:58 -0000
+X-Groupsio-MsgNum: 7435
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig717D12C69E536C64F790AE12"
 
-On Tue, 2009-01-27 at 10:03 +0100, Marco Cavallini wrote:
-> Sledz, Steffen ha scritto:
-> > Just a short question: Is somebody working on support for Atmel AVR XMEGA (8-bit AVR) architecture in OE?
-> > 
-> 
-> http://wiki.openembedded.net/index.php/Main_Page
-> Openembedded, your best-in class cross-compile environment. Openembedded
-> allows developers to create a complete Linux Distribution for embedded
-> systems
-> 
-> Linux doesn't run on 8 bit CPUs
+--------------enig717D12C69E536C64F790AE12
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-There's nothing about OpenEmbedded itself that is inherently specific to
-Linux; it just so happens that all the currently supported targets are
-Linux-based.  There's certainly no reason that one couldn't build an OE
-target system around, say, the Hurd or the BSD kernel.
+Hi,
+today I was thinking about some missing semantics in OE's DEPENDS
+variable and had the idea of reusing the way we write SRC_URI entries
+for them.
 
-Likewise, it would be perfectly feasible to use OE to generate binaries
-for a 8-bit device, although the nature of those small deeply-embedded
-systems tends to be that they use single monolithic application binaries
-rather than a filesystem or "distribution" in the sense that larger,
-general-purpose machines do.  That being the case I suspect some of the
-advantages of OE would probably be negated in such an environment.
+The issues:
 
-As far as I know nobody is working on XMEGA support, anyway.
+1) Strong dependencies
 
-p.
+Some recipes have a strong dependency on another recipe. Take llvm as an
+example. llvm puts a bunch of static libraries (.a) and object code
+files into staging which another program links to. So, if llvm is
+recompiled (e.g. changed CFLAGS or applied a patch) those having a
+dependency on llvm should be recompiled as well.
+
+In order to express this, I would write:
+
+DEPENDS +=3D "llvm;strong=3Dtrue"
+
+2) Minimum & Maximum supported versions
+Some recipes cannot be built with certain versions of other recipes.
+
+DEPENDS +=3D "automake-native;minver=3D1.10"
+
+If the distro uses a lower automake version OE should error out when
+someone tries to build that recipe:
+
+ERROR: Recipe 'foo' needs at least 'automake-native 1.10' but
+'PREFERRED_VERSION_automake-native' is set to '1.9.6'.
+
+--
+
+I know this brings in a lot of complicated things to think about, e.g.
+what is the result of:
+
+foo.inc: DEPENDS =3D "bar;minver=3D0.8;maxver=3D0.9"
+
+foo_1.0: require foo.inc
+         DEPENDS +=3D "bar;minver=3D1.0"
+
+Perhaps to many components in OE already expect DEPENDS to be a
+whitespace separated list of words and we should be add another variable
+whose only purpose is to set properties for existing DEPENDS entries:
 
 
+foo_1.0:
+ require foo.inc
+ # Replaces value from foo.inc
+ DEPENDSPROPS =3D "bar;minver=3D1.0"
+
+--
+
+My main concern is that the knowledge about which recipe can live in
+harmony with another is currently implicit. There is no way to express
+this except by writing a comment (which is almost never done).
+
+Regards
+Robert
 
 
+--------------enig717D12C69E536C64F790AE12
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkl+6ukACgkQG9cfwmwwEtov1wCfe63CEF2PgMobLVBJrbCWXYKa
+90YAnjXYvONWZ/Ya/PPpttaQoaa2Gv7Y
+=lqHR
+-----END PGP SIGNATURE-----
+
+--------------enig717D12C69E536C64F790AE12--
