@@ -1,30 +1,29 @@
-Received: from [209.85.198.251] (helo=rv-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1LRwUo-0004ln-NK
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jan 2009 23:33:27 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so7272218rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2009 14:25:52 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.142.170.6 with SMTP id s6mr770886wfe.58.1233095152238; Tue, 27 
-	Jan 2009 14:25:52 -0800 (PST)
-In-Reply-To: <E9998B7D-F3BE-484A-BDAE-75B25BEEC330@beagleboard.org>
-References: <5899DAF1-278D-43D5-8C90-BECD7FC3E4B5@beagleboard.org>
-	<f20732e90901270708t65dc4a67jfe0829bb6ca4c540@mail.gmail.com>
-	<B1B8AC48-51AB-435E-A431-AC1494B171DA@beagleboard.org>
-	<670B7A54-3C74-42FD-A6F8-DAAFD4AEC73A@beagleboard.org>
-	<A69FA2915331DC488A831521EAE36FE4012470D042@dlee06.ent.ti.com>
-	<f20732e90901271019s6f2fa8abvc596f72091decdef@mail.gmail.com>
-	<20090127210257.GA31920@denix.org> <glnvfu$1l9$1@ger.gmane.org>
-	<f20732e90901271354g703b73cfl8a2be933ead5ab41@mail.gmail.com>
-	<E9998B7D-F3BE-484A-BDAE-75B25BEEC330@beagleboard.org>
-Date: Tue, 27 Jan 2009 16:25:52 -0600
-Message-ID: <f20732e90901271425v23dca758ka6b26032c12cb7f2@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
-To: beagleboard@googlegroups.com, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [beagleboard] Re: Beagle actions for Rev C validation software image
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LS0mV-0006A8-5B
+	for openembedded-devel@openembedded.org; Wed, 28 Jan 2009 04:07:59 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LS0f8-00050i-F8
+	for openembedded-devel@openembedded.org; Wed, 28 Jan 2009 03:00:23 +0000
+Received: from 203.117.215.163 ([203.117.215.163])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 28 Jan 2009 03:00:22 +0000
+Received: from robk by 203.117.215.163 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 28 Jan 2009 03:00:22 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rob Kramer <robk@starhub.net.sg>
+Date: Wed, 28 Jan 2009 11:00:11 +0800
+Message-ID: <glohnr$osq$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: 203.117.215.163
+User-Agent: KNode/0.10.9
+Sender: news <news@ger.gmane.org>
+Subject: Trouble creating virtual library provider package [REPOST]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,97 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2009 22:33:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Jan 2009 03:07:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7Bit
 
-On Tue, Jan 27, 2009 at 3:55 PM, Koen Kooi <koen@beagleboard.org> wrote:
->
-> Op 27 jan 2009, om 22:54 heeft Jason Kridner het volgende geschreven:
->
->>
->> On Tue, Jan 27, 2009 at 3:48 PM, Koen Kooi <k.kooi@student.utwente.nl>
->> wrote:
->>>
->>> On 27-01-09 22:02, Denys Dmytriyenko wrote:
->>>>
->>>> On Tue, Jan 27, 2009 at 12:19:36PM -0600, Jason Kridner wrote:
->>>>>
->>>>> Adding oe-dev mailing list...
->>>>>
->>>>> On Tue, Jan 27, 2009 at 12:10 PM, Dmytriyenko, Denys<denys@ti.com>
->>>>> wrote:
->>>>>>>>
->>>>>>>> It's a bit sad that we're going to miss out on NEON and vo_omapfb by
->>>>>>>> going armv5te :(
->>>>>>>
->>>>>>> Koen,
->>>>>>> I am rebuilding 'mplayer' now with 'MACHINE=beagleboard bitbake
->>>>>>> mplayer',
->>>>>>> so that concern should go away.  It shouldn't matter much about this
->>>>>>> mplayer, since it should only be used to test the hardware.
->>>>>>> Can you consider inclusion of:
->>>>>>> mplayer and FFmpeg dependency changes:
->>>>>>>
->>>>>>>
->>>>>>> http://www.beagleboard.org/gitweb/?p=arago-oe.git;a=commitdiff_plain;h=0b53219005c8daa95bcff40742d7c807bda17eca
->>>>>>
->>>>>> Hmm, I like these curl-inspired *_FEATURES handlers. The only problem
->>>>>> with
->>>>>> those is they won't trigger automatic rebuild when the featureset in
->>>>>> the
->>>>>> variable changes - don't forget to run bitbake -c rebuild manually...
->>>>>
->>>>> Can I get a few comments on [1]?  I found there is also a dependency
->>>>> in libtheora on x11 that doesn't seem necessary.  I find this very
->>>>> useful to avoid making a new recipe.  Anyone have ideas to address
->>>>> Denys' concern about needing to issue 'bitbake -c rebuild'?
->>>>>
->>>>> [1]
->>>>>
->>>>> http://www.beagleboard.org/gitweb/?p=arago-oe.git;a=commitdiff_plain;h=0b53219005c8daa95bcff40742d7c807bda17eca
->>>>
->>>> For some reason Koen's reply never made it to the oe-dev list... Sorry
->>>> for
->>>> copying it here to continue the discussion.
->>>>
->>>> Koen said:
->>>>>
->>>>> I'm against adding such 'USE flags' to OE, they basically make QA
->>>>> impossible.
->>>>> If people want a different mplayer, they are free to make an
->>>>> 'mplayer-nox' or
->>>>> 'mplayer-nosdl' recipe to fill their needs.
->>>>
->>>> But on the other hand it would make overlays, such as Arago, as well as
->>>> OE
->>>> itself, much cleaner and reduce the recipe creep.
->>>>
->>>> As of the rebuild issue when featureset in the variable changes, I was
->>>> thinking about storing a hash of variable's value, in addition to the
->>>> standard version and revision numbers, should trigger an automatic
->>>> rebuild.
->>>> Similar to bumping up a PR, but without modifying the recipe. Any
->>>> thoughts?
->>>
->>> I'm concerned with mplayer_1.0_armv7a.ipk not being the same as
->>> mplayer_1.0_armv7a.ipk, which is what USE flags do.
->>
->> Is it possible in OE to generate an ipk file name that gives some
->> indication of the USE flags?  Perhaps the right way to do this is with
->> a common .inc file to avoid maintenance issues.
->
-> If it magically mangles package names, what's so different from creating
-> multiple recipes?
+[Aaaanyone?]
 
-I think the differences are the names being sensible (based on having
-multiple recipes and using a .inc file to avoid maintenance issues)
-vs. maintaining fewer recipes.  The USE flags also give greater
-flexibility at the distribution level, but I've only seen a limited
-number of cases for which this is currently required.  As long as the
-recipes give ?= assignments, "personal" distributions could still be
-generated at the local.conf level.  The idea to add a hash to trigger
-an automatic rebuild if relevant USE flags change still seems quite
-useful (and even putting the USE flags into the control file).
+
+Hi all,
+
+How would I go about if I'd like to have two packages that provide the same
+thing? For example, I have package freetype, and freetype-led (which has a
+device-specific hack). Or ffmpeg and ffmpeg-minimal (which builds the
+smallest possible libavcodec/format). The right package is selected by the
+image recipe, via a task. 
+
+Is the normal way to do this to make a virtual/freetype and
+PREFERRED_PROVIDER? I tried to do this, but still have trouble with double
+providers etc. It gets tricky if package-name munging is involved, where
+the final package is called libfreetype6_2.3.7-r4_i586.ipk, and not
+freetype_2.3.7-r4_i586.ipk (and freetype-led_2.3.7-r4_i586.ipk).
+
+If this is the right way, can someone point to a good (simple) example of a
+virtual library provider?
+
+Cheers!
+
+    Rob
+
 
 
