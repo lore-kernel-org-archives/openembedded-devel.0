@@ -1,31 +1,33 @@
-Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1LS5nY-0007oV-Ut
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jan 2009 09:29:25 +0100
-Received: by rv-out-0708.google.com with SMTP id f25so7501933rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2009 00:21:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=EcwPjG7nTry+5ttnCw32FZYQT0630RB3jDKfNIyAot0=;
-	b=UdyZo42L3eaUsKmymf92aHudDtpyGtL6PmlNkQ6wyLIe5yROJEBk19RS0lQg/QndWT
-	6kaq+w2PLgehODx3csRlNONIsQ1aT1bpa2E70YIIOE1cktjx5/SsZQVzEWoo0UkwENzp
-	mXpYqM/NXJTExgP4irg/dsWZdsDrZBC1OBDag=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=b7ke5jJUu5OLkz9/XF9+zNPe260+wd+OnV2RLN1PMx/jlAgZSVvr3spaUXXU9abna+
-	fp9PEUQ/NfgPuvz8gCLsRNXTPTCDVpvX1sbkvnU/JXGYpZYwc7vCYY7XwnG0oKSq8REA
-	Xant4w4FAz4w2Sd2DX7Ex1Ud9miy/6DjyrJbs=
-MIME-Version: 1.0
-Received: by 10.141.90.13 with SMTP id s13mr1085774rvl.5.1233130907491; Wed, 
-	28 Jan 2009 00:21:47 -0800 (PST)
-Date: Wed, 28 Jan 2009 00:21:47 -0800
-Message-ID: <a7f8874a0901280021u2d3bcbd9w2e6f47bfca00bb81@mail.gmail.com>
-From: Hans Henry von Tresckow <hvontres@gmail.com>
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] Added rsnapshot
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LS5sg-00080W-T0
+	for openembedded-devel@openembedded.org; Wed, 28 Jan 2009 09:34:43 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LS5lK-0007Zn-Jx
+	for openembedded-devel@openembedded.org; Wed, 28 Jan 2009 08:27:06 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 28 Jan 2009 08:27:06 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 28 Jan 2009 08:27:06 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 28 Jan 2009 09:26:56 +0100
+Message-ID: <glp4sh$3aq$1@ger.gmane.org>
+References: <a7f8874a0901280005p5c21c00ay5647c21df9fce86d@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090118 Shredder/3.0b2pre
+In-Reply-To: <a7f8874a0901280005p5c21c00ay5647c21df9fce86d@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] Added sg3-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,108 +41,333 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2009 08:29:25 -0000
-X-Groupsio-MsgNum: 7457
-Content-Type: multipart/mixed; boundary=000e0cd23b82b3deba046186a960
-
---000e0cd23b82b3deba046186a960
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 28 Jan 2009 08:34:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-From 6d8f2311c513392996aef7bf61114977c859412b Mon Sep 17 00:00:00 2001
-From: Henry von Tresckow <hvontres@gmail.com>
-Date: Wed, 28 Jan 2009 00:19:45 -0800
-Subject: [PATCH] Added rsnapshot
-
----
- conf/checksums.ini                    |    4 ++++
- packages/rsnapshot/rsnapshot_1.3.1.bb |   15 +++++++++++++++
- 2 files changed, 19 insertions(+), 0 deletions(-)
- create mode 100644 packages/rsnapshot/rsnapshot_1.3.1.bb
-
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index e3a8253..9d412a2 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -18570,6 +18570,10 @@
-sha256=27ffe0392ae193eb04786a2159c099a00fe38ccdaebcebd72afc842c528bb6d3
- md5=4e855372c4a533b9ed605503156e6e04
- sha256=3dbd653b27fc855bf86dfe0ac06ed9bf59c8b85c9bcb4b5488528b30c59970f4
-
-+[http://downloads.sourceforge.net/rsnapshot/rsnapshot-1.3.1.tar.gz]
-+md5=588f92995dcf60a6ea6df8d94a017e7e
-+sha256=94b6c77e40628935f42a191bdc28ad93b1f132fde456ee76ee87763f1eddc75e
-+
- [http://www.claws-mail.org/downloads/plugins/rssyl-0.10.tar.gz]
- md5=01a123319f2a32ecff7e560b95c2e4df
- sha256=d6bfdee4fd31c0e0089c6edab594eefaa5b7b95f0b783f1156dffadf1a90d820
-diff --git a/packages/rsnapshot/rsnapshot_1.3.1.bb
-b/packages/rsnapshot/rsnapshot_1.3.1.bb
-new file mode 100644
-index 0000000..2ea32c7
---- /dev/null
-+++ b/packages/rsnapshot/rsnapshot_1.3.1.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "Rsnapshot Backup System"
-+HOMEPAGE = "http://www.rsnapshot.org/"
-+LICENSE = "GPLv2"
-+SECTION = "console/networking"
-+PR = "r0"
-+
-+RDEPENDS += " perl rsync logrotate"
-+RRECOMENTS += " ssh"
-+
-+#SRC_URI= "http://www.rsnapshot.org/downloads/rsnapshot-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/rsnapshot/rsnapshot-${PV}.tar.gz"
-+
-+inherit autotools
-+
-+
--- 
-1.5.4.3
+On 28-01-09 09:05, Hans Henry von Tresckow wrote:
+>  From 6f470d6b859e78dff1a168fc24bcb8d3ddcef575 Mon Sep 17 00:00:00 2001
+> From: Henry von Tresckow<hvontres@gmail.com>
+> Date: Tue, 27 Jan 2009 23:44:26 -0800
+> Subject: [PATCH] Added sg3-utils
 
 
+Looks good to me.
 
--- 
-Henry von Tresckow (hvontres)
-Bill Cosby  - "A word to the wise ain't necessary - it's the stupid
-ones that need the advice."
+regards,
 
---000e0cd23b82b3deba046186a960
-Content-Type: text/x-diff; charset=US-ASCII; name="0001-Added-rsnapshot.patch"
-Content-Disposition: attachment; filename="0001-Added-rsnapshot.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_fqhqai3f0
+Koen
 
-RnJvbSA2ZDhmMjMxMWM1MTMzOTI5OTZhZWY3YmY2MTExNDk3N2M4NTk0MTJiIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBIZW5yeSB2b24gVHJlc2Nrb3cgPGh2b250cmVzQGdtYWlsLmNv
-bT4KRGF0ZTogV2VkLCAyOCBKYW4gMjAwOSAwMDoxOTo0NSAtMDgwMApTdWJqZWN0OiBbUEFUQ0hd
-IEFkZGVkIHJzbmFwc2hvdAoKLS0tCiBjb25mL2NoZWNrc3Vtcy5pbmkgICAgICAgICAgICAgICAg
-ICAgIHwgICAgNCArKysrCiBwYWNrYWdlcy9yc25hcHNob3QvcnNuYXBzaG90XzEuMy4xLmJiIHwg
-ICAxNSArKysrKysrKysrKysrKysKIDIgZmlsZXMgY2hhbmdlZCwgMTkgaW5zZXJ0aW9ucygrKSwg
-MCBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCBwYWNrYWdlcy9yc25hcHNob3QvcnNu
-YXBzaG90XzEuMy4xLmJiCgpkaWZmIC0tZ2l0IGEvY29uZi9jaGVja3N1bXMuaW5pIGIvY29uZi9j
-aGVja3N1bXMuaW5pCmluZGV4IGUzYTgyNTMuLjlkNDEyYTIgMTAwNjQ0Ci0tLSBhL2NvbmYvY2hl
-Y2tzdW1zLmluaQorKysgYi9jb25mL2NoZWNrc3Vtcy5pbmkKQEAgLTE4NTcwLDYgKzE4NTcwLDEw
-IEBAIHNoYTI1Nj0yN2ZmZTAzOTJhZTE5M2ViMDQ3ODZhMjE1OWMwOTlhMDBmZTM4Y2NkYWViY2Vi
-ZDcyYWZjODQyYzUyOGJiNmQzCiBtZDU9NGU4NTUzNzJjNGE1MzNiOWVkNjA1NTAzMTU2ZTZlMDQK
-IHNoYTI1Nj0zZGJkNjUzYjI3ZmM4NTViZjg2ZGZlMGFjMDZlZDliZjU5YzhiODVjOWJjYjRiNTQ4
-ODUyOGIzMGM1OTk3MGY0CiAKK1todHRwOi8vZG93bmxvYWRzLnNvdXJjZWZvcmdlLm5ldC9yc25h
-cHNob3QvcnNuYXBzaG90LTEuMy4xLnRhci5nel0KK21kNT01ODhmOTI5OTVkY2Y2MGE2ZWE2ZGY4
-ZDk0YTAxN2U3ZQorc2hhMjU2PTk0YjZjNzdlNDA2Mjg5MzVmNDJhMTkxYmRjMjhhZDkzYjFmMTMy
-ZmRlNDU2ZWU3NmVlODc3NjNmMWVkZGM3NWUKKwogW2h0dHA6Ly93d3cuY2xhd3MtbWFpbC5vcmcv
-ZG93bmxvYWRzL3BsdWdpbnMvcnNzeWwtMC4xMC50YXIuZ3pdCiBtZDU9MDFhMTIzMzE5ZjJhMzJl
-Y2ZmN2U1NjBiOTVjMmU0ZGYKIHNoYTI1Nj1kNmJmZGVlNGZkMzFjMGUwMDg5YzZlZGFiNTk0ZWVm
-YWE1YjdiOTVmMGI3ODNmMTE1NmRmZmFkZjFhOTBkODIwCmRpZmYgLS1naXQgYS9wYWNrYWdlcy9y
-c25hcHNob3QvcnNuYXBzaG90XzEuMy4xLmJiIGIvcGFja2FnZXMvcnNuYXBzaG90L3JzbmFwc2hv
-dF8xLjMuMS5iYgpuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwLi4yZWEzMmM3Ci0t
-LSAvZGV2L251bGwKKysrIGIvcGFja2FnZXMvcnNuYXBzaG90L3JzbmFwc2hvdF8xLjMuMS5iYgpA
-QCAtMCwwICsxLDE1IEBACitERVNDUklQVElPTiA9ICJSc25hcHNob3QgQmFja3VwIFN5c3RlbSIK
-K0hPTUVQQUdFID0gImh0dHA6Ly93d3cucnNuYXBzaG90Lm9yZy8iCitMSUNFTlNFID0gIkdQTHYy
-IgorU0VDVElPTiA9ICJjb25zb2xlL25ldHdvcmtpbmciCitQUiA9ICJyMCIKKworUkRFUEVORFMg
-Kz0gIiBwZXJsIHJzeW5jIGxvZ3JvdGF0ZSIKK1JSRUNPTUVOVFMgKz0gIiBzc2giCisKKyNTUkNf
-VVJJPSAiaHR0cDovL3d3dy5yc25hcHNob3Qub3JnL2Rvd25sb2Fkcy9yc25hcHNob3QtJHtQVn0u
-dGFyLmd6IgorU1JDX1VSSSA9ICIke1NPVVJDRUZPUkdFX01JUlJPUn0vcnNuYXBzaG90L3JzbmFw
-c2hvdC0ke1BWfS50YXIuZ3oiCisKK2luaGVyaXQgYXV0b3Rvb2xzCisKKwotLSAKMS41LjQuMwoK
+> ---
+>   conf/checksums.ini                      |    4 +
+>   packages/sg3-utils/files/Makefile.patch |  246 +++++++++++++++++++++++++++++++
+>   packages/sg3-utils/sg3-utils_1.24.bb    |   14 ++
+>   3 files changed, 264 insertions(+), 0 deletions(-)
+>   create mode 100644 packages/sg3-utils/files/Makefile.patch
+>   create mode 100644 packages/sg3-utils/sg3-utils_1.24.bb
+>
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index f98fa55..e3a8253 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -19150,6 +19150,10 @@
+> sha256=4d710b17c5440518b43d3d1f7cbcb78a62c72f25e48a1b385a0ae3872ec8b40b
+>   md5=350180a6e4132a2b1262c7a15162c007
+>   sha256=4323581ddb6150677a36bcb87e3960100a7ea7c80906f0c7b7a27d1e43b055d9
+>
+> +[ftp://ftp.debian.org/debian/pool/main/s/sg3-utils/sg3-utils_1.24.orig.tar.gz]
+> +md5=9e1b8811b013d8f97d8ea2e0942cebad
+> +sha256=0a06dae84a8f7f464c0c29c78a8f73f24a62894a2d3fc10b5f74a993f7b5abfe
+> +
+>   [ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz]
+>   md5=103c9828f24820df86e55e7862e28974
+>   sha256=7dc418c1d361123ffc5e45d61f1b97257940a8eb35d0bfbbc493381cc5b1f959
+> diff --git a/packages/sg3-utils/files/Makefile.patch
+> b/packages/sg3-utils/files/Makefile.patch
+> new file mode 100644
+> index 0000000..cc5babf
+> --- /dev/null
+> +++ b/packages/sg3-utils/files/Makefile.patch
+> @@ -0,0 +1,246 @@
+> +Index: sg3-utils-1.24/Makefile
+> +===================================================================
+> +--- sg3-utils-1.24.orig/Makefile	2009-01-27 16:29:26.000000000 -0800
+> ++++ sg3-utils-1.24/Makefile	2009-01-27 22:31:04.000000000 -0800
+> +@@ -1,6 +1,6 @@
+> + SHELL = /bin/sh
+> +
+> +-PREFIX=/usr/local
+> ++PREFIX=/usr
+> + LIBDIR=$(DESTDIR)/$(PREFIX)/lib
+> + INSTDIR=$(DESTDIR)/$(PREFIX)/bin
+> + MANDIR=$(DESTDIR)/$(PREFIX)/share/man
+> +@@ -8,6 +8,8 @@
+> +
+> + CC = gcc
+> + LD = gcc
+> ++LIBTOOL = libtool
+> ++LT_EXTRA = --tag=CC
+> +
+> + EXECS = sg_dd sgp_dd sgm_dd sg_read sg_map sg_scan sg_rbuf \
+> +   	sginfo sg_readcap sg_turs sg_inq sg_test_rwbuf \
+> +@@ -64,164 +66,164 @@
+> + 	$(CC) $(INCLUDES) $(CFLAGS) $(S_CFLAGS) -c -o $@ $<
+> +
+> + sg_lib.lo: sg_lib.o
+> +-	libtool --mode=compile $(CC) -c sg_lib.c
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_lib.c
+> +
+> + sg_cmds_basic.lo: sg_cmds_basic.o
+> +-	libtool --mode=compile $(CC) -c sg_cmds_basic.c
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_cmds_basic.c
+> +
+> + sg_cmds_extra.lo: sg_cmds_extra.o
+> +-	libtool --mode=compile $(CC) -c sg_cmds_extra.c
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_cmds_extra.c
+> +
+> + sg_pt_linux.lo: sg_pt_linux.o
+> +-	libtool --mode=compile $(CC) -c sg_pt_linux.c
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_pt_linux.c
+> +
+> + libsgutils.la: sg_lib.lo sg_cmds_basic.lo sg_cmds_extra.lo sg_pt_linux.lo
+> +-	libtool --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o libsgutils.la sg_lib.lo
+> sg_cmds_basic.lo \
+> + 	sg_cmds_extra.lo sg_pt_linux.lo -rpath $(LIBDIR) \
+> + 	-version-info $(LIB_VINFO)
+> +
+> + # libsgutils.la: sg_lib.lo sg_cmds_basic.lo sg_cmds_extra.lo
+> +-#	libtool --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+> ++#	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o libsgutils.la
+> sg_lib.lo sg_cmds_basic.lo \
+> + #	sg_cmds_extra.lo -rpath $(LIBDIR) -release $(RELEASE)
+> +
+> + sg_inq: sg_inq.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_dd: sg_dd.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_scan: sg_scan.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sginfo: sginfo.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_start: sg_start.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_rbuf: sg_rbuf.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_readcap: sg_readcap.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sgp_dd.o: sgp_dd.c
+> + 	$(CC) $(INCLUDES) $(CFLAGS) $(S_CFLAGS) $(CFLAGS_PTHREADS) \
+> + 	-c -o sgp_dd.o $<
+> +
+> + sgp_dd: sgp_dd.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ -lpthread
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ -lpthread
+> +
+> + sgm_dd: sgm_dd.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_map: sg_map.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_turs: sg_turs.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_test_rwbuf: sg_test_rwbuf.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_read: sg_read.o sg_io_linux.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_reset: sg_reset.o
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_modes: sg_modes.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_logs: sg_logs.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_senddiag: sg_senddiag.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_opcodes: sg_opcodes.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_persist: sg_persist.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_write_long: sg_write_long.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_read_long: sg_read_long.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_requests: sg_requests.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_ses: sg_ses.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_verify: sg_verify.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_emc_trespass: sg_emc_trespass.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_luns: sg_luns.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_sync: sg_sync.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_prevent: sg_prevent.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_get_config: sg_get_config.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_wr_mode: sg_wr_mode.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_rtpg: sg_rtpg.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_reassign: sg_reassign.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_format: sg_format.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_rmsn: sg_rmsn.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_ident: sg_ident.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_map26: sg_map26.o
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_rdac: sg_rdac.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_vpd: sg_vpd.o sg_vpd_vendor.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_sat_identify: sg_sat_identify.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_read_buffer: sg_read_buffer.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_write_buffer: sg_write_buffer.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> + sg_raw: sg_raw.o libsgutils.la
+> +-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+> +
+> +
+> + install: $(EXECS)
+> + 	install -d $(INSTDIR)
+> + 	install -d $(LIBDIR)
+> +-	libtool --mode=install install -c libsgutils.la $(LIBDIR)/libsgutils.la
+> +-	libtool --finish $(LIBDIR)
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=install install -c libsgutils.la
+> $(LIBDIR)/libsgutils.la
+> ++	$(LIBTOOL) $(LT_EXTRA) --finish $(LIBDIR)
+> + 	for name in $^; \
+> +-	 do libtool --mode=install install -m 755 \
+> ++	 do $(LIBTOOL) $(LT_EXTRA) --mode=install install -m 755 \
+> + 		$$name $(INSTDIR); \
+> + 	done
+> + 	install -d $(MANDIR)/$(MAN_PREF)
+> +@@ -235,7 +237,7 @@
+> + 	done
+> +
+> + uninstall:
+> +-	libtool --mode=uninstall rm -f $(LIBDIR)/libsgutils.la
+> ++	$(LIBTOOL) $(LT_EXTRA) --mode=uninstall rm -f $(LIBDIR)/libsgutils.la
+> + 	dists="$(EXECS)"; \
+> + 	for name in $$dists; do \
+> + 	 rm -f $(INSTDIR)/$$name; \
+> diff --git a/packages/sg3-utils/sg3-utils_1.24.bb
+> b/packages/sg3-utils/sg3-utils_1.24.bb
+> new file mode 100644
+> index 0000000..d5f9071
+> --- /dev/null
+> +++ b/packages/sg3-utils/sg3-utils_1.24.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION = "Utilities for working with generic SCSI devices"
+> +SECTION = "console/admin"
+> +LICENSE = "GPLv2"
+> +HOMEPAGE = "http://packages.qa.debian.org/s/sg3-utils.html"
+> +AUTHOR = "Eric Schwartz (Skif)<emschwar@debian.org>"
+> +PR = "r0"
+> +
+> +SRC_URI = "${DEBIAN_MIRROR}/main/s/sg3-utils/sg3-utils_${PV}.orig.tar.gz \
+> +	file://Makefile.patch;patch=1"
+> +
+> +S = "${WORKDIR}/sg3-utils-${PV}"
+> +
+> +inherit autotools
+> +
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---000e0cd23b82b3deba046186a960--
+
+
+
