@@ -1,36 +1,15 @@
-Received: from [209.85.132.244] (helo=an-out-0708.google.com)
+Received: from [82.208.44.173] (helo=ibawizard.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elena.valhalla@gmail.com>) id 1LS7Ov-0007I6-8t
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jan 2009 11:12:05 +0100
-Received: by an-out-0708.google.com with SMTP id d40so1702514and.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2009 02:04:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=73CXIc7oZdWumzEvGlQLI2Tedx3GhFftzOUDwMPcdq0=;
-	b=tsM4vTEiflUFEasqyBb+pSr75gUHxoJhzPoVLUvZcMCTGW3x9kJmJ/jveydaBYP05N
-	ArHRSsXNART6F0GugBm+NSuoTaklbnTN0J/J/9JSDGdQ21j0d8Ge+9m4vYcpiFSvA2pB
-	7WML14xFZzwn/7GPfWitGFDjqb7TnBWALO9Yg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=tooXlH/GYbnUm8j+Jhof6+cH9vRyEk4vFwtr1Bb7zH+XlxNkAFJsNbdum+lXEwpAZz
-	XP6C/nh4Gu5zHJ/vicQKP70W8wD6PwdScODNno11if9BHcRAsfZ+bezvrrBdwKBJTibb
-	0P79jUhCk7wowWpO/fIsAMZYtMDz1FccIGhqk=
-MIME-Version: 1.0
-Received: by 10.100.14.2 with SMTP id 2mr329483ann.13.1233137068923; Wed, 28 
-	Jan 2009 02:04:28 -0800 (PST)
-In-Reply-To: <1233136141.7444.3.camel@ubuntu2>
-References: <1233059140.7818.4.camel@ubuntu2> <497F0D92.4040904@gmail.com>
-	<1233136141.7444.3.camel@ubuntu2>
-Date: Wed, 28 Jan 2009 11:04:28 +0100
-Message-ID: <5c5e5c350901280204y4225d39cn3b4baf2d723ef879@mail.gmail.com>
-From: Elena of Valhalla <elena.valhalla@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Build problems
+	(envelope-from <ynezz@ibawizard.net>) id 1LS8fA-0002m2-Fc
+	for openembedded-devel@openembedded.org; Wed, 28 Jan 2009 12:32:56 +0100
+Received: by ibawizard.net (Postfix, from userid 1002)
+	id C4F1C16C001; Wed, 28 Jan 2009 12:25:14 +0100 (CET)
+From: =?utf-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+To: openembedded-devel@openembedded.org
+Date: Wed, 28 Jan 2009 12:25:14 +0100
+Message-Id: <1233141914-25251-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.6.0
+Subject: [PATCH] fix missing groups in udevd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,22 +23,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2009 10:12:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Jan 2009 11:32:56 -0000
 
-On Wed, Jan 28, 2009 at 10:49 AM, Paolo Cremonese <pisa.t@teledata-i.com> wrote:
-> Now, what I have to do to create a bootable compact flash with the
-> image?
+Fix for udevd warning messages when I plug in USB stick:
 
-What image format did you build? I've found that the easier way to
-create a bootable compact flash would be to build the .tar image,
-format the CF as ext(2|3), extract the contents of the tarball in the
-mounted CF and then install extlinux on it
+	Starting udevudevd[585]: lookup_group: specified group 'scanner' unknown
+	udevd[585]: lookup_group: specified group 'nvram' unknown
+	udevd[585]: lookup_user: specified user 'tss' unknown
+	udevd[585]: lookup_group: specified group 'fuse' unknown
+	udevd[585]: lookup_group: specified group 'kvm' unknown
+	udevd[585]: lookup_group: specified group 'rdma' unknown
+	udevd version 124 started
 
+Signed-off-by: Petr Štetiar <ynezz@true.cz>
+---
+ packages/udev/udev-124/permissions.rules |   20 ++++++++++----------
+ 1 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/packages/udev/udev-124/permissions.rules b/packages/udev/udev-124/permissions.rules
+index 205b733..fbc9974 100644
+--- a/packages/udev/udev-124/permissions.rules
++++ b/packages/udev/udev-124/permissions.rules
+@@ -32,12 +32,12 @@ KERNEL=="nht[0-9]*", 				GROUP="tape"
+ # SCSI devices
+ KERNEL=="sr[0-9]*", IMPORT{program}="cdrom_id --export $tempnode"
+ SUBSYSTEMS=="scsi", ATTRS{type}=="1",				GROUP="tape"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="HP",	GROUP="scanner"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="Epson",	GROUP="scanner"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="EPSON",	GROUP="scanner"
++SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="HP",	GROUP="plugdev"
++SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="Epson",	GROUP="plugdev"
++SUBSYSTEMS=="scsi", ATTRS{type}=="3", ATTRS{vendor}=="EPSON",	GROUP="plugdev"
+ SUBSYSTEMS=="scsi", ATTRS{type}=="4",				GROUP="cdrom"
+ SUBSYSTEMS=="scsi", ATTRS{type}=="5",				GROUP="cdrom"
+-SUBSYSTEMS=="scsi", ATTRS{type}=="6",				GROUP="scanner"
++SUBSYSTEMS=="scsi", ATTRS{type}=="6",				GROUP="plugdev"
+ SUBSYSTEMS=="scsi", ATTRS{type}=="8",				GROUP="tape"
+ 
+ # USB devices
+@@ -86,10 +86,10 @@ KERNEL=="inotify",		MODE="0666"
+ KERNEL=="sgi_fetchop",		MODE="0666"
+ KERNEL=="sonypi",		MODE="0666"
+ KERNEL=="agpgart",				GROUP="video"
+-KERNEL=="nvram",				GROUP="nvram"
++KERNEL=="nvram",				GROUP="staff"
+ KERNEL=="rtc|rtc[0-9]*",			GROUP="audio"
+-KERNEL=="tpm*",			MODE="0600",	OWNER="tss", GROUP="tss"
+-KERNEL=="fuse",					GROUP="fuse"
++KERNEL=="tpm*",			MODE="0600",	OWNER="root", GROUP="staff"
++KERNEL=="fuse",					GROUP="staff"
+ KERNEL=="kqemu",		MODE="0666"
+ KERNEL=="kvm",					GROUP="kvm"
+ KERNEL=="tun",			MODE="0666",
+@@ -98,9 +98,9 @@ KERNEL=="cdemu[0-9]*",				GROUP="cdrom"
+ KERNEL=="pktcdvd[0-9]*",			GROUP="cdrom"
+ KERNEL=="pktcdvd",		MODE="0644"
+ 
+-KERNEL=="uverbs*",				GROUP="rdma"
+-KERNEL=="ucm*",					GROUP="rdma"
+-KERNEL=="rdma_ucm",				GROUP="rdma"
++KERNEL=="uverbs*",				GROUP="staff"
++KERNEL=="ucm*",					GROUP="staff"
++KERNEL=="rdma_ucm",				GROUP="staff"
+ 
+ # printers and parallel devices
+ SUBSYSTEM=="printer",				GROUP="lp"
 -- 
-Elena ``of Valhalla''
+1.5.4.3
 
-email: elena.valhalla@gmail.com
 
 
