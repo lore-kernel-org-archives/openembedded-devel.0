@@ -1,26 +1,33 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [209.85.162.176] (helo=el-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LSNvs-0008UE-TY
-	for openembedded-devel@openembedded.org; Thu, 29 Jan 2009 04:51:13 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090129034326.VUOP2342.fed1rmmtao102.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 28 Jan 2009 22:43:26 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo03.cox.net with bizsmtp
-	id 9FjP1b00G1E665w04FjPeo; Wed, 28 Jan 2009 22:43:26 -0500
-X-Authority-Analysis: v=1.0 c=1 a=J-sQMM1VYodFNAylcDEA:9
-	a=S2JVYZfeeB1IXdSSCY4A:7 a=oK4Ou9Uj--IgUXcEw70hjSzDi6wA:4
-	a=b8hG5vVbyAkA:10
-X-CM-Score: 0.00
-Date: Wed, 28 Jan 2009 20:43:23 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090129034323.GL15885@smtp.west.cox.net>
+	(envelope-from <slapinid@gmail.com>) id 1LSROB-0002j7-GJ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jan 2009 08:32:39 +0100
+Received: by el-out-1112.google.com with SMTP id v27so2177938ele.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Jan 2009 23:24:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:cc:content-type:content-transfer-encoding;
+	bh=FmQYXwddaDFy2KE1+ETL3tCtSoo76933Rw0mgDJEshk=;
+	b=Qau5To0RhxJZw8IZrAqYzNGvQIoHYW8A5vRQssNE3eNZDu+xS1x9NbYNAFV3djmaYU
+	Vvx9DjxpCt97iOkC4tmpAZttNfKYi84uZPPzw85QsbAATcwfJ+yt244mky6EOkmDoZNB
+	RkqVTory6LCG2cmeeMpVfq//ipFaJ7oJSVpuU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=fRiPmxf4WO7DIdva/F+tPnWWs+m70xg69fUJOuJpBC3aQzJX+YvquJ/pJV0eXN1ao1
+	HZuxwYZyV/nBc4jt1j9v3FUINLaDQ/6IquVZ09JIMaeIQAK+yTD7xBFF2mya6t6RpGGC
+	/LAQfZW3W7s3kBmXW797YaDwvfqq1PsShnOFE=
 MIME-Version: 1.0
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Canadian SDK support
+Received: by 10.150.98.4 with SMTP id v4mr1553898ybb.141.1233213899288; Wed, 
+	28 Jan 2009 23:24:59 -0800 (PST)
+Date: Thu, 29 Jan 2009 10:24:59 +0300
+Message-ID: <48239d390901282324j203a7111i6993ee223c12e109@mail.gmail.com>
+From: Sergey Lapin <slapinid@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Dmitry <dbaryshkov@gmail.com>
+Subject: maintainers for wireshark/tshark, net-snmp, libpcap, tcpdump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,18 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2009 03:51:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 29 Jan 2009 07:32:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hey all.  After pushing the new packages into dev, it turns out I forgot
-what happens when a recipe can't be parsed, oops.  So, I've gone and
-pushed the last few bits of the Canadian SDK stuff.  AFAICT the only
-really objectionable part is just how much of canadian-sdk.bb c&p's from
-meta-toolchain.bb.  I intend to see what I can turn into functions for a
-meta-toolchain.inc shortly.
+Hi, all!
 
--- 
-Tom Rini
+Is there any maintainers for the following recipes:?
+
+o.o.d/packages/wireshark/tshark_0.99.4.bb
+o.o.d/packages/wireshark/wireshark_0.99.4.bb
+o.o.s/packages/net-snmp/net-snmp_*.bb
+o.o.s/packages/libpcap/libpcap_*.bb
+o.o.d/packages/tcpdump/tcpdump_*.bb
+
+I have a set of patches implementing IEEE802.15.4 stuff, so these are
+needed to be upgraded and patched.
+
+wireshark/tshark: buildability
+net-snmp: recipe for svn trunk with fixed release (net-snmp recipe is
+unbuildable currently
+   probably that could be fixed, too. Some libtool issue is there.).
+libpcap: upgrade to latest upstream (1.0.0), minor patching for
+ARPHRD_* stuff, does not change normal use
+tcpdump: upgrade to latest upstream (4.0.0) minor patching to properly
+react on DLT_IEEE802_15_4
+
+None of these patches change normal use of tools, only adds minor functionality.
+
+So, if there's no objections I'll push this stuff, and if somebody interested,
+I'll send patches beforehand.
+
+All the best,
+S.
 
 
