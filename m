@@ -1,24 +1,41 @@
-Received: from [85.33.31.84] (helo=smtpout084B.attiva.biz)
+Received: from [209.85.219.15] (helo=mail-ew0-f15.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pisa.t@teledata-i.com>) id 1LSUyh-0008AC-OU
-	for openembedded-devel@openembedded.org; Thu, 29 Jan 2009 12:22:35 +0100
-Received: from FBCMFE02B19.fbc.local ([192.168.31.237]) by
-	smtpout084B.attiva.biz with Microsoft SMTPSVC(6.0.3790.1830); 
-	Thu, 29 Jan 2009 12:14:57 +0100
-Received: from [193.100.100.77] ([80.207.73.242]) by FBCMFE02B19.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 29 Jan 2009 12:13:51 +0100
-From: Paolo Cremonese <pisa.t@teledata-i.com>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <49802D8A.6020208@gmail.com>
-References: <1233059140.7818.4.camel@ubuntu2> <497F0D92.4040904@gmail.com>
-	<1233136141.7444.3.camel@ubuntu2>  <49802D8A.6020208@gmail.com>
-Date: Thu, 29 Jan 2009 12:14:04 +0100
-Message-Id: <1233227644.6517.5.camel@ubuntu2>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-OriginalArrivalTime: 29 Jan 2009 11:13:51.0924 (UTC)
-	FILETIME=[AA863F40:01C98202]
+	(envelope-from <jay4mail@gmail.com>) id 1LSWEa-0006va-Np
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jan 2009 13:43:05 +0100
+Received: by ewy8 with SMTP id 8so2010700ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Jan 2009 04:35:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:message-id;
+	bh=Ljm/Nbg+41yeYpiqr9moFCKU54O+38PRDb8jgswEh90=;
+	b=extcI/bWu9Q7ZTryRIwmBoB+dVwJhWmptdihSPiV/7KkEnDPHTtCHzYS2fLJEBsHbI
+	NwLiwlprLNqTlEWJ3cdfiG6XiIAJdniy/v70NTmmMoaCvXRayDUWkRnPAk4bMYzXAMYN
+	c0orPLsjnZzuWSKMGn98yofjk/wu4jaA1PARM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:message-id;
+	b=ZDee3YNnEuGVLTDMPL3biFuzfIzRSHjwk6nzOT2ii/8DjjiUVybPZ4LOlWm8+uIWdR
+	bGmdqDJ4Z7EdQdm4XoiwAPG8BmxU6zkiCqR9AVbbJ/ZUPubhXe0RRhLz/12pV8uAQW+T
+	qpJchUkWt4/WifBpgZ8foGhKiU1Ftapb3PjFE=
+Received: by 10.86.76.20 with SMTP id y20mr56438fga.37.1233232521709;
+	Thu, 29 Jan 2009 04:35:21 -0800 (PST)
+Received: from is.home ([93.81.136.171])
+	by mx.google.com with ESMTPS id 4sm1963398fgg.44.2009.01.29.04.35.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 29 Jan 2009 04:35:21 -0800 (PST)
+From: Yuri Bushmelev <jay4mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 29 Jan 2009 15:35:16 +0300
+User-Agent: KMail/1.9.10
+References: <1233059140.7818.4.camel@ubuntu2> <49802D8A.6020208@gmail.com>
+	<1233227644.6517.5.camel@ubuntu2>
+In-Reply-To: <1233227644.6517.5.camel@ubuntu2>
+MIME-Version: 1.0
+Message-Id: <200901291535.16495.jay4mail@gmail.com>
 Subject: Re: Build problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,63 +50,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2009 11:22:35 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Jan 2009 12:43:05 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-OK, I done all but GRUB.
+Hello!
 
-My CF is connected through an USB adapter, and is seen as /dev/sdb
+> I try to install GRUB using
+>
+> sudo grub-install /dev/sdb
+>
+> but the answer is
+>
+> /dev/sdb does not have any corresponding BIOS drive.
 
-I can navigate into the filesystem.
+Try with --recheck-devices or something like (look at grub-install --help).
 
-I try to install GRUB using
-
-sudo grub-install /dev/sdb
-
-but the answer is
-
-/dev/sdb does not have any corresponding BIOS drive.
-
-Do I have necessarly to connect the CF using an IDE port?
-
-Thanks in advance.
-
-Ciao,
-Paolo
-
-
-On mer, 2009-01-28 at 11:03 +0100, Marco Cavallini wrote:
-> Paolo Cremonese ha scritto:
-> > OK, I have built the image wihout errors, thank you.
-> >=20
-> > Now, what I have to do to create a bootable compact flash with the
-> > image?
-> >=20
-> > Thanks in advance,
-> > Paolo
->=20
-> Paolo,
-> I'm just working on a system like your, but with i486.
->=20
-> 1. prtition your CF
-> 2. format CF ext3
-> 3. load (untar) yourimage.tar into CF
-> 4. install bootloader (GRUB)[1]
->=20
-> [1] GRUB build in OE is broken at the moment, I'm patching it ;-)
->=20
-> Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
-> --
-> Marco Cavallini | KOAN sas | Bergamo - Italia
->  embedded and real-time software engineering
-> Phone:+39-035-255.235 - Fax:+39-178-22.39.748
->       http://www.KoanSoftware.com
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+-- 
+Yuri Bushmelev
 
 
