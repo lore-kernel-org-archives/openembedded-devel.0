@@ -1,37 +1,25 @@
-Received: from [74.125.44.153] (helo=yx-out-1718.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1LSSee-0005ay-Gd
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LSSkD-0005in-7u
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jan 2009 09:53:45 +0100
-Received: by yx-out-1718.google.com with SMTP id 4so3034596yxp.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jan 2009 00:46:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=Gn61+fs/oCIxeMbOrKufAp3lQFZfNyTmC9zN0JKAnV4=;
-	b=csaX5cbnVAalV6XXPwb5sS9ztedbCd68SVWG2Y2SPM9cRofQ3hRQlX+8U7yOmt6LAA
-	ABYrWRcGHz2/6GF1YHfrxLmcFLef+QxKhLf8pEN7V3PS+MzVL3mIAXjjiUf9ivJR1pHd
-	gwydsgujNm+tWEQP+QugJ3cVfHI0Ld5QpZV2k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=kxtrxShxnPQ0c0kReLjy94itR9YE9udx0gtxo7NIhBjGL5alWfujSQ3RJt6CL4ELzg
-	eHLf4hiCY4wspzpkt/rFwT4dF8b+ntxjwTvFBh+5YIctralByEBIWu1L2r+BTC045ttg
-	8HHRzuWicPLWtu8wMtGOVW49LoPgYwlFRigRE=
+	Thu, 29 Jan 2009 09:59:48 +0100
+Received: (qmail invoked by alias); 29 Jan 2009 08:51:46 -0000
+Received: from e178080184.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.80.184]
+	by mail.gmx.net (mp061) with SMTP; 29 Jan 2009 09:51:46 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18B224/6f0BcyE4Bv1DTY/xOLpPBslFc/iAgJpL8i
+	Esb7xhzQ7hkwQ+
+Message-ID: <49816E98.7080508@gmx.net>
+Date: Thu, 29 Jan 2009 09:53:44 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-Received: by 10.150.97.20 with SMTP id u20mr2552997ybb.64.1233218764045; Thu, 
-	29 Jan 2009 00:46:04 -0800 (PST)
-In-Reply-To: <bc64b4640901290039g76152012na95522723349968c@mail.gmail.com>
-References: <48239d390901282324j203a7111i6993ee223c12e109@mail.gmail.com>
-	<bc64b4640901290039g76152012na95522723349968c@mail.gmail.com>
-Date: Thu, 29 Jan 2009 11:46:04 +0300
-Message-ID: <48239d390901290046ibe1040fvdd231f1a0428d808@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
-To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: maintainers for wireshark/tshark, net-snmp, libpcap, tcpdump
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.6
+Subject: building OE for an amd64 machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +33,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2009 08:53:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Jan 2009 09:00:02 -0000
+X-Groupsio-MsgNum: 7476
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig8381A590AD50890CFDD248B4"
 
->> I have a set of patches implementing IEEE802.15.4 stuff, so these are
->> needed to be upgraded and patched.
->>
->> wireshark/tshark: buildability
->
-> While you at at it,  could you please also bump the version of wshark/tshark
-> to the upstream one?
-'twas my initial intention, but it has some additional
-cross-compile-unfriendly tests
-which require some attention.
+--------------enig8381A590AD50890CFDD248B4
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+I want to build packages with OE that can run on my AMD64 system. As
+such I started a machine configuration and a CPU tune file.
+
+At first everything looks good but when glibc-initial is about to
+compiled it wants to include some header file from the kernel headers
+(asm-x64-64/socket.h) and cannot find it.
+
+The strange thing is that linux-libc-headers is not installed into any
+of the staging directories.
+
+Well, it is basically my first shot at a new machine configuration. :)
+
+I created a user branch for the amd64 support and committed those two
+patches to it:
+
+http://cgit.openembedded.net/cgit.cgi?url=3Dopenembedded/commit/&h=3Drobe=
+rtschuster/amd64-target&id=3D20a70182e0ab8b6fad5381ea797123c6d6478dc4
+http://cgit.openembedded.net/cgit.cgi?url=3Dopenembedded/commit/&h=3Drobe=
+rtschuster/amd64-target&id=3D6441c620a7e13d6a6f1be4fe54bf1fb7fc3e6dc5
+http://cgit.openembedded.net/cgit.cgi?url=3Dopenembedded/commit/&h=3Drobe=
+rtschuster/amd64-target&id=3D0aeb635f90e332cfb65725147dd1f78a30b9f079
+
+I am grateful about any help to get this to work.
+
+Regards
+Robert
 
 
+--------------enig8381A590AD50890CFDD248B4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAkmBbpsACgkQG9cfwmwwEtpipwCfTIpPnr0dA0/1YDvkpEHtOkO2
+knYAoIdfXY4Yd6hmVSIbqG3N3fM/NBF4
+=eu7M
+-----END PGP SIGNATURE-----
+
+--------------enig8381A590AD50890CFDD248B4--
