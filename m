@@ -1,33 +1,35 @@
-Received: from [209.85.162.176] (helo=el-out-1112.google.com)
+Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1LSROB-0002j7-GJ
+	(envelope-from <slapinid@gmail.com>) id 1LSSDv-00050G-Dt
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jan 2009 08:32:39 +0100
-Received: by el-out-1112.google.com with SMTP id v27so2177938ele.24
+	Thu, 29 Jan 2009 09:26:07 +0100
+Received: by yx-out-1718.google.com with SMTP id 4so3032853yxp.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2009 23:24:59 -0800 (PST)
+	Thu, 29 Jan 2009 00:18:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:cc:content-type:content-transfer-encoding;
-	bh=FmQYXwddaDFy2KE1+ETL3tCtSoo76933Rw0mgDJEshk=;
-	b=Qau5To0RhxJZw8IZrAqYzNGvQIoHYW8A5vRQssNE3eNZDu+xS1x9NbYNAFV3djmaYU
-	Vvx9DjxpCt97iOkC4tmpAZttNfKYi84uZPPzw85QsbAATcwfJ+yt244mky6EOkmDoZNB
-	RkqVTory6LCG2cmeeMpVfq//ipFaJ7oJSVpuU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=fRiPmxf4WO7DIdva/F+tPnWWs+m70xg69fUJOuJpBC3aQzJX+YvquJ/pJV0eXN1ao1
-	HZuxwYZyV/nBc4jt1j9v3FUINLaDQ/6IquVZ09JIMaeIQAK+yTD7xBFF2mya6t6RpGGC
-	/LAQfZW3W7s3kBmXW797YaDwvfqq1PsShnOFE=
+	bh=kIC2o0txYnq2Zs7BKwCYaGUXYWd2U109PpbqfyaNhJ0=;
+	b=Lp8Ku49UufYMK1x9HgrNjrG+NGH6a45/yGuYO5Pba9XXBCUb5Na2iUneroXtomRAX/
+	XwSKJ9FN6HYapHtIuB3lbvm/xDCJx9Kq6AOM81xjoyg/OJ8PK5or8omDw5XGyvN9ciYB
+	mU9kUcMa49NbKi8zcaoxI7PnFJmjXwEkuUVwA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Lq4Zj+z/MJvsPWMhXFRlqinAcXLZIfJtxqJmdN97BQu78i3laJUhb+jFvK7APCpnIN
+	t7jZTAkWLDk+7HZy7hA6C79yrS6iTN7jq1jxo25piNyKEdyF/NqhKPG7pWzonDoZ0vl5
+	psjWYzFx90iIcb3bfhyOJVCSmY/8tj6QW3GH4=
 MIME-Version: 1.0
-Received: by 10.150.98.4 with SMTP id v4mr1553898ybb.141.1233213899288; Wed, 
-	28 Jan 2009 23:24:59 -0800 (PST)
-Date: Thu, 29 Jan 2009 10:24:59 +0300
-Message-ID: <48239d390901282324j203a7111i6993ee223c12e109@mail.gmail.com>
+Received: by 10.150.138.1 with SMTP id l1mr2847521ybd.241.1233217107132; Thu, 
+	29 Jan 2009 00:18:27 -0800 (PST)
+In-Reply-To: <48239d390901282324j203a7111i6993ee223c12e109@mail.gmail.com>
+References: <48239d390901282324j203a7111i6993ee223c12e109@mail.gmail.com>
+Date: Thu, 29 Jan 2009 11:18:27 +0300
+Message-ID: <48239d390901290018k381749e0m12f40375bcf6babb@mail.gmail.com>
 From: Sergey Lapin <slapinid@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Dmitry <dbaryshkov@gmail.com>
-Subject: maintainers for wireshark/tshark, net-snmp, libpcap, tcpdump
+Subject: Re: maintainers for wireshark/tshark, net-snmp, libpcap, tcpdump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,38 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2009 07:32:40 -0000
+X-List-Received-Date: Thu, 29 Jan 2009 08:26:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi, all!
+On Thu, Jan 29, 2009 at 10:24 AM, Sergey Lapin <slapinid@gmail.com> wrote:
+> Hi, all!
+>
+> Is there any maintainers for the following recipes:?
+>
+> o.o.d/packages/wireshark/tshark_0.99.4.bb
+> o.o.d/packages/wireshark/wireshark_0.99.4.bb
+> o.o.s/packages/net-snmp/net-snmp_*.bb
+I have overlooked maintainer of net-snmp in MAINTAINERS and tried
+contacting him.
+other recipts are not listed there.
 
-Is there any maintainers for the following recipes:?
+> o.o.s/packages/libpcap/libpcap_*.bb
+> o.o.d/packages/tcpdump/tcpdump_*.bb
+>
+>
+> None of these patches change normal use of tools, only adds minor functionality.
+>
+> So, if there's no objections I'll push this stuff, and if somebody interested,
+> I'll send patches beforehand.
 
-o.o.d/packages/wireshark/tshark_0.99.4.bb
-o.o.d/packages/wireshark/wireshark_0.99.4.bb
-o.o.s/packages/net-snmp/net-snmp_*.bb
-o.o.s/packages/libpcap/libpcap_*.bb
-o.o.d/packages/tcpdump/tcpdump_*.bb
+I have pushed these changes to separate branch, ieee80215.
+It can be viewed using OE cgit:
+http://cgit.openembedded.net/cgit.cgi?url=openembedded%2Flog&h=ieee80215&=switch
+(patches in question are first four (3 by me and 1 by Dmitry).
 
-I have a set of patches implementing IEEE802.15.4 stuff, so these are
-needed to be upgraded and patched.
-
-wireshark/tshark: buildability
-net-snmp: recipe for svn trunk with fixed release (net-snmp recipe is
-unbuildable currently
-   probably that could be fixed, too. Some libtool issue is there.).
-libpcap: upgrade to latest upstream (1.0.0), minor patching for
-ARPHRD_* stuff, does not change normal use
-tcpdump: upgrade to latest upstream (4.0.0) minor patching to properly
-react on DLT_IEEE802_15_4
-
-None of these patches change normal use of tools, only adds minor functionality.
-
-So, if there's no objections I'll push this stuff, and if somebody interested,
-I'll send patches beforehand.
-
-All the best,
+Thanks a lot,
 S.
 
 
