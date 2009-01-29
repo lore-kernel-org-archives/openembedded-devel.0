@@ -1,33 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [85.33.31.84] (helo=smtpout084B.attiva.biz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LSTh9-0004GY-7r
-	for openembedded-devel@openembedded.org; Thu, 29 Jan 2009 11:00:23 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LSTZj-0000Ey-MP
-	for openembedded-devel@openembedded.org; Thu, 29 Jan 2009 09:52:43 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 29 Jan 2009 09:52:43 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 29 Jan 2009 09:52:43 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <pisa.t@teledata-i.com>) id 1LSUyh-0008AC-OU
+	for openembedded-devel@openembedded.org; Thu, 29 Jan 2009 12:22:35 +0100
+Received: from FBCMFE02B19.fbc.local ([192.168.31.237]) by
+	smtpout084B.attiva.biz with Microsoft SMTPSVC(6.0.3790.1830); 
+	Thu, 29 Jan 2009 12:14:57 +0100
+Received: from [193.100.100.77] ([80.207.73.242]) by FBCMFE02B19.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 29 Jan 2009 12:13:51 +0100
+From: Paolo Cremonese <pisa.t@teledata-i.com>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 29 Jan 2009 10:52:33 +0100
-Message-ID: <glru92$m7k$1@ger.gmane.org>
-References: <49816E98.7080508@gmx.net>
+In-Reply-To: <49802D8A.6020208@gmail.com>
+References: <1233059140.7818.4.camel@ubuntu2> <497F0D92.4040904@gmail.com>
+	<1233136141.7444.3.camel@ubuntu2>  <49802D8A.6020208@gmail.com>
+Date: Thu, 29 Jan 2009 12:14:04 +0100
+Message-Id: <1233227644.6517.5.camel@ubuntu2>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090123 Shredder/3.0b2pre
-In-Reply-To: <49816E98.7080508@gmx.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: building OE for an amd64 machine
+X-Mailer: Evolution 2.22.3.1 
+X-OriginalArrivalTime: 29 Jan 2009 11:13:51.0924 (UTC)
+	FILETIME=[AA863F40:01C98202]
+Subject: Re: Build problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +33,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2009 10:00:23 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Jan 2009 11:22:35 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 29-01-09 09:53, Robert Schuster wrote:
-> Hi,
-> I want to build packages with OE that can run on my AMD64 system. As
-> such I started a machine configuration and a CPU tune file.
->
-> At first everything looks good but when glibc-initial is about to
-> compiled it wants to include some header file from the kernel headers
-> (asm-x64-64/socket.h) and cannot find it.
->
-> The strange thing is that linux-libc-headers is not installed into any
-> of the staging directories.
->
-> Well, it is basically my first shot at a new machine configuration. :)
->
-> I created a user branch for the amd64 support and committed those two
-> patches to it:
->
-> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&h=robertschuster/amd64-target&id=20a70182e0ab8b6fad5381ea797123c6d6478dc4
-> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&h=robertschuster/amd64-target&id=6441c620a7e13d6a6f1be4fe54bf1fb7fc3e6dc5
-> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&h=robertschuster/amd64-target&id=0aeb635f90e332cfb65725147dd1f78a30b9f079
->
-> I am grateful about any help to get this to work.
+OK, I done all but GRUB.
 
-+PACKAGE_EXTRA_ARCH += "amd64"
+My CF is connected through an USB adapter, and is seen as /dev/sdb
 
-That's missing an 'S' at the end
+I can navigate into the filesystem.
 
-+IMAGE_FSTYPES ?= "ext2.gz"
+I try to install GRUB using
 
-That should the '+='
+sudo grub-install /dev/sdb
 
-regards,
+but the answer is
 
-Koen
+/dev/sdb does not have any corresponding BIOS drive.
+
+Do I have necessarly to connect the CF using an IDE port?
+
+Thanks in advance.
+
+Ciao,
+Paolo
+
+
+On mer, 2009-01-28 at 11:03 +0100, Marco Cavallini wrote:
+> Paolo Cremonese ha scritto:
+> > OK, I have built the image wihout errors, thank you.
+> >=20
+> > Now, what I have to do to create a bootable compact flash with the
+> > image?
+> >=20
+> > Thanks in advance,
+> > Paolo
+>=20
+> Paolo,
+> I'm just working on a system like your, but with i486.
+>=20
+> 1. prtition your CF
+> 2. format CF ext3
+> 3. load (untar) yourimage.tar into CF
+> 4. install bootloader (GRUB)[1]
+>=20
+> [1] GRUB build in OE is broken at the moment, I'm patching it ;-)
+>=20
+> Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+> --
+> Marco Cavallini | KOAN sas | Bergamo - Italia
+>  embedded and real-time software engineering
+> Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+>       http://www.KoanSoftware.com
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
