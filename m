@@ -1,42 +1,25 @@
-Received: from [209.85.219.15] (helo=mail-ew0-f15.google.com)
+Received: from [195.238.6.171] (helo=mailrelay005.isp.belgacom.be)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1LSWEa-0006va-Np
+	(envelope-from <jpa@mgb-tech.com>) id 1LSXFr-0005j0-S8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jan 2009 13:43:05 +0100
-Received: by ewy8 with SMTP id 8so2010700ewy.12
+	Thu, 29 Jan 2009 14:48:27 +0100
+X-Belgacom-Dynamic: yes
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AtwEAJA/gUlbsllk/2dsb2JhbACBbso3hA4G
+Received: from 100.89-178-91.adsl-dyn.isp.belgacom.be (HELO
+	hermes.mgb-tech.com) ([91.178.89.100])
+	by relay.skynet.be with ESMTP; 29 Jan 2009 14:40:41 +0100
+Received: from [192.168.1.23] (gandalf.mgb-tech.com [192.168.1.23])
+	by hermes.mgb-tech.com (Postfix) with ESMTP id 6AA43117FE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jan 2009 04:35:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	bh=Ljm/Nbg+41yeYpiqr9moFCKU54O+38PRDb8jgswEh90=;
-	b=extcI/bWu9Q7ZTryRIwmBoB+dVwJhWmptdihSPiV/7KkEnDPHTtCHzYS2fLJEBsHbI
-	NwLiwlprLNqTlEWJ3cdfiG6XiIAJdniy/v70NTmmMoaCvXRayDUWkRnPAk4bMYzXAMYN
-	c0orPLsjnZzuWSKMGn98yofjk/wu4jaA1PARM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:message-id;
-	b=ZDee3YNnEuGVLTDMPL3biFuzfIzRSHjwk6nzOT2ii/8DjjiUVybPZ4LOlWm8+uIWdR
-	bGmdqDJ4Z7EdQdm4XoiwAPG8BmxU6zkiCqR9AVbbJ/ZUPubhXe0RRhLz/12pV8uAQW+T
-	qpJchUkWt4/WifBpgZ8foGhKiU1Ftapb3PjFE=
-Received: by 10.86.76.20 with SMTP id y20mr56438fga.37.1233232521709;
-	Thu, 29 Jan 2009 04:35:21 -0800 (PST)
-Received: from is.home ([93.81.136.171])
-	by mx.google.com with ESMTPS id 4sm1963398fgg.44.2009.01.29.04.35.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 29 Jan 2009 04:35:21 -0800 (PST)
-From: Yuri Bushmelev <jay4mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Jan 2009 15:35:16 +0300
-User-Agent: KMail/1.9.10
-References: <1233059140.7818.4.camel@ubuntu2> <49802D8A.6020208@gmail.com>
-	<1233227644.6517.5.camel@ubuntu2>
-In-Reply-To: <1233227644.6517.5.camel@ubuntu2>
+	Wed, 28 Jan 2009 19:19:30 +0100 (CET)
+Message-ID: <4981B266.6010501@mgb-tech.com>
+Date: Thu, 29 Jan 2009 14:43:02 +0100
+From: Jan Pannecoeck <jpa@mgb-tech.com>
+User-Agent: Thunderbird 2.0.0.19 (Windows/20081209)
 MIME-Version: 1.0
-Message-Id: <200901291535.16495.jay4mail@gmail.com>
-Subject: Re: Build problems
+To: openembedded-devel@lists.openembedded.org
+Subject: GNU Classpath and the XMPP Smack API
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,25 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2009 12:43:05 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 29 Jan 2009 13:48:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello!
+Hi all,
 
-> I try to install GRUB using
->
-> sudo grub-install /dev/sdb
->
-> but the answer is
->
-> /dev/sdb does not have any corresponding BIOS drive.
+No clue where the fire this question, but since I'm using OE with GNU 
+Classpath and JamVM 1.5 I thought I could ask my question here... Since 
+finding a solution for my problem is quite hard. And maybe someone who 
+is reading this mailinglist has had this problem before.
 
-Try with --recheck-devices or something like (look at grub-install --help).
+As the subject is already telling you, I'm stuck trying to get the Smack 
+API working on my embedded device. The Smack library is written to 
+communicate using XMPP. I know already that smack is developed to work 
+under the Java Sun library, and that using GNU Classpath could cause 
+problems. But since they have managed to get it working at Android, with 
+the GNU Classpath, I think that it should be possible to run it also on 
+an OpenEmbedded device.
 
--- 
-Yuri Bushmelev
+I've got the latest version of the smack.jar that was patched for the 
+Android, but that still isn't working. I have had a bunch of different 
+errors like:
+
+- OEFException during the SSLSocket doHandshake method.
+- KeyStoreException: jks during an SALSAuthentication
+
+And now I'm having a "No response from the server" exception during the 
+NonSASLAuthentication.authenticate method.
+
+I know this problem is quite big and my explanation is probably not that 
+great neither, but still I hope that someone has done this before and 
+succeeded in his mission. If someone could send me some more information 
+about this, or a working smack.jar (if possible with source code) that 
+would be great!!
+
+All help is welcome ofcourse!
+
+Thanks in advance,
+Jan Pannecoeck
 
 
