@@ -1,36 +1,25 @@
-Received: from [74.125.44.158] (helo=yx-out-1718.google.com)
+Received: from [195.54.101.73] (helo=proxy3.bredband.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1LSahy-0001BJ-Bf
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1LSh6t-0002g1-JU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jan 2009 18:29:43 +0100
-Received: by yx-out-1718.google.com with SMTP id 4so8631yxp.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jan 2009 09:22:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=1xVOvIvXJHUtVrmInNSVywNX3emHGI2Mz1Kxaps3rmg=;
-	b=l3TJFlqeaecl1/VTheGR5LUm87xGzXnAn8h/ANGN3lceNqFf5G5lu5Sx5uLfCW64qr
-	eQqZW+JxbnQYgIkJpTyI1e9WoIf93Aed8XiyX3DYElwOfgf+7QOBttQepA+YhdZ6+4n1
-	3lRwKcrC8yKaPdUfOJhz0Bj1lyF0Ob3uxvR2o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=puiFjeJk9xlEOJ8+/S7t+XNrf0Mo8F8nmX1bfIhGPqannC1ekHb5DZX0mKpSVkHIj4
-	+oeXyLWI9L8vbE2snez0MzpgrRZvGUNzbjuAMTw9aeXgW7N4uM7Kx0y3vYU8VyHHCyAb
-	ynZZQcYtB4AZNmW5JldSFPQ47ejTiUbUWrBc4=
-MIME-Version: 1.0
-Received: by 10.150.134.21 with SMTP id h21mr303454ybd.89.1233249720260; Thu, 
-	29 Jan 2009 09:22:00 -0800 (PST)
-In-Reply-To: <glsnd7$kfi$1@ger.gmane.org>
-References: <48239d390901282324j203a7111i6993ee223c12e109@mail.gmail.com>
-	<glsnd7$kfi$1@ger.gmane.org>
-Date: Thu, 29 Jan 2009 20:22:00 +0300
-Message-ID: <48239d390901290922p1733d028rfe354ddc602b5dca@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Fri, 30 Jan 2009 01:19:51 +0100
+Received: from ironport2.bredband.com (195.54.101.122) by proxy3.bredband.net
+	(7.3.127)
+	id 492A9CFF017A0CB0 for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Jan 2009 01:12:06 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: An8LABzVgUlT4zhBPGdsb2JhbAAIiRWKbgEBAQE1twSEEAY
+Received: from c-4138e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.221]) ([83.227.56.65])
+	by ironport2.bredband.com with ESMTP; 30 Jan 2009 01:12:06 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: maintainers for wireshark/tshark, net-snmp, libpcap, tcpdump
+Organization: Atmel Nordic AB
+Date: Fri, 30 Jan 2009 01:12:05 +0100
+Message-Id: <1233274325.4147.72.camel@elrond.atmel.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Review of ulf/atmel branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2009 17:29:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 30 Jan 2009 00:19:51 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 29, 2009 at 8:01 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 29-01-09 08:24, Sergey Lapin wrote:
->>
->> Hi, all!
->>
->> Is there any maintainers for the following recipes:?
->>
->> o.o.d/packages/wireshark/tshark_0.99.4.bb
->> o.o.d/packages/wireshark/wireshark_0.99.4.bb
->> o.o.s/packages/net-snmp/net-snmp_*.bb
->> o.o.s/packages/libpcap/libpcap_*.bb
->> o.o.d/packages/tcpdump/tcpdump_*.bb
->>
->> I have a set of patches implementing IEEE802.15.4 stuff, so these are
->> needed to be upgraded and patched.
->
-> In the future please update conf/checksums.ini with the checksums for new
-> packages as well.
-Ok, sorry, will do.
+Myybe someone can look into this.
+
+I have added 
+
+* at91bootstrap-2.10
+* u-boot-2009.01
+* linux-2.6.28.2
+
+focusing on at91sam9263ek
+
+at91bootstrap is my own version of the
+official at91bootstrap-1.11 from Atmel
+A key difference is that at91bootstrap can
+now be configured using Kconfig.
+
+U-Boot has some extra patches, including at91sam9g20
+It also fixed a problem with AVR32.
+Due to a miss, a patch was not pulled from Haavards
+git, so 2009.01 is broken for all AVR32 withotu this patch.
+
+linux-2.6.28.2 has the Atmel 2.6.27 patches
+forward ported to 2.6.28.2.
+
+Stuff builds, but I have only tested
+a few of the multiple combinations
+on real H/W.
+
+Hope to start adding the latest 2.6.27 patchees for AVR32 as well
+but time is short...
+
+BR
+Ulf Samuelsson
+
+
 
 
