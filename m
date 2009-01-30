@@ -1,21 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LStOB-0002XY-HF
-	for openembedded-devel@openembedded.org; Fri, 30 Jan 2009 14:26:31 +0100
-Received: (qmail 30682 invoked by uid 813007); 30 Jan 2009 13:18:45 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 30 Jan 2009 13:18:45 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jan 2009 14:18:28 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
-References: <1233320753.14101.1.camel@EPBYMINW0568>
-In-Reply-To: <1233320753.14101.1.camel@EPBYMINW0568>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LSvPh-00080t-GM
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Jan 2009 16:36:13 +0100
+Received: (qmail invoked by alias); 30 Jan 2009 15:28:25 -0000
+Received: from e178118160.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.118.160]
+	by mail.gmx.net (mp054) with SMTP; 30 Jan 2009 16:28:25 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19soPJtDLxsYMLSB/NT2V14m0fAR6/DO2K8QmVBYI
+	hCozAdK+sVHEek
+Message-ID: <49831D11.6040708@gmx.net>
+Date: Fri, 30 Jan 2009 16:30:25 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-Message-Id: <200901301418.30308.openembedded@haerwu.biz>
-Subject: Re: [PATCH] Reworked stb225 machine configuration file; build uImage for stb225.
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.79
+Subject: OpenEmbedded e.V. is now official
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,25 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2009 13:26:31 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Jan 2009 15:36:13 -0000
+X-Groupsio-MsgNum: 7493
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig89B6B88D9518A2AF20F7B43E"
 
-On Friday 30 of January 2009 14:05:53 Ihar Hrachyshka wrote:
-> Reworked stb225 machine configuration file; build uImage for stb225.
->
-> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+--------------enig89B6B88D9518A2AF20F7B43E
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Pushed
+Hi,
+yesterday the papers from the court arrived and there where no further
+requests to change the statutes or explanations.
 
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+As such we now have an official legal entity for the OpenEmbedded
+project. :)
+
+Regards
+Robert
 
 
+--------------enig89B6B88D9518A2AF20F7B43E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEYEAREIAAYFAkmDHRMACgkQG9cfwmwwEtpXDACdEG3nlNb7wUB8mD5fwJaZukIG
+AS8AoISCYbepCSrWE3WYvEAvGtOU2cY2
+=4A0b
+-----END PGP SIGNATURE-----
+
+--------------enig89B6B88D9518A2AF20F7B43E--
