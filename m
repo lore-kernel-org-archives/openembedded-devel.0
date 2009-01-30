@@ -1,27 +1,36 @@
-Received: from [209.85.219.10] (helo=mail-ew0-f10.google.com)
+Received: from [209.85.132.248] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1LSt3e-0005C0-1O
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LStBn-0005VW-Cb
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jan 2009 14:05:18 +0100
-Received: by ewy3 with SMTP id 3so478891ewy.12
+	Fri, 30 Jan 2009 14:13:43 +0100
+Received: by an-out-0708.google.com with SMTP id d40so216440and.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2009 04:57:30 -0800 (PST)
-Received: by 10.210.34.19 with SMTP id h19mr1301064ebh.199.1233320250365;
-	Fri, 30 Jan 2009 04:57:30 -0800 (PST)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id i7sm2264766nfh.13.2009.01.30.04.57.29
-	(version=SSLv3 cipher=RC4-MD5); Fri, 30 Jan 2009 04:57:29 -0800 (PST)
-Message-ID: <4982F938.3050000@xora.org.uk>
-Date: Fri, 30 Jan 2009 12:57:28 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
+	Fri, 30 Jan 2009 05:05:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:subject:from:to:content-type
+	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
+	bh=RbNd2T/WeIdqkB3x5mwoLRVsURtvRf3XPkVJ4oBYAOQ=;
+	b=dkgJ+zjNVeNKoSeYt5k04xUI9q5OIzUhziuOzhGEPGrJTlqmInkyheRslMPS/ofqLV
+	+qUu1NONc4Zx/PAoZ6rjAnT0lvc1obVZQqlwsyWL+XSD/UZPmpa9RJrGNwUUEpCdQb2m
+	a8T0IXRvXdnyxT2Dezduh8bW8M0qigYotIsB0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding;
+	b=d9h01DeUhVQ5DjNrXFi5ogZSa91midWEi5QqNbgHUqfFpdq4xto6JqOY9/EkwEij2B
+	uDhfuLiQmmRS8r8+FVvwiP03Avo788tkQln0s4En8TOHfkSeecwoqoSahLoXufeuDunr
+	KqtHX5/C53xPgeW0qR7+B59qhaxIN3udTQFJ0=
+Received: by 10.100.168.18 with SMTP id q18mr368705ane.7.1233320757780;
+	Fri, 30 Jan 2009 05:05:57 -0800 (PST)
+Received: from ?10.6.9.10? (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id b7sm892338ana.19.2009.01.30.05.05.55
+	(version=SSLv3 cipher=RC4-MD5); Fri, 30 Jan 2009 05:05:57 -0800 (PST)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1233319034.13141.2.camel@EPBYMINW0568>
-In-Reply-To: <1233319034.13141.2.camel@EPBYMINW0568>
-X-Enigmail-Version: 0.95.0
-Subject: Re: [PATCH] Automate uboot entry/load addresses detection.
+Date: Fri, 30 Jan 2009 15:05:53 +0200
+Message-Id: <1233320753.14101.1.camel@EPBYMINW0568>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: [PATCH] Reworked stb225 machine configuration file; build uImage for stb225.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,18 +44,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2009 13:05:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 30 Jan 2009 13:13:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Ihar Hrachyshka wrote:
-> Automated UBOOT_LOADADDRESS and UBOOT_ENTRYPOINT variables detection (no
-> need to specify them for every machine and/or kernel now).
->
->   
-Looks like a nice patch! I think this should probably go it.
+Reworked stb225 machine configuration file; build uImage for stb225.
 
-Graeme
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ conf/machine/include/tune-mips32.inc            |    1 +
+ conf/machine/stb225.conf                        |   16 +++++++++++-----
+ packages/linux/linux-2.6.28/stb225/uImage.patch |   23 +++++++++++++++++++++++
+ packages/linux/linux_2.6.28.bb                  |    3 ++-
+ 4 files changed, 37 insertions(+), 6 deletions(-)
+ create mode 100644 conf/machine/include/tune-mips32.inc
+ create mode 100644 packages/linux/linux-2.6.28/stb225/uImage.patch
+
+diff --git a/conf/machine/include/tune-mips32.inc b/conf/machine/include/tune-mips32.inc
+new file mode 100644
+index 0000000..93da66b
+--- /dev/null
++++ b/conf/machine/include/tune-mips32.inc
+@@ -0,0 +1 @@
++TARGET_CC_ARCH = "-march=mips32"
+diff --git a/conf/machine/stb225.conf b/conf/machine/stb225.conf
+index 97370e1..c57adb0 100644
+--- a/conf/machine/stb225.conf
++++ b/conf/machine/stb225.conf
+@@ -1,8 +1,14 @@
+ # PNX8335 STB225 board
++
+ TARGET_ARCH = "mipsel"
+-TARGET_CC_ARCH="-march=mips32"
++
+ MACHINE_FEATURES = "kernel26"
+-IMAGE_FSTYPES="tar.gz"
+-PREFERRED_PROVIDER_virtual/kernel="linux"
+-KERNEL_IMAGETYPE="vmlinux"
+-KERNEL_OUTPUT="${KERNEL_IMAGETYPE}"
++
++IMAGE_FSTYPES += "tar.gz"
++
++PREFERRED_PROVIDER_virtual/kernel = "linux"
++KERNEL_IMAGETYPE = "uImage"
++
++SERIAL_CONSOLE ?= "115200 ttySA0"
++
++require conf/machine/include/tune-mips32.inc
+diff --git a/packages/linux/linux-2.6.28/stb225/uImage.patch b/packages/linux/linux-2.6.28/stb225/uImage.patch
+new file mode 100644
+index 0000000..f43a221
+--- /dev/null
++++ b/packages/linux/linux-2.6.28/stb225/uImage.patch
+@@ -0,0 +1,23 @@
++diff -urN linux-2.6.28.orig/arch/mips/Makefile linux-2.6.28/arch/mips/Makefile
++--- linux-2.6.28.orig/arch/mips/Makefile	2009-01-28 16:12:23.000000000 +0200
+++++ linux-2.6.28/arch/mips/Makefile	2009-01-28 16:13:54.000000000 +0200
++@@ -682,6 +682,19 @@
++ 
++ all:	$(all-y)
++ 
+++# Support for U-Boot image creation (from U-Boot README)
+++uImage: vmlinux
+++	$(OBJCOPY) -O binary -R .note -R .comment -S vmlinux vmlinux.bin
+++	rm -f vmlinux.bin.gz
+++	gzip -9 vmlinux.bin
+++	LA=`$(OBJDUMP) -p vmlinux | sed -n 's/LOAD.*vaddr \([^ ]*\).*/\1/p'`; \
+++	EN=`$(OBJDUMP) -f vmlinux | sed -n 's/.*start address \([^ ]*\).*/\1/p'`; \
+++	echo $$LA; \
+++	echo $$EN; \
+++	mkimage -A mips -O linux -T kernel -C gzip \
+++		-a $$LA -e $$EN -n "Linux Kernel Image" \
+++		-d vmlinux.bin.gz uImage
+++
++ vmlinux.bin: $(vmlinux-32)
++ 	+@$(call makeboot,$@)
++ 
+diff --git a/packages/linux/linux_2.6.28.bb b/packages/linux/linux_2.6.28.bb
+index b042a45..ea88f71 100644
+--- a/packages/linux/linux_2.6.28.bb
++++ b/packages/linux/linux_2.6.28.bb
+@@ -16,6 +16,7 @@ SRC_URI_append_at91sam9263ek = " \
+ 	   file://linux-2.6.28-exp.patch.bz2;patch=1 "
+ 
+ SRC_URI_append_stb225 = " \
++           file://uImage.patch;patch=1 \
+            file://ebase-fix.patch;patch=1 \
+            file://enable-uart.patch;patch=1 \
+-	   file://ip3902.patch;patch=1 "
++           file://ip3902.patch;patch=1"
+-- 
+1.5.6.3
+
 
 
 
