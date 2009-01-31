@@ -1,34 +1,41 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [65.254.253.109] (helo=mailout13.yourhostingaccount.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LTAvy-00064j-AY
-	for openembedded-devel@openembedded.org; Sat, 31 Jan 2009 09:10:34 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LTAoQ-0003s1-DW
-	for openembedded-devel@openembedded.org; Sat, 31 Jan 2009 08:02:46 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 31 Jan 2009 08:02:46 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 31 Jan 2009 08:02:46 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 31 Jan 2009 09:02:34 +0100
-Message-ID: <gm10ir$uuj$1@ger.gmane.org>
-References: <cover.1232244759.git.andrea.adami@gmail.com>	<8c1396b3add963b97e1f9f144c1bdd966ebbce02.1232244759.git.andrea.adami@gmail.com>	<4c945c9a1076160cee628241443c8a27d8b5e1ca.1232244759.git.andrea.adami@gmail.com>	<200901310401.11885.jay4mail@gmail.com>
-	<4983B3B4.5070201@xora.org.uk>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090123 Shredder/3.0b2pre
-In-Reply-To: <4983B3B4.5070201@xora.org.uk>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 08/14] zaurus-2.6.inc: switch to kexecboot and deploy kernel in /boot
+	(envelope-from <SRS0=i4+37W=6D=ngndg.com=tim@yourhostingaccount.com>)
+	id 1LTHRU-0000qD-NW for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jan 2009 16:07:32 +0100
+Received: from mailscan15.yourhostingaccount.com ([10.1.15.15]
+	helo=mailscan15.yourhostingaccount.com)
+	by mailout13.yourhostingaccount.com with esmtp (Exim)
+	id 1LTHJu-0000yd-Bc for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jan 2009 09:59:42 -0500
+Received: from impout02.yourhostingaccount.com ([10.1.55.2]
+	helo=impout02.yourhostingaccount.com)
+	by mailscan15.yourhostingaccount.com with esmtp (Exim)
+	id 1LTHJu-0006RT-39 for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jan 2009 09:59:42 -0500
+Received: from authsmtp09.yourhostingaccount.com ([10.1.18.9])
+	by impout02.yourhostingaccount.com with NO UCE
+	id AEzh1b00G0BkWne0000000; Sat, 31 Jan 2009 09:59:41 -0500
+X-EN-OrigOutIP: 10.1.18.9
+X-EN-IMPSID: AEzh1b00G0BkWne0000000
+Received: from 92-237-114-21.cable.ubr03.chms.blueyonder.co.uk
+	([92.237.114.21] helo=[192.168.1.104])
+	by authsmtp09.yourhostingaccount.com with esmtpa (Exim)
+	id 1LTHJt-0000vf-FU for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jan 2009 09:59:41 -0500
+Message-Id: <9342BA46-9CBB-4462-8D0F-C2C7F325DEA5@ngndg.com>
+From: Tim Ellis <tim@ngndg.com>
+To: openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0 (Apple Message framework v930.3)
+Date: Sat, 31 Jan 2009 14:59:39 +0000
+References: <C2AB3E43-BDA7-4353-9496-C57DE480F612@ngndg.com>
+X-Mailer: Apple Mail (2.930.3)
+X-EN-UserInfo: b8ae887d91300d60195f6ea73d56f3bc:43527cee0c82d0ab5dc2dc3726f6afdf
+X-EN-AuthUser: tim@ngndg.com
+Sender: Tim Ellis <tim@ngndg.com>
+X-EN-OrigIP: 92.237.114.21
+X-EN-OrigHost: 92-237-114-21.cable.ubr03.chms.blueyonder.co.uk
+Subject: Re: krb recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +49,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jan 2009 08:10:34 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 31 Jan 2009 15:07:33 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7bit
 
-On 31-01-09 03:13, Graeme Gregory wrote:
-> Yuri Bushmelev wrote:
->> Hello!
->>
->>> ---
->>>   conf/machine/include/zaurus-2.6.inc |    4 ++++
->>>   1 files changed, 4 insertions(+), 0 deletions(-)
->>>
->>> diff --git a/conf/machine/include/zaurus-2.6.inc
->>> b/conf/machine/include/zaurus-2.6.inc index eee7631..8adb3d5 100644
->>> --- a/conf/machine/include/zaurus-2.6.inc
->>> +++ b/conf/machine/include/zaurus-2.6.inc
->>> @@ -83,3 +83,7 @@ zaurus_make_installkit () {
->>>   RDEPENDS_kernel-base = ""
->>>
->>>   KERNEL_IMAGETYPE ?= "zImage"
->>> +
->>> +# uncomment this if you want to override the legacy layout
->>> +# and deploy kernel in /boot
->>> +require conf/machine/include/kexecboot.inc
->>>
->> IMHO, we are ready now to switch on kexecboot by default for all supported
->> zauruses (at least) in .dev branch.
->>
-> I think we are now as well, kexecboot makes zaurus booting a dream
-> compared to what it used to be. Haven't had any problems at all on the tosa.
-
-This all has been RFC'ed to death and noone objected against the idea, 
-so let's make kexecboot the default for the zaurus family. If time 
-permits I'll do the same for ipaqs.
-
-regards,
-
-Koen
+>
+> - This doesn't work.  First, I don't think the unpack belongs in  
+> do_configure, but be that as it may.  The big
+> issue is that the patch creates a source file, which causes patching  
+> to fail because the source file
+> already exists for any subsequent attempt to run do_configure.
+>
+> do_configure() {
+>       tar xzf ${WORKDIR}/krb5-1.6.3.tar.gz -C ${WORKDIR}/
+>       patch -p1 < ${WORKDIR}/fix-uclibc-ruserpass-collision.patch
+>       oe_runconf
+> }
+>
+> foonas email is a bit broken so using this one atm. I am unable to  
+> recreate a failure here - I am unsure also why it would fail for you  
+> or need a subsequent do_configure, do you have more information? I  
+> can put this in a do_unpack - since this ships as a signed tar.gz in  
+> a tar archive this looked like the least messy way to do it.
+>
+> - do_configure failes if TARGET_LINK_HASH_STYLE is not set.  Right  
+> now it's only set for Angstrom distros,
+> so this recipe only builds for Angstrom.  Note the extra space  
+> between "-O1" and "-lpthread" in the first
+> line; something stripped extra white space as it was passed through  
+> somewhere.
+>
+> configure: error: `LDFLAGS' has changed since the previous run:
+> configure:   former value:  -L/u/slug/slugos/tmp/staging/armv5teb- 
+> linux-gnueabi/usr/lib -Wl,-rpath-link,/u/slug/slugos/\
+> tmp/staging/armv5teb-linux-gnueabi/usr/lib -Wl,-O1  -lpthread
+> configure:   current value: -L/u/slug/slugos/tmp/staging/armv5teb- 
+> linux-gnueabi/usr/lib -Wl,-rpath-link,/u/slug/slugos/\
+> tmp/staging/armv5teb-linux-gnueabi/usr/lib -Wl,-O1 -lpthread
+> configure: error: changes in the environment can compromise the build
+>
+> Since I am working with angstrom I am unable to recreate this  
+> unfortunately. It would be great if we can track down what exactly  
+> is doing this though to make it fail for your distribution. I will  
+> take a look.
+>
+> Tim
 
 
 
