@@ -1,21 +1,34 @@
-Received: from [216.145.245.200] (helo=mx04.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LTAIo-0001da-S8
-	for openembedded-devel@openembedded.org; Sat, 31 Jan 2009 08:30:08 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx04.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LTABF-00026B-O4
-	for openembedded-devel@openembedded.org; Sat, 31 Jan 2009 01:22:17 -0600
-Message-ID: <4983FC27.8040102@dls.net>
-Date: Sat, 31 Jan 2009 01:22:15 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LTAvy-00064j-AY
+	for openembedded-devel@openembedded.org; Sat, 31 Jan 2009 09:10:34 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LTAoQ-0003s1-DW
+	for openembedded-devel@openembedded.org; Sat, 31 Jan 2009 08:02:46 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 31 Jan 2009 08:02:46 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 31 Jan 2009 08:02:46 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <4983FAF8.2010503@dls.net>
-In-Reply-To: <4983FAF8.2010503@dls.net>
-Subject: Re: samba-3.2.5 missing
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 31 Jan 2009 09:02:34 +0100
+Message-ID: <gm10ir$uuj$1@ger.gmane.org>
+References: <cover.1232244759.git.andrea.adami@gmail.com>	<8c1396b3add963b97e1f9f144c1bdd966ebbce02.1232244759.git.andrea.adami@gmail.com>	<4c945c9a1076160cee628241443c8a27d8b5e1ca.1232244759.git.andrea.adami@gmail.com>	<200901310401.11885.jay4mail@gmail.com>
+	<4983B3B4.5070201@xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090123 Shredder/3.0b2pre
+In-Reply-To: <4983B3B4.5070201@xora.org.uk>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 08/14] zaurus-2.6.inc: switch to kexecboot and deploy kernel in /boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,19 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jan 2009 07:30:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 31 Jan 2009 08:10:34 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Mike (mwester) wrote:
+On 31-01-09 03:13, Graeme Gregory wrote:
+> Yuri Bushmelev wrote:
+>> Hello!
+>>
+>>> ---
+>>>   conf/machine/include/zaurus-2.6.inc |    4 ++++
+>>>   1 files changed, 4 insertions(+), 0 deletions(-)
+>>>
+>>> diff --git a/conf/machine/include/zaurus-2.6.inc
+>>> b/conf/machine/include/zaurus-2.6.inc index eee7631..8adb3d5 100644
+>>> --- a/conf/machine/include/zaurus-2.6.inc
+>>> +++ b/conf/machine/include/zaurus-2.6.inc
+>>> @@ -83,3 +83,7 @@ zaurus_make_installkit () {
+>>>   RDEPENDS_kernel-base = ""
+>>>
+>>>   KERNEL_IMAGETYPE ?= "zImage"
+>>> +
+>>> +# uncomment this if you want to override the legacy layout
+>>> +# and deploy kernel in /boot
+>>> +require conf/machine/include/kexecboot.inc
+>>>
+>> IMHO, we are ready now to switch on kexecboot by default for all supported
+>> zauruses (at least) in .dev branch.
+>>
+> I think we are now as well, kexecboot makes zaurus booting a dream
+> compared to what it used to be. Haven't had any problems at all on the tosa.
 
-> I'm going to re-create samba-3.2.5 as best as I can (it's way late,
-> maybe I'll screw it up and nobody's builds will work, who knows?),
+This all has been RFC'ed to death and noone objected against the idea, 
+so let's make kexecboot the default for the zaurus family. If time 
+permits I'll do the same for ipaqs.
 
-Screw it.  The changes are ******HUGE*****.   Can whoever removed the
-working 3.2.5 please put it back?  Thank you.
+regards,
 
-Regards,
-Mike (mwester)
+Koen
+
 
 
