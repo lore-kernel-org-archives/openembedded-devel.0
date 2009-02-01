@@ -1,24 +1,35 @@
-Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
+Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1LTLoI-00008s-9w
+	(envelope-from <norguhtar@gmail.com>) id 1LTcG6-00067G-SI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jan 2009 20:47:22 +0100
-Received: from [92.116.132.184] (helo=tamarin.localnet)
-	by coruscant.onosendai.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1LTLge-0004SF-UQ
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jan 2009 20:39:30 +0100
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 31 Jan 2009 20:36:59 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.27-9-generic; KDE/4.2.0; i686; ; )
-References: <c384c5ea0812030846n604eccf0pe47d15f7122f0435@mail.gmail.com>
-In-Reply-To: <c384c5ea0812030846n604eccf0pe47d15f7122f0435@mail.gmail.com>
+	Sun, 01 Feb 2009 14:21:13 +0100
+Received: by fg-out-1718.google.com with SMTP id 13so355063fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 01 Feb 2009 05:13:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=iMPSaZOimsFthhz9v/4wTXzQ3vafLA7PjQycJsH78KE=;
+	b=W9InK+RSHctG1+cCRT8TGz89VsbPxlR1VWeW6mTCXAk4aNBpCvfXze8dBbMXDNppRj
+	bbI7m51tw+YpktBDlns4QDebu7xkMah6OIiaa/sXxKaNns47t6T2JVudol97OMA6e2Vk
+	jH9uqOFeBMLFwlCQsl/Txw6q3BTe97dUlrMEA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LdVd0IlOXGB93+S4Q790lGjFghkwBujcbdINAA33VaWAKWp45U6N4RlP+w/3pEVXXf
+	XRAdI0OFfabMZOdLGOwVK5x9Cocczep/161kaFUCGYKpYs8/I118JctsLXMkqAY8yb6G
+	AqWvBIfJmOCPDedRzpiiqyNLjhTRNCX8p806s=
 MIME-Version: 1.0
-Message-Id: <200901312037.00579.zecke@selfish.org>
-X-Broken-Reverse-DNS: no host name found for IP address 92.116.132.184
-Subject: Re: [RFC Wild Ideas Department] create soft-links from <pkg>/<src>/patches/some_local.patch to <oe.git>/packages/<pkg>/files/some_local.patch
+Received: by 10.103.220.18 with SMTP id x18mr1417982muq.38.1233493996392; Sun, 
+	01 Feb 2009 05:13:16 -0800 (PST)
+In-Reply-To: <4983F48F.20208@dls.net>
+References: <4983F48F.20208@dls.net>
+Date: Sun, 1 Feb 2009 18:13:16 +0500
+Message-ID: <1fea892d0902010513l44053e9atde45d4f2024c77a1@mail.gmail.com>
+From: Anatoly Shipitsin <norguhtar@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: krb recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +43,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jan 2009 19:47:22 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sun, 01 Feb 2009 13:21:14 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 03 December 2008 17:46:04 Leon Woestenberg wrote:
-> Hello,
->
-> during maintenance of our local set of OE patches, it would be handy
-> not having to copy patches back into the repository.
->
-> i.e. the patch fetcher could instead of copy the patch to the work
-> directory, soft-link from the repo.
->
-> Does this make sense?
+On Sat, Jan 31, 2009 at 11:49, Mike (mwester) <mwester@dls.net> wrote:
 
-Yes it does, but I'm also toying with the idea of turning everything into a 
-git checkout (using git am for the patches...)...
+> configure: error: changes in the environment can compromise the build
+>  <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
 
-z.
 
+mit-kerberos configure not support crocc-compile enveroment.
 
