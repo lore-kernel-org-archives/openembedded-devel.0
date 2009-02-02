@@ -1,28 +1,34 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LU0xu-0006fi-PY
+	(envelope-from <koansoftware@gmail.com>) id 1LU1Y0-0001Iq-Qm
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Feb 2009 16:44:02 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 1567016DEFE
+	Mon, 02 Feb 2009 17:21:21 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 0CF282C8A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 16:48:19 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 12D162A4203
+	Mon,  2 Feb 2009 16:12:47 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id U-QJrdy2NxWz
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 16:36:04 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Mon,  2 Feb 2009 16:12:45 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 214DD2C799
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Feb 2009 16:12:44 +0000 (UTC)
+Message-ID: <49871B9D.3040202@gmail.com>
+Date: Mon, 02 Feb 2009 17:13:17 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-Date: Mon, 2 Feb 2009 16:35:42 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF61D@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: config/compile problem with apr-1.2.12
-Thread-Index: AcmFS/UvDS8k7+GTSNqQljH5HhSAag==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: config/compile problem with apr-1.2.12
+To: openembedded-devel@lists.openembedded.org
+References: <1233059140.7818.4.camel@ubuntu2>
+	<497F0D92.4040904@gmail.com>	<1233136141.7444.3.camel@ubuntu2>
+	<49802D8A.6020208@gmail.com>	<1233227644.6517.5.camel@ubuntu2>
+	<49832BE7.6090801@gmail.com> <1233586679.6429.5.camel@ubuntu2>
+In-Reply-To: <1233586679.6429.5.camel@ubuntu2>
+Subject: Re: Build problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,43 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2009 15:44:02 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 02 Feb 2009 16:21:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-SSdtIG5vdCByZWFsbHkgc3VyZSB3aGF0J3MgdGhlIHByb2JsZW0gaGVyZSwgbWF5YmUgaXQgaGFz
-IHRoZSBzYW1lIGJhY2tncm91bmQgbGlrZSA8aHR0cDovL2J1Z3MuZ2VudG9vLm9yZy9zaG93X2J1
-Zy5jZ2k/aWQ9MjI2NTc3Pi4gQ2FuIHNvbWVvbmUgaGVscD8NCg0KRVJST1I6IGxvZyBkYXRhIGZv
-bGxvd3MgKC9ob21lL3NsZWR6L29lL3RtcC4xL3dvcmsvaTQ4Ni1hbmdzdHJvbS1saW51eC9hcHIt
-MS4yLjEyLXIwL3RlbXAvbG9nLmRvX2NvbXBpbGUuMzA0NTQpDQp8IE5PVEU6IG1ha2UNCnwgbWFr
-ZVsxXTogRW50ZXJpbmcgZGlyZWN0b3J5IGAvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2k0ODYt
-YW5nc3Ryb20tbGludXgvYXByLTEuMi4xMi1yMC9hcHItMS4yLjEyJw0KfCAvYmluL2Jhc2ggL2hv
-bWUvc2xlZHovb2UvdG1wLjEvd29yay9pNDg2LWFuZ3N0cm9tLWxpbnV4L2Fwci0xLjIuMTItcjAv
-YXByLTEuMi4xMi9saWJ0b29sIC0tc2lsZW50IC0tbW9kZT1jb21waWxlIGk0ODYtYW5nc3Ryb20t
-bGludXgtZ2NjIC1tYXJjaD1pNDg2ICAgLWlzeXN0ZW0vaG9tZS9zbGVkei9vZS90bXAuMS9zdGFn
-aW5nL2k0ODYtYW5nc3Ryb20tbGludXgvdXNyL2luY2x1ZGUgLWZleHBlbnNpdmUtb3B0aW1pemF0
-aW9ucyAtZnJlbmFtZS1yZWdpc3RlcnMgLWZvbWl0LWZyYW1lLXBvaW50ZXIgLU8yIC1ESEFWRV9D
-T05GSUdfSCAtRExJTlVYPTIgLURfUkVFTlRSQU5UIC1EX0dOVV9TT1VSQ0UgIC1pc3lzdGVtL2hv
-bWUvc2xlZHovb2UvdG1wLjEvc3RhZ2luZy9pNDg2LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRl
-IC1JLi9pbmNsdWRlIC1JL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9pNDg2LWFuZ3N0cm9tLWxp
-bnV4L2Fwci0xLjIuMTItcjAvYXByLTEuMi4xMi9pbmNsdWRlL2FyY2gvdW5peCAtSS4vaW5jbHVk
-ZS9hcmNoL3VuaXggLUkvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2k0ODYtYW5nc3Ryb20tbGlu
-dXgvYXByLTEuMi4xMi1yMC9hcHItMS4yLjEyL2luY2x1ZGUgIC1vIHBhc3N3ZC9hcHJfZ2V0cGFz
-cy5sbyAtYyBwYXNzd2QvYXByX2dldHBhc3MuYyAmJiB0b3VjaCBwYXNzd2QvYXByX2dldHBhc3Mu
-bG8NCnwgL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9pNDg2LWFuZ3N0cm9tLWxpbnV4L2Fwci0x
-LjIuMTItcjAvYXByLTEuMi4xMi9saWJ0b29sOiBsaW5lIDQ2MDogQ0RQQVRIOiBjb21tYW5kIG5v
-dCBmb3VuZA0KfCAvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2k0ODYtYW5nc3Ryb20tbGludXgv
-YXByLTEuMi4xMi1yMC9hcHItMS4yLjEyL2xpYnRvb2w6IGxpbmUgMTEzODogZnVuY19vcHRfc3Bs
-aXQ6IGNvbW1hbmQgbm90IGZvdW5kDQp8IGxpYnRvb2w6IFZlcnNpb24gbWlzbWF0Y2ggZXJyb3Iu
-ICBUaGlzIGlzIGxpYnRvb2wgMi4yLjQsIGJ1dCB0aGUNCnwgbGlidG9vbDogZGVmaW5pdGlvbiBv
-ZiB0aGlzIExUX0lOSVQgY29tZXMgZnJvbSBhbiBvbGRlciByZWxlYXNlLg0KfCBsaWJ0b29sOiBZ
-b3Ugc2hvdWxkIHJlY3JlYXRlIGFjbG9jYWwubTQgd2l0aCBtYWNyb3MgZnJvbSBsaWJ0b29sIDIu
-Mi40DQp8IGxpYnRvb2w6IGFuZCBydW4gYXV0b2NvbmYgYWdhaW4uDQp8IG1ha2VbMV06ICoqKiBb
-cGFzc3dkL2Fwcl9nZXRwYXNzLmxvXSBFcnJvciA2Mw0KfCBtYWtlWzFdOiBMZWF2aW5nIGRpcmVj
-dG9yeSBgL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9pNDg2LWFuZ3N0cm9tLWxpbnV4L2Fwci0x
-LjIuMTItcjAvYXByLTEuMi4xMicNCnwgbWFrZTogKioqIFthbGwtcmVjdXJzaXZlXSBFcnJvciAx
-DQp8IEZBVEFMOiBvZV9ydW5tYWtlIGZhaWxlZA0K
+Paolo Cremonese ha scritto:
+> Fine, waiting for GRUB patch. (what is "hrw" ?)
+>=20
+> My target has not hard disk, only CF.
+> To run the image, do I need a RAMFS ?
+> And in this case, I have to add it to the GRUB "menu.lst" ?
+
+Paolo,
+hrw is Marcin Juszkiewicz, an OE developer and mantainer.
+GRUB patch was pushed this morning and is ready for use into git mainstre=
+am.
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
 
