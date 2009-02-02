@@ -1,31 +1,30 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LU2aU-0002tP-J0
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Feb 2009 18:28:09 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1LU3BW-0003bs-Tk
+	for openembedded-devel@openembedded.org; Mon, 02 Feb 2009 19:06:24 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 9D8552C8A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 17:19:23 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mOXxWFUz2CPN
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 17:19:19 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id E0BDD2C799
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 17:19:18 +0000 (UTC)
-Message-ID: <49872B38.10209@gmail.com>
-Date: Mon, 02 Feb 2009 18:19:52 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49871D38.10906@gmail.com> <gm77ei$g7v$1@ger.gmane.org>
-In-Reply-To: <gm77ei$g7v$1@ger.gmane.org>
-Subject: Re: OpenEmbedded toolchain census
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n12Hw9Rs031808
+	for <openembedded-devel@openembedded.org>; Mon, 2 Feb 2009 17:58:09 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 31341-10 for <openembedded-devel@openembedded.org>;
+	Mon,  2 Feb 2009 17:58:05 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n12Hw3Wl031802
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Mon, 2 Feb 2009 17:58:04 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF61D@hiob.intern.dresearch.de>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF61D@hiob.intern.dresearch.de>
+Date: Mon, 02 Feb 2009 17:59:47 +0000
+Message-Id: <1233597587.5363.76.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: config/compile problem with apr-1.2.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,46 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2009 17:28:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 02 Feb 2009 18:06:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Koen,
-thank you for answering.
+On Mon, 2009-02-02 at 16:35 +0100, Sledz, Steffen wrote:
+> I'm not really sure what's the problem here, maybe it has the same background like <http://bugs.gentoo.org/show_bug.cgi?id=226577>. Can someone help?
+> 
+> ERROR: log data follows (/home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/temp/log.do_compile.30454)
+> | NOTE: make
+> | make[1]: Entering directory `/home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/apr-1.2.12'
+> | /bin/bash /home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/apr-1.2.12/libtool --silent --mode=compile i486-angstrom-linux-gcc -march=i486   -isystem/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE  -isystem/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/include -I./include -I/home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/apr-1.2.12/include/arch/unix -I./include/arch/unix -I/home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/apr-1.2.12/include  -o passwd/apr_getpass.lo -c passwd/apr_getpass.c && touch passwd/apr_getpass.lo
+> | /home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/apr-1.2.12/libtool: line 460: CDPATH: command not found
+> | /home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/apr-1.2.12/libtool: line 1138: func_opt_split: command not found
+> | libtool: Version mismatch error.  This is libtool 2.2.4, but the
+> | libtool: definition of this LT_INIT comes from an older release.
+> | libtool: You should recreate aclocal.m4 with macros from libtool 2.2.4
+> | libtool: and run autoconf again.
+> | make[1]: *** [passwd/apr_getpass.lo] Error 63
+> | make[1]: Leaving directory `/home/sledz/oe/tmp.1/work/i486-angstrom-linux/apr-1.2.12-r0/apr-1.2.12'
+> | make: *** [all-recursive] Error 1
+> | FATAL: oe_runmake failed
 
-> Let's answer a few questions first:
->=20
-> * What do you mean with "toolchains"?
+I'd try the recipes in Poky for apr and apr-utils as they have fixes for
+a load of issues like this...
 
-With the term 'toolchain' I simply mean a GNU/toolchain
-(http://en.wikipedia.org/wiki/GNU_toolchain)
+Cheers,
 
-> * What do you want to do with the resulting information?
+Richard
 
-Because I can get a arm-oabi toolchain doing
-
- MACHINE=3Dcollie bitbake meta-toolchain
-
-I wonder if OE could be used for generic toolchain generation as many
-other tools do.
-
-> Angstrom will generate working toolchains for nearly every machine in
-> OE, so you don't need to know about toolchains. More to the point, if
-> you need to ask about them, you shouldn't be touching them :)
-
-The purpose of this reseach is to understand and document how and how
-many toolchain can be managed with OE. Results could be posted into wiki
-if this effort will be appreciated.
-The purpose of such toolchain could be, for example, to build any source
-code or package outside OE environment.
-
-If you have futher questions please ask :-)
-
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
 
 
