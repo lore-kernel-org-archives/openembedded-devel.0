@@ -1,35 +1,37 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [65.182.109.77] (helo=mta8.brinkster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1LTcG6-00067G-SI
+	(envelope-from <John.Willis@Distant-earth.com>) id 1LTxIG-0000B5-Am
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Feb 2009 14:21:13 +0100
-Received: by fg-out-1718.google.com with SMTP id 13so355063fge.20
+	Mon, 02 Feb 2009 12:48:48 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta8.brinkster.com (Postfix) with ESMTP id 6B7E671559A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Feb 2009 05:13:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=iMPSaZOimsFthhz9v/4wTXzQ3vafLA7PjQycJsH78KE=;
-	b=W9InK+RSHctG1+cCRT8TGz89VsbPxlR1VWeW6mTCXAk4aNBpCvfXze8dBbMXDNppRj
-	bbI7m51tw+YpktBDlns4QDebu7xkMah6OIiaa/sXxKaNns47t6T2JVudol97OMA6e2Vk
-	jH9uqOFeBMLFwlCQsl/Txw6q3BTe97dUlrMEA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=LdVd0IlOXGB93+S4Q790lGjFghkwBujcbdINAA33VaWAKWp45U6N4RlP+w/3pEVXXf
-	XRAdI0OFfabMZOdLGOwVK5x9Cocczep/161kaFUCGYKpYs8/I118JctsLXMkqAY8yb6G
-	AqWvBIfJmOCPDedRzpiiqyNLjhTRNCX8p806s=
-MIME-Version: 1.0
-Received: by 10.103.220.18 with SMTP id x18mr1417982muq.38.1233493996392; Sun, 
-	01 Feb 2009 05:13:16 -0800 (PST)
-In-Reply-To: <4983F48F.20208@dls.net>
-References: <4983F48F.20208@dls.net>
-Date: Sun, 1 Feb 2009 18:13:16 +0500
-Message-ID: <1fea892d0902010513l44053e9atde45d4f2024c77a1@mail.gmail.com>
-From: Anatoly Shipitsin <norguhtar@gmail.com>
+	Mon,  2 Feb 2009 06:40:45 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+X-Spam-Flag: NO
+X-Spam-Score: 0.167
+X-Spam-Level: 
+X-Spam-Status: No, score=0.167 tagged_above=-10 required=5 tests=[AWL=-0.331, 
+	BAYES_00=-2.599, HELO_LH_LD=1.215, RCVD_IN_PBL=0.905,
+	RCVD_IN_SORBS_DUL=0.877, RDNS_DYNAMIC=0.1]
+Received: from mta8.brinkster.com ([127.0.0.1])
+	by localhost (mta8.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kZUyAr9FuHKp
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Feb 2009 06:40:45 -0500 (EST)
+Received: from localhost.localdomain
+	(82-46-19-72.cable.ubr02.bath.blueyonder.co.uk [82.46.19.72])
+	by mta8.brinkster.com (Postfix) with ESMTP id 670F0715692
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Feb 2009 06:40:44 -0500 (EST)
+From: David-John Willis <John.Willis@Distant-earth.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: krb recipe
+Date: Mon,  2 Feb 2009 11:40:47 +0000
+Message-Id: <1233574850-4230-1-git-send-email-John.Willis@Distant-earth.com>
+X-Mailer: git-send-email 1.5.4.3
+In-Reply-To: <>
+References: <>
+Subject: Small set of patches to add a few default configuration files for the OMAP3-Pandora machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,15 +45,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Feb 2009 13:21:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-On Sat, Jan 31, 2009 at 11:49, Mike (mwester) <mwester@dls.net> wrote:
-
-> configure: error: changes in the environment can compromise the build
->  <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
+X-List-Received-Date: Mon, 02 Feb 2009 11:48:49 -0000
 
 
-mit-kerberos configure not support crocc-compile enveroment.
+These patches add support for a default touchscreen calibration (pointercal), fb.modes and an xorg.conf for the OMAP3-Pandora system. I am still beating git send-email into submission so if I have got this email wrong I apologise in advance ;-).
+
+Regards,
+
+John Willis
+
+
 
