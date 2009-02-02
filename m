@@ -1,29 +1,33 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LU1ec-0004PP-40
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Feb 2009 17:28:10 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 596E82C8A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 16:19:36 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6-lOC1c8oWEa
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 16:19:34 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 7CFAC2C799
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2009 16:19:33 +0000 (UTC)
-Message-ID: <49871D38.10906@gmail.com>
-Date: Mon, 02 Feb 2009 17:20:08 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: OpenEmbedded toolchain census
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LU1uc-0004w0-R2
+	for openembedded-devel@openembedded.org; Mon, 02 Feb 2009 17:44:42 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LU1mu-0005iU-2v
+	for openembedded-devel@openembedded.org; Mon, 02 Feb 2009 16:36:44 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 02 Feb 2009 16:36:44 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 02 Feb 2009 16:36:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 02 Feb 2009 17:36:33 +0100
+Message-ID: <gm77ei$g7v$1@ger.gmane.org>
+References: <49871D38.10906@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090123 Shredder/3.0b2pre
+In-Reply-To: <49871D38.10906@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: OpenEmbedded toolchain census
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,31 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2009 16:28:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 02 Feb 2009 16:44:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi all,
-I'd like to take a census of OE toolchains available for different
-architectures.
-Does anybody want to contribute telling me which machine and which
-toolchain is using?
+On 02-02-09 17:20, Marco Cavallini wrote:
+> Hi all,
+> I'd like to take a census of OE toolchains available for different
+> architectures.
+> Does anybody want to contribute telling me which machine and which
+> toolchain is using?
+>
+> I started with the following:
+>   MACHINE=collie arm-oabi
+>   MACHINE=at91sam9263dk arm-gnueabi
+>
+> and if there are toolchains for DaVinci, MIPS, PowerPC, and so on.
+> BTW I wonder what is created for
+>   MACHINE=generic-i586
+>
+> Any hint will be appreciated :-)
 
-I started with the following:
- MACHINE=3Dcollie arm-oabi
- MACHINE=3Dat91sam9263dk arm-gnueabi
+Let's answer a few questions first:
 
-and if there are toolchains for DaVinci, MIPS, PowerPC, and so on.
-BTW I wonder what is created for
- MACHINE=3Dgeneric-i586
+* What do you mean with "toolchains"?
+* What do you want to do with the resulting information?
 
-Any hint will be appreciated :-)
+Angstrom will generate working toolchains for nearly every machine in 
+OE, so you don't need to know about toolchains. More to the point, if 
+you need to ask about them, you shouldn't be touching them :)
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+regards,
+
+Koen
+
 
 
