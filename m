@@ -1,28 +1,22 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LUkME-0004Y3-6f
-	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 17:12:10 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090204161155.RDMX2342.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 4 Feb 2009 11:11:55 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id BsBu1b00L1E665w03sBuAh; Wed, 04 Feb 2009 11:11:54 -0500
-X-Authority-Analysis: v=1.0 c=1 a=M9z8WcchHLQA:10 a=v_fsgkS4Ov0A:10
-	a=J92DXz6IE2kMf7DF88EA:9 a=F2orCJ3rzSVJoUWJbpuHldqQJt0A:4
-	a=_dII2WmA2dcA:10 a=MSl-tDqOz04A:10 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 4 Feb 2009 09:11:54 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090204161154.GJ3856@smtp.west.cox.net>
-References: <1233740408.5817.8.camel@EPBYMINW0568>
+	(envelope-from <openembedded@haerwu.biz>) id 1LUlqI-0001T6-AK
+	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 18:47:18 +0100
+Received: (qmail 19088 invoked by uid 813007); 4 Feb 2009 17:47:09 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 4 Feb 2009 17:47:09 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 4 Feb 2009 18:47:04 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
+References: <1233059140.7818.4.camel@ubuntu2> <gmbu7j$f7s$1@ger.gmane.org>
+	<1233762533.6176.9.camel@ubuntu2>
+In-Reply-To: <1233762533.6176.9.camel@ubuntu2>
 MIME-Version: 1.0
-In-Reply-To: <1233740408.5817.8.camel@EPBYMINW0568>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] Update directfb-examples package to 1.2.0
+Message-Id: <200902041847.07209.openembedded@haerwu.biz>
+Subject: Re: Build problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,19 +30,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2009 16:12:10 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 04 Feb 2009 17:47:18 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Feb 04, 2009 at 11:40:08AM +0200, Ihar Hrachyshka wrote:
+On Wednesday 04 of February 2009 16:48:53 Paolo Cremonese wrote:
+> OK, changed DASH to BASH.
+> Compiled libtool-cross OK.
+>
+> compiling gtk+ (bitbake gtk+), fails.
 
-> Update directfb-examples package (current one is not buildable).
-> 
-> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+"bitbake -crebuild gtk+" is needed because gtk+ configure was done with 
+dash.
 
-Commiting / pushing now, thanks!
-
+Regards, 
 -- 
-Tom Rini
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
