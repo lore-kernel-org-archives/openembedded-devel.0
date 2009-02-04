@@ -1,36 +1,37 @@
-Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LUeF1-00058y-5P
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Feb 2009 10:40:40 +0100
-Received: by yw-out-1718.google.com with SMTP id 5so936577ywr.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Feb 2009 01:40:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:to:content-type
-	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
-	bh=lT6XAWPfnmA6+hMDijHJG+tHaFU1jQbZQE5h+qdTJ1s=;
-	b=PiPOCjRvDXpHq9B4c3yTAUW2Ybo9ZYrUUNFuPtdZaY6c8Z/ApUyp0uOBvzB/rJbYb2
-	fFfIABGv/quBHnvgpTtWH/d8b5MC9/RsIk4Cd1BvAlEl55CiWO3khSy1vUetLHjLzhxa
-	xE0dPDaNZBZW5wSwjPp+Yd11Z1K2KZOcTXukU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer
-	:content-transfer-encoding;
-	b=oXdL8bGKrgEf+DtQ/AISCABS2KoyypSCJkhJuREkwVZSgFlSw9uub5+uv4ZI2NMnOl
-	EKRSVn7CPIr1LQ0ss4hi446DoipNmavTJRnJBU9POHjykO6DfiGfdaHEXRJKgrnnuYqn
-	FZegHEwDKXZD6OGmd/BoebReO4EOQHgLMTWsg=
-Received: by 10.100.143.17 with SMTP id q17mr4528464and.29.1233740413212;
-	Wed, 04 Feb 2009 01:40:13 -0800 (PST)
-Received: from ?10.6.9.10? (cpmsq.epam.com [217.21.56.2])
-	by mx.google.com with ESMTPS id b14sm8543652ana.36.2009.02.04.01.40.10
-	(version=SSLv3 cipher=RC4-MD5); Wed, 04 Feb 2009 01:40:12 -0800 (PST)
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 04 Feb 2009 11:40:08 +0200
-Message-Id: <1233740408.5817.8.camel@EPBYMINW0568>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LUfxK-0001Bs-Hr
+	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 12:30:10 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LUfxE-0005tD-WA
+	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 11:30:05 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 04 Feb 2009 11:30:04 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 04 Feb 2009 11:30:04 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 04 Feb 2009 12:29:55 +0100
+Message-ID: <gmbu7j$f7s$1@ger.gmane.org>
+References: <1233059140.7818.4.camel@ubuntu2>
+	<497F0D92.4040904@gmail.com>	<1233136141.7444.3.camel@ubuntu2>
+	<49802D8A.6020208@gmail.com>	<1233227644.6517.5.camel@ubuntu2>
+	<49832BE7.6090801@gmail.com>	<1233586679.6429.5.camel@ubuntu2>
+	<49871B9D.3040202@gmail.com> <1233739630.6176.4.camel@ubuntu2>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: [PATCH] Update directfb-examples package to 1.2.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090123 Shredder/3.0b2pre
+In-Reply-To: <1233739630.6176.4.camel@ubuntu2>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Build problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,59 +45,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2009 09:44:21 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Feb 2009 11:30:10 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Update directfb-examples package (current one is not buildable).
+On 04-02-09 10:27, Paolo Cremonese wrote:
+> Sorry, don't know...
+>
+> Now the image works !
+>
+> Then I try to build a gpe-image, but i get an error at the last step.
 
-Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
----
- conf/checksums.ini                           |    4 ++++
- packages/directfb/directfb-examples_1.2.0.bb |   17 +++++++++++++++++
- 2 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 packages/directfb/directfb-examples_1.2.0.bb
+Don't use dash as /bin/sh, use bash and rebuild libtool-cross and gtk+
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 8b414ff..72963fa 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -194,6 +194,10 @@ sha256=f83af60d53ab4319e5d71a4459cc10464ffd683efabacd6bd773bb807f8771fa
- md5=0cdfb4dd248eada3dc35db4f8cf75f8d
- sha256=c54e779a720841126e23d692de85243e23b0d94fb7792a958b96b5bd097a8b85
- 
-+[http://www.directfb.org/downloads/Extras/DirectFB-examples-1.2.0.tar.gz]
-+md5=ce018f681b469a1d72ffc32650304b98
-+sha256=830a1bd6775d8680523596a88a72fd8e4c6a74bf886d3e169b06d234a5cf7e3e
-+
- [http://media.djangoproject.com/releases/1.0/Django-1.0.tar.gz]
- md5=84d0490e4126f31d1c23f640e1e86f2f
- sha256=4c780b9e2906944ce02a9325b15f480d2bd4c0b12137f752aa4800c0f8563acf
-diff --git a/packages/directfb/directfb-examples_1.2.0.bb b/packages/directfb/directfb-examples_1.2.0.bb
-new file mode 100644
-index 0000000..7fd3f38
---- /dev/null
-+++ b/packages/directfb/directfb-examples_1.2.0.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "DirectFB extra providers"
-+DEPENDS = "directfb"
-+SECTION = "libs"
-+LICENSE = "GPL"
-+
-+SRC_URI = " \
-+           http://www.directfb.org/downloads/Extras/DirectFB-examples-${PV}.tar.gz \
-+          "
-+S = "${WORKDIR}/DirectFB-examples-${PV}"
-+
-+inherit autotools
-+
-+do_stage() {
-+	autotools_stage_all
-+}
-+
-+
--- 
-1.5.6.3
+regards,
+
+Koen
+
+>
+> Thanks in advance,
+>
+> Paolo
+>
+>
+>
+> | /home/paolo/oe/stuff/build/tmp/cross/i586/lib/gcc/i586-angstrom-linux/4.2.4/../../../../i586-angstrom-linux/bin/ld:.libs/libgdk_pixbuf-2.0.ver:2: ignoring invalid character `\001' in script
+> | /home/paolo/oe/stuff/build/tmp/cross/i586/lib/gcc/i586-angstrom-linux/4.2.4/../../../../i586-angstrom-linux/bin/ld:.libs/libgdk_pixbuf-2.0.ver:2: syntax error in VERSION script
+> | collect2: ld returned 1 exit status
+> | make[4]: *** [libgdk_pixbuf-2.0.la] Error 1
+> | make[4]: Leaving directory
+> `/home/paolo/oe/stuff/build/tmp/work/i586-angstrom-linux/gtk
+> +-2.14.2-r1/gtk+-2.14.2/gdk-pixbuf'
+> | make[3]: *** [all-recursive] Error 1
+> | make[3]: Leaving directory
+> `/home/paolo/oe/stuff/build/tmp/work/i586-angstrom-linux/gtk
+> +-2.14.2-r1/gtk+-2.14.2/gdk-pixbuf'
+> | make[2]: *** [all] Error 2
+> | make[2]: Leaving directory
+> `/home/paolo/oe/stuff/build/tmp/work/i586-angstrom-linux/gtk
+> +-2.14.2-r1/gtk+-2.14.2/gdk-pixbuf'
+> | make[1]: *** [all-recursive] Error 1
+> | make[1]: Leaving directory
+> `/home/paolo/oe/stuff/build/tmp/work/i586-angstrom-linux/gtk
+> +-2.14.2-r1/gtk+-2.14.2'
+> | make: *** [all] Error 2
+> | FATAL: oe_runmake failed
+> NOTE: Task
+> failed: /home/paolo/oe/stuff/build/tmp/work/i586-angstrom-linux/gtk
+> +-2.14.2-r1/temp/log.do_compile.22403
+> NOTE: package gtk+-2.14.2-r1: task do_compile: failed
+> ERROR: TaskFailed event exception, aborting
+> NOTE: package gtk+-2.14.2: failed
+> ERROR: Build of /home/paolo/oe/stuff/openembedded/packages/gtk+/gtk
+> +_2.14.2.bb do_compile failed
+> ERROR: Task 951 (/home/paolo/oe/stuff/openembedded/packages/gtk+/gtk
+> +_2.14.2.bb, do_compile) failed
+> NOTE: Tasks Summary: Attempted 1003 tasks of which 788 didn't need to be
+> rerun and 1 failed.
+> ERROR: '/home/paolo/oe/stuff/openembedded/packages/gtk+/gtk+_2.14.2.bb'
+> failed
+> NOTE: build 200902040809: completed
+>
+>
+>
+>
+>
+>
+> On lun, 2009-02-02 at 17:13 +0100, Marco Cavallini wrote:
+>> Paolo Cremonese ha scritto:
+>>> Fine, waiting for GRUB patch. (what is "hrw" ?)
+>>>
+>>> My target has not hard disk, only CF.
+>>> To run the image, do I need a RAMFS ?
+>>> And in this case, I have to add it to the GRUB "menu.lst" ?
+>> Paolo,
+>> hrw is Marcin Juszkiewicz, an OE developer and mantainer.
+>> GRUB patch was pushed this morning and is ready for use into git mainstream.
+>>
+>> Cordiali Saluti / Kindest Regards / mit freundlichen Grüssen
+>> --
+>> Marco Cavallini | KOAN sas | Bergamo - Italia
+>>   embedded and real-time software engineering
+>>     Atmel third party certified consultant
+>> Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+>>        http://www.KoanSoftware.com
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
