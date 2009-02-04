@@ -1,22 +1,31 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LUlqI-0001T6-AK
-	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 18:47:18 +0100
-Received: (qmail 19088 invoked by uid 813007); 4 Feb 2009 17:47:09 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 4 Feb 2009 17:47:09 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 4 Feb 2009 18:47:04 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
-References: <1233059140.7818.4.camel@ubuntu2> <gmbu7j$f7s$1@ger.gmane.org>
-	<1233762533.6176.9.camel@ubuntu2>
-In-Reply-To: <1233762533.6176.9.camel@ubuntu2>
-MIME-Version: 1.0
-Message-Id: <200902041847.07209.openembedded@haerwu.biz>
-Subject: Re: Build problems
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LUoTF-0001cH-O5
+	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 21:35:44 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LUoT6-0002qT-Nc
+	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 20:35:32 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 04 Feb 2009 20:35:32 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 04 Feb 2009 20:35:32 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 04 Feb 2009 21:35:22 +0100
+Message-ID: <gmcu6b$5r9$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090131 Shredder/3.0b2pre
+Sender: news <news@ger.gmane.org>
+Subject: python 'platform' module not being built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,27 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2009 17:47:18 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 04 Feb 2009 20:35:58 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Wednesday 04 of February 2009 16:48:53 Paolo Cremonese wrote:
-> OK, changed DASH to BASH.
-> Compiled libtool-cross OK.
->
-> compiling gtk+ (bitbake gtk+), fails.
+Hi,
 
-"bitbake -crebuild gtk+" is needed because gtk+ configure was done with 
-dash.
+Frans and I are trying to get python-coherence working, but we are 
+hitting a few snags:
 
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+root@beagleboard:~# coherence
+Traceback (most recent call last):
+   File "/usr/bin/coherence", line 21, in <module>
+     from coherence import __version__
+   File "/usr/lib/python2.6/site-packages/coherence/__init__.py", line 
+1, in <module>
+     import platform
+ImportError: No module named platform
+root@beagleboard:~#
 
+Some googling brings me to:
+
+http://docs.python.org/library/platform.html
+
+That suggests that it's part of python, but it doesn't seem to get built 
+in OE, is there any reason for that? If not, what would be the best way 
+to build it?
+
+regards,
+
+Koen
 
 
 
