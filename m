@@ -1,32 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.198.236] (helo=rv-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LUcgu-00023x-Ax
-	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 09:01:05 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LUcgp-0006va-Go
-	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 08:00:55 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 04 Feb 2009 08:00:55 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 04 Feb 2009 08:00:55 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 04 Feb 2009 09:00:45 +0100
-Message-ID: <gmbhvd$8sm$1@ger.gmane.org>
-References: <a7f8874a0902032245v333a379dq179c5bd7369f5dde@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090123 Shredder/3.0b2pre
+	(envelope-from <hvontres@gmail.com>) id 1LUdEg-0007cW-7u
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Feb 2009 09:35:58 +0100
+Received: by rv-out-0506.google.com with SMTP id g9so1790323rvb.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Feb 2009 00:35:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ZcnqgWDeWeCfuwgiD499Dxayc1QoTbfGPlk/V+z57iQ=;
+	b=xMPmpI+osBIA0lFM6owTj5oTR9aoCH3J8Q/bxBOvcfcSjAiyGVFwsPDTZI5QVwa14d
+	Uf8hTIkY5owZSZfEK6zgp9QGauKT04cPmxm/CC7mbL/BcC6BqfatDD2y+I1LJOSc9C27
+	TC1NUUgslFJqyM5OvahqNlLtomdajbs7c25Cs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=p+9c9q8BiGJ7/nBLthSWfiY6iXY/YDdT02wg3lX7J0r/AJMRJERBzrjWMUdCBucnVA
+	1Wc2ZlexlvOBTqpJf2Ncb8YvXLS8MB4juVn+lvnSpwGMcgjt1MsHlfVT3EUg0iytLxN3
+	9CDABnN+1q00T4Q2p3BP2hFacdvk1cMganOZ4=
+MIME-Version: 1.0
+Received: by 10.141.203.7 with SMTP id f7mr2780334rvq.256.1233736548797; Wed, 
+	04 Feb 2009 00:35:48 -0800 (PST)
 In-Reply-To: <a7f8874a0902032245v333a379dq179c5bd7369f5dde@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+References: <a7f8874a0902032245v333a379dq179c5bd7369f5dde@mail.gmail.com>
+Date: Wed, 4 Feb 2009 00:35:48 -0800
+Message-ID: <a7f8874a0902040035kcf95670u1378572abb0ce9c2@mail.gmail.com>
+From: Hans Henry von Tresckow <hvontres@gmail.com>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] sg3-utils: get 1.24 to cross compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,30 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2009 08:02:00 -0000
-X-List-Received-Date: Wed, 04 Feb 2009 08:02:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 04 Feb 2009 08:36:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 04-02-09 07:45, Hans Henry von Tresckow wrote:
+Never Mind. This still has issues
+
+On Tue, Feb 3, 2009 at 10:45 PM, Hans Henry von Tresckow
+<hvontres@gmail.com> wrote:
 > Please review this patch and push if OK
 >
-
-> -<<<<<<<  HEAD:packages/sg3-utils/sg3-utils_1.24.bb
+> Thanks,
+> Henry
 >
-> -=======
-> ->>>>>>>  c92bef17d2a35e06ec6edc2439918c88a7b4808b:packages/sg3-utils/sg3-utils_1.24.bb
+Never Mind. This still has issues
 
-This highlights one of the braindead things of git: it leave inline 
-conflict markers in your code without telling you, breaking things left 
-and right.
-
-Anyway... those conflict markers aren't in OE, so please generate your 
-patch against a clean tree.
-
-regards,
-
-Koen
-
+-- 
+Henry von Tresckow (hvontres)
+Rodney Dangerfield  - "My marriage is on the rocks again, yeah, my
+wife just broke up with her boyfriend."
 
 
