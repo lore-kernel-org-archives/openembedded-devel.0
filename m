@@ -1,32 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.27.42.5] (helo=smtp5-g21.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LUiVv-0007fY-Ap
-	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 15:14:03 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LUiVn-0003ha-KR
-	for openembedded-devel@openembedded.org; Wed, 04 Feb 2009 14:13:55 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 04 Feb 2009 14:13:55 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 04 Feb 2009 14:13:55 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 04 Feb 2009 15:13:45 +0100
-Message-ID: <gmc7qq$gim$1@ger.gmane.org>
-References: <49899FCE.3020900@free.fr>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090123 Shredder/3.0b2pre
-In-Reply-To: <49899FCE.3020900@free.fr>
-Sender: news <news@ger.gmane.org>
+	(envelope-from <ebenard@free.fr>) id 1LUioD-0004yC-48
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Feb 2009 15:32:57 +0100
+Received: from smtp5-g21.free.fr (localhost [127.0.0.1])
+	by smtp5-g21.free.fr (Postfix) with ESMTP id 6D355D481D9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Feb 2009 15:32:47 +0100 (CET)
+Received: from [192.168.1.15] (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71])
+	by smtp5-g21.free.fr (Postfix) with ESMTP id 7E0C8D481D4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Feb 2009 15:32:45 +0100 (CET)
+Message-ID: <4989A70D.8010009@free.fr>
+Date: Wed, 04 Feb 2009 15:32:45 +0100
+From: Eric BENARD <ebenard@free.fr>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <49899FCE.3020900@free.fr> <gmc7qq$gim$1@ger.gmane.org>
+In-Reply-To: <gmc7qq$gim$1@ger.gmane.org>
 Subject: Re: gnutls-2.4.2 & automake 1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,26 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2009 14:14:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 04 Feb 2009 14:32:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 04-02-09 15:01, Eric BENARD wrote:
-> Hi,
->
-> I'm building a "minimal" distro for arm926 and got a problem with
-> gnutls-2.4.2 (see message below).
-> Running "bitbake automake-native-1.10" solved the problem by forcing the
-> installation of a native automake 1.10.
->
-> How can we tell gnutls-2.4.2 to automatically require automake 1.10
-> during it's build process ?
+Hi Koen,
 
-use DISTRO=angstrom-2008.1 and define your own minimal image.
+Koen Kooi wrote :
+> use DISTRO=angstrom-2008.1 and define your own minimal image.
+> 
+OK, thanks.
+Is the minimal image I can build minimal-image.bb ? (excluding the 
+helloworld-image of course ;-)
 
-regards,
+BTW : minimal distro build failed later on gnome-vfs-2.22.0-r0 which 
+needs fetching fakeroot_1.9.6.tar.gz manually and running "bitbake 
+dbus-glib" in order to build.
 
-Koen
-
+Thanks,
+Eric
 
 
