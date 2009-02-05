@@ -1,16 +1,30 @@
-Received: from [83.222.24.113] (helo=smtp-13.masterhost.ru)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1LV6Ht-0005hC-MU
-	for openembedded-devel@openembedded.org; Thu, 05 Feb 2009 16:37:16 +0100
-Received: (qmail 92828 invoked from network); 5 Feb 2009 15:36:30 -0000
-Received: from unknown (HELO ?192.168.1.105?) (rik@osrc.info@80.246.246.162)
-	by smtp1.masterhost.ru with SMTP; 5 Feb 2009 15:36:31 -0000
+Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <nytowl@openmoko.org>) id 1LV6Z9-0006SM-M7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Feb 2009 16:55:03 +0100
+Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
+	helo=[172.16.14.101]) by aakash.openmoko.org with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <nytowl@openmoko.org>) id 1LV6Yh-0001MO-FA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Feb 2009 23:54:42 +0800
+From: Angus Ainslie <nytowl@openmoko.org>
 To: openembedded-devel@lists.openembedded.org
-From: Roman I Khimov <roman@khimov.ru>
-Date: Thu, 5 Feb 2009 18:36:16 +0300
-MIME-Version: 1.0
-Message-Id: <200902051836.25770.roman@khimov.ru>
-Subject: [PATCH] New package: byacc
+Date: Thu, 05 Feb 2009 08:54:27 -0700
+Message-Id: <1233849267.23894.47.camel@alap>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 70.73.132.19
+X-SA-Exim-Mail-From: nytowl@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.8 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: linux-openmoko-devel patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -24,85 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2009 15:37:17 -0000
-X-Groupsio-MsgNum: 7559
-Content-Type: multipart/signed; boundary="nextPart2608679.oNTGlTOjkU";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Thu, 05 Feb 2009 15:55:08 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
---nextPart2608679.oNTGlTOjkU
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Hi,
 
-Hello everyone.
+I'm the new distribution maintainer for Openmoko and I'd like to work
+towards getting push access to the OE git repository. It would be great
+if I could get a sandbox branch to commit changes for review.
 
-The package is mostly intended to be built as native and then used to build=
-=20
-other packages. It's trivial and I thought it might be useful for someone=20
-else too, hence, trying to push.
+Thanks
+Angus
 
-diff -puraN /void/byacc_20081225.bb packages/byacc/byacc_20081225.bb
-=2D-- a/packages/byacc/byacc_20081225.bb	1970-01-01 03:00:00.000000000 +0300
-+++ b/packages/byacc/byacc_20081225.bb	2009-02-03 22:51:24.811593078 +0300
-@@ -0,0 +1,13 @@
-+DESCRIPTION =3D "Berkeley Yacc"
-+SECTION =3D "devel"
-+LICENSE =3D "public domain"
-+PR =3D "r0"
-+
-+SRC_URI =3D "ftp://invisible-island.net/byacc/byacc.tar.gz"
-+EXTRA_OECONF +=3D "--program-transform-name=3D's,^,b,'"
-+
-+inherit autotools
-+
-+do_configure() {
-+	oe_runconf
-+}
-diff -puraN /void/byacc-native_20081225.bb=20
-packages/byacc/byacc-native_20081225.bb
-=2D-- a/packages/byacc/byacc-native_20081225.bb	1970-01-01 03:00:00.0000000=
-00=20
-+0300
-+++ b/packages/byacc/byacc-native_20081225.bb	2009-02-03 15:36:55.981948513=
-=20
-+0300
-@@ -0,0 +1,4 @@
-+SECTION =3D "devel"
-+require byacc_${PV}.bb
-+S =3D "${WORKDIR}/byacc-${PV}"
-+inherit native
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 8339981..07e3733 100644
-=2D-- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -25042,3 +25042,6 @@=20
-sha256=3D5cc1a53bb909922596bdd0fa967b654fe1bfbe0dcf1d34608f0b7c90e0c27867
- md5=3D5f7b88ebb2bcd7e8044328482d079661
- sha256=3Df57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
-=20
-+[ftp://invisible-island.net/byacc/byacc.tar.gz]
-+md5=3Db9715b9a2867c221176b597e8f73cbc9
-+sha256=3D1364c7fe382de659e8b9841a1736b645345a460d2f4302303e80c02235a2a575
+--- packages/linux/linux-openmoko-devel_git.bb.orig     2009-02-02 13:42:00.000000000 -0700
++++ packages/linux/linux-openmoko-devel_git.bb  2009-02-02 13:44:13.000000000 -0700
+@@ -20,7 +20,7 @@
+ S = "${WORKDIR}/git"
+
+ do_configure_prepend() {
+-       install -m 644 ./arch/arm/configs/gta02-packaging-defconfig ${WORKDIR}/defconfig-oe
++       install -m 644 ./arch/arm/configs/gta02_packaging_defconfig ${WORKDIR}/defconfig-oe
+        cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
+ }
 
 
-=2D-=20
-                            Roman
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart2608679.oNTGlTOjkU
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAkmLB3AACgkQXJ70z+XgVcNxNACg1BfFi+KD6DXLV52a9x0M5MX1
-FmcAoKgOLSwC5k4pG1pt0BbZQ0Goti/h
-=Diq3
------END PGP SIGNATURE-----
-
---nextPart2608679.oNTGlTOjkU--
