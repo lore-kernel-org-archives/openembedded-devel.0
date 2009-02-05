@@ -1,28 +1,32 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LUzHO-0007rh-0n
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Feb 2009 09:08:10 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 8F73016DEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Feb 2009 09:20:18 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 3935E2A4213
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Feb 2009 09:07:56 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Thu, 5 Feb 2009 09:07:56 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF632@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Please use the wiki
-Thread-Index: AcmHaNn/Qaalax8URNy2+XD1vLYYoA==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Please use the wiki
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LUziK-0004w5-H9
+	for openembedded-devel@openembedded.org; Thu, 05 Feb 2009 09:36:00 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LUzi3-00029A-HK
+	for openembedded-devel@openembedded.org; Thu, 05 Feb 2009 08:35:43 +0000
+Received: from p5483a5ac.dip0.t-ipconnect.de ([84.131.165.172])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 05 Feb 2009 08:35:43 +0000
+Received: from vjensen by p5483a5ac.dip0.t-ipconnect.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 05 Feb 2009 08:35:43 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Vitus Jensen <vjensen@gmx.de>
+Date: Thu, 5 Feb 2009 08:35:31 +0000 (UTC)
+Message-ID: <gme8cj$ejn$1@ger.gmane.org>
+References: <200901120019.45621.mickey@vanille-media.de>
+	<200901141547.26513.mickey@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5483a5ac.dip0.t-ipconnect.de
+User-Agent: Pan/0.133 (House of Butterflies)
+Sender: news <news@ger.gmane.org>
+Subject: Re: python roadmap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,33 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2009 08:08:10 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 05 Feb 2009 08:36:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-QXMgYSBkZXZlbG9wZXIgd29ya2luZyBvbiBPRSBqdXN0IHNvbWV0aW1lcyBpdCBpcyByZWFsbHkg
-aGFyZCB0byBmaW5kIGluZm9ybWF0aW9uIGFib3V0IGFsbCB0aGUgYmlnIGFuZCBsaXR0bGUgcHJv
-YmxlbXMsIGhhY2tzLCB0aXBwcywgYW5kIHRyaWNrcy4gT2Z0ZW4geW91IGhhdmUgdG8gZGlnIHRo
-cm91Z2ggdGhlIGFyY2hpdmVzIG9mIHRoZSBtYWlsaW5nIGxpc3RzIGFuZCBmcmVxdWVudGx5IHlv
-dSBvdmVybG9vayBpbXBvcnRhbnQgdGhpbmdzLiBUaGlzIGxlYWRzIHRvIHByb2JsZW1zIGJ5IGJy
-ZWFraW5nIHVua25vd24gcnVsZXMgYW5kIG11Y2ggbW9yZSBtYWlscyBhc2tpbmcgdGhlIHNhbWUg
-cXVlc3Rpb25zIGFnYWluIGFuZCBhZ2Fpbi4NCg0KV2l0aCB0aGUgd2lraSA8aHR0cDovL3dpa2ku
-b3BlbmVtYmVkZGVkLm5ldC8+IHRoZXJlIGlzIGEgbXVjaCBiZXR0ZXIgcGxhY2UgdG8gcG9vbCBh
-bGwgdGhlc2UgaW5mb3JtYXRpb25zLiBJdCBpcyBlYXN5IHRvIHdyaXRlIGFuZCB1cGRhdGUgdGhl
-IHBhZ2VzLCBpdCBpcyBwb3NzaWJsZSB0byBkaXNjdXNzIHRoZSBpdGVtcywgdGhlcmUgaXMgYSB2
-ZXJzaW9uIGhpc3RvcnkgYW5kIGEgZnVsbCB0ZXh0IHNlYXJjaCwgaXQgaXMgcG9zc2libGUgdG8g
-dXNlIGNhdGVnb3JpZXMsIGFuZCBtdWNoIG1vcmUuDQoNCkl0IHdvdWxkIGJlIHJlYWxseSBoZWxw
-ZnVsIGlmIGFsbCB0aGUgaW1wb3J0YW50IGluZm9ybWF0aW9uIGZyb20gdGhlIG1haWxpbmcgbGlz
-dHMgYW5kIG90aGVyIHNvdXJjZXMgY291bGQgZmluZCBpdCdzIHdheSAoZGlyZWN0bHkgb3Igd2l0
-aCByZWZlcmVuY2VzKSB0byB0aGUgd2lraS4gSSBtaXNzIHBhZ2VzIGRlc2NyaWJpbmcgbWFqb3Ig
-Y29uY2VwdHMgKGUuZy4gdmlydHVhbCBhbmQgbmF0aXZlIHBhY2thZ2VzKSwgdGhlIGJyYW5jaCBw
-b2xpY3kgKGUuZy4gaG93J3MgdGhlIHRoZSBzdGFibGUgYnJhbmNoIG1hZGU/KSwgcGFnZXMgdG8g
-YWxsIHRoZSBtYWluIGRpc3Ryb3MsIG1hY2hpbmVzIGFuZCBtYWpvciBwYWNrYWdlcywgYW4gb3Zl
-cnZpZXcgYWJvdXQgYWxsIHRoZSB0cmlja3kgdGhpbmdzIHVzYWJsZSBpbiB0aGUgcmVjaXBlcywg
-YmVzdCBwcmFjdGlzZXMsIGFuZCBzbyBvbi4NCg0KU28gYWdhaW4gbXkgY2FsbCAoZXNwZWNpYWxs
-eSB0byB0aGUgY29yZSB0ZWFtKTogUGxlYXNlIHNoYXJlIHlvdXIga25vd2xlZGdlIGluIHRoZSB3
-aWtpIQ0KDQpUaHggaW4gYWR2YW5jZSwNClN0ZWZmZW4NCg==
+Am Wed, 14 Jan 2009 15:47:26 +0100 schrieb Michael 'Mickey' Lauer:
+
+> Thanks to some extrashifts this work has proceeded faster than
+> scheduled. I plan to merge mickey/python26 into master on friday. If you
+> see something dangerous, yell.
+
+Yell ;-)
+
+See http://bugs.openembedded.net/show_bug.cgi?id=5013
+
+python26 fails to build for the big-endian machines I tried, namely 
+nslu2be.  And as python25 was removed it is a real blocker for packages 
+which DEPEND on pathon, which inturn is the case for php.  And php I'm 
+trying to get a version working again.
+
+do_compile tries to load a .so on the host which was build for armeb and 
+complains about wrong byteorder.  But there is no complain when 
+MACHINE=nslu2le in which case the .so shouldn't be loadable, too (it's 
+for arm after all, not x86).  AND python25 used exactly the same 
+do_compile method, and does not fail!
+
+So I'm a little confused how it's supposed to work.  Could you please 
+take a look at it?
+
+Thanks,
+  Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
+
 
 
