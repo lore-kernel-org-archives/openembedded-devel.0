@@ -1,33 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LVN27-0008Vp-8s
-	for openembedded-devel@openembedded.org; Fri, 06 Feb 2009 10:29:59 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LVN1h-00073Y-2w
-	for openembedded-devel@openembedded.org; Fri, 06 Feb 2009 09:29:33 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 06 Feb 2009 09:29:33 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 06 Feb 2009 09:29:33 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 06 Feb 2009 10:29:20 +0100
-Message-ID: <gmgvtg$1i9$1@ger.gmane.org>
-References: <gmg4k5$rdj$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090131 Shredder/3.0b2pre
-In-Reply-To: <gmg4k5$rdj$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] rcs_5.7.bb: The Revision Control System (RCS)
+	(envelope-from <chrisfriedt@gmail.com>) id 1LVq00-0002TQ-6T
+	for Openembedded-devel@lists.openembedded.org;
+	Sat, 07 Feb 2009 17:25:45 +0100
+Received: by yx-out-1718.google.com with SMTP id 4so539043yxp.42
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Feb 2009 08:25:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=yOQti3APjV4R3GetfbLf4GwtJwftVrU5hCY6njB1rMo=;
+	b=dDiFnnHGM9oW3pTapuXCYK82Kts7BIIZHkLcHkMvExMXUr31ZJPxMfIOOcPaW5g0I4
+	JKz9tG17ZT1zsAF95XfkBLs4180tX6zOk2XBw+zfRsU/lP3TjKeUrqOLNS0mZjaCZb3f
+	R14scfeOLvy5oImLOTXjBGpEdjCaOSeM+iI7w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=XG7VA1xocnqkoWn7t9+qJk2tYsemPzeGlYDr1Chpv46XLcXWukOeAsBC5TA7P6QqMX
+	NkTq6JbjP85AZVRT5HnBfX5cgbSQQXobj14tLAi3EadV5I2/lZFPdfAAidOfXlo7ynlC
+	YpZ1YzNFE3RMpeMJtkqY0OvWSTBfIbo5PlKDw=
+MIME-Version: 1.0
+Received: by 10.100.153.4 with SMTP id a4mr1831970ane.101.1234023909960; Sat, 
+	07 Feb 2009 08:25:09 -0800 (PST)
+Date: Sat, 7 Feb 2009 11:25:09 -0500
+Message-ID: <3ea34a000902070825j48291819x61976d871da422d@mail.gmail.com>
+From: Christopher Friedt <chrisfriedt@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+Subject: c compiler cannot create executables (do_configure, gettext-native-0.17-r3)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,525 +40,256 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Feb 2009 09:30:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 07 Feb 2009 16:25:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 06-02-09 02:43, Vitus Jensen wrote:
-> Please review and comment.
+Hi everyone,
 
-How valid is that conf.h for all architectures and machines in OE?
+I've run into a configure error that I'm not quite sure how to fix -
+it could have something to do with ccache, and I've tried clearing out
+my cache already, but that hasn't worked. It's for a 'new' machine,
+but I've essentially just copied the aximx50.conf and renamed it to
+cl9400.conf (also added the relevent parts according to
+http://wiki.openembedded.net/index.php/Adding_a_new_Machine).
 
-regards,
+What's really odd, is that I've gone into the specified build directly
+directly after it apparently fails, taken the exact ./configure
+command from config.log, and run it without any errors showing up.
 
-Koen
+I would appreciate if anyone would like to offer some advice - please
+see the build log below.
 
+Cheers,
 
->  From 321b8062a16070a8dfd82df1d3fc1ea5f3d7f2ff Mon Sep 17 00:00:00 2001
-> From: Vitus Jensen<vjensen@gmx.de>
-> Date: Fri, 6 Feb 2009 02:33:21 +0100
-> Subject: [PATCH] rcs_5.7.bb: The Revision Control System (RCS)
->
->
-> Signed-off-by: Vitus Jensen<vjensen@gmx.de>
-> ---
->   conf/checksums.ini                       |    4 +
->   packages/rcs/files/angstrom-src-conf.h   |  399 ++++++++++++++++++++++++++++++
->   packages/rcs/files/fix-installpath.patch |   33 +++
->   packages/rcs/rcs_5.7.bb                  |   22 ++
->   4 files changed, 458 insertions(+), 0 deletions(-)
->   create mode 100644 packages/rcs/files/angstrom-src-conf.h
->   create mode 100644 packages/rcs/files/fix-installpath.patch
->   create mode 100644 packages/rcs/rcs_5.7.bb
->
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 50307c4..12e20a2 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -18486,6 +18486,10 @@ sha256=102fd42f8f2562450f4e45c28bfb0390c2d30ffa6a805eead15d67018930f654
->   md5=bcf36d524f6f50aa16ee8e183350f7b8
->   sha256=7a5eb58f10d02f58c2f7fb153bb5dc6d72173d5fa3d317bdbd9674f4577e0ad0
->
-> +[http://www.cs.purdue.edu/homes/trinkle/RCS/rcs-5.7.tar.Z]
-> +md5=423282f0edb353296d9f3498ab683abf
-> +sha256=7b7d2f7f5c2bbb096d23ee6dc5590b7d0b84e16ed54694d5794b7a4a989a63ad
-> +
->   [http://downloads.sourceforge.net/rdesktop/rdesktop-1.3.1.tar.gz]
->   md5=968a1e3f5161bab80c306df31c54cfb1
->   sha256=67332a0a16471c1c3592d3e51ae5cc0562f9a2f1b1ab942b493f7d5080bd2c33
-> diff --git a/packages/rcs/files/angstrom-src-conf.h b/packages/rcs/files/angstrom-src-conf.h
-> new file mode 100644
-> index 0000000..a57e6c0
-> --- /dev/null
-> +++ b/packages/rcs/files/angstrom-src-conf.h
-> @@ -0,0 +1,399 @@
-> +/* RCS compile-time configuration */
-> +
-> +	/* $Id$ */
-> +
-> +/*
-> + * This file is generated automatically.
-> + * If you edit it by hand your changes may be lost.
-> + * Instead, please try to fix conf.sh,
-> + * and send your fixes to rcs-bugs@cs.purdue.edu.
-> + */
-> +
-> +#define exitmain(n) return n /* how to exit from main() */
-> +/* #define _POSIX_C_SOURCE 2147483647L */ /* if strict C + Posix 1003.1b-1993 or later */
-> +/* #define _POSIX_SOURCE */ /* if strict C + Posix 1003.1-1990 */
-> +
-> +#include<errno.h>
-> +#include<stdio.h>
-> +#include<time.h>
-> +
-> +/* Comment out #include lines below that do not work.  */
-> +#include<sys/types.h>
-> +#include<sys/stat.h>
-> +#include<dirent.h>
-> +#include<fcntl.h>
-> +#include<limits.h>
-> +/* #include<mach/mach.h>  */
-> +/* #include<net/errno.h>  */
-> +#include<pwd.h>
-> +/* #include<siginfo.h>  */
-> +#include<signal.h>
-> +#include<stdlib.h>
-> +#include<string.h>
-> +#include<sys/mman.h>
-> +#include<sys/wait.h>
-> +#include<ucontext.h>
-> +#include<unistd.h>
-> +#include<utime.h>
-> +/* #include<vfork.h>  */
-> +
-> +/* Define boolean symbols to be 0 (false, the default), or 1 (true).  */
-> +#define has_sys_param_h 1 /* Does #include<sys/param.h>  work?  */
-> +/* extern int errno; */ /* Uncomment if<errno.h>  doesn't declare errno.  */
-> +#define has_readlink 1 /* Does readlink() work?  */
-> +#define readlink_isreg_errno EINVAL /* errno after readlink on regular file */
-> +
-> +#if has_readlink&&  !defined(MAXSYMLINKS)
-> +#	if has_sys_param_h
-> +#		include<sys/param.h>
-> +#	endif
-> +#	ifndef MAXSYMLINKS
-> +#		define MAXSYMLINKS 20 /* BSD; not standard yet */
-> +#	endif
-> +#endif
-> +
-> +/* Comment out the typedefs below if the types are already declared.  */
-> +/* Fix any uncommented typedefs that are wrong.  */
-> +/* typedef int mode_t; */
-> +/* typedef long off_t; */
-> +/* typedef int pid_t; */
-> +/* typedef int sig_atomic_t; */
-> +/* typedef unsigned size_t; */
-> +/* typedef int ssize_t; */
-> +/* typedef long time_t; */
-> +/* typedef int uid_t; */
-> +
-> +/* Comment out the keyword definitions below if the keywords work.  */
-> +/* #define const */
-> +/* #define volatile */
-> +
-> +/* Define boolean symbols to be 0 (false, the default), or 1 (true).  */
-> +#define has_prototypes 1 /* Do function prototypes work?  */
-> +#define has_stdarg 1 /* Does<stdarg.h>  work?  */
-> +/* #define has_varargs ? */ /* Does<varargs.h>  work?  */
-> +#define va_start_args 2 /* How many args does va_start() take?  */
-> +
-> +#if O_BINARY
-> +	/* Text and binary i/o behave differently.  */
-> +	/* This is incompatible with Posix and Unix.  */
-> +#	define FOPEN_RB "rb"
-> +#	define FOPEN_R_WORK (Expand==BINARY_EXPAND ? "r" : "rb")
-> +#	define FOPEN_WB "wb"
-> +#	define FOPEN_W_WORK (Expand==BINARY_EXPAND ? "w" : "wb")
-> +#	define FOPEN_WPLUS_WORK (Expand==BINARY_EXPAND ? "w+" : "w+b")
-> +#	define OPEN_O_BINARY O_BINARY
-> +#else
-> +	/*
-> +	* Text and binary i/o behave the same.
-> +	* Omit "b", since some nonstandard hosts reject it.
-> +	*/
-> +#	define FOPEN_RB "r"
-> +#	define FOPEN_R_WORK "r"
-> +#	define FOPEN_WB "w"
-> +#	define FOPEN_W_WORK "w"
-> +#	define FOPEN_WPLUS_WORK "w+"
-> +#	define OPEN_O_BINARY 0
-> +#endif
-> +
-> +/* This may need changing on non-Unix systems (notably DOS).  */
-> +#define OPEN_CREAT_READONLY (S_IRUSR|S_IRGRP|S_IROTH) /* lock file mode */
-> +#define OPEN_O_LOCK 0 /* extra open flags for creating lock file */
-> +#define OPEN_O_WRONLY O_WRONLY /* main open flag for creating a lock file */
-> +
-> +/* Define or comment out the following symbols as needed.  */
-> +#if has_prototypes
-> +#	define P(params) params
-> +#else
-> +#	define P(params) ()
-> +#endif
-> +#if has_stdarg
-> +#	include<stdarg.h>
-> +#else
-> +#	if has_varargs
-> +#		include<varargs.h>
-> +#	else
-> +		typedef char *va_list;
-> +#		define va_dcl int va_alist;
-> +#		define va_start(ap) ((ap) = (va_list)&va_alist)
-> +#		define va_arg(ap,t) (((t*) ((ap)+=sizeof(t)))  [-1])
-> +#		define va_end(ap)
-> +#	endif
-> +#endif
-> +#if va_start_args == 2
-> +#	define vararg_start va_start
-> +#else
-> +#	define vararg_start(ap,p) va_start(ap)
-> +#endif
-> +#define bad_chmod_close 0 /* Can chmod() close file descriptors?  */
-> +#define bad_creat0 0 /* Do writes fail after creat(f,0)?  */
-> +#define bad_fopen_wplus 0 /* Does fopen(f,"w+") fail to truncate f?  */
-> +#define getlogin_is_secure 0 /* Is getlogin() secure?  Usually it's not.  */
-> +#define has_attribute_noreturn 1 /* Does __attribute__((noreturn)) work?  */
-> +#if has_attribute_noreturn
-> +#	define exiting __attribute__((noreturn))
-> +#else
-> +#	define exiting
-> +#endif
-> +#define has_dirent 1 /* Do opendir(), readdir(), closedir() work?  */
-> +#define void_closedir 0 /* Does closedir() yield void?  */
-> +#define has_fchmod 1 /* Does fchmod() work?  */
-> +#define has_fflush_input 1 /* Does fflush() work on input files?  */
-> +#define has_fputs 1 /* Does fputs() work?  */
-> +#define has_ftruncate 1 /* Does ftruncate() work?  */
-> +#define has_getuid 1 /* Does getuid() work?  */
-> +#define has_getpwuid 1 /* Does getpwuid() work?  */
-> +#define has_memcmp 1 /* Does memcmp() work?  */
-> +#define has_memcpy 1 /* Does memcpy() work?  */
-> +#define has_memmove 1 /* Does memmove() work?  */
-> +#define has_map_fd 0 /* Does map_fd() work?  */
-> +#define has_mmap 1 /* Does mmap() work on regular files?  */
-> +#define has_madvise 1 /* Does madvise() work?  */
-> +#define mmap_signal SIGBUS /* signal received if you reference nonexistent part of mmapped file */
-> +#define has_rename 1 /* Does rename() work?  */
-> +#define bad_a_rename 0 /* Does rename(A,B) fail if A is unwritable?  */
-> +#define bad_b_rename 0 /* Does rename(A,B) fail if B is unwritable?  */
-> +#define bad_NFS_rename 0 /* Can rename(A,B) falsely report success?  */
-> +/* typedef int void; */ /* Some ancient compilers need this.  */
-> +#define VOID (void) /* 'VOID e;' discards the value of an expression 'e'.  */
-> +#define has_seteuid 1 /* Does seteuid() work?  See ../INSTALL.RCS.  */
-> +#define has_setreuid 0 /* Does setreuid() work?  See ../INSTALL.RCS.  */
-> +#define has_setuid 1 /* Does setuid() exist?  */
-> +#define has_sigaction 1 /* Does struct sigaction work?  */
-> +#define has_sa_sigaction 1 /* Does struct sigaction have sa_sigaction?  */
-> +#define has_signal 1 /* Does signal() work?  */
-> +#define signal_type void /* type returned by signal handlers */
-> +#define sig_zaps_handler 0 /* Must a signal handler reinvoke signal()?  */
-> +/* #define has_sigblock ? */ /* Does sigblock() work?  */
-> +/* #define sigmask(s) (1<<  ((s)-1)) */ /* Yield mask for signal number.  */
-> +typedef size_t fread_type; /* type returned by fread() and fwrite() */
-> +typedef size_t freadarg_type; /* type of their size arguments */
-> +typedef void *malloc_type; /* type returned by malloc() */
-> +#define has_getcwd 1 /* Does getcwd() work?  */
-> +/* #define has_getwd ? */ /* Does getwd() work?  */
-> +#define needs_getabsname 0 /* Must we define getabsname?  */
-> +#define has_mktemp 1 /* Does mktemp() work?  */
-> +#define has_NFS 1 /* Might NFS be used?  */
-> +#define has_psiginfo 0 /* Does psiginfo() work?  */
-> +#define has_psignal 1 /* Does psignal() work?  */
-> +/* #define has_si_errno ? */ /* Does siginfo_t have si_errno?  */
-> +/* #define has_sys_siglist ? */ /* Does sys_siglist[] work?  */
-> +/* #define strchr index */ /* Use old-fashioned name for strchr()?  */
-> +/* #define strrchr rindex */ /* Use old-fashioned name for strrchr()?  */
-> +#define bad_unlink 0 /* Does unlink() fail on unwritable files?  */
-> +#define has_vfork 1 /* Does vfork() work?  */
-> +#define has_fork 1 /* Does fork() work?  */
-> +#define has_spawn 0 /* Does spawn*() work?  */
-> +#define has_waitpid 1 /* Does waitpid() work?  */
-> +#define bad_wait_if_SIGCHLD_ignored 0 /* Does ignoring SIGCHLD break wait()?  */
-> +#define RCS_SHELL "/bin/sh" /* shell to run RCS subprograms */
-> +#define has_printf_dot 1 /* Does "%.2d" print leading 0?  */
-> +#define has_vfprintf 1 /* Does vfprintf() work?  */
-> +#define has_attribute_format_printf 1 /* Does __attribute__((format(printf,N,N+1))) work?  */
-> +#if has_attribute_format_printf
-> +#	define printf_string(m, n) __attribute__((format(printf, m, n)))
-> +#else
-> +#	define printf_string(m, n)
-> +#endif
-> +#if has_attribute_format_printf&&  has_attribute_noreturn
-> +	/* Work around a bug in GCC 2.5.x.  */
-> +#	define printf_string_exiting(m, n) __attribute__((format(printf, m, n), noreturn))
-> +#else
-> +#	define printf_string_exiting(m, n) printf_string(m, n) exiting
-> +#endif
-> +/* #define has__doprintf ? */ /* Does _doprintf() work?  */
-> +/* #define has__doprnt ? */ /* Does _doprnt() work?  */
-> +/* #undef EXIT_FAILURE */ /* Uncomment this if EXIT_FAILURE is broken.  */
-> +#define large_memory 1 /* Can main memory hold entire RCS files?  */
-> +#ifndef LONG_MAX
-> +#define LONG_MAX 2147483647L /* long maximum */
-> +#endif
-> +/* Do struct stat s and t describe the same file?  Answer d if unknown.  */
-> +#define same_file(s,t,d) ((s).st_ino==(t).st_ino&&  (s).st_dev==(t).st_dev)
-> +#define has_utimbuf 1 /* Does struct utimbuf work?  */
-> +#define CO "/usr/bin/co" /* name of 'co' program */
-> +#define COMPAT2 0 /* Are version 2 files supported?  */
-> +#define DIFF "/usr/bin/diff" /* name of 'diff' program */
-> +#define DIFF3 "/usr/bin/diff3" /* name of 'diff3' program */
-> +#define DIFF3_BIN 1 /* Is diff3 user-visible (not the /usr/lib auxiliary)?  */
-> +#define DIFFFLAGS "-an" /* Make diff output suitable for RCS.  */
-> +#define DIFF_L 1 /* Does diff -L work?  */
-> +#define DIFF_SUCCESS 0 /* DIFF status if no differences are found */
-> +#define DIFF_FAILURE 1 /* DIFF status if differences are found */
-> +#define DIFF_TROUBLE 2 /* DIFF status if trouble */
-> +#define ED "/bin/ed" /* name of 'ed' program (used only if !DIFF3_BIN) */
-> +#define MERGE "/usr/bin/merge" /* name of 'merge' program */
-> +#define TMPDIR "/tmp" /* default directory for temporary files */
-> +#define SLASH '/' /* principal filename separator */
-> +#define SLASHes '/' /* `case SLASHes:' labels all filename separators */
-> +#define isSLASH(c) ((c) == SLASH) /* Is arg a filename separator?  */
-> +#define ROOTPATH(p) isSLASH((p)[0]) /* Is p an absolute pathname?  */
-> +#define X_DEFAULT ",v/" /* default value for -x option */
-> +#define SLASHSLASH_is_SLASH 1 /* Are // and / the same directory?  */
-> +#define ALL_ABSOLUTE 1 /* Do all subprograms satisfy ROOTPATH?  */
-> +#define DIFF_ABSOLUTE 1 /* Is ROOTPATH(DIFF) true?  */
-> +#define SENDMAIL "/bin/mail" /* how to send mail */
-> +#define TZ_must_be_set 0 /* Must TZ be set for gmtime() to work?  */
-> +
-> +
-> +
-> +/* Adjust the following declarations as needed.  */
-> +
-> +
-> +/* The rest is for the benefit of non-standard, traditional hosts.  */
-> +/* Don't bother to declare functions that in traditional hosts do not appear, */
-> +/* or are declared in .h files, or return int or void.  */
-> +
-> +
-> +/* traditional BSD */
-> +
-> +#if has_sys_siglist&&  !defined(sys_siglist)
-> +	extern char const * const sys_siglist[];
-> +#endif
-> +
-> +
-> +/* Posix (ISO/IEC 9945-1: 1990 / IEEE Std 1003.1-1990) */
-> +
-> +/*<fcntl.h>  */
-> +#ifdef O_CREAT
-> +#	define open_can_creat 1
-> +#else
-> +#	define open_can_creat 0
-> +#	define O_RDONLY 0
-> +#	define O_WRONLY 1
-> +#	define O_RDWR 2
-> +#	define O_CREAT 01000
-> +#	define O_TRUNC 02000
-> +#endif
-> +#ifndef O_EXCL
-> +#define O_EXCL 0
-> +#endif
-> +
-> +/*<sys/stat.h>  */
-> +#ifndef S_IRUSR
-> +#	ifdef S_IREAD
-> +#		define S_IRUSR S_IREAD
-> +#	else
-> +#		define S_IRUSR 0400
-> +#	endif
-> +#	ifdef S_IWRITE
-> +#		define S_IWUSR S_IWRITE
-> +#	else
-> +#		define S_IWUSR (S_IRUSR/2)
-> +#	endif
-> +#endif
-> +#ifndef S_IRGRP
-> +#	if has_getuid
-> +#		define S_IRGRP (S_IRUSR / 0010)
-> +#		define S_IWGRP (S_IWUSR / 0010)
-> +#		define S_IROTH (S_IRUSR / 0100)
-> +#		define S_IWOTH (S_IWUSR / 0100)
-> +#	else
-> +		/* single user OS -- not Posix or Unix */
-> +#		define S_IRGRP 0
-> +#		define S_IWGRP 0
-> +#		define S_IROTH 0
-> +#		define S_IWOTH 0
-> +#	endif
-> +#endif
-> +#ifndef S_ISREG
-> +#define S_ISREG(n) (((n)&  S_IFMT) == S_IFREG)
-> +#endif
-> +
-> +/*<sys/wait.h>  */
-> +#ifndef WEXITSTATUS
-> +#define WEXITSTATUS(stat_val) ((unsigned)(stat_val)>>  8)
-> +#undef WIFEXITED /* Avoid 4.3BSD incompatibility with Posix.  */
-> +#endif
-> +#ifndef WIFEXITED
-> +#define WIFEXITED(stat_val) (((stat_val)&   0377) == 0)
-> +#endif
-> +#ifndef WTERMSIG
-> +#define WTERMSIG(stat_val) ((stat_val)&  0177)
-> +#undef WIFSIGNALED /* Avoid 4.3BSD incompatibility with Posix.  */
-> +#endif
-> +#ifndef WIFSIGNALED
-> +#define WIFSIGNALED(stat_val) ((unsigned)(stat_val) - 1<   0377)
-> +#endif
-> +
-> +/*<unistd.h>  */
-> +char *getlogin P((void));
-> +#ifndef STDIN_FILENO
-> +#	define STDIN_FILENO 0
-> +#	define STDOUT_FILENO 1
-> +#	define STDERR_FILENO 2
-> +#endif
-> +#if has_fork&&  !has_vfork
-> +#	undef vfork
-> +#	define vfork fork
-> +#endif
-> +#if has_getcwd || !has_getwd
-> +	char *getcwd P((char*,size_t));
-> +#else
-> +	char *getwd P((char*));
-> +#endif
-> +#if has_setuid&&  !has_seteuid
-> +#	undef seteuid
-> +#	define seteuid setuid
-> +#endif
-> +#if has_spawn
-> +#	if ALL_ABSOLUTE
-> +#		define spawn_RCS spawnv
-> +#	else
-> +#		define spawn_RCS spawnvp
-> +#	endif
-> +#else
-> +#	if ALL_ABSOLUTE
-> +#		define exec_RCS execv
-> +#	else
-> +#		define exec_RCS execvp
-> +#	endif
-> +#endif
-> +
-> +/* utime.h */
-> +#if !has_utimbuf
-> +	struct utimbuf { time_t actime, modtime; };
-> +#endif
-> +
-> +
-> +/* Standard C library */
-> +
-> +/*<stdio.h>  */
-> +#ifndef L_tmpnam
-> +#define L_tmpnam 32 /* power of 2>  sizeof("/usr/tmp/xxxxxxxxxxxxxxx") */
-> +#endif
-> +#ifndef SEEK_SET
-> +#define SEEK_SET 0
-> +#endif
-> +#ifndef SEEK_CUR
-> +#define SEEK_CUR 1
-> +#endif
-> +#if has_mktemp
-> +	char *mktemp P((char*)); /* traditional */
-> +#else
-> +	char *tmpnam P((char*));
-> +#endif
-> +
-> +/*<stdlib.h>  */
-> +char *getenv P((char const*));
-> +void _exit P((int)) exiting;
-> +void exit P((int)) exiting;
-> +malloc_type malloc P((size_t));
-> +malloc_type realloc P((malloc_type,size_t));
-> +#ifndef EXIT_FAILURE
-> +#define EXIT_FAILURE 1
-> +#endif
-> +#ifndef EXIT_SUCCESS
-> +#define EXIT_SUCCESS 0
-> +#endif
-> +
-> +/*<string.h>  */
-> +char *strcpy P((char*,char const*));
-> +char *strchr P((char const*,int));
-> +char *strrchr P((char const*,int));
-> +void *memcpy P((void*,void const*,size_t));
-> +#if has_memmove
-> +	void *memmove P((void*,void const*,size_t));
-> +#endif
-> +
-> +/*<time.h>  */
-> +time_t time P((time_t*));
-> diff --git a/packages/rcs/files/fix-installpath.patch b/packages/rcs/files/fix-installpath.patch
-> new file mode 100644
-> index 0000000..7cdead1
-> --- /dev/null
-> +++ b/packages/rcs/files/fix-installpath.patch
-> @@ -0,0 +1,33 @@
-> +diff -Naur a/man/Makefile.in b/man/Makefile.in
-> +--- a/man/Makefile.in	1995-06-16 08:19:24.000000000 +0200
-> ++++ b/man/Makefile.in	2009-02-06 01:08:20.000000000 +0100
-> +@@ -33,9 +33,9 @@
-> + INSTALL_DATA = @INSTALL_DATA@
-> + PIC = @PIC@
-> +
-> +-prefix = @prefix@
-> +-man1dir = $(prefix)/man/man1
-> +-man5dir = $(prefix)/man/man5
-> ++mandir = @mandir@
-> ++man1dir = $(DESTDIR)$(mandir)/man1
-> ++man5dir = $(DESTDIR)$(mandir)/man5
-> + man1ext = .1
-> + man5ext = .5
-> +
-> +diff -Naur a/src/Makefile.in b/src/Makefile.in
-> +--- a/src/Makefile.in	1995-06-16 08:19:24.000000000 +0200
-> ++++ b/src/Makefile.in	2009-02-06 00:43:23.000000000 +0100
-> +@@ -110,11 +110,11 @@
-> + 	$(CC) -c $(ALL_CFLAGS) $<
-> +
-> + installdirs :: ../mkinstalldirs
-> +-	$(srcdir)/../mkinstalldirs $(bindir)
-> ++	$(srcdir)/../mkinstalldirs $(DESTDIR)$(bindir)
-> +
-> + install :: all installdirs
-> + 	for p in $(PROGRAMS); do \
-> +-	  $(INSTALL_PROGRAM) $$p $(bindir)/$$p; \
-> ++	  $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$p; \
-> + 	done
-> +
-> + uninstall ::
-> diff --git a/packages/rcs/rcs_5.7.bb b/packages/rcs/rcs_5.7.bb
-> new file mode 100644
-> index 0000000..f9c329d
-> --- /dev/null
-> +++ b/packages/rcs/rcs_5.7.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION = "The Revision Control System (RCS) manages multiple revisions of files."
-> +HOMEPAGE = "http://www.cs.purdue.edu/homes/trinkle/RCS/"
-> +SECTION = "console/network"
-> +LICENSE = ""
-> +PR = "r0"
-> +
-> +RDEPENDS = "diffutils"
-> +
-> +SRC_URI = "http://www.cs.purdue.edu/homes/trinkle/RCS/rcs-5.7.tar.Z	\
-> +	file://fix-installpath.patch;patch=1	\
-> +	file://angstrom-src-conf.h"
-> +
-> +
-> +inherit autotools
-> +
-> +
-> +EXTRA_OECONF += "--with-diffutils"
-> +
-> +
-> +do_compile_prepend() {
-> +	install -m 0644 ${WORKDIR}/angstrom-src-conf.h ${S}/src/conf.h
-> +}
+Chris
 
+======================================================================
 
+automake (GNU automake) 1.10
+Written by Tom Tromey <tromey@redhat.com>
+       and Alexandre Duret-Lutz <adl@gnu.org>.
+
+Copyright 2006 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+AUTOV is 1
+NOTE: Executing autoreconf --verbose --install --force
+--exclude=autopoint -I
+/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+-I/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+autoreconf: Entering directory `.'
+autoreconf: configure.ac: not using Gettext
+autoreconf: running: aclocal -I
+/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force
+autoreconf: configure.ac: tracing
+autoreconf: configure.ac: adding subdirectory autoconf-lib-link to autoreconf
+autoreconf: Entering directory `autoconf-lib-link'
+autoreconf: running: aclocal -I
+/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force -I m4 -I ../m4
+autoreconf: running: libtoolize --copy --force
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `../build-aux'.
+libtoolize: copying file `../build-aux/ltmain.sh'
+libtoolize: putting macros in `m4'.
+libtoolize: copying file `m4/libtool.m4'
+libtoolize: copying file `m4/ltoptions.m4'
+libtoolize: copying file `m4/ltsugar.m4'
+libtoolize: copying file `m4/ltversion.m4'
+libtoolize: copying file `m4/lt~obsolete.m4'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+autoreconf: running:
+/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/bin/autoconf
+--include=/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+--include=/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+--include=/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+--include=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+--include=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force --warnings=cross
+autoreconf: configure.ac: not using Autoheader
+autoreconf: running: automake --foreign --add-missing --copy
+--force-missing --warnings=cross
+automake: unknown warning category `cross'
+configure.ac:31: installing `../build-aux/config.sub'
+configure.ac:31: installing `../build-aux/config.guess'
+autoreconf: running: gnu-configize
+autoreconf: Leaving directory `autoconf-lib-link'
+autoreconf: configure.ac: adding subdirectory gettext-runtime to autoreconf
+autoreconf: Entering directory `gettext-runtime'
+autoreconf: running: aclocal -I
+/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force -I m4 -I ../autoconf-lib-link/m4 -I ../m4 -I gnulib-m4
+autoreconf: configure.ac: adding subdirectory libasprintf to autoreconf
+autoreconf: Entering directory `libasprintf'
+autoreconf: running: aclocal -I
+/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force -I ../../m4 -I ../m4
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `../../build-aux'.
+libtoolize: copying file `../../build-aux/ltmain.sh'
+libtoolize: putting macros in `../../m4'.
+libtoolize: copying file `../../m4/libtool.m4'
+libtoolize: copying file `../../m4/ltoptions.m4'
+libtoolize: copying file `../../m4/ltsugar.m4'
+libtoolize: copying file `../../m4/ltversion.m4'
+libtoolize: copying file `../../m4/lt~obsolete.m4'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+autoreconf: running:
+/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/bin/autoheader
+--include=/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+--include=/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+--include=/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+--include=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+--include=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force --warnings=cross
+automake: unknown warning category `cross'
+configure.ac:32: installing `../../build-aux/config.sub'
+configure.ac:32: installing `../../build-aux/config.guess'
+autoreconf: Leaving directory `libasprintf'
+autoreconf: configure.ac: AM_GNU_GETTEXT is used, but not AM_GNU_GETTEXT_VERSION
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `../build-aux'.
+libtoolize: copying file `../build-aux/ltmain.sh'
+libtoolize: putting macros in `m4'.
+libtoolize: copying file `m4/libtool.m4'
+libtoolize: copying file `m4/ltoptions.m4'
+libtoolize: copying file `m4/ltsugar.m4'
+libtoolize: copying file `m4/ltversion.m4'
+libtoolize: copying file `m4/lt~obsolete.m4'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+automake: unknown warning category `cross'
+configure.ac:55: installing `../build-aux/config.sub'
+configure.ac:55: installing `../build-aux/config.guess'
+autoreconf: Leaving directory `gettext-runtime'
+autoreconf: configure.ac: adding subdirectory gettext-tools to autoreconf
+autoreconf: Entering directory `gettext-tools'
+autoreconf: running: aclocal -I
+/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I
+../m4 -I gnulib-m4 -I libgettextpo/gnulib-m4
+autoreconf: configure.ac: adding subdirectory examples to autoreconf
+autoreconf: Entering directory `examples'
+autoreconf: running: aclocal -I
+/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link/m4/
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-runtime/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/gettext-tools/m4
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal-1
+-I /home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/aclocal
+--force -I ../../gettext-runtime/m4 -I ../../m4
+autoreconf: configure.ac: not using Libtool
+automake: unknown warning category `cross'
+autoreconf: Leaving directory `examples'
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `../build-aux'.
+libtoolize: copying file `../build-aux/ltmain.sh'
+libtoolize: putting macros in `m4'.
+libtoolize: copying file `m4/libtool.m4'
+libtoolize: copying file `m4/ltoptions.m4'
+libtoolize: copying file `m4/ltsugar.m4'
+libtoolize: copying file `m4/ltversion.m4'
+libtoolize: copying file `m4/lt~obsolete.m4'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+automake: unknown warning category `cross'
+configure.ac:78: installing `../build-aux/config.sub'
+configure.ac:78: installing `../build-aux/config.guess'
+autoreconf: Leaving directory `gettext-tools'
+automake: unknown warning category `cross'
+autoreconf: Leaving directory `.'
+NOTE: Running /home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/configure
+		    --build=x86_64-linux 		    --host=x86_64-linux 		
+--target=x86_64-linux 		
+--prefix=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr 		
+   --exec_prefix=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr
+		    --bindir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/bin
+		    --sbindir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/sbin
+		    --libexecdir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/libexec
+		    --datadir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share
+		    --sysconfdir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/etc
+		    --sharedstatedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/com
+		    --localstatedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/var
+		    --libdir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/lib
+		    --includedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/include
+		    --oldincludedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/include
+		    --infodir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/info
+		    --mandir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/man
+			 --without-lispdir 		 --disable-csharp 		 --disable-libasprintf 		
+--disable-java 		 --disable-native-java 		 --disable-openmp 		
+--with-included-glib 		 --without-emacs 	         		    ...
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating gnulib-local/Makefile
+=== configuring in autoconf-lib-link
+(/home/cfriedt/oe/build-cl9400/tmp/work/x86_64-linux/gettext-native-0.17-r3/gettext-0.17/autoconf-lib-link)
+configure: running /bin/sh ./configure
+'--prefix=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr'
+'--build=x86_64-linux' '--host=x86_64-linux' '--target=x86_64-linux'
+'--exec_prefix=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr'
+'--bindir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/bin'
+'--sbindir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/sbin'
+'--libexecdir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/libexec'
+'--datadir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share'
+'--sysconfdir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/etc'
+'--sharedstatedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/com'
+'--localstatedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/var'
+'--libdir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/lib'
+'--includedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/include'
+'--oldincludedir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/include'
+'--infodir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/info'
+'--mandir=/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/share/man'
+'--without-lispdir' '--disable-csharp' '--disable-libasprintf'
+'--disable-java' '--disable-native-java' '--disable-openmp'
+'--with-included-glib' '--without-emacs' 'build_alias=x86_64-linux'
+'host_alias=x86_64-linux' 'target_alias=x86_64-linux' 'CC=ccache gcc'
+'CFLAGS=-isystem/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/include
+-O2' 'LDFLAGS=-L/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/lib
+-Wl,-rpath-link,/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/lib
+-Wl,-rpath,/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/lib
+-Wl,-O1' 'CPPFLAGS=-isystem/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/include'
+'CPP=gcc -E' 'CXX=ccache g++'
+'CXXFLAGS=-isystem/home/cfriedt/oe/build-cl9400/tmp/staging/x86_64-linux/usr/include
+-O2' --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for x86_64-linux-gcc... ccache gcc
+checking for C compiler default output file name...
+configure: error: C compiler cannot create executables
+See `config.log' for more details.
+configure: error: ./configure failed for autoconf-lib-link
+FATAL: oe_runconf failed
 
 
