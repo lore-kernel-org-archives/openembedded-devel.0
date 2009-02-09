@@ -1,32 +1,27 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1LWDxp-0007LV-2x
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Feb 2009 19:01:05 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.101]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1LWDWP-0001Ji-9q
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Feb 2009 01:32:56 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gmm6d3$act$2@ger.gmane.org>
-References: <1234048773.6803.17.camel@alap>  <gmm6d3$act$2@ger.gmane.org>
-Date: Sun, 08 Feb 2009 10:32:37 -0700
-Message-Id: <1234114357.6803.23.camel@alap>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Re: [PATCH] python-elementtree-1.2.7-20070827-preview checksums
+	(envelope-from <sledz@DResearch.DE>) id 1LWUYz-0001lD-MA
+	for openembedded-devel@openembedded.org; Mon, 09 Feb 2009 12:44:59 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id A330216DF7D
+	for <openembedded-devel@openembedded.org>;
+	Mon,  9 Feb 2009 12:56:17 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 81F802A41EE
+	for <openembedded-devel@openembedded.org>;
+	Mon,  9 Feb 2009 12:43:44 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Mon, 9 Feb 2009 12:43:45 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF642@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: subversion libtool problem
+Thread-Index: AcmKq6l61KuqXcTwQIyWF/FxgHaSdQ==
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@openembedded.org>
+Subject: subversion libtool problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,39 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Feb 2009 18:01:05 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Feb 2009 11:45:39 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Sun, 2009-02-08 at 09:50 +0100, Koen Kooi wrote:
-> Against what tree are you generating these patches?
-> 
-> koen@dominion:/OE/org.openembedded.dev/packages/powervr-drivers$ grep 
-> element ../../conf/checksums.ini
-> [http://svn.o-hand.com/repos/web/trunk/patches/add-end-element-signal.patch]
-> [http://effbot.org/media/downloads/elementtree-1.2.7-20070827-preview.zip]
-> koen@dominion:/OE/org.openembedded.dev/packages/powervr-drivers$
-> 
-> and
-> 
-> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=8611d028e196e438097c263f416b8b89cb3ec10b
-> 
-> Furthermore, could you use git format patch on your patches to get some 
-> more metadata on the patch?
-> 
-> regards,
-> 
-> Koen
-
-Hi Koen,
-
-Sorry, I thought I'd checked the org.openembedded.dev branch. These were
-against the fso/milestone5 branch.
-
-I will learn how to use git format patch.
-
-Thanks
-Angus
-
+U2luY2UgdGhlIHNhdHVyZGF5ICJhcHIgKyBhcHItdXRpbDogbWVyZ2UgZnJvbSBwb2t5IiBjb21t
+aXQgYnkgS29lbiBpIGFsbW9zdCByZWFjaGVkIG15IGdvYWwgdG8gYnVpbGQgYSBzdWJ2ZXJzaW9u
+IGNsaWVudCBmb3IgQW5nc3Ryb20uIEFmdGVyIHBhdGNoaW5nIG5lb24gZm9yIG15c2VsZiB0aGVy
+ZSBpcyBqdXN0IHRoaXMgbGFzdCBwcm9ibGVtOg0KDQpOT1RFOiBSdW5uaW5nIHRhc2sgNDIyIG9m
+IDU3OCAoSUQ6IDcsIC9vcHQvb3BlbmVtYmVkZGVkL3BhY2thZ2VzL3N1YnZlcnNpb24vc3VidmVy
+c2lvbl8xLjQuNS5iYiwgZG9fY29tcGlsZSkNCk5PVEU6IHBhY2thZ2Ugc3VidmVyc2lvbi0xLjQu
+NTogc3RhcnRlZA0KTk9URTogcGFja2FnZSBzdWJ2ZXJzaW9uLTEuNC41LXIwOiB0YXNrIGRvX2Nv
+bXBpbGU6IHN0YXJ0ZWQNCkVSUk9SOiBmdW5jdGlvbiBkb19jb21waWxlIGZhaWxlZA0KRVJST1I6
+IGxvZyBkYXRhIGZvbGxvd3MgKC9ob21lL3NsZWR6L29lL3RtcC4xL3dvcmsvaTQ4Ni1hbmdzdHJv
+bS1saW51eC9zdWJ2ZXJzaW9uLTEuNC41LXIwL3RlbXAvbG9nLmRvX2NvbXBpbGUuNjA4OCkNCnwg
+Tk9URTogbWFrZQ0KfCAvYmluL3NoIC9ob21lL3NsZWR6L29lL3RtcC4xL3dvcmsvaTQ4Ni1hbmdz
+dHJvbS1saW51eC9zdWJ2ZXJzaW9uLTEuNC41LXIwL3N1YnZlcnNpb24tMS40LjUvbGlidG9vbCAt
+LXNpbGVudCAtLW1vZGU9Y29tcGlsZSBpNDg2LWFuZ3N0cm9tLWxpbnV4LWdjYyAtbWFyY2g9aTQ4
+NiAtaXN5c3RlbS9ob21lL3NsZWR6L29lL3RtcC4xL3N0YWdpbmcvaTQ4Ni1hbmdzdHJvbS1saW51
+eC91c3IvaW5jbHVkZSAgIC1ETElOVVg9MiAtRF9SRUVOVFJBTlQgLURfR05VX1NPVVJDRSAgLWlz
+eXN0ZW0vaG9tZS9zbGVkei9vZS90bXAuMS9zdGFnaW5nL2k0ODYtYW5nc3Ryb20tbGludXgvdXNy
+L2luY2x1ZGUgLWZleHBlbnNpdmUtb3B0aW1pemF0aW9ucyAtZnJlbmFtZS1yZWdpc3RlcnMgLWZv
+bWl0LWZyYW1lLXBvaW50ZXIgLU8yICAgLURfTEFSR0VGSUxFNjRfU09VUkNFIC1ETkVfTEZTICAg
+ICAtSS4vc3VidmVyc2lvbi9pbmNsdWRlIC1JLi9zdWJ2ZXJzaW9uIC1JL2hvbWUvc2xlZHovb2Uv
+dG1wLjEvc3RhZ2luZy9pNDg2LWFuZ3N0cm9tLWxpbnV4L3Vzci9pbmNsdWRlL25lb24gLUkvaG9t
+ZS9zbGVkei9vZS90bXAuMS9zdGFnaW5nL2k0ODYtYW5nc3Ryb20tbGludXgvdXNyL2luY2x1ZGUg
+ICAtSS9ob21lL3NsZWR6L29lL3RtcC4xL3N0YWdpbmcvaTQ4Ni1hbmdzdHJvbS1saW51eC91c3Iv
+aW5jbHVkZSAtSS9ob21lL3NsZWR6L29lL3RtcC4xL3N0YWdpbmcvaTQ4Ni1hbmdzdHJvbS1saW51
+eC91c3IvaW5jbHVkZSAgLW8gc3VidmVyc2lvbi9saWJzdm5fZGVsdGEvY2FuY2VsLmxvIC1jIHN1
+YnZlcnNpb24vbGlic3ZuX2RlbHRhL2NhbmNlbC5jDQp8IC9ob21lL3NsZWR6L29lL3RtcC4xL3dv
+cmsvaTQ4Ni1hbmdzdHJvbS1saW51eC9zdWJ2ZXJzaW9uLTEuNC41LXIwL3N1YnZlcnNpb24tMS40
+LjUvbGlidG9vbDogbGluZSA0NjM6IENEUEFUSDogY29tbWFuZCBub3QgZm91bmQNCnwgL2hvbWUv
+c2xlZHovb2UvdG1wLjEvd29yay9pNDg2LWFuZ3N0cm9tLWxpbnV4L3N1YnZlcnNpb24tMS40LjUt
+cjAvc3VidmVyc2lvbi0xLjQuNS9saWJ0b29sOiBsaW5lIDExNDE6IGZ1bmNfb3B0X3NwbGl0OiBj
+b21tYW5kIG5vdCBmb3VuZA0KfCBsaWJ0b29sOiBWZXJzaW9uIG1pc21hdGNoIGVycm9yLiAgVGhp
+cyBpcyBsaWJ0b29sIDIuMi40LCBidXQgdGhlDQp8IGxpYnRvb2w6IGRlZmluaXRpb24gb2YgdGhp
+cyBMVF9JTklUIGNvbWVzIGZyb20gYW4gb2xkZXIgcmVsZWFzZS4NCnwgbGlidG9vbDogWW91IHNo
+b3VsZCByZWNyZWF0ZSBhY2xvY2FsLm00IHdpdGggbWFjcm9zIGZyb20gbGlidG9vbCAyLjIuNA0K
+fCBsaWJ0b29sOiBhbmQgcnVuIGF1dG9jb25mIGFnYWluLg0KfCBtYWtlOiAqKiogW3N1YnZlcnNp
+b24vbGlic3ZuX2RlbHRhL2NhbmNlbC5sb10gRXJyb3IgNjMNCnwgRkFUQUw6IG9lX3J1bm1ha2Ug
+ZmFpbGVkDQo=
 
 
