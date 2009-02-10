@@ -1,26 +1,20 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LWzXr-0000Xx-JB
-	for openembedded-devel@openembedded.org; Tue, 10 Feb 2009 21:49:27 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090210204819.XJDI8485.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>;
-	Tue, 10 Feb 2009 15:48:19 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
-	id ELoJ1b0051E665w04LoJJS; Tue, 10 Feb 2009 15:48:18 -0500
-X-Authority-Analysis: v=1.0 c=1 a=VuR7V1Ii2mUA:10 a=yomc03Q_ZLsA:10
-	a=ujUVQg6_KHiZ9SmS8VoA:9 a=KGIRn0VTeBqJer4mw0QA:7
-	a=KMX1jjNHyjOzi0h4aRdG6BA6UKAA:4 a=b8hG5vVbyAkA:10
-X-CM-Score: 0.00
-Date: Tue, 10 Feb 2009 13:48:17 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090210204817.GH11815@smtp.west.cox.net>
+	(envelope-from <philip@balister.org>) id 1LX08g-0006k6-SX
+	for openembedded-devel@openembedded.org; Tue, 10 Feb 2009 22:27:31 +0100
+Received: (qmail 1346 invoked by uid 1003); 10 Feb 2009 21:27:57 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 10 Feb 2009 21:27:57 -0000
+Message-ID: <4991F101.703@balister.org>
+Date: Tue, 10 Feb 2009 16:26:25 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: [RFC] Add ubi volume image support, fix ubifs
+To: openembedded-devel@lists.openembedded.org
+References: <c16a574a0902101039q487263e2w1ba3ab42fb84c3ed@mail.gmail.com>
+In-Reply-To: <c16a574a0902101039q487263e2w1ba3ab42fb84c3ed@mail.gmail.com>
+Subject: Re: Bump euphony: 0.1.2 -> 0.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,66 +28,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Feb 2009 20:49:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Feb 2009 21:27:31 -0000
+X-Groupsio-MsgNum: 7589
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms030006020109020500080702"
 
-Hey all.  I'd like to commit the following patch.  This will add support
-for generating single image UBI volumes as well as fix creating ubifs
-images.  Going backwards here, the problem with ubifs images right now
-is that you must pass in -m -e -c -r and -o args in order to get an
-image to come out and only -r / -o are not flash part specific.  To fix
-this, on ubifs images, pass in ${MKUBIFS_ARGS}.  Why not just
-${EXTRA_IMAGECMD} ? That's because making a UBI volume requires a
-different set of mandatory arguments too.  And as there's no way (today)
-to have IMAGETYPE=foo require IMAGETYPE=bar to be built previously, we
-need to use a separate mechanism here (similar to ext2/3 and blocksize).
-To pass in the ubinize args we then go and set UBINIZE_ARGS and then we
-get our 1 image UBI volume to come out if mtd-utils-native=1.2.0+git is
-being used.
+--------------ms030006020109020500080702
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-As an example, on a board we have with a Samsung K9F2G08U0M we do:
-# Make 256MiB/128KiB
-MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2047"
-UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+Thomas Gst=E4dtner wrote:
+> The attached patch bumps euphony from 0.1.2 to 0.1.3.
 
-Note that for ubinize we get around needing to pass in a vol_size param
-by dropping it (causing the image to be exactly the size of the
-contents) and then setting the resize flag so that when written it will
-take up all the room it can.
+Any good reason to delete 0.1.2? Deleting recipes may cause problem for=20
+people using the existing version.
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 81d4c93..61e8948 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -329,7 +329,8 @@ IMAGE_CMD_tar.gz = "cd ${IMAGE_ROOTFS} && tar -zcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_
- IMAGE_CMD_tar.bz2 = "cd ${IMAGE_ROOTFS} && tar -jcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar.bz2 ."
- IMAGE_CMD_cpio = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio) ${EXTRA_IMAGECMD}"
- IMAGE_CMD_cpio.gz = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}"
--IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img"
-+IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=rootfs >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
-+IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
- 
- EXTRA_IMAGECMD = ""
- EXTRA_IMAGECMD_jffs2 = ""
-@@ -338,6 +339,7 @@ EXTRA_IMAGECMD_squashfs = ""
- EXTRA_IMAGECMD_squashfs-lzma = ""
- EXTRA_IMAGECMD_cpio = ""
- EXTRA_IMAGECMD_cpio.gz = ""
-+EXTRA_IMAGECMD_ubi = ""
- EXTRA_IMAGECMD_ubifs = ""
- 
- IMAGE_DEPENDS = ""
-@@ -350,6 +352,7 @@ IMAGE_DEPENDS_ext3 = "genext2fs-native e2fsprogs-native"
- IMAGE_DEPENDS_ext3.gz = "genext2fs-native e2fsprogs-native"
- IMAGE_DEPENDS_squashfs = "squashfs-tools-native"
- IMAGE_DEPENDS_squashfs-lzma = "squashfs-lzma-tools-native"
-+IMAGE_DEPENDS_ubi = "mtd-utils-native"
- IMAGE_DEPENDS_ubifs = "mtd-utils-native"
- 
- EXTRA_IMAGEDEPENDS = ""
-
--- 
-Tom Rini
+Philip
 
 
+--------------ms030006020109020500080702
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxMDIx
+MjYyNVowIwYJKoZIhvcNAQkEMRYEFHwqv68jk6YZkkfOQriSAEd6ImfAMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQAg3ePGG/nViGhm4UzqTzNUVh7ki0In7fFEwRHP9whl+UmTHW2j
+JMUDvF1ZaGfOOHbL2AI9VgwRQEOSQwlQDCMdBl/+VXEQtnjIzyRZYX5RJURgUX49HQIGD7RYOMHm
+i9YZXc4olpx6fh2dMHNoNwJHJcToA4ZSA/wiGhM9wlX/aZXd8WsDSheSeuahF25R8Zf8ACTxNupu
+2CGY0qfp7fIUwWyfHSxcry7sbarOJk83mda30BDYlJPsVTJXYTeqBRlYfhMl0/jiVaoqfcA+pYuQ
+pIDHKLZQMRBXEbWKfKS54H/RQIHgLKPwzYL95EEOU4EkrajH4OVFQKeMQzJGGaa/AAAAAAAA
+
+--------------ms030006020109020500080702--
