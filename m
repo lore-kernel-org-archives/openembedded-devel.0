@@ -1,30 +1,40 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [65.182.109.75] (helo=mta6.brinkster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LXFLf-0006oE-13
+	(envelope-from <John.Willis@Distant-earth.com>) id 1LXHoY-0005CD-U4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Feb 2009 14:41:55 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 5222B16DEFE
+	Wed, 11 Feb 2009 17:19:55 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta6.brinkster.com (Postfix) with ESMTP id 192043E84AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2009 14:53:26 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id A8ED22A422A
+	Wed, 11 Feb 2009 11:59:33 -0700 (MST)
+X-Virus-Scanned: amavisd-new at 
+X-Spam-Flag: NO
+X-Spam-Score: 0.479
+X-Spam-Level: 
+X-Spam-Status: No, score=0.479 tagged_above=-10 required=5 tests=[AWL=-0.253, 
+	BAYES_00=-2.599, MSGID_MULTIPLE_AT=1.449, RCVD_IN_PBL=0.905,
+	RCVD_IN_SORBS_DUL=0.877, RDNS_DYNAMIC=0.1]
+Received: from mta6.brinkster.com ([127.0.0.1])
+	by localhost (mta6.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id TtO+2kvYs9LE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2009 14:40:47 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Wed, 11 Feb 2009 14:40:47 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF653@hiob.intern.dresearch.de>
-In-Reply-To: <gmuhki$409$1@ger.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Mailinglists, was: Re:  Bugtracker Status
-Thread-Index: AcmMSHuy7SvC8i3vQuWWePSkc+7IRwABdXfg
-References: <gmeron$e6l$1@ger.gmane.org> <gmuhki$409$1@ger.gmane.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
+	Wed, 11 Feb 2009 11:59:32 -0700 (MST)
+Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
+	[82.46.19.72])
+	by mta6.brinkster.com (Postfix) with ESMTP id 933A03E84C7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Feb 2009 11:59:30 -0700 (MST)
+From: "John Willis" <John.Willis@Distant-earth.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Mailinglists, was: Re: Bugtracker Status
+References: <20090210204817.GH11815@smtp.west.cox.net>	<03499B67-9FFC-43D7-91C4-A92ECDB55370@student.utwente.nl>	<20090210225940.GI11815@smtp.west.cox.net>	<gmt3da$4r1$1@ger.gmane.org>
+	<20090211002752.GJ11815@smtp.west.cox.net>
+In-Reply-To: <20090211002752.GJ11815@smtp.west.cox.net>
+Date: Wed, 11 Feb 2009 16:18:02 -0000
+Message-ID: <000c01c98c64$51bfc3b0$f53f4b10$@Willis@Distant-earth.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcmL3/kaKvEQRe5BS2iEtW7GY580ogAgq5jQ
+Subject: Re: [RFC] Add ubi volume image support, fix ubifs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,31 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 13:41:55 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Wed, 11 Feb 2009 16:19:55 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
-> OK, Philip indicated he got confused by the proposals, so=20
-> here's a rundown
->=20
-> current situation:
->=20
-> Openembedded-announce=09
-> Openembedded-commits=09
-> Openembedded-devel=09
-> Openembedded-issues=09
-> Openembedded-stablebranch
-> Openembedded-users
-> Openembedded-private
->=20
-> new situation:
->=20
-> openembedded-devel - for humans to post patches and ask questions
-> openembedded-bots - commits, bugs, logs, etc
-> Openembedded-private - core team
+Hi,
 
-+1
+Thanks for these patches. Looking good IMHO.
+
+> >> Really?  iirc from the mounting commandline stuff that means you
+> have to
+> >> pass in machine-rootfs rather than just rootfs, ie
+> >> root=ubi0:machine-rootfs not root=ubi0:rootfs
+> >
+> > You'll have to update your bootloaders anyway, so cutting down on
+> > 'flashed wrong machine' errors is a big win :)
+> 
+> The PoV we have is of starting things from scratch, so that's not
+> something we worry about.  How about this so distros can take care of
+> it?
+
+Yep, I can't really see many normal OE users will have converted existing
+images over to UBI so it seems like the right way to start is as we mean to
+go on.
+
+I'll test these patches on the Pandora NAND image later (they are along the
+same lines as the patches I have been working on for UBI/UBIFS support but
+have the extra bonus feature of actually looking like they work). 
+It will make a nice change from post processing a TAR ;).
+ 
+Regards,
+
+John Willis
+
+
+
 
 
