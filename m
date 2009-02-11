@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXEUj-00007O-I4
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 13:47:13 +0100
+	id 1LXEa6-0000Gg-NM
+	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 13:52:47 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LXETZ-0005ID-OO
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 12:46:01 +0000
+	id 1LXEZ1-0005Sl-3P
+	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 12:51:39 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 11 Feb 2009 12:46:01 +0000
+	Wed, 11 Feb 2009 12:51:39 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 11 Feb 2009 12:46:01 +0000
+	Wed, 11 Feb 2009 12:51:39 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 11 Feb 2009 13:45:48 +0100
-Message-ID: <gmuh9s$2gt$1@ger.gmane.org>
+Date: Wed, 11 Feb 2009 13:51:30 +0100
+Message-ID: <gmuhki$409$1@ger.gmane.org>
 References: <200901230131.09511.mickey@vanille-media.de>	<87wscmn8ne.fsf@neumann.lab.ossystems.com.br>	<49799C30.90508@epfl.ch>	<glc8ce$eoh$1@ger.gmane.org>
 	<gmeron$e6l$1@ger.gmane.org>
 Mime-Version: 1.0
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 12:47:13 -0000
+X-List-Received-Date: Wed, 11 Feb 2009 12:52:47 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -113,8 +113,23 @@ On 05-02-09 15:06, Koen Kooi wrote:
 > No objections, only support for my proposal, so can this get implemented
 > now?
 
-Still no objections and still no action. Can I shut down the unneeded 
-lists myself now?
+OK, Philip indicated he got confused by the proposals, so here's a rundown
+
+current situation:
+
+Openembedded-announce	
+Openembedded-commits	
+Openembedded-devel	
+Openembedded-issues	
+Openembedded-stablebranch
+Openembedded-users
+Openembedded-private
+
+new situation:
+
+openembedded-devel - for humans to post patches and ask questions
+openembedded-bots - commits, bugs, logs, etc
+Openembedded-private - core team
 
 regards,
 
