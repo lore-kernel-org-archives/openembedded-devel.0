@@ -1,34 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXAB3-0006tJ-05
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 09:10:37 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LXA9w-0003cY-Qq
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 08:09:28 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 11 Feb 2009 08:09:28 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 11 Feb 2009 08:09:28 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 11 Feb 2009 09:09:15 +0100
-Message-ID: <gmu13b$dto$1@ger.gmane.org>
-References: <20090210204817.GH11815@smtp.west.cox.net>	<03499B67-9FFC-43D7-91C4-A92ECDB55370@student.utwente.nl>	<20090210225940.GI11815@smtp.west.cox.net>	<gmt3da$4r1$1@ger.gmane.org>
-	<20090211002752.GJ11815@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090131 Shredder/3.0b2pre
-In-Reply-To: <20090211002752.GJ11815@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Add ubi volume image support, fix ubifs
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <g.development@gmx.net>) id 1LXChR-0001RK-D5
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Feb 2009 11:52:13 +0100
+Received: (qmail 6638 invoked by uid 0); 11 Feb 2009 10:51:04 -0000
+Received: from 212.42.238.78 by www031.gmx.net with HTTP;
+	Wed, 11 Feb 2009 11:51:04 +0100 (CET)
+Date: Wed, 11 Feb 2009 11:51:04 +0100
+From: "Ali Botorabi" <g.development@gmx.net>
+In-Reply-To: <mailman.0.1234264323.11785.openembedded-devel@lists.openembedded.org>
+Message-ID: <20090211105104.67620@gmx.net>
+MIME-Version: 1.0
+References: <mailman.0.1234264323.11785.openembedded-devel@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org
+X-Authenticated: #11512862
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX19sio5+V4RsJghkq3/hDzT6OGf4IlLS1yRmMRTFYo
+	AEN1n5KUYZ/rHhaZjpHY7xoqwjNa679d8usg== 
+X-GMX-UID: +cH5ISNPTlI8d3bJ2Ghr8S1OU2poZVkM
+X-FuHaFi: 0.6
+Subject: Problem with baking GStreamer Plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 08:10:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Feb 2009 10:52:13 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
 
-On 11-02-09 01:27, Tom Rini wrote:
-> On Wed, Feb 11, 2009 at 12:42:34AM +0100, Koen Kooi wrote:
->> On 10-02-09 23:59, Tom Rini wrote:
-> [snip]
->>> Really?  iirc from the mounting commandline stuff that means you have to
->>> pass in machine-rootfs rather than just rootfs, ie
->>> root=ubi0:machine-rootfs not root=ubi0:rootfs
->> You'll have to update your bootloaders anyway, so cutting down on
->> 'flashed wrong machine' errors is a big win :)
->
-> The PoV we have is of starting things from scratch, so that's not
-> something we worry about.  How about this so distros can take care of
-> it?
+Hello,
 
-Even better, since I wonder whow ubifs handles 
-'somereallylongmachinename-rootfs' :)
+I am trying to include some of the GStreamer plugins into an own image. The image bases on angstrom base and X11 images. Koen helped me to setup a task for the GStreamer plugins:
 
-regards,
+-------------------------------------
+DESCRIPTION = "ToDo"
+LICENSE = "ToDo"
+PR = "r1.4"
 
-Koen
+#PREFERRED_PROVIDER_gst-plugin-alsa ?= "gst-plugins-good"
 
+DEPENDS = "gst-plugins-base gst-plugins-bad gst-plugins-good gst-plugins-ugly libogg libvorbis directfb"
+RDEPENDS_${PN} = "\
+        libid3tag \
+        libsidplay \
+        libvorbis \
+        libogg \
+        directfb \
+        alsa-lib \
+        gstreamer \
+        gst-plugin-alsa \
+        gst-plugin-icydemux \
+        gst-plugin-asfdemux \
+        gst-plugin-dvdlpcmdec \
+        gst-plugin-mpegstream \
+        gst-plugin-realmedia \
+"
+
+inherit task
+------------------------------
+
+This task is included by the image recipe. Bitbake evaluates the task and complains about various packages providing the plugins (base, good, ugly, bad). I have also tried to use PREFERRED_PROVIDER, it had no effect.
+
+The major problem is that the plugins do not end in the image.
+
+Any help is highly appreciated.
+
+Cheers
+Botorabi
+
+-- 
+Psssst! Schon vom neuen GMX MultiMessenger gehört? Der kann`s mit allen: http://www.gmx.net/de/go/multimessenger01
 
 
