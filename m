@@ -1,42 +1,40 @@
-Received: from [64.233.170.188] (helo=rn-out-0910.google.com)
+Received: from [65.182.109.73] (helo=mta4.brinkster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LXKuQ-0005pr-Fg
+	(envelope-from <John.Willis@Distant-earth.com>) id 1LXLRN-0006sl-8s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Feb 2009 20:38:10 +0100
-Received: by rn-out-0910.google.com with SMTP id j42so384417rne.20
+	Wed, 11 Feb 2009 21:12:13 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta4.brinkster.com (Postfix) with ESMTP id 377795ED427
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2009 11:37:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=8funYdz//iYRRn3hIVIrYy/mzOHZzDdres/xfT51yjc=;
-	b=sK7QHzKVe/X3B9YgjR1u6TVlP3kyhvMsICPHVDfSHaGBYnW0T5qdqHAJJ1xkKqmQOB
-	oBU0x+VWqgxHe0Cz6c0WLSSST0mTZMLU107Gy4pbY6ojpQ6pmTpYtmNkDy1Vc+kvZybw
-	aRexKofbgkaUm0WpZfiC9oqtQhV43OwfFrpvI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Bevw7AonnLY9emYaV61/p5tYzMFgg0SPytzgfH14QT/WQG3kIdDd8jP47B6BFmlN+u
-	eHKqCR1BVWEpFbZQHUq79x684YeA6telDQgSDlA3UfDLm0cZ13n1UQD/EixTK7OvWMa9
-	DTIT6Dzq0GoqGwAIHG0vK9TX4pjYs9A9KTgzU=
-Received: by 10.143.8.10 with SMTP id l10mr10750wfi.175.1234381019860;
-	Wed, 11 Feb 2009 11:36:59 -0800 (PST)
-Received: from gmail.com (adsl-71-146-3-29.dsl.pltn13.sbcglobal.net
-	[71.146.3.29])
-	by mx.google.com with ESMTPS id 22sm15322637wfi.1.2009.02.11.11.36.59
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 11 Feb 2009 11:36:59 -0800 (PST)
-Date: Wed, 11 Feb 2009 11:36:57 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090211193657.GB16064@gmail.com>
-References: <20090126074953.GA26318@gmail.com>
-	<1232958250.4890.104.camel@lenovo.internal.reciva.com>
+	Wed, 11 Feb 2009 15:11:01 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+X-Spam-Flag: NO
+X-Spam-Score: 0.38
+X-Spam-Level: 
+X-Spam-Status: No, score=0.38 tagged_above=-10 required=5 tests=[AWL=-0.352,
+	BAYES_00=-2.599, MSGID_MULTIPLE_AT=1.449, RCVD_IN_PBL=0.905,
+	RCVD_IN_SORBS_DUL=0.877, RDNS_DYNAMIC=0.1]
+Received: from mta4.brinkster.com ([127.0.0.1])
+	by localhost (mta4.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5unz06GGwbEN
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Feb 2009 15:11:00 -0500 (EST)
+Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
+	[82.46.19.72])
+	by mta4.brinkster.com (Postfix) with ESMTP id 2C5DB5ED4A5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Feb 2009 15:11:00 -0500 (EST)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <008c01c98b68$bb7386e0$325a94a0$@Willis@Distant-earth.com>
+	<499325FC.6030401@dls.net>
+In-Reply-To: <499325FC.6030401@dls.net>
+Date: Wed, 11 Feb 2009 20:10:24 -0000
+Message-ID: <003701c98c84$c722d410$55687c30$@Willis@Distant-earth.com>
 MIME-Version: 1.0
-In-Reply-To: <1232958250.4890.104.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: fix for strl functions in alsautils
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcmMf9k69zpf2AD9S6qY7fjfXfRgqQAA3cbw
+Subject: Re: [PATCH] Add package for ntfs-3g 2009.1.1 (latest) and update checksums.ini accordingly.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,89 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 19:38:10 -0000
-X-Groupsio-MsgNum: 7614
-Content-Type: multipart/mixed; boundary="fUYQa+Pmc3FrFX/N"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Feb 2009 20:12:13 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
---fUYQa+Pmc3FrFX/N
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On (26/01/09 08:24), Phil Blundell wrote:
-> On Sun, 2009-01-25 at 23:49 -0800, Khem Raj wrote:
-> > * These funtions are provided by C libraries like uclibc
-> >         Declaring them static here causes static not static declaration
-> >         issues reported by gcc.
-> > [...]
-> > + #ifdef __GLIBC__
-> > +-static size_t strlcpy(char *dst, const char *src, size_t size)
-> > ++size_t strlcpy(char *dst, const char *src, size_t size)
-> > + {
+> > Builds fine and quickly tested with no issues.
 > 
-> Wouldn't it be better to change that "#ifdef __GLIBC__" to something
-> more appropriate?  With your change it looks like you will still get
-> useless copies of these functions in the resulting binaries.
-
-Attached patch detects these functions during configure and
-includes/excludes them accordingly.
-
+> I can (and will) test on the NSLU2 (ixp4xx kernel).  What
+> machines/distros have you tested with?
 > 
-> p.
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> If nobody objects, I'll add this version.
 
---fUYQa+Pmc3FrFX/N
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="alsa-utils-autoconf-strl-funcs.patch"
+Tested on the OMAP3EVM and Pandora (Both OMAP3/ARMv7). Basic OE images,
+Angstrom GPE image and the Pandora Angstrom images. I did some controlled
+read and write tests (100MB test file) and all seems good.
 
-Index: alsa-utils-1.0.18/alsactl/init_sysdeps.c
-===================================================================
---- alsa-utils-1.0.18.orig/alsactl/init_sysdeps.c	2008-10-29 05:42:11.000000000 -0700
-+++ alsa-utils-1.0.18/alsactl/init_sysdeps.c	2009-02-10 23:17:47.000000000 -0800
-@@ -17,7 +17,7 @@
-  *
-  */
+Also left it playing videos off the NTFS volume in a loop for about 12 hours
+(something else I was testing). 
+No issues.
  
--#ifdef __GLIBC__
-+#if !HAVE_STRLCPY
- static size_t strlcpy(char *dst, const char *src, size_t size)
- {
- 	size_t bytes = 0;
-@@ -36,7 +36,10 @@
- 		*q = '\0';
- 	return bytes;
- }
-+#endif /* !HAVE_STRLCPY */
- 
-+
-+#if !HAVE_STRLCAT
- static size_t strlcat(char *dst, const char *src, size_t size)
- {
- 	size_t bytes = 0;
-@@ -60,4 +63,4 @@
- 	*q = '\0';
- 	return bytes;
- }
--#endif /* __GLIBC__ */
-+#endif /* !HAVE_STRLCAT */
-Index: alsa-utils-1.0.18/configure.in
-===================================================================
---- alsa-utils-1.0.18.orig/configure.in	2008-10-29 05:48:01.000000000 -0700
-+++ alsa-utils-1.0.18/configure.in	2009-02-10 23:02:07.000000000 -0800
-@@ -6,7 +6,7 @@
- 
- AM_GNU_GETTEXT([external])
- AM_GNU_GETTEXT_VERSION([0.15])
--
-+AC_CHECK_FUNCS(strlcat strlcpy)
- dnl Checks for programs.
- 
- dnl try to gues cross-compiler if not set
+> > Note: the ntfs-3g v1 package is suspect (download pulled from
+> > http://www.ntfs-3g.org/) so that may well be best removed? Not sure
+> what the
+> > process is on such things.
+> 
+> Can you clarify what you mean by suspect?
 
---fUYQa+Pmc3FrFX/N--
+If you go to ntfs-3g.org you find the download for version 1.0 has long
+since been pulled in favor of newer releases. In this case that is what I
+mean by suspect.
+
+Regards,
+
+John
+
+
+
+
