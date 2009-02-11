@@ -1,31 +1,34 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LX9lz-0006My-UM
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 08:44:47 +0100
+	id 1LXAB3-0006tJ-05
+	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 09:10:37 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LX9ku-0002gD-Fv
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 07:43:36 +0000
-Received: from p5483a6b4.dip0.t-ipconnect.de ([84.131.166.180])
+	id 1LXA9w-0003cY-Qq
+	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 08:09:28 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 11 Feb 2009 07:43:36 +0000
-Received: from vjensen by p5483a6b4.dip0.t-ipconnect.de with local (Gmexim 0.1
+	Wed, 11 Feb 2009 08:09:28 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 11 Feb 2009 07:43:36 +0000
+	Wed, 11 Feb 2009 08:09:28 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Vitus Jensen <vjensen@gmx.de>
-Date: Wed, 11 Feb 2009 07:43:22 +0000 (UTC)
-Message-ID: <gmtviq$6l8$1@ger.gmane.org>
-References: <gmg4k5$rdj$1@ger.gmane.org> <gmgvtg$1i9$1@ger.gmane.org>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 11 Feb 2009 09:09:15 +0100
+Message-ID: <gmu13b$dto$1@ger.gmane.org>
+References: <20090210204817.GH11815@smtp.west.cox.net>	<03499B67-9FFC-43D7-91C4-A92ECDB55370@student.utwente.nl>	<20090210225940.GI11815@smtp.west.cox.net>	<gmt3da$4r1$1@ger.gmane.org>
+	<20090211002752.GJ11815@smtp.west.cox.net>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5483a6b4.dip0.t-ipconnect.de
-User-Agent: Pan/0.133 (House of Butterflies)
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090131 Shredder/3.0b2pre
+In-Reply-To: <20090211002752.GJ11815@smtp.west.cox.net>
 Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] rcs_5.7.bb: The Revision Control System (RCS)
+Subject: Re: [RFC] Add ubi volume image support, fix ubifs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,35 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 07:44:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Feb 2009 08:10:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Am Fri, 06 Feb 2009 10:29:20 +0100 schrieb Koen Kooi:
+On 11-02-09 01:27, Tom Rini wrote:
+> On Wed, Feb 11, 2009 at 12:42:34AM +0100, Koen Kooi wrote:
+>> On 10-02-09 23:59, Tom Rini wrote:
+> [snip]
+>>> Really?  iirc from the mounting commandline stuff that means you have to
+>>> pass in machine-rootfs rather than just rootfs, ie
+>>> root=ubi0:machine-rootfs not root=ubi0:rootfs
+>> You'll have to update your bootloaders anyway, so cutting down on
+>> 'flashed wrong machine' errors is a big win :)
+>
+> The PoV we have is of starting things from scratch, so that's not
+> something we worry about.  How about this so distros can take care of
+> it?
 
-> On 06-02-09 02:43, Vitus Jensen wrote:
->> Please review and comment.
-> 
-> How valid is that conf.h for all architectures and machines in OE?
+Even better, since I wonder whow ubifs handles 
+'somereallylongmachinename-rootfs' :)
 
-conf.h is copied from optware (http://trac.nslu2-linux.org/optware/
-browser/trunk/sources/rcs/slug-src-conf.h?rev=2120), just moved /opt/bin 
-to /usr/bin.  In my understanding all those settings are libc and syscall 
-related, so different architectures and machines won't matter.  Switching 
-from glibc to uclibc could make a difference but I have no experience 
-with uclibc.
+regards,
 
-RCS uses a conf.sh script to produce conf.h which I find hard to modify 
-to run it inside OE.  Is this really neccessary and if, would be some 
-kind of do_after_configure() better than do_compile() to produce conf.h?
-
-Best regards,
-   Vitus
-
-PS: sorry, had to remove the patch, pan insists in wordwrapping
-
--- 
-Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
+Koen
 
 
 
