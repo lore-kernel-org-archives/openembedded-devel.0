@@ -1,27 +1,34 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <g.development@gmx.net>) id 1LXChR-0001RK-D5
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Feb 2009 11:52:13 +0100
-Received: (qmail 6638 invoked by uid 0); 11 Feb 2009 10:51:04 -0000
-Received: from 212.42.238.78 by www031.gmx.net with HTTP;
-	Wed, 11 Feb 2009 11:51:04 +0100 (CET)
-Date: Wed, 11 Feb 2009 11:51:04 +0100
-From: "Ali Botorabi" <g.development@gmx.net>
-In-Reply-To: <mailman.0.1234264323.11785.openembedded-devel@lists.openembedded.org>
-Message-ID: <20090211105104.67620@gmx.net>
-MIME-Version: 1.0
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXDZk-0001kd-E6
+	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 12:48:20 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LXDYe-0003CW-2f
+	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 11:47:12 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 11 Feb 2009 11:47:12 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 11 Feb 2009 11:47:12 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 11 Feb 2009 12:47:02 +0100
+Message-ID: <gmudrn$n1p$1@ger.gmane.org>
 References: <mailman.0.1234264323.11785.openembedded-devel@lists.openembedded.org>
-To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #11512862
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX19sio5+V4RsJghkq3/hDzT6OGf4IlLS1yRmMRTFYo
-	AEN1n5KUYZ/rHhaZjpHY7xoqwjNa679d8usg== 
-X-GMX-UID: +cH5ISNPTlI8d3bJ2Ghr8S1OU2poZVkM
-X-FuHaFi: 0.6
-Subject: Problem with baking GStreamer Plugins
+	<20090211105104.67620@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090131 Shredder/3.0b2pre
+In-Reply-To: <20090211105104.67620@gmx.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Problem with baking GStreamer Plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,51 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 10:52:13 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Feb 2009 11:48:20 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On 11-02-09 11:51, Ali Botorabi wrote:
+> Hello,
+>
+> I am trying to include some of the GStreamer plugins into an own image. The image bases on angstrom base and X11 images. Koen helped me to setup a task for the GStreamer plugins:
 
-I am trying to include some of the GStreamer plugins into an own image. The image bases on angstrom base and X11 images. Koen helped me to setup a task for the GStreamer plugins:
+[snip]
 
--------------------------------------
-DESCRIPTION = "ToDo"
-LICENSE = "ToDo"
-PR = "r1.4"
+> The major problem is that the plugins do not end in the image.
 
-#PREFERRED_PROVIDER_gst-plugin-alsa ?= "gst-plugins-good"
+There is a simple solution to this, but I'm not sure everyone will like it:
 
-DEPENDS = "gst-plugins-base gst-plugins-bad gst-plugins-good gst-plugins-ugly libogg libvorbis directfb"
-RDEPENDS_${PN} = "\
-        libid3tag \
-        libsidplay \
-        libvorbis \
-        libogg \
-        directfb \
-        alsa-lib \
-        gstreamer \
-        gst-plugin-alsa \
-        gst-plugin-icydemux \
-        gst-plugin-asfdemux \
-        gst-plugin-dvdlpcmdec \
-        gst-plugin-mpegstream \
-        gst-plugin-realmedia \
-"
+--- a/packages/gstreamer/gst-plugins.inc
++++ b/packages/gstreamer/gst-plugins.inc
+@@ -3,8 +3,6 @@ DESCRIPTION = "Plugins for GStreamer"
+  DEPENDS = "gstreamer libmikmod liboil libogg tremor libvorbis"
+  DEPENDS += "${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad 
+libid3tag', d)}"
 
-inherit task
-------------------------------
+-PACKAGES_DYNAMIC = "gst-plugin-*"
+-
 
-This task is included by the image recipe. Bitbake evaluates the task and complains about various packages providing the plugins (base, good, ugly, bad). I have also tried to use PREFERRED_PROVIDER, it had no effect.
+--- /dev/null   2008-08-09 15:46:29.777083446 +0200
++++ gst-plugins.bb      2009-02-11 12:43:23.000000000 +0100
+@@ -0,0 +1,5 @@
++
++DEPENDS = "gst-plugins-good gst-plugins-bad gst-plugins-ugly"
++
++PACKAGES_DYNAMIC = "gst-plugin-*"
++
 
-The major problem is that the plugins do not end in the image.
+Doing it like that will git rid of the PACKAGES_DYNAMIC statements 
+confusing eachother. It also means you have to build *all* plugin sets.
 
-Any help is highly appreciated.
+regards,
 
-Cheers
-Botorabi
+Koen
 
--- 
-Psssst! Schon vom neuen GMX MultiMessenger gehört? Der kann`s mit allen: http://www.gmx.net/de/go/multimessenger01
 
 
