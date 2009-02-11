@@ -1,40 +1,35 @@
-Received: from [65.182.109.75] (helo=mta6.brinkster.com)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1LXHoY-0005CD-U4
+	(envelope-from <otavio@freedom.ind.br>) id 1LXIlc-0003Zu-4o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Feb 2009 17:19:55 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta6.brinkster.com (Postfix) with ESMTP id 192043E84AF
+	Wed, 11 Feb 2009 18:20:56 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 63D5740205
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2009 11:59:33 -0700 (MST)
-X-Virus-Scanned: amavisd-new at 
-X-Spam-Flag: NO
-X-Spam-Score: 0.479
-X-Spam-Level: 
-X-Spam-Status: No, score=0.479 tagged_above=-10 required=5 tests=[AWL=-0.253, 
-	BAYES_00=-2.599, MSGID_MULTIPLE_AT=1.449, RCVD_IN_PBL=0.905,
-	RCVD_IN_SORBS_DUL=0.877, RDNS_DYNAMIC=0.1]
-Received: from mta6.brinkster.com ([127.0.0.1])
-	by localhost (mta6.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TtO+2kvYs9LE
+	Wed, 11 Feb 2009 13:19:59 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id D80F2740C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2009 11:59:32 -0700 (MST)
-Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
-	[82.46.19.72])
-	by mta6.brinkster.com (Postfix) with ESMTP id 933A03E84C7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2009 11:59:30 -0700 (MST)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <20090210204817.GH11815@smtp.west.cox.net>	<03499B67-9FFC-43D7-91C4-A92ECDB55370@student.utwente.nl>	<20090210225940.GI11815@smtp.west.cox.net>	<gmt3da$4r1$1@ger.gmane.org>
-	<20090211002752.GJ11815@smtp.west.cox.net>
-In-Reply-To: <20090211002752.GJ11815@smtp.west.cox.net>
-Date: Wed, 11 Feb 2009 16:18:02 -0000
-Message-ID: <000c01c98c64$51bfc3b0$f53f4b10$@Willis@Distant-earth.com>
+	Wed, 11 Feb 2009 15:19:55 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 89516610054; Wed, 11 Feb 2009 15:19:42 -0200 (BRST)
+From: Otavio Salvador <otavio@debian.org>
+To: openembedded-devel@lists.openembedded.org
+Organization: O.S. Systems Ltda.
+References: <200901230131.09511.mickey@vanille-media.de>
+	<87wscmn8ne.fsf@neumann.lab.ossystems.com.br> <49799C30.90508@epfl.ch>
+	<glc8ce$eoh$1@ger.gmane.org> <gmeron$e6l$1@ger.gmane.org>
+	<gmuhki$409$1@ger.gmane.org> <4992D0A3.9040503@balister.org>
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Wed, 11 Feb 2009 15:19:42 -0200
+In-Reply-To: <4992D0A3.9040503@balister.org> (Philip Balister's message of
+	"Wed, 11 Feb 2009 08:20:35 -0500")
+Message-ID: <87prho51sh.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AcmL3/kaKvEQRe5BS2iEtW7GY580ogAgq5jQ
-Subject: Re: [RFC] Add ubi volume image support, fix ubifs
+Subject: Re: Mailinglists, was: Re: Bugtracker Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,42 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 16:19:55 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-us
+X-List-Received-Date: Wed, 11 Feb 2009 17:20:56 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hi,
+Philip Balister <philip@balister.org> writes:
 
-Thanks for these patches. Looking good IMHO.
+> Although I would keep the stable branch list for now.
 
-> >> Really?  iirc from the mounting commandline stuff that means you
-> have to
-> >> pass in machine-rootfs rather than just rootfs, ie
-> >> root=ubi0:machine-rootfs not root=ubi0:rootfs
-> >
-> > You'll have to update your bootloaders anyway, so cutting down on
-> > 'flashed wrong machine' errors is a big win :)
-> 
-> The PoV we have is of starting things from scratch, so that's not
-> something we worry about.  How about this so distros can take care of
-> it?
+Personally I think it should be at same development list since even
+using the stable branch it is a development of a distribution using OE.
 
-Yep, I can't really see many normal OE users will have converted existing
-images over to UBI so it seems like the right way to start is as we mean to
-go on.
+This also makes easier to spot bugs that needs fixing and/or backporting
+of fixes.
 
-I'll test these patches on the Pandora NAND image later (they are along the
-same lines as the patches I have been working on for UBI/UBIFS support but
-have the extra bonus feature of actually looking like they work). 
-It will make a nice change from post processing a TAR ;).
- 
-Regards,
-
-John Willis
-
-
-
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
