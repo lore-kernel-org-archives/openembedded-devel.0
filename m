@@ -1,21 +1,42 @@
-Received: from [216.145.245.200] (helo=mx04.dls.net)
+Received: from [64.233.170.188] (helo=rn-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LXKil-0005TY-Ps
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 20:26:08 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx04.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LXKhd-0004nU-A4
-	for openembedded-devel@openembedded.org; Wed, 11 Feb 2009 13:24:57 -0600
-Message-ID: <499325FC.6030401@dls.net>
-Date: Wed, 11 Feb 2009 13:24:44 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
+	(envelope-from <raj.khem@gmail.com>) id 1LXKuQ-0005pr-Fg
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Feb 2009 20:38:10 +0100
+Received: by rn-out-0910.google.com with SMTP id j42so384417rne.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Feb 2009 11:37:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=8funYdz//iYRRn3hIVIrYy/mzOHZzDdres/xfT51yjc=;
+	b=sK7QHzKVe/X3B9YgjR1u6TVlP3kyhvMsICPHVDfSHaGBYnW0T5qdqHAJJ1xkKqmQOB
+	oBU0x+VWqgxHe0Cz6c0WLSSST0mTZMLU107Gy4pbY6ojpQ6pmTpYtmNkDy1Vc+kvZybw
+	aRexKofbgkaUm0WpZfiC9oqtQhV43OwfFrpvI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Bevw7AonnLY9emYaV61/p5tYzMFgg0SPytzgfH14QT/WQG3kIdDd8jP47B6BFmlN+u
+	eHKqCR1BVWEpFbZQHUq79x684YeA6telDQgSDlA3UfDLm0cZ13n1UQD/EixTK7OvWMa9
+	DTIT6Dzq0GoqGwAIHG0vK9TX4pjYs9A9KTgzU=
+Received: by 10.143.8.10 with SMTP id l10mr10750wfi.175.1234381019860;
+	Wed, 11 Feb 2009 11:36:59 -0800 (PST)
+Received: from gmail.com (adsl-71-146-3-29.dsl.pltn13.sbcglobal.net
+	[71.146.3.29])
+	by mx.google.com with ESMTPS id 22sm15322637wfi.1.2009.02.11.11.36.59
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 11 Feb 2009 11:36:59 -0800 (PST)
+Date: Wed, 11 Feb 2009 11:36:57 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090211193657.GB16064@gmail.com>
+References: <20090126074953.GA26318@gmail.com>
+	<1232958250.4890.104.camel@lenovo.internal.reciva.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <008c01c98b68$bb7386e0$325a94a0$@Willis@Distant-earth.com>
-In-Reply-To: <008c01c98b68$bb7386e0$325a94a0$@Willis@Distant-earth.com>
-Subject: Re: [PATCH] Add package for ntfs-3g 2009.1.1 (latest) and update checksums.ini accordingly.
+In-Reply-To: <1232958250.4890.104.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: Re: fix for strl functions in alsautils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,76 +50,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2009 19:26:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Feb 2009 19:38:10 -0000
+X-Groupsio-MsgNum: 7614
+Content-Type: multipart/mixed; boundary="fUYQa+Pmc3FrFX/N"
+Content-Disposition: inline
 
-John Willis wrote:
-> This patch simply updates the NTFS-3G package to use the latest release
-> tarball (January 22, 2009 - 2009.1.1).
+--fUYQa+Pmc3FrFX/N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On (26/01/09 08:24), Phil Blundell wrote:
+> On Sun, 2009-01-25 at 23:49 -0800, Khem Raj wrote:
+> > * These funtions are provided by C libraries like uclibc
+> >         Declaring them static here causes static not static declaration
+> >         issues reported by gcc.
+> > [...]
+> > + #ifdef __GLIBC__
+> > +-static size_t strlcpy(char *dst, const char *src, size_t size)
+> > ++size_t strlcpy(char *dst, const char *src, size_t size)
+> > + {
 > 
-> Builds fine and quickly tested with no issues.
+> Wouldn't it be better to change that "#ifdef __GLIBC__" to something
+> more appropriate?  With your change it looks like you will still get
+> useless copies of these functions in the resulting binaries.
 
-I can (and will) test on the NSLU2 (ixp4xx kernel).  What
-machines/distros have you tested with?
+Attached patch detects these functions during configure and
+includes/excludes them accordingly.
 
-If nobody objects, I'll add this version.
-
-> Note: the ntfs-3g v1 package is suspect (download pulled from
-> http://www.ntfs-3g.org/) so that may well be best removed? Not sure what the
-> process is on such things.
-
-Can you clarify what you mean by suspect?
-
-> Regards,
 > 
-> John Willis
+> p.
 > 
-> Signed-off-by: David-John Willis <John.Willis@Distant-earth.com>
-> ---
->  conf/checksums.ini                   |    4 ++++
->  packages/ntfs-3g/ntfs-3g_2009.1.1.bb |   12 ++++++++++++
->  2 files changed, 16 insertions(+), 0 deletions(-)
->  mode change 100644 => 100755 conf/checksums.ini
->  create mode 100755 packages/ntfs-3g/ntfs-3g_2009.1.1.bb
 > 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> old mode 100644
-> new mode 100755
-> index 0eba0c8..5036fa9
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -15766,6 +15766,10 @@
-> sha256=0bf226bb3a1716e6eb97355e08a7ffcf09aadfb91ba41ccef2ef1ba7a01719a2
->  md5=873a8de662849d129fc7c475ad3f5447
->  sha256=b5bbf81230bb21573d69fc471721b0b0c404eaa5040ef28e7dcec38320a1b2e4
->  
-> +[http://www.ntfs-3g.org/ntfs-3g-2009.1.1.tgz]
-> +md5=56e4aed24d0c2543597de0ba52b3ed64
-> +sha256=0e02ff891645658c1801ba7d665c0ff3a4231e5570b974a803ffc2974ef68e45
-> +
->  [http://downloads.sourceforge.net/ntop/ntop-3.0.tgz]
->  md5=1ec6055c75f1acbb5d5600492481ef85
->  sha256=c50cdf2c6cf7309f88c7ec0a56158eca76c80532502b36f3378eeca433423d83
-> diff --git a/packages/ntfs-3g/ntfs-3g_2009.1.1.bb
-> b/packages/ntfs-3g/ntfs-3g_2009.1.1.bb
-> new file mode 100755
-> index 0000000..7d73b79
-> --- /dev/null
-> +++ b/packages/ntfs-3g/ntfs-3g_2009.1.1.bb
-> @@ -0,0 +1,12 @@
-> +DESCRIPTION = "The NTFS-3G driver is an open source, freely available NTFS
-> driver for Linux with read and write support."
-> +HOMEPAGE = "http://www.ntfs-3g.org/"
-> +LICENSE = "GPLv2"
-> +DEPENDS = "fuse"
-> +RDEPENDS = "fuse"
-> +PR = "r0"
-> +
-> +SRC_URI = http://www.ntfs-3g.org/ntfs-3g-${PV}.tgz
-> +
-> +inherit autotools
-> +
-> +EXTRA_OEMAKE = "LDCONFIG=echo"
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--fUYQa+Pmc3FrFX/N
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="alsa-utils-autoconf-strl-funcs.patch"
 
+Index: alsa-utils-1.0.18/alsactl/init_sysdeps.c
+===================================================================
+--- alsa-utils-1.0.18.orig/alsactl/init_sysdeps.c	2008-10-29 05:42:11.000000000 -0700
++++ alsa-utils-1.0.18/alsactl/init_sysdeps.c	2009-02-10 23:17:47.000000000 -0800
+@@ -17,7 +17,7 @@
+  *
+  */
+ 
+-#ifdef __GLIBC__
++#if !HAVE_STRLCPY
+ static size_t strlcpy(char *dst, const char *src, size_t size)
+ {
+ 	size_t bytes = 0;
+@@ -36,7 +36,10 @@
+ 		*q = '\0';
+ 	return bytes;
+ }
++#endif /* !HAVE_STRLCPY */
+ 
++
++#if !HAVE_STRLCAT
+ static size_t strlcat(char *dst, const char *src, size_t size)
+ {
+ 	size_t bytes = 0;
+@@ -60,4 +63,4 @@
+ 	*q = '\0';
+ 	return bytes;
+ }
+-#endif /* __GLIBC__ */
++#endif /* !HAVE_STRLCAT */
+Index: alsa-utils-1.0.18/configure.in
+===================================================================
+--- alsa-utils-1.0.18.orig/configure.in	2008-10-29 05:48:01.000000000 -0700
++++ alsa-utils-1.0.18/configure.in	2009-02-10 23:02:07.000000000 -0800
+@@ -6,7 +6,7 @@
+ 
+ AM_GNU_GETTEXT([external])
+ AM_GNU_GETTEXT_VERSION([0.15])
+-
++AC_CHECK_FUNCS(strlcat strlcpy)
+ dnl Checks for programs.
+ 
+ dnl try to gues cross-compiler if not set
+
+--fUYQa+Pmc3FrFX/N--
