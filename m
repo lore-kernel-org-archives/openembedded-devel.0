@@ -1,27 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1LXkHz-0006PQ-Bq; Thu, 12 Feb 2009 23:44:12 +0100
-Received: from 79-79-208-205.dynamic.dsl.as9105.com ([79.79.208.205]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1LXkGV-0004Ho-Ms; Thu, 12 Feb 2009 22:42:42 +0000
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49946CA4.6060303@dls.net>
-References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
-	<1234460865.3592.2.camel@mill.internal.reciva.com>
-	<49946CA4.6060303@dls.net>
-Date: Thu, 12 Feb 2009 22:42:24 +0000
-Message-Id: <1234478544.4890.404.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXkL0-0006YW-P4
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 23:47:18 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LXkJi-0007aC-Td
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 22:45:58 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 22:45:58 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 22:45:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 12 Feb 2009 23:45:47 +0100
+Message-ID: <gn28qr$aac$1@ger.gmane.org>
+References: <20090210204817.GH11815@smtp.west.cox.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 3/6] package.bbclass, package_ipk.bbclass:	add	dynamic depends on locale packages (ipk	specific)
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <20090210204817.GH11815@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] Add ubi volume image support, fix ubifs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,43 +41,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 22:44:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Feb 2009 22:47:18 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-02-12 at 12:38 -0600, Mike (mwester) wrote:
-> Phil Blundell wrote:
-> > This looks like it will add locale dependencies to all the subpackages
-> > (e.g. foo-doc, foo-dev and the like) as well as the main "foo" package,
-> > which is a bit different to how the old code used to work.  But I guess
-> > that's harmless enough: the worst effect will be to bloat the Packages
-> > file a bit, and I doubt anybody will care too much.  So, thumbs up from
-> > me.
-> 
-> How much bloat? 
+On 10-02-09 21:48, Tom Rini wrote:
+> Hey all.  I'd like to commit the following patch.  This will add support
+> for generating single image UBI volumes as well as fix creating ubifs
+> images.  Going backwards here, the problem with ubifs images right now
+> is that you must pass in -m -e -c -r and -o args in order to get an
+> image to come out and only -r / -o are not flash part specific.  To fix
+> this, on ubifs images, pass in ${MKUBIFS_ARGS}.  Why not just
+> ${EXTRA_IMAGECMD} ? That's because making a UBI volume requires a
+> different set of mandatory arguments too.  And as there's no way (today)
+> to have IMAGETYPE=foo require IMAGETYPE=bar to be built previously, we
+> need to use a separate mechanism here (similar to ext2/3 and blocksize).
+> To pass in the ubinize args we then go and set UBINIZE_ARGS and then we
+> get our 1 image UBI volume to come out if mtd-utils-native=1.2.0+git is
+> being used.
+>
+> As an example, on a board we have with a Samsung K9F2G08U0M we do:
+> # Make 256MiB/128KiB
+> MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2047"
+> UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
 
-For a source package "foo", you'd be talking about adding one copy of
-the literal string "foo-locale-*" to the Depends line for each of its
-subpackages (foo-doc, foo-dev, foo-dbg and the like).  The exact amount
-obviously depends on the length of the package name, but I guess you
-could call it about 16 bytes per binary package as a rough
-approximation.
+To get the values for these params:
 
-Exactly what the real-world impact of that would be will depend on your
-distro policy.  If you already strip out the -dev and -doc packages from
-the main Packages feed then obviously the impact will be virtually nil
-because most of the affected packages won't be there in the first place.
-At the other extreme, if your Packages files currently contain
-everything from the control data (including Source:, Description: and so
-on) then they are probably so huge already that another sixteen bytes
-per package is negligible in percentage terms.
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=76af265d0f1a9ed377dbaba7be03fe23643910fe
 
-If those 16*n bytes did turn out to cause a problem for someone then it
-probably wouldn't be that hard to reinstate the original behaviour of
-only adding this dependency on the primary binary.
+# do ubiattach /dev/ubi_ctrl -m 4
+# From dmesg:
+# UBI: smallest flash I/O unit:    2048
+# UBI: logical eraseblock size:    129024 bytes
+# from ubiattach stdout:
+# UBI device number 0, total 1996 LEBs
+MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
 
-p.
+# do ubiattach /dev/ubi_ctrl -m 4
+# from dmesg:
+# UBI: smallest flash I/O unit:    2048
+# UBI: physical eraseblock size:   131072 bytes (128 KiB)
+# UBI: sub-page size:              512
+UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
 
+regards,
+
+Koen
 
 
 
