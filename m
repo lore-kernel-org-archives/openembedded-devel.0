@@ -1,20 +1,33 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LXak0-0005jO-W7
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 13:32:29 +0100
-Received: (qmail 31772 invoked by uid 1003); 12 Feb 2009 12:31:09 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 12 Feb 2009 12:31:09 -0000
-Message-ID: <4994168C.6010603@balister.org>
-Date: Thu, 12 Feb 2009 07:31:08 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXaoW-0005rQ-TX
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 13:37:08 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LXanE-0007AV-VB
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 12:35:48 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 12:35:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 12:35:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 12 Feb 2009 13:35:37 +0100
+Message-ID: <gn152q$5pk$1@ger.gmane.org>
 References: <200902121426.26727.roman@khimov.ru> <gn12ij$ssf$1@ger.gmane.org>
 	<4994132E.2040603@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
 In-Reply-To: <4994132E.2040603@balister.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [PATCH] Fix rpm2cio sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,160 +42,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 12:32:29 -0000
-X-Groupsio-MsgNum: 7627
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms030105040309050903080908"
-
---------------ms030105040309050903080908
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 12 Feb 2009 12:37:09 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Philip Balister wrote:
+On 12-02-09 13:16, Philip Balister wrote:
 > Koen Kooi wrote:
 >> On 12-02-09 12:26, Roman I Khimov wrote:
 >>> Hello all.
 >>>
->>> Don't know why, but rpm2cpio tarball checksums are wrong, so here is 
+>>> Don't know why, but rpm2cpio tarball checksums are wrong, so here is
 >>> the fix:
 >>
->> If they are wrong we want to see the diff between the old and new 
->> tarballs, replacing checksums as soon as upstream changes defeats the 
+>> If they are wrong we want to see the diff between the old and new
+>> tarballs, replacing checksums as soon as upstream changes defeats the
 >> purpose of us adding them.
-> 
-> How can we find a copy of the tarball with the original checksum? I do 
-> not have it in my local source cache. The file date on the ftp server is 
-> March 1 2008. I'm surprised the FreeBSD crowd would change a tarball, 
+>
+> How can we find a copy of the tarball with the original checksum? I do
+> not have it in my local source cache. The file date on the ftp server is
+> March 1 2008. I'm surprised the FreeBSD crowd would change a tarball,
 > without changing the version.
 
-I checked a couple of the files from this list:
+It gets worse:
 
-http://dir.filewatcher.com/d/FreeBSD/5.4-release/alpha/rpm2cpio-1.2_2.tbz.3919.html
+koen@dominion:/OE/build$ md5sum /OE/downloads/*rpm*tbz ; sha256sum 
+/OE/downloads/*rpm*tbz
+cb0cabdac81b7171843427f32427ca84  rpm2cpio-1.2_2.tbz
+20f48aa3c1f950c224e844d3a7d28a679f41173a26a2d7095ef1da27bda42c2f 
+rpm2cpio-1.2_2.tbz
 
-and the md5sum is 6759b9c029d0c20c657b88d60bc2e277
-
-And yes, I am sort of testing patchwork :) [1]
-
-Philip
-
-[1] http://patchwork.openembedded.org/patch/6/
+angstrom@serenity:~/website/unstable/sources$ md5sum *rpm* ; sha256sum *rpm*
+76f8b7060500191c7cde078f831c7f0c  rpm2cpio-1.2_2.tbz
+aac7daba6d805d87e62636f0af53ce4b532cacf00a29485d94b3a605f2ffdf6c 
+rpm2cpio-1.2_2.tbz
 
 
+git annotate:
 
-> 
-> Philip
-> 
-> 
->>
->> regards,
->>
->> Koen
->>
->>>
->>> --- a/conf/checksums.ini     2009-02-12 14:23:11.655542059 +0300
->>> +++ b/conf/checksums.ini      2009-02-12 14:23:50.520780173 +0300
->>> @@ -18931,8 +18931,8 @@ md5=b8f0661ac765ce1a2de66ca53e37af83
->>>   
->>> sha256=a8168b8884ab40aadebba0ba696b889e25020d32a88e646d4f4bc56f2236b184
->>>
->>>   
->>> [ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz] 
->>>
->>> -md5=63f39118ea5ef7cda84a0638002ed6d2
->>> -sha256=27ffe0392ae193eb04786a2159c099a00fe38ccdaebcebd72afc842c528bb6d3
->>> +md5=cb0cabdac81b7171843427f32427ca84
->>> +sha256=20f48aa3c1f950c224e844d3a7d28a679f41173a26a2d7095ef1da27bda42c2f
->>>
->>>   [http://downloads.sourceforge.net/rpyc/rpyc-3.02.tar.gz]
->>>   md5=4e855372c4a533b9ed605503156e6e04
->>>
->>>
->>>
->>> ------------------------------------------------------------------------
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> 
-> ------------------------------------------------------------------------
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+0da69511    (Marcin Juszkiewicz 2007-10-24 13:09:31 +0000 
+18933)[ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz]
+a7d0813d    (Otavio Salvador    2008-11-18 12:21:08 -0200 
+18934)md5=63f39118ea5ef7cda84a0638002ed6d2
+a7d0813d    (Otavio Salvador    2008-11-18 12:21:08 -0200 
+18935)sha256=27ffe0392ae193eb04786a2159c099a00fe38ccdaebcebd72afc842c528bb6d3
 
---------------ms030105040309050903080908
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+The first commit is:
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxMjEy
-MzEwOFowIwYJKoZIhvcNAQkEMRYEFN5CsIsAwFUm0Fu/mqncBzuR6/ACMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQCTHUnCwXy/gK3P0KauIKs1Opik7LVsy5ocusJdThNFFDZ78LCA
-DcymBCc78LKQdCWQVuHdwQU0gEcxgD2ZMLaInsqQwCLJ8NvrAKmj/gnjyoFLVsXWVJpVsSp5hZCi
-c0HiFEwHD/zhZ/C+WND/4iX+/brNHsgyiv4ubgDRSgBOgwLH+hMDJZH5oM/0pdk4Tu5pyZBjStuW
-GKxglILGWZMQ5/5QFoqm8voBONYpkHRjuanzhYPdf4vF23xKCG3hpEtX5J0rrhE1Y998v3w0jHT7
-KyR0myzsRI1uiNnl8pp7UmEZeh1XFaBlo4wtbGb5m9q+QjsJIKSkufl5WYkd6qzDAAAAAAAA
+commit 0da695117f8a142e6d15601d8d7064ed5c35074a
+Author: Marcin Juszkiewicz <hrw@openembedded.org>
+Date:   Wed Oct 24 13:09:31 2007 +0000
 
---------------ms030105040309050903080908--
+     checksums.ini: sync with Poky
+     r2954 | hrw | 2007-10-24 14:29:57 +0200 (<C5><9A>r, 24 X 2007) | 1 line
+     checksums.ini: added some new entries from OpenMoko build
+ 
+------------------------------------------------------------------------
+     r2953 | hrw | 2007-10-24 14:28:03 +0200 (<C5><9A>r, 24 X 2007) | 1 line
+     checksums.ini: sort by archive name (script for it will be pushed 
+into OE later)
+ 
+------------------------------------------------------------------------
+     r2952 | hrw | 2007-10-24 13:39:13 +0200 (<C5><9A>r, 24 X 2007) | 1 line
+     checksums.ini: sort alphabetically to make updates easier
+
+This is a red herring, see the diff:
+
+-[ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz]
+-md5=d4950dc6918ca79a4abab306b6188512
+-sha256=5ec970d34b4e22feea0333dae3b5f5ee0e38295d89e306b4929b910f4a2aae25
+
++[ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz]
++md5=d4950dc6918ca79a4abab306b6188512
++sha256=5ec970d34b4e22feea0333dae3b5f5ee0e38295d89e306b4929b910f4a2aae25
+
+
+The second one:
+
+commit a7d0813dd5c391183b1356c49bf082a647123985
+Author: Otavio Salvador <otavio@ossystems.com.br>
+Date:   Tue Nov 18 12:21:08 2008 -0200
+
+     checksums.ini: fix rpm2cpio checksums
+
+-md5=d4950dc6918ca79a4abab306b6188512
+-sha256=5ec970d34b4e22feea0333dae3b5f5ee0e38295d89e306b4929b910f4a2aae25
++md5=63f39118ea5ef7cda84a0638002ed6d2
++sha256=27ffe0392ae193eb04786a2159c099a00fe38ccd
+
+So it seems that freebsd people are replacing their files or that their 
+server suffers massive disk corruption.
+
+regards,
+
+Koen
+
+
+
+
