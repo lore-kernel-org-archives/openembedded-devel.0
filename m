@@ -1,35 +1,32 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [209.85.220.17] (helo=mail-fx0-f17.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LXdW2-0000of-0k
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LXdob-0001SI-KS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 16:30:15 +0100
-Received: by bwz9 with SMTP id 9so1011058bwz.12
+	Thu, 12 Feb 2009 16:49:25 +0100
+Received: by fxm10 with SMTP id 10so1456090fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2009 07:28:54 -0800 (PST)
+	Thu, 12 Feb 2009 07:48:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=79bgcp5XjAZstXTCHA2IJYDRUr6VCtISifnRDR6Rwfk=;
-	b=IjrKr4D4zmSTBgiGeBdAsgoXdNJymm2raZDvNKxD8ROMS7e/AOevOINyhsm5tFF2sc
-	304HOfkE+YKm9sppv8qPgN8XqT6vwSK0eAEfnceW2hms/0+29Zyk3tARR7QjPfars0Nj
-	4A+C9BQiXz1oFUt3oIQwVK2e3Cj5z2Fa/P7SE=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=+wHq76WDMXiCN/TuO2K1JYgNKvGeClBY3FCCnUyiqyM=;
+	b=ZE2KZz2XKZW0JQh1li9cByqBSLJQVmkyKLw9BB0EEtuPD/A8+HzzROIMVYuwGi4GZR
+	2TSNgeDl+q4KSGn5NKRCa5XzO7K3YCfJLqEX0/U6kMI1LktsCiR8Yp+oqK+wH55WXySW
+	S9sOVtt478xg6wm0xKxhp3s5nkCx9doUEo5Yk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Vz8UoYP+ekqLOVM2DXL3fAitxX4getQydcsGN0Q9FVXqQOCRyqRcmx5PTJjhOx2kX6
-	Xqo7BqcHjwQM7LYbIa752LJRJWfTxKhxP0oQCecysZWgoNZn2Jzv9nTtuCX1xKZAsx6M
-	5eyEw2slBFUdhb9hllRAYM0TmKlbsl5ejFZQk=
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=LYH4yXjMaKa+hOxhRCToKPseRIRDaKmSU9g9AY9iT9mSpx2GYl6iSsvM78CMAv3Ix7
+	tQzRO+bcmEkfqz6dWWGy8C8nRWsf+GDIWsfYeYw8APd2kz2r4k0m6j77ed4FGeIVKG+z
+	BryIgVPQHWUrPDW6Psw775aD+d9TF9Nc46HSQ=
 MIME-Version: 1.0
-Received: by 10.180.204.10 with SMTP id b10mr335431bkg.201.1234452534671; Thu, 
-	12 Feb 2009 07:28:54 -0800 (PST)
-In-Reply-To: <200902121727.21796.roman@khimov.ru>
-References: <200902121727.21796.roman@khimov.ru>
-Date: Thu, 12 Feb 2009 16:28:54 +0100
-Message-ID: <c384c5ea0902120728n459671f4y32957b212a8af0ed@mail.gmail.com>
+Received: by 10.180.222.14 with SMTP id u14mr346669bkg.141.1234453610342; Thu, 
+	12 Feb 2009 07:46:50 -0800 (PST)
+Date: Thu, 12 Feb 2009 16:46:50 +0100
+Message-ID: <c384c5ea0902120746r2ff7a7f0o972e5e1d370fcbc5@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] icecc: base fix for cross and native builds
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [RFC] OpenEmbedded name tags (for shows, events)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,25 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 15:30:16 -0000
+X-List-Received-Date: Thu, 12 Feb 2009 15:49:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Hello,
 
-On Thu, Feb 12, 2009 at 3:27 PM, Roman I Khimov <roman@khimov.ru> wrote:
-> Hello all.
->
-> There are severe problems with icecc builds currently in OE. Cross-compiler
-> tarball created wrong, PATH set incorrectly, etc.
->
-Excellent!
+on events we plan to walk around carrying OpenEmbedded name tags.
+It will feature the new logo, with the openembedded name underneath.
 
-It's probably a little-used class, but if we get it to work more
-robustly, we can make more noise about it.
+Then, in a consistent (but probably different typeface) your name,
+which is completed with a (possibly personal tagline).
 
-I will try to do some tests here over the next few weeks with your
-patch, time permitting.
+I will create a executable C file that generates a PDF that you can
+bring to the print shop to print 20-something name tags.
+I will create this project inside the contrib/ folder.
+
+Also, I would like to add a file there containing well-known
+developers and/or users, as an input file.
+
+Everybody please list their names (optionally with IRC nick) and a tagline.
+
+          /OE\
+   openembedded
+Leon Woestenberg
+ just a happy user
+
+Leon 'likewise' Woestenberg
+     non-core developer
+
+Leon 'likewise' Woestenberg
+    really core developer
+
+Leon Woestenberg
+    bitbake bully
+
+Leon Woestenberg
+     build monkey
+
+
+Ideas/wishes/feedback?
 
 Regards,
 -- 
