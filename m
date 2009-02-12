@@ -1,41 +1,33 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1LXb1C-00064G-Ca
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 13:50:14 +0100
-Received: by fg-out-1718.google.com with SMTP id 13so233273fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2009 04:48:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	bh=+o8I7UB6oRTGgeACIyPDg0uBhPaj5pmjraBQL1UpfQk=;
-	b=AFMR8JfeY4J5X5NJ4q6D4mdvNyJ3rLouFexpk4uRMr0lJZVhwN/MgfIqtcR9/ubDId
-	yEK0h1+fg/A2iqpqFMKblb9HrYrmeglAJN1yJg5sD4zQgAdRJqlhvLj0oXmqPMyT0aie
-	MtBIrUREjDSApALyZBeJ871jiwuPzWXdn2YMQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:message-id;
-	b=V93cGrrFom1kIyQaRq9UDmsIvoI0KO6Bu6g6aTIEIGjAGUoua3j62fq9QqN6UgIxH3
-	ErsGK0jerpQlxK0MdUjVHsw1cGrfz2NUwDKExooactMSil2kx42q1O6oAAi2VNqyxyao
-	Au5s9jsQHvKlRQS3yZQxNUxM2tP3ovdFuLkF8=
-Received: by 10.86.59.18 with SMTP id h18mr1417450fga.5.1234442938498;
-	Thu, 12 Feb 2009 04:48:58 -0800 (PST)
-Received: from is.home ([93.81.136.171])
-	by mx.google.com with ESMTPS id l12sm1605812fgb.51.2009.02.12.04.48.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 12 Feb 2009 04:48:57 -0800 (PST)
-From: Yuri Bushmelev <jay4mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Feb 2009 15:47:47 +0300
-User-Agent: KMail/1.9.10
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXb40-0006Eh-70
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 13:53:08 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LXb2i-0007pn-Fl
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 12:51:48 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 12:51:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 12:51:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 12 Feb 2009 13:51:34 +0100
+Message-ID: <gn160m$8s4$1@ger.gmane.org>
 References: <200902121426.26727.roman@khimov.ru> <gn12ij$ssf$1@ger.gmane.org>
-	<4994132E.2040603@balister.org>
-In-Reply-To: <4994132E.2040603@balister.org>
-MIME-Version: 1.0
-Message-Id: <200902121547.48057.jay4mail@gmail.com>
+	<200902121541.09495.roman@khimov.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <200902121541.09495.roman@khimov.ru>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [PATCH] Fix rpm2cio sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,27 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 12:50:14 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 12 Feb 2009 12:53:08 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello!
+On 12-02-09 13:41, Roman I Khimov wrote:
+> Koen Kooi:
+>> On 12-02-09 12:26, Roman I Khimov wrote:
+>>> Don't know why, but rpm2cpio tarball checksums are wrong, so here is
+>>> the fix:
+>> If they are wrong we want to see the diff between the old and new
+>> tarballs, replacing checksums as soon as upstream changes defeats the
+>> purpose of us adding them.
+>
+> If I've had old one anywhere around, I'd show the diff, but the problem is I
+> don't have it.
+>
+>  From what I see most probably it's some meta-data changes as we have
+> ready-to-install FreeBSD tarball there with all
+> its "+COMMENT", "+CONTENTS", "+DESC", "+MTREE_DIRS" files. So
+> the 'rpm2cpio.pl' itself should be the same.
+>
+> Now another question is why OE package uses such tarball as source at all.
+> So, probably we can change the source to something like
+>
+> http://www.freebsd.org/cgi/cvsweb.cgi/%7Echeckout%7E/ports/archivers/rpm2cpio/files/rpm2cpio?rev=1.2;content-type=text%2Fplain;only_with_tag=RELEASE_7_1_0
+>
+> which is the only file we need and it's rev'd tagged should-be-non-volatile.
 
-> >> [ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-
-> >>1.2_2.tbz]
+Seeing the current sitation with the freebsd people this would get my vote.
 
-This 
-(ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz) 
-is a freebsd precompiled package, not a source tarball. It can change 
-checksum after rebuild. All files in 'packages' dir are precompiled 
-packages.
+regards,
 
-Source tarballs are placed here (in 'distfiles' dir): 
-ftp://ftp.freebsd.org/pub/FreeBSD//ports/distfiles/
+Koen
 
--- 
-Yuri Bushmelev
 
 
