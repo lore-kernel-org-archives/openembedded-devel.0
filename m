@@ -1,35 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXeXj-0008AT-Ip
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 17:36:03 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LXeWS-0000ix-Qf
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 16:34:44 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 16:34:44 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 16:34:44 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 12 Feb 2009 17:34:35 +0100
-Message-ID: <gn1j2r$qc5$1@ger.gmane.org>
-References: <200902121426.26727.roman@khimov.ru>
-	<gn160m$8s4$1@ger.gmane.org>	<200902121624.02569.jay4mail@gmail.com>	<200902121656.56180.roman@khimov.ru>
-	<87hc2zslfn.fsf@neumann.lab.ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <87hc2zslfn.fsf@neumann.lab.ossystems.com.br>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] Fix rpm2cio sums
+	(envelope-from <otavio@ossystems.com.br>) id 1LXebP-0008EM-Oh
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Feb 2009 17:39:52 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 92BFF402F5;
+	Thu, 12 Feb 2009 12:38:49 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 443C9740DC;
+	Thu, 12 Feb 2009 14:38:48 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id B2FA361012D; Thu, 12 Feb 2009 14:38:35 -0200 (BRST)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Feb 2009 14:38:31 -0200
+Message-Id: <1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.6.2.rc0
+In-Reply-To: <1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
+References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH 2/6] cups: add 1.3.8.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 16:36:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Feb 2009 16:39:52 -0000
 
-On 12-02-09 16:51, Otavio Salvador wrote:
-> Roman I Khimov<roman@khimov.ru>  writes:
->
->> I don't think we can trust precompiled packages with this situation. And cvs
->> checkout for one file... Well, maybe something like this:
-> <...>
->
-> I liked this solution since it is a simple http request, we track the
-> checksum and also avoid the freebsd packages.
->
-> +1
+---
+ .../cups/cups-1.3.8/use_echo_only_in_init.patch    |   11 +++++++++++
+ packages/cups/cups_1.3.8.bb                        |    8 ++++++++
+ 2 files changed, 19 insertions(+), 0 deletions(-)
+ create mode 100644 packages/cups/cups-1.3.8/use_echo_only_in_init.patch
+ create mode 100644 packages/cups/cups_1.3.8.bb
 
-+1
-
+diff --git a/packages/cups/cups-1.3.8/use_echo_only_in_init.patch b/packages/cups/cups-1.3.8/use_echo_only_in_init.patch
+new file mode 100644
+index 0000000..21ff0e5
+--- /dev/null
++++ b/packages/cups/cups-1.3.8/use_echo_only_in_init.patch
+@@ -0,0 +1,11 @@
++--- a/init/cups.sh.in.orig	2008-10-04 16:50:46.000000000 -0300
+++++ b/init/cups.sh.in	2008-10-04 16:51:39.000000000 -0300
++@@ -68,7 +68,7 @@
++ 		ECHO_ERROR=:
++ 		;;
++ 
++-	Linux*)
+++	DISABLELinux*)
++ 		IS_ON=/bin/true
++ 		if test -f /etc/init.d/functions; then
++ 			. /etc/init.d/functions
+diff --git a/packages/cups/cups_1.3.8.bb b/packages/cups/cups_1.3.8.bb
+new file mode 100644
+index 0000000..e9fd985
+--- /dev/null
++++ b/packages/cups/cups_1.3.8.bb
+@@ -0,0 +1,8 @@
++require cups.inc
++
++SRC_URI += "file://use_echo_only_in_init.patch;patch=1"
++PR = "r1"
++
++DEFAULT_PREFERENCE = "-1"
++
++EXTRA_OECONF += " --disable-gssapi "
+-- 
+1.6.2.rc0
 
 
 
