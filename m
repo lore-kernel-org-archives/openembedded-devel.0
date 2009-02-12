@@ -1,42 +1,32 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1LXb9T-0006NE-Jv
+	(envelope-from <otavio@freedom.ind.br>) id 1LXbSC-0006z9-DG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 13:58:47 +0100
-Received: by bwz9 with SMTP id 9so909322bwz.12
+	Thu, 12 Feb 2009 14:18:08 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 70F834025B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2009 04:57:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	bh=w3coH0hrkGBZepMiXKVqFoV5AsNst0GeANUSTY1LP8U=;
-	b=Rsftei+Mtznmdz6pmMdDjNSAy+HWkS2GLRqXPTUKxM60+Ce5YfMMDn5+SmupCuLhWa
-	K48yJdTKnOO/onVbWzOma0GX1RIKrJ6K9GMdDB6wnCKnRUSPnHCThNkXN+mABsF9ae4k
-	waziU+T+nqQujxhofu+iSD6tDIKUnk9vVT08A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:message-id;
-	b=m934YSPSaofOMwdCd06HxaOrWGkXXjYu6elmoCEu7nqehuA42dPm9EZn37Owuo/EJD
-	D+GKWZf/Zn2bT1T8OJ1EhuH8cTA9C1UamGjlIlGQfeSY+DhTX0PV1s7A90VlL6dUPmGX
-	3lu6BR6lUnAu5QyZd7jaV6xupSlGz5PXJ7adg=
-Received: by 10.103.251.3 with SMTP id d3mr340418mus.72.1234443449143;
-	Thu, 12 Feb 2009 04:57:29 -0800 (PST)
-Received: from is.home ([93.81.136.171])
-	by mx.google.com with ESMTPS id 25sm828559mul.51.2009.02.12.04.57.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 12 Feb 2009 04:57:28 -0800 (PST)
-From: Yuri Bushmelev <jay4mail@gmail.com>
+	Thu, 12 Feb 2009 09:17:04 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id BBB8C740D9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Feb 2009 11:16:58 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id AB88061006F; Thu, 12 Feb 2009 11:16:45 -0200 (BRST)
+From: Otavio Salvador <otavio@debian.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Feb 2009 15:57:23 +0300
-User-Agent: KMail/1.9.10
-References: <200902121426.26727.roman@khimov.ru>
-	<4994132E.2040603@balister.org>
-	<200902121547.48057.jay4mail@gmail.com>
-In-Reply-To: <200902121547.48057.jay4mail@gmail.com>
+Organization: O.S. Systems Ltda.
+References: <200902121426.26727.roman@khimov.ru> <gn12ij$ssf$1@ger.gmane.org>
+	<4994132E.2040603@balister.org> <4994168C.6010603@balister.org>
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Thu, 12 Feb 2009 11:16:45 -0200
+In-Reply-To: <4994168C.6010603@balister.org> (Philip Balister's message of
+	"Thu, 12 Feb 2009 07:31:08 -0500")
+Message-ID: <87iqnfvlqa.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
 MIME-Version: 1.0
-Message-Id: <200902121557.23426.jay4mail@gmail.com>
 Subject: Re: [PATCH] Fix rpm2cio sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -51,32 +41,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 12:58:47 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Feb 2009 13:18:08 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hello!
+Philip Balister <philip@balister.org> writes:
 
-> > >> [ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpi
-> > >>o- 1.2_2.tbz]
+> Philip Balister wrote:
+>> Koen Kooi wrote:
+>>> On 12-02-09 12:26, Roman I Khimov wrote:
+>>>> Hello all.
+>>>>
+>>>> Don't know why, but rpm2cpio tarball checksums are wrong, so here
+>>>> is the fix:
+>>>
+>>> If they are wrong we want to see the diff between the old and new
+>>> tarballs, replacing checksums as soon as upstream changes defeats
+>>> the purpose of us adding them.
+>>
+>> How can we find a copy of the tarball with the original checksum? I
+>> do not have it in my local source cache. The file date on the ftp
+>> server is March 1 2008. I'm surprised the FreeBSD crowd would change
+>> a tarball, without changing the version.
 >
-> This
-> (ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2
->_2.tbz) is a freebsd precompiled package, not a source tarball. It can
-> change checksum after rebuild. All files in 'packages' dir are
-> precompiled packages.
+> I checked a couple of the files from this list:
 >
-> Source tarballs are placed here (in 'distfiles' dir):
-> ftp://ftp.freebsd.org/pub/FreeBSD//ports/distfiles/
+> http://dir.filewatcher.com/d/FreeBSD/5.4-release/alpha/rpm2cpio-1.2_2.tbz.3919.html
+>
+> and the md5sum is 6759b9c029d0c20c657b88d60bc2e277
+>
+> And yes, I am sort of testing patchwork :) [1]
+>
+> Philip
+>
+> [1] http://patchwork.openembedded.org/patch/6/
 
-Ah, sorry, rpm2cpio have no source file. It is stored directly in ports:
-http://www.freebsd.org/cgi/cvsweb.cgi/ports/archivers/rpm2cpio/files/
-
-We can grab it via cvs.
+I'm also using this rpm2cpio since previous one couldn't be located by
+me and this works quite fine. I personally support this patch.
 
 -- 
-Yuri Bushmelev
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
