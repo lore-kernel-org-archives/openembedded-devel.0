@@ -1,38 +1,29 @@
-Received: from [66.80.197.243] (helo=looper.buglabs.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@buglabs.net>) id 1LXgSR-0005KG-2j
+	(envelope-from <pb@reciva.com>) id 1LXiB6-0000wd-QN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 19:38:43 +0100
-Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
-	by looper.buglabs.net (Postfix) with ESMTP id E61D9340C5;
-	Thu, 12 Feb 2009 13:39:57 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by aphid.buglabs.net (Postfix) with ESMTP id DB68728E002;
-	Thu, 12 Feb 2009 13:39:00 -0500 (EST)
-X-Virus-Scanned: amavisd-new at aphid.buglabs.net
-Received: from aphid.buglabs.net ([127.0.0.1])
-	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id l1WJBtt-AZ5I; Thu, 12 Feb 2009 13:39:00 -0500 (EST)
-Received: from [192.168.0.120] (t61.buglabs.net [192.168.0.120])
-	by aphid.buglabs.net (Postfix) with ESMTP id 3726F28E001;
-	Thu, 12 Feb 2009 13:39:00 -0500 (EST)
-From: Ken Gilmer <ken@buglabs.net>
+	Thu, 12 Feb 2009 21:28:57 +0100
+Received: from 79-79-208-205.dynamic.dsl.as9105.com ([79.79.208.205]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1LXi9j-0002Ua-U9; Thu, 12 Feb 2009 20:27:32 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gn1m9a$5tl$5@ger.gmane.org>
+In-Reply-To: <1234456715-23618-7-git-send-email-otavio@ossystems.com.br>
 References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
 	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
 	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
 	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
 	<1234456715-23618-5-git-send-email-otavio@ossystems.com.br>
 	<1234456715-23618-6-git-send-email-otavio@ossystems.com.br>
-	<gn1m9a$5tl$5@ger.gmane.org>
-Organization: Bug Labs, Inc.
-Date: Thu, 12 Feb 2009 13:39:44 -0500
-Message-Id: <1234463984.3413.263.camel@t61.buglabs.net>
+	<1234456715-23618-7-git-send-email-otavio@ossystems.com.br>
+Date: Thu, 12 Feb 2009 20:27:28 +0000
+Message-Id: <1234470448.4890.379.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 5/6] sun-jre6: add 1.6.0.10
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [PATCH 6/6] flash-plugin: add 10.0.12.36
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,46 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 18:38:43 -0000
+X-List-Received-Date: Thu, 12 Feb 2009 20:28:57 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+On Thu, 2009-02-12 at 14:38 -0200, Otavio Salvador wrote:
+> +pkg_postinst() {
+> +	test -n "$D" && exit 1
+> +	mkdir -p ${libdir}/X11/fonts/misc
+> +	cat >> ${libdir}/X11/fonts/misc/fonts.alias <<_PUNT
+> +-*-*-medium-r-normal-*-10-*              -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1
+> +-*-helvetica-medium-r-normal-*-10-*      -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1
+> +-*-serf-medium-r-normal-*-10-*           -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1
+> +-*-*-*-*-*-*-*-*-*-*-*-*-big5-*          -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1
+> +-*-*-*-*-*-*-*-*-*-*-*-*-gb2312.1980-*   -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1
+> +-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*  -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1
+> +-*-fixed-*--14-*                         -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-1
+> +_PUNT
+> +}
 
-Also, I may be missing something here but isn't this binary-only package
-for i586 architecture?  Not seeing in the recipe where the architecture
-is constrained.
+This seems altogether pretty weird.  I'm not quite sure what you are
+trying to accomplish but I am fairly sure that this can't be the right
+way to do it :-)
 
-thx
-ken
+For one thing, the fonts.alias file will be appended to every time the
+package is installed (or, at least, configured) but won't be removed
+when it is uninstalled.  For another thing, these changes will be wiped
+out when font-alias is upgraded or reinstalled.  And, finally, you seem
+to be aliasing a whole load of fonts of various different sizes (and
+even different encodings!) to the same thing, which doesn't seem like it
+can be generally good news.
 
-On Thu, 2009-02-12 at 18:29 +0100, Koen Kooi wrote:
-> On 12-02-09 17:38, Otavio Salvador wrote:
-> > Signed-off-by: Otavio Salvador<otavio@ossystems.com.br>
-> > ---
-> 
-> NACK:
-> 
-> > +PACKAGES =+ "${PN}-plugin"
-> > +
-> > +FILES_${PN} = "/usr/"
-> > +FILES_${PN}-dbg += "/usr/*/.debug /usr/*/*/.debug /usr/*/*/*/.debug /usr/*/*/*/*/.debug /usr/*/*/*/*/*/.debug"
-> > +FILES_${PN}-plugin = "${libdir}/firefox-3.0.1/plugins/* ${libdir}/sun-java6-${PV}/plugin/i386/ns7/libjavaplugin_oji.so"
-> 
-> it would be better to install the plugin to /usr/lib/mozilla/plugins and 
-> have a postinst that symlinks it to ${libdir}/firefox-*, 
-> ${libdir}/fennec-*, ${libdir}/iceweasle when those are present. That way 
-> other browser implement NPAPI (webkit...) can use the one in 
-> mozilla/plugins.
-> 
-> regards,
-> 
-> Koen
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+If this is a workaround for some craving that the flash plugin has for
+server-side fonts, and the intention is to allow you to run it without
+crashing if you don't have the fonts in question, then it would probably
+be better to put those bits in some appropriate package of their own so
+that distribution people (and/or end users) can decide what they want to
+do about it.  I guess there might be an argument for distributing a
+dummy-server-fonts package that just ships one font and aliases
+everything else to it for the purpose of keeping legacy applications
+happy.
+
+p.
+
 
 
 
