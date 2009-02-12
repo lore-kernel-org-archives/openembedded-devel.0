@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.67.172.39] (helo=webmail.no-log.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXecu-0008GE-3R
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 17:41:24 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LXebb-0000xH-01
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 16:40:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 16:40:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 16:40:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 12 Feb 2009 17:36:06 +0100
-Message-ID: <gn1j5m$qc5$2@ger.gmane.org>
-References: <200902121727.21796.roman@khimov.ru>
-	<c384c5ea0902120728n459671f4y32957b212a8af0ed@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <c384c5ea0902120728n459671f4y32957b212a8af0ed@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] icecc: base fix for cross and native builds
+	(envelope-from <GNUtoo@no-log.org>) id 1LXeu9-0000Dl-2u
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Feb 2009 17:59:13 +0100
+Received: by webmail.no-log.org (Postfix, from userid 33)
+	id 71BA04C1A1; Thu, 12 Feb 2009 17:57:54 +0100 (CET)
+X-Squirrel-UserHash: c3wyGAAN
+X-Squirrel-FromHash: AFRWCldXDSo=
+Message-ID: <57280.AFRWCldXDSo=.1234457874.squirrel@webmail.no-log.org>
+In-Reply-To: <c384c5ea0902120746r2ff7a7f0o972e5e1d370fcbc5@mail.gmail.com>
+References: <c384c5ea0902120746r2ff7a7f0o972e5e1d370fcbc5@mail.gmail.com>
+Date: Thu, 12 Feb 2009 17:57:54 +0100 (CET)
+From: "Denis" <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+User-Agent: SquirrelMail/1.4.9a
+MIME-Version: 1.0
+X-Priority: 3 (Normal)
+Importance: Normal
+Subject: Re: [RFC] OpenEmbedded name tags (for shows, events)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +31,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 16:41:24 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Feb 2009 16:59:13 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 12-02-09 16:28, Leon Woestenberg wrote:
 > Hello,
 >
-> On Thu, Feb 12, 2009 at 3:27 PM, Roman I Khimov<roman@khimov.ru>  wrote:
->> Hello all.
->>
->> There are severe problems with icecc builds currently in OE. Cross-compiler
->> tarball created wrong, PATH set incorrectly, etc.
->>
-> Excellent!
+> on events we plan to walk around carrying OpenEmbedded name tags.
+> It will feature the new logo, with the openembedded name underneath.
 >
-> It's probably a little-used class, but if we get it to work more
-> robustly, we can make more noise about it.
+> Then, in a consistent (but probably different typeface) your name,
+> which is completed with a (possibly personal tagline).
 >
-> I will try to do some tests here over the next few weeks with your
-> patch, time permitting.
+> I will create a executable C file that generates a PDF that you can
+> bring to the print shop to print 20-something name tags.
+> I will create this project inside the contrib/ folder.
+>
+> Also, I would like to add a file there containing well-known
+> developers and/or users, as an input file.
+>
+> Everybody please list their names (optionally with IRC nick) and a
+> tagline.
+>
+>           /OE\
+>    openembedded
+> Leon Woestenberg
+>  just a happy user
+>
+> Leon 'likewise' Woestenberg
+>      non-core developer
+>
+> Leon 'likewise' Woestenberg
+>     really core developer
+>
+> Leon Woestenberg
+>     bitbake bully
+>
+> Leon Woestenberg
+>      build monkey
+>
+>
+> Ideas/wishes/feedback?
+>
+> Regards,
+> --
+> Leon
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+There is a file in oe where there are the devellopers are listed.
+The file is called MAINTAINERS
+by the way if I've done some recipes should I add myself in it?
 
-Once icecc works we should have a chat with the suse buildservice 
-people. PARALLEL_MAKE = "-j256", here we come :)
-
-regards,
-
-Koen
-
+by the way here it is:
+Denis 'GNUtoo' Carikli
+non-core developer
+Denis.
 
 
