@@ -1,28 +1,34 @@
-Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@ossystems.com.br>) id 1LXebU-0008Er-Js
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 17:39:56 +0100
-Received: from internet.ossystems.com.br
-	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
-	by listas.ossystems.com.br (Postfix) with ESMTP id 93DC94025B;
-	Thu, 12 Feb 2009 12:38:54 -0200 (BRST)
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 42D46740DB;
-	Thu, 12 Feb 2009 14:38:48 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id BC676610133; Thu, 12 Feb 2009 14:38:35 -0200 (BRST)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Feb 2009 14:38:32 -0200
-Message-Id: <1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.6.2.rc0
-In-Reply-To: <1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
-References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 3/6] package.bbclass, package_ipk.bbclass: add dynamic depends on locale packages (ipk specific)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXecu-0008GE-3R
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 17:41:24 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LXebb-0000xH-01
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 16:40:03 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 16:40:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 16:40:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 12 Feb 2009 17:36:06 +0100
+Message-ID: <gn1j5m$qc5$2@ger.gmane.org>
+References: <200902121727.21796.roman@khimov.ru>
+	<c384c5ea0902120728n459671f4y32957b212a8af0ed@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <c384c5ea0902120728n459671f4y32957b212a8af0ed@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] icecc: base fix for cross and native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,51 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 16:39:56 -0000
+X-List-Received-Date: Thu, 12 Feb 2009 16:41:24 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
----
- classes/package.bbclass     |   10 ----------
- classes/package_ipk.bbclass |    4 ++++
- 2 files changed, 4 insertions(+), 10 deletions(-)
+On 12-02-09 16:28, Leon Woestenberg wrote:
+> Hello,
+>
+> On Thu, Feb 12, 2009 at 3:27 PM, Roman I Khimov<roman@khimov.ru>  wrote:
+>> Hello all.
+>>
+>> There are severe problems with icecc builds currently in OE. Cross-compiler
+>> tarball created wrong, PATH set incorrectly, etc.
+>>
+> Excellent!
+>
+> It's probably a little-used class, but if we get it to work more
+> robustly, we can make more noise about it.
+>
+> I will try to do some tests here over the next few weeks with your
+> patch, time permitting.
 
-diff --git a/classes/package.bbclass b/classes/package.bbclass
-index a7cdb5f..5559592 100644
---- a/classes/package.bbclass
-+++ b/classes/package.bbclass
-@@ -293,16 +293,6 @@ python package_do_split_locales() {
- 		bb.data.setVar('DESCRIPTION_' + pkg, '%s translation for %s' % (l, pn), d)
- 
- 	bb.data.setVar('PACKAGES', ' '.join(packages), d)
--
--	# Disabled by RP 18/06/07
--	# Wildcards aren't supported in debian
--	# They break with ipkg since glibc-locale* will mean that 
--	# glibc-localedata-translit* won't install as a dependency
--	# for some other package which breaks meta-toolchain
--	# Probably breaks since virtual-locale- isn't provided anywhere
--	#rdep = (bb.data.getVar('RDEPENDS_%s' % mainpkg, d, 1) or bb.data.getVar('RDEPENDS', d, 1) or "").split()
--	#rdep.append('%s-locale*' % pn)
--	#bb.data.setVar('RDEPENDS_%s' % mainpkg, ' '.join(rdep), d)
- }
- 
- python populate_packages () {
-diff --git a/classes/package_ipk.bbclass b/classes/package_ipk.bbclass
-index 3a97729..2d28cf8 100644
---- a/classes/package_ipk.bbclass
-+++ b/classes/package_ipk.bbclass
-@@ -244,6 +244,10 @@ python do_package_ipk () {
- 		rprovides = (bb.data.getVar("RPROVIDES", localdata, 1) or "").split()
- 		rreplaces = (bb.data.getVar("RREPLACES", localdata, 1) or "").split()
- 		rconflicts = (bb.data.getVar("RCONFLICTS", localdata, 1) or "").split()
-+
-+		if pkgname.find('-locale-') == -1:
-+			rdepends.append('%s-locale*' % pkgname)
-+
- 		if rdepends:
- 			ctrlfile.write("Depends: %s\n" % ", ".join(rdepends))
- 		if rsuggests:
--- 
-1.6.2.rc0
+Once icecc works we should have a chat with the suse buildservice 
+people. PARALLEL_MAKE = "-j256", here we come :)
+
+regards,
+
+Koen
 
 
 
