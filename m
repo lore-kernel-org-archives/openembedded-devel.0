@@ -1,33 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXkL0-0006YW-P4
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 23:47:18 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LXkJi-0007aC-Td
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 22:45:58 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 22:45:58 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 22:45:58 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 12 Feb 2009 23:45:47 +0100
-Message-ID: <gn28qr$aac$1@ger.gmane.org>
-References: <20090210204817.GH11815@smtp.west.cox.net>
+	(envelope-from <pb@reciva.com>)
+	id 1LXkMe-0006ZD-JO; Thu, 12 Feb 2009 23:49:00 +0100
+Received: from 79-79-208-205.dynamic.dsl.as9105.com ([79.79.208.205]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1LXkLG-0004Ln-C4; Thu, 12 Feb 2009 22:47:36 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <gn24o9$s96$1@ger.gmane.org>
+References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-5-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-6-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-7-git-send-email-otavio@ossystems.com.br>
+	<1234470448.4890.379.camel@lenovo.internal.reciva.com>
+	<gn24o9$s96$1@ger.gmane.org>
+Date: Thu, 12 Feb 2009 22:47:26 +0000
+Message-Id: <1234478846.4890.409.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <20090210204817.GH11815@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Add ubi volume image support, fix ubifs
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH 6/6] flash-plugin: add 10.0.12.36
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,52 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 22:47:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 12 Feb 2009 22:49:01 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 10-02-09 21:48, Tom Rini wrote:
-> Hey all.  I'd like to commit the following patch.  This will add support
-> for generating single image UBI volumes as well as fix creating ubifs
-> images.  Going backwards here, the problem with ubifs images right now
-> is that you must pass in -m -e -c -r and -o args in order to get an
-> image to come out and only -r / -o are not flash part specific.  To fix
-> this, on ubifs images, pass in ${MKUBIFS_ARGS}.  Why not just
-> ${EXTRA_IMAGECMD} ? That's because making a UBI volume requires a
-> different set of mandatory arguments too.  And as there's no way (today)
-> to have IMAGETYPE=foo require IMAGETYPE=bar to be built previously, we
-> need to use a separate mechanism here (similar to ext2/3 and blocksize).
-> To pass in the ubinize args we then go and set UBINIZE_ARGS and then we
-> get our 1 image UBI volume to come out if mtd-utils-native=1.2.0+git is
-> being used.
->
-> As an example, on a board we have with a Samsung K9F2G08U0M we do:
-> # Make 256MiB/128KiB
-> MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2047"
-> UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+On Thu, 2009-02-12 at 22:36 +0100, Koen Kooi wrote:
+> On 12-02-09 21:27, Phil Blundell wrote:
+> > I guess there might be an argument for distributing a
+> > dummy-server-fonts package that just ships one font and aliases
+> > everything else to it for the purpose of keeping legacy applications
+> > happy.
+> 
+> The xorg-minimal-fonts tries to do that.
 
-To get the values for these params:
+Yeah, sort of like xorg-minimal-fonts but more so.  That package seems
+to ship rather more than one font, including some slightly
+fringe-looking ISO8859-xx encoding variants, giving you about 500k of
+data which seems like rather a lot if it's just going to be a
+placeholder.  Also, its fonts.alias file is rather more selective than I
+was thinking of and I'm not sure it would handle the specific cases that
+are mentioned in the flash-plugin package.
 
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=76af265d0f1a9ed377dbaba7be03fe23643910fe
+p.
 
-# do ubiattach /dev/ubi_ctrl -m 4
-# From dmesg:
-# UBI: smallest flash I/O unit:    2048
-# UBI: logical eraseblock size:    129024 bytes
-# from ubiattach stdout:
-# UBI device number 0, total 1996 LEBs
-MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
-
-# do ubiattach /dev/ubi_ctrl -m 4
-# from dmesg:
-# UBI: smallest flash I/O unit:    2048
-# UBI: physical eraseblock size:   131072 bytes (128 KiB)
-# UBI: sub-page size:              512
-UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
-
-regards,
-
-Koen
 
 
 
