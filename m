@@ -1,34 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXfdi-0006oX-O1
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 18:46:18 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LXfcU-0003kC-Kz
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 17:45:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 17:45:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 17:45:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 12 Feb 2009 18:29:54 +0100
-Message-ID: <gn1maj$5tl$6@ger.gmane.org>
-References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-5-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-6-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-7-git-send-email-otavio@ossystems.com.br>
+	(envelope-from <pb@reciva.com>) id 1LXg8Q-00086O-7Z
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Feb 2009 19:18:02 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1LXff8-0008Tg-VS; Thu, 12 Feb 2009 17:47:48 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>)
+	id 1LXff8-0002ow-1x; Thu, 12 Feb 2009 17:47:46 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
+References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
+Date: Thu, 12 Feb 2009 17:47:45 +0000
+Message-Id: <1234460865.3592.2.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <1234456715-23618-7-git-send-email-otavio@ossystems.com.br>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 6/6] flash-plugin: add 10.0.12.36
+X-Mailer: Evolution 2.22.3.1 
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [PATCH 3/6] package.bbclass, package_ipk.bbclass: add	dynamic depends on locale packages (ipk specific)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 17:46:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 12 Feb 2009 18:18:02 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 12-02-09 17:38, Otavio Salvador wrote:
-> Signed-off-by: Otavio Salvador<otavio@ossystems.com.br>
+On Thu, 2009-02-12 at 14:38 -0200, Otavio Salvador wrote:
+> +
+> +		if pkgname.find('-locale-') == -1:
+> +			rdepends.append('%s-locale*' % pkgname)
+> +
 
-> +	cat>>  ${libdir}/X11/fonts/misc/fonts.alias<<_PUNT
+This looks like it will add locale dependencies to all the subpackages
+(e.g. foo-doc, foo-dev and the like) as well as the main "foo" package,
+which is a bit different to how the old code used to work.  But I guess
+that's harmless enough: the worst effect will be to bloat the Packages
+file a bit, and I doubt anybody will care too much.  So, thumbs up from
+me.
 
-Won't that append to the file each time the package gets upgraded?
+p.
 
-regards,
-
-Koen
 
 
 
