@@ -1,33 +1,35 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1LXT0i-0006xG-RV
+	(envelope-from <raj.khem@gmail.com>) id 1LXU99-00023u-B7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 05:17:13 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.106]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1LXSzJ-0000Vy-Dz
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 12:15:58 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
+	Thu, 12 Feb 2009 06:29:59 +0100
+Received: by rv-out-0708.google.com with SMTP id b17so224036rvf.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Feb 2009 21:28:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=VbbOw3zUcg0yXEwAHtyT5ICpwlZdA27W6b+Fv6qFX1E=;
+	b=q9BkkJBga2mrlqUMBYTI600VhWifVog+Jwcp9w6SNmMGcC3apjU5x9culxjj2FK2/q
+	9vodIht5ba+hgQMGMRIltxeTpkjsBWWycosTprKuX/ub4h36EcHVAS4AnzHm0AVw+qCH
+	TxmyvKfFJDsPq5xYqTUffJY+rYJWqKO5ziC58=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=VweOgrGY2yqHUFP5OUKPCzj3ZZrjZ5CtMasLzB+HzF5HkAPc/hgEMOApoDdH9grD71
+	b90mdoTrSaLiRRN9oV7Mt2UZEk7dCYACzkngKmDtzl+bJGAXtndZe2LTHsXB30/CG0lX
+	GFvngg8jD329fa0YURC4IHa9HSsEPgkfzD3sQ=
+MIME-Version: 1.0
+Received: by 10.141.33.19 with SMTP id l19mr300162rvj.294.1234416525290; Wed, 
+	11 Feb 2009 21:28:45 -0800 (PST)
+In-Reply-To: <1232958250.4890.104.camel@lenovo.internal.reciva.com>
+References: <20090126074953.GA26318@gmail.com>
+	<1232958250.4890.104.camel@lenovo.internal.reciva.com>
+Date: Wed, 11 Feb 2009 21:28:45 -0800
+Message-ID: <19c1b8a90902112128y12c2e680y7b1624bfd9c7878a@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200902120034.24306.mickey@vanille-media.de>
-References: <1234393426.16455.67.camel@alap>
-	<200902120034.24306.mickey@vanille-media.de>
-Date: Wed, 11 Feb 2009 21:15:34 -0700
-Message-Id: <1234412134.6572.42.camel@think-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Re: [patch] new gta01_config file to build devel kernels on fso milestone5 branch
+Subject: Re: fix for strl functions in alsautils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +43,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 04:17:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Feb 2009 05:30:00 -0000
+X-Groupsio-MsgNum: 7621
+Content-Type: multipart/mixed; boundary=000e0cd1452e7eaebc0462b1fe16
+
+--000e0cd1452e7eaebc0462b1fe16
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-This defconfig was plucked from a newer kernel git rev than is being
-used in milestone 5. I was hoping once we had it in the milestone 5
-branch I could figure out what massaging it needed for the 2.6.8 and
-devel kernels. 
+On Mon, Jan 26, 2009 at 12:24 AM, Phil Blundell <pb@reciva.com> wrote:
+> On Sun, 2009-01-25 at 23:49 -0800, Khem Raj wrote:
+>> * These funtions are provided by C libraries like uclibc
+>>         Declaring them static here causes static not static declaration
+>>         issues reported by gcc.
+>> [...]
+>> + #ifdef __GLIBC__
+>> +-static size_t strlcpy(char *dst, const char *src, size_t size)
+>> ++size_t strlcpy(char *dst, const char *src, size_t size)
+>> + {
+>
+> Wouldn't it be better to change that "#ifdef __GLIBC__" to something
+> more appropriate?  With your change it looks like you will still get
+> useless copies of these functions in the resulting binaries.
 
-If we get it to work on milestone 5 then whatever processing is
-necessary should also work for the current git version.
-
-Angus
-
-On Thu, 2009-02-12 at 00:34 +0100, Michael 'Mickey' Lauer wrote:
-> The patch looks good, but we did quite some things to be able to use upstream 
-> defconfigs which we just slightly preprocess and I'd rather not start with 
-> own defconfigs again for such a moving target. Can't we do the same as we do 
-> with the 02 config?
-> 
-> :M:
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Here is alternative patch. Somehow I am having problem sending emails.
 
 
+Thanks
 
+-Khem
+
+--000e0cd1452e7eaebc0462b1fe16
+Content-Type: text/x-patch; charset=US-ASCII; name="alsa-utils-autoconf-strl-funcs.patch"
+Content-Disposition: attachment; 
+	filename="alsa-utils-autoconf-strl-funcs.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_fr2zoz5x0
+
+SW5kZXg6IGFsc2EtdXRpbHMtMS4wLjE4L2Fsc2FjdGwvaW5pdF9zeXNkZXBzLmMKPT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PQotLS0gYWxzYS11dGlscy0xLjAuMTgub3JpZy9hbHNhY3RsL2luaXRfc3lzZGVwcy5jCTIwMDgt
+MTAtMjkgMDU6NDI6MTEuMDAwMDAwMDAwIC0wNzAwCisrKyBhbHNhLXV0aWxzLTEuMC4xOC9hbHNh
+Y3RsL2luaXRfc3lzZGVwcy5jCTIwMDktMDItMTAgMjM6MTc6NDcuMDAwMDAwMDAwIC0wODAwCkBA
+IC0xNyw3ICsxNyw3IEBACiAgKgogICovCiAKLSNpZmRlZiBfX0dMSUJDX18KKyNpZiAhSEFWRV9T
+VFJMQ1BZCiBzdGF0aWMgc2l6ZV90IHN0cmxjcHkoY2hhciAqZHN0LCBjb25zdCBjaGFyICpzcmMs
+IHNpemVfdCBzaXplKQogewogCXNpemVfdCBieXRlcyA9IDA7CkBAIC0zNiw3ICszNiwxMCBAQAog
+CQkqcSA9ICdcMCc7CiAJcmV0dXJuIGJ5dGVzOwogfQorI2VuZGlmIC8qICFIQVZFX1NUUkxDUFkg
+Ki8KIAorCisjaWYgIUhBVkVfU1RSTENBVAogc3RhdGljIHNpemVfdCBzdHJsY2F0KGNoYXIgKmRz
+dCwgY29uc3QgY2hhciAqc3JjLCBzaXplX3Qgc2l6ZSkKIHsKIAlzaXplX3QgYnl0ZXMgPSAwOwpA
+QCAtNjAsNCArNjMsNCBAQAogCSpxID0gJ1wwJzsKIAlyZXR1cm4gYnl0ZXM7CiB9Ci0jZW5kaWYg
+LyogX19HTElCQ19fICovCisjZW5kaWYgLyogIUhBVkVfU1RSTENBVCAqLwpJbmRleDogYWxzYS11
+dGlscy0xLjAuMTgvY29uZmlndXJlLmluCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KLS0tIGFsc2EtdXRpbHMtMS4wLjE4
+Lm9yaWcvY29uZmlndXJlLmluCTIwMDgtMTAtMjkgMDU6NDg6MDEuMDAwMDAwMDAwIC0wNzAwCisr
+KyBhbHNhLXV0aWxzLTEuMC4xOC9jb25maWd1cmUuaW4JMjAwOS0wMi0xMCAyMzowMjowNy4wMDAw
+MDAwMDAgLTA4MDAKQEAgLTYsNyArNiw3IEBACiAKIEFNX0dOVV9HRVRURVhUKFtleHRlcm5hbF0p
+CiBBTV9HTlVfR0VUVEVYVF9WRVJTSU9OKFswLjE1XSkKLQorQUNfQ0hFQ0tfRlVOQ1Moc3RybGNh
+dCBzdHJsY3B5KQogZG5sIENoZWNrcyBmb3IgcHJvZ3JhbXMuCiAKIGRubCB0cnkgdG8gZ3VlcyBj
+cm9zcy1jb21waWxlciBpZiBub3Qgc2V0Cg==
+
+--000e0cd1452e7eaebc0462b1fe16--
