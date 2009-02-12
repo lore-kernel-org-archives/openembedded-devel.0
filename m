@@ -1,23 +1,34 @@
-Received: from [80.67.172.39] (helo=webmail.no-log.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1LXeu9-0000Dl-2u
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 17:59:13 +0100
-Received: by webmail.no-log.org (Postfix, from userid 33)
-	id 71BA04C1A1; Thu, 12 Feb 2009 17:57:54 +0100 (CET)
-X-Squirrel-UserHash: c3wyGAAN
-X-Squirrel-FromHash: AFRWCldXDSo=
-Message-ID: <57280.AFRWCldXDSo=.1234457874.squirrel@webmail.no-log.org>
-In-Reply-To: <c384c5ea0902120746r2ff7a7f0o972e5e1d370fcbc5@mail.gmail.com>
-References: <c384c5ea0902120746r2ff7a7f0o972e5e1d370fcbc5@mail.gmail.com>
-Date: Thu, 12 Feb 2009 17:57:54 +0100 (CET)
-From: "Denis" <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.9a
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: Re: [RFC] OpenEmbedded name tags (for shows, events)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXfK5-0006LF-Sp
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 18:26:01 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LXfIn-0002ro-RN
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 17:24:41 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 17:24:41 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Feb 2009 17:24:41 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 12 Feb 2009 18:24:28 +0100
+Message-ID: <gn1m0d$5tl$1@ger.gmane.org>
+References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
+	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 1/6] rt61-firmware: add 1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,64 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 16:59:13 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Feb 2009 17:26:02 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> Hello,
+On 12-02-09 17:38, Otavio Salvador wrote:
+> ---
+>   packages/rt2x00/rt61-firmware_1.2.bb |   14 ++++++++++++++
+>   1 files changed, 14 insertions(+), 0 deletions(-)
+>   create mode 100644 packages/rt2x00/rt61-firmware_1.2.bb
 >
-> on events we plan to walk around carrying OpenEmbedded name tags.
-> It will feature the new logo, with the openembedded name underneath.
->
-> Then, in a consistent (but probably different typeface) your name,
-> which is completed with a (possibly personal tagline).
->
-> I will create a executable C file that generates a PDF that you can
-> bring to the print shop to print 20-something name tags.
-> I will create this project inside the contrib/ folder.
->
-> Also, I would like to add a file there containing well-known
-> developers and/or users, as an input file.
->
-> Everybody please list their names (optionally with IRC nick) and a
-> tagline.
->
->           /OE\
->    openembedded
-> Leon Woestenberg
->  just a happy user
->
-> Leon 'likewise' Woestenberg
->      non-core developer
->
-> Leon 'likewise' Woestenberg
->     really core developer
->
-> Leon Woestenberg
->     bitbake bully
->
-> Leon Woestenberg
->      build monkey
->
->
-> Ideas/wishes/feedback?
->
-> Regards,
-> --
-> Leon
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-There is a file in oe where there are the devellopers are listed.
-The file is called MAINTAINERS
-by the way if I've done some recipes should I add myself in it?
+> diff --git a/packages/rt2x00/rt61-firmware_1.2.bb b/packages/rt2x00/rt61-firmware_1.2.bb
+> new file mode 100644
+> index 0000000..ae683c8
+> --- /dev/null
+> +++ b/packages/rt2x00/rt61-firmware_1.2.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION = "Firmware for rt61 based USB wifi adaptors"
+> +LICENSE = "unknown"
+> +
+> +SRC_URI = "http://www.ralinktech.com.tw/data/RT61_Firmware_V${PV}.zip"
+> +
+> +S = "${WORKDIR}/RT61_Firmware_V${PV}"
+> +
+> +do_install() {
+> +	install -d ${D}/${base_libdir}/firmware
+> +	install -m 0644 rt61.bin ${D}/${base_libdir}/firmware/
+> +}
+> +
+> +FILES_${PN} = "${base_libdir}/firmware/"
+> +PACKAGE_ARCH = "all"
 
-by the way here it is:
-Denis 'GNUtoo' Carikli
-non-core developer
-Denis.
+ACK
+
 
 
