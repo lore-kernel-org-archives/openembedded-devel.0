@@ -1,32 +1,17 @@
-Received: from [209.85.128.185] (helo=fk-out-0910.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LXWYo-00009Q-79
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Feb 2009 09:04:38 +0100
-Received: by fk-out-0910.google.com with SMTP id f40so269005fka.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2009 00:03:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=Lz8+2XMekKDkfvw/caxLHX/56pCZrW2PoutBJbxWTgg=;
-	b=Oe+wpnxnIOl1qIJb3BXM0KExHVzUbEloJD4AMqH7MFsqF/NjRwr/WiZgLY44qcnlLm
-	l/zrvrKkU0dVYNZyhPWmtj3d2ri3jkxo6emONhAHT8qrKXQ8N/TSQtB7lN//YwTYrTEd
-	iGmDZ2A43eLcmfQ0+j8a+spl08aaW0I/IFoio=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=UORL8RocFmu8aqy28pl1KeAF8QdEEIx1wCtrLA2OIro+2aWM8JbpvvUZZnoqzMcw+A
-	796sIkVEZg5V4mZK9vEnr90pAYsfFl2guDrExUQbn9FdiF6ytGzl9dN9sH9J1LGSKJCf
-	1sx6i6hJ+/IQB//NCKTbCPaZaVYin7zVypOOg=
-MIME-Version: 1.0
-Received: by 10.223.113.3 with SMTP id y3mr508558fap.71.1234425803851; Thu, 12 
-	Feb 2009 00:03:23 -0800 (PST)
-Date: Thu, 12 Feb 2009 09:03:23 +0100
-Message-ID: <ac9c93b10902120003sbbd2520rcaa70d7d4d9f02e8@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: from [83.222.24.114] (helo=smtp-14.masterhost.ru)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <roman@khimov.ru>) id 1LXZjn-0006n1-BL
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 12:28:11 +0100
+Received: (qmail 15164 invoked from network); 12 Feb 2009 11:26:33 -0000
+Received: from unknown (HELO ?192.168.1.116?) (rik@osrc.info@80.246.246.162)
+	by smtp1.masterhost.ru with SMTP; 12 Feb 2009 11:26:33 -0000
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Subject: zope issue
+Date: Thu, 12 Feb 2009 14:26:20 +0300
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <200902121426.26727.roman@khimov.ru>
+Subject: [PATCH] Fix rpm2cio sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +25,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 08:04:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Feb 2009 11:28:11 -0000
+X-Groupsio-MsgNum: 7623
+Content-Type: multipart/signed; boundary="nextPart1776724.QRY5DUBfPh";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+--nextPart1776724.QRY5DUBfPh
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Yesterday I discovered that zope had its own outdated copy of twisted
-(2.1.0), which got installed in /usr/lib/python2.6/twisted and
-/usr/lib/python2.6/zope/app/twisted.
-However this conflicted with the twisted pacakges (which are at 8.2.0)
-and which got installed in /usr/lib/python2.6/site-packages/twisted.
+Hello all.
 
-Unfortunately the zope twisted was preferred by python, while a
-pacakge like python-coherence needed a more recent version of twisted.
-In order to fix it, I changed the zope recipe to remove the twisted
-dirs upon install (based upon advice of Koen).
+Don't know why, but rpm2cpio tarball checksums are wrong, so here is the fi=
+x:
 
-However, as I am not a python expert, I'd like to bring up the issue
-here, in case there is a better solution.
+=2D-- a/conf/checksums.ini     2009-02-12 14:23:11.655542059 +0300
++++ b/conf/checksums.ini      2009-02-12 14:23:50.520780173 +0300
+@@ -18931,8 +18931,8 @@ md5=3Db8f0661ac765ce1a2de66ca53e37af83
+ sha256=3Da8168b8884ab40aadebba0ba696b889e25020d32a88e646d4f4bc56f2236b184
 
-FM.
+ [ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_=
+2.tbz]
+=2Dmd5=3D63f39118ea5ef7cda84a0638002ed6d2
+=2Dsha256=3D27ffe0392ae193eb04786a2159c099a00fe38ccdaebcebd72afc842c528bb6d3
++md5=3Dcb0cabdac81b7171843427f32427ca84
++sha256=3D20f48aa3c1f950c224e844d3a7d28a679f41173a26a2d7095ef1da27bda42c2f
 
+ [http://downloads.sourceforge.net/rpyc/rpyc-3.02.tar.gz]
+ md5=3D4e855372c4a533b9ed605503156e6e04
 
+=2D-=20
+                            Roman
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart1776724.QRY5DUBfPh
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAkmUB10ACgkQXJ70z+XgVcNP+ACgh2PdF2HmHqvLjvGxSyYwL0l9
+UAsAnRXvG/fdMUtaXKplJfVKk3kTXcoB
+=rPks
+-----END PGP SIGNATURE-----
+
+--nextPart1776724.QRY5DUBfPh--
