@@ -1,19 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LXaW5-0000AK-TO
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 13:18:06 +0100
-Received: (qmail 32595 invoked by uid 1003); 12 Feb 2009 12:16:47 -0000
+	(envelope-from <philip@balister.org>) id 1LXak0-0005jO-W7
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 13:32:29 +0100
+Received: (qmail 31772 invoked by uid 1003); 12 Feb 2009 12:31:09 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 12 Feb 2009 12:16:47 -0000
-Message-ID: <4994132E.2040603@balister.org>
-Date: Thu, 12 Feb 2009 07:16:46 -0500
+	by mail.geekisp.com with SMTP; 12 Feb 2009 12:31:09 -0000
+Message-ID: <4994168C.6010603@balister.org>
+Date: Thu, 12 Feb 2009 07:31:08 -0500
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <200902121426.26727.roman@khimov.ru> <gn12ij$ssf$1@ger.gmane.org>
-In-Reply-To: <gn12ij$ssf$1@ger.gmane.org>
+	<4994132E.2040603@balister.org>
+In-Reply-To: <4994132E.2040603@balister.org>
 Subject: Re: [PATCH] Fix rpm2cio sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -28,74 +29,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 12:18:06 -0000
-X-Groupsio-MsgNum: 7626
+X-List-Received-Date: Thu, 12 Feb 2009 12:32:29 -0000
+X-Groupsio-MsgNum: 7627
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020306010104020403000409"
+	micalg=sha1; boundary="------------ms030105040309050903080908"
 
---------------ms020306010104020403000409
+--------------ms030105040309050903080908
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> On 12-02-09 12:26, Roman I Khimov wrote:
->> Hello all.
+Philip Balister wrote:
+> Koen Kooi wrote:
+>> On 12-02-09 12:26, Roman I Khimov wrote:
+>>> Hello all.
+>>>
+>>> Don't know why, but rpm2cpio tarball checksums are wrong, so here is 
+>>> the fix:
 >>
->> Don't know why, but rpm2cpio tarball checksums are wrong, so here is 
->> the fix:
+>> If they are wrong we want to see the diff between the old and new 
+>> tarballs, replacing checksums as soon as upstream changes defeats the 
+>> purpose of us adding them.
 > 
-> If they are wrong we want to see the diff between the old and new 
-> tarballs, replacing checksums as soon as upstream changes defeats the 
-> purpose of us adding them.
+> How can we find a copy of the tarball with the original checksum? I do 
+> not have it in my local source cache. The file date on the ftp server is 
+> March 1 2008. I'm surprised the FreeBSD crowd would change a tarball, 
+> without changing the version.
 
-How can we find a copy of the tarball with the original checksum? I do 
-not have it in my local source cache. The file date on the ftp server is 
-March 1 2008. I'm surprised the FreeBSD crowd would change a tarball, 
-without changing the version.
+I checked a couple of the files from this list:
+
+http://dir.filewatcher.com/d/FreeBSD/5.4-release/alpha/rpm2cpio-1.2_2.tbz.3919.html
+
+and the md5sum is 6759b9c029d0c20c657b88d60bc2e277
+
+And yes, I am sort of testing patchwork :) [1]
 
 Philip
 
+[1] http://patchwork.openembedded.org/patch/6/
+
+
 
 > 
-> regards,
+> Philip
 > 
-> Koen
 > 
 >>
->> --- a/conf/checksums.ini     2009-02-12 14:23:11.655542059 +0300
->> +++ b/conf/checksums.ini      2009-02-12 14:23:50.520780173 +0300
->> @@ -18931,8 +18931,8 @@ md5=b8f0661ac765ce1a2de66ca53e37af83
->>   sha256=a8168b8884ab40aadebba0ba696b889e25020d32a88e646d4f4bc56f2236b184
+>> regards,
 >>
->>   
->> [ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz] 
+>> Koen
 >>
->> -md5=63f39118ea5ef7cda84a0638002ed6d2
->> -sha256=27ffe0392ae193eb04786a2159c099a00fe38ccdaebcebd72afc842c528bb6d3
->> +md5=cb0cabdac81b7171843427f32427ca84
->> +sha256=20f48aa3c1f950c224e844d3a7d28a679f41173a26a2d7095ef1da27bda42c2f
+>>>
+>>> --- a/conf/checksums.ini     2009-02-12 14:23:11.655542059 +0300
+>>> +++ b/conf/checksums.ini      2009-02-12 14:23:50.520780173 +0300
+>>> @@ -18931,8 +18931,8 @@ md5=b8f0661ac765ce1a2de66ca53e37af83
+>>>   
+>>> sha256=a8168b8884ab40aadebba0ba696b889e25020d32a88e646d4f4bc56f2236b184
+>>>
+>>>   
+>>> [ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz] 
+>>>
+>>> -md5=63f39118ea5ef7cda84a0638002ed6d2
+>>> -sha256=27ffe0392ae193eb04786a2159c099a00fe38ccdaebcebd72afc842c528bb6d3
+>>> +md5=cb0cabdac81b7171843427f32427ca84
+>>> +sha256=20f48aa3c1f950c224e844d3a7d28a679f41173a26a2d7095ef1da27bda42c2f
+>>>
+>>>   [http://downloads.sourceforge.net/rpyc/rpyc-3.02.tar.gz]
+>>>   md5=4e855372c4a533b9ed605503156e6e04
+>>>
+>>>
+>>>
+>>> ------------------------------------------------------------------------
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >>
->>   [http://downloads.sourceforge.net/rpyc/rpyc-3.02.tar.gz]
->>   md5=4e855372c4a533b9ed605503156e6e04
 >>
->>
->>
->> ------------------------------------------------------------------------
 >>
 >> _______________________________________________
 >> Openembedded-devel mailing list
 >> Openembedded-devel@lists.openembedded.org
 >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 > 
-> 
+> ------------------------------------------------------------------------
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
 
---------------ms020306010104020403000409
+--------------ms030105040309050903080908
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -147,17 +172,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxMjEy
-MTY0NlowIwYJKoZIhvcNAQkEMRYEFJRbX5gL6yff6dXu7nSexlCyeXJBMFIGCSqGSIb3DQEJDzFF
+MzEwOFowIwYJKoZIhvcNAQkEMRYEFN5CsIsAwFUm0Fu/mqncBzuR6/ACMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQAyMjFUWpkkxudAyM03jkAVJcXl0RCGfcEZAFpL20SkvHC7Jkdi
-02kP6YG20kI5M1BotgjiDhzQz4EQjekbLR/A59Y2aq635zmVengdtqjd6mZ6ModkQn2qeTZKtR20
-cBFw10YWGu3rsWHrHZsAvGExM6rMB2rGwN1qpRDXWmUyxTW68QbdzeMOYRdE+ivcqrhDtz5fx3+n
-4eKuQ1qboeBir8IG7aqUp3I9jLtJHZLYgG4Fly5YdGWbNO90lFYlSJdvTZQd0eKJ3Ea98VTS3Iug
-yST6a4YmZeoICHV7vd61mgpI7auwdXesi4ICNbwGMtygjJRHsmyQwfBbw9BH6eH7AAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQCTHUnCwXy/gK3P0KauIKs1Opik7LVsy5ocusJdThNFFDZ78LCA
+DcymBCc78LKQdCWQVuHdwQU0gEcxgD2ZMLaInsqQwCLJ8NvrAKmj/gnjyoFLVsXWVJpVsSp5hZCi
+c0HiFEwHD/zhZ/C+WND/4iX+/brNHsgyiv4ubgDRSgBOgwLH+hMDJZH5oM/0pdk4Tu5pyZBjStuW
+GKxglILGWZMQ5/5QFoqm8voBONYpkHRjuanzhYPdf4vF23xKCG3hpEtX5J0rrhE1Y998v3w0jHT7
+KyR0myzsRI1uiNnl8pp7UmEZeh1XFaBlo4wtbGb5m9q+QjsJIKSkufl5WYkd6qzDAAAAAAAA
 
---------------ms020306010104020403000409--
+--------------ms030105040309050903080908--
