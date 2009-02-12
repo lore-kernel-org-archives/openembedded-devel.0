@@ -1,34 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXjFW-0007h3-Up
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 22:37:34 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LXjEH-0004nO-0H
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 21:36:17 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 21:36:16 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 21:36:16 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <mwester@dls.net>) id 1LXjaw-0008JS-MN
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 22:59:42 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx01.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LXgSR-0000rs-Bn
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 12:38:43 -0600
+Message-ID: <49946CA4.6060303@dls.net>
+Date: Thu, 12 Feb 2009 12:38:28 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 12 Feb 2009 22:36:08 +0100
-Message-ID: <gn24o9$s96$1@ger.gmane.org>
-References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-5-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-6-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-7-git-send-email-otavio@ossystems.com.br>
-	<1234470448.4890.379.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <1234470448.4890.379.camel@lenovo.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 6/6] flash-plugin: add 10.0.12.36
+References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
+	<1234460865.3592.2.camel@mill.internal.reciva.com>
+In-Reply-To: <1234460865.3592.2.camel@mill.internal.reciva.com>
+Subject: Re: [PATCH 3/6] package.bbclass, package_ipk.bbclass: add	dynamic depends on locale packages (ipk	specific)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 21:37:35 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 12 Feb 2009 21:59:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 12-02-09 21:27, Phil Blundell wrote:
-> I guess there might be an argument for distributing a
-> dummy-server-fonts package that just ships one font and aliases
-> everything else to it for the purpose of keeping legacy applications
-> happy.
+Phil Blundell wrote:
+> On Thu, 2009-02-12 at 14:38 -0200, Otavio Salvador wrote:
+>> +
+>> +		if pkgname.find('-locale-') == -1:
+>> +			rdepends.append('%s-locale*' % pkgname)
+>> +
+> 
+> This looks like it will add locale dependencies to all the subpackages
+> (e.g. foo-doc, foo-dev and the like) as well as the main "foo" package,
+> which is a bit different to how the old code used to work.  But I guess
+> that's harmless enough: the worst effect will be to bloat the Packages
+> file a bit, and I doubt anybody will care too much.  So, thumbs up from
+> me.
 
-The xorg-minimal-fonts tries to do that.
+How much bloat?  Opkg already trips the OOM killer on the NSLU2 (32MB of
+RAM) when it loads the current Packages file and then tries to do
+something; we can work around it for now, but if this doubles the size
+in-memory, we may simply not have enough RAM to do whatever it is that
+opkg does with all that in-memory.
 
-regards,
+I have grave concerns over anything that adds unnecessary entries that
+cannot be turned off.
 
-Koen
-
+Mike (mwester)
 
 
