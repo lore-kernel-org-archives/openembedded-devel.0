@@ -1,33 +1,19 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXaoW-0005rQ-TX
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 13:37:08 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LXanE-0007AV-VB
-	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 12:35:48 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 12:35:48 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Feb 2009 12:35:48 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 12 Feb 2009 13:35:37 +0100
-Message-ID: <gn152q$5pk$1@ger.gmane.org>
+Received: from [83.222.24.104] (helo=smtp-4.masterhost.ru)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <roman@khimov.ru>) id 1LXau7-0005v1-Dv
+	for openembedded-devel@openembedded.org; Thu, 12 Feb 2009 13:42:55 +0100
+Received: (qmail 16061 invoked from network); 12 Feb 2009 12:41:14 -0000
+Received: from unknown (HELO ?192.168.1.116?) (rik@osrc.info@80.246.246.162)
+	by smtp1.masterhost.ru with SMTP; 12 Feb 2009 12:41:16 -0000
+From: Roman I Khimov <roman@khimov.ru>
+To: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 12 Feb 2009 15:41:06 +0300
+User-Agent: KMail/1.9.9
 References: <200902121426.26727.roman@khimov.ru> <gn12ij$ssf$1@ger.gmane.org>
-	<4994132E.2040603@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <4994132E.2040603@balister.org>
-Sender: news <news@ger.gmane.org>
+In-Reply-To: <gn12ij$ssf$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200902121541.09495.roman@khimov.ru>
+Cc: openembedded-devel@openembedded.org
 Subject: Re: [PATCH] Fix rpm2cio sums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,100 +28,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2009 12:37:09 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 12 Feb 2009 12:42:56 -0000
+X-Groupsio-MsgNum: 7629
+Content-Type: multipart/signed; boundary="nextPart1439382.0GuSuFFuDX";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-On 12-02-09 13:16, Philip Balister wrote:
-> Koen Kooi wrote:
->> On 12-02-09 12:26, Roman I Khimov wrote:
->>> Hello all.
->>>
->>> Don't know why, but rpm2cpio tarball checksums are wrong, so here is
->>> the fix:
->>
->> If they are wrong we want to see the diff between the old and new
->> tarballs, replacing checksums as soon as upstream changes defeats the
->> purpose of us adding them.
+--nextPart1439382.0GuSuFFuDX
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Koen Kooi:
+> On 12-02-09 12:26, Roman I Khimov wrote:
+> > Don't know why, but rpm2cpio tarball checksums are wrong, so here is
+> > the fix:
 >
-> How can we find a copy of the tarball with the original checksum? I do
-> not have it in my local source cache. The file date on the ftp server is
-> March 1 2008. I'm surprised the FreeBSD crowd would change a tarball,
-> without changing the version.
+> If they are wrong we want to see the diff between the old and new
+> tarballs, replacing checksums as soon as upstream changes defeats the
+> purpose of us adding them.
 
-It gets worse:
+If I've had old one anywhere around, I'd show the diff, but the problem is =
+I=20
+don't have it.
 
-koen@dominion:/OE/build$ md5sum /OE/downloads/*rpm*tbz ; sha256sum 
-/OE/downloads/*rpm*tbz
-cb0cabdac81b7171843427f32427ca84  rpm2cpio-1.2_2.tbz
-20f48aa3c1f950c224e844d3a7d28a679f41173a26a2d7095ef1da27bda42c2f 
-rpm2cpio-1.2_2.tbz
+=46rom what I see most probably it's some meta-data changes as we have=20
+ready-to-install FreeBSD tarball there with all=20
+its "+COMMENT", "+CONTENTS", "+DESC", "+MTREE_DIRS" files. So=20
+the 'rpm2cpio.pl' itself should be the same.
 
-angstrom@serenity:~/website/unstable/sources$ md5sum *rpm* ; sha256sum *rpm*
-76f8b7060500191c7cde078f831c7f0c  rpm2cpio-1.2_2.tbz
-aac7daba6d805d87e62636f0af53ce4b532cacf00a29485d94b3a605f2ffdf6c 
-rpm2cpio-1.2_2.tbz
+Now another question is why OE package uses such tarball as source at all.=
+=20
+So, probably we can change the source to something like
 
+http://www.freebsd.org/cgi/cvsweb.cgi/%7Echeckout%7E/ports/archivers/rpm2cp=
+io/files/rpm2cpio?rev=3D1.2;content-type=3Dtext%2Fplain;only_with_tag=3DREL=
+EASE_7_1_0
 
-git annotate:
+which is the only file we need and it's rev'd tagged should-be-non-volatile.
 
-0da69511    (Marcin Juszkiewicz 2007-10-24 13:09:31 +0000 
-18933)[ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz]
-a7d0813d    (Otavio Salvador    2008-11-18 12:21:08 -0200 
-18934)md5=63f39118ea5ef7cda84a0638002ed6d2
-a7d0813d    (Otavio Salvador    2008-11-18 12:21:08 -0200 
-18935)sha256=27ffe0392ae193eb04786a2159c099a00fe38ccdaebcebd72afc842c528bb6d3
+=2D-=20
+                            Roman
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-The first commit is:
+--nextPart1439382.0GuSuFFuDX
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-commit 0da695117f8a142e6d15601d8d7064ed5c35074a
-Author: Marcin Juszkiewicz <hrw@openembedded.org>
-Date:   Wed Oct 24 13:09:31 2007 +0000
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
-     checksums.ini: sync with Poky
-     r2954 | hrw | 2007-10-24 14:29:57 +0200 (<C5><9A>r, 24 X 2007) | 1 line
-     checksums.ini: added some new entries from OpenMoko build
- 
-------------------------------------------------------------------------
-     r2953 | hrw | 2007-10-24 14:28:03 +0200 (<C5><9A>r, 24 X 2007) | 1 line
-     checksums.ini: sort by archive name (script for it will be pushed 
-into OE later)
- 
-------------------------------------------------------------------------
-     r2952 | hrw | 2007-10-24 13:39:13 +0200 (<C5><9A>r, 24 X 2007) | 1 line
-     checksums.ini: sort alphabetically to make updates easier
+iEYEABECAAYFAkmUGOIACgkQXJ70z+XgVcMNhgCgsJNA/VKLa0NqN6UrVP3Dycze
+X8MAoJvLPZVL+Ky9SYNc9qHFkV7N1nQa
+=kRYS
+-----END PGP SIGNATURE-----
 
-This is a red herring, see the diff:
-
--[ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz]
--md5=d4950dc6918ca79a4abab306b6188512
--sha256=5ec970d34b4e22feea0333dae3b5f5ee0e38295d89e306b4929b910f4a2aae25
-
-+[ftp://ftp.freebsd.org/pub/FreeBSD//ports/packages/archivers/rpm2cpio-1.2_2.tbz]
-+md5=d4950dc6918ca79a4abab306b6188512
-+sha256=5ec970d34b4e22feea0333dae3b5f5ee0e38295d89e306b4929b910f4a2aae25
-
-
-The second one:
-
-commit a7d0813dd5c391183b1356c49bf082a647123985
-Author: Otavio Salvador <otavio@ossystems.com.br>
-Date:   Tue Nov 18 12:21:08 2008 -0200
-
-     checksums.ini: fix rpm2cpio checksums
-
--md5=d4950dc6918ca79a4abab306b6188512
--sha256=5ec970d34b4e22feea0333dae3b5f5ee0e38295d89e306b4929b910f4a2aae25
-+md5=63f39118ea5ef7cda84a0638002ed6d2
-+sha256=27ffe0392ae193eb04786a2159c099a00fe38ccd
-
-So it seems that freebsd people are replacing their files or that their 
-server suffers massive disk corruption.
-
-regards,
-
-Koen
-
-
-
-
+--nextPart1439382.0GuSuFFuDX--
