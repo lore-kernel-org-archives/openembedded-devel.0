@@ -1,22 +1,30 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LY04i-0007pH-Qg
+	(envelope-from <otavio@freedom.ind.br>) id 1LY0Ah-0008Df-0R
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 16:35:32 +0100
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.116])
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LY03J-000H9f-3H
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 18:34:05 +0300
-From: Roman I Khimov <khimov@altell.ru>
+	Fri, 13 Feb 2009 16:41:43 +0100
+Received: from internet.ossystems.com.br (unknown [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 29AB54020B;
+	Fri, 13 Feb 2009 11:40:25 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id 6A047740C3;
+	Fri, 13 Feb 2009 13:39:14 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 12930610067; Fri, 13 Feb 2009 13:39:32 -0200 (BRST)
+From: Otavio Salvador <otavio@debian.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Feb 2009 18:33:54 +0300
-User-Agent: KMail/1.9.9
-Organization: Altell Ltd.
+Organization: O.S. Systems Ltda.
+References: <200902131525.34787.openembedded@haerwu.biz>
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Fri, 13 Feb 2009 13:39:32 -0200
+In-Reply-To: <200902131525.34787.openembedded@haerwu.biz> (Marcin
+	Juszkiewicz's message of "Fri, 13 Feb 2009 15:25:33 +0100")
+Message-ID: <87r622firv.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
 MIME-Version: 1.0
-Message-Id: <200902131833.55265.khimov@altell.ru>
-Subject: [PATCH] New package: tnef
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Machine config generator (FOSDEM idea)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,44 +38,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 15:35:33 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Feb 2009 15:41:43 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hello all.
+Marcin Juszkiewicz <openembedded@haerwu.biz> writes:
 
-diff --git a/packages/tnef/tnef.inc b/packages/tnef/tnef.inc
-new file mode 100644
-index 0000000..2da8960
---- /dev/null
-+++ b/packages/tnef/tnef.inc
-@@ -0,0 +1,7 @@
-+DESCRIPTION = "TNEF is a program for unpacking ms-tnef type MIME attachments"
-+SECTION = "net"
-+LICENSE = "GPL"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/tnef/tnef-${PV}.tar.gz"
-+
-+inherit autotools
-diff --git a/packages/tnef/tnef_1.4.5.bb b/packages/tnef/tnef_1.4.5.bb
-new file mode 100644
-index 0000000..cec39d8
---- /dev/null
-+++ b/packages/tnef/tnef_1.4.5.bb
-@@ -0,0 +1,3 @@
-+require tnef.inc
-+
-+PR = "r0"
---- a/conf/checksums.ini	2009-02-13 15:05:24.976017132 +0300
-+++ b/conf/checksums.ini	2009-02-13 18:30:39.887017023 +0300
-@@ -25330,3 +25330,6 @@ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340
- md5=5f7b88ebb2bcd7e8044328482d079661
- sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
- 
-+[http://downloads.sourceforge.net/tnef/tnef-1.4.5.tar.gz]
-+md5=ec46d47525c6afb928642e3edec21058
-+sha256=42067fbc00d1ad4bcbb67440d61869aa43ed2d3d099fc691d3da8ad4296fa6b1
+> Hi
+>
+> I was talking during FOSDEM with some developers and one of things which 
+> I was asked about was 'how to create machine config' (usually question 
+> was other but had this sense).
+>
+> OE developers usually know that machine config is simple but tell that 
+> to Joe Random who only knows that his board use s3c2443 etc. So idea was 
+> to create simple few steps wizard which will ask few questions and 
+> produce machine config as result. More work would be required on 
+> creating kernel recipe because kernel can be from svn/cvs/git or tarball 
+> + quilt patchset etc...
+>
+> Thats only beginning of idea - I hope that someone will provide 
+> feedback.
+
+I see the pros for it but I also think it will not help too much; the
+most difficult problem is to understand OE as a whole and how the
+packages can affect each other.
+
+It takes a while to identify the failures and to cook up a fix for those
+problems.
+
+What will be the use of a machine definition without a kernel config for
+it? And let's be real, if the person knows how to compile the kernel for
+it then I'm absolute sure that the machine definition won't be problem.
+
+What I do think could be useful is a more detailed set of "Quick Start
+Guide" having one for each really common task. The set of tasks I
+believe are common for regular users are:
+
+ - adding a new package version
+ - adding a new package
+ - creating a distribution based in another
+ - adding a new machine
+
+This small set solves 90% of problems people usually have and as a plus
+help the end user to understand OE in more deep; as a bonus we can end
+up having more people giving back the generated changes.
+
+My 2c.
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
