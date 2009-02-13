@@ -1,30 +1,33 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LXtd0-0006uV-Pu
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 09:42:30 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 33B4116E235
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 09:53:51 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 8DBE62A420E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 09:41:07 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 13 Feb 2009 09:41:07 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF664@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF642@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] subversion libtool problem
-Thread-Index: AcmKq6l61KuqXcTwQIyWF/FxgHaSdQDCwxig
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF642@hiob.intern.dresearch.de>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: subversion libtool problem
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXtv0-0000pg-Ub
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 10:01:06 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LXttg-0004df-JF
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 08:59:44 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 13 Feb 2009 08:59:44 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 13 Feb 2009 08:59:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 13 Feb 2009 09:59:33 +0100
+Message-ID: <gn3cpm$tif$1@ger.gmane.org>
+References: <87iqnfjccq.fsf@neumann.lab.ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <87iqnfjccq.fsf@neumann.lab.ossystems.com.br>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFH] Support for automatic package versining using git describe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,62 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 08:42:31 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Feb 2009 09:01:07 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> Since the saturday "apr + apr-util: merge from poky" commit=20
-> by Koen i almost reached my goal to build a subversion client=20
-> for Angstrom. After patching neon for myself there is just=20
-> this last problem:
->=20
-> NOTE: Running task 422 of 578 (ID: 7,=20
-> /opt/openembedded/packages/subversion/subversion_1.4.5.bb, do_compile)
-> NOTE: package subversion-1.4.5: started
-> NOTE: package subversion-1.4.5-r0: task do_compile: started
-> ERROR: function do_compile failed
-> ERROR: log data follows=20
-> (/home/sledz/oe/tmp.1/work/i486-angstrom-linux/subversion-1.4.
-> 5-r0/temp/log.do_compile.6088)
-> | NOTE: make
-> | /bin/sh=20
-> /home/sledz/oe/tmp.1/work/i486-angstrom-linux/subversion-1.4.5
-> -r0/subversion-1.4.5/libtool --silent --mode=3Dcompile=20
-> i486-angstrom-linux-gcc -march=3Di486=20
-> -isystem/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/i
-> nclude   -DLINUX=3D2 -D_REENTRANT -D_GNU_SOURCE =20
-> -isystem/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/i
-> nclude -fexpensive-optimizations -frename-registers=20
-> -fomit-frame-pointer -O2   -D_LARGEFILE64_SOURCE -DNE_LFS    =20
-> -I./subversion/include -I./subversion=20
-> -I/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/include
-> /neon=20
-> -I/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/include
->   =20
-> -I/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/include
-> =20
-> -I/home/sledz/oe/tmp.1/staging/i486-angstrom-linux/usr/include
->   -o subversion/libsvn_delta/cancel.lo -c=20
-> subversion/libsvn_delta/cancel.c
-> |=20
-> /home/sledz/oe/tmp.1/work/i486-angstrom-linux/subversion-1.4.5
-> -r0/subversion-1.4.5/libtool: line 463: CDPATH: command not found
-> |=20
-> /home/sledz/oe/tmp.1/work/i486-angstrom-linux/subversion-1.4.5
-> -r0/subversion-1.4.5/libtool: line 1141: func_opt_split:=20
-> command not found
-> | libtool: Version mismatch error.  This is libtool 2.2.4, but the
-> | libtool: definition of this LT_INIT comes from an older release.
-> | libtool: You should recreate aclocal.m4 with macros from=20
-> libtool 2.2.4
-> | libtool: and run autoconf again.
-> | make: *** [subversion/libsvn_delta/cancel.lo] Error 63
-> | FATAL: oe_runmake failed
+On 13-02-09 03:32, Otavio Salvador wrote:
+> Hello,
+>
+> One of nice features we've been using is the git-describe to get
+> versions based on tags; many projects are using it to name the
+> development releases and it does give a better view of how diverged it
+> from last released version.
+>
+> So we're looking for a way to use it to generate the PV based on
+> that. The current git fetcher already has the required support to get
+> tags, so we can use it as SRCREV, but not yet to use git-describe.
 
-Is there nobody maintaining subversion???
+Do you have any examples of the output?
 
-Steffen
+regards,
+
+Koen
+
 
 
