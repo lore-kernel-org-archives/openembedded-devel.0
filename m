@@ -1,19 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LXz0S-0000Ox-4N
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 15:27:04 +0100
-Received: (qmail 16138 invoked by uid 813007); 13 Feb 2009 14:25:38 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 13 Feb 2009 14:25:38 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@openembedded.org
-Date: Fri, 13 Feb 2009 15:25:33 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
+	(envelope-from <khimov@altell.ru>) id 1LXz8S-0000aA-QM
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Feb 2009 15:35:20 +0100
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.116])
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LXz73-0008mV-Ic
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Feb 2009 17:33:53 +0300
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Feb 2009 17:33:44 +0300
+User-Agent: KMail/1.9.9
+References: <200902121727.21796.roman@khimov.ru> <gn1j5m$qc5$2@ger.gmane.org>
+	<200902130952.52664.roman@khimov.ru>
+In-Reply-To: <200902130952.52664.roman@khimov.ru>
+Organization: Altell Ltd.
 MIME-Version: 1.0
-Message-Id: <200902131525.34787.openembedded@haerwu.biz>
-Subject: Machine config generator (FOSDEM idea)
+Message-Id: <200902131733.44801.khimov@altell.ru>
+Subject: Re: [PATCH] icecc: base fix for cross and native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,35 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 14:27:04 -0000
+X-List-Received-Date: Fri, 13 Feb 2009 14:35:21 -0000
 Content-Type: text/plain;
-  charset="us-ascii"
+  charset="windows-1251"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
+Roman I Khimov:
+> Another approach could be just reducing the race window, fixing
+> create-icecc-env.sh to write to temporary file and then move it to its
+> place. Maybe that would be enough.
 
-Hi
+BTW, this kind of kludge seems to be working, at least for two runs on 
+dual-core and quad-core machines.
 
-I was talking during FOSDEM with some developers and one of things which 
-I was asked about was 'how to create machine config' (usually question 
-was other but had this sense).
-
-OE developers usually know that machine config is simple but tell that 
-to Joe Random who only knows that his board use s3c2443 etc. So idea was 
-to create simple few steps wizard which will ask few questions and 
-produce machine config as result. More work would be required on 
-creating kernel recipe because kernel can be from svn/cvs/git or tarball 
-+ quilt patchset etc...
-
-Thats only beginning of idea - I hope that someone will provide 
-feedback.
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+--- a/create-icecc-env.sh
++++ b/create-icecc-env.sh
+@@ -181,12 +181,14 @@ else
+  fi
+ 
+ fi
++TEMPFILE=`tempfile`
+ cd $tempdir
+-tar -czhf "$mydir/$archive_name".tar.gz $target_files || {
++tar -czhf $TEMPFILE $target_files || {
+  if test -z "$silent"; then
+   echo "Couldn't create archive"
+  fi
+   exit 3
+ }
+ cd ..
++mv $TEMPFILE "$mydir/$archive_name".tar.gz
+ rm -rf $tempdir
 
 
