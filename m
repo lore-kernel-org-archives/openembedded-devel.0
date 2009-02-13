@@ -1,34 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.220.17] (helo=mail-fx0-f17.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LXu4z-000142-8u
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 10:11:25 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LXu3e-00054C-Py
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 09:10:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 13 Feb 2009 09:10:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 13 Feb 2009 09:10:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 13 Feb 2009 10:05:02 +0100
-Message-ID: <gn3d3v$um5$2@ger.gmane.org>
-References: <200902121727.21796.roman@khimov.ru>	<c384c5ea0902120728n459671f4y32957b212a8af0ed@mail.gmail.com>	<gn1j5m$qc5$2@ger.gmane.org>
-	<200902130952.52664.roman@khimov.ru>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <200902130952.52664.roman@khimov.ru>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] icecc: base fix for cross and native builds
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LXuBa-0001QD-Cv
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Feb 2009 10:18:14 +0100
+Received: by fxm10 with SMTP id 10so2042040fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 01:16:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=6LyseWqvMo1MCYN0Sgt+DKqQpWA5Yo9sU5K5zjLm2eQ=;
+	b=CDgqx9RttPsz4VIBane3qSJlvSz1DkGoLpwKHvBdJmhJn6MwMbVL3uzWXC2TW191hy
+	DSQrhua5xo7QHMEdciKBhpUfvVETwNS3RzUbp9Gv2EFuRmlIKYQAbOdMp2cxT1AiMD2o
+	fSYObXUgsloaF737nY6KrXdt2OlCSMj/iCrxY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=p8E/IKHSID58ML2/Z88QlK3xdnoyGFmeTrlS3pld7dgYzsG+DFutLsONWOEamlh1ji
+	XHA/DOph/OotgFQOJku1ibVcV5iUdSIW9Sl4C7tMFaxb6k6cOM2rqePLje8jOwQVH3mm
+	CwtCQPe/Yk8zjsPmLKkovukZPwUHq1bmCdU9M=
+MIME-Version: 1.0
+Received: by 10.180.255.1 with SMTP id c1mr652903bki.36.1234516607963; Fri, 13 
+	Feb 2009 01:16:47 -0800 (PST)
+In-Reply-To: <57280.AFRWCldXDSo=.1234457874.squirrel@webmail.no-log.org>
+References: <c384c5ea0902120746r2ff7a7f0o972e5e1d370fcbc5@mail.gmail.com>
+	<57280.AFRWCldXDSo=.1234457874.squirrel@webmail.no-log.org>
+Date: Fri, 13 Feb 2009 10:16:47 +0100
+Message-ID: <c384c5ea0902130116v88b33acp6ffb6567c89026@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] OpenEmbedded name tags (for shows, events)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 09:11:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 13 Feb 2009 09:18:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 13-02-09 07:52, Roman I Khimov wrote:
-> Koen Kooi:
->> On 12-02-09 16:28, Leon Woestenberg wrote:
->>> On Thu, Feb 12, 2009 at 3:27 PM, Roman I Khimov<roman@khimov.ru>   wrote:
->>>> There are severe problems with icecc builds currently in OE.
->>>> Cross-compiler tarball created wrong, PATH set incorrectly, etc.
->>> Excellent!
->>>
->>> It's probably a little-used class, but if we get it to work more
->>> robustly, we can make more noise about it.
->>>
->>> I will try to do some tests here over the next few weeks with your
->>> patch, time permitting.
->> Once icecc works we should have a chat with the suse buildservice
->> people. PARALLEL_MAKE = "-j256", here we come :)
+Hello,
+
+On Thu, Feb 12, 2009 at 5:57 PM, Denis <GNUtoo@no-log.org> wrote:
+>>
+>> I will create a executable C file that generates a PDF that you can
+>> bring to the print shop to print 20-something name tags.
+>> I will create this project inside the contrib/ folder.
+>>
+>> Also, I would like to add a file there containing well-known
+>> developers and/or users, as an input file.
+>> ...
+>> Ideas/wishes/feedback?
+>>
+> There is a file in oe where there are the devellopers are listed.
+> The file is called MAINTAINERS
 >
-> I'm running it with "-j14" there and combined with bitbake parallel task
-> execution it just rocks, the only slowdowns are blacklisted packages like
-> gcc and glibc.
->
-> So, if anyone cares enough to commit? ;)
+Duh. Thanks for waking me up.
 
-
-AIUI Leon wants to give it a spin first, but you have my +1.
-
-regards,
-
-Koen
-
+Regards,
+-- 
+Leon
 
 
