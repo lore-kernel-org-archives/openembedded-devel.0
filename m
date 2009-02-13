@@ -1,18 +1,35 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [198.175.154.225] (helo=us194mx04.tycoelectronics.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LXxoD-00035I-5v
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 14:10:33 +0100
-Received: (qmail 7131 invoked by uid 1003); 13 Feb 2009 13:08:53 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 Feb 2009 13:08:52 -0000
-Message-ID: <499570E4.1020503@balister.org>
-Date: Fri, 13 Feb 2009 08:08:52 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <john.charlton@tycoelectronics.com>)
+	id 1LXyFh-0000Rx-PM for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Feb 2009 14:38:45 +0100
+Received: from us194mx11.tycoelectronics.net ([163.241.185.106]) by
+	us194mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.2499); 
+	Fri, 13 Feb 2009 08:37:05 -0500
+Received: from us194mx07.tycoelectronics.net ([163.241.185.38]) by
+	us194mx11.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
+	Fri, 13 Feb 2009 08:37:05 -0500
+Received: from us194mx002.tycoelectronics.net (163.241.202.108) by
+	us194mx07.tycoelectronics.net (163.241.185.38) with Microsoft SMTP
+	Server (TLS) id 8.1.336.0; Fri, 13 Feb 2009 08:37:04 -0500
+Received: from us194mx002.tycoelectronics.net ([163.241.202.108]) by
+	us194mx002.tycoelectronics.net ([163.241.202.108]) with mapi;
+	Fri, 13 Feb 2009 08:37:04 -0500
+From: "Charlton, John" <john.charlton@tycoelectronics.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 13 Feb 2009 08:37:02 -0500
+Thread-Topic: Devshell X display error
+Thread-Index: AcmN4CdY9xDplUOAS8mF+YjnvoqJng==
+Message-ID: <CF7FB0793253794F9F45991443E5FE20050080FC56@us194mx002.tycoelectronics.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-Subject: Having trouble keeping track of the Patches?
+X-OriginalArrivalTime: 13 Feb 2009 13:37:05.0054 (UTC)
+	FILETIME=[28A013E0:01C98DE0]
+Subject: Devshell X display error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,92 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 13:10:42 -0000
-X-Groupsio-MsgNum: 7697
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050000020902060701060109"
+X-List-Received-Date: Fri, 13 Feb 2009 13:38:46 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
---------------ms050000020902060701060109
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+I am getting the following error when I attempt to start a gnome-terminal d=
+evshell as follows:
 
-Patches sent to the list are being tracked with patchwork now:
+bitbake -c devshell virtual/kernel
 
-http://patchwork.openembedded.org/project/openembedded/list/
+This was working the last time I used it with org.openembedded.stable and t=
+he angstrom.2007.1 distro for i686-generic but with the following configura=
+tion I always get the 'X11 connection rejected because of wrong authenticat=
+ion.' error and it doesn't display the gnome-terminal window.  If I run gno=
+me-terminal from the command line it works correctly as do other x window a=
+pplications.
 
-If you submit a patch, please update the flags as comments occur and 
-consensus happens.
 
-Hopefully, having one place to review discussion will make it easier for 
-people with commit access to commit patches they are not personally 
-comfortable with. Hopefully, this improves patch quality and gets more 
-patches commited in less time, and spreads the commit load over more people.
+OE Build Configuration:
+BB_VERSION        =3D "1.8.13"
+METADATA_BRANCH   =3D "org.openembedded.dev"
+METADATA_REVISION =3D "b935d0e40c9bd24294d13bfbde0cbdcd14671e0c"
+TARGET_ARCH       =3D "arm"
+TARGET_OS         =3D "linux-gnueabi"
+MACHINE           =3D "at91sam9261ek"
+DISTRO            =3D "angstrom"
+DISTRO_VERSION    =3D "2009.X-test-20090212"
+TARGET_FPU        =3D "soft"
 
-Philip
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 32 of 32 (ID: 4, /home/us075929/projects/oe/openembedded=
+/packages/linux/linux_2.6.20.bb, do_devshell)
+NOTE: package linux-2.6.20: started
+NOTE: package linux-2.6.20-r8: task do_devshell: started
+X11 connection rejected because of wrong authentication.
+ERROR: function do_devshell failed
 
---------------ms050000020902060701060109
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+--John
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxMzEz
-MDg1MlowIwYJKoZIhvcNAQkEMRYEFAVTpt4XXEA/c3WudVXRcku60VF4MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQAm1JUzrc+Ti8ZtVvbw0EsGJs4o1Xvq3XQn2LkJJcZoVwhvG1WG
-48En1CSr+YklV9gAjVqF31ag82O++k0g3lPS2pu/vmeZGr3Dvsq6yXuX/ccsLYgDprKnIzdIffER
-x4sgNFXkZi7TITrzeej5DwdCColGbNVjfuQN1uKKd0gjtFGk4ATZXaDkAhduHQNzy2zDFmPyHdDT
-bg43/f9icG6s19L9LY/BJ01GVcc5LY2tU9LhJoPNXZIUaF+e9LohbBuzrJAD5yJIG9BS7QCTbxF5
-5V4fX7YwnDcw9O5RKWUsU0D64+a/y7PsTEy2CNz5c6PFxV4vszXUk88xxeKPl1jFAAAAAAAA
 
---------------ms050000020902060701060109--
