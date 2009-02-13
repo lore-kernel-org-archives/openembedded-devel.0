@@ -1,37 +1,39 @@
-Received: from [209.85.220.17] (helo=mail-fx0-f17.google.com)
+Received: from [65.182.109.70] (helo=mta1.brinkster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LY3qJ-00036P-TS
+	(envelope-from <John.Willis@Distant-earth.com>) id 1LY3wx-0003LP-VK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 20:36:55 +0100
-Received: by fxm10 with SMTP id 10so2647806fxm.12
+	Fri, 13 Feb 2009 20:43:48 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta1.brinkster.com (Postfix) with ESMTP id F04983966F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 11:35:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JS5lM9aKmCfHEzprIgRv8ACmAxZF+bH+zpcHpuD3tuE=;
-	b=twO25DxZfk7HOPRFcs98O0Hgt5QiPRIBb+Z1G3/yoTHk22vJN910oDPqxSsgiOUxlS
-	emsZZdFOp6/IKpPdW/XcMVIFKlZNxpsyHKdb1eiTDwFziAD8gBsmV+3pyS609I9HC9gS
-	ux62GE9kKhG+5n9zLied8jaaMUQrWomXBIkXw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Q7CfBXL5i/OoMj8EPpz77pBbGQ3Km2iCnSxqJXODPpTZw6AZ6R2rsyQBlt3mNEIZjH
-	GAR9CqMy8XX3EWFLzMj4QOENOa+8VN6+QDcKMtMLbUEuI08sHCoZniOfGuan0KvZb2Qu
-	ZIWicE0PDyHoGEotzCIv9kSTMkTmlbo8ldstQ=
-MIME-Version: 1.0
-Received: by 10.181.61.7 with SMTP id o7mr828780bkk.51.1234553724875; Fri, 13 
-	Feb 2009 11:35:24 -0800 (PST)
-In-Reply-To: <871vu2chee.fsf@neumann.lab.ossystems.com.br>
-References: <200902131728.08634.openembedded@haerwu.biz>
-	<878woae03q.fsf@neumann.lab.ossystems.com.br>
-	<fce2a370902130939m708ada3dn55be8cdeadacbfbb@mail.gmail.com>
+	Fri, 13 Feb 2009 14:42:18 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+X-Spam-Flag: NO
+X-Spam-Score: 0.289
+X-Spam-Level: 
+X-Spam-Status: No, score=0.289 tagged_above=-10 required=5 tests=[AWL=-0.443, 
+	BAYES_00=-2.599, MSGID_MULTIPLE_AT=1.449, RCVD_IN_PBL=0.905,
+	RCVD_IN_SORBS_DUL=0.877, RDNS_DYNAMIC=0.1]
+Received: from mta1.brinkster.com ([127.0.0.1])
+	by localhost (mta1.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7ViCgtWq3A89
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 14:42:18 -0500 (EST)
+Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
+	[82.46.19.72])
+	by mta1.brinkster.com (Postfix) with ESMTP id 8EEA6395FFE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 14:42:16 -0500 (EST)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <200902131728.08634.openembedded@haerwu.biz>	<878woae03q.fsf@neumann.lab.ossystems.com.br>	<fce2a370902130939m708ada3dn55be8cdeadacbfbb@mail.gmail.com>
 	<871vu2chee.fsf@neumann.lab.ossystems.com.br>
-Date: Fri, 13 Feb 2009 20:35:24 +0100
-Message-ID: <c384c5ea0902131135v5797291t2955907944e27bb7@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <871vu2chee.fsf@neumann.lab.ossystems.com.br>
+Date: Fri, 13 Feb 2009 19:41:59 -0000
+Message-ID: <029801c98e13$26b15b10$74141130$@Willis@Distant-earth.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcmODG8DHt1bN7HXTG+RzzKd9OqRSgABH4oA
 Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,73 +48,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 19:36:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 13 Feb 2009 19:43:48 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
-Hello,
+> >> <...>
+> >>> This solution also has one nasty part - now we can keep SRC_URI for
+> >>> multiple versions in common file, but if we switch to storing it in
+> >>> SRC_URI we will have to change that.
+> >>>
+> >>> Other solution proposed on IRC was to keep checksums in extra file
+> in
+> >>> each directory of packages/ subdirectory. I think that it is not
+> best
+> >>> but sounds better then one file.
+> >>>
+> >>> What do you think? Which way we should go? Do you have other ideas?
+> >> <...>
+> >>
+> >> What about having a checksums for _each_ recipe?
+> >>
+> >> foo_1.0.bb
+> >> foo_1.0.md5sum
+> >
+> > This will waste directories and will make tree navigation harder.
+> 
+> Well; so let's just create a md5sums directory at OE topdir and add the
+> dirs and files there.
 
-On Fri, Feb 13, 2009 at 7:37 PM, Otavio Salvador <otavio@debian.org> wrote:
-> Ihar Hrachyshka <ihar.hrachyshka@gmail.com> writes:
->
->> On Fri, Feb 13, 2009 at 7:08 PM, Otavio Salvador <otavio@debian.org> wrote:
->>> Marcin Juszkiewicz <openembedded@haerwu.biz> writes:
->>>
->>>>
->>>> What do you think? Which way we should go? Do you have other ideas?
->>> <...>
->>>
+Why not take that a little further and just have a checksums dir at the root
+with a 'downloadname'.manifest with MD5 and SHA256 hashes? Take the
+formatting from Gentoo if people want to. Plenty of scope to be flexible in
+the future then without committing to some name stamped method ;-).
 
-I have thought about this (and our current fetch and checksum) a lot
-in the past.
-
->> Keep the checksums.ini file, but change it's layout a bit.
-
-In all cases, we need to REMOVE the URL of a package from the key, as
-we are ONLY interested in its contents.
-
-So, solution 1:
-
->> Make the key of a package: <filename>.
-
-However, I would opt for solution 2:
-
->> Make the key of a source package: <filename, sha1sum, md5sum>.
-
-Yes, that's right. The key of a package is it's filename plus it's contents.
-Filename because we humans identify it by its name.
-The dual checksum because we can guarantee the desired contents.
-
-Next step, is we adapt the fetcher to:
-
-- find URLs for a package given any of it's (sub)key.
-- check the package against its dual sums.
-
-I have written a working proof-of-concept of a
-package-fetcher/checker/ url-cache/... in C using sqlite (instead of
-checksums.ini)
-
-which is public here:
-
-http://www.sidebranch.com/leon/witpa_20080730.tar.bz2
-
-It can import checksums.ini though.
-
-
-To summarize: remove URL from the package key.
-
-The .bb names the upstream URL and filename.
-
-The filename ALONE is used as the key into the file database.
-The file database caches URLs for the package, and has its md5sum and sha1sum.
-
-The fetcher tries to fetch from the cached URLs or can fall back to
-Google for the file by either filename or any checksum.
-It can verify correctness against the checksums.
-
+I think the URL pre filename is a bit of a non issue as it stands mind you
+and I am not sure that the current checksums.ini approach is as bad as all
+that if it dropped dupes and URLs. Maybe a little refinement is needed but a
+wholesale change seems a little extreme (but I can see pros and cons for
+both). As long as it is kept clean and contained and does not break overlays
+to much I guess I am happy.
 
 Regards,
--- 
-Leon
+
+John
+
+
 
 
