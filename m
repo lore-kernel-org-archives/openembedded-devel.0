@@ -1,35 +1,26 @@
-Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1LY0hM-000117-VY
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 17:15:29 +0100
-Received: by rv-out-0708.google.com with SMTP id b17so870151rvf.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 08:14:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=TCXhWAYDQC0ETbGXX1/RV6XJFpTt0aRwsxqSMoeQWsc=;
-	b=ZSrClLvOjlt+MLsQCgoq3woXGW+klvDLrhutcf/PFSOwOGQDkwYI50FzkNQgUFvKu5
-	2CKocIUeAHzAgLWO4rxJ3HnvIBgZtOmQg7KN9w06ciuwmOmjJ+ro+Blr/db/u6+2S9o2
-	og8xGUBfRkhNJ5y+dDS6O4PO8yy5yzpADoKd4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=YXEIWnsRjNnI+0W5YeymQzxjr855nx77V6PCZNX4Zdd47Rb7c+ihGC95fOjOldHX7P
-	yIjJazBiN/NhfXffwcG2CfQ4HKb6kuZN8qDE/9KZXG6QBsjpEd/rp8Tpy/xyRiuqbYcX
-	TKT4JNTyzqav+ZbDrln0o6PfifNEkl3rv+u48=
-MIME-Version: 1.0
-Received: by 10.141.50.11 with SMTP id c11mr222423rvk.28.1234541642178; Fri, 
-	13 Feb 2009 08:14:02 -0800 (PST)
-In-Reply-To: <a7f8874a0902042227w54cf3700p75006bd994f3ade7@mail.gmail.com>
-References: <a7f8874a0902042227w54cf3700p75006bd994f3ade7@mail.gmail.com>
-Date: Fri, 13 Feb 2009 08:14:02 -0800
-Message-ID: <a7f8874a0902130814n5b6baaf1sb46ecffa1b31bcce@mail.gmail.com>
-From: Hans Henry von Tresckow <hvontres@gmail.com>
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] sg3-utils: Updated Makefile patch to deal with cross-compiling
+	(envelope-from <pb@reciva.com>)
+	id 1LY0on-0006QZ-6q; Fri, 13 Feb 2009 17:23:09 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1LY0nO-0002vD-IM; Fri, 13 Feb 2009 16:21:42 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>)
+	id 1LY0nO-0003RL-C3; Fri, 13 Feb 2009 16:21:42 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200902131525.34787.openembedded@haerwu.biz>
+References: <200902131525.34787.openembedded@haerwu.biz>
+Date: Fri, 13 Feb 2009 16:21:41 +0000
+Message-Id: <1234542101.3592.46.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Machine config generator (FOSDEM idea)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 16:15:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 13 Feb 2009 16:23:09 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 4, 2009 at 10:27 PM, Hans Henry von Tresckow
-<hvontres@gmail.com> wrote:
-> Please review and if ok, push
->
->
-> From a9216efa1e2f56a53d6e5c210655c0c4a7256169 Mon Sep 17 00:00:00 2001
-> From: Henry von Tresckow <hvontres@gmail.com>
-> Date: Wed, 4 Feb 2009 16:50:15 -0800
-> Subject: [PATCH] sg3-utils: Updated Makefile patch to deal with cross-compiling
->
-> Signed-off-by: Henry von Tresckow <hvontres@gmail.com>
-> ---
->  packages/sg3-utils/files/Makefile-r1.patch |  263 ++++++++++++++++++++++++++++
->  packages/sg3-utils/files/Makefile.patch    |  246 --------------------------
->  packages/sg3-utils/sg3-utils_1.24.bb       |    7 +-
->  3 files changed, 268 insertions(+), 248 deletions(-)
->  create mode 100644 packages/sg3-utils/files/Makefile-r1.patch
->  delete mode 100644 packages/sg3-utils/files/Makefile.patch
->
+On Fri, 2009-02-13 at 15:25 +0100, Marcin Juszkiewicz wrote:
+> OE developers usually know that machine config is simple but tell that 
+> to Joe Random who only knows that his board use s3c2443 etc. So idea was 
+> to create simple few steps wizard which will ask few questions and 
+> produce machine config as result. More work would be required on 
+> creating kernel recipe because kernel can be from svn/cvs/git or tarball 
+> + quilt patchset etc...
 
-Any reason why this got rejected? I would like to fix the problem and re-submit
--- 
-Henry von Tresckow (hvontres)
-Garry Shandling  - "I'm dating a woman now who, evidently, is unaware of it."
+This seems like it's really a documentation problem.  It's hard to see
+that the wizard would be able to perform any useful, non-trivial
+processing of its own: it'd basically just be taking the information
+from the user and regurgitating it in a slightly different format.
+
+If users are finding it hard to figure out how to create a machine
+description then the right answer is probably a wiki page or a chapter
+in the manual that explains in small words how to do it.
+
+p.
+
+
 
 
