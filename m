@@ -1,36 +1,18 @@
-Received: from [209.85.218.213] (helo=mail-bw0-f213.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LXx09-0001ld-SV
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 13:18:37 +0100
-Received: by bwz9 with SMTP id 9so1573215bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 04:17:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:to:content-type
-	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
-	bh=h8x+jjEnbq0aBsbSaasQ9ZRt1BAr+ZQYrv9n7n5Sf8c=;
-	b=VUYbIE0MYxlLJSjMRSrv7u86JeOjNyY7R4P4LVC798OlfzeGlJj9jiEzFcGeB8QD5B
-	Saxmnx9Bvobv77HYbIYog4iOVFrAka/05FPYl8KQ8UNWZHw53WBgfioSWYwAk2R7MBMB
-	PbgU7JV4yGcBcLbzaQxoFf1mJ6D9UVhDcLTxg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer
-	:content-transfer-encoding;
-	b=uzoGShhbYe/3ZASXJnyLF+IqUzbt3Tb8Y5xsiJbwVk1MBvEH8LL4i9blBDSMnAp7HF
-	MAq7eeR3LCW/qm0hsLVM8N0Mkt5cMiBk/VJ2s1xgWjBpUxcerovM5C+EdatrtlizZleX
-	/sXuzFPWBfViYpqBor+fgbpdaNQEeMWLKDfXw=
-Received: by 10.223.103.207 with SMTP id l15mr1514603fao.2.1234527430879;
-	Fri, 13 Feb 2009 04:17:10 -0800 (PST)
-Received: from ?10.6.26.234? (cpmsq.epam.com [217.21.56.2])
-	by mx.google.com with ESMTPS id g30sm23420855ugd.26.2009.02.13.04.17.09
-	(version=SSLv3 cipher=RC4-MD5); Fri, 13 Feb 2009 04:17:10 -0800 (PST)
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Feb 2009 14:17:08 +0200
-Message-Id: <1234527428.24574.2.camel@EPBYMINW0568>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: [PATCH] Fixed ruby 1.8.5 compilation problem
+	(envelope-from <philip@balister.org>) id 1LXxoD-00035I-5v
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 14:10:33 +0100
+Received: (qmail 7131 invoked by uid 1003); 13 Feb 2009 13:08:53 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 13 Feb 2009 13:08:52 -0000
+Message-ID: <499570E4.1020503@balister.org>
+Date: Fri, 13 Feb 2009 08:08:52 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+Subject: Having trouble keeping track of the Patches?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,197 +26,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 12:18:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 Feb 2009 13:10:42 -0000
+X-Groupsio-MsgNum: 7697
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms050000020902060701060109"
+
+--------------ms050000020902060701060109
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Backported openssl fix from 1.8.7 for successfull ruby 1.8.5
-compilation.
+Patches sent to the list are being tracked with patchwork now:
 
-Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
----
- packages/ruby/files/openssl.patch |  156 +++++++++++++++++++++++++++++++++++++
- packages/ruby/ruby.inc            |    1 +
- 2 files changed, 157 insertions(+), 0 deletions(-)
- create mode 100644 packages/ruby/files/openssl.patch
+http://patchwork.openembedded.org/project/openembedded/list/
 
-diff --git a/packages/ruby/files/openssl.patch b/packages/ruby/files/openssl.patch
-new file mode 100644
-index 0000000..9de37ef
---- /dev/null
-+++ b/packages/ruby/files/openssl.patch
-@@ -0,0 +1,156 @@
-+This patch backports changes from ruby 1.8.7 which only includes the
-+openssl prototypes for functions that are not in the system openssl
-+library.
-+
-+diff -u ruby-1.8.5.orig/ext/openssl/extconf.rb ruby-1.8.5/ext/openssl/extconf.rb
-+--- ruby-1.8.5.orig/ext/openssl/openssl_missing.c	2007-02-13 00:01:19.000000000 +0100
-++++ ruby-1.8.5/ext/openssl/openssl_missing.c	2008-05-19 05:00:52.000000000 +0200
-+@@ -22,17 +22,15 @@
-+ #include "openssl_missing.h"
-+ 
-+ #if !defined(HAVE_HMAC_CTX_COPY)
-+-int
-++void
-+ HMAC_CTX_copy(HMAC_CTX *out, HMAC_CTX *in)
-+ {
-+-    if (!out || !in) return 0;
-++    if (!out || !in) return;
-+     memcpy(out, in, sizeof(HMAC_CTX));
-+ 
-+-    if (!EVP_MD_CTX_copy(&out->md_ctx, &in->md_ctx)
-+-	    || !EVP_MD_CTX_copy(&out->i_ctx, &in->i_ctx)
-+-	    || !EVP_MD_CTX_copy(&out->o_ctx, &in->o_ctx))
-+-	return 0;
-+-    return 1;
-++    EVP_MD_CTX_copy(&out->md_ctx, &in->md_ctx);
-++    EVP_MD_CTX_copy(&out->i_ctx, &in->i_ctx);
-++    EVP_MD_CTX_copy(&out->o_ctx, &in->o_ctx);
-+ }
-+ #endif /* HAVE_HMAC_CTX_COPY */
-+ #endif /* NO_HMAC */
-+diff -u ruby-1.8.5.orig/ext/openssl/openssl_missing.h ruby-1.8.5/ext/openssl/openssl_missing.h
-+--- ruby-1.8.5.orig/ext/openssl/openssl_missing.h	2008-08-04 06:43:34.000000000 +0200
-++++ ruby-1.8.5/ext/openssl/openssl_missing.h	2008-08-04 06:44:17.000000000 +0200
-+@@ -60,14 +60,33 @@
-+ 	(char *(*)())d2i_PKCS7_RECIP_INFO, (char *)ri)
-+ #endif
-+ 
-++#if !defined(HAVE_EVP_MD_CTX_INIT)
-+ void HMAC_CTX_init(HMAC_CTX *ctx);
-+-int HMAC_CTX_copy(HMAC_CTX *out, HMAC_CTX *in);
-++#endif
-++
-++#if !defined(HAVE_HMAC_CTX_COPY)
-++void HMAC_CTX_copy(HMAC_CTX *out, HMAC_CTX *in);
-++#endif
-++
-++#if !defined(HAVE_HMAC_CTX_CLEANUP)
-+ void HMAC_CTX_cleanup(HMAC_CTX *ctx);
-++#endif
-+ 
-++#if !defined(HAVE_EVP_MD_CTX_CREATE)
-+ EVP_MD_CTX *EVP_MD_CTX_create(void);
-++#endif
-++
-++#if !defined(HAVE_EVP_MD_CTX_INIT)
-+ void EVP_MD_CTX_init(EVP_MD_CTX *ctx);
-++#endif
-++
-++#if !defined(HAVE_EVP_MD_CTX_CLEANUP)
-+ int EVP_MD_CTX_cleanup(EVP_MD_CTX *ctx);
-++#endif
-++
-++#if !defined(HAVE_EVP_MD_CTX_DESTROY)
-+ void EVP_MD_CTX_destroy(EVP_MD_CTX *ctx);
-++#endif
-+ 
-+ #if !defined(HAVE_EVP_CIPHER_CTX_COPY)
-+ int EVP_CIPHER_CTX_copy(EVP_CIPHER_CTX *out, EVP_CIPHER_CTX *in);
-+@@ -111,19 +130,54 @@
-+ #define OPENSSL_cleanse(p, l) memset(p, 0, l)
-+ #endif
-+ 
-++#if !defined(HAVE_X509_STORE_SET_EX_DATA)
-+ void *X509_STORE_get_ex_data(X509_STORE *str, int idx);
-+ int X509_STORE_set_ex_data(X509_STORE *str, int idx, void *data);
-++#endif
-++
-++#if !defined(HAVE_X509_CRL_SET_VERSION)
-+ int X509_CRL_set_version(X509_CRL *x, long version);
-++#endif
-++
-++#if !defined(HAVE_X509_CRL_SET_ISSUER_NAME)
-+ int X509_CRL_set_issuer_name(X509_CRL *x, X509_NAME *name);
-++#endif
-++
-++#if !defined(HAVE_X509_CRL_SORT)
-+ int X509_CRL_sort(X509_CRL *c);
-++#endif
-++
-++#if !defined(HAVE_X509_CRL_ADD0_REVOKED)
-+ int X509_CRL_add0_revoked(X509_CRL *crl, X509_REVOKED *rev);
-++#endif
-++
-++#if !defined(HAVE_BN_MOD_SQR)
-+ int BN_mod_sqr(BIGNUM *r, const BIGNUM *a, const BIGNUM *m, BN_CTX *ctx);
-++#endif
-++
-++#if !defined(HAVE_BN_MOD_ADD)
-+ int BN_mod_add(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx);
-++#endif
-++
-++#if !defined(HAVE_BN_MOD_SUB)
-+ int BN_mod_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_CTX *ctx);
-++#endif
-++
-++#if !defined(HAVE_BN_RAND_RANGE)
-+ int BN_rand_range(BIGNUM *r, BIGNUM *range);
-++#endif
-++
-++#if !defined(HAVE_BN_PSEUDO_RAND_RANGE)
-+ int BN_pseudo_rand_range(BIGNUM *r, BIGNUM *range);
-++#endif
-++
-++#if !defined(HAVE_CONF_GET1_DEFAULT_CONFIG_FILE)
-+ char *CONF_get1_default_config_file(void);
-++#endif
-++
-++#if !defined(HAVE_PEM_DEF_CALLBACK)
-+ int PEM_def_callback(char *buf, int num, int w, void *key);
-++#endif
-+ 
-+ #if defined(__cplusplus)
-+ }
-+diff -u ruby-1.8.5.orig/ext/openssl/ossl_hmac.c ruby-1.8.5/ext/openssl/ossl_hmac.c
-+--- ruby-1.8.5.orig/ext/openssl/ossl_hmac.c	2007-03-12 05:12:32.000000000 +0100
-++++ ruby-1.8.5/ext/openssl/ossl_hmac.c	2008-05-19 05:00:52.000000000 +0200
-+@@ -81,12 +87,15 @@
-+     GetHMAC(self, ctx1);
-+     SafeGetHMAC(other, ctx2);
-+ 
-+-    if (!HMAC_CTX_copy(ctx1, ctx2)) {
-+-	ossl_raise(eHMACError, NULL);
-+-    }
-++    HMAC_CTX_copy(ctx1, ctx2);
-+     return self;
-+ }
-+ 
-++/*
-++ *  call-seq:
-++ *     hmac.update(string) -> self
-++ *
-++ */
-+ static VALUE
-+ ossl_hmac_update(VALUE self, VALUE data)
-+ {
-+@@ -104,9 +113,7 @@
-+ {
-+     HMAC_CTX final;
-+ 
-+-    if (!HMAC_CTX_copy(&final, ctx)) {
-+-	ossl_raise(eHMACError, NULL);
-+-    }
-++    HMAC_CTX_copy(&final, ctx);
-+     if (!(*buf = OPENSSL_malloc(HMAC_size(&final)))) {
-+ 	HMAC_CTX_cleanup(&final);
-+ 	OSSL_Debug("Allocating %d mem", HMAC_size(&final));
-diff --git a/packages/ruby/ruby.inc b/packages/ruby/ruby.inc
-index 9fe8333..978bf4b 100644
---- a/packages/ruby/ruby.inc
-+++ b/packages/ruby/ruby.inc
-@@ -6,6 +6,7 @@ LICENSE = "GPL"
- 
- SRC_URI = "ftp://ftp.ruby-lang.org/pub/ruby/ruby-${PV}.tar.gz \
-            file://extmk_run.patch;patch=1 \
-+           file://openssl.patch;patch=1 \
-            file://disable_wide_getaddrinfo_check.patch;patch=1"
- 
- S = "${WORKDIR}/ruby-${PV}"
--- 
-1.5.6.3
+If you submit a patch, please update the flags as comments occur and 
+consensus happens.
 
+Hopefully, having one place to review discussion will make it easier for 
+people with commit access to commit patches they are not personally 
+comfortable with. Hopefully, this improves patch quality and gets more 
+patches commited in less time, and spreads the commit load over more people.
 
+Philip
 
+--------------ms050000020902060701060109
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxMzEz
+MDg1MlowIwYJKoZIhvcNAQkEMRYEFAVTpt4XXEA/c3WudVXRcku60VF4MFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQAm1JUzrc+Ti8ZtVvbw0EsGJs4o1Xvq3XQn2LkJJcZoVwhvG1WG
+48En1CSr+YklV9gAjVqF31ag82O++k0g3lPS2pu/vmeZGr3Dvsq6yXuX/ccsLYgDprKnIzdIffER
+x4sgNFXkZi7TITrzeej5DwdCColGbNVjfuQN1uKKd0gjtFGk4ATZXaDkAhduHQNzy2zDFmPyHdDT
+bg43/f9icG6s19L9LY/BJ01GVcc5LY2tU9LhJoPNXZIUaF+e9LohbBuzrJAD5yJIG9BS7QCTbxF5
+5V4fX7YwnDcw9O5RKWUsU0D64+a/y7PsTEy2CNz5c6PFxV4vszXUk88xxeKPl1jFAAAAAAAA
+
+--------------ms050000020902060701060109--
