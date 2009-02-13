@@ -1,29 +1,38 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [209.85.220.17] (helo=mail-fx0-f17.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LY3CB-00057h-7T
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 19:55:27 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090213185354.JRHQ2948.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Fri, 13 Feb 2009 13:53:54 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo02.cox.net with bizsmtp
-	id FWts1b0091E665w04Wtsjc; Fri, 13 Feb 2009 13:53:52 -0500
-X-Authority-Analysis: v=1.0 c=1 a=txmDflyvLeqZFbqq4bkA:9
-	a=tKwTT6k0aJ9oFCtEHA0W4AImWqgA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Fri, 13 Feb 2009 11:53:52 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090213185352.GX11815@smtp.west.cox.net>
-References: <200902131833.55265.khimov@altell.ru>
-	<20090213155637.GV11815@smtp.west.cox.net>
-	<200902132119.22895.khimov@altell.ru>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LY3qJ-00036P-TS
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Feb 2009 20:36:55 +0100
+Received: by fxm10 with SMTP id 10so2647806fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 11:35:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=JS5lM9aKmCfHEzprIgRv8ACmAxZF+bH+zpcHpuD3tuE=;
+	b=twO25DxZfk7HOPRFcs98O0Hgt5QiPRIBb+Z1G3/yoTHk22vJN910oDPqxSsgiOUxlS
+	emsZZdFOp6/IKpPdW/XcMVIFKlZNxpsyHKdb1eiTDwFziAD8gBsmV+3pyS609I9HC9gS
+	ux62GE9kKhG+5n9zLied8jaaMUQrWomXBIkXw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Q7CfBXL5i/OoMj8EPpz77pBbGQ3Km2iCnSxqJXODPpTZw6AZ6R2rsyQBlt3mNEIZjH
+	GAR9CqMy8XX3EWFLzMj4QOENOa+8VN6+QDcKMtMLbUEuI08sHCoZniOfGuan0KvZb2Qu
+	ZIWicE0PDyHoGEotzCIv9kSTMkTmlbo8ldstQ=
 MIME-Version: 1.0
-In-Reply-To: <200902132119.22895.khimov@altell.ru>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] New package: tnef
+Received: by 10.181.61.7 with SMTP id o7mr828780bkk.51.1234553724875; Fri, 13 
+	Feb 2009 11:35:24 -0800 (PST)
+In-Reply-To: <871vu2chee.fsf@neumann.lab.ossystems.com.br>
+References: <200902131728.08634.openembedded@haerwu.biz>
+	<878woae03q.fsf@neumann.lab.ossystems.com.br>
+	<fce2a370902130939m708ada3dn55be8cdeadacbfbb@mail.gmail.com>
+	<871vu2chee.fsf@neumann.lab.ossystems.com.br>
+Date: Fri, 13 Feb 2009 20:35:24 +0100
+Message-ID: <c384c5ea0902131135v5797291t2955907944e27bb7@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,25 +46,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 18:55:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Feb 2009 19:36:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 13, 2009 at 09:19:22PM +0300, Roman I Khimov wrote:
-> Tom Rini:
-> > On Fri, Feb 13, 2009 at 06:33:54PM +0300, Roman I Khimov wrote:
-> > > --- a/conf/checksums.ini	2009-02-13 15:05:24.976017132 +0300
-> > > +++ b/conf/checksums.ini	2009-02-13 18:30:39.887017023 +0300
-> >
-> > Can you please run the sorter
-> > (contrib/source-checker/oe-checksums-sorter.py) when you add new
-> > entries?  Thanks.
-> 
-> Sure. Didn't know about that. So, updated one should be like this:
+Hello,
 
-Done, thanks.
+On Fri, Feb 13, 2009 at 7:37 PM, Otavio Salvador <otavio@debian.org> wrote:
+> Ihar Hrachyshka <ihar.hrachyshka@gmail.com> writes:
+>
+>> On Fri, Feb 13, 2009 at 7:08 PM, Otavio Salvador <otavio@debian.org> wrote:
+>>> Marcin Juszkiewicz <openembedded@haerwu.biz> writes:
+>>>
+>>>>
+>>>> What do you think? Which way we should go? Do you have other ideas?
+>>> <...>
+>>>
 
+I have thought about this (and our current fetch and checksum) a lot
+in the past.
+
+>> Keep the checksums.ini file, but change it's layout a bit.
+
+In all cases, we need to REMOVE the URL of a package from the key, as
+we are ONLY interested in its contents.
+
+So, solution 1:
+
+>> Make the key of a package: <filename>.
+
+However, I would opt for solution 2:
+
+>> Make the key of a source package: <filename, sha1sum, md5sum>.
+
+Yes, that's right. The key of a package is it's filename plus it's contents.
+Filename because we humans identify it by its name.
+The dual checksum because we can guarantee the desired contents.
+
+Next step, is we adapt the fetcher to:
+
+- find URLs for a package given any of it's (sub)key.
+- check the package against its dual sums.
+
+I have written a working proof-of-concept of a
+package-fetcher/checker/ url-cache/... in C using sqlite (instead of
+checksums.ini)
+
+which is public here:
+
+http://www.sidebranch.com/leon/witpa_20080730.tar.bz2
+
+It can import checksums.ini though.
+
+
+To summarize: remove URL from the package key.
+
+The .bb names the upstream URL and filename.
+
+The filename ALONE is used as the key into the file database.
+The file database caches URLs for the package, and has its md5sum and sha1sum.
+
+The fetcher tries to fetch from the cached URLs or can fall back to
+Google for the file by either filename or any checksum.
+It can verify correctness against the checksums.
+
+
+Regards,
 -- 
-Tom Rini
+Leon
 
 
