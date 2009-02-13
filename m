@@ -1,34 +1,19 @@
-Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1LY2wL-0004PA-0j
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 19:39:05 +0100
-Received: from internet.ossystems.com.br
-	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
-	by listas.ossystems.com.br (Postfix) with ESMTP id EF8724020B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 14:37:52 -0200 (BRST)
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 33FF1740C3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 16:37:10 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 4A64E610067; Fri, 13 Feb 2009 16:37:29 -0200 (BRST)
-From: Otavio Salvador <otavio@debian.org>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <200902131728.08634.openembedded@haerwu.biz>
-	<878woae03q.fsf@neumann.lab.ossystems.com.br>
-	<fce2a370902130939m708ada3dn55be8cdeadacbfbb@mail.gmail.com>
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Fri, 13 Feb 2009 16:37:29 -0200
-In-Reply-To: <fce2a370902130939m708ada3dn55be8cdeadacbfbb@mail.gmail.com>
-	(Ihar Hrachyshka's message of "Fri, 13 Feb 2009 19:39:39 +0200")
-Message-ID: <871vu2chee.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
+	(envelope-from <mwester@dls.net>) id 1LY34c-0004hV-VB
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 19:47:39 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx01.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LY33B-0001N3-Up
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 12:46:10 -0600
+Message-ID: <4995BFE1.7090900@dls.net>
+Date: Fri, 13 Feb 2009 12:45:53 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Subject: Re: checksums situation
+To: openembedded-devel@openembedded.org
+Subject: boost-1.36.0 fails when compiling; cannot find the compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,44 +27,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 18:39:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 13 Feb 2009 18:47:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Ihar Hrachyshka <ihar.hrachyshka@gmail.com> writes:
+Boost 1.36.0 fails to build, do_compile log is below.  In a nutshell, it
+seems to have lost the PATH variable.  The 1.33.1 version builds just fine.
 
-> On Fri, Feb 13, 2009 at 7:08 PM, Otavio Salvador <otavio@debian.org> wrote:
->> Marcin Juszkiewicz <openembedded@haerwu.biz> writes:
->>
->> <...>
->>> This solution also has one nasty part - now we can keep SRC_URI for
->>> multiple versions in common file, but if we switch to storing it in
->>> SRC_URI we will have to change that.
->>>
->>> Other solution proposed on IRC was to keep checksums in extra file in
->>> each directory of packages/ subdirectory. I think that it is not best
->>> but sounds better then one file.
->>>
->>> What do you think? Which way we should go? Do you have other ideas?
->> <...>
->>
->> What about having a checksums for _each_ recipe?
->>
->> foo_1.0.bb
->> foo_1.0.md5sum
->
-> This will waste directories and will make tree navigation harder.
+The compiler is present.  The PATH is set correctly, it appears, from
+the run.do_compile file.  So I can only presume that whatever "bjam" is,
+its resetting the PATH or something.
 
-Well; so let's just create a md5sums directory at OE topdir and add the
-dirs and files there.
+Nothing else has changed in the environment; 1.33.1 builds, 1.36.0
+doesn't, and I have no idea what the heck this "bjam" stuff is or how to
+debug it.
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Any suggestions?  Does this work for anyone else?
+
+Mike (mwester)
+
+
+-----------
++ bjam -sTOOLS=gcc '-sGCC=armeb-linux-gnueabi-gcc -march=armv5te
+-mtune=xscale -mno-thumb-interwork -mno-thumb -mno-thumb-interwork
+-mno-thumb  -L/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/lib
+-Wl,-rpath-link,/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/lib
+-Wl,-O1 ${TARGET_LINK_HASH_STYLE}
+'\''-DBOOST_PLATFORM_CONFIG="boost/config/platform/linux-gnueabi.hpp"'\'''
+'-sGXX=armeb-linux-gnueabi-g++ -march=armv5te -mtune=xscale
+-mno-thumb-interwork -mno-thumb -mno-thumb-interwork -mno-thumb
+-L/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/lib
+-Wl,-rpath-link,/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/lib
+-Wl,-O1 ${TARGET_LINK_HASH_STYLE}
+'\''-DBOOST_PLATFORM_CONFIG="boost/config/platform/linux-gnueabi.hpp"'\'''
+-sGCC_INCLUDE_DIRECTORY=/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/include
+-sGCC_STDLIB_DIRECTORY=/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/lib
+-sNO_BZIP2=1 -sNO_ZLIB=1 '-sBUILD=release <optimization>space
+<inlining>on <debug-symbols>off' '-sPYTHON_VERSION=${PYTHON_VERSION}'
+--layout=system
+--builddir=/u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/boost-1.36.0-r5/boost_1_36_0/armeb-linux-gnueabi
+--prefix=/usr --exec-prefix=/usr --libdir=/usr/lib --includedir=/usr/include
+warning: Graph library does not contain optional GraphML reader.
+note: to enable GraphML support, set EXPAT_INCLUDE and EXPAT_LIBPATH to the
+note: directories containing the Expat headers and libraries, respectively.
+warning: skipping optional Message Passing Interface (MPI) library.
+note: to enable MPI support, add "using mpi ;" to user-config.jam.
+note: to suppress this message, pass "--without-mpi" to bjam.
+note: otherwise, you can safely ignore this message.
+Building Boost.Regex with the optional Unicode/ICU support disabled.
+Please refer to the Boost.Regex documentation for more information
+(don't panic: this is a strictly optional feature).
+...patience...
+...patience...
+...patience...
+...found 5258 targets...
+...updating 765 targets...
+MkDir1-quick-fix-for-unix bin.v2
+MkDir1-quick-fix-for-unix bin.v2/libs
+MkDir1-quick-fix-for-unix bin.v2/libs/math
+MkDir1-quick-fix-for-unix bin.v2/libs/math/build
+MkDir1-quick-fix-for-unix bin.v2/libs/math/build/gcc-4.3.1
+MkDir1-quick-fix-for-unix bin.v2/libs/math/build/gcc-4.3.1/release
+MkDir1-quick-fix-for-unix
+bin.v2/libs/math/build/gcc-4.3.1/release/threading-multi
+gcc.compile.c++
+bin.v2/libs/math/build/gcc-4.3.1/release/threading-multi/acosh.o
+armeb-linux-gnueabi-g++: : No such file or directory
+
+    "armeb-linux-gnueabi-g++" "-march=armv5te" "-mtune=xscale"
+"-mno-thumb-interwork" "-mno-thumb" "-mno-thumb-interwork" "-mno-thumb"
+"-L/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/lib"
+"-Wl,-rpath-link,/u/slug/slugos/tmp/staging/armv5teb-linux-gnueabi/usr/lib"
+"-Wl,-O1" "${TARGET_LINK_HASH_STYLE}"  -ftemplate-depth-128 -O3
+-finline-functions -Wno-inline -Wall -fPIC -pthread
+-DBOOST_ALL_NO_LIB=1 -DBOOST_MATH_TR1_DYN_LINK=1 -DNDEBUG  -I"." -c -o
+"bin.v2/libs/math/build/gcc-4.3.1/release/threading-multi/acosh.o"
+"libs/math/build/../src/tr1/acosh.cpp"
+
+...failed gcc.compile.c++
+bin.v2/libs/math/build/gcc-4.3.1/release/threading-multi/acosh.o...
+...removing bin.v2/libs/math/build/gcc-4.3.1/release/threading-multi/acosh.o
+gcc.compile.c++
+bin.v2/libs/math/build/gcc-4.3.1/release/threading-multi/asinh.o
+armeb-linux-gnueabi-g++: : No such file or directory
+
 
 
