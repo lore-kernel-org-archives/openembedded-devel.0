@@ -1,26 +1,19 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1LY0on-0006QZ-6q; Fri, 13 Feb 2009 17:23:09 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1LY0nO-0002vD-IM; Fri, 13 Feb 2009 16:21:42 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1LY0nO-0003RL-C3; Fri, 13 Feb 2009 16:21:42 +0000
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200902131525.34787.openembedded@haerwu.biz>
-References: <200902131525.34787.openembedded@haerwu.biz>
-Date: Fri, 13 Feb 2009 16:21:41 +0000
-Message-Id: <1234542101.3592.46.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Machine config generator (FOSDEM idea)
+	(envelope-from <openembedded@haerwu.biz>) id 1LY0v5-0006gF-Cj
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 17:29:39 +0100
+Received: (qmail 24751 invoked by uid 813007); 13 Feb 2009 16:28:12 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 13 Feb 2009 16:28:12 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@openembedded.org
+Date: Fri, 13 Feb 2009 17:28:08 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <200902131728.08634.openembedded@haerwu.biz>
+Subject: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +27,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 16:23:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 Feb 2009 16:29:39 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, 2009-02-13 at 15:25 +0100, Marcin Juszkiewicz wrote:
-> OE developers usually know that machine config is simple but tell that 
-> to Joe Random who only knows that his board use s3c2443 etc. So idea was 
-> to create simple few steps wizard which will ask few questions and 
-> produce machine config as result. More work would be required on 
-> creating kernel recipe because kernel can be from svn/cvs/git or tarball 
-> + quilt patchset etc...
 
-This seems like it's really a documentation problem.  It's hard to see
-that the wizard would be able to perform any useful, non-trivial
-processing of its own: it'd basically just be taking the information
-from the user and regurgitating it in a slightly different format.
+Hi
 
-If users are finding it hard to figure out how to create a machine
-description then the right answer is probably a wiki page or a chapter
-in the manual that explains in small words how to do it.
+It is nearly two years since conf/checksums.ini was introduced. We 
+populated it with over 6000 entries during that time (mostly by 
+automatic fetching of all source on CELF and EWI machines). But there 
+are problems with it's format.
 
-p.
+First problem is how to use it when overlays are used. Not every entry 
+of SRC_URI can be provided into public (NDA binaries etc) so people 
+starts to switch off checking of checksums which is not good idea. OE 
+reads only one copy of file. OK, such users can copy it to their overlay 
+and extend with own entries which will work with properly created value 
+of BBPATH variable. But this does not sound as solution.
+
+Second problem which I hit few times is using of DEBIAN_MIRROR etc 
+variables. We allow users to choose fastest Debian, kernel.org, 
+SourceForge mirror but this also mean that URLs for sources will differ 
+from ones in checksums.ini. Of course users can submit new entries but 
+we will have duplicates then (we have about 700 of them already). There 
+were ideas how to solve that which were sent to this mailing list.
+
+One of ideas was to use filename as key (instead of URL). But I can 
+imagine few situations when it will be wrong way (similiar names for 
+different files, different contents of same name tarballs etc).
+
+Other was to use filename as key and add "url[0-xx]" fields which will 
+list alternative locations. This one looks better but still does not 
+solve situation when someone use DEBIAN_MIRROR which is not present in 
+checksums.ini file.
+
+Possible solution would be going to keeping MD5/SHA256 sums in recipes. 
+We used 'md5' parametr in SRC_URI for that in past. We can switch to 
+using it for md5 and sha256, but some purists can say that it will make 
+SRC_URI entries much longer.
+
+Example:
+
+SRC_URI = "${SOURCEFORGE_MIRROR}/zziplib/zziplib-${PV}.tar.bz2"
+
+will change to:
+
+SRC_URI = 
+"${SOURCEFORGE_MIRROR}/zziplib/zziplib-${PV}.tar.bz2;md5=a6538f6c44ceeed0ed7e8e356f444168;sha256=f684397ce39ec400ba3369521892b7c3a8711d3ef1be59115db9f8d57707bbb8"
+
+which is very long line.
+
+This solution also has one nasty part - now we can keep SRC_URI for 
+multiple versions in common file, but if we switch to storing it in 
+SRC_URI we will have to change that.
+
+Other solution proposed on IRC was to keep checksums in extra file in 
+each directory of packages/ subdirectory. I think that it is not best 
+but sounds better then one file.
+
+What do you think? Which way we should go? Do you have other ideas?
+
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
 
