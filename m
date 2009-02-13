@@ -1,19 +1,19 @@
 Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1LXvGx-0005AL-O3
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 11:27:51 +0100
+	(envelope-from <roman@khimov.ru>) id 1LXvIV-0005Bl-Di
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 11:29:27 +0100
 Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.116])
 	by relay1.mail.masterhost.ru with esmtp 
 	envelope from <roman@khimov.ru> authenticated with rik@osrc.info
-	message id 1LXvFZ-000JY7-Uk
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 13:26:26 +0300
+	message id 1LXvH7-000KcA-Hf
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 13:28:01 +0300
 From: Roman I Khimov <roman@khimov.ru>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Date: Fri, 13 Feb 2009 13:26:15 +0300
+To: openembedded-devel@openembedded.org
+Date: Fri, 13 Feb 2009 13:28:00 +0300
 User-Agent: KMail/1.9.9
 MIME-Version: 1.0
-Message-Id: <200902131326.19376.roman@khimov.ru>
-Subject: [PATCH] glibc 2.7 fails to build
+Message-Id: <200902131328.01161.roman@khimov.ru>
+Subject: [PATCH] glibc-initial 2.7 missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,63 +27,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 10:27:51 -0000
-X-Groupsio-MsgNum: 7690
-Content-Type: multipart/signed; boundary="nextPart1715390.gdq0SJs9M0";
+X-List-Received-Date: Fri, 13 Feb 2009 10:29:27 -0000
+X-Groupsio-MsgNum: 7691
+Content-Type: multipart/signed; boundary="nextPart14879273.1zKLVlAEhv";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
---nextPart1715390.gdq0SJs9M0
+--nextPart14879273.1zKLVlAEhv
 Content-Type: text/plain;
   charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Hello.
+Hello again.
 
-As I've mentioned some days ago, I'd submitted several bugs via bugzilla and
-as there is zero reaction on it and in general direction to completely stop
-using it, I'm reposting that patches here.
+Second one is bug 5007 (http://bugs.openembedded.net/show_bug.cgi?id=3D5007=
+):
 
-This one is bug 5000 (http://bugs.openembedded.net/show_bug.cgi?id=3D5000):
+I think it's good to have same glibc versions used for glibc-initial and=20
+glibc
+itself, which works with most of the versions provided by OE, but the latest
+available, 2.7.
 
-glibc 2.7 fails to build with
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-In file included from ../include/limits.h:125,
-                 from ../nptl/sysdeps/pthread/allocalim.h:21,
-                 from ../include/alloca.h:20,
-                 from ../stdlib/stdlib.h:497,
-                 from ../include/stdlib.h:8,
-                 from ../nptl/sysdeps/i386/i686/../tls.h:28,
-                 from ../nptl/sysdeps/i386/i686/tls.h:34,
-                 from ../include/tls.h:6,
-                 from ../sysdeps/unix/sysv/linux/i386/sysdep.h:30,
-                 from <stdin>:1:
-/home/rik/work/altell/distro/oe/tmp/staging/i686-linux/usr/include/limits.h=
-:125:26:
-error: no include path in which to search for limits.h
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Configuration tried was for x86-32-nocona.
+So, here is a trivial patch to add glibc-initial-2.7.
 
-=46ixed easily by applying same glibc-use-isystem-include-fixed.patch as us=
-ed
-with 2.6.1, like in patch attached
-
-diff --git a/packages/glibc/glibc_2.7.bb b/packages/glibc/glibc_2.7.bb
-index 3349ce5..2bd4fa4 100644
-=2D-- a/packages/glibc/glibc_2.7.bb
-+++ b/packages/glibc/glibc_2.7.bb
-@@ -65,7 +65,8 @@ SRC_URI =3D "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.=
-tar.bz2 \
- 	   file://generic-bits_typesizes.h \
- 	   file://generic-bits_time.h \
-            file://etc/ld.so.conf \
-=2D           file://generate-supported.mk"
-+           file://generate-supported.mk \
-+           file://glibc-use-isystem-include-fixed.patch;patch=3D1"
+=2D-- a/packages/glibc/glibc-initial.inc	2008-12-26 23:41:39.767581663 +0300
++++ b/packages/glibc/glibc-initial.inc	2009-02-02 18:12:13.524061983 +0300
+@@ -1,7 +1,7 @@
+ SECTION =3D "libs"
+ DEPENDS =3D "virtual/${TARGET_PREFIX}gcc-initial linux-libc-headers"
+ PROVIDES =3D "virtual/${TARGET_PREFIX}libc-initial"
+=2DFILESPATH=20
+=3D "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.4', '${FILE_DIRNAME}/=
+glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ],=20
+d)}"
++FILESPATH=20
+=3D "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.4', '${FILE_DIRNAME}/=
+glibc-${PV}', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIR=
+NAME}' ],=20
+d)}"
 =20
-=20
- # Build fails on sh3 and sh4 without additional patches
+ PACKAGES =3D ""
+ PACKAGES_DYNAMIC =3D ""
+=2D-- /dev/null	2009-02-02 21:32:34.874002007 +0300
++++ b/packages/glibc/glibc-initial_2.7.bb	2009-02-02 17:31:29.413062961=20
++0300
+@@ -0,0 +1,6 @@
++require glibc_${PV}.bb
++require glibc-initial.inc
++
++do_configure_prepend () {
++	unset CFLAGS
++}
+
 
 =2D-=20
                             Roman
@@ -91,16 +87,16 @@ tar.bz2 \
 mailto: roman@khimov.ru
 gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1715390.gdq0SJs9M0
+--nextPart14879273.1zKLVlAEhv
 Content-Type: application/pgp-signature; name=signature.asc 
 Content-Description: This is a digitally signed message part.
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEABECAAYFAkmVSsgACgkQXJ70z+XgVcNj4gCdEKBjK8kdfiSLTS4v2TdQv04M
-UF8AnigMOU1jnh+X3iZRFn7ZEcW8znth
-=VcSB
+iEYEABECAAYFAkmVSzEACgkQXJ70z+XgVcNAngCfXnaB4dXhZ9fHn/YYStgWmUHK
+IpMAoNMYv0yHReyvG4Ty6TJ/SGOldbi8
+=U1C6
 -----END PGP SIGNATURE-----
 
---nextPart1715390.gdq0SJs9M0--
+--nextPart14879273.1zKLVlAEhv--
