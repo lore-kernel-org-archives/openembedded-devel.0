@@ -1,27 +1,35 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [209.85.220.17] (helo=mail-fx0-f17.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LY0Qi-0000SN-Py
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 16:58:17 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090213155639.RVRL12838.fed1rmmtao103.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Fri, 13 Feb 2009 10:56:39 -0500
-Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
-	id FTwd1b0081E665w03TwdeT; Fri, 13 Feb 2009 10:56:39 -0500
-X-Authority-Analysis: v=1.0 c=1 a=FP58Ms26AAAA:8 a=QWsv5MtBLs_8dyIVKcUA:9
-	a=bdEZbcN1le2eOoKq_Btt91GWqJcA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Fri, 13 Feb 2009 08:56:37 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090213155637.GV11815@smtp.west.cox.net>
-References: <200902131833.55265.khimov@altell.ru>
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LY0eu-0000xw-Ii
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Feb 2009 17:12:56 +0100
+Received: by fxm10 with SMTP id 10so2459107fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 08:11:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=wD2Bpp+pu9EytHeQmtwdgKizPGh46Av/ZQs6rzRlP2s=;
+	b=lEMCP+9qmdLtg6BwW9XIy7+jaaPl/fCvoZk7S3Ut6aA9ssTsnKTbpeH/YaKcAwCW2v
+	RkgYU+mujKnZhvaLCnaxVutQ6BInKLeD5Tch0ztto8czNDWjSn+ERdZ+3lbifhIGdilf
+	HWsNX72zYh0job9OjoNPERItsaIGmEu79amJA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=SYDAcxR+8qFCMqEplR0bMXMnSNk0OcmNL3B4V3gE6vSqm7CTGvrRInPvE689Cnz2rQ
+	iAp8Ypow+s/Rx9urTcuY6ZAIbc9VH2vQTK5tPa1zBhdpNKCBsLTsMTiosrXn/Ya0hJmD
+	1zhBOouNdGmPLA8YFZAaBaTLCp73B06U6y0ec=
 MIME-Version: 1.0
-In-Reply-To: <200902131833.55265.khimov@altell.ru>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] New package: tnef
+Received: by 10.181.148.13 with SMTP id a13mr773794bko.20.1234541432983; Fri, 
+	13 Feb 2009 08:10:32 -0800 (PST)
+In-Reply-To: <1234538851.24574.4.camel@EPBYMINW0568>
+References: <1234538851.24574.4.camel@EPBYMINW0568>
+Date: Fri, 13 Feb 2009 18:10:32 +0200
+Message-ID: <fce2a370902130810r61652aajcc71822d645fe532@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Add new ruby-dbus package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,28 +43,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 15:58:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Feb 2009 16:12:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 13, 2009 at 06:33:54PM +0300, Roman I Khimov wrote:
+Please don't commit it. I forgot to add DEPENDS += "ruby" for it.
 
-[snip]
-> --- a/conf/checksums.ini	2009-02-13 15:05:24.976017132 +0300
-> +++ b/conf/checksums.ini	2009-02-13 18:30:39.887017023 +0300
-> @@ -25330,3 +25330,6 @@ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340
->  md5=5f7b88ebb2bcd7e8044328482d079661
->  sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
->  
-> +[http://downloads.sourceforge.net/tnef/tnef-1.4.5.tar.gz]
-> +md5=ec46d47525c6afb928642e3edec21058
-> +sha256=42067fbc00d1ad4bcbb67440d61869aa43ed2d3d099fc691d3da8ad4296fa6b1
-
-Can you please run the sorter
-(contrib/source-checker/oe-checksums-sorter.py) when you add new
-entries?  Thanks.
-
--- 
-Tom Rini
+On Fri, Feb 13, 2009 at 5:27 PM, Ihar Hrachyshka
+<ihar.hrachyshka@gmail.com> wrote:
+> This is a package with D-Bus bindings for Ruby language.
+>
+> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+> ---
+>  conf/checksums.ini               |    4 ++++
+>  packages/ruby/ruby-dbus_0.2.1.bb |   17 +++++++++++++++++
+>  2 files changed, 21 insertions(+), 0 deletions(-)
+>  create mode 100644 packages/ruby/ruby-dbus_0.2.1.bb
+>
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index 4e8e0f1..8d508eb 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -19074,6 +19074,10 @@ sha256=1774de918b156c360843c1b68690f5f57532ee48ff079d4d05c51dace8d523ed
+>  md5=797ea136fe43e4286c9362ee4516674e
+>  sha256=1774de918b156c360843c1b68690f5f57532ee48ff079d4d05c51dace8d523ed
+>
+> +[http://trac.luon.net/data/ruby-dbus/releases/ruby-dbus-0.2.1.tar.gz]
+> +md5=1f6398d8bbafa272c0b43878fec43276
+> +sha256=cfcadc4ae860f2de3d6aa1a1230a410b1dedf783148a27a20205bb3b54e3c3ac
+> +
+>  [http://rxtx.qbang.org/pub/rxtx/rxtx-2.1-7r2.zip]
+>  md5=9290b4832d46199f8d798a531209640b
+>  sha256=31db3852a86105766758975519b27d262407c96cacad4f34ad0de5aae26addd9
+> diff --git a/packages/ruby/ruby-dbus_0.2.1.bb b/packages/ruby/ruby-dbus_0.2.1.bb
+> new file mode 100644
+> index 0000000..a1ce40c
+> --- /dev/null
+> +++ b/packages/ruby/ruby-dbus_0.2.1.bb
+> @@ -0,0 +1,17 @@
+> +DESCRIPTION = "${PN} bindings"
+> +SECTION = "devel/ruby"
+> +LICENSE = "LGPL"
+> +
+> +SRC_URI = "http://trac.luon.net/data/ruby-dbus/releases/ruby-dbus-0.2.1.tar.gz"
+> +
+> +RUBY_DIR = "/usr/lib/ruby/1.8"
+> +
+> +S = "${WORKDIR}/ruby-dbus-${PV}"
+> +
+> +FILES_${PN} += "${RUBY_DIR}"
+> +
+> +do_install() {
+> +       install -d ${D}${RUBY_DIR}
+> +       cp -r lib/* ${D}${RUBY_DIR}
+> +}
+> +
+> --
+> 1.5.6.3
+>
+>
+>
 
 
