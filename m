@@ -1,29 +1,40 @@
-Received: from [195.65.72.27] (helo=bagnes.atmel.com)
+Received: from [209.85.128.190] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1LXzlI-00023S-SK
+	(envelope-from <jay4mail@gmail.com>) id 1LXzny-00025k-Qc
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 16:15:28 +0100
-Received: from fribh01.corp.atmel.com (FRIBH01 [10.175.30.10])
-	by bagnes.atmel.com (8.13.8+Sun/8.13.8) with ESMTP id n1DF90xh006059;
-	Fri, 13 Feb 2009 07:09:00 -0800 (PST)
-Received: from frimb01.corp.atmel.com ([10.175.30.12]) by
-	fribh01.corp.atmel.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 13 Feb 2009 16:14:00 +0100
-Received: from Glamdring ([172.24.49.65]) by frimb01.corp.atmel.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 13 Feb 2009 16:14:00 +0100
-Message-ID: <006b01c98ded$b05e37a0$413118ac@Glamdring>
-From: "Ulf Samuelsson" <ulf.samuelsson@atmel.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<openembedded-devel@openembedded.org>
+	Fri, 13 Feb 2009 16:18:14 +0100
+Received: by fk-out-0910.google.com with SMTP id f40so634673fka.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 07:16:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:message-id;
+	bh=78yzp9jY9qFR+XpxBKLFzrf/KqWqxSZK6Qgw4p0jI/U=;
+	b=Y6X3Bb/pAIA7jsy/Isb0ZFE+LQ//VqsUC4PaJuuL+UotpOWy4+LgGg4ZlnJ7093Vwv
+	g0Gd0QOGt8xZzTcTIpp6OGphVhkFSCpZprXH/YvIax1lcUg0moixZG7E57sBF6LhnFa4
+	yw/aBrXx+MKx0thirww05Rfam78juMOVuH7QM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:message-id;
+	b=ULBqJWEcbM1WO3o3J+N7EySZBsCfTm+7mJO70zB6I+/y9oYNeLgd7GdGjVHUJGsotj
+	getnK0aJ+GkGKsOPDcPE6R1ShK/IHFD54fZ2sJyKHIDj6o0rKQJqs9QWpvzKcc0L+zS9
+	Joz7Kfn0riai551+BhlEQw8Jb8jaujqqNIO9E=
+Received: by 10.86.73.1 with SMTP id v1mr327139fga.52.1234538209185;
+	Fri, 13 Feb 2009 07:16:49 -0800 (PST)
+Received: from is.home ([93.81.136.171])
+	by mx.google.com with ESMTPS id l19sm3021921fgb.47.2009.02.13.07.16.48
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 13 Feb 2009 07:16:48 -0800 (PST)
+From: Yuri Bushmelev <jay4mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Feb 2009 18:16:43 +0300
+User-Agent: KMail/1.9.10
 References: <200902131525.34787.openembedded@haerwu.biz>
-Date: Fri, 13 Feb 2009 16:12:01 +0100
+In-Reply-To: <200902131525.34787.openembedded@haerwu.biz>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.3138
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3350
-X-OriginalArrivalTime: 13 Feb 2009 15:14:00.0479 (UTC)
-	FILETIME=[B2E382F0:01C98DED]
+Message-Id: <200902131816.43672.jay4mail@gmail.com>
 Subject: Re: Machine config generator (FOSDEM idea)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,66 +49,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 15:15:29 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=original
+X-List-Received-Date: Fri, 13 Feb 2009 15:18:14 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-
-
->
-> Hi
->
-> I was talking during FOSDEM with some developers and one of things which
-> I was asked about was 'how to create machine config' (usually question
-> was other but had this sense).
->
+Hello!
 > OE developers usually know that machine config is simple but tell that
 > to Joe Random who only knows that his board use s3c2443 etc. So idea was
 > to create simple few steps wizard which will ask few questions and
 > produce machine config as result. More work would be required on
 > creating kernel recipe because kernel can be from svn/cvs/git or tarball
 > + quilt patchset etc...
->
-> Thats only beginning of idea - I hope that someone will provide
-> feedback.
->
 
-Yes, this is one of two major drawbacks of OpenEmbedded.
-The second beeing buildtime.
+We still needed defconfig's management tool :)
+Now for make new kernel recipe creating easier (e.g. by selecting known 
+devices and drivers).
 
-Should it be possible to use KConfig?
-
-For Buildroot, I have generated a Config.in which
-allows you to specify any kernel version from 2.6.22 and onwards.
-You can apply any minor patch, -mm patch or -rc-# patch.
-You can also apply an architecture or board specific patch
-as well as a named patch from the download directory.
-
-When you apply an architecture specific patch, you have a list
-of patches to select from so you could apply the 2.6.17.6 patches
-on top of 2.6.17.12.
-
-Would be good to be able to download a patchset as well, but this is not yet 
-supported.
-
-Best Regards
-Ulf Samuelsson
-
-> Regards,
-> -- 
-> JID:      hrw@jabber.org
-> Website:  http://marcin.juszkiewicz.com.pl/
-> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
-
+-- 
+Yuri Bushmelev
 
 
