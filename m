@@ -1,19 +1,31 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1LXvK0-0005G3-38
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 11:31:00 +0100
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.116])
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <roman@khimov.ru> authenticated with rik@osrc.info
-	message id 1LXvIc-000MBN-1M
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 13:29:34 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@openembedded.org
-Date: Fri, 13 Feb 2009 13:29:27 +0300
-User-Agent: KMail/1.9.9
+	(envelope-from <otavio@freedom.ind.br>) id 1LXva5-0005iL-Iu
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 11:47:37 +0100
+Received: from internet.ossystems.com.br
+	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
+	by listas.ossystems.com.br (Postfix) with ESMTP id 90DF94020B;
+	Fri, 13 Feb 2009 06:46:30 -0200 (BRST)
+Received: from ossystems.com.br (unknown [10.1.0.243])
+	by internet.ossystems.com.br (Postfix) with ESMTP id C99DC740C3;
+	Fri, 13 Feb 2009 08:46:27 -0200 (BRST)
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 68CCB610142; Fri, 13 Feb 2009 08:46:15 -0200 (BRST)
+From: Otavio Salvador <otavio@debian.org>
+To: openembedded-devel@lists.openembedded.org
+Organization: O.S. Systems Ltda.
+References: <87iqnfjccq.fsf@neumann.lab.ossystems.com.br>
+	<gn3cpm$tif$1@ger.gmane.org>
+X-URL: http://www.debian.org/~otavio/
+X-Attribution: O.S.
+Date: Fri, 13 Feb 2009 08:46:15 -0200
+In-Reply-To: <gn3cpm$tif$1@ger.gmane.org> (Koen Kooi's message of "Fri, 13 Feb
+	2009 09:59:33 +0100")
+Message-ID: <87d4dmiphk.fsf@neumann.lab.ossystems.com.br>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
 MIME-Version: 1.0
-Message-Id: <200902131329.27698.roman@khimov.ru>
-Subject: [PATCH] bison-native-2.3 missing data
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [RFH] Support for automatic package versining using git describe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,56 +39,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 10:31:00 -0000
-X-Groupsio-MsgNum: 7692
-Content-Type: multipart/signed; boundary="nextPart2514716.0qjexdUpET";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Feb 2009 10:47:38 -0000
+Content-Type: text/plain; charset=us-ascii
 
---nextPart2514716.0qjexdUpET
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Koen Kooi <k.kooi@student.utwente.nl> writes:
 
-Hello again.
+> On 13-02-09 03:32, Otavio Salvador wrote:
+>> Hello,
+>>
+>> One of nice features we've been using is the git-describe to get
+>> versions based on tags; many projects are using it to name the
+>> development releases and it does give a better view of how diverged it
+>> from last released version.
+>>
+>> So we're looking for a way to use it to generate the PV based on
+>> that. The current git fetcher already has the required support to get
+>> tags, so we can use it as SRCREV, but not yet to use git-describe.
+>
+> Do you have any examples of the output?
 
-Third one is bug 5012 (http://bugs.openembedded.net/show_bug.cgi?id=3D5012):
+Sure:
 
-Current bison-native installation script misses several data files.
-This might break packages requiring them.
+otavio@neumann:~/hacking/ossystems/toscoterm$ git describe 
+0.1-1-gd834119
 
-=2D-- a/packages/bison/bison-native_2.3.bb	2009-02-03 12:27:57.808843341 +0=
-300
-+++ b/packages/bison/bison-native_2.3.bb	2009-02-03 16:22:50.611053189 +0300
-@@ -15,6 +15,6 @@ exec ${STAGING_BINDIR}/bison -y "\$@"
- EOF
- 	chmod a+rx ${STAGING_BINDIR}/yacc
- 	install -d ${STAGING_DATADIR}/bison/m4sugar
-=2D	install -m 0755 data/c.m4 data/glr.c data/lalr1.cc data/yacc.c ${STAGIN=
-G_DATADIR}/bison/
-+	install -m 0755 data/c.m4 data/c++.m4 data/glr.c data/glr.cc data/lalr1.c=
-c data/location.cc data/yacc.c ${STAGING_DATADIR}/bison/
- 	install -m 0755 data/m4sugar/m4sugar.m4 ${STAGING_DATADIR}/bison/m4sugar/
- }
+Basically this can be read as:
+
+ - last version was 0.1
+ - since that we've done 1 commit
+ - the sha1sum of it is d834119 (g is always included before it)
+
+Cheers,
+
+-- 
+        O T A V I O    S A L V A D O R
+---------------------------------------------
+ E-mail: otavio@debian.org      UIN: 5906116
+ GNU/Linux User: 239058     GPG ID: 49A5F855
+ Home Page: http://otavio.ossystems.com.br
+---------------------------------------------
+"Microsoft sells you Windows ... Linux gives
+ you the whole house."
 
 
-=2D-=20
-                            Roman
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
---nextPart2514716.0qjexdUpET
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAkmVS4cACgkQXJ70z+XgVcPg1ACfbmF3ZLsBbl8C4zjll9l1Q3FU
-B3EAoLublAw0qDTNhEHgwfrCHJc88BYf
-=p/6D
------END PGP SIGNATURE-----
-
---nextPart2514716.0qjexdUpET--
