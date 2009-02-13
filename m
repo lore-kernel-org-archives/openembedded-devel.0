@@ -1,25 +1,30 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LXz8S-0000aA-QM
+	(envelope-from <sledz@DResearch.DE>) id 1LXzEx-0000kS-AZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 15:35:20 +0100
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.116])
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LXz73-0008mV-Ic
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 17:33:53 +0300
-From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Feb 2009 17:33:44 +0300
-User-Agent: KMail/1.9.9
-References: <200902121727.21796.roman@khimov.ru> <gn1j5m$qc5$2@ger.gmane.org>
-	<200902130952.52664.roman@khimov.ru>
-In-Reply-To: <200902130952.52664.roman@khimov.ru>
-Organization: Altell Ltd.
+	Fri, 13 Feb 2009 15:42:03 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 13B7416DFBD
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 15:53:22 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id B9CFE2A41DF
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Feb 2009 15:40:37 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Message-Id: <200902131733.44801.khimov@altell.ru>
-Subject: Re: [PATCH] icecc: base fix for cross and native builds
+Date: Fri, 13 Feb 2009 15:40:40 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF66A@hiob.intern.dresearch.de>
+In-Reply-To: <CF7FB0793253794F9F45991443E5FE20050080FC56@us194mx002.tycoelectronics.net>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Devshell X display error
+Thread-Index: AcmN4CdY9xDplUOAS8mF+YjnvoqJngACBvPQ
+References: <CF7FB0793253794F9F45991443E5FE20050080FC56@us194mx002.tycoelectronics.net>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: Devshell X display error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,37 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 14:35:21 -0000
+X-List-Received-Date: Fri, 13 Feb 2009 14:42:03 -0000
+Content-class: urn:content-classes:message
 Content-Type: text/plain;
-  charset="windows-1251"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Roman I Khimov:
-> Another approach could be just reducing the race window, fixing
-> create-icecc-env.sh to write to temporary file and then move it to its
-> place. Maybe that would be enough.
+> I am getting the following error when I attempt to start a=20
+> gnome-terminal devshell as follows:
+> ...
+> NOTE: package linux-2.6.20-r8: task do_devshell: started
+> X11 connection rejected because of wrong authentication.
+> ERROR: function do_devshell failed
 
-BTW, this kind of kludge seems to be working, at least for two runs on 
-dual-core and quad-core machines.
+I had the same problem when using X11 over ssh redirection. The =
+following part in my .profile helped me.
 
---- a/create-icecc-env.sh
-+++ b/create-icecc-env.sh
-@@ -181,12 +181,14 @@ else
-  fi
- 
+ if [ -e "$HOME/.Xauthority" ] ; then
+     export XAUTHORITY=3D"$HOME/.Xauthority"
  fi
-+TEMPFILE=`tempfile`
- cd $tempdir
--tar -czhf "$mydir/$archive_name".tar.gz $target_files || {
-+tar -czhf $TEMPFILE $target_files || {
-  if test -z "$silent"; then
-   echo "Couldn't create archive"
-  fi
-   exit 3
- }
- cd ..
-+mv $TEMPFILE "$mydir/$archive_name".tar.gz
- rm -rf $tempdir
+
+Steffen
 
 
