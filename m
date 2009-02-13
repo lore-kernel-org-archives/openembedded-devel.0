@@ -1,36 +1,34 @@
-Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1LXlYw-0005DO-Js
-	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 01:05:47 +0100
-Received: from internet.ossystems.com.br
-	(201-40-162-47.cable.viacabocom.com.br [201.40.162.47])
-	by listas.ossystems.com.br (Postfix) with ESMTP id AB3FE4025B;
-	Thu, 12 Feb 2009 20:04:42 -0200 (BRST)
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 1974C740D9;
-	Thu, 12 Feb 2009 22:04:36 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id B9D886101F6; Thu, 12 Feb 2009 22:04:23 -0200 (BRST)
-From: Otavio Salvador <otavio@debian.org>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>
-	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>
-	<1234460865.3592.2.camel@mill.internal.reciva.com>
-	<49946CA4.6060303@dls.net>
-	<1234478544.4890.404.camel@lenovo.internal.reciva.com>
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Thu, 12 Feb 2009 22:04:23 -0200
-In-Reply-To: <1234478544.4890.404.camel@lenovo.internal.reciva.com> (Phil
-	Blundell's message of "Thu, 12 Feb 2009 22:42:24 +0000")
-Message-ID: <871vu3mcc8.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
-MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 3/6] package.bbclass, package_ipk.bbclass:	add	dynamic depends on locale packages (ipk	specific)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LXlzK-0003Ez-F5
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 01:33:02 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LXlxz-0003UM-Ki
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 00:31:39 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 13 Feb 2009 00:31:39 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 13 Feb 2009 00:31:39 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 13 Feb 2009 01:31:27 +0100
+Message-ID: <gn2f0v$rh2$1@ger.gmane.org>
+References: <1234456715-23618-1-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-2-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-3-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-4-git-send-email-otavio@ossystems.com.br>	<1234456715-23618-5-git-send-email-otavio@ossystems.com.br>	<gn1m3u$5tl$4@ger.gmane.org>
+	<87prhnmcxh.fsf@neumann.lab.ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <87prhnmcxh.fsf@neumann.lab.ossystems.com.br>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 4/6] parted: drop versions up to 1.8.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,55 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 00:05:47 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 13 Feb 2009 00:33:02 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Phil Blundell <pb@reciva.com> writes:
+On 13-02-09 00:51, Otavio Salvador wrote:
 
-> On Thu, 2009-02-12 at 12:38 -0600, Mike (mwester) wrote:
->> Phil Blundell wrote:
->> > This looks like it will add locale dependencies to all the subpackages
->> > (e.g. foo-doc, foo-dev and the like) as well as the main "foo" package,
->> > which is a bit different to how the old code used to work.  But I guess
->> > that's harmless enough: the worst effect will be to bloat the Packages
->> > file a bit, and I doubt anybody will care too much.  So, thumbs up from
->> > me.
->> 
->> How much bloat? 
->
-> For a source package "foo", you'd be talking about adding one copy of
-> the literal string "foo-locale-*" to the Depends line for each of its
-> subpackages (foo-doc, foo-dev, foo-dbg and the like).  The exact amount
-> obviously depends on the length of the package name, but I guess you
-> could call it about 16 bytes per binary package as a rough
-> approximation.
->
-> Exactly what the real-world impact of that would be will depend on your
-> distro policy.  If you already strip out the -dev and -doc packages from
-> the main Packages feed then obviously the impact will be virtually nil
-> because most of the affected packages won't be there in the first place.
-> At the other extreme, if your Packages files currently contain
-> everything from the control data (including Source:, Description: and so
-> on) then they are probably so huge already that another sixteen bytes
-> per package is negligible in percentage terms.
->
-> If those 16*n bytes did turn out to cause a problem for someone then it
-> probably wouldn't be that hard to reinstate the original behaviour of
-> only adding this dependency on the primary binary.
+> I think people are suppose to clean the checksums.ini before adding the
+> missing ones instead of blindly adding all them. Besides, keeping it in
+> ini just makes it bigger so I'd prefer to drop them and NACK the patches
+> that add them back.
 
-Now I have two good points and I'm uncertain where to go :-)
+They get added back by the process we recommend, so NACKing patches on 
+that is bogus. And besides, people might have the 'old' stuff in 
+overlays and you can't put checksums.ini in an overlay.
 
-Push it and sort the regressions out depending how hard is it or make it
-optional?
+regards,
 
--- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Koen
+
+
 
 
