@@ -1,35 +1,32 @@
-Received: from [209.85.220.17] (helo=mail-fx0-f17.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LY23I-0005xu-FA
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 18:42:12 +0100
-Received: by fxm10 with SMTP id 10so2537952fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 09:40:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=iCNCI2UUXUF79c2QYPV0kBIwGjQdPFZrIHSyLO/Yue8=;
-	b=HPWT3BZGW38hbLGKc2XOFI6NakbONT9kfhupt7O6wNObkxDjVCkOBKRqMLEGNGoTY1
-	2zDob492cZ7vLh9lXQCrcEd+/Udd8POtD0E7h0stS+PFwABil2ECeACwCuuWIqNsBAjK
-	kR91AVVjCc1FdsH7wCPy/woe+5krisrivcUNo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Qst/w1STSTP/P55ooqF1hNVAjsAxNaeFANYd1HMdpDQYZyOvHdaFQTncFvPnpcvQRn
-	eilm6QvJc/9f+h+dWMW3c1w/vuQGACJf4RLp8x9hqBWL3pSAk7TFdIVFDfbgd6a8EbFF
-	upZJAiA9efXTIw3AVWJqnmttG/OYjngdTu3MU=
-MIME-Version: 1.0
-Received: by 10.181.134.12 with SMTP id l12mr346582bkn.80.1234546779143; Fri, 
-	13 Feb 2009 09:39:39 -0800 (PST)
-In-Reply-To: <878woae03q.fsf@neumann.lab.ossystems.com.br>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LY2Oe-0006ZB-Jm
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 19:04:16 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LY2NE-00026a-6H
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 18:02:48 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 13 Feb 2009 18:02:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 13 Feb 2009 18:02:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 13 Feb 2009 19:02:38 +0100
+Message-ID: <gn4cju$f31$1@ger.gmane.org>
 References: <200902131728.08634.openembedded@haerwu.biz>
-	<878woae03q.fsf@neumann.lab.ossystems.com.br>
-Date: Fri, 13 Feb 2009 19:39:39 +0200
-Message-ID: <fce2a370902130939m708ada3dn55be8cdeadacbfbb@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <200902131728.08634.openembedded@haerwu.biz>
+Sender: news <news@ger.gmane.org>
 Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,50 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 17:42:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 Feb 2009 18:04:16 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 13, 2009 at 7:08 PM, Otavio Salvador <otavio@debian.org> wrote:
-> Marcin Juszkiewicz <openembedded@haerwu.biz> writes:
->
-> <...>
->> This solution also has one nasty part - now we can keep SRC_URI for
->> multiple versions in common file, but if we switch to storing it in
->> SRC_URI we will have to change that.
->>
->> Other solution proposed on IRC was to keep checksums in extra file in
->> each directory of packages/ subdirectory. I think that it is not best
->> but sounds better then one file.
->>
->> What do you think? Which way we should go? Do you have other ideas?
-> <...>
->
-> What about having a checksums for _each_ recipe?
->
-> foo_1.0.bb
-> foo_1.0.md5sum
+On 13-02-09 17:28, Marcin Juszkiewicz wrote:
 
-This will waste directories and will make tree navigation harder.
+> One of ideas was to use filename as key (instead of URL). But I can
+> imagine few situations when it will be wrong way (similiar names for
+> different files, different contents of same name tarballs etc).
 
->
-> This could have the valid one; this also avoid the sorting problem and
-> like.
->
-> --
->        O T A V I O    S A L V A D O R
-> ---------------------------------------------
->  E-mail: otavio@debian.org      UIN: 5906116
->  GNU/Linux User: 239058     GPG ID: 49A5F855
->  Home Page: http://otavio.ossystems.com.br
-> ---------------------------------------------
-> "Microsoft sells you Windows ... Linux gives
->  you the whole house."
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+That's a non-issue since we already plonk everything in DL_DIR without 
+looking twice.
+
+regards,
+
+Koen
+
 
 
