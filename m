@@ -1,35 +1,19 @@
-Received: from [198.175.154.225] (helo=us194mx04.tycoelectronics.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john.charlton@tycoelectronics.com>)
-	id 1LXyFh-0000Rx-PM for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 14:38:45 +0100
-Received: from us194mx11.tycoelectronics.net ([163.241.185.106]) by
-	us194mx04.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.2499); 
-	Fri, 13 Feb 2009 08:37:05 -0500
-Received: from us194mx07.tycoelectronics.net ([163.241.185.38]) by
-	us194mx11.tycoelectronics.net with Microsoft SMTPSVC(6.0.3790.1830); 
-	Fri, 13 Feb 2009 08:37:05 -0500
-Received: from us194mx002.tycoelectronics.net (163.241.202.108) by
-	us194mx07.tycoelectronics.net (163.241.185.38) with Microsoft SMTP
-	Server (TLS) id 8.1.336.0; Fri, 13 Feb 2009 08:37:04 -0500
-Received: from us194mx002.tycoelectronics.net ([163.241.202.108]) by
-	us194mx002.tycoelectronics.net ([163.241.202.108]) with mapi;
-	Fri, 13 Feb 2009 08:37:04 -0500
-From: "Charlton, John" <john.charlton@tycoelectronics.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Feb 2009 08:37:02 -0500
-Thread-Topic: Devshell X display error
-Thread-Index: AcmN4CdY9xDplUOAS8mF+YjnvoqJng==
-Message-ID: <CF7FB0793253794F9F45991443E5FE20050080FC56@us194mx002.tycoelectronics.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	(envelope-from <openembedded@haerwu.biz>) id 1LXz0S-0000Ox-4N
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 15:27:04 +0100
+Received: (qmail 16138 invoked by uid 813007); 13 Feb 2009 14:25:38 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 13 Feb 2009 14:25:38 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@openembedded.org
+Date: Fri, 13 Feb 2009 15:25:33 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
 MIME-Version: 1.0
-X-OriginalArrivalTime: 13 Feb 2009 13:37:05.0054 (UTC)
-	FILETIME=[28A013E0:01C98DE0]
-Subject: Devshell X display error
+Message-Id: <200902131525.34787.openembedded@haerwu.biz>
+Subject: Machine config generator (FOSDEM idea)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,45 +27,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 13:38:46 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-I am getting the following error when I attempt to start a gnome-terminal d=
-evshell as follows:
-
-bitbake -c devshell virtual/kernel
-
-This was working the last time I used it with org.openembedded.stable and t=
-he angstrom.2007.1 distro for i686-generic but with the following configura=
-tion I always get the 'X11 connection rejected because of wrong authenticat=
-ion.' error and it doesn't display the gnome-terminal window.  If I run gno=
-me-terminal from the command line it works correctly as do other x window a=
-pplications.
+X-List-Received-Date: Fri, 13 Feb 2009 14:27:04 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 
-OE Build Configuration:
-BB_VERSION        =3D "1.8.13"
-METADATA_BRANCH   =3D "org.openembedded.dev"
-METADATA_REVISION =3D "b935d0e40c9bd24294d13bfbde0cbdcd14671e0c"
-TARGET_ARCH       =3D "arm"
-TARGET_OS         =3D "linux-gnueabi"
-MACHINE           =3D "at91sam9261ek"
-DISTRO            =3D "angstrom"
-DISTRO_VERSION    =3D "2009.X-test-20090212"
-TARGET_FPU        =3D "soft"
+Hi
 
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 32 of 32 (ID: 4, /home/us075929/projects/oe/openembedded=
-/packages/linux/linux_2.6.20.bb, do_devshell)
-NOTE: package linux-2.6.20: started
-NOTE: package linux-2.6.20-r8: task do_devshell: started
-X11 connection rejected because of wrong authentication.
-ERROR: function do_devshell failed
+I was talking during FOSDEM with some developers and one of things which 
+I was asked about was 'how to create machine config' (usually question 
+was other but had this sense).
 
---John
+OE developers usually know that machine config is simple but tell that 
+to Joe Random who only knows that his board use s3c2443 etc. So idea was 
+to create simple few steps wizard which will ask few questions and 
+produce machine config as result. More work would be required on 
+creating kernel recipe because kernel can be from svn/cvs/git or tarball 
++ quilt patchset etc...
+
+Thats only beginning of idea - I hope that someone will provide 
+feedback.
+
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
