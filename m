@@ -1,30 +1,27 @@
-Received: from [200.17.161.174] (helo=listas.ossystems.com.br)
+Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio@freedom.ind.br>) id 1LY0Ah-0008Df-0R
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Feb 2009 16:41:43 +0100
-Received: from internet.ossystems.com.br (unknown [201.40.162.47])
-	by listas.ossystems.com.br (Postfix) with ESMTP id 29AB54020B;
-	Fri, 13 Feb 2009 11:40:25 -0200 (BRST)
-Received: from ossystems.com.br (unknown [10.1.0.243])
-	by internet.ossystems.com.br (Postfix) with ESMTP id 6A047740C3;
-	Fri, 13 Feb 2009 13:39:14 -0200 (BRST)
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 12930610067; Fri, 13 Feb 2009 13:39:32 -0200 (BRST)
-From: Otavio Salvador <otavio@debian.org>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <200902131525.34787.openembedded@haerwu.biz>
-X-URL: http://www.debian.org/~otavio/
-X-Attribution: O.S.
-Date: Fri, 13 Feb 2009 13:39:32 -0200
-In-Reply-To: <200902131525.34787.openembedded@haerwu.biz> (Marcin
-	Juszkiewicz's message of "Fri, 13 Feb 2009 15:25:33 +0100")
-Message-ID: <87r622firv.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
+	(envelope-from <trini@kernel.crashing.org>) id 1LY0Qi-0000SN-Py
+	for openembedded-devel@openembedded.org; Fri, 13 Feb 2009 16:58:17 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao103.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090213155639.RVRL12838.fed1rmmtao103.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Fri, 13 Feb 2009 10:56:39 -0500
+Received: from localhost ([68.230.61.57]) by fed1rmimpo01.cox.net with bizsmtp
+	id FTwd1b0081E665w03TwdeT; Fri, 13 Feb 2009 10:56:39 -0500
+X-Authority-Analysis: v=1.0 c=1 a=FP58Ms26AAAA:8 a=QWsv5MtBLs_8dyIVKcUA:9
+	a=bdEZbcN1le2eOoKq_Btt91GWqJcA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Fri, 13 Feb 2009 08:56:37 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090213155637.GV11815@smtp.west.cox.net>
+References: <200902131833.55265.khimov@altell.ru>
 MIME-Version: 1.0
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Machine config generator (FOSDEM idea)
+In-Reply-To: <200902131833.55265.khimov@altell.ru>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] New package: tnef
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,61 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2009 15:41:43 -0000
+X-List-Received-Date: Fri, 13 Feb 2009 15:58:17 -0000
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Marcin Juszkiewicz <openembedded@haerwu.biz> writes:
+On Fri, Feb 13, 2009 at 06:33:54PM +0300, Roman I Khimov wrote:
 
-> Hi
->
-> I was talking during FOSDEM with some developers and one of things which 
-> I was asked about was 'how to create machine config' (usually question 
-> was other but had this sense).
->
-> OE developers usually know that machine config is simple but tell that 
-> to Joe Random who only knows that his board use s3c2443 etc. So idea was 
-> to create simple few steps wizard which will ask few questions and 
-> produce machine config as result. More work would be required on 
-> creating kernel recipe because kernel can be from svn/cvs/git or tarball 
-> + quilt patchset etc...
->
-> Thats only beginning of idea - I hope that someone will provide 
-> feedback.
+[snip]
+> --- a/conf/checksums.ini	2009-02-13 15:05:24.976017132 +0300
+> +++ b/conf/checksums.ini	2009-02-13 18:30:39.887017023 +0300
+> @@ -25330,3 +25330,6 @@ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340
+>  md5=5f7b88ebb2bcd7e8044328482d079661
+>  sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
+>  
+> +[http://downloads.sourceforge.net/tnef/tnef-1.4.5.tar.gz]
+> +md5=ec46d47525c6afb928642e3edec21058
+> +sha256=42067fbc00d1ad4bcbb67440d61869aa43ed2d3d099fc691d3da8ad4296fa6b1
 
-I see the pros for it but I also think it will not help too much; the
-most difficult problem is to understand OE as a whole and how the
-packages can affect each other.
-
-It takes a while to identify the failures and to cook up a fix for those
-problems.
-
-What will be the use of a machine definition without a kernel config for
-it? And let's be real, if the person knows how to compile the kernel for
-it then I'm absolute sure that the machine definition won't be problem.
-
-What I do think could be useful is a more detailed set of "Quick Start
-Guide" having one for each really common task. The set of tasks I
-believe are common for regular users are:
-
- - adding a new package version
- - adding a new package
- - creating a distribution based in another
- - adding a new machine
-
-This small set solves 90% of problems people usually have and as a plus
-help the end user to understand OE in more deep; as a bonus we can end
-up having more people giving back the generated changes.
-
-My 2c.
+Can you please run the sorter
+(contrib/source-checker/oe-checksums-sorter.py) when you add new
+entries?  Thanks.
 
 -- 
-        O T A V I O    S A L V A D O R
----------------------------------------------
- E-mail: otavio@debian.org      UIN: 5906116
- GNU/Linux User: 239058     GPG ID: 49A5F855
- Home Page: http://otavio.ossystems.com.br
----------------------------------------------
-"Microsoft sells you Windows ... Linux gives
- you the whole house."
+Tom Rini
 
 
