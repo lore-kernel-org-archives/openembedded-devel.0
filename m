@@ -1,19 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LYL9o-0004f6-QY
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 15:06:13 +0100
-Received: (qmail 2434 invoked by uid 1003); 14 Feb 2009 14:04:36 -0000
+	(envelope-from <philip@balister.org>) id 1LYLBP-0004hG-3s
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 15:08:06 +0100
+Received: (qmail 11773 invoked by uid 1003); 14 Feb 2009 14:06:14 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 14 Feb 2009 14:04:36 -0000
-Message-ID: <4996CF73.5060309@balister.org>
-Date: Sat, 14 Feb 2009 09:04:35 -0500
+	by mail.geekisp.com with SMTP; 14 Feb 2009 14:06:13 -0000
+Message-ID: <4996CFD5.8080203@balister.org>
+Date: Sat, 14 Feb 2009 09:06:13 -0500
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <499570E4.1020503@balister.org> <4996379F.50003@whitby.id.au>
-In-Reply-To: <4996379F.50003@whitby.id.au>
+References: <499570E4.1020503@balister.org>
+	<4996379F.50003@whitby.id.au>	<19c1b8a90902132000m4368f3e5ma5addfe5e4e75d69@mail.gmail.com>
+	<gn606d$ea0$1@ger.gmane.org>
+In-Reply-To: <gn606d$ea0$1@ger.gmane.org>
 Subject: Re: Having trouble keeping track of the Patches?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -28,33 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2009 14:06:13 -0000
-X-Groupsio-MsgNum: 7746
+X-List-Received-Date: Sat, 14 Feb 2009 14:08:06 -0000
+X-Groupsio-MsgNum: 7747
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms070204000308080401050508"
+	micalg=sha1; boundary="------------ms050503060200030100020509"
 
---------------ms070204000308080401050508
+--------------ms050503060200030100020509
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Rod Whitby wrote:
-> Philip Balister wrote:
->> Patches sent to the list are being tracked with patchwork now:
->>
->> http://patchwork.openembedded.org/project/openembedded/list/
->>
->> If you submit a patch, please update the flags as comments occur and 
->> consensus happens.
+Rolf Leggewie wrote:
+> Khem Raj wrote:
+>>>> http://patchwork.openembedded.org/project/openembedded/list/
 > 
-> I've applied patch 22 to oe.dev, and have an account on patchwork - how
-> do I update it to identify that it has been applied?
+> Please make patchwork.openembedded.NET accessible, too.  Thanks.
 
-I trying to figure out how to grant people rights this weekend :) It is 
-not as obvious as i would like ...
+Actually, now that we have easier access to oe.org DNS, we should rely 
+more on the one "official" domain now and use the other for testing etc.
+
+I do need to work with someone to get the webserver configured to 
+respond to *.oe.org requests.
 
 Philip
 
---------------ms070204000308080401050508
+--------------ms050503060200030100020509
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -106,17 +105,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxNDE0
-MDQzNVowIwYJKoZIhvcNAQkEMRYEFFJ56h/wbun8MLQkctSCTK/f0F3AMFIGCSqGSIb3DQEJDzFF
+MDYxM1owIwYJKoZIhvcNAQkEMRYEFFloZxiahFzUT8GST4Xfk4sLmOxpMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQAB/iFJmuOuwvf+YwKW1rjsLNunbWDgl2CSC3aWM+JT+IQhVmbw
-R4N+SMPwsQd07xBndkUM0TnZdgmOtWGGThk9J1JMBDAdz+SiEM5LqiAn7LKGh6Plkk+mWBTjFVIh
-H6sPgh+yzSUrT2otzffKgtWwkxMJlbinh1HjG7773IOSUf6CasM5p7ohCYYC6fJJQtQDEfDITgar
-URzS9g7z1O2yCdFFJpYsPmjEb5BCCvh17C3z40aLK4vtuZoZwxejqr/GTo3DJc8PNCNUKjTogCOm
-TcvFhSgj08f71h677UsPwqNUDbF+ie00f4Qg7TY1/iQBu8ICKa6H39eX35xW+/mjAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQCh4zL3WFHnkFO8QJhF6OiBGxu8Jw5/dy93N7NA+XIl75NNAwiB
+/tIl86Vw7U0RvkvnJly0liwYd30qHTBJUjdJ7J8mOcrWjrcYtlvsluzvN3YJeLdC3bR7mCue4hjL
+RDpPaUuF7caY5dckofWaK1Cu08cj4yEREn2iO30Xo5O5FUVF596cEFfkHO/IMUW+7uKZHgVbVJtw
+XNzr32OJmeVR25WT7I8DAQU5bUaM2aPKltiRJBRSwh/K/QRFjZ1MB57VdX0ub6cQ6zTLU0i2Sewz
+RvWefGOJTfX8+Y/GTcaS/6q7kwQ41cmcrDxX0FgQFciKCm9QQvT6SAOJunfp7f42AAAAAAAA
 
---------------ms070204000308080401050508--
+--------------ms050503060200030100020509--
