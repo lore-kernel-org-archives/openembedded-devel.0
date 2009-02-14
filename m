@@ -1,33 +1,39 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.213] (helo=mail-bw0-f213.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LYGKg-0005Pp-PX
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 09:57:07 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LYGJE-0007Xc-7u
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 08:55:36 +0000
-Received: from p031211.dynamic.ppp.asahi-net.or.jp ([221.113.31.211])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 14 Feb 2009 08:55:36 +0000
-Received: from no2spam by p031211.dynamic.ppp.asahi-net.or.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LYH24-0003Hq-NT
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 10:41:56 +0100
+Received: by bwz9 with SMTP id 9so2049813bwz.12
 	for <openembedded-devel@openembedded.org>;
-	Sat, 14 Feb 2009 08:55:36 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 14 Feb 2009 17:55:30 +0900
-Message-ID: <49968702.8070406@nospam.arcornews.de>
-References: <1234527428.24574.2.camel@EPBYMINW0568>
-	<4996375F.6080105@whitby.id.au>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p031211.dynamic.ppp.asahi-net.or.jp
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-In-Reply-To: <4996375F.6080105@whitby.id.au>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] Fixed ruby 1.8.5 compilation problem
+	Sat, 14 Feb 2009 01:40:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=aunTniSMK7kZefP28aPr8EnX0QQbpQNxp76M8XzEzcA=;
+	b=LCSwxkG0CaSpYWt4wPjK0DUNaTFSbqE3kEcr5zFUU3IZ3Mdc8H4AHs3PyGK2JXAXUn
+	H452D4DrgZp4vvEbN1VK291+hrJaT1Gp5yiLjgXaFG6WEps/f2v9F771GAIzZqVvAbDr
+	Knn1/EYdMYTbuUActmfFFdJzxbnRNbBT0LDN8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=c5yCkx9Cb2454f/114DKCjnKG/xAOxBHPlb28wulxWnkt2RTtAxm/u72WcbmmlwK1F
+	4R6HyzuEt2KZDQQd9X3RMHncNZnCwlqJeatfS5lRo7g2UtPCXrEgAfOowL7WYDinrFBN
+	mqIrCJVhPAIj6crZKYVJiKJq4LipRGQ82HgnY=
+MIME-Version: 1.0
+Received: by 10.181.234.5 with SMTP id l5mr1066542bkr.124.1234604422320; Sat, 
+	14 Feb 2009 01:40:22 -0800 (PST)
+In-Reply-To: <c384c5ea0902131538o47bbbfa1oed7415d40d58bbbd@mail.gmail.com>
+References: <200902121727.21796.roman@khimov.ru>
+	<c384c5ea0902120728n459671f4y32957b212a8af0ed@mail.gmail.com>
+	<gn1j5m$qc5$2@ger.gmane.org> <200902130952.52664.roman@khimov.ru>
+	<gn3d3v$um5$2@ger.gmane.org>
+	<c384c5ea0902131538o47bbbfa1oed7415d40d58bbbd@mail.gmail.com>
+Date: Sat, 14 Feb 2009 10:40:22 +0100
+Message-ID: <c384c5ea0902140140u437d5135w1fd2469612924d27@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH] icecc: base fix for cross and native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,16 +47,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2009 08:57:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 14 Feb 2009 09:41:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Rod Whitby wrote:
- > [Used patchwork to get the mbox to apply with git-am, and git commit
- > --amend to edit the commit message to match policy.]
+Applied.
 
-Rod, can you maybe write a short howto at 
-http://wiki.openembedded.net/index.php/Patchwork ?
-
+-- 
+Leon
 
 
