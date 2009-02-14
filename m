@@ -1,33 +1,34 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LYG0M-0004ur-JH
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 09:36:06 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LYFyr-0006sx-5L
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 08:34:33 +0000
+	id 1LYG5d-00052j-Ud
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 09:41:33 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LYG4A-00072a-RC
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 08:40:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 14 Feb 2009 08:34:33 +0000
+	Sat, 14 Feb 2009 08:40:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sat, 14 Feb 2009 08:34:33 +0000
+	Sat, 14 Feb 2009 08:40:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 14 Feb 2009 09:34:16 +0100
-Message-ID: <gn5vm8$clm$1@ger.gmane.org>
-References: <499570E4.1020503@balister.org> <4996379F.50003@whitby.id.au>
+Date: Sat, 14 Feb 2009 09:34:56 +0100
+Message-ID: <gn5vng$clm$2@ger.gmane.org>
+References: <200902140035.13820.khimov@altell.ru>
+	<200902140730.32782.openembedded@haerwu.biz>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <4996379F.50003@whitby.id.au>
+In-Reply-To: <200902140730.32782.openembedded@haerwu.biz>
 Sender: news <news@ger.gmane.org>
-Subject: Re: Having trouble keeping track of the Patches?
+Subject: Re: [PATCH] New package: siproxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2009 08:36:06 -0000
+X-List-Received-Date: Sat, 14 Feb 2009 08:41:34 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 14-02-09 04:16, Rod Whitby wrote:
-> Philip Balister wrote:
->> Patches sent to the list are being tracked with patchwork now:
->>
->> http://patchwork.openembedded.org/project/openembedded/list/
->>
->> If you submit a patch, please update the flags as comments occur and
->> consensus happens.
+On 14-02-09 07:30, Marcin Juszkiewicz wrote:
+> On Friday 13 of February 2009 22:35:13 Roman I Khimov wrote:
 >
-> I've applied patch 22 to oe.dev, and have an account on patchwork - how
-> do I update it to identify that it has been applied?
+>> diff --git a/packages/siproxd/siproxd.inc
+>
+>> +RDEPENDS = "libosip2"
+>
+>> diff --git a/packages/siproxd/siproxd_0.7.1.bb
+>
+>> +PR = "r0"
+>
+> Drop those two lines. You should not add libs to RDEPENDS (OE takes care
+> of it)
 
-Change the state to 'accepted' and tick the 'archive' box. It looks we 
-can define our own set of states, so maybe a 'committed' can be added.
+Unless it's dlopen()'ed.
 
 regards,
 
