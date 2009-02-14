@@ -1,21 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LYE4M-0006LT-Ke
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 07:32:06 +0100
-Received: (qmail 19786 invoked by uid 813007); 14 Feb 2009 06:30:34 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 14 Feb 2009 06:30:34 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 14 Feb 2009 07:30:31 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
-References: <200902140035.13820.khimov@altell.ru>
-In-Reply-To: <200902140035.13820.khimov@altell.ru>
-MIME-Version: 1.0
-Message-Id: <200902140730.32782.openembedded@haerwu.biz>
-Subject: Re: [PATCH] New package: siproxd
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LYG0M-0004ur-JH
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 09:36:06 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LYFyr-0006sx-5L
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 08:34:33 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 14 Feb 2009 08:34:33 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 14 Feb 2009 08:34:33 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 14 Feb 2009 09:34:16 +0100
+Message-ID: <gn5vm8$clm$1@ger.gmane.org>
+References: <499570E4.1020503@balister.org> <4996379F.50003@whitby.id.au>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <4996379F.50003@whitby.id.au>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Having trouble keeping track of the Patches?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,31 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2009 06:32:07 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 14 Feb 2009 08:36:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 13 of February 2009 22:35:13 Roman I Khimov wrote:
+On 14-02-09 04:16, Rod Whitby wrote:
+> Philip Balister wrote:
+>> Patches sent to the list are being tracked with patchwork now:
+>>
+>> http://patchwork.openembedded.org/project/openembedded/list/
+>>
+>> If you submit a patch, please update the flags as comments occur and
+>> consensus happens.
+>
+> I've applied patch 22 to oe.dev, and have an account on patchwork - how
+> do I update it to identify that it has been applied?
 
-> diff --git a/packages/siproxd/siproxd.inc
+Change the state to 'accepted' and tick the 'archive' box. It looks we 
+can define our own set of states, so maybe a 'committed' can be added.
 
-> +RDEPENDS = "libosip2"
+regards,
 
-> diff --git a/packages/siproxd/siproxd_0.7.1.bb
-
-> +PR = "r0"
-
-Drop those two lines. You should not add libs to RDEPENDS (OE takes care 
-of it) and "r0" is default PR value.
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+Koen
 
 
 
