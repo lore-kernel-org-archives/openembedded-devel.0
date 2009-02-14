@@ -1,35 +1,21 @@
-Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LYBj9-0005dC-67
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Feb 2009 05:02:03 +0100
-Received: by rv-out-0708.google.com with SMTP id b17so1088230rvf.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2009 20:00:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=3WqbP+IapWiHI9dQsPGqYc4aqmgJ0oIHgjd5LbZhDpc=;
-	b=TxWF2A3tKuErhksq9jBXCIUj5WYj+NHMpx/6vRg4zDchHhz58DqQcUaf+rPdxnL/rf
-	dM+5Ku08jCWZ8W0UTKNtScl7loGBw1BAmG8uxKKfEpa0xfpVhKLw3JjK7WTDFW0nkgJn
-	vBHEtHUiyYwvXHzCx2syBaZWkeOv8mXISKvwg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=HFqijX9mvqIdiAKNCkRHY2EBsCeGdcwkIduQNsKtRQKowIgSs2mc/UAFv4fPkn08mM
-	T0kyJZyfNZjsSRPknahSrC/s5F2gpaIixOfpEom/3hOv5IGNKcwNBkC8QUyibaL8jlhj
-	z6R65t1tdKGM5EpCWDuAdYviMNsc3RUFlGfb0=
-MIME-Version: 1.0
-Received: by 10.141.210.21 with SMTP id m21mr1465361rvq.204.1234584032068; 
-	Fri, 13 Feb 2009 20:00:32 -0800 (PST)
-In-Reply-To: <4996379F.50003@whitby.id.au>
-References: <499570E4.1020503@balister.org> <4996379F.50003@whitby.id.au>
-Date: Fri, 13 Feb 2009 20:00:32 -0800
-Message-ID: <19c1b8a90902132000m4368f3e5ma5addfe5e4e75d69@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	(envelope-from <openembedded@haerwu.biz>) id 1LYE4M-0006LT-Ke
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 07:32:06 +0100
+Received: (qmail 19786 invoked by uid 813007); 14 Feb 2009 06:30:34 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 14 Feb 2009 06:30:34 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Having trouble keeping track of the Patches?
+Date: Sat, 14 Feb 2009 07:30:31 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
+References: <200902140035.13820.khimov@altell.ru>
+In-Reply-To: <200902140035.13820.khimov@altell.ru>
+MIME-Version: 1.0
+Message-Id: <200902140730.32782.openembedded@haerwu.biz>
+Subject: Re: [PATCH] New package: siproxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2009 04:02:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 14 Feb 2009 06:32:07 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Fri, Feb 13, 2009 at 7:16 PM, Rod Whitby <rod@whitby.id.au> wrote:
-> Philip Balister wrote:
->> Patches sent to the list are being tracked with patchwork now:
->>
->> http://patchwork.openembedded.org/project/openembedded/list/
->>
->> If you submit a patch, please update the flags as comments occur and
->> consensus happens.
+On Friday 13 of February 2009 22:35:13 Roman I Khimov wrote:
 
-Great work. It would be nice if there is  link on openembedded.org
-main page to patchwork.
+> diff --git a/packages/siproxd/siproxd.inc
 
-Thx
+> +RDEPENDS = "libosip2"
 
--Khem
+> diff --git a/packages/siproxd/siproxd_0.7.1.bb
+
+> +PR = "r0"
+
+Drop those two lines. You should not add libs to RDEPENDS (OE takes care 
+of it) and "r0" is default PR value.
+
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
