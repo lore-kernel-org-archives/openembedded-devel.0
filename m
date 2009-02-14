@@ -1,22 +1,25 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LYLBP-0004hG-3s
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 15:08:06 +0100
-Received: (qmail 11773 invoked by uid 1003); 14 Feb 2009 14:06:14 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 14 Feb 2009 14:06:13 -0000
-Message-ID: <4996CFD5.8080203@balister.org>
-Date: Sat, 14 Feb 2009 09:06:13 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+	(envelope-from <khimov@altell.ru>) id 1LYLKw-0004xL-U6
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 14 Feb 2009 15:17:43 +0100
+Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.hex)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LYLJO-00070H-Fu
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 14 Feb 2009 17:16:06 +0300
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <499570E4.1020503@balister.org>
-	<4996379F.50003@whitby.id.au>	<19c1b8a90902132000m4368f3e5ma5addfe5e4e75d69@mail.gmail.com>
-	<gn606d$ea0$1@ger.gmane.org>
-In-Reply-To: <gn606d$ea0$1@ger.gmane.org>
-Subject: Re: Having trouble keeping track of the Patches?
+Date: Sat, 14 Feb 2009 17:15:56 +0300
+User-Agent: KMail/1.9.9
+References: <200902140035.13820.khimov@altell.ru>
+	<200902140730.32782.openembedded@haerwu.biz>
+In-Reply-To: <200902140730.32782.openembedded@haerwu.biz>
+Organization: Altell Ltd.
+MIME-Version: 1.0
+Message-Id: <200902141715.56797.khimov@altell.ru>
+Subject: Re: [PATCH] New package: siproxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,92 +33,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2009 14:08:06 -0000
-X-Groupsio-MsgNum: 7747
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050503060200030100020509"
-
---------------ms050503060200030100020509
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 14 Feb 2009 14:17:43 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Rolf Leggewie wrote:
-> Khem Raj wrote:
->>>> http://patchwork.openembedded.org/project/openembedded/list/
-> 
-> Please make patchwork.openembedded.NET accessible, too.  Thanks.
+Marcin Juszkiewicz:
+> On Friday 13 of February 2009 22:35:13 Roman I Khimov wrote:
+> > diff --git a/packages/siproxd/siproxd.inc
+> >
+> > +RDEPENDS = "libosip2"
+> >
+> > diff --git a/packages/siproxd/siproxd_0.7.1.bb
+> >
+> > +PR = "r0"
+>
+> Drop those two lines. You should not add libs to RDEPENDS (OE takes care
+> of it) and "r0" is default PR value.
 
-Actually, now that we have easier access to oe.org DNS, we should rely 
-more on the one "official" domain now and use the other for testing etc.
+OK.
 
-I do need to work with someone to get the webserver configured to 
-respond to *.oe.org requests.
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index ca05e9f..ebf53da 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -19686,6 +19686,10 @@ sha256=928fa03d1b8a2329f5e71dd9190080146b5275119e28c19c36fdd57e788d84ba
+ md5=597d7ff7edb42a18421c806ffd18a136
+ sha256=7faaccb6f17296399051bd076a7f41e0f6d95a28eda3e30468f1bd7cf45898e1
+ 
++[http://downloads.sourceforge.net/siproxd/siproxd-0.7.1.tar.gz]
++md5=45e5a44803181e2bf3361d562060c904
++sha256=9e702c1fe770815ed87cf2a2b1d1d1d87551573d
++
+ [http://download.berlios.de/sipsak/sipsak-0.9.6-1.tar.gz]
+ md5=c4eb8e282902e75f4f040f09ea9d99d5
+ sha256=5064c56d482a080b6a4aea71821b78c21b59d44f6d1aa14c27429441917911a9
+diff --git a/packages/siproxd/siproxd.inc b/packages/siproxd/siproxd.inc
+new file mode 100644
+index 0000000..333210f
+--- /dev/null
++++ b/packages/siproxd/siproxd.inc
+@@ -0,0 +1,8 @@
++DESCRIPTION = "SIP proxy/masquerading daemon"
++SECTION = "net"
++DEPENDS = "libosip2"
++LICENSE = "GPL"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/siproxd/siproxd-${PV}.tar.gz"
++
++inherit autotools
+diff --git a/packages/siproxd/siproxd_0.7.1.bb b/packages/siproxd/siproxd_0.7.1.bb
+new file mode 100644
+index 0000000..760a8b6
+--- /dev/null
++++ b/packages/siproxd/siproxd_0.7.1.bb
+@@ -0,0 +1 @@
++require siproxd.inc
 
-Philip
 
---------------ms050503060200030100020509
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxNDE0
-MDYxM1owIwYJKoZIhvcNAQkEMRYEFFloZxiahFzUT8GST4Xfk4sLmOxpMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQCh4zL3WFHnkFO8QJhF6OiBGxu8Jw5/dy93N7NA+XIl75NNAwiB
-/tIl86Vw7U0RvkvnJly0liwYd30qHTBJUjdJ7J8mOcrWjrcYtlvsluzvN3YJeLdC3bR7mCue4hjL
-RDpPaUuF7caY5dckofWaK1Cu08cj4yEREn2iO30Xo5O5FUVF596cEFfkHO/IMUW+7uKZHgVbVJtw
-XNzr32OJmeVR25WT7I8DAQU5bUaM2aPKltiRJBRSwh/K/QRFjZ1MB57VdX0ub6cQ6zTLU0i2Sewz
-RvWefGOJTfX8+Y/GTcaS/6q7kwQ41cmcrDxX0FgQFciKCm9QQvT6SAOJunfp7f42AAAAAAAA
-
---------------ms050503060200030100020509--
