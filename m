@@ -1,34 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LYG5d-00052j-Ud
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 09:41:33 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LYG4A-00072a-RC
-	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 08:40:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1LYG8g-00054U-Kg
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 09:44:42 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LYG79-00079a-BA
+	for openembedded-devel@openembedded.org; Sat, 14 Feb 2009 08:43:07 +0000
+Received: from p031211.dynamic.ppp.asahi-net.or.jp ([221.113.31.211])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 14 Feb 2009 08:40:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sat, 14 Feb 2009 08:43:07 +0000
+Received: from no2spam by p031211.dynamic.ppp.asahi-net.or.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sat, 14 Feb 2009 08:40:02 +0000
+	Sat, 14 Feb 2009 08:43:07 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 14 Feb 2009 09:34:56 +0100
-Message-ID: <gn5vng$clm$2@ger.gmane.org>
-References: <200902140035.13820.khimov@altell.ru>
-	<200902140730.32782.openembedded@haerwu.biz>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 14 Feb 2009 17:42:55 +0900
+Message-ID: <gn606d$ea0$1@ger.gmane.org>
+References: <499570E4.1020503@balister.org> <4996379F.50003@whitby.id.au>
+	<19c1b8a90902132000m4368f3e5ma5addfe5e4e75d69@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <200902140730.32782.openembedded@haerwu.biz>
+X-Gmane-NNTP-Posting-Host: p031211.dynamic.ppp.asahi-net.or.jp
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+In-Reply-To: <19c1b8a90902132000m4368f3e5ma5addfe5e4e75d69@mail.gmail.com>
 Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] New package: siproxd
+Subject: Re: Having trouble keeping track of the Patches?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +41,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2009 08:41:34 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 14 Feb 2009 08:44:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 14-02-09 07:30, Marcin Juszkiewicz wrote:
-> On Friday 13 of February 2009 22:35:13 Roman I Khimov wrote:
->
->> diff --git a/packages/siproxd/siproxd.inc
->
->> +RDEPENDS = "libosip2"
->
->> diff --git a/packages/siproxd/siproxd_0.7.1.bb
->
->> +PR = "r0"
->
-> Drop those two lines. You should not add libs to RDEPENDS (OE takes care
-> of it)
+Khem Raj wrote:
+>>> http://patchwork.openembedded.org/project/openembedded/list/
 
-Unless it's dlopen()'ed.
+Please make patchwork.openembedded.NET accessible, too.  Thanks.
 
-regards,
+> Great work. It would be nice if there is  link on openembedded.org
+> main page to patchwork.
 
-Koen
+Indeed, great improvement.  Added a link to the wiki sidebar.
 
 
 
