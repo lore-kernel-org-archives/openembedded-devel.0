@@ -1,32 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LYjow-0002iD-Ci
-	for openembedded-devel@openembedded.org; Sun, 15 Feb 2009 17:26:18 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LYjnH-0002Ao-CL
-	for openembedded-devel@openembedded.org; Sun, 15 Feb 2009 16:24:35 +0000
-Received: from p5483acb9.dip0.t-ipconnect.de ([84.131.172.185])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 15 Feb 2009 16:24:35 +0000
-Received: from vjensen by p5483acb9.dip0.t-ipconnect.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 15 Feb 2009 16:24:35 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Vitus Jensen <vjensen@gmx.de>
-Date: Sun, 15 Feb 2009 16:24:23 +0000 (UTC)
-Message-ID: <gn9fjn$4rj$1@ger.gmane.org>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF642@hiob.intern.dresearch.de>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF664@hiob.intern.dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5483acb9.dip0.t-ipconnect.de
-User-Agent: Pan/0.133 (House of Butterflies)
-Sender: news <news@ger.gmane.org>
-Subject: Re: subversion libtool problem
+	(envelope-from <openembedded@haerwu.biz>) id 1LYleN-0007KV-QF
+	for openembedded-devel@openembedded.org; Sun, 15 Feb 2009 19:23:31 +0100
+Received: (qmail 8252 invoked by uid 813007); 15 Feb 2009 18:21:46 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 15 Feb 2009 18:21:46 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 15 Feb 2009 19:21:38 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
+References: <20090215023549.92DE8E802F@amethyst.openembedded.net>
+In-Reply-To: <20090215023549.92DE8E802F@amethyst.openembedded.net>
+MIME-Version: 1.0
+Message-Id: <200902151921.39445.openembedded@haerwu.biz>
+Subject: Re: [oe-commits] Lynn Lin : Signed-off-by: Khem Raj <raj.khem@gmail.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,57 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Feb 2009 16:26:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 15 Feb 2009 18:23:32 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Am Fri, 13 Feb 2009 09:41:07 +0100 schrieb Sledz, Steffen:
+On Sunday 15 of February 2009 03:35:49 GIT User account wrote:
+> Author: Lynn Lin <lynn.lin@avocent.com>
+> Date: =A0 Sat Feb 14 18:35:07 2009 -0800
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> mini-httpd: New recipe.
 
->> Since the saturday "apr + apr-util: merge from poky" commit by Koen i
->> almost reached my goal to build a subversion client for Angstrom. After
->> patching neon for myself there is just this last problem:
->> 
->> NOTE: Running task 422 of 578 (ID: 7,
->> /opt/openembedded/packages/subversion/subversion_1.4.5.bb, do_compile)
->> NOTE: package subversion-1.4.5: started NOTE: package
->> subversion-1.4.5-r0: task do_compile: started ERROR: function
->> do_compile failed
-...
- 
-> Is there nobody maintaining subversion???
+WTF? Please conform to CommitPolicy (first line is summary of commit).
 
-Probably.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Did you fix http://bugs.openembedded.net/show_bug.cgi?id=4830 when 
-"patching neon for myself"?  I tried a DEPENDS = "gnutls (<2.0)" but the 
-only thing which worked was a direct reference to a 1.x version.
-
-If someone is interested, here is the change:
-
-commit d10fe069dde68f25710250dfa295dbc88d62dfc1
-Author: Vitus Jensen <vjensen@gmx.de>
-Date:   Sun Feb 15 17:14:19 2009 +0100
-
-    neon_0.25.5.bb: preliminary patch to force gnutls < 2.0
-
-diff --git a/packages/neon/neon_0.25.5.bb b/packages/neon/neon_0.25.5.bb
-index f935fdb..ef70178 100644
---- a/packages/neon/neon_0.25.5.bb
-+++ b/packages/neon/neon_0.25.5.bb
-@@ -2,8 +2,7 @@ DESCRIPTION = "neon is an HTTP and WebDAV client library, with a C interface."
- HOMEPAGE = "http://www.webdav.org/neon"
- SECTION = "libs"
- LICENSE = "LGPL"
--DEPENDS = "zlib libxml2 expat time gnutls"
--
-+DEPENDS = "zlib libxml2 expat time gnutls-1.6.3"
- PR = "r3"
- 
- SRC_URI = "http://www.webdav.org/${PN}/${P}.tar.gz \
-
-
--- 
-Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
 
 
 
