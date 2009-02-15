@@ -1,33 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LYi8X-0006va-SA
-	for openembedded-devel@openembedded.org; Sun, 15 Feb 2009 15:38:26 +0100
+	id 1LYjow-0002iD-Ci
+	for openembedded-devel@openembedded.org; Sun, 15 Feb 2009 17:26:18 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LYi6q-0006yE-6v
-	for openembedded-devel@openembedded.org; Sun, 15 Feb 2009 14:36:40 +0000
-Received: from p031211.dynamic.ppp.asahi-net.or.jp ([221.113.31.211])
+	id 1LYjnH-0002Ao-CL
+	for openembedded-devel@openembedded.org; Sun, 15 Feb 2009 16:24:35 +0000
+Received: from p5483acb9.dip0.t-ipconnect.de ([84.131.172.185])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 15 Feb 2009 14:36:40 +0000
-Received: from no2spam by p031211.dynamic.ppp.asahi-net.or.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	Sun, 15 Feb 2009 16:24:35 +0000
+Received: from vjensen by p5483acb9.dip0.t-ipconnect.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sun, 15 Feb 2009 14:36:40 +0000
+	Sun, 15 Feb 2009 16:24:35 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 15 Feb 2009 23:36:28 +0900
-Message-ID: <gn999c$cp4$1@ger.gmane.org>
-References: <499570E4.1020503@balister.org>	<4996379F.50003@whitby.id.au>	<19c1b8a90902132000m4368f3e5ma5addfe5e4e75d69@mail.gmail.com>	<gn606d$ea0$1@ger.gmane.org>	<4996CFD5.8080203@balister.org>	<gn77ej$t39$1@ger.gmane.org>
-	<499726CD.1030402@balister.org>
+From: Vitus Jensen <vjensen@gmx.de>
+Date: Sun, 15 Feb 2009 16:24:23 +0000 (UTC)
+Message-ID: <gn9fjn$4rj$1@ger.gmane.org>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF642@hiob.intern.dresearch.de>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF664@hiob.intern.dresearch.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p031211.dynamic.ppp.asahi-net.or.jp
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-In-Reply-To: <499726CD.1030402@balister.org>
+X-Gmane-NNTP-Posting-Host: p5483acb9.dip0.t-ipconnect.de
+User-Agent: Pan/0.133 (House of Butterflies)
 Sender: news <news@ger.gmane.org>
-Subject: Re: Having trouble keeping track of the Patches?
+Subject: Re: subversion libtool problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,20 +40,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Feb 2009 14:38:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 15 Feb 2009 16:26:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Philip Balister wrote:
-> Can you look at, cgit.oe.org? I'm not sure why it is not working. I have 
-> it set as a CNAME for cgit.openembedded.net atm.
+Am Fri, 13 Feb 2009 09:41:07 +0100 schrieb Sledz, Steffen:
 
-Should be working now as well as any other addresses I spotted.
+>> Since the saturday "apr + apr-util: merge from poky" commit by Koen i
+>> almost reached my goal to build a subversion client for Angstrom. After
+>> patching neon for myself there is just this last problem:
+>> 
+>> NOTE: Running task 422 of 578 (ID: 7,
+>> /opt/openembedded/packages/subversion/subversion_1.4.5.bb, do_compile)
+>> NOTE: package subversion-1.4.5: started NOTE: package
+>> subversion-1.4.5-r0: task do_compile: started ERROR: function
+>> do_compile failed
+...
+ 
+> Is there nobody maintaining subversion???
 
-> If you notice anything we can do to get all the services working well 
-> via the oe.org addresses, let me know.
+Probably.
 
-tinderbox still needs a DNS entry.  Apache is already ready for it.
+Did you fix http://bugs.openembedded.net/show_bug.cgi?id=4830 when 
+"patching neon for myself"?  I tried a DEPENDS = "gnutls (<2.0)" but the 
+only thing which worked was a direct reference to a 1.x version.
+
+If someone is interested, here is the change:
+
+commit d10fe069dde68f25710250dfa295dbc88d62dfc1
+Author: Vitus Jensen <vjensen@gmx.de>
+Date:   Sun Feb 15 17:14:19 2009 +0100
+
+    neon_0.25.5.bb: preliminary patch to force gnutls < 2.0
+
+diff --git a/packages/neon/neon_0.25.5.bb b/packages/neon/neon_0.25.5.bb
+index f935fdb..ef70178 100644
+--- a/packages/neon/neon_0.25.5.bb
++++ b/packages/neon/neon_0.25.5.bb
+@@ -2,8 +2,7 @@ DESCRIPTION = "neon is an HTTP and WebDAV client library, with a C interface."
+ HOMEPAGE = "http://www.webdav.org/neon"
+ SECTION = "libs"
+ LICENSE = "LGPL"
+-DEPENDS = "zlib libxml2 expat time gnutls"
+-
++DEPENDS = "zlib libxml2 expat time gnutls-1.6.3"
+ PR = "r3"
+ 
+ SRC_URI = "http://www.webdav.org/${PN}/${P}.tar.gz \
+
+
+-- 
+Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
 
 
 
