@@ -1,28 +1,23 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LZ18L-00062L-El
+	(envelope-from <mickey@vanille-media.de>) id 1LZ1Yp-0003We-8f
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 11:55:29 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id B3B8716E22C
+	Mon, 16 Feb 2009 12:22:51 +0100
+Received: from andromeda.vanille.de (e180132210.adsl.alicedsl.de
+	[85.180.132.210])
+	by drlauer-research.com (Postfix) with ESMTP id B66365843C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 12:06:31 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 70BFE2A422B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 11:53:39 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Mon, 16 Feb 2009 12:44:20 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Feb 2009 12:20:57 +0100
+User-Agent: KMail/1.9.10
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF672@hiob.intern.dresearch.de>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF672@hiob.intern.dresearch.de>
 MIME-Version: 1.0
-Date: Mon, 16 Feb 2009 11:53:16 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF672@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: How to determine DEPENDS and RDEPENDS
-Thread-Index: AcmQJNMtIFlfvSktQmOg/PwLrGZHqA==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: How to determine DEPENDS and RDEPENDS
+Message-Id: <200902161220.58448.mickey@vanille-media.de>
+Subject: Re: How to determine DEPENDS and RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,15 +31,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 10:55:29 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Mon, 16 Feb 2009 11:22:51 -0000
 Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-SXMgdGhlcmUgdG9vbCBzdXBwb3J0IGluIE9FIHRvIGRldGVybWluZSB2YWx1YXMgZm9yIERFUEVO
-RFMgYW5kL29yIFJERVBFTkRTIGluIGEgc2FmZSB3YXk/IFRoaXMgd291bGQgYmUgcmVhbGx5IGhl
-bHBmdWwgd2hlbiBzZXR0aW5nIHVwIHRoZSBiYiBmb3IgYSBuZXcgcGFja2FnZS4NCg0KU3RlZmZl
-bg0K
+Am Monday 16 February 2009 11:53:16 schrieb Sledz, Steffen:
+> Is there tool support in OE to determine valuas for DEPENDS and/or RDEPENDS
+> in a safe way? This would be really helpful when setting up the bb for a
+> new package.
+
+No, however usually DEPENDS can be figured out by looking at configure.ac. 
+RDEPENDS are more special, for dynamic linking, OE will figure out on its, 
+own, so you only have to provide these for dlopened libraries, config files, 
+artwork, or otherwise plugins, etc.
+
+-- 
+:M:
 
 
