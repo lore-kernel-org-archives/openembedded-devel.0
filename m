@@ -1,49 +1,37 @@
-Received: from [209.85.218.164] (helo=mail-bw0-f164.google.com)
+Received: from [65.182.109.77] (helo=mta8.brinkster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LZ774-000886-4z
+	(envelope-from <John.Willis@Distant-earth.com>) id 1LZ8cD-0003mb-Iz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 18:18:34 +0100
-Received: by bwz8 with SMTP id 8so1464380bwz.12
+	Mon, 16 Feb 2009 19:54:49 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta8.brinkster.com (Postfix) with ESMTP id F3F267148CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 09:16:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type;
-	bh=WarbS0QBF9+Ak0g8q0m5bAvb/yiYpASRVti3FndKsPU=;
-	b=gz0SG0CNByyGBvx4M9kCAeH1W4FAwqp6OHLbkzNWKm0pxEmtfE5Q3Qaxt6km4pFXyj
-	fa2fOQINs+L7fcffQhTOuTS5ccsi6jHC/pCho/fCvJ1eUlO807Bym/XXMTRtCLBDWbbK
-	rGFMuvp3Of3sfoc33negvyhONfJwu0hnoaiIY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
-	b=ET49dvcpq/Fc1B3CVmeUaZpCiHfapNZV5ZoIN0o8OiFvHddx5BjhI2jTzrmS3oqxMu
-	k46RlzgW3HWb5lQEd25uniRcTSs2UmnJoWeRpBcIPOKMY2sIaevwBEpz/xvD77TzLT8V
-	ZUAOtkHGu7vv6dbkmwany7cv1VIF69sypxNcU=
-Received: by 10.103.244.4 with SMTP id w4mr1903220mur.90.1234804599074;
-	Mon, 16 Feb 2009 09:16:39 -0800 (PST)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id l20sm3630067uga.44.2009.02.16.09.16.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 16 Feb 2009 09:16:38 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id A0184610067; Mon, 16 Feb 2009 14:16:34 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <1234795059.5643.2.camel@EPBYMINW0568>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Mon, 16 Feb 2009 14:16:34 -0300
-In-Reply-To: <1234795059.5643.2.camel@EPBYMINW0568> (Ihar Hrachyshka's message
-	of "Mon, 16 Feb 2009 16:37:39 +0200")
-Message-ID: <87ljs6fgjx.fsf@neumann.lab.ossystems.com.br>
+	Mon, 16 Feb 2009 13:52:54 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+X-Spam-Flag: NO
+X-Spam-Score: 0.294
+X-Spam-Level: 
+X-Spam-Status: No, score=0.294 tagged_above=-10 required=5 tests=[AWL=-0.438, 
+	BAYES_00=-2.599, MSGID_MULTIPLE_AT=1.449, RCVD_IN_PBL=0.905,
+	RCVD_IN_SORBS_DUL=0.877, RDNS_DYNAMIC=0.1]
+Received: from mta8.brinkster.com ([127.0.0.1])
+	by localhost (mta8.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BeQu3vOerkT9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Feb 2009 13:52:52 -0500 (EST)
+Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
+	[82.46.19.72])
+	by mta8.brinkster.com (Postfix) with ESMTP id 8FBBC715407
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Feb 2009 13:52:51 -0500 (EST)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 16 Feb 2009 18:52:19 -0000
+Message-ID: <012601c99067$b2d3b560$187b2020$@Willis@Distant-earth.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] neon: bump version to 0.28.3
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcmQZ7FtbkmXRsWpTruEqDP08ApgQw==
+Subject: [RFC/PATCH] Modify libgles-omap3 package to make /dev/pvrsrvkm accessible by non ROOT users.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,18 +45,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 17:18:34 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 Feb 2009 18:54:49 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
-Ihar Hrachyshka <ihar.hrachyshka@gmail.com> writes:
+Tested by running several OGLES apps on the Pandora as a normal user, should
+also be fine on the Beagle/Overo/OMAP3EVM etc.
 
-> Seems that current neon versions doesn't work with gnutls 2.x
+Signed-off-by: David-John Willis <John.Willis@Distant-earth.com>
+---
+ packages/powervr-drivers/libgles-omap3/rc.pvr      |    1 +
+ .../powervr-drivers/libgles-omap3_3.00.00.06.bb    |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+ mode change 100644 => 100755
+packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
 
-In this case I belive it could be droped; what others think?
-
+diff --git a/packages/powervr-drivers/libgles-omap3/rc.pvr
+b/packages/powervr-drivers/libgles-omap3/rc.pvr
+index 4476a9d..1f63d4e 100755
+--- a/packages/powervr-drivers/libgles-omap3/rc.pvr
++++ b/packages/powervr-drivers/libgles-omap3/rc.pvr
+@@ -15,6 +15,7 @@ if [ -e /dev/pvrsrvkm ] ; then
+ fi
+ 
+ mknod /dev/pvrsrvkm c $pvr_maj 0 
++chmod 666 /dev/pvrsrvkm
+ 
+ /usr/bin/pvrsrvinit
+ 
+diff --git a/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
+b/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
+index aba613c..7af52a2
+--- a/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
++++ b/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
+@@ -2,7 +2,7 @@ require libgles-omap3.inc
+ 
+ # Not released yet
+ #DEFAULT_PREFERENCE = "-1"
+-PR = "r5"
++PR = "r6"
+ 
+ SGXPV = "3_00_00_06"
+ IMGPV = "1.3.13.1397"
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+1.6.0.5
+
+
+
 
 
