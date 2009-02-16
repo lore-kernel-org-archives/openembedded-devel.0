@@ -1,24 +1,26 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LYypv-0000Q1-KF
+	(envelope-from <khimov@altell.ru>) id 1LYzo3-0007Cq-HK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 09:28:19 +0100
-Received: from gandalf.denix.org ([71.251.57.220]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KF5008PSGRK7SK8@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	16 Feb 2009 02:26:09 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EEFF26B83A8; Mon,
-	16 Feb 2009 03:26:07 -0500 (EST)
-Date: Mon, 16 Feb 2009 03:26:07 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 16 Feb 2009 10:30:28 +0100
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.116])
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LYzmF-000OMI-PP
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Feb 2009 12:28:35 +0300
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090216082607.GA30105@denix.org>
-References: <000d01c98f79$3e36e6d0$baa4b470$@com>
-MIME-version: 1.0
-In-reply-to: <000d01c98f79$3e36e6d0$baa4b470$@com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: image.bbclass broken?
+Date: Mon, 16 Feb 2009 12:28:26 +0300
+User-Agent: KMail/1.9.9
+References: <200902140035.13820.khimov@altell.ru>
+	<20090215211330.GB11815@smtp.west.cox.net>
+	<87hc2vi3wy.fsf@neumann.lab.ossystems.com.br>
+In-Reply-To: <87hc2vi3wy.fsf@neumann.lab.ossystems.com.br>
+Organization: Altell Ltd.
+MIME-Version: 1.0
+Message-Id: <200902161228.26942.khimov@altell.ru>
+Subject: Re: [PATCH] New package: siproxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,49 +34,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 08:28:19 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 16 Feb 2009 09:30:29 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Sun, Feb 15, 2009 at 03:25:24PM +0100, Christian P?ssinger wrote:
-> Hello, 
-> 
-> after a recent 'git pull' of the -dev branch I'm not able to create images.
-> 
-> I receive the following error:
-> 
-> | awk: {size = 10240 + $1; print (size > ${IMAGE_ROOTFS_SIZE} ? size :
-> ${IMAGE_ROOTFS_SIZE}) }
-> | awk:
-> ^ syntax 
-> | du: write error
-> 
-> Doing a grep for the line I found it:
-> 
-> org.openembedded.dev/classes/image.bbclass:110:
-> ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}|awk '{size = ${IMAGE_EXTRA_SPACE} + $1;
-> print (size >                  ${IMAGE_ROOTFS_SIZE} ? size :
-> ${IMAGE_ROOTFS_SIZE}) }'`
-> 
-> After replacing image.bbclass with the one from the -stable branch
-> everything worked again. I run OE on an up-2-date Ubuntu Server 8.10.
-> 
-> Can anyone confirm this behavior?
+Otavio Salvador:
+> Basically we could suggest following workflow for regular users:
+>
+>  - when going to make any change at OE, start a personal branch
+>
+>    $: git checkout -b local master
 
-Christian,
+Here is when the problem starts. Currently we have overlay setup, so I'm 
+extracting everything I'm pushing now from overlay (which itself is managed 
+in git, but that's another story since at least one thing is not managed at 
+all in overlay - checksums).
 
-The change was made almost a month ago:
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=d38f1dd24dd6ed94408aa49aad33e46634a129ff
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=9d7586e655755f51be3f09f3da48147b0937c3e1
+>    $: git format-patch master..
+>
+>  - mail them to ml
 
-I haven't heard of anyone having any issues creating images since then.
+And this is another thing I'm not sure about, there might be a lot 
+of 'intermediate' commits leading to nice-upstream-acceptable package, 
+pushing them all in series is kinda wrong, IMHO.
 
-Now, judging from the error message, I'd guess you have IMAGE_ROOTFS_SIZE 
-variable undefined. Normally it is set to a default value by conf/bitbake.conf,
-unless it was specifically set in one of the image recipes and/or your
-local.conf...
+There is of course some git kung fu that might help doing one patch for one 
+thing regardless of the number of intermediate results. But then again 
+there is reviewing process that leads to more changes and more git kung fu 
+to make single patch for single package again.
 
--- 
-Denys
+Does it make any sense? Currently I'm trying to push new things in 'one 
+package - one patch' model, extracting package patch from overlay as `git 
+diff some_commit..` plus adding checksums to local OE tree and doing `git 
+diff` there (not commiting it at all). Then after new package is in, I'm 
+able to pull from main OE and remove things from overlay.
 
 
