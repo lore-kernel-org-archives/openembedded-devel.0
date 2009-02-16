@@ -1,52 +1,36 @@
-Received: from [209.85.221.22] (helo=mail-qy0-f22.google.com)
+Received: from [209.85.134.188] (helo=mu-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LZ2VO-0001wZ-67
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LZ39H-0002x1-K8
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 13:23:22 +0100
-Received: by qyk3 with SMTP id 3so680088qyk.12
+	Mon, 16 Feb 2009 14:04:35 +0100
+Received: by mu-out-0910.google.com with SMTP id w9so974651mue.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 04:21:29 -0800 (PST)
+	Mon, 16 Feb 2009 05:02:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type;
-	bh=vm+nUilffNv/yZZpEe/BpooGwyIc+9ibGCKTrxn3kzg=;
-	b=nlOJtRaxzecfDxoTECaV6sDDD5f34rIYe5P1RSWX6kg7hjmj6tmy2sw2+ryolq4c0s
-	bzGPUo8dDP8g+hvaAgf9LC/8FK+RyyGKp1i3zcsprb+1jrzU/bDkJM86t4jYnolFd5ty
-	GcQItlSgWZ8vCwC6doBJ0kBwuaHd83Ur2zMlU=
+	h=domainkey-signature:received:received:subject:from:to:content-type
+	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
+	bh=fxOCpWqNGYSDwmoghcrZAIR4ziXETErlztCeeZ8ySvY=;
+	b=sh15rqKgI23yQZwVkbNpxowVmSa4GjP2phzoN0R+FuaAnyvck1Kjd6+l1S6dNYetBk
+	Z5xvYzUR0M0qjsm4WtKO198y7t/kKooXozWjpAcjXoRhKP50GVtv7ytINwkcSJZHd8AJ
+	izIlXv4qUg2iBELHCrJAOCrUb2fRzklY0Nod4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
-	b=HW+B68uVxKH8wOkT7ecdhzXlalrU1Mak5pxewskwlmjpJfQ8UI2/MaxvIO+y/cmge1
-	R3MGFzCTtUcbGvhhFAg4aQZYyzaR073awSuK7pdBgl78uyK/9jX+xguq3JeV7ZDQiEj7
-	OJR38SldXV61WrBgLfXy2rsPGGnicpKegBFrA=
-Received: by 10.224.28.138 with SMTP id m10mr7877023qac.79.1234786889043;
-	Mon, 16 Feb 2009 04:21:29 -0800 (PST)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id 2sm4315221qwi.58.2009.02.16.04.21.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 16 Feb 2009 04:21:28 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id E3D50610067; Mon, 16 Feb 2009 09:21:30 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding;
+	b=QV/t4d+uIs/T5Gw1jWQ+F9GxGl3Hmk6H+exp5gm0VZ5RT22kufRPFeMiyOSIw6did9
+	7jWhHknqyWDUXitgVN0PMJqxQzPuAZj0PqiH28gLF+1zRWfZON2PtfTV+Aii6zWkngdi
+	qSYGEvxDn0AJk15R01anya98YSUQUzTQiy7w8=
+Received: by 10.103.160.10 with SMTP id m10mr1384492muo.50.1234789364082;
+	Mon, 16 Feb 2009 05:02:44 -0800 (PST)
+Received: from ?10.6.26.234? (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id 25sm8594361mul.21.2009.02.16.05.02.43
+	(version=SSLv3 cipher=RC4-MD5); Mon, 16 Feb 2009 05:02:43 -0800 (PST)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <200902140035.13820.khimov@altell.ru>
-	<20090215211330.GB11815@smtp.west.cox.net>
-	<87hc2vi3wy.fsf@neumann.lab.ossystems.com.br>
-	<200902161228.26942.khimov@altell.ru>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Mon, 16 Feb 2009 09:21:30 -0300
-In-Reply-To: <200902161228.26942.khimov@altell.ru> (Roman I. Khimov's message
-	of "Mon, 16 Feb 2009 12:28:26 +0300")
-Message-ID: <873aeeh8s5.fsf@neumann.lab.ossystems.com.br>
-MIME-Version: 1.0
-Subject: Re: [PATCH] New package: siproxd
+Date: Mon, 16 Feb 2009 15:02:41 +0200
+Message-Id: <1234789361.5643.0.camel@EPBYMINW0568>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: [PATCH] ruby-dbus: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,50 +44,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 12:23:22 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 Feb 2009 13:04:35 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Roman I Khimov <khimov@altell.ru> writes:
+This is a package with D-Bus bindings for Ruby language.
 
-> Otavio Salvador:
->> Basically we could suggest following workflow for regular users:
->>
->>  - when going to make any change at OE, start a personal branch
->>
->>    $: git checkout -b local master
->
-> Here is when the problem starts. Currently we have overlay setup, so I'm 
-> extracting everything I'm pushing now from overlay (which itself is managed 
-> in git, but that's another story since at least one thing is not managed at 
-> all in overlay - checksums).
->
->>    $: git format-patch master..
->>
->>  - mail them to ml
->
-> And this is another thing I'm not sure about, there might be a lot 
-> of 'intermediate' commits leading to nice-upstream-acceptable package, 
-> pushing them all in series is kinda wrong, IMHO.
->
-> There is of course some git kung fu that might help doing one patch for one 
-> thing regardless of the number of intermediate results. But then again 
-> there is reviewing process that leads to more changes and more git kung fu 
-> to make single patch for single package again.
->
-> Does it make any sense? Currently I'm trying to push new things in 'one 
-> package - one patch' model, extracting package patch from overlay as `git 
-> diff some_commit..` plus adding checksums to local OE tree and doing `git 
-> diff` there (not commiting it at all). Then after new package is in, I'm 
-> able to pull from main OE and remove things from overlay.
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ conf/checksums.ini               |    4 ++++
+ packages/ruby/ruby-dbus_0.2.1.bb |   18 ++++++++++++++++++
+ 2 files changed, 22 insertions(+), 0 deletions(-)
+ create mode 100644 packages/ruby/ruby-dbus_0.2.1.bb
 
-You need to created another temp branch and cherry-pick the changes to
-it; after grabbing them you can use:
-
- $: git format-patch master..temp
-
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index e867c6e..178f45c 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -19138,6 +19138,10 @@ sha256=1774de918b156c360843c1b68690f5f57532ee48ff079d4d05c51dace8d523ed
+ md5=797ea136fe43e4286c9362ee4516674e
+ sha256=1774de918b156c360843c1b68690f5f57532ee48ff079d4d05c51dace8d523ed
+ 
++[http://trac.luon.net/data/ruby-dbus/releases/ruby-dbus-0.2.1.tar.gz]
++md5=1f6398d8bbafa272c0b43878fec43276
++sha256=cfcadc4ae860f2de3d6aa1a1230a410b1dedf783148a27a20205bb3b54e3c3ac
++
+ [http://rxtx.qbang.org/pub/rxtx/rxtx-2.1-7r2.zip]
+ md5=9290b4832d46199f8d798a531209640b
+ sha256=31db3852a86105766758975519b27d262407c96cacad4f34ad0de5aae26addd9
+diff --git a/packages/ruby/ruby-dbus_0.2.1.bb b/packages/ruby/ruby-dbus_0.2.1.bb
+new file mode 100644
+index 0000000..40627d3
+--- /dev/null
++++ b/packages/ruby/ruby-dbus_0.2.1.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "${PN} bindings"
++SECTION = "devel/ruby"
++LICENSE = "LGPL"
++RDEPENDS = "dbus ruby"
++
++SRC_URI = "http://trac.luon.net/data/${PN}/releases/${PN}-0.2.1.tar.gz"
++
++RUBY_DIR = "/usr/lib/ruby/1.8"
++
++S = "${WORKDIR}/${PN}-${PV}"
++
++FILES_${PN} += "${RUBY_DIR}"
++
++do_install() {
++	install -d ${D}${RUBY_DIR}
++	cp -r lib/* ${D}${RUBY_DIR}
++}
++
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+1.5.6.3
+
+
 
 
