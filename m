@@ -1,13 +1,13 @@
 Received: from [80.67.172.39] (helo=webmail.no-log.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1LZ3S5-00005Z-C8
-	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 14:24:01 +0100
+	(envelope-from <GNUtoo@no-log.org>) id 1LZ3SF-00005h-Io
+	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 14:24:11 +0100
 Received: by webmail.no-log.org (Postfix, from userid 33)
-	id 15B2E4BFCD; Mon, 16 Feb 2009 14:22:09 +0100 (CET)
+	id 9A5484BECE; Mon, 16 Feb 2009 14:22:20 +0100 (CET)
 X-Squirrel-UserHash: c3wyGAAN
 X-Squirrel-FromHash: AFRWCldXDSo=
-Message-ID: <34764.AFRWCldXDSo=.1234790529.squirrel@webmail.no-log.org>
-Date: Mon, 16 Feb 2009 14:22:09 +0100 (CET)
+Message-ID: <34765.AFRWCldXDSo=.1234790540.squirrel@webmail.no-log.org>
+Date: Mon, 16 Feb 2009 14:22:20 +0100 (CET)
 From: "GNUtoo" <GNUtoo@no-log.org>
 To: openembedded-devel@openembedded.org
 User-Agent: SquirrelMail/1.4.9a
@@ -28,7 +28,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 13:24:01 -0000
+X-List-Received-Date: Mon, 16 Feb 2009 13:24:11 -0000
 Content-Type: text/plain;charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
@@ -54,5 +54,6 @@ by the way here's my setup:
 *openmoko distro
 
 (I've also a bug device to test(armv6) (without a working LCD))
+Denis.
 
 
