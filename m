@@ -1,23 +1,31 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LZ1Yp-0003We-8f
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 12:22:51 +0100
-Received: from andromeda.vanille.de (e180132210.adsl.alicedsl.de
-	[85.180.132.210])
-	by drlauer-research.com (Postfix) with ESMTP id B66365843C9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 12:44:20 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Feb 2009 12:20:57 +0100
-User-Agent: KMail/1.9.10
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF672@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF672@hiob.intern.dresearch.de>
-MIME-Version: 1.0
-Message-Id: <200902161220.58448.mickey@vanille-media.de>
-Subject: Re: How to determine DEPENDS and RDEPENDS
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LZ2Ra-00059v-GN
+	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 13:19:26 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LZ2Pn-00048J-JS
+	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 12:17:35 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 16 Feb 2009 12:17:35 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 16 Feb 2009 12:17:35 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Feb 2009 13:17:26 +0100
+Message-ID: <gnblgm$i7s$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+Sender: news <news@ger.gmane.org>
+Subject: autotools_stage already inherits autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,23 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 11:22:51 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 16 Feb 2009 12:19:26 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Am Monday 16 February 2009 11:53:16 schrieb Sledz, Steffen:
-> Is there tool support in OE to determine valuas for DEPENDS and/or RDEPENDS
-> in a safe way? This would be really helpful when setting up the bb for a
-> new package.
+Hi,
 
-No, however usually DEPENDS can be figured out by looking at configure.ac. 
-RDEPENDS are more special, for dynamic linking, OE will figure out on its, 
-own, so you only have to provide these for dlopened libraries, config files, 
-artwork, or otherwise plugins, etc.
+Lately a number of commits were made doing this:
 
--- 
-:M:
+-inherit autotools
++inherit autotools autotools_stage
+
+which is bogus, since autotools_stage.bbclass consists of:
+
+inherit autotools
+
+do_stage () {
+     autotools_stage_all
+}
+
+Summary: inherit autotools autotools_stage = BAD, inherit 
+autotools_stage = GOOD
+
+regards,
+
+Koen
+
 
 
