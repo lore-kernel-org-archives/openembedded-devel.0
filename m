@@ -1,32 +1,35 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LZBTt-0007Nn-88
-	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 22:58:25 +0100
+	id 1LZBUX-0007OO-Eq
+	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 22:59:05 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LZBS3-0003WE-82
-	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 21:56:31 +0000
-Received: from p5483a559.dip0.t-ipconnect.de ([84.131.165.89])
+	id 1LZBSi-0003Xv-K4
+	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 21:57:12 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 16 Feb 2009 21:56:31 +0000
-Received: from vjensen by p5483a559.dip0.t-ipconnect.de with local (Gmexim 0.1
+	Mon, 16 Feb 2009 21:57:12 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 16 Feb 2009 21:56:31 +0000
+	Mon, 16 Feb 2009 21:57:12 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Vitus Jensen <vjensen@gmx.de>
-Date: Mon, 16 Feb 2009 21:56:22 +0000 (UTC)
-Message-ID: <gncne6$i0f$1@ger.gmane.org>
-References: <1234795059.5643.2.camel@EPBYMINW0568>
-	<87ljs6fgjx.fsf@neumann.lab.ossystems.com.br>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Feb 2009 22:57:03 +0100
+Message-ID: <gncnff$kar$1@ger.gmane.org>
+References: <4995BFE1.7090900@dls.net>
+	<4995CF5B.6080103@balister.org>	<C3C7F026-8C3F-4247-8370-78C109729166@ngndg.com>
+	<4999CE6C.9020902@balister.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5483a559.dip0.t-ipconnect.de
-User-Agent: Pan/0.133 (House of Butterflies)
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <4999CE6C.9020902@balister.org>
 Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] neon: bump version to 0.28.3
+Subject: Re: boost-1.36.0 fails when compiling; cannot find the compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 21:58:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 Feb 2009 21:59:05 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Am Mon, 16 Feb 2009 14:16:34 -0300 schrieb Otavio Salvador:
+On 16-02-09 21:37, Philip Balister wrote:
+> Tim Ellis wrote:
+>> Currently not working on ARM:
 
-> Ihar Hrachyshka <ihar.hrachyshka@gmail.com> writes:
-> 
->> Seems that current neon versions doesn't work with gnutls 2.x
-> 
-> In this case I belive it could be droped; what others think?
+That one is fixed now.
 
-Bad idea as "Please note: The neon API is subject to backwards-
-incompatible change over minor versions (0.24.x -> 0.25.x) but is stable 
-across patch releases (0.24.0 -> 0.24.x)." (http://www.webdav.org/neon/) 
-and current recipes may rely on a specific minor version.  As least 
-subversion and devfs2 tests neon versions.  I haven't checked the others.
+>>
+>> http://tinderbox.openembedded.net/public/logs/3460249.txt
+>
+> Hmm, it works for armv7a ....
 
-Bye,
-   Vitus
+armv7a doesn't use thumb in angstrom.
 
--- 
-Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
+regards,
+
+Koen
 
 
 
