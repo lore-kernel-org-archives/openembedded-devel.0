@@ -1,31 +1,24 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LYxls-0001oh-Jb
+	(envelope-from <denis@denix.org>) id 1LYypv-0000Q1-KF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 08:20:04 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 4145F16E122
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 08:31:07 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 5F7AE2A4225
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 08:18:15 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 16 Feb 2009 08:18:16 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF66E@hiob.intern.dresearch.de>
-In-Reply-To: <gn9fjn$4rj$1@ger.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] subversion libtool problem
-Thread-Index: AcmPjolDXnnw2nhuR+2TWB/D5Y58VgAd7Bcg
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF642@hiob.intern.dresearch.de><69E6C70090A0A14498CC98FAE5E06B6E3CF664@hiob.intern.dresearch.de>
-	<gn9fjn$4rj$1@ger.gmane.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: subversion libtool problem
+	Mon, 16 Feb 2009 09:28:19 +0100
+Received: from gandalf.denix.org ([71.251.57.220]) by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KF5008PSGRK7SK8@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	16 Feb 2009 02:26:09 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EEFF26B83A8; Mon,
+	16 Feb 2009 03:26:07 -0500 (EST)
+Date: Mon, 16 Feb 2009 03:26:07 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090216082607.GA30105@denix.org>
+References: <000d01c98f79$3e36e6d0$baa4b470$@com>
+MIME-version: 1.0
+In-reply-to: <000d01c98f79$3e36e6d0$baa4b470$@com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: image.bbclass broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,59 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 07:20:05 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Feb 2009 08:28:19 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-> Did you fix http://bugs.openembedded.net/show_bug.cgi?id=3D4830 when=20
-> "patching neon for myself"?  I tried a DEPENDS =3D "gnutls=20
-> (<2.0)" but the=20
-> only thing which worked was a direct reference to a 1.x version.
+On Sun, Feb 15, 2009 at 03:25:24PM +0100, Christian P?ssinger wrote:
+> Hello, 
+> 
+> after a recent 'git pull' of the -dev branch I'm not able to create images.
+> 
+> I receive the following error:
+> 
+> | awk: {size = 10240 + $1; print (size > ${IMAGE_ROOTFS_SIZE} ? size :
+> ${IMAGE_ROOTFS_SIZE}) }
+> | awk:
+> ^ syntax 
+> | du: write error
+> 
+> Doing a grep for the line I found it:
+> 
+> org.openembedded.dev/classes/image.bbclass:110:
+> ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}|awk '{size = ${IMAGE_EXTRA_SPACE} + $1;
+> print (size >                  ${IMAGE_ROOTFS_SIZE} ? size :
+> ${IMAGE_ROOTFS_SIZE}) }'`
+> 
+> After replacing image.bbclass with the one from the -stable branch
+> everything worked again. I run OE on an up-2-date Ubuntu Server 8.10.
+> 
+> Can anyone confirm this behavior?
 
-I've tried another way. But as long as i can't build and test subversion =
-i'm not sure if this is working. :(
+Christian,
 
-$ git diff --cached packages/neon/
-diff --git a/packages/neon/files/gnutls-2.patch =
-b/packages/neon/files/gnutls-2.patch
-new file mode 100644
-index 0000000..2b37dfc
---- /dev/null
-+++ b/packages/neon/files/gnutls-2.patch
-@@ -0,0 +1,11 @@
-+diff -Nurd neon-0.25.5/macros/neon.m4 =
-neon-0.25.5-patched/macros/neon.m4
-+--- neon-0.25.5/macros/neon.m4 2009-02-03 16:23:40.000000000 +0100
-++++ neon-0.25.5-patched/macros/neon.m4 2009-02-03 16:24:00.000000000 =
-+0100
-+@@ -895,6 +895,7 @@
-+    1.0.?|1.0.1?|1.0.20|1.0.21)=20
-+       AC_MSG_ERROR([GNU TLS version $ne_gnutls_ver is too old -- =
-1.0.22 or later required]) ;;
-+    1.*) ;;
-++   2.*) ;;
-+    *) AC_MSG_ERROR([GNU TLS version $ne_gnutls_ver is not supported]) =
-;;
-+    esac
-+=20
-diff --git a/packages/neon/neon_0.25.5.bb b/packages/neon/neon_0.25.5.bb
-index f935fdb..bec9262 100644
---- a/packages/neon/neon_0.25.5.bb
-+++ b/packages/neon/neon_0.25.5.bb
-@@ -4,10 +4,11 @@ SECTION =3D "libs"
- LICENSE =3D "LGPL"
- DEPENDS =3D "zlib libxml2 expat time gnutls"
-=20
--PR =3D "r3"
-+PR =3D "r4"
-=20
- SRC_URI =3D "http://www.webdav.org/${PN}/${P}.tar.gz \
--       file://gnutls-force-and-detect.patch;patch=3D1"
-+       file://gnutls-force-and-detect.patch;patch=3D1 \
-+       file://gnutls-2.patch;patch=3D1"
-=20
- inherit autotools binconfig lib_package pkgconfig
+The change was made almost a month ago:
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=d38f1dd24dd6ed94408aa49aad33e46634a129ff
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=9d7586e655755f51be3f09f3da48147b0937c3e1
+
+I haven't heard of anyone having any issues creating images since then.
+
+Now, judging from the error message, I'd guess you have IMAGE_ROOTFS_SIZE 
+variable undefined. Normally it is set to a default value by conf/bitbake.conf,
+unless it was specifically set in one of the image recipes and/or your
+local.conf...
+
+-- 
+Denys
 
 
