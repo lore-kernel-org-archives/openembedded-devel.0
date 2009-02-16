@@ -1,39 +1,32 @@
-Received: from [209.85.217.174] (helo=mail-gx0-f174.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LZCW4-0005pu-TE
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Feb 2009 00:04:45 +0100
-Received: by gxk22 with SMTP id 22so1483046gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 15:02:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=sYP4BjOnP59BR0aPaSan7FZvBRFmiwtCgkY2ZNFKmvc=;
-	b=H8i/6P166Gg+vLkMXm/kA5xkKnilt41iVaQRNG7fKhZE6GGow32UIF/GsNYqxXGjWv
-	5als4gpbzDOCcL3CeWA7NIho2Ra2VhkDkiwWdG+a4tCScb0W5yFVch3APr48zfpTw+t9
-	J+08idiSl6eDDDTddA7UsH0K99bJtgMjQr0WI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=ARBNpO4Ht4c6Q1O72PAz73csgv4w4zyEN6cp6fKJ0gS2Wy6ZRTqAfx+TEGKGutGqQy
-	EIQ2vyfHjh1Fb2rkc+5JWsF+vZA2QbLhrL+gDV3/vJIx+l85DU5BX4I9h4hljkTVJu7a
-	kPAVTp1/sem7hg36B4uOk1jI/jETC/qGgzyjM=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.125.12 with SMTP id x12mr60688anc.159.1234825367229; Mon, 
-	16 Feb 2009 15:02:47 -0800 (PST)
-In-Reply-To: <200902170936.57379.jk@ozlabs.org>
-References: <87ocx2rq7w.fsf@neumann.lab.ossystems.com.br>
-	<200902170936.57379.jk@ozlabs.org>
-Date: Mon, 16 Feb 2009 20:02:47 -0300
-X-Google-Sender-Auth: adeea83505ed1388
-Message-ID: <be7a9f3d0902161502y3e5ca44biac0b9acc4ff7b6ba@mail.gmail.com>
-From: Otavio Salvador <otavio@debian.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: Usage of groups
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LZD2F-0003XY-Bt
+	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 00:37:59 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LZD0L-0007Gu-N9
+	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 23:36:01 +0000
+Received: from p5483a559.dip0.t-ipconnect.de ([84.131.165.89])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 16 Feb 2009 23:36:01 +0000
+Received: from vjensen by p5483a559.dip0.t-ipconnect.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 16 Feb 2009 23:36:01 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Vitus Jensen <vjensen@gmx.de>
+Date: Mon, 16 Feb 2009 23:35:48 +0000 (UTC)
+Message-ID: <gnct8k$i0f$2@ger.gmane.org>
+References: <34765.AFRWCldXDSo=.1234790540.squirrel@webmail.no-log.org>
+	<200902161659.09894.khimov@altell.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5483a559.dip0.t-ipconnect.de
+User-Agent: Pan/0.133 (House of Butterflies)
+Sender: news <news@ger.gmane.org>
+Subject: Re: bzip2-full-native_1.0.5.bb problem and possible fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +40,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 23:04:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Feb 2009 23:37:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello folks,
+Am Mon, 16 Feb 2009 16:59:09 +0300 schrieb Roman I Khimov:
 
-I've contacted PatchWork people and asked for details how to make it
-properly fit our needs. Bellow goes the answer they gave me.
+> GNUtoo:
+>> I've:
+>> >| cp: will not overwrite just-created
+>>
+>> `/home/embedded/oetmp_openmoko/work/i686-linux/bzip2-full-native-1.0.5-
+r0
+>>/bzip2-1.0.5/install-sh' with
+>> `/home/embedded/oetmp_openmoko/staging/i686-linux/usr/share/
+automake-1.9/
+>>install-sh'
+> 
+> Most probably you've worked with automake 1.9, then switched to automake
+> 1.10 (or reverse way) and got two automakes in staging directory, then
+> this:
+> 
+>> cp ${STAGING_DATADIR_NATIVE}/automake*/install-sh ${S}/
+> 
+> which should expand as (for example)
+> 
+> cp ${STAGING_DATADIR_NATIVE}/automake-1.10/install-sh ${S}/
+> 
+> expands as
+> 
+> cp ${STAGING_DATADIR_NATIVE}/automake-1.10/install-sh \
+> 	${STAGING_DATADIR_NATIVE}/automake-1.9/install-sh ${S}/
+> 
+> Boom.
+> 
+> Had this on automake switch too, not sure how to fix it better, but it's
+> not a problem when you only use one automake (and you can clean up stale
+> version manually if you switched from one version to another).
 
->> The OpenEmbedded project started to use PatchWork to allow us to
->> better track the patches that come to us. It has been working fine
->> except that we're not finding how to add groups to make easier the
->> permission setting for users and like.
+http://bugs.openembedded.net/show_bug.cgi?id=4911
 
-> The built-in 'groups' system doesn't affect any of the permissions on
-> patchwork at the moment. To allow a user to alter patches, they need to
-> be a 'maintainer' of the project that the patch belongs to.
+It's the issue described there, right?  I had this problem once but it 
+mysteriously went away.  Probably after wiping TMPDIR but "bitbake bzip2 -
+c clean" would have been enough?
 
-> To make a use a maintainer, just open their UserProfile page in the
-> admin interface, and select the appropriate 'maintainer groups'.
-
-> Cheers,
-
-
-> Jeremy
+Vitus
 
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
+
 
 
