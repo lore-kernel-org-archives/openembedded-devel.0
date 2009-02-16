@@ -1,20 +1,24 @@
-Received: from [80.67.172.39] (helo=webmail.no-log.org)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1LZ3SF-00005h-Io
-	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 14:24:11 +0100
-Received: by webmail.no-log.org (Postfix, from userid 33)
-	id 9A5484BECE; Mon, 16 Feb 2009 14:22:20 +0100 (CET)
-X-Squirrel-UserHash: c3wyGAAN
-X-Squirrel-FromHash: AFRWCldXDSo=
-Message-ID: <34765.AFRWCldXDSo=.1234790540.squirrel@webmail.no-log.org>
-Date: Mon, 16 Feb 2009 14:22:20 +0100 (CET)
-From: "GNUtoo" <GNUtoo@no-log.org>
-To: openembedded-devel@openembedded.org
-User-Agent: SquirrelMail/1.4.9a
+	(envelope-from <khimov@altell.ru>) id 1LZ42C-0001sK-8r
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Feb 2009 15:01:20 +0100
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.116])
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LZ40M-000P7c-FE
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Feb 2009 16:59:26 +0300
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Feb 2009 16:59:09 +0300
+User-Agent: KMail/1.9.9
+References: <34765.AFRWCldXDSo=.1234790540.squirrel@webmail.no-log.org>
+In-Reply-To: <34765.AFRWCldXDSo=.1234790540.squirrel@webmail.no-log.org>
+Organization: Altell Ltd.
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: bzip2-full-native_1.0.5.bb problem and possible fix
+Message-Id: <200902161659.09894.khimov@altell.ru>
+Subject: Re: bzip2-full-native_1.0.5.bb problem and possible fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,32 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 13:24:11 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Feb 2009 14:01:20 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-hello, what's the reason of:
->cp ${STAGING_DATADIR_NATIVE}/automake*/install-sh ${S}/
-in bzip2-full-native_1.0.5.bb
-I've:
->| cp: will not overwrite just-created
-`/home/embedded/oetmp_openmoko/work/i686-linux/bzip2-full-native-1.0.5-r0=
-/bzip2-1.0.5/install-sh'
-with
-`/home/embedded/oetmp_openmoko/staging/i686-linux/usr/share/automake-1.9/=
-install-sh'
+GNUtoo:
+> I've:
+> >| cp: will not overwrite just-created
+>
+> `/home/embedded/oetmp_openmoko/work/i686-linux/bzip2-full-native-1.0.5-r0
+>/bzip2-1.0.5/install-sh' with
+> `/home/embedded/oetmp_openmoko/staging/i686-linux/usr/share/automake-1.9/
+>install-sh'
 
-if I remove :
-cp ${STAGING_DATADIR_NATIVE}/automake*/install-sh ${S}/
-It works.
+Most probably you've worked with automake 1.9, then switched to automake 
+1.10 (or reverse way) and got two automakes in staging directory, then 
+this:
 
-should I commit the change or was this line here for a reason?
+> cp ${STAGING_DATADIR_NATIVE}/automake*/install-sh ${S}/
 
-by the way here's my setup:
-*om-gta02 machine
-*openmoko distro
+which should expand as (for example)
 
-(I've also a bug device to test(armv6) (without a working LCD))
-Denis.
+cp ${STAGING_DATADIR_NATIVE}/automake-1.10/install-sh ${S}/
+
+expands as
+
+cp ${STAGING_DATADIR_NATIVE}/automake-1.10/install-sh \
+	${STAGING_DATADIR_NATIVE}/automake-1.9/install-sh ${S}/
+
+Boom.
+
+Had this on automake switch too, not sure how to fix it better, but it's not 
+a problem when you only use one automake (and you can clean up stale 
+version manually if you switched from one version to another).
 
 
