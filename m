@@ -1,33 +1,33 @@
 Received: from [209.85.218.213] (helo=mail-bw0-f213.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LZ4Hx-0001rJ-Kq
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LZ4dD-0002b2-EQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 15:17:37 +0100
-Received: by bwz9 with SMTP id 9so2887015bwz.12
+	Mon, 16 Feb 2009 15:39:35 +0100
+Received: by bwz9 with SMTP id 9so2901048bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2009 06:15:43 -0800 (PST)
+	Mon, 16 Feb 2009 06:37:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:subject:from:to:content-type
 	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
-	bh=WF7pqUr0arypOQuduojDgvxoBultzdSFyHB4vE1JzFU=;
-	b=E/yc8RlFOB3fIOjETfoI7FMvmXTqvvTahNWjHlmIMiP0k/4jbJzrcVS4Q9N+IuW8zM
-	h6DOu5/yiOEbcuelKwMjdx3fhN4NCUt3c73eMSbDr2gaAscBPuA2qscn8B5XuGMD87ca
-	Nhuaw3k6vJNpLf8uQ1Yg+UE7FdHs24oF0cSWE=
+	bh=gEGwTPYc9vxcjOF3SziE5EXgjoStFABhs92l/uWvHro=;
+	b=XcM9F/BmniVjN1yY+J2v8jQlN/h+WGUwukyVES9kSN6StSgEKOPqb+JYY8WmFehNGN
+	3hcRE/aLC2NyUB4zEB8xhVzladZerGyObCYAPPZObTcOB7uqO6C/sYMBvt17XY/sam6m
+	SvwBUerhBo2+sE2t4ulq+JnAos+3C+7qs7yjo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer
 	:content-transfer-encoding;
-	b=lDAEygGuvIZD4IoGSn/315gKcm84GY+UslaSsb1yzarCzTKPqVeDNnXsb/ZqYocg7N
-	whwGQ7xT3HsKth8IK/Lje2xV8zAJtdQXJeNChQRMdaALoZSD1wIbC9yORNDka7bxA+1I
-	tlZuZpammNIlofpEFAn8H3Uh6Bw3XbFrACDvw=
-Received: by 10.103.175.9 with SMTP id c9mr2955569mup.3.1234793743502;
-	Mon, 16 Feb 2009 06:15:43 -0800 (PST)
+	b=Zqa7Q1VPriGh9RLooAeYrqro9yPPQs2Va1tdtJfoCXnkNx6PDztZ18PW++sFCVfwIy
+	WNNtguCfCgJa+9A97LbLWbppKBfrA9Jcu2m/frrXoNrnyjQFMqWriY+3rm9mMsdocmzN
+	Kg1hyeu7jAYfSW2LydihRPzpLUruPhTlsLF0k=
+Received: by 10.103.214.8 with SMTP id r8mr464833muq.92.1234795061408;
+	Mon, 16 Feb 2009 06:37:41 -0800 (PST)
 Received: from ?10.6.26.234? (cpmsq.epam.com [217.21.56.2])
-	by mx.google.com with ESMTPS id 23sm7768648mun.0.2009.02.16.06.15.42
-	(version=SSLv3 cipher=RC4-MD5); Mon, 16 Feb 2009 06:15:43 -0800 (PST)
+	by mx.google.com with ESMTPS id 14sm9975935muo.50.2009.02.16.06.37.40
+	(version=SSLv3 cipher=RC4-MD5); Mon, 16 Feb 2009 06:37:40 -0800 (PST)
 From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Feb 2009 16:15:34 +0200
-Message-Id: <1234793734.5643.1.camel@EPBYMINW0568>
+Date: Mon, 16 Feb 2009 16:37:39 +0200
+Message-Id: <1234795059.5643.2.camel@EPBYMINW0568>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.24.3 
 Subject: [PATCH] neon: bump version to 0.28.3
@@ -44,7 +44,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 14:17:38 -0000
+X-List-Received-Date: Mon, 16 Feb 2009 14:39:35 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
@@ -53,8 +53,8 @@ Seems that current neon versions doesn't work with gnutls 2.x
 Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 ---
  conf/checksums.ini           |    4 ++++
- packages/neon/neon_0.28.3.bb |   17 +++++++++++++++++
- 2 files changed, 21 insertions(+), 0 deletions(-)
+ packages/neon/neon_0.28.3.bb |   16 ++++++++++++++++
+ 2 files changed, 20 insertions(+), 0 deletions(-)
  create mode 100644 packages/neon/neon_0.28.3.bb
 
 diff --git a/conf/checksums.ini b/conf/checksums.ini
@@ -74,15 +74,14 @@ index 178f45c..a08be2a 100644
  sha256=1fca69e934c3d526e308450cc5af2478d440e012922dd0bb10388fcf093ef32e
 diff --git a/packages/neon/neon_0.28.3.bb b/packages/neon/neon_0.28.3.bb
 new file mode 100644
-index 0000000..7f814b4
+index 0000000..0e347e7
 --- /dev/null
 +++ b/packages/neon/neon_0.28.3.bb
-@@ -0,0 +1,17 @@
+@@ -0,0 +1,16 @@
 +DESCRIPTION = "neon is an HTTP and WebDAV client library, with a C interface."
 +SECTION = "libs"
 +LICENSE = "LGPL"
 +DEPENDS = "zlib libxml2 expat time gnutls"
-+PR = "r2"
 +
 +DEFAULT_PREFERENCE = "1"
 +
