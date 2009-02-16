@@ -1,24 +1,49 @@
-Received: from [80.67.172.39] (helo=webmail.no-log.org)
+Received: from [209.85.218.164] (helo=mail-bw0-f164.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1LZ6rd-0007Qu-Ud
+	(envelope-from <otavio.salvador@gmail.com>) id 1LZ774-000886-4z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Feb 2009 18:02:37 +0100
-Received: by webmail.no-log.org (Postfix, from userid 33)
-	id 706C24C298; Mon, 16 Feb 2009 18:00:45 +0100 (CET)
-X-Squirrel-UserHash: c3wyGAAN
-X-Squirrel-FromHash: AFRWCldXDSo=
-Message-ID: <33595.AFRWCldXDSo=.1234803644.squirrel@webmail.no-log.org>
-In-Reply-To: <200902161659.09894.khimov@altell.ru>
-References: <34765.AFRWCldXDSo=.1234790540.squirrel@webmail.no-log.org>
-	<200902161659.09894.khimov@altell.ru>
-Date: Mon, 16 Feb 2009 18:00:44 +0100 (CET)
-From: "GNUtoo" <GNUtoo@no-log.org>
+	Mon, 16 Feb 2009 18:18:34 +0100
+Received: by bwz8 with SMTP id 8so1464380bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Feb 2009 09:16:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:received:from:to
+	:subject:organization:references:user-agent:x-url:x-attribution:date
+	:in-reply-to:message-id:mime-version:content-type;
+	bh=WarbS0QBF9+Ak0g8q0m5bAvb/yiYpASRVti3FndKsPU=;
+	b=gz0SG0CNByyGBvx4M9kCAeH1W4FAwqp6OHLbkzNWKm0pxEmtfE5Q3Qaxt6km4pFXyj
+	fa2fOQINs+L7fcffQhTOuTS5ccsi6jHC/pCho/fCvJ1eUlO807Bym/XXMTRtCLBDWbbK
+	rGFMuvp3Of3sfoc33negvyhONfJwu0hnoaiIY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:organization:references:user-agent:x-url
+	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
+	b=ET49dvcpq/Fc1B3CVmeUaZpCiHfapNZV5ZoIN0o8OiFvHddx5BjhI2jTzrmS3oqxMu
+	k46RlzgW3HWb5lQEd25uniRcTSs2UmnJoWeRpBcIPOKMY2sIaevwBEpz/xvD77TzLT8V
+	ZUAOtkHGu7vv6dbkmwany7cv1VIF69sypxNcU=
+Received: by 10.103.244.4 with SMTP id w4mr1903220mur.90.1234804599074;
+	Mon, 16 Feb 2009 09:16:39 -0800 (PST)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id l20sm3630067uga.44.2009.02.16.09.16.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 16 Feb 2009 09:16:38 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id A0184610067; Mon, 16 Feb 2009 14:16:34 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.9a
+Organization: O.S. Systems Ltda.
+References: <1234795059.5643.2.camel@EPBYMINW0568>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
+	(x86_64-pc-linux-gnu)
+X-URL: http://www.ossystems.com.br/
+X-Attribution: O.S.
+Date: Mon, 16 Feb 2009 14:16:34 -0300
+In-Reply-To: <1234795059.5643.2.camel@EPBYMINW0568> (Ihar Hrachyshka's message
+	of "Mon, 16 Feb 2009 16:37:39 +0200")
+Message-ID: <87ljs6fgjx.fsf@neumann.lab.ossystems.com.br>
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: Re: bzip2-full-native_1.0.5.bb problem and possible fix
+Subject: Re: [PATCH] neon: bump version to 0.28.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,45 +57,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 17:02:38 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Feb 2009 17:18:34 -0000
+Content-Type: text/plain; charset=us-ascii
 
-> GNUtoo:
->> I've:
->> >| cp: will not overwrite just-created
->>
->> `/home/embedded/oetmp_openmoko/work/i686-linux/bzip2-full-native-1.0.5=
--r0
->>/bzip2-1.0.5/install-sh' with
->> `/home/embedded/oetmp_openmoko/staging/i686-linux/usr/share/automake-1=
-.9/
->>install-sh'
->
-> Most probably you've worked with automake 1.9, then switched to automak=
-e
-> 1.10 (or reverse way) and got two automakes in staging directory, then
-> this:
->
->> cp ${STAGING_DATADIR_NATIVE}/automake*/install-sh ${S}/
->
-> which should expand as (for example)
->
-> cp ${STAGING_DATADIR_NATIVE}/automake-1.10/install-sh ${S}/
->
-> expands as
->
-> cp ${STAGING_DATADIR_NATIVE}/automake-1.10/install-sh \
-> 	${STAGING_DATADIR_NATIVE}/automake-1.9/install-sh ${S}/
->
-> Boom.
->
-> Had this on automake switch too, not sure how to fix it better, but it'=
-s
-> not
-> a problem when you only use one automake (and you can clean up stale
-> version manually if you switched from one version to another).
-ah ok thanks a lot.
-Denis.
+Ihar Hrachyshka <ihar.hrachyshka@gmail.com> writes:
+
+> Seems that current neon versions doesn't work with gnutls 2.x
+
+In this case I belive it could be droped; what others think?
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
