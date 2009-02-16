@@ -1,21 +1,31 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LYtZz-0001u7-DV
-	for openembedded-devel@openembedded.org; Mon, 16 Feb 2009 03:51:31 +0100
-Received: (qmail 9473 invoked by uid 1003); 16 Feb 2009 02:49:41 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 16 Feb 2009 02:49:40 -0000
-Message-ID: <4998D444.9080300@balister.org>
-Date: Sun, 15 Feb 2009 21:49:40 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <sledz@DResearch.DE>) id 1LYxls-0001oh-Jb
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Feb 2009 08:20:04 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 4145F16E122
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Feb 2009 08:31:07 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 5F7AE2A4225
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Feb 2009 08:18:15 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <499570E4.1020503@balister.org>	<4996379F.50003@whitby.id.au>	<19c1b8a90902132000m4368f3e5ma5addfe5e4e75d69@mail.gmail.com>	<gn606d$ea0$1@ger.gmane.org>	<4996CFD5.8080203@balister.org>	<gn77ej$t39$1@ger.gmane.org>	<499726CD.1030402@balister.org>
-	<gn999c$cp4$1@ger.gmane.org>
-In-Reply-To: <gn999c$cp4$1@ger.gmane.org>
-Subject: Re: Having trouble keeping track of the Patches?
+Date: Mon, 16 Feb 2009 08:18:16 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF66E@hiob.intern.dresearch.de>
+In-Reply-To: <gn9fjn$4rj$1@ger.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] subversion libtool problem
+Thread-Index: AcmPjolDXnnw2nhuR+2TWB/D5Y58VgAd7Bcg
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF642@hiob.intern.dresearch.de><69E6C70090A0A14498CC98FAE5E06B6E3CF664@hiob.intern.dresearch.de>
+	<gn9fjn$4rj$1@ger.gmane.org>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: subversion libtool problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,94 +39,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2009 02:51:31 -0000
-X-Groupsio-MsgNum: 7763
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050901060203060108050103"
+X-List-Received-Date: Mon, 16 Feb 2009 07:20:05 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
---------------ms050901060203060108050103
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+> Did you fix http://bugs.openembedded.net/show_bug.cgi?id=3D4830 when=20
+> "patching neon for myself"?  I tried a DEPENDS =3D "gnutls=20
+> (<2.0)" but the=20
+> only thing which worked was a direct reference to a 1.x version.
 
-Rolf Leggewie wrote:
-> Philip Balister wrote:
->> Can you look at, cgit.oe.org? I'm not sure why it is not working. I 
->> have it set as a CNAME for cgit.openembedded.net atm.
-> 
-> Should be working now as well as any other addresses I spotted.
-> 
->> If you notice anything we can do to get all the services working well 
->> via the oe.org addresses, let me know.
-> 
-> tinderbox still needs a DNS entry.  Apache is already ready for it.
+I've tried another way. But as long as i can't build and test subversion =
+i'm not sure if this is working. :(
 
-Tinderbox.openembedded.org is working now.
+$ git diff --cached packages/neon/
+diff --git a/packages/neon/files/gnutls-2.patch =
+b/packages/neon/files/gnutls-2.patch
+new file mode 100644
+index 0000000..2b37dfc
+--- /dev/null
++++ b/packages/neon/files/gnutls-2.patch
+@@ -0,0 +1,11 @@
++diff -Nurd neon-0.25.5/macros/neon.m4 =
+neon-0.25.5-patched/macros/neon.m4
++--- neon-0.25.5/macros/neon.m4 2009-02-03 16:23:40.000000000 +0100
+++++ neon-0.25.5-patched/macros/neon.m4 2009-02-03 16:24:00.000000000 =
++0100
++@@ -895,6 +895,7 @@
++    1.0.?|1.0.1?|1.0.20|1.0.21)=20
++       AC_MSG_ERROR([GNU TLS version $ne_gnutls_ver is too old -- =
+1.0.22 or later required]) ;;
++    1.*) ;;
+++   2.*) ;;
++    *) AC_MSG_ERROR([GNU TLS version $ne_gnutls_ver is not supported]) =
+;;
++    esac
++=20
+diff --git a/packages/neon/neon_0.25.5.bb b/packages/neon/neon_0.25.5.bb
+index f935fdb..bec9262 100644
+--- a/packages/neon/neon_0.25.5.bb
++++ b/packages/neon/neon_0.25.5.bb
+@@ -4,10 +4,11 @@ SECTION =3D "libs"
+ LICENSE =3D "LGPL"
+ DEPENDS =3D "zlib libxml2 expat time gnutls"
+=20
+-PR =3D "r3"
++PR =3D "r4"
+=20
+ SRC_URI =3D "http://www.webdav.org/${PN}/${P}.tar.gz \
+-       file://gnutls-force-and-detect.patch;patch=3D1"
++       file://gnutls-force-and-detect.patch;patch=3D1 \
++       file://gnutls-2.patch;patch=3D1"
+=20
+ inherit autotools binconfig lib_package pkgconfig
 
-Philip
 
---------------ms050901060203060108050103
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxNjAy
-NDk0MFowIwYJKoZIhvcNAQkEMRYEFOqqus3rF+gH/8VJaQ/N8uHfPn5cMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQAjPxdu0c0LonEEbfbu5aJg7WabmCxfhKvRRm7CT5Nl0II3IVh/
-3mXz6d9RwFYlR3E+ItJJ+eIVeaaIhClkay8f/K/JLBtd0ArQSin4q2Qi9Yi0k8mFCuqF6EfNVrhi
-vsZhIm4s3lTVqF/tgEhev6YNQQdmyWLmLKy8Bq9KY+vc9B4ZtkBhLu3v5vHuilBJuC5DmF9rmLed
-bSGlVT2oLoQ3irB6Xch8CuVjivrnywbcHxmyzGtoNDA3SgiVFn4i/iZWok9UawyyESNDL85/4Wm8
-5KvB3wboJgEI1uIzUrlOYQzIDrevW05YK2bSnQxsBciHe+EF+xnTeZfPcVIl3k9yAAAAAAAA
-
---------------ms050901060203060108050103--
