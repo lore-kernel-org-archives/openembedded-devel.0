@@ -1,21 +1,33 @@
-Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1LZW3m-00006T-O1
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Feb 2009 20:56:51 +0100
-Received: from [192.168.1.102] (77-21-130-108-dynip.superkabel.de
-	[77.21.130.108])
-	by dd20204.kasserver.com (Postfix) with ESMTP id C374318058977
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2009 20:54:52 +0100 (CET)
-Message-ID: <499B1606.3040406@opensimpad.org>
-Date: Tue, 17 Feb 2009 20:54:46 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LZXjo-0004Pp-25
+	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 22:44:23 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LZXho-0007xu-7f
+	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 21:42:16 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 17 Feb 2009 21:42:16 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 17 Feb 2009 21:42:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 17 Feb 2009 22:42:00 +0100
+Message-ID: <gnfav9$t7i$1@ger.gmane.org>
 References: <499AD8D6.3000708@balister.org> <gnere3$16u$1@ger.gmane.org>
-In-Reply-To: <gnere3$16u$1@ger.gmane.org>
+	<499B1606.3040406@opensimpad.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <499B1606.3040406@opensimpad.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Autobuilder bugs versus stable branch being updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,26 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2009 19:56:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 17 Feb 2009 21:44:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie wrote:
-> Philip,
->
-> thank you for your comment.
->
-> Philip Balister wrote:
->> I think it is a but of stretch to close old autobuilder bugs with the 
->> comment the stable branch will not be updated.
->
-> That should not be the case (unless of course they were both of type 
-> .stable and -autobuild).
->
-We should create a new stable branch. The old one drifted too much away 
-from .dev which makes it hard to backport things from .dev to stable.
+On 17-02-09 20:54, Bernhard Guillon wrote:
+> Rolf Leggewie wrote:
+>> Philip,
+>>
+>> thank you for your comment.
+>>
+>> Philip Balister wrote:
+>>> I think it is a but of stretch to close old autobuilder bugs with the
+>>> comment the stable branch will not be updated.
+>>
+>> That should not be the case (unless of course they were both of type
+>> .stable and -autobuild).
+>>
+> We should create a new stable branch. The old one drifted too much away
+> from .dev which makes it hard to backport things from .dev to stable.
 
-Best regards
-Bernhard Guillon
+There's already work being done to do that, hold your horses please.
+
 
 
