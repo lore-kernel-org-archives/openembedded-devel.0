@@ -1,35 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LZYal-0002nH-I1
-	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 23:39:03 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LZYYl-0001oi-SH
-	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 22:37:00 +0000
-Received: from p5483af90.dip0.t-ipconnect.de ([84.131.175.144])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 17 Feb 2009 22:36:59 +0000
-Received: from vjensen by p5483af90.dip0.t-ipconnect.de with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 17 Feb 2009 22:36:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Vitus Jensen <vjensen@gmx.de>
-Date: Tue, 17 Feb 2009 22:36:50 +0000 (UTC)
-Message-ID: <gnfe62$7mo$1@ger.gmane.org>
-References: <200901120019.45621.mickey@vanille-media.de>
-	<200901141547.26513.mickey@vanille-media.de>
-	<gme8cj$ejn$1@ger.gmane.org>
-	<gndlrv$sht$1@ger.gmane.org> <gndrc8$at1$1@ger.gmane.org>
-	<gne20v$aj$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5483af90.dip0.t-ipconnect.de
-User-Agent: Pan/0.133 (House of Butterflies)
-Sender: news <news@ger.gmane.org>
-Subject: Re: python roadmap
+	(envelope-from <denis@denix.org>) id 1LZYrf-0003ID-K2
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Feb 2009 23:56:31 +0100
+Received: from gandalf.denix.org ([71.251.57.220]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KF800GZ5FMPBSHB@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	17 Feb 2009 16:54:26 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id AFE476B83B5; Tue,
+	17 Feb 2009 17:54:24 -0500 (EST)
+Date: Tue, 17 Feb 2009 17:54:24 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090217225424.GC9047@denix.org>
+References: <20090217022412.GA3240@denix.org>
+MIME-version: 1.0
+In-reply-to: <20090217022412.GA3240@denix.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Enterprise kills BBMASK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,44 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2009 22:39:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 17 Feb 2009 22:56:31 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Am Tue, 17 Feb 2009 10:03:12 +0000 schrieb Vitus Jensen:
-
-> Am Tue, 17 Feb 2009 09:09:43 +0100 schrieb Koen Kooi:
+On Mon, Feb 16, 2009 at 09:24:12PM -0500, Denys Dmytriyenko wrote:
+> Sorry for the "sensational" subject... :)
 > 
->> On 17-02-09 07:35, Vitus Jensen wrote:
->>> Am Thu, 05 Feb 2009 08:35:31 +0000 schrieb Vitus Jensen:
->>>
->>>> Am Wed, 14 Jan 2009 15:47:26 +0100 schrieb Michael 'Mickey' Lauer:
->>>>
->>>>> Thanks to some extrashifts this work has proceeded faster than
->>>>> scheduled. I plan to merge mickey/python26 into master on friday. If
->>>>> you see something dangerous, yell.
->>>> Yell ;-)
->>>>
->>>> See http://bugs.openembedded.net/show_bug.cgi?id=5013
->>>>
->>>> python26 fails to build for the big-endian machines I tried, namely
->>>> nslu2be.  And as python25 was removed it is a real blocker for
->>>> packages which DEPEND on pathon, which inturn is the case for php.
->>>> And php I'm trying to get a version working again.
->>> ...
->>>
->>> Does anyone build packages for bigendian machines?
->> 
->> yes
+> Basically, some time back I noticed that BBMASK stopped working. I didn't have 
+> time to look into it, until today. One of Mickey's commits broke the tree, 
+> because bunch of recipes require a missing .inc file, leading to Bitbake 
+> parsing failure.
 > 
-> OK.  Restarting from scratch...
+> Now, trying to set BBMASK leads to nothing. The problem is with 
+> conf/enterprise.conf, which re-sets it to empty if ENTERPRISE_DISTRO is not 
+> set. So, not matter what you set BBMASK to in your local.conf, it ends up 
+> being empty. Unfortunately, it can't be done with "+=", as it has to be a 
+> regular expression...
+> 
+> Any ideas how to fix it?
 
-... doesn't build after clearing TMPDIR.
-
-I will reinstall my slug to nslu2le and build those packages.
+So, does it mean nobody cares that BBMASK is broken? Or maybe I didn't explain 
+the problem clearly enough the first time? :)
 
 -- 
-Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
-
+Denys
 
 
