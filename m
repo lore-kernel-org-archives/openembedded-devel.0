@@ -1,24 +1,33 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LZHo7-0001Tu-HZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Feb 2009 05:43:43 +0100
-Received: from gandalf.denix.org ([71.251.57.220]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KF700JLO10NGNJC@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	16 Feb 2009 22:41:17 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB0336B83B5; Mon,
-	16 Feb 2009 23:41:10 -0500 (EST)
-Date: Mon, 16 Feb 2009 23:41:10 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090217044110.GB3240@denix.org>
-References: <20090217022412.GA3240@denix.org>
-MIME-version: 1.0
-In-reply-to: <20090217022412.GA3240@denix.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Enterprise kills BBMASK
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LZJaZ-00039H-5D
+	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 07:37:51 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LZJYd-0004mH-Q9
+	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 06:35:51 +0000
+Received: from p5483af90.dip0.t-ipconnect.de ([84.131.175.144])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 17 Feb 2009 06:35:51 +0000
+Received: from vjensen by p5483af90.dip0.t-ipconnect.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 17 Feb 2009 06:35:51 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Vitus Jensen <vjensen@gmx.de>
+Date: Tue, 17 Feb 2009 06:35:43 +0000 (UTC)
+Message-ID: <gndlrv$sht$1@ger.gmane.org>
+References: <200901120019.45621.mickey@vanille-media.de>
+	<200901141547.26513.mickey@vanille-media.de>
+	<gme8cj$ejn$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5483af90.dip0.t-ipconnect.de
+User-Agent: Pan/0.133 (House of Butterflies)
+Sender: news <news@ger.gmane.org>
+Subject: Re: python roadmap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2009 04:43:43 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 17 Feb 2009 06:37:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Feb 16, 2009 at 09:24:12PM -0500, Denys Dmytriyenko wrote:
-> Sorry for the "sensational" subject... :)
+Am Thu, 05 Feb 2009 08:35:31 +0000 schrieb Vitus Jensen:
+
+> Am Wed, 14 Jan 2009 15:47:26 +0100 schrieb Michael 'Mickey' Lauer:
 > 
-> Basically, some time back I noticed that BBMASK stopped working. I didn't have 
-> time to look into it, until today. One of Mickey's commits broke the tree, 
-> because bunch of recipes require a missing .inc file, leading to Bitbake 
-> parsing failure.
+>> Thanks to some extrashifts this work has proceeded faster than
+>> scheduled. I plan to merge mickey/python26 into master on friday. If
+>> you see something dangerous, yell.
+> 
+> Yell ;-)
+> 
+> See http://bugs.openembedded.net/show_bug.cgi?id=5013
+> 
+> python26 fails to build for the big-endian machines I tried, namely
+> nslu2be.  And as python25 was removed it is a real blocker for packages
+> which DEPEND on pathon, which inturn is the case for php.  And php I'm
+> trying to get a version working again.
+...
 
-Oh, and by the way, after some discussion on irc I ended up adding an "empty" 
-fso-image.inc file just to let Bitbake parse through the tree:
+Does anyone build packages for bigendian machines?
 
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=faa823642b911ac367af38cc5625360987b61a98
-
-Mickey, please replace it with the actual file once you get back... :)
+Vitus
 
 -- 
-Denys
+Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
+
 
 
