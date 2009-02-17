@@ -1,31 +1,25 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LZR58-0001jz-M9
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <g.development@gmx.net>) id 1LZRtG-0000rg-CZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Feb 2009 15:37:54 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id AFD8B16DEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2009 08:09:54 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 9CCD42A419E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2009 07:56:59 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Tue, 17 Feb 2009 16:29:42 +0100
+Received: (qmail 18854 invoked by uid 0); 17 Feb 2009 15:27:39 -0000
+Received: from 212.42.244.241 by www008.gmx.net with HTTP;
+	Tue, 17 Feb 2009 16:27:39 +0100 (CET)
+Date: Tue, 17 Feb 2009 16:27:39 +0100
+From: "Ali Botorabi" <g.development@gmx.net>
+Message-ID: <20090217152739.171050@gmx.net>
 MIME-Version: 1.0
-Date: Tue, 17 Feb 2009 07:57:03 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF675@hiob.intern.dresearch.de>
-In-Reply-To: <fce2a370902161502y2ebd80f7pb0214434b5888404@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH] neon: bump version to 0.28.3
-Thread-Index: AcmQjnIzMUALyRWHSBOesyNRQIHgCgAPbZmw
-References: <1234795059.5643.2.camel@EPBYMINW0568><87ljs6fgjx.fsf@neumann.lab.ossystems.com.br><gncne6$i0f$1@ger.gmane.org>
-	<fce2a370902161502y2ebd80f7pb0214434b5888404@mail.gmail.com>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] neon: bump version to 0.28.3
+To: openembedded-devel@lists.openembedded.org
+X-Authenticated: #11512862
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX1/wqiZFhgrwFpfMNKvU+vHtuiQRMmEsOMKSrO8udz
+	7csnPtW9qnUl1phpe5+2jLd1+5k0dVCrJi5g== 
+X-GMX-UID: U+CpfZMwf2IsN0nFw2xoXQ94dWxlc1b4
+X-FuHaFi: 0.53
+Subject: Problem with baking GStreamer Plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +33,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2009 14:37:54 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Feb 2009 15:29:42 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
 
-> >>> Seems that current neon versions doesn't work with gnutls 2.x
-> >>
-> >> In this case I belive it could be droped; what others think?
+hello koen,
+
+i have tried your suggestion, however it did not help. i have also tried to add the needed plugins into RDEPENDS and RRECOMMENDS such as:
+
+
+RDEPENDS_${PN} = "\
+		libid3tag \
+		libsidplay \
+		libvorbis \
+		libogg \
+		directfb \
+		alsa-lib \
+		gstreamer \
+		gst-plugin-alsa \
+		gst-plugin-icydemux \
+		gst-plugin-asfdemux \
+		gst-plugin-dvdlpcmdec \
+		gst-plugin-mpegstream \
+		gst-plugin-realmedia \
+  gst-plugin-mad \
+  gst-plugin-modplug \
+  gst-plugin-ivorbis \
+  gst-plugin-tcp \
+  gst-plugin-audioconvert \
+  gst-plugin-esd \
+  gst-plugin-typefindfunctions \
+  gst-plugin-decodebin \
+  gst-plugin-volume \
+"
+but it did not helo either.
+
+any other ideas?
+
+cheers
+botorabi
+
+
+Koen wrote
+##########
+
+On 11-02-09 11:51, Ali Botorabi wrote:
+> Hello,
 >
-> How can I help to update neon version? testing some packages? Please
-> provide me with the list of them, I'll try to build it.
+> I am trying to include some of the GStreamer plugins into an own image. The image bases on angstrom base and X11 images. Koen helped me to setup a task for the GStreamer plugins:
 
-I would like to try a little patch enabling gnutls-2 support in neon =
-mentioned in =
-<http://article.gmane.org/gmane.comp.handhelds.openembedded/21118> to =
-build a subversion client. But i failed with building the client itself. =
-May be you can help there.
+[snip]
 
-Steffen
+> The major problem is that the plugins do not end in the image.
+
+There is a simple solution to this, but I'm not sure everyone will like it:
+
+--- a/packages/gstreamer/gst-plugins.inc
++++ b/packages/gstreamer/gst-plugins.inc
+@@ -3,8 +3,6 @@ DESCRIPTION = "Plugins for GStreamer"
+  DEPENDS = "gstreamer libmikmod liboil libogg tremor libvorbis"
+  DEPENDS += "${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad 
+libid3tag', d)}"
+
+-PACKAGES_DYNAMIC = "gst-plugin-*"
+-
+
+--- /dev/null   2008-08-09 15:46:29.777083446 +0200
++++ gst-plugins.bb      2009-02-11 12:43:23.000000000 +0100
+@@ -0,0 +1,5 @@
++
++DEPENDS = "gst-plugins-good gst-plugins-bad gst-plugins-ugly"
++
++PACKAGES_DYNAMIC = "gst-plugin-*"
++
+
+Doing it like that will git rid of the PACKAGES_DYNAMIC statements 
+confusing eachother. It also means you have to build *all* plugin sets.
+
+regards,
+
+Koen
+
+
+-- 
+Jetzt 1 Monat kostenlos! GMX FreeDSL - Telefonanschluss + DSL 
+für nur 17,95 Euro/mtl.!* http://dsl.gmx.de/?ac=OM.AD.PD003K11308T4569a
 
 
