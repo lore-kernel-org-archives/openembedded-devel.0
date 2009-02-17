@@ -1,31 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LZP46-0004Xt-9K
-	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 13:28:42 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LZP2A-0001B0-TG
-	for openembedded-devel@openembedded.org; Tue, 17 Feb 2009 12:26:42 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 17 Feb 2009 12:26:42 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 17 Feb 2009 12:26:42 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 17 Feb 2009 13:26:34 +0100
-Message-ID: <gneadq$s6g$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-Sender: news <news@ger.gmane.org>
-Subject: [RFC] removing DISTRO_* vars from task-boot
+	(envelope-from <khimov@altell.ru>) id 1LZP7W-0004bW-M6
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Feb 2009 13:32:14 +0100
+Received: from [192.168.1.116] (unknown [192.168.1.116])
+	by mail.altell.local (Postfix) with ESMTP id 968186819B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Feb 2009 15:30:04 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Feb 2009 15:25:28 +0300
+User-Agent: KMail/1.9.9
+References: <200902140035.13820.khimov@altell.ru>
+	<200902141715.56797.khimov@altell.ru>
+	<87ocx3y2xu.fsf@neumann.lab.ossystems.com.br>
+In-Reply-To: <87ocx3y2xu.fsf@neumann.lab.ossystems.com.br>
+Organization: Altell Ltd.
+MIME-Version: 1.0
+Message-Id: <200902171525.28995.khimov@altell.ru>
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-Spam-Status: No
+Subject: Re: [PATCH] New package: siproxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,82 +35,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2009 12:28:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Feb 2009 12:32:15 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Otavio Salvador:
+> Roman I Khimov <khimov@altell.ru> writes:
+> > Marcin Juszkiewicz:
+> >> On Friday 13 of February 2009 22:35:13 Roman I Khimov wrote:
+> >> > diff --git a/packages/siproxd/siproxd.inc
+> >> >
+> >> > +RDEPENDS =3D "libosip2"
+> >> >
+> >> > diff --git a/packages/siproxd/siproxd_0.7.1.bb
+> >> >
+> >> > +PR =3D "r0"
+> >>
+> >> Drop those two lines. You should not add libs to RDEPENDS (OE takes
+> >> care of it) and "r0" is default PR value.
+> >
+> > OK.
+>
+> It would be quite nice if you could send a git exported patch since it
+> makes the life eaiser for anyone going to apply your commit (locally or
+> for pushing it) and also keeps the credit for you.
 
-Lately I have been wondering how to change the /dev manager on a per 
-image base, since I want udev for most images and busybox-mdev for 
-special-purpose stuff. The catch is that I want to keep using task-boot 
-for both.
+OK, let me try to embed it here first, then I'll try to send raw format-pat=
+ch
+output for other patches. I've also fixed config files installation with th=
+is one.
 
-Currently we have:
+=46rom d6e5e440e1083455a916964f2da6695337fcffe6 Mon Sep 17 00:00:00 2001
+From: Roman I Khimov <khimov@altell.ru>
+Date: Mon, 16 Feb 2009 19:03:48 +0300
+Subject: [PATCH] siproxd: new package
 
-DISTRO_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26", 
-  "udev","",d)} "
-DISTRO_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
-DISTRO_INITSCRIPTS ?= "initscripts"
-DISTRO_LOGIN_MANAGER ?= "tinylogin"
+---
+ conf/checksums.ini                |    4 ++++
+ packages/siproxd/siproxd.inc      |   17 +++++++++++++++++
+ packages/siproxd/siproxd_0.7.1.bb |    1 +
+ 3 files changed, 22 insertions(+), 0 deletions(-)
+ create mode 100644 packages/siproxd/siproxd.inc
+ create mode 100644 packages/siproxd/siproxd_0.7.1.bb
 
-in task-boot.bb
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index e867c6e..e198cae 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -19754,6 +19754,10 @@ sha256=3D928fa03d1b8a2329f5e71dd9190080146b5275119=
+e28c19c36fdd57e788d84ba
+ md5=3D597d7ff7edb42a18421c806ffd18a136
+ sha256=3D7faaccb6f17296399051bd076a7f41e0f6d95a28eda3e30468f1bd7cf45898e1
+=20
++[http://downloads.sourceforge.net/siproxd/siproxd-0.7.1.tar.gz]
++md5=3D45e5a44803181e2bf3361d562060c904
++sha256=3D9e702c1fe770815ed87cf2a2b1d1d1d87551573d
++
+ [http://download.berlios.de/sipsak/sipsak-0.9.6-1.tar.gz]
+ md5=3Dc4eb8e282902e75f4f040f09ea9d99d5
+ sha256=3D5064c56d482a080b6a4aea71821b78c21b59d44f6d1aa14c27429441917911a9
+diff --git a/packages/siproxd/siproxd.inc b/packages/siproxd/siproxd.inc
+new file mode 100644
+index 0000000..c4ac144
+--- /dev/null
++++ b/packages/siproxd/siproxd.inc
+@@ -0,0 +1,17 @@
++DESCRIPTION =3D "SIP proxy/masquerading daemon"
++SECTION =3D "net"
++DEPENDS =3D "libosip2"
++LICENSE =3D "GPL"
++
++SRC_URI =3D "${SOURCEFORGE_MIRROR}/siproxd/siproxd-${PV}.tar.gz"
++
++do_install_append() {
++	mv ${D}/${sysconfdir}/siproxd.conf{.example,}
++}
++
++CONFFILES_${PN} =3D " \
++	${sysconfdir}/siproxd.conf \
++	${sysconfdir}/siproxd_passwd.cfg \
++	"
++
++inherit autotools
+diff --git a/packages/siproxd/siproxd_0.7.1.bb b/packages/siproxd/siproxd_0=
+.7.1.bb
+new file mode 100644
+index 0000000..760a8b6
+--- /dev/null
++++ b/packages/siproxd/siproxd_0.7.1.bb
+@@ -0,0 +1 @@
++require siproxd.inc
+--=20
+1.6.1.3
 
-There are various ways we could attack this:
-
-1) The image.bbclass way:
-
-   Put the following in image.bbclass:
-
-   IMAGE_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", 
-"kernel26",  "udev","",d)} "
-   IMAGE_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
-   IMAGE_INITSCRIPTS ?= "initscripts"
-   IMAGE_LOGIN_MANAGER ?= "tinylogin"
-
-   Pros:
-   * Takes immediate effect
-   * Can have distro defaults, overridable per image
-
-   Cons:
-   * marks them as 'user installed'
-   * you can't 'debootstrap' from tasks anymore, you need to encode 
-knowledge about the above vars into the debootstrap script
-
-2) Make task-boot nostamp
-
-   Pros:
-   * takes effect on image build time
-   * Can have distro defaults, overridable per image
-
-   Cons:
-   * QA hell, there's no way to tell what's inside task-boot_1.0-r87.ipk 
-from the outside
-
-3) Have task-boot.bb create task-boot-mdev and task-boot-udev
-
-   Pros:
-   * clean
-   * solves my immediate need
-
-   Cons:
-   * doesn't scale for other vars
-
-4) Move the vars to RRECOMMENDS and filter them out with BAD_RECOMMENDATIONS
-
-   Pros:
-   * takes effect on image time
-   * performs as expected
-
-   Cons:
-   * image build succeeds when no /dev manager is present
-
-What are your opinions on all this?
-
-regards,
-
-Koen
-
+--=20
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
 
 
 
