@@ -1,23 +1,22 @@
-Received: from [130.149.7.33] (helo=mail.tu-berlin.de)
+Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <torsten.sadowski@tu-berlin.de>) id 1LZo6a-0000Pk-Ew
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1LZobP-0006KZ-Mr
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Feb 2009 16:12:56 +0100
-X-tubIT-Incoming-IP: 130.149.75.153
-Received: from kapitaen.kup.tu-berlin.de ([130.149.75.153]
-	helo=kapitaen.localnet)
-	by mail.tu-berlin.de (exim-4.69/mailfrontend-b) with esmtpa 
-	for <openembedded-devel@lists.openembedded.org>
-	id 1LZo4S-00020N-Mx; Wed, 18 Feb 2009 16:10:45 +0100
-From: Torsten Sadowski <torsten.sadowski@tu-berlin.de>
-Organization: TU Berlin
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Feb 2009 16:10:26 +0100
-User-Agent: KMail/1.10.3 (Linux/2.6.27-11-generic; KDE/4.1.3; i686; ; )
+	Wed, 18 Feb 2009 16:44:47 +0100
+Received: from [192.168.1.102] (77-21-130-108-dynip.superkabel.de
+	[77.21.130.108])
+	by dd20204.kasserver.com (Postfix) with ESMTP id 95C951805896D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2009 16:42:41 +0100 (CET)
+Message-ID: <499C2C6D.8050407@opensimpad.org>
+Date: Wed, 18 Feb 2009 16:42:37 +0100
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-Message-Id: <200902181610.26763.torsten.sadowski@tu-berlin.de>
-X-tubIT-Score: 0.0 ()
-Subject: angstrom-2008.1 fails on Simpad because of missing devices
+To: openembedded-devel@lists.openembedded.org
+References: <200902181610.26763.torsten.sadowski@tu-berlin.de>
+In-Reply-To: <200902181610.26763.torsten.sadowski@tu-berlin.de>
+Subject: Re: angstrom-2008.1 fails on Simpad because of missing devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,40 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2009 15:12:56 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 18 Feb 2009 15:44:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hi,
+Torsten Sadowski wrote:
+> Hi,
+>
+> I tried to build a new x11-image for the Simpad. Unluckily it doesn't finish 
+> to boot. Does anyone know a simple solution?
+>
+>   
+Yes, if you using bootldr please update your linuxargs to not set init.
+Currently it is set to /linuxargs as default. Unfortunately /linuxargs 
+is now a symlink to busybox. So the busybox init is used which has an 
+other syntax then sysv init.
 
-I tried to build a new x11-image for the Simpad. Unluckily it doesn't finish 
-to boot. Does anyone know a simple solution?
+I need to update the documentation at opensimpad.org about this - if you 
+like you can change the documentation there. Sorry for your inconvenience.
 
-Cheers, Torsten
+A general question - is it the intended behaviour or should I try to fix 
+busybox?
 
-init started: BusyBox v1.13.2 (2009-02-18 13:49:55 CET)
-Bad inittab entry at line 5
-can't open /dev/si: No such file or directory
-can't open /dev/~~: No such file or directory
-can't open /dev/l0: No such file or directory
-can't open /dev/l1: No such file or directory
-can't open /dev/l2: No such file or directory
-can't open /dev/l3: No such file or directory
-can't open /dev/l4: No such file or directory
-can't open /dev/l5: No such file or directory
-can't open /dev/l6: No such file or directory
-can't open /dev/z6: No such file or directory
-can't open /dev/S: No such file or directory
-process '/sbin/sulogin' (pid 769) exited. Scheduling for restart.
-process '/sbin/getty ttySA0 115200 vt100' (pid 770) exited. Scheduling for 
-restart.
-can't open /dev/z6: No such file or directory
-can't open /dev/S: No such file or directory
-process '/sbin/sulogin' (pid 771) exited. Scheduling for restart.
-process '/sbin/getty ttySA0 115200 vt100' (pid 772) exited. Scheduling for 
-restart.
-....continues ad infinitum
+Best regards
+Bernhard Guillon
 
 
