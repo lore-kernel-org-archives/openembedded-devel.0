@@ -1,31 +1,34 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LZp44-00071A-C3
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Feb 2009 17:14:29 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 6979216DEFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2009 17:25:13 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id E52192A4248
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2009 17:12:14 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Wed, 18 Feb 2009 17:11:53 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF683@hiob.intern.dresearch.de>
-In-Reply-To: <499B4678.4030202@gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Autobuilder bugs versus stable branch being updated
-Thread-Index: AcmRWRhM5Udp49w8RrKVJV+Kz9YW1QAilfYw
-References: <20090217215529.GJ11815@smtp.west.cox.net>
-	<499B4678.4030202@gmail.com>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Autobuilder bugs versus stable branch being updated
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LZrQq-0001rS-HH
+	for openembedded-devel@openembedded.org; Wed, 18 Feb 2009 19:46:04 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LZrOh-0006tG-4g
+	for openembedded-devel@openembedded.org; Wed, 18 Feb 2009 18:43:51 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 18 Feb 2009 18:43:51 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 18 Feb 2009 18:43:51 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 18 Feb 2009 19:43:42 +0100
+Message-ID: <gnhksv$49n$1@ger.gmane.org>
+References: <gneadq$s6g$1@ger.gmane.org>
+	<20090217163526.GF11815@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <20090217163526.GF11815@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] removing DISTRO_* vars from task-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +42,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2009 16:14:37 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Feb 2009 18:46:04 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> > The problem really is a policy one.  The old stable was "angstrom
-> > snapped for 2007 here".  That's one way to do a stable=20
-> > branch, but not what everyone thinks when they read "stable".
-> > How much would it hurt to have OE actually do releases, rather
-> > than to be, in kernel terms, mostly like Andrew's tree
-> > (once stuff seems to work for some people, pull it
-> > in, see what breaks)?
->=20
-> +1 for releases instead of snap short, which was proven not=20
-> working for the users.
+On 17-02-09 17:35, Tom Rini wrote:
+> On Tue, Feb 17, 2009 at 01:26:34PM +0100, Koen Kooi wrote:
+>
+>> Hi,
+>>
+>> Lately I have been wondering how to change the /dev manager on a per
+>> image base, since I want udev for most images and busybox-mdev for
+>> special-purpose stuff. The catch is that I want to keep using task-boot
+>> for both.
+>>
+>> Currently we have:
+>>
+>> DISTRO_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",
+>> "udev","",d)}"
+>> DISTRO_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
+>> DISTRO_INITSCRIPTS ?= "initscripts"
+>> DISTRO_LOGIN_MANAGER ?= "tinylogin"
+>>
+>> in task-boot.bb
+>>
+>> There are various ways we could attack this:
+>>
+>> 1) The image.bbclass way:
+>>
+>>    Put the following in image.bbclass:
+>>
+>>    IMAGE_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",
+>> "udev","",d)}"
+>>    IMAGE_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
+>>    IMAGE_INITSCRIPTS ?= "initscripts"
+>>    IMAGE_LOGIN_MANAGER ?= "tinylogin"
+>>
+>>    Pros:
+>>    * Takes immediate effect
+>>    * Can have distro defaults, overridable per image
+>>
+>>    Cons:
+>>    * marks them as 'user installed'
+>>    * you can't 'debootstrap' from tasks anymore, you need to encode
+>> knowledge about the above vars into the debootstrap script
+>
+> I really like this one as for our uses there's times where I'd rather
+> let busybox handle INIT_MANAGER and LOGIN_MANAGER too.
 
-+1 or +42 if this would be possible ;-)
+Philip C. agrees with you. Should be move everything over or start with 
+IMAGE_DEV_MANAGER?
+
+regards,
+
+Koen
+
+
 
 
