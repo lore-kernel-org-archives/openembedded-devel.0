@@ -1,17 +1,31 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1La7mo-0005TS-0T
+	(envelope-from <sledz@DResearch.DE>) id 1La7sC-0005fx-3R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Feb 2009 13:13:50 +0100
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id 0EE2218935A; Thu, 19 Feb 2009 13:12:03 +0100 (CET)
-From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Feb 2009 13:12:03 +0100
-Message-Id: <1235045523-6405-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [PATCH] task-boot: rename DISTRO_ vars to IMAGE_ vars and move to image.bbclass
+	Thu, 19 Feb 2009 13:19:24 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 3CA2C16DEFE
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2009 13:30:08 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 692F32A4238
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2009 13:17:07 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 19 Feb 2009 13:17:36 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF68A@hiob.intern.dresearch.de>
+In-Reply-To: <gnjfl8$ddg$1@ger.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [RFC] removing DISTRO_* vars from task-boot
+Thread-Index: AcmSiBUOQsp3AQBBTL2dIRGjXyffnQAAdLnw
+References: <20090218192246.GM11815@smtp.west.cox.net>	<gnjcun$429$1@ger.gmane.org><69E6C70090A0A14498CC98FAE5E06B6E3CF689@hiob.intern.dresearch.de>
+	<gnjfl8$ddg$1@ger.gmane.org>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [RFC] removing DISTRO_* vars from task-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,160 +39,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 12:13:50 -0000
+X-List-Received-Date: Thu, 19 Feb 2009 12:19:24 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-From: Koen Kooi <koen@openembedded.org>
+> > This is a good (or bad?) example for the wish a uttered=20
+> > some days before. In the official OE manual there is nothing=20
+> > to read about DISTRO_* and/or IMAGE_* vars.
+>=20
+> The manual is in git, anyone can edit it. If you think someone is=20
+> missing, add it.
 
----
- classes/image.bbclass         |   22 ++++++++++++++++++++++
- conf/distro/kaeilos.conf      |    2 +-
- conf/distro/openmoko.conf     |    2 +-
- conf/distro/openprotium.conf  |    6 +++---
- conf/machine/mx31moboard.conf |    2 +-
- packages/tasks/task-boot.bb   |   22 +---------------------
- 6 files changed, 29 insertions(+), 27 deletions(-)
+Sorry, but this is not very constructive.
 
-diff --git a/classes/image.bbclass b/classes/image.bbclass
-index c493c73..2ed0ee1 100644
---- a/classes/image.bbclass
-+++ b/classes/image.bbclass
-@@ -16,6 +16,28 @@ EXCLUDE_FROM_WORLD = "1"
- 
- USE_DEVFS ?= "0"
- 
-+#
-+# udev, devfsd, busybox-mdev (from busybox) or none
-+#
-+IMAGE_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",  "udev","",d)} "
-+#
-+# sysvinit, upstart
-+#
-+IMAGE_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
-+IMAGE_INITSCRIPTS ?= "initscripts"
-+#
-+# tinylogin, getty
-+#
-+IMAGE_LOGIN_MANAGER ?= "tinylogin" 
-+
-+IMAGE_VARS = "${IMAGE_INITSCRIPTS} \
-+${IMAGE_DEV_MANAGER} \
-+${IMAGE_INIT_MANAGER} \
-+${IMAGE_LOGIN_MANAGER} "
-+
-+RDEPENDS += "${IMAGE_VARS}"
-+PACKAGE_INSTALL += "${IMAGE_VARS}"
-+
- PID = "${@os.getpid()}"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
-index fac86c8..a65bbff 100644
---- a/conf/distro/kaeilos.conf
-+++ b/conf/distro/kaeilos.conf
-@@ -21,7 +21,7 @@ require conf/distro/include/preferred-opie-versions-1.2.4.inc
- PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
- PREFERRED_VERSION_busybox        = "1.13.2"
- 
--DISTRO_DEV_MANAGER = "busybox-mdev"
-+IMAGE_DEV_MANAGER = "busybox-mdev"
- 
- #Images built can have to modes:
- # 'debug': empty rootpassword, strace included
-diff --git a/conf/distro/openmoko.conf b/conf/distro/openmoko.conf
-index c038096..cb1513d 100644
---- a/conf/distro/openmoko.conf
-+++ b/conf/distro/openmoko.conf
-@@ -30,7 +30,7 @@ DISTRO_FEED_URI ?= "http://downloads.openmoko.org/repository/testing"
- AB_DEPLOY_EXTRA ?= ""
- DEPLOY_DIR_IMAGE = "${DEPLOY_DIR}/images/${MACHINE_ARCH}/${AB_DEPLOY_EXTRA}"
- 
--DISTRO_INITSCRIPTS = "initscripts-openmoko"
-+IMAGE_INITSCRIPTS = "initscripts-openmoko"
- 
- # We try to minimize the distro features in the default image.
- DISTRO_FEATURES = "wifi ppp alsa ext2 vfat usbhost"
-diff --git a/conf/distro/openprotium.conf b/conf/distro/openprotium.conf
-index b794d4a..633e3bc 100644
---- a/conf/distro/openprotium.conf
-+++ b/conf/distro/openprotium.conf
-@@ -8,10 +8,10 @@ TARGET_OS = "linux"
- #
- # Basic configuration
- #
--DISTRO_DEV_MANAGER = "udev"
-+IMAGE_DEV_MANAGER = "udev"
- DISTRO_SSH_DAEMON = "dropbear"
--DISTRO_INIT_MANAGER = "sysvinit"
--DISTRO_LOGIN_MANAGER = "tinylogin"
-+IMAGE_INIT_MANAGER = "sysvinit"
-+IMAGE_LOGIN_MANAGER = "tinylogin"
- MACHINE_TASK_PROVIDER = "task-openprotium"
- 
- #
-diff --git a/conf/machine/mx31moboard.conf b/conf/machine/mx31moboard.conf
-index a00a9b1..a1a5212 100644
---- a/conf/machine/mx31moboard.conf
-+++ b/conf/machine/mx31moboard.conf
-@@ -20,7 +20,7 @@ module_conf_g_ether = "alias usb0 g_ether"
- module_conf_rt2570-k2wrlz = "alias rausb0 rt2570"
- 
- # tinylogin is broken for our speeds
--DISTRO_LOGIN_MANAGER = "busybox"
-+IMAGE_LOGIN_MANAGER = "busybox"
- 
- # used by sysvinit_2
- SERIAL_CONSOLE = "-Lh 921600 ttymxc0 vt100"
-diff --git a/packages/tasks/task-boot.bb b/packages/tasks/task-boot.bb
-index 1a74f15..1a1b9f2 100644
---- a/packages/tasks/task-boot.bb
-+++ b/packages/tasks/task-boot.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Basic task to get a device booting"
--PR = "r48"
-+PR = "r49"
- 
- inherit task
- 
-@@ -8,22 +8,6 @@ inherit task
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
- #
--# udev, devfsd, mdev (from busybox) or none
--#
--DISTRO_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",  "udev","",d)} "
--
--#
--# sysvinit, upstart
--#
--DISTRO_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
--DISTRO_INITSCRIPTS ?= "initscripts"
--
--#
--# tinylogin, getty
--#
--DISTRO_LOGIN_MANAGER ?= "tinylogin"
--
--#
- # those ones can be set in machine config to supply packages needed to get machine booting
- #
- MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
-@@ -40,14 +24,10 @@ RDEPENDS_task-boot = "\
-     base-files \
-     base-passwd \
-     busybox \
--    ${DISTRO_INITSCRIPTS} \
-     ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
-     modutils-initscripts \
-     netbase \
-     update-alternatives \
--    ${DISTRO_DEV_MANAGER} \
--    ${DISTRO_INIT_MANAGER} \
--    ${DISTRO_LOGIN_MANAGER} \
-     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
-     "
- 
--- 
-1.6.1
+I do not have the knowledge about these things, but you(*) have (i =
+believe). So i can't document this, but you can.
 
+I know that documentation is a very boring and time consuming task (i'm =
+a software developer myself), but it is an essential part of =
+development. And if you want to avoid later problems (beginning from =
+annoying, repetitive questions in the mailing list up to dirty patches =
+based on misunderstanding), you should not ignore this task.
+
+(*) Here 'you' is not just Koen but everyone who is responsible for a =
+bigger a smaller part of OE.=20
+
+Regards,
+Steffen
 
 
