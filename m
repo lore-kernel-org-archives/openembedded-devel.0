@@ -1,34 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LaArk-0007o4-NK
-	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 16:31:08 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LaApU-0005js-BZ
-	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 15:28:48 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 19 Feb 2009 15:28:48 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 19 Feb 2009 15:28:48 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 19 Feb 2009 16:28:39 +0100
-Message-ID: <gnjtr8$2a0$1@ger.gmane.org>
-References: <20090219135607.3D71A18935A@amethyst.openembedded.net>
-	<200902191515.02208.mickey@vanille-media.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <200902191515.02208.mickey@vanille-media.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Carsten Haitzler (Raster) : libgles-omap3: add comments on how to get the gles binary files to help
+	(envelope-from <mickey@vanille-media.de>) id 1LaAtq-0007qf-Gm
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Feb 2009 16:33:18 +0100
+Received: from andromeda.vanille.de (e180136146.adsl.alicedsl.de
+	[85.180.136.146])
+	by drlauer-research.com (Postfix) with ESMTP id 7D09B58413B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2009 16:54:33 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Feb 2009 16:30:53 +0100
+User-Agent: KMail/1.9.10
+References: <499D6562.2070702@gmail.com>
+	<200902191517.16274.mickey@vanille-media.de>
+	<200902191527.18534.openembedded@haerwu.biz>
+In-Reply-To: <200902191527.18534.openembedded@haerwu.biz>
+MIME-Version: 1.0
+Message-Id: <200902191630.54598.mickey@vanille-media.de>
+Subject: Re: KaeilOS distribution joins OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,14 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 15:31:08 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 19 Feb 2009 15:33:18 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 19-02-09 15:15, Michael 'Mickey' Lauer wrote:
-> Please back this one out as it seems out of bounds!
+Am Thursday 19 February 2009 15:27:17 schrieb Marcin Juszkiewicz:
+> On Thursday 19 of February 2009 15:17:16 Michael 'Mickey' Lauer wrote:
+> > This is an exciting moment for OpenEmbedded, we are looking forward
+> > to cooperating with you guys.
+> >
+> > Regarding boot time, I have since long wanted to bring upstart into
+> > the platform, but I can't find time for it.
+>
+> Will be interesting to compare upstart with sysvinit for some of our
+> devices.
 
-Out of bounds in what way?
+Absolutely. To be honest, my primary motivation is not boot time, but rather 
+on-demand service activation and deativation. It feels wrong to 
+call /etc/init.d/foo start|stop|restart from a resource manager, so I'd 
+welcome init system support for that.
 
+Boot time improvement will come as a consequence of this, since in OE we still 
+boot our embedded systems as if they were desktop systems. All services up by 
+default is wrong.
+
+-- 
+:M:
 
 
