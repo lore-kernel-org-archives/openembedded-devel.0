@@ -1,34 +1,50 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LaBML-0008UG-Iw
-	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 17:02:45 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LaBK8-00076Z-17
-	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 16:00:28 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 19 Feb 2009 16:00:28 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 19 Feb 2009 16:00:28 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 19 Feb 2009 17:00:18 +0100
-Message-ID: <gnjvmj$a1k$1@ger.gmane.org>
-References: <20090219135607.3D71A18935A@amethyst.openembedded.net>	<200902191515.02208.mickey@vanille-media.de>	<gnjtr8$2a0$1@ger.gmane.org>
-	<499D7D13.9060808@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <499D7D13.9060808@balister.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Carsten Haitzler (Raster) : libgles-omap3: add comments on how to get the gles binary files to help
+	(envelope-from <otavio.salvador@gmail.com>) id 1LaBwK-0007fD-Tl
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Feb 2009 17:39:57 +0100
+Received: by bwz9 with SMTP id 9so1272038bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2009 08:37:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:received:from:to:cc
+	:subject:organization:references:user-agent:x-url:x-attribution:date
+	:in-reply-to:message-id:mime-version:content-type;
+	bh=mNRTkD/V7dzWGifohweHhEl+5tYJ7MuJPnq+aWlQYps=;
+	b=ReRyfwi4zivaJMNsXo+5h9PboF1cVFAXfMa0waOHWCvhRlm4V8AxfD8lyh6ZFfmZbg
+	a51TFq9MCAtuOqIMlooztfLYEjzh29ZFgilkj6/JSVMXocvGiSqfzllv4XygYHsqM7QJ
+	notM1TSodm1BlP2gW74E5JI/5i8UbsTHeW1L8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:organization:references:user-agent:x-url
+	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
+	b=X+osj8pDPVGD05YuoBdEmQAE+Fr5qU4dKHy5ptG5/BEF+ILjBD3xk0gXIJK7ZOKxH7
+	IfuR5Px0gMdzzLvHclpVCzl2Ux0Kz/hoAvP+i6IZ4Vm61TWjnfOOwhStrL2u6kahU7PJ
+	+Po8kR85qYgE4d8nzPz6Xjs1oQs6UQWVxfDSE=
+Received: by 10.103.225.11 with SMTP id c11mr714753mur.24.1235061455872;
+	Thu, 19 Feb 2009 08:37:35 -0800 (PST)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id i7sm1043321mue.14.2009.02.19.08.37.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 19 Feb 2009 08:37:35 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id CF548610047; Thu, 19 Feb 2009 13:37:27 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Organization: O.S. Systems Ltda.
+References: <1235045523-6405-1-git-send-email-k.kooi@student.utwente.nl>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
+	(x86_64-pc-linux-gnu)
+X-URL: http://www.ossystems.com.br/
+X-Attribution: O.S.
+Date: Thu, 19 Feb 2009 13:37:27 -0300
+In-Reply-To: <1235045523-6405-1-git-send-email-k.kooi@student.utwente.nl>
+	(Koen Kooi's message of "Thu, 19 Feb 2009 13:12:03 +0100")
+Message-ID: <87tz6qjsc8.fsf@neumann.lab.ossystems.com.br>
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: Re: [PATCH] task-boot: rename DISTRO_ vars to IMAGE_ vars and move to image.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +58,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 16:02:45 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Feb 2009 16:40:13 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On 19-02-09 16:38, Philip Balister wrote:
-> Koen Kooi wrote:
->> On 19-02-09 15:15, Michael 'Mickey' Lauer wrote:
->>> Please back this one out as it seems out of bounds!
+Koen Kooi <k.kooi@student.utwente.nl> writes:
+
+> From: Koen Kooi <koen@openembedded.org>
 >
-> Something looks funny. cgit shows two commits with same message, but
-> different content. The instructions appear to be in both commits.
->
-> Mind you, this is just from a quick look.
+> ---
+>  classes/image.bbclass         |   22 ++++++++++++++++++++++
+>  conf/distro/kaeilos.conf      |    2 +-
+>  conf/distro/openmoko.conf     |    2 +-
+>  conf/distro/openprotium.conf  |    6 +++---
+>  conf/machine/mx31moboard.conf |    2 +-
+>  packages/tasks/task-boot.bb   |   22 +---------------------
+>  6 files changed, 29 insertions(+), 27 deletions(-)
 
-Ah, it seems git commit --amend doesn't work if you do it twice, once 
-adding the bogus changes and once removing them.
-I kept looking at the first commit and couldn't figure out what was so 
-objectionable about the instructions for downloading the SGX SDK.
+[...]
 
-regards,
++1
 
-Koen
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
