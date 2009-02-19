@@ -1,22 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.8] (helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1La8P7-0003Gc-9k
-	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 13:53:25 +0100
-Received: (qmail 9683 invoked by uid 813007); 19 Feb 2009 12:51:07 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 19 Feb 2009 12:51:07 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Feb 2009 13:51:00 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
-References: <gneadq$s6g$1@ger.gmane.org> <gnjcun$429$1@ger.gmane.org>
-	<gnjeua$b0f$1@ger.gmane.org>
-In-Reply-To: <gnjeua$b0f$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200902191351.04459.openembedded@haerwu.biz>
-Subject: Re: [RFC] removing DISTRO_* vars from task-boot
+	(envelope-from <k.kooi@student.utwente.nl>) id 1La8pF-00042K-MG
+	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 14:20:25 +0100
+Received: from [172.20.1.5] (vpn006019.vpn.utwente.nl [130.89.6.19])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	n1JDHcUQ004281 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2009 14:17:39 +0100
+Message-Id: <9CC95921-FE24-4E0C-8C8C-D5882962AA1E@student.utwente.nl>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Mime-Version: 1.0 (Apple Message framework v930.3)
+Date: Thu, 19 Feb 2009 14:17:36 +0100
+X-Pgp-Agent: GPGMail d55 (v55, Leopard)
+X-Mailer: Apple Mail (2.930.3)
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: please add DNS for docs.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,44 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 12:53:25 -0000
-X-Groupsio-MsgNum: 7832
-Content-Type: multipart/signed; boundary="nextPart18184399.zl2YoH18Qi";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Thu, 19 Feb 2009 13:20:25 -0000
+X-Groupsio-MsgNum: 7833
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg=pgp-sha1; boundary="Apple-Mail-1--955781136"
 Content-Transfer-Encoding: 7bit
 
---nextPart18184399.zl2YoH18Qi
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+--Apple-Mail-1--955781136
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
-On Thursday 19 of February 2009 12:14:18 Koen Kooi wrote:
-> > The patch should appear on this ml right about now.
->
-> Mailman seems to hate me:
->
-> http://amethyst.openembedded.net/~koen/0001-task-boot-rename-DISTRO_-
->vars-to-IMAGE_-vars-and-mo.patch
+Hi,
 
-Acked-By: Marcin Juszkiewicz <hrw@openembedded.org>
+Apache2 now hosts an up to date copy of the OE manual for  
+docs.openembedded.org, we only need dns to point at it.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+regards,
 
---nextPart18184399.zl2YoH18Qi
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+Koen
+
+--Apple-Mail-1--955781136
+content-type: application/pgp-signature; x-mac-type=70674453;
+	name=PGP.sig
+content-description: Dit deel van het bericht is digitaal ondertekend
+content-disposition: inline; filename=PGP.sig
+content-transfer-encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkmdVbUACgkQeQ6MlGH/2qtbsQCfbF234B7B+K7kSKzsrU7DShPP
-8FoAniXG1t/Lir7hx6ygxTP1R2imDN1s
-=EGxs
+iD8DBQFJnVvyMkyGM64RGpERAqCXAKCfQoQUXmunpYn2W3gZZQuB/cBmDQCdG8s1
+LQDXGKREyKx0P/wrpSqIh28=
+=fFwR
 -----END PGP SIGNATURE-----
 
---nextPart18184399.zl2YoH18Qi--
+--Apple-Mail-1--955781136--
