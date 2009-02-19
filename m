@@ -1,30 +1,33 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1LaFUS-0002zU-Or
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Feb 2009 21:27:25 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.101]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1LaFS0-00009B-3E
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Feb 2009 04:25:03 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Feb 2009 13:24:39 -0700
-Message-Id: <1235075079.6859.211.camel@alap>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LaGMJ-0001Zc-Cd
+	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 22:23:03 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LaGJz-0004Aj-To
+	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 21:20:40 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 19 Feb 2009 21:20:39 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 19 Feb 2009 21:20:39 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 19 Feb 2009 22:20:29 +0100
+Message-ID: <gnkieu$k8b$1@ger.gmane.org>
+References: <1235074713.6859.210.camel@alap>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: [PATCH] add paroli autostart
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <1235074713.6859.210.camel@alap>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] add autostart PACKAGE to paroli recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,45 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 20:27:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 19 Feb 2009 21:23:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
----
- packages/images/fso-paroli-image.bb |   12 +++++++++---
- 1 files changed, 9 insertions(+), 3 deletions(-)
+On 19-02-09 21:18, Angus Ainslie wrote:
 
-diff --git a/packages/images/fso-paroli-image.bb
-b/packages/images/fso-paroli-image.bb
-index 1d4bdd5..d7ac2d9 100644
---- a/packages/images/fso-paroli-image.bb
-+++ b/packages/images/fso-paroli-image.bb
-@@ -1,12 +1,18 @@
- require fso-zhone-image.bb
+> +       mkdir -p ${D}/home/root/.e/e/config/illume/
+> +       install ${S}/data/module.illume.cfg
+> ${D}/home/root/.e/e/config/illume/
+> +       install ${S}/data/e.cfg ${D}/home/root/.e/e/config/illume/
+> +       mkdir -p ${D}/home/root/.e/e/themes
+> +       install ${S}/data/illume.edj ${D}/home/root/.e/e/themes
 
--# no extra apps
--GTK_INSTALL = ""
-+ILLUME_THEME = ""
-+
-+# not many extra apps
-+GTK_INSTALL = " \
-+   vala-terminal \
-+"
-+
- GAMES_INSTALL = ""
--APP_INSTALL = ""
-+APPS_INSTALL = ""
+NACK, a package is NEVER EVER allowed to touch /home/*, NEVER. Caps used 
+to get the point accross.
 
- # fso+zhone
- ZHONE_INSTALL = "\
-   task-fso-compliance \
-   paroli \
-+  paroli-autostart \
- "
---
-1.5.6.5
+regards,
 
-
+Koen
 
 
 
