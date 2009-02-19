@@ -1,24 +1,33 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LaB6x-00085e-Pp
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Feb 2009 16:46:51 +0100
-Received: from andromeda.vanille.de (e180136146.adsl.alicedsl.de
-	[85.180.136.146])
-	by drlauer-research.com (Postfix) with ESMTP id 75A32584122
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Feb 2009 17:08:09 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Feb 2009 16:44:28 +0100
-User-Agent: KMail/1.9.10
-References: <20090219135607.3D71A18935A@amethyst.openembedded.net>
-	<200902191515.02208.mickey@vanille-media.de>
-	<gnjtr8$2a0$1@ger.gmane.org>
-In-Reply-To: <gnjtr8$2a0$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200902191644.28841.mickey@vanille-media.de>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LaBML-0008UG-Iw
+	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 17:02:45 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LaBK8-00076Z-17
+	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 16:00:28 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 19 Feb 2009 16:00:28 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 19 Feb 2009 16:00:28 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 19 Feb 2009 17:00:18 +0100
+Message-ID: <gnjvmj$a1k$1@ger.gmane.org>
+References: <20090219135607.3D71A18935A@amethyst.openembedded.net>	<200902191515.02208.mickey@vanille-media.de>	<gnjtr8$2a0$1@ger.gmane.org>
+	<499D7D13.9060808@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <499D7D13.9060808@balister.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Carsten Haitzler (Raster) : libgles-omap3: add comments on how to get the gles binary files to help
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,32 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 15:46:52 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Feb 2009 16:02:45 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Am Thursday 19 February 2009 16:28:39 schrieb Koen Kooi:
-> On 19-02-09 15:15, Michael 'Mickey' Lauer wrote:
-> > Please back this one out as it seems out of bounds!
+On 19-02-09 16:38, Philip Balister wrote:
+> Koen Kooi wrote:
+>> On 19-02-09 15:15, Michael 'Mickey' Lauer wrote:
+>>> Please back this one out as it seems out of bounds!
 >
-> Out of bounds in what way?
+> Something looks funny. cgit shows two commits with same message, but
+> different content. The instructions appear to be in both commits.
+>
+> Mind you, this is just from a quick look.
 
-It touches a number of unrelated files and does strange things with 'em:
+Ah, it seems git commit --amend doesn't work if you do it twice, once 
+adding the bogus changes and once removing them.
+I kept looking at the first commit and couldn't figure out what was so 
+objectionable about the instructions for downloading the SGX SDK.
 
-=A0conf/distro/include/sane-srcrevs.inc =A0 =A0 =A0 | =A0 =A02 +-
-=A0packages/efl1/ecore.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =A0=
-2 +-
-=A0packages/mtd/mtd-utils-native_1.2.0+git.bb | =A0 =A02 +-
-=A0packages/powervr-drivers/libgles-omap3.inc | =A0 15 ++++++++++++++-
-=A0packages/qte/qte-mt-static_2.3.10.bb =A0 =A0 =A0 | =A0 22 --------------=
-=2D-------
-=A0packages/qte/qte-mt_2.3.10.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =A06 ----=
-=2D-
-=A0packages/qte/qte_2.3.10.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A03 ---
+regards,
 
-=2D-=20
-:M:
+Koen
+
 
 
