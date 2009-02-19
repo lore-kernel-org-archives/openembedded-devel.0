@@ -1,50 +1,35 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [209.85.198.224] (helo=rv-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LaBwK-0007fD-Tl
+	(envelope-from <raj.khem@gmail.com>) id 1LaDaT-0004Dc-CP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Feb 2009 17:39:57 +0100
-Received: by bwz9 with SMTP id 9so1272038bwz.12
+	Thu, 19 Feb 2009 19:25:29 +0100
+Received: by rv-out-0506.google.com with SMTP id g9so389503rvb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Feb 2009 08:37:36 -0800 (PST)
+	Thu, 19 Feb 2009 10:23:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to:cc
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type;
-	bh=mNRTkD/V7dzWGifohweHhEl+5tYJ7MuJPnq+aWlQYps=;
-	b=ReRyfwi4zivaJMNsXo+5h9PboF1cVFAXfMa0waOHWCvhRlm4V8AxfD8lyh6ZFfmZbg
-	a51TFq9MCAtuOqIMlooztfLYEjzh29ZFgilkj6/JSVMXocvGiSqfzllv4XygYHsqM7QJ
-	notM1TSodm1BlP2gW74E5JI/5i8UbsTHeW1L8=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=F3FSoFIiaCneymd1CTq2YnO0Oopv+ndxpLjwnOWbAdk=;
+	b=M+oZ4jZyyNDuMlfiZu8X66Naa4BsyH+ffhvqkSA77tU2PqzHBNQyp2ZGVLVqeKRIjh
+	YfY4Dvv/I9RO9G7S0eiGJmqXoFesi9nmvODGMnkoVVKeTYyXWiGJx9R0DWDdNwPTBiBu
+	OsCptEv3+FqRdoGmNQL/F3VFYwfMa3NyMT0Jo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
-	b=X+osj8pDPVGD05YuoBdEmQAE+Fr5qU4dKHy5ptG5/BEF+ILjBD3xk0gXIJK7ZOKxH7
-	IfuR5Px0gMdzzLvHclpVCzl2Ux0Kz/hoAvP+i6IZ4Vm61TWjnfOOwhStrL2u6kahU7PJ
-	+Po8kR85qYgE4d8nzPz6Xjs1oQs6UQWVxfDSE=
-Received: by 10.103.225.11 with SMTP id c11mr714753mur.24.1235061455872;
-	Thu, 19 Feb 2009 08:37:35 -0800 (PST)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id i7sm1043321mue.14.2009.02.19.08.37.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Feb 2009 08:37:35 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id CF548610047; Thu, 19 Feb 2009 13:37:27 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <1235045523-6405-1-git-send-email-k.kooi@student.utwente.nl>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Thu, 19 Feb 2009 13:37:27 -0300
-In-Reply-To: <1235045523-6405-1-git-send-email-k.kooi@student.utwente.nl>
-	(Koen Kooi's message of "Thu, 19 Feb 2009 13:12:03 +0100")
-Message-ID: <87tz6qjsc8.fsf@neumann.lab.ossystems.com.br>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=PQ4Pvkesx8P42RqXGnJXEeMIhz663FtAlPlQJzLj1ldwb+9OyDjUYRrRCbkdlvfwne
+	fG1Rf0aC3XMRXnLJIjPIUwbjkztDoqGs4/GihJdWhPfeeiK86VXnbz0MBLb9RN5PI7pp
+	jvGZh4Gk0I2Ridj7D9aaf3yhhdT5fYbHtsQhQ=
 MIME-Version: 1.0
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: Re: [PATCH] task-boot: rename DISTRO_ vars to IMAGE_ vars and move to image.bbclass
+Received: by 10.140.201.8 with SMTP id y8mr4484056rvf.126.1235067789473; Thu, 
+	19 Feb 2009 10:23:09 -0800 (PST)
+In-Reply-To: <499A180C.1070802@balister.org>
+References: <499A0B64.2000303@whitby.id.au> <499A180C.1070802@balister.org>
+Date: Thu, 19 Feb 2009 10:23:09 -0800
+Message-ID: <19c1b8a90902191023t7be0d596saee298af835f9fb3@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Commit message policy for new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,29 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 16:40:13 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 19 Feb 2009 18:25:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Koen Kooi <k.kooi@student.utwente.nl> writes:
-
-> From: Koen Kooi <koen@openembedded.org>
+On Mon, Feb 16, 2009 at 5:51 PM, Philip Balister <philip@balister.org> wrote:
+> Rod Whitby wrote:
+>>
+>> <http://cia.vc/stats/project/openembedded/.message/efeb91>
+>>
+>> Any chance the commit message policy could be changed such that commits
+>> for new recipes contain a description of the software that has been
+>> pacakaged?
+>>
+>> Then someone following the commit RSS feed can see interesting new
+>> package descriptions ...
 >
-> ---
->  classes/image.bbclass         |   22 ++++++++++++++++++++++
->  conf/distro/kaeilos.conf      |    2 +-
->  conf/distro/openmoko.conf     |    2 +-
->  conf/distro/openprotium.conf  |    6 +++---
->  conf/machine/mx31moboard.conf |    2 +-
->  packages/tasks/task-boot.bb   |   22 +---------------------
->  6 files changed, 29 insertions(+), 27 deletions(-)
+> +1, in the future I'll try and give a one or two line description of the
+> software when I commit new recipes.
 
-[...]
-
-+1
-
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+me too :)
 
 
