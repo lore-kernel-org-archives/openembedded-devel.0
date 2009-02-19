@@ -1,21 +1,35 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.200.174] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LaHX8-0000Nj-Dj
-	for openembedded-devel@openembedded.org; Thu, 19 Feb 2009 23:38:22 +0100
-Received: (qmail 812 invoked by uid 1003); 19 Feb 2009 22:35:55 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 19 Feb 2009 22:35:55 -0000
-Message-ID: <499DDECA.2070304@balister.org>
-Date: Thu, 19 Feb 2009 17:35:54 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+	(envelope-from <raj.khem@gmail.com>) id 1LaIIt-0007mQ-95
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Feb 2009 00:27:39 +0100
+Received: by wf-out-1314.google.com with SMTP id 28so704358wff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2009 15:25:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=0IadMi5cfuh1XFJGb+br/tQSHaJvM+dEvGk0dPTRjc4=;
+	b=IcHpcrWxCIQ4oVliqOq9EPOWpz5/MDYZnvPkE0bPd6JcLtGc0Sg5MN5Wksq1oso2ct
+	8M03Xbwyt9f3k7MqgTJtGxBU38dAFGvYmSKYHRbYbL2X+uwK95ULPbD4yLrqHrWePat8
+	ZRFko/BcEWiR9i6heKedwLnyulNFvjgI0VWLY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=hza3NZWc6c2Y+PxWEbDWB0G1pDtA7//1bq1l+7MiEzBtr2gSfaqPgA2JUk1gn8aRFu
+	z2iCRLZqh3CHNELBxpj6myqLNbho2XE67Tx9IaaBZ2YUD8wKM7X2raIQu1R0s95kIGfm
+	mlsJIzKwCA2IYEZbBmZ/XhNIcBoUo7uBSLEgo=
+Received: by 10.142.174.13 with SMTP id w13mr63151wfe.49.1235085917493;
+	Thu, 19 Feb 2009 15:25:17 -0800 (PST)
+Received: from localhost.localdomain
+	(adsl-71-146-30-62.dsl.pltn13.sbcglobal.net [71.146.30.62])
+	by mx.google.com with ESMTPS id 32sm3644893wfc.29.2009.02.19.15.25.16
+	(version=SSLv3 cipher=RC4-MD5); Thu, 19 Feb 2009 15:25:17 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <87ocx2rq7w.fsf@neumann.lab.ossystems.com.br>	<200902170936.57379.jk@ozlabs.org>
-	<be7a9f3d0902161502y3e5ca44biac0b9acc4ff7b6ba@mail.gmail.com>
-In-Reply-To: <be7a9f3d0902161502y3e5ca44biac0b9acc4ff7b6ba@mail.gmail.com>
-Subject: Re: Usage of groups
+Date: Thu, 19 Feb 2009 15:25:14 -0800
+Message-Id: <1235085914-23155-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+Subject: [PATCH] preferred-om-2008-versions.inc: Use pidgin version 2.5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,108 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2009 22:38:35 -0000
-X-Groupsio-MsgNum: 7850
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050305050402090503080800"
+X-List-Received-Date: Thu, 19 Feb 2009 23:27:39 -0000
 
---------------ms050305050402090503080800
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+recipe for 2.2.1 pidgin does not exist therefore use 2.5.3 as PREFERRED_VERSION
 
-Otavio Salvador wrote:
-> Hello folks,
-> 
-> I've contacted PatchWork people and asked for details how to make it
-> properly fit our needs. Bellow goes the answer they gave me.
-> 
->>> The OpenEmbedded project started to use PatchWork to allow us to
->>> better track the patches that come to us. It has been working fine
->>> except that we're not finding how to add groups to make easier the
->>> permission setting for users and like.
-> 
->> The built-in 'groups' system doesn't affect any of the permissions on
->> patchwork at the moment. To allow a user to alter patches, they need to
->> be a 'maintainer' of the project that the patch belongs to.
-> 
->> To make a use a maintainer, just open their UserProfile page in the
->> admin interface, and select the appropriate 'maintainer groups'.
+---
+ conf/distro/include/preferred-om-2008-versions.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-OK, I've decrypted this message :) and managed to set up Khem's account 
-so he can change patch state.
+diff --git a/conf/distro/include/preferred-om-2008-versions.inc b/conf/distro/include/preferred-om-2008-versions.inc
+index f78c804..4515248 100644
+--- a/conf/distro/include/preferred-om-2008-versions.inc
++++ b/conf/distro/include/preferred-om-2008-versions.inc
+@@ -1435,7 +1435,7 @@ PREFERRED_VERSION_phoneserver ?= "1.0"
+ PREFERRED_VERSION_php ?= "5.2.0"
+ PREFERRED_VERSION_php-native ?= "5.2.0"
+ PREFERRED_VERSION_picocom ?= "1.4"
+-PREFERRED_VERSION_pidgin ?= "2.2.1"
++PREFERRED_VERSION_pidgin ?= "2.5.3"
+ PREFERRED_VERSION_pine ?= "4.64"
+ PREFERRED_VERSION_pipeman ?= "1.0.0"
+ PREFERRED_VERSION_pipepanic ?= "0.1.1"
+-- 
+1.6.0.4
 
-I'm thinking that people with commit access should be given maintainer 
-status so they can mark patches as needed? How does that sound? If you 
-have submitted a patch, can you change the state at the moment? Could 
-someone check?
 
-Thanks,
 
-Philip
-
---------------ms050305050402090503080800
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIxOTIy
-MzU1NFowIwYJKoZIhvcNAQkEMRYEFIeJDNRRm7CxMKy8Avuq9hIoJRPcMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQCWcvqMmwhZ9NaQXaeYzQ17ZDjwzNnk3LFu+BbwVXSK42nu2ymf
-JSmvwH9Ex9uMDX1Mg8EIDft0LMg9J5kiODvEMB9B3MFzAdyBmBpvDmqHtpo6WiGkjo92rRSEtOJa
-xdaXm7a3zfJ46PqzaSHYA1eo559zI99KrZdo4iUX9q3fkJW+HIoHRelLhVLcSVjzwVLsWD+jiZ3d
-n7Xp/QgpbDixUYSfnSrhLxJ3mcc8wzg9VkPwFL7PmMlwnt/QMFRatmggmuwiXow2VCX8aqTy7aqg
-SF5dGJsgM8H7cHPoMQYp9IdZFnIlEiL4QarVxoQqV+YolcHFWV+TdabMZT2WbbjeAAAAAAAA
-
---------------ms050305050402090503080800--
