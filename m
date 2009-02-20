@@ -1,33 +1,47 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.221.16] (helo=mail-qy0-f16.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LaZcb-0003g6-Gr
-	for openembedded-devel@openembedded.org; Fri, 20 Feb 2009 18:57:09 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LaZaC-00039o-1S
-	for openembedded-devel@openembedded.org; Fri, 20 Feb 2009 17:54:40 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 20 Feb 2009 17:54:40 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 20 Feb 2009 17:54:40 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 20 Feb 2009 18:54:30 +0100
-Message-ID: <gnmqom$50a$1@ger.gmane.org>
-References: <1235130913-15461-1-git-send-email-ihar.hrachyshka@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <1235130913-15461-1-git-send-email-ihar.hrachyshka@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] Check if package provides qtopia-core not package name
+	(envelope-from <otavio.salvador@gmail.com>) id 1LafEl-00039q-7M
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 21 Feb 2009 00:56:55 +0100
+Received: by qyk9 with SMTP id 9so1728439qyk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Feb 2009 15:54:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:received:from:to
+	:subject:organization:user-agent:x-url:x-attribution:date:message-id
+	:mime-version:content-type;
+	bh=iPMff/ougHYlQZrMMSROooNJMRaVesNcF2VSoKv0SO4=;
+	b=iAsCOUenLFgmsDGDTCJ3NwXSU2HPuNCdb57JXeWxn4/KBvn3VurSd2q+kiBBDmiHve
+	AhM3JDKLHemIIXYhFTv2nA2es9VIl4pmv0weP1Yd+LxXif8HjkgsSKkdz0nWDbSkiiQ/
+	iISKmX6HIbsGVEngSD/H0IO0kbBhwo5upYuXY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:organization:user-agent:x-url:x-attribution
+	:date:message-id:mime-version:content-type;
+	b=x+jDPIVEcQZbH70PYv8C+AAES998QsWTVxKcH2fcQ5j52c/fnTdngtHKu0YThrkqjk
+	uDBeLJOKZKNNZuV9QEvAnPItv0db0PzeAZLY2CB4/EhOhGs2eN78LZt4a8ryxxVyJhkr
+	3s1d5IVc5o9uZaZgq0ykTLCXNKEspoKOag3Bw=
+Received: by 10.224.10.208 with SMTP id q16mr2362394qaq.387.1235174062782;
+	Fri, 20 Feb 2009 15:54:22 -0800 (PST)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id 6sm2896946qwd.53.2009.02.20.15.54.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 20 Feb 2009 15:54:22 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id BE3F8610047; Fri, 20 Feb 2009 20:54:10 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Development Mailing List
+	<openembedded-devel@lists.openembedded.org>
+Organization: O.S. Systems Ltda.
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
+	(x86_64-pc-linux-gnu)
+X-URL: http://www.ossystems.com.br/
+X-Attribution: O.S.
+Date: Fri, 20 Feb 2009 20:54:10 -0300
+Message-ID: <87ocww3brx.fsf@neumann.lab.ossystems.com.br>
+MIME-Version: 1.0
+Subject: Pull request with minor changes for initrdscripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +55,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2009 17:57:10 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Feb 2009 23:56:55 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On 20-02-09 12:55, Ihar Hrachyshka wrote:
-> This change fixes dependency loops for qtopia-core and qt-embedded.
->
-> Signed-off-by: Ihar Hrachyshka<ihar.hrachyshka@gmail.com>
-> ---
->   classes/qtopia4core.bbclass |    2 +-
->   1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/qtopia4core.bbclass b/classes/qtopia4core.bbclass
-> index b5f10fa..214232d 100644
-> --- a/classes/qtopia4core.bbclass
-> +++ b/classes/qtopia4core.bbclass
-> @@ -1,4 +1,4 @@
-> -DEPENDS_prepend = "${@["qtopia-core ", ""][(bb.data.getVar('PN', d, 1) == 'qtopia-core')]}"
-> +DEPENDS_prepend = "${@["qtopia-core ", ""]['qtopia-core' in bb.data.getVar('PROVIDES', d, 1)]}"
->   inherit qmake2
->
->   QT_DIR_NAME = "qtopia"
+Hello,
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+We've done few minor but usefull changes at our tree and would be nice
+to get them merged in. Please someone review it and pull if agree.
 
+The following changes since commit 1b3740d56dfddbfa7861a07fdfdc3d00f5af0637:
+  Otavio Salvador (1):
+        parted: drop configure_prepend since syscalls.h was remove
+
+are available in the git repository at:
+
+  git://projetos.ossystems.com.br/git/users/otavio/org.openembedded.dev.git master
+
+Otavio Salvador (4):
+      initramfs-module-ext3: use mkdir -p to create mount path
+      initramfs-module-aufs: use mkdir -p to create mount path
+      initramfs-uniboot: add support to start a shell and enable debug
+      initramfs-uniboot: call depmod if the image lack a dep file
+
+ packages/initrdscripts/files/80-ext3.sh |    2 +-
+ packages/initrdscripts/files/98-aufs.sh |    2 +-
+ packages/initrdscripts/files/init.sh    |    7 +++++++
+ 3 files changed, 9 insertions(+), 2 deletions(-)
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
