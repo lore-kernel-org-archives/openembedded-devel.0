@@ -1,47 +1,31 @@
-Received: from [209.85.221.16] (helo=mail-qy0-f16.google.com)
+Received: from [209.85.200.169] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LafEl-00039q-7M
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Feb 2009 00:56:55 +0100
-Received: by qyk9 with SMTP id 9so1728439qyk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2009 15:54:22 -0800 (PST)
+	(envelope-from <taroth@gmail.com>) id 1LahTx-0007WS-9t
+	for openembedded-devel@openembedded.org; Sat, 21 Feb 2009 03:20:45 +0100
+Received: by wf-out-1314.google.com with SMTP id 25so1220426wfc.6
+	for <openembedded-devel@openembedded.org>;
+	Fri, 20 Feb 2009 18:18:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:user-agent:x-url:x-attribution:date:message-id
-	:mime-version:content-type;
-	bh=iPMff/ougHYlQZrMMSROooNJMRaVesNcF2VSoKv0SO4=;
-	b=iAsCOUenLFgmsDGDTCJ3NwXSU2HPuNCdb57JXeWxn4/KBvn3VurSd2q+kiBBDmiHve
-	AhM3JDKLHemIIXYhFTv2nA2es9VIl4pmv0weP1Yd+LxXif8HjkgsSKkdz0nWDbSkiiQ/
-	iISKmX6HIbsGVEngSD/H0IO0kbBhwo5upYuXY=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=dlekWnUpMixDfciuoXCemKSLpUXcB8dcgIZIulRzt1Y=;
+	b=AQct8/zOAnvAyRbfoM79bLPDvfqEpXUw+cpjaDaRzVxr4x0bf+vBqX7bVidA03Mm8z
+	j1/GZAQdu/O9i3P2Q+YoRZZD0p0h2wnCr2ciCjf+64ZAXfFmz0be7YFX8q2pPH/GPADs
+	gUZc8XKmgj8LoMB9XhJKivM4cS7AkzKJnMUHQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:user-agent:x-url:x-attribution
-	:date:message-id:mime-version:content-type;
-	b=x+jDPIVEcQZbH70PYv8C+AAES998QsWTVxKcH2fcQ5j52c/fnTdngtHKu0YThrkqjk
-	uDBeLJOKZKNNZuV9QEvAnPItv0db0PzeAZLY2CB4/EhOhGs2eN78LZt4a8ryxxVyJhkr
-	3s1d5IVc5o9uZaZgq0ykTLCXNKEspoKOag3Bw=
-Received: by 10.224.10.208 with SMTP id q16mr2362394qaq.387.1235174062782;
-	Fri, 20 Feb 2009 15:54:22 -0800 (PST)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id 6sm2896946qwd.53.2009.02.20.15.54.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 20 Feb 2009 15:54:22 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id BE3F8610047; Fri, 20 Feb 2009 20:54:10 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Development Mailing List
-	<openembedded-devel@lists.openembedded.org>
-Organization: O.S. Systems Ltda.
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Fri, 20 Feb 2009 20:54:10 -0300
-Message-ID: <87ocww3brx.fsf@neumann.lab.ossystems.com.br>
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=tsoxHGkBUt7zBDX2zE2IjXxXqjNYgDM+fErSh1dzcHTlXQ32b9itrKHO+Vq4b6/H5E
+	d9N8u8QDVrvcdDPeR0ff2QwoK6J7zIdFG0gPTW15txvBuENYb9L/QcZQnY+C9RTHd/U9
+	+Z7VQrpaKaA8qeivnrVXncewvnQz6kJ4NbAD4=
 MIME-Version: 1.0
-Subject: Pull request with minor changes for initrdscripts
+Received: by 10.142.180.20 with SMTP id c20mr707625wff.129.1235182693688; Fri, 
+	20 Feb 2009 18:18:13 -0800 (PST)
+Date: Fri, 20 Feb 2009 18:18:13 -0800
+Message-ID: <f46da1cf0902201818r3fcf3432oc14929b5f455bbe7@mail.gmail.com>
+From: "Theodore A. Roth" <taroth@gmail.com>
+To: openembedded-devel@openembedded.org
+Subject: Documentation/User Manual questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,36 +39,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2009 23:56:55 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 21 Feb 2009 02:20:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi,
 
-We've done few minor but usefull changes at our tree and would be nice
-to get them merged in. Please someone review it and pull if agree.
+In my quest to learn how OE works, I've been reading the Wiki and the
+User Manual a lot. I have a few questions to ask.
 
-The following changes since commit 1b3740d56dfddbfa7861a07fdfdc3d00f5af0637:
-  Otavio Salvador (1):
-        parted: drop configure_prepend since syscalls.h was remove
+1: Why is the user manual on a separate branch instead of simply being
+part of the org.openembedded.dev branch?
 
-are available in the git repository at:
+Speaking as a newbie, it would have been nice to have gotten the user
+manual automagically when I cloned the git repo. It took me a couple
+of weeks to discover where it's source was located since I am also
+learning git at the same time. Speaking as developer, having the
+documentation as close to the source as possible gives it more
+visibility and tends to increase the likelihood of it being kept up to
+date.
 
-  git://projetos.ossystems.com.br/git/users/otavio/org.openembedded.dev.git master
+2: Was the documentation branch really last updated on May 9, 2008? Is
+there a newer branch I have not yet discovered?
 
-Otavio Salvador (4):
-      initramfs-module-ext3: use mkdir -p to create mount path
-      initramfs-module-aufs: use mkdir -p to create mount path
-      initramfs-uniboot: add support to start a shell and enable debug
-      initramfs-uniboot: call depmod if the image lack a dep file
+3: There is a ton of information in the Wiki, but finding what one
+needs can be rather tedious if not difficult. Is there any chance of
+pulling information from the Wiki into the user manual?
 
- packages/initrdscripts/files/80-ext3.sh |    2 +-
- packages/initrdscripts/files/98-aufs.sh |    2 +-
- packages/initrdscripts/files/init.sh    |    7 +++++++
- 3 files changed, 9 insertions(+), 2 deletions(-)
+The format of a user manual can make finding information so much more
+efficient. A table of contents and a good index can make a newbies
+life so much easier.
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+I would love to step up and take on some of this. My knowledge of OE
+is quite limited at the moment, but with some review from the gurus
+out there, I think I can remedy that.
+
+Thanks for your time.
+
+Ted Roth
 
 
