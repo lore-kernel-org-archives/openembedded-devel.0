@@ -1,31 +1,33 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.198.234] (helo=rv-out-0506.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Lb1ji-0000sR-DI
+	(envelope-from <linuxfpga@gmail.com>) id 1LbJCi-0005WB-Vk
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Feb 2009 00:58:22 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id C7D2F140933D
+	Sun, 22 Feb 2009 19:37:29 +0100
+Received: by rv-out-0506.google.com with SMTP id g9so1506238rvb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Feb 2009 00:56:23 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NrpLQZ0OiclT
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Feb 2009 00:56:23 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 9D8EA140932E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Feb 2009 00:56:22 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Sun, 22 Feb 2009 10:34:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:cc:content-type:content-transfer-encoding;
+	bh=EWmJQbSWZjNniEp2uBFkgAyHebUSJzisNYxxLT1QDFY=;
+	b=LDAeQ9iOKxjyyS0pLq0AC1yp1RaIZE8jeeKOB4w9afDNJvLKcjfrTWZWREwriny34I
+	/bgDYtTxdoDS95N0J1dd2SQUE14wcJtQJXxR97gGPBye32Ad6YER7sbzduwQApFVHi00
+	x2sC4U3pN03WswCyelKGa3ZggmLjlIbbho5VY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=id9OvhAsBQKpKUJ+Z2Ms5J3MIxVjlJLFWSgPuHm5Fu7OlDvC9e7BTPURF5FkqpYGPo
+	U2lAxtoiMrTuPECeFVfW8QgY47Pqo/eQl//jdrr9VoccYTGz28admq5/0wnF9L8YsneG
+	O4+UoP3a4cRZ/GR+A58E03wyBTGIQELB4tccg=
+MIME-Version: 1.0
+Received: by 10.142.171.3 with SMTP id t3mr1570284wfe.26.1235327682780; Sun, 
+	22 Feb 2009 10:34:42 -0800 (PST)
+Date: Sun, 22 Feb 2009 21:34:42 +0300
+Message-ID: <d741b6090902221034t224cd1e5ja6b3e863fd54bbda@mail.gmail.com>
+From: Alex Williams <linuxfpga@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49A033F4.4090807@opensimpad.org>
-References: <49A033F4.4090807@opensimpad.org>
-Date: Sun, 22 Feb 2009 00:55:41 +0100
-Message-Id: <1235260541.12178.11.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: tcl tk: tclConfig.sh/tkConfig.sh ${STAGING_BINDIR_CROSS}	or ${STAGING_LIBDIR} ?
+Cc: koen@openembedded.org
+Subject: Angstrom, ep93xx, broken rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,38 +41,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Feb 2009 23:58:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 22 Feb 2009 18:37:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Bernhard Guillon wrote:
-> Hi all,
-> I am currently try to build hv3 [1] - a super fast and small browser=20
-> (dillo2 killer ?).
-> I need to provide the PATH to  tclConfig.sh/tkConfig.sh which is=20
-> currently ${STAGING_BINDIR_CROSS}.
-=EF=BB=BF
-> Is this the right PATH or should tcl=20
-> tk place tclConfig.sh/tkConfig.sh to ${STAGING_LIBDIR} ?
-
-=EF=BB=BFIt depends on the purpose.
-
-If you need tcl/tk for the build process, you need tcl/tk-native and
-{STAGING_BINDIR}. If you need to link with tcl/tk, then you need
-{STAGING_BINDIR_CROSS}.
-
-Note: You should be aware, that user may set ASSUME_PROVIDED =3D
-"tcl-native tk-native" in local.conf. In this case, your program should
-be able to find tcl-native/tk-native in system-wide directories (it's
-the default behavior of most upstream packages).
-
-If you need both, you have to do some tricks (set needed variable in bb
-file and patch package to use this variable).
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+Hello!
+I decided to update my OpenEmbedded from git today. Result: broken
+rootfs, many applications lost such as busybox and many other files,
+symlinks. Tried to build minimal-image... One week before update I had
+perfect rootfs and everything work fine... Resetting many commits
+since last week did not helped me.
+Details here: http://pastebin.com/m7ddd3941
 
 
