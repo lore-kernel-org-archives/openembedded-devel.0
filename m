@@ -1,23 +1,36 @@
-Received: from [130.149.7.33] (helo=mail.tu-berlin.de)
+Received: from [209.85.200.174] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <torsten.sadowski@tu-berlin.de>) id 1Lbb3C-0005SJ-MZ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Feb 2009 14:40:50 +0100
-X-tubIT-Incoming-IP: 130.149.75.153
-Received: from kapitaen.kup.tu-berlin.de ([130.149.75.153]
-	helo=kapitaen.localnet)
-	by mail.tu-berlin.de (exim-4.69/mailfrontend-a) with esmtpa 
-	for <openembedded-devel@lists.openembedded.org>
-	id 1Lbb0N-0004FB-VP; Mon, 23 Feb 2009 14:37:56 +0100
-From: Torsten Sadowski <torsten.sadowski@tu-berlin.de>
-Organization: TU Berlin
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Feb 2009 14:37:32 +0100
-User-Agent: KMail/1.10.4 (Linux/2.6.27-11-generic; KDE/4.1.4; i686; ; )
+	(envelope-from <taroth@gmail.com>) id 1Lbf1N-00071O-Mn
+	for openembedded-devel@openembedded.org; Mon, 23 Feb 2009 18:55:14 +0100
+Received: by wf-out-1314.google.com with SMTP id 25so2142247wfc.6
+	for <openembedded-devel@openembedded.org>;
+	Mon, 23 Feb 2009 09:52:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=BzTUZcwiU0ly30wzfXRo4gnw80OblnV3AxmLNWyvWQw=;
+	b=b7XbgwV6fe29sMxTWWRf1dZl/PVnwvAk50NwqO5+7uTqgyfW68dwBT7M1V6Xye/YtC
+	B3hwLh8xe3YgYhYZyud/9Ku5YHkkf/GqMz5C+3G9FflLR7/6qeQCWNxJ8GY6VDF80Rnj
+	9wCKvEFdEvIui1eY3bxz/czAIe6V0FpQkKORQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=Peo5taRCAc5+C9rWGi2qSBXHElRGmi+sL8p7gm5JLx+vt0e10/H3GjHRBAmdw2jXz2
+	IJbUwesle5WUJZ0hvic13xBZ0nt5Pyq9C7fwxrFPseoqlBWdJpHQV9ksqxB82r+2JAEd
+	yjscufoSAnaTgSDVlBO7cJ3YkAHhxQHTDtlvY=
 MIME-Version: 1.0
-Message-Id: <200902231437.33180.torsten.sadowski@tu-berlin.de>
-X-tubIT-Score: 0.0 ()
-Subject: Re: angstrom-2008.1 fails on Simpad because of missing devices
+Received: by 10.142.142.16 with SMTP id p16mr2071368wfd.321.1235411539004; 
+	Mon, 23 Feb 2009 09:52:19 -0800 (PST)
+In-Reply-To: <49A1C706.6000906@techworks.ie>
+References: <d741b6090902221034t224cd1e5ja6b3e863fd54bbda@mail.gmail.com>
+	<49A1C706.6000906@techworks.ie>
+Date: Mon, 23 Feb 2009 09:52:18 -0800
+Message-ID: <f46da1cf0902230952x22aea3fct180aeb5bd0ab7f22@mail.gmail.com>
+From: "Theodore A. Roth" <taroth@gmail.com>
+To: Christian Gagneraud <cgagneraud@techworks.ie>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: ep93xx, ts72xx, gesbc-9302 and more (was Re: Angstrom, ep93xx, broken rootfs)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,29 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Feb 2009 13:41:28 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Mon, 23 Feb 2009 17:55:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Torsten Sadowski wrote:
-> Hi,
+Hi Chris,
+
+On Sun, Feb 22, 2009 at 1:43 PM, Christian Gagneraud
+<cgagneraud@techworks.ie> wrote:
+
 >
-> I tried to build a new x11-image for the Simpad. Unluckily it doesn't finish 
-> to boot. Does anyone know a simple solution?
+> Finally I would like to see the machines ts72xx and ts7800 officially
+> supported by openembedded and/or angstrom (so that we can use Narcissus for
+> example!;))
 >
->   
-Yes, if you using bootldr please update your linuxargs to not set init.
-Currently it is set to /linuxargs as default. Unfortunately /linuxargs 
-is now a symlink to busybox. So the busybox init is used which has an 
-other syntax then sysv init.
+> I'm willing to be a machine maintainer/mentor for the ts72xx and the ts7800.
+> At work we use them in lot of our products, and we decided to switch to
+> OE/Angstron distro (after encouraging test results).
+> What's the procedure for this exactly?
+>
+> Regards,
+> Chris.
+>
 
+I too am working on adding support for the TS7800 to OE. I have only
+been focusing on using vanilla linux kernel 2.6.28 for now. I have put
+my branch of the OE sources up on github. I would love to collaborate
+with you on getting this into the upstream OE tree. I also have a
+TS7390 board I would like to contribute support in the future.
 
-Thank you, that did it.
+So far, I have been working on getting a very minimal initramfs rootfs
+running off the SD card for the ts7800. I have been successful in
+getting to a shell prompt using a uClibc Angstrom 2009 dev build.
+There were a few problems I had to figure out to get that to build
+though.
 
-Now I have a Simpad WITH sound.
+My OE git tree is available here:
 
-Cheers, Torsten
+  http://github.com/troth/oe-ts7xxx/tree/ts7800
+
+I have a separate git tree for my local setup here:
+
+  http://github.com/troth/oe-setup/tree/master
+
+Ted Roth
 
 
