@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [130.149.7.33] (helo=mail.tu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LbW36-0007WN-Cj
-	for openembedded-devel@openembedded.org; Mon, 23 Feb 2009 09:20:33 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LbW0K-0000AS-VE
-	for openembedded-devel@openembedded.org; Mon, 23 Feb 2009 08:17:32 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 23 Feb 2009 08:17:32 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 23 Feb 2009 08:17:32 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 23 Feb 2009 09:17:23 +0100
-Message-ID: <gntm2j$dbu$1@ger.gmane.org>
-References: <1235372951.19710.3.camel@ubuntu2>
-	<5c5e5c350902222346n632f3598vbc3965761c58229b@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <5c5e5c350902222346n632f3598vbc3965761c58229b@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Machine for Dual Core
+	(envelope-from <torsten.sadowski@tu-berlin.de>) id 1Lbb3C-0005SJ-MZ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Feb 2009 14:40:50 +0100
+X-tubIT-Incoming-IP: 130.149.75.153
+Received: from kapitaen.kup.tu-berlin.de ([130.149.75.153]
+	helo=kapitaen.localnet)
+	by mail.tu-berlin.de (exim-4.69/mailfrontend-a) with esmtpa 
+	for <openembedded-devel@lists.openembedded.org>
+	id 1Lbb0N-0004FB-VP; Mon, 23 Feb 2009 14:37:56 +0100
+From: Torsten Sadowski <torsten.sadowski@tu-berlin.de>
+Organization: TU Berlin
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 23 Feb 2009 14:37:32 +0100
+User-Agent: KMail/1.10.4 (Linux/2.6.27-11-generic; KDE/4.1.4; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200902231437.33180.torsten.sadowski@tu-berlin.de>
+X-tubIT-Score: 0.0 ()
+Subject: Re: angstrom-2008.1 fails on Simpad because of missing devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Feb 2009 08:20:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 23 Feb 2009 13:41:28 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 23-02-09 08:46, Elena of Valhalla wrote:
-> On Mon, Feb 23, 2009 at 8:09 AM, Paolo Cremonese<pisa.t@teledata-i.com>  wrote:
->> what type of "machine" have I to use to build an image for a Pentium
->> Dual Core?
+Torsten Sadowski wrote:
+> Hi,
 >
-> i586-generic will run, is currently working (unlike AFAIK i686) and
-> could do if you're using it for tests
+> I tried to build a new x11-image for the Simpad. Unluckily it doesn't finish 
+> to boot. Does anyone know a simple solution?
 >
-> I'm not sure that OE/Angstrom would be suitable to be _used_ on such a
-> pc, however
+>   
+Yes, if you using bootldr please update your linuxargs to not set init.
+Currently it is set to /linuxargs as default. Unfortunately /linuxargs 
+is now a symlink to busybox. So the busybox init is used which has an 
+other syntax then sysv init.
 
-Yes, it is
 
+Thank you, that did it.
 
+Now I have a Simpad WITH sound.
+
+Cheers, Torsten
 
 
