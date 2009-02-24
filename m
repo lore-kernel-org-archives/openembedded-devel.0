@@ -1,27 +1,21 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LbrBZ-0005j2-8O
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 07:54:33 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090224065126.OUPN2948.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 01:51:26 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id KirQ1b0074dMFYL04irQXQ; Tue, 24 Feb 2009 01:51:26 -0500
-X-Authority-Analysis: v=1.0 c=1 a=hjmUo6_iwTf1-Xc1ZCUA:9
-	a=nJteQal8-xDW7jX9PsGSIQs_xhUA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 23 Feb 2009 23:51:24 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090224065124.GF2172@smtp.west.cox.net>
+	(envelope-from <openembedded@haerwu.biz>) id 1Lbt1X-0005Cb-IY
+	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 09:52:19 +0100
+Received: (qmail 19213 invoked by uid 813007); 24 Feb 2009 08:49:18 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 24 Feb 2009 08:49:18 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 24 Feb 2009 09:49:04 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
 References: <200902131728.08634.openembedded@haerwu.biz>
 	<20090224064639.GE2172@smtp.west.cox.net>
-MIME-Version: 1.0
 In-Reply-To: <20090224064639.GE2172@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+MIME-Version: 1.0
+Message-Id: <200902240949.10862.openembedded@haerwu.biz>
 Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,35 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 06:54:33 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 24 Feb 2009 08:52:19 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Feb 23, 2009 at 11:46:39PM -0700, Tom Rini wrote:
-> On Fri, Feb 13, 2009 at 05:28:08PM +0100, Marcin Juszkiewicz wrote:
-> 
-> > 
-> > Hi
-> > 
-> > It is nearly two years since conf/checksums.ini was introduced. We 
-> > populated it with over 6000 entries during that time (mostly by 
-> > automatic fetching of all source on CELF and EWI machines). But there 
-> > are problems with it's format.
-> 
-> I'm going to make a different suggestion.  Lets just drop it.  Part of
-> why I say this is that we went back on it being a mandatory thing
-> because it was a burden.  And we're already back to adding stuff without
-> checksums again (gstreamer, libdaemon on this build so far..).
-[snip]
-> Oh, and in the 5 minutes the above took to write, gst-plugins-base
-> failed to have a checksum too.
+On Tuesday 24 of February 2009 07:46:39 Tom Rini wrote:
 
-OK, this is a me problem.  But the rest of my point stands.  I'm willing
-to bet most people aren't making sure the md5/sha1 is right with
-upstream, and I think we'd be better off at trying to automatically grab
-an upstream verification and use that.
+> And, is anyone doing more then 'cat tmp/checksums.ini >>
+> openembedded/conf/checksums.ini && python the-sorter' ?  And by more
+> I mean check for an upstream .md5 or similar, to make sure this is
+> really right?
 
+commit 67aa127f4b4cb2e4083a02adfddd7d82534751a3
+Author: Marcin Juszkiewicz <hrw@openembedded.org>
+Date:   Thu Nov 13 18:07:47 2008 +0100
+
+    checksums.ini: add 1212 entries from test fetch build
+
+    This is result of simple shell script and few hours of fetching:
+    for recipe in $OEROOT/packages/*/*.bb
+    do
+      bitbake -b $recipe -cfetch
+    done
+
+This was done with not so empty DL_DIR but most of entries were fresh 
+fetched. If someone has machine with good network connection (I no 
+longer have access to machine where I was running that test) then feel 
+free to call that loop with empty DL_DIR.
+
+Regards, 
 -- 
-Tom Rini
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
