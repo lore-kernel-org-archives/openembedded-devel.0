@@ -1,30 +1,20 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1Lc2st-0005Ef-8w
+	(envelope-from <mickey@vanille-media.de>) id 1Lc32F-0005ZH-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Feb 2009 20:24:03 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.101]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1Lc2pj-0002es-0C
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Feb 2009 03:20:58 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Feb 2009 12:20:37 -0700
-Message-Id: <1235503237.8911.53.camel@alap>
+	Tue, 24 Feb 2009 20:33:44 +0100
+Received: from [192.168.1.105] (e180190230.adsl.alicedsl.de [85.180.190.230])
+	by drlauer-research.com (Postfix) with ESMTP id 564DC584112
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2009 20:54:42 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Organization: Vanille-Media
+Date: Tue, 24 Feb 2009 20:30:39 +0100
+Message-Id: <1235503839.2621.3.camel@andromeda>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: [PATCH] Add the git branch to the name for endusers
+Subject: commit access for Angus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,35 +28,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 19:24:03 -0000
+X-List-Received-Date: Tue, 24 Feb 2009 19:33:44 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+I want to propose commit access for Angus Ainslie. He is the new
+distribution maintainer @ Openmoko, Inc. and will work on getting the
+forthcoming Openmoko 2009.x distro built out of OE. In contrast to
+earlier OM distro managers, he has been instructed to keep a close eye
+on upstream hence working in our branches as much as possible (until the
+final prerelease image stabilization phase starts).
 
----
- packages/linux/linux-openmoko-devel_git.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+He will first get his feet wet in the fso/ branches, so we have the
+chance to cherry-pick and/or merge his work while he gets up to speed
+with regards to our upstream needs.
 
-diff --git a/packages/linux/linux-openmoko-devel_git.bb b/packages/linux/linux-openmoko-devel_git.bb
-index 4860cca..81bbd53 100644
---- a/packages/linux/linux-openmoko-devel_git.bb
-+++ b/packages/linux/linux-openmoko-devel_git.bb
-@@ -8,9 +8,9 @@ DEFAULT_PREFERENCE = "-1"
- KERNEL_RELEASE = "2.6.28"
- KERNEL_VERSION = "${KERNEL_RELEASE}"
+Please support him.
 
--OEV = "oe1"
--PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCREV}"
--PR = "r2"
-+OMV = "andy-tracking"
-+PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCREV}"
-+PR = "r3"
+Cheers,
 
- SRC_URI = "\
-   git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
---
-1.5.6.5
-
+-- 
+:M:
 
 
 
