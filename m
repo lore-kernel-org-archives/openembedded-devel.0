@@ -1,30 +1,35 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lc0L2-00012x-4z
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 17:40:56 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090224163752.DHSK13097.fed1rmmtao102.cox.net@fed1rmimpo03.cox.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lc0YV-0001jT-OV
+	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 17:54:51 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lc0VZ-00042f-7a
+	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 16:51:49 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 24 Feb 2009 16:51:49 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 11:37:52 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id Ksdr1b0074dMFYL04sdrxr; Tue, 24 Feb 2009 11:37:51 -0500
-X-Authority-Analysis: v=1.0 c=1 a=7jsWU2tSb2dUlhi5bn4A:9
-	a=cO3BRM9nevhkeVSxrzZ1KWLapY0A:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 24 Feb 2009 09:37:51 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	Tue, 24 Feb 2009 16:51:49 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20090224163750.GJ2172@smtp.west.cox.net>
-References: <200902131728.08634.openembedded@haerwu.biz>
-	<20090224064639.GE2172@smtp.west.cox.net>
-	<1235492001.27962.60.camel@andromeda>
-	<1235492726.8911.34.camel@alap>
-MIME-Version: 1.0
-In-Reply-To: <1235492726.8911.34.camel@alap>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: checksums situation
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 24 Feb 2009 17:51:39 +0100
+Message-ID: <go18ir$64n$1@ger.gmane.org>
+References: <gmeron$e6l$1@ger.gmane.org>
+	<gmuhki$409$1@ger.gmane.org>	<69E6C70090A0A14498CC98FAE5E06B6E3CF653@hiob.intern.dresearch.de>	<49A3BBE0.9070404@gefanuc.com>
+	<1235491906.27962.58.camel@andromeda>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <1235491906.27962.58.camel@andromeda>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Mailinglists, was: Re: Bugtracker Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,31 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 16:40:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 24 Feb 2009 16:54:52 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 24, 2009 at 09:25:26AM -0700, Angus Ainslie wrote:
-> On Tue, 2009-02-24 at 17:13 +0100, Michael 'Mickey' Lauer wrote:
-> > Am Montag, den 23.02.2009, 23:46 -0700 schrieb Tom Rini:
-> > > I'm going to make a different suggestion.  Lets just drop it. 
-> > 
-> > I'm in favour of this. I don't think they give us the safety we want and
-> > they introduce more inconvenience.
-> > 
-> > Cheers,
-> > 
-> 
-> Couldn't the default be a stern warning if the checksums don't match and
-> distro's that want it could change it to an error ?
+On 24-02-09 17:11, Michael 'Mickey' Lauer wrote:
+> Am Dienstag, den 24.02.2009, 09:20 +0000 schrieb Martyn Welch:
+>> Sledz, Steffen wrote:
+>>>> OK, Philip indicated he got confused by the proposals, so
+>>>> here's a rundown
+>>>>
+>>>> current situation:
+>>>>
+>>>> Openembedded-announce	
+>>>> Openembedded-commits	
+>>>> Openembedded-devel	
+>>>> Openembedded-issues	
+>>>> Openembedded-stablebranch
+>>>> Openembedded-users
+>>>> Openembedded-private
+>>>>
+>>>> new situation:
+>>>>
+>>>> openembedded-devel - for humans to post patches and ask questions
+>>>> openembedded-bots - commits, bugs, logs, etc
+>>>> Openembedded-private - core team
+>
+> I'm ok with that in principle, but I'm not really fond of renaming
+> existing mailing lists. I'd rather keep openembedded-commits intact and
+> have the bugtracker send its reports there.
 
-That's not what's causing heartburn.  What's causing it is the far more
-sources than checksums we have today.  Which got me thinking that (as I
-said just now in another email) we have a system that's fine for
-checking if the tarball changed under me, but worthless for "are the
-sources what upstream says they should be", ie guarding against trojans.
+I don't have a strong opionion on naming, let's take one step at a time 
+and start 'merging' lists by closing a few and promote the remaining ones.
 
--- 
-Tom Rini
+regards,
+
+Koen
+
 
 
