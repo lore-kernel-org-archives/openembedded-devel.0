@@ -1,32 +1,22 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1Lc3wY-0003tE-S5
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1Lc3x2-0003wA-Ga
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Feb 2009 21:31:55 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.101]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1Lc3tL-0004HT-VW
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Feb 2009 04:28:49 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
+	Tue, 24 Feb 2009 21:32:24 +0100
+Received: from [192.168.1.102] (77-21-130-108-dynip.superkabel.de
+	[77.21.130.108])
+	by dd20204.kasserver.com (Postfix) with ESMTP id 26773182C5F86
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2009 21:29:25 +0100 (CET)
+Message-ID: <49A458A1.80308@opensimpad.org>
+Date: Tue, 24 Feb 2009 21:29:21 +0100
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <go1jd3$mlv$1@ger.gmane.org>
-References: <1235501736.8911.52.camel@alap>  <go1jd3$mlv$1@ger.gmane.org>
-Date: Tue, 24 Feb 2009 13:28:24 -0700
-Message-Id: <1235507304.8911.56.camel@alap>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Re: [PATCH] add the openmoko git kernel stable branch to fso/milestone5
+References: <200902131728.08634.openembedded@haerwu.biz>
+In-Reply-To: <200902131728.08634.openembedded@haerwu.biz>
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,85 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 20:31:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 Feb 2009 20:32:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-02-24 at 20:56 +0100, Koen Kooi wrote:
-> NACK. This violates OEs versioning policy since 2.6.29-rc3 will sort 
-> higher than 2.6.29 final.
-> 
-> regards,
-> 
-> Koen
-> 
+Marcin Juszkiewicz wrote:
+> Other was to use filename as key and add "url[0-xx]" fields which will 
+> list alternative locations. This one looks better but still does not 
+> solve situation when someone use DEBIAN_MIRROR which is not present in 
+> checksums.ini file.
+>
+>   
+What about using the hashes as identifier:
 
+Something like this:
 
-Is this better ?
+filename=foo-0.13.49.tar.bz2
+url[0-xx]
+generated_url[0-xx] //or only [0-xx]
+md5=5f7b88ebb2bcd7e8044328482d079661
+sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
 
-Thanks
-Angus
+pseudo code:
+download source
+check_ok:=false
 
----
- conf/distro/include/sane-srcrevs.inc        |    1 +
- packages/linux/linux-openmoko-stable_git.bb |   33 +++++++++++++++++++++++++++
- 2 files changed, 35 insertions(+), 1 deletions(-)                             
- create mode 100644 packages/linux/linux-openmoko-stable_git.bb                
+if SRC_URI exists in url/generated_url + filename
+    do normal check
+else
+    generate md5 and sha256 sums of the source
+    look up md5 and sha256 sum
+    if both exists in the same entity
+       if filename matches filename of SRC_URI
+          check_ok:=true
+          add url to generated_urls
 
-diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-index 2f4e913..328e612 100644                                                           
---- a/conf/distro/include/sane-srcrevs.inc                                              
-+++ b/conf/distro/include/sane-srcrevs.inc                                              
-@@ -97,6 +97,7 @@ SRCREV_pn-linux-ixp4xx ?= "1085"                                      
- SRCREV_pn-linux-openmoko-2.6.24 ?= "fb42ce6724576fc173faf8abfb04aa2c36d213b7"          
- SRCREV_pn-linux-openmoko-2.6.28 ?= "34240a1c06ae36180dee695aa25bbae869b2aa26"          
- SRCREV_pn-linux-openmoko-devel ?= "34240a1c06ae36180dee695aa25bbae869b2aa26"           
-+SRCREV_pn-linux-openmoko-stable ?= "0e5fe639e234cdeb11d8441f19c5b3109a8b6a17"          
- SRCREV_pn-linux-eten ?= "ab2d414f4f13816af0ec0401b608133ca946624a"                     
- SRCREV_pn-llvm-gcc4 ?= "374"                                                           
- SRCREV_pn-llvm-gcc4-cross ?= "374"                                                     
-diff --git a/packages/linux/linux-openmoko-stable_git.bb b/packages/linux/linux-openmoko-stable_git.bb
-new file mode 100644                                                                                  
-index 0000000..a7b74b8                                                                                
---- /dev/null                                                                                         
-+++ b/packages/linux/linux-openmoko-stable_git.bb
-@@ -0,0 +1,33 @@
-+require linux.inc
-+require linux-openmoko.inc
-+
-+DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+KERNEL_RELEASE = "2.6.29"
-+KERNEL_VERSION = "${KERNEL_RELEASE}"
-+
-+OMV = "stable"
-+PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCREV}"
-+PR = "r2"
-+
-+SRC_URI = "\
-+  git://git.openmoko.org/git/kernel.git;protocol=git;branch=stable \
-+#  file://defconfig-oe.patch \
-+"
-+S = "${WORKDIR}/git"
-+
-+do_configure_prepend() {
-+       if [ ${MACHINE} = "om-gta01" ] ; then
-+               install -m 644 ./arch/arm/configs/gta01_moredrivers_defconfig ${WORKDIR}/defconfig-oe
-+       fi
-+       if [ ${MACHINE} = "om-gta02" ] ; then
-+               install -m 644 ./arch/arm/configs/gta02_packaging_defconfig ${WORKDIR}/defconfig-oe
-+       fi
-+       if [ ${MACHINE} = "om-gta03" ] ; then
-+               install -m 644 ./arch/arm/configs/gta03_defconfig ${WORKDIR}/defconfig-oe
-+       fi
-+#      cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
-+}
-+
---
-1.5.6.5
-
-
+best regards
+Bernhard Guillon
 
 
