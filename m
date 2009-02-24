@@ -1,35 +1,24 @@
-Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1LbzET-0001Ci-1X
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 16:30:05 +0100
-Received: by rv-out-0708.google.com with SMTP id l33so2483083rvb.0
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 07:27:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=hFUDyglrcOfWeI1mD8Xr9mkZjcVQYmEPLE5xJrIeZQ0=;
-	b=UEoliQgsDhD3eEk6lu71l624wSKg2vB+CxOqhCZCSApPe3S3rEdAYlSpuAI/U968Iu
-	ndyaCyNRp6uLq6RRpNlUlnqckTFIqilPLQuxZ6jTVYLJnE5HSU9ovW0aTAzuAvndBsoU
-	IZB33OPdDBiyA28VO461qx+fqa4/BffvBIH/4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=Vw0mEpGOFWMFzDMcUU0qvrp5dRrpXxBTgaG2pw6BDIou4h0qqUcx+yRNkoETB6IgDz
-	RuEnImaPilMtywKq4+HqbaCPP40ZdoWDFqHDehPpbrbTRA16Qlqc8MsLmVEqHY14AtEe
-	VNlREAPZW2HESEWdTpojVIl0ZFpqYp40o/N5U=
-MIME-Version: 1.0
-Received: by 10.141.42.10 with SMTP id u10mr2646706rvj.241.1235489222649; Tue, 
-	24 Feb 2009 07:27:02 -0800 (PST)
-In-Reply-To: <f46da1cf0902231621w553de26bkbb4773bddadfe68f@mail.gmail.com>
-References: <f46da1cf0902231621w553de26bkbb4773bddadfe68f@mail.gmail.com>
-Date: Tue, 24 Feb 2009 10:27:02 -0500
-Message-ID: <f96d234e0902240727q76e5b0aejb18c788d360fb071@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	(envelope-from <mlauer@vanille-media.de>) id 1Lbzvi-0003CC-A7
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Feb 2009 17:14:46 +0100
+Received: from [192.168.1.105] (e180190230.adsl.alicedsl.de [85.180.190.230])
+	by drlauer-research.com (Postfix) with ESMTP id D07C65847DA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2009 17:35:45 +0100 (CET)
+From: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [patch] [Doc] introduction.xml: Fix spelling of Angstrom.
+In-Reply-To: <49A3BBE0.9070404@gefanuc.com>
+References: <gmeron$e6l$1@ger.gmane.org> <gmuhki$409$1@ger.gmane.org>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF653@hiob.intern.dresearch.de>
+	<49A3BBE0.9070404@gefanuc.com>
+Organization: Vanille-Media
+Date: Tue, 24 Feb 2009 17:11:46 +0100
+Message-Id: <1235491906.27962.58.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Re: Mailinglists, was: Re: Bugtracker Status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,20 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 15:30:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 Feb 2009 16:14:46 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 23, 2009 at 7:21 PM, Theodore A. Roth <taroth@gmail.com> wrote:
-> =A0* Use character entities.
+Am Dienstag, den 24.02.2009, 09:20 +0000 schrieb Martyn Welch:
+> Sledz, Steffen wrote:
+> >> OK, Philip indicated he got confused by the proposals, so 
+> >> here's a rundown
+> >>
+> >> current situation:
+> >>
+> >> Openembedded-announce	
+> >> Openembedded-commits	
+> >> Openembedded-devel	
+> >> Openembedded-issues	
+> >> Openembedded-stablebranch
+> >> Openembedded-users
+> >> Openembedded-private
+> >>
+> >> new situation:
+> >>
+> >> openembedded-devel - for humans to post patches and ask questions
+> >> openembedded-bots - commits, bugs, logs, etc
+> >> Openembedded-private - core team
 
-Pushed.  Thanks!
+I'm ok with that in principle, but I'm not really fond of renaming
+existing mailing lists. I'd rather keep openembedded-commits intact and
+have the bugtracker send its reports there.
 
-Cliff
+>the Openembedded-users list still seems to be active. Has there been a
+>change of heart, I this thread seems to contain nothing but approval?
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Cliff Brake
-http://bec-systems.com
+It looks like all people who cared to comment are in favour of the
+changes. If you want me to do that, you have to wait until I have some
+admin-time-slots free -- probably on weekend.
+
+>Also, I haven't seen anything about this on Openembedded-users, might
+>it be worth asking the subscribers of that list how they feel about
+>this?
+
+Sounds good, can do you that, please?
+
+:M:
+
+
 
 
