@@ -1,32 +1,22 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lc3dW-0006Ww-6p
+	(envelope-from <mickey@vanille-media.de>) id 1Lc3v1-0003ri-7R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Feb 2009 21:12:14 +0100
-Received: by bwz9 with SMTP id 9so5734615bwz.12
+	Tue, 24 Feb 2009 21:30:19 +0100
+Received: from [192.168.1.105] (e180190230.adsl.alicedsl.de [85.180.190.230])
+	by drlauer-research.com (Postfix) with ESMTP id 188CA58413E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2009 12:09:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=K4O9iFNevg9omBx0zPVcnOM5/VKPJHjYom4514YiiOU=;
-	b=CH7h7j6N/4rfShl3wIO2VdVxPVXdco+NHCf/z0gXC5Rz7mFfb5PWIhs9zUIlRj4I5w
-	4uy9ecR7hUEe7aibCqToXkUz1oQ/8tGe1lTuMmoTp6Z4hjnxIuL4sZfbj8pRwO9s6nN6
-	y8r/UKdf56ARUG2FlCuzWT3pEFW9mxBGBCGs0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=HRL9jbwLd5scNxCV5+mkC37h9MxUlR+InuFZ7MW++H73B5SAtRzUZaGviW9/a/XtY0
-	zQn81CH91HdR2h230PBmbROxKQ78agN8JwwVSWc76R+VYpWffaIcTIa0CCflXoraqJDE
-	AY2KJWZOekp5ynvukonnMsrHvUYMVY3VnVOIc=
-MIME-Version: 1.0
-Received: by 10.223.105.9 with SMTP id r9mr52061fao.66.1235506147947; Tue, 24 
-	Feb 2009 12:09:07 -0800 (PST)
-Date: Tue, 24 Feb 2009 21:09:07 +0100
-Message-ID: <ac9c93b10902241209l692eebe3n26da3e66dae7bea3@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 24 Feb 2009 21:51:18 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] [Doc] getting_oe.xml: Update documentation.
+In-Reply-To: <go1jd3$mlv$1@ger.gmane.org>
+References: <1235501736.8911.52.camel@alap>  <go1jd3$mlv$1@ger.gmane.org>
+Organization: Vanille-Media
+Date: Tue, 24 Feb 2009 21:27:15 +0100
+Message-Id: <1235507235.2621.6.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Re: [PATCH] add the openmoko git kernel stable branch to fso/milestone5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 20:12:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 Feb 2009 20:30:19 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
->
-> On Tue, Feb 24, 2009 at 7:23 AM, Cliff Brake <cliff.brake@gmail.com> wrot=
-e:
->> Thanks for the patch. ?Can you reply with the no line wraps, or attach
->> the patch to an email as the following is corrupt?
->
-> Patch included as an attachment.
->
-> I have also been pushing my changes to the troth-doc branch here:
->
-> =A0http://github.com/troth/oe-ts7xxx/tree/troth-doc
->
->>
->> I also have not figured out a good way to easily send patches through
->> gmail, so let me know when you figure it out :-)
->
-> I don't think it is possible. Gmail is "too smart" for us. :-)
+Am Dienstag, den 24.02.2009, 20:56 +0100 schrieb Koen Kooi:
+> On 24-02-09 19:55, Angus Ainslie wrote:
+> 
+> > +KERNEL_RELEASE = "2.6.29-rc3"
+> > +KERNEL_VERSION = "${KERNEL_RELEASE}"
+> > +
+> > +OMV = "stable"
+> > +PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCREV}"
+> 
+> NACK. This violates OEs versioning policy since 2.6.29-rc3 will sort 
+> higher than 2.6.29 final.
 
-It is possible with gmail, but not with the web interface.
-I've submitted patches to LKML through gmail.
-Just follow Documentation/email-clients.txt
+Right.
 
-In my case I used alpine to send the message, make sure you disable wrappin=
-g.
+Angus, I'd just keep 2.6.28+whatever. I don't think it's that relevant
+which rc is the baseline of this version.
 
-FM.
+If you disagree, just go with 2.6.28+2.6.29rc3.
+
+In general, the format is <stable>+<devel> until <devel> has become
+final. This (and all the other policies) should be in the Wiki. If not,
+please alert us and we'll add them.
+
+Cheers,
+
+-- 
+:M:
+
 
 
