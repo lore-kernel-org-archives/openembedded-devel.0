@@ -1,25 +1,27 @@
-Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LboFo-0005zt-26
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Feb 2009 04:46:44 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KFJ00EQYX0VCPNS@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	23 Feb 2009 21:43:44 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0AB226B83B5; Mon,
-	23 Feb 2009 22:43:43 -0500 (EST)
-Date: Mon, 23 Feb 2009 22:43:42 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090224034342.GA14034@denix.org>
-References: <1235372951.19710.3.camel@ubuntu2>
-	<5c5e5c350902222346n632f3598vbc3965761c58229b@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <5c5e5c350902222346n632f3598vbc3965761c58229b@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Machine for Dual Core
+	(envelope-from <trini@kernel.crashing.org>) id 1Lbr6w-0005if-0g
+	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 07:49:46 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090224064639.ONLB2948.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 24 Feb 2009 01:46:39 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id Kimf1b0084dMFYL04imfFh; Tue, 24 Feb 2009 01:46:39 -0500
+X-Authority-Analysis: v=1.0 c=1 a=_qgFuyByEGCj-mRECM4A:9
+	a=mTdydqthOHHX8U15m0T_MVJ788kA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Mon, 23 Feb 2009 23:46:39 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090224064639.GE2172@smtp.west.cox.net>
+References: <200902131728.08634.openembedded@haerwu.biz>
+MIME-Version: 1.0
+In-Reply-To: <200902131728.08634.openembedded@haerwu.biz>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 03:46:44 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 24 Feb 2009 06:49:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Feb 23, 2009 at 08:46:06AM +0100, Elena of Valhalla wrote:
-> On Mon, Feb 23, 2009 at 8:09 AM, Paolo Cremonese <pisa.t@teledata-i.com> wrote:
-> > what type of "machine" have I to use to build an image for a Pentium
-> > Dual Core?
+On Fri, Feb 13, 2009 at 05:28:08PM +0100, Marcin Juszkiewicz wrote:
+
 > 
-> i586-generic will run, is currently working (unlike AFAIK i686) and
-> could do if you're using it for tests
+> Hi
+> 
+> It is nearly two years since conf/checksums.ini was introduced. We 
+> populated it with over 6000 entries during that time (mostly by 
+> automatic fetching of all source on CELF and EWI machines). But there 
+> are problems with it's format.
 
-Please be more specific. i686-generic/Angstrom work fine here. There were 
-issues with glibc, fixed by 0f1aa27588234f2ecce8d52af478c44fa2c0d9a3
+I'm going to make a different suggestion.  Lets just drop it.  Part of
+why I say this is that we went back on it being a mandatory thing
+because it was a burden.  And we're already back to adding stuff without
+checksums again (gstreamer, libdaemon on this build so far..).  And, is
+anyone doing more then 'cat tmp/checksums.ini >>
+openembedded/conf/checksums.ini && python the-sorter' ?  And by more I
+mean check for an upstream .md5 or similar, to make sure this is really
+right?
 
-By default, i686-generic will optimize for PentiumPro, but there are tune-* 
-files for other variants, including Prescott and Nocona...
+Perhaps we're going about this wrong.  Perhaps we want to see if from
+upstream we can get ${URI}.md5, .md5sum .sha1 or any of the other
+standard mechanisms and seeing if we get that as a match (and
+pre-seeding ourselves with just the hashes for the tools that check
+hashes).
+
+Oh, and in the 5 minutes the above took to write, gst-plugins-base
+failed to have a checksum too.
 
 -- 
-Denys
+Tom Rini
 
 
