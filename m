@@ -1,30 +1,51 @@
-Received: from [209.85.200.170] (helo=wf-out-1314.google.com)
+Received: from [74.125.92.146] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <taroth@gmail.com>) id 1Lc1dH-0000YG-2E
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 19:03:51 +0100
-Received: by wf-out-1314.google.com with SMTP id 25so2713569wfc.6
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 10:00:47 -0800 (PST)
+	(envelope-from <otavio.salvador@gmail.com>) id 1Lc1e3-0000a1-6Y
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Feb 2009 19:04:39 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so907750qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2009 10:01:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=gc2hBUrKtOl1foOSg2SDtKY04075MT0U1UrAXb6sdG4=;
-	b=vl72qYZhAvHSdch/Sw5h9gykQzhl8qVoT3UDMQ6OT+HYlGscSXXOa5STpyePVsSr51
-	LIwaWk6PPOixUJHwwBS6TiAQw5dNvRWR3XNgGDsCasqZFikC64Z+wiFHEysXmytKdOno
-	3CtX7RwzOExvdAz8JaYiXDQ/fJKG5fxOUGWUc=
+	h=domainkey-signature:received:received:sender:received:from:to
+	:subject:organization:references:user-agent:x-url:x-attribution:date
+	:in-reply-to:message-id:mime-version:content-type;
+	bh=yG+yzH50imZdDPbffT9PrEv90AvJ4aqKRtB0zFhst3U=;
+	b=X0RGzCV2lBpIRRM0IjdKH37TD6wlGBjwHfkVAwXHPbJI8u9TQ21+4fcV3MMdszyPKl
+	2iYo4iu0GCo9TBtXoniroFYlu7HI2t7LcUkg5A11G55tOiLHXjyoVFcetINHS9xMCDYM
+	K8mjwdBULlVlNVXT4+7HnpHbR+ViroF+D6Ljg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=ovAuFGo87MYc+YTGX3eO8mfjEz4yJvifZQ4jVRh7zBmMt1J3JaLyrDKt6SBSe4fkup
-	9cTWNk6oMsBd8nS4Rx3uPnOJmpJMhvIWwPNAngmvUyl8S/oIhhVmBhXTNwj9bvsUblDx
-	VPaQLzfxc8h4bJn6HkgWg4TFbRARKSsfgWghg=
+	h=sender:from:to:subject:organization:references:user-agent:x-url
+	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
+	b=YECpOj6aW5pfQiQ4qzetpo/fdW5Yo4DpBcwoS16C0mh6n9aOmQ8apliidtuEMvF6BZ
+	DE00SgiW92sACqaeA6mz1SkBcCZSf0BkonSiwAYaQ2XwzV9JaN5PfZ4oa7cphtF3zmCt
+	6/+SMLNYEJNqjRMiUK+fk6ofGkiOsPxHy54Fs=
+Received: by 10.224.2.75 with SMTP id 11mr7306qai.262.1235498495941;
+	Tue, 24 Feb 2009 10:01:35 -0800 (PST)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id 5sm3113668qwg.54.2009.02.24.10.01.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 24 Feb 2009 10:01:35 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 63A446100F6; Tue, 24 Feb 2009 15:01:30 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Organization: O.S. Systems Ltda.
+References: <200902131728.08634.openembedded@haerwu.biz>
+	<20090224064639.GE2172@smtp.west.cox.net>
+	<1235492001.27962.60.camel@andromeda>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
+	(x86_64-pc-linux-gnu)
+X-URL: http://www.ossystems.com.br/
+X-Attribution: O.S.
+Date: Tue, 24 Feb 2009 15:01:30 -0300
+In-Reply-To: <1235492001.27962.60.camel@andromeda> (Michael Lauer's message of
+	"Tue, 24 Feb 2009 17:13:21 +0100")
+Message-ID: <8763izyarp.fsf@neumann.lab.ossystems.com.br>
 MIME-Version: 1.0
-Received: by 10.142.194.1 with SMTP id r1mr2648823wff.122.1235498447555; Tue, 
-	24 Feb 2009 10:00:47 -0800 (PST)
-Date: Tue, 24 Feb 2009 10:00:47 -0800
-Message-ID: <f46da1cf0902241000k63e1e12aobcb824679f7b7085@mail.gmail.com>
-From: "Theodore A. Roth" <taroth@gmail.com>
-To: openembedded-devel@openembedded.org
-Subject: [PATCH] [Doc] getting_oe.xml: Update getting openembedded section.
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,103 +59,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 18:03:51 -0000
-X-Groupsio-MsgNum: 7910
-Content-Type: multipart/mixed; boundary=000e0cd14ed8164c850463ade6a8
+X-List-Received-Date: Tue, 24 Feb 2009 18:04:39 -0000
+Content-Type: text/plain; charset=us-ascii
 
---000e0cd14ed8164c850463ade6a8
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Michael 'Mickey' Lauer <mlauer@vanille-media.de> writes:
 
-Update manual to talk about git instead of monotone.
+> Am Montag, den 23.02.2009, 23:46 -0700 schrieb Tom Rini:
+>> I'm going to make a different suggestion.  Lets just drop it. 
+>
+> I'm in favour of this. I don't think they give us the safety we want and
+> they introduce more inconvenience.
 
-Patch is attached and available here:
+After reading the thread I'm also in favour of this.
 
-  http://github.com/troth/oe-ts7xxx/commit/76152d0a2ae5eb0c8eb9f80f0bebac315baf1a09
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
-Signed-off-by: Theodore A. Roth <taroth@gmail.com>
 
-Ted Roth
-
---000e0cd14ed8164c850463ade6a8
-Content-Type: text/x-diff; charset=US-ASCII; 
-	name="0003-getting_oe.xml-Update-getting-openembedded-section.patch"
-Content-Disposition: attachment; 
-	filename="0003-getting_oe.xml-Update-getting-openembedded-section.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_frkvrcxn1
-
-RnJvbSA3NjE1MmQwYTJhZTVlYjBjOGViOWY4MGYwYmViYWMzMTViYWYxYTA5IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBUaGVvZG9yZSBBLiBSb3RoIDx0cm90aEBvcGVuYXZyLm9yZz4K
-RGF0ZTogTW9uLCAyMyBGZWIgMjAwOSAxODo0Nzo0NyAtMDgwMApTdWJqZWN0OiBbUEFUQ0hdIGdl
-dHRpbmdfb2UueG1sOiBVcGRhdGUgZ2V0dGluZyBvcGVuZW1iZWRkZWQgc2VjdGlvbi4KCi0tLQog
-dXNlcm1hbnVhbC9jaGFwdGVycy9nZXR0aW5nX29lLnhtbCB8ICAgNjAgKysrKysrKysrKysrKysr
-KysrKysrKysrKy0tLS0tLS0tLS0KIDEgZmlsZXMgY2hhbmdlZCwgNDMgaW5zZXJ0aW9ucygrKSwg
-MTcgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvdXNlcm1hbnVhbC9jaGFwdGVycy9nZXR0aW5n
-X29lLnhtbCBiL3VzZXJtYW51YWwvY2hhcHRlcnMvZ2V0dGluZ19vZS54bWwKaW5kZXggYzdlYjdl
-Yy4uNjliOTEyNiAxMDA2NDQKLS0tIGEvdXNlcm1hbnVhbC9jaGFwdGVycy9nZXR0aW5nX29lLnht
-bAorKysgYi91c2VybWFudWFsL2NoYXB0ZXJzL2dldHRpbmdfb2UueG1sCkBAIC05MiwyNCArOTIs
-NTAgQEAgJCA8Y29tbWFuZD5zdm48L2NvbW1hbmQ+IGNvIHN2bjovL3N2bi5iZXJsaW9zLmRlL2Jp
-dGJha2UvYnJhbmNoZXMvYml0YmFrZS0xLjgvIGIKICAgPHNlY3Rpb24gaWQ9ImdldHRpbmdvZV9n
-ZXR0aW5nX29lIj4KICAgICA8dGl0bGU+R2V0dGluZyBPcGVuRW1iZWRkZWQ8L3RpdGxlPgogCisg
-ICAgPHBhcmE+PGVtcGhhc2lzPk5vdGU6PC9lbXBoYXNpcz4gT25jZSB1cG9uIGEgdGltZSBPcGVu
-RW1iZWRkZWQgdXNlZAorICAgICAgTW9ub3RvbmUgZm9yIHZlcnNpb24gY29udHJvbC4gSWYgeW91
-IGhhdmUgYW4gT0UgTW9ub3RvbmUgcmVwb3NpdG9yeSBvbgorICAgICAgeW91ciBjb21wdXRlciwg
-eW91IHNob3VsZCByZXBsYWNlIGl0IHdpdGggdGhlIEdpdCByZXBvc2l0b3J5LjwvcGFyYT4KKwog
-ICAgIDxwYXJhPlRoZSBPcGVuRW1iZWRkZWQgbWV0YWRhdGEgaGFzIGEgaGlnaCByYXRlIG9mIGRl
-dmVsb3BtZW50LCBzbyBpdCdzIGEKLSAgICBnb29kIGlkZWEgdG8gc3RheSB1cCB0byBkYXRlLiBZ
-b3UnbGwgbmVlZCBtb25vdG9uZSAwLjI4IHRvIGdldCB0aGUKLSAgICBtZXRhZGF0YSBhbmQgc3Rh
-eSB1cCB0byBkYXRlLiBNb25vdG9uZSBpcyBhdmFpbGFibGUgaW4gbW9zdCBkaXN0cmlidXRpb25z
-Ci0gICAgYW5kIGhhcyBiaW5hcmllcyBhdCA8dWxpbmsgdXJsPSJodHRwOi8vdmVuZ2UubmV0L21v
-bm90b25lLyI+TW9ub3RvbmUKLSAgICBob21lcGFnZTwvdWxpbms+LjwvcGFyYT4KLQotICAgIDxw
-YXJhPk5leHQgc3RlcCBpcyBnZXR0aW5nIHNuYXBzaG90IG9mIGRhdGFiYXNlLiA8c2NyZWVuPgot
-d2dldCBodHRwOi8vb3BlbmVtYmVkZGVkLm9yZy9zbmFwc2hvdHMvT0UubXRuLmJ6MiBodHRwOi8v
-b3BlbmVtYmVkZGVkLm9yZy9zbmFwc2hvdHMvT0UubXRuLmJ6Mi5tZDUKLTwvc2NyZWVuPiBPciBp
-ZiB5b3UgaGF2ZSBtb25vdG9uZSAwLjMwIG9yIGxhdGVyOiA8c2NyZWVuPgotd2dldCBodHRwOi8v
-d3d3Lm9wZW5lbWJlZGRlZC5vcmcvc25hcHNob3RzL09FLXRoaXMtaXMtZm9yLW10bi0wLjMwLm10
-bi5iejIgCi13Z2V0IGh0dHA6Ly93d3cub3BlbmVtYmVkZGVkLm9yZy9zbmFwc2hvdHMvT0UtdGhp
-cy1pcy1mb3ItbXRuLTAuMzAubXRuLmJ6Mi5tZDUKLTwvc2NyZWVuPiBUaGVuIHZlcmlmeSBpbnRl
-Z3JpdHkgb2Ygc25hcHNob3QgYnkgY2hlY2tpbmcgbWQ1c3VtLiA8c2NyZWVuPgotbWQ1c3VtIC1j
-IE9FLm10bi5iejIubWQ1c3VtCi08L3NjcmVlbj4gVGhlbiB1bnBhY2sgZGF0YWJhc2UuIDxzY3Jl
-ZW4+Ci1idW56aXAgT0UubXRuLmJ6MgotPC9zY3JlZW4+IEZpbmFsbHkgY2hlY2tvdXQgdGhlIGRl
-dmVsb3BtZW50IGJyYW5jaC4gPHNjcmVlbj4KLW10biAtLWRiPU9FLm10biBjbyAtYiBvcmcub3Bl
-bmVtYmVkZGVkLmRldgotPC9zY3JlZW4+PC9wYXJhPgorICAgICAgZ29vZCBpZGVhIHRvIHN0YXkg
-dXAgdG8gZGF0ZS4gWW91J2xsIG5lZWQgR2l0IHRvIGdldCB0aGUgbWV0YWRhdGEgYW5kCisgICAg
-ICBzdGF5IHVwIHRvIGRhdGUuIEdpdCBpcyBhdmFpbGFibGUgaW4gbW9zdCBkaXN0cmlidXRpb25z
-IGFuZCBoYXMgYmluYXJpZXMKKyAgICAgIGF0IDx1bGluayB1cmw9Imh0dHA6Ly9naXQtc2NtLmNv
-bS8iPkdpdCBob21lcGFnZTwvdWxpbms+LjwvcGFyYT4KKworICAgIDxzZWN0aW9uPjx0aXRsZT5D
-aGVja2luZyBPdXQgT3BlbkVtYmVkZGVkIFdpdGggR2l0PC90aXRsZT4KKyAgICAgIDxwYXJhPk9u
-Y2UgeW91IGhhdmUgaW5zdGFsbGVkIEdpdCwgY2hlY2tvdXQgdGhlIE9wZW5FbWJlZGRlZCByZXBv
-c2l0b3J5OgorICAgICAgICA8c2NyZWVuPgorJCBjZCAkT0VCQVNFCiskIGdpdCBjbG9uZSBnaXQ6
-Ly9naXQub3BlbmVtYmVkZGVkLm5ldC9vcGVuZW1iZWRkZWQ8L3NjcmVlbj4KKyAgICAgICAgVGhl
-IDxsaXRlcmFsPiRPRUJBU0Uvb3BlbmVtYmVkZGVkLzwvbGl0ZXJhbD4gZGlyZWN0b3J5IHNob3Vs
-ZCBub3cKKyAgICAgICAgZXhpc3QuPC9wYXJhPgorICAgIDwvc2VjdGlvbj4KKworICAgIDxzZWN0
-aW9uPjx0aXRsZT5VcGRhdGluZyBPcGVuRW1iZWRkZWQ8L3RpdGxlPgorICAgICAgPHBhcmE+VGhl
-IDxsaXRlcmFsPm9yZy5vcGVuZW1iZWRkZWQuZGV2PC9saXRlcmFsPiBicmFuY2ggb2YgT3BlbkVt
-YmVkZGVkCisgICAgICAgIGlzIHVwZGF0ZWQgdmVyeSBmcmVxdWVudGx5IChhcyBtdWNoIGFzIHNl
-dmVyYWwgdGltZXMgYW4gaG91cikuIFRoZQorICAgICAgICBkaXN0cm8gYnJhbmNoZXMgYXJlIG5v
-dCB1cGRhdGVkIGFzIG11Y2ggYnV0IHN0aWxsIGZhaXJseSBvZnRlbi4gSXQKKyAgICAgICAgc2Vl
-bXMgZ29vZCBwcmFjdGljZSB0byB1cGRhdGUgeW91ciBPcGVuRW1iZWRkZWQgdHJlZSBhdCBsZWFz
-dAorICAgICAgICBkYWlseS4gVG8gZG8gdGhpcywgcnVuOgorICAgICAgICA8c2NyZWVuPgorJCBj
-ZCAkT0VCQVNFCiskIGdpdCBwdWxsPC9zY3JlZW4+CisgICAgICA8L3BhcmE+CisgICAgPC9zZWN0
-aW9uPgorICAgIDxzZWN0aW9uPjx0aXRsZT5DaGFuZ2luZyBCcmFuY2hlczwvdGl0bGU+CisgICAg
-ICA8cGFyYT5Xb3JraW5nIHdpdGggbXVsdGlwbGUgYnJhbmNoZXMgaXMgdmVyeSBlYXN5IHRvIGRv
-IHdpdGggR2l0LiBUaGUKKyAgICAgICAgT3BlbkVtYmVkZGVkIHJlcG9zaXRvcnkgaG9sZHMgbWFu
-eSBicmFuY2hlcy4gVG8gbGlzdCBhbGwgYnJhbmNoZXMsIHVzZSB0aGlzIGNvbW1hbmQ6CisgICAg
-ICAgIDxzY3JlZW4+JCBnaXQgYnJhbmNoIC1hPC9zY3JlZW4+CisgICAgICAgIEJyYW5jaCBuYW1l
-cyB0aGF0IGJlZ2luIHdpdGggPGxpdGVyYWw+b3JpZ2luLzwvbGl0ZXJhbD4gZGVub3RlCisgICAg
-ICAgIGJyYW5jaGVzIHRoYXQgZXhpc3Qgb24gdGhlIHJlbW90ZSBzZXJ2ZXIuIFRoZSBuYW1lIHdp
-dGggYSAqIGluIGZyb250CisgICAgICAgIG9mIGl0IGlzIHRoZSBicmFuY2ggY3VycmVudGx5IGNo
-ZWNrZWQgb3V0LiBJZiB5b3Ugd2FudCB0byB3b3JrIHdpdGggYQorICAgICAgICByZW1vdGUgYnJh
-bmNoLCB5b3UgbXVzdCBmaXJzdCBjcmVhdGUgYSBsb2NhbCBjb3B5IG9mIGl0LiBUaGUgZm9sbG93
-aW5nCisgICAgICAgIGNvbW1hbmQgd2lsbCBjcmVhdGUgYSBsb2NhbCBjb3B5IG9mIGEgcmVtb3Rl
-IGJyYW5jaDoKKyAgICAgICAgPHNjcmVlbj4kIGdpdCBicmFuY2ggJmx0O2xvY2FsX25hbWUmZ3Q7
-ICZsdDtyZW1vdGVfbmFtZSZndDs8L3NjcmVlbj4KKyAgICAgICAgVG8gY2hhbmdlIGJyYW5jaGVz
-LCB1c2UgdGhpcyBjb21tYW5kOgorICAgICAgICA8c2NyZWVuPiQgZ2l0IGNoZWNrb3V0ICZsdDti
-cmFuY2hfbmFtZSZndDs8L3NjcmVlbj4KKyAgICAgICAgVGhlcmUgYXJlIG1vcmUgY29tcGxpY2F0
-ZWQgYnJhbmNoIG9wZXJhdGlvbnMgdGhhdCBjYW4gYmUgZG9uZSB3aXRoIGdpdCwKKyAgICAgICAg
-YnV0IHRob3NlIGFyZSBiZXlvbmQgdGhlIHNjb3BlIG9mIHRoaXMgZG9jdW1lbnQuPC9wYXJhPgor
-ICAgIDwvc2VjdGlvbj4KICAgPC9zZWN0aW9uPgogCiAgIDxzZWN0aW9uIGlkPSJnZXR0aW5nb2Vf
-Y29uZmlndXJpbmdfb2UiPgotLSAKMS41LjQuMwoK
-
---000e0cd14ed8164c850463ade6a8--
