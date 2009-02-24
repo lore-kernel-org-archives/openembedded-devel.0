@@ -1,34 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.200.169] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lc0be-0001sb-D3
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 17:58:06 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1Lc0Yg-0004Bj-I7
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 16:55:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 16:55:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 16:55:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 24 Feb 2009 17:53:45 +0100
-Message-ID: <go18mp$64n$2@ger.gmane.org>
-References: <f46da1cf0902201818r3fcf3432oc14929b5f455bbe7@mail.gmail.com>	<f96d234e0902240651r7ad36677h8e828964308e2b50@mail.gmail.com>	<1235492099.27962.62.camel@andromeda>
-	<f96d234e0902240837l234c10cdw443d3b4c64f81084@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <f96d234e0902240837l234c10cdw443d3b4c64f81084@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: RFC: Importing docs directory to org.oe.dev.
+	(envelope-from <taroth@gmail.com>) id 1Lc1Xj-0000L7-NX
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Feb 2009 18:58:08 +0100
+Received: by wf-out-1314.google.com with SMTP id 28so3052100wff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2009 09:55:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=94UgXFOExCBPNVdPpmhUhoB1xG8lT7iVvIySwTEdfP8=;
+	b=Xl5JkY9K59a2Hw7fWT95502eMqM4L1bfd5FsC4Xr3Vq9VJvymJKJ1YhhEpZYSly6D/
+	Dzws25Hrrv0tP9r6bOJD7HZSEw556NbRqpMaJA2w56/tUvLheakFxDeeouoHBH2H3/Kc
+	I4niXTbckop/SCpfWqmVb4G4O7DlBzqTzU2UM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Y+NxJ02yiJWsk1nURmIipycQTA/VzEACPrW7+NcP+rK3qe8yc5jFRuyifrXgm8NyrM
+	WNawvbAFg7nISU94Vq8WkFTlEmlnOqd7sumN3DtXI/I+nBID/g5oVy+ytbL1Bj4sXE7B
+	7zuejSJkE4p76T7Ygo7BPispN5RBW2qNFLon0=
+MIME-Version: 1.0
+Received: by 10.142.82.13 with SMTP id f13mr2639101wfb.290.1235498104365; Tue, 
+	24 Feb 2009 09:55:04 -0800 (PST)
+In-Reply-To: <f96d234e0902240723v2d407d17h4dc8dd2a634bc1d9@mail.gmail.com>
+References: <f46da1cf0902231625m260a7361ka4d8149040054972@mail.gmail.com>
+	<f96d234e0902240723v2d407d17h4dc8dd2a634bc1d9@mail.gmail.com>
+Date: Tue, 24 Feb 2009 09:55:04 -0800
+Message-ID: <f46da1cf0902240955l76fb0beh16492117215be1f0@mail.gmail.com>
+From: "Theodore A. Roth" <taroth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] [Doc] getting_oe.xml: Update documentation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +43,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 16:58:06 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Feb 2009 17:58:08 -0000
+X-Groupsio-MsgNum: 7909
+Content-Type: multipart/mixed; boundary=001636e90e87a1a1110463add108
 
-On 24-02-09 17:37, Cliff Brake wrote:
-> On Tue, Feb 24, 2009 at 11:14 AM, Michael 'Mickey' Lauer
-> <mlauer@vanille-media.de>  wrote:
->> I want to propose importing the documentation into the org.oe.dev
->> branch, notably in the docs directly.
+--001636e90e87a1a1110463add108
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Feb 24, 2009 at 7:23 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> Thanks for the patch. =A0Can you reply with the no line wraps, or attach
+> the patch to an email as the following is corrupt?
+
+Patch included as an attachment.
+
+I have also been pushing my changes to the troth-doc branch here:
+
+  http://github.com/troth/oe-ts7xxx/tree/troth-doc
+
 >
-> Sounds good to me.  It is a minuscule amount of data -- no reason to
-> have it separate.
+> I also have not figured out a good way to easily send patches through
+> gmail, so let me know when you figure it out :-)
 
-It was kept seperate to allow docs write access to the docs, but not to 
-the main repository. If we are OK with given docs writes global access, 
-please import the docs.
-Personally I dislike having a 200MB git repo for a few kiB of docs, but 
-then again, my 1TB disk just arrived :)
-
-regards,
-
-Koen
+I don't think it is possible. Gmail is "too smart" for us. :-)
 
 
+Ted Roth
 
+--001636e90e87a1a1110463add108
+Content-Type: text/x-diff; charset=US-ASCII; 
+	name="0002-getting_oe.xml-Update-documentation.patch"
+Content-Disposition: attachment; 
+	filename="0002-getting_oe.xml-Update-documentation.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_frkvmmsp0
+
+RnJvbSBjYTlhMzNlNWNjOGQxNjUyMjk4Y2Y4MmE4NDQxYWQ2ZDY1NjcxYWYwIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBUaGVvZG9yZSBBLiBSb3RoIDx0cm90aEBvcGVuYXZyLm9yZz4K
+RGF0ZTogTW9uLCAyMyBGZWIgMjAwOSAxNjoxMzozNSAtMDgwMApTdWJqZWN0OiBbUEFUQ0hdIGdl
+dHRpbmdfb2UueG1sOiBVcGRhdGUgZG9jdW1lbnRhdGlvbi4KICogTmV3IHNlY3Rpb24gYWJvdXQg
+ZGlyZWN0b3J5IHN0cnVjdHVyZS4KICogVXBkYXRlICdHZXR0aW5nIEJpdEJha2UnIHNlY3Rpb24u
+CgotLS0KIHVzZXJtYW51YWwvY2hhcHRlcnMvZ2V0dGluZ19vZS54bWwgfCAgMTAzICsrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrLS0tLS0tLQogMSBmaWxlcyBjaGFuZ2VkLCA4MyBpbnNlcnRp
+b25zKCspLCAyMCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS91c2VybWFudWFsL2NoYXB0ZXJz
+L2dldHRpbmdfb2UueG1sIGIvdXNlcm1hbnVhbC9jaGFwdGVycy9nZXR0aW5nX29lLnhtbAppbmRl
+eCA5MjM4ZTRmLi5jN2ViN2VjIDEwMDY0NAotLS0gYS91c2VybWFudWFsL2NoYXB0ZXJzL2dldHRp
+bmdfb2UueG1sCisrKyBiL3VzZXJtYW51YWwvY2hhcHRlcnMvZ2V0dGluZ19vZS54bWwKQEAgLTIs
+MzAgKzIsOTMgQEAKIDxjaGFwdGVyIGlkPSJjaGFwdGVyX2dldHRpbmdfb2UiPgogICA8dGl0bGU+
+R2V0dGluZyBTdGFydGVkPC90aXRsZT4KIAorICA8c2VjdGlvbiBpZD0iZ2V0dGluZ29lX2RpcmVj
+dG9yeV9zZXR1cCI+CisgICAgPHRpdGxlPk9wZW5FbWJlZGRlZCBEaXJlY3RvcnkgU3RydWN0dXJl
+PC90aXRsZT4KKworICAgIDxwYXJhPkJlZm9yZSB5b3UgYmVnaW4gZG93bmxvYWRpbmcgT3BlbkVt
+YmVkZGVkLCB5b3UgbmVlZCB0byBzZXR1cCB5b3VyCisgICAgd29ya2luZyBlbnZpcm9ubWVudC48
+L3BhcmE+CisKKwk8cGFyYT5UaGUgZmlyc3Qgc3RlcCBpcyB0byBkZWNpZGUgd2hlcmUgb24geW91
+ciBzeXN0ZW0geW91IHdpc2ggdG8KKyAgICB3b3JrLiBUaGlzIGRvY3VtZW50IHdpbGwgdXNlIHRo
+ZSA8dmFybmFtZT4kT0VCQVNFPC92YXJuYW1lPiB2YXJpYWJsZSB0bworICAgIGRlbm90ZSB0aGUg
+YmFzZSBkaXJlY3Rvcnkgb2YgdGhlIE9wZW5FbWJlZGRlZCBlbnZpcm9ubWVudC4gRm9yCisgICAg
+ZXhhbXBsZSwgPHZhcm5hbWU+JE9FQkFTRTwvdmFybmFtZT4gY291bGQKKyAgICBiZSA8bGl0ZXJh
+bD4vaG9tZS9qb2Uvd29yay9vZTwvbGl0ZXJhbD4uPC9wYXJhPgorCisgICAgPHBhcmE+VGhlIGJh
+c2UgZGlyZWN0b3J5IG9mIHlvdXIgT3BlbkVtYmVkZGVkIGVudmlyb25tZW50CisgICAgKDx2YXJu
+YW1lPiRPRUJBU0U8L3Zhcm5hbWU+KSBpcyB0aGUgbG9jYXRpb24gd2hlcmUgc291cmNlcyB3aWxs
+IGJlIGNoZWNrZWQKKyAgICBvdXQgKG9yIHVucGFja2VkKS4gWW91IG11c3QgY2hvb3NlIGEgbG9j
+YXRpb24gd2l0aCA8ZW1waGFzaXM+bm8gc3ltbGlua3MKKyAgICBhYm92ZSBpdDwvZW1waGFzaXM+
+LjwvcGFyYT4KKworCTxwYXJhPlRvIGNyZWF0ZSB0aGUgZGlyZWN0b3J5IHN0cnVjdHVyZToKKwor
+ICAgIDxzY3JlZW4+CiskIG1rZGlyIC1wICRPRUJBU0UvYnVpbGQvY29uZgorJCBjZCAkT0VCQVNF
+PC9zY3JlZW4+CisKKwlUaGUgPGxpdGVyYWw+JE9FQkFTRS9idWlsZDwvbGl0ZXJhbD4gZGlyZWN0
+b3J5IHdpbGwgY29udGFpbiB5b3VyCisJbG9jYWwgY29uZmlndXJhdGlvbnMgYW5kIGV4dGVuc2lv
+bnMgdG8gdGhlIE9wZW5FbWJlZGRlZCBzeXN0ZW0gd2hpY2ggYWxsb3cKKwl5b3UgdG8gYnVpbGQg
+eW91ciBhcHBsaWNhdGlvbnMgYW5kIGltYWdlcy4KKyAgICA8L3BhcmE+CisKKwk8cGFyYT5UaGUg
+PHZhcm5hbWU+JE9FQkFTRTwvdmFybmFtZT4gd2lsbCBhbHNvIGNvbnRhaW4gYm90aCBiaXRiYWtl
+LyBhbmQKKwlvcGVuZW1iZWRkZWQvIGRpcmVjdG9yaWVzLiBUaGVzZSB3aWxsIGJlIGRpc2N1c3Nl
+ZCBpbgorCTx4cmVmIGxpbmtlbmQ9ImdldHRpbmdvZV9nZXR0aW5nX2JpdGJha2UiLz4gYW5kCisJ
+PHhyZWYgbGlua2VuZD0iZ2V0dGluZ29lX2dldHRpbmdfb2UiLz4uCisJPC9wYXJhPgorICA8L3Nl
+Y3Rpb24+CisKICAgPHNlY3Rpb24gaWQ9ImdldHRpbmdvZV9nZXR0aW5nX2JpdGJha2UiPgogICAg
+IDx0aXRsZT5HZXR0aW5nIDxhcHBsaWNhdGlvbj5CaXRCYWtlPC9hcHBsaWNhdGlvbj48L3RpdGxl
+PgogCi0gICAgPHBhcmE+VGhlIHJlcXVpcmVkIHZlcnNpb24gb2YgPGFwcGxpY2F0aW9uPkJpdEJh
+a2U8L2FwcGxpY2F0aW9uPiBpcwotICAgIGNoYW5naW5nIHJhcGlkbHkuIEF0IHRoZSB0aW1lIG9m
+IHdyaXRpbmcgKGVuZCAyMDA3KQotICAgIDxhcHBsaWNhdGlvbj5CaXRCYWtlPC9hcHBsaWNhdGlv
+bj4gMS44LmxhdGVzdCB3YXMgcmVxdWlyZWQuPC9wYXJhPgotCi0gICAgPHBhcmE+QSBzYWZlIG1l
+dGhvZCBpcyB0byBnZXQgdGhlIDxhcHBsaWNhdGlvbj5CaXRCYWtlPC9hcHBsaWNhdGlvbj4gZnJv
+bQotICAgIGEgc3RhYmxlIFN1YnZlcnNpb24gYnJhbmNoICh0aG9zZSB3aXRoIGFuIGV2ZW4gbWlu
+b3IgbnVtYmVyKS4gPHNjcmVlbj4KLTxjb21tYW5kPnN2bjwvY29tbWFuZD4gY28gaHR0cDovL3N2
+bi5iZXJsaW9zLmRlL3N2bnJvb3QvcmVwb3MvYml0YmFrZS9icmFuY2hlcy9iaXRiYWtlLTEuOAot
+Li4uCi1BICAgYml0YmFrZS0xLjgvY2xhc3Nlcy9iYXNlLmJiY2xhc3MKLVUgICBiaXRiYWtlLTEu
+OAotQXQgcmV2aXNpb24gODI3LgotICAgICAgICAgICAgPC9zY3JlZW4+IDxhcHBsaWNhdGlvbj5C
+aXRCYWtlPC9hcHBsaWNhdGlvbj4gaXMgY2hlY2tlZCBvdXQgbm93OwotICAgIHRoaXMgY29tcGxl
+dGVzIHRoZSBmaXJzdCBhbmQgbW9zdCBjcml0aWNhbCBkZXBlbmRlbmN5IG9mIE9wZW5FbWJlZGRl
+ZC4KLSAgICBJc3N1aW5nIDxjb21tYW5kPnN2bjwvY29tbWFuZD4gPGNvbW1hbmQ+dXA8L2NvbW1h
+bmQ+IGluIHRoZQotICAgIDxlbXBoYXNpcz5iaXRiYWtlLTEuODwvZW1waGFzaXM+IGRpcmVjdG9y
+eSB3aWxsIHVwZGF0ZQotICAgIDxhcHBsaWNhdGlvbj5CaXRCYWtlPC9hcHBsaWNhdGlvbj4gdG8g
+dGhlIGxhdGVzdCBzdGFibGUgdmVyc2lvbiwgYnV0Ci0gICAgZ2VuZXJhbGx5IGl0IGlzIGEgZ29v
+ZCBpZGVhIHRvIHN0aWNrIHdpdGggYSBzcGVjaWZpYyBrbm93biB3b3JraW5nIHZlcnNpb24KLSAg
+ICBvZiA8YXBwbGljYXRpb24+Qml0QmFrZTwvYXBwbGljYXRpb24+IHVudGlsIE9wZW5FbWJlZGRl
+ZCBhc2tzIHlvdSB0bwotICAgIHVwZ3JhZGUuPC9wYXJhPgorICAgIDxwYXJhPkJlZm9yZSB1c2lu
+ZyBPRSwgeW91IG11c3QgZmlyc3Qgb2J0YWluIHRoZSBidWlsZCB0b29sIGl0IG5lZWRzOgorICAg
+IGJpdGJha2UuPC9wYXJhPgorCisgICAgPHBhcmE+SXQgaXMgcmVjb21tZW5kZWQgdG8gcnVuIGJp
+dGJha2Ugd2l0aG91dCBpbnN0YWxsaW5nIGl0LCBhcyBhIHNpYmxpbmcKKyAgICBkaXJlY3Rvcnkg
+b2YgPGxpdGVyYWw+b3BlbmVtYmVkZGVkLzwvbGl0ZXJhbD4KKyAgICBhbmQgPGxpdGVyYWw+YnVp
+bGQvPC9saXRlcmFsPiBkaXJlY3Rvcmllcy4gSW5kZWVkLCBhcyBiaXRiYWtlIGlzIHdyaXR0ZW4K
+KyAgICBpbiBweXRob24gaXQgZG9lcyBub3QgbmVlZCBjb21waWxhdGlvbiBmb3IgYmVpbmcgdXNl
+ZC4gWW91J2xsIGp1c3QgaGF2ZSB0bworICAgIHNldCB0aGUgUEFUSCB2YXJpYWJsZSBzbyB0aGF0
+IHRoZSBCaXRCYWtlIHRvb2xzIGFyZSBhY2Nlc3NpYmxlIChzZWUKKyAgICA8eHJlZiBsaW5rZW5k
+PSJnZXR0aW5nb2VfY29uZmlndXJpbmdfb2UiLz4pLjwvcGFyYT4KKworCTxzZWN0aW9uPjx0aXRs
+ZT5HZXR0aW5nIDxhcHBsaWNhdGlvbj5CaXRCYWtlPC9hcHBsaWNhdGlvbj4gVXNpbmcgU3VidmVy
+c2lvbjwvdGl0bGU+CisJICA8cGFyYT5UbyBjaGVja291dCB0aGUgbGF0ZXN0IHZlcnNpb24gb2Yg
+dGhlIEJpdEJha2UgMS44IGJyYW5jaCwgdXNlIHRoZQorCQlmb2xsb3dpbmcgY29tbWFuZDoKKwkJ
+PHNjcmVlbj4KKyQgY2QgJE9FQkFTRQorJCA8Y29tbWFuZD5zdm48L2NvbW1hbmQ+IGNvIHN2bjov
+L3N2bi5iZXJsaW9zLmRlL2JpdGJha2UvYnJhbmNoZXMvYml0YmFrZS0xLjgvIGJpdGJha2UKKzwv
+c2NyZWVuPgorCSAgPC9wYXJhPgorCisJICA8cGFyYT48YXBwbGljYXRpb24+Qml0QmFrZTwvYXBw
+bGljYXRpb24+IGlzIGNoZWNrZWQgb3V0IG5vdyBhbmQKKwkJdGhlIDx2YXJuYW1lPiRPRUJBU0U8
+L3Zhcm5hbWU+IGRpcmVjdG9yeSB3aWxsIGNvbnRhaW4KKwkJYSA8bGl0ZXJhbD5iaXRiYWtlLzwv
+bGl0ZXJhbD4gc3ViZGlyZWN0b3J5LjwvcGFyYT4KKworCSAgPHBhcmE+SWYgeW91IG5lZWQgdG8g
+YWNjZXNzIGEgU3VidmVyc2lvbiBzZXJ2ZXIgdGhyb3VnaCBhIHByb3h5LCBzZWUgdGhlCisJCTx1
+bGluayB1cmw9Imh0dHA6Ly9zdWJ2ZXJzaW9uLnRpZ3Jpcy5vcmcvZmFxLmh0bWwjcHJveHkiPlNW
+TiBGQVE8L3VsaW5rPgorCSAgPC9wYXJhPgorCTwvc2VjdGlvbj4KKworCTxzZWN0aW9uPjx0aXRs
+ZT5VcGRhdGluZyA8YXBwbGljYXRpb24+Qml0QmFrZTwvYXBwbGljYXRpb24+PC90aXRsZT4KKwkg
+IDxwYXJhPkJpdGJha2UgaXMgYmVpbmcgcmV2aXNlZCBmYWlybHkgb2Z0ZW4uIFBlcmlvZGljYWxs
+eSBpdCdzIGEgZ29vZAorCQlpZGVhIHRvIGNoZWNrIHRoZSByZXBvc2l0b3J5IG9mIGJpdGJha2Ug
+c3RhYmxlIGJyYW5jaGVzIHRvIHNlZSBpZiBhCisJCW5ldyBzdGFibGUgYnJhbmNoIGlzIGF2YWls
+YWJsZSBvciBpZiB0aGUgY3VycmVudCBicmFuY2ggaGFzIGJlZW4KKwkJcmV2aXNlZC4gQ29tcGFy
+ZSB5b3VyIGV4aXN0aW5nIGJpdGJha2UgZGlyZWN0b3J5IHdpdGggdGhlIGxhdGVzdAorCQliaXRi
+YWtlIGJyYW5jaCBpbiB0aGUgcmVwb3NpdG9yeS4gWW91ciBleGlzdGluZyBiaXRiYWtlIGJyYW5j
+aCBhbmQKKwkJaXRzICdsYXN0IGNoYW5nZWQgcmV2aXNpb24nIG51bWJlciBjYW4gYmUgZm91bmQg
+YXMgZm9sbG93czoKKworCQk8c2NyZWVuPiQgY2QgJE9FQkFTRS9iaXRiYWtlOyBzdm4gaW5mbzwv
+c2NyZWVuPgorCisJCUlmIHRoZXJlIGlzIGEgbmV3IHN0YWJsZSBicmFuY2gsIHlvdSB3aWxsIHdh
+bnQgdG8gbW92ZSBvciBkZWxldGUKKwkJeW91ciBleGlzdGluZyBiaXRiYWtlIGRpcmVjdG9yeSBh
+bmQgcmVwZWF0IHRoZSBwcm9jZXNzIGxpc3RlZCBhYm92ZQorCQl1bmRlciAiVG8gb2J0YWluIGJp
+dGJha2UiLiBJZiB0aGVyZSBpcyBubyBuZXcgYnJhbmNoLCBpdCBpcyBlYXN5IHRvCisJCXVwZGF0
+ZSBiaXRiYWtlOgorCisJCTxzY3JlZW4+JCBjZCAkT0VCQVNFL2JpdGJha2U7IHN2biB1cGRhdGU8
+L3NjcmVlbj4KKwkgIDwvcGFyYT4KKwk8L3NlY3Rpb24+CiAgIDwvc2VjdGlvbj4KIAorCiAgIDxz
+ZWN0aW9uIGlkPSJnZXR0aW5nb2VfZ2V0dGluZ19vZSI+CiAgICAgPHRpdGxlPkdldHRpbmcgT3Bl
+bkVtYmVkZGVkPC90aXRsZT4KIApAQCAtNjcsNCArMTMwLDQgQEAgYml0YmFrZSAmbHQ7cmVjaXBl
+X25hbWUmZ3Q7CiAKICAgICA8cGFyYT5UaGlzIHNlY3Rpb24gaXMgYSBzdHViLCBoZWxwIHVzIGJ5
+IGV4cGFuZGluZyBpdDwvcGFyYT4KICAgPC9zZWN0aW9uPgotPC9jaGFwdGVyPgpcIE5vIG5ld2xp
+bmUgYXQgZW5kIG9mIGZpbGUKKzwvY2hhcHRlcj4KLS0gCjEuNS40LjMKCg==
+
+--001636e90e87a1a1110463add108--
