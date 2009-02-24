@@ -1,33 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lc3RF-000629-OR
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 20:59:33 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lc3OF-0004Pd-Fc
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 19:56:27 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 19:56:27 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 19:56:27 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 24 Feb 2009 20:56:19 +0100
-Message-ID: <go1jd3$mlv$1@ger.gmane.org>
-References: <1235501736.8911.52.camel@alap>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <1235501736.8911.52.camel@alap>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] add the openmoko git kernel stable branch to fso/milestone5
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lc3VS-0006Ec-Lz
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Feb 2009 21:03:54 +0100
+Received: by fxm11 with SMTP id 11so2919832fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2009 12:00:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=UzXMwNgCqk13JQBdkJlEPu97ahydeimDlS9mkB8j8T0=;
+	b=iCe1MaYuEtcWJG4UsbywRPumjOhCy5hnW2uder5FnD0bIwnB+FyTYzxvBE73C2WdZl
+	wdjE2pEp8pmz/2bOaIfffliB9+dyLJt5YBK7krpXhr251obRZdzb9WjjDvLI8BS3vn/q
+	9V/OBwp0/IJJD4pIWpWFlg4VlRH25Ov51156k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=R95vIAr7FNbZNys/imkOdIMVhmuO40kv7SqeGYQWvPm9nCv6Osg0GNejfPFE8VcRbG
+	dD+KI/lG+zNgamqeRRT/YEKcn5sWQGDDfXYa4AEqzOgH1W3dB42YQkBx1nTaQh3HT1eD
+	La0WAPHPQzlMjrUbjkCQM2zS+FiCl3vjlWC30=
+MIME-Version: 1.0
+Received: by 10.223.122.15 with SMTP id j15mr41288far.74.1235505649085; Tue, 
+	24 Feb 2009 12:00:49 -0800 (PST)
+Date: Tue, 24 Feb 2009 21:00:49 +0100
+Message-ID: <ac9c93b10902241200k3aa643a7w7f9a3cb8a2cf538c@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 19:59:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 24 Feb 2009 20:03:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 24-02-09 19:55, Angus Ainslie wrote:
+Personally I feel the check that the src has not changed under our
+fingers valuable, but I admit that adding the checksums is cumbersome.
 
-> +KERNEL_RELEASE = "2.6.29-rc3"
-> +KERNEL_VERSION = "${KERNEL_RELEASE}"
-> +
-> +OMV = "stable"
-> +PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCREV}"
+Can't we automate this one way or another. E.g. if a .bb file is
+checked in it is processed and the checksum is automatically added.
+This could be done at server side or client side.
+Or maybe harvest new checksums at regular intervals (e.g. from tinderbox).
+Of course something should also be done in case a SRCREV changes.
 
-NACK. This violates OEs versioning policy since 2.6.29-rc3 will sort 
-higher than 2.6.29 final.
-
-regards,
-
-Koen
-
+FM.
 
 
