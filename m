@@ -1,20 +1,30 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Lc0CI-0000gE-3T
-	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 17:31:54 +0100
-Received: (qmail 13849 invoked by uid 1003); 24 Feb 2009 16:28:49 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 24 Feb 2009 16:28:49 -0000
-Message-ID: <49A4203E.3060202@balister.org>
-Date: Tue, 24 Feb 2009 11:28:46 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <200902131728.08634.openembedded@haerwu.biz>	<20090224064639.GE2172@smtp.west.cox.net>
+	(envelope-from <trini@kernel.crashing.org>) id 1Lc0JS-0000vy-OO
+	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 17:39:19 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090224163609.UABZ2948.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 24 Feb 2009 11:36:09 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id Ksc81b00F4dMFYL03sc8J2; Tue, 24 Feb 2009 11:36:08 -0500
+X-Authority-Analysis: v=1.0 c=1 a=xT2cSXgipxKjdyq02GgA:9
+	a=1ZUHTDXQChDSdHQpETkA:7 a=CT7tZsWKkALcVqlUndhlx0oNEjwA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 24 Feb 2009 09:36:08 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090224163608.GI2172@smtp.west.cox.net>
+References: <200902131728.08634.openembedded@haerwu.biz>
+	<20090224064639.GE2172@smtp.west.cox.net>
 	<1235492001.27962.60.camel@andromeda>
-In-Reply-To: <1235492001.27962.60.camel@andromeda>
+	<49A4203E.3060202@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <49A4203E.3060202@balister.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,100 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 16:31:54 -0000
-X-Groupsio-MsgNum: 7903
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040107010600000404020301"
+X-List-Received-Date: Tue, 24 Feb 2009 16:39:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------ms040107010600000404020301
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+On Tue, Feb 24, 2009 at 11:28:46AM -0500, Philip Balister wrote:
+> Michael 'Mickey' Lauer wrote:
+>> Am Montag, den 23.02.2009, 23:46 -0700 schrieb Tom Rini:
+>>> I'm going to make a different suggestion.  Lets just drop it. 
+>>
+>> I'm in favour of this. I don't think they give us the safety we want and
+>> they introduce more inconvenience.
+>
+> Drop checksum checking? I am not in favour of this. The check does  
+> provide valuable reassurance that the source's are not changing in  
+> "funny" ways. This is valuable data for many people.
+>
+> We have ways of disabling the checks for people who are less concerned  
+> with image integrity.
+>
+> I agree the current implementation is not perfect, but it is a good  
+> compromise.
+>
+> The only thing I would like to see is a way to keep a local checksums  
+> file for people using overlays and other out of tree sw.
 
-Michael 'Mickey' Lauer wrote:
-> Am Montag, den 23.02.2009, 23:46 -0700 schrieb Tom Rini:
->> I'm going to make a different suggestion.  Lets just drop it. 
-> 
-> I'm in favour of this. I don't think they give us the safety we want and
-> they introduce more inconvenience.
+So in the case of "I care if the file changed under me" what we have now
+is OK.  But it's worthless in the case of "I care that the file is what
+upstream says it should be".
 
-Drop checksum checking? I am not in favour of this. The check does 
-provide valuable reassurance that the source's are not changing in 
-"funny" ways. This is valuable data for many people.
+-- 
+Tom Rini
 
-We have ways of disabling the checks for people who are less concerned 
-with image integrity.
 
-I agree the current implementation is not perfect, but it is a good 
-compromise.
-
-The only thing I would like to see is a way to keep a local checksums 
-file for people using overlays and other out of tree sw.
-
-Philip
-
---------------ms040107010600000404020301
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIyNDE2
-Mjg0NlowIwYJKoZIhvcNAQkEMRYEFIkV7vs06mZHYKw5WRGenOQEbrFoMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQA2d8MMQyPR3o2kIiCn2QO9Zykev1nMSQELUZqR+uIyiwjivpHz
-gOSH05CJQkfXa1Es1jv/licQuVd4H+jihQcvXlIjl9Y0v9rhMFOCczOjd3zNq1R0O8zfMzwsk8VW
-jgmdRSG/NC8CfV5dMu3eYTCfBWrzWW1JtFiBHeg6dTxp0bgOKiAJ/otQRdigWFGw+YkEuQE+NZfH
-MV0p6TvfZKZYn+LukVz6DCsJmmoKsaK6hWAukVuU1HjFsgQncMbfsiiEVrbbrNfNkZOm+ggmxMZ/
-xJ8ndPWjlIp8JH+UhExGbKET5GihkeTbHvOezmo3h28b5B8/pXtQ26bZFezSgf6vAAAAAAAA
-
---------------ms040107010600000404020301--
