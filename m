@@ -1,20 +1,33 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Lc32F-0005ZH-Ay
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Feb 2009 20:33:44 +0100
-Received: from [192.168.1.105] (e180190230.adsl.alicedsl.de [85.180.190.230])
-	by drlauer-research.com (Postfix) with ESMTP id 564DC584112
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2009 20:54:42 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Organization: Vanille-Media
-Date: Tue, 24 Feb 2009 20:30:39 +0100
-Message-Id: <1235503839.2621.3.camel@andromeda>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lc3RF-000629-OR
+	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 20:59:33 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lc3OF-0004Pd-Fc
+	for openembedded-devel@openembedded.org; Tue, 24 Feb 2009 19:56:27 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 24 Feb 2009 19:56:27 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 24 Feb 2009 19:56:27 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 24 Feb 2009 20:56:19 +0100
+Message-ID: <go1jd3$mlv$1@ger.gmane.org>
+References: <1235501736.8911.52.camel@alap>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: commit access for Angus
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <1235501736.8911.52.camel@alap>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] add the openmoko git kernel stable branch to fso/milestone5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,27 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 19:33:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 Feb 2009 19:59:33 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I want to propose commit access for Angus Ainslie. He is the new
-distribution maintainer @ Openmoko, Inc. and will work on getting the
-forthcoming Openmoko 2009.x distro built out of OE. In contrast to
-earlier OM distro managers, he has been instructed to keep a close eye
-on upstream hence working in our branches as much as possible (until the
-final prerelease image stabilization phase starts).
+On 24-02-09 19:55, Angus Ainslie wrote:
 
-He will first get his feet wet in the fso/ branches, so we have the
-chance to cherry-pick and/or merge his work while he gets up to speed
-with regards to our upstream needs.
+> +KERNEL_RELEASE = "2.6.29-rc3"
+> +KERNEL_VERSION = "${KERNEL_RELEASE}"
+> +
+> +OMV = "stable"
+> +PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCREV}"
 
-Please support him.
+NACK. This violates OEs versioning policy since 2.6.29-rc3 will sort 
+higher than 2.6.29 final.
 
-Cheers,
+regards,
 
--- 
-:M:
+Koen
 
 
 
