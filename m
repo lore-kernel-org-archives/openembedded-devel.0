@@ -1,21 +1,34 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1LcFfr-0006Pt-Af
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 10:03:28 +0100
-Received: (qmail 31841 invoked by uid 813007); 25 Feb 2009 09:00:17 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 25 Feb 2009 09:00:17 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Feb 2009 09:59:57 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
-References: <1235503839.2621.3.camel@andromeda>
-In-Reply-To: <1235503839.2621.3.camel@andromeda>
-MIME-Version: 1.0
-Message-Id: <200902251000.14561.openembedded@haerwu.biz>
-Subject: Re: commit access for Angus
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LcFmI-0006Ur-5H
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 10:10:08 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LcFjG-0001dA-18
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 09:06:58 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 09:06:58 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 09:06:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 25 Feb 2009 10:06:50 +0100
+Message-ID: <go31na$n9l$1@ger.gmane.org>
+References: <20090224211929.77E79E8037@amethyst.openembedded.net>	<1235513110.2621.7.camel@andromeda>
+	<go2tek$akt$1@ger.gmane.org> <1235549128.2621.20.camel@andromeda>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
+In-Reply-To: <1235549128.2621.20.camel@andromeda>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [oe-commits] Koen Kooi : gstreamer-ti: bump to r126 to make gstreamer autoplug and playbin work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,43 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 09:03:28 -0000
-X-Groupsio-MsgNum: 7950
-Content-Type: multipart/signed; boundary="nextPart1628422.X9sTcAzUuK";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 25 Feb 2009 09:10:09 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
---nextPart1628422.X9sTcAzUuK
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+On 25-02-09 09:05, Michael 'Mickey' Lauer wrote:
+> Am Mittwoch, den 25.02.2009, 08:53 +0100 schrieb Koen Kooi:
+>> On 24-02-09 23:05, Michael 'Mickey' Lauer wrote:
+>>> Hi Koen,
+>>>
+>>>> -SRCREV = "121"
+>>>> +SRCREV = "126"
+>>> Is there any specific reason you're not using sane-srcrevs.inc for that?
+>> The 5 minute reparse time everytime someone touches sane-srcrevs.
+>
+> Aha. I don't think that's a good reason, but YMMV. So we should get rid
+> of sane-srcrevs.inc and put it all into the files?
+
+It would make overriding revs a lot easier and handle things like 
+multiple git kernels (e.g. linux-omap) and recipes with both svn and git 
+versions (ffmpeg).
+I have no strong opinions on dumping sane-srcrevs, but lately people 
+have been willy-nilly updating revs that things are hardly 'sane' anymore.
+
+regards,
+
+Koen
 
 
 
-On Tuesday 24 of February 2009 20:30:39 Michael 'Mickey' Lauer wrote:
-> I want to propose commit access for Angus Ainslie. He is the new
-> distribution maintainer @ Openmoko, Inc. and will work on getting the
-> forthcoming Openmoko 2009.x distro built out of OE.
 
-+1
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
---nextPart1628422.X9sTcAzUuK
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAkmlCJkACgkQeQ6MlGH/2qtZvQCghUFPliIgZNoRqqRPd44aB5/e
-q+oAn2cuApXWH/MrBDiPMKKOXEXi+Nq+
-=d1z8
------END PGP SIGNATURE-----
-
---nextPart1628422.X9sTcAzUuK--
