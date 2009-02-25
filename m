@@ -1,36 +1,36 @@
-Received: from [209.85.200.171] (helo=wf-out-1314.google.com)
+Received: from [209.85.200.172] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <taroth@gmail.com>) id 1Lc9d2-0002iW-GI
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 03:36:08 +0100
-Received: by wf-out-1314.google.com with SMTP id 25so2922091wfc.6
+	(envelope-from <taroth@gmail.com>) id 1Lc9fq-0002oO-HV
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 03:39:02 +0100
+Received: by wf-out-1314.google.com with SMTP id 25so2923251wfc.6
 	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Feb 2009 18:33:02 -0800 (PST)
+	Tue, 24 Feb 2009 18:35:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:user-agent:mime-version:content-type;
-	bh=Xv/v0HAMMytLThINbzrYX/zSEXECGDOQYE2LVk22Xzs=;
-	b=tMsDVKLqPoeqdtQSjsPgqBIRt5RWoj8XsxdPXJVhWPvFJWxCTeFTOalkwSgo9lKCiW
-	TCb81IT2UexFjWBJktzy/3yg6hN8bj7mNFBJ6kdJwbLsfrgaJLbX00yZF4CyXbFQN+yH
-	/4GXo/hJ0VY9zjSof3RZD24ymGCEFzQ8lH+Hg=
+	bh=HqrQX7unWXonRPoAATAHPUGc9i0K39KjdPNNkr5ORmw=;
+	b=V2xF4QleLQF8QzbM7+ix+yCDk+rjAT/IJA6NNCJkrCDXPqVE+TeUDVkBaI4I5jxyig
+	H1+C7Ez1iYOCLmwKCQc3bN9//4l91x8dLswNCKFaCproUtFJ8ST6Jr3MJc4E7PO2eVHO
+	RufMw+cgCGz2KO1alRQWSexDqyomA1qkgN+XU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:user-agent:mime-version
 	:content-type;
-	b=FAtCocf3vqbgfa8dB7xQG1t6UqBZzUa0V7++rInfsUbVEUwvGFvrhMaXb8aWrNwdmy
-	Yn4W/HC3rO0cwAsP0eWbfv81BIYxRfBoOByWQ7EPF7XQ3wvLMq0FW9ZHziRYEBokvEwV
-	OW+CgoP6EDdYDWTOOKp5mCf8CikTd+1nC1AuA=
-Received: by 10.142.170.6 with SMTP id s6mr2276260wfe.322.1235529181200;
-	Tue, 24 Feb 2009 18:33:01 -0800 (PST)
+	b=fWDztgeOQs+tTpDhS5mkdTYZrz8yEyMIn9upnYLua9Gl4ofgUebOAGokxyRxAHZx5z
+	BtULt8Acn4YmrqnatzFmefyHkF9auTL7hAJhYSTVdlnt7taW8NBaUQ8KTEkVUQ+woxwp
+	SHFkTYxQOSdsEpZ4kLUeuy4rceWAgIdag0o1E=
+Received: by 10.142.165.21 with SMTP id n21mr236722wfe.143.1235529355573;
+	Tue, 24 Feb 2009 18:35:55 -0800 (PST)
 Received: from dorkboy (68-29-178-240.pools.spcsdns.net [68.29.178.240])
-	by mx.google.com with ESMTPS id 28sm9669772wfd.5.2009.02.24.18.32.59
+	by mx.google.com with ESMTPS id 22sm14294987wfg.23.2009.02.24.18.35.53
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 24 Feb 2009 18:33:00 -0800 (PST)
-Date: Tue, 24 Feb 2009 18:32:57 -0800 (PST)
+	Tue, 24 Feb 2009 18:35:54 -0800 (PST)
+Date: Tue, 24 Feb 2009 18:35:51 -0800 (PST)
 From: "Theodore A. Roth" <taroth@gmail.com>
 To: openembedded-devel@openembedded.org
-Message-ID: <alpine.DEB.1.00.0902241830490.19556@localhost.localdomain>
+Message-ID: <alpine.DEB.1.00.0902241833540.19556@localhost.localdomain>
 User-Agent: Alpine 1.00 (DEB 882 2007-12-20)
 MIME-Version: 1.0
-Subject: [PATCH] getting_oe.xml: Update getting openembedded section.
+Subject: [PATCH] getting_oe.xml: Add Configuring OpenEmbedded section.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,91 +44,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 02:36:08 -0000
+X-List-Received-Date: Wed, 25 Feb 2009 02:39:03 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Resubmitted against .dev branch instead of .documentation.
-
-getting_oe.xml: Update getting openembedded section.
+This patch fills in the stub for the "Configuring OpenEmbedded" section.
 
 Signed-off-by: Theodore A. Roth <taroth@gmail.com>
 
 ---
- docs/usermanual/chapters/getting_oe.xml |   60 ++++++++++++++++++++++---------
- 1 files changed, 43 insertions(+), 17 deletions(-)
+ docs/usermanual/chapters/getting_oe.xml |   97 ++++++++++++++++++++++++++++++-
+ 1 files changed, 96 insertions(+), 1 deletions(-)
 
 diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
-index c7eb7ec..69b9126 100644
+index 69b9126..3c68504 100644
 --- a/docs/usermanual/chapters/getting_oe.xml
 +++ b/docs/usermanual/chapters/getting_oe.xml
-@@ -92,24 +92,50 @@ $ <command>svn</command> co svn://svn.berlios.de/bitbake/branches/bitbake-1.8/ b
-   <section id="gettingoe_getting_oe">
-     <title>Getting OpenEmbedded</title>
+@@ -141,7 +141,102 @@ $ git pull</screen>
+   <section id="gettingoe_configuring_oe">
+     <title>Configuring OpenEmbedded</title>
  
-+    <para><emphasis>Note:</emphasis> Once upon a time OpenEmbedded used
-+      Monotone for version control. If you have an OE Monotone repository on
-+      your computer, you should replace it with the Git repository.</para>
+-    <para>This section is a stub, help us by expanding it</para>
++    <para>At this point, your <literal>$OEBASE/</literal> directory should
++      contain at least the following subdirectories:
++      <itemizedlist>
++        <listitem><simpara><literal>build/</literal></simpara></listitem>
++        <listitem><simpara><literal>bitbake/</literal></simpara></listitem>
++        <listitem><simpara><literal>openembedded/</literal></simpara></listitem>
++      </itemizedlist>
++    </para>
 +
-     <para>The OpenEmbedded metadata has a high rate of development, so it's a
--    good idea to stay up to date. You'll need monotone 0.28 to get the
--    metadata and stay up to date. Monotone is available in most distributions
--    and has binaries at <ulink url="http://venge.net/monotone/">Monotone
--    homepage</ulink>.</para>
--
--    <para>Next step is getting snapshot of database. <screen>
--wget http://openembedded.org/snapshots/OE.mtn.bz2 http://openembedded.org/snapshots/OE.mtn.bz2.md5
--</screen> Or if you have monotone 0.30 or later: <screen>
--wget http://www.openembedded.org/snapshots/OE-this-is-for-mtn-0.30.mtn.bz2 
--wget http://www.openembedded.org/snapshots/OE-this-is-for-mtn-0.30.mtn.bz2.md5
--</screen> Then verify integrity of snapshot by checking md5sum. <screen>
--md5sum -c OE.mtn.bz2.md5sum
--</screen> Then unpack database. <screen>
--bunzip OE.mtn.bz2
--</screen> Finally checkout the development branch. <screen>
--mtn --db=OE.mtn co -b org.openembedded.dev
--</screen></para>
-+      good idea to stay up to date. You'll need Git to get the metadata and
-+      stay up to date. Git is available in most distributions and has binaries
-+      at <ulink url="http://git-scm.com/">Git homepage</ulink>.</para>
++    <section><title>Environment Setup</title>
++      <para>There are a few environment variables that you will need to set
++        before you can build software for OpenEmbedded using BitBake. You will
++        need to set these variables every time you open a terminal for
++        development. You can automate this in
++        <filename>~/.profile</filename>, <filename>/etc/profile</filename>, or
++        perhaps use a script to set the necessary variables for using BitBake.
++      </para>
 +
-+    <section><title>Checking Out OpenEmbedded With Git</title>
-+      <para>Once you have installed Git, checkout the OpenEmbedded repository:
++      <para>Since the path to your OpenEmbedded installation will be used in
++        many places, setting it in your environment will allow you to use
++        the <varname>$OEBASE</varname> variable in all pathes and make it
++        easier to change in the future should the need arise. To
++        set <varname>$OEBASE</varname> if you use a Bourne like shell
++        <footnote>
++          <para>If you use a CSH like shell (e.g. on a FreeBSD system), you
++            will set environment variables like this:
++            <screen>
++$ setenv VAR_NAME "VAR_VALUE"</screen>
++          </para>
++        </footnote>, do this:
++
 +        <screen>
-+$ cd $OEBASE
-+$ git clone git://git.openembedded.net/openembedded</screen>
-+        The <literal>$OEBASE/openembedded/</literal> directory should now
-+        exist.</para>
-+    </section>
++$ export OEBASE=/path/to/your/oe/installation</screen>
 +
-+    <section><title>Updating OpenEmbedded</title>
-+      <para>The <literal>org.openembedded.dev</literal> branch of OpenEmbedded
-+        is updated very frequently (as much as several times an hour). The
-+        distro branches are not updated as much but still fairly often. It
-+        seems good practice to update your OpenEmbedded tree at least
-+        daily. To do this, run:
++      </para>
++
++      <para>If you followed the recommendation to use BitBake from svn, you
++        will need to add the path to the BitBake executable to
++        your <varname>PATH</varname> environment variable like this:
++
 +        <screen>
-+$ cd $OEBASE
-+$ git pull</screen>
++$ export PATH=$OEBASE/bitbake/bin:$PATH</screen>
++      </para>
++
++      <para>In order for bitbake to find the configuration files for
++        OpenEmbedded, you will need to set the <varname>BBPATH</varname>
++        variable.
++
++        <screen>
++$ export BBPATH=$OEBASE/build:$OEBASE/openembedded</screen>
++      </para>
++
++      <para>Finally, if you wish to allow BitBake to inherit
++        the <varname>$OEBASE</varname> variable from the environment, you will
++        need to set the <varname>BB_ENV_EXTRAWHITE</varname> variable:
++
++        <screen>
++$ export BB_ENV_EXTRAWHITE="OEBASE"</screen>
++
++        Note the absence of the "$" character which implies that you are
++        setting <varname>BB_ENV_EXTRAWHITE</varname> to the variable name, not
++        the variable value.
 +      </para>
 +    </section>
-+    <section><title>Changing Branches</title>
-+      <para>Working with multiple branches is very easy to do with Git. The
-+        OpenEmbedded repository holds many branches. To list all branches, use this command:
-+        <screen>$ git branch -a</screen>
-+        Branch names that begin with <literal>origin/</literal> denote
-+        branches that exist on the remote server. The name with a * in front
-+        of it is the branch currently checked out. If you want to work with a
-+        remote branch, you must first create a local copy of it. The following
-+        command will create a local copy of a remote branch:
-+        <screen>$ git branch &lt;local_name&gt; &lt;remote_name&gt;</screen>
-+        To change branches, use this command:
-+        <screen>$ git checkout &lt;branch_name&gt;</screen>
-+        There are more complicated branch operations that can be done with git,
-+        but those are beyond the scope of this document.</para>
++
++    <section><title>Local Configuration</title>
++      <para>It is now time to create your local configuration. While you could
++        copy the default <filename>local.conf.sample</filename> like this:
++
++        <screen>
++$ cd $OEBASE
++$ cp openembedded/conf/local.conf.sample build/conf/local.conf
++$ vi build/conf/local.conf</screen>
++
++        It is actually recommended to start smaller and
++        keep <filename>local.conf.sample</filename> in the background. Add
++        entries from there step-by-step as you understand and need
++        them. Please, do not just edit
++        <filename>build/conf/local.conf.sample</filename> but
++        actually <emphasis>READ</emphasis> it (read it and then edit it).
++      </para>
++
++      <para>For building an <literal>org.openembedded.dev</literal> branch, in
++        your <filename>local.conf</filename> file, you should have at least
++        the following three
++        entries: <varname>BBFILES</varname>, <varname>DISTRO</varname>
++        and <varname>MACHINE</varname>. For example, consider the following
++        mininal <literal>local.conf</literal> file for the &Aring;ngstr&ouml;m
++        distribution and the Openmoko gta01 machine:
++
++        <screen>
++BBFILES = "${OEBASE}/openembedded/packages/*/*.bb"
++DISTRO = "angstrom-2008.1"
++MACHINE = "om-gta01"</screen>
++      </para>
 +    </section>
    </section>
  
-   <section id="gettingoe_configuring_oe">
+   <section id="gettingoe_building_software">
 -- 
 1.5.4.3
 
