@@ -1,39 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LcRun-0005ez-SW
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 23:07:45 +0100
+	id 1LcS3d-0005oO-Hp
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 23:17:12 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LcRre-0003nx-PT
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 22:04:26 +0000
-Received: from p54839b11.dip0.t-ipconnect.de ([84.131.155.17])
+	id 1LcS0T-0004D6-Db
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 22:13:33 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 22:04:26 +0000
-Received: from vjensen by p54839b11.dip0.t-ipconnect.de with local (Gmexim 0.1
+	Wed, 25 Feb 2009 22:13:33 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 22:04:26 +0000
+	Wed, 25 Feb 2009 22:13:33 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Vitus Jensen <vjensen@gmx.de>
-Date: Wed, 25 Feb 2009 22:04:18 +0000 (UTC)
-Message-ID: <go4f92$khh$2@ger.gmane.org>
-References: <200902131728.08634.openembedded@haerwu.biz>
-	<20090224064639.GE2172@smtp.west.cox.net>
-	<1235492001.27962.60.camel@andromeda>
-	<8763izyarp.fsf@neumann.lab.ossystems.com.br>
-	<fce2a370902241036y359e2c7cv1126a62c8627d2bb@mail.gmail.com>
-	<20090224185059.GL2172@smtp.west.cox.net>
-	<87wsbfw9zy.fsf@neumann.lab.ossystems.com.br>
-	<20090225022507.GP2172@smtp.west.cox.net> <go4d36$khh$1@ger.gmane.org>
-	<20090225213536.GT2172@smtp.west.cox.net>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 25 Feb 2009 23:13:24 +0100
+Message-ID: <go4fq4$3t7$1@ger.gmane.org>
+References: <f46da1cf0902251338k5592fd9dt91ceb4cdd63dd5b7@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p54839b11.dip0.t-ipconnect.de
-User-Agent: Pan/0.133 (House of Butterflies)
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+In-Reply-To: <f46da1cf0902251338k5592fd9dt91ceb4cdd63dd5b7@mail.gmail.com>
 Sender: news <news@ger.gmane.org>
-Subject: Re: checksums situation
+Subject: Re: question for docs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,60 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 22:09:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 25 Feb 2009 22:18:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Am Wed, 25 Feb 2009 14:35:36 -0700 schrieb Tom Rini:
+On 25-02-09 22:38, Theodore A. Roth wrote:
+> Hi,
+>
+> I'm working on a user manual update for the "Building Software"
+> section of chapter 2.
+>
+> Can someone give me a quick one liner description of the contents of
 
-> On Wed, Feb 25, 2009 at 09:27:02PM +0000, Vitus Jensen wrote:
->> Am Tue, 24 Feb 2009 19:25:07 -0700 schrieb Tom Rini:
->> 
->> > On Tue, Feb 24, 2009 at 11:01:05PM -0300, Otavio Salvador wrote:
->> > [snip]
->> >> I do belive that the best way to solve it is to have a md5 file
->> >> together with the .bb recipe. This solves the problems for forks,
->> >> derivatives and also makes harder to just use "cat tmp/checksums.ini
->> >> >> conf/checksums.ini".
->> > 
->> > Running a script that will make the .sum file isn't any harder
->> > really. And it's still a "this is the checksum we downloaded" not
->> > "this is the checksum upstream says is correct".
->> ...
->> 
->> But "this is the checksum we downloaded" says that's it's the same
->> version the author of the .bb receipe downloaded, reviewed and tested
->> on his device.  What is the probability that this author downloaded a
->> corrupt but working archive last november and you get the same corrupt
->> archive now?
-> 
-> See hrw's post earlier where he points out how many checksums are a
-> simple fetch and add? :)
+> packages/meta/
 
-Very simple ... but getting the commit of MODIFIED checksum.ini entries 
-through unrecognized is much harder.  I have seen discussions about such 
-patches here.
+Collection of usefull meta tasks and recipes that don't fit in a general 
+category
 
+> packages/tasks/
 
->> If you want better security you have to ask the download source for a
->> GPG signature of his files or the like as MD5 isn't really safe.
-> 
-> This is one of my points.  People think we have security from our
-> current checksum list, but we do not.
+Collection of meta-packages that depend on real packages to make 
+managing package sets easier
 
-But even a really safe signature is just an entry in some central or 
-distributed checksum.ini, so commiting a different entry would be as easy 
-as it is now.
+( Yes, I see how my descriptions will create confusion :))
 
-If this leads you to abandon checksums alltogether: the current situation 
-protects against corrupt downloads and otherwise undetected updates from 
-upstream and I'm all for keeping such a protection.
+regards,
 
-Bye,
-  Vitus
-
--- 
-Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
+Koen
 
 
 
