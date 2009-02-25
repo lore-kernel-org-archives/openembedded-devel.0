@@ -1,28 +1,37 @@
-Received: from [64.18.0.186] (helo=exprod5og108.obsmtp.com)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>)
-	id 1LcML5-0005kx-Hx; Wed, 25 Feb 2009 17:10:29 +0100
-Received: from source ([4.78.218.129]) (using TLSv1) by
-	exprod5ob108.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKSaVss7DQkFTNn/P/DKPIbfIGS1lVhMp5@postini.com;
-	Wed, 25 Feb 2009 08:07:17 PST
-Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
-	by Cinmlip04.e2k.ad.ge.com with ESMTP; 25 Feb 2009 11:07:15 -0500
-Received: from ind-3n4b83jh1.amer.consind.ge.com (HELO [192.168.219.128])
-	([3.138.54.81])
-	by cinmlip01.e2k.ad.ge.com with ESMTP; 25 Feb 2009 11:07:15 -0500
-Message-ID: <49A56CE3.1060305@gefanuc.com>
-Date: Wed, 25 Feb 2009 16:08:03 +0000
-From: Martyn Welch <martyn.welch@gefanuc.com>
-Organization: GE Fanuc Intelligent Platforms Ltd.
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	(envelope-from <cliff.brake@gmail.com>) id 1LcMfK-0003RB-Fq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Feb 2009 17:31:22 +0100
+Received: by rv-out-0708.google.com with SMTP id b17so94476rvf.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Feb 2009 08:28:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=2t2puoKyN8Y/tChpQT82IQtgC9ODK7p8q4h70BwlSjg=;
+	b=WR2YSncZt0A/5mJf0tMBUSgF8XvtSDH+S+QAkV5oUj9dRnDeXR8w7MLv560boRYVoK
+	wMobsTB/Bvw8QqYmaUoXXiG9VxS8hmPPhYWhZvSN9FuDszFhDxqJyb17c2VjGY+MgehN
+	LYW++Pj+/Q6OHD6JRSzXf/i3dUQLLI5eArTkA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=kHACMk0GBRWIChZFtW6FrQWi3IFAr+cNKgybjNOGRu1sISBLuOBDH1znDyf/kNWt3D
+	KJoap8BJFqJF8RJ3Lpx/YHI0De5nsQBM3lybYXNOYkNDUyLFuLEn8kwkpQRM90jmfV08
+	L1+XL8xJLzlRWwNGWeON4w3kUGEto1J16O0gY=
 MIME-Version: 1.0
-To: Using OE <openembedded-users@openembedded.org>
-References: <49A513AA.9080201@gefanuc.com>
-	<B6FF18F4244BAE4991D05BF4F7A7649293467E@MCHP7I5A.ww902.siemens.net>
-In-Reply-To: <B6FF18F4244BAE4991D05BF4F7A7649293467E@MCHP7I5A.ww902.siemens.net>
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Discussion regarding the future of OpenEmbedded mailing lists
+Received: by 10.141.168.2 with SMTP id v2mr129547rvo.47.1235579290919; Wed, 25 
+	Feb 2009 08:28:10 -0800 (PST)
+In-Reply-To: <49A55A59.5080409@balister.org>
+References: <f46da1cf0902201818r3fcf3432oc14929b5f455bbe7@mail.gmail.com>
+	<f96d234e0902240651r7ad36677h8e828964308e2b50@mail.gmail.com>
+	<49A55A59.5080409@balister.org>
+Date: Wed, 25 Feb 2009 11:28:10 -0500
+Message-ID: <f96d234e0902250828x6e72a8b6kc0a4285125f27b0e@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Documentation/User Manual questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,47 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 16:10:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Feb 2009 16:31:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Wolf, Josef wrote:
-> Martyn Welch wrote:
-> 
-> [ ... ]
->> There has been a proposal on the openembedded-devel mailing list
->> to re-organise the lists provided on openembedded.org.
-> [ ... ]
->> Openembedded-devel - for humans to post patches and ask questions
->> Openembedded-commits - commits, bugs, logs, etc
->> Openembedded-private - core team
-> 
-> To be honest, I am somewhat confused by the naming of the lists.
-> If I understand correctly, the intent of the new lists are
-> 
-> OE-private: core-team.
->             All the other projects I know of would call this list
->             FOOBAR-devel
-> 
-> OE-devel: rest of the world.
->           All the other projects I know of would call this list
->           FOOBAR-users
-> 
-> Is there any reason for this strange (that is: non-standard) naming
-> scheme?  Is OE-private meant to contain really private (confidential?)
-> traffic?  If not, I'd guess many people (like me) would mis-interpret
-> the intent of this list.
+On Wed, Feb 25, 2009 at 9:48 AM, Philip Balister <philip@balister.org> wrot=
+e:
+> Cliff Brake wrote:
+>>
+>> On Fri, Feb 20, 2009 at 9:18 PM, Theodore A. Roth <taroth@gmail.com>
+>> wrote:
+>>
+>>> 2: Was the documentation branch really last updated on May 9, 2008? Is
+>>> there a newer branch I have not yet discovered?
+>>
+>> Yes, this is likely correct. =A0Documentation is not OE's strong point.
+>> But the combination of various docs available cover things pretty
+>> well:
+>>
+>> http://wiki.openembedded.net/index.php/Documentation
+>
+> I notice you keep copies of the manual on your website. Last week Koen
+> suggested we add docs.openembedded.org to DNS. Would it make sense to go
+> ahead and add this address and use it for "static" copies of documentatio=
+n?
 
-Yes - it is my understanding that the traffic on Openembedded-private is really private (I believe that OpenEmbedded is now legally registered as a non-profit in Germany and I should imagine there are certain discussions which need a degree of privacy).
+I have a script that automatically updates the docs and rsyncs them to
+my web site.  I can adjust that as soon as docs.oe.org comes on line.
+Given the reliability of OE infrastructure in the past, it was just a
+lot easier to use my own server, but it seems like things are
+stabilizing now.
 
-Openembedded-devel is currently planned to be the list for all technical discussions of the use and development of OE.
+Thanks,
+Cliff
 
-Martyn
-
--- 
-Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
-GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
-Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
-Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 729849476
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Cliff Brake
+http://bec-systems.com
 
 
