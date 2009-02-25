@@ -1,27 +1,35 @@
-Received: from [74.125.46.156] (helo=yw-out-1718.google.com)
+Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1LcJ2O-0000RA-TU
+	(envelope-from <cliff.brake@gmail.com>) id 1LcK7J-0007T6-Oi
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Feb 2009 13:38:57 +0100
-Received: by yw-out-1718.google.com with SMTP id 4so1280846ywq.42
+	Wed, 25 Feb 2009 14:48:05 +0100
+Received: by rv-out-0708.google.com with SMTP id b17so27421rvf.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2009 04:35:47 -0800 (PST)
-Received: by 10.100.242.20 with SMTP id p20mr141053anh.88.1235565338604;
-	Wed, 25 Feb 2009 04:35:38 -0800 (PST)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id f7sm7479561nfh.13.2009.02.25.04.35.37
-	(version=SSLv3 cipher=RC4-MD5); Wed, 25 Feb 2009 04:35:37 -0800 (PST)
-Message-ID: <49A53B18.4070404@xora.org.uk>
-Date: Wed, 25 Feb 2009 12:35:36 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	Wed, 25 Feb 2009 05:44:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=55OhOaH/1wYl+ksL+uFQgxg0jWEPWOruHD2y6xG8pB0=;
+	b=hmfuFfZxdi/V9VYZtxC7tpMwHpY6mR87bwCYQD1QQrrcLvtc3U6iJ1AwVJAu2d03r9
+	pf5WskPOd23IDUYhLAHL7TFlas6T0/Hl01494ZwglEaKKcj3l7ZrDAm+uQXN4V7Caeyv
+	Fn89IU8RfNg5MuaYiGRpaxFPWmxQqdJ8SnltA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=r+ogJZf4DwjlYAJ5uEugebvRjVbEO98+okOu16ws4oVwVngsakF2wgLpD8c7X4HfhC
+	ZojBqIcIqoLn3b8P+M3jDTdVDWGl5nHak1mEPw/jCubmyOyE2V0KVevOdnY2g8RjqoND
+	3PJN60XwLM09jCFyKpT6c1wLxC6QbHHNvOiUw=
 MIME-Version: 1.0
+Received: by 10.141.53.4 with SMTP id f4mr60964rvk.155.1235569495214; Wed, 25 
+	Feb 2009 05:44:55 -0800 (PST)
+In-Reply-To: <alpine.DEB.1.00.0902241827020.19556@localhost.localdomain>
+References: <alpine.DEB.1.00.0902241827020.19556@localhost.localdomain>
+Date: Wed, 25 Feb 2009 08:44:55 -0500
+Message-ID: <f96d234e0902250544w629cc08fwf9710e83fd6da25c@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1235522090.2621.12.camel@andromeda>
-In-Reply-To: <1235522090.2621.12.camel@andromeda>
-X-Enigmail-Version: 0.95.0
-Subject: Re: commit access for Lukas Gorris (dcordes)
+Subject: Re: [PATCH] getting_oe.xml: Update documentation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,20 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 12:38:57 -0000
+X-List-Received-Date: Wed, 25 Feb 2009 13:48:06 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Michael 'Mickey' Lauer wrote:
-> I propose commit access for Lukas, who is active in the HTC Linux
-> community. His work will mainly be maintaining the HTC kernel and
-> machine configuration, but also adding general support for distros.
+On Tue, Feb 24, 2009 at 9:30 PM, Theodore A. Roth <taroth@gmail.com> wrote:
+> =A0* New section about directory structure.
+> =A0* Update 'Getting BitBake' section.
 >
->   
-+1 from me, I worked with him when he originally started the HTC stuff
-in OE.
+> Resubmitted against .dev instead of .documentation.
+>
+> Signed-off-by: Theodore A. Roth <taroth@gmail.com>
 
-Graeme
+Pushed, thanks.
 
+Cliff
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Cliff Brake
+http://bec-systems.com
 
 
