@@ -1,24 +1,31 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LcQcu-0006Hw-8u
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Feb 2009 21:45:08 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KFN003OE2TDF879@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	25 Feb 2009 14:41:43 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1EB936B83A8; Wed,
-	25 Feb 2009 15:41:37 -0500 (EST)
-Date: Wed, 25 Feb 2009 15:41:37 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090225204137.GA25095@denix.org>
-References: <go498c$bqq$1@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <go498c$bqq$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [RFC] renaming packages/ to recipes/
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LcQh7-0006WN-RR
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 21:49:29 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LcQdy-0000Fd-Fa
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 20:46:14 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 20:46:14 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 20:46:14 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 25 Feb 2009 21:46:03 +0100
+Message-ID: <go4amc$h30$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+Sender: news <news@ger.gmane.org>
+Subject: [RFC] update opkg* SRCREV to 201
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,38 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 20:45:08 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 25 Feb 2009 20:49:30 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 25, 2009 at 09:21:32PM +0100, Koen Kooi wrote:
-> Hi,
->
-> I keep trying to teach people the difference between recipes (what's in OE) 
-> and packages (what you install on the target) and keep getting reactions 
-> like "ok, but why is the dir called packages?", which are completely valid.
->
-> Proposal:
->
-> mv packages recipes ; git commit .
->
-> While it would make setting up OE more intuitive, it does mean that people 
-> have to adjust local.conf and distro people need to update their 
-> installation instructions.
+Hi,
 
-+1 - the whole directory structure needs some revamping. There are also some 
-inconsistencies with meta, images and tasks directories. But it is good to 
-start with small and easy items first.
+I was getting seriously annoyed with the useless error codes opkg was 
+giving me and Tick pointed me to:
 
-> I have some other intrusive proposals about shuffling things around in TMP 
-> a bit (and out of TMP as well), standardizing on source locations for 
-> source_distribute and sourcepkg, etc, but let's start with this easy one.
+http://code.google.com/p/opkg/issues/detail?id=6&can=1
 
-Speaking of TMP and outside of it - does it make sense to have DEPLOY outside 
-of TMP by default in OE? I do it in Arago, but I had to make a small fix in 
-base.bbclass though - see bug #4580.
+We're at 197 now in OE (with r201 applied as patch). I'd like to get 
+r199 and r200 in as well, and since I'm lazy I though we'd get r198 in 
+as well, which means instead of adding a few patches I can just bump up 
+SRCREV to 201.
 
--- 
-Denys
+What do you think?
+
+regards,
+
+Koen
+
 
 
