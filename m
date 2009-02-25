@@ -1,33 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LcS3d-0005oO-Hp
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 23:17:12 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LcS0T-0004D6-Db
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 22:13:33 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 22:13:33 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <utx@penguin.cz>) id 1LcSTB-00031S-9M
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 23:43:35 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 446DA1409347
 	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 22:13:33 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 25 Feb 2009 23:40:58 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kXs3nNOG8rv5 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 23:40:58 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 0ED081417191
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 23:40:57 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 25 Feb 2009 23:13:24 +0100
-Message-ID: <go4fq4$3t7$1@ger.gmane.org>
-References: <f46da1cf0902251338k5592fd9dt91ceb4cdd63dd5b7@mail.gmail.com>
+Date: Wed, 25 Feb 2009 23:39:59 +0100
+Message-Id: <1235601599.7701.32.camel@utx.utx.cz>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
-In-Reply-To: <f46da1cf0902251338k5592fd9dt91ceb4cdd63dd5b7@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: question for docs
+X-Mailer: Evolution 2.22.1.1 
+Subject: How to package locale files outside /usr/share/locale?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 22:18:44 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 25 Feb 2009 22:43:53 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 25-02-09 22:38, Theodore A. Roth wrote:
-> Hi,
->
-> I'm working on a user manual update for the "Building Software"
-> section of chapter 2.
->
-> Can someone give me a quick one liner description of the contents of
+I wanted to package locale dependent files to -locale- packages.
 
-> packages/meta/
+Is there anything simpler than following code?
 
-Collection of usefull meta tasks and recipes that don't fit in a general 
-category
+python populate_packages_prepend () {
+	mcdir = bb.data.expand('${datadir}/mc', d)
+	do_split_packages(d, mcdir, '^mc\.[hm][ile][npn].*\.(.*)$',
+		output_pattern='mc-locale-%s',
+		description='%s translation for mc')
+}
+(packages/mc/mc.inc)
 
-> packages/tasks/
 
-Collection of meta-packages that depend on real packages to make 
-managing package sets easier
-
-( Yes, I see how my descriptions will create confusion :))
-
-regards,
-
-Koen
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
