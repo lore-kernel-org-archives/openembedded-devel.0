@@ -1,24 +1,20 @@
-Received: from [80.67.172.39] (helo=webmail.no-log.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Lc64s-0001W9-OP
+	(envelope-from <mickey@vanille-media.de>) id 1Lc7me-00061t-7I
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Feb 2009 23:48:38 +0100
-Received: by webmail.no-log.org (Postfix, from userid 33)
-	id 872744BE76; Tue, 24 Feb 2009 23:45:34 +0100 (CET)
-X-Squirrel-UserHash: c3wyGAAN
-X-Squirrel-FromHash: AFRWVFwAXS0=
-Message-ID: <54520.AFRWVFwAXS0=.1235515534.squirrel@webmail.no-log.org>
-In-Reply-To: <49A458A1.80308@opensimpad.org>
-References: <200902131728.08634.openembedded@haerwu.biz>
-	<49A458A1.80308@opensimpad.org>
-Date: Tue, 24 Feb 2009 23:45:34 +0100 (CET)
-From: "GNUtoo" <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.9a
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: Re: checksums situation
+	Wed, 25 Feb 2009 01:37:56 +0100
+Received: from [192.168.1.105] (e180190230.adsl.alicedsl.de [85.180.190.230])
+	by drlauer-research.com (Postfix) with ESMTP id EC557584144
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Feb 2009 01:58:53 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Organization: Vanille-Media
+Date: Wed, 25 Feb 2009 01:34:50 +0100
+Message-Id: <1235522090.2621.12.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: commit access for Lukas Gorris (dcordes)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,51 +28,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2009 22:48:38 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Feb 2009 00:37:56 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-> Marcin Juszkiewicz wrote:
->> Other was to use filename as key and add "url[0-xx]" fields which will
->> list alternative locations. This one looks better but still does not
->> solve situation when someone use DEBIAN_MIRROR which is not present in
->> checksums.ini file.
->>
->>
-> What about using the hashes as identifier:
->
-> Something like this:
->
-> filename=3Dfoo-0.13.49.tar.bz2
-> url[0-xx]
-> generated_url[0-xx] //or only [0-xx]
-> md5=3D5f7b88ebb2bcd7e8044328482d079661
-> sha256=3Df57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22=
-af
->
-> pseudo code:
-> download source
-> check_ok:=3Dfalse
->
-> if SRC_URI exists in url/generated_url + filename
->     do normal check
-> else
->     generate md5 and sha256 sums of the source
->     look up md5 and sha256 sum
->     if both exists in the same entity
->        if filename matches filename of SRC_URI
->           check_ok:=3Dtrue
->           add url to generated_urls
->
-> best regards
-> Bernhard Guillon
-great idea...
-but we also need to find out how to handle the commits of suchs generated=
-s
-urls?
-because some developers forget to commit the checksums,and because they
-could have differents repositories
-Denis.
+I propose commit access for Lukas, who is active in the HTC Linux
+community. His work will mainly be maintaining the HTC kernel and
+machine configuration, but also adding general support for distros.
+
+-- 
+:M:
 
 
 
