@@ -1,19 +1,24 @@
-Received: from [216.145.245.198] (helo=mx02.dls.net)
+Received: from [209.85.217.166] (helo=mail-gx0-f166.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LcDhX-00087C-5J
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 07:57:03 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx02.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LcDeU-0008AS-7x
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 00:53:54 -0600
-Message-ID: <49A4EAFC.3080806@dls.net>
-Date: Wed, 25 Feb 2009 00:53:48 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-Subject: fakeroot fails to build
+	(envelope-from <rod@whitby.name>) id 1LcEPo-0005ZH-0x
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Feb 2009 08:42:48 +0100
+Received: by gxk10 with SMTP id 10so7803146gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2009 23:39:38 -0800 (PST)
+Received: by 10.231.15.74 with SMTP id j10mr498293iba.48.1235547577600;
+	Tue, 24 Feb 2009 23:39:37 -0800 (PST)
+Received: from ?120.16.168.232? ([120.16.168.232])
+	by mx.google.com with ESMTPS id 25sm17907428qbw.35.2009.02.24.23.39.30
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 24 Feb 2009 23:39:37 -0800 (PST)
+Sender: Rod Whitby <rod@whitby.name>
+From: "Rod Whitby" <rod@whitby.id.au>
+Date: Tue, 24 Feb 2009 23:39:37 -0800 (PST)
+To: <openembedded-devel@lists.openembedded.org>
+X-Mailer: ChatterEmail+ for Treo 6xx/700p (3.0.10)
+Message-ID: <3318430170.973000@smtp.gmail.com>
+Subject: Re: commit access for Angus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,53 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 06:57:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Feb 2009 07:42:49 -0000
 
-fakeroot fails to build -- any idea how we can fix this?
++1 for Angus.
+-- Rod
 
-log file:
+-----Original Message-----
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Date: Wednesday, Feb 25, 2009 6:03 am
+Subject: [oe] commit access for Angus
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>Reply-To: openembedded-devel@lists.openembedded.org
 
-gcc -DHAVE_CONFIG_H -I.
--isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include
--isystem/u/slug/slugos/tmp/staging\
-/i686-linux/usr/include -O2 -MT simple.o -MD -MP -MF .deps/simple.Tpo -c
--o simple.o simple.c
-mv -f .deps/simple.Tpo .deps/simple.Po
-/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.
--isystem/u/slug/slugos/tmp/staging/i686-linux/usr\
-/include  -isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include -O2
--MT libfakeroot.lo -MD -MP -MF .deps/libfakeroo\
-t.Tpo -c -o libfakeroot.lo libfakeroot.c
-./libtool: line 764: X--tag=CC: command not found
-./libtool: line 797: libtool: ignoring unknown tag : command not found
-./libtool: line 764: X--mode=compile: command not found
-./libtool: line 764: X--tag=CC: command not found
-./libtool: line 797: libtool: ignoring unknown tag : command not found
-./libtool: line 764: X--mode=compile: command not found
-./libtool: line 914: *** Warning: inferring the mode of operation is
-deprecated.: command not found
-./libtool: line 915: *** Future versions of Libtool will require
--mode=MODE be specified.: command not found
-./libtool: line 1058: Xgcc: command not found
-./libtool: line 1058: X-DHAVE_CONFIG_H: command not found
-./libtool: line 1058: X-I.: command not found
-./libtool: line 1058:
-X-isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include: No such file
-or directory
-./libtool: line 1058:
-X-isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include: No such file
-or directory
-./libtool: line 1058: X-O2: command not found
-./libtool: line 914: *** Warning: inferring the mode of operation is
-deprecated.: command not found
-./libtool: line 915: *** Future versions of Libtool will require
--mode=MODE be specified.: command not found
-./libtool: line 1058: X-MT: command not found
-./libtool: line 1058: Xgcc: command not found
-./libtool: line 1058: Xcommunicate.lo: command not found
+I want to propose commit access for Angus Ainslie. He is the new
+>distribution maintainer @ Openmoko, Inc. and will work on getting the forthcoming Openmoko 2009.x distro built out of OE. In contrast to
+>earlier OM distro managers, he has been instructed to keep a close eye on upstream hence working in our branches as much as possible (until the final prerelease image stabilization phase starts).
+>
+>He will first get his feet wet in the fso/ branches, so we have the chance to cherry-pick and/or merge his work while he gets up to speed with regards to our upstream needs.
+>
+>Please support him.
+>
+>Cheers,
+>
+>-- 
+>:M:
+>
+>
+>_______________________________________________
+>Openembedded-devel mailing list
+>Openembedded-devel@lists.openembedded.org
+>http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-(which goes on and on and on)
 
 
