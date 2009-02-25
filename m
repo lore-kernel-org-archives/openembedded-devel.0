@@ -1,20 +1,32 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LcQjo-0006fV-KC
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 21:52:16 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx01.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LcQgf-0000Tx-IP
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 14:49:01 -0600
-Message-ID: <49A5AEB8.7080909@dls.net>
-Date: Wed, 25 Feb 2009 14:48:56 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LcQp2-0006tc-GV
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 21:57:40 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LcQls-0000eE-Jv
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 20:54:24 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 20:54:24 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 20:54:24 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <go498c$bqq$1@ger.gmane.org> <go4a60$eh8$1@ger.gmane.org>
-In-Reply-To: <go4a60$eh8$1@ger.gmane.org>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 25 Feb 2009 21:54:14 +0100
+Message-ID: <go4b5m$imv$1@ger.gmane.org>
+References: <go498c$bqq$1@ger.gmane.org> <20090225204137.GA25095@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+In-Reply-To: <20090225204137.GA25095@denix.org>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,40 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 20:52:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 25 Feb 2009 20:57:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> On 25-02-09 21:21, Koen Kooi wrote:
-> 
->> I have some other intrusive proposals about shuffling things around in
->> TMP a bit (and out of TMP as well), standardizing on source locations
->> for source_distribute and sourcepkg, etc, but let's start with this easy
->> one.
-> 
-> What I meant to say is:
-> 
-> Let's bunch up all the proposals that get approved so we can have a flag
-> day in a week or 3 to minimize documentation churn.
+On 25-02-09 21:41, Denys Dmytriyenko wrote:
 
-Good timing; I was just composing a separate RFC email, but instead I'll
-add my thoughts to this thread, since what I will propose is very
-similar to the "flag day" idea.
+> Speaking of TMP and outside of it - does it make sense to have DEPLOY outside
+> of TMP by default in OE? I do it in Arago, but I had to make a small fix in
+> base.bbclass though - see bug #4580.
 
-I'd like to propose that we adopt a monthly "Big Change Window" (insert
-your favorite term instead, if you wish).  Many organizations do this to
-manage changes to shared branches.  The idea is that non-critical, but
-potentially disruptive, changes are all merged to the dev branch during
-standard time-periods (e.g. the first week of each calendar month).
+That's exactly what I'm talking about :) I was thinking of a structure 
+like this:
 
-This would set expectations for all users and even the core developers;
-don't sync during these periods if you aren't ready, or perhaps some
-folks might make the decision about working on a branch or not based on
-the proximity of the Big Change Window.
+/OE/org.openembedded.dev # metadate
+/OE/conf # local.conf, auto.conf, site.conf
+/OE/tmp # work/ stamps/ cache/ rootfs/
+/OE/target # ipk,deb,rpm/ images/
+/OE/build # staging, cross, pstage packages
+/OE/downloads # DL_DIR
 
-(BTW, +1 on the renaming of packages to recipes)
+That just leaves finding a place for sdk output and things like 
+sourcepkg and source_distribute.
 
--Mike
+This isn't an RFC yet, since I haven't worked it all out yet, but don't 
+let that stop you from sending in an RFC :)
+
+regards,
+
+Koen
+
+
+
 
 
