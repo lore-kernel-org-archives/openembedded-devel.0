@@ -1,30 +1,31 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LcP2N-0001WG-5w
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 20:03:21 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090225185913.JMYD4363.fed1rmmtao103.cox.net@fed1rmimpo02.cox.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LcQJN-0005I7-Qc
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 21:24:59 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LcQGE-0007CC-FW
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 20:21:42 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 20:21:42 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 13:59:13 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id LJzD1b00A4dMFYL04JzDw4; Wed, 25 Feb 2009 13:59:13 -0500
-X-Authority-Analysis: v=1.0 c=1 a=3t9qBeb09IMA:10 a=bHuD5RsJqpsA:10
-	a=6tYX19vIdiCGKLKksfMA:9 a=JQZl8W2wu1rDw3by7Xm0-2c6MscA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 25 Feb 2009 11:59:12 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	Wed, 25 Feb 2009 20:21:42 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20090225185912.GR2172@smtp.west.cox.net>
-References: <49A4EAFC.3080806@dls.net> <go2tlk$akt$2@ger.gmane.org>
-	<1235550209.2621.28.camel@andromeda> <49A5606D.3050507@dls.net>
-	<1235586352.2621.42.camel@andromeda>
-MIME-Version: 1.0
-In-Reply-To: <1235586352.2621.42.camel@andromeda>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Minimal distro (was: fakeroot fails to build)
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 25 Feb 2009 21:21:32 +0100
+Message-ID: <go498c$bqq$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+Sender: news <news@ger.gmane.org>
+Subject: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,49 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 19:03:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Feb 2009 20:25:00 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 25, 2009 at 07:25:52PM +0100, Michael 'Mickey' Lauer wrote:
-> Am Mittwoch, den 25.02.2009, 09:14 -0600 schrieb Mike (mwester):
-> > So it sounds like there's not a libtool problem; rather I need to
-> > upgrade to the new libtool entirely then. :-(   That's unfortunate,
-> > really unfortunate timing -- but timing is not an OE issue. :-(
-> 
-> Sorry about that. I guess we really need a new stable branch.
-> 
-> > (BTW, the reason libtool got locked down for me is because it made
-> > pkgconfig fail to build, so I might be back with questions on how to
-> > make that work if that failure still exists.)
-> 
-> Try with pkgconfig 0.23, it works with the new libtool.
-> 
-> > ((Also, are there any non-angstrom distros still left in OE, besides
-> > SlugOS?  I really feel like I'm swimming upstream all the time with OE
-> > -- things break for me so often that just don't seem to affect anyone
-> > else...))
-> 
-> I seriously want to revitalize the 'minimal' distro, that's why I have
-> started to do some (invasive) work on improving / updating default
-> versions.
-> 
-> As much as I love Angstrom, I think it is dangerous only to depend on
-> one -- relatively complex -- distribution, since this hides all kinds of
-> bugs in our metadata.
-> 
-> Since my time slots to work on that is also pretty limited, I'd be very
-> glad if I could get some people on board to work towards this common goal:
-> Providing a distribution with minimal policies and default settings that
-> serves as a starting point for new distros.
-> 
-> Can I count on you?
+Hi,
 
-As someone else who depends on !Angstrom working, I'll volunteer to try
-and help the minimal distro keep working.  I assume making sure
-icecc.bbclass works with minimal is OK :)
+I keep trying to teach people the difference between recipes (what's in 
+OE) and packages (what you install on the target) and keep getting 
+reactions like "ok, but why is the dir called packages?", which are 
+completely valid.
 
--- 
-Tom Rini
+Proposal:
+
+mv packages recipes ; git commit .
+
+While it would make setting up OE more intuitive, it does mean that 
+people have to adjust local.conf and distro people need to update their 
+installation instructions.
+
+I have some other intrusive proposals about shuffling things around in 
+TMP a bit (and out of TMP as well), standardizing on source locations 
+for source_distribute and sourcepkg, etc, but let's start with this easy 
+one.
+
+The main motivation for all this is to make the next stable branch 
+easier to grasp for newbies than the current OE structure.
+
+regards,
+
+Koen
+
 
 
