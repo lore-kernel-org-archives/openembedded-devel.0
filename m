@@ -1,39 +1,37 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1LcFcc-0006Ju-3O
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 10:00:06 +0100
-Received: (qmail 2530 invoked from network); 25 Feb 2009 09:56:57 +0100
-Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
-	by leibniz.math.fu-berlin.de with SMTP; 25 Feb 2009 09:56:57 +0100
-Received: (qmail 15224 invoked by uid 9804); 25 Feb 2009 09:56:57 +0100
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 25 Feb 2009 09:56:49 +0100
-Received: (qmail 15214 invoked by uid 9804); 25 Feb 2009 09:56:49 +0100
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by luzin.mi.fu-berlin.de with SMTP; 25 Feb 2009 09:56:49 +0100
-Received: (qmail 2498 invoked from network); 25 Feb 2009 09:56:49 +0100
-Received: from omsk.mi.fu-berlin.de (160.45.45.210)
-	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
-	25 Feb 2009 08:56:49 -0000
-Received: from heinold by omsk.mi.fu-berlin.de with local (Exim 4.63 #1
-	(Debian)) id 1LcFZR-0005jg-3g
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2009 09:56:49 +0100
-Date: Wed, 25 Feb 2009 09:56:49 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090225085648.GA21942@mi.fu-berlin.de>
-References: <1235522090.2621.12.camel@andromeda>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[15217](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.210
-MIME-Version: 1.0
-In-Reply-To: <1235522090.2621.12.camel@andromeda>
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-Subject: Re: commit access for Lukas Gorris (dcordes)
+	(envelope-from <rpurdie@rpsys.net>) id 1LcFfD-0006Ob-Ma
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 10:03:09 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n1P8xblK028501
+	for <openembedded-devel@openembedded.org>; Wed, 25 Feb 2009 08:59:37 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 25651-07 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 08:59:29 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n1P8xQ2g028491
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 25 Feb 2009 08:59:27 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20090225022507.GP2172@smtp.west.cox.net>
+References: <200902131728.08634.openembedded@haerwu.biz>
+	<20090224064639.GE2172@smtp.west.cox.net>
+	<1235492001.27962.60.camel@andromeda>
+	<8763izyarp.fsf@neumann.lab.ossystems.com.br>
+	<fce2a370902241036y359e2c7cv1126a62c8627d2bb@mail.gmail.com>
+	<20090224185059.GL2172@smtp.west.cox.net>
+	<87wsbfw9zy.fsf@neumann.lab.ossystems.com.br>
+	<20090225022507.GP2172@smtp.west.cox.net>
+Date: Wed, 25 Feb 2009 09:01:48 +0000
+Message-Id: <1235552508.5399.2.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,20 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 09:00:12 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Feb 2009 09:03:12 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 25, 2009 at 01:34:50AM +0100, Michael 'Mickey' Lauer wrote:
-> I propose commit access for Lukas, who is active in the HTC Linux
-> community. His work will mainly be maintaining the HTC kernel and
-> machine configuration, but also adding general support for distros.
+
+On Tue, 2009-02-24 at 19:25 -0700, Tom Rini wrote:
+> On Tue, Feb 24, 2009 at 11:01:05PM -0300, Otavio Salvador wrote:
+> [snip]
+> > I do belive that the best way to solve it is to have a md5 file together
+> > with the .bb recipe. This solves the problems for forks, derivatives and
+> > also makes harder to just use "cat tmp/checksums.ini >> conf/checksums.ini".
 > 
-> -- 
-> :M:
+> Running a script that will make the .sum file isn't any harder really.
+> And it's still a "this is the checksum we downloaded" not "this is the
+> checksum upstream says is correct".
 
-+1 from me
+You can specify the md5 as part of the SRC_URI if I remember correctly.
+Its just such a pain, nobody does.
 
-Bye Henning
+-- 
+RP
+
 
 
