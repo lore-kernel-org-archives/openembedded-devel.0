@@ -1,23 +1,30 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LcOsw-0000z5-Tf
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 19:53:35 +0100
-Received: (qmail 22855 invoked by uid 1003); 25 Feb 2009 18:50:20 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 25 Feb 2009 18:50:20 -0000
-Message-ID: <49A592EA.1050602@balister.org>
-Date: Wed, 25 Feb 2009 13:50:18 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <trini@kernel.crashing.org>) id 1LcP2N-0001WG-5w
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 20:03:21 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao103.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090225185913.JMYD4363.fed1rmmtao103.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 13:59:13 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id LJzD1b00A4dMFYL04JzDw4; Wed, 25 Feb 2009 13:59:13 -0500
+X-Authority-Analysis: v=1.0 c=1 a=3t9qBeb09IMA:10 a=bHuD5RsJqpsA:10
+	a=6tYX19vIdiCGKLKksfMA:9 a=JQZl8W2wu1rDw3by7Xm0-2c6MscA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Wed, 25 Feb 2009 11:59:12 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090225185912.GR2172@smtp.west.cox.net>
+References: <49A4EAFC.3080806@dls.net> <go2tlk$akt$2@ger.gmane.org>
+	<1235550209.2621.28.camel@andromeda> <49A5606D.3050507@dls.net>
+	<1235586352.2621.42.camel@andromeda>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49A513AA.9080201@gefanuc.com>	<B6FF18F4244BAE4991D05BF4F7A7649293467E@MCHP7I5A.ww902.siemens.net>	<49A56CE3.1060305@gefanuc.com>
-	<1235587135.2621.47.camel@andromeda>
-In-Reply-To: <1235587135.2621.47.camel@andromeda>
-Cc: openembedded-devel@openembedded.org,
-	Using OE <openembedded-users@lists.openembedded.org>
-Subject: Re: Discussion regarding the future of OpenEmbedded mailing lists
+In-Reply-To: <1235586352.2621.42.camel@andromeda>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Minimal distro (was: fakeroot fails to build)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,116 +38,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 18:53:36 -0000
-X-Groupsio-MsgNum: 7971
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms070102030500070303080904"
+X-List-Received-Date: Wed, 25 Feb 2009 19:03:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------ms070102030500070303080904
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Michael 'Mickey' Lauer wrote:
-> Am Mittwoch, den 25.02.2009, 16:08 +0000 schrieb Martyn Welch:
->> Wolf, Josef wrote:
->>> Martyn Welch wrote:
->>>
->>> [ ... ]
->>>> There has been a proposal on the openembedded-devel mailing list
->>>> to re-organise the lists provided on openembedded.org.
->>> [ ... ]
->>>> Openembedded-devel - for humans to post patches and ask questions
->>>> Openembedded-commits - commits, bugs, logs, etc
->>>> Openembedded-private - core team
->>> To be honest, I am somewhat confused by the naming of the lists.
->>> If I understand correctly, the intent of the new lists are
->>>
->>> OE-private: core-team.
->>>             All the other projects I know of would call this list
->>>             FOOBAR-devel
->>>
->>> OE-devel: rest of the world.
->>>           All the other projects I know of would call this list
->>>           FOOBAR-users
->>>
->>> Is there any reason for this strange (that is: non-standard) naming
->>> scheme?  Is OE-private meant to contain really private (confidential?)
->>> traffic?  If not, I'd guess many people (like me) would mis-interpret
->>> the intent of this list.
->> Yes - it is my understanding that the traffic on Openembedded-private is really private (I believe that OpenEmbedded is now legally registered as a non-profit in Germany and I should imagine there are certain discussions which need a degree of privacy).
+On Wed, Feb 25, 2009 at 07:25:52PM +0100, Michael 'Mickey' Lauer wrote:
+> Am Mittwoch, den 25.02.2009, 09:14 -0600 schrieb Mike (mwester):
+> > So it sounds like there's not a libtool problem; rather I need to
+> > upgrade to the new libtool entirely then. :-(   That's unfortunate,
+> > really unfortunate timing -- but timing is not an OE issue. :-(
 > 
-> Correct, although it's not because of the e.V., but rather for companies
-> who may want to contact us in order to get some work arrangements, but
-> don't want to be disclosed.
+> Sorry about that. I guess we really need a new stable branch.
+> 
+> > (BTW, the reason libtool got locked down for me is because it made
+> > pkgconfig fail to build, so I might be back with questions on how to
+> > make that work if that failure still exists.)
+> 
+> Try with pkgconfig 0.23, it works with the new libtool.
+> 
+> > ((Also, are there any non-angstrom distros still left in OE, besides
+> > SlugOS?  I really feel like I'm swimming upstream all the time with OE
+> > -- things break for me so often that just don't seem to affect anyone
+> > else...))
+> 
+> I seriously want to revitalize the 'minimal' distro, that's why I have
+> started to do some (invasive) work on improving / updating default
+> versions.
+> 
+> As much as I love Angstrom, I think it is dangerous only to depend on
+> one -- relatively complex -- distribution, since this hides all kinds of
+> bugs in our metadata.
+> 
+> Since my time slots to work on that is also pretty limited, I'd be very
+> glad if I could get some people on board to work towards this common goal:
+> Providing a distribution with minimal policies and default settings that
+> serves as a starting point for new distros.
+> 
+> Can I count on you?
 
-And it is not a very exciting list either. No one is missing anything 
-not being on it.
+As someone else who depends on !Angstrom working, I'll volunteer to try
+and help the minimal distro keep working.  I assume making sure
+icecc.bbclass works with minimal is OK :)
 
-Philip
+-- 
+Tom Rini
 
---------------ms070102030500070303080904
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIyNTE4
-NTAxOFowIwYJKoZIhvcNAQkEMRYEFH/D2HR7L4xABWRjR6Q4sXtFapbtMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBDvVaNRIdeRY6KtbWeenSio19e2iJtpkCA5TxOh/iBw0ynMlh/
-IDDJyGCnROYGdlaL9iBHEcKR6rKRjUT+Pjt+LllGYdrfY6kvLk+qkpD2kxjB40j8DNBXiGAlo2ib
-HNOzFheRZQmBCJB8pMhC86SzRJuuLFpUYdnjwYxFW3MHdFqlTlTrdvPyamNL8hRHy1T5eMwIGp+c
-FBgvfLCgeACH1bSINZzms/82pOfDEa3ViYZ5htr0wPL/pHULjCFn4l3p2rdN7/CjAgZsVpyinghW
-uHLsjKhODPUoU1UXZVM1/QcVQFuzJRPK4zMAhAolVkWt74c9JhVzJoSx4pLkJeYEAAAAAAAA
-
---------------ms070102030500070303080904--
