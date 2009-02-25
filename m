@@ -1,34 +1,19 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LcCls-0006B4-EI
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 06:57:28 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LcCiq-0002n3-Kl
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 05:54:20 +0000
-Received: from p031211.dynamic.ppp.asahi-net.or.jp ([221.113.31.211])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 05:54:20 +0000
-Received: from no2spam by p031211.dynamic.ppp.asahi-net.or.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 05:54:20 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <mwester@dls.net>) id 1LcDhX-00087C-5J
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 07:57:03 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx02.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LcDeU-0008AS-7x
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 00:53:54 -0600
+Message-ID: <49A4EAFC.3080806@dls.net>
+Date: Wed, 25 Feb 2009 00:53:48 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 25 Feb 2009 14:54:10 +0900
-Message-ID: <go2me3$q0a$1@ger.gmane.org>
-References: <1235501736.8911.52.camel@alap>
-	<go1jd3$mlv$1@ger.gmane.org>	<1235507235.2621.6.camel@andromeda>
-	<1235508515.8911.60.camel@alap>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p031211.dynamic.ppp.asahi-net.or.jp
-User-Agent: Thunderbird 2.0.0.19 (X11/20090103)
-In-Reply-To: <1235508515.8911.60.camel@alap>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] add the openmoko git kernel stable branch to fso/milestone5
+Subject: fakeroot fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,17 +27,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 05:57:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 25 Feb 2009 06:57:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Angus Ainslie wrote:
-> I found the policy section and am reading it now. The commit policy
-> still has references to monotone.
-> 
-> http://wiki.openembedded.net/index.php/Commit_Policy
+fakeroot fails to build -- any idea how we can fix this?
 
-Fixed, thanks for pointing out.
+log file:
 
+gcc -DHAVE_CONFIG_H -I.
+-isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include
+-isystem/u/slug/slugos/tmp/staging\
+/i686-linux/usr/include -O2 -MT simple.o -MD -MP -MF .deps/simple.Tpo -c
+-o simple.o simple.c
+mv -f .deps/simple.Tpo .deps/simple.Po
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.
+-isystem/u/slug/slugos/tmp/staging/i686-linux/usr\
+/include  -isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include -O2
+-MT libfakeroot.lo -MD -MP -MF .deps/libfakeroo\
+t.Tpo -c -o libfakeroot.lo libfakeroot.c
+./libtool: line 764: X--tag=CC: command not found
+./libtool: line 797: libtool: ignoring unknown tag : command not found
+./libtool: line 764: X--mode=compile: command not found
+./libtool: line 764: X--tag=CC: command not found
+./libtool: line 797: libtool: ignoring unknown tag : command not found
+./libtool: line 764: X--mode=compile: command not found
+./libtool: line 914: *** Warning: inferring the mode of operation is
+deprecated.: command not found
+./libtool: line 915: *** Future versions of Libtool will require
+-mode=MODE be specified.: command not found
+./libtool: line 1058: Xgcc: command not found
+./libtool: line 1058: X-DHAVE_CONFIG_H: command not found
+./libtool: line 1058: X-I.: command not found
+./libtool: line 1058:
+X-isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include: No such file
+or directory
+./libtool: line 1058:
+X-isystem/u/slug/slugos/tmp/staging/i686-linux/usr/include: No such file
+or directory
+./libtool: line 1058: X-O2: command not found
+./libtool: line 914: *** Warning: inferring the mode of operation is
+deprecated.: command not found
+./libtool: line 915: *** Future versions of Libtool will require
+-mode=MODE be specified.: command not found
+./libtool: line 1058: X-MT: command not found
+./libtool: line 1058: Xgcc: command not found
+./libtool: line 1058: Xcommunicate.lo: command not found
+
+(which goes on and on and on)
 
 
