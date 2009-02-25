@@ -1,34 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LcFmI-0006Ur-5H
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 10:10:08 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LcFjG-0001dA-18
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 09:06:58 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 09:06:58 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 09:06:58 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <rpurdie@rpsys.net>) id 1LcFmp-0006XX-GW
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 10:10:47 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n1P97Tii028827
+	for <openembedded-devel@openembedded.org>; Wed, 25 Feb 2009 09:07:29 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 26692-06 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Feb 2009 09:07:22 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n1P97IJK028813
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Wed, 25 Feb 2009 09:07:18 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 25 Feb 2009 10:06:50 +0100
-Message-ID: <go31na$n9l$1@ger.gmane.org>
-References: <20090224211929.77E79E8037@amethyst.openembedded.net>	<1235513110.2621.7.camel@andromeda>
-	<go2tek$akt$1@ger.gmane.org> <1235549128.2621.20.camel@andromeda>
+In-Reply-To: <1235514594.4890.525.camel@lenovo.internal.reciva.com>
+References: <200902131728.08634.openembedded@haerwu.biz>
+	<20090224064639.GE2172@smtp.west.cox.net>
+	<1235492001.27962.60.camel@andromeda> <49A4203E.3060202@balister.org>
+	<59251.AFRWVFwAXS0=.1235513405.squirrel@webmail.no-log.org>
+	<1235514594.4890.525.camel@lenovo.internal.reciva.com>
+Date: Wed, 25 Feb 2009 09:09:40 +0000
+Message-Id: <1235552980.5399.10.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090209 Shredder/3.0b2pre
-In-Reply-To: <1235549128.2621.20.camel@andromeda>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] Koen Kooi : gstreamer-ti: bump to r126 to make gstreamer autoplug and playbin work
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 09:10:09 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 25 Feb 2009 09:10:50 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 25-02-09 09:05, Michael 'Mickey' Lauer wrote:
-> Am Mittwoch, den 25.02.2009, 08:53 +0100 schrieb Koen Kooi:
->> On 24-02-09 23:05, Michael 'Mickey' Lauer wrote:
->>> Hi Koen,
->>>
->>>> -SRCREV = "121"
->>>> +SRCREV = "126"
->>> Is there any specific reason you're not using sane-srcrevs.inc for that?
->> The 5 minute reparse time everytime someone touches sane-srcrevs.
->
-> Aha. I don't think that's a good reason, but YMMV. So we should get rid
-> of sane-srcrevs.inc and put it all into the files?
+On Tue, 2009-02-24 at 22:29 +0000, Phil Blundell wrote:
+> I think Tom Rini's point, which is a good one, was that the existing
+> checksums.ini workflow doesn't actually do anything to protect against
+> those threats, since there isn't any validation of the checksum against
+> an authoritative source.  Right now, the checksum that you get in
+> checksums.ini is just what was computed by the first person to build the
+> corresponding .bb file: if the file had been compromised before that, we
+> would never know.
+> 
+> Even in the case where the upstream tarball changes unexpectedly, I
+> wouldn't be at all surprised if some or other developer just decided
+> that the checksums.ini entry was wrong and quietly checked in a
+> "correction" for it.  So I tend to agree with Tom, the checksums in
+> their current form do not really buy much.
 
-It would make overriding revs a lot easier and handle things like 
-multiple git kernels (e.g. linux-omap) and recipes with both svn and git 
-versions (ffmpeg).
-I have no strong opinions on dumping sane-srcrevs, but lately people 
-have been willy-nilly updating revs that things are hardly 'sane' anymore.
+I think checksums.ini even in its current form is useful. If the
+checksum matches it tells us that your build configuration at least
+matches the configuration the original recipe submitter had. It also
+spots corrupted downloads and cases where upstream changes and we have
+seen those cases. People shouldn't be silently checking in those changes
+and if they do, would most likely get spotted by people with the old
+version in DL_DIR.
 
-regards,
+So to say it does buy much isn't really fair although I agree if you
+want verification of the sources at every level, its not good enough. If
+we want to do better, all it takes is someone to do the work. We could
+have a "verified-checksums.ini" file with some policy attached to it
+which is used instead of or supplements checksums.ini...
 
-Koen
+For overlays, I'd suggest just scanning the overlay directories (BBPATH)
+for more checksum.ini files like we do with conf/class files...
 
+-- 
+RP
 
 
 
