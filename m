@@ -1,37 +1,23 @@
-Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1LcMfK-0003RB-Fq
+	(envelope-from <mickey@vanille-media.de>) id 1LcOVE-0000DR-9V
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Feb 2009 17:31:22 +0100
-Received: by rv-out-0708.google.com with SMTP id b17so94476rvf.12
+	Wed, 25 Feb 2009 19:29:04 +0100
+Received: from [192.168.1.105] (e180139171.adsl.alicedsl.de [85.180.139.171])
+	by drlauer-research.com (Postfix) with ESMTP id 4769058419A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2009 08:28:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=2t2puoKyN8Y/tChpQT82IQtgC9ODK7p8q4h70BwlSjg=;
-	b=WR2YSncZt0A/5mJf0tMBUSgF8XvtSDH+S+QAkV5oUj9dRnDeXR8w7MLv560boRYVoK
-	wMobsTB/Bvw8QqYmaUoXXiG9VxS8hmPPhYWhZvSN9FuDszFhDxqJyb17c2VjGY+MgehN
-	LYW++Pj+/Q6OHD6JRSzXf/i3dUQLLI5eArTkA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=kHACMk0GBRWIChZFtW6FrQWi3IFAr+cNKgybjNOGRu1sISBLuOBDH1znDyf/kNWt3D
-	KJoap8BJFqJF8RJ3Lpx/YHI0De5nsQBM3lybYXNOYkNDUyLFuLEn8kwkpQRM90jmfV08
-	L1+XL8xJLzlRWwNGWeON4w3kUGEto1J16O0gY=
-MIME-Version: 1.0
-Received: by 10.141.168.2 with SMTP id v2mr129547rvo.47.1235579290919; Wed, 25 
-	Feb 2009 08:28:10 -0800 (PST)
-In-Reply-To: <49A55A59.5080409@balister.org>
-References: <f46da1cf0902201818r3fcf3432oc14929b5f455bbe7@mail.gmail.com>
-	<f96d234e0902240651r7ad36677h8e828964308e2b50@mail.gmail.com>
-	<49A55A59.5080409@balister.org>
-Date: Wed, 25 Feb 2009 11:28:10 -0500
-Message-ID: <f96d234e0902250828x6e72a8b6kc0a4285125f27b0e@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Wed, 25 Feb 2009 19:49:59 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Documentation/User Manual questions
+In-Reply-To: <49A5606D.3050507@dls.net>
+References: <49A4EAFC.3080806@dls.net> <go2tlk$akt$2@ger.gmane.org>
+	<1235550209.2621.28.camel@andromeda>  <49A5606D.3050507@dls.net>
+Organization: Vanille-Media
+Date: Wed, 25 Feb 2009 19:25:52 +0100
+Message-Id: <1235586352.2621.42.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Minimal distro (was: fakeroot fails to build)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 16:31:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Feb 2009 18:29:04 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 25, 2009 at 9:48 AM, Philip Balister <philip@balister.org> wrot=
-e:
-> Cliff Brake wrote:
->>
->> On Fri, Feb 20, 2009 at 9:18 PM, Theodore A. Roth <taroth@gmail.com>
->> wrote:
->>
->>> 2: Was the documentation branch really last updated on May 9, 2008? Is
->>> there a newer branch I have not yet discovered?
->>
->> Yes, this is likely correct. =A0Documentation is not OE's strong point.
->> But the combination of various docs available cover things pretty
->> well:
->>
->> http://wiki.openembedded.net/index.php/Documentation
->
-> I notice you keep copies of the manual on your website. Last week Koen
-> suggested we add docs.openembedded.org to DNS. Would it make sense to go
-> ahead and add this address and use it for "static" copies of documentatio=
-n?
+Am Mittwoch, den 25.02.2009, 09:14 -0600 schrieb Mike (mwester):
+> So it sounds like there's not a libtool problem; rather I need to
+> upgrade to the new libtool entirely then. :-(   That's unfortunate,
+> really unfortunate timing -- but timing is not an OE issue. :-(
 
-I have a script that automatically updates the docs and rsyncs them to
-my web site.  I can adjust that as soon as docs.oe.org comes on line.
-Given the reliability of OE infrastructure in the past, it was just a
-lot easier to use my own server, but it seems like things are
-stabilizing now.
+Sorry about that. I guess we really need a new stable branch.
 
-Thanks,
-Cliff
+> (BTW, the reason libtool got locked down for me is because it made
+> pkgconfig fail to build, so I might be back with questions on how to
+> make that work if that failure still exists.)
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Cliff Brake
-http://bec-systems.com
+Try with pkgconfig 0.23, it works with the new libtool.
+
+> ((Also, are there any non-angstrom distros still left in OE, besides
+> SlugOS?  I really feel like I'm swimming upstream all the time with OE
+> -- things break for me so often that just don't seem to affect anyone
+> else...))
+
+I seriously want to revitalize the 'minimal' distro, that's why I have
+started to do some (invasive) work on improving / updating default
+versions.
+
+As much as I love Angstrom, I think it is dangerous only to depend on
+one -- relatively complex -- distribution, since this hides all kinds of
+bugs in our metadata.
+
+Since my time slots to work on that is also pretty limited, I'd be very
+glad if I could get some people on board to work towards this common goal:
+Providing a distribution with minimal policies and default settings that
+serves as a starting point for new distros.
+
+Can I count on you?
+
+-- 
+:M:
+
 
 
