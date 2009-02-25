@@ -1,36 +1,31 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [209.85.200.174] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LcRSw-00051i-GL
-	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 22:38:54 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090225213538.CJIQ13097.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
+	(envelope-from <taroth@gmail.com>) id 1LcRVg-00057W-R2
+	for openembedded-devel@openembedded.org; Wed, 25 Feb 2009 22:41:45 +0100
+Received: by wf-out-1314.google.com with SMTP id 25so219010wfc.6
 	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Feb 2009 16:35:38 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id LMbc1b00S4dMFYL03MbcuL; Wed, 25 Feb 2009 16:35:39 -0500
-X-Authority-Analysis: v=1.0 c=1 a=Q4-j1AaZAAAA:8 a=22pK5S-mAAAA:8
-	a=fwczLco4d1agzBYopBUA:9 a=_Upx03UvB7obr1woztMA:7
-	a=-qKpPbAjlHH6XQEKRyIRIyNKf3IA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 25 Feb 2009 14:35:36 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090225213536.GT2172@smtp.west.cox.net>
-References: <200902131728.08634.openembedded@haerwu.biz>
-	<20090224064639.GE2172@smtp.west.cox.net>
-	<1235492001.27962.60.camel@andromeda>
-	<8763izyarp.fsf@neumann.lab.ossystems.com.br>
-	<fce2a370902241036y359e2c7cv1126a62c8627d2bb@mail.gmail.com>
-	<20090224185059.GL2172@smtp.west.cox.net>
-	<87wsbfw9zy.fsf@neumann.lab.ossystems.com.br>
-	<20090225022507.GP2172@smtp.west.cox.net>
-	<go4d36$khh$1@ger.gmane.org>
+	Wed, 25 Feb 2009 13:38:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=TTfje/9JtLwfC81b71G0iTD1zEEDC1yl3fjWdty9spg=;
+	b=kmTQZTG8m6X11UUD+b/jauRjVvuIDJt6Cf+hQ5E5ucJB7CtbqPxfMhqTiNYAjUN7i0
+	zEWEt0uwAymNUmjxjL/OtfxDwDRvoi1UsZgslus5+DDFhYzvUeR1Uo7pGOZu6IP07uR8
+	kTEZdasgU4/YcLHbn6lFPBUSjqpE2ZGh93wTU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=NOMKj+gNZxOZuiVNaaqMDa2hd2K+ZFC7ZW1yxSCsIeTXpiNtRyWVfN0hVyBENTGbya
+	Y22OXyNwECNOduAw4THj+YxPUwsfJWZbEboKsxdJ9BbpnRfcYQ4T6Tg3QnLkHEfB3cyM
+	WK60SnfcwQrc2QbW/mb7YnNh3umpnghlwOiVY=
 MIME-Version: 1.0
-In-Reply-To: <go4d36$khh$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: checksums situation
+Received: by 10.142.70.11 with SMTP id s11mr249251wfa.42.1235597911177; Wed, 
+	25 Feb 2009 13:38:31 -0800 (PST)
+Date: Wed, 25 Feb 2009 13:38:31 -0800
+Message-ID: <f46da1cf0902251338k5592fd9dt91ceb4cdd63dd5b7@mail.gmail.com>
+From: "Theodore A. Roth" <taroth@gmail.com>
+To: openembedded-devel@openembedded.org
+Subject: question for docs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,53 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 21:38:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Feb 2009 21:41:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 25, 2009 at 09:27:02PM +0000, Vitus Jensen wrote:
-> Am Tue, 24 Feb 2009 19:25:07 -0700 schrieb Tom Rini:
-> 
-> > On Tue, Feb 24, 2009 at 11:01:05PM -0300, Otavio Salvador wrote: [snip]
-> >> I do belive that the best way to solve it is to have a md5 file
-> >> together with the .bb recipe. This solves the problems for forks,
-> >> derivatives and also makes harder to just use "cat tmp/checksums.ini >>
-> >> conf/checksums.ini".
-> > 
-> > Running a script that will make the .sum file isn't any harder really.
-> > And it's still a "this is the checksum we downloaded" not "this is the
-> > checksum upstream says is correct".
-> ...
-> 
-> But "this is the checksum we downloaded" says that's it's the same 
-> version the author of the .bb receipe downloaded, reviewed and tested on 
-> his device.  What is the probability that this author downloaded a 
-> corrupt but working archive last november and you get the same corrupt 
-> archive now?
+Hi,
 
-See hrw's post earlier where he points out how many checksums are a
-simple fetch and add? :)
+I'm working on a user manual update for the "Building Software"
+section of chapter 2.
 
-> If you want better security you have to ask the download source for a GPG 
-> signature of his files or the like as MD5 isn't really safe.
+Can someone give me a quick one liner description of the contents of
+packages/meta/ and packages/tasks/ which I can use in the user manual?
 
-This is one of my points.  People think we have security from our
-current checksum list, but we do not.
+Thanks.
 
-> 
-> Bye,
->    Vitus
-> 
-> -- 
-> Vitus Jensen, Hannover, Germany, Earth, Milky Way, Universe (current)
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
--- 
-Tom Rini
+Ted Roth
 
 
