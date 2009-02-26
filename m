@@ -1,26 +1,42 @@
-Received: from [64.18.0.26] (helo=exprod5og113.obsmtp.com)
+Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1LcbaH-0003H5-4o
-	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 09:27:09 +0100
-Received: from source ([12.43.191.1]) (using TLSv1) by
-	exprod5ob113.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKSaZRl5GT3u8I+kv3hrIrpK1asa8yaGg0@postini.com;
-	Thu, 26 Feb 2009 00:23:52 PST
-Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
-	by Alpmlip05.e2k.ad.ge.com with ESMTP; 26 Feb 2009 03:23:49 -0500
-Received: from ind-3n4b83jh1.amer.consind.ge.com (HELO [192.168.219.128])
-	([3.138.54.81])
-	by alpmlip01.e2k.ad.ge.com with ESMTP; 26 Feb 2009 03:23:50 -0500
-Message-ID: <49A651BD.4030007@gefanuc.com>
-Date: Thu, 26 Feb 2009 08:24:29 +0000
-From: Martyn Welch <martyn.welch@gefanuc.com>
-Organization: GE Fanuc Intelligent Platforms Ltd.
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	(envelope-from <jay4mail@gmail.com>) id 1LccLe-0004Ey-G8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Feb 2009 10:16:15 +0100
+Received: by fxm11 with SMTP id 11so382522fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Feb 2009 01:12:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:message-id;
+	bh=66frXquoaUoJF56YIpm+2BYohGCZW/qS+nsAxHbHTus=;
+	b=SjPs6c2H943rUHSdwiQ29Lo9Du9/Cgy4a6B3yYWgjc9f3Ik6h5AVEjINXjVdHwGWpG
+	bT+Av/fY3DwozzJcMt7aeptukypOxtxRq1Z+V3fmTZfdhQpwAH9uqsieOfasmA8guoXT
+	8w3A/ob3kr8KeP3au16klQOr8DNr5slglpD4g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:message-id;
+	b=eRIhQjsxNw/CthbTpZ86aoUsgIUAOTQd278pvK3+gDncWMaH9Q/Qwr3Cxac8h2rXzW
+	+f/3ZHcEG9SLlkw5QU2cKfTh7a3DW7rgC61JoXHhF2RHnM9C7bVCqj+Ic8Z5EkiMnKYP
+	7EoqCKZkJFlshfI4nhHwCdcWxaoQiJmALOtlE=
+Received: by 10.86.57.9 with SMTP id f9mr1967815fga.38.1235639566662;
+	Thu, 26 Feb 2009 01:12:46 -0800 (PST)
+Received: from is.home (93-81-1-160.broadband.corbina.ru [93.81.1.160])
+	by mx.google.com with ESMTPS id 4sm1652446fge.24.2009.02.26.01.12.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 26 Feb 2009 01:12:46 -0800 (PST)
+From: Yuri Bushmelev <jay4mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Feb 2009 12:09:09 +0300
+User-Agent: KMail/1.9.10
+References: <go498c$bqq$1@ger.gmane.org> <49A5AEB8.7080909@dls.net>
+	<go4bh1$kbu$1@ger.gmane.org>
+In-Reply-To: <go4bh1$kbu$1@ger.gmane.org>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <go498c$bqq$1@ger.gmane.org>
-In-Reply-To: <go498c$bqq$1@ger.gmane.org>
-Subject: Re: [RFC] renaming packages/ to recipes/
+Message-Id: <200902261209.09173.jay4mail@gmail.com>
+Subject: Re: Merge windows, was: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,30 +50,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 08:27:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 26 Feb 2009 09:16:56 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> Hi,
-> 
-> I keep trying to teach people the difference between recipes (what's in 
-> OE) and packages (what you install on the target) and keep getting 
-> reactions like "ok, but why is the dir called packages?", which are 
-> completely valid.
-> 
-> Proposal:
-> 
-> mv packages recipes ; git commit .
-> 
+Hello!
 
-+1
+> Related to that: a NEWS file would be neat as well, but that's only
+> needed when we start doing releases based on the stable branch
 
-Martyn
+Look at FreeBSD UPDATING file too:
+http://www.freebsd.org/cgi/cvsweb.cgi/ports/UPDATING?rev=1.780;content-type=text%2Fplain
+
+This file describes big changes in ports to warn users. It recommended to 
+read this file before doing upgrade. We can use this idea too.
+
 -- 
-Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
-GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
-Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
-Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 729849476
+Yuri Bushmelev
 
 
