@@ -1,27 +1,33 @@
-Received: from [209.85.219.166] (helo=mail-ew0-f166.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Lcium-0002QJ-Gm
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 17:16:48 +0100
-Received: by ewy10 with SMTP id 10so693448ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2009 08:13:26 -0800 (PST)
-Received: by 10.210.13.17 with SMTP id 17mr1020351ebm.45.1235664806693;
-	Thu, 26 Feb 2009 08:13:26 -0800 (PST)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id 7sm26366eyg.37.2009.02.26.08.13.25
-	(version=SSLv3 cipher=RC4-MD5); Thu, 26 Feb 2009 08:13:26 -0800 (PST)
-Message-ID: <49A6BFA5.4070405@xora.org.uk>
-Date: Thu, 26 Feb 2009 16:13:25 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <go4amc$h30$1@ger.gmane.org> <go6ah4$cud$1@ger.gmane.org>
-In-Reply-To: <go6ah4$cud$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
-Subject: Re: [RFC] update opkg* SRCREV to 201
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LcjOi-0008V9-Bt
+	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 17:47:48 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LcjLU-0000Hs-Vd
+	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 16:44:24 +0000
+Received: from p030043.dynamic.ppp.asahi-net.or.jp ([221.113.30.43])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 26 Feb 2009 16:44:24 +0000
+Received: from no2spam by p030043.dynamic.ppp.asahi-net.or.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 26 Feb 2009 16:44:24 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 27 Feb 2009 01:44:14 +0900
+Message-ID: <go6gt0$5hp$1@ger.gmane.org>
+References: <go498c$bqq$1@ger.gmane.org>	<200902261144.46548.openembedded@haerwu.biz>
+	<49A69217.3070705@opensimpad.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p030043.dynamic.ppp.asahi-net.or.jp
+User-Agent: Thunderbird 2.0.0.19 (X11/20090103)
+In-Reply-To: <49A69217.3070705@opensimpad.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 16:16:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 26 Feb 2009 16:48:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> On 25-02-09 21:46, Koen Kooi wrote:
->> Hi,
->>
->> I was getting seriously annoyed with the useless error codes opkg was
->> giving me and Tick pointed me to:
->>
->> http://code.google.com/p/opkg/issues/detail?id=6&can=1
->>
->> We're at 197 now in OE (with r201 applied as patch). I'd like to get
->> r199 and r200 in as well, and since I'm lazy I though we'd get r198 in
->> as well, which means instead of adding a few patches I can just bump up
->> SRCREV to 201.
->>
->> What do you think?
->
-> Noone is thinking anything?
->
-Sorry been AFK, my opinion of these things is always no-one will test
-until stuff is committed anyway. So you might as well go ahead! Without
-the bug reports tick won't be able to improve opkg.
+Bernhard Guillon wrote:
+>> mkdir recipes-broken
+>> git add  recipes-broken
+>> git mv recipes/obsolete recipes-broken/obsolete
+>> git mv recipes/nonworking recipes-broken/nonworking
 
-Graeme (XorA)
++1
+
+> I like this idea. But we should add a description file to the recipe on 
+> which arch it is broken or why it is obsolete.
+
+Oh no, please no.  Not yet another file which people will ignore ;-) 
+That is what the commit message and "git log 
+recipes/obsolete/$somepackage" is for.
 
 
 
