@@ -1,22 +1,35 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Lcmrg-0001Nz-4c
-	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 21:29:53 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx01.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Lclbw-0000Ex-0D
-	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 13:09:32 -0600
-Message-ID: <49A6E8E3.6090007@dls.net>
-Date: Thu, 26 Feb 2009 13:09:23 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
+	(envelope-from <cliff.brake@gmail.com>) id 1Lcorj-0006oH-5v
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Feb 2009 23:38:03 +0100
+Received: by rv-out-0708.google.com with SMTP id b17so801486rvf.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Feb 2009 14:34:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=pFjIhPuQMgNbYFzje6UVJLGZT/8u0Th692yrILV6LOg=;
+	b=EguxajrPRcUrBPguucHNDQd8Qb0oe5JX0n1GU4WOHa8UbrcHlG/d6OoSDxGcwBtA7k
+	JFeLoLtPuVzO4VA9h5UvLl0iZATnM4OpU64RzB79+dTpPawxKC/APi+5nInR6jI00PFD
+	e16vnwYakfyW2Ut5zGUmNYalrcCGanYT95PPo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=h/LyVVkAWrl0Vf1tCHvcM6+/vhNjMPf4FojLyo+n3XkMIUlRLOc8drQqT1nhExpm1l
+	sX15pQ8oHzQZ10qYad7hVF+LA9/MaMiIyQh8BNn7Ry7YwOdI7bNt4IcqR9TVY2kOI7V/
+	mL/ieojSmY3dKD2xW0LvbuH6flpCvjuYppVuI=
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <go4amc$h30$1@ger.gmane.org> <go6ah4$cud$1@ger.gmane.org>
-	<49A6B938.3040201@balister.org>
-In-Reply-To: <49A6B938.3040201@balister.org>
-Subject: Re: [RFC] update opkg* SRCREV to 201
+Received: by 10.141.53.4 with SMTP id f4mr846408rvk.155.1235687680636; Thu, 26 
+	Feb 2009 14:34:40 -0800 (PST)
+In-Reply-To: <alpine.DEB.1.00.0902251712490.25447@localhost.localdomain>
+References: <alpine.DEB.1.00.0902251712490.25447@localhost.localdomain>
+Date: Thu, 26 Feb 2009 17:34:40 -0500
+Message-ID: <f96d234e0902261434r7ac3e41ek877a8045f28e6425@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] getting_oe.xml: Update "Building Software" section.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,48 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 20:29:55 -0000
+X-List-Received-Date: Thu, 26 Feb 2009 22:38:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Philip Balister wrote:
-> Koen Kooi wrote:
->> On 25-02-09 21:46, Koen Kooi wrote:
->>> Hi,
->>>
->>> I was getting seriously annoyed with the useless error codes opkg was
->>> giving me and Tick pointed me to:
->>>
->>> http://code.google.com/p/opkg/issues/detail?id=6&can=1
->>>
->>> We're at 197 now in OE (with r201 applied as patch). I'd like to get
->>> r199 and r200 in as well, and since I'm lazy I though we'd get r198 in
->>> as well, which means instead of adding a few patches I can just bump up
->>> SRCREV to 201.
->>>
->>> What do you think?
->>
->> Noone is thinking anything?
-> 
-> Well, it looks ok to me, but I am not a follower of opkg.
-> 
-> Hearing no positive comments, does anyone object to pushing this,
-> knowing that if Koen is wrong about this working, it messes up our builds?
+On Wed, Feb 25, 2009 at 8:15 PM, Theodore A. Roth <taroth@gmail.com> wrote:
+>
+> ---
+> =A0docs/usermanual/chapters/getting_oe.xml | =A0317 +++++++++++++++++++++=
++++++++++-
+> =A01 files changed, 310 insertions(+), 7 deletions(-)
 
-[I have failed -- I had intended to remain silent on the topic of opkg ;-) ]
+Applied, thanks!
 
-I use PREFERRED_VERSION, for a reason -- opkg has numerous issues, few
-of which seem to be well-understood much less being worked on, and it
-seems that small-memory devices trigger these issues more so than the
-larger more common systems.
+Cliff
 
-I will be back-porting these patches for the opkg-nogpg-nocurl recipe,
-regardless.
-
-If folks would rather not have the ever-growing set of opkg-nogpg-nocurl
-patches clutter up the opkg recipe directory, feel free to instruct me
-to move that all to a different directory.
-
--Mike (mwester)
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Cliff Brake
+http://bec-systems.com
 
 
