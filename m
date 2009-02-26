@@ -1,20 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1Lcdmh-0007Tn-VT
-	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 11:48:11 +0100
-Received: (qmail 11683 invoked by uid 813007); 26 Feb 2009 10:44:49 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 26 Feb 2009 10:44:49 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Lce78-0007kJ-9n
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Feb 2009 12:09:22 +0100
+Received: (qmail invoked by alias); 26 Feb 2009 11:05:54 -0000
+Received: from e178095221.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[85.178.95.221]
+	by mail.gmx.net (mp043) with SMTP; 26 Feb 2009 12:05:54 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/P070TGerPW7lEKcD3PNCedZun89QxIioRXmyflJ
+	+OT8PzGwt7lsOJ
+Message-ID: <49A67831.7010702@gmx.net>
+Date: Thu, 26 Feb 2009 12:08:33 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Feb 2009 11:44:17 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc2; KDE/4.2.0; x86_64; ; )
 References: <go498c$bqq$1@ger.gmane.org>
 In-Reply-To: <go498c$bqq$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200902261144.46548.openembedded@haerwu.biz>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.8100000000000001
 Subject: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,54 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 10:48:30 -0000
-X-Groupsio-MsgNum: 8003
-Content-Type: multipart/signed; boundary="nextPart1394076.S96bjhZ58b";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 26 Feb 2009 11:09:50 -0000
+X-Groupsio-MsgNum: 8004
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigC70B06E5666FF79D6F7625BE"
 
---nextPart1394076.S96bjhZ58b
-Content-Type: text/plain;
-  charset="iso-8859-1"
+--------------enigC70B06E5666FF79D6F7625BE
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-On Wednesday 25 of February 2009 21:21:32 Koen Kooi wrote:
+Hi,
+
+Koen Kooi schrieb:
 > Proposal:
->
+>=20
 > mv packages recipes ; git commit .
++1
 
-+1 from me
+Regards
+Robert
 
-My addition to this:
 
-mkdir recipes-broken
-git add  recipes-broken
-git mv recipes/obsolete recipes-broken/obsolete
-git mv recipes/nonworking recipes-broken/nonworking
-
-As this will allow users to set:
-
-BBFILES =3D "/somewhere/oe/recipes/"
-
-which is supported by BitBake for years.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
---nextPart1394076.S96bjhZ58b
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+--------------enigC70B06E5666FF79D6F7625BE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iEYEABECAAYFAkmmcpsACgkQeQ6MlGH/2qtpxgCfXDfFUS9ikY26q2gzzchamBHE
-Ld8An2we0HNEJe4rsgNZbQoEhpR+QzkN
-=LJUO
+iEYEAREIAAYFAkmmeDQACgkQG9cfwmwwEtqnhwCfSkye6XAwE6gTb5yHq32nsf38
+FsoAnA1gK8W/tMjLovGuXuQgGpUCv2B3
+=DGHO
 -----END PGP SIGNATURE-----
 
---nextPart1394076.S96bjhZ58b--
+--------------enigC70B06E5666FF79D6F7625BE--
