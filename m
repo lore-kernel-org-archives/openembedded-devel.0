@@ -1,38 +1,39 @@
-Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
+Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1LcWRC-0002ha-R5
+	(envelope-from <hvontres@gmail.com>) id 1LcWRF-0002hj-Vm
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 03:57:27 +0100
-Received: by rv-out-0708.google.com with SMTP id b17so334262rvf.12
+	Thu, 26 Feb 2009 03:57:31 +0100
+Received: by rv-out-0708.google.com with SMTP id b17so334280rvf.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2009 18:54:11 -0800 (PST)
+	Wed, 25 Feb 2009 18:54:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
+	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=HzNx6xWm4+ePFmWbNV3vZuVHXL01M4FmQisAwp9njA4=;
-	b=nBqdi2x+lzilrWnfnj+ywx5qlttPG6XLl4L8E0dFkIDt/S84/MPq5rCgIsNxoPK+pq
-	dx/Nk4I9wygKNGQKX+JUtBgE3m8HB+dVbmrFzQHAmakgW62ajs1e3swSAag+yOkosRht
-	oMecHMoj37CeraOiSaRCHjb4IlrbCpYKFnbS0=
+	bh=QbxSloPORaWwcyKPOLcRHNsUHfLElBxzlvDCCKIuunk=;
+	b=GvfQxkzMvAC7LWv38EThgG5KIweXpAztAswhn/ycBxNF0n9hb4PMj+WSJVO3Nq0fAq
+	lsiKcV7ty4xH6LBemHmH1+wOg12vP1YgYComvgowLuIBbPqdWo9+PgZLmaOY/XDwg5RW
+	zet2CIuBbGG7ZJsqKe1RbMQsEjHZKBAdsrrOs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=FKMD9I6QWiZpXTJVoSop90aBUG0uoGIpm1eOompbhy8QL2GcslyFJpjNA+tDnbk3Q6
-	DcIFJ9mOVU77hRnYncDD3QS0LlfA6WRBwU9nZaLzN+xkJU204cmfYu3/HABAbV7u2wFR
-	mbpJ5F4vlanJmVyKrs2KDB/Wo+GHdJtZJv0go=
-Received: by 10.141.41.12 with SMTP id t12mr337894rvj.289.1235616851458;
-	Wed, 25 Feb 2009 18:54:11 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=v9/7aZ+JfddD1CVTQ2l4Im4mNS7y2MQQdMvBc4Aiy0cqvkTN9FSxFLQtxW1SV6QNsO
+	esU+J4krArm1TOpi7eVz8ef5OXnPoLkW/CKikSsvhyoWE6yOiZelpXbKvp9uGtktr2Z/
+	RvXOHFlb7dWHM0P2zL26+VjIjUPWBVUXhotrk=
+Received: by 10.141.136.4 with SMTP id o4mr363086rvn.13.1235616854341;
+	Wed, 25 Feb 2009 18:54:14 -0800 (PST)
 Received: from localhost (adsl-75-8-123-171.dsl.sndg02.sbcglobal.net
 	[75.8.123.171])
-	by mx.google.com with ESMTPS id g22sm45465rvb.0.2009.02.25.18.54.10
+	by mx.google.com with ESMTPS id f42sm287032rvb.3.2009.02.25.18.54.12
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 25 Feb 2009 18:54:11 -0800 (PST)
+	Wed, 25 Feb 2009 18:54:13 -0800 (PST)
 From: Henry von Tresckow <hvontres@gmail.com>
 To: "oe-devel" <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Feb 2009 18:54:08 -0800
-Message-Id: <1235616849-19663-1-git-send-email-hvontres@gmail.com>
+Date: Wed, 25 Feb 2009 18:54:09 -0800
+Message-Id: <1235616849-19663-2-git-send-email-hvontres@gmail.com>
 X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <>
+In-Reply-To: <1235616849-19663-1-git-send-email-hvontres@gmail.com>
 References: <>
-Subject: [PATCH] sg3-utils: Updated Makefile patch to deal with cross-compiling - resend
+ <1235616849-19663-1-git-send-email-hvontres@gmail.com>
+Subject: [PATCH] sg3-utils: Updated Makefile patch to deal with cross-compiling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,9 +47,561 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 02:57:29 -0000
+X-List-Received-Date: Thu, 26 Feb 2009 02:57:38 -0000
 
-Please Review and apply if ok
+Signed-off-by: Henry von Tresckow <hvontres@gmail.com>
+---
+ packages/sg3-utils/files/Makefile-r1.patch |  263 ++++++++++++++++++++++++++++
+ packages/sg3-utils/files/Makefile.patch    |  246 --------------------------
+ packages/sg3-utils/sg3-utils_1.24.bb       |    7 +-
+ 3 files changed, 268 insertions(+), 248 deletions(-)
+ create mode 100644 packages/sg3-utils/files/Makefile-r1.patch
+ delete mode 100644 packages/sg3-utils/files/Makefile.patch
+
+diff --git a/packages/sg3-utils/files/Makefile-r1.patch b/packages/sg3-utils/files/Makefile-r1.patch
+new file mode 100644
+index 0000000..d43b51d
+--- /dev/null
++++ b/packages/sg3-utils/files/Makefile-r1.patch
+@@ -0,0 +1,263 @@
++Index: sg3-utils-1.24/Makefile
++===================================================================
++--- sg3-utils-1.24.orig/Makefile	2007-05-07 11:59:19.000000000 -0700
+++++ sg3-utils-1.24/Makefile	2009-02-02 16:37:35.000000000 -0800
++@@ -1,13 +1,15 @@
++ SHELL = /bin/sh
++ 
++-PREFIX=/usr/local
+++PREFIX=/usr
++ LIBDIR=$(DESTDIR)/$(PREFIX)/lib
++ INSTDIR=$(DESTDIR)/$(PREFIX)/bin
++ MANDIR=$(DESTDIR)/$(PREFIX)/share/man
++ INCLUDEDIR=$(DESTDIR)/$(PREFIX)/include
++ 
++-CC = gcc
++-LD = gcc
+++CC ?= gcc
+++LD = ${CC}
+++LIBTOOL ?= libtool
+++LT_EXTRA = --tag=CC
++ 
++ EXECS = sg_dd sgp_dd sgm_dd sg_read sg_map sg_scan sg_rbuf \
++   	sginfo sg_readcap sg_turs sg_inq sg_test_rwbuf \
++@@ -37,12 +39,12 @@
++ S_CFLAGS = $(OS_FLAGS) $(LARGE_FILE_FLAGS)
++ 
++ # CFLAGS = -O2 -Wall -W
++-CFLAGS = -g -O2 -Wall -W
+++CFLAGS ?= -g -O2 -Wall -W
++ # CFLAGS = -g -O2 -Wall -W -pedantic -std=c99
++ 
++ CFLAGS_PTHREADS = -D_REENTRANT
++ 
++-LDFLAGS = 
+++LDFLAGS ?= 
++ # LDFLAGS = -v -lm
++ 
++ LIB_VINFO = 1:0:0
++@@ -64,164 +66,164 @@
++ 	$(CC) $(INCLUDES) $(CFLAGS) $(S_CFLAGS) -c -o $@ $<
++ 
++ sg_lib.lo: sg_lib.o
++-	libtool --mode=compile $(CC) -c sg_lib.c
+++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_lib.c
++ 
++ sg_cmds_basic.lo: sg_cmds_basic.o
++-	libtool --mode=compile $(CC) -c sg_cmds_basic.c
+++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_cmds_basic.c
++ 
++ sg_cmds_extra.lo: sg_cmds_extra.o
++-	libtool --mode=compile $(CC) -c sg_cmds_extra.c
+++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_cmds_extra.c
++ 
++ sg_pt_linux.lo: sg_pt_linux.o
++-	libtool --mode=compile $(CC) -c sg_pt_linux.c
+++	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_pt_linux.c
++ 
++ libsgutils.la: sg_lib.lo sg_cmds_basic.lo sg_cmds_extra.lo sg_pt_linux.lo
++-	libtool --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
++ 	sg_cmds_extra.lo sg_pt_linux.lo -rpath $(LIBDIR) \
++ 	-version-info $(LIB_VINFO)
++ 
++ # libsgutils.la: sg_lib.lo sg_cmds_basic.lo sg_cmds_extra.lo
++-#	libtool --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+++#	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
++ #	sg_cmds_extra.lo -rpath $(LIBDIR) -release $(RELEASE)
++ 
++ sg_inq: sg_inq.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
++ 
++ sg_dd: sg_dd.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_scan: sg_scan.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
++ 
++ sginfo: sginfo.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_start: sg_start.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
++ 
++ sg_rbuf: sg_rbuf.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_readcap: sg_readcap.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sgp_dd.o: sgp_dd.c
++ 	$(CC) $(INCLUDES) $(CFLAGS) $(S_CFLAGS) $(CFLAGS_PTHREADS) \
++ 	-c -o sgp_dd.o $<
++ 
++ sgp_dd: sgp_dd.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ -lpthread
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ -lpthread
++ 
++ sgm_dd: sgm_dd.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_map: sg_map.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_turs: sg_turs.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_test_rwbuf: sg_test_rwbuf.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_read: sg_read.o sg_io_linux.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_reset: sg_reset.o
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_modes: sg_modes.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_logs: sg_logs.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_senddiag: sg_senddiag.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_opcodes: sg_opcodes.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_persist: sg_persist.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_write_long: sg_write_long.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_read_long: sg_read_long.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_requests: sg_requests.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_ses: sg_ses.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_verify: sg_verify.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_emc_trespass: sg_emc_trespass.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_luns: sg_luns.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_sync: sg_sync.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_prevent: sg_prevent.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_get_config: sg_get_config.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_wr_mode: sg_wr_mode.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_rtpg: sg_rtpg.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_reassign: sg_reassign.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_format: sg_format.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_rmsn: sg_rmsn.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_ident: sg_ident.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_map26: sg_map26.o
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_rdac: sg_rdac.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_vpd: sg_vpd.o sg_vpd_vendor.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_sat_identify: sg_sat_identify.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_read_buffer: sg_read_buffer.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_write_buffer: sg_write_buffer.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ sg_raw: sg_raw.o libsgutils.la
++-	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+++	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
++ 
++ 
++ install: $(EXECS)
++ 	install -d $(INSTDIR)
++ 	install -d $(LIBDIR)
++-	libtool --mode=install install -c libsgutils.la $(LIBDIR)/libsgutils.la
++-	libtool --finish $(LIBDIR)
+++	$(LIBTOOL) $(LT_EXTRA) --mode=install install -c libsgutils.la $(LIBDIR)/libsgutils.la
+++	$(LIBTOOL) $(LT_EXTRA) --finish $(LIBDIR)
++ 	for name in $^; \
++-	 do libtool --mode=install install -m 755 \
+++	 do $(LIBTOOL) $(LT_EXTRA) --mode=install install -m 755 \
++ 		$$name $(INSTDIR); \
++ 	done
++ 	install -d $(MANDIR)/$(MAN_PREF)
++@@ -235,7 +237,7 @@
++ 	done
++ 
++ uninstall:
++-	libtool --mode=uninstall rm -f $(LIBDIR)/libsgutils.la
+++	$(LIBTOOL) $(LT_EXTRA) --mode=uninstall rm -f $(LIBDIR)/libsgutils.la
++ 	dists="$(EXECS)"; \
++ 	for name in $$dists; do \
++ 	 rm -f $(INSTDIR)/$$name; \
+diff --git a/packages/sg3-utils/files/Makefile.patch b/packages/sg3-utils/files/Makefile.patch
+deleted file mode 100644
+index cc5babf..0000000
+--- a/packages/sg3-utils/files/Makefile.patch
++++ /dev/null
+@@ -1,246 +0,0 @@
+-Index: sg3-utils-1.24/Makefile
+-===================================================================
+---- sg3-utils-1.24.orig/Makefile	2009-01-27 16:29:26.000000000 -0800
+-+++ sg3-utils-1.24/Makefile	2009-01-27 22:31:04.000000000 -0800
+-@@ -1,6 +1,6 @@
+- SHELL = /bin/sh
+- 
+--PREFIX=/usr/local
+-+PREFIX=/usr
+- LIBDIR=$(DESTDIR)/$(PREFIX)/lib
+- INSTDIR=$(DESTDIR)/$(PREFIX)/bin
+- MANDIR=$(DESTDIR)/$(PREFIX)/share/man
+-@@ -8,6 +8,8 @@
+- 
+- CC = gcc
+- LD = gcc
+-+LIBTOOL = libtool
+-+LT_EXTRA = --tag=CC
+- 
+- EXECS = sg_dd sgp_dd sgm_dd sg_read sg_map sg_scan sg_rbuf \
+-   	sginfo sg_readcap sg_turs sg_inq sg_test_rwbuf \
+-@@ -64,164 +66,164 @@
+- 	$(CC) $(INCLUDES) $(CFLAGS) $(S_CFLAGS) -c -o $@ $<
+- 
+- sg_lib.lo: sg_lib.o
+--	libtool --mode=compile $(CC) -c sg_lib.c
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_lib.c
+- 
+- sg_cmds_basic.lo: sg_cmds_basic.o
+--	libtool --mode=compile $(CC) -c sg_cmds_basic.c
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_cmds_basic.c
+- 
+- sg_cmds_extra.lo: sg_cmds_extra.o
+--	libtool --mode=compile $(CC) -c sg_cmds_extra.c
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_cmds_extra.c
+- 
+- sg_pt_linux.lo: sg_pt_linux.o
+--	libtool --mode=compile $(CC) -c sg_pt_linux.c
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=compile $(CC) -c sg_pt_linux.c
+- 
+- libsgutils.la: sg_lib.lo sg_cmds_basic.lo sg_cmds_extra.lo sg_pt_linux.lo
+--	libtool --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+- 	sg_cmds_extra.lo sg_pt_linux.lo -rpath $(LIBDIR) \
+- 	-version-info $(LIB_VINFO)
+- 
+- # libsgutils.la: sg_lib.lo sg_cmds_basic.lo sg_cmds_extra.lo
+--#	libtool --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+-+#	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o libsgutils.la sg_lib.lo sg_cmds_basic.lo \
+- #	sg_cmds_extra.lo -rpath $(LIBDIR) -release $(RELEASE)
+- 
+- sg_inq: sg_inq.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+- 
+- sg_dd: sg_dd.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_scan: sg_scan.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+- 
+- sginfo: sginfo.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_start: sg_start.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ 
+- 
+- sg_rbuf: sg_rbuf.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_readcap: sg_readcap.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sgp_dd.o: sgp_dd.c
+- 	$(CC) $(INCLUDES) $(CFLAGS) $(S_CFLAGS) $(CFLAGS_PTHREADS) \
+- 	-c -o sgp_dd.o $<
+- 
+- sgp_dd: sgp_dd.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^ -lpthread
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^ -lpthread
+- 
+- sgm_dd: sgm_dd.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_map: sg_map.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_turs: sg_turs.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_test_rwbuf: sg_test_rwbuf.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_read: sg_read.o sg_io_linux.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_reset: sg_reset.o
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_modes: sg_modes.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_logs: sg_logs.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_senddiag: sg_senddiag.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_opcodes: sg_opcodes.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_persist: sg_persist.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_write_long: sg_write_long.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_read_long: sg_read_long.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_requests: sg_requests.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_ses: sg_ses.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_verify: sg_verify.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_emc_trespass: sg_emc_trespass.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_luns: sg_luns.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_sync: sg_sync.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_prevent: sg_prevent.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_get_config: sg_get_config.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_wr_mode: sg_wr_mode.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_rtpg: sg_rtpg.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_reassign: sg_reassign.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_format: sg_format.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_rmsn: sg_rmsn.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_ident: sg_ident.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_map26: sg_map26.o
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_rdac: sg_rdac.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_vpd: sg_vpd.o sg_vpd_vendor.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_sat_identify: sg_sat_identify.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_read_buffer: sg_read_buffer.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_write_buffer: sg_write_buffer.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- sg_raw: sg_raw.o libsgutils.la
+--	libtool --mode=link $(LD) -o $@ $(LDFLAGS) $^
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=link $(LD) -o $@ $(LDFLAGS) $^
+- 
+- 
+- install: $(EXECS)
+- 	install -d $(INSTDIR)
+- 	install -d $(LIBDIR)
+--	libtool --mode=install install -c libsgutils.la $(LIBDIR)/libsgutils.la
+--	libtool --finish $(LIBDIR)
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=install install -c libsgutils.la $(LIBDIR)/libsgutils.la
+-+	$(LIBTOOL) $(LT_EXTRA) --finish $(LIBDIR)
+- 	for name in $^; \
+--	 do libtool --mode=install install -m 755 \
+-+	 do $(LIBTOOL) $(LT_EXTRA) --mode=install install -m 755 \
+- 		$$name $(INSTDIR); \
+- 	done
+- 	install -d $(MANDIR)/$(MAN_PREF)
+-@@ -235,7 +237,7 @@
+- 	done
+- 
+- uninstall:
+--	libtool --mode=uninstall rm -f $(LIBDIR)/libsgutils.la
+-+	$(LIBTOOL) $(LT_EXTRA) --mode=uninstall rm -f $(LIBDIR)/libsgutils.la
+- 	dists="$(EXECS)"; \
+- 	for name in $$dists; do \
+- 	 rm -f $(INSTDIR)/$$name; \
+diff --git a/packages/sg3-utils/sg3-utils_1.24.bb b/packages/sg3-utils/sg3-utils_1.24.bb
+index 135ba0f..4a2c378 100644
+--- a/packages/sg3-utils/sg3-utils_1.24.bb
++++ b/packages/sg3-utils/sg3-utils_1.24.bb
+@@ -3,11 +3,14 @@ AUTHOR = "Eric Schwartz (Skif) <emschwar@debian.org>"
+ HOMEPAGE = "http://packages.qa.debian.org/s/sg3-utils.html"
+ SECTION = "console/admin"
+ LICENSE = "GPLv2"
+-PR = "r0"
++AUTHOR = "Eric Schwartz (Skif) <emschwar@debian.org>"
++PR = "r1"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/s/sg3-utils/sg3-utils_${PV}.orig.tar.gz \
+-           file://Makefile.patch;patch=1"
++	file://Makefile-r1.patch;patch=1"
+ 
+ S = "${WORKDIR}/sg3-utils-${PV}"
+ 
+ inherit autotools
++
++EXTRA_OEMAKE='"LIBTOOL=${STAGING_BINDIR_NATIVE}/${HOST_SYS}-libtool"'
+-- 
+1.5.4.3
 
 
 
