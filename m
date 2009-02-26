@@ -1,41 +1,33 @@
-Received: from [209.85.219.166] (helo=mail-ew0-f166.google.com)
+Received: from [59.124.115.149] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LcmVu-0003ut-N0
+	(envelope-from <nytowl@openmoko.org>) id 1LcmbE-000475-Ek
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 21:07:25 +0100
-Received: by ewy10 with SMTP id 10so918585ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2009 12:03:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=/MmGXsce7dCBz/7XBXfAjWZKxDdlCVzjuXvQQwT7mqQ=;
-	b=lZo0IGjfJ1ityo66nu7UegTmG0Y/0itvs1jpDhHW22p7KV8yn0LHmHZHH5r2tnLoqz
-	IkypXuqRhjayRPPR9kfYviKD7m+MMxpJw0eRZw9BlMdpl1y18ts9QTO1qrqlZl1X2srw
-	ojfQteTaEfvp8ffSiR6qLBf3LkQTnbhBULITY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=AdW40/TzbkMOFg15ZZ1WhOTGrR18haehMDKlSDs9paObhzNYTvUew0q+qRnYhYBwu1
-	vkBAA2f5md8cHwcLq1wr+0PJ83FwgVRWE608xRt1/MRblyCXPvfb3RsR292oSPQ7bBuO
-	knRb0p0N3Vt0he87ZSgKLlkny/+CeLOBC/9cQ=
-Received: by 10.143.160.17 with SMTP id m17mr814479wfo.298.1235678214955;
-	Thu, 26 Feb 2009 11:56:54 -0800 (PST)
-Received: from gmail.com (adsl-71-146-30-62.dsl.pltn13.sbcglobal.net
-	[71.146.30.62])
-	by mx.google.com with ESMTPS id 30sm6554099wfa.38.2009.02.26.11.56.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 26 Feb 2009 11:56:54 -0800 (PST)
-Date: Thu, 26 Feb 2009 11:56:49 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 26 Feb 2009 21:12:53 +0100
+Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
+	helo=[172.16.14.103]) by aakash.openmoko.org with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <nytowl@openmoko.org>) id 1LcmXk-0001qH-0I
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Feb 2009 04:09:28 +0800
+From: Angus Ainslie <nytowl@openmoko.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090226195649.GA26281@gmail.com>
-References: <a7f8874a0902252037h6177f2efu1be098779fe87a69@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <a7f8874a0902252037h6177f2efu1be098779fe87a69@mail.gmail.com>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: [OT] Prefered Endianess for ixp4xx Processors
+In-Reply-To: <1235508093.8911.58.camel@alap>
+References: <1235501736.8911.52.camel@alap>  <go1jd3$mlv$1@ger.gmane.org>
+	<1235507304.8911.56.camel@alap>  <1235508093.8911.58.camel@alap>
+Date: Thu, 26 Feb 2009 13:09:07 -0700
+Message-Id: <1235678947.6800.24.camel@alap>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 70.73.132.19
+X-SA-Exim-Mail-From: nytowl@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: Re: [PATCH] add the openmoko git kernel stable branch to fso/milestone5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,22 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 20:07:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 26 Feb 2009 20:12:55 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On (25/02/09 20:37), Hans Henry von Tresckow wrote:
-> Hi,
-> Sorry if this is way off topic, but I was wondering if there are any
-> advantages running an ixp4xx in either BE or LE mode
+On Tue, 2009-02-24 at 13:41 -0700, Angus Ainslie wrote:
+> Round 3 per Mickey's and Koen's sugestions
+> 
+> Angus
+> 
+> 
 
-Depends on your needs. If you are looking for network processors then
-the incoming data could be big endian format so if you use in BE mode
-you avoid swapping. 
+How long should I wait before I assume that patches have been silently
+reviewed ?
 
-In LE machine you can access least signicant bits with same address and on
-BE machine you have immediate access to sign bit. etc etc.
+Thanks
+Angus
 
--Khem
+
 
 
