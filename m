@@ -1,32 +1,30 @@
-Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1LcY31-0007EG-TH
+	(envelope-from <sledz@DResearch.DE>) id 1LcaAN-0002F7-Rg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 05:40:39 +0100
-Received: by rv-out-0708.google.com with SMTP id b17so376835rvf.12
+	Thu, 26 Feb 2009 07:56:19 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 0492B16DF81
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2009 20:37:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=eT9F2mOCoBcmSkR3h9uiz01ApU9My1cjsNvVHP4DKBs=;
-	b=N369koJ27o3AE8ErDJmu0MhCap7nc0+1jOh14aPoG1mpZk9u2i9xuffB+XIoKVfjBN
-	28yIqLfXADAY7U2bUU6/F6bU0L4xwU7P2S42gphT1zYx7/H8NVdap/VfQR8kiqwNr4TH
-	Uqqq3vvOtf9VIFNGd6IPoZ2+PrGA6r9AxRiy4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=VkGsK/60oJNLcgpUSYMZM20H4DB/wG1VEMYlcrvjMqmJCM9JMU89iME6dxkkmZNfeH
-	r/RhmQpnhzBqpXN1DlI3WHQOX6pFrw5Ysi+3PJ+d7IyixTrcMy24oRa3ssl6IlyO8uNs
-	ri3bpE5laIOyY/BoiukWv0sBM91KRatYGAGe8=
+	Thu, 26 Feb 2009 08:06:23 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id A73AF2A4216
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Feb 2009 07:53:03 +0100 (CET)
 MIME-Version: 1.0
-Received: by 10.141.42.10 with SMTP id u10mr410010rvj.61.1235623039738; Wed, 
-	25 Feb 2009 20:37:19 -0800 (PST)
-Date: Wed, 25 Feb 2009 20:37:19 -0800
-Message-ID: <a7f8874a0902252037h6177f2efu1be098779fe87a69@mail.gmail.com>
-From: Hans Henry von Tresckow <hvontres@gmail.com>
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-Subject: [OT] Prefered Endianess for ixp4xx Processors
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Date: Thu, 26 Feb 2009 07:52:40 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF6BB@hiob.intern.dresearch.de>
+In-Reply-To: <20090225204137.GA25095@denix.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [RFC] renaming packages/ to recipes/
+Thread-Index: AcmXihDxSZJa+e1PRcSCvMmAMcwYLwAVLHMg
+References: <go498c$bqq$1@ger.gmane.org> <20090225204137.GA25095@denix.org>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,16 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 04:40:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 26 Feb 2009 06:56:20 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
-Sorry if this is way off topic, but I was wondering if there are any
-advantages running an ixp4xx in either BE or LE mode
+> Speaking of TMP and outside of it - does it make sense to=20
+> have DEPLOY outside of TMP by default in OE? I do it in
+> Arago, but I had to make a small fix in=20
+> base.bbclass though - see bug #4580.
 
--- 
-Henry von Tresckow (hvontres)
-Fran Lebowitz  - "You're only has good as your last haircut."
++1
 
 
