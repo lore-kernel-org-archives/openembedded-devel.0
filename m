@@ -1,30 +1,35 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LcaAN-0002F7-Rg
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 07:56:19 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 0492B16DF81
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2009 08:06:23 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id A73AF2A4216
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2009 07:53:03 +0100 (CET)
-MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Thu, 26 Feb 2009 07:52:40 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF6BB@hiob.intern.dresearch.de>
-In-Reply-To: <20090225204137.GA25095@denix.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [RFC] renaming packages/ to recipes/
-Thread-Index: AcmXihDxSZJa+e1PRcSCvMmAMcwYLwAVLHMg
-References: <go498c$bqq$1@ger.gmane.org> <20090225204137.GA25095@denix.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [RFC] renaming packages/ to recipes/
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LcbNg-0005kw-CJ
+	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 09:14:11 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LcbKS-00021I-Va
+	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 08:10:49 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 26 Feb 2009 08:10:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 26 Feb 2009 08:10:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 26 Feb 2009 09:10:35 +0100
+Message-ID: <go5ipr$nvl$1@ger.gmane.org>
+References: <200902131728.08634.openembedded@haerwu.biz>	<20090224064639.GE2172@smtp.west.cox.net>	<1235492001.27962.60.camel@andromeda>	<8763izyarp.fsf@neumann.lab.ossystems.com.br>	<fce2a370902241036y359e2c7cv1126a62c8627d2bb@mail.gmail.com>	<20090224185059.GL2172@smtp.west.cox.net>	<87wsbfw9zy.fsf@neumann.lab.ossystems.com.br>	<20090225022507.GP2172@smtp.west.cox.net>
+	<go4d36$khh$1@ger.gmane.org>	<20090225213536.GT2172@smtp.west.cox.net>
+	<go4f92$khh$2@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+In-Reply-To: <go4f92$khh$2@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: checksums situation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,17 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 06:56:20 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Feb 2009 08:14:21 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> Speaking of TMP and outside of it - does it make sense to=20
-> have DEPLOY outside of TMP by default in OE? I do it in
-> Arago, but I had to make a small fix in=20
-> base.bbclass though - see bug #4580.
+On 25-02-09 23:04, Vitus Jensen wrote:
 
-+1
+> If this leads you to abandon checksums alltogether: the current situation
+> protects against corrupt downloads and otherwise undetected updates from
+> upstream and I'm all for keeping such a protection.
+
+I get reports pretty much every single week about someone asking "what 
+does 'checksum failed' mean" when their download is corrupt due to evil 
+proxies and bad disks. It's a lot easier and faster to debug than 
+seemingly random build failures.
+
+regards,
+
+Koen
+
 
 
