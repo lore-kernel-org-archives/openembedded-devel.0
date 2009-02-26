@@ -1,25 +1,52 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LcT0T-0003bF-M6
+	(envelope-from <otavio.salvador@gmail.com>) id 1LcUcW-0006qp-Kh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 00:18:21 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KFN00KD69UZWDNO@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	25 Feb 2009 17:13:53 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EA5A76B83A8; Wed,
-	25 Feb 2009 18:13:46 -0500 (EST)
-Date: Wed, 25 Feb 2009 18:13:46 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 26 Feb 2009 02:01:04 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so292719qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Feb 2009 16:56:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:received:from:to:cc
+	:subject:organization:references:user-agent:x-url:x-attribution:date
+	:in-reply-to:message-id:mime-version:content-type;
+	bh=U9wVuXnmHwiVOAPk1/tsllAsVNJCbRsk+juH44+dkBc=;
+	b=DnSbHU78wuzWppnaIg2AwFV+z1SsnUqH7cLVB6vVwM0R9YyU4HR3oaSXcoTeQtg89U
+	E5jlP2FUJVUu9onPrLzLE9ssWOCJtvigtPzf0aGzkePipy+JnIehjV6BSu+B5jJRaT2N
+	j3OuzSS5rSXlBFTO/uU29+qfzYFfNUc4lmlfc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:organization:references:user-agent:x-url
+	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
+	b=Sx4l8aqILBZdbd3U3Mmuv6P9zJz6wFmg6d+NQtLAeoL14SfT8BCmICfYIxKtbJcF7m
+	HKdkTHEuRlSAHSUW8IXNWQcwFxf39rpE0kzoaJpiu3PzrEUvnf5ZC2BVI14wCnfoMFJ3
+	dg5k8J9tSuVsgvl2BiGuNmf2jesCzwUKGa44s=
+Received: by 10.224.67.193 with SMTP id s1mr1343121qai.291.1235609765650;
+	Wed, 25 Feb 2009 16:56:05 -0800 (PST)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id 8sm490444qwj.56.2009.02.25.16.56.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 25 Feb 2009 16:56:05 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id DA7D5610267; Wed, 25 Feb 2009 21:56:03 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090225231346.GB25783@denix.org>
-References: <f46da1cf0902251338k5592fd9dt91ceb4cdd63dd5b7@mail.gmail.com>
-	<go4fq4$3t7$1@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <go4fq4$3t7$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: question for docs
+Organization: O.S. Systems Ltda.
+References: <go498c$bqq$1@ger.gmane.org> <go4a60$eh8$1@ger.gmane.org>
+	<49A5AEB8.7080909@dls.net> <go4bh1$kbu$1@ger.gmane.org>
+	<1235596554.2621.50.camel@andromeda> <go4cq2$og6$1@ger.gmane.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
+	(x86_64-pc-linux-gnu)
+X-URL: http://www.ossystems.com.br/
+X-Attribution: O.S.
+Date: Wed, 25 Feb 2009 21:56:03 -0300
+In-Reply-To: <go4cq2$og6$1@ger.gmane.org> (Koen Kooi's message of "Wed, 25 Feb
+	2009 22:22:10 +0100")
+Message-ID: <877i3evwws.fsf@neumann.lab.ossystems.com.br>
+MIME-Version: 1.0
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Merge windows, was: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,38 +60,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2009 23:19:00 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 26 Feb 2009 01:07:40 -0000
+X-List-Received-Date: Thu, 26 Feb 2009 01:07:40 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On Wed, Feb 25, 2009 at 11:13:24PM +0100, Koen Kooi wrote:
-> On 25-02-09 22:38, Theodore A. Roth wrote:
->> Hi,
->>
->> I'm working on a user manual update for the "Building Software"
->> section of chapter 2.
->>
->> Can someone give me a quick one liner description of the contents of
->
->> packages/meta/
->
-> Collection of usefull meta tasks and recipes that don't fit in a general 
-> category
->
->> packages/tasks/
->
-> Collection of meta-packages that depend on real packages to make managing 
-> package sets easier
->
-> ( Yes, I see how my descriptions will create confusion :))
+Koen Kooi <k.kooi@student.utwente.nl> writes:
 
-Is there any way to simplify it?
+> On 25-02-09 22:15, Michael 'Mickey' Lauer wrote:
+>> Sounds good for me on a stable branch, not so much on a development
+>> branch.
+>
+> A perptually broken development branch is no good. The current .dev is
+> unbuildable literally every other day, so I'm not a fan of keeping
+> .dev the free-for-all it is now.
+> And Mikes proposal was holding off *disruptive* changes, not *all* changes.
 
-That's what I meant by inconsistencies in my other email[1].
+[...]
 
-[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/21326/focus=21329
+Yes from my POV it does make sense and it could also help derivatives to
+plan their development according to it.
+
+For example if you have a distro that is based on dev branch you should
+avoid merging it at start of mounth since it has high risk to be broken
+or with still unknown bugs.
+
+With GIT it is quite easy to hold changes for a while and merge them all
+together when done. We could even build a "oe-next" try that merges
+automatically from people trees and catch conflicts. This could make
+whole merging easier when next mounth arrives ;-)
+
+Cheers,
 
 -- 
-Denys
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
