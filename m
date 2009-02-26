@@ -1,35 +1,33 @@
-Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Lcga0-0002Ap-5y
-	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 14:47:23 +0100
-Received: by yx-out-1718.google.com with SMTP id 36so373187yxh.30
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LchhU-0000RC-Qc
+	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 15:59:34 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LcheG-0003Ku-By
+	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 14:55:40 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 26 Feb 2009 14:55:40 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Feb 2009 05:43:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=tSSBnTFKrAhskuHyO9O8Q/OgmA7CSZ/8WU2V38ntQeE=;
-	b=QOT3CkIKp2D+t53DNprXmiGULG7Ac443TlO1bXQj5ROq0T9Zu+iY2SK/i9NVVODMMX
-	3qHf2PvquoFGf8VCwrMktJg0pNQOjMr9srqQIgK2fFYW2x2fLgEYABHSy7kNKu/P9nUY
-	PWEe+1o0oXN3nVAuq5MdzcGReOZU/apyrT0tw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=Luth3dZNBl9A+SnXjlMBr6IdGHoEb/fRNztXdkzKgzF7PN4eju1eahemeBIMLtsQ3n
-	usWoJi+rvixsgN6PQpkSbzA8dQL5RAp7m0y/CRcx79xEK2z0QJPL8Pa64Ug823pOOthQ
-	kFFiO7bypU3uraDVesxz5n1QgfaOEQTH9W9O0=
-MIME-Version: 1.0
-Received: by 10.220.85.130 with SMTP id o2mr597037vcl.80.1235655833100; Thu, 
-	26 Feb 2009 05:43:53 -0800 (PST)
-In-Reply-To: <go498c$bqq$1@ger.gmane.org>
-References: <go498c$bqq$1@ger.gmane.org>
-Date: Thu, 26 Feb 2009 14:43:53 +0100
-Message-ID: <c384c5ea0902260543y32a770c7nb1e2510780df1c8a@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [RFC] renaming packages/ to recipes/
+	Thu, 26 Feb 2009 14:55:40 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 26 Feb 2009 15:55:32 +0100
+Message-ID: <go6ah4$cud$1@ger.gmane.org>
+References: <go4amc$h30$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+In-Reply-To: <go4amc$h30$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] update opkg* SRCREV to 201
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,19 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 13:47:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 26 Feb 2009 14:59:51 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
-
-On Wed, Feb 25, 2009 at 9:21 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> mv packages recipes ; git commit .
+On 25-02-09 21:46, Koen Kooi wrote:
+> Hi,
 >
-if (i < MAX_INT) i++;
+> I was getting seriously annoyed with the useless error codes opkg was
+> giving me and Tick pointed me to:
+>
+> http://code.google.com/p/opkg/issues/detail?id=6&can=1
+>
+> We're at 197 now in OE (with r201 applied as patch). I'd like to get
+> r199 and r200 in as well, and since I'm lazy I though we'd get r198 in
+> as well, which means instead of adding a few patches I can just bump up
+> SRCREV to 201.
+>
+> What do you think?
 
-Regards,
--- 
-Leon
+Noone is thinking anything?
+
+regards,
+
+Koen
+
 
 
