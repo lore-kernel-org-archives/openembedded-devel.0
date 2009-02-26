@@ -1,43 +1,28 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1LciMu-0001HM-JX
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 16:41:48 +0100
-Received: by fg-out-1718.google.com with SMTP id 13so448010fge.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2009 07:38:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	bh=o4FtFCAC7V6AfXnnlOnBZ5tqF9P1661LUe8bI82Zm4E=;
-	b=x1BBbQZvPh+EuhkOcZ7aXaI6rbgLtetuKCZ1xQkxvSLT0Ka+im8LNbbAqSrC+Z/2Zu
-	esa7DaYKXScJC3xGubwrQnkCIV5+EHDgcTKtwzOjtpfzstzbDOMUT01cbzG4K+TxHW17
-	NcctxC8uEVswo1kSLTJAbuWQOmBt3cBSlunu8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:message-id;
-	b=ZX9MTykMmrTCFf++KS2Tsy7Mr9gcTMBA8B0N50GFcNiPVgnwTWZoIgNrpjnaNJpywC
-	EL2PyKvlNDT7jGpB1nNS1/J359JH3/aZoxhNNOI8FDqdKMZ7+Zl2zIDYn+RLR2qnXcrQ
-	DbaDwFErVQMEDhKHy7vj7FzsuJr5R4+iHrvjY=
-Received: by 10.86.70.3 with SMTP id s3mr1376307fga.78.1235662709176;
-	Thu, 26 Feb 2009 07:38:29 -0800 (PST)
-Received: from is.home (93-81-1-160.broadband.corbina.ru [93.81.1.160])
-	by mx.google.com with ESMTPS id l12sm6057432fgb.41.2009.02.26.07.38.28
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 26 Feb 2009 07:38:28 -0800 (PST)
-From: Yuri Bushmelev <jay4mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Feb 2009 18:38:20 +0300
-User-Agent: KMail/1.9.10
-References: <go498c$bqq$1@ger.gmane.org>
-	<200902261144.46548.openembedded@haerwu.biz>
-	<49A69217.3070705@opensimpad.org>
-In-Reply-To: <49A69217.3070705@opensimpad.org>
+	(envelope-from <trini@kernel.crashing.org>) id 1LciOi-0001OA-35
+	for openembedded-devel@openembedded.org; Thu, 26 Feb 2009 16:43:40 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090226154009.CEDK4363.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Thu, 26 Feb 2009 10:40:09 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id Lfg71b00C4dMFYL04fg7K8; Thu, 26 Feb 2009 10:40:07 -0500
+X-Authority-Analysis: v=1.0 c=1 a=-YUmSzi2JToA:10 a=X-6fHHiI_zAA:10
+	a=1XWaLZrsAAAA:8 a=hzOf93vKdFChDkhoymQA:9
+	a=XeBPKvkP2t-InMTiTSFFDtBPzPoA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Thu, 26 Feb 2009 08:40:07 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090226154007.GZ2172@smtp.west.cox.net>
+References: <go4amc$h30$1@ger.gmane.org> <go6ah4$cud$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200902261838.20657.jay4mail@gmail.com>
-Subject: Re: [RFC] renaming packages/ to recipes/
+In-Reply-To: <go6ah4$cud$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] update opkg* SRCREV to 201
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 15:41:49 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Feb 2009 15:43:40 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 26 =D1=84=D0=B5=D0=B2=D1=80=D0=
-=B0=D0=BB=D1=8F 2009 Bernhard Guillon =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=
-=D0=BB(a):
-> Marcin Juszkiewicz wrote:
-> > On Wednesday 25 of February 2009 21:21:32 Koen Kooi wrote:
-> >> Proposal:
-> >>
-> >> mv packages recipes ; git commit .
-> >
-> > +1 from me
-> >
-> > My addition to this:
-> >
-> > mkdir recipes-broken
-> > git add  recipes-broken
-> > git mv recipes/obsolete recipes-broken/obsolete
-> > git mv recipes/nonworking recipes-broken/nonworking
+On Thu, Feb 26, 2009 at 03:55:32PM +0100, Koen Kooi wrote:
+> On 25-02-09 21:46, Koen Kooi wrote:
+>> Hi,
+>>
+>> I was getting seriously annoyed with the useless error codes opkg was
+>> giving me and Tick pointed me to:
+>>
+>> http://code.google.com/p/opkg/issues/detail?id=6&can=1
+>>
+>> We're at 197 now in OE (with r201 applied as patch). I'd like to get
+>> r199 and r200 in as well, and since I'm lazy I though we'd get r198 in
+>> as well, which means instead of adding a few patches I can just bump up
+>> SRCREV to 201.
+>>
+>> What do you think?
 >
-> I like this idea. But we should add a description file to the recipe on
-> which arch it is broken or why it is obsolete.
-> A package tested and working for arch x can break on arch y easily. E.g.
-> if it uses netlib floating points.
+> Noone is thinking anything?
 
-Here is other example from FreeBSD project - MOVED file:
-http://www.freebsd.org/cgi/cvsweb.cgi/ports/MOVED?rev=3D1.1803;content-type=
-=3Dtext%2Fplain
+<sarcasm> not since I switched to debs </sarcasm>
 
-It contains information about package movement/removal in ports tree.
-
-Just as example :)
-
-=2D-=20
-Yuri Bushmelev
+-- 
+Tom Rini
 
 
