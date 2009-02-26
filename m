@@ -1,22 +1,24 @@
 Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Lcm6B-0003Md-Sr
+	(envelope-from <mickey@vanille-media.de>) id 1Lcm8j-0003Qt-QI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Feb 2009 20:40:49 +0100
+	Thu, 26 Feb 2009 20:43:25 +0100
 Received: from [192.168.1.105] (e180159253.adsl.alicedsl.de [85.180.159.253])
-	by drlauer-research.com (Postfix) with ESMTP id 9052458415A
+	by drlauer-research.com (Postfix) with ESMTP id 81B2758415A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2009 21:01:39 +0100 (CET)
+	Thu, 26 Feb 2009 21:04:17 +0100 (CET)
 From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b10902260920s24a8c5we592cbb4d0d63221@mail.gmail.com>
-References: <ac9c93b10902260920s24a8c5we592cbb4d0d63221@mail.gmail.com>
+In-Reply-To: <49A69786.9080702@gmail.com>
+References: <49A513AA.9080201@gefanuc.com>
+	<B6FF18F4244BAE4991D05BF4F7A7649293467E@MCHP7I5A.ww902.siemens.net>
+	<49A56CE3.1060305@gefanuc.com>  <49A69786.9080702@gmail.com>
 Organization: Vanille-Media
-Date: Thu, 26 Feb 2009 20:37:26 +0100
-Message-Id: <1235677046.2621.226.camel@andromeda>
+Date: Thu, 26 Feb 2009 20:40:04 +0100
+Message-Id: <1235677204.2621.232.camel@andromeda>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.24.3 
-Subject: Re: OE breakages, was: Re: fakeroot fails to build
+Subject: Re: Discussion regarding the future of OpenEmbedded mailing lists
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,28 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2009 19:41:01 -0000
+X-List-Received-Date: Thu, 26 Feb 2009 19:43:26 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Am Donnerstag, den 26.02.2009, 18:20 +0100 schrieb Frans Meulenbroeks:
-> > Maybe it's time for OE to consider whether it really wants a zillion
-> > commits per day or only a few tested commits per day.
+Am Donnerstag, den 26.02.2009, 14:22 +0100 schrieb Marco Cavallini:
+> Martyn Welch ha scritto:
+> >> To be honest, I am somewhat confused by the naming of the lists.
+> >> If I understand correctly, the intent of the new lists are
+> >>
+> >> OE-private: core-team.
+> >>             All the other projects I know of would call this list
+> >>             FOOBAR-devel
+> >>
+> >> OE-devel: rest of the world.
+> >>           All the other projects I know of would call this list
+> >>           FOOBAR-users
+> >>
+> >> Is there any reason for this strange (that is: non-standard) naming
+> >> scheme?  Is OE-private meant to contain really private (confidential?)
+> >> traffic?  If not, I'd guess many people (like me) would mis-interpret
+> >> the intent of this list.
+> > 
+> > Yes - it is my understanding that the traffic on Openembedded-private is
+> > really private (I believe that OpenEmbedded is now legally registered as
+> > a non-profit in Germany and I should imagine there are certain
+> > discussions which need a degree of privacy).
+> 
+> IMHO this behaviour would appear like whether OE was yet another
+> company/competitor in the embedded market rather than an open source
+> project, achieving the opposite effect than expected.
 
-I think we want both, given the right branches. Let me again propose a
-structure such as org.openembedded.{stable,testing,unstable} where only
-cherry-picking from the more unstable to the lesser unstable branch is
-allowed.
+No.
 
-Note that this doesn't conflict with your idea of reviews, someone/some
-people still need to decide which revs are good to cherry-pick.
+We explicitly encourage companies to use OE in their projects and
+openembedded-private has been established to facilitate that for
+companies that do not want to be disclosed -- which is their right and
+not to be judged by us.
 
-> BTW, I noticed that there are a lot of bugs in bugzilla about packages
-> that do not build. Most of these are old. Guess the bugs are fixed but
-> no-one seems to close them.
-
-I regularly scan the bugtracker doing my share of cleaning, more people
-should do that.
+The outcome of this has shown up in more than just one improvement of
+OE. If we close this list, we lose opportunities, it's as simple as
+that.
 
 -- 
 :M:
