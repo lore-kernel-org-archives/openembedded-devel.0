@@ -1,31 +1,30 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [59.124.115.149] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Ld5Mw-0007Pg-RQ
+	(envelope-from <nytowl@openmoko.org>) id 1Ld5VT-0004ff-U2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Feb 2009 17:15:30 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id B745516DFB8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2009 17:25:17 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id CC75C2A419E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2009 17:11:54 +0100 (CET)
-MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Fri, 27 Feb 2009 17:11:30 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF6D2@hiob.intern.dresearch.de>
-In-Reply-To: <50939.AFRVDw5RXnw=.1235748344.squirrel@webmail.no-log.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [patch](or sort of): emacs didn't compile[first part:
-	emacsrecipe]
-Thread-Index: AcmY8w/lZFXIMOm3Tfquic+UAaQ+OgAAmTNg
-References: <50939.AFRVDw5RXnw=.1235748344.squirrel@webmail.no-log.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [patch](or sort of): emacs didn't compile[first part: emacsrecipe]
+	Fri, 27 Feb 2009 17:24:37 +0100
+Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
+	helo=[172.16.14.103]) by aakash.openmoko.org with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <nytowl@openmoko.org>) id 1Ld5Rr-0007bb-7p
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 28 Feb 2009 00:20:40 +0800
+From: Angus Ainslie <nytowl@openmoko.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Feb 2009 09:20:16 -0700
+Message-Id: <1235751616.6800.1063.camel@alap>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 70.73.132.19
+X-SA-Exim-Mail-From: nytowl@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: Git phrase book
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +38,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2009 16:15:44 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Feb 2009 16:24:57 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi Denis,
+Hi,
 
-i hope your message will help to come to a stable emacs build. I've =
-reported build problems some days before too (see =
-<http://thread.gmane.org/gmane.comp.handhelds.openembedded/21178>). The =
-interesting point is that the build behaviour is different on some of my =
-machines.
+I'm try to push a change onto the FSO 5.5 branch and was following
+through the git phrase book
 
-Steffen
+ http://wiki.openembedded.net/index.php/GitPhraseBook
+
+under feature branches it has an example of pushing the branch back to
+the server 
+
+http://wiki.openembedded.net/index.php/GitPhraseBook#Feature_branches
+
+When I try that it doesn't work
+
+angus@builder:/usr/src/openmoko/openembedded$ git push origin fso/milestone5.5
+fatal: The remote end hung up unexpectedly
+
+Thanks
+Angus
+
+
 
 
