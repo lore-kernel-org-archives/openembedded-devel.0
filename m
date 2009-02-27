@@ -1,21 +1,21 @@
 Received: from [80.67.172.39] (helo=webmail.no-log.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Ld4eH-00064S-2f
+	(envelope-from <GNUtoo@no-log.org>) id 1Ld4v8-0006Sx-5F
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Feb 2009 16:29:19 +0100
+	Fri, 27 Feb 2009 16:46:55 +0100
 Received: by webmail.no-log.org (Postfix, from userid 33)
-	id 05E094C10E; Fri, 27 Feb 2009 16:25:44 +0100 (CET)
+	id 4951E4BE52; Fri, 27 Feb 2009 16:43:10 +0100 (CET)
 X-Squirrel-UserHash: c3wyGAAN
 X-Squirrel-FromHash: AFRVDw5RXnw=
-Message-ID: <50939.AFRVDw5RXnw=.1235748344.squirrel@webmail.no-log.org>
-Date: Fri, 27 Feb 2009 16:25:44 +0100 (CET)
+Message-ID: <43954.AFRVDw5RXnw=.1235749389.squirrel@webmail.no-log.org>
+Date: Fri, 27 Feb 2009 16:43:09 +0100 (CET)
 From: "GNUtoo" <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
 User-Agent: SquirrelMail/1.4.9a
 MIME-Version: 1.0
 X-Priority: 3 (Normal)
 Importance: Normal
-Subject: [patch](or sort of): emacs didn't compile[first part: emacs recipe]
+Subject: [patch](or sort of): emacs didn't compile[second part: qemu recipe]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,204 +29,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2009 15:29:33 -0000
+X-List-Received-Date: Fri, 27 Feb 2009 15:47:07 -0000
 Content-Type: text/plain;charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-hello,
-for me emacs didn't compile...I was able to compile it but:
-*It needed a special version of qemu
-*I made some changes that may need review
+here's my qemu recipe that isn't commitable:
+it's a recipe for qemu-arm-eabi:
+http://qemu-arm-eabi.wiki.sourceforge.net/
 
-here's the diff for emacs:
-diff -Nurd org.openembedded.dev/packages/emacs/emacs.inc
-local_packages/packages/emacs/emacs.inc
---- org.openembedded.dev/packages/emacs/emacs.inc	2009-02-25
-17:32:29.000000000 +0100
-+++ local_packages/packages/emacs/emacs.inc	2009-02-25 18:04:56.000000000
+here's the recipe(hardcoded revision,I know it's bad):
+diff -Nurd org.openembedded.dev/packages/qemu/qemu_svn.bb
+local_packages/packages/qemu/qemu_svn.bb
+--- org.openembedded.dev/packages/qemu/qemu_svn.bb	2009-02-12
+15:26:46.000000000 +0100
++++ local_packages/packages/qemu/qemu_svn.bb	2009-02-25 11:17:57.00000000=
+0
 +0100
-@@ -5,6 +5,8 @@
- # and it needs to run some generated binaries..
- DEPENDS +=3D "qemu-native"
+@@ -1,47 +1,51 @@
+ LICENSE =3D "GPL"
+ DEPENDS =3D "zlib"
+-PV =3D "0.9.1+svnr${SRCREV}"
+-PR =3D "r14"
++PV =3D "0.9.1+svnr5391"
++PR =3D "r16"
 
-+DEPENDS +=3D" liblockfile"
-+
+-FILESPATH =3D "${FILE_DIRNAME}/qemu-${PV}/:${FILE_DIRNAME}/qemu-0.9.1+sv=
+n/"
++#FILESPATH =3D "${FILE_DIRNAME}/qemu-${PV}/:${FILE_DIRNAME}/qemu-0.9.1+s=
+vn/"
+
+ SRC_URI =3D "\
+-    svn://svn.savannah.nongnu.org/qemu;module=3Dtrunk \
+-    file://05_non-fatal_if_linux_hd_missing.patch;patch=3D1;pnum=3D1 \
+-    file://06_exit_segfault.patch;patch=3D1;pnum=3D0 \
+-    file://10_signal_jobs.patch;patch=3D1;pnum=3D0 \
+-    file://11_signal_sigaction.patch;patch=3D1;pnum=3D0 \
+-    file://22_net_tuntap_stall.patch;patch=3D1;pnum=3D0 \
+-    file://31_syscalls.patch;patch=3D1;pnum=3D0 \
+-    file://32_syscall_sysctl.patch;patch=3D1;pnum=3D0 \
+-    file://33_syscall_ppc_clone.patch;patch=3D1;pnum=3D0 \
+-    file://39_syscall_fadvise64.patch;patch=3D1;pnum=3D0 \
+-    file://41_arm_fpa_sigfpe.patch;patch=3D1;pnum=3D0;maxrev=3D4028 \
+-    file://52_ne2000_return.patch;patch=3D1;pnum=3D1 \
+-    file://61_safe_64bit_int.patch;patch=3D1;pnum=3D0 \
+-    file://63_sparc_build.patch;patch=3D1;pnum=3D0 \
+-    file://64_ppc_asm_constraints.patch;patch=3D1;pnum=3D1 \
+-    file://65_kfreebsd.patch;patch=3D1;pnum=3D0 \
+-    file://66_tls_ld.patch;patch=3D1;pnum=3D0 \
+-    file://91-oh-sdl-cursor.patch;patch=3D1;pnum=3D0 \
+-    file://qemu-0.9.0-nptl.patch;patch=3D1 \
+-    file://qemu-0.9.0-nptl-update.patch;patch=3D1;maxrev=3D4028 \
+-    file://qemu-amd64-32b-mapping-0.9.0.patch;patch=3D1 \
+-    file://workaround_bad_futex_headers.patch;patch=3D1 \
+-    file://fix_segfault.patch;patch=3D1 \
+-    file://no-strip.patch;patch=3D1 \
+-    file://fix_brk.patch;patch=3D1 \
+-    file://fix_protection_bits.patch;patch=3D1 \
+-    file://revert_arm_tcg.patch.gz;patch=3D1;minrev=3D4242 \
+-    file://qemu-n800-support.patch;patch=3D1 \
+-    file://fix_baum_c_compilation.patch;patch=3D1 \
+-    file://fix_dirent_h_include.patch;patch=3D1"
++svn://svn.savannah.nongnu.org/qemu;module=3Dtrunk;rev=3D5391 \
++file://01_fix_srs_rfe.patch;patch=3D1;pnum=3D0 \
++file://02_fix_page_range_check.patch;patch=3D1;pnum=3D0 \
++file://03_arm_cpu_default.patch;patch=3D1;pnum=3D1 \
++file://04_shmat_strace.patch;patch=3D1;pnum=3D0 \
++file://06_exit_segfault.patch;patch=3D1;pnum=3D0 \
++file://10_signal_jobs.patch;patch=3D1;pnum=3D0 \
++file://19_zero_null.2.read.patch;patch=3D1;pnum=3D1 \
++file://19_zero_null.3.accept.patch;patch=3D1;pnum=3D1 \
++file://19_zero_null.4.acct.patch;patch=3D1;pnum=3D1 \
++file://21_net_soopts.patch;patch=3D1;pnum=3D1 \
++file://22_IPCOP_msg.patch;patch=3D1;pnum=3D1 \
++file://23_msg_syscalls.patch;patch=3D1;pnum=3D1 \
++file://24_IPCOP_sem.patch;patch=3D1;pnum=3D1 \
++file://25_sem_syscalls.patch;patch=3D1;pnum=3D1 \
++file://26_IPCOP_shm.patch;patch=3D1;pnum=3D1 \
++file://27_shm_syscalls.patch;patch=3D1;pnum=3D1 \
++file://30_check_host_to_target_sockaddr_return_value.patch;patch=3D1;pnu=
+m=3D0 \
++file://31_syscalls.patch;patch=3D1;pnum=3D1 \
++file://32_syscall_sysctl.patch;patch=3D1;pnum=3D0 \
++file://33_fix_getdents_syscalls.patch;patch=3D1;pnum=3D1 \
++file://34_fix_siocatmark.patch;patch=3D1;pnum=3D0 \
++file://35_syscall_sockaddr.patch;patch=3D1;pnum=3D1 \
++file://36_fix_iovec.patch;patch=3D1;pnum=3D1 \
++file://37_check_target_to_host_sockaddr_return_value.patch;patch=3D1;pnu=
+m=3D1 \
++file://38_fix_recvmsg_return_value.patch;patch=3D1;pnum=3D1 \
++file://39_fix_exit_syscall.patch;patch=3D1;pnum=3D1 \
++file://40_clone_child_cleartid.patch;patch=3D1;pnum=3D1 \
++file://44_socklen_t_check.patch;patch=3D1;pnum=3D1 \
++file://48_signal_terminate.patch;patch=3D1;pnum=3D1 \
++file://99_sbox_callhack.patch;patch=3D1;pnum=3D1 \
++file://99_sbox_proc.patch;patch=3D1;pnum=3D1 \
++"
+
+ S =3D "${WORKDIR}/trunk"
+
+ #EXTRA_OECONF +=3D "--disable-sdl"
+ #EXTRA_OECONF +=3D "--target-list=3Darm-linux-user,arm-softmmu,i386-soft=
+mmu"
+ EXTRA_OECONF +=3D "--disable-gfx-check"
++EXTRA_OECONF +=3D "--target-list=3Darm-linux-user"
+
  inherit autotools
 
- PACKAGES =3D+ "${PN}-el"
-@@ -16,8 +18,12 @@
+It doesn't compile the full qemu...just the arm part...because compiling
+the full qemu resulted in a compilation failure
 
- FILES_${PN}-dbg +=3D "${libexecdir}/emacs/*/*/.debug
-${datadir}/emacs/*/*/.debug"
-
-+TREEDIR =3D "${WORKDIR}/qemu-treedir"
-+
- # Large stack is required at least on x86_64 host, otherwise random
-segfaults appear:
--QEMU =3D "qemu-${TARGET_ARCH} ${QEMU_OPTIONS} -s 1048576 -L
-${STAGING_DIR_TARGET}"
-+QEMU =3D "qemu-${TARGET_ARCH} ${QEMU_OPTIONS} -s 1048576 -L ${TREEDIR}"
-+
-+export LOGNAME =3D "$(whoami)"
-
- do_compile_prepend() {
- 	sed -i ':1;s:\(START.* \|LIB_STANDARD.* \|LIBES.*
-\)/usr/lib:\1${STAGING_LIBDIR}:;t1' ${S}/src/s/gnu-linux.h `find "${S}"
--name Makefile`
-@@ -26,6 +32,19 @@
- 	ln -sf ../src/emacs lisp/emacs
- 	ln -sf ../src/emacs lib-src/emacs
- 	ln -sf ../src/emacs leim/emacs
-+#copy STAGING_DIR_TARGET and libgcc_s.so* to WORKDIR/qemu-treedir #copie=
-d
-code from glibc-package.bbclass
-+	treedir=3D${TREEDIR}
-+	if [ -e $treedir ];then
-+		rm -rf $treedir
-+	fi
-+	mkdir $treedir
-+	cp -pPR ${STAGING_DIR_TARGET}/* $treedir
-+	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so ]; then
-+                cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so
-$treedir/lib
-+        fi
-+        if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so.* ]; then
-+                cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so.*
-$treedir/lib
-+        fi
- }
-
- EXTRA_OEMAKE +=3D 'QEMU=3D"${QEMU}"'
-diff -Nurd org.openembedded.dev/packages/emacs/emacs-x11_22.3.bb
-local_packages/packages/emacs/emacs-x11_22.3.bb
---- org.openembedded.dev/packages/emacs/emacs-x11_22.3.bb	2009-02-25
-17:32:29.000000000 +0100
-+++ local_packages/packages/emacs/emacs-x11_22.3.bb	2009-02-26
-19:51:10.000000000 +0100
-@@ -1,9 +1,9 @@
- require emacs.inc
-
- # full X (non-diet) is needed for X support
--DEPENDS +=3D "gtk+ libungif"
-+DEPENDS +=3D "gtk+ libungif libxpm"
-
--EXTRA_OECONF =3D "--without-sound --with-x-toolkit=3Dgtk"
-+EXTRA_OECONF =3D "--without-sound --with-x-toolkit=3Dgtk --with-xpm"
-
- RREPLACES =3D "emacs"
-
------------------------------end diff------------------------------------=
--
-DEPENDS +=3D"liblockfile" : that is because otherwise it complained about=
- it:
-| checking for liblockfile.so... yes
-| configure: error: Shared liblockfile found but can't link against it.
-| This probably means that movemail could lose mail.
-| There may be a `development' package to install containing liblockfile.
-| FATAL: oe_runconf failed
-NOTE: Task failed:
-/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-22=
-.3-r0/temp/log.do_configure.9431
-NOTE: package emacs-22.3-r0: task do_configure: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package emacs-22.3: failed
-ERROR: Build of
-/home/embedded/oe/org.openembedded.dev/packages/emacs/emacs_22.3.bb
-do_configure failed
-ERROR: Task 5
-(/home/embedded/oe/org.openembedded.dev/packages/emacs/emacs_22.3.bb,
-do_configure) failed
-NOTE: Tasks Summary: Attempted 307 tasks of which 307 didn't need to be
-rerun and 1 failed.
-ERROR: '/home/embedded/oe/org.openembedded.dev/packages/emacs/
-
-The treedir part is because it didn't find libgcc:
-
-| unset CDPATH; \
-| 	if [ -n "/bin/gzip" ]; \
-| 	then \
-| 	   echo "Compressing *.el ..." ; \
-| 	   (cd
-/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-22=
-.3-r0/image/usr/share/emacs/22.3/leim;
-for f in `find . -name "*.elc" -print`; do \
-| 		/bin/gzip -9n `echo $f|sed 's/.elc$/.el/'` ; \
-| 	    done) \
-| 	else true; fi
-| Compressing *.el ...
-| chmod -R a+r
-/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-22=
-.3-r0/image/usr/share/emacs/22.3/leim
-| find
-/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-22=
-.3-r0/image/usr/share/emacs/22.3/leim
--exec chown ${LOGNAME:-$USERNAME} '{}' ';'
-| make[1]: Leaving directory
-`/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-2=
-2.3-r0/emacs-22.3/leim'
-| cd lib-src; make maybe-blessmail  \
-| 	  MAKE=3D'make'
-archlibdir=3D'/usr/libexec/emacs/22.3/arm-angstrom-linux-gnueabi'
-| make[1]: Entering directory
-`/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-2=
-2.3-r0/emacs-22.3/lib-src'
-| qemu-arm  -s 1048576 -L
-/home/embedded/oetmp_openmoko/staging/armv4t-angstrom-linux-gnueabi emacs
--batch --no-site-file --multibyte -l
-/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-22=
-.3-r0/emacs-22.3/lib-src/../lisp/mail/blessmail.el
-| emacs: error while loading shared libraries: libgcc_s.so.1: cannot open
-shared object file: No such file or directory
-| make[1]: *** [blessmail] Error 127
-| make[1]: Leaving directory
-`/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-2=
-2.3-r0/emacs-22.3/lib-src'
-| make: *** [blessmail] Error 2
-| FATAL: oe_runmake failed
-NOTE: Task failed:
-/home/embedded/oetmp_openmoko/work/armv4t-angstrom-linux-gnueabi/emacs-22=
-.3-r0/temp/log.do_install.26296
-NOTE: package emacs-22.3-r0: task do_install: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package emacs-22.3: failed
-ERROR: Build of
-/home/embedded/oe/local_packages/packages/emacs/emacs_22.3.bb do_install
-failed
-ERROR: Task 8
-(/home/embedded/oe/local_packages/packages/emacs/emacs_22.3.bb,
-do_install) failed
-NOTE: Tasks Summary: Attempted 331 tasks of which 324 didn't need to be
-rerun and 1 failed.
-ERROR: '/home/embedded/oe/local_packages/packages/emacs/emacs_22.3.bb' fa=
-iled
-NOTE: build 200902251721: completed
-
---with-xpm is because otherwise the button in GTK are there but have no
-icon in them,that is to say there is a x icon on top of each button
-
-Note that I didn't bump the PR yet because it didn't compile...but maybe =
-I
-should if it compiled for other people(would fix the icon issue in
-emacs-x11)
-
-By the way I saw emacs(non x11 version) in freesmarphones.org unstable
-repository...I wonder how it has been compiled or why it didn't work for
-me.
-This is the main reason why I'm asking for review or comments...it may be
-my system/build environment,but in another hand another person wasn't abl=
-e
-to build it neither: there was a thread named:
-[oe] Ugly build problem with emacs/qemu
-in the devel mailing-list:
-http://article.gmane.org/gmane.comp.handhelds.openembedded/21178/match=3D=
-emacs
-
-
-PS:I didn't look deeply into changing emacs-x11 fonts size yet:
-It shows a lot of font size but if you don't stick to the default it says
-the font is unavailable
-
-Thanks in advance for the review
+so that's the ugly part...
+I bet I'll have to track down which patch(es) can permit the compilation
+of emacs...and It would be long and painful,so I need to automatize
+it(what should I use to do that...they do it with toolchains or
+projects...do I just have to generate the recipes automatically,and use
+the return code of bitbake as a compilation failure or success?)
 Denis.
 
 
