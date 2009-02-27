@@ -1,22 +1,20 @@
-Received: from [85.37.16.8] (helo=smtpout30.attiva.biz)
+Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pisa.t@teledata-i.com>) id 1Ld12k-0003zd-F1
-	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 12:38:21 +0100
-Received: from FBCMFE02B14.fbc.local ([192.168.30.160]) by
-	smtpout30.attiva.biz with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 27 Feb 2009 12:34:51 +0100
-Received: from [193.100.100.77] ([80.207.73.242]) by FBCMFE02B14.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 27 Feb 2009 12:34:50 +0100
-From: Paolo Cremonese <pisa.t@teledata-i.com>
-To: Lista Openembedded <openembedded-devel@openembedded.org>
-Date: Fri, 27 Feb 2009 12:37:32 +0100
-Message-Id: <1235734652.7210.12.camel@ubuntu2>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-OriginalArrivalTime: 27 Feb 2009 11:34:51.0061 (UTC)
-	FILETIME=[67020E50:01C998CF]
-Subject: Bootloader problems
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1Ld4Ev-00008o-9O
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Feb 2009 16:03:01 +0100
+Received: from [192.168.1.102] (77-21-130-108-dynip.superkabel.de
+	[77.21.130.108])
+	by dd20204.kasserver.com (Postfix) with ESMTP id EFC37180F5DF3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Feb 2009 15:59:35 +0100 (CET)
+Message-ID: <49A7FFD4.5090202@opensimpad.org>
+Date: Fri, 27 Feb 2009 15:59:32 +0100
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: How to use libsdl-qpe for opie?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,57 +28,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2009 11:38:56 -0000
-X-List-Received-Date: Fri, 27 Feb 2009 11:38:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Feb 2009 15:03:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi all,
-I have problems in generating a bootable device (CF)
-During the setup the CF is connected to the host via an USB adapter.
+Hi everybody,
+I am currently trying to support libsdl for opie.
+If I set PREFERRED_PROVIDER_virtual/libsdl ?= "libsdl-qpe" in my 
+local.conf I am able to build sdl games and play them on qemuarm.
 
-These are the steps I do:
+The info I got so far from IRC was that it has to be set by distribution 
+or in local.conf.
 
-# fdisk /dev/sdb
-   create a linux partition /dev/sdb1 and activate it
+I tested using games linked against libsdl-x11 with libsdl-qpe and this 
+did not work.
 
-# mkfs.ext3 /dev/sdb1
+Options now:
 
-# mount -t ext3 /dev/sdb1 /media/disk
+Set PREFERRED_PROVIDER_virtual/libsdl ?= "libsdl-qpe" 
+This is a no go because a new distribution has to be build.
 
-# cd /media/disk
-# tar
--xvf /home/paolo/oe/stuff/build/gpe-image/deploy/glibc/images/i586-generic/gpe-image-i586-generic.tar
+Enable qtopia video in libsdl-x11
+Would be an option but it woud be a lot of work to get it working.
 
-and the filesystem is correctly on the CF
+Set up a feed for packages linked against libsdl-qpe
+Possible but I don't know if this is smart?
 
-# cd boot
-# mkdir grub
-# cd grub
-# < copy of grub files>
-# grub ...
+Any help is appreciated :)
 
-the menu.lst contains
-
-title		OpenEmbedded Linux (hda1)
-root		(hd0,0)
-kernel		/boot/bzImage-2.6.21 root=/dev/hda1 ro
-quiet
-
-
-The system boots, but when the filesystem is created, the kernel crashes
-with the message:
-
-VFS: Cannot open root device "(hd0,0)" or unknown-block(0,0)
-Please append a correct "root=" boot option
-Kernel panic - not syncing: VFS: unable to mount root fs or
-unknown-block(0,0)
-
-but I don't understand what I have to do...
-
-Thanks in advance
-Paolo
-
-
+Best regards
+Bernhard Guillon
 
 
