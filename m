@@ -1,30 +1,36 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [209.85.198.246] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Ld8sn-0004IM-9r
-	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 21:00:29 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090227195657.FRHR16134.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Fri, 27 Feb 2009 14:56:57 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id M7ww1b00B4dMFYL037wwNT; Fri, 27 Feb 2009 14:56:56 -0500
-X-Authority-Analysis: v=1.0 c=1 a=-YUmSzi2JToA:10 a=X-6fHHiI_zAA:10
-	a=1XWaLZrsAAAA:8 a=xwjP7ZkPSL3JkErGzuAA:9
-	a=6Oj59o2chdjO-q424q18Yyo5820A:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Fri, 27 Feb 2009 12:56:56 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090227195656.GF5420@smtp.west.cox.net>
-References: <go4amc$h30$1@ger.gmane.org> <go6ah4$cud$1@ger.gmane.org>
-	<20090226154007.GZ2172@smtp.west.cox.net>
-	<go848j$1a4$1@ger.gmane.org>
+	(envelope-from <papercrane@gmail.com>) id 1Ld9Ng-0002PN-4H
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Feb 2009 21:32:26 +0100
+Received: by rv-out-0708.google.com with SMTP id b17so1353445rvf.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Feb 2009 12:28:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:reply-to:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=p651pkPktUUezRSS2laYfLj6Rtg3vNsHoG6dxr0SKQg=;
+	b=w0gaoVwtawVyFsbGRegrHqN9FXzrJJmaYjICkLMpMSH53nn4ngWVB7nzWyTEhCdGqC
+	ala2UEmU/9ZFgeiCRW1FR9v9FhpdpvVv91CRTXAcBhk7aQOVpvKpT6QQkk0lDpUXs/NV
+	5qTUV+9STwgyMsCLvHeT4I6GQ6HnwJ0zZ2tEA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:reply-to:in-reply-to:references:date:message-id
+	:subject:from:to:cc:content-type:content-transfer-encoding;
+	b=RiJgpvqTUIS8gSmSErF2SgPElR9FqEBjPXPbuWmtnjR2pdudGVYBPiq53buhl0cPim
+	xzQE+3mW5UQn1Mh2qGLgQH3S5BVhFGYcNa4WWpK7jzlMIX1lspV30cWVPZ6SI5GQlnKz
+	Lc0Hmm/qk6PebAEFoeQAC2YCGyBDEguyZSPh8=
 MIME-Version: 1.0
-In-Reply-To: <go848j$1a4$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] update opkg* SRCREV to 201
+Received: by 10.141.177.2 with SMTP id e2mr1358040rvp.266.1235766533577; Fri, 
+	27 Feb 2009 12:28:53 -0800 (PST)
+In-Reply-To: <49A7BD17.2080407@dresearch.de>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF686@hiob.intern.dresearch.de>
+	<49A7BD17.2080407@dresearch.de>
+Date: Fri, 27 Feb 2009 12:28:53 -0800
+Message-ID: <432beae0902271228w2150a17fo79e5a76c8eb71b42@mail.gmail.com>
+From: Justin Patrin <papercrane@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Ugly build problem with emacs/qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,36 +44,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2009 20:00:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 27 Feb 2009 20:32:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 27, 2009 at 08:20:51AM +0100, Koen Kooi wrote:
-> On 26-02-09 16:40, Tom Rini wrote:
->> On Thu, Feb 26, 2009 at 03:55:32PM +0100, Koen Kooi wrote:
->>> On 25-02-09 21:46, Koen Kooi wrote:
->>>> Hi,
->>>>
->>>> I was getting seriously annoyed with the useless error codes opkg was
->>>> giving me and Tick pointed me to:
->>>>
->>>> http://code.google.com/p/opkg/issues/detail?id=6&can=1
->>>>
->>>> We're at 197 now in OE (with r201 applied as patch). I'd like to get
->>>> r199 and r200 in as well, and since I'm lazy I though we'd get r198 in
->>>> as well, which means instead of adding a few patches I can just bump up
->>>> SRCREV to 201.
->>>>
->>>> What do you think?
->>> Noone is thinking anything?
->>
->> <sarcasm>  not since I switched to debs</sarcasm>
+Are the machines you're building on exactly the same? Do they perhaps
+have different architectures or distributions? Have you tried updating
+the systems?
+
+This looks like a qemu failure to me.
+
+On 2/27/09, Steffen Sledz <sledz@dresearch.de> wrote:
+> Hi Justin and Richard,
 >
-> You still going to get bitten by opkg bugs when using packaged-staging
+>  this problem is still existing. Do you have an idea what's wrong here? Is there anything i can do to help finding the problem.
+>
+>
+>  Steffen
+>
+>
+>  > I'm not sure if this is a problem with emacs itself or qemu.
+>  >
+>  > I try to build exactly the same image with the same configuration (fyi CCACHE="") on different computers. On one everything builds fine on the other compiling emacs fails with a segmentation fault. :(
+>  >
+>  > NOTE: make QEMU=qemu-arm  -s 1048576 -L /home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi
+>  > cd lib-src; make all  \
+>  >           CC='arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mthumb' CFLAGS='-isystem/home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi/usr/i
+>  > nclude -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2' CPPFLAGS='-D_BSD_SOURCE  -isystem/home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi/usr/include' \
+>  >           LDFLAGS='-L/home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-rpath-link,/home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,-
+>  > -hash-style=gnu -Wl,-znocombreloc' MAKE='make'
+>  > make[1]: Entering directory `/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/emacs-22.3-r0/emacs-22.3/lib-src'
+>  > arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mthumb -D_BSD_SOURCE -DHAVE_CONFIG_H -I. -I../src -I/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gn
+>  > ueabi/emacs-22.3-r0/emacs-22.3/lib-src -I/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/emacs-22.3-r0/emacs-22.3/lib-src/../src -L/home/sledz/oe/tmp.1/staging/armv5te-angstrom-
+>  > linux-gnueabi/usr/lib -Wl,-rpath-link,/home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=gnu -Wl,-znocombreloc -D_BSD_SOURCE  -isystem/home/sled
+>  > z/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi/usr/include -isystem/home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -frename-registers
+>  >  -fomit-frame-pointer -O2 -o test-distrib /home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/emacs-22.3-r0/emacs-22.3/lib-src/test-distrib.c
+>  > qemu-arm  -s 1048576 -L /home/sledz/oe/tmp.1/staging/armv5te-angstrom-linux-gnueabi ./test-distrib /home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/emacs-22.3-r0/emacs-22.3/lib-s
+>  > rc/testfile
+>  > make[1]: *** [test-distrib] Segmentation fault
+>  > make[1]: *** Deleting file `test-distrib'
+>  > make[1]: Leaving directory `/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/emacs-22.3-r0/emacs-22.3/lib-src'
+>  > make: *** [lib-src] Error 2
+>  > FATAL: oe_runmake failed
+>  > _______________________________________________
+>  > Openembedded-devel mailing list
+>  > Openembedded-devel@lists.openembedded.org
+>  > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-Something I wanna find the time to fix.
 
 -- 
-Tom Rini
+Justin Patrin
 
 
