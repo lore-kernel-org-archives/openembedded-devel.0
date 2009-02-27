@@ -1,21 +1,33 @@
-Received: from [80.67.172.39] (helo=webmail.no-log.org)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Ld50k-0006jB-Rr
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Feb 2009 16:52:32 +0100
-Received: by webmail.no-log.org (Postfix, from userid 33)
-	id D19414C15D; Fri, 27 Feb 2009 16:48:57 +0100 (CET)
-X-Squirrel-UserHash: c3wyGAAN
-X-Squirrel-FromHash: AFRVDw5RXnw=
-Message-ID: <36869.AFRVDw5RXnw=.1235749737.squirrel@webmail.no-log.org>
-Date: Fri, 27 Feb 2009 16:48:57 +0100 (CET)
-From: "GNUtoo" <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.9a
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: [patch](or sort of): emacs didn't compile[third and last part: liblockfile url]
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ld54q-0006o2-Om
+	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 16:56:43 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ld51S-0007fQ-OF
+	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 15:53:10 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 27 Feb 2009 15:53:10 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 27 Feb 2009 15:53:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 27 Feb 2009 16:53:02 +0100
+Message-ID: <go928u$cgu$1@ger.gmane.org>
+References: <49A7FFD4.5090202@opensimpad.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+In-Reply-To: <49A7FFD4.5090202@opensimpad.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: How to use libsdl-qpe for opie?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,50 +41,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2009 15:52:43 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Feb 2009 15:56:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-liblockfile didn't find the file in any of the debian mirrors...
-$ diff -Nurd org.openembedded.dev/packages/liblockfile/
-local_packages/packages/liblockfile/
-diff -Nurd org.openembedded.dev/packages/liblockfile/liblockfile_1.06.bb
-local_packages/packages/liblockfile/liblockfile_1.06.bb
----
-org.openembedded.dev/packages/liblockfile/liblockfile_1.06.bb	2009-02-25
-11:40:19.000000000 +0100
-+++ local_packages/packages/liblockfile/liblockfile_1.06.bb	2009-02-25
-11:39:40.000000000 +0100
-@@ -3,7 +3,9 @@
- LICENSE =3D "LGPL"
- PR =3D"r1"
+On 27-02-09 15:59, Bernhard Guillon wrote:
 
--SRC_URI =3D "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_${PV}.ta=
-r.gz \
-+#SRC_URI =3D
-"${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_${PV}.tar.gz \
-+SRC_URI =3D "http://distfiles.gentoo.org/distfiles/liblockfile_${PV}.tar=
-.gz \
-+
- 	   file://install.patch;patch=3D1 \
- 	   file://configure.patch;patch=3D1 \
- 	   file://ldflags.patch;patch=3D1 \
+> Enable qtopia video in libsdl-x11
+> Would be an option but it woud be a lot of work to get it working.
 
-so I bet I can commit the changes here...
-(the md5sum are in the checksums.ini:
-[ftp://ftp.debian.org/debian/pool/main/libl/liblockfile/liblockfile_1.06.=
-tar.gz]
-md5=3D2de88389da013488bfd31356523070c0
-sha256=3D14f9690328318d11f9ba13a9356a2c008bdd169b7a817f38cb7f9eb32cf7240e
+That's the only option
 
-[ftp://ftp.nl.debian.org/debian/pool/main/libl/liblockfile/liblockfile_1.=
-06.tar.gz]
-md5=3D2de88389da013488bfd31356523070c0
-sha256=3D14f9690328318d11f9ba13a9356a2c008bdd169b7a817f38cb7f9eb32cf7240e
-)
-and I do not change the PR because it doesn't change the content of the
-package...
-but I post here just in case someone has an objection
-Denis.
 
 
