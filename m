@@ -1,37 +1,24 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ld700-0005K2-0F
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Feb 2009 18:59:48 +0100
-Received: by bwz9 with SMTP id 9so1187772bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2009 09:56:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Zg+FoN9V8WJ3/rhUKm+3Z+zm1JAUOuFZvrzumM89Fq0=;
-	b=QXrY4uhipz4+7xsRa8af3fiCnXMwcy6znKzra0gW6aYsyCJW3gaWfkpD/XoVKZCAzN
-	8HFny5RR3y+uGQGH1u37hmmCXsP4OQi9bvnsySxVbZtbNJEe73DLUDXTVjKZS4FG1gqS
-	4O3enjWMaUz9F3tm3Dlnmrc0Nw0elrre73hh8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=tSwNF+dTWBkuhNeSIkR29uZN2Oig0WEewjY+h/NDLNDsUOcyNifSyVtBZfeqnD3RxQ
-	VWxOVWDbwrCIUHdPHRRpvLixWxSI2sUC+gFCVBtIIvZoZfkBg0WlVcpG6dzVEzMhKNcW
-	CjZwqBuldlth/7ymnafL/gFP4dAPgoqx7SlIc=
-MIME-Version: 1.0
-Received: by 10.223.107.135 with SMTP id b7mr3526127fap.30.1235757376334; Fri, 
-	27 Feb 2009 09:56:16 -0800 (PST)
-In-Reply-To: <20090227162633.GD5420@smtp.west.cox.net>
-References: <ac9c93b10902260920s24a8c5we592cbb4d0d63221@mail.gmail.com>
-	<c384c5ea0902270806n70ce6bbfg45d19b5ebaf64050@mail.gmail.com>
-	<20090227162633.GD5420@smtp.west.cox.net>
-Date: Fri, 27 Feb 2009 18:56:16 +0100
-Message-ID: <ac9c93b10902270956k501e0316y7820f047b4755f0c@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <denis@denix.org>) id 1Ld7nU-0004Vn-1s
+	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 19:50:56 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KFQ007FLMUKB89O@vms173001.mailsrvcs.net> for
+	openembedded-devel@openembedded.org;
+	Fri, 27 Feb 2009 12:47:14 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 047A26B83A8; Fri,
+	27 Feb 2009 13:47:08 -0500 (EST)
+Date: Fri, 27 Feb 2009 13:47:07 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: OE breakages, was: Re: fakeroot fails to build
+Message-id: <20090227184707.GA6027@denix.org>
+References: <1235734652.7210.12.camel@ubuntu2>
+MIME-version: 1.0
+In-reply-to: <1235734652.7210.12.camel@ubuntu2>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: Lista Openembedded <openembedded-devel@openembedded.org>
+Subject: Re: Bootloader problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,41 +32,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2009 17:59:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Feb 2009 18:50:56 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-2009/2/27 Tom Rini <trini@kernel.crashing.org>:
-> On Fri, Feb 27, 2009 at 05:06:25PM +0100, Leon Woestenberg wrote:
->> Hello,
->>
->> On Thu, Feb 26, 2009 at 6:20 PM, Frans Meulenbroeks
->> <fransmeulenbroeks@gmail.com> wrote:
->> >> On 25-02-09 16:14, Mike (mwester) wrote:
->> >
->> > The problem I am facing is somewhat different.
->> > I've added packages which build and test fine in my environment but
->> > for some reason they do not build properly on tinderbox.
->> >
->> That often indicates a leak to the host and/or missing DEPENDS.
->>
->> The build machines that run test builds, should do so with the minimal
->> amount of host requirements.
->>
->> Easily testable using virtual machines with freshly installed Linux,
->> as most machines grow their installed package base during their
->> lifecycle.
->
-> Also, chroots work for this.
->
+On Fri, Feb 27, 2009 at 12:37:32PM +0100, Paolo Cremonese wrote:
+> Hi all,
+> I have problems in generating a bootable device (CF)
+> During the setup the CF is connected to the host via an USB adapter.
+> 
+> These are the steps I do:
+> 
+> # fdisk /dev/sdb
+>    create a linux partition /dev/sdb1 and activate it
+> 
+> # mkfs.ext3 /dev/sdb1
+> 
+> # mount -t ext3 /dev/sdb1 /media/disk
+> 
+> # cd /media/disk
+> # tar
+> -xvf /home/paolo/oe/stuff/build/gpe-image/deploy/glibc/images/i586-generic/gpe-image-i586-generic.tar
+> 
+> and the filesystem is correctly on the CF
+> 
+> # cd boot
+> # mkdir grub
+> # cd grub
+> # < copy of grub files>
+> # grub ...
+> 
+> the menu.lst contains
+> 
+> title		OpenEmbedded Linux (hda1)
+> root		(hd0,0)
+> kernel		/boot/bzImage-2.6.21 root=/dev/hda1 ro
+> quiet
+> 
+> 
+> The system boots, but when the filesystem is created, the kernel crashes
+> with the message:
+> 
+> VFS: Cannot open root device "(hd0,0)" or unknown-block(0,0)
+> Please append a correct "root=" boot option
+> Kernel panic - not syncing: VFS: unable to mount root fs or
+> unknown-block(0,0)
+> 
+> but I don't understand what I have to do...
 
-True but that is not what we have at the moment. E.g the mpd problem I
-mentioned earlier in this thread is probably caused by some docbook
-residue.
+Please verify:
 
-(and I agree that it is easy to miss a DEPENDS because of accumulated
-installed packages).
+1. Your device, you are trying to boot, maps your CF at /dev/hda (or /dev/sda)
+2. Your kernel has the support for the filesystem type you want - ext3/ext2
+3. Your filesystem has static /dev/hda and enough /dev/hda? devnodes
 
-FM
+-- 
+Denys
 
 
