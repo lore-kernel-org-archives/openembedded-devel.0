@@ -1,34 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [85.37.16.8] (helo=smtpout30.attiva.biz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lcx5A-0001Ir-It
-	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 08:24:28 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lcx1p-0002Po-FS
-	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 07:21:01 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 27 Feb 2009 07:21:01 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 27 Feb 2009 07:21:01 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 27 Feb 2009 08:20:51 +0100
-Message-ID: <go848j$1a4$1@ger.gmane.org>
-References: <go4amc$h30$1@ger.gmane.org> <go6ah4$cud$1@ger.gmane.org>
-	<20090226154007.GZ2172@smtp.west.cox.net>
+	(envelope-from <pisa.t@teledata-i.com>) id 1Ld12k-0003zd-F1
+	for openembedded-devel@openembedded.org; Fri, 27 Feb 2009 12:38:21 +0100
+Received: from FBCMFE02B14.fbc.local ([192.168.30.160]) by
+	smtpout30.attiva.biz with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 27 Feb 2009 12:34:51 +0100
+Received: from [193.100.100.77] ([80.207.73.242]) by FBCMFE02B14.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 27 Feb 2009 12:34:50 +0100
+From: Paolo Cremonese <pisa.t@teledata-i.com>
+To: Lista Openembedded <openembedded-devel@openembedded.org>
+Date: Fri, 27 Feb 2009 12:37:32 +0100
+Message-Id: <1235734652.7210.12.camel@ubuntu2>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
-In-Reply-To: <20090226154007.GZ2172@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] update opkg* SRCREV to 201
+X-Mailer: Evolution 2.22.3.1 
+X-OriginalArrivalTime: 27 Feb 2009 11:34:51.0061 (UTC)
+	FILETIME=[67020E50:01C998CF]
+Subject: Bootloader problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +30,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2009 07:24:28 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 27 Feb 2009 11:38:56 -0000
+X-List-Received-Date: Fri, 27 Feb 2009 11:38:56 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 26-02-09 16:40, Tom Rini wrote:
-> On Thu, Feb 26, 2009 at 03:55:32PM +0100, Koen Kooi wrote:
->> On 25-02-09 21:46, Koen Kooi wrote:
->>> Hi,
->>>
->>> I was getting seriously annoyed with the useless error codes opkg was
->>> giving me and Tick pointed me to:
->>>
->>> http://code.google.com/p/opkg/issues/detail?id=6&can=1
->>>
->>> We're at 197 now in OE (with r201 applied as patch). I'd like to get
->>> r199 and r200 in as well, and since I'm lazy I though we'd get r198 in
->>> as well, which means instead of adding a few patches I can just bump up
->>> SRCREV to 201.
->>>
->>> What do you think?
->> Noone is thinking anything?
->
-> <sarcasm>  not since I switched to debs</sarcasm>
+Hi all,
+I have problems in generating a bootable device (CF)
+During the setup the CF is connected to the host via an USB adapter.
 
-You still going to get bitten by opkg bugs when using packaged-staging
+These are the steps I do:
+
+# fdisk /dev/sdb
+   create a linux partition /dev/sdb1 and activate it
+
+# mkfs.ext3 /dev/sdb1
+
+# mount -t ext3 /dev/sdb1 /media/disk
+
+# cd /media/disk
+# tar
+-xvf /home/paolo/oe/stuff/build/gpe-image/deploy/glibc/images/i586-generic/gpe-image-i586-generic.tar
+
+and the filesystem is correctly on the CF
+
+# cd boot
+# mkdir grub
+# cd grub
+# < copy of grub files>
+# grub ...
+
+the menu.lst contains
+
+title		OpenEmbedded Linux (hda1)
+root		(hd0,0)
+kernel		/boot/bzImage-2.6.21 root=/dev/hda1 ro
+quiet
+
+
+The system boots, but when the filesystem is created, the kernel crashes
+with the message:
+
+VFS: Cannot open root device "(hd0,0)" or unknown-block(0,0)
+Please append a correct "root=" boot option
+Kernel panic - not syncing: VFS: unable to mount root fs or
+unknown-block(0,0)
+
+but I don't understand what I have to do...
+
+Thanks in advance
+Paolo
 
 
 
