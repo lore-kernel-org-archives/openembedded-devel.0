@@ -1,21 +1,18 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LdP3V-0004n1-Tn
-	for openembedded-devel@openembedded.org; Sat, 28 Feb 2009 14:16:38 +0100
-Received: (qmail 24181 invoked by uid 1003); 28 Feb 2009 13:12:59 -0000
+	(envelope-from <philip@balister.org>) id 1LdPBJ-0001kV-1G
+	for openembedded-devel@openembedded.org; Sat, 28 Feb 2009 14:24:41 +0100
+Received: (qmail 31249 invoked by uid 1003); 28 Feb 2009 13:21:02 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 28 Feb 2009 13:12:59 -0000
-Message-ID: <49A9385A.3070100@balister.org>
-Date: Sat, 28 Feb 2009 08:12:58 -0500
+	by mail.geekisp.com with SMTP; 28 Feb 2009 13:21:02 -0000
+Message-ID: <49A93A3D.7060003@balister.org>
+Date: Sat, 28 Feb 2009 08:21:01 -0500
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <200902131728.08634.openembedded@haerwu.biz>	<20090224064639.GE2172@smtp.west.cox.net>	<1235492001.27962.60.camel@andromeda>	<8763izyarp.fsf@neumann.lab.ossystems.com.br>	<fce2a370902241036y359e2c7cv1126a62c8627d2bb@mail.gmail.com>	<20090224185059.GL2172@smtp.west.cox.net>	<87wsbfw9zy.fsf@neumann.lab.ossystems.com.br>	<20090225022507.GP2172@smtp.west.cox.net>	<go4d36$khh$1@ger.gmane.org>	<20090225213536.GT2172@smtp.west.cox.net>	<49A69032.9050505@opensimpad.org>	<49A90A73.90109@gremlin.it>	<gob4jo$mi3$1@ger.gmane.org>
-	<49A9171C.8030602@gremlin.it>
-In-Reply-To: <49A9171C.8030602@gremlin.it>
-Subject: Re: checksums situation
+Subject: Tinylogin fetching failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,64 +26,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Feb 2009 13:16:38 -0000
-X-Groupsio-MsgNum: 8057
+X-List-Received-Date: Sat, 28 Feb 2009 13:24:41 -0000
+X-Groupsio-MsgNum: 8058
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040008060507040100020205"
+	micalg=sha1; boundary="------------ms050304000508080606020105"
 
---------------ms040008060507040100020205
+--------------ms050304000508080606020105
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Alessandro GARDICH wrote:
-> Koen Kooi wrote:
->> On 28-02-09 10:57, Alessandro GARDICH wrote:
->>
->>> Last but more important : why the hell this feature is in the default
->>> dev branch ???
->>
->> It was discussed over a period of weeks and RFC'ed, so bitching about 
->> it now is just trolling.
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> Ok my fault, I read mailing list to few ...
-> 
-> but a little question remain, why in the main .dev when is so few tested 
->  and broke a lot of build ...
+Gremlin is building minimal distro and finds he cannot fetch tiny login 
+due to a ssl problem. I've tried wget and see this:
 
-I think there are two issues at the moment:
+[balister@localhost ~]$ wget 
+http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+--08:13:18--  http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+            => `tinylogin-1.4.tar.bz2'
+Resolving tinylogin.busybox.net... 140.211.167.224
+Connecting to tinylogin.busybox.net|140.211.167.224|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2 
+[following]
+--08:13:19--  https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+            => `tinylogin-1.4.tar.bz2'
+Resolving bugs.busybox.net... 140.211.167.224
+Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
+ERROR: Certificate verification error for bugs.busybox.net: unable to 
+get local issuer certificate
+To connect to bugs.busybox.net insecurely, use `--no-check-certificate'.
+Unable to establish SSL connection.
+[balister@localhost ~]$ wget 
+https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+--08:15:19--  https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+            => `tinylogin-1.4.tar.bz2'
+Resolving bugs.busybox.net... 140.211.167.224
+Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
+ERROR: Certificate verification error for bugs.busybox.net: unable to 
+get local issuer certificate
+To connect to bugs.busybox.net insecurely, use `--no-check-certificate'.
+Unable to establish SSL connection.
+[balister@localhost ~]$
 
-1) Build breakage caused by the addition of new sources without the 
-corresponding checksums. This leads to build failures for people 
-building with checksum checking enabled. For some reason, these failures 
-have increased in recent weeks. People, please try to remember to add 
-the checksums, even if you are building with checksums disabled.
-
-2) The monolithic checksums.ini file does not currently provide an easy 
-way for people to add checksums for packages that are in 
-collections/private branches. I believe there is a proposal to fix this 
-problem by allowing people to extend checksums.ini.
-
-For "casual users", you can set:
-
-OE_STRICT_CHECKSUMS = ""
-
-this will not error on missing checksums, but will error if the checksum 
-does not match. This detects bad downloads, upstream projects that 
-change source without changing file names, and evil.
-
-If people start paying a little more attention to 1 and we get 2 
-implemented, much of the recent checksum noise will go away.
+I need to run some errands today, so I cannot look at this further, but 
+I wanted to bring this up in hopes someone can resolve the problem.
 
 Philip
 
---------------ms040008060507040100020205
+PS: If you are building for Angstrom, the source mirror masks the problem :)
+
+--------------ms050304000508080606020105
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -138,17 +126,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIyODEz
-MTI1OFowIwYJKoZIhvcNAQkEMRYEFHotI2flTzgAh42HclJNgkvH5dsrMFIGCSqGSIb3DQEJDzFF
+MjEwMVowIwYJKoZIhvcNAQkEMRYEFCxi7hsAFttQmcSpYEMoOPRuA8NZMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQANlW6kTcaQT3XZIjVREwE27j+8OEz7e4+qWMWD0q3BzXP+uLwd
-eIImaj2sY8igpkOXXSwj/nfD765OmCxnLj4HGPW/Oz7q0lMRutNsnxpk/GAJY3kkLBvKXP12rhEK
-dTi8xbpdyyFCHohNT11L4ZjIuMiXNrYJ9PqE+Vaxz0EmXjNEZDZjbTHZfRmcEWXpao/8vCYdjOHY
-uJdYcIRjoSRr+FVGDygyuqQqaUsjIN3Mo7GNqAQKajAxEtDyOQwmTqImL/omIHK/hHbQJ7LuAUJB
-a7AF+H6s3X41378qkt1EWYD+JWf+msSMIwfj5KM32DDUcPZWQKcl0BZWvDlbjwz/AAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQBqttLQqo9iUfe2jogW211w0Ne4OLu2f7XbsP+VthUSiiYnadWx
+dmnSseJkiuIWT78R/Sm5+8wTSFR3DmZxj/2mM1ReL0BLvzXHXfF9ve/ek5enqlEK3OMalkgwuchd
+Q0GmKA48eKrspnTxm1rDHbp+zDEpEQwcn3tLu2jqx2J0pLmxiwGXsiHMx/jtGjmlH93MblCFqt8f
+SP5csBVdxR7TV1aFF/dJZaidVHvVW0RbYfu6qRBVuhI/0aFVsI96fLjl+nad1KC2Z5Pkq3YFxuRQ
+MAp4Zvn5Vn4sYkqU8l8UspYswFg4upPsvBMdRHtafA47TXCWlPk+OCc+EJfUXl30AAAAAAAA
 
---------------ms040008060507040100020205--
+--------------ms050304000508080606020105--
