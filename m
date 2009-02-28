@@ -1,18 +1,21 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [217.200.184.87] (helo=fepna02-svc.tim.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LdPBJ-0001kV-1G
-	for openembedded-devel@openembedded.org; Sat, 28 Feb 2009 14:24:41 +0100
-Received: (qmail 31249 invoked by uid 1003); 28 Feb 2009 13:21:02 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 28 Feb 2009 13:21:02 -0000
-Message-ID: <49A93A3D.7060003@balister.org>
-Date: Sat, 28 Feb 2009 08:21:01 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <gremlin@gremlin.it>) id 1LdPIc-0001wk-0V
+	for openembedded-devel@openembedded.org; Sat, 28 Feb 2009 14:32:14 +0100
+Received: from sesha.loc ([217.203.130.38]) by fepna02-svc.tim.it
+	(InterMail vM.6.01.06.03 201-2131-130-104-20060516) with ESMTP
+	id <20090228132833.OODP15437.fepna02-svc.tim.it@sesha.loc>
+	for <openembedded-devel@openembedded.org>;
+	Sat, 28 Feb 2009 14:28:33 +0100
+Message-ID: <49A93B72.1020208@gremlin.it>
+Date: Sat, 28 Feb 2009 14:26:10 +0100
+From: Alessandro GARDICH <gremlin@gremlin.it>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: Tinylogin fetching failing
+To: openembedded-devel@openembedded.org
+References: <49A93A3D.7060003@balister.org>
+In-Reply-To: <49A93A3D.7060003@balister.org>
+Subject: Re: Tinylogin fetching failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,117 +29,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Feb 2009 13:24:41 -0000
-X-Groupsio-MsgNum: 8058
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050304000508080606020105"
-
---------------ms050304000508080606020105
+X-List-Received-Date: Sat, 28 Feb 2009 13:32:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Gremlin is building minimal distro and finds he cannot fetch tiny login 
-due to a ssl problem. I've tried wget and see this:
+Philip Balister wrote:
+> Gremlin is building minimal distro and finds he cannot fetch tiny login 
+> due to a ssl problem. I've tried wget and see this:
+> 
+> [balister@localhost ~]$ wget 
+> http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+> --08:13:18--  http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+>            => `tinylogin-1.4.tar.bz2'
+> Resolving tinylogin.busybox.net... 140.211.167.224
+> Connecting to tinylogin.busybox.net|140.211.167.224|:80... connected.
+> HTTP request sent, awaiting response... 301 Moved Permanently
+> Location: https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2 
+> [following]
+> --08:13:19--  https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+>            => `tinylogin-1.4.tar.bz2'
+> Resolving bugs.busybox.net... 140.211.167.224
+> Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
+> ERROR: Certificate verification error for bugs.busybox.net: unable to 
+> get local issuer certificate
+> To connect to bugs.busybox.net insecurely, use `--no-check-certificate'.
+> Unable to establish SSL connection.
+> [balister@localhost ~]$ wget 
+> https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+> --08:15:19--  https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+>            => `tinylogin-1.4.tar.bz2'
+> Resolving bugs.busybox.net... 140.211.167.224
+> Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
+> ERROR: Certificate verification error for bugs.busybox.net: unable to 
+> get local issuer certificate
+> To connect to bugs.busybox.net insecurely, use `--no-check-certificate'.
+> Unable to establish SSL connection.
+> [balister@localhost ~]$
+> 
+> I need to run some errands today, so I cannot look at this further, but 
+> I wanted to bring this up in hopes someone can resolve the problem.
+> 
+> Philip
+> 
+> PS: If you are building for Angstrom, the source mirror masks the 
+> problem :)
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-[balister@localhost ~]$ wget 
-http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
---08:13:18--  http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
-            => `tinylogin-1.4.tar.bz2'
-Resolving tinylogin.busybox.net... 140.211.167.224
-Connecting to tinylogin.busybox.net|140.211.167.224|:80... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2 
-[following]
---08:13:19--  https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
-            => `tinylogin-1.4.tar.bz2'
-Resolving bugs.busybox.net... 140.211.167.224
-Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
-ERROR: Certificate verification error for bugs.busybox.net: unable to 
-get local issuer certificate
-To connect to bugs.busybox.net insecurely, use `--no-check-certificate'.
-Unable to establish SSL connection.
-[balister@localhost ~]$ wget 
-https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
---08:15:19--  https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
-            => `tinylogin-1.4.tar.bz2'
-Resolving bugs.busybox.net... 140.211.167.224
-Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
-ERROR: Certificate verification error for bugs.busybox.net: unable to 
-get local issuer certificate
-To connect to bugs.busybox.net insecurely, use `--no-check-certificate'.
-Unable to establish SSL connection.
-[balister@localhost ~]$
 
-I need to run some errands today, so I cannot look at this further, but 
-I wanted to bring this up in hopes someone can resolve the problem.
+the real problem is that tinylogin.busybox.net will redirect to https 
+bugzilla site, and a part a bad certificate the source don't exist.
 
-Philip
+I fetch the sources via subversion, seem the only way available.
 
-PS: If you are building for Angstrom, the source mirror masks the problem :)
+-- 
+  /-------------------------------------------------------------\
+|           Alessandro Gardich : gremlin#gremlin!it             |
+  >-------------------------------------------------------------<
+|  I never saw a wild thing sorry for itself.                   |
+|  A small bird will drop frozen dead from a bough              |
+|  without ever having felt sorry for itself.                   |
+  \-------------------------------------------------------------/
 
---------------ms050304000508080606020105
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDIyODEz
-MjEwMVowIwYJKoZIhvcNAQkEMRYEFCxi7hsAFttQmcSpYEMoOPRuA8NZMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBqttLQqo9iUfe2jogW211w0Ne4OLu2f7XbsP+VthUSiiYnadWx
-dmnSseJkiuIWT78R/Sm5+8wTSFR3DmZxj/2mM1ReL0BLvzXHXfF9ve/ek5enqlEK3OMalkgwuchd
-Q0GmKA48eKrspnTxm1rDHbp+zDEpEQwcn3tLu2jqx2J0pLmxiwGXsiHMx/jtGjmlH93MblCFqt8f
-SP5csBVdxR7TV1aFF/dJZaidVHvVW0RbYfu6qRBVuhI/0aFVsI96fLjl+nad1KC2Z5Pkq3YFxuRQ
-MAp4Zvn5Vn4sYkqU8l8UspYswFg4upPsvBMdRHtafA47TXCWlPk+OCc+EJfUXl30AAAAAAAA
-
---------------ms050304000508080606020105--
