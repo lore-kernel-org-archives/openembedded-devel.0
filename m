@@ -1,52 +1,25 @@
-Received: from [74.125.92.144] (helo=qw-out-1920.google.com)
+Received: from [85.37.16.27] (helo=smtpout26.attiva.biz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LdcZj-0001Jw-5Y
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Mar 2009 04:42:47 +0100
-Received: by qw-out-1920.google.com with SMTP id 5so1576938qwf.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Feb 2009 19:39:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=PKrcX3fb53EZrhlymfg4EmquKJ/imuXs/icyGhriRiA=;
-	b=f9hpWqZF/GXcO4WEqGR7/Vt4hqF5s0PaDp/5z0Yz4orbjn9q8RFNLaJCQTgIUs/6uF
-	nxxSIeD5/a/TkMsBvAXF3GSFtAQkaQjAOyqKJ+89Ny6otQkiFqHZv3kgZT0FAOOOPsKd
-	fOPIR+WzaZdazuW2Ags03gHuzMCKUe/R91pCc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	b=CtW+zqm0mrQUdyIp9vs0yKpU0YrnTzConozx834KjY0VRlioh9tGVudIZMT52FVH6u
-	IP7vGZKGQmOUkyTzaZ4x1SQov6kkLyR8WMEz7TeqKE7g/y6jZuY+2z0D7I5UYoQoQCnF
-	ZTFofaxZh5NJ49Mj5UL/YBxjJ7HK/GFgDGJVE=
-Received: by 10.224.74.74 with SMTP id t10mr5868436qaj.333.1235878745336;
-	Sat, 28 Feb 2009 19:39:05 -0800 (PST)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id 7sm2558539qwb.31.2009.02.28.19.39.03
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 28 Feb 2009 19:39:04 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id A3CC2610179; Sun,  1 Mar 2009 00:39:12 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <000801c99992$45c23440$d1469cc0$@com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.90 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Sun, 01 Mar 2009 00:39:12 -0300
-In-Reply-To: <000801c99992$45c23440$d1469cc0$@com> ("Christian =?utf-8?Q?P?=
-	=?utf-8?Q?=C3=B6ssinger=22's?=
-	message of "Sat, 28 Feb 2009 11:49:45 +0100")
-Message-ID: <87myc57vz3.fsf@neumann.lab.ossystems.com.br>
-MIME-Version: 1.0
-Subject: Re: [PATCH] Added new recipe for a newer version of the Asterisk Soft-PBX
+	(envelope-from <pisa.t@teledata-i.com>) id 1Ldi69-0001yp-20
+	for openembedded-devel@openembedded.org; Sun, 01 Mar 2009 10:36:37 +0100
+Received: from FBCMFE02B28.fbc.local ([192.168.31.8]) by smtpout26.attiva.biz
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 1 Mar 2009 10:32:51 +0100
+Received: from [193.100.100.77] ([80.207.73.242]) by FBCMFE02B28.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 1 Mar 2009 10:32:51 +0100
+From: Paolo Cremonese <pisa.t@teledata-i.com>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20090227184707.GA6027@denix.org>
+References: <1235734652.7210.12.camel@ubuntu2>
+	<20090227184707.GA6027@denix.org>
+Date: Sun, 01 Mar 2009 10:35:39 +0100
+Message-Id: <1235900139.5901.4.camel@ubuntu2>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-OriginalArrivalTime: 01 Mar 2009 09:32:51.0808 (UTC)
+	FILETIME=[B1382E00:01C99A50]
+Subject: Re: Bootloader problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,26 +33,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2009 03:42:47 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 01 Mar 2009 09:36:37 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Christian P=C3=B6ssinger <christian@poessinger.com> writes:
+On ven, 2009-02-27 at 13:47 -0500, Denys Dmytriyenko wrote:
+> On Fri, Feb 27, 2009 at 12:37:32PM +0100, Paolo Cremonese wrote:
+> > Hi all,
+> > I have problems in generating a bootable device (CF)
+> > During the setup the CF is connected to the host via an USB adapter.
+> > 
+> > These are the steps I do:
+> > 
+> > # fdisk /dev/sdb
+> >    create a linux partition /dev/sdb1 and activate it
+> > 
+> > # mkfs.ext3 /dev/sdb1
+> > 
+> > # mount -t ext3 /dev/sdb1 /media/disk
+> > 
+> > # cd /media/disk
+> > # tar
+> > -xvf /home/paolo/oe/stuff/build/gpe-image/deploy/glibc/images/i586-generic/gpe-image-i586-generic.tar
+> > 
+> > and the filesystem is correctly on the CF
+> > 
+> > # cd boot
+> > # mkdir grub
+> > # cd grub
+> > # < copy of grub files>
+> > # grub ...
+> > 
+> > the menu.lst contains
+> > 
+> > title		OpenEmbedded Linux (hda1)
+> > root		(hd0,0)
+> > kernel		/boot/bzImage-2.6.21 root=/dev/hda1 ro
+> > quiet
+> > 
+> > 
+> > The system boots, but when the filesystem is created, the kernel crashes
+> > with the message:
+> > 
+> > VFS: Cannot open root device "(hd0,0)" or unknown-block(0,0)
+> > Please append a correct "root=" boot option
+> > Kernel panic - not syncing: VFS: unable to mount root fs or
+> > unknown-block(0,0)
+> > 
+> > but I don't understand what I have to do...
+> 
+> Please verify:
+> 
+> 1. Your device, you are trying to boot, maps your CF at /dev/hda (or /dev/sda)
+> 2. Your kernel has the support for the filesystem type you want - ext3/ext2
+> 3. Your filesystem has static /dev/hda and enough /dev/hda? devnodes
+> 
 
-> ---
->  packages/asterisk/asterisk-1.4.23.1/Makefile.patch |   21 +++
->  packages/asterisk/asterisk-1.4.23.1/init           |   79 ++++++++++
->  packages/asterisk/asterisk-1.4.23.1/logrotate      |   12 ++
->  .../asterisk/asterisk-1.4.23.1/sounds.xml.patch    |   19 +++
->  packages/asterisk/asterisk-1.4.23.1/volatiles      |    7 +
->  packages/asterisk/asterisk_1.4.23.1.bb             |  165 ++++++++++++++=
-++++++
+I have checked:
 
-Please add the checksums.ini required changes ;-)
+3. I find /dev/hda and devnodes /dev/hda1 to /dev/hda19
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+How can I check points 2 and 1?
+for the point 1 I think yes because the CF is connected to the IDE, but
+I'm not sure..
+For the point 2, How can I check?
+
+Many thanks,
+Paolo
+
 
 
