@@ -1,31 +1,34 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LdnNp-00008O-7y
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Mar 2009 16:15:13 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id A71F616DFB8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Mar 2009 16:24:55 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id ACA692A41A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Mar 2009 16:11:27 +0100 (CET)
-Received: from [10.24.0.58] ([10.24.0.58]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Sun, 1 Mar 2009 16:11:06 +0100
-Message-ID: <49AAA599.5070507@dresearch.de>
-Date: Sun, 01 Mar 2009 16:11:21 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.19 (X11/20081227)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF686@hiob.intern.dresearch.de>	<49A7BD17.2080407@dresearch.de>
-	<432beae0902271228w2150a17fo79e5a76c8eb71b42@mail.gmail.com>
-In-Reply-To: <432beae0902271228w2150a17fo79e5a76c8eb71b42@mail.gmail.com>
-X-OriginalArrivalTime: 01 Mar 2009 15:11:06.0890 (UTC)
-	FILETIME=[F207EEA0:01C99A7F]
-Subject: Re: Ugly build problem with emacs/qemu
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LdpE5-0004XT-G2
+	for openembedded-devel@openembedded.org; Sun, 01 Mar 2009 18:13:17 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LdpAM-0005Gr-LV
+	for openembedded-devel@openembedded.org; Sun, 01 Mar 2009 17:09:26 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 01 Mar 2009 17:09:26 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 01 Mar 2009 17:09:26 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 01 Mar 2009 18:09:14 +0100
+Message-ID: <goeffr$gm2$1@ger.gmane.org>
+References: <ac9c93b10902260920s24a8c5we592cbb4d0d63221@mail.gmail.com>	<c384c5ea0902270806n70ce6bbfg45d19b5ebaf64050@mail.gmail.com>	<20090227162633.GD5420@smtp.west.cox.net>	<ac9c93b10902280254j3ac8533bod972dfd150b46621@mail.gmail.com>	<20090228155335.GJ5420@smtp.west.cox.net>	<ac9c93b10902281007h3e063b81u63bbad13419c5d6c@mail.gmail.com>
+	<20090228182919.GK5420@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+In-Reply-To: <20090228182919.GK5420@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: OE breakages, was: Re: fakeroot fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,29 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2009 15:15:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 01 Mar 2009 17:13:17 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Justin Patrin schrieb:
-> Are the machines you're building on exactly the same? Do they perhaps
-> have different architectures or distributions? Have you tried updating
-> the systems?
+On 28-02-09 19:29, Tom Rini wrote:
 
-The machines are different.
+> Tangentally, packaged staging _can_ help here, but it's not I believe,
+> relocatible (unless you assume-provided some -native packages and
+> possibly we've fixed what we're doing wrong with gcc configure args).
+> IOW, if you build in, /OE/tmp you can't re-use the packaged staging
+> packages in /home/me/OE/tmp
 
-The one that works fine:
- Ubuntu 8.10
- Linux bfg9000 2.6.27-11-generic #1 SMP Thu Jan 29 19:28:32 UTC 2009 x86_64 GNU/Linux
+You can, packaged staging has 2 dirs: one for relocatable packages and 
+one for non-relocatable packages. That's how I understand it.
 
-The one with the problem:
- openSUSE 11.1
- Linux recycler 2.6.27.19-3.2-default #1 SMP 2009-02-25 15:40:44 +0100 i686 athlon i386 GNU/Linux
+regards,
 
-> This looks like a qemu failure to me.
+Koen
 
-I agree. But i can't believe, that the different OS my be involved in that. Both are up-to-date. And i thought that all the tools needed to cross-build the packages are build by OE itself.
-
-Steffen
 
 
