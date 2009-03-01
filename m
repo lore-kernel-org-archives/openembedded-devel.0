@@ -1,25 +1,31 @@
-Received: from [85.37.16.27] (helo=smtpout26.attiva.biz)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pisa.t@teledata-i.com>) id 1Ldi69-0001yp-20
-	for openembedded-devel@openembedded.org; Sun, 01 Mar 2009 10:36:37 +0100
-Received: from FBCMFE02B28.fbc.local ([192.168.31.8]) by smtpout26.attiva.biz
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 1 Mar 2009 10:32:51 +0100
-Received: from [193.100.100.77] ([80.207.73.242]) by FBCMFE02B28.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 1 Mar 2009 10:32:51 +0100
-From: Paolo Cremonese <pisa.t@teledata-i.com>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <20090227184707.GA6027@denix.org>
-References: <1235734652.7210.12.camel@ubuntu2>
-	<20090227184707.GA6027@denix.org>
-Date: Sun, 01 Mar 2009 10:35:39 +0100
-Message-Id: <1235900139.5901.4.camel@ubuntu2>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-OriginalArrivalTime: 01 Mar 2009 09:32:51.0808 (UTC)
-	FILETIME=[B1382E00:01C99A50]
-Subject: Re: Bootloader problems
+	(envelope-from <sledz@DResearch.DE>) id 1LdnNp-00008O-7y
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Mar 2009 16:15:13 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id A71F616DFB8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  1 Mar 2009 16:24:55 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id ACA692A41A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  1 Mar 2009 16:11:27 +0100 (CET)
+Received: from [10.24.0.58] ([10.24.0.58]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Sun, 1 Mar 2009 16:11:06 +0100
+Message-ID: <49AAA599.5070507@dresearch.de>
+Date: Sun, 01 Mar 2009 16:11:21 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.19 (X11/20081227)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF686@hiob.intern.dresearch.de>	<49A7BD17.2080407@dresearch.de>
+	<432beae0902271228w2150a17fo79e5a76c8eb71b42@mail.gmail.com>
+In-Reply-To: <432beae0902271228w2150a17fo79e5a76c8eb71b42@mail.gmail.com>
+X-OriginalArrivalTime: 01 Mar 2009 15:11:06.0890 (UTC)
+	FILETIME=[F207EEA0:01C99A7F]
+Subject: Re: Ugly build problem with emacs/qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,73 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2009 09:36:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 01 Mar 2009 15:15:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On ven, 2009-02-27 at 13:47 -0500, Denys Dmytriyenko wrote:
-> On Fri, Feb 27, 2009 at 12:37:32PM +0100, Paolo Cremonese wrote:
-> > Hi all,
-> > I have problems in generating a bootable device (CF)
-> > During the setup the CF is connected to the host via an USB adapter.
-> > 
-> > These are the steps I do:
-> > 
-> > # fdisk /dev/sdb
-> >    create a linux partition /dev/sdb1 and activate it
-> > 
-> > # mkfs.ext3 /dev/sdb1
-> > 
-> > # mount -t ext3 /dev/sdb1 /media/disk
-> > 
-> > # cd /media/disk
-> > # tar
-> > -xvf /home/paolo/oe/stuff/build/gpe-image/deploy/glibc/images/i586-generic/gpe-image-i586-generic.tar
-> > 
-> > and the filesystem is correctly on the CF
-> > 
-> > # cd boot
-> > # mkdir grub
-> > # cd grub
-> > # < copy of grub files>
-> > # grub ...
-> > 
-> > the menu.lst contains
-> > 
-> > title		OpenEmbedded Linux (hda1)
-> > root		(hd0,0)
-> > kernel		/boot/bzImage-2.6.21 root=/dev/hda1 ro
-> > quiet
-> > 
-> > 
-> > The system boots, but when the filesystem is created, the kernel crashes
-> > with the message:
-> > 
-> > VFS: Cannot open root device "(hd0,0)" or unknown-block(0,0)
-> > Please append a correct "root=" boot option
-> > Kernel panic - not syncing: VFS: unable to mount root fs or
-> > unknown-block(0,0)
-> > 
-> > but I don't understand what I have to do...
-> 
-> Please verify:
-> 
-> 1. Your device, you are trying to boot, maps your CF at /dev/hda (or /dev/sda)
-> 2. Your kernel has the support for the filesystem type you want - ext3/ext2
-> 3. Your filesystem has static /dev/hda and enough /dev/hda? devnodes
-> 
+Justin Patrin schrieb:
+> Are the machines you're building on exactly the same? Do they perhaps
+> have different architectures or distributions? Have you tried updating
+> the systems?
 
-I have checked:
+The machines are different.
 
-3. I find /dev/hda and devnodes /dev/hda1 to /dev/hda19
+The one that works fine:
+ Ubuntu 8.10
+ Linux bfg9000 2.6.27-11-generic #1 SMP Thu Jan 29 19:28:32 UTC 2009 x86_64 GNU/Linux
 
-How can I check points 2 and 1?
-for the point 1 I think yes because the CF is connected to the IDE, but
-I'm not sure..
-For the point 2, How can I check?
+The one with the problem:
+ openSUSE 11.1
+ Linux recycler 2.6.27.19-3.2-default #1 SMP 2009-02-25 15:40:44 +0100 i686 athlon i386 GNU/Linux
 
-Many thanks,
-Paolo
+> This looks like a qemu failure to me.
 
+I agree. But i can't believe, that the different OS my be involved in that. Both are up-to-date. And i thought that all the tools needed to cross-build the packages are build by OE itself.
+
+Steffen
 
 
