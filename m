@@ -1,22 +1,36 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [202.37.96.11] (helo=gatekeeper.tait.co.nz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nils.faerber@kernelconcepts.de>) id 1LdvRn-00069t-1I
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2009 00:51:51 +0100
-Received: from [85.181.241.28] (helo=[192.168.178.35])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nils.faerber@kernelconcepts.de>) id 1Ldvcl-0006CL-0B
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2009 01:03:11 +0100
-Message-ID: <49AB1EB0.5090002@kernelconcepts.de>
-Date: Mon, 02 Mar 2009 00:48:00 +0100
-From: Nils Faerber <nils.faerber@kernelconcepts.de>
+	(envelope-from <douglas.royds@tait.co.nz>) id 1LdzJo-0005cu-6D
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Mar 2009 04:59:52 +0100
+Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
+	by localhost.tait.co.nz (Postfix) with ESMTP id C804F46751
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Mar 2009 16:56:00 +1300 (NZDT)
+Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])by 
+	gatekeeper.tait.co.nz (Postfix) with ESMTP id B6A4346749for 
+	<openembedded-devel@lists.openembedded.org>; Mon,  2 Mar 2009 16:56:00 
+	+1300 (NZDT)
+Received: from conversion-daemon.sunstrike.tait.co.nz by 
+	sunstrike.tait.co.nz(Sun Java System Messaging Server 6.1 (built Apr 28
+	2004))id <0KFU00501X2UQY00@sunstrike.tait.co.nz>(original mail from 
+	douglas.royds@tait.co.nz)for openembedded-devel@lists.openembedded.org; 
+	Mon,02 Mar 2009 16:56:00 +1300 (NZDT)
+Received: from [172.25.116.23] by sunstrike.tait.co.nz(Sun Java System 
+	Messaging Server 6.1 (built Apr 28 2004))with ESMTP id 
+	<0KFV005ZK1L8UB00@sunstrike.tait.co.nz> 
+	foropenembedded-devel@lists.openembedded.org; Mon,02 Mar 2009 16:55:58 
+	+1300 (NZDT)
+Date: Mon, 02 Mar 2009 16:55:54 +1300
+From: Douglas Royds <douglas.royds@tait.co.nz>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <49AB58CA.7090406@tait.co.nz>
+MIME-version: 1.0
 User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-Subject: Dependency tracking - or - how to get rid of kexec-tools
+X-imss-version: 2.053
+X-imss-result: Passed
+X-imss-approveListMatch: *@tait.co.nz
+Subject: fatal: Not a git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,44 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2009 23:51:51 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Mar 2009 03:59:52 -0000
+Content-type: text/plain;
+	format=flowed;
+	charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
 
-Hi!
-I just found a little bit of a problem and am now looking for the most
-correct solution to it...
-I am trying to build x11-image for a mipsel target. I am using the
-dev-head and angstrom-2009 or DISTRO_VERSION = "2009.X-test-20090301"
-respectively.
-The problem is that this constellation includes kexec-tools-static for
-something just that kexec-tools-1.101 does not support mipsel.
-As far as I have seen it I will not make use of kexec-tools later on. I
-just want to build a quite simple X11 image for that device.
+Anyone else getting this?
 
-So I can do two things:
-1. Get rid of the dependency so that it will not be built. How can I
-find out which dependency pulls in kexec-tools?
+    NOTE: Handling BitBake files: / (6587/6587) [100 %]
+    NOTE: Parsing finished. 6302 cached, 0 parsed, 285 skipped, 0 masked.
+    NOTE: Cache is clean, not saving.
+    NOTE: build 200903021645: started
+    fatal: Not a git repository <----------------------
 
-2. Upgrade kexec-tools to the version that is e.g. in Debian, like
-kexec-tools_20080324.orig.tar.gz which now include mipsel support.
+    OE Build Configuration:
+    BB_VERSION        = "1.8.12"
+    ...
 
-So, what to do now?
-Even if 2. would be the best way to go I would still be interested how
-one can trace this kind of dependency - sometimes I would be really
-interested why certain packages are built.
+The same complaint seems to crop up at various points during a build, as 
+well.
+
+Suggestions?
+Douglas.
 
 
-PS: I am planning on submitting this mipsel machine support. What would
-be the best way? Create a diff against dev-head and post here?
 
-Cheers
-  nils faerber
 
--- 
-kernel concepts GbR      Tel: +49-271-771091-12
-Sieghuetter Hauptweg 48  Fax: +49-271-771091-19
-D-57072 Siegen           Mob: +49-176-21024535
---
+
+
+=======================================================================
+This email, including any attachments, is only for the intended
+addressee.  It is subject to copyright, is confidential and may be
+the subject of legal or other privilege, none of which is waived or
+lost by reason of this transmission.
+If the receiver is not the intended addressee, please accept our
+apologies, notify us by return, delete all copies and perform no
+other act on the email.
+Unfortunately, we cannot warrant that the email has not been
+ altered or corrupted during transmission.
+=======================================================================
+
 
 
