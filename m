@@ -1,28 +1,31 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1LeE7e-0000eT-4G
-	for openembedded-devel@openembedded.org; Mon, 02 Mar 2009 20:48:38 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.103]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1LeE3a-0004wW-4n
-	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 03:44:19 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
-To: Lista Openembedded <openembedded-devel@openembedded.org>
-Date: Mon, 02 Mar 2009 12:44:03 -0700
-Message-Id: <1236023043.6800.1174.camel@alap>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: New recipe for openmoko QA test scripts
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LeEBU-0000hI-SD
+	for openembedded-devel@openembedded.org; Mon, 02 Mar 2009 20:52:55 +0100
+Received: by fk-out-0910.google.com with SMTP id f40so958214fka.12
+	for <openembedded-devel@openembedded.org>;
+	Mon, 02 Mar 2009 11:48:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=TNul1wto8niYa9X4dHDHglYrl23bufDVwrXO52j4Ehk=;
+	b=Y2gWgdN0PgeBwTA0wrg8Ef/Lk5jYTOqD0sBre/7QDH3aXt5MZ4bAriQhupeD8al5+Z
+	dpBX9yauzmBedkosqi/OREWD/LOAkwAvnhuZ/svp1sqvUBzdCE0Z2SOvc822YV0u5x4z
+	ueKgljFcgzn1QXzyZWM9jIrtcriWmmBRV7cK4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=K//1As98uH90539vBoh/ugrQyllZs1pYJbkibBcpQgh0TTioO0YNyGFMkGHqRcpRzC
+	paLpjG5d9OPBlyDOSfr6mTi37rH60MSv3DurZ48GzuEYFzxw115DoYvPK+GzgGlh5N3M
+	8+Xxjd3oMeo2nVILat6cm3Fw8sXHNUWz5kLLY=
+MIME-Version: 1.0
+Received: by 10.223.116.205 with SMTP id n13mr6269450faq.103.1236023301062; 
+	Mon, 02 Mar 2009 11:48:21 -0800 (PST)
+Date: Mon, 2 Mar 2009 20:48:21 +0100
+Message-ID: <ac9c93b10903021148v423481c1v4c9a39ba762a984a@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@openembedded.org
+Subject: improved/extended bitbake -c clean ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,38 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2009 19:49:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 02 Mar 2009 19:53:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Please review for any policy violations.
+Hi,
 
-Thanks
-Angus
+Not sure if others have the same problem, but sometimes I have the
+need to edit in the work dir of a package. Especially if a package
+does not function as expected or does not build this can be handy.
+Typically what I then do is remove all stamps from compile onwards.
 
---- openembedded/packages/openmoko-projects/openmoko-qa-scripts.bb.oring        1969-12-31 17:00:00.000000000 -0700
-+++ openembedded/packages/openmoko-projects/openmoko-qa-scripts.bb      2009-03-02 12:38:55.000000000 -0700
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Openmoko QA test scripts"
-+SECTION = "utils"
-+LICENSE = "GPL"
-+PV = "gitr${SRCREV}"
-+
-+SRC_URI = "git://git.openmoko.org/git/testing_scripts;protocol=git"
-+S = "${WORKDIR}/git"
-+
-+RDEPENDS = "\
-+  bluez4 \
-+  opkg \
-+  xrandr \
-+  task-boot \
-+"
-+
-+do_install() {
-+          install -d ${D}/usr/bin
-+          install ${S}/bin/* ${D}/usr/bin/
-+}
+However, it would be convenient if there is a way to tell to bitbake
+to remove e.g. the stamp for a step and all later stamps.
+E.g. something like bitbake -c clean:compile
 
+What do others feel about this?
 
+Frans.
+
+PS: I cannot implement this myself as I do not speak pythonese, so if
+someone wants to give this a stab (assuming we want this) that would
+be nice.
 
 
