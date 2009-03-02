@@ -1,36 +1,31 @@
-Received: from [202.37.96.11] (helo=gatekeeper.tait.co.nz)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1LdzJo-0005cu-6D
+	(envelope-from <sledz@DResearch.DE>) id 1Le20b-0001VS-Pg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2009 04:59:52 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id C804F46751
+	Mon, 02 Mar 2009 07:52:13 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 3588416E002
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2009 16:56:00 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])by 
-	gatekeeper.tait.co.nz (Postfix) with ESMTP id B6A4346749for 
-	<openembedded-devel@lists.openembedded.org>; Mon,  2 Mar 2009 16:56:00 
-	+1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by 
-	sunstrike.tait.co.nz(Sun Java System Messaging Server 6.1 (built Apr 28
-	2004))id <0KFU00501X2UQY00@sunstrike.tait.co.nz>(original mail from 
-	douglas.royds@tait.co.nz)for openembedded-devel@lists.openembedded.org; 
-	Mon,02 Mar 2009 16:56:00 +1300 (NZDT)
-Received: from [172.25.116.23] by sunstrike.tait.co.nz(Sun Java System 
-	Messaging Server 6.1 (built Apr 28 2004))with ESMTP id 
-	<0KFV005ZK1L8UB00@sunstrike.tait.co.nz> 
-	foropenembedded-devel@lists.openembedded.org; Mon,02 Mar 2009 16:55:58 
-	+1300 (NZDT)
-Date: Mon, 02 Mar 2009 16:55:54 +1300
-From: Douglas Royds <douglas.royds@tait.co.nz>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <49AB58CA.7090406@tait.co.nz>
-MIME-version: 1.0
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-X-imss-version: 2.053
-X-imss-result: Passed
-X-imss-approveListMatch: *@tait.co.nz
-Subject: fatal: Not a git repository
+	Mon,  2 Mar 2009 08:01:52 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 8A4DF2A420B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Mar 2009 07:48:22 +0100 (CET)
+MIME-Version: 1.0
+Date: Mon, 2 Mar 2009 07:48:03 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF6D4@hiob.intern.dresearch.de>
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+In-Reply-To: <49A8626B.8020209@balister.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Documentation/User Manual questions
+Thread-Index: AcmZJyL9CnkXWALTRdaifdSoedtFOAB20Y0g
+References: <f46da1cf0902201818r3fcf3432oc14929b5f455bbe7@mail.gmail.com>	<f96d234e0902240651r7ad36677h8e828964308e2b50@mail.gmail.com>	<49A55A59.5080409@balister.org><f96d234e0902250828x6e72a8b6kc0a4285125f27b0e@mail.gmail.com>
+	<49A8626B.8020209@balister.org>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: Documentation/User Manual questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,46 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2009 03:59:52 -0000
-Content-type: text/plain;
-	format=flowed;
-	charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Mon, 02 Mar 2009 06:52:14 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Anyone else getting this?
+> docs.openembedded.org is working now. Koen put a copy of the=20
+> manual up=20
+> there, but I suspect that long term other documents may also belong=20
+> there. I'm not sure who has access to that part of amethyst/=20
+> Cliff, Koen=20
+> and others, can you work out the details of keeping this up to date?
 
-    NOTE: Handling BitBake files: / (6587/6587) [100 %]
-    NOTE: Parsing finished. 6302 cached, 0 parsed, 285 skipped, 0 masked.
-    NOTE: Cache is clean, not saving.
-    NOTE: build 200903021645: started
-    fatal: Not a git repository <----------------------
+There's a little configuration problem according to the encoding. The =
+document seems to be in Latin1 and contains
 
-    OE Build Configuration:
-    BB_VERSION        = "1.8.12"
-    ...
+<meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3DISO-8859-1">
 
-The same complaint seems to crop up at various points during a build, as 
-well.
+but the HTTP header say UTF-8.
 
-Suggestions?
-Douglas.
+HTTP/1.1 200 OK
+Date: Mon, 02 Mar 2009 06:45:20 GMT
+Server: Apache/2.2.3 (Debian) mod_python/3.2.10 Python/2.4.4 =
+PHP/5.2.0-8+etch13 mod_perl/2.0.2 Perl/v5.8.8
+Last-Modified: Tue, 06 May 2008 12:30:38 GMT
+ETag: "184311-84-44c8f04003780"
+Accept-Ranges: bytes
+Content-Length: 132
+Connection: close
+Content-Type: text/html; charset=3DUTF-8
 
-
-
-
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
-
+This results in wrong presentation e.g. of the copyright symbol. :(
 
 
