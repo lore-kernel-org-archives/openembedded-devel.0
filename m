@@ -1,24 +1,38 @@
-Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LeC1j-0002m2-Fz
+	(envelope-from <hvontres@gmail.com>) id 1LeCE0-00037C-2D
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2009 18:34:12 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KFW00IFL39I601Q@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	02 Mar 2009 11:29:43 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4533B6B83A8; Mon,
-	02 Mar 2009 12:29:42 -0500 (EST)
-Date: Mon, 02 Mar 2009 12:29:42 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 02 Mar 2009 18:46:46 +0100
+Received: by rv-out-0708.google.com with SMTP id b17so2621460rvf.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Mar 2009 09:42:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=aU/M1tr9C2BgnG9X3Cj0fErrkBYrSZbovDBItUFLCI0=;
+	b=cz8wKusfmKVLhf6cTMzZvyo8zuHCW+fozr55DjPM9SHDeY5jooMsTWYBaK8gDEi2D6
+	NomnSg5soEES2i4W/NT4sBigYmIwU/dRB1pfiVP4iClccKuyleYgFdy40kmkZ8FZ8YJe
+	vfFhIsrKXpyG/huLRFOom67ilwZJ+UX0mU8Bs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=LF4L0+JRUWhZspX/MSJ5qREUzZ2HnSVu8rW7NT8ZtV4faprFGrUDD+plV6aItmAkzb
+	oRFupYMcXnVuXgqfrXxAe4mOWBV0HuanUX6D39LwCGy0cdZ8AEzRP3EUO8E1DMvx8uq0
+	726uhcGaeQWvo9BpoQagcZYKn4Hgi/yqlZL64=
+MIME-Version: 1.0
+Received: by 10.141.196.8 with SMTP id y8mr2997003rvp.298.1236015767980; Mon, 
+	02 Mar 2009 09:42:47 -0800 (PST)
+In-Reply-To: <49AAA599.5070507@dresearch.de>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF686@hiob.intern.dresearch.de>
+	<49A7BD17.2080407@dresearch.de>
+	<432beae0902271228w2150a17fo79e5a76c8eb71b42@mail.gmail.com>
+	<49AAA599.5070507@dresearch.de>
+Date: Mon, 2 Mar 2009 09:42:47 -0800
+Message-ID: <a7f8874a0903020942y65f55a90rec06b1bc87ac8702@mail.gmail.com>
+From: Hans Henry von Tresckow <hvontres@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090302172942.GA615@denix.org>
-References: <20090217022412.GA3240@denix.org> <20090217225424.GC9047@denix.org>
-MIME-version: 1.0
-In-reply-to: <20090217225424.GC9047@denix.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Enterprise kills BBMASK
+Subject: Re: Ugly build problem with emacs/qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,39 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2009 17:34:36 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 02 Mar 2009 17:48:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 17, 2009 at 05:54:24PM -0500, Denys Dmytriyenko wrote:
-> On Mon, Feb 16, 2009 at 09:24:12PM -0500, Denys Dmytriyenko wrote:
-> > Sorry for the "sensational" subject... :)
-> > 
-> > Basically, some time back I noticed that BBMASK stopped working. I didn't have 
-> > time to look into it, until today. One of Mickey's commits broke the tree, 
-> > because bunch of recipes require a missing .inc file, leading to Bitbake 
-> > parsing failure.
-> > 
-> > Now, trying to set BBMASK leads to nothing. The problem is with 
-> > conf/enterprise.conf, which re-sets it to empty if ENTERPRISE_DISTRO is not 
-> > set. So, not matter what you set BBMASK to in your local.conf, it ends up 
-> > being empty. Unfortunately, it can't be done with "+=", as it has to be a 
-> > regular expression...
-> > 
-> > Any ideas how to fix it?
-> 
-> So, does it mean nobody cares that BBMASK is broken? Or maybe I didn't explain 
-> the problem clearly enough the first time? :)
+On Sun, Mar 1, 2009 at 7:11 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> Justin Patrin schrieb:
+>> Are the machines you're building on exactly the same? Do they perhaps
+>> have different architectures or distributions? Have you tried updating
+>> the systems?
+>
+> The machines are different.
+>
+> The one that works fine:
+> =A0Ubuntu 8.10
+> =A0Linux bfg9000 2.6.27-11-generic #1 SMP Thu Jan 29 19:28:32 UTC 2009 x8=
+6_64 GNU/Linux
+>
+> The one with the problem:
+> =A0openSUSE 11.1
+> =A0Linux recycler 2.6.27.19-3.2-default #1 SMP 2009-02-25 15:40:44 +0100 =
+i686 athlon i386 GNU/Linux
+>
+>> This looks like a qemu failure to me.
+>
+> I agree. But i can't believe, that the different OS my be involved in tha=
+t. Both are up-to-date. And i thought that all the tools needed to cross-bu=
+ild the packages are build by OE itself.
+>
+> Steffen
+>
 
-Thanks to Chris "kergoth" for coming up with the below code for conf/enterprise.conf,
-which makes BBMASK work again! Any objections for commiting it? Zecke?
+I don't kow about openSuse, but I remember that Fedora used to have
+some kernel patches that did not play well with QEMU. But that was
+back on Ferora 7, since then I switched to ubuntu. I don't even
+rmember exactly what patch caused the problems, but IIRC it was
+security related.
 
-# For the enterprise edition we want to avoid certain packages by default.
-BBMASK ?= ""
-OLDBBMASK := "${BBMASK}"
-BBMASK = "${@base_conditional('ENTERPRISE_DISTRO', '1', base_conditional('OLDBBMASK', '', '', '(${OLDBBMASK})|', d) + '(mp3blaster|mpg123|mpg321|smpeg|liba52|lame|libmad|mpeg2dec|xmms-mad|madplay|python-mad|opie-mediaplayer1-libmadplugin|ffmpeg|mplayer)', '${OLDBBMASK}', d)}"
-
--- 
-Denys
+--=20
+Henry von Tresckow (hvontres)
+W. C. Fields  - "I never drink water because of the disgusting things
+that fish do in it."
 
 
