@@ -1,36 +1,24 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1LeBBS-0004ty-0J
+	(envelope-from <denis@denix.org>) id 1LeC1j-0002m2-Fz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2009 17:40:32 +0100
-Received: by bwz9 with SMTP id 9so2037636bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2009 08:36:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=QA4xzWjeqN+ZI9gGSYeCJZOfDBZCfe9RhCSf+obPIOw=;
-	b=IY81FMxkq86JiLf4Q8ATD+007hgQ+BP7nIl1wPUjvD5NZBLXAHSJ2nrOs9rsEgnGfA
-	qUGOlVxpqC/dFwFTnetH+Jvor3PdJ2Zu3o8vL+5YutdBJzwl61bDTAjbfPP/E5T3wrS8
-	wSBmhaIo8il2MV+4aKYG10RFc0LIdFSB50two=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=gUpZlVkI4WE8pYO8JVdQELXBrt0nIQOE4lPVYSdqdYvHEvu2N/S4RbTkSLteUTbY0S
-	bTRcEoaONk6N+f9VwBZnj+cqC4zM7D3unb0DHJT0Pacxrcbgd9rKc/HsIlS/y1Iq+aFL
-	SVBKSZnjJBSGfUlhD+OQHDli9lmsSKsWSEEV4=
-MIME-Version: 1.0
-Received: by 10.103.217.5 with SMTP id u5mr3016688muq.118.1236011764815; Mon, 
-	02 Mar 2009 08:36:04 -0800 (PST)
-In-Reply-To: <1235900139.5901.4.camel@ubuntu2>
-References: <1235734652.7210.12.camel@ubuntu2>
-	<20090227184707.GA6027@denix.org> <1235900139.5901.4.camel@ubuntu2>
-Date: Mon, 2 Mar 2009 21:36:04 +0500
-Message-ID: <1fea892d0903020836u352b9cb3ld15f6e5609581b4a@mail.gmail.com>
-From: Anatoly Shipitsin <norguhtar@gmail.com>
+	Mon, 02 Mar 2009 18:34:12 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KFW00IFL39I601Q@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	02 Mar 2009 11:29:43 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4533B6B83A8; Mon,
+	02 Mar 2009 12:29:42 -0500 (EST)
+Date: Mon, 02 Mar 2009 12:29:42 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Bootloader problems
+Message-id: <20090302172942.GA615@denix.org>
+References: <20090217022412.GA3240@denix.org> <20090217225424.GC9047@denix.org>
+MIME-version: 1.0
+In-reply-to: <20090217225424.GC9047@denix.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Enterprise kills BBMASK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,14 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2009 16:40:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Mar 2009 17:34:36 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Sun, Mar 1, 2009 at 14:35, Paolo Cremonese <pisa.t@teledata-i.com> wrote:
+On Tue, Feb 17, 2009 at 05:54:24PM -0500, Denys Dmytriyenko wrote:
+> On Mon, Feb 16, 2009 at 09:24:12PM -0500, Denys Dmytriyenko wrote:
+> > Sorry for the "sensational" subject... :)
+> > 
+> > Basically, some time back I noticed that BBMASK stopped working. I didn't have 
+> > time to look into it, until today. One of Mickey's commits broke the tree, 
+> > because bunch of recipes require a missing .inc file, leading to Bitbake 
+> > parsing failure.
+> > 
+> > Now, trying to set BBMASK leads to nothing. The problem is with 
+> > conf/enterprise.conf, which re-sets it to empty if ENTERPRISE_DISTRO is not 
+> > set. So, not matter what you set BBMASK to in your local.conf, it ends up 
+> > being empty. Unfortunately, it can't be done with "+=", as it has to be a 
+> > regular expression...
+> > 
+> > Any ideas how to fix it?
+> 
+> So, does it mean nobody cares that BBMASK is broken? Or maybe I didn't explain 
+> the problem clearly enough the first time? :)
 
-> How can I check points 2 and 1?
+Thanks to Chris "kergoth" for coming up with the below code for conf/enterprise.conf,
+which makes BBMASK work again! Any objections for commiting it? Zecke?
 
-1. You CF should be primary master in BIOS.
-2. Check .config file from kernel source tree.
+# For the enterprise edition we want to avoid certain packages by default.
+BBMASK ?= ""
+OLDBBMASK := "${BBMASK}"
+BBMASK = "${@base_conditional('ENTERPRISE_DISTRO', '1', base_conditional('OLDBBMASK', '', '', '(${OLDBBMASK})|', d) + '(mp3blaster|mpg123|mpg321|smpeg|liba52|lame|libmad|mpeg2dec|xmms-mad|madplay|python-mad|opie-mediaplayer1-libmadplugin|ffmpeg|mplayer)', '${OLDBBMASK}', d)}"
+
+-- 
+Denys
+
 
