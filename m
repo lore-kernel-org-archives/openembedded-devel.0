@@ -1,31 +1,40 @@
 Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Le20b-0001VS-Pg
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2009 07:52:13 +0100
+	(envelope-from <sledz@DResearch.DE>) id 1Le2Lv-0002Ow-0c
+	for openembedded-devel@openembedded.org; Mon, 02 Mar 2009 08:14:15 +0100
 Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
 	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 3588416E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2009 08:01:52 +0100 (CET)
+	by mail.extern.dresearch.de (Postfix) with ESMTP id AF43216E233
+	for <openembedded-devel@openembedded.org>;
+	Mon,  2 Mar 2009 08:23:53 +0100 (CET)
 Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 8A4DF2A420B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2009 07:48:22 +0100 (CET)
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 02E342A420C
+	for <openembedded-devel@openembedded.org>;
+	Mon,  2 Mar 2009 08:10:24 +0100 (CET)
 MIME-Version: 1.0
-Date: Mon, 2 Mar 2009 07:48:03 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF6D4@hiob.intern.dresearch.de>
+Date: Mon, 2 Mar 2009 08:10:04 +0100
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF6D5@hiob.intern.dresearch.de>
 X-MimeOLE: Produced By Microsoft Exchange V6.5
-In-Reply-To: <49A8626B.8020209@balister.org>
+In-Reply-To: <be7a9f3d0903010830u4d07af83i8e51bd075f945d75@mail.gmail.com>
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Documentation/User Manual questions
-Thread-Index: AcmZJyL9CnkXWALTRdaifdSoedtFOAB20Y0g
-References: <f46da1cf0902201818r3fcf3432oc14929b5f455bbe7@mail.gmail.com>	<f96d234e0902240651r7ad36677h8e828964308e2b50@mail.gmail.com>	<49A55A59.5080409@balister.org><f96d234e0902250828x6e72a8b6kc0a4285125f27b0e@mail.gmail.com>
-	<49A8626B.8020209@balister.org>
+Thread-Topic: OE - help with libtool problem
+Thread-Index: AcmaivI9UY5K7WYpQHut+duiI6H/dAAeX9TQ
+References: <499DB474.1070205@zone42.org>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF68E@hiob.intern.dresearch.de>
+	<be7a9f3d0902200317x93d8888wd3e9ce41f0641d4c@mail.gmail.com>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF695@hiob.intern.dresearch.de>
+	<871vts4z4x.fsf@neumann.lab.ossystems.com.br>
+	<49A01664.7090908@dresearch.de>
+	<8763j1q3di.fsf@neumann.lab.ossystems.com.br>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF697@hiob.intern.dresearch.de>
+	<be7a9f3d0902261002p4d663dd6p28bbf37cf5962dba@mail.gmail.com>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF6C4@hiob.intern.dresearch.de>
+	<be7a9f3d0903010830u4d07af83i8e51bd075f945d75@mail.gmail.com>
 From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Documentation/User Manual questions
+To: "Otavio Salvador" <otavio@ossystems.com.br>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: OE - help with libtool problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,38 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2009 06:52:14 -0000
+X-List-Received-Date: Mon, 02 Mar 2009 07:14:15 -0000
 Content-class: urn:content-classes:message
 Content-Type: text/plain;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-> docs.openembedded.org is working now. Koen put a copy of the=20
-> manual up=20
-> there, but I suspect that long term other documents may also belong=20
-> there. I'm not sure who has access to that part of amethyst/=20
-> Cliff, Koen=20
-> and others, can you work out the details of keeping this up to date?
+> >> I'll take a look at it. Will try to build it locally=20
+> >> however it looks like neon doesn't build out of box.
+> >> Are you using any patch related to it?
+> >
+> > Yes, see below (patch file://gnutls-2.patch was pushed=20
+> > before to git).
+>=20
+> I've commited the neon patch in master and I failed to get=20
+> subversion to build.
 
-There's a little configuration problem according to the encoding. The =
-document seems to be in Latin1 and contains
+I didn't push this patch because i had no chance to test it until now. =
+So let's hope it will work.
 
-<meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3DISO-8859-1">
+> It is rather strange that it behaves as it does since even updating
+> the libtool it still fails. Since I'm not experienced at subversion
+> and have no idea how to fix it I belive you'd need to ask someone else
+> for help on that.
 
-but the HTTP header say UTF-8.
-
-HTTP/1.1 200 OK
-Date: Mon, 02 Mar 2009 06:45:20 GMT
-Server: Apache/2.2.3 (Debian) mod_python/3.2.10 Python/2.4.4 =
-PHP/5.2.0-8+etch13 mod_perl/2.0.2 Perl/v5.8.8
-Last-Modified: Tue, 06 May 2008 12:30:38 GMT
-ETag: "184311-84-44c8f04003780"
-Accept-Ranges: bytes
-Content-Length: 132
-Connection: close
-Content-Type: text/html; charset=3DUTF-8
-
-This results in wrong presentation e.g. of the copyright symbol. :(
+I've CC'ed this to the mailing list in the hope there is someone able to =
+help.
 
 
