@@ -1,20 +1,21 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LeJJc-0007LV-J0
-	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 02:21:00 +0100
-Received: (qmail 28416 invoked by uid 1003); 3 Mar 2009 01:17:00 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 3 Mar 2009 01:17:00 -0000
-Message-ID: <49AC850A.2070702@balister.org>
-Date: Mon, 02 Mar 2009 20:16:58 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <mwester@dls.net>) id 1LeJV6-0008MU-PP
+	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 02:32:53 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx02.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LeJRF-0005Ng-4z
+	for openembedded-devel@openembedded.org; Mon, 02 Mar 2009 19:28:53 -0600
+Message-ID: <49AC87D1.3050505@dls.net>
+Date: Mon, 02 Mar 2009 19:28:49 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1236007399.6800.1133.camel@alap>
-In-Reply-To: <1236007399.6800.1133.camel@alap>
-Subject: Re: [PATCH] Add elementtree checksum
+To: openembedded-devel@openembedded.org
+References: <49AB58CA.7090406@tait.co.nz>
+In-Reply-To: <49AB58CA.7090406@tait.co.nz>
+Subject: Re: fatal: Not a git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,125 +29,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2009 01:21:01 -0000
-X-Groupsio-MsgNum: 8086
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050906040200070406050209"
-
---------------ms050906040200070406050209
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 03 Mar 2009 01:32:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Angus Ainslie wrote:
-> Please advise me if there are policies for applying patches to
-> checksums.ini
-
-Normally I do this:
-
-$ mv checksums.ini checksums.ini.old
-$ vi checksum.ini.old and add the new entry at the top of the file
-$ python ../contrib/source-checker/oe-checksums-sorter.py 
-checksums.ini.old > checksums.ini
-
-Then remove the .old file, run a quick test and commit.
-
-Philip
-
+Douglas Royds wrote:
+> Anyone else getting this?
 > 
+>    NOTE: Handling BitBake files: / (6587/6587) [100 %]
+>    NOTE: Parsing finished. 6302 cached, 0 parsed, 285 skipped, 0 masked.
+>    NOTE: Cache is clean, not saving.
+>    NOTE: build 200903021645: started
+>    fatal: Not a git repository <----------------------
 > 
-> Thanks
-> Angus
+>    OE Build Configuration:
+>    BB_VERSION        = "1.8.12"
+>    ...
 > 
-> ---
->  conf/checksums.ini |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
-> 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 52e26d6..497dd07 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -1,3 +1,7 @@
-> +[http://effbot.org/media/downloads/elementtree-1.2.7-20070827-preview.zip]
-> +md5=30e2fe5edd143f347e03a8baf5d60f8a
-> +sha256=5071431068c58c1f56dcc8fff37f8a213351f3b45c012d3adb640ec9418053ad
-> +
->  [http://www.directfb.org/downloads/Extras/++DFB-0.9.25.tar.gz]
->  md5=c6a2705f6210d8ede50a947b375f1c0b
->  sha256=b3dbf01563dd60d63cff543ea8cd0c885381e78ecbbab8ff176e46df3f198a88
-> --
-> 1.5.6.3
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+> The same complaint seems to crop up at various points during a build, as
+> well.
 
---------------ms050906040200070406050209
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Yes, I see that as well.  Of course, since I -- at the time -- was
+building from a snapshot and not the original git repo, and the build
+results seemed quite normal, I gave it no further thought.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDMwMzAx
-MTY1OFowIwYJKoZIhvcNAQkEMRYEFM4CUvdskzsTdmbdXx3q5qig4p2nMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBvHnLMRHtolHMHpMIKKlznakYPZCG7sSuLfbhWI3qrjdib0DE8
-3guFcoYD3g0FU+cnaHaAVi222OiAR4FOP/gLKX4359u7kaxSr9vU1lY8YnfRspyA1zqw9mllsXvb
-yxVYSR2/yswOKpy6e6RCbuDcBtO3t6JUClhcclSmO+QZqNXgvhynD6OCfiu0pidgh5dQxS3zE6+Q
-eeh1pjrU114FkYy4hCHTDROKnxXCRyWMiFr4uDzOoIEYIvkSn9Tp8Yg7gGCn+ln5T+O+H4D3kEVs
-cck+1luWSW0PqO5FWTieX7PsQ/nZjioIiQOdhHxod4XRGAktweQeqUoVTCZfmdjhAAAAAAAA
 
---------------ms050906040200070406050209--
+> =======================================================================
+> This email, including any attachments, is only for the intended
+> addressee.  It is subject to copyright, is confidential and may be
+> the subject of legal or other privilege, none of which is waived or
+> lost by reason of this transmission.
+> If the receiver is not the intended addressee, please accept our
+> apologies, notify us by return, delete all copies and perform no
+> other act on the email.
+> Unfortunately, we cannot warrant that the email has not been
+> altered or corrupted during transmission.
+> =======================================================================
+
+I guess I'm not sure that I am the intended addressee.  Can you tell me
+if you did, in fact, intend to send the original email to me, in the
+legal sense of the definition of "intended addressee"?
+
+In any case, please inform your legal department that I do not accept
+apologies from lawyers, and that this email constitutes my notification
+of that to your lawyers, that I have deleted all copies -- at least
+those copies that _I_ possess; the email notice is rather vague as to
+whether I am required to track down all copies that might exist in the
+world today -- and I also shall perform no other act on the email.
+
+- Mike (mwester)
+
+P.S.  Neither can I warrant that my response to this email has not been
+altered or corrupted during transmission.  And I'll go one better than
+your lawyers, and note that you'll never know if my original email was
+full of typos -- and that it was actually *corrected* during
+transmission.  Poor lawyers...  that sort of disclaimer rather makes the
+entire footnote they added there completely ridiculous and pointless,
+doesn't it??!
+
+
