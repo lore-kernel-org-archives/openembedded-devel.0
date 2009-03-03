@@ -1,37 +1,31 @@
-Received: from [209.85.132.248] (helo=an-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <e.robertson.svg@gmail.com>) id 1LeFY9-0006vX-7n
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2009 22:19:50 +0100
-Received: by an-out-0708.google.com with SMTP id d40so3164752and.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2009 13:15:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:mime-version:content-type:content-transfer-encoding
-	:content-disposition:message-id;
-	bh=6wc4nYUXFXXm1wXJp0bLPXGhh449BXg7V7teOtXSj4Y=;
-	b=S+P+jNoACFMXDpu2pTFtRhR4qxOHrMRefgBI1lOUDOnCmf7Jw30kk4frZ/0gF5l9N3
-	caJ9CKZ1sGmnERFUlHcvYgHbfRfr7PlvNql0HRLkqlz8p1dy7K9ao/UuogvNAHwXLl/t
-	+ygzCwYXC2PAk3vDwCfOrR0Ks9qMAARquGiEY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	b=BV9CwbdloiNvLHJHR/O8REFZc9TMsvI8oiFEEgzRVDAxqIxc5hhWizVeehKvNsHsy3
-	j2wXvKt8QSeSqJQvyPap4Npt8aADM2A9EePs5WOD23aIUoaR8BuqXVZXZV8aWI86j8hm
-	2qa7wr3c5SBRrTcVUj8TWL4eJ7dL1JwIj+vdI=
-Received: by 10.100.134.10 with SMTP id h10mr5177086and.28.1236028548335;
-	Mon, 02 Mar 2009 13:15:48 -0800 (PST)
-Received: from vincy (anyhost.homeauto.com [65.14.111.202])
-	by mx.google.com with ESMTPS id d35sm7941175and.18.2009.03.02.13.15.47
-	(version=SSLv3 cipher=RC4-MD5); Mon, 02 Mar 2009 13:15:48 -0800 (PST)
-From: E Robertson <e.robertson.svg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 2 Mar 2009 15:15:46 -0600
-User-Agent: KMail/1.9.9
-MIME-Version: 1.0
-Message-Id: <200903021515.46131.e.robertson.svg@gmail.com>
-Subject: sysvinit runlevels
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LeIJX-00061E-SU
+	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 01:16:51 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LeIFe-0000v4-Sl
+	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 00:12:50 +0000
+Received: from p5483a6c4.dip0.t-ipconnect.de ([84.131.166.196])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 03 Mar 2009 00:12:50 +0000
+Received: from vjensen by p5483a6c4.dip0.t-ipconnect.de with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 03 Mar 2009 00:12:50 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Vitus Jensen <vjensen@gmx.de>
+Date: Tue, 3 Mar 2009 00:12:38 +0000 (UTC)
+Message-ID: <gohslm$3bl$1@ger.gmane.org>
+References: <49AB58CA.7090406@tait.co.nz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5483a6c4.dip0.t-ipconnect.de
+User-Agent: Pan/0.133 (House of Butterflies)
+Sender: news <news@ger.gmane.org>
+Subject: Re: fatal: Not a git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +39,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2009 21:21:22 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 03 Mar 2009 00:16:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
-I'm building a busybox based distro using busybox init. I notice sysvinit run 
-levels unexpectedly showed up my rootfs. Is this normally what it does and I 
-need to explicitly remove them? 
-Also, I couldn't find the "?=" operation in the bitbake manual so I assumed it 
-a condition statement and is overridden of the variable is defined, it this 
-true?
-Thanks.   
+Am Mon, 02 Mar 2009 16:55:54 +1300 schrieb Douglas Royds:
+
+> Anyone else getting this?
+> 
+>     NOTE: Handling BitBake files: / (6587/6587) [100 %] NOTE: Parsing
+>     finished. 6302 cached, 0 parsed, 285 skipped, 0 masked. NOTE: Cache
+>     is clean, not saving.
+>     NOTE: build 200903021645: started
+>     fatal: Not a git repository <----------------------
+> 
+>     OE Build Configuration:
+>     BB_VERSION        = "1.8.12"
+>     ...
+
+
+Yes, it happens on every build.  I guess bitbake is testing the current 
+directory via git and would include the current head in the build number.
+
+> The same complaint seems to crop up at various points during a build, as
+> well.
+> 
+> Suggestions?
+
+Just ignore.  Besides called "fatal" it isn't fatal at all.
+
+Bye,
+ Vitus
+
 
 
