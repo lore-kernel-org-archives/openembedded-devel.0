@@ -1,39 +1,33 @@
-Received: from [202.37.96.11] (helo=gatekeeper.tait.co.nz)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1LeNeC-00031a-Ha
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Mar 2009 06:58:33 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id AF7C846757
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2009 18:54:31 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])by 
-	gatekeeper.tait.co.nz (Postfix) with ESMTP id 9E1A246756for 
-	<openembedded-devel@lists.openembedded.org>; Tue,  3 Mar 2009 18:54:30 
-	+1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by 
-	sunstrike.tait.co.nz(Sun Java System Messaging Server 6.1 (built Apr 28
-	2004))id <0KFX000010QVTR00@sunstrike.tait.co.nz>(original mail from 
-	douglas.royds@tait.co.nz)for openembedded-devel@lists.openembedded.org; 
-	Tue,03 Mar 2009 18:54:30 +1300 (NZDT)
-Received: from [172.25.116.23] by sunstrike.tait.co.nz(Sun Java System 
-	Messaging Server 6.1 (built Apr 28 2004))with ESMTP id 
-	<0KFX00LWG1QSLF10@sunstrike.tait.co.nz> 
-	foropenembedded-devel@lists.openembedded.org; Tue,03 Mar 2009 18:54:29 
-	+1300 (NZDT)
-Date: Tue, 03 Mar 2009 18:54:23 +1300
-From: Douglas Royds <douglas.royds@tait.co.nz>
-In-reply-to: <20090303021719.GK26343@smtp.west.cox.net>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <49ACC60F.9050808@tait.co.nz>
-MIME-version: 1.0
-References: <49AB58CA.7090406@tait.co.nz> 
-	<gohslm$3bl$1@ger.gmane.org><20090303021719.GK26343@smtp.west.cox.net>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-X-imss-version: 2.053
-X-imss-result: Passed
-X-imss-approveListMatch: *@tait.co.nz
-Subject: Re: fatal: Not a git repository
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LeOyG-0005DL-Hm
+	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 08:23:20 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LeOuI-0006Q1-SG
+	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 07:19:14 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 03 Mar 2009 07:19:14 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 03 Mar 2009 07:19:14 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 03 Mar 2009 08:19:06 +0100
+Message-ID: <goilla$vh8$1@ger.gmane.org>
+References: <1236023043.6800.1174.camel@alap>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090219 Shredder/3.0b3pre
+In-Reply-To: <1236023043.6800.1174.camel@alap>
+Sender: news <news@ger.gmane.org>
+Subject: Re: New recipe for openmoko QA test scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,79 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2009 05:58:33 -0000
-Content-type: text/plain;
-	format=flowed;
-	charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Tue, 03 Mar 2009 07:23:20 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Tom Rini wrote:
-> On Tue, Mar 03, 2009 at 12:12:38AM +0000, Vitus Jensen wrote:
->   
->> Am Mon, 02 Mar 2009 16:55:54 +1300 schrieb Douglas Royds:
->>     
->>> Anyone else getting this?
->>>
->>>     NOTE: Handling BitBake files: / (6587/6587) [100 %] NOTE: Parsing
->>>     finished. 6302 cached, 0 parsed, 285 skipped, 0 masked. NOTE: Cache
->>>     is clean, not saving.
->>>     NOTE: build 200903021645: started
->>>     fatal: Not a git repository <----------------------
->>>
->>>     OE Build Configuration:
->>>     BB_VERSION        = "1.8.12"
->>>     ...
->>>       
->> Yes, it happens on every build.  I guess bitbake is testing the current 
->> directory via git and would include the current head in the build number.
->>
->>     
->>> The same complaint seems to crop up at various points during a build, as
->>> well.
->>>
->>> Suggestions?
->>>       
->> Just ignore.  Besides called "fatal" it isn't fatal at all.
->>     
+On 02-03-09 20:44, Angus Ainslie wrote:
+> Please review for any policy violations.
 >
-> Well, to git it's fatal :)  Someone should dig to where the call is and
-> redirect stderr somewhere, I suspect..
->   
+> Thanks
+> Angus
+>
+> --- openembedded/packages/openmoko-projects/openmoko-qa-scripts.bb.oring        1969-12-31 17:00:00.000000000 -0700
+> +++ openembedded/packages/openmoko-projects/openmoko-qa-scripts.bb      2009-03-02 12:38:55.000000000 -0700
+> @@ -0,0 +1,19 @@
+> +DESCRIPTION = "Openmoko QA test scripts"
+> +SECTION = "utils"
+> +LICENSE = "GPL"
+> +PV = "gitr${SRCREV}"
 
-This silences it, though I'm not sure that it's the right solution:
-
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 18afc1a..21b08a5 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -807,7 +807,7 @@ def base_get_metadata_svn_revision(d):
- 
- def base_get_metadata_git_branch(d):
-        import os
--       branch = os.popen('cd %s; git branch | grep "^* " | tr -d "* "' 
-% base_get_scmbasepath(d)).read()
-+       branch = os.popen('cd %s; git branch 2>&1 | grep "^* " | tr -d 
-"* "' % base_get_scmbasepath(d)).read()
- 
-        if len(branch) != 0:
-                return branch
-
-
-
-
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
+NACK, as pointed out numerous times before: git revisions don't sort, so 
+the above breaks upgrade paths.
 
 
 
