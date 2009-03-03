@@ -1,36 +1,43 @@
 Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LeTwQ-0003Xf-81
+	(envelope-from <piernik@gmail.com>) id 1LeTwi-0003Xf-QX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Mar 2009 13:41:46 +0100
-Received: by fxm11 with SMTP id 11so2352845fxm.12
+	Tue, 03 Mar 2009 13:42:04 +0100
+Received: by mail-fx0-f167.google.com with SMTP id 11so2352845fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2009 04:37:42 -0800 (PST)
+	Tue, 03 Mar 2009 04:38:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Urak8BdxpaCerrEagRDq/Fgq0QOM3CaHUC3Lw9fWZHM=;
-	b=Af1agDXlg8p9k0PgvyCB+p3iKj6JSgGCkKDH+yhpH9xaSpUQIL/7Cdv0nLbLE8a/1h
-	hVhUPceDRderXIf3E2H6MYaucPAtkabNTual6AuOcYRftIoxrvRW5Y303HhU9xUX8dEe
-	e4BkB4Uol8WD5+7Gnkt6wYsnKSqUeyUmgP6UU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=domainkey-signature:received:received:sender:date:from:to:subject
+	:message-id:in-reply-to:references:x-mailer:x-face:mime-version
 	:content-type:content-transfer-encoding;
-	b=j7bhtg42JEXtlJrA1noyZcfEkHjnliIRLQ3XvmPgiMkOe4y/qC7swfjqP1F9pL3cgE
-	efhlGBybAHjjebk0e+MR1a2Zp1WOtMDrsyjRJXsGSfS1/kYzWbLkwPCz5Stncvlkn8G/
-	lDdD+ne8ttgDsaNtACpELHpIyKwKG9URaq+tA=
-MIME-Version: 1.0
-Received: by 10.223.106.200 with SMTP id y8mr3949574fao.24.1236083862047; Tue, 
-	03 Mar 2009 04:37:42 -0800 (PST)
-In-Reply-To: <20090303093030.GA17676@mi.fu-berlin.de>
-References: <49AB1EB0.5090002@kernelconcepts.de>
-	<20090303093030.GA17676@mi.fu-berlin.de>
-Date: Tue, 3 Mar 2009 13:37:42 +0100
-Message-ID: <d1b08f940903030437w1ad85019xfdd0685e97b9aafb@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	bh=TDCy705pKUoZQ8SFy5EaZIMpK5/LS3aF4jqN+CLY5Bw=;
+	b=EigrxAZpS7cU7IQxpCs6feexDT+MtKZ/1LgWLdqjs5VLSsXCcBfYH7x9vNu5bfX3Ov
+	axrUmylJ8iIPZ6qR9pOPT5EBSnawJ+uLA9adr1FtDmeiIyvAY3x9pcQB0FBBpWn7jTXg
+	8SZ1opepiIMo48ZKjlGj49gVlubm+sTd10gqc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:date:from:to:subject:message-id:in-reply-to:references
+	:x-mailer:x-face:mime-version:content-type:content-transfer-encoding;
+	b=s5QmmPZrDdV4/XzkdortEUYK3Eu1uGrWYscfIwE1t4Td6lOdmuC5+1cs54DhiSxY7e
+	pYDGoqUUEek61CNPBHqMUMWsad4dcMSaqV3xs3lD9CB+4ZATZwYAMqpd56Pp2pCmsqhU
+	dkCn7Nzgc+DzcRKur5anqBS2nmyA+2K+cy7bA=
+Received: by 10.86.82.16 with SMTP id f16mr6781558fgb.26.1236083883115;
+	Tue, 03 Mar 2009 04:38:03 -0800 (PST)
+Received: from mobil.site (87-205-79-201.adsl.inetia.pl [87.205.79.201])
+	by mx.google.com with ESMTPS id 4sm568046fge.44.2009.03.03.04.38.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 03 Mar 2009 04:38:02 -0800 (PST)
+Sender: Krzysztof Kotlenga <piernik@gmail.com>
+Date: Tue, 3 Mar 2009 13:36:26 +0100
+From: Krzysztof Kotlenga <pocek@users.sf.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Dependency tracking - or - how to get rid of kexec-tools
+Message-ID: <20090303133626.5706500e@mobil.site>
+In-Reply-To: <20090211213312.919E8189338@amethyst.openembedded.net>
+References: <20090211213312.919E8189338@amethyst.openembedded.net>
+X-Mailer: Claws Mail 3.7.0 (GTK+ 2.12.9; i586-suse-linux-gnu)
+X-Face: U{.sZrXl+;
+	-boiB]N4=wPdrR|YT0!fcISDza0Y}=n*z')0S{iZW<Uy$s~&}09$vR^IuFq,E0)iS]JFG0-3Wmow(MTQ!]rN*<Pa(<PO:*9RFU_\(15s:]Pj}lCTcP(,pUZLy"[4/jpF1l^Y4z!>jV!F"n+n2Rpp8jcp53&OWJgn?AJcD2
+Mime-Version: 1.0
+Subject: Re: [oe-commits] Frans Meulenbroeks : opkg: fix bug that occured with file names of exactly 100 chars in the tar file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,20 +51,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2009 12:41:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 03 Mar 2009 12:42:04 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
->Upgrade kexec-tools
-+1
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 4e1b79d2d824ae7e0204251a09e852c24045c54a
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=4e1b79d2d824ae7e0204251a09e852c24045c54a
+> 
+> Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> Date:   Wed Feb 11 22:32:06 2009 +0100
+> 
+> opkg: fix bug that occured with file names of exactly 100 chars in
+> the tar file
+> 
+> ---
+> 
+>  packages/opkg/files/opkg_unarchive.patch |   13 +++++++++++++
 
-You could also try:
+Hi,
+this is actually a new bug, it causes paths in .list files being cut at
+99 characters. I've run into this issue when I couldn't find gcc in
+meta-toolchain.
 
-cd ../org.openembedded.dev/conf
-grep -r  kexec .
-
-My 2 cents
-
-Andrea
+-- 
+kjk
 
 
