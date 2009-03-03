@@ -1,36 +1,30 @@
-Received: from [209.85.128.184] (helo=fk-out-0910.google.com)
+Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LeUBJ-0004Dz-8p
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Mar 2009 13:57:09 +0100
-Received: by fk-out-0910.google.com with SMTP id f40so1079380fka.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2009 04:53:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JT+/Zv7K2HYfcCPMO1IwGj+6jvjX7SHSRft4iwZjWwc=;
-	b=CVhUU5YKox+OfamAsglmZmSpFIDBRFGZYJjiFlTIi6QTKnWJdH6yuoSRfDzSBQ+LNo
-	KYWx+EGM1tMQpqmwQ/iA267VsfjUD26vnoxOK4wE5yqBgzTlO1x9feu2Hb89LtgMB+Se
-	iMG7JN+AxA/7bT9B2/zm50WJMvHfTWkHwqkiw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=UYGTGeRu830KphJjIu5WM1qegEMrDfjJlEicBriqlIKFmFaOk9ZaE117MwNUwCSxNy
-	iG5tVOdr9v4WZmVyz1KBJw8caqSPSOO9W+4cU1oKA9I1U7EcaDTHlbegxwzBMSthAKCN
-	7BsWYgJVPnHPfp2WTSUI1IbaWPJD0k2/nEMNk=
+	(envelope-from <trini@kernel.crashing.org>) id 1LeWQQ-0000uD-TR
+	for openembedded-devel@openembedded.org; Tue, 03 Mar 2009 16:20:55 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao106.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090303151649.HJBT22254.fed1rmmtao106.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 3 Mar 2009 10:16:49 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id NfGp1b0024dMFYL03fGpD1; Tue, 03 Mar 2009 10:16:49 -0500
+X-Authority-Analysis: v=1.0 c=1 a=uScoJcWiD1UA:10 a=XXFRhCI6BIMA:10
+	a=C2fOdq07eGq1GACAM1EA:9 a=nElqyFzM7Z2WN4CgxhkA:7
+	a=v8C3Kt6wjpSfmhPgsHscRx57raAA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 3 Mar 2009 08:16:48 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090303151648.GL26343@smtp.west.cox.net>
+References: <gh8v57$5nk$1@ger.gmane.org> <49380C4F.1050809@dls.net>
+	<49380EAC.5020809@dls.net> <gh94ov$rdk$1@ger.gmane.org>
+	<20090303051111.GD26643@denix.org> <goilvs$ps$1@ger.gmane.org>
 MIME-Version: 1.0
-Received: by 10.223.115.16 with SMTP id g16mr6997321faq.93.1236084787114; Tue, 
-	03 Mar 2009 04:53:07 -0800 (PST)
-In-Reply-To: <20090303133626.5706500e@mobil.site>
-References: <20090211213312.919E8189338@amethyst.openembedded.net>
-	<20090303133626.5706500e@mobil.site>
-Date: Tue, 3 Mar 2009 13:53:07 +0100
-Message-ID: <ac9c93b10903030453g6bdfb268ubb30f3854e667d12@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Frans Meulenbroeks : opkg: fix bug that occured with file names of exactly 100 chars in the tar file
+In-Reply-To: <goilvs$ps$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: invalidating udev cache, how?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2009 12:57:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 03 Mar 2009 15:20:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2009/3/3 Krzysztof Kotlenga <pocek@users.sf.net>:
->> Module: openembedded.git
->> Branch: org.openembedded.dev
->> Commit: 4e1b79d2d824ae7e0204251a09e852c24045c54a
->> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcom=
-mit;h=3D4e1b79d2d824ae7e0204251a09e852c24045c54a
+On Tue, Mar 03, 2009 at 08:24:44AM +0100, Koen Kooi wrote:
+> On 03-03-09 06:11, Denys Dmytriyenko wrote:
+>> On Thu, Dec 04, 2008 at 06:41:50PM +0100, Koen Kooi wrote:
+>>> On 04-12-08 18:09, Mike (mwester) wrote:
+>>>> Mike (mwester) wrote:
+>>>>
+>>>>> A slight improvement would be to make the dev.tar file dependent upon
+>>>>> the bootargs; i.e. invalidate /etc/dev.tar file if the boot command line
+>>>>> doesn't match the current command line.  This could be a very fast
+>>>>> operation, just "cmp /proc/cmdline /etc/dev_cmdline" or similar.
+>>>> As I consider this further, we could actually just save and compare
+>>>> /proc/atags if that's present on the device in question (falling back to
+>>>> /proc/cmdline if not present).  That would catch *any* changes passed in
+>>>> to the kernel via the bootloader.
+>>>>
+>>>> Flashing a new kernel would seem to be another logical place to
+>>>> invalidate the cache, so adding a comparison of "uname -rv" would be a
+>>>> reasonable way to catch that.
+>>> That should indeed take care of bootargs and kernel version changes. I'm
+>>> still tempted to add option 2) to all that :)
 >>
->> Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->> Date: =A0 Wed Feb 11 22:32:06 2009 +0100
->>
->> opkg: fix bug that occured with file names of exactly 100 chars in
->> the tar file
->>
->> ---
->>
->> =A0packages/opkg/files/opkg_unarchive.patch | =A0 13 +++++++++++++
+>> Sorry for bringing up this old discussion. Are there any plans to implement
+>> the above checks in udev?
 >
-> Hi,
-> this is actually a new bug, it causes paths in .list files being cut at
-> 99 characters. I've run into this issue when I couldn't find gcc in
-> meta-toolchain.
->
-> --
-> kjk
->
+> Plans yes, time no :(
 
-I don't have time today to look into this (all day & evening hooked up
-at work). Probably tomorrow.
-Anyway, appending the 0 byte is no good as tar_entry->name[100] is
-already out of bounds.
+Can we make sure they're optional?
 
-For now I suggest undoing my patch. I'll come up with a better solution a.s=
-.a.p.
-Guess this needs to be fixed at the place where tar_entry->name is
-used (the issue was that this array was 100 bytes and got followed by
-the mode (.e.g 000644), so without my patch you got files like:
-.....xml000644). this happens if the file name is exactly 100 chars
-
-Apologies for any inconvenience.
-
-Frans
+-- 
+Tom Rini
 
 
