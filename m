@@ -1,19 +1,19 @@
 Received: from [199.44.250.2] (helo=exchsrvr.syntech-fuelmaster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1Lez3X-0002nW-TA
+	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1Lez7p-000348-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 22:55:12 +0100
+	Wed, 04 Mar 2009 22:59:37 +0100
 MIME-Version: 1.0
 X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Wed, 4 Mar 2009 16:54:56 -0500
-Message-ID: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A2@EXCHSRVR.syntech.org>
+Date: Wed, 4 Mar 2009 16:59:22 -0500
+Message-ID: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A6@EXCHSRVR.syntech.org>
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Thread-Topic: Getting "fatal: Not a git repository"
-thread-index: AcmdE9tdQXPL8mFdRiSE0QvqYW6TFQ==
+Thread-Topic: Error building gnome-vfs-2.22.0
+thread-index: AcmdFHn5JT4hqg5pSlqd+NJ6rMdLxQ==
 From: "Mark Butsch" <mbutsch@syntech-fuelmaster.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: Getting "fatal: Not a git repository"
+Subject: Error building gnome-vfs-2.22.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,7 +27,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 21:55:12 -0000
+X-List-Received-Date: Wed, 04 Mar 2009 21:59:37 -0000
 Content-class: urn:content-classes:message
 Content-Type: text/plain;
 	charset="us-ascii"
@@ -35,37 +35,39 @@ Content-Transfer-Encoding: quoted-printable
 
 Hello,
 
-I am getting the message "fatal: Not a git repository" when I build. It
-doesn't seem to be causing a problem, but it bothers me none the less.
+When building gnome-vfs-2.22.0, it fails task do_configure with the
+following error message:
 
----------
-[mbutsch@tuxoe 4G]$ bitbake task-base
-NOTE: Handling BitBake files: \ (6587/6587) [100 %]
-NOTE: Parsing finished. 6325 cached, 0 parsed, 262 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: build 200903041647: started
-fatal: Not a git repository
-fatal: Not a git repository
+------
+checking for LIBGNOMEVFS... configure: error: Package requirements
+(glib-2.0 >=3D
+2.9.3 gmodule-no-export-2.0 >=3D 2.9.3 gthread-2.0 >=3D 2.9.3 =
+gobject-2.0 >=3D
+2.9.3 g
+conf-2.0 >=3D 1.1.1 libxml-2.0 >=3D 2.6.0 gnome-mime-data-2.0 =
+dbus-glib-1 >=3D
+0.60) w
+ere not met:
 
-OE Build Configuration:
-BB_VERSION        =3D "1.8.13"
-METADATA_BRANCH   =3D "<unknown>"
-METADATA_REVISION =3D "<unknown>"
-TARGET_ARCH       =3D "i686"
-TARGET_OS         =3D "linux"
-MACHINE           =3D "4g-i686"
-DISTRO            =3D "4g"
-DISTRO_VERSION    =3D ".dev-snapshot-20090304"
-TARGET_FPU        =3D ""
------------
+No package 'dbus-glib-1' found
 
-I am using an overlay, is that causing this?
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
 
-Any suggestions on how to solve this?
+Alternatively, you may set the environment variables LIBGNOMEVFS_CFLAGS
+and LIBGNOMEVFS_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+FATAL: oe_runconf failed
+------
+
+Is this referring to 'dbus-glib-1' missing from my dev host or from the
+OE built stuff?
+
+Where should I look to resolve this?
 
 Thanks,
 
 Mark
-
 
 
