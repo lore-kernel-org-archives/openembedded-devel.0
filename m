@@ -1,31 +1,31 @@
 Received: from [217.146.130.193] (helo=chlothar.bnv-bamberg.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ba0547@bnv-bamberg.de>) id 1LesWb-0006oM-Ee
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1LesgZ-000762-RY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 15:56:45 +0100
+	Wed, 04 Mar 2009 16:07:03 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bnv-bamberg.de; s=mail2008; h=Subject:From:To:Content-Type:
-	Date:Message-Id:Mime-Version:Content-Transfer-Encoding; bh=a9eGp
-	WT2HfjTgnUklRCQ9GQ7652uoKnMpvYl3vlAAbQ=; b=Vs/jcX/gEO68IDee1QKAr
-	qpyfLTzRJ3+8DvQClE71egq8ks3YrtuXZa6sfIh4DFWXx4Q7YpQK9qhlFRi4IwvO
-	X+leGHVFYh3qkrUAMenaePZVcapvetRyppHuRkl4hYYjIF1onOBhzbDx5dnKT82m
-	oCPXAp2dSIHT/D5t0RqhK0=
+	Date:Message-Id:Mime-Version:Content-Transfer-Encoding; bh=Iov9m
+	lVgDxyA95JWpIb81zlRIh8yQmjY/UPa6wJo72w=; b=GAwfoIdbfzv1wlT9WCPHi
+	m83a95luFDnA5m9K3qw/SrE0Uvh/7t97qej+mYxmwKrqRx1BhZXQFYMPCT5GOZNs
+	ZrebSxI0c4F6y27P6VL5RmXzro2sqhOgrKv7QRSGeIyfgdUDDo+s1qGsjL2C7QXi
+	DBhkEMm+1njF4YBzcemt38=
 Received: from localhost ([127.0.0.1] helo=chlothar.bnv-bamberg.de)
-	by chlothar.bnv-bamberg.de with esmtp id 1LesSY-0002sz-20 
+	by chlothar.bnv-bamberg.de with esmtp id 1LescW-0006Uz-Cz 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 15:52:34 +0100
+	Wed, 04 Mar 2009 16:02:52 +0100
 Received: from w0659.w.pppool.de ([89.58.6.89] helo=[192.168.2.3])
 	by chlothar.bnv-bamberg.de with esmtpa (Exim 4.69)
-	(envelope-from <ba0547@bnv-bamberg.de>) id 1LesSX-0002qi-Oe
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1LescV-0006Oq-MI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 15:52:34 +0100
+	Wed, 04 Mar 2009 16:02:52 +0100
 From: harald <ba0547@bnv-bamberg.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 04 Mar 2009 15:52:30 +0100
-Message-Id: <1236178350.4249.5.camel@debian.dorg.org>
+Date: Wed, 04 Mar 2009 16:02:47 +0100
+Message-Id: <1236178967.4249.7.camel@debian.dorg.org>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
-Subject: Compile OE on Sun Ultrasparc 64 architecture?
+Subject: Linux/Opie/Angstroem on Fujitsu Siemens Loox 420
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,24 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 14:56:45 -0000
+X-List-Received-Date: Wed, 04 Mar 2009 15:07:04 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+
 Hello,
 
-tried to compile OE on my Sun Ultrasparc 64 machine running on debian
-lenny. 
-Compilation fails, package qemu-native fails to compile with an error in
-zlib. please see build logs, machine h4000, user ba0547.
+managed to build a complete opie-image with
+openembedded. Read that my Fujitsu Siemens Pocket Loox is very similar
+to HP Ipaq 4000. So i built system for this machine type. Unfortunately
+the system does not start througth. It hangs after "freeing init
+memory:88k", then some lines appear with some bluetooth informations.
+That's all. System seems to run still, gives me some messages after i
+did some inputs to the touchscreen, maybe basic initialisation fails or
+there is something wrong with busybox?  Do you know what i can do to get
+opie, anstrong running on my machine? is it possible to generate a
+customized installation on openembedded for this kind of machines? 
 
-i have changed a value for architecture from sparc-linux to
-sparc64-linux becuase sparc64-linux has not been found and cmpilation
-does not even start.
+Thank you for any tip.
 
-please tell me what to do to resolve these errors.
-
-Regards, harald.
+Regards, harald. 
 
 
 
