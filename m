@@ -1,22 +1,23 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Leuu9-0007AC-4V
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 18:29:13 +0100
-Received: from [192.168.1.105] (e180183108.adsl.alicedsl.de [85.180.183.108])
-	by drlauer-research.com (Postfix) with ESMTP id 27045584167
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2009 18:49:43 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	(envelope-from <openembedded@haerwu.biz>) id 1Lev4q-0007hX-P0
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 18:40:16 +0100
+Received: (qmail 5485 invoked by uid 813007); 4 Mar 2009 17:29:23 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 17:29:23 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1236178967.4249.7.camel@debian.dorg.org>
-References: <1236178967.4249.7.camel@debian.dorg.org>
-Organization: Vanille-Media
-Date: Wed, 04 Mar 2009 18:25:01 +0100
-Message-Id: <1236187501.10602.130.camel@andromeda>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: Re: Linux/Opie/Angstroem on Fujitsu Siemens Loox 420
+Date: Wed, 4 Mar 2009 18:29:16 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.0; x86_64; ;
+	)
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+	<1236187304.10602.127.camel@andromeda>
+In-Reply-To: <1236187304.10602.127.camel@andromeda>
+MIME-Version: 1.0
+Message-Id: <200903041829.17257.openembedded@haerwu.biz>
+Subject: Re: Merging RPM support from Poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,23 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 17:29:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Mar 2009 17:40:17 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Am Mittwoch, den 04.03.2009, 16:02 +0100 schrieb harald:
-> managed to build a complete opie-image with
-> openembedded. Read that my Fujitsu Siemens Pocket Loox is very similar
-> to HP Ipaq 4000. So i built system for this machine type. Unfortunately
-> the system does not start througth. It hangs after "freeing init
-> memory:88k", then some lines appear with some bluetooth informations.
-> That's all.
+On Wednesday 04 of March 2009 18:21:44 Michael 'Mickey' Lauer wrote:
+> Impressive work, both from the original author and you.
 
-Sounds like an EABI/OABI kernel/userland problem. Make sure your kernel
-contains the ABI support you build userland with.
+Most of work was done by Richard Purdie, then I had to check how it 
+works and make it work also on device. Some changes were done by other 
+OpenedHand guys. My patchset was result of digging in over thousand of 
+Poky changes and some of them were tweaked a bit to apply to current OE.
 
+Regards, 
 -- 
-:M:
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
