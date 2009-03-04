@@ -1,30 +1,24 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LexDy-0005jw-3t
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 20:57:50 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090304195334.BEYA16134.fed1rmmtao104.cox.net@fed1rmimpo02.cox.net>;
-	Wed, 4 Mar 2009 14:53:34 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id P7tZ1b00L4dMFYL047tZu4; Wed, 04 Mar 2009 14:53:33 -0500
-X-Authority-Analysis: v=1.0 c=1 a=z2cBfJZmOvIA:10 a=II7UTkEhgZcA:10
-	a=Js0LpgGrAAAA:8 a=b_OEaAMLAAAA:8 a=fGO4tVQLAAAA:8
-	a=LlluvTSdv8SKUqF7ffMA:9
-	a=dMA8JwGNgqjpw4T2pGiYzkrKaWQA:4 a=LY0hPdMaydYA:10 a=_qZRxRWV73kA:10
-X-CM-Score: 0.00
-Date: Wed, 4 Mar 2009 12:53:33 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090304195333.GY26343@smtp.west.cox.net>
+	(envelope-from <openembedded@haerwu.biz>) id 1LexIZ-0005wD-H0
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 21:02:35 +0100
+Received: (qmail 26471 invoked by uid 813007); 4 Mar 2009 19:58:21 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 19:58:21 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 4 Mar 2009 20:58:14 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.0; x86_64; ;
+	)
 References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-	<1236182004-4523-15-git-send-email-openembedded@haerwu.biz>
+	<1236182004-4523-14-git-send-email-openembedded@haerwu.biz>
+	<1236186847.10602.123.camel@andromeda>
+In-Reply-To: <1236186847.10602.123.camel@andromeda>
 MIME-Version: 1.0
-In-Reply-To: <1236182004-4523-15-git-send-email-openembedded@haerwu.biz>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: Richard Purdie <richard@openedhand.com>
-Subject: Re: [PATCH 14/70] Add yum-native and createrepo (from Poky)
+Message-Id: <200903042058.14815.openembedded@haerwu.biz>
+Subject: Re: [PATCH 13/70] Add python-urlgrabber, python-iniparser, yum-metadata-parser and native varients (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,23 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 19:57:51 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 04 Mar 2009 20:02:35 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wed, Mar 04, 2009 at 04:52:29PM +0100, Marcin Juszkiewicz wrote:
+On Wednesday 04 of March 2009 18:14:07 Michael 'Mickey' Lauer wrote:
 
-> From: Richard Purdie <richard@openedhand.com>
-> 
-> git-svn-id: https://svn.o-hand.com/repos/poky@5098 311d38ba-8fff-0310-9ca6-ca027cbcb966
-[snip]
-> --- /dev/null
-> +++ b/packages/yum/yum-native_3.2.18.bb
+> Better use distutils_stage_headers or distutils_stage_all here, if
+> they do the job.
 
-Fails to compile, MACHINE=nokia800 DISTRO=minimal, BB_NUMBER_THREADS=4
-PARALLE_MAKE="-j 6".  See http://pastebin.com/m36a992fb
+This would need to wait then as I am not so Python expert to check it 
+properly.
 
+Regards, 
 -- 
-Tom Rini
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
