@@ -1,30 +1,34 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [217.146.130.193] (helo=chlothar.bnv-bamberg.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LewfP-0007Sh-NA
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 20:22:11 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090304191751.RKJD15318.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>;
-	Wed, 4 Mar 2009 14:17:51 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id P7Hr1b00U4dMFYL047HrW5; Wed, 04 Mar 2009 14:17:51 -0500
-X-Authority-Analysis: v=1.0 c=1 a=YohJiyLUb4EA:10 a=9ZRQWrMggegA:10
-	a=Js0LpgGrAAAA:8 a=b_OEaAMLAAAA:8 a=fGO4tVQLAAAA:8
-	a=HGVZKLU8xKzQ9sFw3tgA:9
-	a=DlQZ4W33_vSRF9lv8wPWKaQ92aMA:4 a=LY0hPdMaydYA:10 a=_qZRxRWV73kA:10
-X-CM-Score: 0.00
-Date: Wed, 4 Mar 2009 12:17:51 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090304191751.GV26343@smtp.west.cox.net>
-References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-	<1236182004-4523-3-git-send-email-openembedded@haerwu.biz>
-MIME-Version: 1.0
-In-Reply-To: <1236182004-4523-3-git-send-email-openembedded@haerwu.biz>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: Richard Purdie <richard@openedhand.com>
-Subject: Re: [PATCH 02/70] rpm/rpm-native: Add recipe for 4.4.2.3	(from Poky)
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1LewpB-0004SI-PC
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 20:32:16 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bnv-bamberg.de; s=mail2008; h=Subject:From:To:In-Reply-To:
+	References:Content-Type:Date:Message-Id:Mime-Version:
+	Content-Transfer-Encoding; bh=IRPKiXh3RWRWMM+jpYxZGXayybnM1swcFH
+	tb5pKS2Bc=; b=I2VQLedSI+o7X1gUrbKNureHSK50Vr1uzZcvitZYMpZdbQXIL/
+	FW4V+IG6q96lcnSj8z7ttCeTbqoV0fhGyZRf5ZyEDae1xZPjGiUkw8IR2AWFpEZO
+	8WBd4Zby5YWPnqSP571Te2UjBU+rKAZAPjiI7aKNim74JhsUCdY7+wkkU=
+Received: from localhost ([127.0.0.1] helo=chlothar.bnv-bamberg.de)
+	by chlothar.bnv-bamberg.de with esmtp id 1Lewl6-0005yM-FK 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 20:28:00 +0100
+Received: from w0659.w.pppool.de ([89.58.6.89] helo=[192.168.2.3])
+	by chlothar.bnv-bamberg.de with esmtpa (Exim 4.69)
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1Lewl6-0005vE-4E
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 20:28:00 +0100
+From: harald <ba0547@bnv-bamberg.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1236187501.10602.130.camel@andromeda>
+References: <1236178967.4249.7.camel@debian.dorg.org>
+	<1236187501.10602.130.camel@andromeda>
+Date: Wed, 04 Mar 2009 20:27:56 +0100
+Message-Id: <1236194876.4249.16.camel@debian.dorg.org>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Linux/Opie/Angstroem on Fujitsu Siemens Loox 420
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,29 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 19:23:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Mar 2009 19:32:23 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 04, 2009 at 04:52:17PM +0100, Marcin Juszkiewicz wrote:
+hello,
 
-> From: Richard Purdie <richard@openedhand.com>
+this cannot be enabled while using a gcc version below 4.0. The
+following text is in kernel help 
+
+"Use the ARM EABI to compile the kernel (AEABI)
+
+This option allows for the kernel to be compiled using the latest
+ARM ABI (aka EABI). This is only useful if you are using a user
+space environment that is also compiled with EABI.
+
+Since there are major incompatibilities between the legacy ABI and
+EABI, especially with regard to structure member alignment, this
+option also changes the kernel syscall calling convention to
+disambiguate both ABIs and allow for backward compatibility support
+(selected with CONFIG_OABI_COMPAT).
+
+To use this you need GCC version 4.0.0 or later."
+
+Used the kernel which was built together with "opie-image", did not yet
+look if this feature is enabled in this kernel.
+
+Regards, Harald.
+
+Am Mittwoch, den 04.03.2009, 18:25 +0100 schrieb Michael 'Mickey' Lauer:
+> Am Mittwoch, den 04.03.2009, 16:02 +0100 schrieb harald:
+> > managed to build a complete opie-image with
+> > openembedded. Read that my Fujitsu Siemens Pocket Loox is very similar
+> > to HP Ipaq 4000. So i built system for this machine type. Unfortunately
+> > the system does not start througth. It hangs after "freeing init
+> > memory:88k", then some lines appear with some bluetooth informations.
+> > That's all.
 > 
-> git-svn-id: https://svn.o-hand.com/repos/poky@5069 311d38ba-8fff-0310-9ca6-ca027cbcb966
-> ---
->  packages/rpm/files/cross_libpaths.patch |  145 +++++++++++++++++++++++++++++++
->  packages/rpm/files/external-tools.patch |  108 +++++++++++++++++++++++
->  packages/rpm/rpm-native_4.4.2.3.bb      |   10 ++
->  packages/rpm/rpm_4.4.2.3.bb             |   84 ++++++++++++++++++
+> Sounds like an EABI/OABI kernel/userland problem. Make sure your kernel
+> contains the ABI support you build userland with.
+> 
 
-rpm-native's configure depends on 'ed' being on the host.  We don't
-currently check for this in sanity.bbclass nor have an ed-native package
-which can be added to DEPENDS.
-
-See http://pastebin.com/m1ea52c95, MACHINE=nokia800 (but I also see it
-for db1200 and beagleboard and mx31ads) DISTRO=minimal.
-
--- 
-Tom Rini
 
 
