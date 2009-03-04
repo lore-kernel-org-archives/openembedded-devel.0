@@ -1,34 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Leoe2-0002df-AW
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 11:48:11 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Leo6k-0007hL-9s
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 10:13:46 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 04 Mar 2009 10:13:46 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 04 Mar 2009 10:13:46 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 04 Mar 2009 11:13:30 +0100
-Message-ID: <golk8b$52t$1@ger.gmane.org>
-References: <20090303204954.CCB9CE8008@amethyst.openembedded.net>	<1236119119.10602.62.camel@andromeda>	<49ADB183.5070709@balister.org>	<1236120999.10602.70.camel@andromeda>
-	<49AE5117.5020806@gefanuc.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
-In-Reply-To: <49AE5117.5020806@gefanuc.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] Koen Kooi : angstrom 2009.X: bump automake-native to 1.10. 2 since some idiot deleted 1.10
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LeojJ-0002jc-OP
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 11:54:02 +0100
+Received: by bwz9 with SMTP id 9so2767898bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Mar 2009 02:49:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ptF1ftGz5/MSRd03u6as+qzVxWJdbsnQPI8bgBWl4qk=;
+	b=H1QaSL1PLUwPFgcpgcOU7dWa5r6m0w5KHvZnkf9V2NcA+MFgDAF9x2zbt2lmx9Db9Q
+	fgnsJL2KzmRVBwgJbyya4r2PCaNDU/mfit8IMARQ8o69RoFscJscHODU/dTBg6mnzXWc
+	FOoiYrXVdCyD+GjvmUJ11QA4Y5alguhlUaXvI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=caeHt3LRiyKMlZSS7MfpE+kMa6KacxKCNFKNiOncnB6rfu5gUlDhcqyiyQyvSsyB+s
+	m8CW/RTP4QU2TV6oQzEHAeSPCvnxabYimads5nPzEdt8RTcMowf9yu/ervVZ9Y6ylSh+
+	A6qXwSa2h+d+hrTO86mOpmBlhjuQaGKmNw+f4=
+MIME-Version: 1.0
+Received: by 10.181.36.18 with SMTP id o18mr2914139bkj.136.1236163765156; Wed, 
+	04 Mar 2009 02:49:25 -0800 (PST)
+In-Reply-To: <20090304101045.GA736@gmail.com>
+References: <20090304101045.GA736@gmail.com>
+Date: Wed, 4 Mar 2009 12:49:25 +0200
+Message-ID: <fce2a370903040249t78b98997j8f4a83be45b1d27d@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [patch] Fix for nfs-utils tools build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,67 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 10:48:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 04 Mar 2009 10:54:54 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 04-03-09 10:59, Martyn Welch wrote:
-> Michael 'Mickey' Lauer wrote:
->> Am Dienstag, den 03.03.2009, 17:38 -0500 schrieb Philip Balister:
->>> Michael 'Mickey' Lauer wrote:
->>>> Am Dienstag, den 03.03.2009, 21:49 +0100 schrieb GIT User account:
->>>>> Module: openembedded.git
->>>>> Branch: org.openembedded.dev
->>>>> Commit: eee859a9c348871d6d644ece76bc57b151cc80e8
->>>>> URL:
->>>>> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=eee859a9c348871d6d644ece76bc57b151cc80e8
->>>>>
->>>>>
->>>>> Author: Koen Kooi <koen@openembedded.org>
->>>>> Date: Tue Mar 3 21:47:57 2009 +0100
->>>>>
->>>>> angstrom 2009.X: bump automake-native to 1.10.2 since some idiot
->>>>> deleted 1.10
->>>> Ah, are we in that mood again? Take more pills.
->>> We need to have a serious discussion about deleting recipes. I know
->>> the deletion of python 2.5 will force me to address the 2.5->2.6
->>> upgrade in gnuradio before the upstream developers are ready.
->>>
->>> We need a way to remove recipes, but doing it as part of adding a new
->>> recipe is causing problems for OE users.
->>
->> Yes, we need to have a serious discussion about lots of things
->> surrounding the OpenEmbedded project, before the popularity kills the
->> project. Judging from the amount of interest though, I don't see that
->> happening -- neither short term nor long term.
->>
->
-> Ok, so if a serious discussion is out of the question, lets just have a
-> normal discussion.
->
-> I see this issue to be partially related to the on going discussions
-> regarding submissions. I assume that the "Commit_Policy"[1] on the wiki
-> is either unofficial, out-of-date or optional as it states:
->
-> * Changes to core toolchain components need review (gcc, binutils,
-> libtool, pkgconfig, automake, autoconf etc.)
->
-> Where:
->
-> "Review" is defined as posting it on the mailing lists and getting
-> positive agreement from two or more core developers.
-> Now a quick check of my OpenEmbedded mail folder doesn't chuck up any
-> messages with automake in the title that have a patch with this commit.
-> Maybe I'm looking on the wrong mailing list.
+That's what I was going to send to ML now. Voting for this patch.
 
-I haven't seen anything like that either, and upgrading automake *did* 
-break, since a lot of apps now do 'install -s' which calls host strip :(
-This is exactly why we did extensive testing the last time we touched 
-automake.
-
-regards,
-
-Koen
-
+On Wed, Mar 4, 2009 at 12:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi
+>
+> Currently nfs-utils 1.1.2 does not build correctly. The reason is that
+> there are certain tools which are passed in CFLAGS in their makefiles
+> even though they are to be build using host compiler for them to be run
+> on host machine.
+>
+> Current builds use target headers to build them due to CFLAGS funkiness
+> where we have alters system include dirs. This goes ok with arm and x86
+> but on mips you see errors.
+>
+> This patch fixes the issue
+>
+> OK for .dev
+>
+> Thx
+>
+> -Khem
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
