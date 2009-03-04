@@ -1,24 +1,24 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetaY-0005Zq-RK
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 17:05:01 +0100
-Received: (qmail 27582 invoked by uid 813007); 4 Mar 2009 15:54:02 -0000
+	(envelope-from <hrw@juszkiewicz.com.pl>) id 1Letaj-0005bZ-47
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 17:05:05 +0100
+Received: (qmail 27973 invoked by uid 813007); 4 Mar 2009 15:54:12 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 89.78.173.235 (HELO localhost)
 	(smtp?user@juszkiewicz.com.pl@89.78.173.235)
-	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:54:02 -0000
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:54:12 -0000
 Received: from hrw by localhost with local (Exim 4.69)
 	(envelope-from <hrw@hrw.one.pl>)
-	id 1LetPv-0001ES-3N; Wed, 04 Mar 2009 16:53:55 +0100
+	id 1LetQ4-0001F4-Td; Wed, 04 Mar 2009 16:54:04 +0100
 From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2009 16:52:52 +0100
-Message-Id: <1236182004-4523-38-git-send-email-openembedded@haerwu.biz>
+Date: Wed,  4 Mar 2009 16:53:04 +0100
+Message-Id: <1236182004-4523-50-git-send-email-openembedded@haerwu.biz>
 X-Mailer: git-send-email 1.6.1.3
 In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 Cc: Marcin Juszkiewicz <hrw@openedhand.com>
-Subject: [PATCH 37/70] package_rpm.bbclass: files needs to start from / (from Poky)
+Subject: [PATCH 49/70] rootfs_rpm.bbclass: remove lock files to get rpm working on device (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,24 +36,25 @@ X-List-Received-Date: Wed, 04 Mar 2009 16:05:07 -0000
 
 From: Marcin Juszkiewicz <hrw@openedhand.com>
 
-git-svn-id: https://svn.o-hand.com/repos/poky@5116 311d38ba-8fff-0310-9ca6-ca027cbcb966
+git-svn-id: https://svn.o-hand.com/repos/poky@5412 311d38ba-8fff-0310-9ca6-ca027cbcb966
 ---
- classes/package_rpm.bbclass |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ classes/rootfs_rpm.bbclass |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/classes/package_rpm.bbclass b/classes/package_rpm.bbclass
-index fad02f5..e1398d2 100644
---- a/classes/package_rpm.bbclass
-+++ b/classes/package_rpm.bbclass
-@@ -82,6 +82,8 @@ python write_specfile() {
+diff --git a/classes/rootfs_rpm.bbclass b/classes/rootfs_rpm.bbclass
+index 9b0dba7..ed3cb8c 100644
+--- a/classes/rootfs_rpm.bbclass
++++ b/classes/rootfs_rpm.bbclass
+@@ -133,6 +133,9 @@ EOF
+ 	rm -rf ${IMAGE_ROOTFS}/var/log2/
+ 	rm -rf ${IMAGE_ROOTFS}${DEPLOY_DIR_RPM}/
  
- 	fd.write("%files\n")
- 	for file in files:
-+		if file[0] != '/':
-+			fd.write('/')
- 		fd.write("%s\n" % file)
++	# remove lock files
++	rm -f ${IMAGE_ROOTFS}/var/lib/rpm/__db.*
++
+ 	log_check rootfs 	
+ }
  
- 	fd.close()
 -- 
 1.6.1.3
 
