@@ -1,34 +1,24 @@
-Received: from [217.146.130.193] (helo=chlothar.bnv-bamberg.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ba0547@bnv-bamberg.de>) id 1LewpB-0004SI-PC
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 20:32:16 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bnv-bamberg.de; s=mail2008; h=Subject:From:To:In-Reply-To:
-	References:Content-Type:Date:Message-Id:Mime-Version:
-	Content-Transfer-Encoding; bh=IRPKiXh3RWRWMM+jpYxZGXayybnM1swcFH
-	tb5pKS2Bc=; b=I2VQLedSI+o7X1gUrbKNureHSK50Vr1uzZcvitZYMpZdbQXIL/
-	FW4V+IG6q96lcnSj8z7ttCeTbqoV0fhGyZRf5ZyEDae1xZPjGiUkw8IR2AWFpEZO
-	8WBd4Zby5YWPnqSP571Te2UjBU+rKAZAPjiI7aKNim74JhsUCdY7+wkkU=
-Received: from localhost ([127.0.0.1] helo=chlothar.bnv-bamberg.de)
-	by chlothar.bnv-bamberg.de with esmtp id 1Lewl6-0005yM-FK 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 20:28:00 +0100
-Received: from w0659.w.pppool.de ([89.58.6.89] helo=[192.168.2.3])
-	by chlothar.bnv-bamberg.de with esmtpa (Exim 4.69)
-	(envelope-from <ba0547@bnv-bamberg.de>) id 1Lewl6-0005vE-4E
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 20:28:00 +0100
-From: harald <ba0547@bnv-bamberg.de>
+	(envelope-from <openembedded@haerwu.biz>) id 1Lewr7-0004VL-2n
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 20:34:15 +0100
+Received: (qmail 4012 invoked by uid 813007); 4 Mar 2009 19:29:59 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 19:29:59 -0000
+From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1236187501.10602.130.camel@andromeda>
-References: <1236178967.4249.7.camel@debian.dorg.org>
-	<1236187501.10602.130.camel@andromeda>
-Date: Wed, 04 Mar 2009 20:27:56 +0100
-Message-Id: <1236194876.4249.16.camel@debian.dorg.org>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: Linux/Opie/Angstroem on Fujitsu Siemens Loox 420
+Date: Wed, 4 Mar 2009 20:29:51 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.0; x86_64; ;
+	)
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+	<1236182004-4523-9-git-send-email-openembedded@haerwu.biz>
+	<1236186706.10602.122.camel@andromeda>
+In-Reply-To: <1236186706.10602.122.camel@andromeda>
+MIME-Version: 1.0
+Message-Id: <200903042029.52194.openembedded@haerwu.biz>
+Subject: Re: [PATCH 08/70] rpm: Handle PYTHONVER differently in EXTRA_OECONF to stop gettext/uclibc failures during parsing (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +32,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 19:32:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Mar 2009 19:34:20 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-hello,
+On Wednesday 04 of March 2009 18:11:46 Michael 'Mickey' Lauer wrote:
+>>  packages/rpm/rpm_4.4.2.3.bb |   16 ++++++++++------
 
-this cannot be enabled while using a gcc version below 4.0. The
-following text is in kernel help 
+> No. Better inherit distutils_base and use its PYTHON_DIR here.
 
-"Use the ARM EABI to compile the kernel (AEABI)
+done
 
-This option allows for the kernel to be compiled using the latest
-ARM ABI (aka EABI). This is only useful if you are using a user
-space environment that is also compiled with EABI.
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Since there are major incompatibilities between the legacy ABI and
-EABI, especially with regard to structure member alignment, this
-option also changes the kernel syscall calling convention to
-disambiguate both ABIs and allow for backward compatibility support
-(selected with CONFIG_OABI_COMPAT).
-
-To use this you need GCC version 4.0.0 or later."
-
-Used the kernel which was built together with "opie-image", did not yet
-look if this feature is enabled in this kernel.
-
-Regards, Harald.
-
-Am Mittwoch, den 04.03.2009, 18:25 +0100 schrieb Michael 'Mickey' Lauer:
-> Am Mittwoch, den 04.03.2009, 16:02 +0100 schrieb harald:
-> > managed to build a complete opie-image with
-> > openembedded. Read that my Fujitsu Siemens Pocket Loox is very similar
-> > to HP Ipaq 4000. So i built system for this machine type. Unfortunately
-> > the system does not start througth. It hangs after "freeing init
-> > memory:88k", then some lines appear with some bluetooth informations.
-> > That's all.
-> 
-> Sounds like an EABI/OABI kernel/userland problem. Make sure your kernel
-> contains the ABI support you build userland with.
-> 
 
 
 
