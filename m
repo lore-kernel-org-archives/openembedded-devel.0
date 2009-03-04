@@ -1,35 +1,34 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LeojJ-0002jc-OP
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 11:54:02 +0100
-Received: by bwz9 with SMTP id 9so2767898bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Mar 2009 02:49:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ptF1ftGz5/MSRd03u6as+qzVxWJdbsnQPI8bgBWl4qk=;
-	b=H1QaSL1PLUwPFgcpgcOU7dWa5r6m0w5KHvZnkf9V2NcA+MFgDAF9x2zbt2lmx9Db9Q
-	fgnsJL2KzmRVBwgJbyya4r2PCaNDU/mfit8IMARQ8o69RoFscJscHODU/dTBg6mnzXWc
-	FOoiYrXVdCyD+GjvmUJ11QA4Y5alguhlUaXvI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=caeHt3LRiyKMlZSS7MfpE+kMa6KacxKCNFKNiOncnB6rfu5gUlDhcqyiyQyvSsyB+s
-	m8CW/RTP4QU2TV6oQzEHAeSPCvnxabYimads5nPzEdt8RTcMowf9yu/ervVZ9Y6ylSh+
-	A6qXwSa2h+d+hrTO86mOpmBlhjuQaGKmNw+f4=
-MIME-Version: 1.0
-Received: by 10.181.36.18 with SMTP id o18mr2914139bkj.136.1236163765156; Wed, 
-	04 Mar 2009 02:49:25 -0800 (PST)
-In-Reply-To: <20090304101045.GA736@gmail.com>
-References: <20090304101045.GA736@gmail.com>
-Date: Wed, 4 Mar 2009 12:49:25 +0200
-Message-ID: <fce2a370903040249t78b98997j8f4a83be45b1d27d@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [patch] Fix for nfs-utils tools build
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Leojr-0002kL-PG
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 11:55:00 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1Leofq-0000hh-7w
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 10:50:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 04 Mar 2009 10:50:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 04 Mar 2009 10:50:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 04 Mar 2009 11:47:42 +0100
+Message-ID: <golm8g$c2m$1@ger.gmane.org>
+References: <20090211213312.919E8189338@amethyst.openembedded.net>	<20090303133626.5706500e@mobil.site>	<ac9c93b10903030453g6bdfb268ubb30f3854e667d12@mail.gmail.com>	<20090303182231.2a9b2007@mobil.site>	<565965130903031700o49cfcaf3r44e81101971f436c@mail.gmail.com>
+	<20090304112631.4cc70f62@mobil.site>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
+In-Reply-To: <20090304112631.4cc70f62@mobil.site>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [oe-commits] Frans Meulenbroeks : opkg: fix bug that occured with file names of exactly 100 chars in the tar file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,39 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 10:54:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Mar 2009 10:55:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-That's what I was going to send to ML now. Voting for this patch.
+On 04-03-09 11:26, Krzysztof Kotlenga wrote:
+> Tick wrote:
+>
+>> Hi kjk,
+>>    Thanks, patch applied as R203
+>
+> Thanks Tick.
+> Since Koen has bumped opkg SRCREV to r203, now we have one problem
+> left: opkg_unarchive.patch has to be disabled/removed. Otherwise it
+> breaks what was fixed here.
 
-On Wed, Mar 4, 2009 at 12:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> Hi
->
-> Currently nfs-utils 1.1.2 does not build correctly. The reason is that
-> there are certain tools which are passed in CFLAGS in their makefiles
-> even though they are to be build using host compiler for them to be run
-> on host machine.
->
-> Current builds use target headers to build them due to CFLAGS funkiness
-> where we have alters system include dirs. This goes ok with arm and x86
-> but on mips you see errors.
->
-> This patch fixes the issue
->
-> OK for .dev
->
-> Thx
->
-> -Khem
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Oops, forgot to commit that bit, sorry. It's in now.
+
+regards,
+
+Koen
+
+
 
 
