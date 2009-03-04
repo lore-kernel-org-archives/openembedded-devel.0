@@ -1,28 +1,28 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LezBi-0003E8-9S
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 23:03:38 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao107.cox.net
+	(envelope-from <trini@kernel.crashing.org>) id 1Lf096-00010X-9d
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 00:05:05 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090304215921.KEIY10385.fed1rmmtao107.cox.net@fed1rmimpo03.cox.net>
+	<20090304230042.SSIW27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Wed, 4 Mar 2009 16:59:21 -0500
+	Wed, 4 Mar 2009 18:00:42 -0500
 Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id P9zM1b0084dMFYL049zMqF; Wed, 04 Mar 2009 16:59:21 -0500
-X-Authority-Analysis: v=1.0 c=1 a=V5V9HtveiJkA:10 a=uNyGdzrO2vsA:10
-	a=yKtI0ae-VplE7RRuheoA:9 a=zqluDS7YDb3b_CEBUNccRbh6FboA:4
-	a=LY0hPdMaydYA:10
+	id PB0i1b00T4dMFYL04B0jXA; Wed, 04 Mar 2009 18:00:43 -0500
+X-Authority-Analysis: v=1.0 c=1 a=wFN6jymYzWsA:10 a=b2ZvGRdsAAAA:8
+	a=fGO4tVQLAAAA:8 a=wUVHpReK7uqhoESgqm0A:9
+	a=8-lH7ZoRsm_mBFYCuAJI7vxn_DMA:4 a=LY0hPdMaydYA:10
 X-CM-Score: 0.00
-Date: Wed, 4 Mar 2009 14:59:21 -0700
+Date: Wed, 4 Mar 2009 16:00:42 -0700
 From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-Message-ID: <20090304215921.GB26343@smtp.west.cox.net>
-References: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A2@EXCHSRVR.syntech.org>
+Message-ID: <20090304230042.GD26343@smtp.west.cox.net>
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 MIME-Version: 1.0
-In-Reply-To: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A2@EXCHSRVR.syntech.org>
+In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Getting "fatal: Not a git repository"
+Subject: Re: Merging RPM support from Poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,41 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 22:03:39 -0000
+X-List-Received-Date: Wed, 04 Mar 2009 23:05:21 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Mar 04, 2009 at 04:54:56PM -0500, Mark Butsch wrote:
+On Wed, Mar 04, 2009 at 04:52:15PM +0100, Marcin Juszkiewicz wrote:
 
-> Hello,
+> As some of you know Poky has RPM support written. It consists few parts:
 > 
-> I am getting the message "fatal: Not a git repository" when I build. It
-> doesn't seem to be causing a problem, but it bothers me none the less.
+> - creating RPM packages
+> - creating rootfs from RPM packages
+> - using RPM/YUM on device to managing packages (installing from local and
+>   remote packages
+> 
+> I had one attempt to get it merged before but it had some bugs so I started
+> from scratch. Extracting required patches from pile of 1800 Poky changsets
+> took me some time.
+> 
+> With this patchset I managed to build 'minimal-image' for AT91SAM9263-EK
+> machine. As distribution I used 'minimal' to get something other then
+> Angstrom.
+> 
+> So please review it (patch 67 is already merged in .dev tree).
+> 
+> It is also visible on Web: http://cgit.openembedded.net/cgit.cgi?url=openembedded/log/&h=hrw/poky-merge/add-rpm-packages-support
+> 
+> Fetch via: git pull hrw/poky-merge/add-rpm-packages-support
 
-Totally untested:
-
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 18afc1a..d716bcb 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -807,7 +807,7 @@ def base_get_metadata_svn_revision(d):
- 
- def base_get_metadata_git_branch(d):
- 	import os
--	branch = os.popen('cd %s; git branch | grep "^* " | tr -d "* "' % base_get_scmbasepath(d)).read()
-+	branch = os.popen('cd %s; git branch 2>/dev/null | grep "^* " | tr -d "* "' % base_get_scmbasepath(d)).read()
- 
- 	if len(branch) != 0:
- 		return branch
-@@ -815,7 +815,7 @@ def base_get_metadata_git_branch(d):
- 
- def base_get_metadata_git_revision(d):
- 	import os
--	rev = os.popen("cd %s; git log -n 1 --pretty=oneline --" % base_get_scmbasepath(d)).read().split(" ")[0]
-+	rev = os.popen("cd %s; git log -n 1 --pretty=oneline -- 2>/dev/null" % base_get_scmbasepath(d)).read().split(" ")[0]
- 	if len(rev) != 0:
- 		return rev
- 	return "<unknown>"
+OK.  I got a failure that I'm not quite sure where it's from, other than
+rootfs_rpm.bbclass.  Log is http://pastebin.com/d64e6cd01
+MACHINE=nokia800 DISTRO=minimal and unrelated to BB_NUMBER_THREADS /
+PARALLEL_MAKE.
 
 -- 
 Tom Rini
