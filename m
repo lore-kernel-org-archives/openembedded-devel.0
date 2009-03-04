@@ -1,24 +1,24 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetaY-0005Zp-RG
+	(envelope-from <hrw@juszkiewicz.com.pl>) id 1Letac-0005aA-Mb
 	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 17:05:01 +0100
-Received: (qmail 27432 invoked by uid 813007); 4 Mar 2009 15:54:00 -0000
+Received: (qmail 27751 invoked by uid 813007); 4 Mar 2009 15:54:06 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 89.78.173.235 (HELO localhost)
 	(smtp?user@juszkiewicz.com.pl@89.78.173.235)
-	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:54:00 -0000
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:54:06 -0000
 Received: from hrw by localhost with local (Exim 4.69)
 	(envelope-from <hrw@hrw.one.pl>)
-	id 1LetPt-0001EM-FK; Wed, 04 Mar 2009 16:53:53 +0100
+	id 1LetPz-0001Eh-6r; Wed, 04 Mar 2009 16:53:59 +0100
 From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2009 16:52:50 +0100
-Message-Id: <1236182004-4523-36-git-send-email-openembedded@haerwu.biz>
+Date: Wed,  4 Mar 2009 16:52:57 +0100
+Message-Id: <1236182004-4523-43-git-send-email-openembedded@haerwu.biz>
 X-Mailer: git-send-email 1.6.1.3
 In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 Cc: Richard Purdie <richard@openedhand.com>
-Subject: [PATCH 35/70] package_rpm.bbclass: Fix empty package handling, handle package dependency renaming by adding a missing function call and expand RPMBUILD before changing the dictonary so local PV/PR changes don't break the WORKDIR variable expansion (from Poky)
+Subject: [PATCH 42/70] package_rpm.bbclass: Fix dependency rebuilding bug (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,49 +36,24 @@ X-List-Received-Date: Wed, 04 Mar 2009 16:05:07 -0000
 
 From: Richard Purdie <richard@openedhand.com>
 
-git-svn-id: https://svn.o-hand.com/repos/poky@5100 311d38ba-8fff-0310-9ca6-ca027cbcb966
+git-svn-id: https://svn.o-hand.com/repos/poky@5397 311d38ba-8fff-0310-9ca6-ca027cbcb966
 ---
- classes/package_rpm.bbclass |   12 ++++++++----
- 1 files changed, 8 insertions(+), 4 deletions(-)
+ classes/package_rpm.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/classes/package_rpm.bbclass b/classes/package_rpm.bbclass
-index 7c69063..0b93266 100644
+index de4d898..93cfd35 100644
 --- a/classes/package_rpm.bbclass
 +++ b/classes/package_rpm.bbclass
-@@ -43,7 +43,7 @@ python write_specfile() {
- 			del files[files.index(r)]
- 		except ValueError:
- 			pass
--	if not files:
-+	if not files and bb.data.getVar('ALLOW_EMPTY', d) != "1":
- 		from bb import note
- 		note("Not creating empty archive for %s" % (bb.data.expand('${PKG}-${PV}-${PR}${DISTRO_PR}', d, True))
- 		return
-@@ -62,10 +62,11 @@ python write_specfile() {
- 		if out_vartranslate[var][0] == "%":
- 			continue
- 		val = bb.data.getVar(var, d, 1)
--		if var == "RDEPENDS":
--			val = val.split()[0]
- 		fd.write("%s\t: %s\n" % (out_vartranslate[var], val))
--	rdepends = " ".join(bb.utils.explode_deps(bb.data.getVar('RDEPENDS', d, True)))
-+
-+	bb.build.exec_func("mapping_rename_hook", d)
-+	rdepends = " ".join(bb.utils.explode_deps(bb.data.getVar('RDEPENDS', d, True) or ""))
-+
- 	if rdepends:
- 		fd.write("Requires: %s\n" % rdepends)
-         fd.write("Release\t: %s\n" % bb.data.expand('${PR}${DISTRO_PR}', d, True)
-@@ -158,6 +159,9 @@ python do_package_rpm () {
- 		pkgoutdir = outdir
- 		bb.mkdirhier(pkgoutdir)
- 		bb.data.setVar('OUTSPECFILE', os.path.join(workdir, "%s.spec" % pkg), localdata)
-+		# Save the value of RPMBUILD expanded into the new dictonary so any 
-+		# changes in the compoents that make up workdir don't break packaging
-+		bb.data.setVar('RPMBUILD', bb.data.getVar("RPMBUILD", d, True), localdata)
- 		bb.build.exec_func('write_specfile', localdata)
- 		bb.utils.unlockfile(lf)
- }
+@@ -85,7 +85,7 @@ python write_specfile() {
+ 				newdeps.append("%s (%s)" % (dep, ver))
+ 			elif dep:
+ 				newdeps.append(dep)
+-		bb.data.setVar(varname, ", ".join(newdeps), d)
++		bb.data.setVar(varname, " ".join(newdeps), d)
+ 
+ 	fix_dep_versions('RDEPENDS')
+ 	fix_dep_versions('RRECOMMENDS')
 -- 
 1.6.1.3
 
