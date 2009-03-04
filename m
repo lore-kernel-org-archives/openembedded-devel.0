@@ -1,24 +1,24 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hrw@juszkiewicz.com.pl>) id 1Letab-0005a3-Jf
+	(envelope-from <hrw@juszkiewicz.com.pl>) id 1Letae-0005aX-Sp
 	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 17:05:01 +0100
-Received: (qmail 27642 invoked by uid 813007); 4 Mar 2009 15:54:04 -0000
+Received: (qmail 27851 invoked by uid 813007); 4 Mar 2009 15:54:08 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 89.78.173.235 (HELO localhost)
 	(smtp?user@juszkiewicz.com.pl@89.78.173.235)
-	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:54:04 -0000
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:54:08 -0000
 Received: from hrw by localhost with local (Exim 4.69)
 	(envelope-from <hrw@hrw.one.pl>)
-	id 1LetPw-0001EY-OY; Wed, 04 Mar 2009 16:53:56 +0100
+	id 1LetQ0-0001Ep-RL; Wed, 04 Mar 2009 16:54:00 +0100
 From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2009 16:52:54 +0100
-Message-Id: <1236182004-4523-40-git-send-email-openembedded@haerwu.biz>
+Date: Wed,  4 Mar 2009 16:52:59 +0100
+Message-Id: <1236182004-4523-45-git-send-email-openembedded@haerwu.biz>
 X-Mailer: git-send-email 1.6.1.3
 In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 Cc: Richard Purdie <richard@openedhand.com>
-Subject: [PATCH 39/70] package_rpm.bbclass: Add support for postinst and preinst scripts (from Poky)
+Subject: [PATCH 44/70] rootfs_rpm.bbclass: Remove the feed directory before packaging the image (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,47 +36,23 @@ X-List-Received-Date: Wed, 04 Mar 2009 16:05:07 -0000
 
 From: Richard Purdie <richard@openedhand.com>
 
-git-svn-id: https://svn.o-hand.com/repos/poky@5131 311d38ba-8fff-0310-9ca6-ca027cbcb966
+git-svn-id: https://svn.o-hand.com/repos/poky@5112 311d38ba-8fff-0310-9ca6-ca027cbcb966
 ---
- classes/package_rpm.bbclass |   11 ++++++++---
- 1 files changed, 8 insertions(+), 3 deletions(-)
+ classes/rootfs_rpm.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/classes/package_rpm.bbclass b/classes/package_rpm.bbclass
-index 040d8b8..47fbb38 100644
---- a/classes/package_rpm.bbclass
-+++ b/classes/package_rpm.bbclass
-@@ -24,6 +24,8 @@ python write_specfile() {
- 		"ROOT": "BuildRoot",
- 		"LICENSE": "License",
- 		"SECTION": "Group",
-+		"pkg_postinst": "%post",
-+		"pkg_preinst": "%pre",
- 	}
+diff --git a/classes/rootfs_rpm.bbclass b/classes/rootfs_rpm.bbclass
+index 7e969a7..8da7f3a 100644
+--- a/classes/rootfs_rpm.bbclass
++++ b/classes/rootfs_rpm.bbclass
+@@ -96,6 +96,7 @@ EOF
+ 	rm -rf ${IMAGE_ROOTFS}/var/cache2/
+ 	rm -rf ${IMAGE_ROOTFS}/var/run2/
+ 	rm -rf ${IMAGE_ROOTFS}/var/log2/
++	rm -rf ${IMAGE_ROOTFS}${DEPLOY_DIR_RPM}/
  
- 	root = bb.data.getVar('ROOT', d)
-@@ -67,7 +69,8 @@ python write_specfile() {
- 		if out_vartranslate[var][0] == "%":
- 			continue
- 		val = bb.data.getVar(var, d, 1)
--		fd.write("%s\t: %s\n" % (out_vartranslate[var], val))
-+		if val:
-+			fd.write("%s\t: %s\n" % (out_vartranslate[var], val))
- 
- 	fd.write("AutoReqProv: no\n")
- 
-@@ -96,8 +99,10 @@ python write_specfile() {
- 	for var in out_vartranslate.keys():
- 		if out_vartranslate[var][0] != "%":
- 			continue
--		fd.write(out_vartranslate[var] + "\n")
--		fd.write(bb.data.getVar(var, d) + "\n\n")
-+		val = bb.data.getVar(var, d)
-+		if val:
-+			fd.write(out_vartranslate[var] + "\n")
-+			fd.write(val + "\n\n")
- 
- 	fd.write("%files\n")
- 	for file in files:
+ 	log_check rootfs 	
+ }
 -- 
 1.6.1.3
 
