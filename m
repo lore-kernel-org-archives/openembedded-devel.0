@@ -1,28 +1,38 @@
-Received: from [64.18.0.186] (helo=exprod5og108.obsmtp.com)
+Received: from [209.85.200.168] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1Lenwt-0004mB-8H
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 11:03:49 +0100
-Received: from source ([12.71.149.1]) (using TLSv1) by
-	exprod5ob108.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKSa5Q+wViVPZ/J87i7YSJsNoDYbRY/+kq@postini.com;
-	Wed, 04 Mar 2009 01:59:25 PST
-Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
-	by Cinmlip05.e2k.ad.ge.com with ESMTP; 04 Mar 2009 04:59:20 -0500
-Received: from ind-3n4b83jh1.amer.consind.ge.com (HELO [192.168.219.128])
-	([3.138.54.81])
-	by cinmlip01.e2k.ad.ge.com with ESMTP; 04 Mar 2009 04:59:20 -0500
-Message-ID: <49AE5117.5020806@gefanuc.com>
-Date: Wed, 04 Mar 2009 09:59:51 +0000
-From: Martyn Welch <martyn.welch@gefanuc.com>
-Organization: GE Fanuc Intelligent Platforms Ltd.
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	(envelope-from <raj.khem@gmail.com>) id 1Leo7x-00050L-I0
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 11:16:08 +0100
+Received: by wf-out-1314.google.com with SMTP id 28so3959449wff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Mar 2009 02:10:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=zC3aKt1kpMwQDP6VD69U2d9bFb7CMJOOv1W61zneyiI=;
+	b=GQiU1zFouyOmuiyp1VDvDMeXJzESxBue4Tob4cy4p14JnqT9Rnadkv8Sk4HJvc7Qvh
+	VcOgEkbF+F1eYhyaNKZekNSPorWaROgzozloXrY9PT98Q7tsDjJ/MyQxJR6cXyiGavJX
+	00h6OBo1mrPA8ZYzY9NVoN45j7hmelARV8FoU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=Xujm6VmC+JLrlrn1Y/5MMHL1RYNVWskGvxw5b91SSM9xhc9EQMLdiM0FSGj08zn4q4
+	H17M29qv/r0VjWZmR3u3jVPDCCR737xs6/wwleT6S3LjLnORdS39TDKwY6HQFCA9qbkG
+	V8gosFPwuq8E2gyF/JjgCpDsyLfSTP4xe2cDM=
+Received: by 10.143.28.8 with SMTP id f8mr4122673wfj.204.1236161451070;
+	Wed, 04 Mar 2009 02:10:51 -0800 (PST)
+Received: from gmail.com (adsl-71-146-1-99.dsl.pltn13.sbcglobal.net
+	[71.146.1.99])
+	by mx.google.com with ESMTPS id 24sm13717510wfc.57.2009.03.04.02.10.49
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Mar 2009 02:10:50 -0800 (PST)
+Date: Wed, 4 Mar 2009 02:10:45 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090304101045.GA736@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <20090303204954.CCB9CE8008@amethyst.openembedded.net>	<1236119119.10602.62.camel@andromeda>
-	<49ADB183.5070709@balister.org>
-	<1236120999.10602.70.camel@andromeda>
-In-Reply-To: <1236120999.10602.70.camel@andromeda>
-Subject: Re: [oe-commits] Koen Kooi : angstrom 2009.X: bump automake-native to 1.10. 2 since some idiot deleted 1.10
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: [patch] Fix for nfs-utils tools build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,64 +46,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 10:04:27 -0000
-X-List-Received-Date: Wed, 04 Mar 2009 10:04:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Mar 2009 10:23:22 -0000
+X-Groupsio-MsgNum: 8125
+Content-Type: multipart/mixed; boundary="YZ5djTAD1cGYuMQK"
+Content-Disposition: inline
 
-Michael 'Mickey' Lauer wrote:
-> Am Dienstag, den 03.03.2009, 17:38 -0500 schrieb Philip Balister:
->> Michael 'Mickey' Lauer wrote:
->>> Am Dienstag, den 03.03.2009, 21:49 +0100 schrieb GIT User account:
->>>> Module: openembedded.git
->>>> Branch: org.openembedded.dev
->>>> Commit: eee859a9c348871d6d644ece76bc57b151cc80e8
->>>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=eee859a9c348871d6d644ece76bc57b151cc80e8
->>>>
->>>> Author: Koen Kooi <koen@openembedded.org>
->>>> Date:   Tue Mar  3 21:47:57 2009 +0100
->>>>
->>>> angstrom 2009.X: bump automake-native to 1.10.2 since some idiot deleted 1.10
->>> Ah, are we in that mood again? Take more pills.
->> We need to have a serious discussion about deleting recipes. I know the 
->> deletion of python 2.5 will force me to address the 2.5->2.6 upgrade in 
->> gnuradio before the upstream developers are ready.
->>
->> We need a way to remove recipes, but doing it as part of adding a new 
->> recipe is causing problems for OE users.
-> 
-> Yes, we need to have a serious discussion about lots of things
-> surrounding the OpenEmbedded project, before the popularity kills the
-> project. Judging from the amount of interest though, I don't see that
-> happening -- neither short term nor long term.
-> 
+--YZ5djTAD1cGYuMQK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Ok, so if a serious discussion is out of the question, lets just have a normal discussion.
+Hi
 
-I see this issue to be partially related to the on going discussions regarding submissions. I assume that the "Commit_Policy"[1] on the wiki is either unofficial, out-of-date or optional as it states:
+Currently nfs-utils 1.1.2 does not build correctly. The reason is that
+there are certain tools which are passed in CFLAGS in their makefiles
+even though they are to be build using host compiler for them to be run
+on host machine. 
 
-* Changes to core toolchain components need review (gcc, binutils, 
-   libtool, pkgconfig, automake, autoconf etc.)
+Current builds use target headers to build them due to CFLAGS funkiness
+where we have alters system include dirs. This goes ok with arm and x86
+but on mips you see errors.
 
-Where:
+This patch fixes the issue
 
-"Review" is defined as posting it on the mailing lists and getting positive agreement from two or more core developers. 
+OK for .dev
 
-Now a quick check of my OpenEmbedded mail folder doesn't chuck up any messages with automake in the title that have a patch with this commit. Maybe I'm looking on the wrong mailing list.
+Thx
 
-Given that the commit policy does seem to be quite a sensible suggestion (it's part of the mechanism that seems to work quit well for the Linux kernel), maybe it needs a little bit of work to qualify it a little (which mailing list for example) and get some more links to it (for example there is no mention of a commit policy in the "adding packages"[2] section of the "Getting started guide".
-
-If nobody objects, I will happily add the link.
-
-Martyn
-
-[1] http://wiki.openembedded.net/index.php/Commit_Policy
-[2] http://wiki.openembedded.net/index.php/Getting_started#Adding_Packages
-
--- 
-Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
-GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
-Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
-Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 729849476
+-Khem
 
 
+
+--YZ5djTAD1cGYuMQK
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="nfs-utils-tools-unset-cflags.patch"
+
+Index: nfs-utils-1.1.2/tools/Makefile.am
+===================================================================
+--- nfs-utils-1.1.2.orig/tools/Makefile.am	2008-03-14 08:46:29.000000000 -0700
++++ nfs-utils-1.1.2/tools/Makefile.am	2009-03-04 01:58:50.000000000 -0800
+@@ -5,7 +5,10 @@
+ if CONFIG_RPCGEN
+ OPTDIRS += rpcgen
+ endif
+-
++CFLAGS=$(CFLAGS_FOR_BUILD)
++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
++LDFLAGS=$(LDFLAGS_FOR_BUILD)
+ SUBDIRS = locktest rpcdebug nlmtest $(OPTDIRS)
+ 
+ MAINTAINERCLEANFILES = Makefile.in
+Index: nfs-utils-1.1.2/tools/locktest/Makefile.am
+===================================================================
+--- nfs-utils-1.1.2.orig/tools/locktest/Makefile.am	2008-03-14 08:46:29.000000000 -0700
++++ nfs-utils-1.1.2/tools/locktest/Makefile.am	2009-03-04 01:58:50.000000000 -0800
+@@ -1,12 +1,13 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+ CC=$(CC_FOR_BUILD)
++CFLAGS=$(CFLAGS_FOR_BUILD)
++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
++LDFLAGS=$(LDFLAGS_FOR_BUILD)
+ LIBTOOL = @LIBTOOL@ --tag=CC
+ 
+ noinst_PROGRAMS = testlk
+ testlk_SOURCES = testlk.c
+-testlk_CFLAGS=$(CFLAGS_FOR_BUILD)
+-testlk_CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
+-testlk_LDFLAGS=$(LDFLAGS_FOR_BUILD)
+ 
+ MAINTAINERCLEANFILES = Makefile.in
+Index: nfs-utils-1.1.2/tools/nlmtest/Makefile.am
+===================================================================
+--- nfs-utils-1.1.2.orig/tools/nlmtest/Makefile.am	2008-03-14 08:46:29.000000000 -0700
++++ nfs-utils-1.1.2/tools/nlmtest/Makefile.am	2009-03-04 01:58:50.000000000 -0800
+@@ -1,5 +1,8 @@
+ ## Process this file with automake to produce Makefile.in
+-
++CFLAGS=$(CFLAGS_FOR_BUILD)
++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
++LDFLAGS=$(LDFLAGS_FOR_BUILD)
+ EXTRA_DIST = \
+ 	README \
+ 	host.h \
+Index: nfs-utils-1.1.2/tools/rpcgen/Makefile.am
+===================================================================
+--- nfs-utils-1.1.2.orig/tools/rpcgen/Makefile.am	2008-03-14 08:46:29.000000000 -0700
++++ nfs-utils-1.1.2/tools/rpcgen/Makefile.am	2009-03-04 01:58:50.000000000 -0800
+@@ -1,6 +1,10 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+ CC=$(CC_FOR_BUILD)
++CFLAGS=$(CFLAGS_FOR_BUILD)
++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
++LDFLAGS=$(LDFLAGS_FOR_BUILD)
+ LIBTOOL = @LIBTOOL@ --tag=CC
+ 
+ noinst_PROGRAMS = rpcgen
+@@ -9,10 +13,6 @@
+ 		 rpc_util.c rpc_sample.c rpc_output.h rpc_parse.h \
+ 		 rpc_scan.h rpc_util.h
+ 
+-rpcgen_CFLAGS=$(CFLAGS_FOR_BUILD)
+-rpcgen_CPPLAGS=$(CPPFLAGS_FOR_BUILD)
+-rpcgen_LDFLAGS=$(LDFLAGS_FOR_BUILD)
+-
+ MAINTAINERCLEANFILES = Makefile.in
+ 
+ EXTRA_DIST = rpcgen.new.1
+Index: nfs-utils-1.1.2/tools/rpcdebug/Makefile.am
+===================================================================
+--- nfs-utils-1.1.2.orig/tools/rpcdebug/Makefile.am	2009-03-04 02:01:41.000000000 -0800
++++ nfs-utils-1.1.2/tools/rpcdebug/Makefile.am	2009-03-04 02:02:42.000000000 -0800
+@@ -1,6 +1,10 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+ CC=$(CC_FOR_BUILD)
++CFLAGS=$(CFLAGS_FOR_BUILD)
++CPPFLAGS=$(CPPFLAGS_FOR_BUILD)
++CXXFLAGS=$(CXXFLAGS_FOR_BUILD)
++LDFLAGS=$(LDFLAGS_FOR_BUILD)
+ LIBTOOL = @LIBTOOL@ --tag=CC
+ 
+ man8_MANS = rpcdebug.man
+
+--YZ5djTAD1cGYuMQK--
