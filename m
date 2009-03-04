@@ -1,24 +1,24 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetTg-0005OM-2c
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 16:57:52 +0100
-Received: (qmail 26255 invoked by uid 813007); 4 Mar 2009 15:53:35 -0000
+	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetTh-0005OO-Nd
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 16:57:54 +0100
+Received: (qmail 26340 invoked by uid 813007); 4 Mar 2009 15:53:37 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 89.78.173.235 (HELO localhost)
 	(smtp?user@juszkiewicz.com.pl@89.78.173.235)
-	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:53:35 -0000
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:53:37 -0000
 Received: from hrw by localhost with local (Exim 4.69)
 	(envelope-from <hrw@hrw.one.pl>)
-	id 1LetPU-0001Ck-01; Wed, 04 Mar 2009 16:53:28 +0100
+	id 1LetPV-0001Cq-KA; Wed, 04 Mar 2009 16:53:29 +0100
 From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2009 16:52:19 +0100
-Message-Id: <1236182004-4523-5-git-send-email-openembedded@haerwu.biz>
+Date: Wed,  4 Mar 2009 16:52:21 +0100
+Message-Id: <1236182004-4523-7-git-send-email-openembedded@haerwu.biz>
 X-Mailer: git-send-email 1.6.1.3
 In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 Cc: Richard Purdie <richard@openedhand.com>
-Subject: [PATCH 04/70] rpm: Enable python extensions and improve cross compiling patches (from Poky)
+Subject: [PATCH 06/70] rpm: Add recommends support from suse rpm patches (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,308 +33,399 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 04 Mar 2009 15:59:35 -0000
-X-List-Received-Date: Wed, 04 Mar 2009 15:59:35 -0000
 
 From: Richard Purdie <richard@openedhand.com>
 
-git-svn-id: https://svn.o-hand.com/repos/poky@5093 311d38ba-8fff-0310-9ca6-ca027cbcb966
+git-svn-id: https://svn.o-hand.com/repos/poky@5113 311d38ba-8fff-0310-9ca6-ca027cbcb966
 ---
- packages/rpm/files/cross_libpaths.patch |  140 +++++++++++++++++++++++++------
- packages/rpm/files/external-tools.patch |    4 +-
- packages/rpm/rpm-native_4.4.2.3.bb      |    3 +-
- packages/rpm/rpm_4.4.2.3.bb             |   18 ++++-
- 4 files changed, 133 insertions(+), 32 deletions(-)
+ packages/rpm/files/tagsbackport.patch |   37 ++++
+ packages/rpm/files/weakdeps.patch     |  312 +++++++++++++++++++++++++++++++++
+ packages/rpm/rpm_4.4.2.3.bb           |    6 +-
+ 3 files changed, 353 insertions(+), 2 deletions(-)
+ create mode 100644 packages/rpm/files/tagsbackport.patch
+ create mode 100644 packages/rpm/files/weakdeps.patch
 
-diff --git a/packages/rpm/files/cross_libpaths.patch b/packages/rpm/files/cross_libpaths.patch
-index 4fed9b7..798db15 100644
---- a/packages/rpm/files/cross_libpaths.patch
-+++ b/packages/rpm/files/cross_libpaths.patch
-@@ -1,7 +1,7 @@
- Index: rpm-4.4.2.3/configure.ac
- ===================================================================
----- rpm-4.4.2.3.orig/configure.ac	2008-08-18 10:25:14.000000000 +0100
--+++ rpm-4.4.2.3/configure.ac	2008-08-18 10:25:14.000000000 +0100
-+--- rpm-4.4.2.3.orig/configure.ac	2008-08-23 16:03:51.000000000 +0100
-++++ rpm-4.4.2.3/configure.ac	2008-08-25 16:26:11.000000000 +0100
- @@ -326,10 +326,8 @@
-  
-  localdone=
-@@ -40,23 +40,47 @@ Index: rpm-4.4.2.3/configure.ac
-      WITH_NEON_LIB="-lneon"
-    ])
-  ],[
-+@@ -857,6 +856,12 @@
-+ dnl
-+ dnl Auto-detect which python bindings should be built.
-+ dnl
+diff --git a/packages/rpm/files/tagsbackport.patch b/packages/rpm/files/tagsbackport.patch
+new file mode 100644
+index 0000000..a2a3609
+--- /dev/null
++++ b/packages/rpm/files/tagsbackport.patch
+@@ -0,0 +1,37 @@
++Backported some new tags and sense values.
++
++Index: lib/rpmlib.h
++===================================================================
++--- lib/rpmlib.h.orig	2008-08-26 17:07:12.000000000 +0100
+++++ lib/rpmlib.h	2008-08-26 17:22:21.000000000 +0100
++@@ -447,7 +447,19 @@
++     RPMTAG_PRIORITY		= 1162, /* i   extension placeholder */
++     RPMTAG_CVSID		= 1163, /* s */
++ #define	RPMTAG_SVNID	RPMTAG_CVSID	/* s */
+++    RPMTAG_BLINKPKGID		= 1164, /* s[] */
+++    RPMTAG_BLINKHDRID		= 1165, /* s[] */
+++    RPMTAG_BLINKNEVRA		= 1166, /* s[] */
+++    RPMTAG_FLINKPKGID		= 1167, /* s[] */
+++    RPMTAG_FLINKHDRID		= 1168, /* s[] */
+++    RPMTAG_FLINKNEVRA		= 1169, /* s[] */
+++    RPMTAG_PACKAGEORIGIN	= 1170, /* s */
++     RPMTAG_TRIGGERPREIN		= 1171, /*!< internal */
+++    RPMTAG_BUILDSUGGESTS	= 1172, /*!< internal */
+++    RPMTAG_BUILDENHANCES	= 1173, /*!< internal */
+++    RPMTAG_SCRIPTSTATES		= 1174, /*!< i scriptlet exit codes */
+++    RPMTAG_SCRIPTMETRICS	= 1175, /*!< i scriptlet execution times */
+++    RPMTAG_BUILDCPUCLOCK	= 1176, /*!< i */
++ 
++ /*@-enummemuse@*/
++     RPMTAG_FIRSTFREE_TAG	/*!< internal */
++@@ -531,7 +543,9 @@
++ /*@=enummemuse@*/
++     RPMSENSE_KEYRING	= (1 << 26),
++     RPMSENSE_STRONG	= (1 << 27),
++-    RPMSENSE_CONFIG	= (1 << 28)
+++    RPMSENSE_CONFIG	= (1 << 28),
+++    RPMSENSE_PROBE	= (1 << 29),
+++    RPMSENSE_PACKAGE	= (1 << 30)
++ } rpmsenseFlags;
++ 
++ #define	RPMSENSE_SENSEMASK	15	 /* Mask to get senses, ie serial, */
+diff --git a/packages/rpm/files/weakdeps.patch b/packages/rpm/files/weakdeps.patch
+new file mode 100644
+index 0000000..a013b75
+--- /dev/null
++++ b/packages/rpm/files/weakdeps.patch
+@@ -0,0 +1,312 @@
++Taken from OpenSUSE 11 rpm source file - RP 26/8/08
++
++Add support for weak dependencies:
++
++A) use RPMTAG_SUGGESTS and RPMTAG_ENHANCES to store them.
++
++   This is different to upstream, which uses RPMSENSE_MISSINGOK
++   and RPMTAG_REQUIRES/RPMTAG_PROVIDES instead. I chose different
++   tags because I wanted to be compatible. The point is that
++   applications that don't know about the new MISSINGOK semantics
++   will mis-interpret the provides/requires otherwise, which
++   I deemed to risky.
++
++B) use RPMSENSE_STRONG to support a "strong" version, "Recommends"
++   instead of "Suggests" and "Supplements" instead of "Enhances".
++
++Needs extcond.diff for query operations.
++
++Index: build/parsePreamble.c
++===================================================================
++--- build/parsePreamble.c.orig	2008-04-01 08:28:21.000000000 +0100
+++++ build/parsePreamble.c	2008-08-26 16:58:09.000000000 +0100
++@@ -129,6 +129,8 @@
++     { "post",		RPMSENSE_SCRIPT_POST },
++     { "rpmlib",		RPMSENSE_RPMLIB },
++     { "verify",		RPMSENSE_SCRIPT_VERIFY },
+++    { "hint",		RPMSENSE_MISSINGOK },
+++    { "strong",		RPMSENSE_STRONG },
++     { NULL, 0 }
++ };
++ 
++@@ -140,6 +142,8 @@
++     { "build",		RPMSENSE_SCRIPT_BUILD },
++     { "install",	RPMSENSE_SCRIPT_INSTALL },
++     { "clean",		RPMSENSE_SCRIPT_CLEAN },
+++    { "hint",		RPMSENSE_MISSINGOK },
+++    { "strong",		RPMSENSE_STRONG },
++     { NULL, 0 }
++ };
++ 
++@@ -692,6 +696,18 @@
++ 	if ((rc = parseRCPOT(spec, pkg, field, tag, 0, tagflags)))
++ 	    return rc;
++ 	break;
+++    case RPMTAG_SUGGESTSFLAGS:
+++    case RPMTAG_ENHANCESFLAGS:
+++    case RPMTAG_BUILDSUGGESTS:
+++    case RPMTAG_BUILDENHANCES:
+++	tagflags = RPMSENSE_MISSINGOK;
+++	if (macro && (!strcmp(macro, "recommends") || !strcmp(macro, "buildrecommends")))
+++	    tagflags |= RPMSENSE_STRONG;
+++	if (macro && (!strcmp(macro, "supplements") || !strcmp(macro, "buildsupplements")))
+++	    tagflags |= RPMSENSE_STRONG;
+++	if ((rc = parseRCPOT(spec, pkg, field, tag, 0, tagflags)))
+++	    return rc;
+++	break;
++     case RPMTAG_EXCLUDEARCH:
++     case RPMTAG_EXCLUSIVEARCH:
++     case RPMTAG_EXCLUDEOS:
++@@ -783,6 +799,14 @@
++     {RPMTAG_DISTTAG,		0, 0, 0, "disttag"},
++     {RPMTAG_CVSID,		0, 0, 0, "cvsid"},
++     {RPMTAG_SVNID,		0, 0, 0, "svnid"},
+++    {RPMTAG_SUGGESTSFLAGS,	0, 0, 0, "recommends"},
+++    {RPMTAG_SUGGESTSFLAGS,	0, 0, 0, "suggests"},
+++    {RPMTAG_ENHANCESFLAGS,	0, 0, 0, "supplements"},
+++    {RPMTAG_ENHANCESFLAGS,	0, 0, 0, "enhances"},
+++    {RPMTAG_BUILDSUGGESTS,	0, 0, 0, "buildrecommends"},
+++    {RPMTAG_BUILDSUGGESTS,	0, 0, 0, "buildsuggests"},
+++    {RPMTAG_BUILDENHANCES,	0, 0, 0, "buildsupplements"},
+++    {RPMTAG_BUILDENHANCES,	0, 0, 0, "buildenhances"},
++     /*@-nullassign@*/	/* LCL: can't add null annotation */
++     {0, 0, 0, 0, 0}
++     /*@=nullassign@*/
++Index: build/parseReqs.c
++===================================================================
++--- build/parseReqs.c.orig	2008-04-01 08:28:21.000000000 +0100
+++++ build/parseReqs.c	2008-08-26 16:58:09.000000000 +0100
++@@ -85,6 +85,14 @@
++ 	tagflags |= RPMSENSE_ANY;
++ 	h = spec->buildRestrictions;
++ 	break;
+++    case RPMTAG_SUGGESTSFLAGS:
+++    case RPMTAG_ENHANCESFLAGS:
+++	h = pkg->header;
+++	break;
+++    case RPMTAG_BUILDSUGGESTS:
+++    case RPMTAG_BUILDENHANCES:
+++        h = spec->buildRestrictions;
+++        break;
++     default:
++     case RPMTAG_REQUIREFLAGS:
++ 	tagflags |= RPMSENSE_ANY;
++Index: build/reqprov.c
++===================================================================
++--- build/reqprov.c.orig	2008-04-01 08:28:21.000000000 +0100
+++++ build/reqprov.c	2008-08-26 16:58:09.000000000 +0100
++@@ -48,6 +48,16 @@
++ 	flagtag = RPMTAG_TRIGGERFLAGS;
++ 	indextag = RPMTAG_TRIGGERINDEX;
++ 	extra = Flags & RPMSENSE_TRIGGER;
+++    } else if (tagN == RPMTAG_SUGGESTSFLAGS || tagN == RPMTAG_BUILDSUGGESTS) {
+++	nametag = RPMTAG_SUGGESTSNAME;
+++	versiontag = RPMTAG_SUGGESTSVERSION;
+++	flagtag = RPMTAG_SUGGESTSFLAGS;
+++	extra = Flags & _ALL_REQUIRES_MASK;
+++    } else if (tagN == RPMTAG_ENHANCESFLAGS || tagN == RPMTAG_BUILDENHANCES) {
+++	nametag = RPMTAG_ENHANCESNAME;
+++	versiontag = RPMTAG_ENHANCESVERSION;
+++	flagtag = RPMTAG_ENHANCESFLAGS;
+++	extra = Flags & _ALL_REQUIRES_MASK;
++     } else {
++ 	nametag = RPMTAG_REQUIRENAME;
++ 	versiontag = RPMTAG_REQUIREVERSION;
++Index: build/rpmfc.c
++===================================================================
++--- build/rpmfc.c.orig	2008-04-01 08:28:21.000000000 +0100
+++++ build/rpmfc.c	2008-08-26 16:58:09.000000000 +0100
++@@ -1385,6 +1385,12 @@
++   { "Obsoletes",	{ "%{?__find_obsoletes}", NULL, NULL, NULL },
++ 	RPMTAG_OBSOLETENAME, RPMTAG_OBSOLETEVERSION, RPMTAG_OBSOLETEFLAGS,
++ 	0, -1 },
+++  { "Enhances",		{ "%{?__find_enhances}", NULL, NULL, NULL },
+++	RPMTAG_ENHANCESNAME, RPMTAG_ENHANCESVERSION, RPMTAG_ENHANCESFLAGS,
+++	RPMSENSE_STRONG, RPMSENSE_STRONG },
+++  { "Supplements",	{ "%{?__find_supplements}", NULL, NULL, NULL },
+++	RPMTAG_ENHANCESNAME, RPMTAG_ENHANCESVERSION, RPMTAG_ENHANCESFLAGS,
+++	RPMSENSE_STRONG, 0 },
++   { NULL,		{ NULL, NULL, NULL, NULL },	0, 0, 0, 0, 0 }
++ };
++ 
++@@ -1480,6 +1486,14 @@
++ 	    failnonzero = 0;
++ 	    tagflags = RPMSENSE_FIND_REQUIRES;
++ 	    /*@switchbreak@*/ break;
+++	case RPMTAG_ENHANCESFLAGS:
+++	    if (!pkg->autoProv)
+++		continue;
+++	    failnonzero = 0;
+++	    tagflags = RPMSENSE_FIND_REQUIRES | RPMSENSE_MISSINGOK;
+++	    if (strcmp(dm->msg, "Supplements") == 0)
+++		tagflags |= RPMSENSE_STRONG;
+++	    /*@switchbreak@*/ break;
++ 	default:
++ 	    continue;
++ 	    /*@notreached@*/ /*@switchbreak@*/ break;
++Index: lib/rpmlib.h
++===================================================================
++--- lib/rpmlib.h.orig	2008-04-01 08:28:22.000000000 +0100
+++++ lib/rpmlib.h	2008-08-26 17:00:37.000000000 +0100
++@@ -530,7 +530,7 @@
++     RPMSENSE_TRIGGERPREIN = (1 << 25),	/*!< @todo Implement %triggerprein. */
++ /*@=enummemuse@*/
++     RPMSENSE_KEYRING	= (1 << 26),
++-    RPMSENSE_PATCHES	= (1 << 27),
+++    RPMSENSE_STRONG	= (1 << 27),
++     RPMSENSE_CONFIG	= (1 << 28)
++ } rpmsenseFlags;
++ 
++Index: python/rpmmodule.c
++===================================================================
++--- python/rpmmodule.c.orig	2008-04-01 08:28:22.000000000 +0100
+++++ python/rpmmodule.c	2008-08-26 16:58:09.000000000 +0100
++@@ -433,7 +433,7 @@
++     REGISTER_ENUM(RPMSENSE_RPMLIB);
++     REGISTER_ENUM(RPMSENSE_TRIGGERPREIN);
++     REGISTER_ENUM(RPMSENSE_KEYRING);
++-    REGISTER_ENUM(RPMSENSE_PATCHES);
+++    REGISTER_ENUM(RPMSENSE_STRONG);
++     REGISTER_ENUM(RPMSENSE_CONFIG);
++ 
++     REGISTER_ENUM(RPMTRANS_FLAG_TEST);
++Index: lib/rpmds.c
++===================================================================
++--- lib/rpmds.c.orig	2008-04-01 08:28:22.000000000 +0100
+++++ lib/rpmds.c	2008-08-26 16:58:09.000000000 +0100
++@@ -320,6 +320,11 @@
++ 	tagEVR = RPMTAG_TRIGGERVERSION;
++ 	tagF = RPMTAG_TRIGGERFLAGS;
++     } else
+++    if (tagN == RPMTAG_ENHANCESNAME) {
+++	Type = "Enhances";
+++	tagEVR = RPMTAG_ENHANCESVERSION;
+++	tagF = RPMTAG_ENHANCESFLAGS;
+++    } else
++ 	goto exit;
++ 
++     /*@-branchstate@*/
++Index: rpmpopt.in
++===================================================================
++--- rpmpopt.in.orig	2008-04-01 08:28:22.000000000 +0100
+++++ rpmpopt.in	2008-08-26 16:58:09.000000000 +0100
++@@ -68,6 +68,22 @@
++ 	--POPTdesc=$"list capabilities required by package(s)"
++ rpm	alias -R --requires
++ 
+++rpm	alias --suggests	--qf \
+++  "[%|SUGGESTSFLAGS:depflag_strong?{}:{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package suggests"
 ++
-++AC_ARG_WITH(python-incdir, [  --with-python-incdir    python include directory ])
-++PYTHON_INCDIR=$withval
-++AC_ARG_WITH(python-libdir, [  --with-python-libdir    python library directory ])
-++PYTHON_LIBDIR=$withval
+++rpm	alias --recommends	--qf \
+++  "[%|SUGGESTSFLAGS:depflag_strong?{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package recommends"
 ++
-+ withval=auto
-+ AC_ARG_WITH(python, [  --with-python           build rpm python bindings ])
+++rpm	alias --enhances	--qf \
+++  "[%|ENHANCESFLAGS:depflag_strong?{}:{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package enhances"
+++
+++rpm	alias --supplements	--qf \
+++  "[%|ENHANCESFLAGS:depflag_strong?{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package supplements"
+++
++ rpm	alias --info --qf 'Name        : %-27{NAME}  Relocations: %|PREFIXES?{[%{PREFIXES} ]}:{(not relocatable)}|\n\
++ Version     : %-27{VERSION}       Vendor: %{VENDOR}\n\
++ Release     : %-27{RELEASE}   Build Date: %{BUILDTIME:date}\n\
++@@ -351,6 +367,22 @@
++ 	--POPTdesc=$"list capabilities required by package(s)"
++ rpmq	alias -R --requires
 + 
-+@@ -934,6 +939,8 @@
-+ AC_SUBST(WITH_PYTHON_SUBDIR)
-+ AC_SUBST(WITH_PYTHON_SUBPACKAGE)
-+ AC_SUBST(WITH_PYTHON_VERSION)
-++AC_SUBST(PYTHON_LIBDIR)
-++AC_SUBST(PYTHON_INCDIR)
+++rpmq	alias --suggests	--qf \
+++  "[%|SUGGESTSFLAGS:depflag_strong?{}:{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package suggests"
+++
+++rpmq	alias --recommends	--qf \
+++  "[%|SUGGESTSFLAGS:depflag_strong?{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package recommends"
+++
+++rpmq	alias --enhances	--qf \
+++  "[%|ENHANCESFLAGS:depflag_strong?{}:{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package enhances"
+++
+++rpmq	alias --supplements	--qf \
+++  "[%|ENHANCESFLAGS:depflag_strong?{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package supplements"
+++
++ rpmq	alias --info --qf 'Name        : %-27{NAME}  Relocations: %|PREFIXES?{[%{PREFIXES} ]}:{(not relocatable)}|\n\
++ Version     : %-27{VERSION}       Vendor: %{VENDOR}\n\
++ Release     : %-27{RELEASE}   Build Date: %{BUILDTIME:date}\n\
++@@ -452,6 +484,22 @@
++ 	--POPTdesc=$"list capabilities required by package(s)"
++ rpmquery	alias -R --requires
 + 
-+ AC_PATH_PROG(__DOXYGEN, doxygen, no, $PATH)
-+ dnl
- Index: rpm-4.4.2.3/rpmio/Makefile.am
- ===================================================================
- --- rpm-4.4.2.3.orig/rpmio/Makefile.am	2008-04-01 08:28:22.000000000 +0100
--+++ rpm-4.4.2.3/rpmio/Makefile.am	2008-08-18 10:25:14.000000000 +0100
--@@ -26,8 +26,6 @@
-++++ rpm-4.4.2.3/rpmio/Makefile.am	2008-08-23 12:14:12.000000000 +0100
-+@@ -26,9 +26,7 @@
-  
-  BEECRYPTLOBJS = $(shell test X"@WITH_BEECRYPT_SUBDIR@" != X && cat $(top_builddir)/@WITH_BEECTYPT_SUBDIR@/listobjs)
-  
- -LDFLAGS = -L$(RPM_BUILD_ROOT)$(usrlibdir) -L$(DESTDIR)$(usrlibdir)
- -
-- usrlibdir = $(libdir)@MARK64@
-+-usrlibdir = $(libdir)@MARK64@
-++usrlibdir = $(libdir)
-  usrlib_LTLIBRARIES = librpmio.la
-  librpmio_la_SOURCES = \
-+ 	argv.c digest.c fts.c macro.c rpmdav.c \
- Index: rpm-4.4.2.3/rpmio/rpmio_internal.h
- ===================================================================
- --- rpm-4.4.2.3.orig/rpmio/rpmio_internal.h	2008-04-01 08:28:22.000000000 +0100
--+++ rpm-4.4.2.3/rpmio/rpmio_internal.h	2008-08-18 10:25:14.000000000 +0100
-++++ rpm-4.4.2.3/rpmio/rpmio_internal.h	2008-08-23 12:07:29.000000000 +0100
- @@ -12,22 +12,22 @@
-  #if HAVE_BEECRYPT_API_H
-  #include <api.h>
-@@ -93,7 +117,7 @@ Index: rpm-4.4.2.3/rpmio/rpmio_internal.h
- Index: rpm-4.4.2.3/Makefile.am
- ===================================================================
- --- rpm-4.4.2.3.orig/Makefile.am	2008-04-01 08:28:21.000000000 +0100
--+++ rpm-4.4.2.3/Makefile.am	2008-08-20 08:26:44.000000000 +0100
-++++ rpm-4.4.2.3/Makefile.am	2008-08-23 12:07:29.000000000 +0100
- @@ -10,7 +10,7 @@
-  	po/*.in po/*.po po/rpm.pot \
-  	rpm.magic rpmpopt-$(VERSION) rpmqv.c 
-@@ -103,52 +127,118 @@ Index: rpm-4.4.2.3/Makefile.am
-  
-  INCLUDES = \
-  	-I$(top_srcdir)/build \
--@@ -93,7 +93,7 @@
-- rpm2cpio_LDFLAGS =	$(myLDFLAGS)
-- rpm2cpio_LDADD =	$(myLDADD) @LIBMISC@
-- 
---$(PROGRAMS): 		$(myLDADD) @WITH_APIDOCS_TARGET@
--+$(PROGRAMS): 		@WITH_APIDOCS_TARGET@
-- 
-- .PHONY:	splint
-- splint:
- Index: rpm-4.4.2.3/rpmdb/Makefile.am
- ===================================================================
- --- rpm-4.4.2.3.orig/rpmdb/Makefile.am	2008-04-01 08:28:22.000000000 +0100
--+++ rpm-4.4.2.3/rpmdb/Makefile.am	2008-08-18 10:25:14.000000000 +0100
--@@ -41,9 +41,6 @@
-++++ rpm-4.4.2.3/rpmdb/Makefile.am	2008-08-23 12:13:18.000000000 +0100
-+@@ -41,10 +41,7 @@
-  # XXX watchout, ../db3/libdb.la created by this Makefile may surprise
-  libdb_la = $(top_builddir)/$(WITH_DB_SUBDIR)/libdb.la
-  
- -# XXX grrr, RPM_BUILD_ROOT prevents build pollution if/when -lrpm different
- -LDFLAGS = -L$(RPM_BUILD_ROOT)$(usrlibdir) -L$(DESTDIR)$(usrlibdir)
- -
-- usrlibdir = $(libdir)@MARK64@
-+-usrlibdir = $(libdir)@MARK64@
-++usrlibdir = $(libdir)
-  usrlib_LTLIBRARIES = librpmdb.la
-  librpmdb_la_SOURCES = \
-+ 	dbconfig.c fprint.c \
- Index: rpm-4.4.2.3/lib/Makefile.am
- ===================================================================
- --- rpm-4.4.2.3.orig/lib/Makefile.am	2008-04-01 08:28:22.000000000 +0100
--+++ rpm-4.4.2.3/lib/Makefile.am	2008-08-18 10:25:14.000000000 +0100
--@@ -29,8 +29,6 @@
-++++ rpm-4.4.2.3/lib/Makefile.am	2008-08-23 16:03:51.000000000 +0100
-+@@ -29,9 +29,7 @@
-  mylibs = librpm.la
-  LIBS =
-  
- -LDFLAGS = -L$(RPM_BUILD_ROOT)$(usrlibdir) -L$(DESTDIR)$(usrlibdir)
- -
-- usrlibdir = $(libdir)@MARK64@
-+-usrlibdir = $(libdir)@MARK64@
-++usrlibdir = $(libdir)
-  usrlib_LTLIBRARIES = librpm.la
-  librpm_la_SOURCES = \
-+ 	cpio.c depends.c formats.c fs.c fsm.c getdate.c \
- Index: rpm-4.4.2.3/build/Makefile.am
- ===================================================================
- --- rpm-4.4.2.3.orig/build/Makefile.am	2008-04-01 08:28:21.000000000 +0100
--+++ rpm-4.4.2.3/build/Makefile.am	2008-08-18 10:25:14.000000000 +0100
--@@ -22,8 +22,6 @@
-++++ rpm-4.4.2.3/build/Makefile.am	2008-08-23 16:03:51.000000000 +0100
-+@@ -22,9 +22,7 @@
-  pkginc_HEADERS = rpmbuild.h rpmfc.h rpmfile.h rpmspec.h
-  noinst_HEADERS = buildio.h
-  
- -LDFLAGS = -L$(RPM_BUILD_ROOT)$(usrlibdir) -L$(DESTDIR)$(usrlibdir)
- -
-- usrlibdir = $(libdir)@MARK64@
-+-usrlibdir = $(libdir)@MARK64@
-++usrlibdir = $(libdir)
-  usrlib_LTLIBRARIES = librpmbuild.la
-  librpmbuild_la_SOURCES = \
-+ 	build.c expression.c files.c misc.c names.c pack.c \
-+Index: rpm-4.4.2.3/python/Makefile.am
+++rpmquery	alias --suggests	--qf \
+++  "[%|SUGGESTSFLAGS:depflag_strong?{}:{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package suggests"
+++
+++rpmquery	alias --recommends	--qf \
+++  "[%|SUGGESTSFLAGS:depflag_strong?{%{SUGGESTSNAME} %{SUGGESTSFLAGS:depflags} %{SUGGESTSVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package recommends"
+++
+++rpmquery	alias --enhances	--qf \
+++  "[%|ENHANCESFLAGS:depflag_strong?{}:{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package enhances"
+++
+++rpmquery	alias --supplements	--qf \
+++  "[%|ENHANCESFLAGS:depflag_strong?{%{ENHANCESNAME} %{ENHANCESFLAGS:depflags} %{ENHANCESVERSION}\n}|]" \
+++	--POPTdesc=$"list capabilities this package supplements"
+++
++ rpmquery	alias --info --qf 'Name        : %-27{NAME}  Relocations: %|PREFIXES?{[%{PREFIXES} ]}:{(not relocatable)}|\n\
++ Version     : %-27{VERSION}       Vendor: %{VENDOR}\n\
++ Release     : %-27{RELEASE}   Build Date: %{BUILDTIME:date}\n\
++Index: lib/formats.c
 +===================================================================
-+--- rpm-4.4.2.3.orig/python/Makefile.am	2008-04-01 08:28:22.000000000 +0100
-++++ rpm-4.4.2.3/python/Makefile.am	2008-08-25 16:26:56.000000000 +0100
-+@@ -4,8 +4,8 @@
++--- lib/formats.c.orig	2008-04-01 08:28:22.000000000 +0100
+++++ lib/formats.c	2008-08-26 16:58:09.000000000 +0100
++@@ -543,6 +543,38 @@
++     return val;
++ }
 + 
-+ LINT = splint
-+ 
-+-pylibdir = ${prefix}/lib@MARK64@/python@WITH_PYTHON_VERSION@
-+-pyincdir = $(prefix)/include/python@WITH_PYTHON_VERSION@
-++pylibdir = @PYTHON_LIBDIR@
-++pyincdir = @PYTHON_INCDIR@
-+ 
-+ SUBDIRS = rpm
-+ 
-+Index: rpm-4.4.2.3/python/rpm/Makefile.am
-+===================================================================
-+--- rpm-4.4.2.3.orig/python/rpm/Makefile.am	2008-04-01 08:28:22.000000000 +0100
-++++ rpm-4.4.2.3/python/rpm/Makefile.am	2008-08-25 16:27:29.000000000 +0100
-+@@ -4,8 +4,8 @@
-+ 
-+ PYVER = @WITH_PYTHON_VERSION@
-+ 
-+-pylibdir = ${prefix}/lib@MARK64@/python@WITH_PYTHON_VERSION@
-+-pyincdir = $(prefix)/include/python@WITH_PYTHON_VERSION@
-++pylibdir = @PYTHON_LIBDIR@
-++pyincdir = @PYTHON_INCDIR@
-+ 
-+ EXTRA_DIST = \
-+ 	__init__.py
-+Index: rpm-4.4.2.3/file/src/Makefile.am
-+===================================================================
-+--- rpm-4.4.2.3.orig/file/src/Makefile.am	2008-08-23 16:06:25.000000000 +0100
-++++ rpm-4.4.2.3/file/src/Makefile.am	2008-08-23 16:06:39.000000000 +0100
-+@@ -4,7 +4,7 @@
-+ EXTRA_DIST = test.c
-+ 
-+ # XXX Make sure compress.c links internal zlib
-+-INCLUDES = -I. -I ../../zlib
-++INCLUDES = -I. 
-+ 
-+ pkglibdir =  @prefix@/lib/rpm
-+ MAGIC    = $(pkglibdir)/magic
-+@@ -26,7 +26,7 @@
-+ 
-+ noinst_PROGRAMS = file
-+ file_SOURCES = file.c
-+-file_LDFLAGS = -L../../zlib # -all-static
-++#file_LDFLAGS = -L../../zlib # -all-static
-+ file_LDADD = libmagic.la
-+ 
-+ listobjs:
-+Index: rpm-4.4.2.3/file/magic/Makefile.am
-+===================================================================
-+--- rpm-4.4.2.3.orig/file/magic/Makefile.am	2008-08-25 16:14:47.000000000 +0100
-++++ rpm-4.4.2.3/file/magic/Makefile.am	2008-08-25 16:15:02.000000000 +0100
-+@@ -18,10 +18,10 @@
-+ 	done >> $@
-+ 
-+ magic.mgc: magic
-+-	$(top_builddir)/src/file -C -m magic
-++	file -C -m magic
-+ 
-+ magic.mime.mgc: magic.mime
-+-	$(top_builddir)/src/file -C -m $(srcdir)/magic.mime
-++	file -C -m $(srcdir)/magic.mime
-+ 
-+ magic_FRAGMENTS = \
-+ Magdir/acorn \
-diff --git a/packages/rpm/files/external-tools.patch b/packages/rpm/files/external-tools.patch
-index e967b87..2b2ff70 100644
---- a/packages/rpm/files/external-tools.patch
-+++ b/packages/rpm/files/external-tools.patch
-@@ -7,7 +7,7 @@ Index: rpm-4.4.2.3/configure.ac
-  WITH_MAGIC_LIB=
-  
- -if test -d file ; then
--+if test -d file_disabled ; then
-++if test -d file  ; then
-    WITH_RPMFILE=rpmfile
-    WITH_MAGIC_SUBDIR=file
-    WITH_MAGIC_INCLUDE="-I\${top_srcdir}/${WITH_MAGIC_SUBDIR}/src"
-@@ -16,7 +16,7 @@ Index: rpm-4.4.2.3/configure.ac
-  dnl export LIBS INCPATH CONFIG_SITE
-  
- -AC_CONFIG_SUBDIRS(popt file db3)
--+AC_CONFIG_SUBDIRS(db/dist)
-++AC_CONFIG_SUBDIRS(db/dist file)
-  
-  AC_CONFIG_FILES([ Doxyfile Makefile rpmrc macros platform rpmpopt
-  	rpmio/Makefile rpmdb/Makefile lib/Makefile build/Makefile
-diff --git a/packages/rpm/rpm-native_4.4.2.3.bb b/packages/rpm/rpm-native_4.4.2.3.bb
-index f122a47..517b571 100644
---- a/packages/rpm/rpm-native_4.4.2.3.bb
-+++ b/packages/rpm/rpm-native_4.4.2.3.bb
-@@ -1,10 +1,9 @@
- require rpm_${PV}.bb
- inherit native
- 
--DEPENDS = "beecrypt-native zlib-native file-native popt-native"
-+DEPENDS = "beecrypt-native zlib-native file-native popt-native python-native"
- 
- PR = "r2"
- 
- export sharedstatedir = "${layout_sharedstatedir}"
- export localstatedir = "${layout_localstatedir}"
--
+++static /*@only@*/ char * depflag_strongFormat(int_32 type, const void * data,
+++		char * formatPrefix, int padding, /*@unused@*/ int element)
+++	/*@modifies formatPrefix @*/
+++	/*@requires maxRead(data) >= 0 @*/
+++{
+++    char * val;
+++    char buf[10];
+++    int anint;
+++
+++    if (type != RPM_INT32_TYPE) {
+++	val = xstrdup(_("(not a number)"));
+++    } else {
+++	anint = *((int_32 *) data);
+++	buf[0] = '\0';
+++
+++/*@-boundswrite@*/
+++	if (anint & RPMSENSE_STRONG)
+++	    strcat(buf, "strong");
+++/*@=boundswrite@*/
+++
+++	val = xmalloc(7 + padding);
+++/*@-boundswrite@*/
+++	strcat(formatPrefix, "s");
+++/*@=boundswrite@*/
+++	/*@-formatconst@*/
+++	sprintf(val, formatPrefix, buf);
+++	/*@=formatconst@*/
+++    }
+++
+++    return val;
+++}
+++
++ /**
++  * Retrieve mounted file system paths.
++  * @param h		header
++@@ -1171,6 +1203,7 @@
++     { HEADER_EXT_FORMAT, "base64",		{ base64Format } },
++     { HEADER_EXT_FORMAT, "pgpsig",		{ pgpsigFormat } },
++     { HEADER_EXT_FORMAT, "depflags",		{ depflagsFormat } },
+++    { HEADER_EXT_FORMAT, "depflag_strong",	{ depflag_strongFormat } },
++     { HEADER_EXT_FORMAT, "fflags",		{ fflagsFormat } },
++     { HEADER_EXT_FORMAT, "perms",		{ permsFormat } },
++     { HEADER_EXT_FORMAT, "permissions",		{ permsFormat } },
 diff --git a/packages/rpm/rpm_4.4.2.3.bb b/packages/rpm/rpm_4.4.2.3.bb
-index a568ea8..7edecbc 100644
+index 4e868e3..1a6e01a 100644
 --- a/packages/rpm/rpm_4.4.2.3.bb
 +++ b/packages/rpm/rpm_4.4.2.3.bb
-@@ -1,8 +1,8 @@
- DESCRIPTION = "The RPM Package Manager."
+@@ -2,11 +2,13 @@ DESCRIPTION = "The RPM Package Manager."
  HOMEPAGE = "http://rpm.org/"
  LICENSE = "LGPL GPL"
--DEPENDS = "zlib beecrypt file popt"
--PR = "r2"
-+DEPENDS = "zlib beecrypt file popt python"
-+PR = "r3"
+ DEPENDS = "zlib beecrypt file popt python"
+-PR = "r4"
++PR = "r6"
  
  SRC_URI = "http://www.rpm.org/releases/rpm-4.4.x/rpm-4.4.2.3.tar.gz \
             file://external-tools.patch;patch=1 \
-@@ -14,7 +14,9 @@ S = "${WORKDIR}/rpm-${PV}"
+-	   file://cross_libpaths.patch;patch=1"
++	   file://cross_libpaths.patch;patch=1 \
++	   file://weakdeps.patch;patch=1;pnum=0 \
++	   file://tagsbackport.patch;patch=1;pnum=0"
  
- acpaths = "-I ${S}/db/dist/aclocal -I ${S}/db/dist/aclocal_java"
+ inherit autotools gettext
  
--EXTRA_OECONF = "--without-python \
-+EXTRA_OECONF = "--with-python=${PYTHONVER} \
-+		--with-python-incdir=${STAGING_INCDIR}/python${PYTHONVER} \
-+		--with-python-libdir=${STAGING_LIBDIR}/python${PYTHONVER} \
- 		--without-apidocs \
- 		--without-selinux \
- 		--without-lua \
-@@ -82,3 +84,13 @@ do_configure () {
- 		    --with-pic
- 
- }
-+
-+def rpm_python_version(d):
-+	import os, bb
-+	staging_incdir = bb.data.getVar( "STAGING_INCDIR", d, 1 )
-+	if os.path.exists( "%s/python2.5" % staging_incdir ): return "2.5"
-+	if os.path.exists( "%s/python2.4" % staging_incdir ): return "2.4"
-+	if os.path.exists( "%s/python2.3" % staging_incdir ): return "2.3"
-+	raise "No Python in STAGING_INCDIR. Forgot to build python/python-native?"
-+
-+PYTHONVER = "${@rpm_python_version(d)}"
 -- 
 1.6.1.3
 
