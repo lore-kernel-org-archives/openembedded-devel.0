@@ -1,31 +1,28 @@
-Received: from [85.33.2.26] (helo=smtp-out26.alice.it)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1LesqL-0007Vt-Aj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 16:17:09 +0100
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out26.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 4 Mar 2009 16:13:01 +0100
-Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.1830); 
-	Wed, 4 Mar 2009 16:13:01 +0100
-Received: from [192.168.1.107] ([79.44.163.114]) by FBCMCL01B05.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Wed, 4 Mar 2009 16:12:59 +0100
-From: GNUtoo <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <golpdn$mni$1@ger.gmane.org>
-References: <20090303204954.CCB9CE8008@amethyst.openembedded.net>
-	<1236119119.10602.62.camel@andromeda> <49ADB183.5070709@balister.org>
-	<1236120999.10602.70.camel@andromeda> <49AE5117.5020806@gefanuc.com>
-	<1236162102.10602.97.camel@andromeda> <golmkq$cve$1@ger.gmane.org>
-	<1236165806.10602.102.camel@andromeda>  <golpdn$mni$1@ger.gmane.org>
-Date: Wed, 04 Mar 2009 16:06:18 +0100
-Message-Id: <1236179178.9339.3.camel@port4>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.4 
-X-OriginalArrivalTime: 04 Mar 2009 15:12:59.0775 (UTC)
-	FILETIME=[B48E10F0:01C99CDB]
-Subject: Re: [oe-commits] Koen Kooi : angstrom 2009.X: bump automake-native to 1.10. 2 since some idiot deleted 1.10
+	(envelope-from <trini@kernel.crashing.org>) id 1Let7G-0004l7-HH
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 16:34:38 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090304153023.YAGJ10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 4 Mar 2009 10:30:23 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id P3WM1b0084dMFYL043WMzd; Wed, 04 Mar 2009 10:30:23 -0500
+X-Authority-Analysis: v=1.0 c=1 a=GwHlaoLqetoA:10 a=yXSnPE-BrL4A:10
+	a=UQJ1FK12DMEHe_hzdXUA:9 a=QQFmC916zVDk4cmUDI0A:7
+	a=WNAxvKsIrlOpN3lMnrsGg8OQuqoA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Wed, 4 Mar 2009 08:30:21 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090304153021.GP26343@smtp.west.cox.net>
+References: <go498c$bqq$1@ger.gmane.org> <golnv0$h4r$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <golnv0$h4r$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +36,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 15:17:09 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Mar 2009 15:34:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> Again, why are people so affraid of posting intrusive patches for review?
-I usually ask for review on the mailing list when I am told to do so or
-I know I really have to.
-The reason for it is that I usually ask for some hints or some help on
-IRC Before asking on the mailing-list.
-Often I also ask stupid questions on IRC,then find the answer myself.
-that clearly do not belongs to the mailing-list.
-Denis.
+On Wed, Mar 04, 2009 at 12:16:48PM +0100, Koen Kooi wrote:
+> On 25-02-09 21:21, Koen Kooi wrote:
+>> Hi,
+>>
+>> I keep trying to teach people the difference between recipes (what's in
+>> OE) and packages (what you install on the target) and keep getting
+>> reactions like "ok, but why is the dir called packages?", which are
+>> completely valid.
+>>
+>> Proposal:
+>>
+>> mv packages recipes ; git commit .
+>
+> Only positive replies sofar, so when do we want to schedule this commit?  
+> My proposal is somewhere in april, since I'm too busy this month with  
+> bossaconference and university work to deal with the fallout properly.
 
+Fine with me.  Do I have a vote? :)
 
+> Also, shall we restructure TMPDIR at the same time?
 
+Yes, lets get that RFC out :)  FWIW, I think 'sdk' should be in the same
+place as the other target oriented stuff.  Perhaps target/${host}/sdk/
+
+-- 
+Tom Rini
 
 
