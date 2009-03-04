@@ -1,35 +1,33 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lelv3-0000S4-Mg
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 08:53:33 +0100
-Received: by bwz9 with SMTP id 9so2705029bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2009 23:49:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=aD2OkLV3F3irSDl8cbyowMhGe+X5MbVa9T8d01U4ySE=;
-	b=V5hzhpBzT89NKFig62q8tNveocCq9EPhWSJ+RudQeC8fGA6mpwlZc0taNv8viuWcwI
-	UP41mZ5Lx3SmXawWAQyi3XfPLjBFNW6Q/YGY8JgEmjXkRPQpN1pcOgNy+5rdrfioTxQd
-	XFrFhvIOSURF6RYuDuvlWOzh/jaejLUTUJyLE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=gjwkl+1qttl9wGjSFffkGJZrRf7OaRQIWyp3clckHXHZ02V9Mo3jjAxIGqocaKZyxp
-	FNhGzdtPxHHpnfM6pZIW9WIuWEdjKPimYsbjq9u8tDfV11A44GMwSjBGgpJojt3yZjex
-	6ZKZxdO5brLeZvFuwQc0G3y7zC7ivNNe29hFc=
-MIME-Version: 1.0
-Received: by 10.223.122.15 with SMTP id j15mr7840632far.74.1236152962217; Tue, 
-	03 Mar 2009 23:49:22 -0800 (PST)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lem1I-0000dn-Tj
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 09:00:01 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LelxI-0002Tt-LS
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 07:55:52 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 04 Mar 2009 07:55:52 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 04 Mar 2009 07:55:52 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 04 Mar 2009 08:55:42 +0100
+Message-ID: <golc5v$c5u$1@ger.gmane.org>
+References: <20090303204954.CCB9CE8008@amethyst.openembedded.net>	<1236119119.10602.62.camel@andromeda>
+	<49ADB183.5070709@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
 In-Reply-To: <49ADB183.5070709@balister.org>
-References: <20090303204954.CCB9CE8008@amethyst.openembedded.net>
-	<1236119119.10602.62.camel@andromeda> <49ADB183.5070709@balister.org>
-Date: Wed, 4 Mar 2009 08:49:22 +0100
-Message-ID: <ac9c93b10903032349h1f6243a8t661505b31f67fbff@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Sender: news <news@ger.gmane.org>
 Subject: Re: [oe-commits] Koen Kooi : angstrom 2009.X: bump automake-native to 1.10. 2 since some idiot deleted 1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,28 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 07:53:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Mar 2009 08:00:02 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2009/3/3 Philip Balister <philip@balister.org>:
+On 03-03-09 23:38, Philip Balister wrote:
 > Michael 'Mickey' Lauer wrote:
->>
 >> Am Dienstag, den 03.03.2009, 21:49 +0100 schrieb GIT User account:
->>>
 >>> Module: openembedded.git
 >>> Branch: org.openembedded.dev
 >>> Commit: eee859a9c348871d6d644ece76bc57b151cc80e8
 >>> URL:
->>> =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3D=
-eee859a9c348871d6d644ece76bc57b151cc80e8
+>>> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=eee859a9c348871d6d644ece76bc57b151cc80e8
+>>>
 >>>
 >>> Author: Koen Kooi <koen@openembedded.org>
->>> Date: =A0 Tue Mar =A03 21:47:57 2009 +0100
+>>> Date: Tue Mar 3 21:47:57 2009 +0100
 >>>
->>> angstrom 2009.X: bump automake-native to 1.10.2 since some idiot delete=
-d
->>> 1.10
+>>> angstrom 2009.X: bump automake-native to 1.10.2 since some idiot
+>>> deleted 1.10
 >>
 >> Ah, are we in that mood again? Take more pills.
 >
@@ -73,23 +68,21 @@ d
 > deletion of python 2.5 will force me to address the 2.5->2.6 upgrade in
 > gnuradio before the upstream developers are ready.
 >
-> We need a way to remove recipes, but doing it as part of adding a new rec=
-ipe
-> is causing problems for OE users.
->
-> Philip
+> We need a way to remove recipes, but doing it as part of adding a new
+> recipe is causing problems for OE users.
 
-Hm.
-When I returned to oe 2 months ago I just created new recipes for new
-versions (as was the common practice when I started my extended
-vacation 2 years ago).
-However at some point I stumbled upon
-http://wiki.openembedded.net/index.php/Upgrading_Packages and started
-using git mv (2 years ago the cumulation of recipes already became
-cumbersome).
-Part of the problem is that there is no good "algorithm" to decide
-whether to keep the old version or not.
+Especially for 'core' recipes like busybox, automake and to a lesser 
+extent, python.
+The last time angstrom changed automake version multiple people had 
+tested the the change and verified that the produced images worked as 
+well as before the upgrade. That took some weeks to do. Now someone 
+forced me (I didn't even look up who deleted 1.10) to used an untested 
+version without asking or any heads up before the deletion.
+Does this mean that I can add glibc 2.9 and delete all other versions?
 
-FM.
+regards,
+
+Koen
+
 
 
