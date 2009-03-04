@@ -1,31 +1,36 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Lel77-00018n-QE
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lelv3-0000S4-Mg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 08:01:57 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id B1BF916E002
+	Wed, 04 Mar 2009 08:53:33 +0100
+Received: by bwz9 with SMTP id 9so2705029bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2009 08:11:23 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id DCB4E2A420C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2009 07:57:48 +0100 (CET)
+	Tue, 03 Mar 2009 23:49:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=aD2OkLV3F3irSDl8cbyowMhGe+X5MbVa9T8d01U4ySE=;
+	b=V5hzhpBzT89NKFig62q8tNveocCq9EPhWSJ+RudQeC8fGA6mpwlZc0taNv8viuWcwI
+	UP41mZ5Lx3SmXawWAQyi3XfPLjBFNW6Q/YGY8JgEmjXkRPQpN1pcOgNy+5rdrfioTxQd
+	XFrFhvIOSURF6RYuDuvlWOzh/jaejLUTUJyLE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=gjwkl+1qttl9wGjSFffkGJZrRf7OaRQIWyp3clckHXHZ02V9Mo3jjAxIGqocaKZyxp
+	FNhGzdtPxHHpnfM6pZIW9WIuWEdjKPimYsbjq9u8tDfV11A44GMwSjBGgpJojt3yZjex
+	6ZKZxdO5brLeZvFuwQc0G3y7zC7ivNNe29hFc=
 MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Wed, 4 Mar 2009 07:57:25 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF6E6@hiob.intern.dresearch.de>
-In-Reply-To: <f96d234e0903030840k69edc48cy7f946274616a3c24@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Documentation/User Manual questions
-Thread-Index: AcmcHvxZBbVtVBnnQzS0lWCbMK4GRgAdweMQ
-References: <f46da1cf0902201818r3fcf3432oc14929b5f455bbe7@mail.gmail.com><f96d234e0902240651r7ad36677h8e828964308e2b50@mail.gmail.com><49A55A59.5080409@balister.org><f96d234e0902250828x6e72a8b6kc0a4285125f27b0e@mail.gmail.com><49A8626B.8020209@balister.org><69E6C70090A0A14498CC98FAE5E06B6E3CF6D4@hiob.intern.dresearch.de>
-	<f96d234e0903030840k69edc48cy7f946274616a3c24@mail.gmail.com>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Documentation/User Manual questions
+Received: by 10.223.122.15 with SMTP id j15mr7840632far.74.1236152962217; Tue, 
+	03 Mar 2009 23:49:22 -0800 (PST)
+In-Reply-To: <49ADB183.5070709@balister.org>
+References: <20090303204954.CCB9CE8008@amethyst.openembedded.net>
+	<1236119119.10602.62.camel@andromeda> <49ADB183.5070709@balister.org>
+Date: Wed, 4 Mar 2009 08:49:22 +0100
+Message-ID: <ac9c93b10903032349h1f6243a8t661505b31f67fbff@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : angstrom 2009.X: bump automake-native to 1.10. 2 since some idiot deleted 1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,47 +44,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 07:01:58 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Wed, 04 Mar 2009 07:53:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-> > There's a little configuration problem according to the=20
-> > encoding. The document seems to be in Latin1 and contains
-> >
-> > <meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3DISO-8859-1">
-> >
-> > but the HTTP header say UTF-8.
-> >
-> > HTTP/1.1 200 OK
-> > Date: Mon, 02 Mar 2009 06:45:20 GMT
-> > Server: Apache/2.2.3 (Debian) mod_python/3.2.10 Python/2.4.4 =
-PHP/5.2.0-8+etch13 mod_perl/2.0.2 Perl/v5.8.8
-> > Last-Modified: Tue, 06 May 2008 12:30:38 GMT
-> > ETag: "184311-84-44c8f04003780"
-> > Accept-Ranges: bytes
-> > Content-Length: 132
-> > Connection: close
-> > Content-Type: text/html; charset=3DUTF-8
-> >
-> > This results in wrong presentation e.g. of the copyright symbol. :(
->=20
-> I'm unable to reproduce the problem -- can you supply:
->=20
-> - browser and version that displays this problem
-> - screen shot of problem
+2009/3/3 Philip Balister <philip@balister.org>:
+> Michael 'Mickey' Lauer wrote:
+>>
+>> Am Dienstag, den 03.03.2009, 21:49 +0100 schrieb GIT User account:
+>>>
+>>> Module: openembedded.git
+>>> Branch: org.openembedded.dev
+>>> Commit: eee859a9c348871d6d644ece76bc57b151cc80e8
+>>> URL:
+>>> =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3D=
+eee859a9c348871d6d644ece76bc57b151cc80e8
+>>>
+>>> Author: Koen Kooi <koen@openembedded.org>
+>>> Date: =A0 Tue Mar =A03 21:47:57 2009 +0100
+>>>
+>>> angstrom 2009.X: bump automake-native to 1.10.2 since some idiot delete=
+d
+>>> 1.10
+>>
+>> Ah, are we in that mood again? Take more pills.
+>
+> We need to have a serious discussion about deleting recipes. I know the
+> deletion of python 2.5 will force me to address the 2.5->2.6 upgrade in
+> gnuradio before the upstream developers are ready.
+>
+> We need a way to remove recipes, but doing it as part of adding a new rec=
+ipe
+> is causing problems for OE users.
+>
+> Philip
 
-Theodore sent one some minutes before.
+Hm.
+When I returned to oe 2 months ago I just created new recipes for new
+versions (as was the common practice when I started my extended
+vacation 2 years ago).
+However at some point I stumbled upon
+http://wiki.openembedded.net/index.php/Upgrading_Packages and started
+using git mv (2 years ago the cumulation of recipes already became
+cumbersome).
+Part of the problem is that there is no good "algorithm" to decide
+whether to keep the old version or not.
 
-> Patches are also welcome if you know what needs changed in=20
-> the docs source.
-
-I don't believe it's a problem in the sources but in the apache =
-configuration. It seems that apache does not respect the meta tag inside =
-the document.
-
-Steffen
+FM.
 
 
