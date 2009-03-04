@@ -1,35 +1,23 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1LeuVP-0000mH-Vg
+	(envelope-from <mickey@vanille-media.de>) id 1LeuhJ-0001DC-LN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 18:03:40 +0100
-Received: by bwz9 with SMTP id 9so2903780bwz.12
+	Wed, 04 Mar 2009 18:15:57 +0100
+Received: from [192.168.1.105] (e180183108.adsl.alicedsl.de [85.180.183.108])
+	by drlauer-research.com (Postfix) with ESMTP id B2EBC584167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Mar 2009 08:59:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=lmLa8CeQyVVuDObN0YWvcB5h3ryYwA/r986yY2XvOAw=;
-	b=YJ3HPH87SmyDcD+MCQc+uMPnujCpz1G1so1B/aZRCZ+D0FDyCfZl97KAUbBBukv7ce
-	37rkzNb3IX3TnESSzj8lPgKKhi2XMwkzel0wgFOM1I1MoMw2PCzmOP86O93vu9tMr0TI
-	/J0q9atrilo2fNdU5fzXRPszHgJiVIWoLq1MA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=VRNlpG/r6gl+olAld+W3irzm9uBAd7SAgf4trOokwq1JHYkzAl4q24b7aDTEH0rX8w
-	XVhMW3C/VffC1QGpSTO4UC7uVMCxLk66Qb+ihmNSU6ceXoBzcsdT8nPrKbGbKV2AgReG
-	y3KpMmF7FLOt0K8citmxaMtYihPIn4UlSmLgM=
-MIME-Version: 1.0
-Received: by 10.181.208.11 with SMTP id k11mr18291bkq.180.1236185965159; Wed, 
-	04 Mar 2009 08:59:25 -0800 (PST)
-In-Reply-To: <EC5EE493B6046F45A2DDEC4A828DE52E039C6343@EXCHSRVR.syntech.org>
-References: <EC5EE493B6046F45A2DDEC4A828DE52E039C6343@EXCHSRVR.syntech.org>
-Date: Wed, 4 Mar 2009 18:59:25 +0200
-Message-ID: <fce2a370903040859r1235924dg47344d9a02efff31@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	Wed,  4 Mar 2009 18:36:27 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Overlays and kernel question
+In-Reply-To: <1236182004-4523-9-git-send-email-openembedded@haerwu.biz>
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+	<1236182004-4523-9-git-send-email-openembedded@haerwu.biz>
+Organization: Vanille-Media
+Date: Wed, 04 Mar 2009 18:11:46 +0100
+Message-Id: <1236186706.10602.122.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Re: [PATCH 08/70] rpm: Handle PYTHONVER differently in EXTRA_OECONF to stop gettext/uclibc failures during parsing (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,38 +31,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 17:03:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Mar 2009 17:15:57 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-You need full recipe copy, with all the patches, files, includes etc.
+Am Mittwoch, den 04.03.2009, 16:52 +0100 schrieb Marcin Juszkiewicz:
+> From: Richard Purdie <richard@openedhand.com>
+> 
+> git-svn-id: https://svn.o-hand.com/repos/poky@5152 311d38ba-8fff-0310-9ca6-ca027cbcb966
+> ---
+>  packages/rpm/rpm_4.4.2.3.bb |   16 ++++++++++------
+>  1 files changed, 10 insertions(+), 6 deletions(-)
+> 
+> diff --git a/packages/rpm/rpm_4.4.2.3.bb b/packages/rpm/rpm_4.4.2.3.bb
+> index 6718042..ef60878 100644
+> --- a/packages/rpm/rpm_4.4.2.3.bb
+> +++ b/packages/rpm/rpm_4.4.2.3.bb
+> @@ -2,13 +2,15 @@ DESCRIPTION = "The RPM Package Manager."
+>  HOMEPAGE = "http://rpm.org/"
+>  LICENSE = "LGPL GPL"
+>  DEPENDS = "zlib beecrypt file popt python"
+> -PR = "r7"
+> +PR = "r9"
+>  
+>  SRC_URI = "http://www.rpm.org/releases/rpm-4.4.x/rpm-4.4.2.3.tar.gz \
+>             file://external-tools.patch;patch=1 \
+>  	   file://cross_libpaths.patch;patch=1 \
+>  	   file://weakdeps.patch;patch=1;pnum=0 \
+> -	   file://tagsbackport.patch;patch=1;pnum=0"
+> +	   file://tagsbackport.patch;patch=1;pnum=0 \
+> +	   file://missingok.patch;patch=1;pnum=0 \
+> +	   file://extcond.patch;patch=1;pnum=0"
+>  
+>  inherit autotools gettext
+>  
+> @@ -16,9 +18,9 @@ S = "${WORKDIR}/rpm-${PV}"
+>  
+>  acpaths = "-I ${S}/db/dist/aclocal -I ${S}/db/dist/aclocal_java"
+>  
+> -EXTRA_OECONF = "--with-python=${PYTHONVER} \
+> -		--with-python-incdir=${STAGING_INCDIR}/python${PYTHONVER} \
+> -		--with-python-libdir=${STAGING_LIBDIR}/python${PYTHONVER} \
+> +EXTRA_OECONF = "--with-python=$PYTHONVER \
+> +		--with-python-incdir=${STAGING_INCDIR}/python$PYTHONVER \
+> +		--with-python-libdir=${STAGING_LIBDIR}/python$PYTHONVER \
+>  		--without-apidocs \
+>  		--without-selinux \
+>  		--without-lua \
+> @@ -97,4 +99,6 @@ def rpm_python_version(d):
+>  	if os.path.exists( "%s/python2.3" % staging_incdir ): return "2.3"
+>  	raise "No Python in STAGING_INCDIR. Forgot to build python/python-native?"
+>  
+> -PYTHONVER = "${@rpm_python_version(d)}"
+> +# Use a shell variable here since otherwise gettext trys to expand this at 
+> +# parse time when it manipulates EXTRA_OECONF which fails
+> +export PYTHONVER = "${@rpm_python_version(d)}"
 
-On Wed, Mar 4, 2009 at 6:55 PM, Mark Butsch
-<mbutsch@syntech-fuelmaster.com> wrote:
-> Hello,
->
->
->
-> I am trying to place my .defconfig in my OE overlay and am not sure of
-> the proper/best way to do that.
->
->
->
-> Can I just have the .defconfig in the overlay or do I need a copy of the
-> recipe in my overlay also?
->
->
->
-> Thanks for the help,
->
->
->
-> Mark Butsch
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+No. Better inherit distutils_base and use its PYTHON_DIR here.
+
+-- 
+:M:
+
 
 
