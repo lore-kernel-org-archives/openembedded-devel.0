@@ -1,30 +1,34 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [217.146.130.193] (helo=chlothar.bnv-bamberg.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LewwX-0004n8-IT
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 20:39:51 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090304193523.BJXX4363.fed1rmmtao103.cox.net@fed1rmimpo01.cox.net>;
-	Wed, 4 Mar 2009 14:35:23 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id P7bP1b0084dMFYL037bPEh; Wed, 04 Mar 2009 14:35:23 -0500
-X-Authority-Analysis: v=1.0 c=1 a=z2cBfJZmOvIA:10 a=II7UTkEhgZcA:10
-	a=Js0LpgGrAAAA:8 a=b_OEaAMLAAAA:8 a=-7hVfbqxAAAA:8 a=t4joOSN0AAAA:8
-	a=TK3PjqdiS0dfZaHb5hYA:9 a=qH5K_HX8CRemf8T2wcXMFWxELEcA:4
-	a=LY0hPdMaydYA:10 a=_qZRxRWV73kA:10
-X-CM-Score: 0.00
-Date: Wed, 4 Mar 2009 12:35:21 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090304193521.GW26343@smtp.west.cox.net>
-References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-	<1236182004-4523-15-git-send-email-openembedded@haerwu.biz>
-MIME-Version: 1.0
-In-Reply-To: <1236182004-4523-15-git-send-email-openembedded@haerwu.biz>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: Richard Purdie <richard@openedhand.com>
-Subject: Re: [PATCH 14/70] Add yum-native and createrepo (from Poky)
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1Lewwd-0004np-3o
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 20:39:56 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bnv-bamberg.de; s=mail2008; h=Subject:From:To:In-Reply-To:
+	References:Content-Type:Date:Message-Id:Mime-Version:
+	Content-Transfer-Encoding; bh=HZdfa8WA7xkuVfjmeZhH5fe+q6fehNFWPY
+	nuA58vnqU=; b=eYsQ5ijmoWFmn+/qAFKZ19G/RYbSqOZocRAxE0OmYxMpb9gjKg
+	vpmqN1qOPGRpkib5Mv3Uzzkwzq+nYFOwQVTixeg6uE3M7YXwlUTwZrbweVVtb3gj
+	kUCsKREVyHzUwPuo900/8VrDaQ2TOdFS7uRXIifaPSyl1nyyjfAKevdlM=
+Received: from localhost ([127.0.0.1] helo=chlothar.bnv-bamberg.de)
+	by chlothar.bnv-bamberg.de with esmtp id 1LewsY-0000Y4-2u 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 20:35:42 +0100
+Received: from w0659.w.pppool.de ([89.58.6.89] helo=[192.168.2.3])
+	by chlothar.bnv-bamberg.de with esmtpa (Exim 4.69)
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1LewsX-0000VM-Oi
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Mar 2009 20:35:42 +0100
+From: harald <ba0547@bnv-bamberg.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20090304153617.GQ26343@smtp.west.cox.net>
+References: <1236178350.4249.5.camel@debian.dorg.org>
+	<20090304153617.GQ26343@smtp.west.cox.net>
+Date: Wed, 04 Mar 2009 20:35:38 +0100
+Message-Id: <1236195338.4249.20.camel@debian.dorg.org>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Compile OE on Sun Ultrasparc 64 architecture?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +42,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 19:39:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Mar 2009 19:39:58 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 04, 2009 at 04:52:29PM +0100, Marcin Juszkiewicz wrote:
-
-> From: Richard Purdie <richard@openedhand.com>
+Am Mittwoch, den 04.03.2009, 08:36 -0700 schrieb Tom Rini:
+> On Wed, Mar 04, 2009 at 03:52:30PM +0100, harald wrote:
 > 
-> git-svn-id: https://svn.o-hand.com/repos/poky@5098 311d38ba-8fff-0310-9ca6-ca027cbcb966
-[snip]
-> --- /dev/null
-> +++ b/packages/yum/createrepo-native_0.9.bb
-> @@ -0,0 +1,13 @@
-> +SRC_URI = "http://linux.duke.edu/projects/metadata/generate/createrepo-${PV}.tar.gz \
+> > Hello,
+> > 
+> > tried to compile OE on my Sun Ultrasparc 64 machine running on debian
+> > lenny. 
+> > Compilation fails, package qemu-native fails to compile with an error in
+> > zlib. please see build logs, machine h4000, user ba0547.
+> 
+> You might want to disable binary locale generation on the host and see
+> what else falls down.  ENABLE_BINARY_LOCALE_GENERATION = 0 in your
+> local.conf
+> 
+hello, 
 
-404.  This is now:
-http://createrepo.baseurl.org/download/createrepo-${PV}.tar.gz
+binary_locale_generation has been set to 0.
 
-Also, 0.9.6 is current.  Didn't poke any further than looking in the new
-download dir, however.
+now other packages fail to compile/install:
 
--- 
-Tom Rini
+| Making all in mpn
+| make[2]: Entering directory
+`/home/stuff/tmp/work/sparc64-linux/gmp-native-4.2.4-r0/gmp-4.2.4/mpn'
+| /bin/sh ../sparc64-linux-libtool --mode=compile
+--tag=CC ../mpn/m4-ccas --m4="m4" ccache gcc -std=gnu99 -c
+-DHAVE_CONFIG_H -I. -I.. -D__GMP_WITHIN_GMP -I.. -DOPERATION_`echo add_n
+| sed 's/_$//'`
+-isystem/home/stuff/tmp/staging/sparc64-linux/usr/include
+-isystem/home/stuff/tmp/staging/sparc64-linux/usr/include -O2
+-Wa,--noexecstack `test -f 'add_n.asm' || echo './'`add_n.asm
+| sparc64-linux-libtool: compile:  ../mpn/m4-ccas --m4=m4 ccache gcc
+-std=gnu99 -c -DHAVE_CONFIG_H -I. -I.. -D__GMP_WITHIN_GMP -I..
+-DOPERATION_add_n
+-isystem/home/stuff/tmp/staging/sparc64-linux/usr/include
+-isystem/home/stuff/tmp/staging/sparc64-linux/usr/include -O2
+-Wa,--noexecstack add_n.asm  -fPIC -DPIC -o .libs/add_n.o
+| m4  -DHAVE_CONFIG_H -D__GMP_WITHIN_GMP -DOPERATION_add_n -DPIC
+add_n.asm >tmp-add_n.s
+|  ccache gcc -std=gnu99 -c -DHAVE_CONFIG_H -I. -I.. -D__GMP_WITHIN_GMP
+-I.. -DOPERATION_add_n
+-isystem/home/stuff/tmp/staging/sparc64-linux/usr/include
+-isystem/home/stuff/tmp/staging/sparc64-linux/usr/include -O2
+-Wa,--noexecstack tmp-add_n.s -fPIC -DPIC -o .libs/add_n.o
+| tmp-add_n.s: Assembler messages:
+| tmp-add_n.s:66: Error: Architecture mismatch on "lduw".
+| tmp-add_n.s:66:  (Requires v9|v9a|v9b; requested architecture is
+sparclite.)
+| tmp-add_n.s:67: Error: Architecture mismatch on "lduw".
+| tmp-add_n.s:67:  (Requires v9|v9a|v9b; requested architecture is
+sparclite.)
+| tmp-add_n.s:69: Error: Architecture mismatch on "bl,pn %icc,.Lend1".
+| tmp-add_n.s:69:  (Requires v9|v9a|v9b; requested architecture is
+sparclite.)
+| tmp-add_n.s:70: Error: Architecture mismatch on "lduw".
+| tmp-add_n.s:70:  (Requires v9|v9a|v9b; requested architecture is
+sparclite.)
+| tmp-add_n.s:
+
+cut....
+
+for further details please see build log.
+Any idea?
+
+regards, harald.
+
+
 
 
