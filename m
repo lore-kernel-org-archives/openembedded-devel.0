@@ -1,24 +1,24 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetU7-0005Oo-VO
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 16:58:45 +0100
-Received: (qmail 27624 invoked by uid 813007); 4 Mar 2009 15:54:03 -0000
+	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetaG-0005Yi-Vh
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 17:04:38 +0100
+Received: (qmail 26669 invoked by uid 813007); 4 Mar 2009 15:53:43 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 89.78.173.235 (HELO localhost)
 	(smtp?user@juszkiewicz.com.pl@89.78.173.235)
-	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:54:03 -0000
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:53:43 -0000
 Received: from hrw by localhost with local (Exim 4.69)
 	(envelope-from <hrw@hrw.one.pl>)
-	id 1LetPv-0001EV-To; Wed, 04 Mar 2009 16:53:55 +0100
+	id 1LetPc-0001DG-6n; Wed, 04 Mar 2009 16:53:36 +0100
 From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2009 16:52:53 +0100
-Message-Id: <1236182004-4523-39-git-send-email-openembedded@haerwu.biz>
+Date: Wed,  4 Mar 2009 16:52:29 +0100
+Message-Id: <1236182004-4523-15-git-send-email-openembedded@haerwu.biz>
 X-Mailer: git-send-email 1.6.1.3
 In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
 Cc: Richard Purdie <richard@openedhand.com>
-Subject: [PATCH 38/70] package_rpm.bbclass: Fix problems with package version with '-' in the version (replace with '+'), improve the Requires and Recommends generation code (from Poky)
+Subject: [PATCH 14/70] Add yum-native and createrepo (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,83 +32,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 16:00:48 -0000
+X-List-Received-Date: Wed, 04 Mar 2009 16:04:42 -0000
 
 From: Richard Purdie <richard@openedhand.com>
 
-git-svn-id: https://svn.o-hand.com/repos/poky@5129 311d38ba-8fff-0310-9ca6-ca027cbcb966
+git-svn-id: https://svn.o-hand.com/repos/poky@5098 311d38ba-8fff-0310-9ca6-ca027cbcb966
 ---
- classes/package_rpm.bbclass |   33 +++++++++++++++++++++++++--------
- 1 files changed, 25 insertions(+), 8 deletions(-)
+ packages/yum/createrepo-native/pathfix.patch |   81 ++++++++++++++++++++++++++
+ packages/yum/createrepo-native_0.9.bb        |   13 ++++
+ packages/yum/yum-native_3.2.18.bb            |   14 +++++
+ 3 files changed, 108 insertions(+), 0 deletions(-)
+ create mode 100644 packages/yum/createrepo-native/pathfix.patch
+ create mode 100644 packages/yum/createrepo-native_0.9.bb
+ create mode 100644 packages/yum/yum-native_3.2.18.bb
 
-diff --git a/classes/package_rpm.bbclass b/classes/package_rpm.bbclass
-index e1398d2..040d8b8 100644
---- a/classes/package_rpm.bbclass
-+++ b/classes/package_rpm.bbclass
-@@ -12,9 +12,14 @@ RPM="rpm ${RPMOPTS}"
- python write_specfile() {
- 	from bb import data, build
- 	import sys
+diff --git a/packages/yum/createrepo-native/pathfix.patch b/packages/yum/createrepo-native/pathfix.patch
+new file mode 100644
+index 0000000..a09a51c
+--- /dev/null
++++ b/packages/yum/createrepo-native/pathfix.patch
+@@ -0,0 +1,81 @@
++Index: createrepo-0.9/Makefile
++===================================================================
++--- createrepo-0.9.orig/Makefile	2008-08-23 17:49:24.000000000 +0100
+++++ createrepo-0.9/Makefile	2008-08-23 17:52:01.000000000 +0100
++@@ -10,22 +10,6 @@
++ SHELL = /bin/sh
++ top_srcdir = .
++ srcdir = .
++-prefix = /usr
++-exec_prefix = ${prefix}
++-
++-bindir = ${exec_prefix}/bin
++-sbindir = ${exec_prefix}/sbin
++-libexecdir = ${exec_prefix}/libexec
++-datadir = ${prefix}/share
++-sysconfdir = ${prefix}/etc
++-sharedstatedir = ${prefix}/com
++-localstatedir = ${prefix}/var
++-libdir = ${exec_prefix}/lib
++-infodir = ${prefix}/info
++-docdir = 
++-includedir = ${prefix}/include
++-oldincludedir = /usr/include
++-mandir = ${prefix}/share/man
++ 
++ pkgdatadir = $(datadir)/$(PKGNAME)
++ pkglibdir = $(libdir)/$(PKGNAME)
++Index: createrepo-0.9/bin/Makefile
++===================================================================
++--- createrepo-0.9.orig/bin/Makefile	2008-08-23 17:50:13.000000000 +0100
+++++ createrepo-0.9/bin/Makefile	2008-08-23 17:50:23.000000000 +0100
++@@ -1,22 +1,6 @@
++ SHELL = /bin/sh
++ top_srcdir = ..
++ srcdir = ../bin
++-prefix = /usr
++-exec_prefix = ${prefix}
++-
++-bindir = ${exec_prefix}/bin
++-sbindir = ${exec_prefix}/sbin
++-libexecdir = ${exec_prefix}/libexec
++-datadir = ${prefix}/share
++-sysconfdir = ${prefix}/etc
++-sharedstatedir = ${prefix}/com
++-localstatedir = ${prefix}/var
++-libdir = ${exec_prefix}/lib
++-infodir = ${prefix}/info
++-docdir = 
++-includedir = ${prefix}/include
++-oldincludedir = /usr/include
++-mandir = ${prefix}/man
++ 
++ pkgdatadir = $(datadir)/$(PKGNAME)
++ pkglibdir = $(libdir)/$(PKGNAME)
++Index: createrepo-0.9/docs/Makefile
++===================================================================
++--- createrepo-0.9.orig/docs/Makefile	2008-08-23 17:52:42.000000000 +0100
+++++ createrepo-0.9/docs/Makefile	2008-08-23 17:52:50.000000000 +0100
++@@ -1,22 +1,6 @@
++ SHELL = /bin/sh
++ top_srcdir = ..
++ srcdir = ../docs
++-prefix = /usr
++-exec_prefix = ${prefix}
++-
++-bindir = ${exec_prefix}/bin
++-sbindir = ${exec_prefix}/sbin
++-libexecdir = ${exec_prefix}/libexec
++-datadir = ${prefix}/share
++-sysconfdir = ${prefix}/etc
++-sharedstatedir = ${prefix}/com
++-localstatedir = ${prefix}/var
++-libdir = ${exec_prefix}/lib
++-infodir = ${prefix}/info
++-docdir = 
++-includedir = ${prefix}/include
++-oldincludedir = /usr/include
++-mandir = ${datadir}/man
++ 
++ pkgdatadir = $(datadir)/$(PKGNAME)
++ pkglibdir = $(libdir)/$(PKGNAME)
+diff --git a/packages/yum/createrepo-native_0.9.bb b/packages/yum/createrepo-native_0.9.bb
+new file mode 100644
+index 0000000..e682667
+--- /dev/null
++++ b/packages/yum/createrepo-native_0.9.bb
+@@ -0,0 +1,13 @@
++SRC_URI = "http://linux.duke.edu/projects/metadata/generate/createrepo-${PV}.tar.gz \
++           file://pathfix.patch;patch=1 "
 +
-+	version = bb.data.getVar('PV', d, 1)
-+	version = version.replace('-', '+')
-+	bb.data.setVar('RPMPV', version, d)
++inherit autotools native
 +
- 	out_vartranslate = {
- 		"PKG": "Name",
--		"PV": "Version",
-+		"RPMPV": "Version",
- 		"DESCRIPTION": "%description",
- 		"ROOT": "BuildRoot",
- 		"LICENSE": "License",
-@@ -67,10 +72,24 @@ python write_specfile() {
- 	fd.write("AutoReqProv: no\n")
- 
- 	bb.build.exec_func("mapping_rename_hook", d)
--	rdepends = " ".join(bb.utils.explode_deps(bb.data.getVar('RDEPENDS', d, True) or ""))
-+	rdepends = bb.utils.explode_dep_versions(bb.data.getVar('RDEPENDS', d, True) or "")
-+	for dep in rdepends:
-+		ver = rdepends[dep]
-+		if dep and ver:
-+			ver = ver.replace('-', '+')
-+			fd.write("Requires: %s %s\n" % (dep, ver))
-+		elif dep:
-+			fd.write("Requires: %s\n" % (dep))
++S = "${WORKDIR}/createrepo-${PV}"
 +
-+	rdepends = bb.utils.explode_dep_versions(bb.data.getVar('RRECOMMENDS', d, True) or "")
-+	for dep in rdepends:
-+		ver = rdepends[dep]
-+		if dep and ver:
-+			ver = ver.replace('-', '+')
-+			fd.write("Recommends: %s %s\n" % (dep, ver))
-+		elif dep:
-+			fd.write("Recommends: %s\n" % (dep))
- 
--	if rdepends:
--		fd.write("Requires: %s\n" % rdepends)
-         fd.write("Release\t: %s\n" % bb.data.expand('${PR}${DISTRO_PR}', d, True)
- 	fd.write("Summary\t: .\n")
- 
-@@ -82,8 +101,6 @@ python write_specfile() {
- 
- 	fd.write("%files\n")
- 	for file in files:
--		if file[0] != '/':
--			fd.write('/')
- 		fd.write("%s\n" % file)
- 
- 	fd.close()
-@@ -97,8 +114,8 @@ python write_specfile() {
- 	bb.build.exec_func('BUILDSPEC', d)
- 
- 	# move the rpm into the pkgoutdir
--	rpm = bb.data.expand('${RPMBUILDPATH}/RPMS/${TARGET_ARCH}/${PKG}-${PV}-${PR}${DISTRO_PR}.${TARGET_ARCH}.rpm', d)
--	outrpm = bb.data.expand('${DEPLOY_DIR_RPM}/${PKG}-${PV}-${PR}${DISTRO_PR}.${TARGET_ARCH}.rpm', d)
-+	rpm = bb.data.expand('${RPMBUILDPATH}/RPMS/${TARGET_ARCH}/${PKG}-${RPMPV}-${PR}.${TARGET_ARCH}.rpm', d)
-+	outrpm = bb.data.expand('${DEPLOY_DIR_RPM}/${PKG}-${RPMPV}-${PR}.${TARGET_ARCH}.rpm', d)
- 	bb.movefile(rpm, outrpm)
- }
- 
++do_compile_append () {
++	sed -e 's#exec /usr/share#exec ${datadir}#' -i ${S}/bin/createrepo
++	sed -e 's#exec /usr/share#exec ${datadir}#' -i ${S}/bin/modifyrepo
++	sed -e 's#!/usr/bin/python#!${bindir}/python#' -i ${S}/genpkgmetadata.py
++	sed -e 's#!/usr/bin/python#!${bindir}/python#' -i ${S}/modifyrepo.py
++}
+diff --git a/packages/yum/yum-native_3.2.18.bb b/packages/yum/yum-native_3.2.18.bb
+new file mode 100644
+index 0000000..6657c52
+--- /dev/null
++++ b/packages/yum/yum-native_3.2.18.bb
+@@ -0,0 +1,14 @@
++HOMEPAGE = "http://linux.duke.edu/projects/yum/"
++
++SRC_URI = "http://linux.duke.edu/projects/yum/download/3.2/yum-${PV}.tar.gz"
++
++DEPENDS = "rpm-native python-native python-iniparse-native python-urlgrabber-native yum-metadata-parser-native"
++
++S = "${WORKDIR}/yum-${PV}"
++
++inherit autotools native
++
++do_compile_append () {
++	sed -e 's#!/usr/bin/python#!${bindir}/python#' -e 's#/usr/share#${datadir}#' -i ${S}/bin/yum.py
++	sed -e 's#!/usr/bin/python#!${bindir}/python#' -e 's#/usr/share#${datadir}#' -i ${S}/bin/yum-updatesd.py
++}
 -- 
 1.6.1.3
 
