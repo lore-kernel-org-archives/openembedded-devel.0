@@ -1,28 +1,38 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lf096-00010X-9d
-	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 00:05:05 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090304230042.SSIW27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 4 Mar 2009 18:00:42 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id PB0i1b00T4dMFYL04B0jXA; Wed, 04 Mar 2009 18:00:43 -0500
-X-Authority-Analysis: v=1.0 c=1 a=wFN6jymYzWsA:10 a=b2ZvGRdsAAAA:8
-	a=fGO4tVQLAAAA:8 a=wUVHpReK7uqhoESgqm0A:9
-	a=8-lH7ZoRsm_mBFYCuAJI7vxn_DMA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 4 Mar 2009 16:00:42 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090304230042.GD26343@smtp.west.cox.net>
-References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+	(envelope-from <raj.khem@gmail.com>) id 1Lf0vO-0006zQ-IW
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Mar 2009 00:55:06 +0100
+Received: by wa-out-1112.google.com with SMTP id n7so1775819wag.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Mar 2009 15:50:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=rwnoge3C3ZEz94lC65nnY12+1jVAR3GQHQVa3PM2BqY=;
+	b=uCgjrkQHWXTiDZRQO3Tmn3ss3+4nmW+54iVKywdCM3yQ+KHwbSHMBcIn9rw6BxyLL8
+	rXhJQyLN567a4Ax8TG3SKWoohl/x+eLyIGYuG4OeweeU2Jhrj1/HNzVvv1DoJ1bDnJ4f
+	eb3L6K1wTySadf0NY0ndjJJWXd7rPnO1NXgdM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=ahwR3s1agOVXSrdy9HsTyDuaR6VXtQJtBfam99JSkmi0aIvGYcCz62Mbe08rPleiQ8
+	6xlSFR+i4H/df4qNXWVFVYeKENT02z8Ip0+yaAeBTclrM2Rm20NAL1k7KSKGui+K/LDR
+	byOrEydOzpMGrHuWqQO0lHVulUZ+H6gJwpeVs=
+Received: by 10.114.37.1 with SMTP id k1mr266950wak.28.1236210638732;
+	Wed, 04 Mar 2009 15:50:38 -0800 (PST)
+Received: from gmail.com (adsl-71-146-1-99.dsl.pltn13.sbcglobal.net
+	[71.146.1.99])
+	by mx.google.com with ESMTPS id z15sm20250490pod.14.2009.03.04.15.50.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Mar 2009 15:50:38 -0800 (PST)
+Date: Wed, 4 Mar 2009 15:50:32 -0800
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090304235032.GA29159@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Merging RPM support from Poky
+Subject: [PATCH] Make coreutils 6.x+ install utility to honor STRIP env	variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,39 +46,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 23:05:21 -0000
+X-List-Received-Date: Wed, 04 Mar 2009 23:55:30 -0000
+X-List-Received-Date: Wed, 04 Mar 2009 23:55:30 -0000
+X-Groupsio-MsgNum: 8252
+Content-Type: multipart/mixed; boundary="sdtB3X0nJg68CQEu"
+Content-Disposition: inline
+
+--sdtB3X0nJg68CQEu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Mar 04, 2009 at 04:52:15PM +0100, Marcin Juszkiewicz wrote:
+Hi
 
-> As some of you know Poky has RPM support written. It consists few parts:
-> 
-> - creating RPM packages
-> - creating rootfs from RPM packages
-> - using RPM/YUM on device to managing packages (installing from local and
->   remote packages
-> 
-> I had one attempt to get it merged before but it had some bugs so I started
-> from scratch. Extracting required patches from pile of 1800 Poky changsets
-> took me some time.
-> 
-> With this patchset I managed to build 'minimal-image' for AT91SAM9263-EK
-> machine. As distribution I used 'minimal' to get something other then
-> Angstrom.
-> 
-> So please review it (patch 67 is already merged in .dev tree).
-> 
-> It is also visible on Web: http://cgit.openembedded.net/cgit.cgi?url=openembedded/log/&h=hrw/poky-merge/add-rpm-packages-support
-> 
-> Fetch via: git pull hrw/poky-merge/add-rpm-packages-support
+As reported in bug 5052 and also on irc, install calls strip directly. We should make it use STRIP
+env variable which is set to <cross-strip> in OE env.
 
-OK.  I got a failure that I'm not quite sure where it's from, other than
-rootfs_rpm.bbclass.  Log is http://pastebin.com/d64e6cd01
-MACHINE=nokia800 DISTRO=minimal and unrelated to BB_NUMBER_THREADS /
-PARALLEL_MAKE.
+This is a patch which does that
 
--- 
-Tom Rini
+OK for .dev ?
+
+Thx
+-Khem
 
 
+
+--sdtB3X0nJg68CQEu
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="coreutils-install-use-STRIP.patch"
+
+Index: coreutils-6.0/src/install.c
+===================================================================
+--- coreutils-6.0.orig/src/install.c	2009-03-04 15:37:45.000000000 -0800
++++ coreutils-6.0/src/install.c	2009-03-04 15:38:57.000000000 -0800
+@@ -526,7 +526,14 @@
+ strip (char const *name)
+ {
+   int status;
+-  pid_t pid = fork ();
++  pid_t pid;
++  char *strip_name;
++
++  strip_name = getenv ("STRIP");
++  if (strip_name == NULL)
++    strip_name = "strip";
++
++  pid = fork ();
+ 
+   switch (pid)
+     {
+@@ -534,7 +541,7 @@
+       error (EXIT_FAILURE, errno, _("fork system call failed"));
+       break;
+     case 0:			/* Child. */
+-      execlp ("strip", "strip", name, NULL);
++      execlp (strip_name, "strip", name, NULL);
+       error (EXIT_FAILURE, errno, _("cannot run strip"));
+       break;
+     default:			/* Parent. */
+
+--sdtB3X0nJg68CQEu--
