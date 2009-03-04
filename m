@@ -1,23 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@haerwu.biz>) id 1Lev4q-0007hX-P0
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 18:40:16 +0100
-Received: (qmail 5485 invoked by uid 813007); 4 Mar 2009 17:29:23 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 4 Mar 2009 17:29:23 -0000
-From: Marcin Juszkiewicz <openembedded@haerwu.biz>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 4 Mar 2009 18:29:16 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.0; x86_64; ;
-	)
+	(envelope-from <trini@kernel.crashing.org>) id 1LevBE-00080G-U8
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 18:46:53 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090304174238.NZJF15318.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>;
+	Wed, 4 Mar 2009 12:42:38 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id P5ib1b0094dMFYL045ibPW; Wed, 04 Mar 2009 12:42:37 -0500
+X-Authority-Analysis: v=1.0 c=1 a=AYkYuw04ExYA:10 a=YCkBchfvqYgA:10
+	a=Js0LpgGrAAAA:8 a=b_OEaAMLAAAA:8 a=TVNzOE90O2ceT0RJq0IA:9
+	a=2LsMjO5Nx5MEOBSpHTl97Ugy0boA:4 a=LY0hPdMaydYA:10 a=_qZRxRWV73kA:10
+X-CM-Score: 0.00
+Date: Wed, 4 Mar 2009 10:42:35 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090304174234.GS26343@smtp.west.cox.net>
 References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-	<1236187304.10602.127.camel@andromeda>
-In-Reply-To: <1236187304.10602.127.camel@andromeda>
+	<1236182004-4523-34-git-send-email-openembedded@haerwu.biz>
 MIME-Version: 1.0
-Message-Id: <200903041829.17257.openembedded@haerwu.biz>
-Subject: Re: Merging RPM support from Poky
+In-Reply-To: <1236182004-4523-34-git-send-email-openembedded@haerwu.biz>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Cc: Richard Purdie <richard@openedhand.com>
+Subject: Re: [PATCH 33/70] Add rootfs_rpm.bbclass, a start at image	generation from rpms. Its not expected to be entirely functional	yet. (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,26 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 17:40:17 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Mar 2009 17:46:53 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wednesday 04 of March 2009 18:21:44 Michael 'Mickey' Lauer wrote:
-> Impressive work, both from the original author and you.
+On Wed, Mar 04, 2009 at 04:52:48PM +0100, Marcin Juszkiewicz wrote:
 
-Most of work was done by Richard Purdie, then I had to check how it 
-works and make it work also on device. Some changes were done by other 
-OpenedHand guys. My patchset was result of digging in over thousand of 
-Poky changes and some of them were tweaked a bit to apply to current OE.
+> From: Richard Purdie <richard@openedhand.com>
+> 
+> git-svn-id: https://svn.o-hand.com/repos/poky@5101 311d38ba-8fff-0310-9ca6-ca027cbcb966
+> ---
+>  classes/rootfs_rpm.bbclass |  148 ++++++++++++++++++++++++++++++++++++++++++++
 
-Regards, 
+There's a 'poky' references here that should either be dropped or made
+into ${DISTRO}:
+
+[snip]
+> +[poky-feed]
+> +name = Poky RPM Feed
+
 -- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+Tom Rini
 
 
