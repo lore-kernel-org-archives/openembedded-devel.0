@@ -1,24 +1,47 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.128.189] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LeoIU-0005BP-4W
+	(envelope-from <piernik@gmail.com>) id 1LeoOo-0001x5-1e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 11:25:55 +0100
-Received: from [192.168.1.105] (e180183108.adsl.alicedsl.de [85.180.183.108])
-	by drlauer-research.com (Postfix) with ESMTP id 5631C584389
+	Wed, 04 Mar 2009 11:34:18 +0100
+Received: by fk-out-0910.google.com with SMTP id f40so1249829fka.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2009 11:46:22 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Wed, 04 Mar 2009 02:28:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:date:from:to:subject
+	:message-id:in-reply-to:references:x-mailer:x-face:mime-version
+	:content-type:content-transfer-encoding;
+	bh=ERzK+g/bgVrZ2WmVc2Bv3bjdBxHd7aK0klL5gDcDtTo=;
+	b=fEwvAnv+1joV0vic883ySXodGiq9uF1d+Ly5Px5lUCIRxQ6J8Z3sXHCL/OXrocDTcY
+	j88VLjdo+yW/ABGNYnCHPJHiHs83w445VMOudyIeIifRCMQlDTj88tzyyjEIrxelTnGW
+	o+vWliEo6TAZb99wPPN4Qi0ZKKeqDcL7fjwBo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:date:from:to:subject:message-id:in-reply-to:references
+	:x-mailer:x-face:mime-version:content-type:content-transfer-encoding;
+	b=Xkd20bGN2Gj/XZb1yY9UcUwVZPsQ/FwYDPYfeACiWegHAqOLBVS+zTiz5/nlalyL5W
+	tzxUlznrhi0aZbdzlE6FjtlYm8qiA4DI1af0jY16HZhW16LaWMCNKbm0c+UTNhzcRYtA
+	jxhpGtHV1nFsefbmDqkCdx319N+XMzqKJHgjw=
+Received: by 10.86.91.3 with SMTP id o3mr3151455fgb.17.1236162495864;
+	Wed, 04 Mar 2009 02:28:15 -0800 (PST)
+Received: from mobil.site (87-205-79-201.adsl.inetia.pl [87.205.79.201])
+	by mx.google.com with ESMTPS id 3sm1785758fge.18.2009.03.04.02.28.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Mar 2009 02:28:15 -0800 (PST)
+Sender: Krzysztof Kotlenga <piernik@gmail.com>
+Date: Wed, 4 Mar 2009 11:26:31 +0100
+From: Krzysztof Kotlenga <pocek@users.sf.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49AE5117.5020806@gefanuc.com>
-References: <20090303204954.CCB9CE8008@amethyst.openembedded.net>
-	<1236119119.10602.62.camel@andromeda> <49ADB183.5070709@balister.org>
-	<1236120999.10602.70.camel@andromeda>  <49AE5117.5020806@gefanuc.com>
-Organization: Vanille-Media
-Date: Wed, 04 Mar 2009 11:21:42 +0100
-Message-Id: <1236162102.10602.97.camel@andromeda>
+Message-ID: <20090304112631.4cc70f62@mobil.site>
+In-Reply-To: <565965130903031700o49cfcaf3r44e81101971f436c@mail.gmail.com>
+References: <20090211213312.919E8189338@amethyst.openembedded.net>
+	<20090303133626.5706500e@mobil.site>
+	<ac9c93b10903030453g6bdfb268ubb30f3854e667d12@mail.gmail.com>
+	<20090303182231.2a9b2007@mobil.site>
+	<565965130903031700o49cfcaf3r44e81101971f436c@mail.gmail.com>
+X-Mailer: Claws Mail 3.7.0 (GTK+ 2.12.9; i586-suse-linux-gnu)
+X-Face: U{.sZrXl+;
+	-boiB]N4=wPdrR|YT0!fcISDza0Y}=n*z')0S{iZW<Uy$s~&}09$vR^IuFq,E0)iS]JFG0-3Wmow(MTQ!]rN*<Pa(<PO:*9RFU_\(15s:]Pj}lCTcP(,pUZLy"[4/jpF1l^Y4z!>jV!F"n+n2Rpp8jcp53&OWJgn?AJcD2
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: Re: [oe-commits] Koen Kooi : angstrom 2009.X: bump automake-native to 1.10. 2 since some idiot deleted 1.10
+Subject: Re: [oe-commits] Frans Meulenbroeks : opkg: fix bug that occured with file names of exactly 100 chars in the tar file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,25 +55,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2009 10:26:18 -0000
-X-List-Received-Date: Wed, 04 Mar 2009 10:26:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Mar 2009 10:35:13 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-Am Mittwoch, den 04.03.2009, 09:59 +0000 schrieb Martyn Welch:
-> "Review" is defined as posting it on the mailing lists and getting positive agreement from two or more core developers. 
+Tick wrote:
 
-Let me propose these kinds of patches being promoted in an unstable
-branch rather than via mailing list. This eases testing and playing
-around with the patch.
+> Hi kjk,
+>   Thanks, patch applied as R203
 
-Although there were 0 comments (among those none in favour, but also
-none against), I still think that org.oe.{stable,testing(dev),unstable}
-with a strict only-cherry-picking-from-right-to-left-allowed policy
-would improve our workflow and overall stability.
+Thanks Tick.
+Since Koen has bumped opkg SRCREV to r203, now we have one problem
+left: opkg_unarchive.patch has to be disabled/removed. Otherwise it
+breaks what was fixed here.
 
 -- 
-:M:
-
+kjk
 
 
