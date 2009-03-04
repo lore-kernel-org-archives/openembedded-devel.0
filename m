@@ -1,22 +1,24 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetTc-0005OE-DM
-	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 16:57:49 +0100
-Received: (qmail 26012 invoked by uid 813007); 4 Mar 2009 15:53:31 -0000
+	(envelope-from <hrw@juszkiewicz.com.pl>) id 1LetTk-0005OT-3d
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 16:57:54 +0100
+Received: (qmail 26451 invoked by uid 813007); 4 Mar 2009 15:53:39 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 89.78.173.235 (HELO localhost)
 	(smtp?user@juszkiewicz.com.pl@89.78.173.235)
-	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:53:31 -0000
+	by 195.149.226.213 with ESMTPA; 4 Mar 2009 15:53:39 -0000
 Received: from hrw by localhost with local (Exim 4.69)
-	(envelope-from <hrw@hrw.one.pl>) id 1LetPQ-0001Cb-Vp
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Mar 2009 16:53:24 +0100
+	(envelope-from <hrw@hrw.one.pl>)
+	id 1LetPY-0001Cz-2v; Wed, 04 Mar 2009 16:53:32 +0100
 From: Marcin Juszkiewicz <openembedded@haerwu.biz>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2009 16:52:15 +0100
-Message-Id: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+Date: Wed,  4 Mar 2009 16:52:24 +0100
+Message-Id: <1236182004-4523-10-git-send-email-openembedded@haerwu.biz>
 X-Mailer: git-send-email 1.6.1.3
-Subject: Merging RPM support from Poky
+In-Reply-To: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+Cc: Richard Purdie <richard@openedhand.com>
+Subject: [PATCH 09/70] rpm: Add missing patches (from Poky)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,71 +37,152 @@ X-List-Received-Date: Wed, 04 Mar 2009 15:59:17 -0000
 X-List-Received-Date: Wed, 04 Mar 2009 15:59:17 -0000
 X-List-Received-Date: Wed, 04 Mar 2009 15:59:17 -0000
 
-As some of you know Poky has RPM support written. It consists few parts:
+From: Richard Purdie <richard@openedhand.com>
 
-- creating RPM packages
-- creating rootfs from RPM packages
-- using RPM/YUM on device to managing packages (installing from local and
-  remote packages
+git-svn-id: https://svn.o-hand.com/repos/poky@5154 311d38ba-8fff-0310-9ca6-ca027cbcb966
+---
+ packages/rpm/files/extcond.patch   |   78 ++++++++++++++++++++++++++++++++++++
+ packages/rpm/files/missingok.patch |   44 ++++++++++++++++++++
+ 2 files changed, 122 insertions(+), 0 deletions(-)
+ create mode 100644 packages/rpm/files/extcond.patch
+ create mode 100644 packages/rpm/files/missingok.patch
 
-I had one attempt to get it merged before but it had some bugs so I started
-from scratch. Extracting required patches from pile of 1800 Poky changsets
-took me some time.
-
-With this patchset I managed to build 'minimal-image' for AT91SAM9263-EK
-machine. As distribution I used 'minimal' to get something other then
-Angstrom.
-
-So please review it (patch 67 is already merged in .dev tree).
-
-It is also visible on Web: http://cgit.openembedded.net/cgit.cgi?url=openembedded/log/&h=hrw/poky-merge/add-rpm-packages-support
-
-Fetch via: git pull hrw/poky-merge/add-rpm-packages-support
-
- classes/base.bbclass                               |   13 +
- classes/package.bbclass                            |    6 +
- classes/package_rpm.bbclass                        |  140 +++++++--
- classes/packaged-staging.bbclass                   |   14 +
- classes/rootfs_rpm.bbclass                         |  220 ++++++++++++++
- classes/rpm_core.bbclass                           |   16 -
- packages/beecrypt/beecrypt_3.1.0.bb                |   16 +-
- packages/beecrypt/files/x64fix.patch               |   20 ++
- packages/fakechroot/fakechroot-native_2.5.bb       |    2 +-
- packages/fakechroot/fakechroot_2.5.bb              |    3 +-
- packages/fakechroot/files/fix-readlink.patch       |   32 ++
- packages/libxml/libxml2-native.inc                 |    5 +-
- packages/libxml/libxml2-native_2.7.2.bb            |    2 +-
- packages/openssl/openssl-native_0.9.7g.bb          |    1 +
- packages/openssl/openssl-native_0.9.7m.bb          |    1 +
- packages/openssl/openssl-native_0.9.8g.bb          |    1 +
- packages/python/python-iniparse-native_0.2.3.bb    |   10 +
- packages/python/python-iniparse_0.2.3.bb           |   11 +
- packages/python/python-urlgrabber-native_3.1.0.bb  |   10 +
- packages/python/python-urlgrabber_3.1.0.bb         |   11 +
- .../python/yum-metadata-parser-native_1.1.2.bb     |   12 +
- packages/python/yum-metadata-parser_1.1.2.bb       |   13 +
- packages/rpm/files/cross_libpaths.patch            |  239 +++++++++++++++-
- packages/rpm/files/extcond.patch                   |   78 +++++
- packages/rpm/files/external-tools.patch            |  108 +++++++
- packages/rpm/files/fix_mypath.patch                |   13 -
- packages/rpm/files/missingok.patch                 |   44 +++
- packages/rpm/files/tagsbackport.patch              |   37 +++
- packages/rpm/files/weakdeps.patch                  |  312 ++++++++++++++++++++
- packages/rpm/rpm-native_4.4.2.3.bb                 |    7 +
- packages/rpm/rpm_4.4.2.3.bb                        |  108 +++++++
- packages/rpm/rpm_4.4.bb                            |   44 ---
- packages/yum/createrepo-native/fix.patch           |   17 +
- packages/yum/createrepo-native/pathfix.patch       |   81 +++++
- packages/yum/createrepo-native_0.9.bb              |   17 +
- packages/yum/files/extract-postinst.awk            |   11 +
- packages/yum/files/fix                             |   18 ++
- packages/yum/files/hacks.patch                     |   81 +++++
- packages/yum/files/paths.patch                     |   96 ++++++
- packages/yum/files/paths2.patch                    |   33 ++
- packages/yum/files/yum-install-recommends.py       |   39 +++
- packages/yum/yum-native_3.2.18.bb                  |   25 ++
- packages/yum/yum_3.2.18.bb                         |   32 ++
- 43 files changed, 1872 insertions(+), 127 deletions(-)
+diff --git a/packages/rpm/files/extcond.patch b/packages/rpm/files/extcond.patch
+new file mode 100644
+index 0000000..6963b86
+--- /dev/null
++++ b/packages/rpm/files/extcond.patch
+@@ -0,0 +1,78 @@
++This patch supports an extension in the condition evaluation.
++If the condition is a format and returns an nonempty string, it is
++assumed to be true.
++This mechanism is used by the weakdeps patch to filter the
++"RPMSENSE_STRONG" flag.
++
++--- ./rpmdb/header.c.orig	2005-06-06 23:33:54.000000000 +0000
+++++ ./rpmdb/header.c	2006-03-17 18:08:02.000000000 +0000
++@@ -2980,8 +2980,12 @@ static int parseExpression(headerSprintf
++ 
++     *endPtr = chptr;
++ 
+++    token->u.cond.tag.type = NULL;
+++    token->u.cond.tag.format = "";
++     token->type = PTOK_COND;
++ 
+++    if ((token->u.cond.tag.type = strchr(str, ':')) != 0)
+++	*token->u.cond.tag.type++ = 0;
++     (void) findTag(hsa, token, str);
++ 
++     return 0;
++@@ -3239,6 +3243,7 @@ static char * singleSprintf(headerSprint
++     int_32 type;
++     int_32 count;
++     sprintfToken spft;
+++    sprintfTag stag;
++     int condNumFormats;
++     size_t need;
++ 
++@@ -3270,6 +3275,18 @@ static char * singleSprintf(headerSprint
++ 	if (token->u.cond.tag.ext || headerIsEntry(hsa->h, token->u.cond.tag.tag)) {
++ 	    spft = token->u.cond.ifFormat;
++ 	    condNumFormats = token->u.cond.numIfTokens;
+++	    if (token->u.cond.tag.fmt) {
+++		/* check if format creates output */
+++		size_t vallen = hsa->vallen;
+++		formatValue(hsa, &token->u.cond.tag, element);
+++		if (hsa->vallen == vallen) {
+++		    spft = token->u.cond.elseFormat;
+++		    condNumFormats = token->u.cond.numElseTokens;
+++		} else {
+++		    hsa->vallen = vallen;
+++		    hsa->val[hsa->vallen] = 0;
+++		}
+++	    }
++ 	} else {
++ 	    spft = token->u.cond.elseFormat;
++ 	    condNumFormats = token->u.cond.numElseTokens;
++@@ -3291,19 +3308,22 @@ static char * singleSprintf(headerSprint
++ 	spft = token->u.array.format;
++ 	for (i = 0; i < token->u.array.numTokens; i++, spft++)
++ 	{
++-	    if (spft->type != PTOK_TAG ||
++-		spft->u.tag.arrayCount ||
++-		spft->u.tag.justOne) continue;
+++	    if (spft->type != PTOK_TAG && spft->type != PTOK_COND)
+++		continue;
+++
+++	    stag = (spft->type == PTOK_COND ? &spft->u.cond.tag : &spft->u.tag);
+++	    if (stag->arrayCount || stag->justOne)
+++		continue;
++ 
++-	    if (spft->u.tag.ext) {
+++	    if (stag->ext) {
++ /*@-boundswrite@*/
++-		if (getExtension(hsa, spft->u.tag.ext, &type, NULL, &count, 
++-				 hsa->ec + spft->u.tag.extNum))
+++		if (getExtension(hsa, stag->ext, &type, NULL, &count, 
+++				 hsa->ec + stag->extNum))
++ 		     continue;
++ /*@=boundswrite@*/
++ 	    } else {
++ /*@-boundswrite@*/
++-		if (!headerGetEntry(hsa->h, spft->u.tag.tag, &type, NULL, &count))
+++		if (!headerGetEntry(hsa->h, stag->tag, &type, NULL, &count))
++ 		    continue;
++ /*@=boundswrite@*/
++ 	    } 
+diff --git a/packages/rpm/files/missingok.patch b/packages/rpm/files/missingok.patch
+new file mode 100644
+index 0000000..b008c9a
+--- /dev/null
++++ b/packages/rpm/files/missingok.patch
+@@ -0,0 +1,44 @@
++Obey MISSINGOK flag for dependencies. Backport from rpm-4.4.7.
++
++Index: lib/depends.c
++===================================================================
++--- lib/depends.c.orig	2008-04-01 08:28:22.000000000 +0100
+++++ lib/depends.c	2008-09-04 14:09:58.000000000 +0100
++@@ -593,8 +593,13 @@
++ /*@=boundsread@*/
++ 
++ unsatisfied:
++-    rc = 1;	/* dependency is unsatisfied */
++-    rpmdsNotify(dep, NULL, rc);
+++    if (rpmdsFlags(dep) & RPMSENSE_MISSINGOK) {
+++	rc = 0; /* dependency is unsatisfied, but just a hint. */
+++	rpmdsNotify(dep, _("(hint skipped)"), rc);
+++    } else {
+++	rc = 1;	/* dependency is unsatisfied */
+++	rpmdsNotify(dep, NULL, rc);
+++    }
++ 
++ exit:
++     /*
++@@ -963,6 +968,8 @@
++ 	return "Requires(postun):";
++     if (f & RPMSENSE_SCRIPT_VERIFY)
++ 	return "Requires(verify):";
+++    if (f & RPMSENSE_MISSINGOK)
+++	return "Requires(hint):";
++     if (f & RPMSENSE_FIND_REQUIRES)
++ 	return "Requires(auto):";
++     return "Requires:";
++Index: lib/rpmlib.h
++===================================================================
++--- lib/rpmlib.h.orig	2008-09-03 22:22:43.000000000 +0100
+++++ lib/rpmlib.h	2008-09-04 15:17:17.000000000 +0100
++@@ -562,6 +562,8 @@
++     RPMSENSE_SCRIPT_POSTUN | \
++     RPMSENSE_SCRIPT_VERIFY | \
++     RPMSENSE_FIND_REQUIRES | \
+++    RPMSENSE_MISSINGOK | \
+++    RPMSENSE_STRONG | \
++     RPMSENSE_SCRIPT_PREP | \
++     RPMSENSE_SCRIPT_BUILD | \
++     RPMSENSE_SCRIPT_INSTALL | \
+-- 
+1.6.1.3
 
 
 
