@@ -1,52 +1,22 @@
-Received: from [209.85.219.167] (helo=mail-ew0-f167.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LfDv7-0006oJ-Uy
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Mar 2009 14:47:34 +0100
-Received: by ewy11 with SMTP id 11so1634953ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2009 05:43:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to:cc
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type;
-	bh=G7+PPOeO88VcbjYKpcU98EdGBycyR4mrikkLvkpvV9c=;
-	b=C9LK5W/keFvdB488E7648WopBLmuCIAUUE2LPLcbC0nSJIPK2UYOTJe/uw+5XOnFKi
-	blPxQyt7dTdMhZcWiJ4+nY9tlQVwPUFA7ApMd2YEMkPm4C7FJRUDA+ncGF8nbrYh/Hft
-	+/D9X3FB5vkyi+Wojc9jiBapzT0S+FUXiD8fk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
-	b=mQOUk8pz5adkBgka3nvMEBrCiWCKR7NeI030TwtnKa2H4XiX6IFryy4vZSMJOOqaFy
-	GjJVcZLNnxAlKgqgIgEqW7xj56lJUw9gKrKqkqsmbHCaNkL59ZwmpsMDHp0Ub8AxOKV5
-	NXHyeSPHM3sXuUchgO7T3G30AKY0cUuTdlUXE=
-Received: by 10.216.2.207 with SMTP id 57mr683195wef.174.1236260587605;
-	Thu, 05 Mar 2009 05:43:07 -0800 (PST)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id t12sm9820989gvd.8.2009.03.05.05.43.05
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 05 Mar 2009 05:43:07 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 020EE6101CE; Thu,  5 Mar 2009 10:43:04 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Mario Domenech Goulart <mario@ossystems.com.br>
-Organization: O.S. Systems Ltda.
-References: <87iqmp5f58.fsf@neumann.lab.ossystems.com.br>
-	<87eixc40oz.fsf@ucpel.tche.br>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Thu, 05 Mar 2009 10:43:04 -0300
-In-Reply-To: <87eixc40oz.fsf@ucpel.tche.br> (Mario Domenech Goulart's message
-	of "Wed, 04 Mar 2009 15:34:57 -0300")
-Message-ID: <87skls2ihj.fsf@neumann.lab.ossystems.com.br>
+	(envelope-from <philip@balister.org>) id 1LfE8X-00075x-DR
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 15:01:21 +0100
+Received: (qmail 9410 invoked by uid 1003); 5 Mar 2009 13:56:58 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 5 Mar 2009 13:56:58 -0000
+Message-ID: <49AFDA25.1020508@balister.org>
+Date: Thu, 05 Mar 2009 08:56:53 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [RFH] Support for automatic package versining using git describe
+To: openembedded-devel@lists.openembedded.org
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>	<1236182004-4523-70-git-send-email-openembedded@haerwu.biz>	<49AF4FBD.1010209@dls.net>
+	<20090305044711.GE26343@smtp.west.cox.net>
+	<d1b08f940903050045meefdefft6fe4f83045692207@mail.gmail.com>
+In-Reply-To: <d1b08f940903050045meefdefft6fe4f83045692207@mail.gmail.com>
+Subject: Re: I got the point - did everyone one else? [was: Re: [PATCH 70/70]...]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,41 +30,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 13:47:43 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 05 Mar 2009 14:01:22 -0000
+X-Groupsio-MsgNum: 8269
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020009070603060300000306"
 
-Mario Domenech Goulart <mario@ossystems.com.br> writes:
+--------------ms020009070603060300000306
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Andrea Adami wrote:
+> Wasn't suggested/agreed to post patches for review on 'openembedded-commits' ?
+> One could just forward the cover-letter to this ML to get attention...
 
-[...]
+The problem with this is not many people will sign up for the list. We 
+really do need every pair of eyes looking at stuff. Even if you do not 
+feel like you really know the stuff, looking it over is a good way to 
+learn. I even caught a very small mistake in one of Mickey's submission 
+that was far from what I know a lot about.
 
-> Index: lib/bb/fetch/git.py
-> ===================================================================
-> --- lib/bb/fetch/git.py	(revision 1152)
-> +++ lib/bb/fetch/git.py	(working copy)
-> @@ -42,11 +42,12 @@
->              ud.proto = ud.parm['protocol']
->  
->          ud.branch = ud.parm.get("branch", "master")
-> +        ud.tag = None
->  
->          tag = Fetch.srcrev_internal_helper(ud, d)
->          if tag is True:
->              ud.tag = self.latest_revision(url, ud, d)	
-> -        elif tag:
-> +        elif tag and tag != "1":
->              ud.tag = tag
->  
->          if not ud.tag or ud.tag == "master":
+Philip
 
-[...]
+--------------ms020009070603060300000306
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-Please drop this hook since it is our internal workaround for the lack
-of the AUTOREV in our recipes.
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDMwNTEz
+NTY1M1owIwYJKoZIhvcNAQkEMRYEFIXzyfkulOThjGZtgf2S6njyaiJmMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQBSjcgHLuY7zOhX9VHIHPrvF7cMOqdrWIOpRdBtS9xsFaHRvgJo
+AUlTrGC+VPBdvhYdbf+HjnQbEU7vvTV8rIs/vyw6NqRwBF46sPy0Airsc5Aebxe2bH/dB6GvCwyL
+LNbEOBhE6vMH861R/bybH6FpRSQtm0trGqGhR4Efazqp1lJRmdiq8t/9C1ilbOh8EyrUpCBrPpPz
+7oOMScwmuAJ/6kmR5Mulrp3tN3ohS0daukTOYak6GiEbUp0rHVl4q7O9ixlVIZrCR8BGTxJScatZ
+vjGH1bvclp6+8dlVCCVJGrkHURzmFZhJZoderKbfcoDzWj29YNELjl83gmCfdOajAAAAAAAA
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
-
-
+--------------ms020009070603060300000306--
