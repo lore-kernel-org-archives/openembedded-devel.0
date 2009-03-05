@@ -1,38 +1,22 @@
-Received: from [209.85.200.170] (helo=wf-out-1314.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Lf1r6-0004pq-FY
+	(envelope-from <mickey@vanille-media.de>) id 1Lf1zk-0004z9-5E
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Mar 2009 01:54:47 +0100
-Received: by wf-out-1314.google.com with SMTP id 28so4342575wff.3
+	Thu, 05 Mar 2009 02:03:39 +0100
+Received: from [192.168.1.105] (e180183108.adsl.alicedsl.de [85.180.183.108])
+	by drlauer-research.com (Postfix) with ESMTP id E83FE5843DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Mar 2009 16:50:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=ERdIQwWVd3febW4aE900xRkrfQtNhnxptgLC85qVm5I=;
-	b=Mn6WxJHVhFkiANnRVNPcK3tB217XnRhqgtYI2PPOiAsJkhJL83IcrX+uJt4gL4v2Mr
-	qIYomhpgRdtOOtMwdjlPYbD5gtmfdaxnwkAWAMiOLDSZLF/Cik4cOaWKLoLFy9ppemHF
-	wlK12i8lrLTHZW8t65tkhc02iP+oOYE5PJu6A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=drW15iuyF7byhCBZ+AQxNmJ/zLKItFprJWNGH69SHGpqquPFOznGYlFbYm/ndF0VoZ
-	uHNxB996HcIZD8mcpyKzSxC6I8J4qsE70R0qWhWVPK94f2K3gPTlo9QJ0PGJc5JFDau/
-	OvR2h0MPwSmTnvUEDAnwFtdgXqqu3KYWYGWAQ=
-Received: by 10.142.102.5 with SMTP id z5mr214887wfb.334.1236214216721;
-	Wed, 04 Mar 2009 16:50:16 -0800 (PST)
-Received: from gmail.com (adsl-71-146-1-99.dsl.pltn13.sbcglobal.net
-	[71.146.1.99])
-	by mx.google.com with ESMTPS id 30sm4180755wfa.18.2009.03.04.16.50.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Mar 2009 16:50:16 -0800 (PST)
-Date: Wed, 4 Mar 2009 16:50:13 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Thu,  5 Mar 2009 02:23:56 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090305005013.GB9605@gmail.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: [PATCH] Replace siginterrupt () in gnutls
+In-Reply-To: <20090304235032.GA29159@gmail.com>
+References: <20090304235032.GA29159@gmail.com>
+Organization: Vanille-Media
+Date: Thu, 05 Mar 2009 01:59:12 +0100
+Message-Id: <1236214752.10602.135.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Re: [PATCH] Make coreutils 6.x+ install utility to honor STRIP env	variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,72 +30,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 00:55:19 -0000
-X-Groupsio-MsgNum: 8253
-Content-Type: multipart/mixed; boundary="oyUTqETQ0mS9luUI"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Mar 2009 01:04:03 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---oyUTqETQ0mS9luUI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Very welcome, thanks.
 
-Hi 
+Can you do the same for 7.1 while you're there?
 
-This patch replace use of siginterrupt () by sigaction as reccommended
-on opengroup docs
+(So that when we upgrade we already have this working)
 
-http://www.opengroup.org/onlinepubs/000095399/functions/siginterrupt.html
-
-uclibc have conditionalized this function as SUSV4_LEGACY. I could have
-enabled this option but I chose to fix gnutls
-
-OK for .dev
-
-Thx
-
--Khem
+-- 
+:M:
 
 
---oyUTqETQ0mS9luUI
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="gnutls-replace-siginterrupt.patch"
 
-Index: gnutls-2.4.2/src/tests.c
-===================================================================
---- gnutls-2.4.2.orig/src/tests.c	2008-09-15 13:04:19.000000000 -0700
-+++ gnutls-2.4.2/src/tests.c	2009-03-04 15:25:09.000000000 -0800
-@@ -491,6 +491,7 @@
-   int old, secs = 6;
- 
- #ifndef _WIN32
-+  struct sigaction act;
-   signal (SIGALRM, got_alarm);
- #endif
- 
-@@ -511,7 +512,9 @@
-     return TEST_FAILED;
- 
- #ifndef _WIN32
--  old = siginterrupt (SIGALRM, 1);
-+  (void) sigaction(SIGALRM, NULL, &act);
-+  act.sa_flags &= ~SA_RESTART;
-+  old = sigaction(SIGALRM, &act, NULL);
-   alarm (secs);
- #else
-   setsockopt ((int)gnutls_transport_get_ptr (session), SOL_SOCKET, SO_RCVTIMEO,
-@@ -525,7 +528,12 @@
-   while (ret > 0);
- 
- #ifndef _WIN32
--  siginterrupt (SIGALRM, old);
-+  (void) sigaction(SIGALRM, NULL, &act);
-+  if (old)
-+    act.sa_flags &= ~SA_RESTART;
-+  else
-+    act.sa_flags |= SA_RESTART;
-+  sigaction(SIGALRM, &act, NULL);
- #else
-   if (WSAGetLastError () == WSAETIMEDOUT ||
-       WSAGetLastError () == WSAECONNABORTED)
-
---oyUTqETQ0mS9luUI--
