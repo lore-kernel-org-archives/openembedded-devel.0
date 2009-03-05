@@ -1,24 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [195.135.220.15] (helo=mx2.suse.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LfFFi-0006MW-5g
-	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 16:12:50 +0100
-Received: (qmail 7630 invoked by uid 813007); 5 Mar 2009 15:08:28 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 5 Mar 2009 15:08:28 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <utx@penguin.cz>) id 1LfFIY-0006Wv-4n
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Mar 2009 16:15:46 +0100
+Received: from Relay1.suse.de (mail2.suse.de [195.135.221.8])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx2.suse.de (Postfix) with ESMTP id 0B2CB47C5B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2009 16:11:26 +0100 (CET)
+Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
+	by mail.suse.cz (Postfix) with ESMTP id A24B4628082
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2009 16:11:25 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 5 Mar 2009 16:08:27 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.0; x86_64; ;
-	)
-References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-	<20090305044711.GE26343@smtp.west.cox.net>
-	<49AFC6A3.9070406@dls.net>
-In-Reply-To: <49AFC6A3.9070406@dls.net>
-MIME-Version: 1.0
-Message-Id: <200903051608.28012.marcin@juszkiewicz.com.pl>
-Subject: Re: I got the point - did everyone one else? [was: Re:	[PATCH 70/70]...]
+In-Reply-To: <EC5EE493B6046F45A2DDEC4A828DE52E039C63CF@EXCHSRVR.syntech.org>
+References: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A6@EXCHSRVR.syntech.org>
+	<1236246311.607.4.camel@hammer.suse.cz>
+	<EC5EE493B6046F45A2DDEC4A828DE52E039C63CF@EXCHSRVR.syntech.org>
+Date: Thu, 05 Mar 2009 16:11:23 +0100
+Message-Id: <1236265883.5297.48.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.1.1 
+Subject: Re: Error building gnome-vfs-2.22.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,43 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 15:12:50 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Mar 2009 15:15:46 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thursday 05 of March 2009 13:33:39 Mike (mwester) wrote:
+Mark Butsch wrote in Thu03/05 2009 at 09:14 -0500:
 
-> Yes, in the NORMAL case that would be true. =A0Seven patches - fine,
-> that would work. =A010x more than that? - that's clearly a case where
-> clear thinking would put the changes on a branch and have it reviewed
-> there.=20
+>That seems to have fixed it. I did notice that your original "DEPENDS"
+>line was different than what was
+>In the file I had.
 
-I sent hrw/poky-rpm branch for review on 19 November 2008. It contained=20
-nearly same set of patches but needed some work. **No one** (except=20
-Koen) looked at it. Thats why I sent whole branch as patchset to ML.=20
-During first hours it got at least 3 persons who read patches and gave=20
-ideas how to improve their quality. Tom Rini even started builds to=20
-check does everything works on his build machine.
+Tree was outdated. The point of the change was adding of dbus-glib,
+which provides the missing package.
 
-And yes - patchset should be squashed but I am tired of that branch=20
-because I work on it since start of November.
+>Also, does this patch need to be made to the "real" OpenEmbedded files
+>and how should that happen?
 
-> 70 patches? =A0Come on, who's going to extract and apply 70 patches
-> from email? =A0Not likely!
+Yes, just pushed to git repository org.openembedded.dev.
 
-And no one has to - whole patchset is available as GIT branch and I=20
-wrote about it in first mail.
-
-The good thing is that I do not plan any such big merges in near future.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
