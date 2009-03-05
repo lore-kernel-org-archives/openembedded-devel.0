@@ -1,22 +1,34 @@
-Received: from [216.145.245.199] (helo=mx03.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LfCpy-0005rA-TC
-	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 13:38:19 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx03.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LfClm-00065r-Ud
-	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 06:33:47 -0600
-Message-ID: <49AFC6A3.9070406@dls.net>
-Date: Thu, 05 Mar 2009 06:33:39 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LfD4u-0006UD-2n
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 13:53:32 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LfD0i-00020v-D4
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 12:49:12 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 05 Mar 2009 12:49:12 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 05 Mar 2009 12:49:12 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>	<1236182004-4523-70-git-send-email-openembedded@haerwu.biz>	<49AF4FBD.1010209@dls.net>
-	<20090305044711.GE26343@smtp.west.cox.net>
-In-Reply-To: <20090305044711.GE26343@smtp.west.cox.net>
-Subject: Re: I got the point - did everyone one else? [was: Re:	[PATCH 70/70]...]
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 05 Mar 2009 13:49:00 +0100
+Message-ID: <goohnu$kel$1@ger.gmane.org>
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>	<1236182004-4523-70-git-send-email-openembedded@haerwu.biz>	<49AF4FBD.1010209@dls.net>	<20090305044711.GE26343@smtp.west.cox.net>
+	<49AFC6A3.9070406@dls.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
+In-Reply-To: <49AFC6A3.9070406@dls.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: I got the point - did everyone one else? [was: Re: [PATCH 70/70]...]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,34 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 12:38:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Mar 2009 12:53:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Tom Rini wrote:
-> On Wed, Mar 04, 2009 at 10:06:21PM -0600, Mike (mwester) wrote:
-> 
->> 70 patches on the list????
->>
->> I presume somebody is making a point with this.  Yes, ok, _I_ get it  -
->> reading the emails on the list using a cell phone and gprs connection
->> and tiny screen REALLY REALLY Reallly SUCKS when the mailing list also
->> used as a patch review list.
-> 
-> Actually, the point is the opposite.  Spamming the list where everyone
-> is means bugs get caught and working-but-incorrect things get pointed
-> out.
+On 05-03-09 13:33, Mike (mwester) wrote:
 
-Yes, in the *NORMAL* case that would be true.  Seven patches - fine,
-that would work.  10x more than that? - that's clearly a case where
-clear thinking would put the changes on a branch and have it reviewed
-there.  (Which is exactly what recent discussions here have been about,
-hence my conclusion that this patch-mega-bomb was intended to make a
-point about that discussion.)
+> 70 patches?  Come on, who's going to extract and apply 70 patches from
+> email?  Not likely!
 
-70 patches?  Come on, who's going to extract and apply 70 patches from
-email?  Not likely!
+You're missing the point completely. Patches go to the mailinglist for 
+review. You can choose to apply and test them if you wish. If you want 
+to test the 69 patches, you pull the branch marcin provided.
+This is done so that patches get many eyes on them without people needed 
+to use git, and people wanting to test can do one of the following:
 
-Mike (mwester)
+* pull the branch
+
+or
+
+* use patchwork to create a bundle
+
+or
+
+* apply patches by hand
+
+regards,
+
+Koen
+
 
 
