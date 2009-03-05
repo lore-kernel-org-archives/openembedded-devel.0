@@ -1,27 +1,39 @@
-Received: from [195.135.220.15] (helo=mx2.suse.de)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1LfACr-0001ad-44
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1LfAPd-0002SR-3l
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Mar 2009 10:49:35 +0100
-Received: from Relay2.suse.de (relay-ext.suse.de [195.135.221.8])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx2.suse.de (Postfix) with ESMTP id 03E4A473B2
+	Thu, 05 Mar 2009 11:02:45 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 92349DB22E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2009 10:45:13 +0100 (CET)
-Received: from [10.20.1.86] (hammer.suse.cz [10.20.1.86])
-	by mail.suse.cz (Postfix) with ESMTP id 993B8628082
+	Thu,  5 Mar 2009 10:58:26 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id BAF1BDB15BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2009 10:45:12 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Thu,  5 Mar 2009 10:58:25 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (e178114187.adsl.alicedsl.de
+	[85.178.114.187]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2009 10:58:25 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 1A76C3C18C; Thu,  5 Mar 2009 10:58:25 +0100 (CET)
+Date: Thu, 5 Mar 2009 10:58:25 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A6@EXCHSRVR.syntech.org>
-References: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A6@EXCHSRVR.syntech.org>
-Date: Thu, 05 Mar 2009 10:45:11 +0100
-Message-Id: <1236246311.607.4.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.1.1 
-Subject: Re: Error building gnome-vfs-2.22.0
+Message-ID: <20090305095824.GA5717@rhein.zuhause.netz>
+References: <20090305005013.GB9605@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20090305005013.GB9605@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [PATCH] Replace siginterrupt () in gnutls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,34 +47,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 09:49:36 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Mar 2009 10:02:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Mark Butsch wrote in Wed 03/04 2009 at 16:59 -0500:
-> Hello,
+On Wed, Mar 04, 2009 at 04:50:13PM -0800, Khem Raj wrote:
+> Hi 
 > 
-> When building gnome-vfs-2.22.0, it fails task do_configure with the
-> following error message:
+> This patch replace use of siginterrupt () by sigaction as reccommended
+> on opengroup docs
+> 
+> http://www.opengroup.org/onlinepubs/000095399/functions/siginterrupt.html
+> 
+> uclibc have conditionalized this function as SUSV4_LEGACY. I could have
+> enabled this option but I chose to fix gnutls
+> 
+> OK for .dev
+> 
+> Thx
+> 
+> -Khem
+> 
 
-> No package 'dbus-glib-1' found
+> Index: gnutls-2.4.2/src/tests.c
+> ===================================================================
+> --- gnutls-2.4.2.orig/src/tests.c	2008-09-15 13:04:19.000000000 -0700
+> +++ gnutls-2.4.2/src/tests.c	2009-03-04 15:25:09.000000000 -0800
+> @@ -491,6 +491,7 @@
+>    int old, secs = 6;
+>  
+>  #ifndef _WIN32
+> +  struct sigaction act;
+>    signal (SIGALRM, got_alarm);
+>  #endif
+>  
+> @@ -511,7 +512,9 @@
+>      return TEST_FAILED;
+>  
+>  #ifndef _WIN32
+> -  old = siginterrupt (SIGALRM, 1);
+> +  (void) sigaction(SIGALRM, NULL, &act);
+> +  act.sa_flags &= ~SA_RESTART;
+> +  old = sigaction(SIGALRM, &act, NULL);
+>    alarm (secs);
+>  #else
+>    setsockopt ((int)gnutls_transport_get_ptr (session), SOL_SOCKET, SO_RCVTIMEO,
+> @@ -525,7 +528,12 @@
+>    while (ret > 0);
+>  
+>  #ifndef _WIN32
+> -  siginterrupt (SIGALRM, old);
+> +  (void) sigaction(SIGALRM, NULL, &act);
+> +  if (old)
+> +    act.sa_flags &= ~SA_RESTART;
+> +  else
+> +    act.sa_flags |= SA_RESTART;
+> +  sigaction(SIGALRM, &act, NULL);
+>  #else
+>    if (WSAGetLastError () == WSAETIMEDOUT ||
+>        WSAGetLastError () == WSAECONNABORTED)
 
-Try this. I can imagine, that this dependency was undiscovered for a
-long time, as it is pretty common.
++1
 
---- a/packages/gnome/gnome-vfs_2.22.0.bb
-+++ b/packages/gnome/gnome-vfs_2.22.0.bb
-@@ -1,5 +1,5 @@
- LICENSE = "GPL"
--DEPENDS = "libxml2 gconf dbus bzip2 gnome-mime-data zlib"
-+DEPENDS = "libxml2 gconf dbus dbus-glib bzip2 gnome-mime-data zlib"
- RRECOMMENDS_${PN} = "gnome-vfs-plugin-file shared-mime-info"
- # Some legacy packages will require gnome-mime-data to be installed, but use of
- # it is deprecated.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+Bye Henning
 
 
