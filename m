@@ -1,22 +1,22 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [216.145.245.200] (helo=mx04.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Lf1zk-0004z9-5E
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Mar 2009 02:03:39 +0100
-Received: from [192.168.1.105] (e180183108.adsl.alicedsl.de [85.180.183.108])
-	by drlauer-research.com (Postfix) with ESMTP id E83FE5843DA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2009 02:23:56 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090304235032.GA29159@gmail.com>
-References: <20090304235032.GA29159@gmail.com>
-Organization: Vanille-Media
-Date: Thu, 05 Mar 2009 01:59:12 +0100
-Message-Id: <1236214752.10602.135.camel@andromeda>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: Re: [PATCH] Make coreutils 6.x+ install utility to honor STRIP env	variable
+	(envelope-from <mwester@dls.net>) id 1Lf4uz-0000Ai-Sm
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 05:11:03 +0100
+Received: from [209.242.7.188] (helo=[192.168.231.111])
+	by mx04.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1Lf4qr-0006ZT-9h
+	for openembedded-devel@openembedded.org; Wed, 04 Mar 2009 22:06:29 -0600
+Message-ID: <49AF4FBD.1010209@dls.net>
+Date: Wed, 04 Mar 2009 22:06:21 -0600
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+	<1236182004-4523-70-git-send-email-openembedded@haerwu.biz>
+In-Reply-To: <1236182004-4523-70-git-send-email-openembedded@haerwu.biz>
+Subject: I got the point - did everyone one else? [was: Re: [PATCH 70/70]...]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,18 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 01:04:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 Mar 2009 04:11:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Very welcome, thanks.
+70 patches on the list????
 
-Can you do the same for 7.1 while you're there?
+I presume somebody is making a point with this.  Yes, ok, _I_ get it  -
+reading the emails on the list using a cell phone and gprs connection
+and tiny screen REALLY REALLY Reallly SUCKS when the mailing list also
+used as a patch review list.
 
-(So that when we upgrade we already have this working)
+Got it.
 
--- 
-:M:
+Deleted the lot; I can't read them on a cell phone, even if I had the
+patience to struggle through 120+ emails on THIS list alone today!
 
+Let's split this list.  I can't be the only person trying to keep up on
+a poor connection via a cell phone.
+
+-Mike (mwester)
 
 
