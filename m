@@ -1,22 +1,25 @@
-Received: from [199.44.250.2] (helo=exchsrvr.syntech-fuelmaster.com)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1LfELL-0007gD-8e
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Mar 2009 15:14:35 +0100
+	(envelope-from <trini@kernel.crashing.org>) id 1LfEky-00054f-RF
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 15:41:05 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090305143640.CINL16134.fed1rmmtao104.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Thu, 5 Mar 2009 09:36:40 -0500
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id PSch1b00D4dMFYL04SchVP; Thu, 05 Mar 2009 09:36:41 -0500
+X-Authority-Analysis: v=1.0 c=1 a=1DqO7UR4j4cO1NbSN_EA:9
+	a=OFeMJ4A8Kpax9ADfEgxnnP7zXmkA:4 a=b8hG5vVbyAkA:10
+X-CM-Score: 0.00
+Date: Thu, 5 Mar 2009 07:36:41 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090305143641.GF26343@smtp.west.cox.net>
 MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Thu, 5 Mar 2009 09:14:16 -0500
-Message-ID: <EC5EE493B6046F45A2DDEC4A828DE52E039C63CF@EXCHSRVR.syntech.org>
-In-Reply-To: <1236246311.607.4.camel@hammer.suse.cz>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Error building gnome-vfs-2.22.0
-thread-index: AcmdeUfWmQFRlgfERsufdznaSH5y9AAIp4MA
-References: <EC5EE493B6046F45A2DDEC4A828DE52E039C63A6@EXCHSRVR.syntech.org>
-	<1236246311.607.4.camel@hammer.suse.cz>
-From: "Mark Butsch" <mbutsch@syntech-fuelmaster.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Error building gnome-vfs-2.22.0
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Add 2.6.28+2.6.29-rc7 or wait?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,63 +33,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 14:14:35 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 05 Mar 2009 14:41:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Mark Butsch wrote in Wed 03/04 2009 at 16:59 -0500:
-> Hello,
->=20
-> When building gnome-vfs-2.22.0, it fails task do_configure with the
-> following error message:
+Hey all.  Kicking off tests for the RPM package support made me realize
+that one of the boards I'm goint to use (the mx31pdk, aka i.mx31
+3-stack) is finally supported to a degree upstream as of 2.6.29-rc1.
+Should I go and add an -rc7 recipe now or just wait for 2.6.29 to
+finally drop?  Thanks.
 
-> No package 'dbus-glib-1' found
-
-Try this. I can imagine, that this dependency was undiscovered for a
-long time, as it is pretty common.
-
---- a/packages/gnome/gnome-vfs_2.22.0.bb
-+++ b/packages/gnome/gnome-vfs_2.22.0.bb
-@@ -1,5 +1,5 @@
- LICENSE =3D "GPL"
--DEPENDS =3D "libxml2 gconf dbus bzip2 gnome-mime-data zlib"
-+DEPENDS =3D "libxml2 gconf dbus dbus-glib bzip2 gnome-mime-data zlib"
- RRECOMMENDS_${PN} =3D "gnome-vfs-plugin-file shared-mime-info"
- # Some legacy packages will require gnome-mime-data to be installed,
-but use of
- # it is deprecated.
-
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
-
-That seems to have fixed it. I did notice that your original "DEPENDS"
-line was different than what was
-In the file I had.
-
-		DEPENDS =3D "libxml2 gconf gnutls avahi dbus bzip2
-gnome-mime-data zlib"
-
-Also, does this patch need to be made to the "real" OpenEmbedded files
-and how should that happen? (I am new
-to this)
-
-Mark
-
-=20
-=20
-************************************************************************
-************
-This footnote confirms that this email message has been scanned by
-PineApp Mail-SeCure for the presence of malicious code, vandals &
-computer viruses.
-************************************************************************
-************
-
-
-
+-- 
+Tom Rini
 
 
