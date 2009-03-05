@@ -1,36 +1,45 @@
-Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
+Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LfKtp-0005mU-U3
+	(envelope-from <mario.goulart@gmail.com>) id 1LfLE1-00030d-97
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Mar 2009 22:14:37 +0100
-Received: by fxm11 with SMTP id 11so118143fxm.12
+	Thu, 05 Mar 2009 22:35:29 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so114376qwf.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2009 13:10:13 -0800 (PST)
+	Thu, 05 Mar 2009 13:31:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=5+PpChjNR2gm2lVkmrm23V7D72V6H2oaWhJFCyJ12Nc=;
-	b=Rs2XwFCQke4aXseYTyGlJF1IHHBgVnkChSC3figLdQAjQJjmOLTDybsDrnI2V6k4Gf
-	LfcdwFHWv2pi7Iu1gj5uLNTHHOQxR3GPnZVyffuBltuLunh+6HlMEEIeoa0lSdukcWva
-	rNuOtuUqnDnCmR4Jfz8KTQ0+rQEewxlN5j4G8=
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:references:date:in-reply-to:message-id:user-agent:mime-version
+	:content-type; bh=13ladPXjg0hoCX2fNwmbzAa7VJVXPAI+uvvfAV+4e10=;
+	b=ld1hGzxAvCs+cQo4vO4oUYpstkzQxmnsP4BGVRFRcxXp7gtHT3wIW04naIsDr4tK4V
+	aAnvmud9ott1Iptpk8XmGDdvasu5HahADgd8Z+o6FnuctpFrtUZBQK7vSTFekwugD7KH
+	dFZXiBiCfgNnmIwxtAbKUgeKCPLr9mvgx02Yo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=bnebbRAbu8IsWeugS4UBT3BObK4Yxm5olXtXW1SAqkK9DQW2P6GMdWVzqJZTLDtjZb
-	mTOkV0AuGo/zXKZfVzwVIk+afrRfQC7pzcPVwnlCRe5xPvvF7rZBXH4keGtUqJNT7VPT
-	WOH5ILgZCmI3+NoNxTcrwNsZexg9dtMHnsvwI=
+	h=sender:from:to:cc:subject:references:date:in-reply-to:message-id
+	:user-agent:mime-version:content-type;
+	b=AVi7hBnme6IDExqOqr3sk7/gkHecgOGwauTrkfCXtW4f5m3duEuMZi40MASb2GRYrA
+	qR69RsVcTIUTRPfDXuEYDE4mmRYVn80DXXwBQd3tNLXP8xQ5x9iqk2t1PqMhVthWSBVt
+	T2RLTebkiUYPDOjQoLPMU4o7jGci1SqhCUXDU=
+Received: by 10.224.80.202 with SMTP id u10mr2614552qak.355.1236288666172;
+	Thu, 05 Mar 2009 13:31:06 -0800 (PST)
+Received: from nachos.gmail.com (189.27.133.159.dynamic.adsl.gvt.net.br
+	[189.27.133.159])
+	by mx.google.com with ESMTPS id 6sm404975qwd.23.2009.03.05.13.31.04
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 05 Mar 2009 13:31:05 -0800 (PST)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: Otavio Salvador <otavio@ossystems.com.br>
+References: <87iqmp5f58.fsf@neumann.lab.ossystems.com.br>
+	<87eixc40oz.fsf@ucpel.tche.br>
+	<87skls2ihj.fsf@neumann.lab.ossystems.com.br>
+Date: Thu, 05 Mar 2009 18:31:05 -0300
+In-Reply-To: <87skls2ihj.fsf@neumann.lab.ossystems.com.br> (Otavio Salvador's
+	message of "Thu, 05 Mar 2009 10:43:04 -0300")
+Message-ID: <87sklr3bdy.fsf@ossystems.com.br>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
 MIME-Version: 1.0
-Received: by 10.223.109.199 with SMTP id k7mr1356820fap.45.1236287413339; Thu, 
-	05 Mar 2009 13:10:13 -0800 (PST)
-In-Reply-To: <gop5fu$ec$1@ger.gmane.org>
-References: <ac9c93b10903050921y59233df1o731fb4983e22e12f@mail.gmail.com>
-	<gop5fu$ec$1@ger.gmane.org>
-Date: Thu, 5 Mar 2009 22:10:13 +0100
-Message-ID: <ac9c93b10903051310g48c05d5eiaa6371f67383f7f1@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: need help: cdrkit & bitifields
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFH] Support for automatic package versining using git describe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,110 +53,184 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 21:14:38 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 05 Mar 2009 21:35:29 -0000
+Content-Type: multipart/mixed; boundary="=-=-="
 
-2009/3/5 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 05-03-09 18:21, Frans Meulenbroeks wrote:
+--=-=-=
+
+On Thu, 05 Mar 2009 10:43:04 -0300 Otavio Salvador <otavio@ossystems.com.br> wrote:
+
+> Mario Domenech Goulart <mario@ossystems.com.br> writes:
 >
->> Ucbit is an unsigned char
+>> Index: lib/bb/fetch/git.py
+>> ===================================================================
+>> --- lib/bb/fetch/git.py	(revision 1152)
+>> +++ lib/bb/fetch/git.py	(working copy)
+>> @@ -42,11 +42,12 @@
+>>              ud.proto = ud.parm['protocol']
+>>  
+>>          ud.branch = ud.parm.get("branch", "master")
+>> +        ud.tag = None
+>>  
+>>          tag = Fetch.srcrev_internal_helper(ud, d)
+>>          if tag is True:
+>>              ud.tag = self.latest_revision(url, ud, d)	
+>> -        elif tag:
+>> +        elif tag and tag != "1":
+>>              ud.tag = tag
+>>  
+>>          if not ud.tag or ud.tag == "master":
 >
-> unsigned char makes me think of
-> http://www.arm.linux.org.uk/docs/faqs/signedchar.php
+> [...]
 >
-> regards,
->
-> Koen
+> Please drop this hook since it is our internal workaround for the lack
+> of the AUTOREV in our recipes.
 
-Well it is explictly defined as unsigned char.
-from utypes.h:
+Sure.  Attached is the new patch.
 
-/*
- * The IBM AIX C-compiler seems to be the only compiler on the world
- * which does not allow to use unsigned char bit fields as a hint
- * for packed bit fields. Define a pesical type to avoid warnings.
- * The packed attribute is honored wit unsigned int in this case too.
- */
-#if     defined(_AIX) && !defined(__GNUC__)
-
-typedef unsigned int    Ucbit;
-
-#else
-
-typedef unsigned char   Ucbit;
-
-#endif
-
-The link you give is related to chars that are by default signed or unsigne=
-d
-
-This one seems to be related to whether bitfields are ordered left to
-right or right to left
-(and if I recall correctly in the ansi C standard this is undefined
-(but it has been a while since I checked)
-
-Decided to do some testing. On x86: gcc 4.3.2:
-frans@linux-suse:~/wt> cat tst.c
-#include <stdio.h>
-
-typedef struct {
-    unsigned char bit0:1;
-    unsigned char bits:6;
-    unsigned char bit7:1;
-} bitfields;
-
-main(int argc, char **argv)
-{
-    char c =3D 0xf0;
-    bitfields *bf =3D &c;
-
-    printf("bit 0 =3D %d, bits =3D %x, bit7 =3D %x\n", bf->bit0, bf->bits, =
-bf->bit7);
-}
-frans@linux-suse:~/wt> gcc  tst.c
-tst.c: In function =91main=92:
-tst.c:12: warning: initialization from incompatible pointer type
-frans@linux-suse:~/wt> ./a.out
-bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-frans@linux-suse:~/wt> gcc -O1 tst.c
-tst.c: In function =91main=92:
-tst.c:12: warning: initialization from incompatible pointer type
-frans@linux-suse:~/wt> ./a.out
-bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-frans@linux-suse:~/wt> gcc -O2 tst.c
-tst.c: In function =91main=92:
-tst.c:12: warning: initialization from incompatible pointer type
-frans@linux-suse:~/wt> ./a.out
-bit 0 =3D 0, bits =3D 1c, bit7 =3D 1
-frans@linux-suse:~/wt> gcc -O3 tst.c
-tst.c: In function =91main=92:
-tst.c:12: warning: initialization from incompatible pointer type
-frans@linux-suse:~/wt> ./a.out
-bit 0 =3D 0, bits =3D 1c, bit7 =3D 1
-
-Same test on beagle (gcc 4.3.1), -O0  -O1 -O2 -O3
-root@beagleboard:~# ./tst0
-bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-root@beagleboard:~# ./tst1
-bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-root@beagleboard:~# ./tst2
-bit 0 =3D 0, bits =3D 20, bit7 =3D 0
-root@beagleboard:~# ./tst3
-bit 0 =3D 0, bits =3D 20, bit7 =3D 0
-
-Not sure what is happening here.
-I tried to compile cdrkit with -O1 using
-FULL_OPTIMIZATION =3D "-O1"
-FULL_OPTIMIZATION_armv7a =3D "-O1"
-BUILD_OPTIMIZATION =3D "${FULL_OPTIMIZATION}"
-but that did not help either.
-
-There is a compile time macro in gcc called BITS_BIG_ENDIAN but that
-one is set to 0 for arm (same as for x86).
-
-Puzzled....
-
-Frans
+Best wishes.
+Mario
 
 
+--=-=-=
+Content-Type: text/x-diff
+Content-Disposition: inline; filename=describe-revision2.diff
+
+Index: lib/bb/fetch/__init__.py
+===================================================================
+--- lib/bb/fetch/__init__.py	(revision 1152)
++++ lib/bb/fetch/__init__.py	(working copy)
+@@ -196,6 +196,20 @@
+ 
+ srcrev_internal_call = False
+ 
++def get_scms(d, urldata, rev_support_only = True):
++    scms = []
++    for u in urldata:
++        ud = urldata[u]
++        if rev_support_only or ud.method.suppports_srcrev():
++            if not ud.setup:
++                ud.setup_localpath(d)
++            scms.append(u)
++
++    if len(scms) == 0:
++        bb.msg.error(bb.msg.domain.Fetcher, "SRCREV was used yet no valid SCM was found in SRC_URI")
++
++    return scms
++
+ def get_srcrev(d):
+     """
+     Return the version string for the current package
+@@ -217,21 +231,9 @@
+     if bb.fetch.srcrev_internal_call:
+         return "SRCREVINACTION"
+ 
+-    scms = []
+-
+-    # Only call setup_localpath on URIs which suppports_srcrev() 
+     urldata = init(bb.data.getVar('SRC_URI', d, 1).split(), d, False)
+-    for u in urldata:
+-        ud = urldata[u]
+-        if ud.method.suppports_srcrev():
+-            if not ud.setup:
+-                ud.setup_localpath(d)
+-            scms.append(u)
++    scms = get_scms(d, urldata)
+ 
+-    if len(scms) == 0:
+-        bb.msg.error(bb.msg.domain.Fetcher, "SRCREV was used yet no valid SCM was found in SRC_URI")
+-        raise ParameterError
+-
+     bb.data.setVar('__BB_DONT_CACHE','1', d)
+ 
+     if len(scms) == 1:
+@@ -253,6 +255,25 @@
+ 
+     return format
+ 
++def describe_revision(d):
++    """ 
++    Return the output of 'git describe' or 'NO_REV_DESCR' in case no
++    tag is found.
++    """
++    urldata = init(bb.data.getVar('SRC_URI', d, 1).split(), d, False)
++    bb.data.setVar('__BB_DONT_CACHE','1', d)
++    scms = get_scms(d, urldata)
++    scm = ''
++    if len(scms) == 1:
++        scm = scms[0]
++    else:
++        bb.msg.error(bb.msg.domain.Fetcher, "describe_revision does not support multiple SCMs.")
++
++    try: 
++        return urldata[scm].method.describe_revision(scm, urldata[scm], d)
++    except NoMethodError:
++        return "NO_REV_DESCR"
++
+ def localpath(url, d, cache = True):
+     """
+     Called from the parser with cache=False since the cache isn't ready 
+Index: lib/bb/fetch/git.py
+===================================================================
+--- lib/bb/fetch/git.py	(revision 1152)
++++ lib/bb/fetch/git.py	(working copy)
+@@ -141,6 +141,16 @@
+     def _want_sortable_revision(self, url, ud, d):
+         return bb.data.getVar("BB_GIT_CLONE_FOR_SRCREV", d, True) or False
+ 
++    def _chrepo(self, repodir, ud, d):
++        # Check if we have the rev already
++        if not os.path.exists(repodir):
++            print "no repo"
++            self.go(None, ud, d)
++
++        os.chdir(repodir)
++        if not self._contains_ref(ud.tag, d):
++            self.go(None, ud, d)
++
+     def _sortable_revision(self, url, ud, d):
+         """
+         This is only called when _want_sortable_revision called true
+@@ -162,15 +172,8 @@
+ 
+         cwd = os.getcwd()
+ 
+-        # Check if we have the rev already
+-        if not os.path.exists(repodir):
+-            print "no repo"
+-            self.go(None, ud, d)
++        self._chrepo(repodir, ud, d)
+ 
+-        os.chdir(repodir)
+-        if not self._contains_ref(ud.tag, d):
+-            self.go(None, ud, d)
+-
+         output = runfetchcmd("git rev-list %s -- 2> /dev/null | wc -l" % ud.tag, d, quiet=True)
+         os.chdir(cwd)
+ 
+@@ -179,3 +182,23 @@
+         return sortable_revision
+         
+ 
++    def describe_revision(self, url, ud, d):
++        gitsrcname = '%s%s' % (ud.host, ud.path.replace('/', '.'))
++        repodir = os.path.join(data.expand('${GITDIR}', d), gitsrcname)
++
++        # Runtime warning on wrongly configured sources
++        if ud.tag == "1":
++            bb.msg.error(1, bb.msg.domain.Fetcher, "SRCREV is '1'. This indicates a configuration error of %s" % url)
++            return "0+1"
++
++        cwd = os.getcwd()
++
++        self._chrepo(repodir, ud, d)
++
++        rev_descr = ''
++        try:
++            rev_descr = runfetchcmd("git describe 2>/dev/null", d, quiet=True).strip()
++        except FetchError:
++            rev_descr = "NO_REV_DESCR"
++        os.chdir(cwd)
++        return rev_descr
+
+--=-=-=--
