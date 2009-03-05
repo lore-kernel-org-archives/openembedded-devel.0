@@ -1,29 +1,38 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LfF1W-0005l0-Cl
-	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 15:58:10 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090305145348.EPBX4363.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 5 Mar 2009 09:53:48 -0500
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id PStm1b00N4dMFYL04StnuL; Thu, 05 Mar 2009 09:53:47 -0500
-X-Authority-Analysis: v=1.0 c=1 a=PtGMK2djFQ4A:10 a=1JGWZoleitcA:10
-	a=lwp0F9UxEp7olKD8OmgA:9 a=TpY_g4SAcpsZbGHwqp-qreT8xcQA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Thu, 5 Mar 2009 07:53:46 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090305145346.GG26343@smtp.west.cox.net>
-References: <20090305143641.GF26343@smtp.west.cox.net>
-	<49AFE5BE.4050205@xora.org.uk>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LfF7r-000605-QG
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Mar 2009 16:04:43 +0100
+Received: by bwz9 with SMTP id 9so3274299bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Mar 2009 07:00:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=4dsJgwcm19aTn5GpaRsYmBDFR1G2YdV3aPxTdx7MX5c=;
+	b=VUwGOiP/mxKEL+v4GReAw/PHQnPNZqsuX/rDemBGSm57CzR9rRiVIAdZDRp/+NUhWI
+	nQeoiJyelYvtZUlTa2EwfsGV+Az4Nx8ZCdBu7J5FvXMgNHJoOzNOolXMDLWaeo67iBkA
+	YhsA4T7ZaTvk0TcCMf2w+bRVrFR3x/rNa7510=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=dmQxN1hcDVtQ3A8dRZ17W5LRUmLO6c5cI6LvbGkpFtZ9cjBUqQaGZ1VenDxqyaADMl
+	GZEUhowXjattWXHE/g6j1qVBc04WICfDrfY4t2qzSrrzELedEaQaj6u1NPS9N58Lhxas
+	RVeGdVwAAt6nPk9+wXfwJDo4gMQlwPDTK2VXM=
 MIME-Version: 1.0
-In-Reply-To: <49AFE5BE.4050205@xora.org.uk>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Add 2.6.28+2.6.29-rc7 or wait?
+Received: by 10.223.115.80 with SMTP id h16mr1007198faq.94.1236265220889; Thu, 
+	05 Mar 2009 07:00:20 -0800 (PST)
+In-Reply-To: <49AFDBA5.7000308@balister.org>
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+	<1236182004-4523-70-git-send-email-openembedded@haerwu.biz>
+	<49AF4FBD.1010209@dls.net> <20090305044711.GE26343@smtp.west.cox.net>
+	<49AFC6A3.9070406@dls.net> <49AFDBA5.7000308@balister.org>
+Date: Thu, 5 Mar 2009 16:00:20 +0100
+Message-ID: <ac9c93b10903050700g423ba896k658be62863eede@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: I got the point - did everyone one else? [was: Re: [PATCH 70/70]...]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +46,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 14:58:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Mar 2009 15:04:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 05, 2009 at 02:46:22PM +0000, Graeme Gregory wrote:
-> Tom Rini wrote:
-> > Hey all.  Kicking off tests for the RPM package support made me realize
-> > that one of the boards I'm goint to use (the mx31pdk, aka i.mx31
-> > 3-stack) is finally supported to a degree upstream as of 2.6.29-rc1.
-> > Should I go and add an -rc7 recipe now or just wait for 2.6.29 to
-> > finally drop?  Thanks.
-> >
-> >   
-> There are already rc5/rc6 recipes so feel free to do rc7
+Is the policy now to send *all* patches to the list?
+Or only the critical ones (e.g. the ones that affect the build system
+and core functionality)?
 
-Ah, missed those, thanks.
-
--- 
-Tom Rini
+Frans.
 
 
