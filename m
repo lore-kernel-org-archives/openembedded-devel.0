@@ -1,20 +1,35 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LfBsX-0006uf-NS
-	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 12:36:41 +0100
-Received: (qmail 14008 invoked by uid 813007); 5 Mar 2009 11:32:21 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 5 Mar 2009 11:32:21 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: "openembedded-devel" <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Mar 2009 12:32:07 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.0; x86_64; ;
-	)
-MIME-Version: 1.0
-Message-Id: <200903051232.09899.marcin@juszkiewicz.com.pl>
-Subject: [PATCH] gtk+: make 2.14.2 default version instead of 2.10.14
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LfBvd-0006yR-SN
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 12:39:53 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LfBrO-0007Z5-54
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 11:35:30 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 05 Mar 2009 11:35:30 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 05 Mar 2009 11:35:30 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 05 Mar 2009 12:35:17 +0100
+Message-ID: <gooddl$6mn$1@ger.gmane.org>
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>	<1236182004-4523-70-git-send-email-openembedded@haerwu.biz>	<49AF4FBD.1010209@dls.net>
+	<20090305044711.GE26343@smtp.west.cox.net>
+	<d1b08f940903050045meefdefft6fe4f83045692207@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
+In-Reply-To: <d1b08f940903050045meefdefft6fe4f83045692207@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: I got the point - did everyone one else? [was: Re: [PATCH 70/70]...]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,45 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 11:36:42 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Mar 2009 11:39:54 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 05-03-09 09:45, Andrea Adami wrote:
+> Wasn't suggested/agreed to post patches for review on 'openembedded-commits' ?
 
-commit 67d5b4c8f0283225eab0408099d0d3cf440c0fd0
-Author: Marcin Juszkiewicz <hrw@openembedded.org>
-Date:   Thu Mar 5 11:03:13 2009 +0100
+No, patches are human generated and need to get posted to *all* developers.
 
-    gtk+: make 2.14.2 default version instead of 2.10.14
+regards,
 
-    =C5ngstr=F6m uses this version and many components of metadata depends
-    on at least 2.12.
-
-diff --git a/packages/gtk+/gtk+_2.14.2.bb b/packages/gtk+/gtk+_2.14.2.bb
-index 38dd3a4..88c40dd 100644
-=2D-- a/packages/gtk+/gtk+_2.14.2.bb
-+++ b/packages/gtk+/gtk+_2.14.2.bb
-@@ -4,9 +4,6 @@ PR =3D "r3"
-
- DEPENDS +=3D "cairo jasper"
-
-=2D# disabled per default - this uses as little patches as possible
-=2DDEFAULT_PREFERENCE =3D "-1"
-=2D
- SRC_URI =3D=20
-"http://download.gnome.org/sources/gtk+/2.14/gtk+-${PV}.tar.bz2 \
-            file://xsettings.patch;patch=3D1 \
-            file://run-iconcache.patch;patch=3D1 \
-
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+Koen
 
 
 
