@@ -1,38 +1,24 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LfF7r-000605-QG
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Mar 2009 16:04:43 +0100
-Received: by bwz9 with SMTP id 9so3274299bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2009 07:00:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=4dsJgwcm19aTn5GpaRsYmBDFR1G2YdV3aPxTdx7MX5c=;
-	b=VUwGOiP/mxKEL+v4GReAw/PHQnPNZqsuX/rDemBGSm57CzR9rRiVIAdZDRp/+NUhWI
-	nQeoiJyelYvtZUlTa2EwfsGV+Az4Nx8ZCdBu7J5FvXMgNHJoOzNOolXMDLWaeo67iBkA
-	YhsA4T7ZaTvk0TcCMf2w+bRVrFR3x/rNa7510=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=dmQxN1hcDVtQ3A8dRZ17W5LRUmLO6c5cI6LvbGkpFtZ9cjBUqQaGZ1VenDxqyaADMl
-	GZEUhowXjattWXHE/g6j1qVBc04WICfDrfY4t2qzSrrzELedEaQaj6u1NPS9N58Lhxas
-	RVeGdVwAAt6nPk9+wXfwJDo4gMQlwPDTK2VXM=
-MIME-Version: 1.0
-Received: by 10.223.115.80 with SMTP id h16mr1007198faq.94.1236265220889; Thu, 
-	05 Mar 2009 07:00:20 -0800 (PST)
-In-Reply-To: <49AFDBA5.7000308@balister.org>
-References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-	<1236182004-4523-70-git-send-email-openembedded@haerwu.biz>
-	<49AF4FBD.1010209@dls.net> <20090305044711.GE26343@smtp.west.cox.net>
-	<49AFC6A3.9070406@dls.net> <49AFDBA5.7000308@balister.org>
-Date: Thu, 5 Mar 2009 16:00:20 +0100
-Message-ID: <ac9c93b10903050700g423ba896k658be62863eede@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LfFFi-0006MW-5g
+	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 16:12:50 +0100
+Received: (qmail 7630 invoked by uid 813007); 5 Mar 2009 15:08:28 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 5 Mar 2009 15:08:28 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: I got the point - did everyone one else? [was: Re: [PATCH 70/70]...]
+Date: Thu, 5 Mar 2009 16:08:27 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.0; x86_64; ;
+	)
+References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
+	<20090305044711.GE26343@smtp.west.cox.net>
+	<49AFC6A3.9070406@dls.net>
+In-Reply-To: <49AFC6A3.9070406@dls.net>
+MIME-Version: 1.0
+Message-Id: <200903051608.28012.marcin@juszkiewicz.com.pl>
+Subject: Re: I got the point - did everyone one else? [was: Re:	[PATCH 70/70]...]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,14 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2009 15:04:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Mar 2009 15:12:50 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Is the policy now to send *all* patches to the list?
-Or only the critical ones (e.g. the ones that affect the build system
-and core functionality)?
+On Thursday 05 of March 2009 13:33:39 Mike (mwester) wrote:
 
-Frans.
+> Yes, in the NORMAL case that would be true. =A0Seven patches - fine,
+> that would work. =A010x more than that? - that's clearly a case where
+> clear thinking would put the changes on a branch and have it reviewed
+> there.=20
+
+I sent hrw/poky-rpm branch for review on 19 November 2008. It contained=20
+nearly same set of patches but needed some work. **No one** (except=20
+Koen) looked at it. Thats why I sent whole branch as patchset to ML.=20
+During first hours it got at least 3 persons who read patches and gave=20
+ideas how to improve their quality. Tom Rini even started builds to=20
+check does everything works on his build machine.
+
+And yes - patchset should be squashed but I am tired of that branch=20
+because I work on it since start of November.
+
+> 70 patches? =A0Come on, who's going to extract and apply 70 patches
+> from email? =A0Not likely!
+
+And no one has to - whole patchset is available as GIT branch and I=20
+wrote about it in first mail.
+
+The good thing is that I do not plan any such big merges in near future.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
