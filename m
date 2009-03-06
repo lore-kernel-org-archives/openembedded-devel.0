@@ -1,22 +1,25 @@
-Received: from [216.145.245.200] (helo=mx04.dls.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LfOLG-00060V-6K
-	for openembedded-devel@openembedded.org; Fri, 06 Mar 2009 01:55:10 +0100
-Received: from [209.242.7.188] (helo=[192.168.231.111])
-	by mx04.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LfOH1-0005ZY-G4
-	for openembedded-devel@openembedded.org; Thu, 05 Mar 2009 18:50:47 -0600
-Message-ID: <49B0735C.6080802@dls.net>
-Date: Thu, 05 Mar 2009 18:50:36 -0600
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.19) Gecko/20081209 Thunderbird/2.0.0.19 Mnenhy/0.7.6.0
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <87iqmp5f58.fsf@neumann.lab.ossystems.com.br>	<87eixc40oz.fsf@ucpel.tche.br>	<87skls2ihj.fsf@neumann.lab.ossystems.com.br>
-	<87sklr3bdy.fsf@ossystems.com.br>
-In-Reply-To: <87sklr3bdy.fsf@ossystems.com.br>
-Subject: Re: [RFH] Support for automatic package versining using git describe
+	(envelope-from <pb@reciva.com>) id 1LfW2V-0005do-8F
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 Mar 2009 10:08:19 +0100
+Received: from 88-109-164-210.dynamic.dsl.as9105.com ([88.109.164.210]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1LfVyB-0006Op-KA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 Mar 2009 09:03:51 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ac9c93b10903051310g48c05d5eiaa6371f67383f7f1@mail.gmail.com>
+References: <ac9c93b10903050921y59233df1o731fb4983e22e12f@mail.gmail.com>
+	<gop5fu$ec$1@ger.gmane.org>
+	<ac9c93b10903051310g48c05d5eiaa6371f67383f7f1@mail.gmail.com>
+Date: Fri, 06 Mar 2009 09:03:50 +0000
+Message-Id: <1236330230.4607.54.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: need help: cdrkit & bitifields
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,25 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2009 00:55:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 06 Mar 2009 09:08:20 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Mario Domenech Goulart wrote:
-> On Thu, 05 Mar 2009 10:43:04 -0300 Otavio Salvador <otavio@ossystems.com.br> wrote:
->> Please drop this hook since it is our internal workaround for the lack
->> of the AUTOREV in our recipes.
-> 
-> Sure.  Attached is the new patch.
+On Thu, 2009-03-05 at 22:10 +0100, Frans Meulenbroeks wrote:
+> main(int argc, char **argv)
+> {
+>     char c = 0xf0;
+>     bitfields *bf = &c;
 
-I don't know the context for these patches, so please forgive me if I
-should be reading the sources instead of asking here (perhaps my
-question makes no sense at all):
+This isn't a legal thing to do.  Struct addresses on ARM need to be
+32-bit aligned, whereas &c is only guaranteed aligned to an 8-bit
+boundary.  You can't, in general, take a pointer to an arbitrary type,
+cast it to a struct and expect to get good results.
 
-What does this code do if I make a tarball snapshot of the
-"openembedded" directory structure, excluding the .git directory, and
-attempt to build from that?
+You need to use a union, or something like:
 
--Mike (mwester)
+struct wrapped_char {
+	char c;
+}
+
+struct wrapped_char wc;
+wc.c = 0xf0;
+bitfields &bf = &wc;
+
+p.
+
+
 
 
