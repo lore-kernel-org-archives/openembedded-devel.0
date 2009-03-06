@@ -1,25 +1,32 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thommycheck@gmx.de>) id 1LfYZu-0007RZ-JN
+Received: from [74.125.46.156] (helo=yw-out-1718.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LfYvY-0008Ci-Lr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Mar 2009 12:50:58 +0100
-Received: (qmail invoked by alias); 06 Mar 2009 11:46:28 -0000
-Received: from p57BB734A.dip.t-dialin.net (EHLO [192.168.2.2]) [87.187.115.74]
-	by mail.gmx.net (mp023) with SMTP; 06 Mar 2009 12:46:28 +0100
-X-Authenticated: #2218979
-X-Provags-ID: V01U2FsdGVkX1+RAWg9AxeRKYcPLC3bEPJjH0i70UXGug3TsUAG5V
-	6fmsPtVlV4k9H5
-Message-ID: <49B10D01.2080801@gmx.de>
-Date: Fri, 06 Mar 2009 12:46:09 +0100
-From: Thomas Kunze <thommycheck@gmx.de>
-User-Agent: Thunderbird 2.0.0.19 (Windows/20081209)
+	Fri, 06 Mar 2009 13:13:20 +0100
+Received: by yw-out-1718.google.com with SMTP id 4so222619ywq.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Mar 2009 04:08:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=yx+LJbHf5bqiTYZB7sLtxuVpbns67EJ9NfmAJLNghhg=;
+	b=I/1wD1ML7X0wZ03iw+e76IqbE01AcKIGCzaLOOLoLdsqvbtaNVwHI9zKblRQRnx41d
+	ZrjsYb9GtCiM/4NgTj6qgW01Xtv6PpvFwSd4wDNcd+mO0USoLK/XdiQrE2dkTScQCu8J
+	C8BkHv8o5scen0fGsKu7IdFedqRNlXdzzukNo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=BVWVZLcKBIIMsc4SBw2h0jbt8rM0W4sIAjVL9hmQz82ekR+SGjeNO2wqq5mZ+topw1
+	3KKjNYkyfCNC+6YStjNTFUIVL8/GMQQ3Cd7vTYF0FWCUD/fbalkLyYtXM5cSCPUhgsTY
+	afCgoodByt+Vy5kxkSH6Q+pCPkvoK8Jhl+3Lk=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20090306064607.C5FCC1880D9@amethyst.openembedded.net>
-In-Reply-To: <20090306064607.C5FCC1880D9@amethyst.openembedded.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.49
-Subject: Re: [oe-commits] Koen Kooi : linux.inc: add back 'yes '' | oe_runmake oldconfig' that got dropped
+Received: by 10.220.75.136 with SMTP id y8mr727920vcj.26.1236341331926; Fri, 
+	06 Mar 2009 04:08:51 -0800 (PST)
+Date: Fri, 6 Mar 2009 13:08:51 +0100
+Message-ID: <c384c5ea0903060408j344cff74s7dd2881c408a9b03@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: redirection to historical/ snapshots missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,47 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2009 11:50:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 06 Mar 2009 12:13:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-GIT User account schrieb:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: cdd27f17b730c0f5ba537fdee6a9086549f67410
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=cdd27f17b730c0f5ba537fdee6a9086549f67410
->
-> Author: Koen Kooi <koen@openembedded.org>
-> Date:   Fri Mar  6 07:44:00 2009 +0100
->
-> linux.inc: add back 'yes '' | oe_runmake oldconfig' that got dropped
->
-> ---
->
->  packages/linux/linux.inc |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/packages/linux/linux.inc b/packages/linux/linux.inc
-> index f3d3bf8..984efac 100644
-> --- a/packages/linux/linux.inc
-> +++ b/packages/linux/linux.inc
-> @@ -124,6 +124,7 @@ do_configure_prepend() {
->                  echo "CONFIG_ROOT_NFS=y"                 >> ${S}/.config
->                  echo "CONFIG_CMDLINE=\"${CMDLINE_NFSROOT_USB}\"" >> ${S}/.config
->          fi
-> +		yes '' | oe_runmake oldconfig
->  }
->  
->  do_configure_append_avr32() {
->
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->   
-I dropped it accidentally, but the same line is already in do_configure 
-from kernel.bbclass. As we only prepend this task there is no reason to 
-duplicate it, isn't it?
+Hello,
+
+http://wiki.openembedded.net/snapshots/
+
+has changed to
+
+http://wiki.openembedded.net/snapshots/historical
+
+but the redirection at http://www.openembedded.org/snapshots/ points
+to the old one.
+
+
+Regards,
+-- 
+Leon
 
 
