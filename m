@@ -1,30 +1,27 @@
-Received: from [85.33.2.25] (helo=smtp-out25.alice.it)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1LfgkO-0000RA-Cv
+	(envelope-from <utx@penguin.cz>) id 1LfhBW-0001KM-IS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Mar 2009 21:34:20 +0100
-Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out25.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 6 Mar 2009 21:29:53 +0100
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO01.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 6 Mar 2009 21:29:46 +0100
-Received: from [192.168.1.107] ([79.54.131.222]) by FBCMCL01B06.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 6 Mar 2009 21:29:46 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Fri, 06 Mar 2009 22:02:22 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 6FDAE1409204;
+	Fri,  6 Mar 2009 21:59:30 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id K7GBaTo60FdV; Fri,  6 Mar 2009 21:59:30 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id 0D14B1416BA2;
+	Fri,  6 Mar 2009 21:59:30 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200903062024.13519.marcin@juszkiewicz.com.pl>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF686@hiob.intern.dresearch.de>
-	<a7f8874a0903020942y65f55a90rec06b1bc87ac8702@mail.gmail.com>
-	<432beae0903061047p33bb6052o28e3d9b73847f1bd@mail.gmail.com>
-	<200903062024.13519.marcin@juszkiewicz.com.pl>
-Date: Fri, 06 Mar 2009 21:28:47 +0100
-Message-Id: <1236371327.8818.5.camel@port4>
+Date: Fri, 06 Mar 2009 21:57:50 +0100
+Message-Id: <1236373070.7461.49.camel@utx.utx.cz>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.4 
-X-OriginalArrivalTime: 06 Mar 2009 20:29:46.0519 (UTC)
-	FILETIME=[4A488A70:01C99E9A]
-Subject: Re: Ugly build problem with emacs/qemu
+X-Mailer: Evolution 2.22.1.1 
+Cc: Matthias Hentges <matthias@hentges.net>
+Subject: [PATCH] new interface is already up but udev must call ifup anyway
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,30 +35,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2009 20:34:20 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 Mar 2009 21:02:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2009-03-06 at 20:24 +0100, Marcin Juszkiewicz wrote:
-> On Friday 06 of March 2009 19:47:58 Justin Patrin wrote:
-> > > I don't kow about openSuse, but I remember that Fedora used to have
-> > >  some kernel patches that did not play well with QEMU. But that was
-> > >  back on Ferora 7, since then I switched to ubuntu. I don't even
-> > >  rmember exactly what patch caused the problems, but IIRC it was
-> > >  security related.
-> >
-> > Hmmm, good point it could be SELinux. Could you try disabling that,
-> > if you have it enabled?
-> 
-> It is not SELinux but one kernel patch - linux-2.6-execshield.patch to 
-> be exact. Rebuild Fedora kernel without that one or use vanilla one.
-> 
-> Took me lot of kernel rebuilds to find that out.
-> 
-> Regards, 
-ah ok I do not have that because I run a stock vanilla kernel.
-Denis.
+Few weeks ago yet another change happened in the dark, and network did
+not start to work automatically after inserting my WLAN card.
 
+Debugging this problem, I found that interface is already up=EF=BB=BF but=
+ not
+configured when /etc/udev/scripts/network.sh is called. This script
+thinks, that card is already configured and quits. This behavior is
+intentional and was introduced three years ago=EF=BB=BF (and working).
+
+The fix actually reverts following change:
+Author: Matthias Hentges <oe@hentges.net>
+Date:   Thu Apr 20 16:01:09 2006 +0000
+    udev: network.sh: Do not ifup an already configured network device ag=
+ain.
+
+That is why I am asking:
+
+Is anybody aware of change, that made new interfaces up without
+configuring them? Was it an intention or not?
+
+Matthias, do you remember, which problem it addressed?
+
+My card is prism2 based wlan card. Firmware is upgraded into card RAM.
+
+diff --git a/packages/udev/files/network.sh b/packages/udev/files/network=
+.sh
+index 182c26d..c97f9f0 100644
+--- a/packages/udev/files/network.sh
++++ b/packages/udev/files/network.sh
+@@ -47,7 +47,7 @@ fi
+ if grep -q "iface \+$INTERFACE" /etc/network/interfaces; then
+   case $ACTION in
+     add)
+-    	ifconfig | grep -q "^$INTERFACE" || ifup $INTERFACE
++    	ifup $INTERFACE
+     	;;
+     remove)
+     	ifdown $INTERFACE
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
