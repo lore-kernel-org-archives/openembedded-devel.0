@@ -1,27 +1,19 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [199.44.250.2] (helo=exchsrvr.syntech-fuelmaster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1LfbjT-0002Ct-CE
+	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1LfcVb-0000JW-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Mar 2009 16:13:03 +0100
-Received: from 88-109-164-210.dynamic.dsl.as9105.com ([88.109.164.210]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Lfbf7-0004MB-5M
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Mar 2009 15:08:33 +0000
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b10903060142k13d1908btcd39319477b37530@mail.gmail.com>
-References: <ac9c93b10903050921y59233df1o731fb4983e22e12f@mail.gmail.com>
-	<gop5fu$ec$1@ger.gmane.org>
-	<ac9c93b10903051310g48c05d5eiaa6371f67383f7f1@mail.gmail.com>
-	<1236330230.4607.54.camel@lenovo.internal.reciva.com>
-	<ac9c93b10903060142k13d1908btcd39319477b37530@mail.gmail.com>
-Date: Fri, 06 Mar 2009 15:08:32 +0000
-Message-Id: <1236352112.4607.57.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: need help: cdrkit & bitifields
+	Fri, 06 Mar 2009 17:02:47 +0100
+MIME-Version: 1.0
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Date: Fri, 6 Mar 2009 11:02:23 -0500
+Message-ID: <EC5EE493B6046F45A2DDEC4A828DE52E039C64B2@EXCHSRVR.syntech.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: need help with do_rootfs "Cannot find package xserver-kdrive"
+thread-index: AcmedO9ECGTH2yLrTRCiFSBb0kpxsg==
+From: "Mark Butsch" <mbutsch@syntech-fuelmaster.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: need help with do_rootfs "Cannot find package xserver-kdrive"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +27,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2009 15:13:03 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 Mar 2009 16:02:47 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2009-03-06 at 10:42 +0100, Frans Meulenbroeks wrote:
-> However the problem occurs in code that I have not written and that is
-> not easy to modify.
-> I don't have the code handy but it could be that the code in cdrkit
-> works just the other way:
+Hello,
 
-What I meant really was that the outcome of your test program might have
-been influenced by alignment issues, and this might have been obscuring
-the real situation with cdrtools.
+I am just getting back to working with OE and am having trouble
+generating my image. It worked fine when I last used it, about a year
+ago. I know there have been many changes in OE in the at time.
 
-> E.g. something like:
-> bitfields bf;
-> char *p = &bf;
-> *p = 0xf0;
+Building my image fails in "task do_rootfs" with an error "Cannot find
+package xserver-kdrive".
 
-Right, this is safe.  Casting from a more restrictive type to "char*" is
-always OK since there are no types with less restrictive alignment
-requirements than char.
+The recipe for kdrive (xserver-kdrive_1.3.0.0.bb) runs, but in the
+..deploy/ipk directory there doesn't seem to be an .ipk file for
+xserver-kdrive like there was before. I guess that is why it can't find
+the package in do_rootfs.
 
-> I'll test that variant as well.
-> The stupid thing is that cdrkit words under opensuse/x68 but not under
-> oe/arm (LE).
-> So either this is a compiler issue or a nonportable construct.
+Any suggestions on how to figure this out?
 
-Yes, it seems.  My guess would be that it's a non-portable construct
-somewhere rather than a compiler bug, but either is possible.
-
-If it does turn out to be a struct alignment thing then you might be
-able to work around it with judicious use of "__attribute__
-((__packed__))".
-
-It might also be worth checking out the ARM binary from Debian to see if
-that behaves the same.
-
-p.
-
-
+Mark
 
 
