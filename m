@@ -1,37 +1,32 @@
-Received: from [65.182.109.73] (helo=mta4.brinkster.com)
+Received: from [85.37.17.114] (helo=smtp-out114.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1Lfgdc-0008WR-C8
+	(envelope-from <GNUtoo@no-log.org>) id 1LfgjW-0000Pc-F8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Mar 2009 21:27:20 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta4.brinkster.com (Postfix) with ESMTP id E9D2E5ED635
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Mar 2009 15:22:46 -0500 (EST)
-X-Virus-Scanned: amavisd-new at 
-X-Spam-Flag: NO
-X-Spam-Score: 0.39
-X-Spam-Level: 
-X-Spam-Status: No, score=0.39 tagged_above=-10 required=5 tests=[AWL=-0.342,
-	BAYES_00=-2.599, MSGID_MULTIPLE_AT=1.449, RCVD_IN_PBL=0.905,
-	RCVD_IN_SORBS_DUL=0.877, RDNS_DYNAMIC=0.1]
-Received: from mta4.brinkster.com ([127.0.0.1])
-	by localhost (mta4.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 27DtkqS4mh8O
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Mar 2009 15:22:46 -0500 (EST)
-Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
-	[82.46.19.72])
-	by mta4.brinkster.com (Postfix) with ESMTP id 7EA915ED2BD
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Mar 2009 15:22:45 -0500 (EST)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 Mar 2009 20:22:15 -0000
-Message-ID: <036901c99e99$3ee48b80$bcada280$@Willis@Distant-earth.com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AcmemT1I8KA993NoSbeNeYXT6A0j6Q==
-Subject: [PATCH] Update libgles-omap3 packages to use a cleaned up init script.
+	Fri, 06 Mar 2009 21:33:26 +0100
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out114.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 6 Mar 2009 21:28:53 +0100
+Received: from FBCMCL01B02.fbc.local ([192.168.69.83]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 6 Mar 2009 21:28:53 +0100
+Received: from [192.168.1.107] ([79.54.131.222]) by FBCMCL01B02.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 6 Mar 2009 21:28:53 +0100
+From: GNUtoo <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <432beae0903061047p33bb6052o28e3d9b73847f1bd@mail.gmail.com>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF686@hiob.intern.dresearch.de>
+	<49A7BD17.2080407@dresearch.de>
+	<432beae0902271228w2150a17fo79e5a76c8eb71b42@mail.gmail.com>
+	<49AAA599.5070507@dresearch.de>
+	<a7f8874a0903020942y65f55a90rec06b1bc87ac8702@mail.gmail.com>
+	<432beae0903061047p33bb6052o28e3d9b73847f1bd@mail.gmail.com>
+Date: Fri, 06 Mar 2009 21:27:56 +0100
+Message-Id: <1236371276.8818.4.camel@port4>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 06 Mar 2009 20:28:53.0289 (UTC)
+	FILETIME=[2A8E4990:01C99E9A]
+Subject: Re: Ugly build problem with emacs/qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,164 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2009 20:27:20 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Fri, 06 Mar 2009 20:33:26 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Language: en-us
 
-Update to libgles-omap3 init script to respect stop/start/restart etc.
-
-Signed-off-by: David-John Willis <John.Willis@Distant-earth.com>
----
- packages/powervr-drivers/libgles-omap3/rc.pvr      |   72
-+++++++++++++++----
- .../powervr-drivers/libgles-omap3_3.00.00.01.bb    |    2 +-
- .../powervr-drivers/libgles-omap3_3.00.00.05.bb    |    2 +-
- .../powervr-drivers/libgles-omap3_3.00.00.06.bb    |    2 +-
- 4 files changed, 60 insertions(+), 18 deletions(-)
- mode change 100644 => 100755
-packages/powervr-drivers/libgles-omap3_3.00.00.01.bb
- mode change 100644 => 100755
-packages/powervr-drivers/libgles-omap3_3.00.00.05.bb
-
-diff --git a/packages/powervr-drivers/libgles-omap3/rc.pvr
-b/packages/powervr-drivers/libgles-omap3/rc.pvr
-index 244f480..83c4414 100755
---- a/packages/powervr-drivers/libgles-omap3/rc.pvr
-+++ b/packages/powervr-drivers/libgles-omap3/rc.pvr
-@@ -1,24 +1,66 @@
- #!/bin/sh
- 
--#rmmod bc_example
--rmmod omaplfb
--rmmod pvrsrvkm
-+DESC="SGX driver"
-+NAME="PVRSRV"
- 
--insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
--#modprobe bc_example
--modprobe omaplfb
- 
--pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
-+d_stop() {
-+	if [ -e /dev/pvrsrvkm ] ; then 
-+		rm -f /dev/pvrsrvkm
-+	fi
- 
--if [ -e /dev/pvrsrvkm ] ; then 
--	rm -f /dev/pvrsrvkm
--fi
-+	if `grep -q pvrsrv /proc/modules` ; then
-+		#rmmod bc_example
-+		rmmod omaplfb
-+		rmmod pvrsrvkm
-+	fi
-+}
- 
--mknod /dev/pvrsrvkm c $pvr_maj 0 
--chmod 666 /dev/pvrsrvkm
-+d_start() {
-+	if `grep -q pvrsrv /proc/modules` ; then
-+		echo " ... already started."
-+		exit 1
-+	fi
- 
--/usr/bin/pvrsrvinit
-+	insmod $(busybox find /lib/modules/$(uname -r) -name "pvrsrvkm.ko")
-+	#modprobe bc_example
-+	modprobe omaplfb
- 
--# Set SGX to full speed
--devmem2 0x48004b40 w 0
-+	pvr_maj=`grep "pvrsrvkm$" /proc/devices | cut -b1,2,3`
- 
-+	mknod /dev/pvrsrvkm c $pvr_maj 0 
-+	chmod 666 /dev/pvrsrvkm
-+
-+	/usr/bin/pvrsrvinit
-+
-+	# Set SGX to full speed
-+	# Temp fix to OMAP clocks are sorted.
-+	devmem2 0x48004b40 w 0
-+}
-+
-+
-+case "$1" in
-+  start)
-+	echo -n "Starting $DESC: $NAME"
-+	d_start
-+	echo "."
-+	;;
-+  stop)
-+	echo -n "Stopping $DESC: $NAME"
-+	d_stop
-+	echo "."
-+	;;
-+  restart|force-reload)
-+	echo -n "Restarting $DESC: $NAME"
-+	d_stop
-+	sleep 1
-+	d_start
-+	echo "."
-+	;;
-+  *)
-+	echo "Usage: $0 {start|stop|restart|force-reload}" >&2
-+	exit 1
-+	;;
-+esac
-+
-+exit 0
-diff --git a/packages/powervr-drivers/libgles-omap3_3.00.00.01.bb
-b/packages/powervr-drivers/libgles-omap3_3.00.00.01.bb
-old mode 100644
-new mode 100755
-index 1f7adfe..70094a7
---- a/packages/powervr-drivers/libgles-omap3_3.00.00.01.bb
-+++ b/packages/powervr-drivers/libgles-omap3_3.00.00.01.bb
-@@ -2,7 +2,7 @@ require libgles-omap3.inc
- 
- SGXPV = "3_00_00_01"
- 
--PR = "r7"
-+PR = "r8"
- 
- # Quality control is really poor on these SDKs, so hack around the latest
-madness:
- FILES_${PN} += "${libdir}/*.so"
-diff --git a/packages/powervr-drivers/libgles-omap3_3.00.00.05.bb
-b/packages/powervr-drivers/libgles-omap3_3.00.00.05.bb
-old mode 100644
-new mode 100755
-index 814ca04..da3e970
---- a/packages/powervr-drivers/libgles-omap3_3.00.00.05.bb
-+++ b/packages/powervr-drivers/libgles-omap3_3.00.00.05.bb
-@@ -2,7 +2,7 @@ require libgles-omap3.inc
- 
- # Not released yet
- DEFAULT_PREFERENCE = "-1"
--PR = "r3"
-+PR = "r4"
- 
- SGXPV = "3_00_00_05"
- IMGPV = "1.2.12.838"
-diff --git a/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
-b/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
-index cc8ddca..6484d23 100755
---- a/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
-+++ b/packages/powervr-drivers/libgles-omap3_3.00.00.06.bb
-@@ -2,7 +2,7 @@ require libgles-omap3.inc
- 
- # Not released yet
- #DEFAULT_PREFERENCE = "-1"
--PR = "r7"
-+PR = "r8"
- 
- SGXPV = "3_00_00_06"
- IMGPV = "1.3.13.1397"
--- 
-1.6.0.5
-
+On Fri, 2009-03-06 at 10:47 -0800, Justin Patrin wrote:
+> On 3/2/09, Hans Henry von Tresckow <hvontres@gmail.com> wrote:
+> > On Sun, Mar 1, 2009 at 7:11 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> >  > Justin Patrin schrieb:
+> >  >> Are the machines you're building on exactly the same? Do they perhaps
+> >  >> have different architectures or distributions? Have you tried updating
+> >  >> the systems?
+> >  >
+> >  > The machines are different.
+> >  >
+> >  > The one that works fine:
+> >  >  Ubuntu 8.10
+> >  >  Linux bfg9000 2.6.27-11-generic #1 SMP Thu Jan 29 19:28:32 UTC 2009 x86_64 GNU/Linux
+> >  >
+> >  > The one with the problem:
+> >  >  openSUSE 11.1
+> >  >  Linux recycler 2.6.27.19-3.2-default #1 SMP 2009-02-25 15:40:44 +0100 i686 athlon i386 GNU/Linux
+> >  >
+> >  >> This looks like a qemu failure to me.
+> >  >
+> >  > I agree. But i can't believe, that the different OS my be involved in that. Both are up-to-date. And i thought that all the tools needed to cross-build the packages are build by OE itself.
+> >  >
+> >  > Steffen
+> >  >
+> >
+> >
+> > I don't kow about openSuse, but I remember that Fedora used to have
+> >  some kernel patches that did not play well with QEMU. But that was
+> >  back on Ferora 7, since then I switched to ubuntu. I don't even
+> >  rmember exactly what patch caused the problems, but IIRC it was
+> >  security related.
+> >
+> >
+> 
+> Hmmm, good point it could be SELinux. Could you try disabling that, if
+> you have it enabled?
+> 
+I have selinux but for now it is in enforcing=0 (I have some problem to
+resolve before putting it in enforcing mode...but I'll try to disable it
+totally)
+Denis.
 
 
 
