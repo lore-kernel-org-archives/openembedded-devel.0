@@ -1,44 +1,32 @@
-Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Lft3N-0008J5-DX
+	(envelope-from <sledz@DResearch.DE>) id 1Lfvr7-000381-Er
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Mar 2009 10:42:45 +0100
-Received: by rv-out-0708.google.com with SMTP id b17so830909rvf.12
+	Sat, 07 Mar 2009 13:42:17 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 9CE1216E002
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Mar 2009 01:38:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:organization:to:subject
-	:date:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	bh=YgJAPHwqtek2Q3/kgFlIYc4EjTECTew8ud8kNYJyOUk=;
-	b=WG86j+XiDh1HEXfpE7T4loICareZvTYGquYPsGr6Q4fdrf6BhDL7kY6VQu5MTxT5Vd
-	7GQcLLH/7B40/s+LHdTOx7DGkJGh9f5FziMz3eFOy7t2hWtBKZp7asmGcN/rKqiYLh8L
-	2Tw07Zws5f8zBbFLmGyas32l4ShLYvFBzVJrI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:organization:to:subject:date:user-agent:cc:references
-	:in-reply-to:mime-version:content-type:content-transfer-encoding
-	:content-disposition:message-id;
-	b=Ts3FrFpdLr4UopKxHTkrZq0qR+fGRYxNjtkOXkXLDqlCFlYEukn6lnFWV66VziGKhA
-	3ezlznfNRM9OjphBOV8wsa3jarGlnRJkeBqTFXHuCDHOTwNMvMC0CkhXdGTwcf0IJdEi
-	0bElnzggXTyA4XKaoz9n3s6M2tidWV68eUQ1g=
-Received: by 10.142.200.3 with SMTP id x3mr498559wff.165.1236418688596;
-	Sat, 07 Mar 2009 01:38:08 -0800 (PST)
-Received: from morpheus.localnet (adsl-71-146-1-99.dsl.pltn13.sbcglobal.net
-	[71.146.1.99])
-	by mx.google.com with ESMTPS id 22sm3858307wfd.6.2009.03.07.01.38.07
-	(version=SSLv3 cipher=RC4-MD5); Sat, 07 Mar 2009 01:38:07 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Organization: Juniper Networks Inc.
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 7 Mar 2009 01:37:40 -0800
-User-Agent: KMail/1.11.1 (Linux/2.6.28-8-generic; KDE/4.2.1; x86_64; ; )
-References: <ac9c93b10903050921y59233df1o731fb4983e22e12f@mail.gmail.com>
-	<gop5fu$ec$1@ger.gmane.org>
-	<ac9c93b10903051310g48c05d5eiaa6371f67383f7f1@mail.gmail.com>
-In-Reply-To: <ac9c93b10903051310g48c05d5eiaa6371f67383f7f1@mail.gmail.com>
+	Sat,  7 Mar 2009 13:51:23 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 701812A4216
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  7 Mar 2009 13:37:40 +0100 (CET)
+Received: from [10.24.0.58] ([10.24.0.58]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 7 Mar 2009 13:37:17 +0100
+Message-ID: <49B26A8C.7090301@dresearch.de>
+Date: Sat, 07 Mar 2009 13:37:32 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1b3pre) Gecko/20090223 Thunderbird/3.0b2
 MIME-Version: 1.0
-Message-Id: <200903070138.05252.raj.khem@gmail.com>
-Subject: Re: need help: cdrkit & bitifields
+To: openembedded-devel@lists.openembedded.org
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF686@hiob.intern.dresearch.de>	<a7f8874a0903020942y65f55a90rec06b1bc87ac8702@mail.gmail.com>	<432beae0903061047p33bb6052o28e3d9b73847f1bd@mail.gmail.com>
+	<200903062024.13519.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200903062024.13519.marcin@juszkiewicz.com.pl>
+X-OriginalArrivalTime: 07 Mar 2009 12:37:17.0281 (UTC)
+	FILETIME=[733BDD10:01C99F21]
+Subject: Re: Ugly build problem with emacs/qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,125 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Mar 2009 09:42:45 -0000
-Content-Type: text/plain;
-  charset="windows-1252"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 07 Mar 2009 12:42:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thursday 05 March 2009 13:10:13 Frans Meulenbroeks wrote:
-> 2009/3/5 Koen Kooi <k.kooi@student.utwente.nl>:
-> > On 05-03-09 18:21, Frans Meulenbroeks wrote:
-> >> Ucbit is an unsigned char
-> >
-> > unsigned char makes me think of
-> > http://www.arm.linux.org.uk/docs/faqs/signedchar.php
-> >
-> > regards,
-> >
-> > Koen
+Am 06.03.2009 20:24, schrieb Marcin Juszkiewicz:
+> On Friday 06 of March 2009 19:47:58 Justin Patrin wrote:
+>>> I don't kow about openSuse, but I remember that Fedora used to have
+>>>   some kernel patches that did not play well with QEMU. But that was
+>>>   back on Ferora 7, since then I switched to ubuntu. I don't even
+>>>   rmember exactly what patch caused the problems, but IIRC it was
+>>>   security related.
+>> Hmmm, good point it could be SELinux. Could you try disabling that,
+>> if you have it enabled?
 >
-> Well it is explictly defined as unsigned char.
-> from utypes.h:
+> It is not SELinux but one kernel patch - linux-2.6-execshield.patch to
+> be exact. Rebuild Fedora kernel without that one or use vanilla one.
 >
-> /*
->  * The IBM AIX C-compiler seems to be the only compiler on the world
->  * which does not allow to use unsigned char bit fields as a hint
->  * for packed bit fields. Define a pesical type to avoid warnings.
->  * The packed attribute is honored wit unsigned int in this case too.
->  */
-> #if     defined(_AIX) && !defined(__GNUC__)
->
-> typedef unsigned int    Ucbit;
->
-> #else
->
-> typedef unsigned char   Ucbit;
->
-> #endif
->
-> The link you give is related to chars that are by default signed or
-> unsigned
->
-> This one seems to be related to whether bitfields are ordered left to
-> right or right to left
-> (and if I recall correctly in the ansi C standard this is undefined
-> (but it has been a while since I checked)
->
-> Decided to do some testing. On x86: gcc 4.3.2:
-> frans@linux-suse:~/wt> cat tst.c
-> #include <stdio.h>
->
-> typedef struct {
->     unsigned char bit0:1;
->     unsigned char bits:6;
->     unsigned char bit7:1;
-> } bitfields;
->
-> main(int argc, char **argv)
-> {
->     char c =3D 0xf0;
->     bitfields *bf =3D &c;
->
->     printf("bit 0 =3D %d, bits =3D %x, bit7 =3D %x\n", bf->bit0, bf->bits,
-> bf->bit7); }
-> frans@linux-suse:~/wt> gcc  tst.c
-> tst.c: In function =91main=92:
-> tst.c:12: warning: initialization from incompatible pointer type
-> frans@linux-suse:~/wt> ./a.out
-> bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-> frans@linux-suse:~/wt> gcc -O1 tst.c
-> tst.c: In function =91main=92:
-> tst.c:12: warning: initialization from incompatible pointer type
-> frans@linux-suse:~/wt> ./a.out
-> bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-> frans@linux-suse:~/wt> gcc -O2 tst.c
-> tst.c: In function =91main=92:
-> tst.c:12: warning: initialization from incompatible pointer type
-> frans@linux-suse:~/wt> ./a.out
-> bit 0 =3D 0, bits =3D 1c, bit7 =3D 1
-> frans@linux-suse:~/wt> gcc -O3 tst.c
-> tst.c: In function =91main=92:
-> tst.c:12: warning: initialization from incompatible pointer type
-> frans@linux-suse:~/wt> ./a.out
-> bit 0 =3D 0, bits =3D 1c, bit7 =3D 1
->
-> Same test on beagle (gcc 4.3.1), -O0  -O1 -O2 -O3
-> root@beagleboard:~# ./tst0
-> bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-> root@beagleboard:~# ./tst1
-> bit 0 =3D 0, bits =3D 38, bit7 =3D 1
-> root@beagleboard:~# ./tst2
-> bit 0 =3D 0, bits =3D 20, bit7 =3D 0
-> root@beagleboard:~# ./tst3
-> bit 0 =3D 0, bits =3D 20, bit7 =3D 0
->
-> Not sure what is happening here.
-> I tried to compile cdrkit with -O1 using
-> FULL_OPTIMIZATION =3D "-O1"
-> FULL_OPTIMIZATION_armv7a =3D "-O1"
-> BUILD_OPTIMIZATION =3D "${FULL_OPTIMIZATION}"
-> but that did not help either.
->
-> There is a compile time macro in gcc called BITS_BIG_ENDIAN but that
-> one is set to 0 for arm (same as for x86).
->
-> Puzzled....
-=46rans
+> Took me lot of kernel rebuilds to find that out.
 
-There is a gcc bug here you are seeing when you use higher opt level. But t=
-his=20
-may not be cause of your problem here. You could try compiling with -Wcast-
-align and see for any new warnings that will pop up. You then need to fix t=
-hose=20
-cases.
+I've no SELinux running and i've tried the vanilla kernel. But the problem's still there. :(
 
-You could also try -Wpadded and see if any structure is getting implicit=20
-padding.
+# uname -a
+Linux mobil-400-300 2.6.27.19-3.2-vanilla #1 SMP 2009-02-25 15:40:44 +0100 i686 i686 i386 GNU/Linux
 
-
-Thx
-
-=2DKhem
+Steffen
 
 
