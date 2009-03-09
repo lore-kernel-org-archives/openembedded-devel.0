@@ -1,40 +1,32 @@
-Received: from [209.85.132.251] (helo=an-out-0708.google.com)
+Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Lgiom-0000Z4-Jc
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LgmBw-0001u1-BU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Mar 2009 17:59:09 +0100
-Received: by an-out-0708.google.com with SMTP id d40so1482327and.42
+	Mon, 09 Mar 2009 21:35:16 +0100
+Received: by bwz9 with SMTP id 9so1293454bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Mar 2009 09:54:12 -0700 (PDT)
+	Mon, 09 Mar 2009 13:30:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=7Wma0vRkUDa7+qO5YJnu0xrcFMAaK4YFMwHHb67Akco=;
-	b=A0LCVwBOxWMji+zQisOIDD6CAtN6DoQZBORflhB08SadqymsOQCLVQoWBvxxPJk8N9
-	JXtLZCMMUcDCimBx6qswxzEUNVBbojdxU0dR6hxDh3XqIHYmvHI+BaXzRm+85AxgMPEA
-	OYKhj840QR8pMu+D1pcIjsbfr9ne1jRiZicW4=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=/xw0iC03btT8i/jlYFicHnh+s1JiBZOPBS3QoIWzCPM=;
+	b=L66tBMmeec+6U+Oxx4mcqoDGRAKBkXU43TGYJo7n+Cn4UyG2VQJMplwhmyfmmRcnTM
+	qh04c89X+ypHENjQT5iS9+8/l8olTzBIjuTeLC31bmP3UMqK5sNy7XtvwwXsLp0/NYmG
+	j2i2sAeHkZaIkWwZdL8fTIN/xMoyvJZKfI+Aw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
+	h=mime-version:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=ZafpbXnpydiwgEiDPstj9/nPnQGVwCP8nLgWd17OrOShAX6s+cVyEYVMgFOC3bLCRS
-	lfkAMLIUkymkPZ5yHgSc0PSl1P/jG/FONPMtSUII30idnx0dfobAF8updtkjTWoqZN6s
-	gjX5W1HZlh1+5wmegwR6uhjzbig+Ct+15R/No=
+	b=idUvSdxkqAiCbWj+XqpuEJ7a8bYNgSB5b8JTqZfBS0DRtQ26q8ba+AStBzXPrXne8o
+	IvF5Sp0TvJRgJznm/MSzTcmfE2S/bh9Lwq8k8X89/Ox1LMe1LQqE6vdjzHHRWHK98UoR
+	CJQyBnQmG+QzL2/jdUXFYaRpHTkU4Yt+cWAa0=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.108.20 with SMTP id g20mr1018762anc.72.1236617652170; Mon, 
-	09 Mar 2009 09:54:12 -0700 (PDT)
-In-Reply-To: <000401c99f26$ddb43c00$991cb400$@com>
-References: <000801c99992$45c23440$d1469cc0$@com>
-	<87myc57vz3.fsf@neumann.lab.ossystems.com.br>
-	<000401c99f26$ddb43c00$991cb400$@com>
-Date: Mon, 9 Mar 2009 13:54:12 -0300
-X-Google-Sender-Auth: cfa7dc132ba23754
-Message-ID: <be7a9f3d0903090954m72f9cafbw8f03af0906bf74ca@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.223.111.134 with SMTP id s6mr4846761fap.37.1236630616161; Mon, 
+	09 Mar 2009 13:30:16 -0700 (PDT)
+Date: Mon, 9 Mar 2009 21:30:16 +0100
+Message-ID: <ac9c93b10903091330g11afcac9w4e4f1fba9a468e9f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Added new recipe for a newer version of the Asterisk Soft-PBX
+Subject: python-zopeinterface
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2009 16:59:10 -0000
+X-List-Received-Date: Mon, 09 Mar 2009 20:35:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Sat, Mar 7, 2009 at 10:16 AM, Christian P=F6ssinger
-<christian@poessinger.com> wrote:
-> Otavio Salvador <otavio@ossystems.com.br> wrote:
->> Christian P=F6ssinger <christian@poessinger.com> writes:
->>
->> > ---
->> > =A0packages/asterisk/asterisk-1.4.23.1/Makefile.patch | =A0 21 +++
->> > =A0packages/asterisk/asterisk-1.4.23.1/init =A0 =A0 =A0 =A0 =A0 | =A0 =
-79 ++++++++++
->> > =A0packages/asterisk/asterisk-1.4.23.1/logrotate =A0 =A0 =A0| =A0 12 +=
-+
->> > =A0.../asterisk/asterisk-1.4.23.1/sounds.xml.patch =A0 =A0| =A0 19 +++
->> > =A0packages/asterisk/asterisk-1.4.23.1/volatiles =A0 =A0 =A0| =A0 =A07=
- +
->> > =A0packages/asterisk/asterisk_1.4.23.1.bb =A0 =A0 =A0 =A0 =A0 =A0 | =
-=A0165
->> ++++++++++++++++++++
->>
->> Please add the checksums.ini required changes ;-)
->>
->
-> [http://downloads.digium.com/pub/asterisk/releases/asterisk-1.4.23.1.tar.=
-gz]
-> md5=3D4788954a93f5fbf78e55e2aa6e03329f
-> sha256=3D03e2cf43ffe9935d56fa0ea3663fc9bd23ce9720682c79d6269e78a9a1629d63
+Hi,
 
-Could you amend your patch and resend it? It makes our life easier
-since we're able to
-get it and apply it to the tree without requiring to edit it later.
+I noticed that python-zopeinterface installs in /usr/lib/python2.6.
+I'm not a python wiz, but shouldn't this install in
+/usr/lib/python2.6/site-packages ?
 
-Thanks in advance,
+If so, can someone fix ?
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Thanks FM
 
 
