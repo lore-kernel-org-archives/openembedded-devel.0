@@ -1,32 +1,27 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [63.245.244.68] (helo=mail.emacinc.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LgmBw-0001u1-BU
+	(envelope-from <tstratman@emacinc.com>) id 1LgmoT-0003Fq-Gi
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Mar 2009 21:35:16 +0100
-Received: by bwz9 with SMTP id 9so1293454bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Mar 2009 13:30:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=/xw0iC03btT8i/jlYFicHnh+s1JiBZOPBS3QoIWzCPM=;
-	b=L66tBMmeec+6U+Oxx4mcqoDGRAKBkXU43TGYJo7n+Cn4UyG2VQJMplwhmyfmmRcnTM
-	qh04c89X+ypHENjQT5iS9+8/l8olTzBIjuTeLC31bmP3UMqK5sNy7XtvwwXsLp0/NYmG
-	j2i2sAeHkZaIkWwZdL8fTIN/xMoyvJZKfI+Aw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=idUvSdxkqAiCbWj+XqpuEJ7a8bYNgSB5b8JTqZfBS0DRtQ26q8ba+AStBzXPrXne8o
-	IvF5Sp0TvJRgJznm/MSzTcmfE2S/bh9Lwq8k8X89/Ox1LMe1LQqE6vdjzHHRWHK98UoR
-	CJQyBnQmG+QzL2/jdUXFYaRpHTkU4Yt+cWAa0=
-MIME-Version: 1.0
-Received: by 10.223.111.134 with SMTP id s6mr4846761fap.37.1236630616161; Mon, 
-	09 Mar 2009 13:30:16 -0700 (PDT)
-Date: Mon, 9 Mar 2009 21:30:16 +0100
-Message-ID: <ac9c93b10903091330g11afcac9w4e4f1fba9a468e9f@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 09 Mar 2009 22:15:05 +0100
+Received: from [63.245.244.67] (helo=emac081.emacinc.com)
+	by mail.emacinc.com with esmtp (Exim 4.50) id 1LgmjI-0007ov-Bp
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Mar 2009 16:09:50 -0500
+From: Travis Stratman <tstratman@emacinc.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: python-zopeinterface
+In-Reply-To: <49B4F056.5040604@mgb-tech.com>
+References: <49B4F056.5040604@mgb-tech.com>
+Date: Mon, 09 Mar 2009 16:09:26 -0500
+Message-Id: <1236632966.29394.25.camel@cheeto.emacinc.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-SA-Exim-Connect-IP: 63.245.244.67
+X-SA-Exim-Mail-From: tstratman@emacinc.com
+X-Spam-Checker-Version: SpamAssassin 3.1.4 (2006-07-26) on mail.emacinc.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-6.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00,
+	GREYLIST_ISWHITE autolearn=ham version=3.1.4
+Subject: Re: Automatically connect to ethernet
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,18 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2009 20:35:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 09 Mar 2009 21:15:06 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Jan,
 
-I noticed that python-zopeinterface installs in /usr/lib/python2.6.
-I'm not a python wiz, but shouldn't this install in
-/usr/lib/python2.6/site-packages ?
+On Mon, 2009-03-09 at 11:32 +0100, Jan Pannecoeck wrote:
+> 
+> So my problem is that linux does not connect to the DHCP server 
+> automatically when I plug in the ethernetcable. When I plug-in the cable 
+> before I launch the linux, this is working fine because at start-up the 
+> DHCP-server is asked for a new IP-lease. But when I don't plug-in the 
+> cable, and I plug it in when linux is already booted, the DHCP-server 
+> isn't contacted for a new IP-lease and I can't connect to the Internet. 
+> I can use the "/etc/init.d/networking restart" command but this isn't a 
+> solution of course because it should work all the time, also if I'm not 
+> there to enter that command...
+> 
+> So, do I  have to change some settings in the kernel, or do I have to 
+> install some extra packages to get this working properly?
+> 
 
-If so, can someone fix ?
+You should look at ifplugd. This will detect the network link beat and
+bring the interface up/down as required.
 
-Thanks FM
+TAS
+
+> Thanks in advance,
+> Jan Pannecoeck
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
