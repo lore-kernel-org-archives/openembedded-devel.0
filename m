@@ -1,19 +1,28 @@
-Received: from [72.14.246.248] (helo=ag-out-0708.google.com)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rodrigo.vivi@openbossa.org>) id 1Lh7vf-0002m4-RZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Mar 2009 20:47:56 +0100
-Received: by ag-out-0708.google.com with SMTP id 9so4187720agd.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2009 12:47:53 -0700 (PDT)
+	(envelope-from <trini@kernel.crashing.org>) id 1Lh9Fz-0001x4-6K
+	for openembedded-devel@openembedded.org; Tue, 10 Mar 2009 22:12:59 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090310211254.URPM27308.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 10 Mar 2009 17:12:54 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id RZCu1b0074dMFYL04ZCuqb; Tue, 10 Mar 2009 17:12:54 -0400
+X-Authority-Analysis: v=1.0 c=1 a=Obwr4fjDA7sA:10 a=KlC65CFGb8MA:10
+	a=S9ld7CfN6Aoxn7LIeA8A:9 a=vRAKlXN7On78FbR-fvDoW3EpiCsA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 10 Mar 2009 14:12:54 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090310211253.GV26343@smtp.west.cox.net>
+References: <156d82ae0903101247j7b17678w4d0b28b8842bfe1b@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.100.166.10 with SMTP id o10mr4832705ane.96.1236714472476; Tue, 
-	10 Mar 2009 12:47:52 -0700 (PDT)
-Date: Tue, 10 Mar 2009 16:47:52 -0300
-Message-ID: <156d82ae0903101247j7b17678w4d0b28b8842bfe1b@mail.gmail.com>
-From: Rodrigo Vivi <rodrigo.vivi@openbossa.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: OEandYourDistro: Building OE in MacOS and M$Windows
+In-Reply-To: <156d82ae0903101247j7b17678w4d0b28b8842bfe1b@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: OEandYourDistro: Building OE in MacOS and M$Windows
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,28 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2009 19:47:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Mar 2009 21:12:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi there,
+On Tue, Mar 10, 2009 at 04:47:52PM -0300, Rodrigo Vivi wrote:
+> Hi there,
+> 
+> I've just noticed that there are 2 bronken links at OEandYourDistro wiki page:
+> 
+> One about using OpenEmbedded under MacOS and another one about work in
+> progress of run OE build under M$ Windows..
+> 
+> Does anyone know the correct links to update the page?
+> 
+> BTW: I'd like to know what is the status about this "M$ Windows
+> work"... Any news?
 
-I've just noticed that there are 2 bronken links at OEandYourDistro wiki page:
-
-One about using OpenEmbedded under MacOS and another one about work in
-progress of run OE build under M$ Windows..
-
-Does anyone know the correct links to update the page?
-
-BTW: I'd like to know what is the status about this "M$ Windows
-work"... Any news?
-
-Cheers
+There are oustanding (and out of date) patches for building on Cygwin.
+Some of these aren't needed now that building a MinGW SDK from Linux is
+possible (the ones related to EXEEXT and such).
 
 -- 
-Rodrigo Vivi
-INdT - Instituto Nokia de Tecnologia
-Blog: http://blog.vivi.eng.br
-GPG: 0x905BE242 @ wwwkeys.pgp.net
+Tom Rini
 
 
