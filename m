@@ -1,29 +1,40 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lh56C-0006k8-3A
-	for openembedded-devel@openembedded.org; Tue, 10 Mar 2009 17:46:36 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090310164632.CUNM15318.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Mar 2009 12:46:32 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id RUmW1b0074dMFYL04UmWcw; Tue, 10 Mar 2009 12:46:32 -0400
-X-Authority-Analysis: v=1.0 c=1 a=wFN6jymYzWsA:10 a=b2ZvGRdsAAAA:8
-	a=fGO4tVQLAAAA:8 a=qCnnQ4xlohOFJgOczmcA:9
-	a=TkYmQEA6X-RBpegVSuUhu7e0GOoA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 10 Mar 2009 09:46:30 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090310164629.GR26343@smtp.west.cox.net>
-References: <1236182004-4523-1-git-send-email-openembedded@haerwu.biz>
-	<20090304230042.GD26343@smtp.west.cox.net>
+	(envelope-from <raj.khem@gmail.com>) id 1Lh5rN-0005OY-2n
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Mar 2009 18:35:21 +0100
+Received: by yx-out-1718.google.com with SMTP id 36so1106662yxh.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Mar 2009 10:35:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=L2sEJ4HInOVo0AwMkosTonXkmP71HW78i1qhwEZz+RY=;
+	b=D7hCb0xdsJyOT3vGiCftzWXx2EKwwOnE6IZNobDbhQqQTNop1fFPg0wdZ5GHKpsYJw
+	EF4ihsMZntfPHe9zuBVhdbcR4acMaOq2FAR8K5LCFAcqH1J3d2G0ZDLKmW/w2HtBGwCX
+	klLjL7SzsAleo6raBNc4RP/xGWwJesptwqA3Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=H6yQREdL+O99yHYC9+He9okufPGhFkOypb4cCdLWEYEd9KvicwRcHRNvykgK3oTrwX
+	aaL7SjrUyTgpfHgalYT9l0I20eDd+efZ0pRbi7x8olIETsQt6pDnjBU92nMRID9lLwOn
+	eA8/KzOe2kxujca54XpU23ypAQrUPCUs5Dr3A=
 MIME-Version: 1.0
-In-Reply-To: <20090304230042.GD26343@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Merging RPM support from Poky
+Received: by 10.143.12.20 with SMTP id p20mr3176501wfi.169.1236706519155; Tue, 
+	10 Mar 2009 10:35:19 -0700 (PDT)
+In-Reply-To: <1236699601.29394.99.camel@cheeto.emacinc.com>
+References: <1236463653.25861.321.camel@cheeto.emacinc.com>
+	<200903071735.37618.raj.khem@gmail.com>
+	<1236637089.29394.59.camel@cheeto.emacinc.com>
+	<19c1b8a90903091535u4dd8982blc884a508cc35e8dc@mail.gmail.com>
+	<1236699601.29394.99.camel@cheeto.emacinc.com>
+Date: Tue, 10 Mar 2009 10:35:19 -0700
+Message-ID: <19c1b8a90903101035t52ba7a0ble2f49e324bc20ba@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: Travis Stratman <tstratman@emacinc.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: failure on gcc-cross-initial-4.2.4-r5 for i686
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2009 16:46:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Mar 2009 17:35:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 04, 2009 at 04:00:42PM -0700, Tom Rini wrote:
-> On Wed, Mar 04, 2009 at 04:52:15PM +0100, Marcin Juszkiewicz wrote:
-> 
-> > As some of you know Poky has RPM support written. It consists few parts:
-> > 
-> > - creating RPM packages
-> > - creating rootfs from RPM packages
-> > - using RPM/YUM on device to managing packages (installing from local and
-> >   remote packages
-> > 
-> > I had one attempt to get it merged before but it had some bugs so I started
-> > from scratch. Extracting required patches from pile of 1800 Poky changsets
-> > took me some time.
-> > 
-> > With this patchset I managed to build 'minimal-image' for AT91SAM9263-EK
-> > machine. As distribution I used 'minimal' to get something other then
-> > Angstrom.
-> > 
-> > So please review it (patch 67 is already merged in .dev tree).
-> > 
-> > It is also visible on Web: http://cgit.openembedded.net/cgit.cgi?url=openembedded/log/&h=hrw/poky-merge/add-rpm-packages-support
-> > 
-> > Fetch via: git pull hrw/poky-merge/add-rpm-packages-support
-> 
-> OK.  I got a failure that I'm not quite sure where it's from, other than
-> rootfs_rpm.bbclass.  Log is http://pastebin.com/d64e6cd01
-> MACHINE=nokia800 DISTRO=minimal and unrelated to BB_NUMBER_THREADS /
-> PARALLEL_MAKE. 
+On Tue, Mar 10, 2009 at 8:40 AM, Travis Stratman <tstratman@emacinc.com> wrote:
+> Thanks Khem.
+>
+> On Mon, 2009-03-09 at 15:35 -0700, Khem Raj wrote:
+>> On Mon, Mar 9, 2009 at 3:18 PM, Travis Stratman <tstratman@emacinc.com> wrote:
+>
+>> snip
+>>
+>> > PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
+>> > PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
+>> > PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
+>>
+>> Can you try by removing above three
+>>
+>> Rest of the changes seems like should not have effect.
+>
+> This doesn't seem to change anything. I made the changes, cleaned all
+> glibc and gcc packages, then tried to build and I still get the same
+> issue.
+>
+> Any other ideas?
 
-The problem is that python-sqlite-native doesn't exist and I don't have
-that installed on my system.
+Hmm looking closely it seems that your cross compiler is from
+i686-linux -> i686-linux which is native configuration and intl
+configury  is then trying to use
+your freshly built CC instead of the BUILD_CC. In short its not really
+thinking if it is cross compiling. I have a x86_64 box thats why it
+worked for me because I am cross'ing from x86_64-linux to i686-linux
 
--- 
-Tom Rini
+I will give it a shot on x86 box too. Meanwhile can you also define
+TARGET_VENDOR = "something" for your distr and rebuild
+
+
+Thx
+
+-Khem
 
 
