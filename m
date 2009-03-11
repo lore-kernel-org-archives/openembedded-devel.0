@@ -1,28 +1,20 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [209.85.200.172] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lh9Fz-0001x4-6K
-	for openembedded-devel@openembedded.org; Tue, 10 Mar 2009 22:12:59 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090310211254.URPM27308.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 10 Mar 2009 17:12:54 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id RZCu1b0074dMFYL04ZCuqb; Tue, 10 Mar 2009 17:12:54 -0400
-X-Authority-Analysis: v=1.0 c=1 a=Obwr4fjDA7sA:10 a=KlC65CFGb8MA:10
-	a=S9ld7CfN6Aoxn7LIeA8A:9 a=vRAKlXN7On78FbR-fvDoW3EpiCsA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 10 Mar 2009 14:12:54 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090310211253.GV26343@smtp.west.cox.net>
-References: <156d82ae0903101247j7b17678w4d0b28b8842bfe1b@mail.gmail.com>
+	(envelope-from <yajinzhou@vm-kernel.org>) id 1LhDRM-0008PH-1l
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Mar 2009 02:41:00 +0100
+Received: by wf-out-1314.google.com with SMTP id 28so2951940wff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Mar 2009 18:40:56 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <156d82ae0903101247j7b17678w4d0b28b8842bfe1b@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: OEandYourDistro: Building OE in MacOS and M$Windows
+Received: by 10.142.141.21 with SMTP id o21mr2790548wfd.79.1236735655990; Tue, 
+	10 Mar 2009 18:40:55 -0700 (PDT)
+Date: Wed, 11 Mar 2009 09:40:55 +0800
+Message-ID: <180e2c240903101840j87d5ce6w1d1af520b488eab4@mail.gmail.com>
+From: yajin zhou <yajinzhou@vm-kernel.org>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: gpe-scap-1.3 patch for mipsel target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,28 +28,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2009 21:12:59 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Mar 2009 01:41:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 10, 2009 at 04:47:52PM -0300, Rodrigo Vivi wrote:
-> Hi there,
-> 
-> I've just noticed that there are 2 bronken links at OEandYourDistro wiki page:
-> 
-> One about using OpenEmbedded under MacOS and another one about work in
-> progress of run OE build under M$ Windows..
-> 
-> Does anyone know the correct links to update the page?
-> 
-> BTW: I'd like to know what is the status about this "M$ Windows
-> work"... Any news?
+Hi everyone, I reported this bug in bug tracker but got no response. So I
+post it here again.
 
-There are oustanding (and out of date) patches for building on Cygwin.
-Some of these aren't needed now that building a MinGW SDK from Linux is
-possible (the ones related to EXEEXT and such).
+http://bugs.openembedded.net/show_bug.cgi?id=5061
+
+The gpe scap version 1.3 has a bug to be built for mips target. The patch is
+here. http://bugs.openembedded.net/attachment.cgi?id=13835
+
 
 -- 
-Tom Rini
+yajin
 
+http://vm-kernel.org
 
