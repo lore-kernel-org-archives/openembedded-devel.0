@@ -1,40 +1,29 @@
-Received: from [209.85.200.175] (helo=wf-out-1314.google.com)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LhEeH-0006eY-1z
+	(envelope-from <denis@denix.org>) id 1LhElD-0006ox-D7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 03:58:25 +0100
-Received: by wf-out-1314.google.com with SMTP id 28so2986560wff.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2009 19:58:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=qMY2RG/L9hE0Z21xJIGFqWEdVh7AEAEuxt4mtlP4aDI=;
-	b=sF7Q/pMnVy/bBJ9na80Hr7hQfywvXlS4zZ/fJM3tDubnbrPINNb7EnmSFVNalHMeBN
-	MsLX8bl7mSM8sZ3kaUX+FEIcJPRFvFs3CaC4kHM7vLlbSgDW/NDZKQfdZXoaqwOOQH7M
-	lREC0I1lf9fIz6wtVLGYKxeNp5FwuM7OGoIRU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:cc:references:in-reply-to
-	:mime-version:content-type:content-transfer-encoding:message-id;
-	b=MtmJvlT37rSAe/xtbKOR0uqgwFu56C6qxhX1LTjRTL9pS80FdHQvZ1YIUJfKAoKJSZ
-	5MrcnjC5qZxSNTJM7anRrWWJj1K7hEOGPlNy6KWsc4XaXafldVWj9lJ9VbVoz9c7NZ1M
-	LvLJZ+yJt2L1MLNHlOHfPC3k8EPjbozykCYR8=
-Received: by 10.142.43.7 with SMTP id q7mr3433908wfq.229.1236740300815;
-	Tue, 10 Mar 2009 19:58:20 -0700 (PDT)
-Received: from morpheus.localnet (adsl-71-146-1-99.dsl.pltn13.sbcglobal.net
-	[71.146.1.99])
-	by mx.google.com with ESMTPS id 24sm13003915wff.22.2009.03.10.19.58.20
-	(version=SSLv3 cipher=RC4-MD5); Tue, 10 Mar 2009 19:58:20 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 11 Mar 2009 04:06:00 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KGB009P6N8ML5F2@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	10 Mar 2009 22:05:15 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B070B6B83A8; Tue,
+	10 Mar 2009 23:05:09 -0400 (EDT)
+Date: Tue, 10 Mar 2009 23:05:09 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Mar 2009 19:58:14 -0700
-User-Agent: KMail/1.11.1 (Linux/2.6.28-9-generic; KDE/4.2.1; x86_64; ; )
-References: <180e2c240903101840j87d5ce6w1d1af520b488eab4@mail.gmail.com>
-In-Reply-To: <180e2c240903101840j87d5ce6w1d1af520b488eab4@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200903101958.18551.raj.khem@gmail.com>
-Subject: Re: gpe-scap-1.3 patch for mipsel target
+Message-id: <20090311030509.GA10085@denix.org>
+References: <1236463653.25861.321.camel@cheeto.emacinc.com>
+	<200903071735.37618.raj.khem@gmail.com>
+	<1236637089.29394.59.camel@cheeto.emacinc.com>
+	<19c1b8a90903091535u4dd8982blc884a508cc35e8dc@mail.gmail.com>
+	<1236699601.29394.99.camel@cheeto.emacinc.com>
+	<19c1b8a90903101035t52ba7a0ble2f49e324bc20ba@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <19c1b8a90903101035t52ba7a0ble2f49e324bc20ba@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: failure on gcc-cross-initial-4.2.4-r5 for i686
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2009 02:58:25 -0000
-X-Groupsio-MsgNum: 8339
-Content-Type: multipart/signed; boundary="nextPart13032986.UpbKJhmtiy";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Mar 2009 03:06:55 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---nextPart13032986.UpbKJhmtiy
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+On Tue, Mar 10, 2009 at 10:35:19AM -0700, Khem Raj wrote:
+> On Tue, Mar 10, 2009 at 8:40 AM, Travis Stratman <tstratman@emacinc.com> wrote:
+> > Thanks Khem.
+> >
+> > On Mon, 2009-03-09 at 15:35 -0700, Khem Raj wrote:
+> >> On Mon, Mar 9, 2009 at 3:18 PM, Travis Stratman <tstratman@emacinc.com> wrote:
+> >
+> >> snip
+> >>
+> >> > PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
+> >> > PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
+> >> > PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
+> >>
+> >> Can you try by removing above three
+> >>
+> >> Rest of the changes seems like should not have effect.
+> >
+> > This doesn't seem to change anything. I made the changes, cleaned all
+> > glibc and gcc packages, then tried to build and I still get the same
+> > issue.
+> >
+> > Any other ideas?
+> 
+> Hmm looking closely it seems that your cross compiler is from
+> i686-linux -> i686-linux which is native configuration and intl
+> configury  is then trying to use
+> your freshly built CC instead of the BUILD_CC. In short its not really
+> thinking if it is cross compiling. I have a x86_64 box thats why it
+> worked for me because I am cross'ing from x86_64-linux to i686-linux
+> 
+> I will give it a shot on x86 box too. Meanwhile can you also define
+> TARGET_VENDOR = "something" for your distr and rebuild
 
-On Tuesday 10 March 2009 18:40:55 yajin zhou wrote:
-> Hi everyone, I reported this bug in bug tracker but got no response. So I
-> post it here again.
->
-> http://bugs.openembedded.net/show_bug.cgi?id=3D5061
->
-> The gpe scap version 1.3 has a bug to be built for mips target. The patch
-> is here. http://bugs.openembedded.net/attachment.cgi?id=3D13835
+I'll save you some trouble - been building i686-generic on I32 x86 for months 
+w/o a problem. Angstrom distro with a small overlay - configuration is pretty 
+basic.
 
-Looks ok to me. Except you might want to generate a -p1 diff and bump up th=
-e PR
+i686-linux holds my native packages
+i686-angstrom-linux holds my target/cross packages, including gcc-cross
+i686-generic-angstrom-linux holds machine-specific target packages
 
-Thx
+-- 
+Denys
 
-=2D-=20
-Khem Raj
 
---nextPart13032986.UpbKJhmtiy
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAkm3KMYACgkQHnJKy6V6em5vGwCdEEM/8jUugq+TkWvaMHiBEs3m
-gvwAnjCWq+HHX3GRy4SyznBr5SoLgztG
-=i4RC
------END PGP SIGNATURE-----
-
---nextPart13032986.UpbKJhmtiy--
