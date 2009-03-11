@@ -1,29 +1,35 @@
-Received: from [208.51.207.131] (helo=mail.2mi.com.br)
+Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jader@2mi.com.br>) id 1LhRq6-0007xW-Rv
+	(envelope-from <raj.khem@gmail.com>) id 1LhVTa-0001Gu-VN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 18:03:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.2mi.com.br (Postfix) with ESMTP id 44B0750277D0
+	Wed, 11 Mar 2009 21:56:31 +0100
+Received: by yw-out-1718.google.com with SMTP id 4so460974ywq.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2009 14:01:32 -0300 (BRT)
-X-Virus-Scanned: amavisd-new at 2mi.com.br
-Received: from mail.2mi.com.br ([127.0.0.1])
-	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rb5t8vw2vHsK
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2009 14:01:27 -0300 (BRT)
-Received: from [192.168.15.100] (unknown [189.102.205.109])
-	by mail.2mi.com.br (Postfix) with ESMTP id 9DFF6502762C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2009 14:01:27 -0300 (BRT)
-From: Jader <jader@2mi.com.br>
-To: Open Embedded <openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Mar 2009 13:56:46 -0300
-Message-Id: <1236790606.14496.4.camel@northpole>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: tinylogin not found
+	Wed, 11 Mar 2009 13:56:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=xFBP4Q/tlvG5dgPThnlmtM7pgejJy8LnNVS3mlJHPIk=;
+	b=ncFpRLQaFBUrlW1MpM39uoaUfitW2ojnJulCaU1fRqHFKtTbX7K2MmUiGe5hiymQie
+	SXTZ94bMWaQGhvETEUKT+WwrKEudwz0QTJBr88tDTsKecdTbRDPjG6zS1Vboe9zj0BBb
+	ALssmzQewExR/TAeqmTKzZcnNR4t8gmFnu5Uw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Fvapkf66fYS0J6sz8NJTlr/OAG2ynl0nZ6O7UdLK3Dzl1eYO8uk5qXodM+xvsfxcr2
+	B7MJ3+qQ07LbCNDnJP9vbLc16FZp6obR4AdBg32kuZRtncRiNVwaKKx6wpE/RUMiDhKP
+	5zI91Cqwtg0hiD4H8bt045/Y0mh8rnUQTyYVM=
+Received: by 10.142.231.7 with SMTP id d7mr3864982wfh.285.1236804981833;
+	Wed, 11 Mar 2009 13:56:21 -0700 (PDT)
+Received: from localhost.localdomain
+	(adsl-71-146-1-99.dsl.pltn13.sbcglobal.net [71.146.1.99])
+	by mx.google.com with ESMTPS id 28sm428077wfd.5.2009.03.11.13.56.21
+	(version=SSLv3 cipher=RC4-MD5); Wed, 11 Mar 2009 13:56:21 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Mar 2009 13:56:19 -0700
+Message-Id: <1236804979-5428-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+Subject: [PATCH] autotools.bbclass: Add new pattern to match -L<libdir> in dependency_libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,76 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2009 17:03:33 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Mar 2009 20:56:32 -0000
 
-Hello.
-I'm trying to compile minimal-image but I've got a tinylogin error.
-It seems tinylogin is deprecated, http://tinylogin.busybox.net/
-redirects to http://bugs.busybox.net/
+	* Current pattern match does one think wrong consider
+	something like this
+	dependency_libs=' -L/home/kraj/work/oe/build/eglibc/omap5912osk/work/x86_64-linux/ncurses-native-5.4-r17/ncurses-5.4/lib'
+	this pattern when matched gets converted to
+	dependency_libs=' -L/home/kraj/work/oe/build/eglibc/omap5912osk/staging/x86_64-linux/usr/lib/lib'
+	which is wrong. If we had a '/' appended to original path then it would work.
+	This patch lets it straight.
+---
+ classes/autotools.bbclass |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-How can I disable it from build?
-
-Task output below:
-
-NOTE: Running task 379 of 801 (ID:
-210, /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb,
-do_fetch)
-DEBUG:
-Parsing /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb
-(full)
-DEBUG: BB /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb:
-handle(data)
-DEBUG: update_data()
-DEBUG: update_data()
-NOTE: package tinylogin-1.4: started
-DEBUG: Executing task do_fetch
-DEBUG: update_data()
-NOTE: package tinylogin-1.4-r6: task do_fetch: started
-DEBUG: mkdirhier(/home/vo/oe/build/source)
-DEBUG: mkdirhier(/home/vo/oe/build/source)
-DEBUG: update_data()
-DEBUG: update_data()
-NOTE: fetch http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
-DEBUG: executing /usr/bin/env wget -t 5 --passive-ftp
---no-check-certificate -P /home/vo/oe/build/source
-http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
---2009-03-11 13:26:48--
-http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
-Resolving tinylogin.busybox.net... 140.211.167.224
-Connecting to tinylogin.busybox.net|140.211.167.224|:80... connected.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
-[following]
---2009-03-11 13:27:22--
-https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
-Resolving bugs.busybox.net... 140.211.167.224
-Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
-WARNING: cannot verify bugs.busybox.net's certificate, issued by
-`/C=US/ST=OR/O=OSU Open Source Lab/CN=OSU Open Source Lab
-CA/emailAddress=dnsadmin@osuosl.org':
-  Unable to locally verify the issuer's authority.
-HTTP request sent, awaiting response... 404 Not Found
-2009-03-11 13:27:32 ERROR 404: Not Found.
-
-NOTE: Task failed: Fetch failed:
-http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
-NOTE: package tinylogin-1.4-r6: task do_fetch: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package tinylogin-1.4: failed
-ERROR: Build
-of /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb do_fetch
-failed
-ERROR: Task 210
-(/home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb, do_fetch)
-failed
-NOTE: Tasks Summary: Attempted 378 tasks of which 378 didn't need to be
-rerun and 1 failed.
-ERROR: '/home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb'
-failed
-NOTE: build 200903111325: completed
-
+diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+index fd8687e..20f371a 100644
+--- a/classes/autotools.bbclass
++++ b/classes/autotools.bbclass
+@@ -212,7 +212,8 @@ autotools_stage_all() {
+ 		for i in $las
+ 		do
+ 			sed -e 's/^installed=yes$/installed=no/' \
+-			    -e '/^dependency_libs=/s,${WORKDIR}[[:alnum:]/\._+-]*/\([[:alnum:]\._+-]*\),${STAGING_LIBDIR}/\1,g' \
++			    -e '/^dependency_libs=/s,${WORKDIR}[[:alnum:]/\._+-]*/\([[:alnum:]\._+-]*.la\),${STAGING_LIBDIR}/\1,g' \
++			    -e '/^dependency_libs=/s,${WORKDIR}[[:alnum:]/\._+-]*/\([[:alnum:]\._+-]*\),${STAGING_LIBDIR},g' \
+ 			    -e "/^dependency_libs=/s,\([[:space:]']\)${libdir},\1${STAGING_LIBDIR},g" \
+ 			    -i ${STAGE_TEMP}/${libdir}/$i
+ 		done
+-- 
+1.6.0.4
 
 
 
