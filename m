@@ -1,23 +1,29 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [208.51.207.131] (helo=mail.2mi.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LhLHy-0001sD-6H
+	(envelope-from <jader@2mi.com.br>) id 1LhRq6-0007xW-Rv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 11:03:50 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1LhLXo-0005oM-1m
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 11:20:12 +0100
-Message-ID: <49B78C7A.2040604@kernelconcepts.de>
-Date: Wed, 11 Mar 2009 11:03:38 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <180e2c240903101840j87d5ce6w1d1af520b488eab4@mail.gmail.com>
-In-Reply-To: <180e2c240903101840j87d5ce6w1d1af520b488eab4@mail.gmail.com>
-X-Enigmail-Version: 0.95.0
-Subject: Re: gpe-scap-1.3 patch for mipsel target
+	Wed, 11 Mar 2009 18:03:33 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.2mi.com.br (Postfix) with ESMTP id 44B0750277D0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2009 14:01:32 -0300 (BRT)
+X-Virus-Scanned: amavisd-new at 2mi.com.br
+Received: from mail.2mi.com.br ([127.0.0.1])
+	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rb5t8vw2vHsK
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2009 14:01:27 -0300 (BRT)
+Received: from [192.168.15.100] (unknown [189.102.205.109])
+	by mail.2mi.com.br (Postfix) with ESMTP id 9DFF6502762C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2009 14:01:27 -0300 (BRT)
+From: Jader <jader@2mi.com.br>
+To: Open Embedded <openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Mar 2009 13:56:46 -0300
+Message-Id: <1236790606.14496.4.camel@northpole>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: tinylogin not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,27 +37,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2009 10:03:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 11 Mar 2009 17:03:33 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Hello.
+I'm trying to compile minimal-image but I've got a tinylogin error.
+It seems tinylogin is deprecated, http://tinylogin.busybox.net/
+redirects to http://bugs.busybox.net/
 
-yajin zhou schrieb:
-> The gpe scap version 1.3 has a bug to be built for mips target. The patch is
-> here. http://bugs.openembedded.net/attachment.cgi?id=13835
+How can I disable it from build?
 
-this is fixed in 1.4 - I'll add this right now.
+Task output below:
 
-Greetings
+NOTE: Running task 379 of 801 (ID:
+210, /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb,
+do_fetch)
+DEBUG:
+Parsing /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb
+(full)
+DEBUG: BB /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb:
+handle(data)
+DEBUG: update_data()
+DEBUG: update_data()
+NOTE: package tinylogin-1.4: started
+DEBUG: Executing task do_fetch
+DEBUG: update_data()
+NOTE: package tinylogin-1.4-r6: task do_fetch: started
+DEBUG: mkdirhier(/home/vo/oe/build/source)
+DEBUG: mkdirhier(/home/vo/oe/build/source)
+DEBUG: update_data()
+DEBUG: update_data()
+NOTE: fetch http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+DEBUG: executing /usr/bin/env wget -t 5 --passive-ftp
+--no-check-certificate -P /home/vo/oe/build/source
+http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+--2009-03-11 13:26:48--
+http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+Resolving tinylogin.busybox.net... 140.211.167.224
+Connecting to tinylogin.busybox.net|140.211.167.224|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+[following]
+--2009-03-11 13:27:22--
+https://bugs.busybox.net/downloads/tinylogin-1.4.tar.bz2
+Resolving bugs.busybox.net... 140.211.167.224
+Connecting to bugs.busybox.net|140.211.167.224|:443... connected.
+WARNING: cannot verify bugs.busybox.net's certificate, issued by
+`/C=US/ST=OR/O=OSU Open Source Lab/CN=OSU Open Source Lab
+CA/emailAddress=dnsadmin@osuosl.org':
+  Unable to locally verify the issuer's authority.
+HTTP request sent, awaiting response... 404 Not Found
+2009-03-11 13:27:32 ERROR 404: Not Found.
 
-Florian
+NOTE: Task failed: Fetch failed:
+http://tinylogin.busybox.net/downloads/tinylogin-1.4.tar.bz2
+NOTE: package tinylogin-1.4-r6: task do_fetch: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package tinylogin-1.4: failed
+ERROR: Build
+of /home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb do_fetch
+failed
+ERROR: Task 210
+(/home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb, do_fetch)
+failed
+NOTE: Tasks Summary: Attempted 378 tasks of which 378 didn't need to be
+rerun and 1 failed.
+ERROR: '/home/vo/oe/openembedded/packages/tinylogin/tinylogin_1.4.bb'
+failed
+NOTE: build 200903111325: completed
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+
 
 
