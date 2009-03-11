@@ -1,35 +1,23 @@
-Received: from [217.146.130.193] (helo=chlothar.bnv-bamberg.de)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ba0547@bnv-bamberg.de>) id 1LhKKD-0004Du-5o
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1LhLHy-0001sD-6H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 10:02:06 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bnv-bamberg.de; s=mail2008; h=Subject:From:To:Cc:In-Reply-To:
-	References:Content-Type:Date:Message-Id:Mime-Version:
-	Content-Transfer-Encoding; bh=qYSymEUYRIduVzQgDB8srDQLjkgiTlVim2
-	M2vzDVcr4=; b=dQpEcqsAUxhEWt+Kf4drDk31wZED9nkkoi4IKfos8DTrHkc+zX
-	2rfzBe/8lrcp/+hZojjny2Qi8zcrByw+lY2KXB3M0xkTVxo64CpzVq5ETrGS0yDx
-	9Tyzghd9MpYKbMDyL/+PX+gR2cTU5LZwv4gZjU+9BFgMGem8ymqZwn1h4=
-Received: from localhost ([127.0.0.1] helo=chlothar.bnv-bamberg.de)
-	by chlothar.bnv-bamberg.de with esmtp 
-	id 1LhKK7-0007sX-QC ; Wed, 11 Mar 2009 10:01:59 +0100
-Received: from w0d87.w.pppool.de ([89.58.13.135] helo=[192.168.2.5])
-	by chlothar.bnv-bamberg.de with esmtpa (Exim 4.69)
-	(envelope-from <ba0547@bnv-bamberg.de>)
-	id 1LhKK7-0007q0-FO; Wed, 11 Mar 2009 10:01:59 +0100
-From: harald <ba0547@bnv-bamberg.de>
-To: angstrom-distro-devel@linuxtogo.org
-In-Reply-To: <1236760668.4955.5.camel@utx.utx.cz>
-References: <49B5E3B9.70409@gmail.com>
-	<1236709292.28500.27.camel@hammer.suse.cz> <49B73DC1.5000902@gmail.com>
-	<74d0deb30903110117m2de9bd4cvd7bc88501e9c719b@mail.gmail.com>
-	<1236760668.4955.5.camel@utx.utx.cz>
-Date: Wed, 11 Mar 2009 10:01:52 +0100
-Message-Id: <1236762113.4471.8.camel@debian.dorg.org>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Angstrom online image builder.
+	Wed, 11 Mar 2009 11:03:50 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1LhLXo-0005oM-1m
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Mar 2009 11:20:12 +0100
+Message-ID: <49B78C7A.2040604@kernelconcepts.de>
+Date: Wed, 11 Mar 2009 11:03:38 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <180e2c240903101840j87d5ce6w1d1af520b488eab4@mail.gmail.com>
+In-Reply-To: <180e2c240903101840j87d5ce6w1d1af520b488eab4@mail.gmail.com>
+X-Enigmail-Version: 0.95.0
+Subject: Re: gpe-scap-1.3 patch for mipsel target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2009 09:02:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 11 Mar 2009 10:03:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi,
 
-after all my tries to build angstroem on my machine fails because my
-loox do not start with my images but with my kernel runs with rootfs
-images which can be downloaded at several locations (opie, gpe.., almost
-all workes). I tired to use angstrom online image builder from here:
-http://amethyst.openembedded.net/~koen/narcissus/
+yajin zhou schrieb:
+> The gpe scap version 1.3 has a bug to be built for mips target. The patch is
+> here. http://bugs.openembedded.net/attachment.cgi?id=13835
 
-This worked only once for me. Now you can choose yor machine and some
-addidional information. No image will be built. Is it a limitation that
-every machine can only send on request or is something wrong with the
-online image builder?  
+this is fixed in 1.4 - I'll add this right now.
 
-Regards, Harald.
+Greetings
 
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
