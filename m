@@ -1,42 +1,41 @@
-Received: from [209.85.146.183] (helo=wa-out-1112.google.com)
+Received: from [209.85.217.166] (helo=mail-gx0-f166.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LhFJh-0004IZ-D2
+	(envelope-from <philipp.zabel@gmail.com>) id 1LhJdd-0006V1-Ey
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 04:41:15 +0100
-Received: by wa-out-1112.google.com with SMTP id n7so1260991wag.12
+	Wed, 11 Mar 2009 09:18:06 +0100
+Received: by gxk10 with SMTP id 10so4124787gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2009 20:41:08 -0700 (PDT)
+	Wed, 11 Mar 2009 01:17:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=YjPSwbJ9cHsCfpXWCjsms9W5INgkcstGrTj9yyr/kts=;
-	b=Aeld6yLIeckw20j98j/6nzD/PCilp7SdKwyIjN2fImm0Tp5R4EeUNiL1eHLxYfXUNg
-	7odCAfiu/wwSiB7ib5qIfouvVQ2kguJmd9+5yIuHfJcjYzRlhlnjEfWtFli6TEOXovMq
-	9Xkh7BjTih5HaWGGrDiiStSqTF3ILiKBXUUgc=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=qYxTGNcIkwTzW+09fBw92Qsqbk53SYW7T6Onn7H8O8w=;
+	b=ab+xug6j9DEycWEEjy4yye3S5raYCgvV+jf34vrKLPHUuGZeCB11p5GInFStmcnh/f
+	xemFU9aLOErgUPpwo88s07y+mpCfYdfSM4sVxVU0W+WOtVNO3BKdqJAHQ7GD9g7ovkOH
+	L3OtrxTBMwrO+KYcvTKTX9gj2FHEAGx1G+MKo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:cc:references:in-reply-to
-	:mime-version:content-type:content-transfer-encoding:message-id;
-	b=hUI9WTjpptDgSdstE9WQnwIgpeafiQUNMgAE5le7jYYTHt/iYsUPPp5+JG6oN4cgcZ
-	OzV7NJ0wWDDknECueEgtNRPBCAwvSemI0x1TyYIzx1m5Va9+PRQwUm6DgQ0Ik18a3HqE
-	eky/tyJbM+uhGK23rjJACNIRQ3+sO/1lUEP1o=
-Received: by 10.115.32.1 with SMTP id k1mr4799250waj.66.1236742868850;
-	Tue, 10 Mar 2009 20:41:08 -0700 (PDT)
-Received: from morpheus.localnet (adsl-71-146-1-99.dsl.pltn13.sbcglobal.net
-	[71.146.1.99])
-	by mx.google.com with ESMTPS id l28sm5760954waf.65.2009.03.10.20.41.07
-	(version=SSLv3 cipher=RC4-MD5); Tue, 10 Mar 2009 20:41:08 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Mar 2009 20:41:02 -0700
-User-Agent: KMail/1.11.1 (Linux/2.6.28-9-generic; KDE/4.2.1; x86_64; ; )
-References: <1236463653.25861.321.camel@cheeto.emacinc.com>
-	<19c1b8a90903101035t52ba7a0ble2f49e324bc20ba@mail.gmail.com>
-	<20090311030509.GA10085@denix.org>
-In-Reply-To: <20090311030509.GA10085@denix.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=aaiauyWIk2ge8QGKBSvoBfbrCdCw8yGUBkQ8angzbY9LcnHv0FWU0nWG1WP6VqVPoM
+	0+n600ticsVWXtn6DcwfFDdIGXdGXiDF1rwTc31LBKtDeVkohD1K6XzBAJRFvjmEeyOs
+	HkvN4Qg7cDoBg8NMad6QBXdNhdqFlPiZWARqc=
 MIME-Version: 1.0
-Message-Id: <200903102041.06686.raj.khem@gmail.com>
-Subject: Re: failure on gcc-cross-initial-4.2.4-r5 for i686
+Received: by 10.150.143.12 with SMTP id q12mr14533131ybd.245.1236759478149; 
+	Wed, 11 Mar 2009 01:17:58 -0700 (PDT)
+In-Reply-To: <49B73DC1.5000902@gmail.com>
+References: <49B5E3B9.70409@gmail.com>
+	<1236709292.28500.27.camel@hammer.suse.cz>
+	<49B73DC1.5000902@gmail.com>
+Date: Wed, 11 Mar 2009 09:17:58 +0100
+Message-ID: <74d0deb30903110117m2de9bd4cvd7bc88501e9c719b@mail.gmail.com>
+From: pHilipp Zabel <philipp.zabel@gmail.com>
+To: Ben Gamari <bgamari@gmail.com>
+Cc: Vitus Jensen <vjensen@gmx.de>, beagleboard@googlegroups.com,
+	openembedded-devel@lists.openembedded.org,
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+Subject: Re: [Angstrom-devel] Avahi recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,83 +49,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2009 03:41:18 -0000
-X-Groupsio-MsgNum: 8341
-Content-Type: multipart/signed; boundary="nextPart9898945.g8txx1lpfE";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 11 Mar 2009 08:18:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
---nextPart9898945.g8txx1lpfE
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Hi,
 
-On Tuesday 10 March 2009 20:05:09 Denys Dmytriyenko wrote:
-> On Tue, Mar 10, 2009 at 10:35:19AM -0700, Khem Raj wrote:
-> > On Tue, Mar 10, 2009 at 8:40 AM, Travis Stratman <tstratman@emacinc.com=
->=20
-wrote:
-> > > Thanks Khem.
-> > >
-> > > On Mon, 2009-03-09 at 15:35 -0700, Khem Raj wrote:
-> > >> On Mon, Mar 9, 2009 at 3:18 PM, Travis Stratman
-> > >> <tstratman@emacinc.com> wrote:
-> > >>
-> > >> snip
-> > >>
-> > >> > PREFERRED_PROVIDERS +=3D "
-> > >> > virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
-> > >> > PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}gcc:gcc-cross"
-> > >> > PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}g++:gcc-cross"
-> > >>
-> > >> Can you try by removing above three
-> > >>
-> > >> Rest of the changes seems like should not have effect.
-> > >
-> > > This doesn't seem to change anything. I made the changes, cleaned all
-> > > glibc and gcc packages, then tried to build and I still get the same
-> > > issue.
-> > >
-> > > Any other ideas?
-> >
-> > Hmm looking closely it seems that your cross compiler is from
-> > i686-linux -> i686-linux which is native configuration and intl
-> > configury  is then trying to use
-> > your freshly built CC instead of the BUILD_CC. In short its not really
-> > thinking if it is cross compiling. I have a x86_64 box thats why it
-> > worked for me because I am cross'ing from x86_64-linux to i686-linux
-> >
-> > I will give it a shot on x86 box too. Meanwhile can you also define
-> > TARGET_VENDOR =3D "something" for your distr and rebuild
+replacing openembedded-users with openembedded-devel
+(http://lists.linuxtogo.org/pipermail/openembedded-users/2009-March/000978.html).
+
+On Wed, Mar 11, 2009 at 5:27 AM, Ben Gamari <bgamari@gmail.com> wrote:
+> On 03/10/2009 02:21 PM, Stanislav Brabec wrote:
+>>
+>> I guess I got the problem:
+>>
+>> Version 0.6.24 is already decently split and you can install
+>> avahi-autoipd without triggering additional dependencies. This is not
+>> valid for version 0.6.21 triggered in your build.
+>>
+>> I guess that it's caused by
+>> distro/include/preferred-om-2008-versions.inc.
+>>
+>> Remove three avahi related lines from it and try again.
+>>
 >
-> I'll save you some trouble - been building i686-generic on I32 x86 for
-> months w/o a problem. Angstrom distro with a small overlay - configuration
-> is pretty basic.
+> Nope, no dice. In fact, things are getting even stranger:
 >
-[snip]
-> i686-linux holds my native packages
-> i686-angstrom-linux holds my target/cross packages, including gcc-cross
+>> DEBUG: providers for avahi-daemon are: ['avahi-python', 'avahi']
+>> DEBUG: update_data()
+>> DEBUG: update_data()
+>> NOTE: checking PREFERRED_PROVIDER_avahi-python
+>> NOTE: checking PREFERRED_PROVIDER_avahi-python-0.6.21
+>> NOTE: checking PREFERRED_PROVIDER_avahi-python-0.6.21-r8
+>> NOTE: checking PREFERRED_PROVIDER_avahi
+>> NOTE: checking PREFERRED_PROVIDER_avahi
+>> NOTE: selecting avahi to satisfy runtime avahi-daemon due to
+>> PREFERRED_PROVIDER_avahi = avahi
+>> DEBUG: sorted providers for avahi-daemon are:
+>> ['/mnt/oe/oe/openembedded/packages/avahi/avahi_0.6.24.bb',
+>> '/mnt/oe/oe/openembedded/packages/avahi/avahi-python_0.6.21.bb']
+>> DEBUG: adding '/mnt/oe/oe/openembedded/packages/avahi/avahi_0.6.24.bb' to
+>> satisfy runtime 'avahi-daemon'
+>
+>> ...
+>>
+>> DEBUG: adding
+>> '/mnt/oe/oe/openembedded/packages/avahi/avahi-python_0.6.21.bb' to satisfy
+>> runtime 'avahi-daemon'
+>
+>> ...
+>>
+>> DEBUG: providers for avahi-autoipd are: ['avahi-python', 'avahi']
+>> DEBUG: update_data()
+>> DEBUG: update_data()
+>> NOTE: checking PREFERRED_PROVIDER_avahi-python
+>> NOTE: checking PREFERRED_PROVIDER_avahi-python-0.6.21
+>> NOTE: checking PREFERRED_PROVIDER_avahi-python-0.6.21-r8
+>> NOTE: checking PREFERRED_PROVIDER_avahi
+>> NOTE: checking PREFERRED_PROVIDER_avahi
+>> NOTE: selecting avahi to satisfy runtime avahi-autoipd due to
+>> PREFERRED_PROVIDER_avahi = avahi
+>> DEBUG: sorted providers for avahi-autoipd are:
+>> ['/mnt/oe/oe/openembedded/packages/avahi/avahi_0.6.24.bb',
+>> '/mnt/oe/oe/openembedded/packages/avahi/avahi-python_0.6.21.bb']
+>> DEBUG: adding '/mnt/oe/oe/openembedded/packages/avahi/avahi_0.6.24.bb' to
+>> satisfy runtime 'avahi-autoipd'
+>> DEBUG: adding
+>> '/mnt/oe/oe/openembedded/packages/avahi/avahi-python_0.6.21.bb' to satisfy
+>> runtime 'avahi-autoipd'
+>
+> It's apparently still trying to install 0.6.21 for some reason, but this
+> time in addition to 0.6.24. Odd. Any ideas?
 
-Yeah this makes your target triplet different then your host triplet and he=
-nce=20
-it compiles a correct cross gcc for you.
+Those messages do not mean that the recipes will be actually built. If
+I'm not mistaken, bitbake is just considering alternatives here.
+Especially this ...
 
-> i686-generic-angstrom-linux holds machine-specific target packages
+>> NOTE: selecting avahi to satisfy runtime avahi-autoipd due to
+>> PREFERRED_PROVIDER_avahi = avahi
 
-=2D-=20
-Khem Raj
+... part sounds like it's going to do the right thing.
 
---nextPart9898945.g8txx1lpfE
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+I have the same messages in my -DD log. When I call "DISTRO=angstrom
+bitbake task-base" on a clean tmp, it just builds avahi (0.6.24), not
+avahi-python (0.6.21) or any of its additional dependencies.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
+regards
+Philipp
 
-iEUEABECAAYFAkm3Ms8ACgkQHnJKy6V6em6mVgCfeNFQUKUUawJlGfE7CjEv0r9H
-UnYAlizdrOYr2KuXZRopmdjjygUyH9I=
-=TkIc
------END PGP SIGNATURE-----
 
---nextPart9898945.g8txx1lpfE--
