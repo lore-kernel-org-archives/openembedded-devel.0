@@ -1,41 +1,35 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [209.85.200.172] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LhVyO-0007Xe-Le
+	(envelope-from <raj.khem@gmail.com>) id 1LhX09-0007PU-NM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 22:28:22 +0100
-Received: by bwz9 with SMTP id 9so168520bwz.12
+	Wed, 11 Mar 2009 23:34:13 +0100
+Received: by wf-out-1314.google.com with SMTP id 28so245643wff.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2009 14:28:10 -0700 (PDT)
+	Wed, 11 Mar 2009 15:34:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=NyO+bDZx9PF7+iXljyuI3uP3EZlEjkFBu183ySpugLU=;
-	b=xwJpQCtlPtx/W6Ro6U0zWZC2dZSU39alVIM4pCB4p5bDH5vMOjY1ilLZLon6RjiOOh
-	lQc6zHmI/jzrjXlILPzz94OfDnbOc+6cMwwElbEalzxoSrBMsRG1e6nzgkM6Mc9niAo2
-	UVBrfmtnpApyoRvRAzP2rln5rV3TYwYveORdU=
+	bh=0opkquCaPxo4Y/eOwQoaS1gWlDG8beAm0LzvfzUWS7Q=;
+	b=EhH/+l8xxbAEt4VYvRDnY1IeIvlSbWpBlu9A2qm1Kd74IN8Xjw3tHsWh57YwbRuawp
+	Au9WhwoXPT2XP0bThU+XSY15BwCaLjCTNEjVZ76kk9DAl6cFMD28Hq5aHupig6Qpo+BX
+	3RvAvlHDtkgCRI9h6giGn9KWebnFboTpr0EeA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=FKFy0Mf283tNet2ZAcEMJ7JUnbEKmLw8HSWqcKxlSwXt50P5E4Smfhrv1w+9i76aNU
-	vjgQxwb/phiEZhc7QkptFDIgFMbuI3ypE3GgJltgoHWlMzjIlOPqc0FFVSslemjLPhrq
-	b/nRnMXvjO6Xi/hCBHbX5e9pMXBzZp6N+VlJI=
+	b=wskIHrdSXJUuFOkPGhpAIUUW3rda1pirRvsg5+2vvnFG4hxanBjYgk81rWT2c0DtPq
+	PK+LV6Rehb+r3aW9MpJ1gqb2BEQH0/hHyx2tgfKMztPUqvmL9jGhY0Y/urQWnhCtcGVd
+	lw0ubL4ifY7SUCjE46zQliMPS2vzFW+oiJXf8=
 MIME-Version: 1.0
-Received: by 10.223.116.205 with SMTP id n13mr6759569faq.103.1236806889857; 
-	Wed, 11 Mar 2009 14:28:09 -0700 (PDT)
-In-Reply-To: <20090311030509.GA10085@denix.org>
-References: <1236463653.25861.321.camel@cheeto.emacinc.com>
-	<200903071735.37618.raj.khem@gmail.com>
-	<1236637089.29394.59.camel@cheeto.emacinc.com>
-	<19c1b8a90903091535u4dd8982blc884a508cc35e8dc@mail.gmail.com>
-	<1236699601.29394.99.camel@cheeto.emacinc.com>
-	<19c1b8a90903101035t52ba7a0ble2f49e324bc20ba@mail.gmail.com>
-	<20090311030509.GA10085@denix.org>
-Date: Wed, 11 Mar 2009 22:28:09 +0100
-Message-ID: <c384c5ea0903111428y4ffee26dud7662f1f614074ac@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+Received: by 10.143.166.10 with SMTP id t10mr3913245wfo.210.1236810843949; 
+	Wed, 11 Mar 2009 15:34:03 -0700 (PDT)
+In-Reply-To: <1236790606.14496.4.camel@northpole>
+References: <1236790606.14496.4.camel@northpole>
+Date: Wed, 11 Mar 2009 15:34:03 -0700
+Message-ID: <19c1b8a90903111534g39f25ba4ocd1f3a5099acf48b@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: failure on gcc-cross-initial-4.2.4-r5 for i686
+Subject: Re: tinylogin not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2009 21:28:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 11 Mar 2009 22:34:14 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Denys,
-
-On Wed, Mar 11, 2009 at 4:05 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+On Wed, Mar 11, 2009 at 9:56 AM, Jader <jader@2mi.com.br> wrote:
+> Hello.
+> I'm trying to compile minimal-image but I've got a tinylogin error.
+> It seems tinylogin is deprecated, http://tinylogin.busybox.net/
+> redirects to http://bugs.busybox.net/
 >
-> i686-linux holds my native packages
-> i686-angstrom-linux holds my target/cross packages, including gcc-cross
-> i686-generic-angstrom-linux holds machine-specific target packages
->
-Are that your overlay directory names?
+> How can I disable it from build?
 
+What distro are you compiling for ?
+try bitbake -g and inspect the dependencies and find out why is it
+being pulled in
+it only shows up explicitly in task-mamona.bb
 
-Then they have nothing to do with the actual problem AFAIK.
+Furthermore tinylogin should be moved to obsoleted packages IMO
 
-It's probably the target triplet name that makes the difference, like
-Khem suggests.
-
-
-Regards,
--- 
-Leon
+Thx
+-Khem
 
 
