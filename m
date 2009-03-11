@@ -1,34 +1,36 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [72.14.220.153] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1LhJwr-0007so-Mp
+	(envelope-from <piero.pezzin@gmail.com>) id 1LhK7y-0005EX-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Mar 2009 09:37:57 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 6AF92140933E;
-	Wed, 11 Mar 2009 09:37:58 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HzSg7LuinwaG; Wed, 11 Mar 2009 09:37:58 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id 3D7461416BA5;
-	Wed, 11 Mar 2009 09:37:57 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
-To: pHilipp Zabel <philipp.zabel@gmail.com>
-In-Reply-To: <74d0deb30903110117m2de9bd4cvd7bc88501e9c719b@mail.gmail.com>
-References: <49B5E3B9.70409@gmail.com>
-	<1236709292.28500.27.camel@hammer.suse.cz> <49B73DC1.5000902@gmail.com>
-	<74d0deb30903110117m2de9bd4cvd7bc88501e9c719b@mail.gmail.com>
-Date: Wed, 11 Mar 2009 09:37:48 +0100
-Message-Id: <1236760668.4955.5.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Cc: Ben Gamari <bgamari@gmail.com>, beagleboard@googlegroups.com,
-	Vitus Jensen <vjensen@gmx.de>, openembedded-devel@lists.openembedded.org,
-	Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: [Angstrom-devel] Avahi recipe
+	Wed, 11 Mar 2009 09:49:27 +0100
+Received: by fg-out-1718.google.com with SMTP id 13so1310559fge.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2009 01:49:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=MpO3lSmAbIyFgf5fNBaL5rK39SopiKxvNaBmfPEi20A=;
+	b=o4hnUVQy0ne2qDYDpJIwL8q1bLdun+55yey0Z1CtYpF0Sdy4iMCjkmLxH+Y+/+fKtx
+	bN3+vtKWxOtyZKGv/Vgg3TuFrVwJNF4F26sqJlNYBiD8usmiHUNwDX6uljypoE4QiBZ8
+	BCc6eBVEf36ORP4MZ2BujlSkIQGULf53c/kEM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=KewkmBlHQTnkA4rvCbg7QOHxvTQ8K+2PJCPYpB5g623jtYppPa55z+e+L51DIw9+ke
+	jqGRZKG+Pox00WFjC2wL5TaflI/qKy2VVBhLicTFjBnxlNqJJjKR89T/U6ncATlyG2EM
+	UbpgRMHIWrQugMcPNHBohVo8rzR2UqteItLXc=
+MIME-Version: 1.0
+Received: by 10.86.33.10 with SMTP id g10mr5777113fgg.47.1236761361184; Wed, 
+	11 Mar 2009 01:49:21 -0700 (PDT)
+In-Reply-To: <19c1b8a90903101122r59d22d0fia19158c42583e784@mail.gmail.com>
+References: <49bdfd00903100733s3af6dc2o48f09b48593fe51f@mail.gmail.com>
+	<19c1b8a90903101122r59d22d0fia19158c42583e784@mail.gmail.com>
+Date: Wed, 11 Mar 2009 09:49:21 +0100
+Message-ID: <49bdfd00903110149y39fb7aa4we99d373a4ff1790f@mail.gmail.com>
+From: Piero Pezzin <piero.pezzin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Problem building kernel - too many files open
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +44,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2009 08:37:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 11 Mar 2009 08:49:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-pHilipp Zabel wrote:
+Hi,
 
-> >> I guess that it's caused by
-> >> distro/include/preferred-om-2008-versions.inc.
-> >>
-> >> Remove three avahi related lines from it and try again.
-> >>
+I searched without success. I agree with you, there is a problem on my host,
+but I'd like to know why it pops out during the do_package task.
+
+Any help will be appreciated.
+
+Regards,
+
+Piero
+
+On Tue, Mar 10, 2009 at 7:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Tue, Mar 10, 2009 at 7:33 AM, Piero Pezzin <piero.pezzin@gmail.com>
+> wrote:
+> > Hello everyone,
 > >
-> > Nope, no dice. In fact, things are getting even stranger:
-
-Ben, what will happen, it you remove avahi_0.6.21.bb from the tree?
-Maybe it poisons the dependency checker?
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
-
+> > I'm building a minimal distribution for a x86 machine (my host is a
+> x86-64
+> > with CentOS 4.4):
+> >
+> > OE Build Configuration:
+> > BB_VERSION        = "1.8.12"
+> > METADATA_BRANCH   = "org.openembedded.dev"
+> > METADATA_REVISION = "a8a23e995d108ecdfc31129941671551c591bc6e"
+> > TARGET_ARCH       = "i486"
+> > TARGET_OS         = "linux"
+> > MACHINE           = "x86"
+> > DISTRO            = "minimal"
+> > DISTRO_VERSION    = ".dev-snapshot-20090310"
+> > TARGET_FPU        = ""
+> >
+> >
+> > During kernel building, I got the following error:
+> >
+> > OTE: package linux-2.6.28: started
+> > NOTE: package linux-2.6.28-r6: task do_package: started
+> > ERROR: Error in executing:
+> > /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+> > linux_2.6.28.bb
+> > ERROR: Exception:exceptions.IOError Message:[Errno 24] Too many open
+> files:
+> >
+> '/home/piero/work/qong-nobk/openembedded/build/tmp/work/x86-oe-linux/linux-2.6.28-r6/tmpQbp1Jr'
+> > ERROR: Error in executing:
+> > /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+> > linux_2.6.28.bb
+> > ERROR: Exception:exceptions.ImportError Message:No module named traceback
+> > ERROR: Error in executing:
+> > /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+> > linux_2.6.28.bb
+> > ERROR: Exception:exceptions.ImportError Message:No module named traceback
+> > ERROR: Error in executing:
+> > /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+> > linux_2.6.28.bb
+> > ERROR: Exception:exceptions.ImportError Message:No module named traceback
+> > ERROR: Build of
+> > /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+> > linux_2.6.28.bb do_package failed
+> > Traceback (most recent call last):
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/bin/bitbake", line
+> 143,
+> > in ?
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/bin/bitbake", line
+> 140,
+> > in main
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/cooker.py",
+> line
+> > 612, in cook
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/cooker.py",
+> line
+> > 514, in buildFile
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/runqueue.py",
+> > line 842, in execute_runqueue
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/runqueue.py",
+> > line 951, in execute_runqueue_internal
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/cooker.py",
+> line
+> > 137, in tryBuild
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/cooker.py",
+> line
+> > 111, in tryBuildPackage
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/build.py",
+> line
+> > 278, in exec_task
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/build.py",
+> line
+> > 113, in exec_func
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/build.py",
+> line
+> > 136, in exec_func_python
+> >  File "/home/piero/work/bitbake-nobk/bitbake-1.8.12/lib/bb/utils.py",
+> line
+> > 186, in better_exec
+> > ImportError: No module named traceback
+> > ERROR: Task 12
+> > (/home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+> > linux_2.6.28.bb, do_package) failed
+> >
+> > Does anyone know what's happening?
+>
+> Someone else also saw this problem. Search the archives. Its most
+> probably your host.
+>
+> >
+> > Thanks in advance and best regards.
+> >
+> > Piero
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
