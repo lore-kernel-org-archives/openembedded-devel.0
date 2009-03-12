@@ -1,22 +1,27 @@
-Received: from [85.13.140.93] (helo=dd20204.kasserver.com)
+Received: from [204.2.163.5] (helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1Lhsxe-0001Tf-KP
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 23:01:06 +0100
-Received: from [192.168.1.102] (77-21-130-108-dynip.superkabel.de
-	[77.21.130.108])
-	by dd20204.kasserver.com (Postfix) with ESMTP id 49CD7180F1F0B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 23:00:56 +0100 (CET)
-Message-ID: <49B98613.8040307@opensimpad.org>
-Date: Thu, 12 Mar 2009 23:00:51 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1210775543.7097.29.camel@localhost.localdomain>
-In-Reply-To: <1210775543.7097.29.camel@localhost.localdomain>
-Subject: Re: Stable Branch
+	(envelope-from <Shane.Dixon@atmel.com>) id 1Lht4Z-0001jN-9B
+	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 23:08:15 +0100
+Received: from csomb01.corp.atmel.com ([10.95.30.150])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id n2CLwmob011011
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Mar 2009 15:06:42 -0700 (PDT)
+Received: from 10.95.105.47 ([10.95.105.47]) by csomb01.corp.atmel.com
+	([10.95.30.150]) with Microsoft Exchange Server HTTP-DAV ; 
+	Thu, 12 Mar 2009 22:02:46 +0000
+Received: from homestead.cso.atmel.com by csomb01.corp.atmel.com;
+	12 Mar 2009 16:02:46 -0600
+From: Shane Dixon <shane.dixon@atmel.com>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200903122027.20010.marcin@juszkiewicz.com.pl>
+References: <1236875362.11134.22.camel@homestead>
+	<200903122027.20010.marcin@juszkiewicz.com.pl>
+Organization: Atmel
+Date: Thu, 12 Mar 2009 16:02:46 -0600
+Message-Id: <1236895366.17908.127.camel@homestead>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Re: Working with the Target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,28 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 22:01:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 12 Mar 2009 22:08:15 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> Just to make things clear the stable branch has the full support of the
-> OE core team. We're aware some members of the community are vocal in
-> their dislike of the way its being run but these do not reflect the
-> views of the majority. To clarify the position with the bugzilla, it
-> remains the place to submit and track OE bugs, be them in .dev, stable
-> or any other branch. If any branch has a submission procedure for
-> changes in addition to that, that is up to the maintainers of the
-> branch.
->
-> We'd like to ask people to work together to make the stable branch a
-> success and make best use of our limited resources.
->
->   
-Are there plans to create a new stable branch or is the idea to backport 
-things to the old one?
+On Thu, 2009-03-12 at 20:27 +0100, Marcin Juszkiewicz wrote:
 
-best regards
-Bernhard Guillon
+> I used my at91sam9263ek with kernel fetched via TFTP and NFS root for 
+> quite long time. It is very useful way to change rootfs contents - 
+> especially when you can press 'Reset' any time without risk of 
+> unfinished transactions.
+
+I'd like to setup the same thing, but I didn't see anything in the OE
+manual for creating a bootable rootfs directory.  Would it be possible
+for you to dump a few files like your u-boot printenv, your tftp config,
+your nfs config, and local.conf?
+
+
+
+-- 
+Shane Dixon
+Atmel Corporation
+Office: 719.540.1123
+E-mail: shane.dixon@atmel.com
 
 
