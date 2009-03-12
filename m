@@ -1,35 +1,41 @@
-Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
+Received: from [209.85.217.166] (helo=mail-gx0-f166.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Lhou5-0005rf-G5
+	(envelope-from <kergoth@gmail.com>) id 1LhpC6-0006Mj-Uv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 18:41:09 +0100
-Received: by yx-out-1718.google.com with SMTP id 36so703586yxh.42
+	Thu, 12 Mar 2009 18:59:47 +0100
+Received: by gxk10 with SMTP id 10so2503013gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 10:40:55 -0700 (PDT)
+	Thu, 12 Mar 2009 10:59:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=j17AiW6UylE2NyalfstSy3sQxKpHq9YsOfZ0CbyNCd8=;
-	b=U6H7UkiLEkdQJAq6+ixUgYbwyQUfhsdrwyLfcr30TQfkweNU9iw9ucKOf9kdWzS3iF
-	f+KVOw1HB6QQF/HqMMIpyThjIJoPTul7HeKNQdkrEnyz9C6PBmZHNQhARwBjmrE9Dew6
-	6FqlkccRTl0MAVqc2AerP2wNWkfNyLTMkzNu4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=Ckfnkg82t89w0+dFt9CrKoNQYC/scqFecHWxnaTdt7B6LIWqv8W57SxIygworgZRiT
-	dnyHjadZg6ioLErGquzaGY8vIrpEXvA+4n01HNVxEJ/aVuSOFqsqng4GgczM1ds+aGNW
-	zu6pWV5ZdF47aVf/95FVbog/AajpKwb3cVJ1M=
+	bh=jfGMlNchm3bYyczx3/d4PS+QTLqRQPDs8wTWG24tgj8=;
+	b=kMEe/4YdUa/egbbOLT4IYFNrfpx0QArAmBSvujtUMWUCCyHuLm39xuCr01sBunx25w
+	UB0tgaIBwARFqa7tvnVenzZifrYqtYvqfaGlrBLgYbz0I4fns/CwDzjdF6zZf5MSuBpK
+	TMw8omYK6DptwXcrWrXCUrR95U9cJ4TP7zuRQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=airkiijoQgSayvyB9EIQM+zqVEAb7cwzbATmYLL7uY9ELcXJuXgdhd4t99kV9hOGuG
+	bYUs0qVH7V2kDKKVM6v9NJipWxKOzwhDDILowZ08JMaHnoE1F+vwNuDXL5dn9BVWFYoV
+	qz322934QW1y9oucoadf90H6njq/RCBSgmTLM=
 MIME-Version: 1.0
-Received: by 10.142.14.18 with SMTP id 18mr53734wfn.35.1236879654915; Thu, 12 
-	Mar 2009 10:40:54 -0700 (PDT)
-In-Reply-To: <EC5EE493B6046F45A2DDEC4A828DE52E03B6B838@EXCHSRVR.syntech.org>
-References: <EC5EE493B6046F45A2DDEC4A828DE52E03B6B838@EXCHSRVR.syntech.org>
-Date: Thu, 12 Mar 2009 10:40:54 -0700
-Message-ID: <19c1b8a90903121040g61964eaau82f4a08c3770d681@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.150.97.19 with SMTP id u19mr489482ybb.243.1236880770309; Thu, 
+	12 Mar 2009 10:59:30 -0700 (PDT)
+In-Reply-To: <200903121728.44337.marcin@juszkiewicz.com.pl>
+References: <49bdfd00903100733s3af6dc2o48f09b48593fe51f@mail.gmail.com>
+	<20090312085123.GD30336@ibawizard.net>
+	<1236863674.6250.21.camel@northpole>
+	<200903121728.44337.marcin@juszkiewicz.com.pl>
+Date: Thu, 12 Mar 2009 10:59:30 -0700
+X-Google-Sender-Auth: da5ae450becd6ab9
+Message-ID: <b6ebd0a50903121059u3c41c5b0odb118526ab475104@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: minimo: task do_configure failed
+Subject: Re: Problem building kernel - too many files open
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,66 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 17:41:09 -0000
+X-List-Received-Date: Thu, 12 Mar 2009 17:59:47 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 12, 2009 at 8:02 AM, Mark Butsch
-<mbutsch@syntech-fuelmaster.com> wrote:
-> Hello,
->
->
->
-> I am starting to work with OE again and am having trouble building
-> minimo. I had had this working a year ago, but now it fails in
-> do_configure:
->
->
->
->
->
-> ...
->
-> checking whether the host c compiler (gcc
-> -isystem/home/ad/mbutsch/4G/tmp/4g/sta
->
-> ging/i686-linux/usr/include -fexpensive-optimizations
-> -fomit-frame-pointer -fren
->
-> ame-registers -O2 -march=i486
-> -L/home/ad/mbutsch/4G/tmp/4g/staging/i686-linux/us
->
-> r/lib
-> -Wl,-rpath-link,/home/ad/mbutsch/4G/tmp/4g/staging/i686-linux/usr/lib
-> -Wl,
->
-> -O1 ) works... configure: error: installation or configuration problem:
-> host com
->
-> piler gcc cannot create executables.
->
-> ...
->
->
->
-> I can build other recipes so it must be a problem in how the compiler is
-> being specified to the minimo recipe.
->
->
->
-> Not sure where to go from here.
->
+A
 
-post your config.log stuff somewhere may be a link to your build on tinderbox
+On Thu, Mar 12, 2009 at 9:28 AM, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> Dnia czwartek, 12 marca 2009 o 14:14:34 Jader napisa=C5=82(a):
+>
+>> There's a patch attached. As I=E1=B8=BF new to git, I don know it it was
+>> created in the right way. Used command following:
+>
+> Thanks a lot for patch. I checked it locally and pushed into repository.
 
->
->
-> Mark
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Thanks for the patch indeed, I kept getting bitten by this one last week.
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
