@@ -1,32 +1,32 @@
-Received: from [195.65.72.27] (helo=bagnes.atmel.com)
+Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1LhhYM-0005PF-Qd
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lhhb0-0005X5-Uf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 10:50:14 +0100
-Received: from fribh01.corp.atmel.com (FRIBH01 [10.175.30.10])
-	by bagnes.atmel.com (8.13.8+Sun/8.13.8) with ESMTP id n2C9gKAN010616
+	Thu, 12 Mar 2009 10:52:58 +0100
+Received: by fxm11 with SMTP id 11so300472fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 02:44:47 -0700 (PDT)
-Received: from frimb01.corp.atmel.com ([10.175.30.12]) by
-	fribh01.corp.atmel.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 12 Mar 2009 10:49:03 +0100
-Received: from aeglos ([10.175.196.249]) by frimb01.corp.atmel.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 12 Mar 2009 10:49:03 +0100
-Message-ID: <261ACB3FFF55421F8A7C0F16AA664838@aeglos>
-From: "Ulf Samuelsson" <ulf.samuelsson@atmel.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <20090312091654.GA4382@sourdiere> <20090312093121.GA4534@sourdiere>
-Date: Thu, 12 Mar 2009 10:39:02 +0100
+	Thu, 12 Mar 2009 02:52:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=iZduZSuerOkWsiWM49+jIRmwbKRBIKYq3uQCc/xYfAo=;
+	b=sePAWyfxrVXe3ZhsnKb152M6E72SC+hYtyrzHKwtp66Ia9/ojhhRJwoIwalP/1ZwcK
+	naLPNpC3DHVVDKZ6Cbm3h6cuHYSOZrkHQh24EiwQnnagU+2r5xEmT/6gcAIgya0Rscch
+	gAUlo1KbsHeiXkY97PqZiBk4bjZGoIsOexwq8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=VSvqWvJxin3Q3RRDeNxtl2rhQOt6B9+wROzLvjttzlbUnspQnhcQ33Se/GkFqx3UGg
+	bKtHAxaldXbvbZaQK0aVMrAKNPPrJ/3HxD90uzUNTPsNymfEe+B1RV2A/R6qj7ag/eW+
+	MCXggC8NE/ZtVtSQ8I86H2irNVVKGDuE0Q0I0=
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5512
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-X-OriginalArrivalTime: 12 Mar 2009 09:49:03.0319 (UTC)
-	FILETIME=[C6D43E70:01C9A2F7]
-X-MIME-Autoconverted: from 8bit to quoted-printable by bagnes.atmel.com id
-	n2C9gKAN010616
-Subject: pax-utils-0.1.13.tar.bz2 no longer available
+Received: by 10.223.105.9 with SMTP id r9mr7146290fao.66.1236851565071; Thu, 
+	12 Mar 2009 02:52:45 -0700 (PDT)
+Date: Thu, 12 Mar 2009 10:52:45 +0100
+Message-ID: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: g++ lib problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 09:50:15 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=original
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Mar 2009 09:52:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Looks like this has disappeared from its original location in OpenEmbedde=
-d.
+Hi,
 
+I was trying to port a program that used asinl etc. but apparently
+asinl is not in our env.
+However if I look at
+~/oe/tmp/staging/armv7a-angstrom-linux-gnueabi/usr/include/c++/cmath I
+see around line 123
 
-Best Regards
-Ulf Samuelsson                ulf@atmel.com
-Atmel Nordic AB
-Mail:  Box 2033, 174 02 Sundbyberg, Sweden
-Visit:  Kavalleriv=E4gen 24, 174 58 Sundbyberg, Sweden
-Phone +46 (8) 441 54 22     Fax +46 (8) 441 54 29
-GSM    +46 (706) 22 44 57=20
+  inline long double
+  asin(long double __x)
+  { return __builtin_asinl(__x); }
 
+questions:
+shouldn't this have been a double asin? (probably not too important as
+the result will be casted)
+and if asin is long double, then why is there no asinl?
+normally it is
 
+double asin(double x);
+long double asinl(long double x);
+
+guess this is something in the way our libs are generated, but I could
+not find the proper way to fix it.
+
+Anyone a suggestion?
+
+Frans.
 
 
