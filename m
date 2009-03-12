@@ -1,32 +1,32 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1Lhfru-0007EA-3R
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LhgJh-0004YU-GE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 09:02:18 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id BA7C02C81D
+	Thu, 12 Mar 2009 09:31:01 +0100
+Received: by bwz9 with SMTP id 9so283154bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 08:01:24 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4MQ72PPa4sGb
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 08:01:20 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 888042C7FD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 08:01:19 +0000 (UTC)
-Message-ID: <49B8C180.3010607@gmail.com>
-Date: Thu, 12 Mar 2009 09:02:08 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	Thu, 12 Mar 2009 01:30:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=6NQMY8qYjCE/TkxcAaLxgsueKRjkBqVnlR1oiNNMy14=;
+	b=nFTa6rVL5ELvIwguue4IzFyztFHYFPfGAsqOx4JuPeHm/ZKBGTgb4AEFJHYi+15W2C
+	NiWmKdRd0eHUyNsdbavVIBnrKogvCMyYH8vzieo1uCOWfPG3KffUepXqGvyzx0BYmDOV
+	+3WmtM3QfTCmJaP6TJ7Mgcd3jeVfizX1ZigTk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=itiMTuOvJY1CnrypXoZgK3uKrxHfWzcbIkel8qtxNe/NGryR3f9j+ZntIyXgDQkG9i
+	mD0Pl7KEVtE+5nVck3zH6IZz44yXIdT9Oh34XdsxojUpKCrCOJY7uC8yzACgsGLCvDni
+	mgQQohrDu2sCwQ/r7btxnkatfnLsmq1h3LDQc=
 MIME-Version: 1.0
+Received: by 10.223.107.9 with SMTP id z9mr7107360fao.1.1236846647328; Thu, 12 
+	Mar 2009 01:30:47 -0700 (PDT)
+Date: Thu, 12 Mar 2009 09:30:47 +0100
+Message-ID: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <49bdfd00903100733s3af6dc2o48f09b48593fe51f@mail.gmail.com>	<19c1b8a90903101122r59d22d0fia19158c42583e784@mail.gmail.com>
-	<49bdfd00903110149y39fb7aa4we99d373a4ff1790f@mail.gmail.com>
-In-Reply-To: <49bdfd00903110149y39fb7aa4we99d373a4ff1790f@mail.gmail.com>
-Subject: Re: Problem building kernel - too many files open
+Subject: do_patch fails if path starts with ./
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,57 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 08:02:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Mar 2009 08:31:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Piero Pezzin ha scritto:
-> Hi,
-> 
-> I searched without success. I agree with you, there is a problem on my host,
-> but I'd like to know why it pops out during the do_package task.
-> 
-> Any help will be appreciated.
-> 
-> Regards,
-> 
-> Piero
-> 
-> On Tue, Mar 10, 2009 at 7:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> 
->> On Tue, Mar 10, 2009 at 7:33 AM, Piero Pezzin <piero.pezzin@gmail.com>
->> wrote:
->>> Hello everyone,
->>>
->>> I'm building a minimal distribution for a x86 machine (my host is a
->> x86-64
->>> with CentOS 4.4):
->>>
->>> OE Build Configuration:
->>> BB_VERSION        = "1.8.12"
->>> METADATA_BRANCH   = "org.openembedded.dev"
->>> METADATA_REVISION = "a8a23e995d108ecdfc31129941671551c591bc6e"
->>> TARGET_ARCH       = "i486"
->>> TARGET_OS         = "linux"
->>> MACHINE           = "x86"
->>> DISTRO            = "minimal"
->>> DISTRO_VERSION    = ".dev-snapshot-20090310"
->>> TARGET_FPU        = ""
->>>
->>>
->>> During kernel building, I got the following error:
->>>
->>> OTE: package linux-2.6.28: started
->>> NOTE: package linux-2.6.28-r6: task do_package: started
->>> ERROR: Error in executing:
->>> /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
->>> linux_2.6.28.bb
->>> ERROR: Exception:exceptions.IOError Message:[Errno 24] Too many open
->> files:
+Hi,
 
-this is a known error.
-Nobody solved it yet.
+When generating my (normally small) patches I typically do a cp file
+file.orig in the work dir, then change file and at the end do a diff
+-urN path/file.oirg path/file >file.patch
+no probllems with that (although if there are recommendations to do
+things simpler/better, I'm of course open to suggestions).
 
-/marco
+However yesterday I copied and pasted filenames and ended up with
+diff -urN ./path/file.orig ./path/file >file.patch
+of course then in file.patch the filenames starts with ./
+when that happens do_patch does not find the file.(probably because it
+thinks there is an additional directory because it does not see that
+./ is actually the same dir)
+
+is this a bug in our build system? or in patch?
+or should I just avoid using ./ if I create a patch?
+
+btw: I alredy tried diff -Nurd (so an additional d flag) but that did
+not make a difference).
+
+Frans.
 
 
