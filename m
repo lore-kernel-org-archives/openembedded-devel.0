@@ -1,32 +1,21 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LhgJh-0004YU-GE
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 09:31:01 +0100
-Received: by bwz9 with SMTP id 9so283154bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 01:30:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=6NQMY8qYjCE/TkxcAaLxgsueKRjkBqVnlR1oiNNMy14=;
-	b=nFTa6rVL5ELvIwguue4IzFyztFHYFPfGAsqOx4JuPeHm/ZKBGTgb4AEFJHYi+15W2C
-	NiWmKdRd0eHUyNsdbavVIBnrKogvCMyYH8vzieo1uCOWfPG3KffUepXqGvyzx0BYmDOV
-	+3WmtM3QfTCmJaP6TJ7Mgcd3jeVfizX1ZigTk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=itiMTuOvJY1CnrypXoZgK3uKrxHfWzcbIkel8qtxNe/NGryR3f9j+ZntIyXgDQkG9i
-	mD0Pl7KEVtE+5nVck3zH6IZz44yXIdT9Oh34XdsxojUpKCrCOJY7uC8yzACgsGLCvDni
-	mgQQohrDu2sCwQ/r7btxnkatfnLsmq1h3LDQc=
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1Lhgdc-0005Et-6U
+	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 09:51:36 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id DB4A21D36194; Thu, 12 Mar 2009 09:51:23 +0100 (CET)
+Date: Thu, 12 Mar 2009 09:51:23 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090312085123.GD30336@ibawizard.net>
+References: <49bdfd00903100733s3af6dc2o48f09b48593fe51f@mail.gmail.com>
+	<19c1b8a90903101122r59d22d0fia19158c42583e784@mail.gmail.com>
+	<49bdfd00903110149y39fb7aa4we99d373a4ff1790f@mail.gmail.com>
+	<49B8C180.3010607@gmail.com>
 MIME-Version: 1.0
-Received: by 10.223.107.9 with SMTP id z9mr7107360fao.1.1236846647328; Thu, 12 
-	Mar 2009 01:30:47 -0700 (PDT)
-Date: Thu, 12 Mar 2009 09:30:47 +0100
-Message-ID: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: do_patch fails if path starts with ./
+In-Reply-To: <49B8C180.3010607@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Problem building kernel - too many files open
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +29,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 08:31:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Mar 2009 08:51:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
+Marco Cavallini <koansoftware@gmail.com> [2009-03-12 09:02:08]:
 
-When generating my (normally small) patches I typically do a cp file
-file.orig in the work dir, then change file and at the end do a diff
--urN path/file.oirg path/file >file.patch
-no probllems with that (although if there are recommendations to do
-things simpler/better, I'm of course open to suggestions).
+> Piero Pezzin ha scritto:
 
-However yesterday I copied and pasted filenames and ended up with
-diff -urN ./path/file.orig ./path/file >file.patch
-of course then in file.patch the filenames starts with ./
-when that happens do_patch does not find the file.(probably because it
-thinks there is an additional directory because it does not see that
-./ is actually the same dir)
+[...]
 
-is this a bug in our build system? or in patch?
-or should I just avoid using ./ if I create a patch?
+> >>> During kernel building, I got the following error:
+> >>>
+> >>> OTE: package linux-2.6.28: started
+> >>> NOTE: package linux-2.6.28-r6: task do_package: started
+> >>> ERROR: Error in executing:
+> >>> /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+> >>> linux_2.6.28.bb
+> >>> ERROR: Exception:exceptions.IOError Message:[Errno 24] Too many open
+> >> files:
+> 
+> this is a known error.
+> Nobody solved it yet.
 
-btw: I alredy tried diff -Nurd (so an additional d flag) but that did
-not make a difference).
+Maybe, that increasing the numbers of max. file handles and number of max.
+inodes might help you:
 
-Frans.
+/proc/sys/fs/file-max
+/proc/sys/fs/inode-max
+
+-- ynezz
 
 
