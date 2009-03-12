@@ -1,32 +1,22 @@
-Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lhhb0-0005X5-Uf
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 10:52:58 +0100
-Received: by fxm11 with SMTP id 11so300472fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 02:52:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=iZduZSuerOkWsiWM49+jIRmwbKRBIKYq3uQCc/xYfAo=;
-	b=sePAWyfxrVXe3ZhsnKb152M6E72SC+hYtyrzHKwtp66Ia9/ojhhRJwoIwalP/1ZwcK
-	naLPNpC3DHVVDKZ6Cbm3h6cuHYSOZrkHQh24EiwQnnagU+2r5xEmT/6gcAIgya0Rscch
-	gAUlo1KbsHeiXkY97PqZiBk4bjZGoIsOexwq8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=VSvqWvJxin3Q3RRDeNxtl2rhQOt6B9+wROzLvjttzlbUnspQnhcQ33Se/GkFqx3UGg
-	bKtHAxaldXbvbZaQK0aVMrAKNPPrJ/3HxD90uzUNTPsNymfEe+B1RV2A/R6qj7ag/eW+
-	MCXggC8NE/ZtVtSQ8I86H2irNVVKGDuE0Q0I0=
-MIME-Version: 1.0
-Received: by 10.223.105.9 with SMTP id r9mr7146290fao.66.1236851565071; Thu, 
-	12 Mar 2009 02:52:45 -0700 (PDT)
-Date: Thu, 12 Mar 2009 10:52:45 +0100
-Message-ID: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lhhr4-000698-8G
+	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 11:09:34 +0100
+Received: (qmail 17857 invoked by uid 813007); 12 Mar 2009 10:09:21 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 12 Mar 2009 10:09:21 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: g++ lib problem
+Date: Thu, 12 Mar 2009 11:09:15 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.1; x86_64; ;
+	)
+References: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
+In-Reply-To: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200903121109.16286.marcin@juszkiewicz.com.pl>
+Subject: Re: do_patch fails if path starts with ./
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,36 +30,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 09:52:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Mar 2009 10:09:34 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Dnia czwartek, 12 marca 2009 o 09:30:47 Frans Meulenbroeks napisa=C5=82(a):
 
-I was trying to port a program that used asinl etc. but apparently
-asinl is not in our env.
-However if I look at
-~/oe/tmp/staging/armv7a-angstrom-linux-gnueabi/usr/include/c++/cmath I
-see around line 123
+> When generating my (normally small) patches=20
 
-  inline long double
-  asin(long double __x)
-  { return __builtin_asinl(__x); }
+quilt new my-new-patch.diff
 
-questions:
-shouldn't this have been a double asin? (probably not too important as
-the result will be casted)
-and if asin is long double, then why is there no asinl?
-normally it is
+> I typically do a cp file file.orig in the work dir,=20
 
-double asin(double x);
-long double asinl(long double x);
+quilt add file
 
-guess this is something in the way our libs are generated, but I could
-not find the proper way to fix it.
+> then change file and at the end do a diff -urN path/file.oirg
+> path/file >file.patch
 
-Anyone a suggestion?
+quilt refresh
 
-Frans.
+> no probllems with that (although if there are recommendations to do
+> things simpler/better, I'm of course open to suggestions).
+
+cp patches/my-new-patch.diff OE/
+
+In other words: start using quilt - life will be much easier.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
