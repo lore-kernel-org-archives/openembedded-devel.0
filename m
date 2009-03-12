@@ -1,24 +1,35 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1LhnBl-0004fI-Mr
+Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lhnaf-0006eR-2i
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 16:51:19 +0100
-Received: (qmail invoked by alias); 12 Mar 2009 15:51:01 -0000
-Received: from p579E1786.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.23.134]
-	by mail.gmx.net (mp033) with SMTP; 12 Mar 2009 16:51:01 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18R9oxWSNYRam9nbV9+WiFuankvcRynOG7HemdiCp
-	W9OeS388GKiUE9
-Message-ID: <49B92F20.3060701@gmx.net>
-Date: Thu, 12 Mar 2009 16:49:52 +0100
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+	Thu, 12 Mar 2009 17:17:01 +0100
+Received: by fxm11 with SMTP id 11so796111fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Mar 2009 09:16:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=DguTtDy93Xj0e8VoCCX3BK66loq71Ml5evx4sIBAvzY=;
+	b=DAaVZtINAwEzkF5GnR3dZu4aTLpAm3Hnpu/FbWI7feTLLcjPpXZCJHDrNBx8w0K5Kd
+	ucOuR5/g6xPMgdclrtuMY3zvTv4qFgAixbKtDQeAK4h0erdpT/usP8XqdCDSi3drEiJh
+	s6UkQiIhAnLukMGhOJVG7CsebcQFoNA6iC9IM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=q+CKrwF3hbfMRzcc3T7cPhWqhHwXv9KhGU1JpPxu2CF4AOwiXjLOQdX4m8UOB+Nc/b
+	8/wEysfNHUE+MwB16PTNomG17dRo55wGGOCUE+tUln9OZY4q/naIhBx7Bk7kSzY6Wu0J
+	P3OmcikNKV/qcrZwLGPSH1w5syrmjBZvesVbQ=
 MIME-Version: 1.0
+Received: by 10.223.107.68 with SMTP id a4mr88814fap.104.1236874605378; Thu, 
+	12 Mar 2009 09:16:45 -0700 (PDT)
+In-Reply-To: <200903121633.44051.marcin@juszkiewicz.com.pl>
+References: <200903121633.44051.marcin@juszkiewicz.com.pl>
+Date: Thu, 12 Mar 2009 17:16:45 +0100
+Message-ID: <ac9c93b10903120916v41c5b513w3cad028e081aeeb3@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.78
-Subject: RFC: CMAKE - support out of tree builds
+Subject: Re: Benchmarks on our devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,87 +43,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 15:51:27 -0000
-X-Groupsio-MsgNum: 8369
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig47DFB988559973DD1210CE50"
-
---------------enig47DFB988559973DD1210CE50
-Content-Type: multipart/mixed;
- boundary="------------070000000409000004030904"
-
---------------070000000409000004030904
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Thu, 12 Mar 2009 16:17:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-I am proposing the attached patch to make it possible to do out-of-tree
-builds in OE. Out-of-tree builds should be preferred but I do not want
-to look at every recipe if it still works.
+interesting other devices:
+- nslu2
+- beagle board
 
-OTOH I want to include llvm 2.5 with its new cmake-based build system
-which incidentally does *not* permit in-tree builds.
+problem with storage speeds is that it to a great extend depends on
+the storage medium itself.
 
-Regards
-Robert
+Frans
 
---------------070000000409000004030904
-Content-Type: text/x-patch;
- name="oe-cmake-outoftree.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline;
- filename="oe-cmake-outoftree.patch"
+2009/3/12 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
+>
+> Hi
+>
+> Some time ago I wrote post about Vortex86sx device [1] and its speed. In
+> it I compared results of 'hdparm -T /dev/sda' on misc devices. But many
+> people thought that it touches storage controller (which it does not in
+> this test) I decided to run better set of benchmarks on embedded
+> devices.
+>
+> The question which I want to ask is: Which benchmark tools would people
+> like to see in such comparison? And which devices to compare?
+>
+> I can do tests on:
+>
+> - AT91SAM9263-EK devboard (at91sam9263 180MHz)
+> - BUG (i.mx31/533Mhz)
+> - Openmoko Neo1973 (s3c2410/200MHz and /266MHz)
+> - Nokia N810 (omap2420/400MHz)
+> - Nokia 770 (omap1510)
+> - Zaurus c760 (pxa255/400MHz)
+> - Linksys WRT54GS (mipsel/216MHz)
+>
+> I want tests to cover speed of CPU, FPU, memory, SD/CF/ATA/USB storage
+> (if available) - maybe also Ethernet speed.
+>
+> 1. http://marcin.juszkiewicz.com.pl/2009/02/20/does-vortex86sx-based-
+> devices-are-worth-something/
+>
+> Regards,
+> --
+> JID: =A0 =A0 =A0hrw@jabber.org
+> Website: =A0http://marcin.juszkiewicz.com.pl/
+> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
-index 8fd25cd..7907f94 100644
---- a/classes/cmake.bbclass
-+++ b/classes/cmake.bbclass
-@@ -3,13 +3,25 @@ DEPENDS +=3D " cmake-native "
- # We want the staging and installing functions from autotools
- inherit autotools
-=20
-+# Use in-tree builds by default but allow this to be changed
-+# since some packages do not support them (e.g. llvm 2.5).
- OECMAKE_SOURCEPATH ?=3D "."
-=20
-+# If declaring this, make sure you also set EXTRA_OEMAKE to
-+# "-C ${OECMAKE_BUILDPATH}". So it will run the right makefiles.
-+OECMAKE_BUILDPATH ?=3D ""
-+
- cmake_do_configure() {
--     cmake ${OECMAKE_SOURCEPATH} \
--     -DCMAKE_INSTALL_PREFIX:PATH=3D${prefix} -Wno-dev \
--     -DCMAKE_FIND_ROOT_PATH=3D${STAGING_DIR_HOST} \
--     ${EXTRA_OECMAKE}
-+  if [ ${OECMAKE_BUILDPATH} ]
-+  then
-+    mkdir ${OECMAKE_BUILDPATH}
-+    cd ${OECMAKE_BUILDPATH}
-+  fi
-+
-+  cmake ${OECMAKE_SOURCEPATH} \
-+    -DCMAKE_INSTALL_PREFIX:PATH=3D${prefix} -Wno-dev \
-+    -DCMAKE_FIND_ROOT_PATH=3D${STAGING_DIR_HOST} \
-+    ${EXTRA_OECMAKE}
- }
-=20
- EXPORT_FUNCTIONS do_configure
 
---------------070000000409000004030904--
-
---------------enig47DFB988559973DD1210CE50
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkm5LyAACgkQG9cfwmwwEtpxEwCdH40OoggQYMMutvYFQZu5/Jzv
-yy0AnjJGFIfBlDGyK0pOnvtC7Z923tyR
-=e3nU
------END PGP SIGNATURE-----
-
---------------enig47DFB988559973DD1210CE50--
