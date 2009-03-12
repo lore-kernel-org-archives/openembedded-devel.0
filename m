@@ -1,24 +1,28 @@
-Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LhpqR-0004hF-44
+	(envelope-from <denis@denix.org>) id 1Lhq6y-0005Dl-Pi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 19:41:27 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173007.mailsrvcs.net
+	Thu, 12 Mar 2009 19:58:32 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173005.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGE004NFP7P69E5@vms173007.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KGE00CPCPZVN6Z5@vms173005.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	12 Mar 2009 13:40:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 69BC06B83B5; Thu,
-	12 Mar 2009 14:40:37 -0400 (EDT)
-Date: Thu, 12 Mar 2009 14:40:37 -0400
+	12 Mar 2009 13:57:37 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7898A6B83B5; Thu,
+	12 Mar 2009 14:57:31 -0400 (EDT)
+Date: Thu, 12 Mar 2009 14:57:31 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090312184037.GA1109@denix.org>
-References: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
+Message-id: <20090312185731.GB1109@denix.org>
+References: <000801c99992$45c23440$d1469cc0$@com>
+	<87myc57vz3.fsf@neumann.lab.ossystems.com.br>
+	<000401c99f26$ddb43c00$991cb400$@com>
+	<be7a9f3d0903090954m72f9cafbw8f03af0906bf74ca@mail.gmail.com>
+	<001401c9a335$eec4f850$cc4ee8f0$@com>
 MIME-version: 1.0
-In-reply-to: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
+In-reply-to: <001401c9a335$eec4f850$cc4ee8f0$@com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: do_patch fails if path starts with ./
+Subject: Re: [PATCH] Added new recipe for a newer version of the	Asterisk Soft-PBX
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,38 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 18:41:27 -0000
+X-List-Received-Date: Thu, 12 Mar 2009 18:58:33 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Mar 12, 2009 at 09:30:47AM +0100, Frans Meulenbroeks wrote:
-> Hi,
-> 
-> When generating my (normally small) patches I typically do a cp file
-> file.orig in the work dir, then change file and at the end do a diff
-> -urN path/file.oirg path/file >file.patch
-> no probllems with that (although if there are recommendations to do
-> things simpler/better, I'm of course open to suggestions).
-> 
-> However yesterday I copied and pasted filenames and ended up with
-> diff -urN ./path/file.orig ./path/file >file.patch
+On Thu, Mar 12, 2009 at 06:13:46PM +0100, Christian P?ssinger wrote:
+> Here is the patch again with the checksums.ini entry.
 
-Have you tried:
-diff -urN path/file.orig path/file >file.patch
+[skip]
 
-> of course then in file.patch the filenames starts with ./
-> when that happens do_patch does not find the file.(probably because it
-> thinks there is an additional directory because it does not see that
-> ./ is actually the same dir)
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index bcfe02c..865e23c 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -1,3 +1,7 @@
+> +[http://downloads.digium.com/pub/asterisk/releases/asterisk-1.4.23.1.tar.gz
+> ]
+> +md5=4788954a93f5fbf78e55e2aa6e03329f
+> +sha256=03e2cf43ffe9935d56fa0ea3663fc9bd23ce9720682c79d6269e78a9a1629d63
+> +
+>  [http://www.directfb.org/downloads/Extras/++DFB-0.9.25.tar.gz]
+>  md5=c6a2705f6210d8ede50a947b375f1c0b
+>  sha256=b3dbf01563dd60d63cff543ea8cd0c885381e78ecbbab8ff176e46df3f198a88
+> diff --git a/packages/asterisk/asterisk-1.4.23.1/Makefile.patch
+> b/packages/asterisk/asterisk-1.4.23.1/Makefile.patch
 
-You may want to play with the pnum variable (increase it?) in the SRC_URI 
-of the patch...
+[skip]
 
-> is this a bug in our build system? or in patch?
-> or should I just avoid using ./ if I create a patch?
-> 
-> btw: I alredy tried diff -Nurd (so an additional d flag) but that did
-> not make a difference).
+The checksums.ini patch is not correct:
+1. the closing square bracket is misplaced
+2. the entry is not sorted (use contrib/source-checker/oe-checksums-sorter.py)
 
 -- 
 Denys
