@@ -1,20 +1,20 @@
-Received: from [199.44.250.2] (helo=exchsrvr.syntech-fuelmaster.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1LhmME-0002zn-G4
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 15:58:02 +0100
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lhmv0-0007ED-LT
+	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 16:33:59 +0100
+Received: (qmail 28423 invoked by uid 813007); 12 Mar 2009 15:33:44 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 12 Mar 2009 15:33:44 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Mar 2009 16:33:40 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.1; x86_64; ;
+	)
 MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Thu, 12 Mar 2009 11:02:06 -0400
-Message-ID: <EC5EE493B6046F45A2DDEC4A828DE52E03B6B838@EXCHSRVR.syntech.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: minimo: task do_configure failed
-thread-index: AcmjI4Is1a8lQ0RWSX6Rtlej9z5/IQ==
-From: "Mark Butsch" <mbutsch@syntech-fuelmaster.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: minimo: task do_configure failed
+Message-Id: <200903121633.44051.marcin@juszkiewicz.com.pl>
+Subject: Benchmarks on our devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,57 +28,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 14:58:03 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Thu, 12 Mar 2009 15:34:01 -0000
 Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello,
 
-=20
+Hi
 
-I am starting to work with OE again and am having trouble building
-minimo. I had had this working a year ago, but now it fails in
-do_configure:
+Some time ago I wrote post about Vortex86sx device [1] and its speed. In 
+it I compared results of 'hdparm -T /dev/sda' on misc devices. But many 
+people thought that it touches storage controller (which it does not in 
+this test) I decided to run better set of benchmarks on embedded 
+devices.
 
-=20
+The question which I want to ask is: Which benchmark tools would people 
+like to see in such comparison? And which devices to compare?
 
-=20
+I can do tests on: 
 
-...
+- AT91SAM9263-EK devboard (at91sam9263 180MHz)
+- BUG (i.mx31/533Mhz)
+- Openmoko Neo1973 (s3c2410/200MHz and /266MHz)
+- Nokia N810 (omap2420/400MHz)
+- Nokia 770 (omap1510)
+- Zaurus c760 (pxa255/400MHz)
+- Linksys WRT54GS (mipsel/216MHz)
 
-checking whether the host c compiler (gcc
--isystem/home/ad/mbutsch/4G/tmp/4g/sta
+I want tests to cover speed of CPU, FPU, memory, SD/CF/ATA/USB storage 
+(if available) - maybe also Ethernet speed.
 
-ging/i686-linux/usr/include -fexpensive-optimizations
--fomit-frame-pointer -fren
+1. http://marcin.juszkiewicz.com.pl/2009/02/20/does-vortex86sx-based-
+devices-are-worth-something/
 
-ame-registers -O2 -march=3Di486
--L/home/ad/mbutsch/4G/tmp/4g/staging/i686-linux/us
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-r/lib
--Wl,-rpath-link,/home/ad/mbutsch/4G/tmp/4g/staging/i686-linux/usr/lib
--Wl,
 
--O1 ) works... configure: error: installation or configuration problem:
-host com
-
-piler gcc cannot create executables.
-
-...
-
-=20
-
-I can build other recipes so it must be a problem in how the compiler is
-being specified to the minimo recipe.
-
-=20
-
-Not sure where to go from here.
-
-=20
-
-Mark
 
 
