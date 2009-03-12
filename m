@@ -1,35 +1,35 @@
-Received: from [209.85.220.167] (helo=mail-fx0-f167.google.com)
+Received: from [209.85.200.173] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <will.newton@gmail.com>) id 1LhoaV-0008No-R0
+	(envelope-from <raj.khem@gmail.com>) id 1Lhor5-0005ht-Tu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 18:20:55 +0100
-Received: by fxm11 with SMTP id 11so1914129fxm.12
+	Thu, 12 Mar 2009 18:38:04 +0100
+Received: by wf-out-1314.google.com with SMTP id 28so1195223wff.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2009 10:20:40 -0700 (PDT)
+	Thu, 12 Mar 2009 10:37:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=CtVhD3OMGA9mjAZgLMzmfBO2NADFTyvw2Wvr3vEoUH8=;
-	b=jPgubRv4qwzjwkZe4hs55BViPix3D+KctGc1PqbpeHox+eV1ev7G6dCOcUgghjBhgi
-	mhEL4LUGn15LD6zcpOjwgwr2NdhUnrrix/AHFJ6G5E/kdpQCCIF7wWkpA4U7D4VgQias
-	ZP75A+lpnTAo6EZnmqucAs8zBhC1YlqV+QL6g=
+	bh=rSuK6EfEQxB2bBNeWeBTRlqmWtRzonJmjYiveRaVLfo=;
+	b=OidXSN4cQbiowXPED9+qbXD/DZ1nhPCdifWaJa9+2yDXXN6/b2QYeQ9AAkxSRq+RwW
+	XzYQh/L5338fiPUi6Hjuh2QhCnqE2SOfu3zAbc8c3F09+N58zE6FQdI8WNdIcxSyFWNy
+	G114JRP6pa1jQzUQkj7Ny8K/CclSpWpuc7Etg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=R7jLkVDldoYco/ukHcLJWThqBNKIQaz0SFonqMV5wVpt+c9bzXGkRJYTu+cNrp6sZi
-	f0kC59X/zYReRPWTvJ11BFL6jTIaS4YvKkmHd9Vt6N0E/YbwwCGhPRI87klcauKcYEDl
-	9QwIOeqHFD2cx4pr+HfBtIyOfzIWuyX0I7bDs=
+	b=WulITewkh4PVnIEcNUJ8hbuXEXFGkeVLllkRRUmeMr6xr8EAdD2UO8opCxL0cAdNkz
+	4GmrB4udS0jJ+/ZOwv/bcZdk1TORKGs6xv0dNaABi/z4AzvTVumgQns3DpUzFX7c1QkG
+	6ygsdMdFXEulxWXbGVcPdEnPaLb5xVs5bap3A=
 MIME-Version: 1.0
-Received: by 10.223.114.68 with SMTP id d4mr151706faq.86.1236878439821; Thu, 
-	12 Mar 2009 10:20:39 -0700 (PDT)
-In-Reply-To: <200903121633.44051.marcin@juszkiewicz.com.pl>
-References: <200903121633.44051.marcin@juszkiewicz.com.pl>
-Date: Thu, 12 Mar 2009 17:20:39 +0000
-Message-ID: <87a5b0800903121020x15462cbcj40bad758ab859fb1@mail.gmail.com>
-From: Will Newton <will.newton@gmail.com>
+Received: by 10.142.239.11 with SMTP id m11mr90918wfh.174.1236879469528; Thu, 
+	12 Mar 2009 10:37:49 -0700 (PDT)
+In-Reply-To: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
+References: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
+Date: Thu, 12 Mar 2009 10:37:49 -0700
+Message-ID: <19c1b8a90903121037g5726bf99qadca1e5d95dcae7@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Benchmarks on our devices
+Subject: Re: g++ lib problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +43,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 17:20:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Mar 2009 17:38:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 12, 2009 at 3:33 PM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
+On Thu, Mar 12, 2009 at 2:52 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Hi,
 >
-> Hi
->
-> Some time ago I wrote post about Vortex86sx device [1] and its speed. In
-> it I compared results of 'hdparm -T /dev/sda' on misc devices. But many
-> people thought that it touches storage controller (which it does not in
-> this test) I decided to run better set of benchmarks on embedded
-> devices.
->
-> The question which I want to ask is: Which benchmark tools would people
-> like to see in such comparison? And which devices to compare?
+> I was trying to port a program that used asinl etc. but apparently
+> asinl is not in our env.
 
-lmbench has a range of micro and not-so-micro benchmarks.
-There's various network benchmarks, e.g. netperf, but they can be
-dependent on external network issues.
+Did you link with -lm ?
 
 
