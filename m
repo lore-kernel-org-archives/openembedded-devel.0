@@ -1,24 +1,23 @@
-Received: from [204.2.163.5] (helo=sjogate2.atmel.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Shane.Dixon@atmel.com>) id 1Lhnmt-000407-Gt
-	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 17:29:39 +0100
-Received: from csomb01.corp.atmel.com ([10.95.30.150])
-	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id n2CGS8um009719
-	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Mar 2009 09:28:08 -0700 (PDT)
-Received: from 10.95.105.47 ([10.95.105.47]) by csomb01.corp.atmel.com
-	([10.95.30.150]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu, 12 Mar 2009 16:29:22 +0000
-Received: from homestead.cso.atmel.com by csomb01.corp.atmel.com;
-	12 Mar 2009 10:29:22 -0600
-From: Shane Dixon <shane.dixon@atmel.com>
-To: openembedded-devel@openembedded.org
-Organization: Atmel
-Date: Thu, 12 Mar 2009 10:29:22 -0600
-Message-Id: <1236875362.11134.22.camel@homestead>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: Working with the Target
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lhns2-0004HH-8B
+	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 17:34:58 +0100
+Received: (qmail 12471 invoked by uid 813007); 12 Mar 2009 16:34:44 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 12 Mar 2009 16:34:44 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Mar 2009 17:34:43 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.1; x86_64; ;
+	)
+References: <200903121633.44051.marcin@juszkiewicz.com.pl>
+	<ac9c93b10903120916v41c5b513w3cad028e081aeeb3@mail.gmail.com>
+In-Reply-To: <ac9c93b10903120916v41c5b513w3cad028e081aeeb3@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200903121734.43776.marcin@juszkiewicz.com.pl>
+Subject: Re: Benchmarks on our devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,27 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 16:29:40 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Mar 2009 16:34:59 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi all,
+Dnia czwartek, 12 marca 2009 o 17:16:45 Frans Meulenbroeks napisa=C5=82(a):
+> interesting other devices:
+> - nslu2
+> - beagle board
 
-I am curious to know how others are working with their target device.
-My last application would build from OE and I had a public/private key
-on my device and a makefile that automatically scp'd the program,
-uninstall the old, install the new, and ran the program to test it.  I'd
-like to do something like netboot the device and keep the kernel and
-rootfs on my machine shared over NFS, but I'm not sure if I can do that
-with OE.  
+If someone will do tests then I will add their results to table.
 
-How are others testing new applications with their target boards?
+> problem with storage speeds is that it to a great extend depends on
+> the storage medium itself.
 
-(By the way, my target is an at91sam9263ek)
+Indeed - for my devices I plan to use same storage for each device (if=20
+possible).
 
--- 
-Shane Dixon
-Atmel Corporation
-E-mail: shane.dixon@atmel.com
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
