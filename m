@@ -1,22 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lhhr4-000698-8G
-	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 11:09:34 +0100
-Received: (qmail 17857 invoked by uid 813007); 12 Mar 2009 10:09:21 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 Mar 2009 10:09:21 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Mar 2009 11:09:15 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.1; x86_64; ;
-	)
-References: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
-In-Reply-To: <ac9c93b10903120130v5c19e5fbq224df848792f3a5f@mail.gmail.com>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1Lhkga-0004Pn-U7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Mar 2009 14:10:57 +0100
+Received: (qmail invoked by alias); 12 Mar 2009 13:10:41 -0000
+Received: from p579E1786.dip.t-dialin.net (EHLO [192.168.4.51]) [87.158.23.134]
+	by mail.gmx.net (mp058) with SMTP; 12 Mar 2009 14:10:41 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18aqdNWpJQa9QlMcdNsLNEzdhyVio29yBjEiWlAf7
+	lT9TsYTrEjJFpa
+Message-ID: <49B9098C.3090908@gmx.net>
+Date: Thu, 12 Mar 2009 14:09:32 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
 MIME-Version: 1.0
-Message-Id: <200903121109.16286.marcin@juszkiewicz.com.pl>
-Subject: Re: do_patch fails if path starts with ./
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.76
+Subject: robertschuster/amd64-target branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,40 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 10:09:34 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 12 Mar 2009 13:10:57 -0000
+X-Groupsio-MsgNum: 8364
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig3F0711E1DDBAA9065B19FC0F"
+
+--------------enig3F0711E1DDBAA9065B19FC0F
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia czwartek, 12 marca 2009 o 09:30:47 Frans Meulenbroeks napisa=C5=82(a):
+Hi,
+please delete the above mentioned branch. It is not merged, but I don't
+think that I will do this anytime soon.
 
-> When generating my (normally small) patches=20
+Originally I had the idea that it would be possible to use OE to build
+highly optimized amd64 binaries.
 
-quilt new my-new-patch.diff
+However I could not get this to work and I lack the knowledge to fix it.
+So if not someone else picks this up, I think the branch can be deleted.
 
-> I typically do a cp file file.orig in the work dir,=20
-
-quilt add file
-
-> then change file and at the end do a diff -urN path/file.oirg
-> path/file >file.patch
-
-quilt refresh
-
-> no probllems with that (although if there are recommendations to do
-> things simpler/better, I'm of course open to suggestions).
-
-cp patches/my-new-patch.diff OE/
-
-In other words: start using quilt - life will be much easier.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Regards
+Robert
 
 
+--------------enig3F0711E1DDBAA9065B19FC0F
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEUEARECAAYFAkm5CYwACgkQG9cfwmwwEtretACgiqdpKqgL9SvpdJpM7OKaC7E/
+05kAliXmhhmZwT6+AwhaMmt9qdxF2vc=
+=hWcZ
+-----END PGP SIGNATURE-----
+
+--------------enig3F0711E1DDBAA9065B19FC0F--
