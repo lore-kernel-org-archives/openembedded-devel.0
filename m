@@ -1,28 +1,22 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Lhq6y-0005Dl-Pi
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 19:58:32 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGE00CPCPZVN6Z5@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	12 Mar 2009 13:57:37 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7898A6B83B5; Thu,
-	12 Mar 2009 14:57:31 -0400 (EDT)
-Date: Thu, 12 Mar 2009 14:57:31 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LhqZ5-00038Y-1g
+	for openembedded-devel@openembedded.org; Thu, 12 Mar 2009 20:27:35 +0100
+Received: (qmail 11883 invoked by uid 813007); 12 Mar 2009 19:27:20 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 12 Mar 2009 19:27:20 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090312185731.GB1109@denix.org>
-References: <000801c99992$45c23440$d1469cc0$@com>
-	<87myc57vz3.fsf@neumann.lab.ossystems.com.br>
-	<000401c99f26$ddb43c00$991cb400$@com>
-	<be7a9f3d0903090954m72f9cafbw8f03af0906bf74ca@mail.gmail.com>
-	<001401c9a335$eec4f850$cc4ee8f0$@com>
-MIME-version: 1.0
-In-reply-to: <001401c9a335$eec4f850$cc4ee8f0$@com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] Added new recipe for a newer version of the	Asterisk Soft-PBX
+Date: Thu, 12 Mar 2009 20:27:19 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc6-00216-g778ef1e; KDE/4.2.1; x86_64; ;
+	)
+References: <1236875362.11134.22.camel@homestead>
+In-Reply-To: <1236875362.11134.22.camel@homestead>
+MIME-Version: 1.0
+Message-Id: <200903122027.20010.marcin@juszkiewicz.com.pl>
+Subject: Re: Working with the Target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,38 +30,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 18:58:33 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 12 Mar 2009 19:27:35 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Thu, Mar 12, 2009 at 06:13:46PM +0100, Christian P?ssinger wrote:
-> Here is the patch again with the checksums.ini entry.
+Dnia czwartek, 12 marca 2009 o 17:29:22 Shane Dixon napisa=C5=82(a):
 
-[skip]
+> I am curious to know how others are working with their target device.
+> My last application would build from OE and I had a public/private
+> key on my device and a makefile that automatically scp'd the program,
+> uninstall the old, install the new, and ran the program to test it.=20
 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index bcfe02c..865e23c 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -1,3 +1,7 @@
-> +[http://downloads.digium.com/pub/asterisk/releases/asterisk-1.4.23.1.tar.gz
-> ]
-> +md5=4788954a93f5fbf78e55e2aa6e03329f
-> +sha256=03e2cf43ffe9935d56fa0ea3663fc9bd23ce9720682c79d6269e78a9a1629d63
-> +
->  [http://www.directfb.org/downloads/Extras/++DFB-0.9.25.tar.gz]
->  md5=c6a2705f6210d8ede50a947b375f1c0b
->  sha256=b3dbf01563dd60d63cff543ea8cd0c885381e78ecbbab8ff176e46df3f198a88
-> diff --git a/packages/asterisk/asterisk-1.4.23.1/Makefile.patch
-> b/packages/asterisk/asterisk-1.4.23.1/Makefile.patch
+> I'd like to do something like netboot the device and keep the kernel
+> and rootfs on my machine shared over NFS, but I'm not sure if I can
+> do that with OE.
 
-[skip]
+> (By the way, my target is an at91sam9263ek)
 
-The checksums.ini patch is not correct:
-1. the closing square bracket is misplaced
-2. the entry is not sorted (use contrib/source-checker/oe-checksums-sorter.py)
+I used my at91sam9263ek with kernel fetched via TFTP and NFS root for=20
+quite long time. It is very useful way to change rootfs contents -=20
+especially when you can press 'Reset' any time without risk of=20
+unfinished transactions.
 
--- 
-Denys
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
