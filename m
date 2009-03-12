@@ -1,31 +1,32 @@
-Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LhaZb-00016h-RE
+	(envelope-from <koansoftware@gmail.com>) id 1Lhfru-0007EA-3R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Mar 2009 03:23:04 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGD00IEXFX3T8Z3@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	11 Mar 2009 21:22:21 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B1F3D6B83B5; Wed,
-	11 Mar 2009 22:22:15 -0400 (EDT)
-Date: Wed, 11 Mar 2009 22:22:15 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 12 Mar 2009 09:02:18 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id BA7C02C81D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Mar 2009 08:01:24 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4MQ72PPa4sGb
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Mar 2009 08:01:20 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 888042C7FD
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Mar 2009 08:01:19 +0000 (UTC)
+Message-ID: <49B8C180.3010607@gmail.com>
+Date: Thu, 12 Mar 2009 09:02:08 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090312022215.GB12341@denix.org>
-References: <1236463653.25861.321.camel@cheeto.emacinc.com>
-	<200903071735.37618.raj.khem@gmail.com>
-	<1236637089.29394.59.camel@cheeto.emacinc.com>
-	<19c1b8a90903091535u4dd8982blc884a508cc35e8dc@mail.gmail.com>
-	<1236699601.29394.99.camel@cheeto.emacinc.com>
-	<19c1b8a90903101035t52ba7a0ble2f49e324bc20ba@mail.gmail.com>
-	<20090311030509.GA10085@denix.org>
-	<c384c5ea0903111428y4ffee26dud7662f1f614074ac@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <c384c5ea0903111428y4ffee26dud7662f1f614074ac@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: failure on gcc-cross-initial-4.2.4-r5 for i686
+References: <49bdfd00903100733s3af6dc2o48f09b48593fe51f@mail.gmail.com>	<19c1b8a90903101122r59d22d0fia19158c42583e784@mail.gmail.com>
+	<49bdfd00903110149y39fb7aa4we99d373a4ff1790f@mail.gmail.com>
+In-Reply-To: <49bdfd00903110149y39fb7aa4we99d373a4ff1790f@mail.gmail.com>
+Subject: Re: Problem building kernel - too many files open
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,35 +40,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2009 02:23:06 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 12 Mar 2009 08:02:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 11, 2009 at 10:28:09PM +0100, Leon Woestenberg wrote:
-> Denys,
+Piero Pezzin ha scritto:
+> Hi,
 > 
-> On Wed, Mar 11, 2009 at 4:05 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> >
-> > i686-linux holds my native packages
-> > i686-angstrom-linux holds my target/cross packages, including gcc-cross
-> > i686-generic-angstrom-linux holds machine-specific target packages
-> >
-> Are that your overlay directory names?
-
-Obviously, not. Those are my target and host triplets. Those are the 
-directories used in work, stamps, staging and pkgdata among other things.
-
-> Then they have nothing to do with the actual problem AFAIK.
+> I searched without success. I agree with you, there is a problem on my host,
+> but I'd like to know why it pops out during the do_package task.
 > 
-> It's probably the target triplet name that makes the difference, like
-> Khem suggests.
+> Any help will be appreciated.
+> 
+> Regards,
+> 
+> Piero
+> 
+> On Tue, Mar 10, 2009 at 7:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> 
+>> On Tue, Mar 10, 2009 at 7:33 AM, Piero Pezzin <piero.pezzin@gmail.com>
+>> wrote:
+>>> Hello everyone,
+>>>
+>>> I'm building a minimal distribution for a x86 machine (my host is a
+>> x86-64
+>>> with CentOS 4.4):
+>>>
+>>> OE Build Configuration:
+>>> BB_VERSION        = "1.8.12"
+>>> METADATA_BRANCH   = "org.openembedded.dev"
+>>> METADATA_REVISION = "a8a23e995d108ecdfc31129941671551c591bc6e"
+>>> TARGET_ARCH       = "i486"
+>>> TARGET_OS         = "linux"
+>>> MACHINE           = "x86"
+>>> DISTRO            = "minimal"
+>>> DISTRO_VERSION    = ".dev-snapshot-20090310"
+>>> TARGET_FPU        = ""
+>>>
+>>>
+>>> During kernel building, I got the following error:
+>>>
+>>> OTE: package linux-2.6.28: started
+>>> NOTE: package linux-2.6.28-r6: task do_package: started
+>>> ERROR: Error in executing:
+>>> /home/piero/work/qong-nobk/openembedded/openembedded/packages/linux/
+>>> linux_2.6.28.bb
+>>> ERROR: Exception:exceptions.IOError Message:[Errno 24] Too many open
+>> files:
 
-Correct, as Khem suspected and Travis confirmed, not setting TARGET_VENDOR 
-messes things up by clashing host and target triplets, which confuses the hell 
-out of the cross-compilation :)
-BTW, Angstrom sets it to "-angstrom" by default, as in my case.
+this is a known error.
+Nobody solved it yet.
 
--- 
-Denys
+/marco
 
 
