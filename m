@@ -1,39 +1,35 @@
-Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
+Received: from [209.85.200.171] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LiBNm-0003iO-RG
+	(envelope-from <raj.khem@gmail.com>) id 1LiBU3-0003tz-U8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Mar 2009 18:41:18 +0100
-Received: by yx-out-1718.google.com with SMTP id 36so251090yxh.42
+	Fri, 13 Mar 2009 18:47:48 +0100
+Received: by wf-out-1314.google.com with SMTP id 28so1937600wff.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2009 10:40:58 -0700 (PDT)
+	Fri, 13 Mar 2009 10:47:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=V2TFAdEcE3GusYkyDRFDC/YDJyRInWfWSc394IL+R+A=;
-	b=VW8IJzdaN5AU+POhvNsI5V5ZztB34Ef4J4gj5v5FPt0WnV0JGBqK2tTwsRZnlnYVw+
-	n+wVpKdIVR+73uXMWUU4WZ9Zzu6sBD7XD0OmPYw+5EmR4UdkFF3+xKT/erbnyNlkmeMC
-	yNhQpRlSdMq+o9g7Vp3sFyfMJhLNKPfZr8isY=
+	bh=snpp9uM5RuGydxp0RMOIFX6JTruE13hwmRkT8eGD+no=;
+	b=cVQFZ3H5i74RUpVIDsXIt2Mk6c/YxIwnAG2c+sJ6cPSaD3NC36d3ylCdVuoFEeeqfD
+	xB4vviar+9lCAhyPP5Z/Gq26YljPFcOE8EnM2H7m0Ih/KmngtHbtVvjvEWw+CZURS9Dj
+	L3SDdJHzcyEElInHDMSmzkvL4rVQCtEi33PpA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=WgDX1qKB1AOs5lhTvX6A7ID/kjzRWH2hKtnklLN46q0BQ4egGTQYjNThpwGqzCLOYV
-	KZizmgF0iFY4lyVNy26n6I/TpbmiF8xBW3Zv6U/9pdZ5XrPfohwXZ8eNHmZqh+SJIbrn
-	jRP6G7EgfXwk7ffz2l5zQNkhxXkQTUiUxNGiY=
+	b=qJUiYWM2JQVu2W2LOMNvOxocZDrqfCoW1K6MlaENSez1dzxbb+rVv1DzQ0lXluDMZS
+	9g9wG+2+xi48U4tb3F+Zyy0Eqakk4eR4Ero+K7vvIFUQ1wRx8HTa4kfcZI2kvknRPzZF
+	LdNepq9AjN/NXE5Mry7kmoXg4R3zc33onJ7r4=
 MIME-Version: 1.0
-Received: by 10.142.221.11 with SMTP id t11mr701343wfg.238.1236966057913; Fri, 
-	13 Mar 2009 10:40:57 -0700 (PDT)
-In-Reply-To: <ac9c93b10903130815t10265676ld8e464ab460689dd@mail.gmail.com>
-References: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
-	<19c1b8a90903121037g5726bf99qadca1e5d95dcae7@mail.gmail.com>
-	<ac9c93b10903121334j3a6cfad8u8e4591ddecf80394@mail.gmail.com>
-	<19c1b8a90903121458ufac02e7p878b6badfe29878@mail.gmail.com>
-	<ac9c93b10903130815t10265676ld8e464ab460689dd@mail.gmail.com>
-Date: Fri, 13 Mar 2009 10:40:57 -0700
-Message-ID: <19c1b8a90903131040k5d7b1f40kfbfafbb787e45341@mail.gmail.com>
+Received: by 10.142.70.16 with SMTP id s16mr710956wfa.151.1236966447207; Fri, 
+	13 Mar 2009 10:47:27 -0700 (PDT)
+In-Reply-To: <ac9c93b10903130915m4b445d3ga007d036d9bd9888@mail.gmail.com>
+References: <ac9c93b10903130915m4b445d3ga007d036d9bd9888@mail.gmail.com>
+Date: Fri, 13 Mar 2009 10:47:27 -0700
+Message-ID: <19c1b8a90903131047p2ef7d04if1736039a8192ad@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: g++ lib problem
+Subject: Re: bitbake warning on opensuse
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 17:41:19 -0000
+X-List-Received-Date: Fri, 13 Mar 2009 17:47:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, Mar 13, 2009 at 8:15 AM, Frans Meulenbroeks
+On Fri, Mar 13, 2009 at 9:15 AM, Frans Meulenbroeks
 <fransmeulenbroeks@gmail.com> wrote:
-> 2009/3/12 Khem Raj <raj.khem@gmail.com>:
-> [...]
->>
->> I see it gets it from libm but g++ specifiies -lm for you where as gcc
->> does not. I think the problem is that ARM have same precision for
->> double and long double so glibc defines __NO_LONG_DOUBLE_MATH for ARM
->> as a result the prototypes for the *l functions are not emitted into
->> math.h. Although in glibc they are aliases for the corresponding
-> [...]
+> Hi,
 >
-> Khem,
+> Not sure if this should go here, but if I bake a recipe on opensuse 11.1 I get:
 >
-> Thanks for the explanation.
-> Should we change the glibc package to resolve this?
+> /home/frans/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
+> module is deprecated
+>  import types, sets
 >
+> Is there a fix for this (or where should I report this)?
 
-hmmm IMO I think you should fix the application to not ask for long
-double functions on platforms where long double is
-not different than double and fixing glibc could be ok too. Care for a patch :)
+Its because you are using python 2.6 I believe. It should be fixed in bitbake
+
+> For now I just ignored it.
+
+I do same for now.
+
+>
+> The same error is also reported for ubuntu 8.04.2 (under vmplayer)
+>
 > Frans
 >
 > _______________________________________________
