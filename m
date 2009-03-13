@@ -1,38 +1,31 @@
-Received: from [209.85.219.166] (helo=mail-ew0-f166.google.com)
+Received: from [195.65.72.27] (helo=bagnes.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Li97A-00087o-54
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1Li9Kc-0005Bs-EO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Mar 2009 16:16:00 +0100
-Received: by ewy10 with SMTP id 10so2796279ewy.12
+	Fri, 13 Mar 2009 16:29:54 +0100
+Received: from fribh01.corp.atmel.com (FRIBH01 [10.175.30.10])
+	by bagnes.atmel.com (8.13.8+Sun/8.13.8) with ESMTP id n2DFOKKv005329
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2009 08:15:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=AiaDdXOpxb2fl3YtsnxreDQFSmAg6wSX11JltFlNUA4=;
-	b=o0Bu+qq+RnHHTUiD2IhnQj7LtZnrc12ZaXwfKGuU/xBHdGuWTyEaoksrFCu4xvte9u
-	SYWNGy8jsVSsPdHV1nlwEMoKz6Sof+Fqm7vj/NiI5fM5UZTXalDJa2kGOW7MaiEfGVY5
-	S9Gq1oaaYxWn3/yejVa/F3bsV/xchPmBQQ0x0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=BtLjw5pzQafYzU9JspEL9Uo6iyGvW5CaFXqKCGnj+LBXtqYe3arTrkUvQ0HAJ4h64B
-	A4t6XdttskZEeOnHQzq4efGTfyD1FzczRi5TIJgc45XImqjzxxlRl3w4pNN2M3pfxyOH
-	34zkI5XHwdUSlcW7BCWQim/oUvjaHS+n8R5JE=
+	Fri, 13 Mar 2009 08:24:20 -0700 (PDT)
+Received: from frimb01.corp.atmel.com ([10.175.30.12]) by
+	fribh01.corp.atmel.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 13 Mar 2009 16:29:32 +0100
+Received: from Glamdring ([172.24.48.94]) by frimb01.corp.atmel.com with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 13 Mar 2009 16:29:31 +0100
+Message-ID: <018101c9a3f0$7f5b2cd0$5e3018ac@Glamdring>
+From: "Ulf Samuelsson" <ulf.samuelsson@atmel.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <20090313060546.GF26343@smtp.west.cox.net><013b01c9a3e7$1b44b3f0$5e3018ac@Glamdring>
+	<20090313145610.GA26373@denix.org>
+Date: Fri, 13 Mar 2009 16:27:08 +0100
 MIME-Version: 1.0
-Received: by 10.210.29.17 with SMTP id c17mr858844ebc.34.1236957338383; Fri, 
-	13 Mar 2009 08:15:38 -0700 (PDT)
-In-Reply-To: <19c1b8a90903121458ufac02e7p878b6badfe29878@mail.gmail.com>
-References: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
-	<19c1b8a90903121037g5726bf99qadca1e5d95dcae7@mail.gmail.com>
-	<ac9c93b10903121334j3a6cfad8u8e4591ddecf80394@mail.gmail.com>
-	<19c1b8a90903121458ufac02e7p878b6badfe29878@mail.gmail.com>
-Date: Fri, 13 Mar 2009 16:15:38 +0100
-Message-ID: <ac9c93b10903130815t10265676ld8e464ab460689dd@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: g++ lib problem
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.3138
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3350
+X-OriginalArrivalTime: 13 Mar 2009 15:29:32.0726 (UTC)
+	FILETIME=[821E1D60:01C9A3F0]
+Subject: Re: PARALLEL_MAKE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +39,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 15:16:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 13 Mar 2009 15:29:54 -0000
+Content-Type: text/plain; format=flowed; charset="iso-8859-1";
+	reply-type=original
 Content-Transfer-Encoding: 7bit
 
-2009/3/12 Khem Raj <raj.khem@gmail.com>:
-[...]
+>>> On the dual dual-core (4 total) boxes I have, I do -j6/4 threads.  On my
+>>> new quad-core box I haven't yet had a chance to figure out what's best.
+>>> I also use -j6/4 threads on an older dual-core amd64 box we've got
+>>> around and that seems best for my tasks at least (I tried a few
+>>> combinations of more jobs/threads and less and both were slower).
+>>>
+>>
+>> I looked at a few recipies which by a stanrge coincidence had
+>> PARALLEL_MAKE="",
 >
-> I see it gets it from libm but g++ specifiies -lm for you where as gcc
-> does not. I think the problem is that ARM have same precision for
-> double and long double so glibc defines __NO_LONG_DOUBLE_MATH for ARM
-> as a result the prototypes for the *l functions are not emitted into
-> math.h. Although in glibc they are aliases for the corresponding
-[...]
+> That's not a strange coincidence, that means a specific package has issues
+> building in parallel - usually some dependencies go out of order.
+>
 
-Khem,
+The strange coincidence was that *ALL*  the packages I *looked* at
+had PARALLEL_MAKE="".
+I made the erroneous assumption that most packages were this way.
 
-Thanks for the explanation.
-Should we change the glibc package to resolve this?
+>> When, I rechecked, I had
+>> PARALLEL_MAKE ="-j 16"
+>> as well and this should be
+>> PARALLEL_MAKE ="-j16"
+>
+> Having only 4 cores and setting number of parallel makes to 16 kills your
+> performance, as system spends more time switching contexts instead of 
+> actually
+> doing something useful - i.e. compiling.
 
-Frans
+The Core i7 has 4 cores and each core has two virtual CPUs so the system 
+sees 8 CPUs.
+I saw some commone from someone claiming that if
+you have n CPUs, then Buildroot should use make -j`2*n`.
+
+I thought about this, and came up with the following explanation.
+If you have one job per CPU, then  whenever you have to wait for the 
+harddisk, you stall this CPU.
+If you have several jobs per CPU, then you can gain some time
+by running the second job while the first job was waiting for the hard disk.
+
+Whether this works in practice, I cannot say, but it would be interesting
+to have some real proof.
+
+>
+>> Changed to
+>> PARALLEL_MAKE ="-j8"
+>> BB_NUMBER_THREADS = "2"
+>>
+>> I see some more cores beeing used.
+>> The initial setup after you changed local.conf seems to run on a single
+>> core though.
+>
+> After you change your configuration, bitbake rebuilds the cache - that is 
+> a
+> single threaded operation, hence uses only one core.
+>
+> -- 
+> Denys
+
+
+Best Regards
+Ulf Samuelsson
+
+
 
 
