@@ -1,30 +1,25 @@
-Received: from [208.51.207.131] (helo=mail.2mi.com.br)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jader@2mi.com.br>) id 1Li9Qo-0005a0-F8
+	(envelope-from <denis@denix.org>) id 1Li9va-0006To-5W
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Mar 2009 16:36:18 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.2mi.com.br (Postfix) with ESMTP id E251C503618D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2009 12:40:46 -0300 (BRT)
-X-Virus-Scanned: amavisd-new at 2mi.com.br
-Received: from mail.2mi.com.br ([127.0.0.1])
-	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5OaWb+7er3IP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2009 12:40:39 -0300 (BRT)
-Received: from [192.168.15.100] (unknown [189.102.205.109])
-	by mail.2mi.com.br (Postfix) with ESMTP id 9CA2E502762D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2009 12:40:39 -0300 (BRT)
-From: "Jader H. Silva" <jader@2mi.com.br>
-To: Open Embedded <openembedded-devel@lists.openembedded.org>
-Organization: 2MI Tecnologia
-Date: Fri, 13 Mar 2009 12:35:47 -0300
-Message-Id: <1236958547.8913.5.camel@northpole>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: Can't build an ext2 minimal image
+	Fri, 13 Mar 2009 17:08:06 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KGG00MUYCSLIK52@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	13 Mar 2009 11:07:34 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EBB726B83B5; Fri,
+	13 Mar 2009 12:07:32 -0400 (EDT)
+Date: Fri, 13 Mar 2009 12:07:32 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090313160732.GA26615@denix.org>
+References: <20090313145610.GA26373@denix.org>
+	<018101c9a3f0$7f5b2cd0$5e3018ac@Glamdring>
+MIME-version: 1.0
+In-reply-to: <018101c9a3f0$7f5b2cd0$5e3018ac@Glamdring>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: PARALLEL_MAKE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,34 +33,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 15:36:19 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Mar 2009 16:08:06 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-I'm trying to build a minimal-image with an ext2 filesystem image, so I
-set inside my local.conf:
+On Fri, Mar 13, 2009 at 04:27:08PM +0100, Ulf Samuelsson wrote:
+>>>> On the dual dual-core (4 total) boxes I have, I do -j6/4 threads.  On my
+>>>> new quad-core box I haven't yet had a chance to figure out what's best.
+>>>> I also use -j6/4 threads on an older dual-core amd64 box we've got
+>>>> around and that seems best for my tasks at least (I tried a few
+>>>> combinations of more jobs/threads and less and both were slower).
+>>>>
+>>>
+>>> I looked at a few recipies which by a stanrge coincidence had
+>>> PARALLEL_MAKE="",
+>>
+>> That's not a strange coincidence, that means a specific package has issues
+>> building in parallel - usually some dependencies go out of order.
+>>
+>
+> The strange coincidence was that *ALL*  the packages I *looked* at
+> had PARALLEL_MAKE="".
+> I made the erroneous assumption that most packages were this way.
 
-IMAGE_FSTYPES = "ext2"
+Ah, I see. I'm not sure what is the percentage of "broken" packages...
 
-But OE insists on building an jffs2 image. I found, inside
-conf/distro/minimal.conf:
+>>> When, I rechecked, I had
+>>> PARALLEL_MAKE ="-j 16"
+>>> as well and this should be
+>>> PARALLEL_MAKE ="-j16"
+>>
+>> Having only 4 cores and setting number of parallel makes to 16 kills your
+>> performance, as system spends more time switching contexts instead of 
+>> actually
+>> doing something useful - i.e. compiling.
+>
+> The Core i7 has 4 cores and each core has two virtual CPUs so the system 
+> sees 8 CPUs.
+> I saw some commone from someone claiming that if
+> you have n CPUs, then Buildroot should use make -j`2*n`.
+>
+> I thought about this, and came up with the following explanation.
+> If you have one job per CPU, then  whenever you have to wait for the 
+> harddisk, you stall this CPU.
+> If you have several jobs per CPU, then you can gain some time
+> by running the second job while the first job was waiting for the hard 
+> disk.
+>
+> Whether this works in practice, I cannot say, but it would be interesting
+> to have some real proof.
 
-IMAGE_FSTYPES = "tar.gz jffs2"
+First of all, I believe -j`2*n` is very agressive. I've seen other suggestions 
+of using -j`n+1` or -j`n+2`.
+Second, your Core i7 still has 4 real cores. Even though HyperThreading 
+presents each core as 2 virtual ones, those are not real 8 cores. And 
+according to [1], sometimes using HyperThreading may degrade the overall 
+performance...
 
-Does it means local.conf's IMAGE_FSTYPES get overwritten? If so, can
-anybody fix it?
+So, you should experiment with your settings and find a sweet spot, which 
+maybe somewhere between 4 and 16 threads :)
 
+[1] http://en.wikipedia.org/wiki/Hyper-threading
 
-
-
-Jader H. Silva
-Depto. de desenvolvimento
-2MI Tecnologia
-
-
-
-
-
-
+-- 
+Denys
 
 
