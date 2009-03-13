@@ -1,29 +1,20 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [204.187.63.106] (helo=mail.evertz.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LiDNi-0001Pm-7K
+	(envelope-from <rlott@evertz.com>) id 1LiDdk-0001jL-WB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Mar 2009 20:49:22 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGG00HYFN0NBR9A@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	13 Mar 2009 14:48:29 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 49D4E6B83B5; Fri,
-	13 Mar 2009 15:48:23 -0400 (EDT)
-Date: Fri, 13 Mar 2009 15:48:23 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090313194823.GC26615@denix.org>
-References: <000801c99992$45c23440$d1469cc0$@com>
-	<87myc57vz3.fsf@neumann.lab.ossystems.com.br>
-	<000401c99f26$ddb43c00$991cb400$@com>
-	<be7a9f3d0903090954m72f9cafbw8f03af0906bf74ca@mail.gmail.com>
-	<001401c9a335$eec4f850$cc4ee8f0$@com> <20090312185731.GB1109@denix.org>
-	<000501c9a410$c7f03510$57d09f30$@com>
-MIME-version: 1.0
-In-reply-to: <000501c9a410$c7f03510$57d09f30$@com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] Added new recipe for a newer version of the	Asterisk Soft-PBX
+	Fri, 13 Mar 2009 21:05:57 +0100
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Fri, 13 Mar 2009 16:05:34 -0400
+Message-ID: <069B6B31F6201B4389D7EEB9AD827BCA05005FAC@otis.burlington.evertz.tv>
+In-Reply-To: <19c1b8a90903131238q5c71c641n2f6a7eb40c911c4a@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] SIP recipe can't find Qt4 package in x86 build
+Thread-Index: AcmkFI7nhCtNIqVVQ3O9tgLuJiVGXgAAQ8aw
+From: "Rodney Lott" <rlott@evertz.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: SIP recipe can't find Qt4 package in x86 build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,52 +28,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 19:49:22 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 13 Mar 2009 20:05:57 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 13, 2009 at 08:20:30PM +0100, Christian P?ssinger wrote:
-> Denys Dmytriyenko on March 12, 2009 7:58 PM wrote:
-> > 
-> > The checksums.ini patch is not correct:
-> > 1. the closing square bracket is misplaced
-> > 2. the entry is not sorted (use contrib/source-checker/oe-checksums-
-> > sorter.py)
-> > 
-> 
-> Hopefully this is now my last attempt.
-> 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 9d578c1..463c58b 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -1754,6 +1754,10 @@
-> sha256=85331e63c90370c305121f134358e76cbb06846a12c04a7825d5869f331ee00d
->  md5=3b416557d2c395a36b97a819812e99b0
->  sha256=2bcc5d5620f8533eb4300ba1b48c9d2a00092ce04588e32f7074cf2aadc34259
-> 
-> +[http://downloads.digium.com/pub/asterisk/releases/asterisk-1.4.23.1.tar.gz
-> ]
+Hi, Khem.
 
-^^^
+Thanks for replying so quickly.
 
-> +md5=4788954a93f5fbf78e55e2aa6e03329f
-> +sha256=03e2cf43ffe9935d56fa0ea3663fc9bd23ce9720682c79d6269e78a9a1629d63
-> +
->  
-> [http://downloads.digium.com/pub/telephony/sounds/releases/asterisk-core-sou
-> nds-en-alaw-1.4.8.tar.gz]
+So, if I am understanding you correctly, I would have to make a recipe =
+that basically pointed to my natively installed version of Qt?  I =
+couldn't find any qt-native or qt-devel recipes in the packages =
+directory of the git OE repository (probably because Qt is a commercial =
+product).
 
-^^^
+Okay, I'll give that a try then.
 
->  md5=e708a5510a61217725b6ad663287dfa0
->  sha256=5d5c305079eb9918d271fad28ac73248a7d2962347dbd80d16aac66fe35e2729
+Thanks.
 
-It would be better to attach the patch, as your MUA damages it with 
-word-wrapping - see highlights above, and there were more damaged long lines 
-in the rest of the patch...
+Rodney
 
--- 
-Denys
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org]On Behalf Of
+Khem Raj
+Sent: Friday, March 13, 2009 3:39 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] SIP recipe can't find Qt4 package in x86 build
+
+
+On Fri, Mar 13, 2009 at 12:11 PM, Rodney Lott <rlott@evertz.com> wrote:
+> Hello.
+>
+> I am new to OE and I couldn't find anything in the devel mailing list =
+archives for Feb and March, so I wanted to ask about the following =
+issue.
+>
+> I am configured as follows:
+>
+> OE Build Configuration:
+> BB_VERSION        =3D "1.8.13"
+> METADATA_BRANCH   =3D "<unknown>"
+> METADATA_REVISION =3D "<unknown>"
+> TARGET_ARCH       =3D "i486"
+> TARGET_OS         =3D "linux"
+> MACHINE           =3D "x86"
+> DISTRO            =3D "minimal"
+> DISTRO_VERSION    =3D ".dev-snapshot-20090313"
+> TARGET_FPU        =3D ""
+>
+> I am using the following git revision:
+>
+> commit 12b093a681c4e011062538e4f2c582630997855f
+> Author: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+> Date:   Sun Feb 8 16:42:47 2009 +0100
+>
+> I am not using the latest because this was what I started with and I =
+don't want to pull the latest yet unless it is necessary.
+>
+> Here's the problem I am having.  I have an image recipe that basically =
+contains the following:
+>
+> require packages/images/minimal-image.bb
+>
+> IMAGE_INSTALL +=3D "cron"
+> IMAGE_INSTALL +=3D "ntp"
+>
+> export IMAGE_BASENAME =3D "cp2210e"
+>
+> If I build with this, everything is peachy and I get my minimalist =
+image with ntp and cron installed.  I then add more IMAGE_INSTALL lines =
+after the ntp line:
+>
+> IMAGE_INSTALL +=3D "python"
+> IMAGE_INSTALL +=3D "python-twisted"
+> IMAGE_INSTALL +=3D "python-pyqt"
+>
+> The build goes on fine for a while and it stops at this:
+>
+> NOTE: Running task 765 of 1189 (ID: 532, =
+/home/rlott/openembedded.git/packages/sip/sip-native_4.7.7.bb, =
+do_configure)
+
+
+You are building sip-native recipe so looking into host tool staging
+is right here. So this file should either come from your host
+installation of qt-devel  or from qt-native package(if there exists
+one) which ever provides it. You might want to make  sip-native
+DEPENDS on this package.
+
+Thx
+
+-Khem
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
