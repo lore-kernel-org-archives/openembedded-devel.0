@@ -1,25 +1,38 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [209.85.219.166] (helo=mail-ew0-f166.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Li8wX-0007ct-Hm
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Li97A-00087o-54
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Mar 2009 16:05:02 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGG00I6J9V7WQG5@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	13 Mar 2009 10:04:24 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C309B6B83B5; Fri,
-	13 Mar 2009 11:04:18 -0400 (EDT)
-Date: Fri, 13 Mar 2009 11:04:18 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 13 Mar 2009 16:16:00 +0100
+Received: by ewy10 with SMTP id 10so2796279ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Mar 2009 08:15:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=AiaDdXOpxb2fl3YtsnxreDQFSmAg6wSX11JltFlNUA4=;
+	b=o0Bu+qq+RnHHTUiD2IhnQj7LtZnrc12ZaXwfKGuU/xBHdGuWTyEaoksrFCu4xvte9u
+	SYWNGy8jsVSsPdHV1nlwEMoKz6Sof+Fqm7vj/NiI5fM5UZTXalDJa2kGOW7MaiEfGVY5
+	S9Gq1oaaYxWn3/yejVa/F3bsV/xchPmBQQ0x0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=BtLjw5pzQafYzU9JspEL9Uo6iyGvW5CaFXqKCGnj+LBXtqYe3arTrkUvQ0HAJ4h64B
+	A4t6XdttskZEeOnHQzq4efGTfyD1FzczRi5TIJgc45XImqjzxxlRl3w4pNN2M3pfxyOH
+	34zkI5XHwdUSlcW7BCWQim/oUvjaHS+n8R5JE=
+MIME-Version: 1.0
+Received: by 10.210.29.17 with SMTP id c17mr858844ebc.34.1236957338383; Fri, 
+	13 Mar 2009 08:15:38 -0700 (PDT)
+In-Reply-To: <19c1b8a90903121458ufac02e7p878b6badfe29878@mail.gmail.com>
+References: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
+	<19c1b8a90903121037g5726bf99qadca1e5d95dcae7@mail.gmail.com>
+	<ac9c93b10903121334j3a6cfad8u8e4591ddecf80394@mail.gmail.com>
+	<19c1b8a90903121458ufac02e7p878b6badfe29878@mail.gmail.com>
+Date: Fri, 13 Mar 2009 16:15:38 +0100
+Message-ID: <ac9c93b10903130815t10265676ld8e464ab460689dd@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090313150418.GB26373@denix.org>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF730@hiob.intern.dresearch.de>
-	<013a01c9a3e7$1a432270$5e3018ac@Glamdring>
-MIME-version: 1.0
-In-reply-to: <013a01c9a3e7$1a432270$5e3018ac@Glamdring>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: PARALLEL_MAKE
+Subject: Re: g++ lib problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,33 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 15:05:02 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 13 Mar 2009 15:16:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Mar 13, 2009 at 03:19:17PM +0100, Ulf Samuelsson wrote:
+2009/3/12 Khem Raj <raj.khem@gmail.com>:
+[...]
 >
->>> A while back you mentioned a program that displayed the per core CPU 
->>> utilization. What was it again?
->> Try htop.
->
-> On OpenSuSE you just right click on the bottom bar, and add the CPU 
-> Frequency meter. I added it 8 times, and configured
-> for each Virtual CPU in the Core i7.
+> I see it gets it from libm but g++ specifiies -lm for you where as gcc
+> does not. I think the problem is that ARM have same precision for
+> double and long double so glibc defines __NO_LONG_DOUBLE_MATH for ARM
+> as a result the prototypes for the *l functions are not emitted into
+> math.h. Although in glibc they are aliases for the corresponding
+[...]
 
-You are probably talking about some sort of window manager or desktop 
-environment for X Window - luckily we are talking about Linux and it can mean 
-pretty much any of the available ones. So, saying things like "right click on 
-the bar and add something" w/o specifying your environment doesn't mean much...
+Khem,
 
-> It does not give you utilization, only frequency.
-> When not used, it is humming along quietly at 1.6 GHz,
-> and when used, then it ups the frequency to 2.67 GHz,
+Thanks for the explanation.
+Should we change the glibc package to resolve this?
 
-I doubt it is the only meter available in your environment. CPU 
-load/utilization is very common and is available on pretty much any WM/DE.
-
--- 
-Denys
+Frans
 
 
