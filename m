@@ -1,30 +1,32 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LiAhk-0004za-DX
-	for openembedded-devel@openembedded.org; Fri, 13 Mar 2009 17:57:52 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090313165730.JVJG15318.fed1rmmtao105.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Fri, 13 Mar 2009 12:57:30 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id SgxV1b00N4dMFYL03gxVgJ; Fri, 13 Mar 2009 12:57:29 -0400
-X-Authority-Analysis: v=1.0 c=1 a=_zo9k9qn05R-Kw4Y_5MA:9
-	a=yL4B0lsicLPnjU6Vflj27FtGV2QA:4 a=LY0hPdMaydYA:10
-	a=Hsa7Bxc7kfmR-1Cg:21 a=vAflNjOIrIXEbU9Y:21
-X-CM-Score: 0.00
-Date: Fri, 13 Mar 2009 09:57:29 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	(envelope-from <rpurdie@rpsys.net>) id 1LiAwq-0005SQ-0K
+	for openembedded-devel@openembedded.org; Fri, 13 Mar 2009 18:13:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2DHD6f7014171
+	for <openembedded-devel@openembedded.org>; Fri, 13 Mar 2009 17:13:06 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 14111-01 for <openembedded-devel@openembedded.org>;
+	Fri, 13 Mar 2009 17:12:58 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2DHCu5h014157
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 13 Mar 2009 17:12:56 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-Message-ID: <20090313165729.GG26343@smtp.west.cox.net>
-References: <20090313145610.GA26373@denix.org>
-	<018101c9a3f0$7f5b2cd0$5e3018ac@Glamdring>
-	<20090313160732.GA26615@denix.org>
-	<ac9c93b10903130920t14221262y841d9999563bd912@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b10903130920t14221262y841d9999563bd912@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+In-Reply-To: <013b01c9a3e7$1b44b3f0$5e3018ac@Glamdring>
+References: <1236900736.26901.8.camel@grond.atmel.com>
+	<200903121838.58470.raj.khem@gmail.com><20090313034930.GA23252@denix.org>
+	<20090313060546.GF26343@smtp.west.cox.net>
+	<013b01c9a3e7$1b44b3f0$5e3018ac@Glamdring>
+Date: Fri, 13 Mar 2009 17:12:58 +0000
+Message-Id: <1236964378.8433.18.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
 Subject: Re: PARALLEL_MAKE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,30 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 16:57:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Mar 2009 17:13:28 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, Mar 13, 2009 at 05:20:51PM +0100, Frans Meulenbroeks wrote:
+On Fri, 2009-03-13 at 15:19 +0100, Ulf Samuelsson wrote:
+> I looked at a few recipies which by a stanrge coincidence had 
+> PARALLEL_MAKE="",
 
-> I'm not sure how PARALLEL_MAKE is supposed to work, but I noticed that
-> often there is a problem because with it a package on which there is a
-> dependency is build in parallel. Since there is a dependency in a lot
-> of cases the underlying package fails.
+That line means the recipe has some kind of Makefile dependency breakage
+issues with "make -j" and therefore for that recipe only, parallel make
+is disabled.
 
-PARALLEL_MAKE is just a wrapper around make ( / cmake?) -j N.
-BB_NUMBER_THREADS is how you get different packages going in parallel.
+> Changed to
+> PARALLEL_MAKE ="-j8"
+> BB_NUMBER_THREADS = "2"
 
-> A typical scenario:
-> a package X depends on perl-native, typically they start to build in
-> parallel but perl-native does take much longer than X. X requires
-> perl-native to complete and fails.
+BB_NUMBER_THREADS is the one for real performance and can scale to a lot
+of cores and use them all. As others have commented, disk bandwidth
+becomes a real problem.
 
-Right.  This is a bug on package X not listing perl-native as a
-dependancy as with BB_NUMBER_THREADS >1 perl-native will be worked until
-do_populate_staging before X do_configure is started.
+> I see some more cores beeing used.
+> The initial setup after you changed local.conf seems to run on a single core 
+> though.
 
--- 
-Tom Rini
+When we added parallel core support the condition was it defaulted to
+single core (backwards compatible). That has continued to this day and
+perhaps the documentation needs to be improved. Poky's sample local.conf
+has commented out entries with an explaination of why you'd set those
+variables. These days I would accept an argument for:
+
+PARALLEL_MAKE ="-j2"
+BB_NUMBER_THREADS = "2"
+
+in OE's sample local.conf as things have been well tested in this area
+for a long time now and more cores are becoming the norm.
+
+Cheers,
+
+Richard
+
+
 
 
