@@ -1,29 +1,28 @@
 Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1LiAwq-0005SQ-0K
-	for openembedded-devel@openembedded.org; Fri, 13 Mar 2009 18:13:28 +0100
+	(envelope-from <rpurdie@rpsys.net>) id 1LiAyD-0005VR-4u
+	for openembedded-devel@openembedded.org; Fri, 13 Mar 2009 18:14:53 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2DHD6f7014171
-	for <openembedded-devel@openembedded.org>; Fri, 13 Mar 2009 17:13:06 GMT
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2DHEWSk014209
+	for <openembedded-devel@openembedded.org>; Fri, 13 Mar 2009 17:14:32 GMT
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 14111-01 for <openembedded-devel@openembedded.org>;
-	Fri, 13 Mar 2009 17:12:58 +0000 (GMT)
+	id 14111-02 for <openembedded-devel@openembedded.org>;
+	Fri, 13 Mar 2009 17:14:28 +0000 (GMT)
 Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
 	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2DHCu5h014157
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2DHENow014203
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>; Fri, 13 Mar 2009 17:12:56 GMT
+	for <openembedded-devel@openembedded.org>; Fri, 13 Mar 2009 17:14:23 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <013b01c9a3e7$1b44b3f0$5e3018ac@Glamdring>
-References: <1236900736.26901.8.camel@grond.atmel.com>
-	<200903121838.58470.raj.khem@gmail.com><20090313034930.GA23252@denix.org>
-	<20090313060546.GF26343@smtp.west.cox.net>
+In-Reply-To: <20090313145610.GA26373@denix.org>
+References: <20090313060546.GF26343@smtp.west.cox.net>
 	<013b01c9a3e7$1b44b3f0$5e3018ac@Glamdring>
-Date: Fri, 13 Mar 2009 17:12:58 +0000
-Message-Id: <1236964378.8433.18.camel@dax.rpnet.com>
+	<20090313145610.GA26373@denix.org>
+Date: Fri, 13 Mar 2009 17:14:25 +0000
+Message-Id: <1236964465.8433.21.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.12.1 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -41,41 +40,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 17:13:28 -0000
+X-List-Received-Date: Fri, 13 Mar 2009 17:14:53 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-03-13 at 15:19 +0100, Ulf Samuelsson wrote:
-> I looked at a few recipies which by a stanrge coincidence had 
-> PARALLEL_MAKE="",
+On Fri, 2009-03-13 at 10:56 -0400, Denys Dmytriyenko wrote:
+> After you change your configuration, bitbake rebuilds the cache - that is a 
+> single threaded operation, hence uses only one core.
 
-That line means the recipe has some kind of Makefile dependency breakage
-issues with "make -j" and therefore for that recipe only, parallel make
-is disabled.
-
-> Changed to
-> PARALLEL_MAKE ="-j8"
-> BB_NUMBER_THREADS = "2"
-
-BB_NUMBER_THREADS is the one for real performance and can scale to a lot
-of cores and use them all. As others have commented, disk bandwidth
-becomes a real problem.
-
-> I see some more cores beeing used.
-> The initial setup after you changed local.conf seems to run on a single core 
-> though.
-
-When we added parallel core support the condition was it defaulted to
-single core (backwards compatible). That has continued to this day and
-perhaps the documentation needs to be improved. Poky's sample local.conf
-has commented out entries with an explaination of why you'd set those
-variables. These days I would accept an argument for:
-
-PARALLEL_MAKE ="-j2"
-BB_NUMBER_THREADS = "2"
-
-in OE's sample local.conf as things have been well tested in this area
-for a long time now and more cores are becoming the norm.
+Some brave person could make the parsing process multi-threaded. Its
+certainly possible and not that hard...
 
 Cheers,
 
