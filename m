@@ -1,37 +1,24 @@
-Received: from [209.85.219.166] (helo=mail-ew0-f166.google.com)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LiA8H-00080R-OO
+	(envelope-from <denis@denix.org>) id 1LiAE0-0003qf-Hq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Mar 2009 17:21:13 +0100
-Received: by ewy10 with SMTP id 10so2823854ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2009 09:20:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=fJ8uBwizOIyCAdeDJjpZjPA/fJPm37j3YeZk0F7BMdg=;
-	b=QnHTPIFQhcmwphEPGa0Yzsl8qSWvR8iNMqANnvimm2aEK83Ox2En2G7B0xMIGAbqCu
-	/+TiaS7GEg55WlRtey8gp0FGJsiY4SSJzLEzTPfDL05s3FQrQXa85rzNPrM+7cHJPH0R
-	p3I9MEKLnBBkdcwV548OEtemO+vnxU8xBAz0U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=OA1tMPMJIJnUROWdNZjJyDfbjyN1GJ833QwkGRpNmomMJarcfHvnQE7HInNXaXyVkl
-	fMbpOj+WNSLO6KLdXBdGxKbRwchmfU0h32OX4rcAgO2XdaXr6EhfDkcHb1Mi1dHFkqrM
-	HTAPlndrShnQFcWX3A60Sh0HSS4Cszs41wXoY=
-MIME-Version: 1.0
-Received: by 10.210.125.7 with SMTP id x7mr880100ebc.89.1236961251857; Fri, 13 
-	Mar 2009 09:20:51 -0700 (PDT)
-In-Reply-To: <20090313160732.GA26615@denix.org>
-References: <20090313145610.GA26373@denix.org>
-	<018101c9a3f0$7f5b2cd0$5e3018ac@Glamdring>
-	<20090313160732.GA26615@denix.org>
-Date: Fri, 13 Mar 2009 17:20:51 +0100
-Message-ID: <ac9c93b10903130920t14221262y841d9999563bd912@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 13 Mar 2009 17:27:08 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KGG007A1DOARBW0@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	13 Mar 2009 11:26:35 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 82C156B83B5; Fri,
+	13 Mar 2009 12:26:34 -0400 (EDT)
+Date: Fri, 13 Mar 2009 12:26:34 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: PARALLEL_MAKE
+Message-id: <20090313162634.GB26615@denix.org>
+References: <1236958547.8913.5.camel@northpole>
+MIME-version: 1.0
+In-reply-to: <1236958547.8913.5.camel@northpole>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Can't build an ext2 minimal image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,24 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 16:21:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Mar 2009 16:27:08 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-I'm not sure how PARALLEL_MAKE is supposed to work, but I noticed that
-often there is a problem because with it a package on which there is a
-dependency is build in parallel. Since there is a dependency in a lot
-of cases the underlying package fails.
+On Fri, Mar 13, 2009 at 12:35:47PM -0300, Jader H. Silva wrote:
+> I'm trying to build a minimal-image with an ext2 filesystem image, so I
+> set inside my local.conf:
+> 
+> IMAGE_FSTYPES = "ext2"
+> 
+> But OE insists on building an jffs2 image. I found, inside
+> conf/distro/minimal.conf:
+> 
+> IMAGE_FSTYPES = "tar.gz jffs2"
+> 
+> Does it means local.conf's IMAGE_FSTYPES get overwritten? If so, can
+> anybody fix it?
 
-A typical scenario:
-a package X depends on perl-native, typically they start to build in
-parallel but perl-native does take much longer than X. X requires
-perl-native to complete and fails.
+Thanks for reporting - it should be fixed now.
 
-Parallelism within a task (e.g. running two compiles in parallel would work).
-Parallelism between tasks is tricky although some of them can always
-be parallelized (e.g. downloading, unpacking and patching).
-
-Frans
+-- 
+Denys
 
 
