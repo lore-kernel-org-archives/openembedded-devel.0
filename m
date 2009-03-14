@@ -1,40 +1,33 @@
-Received: from [209.85.218.165] (helo=mail-bw0-f165.google.com)
+Received: from [208.51.207.131] (helo=mail.2mi.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LiRbZ-0007C5-Od
+	(envelope-from <marcos@2mi.com.br>) id 1LiXW7-0006KM-LC
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Mar 2009 12:00:37 +0100
-Received: by bwz9 with SMTP id 9so3207381bwz.12
+	Sat, 14 Mar 2009 18:19:25 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.2mi.com.br (Postfix) with ESMTP id 5C61450361A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Mar 2009 04:00:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=XSrCijzwyIOmIcwr6VqsvjoR4Q8G71Oz5soOBGSwL28=;
-	b=XDlFLZCiJI3rdxPY7j9PFugUdu7RGdS+EoYSEs33nIIy7BoBPZUCoI8S2QPUAjQF+Y
-	xqFG99yP5hXFL5AX6JVfnyFU5hI/QsCrboLZ47FhCLVqkJ9AyotP2tNkL9rWO0bSvRy4
-	br0G4PpoM4ffowf5Ie2CyI6wmJbBfyC300MF0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=tXJm/otBmJvo2BGIa16AqnyPlG2rzV08rlEJjZvvBqMvOJskUJd2pkvO/ZGrr4D1zL
-	RT6pY6xsjC/K1/qn0n1C4sXZymIYynWX1822nnUWhC8ze2H4LhsTrDkgNK2Alz2SlQtF
-	1vd9inEr49Iq1AZvnXt0Qv+KZeaNar0jPsEAU=
-MIME-Version: 1.0
-Received: by 10.223.115.80 with SMTP id h16mr1141892faq.94.1237028410973; Sat, 
-	14 Mar 2009 04:00:10 -0700 (PDT)
-In-Reply-To: <19c1b8a90903131040k5d7b1f40kfbfafbb787e45341@mail.gmail.com>
-References: <ac9c93b10903120252x292ff544gca18ac8684ce0f2f@mail.gmail.com>
-	<19c1b8a90903121037g5726bf99qadca1e5d95dcae7@mail.gmail.com>
-	<ac9c93b10903121334j3a6cfad8u8e4591ddecf80394@mail.gmail.com>
-	<19c1b8a90903121458ufac02e7p878b6badfe29878@mail.gmail.com>
-	<ac9c93b10903130815t10265676ld8e464ab460689dd@mail.gmail.com>
-	<19c1b8a90903131040k5d7b1f40kfbfafbb787e45341@mail.gmail.com>
-Date: Sat, 14 Mar 2009 12:00:10 +0100
-Message-ID: <ac9c93b10903140400h7cddb9d5x74b72b8055db907a@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 14 Mar 2009 14:23:48 -0300 (BRT)
+X-Virus-Scanned: amavisd-new at 2mi.com.br
+Received: from mail.2mi.com.br ([127.0.0.1])
+	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bZTr+jppMQ51
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Mar 2009 14:23:44 -0300 (BRT)
+Received: from [192.168.15.106] (unknown [189.102.205.109])
+	by mail.2mi.com.br (Postfix) with ESMTP id 9AF03502762D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Mar 2009 14:23:42 -0300 (BRT)
+From: Marcos Amorim <marcos@2mi.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: g++ lib problem
+In-Reply-To: <1236962040.9119.16.camel@faraday>
+References: <1236962040.9119.16.camel@faraday>
+Organization: 2MI Tecnologia
+Date: Sat, 14 Mar 2009 14:18:45 -0300
+Message-Id: <1237051125.4021.2.camel@faraday>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Problem with xserver-xorg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,55 +41,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Mar 2009 11:00:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 14 Mar 2009 17:19:25 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-True but why not add long double function prototypes to glibc as we have them.
-Might save someone some headache later on.
+This problem is solved:
 
-For my specific problem:
-In the package I added a patch for this, and I raised the issue with
-the author of the sw who informed me that the long double accuracy was
-not really needed, so guess the problem will be gone in the next
-release anyway.
+I set PREFERRED_VERSION_mesa =3D "7.2".
 
-Frans
 
-2009/3/13 Khem Raj <raj.khem@gmail.com>:
-> On Fri, Mar 13, 2009 at 8:15 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> 2009/3/12 Khem Raj <raj.khem@gmail.com>:
->> [...]
->>>
->>> I see it gets it from libm but g++ specifiies -lm for you where as gcc
->>> does not. I think the problem is that ARM have same precision for
->>> double and long double so glibc defines __NO_LONG_DOUBLE_MATH for ARM
->>> as a result the prototypes for the *l functions are not emitted into
->>> math.h. Although in glibc they are aliases for the corresponding
->> [...]
->>
->> Khem,
->>
->> Thanks for the explanation.
->> Should we change the glibc package to resolve this?
->>
->
-> hmmm IMO I think you should fix the application to not ask for long
-> double functions on platforms where long double is
-> not different than double and fixing glibc could be ok too. Care for a patch :)
->> Frans
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
+Marcos Amorim
+Eq. de Desenvolvimento
+2MI Tecnologia
+
+
+
+Em Sex, 2009-03-13 =C3=A0s 13:34 -0300, Marcos Amorim escreveu:
+
+> I'm compile distro with xorg-xserver how to fix this problem?
+>=20
+>=20
+> openembedded/packages/xorg-xserver/xserver-xorg_1.5.3.bb, do_configure
+>=20
+> checking for GL... configure: error: Package requirements (glproto >=3D
+> 1.4.9 gl >=3D 7.1.0) were not met:
+> =20
+> No package 'gl' found
+>=20
+> I try with --disable-xgl and --disable-glx and unsuccessfully
+>=20
+> This is my configure options
+>=20
+> build/tmp/work/i486-linux/xserver-xorg-2_1.5.3-r4/xorg-server-1.5.3/con=
+figure --build=3Di686-linux --host=3Di486-linux --target=3Di486-linux --p=
+refix=3D/usr --exec_prefix=3D/usr --bindir=3D/usr/bin --sbindir=3D/usr/sb=
+in --libexecdir=3D/usr/libexec --datadir=3D/usr/share --sysconfdir=3D/etc=
+ --sharedstatedir=3D/usr/com 	--localstatedir=3D/var 	--libdir=3D/usr/lib=
+ --includedir=3D/usr/include --oldincludedir=3D/usr/include --infodir=3D/=
+usr/share/info --mandir=3D/usr/share/man --enable-xcalibrate --enable-kdr=
+ive --enable-xephyr  --disable-xfbdev --disable-xnest --disable-kdrive-ve=
+sa                   --with-default-font-path=3D/usr/share/fonts/X11/misc=
+ ac_cv_file__usr_share_sgml_X11_defs_ent=3Dno
+>=20
+>=20
+>=20
+> Marcos Amorim
+> Eq. de Desenvolvimento
+> 2MI Tecnlogia
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
 
