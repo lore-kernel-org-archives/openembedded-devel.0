@@ -1,35 +1,19 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [12.173.51.131] (helo=mail.hcrest.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1LiFJ1-0006ZA-JN
+	(envelope-from <Phil.Black@hillcrestlabs.com>) id 1LiIKT-00015L-JJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Mar 2009 22:52:39 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 249F41416BC6;
-	Fri, 13 Mar 2009 22:52:33 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FIkpnBVEr53X; Fri, 13 Mar 2009 22:52:33 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id B34FD1416BA5;
-	Fri, 13 Mar 2009 22:52:32 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Sat, 14 Mar 2009 02:06:21 +0100
+Received: from 68.33.21.8 ([68.33.21.8]) by MAILSERV.hcrest.com ([10.1.2.6])
+	with Microsoft Exchange Server HTTP-DAV ; 
+	Sat, 14 Mar 2009 01:05:57 +0000
+Received: from pblack-linux by mail.hcrest.com; 13 Mar 2009 21:05:57 -0400
+From: Philip Black <phil.black@hillcrestlabs.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090313192008.GA20581@mercury.localdomain>
-References: <49B5E3B9.70409@gmail.com>
-	<1236709292.28500.27.camel@hammer.suse.cz> <49B73DC1.5000902@gmail.com>
-	<74d0deb30903110117m2de9bd4cvd7bc88501e9c719b@mail.gmail.com>
-	<1236760668.4955.5.camel@utx.utx.cz>
-	<20090313192008.GA20581@mercury.localdomain>
-Date: Fri, 13 Mar 2009 22:52:17 +0100
-Message-Id: <1236981137.4355.28.camel@utx.utx.cz>
+Date: Fri, 13 Mar 2009 21:05:57 -0400
+Message-Id: <1236992757.7047.2.camel@pblack-linux>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Cc: beagleboard@googlegroups.com,
-	Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: [Angstrom-devel] Avahi recipe & Openmoko
+X-Mailer: Evolution 2.24.3 
+Subject: patch for ipkg-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +27,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2009 21:52:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 14 Mar 2009 01:06:21 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Ben Gamari wrote in Fri 03/13 2009 at 15:20 -0400:
-> On Wed, Mar 11, 2009 at 09:37:48AM +0100, Stanislav Brabec wrote:
-> > Ben, what will happen, it you remove avahi_0.6.21.bb from the tree?
-> > Maybe it poisons the dependency checker?
->=20
-> Indeed, after removing all of the avahi recipes other than _0.6.24.bb
-
-It sounds like a bug of dependency checker.
-
-> things work roughly as expected (i.e. no gtk+). Still 2000 packages wit=
-h
-> a few Xorg packages (libsm required by gstreamer, etc), but I probably
-> just have high expectations.
-
-It's almost surely fixable. Only few modules need X libraries. You
-should just exclude these.
-
-> Would it be possible to remove avahi
-> versions prior to 0.6.24 from the repository?
-
-Ask maintainers of distros with:
-
-PREFERRED_VERSION_avahi-python ?=3D "0.6.21"
-
-=EF=BB=BFNote: Preferring different versions of particular avahi sub-pack=
-ages is
-almost surely incorrect.
-
-It's Openmoko. I guess that upgrade of avahi is sane. There is just one
-important issue to check or fix (bug in libdaemon which triggers dead
-loop in avahi):
-https://bugzilla.novell.com/show_bug.cgi?id=3D469342
+I found a bug with how the arfile.py works when parsing ar files.
+Basically, the code assumed whitespace delimited when it should have
+been fixed sized fields.
 
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+
+diff -wubr ipkg-utils.old/arfile.py ipkg-utils/arfile.py
+--- ipkg-utils.old/arfile.py	2009-03-13 12:45:25.937148714 -0400
++++ ipkg-utils/arfile.py	2009-03-13 12:44:59.680250619 -0400
+@@ -74,7 +74,14 @@
+             if l == "\n":
+                 l = self.f.readline()
+                 if not l: break
+-            descriptor = l.split()
++            descriptor = [ l[0:15].strip() # filename 
++                                , l[16:27].strip() # timestamp
++                                , l[28:33].strip() # owner ID
++                                , l[34:39].strip() # gid
++                                , l[40:47].strip() # mode
++                                , l[48:57].strip() # size in bytes
++                                , l[58:59].strip() # file magic
++            ]
+ #            print descriptor
+             size = int(descriptor[5])
+             memberName = descriptor[0][:-1]
+
 
 
 
