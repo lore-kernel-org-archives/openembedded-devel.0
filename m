@@ -1,30 +1,41 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [208.51.207.131] (helo=mail.2mi.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1LjEyX-0007qh-7f; Mon, 16 Mar 2009 16:43:39 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1LjFEY-0003Xh-13; Mon, 16 Mar 2009 17:00:10 +0100
-Message-ID: <49BE7384.8060402@kernelconcepts.de>
-Date: Mon, 16 Mar 2009 16:43:00 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-MIME-Version: 1.0
+	(envelope-from <marcos@2mi.com.br>) id 1LjFUb-00005V-JM
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Mar 2009 17:16:49 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.2mi.com.br (Postfix) with ESMTP id 7046E50277F0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Mar 2009 13:21:12 -0300 (BRT)
+X-Virus-Scanned: amavisd-new at 2mi.com.br
+Received: from mail.2mi.com.br ([127.0.0.1])
+	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Svedezcy24zb
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Mar 2009 13:21:08 -0300 (BRT)
+Received: from [192.168.15.101] (unknown [189.102.205.109])
+	by mail.2mi.com.br (Postfix) with ESMTP id 60A28502762D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Mar 2009 13:21:08 -0300 (BRT)
+From: Marcos Amorim <marcos@2mi.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <1237150071-24115-1-git-send-email-mad_soft@inbox.ru>
-In-Reply-To: <1237150071-24115-1-git-send-email-mad_soft@inbox.ru>
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+In-Reply-To: <1236890935.6250.26.camel@northpole>
+References: <1236890935.6250.26.camel@northpole>
+Organization: 2MI Tecnologia
+Date: Mon, 16 Mar 2009 13:16:11 -0300
+Message-Id: <1237220171.4020.4.camel@faraday>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 208.51.207.131
+X-SA-Exim-Mail-From: marcos@2mi.com.br
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,HTML_MESSAGE,
+	RDNS_NONE,SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH/RFC] base-files: add noatime to rootfs mount options
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: calibrateproto git tag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,26 +49,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2009 15:43:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Mar 2009 16:16:49 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+libxcalibrate_git add tag=20
 
-Dmitry Artamonow schrieb:
-> Fix it by adding noatime to rootfs mount options in fstab.
 
-+1 from me
+git diff packages/xorg-lib/libxcalibrate_git.bb
+diff --git a/packages/xorg-lib/libxcalibrate_git.bb
+b/packages/xorg-lib/libxcalibrate_git.bb
+index f9e1587..7f889df 100644
+--- a/packages/xorg-lib/libxcalibrate_git.bb
++++ b/packages/xorg-lib/libxcalibrate_git.bb
+@@ -6,7 +6,7 @@ DEPENDS =3D "virtual/libx11 calibrateproto libxext"
+ PV =3D "0.0+gitr${SRCREV}"
+ PE =3D "1"
+=20
+-SRC_URI =3D
+"git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3Dgit"
++SRC_URI =3D
+"git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3Dgit;=
+tag=3Dmaster"
+=20
+ S =3D "${WORKDIR}/git"
 
-Greetings
 
-Florian
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Em Qui, 2009-03-12 =C3=A0s 17:48 -0300, Jader H. Silva escreveu:
 
+> xorg proto calibrateproto git tag added.
+>=20
+> ---
+>  packages/xorg-proto/calibrateproto_git.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/packages/xorg-proto/calibrateproto_git.bb
+> b/packages/xorg-proto/calibrateproto_git.bb
+> index fe9e1a4..08cefa3 100644
+> --- a/packages/xorg-proto/calibrateproto_git.bb
+> +++ b/packages/xorg-proto/calibrateproto_git.bb
+> @@ -6,5 +6,5 @@ PV =3D "0.0+gitr${SRCREV}"
+>  PR =3D "r1"
+>  PE =3D "1"
+> =20
+> -SRC_URI =3D
+> "git://anongit.freedesktop.org/git/xorg/proto/calibrateproto;protocol=3D=
+git"
+> +SRC_URI =3D
+> "git://anongit.freedesktop.org/git/xorg/proto/calibrateproto;protocol=3D=
+git;tag=3Dmaster"
+>  S =3D "${WORKDIR}/git"
 
