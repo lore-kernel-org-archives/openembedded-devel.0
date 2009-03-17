@@ -1,40 +1,44 @@
-Received: from [208.51.207.131] (helo=mail.2mi.com.br)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jader@2mi.com.br>) id 1Ljf5G-0007ai-0w
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LjfCy-0007nr-CW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 20:36:22 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.2mi.com.br (Postfix) with ESMTP id B90E6502762D
+	Tue, 17 Mar 2009 20:44:18 +0100
+Received: by ewy20 with SMTP id 20so300841ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 16:40:43 -0300 (BRT)
-X-Virus-Scanned: amavisd-new at 2mi.com.br
-Received: from mail.2mi.com.br ([127.0.0.1])
-	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XBuqE+pEjO4J
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 16:40:39 -0300 (BRT)
-Received: from [192.168.15.103] (unknown [189.102.205.109])
-	by mail.2mi.com.br (Postfix) with ESMTP id 1DE43502762C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 16:40:37 -0300 (BRT)
-From: "Jader H. Silva" <jader@2mi.com.br>
+	Tue, 17 Mar 2009 12:43:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=aCaKxlAr9KFcMX8NrdUOYM4TLLGKYs6k7u0Bn9jvWA8=;
+	b=RDoyY9Dx6rqEN8GgDuO8oWGANhoSEk2tB9C+naSm7UGB52BxZcem5nz2APx6+oLTMs
+	gLRZoZ39s505JqWvsLKhqY9XhOvYj5ygNApJMDbzAcwPesE+g1O/o6Eltgi/AOK9zVMR
+	L8SJv0YlFqqS+oZfcEUOqnkdRV7S6NK95RguQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=kWtdQhlYIf/mQeYpF1Vc+f6X0fHUzfeMkmvoWjZSqYy/ePWecydx4frpLZq/3GYNha
+	VaoLuPQFSnFz0TOqJdcat228LjO+SjpMG1sv6QrxFwxWDpsK0gQBZMSdDSgWrZJenG3o
+	f38swf1vbGXv+2c6buk/YcdWMOHLPHuzGxlTg=
+MIME-Version: 1.0
+Received: by 10.210.54.15 with SMTP id c15mr272975eba.25.1237319008513; Tue, 
+	17 Mar 2009 12:43:28 -0700 (PDT)
+In-Reply-To: <gpoter$l42$1@ger.gmane.org>
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
+	<gpoter$l42$1@ger.gmane.org>
+Date: Tue, 17 Mar 2009 20:43:28 +0100
+Message-ID: <ac9c93b10903171243j78874fb6x51a46c14312c3568@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1237314240.6587.84.camel@northpole>
-References: <1237314240.6587.84.camel@northpole>
-Organization: 2MI Tecnologia
-Date: Tue, 17 Mar 2009 16:35:21 -0300
-Message-Id: <1237318521.6587.89.camel@northpole>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 208.51.207.131
-X-SA-Exim-Mail-From: jader@2mi.com.br
+X-SA-Exim-Connect-IP: 209.85.219.172
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_HELO_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libxml2-native including system zlib
+Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,123 +52,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 19:36:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 17 Mar 2009 19:44:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Em Ter, 2009-03-17 =C3=A0s 15:24 -0300, Jader H. Silva escreveu:
-> Hello again.
-> I'm trying to build an i586 x11-image, but I cannot pass libxml2-native
-> do_compile task, it seems it includes the host libz.h.
->=20
-> Error:
->=20
-> | i686-linux-libtool: link: ccache gcc
-> -isystem/home/jader/oe/build/conf/tmp/staging/i686-linux/usr/include -O=
-2
-> -pedantic -W -Wformat -Wunused -Wimplicit -Wreturn-type -Wswitch
-> -Wcomment -Wtrigraphs -Wformat -Wchar-subscripts -Wuninitialized
-> -Wparentheses -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings
-> -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes
-> -Wnested-externs -Winline -Wredundant-decls -Wl,-rpath-link
-> -Wl,/home/jader/oe/build/conf/tmp/staging/i686-linux/usr/lib -Wl,-rpath
-> -Wl,/home/jader/oe/build/conf/tmp/staging/i686-linux/usr/lib -Wl,-O1
-> -o .libs/xmllint xmllint.o
-> -L/home/jader/oe/build/conf/tmp/staging/i686-linux/usr/lib ./.libs/libx=
-ml2.so -ldl /home/jader/oe/build/conf/tmp/staging/i686-linux/usr/lib/libz=
-.so -lm -Wl,-rpath -Wl,/home/jader/oe/build/conf/tmp/staging/i686-linux/u=
-sr/lib
-> |
-> | ./.libs/libxml2.so: undefined reference to `gzopen64'
-> | collect2: ld returned 1 exit status
-> | make[2]: *** [xmllint] Error 1
-> | make[2]: *** Waiting for unfinished jobs....
-> | mv -f .deps/testapi.Tpo .deps/testapi.Po
-> | make[2]: Leaving directory
-> `/home/jader/oe/build/conf/tmp/work/i686-linux/libxml2-native-2.7.2-r0/=
-libxml2-2.7.2'
-> | make[1]: *** [all-recursive] Error 1
-> | make[1]: Leaving directory
-> `/home/jader/oe/build/conf/tmp/work/i686-linux/libxml2-native-2.7.2-r0/=
-libxml2-2.7.2'
-> | make: *** [all] Error 2
-> | FATAL: oe_runmake failed
->=20
->=20
->=20
->=20
->=20
-> Found gzopen in libxmlIO.c. gzopen is defined as gzopen64
-> in /usr/include/zlib.h, also, if i run make CFLAGS+=3D--verbose, I get
-> (stripped):
->=20
-> ccache gcc -DHAVE_CONFIG_H -I. -I./include -I./include  -D_REENTRANT
-> -isystem/home/jader/oe/build/conf/tmp/staging/i686-linux/usr/include
-> -isystem/home/j
-> ader/oe/build/conf/tmp/staging/i686-linux/usr/include -O2 -pedantic -W
-> -Wformat -Wunused -Wimplicit -Wreturn-type -Wswitch -Wcomment
-> -Wtrigraphs -Wformat -Wc
-> har-subscripts -Wuninitialized -Wparentheses -Wshadow -Wpointer-arith
-> -Wcast-align -Wwrite-strings -Waggregate-return -Wstrict-prototypes
-> -Wmissing-prototype
-> s -Wnested-externs -Winline -Wredundant-decls -MT xmlIO.o -MD -MP
-> -MF .deps/xmlIO.Tpo -c -o xmlIO.o xmlIO.c
->=20
->=20
-> [...]
-> gcc version 4.2.4 (Ubuntu 4.2.4-1ubuntu3)
->  /usr/lib/gcc/i486-linux-gnu/4.2.4/cc1 -E -quiet -v -I. -I./include
-> -I./include -MD xmlIO.d -MF .deps/xmlIO.Tpo -MP -MT xmlIO.o
-> -isystem /usr/include -DHAVE_CONFIG_H -D_REENTRANT
-> -isystem/home/jader/oe/build/conf/tmp/staging/i686-linux/usr/include
-> xmlIO.c -mtune=3Dgeneric
-> [...]
-> #include "..." search starts here:
-> #include <...> search starts here:
->  .
->  ./include
->  /usr/include
->  /home/jader/oe/build/conf/tmp/staging/i686-linux/usr/include
->  /usr/local/include
->  /usr/lib/gcc/i486-linux-gnu/4.2.4/include
-> End of search list.
-> Reading specs from /usr/lib/gcc/i486-linux-gnu/4.2.4/specs
-> Target: i486-linux-gnu
->=20
->=20
->=20
->=20
->=20
->=20
-> -isystem /usr/include is set on cc1, so it invalidate include
-> path /home/jader/oe/build/conf/tmp/staging/i686-linux/usr/include (wher=
-e
-> zlib.h is).
->=20
->=20
->=20
-> Is it correct for Makefile to use my system GCC ?
-> Can anybody help me to compile it correctly?
->=20
->=20
-> Thanks in advance
+2009/3/17 Koen Kooi <k.kooi@student.utwente.nl>:
+> On 17-03-09 20:18, Chris Larson wrote:
+>>
+>> I'd like to propose re-establishing MAINTAINER, set per package, to
+>> individuals, or left as default for packages which aren't directly
+>> maintained.
+>>
+>> Doing this would:
+>> - Facilitate dumping a list of unmaintained packages to give to new
+>> users wanting to volunteer to help us, but not knowing how to
+>> contribute.
+>> - Return some individual responsibility to the project, giving one
+>> person the blame for brokenness for that package, as well as giving
+>> responsibility for pushing patches upstream to that person. =A0In my
+>> opinion, a number of the recent issues in the project are due, in
+>> part, to a lack of that individual responsibility. =A0Everything is
+>> fuzzy, determined by a group, instead.
+>> - Allow us to physically separate, in the repository, those packages
+>> which get the most attention (are maintained) from those which get the
+>> least (maintained by the entire team). =A0We could finally be *honest*
+>> with our users about what we work on, telling them that the packages
+>> which are maintained by the team are in need of an individual
+>> maintainer, and get less attention, so bugs there will be fixed more
+>> slowly, and there are no guarantees on functionality there. =A0I think
+>> it'd be better to have a core set of *functional* recipes than have a
+>> huge set of "might work, might not" recipes as things stand today. =A0In
+>> my opinion, this would be more likely to give new users stability than
+>> creating a stable branch, while making better use of our limited
+>> manpower, rather than increasing the load drastically.
+>>
+>> Opinions?
+>
+> As long as it doesn't get put in resulting packages in any way, it's fine=
+ by
+> me.
+>
+> regards,
+>
+> Koen
+>
 
-Nevermind, set --with-zlib=3D${STAGING_INCDIR}/zlib.h in packages/libxml/=
-libxml2-native.inc and it compiled
-successfully.
+Agree with koen
 
-Att.
-
-
-Jader H. Silva
-jader@2mi.com.br
-Depto. de desenvolvimento
-2MI Tecnologia
-
-
-
-
-
-
+FM
 
 
