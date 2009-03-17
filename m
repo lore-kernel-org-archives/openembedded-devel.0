@@ -1,29 +1,29 @@
 Received: from [208.51.207.131] (helo=mail.2mi.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jader@2mi.com.br>) id 1Ljf4a-0007Yr-9k
+	(envelope-from <jader@2mi.com.br>) id 1Ljf5G-0007ai-0w
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 20:35:40 +0100
+	Tue, 17 Mar 2009 20:36:22 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by mail.2mi.com.br (Postfix) with ESMTP id 27750502762D
+	by mail.2mi.com.br (Postfix) with ESMTP id B90E6502762D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 16:40:02 -0300 (BRT)
+	Tue, 17 Mar 2009 16:40:43 -0300 (BRT)
 X-Virus-Scanned: amavisd-new at 2mi.com.br
 Received: from mail.2mi.com.br ([127.0.0.1])
 	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id r4FzItc-rK6b
+	with ESMTP id XBuqE+pEjO4J
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 16:39:57 -0300 (BRT)
+	Tue, 17 Mar 2009 16:40:39 -0300 (BRT)
 Received: from [192.168.15.103] (unknown [189.102.205.109])
-	by mail.2mi.com.br (Postfix) with ESMTP id 19CD6502762C
+	by mail.2mi.com.br (Postfix) with ESMTP id 1DE43502762C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 16:39:56 -0300 (BRT)
+	Tue, 17 Mar 2009 16:40:37 -0300 (BRT)
 From: "Jader H. Silva" <jader@2mi.com.br>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1237314240.6587.84.camel@northpole>
 References: <1237314240.6587.84.camel@northpole>
 Organization: 2MI Tecnologia
-Date: Tue, 17 Mar 2009 16:34:39 -0300
-Message-Id: <1237318479.6587.88.camel@northpole>
+Date: Tue, 17 Mar 2009 16:35:21 -0300
+Message-Id: <1237318521.6587.89.camel@northpole>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.24.3 
 X-SA-Exim-Connect-IP: 208.51.207.131
@@ -48,7 +48,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 19:35:40 -0000
+X-List-Received-Date: Tue, 17 Mar 2009 19:36:22 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -149,7 +149,8 @@ e
 >=20
 > Thanks in advance
 
-Nevermind, set --with-zlib=3D${STAGING_INCDIR}/zlib.h and it compiled
+Nevermind, set --with-zlib=3D${STAGING_INCDIR}/zlib.h in packages/libxml/=
+libxml2-native.inc and it compiled
 successfully.
 
 Att.
