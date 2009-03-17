@@ -1,38 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ljadq-0001AM-Eb
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 15:51:45 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ljad8-0005lB-Na
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 14:50:58 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 17 Mar 2009 14:50:58 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 17 Mar 2009 14:50:58 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 17 Mar 2009 15:50:43 +0100
-Message-ID: <gpodc3$nos$1@ger.gmane.org>
-References: <200903171538.21499.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
-In-Reply-To: <200903171538.21499.marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <koansoftware@gmail.com>) id 1Ljar6-0001OF-11
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Mar 2009 16:06:37 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id A2A6D2C81F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2009 15:03:46 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BekWQDhSUQWn
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2009 15:03:45 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 731D62C7FD
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2009 15:03:44 +0000 (UTC)
+Message-ID: <49BFBC09.7090201@gmail.com>
+Date: Tue, 17 Mar 2009 16:04:41 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_40,RCVD_IN_DNSWL_LOW,
-	RDNS_NONE,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,RDNS_NONE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: RFC: new stable release
@@ -49,60 +45,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 14:51:45 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Mar 2009 15:06:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 17-03-09 15:38, Marcin Juszkiewicz wrote:
-
+Marcin Juszkiewicz ha scritto:
+> Hi
+>=20
+> I know that there were lot of talks about creating stable branch of=20
+> OpenEmbedded in last months. But we need stable branch for vendors whic=
+h=20
+> use our product.
+>=20
+> As some people know I am working for Bug Labs company. Their product=20
+> named 'BUG Linux' is based on Poky 'pinky' (last stable release). We=20
+> were considering switch to newer (but never released) version named=20
+> 'elroy' but recently we decided to switch to OpenEmbedded.=20
+>=20
+> But to what kind of OE? Development branch change every day and things=20
+> break from time to time, packages get version bumps without notifying=20
+> anyone etc. Other possibility would be switch to stable branch but=20
+> current one is deprecated and not maintained anymore.
+>=20
+> So the situation looks like we will need new stable branch with few=20
+> maintainers (I will be one of them) and with proper policies for mergin=
+g=20
+> updates from development tree of OE. I maintained OE branches used for=20
+> OpenZaurus/Familiar few years ago so can say that I have needed=20
+> experience for it.
+>=20
 > Which things needs defining? I have few in mind:
->
+>=20
 > 1. Adding new things. This should be possible only by backporting from
->     OE.dev tree and needs to be Acked by at least 2-3 developers which
->     use stable branch. New code has to build for at least one distro and
->     ARM+x86 architectures (unless it is related to one arch or even one
->     machine).
-
-So things must get tested before committing, right?
-
+>    OE.dev tree and needs to be Acked by at least 2-3 developers which
+>    use stable branch. New code has to build for at least one distro and
+>    ARM+x86 architectures (unless it is related to one arch or even one=20
+>    machine).
+>=20
 > 2. Marking recipes as buildable or not. With over 6000 of them it is
->     really hard to check everything for status. We can remove many old
->     versions but sometimes they are useful for some projects. I would
->     rather add things like BUILDABLE_armv4t = "1" into recipe or into
->     conf/distro/include/${DISTRO}-status.inc file. Similar status for
->     recipes which are known to not work for some archs.
-
-Just have a CSV file that includes the test coverage for package + 
-machines. We can have one per distro. If needed we can extract the info 
-from tinderbox after we've done a few builds.
-
-> 3. Dealing with non buildable stuff. We have 'nonworking' and 'obsolete'
->     dirs in metadata - both should be dropped in stable branch. Other
->     recipes can be marked as not buildable or dropped from branch - I did
->     not thought yet on it.
-
-That does mean you can't easily resurrect recipes, but seeing that only 
-happens once every 5 years or so..
-
+>    really hard to check everything for status. We can remove many old
+>    versions but sometimes they are useful for some projects. I would  =20
+>    rather add things like BUILDABLE_armv4t =3D "1" into recipe or into
+>    conf/distro/include/${DISTRO}-status.inc file. Similar status for
+>    recipes which are known to not work for some archs.
+>=20
+> 3. Dealing with non buildable stuff. We have 'nonworking' and 'obsolete=
+'=20
+>    dirs in metadata - both should be dropped in stable branch. Other
+>    recipes can be marked as not buildable or dropped from branch - I di=
+d
+>    not thought yet on it.
+>=20
 > 4. Lifetime of branch. Will we do new stable release after 6 months or
->     after one year? For how long stable branch will be supported by OE
->     itself? I know that there will be companies which will provide
->     support for longer time - thats what I do with Poky 'pinky' now.
-
-The previous branch had a 12 + 3 month lifecycle, 12 months of support 
-then 3 months to wind down.
-
-> What do you feel about it? Any opinions or suggestions? Want to join
+>    after one year? For how long stable branch will be supported by OE
+>    itself? I know that there will be companies which will provide
+>    support for longer time - thats what I do with Poky 'pinky' now.
+>=20
+> What do you feel about it? Any opinions or suggestions? Want to join=20
 > effort?
 
-I certainly want to join the effort, but I fear that creating a stable 
-branch might make some people more inclined to dump even worse crap in 
-.dev, which would not be a good thing. So *if* we go with a stable 
-branch we should make sure .dev well be in a good shape as well.
+I think that a stable branch is defintely necessary when you are using
+OE in industrial environment like we do. A Long Term support would be
+good as well for dome main branches, something like Ubuntu does.
+I agree with this proposal.
 
-regards,
-
-Koen
-
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
 
