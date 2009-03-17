@@ -1,31 +1,29 @@
-Received: from [130.149.7.33] (helo=mail.tu-berlin.de)
+Received: from [88.191.97.79] (helo=legolas.polyconseil.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <torsten.sadowski@tu-berlin.de>) id 1LjZ6i-0005td-1m
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LjZFw-0002uE-NO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 14:13:27 +0100
-X-tubIT-Incoming-IP: 130.149.75.153
-Received: from kapitaen.kup.tu-berlin.de ([130.149.75.153]
-	helo=kapitaen.localnet)
-	by mail.tu-berlin.de (exim-4.69/mailfrontend-a) with esmtpa 
-	for <openembedded-devel@lists.openembedded.org>
-	id 1LjZ5x-00050s-Sx; Tue, 17 Mar 2009 14:12:38 +0100
-From: Torsten Sadowski <torsten.sadowski@tu-berlin.de>
-Organization: TU Berlin
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Mar 2009 14:12:20 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; i686; ; )
+	Tue, 17 Mar 2009 14:23:01 +0100
+Received: from [192.168.95.60] (anj75-1-81-57-0-22.fbx.proxad.net [81.57.0.22])
+	by legolas.polyconseil.fr (Postfix) with ESMTPSA id DAA7E70B6B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2009 14:22:10 +0100 (CET)
+Message-ID: <49BFA406.6030802@bolloretelecom.eu>
+Date: Tue, 17 Mar 2009 14:22:14 +0100
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.19) Gecko/20090103 Thunderbird/2.0.0.19 Mnenhy/0.7.5.0
 MIME-Version: 1.0
-Message-Id: <200903171412.20971.torsten.sadowski@tu-berlin.de>
-X-tubIT-Score: 0.0 ()
-X-SA-Exim-Connect-IP: 130.149.7.33
-X-SA-Exim-Mail-From: torsten.sadowski@tu-berlin.de
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 88.191.97.79
+X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_50,RCVD_IN_DNSWL_LOW,
-	RDNS_NONE autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.8 required=5.0 tests=BAYES_50, RDNS_NONE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Naming of different recipes for the same package
+Subject: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,38 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 13:13:27 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Mar 2009 13:23:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I want to turn my Simpad into a satnav. So I did define a custom image 
-including navit. Unluckily, the image is too large. The reason is that speech-
-dispatcher uses espeak AND flite with flite being a fat 7MB package. 
+Hello,
 
-I tried to make my own speech-dispatcher package but how can I name it to 
-coexist with the default? "speech-dispatcher-noflite_0.6.6.bb" breaks the 
-normal ${PN}-${PV} convention and fails during patching:
+I would like to suggest we drop the "qtopia-core-4.3.3" package, which
+is superseeded by qt-embedded (currently at version 4.4.3). I would
+also like to drop the "qtopia4core.bbclass" file, which is superseeded
+by "qt4e.bbclass".
 
-No file to patch.  Skipping patch.
-1 out of 1 hunk ignored
-can't find file to patch at input line 52
-Perhaps you used the wrong -p or --strip option?
-The text leading up to this was:
---------------------------
-|diff -aurp speech-dispatcher-0.6.5/src.old/tests/Makefile.am speech-
-dispatcher-0.6.5/src/tests/Makefile.am
-|--- speech-dispatcher-0.6.5/src.old/tests/Makefile.am	2008-01-02 
-17:06:47.000000000 -0600
-|+++ speech-dispatcher-0.6.5/src/tests/Makefile.am	2008-01-02 
-17:13:55.000000000 -0600
---------------------------
+I have grepped around and cannot find any packages which depend on
+these packages/classes.
 
-Any hints?
+What are your thoughts on the subject?
 
-Cheers, Torsten
+Cheers,
+
+- --
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkm/pAUACgkQCL1n3lVB9EZvNwCgy7xEJKfmsPQ0CXDSyl4o+7+8
+cVEAn0AB7QkK6xOeTOI3F1wsraU4oG1B
+=3DlyJl
+-----END PGP SIGNATURE-----
+
 
 
