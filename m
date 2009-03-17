@@ -1,33 +1,41 @@
-Received: from [130.89.2.8] (helo=smtp.utwente.nl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1LjaW5-0000yZ-2W
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 15:43:49 +0100
-Received: from Powerbook-3.local (vpn006012.vpn.utwente.nl [130.89.6.12])
-	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
-	n2HEgWUQ029905 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 15:42:33 +0100
-Message-ID: <49BFB6D8.5060804@student.utwente.nl>
-Date: Tue, 17 Mar 2009 15:42:32 +0100
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ljadq-0001AM-Eb
+	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 15:51:45 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ljad8-0005lB-Na
+	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 14:50:58 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 17 Mar 2009 14:50:58 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 17 Mar 2009 14:50:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 17 Mar 2009 15:50:43 +0100
+Message-ID: <gpodc3$nos$1@ger.gmane.org>
+References: <200903171538.21499.marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1237246365-32076-1-git-send-email-denis@denix.org>
-In-Reply-To: <1237246365-32076-1-git-send-email-denis@denix.org>
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-SA-Exim-Connect-IP: 130.89.2.8
-X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
+In-Reply-To: <200903171538.21499.marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_50,
-	RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.1 required=5.0 tests=BAYES_40,RCVD_IN_DNSWL_LOW,
+	RDNS_NONE,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/3] rename packages/ to recipes/ per earlier agreement
+Subject: Re: RFC: new stable release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +49,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 14:43:53 -0000
+X-List-Received-Date: Tue, 17 Mar 2009 14:51:45 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 17-03-09 00:32, Denys Dmytriyenko wrote:
-> Renaming packages/ directory to recipes/, as one of the several structural
-> changes, was proposed by Koen[1] and agreed/approved by many. Since Koen
-> currently doesn't have time/ability to do the change, and some people are
-> too eager to wait any longer, he asked me to do it. Please ack/nack.
->
-> [1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/21326
->
-> Denys Dmytriyenko (3):
->    rename packages/ to recipes/ per earlier agreement
->    recipes: fix hardcoded instances of packages/
->    base.bbclass: fix base_get_scmbasepath() to look for recipes/ and
->      fall back to packages/ while parsing BBFILES
+On 17-03-09 15:38, Marcin Juszkiewicz wrote:
 
-Acked-By: Koen Kooi <koen@openembedded.org>
+> Which things needs defining? I have few in mind:
+>
+> 1. Adding new things. This should be possible only by backporting from
+>     OE.dev tree and needs to be Acked by at least 2-3 developers which
+>     use stable branch. New code has to build for at least one distro and
+>     ARM+x86 architectures (unless it is related to one arch or even one
+>     machine).
 
-Now, if you use patchwork, these acks and SOBs get added to your patch 
-automagically :)
+So things must get tested before committing, right?
+
+> 2. Marking recipes as buildable or not. With over 6000 of them it is
+>     really hard to check everything for status. We can remove many old
+>     versions but sometimes they are useful for some projects. I would
+>     rather add things like BUILDABLE_armv4t = "1" into recipe or into
+>     conf/distro/include/${DISTRO}-status.inc file. Similar status for
+>     recipes which are known to not work for some archs.
+
+Just have a CSV file that includes the test coverage for package + 
+machines. We can have one per distro. If needed we can extract the info 
+from tinderbox after we've done a few builds.
+
+> 3. Dealing with non buildable stuff. We have 'nonworking' and 'obsolete'
+>     dirs in metadata - both should be dropped in stable branch. Other
+>     recipes can be marked as not buildable or dropped from branch - I did
+>     not thought yet on it.
+
+That does mean you can't easily resurrect recipes, but seeing that only 
+happens once every 5 years or so..
+
+> 4. Lifetime of branch. Will we do new stable release after 6 months or
+>     after one year? For how long stable branch will be supported by OE
+>     itself? I know that there will be companies which will provide
+>     support for longer time - thats what I do with Poky 'pinky' now.
+
+The previous branch had a 12 + 3 month lifecycle, 12 months of support 
+then 3 months to wind down.
+
+> What do you feel about it? Any opinions or suggestions? Want to join
+> effort?
+
+I certainly want to join the effort, but I fear that creating a stable 
+branch might make some people more inclined to dump even worse crap in 
+.dev, which would not be a good thing. So *if* we go with a stable 
+branch we should make sure .dev well be in a good shape as well.
 
 regards,
 
