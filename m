@@ -1,44 +1,38 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ljcy1-0005xC-TH
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 18:21:32 +0100
-Received: by ewy20 with SMTP id 20so233132ewy.12
+	(envelope-from <trini@kernel.crashing.org>) id 1Ljd3w-0002wb-VY
+	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 18:27:00 +0100
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao106.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090317172600.ISBJ22254.fed1rmmtao106.cox.net@fed1rmimpo03.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Tue, 17 Mar 2009 10:19:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=/dsB/hOBLzQXOWxGTrTJ0piSbVpPbCC4SMGnEclxdlw=;
-	b=HK388qHqkl0VaGvSonJXMIRgF+wHqAG7hLlaEuMWLhjLRA3IyIKzdaAxBlqIcNz59n
-	xJaAR3d7EaD/fcdV/oTIrDSaiUIsPNC3MOR/T2ZtzzAxMklua+GYXP5Wplkrgj3OjDRO
-	gMSpOIrHMi5QlT06r5xe1eHC+nrvkzvzXNWaQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=TeurY5P8GYqe3yl7gJoyXCw7OZUQ/g/PQ50qocDDa0mgBZ3NEbpz2IjvBzP9l+mDAx
-	rnGXEV9KknILH5yTStFfVvDqge1z1hC9ExBDM14lDQ+BaPUeOsQi1FfOGJsVuynyIwOz
-	nA+rXBZw9g/humzjxmE2n+U2DetmepUdlLL14=
+	Tue, 17 Mar 2009 13:26:00 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id UHS11b0024dMFYL04HS1Tc; Tue, 17 Mar 2009 13:26:01 -0400
+X-Authority-Analysis: v=1.0 c=1 a=8li25rVEXPhIwaeO5NcA:9
+	a=ec9pwOMuE1vY2P6Xj8xPKKRHvGoA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 17 Mar 2009 10:26:00 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090317172600.GM26343@smtp.west.cox.net>
+References: <200903171538.21499.marcin@juszkiewicz.com.pl>
+	<49BFC107.5050806@dls.net>
+	<20090317163556.GK26343@smtp.west.cox.net>
+	<1237309579.20770.17.camel@homestead>
 MIME-Version: 1.0
-Received: by 10.210.141.17 with SMTP id o17mr179501ebd.20.1237310394779; Tue, 
-	17 Mar 2009 10:19:54 -0700 (PDT)
-In-Reply-To: <49BFB6D8.5060804@student.utwente.nl>
-References: <1237246365-32076-1-git-send-email-denis@denix.org>
-	<49BFB6D8.5060804@student.utwente.nl>
-Date: Tue, 17 Mar 2009 18:19:54 +0100
-Message-ID: <ac9c93b10903171019l3074c648r1ba2bfff23a31aac@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.172
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <1237309579.20770.17.camel@homestead>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.40
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 0/3] rename packages/ to recipes/ per earlier agreement
+Subject: Re: RFC: new stable release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 17:21:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Mar 2009 17:27:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2009/3/17 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 17-03-09 00:32, Denys Dmytriyenko wrote:
->>
->> Renaming packages/ directory to recipes/, as one of the several structur=
-al
->> changes, was proposed by Koen[1] and agreed/approved by many. Since Koen
->> currently doesn't have time/ability to do the change, and some people ar=
-e
->> too eager to wait any longer, he asked me to do it. Please ack/nack.
->>
->> [1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/21326
->>
->> Denys Dmytriyenko (3):
->> =A0 rename packages/ to recipes/ per earlier agreement
->> =A0 recipes: fix hardcoded instances of packages/
->> =A0 base.bbclass: fix base_get_scmbasepath() to look for recipes/ and
->> =A0 =A0 fall back to packages/ while parsing BBFILES
->
-> Acked-By: Koen Kooi <koen@openembedded.org>
->
-> Now, if you use patchwork, these acks and SOBs get added to your patch
-> automagically :)
->
-> regards,
->
-> Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-Acked-By: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+On Tue, Mar 17, 2009 at 05:06:19PM +0000, Shane Dixon wrote:
+> On Tue, 2009-03-17 at 09:35 -0700, Tom Rini wrote:
+> 
+> > 
+> > I'd like to add Ubuntu 8.10.  Further, for each of these reference host
+> > configurations we need to say what's installed, preferably by meta
+> > packages (in Ubuntu's case, say ubuntu-minimal + ubuntu-standard) and
+> > specific packages ('gcc', 'g++', etc..).  And I too can help with the
+> > env.  FWIW, a chroot should be good enough for this..
+> > 
+> 
+> 8.04 might be a better target for a "reference machine" because it's an
+> LTS release (although I personally use 8.10).  I think that the goal
+> should be solid support for the longest (within reason of course) amount
+> of time.  If I intend to write a document for a vendor explaining how to
+> use OE as a build environment for their code, the intent should be that
+> I don't have to re-write it again and again over the course of the next
+> year (Ubuntu releases every 6 months).  
 
-if someone is interested in my blessing :-) :-) :-)
+8.04 works for me, really.  The same set of packages actually works for
+me on 7.10/8.04/8.10, and I hope 9.04 :)
 
-Frans
+-- 
+Tom Rini
 
 
