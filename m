@@ -1,29 +1,30 @@
-Received: from [88.191.97.79] (helo=legolas.polyconseil.fr)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LjZFw-0002uE-NO
+	(envelope-from <mickey@vanille-media.de>) id 1LjZSl-00034M-W0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 14:23:01 +0100
-Received: from [192.168.95.60] (anj75-1-81-57-0-22.fbx.proxad.net [81.57.0.22])
-	by legolas.polyconseil.fr (Postfix) with ESMTPSA id DAA7E70B6B
+	Tue, 17 Mar 2009 14:36:15 +0100
+Received: from vanille.zapto.org (e180150028.adsl.alicedsl.de [85.180.150.28])
+	by drlauer-research.com (Postfix) with ESMTP id 0DCB1584140
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 14:22:10 +0100 (CET)
-Message-ID: <49BFA406.6030802@bolloretelecom.eu>
-Date: Tue, 17 Mar 2009 14:22:14 +0100
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.19) Gecko/20090103 Thunderbird/2.0.0.19 Mnenhy/0.7.5.0
-MIME-Version: 1.0
+	Tue, 17 Mar 2009 15:01:15 +0100 (CET)
+Date: Tue, 17 Mar 2009 14:35:26 +0100
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 88.191.97.79
-X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
+Message-ID: <20090317143526.3e79150c@vanille.zapto.org>
+In-Reply-To: <49BFA406.6030802@bolloretelecom.eu>
+References: <49BFA406.6030802@bolloretelecom.eu>
+Organization: Vanille-Media
+X-Mailer: Claws Mail 3.5.0 (GTK+ 2.14.4; i486-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=5.0 tests=BAYES_50, RDNS_NONE,
-	SPF_NEUTRAL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
+Subject: Re: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,38 +38,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 13:23:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Mar 2009 13:36:16 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Sounds good to me, feel free to go ahead.
 
-Hello,
-
-I would like to suggest we drop the "qtopia-core-4.3.3" package, which
-is superseeded by qt-embedded (currently at version 4.4.3). I would
-also like to drop the "qtopia4core.bbclass" file, which is superseeded
-by "qt4e.bbclass".
-
-I have grepped around and cannot find any packages which depend on
-these packages/classes.
-
-What are your thoughts on the subject?
-
-Cheers,
-
-- --
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkm/pAUACgkQCL1n3lVB9EZvNwCgy7xEJKfmsPQ0CXDSyl4o+7+8
-cVEAn0AB7QkK6xOeTOI3F1wsraU4oG1B
-=3DlyJl
------END PGP SIGNATURE-----
-
+:M:
 
 
