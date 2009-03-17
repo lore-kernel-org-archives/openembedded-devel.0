@@ -1,42 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LjevV-0007E5-0p
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 20:26:49 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ljeuj-0000Y8-G0
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 19:25:25 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 17 Mar 2009 19:25:25 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 17 Mar 2009 19:25:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 17 Mar 2009 20:25:14 +0100
-Message-ID: <gpoter$l42$1@ger.gmane.org>
-References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
-In-Reply-To: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <denis@denix.org>) id 1Ljewl-0007Hg-SW
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Mar 2009 20:27:38 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KGO0009Z0NV8C70@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	17 Mar 2009 14:26:20 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4105D6B83A8; Tue,
+	17 Mar 2009 15:26:19 -0400 (EDT)
+Date: Tue, 17 Mar 2009 15:26:19 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090317192619.GA15734@denix.org>
+References: <1237246365-32076-1-git-send-email-denis@denix.org>
+	<49BEF545.4040608@dls.net>
+MIME-version: 1.0
+In-reply-to: <49BEF545.4040608@dls.net>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.19
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Level: **
+X-Spam-Status: No, score=2.1 required=5.0 tests=AWL,BAYES_50,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Package Maintenance
+Subject: Re: [PATCH 0/3] rename packages/ to recipes/ per earlier	agreement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,47 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 19:26:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Mar 2009 19:27:39 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 17-03-09 20:18, Chris Larson wrote:
-> I'd like to propose re-establishing MAINTAINER, set per package, to
-> individuals, or left as default for packages which aren't directly
-> maintained.
->
-> Doing this would:
-> - Facilitate dumping a list of unmaintained packages to give to new
-> users wanting to volunteer to help us, but not knowing how to
-> contribute.
-> - Return some individual responsibility to the project, giving one
-> person the blame for brokenness for that package, as well as giving
-> responsibility for pushing patches upstream to that person.  In my
-> opinion, a number of the recent issues in the project are due, in
-> part, to a lack of that individual responsibility.  Everything is
-> fuzzy, determined by a group, instead.
-> - Allow us to physically separate, in the repository, those packages
-> which get the most attention (are maintained) from those which get the
-> least (maintained by the entire team).  We could finally be *honest*
-> with our users about what we work on, telling them that the packages
-> which are maintained by the team are in need of an individual
-> maintainer, and get less attention, so bugs there will be fixed more
-> slowly, and there are no guarantees on functionality there.  I think
-> it'd be better to have a core set of *functional* recipes than have a
-> huge set of "might work, might not" recipes as things stand today.  In
-> my opinion, this would be more likely to give new users stability than
-> creating a stable branch, while making better use of our limited
-> manpower, rather than increasing the load drastically.
->
-> Opinions?
+On Mon, Mar 16, 2009 at 07:56:37PM -0500, Mike (mwester) wrote:
+> 
+> Denys Dmytriyenko wrote:
+> > Renaming packages/ directory to recipes/, as one of the several structural
+> > changes, was proposed by Koen[1] and agreed/approved by many. Since Koen
+> > currently doesn't have time/ability to do the change, and some people are
+> > too eager to wait any longer, he asked me to do it. Please ack/nack.
+> 
+> Ack.   But can you please tag the revision immediately preceeding the
+> commit of this change so we have some easy-to-reference point[*] in the
+> history?
 
-As long as it doesn't get put in resulting packages in any way, it's 
-fine by me.
+Done. mv-packages-to-recipes-pre and mv-packages-to-recipes-post are the tags 
+applied right before and right after the change.
 
-regards,
+> [*] In accordance with the laws of Murphy, doing this will ensure that
+> nobody will ever actually have to use this easy-to-reference point.
 
-Koen
+Good point! Let's hope.
 
-
+-- 
+Denys
 
 
