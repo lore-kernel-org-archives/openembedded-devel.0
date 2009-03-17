@@ -1,38 +1,35 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [204.2.163.5] (helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Ljcc4-0005Jh-WC
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 17:58:23 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090317165714.BIIP10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
+	(envelope-from <Shane.Dixon@atmel.com>) id 1Ljcku-0005Xr-1L
+	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 18:07:37 +0100
+Received: from csomb01.corp.atmel.com ([10.95.30.150])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id n2HH54d7009824
 	for <openembedded-devel@openembedded.org>;
-	Tue, 17 Mar 2009 12:57:14 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id UGxD1b0044dMFYL04GxDLb; Tue, 17 Mar 2009 12:57:13 -0400
-X-Authority-Analysis: v=1.0 c=1 a=GN_yKGkEFO0A:10 a=74_OhrOYAAAA:8
-	a=4KWNPUysKpfnuzsMjkAA:9 a=zEsT1Xv0uf7f2txDm5NyF_NTqCgA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 17 Mar 2009 09:57:13 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	Tue, 17 Mar 2009 10:05:04 -0700 (PDT)
+Received: from 10.95.105.47 ([10.95.105.47]) by csomb01.corp.atmel.com
+	([10.95.30.150]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue, 17 Mar 2009 17:06:19 +0000
+Received: from homestead.cso.atmel.com by csomb01.corp.atmel.com;
+	17 Mar 2009 17:06:19 +0000
+From: Shane Dixon <shane.dixon@atmel.com>
 To: openembedded-devel@openembedded.org
-Message-ID: <20090317165710.GL26343@smtp.west.cox.net>
-References: <49BF280A.7090705@tait.co.nz>
-	<20090317050424.GJ26343@smtp.west.cox.net>
-	<1237308009.20770.11.camel@homestead>
-MIME-Version: 1.0
-In-Reply-To: <1237308009.20770.11.camel@homestead>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.39
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+In-Reply-To: <20090317163556.GK26343@smtp.west.cox.net>
+References: <200903171538.21499.marcin@juszkiewicz.com.pl>
+	<49BFC107.5050806@dls.net> <20090317163556.GK26343@smtp.west.cox.net>
+Organization: Atmel
+Date: Tue, 17 Mar 2009 17:06:19 +0000
+Message-Id: <1237309579.20770.17.camel@homestead>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 204.2.163.5
+X-SA-Exim-Mail-From: Shane.Dixon@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	WHOIS_NETSOLPR autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Git SRC_TARBALL_STASH filename
+Subject: Re: RFC: new stable release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 16:58:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Mar 2009 17:08:11 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 17, 2009 at 04:40:09PM +0000, Shane Dixon wrote:
+On Tue, 2009-03-17 at 09:35 -0700, Tom Rini wrote:
 
-> Does SRC_TARBALL_STASH replace the PREMIRRORS variable?  I used to use a
-> variable in my local.conf that was similar to the following:
 > 
-> PREMIRRORS = "(ftp|https?)$://.*/.*/ http://server.com/openembedded/"
+> I'd like to add Ubuntu 8.10.  Further, for each of these reference host
+> configurations we need to say what's installed, preferably by meta
+> packages (in Ubuntu's case, say ubuntu-minimal + ubuntu-standard) and
+> specific packages ('gcc', 'g++', etc..).  And I too can help with the
+> env.  FWIW, a chroot should be good enough for this..
 > 
-> Is SRC_TARBALL_STASH the better way to do this?
 
-I believe the problem is that you need to set both to cover all cases.
+8.04 might be a better target for a "reference machine" because it's an
+LTS release (although I personally use 8.10).  I think that the goal
+should be solid support for the longest (within reason of course) amount
+of time.  If I intend to write a document for a vendor explaining how to
+use OE as a build environment for their code, the intent should be that
+I don't have to re-write it again and again over the course of the next
+year (Ubuntu releases every 6 months).  
+
+I think that one of the greatest reasons for a good solid branch is that
+documentation can truly be reliable because we're not aiming at a moving
+target.
 
 -- 
-Tom Rini
+Shane Dixon
+Linux Engineer
+Atmel Corporation
+Office: 719.540.1123
+E-mail: shane.dixon@atmel.com
 
 
