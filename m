@@ -1,32 +1,42 @@
-Received: from [63.139.215.211] (helo=maxie.russound.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <jims@russound.com>) id 1LjggR-0006wf-Ch
+Received: from [217.146.130.193] (helo=chlothar.bnv-bamberg.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1LjhON-0003jj-En
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 22:18:56 +0100
-Received: from kmfms (unknown [10.0.3.67])
-	by maxie.russound.com (Postfix) with ESMTP id 030E6C98619
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2009 17:14:51 -0400 (EDT)
-Date: Tue, 17 Mar 2009 17:17:05 -0400
-From: Jim Sheldon <jims@russound.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20090317171705.208a7d31@kmfms>
-In-Reply-To: <49BFADB1.3090207@bolloretelecom.eu>
-References: <49BFA406.6030802@bolloretelecom.eu>
-	<20090317143526.3e79150c@vanille.zapto.org>
-	<49BFADB1.3090207@bolloretelecom.eu>
-X-Mailer: Claws Mail 3.5.0 (GTK+ 2.12.11; i486-pc-linux-gnu)
+	Tue, 17 Mar 2009 23:04:51 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bnv-bamberg.de; s=mail2008; h=Subject:From:To:In-Reply-To:
+	References:Content-Type:Date:Message-Id:Mime-Version:
+	Content-Transfer-Encoding; bh=kZi1Ivut8AJvtyVjDjwoiLr/u2EG7nQkXH
+	1J49uYP4k=; b=sdoTFWaLVdJM6qvw36nW20KGwNqd5Id3oEwe84xNsXiQrGmxAt
+	F8F5v5F5NYAxOdwfihdNf7xrTx3opazLAk58hVesF3MRJEzGEoxi4EyEcWw3fXta
+	uOMQjPVFOu4u8KrG/Va9vFtxk4z7X412ArWCk+glBwrLfkeLdidxlNcdg=
+Received: from localhost ([127.0.0.1] helo=chlothar.bnv-bamberg.de)
+	by chlothar.bnv-bamberg.de with esmtp id 1LjhNc-0004je-0z 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Mar 2009 23:03:24 +0100
+Received: from w3d50.w.pppool.de ([89.58.61.80] helo=[192.168.2.5])
+	by chlothar.bnv-bamberg.de with esmtpa (Exim 4.69)
+	(envelope-from <ba0547@bnv-bamberg.de>) id 1LjhNb-0004hI-4s
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Mar 2009 23:03:23 +0100
+From: harald <ba0547@bnv-bamberg.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1236187501.10602.130.camel@andromeda>
+References: <1236178967.4249.7.camel@debian.dorg.org>
+	<1236187501.10602.130.camel@andromeda>
+Date: Tue, 17 Mar 2009 23:03:12 +0100
+Message-Id: <1237327392.18278.6.camel@debian.dorg.org>
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 63.139.215.211
-X-SA-Exim-Mail-From: jims@russound.com
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 217.146.130.193
+X-SA-Exim-Mail-From: ba0547@bnv-bamberg.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_FAIL
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
+Subject: Re: Linux/Opie/Angstroem on Fujitsu Siemens Loox 420
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,68 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 21:18:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Mar 2009 22:05:04 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Greetings!  I had a couple of Qt recipes that used "inherit
-qtopia4core" and worked just fine.
+Am Mittwoch, den 04.03.2009, 18:25 +0100 schrieb Michael 'Mickey' Lauer:
+> Am Mittwoch, den 04.03.2009, 16:02 +0100 schrieb harald:
+> > managed to build a complete opie-image with
+> > openembedded. Read that my Fujitsu Siemens Pocket Loox is very similar
+> > to HP Ipaq 4000. So i built system for this machine type. Unfortunately
+> > the system does not start througth. It hangs after "freeing init
+> > memory:88k", then some lines appear with some bluetooth informations.
+> > That's all.
+> 
+> Sounds like an EABI/OABI kernel/userland problem. Make sure your kernel
+> contains the ABI support you build userland with.
+> 
 
-Now if I "inherit qt4e" they fail with something like this:
+Hello,
 
-| NOTE: using qmake spec
-in /home/jim/Projects/gumstix/oe/tmp/cross/armv7a/share/qt4/mkspecs/linux-g=
-nueabi-oe-g++,
-using profiles ''
-| NOTE: qmake prevar substitution:   QT_LIBINFIX=3DE |
-Failure to read QMAKESPEC conf
-file /home/jim/Projects/gumstix/oe/tmp/cross/armv7a/share/qt4/mkspecs/linux=
--gnueabi-oe-g++/qmake.conf.
-| Error processing project file: flickcharm.pro
-| FATAL: Error
-calling /home/jim/Projects/gumstix/oe/tmp/staging/i686-linux/usr/bin/qmake2
-on flickcharm.pro
+now i have compiled a kernel with EABI/OABI support for my loox. it
+workes with all precomiled images from angstrom org or
+http://amethyst.openembedded.net/~koen/narcissus/
 
-Is tmp/cross/armv7a/share/qt4/mkspecs/linux-gnueabi-oe-g++ the correct
-path?  I have a tmp/cross/i686/share/qt4/mkspecs/linux-gnueabi-oe-g++
-area, but not tmp/cross/armv7a/share/qt4/mkspecs/linux-gnueabi-oe-g++.
+unfortunately it does not work for any kind of root image i created with
+OE. none of those worked yet. i don't think that this is a problem of my
+kernel now. the built in kernel of some rootfs images does also not
+start and seems to hang with the same message/point.
 
-I'm assuming I just need to do something more than just "inherit qt4e"
-in my recipe?  Perhaps I'm seeing a bug specific to the gumstix branch?
+hope someone will be able to help me. 
 
-I grepped around but couldn't find another recipe that inherits qt4e to
-use as an example.
+thanks.
 
-Thanks!
-
-Jim
-
-On Tue, 17 Mar 2009 10:03:29 -0400
-Jeremy Lain=C3=A9 <jeremy.laine@bolloretelecom.eu> wrote:
-
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Michael 'Mickey' Lauer wrote:
-> > Sounds good to me, feel free to go ahead.
-> OK, done.
->=20
-> - --
-> Jeremy LAINE
-> Bollor=C3=A9 telecom | 11bis, rue Scribe | F-75009 Paris
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.9 (GNU/Linux)
-> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
->=20
-> iEYEARECAAYFAkm/rbEACgkQCL1n3lVB9EYlCQCeNiXedgURRFihAWGTfzEUrVoG
-> SGQAoL6/0LcGFYJ2j9cOW5o/F9Qj8/sA
-> =3Dq/W8
-> -----END PGP SIGNATURE-----
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
