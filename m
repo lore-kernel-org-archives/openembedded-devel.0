@@ -1,32 +1,38 @@
-Received: from [81.228.8.164] (helo=pne-smtpout2-sn2.hy.skanova.net)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Ljca6-0005Hl-Rb
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 17:56:49 +0100
-Received: from aeglos (194.111.81.229) by pne-smtpout2-sn2.hy.skanova.net
-	(7.3.129) (authenticated as u82406564)
-	id 4873CA9503C8B49A for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 17:55:12 +0100
-Message-ID: <9B414415A7024345895304717D1B3CCF@aeglos>
-From: "Ulf Samuelsson" <ulf.samuelsson@atmel.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <20090313145610.GA26373@denix.org><018101c9a3f0$7f5b2cd0$5e3018ac@Glamdring><20090313160732.GA26615@denix.org>
-	<000001c9a60e$28fd4650$753018ac@GLAMDRING>
-Date: Tue, 17 Mar 2009 17:28:27 +0100
+	(envelope-from <trini@kernel.crashing.org>) id 1Ljcc4-0005Jh-WC
+	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 17:58:23 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090317165714.BIIP10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 17 Mar 2009 12:57:14 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id UGxD1b0044dMFYL04GxDLb; Tue, 17 Mar 2009 12:57:13 -0400
+X-Authority-Analysis: v=1.0 c=1 a=GN_yKGkEFO0A:10 a=74_OhrOYAAAA:8
+	a=4KWNPUysKpfnuzsMjkAA:9 a=zEsT1Xv0uf7f2txDm5NyF_NTqCgA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 17 Mar 2009 09:57:13 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090317165710.GL26343@smtp.west.cox.net>
+References: <49BF280A.7090705@tait.co.nz>
+	<20090317050424.GJ26343@smtp.west.cox.net>
+	<1237308009.20770.11.camel@homestead>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5512
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-X-SA-Exim-Connect-IP: 81.228.8.164
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+In-Reply-To: <1237308009.20770.11.camel@homestead>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.39
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	WHOIS_NETSOLPR autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: PARALLEL_MAKE
+Subject: Re: Git SRC_TARBALL_STASH filename
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,104 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 16:56:57 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=response
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Mar 2009 16:58:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Tue, Mar 17, 2009 at 04:40:09PM +0000, Shane Dixon wrote:
 
+> Does SRC_TARBALL_STASH replace the PREMIRRORS variable?  I used to use a
+> variable in my local.conf that was similar to the following:
+> 
+> PREMIRRORS = "(ftp|https?)$://.*/.*/ http://server.com/openembedded/"
+> 
+> Is SRC_TARBALL_STASH the better way to do this?
 
->>> The Core i7 has 4 cores and each core has two virtual CPUs so the system
->>> sees 8 CPUs.
->>> I saw some commone from someone claiming that if
->>> you have n CPUs, then Buildroot should use make -j`2*n`.
->>>
->>> I thought about this, and came up with the following explanation.
->>> If you have one job per CPU, then  whenever you have to wait for the
->>> harddisk, you stall this CPU.
->>> If you have several jobs per CPU, then you can gain some time
->>> by running the second job while the first job was waiting for the hard
->>> disk.
->>>
->>> Whether this works in practice, I cannot say, but it would be 
->>> interesting
->>> to have some real proof.
->>
->> First of all, I believe -j`2*n` is very agressive. I've seen other 
->> suggestions
->> of using -j`n+1` or -j`n+2`.
->> Second, your Core i7 still has 4 real cores. Even though HyperThreading
->> presents each core as 2 virtual ones, those are not real 8 cores. And
->> according to [1], sometimes using HyperThreading may degrade the overall
->> performance...
->>
->> So, you should experiment with your settings and find a sweet spot, which
->> maybe somewhere between 4 and 16 threads :)
->>
->
-> Yes, I know,
-> Maybe it is a good idea if the result of a build is published somewhere,
-> so that others do not have to go through this process.
->
-> Right now, openembedded does not even build for me,
-> since the native perl build fails :-(
->
->> [1] http://en.wikipedia.org/wiki/Hyper-threading
->>
->
+I believe the problem is that you need to set both to cover all cases.
 
-
-I now managed to build the Angstrom image for the AT91SAM9263 by applying
-a few fixes present in the ulf/linux branch.
-(Did not load on H/W yet though)
-
-perl-native was "fixed" by not building the library which crashed.
-libtheora was fixd, not to use docs/examples.
-busybox updated to 1.13.3
-u-boot, gpsd was set to PARALLEL_MAKE = ""
-u-boot updated to 2009.01
-linux-2.6.28
-at91bootstrap-2.10
-
-Building with PARALLEL_MAKE & Multiple threads was not smooth.
-The build crashed several times, due to erros
-caused by parallellism. "gettext", "gpsd" and "u-boot" were culprits.
-
-u-boot is NOT built cleanly, even after PARALLEL_MAKE was set to "".
-The actual compile completes and generates an u-boot.bin
-but this is not deployed to the result directory.
-There are logs for different stages, but after the compile, they exist, but 
-are empty.
-
-If I remove all the stamps and "bitbake -b <u-boot>" afterwards
-then the build completes correctly, and there is an u-boot-at91sam9263ek.bin
-in the result directory.
-
-Can it be so, that a stage is started, before the previous stage has been 
-completed???
-
-
-
----------------------
-BTW: The total buildtime was around 2 hours. There is some overhead
-since the build was restarted 3-4 times, and local.conf was changed once.
-I started the build with PARALLEL_MAKE = "-j2" and BB_NUMBER_THREADS=8.
-
-I noticed that having a lot of threads helps most of the time,
-since the CPUs were executing at max frequency.
-
-When the cross compiler, was built,it was different,
-most of the cores were not used with this configuration.
-2-3 max while compiling gcc.
-
-Maybe the best approach is to build the Angstrom in several stages
-with different settings for parallelism.
-
-
-
-Best Regards
-Ulf Samuelsson 
-
-
+-- 
+Tom Rini
 
 
