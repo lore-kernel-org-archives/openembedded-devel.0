@@ -1,49 +1,45 @@
-Received: from [209.85.198.248] (helo=rv-out-0708.google.com)
+Received: from [202.37.96.11] (helo=gatekeeper.tait.co.nz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LjPJW-00020b-Kc
+	(envelope-from <douglas.royds@tait.co.nz>) id 1LjR0B-0005bk-HX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 03:46:00 +0100
-Received: by rv-out-0708.google.com with SMTP id c5so1615103rvf.12
+	Tue, 17 Mar 2009 05:34:12 +0100
+Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
+	by localhost.tait.co.nz (Postfix) with ESMTP id 6C26346753
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2009 19:45:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=R2r9YkrutqMrh6HzW+YAoWxVLIIKcVnnx0VwiIDlhts=;
-	b=AgEHe/XGHXtt53QYM2/kOLxj/JSf79LFDFR7cdTEiybYnS9Lyb/vWX5siMJmlYLOBg
-	flt7FaA9S0uyYz/ef+J2HYdOFyvsN9VBfWSpPvzhLpYfRsaHqKoS/DdYjvcZeDT7Lom4
-	dW8Eu/KPwtXNwQWwcUZ4IUdiCICCN98GxBsx0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:cc:references:in-reply-to
-	:mime-version:content-type:content-transfer-encoding:message-id;
-	b=bsTuxb5d/sHRTf2RWGbqKKdjvFtcN0PxHOSFC7em4w610EWuEINEdtmp4k99isJ6a1
-	krWpYsjajmbb9fOIsBW4jj5Cw/+gvgbdhHN8MfavT0iyG0o76xusTiMCsquMQ8wbELPe
-	S30MhUBc0Y9RRjHuSI2Cvwk771W5RJKu4Ltm8=
-Received: by 10.114.153.2 with SMTP id a2mr3831735wae.170.1237257916722;
-	Mon, 16 Mar 2009 19:45:16 -0700 (PDT)
-Received: from morpheus.localnet (adsl-71-146-2-112.dsl.pltn13.sbcglobal.net
-	[71.146.2.112])
-	by mx.google.com with ESMTPS id n30sm5693126wag.56.2009.03.16.19.45.15
-	(version=SSLv3 cipher=RC4-MD5); Mon, 16 Mar 2009 19:45:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 17 Mar 2009 17:33:22 +1300 (NZDT)
+Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])by 
+	gatekeeper.tait.co.nz (Postfix) with ESMTP id 5C3F446752for 
+	<openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2009 17:33:19 
+	+1300 (NZDT)
+Received: from conversion-daemon.sunstrike.tait.co.nz by 
+	sunstrike.tait.co.nz(Sun Java System Messaging Server 6.1 (built Apr 28
+	2004))id <0KGM00001TMH6J00@sunstrike.tait.co.nz>(original mail from 
+	douglas.royds@tait.co.nz)for openembedded-devel@lists.openembedded.org; 
+	Tue,17 Mar 2009 17:33:19 +1300 (NZDT)
+Received: from [172.25.116.23] by sunstrike.tait.co.nz(Sun Java System 
+	Messaging Server 6.1 (built Apr 28 2004))with ESMTP id 
+	<0KGM00G66VBHWB50@sunstrike.tait.co.nz> 
+	foropenembedded-devel@lists.openembedded.org; Tue,17 Mar 2009 17:33:18 
+	+1300 (NZDT)
+Date: Tue, 17 Mar 2009 17:33:14 +1300
+From: Douglas Royds <douglas.royds@tait.co.nz>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2009 19:45:12 -0700
-User-Agent: KMail/1.11.1 (Linux/2.6.28-10-generic; KDE/4.2.1; x86_64; ; )
-References: <1237246365-32076-1-git-send-email-denis@denix.org>
-	<1237246365-32076-3-git-send-email-denis@denix.org>
-In-Reply-To: <1237246365-32076-3-git-send-email-denis@denix.org>
-MIME-Version: 1.0
-Message-Id: <200903161945.13973.raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.198.248
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-id: <49BF280A.7090705@tait.co.nz>
+MIME-version: 1.0
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+X-imss-version: 2.053
+X-imss-result: Passed
+X-imss-approveListMatch: *@tait.co.nz
+X-SA-Exim-Connect-IP: 202.37.96.11
+X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE,SPF_PASS
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_40,HTML_MESSAGE,
+	RDNS_NONE,UNPARSEABLE_RELAY autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] recipes: fix hardcoded instances of packages/
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Git SRC_TARBALL_STASH filename
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,109 +53,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 02:46:01 -0000
-X-Groupsio-MsgNum: 8471
-Content-Type: multipart/signed; boundary="nextPart24769972.IFcs0DV9nW";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Mar 2009 04:34:12 -0000
+Content-Type: text/plain; format=flowed; charset=ISO-8859-1
+Content-Transfer-Encoding: 7BIT
 
---nextPart24769972.IFcs0DV9nW
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Working behind a firewall that doesn't allow Git access (except over 
+http). I've set SRC_TARBALL_STASH so that we only have to download the 
+appropriate source tarball (manually) once.
 
-On Monday 16 March 2009 16:32:43 Denys Dmytriyenko wrote:
-> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-> ---
->  recipes/kexecboot/linux-kexecboot.inc |    2 +-
->  recipes/libffi/libffi_2.0+gcc4.3.2.bb |    2 +-
->  recipes/libffi/libffi_3.0.8.bb        |    2 +-
->  recipes/mamona/gcc-noemu_4.1.1.bb     |    2 +-
->  recipes/mamona/gcc-noemu_4.1.2.bb     |    2 +-
->  5 files changed, 5 insertions(+), 5 deletions(-)
->=20
-> diff --git a/recipes/kexecboot/linux-kexecboot.inc b/recipes/kexecboot/li=
-nux-kexecboot.inc
-> index 2056758..31b6377 100644
-> --- a/recipes/kexecboot/linux-kexecboot.inc
-> +++ b/recipes/kexecboot/linux-kexecboot.inc
-> @@ -6,7 +6,7 @@ SRC_URI =3D "file://defconfig"
->  LOGO_SIZE =3D '${@base_conditional("GUI_MACHINE_CLASS", "bigscreen", "vg=
-a", "qvga", d)}'
->  SRC_URI +=3D "file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2"
-> =20
-> -require packages/linux/linux.inc
-> +require recipes/linux/linux.inc
-> =20
->  DONT_CHECK_KERNELSIZE =3D ""
->  INITRAMFS_IMAGE =3D "initramfs-kexecboot-image"
-> diff --git a/recipes/libffi/libffi_2.0+gcc4.3.2.bb b/recipes/libffi/libff=
-i_2.0+gcc4.3.2.bb
-> index 5a2ae1a..be98050 100644
-> --- a/recipes/libffi/libffi_2.0+gcc4.3.2.bb
-> +++ b/recipes/libffi/libffi_2.0+gcc4.3.2.bb
-> @@ -1,4 +1,4 @@
-> -require packages/gcc/gcc-common.inc
-> +require recipes/gcc/gcc-common.inc
->  SECTION =3D "libs"
->  DESCRIPTION =3D "Foreign Function Interface library"
->  LICENSE =3D "libffi"
-> diff --git a/recipes/libffi/libffi_3.0.8.bb b/recipes/libffi/libffi_3.0.8=
-=2Ebb
-> index 0bad49b..cef09ae 100644
-> --- a/recipes/libffi/libffi_3.0.8.bb
-> +++ b/recipes/libffi/libffi_3.0.8.bb
-> @@ -1,4 +1,4 @@
-> -require packages/gcc/gcc-common.inc
-> +require recipes/gcc/gcc-common.inc
-> =20
->  SECTION =3D "libs"
->  DESCRIPTION =3D "Foreign Function Interface library"
-> diff --git a/recipes/mamona/gcc-noemu_4.1.1.bb b/recipes/mamona/gcc-noemu=
-_4.1.1.bb
-> index 1582598..56ba167 100644
-> --- a/recipes/mamona/gcc-noemu_4.1.1.bb
-> +++ b/recipes/mamona/gcc-noemu_4.1.1.bb
-> @@ -57,7 +57,7 @@ JAVA_arm =3D ""
->  JAVA =3D ""
-> =20
->  LANGUAGES =3D "c,c++${FORTRAN}${JAVA}"
-> -require packages/gcc/gcc-${PV}.inc
-> +require recipes/gcc/gcc-${PV}.inc
-> =20
->  EXTRA_OECONF +=3D "--disable-libspp --with-slibdir=3D\"/lib\""
-> =20
-> diff --git a/recipes/mamona/gcc-noemu_4.1.2.bb b/recipes/mamona/gcc-noemu=
-_4.1.2.bb
-> index 9015e10..44b1d44 100644
-> --- a/recipes/mamona/gcc-noemu_4.1.2.bb
-> +++ b/recipes/mamona/gcc-noemu_4.1.2.bb
-> @@ -77,7 +77,7 @@ JAVA_arm =3D ""
-> =20
-> =20
->  LANGUAGES =3D "c,c++${FORTRAN}${JAVA}"
-> -require packages/gcc/gcc-${PV}.inc
-> +require recipes/gcc/gcc-${PV}.inc
-> =20
-> =20
->  EXTRA_OECONF +=3D " --disable-libssp --with-slibdir=3D\"/lib\" "
+While building mtd-utils, BitBake is trying to fetch from the tarball stash:
 
-Ack. A small nit you also need to make necessary changes in conf files
-I guess local.conf.sample etc will need to be changed.
-=2D-=20
-Khem Raj
+    http://.../git_git.infradead.org.mtd-utils.git.tar.gz
 
---nextPart24769972.IFcs0DV9nW
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+Instead of:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
+    http://.../git_git.infradead.org.mtd-utils.git_ea429635388f7bb53f62c41ec3d5ccf5fa207370.tar.gz
 
-iEYEABECAAYFAkm/DrkACgkQHnJKy6V6em71bgCeJkolBDOBqZ/iQXDvn1refel2
-aZwAn1N/Gp3Xbe9jXhLqqZFldNFhnIgi
-=d0di
------END PGP SIGNATURE-----
+The following patch appears to do the job, but I'm not confident this is 
+the right fix. I notice that all the other fetchers use ud.localfile, 
+which already has the correct filename.
 
---nextPart24769972.IFcs0DV9nW--
+Index: lib/bb/fetch/git.py
+===================================================================
+--- lib/bb/fetch/git.py    (revision 16639)
++++ lib/bb/fetch/git.py    (working copy)
+@@ -73,7 +73,7 @@
+ 
+         gitsrcname = '%s%s' % (ud.host, ud.path.replace('/', '.'))
+ 
+-        repofilename = 'git_%s.tar.gz' % (gitsrcname)
++        repofilename = 'git_%s_%s.tar.gz' % (gitsrcname, ud.tag)
+         repofile = os.path.join(data.getVar("DL_DIR", d, 1), repofilename)
+         repodir = os.path.join(data.expand('${GITDIR}', d), gitsrcname)
+
+
+Suggestions?
+Douglas.
+
+
+
+
+
+
+=======================================================================
+This email, including any attachments, is only for the intended
+addressee.  It is subject to copyright, is confidential and may be
+the subject of legal or other privilege, none of which is waived or
+lost by reason of this transmission.
+If the receiver is not the intended addressee, please accept our
+apologies, notify us by return, delete all copies and perform no
+other act on the email.
+Unfortunately, we cannot warrant that the email has not been
+ altered or corrupted during transmission.
+=======================================================================
+
+
