@@ -1,33 +1,25 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LjfZf-0008O6-7G
+	(envelope-from <Phil.Black@hillcrestlabs.com>) id 1LjfeV-000063-CG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Mar 2009 21:07:46 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGO00JNC2JILWC0@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	17 Mar 2009 15:06:55 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D18156B83A8; Tue,
-	17 Mar 2009 16:06:53 -0400 (EDT)
-Date: Tue, 17 Mar 2009 16:06:53 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 17 Mar 2009 21:12:46 +0100
+X-AuditID: 0a1e000a-b7b75ae0000056bf-81-49c004097cc1
+From: Philip Black <phil.black@hillcrestlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090317200653.GD15734@denix.org>
-References: <000001c9a60e$28fd4650$753018ac@GLAMDRING>
-	<9B414415A7024345895304717D1B3CCF@aeglos>
-MIME-version: 1.0
-In-reply-to: <9B414415A7024345895304717D1B3CCF@aeglos>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Tue, 17 Mar 2009 16:11:53 -0400
+Message-Id: <1237320713.1422.7.camel@pblack-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-Brightmail-Tracker: AAAAAA==
+X-SA-Exim-Connect-IP: 12.173.51.132
+X-SA-Exim-Mail-From: Phil.Black@hillcrestlabs.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=AWL,BAYES_05,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_40,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: PARALLEL_MAKE
+Subject: Kernel/module dependencies?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,80 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 20:07:46 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 17 Mar 2009 20:12:47 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 17, 2009 at 05:28:27PM +0100, Ulf Samuelsson wrote:
->> Yes, I know,
->> Maybe it is a good idea if the result of a build is published somewhere,
->> so that others do not have to go through this process.
->>
->> Right now, openembedded does not even build for me,
->> since the native perl build fails :-(
->>
->>> [1] http://en.wikipedia.org/wiki/Hyper-threading
->
-> I now managed to build the Angstrom image for the AT91SAM9263 by applying
-> a few fixes present in the ulf/linux branch.
-> (Did not load on H/W yet though)
->
-> perl-native was "fixed" by not building the library which crashed.
-> libtheora was fixd, not to use docs/examples.
-> busybox updated to 1.13.3
+Maybe something is messed up in my configuration, I have a problem with
+modules built outside the kernel.  If I update the kernel (including
+bumping the recipe revision), other kernel modules do not get rebuilt.
+I have a couple of modules whose recipes are set up with lines like:
 
-Any specific changes between 1.13.2 and 1.13.3 you need? Would be nice to 
-cherry-pick into .dev branch...
+RDEPENDS += "kernel (${KERNEL_VERSION)"
+DEPENDS += "virtual/kernel"
 
-> u-boot, gpsd was set to PARALLEL_MAKE = ""
-> u-boot updated to 2009.01
-> linux-2.6.28
-> at91bootstrap-2.10
->
-> Building with PARALLEL_MAKE & Multiple threads was not smooth.
-> The build crashed several times, due to erros
-> caused by parallellism. "gettext", "gpsd" and "u-boot" were culprits.
+but when the kernel gets updated, the modules do not rebuild.  Is this
+just how bitbake works? or is there a way to get modules to rebuild
+whenever the kernel updates.  My problem is that when the kernel is
+changed, I can no longer load modules built against the previous
+revision.  To get things working again, I need to force the rebuild of
+anything that depends on the kernel, which is less than ideal.
 
-Would be nice to fix those. Tom Rini was working on fixing some of those 
-issues.
-
-> u-boot is NOT built cleanly, even after PARALLEL_MAKE was set to "".
-> The actual compile completes and generates an u-boot.bin
-> but this is not deployed to the result directory.
-> There are logs for different stages, but after the compile, they exist, but 
-> are empty.
->
-> If I remove all the stamps and "bitbake -b <u-boot>" afterwards
-> then the build completes correctly, and there is an 
-> u-boot-at91sam9263ek.bin
-> in the result directory.
->
-> Can it be so, that a stage is started, before the previous stage has been 
-> completed???
-
-If there are no dependencies between packages, their stage tasks can run in 
-parallel.
-
-> ---------------------
-> BTW: The total buildtime was around 2 hours. There is some overhead
-> since the build was restarted 3-4 times, and local.conf was changed once.
-> I started the build with PARALLEL_MAKE = "-j2" and BB_NUMBER_THREADS=8.
->
-> I noticed that having a lot of threads helps most of the time,
-> since the CPUs were executing at max frequency.
->
-> When the cross compiler, was built,it was different,
-> most of the cores were not used with this configuration.
-> 2-3 max while compiling gcc.
-
-Since gcc/cross is quite a big package and lots of other packages depend on 
-it, it is being built for you only using 2 cores, as specified by 
-PARALLEL_MAKE. Everything else is waiting for it to finish.
-
-> Maybe the best approach is to build the Angstrom in several stages
-> with different settings for parallelism.
-
--- 
-Denys
+Thanks in advance,
+phil
 
 
