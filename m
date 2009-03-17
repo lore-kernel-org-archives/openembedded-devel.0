@@ -1,36 +1,33 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [212.27.42.6] (helo=smtp6-g21.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LjRUE-00068R-IK
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 06:05:14 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090317050426.JVEJ16134.fed1rmmtao104.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 17 Mar 2009 01:04:26 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id U54R1b00B4dMFYL0454RWg; Tue, 17 Mar 2009 01:04:25 -0400
-X-Authority-Analysis: v=1.0 c=1 a=GN_yKGkEFO0A:10 a=JfrnYn6hAAAA:8
-	a=TCpyz0MEsNMupqQoMG0A:9 a=X-RaL_A-38Wd-tTqMOYA:7
-	a=GuH_NDwieIGBICSz8XSqQVqdJcUA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 16 Mar 2009 22:04:24 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090317050424.GJ26343@smtp.west.cox.net>
-References: <49BF280A.7090705@tait.co.nz>
+	(envelope-from <caratorn@gmail.com>) id 1LjVg8-0001jd-2w
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Mar 2009 10:33:46 +0100
+Received: from smtp6-g21.free.fr (localhost [127.0.0.1])
+	by smtp6-g21.free.fr (Postfix) with ESMTP id 88B00E080E3;
+	Tue, 17 Mar 2009 10:32:57 +0100 (CET)
+Received: from free.fr (tui75-3-88-168-237-15.fbx.proxad.net [88.168.237.15])
+	by smtp6-g21.free.fr (Postfix) with ESMTP id 624A2E0808E;
+	Tue, 17 Mar 2009 10:32:55 +0100 (CET)
+Date: Tue, 17 Mar 2009 10:36:58 +0100
+From: Charles =?iso-8859-1?Q?Cl=E9ment?= <caratorn@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20090317093658.GA12668@sourdiere>
+References: <20090316195707.GA3793@sourdiere> <20090316202219.GA4160@sourdiere>
+	<200903161930.49305.raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <49BF280A.7090705@tait.co.nz>
-Organization: Embedded Alley Solutions, Inc
+In-Reply-To: <200903161930.49305.raj.khem@gmail.com>
 User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.42
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+X-SA-Exim-Connect-IP: 212.27.42.6
+X-SA-Exim-Mail-From: caratorn@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.7 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Git SRC_TARBALL_STASH filename
+Subject: Re: [PATCH 1/2] qwo input method recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,33 +41,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 05:05:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 17 Mar 2009 09:33:47 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 17, 2009 at 05:33:14PM +1300, Douglas Royds wrote:
+Thanks for your comments, here's an updated version
 
-> Working behind a firewall that doesn't allow Git access (except over  
-> http). I've set SRC_TARBALL_STASH so that we only have to download the  
-> appropriate source tarball (manually) once.
->
-> While building mtd-utils, BitBake is trying to fetch from the tarball stash:
->
->    http://.../git_git.infradead.org.mtd-utils.git.tar.gz
->
-> Instead of:
->
->    http://.../git_git.infradead.org.mtd-utils.git_ea429635388f7bb53f62c41ec3d5ccf5fa207370.tar.gz
->
-> The following patch appears to do the job, but I'm not confident this is  
-> the right fix. I notice that all the other fetchers use ud.localfile,  
-> which already has the correct filename.
+Subject: [PATCH 1/2] libconfig: Add version 1.3.1
 
-What's going on is that it's trying to fetch the raw git tree stash,
-rather than the checkout stash, so you need to mirror the other.  OTOH,
-perhaps it should try first the checkout then the raw?
+---
+ packages/libconfig/libconfig_1.3.1.bb |   19 +++++++++++++++++++
+ 1 files changed, 19 insertions(+), 0 deletions(-)
+ create mode 100644 packages/libconfig/libconfig_1.3.1.bb
 
--- 
-Tom Rini
+diff --git a/packages/libconfig/libconfig_1.3.1.bb b/packages/libconfig/l=
+ibconfig_1.3.1.bb
+new file mode 100644
+index 0000000..0856afb
+--- /dev/null
++++ b/packages/libconfig/libconfig_1.3.1.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION =3D "Library for manipulating structured configuration files=
+"
++AUTHOR =3D "Mark Lindner"
++HOMEPAGE =3D "http://www.hyperrealm.com/libconfig/"
++SECTION =3D "libs"
++PRIORITY =3D "optional"
++LICENSE =3D "LGPLv2"
++DEPENDS =3D ""
++PV =3D "1.3.1"
++PR =3D "r0"
++
++SRC_URI =3D "http://www.hyperrealm.com/libconfig/libconfig-${PV}.tar.gz"
++
++S =3D "${WORKDIR}/libconfig-${PV}"
++
++inherit autotools
++
++do_stage() {
++	autotools_stage_all
++}
+--=20
+1.6.2
+
+
+On Mon, Mar 16, 2009 at 07:30:42PM -0700, Khem Raj wrote:
+> On Monday 16 March 2009 13:22:19 Charles Cl=E9ment wrote:
+> > Library libconfig is needed for package qwo.
+> >=20
+> > ---
+> >  packages/libconfig/libconfig_1.3.1.bb |   22 ++++++++++++++++++++++
+> >  1 files changed, 22 insertions(+), 0 deletions(-)
+> >  create mode 100644 packages/libconfig/libconfig_1.3.1.bb
+> >=20
+> > diff --git a/packages/libconfig/libconfig_1.3.1.bb b/packages/libconf=
+ig/libconfig_1.3.1.bb
+> > new file mode 100644
+> > index 0000000..cae25f4
+> > --- /dev/null
+> > +++ b/packages/libconfig/libconfig_1.3.1.bb
+> > @@ -0,0 +1,22 @@
+> > +DESCRIPTION =3D "Library for manipulating structured configuration f=
+iles"
+> > +AUTHOR =3D "Mark Lindner"
+> > +HOMEPAGE =3D "http://www.hyperrealm.com/libconfig/"
+> > +SECTION =3D "libs"
+> > +PRIORITY =3D "optional"
+> > +LICENSE =3D "LGPLv2"
+> > +DEPENDS =3D ""
+> > +PV =3D "1.3.1"
+> > +PR =3D "r0"
+> > +
+> > +SRC_URI =3D "http://www.hyperrealm.com/libconfig/libconfig-${PV}.tar=
+.gz"
+> > +
+> > +S =3D "${WORKDIR}/libconfig-${PV}"
+> > +
+> > +inherit autotools
+> > +
+> > +do_stage() {
+>=20
+> snip ...
+>=20
+> > +	install -m 644 libconfig.h ${STAGING_INCDIR}
+> > +	install -m 644 libconfig.h++ ${STAGING_INCDIR}
+> > +	oe_libinstall -a -so libconfig ${STAGING_LIBDIR}
+> > +	oe_libinstall -a -so libconfig++ ${STAGING_LIBDIR}
+>=20
+> can you use autotools_stage_all instead.
+>=20
+> > +}
+> > --=20
+> > 1.6.2
+> >=20
+>=20
+> --=20
+> Khem Raj
+
+
+
+--=20
+Charles Cl=E9ment.
 
 
