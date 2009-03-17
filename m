@@ -1,30 +1,31 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.149.7.33] (helo=mail.tu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LjZ3N-0005kQ-3g
-	for openembedded-devel@openembedded.org; Tue, 17 Mar 2009 14:10:05 +0100
-Received: (qmail 20316 invoked by uid 813007); 17 Mar 2009 13:09:12 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 17 Mar 2009 13:09:12 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <torsten.sadowski@tu-berlin.de>) id 1LjZ6i-0005td-1m
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Mar 2009 14:13:27 +0100
+X-tubIT-Incoming-IP: 130.149.75.153
+Received: from kapitaen.kup.tu-berlin.de ([130.149.75.153]
+	helo=kapitaen.localnet)
+	by mail.tu-berlin.de (exim-4.69/mailfrontend-a) with esmtpa 
+	for <openembedded-devel@lists.openembedded.org>
+	id 1LjZ5x-00050s-Sx; Tue, 17 Mar 2009 14:12:38 +0100
+From: Torsten Sadowski <torsten.sadowski@tu-berlin.de>
+Organization: TU Berlin
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Mar 2009 14:09:10 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
-	x86_64; ; )
-References: <1237246365-32076-1-git-send-email-denis@denix.org>
-In-Reply-To: <1237246365-32076-1-git-send-email-denis@denix.org>
+Date: Tue, 17 Mar 2009 14:12:20 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; i686; ; )
 MIME-Version: 1.0
-Message-Id: <200903171409.14650.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-Id: <200903171412.20971.torsten.sadowski@tu-berlin.de>
+X-tubIT-Score: 0.0 ()
+X-SA-Exim-Connect-IP: 130.149.7.33
+X-SA-Exim-Mail-From: torsten.sadowski@tu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_50,RCVD_IN_DNSWL_LOW,
+	RDNS_NONE autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/3] rename packages/ to recipes/ per earlier agreement
+Subject: Naming of different recipes for the same package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,51 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2009 13:10:08 -0000
-X-Groupsio-MsgNum: 8479
-Content-Type: multipart/signed; boundary="nextPart2295193.cIkiAJSHrZ";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart2295193.cIkiAJSHrZ
+X-List-Received-Date: Tue, 17 Mar 2009 13:13:27 -0000
 Content-Type: text/plain;
   charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia wtorek, 17 marca 2009 o 00:32:41 Denys Dmytriyenko napisa=C5=82(a):
-> Renaming packages/ directory to recipes/, as one of the several
-> structural changes, was proposed by Koen[1] and agreed/approved by
-> many. Since Koen currently doesn't have time/ability to do the
-> change, and some people are too eager to wait any longer, he asked me
-> to do it. Please ack/nack.
->
-> [1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/21326
->
-> Denys Dmytriyenko (3):
->   rename packages/ to recipes/ per earlier agreement
->   recipes: fix hardcoded instances of packages/
->   base.bbclass: fix base_get_scmbasepath() to look for recipes/ and
->     fall back to packages/ while parsing BBFILES
+Hi,
 
-Acked-By: Marcin Juszkiewicz <hrw@openembedded.org>
+I want to turn my Simpad into a satnav. So I did define a custom image 
+including navit. Unluckily, the image is too large. The reason is that speech-
+dispatcher uses espeak AND flite with flite being a fat 7MB package. 
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+I tried to make my own speech-dispatcher package but how can I name it to 
+coexist with the default? "speech-dispatcher-noflite_0.6.6.bb" breaks the 
+normal ${PN}-${PV} convention and fails during patching:
 
---nextPart2295193.cIkiAJSHrZ
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+No file to patch.  Skipping patch.
+1 out of 1 hunk ignored
+can't find file to patch at input line 52
+Perhaps you used the wrong -p or --strip option?
+The text leading up to this was:
+--------------------------
+|diff -aurp speech-dispatcher-0.6.5/src.old/tests/Makefile.am speech-
+dispatcher-0.6.5/src/tests/Makefile.am
+|--- speech-dispatcher-0.6.5/src.old/tests/Makefile.am	2008-01-02 
+17:06:47.000000000 -0600
+|+++ speech-dispatcher-0.6.5/src/tests/Makefile.am	2008-01-02 
+17:13:55.000000000 -0600
+--------------------------
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
+Any hints?
 
-iEYEABECAAYFAkm/oPcACgkQeQ6MlGH/2qu3IgCfWKJSnmTk2s9oyPBUzIWz/KBI
-O0UAnRnDZAvVRzsWJYYAwTA92AF+7UPE
-=QO8e
------END PGP SIGNATURE-----
+Cheers, Torsten
 
---nextPart2295193.cIkiAJSHrZ--
+
