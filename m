@@ -1,43 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [130.89.2.12] (helo=mx.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ljy2M-0002M9-O9
-	for openembedded-devel@openembedded.org; Wed, 18 Mar 2009 16:50:38 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ljy1V-0002pS-Np
-	for openembedded-devel@openembedded.org; Wed, 18 Mar 2009 15:49:41 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 18 Mar 2009 15:49:41 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 18 Mar 2009 15:49:41 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
+	(envelope-from <k.kooi@student.utwente.nl>) id 1Ljy57-0002Q2-Jn
+	for openembedded-devel@openembedded.org; Wed, 18 Mar 2009 16:53:30 +0100
+Received: from Powerbook-3.local (vpn006012.vpn.utwente.nl [130.89.6.12])
+	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id n2IFqQV8001684
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Mar 2009 16:52:27 +0100
+Message-ID: <49C118BA.9020004@student.utwente.nl>
+Date: Wed, 18 Mar 2009 16:52:26 +0100
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 18 Mar 2009 16:49:29 +0100
-Message-ID: <gpr569$535$1@ger.gmane.org>
-References: <49BFA406.6030802@bolloretelecom.eu>	<20090317143526.3e79150c@vanille.zapto.org>	<49BFADB1.3090207@bolloretelecom.eu>	<20090317171705.208a7d31@kmfms>
-	<49C107E3.30505@bolloretelecom.eu>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
-In-Reply-To: <49C107E3.30505@bolloretelecom.eu>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <27612.658069893$1237390186@news.gmane.org>
+In-Reply-To: <27612.658069893$1237390186@news.gmane.org>
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-SA-Exim-Connect-IP: 130.89.2.12
+X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
+Subject: Re: Loss of all package history following the recipe rename.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,21 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2009 15:50:39 -0000
+X-List-Received-Date: Wed, 18 Mar 2009 15:53:31 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 18-03-09 15:40, Jeremy Lainé wrote:
+On 18-03-09 16:23, John Willis wrote:
 
-> If someone can help shed some light on this, I'm all ears!
+> That said, 'git-filter-branch' is a little scary
 
-Contact the indt guys, Aloisio wrote a qt4 class from scratch that 
-completely removed the needs from qmake*bbclass and qmake*bb.
-
+We can't run that anymore on OE, since git changed the behaviour of the 
+crud() function since we migrated and will change author names (no 
+trailing '.' allowed anymore).
 
 regards,
 
 Koen
-
 
 
