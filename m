@@ -1,37 +1,45 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LjpE0-0000mW-U1
-	for openembedded-devel@openembedded.org; Wed, 18 Mar 2009 07:26:04 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090318062509.TPXK15318.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 18 Mar 2009 02:25:09 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id UWR91b0064dMFYL04WR9aP; Wed, 18 Mar 2009 02:25:09 -0400
-X-Authority-Analysis: v=1.0 c=1 a=GN_yKGkEFO0A:10 a=JfrnYn6hAAAA:8
-	a=sUyiPbFjfHvuVPfQJuUA:9 a=AIKGenoRAz-giEo3oRcA:7
-	a=faXxzkihn7jxFkQl3VFfhfAGo0AA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 17 Mar 2009 23:25:09 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090318062509.GQ26343@smtp.west.cox.net>
-References: <20090317050424.GJ26343@smtp.west.cox.net>
-	<49C05843.4030504@tait.co.nz>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ljr30-0000iy-Fi
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Mar 2009 09:23:15 +0100
+Received: by bwz19 with SMTP id 19so560693bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Mar 2009 01:21:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=CJGgxvQLqm836Za78PZWpPRM/lkLNVjWsmZsq1Wxu6Q=;
+	b=c8vVI/jiR45a0sfsU7+UbSXjgaDZ+bKjZjkr6n8yilavTqwnhNQM7bzhxtlo0JIP6y
+	pxtSqB+ubgrAM2233nRMBWaRYYnhTlNIwbre/+okgILIcMqcp8areO9VLO3eL0xP41DF
+	Afi0r0eQdssFJd8JYFxKka0F4LpUAy91ery5M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Cb2gj6UoxP9DFR3afSlOl61tnMWVI65xJQa2R61PA4w7o4sgHC1BFRuILohNYCGX/U
+	Td4B3Um6IDENqoXJEsj23Im07K1zpUtrTFhnXArt4HBQ4qcfSqHzjgOwCjdBZsqcAquD
+	bJ57a42x4ndrWjT4kdDT+1BUIAGS+jaFvagBA=
 MIME-Version: 1.0
-In-Reply-To: <49C05843.4030504@tait.co.nz>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.41
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+Received: by 10.223.108.15 with SMTP id d15mr760083fap.62.1237364513595; Wed, 
+	18 Mar 2009 01:21:53 -0700 (PDT)
+In-Reply-To: <20090318001624.GB20384@denix.org>
+References: <1237328436.20770.57.camel@homestead>
+	<d1b08f940903171633l7c66f604rfa6375bd95b2c3bf@mail.gmail.com>
+	<20090318001624.GB20384@denix.org>
+Date: Wed, 18 Mar 2009 09:21:53 +0100
+Message-ID: <ac9c93b10903180121l3454a2adqbaac9590659daf76@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.171
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Git SRC_TARBALL_STASH filename
+Subject: Re: Cleaning tmp folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,48 +53,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2009 06:26:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Mar 2009 08:23:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 18, 2009 at 03:11:15PM +1300, Douglas Royds wrote:
-> Tom Rini wrote:
->> On Tue, Mar 17, 2009 at 05:33:14PM +1300, Douglas Royds wrote:
->>
->>   
->>> Working behind a firewall that doesn't allow Git access (except over  
->>> http). I've set SRC_TARBALL_STASH so that we only have to download 
->>> the  appropriate source tarball (manually) once.
->>>
->>> While building mtd-utils, BitBake is trying to fetch from the tarball stash:
->>>
->>>    http://.../git_git.infradead.org.mtd-utils.git.tar.gz
->>>
->>> Instead of:
->>>
->>>    http://.../git_git.infradead.org.mtd-utils.git_ea429635388f7bb53f62c41ec3d5ccf5fa207370.tar.gz
->>>
->>> The following patch appears to do the job, but I'm not confident this 
->>> is  the right fix. I notice that all the other fetchers use 
->>> ud.localfile,  which already has the correct filename.
->>>     
->>
->> What's going on is that it's trying to fetch the raw git tree stash,
->> rather than the checkout stash, so you need to mirror the other.  OTOH,
->> perhaps it should try first the checkout then the raw?
->>   
->
-> I don't have the raw git tree stash (firewall, remember)? Regrettably,  
-> mtd-utils don't appear to provide HTTP access to their repository - only  
-> git and ssh - so I don't appear to have any way of getting it.
+A crude temp solution could be to just remove the stamps of all
+non-native, non-cross packages.
 
-Right.  What I believe happens is that PREMIRRORS (etc) will work for
-git_..GITHASH and SRC_TARBALL_STASH will work for git_...git.tar.gz as
-(I believe) mirrors are, even for svn/cvs, the right version but
-SRC_TARBALL_STASH will then make the checked-out tarball (ie populate
-${DL_DIR}/cvs/pkg../ then make ${DL_DIR}/pkg...tar.gz).  I think :)
+Also if you only want to reclaim space I guess it is ok to remove the
+work subdir (or at least in my case (beagleboard) the work/arm* dir)
+If this is not right I guess someone will correct me :-)
 
--- 
-Tom Rini
+Btw: it would also be nice to have a command to purge the tmp dir, so
+if X build for r0 is there and X build for r1 is there the r0 version
+is nuked. Never got to writing something for that though :-)
+
+Frans.
 
 
