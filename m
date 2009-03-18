@@ -1,45 +1,36 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [213.36.80.91] (helo=mail.libertysurf.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ljr30-0000iy-Fi
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LjwxW-0004WI-FI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Mar 2009 09:23:15 +0100
-Received: by bwz19 with SMTP id 19so560693bwz.12
+	Wed, 18 Mar 2009 15:41:33 +0100
+Received: from blini.bolloretelecom.eu (62.210.194.121) by mail.libertysurf.fr
+	(8.5.016.1)
+	id 498AE76200D5464B for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Mar 2009 16:30:39 +0100
+Received: from [192.168.95.60] (unknown [192.168.95.60])
+	by blini.bolloretelecom.eu (Postfix) with ESMTPSA id B150323E44
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2009 01:21:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=CJGgxvQLqm836Za78PZWpPRM/lkLNVjWsmZsq1Wxu6Q=;
-	b=c8vVI/jiR45a0sfsU7+UbSXjgaDZ+bKjZjkr6n8yilavTqwnhNQM7bzhxtlo0JIP6y
-	pxtSqB+ubgrAM2233nRMBWaRYYnhTlNIwbre/+okgILIcMqcp8areO9VLO3eL0xP41DF
-	Afi0r0eQdssFJd8JYFxKka0F4LpUAy91ery5M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Cb2gj6UoxP9DFR3afSlOl61tnMWVI65xJQa2R61PA4w7o4sgHC1BFRuILohNYCGX/U
-	Td4B3Um6IDENqoXJEsj23Im07K1zpUtrTFhnXArt4HBQ4qcfSqHzjgOwCjdBZsqcAquD
-	bJ57a42x4ndrWjT4kdDT+1BUIAGS+jaFvagBA=
+	Wed, 18 Mar 2009 15:40:35 +0100 (CET)
+Message-ID: <49C107E3.30505@bolloretelecom.eu>
+Date: Wed, 18 Mar 2009 15:40:35 +0100
+From: =?UTF-8?B?SmVyZW15IExhaW7DqQ==?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.19) Gecko/20090103 Thunderbird/2.0.0.19 Mnenhy/0.7.5.0
 MIME-Version: 1.0
-Received: by 10.223.108.15 with SMTP id d15mr760083fap.62.1237364513595; Wed, 
-	18 Mar 2009 01:21:53 -0700 (PDT)
-In-Reply-To: <20090318001624.GB20384@denix.org>
-References: <1237328436.20770.57.camel@homestead>
-	<d1b08f940903171633l7c66f604rfa6375bd95b2c3bf@mail.gmail.com>
-	<20090318001624.GB20384@denix.org>
-Date: Wed, 18 Mar 2009 09:21:53 +0100
-Message-ID: <ac9c93b10903180121l3454a2adqbaac9590659daf76@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.171
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <49BFA406.6030802@bolloretelecom.eu>	<20090317143526.3e79150c@vanille.zapto.org>	<49BFADB1.3090207@bolloretelecom.eu>
+	<20090317171705.208a7d31@kmfms>
+In-Reply-To: <20090317171705.208a7d31@kmfms>
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 213.36.80.91
+X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Cleaning tmp folder
+Subject: Re: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,21 +44,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2009 08:23:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Mar 2009 14:41:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: Quoted-Printable
 
-A crude temp solution could be to just remove the stamps of all
-non-native, non-cross packages.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Also if you only want to reclaim space I guess it is ok to remove the
-work subdir (or at least in my case (beagleboard) the work/arm* dir)
-If this is not right I guess someone will correct me :-)
+Hi Jim,
 
-Btw: it would also be nice to have a command to purge the tmp dir, so
-if X build for r0 is there and X build for r1 is there the r0 version
-is nuked. Never got to writing something for that though :-)
+> Now if I "inherit qt4e" they fail with something like this:
+>
+> | NOTE: using qmake spec in
+> /home/jim/Projects/gumstix/oe/tmp/cross/armv7a/share/qt4/mkspecs/linux-=
+gnueabi-oe-g++,
+>  using profiles '' | NOTE: qmake prevar substitution:
+> QT_LIBINFIX=3DE | Failure to read QMAKESPEC conf file
+> /home/jim/Projects/gumstix/oe/tmp/cross/armv7a/share/qt4/mkspecs/linux-=
+gnueabi-oe-g++/qmake.conf.
+>  | Error processing project file: flickcharm.pro | FATAL: Error
+> calling
+> /home/jim/Projects/gumstix/oe/tmp/staging/i686-linux/usr/bin/qmake2
+>  on flickcharm.pro
+>
+> Is tmp/cross/armv7a/share/qt4/mkspecs/linux-gnueabi-oe-g++ the
+> correct path?  I have a
+> tmp/cross/i686/share/qt4/mkspecs/linux-gnueabi-oe-g++ area, but not
+> tmp/cross/armv7a/share/qt4/mkspecs/linux-gnueabi-oe-g++.
+>
+> I'm assuming I just need to do something more than just "inherit
+> qt4e" in my recipe?  Perhaps I'm seeing a bug specific to the
+> gumstix branch?
 
-Frans.
+To my knowledge qmake support has been busted for a while (I also have
+your problem if I try to build a qmake-based package), I'm suprised
+this hasn't cropped up earlier.
+
+I'll try to look into it, but I don't quite understand the way
+"qmake2-native" is packaged (why is it a "cross" package?), and where
+the "mkspecs" directories end up.
+
+If someone can help shed some light on this, I'm all ears!
+
+- --
+Jeremy LAINE
+Bollor=C3=A9 telecom | 11bis, rue Scribe | F-75009 Paris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAknBB+IACgkQCL1n3lVB9Ea2AQCgvutQjRjjeriH5++gUWi/1whr
+3FQAn0Vn2CQEhW9ZESouNaxglZucqsOQ
+=3DPAED
+-----END PGP SIGNATURE-----
+
 
 
