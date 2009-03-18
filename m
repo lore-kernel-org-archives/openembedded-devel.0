@@ -1,46 +1,35 @@
-Received: from [209.85.217.170] (helo=mail-gx0-f170.google.com)
+Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1LjyIU-0002ex-PE
+	(envelope-from <denis@denix.org>) id 1LjzKp-0000c3-9A
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Mar 2009 17:07:32 +0100
-Received: by gxk18 with SMTP id 18so1117065gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2009 09:06:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=M6aS/q9trHnG3b/zOMMjJIag6yhbmur1TZlog+ZfimI=;
-	b=K5AuVamNlHkYvYEHt1aFF4MeMNxYxqk9kwgqCvn6dtnZgPe00IoGCO8+oKt9A+IfML
-	qFhtJU/ZJdnuV8iwWhgxcKhtz7siCCUdrmn9/Z06BiwP0o9DBwH2lKLpAeDBVe9wB05J
-	3inBNZfPnVd4lQKwBULIxK9NhHGDhO9ZYuoew=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=Fgls9BmMbt+CbHAuYkfnxKGgl5FDJinfVWQK/mlG7TcFFkhL7h2yQnFB6HJsAx1mIp
-	2g2RpUviV3mnCuqwg9FalhktFwdoQBLXfAXaSY3r3Wt7CMDTylbOm7vewuGryCZLftPi
-	yG0nG8HVJlTWPk3jagpew6M9x/QkhKCC0WCs0=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.151.103.2 with SMTP id f2mr2505885ybm.107.1237392381243; Wed, 
-	18 Mar 2009 09:06:21 -0700 (PDT)
-In-Reply-To: <-2193387358217288963@unknownmsgid>
-References: <-2193387358217288963@unknownmsgid>
-Date: Wed, 18 Mar 2009 09:06:20 -0700
-X-Google-Sender-Auth: 20bb0b1a4e809568
-Message-ID: <b6ebd0a50903180906v755f082akf8460a3b3307d9fd@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
+	Wed, 18 Mar 2009 18:13:46 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KGP00ITOP5DV056@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	18 Mar 2009 12:12:49 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C4D2A6B83A8; Wed,
+	18 Mar 2009 13:12:48 -0400 (EDT)
+Date: Wed, 18 Mar 2009 13:12:48 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.170
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Message-id: <20090318171248.GA25537@denix.org>
+References: <1237328436.20770.57.camel@homestead>
+	<d1b08f940903171633l7c66f604rfa6375bd95b2c3bf@mail.gmail.com>
+	<20090318001624.GB20384@denix.org>
+	<ac9c93b10903180121l3454a2adqbaac9590659daf76@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <ac9c93b10903180121l3454a2adqbaac9590659daf76@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Level: *
+X-Spam-Status: No, score=1.5 required=5.0 tests=AWL,BAYES_20,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Loss of all package history following the recipe rename.
+Subject: Re: Cleaning tmp folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,38 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2009 16:07:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Mar 2009 17:13:46 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Wed, Mar 18, 2009 at 8:38 AM, John Willis
-<John.Willis@distant-earth.com> wrote:
-> <snip>
->
-> After kergoth took the time to point out that I was just looking at this
-> 'the wrong way' and not 'the GIT way' I think the mail can safely be
-> disregarded ;-).
->
-> It still does not change the fact that the behavior of 'git log' gave me a
-> real panic moment but at least nothing is lost if your happy to dig (or
-> rather use git log --follow, ok, next time I promise to read the man page
-> before panicking ;-), I am just used to --follow functionality being a
-> default behavior).
+On Wed, Mar 18, 2009 at 09:21:53AM +0100, Frans Meulenbroeks wrote:
+> A crude temp solution could be to just remove the stamps of all
+> non-native, non-cross packages.
+> 
+> Also if you only want to reclaim space I guess it is ok to remove the
+> work subdir (or at least in my case (beagleboard) the work/arm* dir)
+> If this is not right I guess someone will correct me :-)
+> 
+> Btw: it would also be nice to have a command to purge the tmp dir, so
+> if X build for r0 is there and X build for r1 is there the r0 version
+> is nuked. Never got to writing something for that though :-)
 
-Re: default behavior, I'm not entirely certain, but the 'diff.renames'
-git config parameter seems promising.  Try running:
-git config diff.renames true
+Speaking of purging tmp/work - you might want to look for
+INHERIT += "rm_work", which cleans work directory for every package, after 
+it's built and staged/packaged.
 
-I'm not sure if git log --follow is the same thing as git diff-tree
--M, but it probably is, since git log is essentially git rev-list |
-git diff-tree.
 -- 
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+Denys
 
 
