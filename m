@@ -1,30 +1,43 @@
-Received: from [130.89.2.12] (helo=mx.utwente.nl)
+Received: from [209.85.217.170] (helo=mail-gx0-f170.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Ljy57-0002Q2-Jn
-	for openembedded-devel@openembedded.org; Wed, 18 Mar 2009 16:53:30 +0100
-Received: from Powerbook-3.local (vpn006012.vpn.utwente.nl [130.89.6.12])
-	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id n2IFqQV8001684
+	(envelope-from <kergoth@gmail.com>) id 1LjyIU-0002ex-PE
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Mar 2009 17:07:32 +0100
+Received: by gxk18 with SMTP id 18so1117065gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2009 16:52:27 +0100
-Message-ID: <49C118BA.9020004@student.utwente.nl>
-Date: Wed, 18 Mar 2009 16:52:26 +0100
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
+	Wed, 18 Mar 2009 09:06:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=M6aS/q9trHnG3b/zOMMjJIag6yhbmur1TZlog+ZfimI=;
+	b=K5AuVamNlHkYvYEHt1aFF4MeMNxYxqk9kwgqCvn6dtnZgPe00IoGCO8+oKt9A+IfML
+	qFhtJU/ZJdnuV8iwWhgxcKhtz7siCCUdrmn9/Z06BiwP0o9DBwH2lKLpAeDBVe9wB05J
+	3inBNZfPnVd4lQKwBULIxK9NhHGDhO9ZYuoew=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Fgls9BmMbt+CbHAuYkfnxKGgl5FDJinfVWQK/mlG7TcFFkhL7h2yQnFB6HJsAx1mIp
+	2g2RpUviV3mnCuqwg9FalhktFwdoQBLXfAXaSY3r3Wt7CMDTylbOm7vewuGryCZLftPi
+	yG0nG8HVJlTWPk3jagpew6M9x/QkhKCC0WCs0=
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <27612.658069893$1237390186@news.gmane.org>
-In-Reply-To: <27612.658069893$1237390186@news.gmane.org>
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-SA-Exim-Connect-IP: 130.89.2.12
-X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
+Sender: kergoth@gmail.com
+Received: by 10.151.103.2 with SMTP id f2mr2505885ybm.107.1237392381243; Wed, 
+	18 Mar 2009 09:06:21 -0700 (PDT)
+In-Reply-To: <-2193387358217288963@unknownmsgid>
+References: <-2193387358217288963@unknownmsgid>
+Date: Wed, 18 Mar 2009 09:06:20 -0700
+X-Google-Sender-Auth: 20bb0b1a4e809568
+Message-ID: <b6ebd0a50903180906v755f082akf8460a3b3307d9fd@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.217.170
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Loss of all package history following the recipe rename.
@@ -41,20 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2009 15:53:31 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 18 Mar 2009 16:07:37 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 18-03-09 16:23, John Willis wrote:
+On Wed, Mar 18, 2009 at 8:38 AM, John Willis
+<John.Willis@distant-earth.com> wrote:
+> <snip>
+>
+> After kergoth took the time to point out that I was just looking at this
+> 'the wrong way' and not 'the GIT way' I think the mail can safely be
+> disregarded ;-).
+>
+> It still does not change the fact that the behavior of 'git log' gave me a
+> real panic moment but at least nothing is lost if your happy to dig (or
+> rather use git log --follow, ok, next time I promise to read the man page
+> before panicking ;-), I am just used to --follow functionality being a
+> default behavior).
 
-> That said, 'git-filter-branch' is a little scary
+Re: default behavior, I'm not entirely certain, but the 'diff.renames'
+git config parameter seems promising.  Try running:
+git config diff.renames true
 
-We can't run that anymore on OE, since git changed the behaviour of the 
-crud() function since we migrated and will change author names (no 
-trailing '.' allowed anymore).
-
-regards,
-
-Koen
+I'm not sure if git log --follow is the same thing as git diff-tree
+-M, but it probably is, since git log is essentially git rev-list |
+git diff-tree.
+-- 
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
