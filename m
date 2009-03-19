@@ -1,23 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LkO28-000716-9g
-	for openembedded-devel@openembedded.org; Thu, 19 Mar 2009 20:36:04 +0100
-Received: (qmail 30343 invoked by uid 813007); 19 Mar 2009 19:35:05 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 19 Mar 2009 19:35:05 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Mar 2009 20:34:59 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
-	x86_64; ; )
-References: <200903051232.09899.marcin@juszkiewicz.com.pl>
-	<200903191751.28927.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200903191751.28927.marcin@juszkiewicz.com.pl>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LkOBF-0007DW-Ak
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Mar 2009 20:45:29 +0100
+Received: (qmail invoked by alias); 19 Mar 2009 19:44:28 -0000
+Received: from f053000052.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.0.52]
+	by mail.gmx.net (mp047) with SMTP; 19 Mar 2009 20:44:28 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1++F2AXK0a+JwQN57hU/t+6u/4G2ZttwmGluIL4w7
+	V9CsjYn9k+WJjW
+Message-ID: <49C2A169.4070806@gmx.net>
+Date: Thu, 19 Mar 2009 20:47:53 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-Message-Id: <200903192035.00003.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH] gtk+: make 2.14.2 default version instead of 2.10.14
+To: openembedded-devel@lists.openembedded.org
+References: <49B92F20.3060701@gmx.net>
+In-Reply-To: <49B92F20.3060701@gmx.net>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.74
+Subject: Re: RFC: CMAKE - support out of tree builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,34 +34,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 19:36:04 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 19 Mar 2009 19:45:29 -0000
+X-Groupsio-MsgNum: 8569
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig25D898285E303F2B34899EC4"
+
+--------------enig25D898285E303F2B34899EC4
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia czwartek, 19 marca 2009 o 17:51:28 Marcin Juszkiewicz napisa=C5=82(a):
-> Dnia czwartek, 5 marca 2009 o 12:32:07 Marcin Juszkiewicz napisa=C5=82(a):
-> > commit 67d5b4c8f0283225eab0408099d0d3cf440c0fd0
-> > Author: Marcin Juszkiewicz <hrw@openembedded.org>
-> > Date: =C2=A0 Thu Mar 5 11:03:13 2009 +0100
-> >
-> > =C2=A0 =C2=A0 gtk+: make 2.14.2 default version instead of 2.10.14
-> >
-> > =C2=A0 =C2=A0 =C3=85ngstr=C3=B6m uses this version and many components =
-of metadata
-> > depends on at least 2.12.
->
-> No one objects?
+Hi,
+I am going to push this 2009-03-20 aka tomorrow. Please speak if you do
+not want it.
 
-pushed.
+Regards
+Robert
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Robert Schuster schrieb:
+> Hi,
+> I am proposing the attached patch to make it possible to do out-of-tree=
+
+> builds in OE. Out-of-tree builds should be preferred but I do not want
+> to look at every recipe if it still works.
+>=20
+> OTOH I want to include llvm 2.5 with its new cmake-based build system
+> which incidentally does *not* permit in-tree builds.
+>=20
+> Regards
+> Robert
+>=20
+>=20
+> -----------------------------------------------------------------------=
+-
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
+--------------enig25D898285E303F2B34899EC4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAknCoWkACgkQG9cfwmwwEtop6ACfVQIw5Cbv69SBjrNOZddNIADO
+xpQAn3o0ErLi4LKtWnon3cqUmKMRtR1u
+=8H9l
+-----END PGP SIGNATURE-----
+
+--------------enig25D898285E303F2B34899EC4--
