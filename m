@@ -1,33 +1,36 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [85.37.17.113] (helo=smtp-out113.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LkI25-0000fw-U0
+	(envelope-from <GNUtoo@no-log.org>) id 1LkJAT-0005lo-J9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 14:11:45 +0100
-Received: from andromeda.vanille.de (e180149050.adsl.alicedsl.de
-	[85.180.149.50])
-	by drlauer-research.com (Postfix) with ESMTP id 115CF58415C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2009 14:36:39 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Thu, 19 Mar 2009 15:24:23 +0100
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out113.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 19 Mar 2009 15:23:21 +0100
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 19 Mar 2009 15:23:20 +0100
+Received: from [192.168.1.107] ([79.24.40.21]) by FBCMCL01B07.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 19 Mar 2009 15:17:20 +0100
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Mar 2009 14:10:41 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
-References: <1237467616-4745-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1237467616-4745-3-git-send-email-marcin@juszkiewicz.com.pl>
-	<1237467616-4745-4-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1237467616-4745-4-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <200903191410.41483.mickey@vanille-media.de>
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+In-Reply-To: <49C1F12B.8020207@gremlin.it>
+References: <c384c5ea0903181536n442efbbbyb80344c7bce7a04@mail.gmail.com>
+	<49C1F12B.8020207@gremlin.it>
+Date: Thu, 19 Mar 2009 15:21:06 +0100
+Message-Id: <1237472466.20244.3.camel@port4>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 19 Mar 2009 14:17:20.0703 (UTC)
+	FILETIME=[6A825CF0:01C9A89D]
+X-SA-Exim-Connect-IP: 85.37.17.113
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_NJABL_PROXY,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] mtd-utils-tests: update to 1.2.0+git
+Subject: Re: I ordered a few SheevaPlugs into .eu, any takers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,16 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 13:11:47 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 19 Mar 2009 14:24:24 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Awesome. +1
-
--- 
-:M:
+On Thu, 2009-03-19 at 08:15 +0100, Alessandro GARDICH wrote:
+> Leon Woestenberg wrote:
+> > Hello,
+> > 
+> > If anyone in .eu wanted to buy a SheevaPlug for OpenEmbedded
+> > development; I have ordered a few to lower the per-unit shipping costs
+> > a bit.
+> > 
+> > I might have one or two left again cost price plus shipping from .nl
+> > (or I bring some to LinuxTag if that is going to happen for me).
+> > 
+> > 
+> > Afterwards, I'm considering refunding the unit cost to OpenEmbedded
+> > developers using code bounties for OE and/or Sheeva related work.
+> > 
+> > Regards,
+> 
+> Hi
+> 
+> I'm doing about the same thing here (2 pieces sure, maybe 5) in Italy.
+> 
+> Can you explain more about the bounties ?
+I'll think about it,
+I may be interested in,And I live in Milan...
+Denis.
 
 
 
