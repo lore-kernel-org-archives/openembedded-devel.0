@@ -1,46 +1,32 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LkCas-0004PF-Hl
+	(envelope-from <mickey@vanille-media.de>) id 1LkF4f-0007Ze-Gq
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 08:23:14 +0100
-Received: by fxm20 with SMTP id 20so347295fxm.12
+	Thu, 19 Mar 2009 11:02:12 +0100
+Received: from andromeda.vanille.de (e180149050.adsl.alicedsl.de
+	[85.180.149.50])
+	by drlauer-research.com (Postfix) with ESMTP id 7E7FD5843D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2009 00:22:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=RaCtXLmTSqwlMuTjZflaxKlLDakU+MIYX+HBCNb7fFY=;
-	b=JOLmB5gK0SG83A7igY/bpiRbPyGyaUkOCE5Kxz6oOzw4HAFYdnwJ2ShxrOqBcJ2j2m
-	zMvK2iShYdem61wacak8b+BhHsFXO4fBMlchqxLyCl94/uTYpbBigU59SvNwx15kc8Vw
-	zLqQhVX+hxPU7TtTXY8yFKMrf2AguObivZm4w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=lz9tT3+XsmgPHgEZG4Z485ET5ofzqIZ6HAAjvGGS5N5kl6vjJTpbGaTix1TRhWhQTY
-	2+5c29rSmINXlbQWvf7tSAx9UrDxZq/MYF61r3wiVsyQig1QmaEjAmGk73K0NczKhS6V
-	as5UYb1Pj9nLiQ8yKv2+6uNkb/ZQ2KFJ0mBIU=
-MIME-Version: 1.0
-Received: by 10.223.108.75 with SMTP id e11mr1782762fap.97.1237447333503; Thu, 
-	19 Mar 2009 00:22:13 -0700 (PDT)
-In-Reply-To: <20090319031330.GB27595@denix.org>
-References: <1237246365-32076-1-git-send-email-denis@denix.org>
-	<49BEF545.4040608@dls.net> <20090317192619.GA15734@denix.org>
-	<f46da1cf0903181725y177da239y9970995168a677b7@mail.gmail.com>
-	<20090319020125.GA27595@denix.org> <20090319031330.GB27595@denix.org>
-Date: Thu, 19 Mar 2009 08:22:13 +0100
-Message-ID: <ac9c93b10903190022g15c2d59dkd814e5304cc33fb9@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 19 Mar 2009 11:27:06 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.172
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Thu, 19 Mar 2009 11:01:08 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
+References: <1237328436.20770.57.camel@homestead>
+	<20090318000600.GA20384@denix.org>
+In-Reply-To: <20090318000600.GA20384@denix.org>
+MIME-Version: 1.0
+Message-Id: <200903191101.09014.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_05,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_PROXY,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/3] rename packages/ to recipes/ per earlier agreement
+Subject: Re: Cleaning tmp folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,104 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 07:23:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 Mar 2009 10:02:15 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-There are still a few related tasks pending.
-One of them is updating the wiki. (e.g.
-http://wiki.openembedded.net/index.php/Getting_Started)
-probably it is most convenient if someone does it who can access the
-system and the files and directly invoke an editor (assuming it are
-files and not in a database).
+On Wednesday 18 March 2009 01:06:00 Denys Dmytriyenko wrote:
+> On Tue, Mar 17, 2009 at 10:20:36PM +0000, Shane Dixon wrote:
+> > I've been digging through the bitbake files and I don't see any recipe
+> > for cleaning the tmp folder.  I typically just blow away the entire tmp/
+> > folder and build again, but then I'm spending time rebuilding the native
+> > packages and crosscompiler.
+> >
+> > Is there a bitbake recipe for cleaning out all non-native and
+> > non-crosscompiler packages from tmp or am I stuck just starting over
+> > each time?
+>
+> If you have packaged staging enabled (see INHERIT += "packaged-staging"),
+> you can try setting DEPLOY_DIR_PSTAGE (or entire DEPLOY_DIR) outside of
+> TMPDIR.
 
-Frans.
+Note that this doesn't work atm. since DEPLOY_DIR is not using a weak 
+assignment in bitbake.conf -- something which I'm changing as we speak.
 
-2009/3/19 Denys Dmytriyenko <denis@denix.org>:
-> On Wed, Mar 18, 2009 at 10:01:25PM -0400, Denys Dmytriyenko wrote:
->> On Wed, Mar 18, 2009 at 05:25:11PM -0700, Theodore A. Roth wrote:
->> > On Tue, Mar 17, 2009 at 12:26 PM, Denys Dmytriyenko <denis@denix.org> =
-wrote:
->> > > On Mon, Mar 16, 2009 at 07:56:37PM -0500, Mike (mwester) wrote:
->> > >>
->> > >> Denys Dmytriyenko wrote:
->> > >> > Renaming packages/ directory to recipes/, as one of the several s=
-tructural
->> > >> > changes, was proposed by Koen[1] and agreed/approved by many. Sin=
-ce Koen
->> > >> > currently doesn't have time/ability to do the change, and some pe=
-ople are
->> > >> > too eager to wait any longer, he asked me to do it. Please ack/na=
-ck.
->> > >>
->> > >> Ack. =A0 But can you please tag the revision immediately preceeding=
- the
->> > >> commit of this change so we have some easy-to-reference point[*] in=
- the
->> > >> history?
->> > >
->> > > Done. mv-packages-to-recipes-pre and mv-packages-to-recipes-post are=
- the tags
->> > > applied right before and right after the change.
->> > >
->> >
->> > Is the packages directory supposed to be empty now? There are still a
->> > few subdirs left:
->> >
->> >
->> > roth@dorkboy:~/dev/OE/openembedded/packages$ ls -1
->> > automake/
->> > blueprobe/
->> > busybox/
->> > coreutils/
->> > gnome/
->> > gpe-gallery/
->> > pkgconfig/
->> > pyneo/
->> > qt4/
->> > udev/
->>
->> Those are empty directories (unless you have uncommited changes in them)=
-.
->> That is because git only keeps track of files, not directories. A simple
->> rename of a single directory resulted in thousands of renames of individ=
-ual
->> files. When you did "git pull" all the files were moved, leaving the old
->> hierarchy empty. It should be safe to remove by "rm -r packages" - if th=
-ere
->> are still files there, rm will fail. And if you do a fresh "git clone", =
-there
->> will be no packages/ directory there.
->
-> Argh, the above "rm -r packages" is not safe, as it won't fail removing f=
-iles.
-> Please use this command instead:
-> find packages -depth -type d -empty -exec rmdir {} \;
->
->> > I will generate a patch to the usermanual to note the new recipes
->> > directory.
->>
->> Thanks for taking care of the documentation.
->>
->> > I am curious is the old packages will still be kept around
->> > or if it will be completely removed. If kept, how would it be
->> > described versus the recipes dir?
->>
->> Now recipes/ directory name represents its contents. Packages are normal=
-ly
->> generated by running/processing recipes. But they are placed inside DEPL=
-OY_DIR
->> and I'm not sure there is any need in packages/ directory in the reposit=
-ory.
->
-> --
-> Denys
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+:M:
+
 
 
