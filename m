@@ -1,47 +1,28 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LkFXp-0004ke-Ty
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 11:32:16 +0100
-Received: by fxm20 with SMTP id 20so408396fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2009 03:31:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=XUbfgaJlELC2F6Xq9sGxCiq/6N+enRtTZHcHhMI59wM=;
-	b=P9qvkJ1dTs8K2i1Qhr7hinS0IriVA1TdBnz9pRwu1s0AP3+aGZv54PJY5o9ljtABl3
-	7bfUhjl2iGiA4r9pd9EC48x0xSUE/+JIoNHREetbxicxKUTV9ce3srEfKTUZlJbyHiuG
-	wVV+0cMka8y8tIRf24dY4QFoRzhEMyPRqCN9Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=YhOXYMpCALj42Mlg2SX7O8cPlohl9bY6zuxinq/uU3RFlRH0KxGdQfG1NfwIsbePwF
-	CG4jhaTXHxI3ENN+8wSbmoZzv6dDN987kTjOUERoaPmGCBnIIdOKnBG5MaQuz0weGM9c
-	NZPJeBpPyUq5XSjBfJmM/7ZKyQ8ZqGT7l5P2E=
-MIME-Version: 1.0
-Received: by 10.223.120.197 with SMTP id e5mr1969263far.25.1237458675841; Thu, 
-	19 Mar 2009 03:31:15 -0700 (PDT)
-In-Reply-To: <20090318171248.GA25537@denix.org>
-References: <1237328436.20770.57.camel@homestead>
-	<d1b08f940903171633l7c66f604rfa6375bd95b2c3bf@mail.gmail.com>
-	<20090318001624.GB20384@denix.org>
-	<ac9c93b10903180121l3454a2adqbaac9590659daf76@mail.gmail.com>
-	<20090318171248.GA25537@denix.org>
-Date: Thu, 19 Mar 2009 11:31:15 +0100
-Message-ID: <ac9c93b10903190331m307e5954web2c049fd94acee5@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LkHs3-0000Cb-6q
+	for openembedded-devel@openembedded.org; Thu, 19 Mar 2009 14:01:23 +0100
+Received: (qmail 18174 invoked by uid 813007); 19 Mar 2009 13:00:17 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 Mar 2009 13:00:17 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.172
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Thu, 19 Mar 2009 14:00:14 +0100
+Message-Id: <1237467616-4745-2-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.2.1
+In-Reply-To: <1237467616-4745-1-git-send-email-marcin@juszkiewicz.com.pl>
+References: <1237467616-4745-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL, BAYES_50, NO_DNS_FOR_FROM,
+	RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Cleaning tmp folder
+Subject: [PATCH 1/3] mtd: dropped 1.0.0(+git) versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,33 +36,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 10:32:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Mar 2009 13:01:24 -0000
 
-2009/3/18 Denys Dmytriyenko <denis@denix.org>:
-> On Wed, Mar 18, 2009 at 09:21:53AM +0100, Frans Meulenbroeks wrote:
->> A crude temp solution could be to just remove the stamps of all
->> non-native, non-cross packages.
->>
->> Also if you only want to reclaim space I guess it is ok to remove the
->> work subdir (or at least in my case (beagleboard) the work/arm* dir)
->> If this is not right I guess someone will correct me :-)
->>
->> Btw: it would also be nice to have a command to purge the tmp dir, so
->> if X build for r0 is there and X build for r1 is there the r0 version
->> is nuked. Never got to writing something for that though :-)
->
-> Speaking of purging tmp/work - you might want to look for
-> INHERIT += "rm_work", which cleans work directory for every package, after
-> it's built and staged/packaged.
->
+From: Marcin Juszkiewicz <hrw@openembedded.org>
 
-Nice, but is there a way to overrule it on the command line.
-Generally I'd like to have this, but when working on a new package I
-typically like to have a look at the work dir too before committing
-the new recipe.
+---
+ recipes/mtd/mtd-utils-native_1.0.0+git.bb |    3 --
+ recipes/mtd/mtd-utils-native_1.0.0.bb     |    2 -
+ recipes/mtd/mtd-utils_1.0.0+git.bb        |   51 -----------------------------
+ recipes/mtd/mtd-utils_1.0.0.bb            |   19 -----------
+ 4 files changed, 0 insertions(+), 75 deletions(-)
+ delete mode 100644 recipes/mtd/mtd-utils-native_1.0.0+git.bb
+ delete mode 100644 recipes/mtd/mtd-utils-native_1.0.0.bb
+ delete mode 100644 recipes/mtd/mtd-utils_1.0.0+git.bb
+ delete mode 100644 recipes/mtd/mtd-utils_1.0.0.bb
 
-FM
+diff --git a/recipes/mtd/mtd-utils-native_1.0.0+git.bb b/recipes/mtd/mtd-utils-native_1.0.0+git.bb
+deleted file mode 100644
+index 6e310cb..0000000
+--- a/recipes/mtd/mtd-utils-native_1.0.0+git.bb
++++ /dev/null
+@@ -1,3 +0,0 @@
+-require mtd-utils_${PV}.bb
+-require mtd-utils-native.inc
+-
+diff --git a/recipes/mtd/mtd-utils-native_1.0.0.bb b/recipes/mtd/mtd-utils-native_1.0.0.bb
+deleted file mode 100644
+index 6f9d71e..0000000
+--- a/recipes/mtd/mtd-utils-native_1.0.0.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-require mtd-utils_${PV}.bb
+-require mtd-utils-native.inc
+diff --git a/recipes/mtd/mtd-utils_1.0.0+git.bb b/recipes/mtd/mtd-utils_1.0.0+git.bb
+deleted file mode 100644
+index b325bb0..0000000
+--- a/recipes/mtd/mtd-utils_1.0.0+git.bb
++++ /dev/null
+@@ -1,51 +0,0 @@
+-DESCRIPTION = "Tools for managing memory technology devices."
+-SECTION = "base"
+-DEPENDS = "zlib lzo"
+-HOMEPAGE = "http://www.linux-mtd.infradead.org/"
+-LICENSE = "GPLv2"
+-PR = "r8"
+-
+-# This is the default package, thus we lock to a specific git version so 
+-# upstream changes will not break builds.
+-
+-TAG = "9845d92440bd87739c89edd000fd6e0c47fab185"
+-# As of 2007/27/07, see http://git.infradead.org/?p=mtd-utils.git;a=shortlog
+-
+-SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=${TAG} \
+-           file://add-exclusion-to-mkfs-jffs2-git.patch;patch=1 \
+-	   file://fix-ignoreerrors-git.patch;patch=1 \
+-	   file://lzo_1x.patch;patch=1"
+-
+-S = "${WORKDIR}/git/"
+-
+-EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR'"
+-
+-do_stage () {
+-	install -d ${STAGING_INCDIR}/mtd
+-	for f in ${S}/include/mtd/*.h; do
+-		install -m 0644 $f ${STAGING_INCDIR}/mtd/
+-	done
+-	for binary in ${mtd_utils}; do
+-		install -m 0755 $binary ${STAGING_BINDIR}
+-	done
+-}
+-
+-mtd_utils = "ftl_format flash_erase flash_eraseall nanddump doc_loadbios \
+-             mkfs.jffs ftl_check mkfs.jffs2 flash_lock flash_unlock flash_info mtd_debug \
+-             flashcp nandwrite jffs2dump sumtool"
+-
+-do_install () {
+-	install -d ${D}${bindir}
+-	install -d ${D}${includedir}/mtd
+-	for binary in ${mtd_utils}; do
+-		install -m 0755 $binary ${D}${bindir}
+-	done
+-	for f in ${S}/include/mtd/*.h; do
+-		install -m 0644 $f ${D}${includedir}/mtd
+-	done
+-}
+-
+-PACKAGES =+ "mkfs-jffs mkfs-jffs2"
+-FILES_mkfs-jffs = "${bindir}/mkfs.jffs"
+-FILES_mkfs-jffs2 = "${bindir}/mkfs.jffs2"
+-
+diff --git a/recipes/mtd/mtd-utils_1.0.0.bb b/recipes/mtd/mtd-utils_1.0.0.bb
+deleted file mode 100644
+index 0ebb47f..0000000
+--- a/recipes/mtd/mtd-utils_1.0.0.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-DESCRIPTION = "Tools for managing memory technology devices."
+-SECTION = "base"
+-DEPENDS = "zlib"
+-HOMEPAGE = "http://www.linux-mtd.infradead.org/"
+-LICENSE = "GPLv2"
+-PR = "r0"
+-
+-# RP/kergoth: Builds seem to break with recent mtd-utils
+-# Can't pin down the exact problems
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRC_URI = "ftp://ftp.infradead.org/pub/mtd-utils/mtd-utils-1.0.0.tar.gz"
+-S = "${WORKDIR}/mtd-utils-${PV}"
+-
+-CFLAGS_prepend = "-I${WORKDIR}/mtd-utils-${PV}/include "
+-
+-do_install() {
+-	oe_runmake install DESTDIR=${D}
+-}
+-- 
+1.6.2.1
+
+
+
 
 
