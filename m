@@ -1,29 +1,29 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [75.125.193.18] (helo=alpha.vfshosting.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1Lk9nO-00040Z-N5
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 05:23:58 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.105]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1Lk9mH-00016v-Fn
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 12:22:57 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Mar 2009 22:22:36 -0600
-Message-Id: <1237436556.13773.2.camel@think-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 59.124.115.149
-X-SA-Exim-Mail-From: nytowl@openmoko.org
+	(envelope-from <gremlin@gremlin.it>) id 1LkCUu-0000eE-Uy
+	for openembedded-devel@openembedded.org; Thu, 19 Mar 2009 08:17:05 +0100
+X-ClientAddr: 127.0.0.1
+Received: from sesha.loc (localhost.localdomain [127.0.0.1])
+	by alpha.vfshosting.net (8.13.8/8.13.8) with ESMTP id n2J7Fx1T030521
+	for <openembedded-devel@openembedded.org>;
+	Thu, 19 Mar 2009 08:16:01 +0100
+Message-ID: <49C1F12B.8020207@gremlin.it>
+Date: Thu, 19 Mar 2009 08:15:55 +0100
+From: Alessandro GARDICH <gremlin@gremlin.it>
+User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <c384c5ea0903181536n442efbbbyb80344c7bce7a04@mail.gmail.com>
+In-Reply-To: <c384c5ea0903181536n442efbbbyb80344c7bce7a04@mail.gmail.com>
+X-SA-Exim-Connect-IP: 75.125.193.18
+X-SA-Exim-Mail-From: gremlin@gremlin.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_20,RDNS_NONE
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Allow openmoko2 to succeed on unsplitable sections
+Subject: Re: I ordered a few SheevaPlugs into .eu, any takers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 04:23:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 19 Mar 2009 07:17:05 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
+Leon Woestenberg wrote:
+> Hello,
+> 
+> If anyone in .eu wanted to buy a SheevaPlug for OpenEmbedded
+> development; I have ordered a few to lower the per-unit shipping costs
+> a bit.
+> 
+> I might have one or two left again cost price plus shipping from .nl
+> (or I bring some to LinuxTag if that is going to happen for me).
+> 
+> 
+> Afterwards, I'm considering refunding the unit cost to OpenEmbedded
+> developers using code bounties for OE and/or Sheeva related work.
+> 
+> Regards,
 
----
- classes/openmoko2.bbclass |   10 ++++++++--
- 1 files changed, 8 insertions(+), 2 deletions(-)
+Hi
 
-diff --git a/classes/openmoko2.bbclass b/classes/openmoko2.bbclass
-index ef734e4..3294026 100644
---- a/classes/openmoko2.bbclass
-+++ b/classes/openmoko2.bbclass
-@@ -6,12 +6,18 @@ OPENMOKO_MIRROR ?= "svn://svn.openmoko.org/trunk"
+I'm doing about the same thing here (2 pieces sure, maybe 5) in Italy.
 
- def openmoko_two_get_license(d):
-     import bb
--    openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
-+    if bb.data.getVar('SECTION', d, 1).find("/") != -1 :
-+        openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
-+    else :
-+       section = bb.data.getVar('SECTION', d, 1)
-     return "LGPL GPL".split()[section != "libs"]
-
- def openmoko_two_get_subdir(d):
-     import bb
--    openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
-+    if bb.data.getVar('SECTION', d, 1).find("/") != -1 :
-+       openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
-+    else :
-+       section = bb.data.getVar('SECTION', d, 1)
-     if section == 'base': return ""
-     elif section == 'libs': return "libraries"
-     elif section in 'apps tools pim'.split(): return "applications"
---
-1.5.6.3
+Can you explain more about the bounties ?
 
 
+-- 
+  /-------------------------------------------------------------\
+|           Alessandro Gardich : gremlin@gremlin.it             |
+  >-------------------------------------------------------------<
+|  I never saw a wild thing sorry for itself.                   |
+|  A small bird will drop frozen dead from a bough              |
+|  without ever having felt sorry for itself.                   |
+  \-------------------------------------------------------------/
 
 
