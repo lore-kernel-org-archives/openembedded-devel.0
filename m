@@ -1,23 +1,23 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LkMoh-0003AC-Pg
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 19:18:07 +0100
-Received: from andromeda.vanille.de (e180149050.adsl.alicedsl.de
-	[85.180.149.50])
-	by drlauer-research.com (Postfix) with ESMTP id 4A83658463A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2009 19:43:08 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LkO28-000716-9g
+	for openembedded-devel@openembedded.org; Thu, 19 Mar 2009 20:36:04 +0100
+Received: (qmail 30343 invoked by uid 813007); 19 Mar 2009 19:35:05 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 Mar 2009 19:35:05 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Mar 2009 19:17:09 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
-References: <alpine.DEB.1.00.0903191053260.9107@localhost.localdomain>
-In-Reply-To: <alpine.DEB.1.00.0903191053260.9107@localhost.localdomain>
+Date: Thu, 19 Mar 2009 20:34:59 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
+	x86_64; ; )
+References: <200903051232.09899.marcin@juszkiewicz.com.pl>
+	<200903191751.28927.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200903191751.28927.marcin@juszkiewicz.com.pl>
 MIME-Version: 1.0
-Message-Id: <200903191917.09270.mickey@vanille-media.de>
-Subject: Re: [PATCH] local.conf.sample: Replace packages/ with recipes/.
+Message-Id: <200903192035.00003.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] gtk+: make 2.14.2 default version instead of 2.10.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,19 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 18:18:07 -0000
+X-List-Received-Date: Thu, 19 Mar 2009 19:36:04 -0000
 Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Theodore,
+Dnia czwartek, 19 marca 2009 o 17:51:28 Marcin Juszkiewicz napisa=C5=82(a):
+> Dnia czwartek, 5 marca 2009 o 12:32:07 Marcin Juszkiewicz napisa=C5=82(a):
+> > commit 67d5b4c8f0283225eab0408099d0d3cf440c0fd0
+> > Author: Marcin Juszkiewicz <hrw@openembedded.org>
+> > Date: =C2=A0 Thu Mar 5 11:03:13 2009 +0100
+> >
+> > =C2=A0 =C2=A0 gtk+: make 2.14.2 default version instead of 2.10.14
+> >
+> > =C2=A0 =C2=A0 =C3=85ngstr=C3=B6m uses this version and many components =
+of metadata
+> > depends on at least 2.12.
+>
+> No one objects?
 
-your patches seem sane. Would you be interested in commit access?
+pushed.
 
-Cheers,
--- 
-:M:
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
