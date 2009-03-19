@@ -1,34 +1,33 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LkHsA-0000Cl-05
+	(envelope-from <mickey@vanille-media.de>) id 1LkI25-0000fw-U0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 14:01:30 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGR004YW83PUUV3@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	19 Mar 2009 07:59:55 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 130716B83A8; Thu,
-	19 Mar 2009 08:59:49 -0400 (EDT)
-Date: Thu, 19 Mar 2009 08:59:49 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 19 Mar 2009 14:11:45 +0100
+Received: from andromeda.vanille.de (e180149050.adsl.alicedsl.de
+	[85.180.149.50])
+	by drlauer-research.com (Postfix) with ESMTP id 115CF58415C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Mar 2009 14:36:39 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090319125949.GC27595@denix.org>
-References: <1237328436.20770.57.camel@homestead>
-	<20090318000600.GA20384@denix.org>
-	<200903191101.09014.mickey@vanille-media.de>
-MIME-version: 1.0
-In-reply-to: <200903191101.09014.mickey@vanille-media.de>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Thu, 19 Mar 2009 14:10:41 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
+References: <1237467616-4745-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1237467616-4745-3-git-send-email-marcin@juszkiewicz.com.pl>
+	<1237467616-4745-4-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1237467616-4745-4-git-send-email-marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+Message-Id: <200903191410.41483.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.4 required=5.0 tests=AWL,BAYES_00,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_NJABL_PROXY,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Cleaning tmp folder
+Subject: Re: [PATCH 3/3] mtd-utils-tests: update to 1.2.0+git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +41,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 13:01:34 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 19 Mar 2009 13:11:47 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Thu, Mar 19, 2009 at 11:01:08AM +0100, Michael 'Mickey' Lauer wrote:
-> On Wednesday 18 March 2009 01:06:00 Denys Dmytriyenko wrote:
-> > On Tue, Mar 17, 2009 at 10:20:36PM +0000, Shane Dixon wrote:
-> > > I've been digging through the bitbake files and I don't see any recipe
-> > > for cleaning the tmp folder.  I typically just blow away the entire tmp/
-> > > folder and build again, but then I'm spending time rebuilding the native
-> > > packages and crosscompiler.
-> > >
-> > > Is there a bitbake recipe for cleaning out all non-native and
-> > > non-crosscompiler packages from tmp or am I stuck just starting over
-> > > each time?
-> >
-> > If you have packaged staging enabled (see INHERIT += "packaged-staging"),
-> > you can try setting DEPLOY_DIR_PSTAGE (or entire DEPLOY_DIR) outside of
-> > TMPDIR.
-> 
-> Note that this doesn't work atm. since DEPLOY_DIR is not using a weak 
-> assignment in bitbake.conf -- something which I'm changing as we speak.
-
-Correct, DEPLOY_DIR is not a weak assignment. But I believe DEPLOY_DIR_PSTAGE 
-is. Also, it can be "fixed" locally in the overlay.
+Awesome. +1
 
 -- 
-Denys
+:M:
+
 
 
