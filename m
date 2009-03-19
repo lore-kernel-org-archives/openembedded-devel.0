@@ -1,36 +1,37 @@
-Received: from [74.125.46.156] (helo=yw-out-1718.google.com)
+Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <taroth@gmail.com>) id 1LkMXx-0002Td-Em
+	(envelope-from <taroth@gmail.com>) id 1LkMaA-0002Zo-0s
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2009 19:00:49 +0100
-Received: by yw-out-1718.google.com with SMTP id 9so454816ywk.42
+	Thu, 19 Mar 2009 19:03:06 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so341367qwf.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2009 10:59:51 -0700 (PDT)
+	Thu, 19 Mar 2009 11:02:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:message-id
-	:user-agent:mime-version:content-type;
-	bh=MQKw25vyEkejWBC9Y5dvhkLQkqJtmwA2YN9JmzJdxB4=;
-	b=mMsx5HORGvrsUqRmnNI8ikADNHW17p19/TCJcroplqg0Et54hrswLz1C0UPhsPWK8u
-	xGVCTu+BcSj45DmNWcNJeWbvaJJe1L3fQg6PXpxNeqd2K8AWMWGxcV3gV2N1+yvHt2lP
-	u8qTWPCMSP1Bvd+jlhQBfCbA/BZMYYDpoDM6g=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:user-agent:mime-version:content-type;
+	bh=xlrkooYv+FPWc6gDh2tSPB2taZ6ECFZiG6JgG9ZSpSw=;
+	b=b9+rJbKdHjgJ0Yzfe531ScYwJslmlpYJaz37QEPrWFGvhRY1OQfniWUg0VJCNEaE28
+	gTkxc/hl9+ofhwetcN0sI5lT4MX4cuiHpIZOzC7e1Er7v728sQq5FFTELCBw8QB8VQ2C
+	zbwdI+sZiLvlYEePSsYZbJCe8u50m9F8Tc3rc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:message-id:user-agent:mime-version:content-type;
-	b=kOjFBhDWPy/KO8SqucRqdHHtBVp+5b1iQqXGKiM5yWAohxzZ6kM2rTgQFmSeSL3S9X
-	gxQ5A54BS84Z5b8CFBes+OSGOlYT18mL5HRaq2yC/9Q4K+tbUW+vl+wZOm8egBk568Yl
-	8dnNQbpH4vJ0+CjW4rBJgWIyj7Kito2VpWgeE=
-Received: by 10.142.174.18 with SMTP id w18mr1058653wfe.24.1237485590583;
-	Thu, 19 Mar 2009 10:59:50 -0700 (PDT)
+	h=date:from:to:subject:message-id:user-agent:mime-version
+	:content-type;
+	b=GJCq2HtUyCYX9zrSvB4olWI+sV6uGPLnYwBS7ogvjrkdXmqIrO8h8t14VIzFAFYSG+
+	1OVfHGQ6OUGGex1/QFML0kUyyT/wb8hU9p/cRXofjY8ug0Qnqt0MZ4YkUBD0iT2nC+7t
+	7IAjnnPaYDVwcW5UiAzOiPsrN9CeuBWfP5VDY=
+Received: by 10.142.142.14 with SMTP id p14mr555741wfd.100.1237485726624;
+	Thu, 19 Mar 2009 11:02:06 -0700 (PDT)
 Received: from dorkboy (99-203-159-164.pools.spcsdns.net [99.203.159.164])
-	by mx.google.com with ESMTPS id 29sm2086512wfg.33.2009.03.19.10.59.48
+	by mx.google.com with ESMTPS id 20sm2074020wfi.52.2009.03.19.11.02.04
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Mar 2009 10:59:49 -0700 (PDT)
-Date: Thu, 19 Mar 2009 10:59:46 -0700 (PDT)
+	Thu, 19 Mar 2009 11:02:06 -0700 (PDT)
+Date: Thu, 19 Mar 2009 11:02:02 -0700 (PDT)
 From: "Theodore A. Roth" <taroth@gmail.com>
 To: OpenEmbedded Development List <openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.1.00.0903191058400.9107@localhost.localdomain>
+Message-ID: <alpine.DEB.1.00.0903191100190.9107@localhost.localdomain>
 User-Agent: Alpine 1.00 (DEB 882 2007-12-20)
 MIME-Version: 1.0
-Subject: (No subject)
+Subject: [PATCH] doc/usermanual/chapters: Replace references to packages dir with recipes dir.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,13 +45,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2009 18:00:50 -0000
+X-List-Received-Date: Thu, 19 Mar 2009 18:03:06 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-From 2c41e9d95bfedd8a73a29478fbe49e7ec538e7f9 Mon Sep 17 00:00:00 2001
-From: Theodore A. Roth <troth@openavr.org>
-Date: Thu, 19 Mar 2009 10:50:54 -0700
-Subject: [PATCH] doc/usermanual/chapters: Replace references to packages dir with recipes dir.
 
 ---
  docs/usermanual/chapters/common_use_cases.xml |    6 +-
@@ -427,7 +424,8 @@ index 9fe20fa..5dd00d6 100644
 -- 
 1.5.4.3
 
-Signed-off-by: Theodore A. Roth <taroth@gmail.com>
+Sorry for the dup. I forget to put the subject on the previous post.
 
+Signed-off-by: Theodore A. Roth <taroth@gmail.com>
 
 
