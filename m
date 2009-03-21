@@ -1,38 +1,38 @@
-Received: from [209.85.200.168] (helo=wf-out-1314.google.com)
+Received: from [209.85.132.249] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LkrB4-00057v-Bn
-	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 03:43:14 +0100
-Received: by wf-out-1314.google.com with SMTP id 28so1396502wfa.6
+	(envelope-from <raj.khem@gmail.com>) id 1LkrTF-0005Ro-KP
+	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 04:02:01 +0100
+Received: by an-out-0708.google.com with SMTP id d11so1067402and.30
 	for <openembedded-devel@openembedded.org>;
-	Fri, 20 Mar 2009 19:42:07 -0700 (PDT)
+	Fri, 20 Mar 2009 20:00:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:subject:date
 	:user-agent:cc:references:in-reply-to:mime-version:content-type
 	:content-transfer-encoding:message-id;
-	bh=SKZRj4f6tK9ziImv5CIi79HpZ86hFg0RzB/kpwsANOI=;
-	b=CqJyG2PkEhhk2ZWHpqEz33rPqjRMiWMOwx0VbVVq3X6Uj8NYMyhEDiMjOF9SnBNwOU
-	N0yYLbFOVWAzaz7nJT24YZNm88I9tHR4b9yQxocIQH661d0szanOEnibYCVuVLWI69Xf
-	lj1mgzCNO+OGK0uMUfXovBvdF0yK93hlidwGQ=
+	bh=K9tyc7rjGn8G+D9pp7M/Nn3b8D23BS7aNJ4VjI2lOO0=;
+	b=eSQZRpfYW12yXITofmbXRvsRRhIPPU2VbnGkoBwSHn/YKWsXnp6V8x6K6MjcxugtCp
+	DpWacID7WZNU5tU+6ZPgg34yJ1ctQqrjjgOC1MSqd3JCE05tuvCkuOn07MSr6ewghFmP
+	Icyb7clh6YyRUIZkrT8r8llO3UGXmNT2jlAho=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:user-agent:cc:references:in-reply-to
 	:mime-version:content-type:content-transfer-encoding:message-id;
-	b=mpmgK1t9Rgr+OnuLPRuV4hXJDPtkRxz/BtMsOAjVvieo2mOPTPTl+qqnbZVnLVd3yj
-	Y2phb323pwm2s5xCKY1HIn6yRpm8ddv3tRZm7SbKbI9N2s6+86h7OYEkCR2JhcS9ebsA
-	hNgZ/JqeKi7ve/DrfAC9n7JzGm8rPUSqEU9Lo=
-Received: by 10.114.103.1 with SMTP id a1mr2842262wac.218.1237603327186;
-	Fri, 20 Mar 2009 19:42:07 -0700 (PDT)
+	b=mhrSC9JbkgqjrGibuEwELYIT7i7qqQyU30XI23kujR4xg1LH22CW4aYWJ6qG3t4Lwg
+	OIpAW6rX6JlB/52k0DBqgWtvD0xSbLXRyqq4+xItSunTym054+CYoPGJxqKdPSuSEJ8L
+	Kbbfl2xEDIMJ7pHD+sV9kh4o5UIkOc2QKlN0U=
+Received: by 10.142.162.9 with SMTP id k9mr1778880wfe.164.1237604454145;
+	Fri, 20 Mar 2009 20:00:54 -0700 (PDT)
 Received: from morpheus.localnet (adsl-71-146-12-154.dsl.pltn13.sbcglobal.net
 	[71.146.12.154])
-	by mx.google.com with ESMTPS id m26sm9971927pof.18.2009.03.20.19.42.06
-	(version=SSLv3 cipher=RC4-MD5); Fri, 20 Mar 2009 19:42:06 -0700 (PDT)
+	by mx.google.com with ESMTPS id 32sm5494961wfa.39.2009.03.20.20.00.52
+	(version=SSLv3 cipher=RC4-MD5); Fri, 20 Mar 2009 20:00:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Mar 2009 19:42:01 -0700
+Date: Fri, 20 Mar 2009 20:00:48 -0700
 User-Agent: KMail/1.11.1 (Linux/2.6.28-11-generic; KDE/4.2.1; x86_64; ; )
 References: <49C4516C.90607@dls.net>
 In-Reply-To: <49C4516C.90607@dls.net>
 MIME-Version: 1.0
-Message-Id: <200903201942.04745.raj.khem@gmail.com>
+Message-Id: <200903202000.51700.raj.khem@gmail.com>
 Cc: openembedded-devel@openembedded.org
 Subject: Re: Parse failure for the new RPM recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -48,13 +48,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2009 02:43:15 -0000
-X-Groupsio-MsgNum: 8586
-Content-Type: multipart/signed; boundary="nextPart1364369.aNS9EJXPCH";
+X-List-Received-Date: Sat, 21 Mar 2009 03:02:02 -0000
+X-Groupsio-MsgNum: 8587
+Content-Type: multipart/signed; boundary="nextPart1777438.GE65tJr79b";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
---nextPart1364369.aNS9EJXPCH
+--nextPart1777438.GE65tJr79b
 Content-Type: text/plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -70,6 +70,25 @@ o that parsing continues.  If that works, I'll commit that change -- someon=
 e can revert it as soon as the real fix comes along (that's the best I can =
 do; I just have no idea what this is trying to do, or why that function is =
 being evaluated at parse time).
+
+I know this patch is bogus but it lets the parse to go through and if you a=
+re not building rpm then you can use it.
+
+diff --git a/recipes/rpm/rpm_4.4.2.3.bb b/recipes/rpm/rpm_4.4.2.3.bb
+index db88282..e88036f 100644
+=2D-- a/recipes/rpm/rpm_4.4.2.3.bb
++++ b/recipes/rpm/rpm_4.4.2.3.bb
+@@ -13,7 +13,7 @@ SRC_URI =3D "http://www.rpm.org/releases/rpm-4.4.x/rpm-4.=
+4.2.3.tar.gz \
+           file://missingok.patch;patch=3D1;pnum=3D0 \
+           file://extcond.patch;patch=3D1;pnum=3D0"
+
+=2Dinherit autotools gettext distutils-base
++inherit autotools gettext
+
+ S =3D "${WORKDIR}/rpm-${PV}"
+
+
 >=20
 > Mike (mwester)
 >=20
@@ -171,22 +190,19 @@ sub
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >=20
 
-Are you also using uclibc as system C library. For me it happens when I cho=
-se uclibc
-if I chose glibc or eglibc parse completes.
 =2D-=20
 Khem Raj
 
---nextPart1364369.aNS9EJXPCH
+--nextPart1777438.GE65tJr79b
 Content-Type: application/pgp-signature; name=signature.asc 
 Content-Description: This is a digitally signed message part.
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEABECAAYFAknEU/kACgkQHnJKy6V6em52KQCaAsFM8y12EYM/8OREnupzYFoH
-758AoKgImJHnENXqu5UyfOs9sO+bRkS/
-=7ln9
+iEYEABECAAYFAknEWGAACgkQHnJKy6V6em7cxACeKWRx580A+Ns21m7UH7qlryoH
+V18AnizaBl6AGoJ87L9zOwmaHDz0HSNy
+=dsHB
 -----END PGP SIGNATURE-----
 
---nextPart1364369.aNS9EJXPCH--
+--nextPart1777438.GE65tJr79b--
