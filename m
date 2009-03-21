@@ -1,34 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lkwr6-00009g-M6
-	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 09:47:01 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lkwpz-0005wI-PG
-	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 08:45:51 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 21 Mar 2009 08:45:51 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 21 Mar 2009 08:45:51 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 21 Mar 2009 09:45:38 +0100
-Message-ID: <gq29fi$k9s$1@ger.gmane.org>
-References: <80a0c20d0903191458m2c450cb3se2ed0c2ef2680c78@mail.gmail.com>	<gpvlao$cps$1@ger.gmane.org>
-	<b6ebd0a50903201805l2eb43d3v8c1f88979e0f1db2@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b3pre) Gecko/20090225 Shredder/3.0b3pre
-In-Reply-To: <b6ebd0a50903201805l2eb43d3v8c1f88979e0f1db2@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: packaged-staging not working properly
+	(envelope-from <mickey@vanille-media.de>) id 1Lkz08-0006WJ-C9
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 21 Mar 2009 12:04:28 +0100
+Received: from andromeda.vanille.de (e180182112.adsl.alicedsl.de
+	[85.180.182.112])
+	by drlauer-research.com (Postfix) with ESMTP id 8284E5847F5;
+	Sat, 21 Mar 2009 12:29:26 +0100 (CET)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 21 Mar 2009 12:03:18 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
+References: <49C4516C.90607@dls.net> <200903202016.34258.raj.khem@gmail.com>
+In-Reply-To: <200903202016.34258.raj.khem@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200903211203.18746.mickey@vanille-media.de>
+Subject: Re: Parse failure for the new RPM recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2009 08:47:05 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 21 Mar 2009 11:04:28 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 21-03-09 02:05, Chris Larson wrote:
-> On Fri, Mar 20, 2009 at 1:49 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
->> On 19-03-09 22:58, Matthieu Poullet wrote:
->>> Hi,
->>>
->>> I'd like to use the packaged-staging capability of OE.
->>> I'm building the console-image for the BB using the dev branch.
->>> DEPLOY_DIR_PSTAGE = "${OE_HOME}/archives"
->> Here you save *only* the pstage packages
->>
->>> touch: cannot touch `/home/mpoullet/oe/tmp/deploy/glibc/ipk/Packages':
->>> No such file or directory
->> And here it wants to use something from deploy outside of PSTAGE.
->
-> That doesn't make any sense.  Packages should be created when needed
-> in the image/rootfs creation process.
+> Attached is a better fix. Is it OK ?
 
-Not if there are pstage packages present for that recipe.
+Yes, this is correct. The problem is a chicken-and-egg-one. We need python 
+built to know what version of python we support (since there's no other way to 
+peek in the metadata, which I'd love to have).
 
-regards,
+Your patch is as good as it can get given the situation.
 
-Koen
+:M:
+
 
 
 
