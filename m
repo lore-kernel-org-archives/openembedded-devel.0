@@ -1,20 +1,22 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [76.96.30.56] (helo=QMTA06.emeryville.ca.mail.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Ll519-00083o-8p
-	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 18:29:55 +0100
-Received: from [209.242.7.134] (helo=[192.168.231.111])
-	by mx01.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Ll500-0000ht-Jw
-	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 12:28:44 -0500
-Message-ID: <49C523BE.3000501@dls.net>
-Date: Sat, 21 Mar 2009 12:28:30 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <1237656337.8743.5.camel@ed-hp-laptop>
-In-Reply-To: <1237656337.8743.5.camel@ed-hp-laptop>
+	(envelope-from <enelson1000@comcast.net>) id 1Ll5oI-0000WW-NH
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 21 Mar 2009 19:20:43 +0100
+Received: from OMTA05.emeryville.ca.mail.comcast.net ([76.96.30.43])
+	by QMTA06.emeryville.ca.mail.comcast.net with comcast
+	id VoS61b0010vp7WLA6uKW3Y; Sat, 21 Mar 2009 18:19:30 +0000
+Received: from [192.168.1.116] ([71.198.120.50])
+	by OMTA05.emeryville.ca.mail.comcast.net with comcast
+	id VuKU1b00D15LFXK8RuKVlQ; Sat, 21 Mar 2009 18:19:30 +0000
+From: ed <enelson1000@comcast.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <49C523BE.3000501@dls.net>
+References: <1237656337.8743.5.camel@ed-hp-laptop> <49C523BE.3000501@dls.net>
+Date: Sat, 21 Mar 2009 11:19:27 -0700
+Message-Id: <1237659567.8743.7.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
 Subject: Re: Missing Packages directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,16 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2009 17:29:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 21 Mar 2009 18:20:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-ed wrote:
-> When I try to install OE using the following command I do not see the
-> packages directory under openembedded directory.  Is something broken?
+Thanks
 
-No, nothing is broken.  It's the "recipes" directory now.
+But now how do I build angstrom console-image.
 
-Mike (mwester)
+When I run command 
+bitbake console-image
+
+It comes back with
+ERROR: Nothing PROVIDES 'console-image'
+
+Thanks
+Ed
+
+On Sat, 2009-03-21 at 12:28 -0500, Mike (mwester) wrote:
+> ed wrote:
+> > When I try to install OE using the following command I do not see the
+> > packages directory under openembedded directory.  Is something broken?
+> 
+> No, nothing is broken.  It's the "recipes" directory now.
+> 
+> Mike (mwester)
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
