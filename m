@@ -1,22 +1,30 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [59.124.115.149] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Lkz08-0006WJ-C9
+	(envelope-from <nytowl@openmoko.org>) id 1Ll26D-0005P5-B2
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Mar 2009 12:04:28 +0100
-Received: from andromeda.vanille.de (e180182112.adsl.alicedsl.de
-	[85.180.182.112])
-	by drlauer-research.com (Postfix) with ESMTP id 8284E5847F5;
-	Sat, 21 Mar 2009 12:29:26 +0100 (CET)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Sat, 21 Mar 2009 15:22:57 +0100
+Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
+	helo=[172.16.14.105]) by aakash.openmoko.org with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <nytowl@openmoko.org>) id 1Ll24r-0004oL-77
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 21 Mar 2009 22:21:45 +0800
+From: Angus Ainslie <nytowl@openmoko.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Mar 2009 12:03:18 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
-References: <49C4516C.90607@dls.net> <200903202016.34258.raj.khem@gmail.com>
-In-Reply-To: <200903202016.34258.raj.khem@gmail.com>
-MIME-Version: 1.0
-Message-Id: <200903211203.18746.mickey@vanille-media.de>
-Subject: Re: Parse failure for the new RPM recipes
+Date: Sat, 21 Mar 2009 08:21:24 -0600
+Message-Id: <1237645284.7417.6.camel@think-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 70.73.132.19
+X-SA-Exim-Mail-From: nytowl@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: i686 meta-toolchain on x86_64 for arm target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,22 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2009 11:04:28 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Sat, 21 Mar 2009 14:22:57 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-> Attached is a better fix. Is it OK ?
+I have a x86_64 host that I've successfully generated a meta-toolchain
+for a om-gta02 machine. 
 
-Yes, this is correct. The problem is a chicken-and-egg-one. We need python 
-built to know what version of python we support (since there's no other way to 
-peek in the metadata, which I'd love to have).
+On that same buildhost can I generate an i686 version of the toolchain ?
 
-Your patch is as good as it can get given the situation.
-
-:M:
-
+Thanks
+Angus
 
 
 
