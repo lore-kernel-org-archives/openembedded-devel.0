@@ -1,21 +1,38 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Ll5vN-0005qW-Ah
-	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 19:28:01 +0100
-Received: (qmail 15568 invoked by uid 1003); 21 Mar 2009 18:26:48 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 21 Mar 2009 18:26:47 -0000
-Message-ID: <49C53166.6030603@balister.org>
-Date: Sat, 21 Mar 2009 14:26:46 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <andrea.adami@gmail.com>) id 1LlAWh-0004s8-S6
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Mar 2009 00:22:51 +0100
+Received: by bwz19 with SMTP id 19so1232413bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Mar 2009 16:21:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=wq7Fi2d7JEoU8yWKSXTO+RLA/su3jpxxsWWyTT1hK50=;
+	b=lkN2DcBOR09Bv4M81g+W4ksGCAXuQ5YvrQYUKxdLtW2eamNkZKgloETxlJ+r3b6CoR
+	K4qjgkHJK1SqtmZ7WGdpXHd82za3L43mQrefFUfv7A1BOtP0kSML9/BYUhIRh6kkNjyg
+	xaZXwmH0wmB/ZTVTyG/Dt3Kyd4I65ZeZXxYtg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=kRcakZ9+0vKLzfQisX1DXXDKVeXKNylpten2rMF1FezDJHeCaqRpxuOF2XqUWJqUeu
+	wQK94j2kcPFRkPm2j+hdXh3EiCI6G1m80Sx56+Aq3Qq5YSG64DvJ5hmKcThOWK5YFdfC
+	g1ltoGWbq0lu6XR4Op3+Ztc1Ir/QvPW+sRYXg=
 MIME-Version: 1.0
+Received: by 10.223.110.144 with SMTP id n16mr4655512fap.55.1237677697511; 
+	Sat, 21 Mar 2009 16:21:37 -0700 (PDT)
+In-Reply-To: <gq29fi$k9s$1@ger.gmane.org>
+References: <80a0c20d0903191458m2c450cb3se2ed0c2ef2680c78@mail.gmail.com>
+	<gpvlao$cps$1@ger.gmane.org>
+	<b6ebd0a50903201805l2eb43d3v8c1f88979e0f1db2@mail.gmail.com>
+	<gq29fi$k9s$1@ger.gmane.org>
+Date: Sun, 22 Mar 2009 00:21:37 +0100
+Message-ID: <d1b08f940903211621u72551e45w22aeeb217712cd00@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1237656337.8743.5.camel@ed-hp-laptop> <49C523BE.3000501@dls.net>
-	<1237659567.8743.7.camel@ed-hp-laptop>
-In-Reply-To: <1237659567.8743.7.camel@ed-hp-laptop>
-Subject: Re: Missing Packages directory
+Subject: Re: packaged-staging not working properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,117 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2009 18:28:01 -0000
-X-Groupsio-MsgNum: 8600
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040700020507030308020007"
-
---------------ms040700020507030308020007
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 21 Mar 2009 23:22:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-ed wrote:
-> Thanks
-> 
-> But now how do I build angstrom console-image.
+Unfortunately I somehow confirm the issue with virtual/kernel: I moved
+DEPLOY_DIR = and now $srcfle = $destfile in  package_stagefile_shell()
+.
 
-Edit the BBFILES variable to reflect the change.
+DEPLOY_DIR = "/oe/build/deploy/${ANGSTROMLIBC}"
 
-Philip
+NOTE: package linux-rp-2.6.26-r9: task do_deploy: started
+ERROR: function do_deploy failed
+ERROR: log data follows
+(/oe/build/tmp/angstrom/work/c7x0-angstrom-linux-gnueabi/linux-rp-2.6.26-r9/temp/log.do_deploy.1405)
+| cp: `/oe/build/deploy/glibc/images/c7x0/zImage-2.6.26-r9-c7x0.bin'
+and `/oe/build/deploy/glibc/images/c7x0/zImage-2.6.26-r9-c7x0.bin' are
+the same file
 
-> 
-> When I run command 
-> bitbake console-image
-> 
-> It comes back with
-> ERROR: Nothing PROVIDES 'console-image'
-> 
-> Thanks
-> Ed
-> 
-> On Sat, 2009-03-21 at 12:28 -0500, Mike (mwester) wrote:
->> ed wrote:
->>> When I try to install OE using the following command I do not see the
->>> packages directory under openembedded directory.  Is something broken?
->> No, nothing is broken.  It's the "recipes" directory now.
->>
->> Mike (mwester)
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+base.bbclass
+ package_stagefile_shell()
+ ...
 
---------------ms040700020507030308020007
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+destfile=`echo $srcfile | sed s#${TMPDIR}#${PSTAGE_TMPDIR_STAGE}#`
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDMyMTE4
-MjY0NlowIwYJKoZIhvcNAQkEMRYEFADGvhtvfbiBAYFjtn4XR3u6LhIzMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQCJQM2t8Tq9hpE4pm+CLwWsBroMY1PMi1M9fEvcEHI+rr1AY07p
-zfoByIEsI1pleuLq1YXfGZSquCSssU/fRpPwxGO5l2fJhV87cT89ZV4ZwJSLLCJZrk8oL9vDMSC3
-KTmGxKuLpySaUlNWNKcTtv0mlJVIDOwZsW0jwn5DbKmc9TYSHEl/S1dwCQpk27N72rKKpunUA3Cv
-Ly++ii9n+iSlm9Ejgi4GWVlx/+0JqHYaOH6dvbqrBWuUVaxa83qz0whGWgIAk3S/dhA22fEzcMm/
-4ccyvR7E4KFTBLXy6ayDNx9orUCfIc3mXSCDKGCE+e2mGmnDhsnAI6kKRrebfFkRAAAAAAAA
+Unsure if it's Angstrom-specific or not.
 
---------------ms040700020507030308020007--
+
+Regards
+
+Andrea
+
+
