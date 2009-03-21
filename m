@@ -1,30 +1,18 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [220.128.136.52] (helo=ns.kevlo.org ident=root)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1Ll26D-0005P5-B2
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Mar 2009 15:22:57 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.105]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1Ll24r-0004oL-77
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Mar 2009 22:21:45 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Mar 2009 08:21:24 -0600
-Message-Id: <1237645284.7417.6.camel@think-laptop>
+	(envelope-from <kevlo@kevlo.org>) id 1Ll3SM-00040o-Fr
+	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 16:49:55 +0100
+Received: from [127.0.0.1] (kevlo.org [220.128.136.52])
+	by ns.kevlo.org (8.14.3/8.14.3) with ESMTP id n2LFpAeQ031670
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Mar 2009 23:51:14 +0800 (CST)
+From: Kevin Lo <kevlo@kevlo.org>
+To: openembedded-devel@openembedded.org
+Date: Sat, 21 Mar 2009 23:48:29 +0800
+Message-Id: <1237650509.6865.6.camel@nsl>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: i686 meta-toolchain on x86_64 for arm target
+Subject: [PATCH] Add checksum for mx21ads-2.6.19rc6-lg1.patch.bz2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,17 +26,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2009 14:22:57 -0000
+X-List-Received-Date: Sat, 21 Mar 2009 15:49:55 -0000
+X-Groupsio-MsgNum: 8595
+Content-Type: multipart/mixed; boundary="=-J7CHDh7YGGfEnx+4JqS4"
+
+--=-J7CHDh7YGGfEnx+4JqS4
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-I have a x86_64 host that I've successfully generated a meta-toolchain
-for a om-gta02 machine. 
+Hi,
 
-On that same buildhost can I generate an i686 version of the toolchain ?
+The attached patch addes checksum for mx21ads-2.6.19rc6-lg1.patch.bz2
 
-Thanks
-Angus
+	Kevin
 
+--=-J7CHDh7YGGfEnx+4JqS4
+Content-Disposition: attachment; filename="patch-checksums.ini"
+Content-Type: text/x-patch; name="patch-checksums.ini"; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
+--- conf/checksums.ini.orig	2009-03-21 23:30:12.000000000 +0800
++++ conf/checksums.ini	2009-03-21 23:33:16.000000000 +0800
+@@ -16446,6 +16446,10 @@
+ md5=c5318eba3404ebd78a15c680fa1b6056
+ sha256=d80142bfe7dd2c8ee9c2345c71fedded8b971267a9a29a853d48c562dd0605d4
+ 
++[http://opensource.wolfsonmicro.com/~lg/linux-2.6-mx21/mx21ads-2.6.19rc6-lg1.patch.bz2]
++md5=d459eeb5da1f0e35a2192de57aaa7241
++sha256=b013c87894112f7732c9bd693d9f875356ee45e3332701ece38d123a9f2d3e65
++
+ [http://opensource.wolfsonmicro.com/~lg/linux-2.6-mx31/mx31ads-2.6.19rc6-lg1.patch.bz2]
+ md5=f814fa7be7f81b26bcdf1d26901aefa8
+ sha256=278f4e36a46b04a6355979fd2138e090823bd1a4bf1bbb1fe781497d576d8a07
 
+--=-J7CHDh7YGGfEnx+4JqS4--
