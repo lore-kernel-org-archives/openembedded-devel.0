@@ -1,18 +1,28 @@
-Received: from [220.128.136.52] (helo=ns.kevlo.org ident=root)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kevlo@kevlo.org>) id 1Ll3SM-00040o-Fr
-	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 16:49:55 +0100
-Received: from [127.0.0.1] (kevlo.org [220.128.136.52])
-	by ns.kevlo.org (8.14.3/8.14.3) with ESMTP id n2LFpAeQ031670
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Mar 2009 23:51:14 +0800 (CST)
-From: Kevin Lo <kevlo@kevlo.org>
+	(envelope-from <trini@kernel.crashing.org>) id 1Ll3YS-00048J-Ec
+	for openembedded-devel@openembedded.org; Sat, 21 Mar 2009 16:56:12 +0100
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090321155500.DRBW27308.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Sat, 21 Mar 2009 11:55:00 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id Vruz1b0074dMFYL03ruzMA; Sat, 21 Mar 2009 11:54:59 -0400
+X-Authority-Analysis: v=1.0 c=1 a=E7u09eCIMb8A:10 a=1t2Z4OKylgoA:10
+	a=xQg4TLlEX-8usgI_k1AA:9 a=xIqWomdXNaOkY6RoBGDc0rIdUhMA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sat, 21 Mar 2009 08:54:59 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-Date: Sat, 21 Mar 2009 23:48:29 +0800
-Message-Id: <1237650509.6865.6.camel@nsl>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: [PATCH] Add checksum for mx21ads-2.6.19rc6-lg1.patch.bz2
+Message-ID: <20090321155458.GJ14278@smtp.west.cox.net>
+References: <1237645284.7417.6.camel@think-laptop>
+MIME-Version: 1.0
+In-Reply-To: <1237645284.7417.6.camel@think-laptop>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: i686 meta-toolchain on x86_64 for arm target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,37 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2009 15:49:55 -0000
-X-Groupsio-MsgNum: 8595
-Content-Type: multipart/mixed; boundary="=-J7CHDh7YGGfEnx+4JqS4"
+X-List-Received-Date: Sat, 21 Mar 2009 15:56:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-J7CHDh7YGGfEnx+4JqS4
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+On Sat, Mar 21, 2009 at 08:21:24AM -0600, Angus Ainslie wrote:
 
-Hi,
+> I have a x86_64 host that I've successfully generated a meta-toolchain
+> for a om-gta02 machine. 
+> 
+> On that same buildhost can I generate an i686 version of the toolchain ?
 
-The attached patch addes checksum for mx21ads-2.6.19rc6-lg1.patch.bz2
+Most easily with 'linux32' and an i686 chroot.  You should, however, be
+able to use the canadian-sdk target to do this as well, but it's not yet
+been tested.
 
-	Kevin
+-- 
+Tom Rini
 
---=-J7CHDh7YGGfEnx+4JqS4
-Content-Disposition: attachment; filename="patch-checksums.ini"
-Content-Type: text/x-patch; name="patch-checksums.ini"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
 
---- conf/checksums.ini.orig	2009-03-21 23:30:12.000000000 +0800
-+++ conf/checksums.ini	2009-03-21 23:33:16.000000000 +0800
-@@ -16446,6 +16446,10 @@
- md5=c5318eba3404ebd78a15c680fa1b6056
- sha256=d80142bfe7dd2c8ee9c2345c71fedded8b971267a9a29a853d48c562dd0605d4
- 
-+[http://opensource.wolfsonmicro.com/~lg/linux-2.6-mx21/mx21ads-2.6.19rc6-lg1.patch.bz2]
-+md5=d459eeb5da1f0e35a2192de57aaa7241
-+sha256=b013c87894112f7732c9bd693d9f875356ee45e3332701ece38d123a9f2d3e65
-+
- [http://opensource.wolfsonmicro.com/~lg/linux-2.6-mx31/mx31ads-2.6.19rc6-lg1.patch.bz2]
- md5=f814fa7be7f81b26bcdf1d26901aefa8
- sha256=278f4e36a46b04a6355979fd2138e090823bd1a4bf1bbb1fe781497d576d8a07
-
---=-J7CHDh7YGGfEnx+4JqS4--
