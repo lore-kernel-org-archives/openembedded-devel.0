@@ -1,24 +1,24 @@
-Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LlTDx-0001qu-De
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Mar 2009 20:20:49 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGX00DK69N1LGNA@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	22 Mar 2009 14:18:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 667E06B83B5; Sun,
-	22 Mar 2009 15:18:37 -0400 (EDT)
-Date: Sun, 22 Mar 2009 15:18:37 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LlTKm-0007R2-N7
+	for openembedded-devel@openembedded.org; Sun, 22 Mar 2009 20:27:48 +0100
+Received: (qmail 14260 invoked by uid 813007); 22 Mar 2009 19:26:31 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Mar 2009 19:26:31 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090322191837.GA17150@denix.org>
-References: <80a0c20d0903221131r263367bcw9c401d93a75f98d3@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <80a0c20d0903221131r263367bcw9c401d93a75f98d3@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Issue with the cvs and wget fetching obey PATH workaround
+Date: Sun, 22 Mar 2009 20:26:17 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
+	x86_64; ; )
+References: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
+	<200903221929.57400.marcin@juszkiewicz.com.pl>
+	<200903222015.34575.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200903222015.34575.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+Message-Id: <200903222026.18349.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] Alsa-state: Wildcard removed and all *.state put back in the recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 19:20:49 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 22 Mar 2009 19:27:48 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Sun, Mar 22, 2009 at 07:31:04PM +0100, Matthieu Poullet wrote:
-> Hi,
-> 
-> I've a problem with the commit
-> 2652dfa9fb6da4423f9d556aaa289ac6fc198fe5 "bitbake.conf: make cvs and
-> wget fetching obey PATH from the metadata."
-> 
-> Instead of downloading in DL_DIR, it downloads in DL_DIR/--no-check-certificate.
-> If I revert the commit everything works.
-> 
-> It's probably a simple syntax issue, but I'm not sure on how to fix it.
+Dnia niedziela, 22 marca 2009 o 20:15:33 Marcin Juszkiewicz napisa=C5=82(a):
+> > > diff --git a/recipes/alsa/alsa-state.bb
+>
+> I looked more at that recipe and found few bugs in it:
+>
+> 1. It assumes that 'asound.conf' is same for all devices. This is not
+>    true for 'at91sam9263ek' which kernel oops with default file.
 
-Actually, it appears the syntax issue was introduced earlier for the 
-RESUMECOMMAND_wget - the extra --no-check-certificate was added in a wrong 
-place.
-Can you check if 681aba468c62f9542c25e32b42b676d56bcc7b92 fixes the issue for 
-you? Thanks.
+fixed in 139b0c1bad85fb628bc6a265a6da08dd190f684a
 
--- 
-Denys
+> 2. It plays with INITSCRIPT_PARAMS in postinst script. I do not know
+>    maybe it was required in past but why it is present now? No idea
+>    and no info in recipe why it is that way.
+
+> 3. Postinst script restore default ALSA settings which is ugly too -
+>    what if user just muted all channels to have device quiet during
+>    night and postinst just makes his 1000W 7.1 audio system goes to
+>    full volume at 02:00 at night?
+
+> 4. With current version is is broken for a780 device which has few
+>    states files available.
+
+fixed in 30b5d30c274b2ae748ed65edea62cef40a23ce32
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
