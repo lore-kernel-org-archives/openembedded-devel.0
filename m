@@ -1,37 +1,22 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LlS3M-0003IZ-2f
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Mar 2009 19:05:44 +0100
-Received: by fxm20 with SMTP id 20so1401418fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Mar 2009 11:04:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=1KCd7W11ZHtq8zcdQR06D+tbQNNW4syic22kon7/qtc=;
-	b=mRqwOINU1thQvNPwvyBtV/DBfMsCBe5fEd5PgLGITU2Opsztg3cPQNmBc/o1lYlnX8
-	afsAyweTW3O1MCu0vN24YE+NMhJv6td8xLo7YGvAzbJegxNOwaZB1UmQhU2bJwZ/o17D
-	EDuFnHorXZs3Ko+dBF0XhpysHTiV/qEn4ohKY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=rQI/0bvXOJEnM+sawWvf86AQ/SUuibg2yw5UBKSX5wHuFUqY3yALJGZhflDG3kTI4s
-	sHQoGyQG8AVsdzRTYJlIYlEzPpsCFb7SUO+R8NqQvCcD8OCDGsxKEsYsfmxGj26RSWPr
-	0JdRPnZ9S0SSGCPvrU5PUOLQrQx/AKJbt7XWY=
-MIME-Version: 1.0
-Received: by 10.223.113.9 with SMTP id y9mr5268823fap.19.1237745064418; Sun, 
-	22 Mar 2009 11:04:24 -0700 (PDT)
-In-Reply-To: <20090322172416.GA16899@denix.org>
-References: <1237737623-10538-1-git-send-email-matthieu.poullet@gmail.com>
-	<d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
-	<20090322172416.GA16899@denix.org>
-Date: Sun, 22 Mar 2009 19:04:24 +0100
-Message-ID: <d1b08f940903221104u5f0f1328i8918a50ec49541f7@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LlSSG-0000iv-8O
+	for openembedded-devel@openembedded.org; Sun, 22 Mar 2009 19:31:28 +0100
+Received: (qmail 19594 invoked by uid 813007); 22 Mar 2009 18:30:10 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Mar 2009 18:30:10 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Angstrom: weak-assign DEPLOY_DIR
+Date: Sun, 22 Mar 2009 19:29:47 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
+	x86_64; ; )
+References: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
+In-Reply-To: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200903221929.57400.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] Alsa-state: Wildcard removed and all *.state put back in the recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +30,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 18:05:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 22 Mar 2009 18:31:28 -0000
+X-Groupsio-MsgNum: 8614
+Content-Type: multipart/signed; boundary="nextPart1638916.cOhH8WCHcV";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Well, I reproduced the issue after long time. Still present.
+--nextPart1638916.cOhH8WCHcV
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-http://www.hentges.net/irclogs/%23oe/2008/July/20080725_oe.log
-[20080725 09:57:35]	 <ant|work>  	 I already have /build/pstage
+Dnia niedziela, 22 marca 2009 o 15:12:22 Matthieu Poullet napisa=C5=82(a):
+> The wildcard doesn't work properly.
+> So either the wildcard support must be fixed or all the *.state files
+> must be added in the SRC_URI.
 
-The 'fix' can be discuted but seems to work
+NACK
 
-Regards
+> diff --git a/recipes/alsa/alsa-state.bb b/recipes/alsa/alsa-state.bb
+> index 3ebc0d5..a878c57 100644
+> --- a/recipes/alsa/alsa-state.bb
+> +++ b/recipes/alsa/alsa-state.bb
+> @@ -13,7 +13,15 @@ SRC_URI =3D "\
+>    file://asound.conf \
+>    file://asound.state \
+>    file://alsa-state \
+> -  file://*.state \
+> +  file://asound.state \
 
-Andrea
+This should be enough. BitBake will take proper asound.state from=20
+MACHINE/ directory if it is present.
 
+> +  file://at91sam9263ek/asound.state \
+> +  file://spitz/asound.state \
+> +  file://tosa/asound.state \
+> +  file://c7x0/asound.state \
+> +  file://magician/asound.state \
+> +  file://hx4700/asound.state \
+> +  file://nokia800/asound.state \
+> +  file://akita/asound.state \
 
+That part is wrong.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+--nextPart1638916.cOhH8WCHcV
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAknGg6AACgkQeQ6MlGH/2qsYGgCaAy7f5tbM5oRGHrr0yHOz27Zl
+LrYAn2WEE3XLEbLSlaK6nezHj4LwIdZu
+=zlSW
+-----END PGP SIGNATURE-----
+
+--nextPart1638916.cOhH8WCHcV--
