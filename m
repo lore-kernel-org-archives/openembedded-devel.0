@@ -1,36 +1,36 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [209.85.128.191] (helo=fk-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LlQjW-0004O7-RR
+	(envelope-from <andrea.adami@gmail.com>) id 1LlQkH-0004Pn-6w
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Mar 2009 17:41:10 +0100
-Received: by fxm20 with SMTP id 20so1384134fxm.12
+	Sun, 22 Mar 2009 17:41:57 +0100
+Received: by fk-out-0910.google.com with SMTP id z22so608568fkz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Mar 2009 09:39:52 -0700 (PDT)
+	Sun, 22 Mar 2009 09:40:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=YTJqLmf/O0AOnYSL4XH2eIr9kiETMFhXgTRKv7LG7Ac=;
-	b=sSU4vA3u3GltFEwbtXsqKxVxL28bCImlW9ZR++yE/JgQkd3vDSHEVtv84Nuv1DQxyO
-	3ztRUCqg/a4kw28bhC8538zPXVdiL8e4EL+WrB88JvcT8tHrMo9zP7TwMDSGkVJKZdNv
-	qh3qPTQJlJgxOl+iEXplCXbioV7ypTTPJEBfU=
+	bh=MQpuFlgLk7GrfSRvgPJNFbo3Yd0MVgieioTmusjeYbU=;
+	b=IPnMPf3ScIgBMsRzCZ9K5HSfoTE6S48Ki5+oC3ErixouXu6DFMVFxYBxSsVPzQtKyt
+	c95HXQahvgfgmyoLolY5NcAM/CN5ICPTkj90jq0l1nDsQ62Isk5saz9Jly45iRNhrhdD
+	lhmYcK0QK+9dzVEixhCcVaMABb3Ba1hZrFrsM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=kl6mD9HFPyweSGijQi37v5qdL5Aa/LRrm6FV8falBaqr+M0v5ehAczS/8BOlZBTAIP
-	fO5DU/m9+eunnUkyGX0yAInUAb00yoNm1rA7qOye3JRldLrErSIHbrzwvH+LBXKftBeP
-	E2ubgZYoRJUkCcKRxEG5GTmgYTPWCUCbzIB+o=
+	b=kdGr1na/mhnEhuUBT5qmWV4b58wDDrV+wCS+NNUiVHyeRLwc1zlgRYhXWL+I1qreG4
+	ykoOvYd1kLGrYDKCnZTUxC2nvFKvvu10jU9o1vY4ghBmSOMDFU5UhlF/0Mtdcnpc5kep
+	spMybrUjXxQLLn4kW9t1kkkcDEvdNzaG7MRfg=
 MIME-Version: 1.0
-Received: by 10.223.108.211 with SMTP id g19mr5189974fap.39.1237739992539; 
-	Sun, 22 Mar 2009 09:39:52 -0700 (PDT)
-In-Reply-To: <49C65016.4040901@balister.org>
-References: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
-	<49C65016.4040901@balister.org>
-Date: Sun, 22 Mar 2009 17:39:52 +0100
-Message-ID: <d1b08f940903220939x3d2278ddyf670b973c793db5b@mail.gmail.com>
+Received: by 10.223.114.68 with SMTP id d4mr5171263faq.86.1237740040467; Sun, 
+	22 Mar 2009 09:40:40 -0700 (PDT)
+In-Reply-To: <d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
+References: <1237737623-10538-1-git-send-email-matthieu.poullet@gmail.com>
+	<d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
+Date: Sun, 22 Mar 2009 17:40:40 +0100
+Message-ID: <d1b08f940903220940i1ff4c90ck4c4fcd76e76a6176@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Alsa-state: Wildcard removed and all *.state put back in the recipes
+Subject: Re: [PATCH] Angstrom: weak-assign DEPLOY_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,12 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 16:41:11 -0000
+X-List-Received-Date: Sun, 22 Mar 2009 16:41:58 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-tested here. thx.
-
 Acked-by: Andrea Adami (andrea.adami@gmail.com)
+
+thx
+
+Andrea
 
 
