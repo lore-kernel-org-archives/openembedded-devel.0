@@ -1,23 +1,21 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [76.96.30.17] (helo=QMTA10.emeryville.ca.mail.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LlTL4-0007RK-NP
-	for openembedded-devel@openembedded.org; Sun, 22 Mar 2009 20:28:06 +0100
-Received: (qmail 14708 invoked by uid 813007); 22 Mar 2009 19:26:49 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Mar 2009 19:26:49 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <enelson1000@comcast.net>) id 1LlTbB-0007tz-QQ
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Mar 2009 20:44:46 +0100
+Received: from OMTA03.emeryville.ca.mail.comcast.net ([76.96.30.27])
+	by QMTA10.emeryville.ca.mail.comcast.net with comcast
+	id WET91b0020b6N64AAKjTHb; Sun, 22 Mar 2009 19:43:27 +0000
+Received: from [192.168.1.116] ([71.198.120.50])
+	by OMTA03.emeryville.ca.mail.comcast.net with comcast
+	id WKjS1b00115LFXK8PKjSJU; Sun, 22 Mar 2009 19:43:26 +0000
+From: ed <enelson1000@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Mar 2009 20:26:35 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
-	x86_64; ; )
-References: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
-	<200903221929.57400.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200903221929.57400.marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <200903222026.36373.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH] Alsa-state: Wildcard removed and all *.state put back in the recipes
+Date: Sun, 22 Mar 2009 12:43:25 -0700
+Message-Id: <1237751005.10499.17.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Custom machine based on at91SAM9261 fails kernel_do_stage for linux_2.6.24.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,27 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 19:28:06 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sun, 22 Mar 2009 19:44:46 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia niedziela, 22 marca 2009 o 19:29:47 Marcin Juszkiewicz napisa=C5=82(a):
-> > The wildcard doesn't work properly.
-> > So either the wildcard support must be fixed or all the *.state
-> > files must be added in the SRC_URI.
->
-> NACK
+When I look at the kernel_do_stage() in linux_2.6.24.bb the first thing
+it does is read the link from directory located at 
+/home/ed/OE/build/tmp/work/sbc9261-angstrom-linux-gnueabi/linux-2.6.24-r25/linux-2.6.24
 
-fix pushed in dc6fc903acadd55c5fc5156f6997e0c055028a76
+kernel_do_stage()
+ASMDIR=`readlink include/asm`
+mkdir-p /home/ed/OE/build/tmp/staging/sbc9261-angstrom-linux-gnueabi/kernel/include/$ASMDIR
+more code
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+But when I look into the
+/home/ed/OE/build/tmp/work/sbc9261-angstrom-linux-gnueabi/linux-2.6.24-r25/linux-2.6.24/include directory the asm directory does not have a link associated with it.
+It looks like the mkdir fails as I do not find that directory created in
+the staging.
 
+Should I change the linux_2.6.24.bb recipe so ASMDIR = asm or is there
+something else that I should look at.
+
+
+Thanks
+Ed
 
 
 
