@@ -1,24 +1,36 @@
-Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
+Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LlRQq-0002Ui-Ff
+	(envelope-from <andrea.adami@gmail.com>) id 1LlS3M-0003IZ-2f
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Mar 2009 18:25:56 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KGX00D4M4CGBMLA@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	22 Mar 2009 12:24:22 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 611496B83B5; Sun,
-	22 Mar 2009 13:24:16 -0400 (EDT)
-Date: Sun, 22 Mar 2009 13:24:16 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090322172416.GA16899@denix.org>
+	Sun, 22 Mar 2009 19:05:44 +0100
+Received: by fxm20 with SMTP id 20so1401418fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Mar 2009 11:04:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=1KCd7W11ZHtq8zcdQR06D+tbQNNW4syic22kon7/qtc=;
+	b=mRqwOINU1thQvNPwvyBtV/DBfMsCBe5fEd5PgLGITU2Opsztg3cPQNmBc/o1lYlnX8
+	afsAyweTW3O1MCu0vN24YE+NMhJv6td8xLo7YGvAzbJegxNOwaZB1UmQhU2bJwZ/o17D
+	EDuFnHorXZs3Ko+dBF0XhpysHTiV/qEn4ohKY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=rQI/0bvXOJEnM+sawWvf86AQ/SUuibg2yw5UBKSX5wHuFUqY3yALJGZhflDG3kTI4s
+	sHQoGyQG8AVsdzRTYJlIYlEzPpsCFb7SUO+R8NqQvCcD8OCDGsxKEsYsfmxGj26RSWPr
+	0JdRPnZ9S0SSGCPvrU5PUOLQrQx/AKJbt7XWY=
+MIME-Version: 1.0
+Received: by 10.223.113.9 with SMTP id y9mr5268823fap.19.1237745064418; Sun, 
+	22 Mar 2009 11:04:24 -0700 (PDT)
+In-Reply-To: <20090322172416.GA16899@denix.org>
 References: <1237737623-10538-1-git-send-email-matthieu.poullet@gmail.com>
 	<d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+	<20090322172416.GA16899@denix.org>
+Date: Sun, 22 Mar 2009 19:04:24 +0100
+Message-ID: <d1b08f940903221104u5f0f1328i8918a50ec49541f7@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] Angstrom: weak-assign DEPLOY_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,21 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 17:25:56 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 22 Mar 2009 18:05:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sun, Mar 22, 2009 at 05:27:23PM +0100, Andrea Adami wrote:
-> +1 from me
-> 
-> Cannot cause any trouble!
-> 
-> Andrea
+Well, I reproduced the issue after long time. Still present.
 
-Actually, only yesterday you mentioned about problems packaging a kernel when 
-DEPLOY_DIR is outside of TMPDIR...
+http://www.hentges.net/irclogs/%23oe/2008/July/20080725_oe.log
+[20080725 09:57:35]	 <ant|work>  	 I already have /build/pstage
 
--- 
-Denys
+The 'fix' can be discuted but seems to work
+
+Regards
+
+Andrea
 
 
