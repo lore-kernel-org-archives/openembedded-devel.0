@@ -1,22 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LlSSG-0000iv-8O
-	for openembedded-devel@openembedded.org; Sun, 22 Mar 2009 19:31:28 +0100
-Received: (qmail 19594 invoked by uid 813007); 22 Mar 2009 18:30:10 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Mar 2009 18:30:10 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Mar 2009 19:29:47 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
-	x86_64; ; )
-References: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
-In-Reply-To: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
+	(envelope-from <matthieu.poullet@gmail.com>) id 1LlSTS-0000jx-2b
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Mar 2009 19:32:42 +0100
+Received: by bwz19 with SMTP id 19so1395265bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Mar 2009 11:31:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:date:received:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=2hFwIeHiI8tdEcy36vfWQ2e/MQk9ABgB9DdQEgo39KE=;
+	b=W7J9lQCOcvbxLtwgUBj+yGwlZhGRQ02JVHF2xGWqYZRGR5P6MYOgP3mROMYK4+D6Ll
+	kPyzxR5d0bp8+Yp7CtgamVGGJvG005JRMFIHjvIl2IEqEzGstrkrBv7jDty4nISk6R98
+	BaxHhy6F4KBo599qA4WYJPGB7Bp5eYi3JIxcs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=SWj+NTbPCx8E9RmYqWVrFKW+xuzI1bnddn6aSHkVi14eLvqHfRPNW7MFIwLpJULV1l
+	1KunSke0FsfsJVbkUNSqAzbT9PJ43Pa6Rk5bgSQrAqBNnw6uUATZ63GXjOY7WUz+8CCS
+	pyfCvnJUQ9Vd+0skzIjvd+kqhv0NE4wWoGZN4=
 MIME-Version: 1.0
-Message-Id: <200903221929.57400.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH] Alsa-state: Wildcard removed and all *.state put back in the recipes
+Date: Sun, 22 Mar 2009 19:31:04 +0100
+Received: by 10.223.110.211 with SMTP id o19mr5272026fap.57.1237746682685; 
+	Sun, 22 Mar 2009 11:31:22 -0700 (PDT)
+Message-ID: <80a0c20d0903221131r263367bcw9c401d93a75f98d3@mail.gmail.com>
+From: Matthieu Poullet <matthieu.poullet@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Issue with the cvs and wget fetching obey PATH workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,66 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 18:31:28 -0000
-X-Groupsio-MsgNum: 8614
-Content-Type: multipart/signed; boundary="nextPart1638916.cOhH8WCHcV";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Sun, 22 Mar 2009 18:32:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
---nextPart1638916.cOhH8WCHcV
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Hi,
 
-Dnia niedziela, 22 marca 2009 o 15:12:22 Matthieu Poullet napisa=C5=82(a):
-> The wildcard doesn't work properly.
-> So either the wildcard support must be fixed or all the *.state files
-> must be added in the SRC_URI.
+I've a problem with the commit
+2652dfa9fb6da4423f9d556aaa289ac6fc198fe5 "bitbake.conf: make cvs and
+wget fetching obey PATH from the metadata."
 
-NACK
+Instead of downloading in DL_DIR, it downloads in DL_DIR/--no-check-certificate.
+If I revert the commit everything works.
 
-> diff --git a/recipes/alsa/alsa-state.bb b/recipes/alsa/alsa-state.bb
-> index 3ebc0d5..a878c57 100644
-> --- a/recipes/alsa/alsa-state.bb
-> +++ b/recipes/alsa/alsa-state.bb
-> @@ -13,7 +13,15 @@ SRC_URI =3D "\
->    file://asound.conf \
->    file://asound.state \
->    file://alsa-state \
-> -  file://*.state \
-> +  file://asound.state \
+It's probably a simple syntax issue, but I'm not sure on how to fix it.
 
-This should be enough. BitBake will take proper asound.state from=20
-MACHINE/ directory if it is present.
+Regards,
+Matthieu.
 
-> +  file://at91sam9263ek/asound.state \
-> +  file://spitz/asound.state \
-> +  file://tosa/asound.state \
-> +  file://c7x0/asound.state \
-> +  file://magician/asound.state \
-> +  file://hx4700/asound.state \
-> +  file://nokia800/asound.state \
-> +  file://akita/asound.state \
 
-That part is wrong.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
---nextPart1638916.cOhH8WCHcV
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAknGg6AACgkQeQ6MlGH/2qsYGgCaAy7f5tbM5oRGHrr0yHOz27Zl
-LrYAn2WEE3XLEbLSlaK6nezHj4LwIdZu
-=zlSW
------END PGP SIGNATURE-----
-
---nextPart1638916.cOhH8WCHcV--
