@@ -1,27 +1,36 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LlELd-0004OI-UB
-	for openembedded-devel@openembedded.org; Sun, 22 Mar 2009 04:27:42 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090322032626.ILMB15318.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Sat, 21 Mar 2009 23:26:26 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id W3SR1b0074dMFYL043SRKA; Sat, 21 Mar 2009 23:26:26 -0400
-X-Authority-Analysis: v=1.0 c=1 a=jnDkwDkONH0A:10 a=NfGtUH3zczzwe6oF5skA:9
-	a=4CXqvqJbpCTPkD0GdgSW8T-v_4cA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Sat, 21 Mar 2009 20:26:25 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090322032625.GK14278@smtp.west.cox.net>
-References: <1237688443.23799.4.camel@ed-hp-laptop>
-MIME-Version: 1.0
-In-Reply-To: <1237688443.23799.4.camel@ed-hp-laptop>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: rootfs directory broken symlinks
+	(envelope-from <matthieu.poullet@gmail.com>) id 1LlOQl-0002KN-Iv
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Mar 2009 15:13:39 +0100
+Received: by fg-out-1718.google.com with SMTP id 19so461890fgg.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Mar 2009 07:12:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=cvo64F16Bt7ucxoo9tCcJSqCTMNOkr5ZCsa/cv2DWyw=;
+	b=Y8cNSywZBmCEZN4l9aj3ojNDsf/51JrJWe9VlyfahUnHo9Rrb0koCllrBDS40lbscB
+	5XxaV04zj65QyKT0oHtQw1LisBEixkOBAKcsFcOqGT4yC/nbe4fnicNrx6ThcUDYWNi5
+	IChrXfMzc8J6QrZ7fuMivUpIkEsN5XZhoFGPA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=a0E1jqAP1/zsTJGopof/5nBZHTSJQAGtYga26r5xIrSOIEgqbBog+IKqVTJHYhRDiY
+	jSs/bFYnuns49uLttkGYRelsTbkEBtEjWLjRZVXvXoDjFpLfSavXjzGbwQfkjr8XMfSv
+	SYeXsi+QoLkGRhxufGmwI1/trP+m2U2mfSUhI=
+Received: by 10.86.3.4 with SMTP id 4mr1839665fgc.54.1237731143698;
+	Sun, 22 Mar 2009 07:12:23 -0700 (PDT)
+Received: from localhost.localdomain (77-22-121-59-dynip.superkabel.de
+	[77.22.121.59])
+	by mx.google.com with ESMTPS id d4sm3075411fga.29.2009.03.22.07.12.23
+	(version=SSLv3 cipher=RC4-MD5); Sun, 22 Mar 2009 07:12:23 -0700 (PDT)
+From: Matthieu Poullet <matthieu.poullet@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 22 Mar 2009 15:12:22 +0100
+Message-Id: <1237731142-8136-1-git-send-email-matthieu.poullet@gmail.com>
+X-Mailer: git-send-email 1.5.6.3
+Cc: Matthieu Poullet <matthieu.poullet@gmail.com>
+Subject: [PATCH] Alsa-state: Wildcard removed and all *.state put back in the recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,19 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 03:27:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 22 Mar 2009 14:13:39 -0000
 
-On Sat, Mar 21, 2009 at 07:20:43PM -0700, ed wrote:
+The wildcard doesn't work properly.
+So either the wildcard support must be fixed or all the *.state files must be added in the SRC_URI.
 
-> Is it normal after doing a build to find a bunch of broken sym links in
-> the build/tmp/rootfs directory?
+---
+ recipes/alsa/alsa-state.bb |   10 +++++++++-
+ 1 files changed, 9 insertions(+), 1 deletions(-)
 
-tmp/rootfs is not a usable directory for anything outside of the build
-process, really.
-
+diff --git a/recipes/alsa/alsa-state.bb b/recipes/alsa/alsa-state.bb
+index 3ebc0d5..a878c57 100644
+--- a/recipes/alsa/alsa-state.bb
++++ b/recipes/alsa/alsa-state.bb
+@@ -13,7 +13,15 @@ SRC_URI = "\
+   file://asound.conf \
+   file://asound.state \
+   file://alsa-state \
+-  file://*.state \
++  file://asound.state \
++  file://at91sam9263ek/asound.state \
++  file://spitz/asound.state \
++  file://tosa/asound.state \
++  file://c7x0/asound.state \
++  file://magician/asound.state \
++  file://hx4700/asound.state \
++  file://nokia800/asound.state \
++  file://akita/asound.state \
+ "
+ 
+ inherit update-rc.d
 -- 
-Tom Rini
+1.5.6.3
+
 
 
