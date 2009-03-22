@@ -1,41 +1,38 @@
-Received: from [209.85.217.170] (helo=mail-gx0-f170.google.com)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1LlWvP-0002q5-D0
+	(envelope-from <andrea.adami@gmail.com>) id 1LlX8d-0008E6-H0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Mar 2009 00:17:51 +0100
-Received: by gxk18 with SMTP id 18so4780986gxk.12
+	Mon, 23 Mar 2009 00:31:31 +0100
+Received: by bwz19 with SMTP id 19so1462900bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Mar 2009 16:16:30 -0700 (PDT)
+	Sun, 22 Mar 2009 16:30:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=5n2t0pUcEtPsE39B3L5oeWJscC3TV30sDKETTf/qKtg=;
-	b=Dl1ZgDRhXv+ageQah41F6xWOaEs0zv3gIAGTq2HVqFQhXq7PIYfx4yUGatnv+F2O5z
-	CfLHUfxH07GsgOYwR7YT4pErD0S7OG3BusULPtAEVznEXkJ3kGs/EniFh+hDHjd2VEhd
-	9XezEcSI5tjXZ8WF2cf9b3MTwetjJ7wukdOzg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=gdjVtcebaMI6jnX71972ZZqw26Ng3OFtsWWMyR+dJCEhil5X2gP50OQEOZ/CP0ga49
-	RNTs7WoTNqeaMtyCcfd8JavJCFuSQgHJ3VucgHSQ/CjCGQ94dS2YhMARJ9vXFS8SlL2x
-	raosR6o2rA93xJ52p81J2alApF4wYfSW382Z0=
+	bh=k1IcYHZ5ySMEHo0yehKWDBqK9NAggavb8xfk+kz7124=;
+	b=Rv1TDMXk0HhRlDokYumqHg6T3X+zfEfpv+A2uV39qHy9F0ZNSykVe8DBtxmlwKm1Ys
+	A3gUBfsTbrt59W3yAg11EaEgNNqnRAk2XzWvTJO8KRHb27YGBlgfhZwMx0tHYcqMvsGW
+	gxrr5moNUiNW5HpjZrNKXyWSBxFDuOZK3nFv0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ruAZAdqkIZC0h+TT7Q9mKCEB7uIso4Jpx20PKP5VHBJM4BA4vDW8btZlkKHdbRh+1c
+	iAONJUJTZ9DWUh0omDXUlfEfCFOzpNpyLGIfXfILLx3tK+H70aM3pRatYY/oL+WJ1MPP
+	pkU1GD2ugbU32uzTMNl5toISLaZSDblTByfw4=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.150.137.9 with SMTP id k9mr11634465ybd.149.1237763790815; Sun, 
-	22 Mar 2009 16:16:30 -0700 (PDT)
-In-Reply-To: <b6ebd0a50903221610g15e7aed0q53fd1a4208775cf4@mail.gmail.com>
-References: <20090321211351.BAC5718934F@amethyst.openembedded.net>
-	<200903222019.02947.marcin@juszkiewicz.com.pl>
-	<b6ebd0a50903221610g15e7aed0q53fd1a4208775cf4@mail.gmail.com>
-Date: Sun, 22 Mar 2009 16:16:30 -0700
-X-Google-Sender-Auth: 39357d6b60e76a8c
-Message-ID: <b6ebd0a50903221616tb03772cke373e42a95594c27@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-To: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Chris Larson : base.bbclass:
+Received: by 10.223.126.145 with SMTP id c17mr5469521fas.102.1237764610779; 
+	Sun, 22 Mar 2009 16:30:10 -0700 (PDT)
+In-Reply-To: <d1b08f940903221104u5f0f1328i8918a50ec49541f7@mail.gmail.com>
+References: <1237737623-10538-1-git-send-email-matthieu.poullet@gmail.com>
+	<d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
+	<20090322172416.GA16899@denix.org>
+	<d1b08f940903221104u5f0f1328i8918a50ec49541f7@mail.gmail.com>
+Date: Mon, 23 Mar 2009 00:30:10 +0100
+Message-ID: <d1b08f940903221630p3e0bc9a5i443e8ada0a40fa03@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Angstrom: weak-assign DEPLOY_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 23:17:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 22 Mar 2009 23:31:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sun, Mar 22, 2009 at 4:10 PM, Chris Larson <clarson@kergoth.com> wrote:
-> On Sun, Mar 22, 2009 at 12:19 PM, Marcin Juszkiewicz
-> <marcin@juszkiewicz.com.pl> wrote:
->>
->> Why those changes were not sent for review to ML? They touched core of
->> system so should be sent first. Especially when they broke many recipes
->> and added extra work for other developers.
->>
->> Now we can not use wildcards in SRC_URI which broke many recipes
->> (alsa-state for example) which is totally wrong. I hope that fix for it
->> is on a way - otherwise I would vote for reverting those changes.
->
-> You're welcome to revert them if you like. =C2=A0I'm fine using my heavil=
-y
-> patched local branch if that's the way you'd prefer it. =C2=A0FILESDIR wa=
-s
-> never intended to stick around this long. =C2=A0It was a remnant of the w=
-ay
-> things were done before FILESPATH was introduced, and the wildcards in
-> file:// urls were never intended to function, either, that only worked
-> as a side effect of the way do_unpack was implemented, in shell.
->
-> Rest assured, I'll be sure to send every single patch to the list in
-> the future, even though It's highly unlikely that you would've spotted
-> the wildcards bug via inspection.
+Wait a moment:
 
-I just realized the tone of the previous email probably made it sound
-unapologetic, but that wasn't intended.  I do apologize, I'd done a
-fair number of test builds, but apparently with the wrong combination
-of packages.  It won't happen again.
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+if we weak-assign DEPLOY_DIR in angstrom.inc
+DEPLOY_DIR ?= "${TMPDIR}/deploy/${ANGSTROMLIBC}"
+
+then it takes the value from bitbake.conf?
+DEPLOY_DIR ?= "${TMPDIR}/deploy"
+
+
+Now doubtful...
+
+Andrea
 
 
