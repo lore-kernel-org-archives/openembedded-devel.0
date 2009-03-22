@@ -1,24 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LlTDl-0001sJ-6q
-	for openembedded-devel@openembedded.org; Sun, 22 Mar 2009 20:20:33 +0100
-Received: (qmail 2611 invoked by uid 813007); 22 Mar 2009 19:19:15 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Mar 2009 19:19:15 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <denis@denix.org>) id 1LlTDx-0001qu-De
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Mar 2009 20:20:49 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KGX00DK69N1LGNA@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	22 Mar 2009 14:18:43 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 667E06B83B5; Sun,
+	22 Mar 2009 15:18:37 -0400 (EDT)
+Date: Sun, 22 Mar 2009 15:18:37 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Mar 2009 20:19:02 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.29-rc7-00188-gebdcc81-dirty; KDE/4.2.1;
-	x86_64; ; )
-References: <20090321211351.BAC5718934F@amethyst.openembedded.net>
-In-Reply-To: <20090321211351.BAC5718934F@amethyst.openembedded.net>
-X-PRIORITY: 2 (High)
-Priority: urgent
-MIME-Version: 1.0
-Message-Id: <200903222019.02947.marcin@juszkiewicz.com.pl>
-Subject: Re: [oe-commits] Chris Larson : base.bbclass:
+Message-id: <20090322191837.GA17150@denix.org>
+References: <80a0c20d0903221131r263367bcw9c401d93a75f98d3@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <80a0c20d0903221131r263367bcw9c401d93a75f98d3@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Issue with the cvs and wget fetching obey PATH workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,27 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 19:20:33 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sun, 22 Mar 2009 19:20:49 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
+On Sun, Mar 22, 2009 at 07:31:04PM +0100, Matthieu Poullet wrote:
+> Hi,
+> 
+> I've a problem with the commit
+> 2652dfa9fb6da4423f9d556aaa289ac6fc198fe5 "bitbake.conf: make cvs and
+> wget fetching obey PATH from the metadata."
+> 
+> Instead of downloading in DL_DIR, it downloads in DL_DIR/--no-check-certificate.
+> If I revert the commit everything works.
+> 
+> It's probably a simple syntax issue, but I'm not sure on how to fix it.
 
-Why those changes were not sent for review to ML? They touched core of 
-system so should be sent first. Especially when they broke many recipes 
-and added extra work for other developers.
+Actually, it appears the syntax issue was introduced earlier for the 
+RESUMECOMMAND_wget - the extra --no-check-certificate was added in a wrong 
+place.
+Can you check if 681aba468c62f9542c25e32b42b676d56bcc7b92 fixes the issue for 
+you? Thanks.
 
-Now we can not use wildcards in SRC_URI which broke many recipes 
-(alsa-state for example) which is totally wrong. I hope that fix for it 
-is on a way - otherwise I would vote for reverting those changes.
-
-Regards, 
 -- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+Denys
 
 
