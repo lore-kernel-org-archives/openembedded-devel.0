@@ -1,38 +1,52 @@
-Received: from [209.85.198.241] (helo=rv-out-0708.google.com)
+Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <donari75@gmail.com>) id 1LlfQX-0006hT-87
+	(envelope-from <otavio.salvador@gmail.com>) id 1LlfVi-0006pL-1y
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Mar 2009 09:22:33 +0100
-Received: by rv-out-0708.google.com with SMTP id k29so1615106rvb.12
+	Mon, 23 Mar 2009 09:27:54 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so890903qwf.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Mar 2009 01:21:12 -0700 (PDT)
+	Mon, 23 Mar 2009 01:26:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=72fOtzkIUd8dC5ogC5c/OwZRhj3/Lj4mhMD8o6SGcgo=;
-	b=cXOpQRqMHKs8TIVhklssaSwngBXgvBhiom47AwvLzwGdRNnF2Lh4I88ptX8eVVB4xT
-	LWE0o3Aj/gwRCY6L9Y58YtRBYpMfVHp+9VZ1UvGLzBB43Iqy8xt0QGs5K/Nm6HPfzS18
-	gSUiUnrPNwdRIJtTvP8mQf6F8kc/o0utYTh1A=
+	h=domainkey-signature:received:received:sender:received:from:to
+	:subject:organization:references:user-agent:x-url:x-attribution:date
+	:in-reply-to:message-id:mime-version:content-type;
+	bh=WIIGEIj4/p1vajoTGXwLtQ5rdBAA6SaEB4eeEs8c5TU=;
+	b=q5+SAMMZ0EEpgiigIqMqPHKrGP7vwk7vP57ALbEfHnfJk+FZavbYwp5GsZi1oJOwZH
+	pve7wI03f1EhOuk1P5R9A6OHnEqYg/DX0ydyhjILJZtp73pfi3roFs6N2Qhwvtfsfmzd
+	aNAOZtZvXSBakzzLosx8arWKILvxpDI5z/920=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=waMicqi07FoCT8OVd8xq9gU67lPlqqfEsuw4vrHbzzBCpsu9A4ZZP/fhpYGBgA4guY
-	E2N+5hoe2TnhC3YuWWhFDSMnEfz1a1AQ7cgHKF7WzlXbSJRPC/qbApIHa4GNqwfKSQ+a
-	OggIr5o+fLPUsRpybTcDmG5rJs3tEPcJATjRg=
-Received: by 10.141.36.10 with SMTP id o10mr2149456rvj.237.1237796471859;
-	Mon, 23 Mar 2009 01:21:11 -0700 (PDT)
-Received: from ?192.168.10.240? ([220.88.14.55])
-	by mx.google.com with ESMTPS id g22sm9802434rvb.53.2009.03.23.01.21.10
+	h=sender:from:to:subject:organization:references:user-agent:x-url
+	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
+	b=TjHzEL+qb7qtGNQt3AA9LEVRA79UK+OKaBftEUWvBdevO0mdRkXfxqIqaroYQkBApv
+	YnRxSUdGrV1kV01Bk2MbNVT+9xYqK2NU/x6zj6dAjnfSY5l9/QqMHCIPAA8dejyLt3ZF
+	vUOd7utQREZw9rUTQngO8yw2ylyz7ZGLYhHS8=
+Received: by 10.224.28.70 with SMTP id l6mr2581155qac.52.1237796793037;
+	Mon, 23 Mar 2009 01:26:33 -0700 (PDT)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id 6sm8977731ywp.11.2009.03.23.01.26.32
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 23 Mar 2009 01:21:11 -0700 (PDT)
-Message-ID: <49C74642.80105@gmail.com>
-Date: Mon, 23 Mar 2009 17:20:18 +0900
-From: unsik Kim <donari75@gmail.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
-MIME-Version: 1.0
+	Mon, 23 Mar 2009 01:26:32 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id B9F036100E0; Mon, 23 Mar 2009 05:26:29 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: udevd receives SIGILL
+Organization: O.S. Systems Ltda.
+References: <200902140035.13820.khimov@altell.ru>
+	<200902141715.56797.khimov@altell.ru>
+	<87ocx3y2xu.fsf@neumann.lab.ossystems.com.br>
+	<200902171525.28995.khimov@altell.ru>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
+	(x86_64-pc-linux-gnu)
+X-URL: http://www.ossystems.com.br/
+X-Attribution: O.S.
+Date: Mon, 23 Mar 2009 05:26:28 -0300
+In-Reply-To: <200902171525.28995.khimov@altell.ru> (Roman I. Khimov's message
+	of "Tue, 17 Feb 2009 15:25:28 +0300")
+Message-ID: <877i2g63wr.fsf@neumann.lab.ossystems.com.br>
+MIME-Version: 1.0
+Subject: Re: [PATCH] New package: siproxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,53 +60,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Mar 2009 08:22:33 -0000
-Content-Type: text/plain; charset=EUC-KR
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Mar 2009 08:27:54 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hello?
+Roman I Khimov <khimov@altell.ru> writes:
 
-Recently I started to change development platform poky to oe, but I have some troubles.
+> Otavio Salvador:
 
-machine : custom PXA270 board.
-kernel : custom 2.6.29-rc8
-oe git : 49c1a7699ac24c580449c13bc3dba425f1d2bb48 (almost current)
-image : base-image (use as NFS-root)
+[...]
 
-udevd receives SIGILL signal.
 
-I found current oe and poky use same source code for udev package (differences are scripts and build env.)
-Here's some tries I did.
-If I use udev package from poky in oe's base-image, boot well.
-If I provide /etc/dev.tar and using oe's udev package also boot well.
-If I change nothing(same as first boot), udevd receive SIGILL.
+[...]
 
-followings are gdb debug results:
+> +do_install_append() {
+> +	mv ${D}/${sysconfdir}/siproxd.conf{.example,}
+> +}
 
-Program received signal SIGILL, Illegal instruction.
-0x00009a98 in sig_handler (signum=17) at udevd.c:818
-818		write(signal_pipe[WRITE_END], "", 1);
-(gdb) l 818
-813				reload_config = 1;
-814				break;
-815		}
-816	
-817		/* write to pipe, which will wakeup select() in our mainloop */
-818		write(signal_pipe[WRITE_END], "", 1);
-819	}
-820	
-821	static void udev_done(int pid, int exitstatus)
-822	{
+[...]
 
-and, debug output message (I use --debug --debug-trace option)
-[555] get_ctrl_msg: udevd message (ENV) received, set 'STARTUP=1'
-[555] msg_queue_insert: seq 372 queued, 'add' 'bus'
-[565] pass_env_to_socket: passed -1 bytes to socket '@/org/kernel/udev/monitor',
-[565] pass_env_to_socket: passed -1 bytes to socket '/org/kernel/udev/monitor',
-[565] udev_event_run: seq 372 finished with 0
+
+This is bashims, it would be better to use expanded commands
+instead. Except from it, it looks OK for me.
+
+Mind to fix it? 
 
 -- 
-Regards,
-unsik Kim
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
