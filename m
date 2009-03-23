@@ -1,37 +1,31 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LlX8d-0008E6-H0
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Mar 2009 00:31:31 +0100
-Received: by bwz19 with SMTP id 19so1462900bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Mar 2009 16:30:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=k1IcYHZ5ySMEHo0yehKWDBqK9NAggavb8xfk+kz7124=;
-	b=Rv1TDMXk0HhRlDokYumqHg6T3X+zfEfpv+A2uV39qHy9F0ZNSykVe8DBtxmlwKm1Ys
-	A3gUBfsTbrt59W3yAg11EaEgNNqnRAk2XzWvTJO8KRHb27YGBlgfhZwMx0tHYcqMvsGW
-	gxrr5moNUiNW5HpjZrNKXyWSBxFDuOZK3nFv0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ruAZAdqkIZC0h+TT7Q9mKCEB7uIso4Jpx20PKP5VHBJM4BA4vDW8btZlkKHdbRh+1c
-	iAONJUJTZ9DWUh0omDXUlfEfCFOzpNpyLGIfXfILLx3tK+H70aM3pRatYY/oL+WJ1MPP
-	pkU1GD2ugbU32uzTMNl5toISLaZSDblTByfw4=
-MIME-Version: 1.0
-Received: by 10.223.126.145 with SMTP id c17mr5469521fas.102.1237764610779; 
-	Sun, 22 Mar 2009 16:30:10 -0700 (PDT)
-In-Reply-To: <d1b08f940903221104u5f0f1328i8918a50ec49541f7@mail.gmail.com>
+	(envelope-from <trini@kernel.crashing.org>) id 1LlXh3-0000Mm-Pb
+	for openembedded-devel@openembedded.org; Mon, 23 Mar 2009 01:07:06 +0100
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090323000544.GLEB10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Sun, 22 Mar 2009 20:05:44 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id WQ5i1b00B4dMFYL04Q5iAq; Sun, 22 Mar 2009 20:05:44 -0400
+X-Authority-Analysis: v=1.0 c=1 a=PBL4Yze-TnsA:10 a=FkxXT6p2H6oA:10
+	a=9tHQh3dixEq_OuM3fNQA:9 a=LS5mtgMDKUmgIuth139Aj7pKBHwA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sun, 22 Mar 2009 17:05:42 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090323000542.GL14278@smtp.west.cox.net>
 References: <1237737623-10538-1-git-send-email-matthieu.poullet@gmail.com>
 	<d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
 	<20090322172416.GA16899@denix.org>
 	<d1b08f940903221104u5f0f1328i8918a50ec49541f7@mail.gmail.com>
-Date: Mon, 23 Mar 2009 00:30:10 +0100
-Message-ID: <d1b08f940903221630p3e0bc9a5i443e8ada0a40fa03@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<d1b08f940903221630p3e0bc9a5i443e8ada0a40fa03@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <d1b08f940903221630p3e0bc9a5i443e8ada0a40fa03@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: [PATCH] Angstrom: weak-assign DEPLOY_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,21 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Mar 2009 23:31:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Mar 2009 00:07:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Wait a moment:
+On Mon, Mar 23, 2009 at 12:30:10AM +0100, Andrea Adami wrote:
+> Wait a moment:
+> 
+> if we weak-assign DEPLOY_DIR in angstrom.inc
+> DEPLOY_DIR ?= "${TMPDIR}/deploy/${ANGSTROMLIBC}"
+> 
+> then it takes the value from bitbake.conf?
+> DEPLOY_DIR ?= "${TMPDIR}/deploy"
 
-if we weak-assign DEPLOY_DIR in angstrom.inc
-DEPLOY_DIR ?= "${TMPDIR}/deploy/${ANGSTROMLIBC}"
+Sounds like Angstrom needs:
+USER_DEPLOY_DIR ?= "${TMPDIR}/deploy/${ANGSTROMLIBC}"
+DEPLOY_DIR = "${USER_DEPLOY_DIR}" if users are going to further override
+what the distro thinks is best.
 
-then it takes the value from bitbake.conf?
-DEPLOY_DIR ?= "${TMPDIR}/deploy"
-
-
-Now doubtful...
-
-Andrea
+-- 
+Tom Rini
 
 
