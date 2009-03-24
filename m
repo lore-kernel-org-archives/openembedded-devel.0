@@ -1,30 +1,41 @@
-Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LmBnT-0007Ng-Qr
-	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 19:56:24 +0100
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao106.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090324185449.NRIF22254.fed1rmmtao106.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Mar 2009 14:54:49 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id X6un1b0054dMFYL036un0X; Tue, 24 Mar 2009 14:54:49 -0400
-X-Authority-Analysis: v=1.0 c=1 a=f5byTqAgYq0WJgKi8-8A:9
-	a=PrYWRad2h52bFGO6huhK5SC3WDsA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 24 Mar 2009 11:54:47 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090324185446.GQ14278@smtp.west.cox.net>
+	(envelope-from <kergoth@gmail.com>) id 1LmBo6-0008Ff-7w
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Mar 2009 19:57:02 +0100
+Received: by yw-out-1718.google.com with SMTP id 9so1859551ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Mar 2009 11:55:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=oE9pCY5pSuJ6cnbiv3dVk/9sDG2/M8rcsmvpWu5rCKg=;
+	b=XcRvuJwdqS1tQm/VjclWzETx7V+Ru5s2R/xIUTn64ZFHEMFlqe8HdVrhxlZLV3//Tl
+	3sorJUR/7SYXD83iQYl0Wmx8+X96Di2JpUOPfh17+4n/qWZw4bs407fCkZKPdq2knPyF
+	GT3ymx1Zgz4AY9i3eb9JdRt8oobd0eP8Kq138=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=gwygPHPKlAw8E88c3S10bEtT+F76rBVK+Wkz38xwsGH5dCkIulMr+IIaeSMIsQ9k/Z
+	asOTzdoAAmlIEDLBDafQPJkYWDmZRwV8nXam3oTA/IkC9dakLlcSv90lopAYrNIsBOuW
+	8Ob2gik9fOOLn8NPXb8Gm3r9S7IGqVcW1CeJc=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.151.113.5 with SMTP id q5mr15495394ybm.116.1237920932323; Tue, 
+	24 Mar 2009 11:55:32 -0700 (PDT)
+In-Reply-To: <ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
 References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
 	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>
 	<1237885606.5348.8.camel@dax.rpnet.com>
 	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>
 	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+Date: Tue, 24 Mar 2009 11:55:32 -0700
+X-Google-Sender-Auth: fad338cc9e736174
+Message-ID: <b6ebd0a50903241155u7743eaads81be33e350925b7a@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,20 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 18:56:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 24 Mar 2009 18:57:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 24, 2009 at 07:36:29PM +0100, Frans Meulenbroeks wrote:
-
-[snip]
+On Tue, Mar 24, 2009 at 11:36 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Disadvantage of a Maintainers file is that it is yet another file to
+> update when you create a package (adjacent to the checksums file and
+> of course the package recipe). Guess it will be forgotten regularly.
+>
 > Also I fear we're going to end up with a lot of orphaned packages.
 
-Do you mean finding out we have a bunch of orphaned packages?  However
-it's done, I don't think having people take ownership will make people
-stop doing it.
+The point I'm trying to make is that we have a lot of orphaned
+packages today, we just aren't being honest about it.  90% of the
+recipes in the tree don't get the attention they should.
 
+At least this way, it's quite clear which get individual attention vs
+those that get cursory attention by the entire team.
 -- 
-Tom Rini
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
