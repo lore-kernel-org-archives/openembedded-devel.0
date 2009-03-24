@@ -1,42 +1,34 @@
-Received: from [209.85.200.172] (helo=wf-out-1314.google.com)
+Received: from [208.51.207.131] (helo=mail.2mi.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1LmDWA-0001QA-5p
+	(envelope-from <jader@2mi.com.br>) id 1LmDqI-00025d-RV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 21:46:38 +0100
-Received: by wf-out-1314.google.com with SMTP id 25so3669972wfa.3
+	Tue, 24 Mar 2009 22:07:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by mail.2mi.com.br (Postfix) with ESMTP id EC96750277F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2009 13:45:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:reply-to
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=78T+71T64/ClP6sUgDbsS1tmTSuU1mTWe3RdzoTKkbA=;
-	b=sNhCpWwrZxxXvwB6iCFGjKiEMO+FKkpp034i8hpHdJBAYGUTeNGc4ugJFUjRsJH15N
-	NMvoWv73C/ZzKvg8OE6Fb0ylV4gSeMl6YWnpWDbt6C/aBcuJVPriP/nlUr8hebz3wyQo
-	JdRcmwQZf1fVDIWiQR6ys+NBQK0YvccyP5Bho=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:reply-to:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	b=WUnXubPAfzGx65WaTygujav0bq4hFkPEc1/0tylUIBcdG8X5vsOYLOkdUq5FiAtr0K
-	YMATMMMSWUVerMT02uEIFK1WxLjryCD7HKSFSSUnKQbJBFM5xYwdxOhvoQ8hZ03ROakS
-	TbyIbbkWBXdhixfODY+LTkOAHufdazNCoyKbw=
-Received: by 10.142.171.3 with SMTP id t3mr3543802wfe.195.1237927507223;
-	Tue, 24 Mar 2009 13:45:07 -0700 (PDT)
-Received: from ?172.31.11.36? (mscitspubwlgw.wustl.edu [128.252.55.250])
-	by mx.google.com with ESMTPS id 30sm279144wfd.15.2009.03.24.13.45.00
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 24 Mar 2009 13:45:06 -0700 (PDT)
-Message-ID: <49C94647.2040401@gmail.com>
-Date: Tue, 24 Mar 2009 15:44:55 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
+	Tue, 24 Mar 2009 18:11:46 -0300 (BRT)
+X-Virus-Scanned: amavisd-new at 2mi.com.br
+Received: from mail.2mi.com.br ([127.0.0.1])
+	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id gK-lS-A0kc+W
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Mar 2009 18:11:42 -0300 (BRT)
+Received: from [192.168.15.91] (unknown [189.102.205.109])
+	by mail.2mi.com.br (Postfix) with ESMTP id 82C80502762C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Mar 2009 18:11:40 -0300 (BRT)
+From: "Jader H. Silva" <jader@2mi.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<1237885606.5348.8.camel@dax.rpnet.com>	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>	<49C92CC7.2080801@gmail.com>	<b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>	<49C93237.7010205@gmail.com>
-	<49C9347C.7010309@balister.org>	<FA1C2D98-DEF3-4694-A757-7C137F667CE3@ngndg.com>	<b6ebd0a50903241301r5b8972b4s59df7be41052ab7a@mail.gmail.com>
-	<dc6682e90903241330m1191395j478ee4180a969cfb@mail.gmail.com>
-In-Reply-To: <dc6682e90903241330m1191395j478ee4180a969cfb@mail.gmail.com>
-Subject: Re: Package Maintenance
+In-Reply-To: <be7a9f3d0903161800i3f6735c8u7eafe009f2cb0b88@mail.gmail.com>
+References: <1236890935.6250.26.camel@northpole>
+	<1237220171.4020.4.camel@faraday>
+	<be7a9f3d0903161800i3f6735c8u7eafe009f2cb0b88@mail.gmail.com>
+Organization: 2MI Tecnologia
+Date: Tue, 24 Mar 2009 18:05:39 -0300
+Message-Id: <1237928739.20348.3.camel@northpole>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Re: calibrateproto git tag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,38 +42,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 20:46:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 24 Mar 2009 21:07:29 -0000
+X-Groupsio-MsgNum: 8678
+Content-Type: multipart/mixed; boundary="=-ogpF/9/w6L8Up4LfU3x+"
+
+--=-ogpF/9/w6L8Up4LfU3x+
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Em Seg, 2009-03-16 =C3=A0s 22:00 -0300, Otavio Salvador escreveu:
+> 2009/3/16 Marcos Amorim <marcos@2mi.com.br>:
+> > libxcalibrate_git add tag
+> >
+> >
+> > git diff packages/xorg-lib/libxcalibrate_git.bb
+> > diff --git a/packages/xorg-lib/libxcalibrate_git.bb
+> > b/packages/xorg-lib/libxcalibrate_git.bb
+> > index f9e1587..7f889df 100644
+> > --- a/packages/xorg-lib/libxcalibrate_git.bb
+> > +++ b/packages/xorg-lib/libxcalibrate_git.bb
+> > @@ -6,7 +6,7 @@ DEPENDS =3D "virtual/libx11 calibrateproto libxext"
+> >  PV =3D "0.0+gitr${SRCREV}"
+> >  PE =3D "1"
+> >
+> > -SRC_URI =3D
+> > "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3D=
+git"
+> > +SRC_URI =3D
+> > "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3D=
+git;tag=3Dmaster"
+>=20
+> Please use AUTOREV in conf/distro/include/insane-srcrevs.inc and a good
+> one at conf/distro/include/sane-srcrevs.inc. This makes images easier t=
+o
+> be reproducable.
+
+Add calibrateproto sane revision to sane-srcrevs.inc, corrected this bug
+in my compilation.
+Patch is attached.
+
+>=20
+Att.
+
+
+Jader H. Silva
+jader@2mi.com.br
+Depto. de desenvolvimento
+2MI Tecnologia
+
+
+--=-ogpF/9/w6L8Up4LfU3x+
+Content-Disposition: attachment; filename="sane-srcrevs.inc.patch"
+Content-Type: text/x-patch; name="sane-srcrevs.inc.patch"; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 03/24/2009 03:30 PM, Lon Lentz wrote:
->   Please excuse my ignorance here, but what happens when a package literally
-> has no maintainer?
-> 
->   Is OE attempting to manage a consumer facing product or provide a
-> centralized clearinghouse and methodology as a service to developers?
+diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
+index 1c01fbc..0a7e8b0 100644
+--- a/conf/distro/include/sane-srcrevs.inc
++++ b/conf/distro/include/sane-srcrevs.inc
+@@ -19,6 +19,7 @@ SRCREV_pn-assassin ?= "268"
+ SRCREV_pn-assassin-thumbnail ?= "4690"
+ SRCREV_pn-bfin-uclibc ?= "1857"
+ SRCREV_pn-bootchart-lite ?= "4"
++SRCREV_pn-calibrateproto ?= "1da6fd1e2c7a49648245c98481fabea8b9690a8c"
+ SRCREV_pn-clutter-box2d ?= "3197"
+ SRCREV_pn-clutter-cairo ?= "3210"
+ SRCREV_pn-clutter-gst ?= "3188"
 
-I think you took the word "responsibility" too seriously.
-
-Regards
-Gordon
-
-
-> On Tue, Mar 24, 2009 at 4:01 PM, Chris Larson <clarson@kergoth.com> wrote:
-> 
->> I don't think the current method is difficult, persay, but rather I'd
->> like to see:
->> - More individual responsibility in the project in general,
->> particularly in class and recipe maintenance.
->> - Clearer delineation between what gets the most attention and what does
->> not.
->>
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
-
-
+--=-ogpF/9/w6L8Up4LfU3x+--
