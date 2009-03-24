@@ -1,34 +1,42 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [65.254.253.134] (helo=mailout16.yourhostingaccount.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LmCes-0000u4-Ao
-	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 20:51:34 +0100
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090324195002.IWTU15318.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Mar 2009 15:50:02 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id X7q11b0094dMFYL047q1qe; Tue, 24 Mar 2009 15:50:01 -0400
-X-Authority-Analysis: v=1.0 c=1 a=NfHW1gY9qQmrc5nluFAA:9
-	a=vClcCFTrWnlYnEvzf2kA:7 a=alpK4RGeFkh1L2JglDHh0h1kEh8A:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Tue, 24 Mar 2009 12:50:01 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090324195001.GR14278@smtp.west.cox.net>
-References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
-	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>
-	<1237885606.5348.8.camel@dax.rpnet.com>
-	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>
-	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
-	<b6ebd0a50903241155u7743eaads81be33e350925b7a@mail.gmail.com>
-	<gqbbf3$jak$1@ger.gmane.org>
-	<b6ebd0a50903241224j9f11e8dp73fe5eb1a81bfd86@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <b6ebd0a50903241224j9f11e8dp73fe5eb1a81bfd86@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+	(envelope-from <SRS0=M4679I=7X=ngndg.com=tim@yourhostingaccount.com>)
+	id 1LmCgf-0003Bf-5e for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Mar 2009 20:53:25 +0100
+Received: from mailscan09.yourhostingaccount.com ([10.1.15.9]
+	helo=mailscan09.yourhostingaccount.com)
+	by mailout16.yourhostingaccount.com with esmtp (Exim)
+	id 1LmCfC-0001h6-Jw for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Mar 2009 15:51:54 -0400
+Received: from impout02.yourhostingaccount.com ([10.1.55.2]
+	helo=impout02.yourhostingaccount.com)
+	by mailscan09.yourhostingaccount.com with esmtp (Exim)
+	id 1LmCfC-00073g-FH for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Mar 2009 15:51:54 -0400
+Received: from authsmtp10.yourhostingaccount.com ([10.1.18.10])
+	by impout02.yourhostingaccount.com with NO UCE
+	id X7ru1b0030D2B7u0000000; Tue, 24 Mar 2009 15:51:54 -0400
+X-EN-OrigOutIP: 10.1.18.10
+X-EN-IMPSID: X7ru1b0030D2B7u0000000
+Received: from 79-77-34-99.dynamic.dsl.as9105.com ([79.77.34.99]
+	helo=[192.168.0.4])
+	by authsmtp10.yourhostingaccount.com with esmtpa (Exim)
+	id 1LmCfB-0001zS-IQ for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Mar 2009 15:51:54 -0400
+Message-Id: <FA1C2D98-DEF3-4694-A757-7C137F667CE3@ngndg.com>
+From: Tim Ellis <tim@ngndg.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <49C9347C.7010309@balister.org>
+Mime-Version: 1.0 (Apple Message framework v930.3)
+Date: Tue, 24 Mar 2009 19:51:47 +0000
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>	<1237885606.5348.8.camel@dax.rpnet.com>	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>	<49C92CC7.2080801@gmail.com>	<b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>
+	<49C93237.7010205@gmail.com> <49C9347C.7010309@balister.org>
+X-Mailer: Apple Mail (2.930.3)
+X-EN-UserInfo: b8ae887d91300d60195f6ea73d56f3bc:43527cee0c82d0ab5dc2dc3726f6afdf
+X-EN-AuthUser: tim@ngndg.com
+Sender: Tim Ellis <tim@ngndg.com>
+X-EN-OrigIP: 79.77.34.99
+X-EN-OrigHost: 79-77-34-99.dynamic.dsl.as9105.com
 Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,26 +51,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 19:51:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 24 Mar 2009 19:53:25 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 24, 2009 at 12:24:27PM -0700, Chris Larson wrote:
-[snip]
-> I also don't think the fact that a recipe builds is an excuse to
-> ignore it.  Recipes should be kept in good shape, by current
-> standards, in my opinion.  As an example, many recipes still don't
-> take advantage of the ${BP}, etc variables, and are overriding
-> FILES{DIR,PATH} unnecessarily.
+I am happy with whatever the outcome of this is as long as my packages  
+as specified in the MAINTAINERS file end up being maintained by me -  
+we should start whatever changes by transferring the information there  
+to wherever it is destined to go and then assessing the logs of  
+individual packages imho. Once a decision has been made getting devs  
+that are listed there to transfer the information would be a good way  
+to see who is active and actually wants to maintain their packages.
 
-I'm saying this as an example, but, the what-now variable?  And why
-didn't however added a handy new variable regex an update in?  If we're
-going to push cleanups off of the person writing them and onto the
-maintainer, they need to be documented and linked from a single spot or
-so (so people can check a page once a week / whenever and see what's
-been put on their plate).
+I don't really have a problem with the way it is at the moment to be  
+honest and try to contact people using git log on packages and the  
+MAINTAINERS file if I have a need to touch other packages, which isn't  
+really that hard!
 
--- 
-Tom Rini
+Thanks
 
 
