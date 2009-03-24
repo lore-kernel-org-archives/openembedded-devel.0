@@ -1,25 +1,22 @@
-Received: from [213.36.80.91] (helo=mail.libertysurf.fr)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LmCm8-0001Uk-SV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 20:59:04 +0100
-Received: from blini.bolloretelecom.eu (62.210.194.121) by mail.libertysurf.fr
-	(8.5.016.1) id 498AE76200F6EC83; Tue, 24 Mar 2009 21:47:19 +0100
-Received: from [192.168.95.60] (unknown [192.168.95.60])
-	by blini.bolloretelecom.eu (Postfix) with ESMTPSA id 5C64C23E4A;
-	Tue, 24 Mar 2009 20:57:31 +0100 (CET)
-Message-ID: <49C93B2B.5040002@bolloretelecom.eu>
-Date: Tue, 24 Mar 2009 20:57:31 +0100
-From: =?UTF-8?B?SmVyZW15IExhaW7DqQ==?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.19) Gecko/20090103 Thunderbird/2.0.0.19 Mnenhy/0.7.5.0
+	(envelope-from <mwester@dls.net>) id 1LmCnW-00030Z-IH
+	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 21:00:31 +0100
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx01.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LmCm2-00064b-GA
+	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 14:58:58 -0500
+Message-ID: <49C93B87.40607@dls.net>
+Date: Tue, 24 Mar 2009 14:59:03 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, jims@russound.com
-References: <49BFA406.6030802@bolloretelecom.eu>	<20090317143526.3e79150c@vanille.zapto.org>	<49BFADB1.3090207@bolloretelecom.eu>
-	<20090317171705.208a7d31@kmfms>
-In-Reply-To: <20090317171705.208a7d31@kmfms>
-X-Enigmail-Version: 0.95.0
-Subject: Re: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
+To: openembedded-devel@openembedded.org
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>	<1237885606.5348.8.camel@dax.rpnet.com>	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>
+	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
+In-Reply-To: <ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
+Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,39 +30,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 19:59:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Tue, 24 Mar 2009 20:00:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Frans Meulenbroeks wrote:
+> Disadvantage of a Maintainers file is that it is yet another file to
+> update when you create a package (adjacent to the checksums file and
+> of course the package recipe). Guess it will be forgotten regularly.
+> 
+> Also I fear we're going to end up with a lot of orphaned packages.
 
-Hi Jim!
+Is lack of a Maintainers file _really_ our problem?
 
-> Greetings!  I had a couple of Qt recipes that used "inherit
-> qtopia4core" and worked just fine.
->
-> Now if I "inherit qt4e" they fail with something like this:
->
-> | NOTE: using qmake spec in
-> /home/jim/Projects/gumstix/oe/tmp/cross/armv7a/share/qt4/mkspecs/linux-=
-gnueabi-oe-g++,
->  using profiles '' | NOTE: qmake prevar substitution:
-> QT_LIBINFIX=3DE | Failure to read QMAKESPEC conf
+IMO, our current issue is what I would term "Drive-by Commits" (for
+example, the past two weekends have seen commits that have introduced
+major breakage of some sort where the committer has not been about for
+some fairly significant period of time.
 
-I have just commited some cleanups to the Qt packages, could you
-please let me know if it works for you?
-- --
-Jeremy LAINE
-Bollor=C3=A9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+I don't think listing a name in a Maintainers file is going to change
+anything, frankly.
 
-iEYEARECAAYFAknJOyoACgkQCL1n3lVB9EYu5gCdGiwOuPFHo/JGmkAjgOW0Osnk
-td8AoKH5iRCXqF9Mos8MuNTWc8D2U3MY
-=3DpeGe
------END PGP SIGNATURE-----
-
+Mike (mwester)
 
 
