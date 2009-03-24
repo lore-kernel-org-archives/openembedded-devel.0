@@ -1,40 +1,43 @@
-Received: from [209.85.221.124] (helo=mail-qy0-f124.google.com)
+Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xjqian@gmail.com>) id 1LmCBE-0003mr-Vr
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 20:20:57 +0100
-Received: by qyk30 with SMTP id 30so3525505qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2009 12:19:25 -0700 (PDT)
+	(envelope-from <kergoth@gmail.com>) id 1LmCG5-0006EP-Et
+	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 20:25:57 +0100
+Received: by yw-out-1718.google.com with SMTP id 9so2190037ywk.30
+	for <openembedded-devel@openembedded.org>;
+	Tue, 24 Mar 2009 12:24:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from:reply-to
-	:user-agent:mime-version:to:subject:references:in-reply-to
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
 	:content-type:content-transfer-encoding;
-	bh=ukybzdC20eWNs4ViswQlaSlQGmODIspKwvHXXbc/Yuo=;
-	b=tx4FdrAKzgCWWcUbgAdpG08BINlP1u9YcvmTKfQBfjdX3bZgPdwSeVxrDfA7yT/U3K
-	fgtbUEtSCgKfgrr51B2YpA2nW7+lk+vjmMOAuf1DuBmW/2efw8Nr8ARRCMvnhqIuUmNu
-	DA3EqdpPe9HcSEnA/7qo5RMNHQfcIR2nk54rg=
+	bh=u8NT3WP1okyLvq8MUWd2zLyYwaqjPxzhKHZ+sOQPQCk=;
+	b=X3FqN/74nkB+ECwqRMDwA4BQnEcuP6X10IaIoQ61ZenuB6b4xOFcOjmPwdu2MRduCt
+	ryenrJHU/rdv4hxa8Z1hXagnM1v61tJzeGw5NGgGaa0jMRPw7wHJxH3pmf6wxvvoKB+z
+	EEvbggn6doGgffOZjeCR5ygl9FWq9bM8hih+E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:reply-to:user-agent:mime-version:to:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	b=DHuhnG2jjibMhI6KWIi3P/T1ouImYA9Fl6+/yi2OBLQcwq5HjCN8xeyu/msXk0xbc7
-	yMBz/suqj/B0jgBYLTaqOljHHKOLFCeV5Iojbl7tyMq6LmqGz+doEMgTgIrBTGS/pi4q
-	/r1aS/zPOEuPqkGFb3lp+gHsZGfmf8PScUVb4=
-Received: by 10.142.13.14 with SMTP id 14mr3519299wfm.275.1237922364363;
-	Tue, 24 Mar 2009 12:19:24 -0700 (PDT)
-Received: from ?172.31.11.36? (mscitspubwlgw.wustl.edu [128.252.55.250])
-	by mx.google.com with ESMTPS id 29sm14158543wfg.13.2009.03.24.12.19.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 24 Mar 2009 12:19:23 -0700 (PDT)
-Message-ID: <49C93237.7010205@gmail.com>
-Date: Tue, 24 Mar 2009 14:19:19 -0500
-From: Junqian Gordon Xu <xjqian@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=qWolfVPUXKZE2wEDekPz+ki9A/EWzs3nkldwmX0OhzlkTSM+zM8/skUacbPQLjqOHk
+	/27LDfVS5ajjEZDs2l9eFZRv5uTIE1LzlcAqmweOsbzRhU71m/W/zoJsCqnrKK6UUlMq
+	1Pzoom9snj7XDZje0Eh2cxK6V4rTisLVqHP8E=
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.151.40.3 with SMTP id s3mr15524966ybj.169.1237922667425; Tue, 
+	24 Mar 2009 12:24:27 -0700 (PDT)
+In-Reply-To: <gqbbf3$jak$1@ger.gmane.org>
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
+	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>
+	<1237885606.5348.8.camel@dax.rpnet.com>
+	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>
+	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
+	<b6ebd0a50903241155u7743eaads81be33e350925b7a@mail.gmail.com>
+	<gqbbf3$jak$1@ger.gmane.org>
+Date: Tue, 24 Mar 2009 12:24:27 -0700
+X-Google-Sender-Auth: 4fccb7bd8b83ffa6
+Message-ID: <b6ebd0a50903241224j9f11e8dp73fe5eb1a81bfd86@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>	<1237885606.5348.8.camel@dax.rpnet.com>	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>	<49C92CC7.2080801@gmail.com>
-	<b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>
-In-Reply-To: <b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,48 +52,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 19:20:57 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Mar 2009 19:25:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 03/24/2009 02:05 PM, Chris Larson wrote:
-> On Tue, Mar 24, 2009 at 11:56 AM, Junqian Gordon Xu <xjqian@gmail.com> wrote:
->> On 03/24/2009 01:36 PM, Frans Meulenbroeks wrote:
+On Tue, Mar 24, 2009 at 12:14 PM, Koen Kooi <k.kooi@student.utwente.nl> wro=
+te:
+> On 24-03-09 19:55, Chris Larson wrote:
+>>
+>> On Tue, Mar 24, 2009 at 11:36 AM, Frans Meulenbroeks
+>> <fransmeulenbroeks@gmail.com> =C2=A0wrote:
+>>>
 >>> Disadvantage of a Maintainers file is that it is yet another file to
 >>> update when you create a package (adjacent to the checksums file and
 >>> of course the package recipe). Guess it will be forgotten regularly.
 >>>
 >>> Also I fear we're going to end up with a lot of orphaned packages.
->> One possibility is to get statistics about the committer from the last X
->> commits, calculate the mean and standard deviation (STD) of the age of the
->> last X commits to indicate how likely the maintainer is alive, and
->> automatically update the Maintainer file every month. There will be other
->> details to discuss, but the maintainer file would look something like this.
 >>
->> Recipe name     Maintainer      Mean Age (last 5)       STD (last 5)
->>
->> gcc             Koen            2 month                 10 days
->> binutils        RP              1 year                  2 month
-> 
-> That's an interesting possibility.  I'd thought about looking at the
-> committers, but didn't think about using the age.  How would you
-> handle something that's had 3 commits by one person and 2 by another?
-> And those 3 were minor bugfixes by a contributer, not someone who
-> plans on taking any responsibility for the state of the recipe? :)
+>> The point I'm trying to make is that we have a lot of orphaned
+>> packages today, we just aren't being honest about it. =C2=A090% of the
+>> recipes in the tree don't get the attention they should.
+>
+> I suspect we have approx 100 properly maintained recipes, which is approx
+> 1.5%. The rest is 'unmaintained' due to dormant upstream, or because it
+> builds and works just well enough for people to ignore it.
+> Also, having people put their name down as maintainer doesn't help when t=
+hey
+> have no interest in QA at all.
 
-That's the details I'm thinking abouts.
+Having people put down their name as the maintainer means they're the
+ones responsible for keeping it in good shape.  They're responsible
+for fixing it if it breaks, though someone else may be nice enough to
+fix it themselves, if it's blocking them.
 
-1) For a recipe who has a strong opinion on taking responsibility. We 
-can use the logic of strong assignment for that person, so the 
-maintainer field won't be overwritten by the weak assignment generated 
-by the statistics.
+I also don't think the fact that a recipe builds is an excuse to
+ignore it.  Recipes should be kept in good shape, by current
+standards, in my opinion.  As an example, many recipes still don't
+take advantage of the ${BP}, etc variables, and are overriding
+FILES{DIR,PATH} unnecessarily.
 
-2) For other recipes, I would use winner-takes-all (who has the most 
-commits) for the last X commits, whether it's a bug fix or contributer. 
-If the contributer really cares, please go back to step 1). If there is 
-a tie, just list all the winners or list the last winner.
+> What about recording when a recipe has been 'vetted' and the results of t=
+he
+> 'vetting':
+>
+> # foo_1.0.bb vetting record:
+> # 2008/10/31 =C2=A0- =C2=A0koen@openembedded.org
+> # =C2=A0 =C2=A0 =C2=A0 beagleboard/angstrom-2008.1
+> # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fails to build with gc=
+c >=3D 4.3.0
+> # =C2=A0 =C2=A0 =C2=A0 tosa/angstrom-2008.1
+> # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 works
+> # 2006/5/16 - hrw@openembedded.org
+> # =C2=A0 =C2=A0 =C2=A0 tosa/openzaurus-3.5.3
+> # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 works
 
-Regards
-Gordon
+I'm sure that would be useful, but I don't see that as a replacement
+for people taking responsibility.  Personally, I'd be a lot more
+confident in my builds if I knew everything I was building was
+actively maintained by an individual member of the team.
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
