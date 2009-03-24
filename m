@@ -1,36 +1,35 @@
-Received: from [74.125.44.153] (helo=yx-out-1718.google.com)
+Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Lm8gK-000891-DA
+	(envelope-from <cliff.brake@gmail.com>) id 1Lm8rN-0000CP-UE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 16:36:48 +0100
-Received: by yx-out-1718.google.com with SMTP id 3so1787793yxi.42
+	Tue, 24 Mar 2009 16:48:14 +0100
+Received: by yx-out-1718.google.com with SMTP id 3so1791758yxi.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2009 08:35:19 -0700 (PDT)
+	Tue, 24 Mar 2009 08:46:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=IuHgwWJNFCvnmQ1r/WQAVDfdB8v8jBHiL1dRI3/qtBo=;
-	b=l2Uu2ZxltuywOtRAtJGLI8R4WBPGpb69haK4Td4uRPppimC7LWXZoRC3NfR7AGUDDJ
-	OoBGx0yzK1lm8Z6pBzgFBc4Yx4oFx6B0odl8Yyefr91cqtORLjEhllgt2KxCkBnPeNwU
-	y1xcoG0i4dUKBQwWJBY2JnRbkRpG85E9CKvm0=
+	bh=uePO4zun8v1fpvRgyaVvnM6TqHilfFdpWTl+pNjcWhk=;
+	b=Zt0Tu5XCg0WtlFcpM3sz3zj9n4+sGGQY6y2ENBNLBllRV8Ck9NSlnR9w36Hq2Q/f3s
+	/9Yg91/P9uPr1qsgGeyBk8hL1y9LFIZNEk9R9AQFsCVI1NjJJw8kQI9gKjgirXEZhnb1
+	+RbPWQVEr15SP9ngEjNr0bjEvmDuTIATQHuP4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=VASv9a4DpusvFtQB49oz4sZAMf3YYEGQryPzP5VMGH140NBXgTEeEHZwLp7cOwxW+/
-	oaZxgKMB0C+1wYCa4o6J9boJKenTT4sndSocf8DHZzQafTtpB7ER/o1X8qQf7I905ibg
-	3vUnRHF9E4T+r+Jgr8e0qhFfS9oFCS1M1ryes=
+	b=vGjWXB7eBLrHO9+9ENHABG1fAdtEXI1XJuTm6o6ArnJH3M2YxCKE6lHiEcNxKX5i8K
+	tD5sEefqiq/67r6Mi8GrfU7lESObBWMhl9Rgm+Cf1Fjiz7Qy0Qghhp1vkPMTZMsfA6wN
+	lOjQ6w41r3qukwjpsKdhYw8cbDLKogF/speNM=
 MIME-Version: 1.0
-Received: by 10.151.43.19 with SMTP id v19mr14552470ybj.153.1237908915101; 
-	Tue, 24 Mar 2009 08:35:15 -0700 (PDT)
-In-Reply-To: <200903191917.09270.mickey@vanille-media.de>
-References: <alpine.DEB.1.00.0903191053260.9107@localhost.localdomain>
-	<200903191917.09270.mickey@vanille-media.de>
-Date: Tue, 24 Mar 2009 11:35:15 -0400
-Message-ID: <f96d234e0903240835t3e137280ub7420726d721f180@mail.gmail.com>
+Received: by 10.150.153.7 with SMTP id a7mr13966613ybe.150.1237909604731; Tue, 
+	24 Mar 2009 08:46:44 -0700 (PDT)
+In-Reply-To: <873ad462xj.fsf@neumann.lab.ossystems.com.br>
+References: <873ad462xj.fsf@neumann.lab.ossystems.com.br>
+Date: Tue, 24 Mar 2009 11:46:44 -0400
+Message-ID: <f96d234e0903240846s37d4bc77lfe7b31a4d6806262@mail.gmail.com>
 From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] local.conf.sample: Replace packages/ with recipes/.
+Subject: Re: Problems with current workflow using PatchWork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,20 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 15:36:48 -0000
+X-List-Received-Date: Tue, 24 Mar 2009 15:48:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 19, 2009 at 2:17 PM, Michael 'Mickey' Lauer
-<mickey@vanille-media.de> wrote:
-> Theodore,
+On Mon, Mar 23, 2009 at 4:47 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> Hello,
 >
-> your patches seem sane. Would you be interested in commit access?
+> Today I went to take a look if there were anything I could help with at
+> OE side and went to PatchWork to review pending patches and noticed a
+> cuple of issues.
+>
+> =A0- we need to do more review cycles at PatchWork and update the status
+> =A0 according
+>
+> =A0 There're applied patches that were not archived and patches that we
+> =A0 asked for changes that hadn't the status changed to reflect it. This
+> =A0 way PW loses the main feature that is trackability of patch status.
+>
+> =A0 Please commiters, when doing a commit please remember to archive the
+> =A0 patch at PW.
+>
+> =A0- merges need to be archived on PW
+>
+> =A0 I noticed tha the RPM fixes went finally merged into the
+> =A0 mainline. GREAT! But they were still listed as waiting for
+> =A0 review. Since Marcin has commit, he did the merge but forgot to
+> =A0 archive the whole set of patches at PW.
+>
+> =A0 I suggest we when commiting our own patches take care of archiving
+> =A0 them at PW to make life easier to everyone.
 
-+1
+Makes sense to me.  I have been archiving patches as I apply them, and
+selecting "Accepted".
 
--- 
-=======================
+Thanks,
+Cliff
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Cliff Brake
 http://bec-systems.com
 
