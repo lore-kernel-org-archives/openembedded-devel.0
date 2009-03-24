@@ -1,34 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.27.42.2] (helo=smtp2-g21.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lm3GC-0001Ls-Ke
-	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 10:49:28 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lm3En-0008MZ-HK
-	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 09:48:01 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 24 Mar 2009 09:48:01 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Mar 2009 09:48:01 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 24 Mar 2009 10:47:48 +0100
-Message-ID: <gqaa84$phh$1@ger.gmane.org>
-References: <200902140035.13820.khimov@altell.ru>	<200902171525.28995.khimov@altell.ru>	<877i2g63wr.fsf@neumann.lab.ossystems.com.br>	<200903232137.43902.khimov@altell.ru>
-	<87tz5k3s28.fsf@neumann.lab.ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090316 Shredder/3.0b3pre
-In-Reply-To: <87tz5k3s28.fsf@neumann.lab.ossystems.com.br>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] New package: siproxd
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1Lm5GZ-0007OO-6B
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Mar 2009 12:58:00 +0100
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 827F04B01B0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Mar 2009 12:56:28 +0100 (CET)
+Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
+	[81.56.56.40])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 9B14A4B0105
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Mar 2009 12:56:26 +0100 (CET)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by sharky.jerryweb.org (Postfix) with ESMTP id DC2E627844C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Mar 2009 12:56:29 +0100 (CET)
+Message-ID: <49C8CA6D.6010703@bolloretelecom.eu>
+Date: Tue, 24 Mar 2009 12:56:29 +0100
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
+	Mnenhy/0.7.5.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <49BFA406.6030802@bolloretelecom.eu>	<20090317143526.3e79150c@vanille.zapto.org>	<49BFADB1.3090207@bolloretelecom.eu>
+	<20090317171705.208a7d31@kmfms>	<49C107E3.30505@bolloretelecom.eu>
+	<gpr569$535$1@ger.gmane.org>
+	<1d6c95c90903201026g709b2adfja5f5a6f8384cc798@mail.gmail.com>
+In-Reply-To: <1d6c95c90903201026g709b2adfja5f5a6f8384cc798@mail.gmail.com>
+Subject: Re: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,47 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 09:49:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Mar 2009 11:58:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 23-03-09 21:25, Otavio Salvador wrote:
-> Roman I Khimov<khimov@altell.ru>  writes:
->
->
-> [...]
->
->>> Mind to fix it?
->>
->> Sure, I'll fix it this week and will try to push even more things as I'm
->> sitting now on a bunch of patches and have zero time to push anything
->> upstream.
->
-> Nice, thx.
->
->> OK. Also, as I've seen Khem had issues trying to build siproxd and even had
->> fixed some of those (original recipe worked fine for me), I've set up two
->> sample testing configs with x86-prescott and qemuarm machines and with
->> plain Angstrom distro. So I've tried to put siproxd in there expecting to
->> reproduce something and discovered another thing - that it wants libosip2>
->> 3.0.0 while Angstrom has 2.2.2 in preferred.
->>
->> What's the best way to handle that and specify that siproxd wants libosip2>
->> 3.0.0? Or it shouldn't be handled in recipes in this cases and I'm just
->> switching to minimal or something and proceeding?
->
-> This is a distro setting, you shouldn't worry about it in your recipe.
->
-> If Koen thinks it should be the default, he will handle the preferred
-> version change by himself.
+> In the same build that you cross-compile qt4-x11-free, you can compile
+> native qt-tools (qmake/moc/uic/rcc), just using properly 'platform'
+> and 'xplatform' configure flags and two different specs.
 
-Noone seems to know why that's in there and the log message is not being 
-helpfull either, so it's gone now :)
+Absolutely, I have always wondered why this was done separately in OE. An=
+other advantage
+of doing this is that you will always have the right "qmake" to go with y=
+our headers/libs.
 
-regards,
+> I already created qt4.bbclass that is based on qt4/qt_*.inc and do all
+> the required work to build qt. The native qt tools binaries and the
+> specs are being sent to staging and a new qmake.bbclass are using them
+> to build qmake based applications.
 
-Koen
+I would be interested in getting hold of a your qt4.bbclass, even if it's=
+ not 100%
+finished and working with you on it. Let me know if you are available for=
+ a chat on IRC.
 
-
+Cheers,
+--=20
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
 
 
