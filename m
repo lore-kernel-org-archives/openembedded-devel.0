@@ -1,43 +1,20 @@
-Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1LmCG5-0006EP-Et
-	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 20:25:57 +0100
-Received: by yw-out-1718.google.com with SMTP id 9so2190037ywk.30
-	for <openembedded-devel@openembedded.org>;
-	Tue, 24 Mar 2009 12:24:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=u8NT3WP1okyLvq8MUWd2zLyYwaqjPxzhKHZ+sOQPQCk=;
-	b=X3FqN/74nkB+ECwqRMDwA4BQnEcuP6X10IaIoQ61ZenuB6b4xOFcOjmPwdu2MRduCt
-	ryenrJHU/rdv4hxa8Z1hXagnM1v61tJzeGw5NGgGaa0jMRPw7wHJxH3pmf6wxvvoKB+z
-	EEvbggn6doGgffOZjeCR5ygl9FWq9bM8hih+E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=qWolfVPUXKZE2wEDekPz+ki9A/EWzs3nkldwmX0OhzlkTSM+zM8/skUacbPQLjqOHk
-	/27LDfVS5ajjEZDs2l9eFZRv5uTIE1LzlcAqmweOsbzRhU71m/W/zoJsCqnrKK6UUlMq
-	1Pzoom9snj7XDZje0Eh2cxK6V4rTisLVqHP8E=
+	(envelope-from <philip@balister.org>) id 1LmCKX-0008EX-ND
+	for openembedded-devel@openembedded.org; Tue, 24 Mar 2009 20:30:34 +0100
+Received: (qmail 21285 invoked by uid 1003); 24 Mar 2009 19:29:01 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 24 Mar 2009 19:29:01 -0000
+Message-ID: <49C9347C.7010309@balister.org>
+Date: Tue, 24 Mar 2009 15:29:00 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.151.40.3 with SMTP id s3mr15524966ybj.169.1237922667425; Tue, 
-	24 Mar 2009 12:24:27 -0700 (PDT)
-In-Reply-To: <gqbbf3$jak$1@ger.gmane.org>
-References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
-	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>
-	<1237885606.5348.8.camel@dax.rpnet.com>
-	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>
-	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
-	<b6ebd0a50903241155u7743eaads81be33e350925b7a@mail.gmail.com>
-	<gqbbf3$jak$1@ger.gmane.org>
-Date: Tue, 24 Mar 2009 12:24:27 -0700
-X-Google-Sender-Auth: 4fccb7bd8b83ffa6
-Message-ID: <b6ebd0a50903241224j9f11e8dp73fe5eb1a81bfd86@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>	<1237885606.5348.8.camel@dax.rpnet.com>	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>	<49C92CC7.2080801@gmail.com>	<b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>
+	<49C93237.7010205@gmail.com>
+In-Reply-To: <49C93237.7010205@gmail.com>
 Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,71 +29,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 19:25:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 Mar 2009 19:30:34 -0000
+X-Groupsio-MsgNum: 8666
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020201000007070003060609"
 
-On Tue, Mar 24, 2009 at 12:14 PM, Koen Kooi <k.kooi@student.utwente.nl> wro=
-te:
-> On 24-03-09 19:55, Chris Larson wrote:
->>
->> On Tue, Mar 24, 2009 at 11:36 AM, Frans Meulenbroeks
->> <fransmeulenbroeks@gmail.com> =C2=A0wrote:
+--------------ms020201000007070003060609
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Junqian Gordon Xu wrote:
+> On 03/24/2009 02:05 PM, Chris Larson wrote:
+>> On Tue, Mar 24, 2009 at 11:56 AM, Junqian Gordon Xu <xjqian@gmail.com> 
+>> wrote:
+>>> On 03/24/2009 01:36 PM, Frans Meulenbroeks wrote:
+>>>> Disadvantage of a Maintainers file is that it is yet another file to
+>>>> update when you create a package (adjacent to the checksums file and
+>>>> of course the package recipe). Guess it will be forgotten regularly.
+>>>>
+>>>> Also I fear we're going to end up with a lot of orphaned packages.
+>>> One possibility is to get statistics about the committer from the last X
+>>> commits, calculate the mean and standard deviation (STD) of the age 
+>>> of the
+>>> last X commits to indicate how likely the maintainer is alive, and
+>>> automatically update the Maintainer file every month. There will be 
+>>> other
+>>> details to discuss, but the maintainer file would look something like 
+>>> this.
 >>>
->>> Disadvantage of a Maintainers file is that it is yet another file to
->>> update when you create a package (adjacent to the checksums file and
->>> of course the package recipe). Guess it will be forgotten regularly.
+>>> Recipe name     Maintainer      Mean Age (last 5)       STD (last 5)
 >>>
->>> Also I fear we're going to end up with a lot of orphaned packages.
+>>> gcc             Koen            2 month                 10 days
+>>> binutils        RP              1 year                  2 month
 >>
->> The point I'm trying to make is that we have a lot of orphaned
->> packages today, we just aren't being honest about it. =C2=A090% of the
->> recipes in the tree don't get the attention they should.
->
-> I suspect we have approx 100 properly maintained recipes, which is approx
-> 1.5%. The rest is 'unmaintained' due to dormant upstream, or because it
-> builds and works just well enough for people to ignore it.
-> Also, having people put their name down as maintainer doesn't help when t=
-hey
-> have no interest in QA at all.
+>> That's an interesting possibility.  I'd thought about looking at the
+>> committers, but didn't think about using the age.  How would you
+>> handle something that's had 3 commits by one person and 2 by another?
+>> And those 3 were minor bugfixes by a contributer, not someone who
+>> plans on taking any responsibility for the state of the recipe? :)
+> 
+> That's the details I'm thinking abouts.
+> 
+> 1) For a recipe who has a strong opinion on taking responsibility. We 
+> can use the logic of strong assignment for that person, so the 
+> maintainer field won't be overwritten by the weak assignment generated 
+> by the statistics.
+> 
+> 2) For other recipes, I would use winner-takes-all (who has the most 
+> commits) for the last X commits, whether it's a bug fix or contributer. 
+> If the contributer really cares, please go back to step 1). If there is 
+> a tie, just list all the winners or list the last winner.
 
-Having people put down their name as the maintainer means they're the
-ones responsible for keeping it in good shape.  They're responsible
-for fixing it if it breaks, though someone else may be nice enough to
-fix it themselves, if it's blocking them.
+I think a report that calculates a score and reports the top three would 
+be really useful. The scoring should give us an idea of how well 
+maintained a recipe is, and who is doing the work. It should also handle 
+active versus inactive recipes.
 
-I also don't think the fact that a recipe builds is an excuse to
-ignore it.  Recipes should be kept in good shape, by current
-standards, in my opinion.  As an example, many recipes still don't
-take advantage of the ${BP}, etc variables, and are overriding
-FILES{DIR,PATH} unnecessarily.
+Philip
 
-> What about recording when a recipe has been 'vetted' and the results of t=
-he
-> 'vetting':
->
-> # foo_1.0.bb vetting record:
-> # 2008/10/31 =C2=A0- =C2=A0koen@openembedded.org
-> # =C2=A0 =C2=A0 =C2=A0 beagleboard/angstrom-2008.1
-> # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fails to build with gc=
-c >=3D 4.3.0
-> # =C2=A0 =C2=A0 =C2=A0 tosa/angstrom-2008.1
-> # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 works
-> # 2006/5/16 - hrw@openembedded.org
-> # =C2=A0 =C2=A0 =C2=A0 tosa/openzaurus-3.5.3
-> # =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 works
+--------------ms020201000007070003060609
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-I'm sure that would be useful, but I don't see that as a replacement
-for people taking responsibility.  Personally, I'd be a lot more
-confident in my builds if I knew everything I was building was
-actively maintained by an individual member of the team.
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDMyNDE5
+MjkwMFowIwYJKoZIhvcNAQkEMRYEFDhBVX0OYGRayEgL1BLbcYNwjge9MFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQBMnUfxKhRBqfudiKnj/1pMw5JSaUqeehZx3DKf5UhV0X7cltC0
+bGgbkHXMzXq6Qmr57GROnUIqqDRnLMsWypJH573StjepG1c3CkNH7rbq5h0ECqDYpAIZ8P3D1D47
+TC1IqNj5T3Ey4y52gb0be7GFTM1cxceYqUrUCGeKbheSa0b2oK2NgIJmfO7sqC+lO39BjdBACu7U
+BpJs87zZSniSElf/lolNS1itvleaJdLuTl0LxtoCyIKuLg3FM758B8azM4uuqfvENJMmDKlwrj9O
+ucqFVKVLR0sducpkLJ/Q8YScMm+novukq0N43YNaUqfUThWjTFPeQInaDqI80s0CAAAAAAAA
 
-
+--------------ms020201000007070003060609--
