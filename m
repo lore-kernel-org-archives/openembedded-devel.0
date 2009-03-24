@@ -1,43 +1,25 @@
-Received: from [65.254.253.134] (helo=mailout16.yourhostingaccount.com)
+Received: from [213.36.80.91] (helo=mail.libertysurf.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <SRS0=M4679I=7X=ngndg.com=tim@yourhostingaccount.com>)
-	id 1LmCgf-0003Bf-5e for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 20:53:25 +0100
-Received: from mailscan09.yourhostingaccount.com ([10.1.15.9]
-	helo=mailscan09.yourhostingaccount.com)
-	by mailout16.yourhostingaccount.com with esmtp (Exim)
-	id 1LmCfC-0001h6-Jw for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 15:51:54 -0400
-Received: from impout02.yourhostingaccount.com ([10.1.55.2]
-	helo=impout02.yourhostingaccount.com)
-	by mailscan09.yourhostingaccount.com with esmtp (Exim)
-	id 1LmCfC-00073g-FH for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 15:51:54 -0400
-Received: from authsmtp10.yourhostingaccount.com ([10.1.18.10])
-	by impout02.yourhostingaccount.com with NO UCE
-	id X7ru1b0030D2B7u0000000; Tue, 24 Mar 2009 15:51:54 -0400
-X-EN-OrigOutIP: 10.1.18.10
-X-EN-IMPSID: X7ru1b0030D2B7u0000000
-Received: from 79-77-34-99.dynamic.dsl.as9105.com ([79.77.34.99]
-	helo=[192.168.0.4])
-	by authsmtp10.yourhostingaccount.com with esmtpa (Exim)
-	id 1LmCfB-0001zS-IQ for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 15:51:54 -0400
-Message-Id: <FA1C2D98-DEF3-4694-A757-7C137F667CE3@ngndg.com>
-From: Tim Ellis <tim@ngndg.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49C9347C.7010309@balister.org>
-Mime-Version: 1.0 (Apple Message framework v930.3)
-Date: Tue, 24 Mar 2009 19:51:47 +0000
-References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<b6ebd0a50903231335y1ddfcb3bpd447b646e18d439a@mail.gmail.com>	<1237885606.5348.8.camel@dax.rpnet.com>	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>	<49C92CC7.2080801@gmail.com>	<b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>
-	<49C93237.7010205@gmail.com> <49C9347C.7010309@balister.org>
-X-Mailer: Apple Mail (2.930.3)
-X-EN-UserInfo: b8ae887d91300d60195f6ea73d56f3bc:43527cee0c82d0ab5dc2dc3726f6afdf
-X-EN-AuthUser: tim@ngndg.com
-Sender: Tim Ellis <tim@ngndg.com>
-X-EN-OrigIP: 79.77.34.99
-X-EN-OrigHost: 79-77-34-99.dynamic.dsl.as9105.com
-Subject: Re: Package Maintenance
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LmCm8-0001Uk-SV
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Mar 2009 20:59:04 +0100
+Received: from blini.bolloretelecom.eu (62.210.194.121) by mail.libertysurf.fr
+	(8.5.016.1) id 498AE76200F6EC83; Tue, 24 Mar 2009 21:47:19 +0100
+Received: from [192.168.95.60] (unknown [192.168.95.60])
+	by blini.bolloretelecom.eu (Postfix) with ESMTPSA id 5C64C23E4A;
+	Tue, 24 Mar 2009 20:57:31 +0100 (CET)
+Message-ID: <49C93B2B.5040002@bolloretelecom.eu>
+Date: Tue, 24 Mar 2009 20:57:31 +0100
+From: =?UTF-8?B?SmVyZW15IExhaW7DqQ==?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.19) Gecko/20090103 Thunderbird/2.0.0.19 Mnenhy/0.7.5.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org, jims@russound.com
+References: <49BFA406.6030802@bolloretelecom.eu>	<20090317143526.3e79150c@vanille.zapto.org>	<49BFADB1.3090207@bolloretelecom.eu>
+	<20090317171705.208a7d31@kmfms>
+In-Reply-To: <20090317171705.208a7d31@kmfms>
+X-Enigmail-Version: 0.95.0
+Subject: Re: Dropping qtopia-core-4.3.3.bb and qtopia4core.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 19:53:25 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Mar 2009 19:59:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: Quoted-Printable
 
-I am happy with whatever the outcome of this is as long as my packages  
-as specified in the MAINTAINERS file end up being maintained by me -  
-we should start whatever changes by transferring the information there  
-to wherever it is destined to go and then assessing the logs of  
-individual packages imho. Once a decision has been made getting devs  
-that are listed there to transfer the information would be a good way  
-to see who is active and actually wants to maintain their packages.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I don't really have a problem with the way it is at the moment to be  
-honest and try to contact people using git log on packages and the  
-MAINTAINERS file if I have a need to touch other packages, which isn't  
-really that hard!
+Hi Jim!
 
-Thanks
+> Greetings!  I had a couple of Qt recipes that used "inherit
+> qtopia4core" and worked just fine.
+>
+> Now if I "inherit qt4e" they fail with something like this:
+>
+> | NOTE: using qmake spec in
+> /home/jim/Projects/gumstix/oe/tmp/cross/armv7a/share/qt4/mkspecs/linux-=
+gnueabi-oe-g++,
+>  using profiles '' | NOTE: qmake prevar substitution:
+> QT_LIBINFIX=3DE | Failure to read QMAKESPEC conf
+
+I have just commited some cleanups to the Qt packages, could you
+please let me know if it works for you?
+- --
+Jeremy LAINE
+Bollor=C3=A9 telecom | 11bis, rue Scribe | F-75009 Paris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAknJOyoACgkQCL1n3lVB9EYu5gCdGiwOuPFHo/JGmkAjgOW0Osnk
+td8AoKH5iRCXqF9Mos8MuNTWc8D2U3MY
+=3DpeGe
+-----END PGP SIGNATURE-----
+
 
 
