@@ -1,34 +1,37 @@
-Received: from [66.111.4.26] (helo=out2.smtp.messagingengine.com)
+Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1Llu1a-0007Ly-14
+	(envelope-from <raj.khem@gmail.com>) id 1Lm1ZY-0002rV-J4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 00:57:46 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id EBABA2FAB4F
+	Tue, 24 Mar 2009 09:01:21 +0100
+Received: by wa-out-1112.google.com with SMTP id n7so1403968wag.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Mar 2009 19:56:20 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Mon, 23 Mar 2009 19:56:20 -0400
-X-Sasl-enc: T3jerzY+dGFhlVptEKTE81Ylyz9IXPURNx1us6lXPLgY 1237852579
-Received: from [192.168.178.120] (p54838CA4.dip0.t-ipconnect.de
-	[84.131.140.164])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 8DC1E7760
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Mar 2009 19:56:19 -0400 (EDT)
-Date: Tue, 24 Mar 2009 00:56:16 +0100 (CET)
-From: Vitus Jensen <vjensen@gmx.de>
+	Tue, 24 Mar 2009 00:59:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:mime-version:content-type:content-transfer-encoding
+	:message-id; bh=3D4orVpOhwUC2pHi9E8ZrvBA0ovVXN1zawud4+Q6TEI=;
+	b=LfVXdzNvMiKl5MKZfLeQajfXVQShkdFZ3OutKCHe516iIWGGjlqy4Jcv1dJlU+L0F3
+	I5JeydKtllKT8aT4Yv+3M7SnbusH3Imhvh3fJwJjBnEGnbG6PEDtZtyoRWut6D0DtPoV
+	5gA8l1tfJpJB3AoSxZjOlN4OZm4AemzKNwR7s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	b=iWTuehKbbJpLeuhTk9C8bXLPsLdQimpSeD62SgNeBgALgp/sPS2vYqSY3wcnHVdL3Y
+	cDxvCp331DxSy1q74F+IZRe6T1oJ4RzimSjGTfXdUVPt71ZrOKj/UNSrZVMd5dbs9g0n
+	mz4NtHjJIWe+cY7dVPshY3+sZ7xqgVC3hM6R8=
+Received: by 10.115.108.1 with SMTP id k1mr5439698wam.0.1237881593167;
+	Tue, 24 Mar 2009 00:59:53 -0700 (PDT)
+Received: from morpheus.localnet (adsl-71-146-12-154.dsl.pltn13.sbcglobal.net
+	[71.146.12.154])
+	by mx.google.com with ESMTPS id k14sm6143793waf.23.2009.03.24.00.59.51
+	(version=SSLv3 cipher=RC4-MD5); Tue, 24 Mar 2009 00:59:52 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gfu0cg$2tl$1@ger.gmane.org>
-Message-ID: <alpine.LNX.2.00.0903240053420.16464@asterix.crazy-teaparty.dyndns.org>
-References: <200811060040.45197.vjensen@gmx.de>
-	<b6ebd0a50811051833l4fb50bb3v973618c9f722ac65@mail.gmail.com>
-	<gf14m5$sdl$1@ger.gmane.org> <gfu0cg$2tl$1@ger.gmane.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+Date: Tue, 24 Mar 2009 00:59:26 -0700
+User-Agent: KMail/1.11.1 (Linux/2.6.28-11-generic; KDE/4.2.1; x86_64; ; )
 MIME-Version: 1.0
-Subject: [PATCH] htmldoc: new recipes
+Message-Id: <200903240059.33172.raj.khem@gmail.com>
+Subject: [PATCH] [RFC] Add new distutils-native-base class so solve PYTHON_DIR problem for native packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,501 +45,582 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Mar 2009 23:57:46 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 24 Mar 2009 08:01:21 -0000
+X-Groupsio-MsgNum: 8645
+Content-Type: multipart/signed; boundary="nextPart3416167.XyDWgkZJtl";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-HTMLDOC converts HTML input files into indexed HTML, postscript
-or PDF files.  These recipes build version 1.8.27 and 1.9.x-r1571
-of htmldoc.
+--nextPart3416167.XyDWgkZJtl
+Content-Type: multipart/mixed;
+  boundary="Boundary-01=_fLJyJil6YMLUSjr"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Updated version creating -doc and -gui packages for 1.8.27, too.
+--Boundary-01=_fLJyJil6YMLUSjr
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Signed-off-by: Vitus Jensen <vjensen@gmx.de>
----
- conf/checksums.ini                            |    8 ++
- recipes/htmldoc/files/paths_1.8.27.patch      |  109 +++++++++++++++++++++++++
- recipes/htmldoc/files/paths_1.9.x.patch       |  109 +++++++++++++++++++++++++
- recipes/htmldoc/htmldoc-gui_1.8.27.bb         |   24 ++++++
- recipes/htmldoc/htmldoc-gui_1.9.x-r1571.bb    |   24 ++++++
- recipes/htmldoc/htmldoc-native_1.8.27.bb      |   34 ++++++++
- recipes/htmldoc/htmldoc-native_1.9.x-r1571.bb |   34 ++++++++
- recipes/htmldoc/htmldoc.inc                   |    6 ++
- recipes/htmldoc/htmldoc_1.8.27.bb             |   22 +++++
- recipes/htmldoc/htmldoc_1.9.x-r1571.bb        |   22 +++++
- 10 files changed, 392 insertions(+), 0 deletions(-)
- create mode 100644 recipes/htmldoc/files/paths_1.8.27.patch
- create mode 100644 recipes/htmldoc/files/paths_1.9.x.patch
- create mode 100644 recipes/htmldoc/htmldoc-gui_1.8.27.bb
- create mode 100644 recipes/htmldoc/htmldoc-gui_1.9.x-r1571.bb
- create mode 100644 recipes/htmldoc/htmldoc-native_1.8.27.bb
- create mode 100644 recipes/htmldoc/htmldoc-native_1.9.x-r1571.bb
- create mode 100644 recipes/htmldoc/htmldoc.inc
- create mode 100644 recipes/htmldoc/htmldoc_1.8.27.bb
- create mode 100644 recipes/htmldoc/htmldoc_1.9.x-r1571.bb
+Hi
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 9142329..81651b4 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -10126,6 +10126,14 @@ sha256=acfda369dff72b9073a8b70f2b05b1397a61a1cdb23970e5ed216d632ff33586
- md5=1713d9a4941120235cb0721ceba6493b
- sha256=acfda369dff72b9073a8b70f2b05b1397a61a1cdb23970e5ed216d632ff33586
+I bumped into this problem today. I parsed dependencies for libxml2-native =
+and it was pulling all sort of packages=20
+which are really meant for target packages e.g. it was pulling in python al=
+ong with python-native and then this inturn
+was pulling in other packages.
 
-+[http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/1.8.27/htmldoc-1.8.27-source.tar.bz2]
-+md5=35589e7b8fe9c54e11be87cd5aec4dcc
-+sha256=89ffd223734268375dc959c200622dc5f167576c5cad9d7ce4bd7567faeb9613
-+
-+[http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/snapshots/htmldoc-1.9.x-r1571.tar.bz2]
-+md5=eda75ba1abe14ed8e71c6f40438def85
-+sha256=b4c78ff6b47521e980533e52cbe46fe86874c75b3d6bc18bcc2500a2ba854c3e
-+
- [http://downloads.sourceforge.net/htop/htop-0.7.tar.gz]
- md5=4afc961fa709167e1b434682897991f9
- sha256=1361f4f0b92d7e6bdac25a4b7ee138a7ee83b5a9368820f5aa518051ca82862b
-diff --git a/recipes/htmldoc/files/paths_1.8.27.patch b/recipes/htmldoc/files/paths_1.8.27.patch
+This is because we inherit from distutils-base class in the native recipes =
+of libxml2 and same is case with rpm-native
+
+The native recipes infact need less than what distutils-base provides, so I=
+ divided this class into=20
+
+distutils-common-base which is inherited by distutils-base class and distut=
+ils-native-base class (new)
+
+Now we can use distuitls-native-base class for the native packages who need=
+ variables like PYTHON_DIR
+
+I fixed zope-native rpm-native and libxml-native recipes. They needed a bit=
+ of restructuring.
+
+Now I get correct build deps for these packages.
+
+OK for .dev ?
+
+=2D-=20
+Khem Raj
+
+
+--Boundary-01=_fLJyJil6YMLUSjr
+Content-Type: text/x-patch;
+  charset="us-ascii";
+  name="diff"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline;
+	filename="diff"
+
+diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-comm=
+on-base.bbclass
 new file mode 100644
-index 0000000..96cfde6
---- /dev/null
-+++ b/recipes/htmldoc/files/paths_1.8.27.patch
-@@ -0,0 +1,109 @@
-+diff -Naur a/Makedefs.in b/Makedefs.in
-+--- a/Makedefs.in	2005-10-28 22:32:59.000000000 +0200
-++++ b/Makedefs.in	2009-03-23 23:40:35.928865178 +0100
-+@@ -46,6 +46,7 @@
-+ #
-+ # Directories...
-+ #
-++DESTDIR = @DESTDIR@
-+ 
-+ bindir		=	@bindir@
-+ datadir		=	@datadir@
-+diff -Naur a/data/Makefile b/data/Makefile
-+--- a/data/Makefile	2004-05-10 03:14:53.000000000 +0200
-++++ b/data/Makefile	2009-03-23 23:35:27.850856359 +0100
-+@@ -53,11 +53,11 @@
-+ #
-+ 
-+ install:
-+-	if [ ! -d $(datadir)/htmldoc/data ]; then\
-+-		$(MKDIR) $(datadir)/htmldoc/data;\
-++	if [ ! -d $(DESTDIR)$(datadir)/htmldoc/data ]; then\
-++		$(MKDIR) $(DESTDIR)$(datadir)/htmldoc/data;\
-+ 	fi
-+-	$(CP) $(FILES) $(datadir)/htmldoc/data
-+-	$(CHMOD) ugo+r $(datadir)/htmldoc/data/*
-++	$(CP) $(FILES) $(DESTDIR)$(datadir)/htmldoc/data
-++	$(CHMOD) ugo+r $(DESTDIR)$(datadir)/htmldoc/data/*
-+ 
-+ 
-+ #
-+diff -Naur a/doc/Makefile b/doc/Makefile
-+--- a/doc/Makefile	2005-10-28 22:32:59.000000000 +0200
-++++ b/doc/Makefile	2009-03-23 23:38:19.478865122 +0100
-+@@ -42,7 +42,7 @@
-+ DOCUMENTS =	htmldoc.html htmldoc.pdf htmldoc.ps
-+ DOCFILES =	help.html htmldoc.pdf
-+ 
-+-HTMLDOC	=	../htmldoc/htmldoc$(EXEEXT) --datadir .. --strict --verbose
-++HTMLDOC	=	htmldoc$(EXEEXT) --datadir .. --strict --verbose
-+ 
-+ 
-+ #
-+@@ -57,16 +57,16 @@
-+ #
-+ 
-+ install: $(DOCUMENTS)
-+-	if [ ! -d $(datadir)/doc/htmldoc ]; then\
-+-		$(MKDIR) $(datadir)/doc/htmldoc;\
-++	if [ ! -d $(DESTDIR)$(datadir)/doc/htmldoc ]; then\
-++		$(MKDIR) $(DESTDIR)$(datadir)/doc/htmldoc;\
-+ 	fi
-+-	$(CP) $(DOCFILES) $(datadir)/doc/htmldoc
-+-	$(CHMOD) ugo+r $(datadir)/doc/htmldoc/*
-+-	if [ ! -d $(mandir)/man1 ]; then\
-+-		$(MKDIR) $(mandir)/man1;\
-++	$(CP) $(DOCFILES) $(DESTDIR)$(datadir)/doc/htmldoc
-++	$(CHMOD) ugo+r $(DESTDIR)$(datadir)/doc/htmldoc/*
-++	if [ ! -d $(DESTDIR)$(mandir)/man1 ]; then\
-++		$(MKDIR) $(DESTDIR)$(mandir)/man1;\
-+ 	fi
-+-	$(CP) htmldoc.man $(mandir)/man1/htmldoc.1
-+-	$(CHMOD) ugo+r $(mandir)/man1/htmldoc.1
-++	$(CP) htmldoc.man $(DESTDIR)$(mandir)/man1/htmldoc.1
-++	$(CHMOD) ugo+r $(DESTDIR)$(mandir)/man1/htmldoc.1
-+ 
-+ 
-+ #
-+diff -Naur a/fonts/Makefile b/fonts/Makefile
-+--- a/fonts/Makefile	2005-10-28 22:32:59.000000000 +0200
-++++ b/fonts/Makefile	2009-03-23 23:39:07.608863524 +0100
-+@@ -75,14 +75,14 @@
-+ 
-+ install:
-+ 	echo "Installing font files in $(datadir)/htmldoc/fonts..."
-+-	if [ ! -d $(datadir)/htmldoc/fonts ]; then\
-+-		$(MKDIR) $(datadir)/htmldoc/fonts;\
-++	if [ ! -d $(DESTDIR)$(datadir)/htmldoc/fonts ]; then\
-++		$(MKDIR) $(DESTDIR)$(datadir)/htmldoc/fonts;\
-+ 	fi
-+ 	for font in $(FONTS); do \
-+-		$(CP) $$font.afm $(datadir)/htmldoc/fonts; \
-+-		$(CP) $$font.pfa $(datadir)/htmldoc/fonts; \
-++		$(CP) $$font.afm $(DESTDIR)$(datadir)/htmldoc/fonts; \
-++		$(CP) $$font.pfa $(DESTDIR)$(datadir)/htmldoc/fonts; \
-+ 	done
-+-	$(CHMOD) ugo+r $(datadir)/htmldoc/fonts/*
-++	$(CHMOD) ugo+r $(DESTDIR)$(datadir)/htmldoc/fonts/*
-+ 
-+ 
-+ #
-+diff -Naur a/htmldoc/Makefile b/htmldoc/Makefile
-+--- a/htmldoc/Makefile	2005-10-28 22:32:59.000000000 +0200
-++++ b/htmldoc/Makefile	2009-03-23 23:40:02.078914179 +0100
-+@@ -50,11 +50,11 @@
-+ #
-+ 
-+ install:	all
-+-	if [ ! -d $(bindir) ]; then\
-+-		$(MKDIR) $(bindir);\
-++	if [ ! -d $(DESTDIR)$(bindir) ]; then\
-++		$(MKDIR) $(DESTDIR)$(bindir);\
-+ 	fi
-+-	cp htmldoc$(EXEEXT) $(bindir)
-+-	chmod ugo+rx $(bindir)/htmldoc$(EXEEXT)
-++	cp htmldoc$(EXEEXT) $(DESTDIR)$(bindir)
-++	chmod ugo+rx $(DESTDIR)$(bindir)/htmldoc$(EXEEXT)
-+ 
-+ 
-+ #
-diff --git a/recipes/htmldoc/files/paths_1.9.x.patch b/recipes/htmldoc/files/paths_1.9.x.patch
+index 0000000..4bcef68
+=2D-- /dev/null
++++ b/classes/distutils-common-base.bbclass
+@@ -0,0 +1,28 @@
++EXTRA_OEMAKE =3D ""
++RDEPENDS +=3D "python-core"
++
++export STAGING_INCDIR
++export STAGING_LIBDIR
++
++def python_dir(d):
++	import os, bb
++	staging_incdir =3D bb.data.getVar( "STAGING_INCDIR", d, 1 )
++	for majmin in "2.6 2.5 2.4 2.3".split():
++		if os.path.exists( "%s/python%s" % ( staging_incdir, majmin ) ): return =
+"python%s" % majmin
++	raise "No Python in STAGING_INCDIR. Forgot to build python-native ?"
++
++PYTHON_DIR =3D "${@python_dir(d)}"
++
++PACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-doc ${PN}"
++
++FILES_${PN} =3D "${bindir}/* ${libdir}/* ${libdir}/${PYTHON_DIR}/*"
++
++FILES_${PN}-dev +=3D "\
++  ${libdir}/pkgconfig \
++  ${libdir}/${PYTHON_DIR}/site-packages/*.la \
++"
++FILES_${PN}-dbg =3D "\
++  ${libdir}/${PYTHON_DIR}/site-packages/.debug \
++  ${libdir}/${PYTHON_DIR}/site-packages/*/.debug \
++  ${libdir}/${PYTHON_DIR}/site-packages/*/*/.debug \
++"
+diff --git a/classes/distutils-native-base.bbclass b/classes/distutils-nati=
+ve-base.bbclass
 new file mode 100644
-index 0000000..f05e405
---- /dev/null
-+++ b/recipes/htmldoc/files/paths_1.9.x.patch
-@@ -0,0 +1,109 @@
-+diff -Naur a/data/Makefile b/data/Makefile
-+--- a/data/Makefile	2008-01-06 02:55:59.000000000 +0100
-++++ b/data/Makefile	2008-11-16 20:02:56.000000000 +0100
-+@@ -51,11 +51,11 @@
-+ #
-+ 
-+ install:
-+-	if [ ! -d $(datadir)/htmldoc/data ]; then\
-+-		$(MKDIR) $(datadir)/htmldoc/data;\
-++	if [ ! -d $(DESTDIR)$(datadir)/htmldoc/data ]; then\
-++		$(MKDIR) $(DESTDIR)$(datadir)/htmldoc/data;\
-+ 	fi
-+-	$(CP) $(FILES) $(datadir)/htmldoc/data
-+-	$(CHMOD) ugo+r $(datadir)/htmldoc/data/*
-++	$(CP) $(FILES) $(DESTDIR)$(datadir)/htmldoc/data
-++	$(CHMOD) ugo+r $(DESTDIR)$(datadir)/htmldoc/data/*
-+ 
-+ 
-+ #
-+diff -Naur a/doc/Makefile b/doc/Makefile
-+--- a/doc/Makefile	2008-01-06 02:55:59.000000000 +0100
-++++ b/doc/Makefile	2008-11-16 20:04:06.000000000 +0100
-+@@ -57,7 +57,7 @@
-+ DOCUMENTS =	htmldoc.html htmldoc.pdf htmldoc.ps
-+ DOCFILES =	htmldoc.pdf
-+ 
-+-HTMLDOC	=	HTMLDOC_DATA=".." ../htmldoc/htmldoc$(EXEEXT) --strict --verbose
-++HTMLDOC	=	HTMLDOC_DATA=".." htmldoc$(EXEEXT) --strict --verbose
-+ 
-+ 
-+ #
-+@@ -72,16 +72,16 @@
-+ #
-+ 
-+ install: $(DOCUMENTS)
-+-	if [ ! -d $(datadir)/doc/htmldoc ]; then\
-+-		$(MKDIR) $(datadir)/doc/htmldoc;\
-++	if [ ! -d $(DESTDIR)$(datadir)/doc/htmldoc ]; then\
-++		$(MKDIR) $(DESTDIR)$(datadir)/doc/htmldoc;\
-+ 	fi
-+-	$(CP) $(DOCFILES) $(datadir)/doc/htmldoc
-+-	$(CHMOD) ugo+r $(datadir)/doc/htmldoc/*
-+-	if [ ! -d $(mandir)/man1 ]; then\
-+-		$(MKDIR) $(mandir)/man1;\
-++	$(CP) $(DOCFILES) $(DESTDIR)$(datadir)/doc/htmldoc
-++	$(CHMOD) ugo+r $(DESTDIR)$(datadir)/doc/htmldoc/*
-++	if [ ! -d $(DESTDIR)$(mandir)/man1 ]; then\
-++		$(MKDIR) $(DESTDIR)$(mandir)/man1;\
-+ 	fi
-+-	$(CP) htmldoc.man $(mandir)/man1/htmldoc.1
-+-	$(CHMOD) ugo+r $(mandir)/man1/htmldoc.1
-++	$(CP) htmldoc.man $(DESTDIR)$(mandir)/man1/htmldoc.1
-++	$(CHMOD) ugo+r $(DESTDIR)$(mandir)/man1/htmldoc.1
-+ 
-+ 
-+ #
-+diff -Naur a/fonts/Makefile b/fonts/Makefile
-+--- a/fonts/Makefile	2008-01-06 02:55:59.000000000 +0100
-++++ b/fonts/Makefile	2008-11-16 20:04:08.000000000 +0100
-+@@ -73,14 +73,14 @@
-+ 
-+ install:
-+ 	echo "Installing font files in $(datadir)/htmldoc/fonts..."
-+-	if test ! -d $(datadir)/htmldoc/fonts; then\
-+-		$(MKDIR) $(datadir)/htmldoc/fonts;\
-++	if test ! -d $(DESTDIR)$(datadir)/htmldoc/fonts; then\
-++		$(MKDIR) $(DESTDIR)$(datadir)/htmldoc/fonts;\
-+ 	fi
-+ 	for font in $(FONTS); do \
-+-		$(CP) $$font.afm $(datadir)/htmldoc/fonts; \
-+-		$(CP) $$font.pfa $(datadir)/htmldoc/fonts; \
-++		$(CP) $$font.afm $(DESTDIR)$(datadir)/htmldoc/fonts; \
-++		$(CP) $$font.pfa $(DESTDIR)$(datadir)/htmldoc/fonts; \
-+ 	done
-+-	$(CHMOD) ugo+r $(datadir)/htmldoc/fonts/*
-++	$(CHMOD) ugo+r $(DESTDIR)$(datadir)/htmldoc/fonts/*
-+ 
-+ 
-+ #
-+diff -Naur a/htmldoc/Makefile b/htmldoc/Makefile
-+--- a/htmldoc/Makefile	2008-03-01 19:18:52.000000000 +0100
-++++ b/htmldoc/Makefile	2008-11-16 20:05:12.000000000 +0100
-+@@ -104,11 +104,11 @@
-+ #
-+ 
-+ install:	all
-+-	if [ ! -d $(bindir) ]; then\
-+-		$(MKDIR) $(bindir);\
-++	if [ ! -d $(DESTDIR)$(bindir) ]; then\
-++		$(MKDIR) $(DESTDIR)$(bindir);\
-+ 	fi
-+-	cp htmldoc$(EXEEXT) $(bindir)
-+-	chmod ugo+rx $(bindir)/htmldoc$(EXEEXT)
-++	cp htmldoc$(EXEEXT) $(DESTDIR)$(bindir)
-++	chmod ugo+rx $(DESTDIR)$(bindir)/htmldoc$(EXEEXT)
-+ 
-+ 
-+ #
-+diff -Naur a/Makedefs.in b/Makedefs.in
-+--- a/Makedefs.in	2008-03-01 19:18:52.000000000 +0100
-++++ b/Makedefs.in	2008-11-16 20:00:34.000000000 +0100
-+@@ -45,6 +45,7 @@
-+ #
-+ # Directories...
-+ #
-++DESTDIR = @DESTDIR@
-+ 
-+ bindir		=	@bindir@
-+ datadir		=	@datadir@
-diff --git a/recipes/htmldoc/htmldoc-gui_1.8.27.bb b/recipes/htmldoc/htmldoc-gui_1.8.27.bb
+index 0000000..2703fe0
+=2D-- /dev/null
++++ b/classes/distutils-native-base.bbclass
+@@ -0,0 +1,3 @@
++DEPENDS  +=3D "${@["python-native", ""][(bb.data.getVar('PACKAGES', d, 1) =
+=3D=3D '')]}"
++
++inherit distutils-common-base
+diff --git a/recipes/rpm/rpm-4.4.2.3.inc b/recipes/rpm/rpm-4.4.2.3.inc
 new file mode 100644
-index 0000000..339c484
---- /dev/null
-+++ b/recipes/htmldoc/htmldoc-gui_1.8.27.bb
-@@ -0,0 +1,24 @@
-+require htmldoc.inc
-+DEPENDS += "htmldoc-native fltk"
-+PR = "r2"
+index 0000000..155e6f6
+=2D-- /dev/null
++++ b/recipes/rpm/rpm-4.4.2.3.inc
+@@ -0,0 +1,97 @@
++DESCRIPTION =3D "The RPM Package Manager."
++HOMEPAGE =3D "http://rpm.org/"
++LICENSE =3D "LGPL GPL"
++PR =3D "r15"
 +
++SRC_URI =3D "http://www.rpm.org/releases/rpm-4.4.x/rpm-4.4.2.3.tar.gz \
++           file://external-tools.patch;patch=3D1 \
++	   file://cross_libpaths.patch;patch=3D1 \
++	   file://rpmconfigdir.patch;patch=3D1 \
++	   file://weakdeps.patch;patch=3D1;pnum=3D0 \
++	   file://tagsbackport.patch;patch=3D1;pnum=3D0 \
++	   file://missingok.patch;patch=3D1;pnum=3D0 \
++	   file://extcond.patch;patch=3D1;pnum=3D0"
 +
-+SRC_URI = "http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/${PV}/htmldoc-${PV}-source.tar.bz2 \
-+file://paths_1.8.27.patch;patch=1"
++inherit autotools gettext
 +
++S =3D "${WORKDIR}/rpm-${PV}"
 +
-+S = "${WORKDIR}/htmldoc-${PV}"
++ARM_INSTRUCTION_SET =3D "arm"
 +
-+inherit autotools pkgconfig
++acpaths =3D "-I ${S}/db/dist/aclocal -I ${S}/db/dist/aclocal_java"
 +
-+EXTRA_AUTORECONF += "--exclude=autoheader"
-+EXTRA_OECONF += "--disable-localpng --disable-localjpeg --disable-localzlib \
-+		--with-gui=yes"
++PACKAGES +=3D "python-rpm"
++FILES_python-rpm =3D "${libdir}/python*/site-packages/rpm/_*"
 +
-+FILES_${PN} += "${datadir}/htmldoc/fonts"
-+FILES_${PN} += "${datadir}/htmldoc/data"
++# Handle the db MUTEX settings here, the POSIX library is
++# the default - "POSIX/pthreads/library".
++# Don't ignore the nice SWP instruction on the ARM:
++# These enable the ARM assembler mutex code, this won't
++# work with thumb compilation...
++ARM_MUTEX =3D "--with-mutex=3DARM/gcc-assembly"
++MUTEX =3D ""
++MUTEX_arm =3D "${ARM_MUTEX}"
++MUTEX_armeb =3D "${ARM_MUTEX}"
++EXTRA_OECONF +=3D "${MUTEX}"
 +
++export varprefix =3D "${localstatedir}"
 +
-+do_install() {
-+	oe_runmake 'DESTDIR=${D}' install
++do_configure_prepend (){
++	export EXTRA_OECONF=3D"--with-python \
++		--with-python-incdir=3D${STAGING_INCDIR}/${PYTHON_DIR} \
++		--with-python-libdir=3D${libdir}/${PYTHON_DIR} \
++		--without-apidocs \
++		--without-selinux \
++		--without-lua \
++		--without-dmalloc \
++		--without-efence"
 +}
-diff --git a/recipes/htmldoc/htmldoc-gui_1.9.x-r1571.bb b/recipes/htmldoc/htmldoc-gui_1.9.x-r1571.bb
-new file mode 100644
-index 0000000..f2315c5
---- /dev/null
-+++ b/recipes/htmldoc/htmldoc-gui_1.9.x-r1571.bb
-@@ -0,0 +1,24 @@
-+require htmldoc.inc
-+DEPENDS += "htmldoc-native fltk"
-+PR = "r2"
 +
++do_configure () {
++	rm ${S}/popt/ -Rf
++	rm ${S}/db/dist/configure.in -f
++	cd ${S}/db/dist/aclocal
++	rm libtool* -f
++	for i in `ls *.ac`; do
++	    j=3D`echo $i | sed 's/.ac/.m4/g'`
++	    mv $i $j
++	done
++	cd ${S}/db/dist/aclocal_java
++	for i in `ls *.ac`; do
++	    j=3D`echo $i | sed 's/.ac/.m4/g'`
++	    mv $i $j
++	done
++	cd ${S}
++	autotools_do_configure
++	cd ${S}/db/dist
++	. ./RELEASE
++	# Edit version information we couldn't pre-compute.
++	sed -i -e "s/__EDIT_DB_VERSION_MAJOR__/$DB_VERSION_MAJOR/g"  configure
++	sed -i -e "s/__EDIT_DB_VERSION_MINOR__/$DB_VERSION_MINOR/g"  configure
++	sed -i -e "s/__EDIT_DB_VERSION_PATCH__/$DB_VERSION_PATCH/g"  configure
++	sed -i -e "s/__EDIT_DB_VERSION_STRING__/$DB_VERSION_STRING/g"  configure
++	sed -i -e "s/__EDIT_DB_VERSION_UNIQUE_NAME__/$DB_VERSION_UNIQUE_NAME/g"  =
+configure
++	sed -i -e "s/__EDIT_DB_VERSION__/$DB_VERSION/g"  configure
++	cd ${S}/db3
++	${S}/db3/configure \
++		    --build=3D${BUILD_SYS} \
++		    --host=3D${HOST_SYS} \
++		    --target=3D${TARGET_SYS} \
++		    --prefix=3D${prefix} \
++		    --exec_prefix=3D${exec_prefix} \
++		    --bindir=3D${bindir} \
++		    --sbindir=3D${sbindir} \
++		    --libexecdir=3D${libexecdir} \
++		    --datadir=3D${datadir} \
++		    --sysconfdir=3D${sysconfdir} \
++		    --sharedstatedir=3D${sharedstatedir} \
++		    --localstatedir=3D${localstatedir} \
++		    --libdir=3D${libdir} \
++		    --includedir=3D${includedir} \
++		    --oldincludedir=3D${oldincludedir} \
++		    --infodir=3D${infodir} \
++		    --mandir=3D${mandir} \
++		    ${EXTRA_OECONF} \
++		    --with-pic
 +
-+SRC_URI = "http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/snapshots/htmldoc-${PV}.tar.bz2 \
-+file://paths_1.9.x.patch;patch=1"
-+
-+
-+S = "${WORKDIR}/htmldoc-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_AUTORECONF += "--exclude=autoheader"
-+EXTRA_OECONF += "--disable-localpng --disable-localjpeg --disable-localzlib \
-+		--with-gui=yes"
-+
-+FILES_${PN} += "${datadir}/htmldoc/fonts"
-+FILES_${PN} += "${datadir}/htmldoc/data"
-+
-+
-+do_install() {
-+	oe_runmake 'DESTDIR=${D}' install
 +}
-diff --git a/recipes/htmldoc/htmldoc-native_1.8.27.bb b/recipes/htmldoc/htmldoc-native_1.8.27.bb
+diff --git a/recipes/zope/zope-3.3.1.inc b/recipes/zope/zope-3.3.1.inc
 new file mode 100644
-index 0000000..b1cd62f
---- /dev/null
-+++ b/recipes/htmldoc/htmldoc-native_1.8.27.bb
-@@ -0,0 +1,34 @@
-+require htmldoc.inc
-+PR = "r2"
+index 0000000..18806b9
+=2D-- /dev/null
++++ b/recipes/zope/zope-3.3.1.inc
+@@ -0,0 +1,47 @@
++DESCRIPTION =3D "A full fledged pluggable content management system with i=
+ntegrated web server and much more."
++SECTION =3D "console/network"
++PRIORITY =3D "optional"
++DEPENDS =3D "python"
++RDEPENDS =3D "python-core python-shell"
++LICENSE =3D "ZPL"
++PR =3D "r9"
 +
++SRC_URI =3D "http://www.zope.org/Products/Zope3/${PV}/Zope-${PV}.tgz"
++S =3D "${WORKDIR}/Zope-${PV}"
 +
-+SRC_URI = "http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/${PV}/htmldoc-${PV}-source.tar.bz2 \
-+file://paths_1.8.27.patch;patch=1"
-+
-+
-+inherit autotools native
-+
-+EXTRA_AUTORECONF += "--exclude=autoheader"
-+EXTRA_OECONF += "--disable-localpng --disable-localjpeg --disable-localzlib \
-+		--with-gui=no"
-+
++do_configure() {
++	./configure --with-python=3D${STAGING_BINDIR_NATIVE}/python --prefix=3D${=
+prefix} --force
++}
 +
 +do_compile() {
-+	cd htmldoc && oe_runmake all ; cd ${S}
++	oe_runmake HOST_SYS=3D${HOST_SYS} BUILD_SYS=3D${BUILD_SYS} STAGING_INCDIR=
+=3D${STAGING_INCDIR}
 +}
-+
-+
-+do_stage () {
-+	install -d ${STAGING_DATADIR}/htmldoc/fonts
-+	install -m 0644 ${S}/fonts/*.afm ${STAGING_DATADIR}/htmldoc/fonts/
-+	install -m 0644 ${S}/fonts/*.pfa ${STAGING_DATADIR}/htmldoc/fonts/
-+
-+	install -d ${STAGING_DATADIR}/htmldoc/data
-+	install -m 0644 ${S}/data/* ${STAGING_DATADIR}/htmldoc/data/
-+
-+	install -d ${STAGING_DIR_HOST}${layout_mandir}/man1
-+	install -m 0644 ${S}/doc/htmldoc.man ${STAGING_DIR_HOST}${layout_mandir}/man1/
-+
-+	install -d ${STAGING_BINDIR}
-+	install -m 0755 ${S}/htmldoc/htmldoc ${STAGING_BINDIR}/
-+}
-diff --git a/recipes/htmldoc/htmldoc-native_1.9.x-r1571.bb b/recipes/htmldoc/htmldoc-native_1.9.x-r1571.bb
-new file mode 100644
-index 0000000..ee2ffd9
---- /dev/null
-+++ b/recipes/htmldoc/htmldoc-native_1.9.x-r1571.bb
-@@ -0,0 +1,34 @@
-+require htmldoc.inc
-+PR = "r2"
-+
-+
-+SRC_URI = "http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/snapshots/htmldoc-${PV}.tar.bz2 \
-+file://paths_1.9.x.patch;patch=1"
-+
-+
-+inherit autotools native
-+
-+EXTRA_AUTORECONF += "--exclude=autoheader"
-+EXTRA_OECONF += "--disable-localpng --disable-localjpeg --disable-localzlib \
-+		--with-gui=no"
-+
-+
-+do_compile() {
-+	cd htmldoc && oe_runmake all ; cd ${S}
-+}
-+
-+
-+do_stage () {
-+	install -d ${STAGING_DATADIR}/htmldoc/fonts
-+	install -m 0644 ${S}/fonts/*.afm ${STAGING_DATADIR}/htmldoc/fonts/
-+	install -m 0644 ${S}/fonts/*.pfa ${STAGING_DATADIR}/htmldoc/fonts/
-+
-+	install -d ${STAGING_DATADIR}/htmldoc/data
-+	install -m 0644 ${S}/data/* ${STAGING_DATADIR}/htmldoc/data/
-+
-+	install -d ${STAGING_DIR_HOST}${layout_mandir}/man1
-+	install -m 0644 ${S}/doc/htmldoc.man ${STAGING_DIR_HOST}${layout_mandir}/man1/
-+
-+	install -d ${STAGING_BINDIR}
-+	install -m 0755 ${S}/htmldoc/htmldoc ${STAGING_BINDIR}/
-+}
-diff --git a/recipes/htmldoc/htmldoc.inc b/recipes/htmldoc/htmldoc.inc
-new file mode 100644
-index 0000000..0a9a540
---- /dev/null
-+++ b/recipes/htmldoc/htmldoc.inc
-@@ -0,0 +1,6 @@
-+DESCRIPTION = "HTMLDOC converts HTML input files into indexed HTML, postscript or PDF files"
-+HOMEPAGE = "http://www.htmldoc.org/"
-+SECTION = "console/utils"
-+PRIORITY = "optional"
-+LICENSE = "GPL"
-+DEPENDS = "openssl libpng jpeg zlib"
-diff --git a/recipes/htmldoc/htmldoc_1.8.27.bb b/recipes/htmldoc/htmldoc_1.8.27.bb
-new file mode 100644
-index 0000000..d211c76
---- /dev/null
-+++ b/recipes/htmldoc/htmldoc_1.8.27.bb
-@@ -0,0 +1,22 @@
-+require htmldoc.inc
-+DEPENDS += "htmldoc-native"
-+PR = "r2"
-+
-+
-+SRC_URI = "http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/${PV}/htmldoc-${PV}-source.tar.bz2 \
-+file://paths_1.8.27.patch;patch=1"
-+
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_AUTORECONF += "--exclude=autoheader"
-+EXTRA_OECONF += "--disable-localpng --disable-localjpeg --disable-localzlib \
-+		--with-gui=no"
-+
-+FILES_${PN} += "${datadir}/htmldoc/fonts"
-+FILES_${PN} += "${datadir}/htmldoc/data"
-+
 +
 +do_install() {
-+	oe_runmake 'DESTDIR=${D}' install
++	install -d ${D}${libdir}/${PYTHON_DIR}
++	oe_runmake install prefix=3D${D}${prefix} HOST_SYS=3D${HOST_SYS} BUILD_SY=
+S=3D${BUILD_SYS}
++	mv ${D}${libdir}/python/* ${D}${libdir}/${PYTHON_DIR}=20
++	rm -rf ${D}${libdir}/${PYTHON_DIR}/twisted
++	rm -rf ${D}${libdir}/${PYTHON_DIR}/zope/app/twisted
 +}
-diff --git a/recipes/htmldoc/htmldoc_1.9.x-r1571.bb b/recipes/htmldoc/htmldoc_1.9.x-r1571.bb
-new file mode 100644
-index 0000000..fe78fb4
---- /dev/null
-+++ b/recipes/htmldoc/htmldoc_1.9.x-r1571.bb
-@@ -0,0 +1,22 @@
-+require htmldoc.inc
-+DEPENDS += "htmldoc-native"
-+PR = "r2"
 +
++PACKAGES =3D+ "python-zopeinterface python-zopeinterface-dbg"
 +
-+SRC_URI = "http://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/htmldoc/snapshots/htmldoc-${PV}.tar.bz2 \
-+file://paths_1.9.x.patch;patch=1"
++FILES_${PN} =3D "${prefix}"
++FILES_${PN}_doc =3D "${prefix}/doc"
++FILES_${PN}-dbg +=3D "\
++${libdir}/${PYTHON_DIR}/BTrees/.debug \
++${libdir}/${PYTHON_DIR}/persistent/.debug \
++${libdir}/${PYTHON_DIR}/zope/proxy/.debug \
++${libdir}/${PYTHON_DIR}/zope/thread/.debug \
++${libdir}/${PYTHON_DIR}/zope/security/.debug \
++${libdir}/${PYTHON_DIR}/zope/hookable/.debug \
++${libdir}/${PYTHON_DIR}/zope/app/container/.debug \
++${libdir}/${PYTHON_DIR}/zope/i18nmessageid/.debug \
++${libdir}/${PYTHON_DIR}/ZODB/.debug"
++FILES_python-zopeinterface-dbg +=3D "${libdir}/${PYTHON_DIR}/zope/interfac=
+e/.debug "
 +
++FILES_python-zopeinterface =3D " ${libdir}/${PYTHON_DIR}/zope/__init__.py*=
+ \
++	${libdir}/${PYTHON_DIR}/zope/interface/*.* \
++	${libdir}/${PYTHON_DIR}/zope/interface/common"
 +
-+inherit autotools pkgconfig
+diff --git a/classes/distutils-base.bbclass b/classes/distutils-base.bbclass
+index a08414a..2e151de 100644
+=2D-- a/classes/distutils-base.bbclass
++++ b/classes/distutils-base.bbclass
+@@ -1,29 +1,5 @@
+=2DEXTRA_OEMAKE =3D ""
+ DEPENDS  +=3D "${@["python-native python", ""][(bb.data.getVar('PACKAGES',=
+ d, 1) =3D=3D '')]}"
+ RDEPENDS +=3D "python-core"
+=20
+=2Dexport STAGING_INCDIR
+=2Dexport STAGING_LIBDIR
++inherit distutils-common-base
+=20
+=2Ddef python_dir(d):
+=2D	import os, bb
+=2D	staging_incdir =3D bb.data.getVar( "STAGING_INCDIR", d, 1 )
+=2D	for majmin in "2.6 2.5 2.4 2.3".split():
+=2D		if os.path.exists( "%s/python%s" % ( staging_incdir, majmin ) ): retur=
+n "python%s" % majmin
+=2D	raise "No Python in STAGING_INCDIR. Forgot to build python-native ?"
+=2D
+=2DPYTHON_DIR =3D "${@python_dir(d)}"
+=2D
+=2DPACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-doc ${PN}"
+=2D
+=2DFILES_${PN} =3D "${bindir}/* ${libdir}/* ${libdir}/${PYTHON_DIR}/*"
+=2D
+=2DFILES_${PN}-dev +=3D "\
+=2D  ${libdir}/pkgconfig \
+=2D  ${libdir}/${PYTHON_DIR}/site-packages/*.la \
+=2D"
+=2DFILES_${PN}-dbg =3D "\
+=2D  ${libdir}/${PYTHON_DIR}/site-packages/.debug \
+=2D  ${libdir}/${PYTHON_DIR}/site-packages/*/.debug \
+=2D  ${libdir}/${PYTHON_DIR}/site-packages/*/*/.debug \
+=2D"
+diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-comm=
+on-base.bbclass
+index 4bcef68..068eac4 100644
+=2D-- a/classes/distutils-common-base.bbclass
++++ b/classes/distutils-common-base.bbclass
+@@ -1,5 +1,4 @@
+ EXTRA_OEMAKE =3D ""
+=2DRDEPENDS +=3D "python-core"
+=20
+ export STAGING_INCDIR
+ export STAGING_LIBDIR
+diff --git a/recipes/libxml/libxml2-native.inc b/recipes/libxml/libxml2-nat=
+ive.inc
+index c8182de..1cfa9f7 100644
+=2D-- a/recipes/libxml/libxml2-native.inc
++++ b/recipes/libxml/libxml2-native.inc
+@@ -5,10 +5,10 @@ FILESDIR =3D "${@os.path.dirname(bb.data.getVar('FILE',d,=
+1))}/libxml2-${PV}"
+ SRC_URI =3D "ftp://xmlsoft.org/libxml2/libxml2-${PV}.tar.gz"
+ S =3D "${WORKDIR}/libxml2-${PV}"
+=20
+=2Dinherit distutils-base autotools native pkgconfig
++inherit autotools native pkgconfig distutils-native-base
+=20
+ do_configure_prepend () {
+=2D	EXTRA_OECONF =3D "\
++	export EXTRA_OECONF=3D"\
+ 	--with-python=3D${PYTHON_DIR} \
+ 	--without-debug \
+ 	--without-legacy \
+diff --git a/recipes/rpm/rpm-4.4.2.3.inc b/recipes/rpm/rpm-4.4.2.3.inc
+index 155e6f6..8de8266 100644
+=2D-- a/recipes/rpm/rpm-4.4.2.3.inc
++++ b/recipes/rpm/rpm-4.4.2.3.inc
+@@ -12,7 +12,7 @@ SRC_URI =3D "http://www.rpm.org/releases/rpm-4.4.x/rpm-4.=
+4.2.3.tar.gz \
+ 	   file://missingok.patch;patch=3D1;pnum=3D0 \
+ 	   file://extcond.patch;patch=3D1;pnum=3D0"
+=20
+=2Dinherit autotools gettext
++#inherit autotools
+=20
+ S =3D "${WORKDIR}/rpm-${PV}"
+=20
+diff --git a/recipes/rpm/rpm-native_4.4.2.3.bb b/recipes/rpm/rpm-native_4.4=
+=2E2.3.bb
+index 935d077..287383c 100644
+=2D-- a/recipes/rpm/rpm-native_4.4.2.3.bb
++++ b/recipes/rpm/rpm-native_4.4.2.3.bb
+@@ -1,5 +1,6 @@
+=2Drequire rpm_${PV}.bb
+=2Dinherit native
++inherit native distutils-native-base
 +
-+EXTRA_AUTORECONF += "--exclude=autoheader"
-+EXTRA_OECONF += "--disable-localpng --disable-localjpeg --disable-localzlib \
-+		--with-gui=no"
-+
-+FILES_${PN} += "${datadir}/htmldoc/fonts"
-+FILES_${PN} += "${datadir}/htmldoc/data"
-+
-+
-+do_install() {
-+	oe_runmake 'DESTDIR=${D}' install
-+}
--- 
-1.6.0.6
++require rpm-${PV}.inc
+=20
+ DEPENDS =3D "beecrypt-native gettext-native zlib-native file-native popt-n=
+ative python-native"
+=20
+diff --git a/recipes/rpm/rpm_4.4.2.3.bb b/recipes/rpm/rpm_4.4.2.3.bb
+index 6bdd0ed..3e67378 100644
+=2D-- a/recipes/rpm/rpm_4.4.2.3.bb
++++ b/recipes/rpm/rpm_4.4.2.3.bb
+@@ -1,98 +1,4 @@
+=2DDESCRIPTION =3D "The RPM Package Manager."
+=2DHOMEPAGE =3D "http://rpm.org/"
+=2DLICENSE =3D "LGPL GPL"
+=2DDEPENDS =3D "zlib beecrypt file popt python sed-native"
+=2DPR =3D "r14"
+=2D
+=2DSRC_URI =3D "http://www.rpm.org/releases/rpm-4.4.x/rpm-4.4.2.3.tar.gz \
+=2D           file://external-tools.patch;patch=3D1 \
+=2D	   file://cross_libpaths.patch;patch=3D1 \
+=2D	   file://rpmconfigdir.patch;patch=3D1 \
+=2D	   file://weakdeps.patch;patch=3D1;pnum=3D0 \
+=2D	   file://tagsbackport.patch;patch=3D1;pnum=3D0 \
+=2D	   file://missingok.patch;patch=3D1;pnum=3D0 \
+=2D	   file://extcond.patch;patch=3D1;pnum=3D0"
+=2D
+=2Dinherit autotools gettext distutils-base
+=2D
+=2DS =3D "${WORKDIR}/rpm-${PV}"
+=2D
+=2DARM_INSTRUCTION_SET =3D "arm"
+=2D
+=2Dacpaths =3D "-I ${S}/db/dist/aclocal -I ${S}/db/dist/aclocal_java"
++inherit distutils-base gettext
+=20
+=2DPACKAGES +=3D "python-rpm"
+=2DFILES_python-rpm =3D "${libdir}/python*/site-packages/rpm/_*"
+=2D
+=2D# Handle the db MUTEX settings here, the POSIX library is
+=2D# the default - "POSIX/pthreads/library".
+=2D# Don't ignore the nice SWP instruction on the ARM:
+=2D# These enable the ARM assembler mutex code, this won't
+=2D# work with thumb compilation...
+=2DARM_MUTEX =3D "--with-mutex=3DARM/gcc-assembly"
+=2DMUTEX =3D ""
+=2DMUTEX_arm =3D "${ARM_MUTEX}"
+=2DMUTEX_armeb =3D "${ARM_MUTEX}"
+=2DEXTRA_OECONF +=3D "${MUTEX}"
+=2D
+=2Dexport varprefix =3D "${localstatedir}"
+=2D
+=2Ddo_configure_prepend (){
+=2D	EXTRA_OECONF =3D "--with-python \
+=2D		--with-python-incdir=3D${STAGING_INCDIR}/${PYTHON_DIR} \
+=2D		--with-python-libdir=3D${libdir}/${PYTHON_DIR} \
+=2D		--without-apidocs \
+=2D		--without-selinux \
+=2D		--without-lua \
+=2D		--without-dmalloc \
+=2D		--without-efence"
+=2D}
+=2D
+=2Ddo_configure () {
+=2D	rm ${S}/popt/ -Rf
+=2D	rm ${S}/db/dist/configure.in -f
+=2D	cd ${S}/db/dist/aclocal
+=2D	rm libtool* -f
+=2D	for i in `ls *.ac`; do
+=2D	    j=3D`echo $i | sed 's/.ac/.m4/g'`
+=2D	    mv $i $j
+=2D	done
+=2D	cd ${S}/db/dist/aclocal_java
+=2D	for i in `ls *.ac`; do
+=2D	    j=3D`echo $i | sed 's/.ac/.m4/g'`
+=2D	    mv $i $j
+=2D	done
+=2D	cd ${S}
+=2D	autotools_do_configure
+=2D	cd ${S}/db/dist
+=2D	. ./RELEASE
+=2D	# Edit version information we couldn't pre-compute.
+=2D	sed -i -e "s/__EDIT_DB_VERSION_MAJOR__/$DB_VERSION_MAJOR/g"  configure
+=2D	sed -i -e "s/__EDIT_DB_VERSION_MINOR__/$DB_VERSION_MINOR/g"  configure
+=2D	sed -i -e "s/__EDIT_DB_VERSION_PATCH__/$DB_VERSION_PATCH/g"  configure
+=2D	sed -i -e "s/__EDIT_DB_VERSION_STRING__/$DB_VERSION_STRING/g"  configure
+=2D	sed -i -e "s/__EDIT_DB_VERSION_UNIQUE_NAME__/$DB_VERSION_UNIQUE_NAME/g"=
+  configure
+=2D	sed -i -e "s/__EDIT_DB_VERSION__/$DB_VERSION/g"  configure
+=2D	cd ${S}/db3
+=2D	${S}/db3/configure \
+=2D		    --build=3D${BUILD_SYS} \
+=2D		    --host=3D${HOST_SYS} \
+=2D		    --target=3D${TARGET_SYS} \
+=2D		    --prefix=3D${prefix} \
+=2D		    --exec_prefix=3D${exec_prefix} \
+=2D		    --bindir=3D${bindir} \
+=2D		    --sbindir=3D${sbindir} \
+=2D		    --libexecdir=3D${libexecdir} \
+=2D		    --datadir=3D${datadir} \
+=2D		    --sysconfdir=3D${sysconfdir} \
+=2D		    --sharedstatedir=3D${sharedstatedir} \
+=2D		    --localstatedir=3D${localstatedir} \
+=2D		    --libdir=3D${libdir} \
+=2D		    --includedir=3D${includedir} \
+=2D		    --oldincludedir=3D${oldincludedir} \
+=2D		    --infodir=3D${infodir} \
+=2D		    --mandir=3D${mandir} \
+=2D		    ${EXTRA_OECONF} \
+=2D		    --with-pic
+=2D
+=2D}
++DEPENDS =3D "zlib beecrypt file popt python sed-native"
++require ${PN}-${PV}.inc
+diff --git a/recipes/zope/zope-3.3.1.inc b/recipes/zope/zope-3.3.1.inc
+index 18806b9..b06174c 100644
+=2D-- a/recipes/zope/zope-3.3.1.inc
++++ b/recipes/zope/zope-3.3.1.inc
+@@ -1,8 +1,6 @@
+ DESCRIPTION =3D "A full fledged pluggable content management system with i=
+ntegrated web server and much more."
+ SECTION =3D "console/network"
+ PRIORITY =3D "optional"
+=2DDEPENDS =3D "python"
+=2DRDEPENDS =3D "python-core python-shell"
+ LICENSE =3D "ZPL"
+ PR =3D "r9"
+=20
+diff --git a/recipes/zope/zope-native_3.3.1.bb b/recipes/zope/zope-native_3=
+=2E3.1.bb
+index 970df6d..70d19e9 100644
+=2D-- a/recipes/zope/zope-native_3.3.1.bb
++++ b/recipes/zope/zope-native_3.3.1.bb
+@@ -1,9 +1,6 @@
+=2Drequire zope_${PV}.bb
+=2Dinherit native
++inherit native distutils-native-base
+=20
+=2DDEPENDS =3D "python-native"
+=2D
+=2Dinherit distutils-base
++require zope-${PV}.inc
+=20
+ export BUILD_SYS
+ export HOST_SYS
+diff --git a/recipes/zope/zope_3.3.1.bb b/recipes/zope/zope_3.3.1.bb
+index 05df3dd..cf81b15 100644
+=2D-- a/recipes/zope/zope_3.3.1.bb
++++ b/recipes/zope/zope_3.3.1.bb
+@@ -1,49 +1,5 @@
+=2DDESCRIPTION =3D "A full fledged pluggable content management system with=
+ integrated web server and much more."
+=2DSECTION =3D "console/network"
+=2DPRIORITY =3D "optional"
+=2DDEPENDS =3D "python"
+=2DRDEPENDS =3D "python-core python-shell"
+=2DLICENSE =3D "ZPL"
+=2DPR =3D "r8"
+=2D
+=2DSRC_URI =3D "http://www.zope.org/Products/Zope3/${PV}/Zope-${PV}.tgz"
+=2DS =3D "${WORKDIR}/Zope-${PV}"
++RDEPENDS =3D "python-shell"
+=20
+ inherit distutils-base
+=20
+=2Ddo_configure() {
+=2D	./configure --with-python=3D${STAGING_BINDIR_NATIVE}/python --prefix=3D=
+${prefix} --force
+=2D}
+=2D
+=2Ddo_compile() {
+=2D	oe_runmake HOST_SYS=3D${HOST_SYS} BUILD_SYS=3D${BUILD_SYS} STAGING_INCD=
+IR=3D${STAGING_INCDIR}
+=2D}
+=2D
+=2Ddo_install() {
+=2D	install -d ${D}${libdir}/${PYTHON_DIR}
+=2D	oe_runmake install prefix=3D${D}${prefix} HOST_SYS=3D${HOST_SYS} BUILD_=
+SYS=3D${BUILD_SYS}
+=2D	mv ${D}${libdir}/python/* ${D}${libdir}/${PYTHON_DIR}=20
+=2D	rm -rf ${D}${libdir}/${PYTHON_DIR}/twisted
+=2D	rm -rf ${D}${libdir}/${PYTHON_DIR}/zope/app/twisted
+=2D}
+=2D
+=2DPACKAGES =3D+ "python-zopeinterface python-zopeinterface-dbg"
+=2D
+=2DFILES_${PN} =3D "${prefix}"
+=2DFILES_${PN}_doc =3D "${prefix}/doc"
+=2DFILES_${PN}-dbg +=3D "\
+=2D${libdir}/${PYTHON_DIR}/BTrees/.debug \
+=2D${libdir}/${PYTHON_DIR}/persistent/.debug \
+=2D${libdir}/${PYTHON_DIR}/zope/proxy/.debug \
+=2D${libdir}/${PYTHON_DIR}/zope/thread/.debug \
+=2D${libdir}/${PYTHON_DIR}/zope/security/.debug \
+=2D${libdir}/${PYTHON_DIR}/zope/hookable/.debug \
+=2D${libdir}/${PYTHON_DIR}/zope/app/container/.debug \
+=2D${libdir}/${PYTHON_DIR}/zope/i18nmessageid/.debug \
+=2D${libdir}/${PYTHON_DIR}/ZODB/.debug"
+=2DFILES_python-zopeinterface-dbg +=3D "${libdir}/${PYTHON_DIR}/zope/interf=
+ace/.debug "
+=2D
+=2DFILES_python-zopeinterface =3D " ${libdir}/${PYTHON_DIR}/zope/__init__.p=
+y* \
+=2D	${libdir}/${PYTHON_DIR}/zope/interface/*.* \
+=2D	${libdir}/${PYTHON_DIR}/zope/interface/common"
+=2D
++require ${PN}-${PV}.inc
 
+--Boundary-01=_fLJyJil6YMLUSjr--
 
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+--nextPart3416167.XyDWgkZJtl
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
+iEYEABECAAYFAknIkt8ACgkQHnJKy6V6em5dYwCeLPqweknji+zfgWjh2sNgXQxj
+9A0An3QUcKmwc1XL2+QcbwqH2aSeyKt0
+=6U++
+-----END PGP SIGNATURE-----
+
+--nextPart3416167.XyDWgkZJtl--
