@@ -1,32 +1,24 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1LmEp3-0002iZ-7V
+	(envelope-from <denis@denix.org>) id 1LmFnd-0000np-0E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 23:10:14 +0100
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.107]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1LmEnL-0001Us-SF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Mar 2009 06:08:40 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
+	Wed, 25 Mar 2009 00:12:50 +0100
+Received: from gandalf.denix.org ([71.255.243.27]) by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KH100KAF9Q74KDS@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	24 Mar 2009 18:11:00 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id E89246B83B5; Tue,
+	24 Mar 2009 19:10:54 -0400 (EDT)
+Date: Tue, 24 Mar 2009 19:10:54 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49C94FFC.1040604@gmx.de>
-References: <49C94FFC.1040604@gmx.de>
-Date: Tue, 24 Mar 2009 16:08:16 -0600
-Message-Id: <1237932496.16710.22.camel@alap>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: Re: python-ecore_svn fails
+Message-id: <20090324231054.GB26944@denix.org>
+References: <200903242144.29168.marcin@juszkiewicz.com.pl>
+MIME-version: 1.0
+In-reply-to: <200903242144.29168.marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: IRC discussion about stable branch - 25.03.2009 12:00 GMT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,38 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 22:10:15 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Mar 2009 23:12:52 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Tue, 2009-03-24 at 22:26 +0100, Stefan Buschmann wrote:
-> Hi all,
+On Tue, Mar 24, 2009 at 09:44:28PM +0100, Marcin Juszkiewicz wrote:
 > 
-> I'm trying to build fso-zhone-image for my freerunner, but I get the 
-> following error message in python-ecore-0.3.1+svnr39502-ml0:
+> Hi
 > 
-> ecore/evas/ecore.evas.c_ecore_evas.c:19373: error: 
-> 'ECORE_EVAS_ENGINE_SDL' undeclared (first use in this function)
-> 
-> The build system is KUbuntu-8.10 (32 Bit), build-log and local.conf are 
-> attached.
-> 
-> BTW, I've checked out only the OE tree from 
-> git://git.openembedded.net/openembedded. Is this correct, or do I need a 
-> different mirror/overlay for OpenMoko/FSO? I'm still a little bit 
-> confused about the different OpenMoko-repositories ;-)
-> 
-> Thanks,
-> 
-> Stefan
-> 
+> As few developers wants to talk about stable branch I proposed time for 
+> such one - tomorrow (25.03.2009) at 12:00 GMT. 
 
+Is it noon or midnight? :)
 
-You should probably try the fso/milestone5.1 or fso/milestone5.5 branch.
-The 5.5 branch is changing almost daily, so if you're looking for
-stability go for the 5.1 branch.
+> Place of meeting: #oe-stable at Freenode irc network.
+> 
+> We want to discuss some timelines and policies. Log and results will be 
+> posted to this mailinglist.
+> 
+> Everyone is invited as long as interested in stable branch of 
+> OpenEmbedded.
 
-Angus
-
+-- 
+Denys
 
 
