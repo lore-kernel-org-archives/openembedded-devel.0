@@ -1,24 +1,17 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LmFnd-0000np-0E
+	(envelope-from <di@fh-wedel.de>) id 1LmG5u-0006NY-B8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Mar 2009 00:12:50 +0100
-Received: from gandalf.denix.org ([71.255.243.27]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KH100KAF9Q74KDS@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	24 Mar 2009 18:11:00 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E89246B83B5; Tue,
-	24 Mar 2009 19:10:54 -0400 (EDT)
-Date: Tue, 24 Mar 2009 19:10:54 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 25 Mar 2009 00:31:43 +0100
+Received: by mail.fh-wedel.de (Postfix, from userid 959)
+	id D461D547D2; Wed, 25 Mar 2009 00:30:09 +0100 (CET)
+Date: Wed, 25 Mar 2009 00:30:09 +0100
+From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090324231054.GB26944@denix.org>
-References: <200903242144.29168.marcin@juszkiewicz.com.pl>
-MIME-version: 1.0
-In-reply-to: <200903242144.29168.marcin@juszkiewicz.com.pl>
+Message-ID: <20090324233009.GC9461@fh-wedel.de>
+MIME-Version: 1.0
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: IRC discussion about stable branch - 25.03.2009 12:00 GMT
+Subject: Strange name for cross binutils binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,28 +25,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 23:12:52 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 24 Mar 2009 23:31:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, Mar 24, 2009 at 09:44:28PM +0100, Marcin Juszkiewicz wrote:
-> 
-> Hi
-> 
-> As few developers wants to talk about stable branch I proposed time for 
-> such one - tomorrow (25.03.2009) at 12:00 GMT. 
+Hi,
 
-Is it noon or midnight? :)
+ just trying another build of OE for nylon/mtx-1 (which is
+TARGET_ARCH "mipsel"). Compiling gcc-cross fails with this
+message: 
 
-> Place of meeting: #oe-stable at Freenode irc network.
-> 
-> We want to discuss some timelines and policies. Log and results will be 
-> posted to this mailinglist.
-> 
-> Everyone is invited as long as interested in stable branch of 
-> OpenEmbedded.
+| make[2]: mipsel-linux-ar: Command not found
+
+Looking at tmp/cross, I find that the cross ar got installed
+under this name: tmp/cross/mipsel/bin/mipsel-linux-mipsel-linux-ar
+
+This does not seem right, or is there anything which I need to
+adapt due to global bbclass/configuration changes?
+
+Cheers,
+
+Martin
 
 -- 
-Denys
+----------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+* Free Speech Online!!! Support the Blue Ribbon Campaign! *
 
 
