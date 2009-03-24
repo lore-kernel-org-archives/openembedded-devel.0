@@ -1,35 +1,43 @@
-Received: from [208.51.207.131] (helo=mail.2mi.com.br)
+Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jader@2mi.com.br>) id 1LmDAH-0006Qo-3b
+	(envelope-from <lon.lentz@gmail.com>) id 1LmDIN-00016w-22
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Mar 2009 21:24:01 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by mail.2mi.com.br (Postfix) with ESMTP id C39CC5036194
+	Tue, 24 Mar 2009 21:32:23 +0100
+Received: by yx-out-1718.google.com with SMTP id 3so1897610yxi.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2009 17:28:22 -0300 (BRT)
-X-Virus-Scanned: amavisd-new at 2mi.com.br
-Received: from mail.2mi.com.br ([127.0.0.1])
-	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NbTOx9rcPd4D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2009 17:28:18 -0300 (BRT)
-Received: from [192.168.15.91] (unknown [189.102.205.109])
-	by mail.2mi.com.br (Postfix) with ESMTP id 17E28502762A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2009 17:28:16 -0300 (BRT)
-From: "Jader H. Silva" <jader@2mi.com.br>
-To: OpenEmbedded Dev List <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <200903121257.36869.raj.khem@gmail.com>
-References: <49bdfd00903100733s3af6dc2o48f09b48593fe51f@mail.gmail.com>
-	<20090312085123.GD30336@ibawizard.net>
-	<1236863674.6250.21.camel@northpole>
-	<200903121257.36869.raj.khem@gmail.com>
-Organization: 2MI Tecnologia
-Date: Tue, 24 Mar 2009 17:22:20 -0300
-Message-Id: <1237926140.6845.6.camel@northpole>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: Re: Problem building kernel - too many files open
+	Tue, 24 Mar 2009 13:30:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=/QBNS0prSepCU+fvZHXm92vD4ZspJgPAfom38lnKH6g=;
+	b=wV2Hf2UqLHl/ODGgAxT+vipo2e106Nm+Yk9Lohb1A3E3UT9lKi9upRnNyvFbI6G8cB
+	yH23gw5RrmFLi7sPri7ipWEUeNwmJmwxc12Af3fPzWFUesZ0KZzvRJ4EGFQieBjGdiSQ
+	2kE6zS9UJnVbDdhNtGE7BPO7qVdXa0ISZP1H0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=SxnoUsvhnHY0Z4fT1Pmx0zRyEhEqyY7JjlAe1mtBphpLaDR5aL2QGAAO8F68ajWDcH
+	KUGIhxsR2MMhdbB+mkza8O4+v4SXk4Q/8+AWlarK03/qFDMSGh0832HXwwknQ5mcO2w4
+	s2WcNFWSPwZuaSzY56b4gdjNayScxSrPCIkx0=
+MIME-Version: 1.0
+Received: by 10.231.16.74 with SMTP id n10mr2271574iba.23.1237926652485; Tue, 
+	24 Mar 2009 13:30:52 -0700 (PDT)
+In-Reply-To: <b6ebd0a50903241301r5b8972b4s59df7be41052ab7a@mail.gmail.com>
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
+	<1237885606.5348.8.camel@dax.rpnet.com>
+	<b6ebd0a50903240808p4e07c61g6a088df634e161b2@mail.gmail.com>
+	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>
+	<49C92CC7.2080801@gmail.com>
+	<b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>
+	<49C93237.7010205@gmail.com> <49C9347C.7010309@balister.org>
+	<FA1C2D98-DEF3-4694-A757-7C137F667CE3@ngndg.com>
+	<b6ebd0a50903241301r5b8972b4s59df7be41052ab7a@mail.gmail.com>
+Date: Tue, 24 Mar 2009 16:30:52 -0400
+Message-ID: <dc6682e90903241330m1191395j478ee4180a969cfb@mail.gmail.com>
+From: Lon Lentz <lon.lentz@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,135 +51,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2009 20:24:02 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 Mar 2009 20:32:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Em Qui, 2009-03-12 =C3=A0s 12:57 -0700, Khem Raj escreveu:
-> On Thursday 12 March 2009 06:14:34 Jader wrote:
-> > Hello.
-> > I had the same problem. It's inside classes/kernel.bbclass:298
-> > (reproduced below):
-> >
-> >
-> > python populate_packages_prepend () {
-> > 	def extract_modinfo(file):
-> > 		import tempfile, os, re
-> > 		tempfile.tempdir =3D bb.data.getVar("WORKDIR", d, 1)
-> > 		tmpfile =3D tempfile.mkstemp()[1]
-> > 		cmd =3D "PATH=3D\"%s\" %sobjcopy -j .modinfo -O binary %s %s" %
-> > (bb.data.getVar("PATH", d, 1), bb.data.getVar("HOST_PREFIX", d, 1) or=
- "",
-> > file, tmpfile) os.system(cmd)
-> > 		f =3D open(tmpfile)
-> > 		l =3D f.read().split("\000")
-> > 		f.close()
-> > 		os.unlink(tmpfile)
-> >
-> >
-> > tempfile.mkstemp() is used to create a temporary file. This function
-> > return a tuple with an OS file descriptor and a filename. Filename is
-> > stored in "tmpfile" but descriptor is not stored anywhere, but it is
-> > still open because it's only an integer to python so it is not closed=
- at
-> > the end of the function.
-> >
-> > For each iteration in which this function is called, a new OS file
-> > descriptor is opened, but not closed. The solution is to store the fi=
-le
-> > descriptor and close it:
->=20
-> How about using TemporaryFile () to create the file instead of mkstemp =
-?
-> we do not have to worry about cleaning it up once it is closed.=20
+  Please excuse my ignorance here, but what happens when a package literally
+has no maintainer?
 
-It would be a better solution, but unix implementation of
-TemporaryFile() unlink the temporary file after it is created, so it's
-removed from filesystem when closed, and so we won't have a valid
-filename for objdump outfile.
-
-> >
-> >
-> > python populate_packages_prepend () {
-> > 	def extract_modinfo(file):
-> > 		import tempfile, os, re
-> > 		tempfile.tempdir =3D bb.data.getVar("WORKDIR", d, 1)
-> > 		tf =3D tempfile.mkstemp()
-> > 		tmpfile =3D tf[1]
-> > 		cmd =3D "PATH=3D\"%s\" %sobjcopy -j .modinfo -O binary %s %s" %
-> > (bb.data.getVar("PATH", d, 1), bb.data.getVar("HOST_PREFIX", d, 1) or=
- "",
-> > file, tmpfile) os.system(cmd)
-> > 		f =3D open(tmpfile)
-> > 		l =3D f.read().split("\000")
-> > 		f.close()
-> > 		os.close(tf[0])
-> > 		os.unlink(tmpfile)
-> >
-> >
-> > There's a patch attached. As I=E1=B8=BF new to git, I don know it it =
-was created
-> > in the right way. Used command following:
-> >
-> >
-> > git format-patch cab70860b89f0fd856c5de1c37c6a3d31fd3cc9d --stdout cl=
-asses
-> > >kernel.bbclass.patch
-> >
-> >
-> > Jader H. Silva
-> > 2MI Tecnologia
-> >
-> > Em Qui, 2009-03-12 =C3=A0s 09:51 +0100, Petr =C5=A0tetiar escreveu:
-> > > Marco Cavallini <koansoftware@gmail.com> [2009-03-12 09:02:08]:
-> > > > Piero Pezzin ha scritto:
-> > >
-> > > [...]
-> > >
-> > > > >>> During kernel building, I got the following error:
-> > > > >>>
-> > > > >>> OTE: package linux-2.6.28: started
-> > > > >>> NOTE: package linux-2.6.28-r6: task do_package: started
-> > > > >>> ERROR: Error in executing:
-> > > > >>> /home/piero/work/qong-nobk/openembedded/openembedded/packages=
-/linux
-> > > > >>>/ linux_2.6.28.bb
-> > > > >>> ERROR: Exception:exceptions.IOError Message:[Errno 24] Too ma=
-ny
-> > > > >>> open
-> > > > >>
-> > > > >> files:
-> > > >
-> > > > this is a known error.
-> > > > Nobody solved it yet.
-> > >
-> > > Maybe, that increasing the numbers of max. file handles and number =
-of
-> > > max. inodes might help you:
-> > >
-> > > /proc/sys/fs/file-max
-> > > /proc/sys/fs/inode-max
-> > >
-> > > -- ynezz
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
->=20
-Att.
+  Is OE attempting to manage a consumer facing product or provide a
+centralized clearinghouse and methodology as a service to developers?
 
 
-Jader H. Silva
-jader@2mi.com.br
-Depto. de desenvolvimento
-2MI Tecnologia
+On Tue, Mar 24, 2009 at 4:01 PM, Chris Larson <clarson@kergoth.com> wrote:
 
-
-
-
-
-
-
+> I don't think the current method is difficult, persay, but rather I'd
+> like to see:
+> - More individual responsibility in the project in general,
+> particularly in class and recipe maintenance.
+> - Clearer delineation between what gets the most attention and what does
+> not.
+>
+>
 
