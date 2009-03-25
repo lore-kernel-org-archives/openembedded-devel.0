@@ -1,30 +1,32 @@
-Received: from [212.27.42.2] (helo=smtp2-g21.free.fr)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LmPok-0002Ny-2r
+	(envelope-from <andrea.adami@gmail.com>) id 1LmQ9d-0002uQ-UJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Mar 2009 10:54:39 +0100
-Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 97E8C4B01D3
+	Wed, 25 Mar 2009 11:16:13 +0100
+Received: by bwz19 with SMTP id 19so2448011bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2009 10:53:02 +0100 (CET)
-Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
-	[81.56.56.40])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id B6D754B00F2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2009 10:52:59 +0100 (CET)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id 8DB1427844C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2009 10:53:03 +0100 (CET)
-Message-ID: <49C9FEFF.2010802@bolloretelecom.eu>
-Date: Wed, 25 Mar 2009 10:53:03 +0100
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
-	Mnenhy/0.7.5.0
+	Wed, 25 Mar 2009 03:14:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=riQrndR+o8M2mb3hJhTGJLZwE4ZQrtcAYpd86GuVruo=;
+	b=RwEK3986mWtMXdovRiKpys63vO95awRGbrJs7Xjrm5DYmNHzyIanNgeEKCr5Px7Mnj
+	4hSZ5tWGdier5aCzkne8LhN9stNzPSYWBFCAhekEq0v+SQbu6ATfc/MjYPh1XbX8XboX
+	6SzUY0UeNDnkGfyYKvc0edkwMuhLHNW7bCQME=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=YCzm03HepQuI1z/8YNSDESJ0AQfgYWcnau5mnFAtLyvmnOYg8lljme8GrOqZlpnctE
+	FhAyzkkznQ9DXOllndEcDuTWaw1JHFi59dvQ/T8S5AQNIRdR9HjxQ1KQ8BdJsSDBZ6h9
+	85wZQdaEDTswuoKlc6U0ut2cK7johN69++qvg=
 MIME-Version: 1.0
+Received: by 10.223.126.66 with SMTP id b2mr7990440fas.67.1237976077829; Wed, 
+	25 Mar 2009 03:14:37 -0700 (PDT)
+Date: Wed, 25 Mar 2009 11:14:37 +0100
+Message-ID: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Dropping qt4-x11-free versions 4.1.2 and 4.3.3?
+Subject: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,22 +40,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2009 09:54:42 -0000
+X-List-Received-Date: Wed, 25 Mar 2009 10:16:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-As part of the general cleanup of Qt in OE which I am currently undertaki=
-ng, I would be
-interested in knowing if anybody uses version 4.1.2 and 4.3.3 of the qt4-=
-x11-free packages?
+Bump
 
-Ideally, I would like to keep only version 4.4.3 and add 4.5.0 sometime i=
-n the near
-future. This would allow us to simplify the rules used to build Qt.
-
-Cheers,
---=20
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+;-)
 
 
