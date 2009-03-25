@@ -1,32 +1,35 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LmQ9d-0002uQ-UJ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Mar 2009 11:16:13 +0100
-Received: by bwz19 with SMTP id 19so2448011bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2009 03:14:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=riQrndR+o8M2mb3hJhTGJLZwE4ZQrtcAYpd86GuVruo=;
-	b=RwEK3986mWtMXdovRiKpys63vO95awRGbrJs7Xjrm5DYmNHzyIanNgeEKCr5Px7Mnj
-	4hSZ5tWGdier5aCzkne8LhN9stNzPSYWBFCAhekEq0v+SQbu6ATfc/MjYPh1XbX8XboX
-	6SzUY0UeNDnkGfyYKvc0edkwMuhLHNW7bCQME=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=YCzm03HepQuI1z/8YNSDESJ0AQfgYWcnau5mnFAtLyvmnOYg8lljme8GrOqZlpnctE
-	FhAyzkkznQ9DXOllndEcDuTWaw1JHFi59dvQ/T8S5AQNIRdR9HjxQ1KQ8BdJsSDBZ6h9
-	85wZQdaEDTswuoKlc6U0ut2cK7johN69++qvg=
-MIME-Version: 1.0
-Received: by 10.223.126.66 with SMTP id b2mr7990440fas.67.1237976077829; Wed, 
-	25 Mar 2009 03:14:37 -0700 (PDT)
-Date: Wed, 25 Mar 2009 11:14:37 +0100
-Message-ID: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LmQv5-0000be-Mv
+	for openembedded-devel@openembedded.org; Wed, 25 Mar 2009 12:05:15 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LmQtX-0008PZ-Uk
+	for openembedded-devel@openembedded.org; Wed, 25 Mar 2009 11:03:39 +0000
+Received: from wlan138118.mobiel.utwente.nl ([130.89.138.118])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 25 Mar 2009 11:03:39 +0000
+Received: from k.kooi by wlan138118.mobiel.utwente.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 25 Mar 2009 11:03:39 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 25 Mar 2009 12:03:24 +0100
+Message-ID: <gqd31s$5vk$1@ger.gmane.org>
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<ac9c93b10903241136q779fe115sa595c31200b707c6@mail.gmail.com>	<49C92CC7.2080801@gmail.com>	<b6ebd0a50903241205h6813f898i87351aaad17b6775@mail.gmail.com>	<49C93237.7010205@gmail.com>
+	<49C9347C.7010309@balister.org>	<FA1C2D98-DEF3-4694-A757-7C137F667CE3@ngndg.com>	<b6ebd0a50903241301r5b8972b4s59df7be41052ab7a@mail.gmail.com>	<dc6682e90903241330m1191395j478ee4180a969cfb@mail.gmail.com>	<49C94647.2040401@gmail.com>
+	<ac9c93b10903250151v6ea0586bv461debbe36f42ac7@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: wlan138118.mobiel.utwente.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090316 Shredder/3.0b3pre
+In-Reply-To: <ac9c93b10903250151v6ea0586bv461debbe36f42ac7@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,12 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2009 10:16:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 25 Mar 2009 11:05:15 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Bump
+On 25-03-09 09:51, Frans Meulenbroeks wrote:
 
-;-)
+> and a last last thing: about the vetting: not sure whether I fully
+> understand the idea, but is a lot of this info on what builds on what
+> not already present in tinderbox?
+
+The tinderbox data is purged periodically, so don't depend on it.
+
+regards,
+
+Koen
+
 
 
