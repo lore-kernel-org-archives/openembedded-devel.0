@@ -1,32 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LmQwQ-0000eC-NO
-	for openembedded-devel@openembedded.org; Wed, 25 Mar 2009 12:06:38 +0100
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LmQut-0008TD-5O
-	for openembedded-devel@openembedded.org; Wed, 25 Mar 2009 11:05:03 +0000
-Received: from wlan138118.mobiel.utwente.nl ([130.89.138.118])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 25 Mar 2009 11:05:03 +0000
-Received: from k.kooi by wlan138118.mobiel.utwente.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 25 Mar 2009 11:05:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 25 Mar 2009 12:04:16 +0100
-Message-ID: <gqd33g$5vk$2@ger.gmane.org>
+	(envelope-from <vjensen@gmx.de>) id 1LmSMe-00056b-VD
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Mar 2009 13:37:49 +0100
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by out1.messagingengine.com (Postfix) with ESMTP id 87BD52F4488
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Mar 2009 08:36:14 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Wed, 25 Mar 2009 08:36:14 -0400
+X-Sasl-enc: oAZ+vjsQXKqXjEG+fXX77/gHyabSivy9JvNEdqrEYu+1 1237984573
+Received: from [192.168.178.120] (p548386C2.dip0.t-ipconnect.de
+	[84.131.134.194])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 8A1663CEFB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Mar 2009 08:36:13 -0400 (EDT)
+Date: Wed, 25 Mar 2009 13:35:48 +0100 (CET)
+From: Vitus Jensen <vjensen@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <gqd33g$5vk$2@ger.gmane.org>
+Message-ID: <alpine.LNX.2.00.0903251334530.1055@asterix.crazy-teaparty.dyndns.org>
 References: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: wlan138118.mobiel.utwente.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090316 Shredder/3.0b3pre
-In-Reply-To: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+	<gqd33g$5vk$2@ger.gmane.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
 Subject: Re: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,18 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2009 11:06:38 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Mar 2009 12:37:49 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On 25-03-09 11:14, Andrea Adami wrote:
-> Bump
+On Wed, 25 Mar 2009, Koen Kooi wrote:
 
-As I said, let's close it down.
+> On 25-03-09 11:14, Andrea Adami wrote:
+>>  Bump
+>
+> As I said, let's close it down.
 
-regards,
+And create new Bugzillas for the different distributions relying on 
+openembedded?
 
-Koen
+Bye,
+   Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
 
 
 
