@@ -1,54 +1,35 @@
-Received: from [209.85.221.124] (helo=mail-qy0-f124.google.com)
+Received: from [74.125.44.158] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LmJDB-0000BZ-Kr
+	(envelope-from <raj.khem@gmail.com>) id 1LmKH5-0006Z3-Qv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Mar 2009 03:51:25 +0100
-Received: by qyk30 with SMTP id 30so3769282qyk.24
+	Wed, 25 Mar 2009 04:59:31 +0100
+Received: by yx-out-1718.google.com with SMTP id 3so2015319yxi.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2009 19:49:50 -0700 (PDT)
+	Tue, 24 Mar 2009 20:57:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=1bhVzs4mUsHK1mx0iMUO+d/TsoJ5td/K/jkUERmTKAo=;
-	b=YwKfOtQCcKbcVxTV9824FIq0qFVVdyqJm6JmspEj33dJCzRKyZDIIH2t5sZNeir7+U
-	HSqC/+p64uX60yJBw7vSLrzxIIcjvtWnvGSDSf7L3173HuFwapqrxJkCsAsI/BrKCoTI
-	96PWo7AKfr2BqVbn0pu0RPk3FY8IWM+qwTbNE=
+	bh=2bBz0rkqRIVU2d+PkmZ4FxwGj1t7UFq4Kc1CVuS9sEA=;
+	b=WuviV8LIts685DBuvaOU5Y+E1uxhHPXk+GUNe7vlTLrmwfKgxFymDFgSJjnTp5AR6r
+	SoiHk7usiNSRduU+SH2E3oqsaajeQF3ZTk7wrbJ6nT/LoLckepW5VZuhCQBE6zVFnG6G
+	W7SIK7aOo4iGJ2LD1jP9pqWWjCXkiArwRPpSM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	b=D413ww51kOV8hB9dEwkJdRQwidM2tFKN5ztoO5UXUGiGtNfrEEa8SQc7jsZiRMCcQ2
-	jj7LILNadZDpl5m6s8C2OaY+S+OzmRqSkBuLxP6a+eSXQ2XROfjudkeHrbzrRZ07sYr3
-	aK9Dk7b1ZKA24dJpK6eyDeXgfo1/+DCRPSvDI=
-Received: by 10.224.20.10 with SMTP id d10mr11886357qab.34.1237949390652;
-	Tue, 24 Mar 2009 19:49:50 -0700 (PDT)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id 33sm4828484yxr.37.2009.03.24.19.49.49
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 24 Mar 2009 19:49:49 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 9BF34610054; Tue, 24 Mar 2009 23:49:47 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <1236890935.6250.26.camel@northpole>
-	<1237220171.4020.4.camel@faraday>
-	<be7a9f3d0903161800i3f6735c8u7eafe009f2cb0b88@mail.gmail.com>
-	<1237928739.20348.3.camel@northpole>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Tue, 24 Mar 2009 23:49:47 -0300
-In-Reply-To: <1237928739.20348.3.camel@northpole> (Jader H. Silva's message of
-	"Tue, 24 Mar 2009 18:05:39 -0300")
-Message-ID: <878wmu48qc.fsf@neumann.lab.ossystems.com.br>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=xeVZkGcgfR63ol0FM9uWY4LBIqTHLHTowUbloKzKVq3zilZmTCFrDuFd3YpVwAgbGf
+	PWpVVcHA3co678hwKjiMuqHluozkkvvD8/HgnhZ31UkXMh1Ab4rWZIM0Gd9ECyZsk4Av
+	2NsRe/TdtxFhvnMxsa9dW7qeGdQQlGY/FAt6k=
 MIME-Version: 1.0
-Subject: Re: calibrateproto git tag
+Received: by 10.100.251.14 with SMTP id y14mr1610083anh.35.1237953478070; Tue, 
+	24 Mar 2009 20:57:58 -0700 (PDT)
+In-Reply-To: <20090324233009.GC9461@fh-wedel.de>
+References: <20090324233009.GC9461@fh-wedel.de>
+Date: Tue, 24 Mar 2009 20:57:58 -0700
+Message-ID: <19c1b8a90903242057v4873c28if94f14f5631ecd6d@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Strange name for cross binutils binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,50 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2009 02:51:26 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Wed, 25 Mar 2009 03:59:32 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-"Jader H. Silva" <jader@2mi.com.br> writes:
-
-> Em Seg, 2009-03-16 =C3=A0s 22:00 -0300, Otavio Salvador escreveu:
->> 2009/3/16 Marcos Amorim <marcos@2mi.com.br>:
->> > libxcalibrate_git add tag
->> >
->> >
->> > git diff packages/xorg-lib/libxcalibrate_git.bb
->> > diff --git a/packages/xorg-lib/libxcalibrate_git.bb
->> > b/packages/xorg-lib/libxcalibrate_git.bb
->> > index f9e1587..7f889df 100644
->> > --- a/packages/xorg-lib/libxcalibrate_git.bb
->> > +++ b/packages/xorg-lib/libxcalibrate_git.bb
->> > @@ -6,7 +6,7 @@ DEPENDS =3D "virtual/libx11 calibrateproto libxext"
->> >  PV =3D "0.0+gitr${SRCREV}"
->> >  PE =3D "1"
->> >
->> > -SRC_URI =3D
->> > "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3Dg=
-it"
->> > +SRC_URI =3D
->> > "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3Dg=
-it;tag=3Dmaster"
->>=20
->> Please use AUTOREV in conf/distro/include/insane-srcrevs.inc and a good
->> one at conf/distro/include/sane-srcrevs.inc. This makes images easier to
->> be reproducable.
+On Tue, Mar 24, 2009 at 4:30 PM, Martin Dietze <di@fh-wedel.de> wrote:
+> Hi,
 >
-> Add calibrateproto sane revision to sane-srcrevs.inc, corrected this bug
-> in my compilation.
-> Patch is attached.
+> =C2=A0just trying another build of OE for nylon/mtx-1 (which is
+> TARGET_ARCH "mipsel"). Compiling gcc-cross fails with this
+> message:
+>
+> | make[2]: mipsel-linux-ar: Command not found
+>
+> Looking at tmp/cross, I find that the cross ar got installed
+> under this name: tmp/cross/mipsel/bin/mipsel-linux-mipsel-linux-ar
+>
+> This does not seem right, or is there anything which I need to
+> adapt due to global bbclass/configuration changes?
 
-[...]
+Well nylon distro is using quite old tools and I dont think anybody
+has been using
+gcc 3.3 binutils 2.14 and glibc 2.3.3 combo.
 
-Please send the patch in git format-patch; so I can queue it here in my
-tree and push it together with other fixes.
+Thats your problem. Now if you can help in testing this distro I can
+certainly put new toolchain in
+but that could mean more changes.
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+
+>
+> Cheers,
+>
+> Martin
+>
+> --
+> ----------- / http://herbert.the-little-red-haired-girl.org / -----------=
+--
+> =3D+=3D
+> * Free Speech Online!!! Support the Blue Ribbon Campaign! *
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
