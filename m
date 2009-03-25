@@ -1,38 +1,21 @@
-Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hs4233@mail.mn-solutions.de>) id 1LmTPJ-0003ot-JI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Mar 2009 14:44:38 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id EC5D314802A;
-	Wed, 25 Mar 2009 14:43:02 +0100 (CET)
-X-Virus-Scanned: by Mittwald Mailscanner
-Received: from mx51.mymxserver.com ([127.0.0.1])
-	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dKSL+fHiRM8R; Wed, 25 Mar 2009 14:43:02 +0100 (CET)
-Received: from lin01.mn-solutions.de (pD95F9E0B.dip0.t-ipconnect.de
-	[217.95.158.11])
-	by mx51.mymxserver.com (Postfix) with ESMTP id 51DEF14802E;
-	Wed, 25 Mar 2009 14:43:02 +0100 (CET)
-Received: by lin01.mn-solutions.de (Postfix, from userid 116)
-	id AD7231E0125; Wed, 25 Mar 2009 14:43:01 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	lin01.mn-logistik.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
-	by lin01.mn-solutions.de (Postfix) with ESMTP id DA5681E0124;
-	Wed, 25 Mar 2009 14:42:57 +0100 (CET)
-From: Holger Schurig <hs4233@mail.mn-solutions.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Mar 2009 14:42:44 +0100
-User-Agent: KMail/1.9.7
-References: <49CA28F4.9020001@gmx.net>
-In-Reply-To: <49CA28F4.9020001@gmx.net>
+	(envelope-from <philip@balister.org>) id 1LmTsj-0004dv-B3
+	for openembedded-devel@openembedded.org; Wed, 25 Mar 2009 15:15:01 +0100
+Received: (qmail 30953 invoked by uid 1003); 25 Mar 2009 14:13:23 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 25 Mar 2009 14:13:23 -0000
+Message-ID: <49CA3BFF.9000305@balister.org>
+Date: Wed, 25 Mar 2009 10:13:19 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Message-Id: <200903251442.44153.hs4233@mail.mn-solutions.de>
-Subject: Re: RFC: rework llvm recipes
+To: openembedded-devel@lists.openembedded.org
+References: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>	<gqd33g$5vk$2@ger.gmane.org>
+	<alpine.LNX.2.00.0903251334530.1055@asterix.crazy-teaparty.dyndns.org>
+In-Reply-To: <alpine.LNX.2.00.0903251334530.1055@asterix.crazy-teaparty.dyndns.org>
+Subject: Re: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,18 +29,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2009 13:44:38 -0000
-Content-Type: text/plain;
-  charset="iso-8859-15"
+X-List-Received-Date: Wed, 25 Mar 2009 14:15:03 -0000
+X-Groupsio-MsgNum: 8705
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms010005000506040601090700"
+
+--------------ms010005000506040601090700
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-+1
+Vitus Jensen wrote:
+> On Wed, 25 Mar 2009, Koen Kooi wrote:
+> 
+>> On 25-03-09 11:14, Andrea Adami wrote:
+>>>  Bump
+>>
+>> As I said, let's close it down.
+> 
+> And create new Bugzillas for the different distributions relying on 
+> openembedded?
 
+Funny, I think we just had a similar discussion while talking about stable.
 
-Are there any users of LLVM inside OE, e.g. the D-compiler?
+We need to think about who is responsible for collecting bug reports 
+from end-users and how to get the fixes into the meta-data. In the end, 
+it the the distro maintainers job to work through end  user issues.
 
-Have you already managed to make a cross-compiler llvm-gcc ?  In 
-the llvm-mailinglist there was a thread about this recently.
+Sometimes, it is confusing where the OE/distro border is.
 
+I do not think this is a perfect solution, but it merits some thought 
+and discussion.
 
+Philip
+
+--------------ms010005000506040601090700
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDMyNTE0
+MTMxOVowIwYJKoZIhvcNAQkEMRYEFHRJXFSc0pyFsq7ePjhkvCVc4CqtMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQBJHmnc0rPudsiAo4+XxbIVCJ4wUu4pPtUjTXAaEGn8mJc0P5IW
+VAuv7bQFUp2CBB7d9zoLndaMsQ3+cs++P3klUmObHAiFRjm4drtOEzgVqUVp+kYCiHNRlvPxILuN
+f2uzZExhhraKnkVWJrsuvvJHmq9z+aEKqfSg+9+PAmvy9CnGp9JLuGcLImgT18kwlr83rPQed+OM
+XBW9cHGCfioFfBMAvEUu1RdbFh+8kd18lwZNbMFRDVqsQPVDtBpELMFuu5roWWgnhn97Yyxiiika
+ROpXbmCqazP0ta3gNpChTHoZiSXNxMrS3NXIOhwK+ufmIVAsbHnt+rPAs562sGtVAAAAAAAA
+
+--------------ms010005000506040601090700--
