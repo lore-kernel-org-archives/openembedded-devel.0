@@ -1,33 +1,24 @@
-Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1LmSMe-00056b-VD
+	(envelope-from <mickey@vanille-media.de>) id 1LmSYB-0005Ve-1Q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Mar 2009 13:37:49 +0100
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by out1.messagingengine.com (Postfix) with ESMTP id 87BD52F4488
+	Wed, 25 Mar 2009 13:49:43 +0100
+Received: from [192.168.1.212] (0x50a5bc8f.abnxx10.dynamic.dsl.tele.dk
+	[80.165.188.143])
+	by drlauer-research.com (Postfix) with ESMTP id 0336A58470D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2009 08:36:14 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Wed, 25 Mar 2009 08:36:14 -0400
-X-Sasl-enc: oAZ+vjsQXKqXjEG+fXX77/gHyabSivy9JvNEdqrEYu+1 1237984573
-Received: from [192.168.178.120] (p548386C2.dip0.t-ipconnect.de
-	[84.131.134.194])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 8A1663CEFB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2009 08:36:13 -0400 (EDT)
-Date: Wed, 25 Mar 2009 13:35:48 +0100 (CET)
-From: Vitus Jensen <vjensen@gmx.de>
+	Wed, 25 Mar 2009 14:14:35 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <gqd33g$5vk$2@ger.gmane.org>
-Message-ID: <alpine.LNX.2.00.0903251334530.1055@asterix.crazy-teaparty.dyndns.org>
-References: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>
-	<gqd33g$5vk$2@ger.gmane.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-Subject: Re: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
+In-Reply-To: <19c1b8a90903242057v4873c28if94f14f5631ecd6d@mail.gmail.com>
+References: <20090324233009.GC9461@fh-wedel.de>
+	<19c1b8a90903242057v4873c28if94f14f5631ecd6d@mail.gmail.com>
+Organization: Vanille-Media
+Date: Wed, 25 Mar 2009 13:48:06 +0100
+Message-Id: <1237985286.8711.5.camel@opal>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+Subject: Re: Strange name for cross binutils binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2009 12:37:49 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Wed, 25 Mar 2009 12:49:44 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, 25 Mar 2009, Koen Kooi wrote:
+You might want to derive nylon from minimal or just reuse minimal.
 
-> On 25-03-09 11:14, Andrea Adami wrote:
->>  Bump
->
-> As I said, let's close it down.
+(Or Angstrom).
 
-And create new Bugzillas for the different distributions relying on 
-openembedded?
+Most of the time what you are after is not really a distro, but a set of
+task and image packages.
 
-Bye,
-   Vitus
+Cheers,
 
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
+:M:
 
 
 
