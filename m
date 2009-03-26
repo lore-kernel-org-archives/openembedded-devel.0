@@ -1,22 +1,29 @@
-Received: from [216.145.245.199] (helo=mx03.dls.net)
+Received: from [85.33.2.25] (helo=smtp-out25.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Lmcx7-0005cg-4J
-	for openembedded-devel@openembedded.org; Thu, 26 Mar 2009 00:56:09 +0100
-Received: from [209.242.7.134] (helo=[192.168.231.111])
-	by mx03.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LmcvX-0005xr-4u
-	for openembedded-devel@openembedded.org; Wed, 25 Mar 2009 18:54:31 -0500
-Message-ID: <49CAC438.2020907@dls.net>
-Date: Wed, 25 Mar 2009 18:54:32 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>	<49C9347C.7010309@balister.org>	<FA1C2D98-DEF3-4694-A757-7C137F667CE3@ngndg.com>	<b6ebd0a50903241301r5b8972b4s59df7be41052ab7a@mail.gmail.com>	<dc6682e90903241330m1191395j478ee4180a969cfb@mail.gmail.com>	<49C94647.2040401@gmail.com>	<ac9c93b10903250151v6ea0586bv461debbe36f42ac7@mail.gmail.com>	<gqd31s$5vk$1@ger.gmane.org>	<49CA5638.1050000@dls.net>	<gqdlka$cbd$1@ger.gmane.org>	<ac9c93b10903251507u4e1edf78u4dbb1b2c7a318789@mail.gmail.com>
-	<49CAAFDC.3070004@bolloretelecom.eu>
-In-Reply-To: <49CAAFDC.3070004@bolloretelecom.eu>
-Subject: Re: Package Maintenance
+	(envelope-from <andrea.adami@gmail.com>) id 1LmdD0-0006C5-GT
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Mar 2009 01:12:34 +0100
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out25.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 26 Mar 2009 01:10:55 +0100
+Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Thu, 26 Mar 2009 01:10:54 +0100
+Received: from localhost.localdomain ([87.15.248.48]) by FBCMCL01B08.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 26 Mar 2009 01:06:10 +0100
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Mar 2009 01:10:53 +0100
+Message-Id: <eaff36cccf868e5b367b402fb61451bf8f681bd8.1238025789.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.6.0.6
+In-Reply-To: <cover.1238025789.git.andrea.adami@gmail.com>
+References: <cover.1238025789.git.andrea.adami@gmail.com>
+In-Reply-To: <cover.1238025789.git.andrea.adami@gmail.com>
+References: <cover.1238025789.git.andrea.adami@gmail.com>
+X-OriginalArrivalTime: 26 Mar 2009 00:06:10.0234 (UTC)
+	FILETIME=[AB0779A0:01C9ADA6]
+Subject: [PATCH 1/1] angstrom-2008.1.conf: add PREFERRED_PROVIDER_virtual/psplash -silence warning during parsing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,26 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2009 23:56:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 26 Mar 2009 00:12:35 -0000
 
-Jeremy Lainé wrote:
->>> Empty TMPDIR is only once case we should test for, I've seen many times that
->>> a 'populated' TMPDIR creates bugs, e.g. midori picking up libhildon to
->>> mention a recent one. So 'always build from empty TMPDIR' will leave serious
->>> and harder to trackdown bugs unnoticed.
->> Test with unpopulataed TMPDIR and test with maximal populated TMPDIR ?
-> 
-> Speaking of populated TMPDIR, is there a notion of conflicts for staging? If two packages
-> want to put the same file into staging, will we barf an error or silently ignore it?
+---
+ conf/distro/angstrom-2008.1.conf |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
 
-It silently ignores it.
+diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+index cde01e1..d8f53af 100644
+--- a/conf/distro/angstrom-2008.1.conf
++++ b/conf/distro/angstrom-2008.1.conf
+@@ -141,6 +141,9 @@ PREFERRED_PROVIDER_virtual/libx11       ?= "libx11"
+ PREFERRED_PROVIDER_virtual/libxine      ?= "libxine-x11"
+ PREFERRED_PROVIDER_virtual/xserver      ?= "xserver-kdrive"
+ 
++#Silence warning during parsing
++PREFERRED_PROVIDER_virtual/psplash ?= "psplash-angstrom"
++
+ # Others:
+ PREFERRED_PROVIDER_linux-libc-headers = "linux-libc-headers"
+ PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+@@ -176,6 +179,8 @@ PREFERRED_PROVIDER_gdk-pixbuf-loader-xpm  ?= "gtk+"
+ #Silence a warning during parsing
+ PREFERRED_PROVIDER_task-bootstrap = "task-bootstrap"
+ 
++
++
+ #This is needed to get a correct PACKAGE_ARCH for packages that have PACKAGE_ARCH = ${MACHINE_ARCH}
+ ARM_ABI ?= "${@['','oabi'][bb.data.getVar('MACHINE',d) in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
+ require conf/distro/include/angstrom${ARM_ABI}.inc
+-- 
+1.6.0.6
 
-As a current example, unless distros have taken special care with libusb
-and libusb1, they will suffer from exactly this problem, with the
-library that is staged determined by which recipe is built most recently.
-
--Mike (mwester)
 
 
