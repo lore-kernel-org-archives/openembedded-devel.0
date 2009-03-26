@@ -1,34 +1,40 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LmkOg-0006MK-St
-	for openembedded-devel@openembedded.org; Thu, 26 Mar 2009 08:53:07 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LmkN3-0008Et-8w
-	for openembedded-devel@openembedded.org; Thu, 26 Mar 2009 07:51:25 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 26 Mar 2009 07:51:25 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 26 Mar 2009 07:51:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 26 Mar 2009 08:51:12 +0100
-Message-ID: <gqfc5g$411$1@ger.gmane.org>
-References: <cover.1238025789.git.andrea.adami@gmail.com>
-	<eaff36cccf868e5b367b402fb61451bf8f681bd8.1238025789.git.andrea.adami@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090316 Shredder/3.0b3pre
-In-Reply-To: <eaff36cccf868e5b367b402fb61451bf8f681bd8.1238025789.git.andrea.adami@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 1/1] angstrom-2008.1.conf: add PREFERRED_PROVIDER_virtual/psplash -silence warning during parsing
+	(envelope-from <andrea.adami@gmail.com>) id 1LmlGr-0006Ut-RB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Mar 2009 09:49:05 +0100
+Received: by bwz19 with SMTP id 19so401736bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Mar 2009 01:47:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=C6hNEy4joR52bcA7TIPdsKbchmUlJ1zxEyR+sJ6Yog0=;
+	b=sWKku3KFgpBvhXUo2uvjFnyF6HkSc674YXnz0/sFTtFMlWzdnP2ZYsHv+i6ykF/LLj
+	6Gyw9Tp/oXUGastOFHWWW3y2g/8i1YZQrIZxdO83RoED4QjR3TL7lbRe3De95GH+9vHW
+	ll0GgdKCKlAEReYYGf6H0Sw2bTW6Ks78mPw4I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=qUyJUAACiEyPt/r5CBZKewb6+HMhKFvtDViKwHqFyhV6Zt0kbC4tQ9BFUrI6txqZs0
+	bovuRmtMxTctxMV/jhxpjNOM6T4/2KA/DSghX09DGuSGx7WnThkE+q/JY/V+DBMhlrFp
+	V9Vjw2Q9qnMB/NCPOIzO1jAAXTQsgWjG7WOVc=
+MIME-Version: 1.0
+Received: by 10.223.105.136 with SMTP id t8mr422058fao.41.1238057244099; Thu, 
+	26 Mar 2009 01:47:24 -0700 (PDT)
+In-Reply-To: <20090323000542.GL14278@smtp.west.cox.net>
+References: <1237737623-10538-1-git-send-email-matthieu.poullet@gmail.com>
+	<d1b08f940903220927v2f820afia681d67bdbd50b54@mail.gmail.com>
+	<20090322172416.GA16899@denix.org>
+	<d1b08f940903221104u5f0f1328i8918a50ec49541f7@mail.gmail.com>
+	<d1b08f940903221630p3e0bc9a5i443e8ada0a40fa03@mail.gmail.com>
+	<20090323000542.GL14278@smtp.west.cox.net>
+Date: Thu, 26 Mar 2009 09:47:24 +0100
+Message-ID: <d1b08f940903260147n5fa49a1bxda7506b14bab20b7@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Angstrom: weak-assign DEPLOY_DIR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,22 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2009 07:53:07 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 26 Mar 2009 08:49:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 26-03-09 01:10, Andrea Adami wrote:
+was: DEPLOY_DIR out of TMPDIR
 
-> +#Silence warning during parsing
-> +PREFERRED_PROVIDER_virtual/psplash ?= "psplash-angstrom"
+>Sounds like Angstrom needs:
+>USER_DEPLOY_DIR ?= "${TMPDIR}/deploy/${ANGSTROMLIBC}"
+>DEPLOY_DIR = "${USER_DEPLOY_DIR}" if users are going to further override
+>what the distro thinks is best.
 
-NACK, the 'psplash' package should get deleted and replaced with 
-'psplash-oe' or something. It was left in place to give people time to 
-switch to the new way of installing branded psplash images.
+As pointed out by Denix and me, we need changes to base.bbclass too:
 
-regards,
+ package_stagefile_shell()
+ ...
+-destfile=`echo $srcfile | sed s#${TMPDIR}#${PSTAGE_TMPDIR_STAGE}#`
++destfile=`echo $srcfile | sed s#${DEPLOY_DIR}#${PSTAGE_TMPDIR_STAGE}#`
+...
 
-Koen
+I tested both patches building from scratch and using packaged staging.
 
+Issues: the 5-6 recipes using package_stagefile_shell() are possibly
+broken...DEPLOY_DIR get sed out and the files are not found.
+I don't have a list here offhand, just grep...two of them are
+zaurus-updater and git.
+
+I fixed locally zaurus-updater just avoiding to call the a.m. function
+
+-        package_stagefile_shell ${DEPLOY_DIR_IMAGE}/updater.sh.${MACHINE}
++       cp -dp updater.sh ${DEPLOY_DIR_IMAGE}/updater.sh.${MACHINE}
+
+-        package_stagefile_shell ${DEPLOY_DIR_IMAGE}/gnu-tar
++       cp -dp gnu-tar ${DEPLOY_DIR_IMAGE}/gnu-tar
+
+Can I proceed and send the set of patches to the mailing list? Better ideas?
+
+
+Regards
+
+Andrea
 
 
