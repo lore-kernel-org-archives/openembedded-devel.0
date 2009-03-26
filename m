@@ -1,20 +1,39 @@
-Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
+Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <di@fh-wedel.de>) id 1Lmdy1-00047O-VS
+	(envelope-from <hs4233@mail.mn-solutions.de>) id 1LmjpR-0004kx-A8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Mar 2009 02:01:10 +0100
-Received: by mail.fh-wedel.de (Postfix, from userid 959)
-	id D2636547D9; Thu, 26 Mar 2009 01:59:30 +0100 (CET)
-Date: Thu, 26 Mar 2009 01:59:30 +0100
-From: Martin Dietze <di@fh-wedel.de>
+	Thu, 26 Mar 2009 08:16:41 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id 5C6323A00C;
+	Thu, 26 Mar 2009 08:15:02 +0100 (CET)
+X-Virus-Scanned: by Mittwald Mailscanner
+Received: from mx51.mymxserver.com ([127.0.0.1])
+	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xwE0-5xWp3Pv; Thu, 26 Mar 2009 08:15:02 +0100 (CET)
+Received: from lin01.mn-solutions.de (pD95F9C30.dip0.t-ipconnect.de
+	[217.95.156.48])
+	by mx51.mymxserver.com (Postfix) with ESMTP id BD2943A007;
+	Thu, 26 Mar 2009 08:15:00 +0100 (CET)
+Received: by lin01.mn-solutions.de (Postfix, from userid 116)
+	id 4E17C1E012C; Thu, 26 Mar 2009 08:15:00 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	lin01.mn-logistik.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
+	by lin01.mn-solutions.de (Postfix) with ESMTP id ADC611E0124;
+	Thu, 26 Mar 2009 08:14:56 +0100 (CET)
+From: Holger Schurig <hs4233@mail.mn-solutions.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090326005930.GA23052@fh-wedel.de>
-References: <20090324233009.GC9461@fh-wedel.de>
-	<19c1b8a90903242057v4873c28if94f14f5631ecd6d@mail.gmail.com>
+Date: Thu, 26 Mar 2009 08:14:38 +0100
+User-Agent: KMail/1.9.7
+References: <49C9FEFF.2010802@bolloretelecom.eu> <1237985345.8711.6.camel@opal>
+	<49CA6B02.9070600@bolloretelecom.eu>
+In-Reply-To: <49CA6B02.9070600@bolloretelecom.eu>
 MIME-Version: 1.0
-In-Reply-To: <19c1b8a90903242057v4873c28if94f14f5631ecd6d@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Strange name for cross binutils binaries
+Message-Id: <200903260814.38745.hs4233@mail.mn-solutions.de>
+Subject: Re: Dropping qt4-x11-free versions 4.1.2 and 4.3.3?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,35 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2009 01:01:10 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 26 Mar 2009 07:16:41 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Tue, March 24, 2009, Khem Raj wrote:
+> * who is the maintainer for the neuros-* packages? They are in
+> a really sad state (staging rules are only half-writtent so
+> they mostly don't build), and they keep coming up when I grep
+> for Qt-related stuff. I am wondering whether they don't belong
+> in "nonworking"..
 
-> Well nylon distro is using quite old tools and I dont think anybody
-> has been using
-> gcc 3.3 binutils 2.14 and glibc 2.3.3 combo.
-
-It seems like I found the culprit; in binutils 2.14 there is a
-double --program-prefix=.... argument in the configure options.
-This resulted in two consecutive sed substitutions for the
-executable program's prefixes.
-I call this a bug regardless how old version 2.14 is. Actually,
-binutils have always had target-arch-related issues, I thus do
-not like the idea of upgrading just because the recipes are
-broken.
-
-I hope I can come up with a set of patches soon.
-
-Cheers,
-
-Martin
-
--- 
------------ / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-Was ist ein Cluster?
-Wenn vier Bratscher unisono spielen.
+They look like abandonware to me, e.g. upstream nothing has been 
+done at all since half a year: http://git.neurostechnology.com/
 
 
