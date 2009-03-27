@@ -1,23 +1,22 @@
-Received: from [206.83.81.187] (helo=smtp1.irobot.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tharvey@irobot.com>) id 1LnJG9-0005y4-O9
+Received: from [63.139.215.211] (helo=maxie.russound.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <jims@russound.com>) id 1LnJUS-0001kN-Eg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Mar 2009 22:06:37 +0100
-Received: from fever2.wardrobe.irobot.com ([192.168.163.187]) by
-	smtp1.irobot.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 27 Mar 2009 17:04:46 -0400
-Received: from [192.168.69.73] ([192.168.69.73]) by fever2.wardrobe.irobot.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 27 Mar 2009 17:04:46 -0400
-Message-ID: <49CD3F6D.1080106@irobot.com>
-Date: Fri, 27 Mar 2009 14:04:45 -0700
-From: Tim Harvey <tharvey@irobot.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	Fri, 27 Mar 2009 22:21:24 +0100
+Received: from kmfms (unknown [10.0.3.67])
+	by maxie.russound.com (Postfix) with ESMTP id 48C84C9863A
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Mar 2009 17:15:27 -0400 (EDT)
+Date: Fri, 27 Mar 2009 17:17:29 -0400
+From: Jim Sheldon <jims@russound.com>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 27 Mar 2009 21:04:46.0231 (UTC)
-	FILETIME=[A87BEA70:01C9AF1F]
-Subject: [PATCH/RFC] kernel.bbclass: add kernel-headers package
+Message-ID: <20090327171729.413357e7@kmfms>
+In-Reply-To: <49CBD43B.6070402@bolloretelecom.eu>
+References: <49C9FEFF.2010802@bolloretelecom.eu>
+	<49CBD43B.6070402@bolloretelecom.eu>
+X-Mailer: Claws Mail 3.5.0 (GTK+ 2.12.11; i486-pc-linux-gnu)
+Mime-Version: 1.0
+Subject: Re: Dropping qt4-x11-free versions 4.1.2 and 4.3.3?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,100 +30,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 21:06:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Mar 2009 21:21:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Add a kernel-headers package suitable for building kernel modules 
-against and add it to the target sdk
+Hello Jeremy,
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 4c1dbda..efdaf96 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -56,6 +56,9 @@ KERNEL_LD = "${LD}${KERNEL_LDSUFFIX} 
-${HOST_LD_KERNEL_ARCH}"
- KERNEL_OUTPUT ?= "arch/${ARCH}/boot/${KERNEL_IMAGETYPE}"
- KERNEL_IMAGEDEST = "boot"
- 
-+# Where kernel headers get installed
-+KERNEL_HEADERS_DEST ?= 
-"/usr/src/linux-headers-${KERNEL_VERSION}-${MACHINE}"
-+
- #
- # configuration
- #
-@@ -163,6 +166,19 @@ kernel_do_install() {
-        else
-                oenote "no modules to install"
-        fi
-+       oenote "installing kernel headers"
-+       install -d ${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}
-+       find . -path './include/*' -prune -o -path './.pc/*' -prune \
-+               -o -path './scripts/*' -prune -o -type f \
-+               \( -name 'Makefile*' -o -name 'Kconfig*' -o -name 
-'Kbuild*' -o \
-+               -name '*.sh' -o -name '*.pl' -o -name '*.lds' \) \
-+               -print | cpio -pd --preserve-modification-time 
-${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}
-+       cp -a drivers/media/dvb/dvb-core/*.h 
-${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}/drivers/media/dvb/dvb-core
-+       cp -a drivers/media/video/*.h 
-${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}/drivers/media/video
-+       cp -a drivers/media/dvb/dvb-core/*.h 
-${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}/drivers/media/dvb/dvb-core
-+       cp -a drivers/media/dvb/frontends/*.h 
-${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}/drivers/media/dvb/frontends
-+       cp -a scripts include 
-${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}/
-+       install -m 0644 Module.symvers 
-${D}${KERNEL_HEADERS_DIR}/${KERNEL_HEADERS_DEST}/
-        
-        install -d ${D}/${KERNEL_IMAGEDEST}
-        install -d ${D}/boot
-@@ -217,11 +233,12 @@ EXPORT_FUNCTIONS do_compile do_install do_stage 
-do_configure
- 
- # kernel-base becomes kernel-${KERNEL_VERSION}
- # kernel-image becomes kernel-image-${KERNEL_VERISON}
--PACKAGES = "kernel kernel-base kernel-image kernel-dev kernel-vmlinux"
-+PACKAGES = "kernel kernel-base kernel-image kernel-dev kernel-vmlinux 
-kernel-headers"
- FILES = ""
- FILES_kernel-image = "/boot/${KERNEL_IMAGETYPE}*"
- FILES_kernel-dev = "/boot/System.map* /boot/config*"
- FILES_kernel-vmlinux = "/boot/vmlinux*"
-+FILES_kernel-headers = "${KERNEL_HEADERS_DEST}/*"
- RDEPENDS_kernel = "kernel-base"
- RRECOMMENDS_kernel-module-hostap-cs += 
-'${@base_version_less_or_equal("KERNEL_VERSION", "2.6.17", "", 
-"apm-wifi-suspendfix", d)}'
- RRECOMMENDS_kernel-module-orinoco-cs += 
-'${@base_version_less_or_equal("KERNEL_VERSION", "2.6.17", "", 
-"apm-wifi-suspendfix", d)}'
-@@ -446,7 +463,7 @@ python populate_packages_prepend () {
-        metapkg = "kernel-modules"
-        bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
-        bb.data.setVar('FILES_' + metapkg, "", d)
--       blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 
-'kernel-vmlinux' ]
-+       blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 
-'kernel-vmlinux', 'kernel-headers' ]
-        for l in module_deps.values():
-                for i in l:
-                        pkg = module_pattern % 
-legitimize_package_name(re.match(module_regex, 
-os.path.basename(i)).group(1))
-diff --git a/recipes/tasks/task-sdk-bare.bb b/recipes/tasks/task-sdk-bare.bb
-index 85d3626..7c837bf 100644
---- a/recipes/tasks/task-sdk-bare.bb
-+++ b/recipes/tasks/task-sdk-bare.bb
-@@ -30,4 +30,5 @@ RDEPENDS_${PN} = "\
-     libgcc \
-     libstdc++ \
-     libstdc++-dev \
-+    kernel-headers \
- "
+I just updated my tree and ran bitbake qt4-embedded which failed with
+this:
 
+| In file included from io/qbuffer.cpp:473:
+| .moc/release-shared-emb-arm/moc_qbuffer.cpp:14:2: error: #error "This
+file was generated using the moc from 4.4.3. It"
+| .moc/release-shared-emb-arm/moc_qbuffer.cpp:15:2: error: #error
+"cannot be used with the include files from this version of Qt."
+| .moc/release-shared-emb-arm/moc_qbuffer.cpp:16:2: error: #error "(The
+moc has changed too much.)" | make[1]: ***
+[.obj/release-shared-emb-arm/qbuffer.o] Error 1 | make[1]: Leaving
+directory
+`/home/jim/Projects/beagleboard/oe/tmp/work/armv7a-angstrom-linux-gnueabi/q=
+t4-embedded-4.5.0-r0/qt-embedded-linux-opensource-src-4.5.0/src/corelib'
+| make: *** [sub-corelib-make_default-ordered] Error 2 | FATAL:
+oe_runmake failed
+
+Looks like something stuck around from 4.4.3.
+
+I will have more time next week to assist with this, thanks for helping
+get Qt 4.5 in OE!
+
+Jim
+
+On Thu, 26 Mar 2009 15:15:07 -0400
+Jeremy Lain=C3=A9 <jeremy.laine@bolloretelecom.eu> wrote:
+
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+>=20
+> > Ideally, I would like to keep only version 4.4.3 and add 4.5.0
+> > sometime
+> in the near
+> > future. This would allow us to simplify the rules used to build Qt.
+> OK, Qt 4.5.0 has landed in OE. For now I have set a DEFAULT_PREFERENCE
+> of -1 until we get some build reports. I you use Qt, give it a spin
+> and let me know whether it works for you.
+>=20
+> Cheers,
+>=20
+> - --
+> Jeremy LAINE
+> Bollor=C3=A9 telecom | 11bis, rue Scribe | F-75009 Paris
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.9 (GNU/Linux)
+> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+>=20
+> iEYEARECAAYFAknL1DsACgkQCL1n3lVB9EbaPQCgyq2iInVmWEQc3wwgIVg+Urb9
+> UpoAnjs3LrtHqF9yJP+19KS11EiMX2hQ
+> =3Dgjt1
+> -----END PGP SIGNATURE-----
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
