@@ -1,21 +1,36 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.217.170] (helo=mail-gx0-f170.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LnB7T-0001x3-1O
-	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 13:25:07 +0100
-Received: (qmail 7599 invoked by uid 1003); 27 Mar 2009 12:23:17 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 27 Mar 2009 12:23:17 -0000
-Message-ID: <49CCC52F.2000009@balister.org>
-Date: Fri, 27 Mar 2009 08:23:11 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <cliff.brake@gmail.com>) id 1LnCw4-0000FO-TD
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Mar 2009 15:21:29 +0100
+Received: by gxk18 with SMTP id 18so2092387gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Mar 2009 07:19:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=9yTFGj/i4aNPMWQlvge+vOl9PXPmA9DTXOsjJcjeTZ0=;
+	b=uZyL0QIyAgVbRQf/W6Yy5egkSLSZct9Wb5TtJV8xTkKobxa53cGpi4SvlX0evCXLo2
+	LzPAaNypARMADpeCbodZDOmJW+Rh379nuLUOJ6gN2qIIFsGKIsKG5ZxeyRT1wP6sFzpz
+	o9ykaMJ49JrYLRaw+3a+yMF2f+01JobP3qyWs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=N4D7lPR6Vqoz8UPpWJMCaTV551kDkgtrMoVbZMwh/50GAVb63UuInmsRRJayGKOPl3
+	evnvt8igh+fBaseIgRAyI94TvtMXLUHSWp52UL71iY/4hFnWz6oFzCn8VqqJ48/Wxo9y
+	Ep9gP0RbQubm478Ce3WaoviwHghUTtJCxx9GM=
 MIME-Version: 1.0
+Received: by 10.151.102.16 with SMTP id e16mr3914754ybm.22.1238163579243; Fri, 
+	27 Mar 2009 07:19:39 -0700 (PDT)
+In-Reply-To: <1237985376.8711.7.camel@opal>
+References: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>
+	<gqd33g$5vk$2@ger.gmane.org> <1237985376.8711.7.camel@opal>
+Date: Fri, 27 Mar 2009 10:19:39 -0400
+Message-ID: <f96d234e0903270719g1d0c2075lc440f8ddac0b4a94@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF746@hiob.intern.dresearch.de>	<20090326175845.GA6756@denix.org>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF74B@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF74B@hiob.intern.dresearch.de>
-Subject: Re: u-boot update question
+Subject: Re: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,96 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 12:25:07 -0000
-X-Groupsio-MsgNum: 8761
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms070109040402080101080300"
-
---------------ms070109040402080101080300
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 27 Mar 2009 14:21:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Sledz, Steffen wrote:
->>> And there is another question. How do i persuade bitbake to 
->>> use u-boot_git.bb instead of u-boot_1.1.2.bb? I couldn't find 
->>> DEFAULT_PREFERENCE items for the other machines in both 
->>> recipes so i assumed that the git recipe is preferred to the 
->>> other. But a "bitbake u-boot" still builds from 1.1.2 .  :(
->> conf/machine/oxnas.conf
-> 
-> Yes, of course. I'm really mortified. ;-)
+On Wed, Mar 25, 2009 at 8:49 AM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+> Am Mittwoch, den 25.03.2009, 12:04 +0100 schrieb Koen Kooi:
+>> On 25-03-09 11:14, Andrea Adami wrote:
+>> > Bump
+>>
+>> As I said, let's close it down.
+>
+> -1000. Lets continue cleaning it up.
 
-I missed this earlier ...
+Building on Chris's push for package maintainers -- perhaps we need to
+insist on style guidelines for bugs as well where we prefix the bug
+title with the component name (like repo commits), or create separate
+components for every directory in recipes, machines, and perhaps a
+catch-all for core files.  Then the maintainer for the component could
+decide if the bug is valid, and close it if not.  If bugs collect for
+a component, and nothing gets done, then we need to search for a
+maintainer, or mark the recipe unmaintained.  I guess the difficult
+part is all this needs active management.  Somehow if we can get bugs
+assigned to the right people (listed in the maintainers file), then
+maybe it would work better.
 
-I am planning on adding a recipe for building u-boot-2009.03. This would 
-be better than using the git recipe, since someone may change the git 
-tag at a later date.
+Cliff
 
-Philip
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
---------------ms070109040402080101080300
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDMyNzEy
-MjMxMVowIwYJKoZIhvcNAQkEMRYEFN6KkO0RNPZO91mHsZt8m/khcZ5pMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBslpyBrstXbNPDkK36lNdA1KLi3gRpQOkb/FLtO519M+OG45KA
-pW4JAOIRGo+iu3jY+n5gEVEFTG2lOLR8g3WbShpMtbKDSzuP4x1QpAWpvoersrzVFNgqXt3cLFfb
-L6VTMzugnv1Pym7OLKsg0UD5czK36LOBN6cQ5Vj6R0gjs3K2aayJdzrQXgmDeoWss2gvbjoZfvYv
-rNZXhbCgx2oK4UMV4SQXeU5HlFqtnltGdTMCPp93W00ZgWFNsmj1PmRldDehX2Uhm6PcZy5gHth4
-/Mk+GwzzoUAIMC1MqJKY4qCLezti41gd8z5tDYem7gwfdVEqKhSovrvaXkPp22bqAAAAAAAA
-
---------------ms070109040402080101080300--
