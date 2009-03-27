@@ -1,22 +1,34 @@
-Received: from [63.139.215.211] (helo=maxie.russound.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <jims@russound.com>) id 1LnJUS-0001kN-Eg
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Mar 2009 22:21:24 +0100
-Received: from kmfms (unknown [10.0.3.67])
-	by maxie.russound.com (Postfix) with ESMTP id 48C84C9863A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Mar 2009 17:15:27 -0400 (EDT)
-Date: Fri, 27 Mar 2009 17:17:29 -0400
-From: Jim Sheldon <jims@russound.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090327171729.413357e7@kmfms>
-In-Reply-To: <49CBD43B.6070402@bolloretelecom.eu>
-References: <49C9FEFF.2010802@bolloretelecom.eu>
-	<49CBD43B.6070402@bolloretelecom.eu>
-X-Mailer: Claws Mail 3.5.0 (GTK+ 2.12.11; i486-pc-linux-gnu)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LnKw2-0001YD-W3
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 23:53:59 +0100
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LnKuH-000560-LT
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 22:52:09 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 27 Mar 2009 22:52:09 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 27 Mar 2009 22:52:09 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 27 Mar 2009 23:51:53 +0100
+Message-ID: <gqjla9$k9u$1@ger.gmane.org>
+References: <49CD3BFF.2030902@irobot.com>
+	<b6ebd0a50903271402r632461b0q962666a6b2ccd50c@mail.gmail.com>
 Mime-Version: 1.0
-Subject: Re: Dropping qt4-x11-free versions 4.1.2 and 4.3.3?
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
+In-Reply-To: <b6ebd0a50903271402r632461b0q962666a6b2ccd50c@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] bash: add alternative configuration for bin/sh -> /bin/bash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,68 +42,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 21:21:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Mar 2009 22:53:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello Jeremy,
+On 27-03-09 22:02, Chris Larson wrote:
+> Be very careful with this.  Specifically, be sure to thoroughly test
+> installing bash onto a system that currently has busybox, and the
+> upgrade paths for both busybox and bash.  You never want to get into a
+> state, due to pre/post rm/install script execution order, where
+> /bin/sh doesn't exist.  If that happens, you won't be able to execute
+> the next script to fix it :)
 
-I just updated my tree and ran bitbake qt4-embedded which failed with
-this:
+And we actually have busyboxisms in some scripts, you can't launch e-wm 
+due to the OE wrapper script (which isn't needed anymore, btw) breaking 
+with bash.
 
-| In file included from io/qbuffer.cpp:473:
-| .moc/release-shared-emb-arm/moc_qbuffer.cpp:14:2: error: #error "This
-file was generated using the moc from 4.4.3. It"
-| .moc/release-shared-emb-arm/moc_qbuffer.cpp:15:2: error: #error
-"cannot be used with the include files from this version of Qt."
-| .moc/release-shared-emb-arm/moc_qbuffer.cpp:16:2: error: #error "(The
-moc has changed too much.)" | make[1]: ***
-[.obj/release-shared-emb-arm/qbuffer.o] Error 1 | make[1]: Leaving
-directory
-`/home/jim/Projects/beagleboard/oe/tmp/work/armv7a-angstrom-linux-gnueabi/q=
-t4-embedded-4.5.0-r0/qt-embedded-linux-opensource-src-4.5.0/src/corelib'
-| make: *** [sub-corelib-make_default-ordered] Error 2 | FATAL:
-oe_runmake failed
+regards,
 
-Looks like something stuck around from 4.4.3.
+Koen
 
-I will have more time next week to assist with this, thanks for helping
-get Qt 4.5 in OE!
 
-Jim
+>
+> On Fri, Mar 27, 2009 at 1:50 PM, Tim Harvey<tharvey@irobot.com>  wrote:
+>> Add alternative configuration for /bin/sh ->  /bin/bash so that for example
+>> bash can exist (and override) as shell if busybox is also installed
+>>
+>> diff --git a/recipes/bash/bash.inc b/recipes/bash/bash.inc
+>> index 4eba689..7c6122b 100644
+>> --- a/recipes/bash/bash.inc
+>> +++ b/recipes/bash/bash.inc
+>> @@ -4,7 +4,7 @@ DEPENDS = "ncurses"
+>> SECTION = "base/shell"
+>> LICENSE = "GPL"
+>>
+>> -inherit autotools gettext
+>> +inherit autotools gettext update-alternatives
+>>
+>> PARALLEL_MAKE = ""
+>>
+>> @@ -33,3 +33,8 @@ pkg_postinst () {
+>>        grep -q "bin/bash" $D${sysconfdir}/shells || echo /bin/bash>>
+>> $D${sysconfdir}/shells
+>>        grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh>>
+>> $D${sysconfdir}/shells
+>> }
+>> +
+>> +ALTERNATIVE_NAME = "sh"
+>> +ALTERNATIVE_LINK = "${base_bindir}/sh"
+>> +ALTERNATIVE_PATH = "${base_bindir}/bash"
+>> +ALTERNATIVE_PRIORITY = "90"
+>> diff --git a/recipes/bash/bash_3.0.bb b/recipes/bash/bash_3.0.bb
+>> index e23887a..8165d07 100644
+>> --- a/recipes/bash/bash_3.0.bb
+>> +++ b/recipes/bash/bash_3.0.bb
+>> @@ -1,5 +1,5 @@
+>> require bash.inc
+>> -PR = "r11"
+>> +PR = "r12"
+>>
+>> SRC_URI += "\
+>>   file://bash-3.0-fixes.patch;patch=1 \
+>> diff --git a/recipes/bash/bash_3.2.bb b/recipes/bash/bash_3.2.bb
+>> index 6a48a4b..e175467 100644
+>> --- a/recipes/bash/bash_3.2.bb
+>> +++ b/recipes/bash/bash_3.2.bb
+>> @@ -1,6 +1,6 @@
+>> require bash.inc
+>>
+>> -PR = "r7"
+>> +PR = "r8"
+>>
+>> SRC_URI += "\
+>>            file://builtins.patch;patch=1 \
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+>
+>
 
-On Thu, 26 Mar 2009 15:15:07 -0400
-Jeremy Lain=C3=A9 <jeremy.laine@bolloretelecom.eu> wrote:
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
->=20
-> > Ideally, I would like to keep only version 4.4.3 and add 4.5.0
-> > sometime
-> in the near
-> > future. This would allow us to simplify the rules used to build Qt.
-> OK, Qt 4.5.0 has landed in OE. For now I have set a DEFAULT_PREFERENCE
-> of -1 until we get some build reports. I you use Qt, give it a spin
-> and let me know whether it works for you.
->=20
-> Cheers,
->=20
-> - --
-> Jeremy LAINE
-> Bollor=C3=A9 telecom | 11bis, rue Scribe | F-75009 Paris
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.9 (GNU/Linux)
-> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
->=20
-> iEYEARECAAYFAknL1DsACgkQCL1n3lVB9EbaPQCgyq2iInVmWEQc3wwgIVg+Urb9
-> UpoAnjs3LrtHqF9yJP+19KS11EiMX2hQ
-> =3Dgjt1
-> -----END PGP SIGNATURE-----
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
