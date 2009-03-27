@@ -1,25 +1,23 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [206.83.81.187] (helo=smtp1.irobot.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LnHFL-0000wO-DR
+	(envelope-from <tharvey@irobot.com>) id 1LnJ21-0005X6-4d
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Mar 2009 19:57:39 +0100
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.hex)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LnHDX-0005cD-W4
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Mar 2009 21:55:48 +0300
-From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Mar 2009 21:55:44 +0300
-User-Agent: KMail/1.9.9
-References: <1238173051-2118-1-git-send-email-khimov@altell.ru>
-	<49CD0AB7.3010309@dls.net>
-In-Reply-To: <49CD0AB7.3010309@dls.net>
-Organization: Altell Ltd.
+	Fri, 27 Mar 2009 21:52:01 +0100
+Received: from fever2.wardrobe.irobot.com ([192.168.163.187]) by
+	smtp1.irobot.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 27 Mar 2009 16:50:08 -0400
+Received: from [192.168.69.73] ([192.168.69.73]) by fever2.wardrobe.irobot.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 27 Mar 2009 16:50:08 -0400
+Message-ID: <49CD3BFF.2030902@irobot.com>
+Date: Fri, 27 Mar 2009 13:50:07 -0700
+From: Tim Harvey <tharvey@irobot.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-Message-Id: <200903272155.44181.khimov@altell.ru>
-Subject: Re: [PATCH] dialog: update version 1.0-20050306 -> 1.1-20080819
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 27 Mar 2009 20:50:08.0873 (UTC)
+	FILETIME=[9D89B590:01C9AF1D]
+Subject: [PATCH] bash: add alternative configuration for bin/sh -> /bin/bash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +31,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 18:57:39 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 27 Mar 2009 20:52:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Mike (mwester):
-> No comment on this particular patch, just in general I want to note that
-> one cannot assume that just because the sources for an older version
-> might be unfetchable on an official download site is insufficient reason
-> to delete the old recipe.
+Add alternative configuration for /bin/sh -> /bin/bash so that for 
+example bash can exist (and override) as shell if busybox is also installed
 
-Well, FTBFS on one distros and building fine on other is not right IMHO. 
-I've also checked that none of packages depends on dialog currently and no 
-distro specifically sets PREFERRED_VERSION. So if I just add this dialog 
-along with an old one it will be autoselected in every distro that is 
-present in org.openembedded.dev tree.
+diff --git a/recipes/bash/bash.inc b/recipes/bash/bash.inc
+index 4eba689..7c6122b 100644
+--- a/recipes/bash/bash.inc
++++ b/recipes/bash/bash.inc
+@@ -4,7 +4,7 @@ DEPENDS = "ncurses"
+ SECTION = "base/shell"
+ LICENSE = "GPL"
+ 
+-inherit autotools gettext
++inherit autotools gettext update-alternatives
+ 
+ PARALLEL_MAKE = ""
+ 
+@@ -33,3 +33,8 @@ pkg_postinst () {
+        grep -q "bin/bash" $D${sysconfdir}/shells || echo /bin/bash >> 
+$D${sysconfdir}/shells
+        grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >> 
+$D${sysconfdir}/shells
+ }
++
++ALTERNATIVE_NAME = "sh"
++ALTERNATIVE_LINK = "${base_bindir}/sh"
++ALTERNATIVE_PATH = "${base_bindir}/bash"
++ALTERNATIVE_PRIORITY = "90"
+diff --git a/recipes/bash/bash_3.0.bb b/recipes/bash/bash_3.0.bb
+index e23887a..8165d07 100644
+--- a/recipes/bash/bash_3.0.bb
++++ b/recipes/bash/bash_3.0.bb
+@@ -1,5 +1,5 @@
+ require bash.inc
+-PR = "r11"
++PR = "r12"
+ 
+ SRC_URI += "\
+   file://bash-3.0-fixes.patch;patch=1 \
+diff --git a/recipes/bash/bash_3.2.bb b/recipes/bash/bash_3.2.bb
+index 6a48a4b..e175467 100644
+--- a/recipes/bash/bash_3.2.bb
++++ b/recipes/bash/bash_3.2.bb
+@@ -1,6 +1,6 @@
+ require bash.inc
+ 
+-PR = "r7"
++PR = "r8"
+ 
+ SRC_URI += "\
+            file://builtins.patch;patch=1 \
 
-Of course, if there are reasons to keep old recipe, I have no problems 
-fixing the patch. Just currently not seeing any.
 
 
