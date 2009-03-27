@@ -1,21 +1,42 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Ln80f-00086B-H9
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Mar 2009 10:05:53 +0100
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 58AB268322;
-	Fri, 27 Mar 2009 12:03:58 +0300 (MSK)
-From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Mar 2009 12:03:58 +0300
-Message-Id: <1238144638-7541-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.1
-MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-Spam-Status: No
-Subject: [PATCH] busybox: update appletlib dependency patch
+	(envelope-from <rpurdie@rpsys.net>) id 1Ln8Ho-0005IR-B8
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 10:23:37 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2R9LmZX029846
+	for <openembedded-devel@openembedded.org>; Fri, 27 Mar 2009 09:21:48 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29809-01 for <openembedded-devel@openembedded.org>;
+	Fri, 27 Mar 2009 09:21:44 +0000 (GMT)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n2R9LfGP029840
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>; Fri, 27 Mar 2009 09:21:41 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <49CAC438.2020907@dls.net>
+References: <b6ebd0a50903171218i7f5716afifd99177982b6df5b@mail.gmail.com>
+	<49C9347C.7010309@balister.org>
+	<FA1C2D98-DEF3-4694-A757-7C137F667CE3@ngndg.com>
+	<b6ebd0a50903241301r5b8972b4s59df7be41052ab7a@mail.gmail.com>
+	<dc6682e90903241330m1191395j478ee4180a969cfb@mail.gmail.com>
+	<49C94647.2040401@gmail.com>
+	<ac9c93b10903250151v6ea0586bv461debbe36f42ac7@mail.gmail.com>
+	<gqd31s$5vk$1@ger.gmane.org>	<49CA5638.1050000@dls.net>
+	<gqdlka$cbd$1@ger.gmane.org>
+	<ac9c93b10903251507u4e1edf78u4dbb1b2c7a318789@mail.gmail.com>
+	<49CAAFDC.3070004@bolloretelecom.eu>  <49CAC438.2020907@dls.net>
+Date: Fri, 27 Mar 2009 09:22:08 +0000
+Message-Id: <1238145728.5342.0.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	n2R9LmZX029846
+Subject: Re: Package Maintenance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,58 +50,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 09:05:54 -0000
-
-Previous version still failed from time to time on clean-start builds
-with 4 bitbake threads and '-j16'. Building busybox as sole target worked
-well.
-
-The reason is that previous version introduced a race between applets make
-processes spawned from top-level Makefile and from libbb Makefile.
-
-Fix it with high-level dependency that doesn't create races.
----
- .../files/busybox-appletlib-dependency.patch       |   24 +++++++++++--------
- 1 files changed, 14 insertions(+), 10 deletions(-)
-
-diff --git a/recipes/busybox/files/busybox-appletlib-dependency.patch b/recipes/busybox/files/busybox-appletlib-dependency.patch
-index 85a61e8..3efd4c0 100644
---- a/recipes/busybox/files/busybox-appletlib-dependency.patch
-+++ b/recipes/busybox/files/busybox-appletlib-dependency.patch
-@@ -1,11 +1,15 @@
----- a/libbb/Kbuild	2008-11-09 20:28:09.000000000 +0300
--+++ b/libbb/Kbuild	2009-02-17 17:41:48.718747865 +0300
--@@ -147,3 +147,8 @@ lib-$(CONFIG_PGREP) += xregcomp.o
-- lib-$(CONFIG_PKILL) += xregcomp.o
-- lib-$(CONFIG_DEVFSD) += xregcomp.o
-- lib-$(CONFIG_FEATURE_FIND_REGEX) += xregcomp.o
-+Index: busybox-1.13.2/Makefile
-+===================================================================
-+--- busybox-1.13.2.orig/Makefile	2009-03-19 15:44:37.419270265 +0300
-++++ busybox-1.13.2/Makefile	2009-03-19 15:45:57.737521296 +0300
-+@@ -471,6 +471,10 @@
-+ 		util-linux/ \
-+ 		util-linux/volume_id/ \
-+ 
-++# Lib interdeps
-++# libbb uses headers generated in applets
-++libbb: applets
- +
--+libbb/appletlib.o: include/usage_compressed.h include/applet_tables.h
--+
--+include/usage_compressed.h include/applet_tables.h:
--+        $(Q)$(MAKE) $(build)=applets $@
-+ endif # KBUILD_EXTMOD
-+ 
-+ ifeq ($(dot-config),1)
--- 
-1.6.2.1
+X-List-Received-Date: Fri, 27 Mar 2009 09:23:39 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
 
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
+On Wed, 2009-03-25 at 18:54 -0500, Mike (mwester) wrote:
+> Jeremy Lain=C3=A9 wrote:
+> >>> Empty TMPDIR is only once case we should test for, I've seen many t=
+imes that
+> >>> a 'populated' TMPDIR creates bugs, e.g. midori picking up libhildon=
+ to
+> >>> mention a recent one. So 'always build from empty TMPDIR' will leav=
+e serious
+> >>> and harder to trackdown bugs unnoticed.
+> >> Test with unpopulataed TMPDIR and test with maximal populated TMPDIR=
+ ?
+> >=20
+> > Speaking of populated TMPDIR, is there a notion of conflicts for stag=
+ing? If two packages
+> > want to put the same file into staging, will we barf an error or sile=
+ntly ignore it?
+>=20
+> It silently ignores it.
+>=20
+> As a current example, unless distros have taken special care with libus=
+b
+> and libusb1, they will suffer from exactly this problem, with the
+> library that is staged determined by which recipe is built most recentl=
+y.
+
+One of the goals of packaged-staging was to detect this and error. Sadly
+nobody has implemented it yet though...
+
+Cheers,
+
+Richard
 
 
 
