@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LnATE-00048j-L8
-	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 12:43:32 +0100
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LnARU-00033o-Us
-	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 11:41:45 +0000
+	id 1LnAbE-0004Li-J8
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 12:51:48 +0100
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LnAZW-0003Ne-PL
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 11:50:02 +0000
 Received: from weppsb02.northropgrumman.com ([155.104.37.18])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 27 Mar 2009 11:41:44 +0000
+	Fri, 27 Mar 2009 11:50:02 +0000
 Received: from jeremy.williams by weppsb02.northropgrumman.com with local
 	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 27 Mar 2009 11:41:44 +0000
+	Fri, 27 Mar 2009 11:50:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Jeremy Williams <jeremy.williams@ngc.com>
-Date: Fri, 27 Mar 2009 11:41:34 +0000 (UTC)
-Message-ID: <loom.20090327T113943-688@post.gmane.org>
+Date: Fri, 27 Mar 2009 11:46:34 +0000 (UTC)
+Message-ID: <loom.20090327T114549-169@post.gmane.org>
 References: <loom.20090326T231434-944@post.gmane.org>
 	<200903270903.13523.marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 11:43:32 -0000
+X-List-Received-Date: Fri, 27 Mar 2009 11:51:48 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
@@ -57,15 +57,12 @@ Marcin Juszkiewicz <marcin <at> juszkiewicz.com.pl> writes:
 > 
 > Regards, 
 
+
 Marcin,
-  Sorry, did not notice that this patch was pulled from metadata.  This error,
-however, occured during build of a metadata pull performed just 18 hours ago. 
-Can you rebuild and confirm the checksum?
+  My apologies, please disregard.  One of our developers copied an older busybox
+to our overlay...
 
 -jeremy
-
-
-
 
 
 
