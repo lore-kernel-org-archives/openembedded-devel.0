@@ -1,29 +1,21 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LnG15-0002KF-Kl
-	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 18:38:52 +0100
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090327173659.USNN27308.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Fri, 27 Mar 2009 13:36:59 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id YHd01b0074dMFYL04Hd0YK; Fri, 27 Mar 2009 13:37:00 -0400
-X-Authority-Analysis: v=1.0 c=1 a=aB74IoA4QDQA:10 a=SqpPp7sK3pAA:10
-	a=FFOlUc_4AAAA:8 a=6LNcd8CsWgjeJj3Qu4gA:9 a=d09U9TuP0oNvi-qy8lAA:7
-	a=JZ9D_yGTl_jYXuK563cBb5RDdUkA:4 a=LY0hPdMaydYA:10 a=BlRIgfqs9KgA:10
-X-CM-Score: 0.00
-Date: Fri, 27 Mar 2009 10:37:00 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090327173659.GY14278@smtp.west.cox.net>
-References: <1238173051-2118-1-git-send-email-khimov@altell.ru>
-	<49CD0AB7.3010309@dls.net>
+	(envelope-from <philip@balister.org>) id 1LnGAG-0002V2-7X
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 18:48:20 +0100
+Received: (qmail 2940 invoked by uid 1003); 27 Mar 2009 17:46:29 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 27 Mar 2009 17:46:29 -0000
+Message-ID: <49CD10F4.5050609@balister.org>
+Date: Fri, 27 Mar 2009 13:46:28 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-In-Reply-To: <49CD0AB7.3010309@dls.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] dialog: update version 1.0-20050306 ->	1.1-20080819
+To: openembedded-devel@lists.openembedded.org
+References: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>	<1237985376.8711.7.camel@opal>	<f96d234e0903270719g1d0c2075lc440f8ddac0b4a94@mail.gmail.com>
+	<200903271652.33801.mickey@vanille-media.de>
+In-Reply-To: <200903271652.33801.mickey@vanille-media.de>
+Subject: Re: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,33 +29,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 17:38:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 27 Mar 2009 17:48:20 -0000
+X-Groupsio-MsgNum: 8770
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms070203040000070406060708"
 
-On Fri, Mar 27, 2009 at 12:19:51PM -0500, Mike (mwester) wrote:
-> Roman I Khimov wrote:
-> > Previous version is obsolete and can't be found on official FTP, it is also
-> > removed from Debian archives so the packages failed to build if not using
-> > some distro-specific mirror.
-> > 
-> > Hence, update version removing the old one along the way.
+--------------ms070203040000070406060708
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Michael 'Mickey' Lauer wrote:
+> On Friday 27 March 2009 15:19:39 Cliff Brake wrote:
+>> On Wed, Mar 25, 2009 at 8:49 AM, Michael 'Mickey' Lauer
+>>
+>> <mickey@vanille-media.de> wrote:
+>>> Am Mittwoch, den 25.03.2009, 12:04 +0100 schrieb Koen Kooi:
+>>>> On 25-03-09 11:14, Andrea Adami wrote:
+>>>>> Bump
+>>>> As I said, let's close it down.
+>>> -1000. Lets continue cleaning it up.
+>> Building on Chris's push for package maintainers -- perhaps we need to
+>> insist on style guidelines for bugs as well where we prefix the bug
+>> title with the component name (like repo commits), or create separate
+>> components for every directory in recipes, machines, and perhaps a
+>> catch-all for core files.  Then the maintainer for the component could
+>> decide if the bug is valid, and close it if not.  If bugs collect for
+>> a component, and nothing gets done, then we need to search for a
+>> maintainer, or mark the recipe unmaintained.  I guess the difficult
+>> part is all this needs active management.  Somehow if we can get bugs
+>> assigned to the right people (listed in the maintainers file), then
+>> maybe it would work better.
 > 
-> No comment on this particular patch, just in general I want to note that
-> one cannot assume that just because the sources for an older version
-> might be unfetchable on an official download site is insufficient reason
-> to delete the old recipe.
-> 
-> For example, nslu2-linux.org mirrors all sources used to build SlugOS;
-> and there are also commonly alternate locations for older sources.
+> Good thinking. I actually love the GNOME folks bugzilla interface. They run 
+> you through a set of questions / choices. That way it takes a bit longer to 
+> create a bug but it's more structured.
 
-Hey, can I make a request?  Can we get a set of mirrors all distros can
-inherit by default?  It'd help with these kinds of problems if by
-default all distros tried the Angstrom mirror, the SlugOS mirror and any
-other distro mirror (and of course, distros can say just use my
-mirror..).
+Bugzilla came up in the IRC stable branch meeting. Basically, who is the 
+audience for the OE bugzilla? Distro users? Distro's should really set 
+up their own bug reporting system.
 
--- 
-Tom Rini
+I'm not sure what the real answer is here, but we should put some effort 
+into deciding who the intended users of bugzilla are, and make sure we 
+meet their needs.
 
+Philip
 
+--------------ms070203040000070406060708
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDMyNzE3
+NDYyOFowIwYJKoZIhvcNAQkEMRYEFIXZbVk9AwqNrf9oTQRDcUAYxBgNMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQC/+2z50VCjeY5UMy5U2Ukq9E0CzOTLiorJ0Hur04KH3tOYQH+B
+JKL3jHh1iz6qBMYyBGPXaeZAsluP2OFzEEOWuOjAxtDwC96+FBqGN6hq7cIV7ceSuy6I2iqIIFfv
+WYPwT+wUSpAvyXpAGW26aI8lj/ZOrAfhrrT0AfbOr8onslWZNUpk5uG7wN0SCw4UfM5lyK4ySusl
+HmoQOWinRLwwdnRLhwaZd3DZVRh3c3uPZPFGHYwysXZ+u0BYx2KgKCllQiwx77PTnmaaEMP0XQeb
+BjbgOrlEylHXW4BY8N7uaqKkVuQsgwXolnYlbbuyippF4ed/UOBsreKuarC1596OAAAAAAAA
+
+--------------ms070203040000070406060708--
