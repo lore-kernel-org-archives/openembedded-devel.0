@@ -1,31 +1,22 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Ln6rT-0001Qe-BA
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Mar 2009 08:52:19 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 89DE316E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Mar 2009 09:05:08 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id D78D22A4217
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Mar 2009 08:50:33 +0100 (CET)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Ln73n-0001jt-2R
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 09:05:04 +0100
+Received: (qmail 19105 invoked by uid 813007); 27 Mar 2009 08:03:15 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 Mar 2009 08:03:15 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Mar 2009 09:02:45 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.29-rc8-00241-g65c2449; KDE/4.2.1; x86_64; ;
+	)
+References: <loom.20090326T231434-944@post.gmane.org>
+In-Reply-To: <loom.20090326T231434-944@post.gmane.org>
 MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Fri, 27 Mar 2009 08:50:07 +0100
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF74B@hiob.intern.dresearch.de>
-In-Reply-To: <20090326175845.GA6756@denix.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] u-boot update question
-Thread-Index: AcmuPaLZkhrJvx30RsOg1rYynQVC8AActzHw
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF746@hiob.intern.dresearch.de>
-	<20090326175845.GA6756@denix.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: u-boot update question
+Message-Id: <200903270903.13523.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] Busybox 1.13.2 - modprobe.patch checksum update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +30,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 07:52:19 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Fri, 27 Mar 2009 08:05:07 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-> > And there is another question. How do i persuade bitbake to=20
-> > use u-boot_git.bb instead of u-boot_1.1.2.bb? I couldn't find=20
-> > DEFAULT_PREFERENCE items for the other machines in both=20
-> > recipes so i assumed that the git recipe is preferred to the=20
-> > other. But a "bitbake u-boot" still builds from 1.1.2 .  :(
->
-> conf/machine/oxnas.conf
+Dnia pi=C4=85tek, 27 marca 2009 o 00:16:05 Jeremy Williams napisa=C5=82(a):
+> Looks like busybox-1.13.2-modprobe.patch was modified, causing a
+> checksum failure.  Here's the patch:
 
-Yes, of course. I'm really mortified. ;-)
+That patch was moved to metadata. Please update.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
