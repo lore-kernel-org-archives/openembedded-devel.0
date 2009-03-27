@@ -1,34 +1,34 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LnA9r-0003bw-RL
-	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 12:23:31 +0100
+	id 1LnATE-00048j-L8
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 12:43:32 +0100
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LnA83-0002J3-60
-	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 11:21:39 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1LnARU-00033o-Us
+	for openembedded-devel@openembedded.org; Fri, 27 Mar 2009 11:41:45 +0000
+Received: from weppsb02.northropgrumman.com ([155.104.37.18])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 27 Mar 2009 11:21:39 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 27 Mar 2009 11:41:44 +0000
+Received: from jeremy.williams by weppsb02.northropgrumman.com with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 27 Mar 2009 11:21:39 +0000
+	Fri, 27 Mar 2009 11:41:44 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 27 Mar 2009 12:21:27 +0100
-Message-ID: <gqicrn$lmd$1@ger.gmane.org>
-References: <5c5e5c350903270322o7d0ded99k3a050586bfcef19a@mail.gmail.com>	<gqiaef$dms$1@ger.gmane.org>
-	<5c5e5c350903270406u79e73e71hb8092bd4e71d088d@mail.gmail.com>
+From: Jeremy Williams <jeremy.williams@ngc.com>
+Date: Fri, 27 Mar 2009 11:41:34 +0000 (UTC)
+Message-ID: <loom.20090327T113943-688@post.gmane.org>
+References: <loom.20090326T231434-944@post.gmane.org>
+	<200903270903.13523.marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
-In-Reply-To: <5c5e5c350903270406u79e73e71hb8092bd4e71d088d@mail.gmail.com>
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 155.104.37.18 (Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7 (.NET CLR 3.5.30729))
 Sender: news <news@ger.gmane.org>
-Subject: Re: xmms-tremor source file is no longer available
+Subject: Re: [PATCH] Busybox 1.13.2 - modprobe.patch checksum update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Mar 2009 11:23:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Mar 2009 11:43:32 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On 27-03-09 12:06, Elena of Valhalla wrote:
-> On Fri, Mar 27, 2009 at 11:40 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
->> On 27-03-09 11:22, Elena of Valhalla wrote:
->>> The package xmms-tremor fails in the do_fetch stage because it can't
->>> find the source tarball, is there a mirror anywhere?
->> Why isn't it fetching it from the angstrom source mirror?
->
-> probably because of a proxy misconfiguration on my side, I'll check that, thanks
+Marcin Juszkiewicz <marcin <at> juszkiewicz.com.pl> writes:
 
-I've heard of people having problems with OE not trying (or succeeding) 
-to use the source mirrors, and I'm curious what the problem is. The 
-SRC_URI usually gets fixed to quickly so people aren't debugging 
-mirroring problems :(
+> 
+> Dnia piątek, 27 marca 2009 o 00:16:05 Jeremy Williams napisał(a):
+> > Looks like busybox-1.13.2-modprobe.patch was modified, causing a
+> > checksum failure.  Here's the patch:
+> 
+> That patch was moved to metadata. Please update.
+> 
+> Regards, 
 
-regards,
+Marcin,
+  Sorry, did not notice that this patch was pulled from metadata.  This error,
+however, occured during build of a metadata pull performed just 18 hours ago. 
+Can you rebuild and confirm the checksum?
 
-Koen
+-jeremy
+
+
 
 
 
