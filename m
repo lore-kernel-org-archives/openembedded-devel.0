@@ -1,25 +1,27 @@
 Received: from [213.165.64.20] (helo=mail.gmx.net)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LnhqY-0007y0-9G
+	(envelope-from <s_buschmann@gmx.de>) id 1LnhyE-0000uC-RQ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Mar 2009 00:21:50 +0100
-Received: (qmail invoked by alias); 28 Mar 2009 23:19:52 -0000
-Received: from f053011046.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.11.46]
-	by mail.gmx.net (mp036) with SMTP; 29 Mar 2009 00:19:52 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX18ONvBFV6MO2tD283Q5HCDxpkLmw4hQDN5R+Eu65j
-	BwHOkHaVr+u3dT
-Message-ID: <49CEB099.4020009@gmx.net>
-Date: Sun, 29 Mar 2009 00:19:53 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+	Sun, 29 Mar 2009 00:29:47 +0100
+Received: (qmail invoked by alias); 28 Mar 2009 23:27:49 -0000
+Received: from p5481C8BA.dip.t-dialin.net (EHLO [192.168.2.107])
+	[84.129.200.186]
+	by mail.gmx.net (mp028) with SMTP; 29 Mar 2009 00:27:49 +0100
+X-Authenticated: #1404922
+X-Provags-ID: V01U2FsdGVkX19XHPQtmEBXRIm9QyJYuATanU9DjtNL1qmfA9KEJQ
+	G13TbQ1Jt962+h
+Message-ID: <49CEB274.9010001@gmx.de>
+Date: Sun, 29 Mar 2009 00:27:48 +0100
+From: Stefan Buschmann <s_buschmann@gmx.de>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Using OE <openembedded-users@lists.openembedded.org>
-X-Enigmail-Version: 0.95.0
+To: openembedded-devel@lists.openembedded.org
+References: <49C94FFC.1040604@gmx.de> <1237932496.16710.22.camel@alap>
+	<b84dee3a0903281042m552e0b32j9a196b96a95b769c@mail.gmail.com>
+In-Reply-To: <b84dee3a0903281042m552e0b32j9a196b96a95b769c@mail.gmail.com>
 X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.71
-Subject: FYI: cmake introduction
+X-FuHaFi: 0.76
+Subject: Re: python-ecore_svn fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,44 +35,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2009 23:21:50 -0000
-X-Groupsio-MsgNum: 8787
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig408D365AC83A64FFBA9E88FB"
-
---------------enig408D365AC83A64FFBA9E88FB
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-I just found a recording of the talk about cmake at FOSDEM 2009. I was
-at this presentation and it helped me a lot understanding how to use it.
-
-=2E.. and now just weeks later I can fumble around with our cmake.bbclass=
-
-and add a recipe that is using it (llvm 2.5).
-
-Highly recommended:
-http://free-electrons.com/pub/video/2009/fosdem/fosdem2009-neundorf-cmake=
-=2Eogv
-
-Regards
-Robert
+X-List-Received-Date: Sat, 28 Mar 2009 23:29:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
---------------enig408D365AC83A64FFBA9E88FB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Rafael Campos schrieb:
+> If you apply the following patch (update the EFL requiered verson) it
+> solves the problem.
+>   
+That did it :-) Now I was finally able to build the image again.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Thanks!
 
-iEYEAREIAAYFAknOsJkACgkQG9cfwmwwEtrlHQCgmd3RGsCFaMRr+/wzOygajkfJ
-BwQAn1a/AU2uZTHNrjKR4zFy3kkQZ9Ih
-=Rpjn
------END PGP SIGNATURE-----
+Stefan
 
---------------enig408D365AC83A64FFBA9E88FB--
+
+
