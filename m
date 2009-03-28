@@ -1,21 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1LngVa-000535-Jk; Sat, 28 Mar 2009 22:56:06 +0100
-Received: from 89-168-150-245.dynamic.dsl.as9105.com ([89.168.150.245]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1LngTg-0002b0-7m; Sat, 28 Mar 2009 21:54:08 +0000
-From: Phil Blundell <pb@reciva.com>
+	(envelope-from <denis@denix.org>) id 1LnhQf-0003AI-Sl
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 28 Mar 2009 23:55:06 +0100
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KH800FD8NKI385D@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	28 Mar 2009 17:53:07 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 682EB6B83A8; Sat,
+	28 Mar 2009 18:53:06 -0400 (EDT)
+Date: Sat, 28 Mar 2009 18:53:06 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090328211530.7700adb1@mail.villafam.com>
+Message-id: <20090328225306.GA13886@denix.org>
 References: <20090328211530.7700adb1@mail.villafam.com>
-Date: Sat, 28 Mar 2009 21:54:06 +0000
-Message-Id: <1238277247.30429.11.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
+	<1238277247.30429.11.camel@lenovo.internal.reciva.com>
+MIME-version: 1.0
+In-reply-to: <1238277247.30429.11.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
 Subject: Re: TinyLogin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,24 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2009 21:56:06 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 28 Mar 2009 22:55:06 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Sat, 2009-03-28 at 17:15 -0400, Juan C. Villa wrote:
-> Hey guys,
+On Sat, Mar 28, 2009 at 09:54:06PM +0000, Phil Blundell wrote:
+> On Sat, 2009-03-28 at 17:15 -0400, Juan C. Villa wrote:
+> > Hey guys,
+> > 
+> > I deleted my local download cache yesterday and I have not been able to rebuild my distro with OpenEmbedded because the TinyLogin (http://tinylogin.busybox.net/) program got merged into BusyBox. 
+> > 
+> > recipes/tinylogin/tinylogin_1.4.bb  needs to be updated.
+
+http://thread.gmane.org/gmane.comp.handhelds.openembedded/21701
+
+> Yes, it seems the crazy busybox dudes have removed the old tinylogin
+> sources.  That's a bit of a pain.
 > 
-> I deleted my local download cache yesterday and I have not been able to rebuild my distro with OpenEmbedded because the TinyLogin (http://tinylogin.busybox.net/) program got merged into BusyBox. 
-> 
-> recipes/tinylogin/tinylogin_1.4.bb  needs to be updated.
+> Are there any mirrors where the files are still available?
 
-Yes, it seems the crazy busybox dudes have removed the old tinylogin
-sources.  That's a bit of a pain.
+http://www.angstrom-distribution.org/unstable/sources/tinylogin-1.4.tar.bz2
 
-Are there any mirrors where the files are still available?
-
-p.
-
-
+-- 
+Denys
 
 
