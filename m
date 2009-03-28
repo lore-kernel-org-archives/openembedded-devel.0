@@ -1,21 +1,22 @@
-Received: from [216.14.122.30] (helo=mail.villafam.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <juanqui@villafam.com>) id 1LnfuA-0007MU-B2
-	for openembedded-devel@openembedded.org; Sat, 28 Mar 2009 22:17:26 +0100
-Received: from [128.61.92.189] ([128.61.92.189])
-	by mail.villafam.com (Kerio MailServer 6.6.2)
-	for openembedded-devel@openembedded.org;
-	Sat, 28 Mar 2009 16:15:30 -0500
-To: openembedded-devel@openembedded.org
-From: "Juan C. Villa" <juanqui@villafam.com>
-Message-ID: <20090328211530.7700adb1@mail.villafam.com>
-Date: Sat, 28 Mar 2009 17:15:30 -0400
-X-Mailer: Kerio MailServer 6.6.2 WebMail
-X-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.0.8) Gecko/2009032713 Fedora/3.0.8-1.fc10 Firefox/3.0.8
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: TinyLogin
+	(envelope-from <pb@reciva.com>)
+	id 1LngVa-000535-Jk; Sat, 28 Mar 2009 22:56:06 +0100
+Received: from 89-168-150-245.dynamic.dsl.as9105.com ([89.168.150.245]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1LngTg-0002b0-7m; Sat, 28 Mar 2009 21:54:08 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20090328211530.7700adb1@mail.villafam.com>
+References: <20090328211530.7700adb1@mail.villafam.com>
+Date: Sat, 28 Mar 2009 21:54:06 +0000
+Message-Id: <1238277247.30429.11.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
+Subject: Re: TinyLogin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,25 +30,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2009 21:17:26 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 28 Mar 2009 21:56:06 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hey guys,
+On Sat, 2009-03-28 at 17:15 -0400, Juan C. Villa wrote:
+> Hey guys,
+> 
+> I deleted my local download cache yesterday and I have not been able to rebuild my distro with OpenEmbedded because the TinyLogin (http://tinylogin.busybox.net/) program got merged into BusyBox. 
+> 
+> recipes/tinylogin/tinylogin_1.4.bb  needs to be updated.
 
-I deleted my local download cache yesterday and I have not been able to re=
-build my distro with OpenEmbedded because the TinyLogin (http://tinylogin.b=
-usybox.net/) program got merged into BusyBox.=20
+Yes, it seems the crazy busybox dudes have removed the old tinylogin
+sources.  That's a bit of a pain.
 
-recipes/tinylogin/tinylogin_1.4.bb  needs to be updated.
+Are there any mirrors where the files are still available?
 
-Regards,
--
-Juan C. Villa
-Computer Engineering
-Georgia Institute of Technology
-juanqui@gatech.edu
-(404)441-9653
-From pb@reciva.com Sat Mar 28 22:56:06 2009
-Received: from [82.71.203.194] (helo
+p.
+
+
+
+
