@@ -1,25 +1,24 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LnhQf-0003AI-Sl
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Lnhkx-0003hV-44
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Mar 2009 23:55:06 +0100
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KH800FD8NKI385D@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	28 Mar 2009 17:53:07 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 682EB6B83A8; Sat,
-	28 Mar 2009 18:53:06 -0400 (EDT)
-Date: Sat, 28 Mar 2009 18:53:06 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Sun, 29 Mar 2009 00:16:03 +0100
+Received: (qmail invoked by alias); 28 Mar 2009 23:14:04 -0000
+Received: from f053011046.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.11.46]
+	by mail.gmx.net (mp066) with SMTP; 29 Mar 2009 00:14:04 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18iE9wsSx0iL/0e4D/AYDXiR5E/oizXMPA2b/YI/a
+	L29TOwJX+UMjNh
+Message-ID: <49CEAF3E.2050805@gmx.net>
+Date: Sun, 29 Mar 2009 00:14:06 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090328225306.GA13886@denix.org>
-References: <20090328211530.7700adb1@mail.villafam.com>
-	<1238277247.30429.11.camel@lenovo.internal.reciva.com>
-MIME-version: 1.0
-In-reply-to: <1238277247.30429.11.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: TinyLogin
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.68
+Subject: OE presentations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +32,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2009 22:55:06 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 28 Mar 2009 23:16:03 -0000
+X-Groupsio-MsgNum: 8786
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig7FEBB3487946E63D0C3394D3"
 
-On Sat, Mar 28, 2009 at 09:54:06PM +0000, Phil Blundell wrote:
-> On Sat, 2009-03-28 at 17:15 -0400, Juan C. Villa wrote:
-> > Hey guys,
-> > 
-> > I deleted my local download cache yesterday and I have not been able to rebuild my distro with OpenEmbedded because the TinyLogin (http://tinylogin.busybox.net/) program got merged into BusyBox. 
-> > 
-> > recipes/tinylogin/tinylogin_1.4.bb  needs to be updated.
+--------------enig7FEBB3487946E63D0C3394D3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/21701
+Hi,
+I've done a presentation about OE at last years LinuxTag. I always
+license my stuff in a way that other people can reuse it. However making
+use of this offer is difficult if you have no way to find the
+presentation somewhere.
 
-> Yes, it seems the crazy busybox dudes have removed the old tinylogin
-> sources.  That's a bit of a pain.
-> 
-> Are there any mirrors where the files are still available?
+I thought that it would be very helpful for OE if we would maintain
+presentations about our project in the repository. This allows you to
+use the idea for your own presentation and safe some time.
 
-http://www.angstrom-distribution.org/unstable/sources/tinylogin-1.4.tar.bz2
+As such I created a folder contrib/presentations and put my slides from
+2008 in.
 
--- 
-Denys
+I also found a nice CC-BY-SA licensed presentation here[0] which I
+updated with information from 2009 and also put into the repository.
+
+Would be cool if you could also share your presentations (in source form
+please) if they are CC-BY-SA or similar.
+
+If you fear the repo becomes to crowded with these things than lets find
+a different solution.
+
+Regards
+Robert
+
+[0] - http://free-electrons.com/docs/openembedded/
 
 
+--------------enig7FEBB3487946E63D0C3394D3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAknOrz4ACgkQG9cfwmwwEtpV5gCfbhevIarmgFu6N6G2eoQ7YxQq
+vEMAni3N4vVmhNmvdMUk0bIPHzwKNEat
+=S7vB
+-----END PGP SIGNATURE-----
+
+--------------enig7FEBB3487946E63D0C3394D3--
