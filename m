@@ -1,25 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1Lnqu6-0005C7-31
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Mar 2009 11:02:06 +0200
-Received: from 89-168-150-245.dynamic.dsl.as9105.com ([89.168.150.245]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Lnqs9-0002oJ-CG
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Mar 2009 10:00:06 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090328225306.GA13886@denix.org>
-References: <20090328211530.7700adb1@mail.villafam.com>
-	<1238277247.30429.11.camel@lenovo.internal.reciva.com>
-	<20090328225306.GA13886@denix.org>
-Date: Sun, 29 Mar 2009 10:00:04 +0100
-Message-Id: <1238317204.30429.12.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LnrJw-0002Os-Hp
+	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 11:28:48 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LnrHz-0007R6-JM
+	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 09:26:47 +0000
+Received: from p030043.dynamic.ppp.asahi-net.or.jp ([221.113.30.43])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 29 Mar 2009 09:26:47 +0000
+Received: from no2spam by p030043.dynamic.ppp.asahi-net.or.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 29 Mar 2009 09:26:47 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 29 Mar 2009 18:26:29 +0900
+Message-ID: <gqnesc$r8i$1@ger.gmane.org>
+References: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>	<gqd33g$5vk$2@ger.gmane.org>
+	<1237985376.8711.7.camel@opal>
+	<f96d234e0903270719g1d0c2075lc440f8ddac0b4a94@mail.gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: TinyLogin
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p030043.dynamic.ppp.asahi-net.or.jp
+User-Agent: Thunderbird 2.0.0.21 (X11/20090319)
+In-Reply-To: <f96d234e0903270719g1d0c2075lc440f8ddac0b4a94@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,17 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Mar 2009 09:02:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 29 Mar 2009 09:28:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2009-03-28 at 18:53 -0400, Denys Dmytriyenko wrote:
-> http://www.angstrom-distribution.org/unstable/sources/tinylogin-1.4.tar.bz2
+Cliff Brake wrote:
+> Somehow if we can get bugs
+> assigned to the right people (listed in the maintainers file), then
+> maybe it would work better.
 
-Is that URL stable or is it liable to disappear?
-
-p.
-
+I agree, but it was heavily frowned upon when I assigned bugs to people. 
+  The compromise was cc'ing them instead.  I agree a sense of 
+responsibility for certain parts would make it easier to slice and dice 
+the tasks into more manageable pieces that people may feel an urge to 
+actually do something about.
 
 
 
