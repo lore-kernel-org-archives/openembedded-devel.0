@@ -1,30 +1,33 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LnuvZ-0006bI-EB
-	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 15:19:53 +0200
-Received: from p5b0350d5.dip.t-dialin.net ([91.3.80.213] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Lnuta-0002zc-Ux by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lnvoy-0004qS-5s
+	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 16:17:08 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lnvn1-0000jM-SD
+	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 14:15:07 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 29 Mar 2009 14:15:07 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sun, 29 Mar 2009 15:17:53 +0200
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1LnutZ-00031r-Ri
-	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 15:17:49 +0200
-Date: Sun, 29 Mar 2009 15:17:49 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sun, 29 Mar 2009 14:15:07 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20090329131749.GA350@excalibur.local>
-MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: [PATCH] connman: Package python test scripts into	connman-test-utils
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 29 Mar 2009 16:14:52 +0200
+Message-ID: <gqnvos$4qb$1@ger.gmane.org>
+References: <20090329131749.GA350@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
+In-Reply-To: <20090329131749.GA350@excalibur.local>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] connman: Package python test scripts into connman-test-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,80 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Mar 2009 13:19:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 29 Mar 2009 14:17:08 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
+On 29-03-09 15:17, Stefan Schmidt wrote:
+> Hello.
+>
+> I would like to get some feedback from other people using connman in OE. I did
+> the following to package the test scripts which enables you to install them as
+> separate package.
 
-I would like to get some feedback from other people using connman in OE. I did
-the following to package the test scripts which enables you to install them as
-separate package.
+The package is missing RDEPENDS on the necessary python interpreter and 
+modules.
 
-I'm also thinking about removing some older connman versions. Say everything
-below 0.14. (0.13 was broken from upstream)
+regards,
 
-Feedback?
-
-regards
-Stefan Schmidt
-
-
-From 0b61b8085f4c0cad0ff6137cb66fe71bda0c0a99 Mon Sep 17 00:00:00 2001
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-Date: Fri, 27 Mar 2009 17:36:46 +0100
-Subject: [PATCH] connman: Package python test scripts into connman-test-utils
-
----
- packages/connman/connman.inc     |    7 ++++++-
- packages/connman/connman_0.15.bb |    2 +-
- 2 files changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/packages/connman/connman.inc b/packages/connman/connman.inc
-index 5ca7723..dd845f5 100644
---- a/packages/connman/connman.inc
-+++ b/packages/connman/connman.inc
-@@ -26,6 +26,9 @@ do_configure_append() {
- 
- do_install_append() {
-     install -m 0755 ${WORKDIR}/connman ${D}${sysconfdir}/init.d/connman
-+    install -d ${D}${libdir}/connman/test/
-+    for file in test/*; do install -m 0755 $file ${D}${libdir}/connman/test/; done
-+    rm ${D}${libdir}/connman/test/Makefile*
- }
- 
- do_stage() {
-@@ -49,7 +52,7 @@ python populate_packages_prepend() {
- 
- PACKAGES_DYNAMIC = "${PN}-plugin-*"
- 
--PACKAGES += "${PN}-scripts"
-+PACKAGES += "${PN}-scripts ${PN}-test-utils"
- 
- FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
-             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-@@ -59,6 +62,8 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
-             ${libdir}/bonobo/servers \
-             ${datadir}/dbus-1/system-services/*"
- 
-+FILES_${PN}-test-utils += "${libdir}/connman/test/*"
-+
- FILES_${PN}-scripts += "${libdir}/connman/scripts"
- FILES_${PN}-dbg += "${libdir}/connman/*/.debug"
- FILES_${PN}-dev += "${libdir}/connman/*/*.la"
-diff --git a/packages/connman/connman_0.15.bb b/packages/connman/connman_0.15.bb
-index c2bb92b..4d86500 100644
---- a/packages/connman/connman_0.15.bb
-+++ b/packages/connman/connman_0.15.bb
-@@ -1,5 +1,5 @@
- require connman.inc
--PR = "r0"
-+PR = "r1"
- 
- EXTRA_OECONF += "\
-   --disable-gtk-doc \
--- 
-1.6.2.1
+Koen
 
 
 
