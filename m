@@ -1,33 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lnvoy-0004qS-5s
-	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 16:17:08 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lnvn1-0000jM-SD
-	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 14:15:07 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 29 Mar 2009 14:15:07 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 29 Mar 2009 14:15:07 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 29 Mar 2009 16:14:52 +0200
-Message-ID: <gqnvos$4qb$1@ger.gmane.org>
-References: <20090329131749.GA350@excalibur.local>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
-In-Reply-To: <20090329131749.GA350@excalibur.local>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] connman: Package python test scripts into connman-test-utils
+	(envelope-from <mickey@vanille-media.de>) id 1LnyLB-0007it-3U
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Mar 2009 18:58:34 +0200
+Received: from andromeda.vanille.de (e180130176.adsl.alicedsl.de
+	[85.180.130.176])
+	by drlauer-research.com (Postfix) with ESMTP id 2DD23584162
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Mar 2009 19:23:21 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 29 Mar 2009 17:56:30 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
+References: <20090329151859.F156EE806C@amethyst.openembedded.net>
+In-Reply-To: <20090329151859.F156EE806C@amethyst.openembedded.net>
+MIME-Version: 1.0
+Message-Id: <200903291856.30655.mickey@vanille-media.de>
+Subject: RFILES (was: ltp: Fix two QA issues; .debug leak and GNU_HASH.)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Mar 2009 14:17:08 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 29 Mar 2009 16:58:36 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 29-03-09 15:17, Stefan Schmidt wrote:
-> Hello.
->
-> I would like to get some feedback from other people using connman in OE. I did
-> the following to package the test scripts which enables you to install them as
-> separate package.
+On Sunday 29 March 2009 17:18:59 GIT User account wrote:
+> -FILES_${PN}-dbg =  "${libexecdir}/ltp/*/*/*/*/*/.debug"
+> +FILES_${PN}-dbg  = "${libexecdir}/ltp/*/*/*/*/*/*/*/*/*/.debug"
+> +FILES_${PN}-dbg += "${libexecdir}/ltp/*/*/*/*/*/*/*/*/.debug"
+> +FILES_${PN}-dbg += "${libexecdir}/ltp/*/*/*/*/*/*/*/.debug"
+> +FILES_${PN}-dbg += "${libexecdir}/ltp/*/*/*/*/*/*/.debug"
+> +FILES_${PN}-dbg += "${libexecdir}/ltp/*/*/*/*/*/.debug"
+>  FILES_${PN}-dbg += "${libexecdir}/ltp/*/*/*/*/.debug"
+>  FILES_${PN}-dbg += "${libexecdir}/ltp/*/*/*/.debug"
+>  FILES_${PN}-dbg += "${libexecdir}/ltp/*/*/.debug"
+>  FILES_${PN}-dbg += "${libexecdir}/ltp/*/.debug"
 
-The package is missing RDEPENDS on the necessary python interpreter and 
-modules.
+That's truely insane. I know there's currently no other way to do it like 
+that, but I'm willing to offer a bounty of like100 USD for someone who 
+implements the RFILES idea -- specifying FILES through regular expressions.
 
-regards,
-
-Koen
-
+:M:
 
 
