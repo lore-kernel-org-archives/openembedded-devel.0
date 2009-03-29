@@ -1,27 +1,25 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <s_buschmann@gmx.de>) id 1LnhyE-0000uC-RQ
+Received: from [82.71.203.194] (helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <pb@reciva.com>) id 1Lnqu6-0005C7-31
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Mar 2009 00:29:47 +0100
-Received: (qmail invoked by alias); 28 Mar 2009 23:27:49 -0000
-Received: from p5481C8BA.dip.t-dialin.net (EHLO [192.168.2.107])
-	[84.129.200.186]
-	by mail.gmx.net (mp028) with SMTP; 29 Mar 2009 00:27:49 +0100
-X-Authenticated: #1404922
-X-Provags-ID: V01U2FsdGVkX19XHPQtmEBXRIm9QyJYuATanU9DjtNL1qmfA9KEJQ
-	G13TbQ1Jt962+h
-Message-ID: <49CEB274.9010001@gmx.de>
-Date: Sun, 29 Mar 2009 00:27:48 +0100
-From: Stefan Buschmann <s_buschmann@gmx.de>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	Sun, 29 Mar 2009 11:02:06 +0200
+Received: from 89-168-150-245.dynamic.dsl.as9105.com ([89.168.150.245]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Lnqs9-0002oJ-CG
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Mar 2009 10:00:06 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-References: <49C94FFC.1040604@gmx.de> <1237932496.16710.22.camel@alap>
-	<b84dee3a0903281042m552e0b32j9a196b96a95b769c@mail.gmail.com>
-In-Reply-To: <b84dee3a0903281042m552e0b32j9a196b96a95b769c@mail.gmail.com>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.76
-Subject: Re: python-ecore_svn fails
+In-Reply-To: <20090328225306.GA13886@denix.org>
+References: <20090328211530.7700adb1@mail.villafam.com>
+	<1238277247.30429.11.camel@lenovo.internal.reciva.com>
+	<20090328225306.GA13886@denix.org>
+Date: Sun, 29 Mar 2009 10:00:04 +0100
+Message-Id: <1238317204.30429.12.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: TinyLogin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,20 +33,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Mar 2009 23:29:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 29 Mar 2009 09:02:06 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+On Sat, 2009-03-28 at 18:53 -0400, Denys Dmytriyenko wrote:
+> http://www.angstrom-distribution.org/unstable/sources/tinylogin-1.4.tar.bz2
 
-Rafael Campos schrieb:
-> If you apply the following patch (update the EFL requiered verson) it
-> solves the problem.
->   
-That did it :-) Now I was finally able to build the image again.
+Is that URL stable or is it liable to disappear?
 
-Thanks!
+p.
 
-Stefan
 
 
 
