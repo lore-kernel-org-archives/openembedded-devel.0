@@ -1,33 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LntXc-0007J7-5z
-	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 13:51:04 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LntVg-0003jC-Ab
-	for openembedded-devel@openembedded.org; Sun, 29 Mar 2009 11:49:04 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 29 Mar 2009 11:49:04 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 29 Mar 2009 11:49:04 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 29 Mar 2009 13:48:50 +0200
-Message-ID: <gqnn72$f5t$1@ger.gmane.org>
-References: <1237150071-24115-1-git-send-email-mad_soft@inbox.ru>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
-In-Reply-To: <1237150071-24115-1-git-send-email-mad_soft@inbox.ru>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH/RFC] base-files: add noatime to rootfs mount options
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lntjn-0007bF-Mg
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Mar 2009 14:03:39 +0200
+Received: by fxm20 with SMTP id 20so1515906fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Mar 2009 05:01:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=3Rihbm5XGfxXvfqhy4KwqkUK6MLiJDeUP1i726iBodI=;
+	b=cwMgCMjAty6ZD1+s1O6jU5K6cC8hJtRAMPhRrJiJd+0QIcGeqyDlRPH2L89RUurPRC
+	Z63xadzltOR4JyM7wcXcahxsIXnWyhi244aUBln+nyhvDC5fGTSGDJ4ZypbTSYyBYAcj
+	GKIygBPhX5kBd/tdDZv7NeMEzWH6+5j5Ozn/4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=QEklgFNHwfk/Ma/3lJW/BtgJnJNcQl0Um5kC3J7oja0ihzpKXbeeWPvDPcaUj3RrXI
+	AMH4BHYTW29oiRCET87FwSZdupmKVTvrg6l0Cl8e81MCBWHqrufVu5ByidU5oRJA4Cva
+	Qx04eKJPTribkqeGHsMEOm1EnSniYk5uSQ7/Q=
+MIME-Version: 1.0
+Received: by 10.223.105.72 with SMTP id s8mr3082934fao.9.1238328098192; Sun, 
+	29 Mar 2009 05:01:38 -0700 (PDT)
+In-Reply-To: <gqnesc$r8i$1@ger.gmane.org>
+References: <d1b08f940903250314r18e16be0k7989e6d51cee2c@mail.gmail.com>
+	<gqd33g$5vk$2@ger.gmane.org> <1237985376.8711.7.camel@opal>
+	<f96d234e0903270719g1d0c2075lc440f8ddac0b4a94@mail.gmail.com>
+	<gqnesc$r8i$1@ger.gmane.org>
+Date: Sun, 29 Mar 2009 14:01:38 +0200
+Message-ID: <ac9c93b10903290501i41fdac09i3838e00a652c8db9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Bugzilla Status (pitiful, penoso, penible, bedauerlich)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Mar 2009 11:51:04 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 29 Mar 2009 12:03:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 15-03-09 21:47, Dmitry Artamonow wrote:
-> In most machines' fstabs rootfs mounted with 'defaults' option.
-> This implies that atime logging is on - i.e. on every read from
-> filesystem kernel writes atime stamp to files' metadata.
-> Here in embedded world, where rootfs is usually stored on some
-> kind of flash (internal NAND/NOR, or external SD/MMC/CF card)
-> it is a real problem, because higher number of writes causes
-> flash wearing, higher system load and higher chance of filesystem
-> corruption.
+2009/3/29 Rolf Leggewie <no2spam@nospam.arcornews.de>:
+> Cliff Brake wrote:
+>>
+>> Somehow if we can get bugs
+>> assigned to the right people (listed in the maintainers file), then
+>> maybe it would work better.
 >
-> Fix it by adding noatime to rootfs mount options in fstab.
+> I agree, but it was heavily frowned upon when I assigned bugs to people.
+> =A0The compromise was cc'ing them instead. =A0I agree a sense of responsi=
+bility
+> for certain parts would make it easier to slice and dice the tasks into m=
+ore
+> manageable pieces that people may feel an urge to actually do something
+> about.
 
-Isn't 'relatime' a better option?
+It is just a matter of policy and understanding.
+For me if I were to get a bug assigned, I would interpreted it as:
+"hey soneone found a bug and perhaps you are the right person to look
+into it".
+If it was not for me, or I cannot fix it, I'd just give it back (and
+probably also if I don't have time or am not interested, however if
+that last thing happens often, then maybe you should not be a
+maintainer)
 
-regards,
-
-Koen
-
+Frans.
 
 
