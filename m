@@ -1,27 +1,39 @@
-Received: from [85.33.2.26] (helo=smtp-out26.alice.it)
+Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Lo3d7-0005cC-MK
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1Lo3zZ-00066N-Il
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 00:37:25 +0200
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out26.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 30 Mar 2009 00:35:21 +0200
-Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.1830); 
-	Mon, 30 Mar 2009 00:35:21 +0200
-Received: from localhost.localdomain ([79.1.229.158]) by FBCMCL01B05.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 30 Mar 2009 00:35:21 +0200
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Mar 2009 00:35:20 +0200
-Message-Id: <1238366120-28099-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.6.0.6
+	Mon, 30 Mar 2009 01:00:37 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so1201195ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Mar 2009 15:58:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=FHSw8PoGJs8d1OnhK+hgbm92/VXeqGaWQR/yew/6zbQ=;
+	b=lrTc345XFRjrkFCW+dw7c7y3EZsGy0fa2SVECop8E0XTjQLCYmbrD6+eAu1FauF0rw
+	sgL6Q/P+29XjPDPbTRUVJafsV+iWi+ggz+8W8LI34MwiYZC30feLY2SzcCq344/BYvTV
+	cAuWGl2bxGflm3QIdrBC78+96U3KjEp/r+B5o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=mk/JqF6XvkmEpITxtCeZ6SQs67SfybKFXevgZlMMJS99VAuRw5HdsUQfOcgldM9jL/
+	lJfCFTWLkPOIJjYG3RoBgXS1gEKC+wr9rm34KuSprRMbn/3fVrt/cMPdnP74Mzc7UFbs
+	0Jz1KRZo5OL3yD5wv41OfaxeuGa70GZvDDDX8=
+MIME-Version: 1.0
+Received: by 10.151.11.19 with SMTP id o19mr9260434ybi.58.1238367514962; Sun, 
+	29 Mar 2009 15:58:34 -0700 (PDT)
 In-Reply-To: <d1b08f940903291528i4fcd7139rc7d3cee88dd315d5@mail.gmail.com>
-References: <d1b08f940903291528i4fcd7139rc7d3cee88dd315d5@mail.gmail.com>
-X-OriginalArrivalTime: 29 Mar 2009 22:35:21.0181 (UTC)
-	FILETIME=[A4CAF8D0:01C9B0BE]
-Subject: [PATCH] kernel.bbclass: Automate uboot entry/load addresses detection.
+References: <1233319034.13141.2.camel@EPBYMINW0568>
+	<fce2a370902030302m1054bfc5wc5589ed60418c959@mail.gmail.com>
+	<gm99v0$ier$1@ger.gmane.org>
+	<fce2a370903030755n133906a3i32a25df5390d537@mail.gmail.com>
+	<d1b08f940903291528i4fcd7139rc7d3cee88dd315d5@mail.gmail.com>
+Date: Mon, 30 Mar 2009 01:58:34 +0300
+Message-ID: <fce2a370903291558o335ef90bj5ac7e23203f3d7a4@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Automate uboot entry/load addresses detection.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Mar 2009 22:37:26 -0000
+X-List-Received-Date: Sun, 29 Mar 2009 23:00:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
----
- classes/kernel.bbclass |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+Maybe I don't get it, but why do you need to send the patch on the ML
+again - with your own credit stuff?
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 17e8941..85a2e07 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -69,10 +69,6 @@ KERNEL_LOCALVERSION ?= ""
- # kernels are generally machine specific
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--# U-Boot support
--UBOOT_ENTRYPOINT ?= "20008000"
--UBOOT_LOADADDRESS ?= "${UBOOT_ENTRYPOINT}"
--
- kernel_do_compile() {
- 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
- 	oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-@@ -491,12 +487,16 @@ do_deploy() {
- 	if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
- 		if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
- 			${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
-+			 UBOOT_LOADADDRESS=`${OBJDUMP} -p arch/${ARCH}/boot/compressed/vmlinux | sed -n 's/LOAD.*vaddr \([^ ]*\).*/\1/p'`; \
-+			 UBOOT_ENTRYPOINT=`${OBJDUMP} -f arch/${ARCH}/boot/compressed/vmlinux | sed -n 's/.*start address \([^ ]*\).*/\1/p'`; \
- 			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
- 			rm -f linux.bin
- 		else
- 			${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
- 			rm -f linux.bin.gz
- 			gzip -9 linux.bin
-+			 UBOOT_LOADADDRESS=`${OBJDUMP} -p vmlinux | sed -n 's/LOAD.*vaddr \([^ ]*\).*/\1/p'`; \
-+			 UBOOT_ENTRYPOINT=`${OBJDUMP} -f vmlinux | sed -n 's/.*start address \([^ ]*\).*/\1/p'`; \
- 			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
- 			rm -f linux.bin.gz
- 		fi
--- 
-1.6.0.6
-
+2009/3/30 Andrea Adami <andrea.adami@gmail.com>:
+> Hi, I've tested the patch and it seems to work.
+> Thanks
+>
+> Andrea
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
