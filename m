@@ -1,33 +1,29 @@
-Received: from [212.27.42.6] (helo=smtp6-g21.free.fr)
+Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LoOV4-0002zl-Cz
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 22:54:30 +0200
-Received: from smtp6-g21.free.fr (localhost [127.0.0.1])
-	by smtp6-g21.free.fr (Postfix) with ESMTP id 9A7C8E081FE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 22:52:20 +0200 (CEST)
-Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
-	[81.56.56.40])
-	by smtp6-g21.free.fr (Postfix) with ESMTP id B470CE08125
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 22:52:17 +0200 (CEST)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id 2000F1840CC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 22:52:17 +0200 (CEST)
-Message-ID: <49D13101.3090309@bolloretelecom.eu>
-Date: Mon, 30 Mar 2009 22:52:17 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
-	Mnenhy/0.7.5.0
+	(envelope-from <trini@kernel.crashing.org>) id 1LoOcy-0003Ir-AW
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 23:02:40 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090330210006.QGDY4363.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 17:00:06 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id ZZ051b00R4dMFYL04Z05wN; Mon, 30 Mar 2009 17:00:05 -0400
+X-Authority-Analysis: v=1.0 c=1 a=6WQpoopjgy8A:10 a=v6f0jDbYLdupzSdXdFQA:9
+	a=3l4NRdUoTpTXSZ5okCxlTvCI24AA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Mon, 30 Mar 2009 14:00:05 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090330210005.GF14278@smtp.west.cox.net>
+References: <200903302155.17027.joerg@hakker.de>
+	<20090330200610.GD14278@smtp.west.cox.net>
+	<200903302236.41493.joerg@hakker.de>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49C9FEFF.2010802@bolloretelecom.eu>	<49CBD43B.6070402@bolloretelecom.eu>
-	<20090327171729.413357e7@kmfms>
-In-Reply-To: <20090327171729.413357e7@kmfms>
-Subject: Re: Dropping qt4-x11-free versions 4.1.2 and 4.3.3?
+In-Reply-To: <200903302236.41493.joerg@hakker.de>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] linux-epia-2.6.19.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,29 +37,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 20:54:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Mar 2009 21:02:40 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-> Looks like something stuck around from 4.4.3.
+On Mon, Mar 30, 2009 at 10:36:41PM +0200, Jörg Bakker wrote:
+> Am Montag 30 März 2009 22:06:10 schrieb Tom Rini:
+> > On Mon, Mar 30, 2009 at 09:55:16PM +0200, Jörg Bakker wrote:
+> > > Building of linux-epia-2.6.19.2 stops with the following error:
+> >
+> > [snip]
+> >
+> > This is actually quite a common error.  Can we call the patch something
+> > more generic and stick it into files/ ? Thanks.
+> 
+> ok, called the actual patch linux-2.6-limits.patch and moved it to files/
+> 
+> Resulting diff is attached. However, the patch is currently only applyed in 
+> linux-epia_2.6.19.2.bb as I don't know which recipes are affected also.
 
-You need to explicitly mark qt4-tools-native 4.5.0 as preferred in your l=
-ocal.conf. For
-instance I have:
+Pushed (and added to the nokia recipes which I always hit this on).
 
-PREFERRED_VERSION_qt4-tools-native =3D "4.5.0"
-PREFERRED_VERSION_qt4-x11-free =3D "4.5.0"
-PREFERRED_VERSION_qt4-embedded =3D "4.5.0"
-
-Also, you might consider using "oestats" so we can track successful / fai=
-led builds:
-
-http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_an=
-d_failure_reports
-
-Cheers,
---=20
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+-- 
+Tom Rini
 
 
