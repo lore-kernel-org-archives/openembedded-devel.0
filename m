@@ -1,29 +1,30 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [59.124.115.149] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LoOcy-0003Ir-AW
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 23:02:40 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090330210006.QGDY4363.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 30 Mar 2009 17:00:06 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id ZZ051b00R4dMFYL04Z05wN; Mon, 30 Mar 2009 17:00:05 -0400
-X-Authority-Analysis: v=1.0 c=1 a=6WQpoopjgy8A:10 a=v6f0jDbYLdupzSdXdFQA:9
-	a=3l4NRdUoTpTXSZ5okCxlTvCI24AA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 30 Mar 2009 14:00:05 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090330210005.GF14278@smtp.west.cox.net>
-References: <200903302155.17027.joerg@hakker.de>
-	<20090330200610.GD14278@smtp.west.cox.net>
-	<200903302236.41493.joerg@hakker.de>
-MIME-Version: 1.0
-In-Reply-To: <200903302236.41493.joerg@hakker.de>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] linux-epia-2.6.19.2
+	(envelope-from <nytowl@openmoko.org>) id 1LoQC7-0007aE-Sg
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 31 Mar 2009 00:43:04 +0200
+Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
+	helo=[172.16.14.116]) by aakash.openmoko.org with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <nytowl@openmoko.org>) id 1LoQ9m-0001Fz-HY
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 31 Mar 2009 06:40:52 +0800
+From: Angus Ainslie <nytowl@openmoko.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Mar 2009 16:40:29 -0600
+Message-Id: <1238452829.7128.4.camel@alap>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 70.73.132.19
+X-SA-Exim-Mail-From: nytowl@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: [PATCH] add hotplug2 package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,29 +38,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 21:02:40 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 30 Mar 2009 22:43:04 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 30, 2009 at 10:36:41PM +0200, Jörg Bakker wrote:
-> Am Montag 30 März 2009 22:06:10 schrieb Tom Rini:
-> > On Mon, Mar 30, 2009 at 09:55:16PM +0200, Jörg Bakker wrote:
-> > > Building of linux-epia-2.6.19.2 stops with the following error:
-> >
-> > [snip]
-> >
-> > This is actually quite a common error.  Can we call the patch something
-> > more generic and stick it into files/ ? Thanks.
-> 
-> ok, called the actual patch linux-2.6-limits.patch and moved it to files/
-> 
-> Resulting diff is attached. However, the patch is currently only applyed in 
-> linux-epia_2.6.19.2.bb as I don't know which recipes are affected also.
 
-Pushed (and added to the nokia recipes which I always hit this on).
+---
+ conf/checksums.ini                        |    4 +++
+ packages/hotplug2/hotplug2_0.9+1.0beta.bb |   31
++++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+), 0
+deletions(-)                             
+ create mode 100644 packages/hotplug2/hotplug2_0.9
++1.0beta.bb                  
 
--- 
-Tom Rini
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 9548a02..c5e6910 100644                       
+--- a/conf/checksums.ini                            
++++ b/conf/checksums.ini                            
+@@ -9318,6 +9318,10 @@
+sha256=af40399fe434678454ae8ea100db6cba0482aa65b8972a05098c779cac57bc48
+
+md5=faa08f321fefd2c61ce4c9355a62fe31                                                         
+
+sha256=ca7ef124cde06883fbf28c7e78ce1e4c5526434bbe5672ef0a3e85a61a9d0b5f                      
+                                                                                              
++[http://isteve.bofh.cz/~isteve/hotplug2/downloads/hotplug2-1.0-beta.tar.gz]                  
++md5=353656ea499d395260c0de143983da4d                                                         
++sha256=54e2fa375506d92a8ac94b5ed332c4c0bf1b69c252692b332c92702670bba583                      
++                                                                                             
+
+[http://www.porchdogsoft.com/download/howl-0.9.7.tar.gz]                                     
+
+md5=85fbe016e2ebad99108b1212ae4b1d6f                                                         
+
+sha256=f8766c44291aac92b2b4abc762e1b11e3504dd9f2a855fdde371b5abd730fe9f                      
+diff --git a/packages/hotplug2/hotplug2_0.9+1.0beta.bb
+b/packages/hotplug2/hotplug2_0.9+1.0beta.bb
+new file mode 100644
+index 0000000..8ae5149
+--- /dev/null
++++ b/packages/hotplug2/hotplug2_0.9+1.0beta.bb
+@@ -0,0 +1,31 @@
++DESCRIPTION = "hotplug2 is a daemon which dynamically creates and
+removes device nodes from \
++/dev/, handles hotplug events and loads drivers at boot time. It
+replaces \
++the hotplug and udev packages and requires a kernel not older than
+2.6.12."
++RPROVIDES_${PN} = "hotplug"
++RREPLACES_${PN} = "udev"
++PR = "r0"
++
++SRC_URI =
+"http://isteve.bofh.cz/~isteve/hotplug2/downloads/hotplug2-1.0-beta.tar.gz \
++           "
++
++S = "${WORKDIR}/hotplug2-1.0-beta"
++
++DEFAULT_PREFERENCE = "-1"
++
++inherit autotools
++
++INITSCRIPT_PARAMS = "start 03 S ."
++
++LDFLAGS += "-lglibc"
++DESTDIR=${D}
++
++do_configure () {
++}
++
++do_install_prepend () {
++        install -d ${D}/lib/hotplug2
++        install -d ${D}/sbin
++}
++
++FILES_${PN} += "${base_libdir}/hotplug2/*"
++FILES_${PN}-dbg += "${base_libdir}/hotplug2/.debug"
+--
+1.5.6.3
+
+
 
 
