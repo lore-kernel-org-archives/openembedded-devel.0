@@ -1,35 +1,39 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elena.valhalla@gmail.com>) id 1LoDCN-0008D7-Mc
+	(envelope-from <hs4233@mail.mn-solutions.de>) id 1LoDIC-0008MB-Ap
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 10:50:27 +0200
-Received: by bwz19 with SMTP id 19so1744797bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 01:48:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=jcDrSrTXh6LC7MvHhACpNcVCE2NyPLZSKO4Kbplw0Os=;
-	b=HZoGUy04ZSM/ygSwnPxHKIEB47hDbrjgfeCwoNVNOhk9LBi69k84GYADLkrSYE149Y
-	VjXoPgzV+DQyWOhcKF7+sqlg7Mn+qgpwkstWCleE1ukBNiAQ791XPYmny9enjuMKOUYn
-	qDRC/OdGnOtsiQC/xzpF5ylrVwnGz5mUFc0t4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=EL0dYDogKReoVsO99IpfsDkx/N7Rd3VV3qq7smuRCfi509rGRKyNJhQfg6PfVi7xqw
-	f5yveEJzxkOf2wi/WABlmNF8H2uhhaB43Uw7Sf3E2JZQUhZOHJhL9a0BR/u+Mlstqzea
-	KUBaECXyFjPs1t4wmbUnEeH1Levri5m0znYxg=
-MIME-Version: 1.0
-Received: by 10.223.111.134 with SMTP id s6mr3699739fap.60.1238402900481; Mon, 
-	30 Mar 2009 01:48:20 -0700 (PDT)
-In-Reply-To: <49CEAF3E.2050805@gmx.net>
-References: <49CEAF3E.2050805@gmx.net>
-Date: Mon, 30 Mar 2009 10:48:20 +0200
-Message-ID: <5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
-From: Elena of Valhalla <elena.valhalla@gmail.com>
+	Mon, 30 Mar 2009 10:56:28 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id 7199014800B;
+	Mon, 30 Mar 2009 10:54:23 +0200 (CEST)
+X-Virus-Scanned: by Mittwald Mailscanner
+Received: from mx51.mymxserver.com ([127.0.0.1])
+	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id KKz93J1zNXha; Mon, 30 Mar 2009 10:54:23 +0200 (CEST)
+Received: from lin01.mn-solutions.de (pD95F9863.dip0.t-ipconnect.de
+	[217.95.152.99])
+	by mx51.mymxserver.com (Postfix) with ESMTP id CC593148075;
+	Mon, 30 Mar 2009 10:54:20 +0200 (CEST)
+Received: by lin01.mn-solutions.de (Postfix, from userid 116)
+	id 466511E0122; Mon, 30 Mar 2009 10:54:20 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	lin01.mn-logistik.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
+	by lin01.mn-solutions.de (Postfix) with ESMTP id EF51B1E0100;
+	Mon, 30 Mar 2009 10:54:16 +0200 (CEST)
+From: Holger Schurig <hs4233@mail.mn-solutions.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: OE presentations
+Date: Mon, 30 Mar 2009 09:53:34 +0100
+User-Agent: KMail/1.9.7
+References: <20090328211530.7700adb1@mail.villafam.com>
+In-Reply-To: <20090328211530.7700adb1@mail.villafam.com>
+MIME-Version: 1.0
+Message-Id: <200903301053.34937.hs4233@mail.mn-solutions.de>
+Cc: openembedded-devel@openembedded.org
+Subject: Re: TinyLogin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +47,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 08:50:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Mar 2009 08:56:28 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-2009/3/29 Robert Schuster <theBohemian@gmx.net>:
-> I thought that it would be very helpful for OE if we would maintain
-> presentations about our project in the repository. This allows you to
-> use the idea for your own presentation and safe some time. [...]
-> Would be cool if you could also share your presentations (in source form
-> please) if they are CC-BY-SA or similar.
+> recipes/tinylogin/tinylogin_1.4.bb  needs to be updated.
 
-I did a presentation on OE for the local LUG and wrote some material
-for it, but it is in italian, would it be interesting anyway?
-
-I still have to put a licence on it, but it will probably be either
-CC-BY-SA or CC-BY
-
-it can be seen here, page in italian:
-http://www.lifolab.org/index.php/Seminari_2009#19_gennaio:_OpenEmbedded
-
--- 
-Elena ``of Valhalla''
-
-email: elena.valhalla@gmail.com
+And maybe it should be deprecated as well. With Busybox 1.13.3 
+you won't need TinyLogin at all.
 
 
