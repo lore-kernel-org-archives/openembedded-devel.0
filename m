@@ -1,34 +1,46 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LoDS9-0000Nc-HG
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 11:06:45 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LoDQ7-0006gx-Ul
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 09:04:39 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 30 Mar 2009 09:04:39 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 30 Mar 2009 09:04:39 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 30 Mar 2009 11:04:27 +0200
-Message-ID: <gqq1us$1hk$1@ger.gmane.org>
-References: <20090328211530.7700adb1@mail.villafam.com>
-	<200903301053.34937.hs4233@mail.mn-solutions.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
-In-Reply-To: <200903301053.34937.hs4233@mail.mn-solutions.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: TinyLogin
+	(envelope-from <stefano.regno@spesonline.com>) id 1LoDVP-0000Xu-ST
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Mar 2009 11:10:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id A4EBD95A71
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
+Received: from sirio.fastnet.it ([127.0.0.1])
+	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 21452-01-10 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
+Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
+	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 8582895A67
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 6CF8A1D9450
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
+Received: from sole.fastnet.it ([127.0.0.1])
+	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
+	id 18848-01-6 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
+Received: from [192.168.1.215]
+	(host141-216-static.91-82-b.business.telecomitalia.it
+	[82.91.216.141])
+	by sole.fastnet.it (FASTnet-NAP) with ESMTP id EA7C31D71E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 11:08:01 +0200 (CEST)
+Message-ID: <49D08BEF.5090202@spesonline.com>
+Date: Mon, 30 Mar 2009 11:07:59 +0200
+From: Stefano Regno <stefano.regno@spesonline.com>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <49CEAF3E.2050805@gmx.net>
+	<5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
+In-Reply-To: <5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
+Subject: Re: OE presentations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +54,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 09:06:45 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 30 Mar 2009 09:10:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 30-03-09 10:53, Holger Schurig wrote:
->> recipes/tinylogin/tinylogin_1.4.bb  needs to be updated.
+Elena of Valhalla wrote:
+> 2009/3/29 Robert Schuster <theBohemian@gmx.net>:
+>   
+>> I thought that it would be very helpful for OE if we would maintain
+>> presentations about our project in the repository. This allows you to
+>> use the idea for your own presentation and safe some time. [...]
+>> Would be cool if you could also share your presentations (in source form
+>> please) if they are CC-BY-SA or similar.
+>>     
 >
-> And maybe it should be deprecated as well. With Busybox 1.13.3
-> you won't need TinyLogin at all.
+> I did a presentation on OE for the local LUG and wrote some material
+> for it, but it is in italian, would it be interesting anyway?
+>
+> I still have to put a licence on it, but it will probably be either
+> CC-BY-SA or CC-BY
+>
+> it can be seen here, page in italian:
+> http://www.lifolab.org/index.php/Seminari_2009#19_gennaio:_OpenEmbedded
+>
+>   
+Trovo il tuo lavoro molto interessante, potrei partecipare "lavoro 
+permettendo anche io"
 
-You do if you don't want busybox to run setuid root.
+Saluti Stefano.
 
-regards,
 
-Koen
+-- 
+Peace cannot be kept by force; it can only be achieved by understanding --Albert Einstein
+
 
 
 
