@@ -1,39 +1,28 @@
-Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hs4233@mail.mn-solutions.de>) id 1LoDgR-00013m-Pv
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 11:21:31 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id 24C833A013;
-	Mon, 30 Mar 2009 11:19:27 +0200 (CEST)
-X-Virus-Scanned: by Mittwald Mailscanner
-Received: from mx51.mymxserver.com ([127.0.0.1])
-	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iBNm1Wa2Fr+c; Mon, 30 Mar 2009 11:19:27 +0200 (CEST)
-Received: from lin01.mn-solutions.de (pD95F9863.dip0.t-ipconnect.de
-	[217.95.152.99])
-	by mx51.mymxserver.com (Postfix) with ESMTP id B8FFB3A006;
-	Mon, 30 Mar 2009 11:19:26 +0200 (CEST)
-Received: by lin01.mn-solutions.de (Postfix, from userid 116)
-	id 4F1681E0122; Mon, 30 Mar 2009 11:19:26 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	lin01.mn-logistik.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
-	by lin01.mn-solutions.de (Postfix) with ESMTP id A404D1E0100;
-	Mon, 30 Mar 2009 11:19:21 +0200 (CEST)
-From: Holger Schurig <hs4233@mail.mn-solutions.de>
+	(envelope-from <pb@reciva.com>)
+	id 1LoERY-0007Hf-QZ; Mon, 30 Mar 2009 12:10:13 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>)
+	id 1LoEPS-0005uh-7B; Mon, 30 Mar 2009 11:08:03 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>)
+	id 1LoEPR-0005lv-7z; Mon, 30 Mar 2009 11:08:01 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Mar 2009 10:18:38 +0100
-User-Agent: KMail/1.9.7
+In-Reply-To: <200903301118.38613.hs4233@mail.mn-solutions.de>
 References: <20090328211530.7700adb1@mail.villafam.com>
 	<200903301053.34937.hs4233@mail.mn-solutions.de>
 	<gqq1us$1hk$1@ger.gmane.org>
-In-Reply-To: <gqq1us$1hk$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200903301118.38613.hs4233@mail.mn-solutions.de>
-Cc: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
+	<200903301118.38613.hs4233@mail.mn-solutions.de>
+Date: Mon, 30 Mar 2009 11:08:01 +0100
+Message-Id: <1238407681.16991.114.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: openembedded-devel@openembedded.org
 Subject: Re: TinyLogin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,48 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 09:21:32 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 30 Mar 2009 10:10:13 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-> > And maybe it should be deprecated as well. With Busybox
-> > 1.13.3 you won't need TinyLogin at all.
->
-> You do if you don't want busybox to run setuid root.
+On Mon, 2009-03-30 at 10:18 +0100, Holger Schurig wrote:
+> Is this a problem?  After all, busybox can drop priviledges:
 
-Is this a problem?  After all, busybox can drop priviledges:
+Indeed it can, and for some distros that might well be a fine solution.
+However, for other distros the prospect of a setuid-root busybox is an
+unwelcome one, typically for some combination of the following reasons:
 
--------------------------------
-CONFIG_FEATURE_SUID
+- making busybox be setuid means that you need to trust all the applets
+to drop privileges that they don't need;
 
-With this option you can install the busybox binary belonging to 
-root with the suid bit set, and it will automatically drop 
-priviledges for applets that don't need root access.
--------------------------------
+- there's no way of telling, from inspection of the binary, which
+applets will run as setuid and which won't, nor of changing the setuid
+attribute on individual applets without recompiling;
 
-The text goes further in case you don't trust busybox' auto-drop 
-capability:
+- security auditing is difficult, since the large amount of code-sharing
+in busybox makes it hard to determine which functions can potentially be
+called from a setuid context;
 
--------------------------------
-If you are really paranoid and don't want to do this, build two 
-busybox binaries with different applets in them (and the 
-appropriate symlinks pointing to each binary), and only set the 
-suid bit on the one that needs it. The applets currently marked 
-to need the suid bit are:
+- the relatively high rate of code churn, combined with the large amount
+of code re-use and the fact that there's no inbuilt guard against
+accidentally mixing privilege domains, means that any audit would be
+likely to need repeating frequently.
 
-crontab, dnsd, findfs, ipcrm, ipcs, login, passwd, ping, su,
-traceroute, vlock.
-----------------------------------
+> If you are really paranoid and don't want to do this, build two 
+> busybox binaries with different applets in them
+
+That does help with the first two points above, but not with the latter
+two.  And, if you're going to build a separate binary for the login
+utilities, you might just as well have gone on using tinylogin in the
+first place.
+
+p.
 
 
-So, the paranoid thinking would make a tinylogin_1.13_3.bb file, 
-which has busybox 1.13.3 in it's SRC_URI, select only the stuff 
-needed for passwd, login, su and friends and install that a 
-SUID.
-
-In the meantime, I'm happy with my CONFIG_FEATURE_SUID-configured 
-busybox :-)
 
 
