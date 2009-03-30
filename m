@@ -1,34 +1,22 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1LoGu4-0002rp-P6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 14:47:48 +0200
-Received: from w1517.wlan.rz.tu-bs.de ([134.169.205.247] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1LoGrx-00088C-Cy by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 14:45:42 +0200
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1LoGrw-0002oN-Px
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 14:45:36 +0200
-Date: Mon, 30 Mar 2009 14:45:36 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090330124536.GD10473@excalibur.local>
-References: <20090329131749.GA350@excalibur.local> <gqnvos$4qb$1@ger.gmane.org>
+	(envelope-from <mwester@dls.net>) id 1LoI1N-0001fn-Uq
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 15:59:26 +0200
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx01.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LoHzJ-0005wm-Rz
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 08:57:17 -0500
+Message-ID: <49D0CFC7.9090902@dls.net>
+Date: Mon, 30 Mar 2009 08:57:27 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-In-Reply-To: <gqnvos$4qb$1@ger.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: [PATCH] connman: Package python test scripts into	connman-test-utils
+To: openembedded-devel@openembedded.org
+References: <20090328211530.7700adb1@mail.villafam.com>	<200903301254.51359.hs4233@mail.mn-solutions.de>	<1238411534.16991.120.camel@mill.internal.reciva.com>
+	<200903301333.04881.hs4233@mail.mn-solutions.de>
+In-Reply-To: <200903301333.04881.hs4233@mail.mn-solutions.de>
+Subject: Re: TinyLogin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 12:47:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Mar 2009 13:59:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello.
+Holger Schurig wrote:
 
-On Sun, 2009-03-29 at 16:14, Koen Kooi wrote:
-> On 29-03-09 15:17, Stefan Schmidt wrote:
->>
->> I would like to get some feedback from other people using connman in OE. I did
->> the following to package the test scripts which enables you to install them as
->> separate package.
->
-> The package is missing RDEPENDS on the necessary python interpreter and  
-> modules.
+> However, I like to base fear on evidence, that's why I replied.
 
-Good point. That reminds me of some other recipes that lack such things. Will
-have a look at them later.
+Having spent 4 years of my life working in the security space, and a
+year of that actually reviewing source code for security-related issues,
+I can safely say that in my part of the world (central US), it is the
+other way around:
 
-I'm wondering how I should handle this case as connman itself does not RDEPEND
-on python here. Is there a special trick for such FILE_${PN} packages and
-RDEPENDS?
+when security is involved, fear is based on _lack_ of evidence of
+correctness.
 
-regards
-Stefan Schmidt
+Due to its size and frequency of change the code is impossible for human
+review, and due to structure of the code, it is unlikely for automated
+commercial tools to be able to do much with it (I know; I tried once).
+
+IMO (for what that's worth), we need to support the "everything is
+busybox!" sort of build; there's just no alternative for small devices.
+ But the problem is what do we do for that middle ground, for devices
+that can't fit the entire set of "proper" tools but might not be willing
+to take the security risk associated with running busybox SETUID.
+
+I rather suspect tinylogin will live on, even if maintenance is minimal.
+
+-Mike (mwester)
 
 
