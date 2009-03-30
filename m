@@ -1,41 +1,20 @@
-Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
+Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LoBSQ-0001Vm-IL
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 08:58:58 +0200
-Received: by wa-out-1112.google.com with SMTP id n7so1111035wag.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Mar 2009 23:56:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=6QPWranzHIdQNYrA36tEN9vZgMiA6kpyUPGhOqip0c8=;
-	b=f1NsL6rmqkqbV/ieaTKJ3u0JcNM0CMDFXpZShrT9DKr05Gj5+y3l1lJq9lGkiZtQnh
-	DNuEx0md+EbMBLMXNXwRFT/Yll+dOAm+ke0lM3ymmNr0csiTuX37mb/HIJ1izIaw5LG6
-	LE15wWerqqjV07n7fDrIcY5jfKJKDCxYBov30=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:cc:references:in-reply-to
-	:mime-version:content-type:content-transfer-encoding:message-id;
-	b=UQ7oQqcnP1qsnKeJEcAikw4GaE2QvQD7X+R+zOEXdOUu9IUdZxVhwm1wlS8/UUnGFA
-	PcfZYyI+z7Ir4fDNQSiaFFJ/pO6P6TCkgF6mkUjZ03Fzxkac2IMhlzvnHjqQlpCquWyQ
-	SRvhKpfNhMIRWWwI5tOZMRz8kSUnHH/x2Ue1E=
-Received: by 10.114.37.1 with SMTP id k1mr3391673wak.28.1238396209457;
-	Sun, 29 Mar 2009 23:56:49 -0700 (PDT)
-Received: from morpheus.localnet (adsl-71-146-12-154.dsl.pltn13.sbcglobal.net
-	[71.146.12.154])
-	by mx.google.com with ESMTPS id j28sm4245254waf.39.2009.03.29.23.56.48
-	(version=SSLv3 cipher=RC4-MD5); Sun, 29 Mar 2009 23:56:48 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Mar 2009 23:56:41 -0700
-User-Agent: KMail/1.11.1 (Linux/2.6.28-11-generic; KDE/4.2.1; x86_64; ; )
-References: <ef4946070903292210t3ce4885cj1298cdaa0253ffdf@mail.gmail.com>
-	<ef4946070903292211k78cec1faq4b66a9d1e80b4d15@mail.gmail.com>
-In-Reply-To: <ef4946070903292211k78cec1faq4b66a9d1e80b4d15@mail.gmail.com>
+	(envelope-from <khimov@altell.ru>) id 1LoCRc-00089V-Ru
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 10:02:08 +0200
+Received: from localhost.localdomain (unknown [192.168.1.115])
+	by mail.altell.local (Postfix) with ESMTP id D84A26831B;
+	Mon, 30 Mar 2009 11:59:57 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@openembedded.org
+Date: Mon, 30 Mar 2009 11:59:57 +0400
+Message-Id: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.2.1
 MIME-Version: 1.0
-Message-Id: <200903292356.46899.raj.khem@gmail.com>
-Subject: Re: Addition of the Coyote Linux distro and HAProxy
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-Spam-Status: No
+Subject: [PATCH] image.bbclass: reorder do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +28,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 06:59:00 -0000
-X-Groupsio-MsgNum: 8810
-Content-Type: multipart/signed; boundary="nextPart1778581.1esocLVcoe";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 Mar 2009 08:02:09 -0000
 
---nextPart1778581.1esocLVcoe
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Places do_rootfs function before do_install in image creation process.
 
-On Sunday 29 March 2009 22:11:33 Joshua Jackson wrote:
-> Helps if I actually attach a patch file...
-> --
-> Joshua Jackson
-> Vortech Consulting, LLC
->=20
+This change allows multiimage builds, when one image depends on another (before
+that second image creation raced with do_rootfs for the first one) and uses
+it for some purpose.
 
-You do not chose binutils and gcc in conf file. So it will pick whatever bi=
-tbake decides. IMO you should
-use a preferred version
+Multiimage builds are useful in situations like creating an installer image
+with initramfs (built in OE) and an image of the target FS (also built in OE)
+or for building virtualized system images to be placed on target FS.
+---
+ classes/image.bbclass |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-=46or glibc=20
+diff --git a/classes/image.bbclass b/classes/image.bbclass
+index fd0df4d..3a0bc32 100644
+--- a/classes/image.bbclass
++++ b/classes/image.bbclass
+@@ -106,6 +106,7 @@ do_rootfs[nostamp] = "1"
+ do_rootfs[dirs] = "${TOPDIR}"
+ do_rootfs[lockfiles] = "${IMAGE_ROOTFS}.lock"
+ do_build[nostamp] = "1"
++do_install[nostamp] = "1"
+ 
+ # Must call real_do_rootfs() from inside here, rather than as a separate
+ # task, so that we have a single fakeroot context for the whole process.
+@@ -234,5 +235,5 @@ rootfs_update_timestamp () {
+ # export the zap_root_password, create_etc_timestamp and remote_init_link
+ EXPORT_FUNCTIONS zap_root_password create_etc_timestamp remove_init_link do_rootfs make_zimage_symlink_relative set_image_autologin rootfs_update_timestamp
+ 
+-addtask rootfs before do_build after do_install
++addtask rootfs after do_compile before do_install
+ addtask deploy_to after do_rootfs
+-- 
+1.6.2.1
 
-+PREFERRED_VERSION_glibc =3D "2.5"
-+PREFERRED_VERSION_glibc-cross =3D "2.5"
-+PREFERRED_VERSION_glibc-cross-sdk =3D "2.5"
-+PREFERRED_VERSION_glibc-cross-initial =3D "2.5"
-+PREFERRED_VERSION_glibc-cross-intermediate =3D "2.5"
 
-I think you only need PREFERRED_VERSION_glibc and PREFERRED_VERSION_glibc-i=
-nitial=20
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
 
-=2D-=20
-Khem Raj
 
---nextPart1778581.1esocLVcoe
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAknQbSoACgkQHnJKy6V6em5o3gCcD3yd886uEr33pJNHY8ORJrPp
-rQ0AnjOmZLOC+iX+LU+XYRxztXaauM/r
-=BUPY
------END PGP SIGNATURE-----
-
---nextPart1778581.1esocLVcoe--
