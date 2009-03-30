@@ -1,26 +1,28 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Lo9sB-00062N-NH
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 07:17:23 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KHA005NXZWWES7G@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	30 Mar 2009 00:15:02 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0E10E6B83A8; Mon,
-	30 Mar 2009 01:14:56 -0400 (EDT)
-Date: Mon, 30 Mar 2009 01:14:55 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090330051455.GA22096@denix.org>
-References: <200903242144.29168.marcin@juszkiewicz.com.pl>
-	<200903271748.24641.marcin@juszkiewicz.com.pl>
-	<gqlf6v$ek7$1@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <gqlf6v$ek7$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: IRC discussion about stable branch - 25.03.2009 12:00 GMT
+	(envelope-from <trini@kernel.crashing.org>) id 1Lo9yo-0001xo-59
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 07:24:14 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090330052208.TVFP10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 01:22:08 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id ZHN71b0074dMFYL04HN72E; Mon, 30 Mar 2009 01:22:07 -0400
+X-Authority-Analysis: v=1.0 c=1 a=vn01oPLS1NIA:10 a=PQxKyjgD8nkA:10
+	a=wMnMka8-0ni_nMP8vnsA:9 a=-Cg9TFHmG9pS5K88sdQA:7
+	a=6bEKDsYo4CESRrSYApFByiknFrAA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sun, 29 Mar 2009 22:22:07 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090330052206.GA14278@smtp.west.cox.net>
+References: <ef4946070903292210t3ce4885cj1298cdaa0253ffdf@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ef4946070903292210t3ce4885cj1298cdaa0253ffdf@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Addition of the Coyote Linux distro and HAProxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,30 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 05:17:24 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 30 Mar 2009 05:24:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, Mar 28, 2009 at 04:19:59PM +0100, Koen Kooi wrote:
-> On 27-03-09 17:48, Marcin Juszkiewicz wrote:
->
->> List of developers which wants to be maintainers for stable branch:
->>
->> - Marcin 'hrw' Juszkiewicz  - own company and Bug Labs Inc.
->> - Philip 'Crofton' Balister
->> - Marco 'mckoan' Cavallini  - Koan Software
->
-> Koen Kooi
-> Machines: beagleboard, leopardboard, sheevaplug
-> Distro: angstrom
+On Mon, Mar 30, 2009 at 01:10:10AM -0400, Joshua Jackson wrote:
 
-I guess I can do my best to look after some machines...
+> I have decided to use OE as the base for the next release of a 10 year old
+> distribution named "Coyote Linux". After a couple weeks of tinkering and
+> waiting many, long hours for compiles to either succeed or fail - I have put
+> together my first patch.
+> 
+> The attached patch adds a distribution config for Coyote Linux v4 and adds
+> the HAProxy recipe. This is my first submission to the project so please let
+> me know if there is anything I need to change about the supplied patch or
+> any other process I should be following.
 
-Denys 'denix' Dmytriyenko - Texas Instruments
-Machines: omap3evm, davinci-dvevm
-Distro: angstrom/arago
+The first suggestion would be to send the new recipe separate from the
+distro conf.  A very quick skim of the patch and the recipe looked fine,
+tho.
 
---
-Denys
+-- 
+Tom Rini
 
 
