@@ -1,43 +1,24 @@
-Received: from [209.85.198.248] (helo=rv-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1LoJaU-0006pj-7x
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LoJp6-0007O6-D3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 17:39:46 +0200
-Received: by rv-out-0708.google.com with SMTP id k29so2207534rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 08:37:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:content-disposition:message-id;
-	bh=5HVtNcYb1F2rH9V6Y95wik5qh2JvGu/SS3jEsF+Kb+s=;
-	b=eOyBH9aYy1TMbuLVoim8PHb8HeZa020g0wiuDVoniuvt2AjPjvAbutaPYVRhFriBcl
-	oiM24ijfA2+NAAmxsu4ntIPjlho/D/GzhuJDIsJuvJQZGHz1Wkmh93psm9b5oyh8xXov
-	3lGRTJxutsGdXAdLMuICh9PA2wR8R5becUpzk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:content-disposition
-	:message-id;
-	b=YRCnY3MIm5TzJGlXr2HBf5RpDNbuzFEzhg+Ji2L/IcCf0cE3faT1me6f23tM1ybFPi
-	L+Cyk6EfTL/Q1DgfY2GnHc+PxS7fHPGkpAn9odCQk87mqoJFxSBgzJZ5tmkhyi0MtkmB
-	4/SYX+M0eTJoVP9IdKX96cIx68lApFil6a61I=
-Received: by 10.141.180.16 with SMTP id h16mr2888174rvp.295.1238427459002;
-	Mon, 30 Mar 2009 08:37:39 -0700 (PDT)
-Received: from is.home (93-81-69-87.broadband.corbina.ru [93.81.69.87])
-	by mx.google.com with ESMTPS id k2sm14338439rvb.4.2009.03.30.08.37.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 30 Mar 2009 08:37:37 -0700 (PDT)
-From: Yuri Bushmelev <jay4mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Mar 2009 19:37:29 +0400
-User-Agent: KMail/1.9.10
-References: <20090328211530.7700adb1@mail.villafam.com>
-	<200903301333.04881.hs4233@mail.mn-solutions.de>
-	<49D0CFC7.9090902@dls.net>
-In-Reply-To: <49D0CFC7.9090902@dls.net>
+	Mon, 30 Mar 2009 17:54:52 +0200
+Received: (qmail invoked by alias); 30 Mar 2009 15:52:43 -0000
+Received: from f053009095.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.9.95]
+	by mail.gmx.net (mp058) with SMTP; 30 Mar 2009 17:52:43 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19GAQkYZj1Gadk8Z1DP/LN843sq96lZaWeedX6HPu
+	ArX8uToQTaofqA
+Message-ID: <49D0EACC.40907@gmx.net>
+Date: Mon, 30 Mar 2009 17:52:44 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-Message-Id: <200903301937.29417.jay4mail@gmail.com>
-Subject: Re: TinyLogin
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.64
+Subject: OpenEmbedded talk at froscon 09 anyone?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +32,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 15:39:46 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Mar 2009 15:54:52 -0000
+X-Groupsio-MsgNum: 8838
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig08C433B2F4CA9AAA04053AC0"
 
-Hello!
+--------------enig08C433B2F4CA9AAA04053AC0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-> IMO (for what that's worth), we need to support the "everything is
-> busybox!" sort of build; there's just no alternative for small devices.
->  But the problem is what do we do for that middle ground, for devices
-> that can't fit the entire set of "proper" tools but might not be willing
-> to take the security risk associated with running busybox SETUID.
+Hi,
+the CfP for the froscon '09 is active. Please submit your OE lecture ASAP=
+=2E
 
-Can we build two busybox'es? One with ordinary non-suid-tools and one with 
-all suid? Is it crazy idea? :)
+http://froscon.org/
 
-Can someone look here for login replacement (about using on Linux):
-http://www.freebsd.org/cgi/cvsweb.cgi/src/release/picobsd/tinyware/login/
+I know everyone is dying to do a presentation about our great project
+but please remember: Only one OE introduction per conference. ;)
 
-and may be here for some other tools:
-http://www.freebsd.org/cgi/cvsweb.cgi/src/release/picobsd/tinyware/
+What about me? Well, I submitted a talk about a topic that I am really
+dying to do for a long time. I even have notes in some file about it on
+my PC.
 
--- 
-Yuri Bushmelev
+---
+
+Title: Understanding and fixing cross-compilation requirements
+Subtitle: How to make your FOSS project cross-compiling friendly
+
+Abstract:
+This lecture talks about the typical problems embedded build
+environments have with the build systems of random FOSS projects out
+there. It will also present best practices to fix them. As such this
+lecture contributes to better cross-compile support in the general FOSS
+community.
+
+The ideas presented here are not related to any build environment in
+special and instead will solve the problem for all of them.
+
+----
+
+I hope it will be accepted.
+
+Regards
+Robert
 
 
+--------------enig08C433B2F4CA9AAA04053AC0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAknQ6s4ACgkQG9cfwmwwEtqwHwCfRbvqmgsTfD6Sbn0NJgvPRkGh
+/HwAn3PLA15JYviyrXjw04ImZoEMwXXo
+=g9m3
+-----END PGP SIGNATURE-----
+
+--------------enig08C433B2F4CA9AAA04053AC0--
