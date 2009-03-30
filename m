@@ -1,25 +1,27 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LoEYE-0007h4-47
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LoF0O-00058X-9A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 12:17:06 +0200
-Received: from andromeda.vanille.de (e180158216.adsl.alicedsl.de
-	[85.180.158.216])
-	by drlauer-research.com (Postfix) with ESMTP id D9ADD5843D9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 12:41:53 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Mar 2009 11:15:00 +0100
-User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
-References: <20090328211530.7700adb1@mail.villafam.com>
-	<gqq1us$1hk$1@ger.gmane.org>
-	<200903301118.38613.hs4233@mail.mn-solutions.de>
-In-Reply-To: <200903301118.38613.hs4233@mail.mn-solutions.de>
+	Mon, 30 Mar 2009 12:46:12 +0200
+Received: (qmail invoked by alias); 30 Mar 2009 10:44:00 -0000
+Received: from f053009095.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.9.95]
+	by mail.gmx.net (mp029) with SMTP; 30 Mar 2009 12:44:00 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+BGzwfD0GBX+O0cByoVOybQiXfYigALQF/HHOnfq
+	xoILu+lwo1YH/Y
+Message-ID: <49D0A271.3010902@gmx.net>
+Date: Mon, 30 Mar 2009 12:44:01 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-Message-Id: <200903301215.01113.mickey@vanille-media.de>
-Subject: Re: TinyLogin
+To: openembedded-devel@lists.openembedded.org
+References: <49CEAF3E.2050805@gmx.net>
+	<5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
+In-Reply-To: <5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: -0.07000000000000001
+Subject: Re: OE presentations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,23 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 10:17:06 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Mar 2009 10:46:12 -0000
+X-Groupsio-MsgNum: 8821
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigC88D28D2550968C4284A1D95"
 
-Using busybox' tinylogin with the per-applet suid feature has been on my todo 
-list for quite a while. I wouldn't mind, if you could do it :)
+--------------enigC88D28D2550968C4284A1D95
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Since not every one trusts busybox though, we would need to make it 
-configurable.
+Hi,
 
-Cheers,
+Elena of Valhalla schrieb:
+> I did a presentation on OE for the local LUG and wrote some material
+> for it, but it is in italian, would it be interesting anyway?
+I thought about this, too. IMO it should go in. The whole issues of
+putting the presentations in is fostering reuse. And I think italian
+people that want to do have base for their equally italian presentation
+will find yours very helpful. :)
 
-:M:
+> I still have to put a licence on it, but it will probably be either
+> CC-BY-SA or CC-BY
+Free licensing is a requirement (no -NC please).
+
+Perhaps you put it into an "it" folder inside presentations. So we adopt
+the practice of putting non-english stuff into special folders.
+
+Regards
+Robert
 
 
+--------------enigC88D28D2550968C4284A1D95
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEYEAREIAAYFAknQonEACgkQG9cfwmwwEtrb5gCeJt3lHm6vxoBjl0dJh58iTXlx
+9UYAn3cxhLrupZSUz8XovtEl5DqZHAM+
+=NPiS
+-----END PGP SIGNATURE-----
 
+--------------enigC88D28D2550968C4284A1D95--
