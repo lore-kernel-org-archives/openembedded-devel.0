@@ -1,34 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LoGJg-0004hf-Sc
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 14:10:12 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LoGHb-0006E9-0c
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 12:08:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 30 Mar 2009 12:08:03 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 30 Mar 2009 12:08:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 30 Mar 2009 14:07:50 +0200
-Message-ID: <gqqcmo$63n$1@ger.gmane.org>
-References: <cover.1238025789.git.andrea.adami@gmail.com>	<eaff36cccf868e5b367b402fb61451bf8f681bd8.1238025789.git.andrea.adami@gmail.com>	<gqfc5g$411$1@ger.gmane.org>
-	<87fxgv44gn.fsf@neumann.lab.ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
-In-Reply-To: <87fxgv44gn.fsf@neumann.lab.ossystems.com.br>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 1/1] angstrom-2008.1.conf: add PREFERRED_PROVIDER_virtual/psplash -silence warning during parsing
+	(envelope-from <stefan@datenfreihafen.org>) id 1LoGu4-0002rp-P6
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Mar 2009 14:47:48 +0200
+Received: from w1517.wlan.rz.tu-bs.de ([134.169.205.247] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1LoGrx-00088C-Cy by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 14:45:42 +0200
+Received: from stefan by excalibur.local with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1LoGrw-0002oN-Px
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Mar 2009 14:45:36 +0200
+Date: Mon, 30 Mar 2009 14:45:36 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090330124536.GD10473@excalibur.local>
+References: <20090329131749.GA350@excalibur.local> <gqnvos$4qb$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gqnvos$4qb$1@ger.gmane.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: [PATCH] connman: Package python test scripts into	connman-test-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 12:10:13 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 Mar 2009 12:47:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 30-03-09 13:47, Otavio Salvador wrote:
-> Koen Kooi<k.kooi@student.utwente.nl>  writes:
->
->> On 26-03-09 01:10, Andrea Adami wrote:
+Hello.
+
+On Sun, 2009-03-29 at 16:14, Koen Kooi wrote:
+> On 29-03-09 15:17, Stefan Schmidt wrote:
 >>
->>> +#Silence warning during parsing
->>> +PREFERRED_PROVIDER_virtual/psplash ?= "psplash-angstrom"
->>
->> NACK, the 'psplash' package should get deleted and replaced with
->> psplash-oe' or something. It was left in place to give people time to
->> switch to the new way of installing branded psplash images.
+>> I would like to get some feedback from other people using connman in OE. I did
+>> the following to package the test scripts which enables you to install them as
+>> separate package.
 >
-> Hello Koen but I belive those are two different issues.
+> The package is missing RDEPENDS on the necessary python interpreter and  
+> modules.
 
-> I added the virtual/psplash package to allow others to properly depends
-> on an alternative. Currently the only recipe using it is
-> initramfs-module-psplash but others may come.
+Good point. That reminds me of some other recipes that lack such things. Will
+have a look at them later.
 
-I don't think virtual/psplash is the way to go, but I don't have a 
-better suggestion.
+I'm wondering how I should handle this case as connman itself does not RDEPEND
+on python here. Is there a special trick for such FILE_${PN} packages and
+RDEPENDS?
 
-> I fully agree that we should drop plain psplash recipe and have
-> people to use the branded one but I also think angstrom needs to
-> properly set the preferred version since it will then allow that
-> its users to use it without much hassle.
-
-Unfortunately this will end up with people spreading FUD like "can't 
-change psplash logo in angstrom" just because they see that line in 
-angstrom.conf.
-But then again, people are still claiming angstrom is bloated and 
-minimal isn't when minimal is currently angstrom.conf with sed 
-s/angstrom/minimal/ applied to it...
-
-regards,
-
-Koen
-
+regards
+Stefan Schmidt
 
 
