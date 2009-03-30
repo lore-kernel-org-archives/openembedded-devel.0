@@ -1,49 +1,34 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LoGHE-0004bY-KH
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 14:07:40 +0200
-Received: by qw-out-1920.google.com with SMTP id 5so1346745qwf.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 05:05:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type;
-	bh=l1ujRdkEUGi6VieeNnNsSglsDJZHOd0JOYXNnJ7FLKk=;
-	b=jduhHxJZNe75CC+3wKVEZJzaGkVC4kjLV+6XOmlAQwds+SK7iDARpxU5nlGjmf7dTZ
-	boPekhq+5YPMZMDx1ovGlRWUeq6MhLI0ahh0FAB5qxsja5LEJ4CVD2JXgRZso4nrcK7R
-	oDcO0VBl1SQwv/aL5KAFrUXydu4rkmcKoq2WQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
-	b=i7T+5XuHTGo5Fh8X6LR4YsKiPkGTM3SUcGRtTb00RDnHKlgd3AGrS9MSqd9Zo91Eau
-	nEyFRcujhD6e7IfHI2sNmTVe4vldifqsPlMOP1qlzg4j+dbPrSlAdBDMfxT++ZSFtxgR
-	OHbI5y/G+9YJ3Z8innXJ5T4/gHhiyhezePSkc=
-Received: by 10.224.2.202 with SMTP id 10mr5954299qak.337.1238414734636;
-	Mon, 30 Mar 2009 05:05:34 -0700 (PDT)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id 5sm3954624ywl.8.2009.03.30.05.05.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 30 Mar 2009 05:05:34 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 72A98610096; Mon, 30 Mar 2009 09:05:40 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <ef4946070903292210t3ce4885cj1298cdaa0253ffdf@mail.gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Mon, 30 Mar 2009 09:05:40 -0300
-In-Reply-To: <ef4946070903292210t3ce4885cj1298cdaa0253ffdf@mail.gmail.com>
-	(Joshua Jackson's message of "Mon, 30 Mar 2009 01:10:10 -0400")
-Message-ID: <8763hr43mz.fsf@neumann.lab.ossystems.com.br>
-MIME-Version: 1.0
-Subject: Re: Addition of the Coyote Linux distro and HAProxy
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LoGJg-0004hf-Sc
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 14:10:12 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LoGHb-0006E9-0c
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 12:08:03 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 12:08:03 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 12:08:03 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 30 Mar 2009 14:07:50 +0200
+Message-ID: <gqqcmo$63n$1@ger.gmane.org>
+References: <cover.1238025789.git.andrea.adami@gmail.com>	<eaff36cccf868e5b367b402fb61451bf8f681bd8.1238025789.git.andrea.adami@gmail.com>	<gqfc5g$411$1@ger.gmane.org>
+	<87fxgv44gn.fsf@neumann.lab.ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
+In-Reply-To: <87fxgv44gn.fsf@neumann.lab.ossystems.com.br>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 1/1] angstrom-2008.1.conf: add PREFERRED_PROVIDER_virtual/psplash -silence warning during parsing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,32 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 12:07:41 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 30 Mar 2009 12:10:13 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Joshua Jackson <jjackson@vortech.net> writes:
+On 30-03-09 13:47, Otavio Salvador wrote:
+> Koen Kooi<k.kooi@student.utwente.nl>  writes:
+>
+>> On 26-03-09 01:10, Andrea Adami wrote:
+>>
+>>> +#Silence warning during parsing
+>>> +PREFERRED_PROVIDER_virtual/psplash ?= "psplash-angstrom"
+>>
+>> NACK, the 'psplash' package should get deleted and replaced with
+>> psplash-oe' or something. It was left in place to give people time to
+>> switch to the new way of installing branded psplash images.
+>
+> Hello Koen but I belive those are two different issues.
 
-Hello Joshua,
+> I added the virtual/psplash package to allow others to properly depends
+> on an alternative. Currently the only recipe using it is
+> initramfs-module-psplash but others may come.
 
-[...]
+I don't think virtual/psplash is the way to go, but I don't have a 
+better suggestion.
 
-> The file is a standard, unified diff against the vanilla OE tree (pulled
-> just before this email as sent).
+> I fully agree that we should drop plain psplash recipe and have
+> people to use the branded one but I also think angstrom needs to
+> properly set the preferred version since it will then allow that
+> its users to use it without much hassle.
 
-[...]
+Unfortunately this will end up with people spreading FUD like "can't 
+change psplash logo in angstrom" just because they see that line in 
+angstrom.conf.
+But then again, people are still claiming angstrom is bloated and 
+minimal isn't when minimal is currently angstrom.conf with sed 
+s/angstrom/minimal/ applied to it...
 
-Please send patches in git format; you can take a look on how to do that
-at 'git format-patch --help'. This allow us to apply it easily.
+regards,
 
-Another thing, please split your changes in logical patches.
+Koen
 
-As you said that your distro is borning, from OE POV, I suggest you to
-use a branch to work on that and maybe put it somewhere for review and
-full merge once instead of in progress patches.
-
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
