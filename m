@@ -1,27 +1,40 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [209.85.146.179] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lo9yo-0001xo-59
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 07:24:14 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090330052208.TVFP10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 30 Mar 2009 01:22:08 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id ZHN71b0074dMFYL04HN72E; Mon, 30 Mar 2009 01:22:07 -0400
-X-Authority-Analysis: v=1.0 c=1 a=vn01oPLS1NIA:10 a=PQxKyjgD8nkA:10
-	a=wMnMka8-0ni_nMP8vnsA:9 a=-Cg9TFHmG9pS5K88sdQA:7
-	a=6bEKDsYo4CESRrSYApFByiknFrAA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Sun, 29 Mar 2009 22:22:07 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090330052206.GA14278@smtp.west.cox.net>
+	(envelope-from <raj.khem@gmail.com>) id 1LoBSQ-0001Vm-IL
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Mar 2009 08:58:58 +0200
+Received: by wa-out-1112.google.com with SMTP id n7so1111035wag.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Mar 2009 23:56:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:cc:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=6QPWranzHIdQNYrA36tEN9vZgMiA6kpyUPGhOqip0c8=;
+	b=f1NsL6rmqkqbV/ieaTKJ3u0JcNM0CMDFXpZShrT9DKr05Gj5+y3l1lJq9lGkiZtQnh
+	DNuEx0md+EbMBLMXNXwRFT/Yll+dOAm+ke0lM3ymmNr0csiTuX37mb/HIJ1izIaw5LG6
+	LE15wWerqqjV07n7fDrIcY5jfKJKDCxYBov30=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:cc:references:in-reply-to
+	:mime-version:content-type:content-transfer-encoding:message-id;
+	b=UQ7oQqcnP1qsnKeJEcAikw4GaE2QvQD7X+R+zOEXdOUu9IUdZxVhwm1wlS8/UUnGFA
+	PcfZYyI+z7Ir4fDNQSiaFFJ/pO6P6TCkgF6mkUjZ03Fzxkac2IMhlzvnHjqQlpCquWyQ
+	SRvhKpfNhMIRWWwI5tOZMRz8kSUnHH/x2Ue1E=
+Received: by 10.114.37.1 with SMTP id k1mr3391673wak.28.1238396209457;
+	Sun, 29 Mar 2009 23:56:49 -0700 (PDT)
+Received: from morpheus.localnet (adsl-71-146-12-154.dsl.pltn13.sbcglobal.net
+	[71.146.12.154])
+	by mx.google.com with ESMTPS id j28sm4245254waf.39.2009.03.29.23.56.48
+	(version=SSLv3 cipher=RC4-MD5); Sun, 29 Mar 2009 23:56:48 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 29 Mar 2009 23:56:41 -0700
+User-Agent: KMail/1.11.1 (Linux/2.6.28-11-generic; KDE/4.2.1; x86_64; ; )
 References: <ef4946070903292210t3ce4885cj1298cdaa0253ffdf@mail.gmail.com>
+	<ef4946070903292211k78cec1faq4b66a9d1e80b4d15@mail.gmail.com>
+In-Reply-To: <ef4946070903292211k78cec1faq4b66a9d1e80b4d15@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <ef4946070903292210t3ce4885cj1298cdaa0253ffdf@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+Message-Id: <200903292356.46899.raj.khem@gmail.com>
 Subject: Re: Addition of the Coyote Linux distro and HAProxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,27 +49,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 05:24:14 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 30 Mar 2009 06:59:00 -0000
+X-Groupsio-MsgNum: 8810
+Content-Type: multipart/signed; boundary="nextPart1778581.1esocLVcoe";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart1778581.1esocLVcoe
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Mon, Mar 30, 2009 at 01:10:10AM -0400, Joshua Jackson wrote:
+On Sunday 29 March 2009 22:11:33 Joshua Jackson wrote:
+> Helps if I actually attach a patch file...
+> --
+> Joshua Jackson
+> Vortech Consulting, LLC
+>=20
 
-> I have decided to use OE as the base for the next release of a 10 year old
-> distribution named "Coyote Linux". After a couple weeks of tinkering and
-> waiting many, long hours for compiles to either succeed or fail - I have put
-> together my first patch.
-> 
-> The attached patch adds a distribution config for Coyote Linux v4 and adds
-> the HAProxy recipe. This is my first submission to the project so please let
-> me know if there is anything I need to change about the supplied patch or
-> any other process I should be following.
+You do not chose binutils and gcc in conf file. So it will pick whatever bi=
+tbake decides. IMO you should
+use a preferred version
 
-The first suggestion would be to send the new recipe separate from the
-distro conf.  A very quick skim of the patch and the recipe looked fine,
-tho.
+=46or glibc=20
 
--- 
-Tom Rini
++PREFERRED_VERSION_glibc =3D "2.5"
++PREFERRED_VERSION_glibc-cross =3D "2.5"
++PREFERRED_VERSION_glibc-cross-sdk =3D "2.5"
++PREFERRED_VERSION_glibc-cross-initial =3D "2.5"
++PREFERRED_VERSION_glibc-cross-intermediate =3D "2.5"
 
+I think you only need PREFERRED_VERSION_glibc and PREFERRED_VERSION_glibc-i=
+nitial=20
 
+=2D-=20
+Khem Raj
+
+--nextPart1778581.1esocLVcoe
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAknQbSoACgkQHnJKy6V6em5o3gCcD3yd886uEr33pJNHY8ORJrPp
+rQ0AnjOmZLOC+iX+LU+XYRxztXaauM/r
+=BUPY
+-----END PGP SIGNATURE-----
+
+--nextPart1778581.1esocLVcoe--
