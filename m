@@ -1,22 +1,34 @@
-Received: from [216.145.245.197] (helo=mx01.dls.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LoI1N-0001fn-Uq
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 15:59:26 +0200
-Received: from [209.242.7.134] (helo=[192.168.231.111])
-	by mx01.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LoHzJ-0005wm-Rz
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 08:57:17 -0500
-Message-ID: <49D0CFC7.9090902@dls.net>
-Date: Mon, 30 Mar 2009 08:57:27 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LoIKN-0002LL-JJ
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 16:19:03 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LoIIL-00049S-BK
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 14:16:57 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 14:16:57 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 14:16:57 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <20090328211530.7700adb1@mail.villafam.com>	<200903301254.51359.hs4233@mail.mn-solutions.de>	<1238411534.16991.120.camel@mill.internal.reciva.com>
-	<200903301333.04881.hs4233@mail.mn-solutions.de>
-In-Reply-To: <200903301333.04881.hs4233@mail.mn-solutions.de>
-Subject: Re: TinyLogin
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 30 Mar 2009 16:16:43 +0200
+Message-ID: <gqqk8b$2eb$1@ger.gmane.org>
+References: <20090329131749.GA350@excalibur.local> <gqnvos$4qb$1@ger.gmane.org>
+	<20090330124536.GD10473@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
+In-Reply-To: <20090330124536.GD10473@excalibur.local>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] connman: Package python test scripts into connman-test-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,34 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 13:59:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Mar 2009 14:19:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Holger Schurig wrote:
+On 30-03-09 14:45, Stefan Schmidt wrote:
+> Hello.
+>
+> On Sun, 2009-03-29 at 16:14, Koen Kooi wrote:
+>> On 29-03-09 15:17, Stefan Schmidt wrote:
+>>>
+>>> I would like to get some feedback from other people using connman in OE. I did
+>>> the following to package the test scripts which enables you to install them as
+>>> separate package.
+>>
+>> The package is missing RDEPENDS on the necessary python interpreter and
+>> modules.
+>
+> Good point. That reminds me of some other recipes that lack such things. Will
+> have a look at them later.
+>
+> I'm wondering how I should handle this case as connman itself does not RDEPEND
+> on python here. Is there a special trick for such FILE_${PN} packages and
+> RDEPENDS?
 
-> However, I like to base fear on evidence, that's why I replied.
+Yes, overrides work on RDEPENDS as well, so RDEPENDS_${PN}-test-utils = 
+"python-core python-dbus python-b0rk" will work.
 
-Having spent 4 years of my life working in the security space, and a
-year of that actually reviewing source code for security-related issues,
-I can safely say that in my part of the world (central US), it is the
-other way around:
+regards,
 
-when security is involved, fear is based on _lack_ of evidence of
-correctness.
+Koen
 
-Due to its size and frequency of change the code is impossible for human
-review, and due to structure of the code, it is unlikely for automated
-commercial tools to be able to do much with it (I know; I tried once).
-
-IMO (for what that's worth), we need to support the "everything is
-busybox!" sort of build; there's just no alternative for small devices.
- But the problem is what do we do for that middle ground, for devices
-that can't fit the entire set of "proper" tools but might not be willing
-to take the security risk associated with running busybox SETUID.
-
-I rather suspect tinylogin will live on, even if maintenance is minimal.
-
--Mike (mwester)
 
 
