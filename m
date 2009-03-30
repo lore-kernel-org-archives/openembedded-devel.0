@@ -1,20 +1,20 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LoCRc-00089V-Ru
-	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 10:02:08 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id D84A26831B;
-	Mon, 30 Mar 2009 11:59:57 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@openembedded.org
-Date: Mon, 30 Mar 2009 11:59:57 +0400
-Message-Id: <1238399997-6016-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.1
+	(envelope-from <di@fh-wedel.de>) id 1LoCfj-00007D-0J
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Mar 2009 10:16:43 +0200
+Received: by mail.fh-wedel.de (Postfix, from userid 959)
+	id BFEF1547D5; Mon, 30 Mar 2009 10:14:36 +0200 (CEST)
+Date: Mon, 30 Mar 2009 10:14:36 +0200
+From: Martin Dietze <di@fh-wedel.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090330081436.GA30222@fh-wedel.de>
+References: <20090327095751.GA8994@fh-wedel.de>
+	<200903272030.23571.raj.khem@gmail.com>
 MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-Spam-Status: No
-Subject: [PATCH] image.bbclass: reorder do_rootfs
+In-Reply-To: <200903272030.23571.raj.khem@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Link error: host instead of target libc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,48 +28,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 08:02:09 -0000
+X-List-Received-Date: Mon, 30 Mar 2009 08:16:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Places do_rootfs function before do_install in image creation process.
+On Fri, March 27, 2009, Khem Raj wrote:
 
-This change allows multiimage builds, when one image depends on another (before
-that second image creation raced with do_rootfs for the first one) and uses
-it for some purpose.
+> One reason could be that you linker is not aware of sysroot properly. As
+> a result it does not append correct sysroot path and ends up looking
+> at /lib which ofcourse it your host libc (x86) and hence the error. you
+> might need to backport sysroot related patches to binutils 2.14
 
-Multiimage builds are useful in situations like creating an installer image
-with initramfs (built in OE) and an image of the target FS (also built in OE)
-or for building virtualized system images to be placed on target FS.
----
- classes/image.bbclass |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Thank you for this hint, this solved it. There was a
+distro-specific override of EXTRA_OECONF which broke the
+EXTRA_OECONF_append defined elsewhere, thus the sysroot property
+was never applied while configuring binutils. 
 
-diff --git a/classes/image.bbclass b/classes/image.bbclass
-index fd0df4d..3a0bc32 100644
---- a/classes/image.bbclass
-+++ b/classes/image.bbclass
-@@ -106,6 +106,7 @@ do_rootfs[nostamp] = "1"
- do_rootfs[dirs] = "${TOPDIR}"
- do_rootfs[lockfiles] = "${IMAGE_ROOTFS}.lock"
- do_build[nostamp] = "1"
-+do_install[nostamp] = "1"
- 
- # Must call real_do_rootfs() from inside here, rather than as a separate
- # task, so that we have a single fakeroot context for the whole process.
-@@ -234,5 +235,5 @@ rootfs_update_timestamp () {
- # export the zap_root_password, create_etc_timestamp and remote_init_link
- EXPORT_FUNCTIONS zap_root_password create_etc_timestamp remove_init_link do_rootfs make_zimage_symlink_relative set_image_autologin rootfs_update_timestamp
- 
--addtask rootfs before do_build after do_install
-+addtask rootfs after do_compile before do_install
- addtask deploy_to after do_rootfs
--- 
-1.6.2.1
+Cheers,
 
+Martin
 
 -- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
-
+----------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+Amongst our weaponry are such diverse elements as: fear, surprise, 
+ruthless efficiency, an almost fanatical devotion to the Pope, and 
+nice red uniforms - Oh damn!
 
 
