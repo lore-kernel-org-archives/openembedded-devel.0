@@ -1,28 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1LoERY-0007Hf-QZ; Mon, 30 Mar 2009 12:10:13 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1LoEPS-0005uh-7B; Mon, 30 Mar 2009 11:08:03 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1LoEPR-0005lv-7z; Mon, 30 Mar 2009 11:08:01 +0100
-From: Phil Blundell <pb@reciva.com>
+	(envelope-from <mickey@vanille-media.de>) id 1LoEYE-0007h4-47
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Mar 2009 12:17:06 +0200
+Received: from andromeda.vanille.de (e180158216.adsl.alicedsl.de
+	[85.180.158.216])
+	by drlauer-research.com (Postfix) with ESMTP id D9ADD5843D9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 12:41:53 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200903301118.38613.hs4233@mail.mn-solutions.de>
+Date: Mon, 30 Mar 2009 11:15:00 +0100
+User-Agent: KMail/1.11.0 (Linux/2.6.27-11-generic; KDE/4.2.0; x86_64; ; )
 References: <20090328211530.7700adb1@mail.villafam.com>
-	<200903301053.34937.hs4233@mail.mn-solutions.de>
 	<gqq1us$1hk$1@ger.gmane.org>
 	<200903301118.38613.hs4233@mail.mn-solutions.de>
-Date: Mon, 30 Mar 2009 11:08:01 +0100
-Message-Id: <1238407681.16991.114.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-devel@openembedded.org
+In-Reply-To: <200903301118.38613.hs4233@mail.mn-solutions.de>
+MIME-Version: 1.0
+Message-Id: <200903301215.01113.mickey@vanille-media.de>
 Subject: Re: TinyLogin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,42 +33,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 10:10:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 30 Mar 2009 10:17:06 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, 2009-03-30 at 10:18 +0100, Holger Schurig wrote:
-> Is this a problem?  After all, busybox can drop priviledges:
+Using busybox' tinylogin with the per-applet suid feature has been on my todo 
+list for quite a while. I wouldn't mind, if you could do it :)
 
-Indeed it can, and for some distros that might well be a fine solution.
-However, for other distros the prospect of a setuid-root busybox is an
-unwelcome one, typically for some combination of the following reasons:
+Since not every one trusts busybox though, we would need to make it 
+configurable.
 
-- making busybox be setuid means that you need to trust all the applets
-to drop privileges that they don't need;
+Cheers,
 
-- there's no way of telling, from inspection of the binary, which
-applets will run as setuid and which won't, nor of changing the setuid
-attribute on individual applets without recompiling;
+:M:
 
-- security auditing is difficult, since the large amount of code-sharing
-in busybox makes it hard to determine which functions can potentially be
-called from a setuid context;
-
-- the relatively high rate of code churn, combined with the large amount
-of code re-use and the fact that there's no inbuilt guard against
-accidentally mixing privilege domains, means that any audit would be
-likely to need repeating frequently.
-
-> If you are really paranoid and don't want to do this, build two 
-> busybox binaries with different applets in them
-
-That does help with the first two points above, but not with the latter
-two.  And, if you're going to build a separate binary for the login
-utilities, you might just as well have gone on using tinylogin in the
-first place.
-
-p.
 
 
 
