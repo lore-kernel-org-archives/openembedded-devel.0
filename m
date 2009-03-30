@@ -1,22 +1,27 @@
-Received: from [212.227.126.186] (helo=moutng.kundenserver.de)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <joerg@hakker.de>) id 1LoNbs-0004RT-Ee
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 21:57:28 +0200
-Received: from tristan.localnet (port-92-202-121-238.dynamic.qsc.de
-	[92.202.121.238])
-	by mrelayeu.kundenserver.de (node=mrelayeu8) with ESMTP (Nemesis)
-	id 0ML31I-1LoNZm3FNZ-0003vR; Mon, 30 Mar 2009 21:55:19 +0200
-From: =?iso-8859-1?q?J=F6rg_Bakker?= <joerg@hakker.de>
-To: Openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Mar 2009 21:55:16 +0200
-User-Agent: KMail/1.11.1 (Linux/2.6.27-11-generic; KDE/4.2.1; i686; ; )
+	(envelope-from <trini@kernel.crashing.org>) id 1LoNmR-0004iJ-Ao
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 22:08:24 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090330200612.HGTW27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 16:06:12 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id ZY6A1b00K4dMFYL04Y6AX6; Mon, 30 Mar 2009 16:06:12 -0400
+X-Authority-Analysis: v=1.0 c=1 a=6WQpoopjgy8A:10 a=DR5V8SchSNLjAFDqEVAA:9
+	a=B-TmyVIz1Ug52mESVtDoSU5AECEA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Mon, 30 Mar 2009 13:06:10 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090330200610.GD14278@smtp.west.cox.net>
+References: <200903302155.17027.joerg@hakker.de>
 MIME-Version: 1.0
-Message-Id: <200903302155.17027.joerg@hakker.de>
-X-Provags-ID: V01U2FsdGVkX182ElK+bm6bSKCrhH9UiNowBtEv86WWQj9dnS0
-	OHkzrhJ9L3AqgK96u1c2s2JeTM9dm1iq2QniDhB5eMUiNGw+o5
-	EYHWqOKGUjMjQUUAMkubw==
-Subject: [PATCH] linux-epia-2.6.19.2
+In-Reply-To: <200903302155.17027.joerg@hakker.de>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] linux-epia-2.6.19.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,93 +35,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 19:57:28 -0000
-X-Groupsio-MsgNum: 8846
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_lOS0JWSPdgLQZWj"
-
---Boundary-00=_lOS0JWSPdgLQZWj
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 Mar 2009 20:08:26 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Building of linux-epia-2.6.19.2 stops with the following error:
+On Mon, Mar 30, 2009 at 09:55:16PM +0200, Jörg Bakker wrote:
 
-| make[2]: Entering directory `/home/jb/devel/cc/jammsession/oe/build/tmp/work/epia-angstrom-linux/linux-epia-2.6.19.2-r1/linux-2.6.19.2'
-|   CC      scripts/mod/empty.o
-|   HOSTCC  scripts/mod/mk_elfconfig
-|   MKELF   scripts/mod/elfconfig.h
-|   HOSTCC  scripts/mod/file2alias.o
-|   GEN     include/asm-i386/asm-offsets.h
-| make[1]: Leaving directory `/home/jb/devel/cc/jammsession/oe/build/tmp/work/epia-angstrom-linux/linux-epia-2.6.19.2-r1/linux-2.6.19.2'
-|   HOSTCC  scripts/mod/modpost.o
-|   HOSTCC  scripts/mod/sumversion.o
-| scripts/mod/sumversion.c: In function 'get_src_version':
-| scripts/mod/sumversion.c:384: error: 'PATH_MAX' undeclared (first use in this function)
-| scripts/mod/sumversion.c:384: error: (Each undeclared identifier is reported only once
-| scripts/mod/sumversion.c:384: error: for each function it appears in.)
-| scripts/mod/sumversion.c:384: warning: unused variable 'filelist'
-| make[2]: *** [scripts/mod/sumversion.o] Error 1
-| make[2]: Leaving directory `/home/jb/devel/cc/jammsession/oe/build/tmp/work/epia-angstrom-linux/linux-epia-2.6.19.2-r1/linux-2.6.19.2'
-| make[1]: *** [scripts/mod] Error 2
-| make[1]: Leaving directory `/home/jb/devel/cc/jammsession/oe/build/tmp/work/epia-angstrom-linux/linux-epia-2.6.19.2-r1/linux-2.6.19.2'
-| make: *** [scripts] Error 2
-| FATAL: oe_runmake failed
-NOTE: Task failed: /home/jb/devel/cc/jammsession/oe/build/tmp/work/epia-angstrom-linux/linux-epia-2.6.19.2-r1/temp/log.do_compile.3783
-NOTE: package linux-epia-2.6.19.2-r1: task do_compile: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package linux-epia-2.6.19.2: failed
-ERROR: Build of /home/jb/devel/cc/jammsession/oe/openembedded/recipes/linux/linux-epia_2.6.19.2.bb do_compile failed
-ERROR: Task 1181 (/home/jb/devel/cc/jammsession/oe/openembedded/recipes/linux/linux-epia_2.6.19.2.bb, do_compile) failed
+> Building of linux-epia-2.6.19.2 stops with the following error:
+[snip]
 
-OE Build Configuration:
-BB_VERSION        = "1.8.13"
-METADATA_BRANCH   = "org.openembedded.dev"
-METADATA_REVISION = "8f8efbe43a7f28802d066f7f83915e8fbd0d4cc2"
-TARGET_ARCH       = "i586"                                    
-TARGET_OS         = "linux"                                   
-MACHINE           = "epia"                                    
-DISTRO            = "angstrom"                                
-DISTRO_VERSION    = "2009.X-test-20090329"                    
+This is actually quite a common error.  Can we call the patch something
+more generic and stick it into files/ ? Thanks.
 
-The attached patch fixes this.
+-- 
+Tom Rini
 
 
---Boundary-00=_lOS0JWSPdgLQZWj
-Content-Type: text/x-patch;
-  charset="UTF-8";
-  name="linux-epia-2619-limits.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="linux-epia-2619-limits.patch"
-
-diff -Nur openembedded/recipes/linux/linux-epia-2.6.19.2/linux-epia-2619-limits.patch build/recipes/linux/linux-epia-2.6.19.2/linux-epia-2619-limits.patch
---- openembedded/recipes/linux/linux-epia-2.6.19.2/linux-epia-2619-limits.patch	1970-01-01 01:00:00.000000000 +0100
-+++ build/recipes/linux/linux-epia-2.6.19.2/linux-epia-2619-limits.patch	2009-03-21 18:02:08.000000000 +0100
-@@ -0,0 +1,10 @@
-+--- linux-2.6.19.2/scripts/mod/sumversion.c.orig	2009-03-15 21:44:58.000000000 +0100
-++++ linux-2.6.19.2/scripts/mod/sumversion.c	2009-03-15 21:44:58.000000000 +0100
-+@@ -8,6 +8,7 @@
-+ #include <errno.h>
-+ #include <string.h>
-+ #include "modpost.h"
-++#include <linux/limits.h>
-+ 
-+ /*
-+  * Stolen form Cryptographic API.
-diff -Nur openembedded/recipes/linux/linux-epia_2.6.19.2.bb build/recipes/linux/linux-epia_2.6.19.2.bb
---- openembedded/recipes/linux/linux-epia_2.6.19.2.bb	2009-03-21 10:44:07.000000000 +0100
-+++ build/recipes/linux/linux-epia_2.6.19.2.bb	2009-03-21 18:03:19.000000000 +0100
-@@ -6,7 +6,8 @@
- KERNEL_CCSUFFIX = "-3.3.4"
- 
- SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
--           file://epia_defconfig"
-+           file://epia_defconfig \
-+	   file://linux-epia-2619-limits.patch;patch=1"
- S = "${WORKDIR}/linux-${PV}"
- 
- COMPATIBLE_HOST = 'i.86.*-linux'
-
---Boundary-00=_lOS0JWSPdgLQZWj--
