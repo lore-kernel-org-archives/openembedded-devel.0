@@ -1,20 +1,35 @@
-Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <di@fh-wedel.de>) id 1LoCfj-00007D-0J
+	(envelope-from <elena.valhalla@gmail.com>) id 1LoDCN-0008D7-Mc
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 10:16:43 +0200
-Received: by mail.fh-wedel.de (Postfix, from userid 959)
-	id BFEF1547D5; Mon, 30 Mar 2009 10:14:36 +0200 (CEST)
-Date: Mon, 30 Mar 2009 10:14:36 +0200
-From: Martin Dietze <di@fh-wedel.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090330081436.GA30222@fh-wedel.de>
-References: <20090327095751.GA8994@fh-wedel.de>
-	<200903272030.23571.raj.khem@gmail.com>
+	Mon, 30 Mar 2009 10:50:27 +0200
+Received: by bwz19 with SMTP id 19so1744797bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 01:48:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=jcDrSrTXh6LC7MvHhACpNcVCE2NyPLZSKO4Kbplw0Os=;
+	b=HZoGUy04ZSM/ygSwnPxHKIEB47hDbrjgfeCwoNVNOhk9LBi69k84GYADLkrSYE149Y
+	VjXoPgzV+DQyWOhcKF7+sqlg7Mn+qgpwkstWCleE1ukBNiAQ791XPYmny9enjuMKOUYn
+	qDRC/OdGnOtsiQC/xzpF5ylrVwnGz5mUFc0t4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=EL0dYDogKReoVsO99IpfsDkx/N7Rd3VV3qq7smuRCfi509rGRKyNJhQfg6PfVi7xqw
+	f5yveEJzxkOf2wi/WABlmNF8H2uhhaB43Uw7Sf3E2JZQUhZOHJhL9a0BR/u+Mlstqzea
+	KUBaECXyFjPs1t4wmbUnEeH1Levri5m0znYxg=
 MIME-Version: 1.0
-In-Reply-To: <200903272030.23571.raj.khem@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Link error: host instead of target libc
+Received: by 10.223.111.134 with SMTP id s6mr3699739fap.60.1238402900481; Mon, 
+	30 Mar 2009 01:48:20 -0700 (PDT)
+In-Reply-To: <49CEAF3E.2050805@gmx.net>
+References: <49CEAF3E.2050805@gmx.net>
+Date: Mon, 30 Mar 2009 10:48:20 +0200
+Message-ID: <5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
+From: Elena of Valhalla <elena.valhalla@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: OE presentations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,31 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 08:16:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Mar 2009 08:50:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, March 27, 2009, Khem Raj wrote:
+2009/3/29 Robert Schuster <theBohemian@gmx.net>:
+> I thought that it would be very helpful for OE if we would maintain
+> presentations about our project in the repository. This allows you to
+> use the idea for your own presentation and safe some time. [...]
+> Would be cool if you could also share your presentations (in source form
+> please) if they are CC-BY-SA or similar.
 
-> One reason could be that you linker is not aware of sysroot properly. As
-> a result it does not append correct sysroot path and ends up looking
-> at /lib which ofcourse it your host libc (x86) and hence the error. you
-> might need to backport sysroot related patches to binutils 2.14
+I did a presentation on OE for the local LUG and wrote some material
+for it, but it is in italian, would it be interesting anyway?
 
-Thank you for this hint, this solved it. There was a
-distro-specific override of EXTRA_OECONF which broke the
-EXTRA_OECONF_append defined elsewhere, thus the sysroot property
-was never applied while configuring binutils. 
+I still have to put a licence on it, but it will probably be either
+CC-BY-SA or CC-BY
 
-Cheers,
-
-Martin
+it can be seen here, page in italian:
+http://www.lifolab.org/index.php/Seminari_2009#19_gennaio:_OpenEmbedded
 
 -- 
------------ / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-Amongst our weaponry are such diverse elements as: fear, surprise, 
-ruthless efficiency, an almost fanatical devotion to the Pope, and 
-nice red uniforms - Oh damn!
+Elena ``of Valhalla''
+
+email: elena.valhalla@gmail.com
 
 
