@@ -1,46 +1,20 @@
-Received: from [195.96.192.9] (helo=sirio.fastnet.it ident=postfix)
+Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefano.regno@spesonline.com>) id 1LoDVP-0000Xu-ST
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 11:10:09 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id A4EBD95A71
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
-Received: from sirio.fastnet.it ([127.0.0.1])
-	by localhost (sirio [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 21452-01-10 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
-Received: from sole.fastnet.it (sole.fastnet.it [195.96.192.1])
-	by sirio.fastnet.it (FASTnet-NAP) with ESMTP id 8582895A67
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id 6CF8A1D9450
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
-Received: from sole.fastnet.it ([127.0.0.1])
-	by localhost (sole [127.0.0.1]) (amavisd-new, port 10024) with LMTP
-	id 18848-01-6 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 11:08:02 +0200 (CEST)
-Received: from [192.168.1.215]
-	(host141-216-static.91-82-b.business.telecomitalia.it
-	[82.91.216.141])
-	by sole.fastnet.it (FASTnet-NAP) with ESMTP id EA7C31D71E3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2009 11:08:01 +0200 (CEST)
-Message-ID: <49D08BEF.5090202@spesonline.com>
-Date: Mon, 30 Mar 2009 11:07:59 +0200
-From: Stefano Regno <stefano.regno@spesonline.com>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080505)
+	(envelope-from <khimov@altell.ru>) id 1LoDft-0000s8-A0
+	for openembedded-devel@openembedded.org; Mon, 30 Mar 2009 11:20:57 +0200
+Received: from localhost.localdomain (unknown [192.168.1.115])
+	by mail.altell.local (Postfix) with ESMTP id 2C36968379;
+	Mon, 30 Mar 2009 13:18:43 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@openembedded.org
+Date: Mon, 30 Mar 2009 13:18:43 +0400
+Message-Id: <1238404723-8814-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.2.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49CEAF3E.2050805@gmx.net>
-	<5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
-In-Reply-To: <5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-X-Virus-Scanned: by amavisd-new-20030616-p10 (Debian) at fastnet.it
-Subject: Re: OE presentations
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-Spam-Status: No
+Subject: [PATCH] bitbake.conf: use ROOTFS_SIZE for gzip'd images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,39 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 09:10:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 Mar 2009 09:20:57 -0000
 
-Elena of Valhalla wrote:
-> 2009/3/29 Robert Schuster <theBohemian@gmx.net>:
->   
->> I thought that it would be very helpful for OE if we would maintain
->> presentations about our project in the repository. This allows you to
->> use the idea for your own presentation and safe some time. [...]
->> Would be cool if you could also share your presentations (in source form
->> please) if they are CC-BY-SA or similar.
->>     
->
-> I did a presentation on OE for the local LUG and wrote some material
-> for it, but it is in italian, would it be interesting anyway?
->
-> I still have to put a licence on it, but it will probably be either
-> CC-BY-SA or CC-BY
->
-> it can be seen here, page in italian:
-> http://www.lifolab.org/index.php/Seminari_2009#19_gennaio:_OpenEmbedded
->
->   
-Trovo il tuo lavoro molto interessante, potrei partecipare "lavoro 
-permettendo anche io"
+Make ext2.gz and ext3.gz images use ROOTFS_SIZE parameter for genext2s (as
+non-compressed ext2 and ext3 does).
 
-Saluti Stefano.
+This allows to use IMAGE_EXTRA_SPACE configuration.
+---
+ conf/bitbake.conf |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 7c159af..9d372f1 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -326,9 +326,9 @@ IMAGE_CMD_jffs2 = "mkfs.jffs2 -x lzo --root=${IMAGE_ROOTFS} --faketime --output=
+ IMAGE_CMD_yaffs2 = "mkyaffs2image ${EXTRA_IMAGECMD} ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.yaffs2"
+ IMAGE_CMD_cramfs = "mkcramfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cramfs ${EXTRA_IMAGECMD}"
+ IMAGE_CMD_ext2 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}"
+-IMAGE_CMD_ext2.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz && mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
++IMAGE_CMD_ext2.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz && mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2 ${EXTRA_IMAGECMD}; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext2.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext2.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
+ IMAGE_CMD_ext3 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
+-IMAGE_CMD_ext3.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz && mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${IMAGE_ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
++IMAGE_CMD_ext3.gz = "rm -rf ${DEPLOY_DIR_IMAGE}/tmp.gz && mkdir ${DEPLOY_DIR_IMAGE}/tmp.gz; genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz; rmdir ${DEPLOY_DIR_IMAGE}/tmp.gz"
+ IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
+ IMAGE_CMD_squashfs-lzma = "mksquashfs-lzma ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend"
+ IMAGE_CMD_tar = "cd ${IMAGE_ROOTFS} && tar -cvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar ."
+-- 
+1.6.2.1
 
 
 -- 
-Peace cannot be kept by force; it can only be achieved by understanding --Albert Einstein
-
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
 
 
 
