@@ -1,28 +1,26 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LomlY-0006zE-G6
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 00:49:08 +0200
-Received: (qmail invoked by alias); 31 Mar 2009 22:46:51 -0000
-Received: from f053009074.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.9.74]
-	by mail.gmx.net (mp058) with SMTP; 01 Apr 2009 00:46:51 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/r9Q0gNj3r2SV0KEXliWM743zt/WLTFXPZrOZKUA
-	8w+ytvgU8uhn+y
-Message-ID: <49D29D5E.8040901@gmx.net>
-Date: Wed, 01 Apr 2009 00:46:54 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49CEAF3E.2050805@gmx.net>	<5c5e5c350903300148j5c4ec665o176a4a1ed0f5b48d@mail.gmail.com>	<49D0A271.3010902@gmx.net>	<1238436006.11483.5.camel@port4>
-	<49D1177F.6040200@gremlin.it>
-In-Reply-To: <49D1177F.6040200@gremlin.it>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.57
-Cc: openembedded-devel@openembedded.org
-Subject: Re: OE presentations
+Received: from [85.33.2.25] (helo=smtp-out25.alice.it)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1Long8-0005Ei-K7
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 01:47:36 +0200
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out25.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 1 Apr 2009 01:45:19 +0200
+Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Wed, 1 Apr 2009 01:45:19 +0200
+Received: from localhost.localdomain ([87.5.74.246]) by FBCMCL01B03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 1 Apr 2009 01:45:18 +0200
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@openembedded.org
+Date: Wed,  1 Apr 2009 01:45:17 +0200
+Message-Id: <05187d8f9a873df8504511279c44af7c02b4facf.1238542568.git.andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.6.0.6
+In-Reply-To: <gqqq0q$or5$1@ger.gmane.org>
+References: <gqqq0q$or5$1@ger.gmane.org>
+X-OriginalArrivalTime: 31 Mar 2009 23:45:18.0951 (UTC)
+	FILETIME=[BFAF5770:01C9B25A]
+Subject: [PATCH] angstrom-2008.1.conf: add PREFERRED_VERSION_psplash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,65 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2009 22:49:08 -0000
-X-Groupsio-MsgNum: 8902
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigEA0357C1FB1D72931D312C2C"
-
---------------enigEA0357C1FB1D72931D312C2C
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-Hi Alessandro,
-
-Alessandro GARDICH schrieb:
-> Hi all
->=20
-> this is a presentation I did about Linux Embedded and OpenEmbedded in
-> Italian for Linux Day (in Italy) in 2007.
->=20
-> http://www.gremlin.it/download/index.php?dir=3D&file=3DLinuxDay2007%20-=
-%20GNU%20Linux%20Embedded.pdf
-This link provokes some anti-leech thingie ... disturbing .. :$
-
-Anyway. I don't understand itialian but your slides look like you argue
-that an embedded system has certain system parameters like RAM, storage,
-CPU speeds that are much lower to what you expect from a desktop
-machine. While this may be true for some time you are always risking
-that next years' technology catches up with your assumptions very quickly=
-=2E
-
-Just think about the Sheeva CPU which supports clockspeed up to 1.2GHz,
-or the OMAP4 which will comes with 2 CPU cores.
-
-A better way to argue is IMO the great integration an embedded system
-provides. The chip that makes up the system often contains various
-controllers for e.g. ethernet, wireless, sound, lcd, bluetooth, ...
-Often there is also a graphics core and a DSP added.
-
-And while having all these shiny stuff in they consume a fraction of the
-power a desktop CPU does.
-
-That is at least the way I would introduce people to the embedded world. =
-:)
-
-Regards
-Robert
+X-List-Received-Date: Tue, 31 Mar 2009 23:47:36 -0000
 
 
---------------enigEA0357C1FB1D72931D312C2C
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+ -second try
+---
+ conf/distro/angstrom-2008.1.conf |   11 ++++++++++-
+ 1 files changed, 10 insertions(+), 1 deletions(-)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+index 57048d6..6c2c1bd 100644
+--- a/conf/distro/angstrom-2008.1.conf
++++ b/conf/distro/angstrom-2008.1.conf
+@@ -76,6 +76,15 @@ PREFERRED_VERSION_glibc-initial 	?= "2.6.1"
+ PREFERRED_VERSION_uclibc        	?= "0.9.30"
+ PREFERRED_VERSION_uclibc-initial	?= "0.9.30"
+ 
++# Preferred version for psplash
++# This enforces a specific brand to be used, in our case the angstrom
++# one. In case you want to change the logo or something like that we
++# suggest you to create another recipe (e.g: psplash-<brand>) for that
++# and add that into your image.
++# You can also opt to change or override this line, but that isn't
++# needed because psplash is using update-alternatives.
++PREFERRED_VERSION_psplash               ?= "psplash-angstrom"
++
+ PREFERRED_PROVIDER_avahi = "avahi"
+ 
+ #Small machines prefer kdrive, but we might ship full Xorg in other images
+@@ -144,7 +153,7 @@ PREFERRED_PROVIDER_virtual/xserver      ?= "xserver-kdrive"
+ # Others:
+ PREFERRED_PROVIDER_linux-libc-headers = "linux-libc-headers"
+ PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+-PREFERRED_PROVIDER_esound 		?= "pulseaudio"
++PREFERRED_PROVIDER_esound               ?= "pulseaudio"
+ PREFERRED_PROVIDER_gconf                ?= "gconf-dbus"
+ PREFERRED_PROVIDER_gnome-vfs            ?= "gnome-vfs"
+ PREFERRED_PROVIDER_gnome-vfs-plugin-file ?= "gnome-vfs"
+-- 
+1.6.0.6
 
-iEYEAREIAAYFAknSnWEACgkQG9cfwmwwEto70QCfW0iFqSkwkSSyTJZ4oNNwR/qE
-Bx4Ani5eaLnZ3NChN1EmOpywMY2P1tQ/
-=kI/a
------END PGP SIGNATURE-----
 
---------------enigEA0357C1FB1D72931D312C2C--
+
