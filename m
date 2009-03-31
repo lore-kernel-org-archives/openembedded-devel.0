@@ -1,30 +1,21 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1LoQC7-0007aE-Sg
+	(envelope-from <mwester@dls.net>) id 1LoTip-0007c8-0q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Mar 2009 00:43:04 +0200
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.116]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1LoQ9m-0001Fz-HY
+	Tue, 31 Mar 2009 04:29:03 +0200
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx02.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LoTge-0002Ar-Kk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Mar 2009 06:40:52 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
+	Mon, 30 Mar 2009 21:26:49 -0500
+Message-ID: <49D17F70.8020109@dls.net>
+Date: Mon, 30 Mar 2009 21:26:56 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Mar 2009 16:40:29 -0600
-Message-Id: <1238452829.7128.4.camel@alap>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 70.73.132.19
-X-SA-Exim-Mail-From: nytowl@openmoko.org
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
-	aakash.openmoko.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb
-X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
-X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
-Subject: [PATCH] add hotplug2 package
+Subject: [RFC] make preferred openssl version match for -native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,86 +29,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2009 22:43:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 31 Mar 2009 02:29:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+I'd like to propose that we remove the "DEFAULT_PREFERENCE = "-1"" line
+from openssl-native_0.9.8j.bb.
 
----
- conf/checksums.ini                        |    4 +++
- packages/hotplug2/hotplug2_0.9+1.0beta.bb |   31
-+++++++++++++++++++++++++++++
- 2 files changed, 35 insertions(+), 0
-deletions(-)                             
- create mode 100644 packages/hotplug2/hotplug2_0.9
-+1.0beta.bb                  
+This is causing a problem in select cases (for example, python-native
+fails "import md5"), because we build and stage openssl 0.9.8j, but the
+corresponding -native that gets built and staged is openssl 0.9.7g.
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 9548a02..c5e6910 100644                       
---- a/conf/checksums.ini                            
-+++ b/conf/checksums.ini                            
-@@ -9318,6 +9318,10 @@
-sha256=af40399fe434678454ae8ea100db6cba0482aa65b8972a05098c779cac57bc48
+The 0.9.8j version is currently selected as the PREFERRED_VERSION in the
+preferred-om-2008-versions.inc file, as well as for SlugOS.  I've
+successfully built it on both 32 and 64 bit hosts.
 
-md5=faa08f321fefd2c61ce4c9355a62fe31                                                         
+Unless there are objections, I'll commit a fix in a couple of days.
 
-sha256=ca7ef124cde06883fbf28c7e78ce1e4c5526434bbe5672ef0a3e85a61a9d0b5f                      
-                                                                                              
-+[http://isteve.bofh.cz/~isteve/hotplug2/downloads/hotplug2-1.0-beta.tar.gz]                  
-+md5=353656ea499d395260c0de143983da4d                                                         
-+sha256=54e2fa375506d92a8ac94b5ed332c4c0bf1b69c252692b332c92702670bba583                      
-+                                                                                             
-
-[http://www.porchdogsoft.com/download/howl-0.9.7.tar.gz]                                     
-
-md5=85fbe016e2ebad99108b1212ae4b1d6f                                                         
-
-sha256=f8766c44291aac92b2b4abc762e1b11e3504dd9f2a855fdde371b5abd730fe9f                      
-diff --git a/packages/hotplug2/hotplug2_0.9+1.0beta.bb
-b/packages/hotplug2/hotplug2_0.9+1.0beta.bb
-new file mode 100644
-index 0000000..8ae5149
---- /dev/null
-+++ b/packages/hotplug2/hotplug2_0.9+1.0beta.bb
-@@ -0,0 +1,31 @@
-+DESCRIPTION = "hotplug2 is a daemon which dynamically creates and
-removes device nodes from \
-+/dev/, handles hotplug events and loads drivers at boot time. It
-replaces \
-+the hotplug and udev packages and requires a kernel not older than
-2.6.12."
-+RPROVIDES_${PN} = "hotplug"
-+RREPLACES_${PN} = "udev"
-+PR = "r0"
-+
-+SRC_URI =
-"http://isteve.bofh.cz/~isteve/hotplug2/downloads/hotplug2-1.0-beta.tar.gz \
-+           "
-+
-+S = "${WORKDIR}/hotplug2-1.0-beta"
-+
-+DEFAULT_PREFERENCE = "-1"
-+
-+inherit autotools
-+
-+INITSCRIPT_PARAMS = "start 03 S ."
-+
-+LDFLAGS += "-lglibc"
-+DESTDIR=${D}
-+
-+do_configure () {
-+}
-+
-+do_install_prepend () {
-+        install -d ${D}/lib/hotplug2
-+        install -d ${D}/sbin
-+}
-+
-+FILES_${PN} += "${base_libdir}/hotplug2/*"
-+FILES_${PN}-dbg += "${base_libdir}/hotplug2/.debug"
---
-1.5.6.3
-
-
+Regards,
+Mike (mwester)
 
 
