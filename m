@@ -1,21 +1,28 @@
-Received: from [216.145.245.198] (helo=mx02.dls.net)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LoTip-0007c8-0q
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Mar 2009 04:29:03 +0200
-Received: from [209.242.7.134] (helo=[192.168.231.111])
-	by mx02.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LoTge-0002Ar-Kk
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Mar 2009 21:26:49 -0500
-Message-ID: <49D17F70.8020109@dls.net>
-Date: Mon, 30 Mar 2009 21:26:56 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
+	(envelope-from <trini@kernel.crashing.org>) id 1LoU4i-00081q-Ka
+	for openembedded-devel@openembedded.org; Tue, 31 Mar 2009 04:51:41 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090331024928.EPPT10385.fed1rmmtao107.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 30 Mar 2009 22:49:28 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id ZepR1b00E4dMFYL03epR19; Mon, 30 Mar 2009 22:49:28 -0400
+X-Authority-Analysis: v=1.0 c=1 a=I0l-3axpi8cA:10 a=W2UYVCv3iGAA:10
+	a=cdIBcQxmch8PBfQryu8A:9 a=X6Q4kGzd-wGc1XjOrIqV6A4ZjtMA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Mon, 30 Mar 2009 19:49:25 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090331024925.GJ14278@smtp.west.cox.net>
+References: <49D17F70.8020109@dls.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: [RFC] make preferred openssl version match for -native recipe
+In-Reply-To: <49D17F70.8020109@dls.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] make preferred openssl version match for -native	recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,24 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2009 02:29:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 Mar 2009 02:51:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I'd like to propose that we remove the "DEFAULT_PREFERENCE = "-1"" line
-from openssl-native_0.9.8j.bb.
+On Mon, Mar 30, 2009 at 09:26:56PM -0500, Mike (mwester) wrote:
+> I'd like to propose that we remove the "DEFAULT_PREFERENCE = "-1"" line
+> from openssl-native_0.9.8j.bb.
+> 
+> This is causing a problem in select cases (for example, python-native
+> fails "import md5"), because we build and stage openssl 0.9.8j, but the
+> corresponding -native that gets built and staged is openssl 0.9.7g.
+> 
+> The 0.9.8j version is currently selected as the PREFERRED_VERSION in the
+> preferred-om-2008-versions.inc file, as well as for SlugOS.  I've
+> successfully built it on both 32 and 64 bit hosts.
+> 
+> Unless there are objections, I'll commit a fix in a couple of days.
 
-This is causing a problem in select cases (for example, python-native
-fails "import md5"), because we build and stage openssl 0.9.8j, but the
-corresponding -native that gets built and staged is openssl 0.9.7g.
+Perhaps we should also make sure anyplace that defines a preferred
+provide for one sets the same version for the other (with an appropriate
+poke to the maintainer) ?
 
-The 0.9.8j version is currently selected as the PREFERRED_VERSION in the
-preferred-om-2008-versions.inc file, as well as for SlugOS.  I've
-successfully built it on both 32 and 64 bit hosts.
-
-Unless there are objections, I'll commit a fix in a couple of days.
-
-Regards,
-Mike (mwester)
+-- 
+Tom Rini
 
 
