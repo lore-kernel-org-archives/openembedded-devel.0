@@ -1,28 +1,39 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LoU4i-00081q-Ka
-	for openembedded-devel@openembedded.org; Tue, 31 Mar 2009 04:51:41 +0200
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090331024928.EPPT10385.fed1rmmtao107.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 30 Mar 2009 22:49:28 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id ZepR1b00E4dMFYL03epR19; Mon, 30 Mar 2009 22:49:28 -0400
-X-Authority-Analysis: v=1.0 c=1 a=I0l-3axpi8cA:10 a=W2UYVCv3iGAA:10
-	a=cdIBcQxmch8PBfQryu8A:9 a=X6Q4kGzd-wGc1XjOrIqV6A4ZjtMA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 30 Mar 2009 19:49:25 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090331024925.GJ14278@smtp.west.cox.net>
-References: <49D17F70.8020109@dls.net>
+	(envelope-from <castroenrico@gmail.com>) id 1LoXCG-0003zg-1N
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 31 Mar 2009 08:11:40 +0200
+Received: by ewy20 with SMTP id 20so2226513ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Mar 2009 23:09:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=Jrn+mfMX4UCk7bCFrLAcq9YLjLOfwBvPHK1wzz4KDh8=;
+	b=AQQKQ1Vpd+d8uW5/lJQ44cJ+RZViJNdTWBUPTIEZk+fDpENg+cROja8y0PCwTE/SHi
+	uJc7VnzNW7loDNsMu1/ry59RNxL21XuMq4vcdekO4kGZqApO5HXvJmG2MHm26gT5UEz5
+	9GTNdVjRuG4TG7dWwqvYlDOrVsfmQvv5zp+7I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=FEuS2F6+4nHyaL42Fb+nTg55wNEZIXCbHORWeaB/7poRX6JiEqj+TBicwd7+K+uV/H
+	V89XKXEH/6xeQnzYTCm6s81NvVzBov+8gHCnLgvqoogWHLu0ch1dIs5n4jDUVsYdmFwh
+	LoplcmIpbBn9m6u/SSpzzcYcOeJTvXB2++yT0=
+Received: by 10.210.86.10 with SMTP id j10mr3254097ebb.41.1238479767290;
+	Mon, 30 Mar 2009 23:09:27 -0700 (PDT)
+Received: from ubuntu.redarrow (net-93-144-44-111.t2.dsl.vodafone.it
+	[93.144.44.111])
+	by mx.google.com with ESMTPS id 10sm2497623eyz.49.2009.03.30.23.09.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 30 Mar 2009 23:09:26 -0700 (PDT)
+Message-ID: <49D1B395.7050004@gmail.com>
+Date: Tue, 31 Mar 2009 08:09:25 +0200
+From: Enrico Castro <castroenrico@gmail.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-In-Reply-To: <49D17F70.8020109@dls.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] make preferred openssl version match for -native	recipe
+To: openembedded-devel@lists.openembedded.org
+Subject: problem with qt-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,29 +47,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2009 02:51:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 31 Mar 2009 06:11:40 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 30, 2009 at 09:26:56PM -0500, Mike (mwester) wrote:
-> I'd like to propose that we remove the "DEFAULT_PREFERENCE = "-1"" line
-> from openssl-native_0.9.8j.bb.
-> 
-> This is causing a problem in select cases (for example, python-native
-> fails "import md5"), because we build and stage openssl 0.9.8j, but the
-> corresponding -native that gets built and staged is openssl 0.9.7g.
-> 
-> The 0.9.8j version is currently selected as the PREFERRED_VERSION in the
-> preferred-om-2008-versions.inc file, as well as for SlugOS.  I've
-> successfully built it on both 32 and 64 bit hosts.
-> 
-> Unless there are objections, I'll commit a fix in a couple of days.
+I installed OE [1] and I build a console-image successful.
+After I tried to build my image:
 
-Perhaps we should also make sure anyplace that defines a preferred
-provide for one sets the same version for the other (with an appropriate
-poke to the maintainer) ?
+IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
 
--- 
-Tom Rini
+ANGSTROM_EXTRA_INSTALL ?= ""
+
+DEPENDS = "task-base-extended \
+            ${@base_contains("MACHINE_FEATURES", "screen", "psplash-
+zap", "",d)} \
+            mplayer omapfbplay \
+            qt-embedded \
+            gdb \
+            rt73-firmware wireless-tools zd1211-firmware \
+            "
+
+IMAGE_INSTALL = "task-base-extended \
+             ${ANGSTROM_EXTRA_INSTALL} \
+             ${@base_contains("MACHINE_FEATURES", "screen", "psplash-zap",
+"",d)} \
+             mplayer omapfbplay \
+             qt-embedded \
+             qt-embedded-plugin-imageformat-gif \
+             qt-embedded-plugin-imageformat-ico \
+             qt-embedded-plugin-imageformat-jpeg \
+             qt-embedded-plugin-imageformat-mng \
+             qt-embedded-plugin-imageformat-svg \
+             qt-embedded-plugin-imageformat-tiff \
+             gdb \
+             rt73-firmware wireless-tools zd1211-firmware \
+            "
+
+export IMAGE_BASENAME = "my-image"
+IMAGE_LINGUAS = ""
+
+inherit image
+
+But I had the next error:
+
+ERROR: Required build target 'my-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['my-image', 'qt-
+embedded']
+
+Maybe do I made any mistake? Then, I tried to build a neuros-osd-base-
+image but I had such error:
+
+ERROR: '['/home/****/oe/openembedded/recipes/images/neuros-osd-base-
+image.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime
+entity 'qt-embedded' but it wasn't found in any PACKAGE or RPROVIDES
+variables
+NOTE: Runtime target 'qt-embedded' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['qt-embedded']
+ERROR: Required build target 'neuros-osd-base-image' has no buildable
+providers.
+Missing or unbuildable dependency chain was: ['neuros-osd-base-image',
+'qt-embedded']
+
+[1] http://elinux.org/BeagleBoardAndOpenEmbeddedGit
 
 
