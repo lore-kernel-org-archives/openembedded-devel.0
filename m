@@ -1,17 +1,17 @@
 Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1Lokkd-0001Gy-NS
+	(envelope-from <koen@amethyst.openembedded.net>) id 1Lokke-0001HD-7H
 	for openembedded-devel@lists.linuxtogo.org;
-	Tue, 31 Mar 2009 22:40:03 +0200
+	Tue, 31 Mar 2009 22:40:04 +0200
 Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id D311F189477; Tue, 31 Mar 2009 22:40:12 +0200 (CEST)
+	id 6357F189477; Tue, 31 Mar 2009 22:40:13 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
 To: openembedded-devel@lists.linuxtogo.org
-Date: Tue, 31 Mar 2009 22:40:12 +0200
-Message-Id: <1238532012-3020-1-git-send-email-k.kooi@student.utwente.nl>
+Date: Tue, 31 Mar 2009 22:40:13 +0200
+Message-Id: <1238532013-3047-1-git-send-email-k.kooi@student.utwente.nl>
 X-Mailer: git-send-email 1.5.6.5
 Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] webkit-gtk: update to 1.1.4 release to get some more bugfixes
+Subject: [STABLE][PATCH] linux-omap 2.6.29: update mmc regulator patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,124 +32,135 @@ From: Koen Kooi <koen@openembedded.org>
 
 Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- conf/distro/include/sane-srcrevs.inc   |    2 +-
- recipes/webkit/webkit-gtk/autogen.sh   |    9 +++++++++
- recipes/webkit/webkit-gtk/configure.ac |    7 +++++--
- recipes/webkit/webkit-gtk_svn.bb       |   11 ++++++++---
- 4 files changed, 23 insertions(+), 6 deletions(-)
+ ...add-regulator-info-to-get-the-microSD-slo.patch |   46 ++++++--------------
+ recipes/linux/linux-omap_2.6.29.bb                 |    2 +-
+ 2 files changed, 14 insertions(+), 34 deletions(-)
 
-diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-index 9a9ce1a..996fe84 100644
---- a/conf/distro/include/sane-srcrevs.inc
-+++ b/conf/distro/include/sane-srcrevs.inc
-@@ -234,7 +234,7 @@ SRCREV_pn-usbpath ?= "3172"
- SRCREV_pn-usbpath-native ?= "3172"
- SRCREV_pn-vala-terminal ?= "94117f453ce884e9c30b611fae6fc19f85f98f2b"
- SRCREV_pn-vala-native ?= "54a924505856a839ad02dc95baa482e994e94a57"
--SRCREV_pn-webkit-gtk ?= "42069"
-+SRCREV_pn-webkit-gtk ?= "42127"
- SRCREV_pn-wlan-ng-modules ?= "1859"
- SRCREV_pn-wlan-ng-utils ?= "1859"
- SRCREV_pn-wmiconfig ?= "4522"
-diff --git a/recipes/webkit/webkit-gtk/autogen.sh b/recipes/webkit/webkit-gtk/autogen.sh
-index f87238c..8f736c4 100644
---- a/recipes/webkit/webkit-gtk/autogen.sh
-+++ b/recipes/webkit/webkit-gtk/autogen.sh
-@@ -14,6 +14,14 @@ AUTOMAKE_FLAGS="--foreign --add-missing"
+diff --git a/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch b/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
+index ddee308..49045f7 100644
+--- a/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
++++ b/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
+@@ -1,17 +1,20 @@
+-From 0561e7124500418e913a3b91ddc09d4bd8dc5032 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@beagleboard.org>
++From 7efa7cc5b807cb840c62b5bf54bf47181c9b95a6 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@openembedded.org>
+ Date: Mon, 30 Mar 2009 15:21:37 +0200
+-Subject: [PATCH] ARM: OMAP: board-ldp: add regulator info to get the microSD slot working again
++Subject: [PATCH v2] ARM: OMAP: board-ldp: add regulator info to get the microSD slot working again
  
- DIE=0
+ The ldp board was left behind when other boards got updated. The ldp info was copied from the beagleboard board file and s/beagle/ldp/g
  
-+(gtkdocize --version) < /dev/null > /dev/null 2>&1 || {
-+    echo
-+    echo "You must have gtkdocize installed to compile $PROJECT."
-+    echo "Install the appropriate package for your distribution,"
-+    echo "or get the source tarball at http://ftp.gnome.org/pub/GNOME/sources/gtk-doc/"
-+    DIE=1
-+}
++Changes since v1:
++ * dropped vsim portion since only 4 pins are hooked up
 +
- (autoconf --version) < /dev/null > /dev/null 2>&1 || {
-     echo
-     echo "You must have autoconf installed to compile $PROJECT."
-@@ -50,6 +58,7 @@ rm -rf $top_srcdir/autom4te.cache
+ Signed-off-by: Koen Kooi <koen@beagleboard.org>
+ ---
+- arch/arm/mach-omap2/board-ldp.c |   55 +++++++++++++++++++++++++++++++++++++++
+- 1 files changed, 55 insertions(+), 0 deletions(-)
++ arch/arm/mach-omap2/board-ldp.c |   32 ++++++++++++++++++++++++++++++++
++ 1 files changed, 32 insertions(+), 0 deletions(-)
  
- touch README INSTALL
+ diff --git a/arch/arm/mach-omap2/board-ldp.c b/arch/arm/mach-omap2/board-ldp.c
+-index 30926b0..faf62f8 100644
++index 30926b0..19a5c15 100644
+ --- a/arch/arm/mach-omap2/board-ldp.c
+ +++ b/arch/arm/mach-omap2/board-ldp.c
+ @@ -22,6 +22,7 @@
+@@ -22,7 +25,7 @@ index 30926b0..faf62f8 100644
+  #include <linux/i2c/twl4030.h>
+  
+  #include <mach/hardware.h>
+-@@ -450,7 +451,17 @@ static struct twl4030_script *twl4030_scripts[] __initdata = {
++@@ -450,7 +451,16 @@ static struct twl4030_script *twl4030_scripts[] __initdata = {
+  	&wrst_script,
+  };
+  
+@@ -31,7 +34,6 @@ index 30926b0..faf62f8 100644
+ +	 * devices' drivers should be managing these.
+ +	 */
+ +	{ .resource = RES_VMMC1, },
+-+	{ .resource = RES_VSIM, },
+ +	{ 0, },
+ +};
+ +
+@@ -40,7 +42,7 @@ index 30926b0..faf62f8 100644
+  	.scripts	= twl4030_scripts,
+  	.size		= ARRAY_SIZE(twl4030_scripts),
+  };
+-@@ -474,6 +485,44 @@ static struct twl4030_madc_platform_data ldp_madc_data = {
++@@ -474,6 +484,25 @@ static struct twl4030_madc_platform_data ldp_madc_data = {
+  	.irq_line	= 1,
+  };
+  
+@@ -48,10 +50,6 @@ index 30926b0..faf62f8 100644
+ +	.supply			= "vmmc",
+ +};
+ +
+-+static struct regulator_consumer_supply ldp_vsim_supply = {
+-+	.supply			= "vmmc_aux",
+-+};
+-+
+ +/* VMMC1 for MMC1 pins CMD, CLK, DAT0..DAT3 (20 mA, plus card == max 220 mA) */
+ +static struct regulator_init_data ldp_vmmc1 = {
+ +	.constraints = {
+@@ -67,41 +65,23 @@ index 30926b0..faf62f8 100644
+ +	.consumer_supplies	= &ldp_vmmc1_supply,
+ +};
+ +
+-+/* VSIM for MMC1 pins DAT4..DAT7 (2 mA, plus card == max 50 mA) */
+-+static struct regulator_init_data ldp_vsim = {
+-+	.constraints = {
+-+		.min_uV			= 1800000,
+-+		.max_uV			= 3000000,
+-+		.valid_modes_mask	= REGULATOR_MODE_NORMAL
+-+					| REGULATOR_MODE_STANDBY,
+-+		.valid_ops_mask		= REGULATOR_CHANGE_VOLTAGE
+-+					| REGULATOR_CHANGE_MODE
+-+					| REGULATOR_CHANGE_STATUS,
+-+	},
+-+	.num_consumer_supplies	= 1,
+-+	.consumer_supplies	= &ldp_vsim_supply,
+-+};
+-+
+  static struct twl4030_platform_data ldp_twldata = {
+  	.irq_base	= TWL4030_IRQ_BASE,
+  	.irq_end	= TWL4030_IRQ_END,
+-@@ -483,6 +532,8 @@ static struct twl4030_platform_data ldp_twldata = {
++@@ -483,6 +512,7 @@ static struct twl4030_platform_data ldp_twldata = {
+  	.madc		= &ldp_madc_data,
+  	.usb		= &ldp_usb_data,
+  	.power		= &sdp3430_t2scripts_data,
+ +	.vmmc1		= &ldp_vmmc1,
+-+	.vsim		= &ldp_vsim,
+  	.gpio		= &ldp_gpio_data,
+  	.keypad		= &ldp_kp_twl4030_data,
+  };
+-@@ -530,6 +581,10 @@ static void __init omap_ldp_init(void)
++@@ -530,6 +560,8 @@ static void __init omap_ldp_init(void)
+  	omap_serial_init();
+  	usb_musb_init();
+  	twl4030_mmc_init(mmc);
+ +	/* link regulators to MMC adapters */
+ +	ldp_vmmc1_supply.dev = mmc[0].dev;
+-+	ldp_vsim_supply.dev = mmc[0].dev;
+-+	
+  }
+  
+  static void __init omap_ldp_map_io(void)
+diff --git a/recipes/linux/linux-omap_2.6.29.bb b/recipes/linux/linux-omap_2.6.29.bb
+index 86827fd..f5c20ba 100644
+--- a/recipes/linux/linux-omap_2.6.29.bb
++++ b/recipes/linux/linux-omap_2.6.29.bb
+@@ -10,7 +10,7 @@ DEFAULT_PREFERENCE = "-1"
  
-+gtkdocize || exit $?
- aclocal $ACLOCAL_FLAGS || exit $?
- $LIBTOOLIZE $LIBTOOLIZE_FLAGS || exit $?
- autoheader || exit $?
-diff --git a/recipes/webkit/webkit-gtk/configure.ac b/recipes/webkit/webkit-gtk/configure.ac
-index ad13dea..4940af8 100644
---- a/recipes/webkit/webkit-gtk/configure.ac
-+++ b/recipes/webkit/webkit-gtk/configure.ac
-@@ -2,7 +2,7 @@ AC_PREREQ(2.59)
+ SRCREV = "90e758af52ba803cba233fabee81176d99589f09"
  
- m4_define([webkit_major_version], [1])
- m4_define([webkit_minor_version], [1])
--m4_define([webkit_micro_version], [3])
-+m4_define([webkit_micro_version], [4])
+-PR = "r1+gitr${SRCREV}"
++PR = "r2+gitr${SRCREV}"
  
- AC_INIT([WebKit],[webkit_major_version.webkit_minor_version.webkit_micro_version],[http://bugs.webkit.org/])
- 
-@@ -24,7 +24,7 @@ AC_CONFIG_SRCDIR([WebCore/config.h])
- 
- dnl # Libtool library version, not to confuse with API version
- dnl # see http://www.gnu.org/software/libtool/manual/html_node/Libtool-versioning.html#Libtool-versioning
--LIBWEBKITGTK_VERSION=3:0:1
-+LIBWEBKITGTK_VERSION=4:0:2
- AC_SUBST([LIBWEBKITGTK_VERSION])
- 
- AM_INIT_AUTOMAKE([foreign subdir-objects tar-ustar])
-@@ -598,6 +598,8 @@ if test "$enable_video" = "yes"; then
-     html_flags=yes
- fi
- 
-+GTK_DOC_CHECK([1.10])
-+
- # OS conditionals
- AM_CONDITIONAL([OS_WIN32],[test "$os_win32" = "yes"])
- AM_CONDITIONAL([OS_UNIX],[test "$os_win32" = "no"])
-@@ -649,6 +651,7 @@ AC_CONFIG_FILES([
- GNUmakefile
- WebKit/gtk/webkit-1.0.pc:WebKit/gtk/webkit.pc.in
- WebKit/gtk/webkit/webkitversion.h
-+WebKit/gtk/docs/version.xml
- ]
- )
- 
-diff --git a/recipes/webkit/webkit-gtk_svn.bb b/recipes/webkit/webkit-gtk_svn.bb
-index 2e5c014..8473131 100644
---- a/recipes/webkit/webkit-gtk_svn.bb
-+++ b/recipes/webkit/webkit-gtk_svn.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "WebKit browser engine, GTK+ edition"
--DEPENDS = "gnome-keyring libsoup-2.4 curl icu libxml2 cairo libxslt libxt libidn gnutls gtk+ gstreamer gst-plugins-base gnome-vfs bison-native flex-native gperf-native perl-native sqlite3"
-+DEPENDS = "gtk-doc-native gtk-doc gnome-keyring libsoup-2.4 curl icu libxml2 cairo libxslt libxt libidn gnutls gtk+ gstreamer gst-plugins-base gnome-vfs bison-native flex-native gperf-native perl-native sqlite3"
- 
- SRCREV_FORMAT = "webcore-rwebkit"
- 
--PV = "1.1.3+svnr${SRCREV}"
-+PV = "1.1.4+svnr${SRCREV}"
- 
- SRC_URI = "\
-   svn://svn.webkit.org/repository/webkit/trunk/;module=JavaScriptCore;proto=http \
-@@ -31,10 +31,15 @@ EXTRA_OECONF = "\
-                 --enable-debug=no \
-                 --enable-svg \
-                 --enable-icon-database=yes \
--		--with-http-backend=soup \
-+                --with-http-backend=soup \
-                "
-+
- EXTRA_AUTORECONF = " -I autotools "
- 
-+do_configure_prepend() {
-+	touch gtk-doc.make
-+}
-+
- # Dolt gets used on x86 and ppc and hardcodes 'libtool'
- do_configure_append() {
- 	cp ${TARGET_PREFIX}libtool libtool || true
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
+ 	   file://defconfig"
 -- 
 1.5.6.5
 
