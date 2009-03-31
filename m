@@ -1,17 +1,17 @@
 Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1Lokkc-0001Gc-Om
+	(envelope-from <koen@amethyst.openembedded.net>) id 1Lokkd-0001Gi-7k
 	for openembedded-devel@lists.linuxtogo.org;
-	Tue, 31 Mar 2009 22:40:02 +0200
+	Tue, 31 Mar 2009 22:40:03 +0200
 Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id AFEE6189477; Tue, 31 Mar 2009 22:40:11 +0200 (CEST)
+	id E3C0E189476; Tue, 31 Mar 2009 22:40:11 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
 To: openembedded-devel@lists.linuxtogo.org
 Date: Tue, 31 Mar 2009 22:40:11 +0200
-Message-Id: <1238532011-2930-1-git-send-email-k.kooi@student.utwente.nl>
+Message-Id: <1238532011-2963-1-git-send-email-k.kooi@student.utwente.nl>
 X-Mailer: git-send-email 1.5.6.5
 Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] webkit-gtk: fix PV
+Subject: [STABLE][PATCH] gcc 4.3.x: disable thumb mode for now, glibc builds don't like it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,24 +32,44 @@ From: Koen Kooi <koen@openembedded.org>
 
 Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- recipes/webkit/webkit-gtk_svn.bb |    4 +---
- 1 files changed, 1 insertions(+), 3 deletions(-)
+ recipes/gcc/gcc-4.3.1.inc |    1 +
+ recipes/gcc/gcc-4.3.2.inc |    1 +
+ recipes/gcc/gcc-4.3.3.inc |    1 +
+ 3 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/webkit/webkit-gtk_svn.bb b/recipes/webkit/webkit-gtk_svn.bb
-index 49b1590..2e5c014 100644
---- a/recipes/webkit/webkit-gtk_svn.bb
-+++ b/recipes/webkit/webkit-gtk_svn.bb
-@@ -3,9 +3,7 @@ DEPENDS = "gnome-keyring libsoup-2.4 curl icu libxml2 cairo libxslt libxt libidn
+diff --git a/recipes/gcc/gcc-4.3.1.inc b/recipes/gcc/gcc-4.3.1.inc
+index 7f7f15e..cdab6dc 100644
+--- a/recipes/gcc/gcc-4.3.1.inc
++++ b/recipes/gcc/gcc-4.3.1.inc
+@@ -1,5 +1,6 @@
+ # No armeb and thumb patches - really needs checking 
+ DEFAULT_PREFERENCE = "-99"
++ARM_INSTRUCTION_SET = "arm"
  
- SRCREV_FORMAT = "webcore-rwebkit"
+ require gcc-common.inc
  
--# Yes, this is wrong...
--PV = "0.1+svnr${SRCREV}"
--PR = "r9"
-+PV = "1.1.3+svnr${SRCREV}"
+diff --git a/recipes/gcc/gcc-4.3.2.inc b/recipes/gcc/gcc-4.3.2.inc
+index 1fc05af..aeb3477 100644
+--- a/recipes/gcc/gcc-4.3.2.inc
++++ b/recipes/gcc/gcc-4.3.2.inc
+@@ -1,5 +1,6 @@
+ # No armeb and thumb patches - really needs checking 
+ DEFAULT_PREFERENCE = "-999"
++ARM_INSTRUCTION_SET = "arm"
  
- SRC_URI = "\
-   svn://svn.webkit.org/repository/webkit/trunk/;module=JavaScriptCore;proto=http \
+ require gcc-common.inc
+ 
+diff --git a/recipes/gcc/gcc-4.3.3.inc b/recipes/gcc/gcc-4.3.3.inc
+index d5d5db0..4bed0e4 100644
+--- a/recipes/gcc/gcc-4.3.3.inc
++++ b/recipes/gcc/gcc-4.3.3.inc
+@@ -1,5 +1,6 @@
+ # No armeb and thumb patches - really needs checking 
+ DEFAULT_PREFERENCE = "-999"
++ARM_INSTRUCTION_SET = "arm"
+ 
+ require gcc-common.inc
+ 
 -- 
 1.5.6.5
 
