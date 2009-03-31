@@ -1,22 +1,35 @@
-Received: from [65.55.90.240] (helo=snt0-omc4-s37.snt0.hotmail.com)
+Received: from [209.85.217.170] (helo=mail-gx0-f170.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <huru_ukko@hotmail.com>) id 1Lol5L-0002UF-Ab
+	(envelope-from <raj.khem@gmail.com>) id 1Loljs-0008Sa-9O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Mar 2009 23:01:27 +0200
-Received: from SNT105-W56 ([65.55.90.201]) by snt0-omc4-s37.snt0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 31 Mar 2009 13:59:10 -0700
-Message-ID: <SNT105-W5667C19202F0CB199F6AF6908A0@phx.gbl>
-X-Originating-IP: [91.153.19.197]
-From: Mauri Sandberg <huru_ukko@hotmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 31 Mar 2009 23:59:10 +0300
-Importance: Normal
+	Tue, 31 Mar 2009 23:43:25 +0200
+Received: by gxk18 with SMTP id 18so5709067gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Mar 2009 14:41:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=WM1o82elQBEhl/I0rED/nEs7rDjJTTh3JKfXGrdhitU=;
+	b=XUNY1P8aPihKmCLxxpD6cIUj6zTu/QgOd+vumXyhZYk2joZTrpmYaGndjflnOmgfsX
+	ANLQ1ndoCrrEv4DQ7bNbUqzYxu/i9ZoYSKoR7X4jokFH0rILcvrltakl0k2362fPhGSg
+	Pjw7bNPqfwrhSJDVGqNOXQqlWKGcNhCgqoD5U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=UFpapxUMGB6uswePqcPaWLTZK/jtPuZDKbSd2OY3GENQI/ywBg64ym5e3ikEMryuYz
+	GYi6apZkafZvCK2NOzQOzs9MUN9PTfvKmqBNumI2d81pW1l2v2pWNSDbo4j1dfFwATnR
+	+GSPx2BKHaZlPadXQ6wrU/BT3xRfHXcGQ+7oU=
 MIME-Version: 1.0
-X-OriginalArrivalTime: 31 Mar 2009 20:59:10.0182 (UTC)
-	FILETIME=[89D5E860:01C9B243]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Does your own system matter
+Received: by 10.101.71.6 with SMTP id y6mr5499101ank.77.1238535663417; Tue, 31 
+	Mar 2009 14:41:03 -0700 (PDT)
+In-Reply-To: <200903302141.30822.joerg@hakker.de>
+References: <200903302141.30822.joerg@hakker.de>
+Date: Tue, 31 Mar 2009 14:41:03 -0700
+Message-ID: <19c1b8a90903311441o492174d0v9df11b339a7e0a3d@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] gcc-cross-kernel-3.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,31 +43,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2009 21:01:27 -0000
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Tue, 31 Mar 2009 21:43:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
+Thanks for the patch something like S_IRUSR | S_IWUSR instead of 0666
+would be better.
 
-	  Does your own system play important part when building stuff with OpenEm=
-bedded? I am building on Ubuntu 8.10 and I do seem to be getting failed bui=
-lds where other people do not judging on build statuses they report.
+On 3/30/09, J=C3=B6rg Bakker <joerg@hakker.de> wrote:
+> Building gcc-cross-kernel-3.3.4 stops with the following error:
+>
+> | In function 'open',
+>
+> |     inlined from 'collect_execute' at
+> /home/jb/devel/cc/jammsession/oe/build/tmp/work/i586-angstrom-linux/gcc-c=
+ross-
+> kernel-3.3.4-3.3.4-r9/gcc-3.3.4/gcc/collect2.c:1575:
+>
+>
+> | /usr/include/bits/fcntl2.h:51: error: call to '__open_missing_mode'
+> declared
+> with attribute error: open with O_CREAT in second argument needs 3 argume=
+nts
+>
+>
+> | make[1]: *** [collect2.o] Error 1
+>
+> | make[1]: *** Waiting for unfinished jobs....
+>
+> | done
+>
+> ....
+> | make[1]: Leaving directory
+> `/home/jb/devel/cc/jammsession/oe/build/tmp/work/i586-angstrom-linux/gcc-
+> cross-kernel-3.3.4-3.3.4-r9/gcc-3.3.4/build.i686-linux.i586-angstrom-
+> linux/gcc'
+> | make: *** [all-gcc] Error 2
+> | FATAL: oe_runmake failed
+> NOTE: Task failed: /home/jb/devel/cc/jammsession/oe/build/tmp/work/i586-
+> angstrom-linux/gcc-cross-kernel-3.3.4-3.3.4-r9/temp/log.do_compile.17555
+> NOTE: package gcc-cross-kernel-3.3.4-3.3.4-r9: task do_compile: failed
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of /home/jb/devel/cc/jammsession/oe/build/recipes/gcc.save/g=
+cc-
+> cross-kernel-3.3.4_3.3.4.bb do_compile failed
+> ERROR: Task 7 (/home/jb/devel/cc/jammsession/oe/build/recipes/gcc.save/gc=
+c-
+> cross-kernel-3.3.4_3.3.4.bb, do_compile) failed
+> NOTE: Tasks Summary: Attempted 271 tasks of which 265 didn't need to be
+> rerun
+> and 1 failed.
+> ERROR: '/home/jb/devel/cc/jammsession/oe/build/recipes/gcc.save/gcc-cross=
+-
+> kernel-3.3.4_3.3.4.bb' failed
+>
+> OE Build Configuration:
+> BB_VERSION        =3D "1.8.13"
+> METADATA_BRANCH   =3D "org.openembedded.dev"
+> METADATA_REVISION =3D "8f8efbe43a7f28802d066f7f83915e8fbd0d4cc2"
+> TARGET_ARCH       =3D "i586"
+> TARGET_OS         =3D "linux"
+> MACHINE           =3D "epia"
+> DISTRO            =3D "angstrom"
+> DISTRO_VERSION    =3D "2009.X-test-20090329"
+>
+> The attached patch fixes this.
+>
+>
+>
+>
 
-I am trying to build for DNS-323 using angstrom-2008.1 distro in stable/200=
-9 branch now. I have tried other branches=2C stable and dev=2C earlier too.=
- Building always breaks at uclibc.
-
-I was able to compile uclibc 0.9.29 for cm-x270=2C though. Unfortunately th=
-at build failed later on also.
-
-Before complaining about broken stuff I'd like to get my own end sorted out=
-.
-
--- Mauri
-
-
-_________________________________________________________________
-Invite your mail contacts to join your friends list with Windows Live Space=
-s. It's easy!
-http://spaces.live.com/spacesapi.aspx?wx_action=3Dcreate&wx_url=3D/friends.=
-aspx&mkt=3Den-us=
 
