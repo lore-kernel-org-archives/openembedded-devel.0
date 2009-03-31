@@ -1,33 +1,23 @@
-Received: from [212.27.42.1] (helo=smtp1-g21.free.fr)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1Loiym-0004Mq-Uf
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Mar 2009 20:46:33 +0200
-Received: from smtp1-g21.free.fr (localhost [127.0.0.1])
-	by smtp1-g21.free.fr (Postfix) with ESMTP id 739D49401CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2009 20:44:16 +0200 (CEST)
-Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
-	[81.56.56.40])
-	by smtp1-g21.free.fr (Postfix) with ESMTP id 8AFF99401C9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2009 20:44:14 +0200 (CEST)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id 12C061840C5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2009 20:44:14 +0200 (CEST)
-Message-ID: <49D2647D.2040609@bolloretelecom.eu>
-Date: Tue, 31 Mar 2009 20:44:13 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lojzp-0002zt-Fr
+	for openembedded-devel@openembedded.org; Tue, 31 Mar 2009 21:51:41 +0200
+Received: (qmail 31015 invoked by uid 813007); 31 Mar 2009 19:49:26 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 31 Mar 2009 19:49:26 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <49D1B395.7050004@gmail.com>	<20090331075734.GB6971@rhein.zuhause.netz>
-	<49D1F9A4.9090403@gmail.com>
-In-Reply-To: <49D1F9A4.9090403@gmail.com>
-Subject: Re: problem with qt-embedded
+Date: Tue, 31 Mar 2009 21:49:24 +0200
+User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
+References: <200903311837.28324.marcin@juszkiewicz.com.pl>
+	<gqti8d$6qs$1@ger.gmane.org>
+	<20090331171727.GK14278@smtp.west.cox.net>
+In-Reply-To: <20090331171727.GK14278@smtp.west.cox.net>
+MIME-Version: 1.0
+Message-Id: <200903312149.25409.marcin@juszkiewicz.com.pl>
+Subject: Re: [STABLE] branch created: stable/2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,18 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2009 18:46:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 31 Mar 2009 19:51:41 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Enrico,
+Dnia wtorek, 31 marca 2009 o 19:17:27 Tom Rini napisa=C5=82(a):
+> > Great!
+> >
+> > I already have a few patches queued up for the stablebranch:
+> >
+> > http://dominion.thruhere.net/koen/OE/for-stable/
+> >
+> > What's the proper procedure for getting those in?
+>
+> And please answer in the form of a link to a wiki page :)
 
-I have replace the references to "qt-embedded" by "qt4-embedded" in
-neuros-osd-base-image.bb and "meta-toolchain-neuros.bb".
+http://wiki.openembedded.net/index.php/Stable contains first=20
+informations.
 
-Cheers,
---=20
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
