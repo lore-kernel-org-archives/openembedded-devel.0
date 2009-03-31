@@ -1,32 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LoduF-0001jP-HR
-	for openembedded-devel@openembedded.org; Tue, 31 Mar 2009 15:21:31 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lods6-0000q2-Vi
-	for openembedded-devel@openembedded.org; Tue, 31 Mar 2009 13:19:18 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 31 Mar 2009 13:19:18 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 31 Mar 2009 13:19:18 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 31 Mar 2009 15:19:08 +0200
-Message-ID: <gqt58c$l2k$1@ger.gmane.org>
+	(envelope-from <hs4233@mail.mn-solutions.de>) id 1LoeBq-000093-VL
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 31 Mar 2009 15:39:42 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id D877E3A010;
+	Tue, 31 Mar 2009 15:37:30 +0200 (CEST)
+X-Virus-Scanned: by Mittwald Mailscanner
+Received: from mx51.mymxserver.com ([127.0.0.1])
+	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 74iCuHhV0gPn; Tue, 31 Mar 2009 15:37:30 +0200 (CEST)
+Received: from lin01.mn-solutions.de (pD95F9924.dip0.t-ipconnect.de
+	[217.95.153.36])
+	by mx51.mymxserver.com (Postfix) with ESMTP id 6C1543A006;
+	Tue, 31 Mar 2009 15:37:30 +0200 (CEST)
+Received: by lin01.mn-solutions.de (Postfix, from userid 116)
+	id 0464D1E0122; Tue, 31 Mar 2009 15:37:30 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	lin01.mn-logistik.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
+	by lin01.mn-solutions.de (Postfix) with ESMTP id 96DB21E0100;
+	Tue, 31 Mar 2009 15:37:26 +0200 (CEST)
+From: Holger Schurig <hs4233@mail.mn-solutions.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 Mar 2009 15:36:37 +0200
+User-Agent: KMail/1.9.7
 References: <49D21128.30201@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090322 Shredder/3.0b3pre
 In-Reply-To: <49D21128.30201@gmx.net>
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200903311536.37486.hs4233@mail.mn-solutions.de>
 Subject: Re: ugly OE issue with RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,47 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2009 13:21:31 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 31 Mar 2009 13:39:43 -0000
+Content-Type: text/plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 31-03-09 14:48, Robert Schuster wrote:
-> Hi,
-> I have this specific issue with with RDEPENDS and no idea how to solve
-> it. It affects my Java recipes but in theory it can happen to any other
-> recipes too. It is nothing Java specific. The unwanted effect is that OE
-> builds to much and as such slows down the time to build a specific
-> package considerably.
->
-> Ok here is how it goes:
->
-> I want to build recipe jamvm (application). This in turn needs recipe
-> classpath. classpath puts a lot of useful things into staging which is
-> needed by the jamvm build. So far so good.
->
-> The problem is. classpath's tar.gz also contains some Java applications
-> (the well known jar, javah and so). Via PACKAGE variable I place those
-> into the binary package classpath-tools. To make everything as smooth as
-> possible for the user I furthermore declare:
->
-> RDEPENDS_classpath-tools = "java2-runtime". This means: For this package
-> to work correctly a Java runtime needs to be installed. OE in turn
-> demands that this java2-runtime dependency is also satisfied during the
-> build.
->
-> The odd thing that happens here is: jamvm (which I want to build) is a
-> provider for java2-runtime but this does not interest OE and it builds
-> another provider for java2-runtime instead. In my case this is
-> openjdk-6, a recipe takes a very long time to built.
+> RDEPENDS_classpath-tools = "java2-runtime".
 
-The real issue is that you RDEPEND on a virtual package, but you're not 
-giving OE enough info to resolve the virtual to a real provider. I 
-suppose you want bitbake to (reverse) check the build target for any 
-virtuals it might provide, right?
+One more comment after reading Koen's reply: maybe you name 
+this "virtual/java2-runtime" ?
 
-regards,
-
-Koen
-
+This has nothing to do with your problem, but just brings in some 
+consistency. And maybe, if bitbake ever considers virtual 
+packages different when it comes to runtime-dependencies, your 
+problem might go away :-)
 
 
