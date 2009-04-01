@@ -1,24 +1,21 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1LoxTl-0006c8-3D
+Received: from [80.246.246.162] (helo=office.altell.ru)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <khimov@altell.ru>) id 1LoxW6-0006em-8I
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 12:15:29 +0200
-Received: (qmail invoked by alias); 01 Apr 2009 10:13:09 -0000
-Received: from f053003157.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.3.157]
-	by mail.gmx.net (mp030) with SMTP; 01 Apr 2009 12:13:09 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/v2jleWA/v2tdnNoH18ZwRe3J0JAOoMdsjAj02/+
-	qwme8XIbHfM1tD
-Message-ID: <49D33E39.4030303@gmx.net>
-Date: Wed, 01 Apr 2009 12:13:13 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
+	Wed, 01 Apr 2009 12:17:54 +0200
+Received: from localhost.localdomain (unknown [192.168.1.115])
+	by mail.altell.local (Postfix) with ESMTP id 97EE868377;
+	Wed,  1 Apr 2009 14:15:28 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.7
-Subject: RFC: removing libsdl-mixer-1.2.6
+Date: Wed,  1 Apr 2009 14:15:28 +0400
+Message-Id: <1238580928-1072-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.2.1
+MIME-Version: 1.0
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-Spam-Status: No
+Subject: [PATCH] package.bbclass: fix globbing for mask-like files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,46 +29,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 10:15:29 -0000
-X-Groupsio-MsgNum: 8914
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig4DE2EDA4EFB41E161F93AD12"
+X-List-Received-Date: Wed, 01 Apr 2009 10:17:54 -0000
 
---------------enig4DE2EDA4EFB41E161F93AD12
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+When a package contains two files like "name*" and "name*smth" OE can't
+properly package those, looping infinetely trying to build file list. The
+reason is that first file name globs to two files and OE adds them both
+into the list, then globs the first one again and gets two same files, etc.
 
-Hi,
-I would like to remove the recipe for libsdl-mixer 1.2.6. That one has
-issues[0] with libtool and is a very old package anyway. In Debian it is
-oldstable.
+Fix that.
+---
+ classes/package.bbclass |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
 
-The only distribution (apart from chinook-compat which I maintain) using
-it is openmoko.
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 7a61c5a..8a77369 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -384,8 +384,12 @@ python populate_packages () {
+ 			globbed = glob.glob(file)
+ 			if globbed:
+ 				if [ file ] != globbed:
+-					files += globbed
+-					continue
++					if not file in globbed:
++						files += globbed
++						continue
++					else:
++						globbed.remove(file)
++						files += globbed
+ 			if (not os.path.islink(file)) and (not os.path.exists(file)):
+ 				continue
+ 			if file in seen:
+-- 
+1.6.2.1
 
-1.2.8 (which the other version we have in OE) builds fine.
 
-Is anyone against the removal? If not I will do it in a few days.
-
-Regards
-Robert
-
-[0] - http://pastebin.com/m2ade815e
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
 
 
---------------enig4DE2EDA4EFB41E161F93AD12
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAknTPjsACgkQG9cfwmwwEtql3QCfb5MPv6sGogr1UrM+C/qJyPzz
-1IoAoJ4B/Zhftx8HVY/nDJjH8wJy3+Mv
-=4puJ
------END PGP SIGNATURE-----
-
---------------enig4DE2EDA4EFB41E161F93AD12--
