@@ -1,31 +1,34 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1Louy6-00075z-7a
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 09:34:39 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 6888A2C823
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Apr 2009 07:30:57 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wVVmQT4Nj+KE
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Apr 2009 07:30:55 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id AD6F42C7FD
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Apr 2009 07:30:54 +0000 (UTC)
-Message-ID: <49D3187D.2030803@gmail.com>
-Date: Wed, 01 Apr 2009 09:32:13 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <200903311837.28324.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200903311837.28324.marcin@juszkiewicz.com.pl>
-Subject: Re: [STABLE] branch created: stable/2009
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LovG3-0007QS-Rm
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 09:53:11 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LovDk-00027C-PH
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 07:50:49 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 01 Apr 2009 07:50:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 01 Apr 2009 07:50:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 01 Apr 2009 09:50:38 +0200
+Message-ID: <gqv6ce$k19$1@ger.gmane.org>
+References: <gqqq0q$or5$1@ger.gmane.org>
+	<05187d8f9a873df8504511279c44af7c02b4facf.1238542568.git.andrea.adami@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <05187d8f9a873df8504511279c44af7c02b4facf.1238542568.git.andrea.adami@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] angstrom-2008.1.conf: add PREFERRED_VERSION_psplash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 07:34:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Apr 2009 07:53:12 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz ha scritto:
-> Hi
-> 
-> I would like to announce creation of new branch: stable/2009 in 
-> OpenEmbedded repository. It was branched few days ago, build tested and 
-> got some bugfixes which were added to .dev tree (and back to 
-> stable/2009).
-> 
-> What was in build test? Distro "angstrom-2008.1", machines: qemuarm 
-> (armv5te), at91sam9263ek (armv5te), beagleboard (armv7a), qemux86 (i586) 
-> and vortex86sx (486sx). I tested building of next images: console, 
-> console-base, x11, beagleboard-demo for each of those machines. So far 
-> only glibc builds were tested, uclibc one is queued.
-> 
-> I also imported BitBake 1.8.12 (last release) into "stable/2009" branch 
-> as this is minimal stable version which works with this repository.
-> 
-> Feel free to clone and do tests. I will write more later.
-> 
-> Regards, 
+On 01-04-09 01:45, Andrea Adami wrote:
+>
+>   -second try
+> ---
+>   conf/distro/angstrom-2008.1.conf |   11 ++++++++++-
+>   1 files changed, 10 insertions(+), 1 deletions(-)
+>
+> diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+> index 57048d6..6c2c1bd 100644
+> --- a/conf/distro/angstrom-2008.1.conf
+> +++ b/conf/distro/angstrom-2008.1.conf
+> @@ -76,6 +76,15 @@ PREFERRED_VERSION_glibc-initial 	?= "2.6.1"
+>   PREFERRED_VERSION_uclibc        	?= "0.9.30"
+>   PREFERRED_VERSION_uclibc-initial	?= "0.9.30"
+>
+> +# Preferred version for psplash
+> +# This enforces a specific brand to be used, in our case the angstrom
+> +# one. In case you want to change the logo or something like that we
+> +# suggest you to create another recipe (e.g: psplash-<brand>) for that
+> +# and add that into your image.
+> +# You can also opt to change or override this line, but that isn't
+> +# needed because psplash is using update-alternatives.
+> +PREFERRED_VERSION_psplash               ?= "psplash-angstrom"
+> +
+>   PREFERRED_PROVIDER_avahi = "avahi"
+>
+>   #Small machines prefer kdrive, but we might ship full Xorg in other images
+> @@ -144,7 +153,7 @@ PREFERRED_PROVIDER_virtual/xserver      ?= "xserver-kdrive"
+>   # Others:
+>   PREFERRED_PROVIDER_linux-libc-headers = "linux-libc-headers"
+>   PREFERRED_PROVIDER_dbus-glib             = "dbus-glib"
+> -PREFERRED_PROVIDER_esound 		?= "pulseaudio"
+> +PREFERRED_PROVIDER_esound               ?= "pulseaudio"
+>   PREFERRED_PROVIDER_gconf                ?= "gconf-dbus"
+>   PREFERRED_PROVIDER_gnome-vfs            ?= "gnome-vfs"
+>   PREFERRED_PROVIDER_gnome-vfs-plugin-file ?= "gnome-vfs"
 
-What command do you use to get it ?
+What does pulseaudio have to do with psplash? Looks OK otherwise
 
-/marco
+regards,
+
+Koen
+
+
 
 
