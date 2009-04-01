@@ -1,20 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Lp0xr-0001gx-8T
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 15:58:47 +0200
-Received: (qmail 9367 invoked by uid 1003); 1 Apr 2009 13:56:25 -0000
+	(envelope-from <philip@balister.org>) id 1Lp0yK-0002Eg-Dm
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 15:59:16 +0200
+Received: (qmail 8068 invoked by uid 1003); 1 Apr 2009 13:56:54 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Apr 2009 13:56:24 -0000
-Message-ID: <49D37286.4070209@balister.org>
-Date: Wed, 01 Apr 2009 09:56:22 -0400
+	by mail.geekisp.com with SMTP; 1 Apr 2009 13:56:54 -0000
+Message-ID: <49D372A4.2080709@balister.org>
+Date: Wed, 01 Apr 2009 09:56:52 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1238532010-2837-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1238532010-2837-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH] omapzoom: linux-omap work better on the device	than linux-omapzoom, so switch to that
+References: <1238532010-2874-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1238532010-2874-1-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH] omapzoom: add xf86-input-tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,12 +28,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 13:58:48 -0000
-X-Groupsio-MsgNum: 8931
+X-List-Received-Date: Wed, 01 Apr 2009 13:59:17 -0000
+X-Groupsio-MsgNum: 8932
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040508070109020101040802"
+	micalg=sha1; boundary="------------ms090203020508020305020807"
 
---------------ms040508070109020101040802
+--------------ms090203020508020305020807
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,25 +45,23 @@ Koen Kooi wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  conf/machine/omapzoom.conf |    3 +--
->  1 files changed, 1 insertions(+), 2 deletions(-)
+>  conf/machine/omapzoom.conf |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
 > 
 > diff --git a/conf/machine/omapzoom.conf b/conf/machine/omapzoom.conf
-> index 22fe5d4..58b61f1 100644
+> index 58b61f1..4ca164e 100644
 > --- a/conf/machine/omapzoom.conf
 > +++ b/conf/machine/omapzoom.conf
-> @@ -24,8 +24,7 @@ EXTRA_IMAGECMD_jffs2 = "-lnp "
->  # Guesswork
->  SERIAL_CONSOLE = "115200 ttyS2"
->  
-> -# Will be merged into the linux-omap recipe soon
-> -PREFERRED_PROVIDER_virtual/kernel = "linux-omapzoom"
-> +PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
->  
->  KERNEL_IMAGETYPE = "uImage"
->  
+> @@ -6,6 +6,7 @@ TARGET_ARCH = "arm"
+>  PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+>  XSERVER = "xserver-xorg \
+>             xf86-input-evdev \
+> +           xf86-input-tslib \
+>             xf86-input-mouse \
+>             xf86-video-omapfb \
+>             xf86-input-keyboard"
 
---------------ms040508070109020101040802
+--------------ms090203020508020305020807
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -115,17 +113,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQwMTEz
-NTYyMlowIwYJKoZIhvcNAQkEMRYEFKIlASy6xe0J1pO8Amk0Jr2OlVogMFIGCSqGSIb3DQEJDzFF
+NTY1MlowIwYJKoZIhvcNAQkEMRYEFCTGAaAnjJKIs2DtyRKfN9BB83tuMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQC60lMcxk8tdEySLbWJjkbqO2pUu0oGtwDkApJL9QFjhBL3Zg5A
-8bDXo3sz8efNvlvlhJOOMd3U08qujyBad673kA1fQvkr3xEAxhrHq5InxzmAEuL/Ujsbfe/v1UI+
-YGqhlsfVkVaDOtq08I7GLgHU+l+8uK9Z7JAsDr92JlJ9JEAEJ/LUYsqclV/d6sG2aMe/+OP0/HRo
-vL7jUIFdGH2LP+pSO21uXZk9XIY81ZJbqfvvnqiMOMsYqZxRaCUZWimU/UbJrkGtT7efWzoArl6K
-8ksnlB4aC8KvxCkuxrrFGQ0Ls3qXTPhJT+Pyt1LMGSWilRGnInvzl5cwIJThgAWoAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQB4Wklf9rJfoPlpnCL8xHll2juMNFg2Z3sH/99MppDoP9ShLBJ4
+ooj3U+9K95FtgNmBMhnEjpfK1WCGv++WNU0OxZYBdAfiJ5bRZuglOWtmhxt0uX7+p/U1xiESv1QJ
+D0VfqSF2b+LRKtl5w6obpTEVEqNx1OH1kfK52mAtWXnhL39bzee+e8wHVnbiMNAaPT8DFxCu3l3a
+W/0ifXFwC4T7nHPecuOi+2kvhs5sqjYgArngpLGeOEHxQjWiAfoM8tX6VEQJQb/R9A58DWQy+NsR
+D3tFsYSoGeDsGLNmPjHT2pR/R390Qc2BTWHsOMEivKYWXx7h7GQobr97clovw7irAAAAAAAA
 
---------------ms040508070109020101040802--
+--------------ms090203020508020305020807--
