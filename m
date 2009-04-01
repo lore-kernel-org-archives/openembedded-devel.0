@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.78.27] (helo=ey-out-2122.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LoysX-0002Mg-2v
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 13:45:09 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LoyqJ-0002zF-3U
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 11:42:51 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 01 Apr 2009 11:42:51 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dp@xora.org.uk>) id 1LozD1-0002z6-1o
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 14:06:19 +0200
+Received: by ey-out-2122.google.com with SMTP id 22so594416eye.51
 	for <openembedded-devel@openembedded.org>;
-	Wed, 01 Apr 2009 11:42:51 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 01 Apr 2009 05:04:00 -0700 (PDT)
+Received: by 10.210.110.5 with SMTP id i5mr5897910ebc.76.1238587440788;
+	Wed, 01 Apr 2009 05:04:00 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 5sm8123162ewy.76.2009.04.01.05.03.59
+	(version=SSLv3 cipher=RC4-MD5); Wed, 01 Apr 2009 05:04:00 -0700 (PDT)
+Message-ID: <49D3582F.4070304@xora.org.uk>
+Date: Wed, 01 Apr 2009 13:03:59 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 01 Apr 2009 13:42:39 +0200
-Message-ID: <gqvjvf$uga$1@ger.gmane.org>
-References: <200903311837.28324.marcin@juszkiewicz.com.pl>	<gqti8d$6qs$1@ger.gmane.org>	<20090331171727.GK14278@smtp.west.cox.net>
-	<200903312149.25409.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <200903312149.25409.marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE] branch created: stable/2009
+X-Enigmail-Version: 0.95.0
+Subject: klibc problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 11:45:10 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 01 Apr 2009 12:06:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On 31-03-09 21:49, Marcin Juszkiewicz wrote:
-> Dnia wtorek, 31 marca 2009 o 19:17:27 Tom Rini napisał(a):
->>> Great!
->>>
->>> I already have a few patches queued up for the stablebranch:
->>>
->>> http://dominion.thruhere.net/koen/OE/for-stable/
->>>
->>> What's the proper procedure for getting those in?
->>
->> And please answer in the form of a link to a wiki page :)
->
-> http://wiki.openembedded.net/index.php/Stable contains first
-> informations.
+Ok, its no mystery to some people that klibc has problems with modern
+kernels.
 
-Thanks, to make getting the patches a bit easier I created a public 
-patchwork bundle:
+But I think we also have a problem with the package in OE. Seeing as
+klibc is machine dependent in that it includes mach-XXX/include/mach/*.h
+files it really should not be staged as part of the base arch. I think
+we need to stage it into ${MACHINE_ARCH} the same was as the kernel is.
 
-http://patchwork.openembedded.org/bundle/koen/koen-for-stable-20090331/
+We can then work on fixing the application compiles. I think I have a
+suitable hack.
 
-And if everyone uses the [STABLE] tag in mail subjects my patchwork 
-filter will make it easier to pick them out.
-
-regards,
-
-Koen
+Graeme
 
 
 
