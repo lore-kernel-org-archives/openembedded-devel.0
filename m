@@ -1,25 +1,39 @@
-Received: from [65.55.90.207] (helo=snt0-omc4-s4.snt0.hotmail.com)
+Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <huru_ukko@hotmail.com>) id 1LowpW-0005SY-TH
+	(envelope-from <castroenrico@gmail.com>) id 1LowsP-0005Ua-4B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 11:33:55 +0200
-Received: from SNT105-W34 ([65.55.90.201]) by snt0-omc4-s4.snt0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 1 Apr 2009 02:31:34 -0700
-Message-ID: <SNT105-W34EB74514DEB1FDC22CF26908B0@phx.gbl>
-X-Originating-IP: [194.251.71.12]
-From: Mauri Sandberg <huru_ukko@hotmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 1 Apr 2009 12:31:34 +0300
-Importance: Normal
-In-Reply-To: <49D28F41.1050005@gmx.net>
-References: <SNT105-W5667C19202F0CB199F6AF6908A0@phx.gbl>
-	<49D28F41.1050005@gmx.net> 
+	Wed, 01 Apr 2009 11:36:57 +0200
+Received: by fxm20 with SMTP id 20so2711250fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Apr 2009 02:34:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=G9snp6vNz/oTZKCpojxvpBl9PUATSWEJC5mVScXa/uw=;
+	b=RIEle4YSh80HpsSFcUBhYwNSzn0MAZCI5h6S/4DfgH32T93gb5SC5/tNaVG6mLG9eI
+	ad3vKQTSzgZaIeTRhalpdDswu4n7BmLtW3Z/vrZKAfhtwwRTASUpJE7DoZNSLHjpEU1V
+	8GIC4r+U6Iu8HmwMS3JOJFyQSMIlB0KcE4CDw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=NDyLZxP1VTr77lDBDOGLEnpLHsZGLOaumGKRXhPZvnqd6LR2LYZCL2Eu7MqXPJup7W
+	wlOvWfYWRolfOTG3dD6y+HbYfo8Tt9TN8AtRujA9DgHKC7Bah6dw/+vEkXBQp0bKV3go
+	CbvTIWeefJfcm19C35PJN+G4qIBQmnERvLbok=
+Received: by 10.86.65.9 with SMTP id n9mr5878493fga.61.1238578473428;
+	Wed, 01 Apr 2009 02:34:33 -0700 (PDT)
+Received: from ubuntu.redarrow (net-93-144-42-124.t2.dsl.vodafone.it
+	[93.144.42.124])
+	by mx.google.com with ESMTPS id l12sm1397368fgb.16.2009.04.01.02.34.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 01 Apr 2009 02:34:32 -0700 (PDT)
+Message-ID: <49D33527.6050102@gmail.com>
+Date: Wed, 01 Apr 2009 11:34:31 +0200
+From: Enrico Castro <castroenrico@gmail.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-X-OriginalArrivalTime: 01 Apr 2009 09:31:34.0804 (UTC)
-	FILETIME=[A6208D40:01C9B2AC]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Does your own system matter
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: qt4-tools-native_4.4.3.bb failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,77 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 09:33:55 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Apr 2009 09:36:59 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 8bit
 
+> Could you please post that log?
 
+http://lists.linuxtogo.org/pipermail/openembedded-devel/attachments/20090401/62fe5532/attachment.asc
 
+> Enrico,
+> 
+> It looks like g++ is not picking up libz from native staging:
+> 
+> g++ -fno-exceptions -Wl,-rpath,/home/enrico/oe/tmp/staging/i686-linux/usr/lib
+> -Wl,-rpath,/home/enrico/oe/tmp/staging/i686-linux/usr/lib -o ../../../bin/uic
+> [snip]
+> .obj/release-static-emb-x86/qfsfileengine_iterator_unix.o     -lz -ldl
+> /usr/bin/ld: cannot find -lz
+> 
+> This is very odd as qt4-tools-native DEPENDS on zlib-native, so libz should be available.
+> Could you please post the output of:
+> 
+> ls -l /home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.*
+> 
+> Cheers,
+> -- 
+> Jeremy LAINE
+> Bolloré telecom | 11bis, rue Scribe | F-75009 Paris
+> 
 
+The output is:
 
+-rw-r--r-- 1 enrico enrico 78752 2009-03-27 12:36 /home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.a
+-rwxr-xr-x 1 enrico enrico   978 2009-03-27 12:36 /home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.la
+lrwxrwxrwx 1 enrico enrico    13 2009-03-27 12:36 
+/home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.so -> libz.so.1.2.3
+lrwxrwxrwx 1 enrico enrico    13 2009-03-27 12:36 
+/home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.so.1 -> libz.so.1.2.3
+-rwxr-xr-x 1 enrico enrico 79084 2009-03-27 12:36 
+/home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.so.1.2.3
 
+Regards
 
+Enrico
 
-Hi=2C
-
-I did not provide logs as my question was deliberately on more general leve=
-l still as I wanted to know if there are some system setups what to avoid e=
-tc. In the wiki page for stable/2009 (http://wiki.openembedded.net/index.ph=
-p/Stable) it is mentioned that support for Ubuntu 8.10 is in TODO-list.
-
-I wanted to know what system setups people are using successfully. I take i=
-t that Ubuntu 8.10 is a bad choice at the moment. How about Ubuntu 7.10 or =
-7.04?
-
-Regards=2C
-Mauri
-
-
-> Date: Tue=2C 31 Mar 2009 23:46:41 +0200
-> From: theBohemian@gmx.net
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Does your own system matter
->=20
-> Hi=2C
-> please provide a log of the failed action. Otherwise we can only guess.
->=20
-> Btw: Have you checked that /bin/sh is /bin/bash on your box?
->=20
-> Regards
-> Robert
->=20
-> Mauri Sandberg schrieb:
-> > 	  Does your own system play important part when building stuff with Op=
-enEmbedded? I am building on Ubuntu 8.10 and I do seem to be getting failed=
- builds where other people do not judging on build statuses they report.
-> >=20
-> > I am trying to build for DNS-323 using angstrom-2008.1 distro in stable=
-/2009 branch now. I have tried other branches=2C stable and dev=2C earlier =
-too. Building always breaks at uclibc.
-> >=20
-> > I was able to compile uclibc 0.9.29 for cm-x270=2C though. Unfortunatel=
-y that build failed later on also.
-> >=20
-> > Before complaining about broken stuff I'd like to get my own end sorted=
- out.
-> >=20
-> > -- Mauri
-> >=20
-> >=20
-> > _________________________________________________________________
-> > Invite your mail contacts to join your friends list with Windows Live S=
-paces. It's easy!
-> > http://spaces.live.com/spacesapi.aspx?wx_action=3Dcreate&wx_url=3D/frie=
-nds.aspx&mkt=3Den-us
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >=20
->=20
->=20
-
-_________________________________________________________________
-Show them the way! Add maps and directions to your party invites.=20
-http://www.microsoft.com/windows/windowslive/products/events.aspx=
 
