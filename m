@@ -1,25 +1,26 @@
-Received: from [212.227.126.171] (helo=moutng.kundenserver.de)
+Received: from [212.227.126.177] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <joerg@hakker.de>) id 1Lp6T2-0001dC-KX
+	(envelope-from <joerg@hakker.de>) id 1Lp76z-0007KH-Hn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 21:51:29 +0200
+	Wed, 01 Apr 2009 22:32:43 +0200
 Received: from tristan.localnet (port-92-202-38-39.dynamic.qsc.de
 	[92.202.38.39])
-	by mrelayeu.kundenserver.de (node=mrelayeu4) with ESMTP (Nemesis)
-	id 0ML21M-1Lp6Qj2gpX-0007kV; Wed, 01 Apr 2009 21:48:58 +0200
-From: =?utf-8?q?J=C3=B6rg_Bakker?= <joerg@hakker.de>
+	by mrelayeu.kundenserver.de (node=mrelayeu8) with ESMTP (Nemesis)
+	id 0ML31I-1Lp74g05v1-0004b3; Wed, 01 Apr 2009 22:30:14 +0200
+From: =?iso-8859-15?q?J=F6rg_Bakker?= <joerg@hakker.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 1 Apr 2009 21:48:56 +0200
-User-Agent: KMail/1.11.1 (Linux/2.6.27-11-generic; KDE/4.2.1; i686; ; )
-References: <200903302141.30822.joerg@hakker.de>
-	<19c1b8a90903311441o492174d0v9df11b339a7e0a3d@mail.gmail.com>
-In-Reply-To: <19c1b8a90903311441o492174d0v9df11b339a7e0a3d@mail.gmail.com>
+Date: Wed, 1 Apr 2009 22:30:11 +0200
+User-Agent: KMail/1.11.1 (Linux/2.6.27-11-generic; KDE/4.2.2; i686; ; )
+References: <SNT105-W5667C19202F0CB199F6AF6908A0@phx.gbl>
+	<SNT105-W291629ECBDDF1A26627D6C908B0@phx.gbl>
+	<49D394A5.2060805@gmx.net>
+In-Reply-To: <49D394A5.2060805@gmx.net>
 MIME-Version: 1.0
-Message-Id: <200904012148.56556.joerg@hakker.de>
-X-Provags-ID: V01U2FsdGVkX18dgTqAIVr9ycBnwI7PVd31Hq4Fk3dNdnEhBka
-	58JddAtP1R587iQEnYCvwF0IHhpAOyBlsO4iEAzCETlJ6uC5BG
-	M2tmXakOFdoz2qm6/octw==
-X-SA-Exim-Connect-IP: 212.227.126.171
+Message-Id: <200904012230.12120.joerg@hakker.de>
+X-Provags-ID: V01U2FsdGVkX1/4ANLZJq/OxzUBXq9yQHVUtfly6GNaPIADjJa
+	5Uvif9lUf3keQ5kQkJDYyNN4mgYylH9awbbORq9sIqT15N1VIU
+	EVSv2FAhSF3/S9PAGnv6g==
+X-SA-Exim-Connect-IP: 212.227.126.177
 X-SA-Exim-Mail-From: joerg@hakker.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
@@ -27,7 +28,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,
 	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gcc-cross-kernel-3.3.4
+Subject: Re: Does your own system matter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,124 +42,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 19:51:30 -0000
-X-Groupsio-MsgNum: 8949
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_oU80JVGK51cGt0o"
-
---Boundary-00=_oU80JVGK51cGt0o
+X-List-Received-Date: Wed, 01 Apr 2009 20:32:44 -0000
 Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Yes, you're right. Changed patch is attached.
+Here's another one using Ubuntu 8.10. Currently building basic bootstrap 
+images with and w/o X, distro is angstrom, branch is org.openembedded.dev, all  
+glibc. The stable branches bumped out very early (think it was the shasum 
+package), so I stayed with org.openembedded.dev.
 
-Thanks for the hint.
+So far, two patches were needed (gcc-cross-kernel and kernel). I also had one 
+issue with intltool:
 
-Am Dienstag 31 M=C3=A4rz 2009 23:41:03 schrieb Khem Raj:
-> Thanks for the patch something like S_IRUSR | S_IWUSR instead of 0666
-> would be better.
+| checking for XML::Parser... configure: error: XML::Parser perl module is 
+required for intltool
+| FATAL: oe_runconf failed
+NOTE: Task failed: /home/jb/devel/cc/jammsession/oe/build/tmp/work/i586-
+angstrom-linux/intltool-0.40.3-r2/temp/log.do_configure.21467
+NOTE: package intltool-0.40.3-r2: task do_configure: failed
+
+and fixed this by running:
+bitbake libxml-parser-perl-native
+
+Hope that gets you further down the road ...
+Joerg
+
+Am Mittwoch 01 April 2009 18:21:57 schrieb Robert Schuster:
+> Hi,
 >
-> On 3/30/09, J=C3=B6rg Bakker <joerg@hakker.de> wrote:
-> > Building gcc-cross-kernel-3.3.4 stops with the following error:
-> > | In function 'open',
-> > |
-> > |     inlined from 'collect_execute' at
+> Mauri Sandberg schrieb:
+> > ----------------------------------------
 > >
-> > /home/jb/devel/cc/jammsession/oe/build/tmp/work/i586-angstrom-linux/gcc=
-=2Dc
-> >ross-
+> >> Date: Wed, 1 Apr 2009 15:10:41 +0200
+> >> From: theBohemian@gmx.net
+> >>
+> >> I am using Ubuntu 8.10 (x86) and Debian squeeze (amd64) for OE
+> >> development. Works like a charm.
 > >
-> > kernel-3.3.4-3.3.4-r9/gcc-3.3.4/gcc/collect2.c:1575:
-> > | /usr/include/bits/fcntl2.h:51: error: call to '__open_missing_mode'
-> >
-> > declared
-> > with attribute error: open with O_CREAT in second argument needs 3
-> > arguments
-> >
-> > | make[1]: *** [collect2.o] Error 1
-> > |
-> > | make[1]: *** Waiting for unfinished jobs....
-> > |
-> > | done
-> >
-> > ....
-> >
-> > | make[1]: Leaving directory
-> >
-> > `/home/jb/devel/cc/jammsession/oe/build/tmp/work/i586-angstrom-linux/gc=
-c-
-> > cross-kernel-3.3.4-3.3.4-r9/gcc-3.3.4/build.i686-linux.i586-angstrom-
-> > linux/gcc'
-> >
-> > | make: *** [all-gcc] Error 2
-> > | FATAL: oe_runmake failed
-> >
-> > NOTE: Task failed: /home/jb/devel/cc/jammsession/oe/build/tmp/work/i586-
-> > angstrom-linux/gcc-cross-kernel-3.3.4-3.3.4-r9/temp/log.do_compile.17555
-> > NOTE: package gcc-cross-kernel-3.3.4-3.3.4-r9: task do_compile: failed
-> > ERROR: TaskFailed event exception, aborting
-> > ERROR: Build of
-> > /home/jb/devel/cc/jammsession/oe/build/recipes/gcc.save/gcc-
-> > cross-kernel-3.3.4_3.3.4.bb do_compile failed
-> > ERROR: Task 7
-> > (/home/jb/devel/cc/jammsession/oe/build/recipes/gcc.save/gcc-
-> > cross-kernel-3.3.4_3.3.4.bb, do_compile) failed
-> > NOTE: Tasks Summary: Attempted 271 tasks of which 265 didn't need to be
-> > rerun
-> > and 1 failed.
-> > ERROR:
-> > '/home/jb/devel/cc/jammsession/oe/build/recipes/gcc.save/gcc-cross-
-> > kernel-3.3.4_3.3.4.bb' failed
-> >
-> > OE Build Configuration:
-> > BB_VERSION        =3D "1.8.13"
-> > METADATA_BRANCH   =3D "org.openembedded.dev"
-> > METADATA_REVISION =3D "8f8efbe43a7f28802d066f7f83915e8fbd0d4cc2"
-> > TARGET_ARCH       =3D "i586"
-> > TARGET_OS         =3D "linux"
-> > MACHINE           =3D "epia"
-> > DISTRO            =3D "angstrom"
-> > DISTRO_VERSION    =3D "2009.X-test-20090329"
-> >
-> > The attached patch fixes this.
+> > That sounds reassuring. Are you building uclibc at all? Also,
+> > does it matter what versions of gcc and g++ packages you have
+> > installed locally? I am using what ever is the latests, 4.x.
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> I've not build uclibc for some time. Will try again to build a current
+> image for a AVR32-based NGW when I at that machine.
+>
+> Regards
+> Robert
 
 
---Boundary-00=_oU80JVGK51cGt0o
-Content-Type: text/x-patch;
-  charset="UTF-8";
-  name="gcc-cross-kernel-334.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="gcc-cross-kernel-334.patch"
 
-diff -Nur openembedded/recipes/gcc/gcc-cross-kernel-3.3.4/gcc334-collect2_file_open_args.patch build/recipes/gcc/gcc-cross-kernel-3.3.4/gcc334-collect2_file_open_args.patch
---- openembedded/recipes/gcc/gcc-cross-kernel-3.3.4/gcc334-collect2_file_open_args.patch	1970-01-01 01:00:00.000000000 +0100
-+++ build/recipes/gcc/gcc-cross-kernel-3.3.4/gcc334-collect2_file_open_args.patch	2009-03-21 17:34:07.000000000 +0100
-@@ -0,0 +1,11 @@
-+--- gcc-3.3.4/gcc/collect2.c.orig	2009-03-21 17:26:11.000000000 +0100
-++++ gcc-3.3.4/gcc/collect2.c	2009-03-21 17:26:47.000000000 +0100
-+@@ -1572,7 +1572,7 @@
-+   if (redir)
-+     {
-+       /* Open response file.  */
-+-      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT);
-++      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR);
-+ 
-+       /* Duplicate the stdout and stderr file handles
-+ 	 so they can be restored later.  */
-diff -Nur openembedded/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb build/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb
---- openembedded/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb	2009-03-21 10:44:02.000000000 +0100
-+++ build/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb	2009-03-21 17:39:11.000000000 +0100
-@@ -1,2 +1,3 @@
- require gcc-cross-initial_${PV}.bb
- require gcc-cross-kernel.inc
-+SRC_URI_append = "file://gcc334-collect2_file_open_args.patch;patch=1"
-
---Boundary-00=_oU80JVGK51cGt0o--
