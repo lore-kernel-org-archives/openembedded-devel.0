@@ -1,39 +1,24 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <castroenrico@gmail.com>) id 1LowsP-0005Ua-4B
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LoxTl-0006c8-3D
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 11:36:57 +0200
-Received: by fxm20 with SMTP id 20so2711250fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Apr 2009 02:34:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=G9snp6vNz/oTZKCpojxvpBl9PUATSWEJC5mVScXa/uw=;
-	b=RIEle4YSh80HpsSFcUBhYwNSzn0MAZCI5h6S/4DfgH32T93gb5SC5/tNaVG6mLG9eI
-	ad3vKQTSzgZaIeTRhalpdDswu4n7BmLtW3Z/vrZKAfhtwwRTASUpJE7DoZNSLHjpEU1V
-	8GIC4r+U6Iu8HmwMS3JOJFyQSMIlB0KcE4CDw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=NDyLZxP1VTr77lDBDOGLEnpLHsZGLOaumGKRXhPZvnqd6LR2LYZCL2Eu7MqXPJup7W
-	wlOvWfYWRolfOTG3dD6y+HbYfo8Tt9TN8AtRujA9DgHKC7Bah6dw/+vEkXBQp0bKV3go
-	CbvTIWeefJfcm19C35PJN+G4qIBQmnERvLbok=
-Received: by 10.86.65.9 with SMTP id n9mr5878493fga.61.1238578473428;
-	Wed, 01 Apr 2009 02:34:33 -0700 (PDT)
-Received: from ubuntu.redarrow (net-93-144-42-124.t2.dsl.vodafone.it
-	[93.144.42.124])
-	by mx.google.com with ESMTPS id l12sm1397368fgb.16.2009.04.01.02.34.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Apr 2009 02:34:32 -0700 (PDT)
-Message-ID: <49D33527.6050102@gmail.com>
-Date: Wed, 01 Apr 2009 11:34:31 +0200
-From: Enrico Castro <castroenrico@gmail.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+	Wed, 01 Apr 2009 12:15:29 +0200
+Received: (qmail invoked by alias); 01 Apr 2009 10:13:09 -0000
+Received: from f053003157.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.3.157]
+	by mail.gmx.net (mp030) with SMTP; 01 Apr 2009 12:13:09 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1/v2jleWA/v2tdnNoH18ZwRe3J0JAOoMdsjAj02/+
+	qwme8XIbHfM1tD
+Message-ID: <49D33E39.4030303@gmx.net>
+Date: Wed, 01 Apr 2009 12:13:13 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: qt4-tools-native_4.4.3.bb failed
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.7
+Subject: RFC: removing libsdl-mixer-1.2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,48 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 09:36:59 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 01 Apr 2009 10:15:29 -0000
+X-Groupsio-MsgNum: 8914
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig4DE2EDA4EFB41E161F93AD12"
 
-> Could you please post that log?
+--------------enig4DE2EDA4EFB41E161F93AD12
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/attachments/20090401/62fe5532/attachment.asc
+Hi,
+I would like to remove the recipe for libsdl-mixer 1.2.6. That one has
+issues[0] with libtool and is a very old package anyway. In Debian it is
+oldstable.
 
-> Enrico,
-> 
-> It looks like g++ is not picking up libz from native staging:
-> 
-> g++ -fno-exceptions -Wl,-rpath,/home/enrico/oe/tmp/staging/i686-linux/usr/lib
-> -Wl,-rpath,/home/enrico/oe/tmp/staging/i686-linux/usr/lib -o ../../../bin/uic
-> [snip]
-> .obj/release-static-emb-x86/qfsfileengine_iterator_unix.o     -lz -ldl
-> /usr/bin/ld: cannot find -lz
-> 
-> This is very odd as qt4-tools-native DEPENDS on zlib-native, so libz should be available.
-> Could you please post the output of:
-> 
-> ls -l /home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.*
-> 
-> Cheers,
-> -- 
-> Jeremy LAINE
-> Bolloré telecom | 11bis, rue Scribe | F-75009 Paris
-> 
+The only distribution (apart from chinook-compat which I maintain) using
+it is openmoko.
 
-The output is:
+1.2.8 (which the other version we have in OE) builds fine.
 
--rw-r--r-- 1 enrico enrico 78752 2009-03-27 12:36 /home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.a
--rwxr-xr-x 1 enrico enrico   978 2009-03-27 12:36 /home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.la
-lrwxrwxrwx 1 enrico enrico    13 2009-03-27 12:36 
-/home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.so -> libz.so.1.2.3
-lrwxrwxrwx 1 enrico enrico    13 2009-03-27 12:36 
-/home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.so.1 -> libz.so.1.2.3
--rwxr-xr-x 1 enrico enrico 79084 2009-03-27 12:36 
-/home/enrico/oe/tmp/staging/i686-linux/usr/lib/libz.so.1.2.3
+Is anyone against the removal? If not I will do it in a few days.
 
 Regards
+Robert
 
-Enrico
+[0] - http://pastebin.com/m2ade815e
 
 
+--------------enig4DE2EDA4EFB41E161F93AD12
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAknTPjsACgkQG9cfwmwwEtql3QCfb5MPv6sGogr1UrM+C/qJyPzz
+1IoAoJ4B/Zhftx8HVY/nDJjH8wJy3+Mv
+=4puJ
+-----END PGP SIGNATURE-----
+
+--------------enig4DE2EDA4EFB41E161F93AD12--
