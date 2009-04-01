@@ -1,20 +1,40 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Lp15p-0002Zt-Ds
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 16:07:02 +0200
-Received: (qmail 28174 invoked by uid 1003); 1 Apr 2009 14:04:39 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Apr 2009 14:04:37 -0000
-Message-ID: <49D37470.6040308@balister.org>
-Date: Wed, 01 Apr 2009 10:04:32 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+	(envelope-from <hs4233@mail.mn-solutions.de>) id 1Lp1Bn-0000Yx-Bv
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Apr 2009 16:13:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id B7AA33A00A;
+	Wed,  1 Apr 2009 16:10:52 +0200 (CEST)
+X-Virus-Scanned: by Mittwald Mailscanner
+Received: from mx51.mymxserver.com ([127.0.0.1])
+	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0meBnsa67Lcd; Wed,  1 Apr 2009 16:10:52 +0200 (CEST)
+Received: from lin01.mn-solutions.de (pD95F960E.dip0.t-ipconnect.de
+	[217.95.150.14])
+	by mx51.mymxserver.com (Postfix) with ESMTP id EA1023A007;
+	Wed,  1 Apr 2009 16:10:51 +0200 (CEST)
+Received: by lin01.mn-solutions.de (Postfix, from userid 116)
+	id 532B31E0122; Wed,  1 Apr 2009 16:10:51 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	lin01.mn-logistik.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00,
+	SUBJ_YOUR_OWN autolearn=ham version=3.1.7-deb
+Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
+	by lin01.mn-solutions.de (Postfix) with ESMTP id 215601E0100;
+	Wed,  1 Apr 2009 16:10:47 +0200 (CEST)
+From: Holger Schurig <hs4233@mail.mn-solutions.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1238532012-2988-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1238532012-2988-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH] libgsm: update to version 1.0.12
+Date: Wed, 1 Apr 2009 16:09:51 +0200
+User-Agent: KMail/1.9.7
+References: <SNT105-W5667C19202F0CB199F6AF6908A0@phx.gbl>
+	<49D367D1.1050302@gmx.net>
+	<SNT105-W291629ECBDDF1A26627D6C908B0@phx.gbl>
+In-Reply-To: <SNT105-W291629ECBDDF1A26627D6C908B0@phx.gbl>
+MIME-Version: 1.0
+Message-Id: <200904011609.51801.hs4233@mail.mn-solutions.de>
+Subject: Re: Does your own system matter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,589 +48,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 14:07:02 -0000
-X-Groupsio-MsgNum: 8935
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms080900050809070406050107"
-
---------------ms080900050809070406050107
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 01 Apr 2009 14:13:11 -0000
+Content-Type: text/plain;
+  charset="windows-1252"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Acked-by: Philip Balister (philip@balister.org)
+> > I am using Ubuntu 8.10 (x86) and Debian squeeze (amd64) for
+> > OE development. Works like a charm.
+>
+> That sounds reassuring. Are you building uclibc at all? Also,
+> does it matter what versions of gcc and g++ packages you have
+> installed locally?
 
-Koen Kooi wrote:
-> From: woglinde <heinold@inf.fu-berlin.de>
-> 
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
->  conf/checksums.ini                                 |    4 +
->  recipes/libgsm/libgsm-1.0.12/01_makefile.patch     |   71 +++++++++
->  recipes/libgsm/libgsm-1.0.12/02_cplusplus.patch    |   25 +++
->  recipes/libgsm/libgsm-1.0.12/03_config.patch       |  154 ++++++++++++++++++++
->  recipes/libgsm/libgsm-1.0.12/04_includes.patch     |   43 ++++++
->  .../libgsm-1.0.12/05_compiler_warnings.patch       |   98 +++++++++++++
->  recipes/libgsm/libgsm_1.0.12.bb                    |   45 ++++++
->  7 files changed, 440 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/libgsm/libgsm-1.0.12/01_makefile.patch
->  create mode 100644 recipes/libgsm/libgsm-1.0.12/02_cplusplus.patch
->  create mode 100644 recipes/libgsm/libgsm-1.0.12/03_config.patch
->  create mode 100644 recipes/libgsm/libgsm-1.0.12/04_includes.patch
->  create mode 100644 recipes/libgsm/libgsm-1.0.12/05_compiler_warnings.patch
->  create mode 100644 recipes/libgsm/libgsm_1.0.12.bb
-> 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index cad12a0..6ce967d 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -9186,6 +9186,10 @@ sha256=850b4512fa5e4bbb964c67c215fe8ce64fe6f7e6b704180a783d8c2a04169ccb
->  md5=4b148480f82e96d274248e13880ec873
->  sha256=ddab700db455e13bcf9bc0592b320e61c6a7c692fb3cef7881b14b2df1a39069
->  
-> +[http://user.cs.tu-berlin.de/~jutta/gsm/gsm-1.0.12.tar.gz]
-> +md5=8909828c601e82e842e6a0ceade60a4e
-> +sha256=dde4e62e4ce35af29a15d26beca2fc0f98c0219553927453425cda01f16e4de4
-> +
->  [http://pyneo.org/downloads/gsm0710muxd-1.7.tgz]
->  md5=b4756f5e521dd2df552862c9766faf11
->  sha256=5149991a219e8f2059350ed9d52bb110c0695da6eb9fe256e9e213e69f83929f
-> diff --git a/recipes/libgsm/libgsm-1.0.12/01_makefile.patch b/recipes/libgsm/libgsm-1.0.12/01_makefile.patch
-> new file mode 100644
-> index 0000000..947db37
-> --- /dev/null
-> +++ b/recipes/libgsm/libgsm-1.0.12/01_makefile.patch
-> @@ -0,0 +1,71 @@
-> +diff -urNad libgsm-1.0.12~/Makefile libgsm-1.0.12/Makefile
-> +--- libgsm-1.0.12~/Makefile	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.12/Makefile	2007-11-01 15:43:06.000000000 +0100
-> +@@ -96,7 +96,7 @@
-> + #  Other tools
-> + 
-> + SHELL		= /bin/sh
-> +-LN		= ln
-> ++LN		= ln -s
-> + BASENAME 	= basename
-> + AR		= ar
-> + ARFLAGS		= cr
-> +@@ -140,6 +140,7 @@
-> + # Targets
-> + 
-> + LIBGSM	= $(LIB)/libgsm.a
-> ++LIBGSMSO= $(LIB)/libgsm.so
-> + 
-> + TOAST	= $(BIN)/toast
-> + UNTOAST	= $(BIN)/untoast
-> +@@ -279,7 +280,7 @@
-> + 
-> + # Target rules
-> + 
-> +-all:		$(LIBGSM) $(TOAST) $(TCAT) $(UNTOAST)
-> ++all:		$(LIBGSM) $(LIBGSMSO) $(TOAST) $(TCAT) $(UNTOAST)
-> + 		@-echo $(ROOT): Done.
-> + 
-> + tst:		$(TST)/lin2cod $(TST)/cod2lin $(TOAST) $(TST)/test-result
-> +@@ -299,6 +300,11 @@
-> + 
-> + # The basic API: libgsm
-> + 
-> ++$(LIBGSMSO):	$(LIB) $(GSM_OBJECTS)
-> ++		$(LD) -o $@.1.0.12 -shared -Xlinker -soname -Xlinker libgsm.so.1 $(GSM_OBJECTS) -lc $(LDFLAGS)
-> ++		ln -fs libgsm.so.1.0.12 lib/libgsm.so.1
-> ++		ln -fs libgsm.so.1.0.12 lib/libgsm.so
-> ++
-> + $(LIBGSM):	$(LIB) $(GSM_OBJECTS)
-> + 		-rm $(RMFLAGS) $(LIBGSM)
-> + 		$(AR) $(ARFLAGS) $(LIBGSM) $(GSM_OBJECTS)
-> +@@ -308,15 +314,15 @@
-> + # Toast, Untoast and Tcat -- the compress-like frontends to gsm.
-> + 
-> + $(TOAST):	$(BIN) $(TOAST_OBJECTS) $(LIBGSM)
-> +-		$(LD) $(LFLAGS) -o $(TOAST) $(TOAST_OBJECTS) $(LIBGSM) $(LDLIB)
-> ++		$(LD) $(LFLAGS) -o $(TOAST) $(TOAST_OBJECTS) $(LIBGSMSO) $(LDLIB)
-> + 
-> + $(UNTOAST):	$(BIN) $(TOAST)
-> + 		-rm $(RMFLAGS) $(UNTOAST)
-> +-		$(LN) $(TOAST) $(UNTOAST)
-> ++		$(LN) toast $(UNTOAST)
-> + 
-> + $(TCAT):	$(BIN) $(TOAST)
-> + 		-rm $(RMFLAGS) $(TCAT)
-> +-		$(LN) $(TOAST) $(TCAT)
-> ++		$(LN) toast $(TCAT)
-> + 
-> + 
-> + # The local bin and lib directories
-> +@@ -426,7 +432,9 @@
-> + 
-> + clean:	semi-clean
-> + 		-rm $(RMFLAGS) $(LIBGSM) $(ADDTST)/add		\
-> +-			$(TOAST) $(TCAT) $(UNTOAST)	\
-> ++			$(LIBGSMSO) $(LIB)/libgsm.so.1.0.12	\
-> ++			$(LIB)libgsm.so.1			\
-> ++			$(TOAST) $(TCAT) $(UNTOAST)		\
-> + 			$(ROOT)/gsm-1.0.tar.Z
-> + 
-> + 
-> diff --git a/recipes/libgsm/libgsm-1.0.12/02_cplusplus.patch b/recipes/libgsm/libgsm-1.0.12/02_cplusplus.patch
-> new file mode 100644
-> index 0000000..a4bbb40
-> --- /dev/null
-> +++ b/recipes/libgsm/libgsm-1.0.12/02_cplusplus.patch
-> @@ -0,0 +1,25 @@
-> +diff -urNad libgsm-1.0.10~/inc/gsm.h libgsm-1.0.10/inc/gsm.h
-> +--- libgsm-1.0.10~/inc/gsm.h	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/inc/gsm.h	2007-11-01 15:44:52.000000000 +0100
-> +@@ -54,6 +54,10 @@
-> + #define	GSM_OPT_FRAME_INDEX	5
-> + #define	GSM_OPT_FRAME_CHAIN	6
-> + 
-> ++#ifdef __cplusplus
-> ++extern "C" {
-> ++#endif
-> ++
-> + extern gsm  gsm_create 	GSM_P((void));
-> + extern void gsm_destroy GSM_P((gsm));	
-> + 
-> +@@ -66,6 +70,10 @@
-> + extern int  gsm_explode GSM_P((gsm, gsm_byte   *, gsm_signal *));
-> + extern void gsm_implode GSM_P((gsm, gsm_signal *, gsm_byte   *));
-> + 
-> ++#ifdef __cplusplus
-> ++}
-> ++#endif
-> ++
-> + #undef	GSM_P
-> + 
-> + #endif	/* GSM_H */
-> diff --git a/recipes/libgsm/libgsm-1.0.12/03_config.patch b/recipes/libgsm/libgsm-1.0.12/03_config.patch
-> new file mode 100644
-> index 0000000..dad241e
-> --- /dev/null
-> +++ b/recipes/libgsm/libgsm-1.0.12/03_config.patch
-> @@ -0,0 +1,154 @@
-> +diff -urNad libgsm-1.0.10~/Makefile libgsm-1.0.10/Makefile
-> +--- libgsm-1.0.10~/Makefile	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/Makefile	2007-11-01 15:48:02.000000000 +0100
-> +@@ -151,7 +151,7 @@
-> + 
-> + HEADERS	=	$(INC)/proto.h		\
-> + 		$(INC)/unproto.h	\
-> +-		$(INC)/config.h		\
-> ++		$(INC)/gsm_config.h	\
-> + 		$(INC)/private.h	\
-> + 		$(INC)/gsm.h		\
-> + 		$(INC)/toast.h		\
-> +diff -urNad libgsm-1.0.10~/inc/config.h libgsm-1.0.10/inc/config.h
-> +--- libgsm-1.0.10~/inc/config.h	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/inc/config.h	1970-01-01 01:00:00.000000000 +0100
-> +@@ -1,37 +0,0 @@
-> +-/*
-> +- * Copyright 1992 by Jutta Degener and Carsten Bormann, Technische
-> +- * Universitaet Berlin.  See the accompanying file "COPYRIGHT" for
-> +- * details.  THERE IS ABSOLUTELY NO WARRANTY FOR THIS SOFTWARE.
-> +- */
-> +-
-> +-/*$Header: /tmp_amd/presto/export/kbs/jutta/src/gsm/RCS/config.h,v 1.5 1996/07/02 11:26:20 jutta Exp $*/
-> +-
-> +-#ifndef	CONFIG_H
-> +-#define	CONFIG_H
-> +-
-> +-/*efine	SIGHANDLER_T	int 		/* signal handlers are void	*/
-> +-/*efine HAS_SYSV_SIGNAL	1		/* sigs not blocked/reset?	*/
-> +-
-> +-#define	HAS_STDLIB_H	1		/* /usr/include/stdlib.h	*/
-> +-#define	HAS_LIMITS_H	1		/* /usr/include/limits.h	*/
-> +-#define	HAS_FCNTL_H	1		/* /usr/include/fcntl.h		*/
-> +-#define	HAS_ERRNO_DECL	1		/* errno.h declares errno	*/
-> +-
-> +-#define	HAS_FSTAT 	1		/* fstat syscall		*/
-> +-#define	HAS_FCHMOD 	1		/* fchmod syscall		*/
-> +-#define	HAS_CHMOD 	1		/* chmod syscall		*/
-> +-#define	HAS_FCHOWN 	1		/* fchown syscall		*/
-> +-#define	HAS_CHOWN 	1		/* chown syscall		*/
-> +-/*efine	HAS__FSETMODE 	1		/* _fsetmode -- set file mode	*/
-> +-
-> +-#define	HAS_STRING_H 	1		/* /usr/include/string.h 	*/
-> +-/*efine	HAS_STRINGS_H	1		/* /usr/include/strings.h 	*/
-> +-
-> +-#define	HAS_UNISTD_H	1		/* /usr/include/unistd.h	*/
-> +-#define	HAS_UTIME	1		/* POSIX utime(path, times)	*/
-> +-/*efine	HAS_UTIMES	1		/* use utimes()	syscall instead	*/
-> +-#define	HAS_UTIME_H	1		/* UTIME header file		*/
-> +-#define	HAS_UTIMBUF	1		/* struct utimbuf		*/
-> +-/*efine	HAS_UTIMEUSEC   1		/* microseconds in utimbuf?	*/
-> +-
-> +-#endif	/* CONFIG_H */
-> +diff -urNad libgsm-1.0.10~/inc/gsm_config.h libgsm-1.0.10/inc/gsm_config.h
-> +--- libgsm-1.0.10~/inc/gsm_config.h	1970-01-01 01:00:00.000000000 +0100
-> ++++ libgsm-1.0.10/inc/gsm_config.h	2007-11-01 15:46:19.000000000 +0100
-> +@@ -0,0 +1,37 @@
-> ++/*
-> ++ * Copyright 1992 by Jutta Degener and Carsten Bormann, Technische
-> ++ * Universitaet Berlin.  See the accompanying file "COPYRIGHT" for
-> ++ * details.  THERE IS ABSOLUTELY NO WARRANTY FOR THIS SOFTWARE.
-> ++ */
-> ++
-> ++/*$Header: /tmp_amd/presto/export/kbs/jutta/src/gsm/RCS/config.h,v 1.5 1996/07/02 11:26:20 jutta Exp $*/
-> ++
-> ++#ifndef	CONFIG_H
-> ++#define	CONFIG_H
-> ++
-> ++/*efine	SIGHANDLER_T	int 		-* signal handlers are void	*/
-> ++/*efine HAS_SYSV_SIGNAL	1		-* sigs not blocked/reset?	*/
-> ++
-> ++#define	HAS_STDLIB_H	1		/* /usr/include/stdlib.h	*/
-> ++#define	HAS_STDIO_H 	1		/* /usr/include/stdio.h 	*/
-> ++/*efine	HAS_LIMITS_H	1		-* /usr/include/limits.h	*/
-> ++#define	HAS_FCNTL_H	1		/* /usr/include/fcntl.h		*/
-> ++
-> ++#define	HAS_FSTAT 	1		/* fstat syscall		*/
-> ++#define	HAS_FCHMOD 	1		/* fchmod syscall		*/
-> ++#define	HAS_CHMOD 	1		/* chmod syscall		*/
-> ++#define	HAS_FCHOWN 	1		/* fchown syscall		*/
-> ++#define	HAS_CHOWN 	1		/* chown syscall		*/
-> ++/*efine	HAS__FSETMODE 	1		-* _fsetmode -- set file mode	*/
-> ++
-> ++#define	HAS_STRING_H 	1		/* /usr/include/string.h 	*/
-> ++/*efine	HAS_STRINGS_H	1		-* /usr/include/strings.h 	*/
-> ++
-> ++#define	HAS_UNISTD_H	1		/* /usr/include/unistd.h	*/
-> ++#define	HAS_UTIME	1		/* POSIX utime(path, times)	*/
-> ++/*efine	HAS_UTIMES	1		-* use utimes()	syscall instead	*/
-> ++#define	HAS_UTIME_H	1		/* UTIME header file		*/
-> ++/*efine	HAS_UTIMBUF	1		-* struct utimbuf		*/
-> ++/*efine	HAS_UTIMEUSEC   1		-* microseconds in utimbuf?	*/
-> ++
-> ++#endif	/* CONFIG_H */
-> +diff -urNad libgsm-1.0.10~/inc/toast.h libgsm-1.0.10/inc/toast.h
-> +--- libgsm-1.0.10~/inc/toast.h	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/inc/toast.h	2007-11-01 15:48:17.000000000 +0100
-> +@@ -9,7 +9,7 @@
-> + #ifndef	TOAST_H
-> + #define	TOAST_H				/* Guard against multiple includes */
-> + 
-> +-#include "config.h"
-> ++#include "gsm_config.h"
-> + 
-> + #include <sys/types.h>
-> + #include <sys/stat.h>
-> +diff -urNad libgsm-1.0.10~/src/code.c libgsm-1.0.10/src/code.c
-> +--- libgsm-1.0.10~/src/code.c	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/src/code.c	2007-11-01 15:48:34.000000000 +0100
-> +@@ -6,7 +6,7 @@
-> + 
-> + /* $Header: /tmp_amd/presto/export/kbs/jutta/src/gsm/RCS/code.c,v 1.3 1996/07/02 09:59:05 jutta Exp $ */
-> + 
-> +-#include	"config.h"
-> ++#include	"gsm_config.h"
-> + 
-> + 
-> + #ifdef	HAS_STDLIB_H
-> +diff -urNad libgsm-1.0.10~/src/gsm_create.c libgsm-1.0.10/src/gsm_create.c
-> +--- libgsm-1.0.10~/src/gsm_create.c	1996-07-02 16:32:44.000000000 +0200
-> ++++ libgsm-1.0.10/src/gsm_create.c	2007-11-01 15:48:48.000000000 +0100
-> +@@ -6,7 +6,7 @@
-> + 
-> + static char const	ident[] = "$Header: /tmp_amd/presto/export/kbs/jutta/src/gsm/RCS/gsm_create.c,v 1.4 1996/07/02 09:59:05 jutta Exp $";
-> + 
-> +-#include	"config.h"
-> ++#include	"gsm_config.h"
-> + 
-> + #ifdef	HAS_STRING_H
-> + #include	<string.h>
-> +diff -urNad libgsm-1.0.10~/src/gsm_destroy.c libgsm-1.0.10/src/gsm_destroy.c
-> +--- libgsm-1.0.10~/src/gsm_destroy.c	1996-07-02 16:32:39.000000000 +0200
-> ++++ libgsm-1.0.10/src/gsm_destroy.c	2007-11-01 15:48:57.000000000 +0100
-> +@@ -7,7 +7,7 @@
-> + /* $Header: /tmp_amd/presto/export/kbs/jutta/src/gsm/RCS/gsm_destroy.c,v 1.3 1994/11/28 19:52:25 jutta Exp $ */
-> + 
-> + #include "gsm.h"
-> +-#include "config.h"
-> ++#include "gsm_config.h"
-> + #include "proto.h"
-> + 
-> + #ifdef	HAS_STDLIB_H
-> +diff -urNad libgsm-1.0.10~/tls/taste.c libgsm-1.0.10/tls/taste.c
-> +--- libgsm-1.0.10~/tls/taste.c	1996-07-02 16:33:05.000000000 +0200
-> ++++ libgsm-1.0.10/tls/taste.c	2007-11-01 15:49:54.000000000 +0100
-> +@@ -10,7 +10,7 @@
-> + #include	<string.h>
-> + #include	<memory.h>
-> + 
-> +-#include	"config.h"
-> ++#include	"gsm_config.h"
-> + 
-> + #ifdef	HAS_STDLIB_H
-> + #	include	<stdlib.h>
-> diff --git a/recipes/libgsm/libgsm-1.0.12/04_includes.patch b/recipes/libgsm/libgsm-1.0.12/04_includes.patch
-> new file mode 100644
-> index 0000000..2769b40
-> --- /dev/null
-> +++ b/recipes/libgsm/libgsm-1.0.12/04_includes.patch
-> @@ -0,0 +1,43 @@
-> +diff -urNad libgsm-1.0.10~/inc/toast.h libgsm-1.0.10/inc/toast.h
-> +--- libgsm-1.0.10~/inc/toast.h	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/inc/toast.h	2007-11-01 15:52:33.000000000 +0100
-> +@@ -16,11 +16,12 @@
-> + 
-> + #include <stdio.h>
-> + #include <ctype.h>
-> ++#include <pthread.h>
-> + #include <signal.h>
-> + 
-> + #include <errno.h>
-> +-#ifndef	HAS_ERRNO_DECL
-> +-	 extern int	errno;
-> ++#ifndef errno
-> ++ extern int	errno;
-> + #endif
-> + 
-> + #ifdef	HAS_LIMITS_H
-> +@@ -37,6 +38,10 @@
-> + # endif
-> + #endif
-> + 
-> ++#ifdef  HAS_STDIO_H
-> ++# include <stdio.h>
-> ++#endif
-> ++
-> + #include "gsm.h"
-> + 
-> + #ifndef	S_ISREG
-> +diff -urNad libgsm-1.0.10~/src/code.c libgsm-1.0.10/src/code.c
-> +--- libgsm-1.0.10~/src/code.c	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/src/code.c	2007-11-01 15:52:33.000000000 +0100
-> +@@ -9,8 +9,8 @@
-> + #include	"config.h"
-> + 
-> + 
-> +-#ifdef	HAS_STDLIB_H
-> +-#include	<stdlib.h>
-> ++#ifdef	HAS_STRING_H
-> ++#include	<string.h>
-> + #else
-> + #	include "proto.h"
-> + 	extern char	* memcpy P((char *, char *, int));
-> diff --git a/recipes/libgsm/libgsm-1.0.12/05_compiler_warnings.patch b/recipes/libgsm/libgsm-1.0.12/05_compiler_warnings.patch
-> new file mode 100644
-> index 0000000..c40100c
-> --- /dev/null
-> +++ b/recipes/libgsm/libgsm-1.0.12/05_compiler_warnings.patch
-> @@ -0,0 +1,98 @@
-> +diff -urNad libgsm-1.0.10~/src/debug.c libgsm-1.0.10/src/debug.c
-> +--- libgsm-1.0.10~/src/debug.c	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/src/debug.c	2007-11-01 15:53:42.000000000 +0100
-> +@@ -49,7 +49,7 @@
-> + 	fprintf( stderr, "%s [%d .. %d]: ", name, from, to );
-> + 	while (from <= to) {
-> + 
-> +-		fprintf(stderr, "%d ", ptr[ from ] );
-> ++		fprintf(stderr, "%ld ", ptr[ from ] );
-> + 		from++;
-> + 		if (nprinted++ >= 7) {
-> + 			nprinted = 0;
-> +@@ -63,14 +63,14 @@
-> + 	char		* name,
-> + 	longword	  value	)
-> + {
-> +-	fprintf(stderr, "%s: %d\n", name, (long)value );
-> ++	fprintf(stderr, "%s: %ld\n", name, (long)value );
-> + }
-> + 
-> + void gsm_debug_word P2(  (name, value),
-> + 	char	* name,
-> + 	word	  value	)
-> + {
-> +-	fprintf(stderr, "%s: %d\n", name, (long)value);
-> ++	fprintf(stderr, "%s: %ld\n", name, (long)value);
-> + }
-> + 
-> + #endif
-> +diff -urNad libgsm-1.0.10~/src/toast.c libgsm-1.0.10/src/toast.c
-> +--- libgsm-1.0.10~/src/toast.c	2007-11-01 15:37:52.000000000 +0100
-> ++++ libgsm-1.0.10/src/toast.c	2007-11-01 15:53:42.000000000 +0100
-> +@@ -251,8 +251,8 @@
-> + {
-> + 	char * s;
-> + 	if (!(s = malloc(len))) {
-> +-		fprintf(stderr, "%s: failed to malloc %d bytes -- abort\n",
-> +-			progname, len);
-> ++		fprintf(stderr, "%s: failed to malloc %ld bytes -- abort\n",
-> ++			progname, (long) len);
-> + 		onintr();
-> + 		exit(1);
-> + 	}
-> +@@ -270,7 +270,7 @@
-> + 	maxlen = strlen(name) + 1 + strlen(want) + strlen(cut);
-> + 	p = strcpy(emalloc(maxlen), name);
-> + 
-> +-	if (s = suffix(p, cut)) strcpy(s, want);
-> ++	if ((s = suffix(p, cut))) strcpy(s, want);
-> + 	else if (*want && !suffix(p, want)) strcat(p, want);
-> + 
-> + 	return p;
-> +@@ -386,7 +386,7 @@
-> + 		ut[0] = instat.st_atime;
-> + 		ut[1] = instat.st_mtime;
-> + 
-> +-		(void) utime(outname, ut);
-> ++		(void) utime(outname, (struct utimbuf *)ut);
-> + 
-> + #endif	/* UTIMBUF */
-> + 	}
-> +@@ -416,7 +416,7 @@
-> + 	}
-> + 	if (st->st_nlink > 1 && !f_cat && !f_precious) {
-> + 		fprintf(stderr, 
-> +-		      "%s: \"%s\" has %s other link%s -- unchanged.\n",
-> ++		      "%s: \"%s\" has %d other link%s -- unchanged.\n",
-> + 			progname,name,st->st_nlink - 1,"s" + (st->st_nlink<=2));
-> + 		return 0;
-> + 	}
-> +@@ -585,8 +585,8 @@
-> + 
-> + 		if (cc != sizeof(s)) {
-> + 			if (cc >= 0) fprintf(stderr,
-> +-			"%s: incomplete frame (%d byte%s missing) from %s\n",
-> +-					progname, sizeof(s) - cc,
-> ++			"%s: incomplete frame (%ld byte%s missing) from %s\n",
-> ++					progname, (long) sizeof(s) - cc,
-> + 					"s" + (sizeof(s) - cc == 1),
-> + 					inname ? inname : "stdin" );
-> + 			gsm_destroy(r);
-> +@@ -624,8 +624,6 @@
-> + 
-> + static int process P1((name), char * name)
-> + {
-> +-	int step = 0;
-> +-
-> + 	out     = (FILE *)0;
-> + 	in      = (FILE *)0;
-> + 
-> +@@ -779,7 +777,6 @@
-> + 	case 'h': help();    exit(0);
-> + 
-> + 	default: 
-> +-	usage:
-> + 		fprintf(stderr,
-> + 	"Usage: %s [-fcpdhvuaslFC] [files...] (-h for help)\n",
-> + 			progname);
-> diff --git a/recipes/libgsm/libgsm_1.0.12.bb b/recipes/libgsm/libgsm_1.0.12.bb
-> new file mode 100644
-> index 0000000..9c96f4d
-> --- /dev/null
-> +++ b/recipes/libgsm/libgsm_1.0.12.bb
-> @@ -0,0 +1,45 @@
-> +DESCRIPTION = "GSM Audio Library"
-> +SECTION = "libs"
-> +PRIORITY = "optional"
-> +#DEPENDS = ""
-> +LICENSE = "libgsm"
-> +
-> +PR = "r0"
-> +
-> +SRC_URI = "http://user.cs.tu-berlin.de/~jutta/gsm/gsm-${PV}.tar.gz \
-> +	   file://01_makefile.patch;patch=1 \
-> +           file://02_cplusplus.patch;patch=1 \
-> +           file://03_config.patch;patch=1 \
-> +           file://04_includes.patch;patch=1 \
-> +           file://05_compiler_warnings.patch;patch=1 \
-> +	  "
-> +
-> +S = "${WORKDIR}/gsm-1.0-pl12/"
-> +
-> +CFLAGS += "-c -g -fPIC -Wall -D_GNU_SOURCE -D_REENTRANT -DNeedFunctionPrototypes=1 -DWAV49 -I./inc"
-> +
-> +PARALLEL_MAKE = ""
-> +
-> +do_compile() {
-> +	unset LD
-> +	oe_runmake CCFLAGS="${CFLAGS}"
-> +}
-> +
-> +do_install() {
-> +	oe_libinstall -a -C lib libgsm ${D}${libdir}
-> +        oe_libinstall -so -C lib libgsm ${D}${libdir}
-> +        install -d ${D}/usr/include/gsm
-> +        install -m 0644 ${S}/inc/gsm.h ${D}/usr/include/gsm/
-> +	cd ${D}/usr/include/
-> +	ln -s gsm/gsm.h gsm.h
-> +}
-> +
-> +do_stage () {
-> +        oe_libinstall -a -C lib libgsm ${STAGING_LIBDIR}
-> +	oe_libinstall -so -C lib libgsm ${STAGING_LIBDIR}
-> +        install -d ${STAGING_INCDIR}/gsm
-> +        install -m 0644 ${S}/inc/gsm.h ${STAGING_INCDIR}/gsm/
-> +	rm -f ${STAGING_INCDIR}/gsm.h
-> +        ln -s ${STAGING_INCDIR}/gsm/gsm.h ${STAGING_INCDIR}/gsm.h
-> +}
-> +
+I'm building uclibc-based devices (AVR32 and ARMv5TEJ) on Debian 
+Etch (Office) and Debian Unstable (home).
 
---------------ms080900050809070406050107
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+The frozen one uses uclibc 0.9.28, the other currently 0.9.30.1.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQwMTE0
-MDQzMlowIwYJKoZIhvcNAQkEMRYEFM3o/zl6T4xN4bLhhaWMMEG6af6/MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQC2fU1VXnrPsk/3ZWXR4eY5OIfP3AiHa8O5CP8OoLHNepDS/Epx
-BjJQB256+GLfcnsK6462YNs6wthhskD0RSlh8HBi+eK0pbmYjTF5wn1p6knHz95DqRUsuwd8OzaN
-kiGFT81Wsmax2sS73jDX5TD7BinukGhjj9N0oqX1KVyPBk7Tv7aQLuoFMtu/zAPt4fOH6U+x1nA1
-UTyjIYhrvETN/cJ7cbHZd9gvRIZNZpqHUx1Npn1YkwEmqhWJ1dqiGKImNK85e55h6wm0X1+BMVM6
-cNRkrxhm0F9LfpiAuitIifqbvBtRC7FICfZmojJduEZrEAhW7X/xgz9ftUU1i7piAAAAAAAA
 
---------------ms080900050809070406050107--
+However, my devices aren't general usable PDA-like devices, so I 
+use a very selected set of packages (lots hand-craftet BBFILES 
++= ..., this also gives nice bitbake-parse times). And I'm not 
+using Angstrom as distribution, but have something different 
+(e.g. centered around unionfs/aufs to minimize flash-wearout).
+
+One device uses a frozen org.openembedded.dev version and is VERY 
+tiny, just 33 *.bb files, the other device is currently on the 
+development branch of OpenEmbedded, as development for that 
+device hasn't yet finished.
+
+
+
+
+As a side note, I don't build all -native packages and instead 
+have this in my config:
+
+ASSUME_PROVIDED += "bison-native"
+ASSUME_PROVIDED += "fakeroot-native"
+ASSUME_PROVIDED += "file-native"
+ASSUME_PROVIDED += "flex-native"
+ASSUME_PROVIDED += "gettext-native"
+ASSUME_PROVIDED += "git-native"
+ASSUME_PROVIDED += "m4-native"
+ASSUME_PROVIDED += "ncurses-native"
+ASSUME_PROVIDED += "openssl-native"
+ASSUME_PROVIDED += "pax-utils-native"
+ASSUME_PROVIDED += "qmake-native"
+ASSUME_PROVIDED += "quilt-native"
+ASSUME_PROVIDED += "readline-native"
+ASSUME_PROVIDED += "zlib-native"
+
+
