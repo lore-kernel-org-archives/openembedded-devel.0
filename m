@@ -1,20 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Lp1W9-0007Xt-7O
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 16:34:16 +0200
-Received: (qmail 15277 invoked by uid 1003); 1 Apr 2009 14:31:50 -0000
+	(envelope-from <philip@balister.org>) id 1Lp1Xc-0000lq-Nm
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 16:35:45 +0200
+Received: (qmail 5148 invoked by uid 1003); 1 Apr 2009 14:33:22 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Apr 2009 14:31:49 -0000
-Message-ID: <49D37AD3.1060900@balister.org>
-Date: Wed, 01 Apr 2009 10:31:47 -0400
+	by mail.geekisp.com with SMTP; 1 Apr 2009 14:33:21 -0000
+Message-ID: <49D37B2F.3000509@balister.org>
+Date: Wed, 01 Apr 2009 10:33:19 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1238532013-3047-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1238532013-3047-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH] linux-omap 2.6.29: update mmc regulator patch
+References: <1238532015-3141-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1238532015-3141-1-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH] initscripts: set alignment to 0 for armv7a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,12 +28,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 14:34:26 -0000
-X-Groupsio-MsgNum: 8939
+X-List-Received-Date: Wed, 01 Apr 2009 14:35:46 -0000
+X-Groupsio-MsgNum: 8940
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050305020307000404050307"
+	micalg=sha1; boundary="------------ms090208010907070905010608"
 
---------------ms050305020307000404050307
+--------------ms090208010907070905010608
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,137 +45,42 @@ Koen Kooi wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  ...add-regulator-info-to-get-the-microSD-slo.patch |   46 ++++++--------------
->  recipes/linux/linux-omap_2.6.29.bb                 |    2 +-
->  2 files changed, 14 insertions(+), 34 deletions(-)
+>  recipes/initscripts/files/arm/alignment.sh |    8 ++++++--
+>  recipes/initscripts/initscripts_1.0.bb     |    2 +-
+>  2 files changed, 7 insertions(+), 3 deletions(-)
 > 
-> diff --git a/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch b/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
-> index ddee308..49045f7 100644
-> --- a/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
-> +++ b/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
-> @@ -1,17 +1,20 @@
-> -From 0561e7124500418e913a3b91ddc09d4bd8dc5032 Mon Sep 17 00:00:00 2001
-> -From: Koen Kooi <koen@beagleboard.org>
-> +From 7efa7cc5b807cb840c62b5bf54bf47181c9b95a6 Mon Sep 17 00:00:00 2001
-> +From: Koen Kooi <koen@openembedded.org>
->  Date: Mon, 30 Mar 2009 15:21:37 +0200
-> -Subject: [PATCH] ARM: OMAP: board-ldp: add regulator info to get the microSD slot working again
-> +Subject: [PATCH v2] ARM: OMAP: board-ldp: add regulator info to get the microSD slot working again
+> diff --git a/recipes/initscripts/files/arm/alignment.sh b/recipes/initscripts/files/arm/alignment.sh
+> index 32a9eaa..1082908 100644
+> --- a/recipes/initscripts/files/arm/alignment.sh
+> +++ b/recipes/initscripts/files/arm/alignment.sh
+> @@ -1,6 +1,10 @@
+>  #!/bin/sh
 >  
->  The ldp board was left behind when other boards got updated. The ldp info was copied from the beagleboard board file and s/beagle/ldp/g
+> -if [ -e /proc/cpu/alignment ] && ! [ $(uname -m) = "armv7l" ]; then
+> -   echo "3" > /proc/cpu/alignment
+> +if [ -e /proc/cpu/alignment ] ; then
+> +   if [ $(uname -m) = "armv7l" ]; then
+> +       echo "0" > /proc/cpu/alignment
+> +   else
+> +       echo "3" > /proc/cpu/alignment
+> +   fi
+>  fi
 >  
-> +Changes since v1:
-> + * dropped vsim portion since only 4 pins are hooked up
-> +
->  Signed-off-by: Koen Kooi <koen@beagleboard.org>
->  ---
-> - arch/arm/mach-omap2/board-ldp.c |   55 +++++++++++++++++++++++++++++++++++++++
-> - 1 files changed, 55 insertions(+), 0 deletions(-)
-> + arch/arm/mach-omap2/board-ldp.c |   32 ++++++++++++++++++++++++++++++++
-> + 1 files changed, 32 insertions(+), 0 deletions(-)
+> diff --git a/recipes/initscripts/initscripts_1.0.bb b/recipes/initscripts/initscripts_1.0.bb
+> index b497576..556fbe4 100644
+> --- a/recipes/initscripts/initscripts_1.0.bb
+> +++ b/recipes/initscripts/initscripts_1.0.bb
+> @@ -4,7 +4,7 @@ PRIORITY = "required"
+>  DEPENDS = "makedevs"
+>  RDEPENDS = "makedevs"
+>  LICENSE = "GPL"
+> -PR = "r112"
+> +PR = "r113"
 >  
->  diff --git a/arch/arm/mach-omap2/board-ldp.c b/arch/arm/mach-omap2/board-ldp.c
-> -index 30926b0..faf62f8 100644
-> +index 30926b0..19a5c15 100644
->  --- a/arch/arm/mach-omap2/board-ldp.c
->  +++ b/arch/arm/mach-omap2/board-ldp.c
->  @@ -22,6 +22,7 @@
-> @@ -22,7 +25,7 @@ index 30926b0..faf62f8 100644
->   #include <linux/i2c/twl4030.h>
->   
->   #include <mach/hardware.h>
-> -@@ -450,7 +451,17 @@ static struct twl4030_script *twl4030_scripts[] __initdata = {
-> +@@ -450,7 +451,16 @@ static struct twl4030_script *twl4030_scripts[] __initdata = {
->   	&wrst_script,
->   };
->   
-> @@ -31,7 +34,6 @@ index 30926b0..faf62f8 100644
->  +	 * devices' drivers should be managing these.
->  +	 */
->  +	{ .resource = RES_VMMC1, },
-> -+	{ .resource = RES_VSIM, },
->  +	{ 0, },
->  +};
->  +
-> @@ -40,7 +42,7 @@ index 30926b0..faf62f8 100644
->   	.scripts	= twl4030_scripts,
->   	.size		= ARRAY_SIZE(twl4030_scripts),
->   };
-> -@@ -474,6 +485,44 @@ static struct twl4030_madc_platform_data ldp_madc_data = {
-> +@@ -474,6 +484,25 @@ static struct twl4030_madc_platform_data ldp_madc_data = {
->   	.irq_line	= 1,
->   };
->   
-> @@ -48,10 +50,6 @@ index 30926b0..faf62f8 100644
->  +	.supply			= "vmmc",
->  +};
->  +
-> -+static struct regulator_consumer_supply ldp_vsim_supply = {
-> -+	.supply			= "vmmc_aux",
-> -+};
-> -+
->  +/* VMMC1 for MMC1 pins CMD, CLK, DAT0..DAT3 (20 mA, plus card == max 220 mA) */
->  +static struct regulator_init_data ldp_vmmc1 = {
->  +	.constraints = {
-> @@ -67,41 +65,23 @@ index 30926b0..faf62f8 100644
->  +	.consumer_supplies	= &ldp_vmmc1_supply,
->  +};
->  +
-> -+/* VSIM for MMC1 pins DAT4..DAT7 (2 mA, plus card == max 50 mA) */
-> -+static struct regulator_init_data ldp_vsim = {
-> -+	.constraints = {
-> -+		.min_uV			= 1800000,
-> -+		.max_uV			= 3000000,
-> -+		.valid_modes_mask	= REGULATOR_MODE_NORMAL
-> -+					| REGULATOR_MODE_STANDBY,
-> -+		.valid_ops_mask		= REGULATOR_CHANGE_VOLTAGE
-> -+					| REGULATOR_CHANGE_MODE
-> -+					| REGULATOR_CHANGE_STATUS,
-> -+	},
-> -+	.num_consumer_supplies	= 1,
-> -+	.consumer_supplies	= &ldp_vsim_supply,
-> -+};
-> -+
->   static struct twl4030_platform_data ldp_twldata = {
->   	.irq_base	= TWL4030_IRQ_BASE,
->   	.irq_end	= TWL4030_IRQ_END,
-> -@@ -483,6 +532,8 @@ static struct twl4030_platform_data ldp_twldata = {
-> +@@ -483,6 +512,7 @@ static struct twl4030_platform_data ldp_twldata = {
->   	.madc		= &ldp_madc_data,
->   	.usb		= &ldp_usb_data,
->   	.power		= &sdp3430_t2scripts_data,
->  +	.vmmc1		= &ldp_vmmc1,
-> -+	.vsim		= &ldp_vsim,
->   	.gpio		= &ldp_gpio_data,
->   	.keypad		= &ldp_kp_twl4030_data,
->   };
-> -@@ -530,6 +581,10 @@ static void __init omap_ldp_init(void)
-> +@@ -530,6 +560,8 @@ static void __init omap_ldp_init(void)
->   	omap_serial_init();
->   	usb_musb_init();
->   	twl4030_mmc_init(mmc);
->  +	/* link regulators to MMC adapters */
->  +	ldp_vmmc1_supply.dev = mmc[0].dev;
-> -+	ldp_vsim_supply.dev = mmc[0].dev;
-> -+	
->   }
->   
->   static void __init omap_ldp_map_io(void)
-> diff --git a/recipes/linux/linux-omap_2.6.29.bb b/recipes/linux/linux-omap_2.6.29.bb
-> index 86827fd..f5c20ba 100644
-> --- a/recipes/linux/linux-omap_2.6.29.bb
-> +++ b/recipes/linux/linux-omap_2.6.29.bb
-> @@ -10,7 +10,7 @@ DEFAULT_PREFERENCE = "-1"
->  
->  SRCREV = "90e758af52ba803cba233fabee81176d99589f09"
->  
-> -PR = "r1+gitr${SRCREV}"
-> +PR = "r2+gitr${SRCREV}"
->  
->  SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
->  	   file://defconfig"
+>  SRC_URI = "file://functions \
+>             file://halt \
 
---------------ms050305020307000404050307
+--------------ms090208010907070905010608
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -227,17 +132,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQwMTE0
-MzE0N1owIwYJKoZIhvcNAQkEMRYEFPiwerPSNoJE7P20RvnIL1RNjxVoMFIGCSqGSIb3DQEJDzFF
+MzMxOVowIwYJKoZIhvcNAQkEMRYEFMxlMhWJeHlElWcwGInbmHGm04G4MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQBO3UQjeJFjeeFN7mckKYiIojRgHXThQOj/y3dGDL/FH4mqLXge
-L5qeUx7ysqtIrWv0xK2f7fyQLAyLxAgJjY0ZDgFoW5FCZDn4jSoInxxe7TSgEXXbH1lkGh0quoUm
-fjWGZbsXnKUeWWd1MvbHCi6EY4JwHnxXgKvVu1M5ku6sWeyWswMIodctadJ6CgPOlN9Viy0ze/Ft
-YFA90ZbbyHP4aBPTZcNsiApiNPprpei20NJWpy4WiO/J0MPektQYtjy4YnBVtrKzXiiXhmufVoAL
-q0G2z+yCh/0Bx8izgCzjgqzwuXwGJxibMvxhi3piFjkBUFKn7fcmolFDeEsRfB9ZAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQBDFDn2thuBlC9vmVbTnM6T8wo1wdXBwAqEnIvHGruyMHWU6rKl
+Ho+4hY6NmxAgkGAH+1b4PsU3B2Iz4WYG1E3CqHbfHV3R98HIyfrVe3Wzb6jdyq2KeSVYaIdvQJRP
+R9Sx7cpXvUlSL+Dc9Vzl5HBV7gYuHnlIEiSReBX+EsMUVx30kdluBvGOaW67zeWo2J3Ui3xGUd3f
+Q+SayqUn7iq2wINygvfmT2SXTfWLr8LPMOEm27Gkr49FwK2mnO8302HzL7sp7YT+FwxmGWIm54w6
+GxQKu7BHDWdVdTu9CVzprIMM92KXpkXjvT9zrDLWfoMz0G2aXS+J4r5OvFmNsq3bAAAAAAAA
 
---------------ms050305020307000404050307--
+--------------ms090208010907070905010608--
