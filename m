@@ -1,20 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Lp0yK-0002Eg-Dm
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 15:59:16 +0200
-Received: (qmail 8068 invoked by uid 1003); 1 Apr 2009 13:56:54 -0000
+	(envelope-from <philip@balister.org>) id 1Lp0zA-0003Fi-To
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 16:00:09 +0200
+Received: (qmail 712 invoked by uid 1003); 1 Apr 2009 13:57:46 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Apr 2009 13:56:54 -0000
-Message-ID: <49D372A4.2080709@balister.org>
-Date: Wed, 01 Apr 2009 09:56:52 -0400
+	by mail.geekisp.com with SMTP; 1 Apr 2009 13:57:45 -0000
+Message-ID: <49D372D6.8020402@balister.org>
+Date: Wed, 01 Apr 2009 09:57:42 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1238532010-2874-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1238532010-2874-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH] omapzoom: add xf86-input-tslib
+References: <1238532011-2902-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1238532011-2902-1-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH] ti-codec-combos: Use DVSDK Codec Combos to be	aligned with DVSDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,40 +28,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 13:59:17 -0000
-X-Groupsio-MsgNum: 8932
+X-List-Received-Date: Wed, 01 Apr 2009 14:00:10 -0000
+X-Groupsio-MsgNum: 8933
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090203020508020305020807"
+	micalg=sha1; boundary="------------ms010101010002020102070003"
 
---------------ms090203020508020305020807
+--------------ms010101010002020102070003
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister (philip@balister.org)
 
 Koen Kooi wrote:
-> From: Koen Kooi <koen@openembedded.org>
+> From: Roger Monk <r-monk@ti.com>
 > 
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  conf/machine/omapzoom.conf |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
+>  recipes/dsplink/ti-codec-combos_3.16.bb |   19 +++----------------
+>  recipes/dsplink/ti-codec-engine_2.23.bb |    5 +++--
+>  2 files changed, 6 insertions(+), 18 deletions(-)
 > 
-> diff --git a/conf/machine/omapzoom.conf b/conf/machine/omapzoom.conf
-> index 58b61f1..4ca164e 100644
-> --- a/conf/machine/omapzoom.conf
-> +++ b/conf/machine/omapzoom.conf
-> @@ -6,6 +6,7 @@ TARGET_ARCH = "arm"
->  PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
->  XSERVER = "xserver-xorg \
->             xf86-input-evdev \
-> +           xf86-input-tslib \
->             xf86-input-mouse \
->             xf86-video-omapfb \
->             xf86-input-keyboard"
+> diff --git a/recipes/dsplink/ti-codec-combos_3.16.bb b/recipes/dsplink/ti-codec-combos_3.16.bb
+> index dc1ef9f..dd97a57 100644
+> --- a/recipes/dsplink/ti-codec-combos_3.16.bb
+> +++ b/recipes/dsplink/ti-codec-combos_3.16.bb
+> @@ -4,7 +4,9 @@ LICENCE = "unknown"
+>  
+>  require ti-paths.inc
+>  
+> -SRC_URI = "http://software-dl.ti.com/sdo/sdo_apps_public_sw/omap3530_dvsdk_combos_tspa/omap3530_dvsdk_combos_tspa-3_16-Linux-x86.bin \
+> +
+> +# Tar-Up Codec Combos from the OMAP DVSDK (http://www.ti.com/dvevmupdates) and drop in files/
+> +SRC_URI = "file://omap3530_dvsdk_combos_3_16.tar.gz \
+>      "
+>  
+>  S = "${WORKDIR}/omap3530_dvsdk_combos_3_16"
+> @@ -20,21 +22,6 @@ export CE_INSTALL_DIR="${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/ti-codec-engine/pa
+>  # Needed for now since makefile in latest package assumes this is set
+>  export CODEC_INSTALL_DIR="${S}"
+>  
+> -# Helper function to run the binary installer and unpack the tar.gz in the same place as it was before - this could be optimised later
+> -do_accept_license() {
+> -        export HOME="${WORKDIR}"
+> -	chmod +x ${WORKDIR}/omap3530_dvsdk_combos_tspa-3_16-Linux-x86.bin
+> -        ${WORKDIR}/omap3530_dvsdk_combos_tspa-3_16-Linux-x86.bin --mode silent --prefix ${S}_install
+> -        cd "${S}_install"
+> -	tar -xzvf omap3530_dvsdk_combos_tspa_3_16.tar.gz
+> -	if [ -d ${S} ] ; then 
+> -            rm -rf ${S}
+> -        fi
+> -        mv omap3530_dvsdk_combos_tspa_3_16 ${S}
+> -}
+> -
+> -addtask accept_license after do_unpack before do_configure
+> -
+>  do_compile() {
+>  
+>          # For now, remove the reference to Rules.make and swap prod for eval, since this only has eval libs included
+> diff --git a/recipes/dsplink/ti-codec-engine_2.23.bb b/recipes/dsplink/ti-codec-engine_2.23.bb
+> index 78684f4..a42c33b 100644
+> --- a/recipes/dsplink/ti-codec-engine_2.23.bb
+> +++ b/recipes/dsplink/ti-codec-engine_2.23.bb
+> @@ -125,7 +125,7 @@ do_compile () {
+>        COMPILER="${KERNEL_CC}" \
+>        ARCHIVER="${KERNEL_AR}" \
+>        KERNEL_DIR="${STAGING_KERNEL_DIR}" \
+> -      clean default
+> +      clean all
+>  
+>      # Build the gpp samples
+>      cd ${DSPLINK}/gpp/src/samples
+> @@ -230,7 +230,8 @@ do_compile () {
+>            CGTOOLS_V5T="${CROSS_DIR}" \
+>            CGTOOLS_C64P="${TICGTOOLSDIR}" \ 
+>            -C ${S}/examples/ti/sdo/ce/examples/$i \
+> -         clean all
+> +         clean 
+> +#all
+>      done    
+>  }
+>  
 
---------------ms090203020508020305020807
+--------------ms010101010002020102070003
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -113,17 +162,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQwMTEz
-NTY1MlowIwYJKoZIhvcNAQkEMRYEFCTGAaAnjJKIs2DtyRKfN9BB83tuMFIGCSqGSIb3DQEJDzFF
+NTc0MlowIwYJKoZIhvcNAQkEMRYEFEIhqp+B2gq+u4ySHiGY67tTy2hQMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQB4Wklf9rJfoPlpnCL8xHll2juMNFg2Z3sH/99MppDoP9ShLBJ4
-ooj3U+9K95FtgNmBMhnEjpfK1WCGv++WNU0OxZYBdAfiJ5bRZuglOWtmhxt0uX7+p/U1xiESv1QJ
-D0VfqSF2b+LRKtl5w6obpTEVEqNx1OH1kfK52mAtWXnhL39bzee+e8wHVnbiMNAaPT8DFxCu3l3a
-W/0ifXFwC4T7nHPecuOi+2kvhs5sqjYgArngpLGeOEHxQjWiAfoM8tX6VEQJQb/R9A58DWQy+NsR
-D3tFsYSoGeDsGLNmPjHT2pR/R390Qc2BTWHsOMEivKYWXx7h7GQobr97clovw7irAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQB488F9tyeIqAqCgIQ0e2Aua6PLbZKobxiGNEHf2COWSgPbMVth
+9ganw5QQWpW3S3K8CnyPkXefZXFEVqtpAfbhgE413/eV8J0YrfOsSTP/OzWK6ClUzHggEZZAryKt
+OVC5rwGGnPUrzlTRwftkIpPeqSi3xJzy0g394SKmwRzVUi2jo/v8dgc4H1kvWdnxkn0lHZebdixG
+Qb2FhHhV2zFBpLt5AMyciigHzblKW++KhAhYbIUI8KnF3dloQUD7IO4ElARk13g12xGwqMpCk4jl
+ATa5EvwDkWgeTzLmK4YtiQTv2LhhT6nSmkLKH1XYFDGR19lBusi4/InSX4zuYf4rAAAAAAAA
 
---------------ms090203020508020305020807--
+--------------ms010101010002020102070003--
