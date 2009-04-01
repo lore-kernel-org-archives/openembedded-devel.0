@@ -1,26 +1,31 @@
-Received: from [194.158.229.31] (helo=smtp-be-01.be08.sunrise.ch)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dv@vollmann.ch>) id 1Lp2AP-0002P5-E3
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 17:15:53 +0200
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-01.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	n31FDVZr027602; Wed, 1 Apr 2009 17:13:32 +0200
-Message-ID: <49D384F8.7050005@vollmann.ch>
-Date: Wed, 01 Apr 2009 17:15:04 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1Lp3Ea-0007MY-0T
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Apr 2009 18:24:23 +0200
+Received: (qmail invoked by alias); 01 Apr 2009 16:21:49 -0000
+Received: from f053003157.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.3.157]
+	by mail.gmx.net (mp035) with SMTP; 01 Apr 2009 18:21:49 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19ok8FM4IZoS5uXjWvfWShduUS9+dBmGSv3qpczIZ
+	p0Nl1EBEyLQ2jz
+Message-ID: <49D394A5.2060805@gmx.net>
+Date: Wed, 01 Apr 2009 18:21:57 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+To: openembedded-devel@lists.openembedded.org
 References: <SNT105-W5667C19202F0CB199F6AF6908A0@phx.gbl>	<49D28F41.1050005@gmx.net>	<SNT105-W34EB74514DEB1FDC22CF26908B0@phx.gbl>	<49D367D1.1050302@gmx.net>
-	<b84dee3a0904010622r494b4f5bk262597848a5a43a8@mail.gmail.com>
-	<SNT105-W71B7EC3C1B61B33DCA96E8908B0@phx.gbl>
-In-Reply-To: <SNT105-W71B7EC3C1B61B33DCA96E8908B0@phx.gbl>
-X-SA-Exim-Connect-IP: 194.158.229.31
-X-SA-Exim-Mail-From: dv@vollmann.ch
+	<SNT105-W291629ECBDDF1A26627D6C908B0@phx.gbl>
+In-Reply-To: <SNT105-W291629ECBDDF1A26627D6C908B0@phx.gbl>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.61
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: theBohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_PASS
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -38,22 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 15:15:53 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Apr 2009 16:24:43 -0000
+X-Groupsio-MsgNum: 8943
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enig2B629FB7FD716FAE13D7748D"
 
-Mauri Sandberg wrote:
->> Date: Wed, 1 Apr 2009 15:22:49 +0200
->> From: methril@gmail.com
-> 
->> Ubuntu 8.10 (amd64) is not working properly.
-> 
-> Do you mean 32 or 64bit Ubuntu? That is, I have 32-bit ubuntu running on amd64.
-Just a note: I routinely run OE inside a chroot environment,
-and sometimes a 32-bit chroot on a 64-bit kernel.
-Of course this works only with the correct personality (setarch).
+--------------enig2B629FB7FD716FAE13D7748D
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-   Detlef
+Hi,
+
+Mauri Sandberg schrieb:
+>=20
+> ----------------------------------------
+>> Date: Wed, 1 Apr 2009 15:10:41 +0200
+>> From: theBohemian@gmx.net
+>=20
+>> I am using Ubuntu 8.10 (x86) and Debian squeeze (amd64) for OE
+>> development. Works like a charm.
+>=20
+> That sounds reassuring. Are you building uclibc at all? Also,
+> does it matter what versions of gcc and g++ packages you have
+> installed locally? I am using what ever is the latests, 4.x.
+I've not build uclibc for some time. Will try again to build a current
+image for a AVR32-based NGW when I at that machine.
+
+Regards
+Robert
 
 
+--------------enig2B629FB7FD716FAE13D7748D
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAknTlKUACgkQG9cfwmwwEtq+/gCfaCOxB9dT9XqXqWZjcThiJMux
+X0cAn2fMunpfTvBkX/dDsPzgY0Wn491a
+=ul/0
+-----END PGP SIGNATURE-----
+
+--------------enig2B629FB7FD716FAE13D7748D--
