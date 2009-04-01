@@ -1,20 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Lp0r6-0001Kk-Vm
-	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 15:51:49 +0200
-Received: (qmail 32748 invoked by uid 1003); 1 Apr 2009 13:49:27 -0000
+	(envelope-from <philip@balister.org>) id 1Lp0wI-0007yM-SE
+	for openembedded-devel@openembedded.org; Wed, 01 Apr 2009 15:57:11 +0200
+Received: (qmail 15122 invoked by uid 1003); 1 Apr 2009 13:54:48 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Apr 2009 13:49:24 -0000
-Message-ID: <49D370DF.5080501@balister.org>
-Date: Wed, 01 Apr 2009 09:49:19 -0400
+	by mail.geekisp.com with SMTP; 1 Apr 2009 13:54:47 -0000
+Message-ID: <49D37224.1090106@balister.org>
+Date: Wed, 01 Apr 2009 09:54:44 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1238593084-9124-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1238593084-9124-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH] epiphany: update to 2.27
+References: <1238532010-2811-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1238532010-2811-1-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH] linux-omap: add patch to fix mmc support and	update defconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,12 +28,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 13:51:49 -0000
-X-Groupsio-MsgNum: 8929
+X-List-Received-Date: Wed, 01 Apr 2009 13:57:11 -0000
+X-Groupsio-MsgNum: 8930
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040001090701080303010809"
+	micalg=sha1; boundary="------------ms050809040509000302070106"
 
---------------ms040001090701080303010809
+--------------ms050809040509000302070106
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,100 +45,175 @@ Koen Kooi wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  conf/checksums.ini               |   32 ++++++++++++++++++++++++++++++++
->  recipes/gnome/epiphany_2.27.1.bb |   16 ++++++++++++++++
->  2 files changed, 48 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/gnome/epiphany_2.27.1.bb
+>  ...add-regulator-info-to-get-the-microSD-slo.patch |  110 ++++++++++++++++++++
+>  recipes/linux/linux-omap-2.6.29/omapzoom/defconfig |    6 +-
+>  recipes/linux/linux-omap_2.6.29.bb                 |    3 +-
+>  3 files changed, 115 insertions(+), 4 deletions(-)
+>  create mode 100644 recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
 > 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index d476432..2a119dd 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -5334,6 +5334,10 @@ sha256=6cf629d628ee2ae908c9aa3c530fa05344dfe47a9b770c1d9d1e7cc16d7528b3
->  md5=af51614c7b78f8b8c68e9ece3d8f4d8f
->  sha256=cc6ff7b30911bf80d8d72d6db7cc7ecbf51b2f5bb66796b79da33f8f680402ac
->  
-> +[http://ftp.gnome.org/pub/GNOME/sources/epiphany/2.27/epiphany-2.27.1.tar.bz2]
-> +md5=840fb2dc0511039de378927e3bccd802
-> +sha256=36d2b3652b5bbf7b459fda95ac0f25c429aa2e05e42fede3e88ce463879bdb8b
-> +
->  [http://enlightenment.freedesktop.org/files/epsilon-0.3.0.007.tar.gz]
->  md5=408d3c63f9efa06e93e29a691c28985e
->  sha256=6f40962eb8d76e0e9d76ec9f461d62c6af8561028d194358aed001827cc418fc
-> @@ -11198,14 +11202,26 @@ sha256=a758c8f9b55d8288e2484dd1a2dcbd9c4ca3ca3052864a45cb104f613b7f712d
->  md5=b4f7ffcc294d41a6a4c40d6e44b7734d
->  sha256=280b34fefa12c3d7a3e432c3730fe5d0d56e8d169c28b695cce9ba6d8dbe6e38
->  
-> +[http://projects.linuxtogo.org/frs/download.php/221/kexecboot-0.3.tar.gz]
-> +md5=3c3b8edb739146183b3ddff3e0af5f1c
-> +sha256=61a918b38a4b0b97e1469cbe3d9c4307af956bd95abec2067aa2fd278739cd96
-> +
->  [http://projects.linuxtogo.org/frs/?group_id=50/kexecboot-0.4.tar.gz]
->  md5=b4a4509ca3f546cfedd23aa6f99ab81d
->  sha256=b8c9d3a51f04bdecabbb4135079d408e02c98cdf3156bab8418a6830cb64b890
->  
-> +[http://projects.linuxtogo.org/~jay7/kexecboot-0.4.tar.gz]
-> +md5=b4a4509ca3f546cfedd23aa6f99ab81d
-> +sha256=b8c9d3a51f04bdecabbb4135079d408e02c98cdf3156bab8418a6830cb64b890
-> +
->  [http://projects.linuxtogo.org/frs/?group_id=50/kexecboot-0.5.tar.gz]
->  md5=a937303d7ef3fc645f9dccf89e1494e2
->  sha256=49c95d62e32b66c9f97e791f667afa82f0714bc0a0e0ad48df010f4f36de42ab
->  
-> +[http://projects.linuxtogo.org/frs/download.php/226/kexecboot-0.5.tar.gz]
-> +md5=a937303d7ef3fc645f9dccf89e1494e2
-> +sha256=49c95d62e32b66c9f97e791f667afa82f0714bc0a0e0ad48df010f4f36de42ab
-> +
->  [http://gpe.linuxtogo.org/download/source/keylaunch-2.0.10.tar.gz]
->  md5=2d81de20b26eac5ad44b759eb412e8eb
->  sha256=38715fcc508740deb3f169a01092f03ea4ce92c9ec3c2589a9510534aa52a540
-> @@ -14866,6 +14882,22 @@ sha256=ee3edf1ea89a90f2b7f82ad09b83c25dc8ea8ca7cf0fce2aa921f897929b2bb9
->  md5=6f15406664ef31172c68d46567569bb8
->  sha256=9532b981c9b8974ceedd3d25a8f9a0e167a92c9da0dece47f34a4ec34e34b1cf
->  
-> +[http://llvm.org/releases/1.9/llvm-1.9.tar.gz]
-> +md5=866ba97420f5ce978b6a6b1cb4338890
-> +sha256=17b82323151925ff5a7ad09a21781a0fa50ead4b87a339cee262271e4ededa13
-> +
-> +[http://llvm.org/releases/2.0/llvm-2.0.tar.gz]
-> +md5=6f88002301a25f31a492052695f6138e
-> +sha256=84d7ca0331963d2b2be7e18af61a80f49653c692f0bad63c5d26b2a2f7bc3375
-> +
-> +[http://llvm.org/releases/2.1/llvm-2.1.tar.gz]
-> +md5=b930e7213b37acc934d0d163cf13af18
-> +sha256=8cabd422f249ada736d864fc8a1f4d14aabefacb6f860c9beefbc53f93e0f96c
-> +
-> +[http://llvm.org/releases/2.4/llvm-2.4.tar.gz]
-> +md5=bf43eee98c364fd79c7d2b72e645a15e
-> +sha256=5fc295b3cf3de019962aee3be1c5efb49d6bf5041dae59451f6c0f544eb36bdc
-> +
->  [http://llvm.org/releases/2.5/llvm-2.5.tar.gz]
->  md5=55df2ea8665c8094ad2ef85187b9fc74
->  sha256=8f3d69e63bc5d1ee2c2ee49ff07ccb7e070070a0e937813d2a6179b9e2e173ed
-> diff --git a/recipes/gnome/epiphany_2.27.1.bb b/recipes/gnome/epiphany_2.27.1.bb
+> diff --git a/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch b/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
 > new file mode 100644
-> index 0000000..0c3327d
+> index 0000000..ddee308
 > --- /dev/null
-> +++ b/recipes/gnome/epiphany_2.27.1.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION = "GNOME default webbrowser"
-> +DEPENDS = "libsoup-2.4 gnome-desktop gnome-vfs libgnomeui webkit-gtk iso-codes startup-notification"
-> +RDEPENDS = "gnome-vfs-plugin-http"
+> +++ b/recipes/linux/linux-omap-2.6.29/0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch
+> @@ -0,0 +1,110 @@
+> +From 0561e7124500418e913a3b91ddc09d4bd8dc5032 Mon Sep 17 00:00:00 2001
+> +From: Koen Kooi <koen@beagleboard.org>
+> +Date: Mon, 30 Mar 2009 15:21:37 +0200
+> +Subject: [PATCH] ARM: OMAP: board-ldp: add regulator info to get the microSD slot working again
 > +
-> +inherit gnome
+> +The ldp board was left behind when other boards got updated. The ldp info was copied from the beagleboard board file and s/beagle/ldp/g
 > +
-> +EXTRA_OECONF = "--with-engine=webkit --with-distributor-name=${DISTRO}"
+> +Signed-off-by: Koen Kooi <koen@beagleboard.org>
+> +---
+> + arch/arm/mach-omap2/board-ldp.c |   55 +++++++++++++++++++++++++++++++++++++++
+> + 1 files changed, 55 insertions(+), 0 deletions(-)
 > +
-> +do_configure_prepend() {
-> +        touch ${S}/gnome-doc-utils.make
-> +        sed -i -e s:help::g Makefile.am
-> +}
+> +diff --git a/arch/arm/mach-omap2/board-ldp.c b/arch/arm/mach-omap2/board-ldp.c
+> +index 30926b0..faf62f8 100644
+> +--- a/arch/arm/mach-omap2/board-ldp.c
+> ++++ b/arch/arm/mach-omap2/board-ldp.c
+> +@@ -22,6 +22,7 @@
+> + #include <linux/clk.h>
+> + #include <linux/spi/spi.h>
+> + #include <linux/spi/ads7846.h>
+> ++#include <linux/regulator/machine.h>
+> + #include <linux/i2c/twl4030.h>
+> + 
+> + #include <mach/hardware.h>
+> +@@ -450,7 +451,17 @@ static struct twl4030_script *twl4030_scripts[] __initdata = {
+> + 	&wrst_script,
+> + };
+> + 
+> ++static const struct twl4030_resconfig ldp_resconfig[] = {
+> ++	/* disable regulators that u-boot left enabled; the
+> ++	 * devices' drivers should be managing these.
+> ++	 */
+> ++	{ .resource = RES_VMMC1, },
+> ++	{ .resource = RES_VSIM, },
+> ++	{ 0, },
+> ++};
+> ++
+> + static struct twl4030_power_data sdp3430_t2scripts_data __initdata = {
+> ++	.resource_config	= ldp_resconfig,
+> + 	.scripts	= twl4030_scripts,
+> + 	.size		= ARRAY_SIZE(twl4030_scripts),
+> + };
+> +@@ -474,6 +485,44 @@ static struct twl4030_madc_platform_data ldp_madc_data = {
+> + 	.irq_line	= 1,
+> + };
+> + 
+> ++static struct regulator_consumer_supply ldp_vmmc1_supply = {
+> ++	.supply			= "vmmc",
+> ++};
+> ++
+> ++static struct regulator_consumer_supply ldp_vsim_supply = {
+> ++	.supply			= "vmmc_aux",
+> ++};
+> ++
+> ++/* VMMC1 for MMC1 pins CMD, CLK, DAT0..DAT3 (20 mA, plus card == max 220 mA) */
+> ++static struct regulator_init_data ldp_vmmc1 = {
+> ++	.constraints = {
+> ++		.min_uV			= 1850000,
+> ++		.max_uV			= 3150000,
+> ++		.valid_modes_mask	= REGULATOR_MODE_NORMAL
+> ++					| REGULATOR_MODE_STANDBY,
+> ++		.valid_ops_mask		= REGULATOR_CHANGE_VOLTAGE
+> ++					| REGULATOR_CHANGE_MODE
+> ++					| REGULATOR_CHANGE_STATUS,
+> ++	},
+> ++	.num_consumer_supplies	= 1,
+> ++	.consumer_supplies	= &ldp_vmmc1_supply,
+> ++};
+> ++
+> ++/* VSIM for MMC1 pins DAT4..DAT7 (2 mA, plus card == max 50 mA) */
+> ++static struct regulator_init_data ldp_vsim = {
+> ++	.constraints = {
+> ++		.min_uV			= 1800000,
+> ++		.max_uV			= 3000000,
+> ++		.valid_modes_mask	= REGULATOR_MODE_NORMAL
+> ++					| REGULATOR_MODE_STANDBY,
+> ++		.valid_ops_mask		= REGULATOR_CHANGE_VOLTAGE
+> ++					| REGULATOR_CHANGE_MODE
+> ++					| REGULATOR_CHANGE_STATUS,
+> ++	},
+> ++	.num_consumer_supplies	= 1,
+> ++	.consumer_supplies	= &ldp_vsim_supply,
+> ++};
+> ++
+> + static struct twl4030_platform_data ldp_twldata = {
+> + 	.irq_base	= TWL4030_IRQ_BASE,
+> + 	.irq_end	= TWL4030_IRQ_END,
+> +@@ -483,6 +532,8 @@ static struct twl4030_platform_data ldp_twldata = {
+> + 	.madc		= &ldp_madc_data,
+> + 	.usb		= &ldp_usb_data,
+> + 	.power		= &sdp3430_t2scripts_data,
+> ++	.vmmc1		= &ldp_vmmc1,
+> ++	.vsim		= &ldp_vsim,
+> + 	.gpio		= &ldp_gpio_data,
+> + 	.keypad		= &ldp_kp_twl4030_data,
+> + };
+> +@@ -530,6 +581,10 @@ static void __init omap_ldp_init(void)
+> + 	omap_serial_init();
+> + 	usb_musb_init();
+> + 	twl4030_mmc_init(mmc);
+> ++	/* link regulators to MMC adapters */
+> ++	ldp_vmmc1_supply.dev = mmc[0].dev;
+> ++	ldp_vsim_supply.dev = mmc[0].dev;
+> ++	
+> + }
+> + 
+> + static void __init omap_ldp_map_io(void)
+> +-- 
+> +1.6.2
 > +
-> +FILES_${PN} += "${datadir}/icons ${datadir}/dbus-1"
-> +
-> +
+> diff --git a/recipes/linux/linux-omap-2.6.29/omapzoom/defconfig b/recipes/linux/linux-omap-2.6.29/omapzoom/defconfig
+> index 194ec72..d2d2ee5 100644
+> --- a/recipes/linux/linux-omap-2.6.29/omapzoom/defconfig
+> +++ b/recipes/linux/linux-omap-2.6.29/omapzoom/defconfig
+> @@ -1,7 +1,7 @@
+>  #
+>  # Automatically generated make config: don't edit
+>  # Linux kernel version: 2.6.29-omap1
+> -# Mon Mar 30 12:32:35 2009
+> +# Mon Mar 30 15:25:29 2009
+>  #
+>  CONFIG_ARM=y
+>  CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+> @@ -1773,8 +1773,8 @@ CONFIG_DETECT_SOFTLOCKUP=y
+>  # CONFIG_BOOTPARAM_SOFTLOCKUP_PANIC is not set
+>  CONFIG_BOOTPARAM_SOFTLOCKUP_PANIC_VALUE=0
+>  CONFIG_SCHED_DEBUG=y
+> -# CONFIG_SCHEDSTATS is not set
+> -# CONFIG_TIMER_STATS is not set
+> +CONFIG_SCHEDSTATS=y
+> +CONFIG_TIMER_STATS=y
+>  # CONFIG_DEBUG_OBJECTS is not set
+>  # CONFIG_DEBUG_SLAB is not set
+>  # CONFIG_DEBUG_RT_MUTEXES is not set
+> diff --git a/recipes/linux/linux-omap_2.6.29.bb b/recipes/linux/linux-omap_2.6.29.bb
+> index cf1a93c..86827fd 100644
+> --- a/recipes/linux/linux-omap_2.6.29.bb
+> +++ b/recipes/linux/linux-omap_2.6.29.bb
+> @@ -10,7 +10,7 @@ DEFAULT_PREFERENCE = "-1"
+>  
+>  SRCREV = "90e758af52ba803cba233fabee81176d99589f09"
+>  
+> -PR = "r0+gitr${SRCREV}"
+> +PR = "r1+gitr${SRCREV}"
+>  
+>  SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git;protocol=git \
+>  	   file://defconfig"
+> @@ -21,6 +21,7 @@ SRC_URI_append = " \
+>             file://read_die_ids.patch;patch=1 \
+>             file://fix-install.patch;patch=1 \
+>             file://DSS2.diff;patch=1 \
+> +           file://0001-board-ldp-add-regulator-info-to-get-the-microSD-slo.patch;patch=1 \
+>  "
+>  
+>  
 
---------------ms040001090701080303010809
+--------------ms050809040509000302070106
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -190,17 +265,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQwMTEz
-NDkxOVowIwYJKoZIhvcNAQkEMRYEFJZEA4Kp5qjKArJZ+5zCZ79vVaPXMFIGCSqGSIb3DQEJDzFF
+NTQ0NFowIwYJKoZIhvcNAQkEMRYEFOivPSKJQ4hqpkDA0DKbWS4S/XZ9MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQC3I/mbLGm9KEuMhZOwYr+ZB97XkL5eCVjZ7RYTGJDAii3i1s0W
-stP89XnUDjzGZFjj7WOgduOaGqKTSX8O52CqWbhnxfwsNYcJ+nVzAkE45CgZWLUDy3Bw/594AxE/
-9EBaOd9UElJZxzixz7cQLRX4PePhFJzxMcBEc2XiQ4imlYqghFhiW1aP/QNIgZz3eMk8u/V95x9Z
-iDt5UQ11Je1cuHnUe1WtR2674Gp9ylFw7eIGMwjJ76kAsa/jwQJGYF21HLlBYzRn5EEMhElH0OFD
-v1hxsMsRqd+G6URR6HyzVfKfHr06MfNf7NjCLL7HOjVawK+QM7DLSBtwN5xXLVqFAAAAAAAA
+hTANBgkqhkiG9w0BAQEFAASCAQAR9Muu5hgmNCdgHABfIBuKGIC0dlX2Fumdu/rgSYngFlLN2zXU
+C5bbrnAF8dOj2ID118a2j0RP3BYy3gn9zmroyGId+8e8b9ubdoyLIrxi/F0plg1QHnZ8utQGDTip
+pUf09XTKUf6XSk0N9A8yjRqpAdV+2wxqK9sxMfQbacKVETcIqFXn9ZeC8ZXfacx2Hyd2x75iVYJ3
+AjPHLiZ2X3TmZ58Zq8knMBasSFVmO9+gw19Bqo+MjooIhiIEQPqccbvPjiLvI67NgZQE/7Fp5el1
+2g30bUEYI7QmOGiBt7lK3WnV70Ft7qCNK5n1UW/B9nVyyBJk6g2Vn7n5mULg2BhsAAAAAAAA
 
---------------ms040001090701080303010809--
+--------------ms050809040509000302070106--
