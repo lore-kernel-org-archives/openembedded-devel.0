@@ -1,38 +1,33 @@
-Received: from [213.91.4.211] (helo=bart.wifirst.net)
+Received: from [59.124.115.149] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <adrien.demarez@bolloretelecom.eu>)
-	id 1Lozxt-0001kt-7P for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 14:54:45 +0200
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id BECD35FF26;
-	Wed,  1 Apr 2009 14:52:24 +0200 (CEST)
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id EBE8F5FF27;
-	Wed,  1 Apr 2009 14:52:22 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on bart
+	(envelope-from <nytowl@openmoko.org>) id 1Lp0DV-0006zt-To
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Apr 2009 15:10:54 +0200
+Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
+	helo=[172.16.14.116]) by aakash.openmoko.org with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <nytowl@openmoko.org>) id 1Lp0B2-0002RK-Hm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Apr 2009 21:08:32 +0800
+From: Angus Ainslie <nytowl@openmoko.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20090331221450.GA31451@denix.org>
+References: <1238452829.7128.4.camel@alap> <gqsel4$g9v$1@ger.gmane.org>
+	<1238511677.7128.86.camel@alap>  <20090331221450.GA31451@denix.org>
+Date: Wed, 01 Apr 2009 07:08:12 -0600
+Message-Id: <1238591292.7128.137.camel@alap>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 70.73.132.19
+X-SA-Exim-Mail-From: nytowl@openmoko.org
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb (2006-10-05) on 
+	aakash.openmoko.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.3
-Received: from blini.bolloretelecom.eu (smtp.bolloretelecom.eu
-	[62.210.194.121])
-	by bart.wifirst.net (Postfix) with ESMTP id 87B955FF26;
-	Wed,  1 Apr 2009 14:52:22 +0200 (CEST)
-Received: from [192.168.95.152] (unknown [192.168.95.152])
-	by blini.bolloretelecom.eu (Postfix) with ESMTPSA id 55CB523E44;
-	Wed,  1 Apr 2009 14:52:22 +0200 (CEST)
-Message-ID: <49D363A5.3010503@bolloretelecom.eu>
-Date: Wed, 01 Apr 2009 14:52:53 +0200
-From: Adrien Demarez <adrien.demarez@bolloretelecom.eu>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
-MIME-Version: 1.0
-To: mwester@dls.net
-References: <49D245F0.4060107@dls.net>
-In-Reply-To: <49D245F0.4060107@dls.net>
-X-Enigmail-Version: 0.95.7
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: openembedded-devel@openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: madwifi-ng & linux 2.6.29
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
+	autolearn=ham version=3.1.7-deb
+X-SA-Exim-Version: 4.2.1 (built Tue, 09 Jan 2007 17:23:22 +0000)
+X-SA-Exim-Scanned: Yes (on aakash.openmoko.org)
+Subject: Re: [PATCH] add hotplug2 package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,99 +41,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 12:54:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 01 Apr 2009 13:10:54 -0000
+X-Groupsio-MsgNum: 8919
+Content-Type: multipart/mixed; boundary="=-sjLmG5DO3ciDIklWyLFK"
 
-Hi all,
+--=-sjLmG5DO3ciDIklWyLFK
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-I am working with Jeremy Lain=E9 on the boc01 architecture. Currently, we
-do use Madwifi + hostapd 0.5 for our 11g Atheros minicard modules
-(despite we want to switch to ath9k / ath5k when it is mature enough).
-As we are still using 2.6.27 kernel and found ath9k is not mature enough
-for AP in this version (at least, it does not work with our AR9160
-modules), I have written a working recipe for compat-wireless (not yet
-committed into OE though, please tell if anyone is interested. Beware :
-it does not compile if MAC80211 or CFG80211 is defined as 'y' in the
-kernel, use 'm' or 'n' instead !).
-This is working, though I'd prefer using vanilla in-kernel drivers
-instead of compat-wireless (so I plan to have a look to ath*k in 2.6.29
-kernel very soon).
+On Tue, 2009-03-31 at 18:14 -0400, Denys Dmytriyenko wrote:
+> 
+> Wow, I'm surprised "-lglibc" above even worked for you:
+> 
+> $ find rootfs -name 'libglibc*'
+> $
+> 
+> Those undefined references above are provided by libdl.so, which needs:
+> 
+> LDFLAGS += " -ldl"
+> 
+> And no need for autotools.
+> 
 
-In order to use ath*k (or any drivers using nl80211) with hostapd, I
-have also written a recipe for hostapd-0.6.9 (Jeremy has uploaded it
-into OE) and this is working perfectly with our AR9160 modules using
-ath9k from compat-wireless. I am currently testing ath5k, but I run into
-a few troubles with AP mode, so until this is fixed we still need to
-keep a working madwifi+hostapd-0.5.10 (I also experienced a few troubles
-with madwifi + hostapd-0.6.9 so for the moment we stand with hostapd-0.5
-when using madwifi, and hostapd-0.6 is not set as the default one. I
-will look at this soon but getting a working ath5k/AP is more important
-to me currently).
-I also have to do more testing with wpa_supplicant (currently, AP mode
-is my focus).
+Weird, I was sure I'd tried it that way the first time. Here's the
+updated recipe.
 
-BTW, if anyone is interested, I also have written a working recipe for
-madwifi using hal-0.10.5.6. I found this hal is necessary for some
-recent chips like AR2417 with whom the vanilla madwifi-ng driver does
-not work.
-
-Best regards,
-
---
-Adrien Demarez
-
-Mike (mwester) a =E9crit :
-> Now that the 2.6.29 kernel has support for some of the Atheros wifi
-> devices, we have a little bit of a problem.  The solution would seem to
-> me to be to virtualize atheros support in OE.  This would change a
-> number of recipes, including hostap-daemon, wpa-supplicant, and a bunch
-> of package and task recipes.
->
-> This assumes that hostap-daemon and wpa-supplicant won't need other
-> changes to support the new drivers...
->
-> So the first question to the group is who uses madwifi anymore?  SlugOS
-> includes drivers, but only for selected (and unusual) devices, so fixin=
-g
-> this is not a high priority for SlugOS, nor is maintaining compatibilit=
-y
-> a big concern for SlugOS, I think.   Anyone else?
->
-> Mike (mwester)
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->  =20
-
---=20
-
-Adrien Demarez
-Bollor=E9 telecom
->> WiMAX is here and across Europe! See us @
-http://www.wimaxoperators.org/regional/europe
-
-Bureaux/Office : 11bis, rue Scribe | F-75009 Paris
-Tel : +33 1 78 14 04 08
-www.bolloretelecom.eu <http://www.bolloretelecom.eu>
-
-------------------------------------------------------------------------
-
-Ce message et toutes les pi=E8ces jointes (ci-apr=E8s le =AB message =BB)=
- sont
-=E9tablis =E0 l'intention exclusive de ses destinataires et sont
-confidentiels. Si vous recevez ce message par erreur, merci de le
-d=E9truire et d'en avertir imm=E9diatement l'exp=E9diteur. Toute utilisat=
-ion
-de ce message non conforme =E0 sa destination, toute diffusion ou toute
-publication, totale ou partielle, est interdite, sauf autorisation
-expresse. L'Internet ne permettant pas d'assurer l'int=E9grit=E9 de ce
-message, Bollor=E9 telecom d=E9cline toute responsabilit=E9 au titre de c=
-e
-message, dans l'hypoth=E8se o=F9 il aurait =E9t=E9 modifi=E9.
-
-------------------------------------------------------------------------
+Angus
 
 
+--=-sjLmG5DO3ciDIklWyLFK
+Content-Disposition: attachment; filename*0=0001-hotplug2-added-new-recipe-and-updated-checksums.ini.patc; filename*1=h
+Content-Type: text/x-patch; name="0001-hotplug2-added-new-recipe-and-updated-checksums.ini.patch"; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+From 055519888c8d279e83ce11337746400343addb7c Mon Sep 17 00:00:00 2001
+From: Angus Ainslie <nytowl@openmoko.org>
+Date: Tue, 31 Mar 2009 08:56:46 -0600
+Subject: [PATCH] hotplug2: added new recipe and updated checksums.ini
+
+---
+ conf/checksums.ini                        |    4 ++++
+ packages/hotplug2/hotplug2_0.9+1.0beta.bb |   26 ++++++++++++++++++++++++++
+ 2 files changed, 30 insertions(+), 0 deletions(-)
+ create mode 100644 packages/hotplug2/hotplug2_0.9+1.0beta.bb
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 9548a02..c5e6910 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -9318,6 +9318,10 @@ sha256=af40399fe434678454ae8ea100db6cba0482aa65b8972a05098c779cac57bc48
+ md5=faa08f321fefd2c61ce4c9355a62fe31
+ sha256=ca7ef124cde06883fbf28c7e78ce1e4c5526434bbe5672ef0a3e85a61a9d0b5f
+ 
++[http://isteve.bofh.cz/~isteve/hotplug2/downloads/hotplug2-1.0-beta.tar.gz]
++md5=353656ea499d395260c0de143983da4d
++sha256=54e2fa375506d92a8ac94b5ed332c4c0bf1b69c252692b332c92702670bba583
++
+ [http://www.porchdogsoft.com/download/howl-0.9.7.tar.gz]
+ md5=85fbe016e2ebad99108b1212ae4b1d6f
+ sha256=f8766c44291aac92b2b4abc762e1b11e3504dd9f2a855fdde371b5abd730fe9f
+diff --git a/packages/hotplug2/hotplug2_0.9+1.0beta.bb b/packages/hotplug2/hotplug2_0.9+1.0beta.bb
+new file mode 100644
+index 0000000..564785d
+--- /dev/null
++++ b/packages/hotplug2/hotplug2_0.9+1.0beta.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "hotplug2 is a daemon which dynamically creates and removes device nodes from \
++/dev/, handles hotplug events and loads drivers at boot time. It replaces \
++the hotplug and udev packages and requires a kernel not older than 2.6.12."
++RPROVIDES_${PN} = "hotplug"
++RREPLACES_${PN} = "udev"
++
++SRC_URI = "http://isteve.bofh.cz/~isteve/hotplug2/downloads/hotplug2-1.0-beta.tar.gz \
++           "
++
++S = "${WORKDIR}/hotplug2-1.0-beta"
++
++inherit update-rc.d
++
++INITSCRIPT_PARAMS = "start 03 S ."
++INITSCRIPT_NAME = "hotplug2"
++
++LDFLAGS += "-ldl"
++DESTDIR="${D}"
++
++do_install_prepend () {
++        install -d ${D}/lib/hotplug2
++        install -d ${D}/sbin
++}
++
++FILES_${PN} += "${base_libdir}/hotplug2/*"
++FILES_${PN}-dbg += "${base_libdir}/hotplug2/.debug"
+-- 
+1.5.6.3
+
+
+--=-sjLmG5DO3ciDIklWyLFK--
