@@ -1,31 +1,45 @@
-Received: from [206.83.81.187] (helo=smtp1.irobot.com)
+Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tharvey@irobot.com>) id 1Lp3J0-0007S2-MK
+	(envelope-from <kergoth@gmail.com>) id 1Lp3hs-00086j-Ic
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 18:29:03 +0200
-Received: from fever2.wardrobe.irobot.com ([192.168.163.187]) by
-	smtp1.irobot.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 1 Apr 2009 12:26:24 -0400
-Received: from [192.168.69.73] ([192.168.69.73]) by fever2.wardrobe.irobot.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 1 Apr 2009 12:26:24 -0400
-Message-ID: <49D395AF.1090706@irobot.com>
-Date: Wed, 01 Apr 2009 09:26:23 -0700
-From: Tim Harvey <tharvey@irobot.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+	Wed, 01 Apr 2009 18:54:30 +0200
+Received: by yx-out-1718.google.com with SMTP id 3so87640yxi.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Apr 2009 09:52:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=6qPIltXo8PvGY184/VQ9Kj0RHxjt8Q/un0mkgRPxZic=;
+	b=kcs4UfkUZ9Adnk/B1RUjRaUi+stZ1IenPwD4jqw0VJIu4sgyYmpA5xqlFMYcZEpQ/K
+	YntALoXkzjxLpE2qY6V61Xic7AUBb2KHtmOJBZIs30ZkJwzmpflXoxLkY8zJ0eXHVvgz
+	+WCF6bNCvO2CDVZvqq0fVWSBdxQG4mNx97yQE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=LmHSuQnOOAq9F2NSxZrcOjxrPIagj8nb5tCssVNFw8gwwSfHxYFl6EMK6eiO9c72R6
+	DWlYihb/Cc+F/6oUZKqCC7/Kjnb5o/YmJzJakT8k7s84yFSUdlhXv5r1TrNHNpfRRWtF
+	xIKnpV9s+4BpaKoPQigJVJIdakv+aRlDEvzkM=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Sender: kergoth@gmail.com
+Received: by 10.151.42.12 with SMTP id u12mr1957939ybj.167.1238604727963; Wed, 
+	01 Apr 2009 09:52:07 -0700 (PDT)
+In-Reply-To: <49D395AF.1090706@irobot.com>
 References: <49CD3BFF.2030902@irobot.com>
 	<b6ebd0a50903271402r632461b0q962666a6b2ccd50c@mail.gmail.com>
-In-Reply-To: <b6ebd0a50903271402r632461b0q962666a6b2ccd50c@mail.gmail.com>
-X-OriginalArrivalTime: 01 Apr 2009 16:26:25.0008 (UTC)
-	FILETIME=[99D84700:01C9B2E6]
-X-SA-Exim-Connect-IP: 206.83.81.187
-X-SA-Exim-Mail-From: tharvey@irobot.com
+	<49D395AF.1090706@irobot.com>
+Date: Wed, 1 Apr 2009 09:52:07 -0700
+X-Google-Sender-Auth: a7304d8add649d4d
+Message-ID: <b6ebd0a50904010952n6ce5b7b2g793f79ada1e6dcc1@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.44.157
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_40,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_05,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] bash: add alternative configuration for bin/sh -> /bin/bash
@@ -42,91 +56,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 16:29:12 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Apr 2009 16:54:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Chris Larson wrote:
-> Be very careful with this.  Specifically, be sure to thoroughly test
-> installing bash onto a system that currently has busybox, and the
-> upgrade paths for both busybox and bash.  You never want to get into a
-> state, due to pre/post rm/install script execution order, where
-> /bin/sh doesn't exist.  If that happens, you won't be able to execute
-> the next script to fix it :)
->   
-in my case, I have both bash and busybox installed and I want bash to 
-take priority as the /bin/sh which it otherwise does not.
-
-attempting to remove the package that contains your shell is something 
-you need to be careful as anyway.
-
-This seems to me to be a prime example of where alternatives should be used?
-
-Tim
-> On Fri, Mar 27, 2009 at 1:50 PM, Tim Harvey <tharvey@irobot.com> wrote:
->   
->> Add alternative configuration for /bin/sh -> /bin/bash so that for example
->> bash can exist (and override) as shell if busybox is also installed
+On Wed, Apr 1, 2009 at 9:26 AM, Tim Harvey <tharvey@irobot.com> wrote:
+> Chris Larson wrote:
 >>
->> diff --git a/recipes/bash/bash.inc b/recipes/bash/bash.inc
->> index 4eba689..7c6122b 100644
->> --- a/recipes/bash/bash.inc
->> +++ b/recipes/bash/bash.inc
->> @@ -4,7 +4,7 @@ DEPENDS = "ncurses"
->> SECTION = "base/shell"
->> LICENSE = "GPL"
+>> Be very careful with this. =C2=A0Specifically, be sure to thoroughly tes=
+t
+>> installing bash onto a system that currently has busybox, and the
+>> upgrade paths for both busybox and bash. =C2=A0You never want to get int=
+o a
+>> state, due to pre/post rm/install script execution order, where
+>> /bin/sh doesn't exist. =C2=A0If that happens, you won't be able to execu=
+te
+>> the next script to fix it :)
 >>
->> -inherit autotools gettext
->> +inherit autotools gettext update-alternatives
->>
->> PARALLEL_MAKE = ""
->>
->> @@ -33,3 +33,8 @@ pkg_postinst () {
->>       grep -q "bin/bash" $D${sysconfdir}/shells || echo /bin/bash >>
->> $D${sysconfdir}/shells
->>       grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >>
->> $D${sysconfdir}/shells
->> }
->> +
->> +ALTERNATIVE_NAME = "sh"
->> +ALTERNATIVE_LINK = "${base_bindir}/sh"
->> +ALTERNATIVE_PATH = "${base_bindir}/bash"
->> +ALTERNATIVE_PRIORITY = "90"
->> diff --git a/recipes/bash/bash_3.0.bb b/recipes/bash/bash_3.0.bb
->> index e23887a..8165d07 100644
->> --- a/recipes/bash/bash_3.0.bb
->> +++ b/recipes/bash/bash_3.0.bb
->> @@ -1,5 +1,5 @@
->> require bash.inc
->> -PR = "r11"
->> +PR = "r12"
->>
->> SRC_URI += "\
->>  file://bash-3.0-fixes.patch;patch=1 \
->> diff --git a/recipes/bash/bash_3.2.bb b/recipes/bash/bash_3.2.bb
->> index 6a48a4b..e175467 100644
->> --- a/recipes/bash/bash_3.2.bb
->> +++ b/recipes/bash/bash_3.2.bb
->> @@ -1,6 +1,6 @@
->> require bash.inc
->>
->> -PR = "r7"
->> +PR = "r8"
->>
->> SRC_URI += "\
->>           file://builtins.patch;patch=1 \
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->>     
 >
+> in my case, I have both bash and busybox installed and I want bash to tak=
+e
+> priority as the /bin/sh which it otherwise does not.
 >
+> attempting to remove the package that contains your shell is something yo=
+u
+> need to be careful as anyway.
 >
->   
+> This seems to me to be a prime example of where alternatives should be us=
+ed?
 
+You missed my point, it seems.  I was talking about
+update-alternatives.  Depending on how update-alternatives is
+implemented, there could be issues similar to what I mentioned in the
+previous email.  Consider: if it uses system(), which calls /bin/sh,
+to remove the old /bin/sh link, and then calls system() again to
+create the new, it will fail.  Speculation, but again, it's something
+you always need to keep in mind if you're messing with /bin/sh in any
+way.
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
