@@ -1,29 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpPBO-0004Hj-Q7
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 17:50:36 +0200
-Received: (qmail 12740 invoked by uid 813007); 2 Apr 2009 15:19:54 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 2 Apr 2009 15:19:54 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <broonie@sirena.org.uk>) id 1LpPKZ-0004Wu-JM
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Apr 2009 17:59:58 +0200
+Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.69)
+	(envelope-from <broonie@sirena.org.uk>)
+	id 1LpPIE-0006zT-7X; Thu, 02 Apr 2009 16:57:26 +0100
+From: Mark Brown <broonie@opensource.wolfsonmicro.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 2 Apr 2009 17:19:53 +0200
-User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
-References: <1238677083-16935-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1238677083-16935-1-git-send-email-k.kooi@student.utwente.nl>
-MIME-Version: 1.0
-Message-Id: <200904021719.54550.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Thu,  2 Apr 2009 16:57:26 +0100
+Message-Id: <1238687846-26851-1-git-send-email-broonie@opensource.wolfsonmicro.com>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 80.68.93.111
+X-SA-Exim-Mail-From: broonie@sirena.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_PASS
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] insane.bbclass: document error class "9" (LDFLAGS ignored)
+Cc: Mark Brown <broonie@opensource.wolfsonmicro.com>
+Subject: [PATCH] watchdog: Update to version 5.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +34,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 15:50:43 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Apr 2009 16:00:13 -0000
 
-Dnia czwartek, 2 kwietnia 2009 o 14:58:03 Koen Kooi napisa=C5=82(a):
-> From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
->
->
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+No packaging changes, just the new upstream.
+---
+ conf/checksums.ini               |    5 +++++
+ recipes/watchdog/watchdog_5.6.bb |   16 ++++++++++++++++
+ 2 files changed, 21 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/watchdog/watchdog_5.6.bb
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 2a119dd..5caccd1 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -23358,6 +23358,11 @@ sha256=6c5bfb2edae5c289233b6cd65393bb7414a2d30ad4d1239c207a659a4232d91a
+ md5=ba97ddce396bfccd8d409bc3141d7ef4
+ sha256=b7bf9feeedea26d7e06935369a1a556089426e94f9ead946018526c96cd9b12e
+ 
++[http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/watchdog-5.6.tar.gz]
++md5=6df285569dd1d85528b983c98c9b2b7c
++sha256=a2c7d6726e092315dbb047211b754528e4532521678a30e16f60a31bb86a7f74
++
++
+ [http://downloads.sourceforge.net/wbxmllib/wbxml2-0.9.0-src.tar.gz]
+ md5=3f9b5bf104ec523b8eebe69f93919ded
+ sha256=acd218148d7f92ee7bd0539d6aabd0b42cca8ae4ffe241bfa8760d30605b28c9
+diff --git a/recipes/watchdog/watchdog_5.6.bb b/recipes/watchdog/watchdog_5.6.bb
+new file mode 100644
+index 0000000..6c8bd56
+--- /dev/null
++++ b/recipes/watchdog/watchdog_5.6.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "System watchdog daemon"
++LICENSE = "GPL"
++
++SRC_URI = "http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/${PN}-${PV}.tar.gz \
++	file://init"
++
++inherit autotools update-rc.d
++
++INITSCRIPT_NAME = "watchdog"
++INITSCRIPT_PARAMS = "defaults 10"
++
++do_install_append() {
++	install -d ${D}${sysconfdir}/init.d
++	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/watchdog
++}
++
+-- 
+1.6.2.1
 
 
 
