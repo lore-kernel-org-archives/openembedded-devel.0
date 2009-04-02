@@ -1,46 +1,33 @@
-Received: from [209.85.221.124] (helo=mail-qy0-f124.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LpQ4W-0002Fh-KC
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 18:47:53 +0200
-Received: by qyk30 with SMTP id 30so1217887qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Apr 2009 09:44:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=mhbNAKzmMoonphmIMfwcJ5zAx+usbitdrbfeMS3tcYk=;
-	b=OnqAvGF8Yz3SpXaW1W6mL6EtHUOZw5FHYT8TvT9e5/X8lMqOdKmXcdQJzr8xrovnEF
-	d0ZvjZ9zOWi4RLv3fCK7R6YRLWBZd6gF5WQsWANDOVe4nExUG+oGDzjR1847RjXVRk4E
-	aJvuPvIZq7wzQRQa2viDBX6YDIs+p1OUk9/+A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=BE1LiTU2Dd1rWTN6Z46iTox3T0LpEWi5SPe6lNBAdosStjULRKxrSXM5ZQ2ioVTycR
-	7YuIwm/PiGKOLGBKN0GaTQg+DvFaiuOGmiU6Y3t7W/XGhtt3Diqy4f8jdtYyviOSenET
-	wHgOdkPoo/YN4nz+QMZUYlh2bnQKuXl6S+IVs=
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LpQQS-0002g5-Vt
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 19:10:28 +0200
+Received: (qmail invoked by alias); 02 Apr 2009 17:07:33 -0000
+Received: from f053009085.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.9.85]
+	by mail.gmx.net (mp008) with SMTP; 02 Apr 2009 19:07:33 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19vc5cseNpvUwOVprXi/JXb1MhMdzunapF+noGDNN
+	apS8VbJNiXPeyJ
+Message-ID: <49D4F0D8.8030904@gmx.net>
+Date: Thu, 02 Apr 2009 19:07:36 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.231.10.140 with SMTP id p12mr70856ibp.50.1238690692423; Thu, 
-	02 Apr 2009 09:44:52 -0700 (PDT)
-In-Reply-To: <49D44D76.7070808@bolloretelecom.eu>
-References: <1238607343.27167.1.camel@homestead>
-	<49D44D76.7070808@bolloretelecom.eu>
-Date: Thu, 2 Apr 2009 13:44:52 -0300
-X-Google-Sender-Auth: 3f4a7cb6a7270bcd
-Message-ID: <be7a9f3d0904020944h4d4c6d6dgac1a2e75163d8cf3@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.124
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+References: <1238607343.27167.1.camel@homestead>
+In-Reply-To: <1238607343.27167.1.camel@homestead>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.75
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: theBohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_PASS
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: openembedded-devel@openembedded.org
 Subject: Re: cmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,28 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 16:48:34 -0000
+X-List-Received-Date: Thu, 02 Apr 2009 17:10:48 -0000
+X-Groupsio-MsgNum: 9014
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigCB4091561E277CEA69AF2727"
+
+--------------enigCB4091561E277CEA69AF2727
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 2, 2009 at 2:30 AM, Jeremy Lain=E9
-<jeremy.laine@bolloretelecom.eu> wrote:
-> Shane Dixon wrote:
->> I'm considering changing my projects over to cmake, but before I do, I
->> wanted to ask how good the cmake support is in OE. =A0I saw a recent
->> proposal to allow out-of-tree builds for cmake, but I'm not sure if that
->> happened or not.
->
-> At work we recently switched our projects over to CMake and they are buil=
-ding happily in
-> OE. Out-of-tree builds are indeed supported, see recipes/llvm/llvm.inc fo=
-r an example.
+Hi Shane,
 
-What do you mean by out-of-tree?
+Shane Dixon schrieb:
+> I'm considering changing my projects over to cmake, but before I do, I
+> wanted to ask how good the cmake support is in OE.  I saw a recent
+> proposal to allow out-of-tree builds for cmake, but I'm not sure if tha=
+t
+> happened or not.
+>=20
+> Can I move forward with changing my projects to cmake and expect that i=
+t
+> will build correctly in OE?
+Go ahead, OE contains latest CMake release as well as out of tree build
+functionality.
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Regards
+Robert
 
 
+--------------enigCB4091561E277CEA69AF2727
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAknU8NsACgkQG9cfwmwwEtrsuQCfVtB2PLHu6InKhJxUR4NENSGD
+WpsAnA9/UGQ49b0407PGEdi8g7mCjYYl
+=KUm9
+-----END PGP SIGNATURE-----
+
+--------------enigCB4091561E277CEA69AF2727--
