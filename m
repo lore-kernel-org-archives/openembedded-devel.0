@@ -1,26 +1,44 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1LpPKZ-0004Wu-JM
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 17:59:58 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>)
-	id 1LpPIE-0006zT-7X; Thu, 02 Apr 2009 16:57:26 +0100
-From: Mark Brown <broonie@opensource.wolfsonmicro.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Apr 2009 16:57:26 +0100
-Message-Id: <1238687846-26851-1-git-send-email-broonie@opensource.wolfsonmicro.com>
-X-Mailer: git-send-email 1.5.6.5
-X-SA-Exim-Connect-IP: 80.68.93.111
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LpPLf-0004YQ-Ig
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 18:01:57 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LpPJK-00039Z-Ao
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 15:58:34 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 02 Apr 2009 15:58:34 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 02 Apr 2009 15:58:34 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 02 Apr 2009 17:58:20 +0200
+Message-ID: <gr2nat$m6k$1@ger.gmane.org>
+References: <49D17F70.8020109@dls.net>
+	<49D42B0B.4020505@dls.net>	<gr1ujt$ga$1@ger.gmane.org>
+	<49D4C641.8080907@dls.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <49D4C641.8080907@dls.net>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_PASS
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Mark Brown <broonie@opensource.wolfsonmicro.com>
-Subject: [PATCH] watchdog: Update to version 5.6
+Subject: Re: [RFC] make preferred openssl version match for -native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,55 +52,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 16:00:13 -0000
+X-List-Received-Date: Thu, 02 Apr 2009 16:02:25 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-No packaging changes, just the new upstream.
----
- conf/checksums.ini               |    5 +++++
- recipes/watchdog/watchdog_5.6.bb |   16 ++++++++++++++++
- 2 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 recipes/watchdog/watchdog_5.6.bb
+On 02-04-09 16:05, Mike (mwester) wrote:
+> Koen Kooi wrote:
+>> On 02-04-09 05:03, Mike (mwester) wrote:
+>>> Mike (mwester) wrote:
+>>>> I'd like to propose that we remove the "DEFAULT_PREFERENCE = "-1"" line
+>>>> from openssl-native_0.9.8j.bb.
+>>>>
+>>>> This is causing a problem in select cases (for example, python-native
+>>>> fails "import md5"), because we build and stage openssl 0.9.8j, but the
+>>>> corresponding -native that gets built and staged is openssl 0.9.7g.
+>>>>
+>>>> The 0.9.8j version is currently selected as the PREFERRED_VERSION in the
+>>>> preferred-om-2008-versions.inc file, as well as for SlugOS.  I've
+>>>> successfully built it on both 32 and 64 bit hosts.
+>>>>
+>>>> Unless there are objections, I'll commit a fix in a couple of days.
+>>>
+>>> Fix committed. (To dev, not to the new stable branch.)
+>>>
+>>> WARNING!  The "correct" thing to do would probably be to bump up the PR
+>>> on all recipes that might include, directly or indirectly, openssh libs
+>>> -- thus forcing them all to link against the new version...
+>>>
+>>> However, that seemed to be an awful lot of packages, and given that at
+>>> least some of the distros already have over-rides to select matching
+>>> versions for openssl and openssl-native, this would seem to cause more
+>>> problems than it would solve.
+>>>
+>>> So anticipate that your builds may fail if a new version of openssl is
+>>> built; the failure mode would be the inability for the app to find the
+>>> old version of the library in the staging area.
+>>
+>> You mean like this:
+>> /OE/angstrom-dev/staging/x86_64-linux/usr/bin/edje_cc: error while
+>> loading shared libraries: libssl.so.0.9.7: cannot open shared object
+>> file: No such file or directory
+>>
+>> Could you please do things properly and bump PR for the affected recipes?
+>
+> I explained why I didn't.
+>
+> I appreciate your comment, none-the-less; to be honest, I fixed this for
+> SlugOS and was happy with the result for me.  I was instructed to fix
+> this for everyone at the behest of one of the other core devs, despite
+> my misgivings over the disruption such a change would have -- disruption
+> that would have happened one way or another, regardless of whether I
+> bumped every ^&&^*&#%! PR in OE.
+>
+> So clearly my initial thought was correct -- only the core members are
+> permitted to break anything.
+>
+> Your feedback is filed, and will be prominently displayed (in commit
+> notices if necessary) to justify my preferred practice of making
+> SlugOS-private fixes.
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 2a119dd..5caccd1 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -23358,6 +23358,11 @@ sha256=6c5bfb2edae5c289233b6cd65393bb7414a2d30ad4d1239c207a659a4232d91a
- md5=ba97ddce396bfccd8d409bc3141d7ef4
- sha256=b7bf9feeedea26d7e06935369a1a556089426e94f9ead946018526c96cd9b12e
- 
-+[http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/watchdog-5.6.tar.gz]
-+md5=6df285569dd1d85528b983c98c9b2b7c
-+sha256=a2c7d6726e092315dbb047211b754528e4532521678a30e16f60a31bb86a7f74
-+
-+
- [http://downloads.sourceforge.net/wbxmllib/wbxml2-0.9.0-src.tar.gz]
- md5=3f9b5bf104ec523b8eebe69f93919ded
- sha256=acd218148d7f92ee7bd0539d6aabd0b42cca8ae4ffe241bfa8760d30605b28c9
-diff --git a/recipes/watchdog/watchdog_5.6.bb b/recipes/watchdog/watchdog_5.6.bb
-new file mode 100644
-index 0000000..6c8bd56
---- /dev/null
-+++ b/recipes/watchdog/watchdog_5.6.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "System watchdog daemon"
-+LICENSE = "GPL"
-+
-+SRC_URI = "http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/${PN}-${PV}.tar.gz \
-+	file://init"
-+
-+inherit autotools update-rc.d
-+
-+INITSCRIPT_NAME = "watchdog"
-+INITSCRIPT_PARAMS = "defaults 10"
-+
-+do_install_append() {
-+	install -d ${D}${sysconfdir}/init.d
-+	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/watchdog
-+}
-+
--- 
-1.6.2.1
+distro private != properly
 
 
 
