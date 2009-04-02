@@ -1,36 +1,30 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LpSMF-0002LI-RN
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 21:13:52 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090402191119.NMKC16134.fed1rmmtao104.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 2 Apr 2009 15:11:19 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id ajBJ1b0084dMFYL04jBJEK; Thu, 02 Apr 2009 15:11:18 -0400
-X-Authority-Analysis: v=1.0 c=1 a=wACDQLuiM8MA:10 a=m2ervYgq_Q4A:10
-	a=gLpkaHEsGui4RcjbgnMA:9 a=jaZCZ9gPs8OvJVPg56uBTlO0bLMA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Thu, 2 Apr 2009 12:11:18 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090402191118.GC30840@smtp.west.cox.net>
-References: <20090402185006.GA12552@denix.org>
+	(envelope-from <mwester@dls.net>) id 1LpSpq-00088M-J1
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 21:44:25 +0200
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx02.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LpSnR-00037l-3Y
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 14:41:53 -0500
+Message-ID: <49D51504.9030909@dls.net>
+Date: Thu, 02 Apr 2009 14:41:56 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-In-Reply-To: <20090402185006.GA12552@denix.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.42
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+To: openembedded-devel@openembedded.org
+References: <49D17F70.8020109@dls.net>	<49D42B0B.4020505@dls.net>	<gr1ujt$ga$1@ger.gmane.org>	<49D4C641.8080907@dls.net>
+	<gr2nat$m6k$1@ger.gmane.org>
+In-Reply-To: <gr2nat$m6k$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 216.145.245.198
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.8 required=5.0 tests=AWL,BAYES_05,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: package_ipk.bbclass fails due to a wrong version of a	package
+Subject: Re: [RFC] make preferred openssl version match for -native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,28 +38,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 19:13:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Apr 2009 19:44:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 02, 2009 at 02:50:06PM -0400, Denys Dmytriyenko wrote:
+Koen Kooi wrote:
 
-> Hi,
-> 
-> I've been debugging this issue for a while now w/o much success.
-> 
-> We have following recipes in play:
-> curl_7.19.0.bb
-> curl-native_7.18.2.bb
-> curl-sdk_7.18.2.bb
-> 
-> None of those set PV explicitly, so they are picked up from the filename.
+> distro private != properly
 
-Hmm, if you throw in a -v -DDD and log all the output, do you see both
-curl_7.18.2.bb being loaded (for -sdk) and curl_7.19.0.bb (for target)
-being loaded up?
+Ah, I see.  The clear conclusion is that unless I fix it "properly"
+(defined by whom?), I should not fix it at all.
 
--- 
-Tom Rini
+Very well.
+
+
+Mike (mwester)
 
 
