@@ -1,27 +1,38 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1LpMV1-0001M0-L4
+	(envelope-from <koansoftware@gmail.com>) id 1LpMXb-0001Sq-8S
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 14:58:38 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id 8D3DB189385; Thu,  2 Apr 2009 14:58:03 +0200 (CEST)
-From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Apr 2009 14:58:03 +0200
-Message-Id: <1238677083-17024-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
+	Thu, 02 Apr 2009 15:01:21 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 5E0DC2C823
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Apr 2009 12:57:16 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YsC4WBKnZ3IR
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Apr 2009 12:57:10 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id E53E82C7FD
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Apr 2009 12:57:09 +0000 (UTC)
+Message-ID: <49D4B67C.405@gmail.com>
+Date: Thu, 02 Apr 2009 14:58:36 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 80.81.242.146
-X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_40,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,RDNS_NONE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>,
-	=?utf-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@m4x.org>
-Subject: [STABLE][PATCH] bzip2: add patch to use LDFLAGS (fixes QA error)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [STABLE][PATCH] 1/3 Added at91sam9g20ek machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,66 +46,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 12:58:58 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Apr 2009 13:01:31 -0000
+Content-Type: text/x-diff;
+ name="0001-Added-at91sam9g20ek-machine.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline; filename="0001-Added-at91sam9g20ek-machine.patch"
 
-From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+From 40e45e43ad83fb8492b0af35554c35f047832478 Mon Sep 17 00:00:00 2001
+From: Marco Cavallini <m.cavallini@koansoftware.com>
+Date: Thu, 2 Apr 2009 14:49:07 +0200
+Subject: [PATCH] Added at91sam9g20ek machine
 
-
-Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- recipes/bzip2/bzip2-1.0.2/ldflags.patch |   14 ++++++++++++++
- recipes/bzip2/bzip2_1.0.2.bb            |    5 +++--
- 2 files changed, 17 insertions(+), 2 deletions(-)
- create mode 100644 recipes/bzip2/bzip2-1.0.2/ldflags.patch
+ conf/machine/at91sam9g20ek.conf |   30 ++++++++++++++++++++++++++++++
+ 1 files changed, 30 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/at91sam9g20ek.conf
 
-diff --git a/recipes/bzip2/bzip2-1.0.2/ldflags.patch b/recipes/bzip2/bzip=
-2-1.0.2/ldflags.patch
+diff --git a/conf/machine/at91sam9g20ek.conf b/conf/machine/at91sam9g20ek.conf
 new file mode 100644
-index 0000000..c7da5bc
+index 0000000..1fd165c
 --- /dev/null
-+++ b/recipes/bzip2/bzip2-1.0.2/ldflags.patch
-@@ -0,0 +1,14 @@
-+diff -urN bzip2-1.0.2.orig/Makefile-libbz2_so bzip2-1.0.2/Makefile-libbz=
-2_so
-+--- bzip2-1.0.2.orig/Makefile-libbz2_so	2001-12-30 02:15:59.000000000 +0=
-000
-++++ bzip2-1.0.2/Makefile-libbz2_so	2009-04-02 12:42:43.000000000 +0000
-+@@ -20,8 +20,8 @@
-+       bzlib.o
-+=20
-+ all: $(OBJS)
-+-	$(CC) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.2 $(OBJS)
-+-	$(CC) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.2
-++	$(CC) $(LDFLAGS) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.=
-0.2 $(OBJS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.2
-+ 	rm -f libbz2.so.1.0
-+ 	ln -s libbz2.so.1.0.2 libbz2.so.1.0
-+=20
-diff --git a/recipes/bzip2/bzip2_1.0.2.bb b/recipes/bzip2/bzip2_1.0.2.bb
-index 1e1cb8e..9e8cb20 100644
---- a/recipes/bzip2/bzip2_1.0.2.bb
-+++ b/recipes/bzip2/bzip2_1.0.2.bb
-@@ -1,10 +1,11 @@
- DESCRIPTION =3D "Very high-quality data compression program."
- SECTION =3D "console/utils"
--PR =3D "r1"
-+PR =3D "r2"
-=20
- LICENSE =3D "bzip2"
- SRC_URI =3D "ftp://sources.redhat.com/pub/bzip2/v102/bzip2-${PV}.tar.gz =
-\
--	   file://installpaths.patch;patch=3D1"
-+	   file://installpaths.patch;patch=3D1 \
-+	   file://ldflags.patch;patch=3D1"
-=20
- CFLAGS_append =3D " -fPIC -fpic -Winline -fno-strength-reduce -D_FILE_OF=
-FSET_BITS=3D64"
-=20
---=20
++++ b/conf/machine/at91sam9g20ek.conf
+@@ -0,0 +1,30 @@
++#@TYPE: Machine
++#@Name: Atmel AT91SAM9G20EK Development Platform
++#@DESCRIPTION: Machine configuration for the at91sam9g20ek development board with a at91sam9g20 processor
++
++TARGET_ARCH = "arm"
++#PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
++
++PREFERRED_PROVIDER_virtual/kernel = "linux"
++PREFERRED_VERSION_linux = "2.6.28"
++PREFERRED_PROVIDER_xserver = "xserver-kdrive"
++
++KERNEL_IMAGETYPE = "uImage"
++PREFERRED_VERSION_u-boot = "2009.01"
++UBOOT_MACHINE = "at92sam9g20ek_config"
++
++PREFERRED_VERSION_at91bootstrap = "2.10"
++
++#don't try to access tty1
++USE_VT = "0"
++
++MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget"
++#EXTRA_IMAGEDEPENDS += "u-boot"
++#EXTRA_IMAGEDEPENDS += "at91bootstrap"
++
++# used by sysvinit_2
++SERIAL_CONSOLE = "115200 ttyS0"
++IMAGE_FSTYPES ?= "jffs2"
++EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
++
++require conf/machine/include/tune-arm926ejs.inc
+-- 
 1.5.6.5
-
 
 
