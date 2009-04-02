@@ -1,29 +1,30 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpRpW-0000OJ-GG
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 20:40:01 +0200
-Received: (qmail 14203 invoked by uid 813007); 2 Apr 2009 18:37:31 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 2 Apr 2009 18:37:31 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <denis@denix.org>) id 1LpS35-0001sK-Sb
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Apr 2009 20:54:06 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KHH00BK9LNJHWWU@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	02 Apr 2009 13:50:13 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0D7216B83B5; Thu,
+	02 Apr 2009 14:50:07 -0400 (EDT)
+Date: Thu, 02 Apr 2009 14:50:06 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 2 Apr 2009 20:37:21 +0200
-User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
-References: <1238654651-7091-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1238654651-7091-1-git-send-email-k.kooi@student.utwente.nl>
-MIME-Version: 1.0
-Message-Id: <200904022037.29145.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-id: <20090402185006.GA12552@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.1
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.4 required=5.0 tests=AWL,BAYES_00,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] places: add patch to fix API change introduced by SRCREV bump
+Subject: package_ipk.bbclass fails due to a wrong version of a package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +38,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 18:40:03 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Apr 2009 18:54:06 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Dnia czwartek, 2 kwietnia 2009 o 08:44:11 Koen Kooi napisa=C5=82(a):
-> From: Koen Kooi <koen@openembedded.org>
->
->
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+Hi,
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+I've been debugging this issue for a while now w/o much success.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+We have following recipes in play:
+curl_7.19.0.bb
+curl-native_7.18.2.bb
+curl-sdk_7.18.2.bb
 
+None of those set PV explicitly, so they are picked up from the filename.
 
+Now, let's run this:
+$ bitbake curl curl-sdk
+
+And here is the error message:
+NOTE: package curl-sdk-7.18.2-r0: task do_package_write_ipk: started
+ERROR: Error, lockfile path does not exist!: /oe/tmp/work/i686-armv5te-sdk-none-linux-gnueabi/curl-7.19.0-r1/install
+ERROR: Error in executing: /oe/openembedded/recipes/curl/curl-sdk_7.18.2.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in executing: /oe/openembedded/recipes/curl/curl-sdk_7.18.2.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Build of /oe/openembedded/recipes/curl/curl-sdk_7.18.2.bb do_package_write_ipk failed
+ERROR: Task 867 (/oe/openembedded/recipes/curl/curl-sdk_7.18.2.bb, do_package_write_ipk) failed
+
+The message comes from package_ipk.bbclass, line 161, bb.utils.lockfile():
+
+        packages = bb.data.getVar('PACKAGES', d, True)
+        for pkg in packages.split():
+                localdata = bb.data.createCopy(d)
+                pkgdest = bb.data.getVar('PKGDEST', d, 1)
+                root = "%s/%s" % (pkgdest, pkg)
+
+                lf = bb.utils.lockfile(root + ".lock")
+
+For some reason it evaluates curl-sdk PV as 7.19.0 in there.
+
+curl-sdk builds fine on its own, it only fails when it's built after the 
+target one. I guess workaround would be to match the version numbers of 
+target, native and sdk recipes...
+
+Any ideas? Thanks in advance.
+
+-- 
+Denys
 
 
