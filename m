@@ -1,43 +1,29 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LpRYd-0007n1-P6
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 20:22:52 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LpRWE-00014N-HS
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 18:20:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 02 Apr 2009 18:20:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 02 Apr 2009 18:20:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 02 Apr 2009 20:16:10 +0200
-Message-ID: <gr2vdb$k2v$2@ger.gmane.org>
-References: <1238532011-2963-1-git-send-email-k.kooi@student.utwente.nl>
-	<19c1b8a90903311458k56ee153fkb6977ce7349b78fc@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <19c1b8a90903311458k56ee153fkb6977ce7349b78fc@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpRpW-0000OJ-GG
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 20:40:01 +0200
+Received: (qmail 14203 invoked by uid 813007); 2 Apr 2009 18:37:31 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 2 Apr 2009 18:37:31 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 2 Apr 2009 20:37:21 +0200
+User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
+References: <1238654651-7091-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1238654651-7091-1-git-send-email-k.kooi@student.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200904022037.29145.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] gcc 4.3.x: disable thumb mode for now, glibc builds don't like it
+Subject: Re: [STABLE][PATCH] places: add patch to fix API change introduced by SRCREV bump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 18:22:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Apr 2009 18:40:03 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 31-03-09 23:58, Khem Raj wrote:
-> can you post the error message and commandline or better preprocessed
-> file of the error thats happening when compiling libgcc in thumb mode
-> plz.
+Dnia czwartek, 2 kwietnia 2009 o 08:44:11 Koen Kooi napisa=C5=82(a):
+> From: Koen Kooi <koen@openembedded.org>
 >
-> We could try to fix the libgcc problem.
+>
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
 
-Any objections to this going into the stable branch till the real bug is 
-fixed?
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-regards,
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Koen
 
 
 
