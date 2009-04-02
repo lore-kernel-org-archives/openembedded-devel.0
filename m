@@ -1,25 +1,49 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1LpGej-0000qK-Uc
+	(envelope-from <raj.khem@gmail.com>) id 1LpGfk-0000rE-7D
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 08:44:08 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id 005A1189361; Thu,  2 Apr 2009 08:44:11 +0200 (CEST)
-From: Koen Kooi <k.kooi@student.utwente.nl>
+	Thu, 02 Apr 2009 08:45:14 +0200
+Received: by rv-out-0708.google.com with SMTP id k29so428869rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Apr 2009 23:42:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:cc:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=uBPIoyDTUmiE4TZQj5CtfrwTu0jbOd96JdsP3V8yZus=;
+	b=ok7GfIrqAHiy9nDMjZND/kKj77fAvKrxVOGrs5IA8F/sirTOsekH7ManS6vJquam0b
+	fg1xEG7bfaSYxL77i6YJAJQmQ1xGE2UOZykIpYiOhvjQxdB2mFwp6K814w+K8jyFDSok
+	MFdWF+3MnC7jY3sCdGIpFX4SNiIiZiM2zBPzU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:cc:references:in-reply-to
+	:mime-version:content-type:content-transfer-encoding:message-id;
+	b=P6woAzDfG2sxchVZEnfXhmpO1b6aPp8pZxUSLqSJ+erNtQu9AEMd1+g5MmvaMXN5zB
+	cVK7ergWTkwKN8l2XVssdLPbNDtP1+KxrMksE+nlRAa/ftxIQ5LivYH/nSL5DNP2dLW9
+	2veGrDklQq8PnLdw6h8zrZDvL1MjkPQTzhNKM=
+Received: by 10.114.73.14 with SMTP id v14mr5721351waa.104.1238654564468;
+	Wed, 01 Apr 2009 23:42:44 -0700 (PDT)
+Received: from morpheus.localnet (adsl-71-146-4-184.dsl.pltn13.sbcglobal.net
+	[71.146.4.184])
+	by mx.google.com with ESMTPS id v9sm805190wah.60.2009.04.01.23.42.43
+	(version=SSLv3 cipher=RC4-MD5); Wed, 01 Apr 2009 23:42:43 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Apr 2009 08:44:11 +0200
-Message-Id: <1238654651-7091-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
-X-SA-Exim-Connect-IP: 80.81.242.146
-X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
+Date: Wed, 1 Apr 2009 23:42:29 -0700
+User-Agent: KMail/1.11.1 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
+References: <49D3582F.4070304@xora.org.uk>
+In-Reply-To: <49D3582F.4070304@xora.org.uk>
+MIME-Version: 1.0
+Message-Id: <200904012342.38417.raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.198.240
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] places: add patch to fix API change introduced by SRCREV bump
+Cc: openembedded-devel@openembedded.org
+Subject: Re: klibc problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,97 +57,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 06:44:10 -0000
+X-List-Received-Date: Thu, 02 Apr 2009 06:45:15 -0000
+X-Groupsio-MsgNum: 8961
+Content-Type: multipart/signed; boundary="nextPart1422220.xQdt33LXdA";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-From: Koen Kooi <koen@openembedded.org>
+--nextPart1422220.xQdt33LXdA
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
+On Wednesday 01 April 2009 05:03:59 Graeme Gregory wrote:
+> Ok, its no mystery to some people that klibc has problems with modern
+> kernels.
+>=20
+> But I think we also have a problem with the package in OE. Seeing as
+> klibc is machine dependent in that it includes mach-XXX/include/mach/*.h
+> files it really should not be staged as part of the base arch. I think
+> we need to stage it into ${MACHINE_ARCH} the same was as the kernel is.
+>=20
+> We can then work on fixing the application compiles.=20
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/e17/places/fix-api.diff |   53 +++++++++++++++++++++++++++++++++++++++
- recipes/e17/places_svn.bb       |    4 ++-
- 2 files changed, 56 insertions(+), 1 deletions(-)
- create mode 100644 recipes/e17/places/fix-api.diff
+How much work this would be.
 
-diff --git a/recipes/e17/places/fix-api.diff b/recipes/e17/places/fix-api.diff
-new file mode 100644
-index 0000000..ef09d25
---- /dev/null
-+++ b/recipes/e17/places/fix-api.diff
-@@ -0,0 +1,53 @@
-+Index: trunk/E-MODULES-EXTRA/places/src/e_mod_places.c
-+===================================================================
-+--- trunk/E-MODULES-EXTRA/places/src/e_mod_places.c (revision 39774)
-++++ trunk/E-MODULES-EXTRA/places/src/e_mod_places.c (revision 39830)
-+@@ -371,5 +371,5 @@
-+                e_menu_item_label_set(mi, alias ? alias :
-+                                         ecore_file_file_get(uri->path));
-+-               e_util_menu_item_icon_theme_set(mi, "folder");
-++               e_util_menu_item_theme_icon_set(mi, "folder");
-+                e_menu_item_callback_set(mi, _places_run_fm, strdup(uri->path)); //TODO free somewhere
-+             }
-+@@ -398,5 +398,5 @@
-+       mi = e_menu_item_new(em);
-+       e_menu_item_label_set(mi, D_("Home"));
-+-      e_util_menu_item_icon_theme_set(mi, "user-home");
-++      e_util_menu_item_theme_icon_set(mi, "user-home");
-+       e_menu_item_callback_set(mi, _places_run_fm, (char*)e_user_homedir_get());
-+    }
-+@@ -407,5 +407,5 @@
-+       mi = e_menu_item_new(em);
-+       e_menu_item_label_set(mi, D_("Desktop"));
-+-      e_util_menu_item_icon_theme_set(mi, "user-desktop");
-++      e_util_menu_item_theme_icon_set(mi, "user-desktop");
-+       snprintf(buf, sizeof(buf), "%s/Desktop", (char*)e_user_homedir_get());
-+       e_menu_item_callback_set(mi, _places_run_fm, strdup(buf)); //TODO free somewhere
-+@@ -417,5 +417,5 @@
-+       mi = e_menu_item_new(em);
-+       e_menu_item_label_set(mi, D_("Trash"));
-+-      e_util_menu_item_icon_theme_set(mi, "folder");
-++      e_util_menu_item_theme_icon_set(mi, "folder");
-+       e_menu_item_callback_set(mi, _places_run_fm, "trash:///");
-+    }
-+@@ -426,5 +426,5 @@
-+       mi = e_menu_item_new(em);
-+       e_menu_item_label_set(mi, D_("Filesystem"));
-+-      e_util_menu_item_icon_theme_set(mi, "drive-harddisk");
-++      e_util_menu_item_theme_icon_set(mi, "drive-harddisk");
-+       e_menu_item_callback_set(mi, _places_run_fm, "/");
-+    }
-+@@ -435,5 +435,5 @@
-+       mi = e_menu_item_new(em);
-+       e_menu_item_label_set(mi, D_("Temp"));
-+-      e_util_menu_item_icon_theme_set(mi, "user-temp");
-++      e_util_menu_item_theme_icon_set(mi, "user-temp");
-+       e_menu_item_callback_set(mi, _places_run_fm, "/tmp");
-+    }
-+@@ -498,5 +498,5 @@
-+    mi = e_menu_item_new(em);
-+    e_menu_item_label_set(mi, D_("Places"));
-+-   e_util_menu_item_icon_theme_set(mi, "system-file-manager");
-++   e_util_menu_item_theme_icon_set(mi, "system-file-manager");
-+ 
-+    m = e_menu_new();
-diff --git a/recipes/e17/places_svn.bb b/recipes/e17/places_svn.bb
-index dc0961f..4aeaed2 100644
---- a/recipes/e17/places_svn.bb
-+++ b/recipes/e17/places_svn.bb
-@@ -1,10 +1,12 @@
- LICENSE = "GPLv3 LGPLv3"
- PV = "0.1.0+svnr${SRCREV}"
- 
--PR = "r2"
-+PR = "r3"
- 
- require e-module.inc
- 
-+SRC_URI += "file://fix-api.diff;patch=1;maxrev=39830;pnum=3"
-+
- # Calls /usr/bin/eject for media
- RRECOMMENDS_${PN} += "eject"
- 
--- 
-1.5.6.5
+> I think I have a
+> suitable hack.
 
+post it.
+>=20
+> Graeme
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 
+=2D-=20
+Khem Raj
 
+--nextPart1422220.xQdt33LXdA
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAknUXlYACgkQHnJKy6V6em4AsgCfXUo4sUWA9OB9z4yT5rutLjUa
+u6AAnic0rB5sCfm2DhW0LbufFqFR/NAw
+=NTti
+-----END PGP SIGNATURE-----
+
+--nextPart1422220.xQdt33LXdA--
