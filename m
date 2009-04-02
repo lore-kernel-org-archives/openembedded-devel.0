@@ -1,55 +1,24 @@
-Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
+Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Lp7lw-0002KT-Aq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Apr 2009 23:15:07 +0200
-Received: by qw-out-1920.google.com with SMTP id 5so219482qwf.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Apr 2009 14:12:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:user-agent:x-url:x-attribution:date:message-id
-	:mime-version:content-type;
-	bh=Td9ePsrS3y5XLnBaJiQRzSLxMM+HGmHxwidYemDvJBk=;
-	b=LFNilQ/LdQNsb5PS6TPmEOXZxyyjh1XDgOuJzblPCJmx9pXRDRG4cckuvPwZkrwBPS
-	zk66pF+b9hdyoxhIkZs5SycV1a2kWk3grl+8dSE2vjZgXKA2+gOv40qxB+/x8ECaqOSR
-	rB+ocFVqbFD8i03f/EwzyjFNujwMhdLBc3lYs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:user-agent:x-url:x-attribution
-	:date:message-id:mime-version:content-type;
-	b=dTW5Q7dxBWxrfyKJZ2rhb0jqMKwnGCxmvfMo0+1Yla5l5efgKxBNhmma6FwERr8Tp1
-	KUDk6j+ahUO0sXoAiXbsRvP9VCwfsoMwN7XmRF9GCpbK+7EO8hGueCY9fAohwUCyyHV7
-	Yy3ED2h/8npiYGdf4G35QyIhQOtve0vNb/0o4=
-Received: by 10.224.20.76 with SMTP id e12mr10673704qab.47.1238620355322;
-	Wed, 01 Apr 2009 14:12:35 -0700 (PDT)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id 8sm333399ywg.4.2009.04.01.14.12.34
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Apr 2009 14:12:34 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 077E56101AF; Wed,  1 Apr 2009 18:12:43 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Development Mailing List
-	<openembedded-devel@lists.openembedded.org>
-Organization: O.S. Systems Ltda.
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Wed, 01 Apr 2009 18:12:43 -0300
-Message-ID: <87tz583wok.fsf@neumann.lab.ossystems.com.br>
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 74.125.92.147
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+	(envelope-from <clarson@mvista.com>) id 1LpAoQ-0003JS-Vf
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 02:29:51 +0200
+Received: from localhost.localdomain (rtow4.mvista.com [10.0.12.53])
+	by hermes.mvista.com (Postfix) with ESMTP
+	id 95D8C18EB8; Wed,  1 Apr 2009 17:27:18 -0700 (PDT)
+From: Chris Larson <clarson@mvista.com>
+To: openembedded-devel@openembedded.org
+Date: Wed,  1 Apr 2009 17:27:17 -0700
+Message-Id: <12386320381719-git-send-email-clarson@mvista.com>
+X-Mailer: git-send-email 1.5.2.1
+X-SA-Exim-Connect-IP: 63.81.120.158
+X-SA-Exim-Mail-From: clarson@mvista.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFH] Ugly dependency on a locale package
+Subject: [PATCH 1/2] bitbake.conf, collections.inc: Add COLLECTIONS mechanism w/ a sane default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,43 +32,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2009 21:15:11 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 02 Apr 2009 00:29:52 -0000
 
-Hello,
+Added code which takes a list of directories in COLLECTIONS, in priority
+order (highest to lowest), and uses those to populate BBFILES,
+BBFILE_COLLECTIONS, BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
 
-Today we spot a wierd package in our image and then we ended figuring
-out that something quite strange is happening.
+The default COLLECTIONS is based on BBPATH, so you can now specify a sane
+BBPATH, not bother setting up the collections variables or BBFILES, and
+still likely be able to do a build.
 
- new debian package, version 2.0.
- size 9880 bytes: control archive= 471 bytes.
-     497 bytes,    13 lines      control              
- Package: evince-locale-pt-br
- Version: 2.24.1-r2.1
- Description: pt_BR translation for evince
- Section: x11/office
- Priority: optional
- Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
- License: GPL
- Architecture: geode
- OE: evince
- Homepage: http://www.ossystems.com.br
- Depends: evince-nautilus-extension, virtual-locale-pt-br
- Provides: evince-locale, pt-br-translation
- Source: http://ftp.gnome.org/pub/GNOME/sources/evince/2.24/evince-2.24.1.tar.bz2 file://no-help-dir.patch;patch=1
+Signed-off-by: Chris Larson <clarson@mvista.com>
+---
+ conf/bitbake.conf    |    1 +
+ conf/collections.inc |   55 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+), 0 deletions(-)
+ create mode 100644 conf/collections.inc
 
-
-Look the line:
-
-  Depends: evince-nautilus-extension, virtual-locale-pt-br
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-
-WHY?
-
-
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 7c159af..134525a 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -620,6 +620,7 @@ OVERRIDES = "local:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUIL
+ # Include the rest of the config files.
+ ##################################################################
+ 
++require conf/collections.inc
+ include conf/site.conf
+ include conf/auto.conf
+ include conf/local.conf
+diff --git a/conf/collections.inc b/conf/collections.inc
+new file mode 100644
+index 0000000..9355b00
+--- /dev/null
++++ b/conf/collections.inc
+@@ -0,0 +1,55 @@
++# Take a list of directories in COLLECTIONS, in priority order (highest to
++# lowest), and use those to populate BBFILES, BBFILE_COLLECTIONS,
++# BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
++
++COLLECTIONS = "${@' '.join(d.getVar('BBPATH', 1).split(':'))}"
++
++def collections_setup(d):
++    """ Populate collection and bbfiles metadata from the COLLECTIONS var. """
++    import bb
++    import os
++    from itertools import izip, chain
++    from glob import glob
++
++    def setifunset(k, v):
++        if d.getVar(k, 0) is None:
++            d.setVar(k, v)
++
++    collections = d.getVar("COLLECTIONS", 1)
++    if not collections:
++        return
++    globbed = (glob(path) for path in collections.split())
++    collections = list(chain(*globbed))
++
++    collectionmap = {}
++    namemap = {}
++    for collection in collections:
++        basename = os.path.basename(collection).split(os.path.extsep)[0]
++        if namemap.get(basename):
++            basename = "%s-%s" % (basename, hash(collection))
++        namemap[basename] = collection
++        collectionmap[collection] = basename
++
++    for (collection, priority) in izip(collections, xrange(len(collections), 0, -1)):
++        if not os.path.exists(collection):
++            bb.fatal("Collection %s does not exist" % collection)
++
++        name = collectionmap[collection]
++        if not name:
++            bb.fatal("Unable to determine collection name for %s" % collection)
++
++        setifunset("BBFILE_PATTERN_%s" % name, "^%s/" % collection)
++        setifunset("BBFILE_PRIORITY_%s" % name, str(priority))
++
++    setifunset("BBFILE_COLLECTIONS", " ".join(collectionmap.values()))
++    setifunset("BBFILES", " ".join(collectionmap.keys()))
++
++addhandler collections_eh
++python collections_eh () {
++    from bb.event import getName
++
++    if getName(e) == "ConfigParsed":
++        collections_setup(e.data)
++
++    return NotHandled
++}
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+1.5.2.1
+
 
 
