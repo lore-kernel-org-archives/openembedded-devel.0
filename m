@@ -1,42 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LpNPX-00089z-JA
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 15:57:23 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LpNNC-0006D2-Oa
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 13:54:26 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 02 Apr 2009 13:54:26 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 02 Apr 2009 13:54:26 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
+	(envelope-from <koen@amethyst.openembedded.net>) id 1LpNQ0-0008AT-8G
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Apr 2009 15:57:36 +0200
+Received: by amethyst.openembedded.net (Postfix, from userid 1002)
+	id B843F189361; Thu,  2 Apr 2009 15:57:25 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 02 Apr 2009 15:54:14 +0200
-Message-ID: <gr2g26$plg$1@ger.gmane.org>
-References: <49D4B67C.405@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <49D4B67C.405@gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  2 Apr 2009 15:57:25 +0200
+Message-Id: <1238680645-11567-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.5.6.5
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 80.81.242.146
+X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] 1/3 Added at91sam9g20ek machine
+Cc: Koen Kooi <koen@openembedded.org>,
+	=?utf-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@m4x.org>
+Subject: [STABLE][PATCH] openssl-0.9.8j: add patch to use LDFLAGS (fixes QA error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,27 +35,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 13:57:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Apr 2009 13:57:55 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 02-04-09 14:58, Marco Cavallini wrote:
->  From 40e45e43ad83fb8492b0af35554c35f047832478 Mon Sep 17 00:00:00 2001
-> From: Marco Cavallini<m.cavallini@koansoftware.com>
-> Date: Thu, 2 Apr 2009 14:49:07 +0200
-> Subject: [PATCH] Added at91sam9g20ek machine
+From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
 
-NACK:
 
-1) violates commit policy
-2) isn't in .dev yet
-3) contains things like #PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
-3a) if you comment out at91bootstrap from depends, no need to set a 
-preferred version either
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/openssl/openssl-0.9.8j/oe-ldflags.patch |   21 +++++++++++++++++=
+++++
+ recipes/openssl/openssl_0.9.8j.bb               |    7 +++++--
+ 2 files changed, 26 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/openssl/openssl-0.9.8j/oe-ldflags.patch
 
-regards,
-
-Koen
+diff --git a/recipes/openssl/openssl-0.9.8j/oe-ldflags.patch b/recipes/op=
+enssl/openssl-0.9.8j/oe-ldflags.patch
+new file mode 100644
+index 0000000..3a2fae6
+--- /dev/null
++++ b/recipes/openssl/openssl-0.9.8j/oe-ldflags.patch
+@@ -0,0 +1,21 @@
++diff -urN openssl-0.9.8j.orig/Makefile.shared openssl-0.9.8j/Makefile.sh=
+ared
++--- openssl-0.9.8j.orig/Makefile.shared	2008-09-17 15:56:40.000000000 +0=
+000
+++++ openssl-0.9.8j/Makefile.shared	2009-04-02 13:44:48.000000000 +0000
++@@ -90,7 +90,7 @@
++ LINK_APP=3D	\
++   ( $(SET_X);   \
++     LIBDEPS=3D"$${LIBDEPS:-$(LIBDEPS)}"; \
++-    LDCMD=3D"$${LDCMD:-$(CC)}"; LDFLAGS=3D"$${LDFLAGS:-$(CFLAGS)}"; \
+++    LDCMD=3D"$${LDCMD:-$(CC)}"; LDFLAGS=3D"$(OE_LDFLAGS) $${LDFLAGS:-$(=
+CFLAGS)}"; \
++     LIBPATH=3D`for x in $$LIBDEPS; do if echo $$x | grep '^ *-L' > /dev=
+/null 2>&1; then echo $$x | sed -e 's/^ *-L//'; fi; done | uniq`; \
++     LIBPATH=3D`echo $$LIBPATH | sed -e 's/ /:/g'`; \
++     LD_LIBRARY_PATH=3D$$LIBPATH:$$LD_LIBRARY_PATH \
++@@ -100,7 +100,7 @@
++   ( $(SET_X);   \
++     LIBDEPS=3D"$${LIBDEPS:-$(LIBDEPS)}"; \
++     SHAREDCMD=3D"$${SHAREDCMD:-$(CC)}"; \
++-    SHAREDFLAGS=3D"$${SHAREDFLAGS:-$(CFLAGS) $(SHARED_LDFLAGS)}"; \
+++    SHAREDFLAGS=3D"$(OE_LDFLAGS) $${SHAREDFLAGS:-$(CFLAGS) $(SHARED_LDF=
+LAGS)}"; \
++     LIBPATH=3D`for x in $$LIBDEPS; do if echo $$x | grep '^ *-L' > /dev=
+/null 2>&1; then echo $$x | sed -e 's/^ *-L//'; fi; done | uniq`; \
++     LIBPATH=3D`echo $$LIBPATH | sed -e 's/ /:/g'`; \
++     LD_LIBRARY_PATH=3D$$LIBPATH:$$LD_LIBRARY_PATH \
+diff --git a/recipes/openssl/openssl_0.9.8j.bb b/recipes/openssl/openssl_=
+0.9.8j.bb
+index d40fb48..21450d2 100644
+--- a/recipes/openssl/openssl_0.9.8j.bb
++++ b/recipes/openssl/openssl_0.9.8j.bb
+@@ -2,10 +2,13 @@ inherit pkgconfig
+=20
+ require openssl.inc
+=20
+-PR =3D "r1"
++PR =3D "r2"
++
++export OE_LDFLAGS=3D"${LDFLAGS}"
+=20
+ SRC_URI +=3D "file://configure-targets.patch;patch=3D1 \
+             file://shared-libs.patch;patch=3D1 \
+-            file://debian.patch;patch=3D1"
++            file://debian.patch;patch=3D1 \
++            file://oe-ldflags.patch;patch=3D1"
+=20
+ PARALLEL_MAKE =3D ""
+--=20
+1.5.6.5
 
 
 
