@@ -1,43 +1,40 @@
-Received: from [209.85.132.245] (helo=an-out-0708.google.com)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1LpKZq-00050v-9H
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 12:55:56 +0200
-Received: by an-out-0708.google.com with SMTP id b2so599717ana.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Apr 2009 03:52:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=bUi9kmyjgVxLfqIxSdgzZK//ehWZJZ5eVIWEOjstJHM=;
-	b=KKBc0ddkJoBwPTLlclqoQj73YEmGYDR9KDnQCbOFSlrsnNpPdoZdi5D+pe1Ayoih12
-	dlQvEIACY7qZAY625qSaYzXXI3AG6BdFyeizhSZG8fhS4amYQzjOvRNlLuq/mKxj+tbi
-	VNJaIOM3ZaqZpVV8ZnVMFjVM/307g1I8CVL7A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=rk6uUHRjNYKrT3+bgNVQqiF3I1GENIWBnKCOn1oYwyLyTpX8AI2Xt4ybizgf4YTzcM
-	ibhhSYwE0fXhWoi73AH3nGMMvcwFm5b0vGaYIqV1F114W8+q/7hu+vtrNK46JDd3jvFU
-	Ui0f3Q3XinoIKKtc0s3f0A30Ju4UlhiUNPR+8=
-MIME-Version: 1.0
-Received: by 10.100.109.13 with SMTP id h13mr8864332anc.140.1238669571947; 
-	Thu, 02 Apr 2009 03:52:51 -0700 (PDT)
-In-Reply-To: <200903311837.28324.marcin@juszkiewicz.com.pl>
-References: <200903311837.28324.marcin@juszkiewicz.com.pl>
-Date: Thu, 2 Apr 2009 12:52:51 +0200
-Message-ID: <d2b9ea600904020352v79eda72fk2fde69139ac29e10@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.132.245
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+	(envelope-from <rpurdie@rpsys.net>) id 1LpKyp-0005gQ-TE
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 13:22:07 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n32BIfFg028033
+	for <openembedded-devel@openembedded.org>;
+	Thu, 2 Apr 2009 12:18:41 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 27441-10 for <openembedded-devel@openembedded.org>;
+	Thu,  2 Apr 2009 12:18:37 +0100 (BST)
+Received: from [192.168.1.3] (dax.rpnet.com [192.168.1.3])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n32BIYuD028027
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 2 Apr 2009 12:18:34 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <49D42C75.9090805@dls.net>
+References: <49D42C75.9090805@dls.net>
+Date: Thu, 02 Apr 2009 12:19:11 +0100
+Message-Id: <1238671151.5341.4.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.12.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE] branch created: stable/2009
+Subject: Re: 2.6.29 kernel bloat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,25 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 10:56:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Apr 2009 11:23:05 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 31, 2009 at 6:37 PM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
->
-> I also imported BitBake 1.8.12 (last release) into "stable/2009" branch
-> as this is minimal stable version which works with this repository.
 
-Is this the new strategy for handling depedency on specific versions of Bit=
-Bake?
+On Wed, 2009-04-01 at 22:09 -0500, Mike (mwester) wrote:
+> The IXP4xx kernel for 2.6.29 has jumped 85 KB in size (1105K on
+> 2.6.27.8, vs 1190K for 2.6.29).  The defconfig is the same, or as nearly
+> as I can make it (make ARCH=arm oldconfig, answer "N" to everything).
+> 
+> Anyone else observed this, or have I missed something?
 
-/Esben
+It does this pretty much every kernel release :( Quite depressing.
 
---=20
-Esben Haabendal, Senior Software Consultant
-Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
-Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
-WWW: http://www.doredevelopment.dk
+Richard
+
 
 
