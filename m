@@ -1,30 +1,35 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpJgP-0005GH-VD
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 11:58:07 +0200
-Received: (qmail 31804 invoked by uid 813007); 2 Apr 2009 09:55:37 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 2 Apr 2009 09:55:37 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 2 Apr 2009 11:55:41 +0200
-User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
-References: <200903311837.28324.marcin@juszkiewicz.com.pl>
-	<49D276F0.2060701@gmx.net>
-In-Reply-To: <49D276F0.2060701@gmx.net>
+	(envelope-from <dp@xora.org.uk>) id 1LpJs8-00048c-7E
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Apr 2009 12:10:13 +0200
+Received: by ewy20 with SMTP id 20so458192ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Apr 2009 03:07:41 -0700 (PDT)
+Received: by 10.216.47.16 with SMTP id s16mr2968473web.16.1238666861710;
+	Thu, 02 Apr 2009 03:07:41 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 5sm1234512eyf.32.2009.04.02.03.07.40
+	(version=SSLv3 cipher=RC4-MD5); Thu, 02 Apr 2009 03:07:41 -0700 (PDT)
+Message-ID: <49D48E6C.7070304@xora.org.uk>
+Date: Thu, 02 Apr 2009 11:07:40 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-Message-Id: <200904021155.42500.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+References: <12386320381719-git-send-email-clarson@mvista.com>
+In-Reply-To: <12386320381719-git-send-email-clarson@mvista.com>
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 209.85.219.172
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE] branch created: stable/2009
+Subject: Re: [PATCH 1/2] bitbake.conf, collections.inc: Add COLLECTIONS mechanism w/ a sane default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,37 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 09:58:07 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Apr 2009 10:10:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 31 marca 2009 o 22:02:56 Robert Schuster napisa=C5=82(a):
-> is it possible/allowed to port things into the stable which IMO make
-> its maintenance easier? E.g. I've just cleaned up the llvm recipes
-> and made them side by side installable (multiple version). The stable
-> branch would be more of a burden when these things differ so much
-> from each other.
+Chris Larson wrote:
+> Added code which takes a list of directories in COLLECTIONS, in priority
+> order (highest to lowest), and uses those to populate BBFILES,
+> BBFILE_COLLECTIONS, BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
+>
+> The default COLLECTIONS is based on BBPATH, so you can now specify a sane
+> BBPATH, not bother setting up the collections variables or BBFILES, and
+> still likely be able to do a build.
+>
+>   
+I haven't had time to test the patch, but I really like the idea of
+this. Also the archives part as well. This will make setup so much
+easier for people wanting to overlay. And improve the ability for OE to
+be shipped in setup scripts.
 
-Read http://wiki.openembedded.net/index.php/Stable#Dealing_with_changes=20
-and provide patches.
-
-> Apart from that llvm is not used from anything but the llvm-gcc
-> recipes which I saw and which look not inspiring confidence.
-
-> Last but not least I was going to base the Jalimo recipes on that and
-> then finally move them into OE.
-
-As long as your changes will also land in .dev (in same of different=20
-versions due to differences between .dev/stable) it will be ok.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+Graeme
 
 
 
