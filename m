@@ -1,35 +1,43 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1LpJs8-00048c-7E
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 12:10:13 +0200
-Received: by ewy20 with SMTP id 20so458192ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Apr 2009 03:07:41 -0700 (PDT)
-Received: by 10.216.47.16 with SMTP id s16mr2968473web.16.1238666861710;
-	Thu, 02 Apr 2009 03:07:41 -0700 (PDT)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id 5sm1234512eyf.32.2009.04.02.03.07.40
-	(version=SSLv3 cipher=RC4-MD5); Thu, 02 Apr 2009 03:07:41 -0700 (PDT)
-Message-ID: <49D48E6C.7070304@xora.org.uk>
-Date: Thu, 02 Apr 2009 11:07:40 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <12386320381719-git-send-email-clarson@mvista.com>
-In-Reply-To: <12386320381719-git-send-email-clarson@mvista.com>
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 209.85.219.172
-X-SA-Exim-Mail-From: dp@xora.org.uk
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LpKX5-0004zg-Ul
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 12:53:07 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LpKUl-0006rI-TS
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 10:50:03 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 02 Apr 2009 10:50:03 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 02 Apr 2009 10:50:03 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 02 Apr 2009 12:49:51 +0200
+Message-ID: <gr258f$lhg$1@ger.gmane.org>
+References: <200903311837.28324.marcin@juszkiewicz.com.pl>	<gqti8d$6qs$1@ger.gmane.org>	<20090331171727.GK14278@smtp.west.cox.net>
+	<200903312149.25409.marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <200903312149.25409.marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] bitbake.conf, collections.inc: Add COLLECTIONS mechanism w/ a sane default.
+Subject: [RFC] more streamlined review procedure, was: Re: [STABLE] branch created: stable/2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +51,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 10:10:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Apr 2009 10:53:22 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Chris Larson wrote:
-> Added code which takes a list of directories in COLLECTIONS, in priority
-> order (highest to lowest), and uses those to populate BBFILES,
-> BBFILE_COLLECTIONS, BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
+On 31-03-09 21:49, Marcin Juszkiewicz wrote:
+> Dnia wtorek, 31 marca 2009 o 19:17:27 Tom Rini napisał(a):
+>>> Great!
+>>>
+>>> I already have a few patches queued up for the stablebranch:
+>>>
+>>> http://dominion.thruhere.net/koen/OE/for-stable/
+>>>
+>>> What's the proper procedure for getting those in?
+>>
+>> And please answer in the form of a link to a wiki page :)
 >
-> The default COLLECTIONS is based on BBPATH, so you can now specify a sane
-> BBPATH, not bother setting up the collections variables or BBFILES, and
-> still likely be able to do a build.
->
->   
-I haven't had time to test the patch, but I really like the idea of
-this. Also the archives part as well. This will make setup so much
-easier for people wanting to overlay. And improve the ability for OE to
-be shipped in setup scripts.
+> http://wiki.openembedded.net/index.php/Stable contains first
+> informations.
 
-Graeme
+I've found that there's a huge flaw in this setup:
+
+Currently there are 8 people signed up as 'maintainers' for the stable 
+branch, but only 2 (yes, two) have looked at some of the patches posted 
+2 days ago. Another said he didn't want to look at patches for machines 
+he didn't build for. No idea why the other 4 haven't responded, but if 
+this continues then the stable branch can be closed down immediately.
+
+Why? The current procedure requires an ACK from a stable 'maintainer' 
+(not including yourself, of course), but you won't get an ACK or even a 
+NACK.
+
+This is annoying since I've had the first bugreports from users that 
+were solved by patches that are 'under review'.
+
+The previous stable branch tried to guarantee that you'd get at least a 
+reaction on all your patches within 24 hours, so submitters knew what 
+was happening. A 'reaction', not a 'review', so "will look at it next 
+week" is perfectly well.
+
+So my proposal:
+
+* within 24 hours of posting at least 1 reaction from any stable 
+'maintainer'
+* No review within a week means automatic approval, commit must have 
+"UNREVIEWED" marker to signify that.
+
+Also:
+
+I still have unreviewed patches in my for-stable bundle: 
+http://patchwork.openembedded.org/bundle/koen/koen-for-stable-20090331/
+
+
+regards,
+
+Koen
 
 
 
