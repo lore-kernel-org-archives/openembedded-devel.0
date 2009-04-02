@@ -1,49 +1,42 @@
-Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <castroenrico@gmail.com>) id 1LpRFl-0001OH-JV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 20:03:29 +0200
-Received: by fg-out-1718.google.com with SMTP id 19so375375fgg.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Apr 2009 11:00:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=lhlmdfGI2Xt+JXSOGkOcEmbL2eVuS9B0oKDQaHmmykc=;
-	b=o1tXQ4nyAr6tRNQ14X17UJ7/ymXdV8FHrCI+pTrmit4/rtSueqmEqUQuqbisoCSoxF
-	dWneiiVgoB/V2Sak66EW7XdYbFnAT8AsKV0vRpLesTQC455RZBhzX5643mn3/gLuZfKj
-	WTtHLMu2rF1j986TgGAI/5XDWfpsznLnxVKqQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=tEYl7HiH5IIi2TMJN7pvwznqAm/bQxQPhdzxGzTrsE8bdFFpKz18GxCG8FV+LlUyrJ
-	vHhilWCJV4mrOBjl4qiPzPeQW6rFijXKnzVaR3YN0PJexUlck751hKrLiMcBNa0XL9kS
-	Bg2L4uJ8+6p+rfk64RYr3BMo4xQgqaWcBZ91g=
-Received: by 10.86.96.18 with SMTP id t18mr362776fgb.25.1238695234877;
-	Thu, 02 Apr 2009 11:00:34 -0700 (PDT)
-Received: from ubuntu.redarrow (net-93-144-64-194.t2.dsl.vodafone.it
-	[93.144.64.194])
-	by mx.google.com with ESMTPS id d4sm3089421fga.8.2009.04.02.11.00.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 02 Apr 2009 11:00:34 -0700 (PDT)
-Message-ID: <49D4FD3F.8010104@gmail.com>
-Date: Thu, 02 Apr 2009 20:00:31 +0200
-From: Enrico Castro <castroenrico@gmail.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49D33527.6050102@gmail.com> <49D46F4D.1010004@bolloretelecom.eu>
-In-Reply-To: <49D46F4D.1010004@bolloretelecom.eu>
-X-SA-Exim-Connect-IP: 72.14.220.156
-X-SA-Exim-Mail-From: castroenrico@gmail.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LpRKQ-0001dC-20
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 20:08:09 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LpRI3-0000Nq-3Z
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 18:05:23 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 02 Apr 2009 18:05:23 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 02 Apr 2009 18:05:23 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 02 Apr 2009 20:05:07 +0200
+Message-ID: <gr2uoj$hj4$1@ger.gmane.org>
+References: <1238687846-26851-1-git-send-email-broonie@opensource.wolfsonmicro.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <1238687846-26851-1-git-send-email-broonie@opensource.wolfsonmicro.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_20,RDNS_NONE,SPF_PASS
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: qt4-tools-native_4.4.3.bb failed
+Subject: Re: [PATCH] watchdog: Update to version 5.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,25 +50,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 18:03:47 -0000
-Content-Type: text/plain; charset=iso-8859-15; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 02 Apr 2009 18:08:13 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Thank you very much, your patch works.
+On 02-04-09 17:57, Mark Brown wrote:
+> No packaging changes, just the new upstream.
 
-Regards,
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-Jeremy Lainé ha scritto:
-> Enrico,
-> 
-> I have managed to reproduce your problem in a chrooted environment which did not have the
-> zlib development files. I have just commited a patch which fixes the problem for me:
-> 
-> http://cgit.openembedded.org/cgit.cgi?url=openembedded/commit/&id=8f61b0343b6c56644fdaa8fa3e84e1c29d3f47b9
-> 
-> Could you please try building qt4-tools-native again and let me know whether it works?
-> 
-> Cheers,
+
+> ---
+>   conf/checksums.ini               |    5 +++++
+>   recipes/watchdog/watchdog_5.6.bb |   16 ++++++++++++++++
+>   2 files changed, 21 insertions(+), 0 deletions(-)
+>   create mode 100644 recipes/watchdog/watchdog_5.6.bb
+>
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index 2a119dd..5caccd1 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -23358,6 +23358,11 @@ sha256=6c5bfb2edae5c289233b6cd65393bb7414a2d30ad4d1239c207a659a4232d91a
+>   md5=ba97ddce396bfccd8d409bc3141d7ef4
+>   sha256=b7bf9feeedea26d7e06935369a1a556089426e94f9ead946018526c96cd9b12e
+>
+> +[http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/watchdog-5.6.tar.gz]
+> +md5=6df285569dd1d85528b983c98c9b2b7c
+> +sha256=a2c7d6726e092315dbb047211b754528e4532521678a30e16f60a31bb86a7f74
+> +
+> +
+>   [http://downloads.sourceforge.net/wbxmllib/wbxml2-0.9.0-src.tar.gz]
+>   md5=3f9b5bf104ec523b8eebe69f93919ded
+>   sha256=acd218148d7f92ee7bd0539d6aabd0b42cca8ae4ffe241bfa8760d30605b28c9
+> diff --git a/recipes/watchdog/watchdog_5.6.bb b/recipes/watchdog/watchdog_5.6.bb
+> new file mode 100644
+> index 0000000..6c8bd56
+> --- /dev/null
+> +++ b/recipes/watchdog/watchdog_5.6.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "System watchdog daemon"
+> +LICENSE = "GPL"
+> +
+> +SRC_URI = "http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/${PN}-${PV}.tar.gz \
+> +	file://init"
+> +
+> +inherit autotools update-rc.d
+> +
+> +INITSCRIPT_NAME = "watchdog"
+> +INITSCRIPT_PARAMS = "defaults 10"
+> +
+> +do_install_append() {
+> +	install -d ${D}${sysconfdir}/init.d
+> +	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/watchdog
+> +}
+> +
+
 
 
 
