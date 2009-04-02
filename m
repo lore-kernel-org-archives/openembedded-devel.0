@@ -1,30 +1,33 @@
-Received: from [216.145.245.198] (helo=mx02.dls.net)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LpSpq-00088M-J1
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 21:44:25 +0200
-Received: from [209.242.7.134] (helo=[192.168.231.111])
-	by mx02.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1LpSnR-00037l-3Y
-	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 14:41:53 -0500
-Message-ID: <49D51504.9030909@dls.net>
-Date: Thu, 02 Apr 2009 14:41:56 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <49D17F70.8020109@dls.net>	<49D42B0B.4020505@dls.net>	<gr1ujt$ga$1@ger.gmane.org>	<49D4C641.8080907@dls.net>
-	<gr2nat$m6k$1@ger.gmane.org>
-In-Reply-To: <gr2nat$m6k$1@ger.gmane.org>
-X-SA-Exim-Connect-IP: 216.145.245.198
-X-SA-Exim-Mail-From: mwester@dls.net
+	(envelope-from <denis@denix.org>) id 1LpT4G-0008Q0-I5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Apr 2009 21:59:19 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KHH00E6WOPLEIAQ@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	02 Apr 2009 14:56:14 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C71156B83B5; Thu,
+	02 Apr 2009 15:56:08 -0400 (EDT)
+Date: Thu, 02 Apr 2009 15:56:08 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090402195608.GB12552@denix.org>
+References: <12386320381719-git-send-email-clarson@mvista.com>
+	<49D48E6C.7070304@xora.org.uk>
+MIME-version: 1.0
+In-reply-to: <49D48E6C.7070304@xora.org.uk>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=AWL,BAYES_05,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_00,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] make preferred openssl version match for -native recipe
+Subject: Re: [PATCH 1/2] bitbake.conf, collections.inc: Add	COLLECTIONS mechanism w/ a sane default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 19:44:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Apr 2009 19:59:19 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Koen Kooi wrote:
+On Thu, Apr 02, 2009 at 11:07:40AM +0100, Graeme Gregory wrote:
+> Chris Larson wrote:
+> > Added code which takes a list of directories in COLLECTIONS, in priority
+> > order (highest to lowest), and uses those to populate BBFILES,
+> > BBFILE_COLLECTIONS, BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
+> >
+> > The default COLLECTIONS is based on BBPATH, so you can now specify a sane
+> > BBPATH, not bother setting up the collections variables or BBFILES, and
+> > still likely be able to do a build.
+> >
+> >   
+> I haven't had time to test the patch, but I really like the idea of
+> this. Also the archives part as well. This will make setup so much
+> easier for people wanting to overlay. And improve the ability for OE to
+> be shipped in setup scripts.
 
-> distro private != properly
++1 - support the idea!
 
-Ah, I see.  The clear conclusion is that unless I fix it "properly"
-(defined by whom?), I should not fix it at all.
+I'll try to test the patches on my overlay...
 
-Very well.
-
-
-Mike (mwester)
+-- 
+Denys
 
 
