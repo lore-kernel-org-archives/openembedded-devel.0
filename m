@@ -1,58 +1,33 @@
-Received: from [209.85.221.124] (helo=mail-qy0-f124.google.com)
+Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LpTYy-0005s3-OK
+	(envelope-from <denis@denix.org>) id 1LpTjM-00069H-HR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 22:31:03 +0200
-Received: by qyk30 with SMTP id 30so1457419qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Apr 2009 13:28:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:received:from:to
-	:subject:organization:references:user-agent:x-url:x-attribution:date
-	:in-reply-to:message-id:mime-version:content-type;
-	bh=XJgTI4ZudUvTJdPdBEA3W0LqQR7gGCHr8PxjLZAcuyg=;
-	b=dy0zPn+dFbjAu7+oDyENB/HFfhmoVlLL80WQy7IiWiK812iZCmKGacC5hTcpd/Jan1
-	BPdWP/ex0M3NQpC12RrrYVNPfy+MsaOLiz+qMK3cUeAeoGptuDxRt6hwZr0BUUk+SdSJ
-	MwuH4zgrmwzIdpCQFSdvEPKRETMl+HHdQf+A8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:subject:organization:references:user-agent:x-url
-	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
-	b=fXcFhnhp+LiNcI0cykWXlLrXyX3KtGzMGqhFoEBySp8wXiclf5emL4qr7gQ2x16g5e
-	rRa+/m/YssRK0vrahkeUBz266Lmp/hziyZUiTOcjKYo8tLQsGbBNC5zehv3Un3IMgyJH
-	W0Kb93/HLcu07Lljsf6jtT2wuJhCWVD00XnG0=
-Received: by 10.224.15.14 with SMTP id i14mr800238qaa.12.1238704111651;
-	Thu, 02 Apr 2009 13:28:31 -0700 (PDT)
-Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
-	[201.40.162.47])
-	by mx.google.com with ESMTPS id 8sm1840544ywg.14.2009.04.02.13.28.29
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 02 Apr 2009 13:28:30 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 83D506101AF; Thu,  2 Apr 2009 17:28:41 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Thu, 02 Apr 2009 22:43:26 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KHH001IRQO8DNBN@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	02 Apr 2009 15:38:38 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 96FDF6B83B5; Thu,
+	02 Apr 2009 16:38:32 -0400 (EDT)
+Date: Thu, 02 Apr 2009 16:38:32 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Organization: O.S. Systems Ltda.
-References: <12386320381719-git-send-email-clarson@mvista.com>
-	<49D48E6C.7070304@xora.org.uk> <20090402195608.GB12552@denix.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
-	(x86_64-pc-linux-gnu)
-X-URL: http://www.ossystems.com.br/
-X-Attribution: O.S.
-Date: Thu, 02 Apr 2009 17:28:41 -0300
-In-Reply-To: <20090402195608.GB12552@denix.org> (Denys Dmytriyenko's message
-	of "Thu, 02 Apr 2009 15:56:08 -0400")
-Message-ID: <87iqlm4x6u.fsf@neumann.lab.ossystems.com.br>
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.221.124
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Message-id: <20090402203832.GC12552@denix.org>
+References: <20090402185006.GA12552@denix.org>
+	<20090402191118.GC30840@smtp.west.cox.net>
+MIME-version: 1.0
+In-reply-to: <20090402191118.GC30840@smtp.west.cox.net>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.17
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_00,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] bitbake.conf, collections.inc: Add	COLLECTIONS mechanism w/ a sane default.
+Subject: Re: package_ipk.bbclass fails due to a wrong version of a	package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -66,36 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 20:31:03 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 02 Apr 2009 20:43:48 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Denys Dmytriyenko <denis@denix.org> writes:
+On Thu, Apr 02, 2009 at 12:11:18PM -0700, Tom Rini wrote:
+> On Thu, Apr 02, 2009 at 02:50:06PM -0400, Denys Dmytriyenko wrote:
+> 
+> > Hi,
+> > 
+> > I've been debugging this issue for a while now w/o much success.
+> > 
+> > We have following recipes in play:
+> > curl_7.19.0.bb
+> > curl-native_7.18.2.bb
+> > curl-sdk_7.18.2.bb
+> > 
+> > None of those set PV explicitly, so they are picked up from the filename.
+> 
+> Hmm, if you throw in a -v -DDD and log all the output, do you see both
+> curl_7.18.2.bb being loaded (for -sdk) and curl_7.19.0.bb (for target)
+> being loaded up?
 
-> On Thu, Apr 02, 2009 at 11:07:40AM +0100, Graeme Gregory wrote:
->> Chris Larson wrote:
->> > Added code which takes a list of directories in COLLECTIONS, in priority
->> > order (highest to lowest), and uses those to populate BBFILES,
->> > BBFILE_COLLECTIONS, BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
->> >
->> > The default COLLECTIONS is based on BBPATH, so you can now specify a sane
->> > BBPATH, not bother setting up the collections variables or BBFILES, and
->> > still likely be able to do a build.
->> >
->> >   
->> I haven't had time to test the patch, but I really like the idea of
->> this. Also the archives part as well. This will make setup so much
->> easier for people wanting to overlay. And improve the ability for OE to
->> be shipped in setup scripts.
->
-> +1 - support the idea!
->
-> I'll try to test the patches on my overlay...
+Nope. While trying to build curl-sdk_7.18.2.bb there is no mentioning of 
+7.19.0 (grepped the output) until the do_package_write_ipk, where it tried to 
+create a lock file, as I mentioned above:
 
-+1
+NOTE: package curl-sdk-7.18.2-r0: task do_package_write_ipk: started
+DEBUG: mkdirhier(/oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-sdk-7.18.2-r0/image)
+DEBUG: mkdirhier(/oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-7.19.0-r1/image)
+ERROR: Error, lockfile path does not exist!: /oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-7.19.0-r1/install
+
+The second mkdirhier() is where it fails and it is called from lockfile(), 
+which gets called from do_package_ipk()...
+
+BTW, this was a i686-generic build, thus i686-i686-sdk path...
 
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Denys
 
 
