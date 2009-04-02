@@ -1,48 +1,47 @@
 Received: from [209.85.221.124] (helo=mail-qy0-f124.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LpQ3p-0002Es-Rr
+	(envelope-from <otavio.salvador@gmail.com>) id 1LpQ4W-0002Fh-KC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 18:47:52 +0200
-Received: by qyk30 with SMTP id 30so1217240qyk.24
+	Thu, 02 Apr 2009 18:47:53 +0200
+Received: by qyk30 with SMTP id 30so1217887qyk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Apr 2009 09:44:09 -0700 (PDT)
+	Thu, 02 Apr 2009 09:44:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:references:date:x-google-sender-auth:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=1Bv7OTyQDKTgX1VyvckwRYEtRiIBxtUAqRB712f9mgk=;
-	b=BN37bTS2FY7zRjklnqOBTmyv12cpbZAg8kwByLn+Cx93sqQAVuzmfGV//2oymrKCxb
-	waC0H0T2SnxbsnDBGpHogmRiB0MHIKGq4YZGBV//Go8DoM2X9ImHbR/IAUBVHgtTJUo8
-	hKrCzHSVlyZ17t0TqUnP+RU0EHAsUisK4IIQc=
+	bh=mhbNAKzmMoonphmIMfwcJ5zAx+usbitdrbfeMS3tcYk=;
+	b=OnqAvGF8Yz3SpXaW1W6mL6EtHUOZw5FHYT8TvT9e5/X8lMqOdKmXcdQJzr8xrovnEF
+	d0ZvjZ9zOWi4RLv3fCK7R6YRLWBZd6gF5WQsWANDOVe4nExUG+oGDzjR1847RjXVRk4E
+	aJvuPvIZq7wzQRQa2viDBX6YDIs+p1OUk9/+A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=ThYXcCm0XrhLuaD0HS9SUshTzk6qz6ak48+96/MvNJEIcrRVHZI6gijxcY0CE/SRbw
-	AeLsAZNzXV0Eojd8kib3qeUYFq4Zo5Qy+UfQOVDtrNpMjZCmZtdXnzPjFQ87VyRcKJCK
-	5FOTR/AU886W2cX+8N6CBONKfVV9fsfVEl4W0=
+	b=BE1LiTU2Dd1rWTN6Z46iTox3T0LpEWi5SPe6lNBAdosStjULRKxrSXM5ZQ2ioVTycR
+	7YuIwm/PiGKOLGBKN0GaTQg+DvFaiuOGmiU6Y3t7W/XGhtt3Diqy4f8jdtYyviOSenET
+	wHgOdkPoo/YN4nz+QMZUYlh2bnQKuXl6S+IVs=
 MIME-Version: 1.0
 Sender: otavio.salvador@gmail.com
-Received: by 10.231.19.204 with SMTP id c12mr73342ibb.39.1238690649528; Thu, 
-	02 Apr 2009 09:44:09 -0700 (PDT)
-In-Reply-To: <gr1map$913$1@ger.gmane.org>
-References: <87tz583wok.fsf@neumann.lab.ossystems.com.br>
-	<gr1map$913$1@ger.gmane.org>
-Date: Thu, 2 Apr 2009 13:44:09 -0300
-X-Google-Sender-Auth: 1ea0fba97ee88780
-Message-ID: <be7a9f3d0904020944q2e0456e7tae3fdbc89faa7a9c@mail.gmail.com>
+Received: by 10.231.10.140 with SMTP id p12mr70856ibp.50.1238690692423; Thu, 
+	02 Apr 2009 09:44:52 -0700 (PDT)
+In-Reply-To: <49D44D76.7070808@bolloretelecom.eu>
+References: <1238607343.27167.1.camel@homestead>
+	<49D44D76.7070808@bolloretelecom.eu>
+Date: Thu, 2 Apr 2009 13:44:52 -0300
+X-Google-Sender-Auth: 3f4a7cb6a7270bcd
+Message-ID: <be7a9f3d0904020944h4d4c6d6dgac1a2e75163d8cf3@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.221.124
 X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
+X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
 	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [RFH] Ugly dependency on a locale package
+Subject: Re: cmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,28 +57,24 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 02 Apr 2009 16:48:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 2, 2009 at 3:35 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 01-04-09 23:12, Otavio Salvador wrote:
->>
->> Hello,
->>
->> Today we spot a wierd package in our image and then we ended figuring
->> out that something quite strange is happening.
+On Thu, Apr 2, 2009 at 2:30 AM, Jeremy Lain=E9
+<jeremy.laine@bolloretelecom.eu> wrote:
+> Shane Dixon wrote:
+>> I'm considering changing my projects over to cmake, but before I do, I
+>> wanted to ask how good the cmake support is in OE. =A0I saw a recent
+>> proposal to allow out-of-tree builds for cmake, but I'm not sure if that
+>> happened or not.
 >
-> Does it use do_split_package without specifying base_depends?
+> At work we recently switched our projects over to CMake and they are buil=
+ding happily in
+> OE. Out-of-tree builds are indeed supported, see recipes/llvm/llvm.inc fo=
+r an example.
 
-This is the evence 2.24 recipe, on OE git. It doesn't use it since it
-uses the default locale spliting method I think.
+What do you mean by out-of-tree?
 
-I really see no reason why it happens but I've reverted your
-patch[1] in our tree to keep our work going but I'd do prefer to
-not divert if we can find the reason why it happens.
-
-1. ebbcf0ebad3e98fd563cb66cb13b07c21d6d7a24
-
--- 
+--=20
 Otavio Salvador                  O.S. Systems
 E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
 Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
