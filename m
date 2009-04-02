@@ -1,27 +1,30 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [216.145.245.200] (helo=mx04.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1LpNQ0-0008AT-8G
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 15:57:36 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id B843F189361; Thu,  2 Apr 2009 15:57:25 +0200 (CEST)
-From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Apr 2009 15:57:25 +0200
-Message-Id: <1238680645-11567-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
+	(envelope-from <mwester@dls.net>) id 1LpNaa-0008SB-AA
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 16:08:28 +0200
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx04.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1LpNYF-0006kU-0n
+	for openembedded-devel@openembedded.org; Thu, 02 Apr 2009 09:05:51 -0500
+Message-ID: <49D4C641.8080907@dls.net>
+Date: Thu, 02 Apr 2009 09:05:53 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 80.81.242.146
-X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
+To: openembedded-devel@openembedded.org
+References: <49D17F70.8020109@dls.net> <49D42B0B.4020505@dls.net>
+	<gr1ujt$ga$1@ger.gmane.org>
+In-Reply-To: <gr1ujt$ga$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 216.145.245.200
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>,
-	=?utf-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@m4x.org>
-Subject: [STABLE][PATCH] openssl-0.9.8j: add patch to use LDFLAGS (fixes QA error)
+Subject: Re: [RFC] make preferred openssl version match for -native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,78 +38,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 13:57:55 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Apr 2009 14:08:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+Koen Kooi wrote:
+> On 02-04-09 05:03, Mike (mwester) wrote:
+>> Mike (mwester) wrote:
+>>> I'd like to propose that we remove the "DEFAULT_PREFERENCE = "-1"" line
+>>> from openssl-native_0.9.8j.bb.
+>>>
+>>> This is causing a problem in select cases (for example, python-native
+>>> fails "import md5"), because we build and stage openssl 0.9.8j, but the
+>>> corresponding -native that gets built and staged is openssl 0.9.7g.
+>>>
+>>> The 0.9.8j version is currently selected as the PREFERRED_VERSION in the
+>>> preferred-om-2008-versions.inc file, as well as for SlugOS.  I've
+>>> successfully built it on both 32 and 64 bit hosts.
+>>>
+>>> Unless there are objections, I'll commit a fix in a couple of days.
+>>
+>> Fix committed. (To dev, not to the new stable branch.)
+>>
+>> WARNING!  The "correct" thing to do would probably be to bump up the PR
+>> on all recipes that might include, directly or indirectly, openssh libs
+>> -- thus forcing them all to link against the new version...
+>>
+>> However, that seemed to be an awful lot of packages, and given that at
+>> least some of the distros already have over-rides to select matching
+>> versions for openssl and openssl-native, this would seem to cause more
+>> problems than it would solve.
+>>
+>> So anticipate that your builds may fail if a new version of openssl is
+>> built; the failure mode would be the inability for the app to find the
+>> old version of the library in the staging area.
+> 
+> You mean like this:
+> /OE/angstrom-dev/staging/x86_64-linux/usr/bin/edje_cc: error while
+> loading shared libraries: libssl.so.0.9.7: cannot open shared object
+> file: No such file or directory
+> 
+> Could you please do things properly and bump PR for the affected recipes?
 
+I explained why I didn't.
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/openssl/openssl-0.9.8j/oe-ldflags.patch |   21 +++++++++++++++++=
-++++
- recipes/openssl/openssl_0.9.8j.bb               |    7 +++++--
- 2 files changed, 26 insertions(+), 2 deletions(-)
- create mode 100644 recipes/openssl/openssl-0.9.8j/oe-ldflags.patch
+I appreciate your comment, none-the-less; to be honest, I fixed this for
+SlugOS and was happy with the result for me.  I was instructed to fix
+this for everyone at the behest of one of the other core devs, despite
+my misgivings over the disruption such a change would have -- disruption
+that would have happened one way or another, regardless of whether I
+bumped every ^&&^*&#%! PR in OE.
 
-diff --git a/recipes/openssl/openssl-0.9.8j/oe-ldflags.patch b/recipes/op=
-enssl/openssl-0.9.8j/oe-ldflags.patch
-new file mode 100644
-index 0000000..3a2fae6
---- /dev/null
-+++ b/recipes/openssl/openssl-0.9.8j/oe-ldflags.patch
-@@ -0,0 +1,21 @@
-+diff -urN openssl-0.9.8j.orig/Makefile.shared openssl-0.9.8j/Makefile.sh=
-ared
-+--- openssl-0.9.8j.orig/Makefile.shared	2008-09-17 15:56:40.000000000 +0=
-000
-++++ openssl-0.9.8j/Makefile.shared	2009-04-02 13:44:48.000000000 +0000
-+@@ -90,7 +90,7 @@
-+ LINK_APP=3D	\
-+   ( $(SET_X);   \
-+     LIBDEPS=3D"$${LIBDEPS:-$(LIBDEPS)}"; \
-+-    LDCMD=3D"$${LDCMD:-$(CC)}"; LDFLAGS=3D"$${LDFLAGS:-$(CFLAGS)}"; \
-++    LDCMD=3D"$${LDCMD:-$(CC)}"; LDFLAGS=3D"$(OE_LDFLAGS) $${LDFLAGS:-$(=
-CFLAGS)}"; \
-+     LIBPATH=3D`for x in $$LIBDEPS; do if echo $$x | grep '^ *-L' > /dev=
-/null 2>&1; then echo $$x | sed -e 's/^ *-L//'; fi; done | uniq`; \
-+     LIBPATH=3D`echo $$LIBPATH | sed -e 's/ /:/g'`; \
-+     LD_LIBRARY_PATH=3D$$LIBPATH:$$LD_LIBRARY_PATH \
-+@@ -100,7 +100,7 @@
-+   ( $(SET_X);   \
-+     LIBDEPS=3D"$${LIBDEPS:-$(LIBDEPS)}"; \
-+     SHAREDCMD=3D"$${SHAREDCMD:-$(CC)}"; \
-+-    SHAREDFLAGS=3D"$${SHAREDFLAGS:-$(CFLAGS) $(SHARED_LDFLAGS)}"; \
-++    SHAREDFLAGS=3D"$(OE_LDFLAGS) $${SHAREDFLAGS:-$(CFLAGS) $(SHARED_LDF=
-LAGS)}"; \
-+     LIBPATH=3D`for x in $$LIBDEPS; do if echo $$x | grep '^ *-L' > /dev=
-/null 2>&1; then echo $$x | sed -e 's/^ *-L//'; fi; done | uniq`; \
-+     LIBPATH=3D`echo $$LIBPATH | sed -e 's/ /:/g'`; \
-+     LD_LIBRARY_PATH=3D$$LIBPATH:$$LD_LIBRARY_PATH \
-diff --git a/recipes/openssl/openssl_0.9.8j.bb b/recipes/openssl/openssl_=
-0.9.8j.bb
-index d40fb48..21450d2 100644
---- a/recipes/openssl/openssl_0.9.8j.bb
-+++ b/recipes/openssl/openssl_0.9.8j.bb
-@@ -2,10 +2,13 @@ inherit pkgconfig
-=20
- require openssl.inc
-=20
--PR =3D "r1"
-+PR =3D "r2"
-+
-+export OE_LDFLAGS=3D"${LDFLAGS}"
-=20
- SRC_URI +=3D "file://configure-targets.patch;patch=3D1 \
-             file://shared-libs.patch;patch=3D1 \
--            file://debian.patch;patch=3D1"
-+            file://debian.patch;patch=3D1 \
-+            file://oe-ldflags.patch;patch=3D1"
-=20
- PARALLEL_MAKE =3D ""
---=20
-1.5.6.5
+So clearly my initial thought was correct -- only the core members are
+permitted to break anything.
 
+Your feedback is filed, and will be prominently displayed (in commit
+notices if necessary) to justify my preferred practice of making
+SlugOS-private fixes.
+
+Have a nice day.
+
+Mike (mwester)
 
 
