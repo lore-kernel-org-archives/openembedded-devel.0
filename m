@@ -1,38 +1,36 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lprkn-0005wI-PA
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 00:20:52 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090403221813.KPGE27308.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
+	(envelope-from <trini@kernel.crashing.org>) id 1Lpryj-00033M-Ur
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 00:35:18 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090403223237.DPLC6112.fed1rmmtao102.cox.net@fed1rmimpo03.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Fri, 3 Apr 2009 18:18:13 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id bAJD1b00E4dMFYL04AJDxM; Fri, 03 Apr 2009 18:18:13 -0400
-X-Authority-Analysis: v=1.0 c=1 a=Mq3P7Hv6zo8A:10 a=gM2A6xlMBQgA:10
-	a=DRi_eEeSPefMijpgFhwA:9 a=z0MOS3QhhCKpgp1VhDwA:7
-	a=Hy-Sis5eseHqFb1N7xVdCjsBObcA:4 a=sFhgDkrQfnUA:10
+	Fri, 3 Apr 2009 18:32:37 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id bAYd1b0014dMFYL04AYd6F; Fri, 03 Apr 2009 18:32:37 -0400
+X-Authority-Analysis: v=1.0 c=1 a=Ji7YCslGg5QA:10 a=Q4-j1AaZAAAA:8
+	a=Wq7rQFVUCRHsSicPWwEA:9 a=C0r33RG8elNchh8B-ioHwGwCd_EA:4
+	a=XF7b4UCPwd8A:10
 X-CM-Score: 0.00
-Date: Fri, 3 Apr 2009 15:18:13 -0700
+Date: Fri, 3 Apr 2009 15:32:36 -0700
 From: Tom Rini <trini@kernel.crashing.org>
 To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090403221813.GK30840@smtp.west.cox.net>
+Message-ID: <20090403223236.GL30840@smtp.west.cox.net>
 References: <20090403221352.GH30840@smtp.west.cox.net>
-	<20090403221721.GI30840@smtp.west.cox.net>
-	<20090403221751.GJ30840@smtp.west.cox.net>
 MIME-Version: 1.0
-In-Reply-To: <20090403221751.GJ30840@smtp.west.cox.net>
+In-Reply-To: <20090403221352.GH30840@smtp.west.cox.net>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.45
+X-SA-Exim-Connect-IP: 68.230.241.44
 X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=AWL,BAYES_05,RDNS_NONE
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] meta-toolchain, canadian-sdk: Move C++ headers into the	correct location, bump PR
+Subject: Re: Fix relocation of our SDK toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,154 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 22:20:52 -0000
+X-List-Received-Date: Fri, 03 Apr 2009 22:35:19 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-meta-toolchain, canadian-sdk: Move C++ headers into the correct location, bump PR
- A gcc that has sysroot support expects that the default C++ headers
- (iostream, etc) are in <toolchain prefix>/include/c++ while regular C
- headers are still in <toolchain prefix>/usr/include.
-
----
- recipes/meta/canadian-sdk.bb            |    8 +++++++-
- recipes/meta/meta-toolchain-fso.bb      |    2 +-
- recipes/meta/meta-toolchain-gpe-sbox.bb |    3 ++-
- recipes/meta/meta-toolchain-gpe.bb      |    3 ++-
- recipes/meta/meta-toolchain-neuros.bb   |    2 +-
- recipes/meta/meta-toolchain-openmoko.bb |    2 +-
- recipes/meta/meta-toolchain-opie.bb     |    1 +
- recipes/meta/meta-toolchain-sbox.bb     |    1 +
- recipes/meta/meta-toolchain.bb          |    6 ++++++
- 9 files changed, 22 insertions(+), 6 deletions(-)
-
-diff --git a/recipes/meta/canadian-sdk.bb b/recipes/meta/canadian-sdk.bb
-index 150c752..9126c7e 100644
---- a/recipes/meta/canadian-sdk.bb
-+++ b/recipes/meta/canadian-sdk.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Meta package for building a installable toolchain"
- LICENSE = "MIT"
- DEPENDS = "ipkg-native ipkg-utils-native fakeroot-native sed-native zip-native"
--PR = "r2"
-+PR = "r3"
- 
- inherit canadian-sdk meta
- 
-@@ -100,6 +100,12 @@ do_populate_sdk() {
- 	# gcc-cross-sdk get built :( (30/11/07)
- 	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/lib/libgcc_s.so
- 
-+	# With sysroot support, gcc expects the default C++ headers to be
-+	# in a specific place.
-+	install -d ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include
-+	mv ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/usr/include/c++ \
-+		${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include/
-+
- 	# Fix or remove broken .la files
- 	for i in `find ${SDK_OUTPUT}/${prefix}/${TARGET_SYS} -name \*.la`; do
- 		sed -i 	-e "/^dependency_libs=/s,\([[:space:]']\)${layout_base_libdir},\1${prefix}/${TARGET_SYS}${layout_base_libdir},g" \
-diff --git a/recipes/meta/meta-toolchain-fso.bb b/recipes/meta/meta-toolchain-fso.bb
-index fbfbb0a..4873c42 100644
---- a/recipes/meta/meta-toolchain-fso.bb
-+++ b/recipes/meta/meta-toolchain-fso.bb
-@@ -1,4 +1,4 @@
--PR = "r0"
-+PR = "r1"
- 
- TOOLCHAIN_TARGET_TASK = "task-fso-toolchain-target"
- TOOLCHAIN_HOST_TASK = "task-fso-toolchain-host"
-diff --git a/recipes/meta/meta-toolchain-gpe-sbox.bb b/recipes/meta/meta-toolchain-gpe-sbox.bb
-index 74ba038..29e39c5 100644
---- a/recipes/meta/meta-toolchain-gpe-sbox.bb
-+++ b/recipes/meta/meta-toolchain-gpe-sbox.bb
-@@ -1,3 +1,4 @@
-+PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-base \
-     task-sdk-sbox \
-@@ -9,4 +10,4 @@ TOOLCHAIN_TARGET_TASK = "\
- 
- require meta-toolchain.bb
- 
--SDK_SUFFIX = "toolchain-gpe-sbox"
-\ No newline at end of file
-+SDK_SUFFIX = "toolchain-gpe-sbox"
-diff --git a/recipes/meta/meta-toolchain-gpe.bb b/recipes/meta/meta-toolchain-gpe.bb
-index bcfb1e1..7b962bf 100644
---- a/recipes/meta/meta-toolchain-gpe.bb
-+++ b/recipes/meta/meta-toolchain-gpe.bb
-@@ -1,3 +1,4 @@
-+PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-base \
-     task-sdk-x11 \
-@@ -6,4 +7,4 @@ TOOLCHAIN_TARGET_TASK = "\
- 
- require meta-toolchain.bb
- 
--SDK_SUFFIX = "toolchain-gpe"
-\ No newline at end of file
-+SDK_SUFFIX = "toolchain-gpe"
-diff --git a/recipes/meta/meta-toolchain-neuros.bb b/recipes/meta/meta-toolchain-neuros.bb
-index 087ddcb..445a187 100644
---- a/recipes/meta/meta-toolchain-neuros.bb
-+++ b/recipes/meta/meta-toolchain-neuros.bb
-@@ -1,6 +1,6 @@
- # Toolchain for neuros-osd devices
- 
--PR = "r4"
-+PR = "r5"
- 
- TOOLCHAIN_HOST_TASK = "task-sdk-host \
-                        qmake2-sdk uicmoc4-sdk"
-diff --git a/recipes/meta/meta-toolchain-openmoko.bb b/recipes/meta/meta-toolchain-openmoko.bb
-index b7e5626..b265615 100644
---- a/recipes/meta/meta-toolchain-openmoko.bb
-+++ b/recipes/meta/meta-toolchain-openmoko.bb
-@@ -1,4 +1,4 @@
--PR = "r1"
-+PR = "r2"
- 
- TOOLCHAIN_TARGET_TASK = "task-openmoko-toolchain-target"
- TOOLCHAIN_HOST_TASK = "task-openmoko-toolchain-host"
-diff --git a/recipes/meta/meta-toolchain-opie.bb b/recipes/meta/meta-toolchain-opie.bb
-index c72208c..9f4b9ac 100644
---- a/recipes/meta/meta-toolchain-opie.bb
-+++ b/recipes/meta/meta-toolchain-opie.bb
-@@ -1,3 +1,4 @@
-+PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-base \
-     task-sdk-opie"
-diff --git a/recipes/meta/meta-toolchain-sbox.bb b/recipes/meta/meta-toolchain-sbox.bb
-index 1283c59..0138329 100644
---- a/recipes/meta/meta-toolchain-sbox.bb
-+++ b/recipes/meta/meta-toolchain-sbox.bb
-@@ -1,3 +1,4 @@
-+PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-bare \
-     task-sdk-sbox"
-diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
-index f892d22..b641be1 100644
---- a/recipes/meta/meta-toolchain.bb
-+++ b/recipes/meta/meta-toolchain.bb
-@@ -117,6 +117,12 @@ do_populate_sdk() {
- 	# gcc-cross-sdk get built :( (30/11/07)
- 	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/lib/libgcc_s.so
- 
-+	# With sysroot support, gcc expects the default C++ headers to be
-+	# in a specific place.
-+	install -d ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include
-+	mv ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/usr/include/c++ \
-+		${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include/
-+
- 	# Fix or remove broken .la files
- 	for i in `find ${SDK_OUTPUT}/${prefix}/${TARGET_SYS} -name \*.la`; do
- 		sed -i 	-e "/^dependency_libs=/s,\([[:space:]']\)${layout_base_libdir},\1${prefix}/${TARGET_SYS}${layout_base_libdir},g" \
--- 
-1.6.0.4
+This is also at
+http://patchwork.openembedded.org/bundle/trini/trini-relocatible-sdk/
+now and I plan on pushing this stuff in Tuesday AM (same time as the
+wireless-tools change).
 
 -- 
 Tom Rini
