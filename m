@@ -1,29 +1,27 @@
-Received: from [130.89.2.14] (helo=mx.utwente.nl)
+Received: from [59.124.115.149] (helo=aakash.openmoko.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1Lpars-0000oQ-K1
-	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 06:19:02 +0200
-Received: from Powerbook-3.local (vpn006010.vpn.utwente.nl [130.89.6.10])
-	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id n334GKIS008748; 
-	Fri, 3 Apr 2009 06:16:21 +0200
-Message-ID: <49D58D93.20803@student.utwente.nl>
-Date: Fri, 03 Apr 2009 06:16:19 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <6b7bf6e9-f3cb-4460-b1dc-312bc0ced19e@j18g2000prm.googlegroups.com>
+	(envelope-from <nytowl@openmoko.org>) id 1LpbLR-0006Tv-K0
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Apr 2009 06:49:36 +0200
+Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
+	helo=[172.16.14.105]) by aakash.openmoko.org with esmtpsa (SSL
+	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <nytowl@openmoko.org>)
+	id 1LpbIn-0006tU-2V; Fri, 03 Apr 2009 12:46:59 +0800
+From: Angus Ainslie <nytowl@openmoko.org>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <6b7bf6e9-f3cb-4460-b1dc-312bc0ced19e@j18g2000prm.googlegroups.com>
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-SA-Exim-Connect-IP: 130.89.2.14
-X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
+References: <6b7bf6e9-f3cb-4460-b1dc-312bc0ced19e@j18g2000prm.googlegroups.com>
+Date: Thu, 02 Apr 2009 22:46:37 -0600
+Message-Id: <1238733997.6527.26.camel@think-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.3 
+X-SA-Exim-Connect-IP: 59.124.115.149
+X-SA-Exim-Mail-From: nytowl@openmoko.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: opkg-devel <opkg-devel@googlegroups.com>
@@ -41,45 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 04:19:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 03 Apr 2009 04:49:36 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 03-04-09 05:59, Tick wrote:
-> Hi All,
->    I am pondering that let conf->force_overwrite in opkg enable
-> resolve_conffiles overwrite any conffiles. Now opkg will not overwrite
-> the conffiles even if you set force_overwrite. It will cause opkg ask
-> user to choose what to do to the conffiles if they are changed.
->
+On Thu, 2009-04-02 at 20:59 -0700, Tick wrote:
 > Adding another flag e.g. force_overwrite_conffile seems a little bit
 > superfluous and not orthogonal to force_overwrite. But it will not
 > change current opkg behavior.
->
-> Letting force_overwrite can overwrite conffiles will cause logical
-> change of this flag.  This will make opkg-cl asking nothing when
-> upgrade some conffiles if you set force_overwrite. It may cause users
-> lose their own setting without a second chance to save them?
->
-> In my own opinion, I prefer let force_overwrite flag can overwrite
-> files including conffiles, because it has to be set manually. But this
-> will change the behaviour of opkg, and may have some impact on other
-> projects. Such as OE. That makes me consider again and again.
->
-> My proposal is if conffiles been overwrited because force_overwrite
-> was set.
-> The old conffile XXXX will be move to XXXX~, and adding a warning
-> message of "overwriting conffile XXXX".
-> Is that a good solution?
 
-It's not a good solution since people use 'force-overwrite' to get 
-around packages that don't (or can't) have RREPLACES set. If I do an 
-opkg upgrade now, I don't want util-linux-ng-mount and busybox to start 
-fighting over /etc/mountall, but I do want opkg to prompt me about fstab 
-changes.
+There is currently a force-defaults switch so why not have a
+force-maintainer or something similar. In OE specifically it would be
+nice to be able to set this per recipe to try and guarantee a certain
+config. The problem comes when 2 different recipes try to assert them
+selves by using th force-maintainer flag.
 
-regards,
+Angus  
 
-Koen
 
 
