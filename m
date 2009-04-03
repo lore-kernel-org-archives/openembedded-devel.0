@@ -1,29 +1,49 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [74.125.46.156] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LphT8-0004ws-3J
-	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 13:21:58 +0200
-Received: (qmail 20884 invoked by uid 813007); 3 Apr 2009 11:19:23 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 3 Apr 2009 11:19:23 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 3 Apr 2009 13:19:21 +0200
-User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
-References: <1238737194-32521-1-git-send-email-jeremy.laine@bolloretelecom.eu>
-In-Reply-To: <1238737194-32521-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+	(envelope-from <otavio.salvador@gmail.com>) id 1Lpidy-0004J4-J8
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Apr 2009 14:37:12 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so730659ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 Apr 2009 05:34:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:content-type:content-transfer-encoding;
+	bh=eDnUYoeqoY+Bc31TXsm6Qf0HYERZPxEBB4J2vGX5+/8=;
+	b=F02WUVJC6HUAztI3en5ROwx8XJeEhne6stE3banIOx0/tx2TBH8PYZu2wOnQLW1PHN
+	uWpxx9wxUvbMhJzmqjp0C12VJENpW0F6M0SKO5C7gq/I8tDw9tfPulOLQMFrdO4agx/i
+	3Ve2hcEEMK/PdSzxzMAckSvdTeVhrzud7aix8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=WfC1s1J8aSaIG3SDvuKZspAi6SEj0LM+kDsZRjwbinB6XI9ZMkQG5VYdf/8dhOLSb2
+	zVa9ib2CAr0O9JIXXYJ468rcwUncyK+nWjr6LAGxaWxyCmiWUhRfAPy6kQmXTwxFAb4w
+	SUSuq8MUivF/r8lKyAumsrKAStr4sKMHl8CxA=
 MIME-Version: 1.0
-Message-Id: <200904031319.22215.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.151.8 with SMTP id y8mr2588201and.106.1238762078596; Fri, 
+	03 Apr 2009 05:34:38 -0700 (PDT)
+In-Reply-To: <200904022154.03611.raj.khem@gmail.com>
+References: <1238532011-2963-1-git-send-email-k.kooi@student.utwente.nl>
+	<19c1b8a90903311458k56ee153fkb6977ce7349b78fc@mail.gmail.com>
+	<gr2vdb$k2v$2@ger.gmane.org> <200904022154.03611.raj.khem@gmail.com>
+Date: Fri, 3 Apr 2009 09:34:38 -0300
+X-Google-Sender-Auth: a4c7c1c29bd65f05
+Message-ID: <be7a9f3d0904030534i7d9ea46ar8833a5b83f641d65@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.46.156
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_20,RDNS_NONE,SPF_PASS
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] qt4-tools-native: set LFLAGS to pick up zlib from staging
+Cc: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH] gcc 4.3.x: disable thumb mode for now, glibc 	builds don't like it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 11:21:58 -0000
-Content-Type: text/plain;
-  charset="utf-8"
+X-List-Received-Date: Fri, 03 Apr 2009 12:37:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia pi=C4=85tek, 3 kwietnia 2009 o 07:39:54 Jeremy Lain=C3=A9 napisa=C5=82=
-(a):
-> From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+On Fri, Apr 3, 2009 at 1:53 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Thursday 02 April 2009 11:16:10 Koen Kooi wrote:
+>> On 31-03-09 23:58, Khem Raj wrote:
+>> > can you post the error message and commandline or better preprocessed
+>> > file of the error thats happening when compiling libgcc in thumb mode
+>> > plz.
+>> >
+>> > We could try to fix the libgcc problem.
+>>
+>> Any objections to this going into the stable branch till the real bug is
+>> fixed?
 >
+> Not from me.
 >
-> Signed-off-by: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+> Acked-by: Khem Raj =A0<raj.khem@gmail.com>
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+From my POV if it is going to stable it needs to go to dev too; even
+if we'll provide a better fix for it later on dev.
 
-
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
