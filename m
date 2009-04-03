@@ -1,49 +1,40 @@
-Received: from [209.85.198.242] (helo=rv-out-0708.google.com)
+Received: from [208.51.207.131] (helo=mail.2mi.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Lpold-0002KJ-Mb
+	(envelope-from <jader@2mi.com.br>) id 1Lpolk-0002KS-KO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 21:09:32 +0200
-Received: by rv-out-0708.google.com with SMTP id k29so1175233rvb.12
+	Fri, 03 Apr 2009 21:09:41 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.2mi.com.br (Postfix) with ESMTP id 1B22F5010901
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Apr 2009 12:06:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=8OBXtb2li68LkqBkRfl8N7EjeZu95TD5G2wwO8MXJ48=;
-	b=lSnorqq9l7ZDbulGVYAKVJ5zDwyk10rEjdx3hKDbM1TwhxGfEhY/1XsjQj5IClBpps
-	spJMCiCmxoJoc9zDSZ/vYeT7luE7mkA075EPpBX8lTwUoTGO/NchMfRu/SfQCaMhuwiP
-	DEelOgGJf4udRuBnBu7AO/f5hTqfI/iIanv5w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=JAgWenoLAD4THtHc9rxlRc7wZapxTf2exwUGlCY4OQ0U3ekCC2GYbpqkLSBNVug+ky
-	lfAUomoDAkqYqbXVXKVEpjiyMw/G8qLO0qQiGGivdiXjXU5zxuZdE81cJT711NIsPYLZ
-	yWQW1jhg6EzzSUy1wg5pCiC55pr+5Xm2TYNw0=
-Received: by 10.141.13.13 with SMTP id q13mr678859rvi.163.1238785616381;
-	Fri, 03 Apr 2009 12:06:56 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-4-184.dsl.pltn13.sbcglobal.net
-	[71.146.4.184])
-	by mx.google.com with ESMTPS id g14sm7808613rvb.9.2009.04.03.12.06.54
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 03 Apr 2009 12:06:55 -0700 (PDT)
-Date: Fri, 3 Apr 2009 12:06:50 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090403190650.GA29161@gmail.com>
-References: <1238753080-8005-1-git-send-email-khimov@altell.ru>
+	Fri,  3 Apr 2009 16:13:51 -0300 (BRT)
+X-Virus-Scanned: amavisd-new at 2mi.com.br
+Received: from mail.2mi.com.br ([127.0.0.1])
+	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 14X9nTZXIKhL
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  3 Apr 2009 16:13:42 -0300 (BRT)
+Received: from [192.168.1.103] (unknown [189.120.39.163])
+	by mail.2mi.com.br (Postfix) with ESMTP id 99A0450277D0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  3 Apr 2009 16:13:41 -0300 (BRT)
+Message-ID: <49D65E44.2080002@2mi.com.br>
+Date: Fri, 03 Apr 2009 16:06:44 -0300
+From: "Jader H. Silva" <jader@2mi.com.br>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-In-Reply-To: <1238753080-8005-1-git-send-email-khimov@altell.ru>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-X-SA-Exim-Connect-IP: 209.85.198.242
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1236890935.6250.26.camel@northpole>	<1237220171.4020.4.camel@faraday>	<be7a9f3d0903161800i3f6735c8u7eafe009f2cb0b88@mail.gmail.com>	<1237928739.20348.3.camel@northpole>
+	<878wmu48qc.fsf@neumann.lab.ossystems.com.br>
+In-Reply-To: <878wmu48qc.fsf@neumann.lab.ossystems.com.br>
+X-SA-Exim-Connect-IP: 208.51.207.131
+X-SA-Exim-Mail-From: jader@2mi.com.br
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ace: New recipe for ACE 5.6.8
+Subject: Re: calibrateproto git tag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,81 +48,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 19:09:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 03 Apr 2009 19:09:41 -0000
+Content-Type: multipart/mixed; boundary="------------040900010600040406050105"
 
-On (03/04/09 14:04), Roman I Khimov wrote:
-> ---
->  conf/checksums.ini       |    4 ++++
->  recipes/ace/ace.inc      |   18 ++++++++++++++++++
->  recipes/ace/ace_5.6.8.bb |    1 +
->  3 files changed, 23 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/ace/ace.inc
->  create mode 100644 recipes/ace/ace_5.6.8.bb
-> 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 15fff1d..18ea297 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -58,6 +58,10 @@ sha256=7a960180e7873b1bdb522e76b0423b5c2c1b8efe1d30d7ca80c41eb97d822b2d
->  md5=24b0e5bbfe21ea9c5a5c589bcc79c0f2
->  sha256=ab877846c6caaff32efbf5be6fc5c63b7dec97a2e78c57c525da7705d2052bfc
->  
-> +[ftp://download.dre.vanderbilt.edu/previous_versions/ACE-5.6.8.tar.bz2]
-> +md5=81c1ff761c3431cd12c81337aa80d558
-> +sha256=96b70582d931a7e83c3ca31b3bc7e23957391e16dee4ae6ddf938c9574d50b27
-> +
->  [http://www.amd.com/files/connectivitysolutions/geode/geode_lx/AES_Linux_LX_02.01.0100.tar.gz]
->  md5=12cb241a9037fffe31ba7c68a48ed614
->  sha256=a6068b4aa0e2330eed6e4741bad3191dc9ca7d7326f7bfab578ac55e2b8b91a2
-> diff --git a/recipes/ace/ace.inc b/recipes/ace/ace.inc
-> new file mode 100644
-> index 0000000..a83eb65
-> --- /dev/null
-> +++ b/recipes/ace/ace.inc
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION = "C++ network programming framework"
-> +SECTION = "net"
-> +LICENSE = "BSD + others"
+--------------040900010600040406050105
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-I think listing all licenses here would be better. Others is too vague.
+Otavio Salvador escreveu:
+> "Jader H. Silva" <jader@2mi.com.br> writes:
+>
+>  =20
+>> Em Seg, 2009-03-16 =C3=A0s 22:00 -0300, Otavio Salvador escreveu:
+>>    =20
+>>> 2009/3/16 Marcos Amorim <marcos@2mi.com.br>:
+>>>      =20
+>>>> libxcalibrate_git add tag
+>>>>
+>>>>
+>>>> git diff packages/xorg-lib/libxcalibrate_git.bb
+>>>> diff --git a/packages/xorg-lib/libxcalibrate_git.bb
+>>>> b/packages/xorg-lib/libxcalibrate_git.bb
+>>>> index f9e1587..7f889df 100644
+>>>> --- a/packages/xorg-lib/libxcalibrate_git.bb
+>>>> +++ b/packages/xorg-lib/libxcalibrate_git.bb
+>>>> @@ -6,7 +6,7 @@ DEPENDS =3D "virtual/libx11 calibrateproto libxext"
+>>>>  PV =3D "0.0+gitr${SRCREV}"
+>>>>  PE =3D "1"
+>>>>
+>>>> -SRC_URI =3D
+>>>> "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3D=
+git"
+>>>> +SRC_URI =3D
+>>>> "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3D=
+git;tag=3Dmaster"
+>>>>        =20
+>>> Please use AUTOREV in conf/distro/include/insane-srcrevs.inc and a go=
+od
+>>> one at conf/distro/include/sane-srcrevs.inc. This makes images easier=
+ to
+>>> be reproducable.
+>>>      =20
+>> Add calibrateproto sane revision to sane-srcrevs.inc, corrected this b=
+ug
+>> in my compilation.
+>> Patch is attached.
+>>    =20
+>
+> [...]
+>
+> Please send the patch in git format-patch; so I can queue it here in my
+> tree and push it together with other fixes.
+>
+>  =20
 
-> +
-> +DEPENDS += "openssl gperf-native"
-> +
-> +SRC_URI = "ftp://download.dre.vanderbilt.edu/previous_versions/ACE-${PV}.tar.bz2"
-> +S = "${WORKDIR}/ACE_wrappers"
-> +B = "${WORKDIR}/build.${TARGET_SYS}"
-> +
-> +EXTRA_OECONF += "--disable-ace-tests --disable-gperf"
-> +LEAD_SONAME = "libACE-[0-9.]*.so"
-> +
-> +inherit autotools
-> +
-> +do_configure_prepend() {
-> +	export ace_cv_linux_event_poll=yes
-> +}
-> diff --git a/recipes/ace/ace_5.6.8.bb b/recipes/ace/ace_5.6.8.bb
-> new file mode 100644
-> index 0000000..345abe1
-> --- /dev/null
-> +++ b/recipes/ace/ace_5.6.8.bb
-> @@ -0,0 +1 @@
-> +require ace.inc
-> -- 
-> 1.6.2.1
-> 
-> 
-> -- 
-> This message has been scanned for viruses and
-> dangerous content by MailScanner, and is
-> believed to be clean.
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Patch in git format-patch is attached, sorry for the delay.
+
+--------------040900010600040406050105
+Content-Type: text/x-patch;
+ name="0001-Add-calibrateproto-and-libxcalibrate-sane-srcrevs.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename*0="0001-Add-calibrateproto-and-libxcalibrate-sane-srcrevs.patch"
+
+From 7511e3619f63200239efcff64996616c700024ab Mon Sep 17 00:00:00 2001
+From: Jader H. Silva <vo@northpole.(none)>
+Date: Fri, 3 Apr 2009 16:00:17 -0300
+Subject: [PATCH] Add calibrateproto and libxcalibrate sane srcrevs
+
+---
+ conf/distro/include/sane-srcrevs.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
+index fc341f3..bb9b75b 100644
+--- a/conf/distro/include/sane-srcrevs.inc
++++ b/conf/distro/include/sane-srcrevs.inc
+@@ -19,6 +19,7 @@ SRCREV_pn-assassin ?= "268"
+ SRCREV_pn-assassin-thumbnail ?= "4690"
+ SRCREV_pn-bfin-uclibc ?= "1857"
+ SRCREV_pn-bootchart-lite ?= "4"
++SRCREV_pn-calibrateproto ?= "1da6fd1e2c7a49648245c98481fabea8b9690a8c"
+ SRCREV_pn-clutter-box2d ?= "3197"
+ SRCREV_pn-clutter-cairo ?= "3210"
+ SRCREV_pn-clutter-gst ?= "3188"
+@@ -98,6 +99,7 @@ SRCREV_pn-libowl ?= "277"
+ SRCREV_pn-librfid ?= "2094"
+ SRCREV_pn-libw100 ?= "47"
+ SRCREV_pn-libowl ?= "277"
++SRCREV_pn-libxcalibrate ?= "209d83af61ed38a002c8096377deac292b3e396c"
+ SRCREV_pn-libxosd ?= "627"
+ SRCREV_pn-linux-bfin ?= "3758"
+ SRCREV_pn-linux-hackndev-2.6 ?= "1308"
+-- 
+1.5.6.3
 
 
+--------------040900010600040406050105--
