@@ -1,48 +1,41 @@
-Received: from [213.91.4.211] (helo=bart.wifirst.net)
+Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jlaine@waffle.bolloretelecom.eu>) id 1LpcCz-0000vR-1m
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 07:44:56 +0200
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id 20A9B5FF20;
-	Fri,  3 Apr 2009 07:42:22 +0200 (CEST)
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id 68B135FF2F;
-	Fri,  3 Apr 2009 07:42:20 +0200 (CEST)
-Received: from blini.bolloretelecom.eu (smtp.bolloretelecom.eu
-	[62.210.194.121])
-	by bart.wifirst.net (Postfix) with ESMTP id 4707B5FF20;
-	Fri,  3 Apr 2009 07:42:20 +0200 (CEST)
-Received: from blini.bolloretelecom.eu (localhost [127.0.0.1])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id D488023E1D;
-	Fri,  3 Apr 2009 07:42:19 +0200 (CEST)
-Received: from blini.bolloretelecom.eu (localhost [127.0.0.1])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id 0BD6C23E36;
-	Fri,  3 Apr 2009 07:42:17 +0200 (CEST)
-Received: from waffle.bolloretelecom.eu (waffle.bolloretelecom.eu
-	[192.168.95.233])
-	by blini.bolloretelecom.eu (Postfix) with ESMTP id 304EC23E1D;
-	Fri,  3 Apr 2009 07:42:16 +0200 (CEST)
-Received: by waffle.bolloretelecom.eu (Postfix, from userid 10000)
-	id E3CA1FFDE; Fri,  3 Apr 2009 07:42:15 +0200 (CEST)
-From: =?utf-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@bolloretelecom.eu>
+	(envelope-from <hs4233@mail.mn-solutions.de>) id 1LpdCu-000550-2e
+	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 08:48:54 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id DEC5E148014;
+	Fri,  3 Apr 2009 08:46:22 +0200 (CEST)
+X-Virus-Scanned: by Mittwald Mailscanner
+Received: from mx51.mymxserver.com ([127.0.0.1])
+	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id L0I4hbr0eACw; Fri,  3 Apr 2009 08:46:22 +0200 (CEST)
+Received: from lin01.mn-solutions.de (pD95F989E.dip0.t-ipconnect.de
+	[217.95.152.158])
+	by mx51.mymxserver.com (Postfix) with ESMTP id 68E7E148006;
+	Fri,  3 Apr 2009 08:46:21 +0200 (CEST)
+Received: by lin01.mn-solutions.de (Postfix, from userid 116)
+	id 4F8ED1E004E; Fri,  3 Apr 2009 08:46:20 +0200 (CEST)
+Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
+	by lin01.mn-solutions.de (Postfix) with ESMTP id C2BC71E0037;
+	Fri,  3 Apr 2009 08:46:11 +0200 (CEST)
+From: Holger Schurig <hs4233@mail.mn-solutions.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Apr 2009 07:42:15 +0200
-Message-Id: <1238737335-32556-1-git-send-email-jeremy.laine@bolloretelecom.eu>
-X-Mailer: git-send-email 1.5.6.5
+Date: Fri, 3 Apr 2009 08:45:06 +0200
+User-Agent: KMail/1.9.7
+References: <12386320381719-git-send-email-clarson@mvista.com>
+In-Reply-To: <12386320381719-git-send-email-clarson@mvista.com>
 MIME-Version: 1.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 213.91.4.211
-X-SA-Exim-Mail-From: jlaine@waffle.bolloretelecom.eu
+Message-Id: <200904030845.06338.hs4233@mail.mn-solutions.de>
+X-SA-Exim-Connect-IP: 85.199.173.110
+X-SA-Exim-Mail-From: hs4233@mail.mn-solutions.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	URIBL_SBL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?utf-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@m4x.org>
-Subject: [STABLE][PATCH] perl-5.8.8: use LDFLAGS for shared libraries (fixes QA error)
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH 1/2] bitbake.conf, collections.inc: Add COLLECTIONS mechanism w/ a sane default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,79 +49,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 05:44:56 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 03 Apr 2009 06:48:54 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+> +# Take a list of directories in COLLECTIONS, in priority order (highest to
+> +# lowest), and use those to populate BBFILES, BBFILE_COLLECTIONS,
+> +# BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
+> +
 
+I like this idea, but I think that this *.inc file
+needs a larger comment block, e.g. not only stating
+what it does, but also why that would be handy. A
+typical use case or maybe a problem-solution section.
 
-Signed-off-by: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
----
- recipes/perl/perl-5.8.8/shared-ldflags.patch |   11 +++++++++++
- recipes/perl/perl_5.8.8.bb                   |    6 +++++-
- 2 files changed, 16 insertions(+), 1 deletions(-)
- create mode 100644 recipes/perl/perl-5.8.8/shared-ldflags.patch
-
-diff --git a/recipes/perl/perl-5.8.8/shared-ldflags.patch b/recipes/perl/=
-perl-5.8.8/shared-ldflags.patch
-new file mode 100644
-index 0000000..b872dc9
---- /dev/null
-+++ b/recipes/perl/perl-5.8.8/shared-ldflags.patch
-@@ -0,0 +1,11 @@
-+diff -urN perl-5.8.8.orig/Cross/generate_config_sh perl-5.8.8/Cross/gene=
-rate_config_sh
-+--- perl-5.8.8.orig/Cross/generate_config_sh	2003-09-05 08:31:08.0000000=
-00 +0000
-++++ perl-5.8.8/Cross/generate_config_sh	2009-04-02 14:59:56.000000000 +0=
-000
-+@@ -30,6 +30,7 @@
-+ $callbacks->{'cppstdin'} =3D [\&simple_process_append, ["CC", "arm-linu=
-x-gcc -E", "-E"]];
-+ $callbacks->{'full_ar'} =3D [\&backtick, ["AR", "which $ENV{AR}", "/usr=
-/local/arm/2.95.3/bin/arm-linux-ar"]];
-+ $callbacks->{'ld'} =3D [\&simple_process, ["LD", "arm-linux-ld"]];
-++$callbacks->{'lddlflags'} =3D [\&simple_process, ["LDDLFLAGS", ""]];
-+ $callbacks->{'ldflags'} =3D [\&simple_process, ["LDFLAGS", ""]];
-+ $callbacks->{'ldflags_uselargefiles'} =3D [\&simple_process, ["LDFLAGS"=
-, ""]];
-+ $callbacks->{'myarchname'} =3D [\&simple_process, ["SYS", "armv4l-linux=
-"]];
-diff --git a/recipes/perl/perl_5.8.8.bb b/recipes/perl/perl_5.8.8.bb
-index 2118bba..521cdf6 100644
---- a/recipes/perl/perl_5.8.8.bb
-+++ b/recipes/perl/perl_5.8.8.bb
-@@ -5,7 +5,7 @@ LICENSE =3D "Artistic|GPL"
- PRIORITY =3D "optional"
- # We need gnugrep (for -I)
- DEPENDS =3D "virtual/db perl-native grep-native"
--PR =3D "r26"
-+PR =3D "r27"
-=20
- # Major part of version
- PVM =3D "5.8"
-@@ -29,6 +29,7 @@ SRC_URI =3D "ftp://ftp.funet.fi/pub/CPAN/src/perl-${PV}=
-.tar.gz \
-         file://62_debian_cpan_definstalldirs.patch;patch=3D1 \
-         file://64_debian_enc2xs_inc.patch;patch=3D1 \
-         file://asm-pageh-fix.patch;patch=3D1 \
-+        file://shared-ldflags.patch;patch=3D1 \
-         file://config.sh \
-         file://config.sh-32 \
-         file://config.sh-32-le \
-@@ -43,6 +44,9 @@ HOSTPERL =3D "${STAGING_BINDIR_NATIVE}/perl${PV}"
- # Where to find .so files - use the -native versions not those from the =
-target build
- export PERLHOSTLIB =3D "${STAGING_LIBDIR_NATIVE}/perl/${PV}/"
-=20
-+# LDFLAGS for shared libraries
-+export LDDLFLAGS =3D "${LDFLAGS} -shared"
-+
- do_configure() {
-         # Make hostperl in build directory be the native perl
-         cp -f ${HOSTPERL} hostperl
---=20
-1.5.6.5
+I think when more of the *.inc and *.bbclass files get
+such in-file comments it'll be easier for people skimming
+throught the code to grasp the big picture.
 
 
