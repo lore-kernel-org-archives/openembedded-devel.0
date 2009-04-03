@@ -1,37 +1,32 @@
-Received: from [130.89.2.13] (helo=mx.utwente.nl)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1LpncJ-0003nE-Q8
-	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 19:55:55 +0200
-Received: from [172.20.1.5] (vpn006064.vpn.utwente.nl [130.89.6.64])
-	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id n33Hr9pw015418; 
-	Fri, 3 Apr 2009 19:53:09 +0200
-Message-Id: <C449F935-2719-4D1B-ACFE-4515E760F704@student.utwente.nl>
-From: Koen Kooi <k.kooi@student.utwente.nl>
-To: Otavio Salvador <otavio@ossystems.com.br>
-In-Reply-To: <be7a9f3d0904030534i7d9ea46ar8833a5b83f641d65@mail.gmail.com>
-Mime-Version: 1.0 (Apple Message framework v930.3)
-Date: Fri, 3 Apr 2009 19:53:06 +0200
-References: <1238532011-2963-1-git-send-email-k.kooi@student.utwente.nl>
-	<19c1b8a90903311458k56ee153fkb6977ce7349b78fc@mail.gmail.com>
-	<gr2vdb$k2v$2@ger.gmane.org>
-	<200904022154.03611.raj.khem@gmail.com>
-	<be7a9f3d0904030534i7d9ea46ar8833a5b83f641d65@mail.gmail.com>
-X-Pgp-Agent: GPGMail d55 (v55, Leopard)
-X-Mailer: Apple Mail (2.930.3)
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	servicedesk@icts.utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-SA-Exim-Connect-IP: 130.89.2.13
-X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
+	(envelope-from <trini@kernel.crashing.org>) id 1Lpnhz-00043y-3u
+	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 20:01:42 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090403175901.VBUG6112.fed1rmmtao102.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Fri, 3 Apr 2009 13:59:01 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id b5z11b00S4dMFYL045z112; Fri, 03 Apr 2009 13:59:02 -0400
+X-Authority-Analysis: v=1.0 c=1 a=pnWKL9YdgUKSsCWWT-UA:9
+	a=ZdzZKDp1X39sfW1GLmmPEhap7rYA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Fri, 3 Apr 2009 10:59:01 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090403175901.GA11095@smtp.west.cox.net>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.44
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_40,FAKE_REPLY_C,
+	RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [STABLE][PATCH] gcc 4.3.x: disable thumb mode for now, glibc builds don't like it
+Subject: Re: gcc-cross-kernel-3.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,70 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 17:55:58 -0000
-X-Groupsio-MsgNum: 9056
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg=pgp-sha1; boundary="Apple-Mail-6-628465266"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Apr 2009 18:01:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---Apple-Mail-6-628465266
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+On Wed, Apr 01, 2009 at 09:48:56AM -0000, =?utf-8?b?SsO2cmcgQmFra2VyIDxqb2VyZ0BoYWtrZXIuZGU+?= wrote:
 
+> Yes, you're right. Changed patch is attached.
+[snip]
+> diff -Nur openembedded/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb build/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb
+> --- openembedded/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb	2009-03-21 10:44:02.000000000 +0100
+> +++ build/recipes/gcc/gcc-cross-kernel-3.3.4_3.3.4.bb	2009-03-21 17:39:11.000000000 +0100
+> @@ -1,2 +1,3 @@
+>  require gcc-cross-initial_${PV}.bb
+>  require gcc-cross-kernel.inc
+> +SRC_URI_append = "file://gcc334-collect2_file_open_args.patch;patch=1"
 
-Op 3 apr 2009, om 14:34 heeft Otavio Salvador het volgende geschreven:
+Grabbed this as mbox from patchwork, so I hope this gets followed-up
+right.  The patch is good, but we should be doing this for all 3.3.4's
+we have left.  I'll take care of that and push shortly.  Thanks.
 
-> On Fri, Apr 3, 2009 at 1:53 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Thursday 02 April 2009 11:16:10 Koen Kooi wrote:
->>> On 31-03-09 23:58, Khem Raj wrote:
->>>> can you post the error message and commandline or better  
->>>> preprocessed
->>>> file of the error thats happening when compiling libgcc in thumb  
->>>> mode
->>>> plz.
->>>>
->>>> We could try to fix the libgcc problem.
->>>
->>> Any objections to this going into the stable branch till the real  
->>> bug is
->>> fixed?
->>
->> Not from me.
->>
->> Acked-by: Khem Raj  <raj.khem@gmail.com>
->
-> From my POV if it is going to stable it needs to go to dev too; even
-> if we'll provide a better fix for it later on dev.
-
-Check http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=56ff0ec54b47b82b30fa260d8048a6425e2644c9 
-  :)
-I only pluck from dev -> stable currently.
-
-regards,
-
-Koen
-
->
-> -- 
-> Otavio Salvador                  O.S. Systems
-> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
->
+-- 
+Tom Rini
 
 
---Apple-Mail-6-628465266
-content-type: application/pgp-signature; x-mac-type=70674453;
-	name=PGP.sig
-content-description: Dit deel van het bericht is digitaal ondertekend
-content-disposition: inline; filename=PGP.sig
-content-transfer-encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFJ1k0EMkyGM64RGpERAscJAKCPaYIK14kcFeWoUQLpPz7tsPgjwwCffrDD
-sTi44dkAGL1hMDKceQcw7Lc=
-=mVhm
------END PGP SIGNATURE-----
-
---Apple-Mail-6-628465266--
