@@ -1,33 +1,34 @@
-Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LpTjM-00069H-HR
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1LpXZM-0006bR-39
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Apr 2009 22:43:26 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KHH001IRQO8DNBN@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	02 Apr 2009 15:38:38 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 96FDF6B83B5; Thu,
-	02 Apr 2009 16:38:32 -0400 (EDT)
-Date: Thu, 02 Apr 2009 16:38:32 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090402203832.GC12552@denix.org>
-References: <20090402185006.GA12552@denix.org>
-	<20090402191118.GC30840@smtp.west.cox.net>
-MIME-version: 1.0
-In-reply-to: <20090402191118.GC30840@smtp.west.cox.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.17
-X-SA-Exim-Mail-From: denis@denix.org
+	Fri, 03 Apr 2009 02:47:42 +0200
+Received: (qmail invoked by alias); 03 Apr 2009 00:45:08 -0000
+Received: from f053009085.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.9.85]
+	by mail.gmx.net (mp037) with SMTP; 03 Apr 2009 02:45:08 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19AqOlVA/JAgAmB2Dnugi81z1QW/BXXsNPk9XpssV
+	Uw6wFennxpOOLZ
+Message-ID: <49D55C18.5020301@gmx.net>
+Date: Fri, 03 Apr 2009 02:45:12 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org, lxgmail@foxmail.com
+References: <tencent_4DD8B58F5C313E372BDDC735@qq.com>
+In-Reply-To: <tencent_4DD8B58F5C313E372BDDC735@qq.com>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.53
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: theBohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_00,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_PASS
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: package_ipk.bbclass fails due to a wrong version of a	package
+Subject: Re: [oe-commits] seekhelp OE!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +42,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2009 20:43:48 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 03 Apr 2009 00:47:42 -0000
+X-Groupsio-MsgNum: 9029
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigA8A49073750C535166253059"
 
-On Thu, Apr 02, 2009 at 12:11:18PM -0700, Tom Rini wrote:
-> On Thu, Apr 02, 2009 at 02:50:06PM -0400, Denys Dmytriyenko wrote:
-> 
-> > Hi,
-> > 
-> > I've been debugging this issue for a while now w/o much success.
-> > 
-> > We have following recipes in play:
-> > curl_7.19.0.bb
-> > curl-native_7.18.2.bb
-> > curl-sdk_7.18.2.bb
-> > 
-> > None of those set PV explicitly, so they are picked up from the filename.
-> 
-> Hmm, if you throw in a -v -DDD and log all the output, do you see both
-> curl_7.18.2.bb being loaded (for -sdk) and curl_7.19.0.bb (for target)
-> being loaded up?
+--------------enigA8A49073750C535166253059
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Nope. While trying to build curl-sdk_7.18.2.bb there is no mentioning of 
-7.19.0 (grepped the output) until the do_package_write_ipk, where it tried to 
-create a lock file, as I mentioned above:
+Hi =E5=B0=8F=E5=88=9A,
 
-NOTE: package curl-sdk-7.18.2-r0: task do_package_write_ipk: started
-DEBUG: mkdirhier(/oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-sdk-7.18.2-r0/image)
-DEBUG: mkdirhier(/oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-7.19.0-r1/image)
-ERROR: Error, lockfile path does not exist!: /oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-7.19.0-r1/install
+=E5=B0=8F=E5=88=9A schrieb:
+> OE obtain to this website has been=20
+> http://ewi546.ewi.utwente.nl/OE/OE.db.bz2=20
+> why not download it.  Which website can download OE.db.bz2 ?
 
-The second mkdirhier() is where it fails and it is called from lockfile(), 
-which gets called from do_package_ipk()...
+What you are trying to download is a monotone database. Monotone is not
+used for OpenEmbedded. It was used until last year. Since half a year
+OpenEmbedded uses 'git'.
 
-BTW, this was a i686-generic build, thus i686-i686-sdk path...
+All you want to know is written down here:
+http://wiki.openembedded.net/index.php/Getting_started
 
--- 
-Denys
+Regards
+Robert
+
+>=20
+> I would like to ask anyone who has encountered the same problem and I
+> thanks:
+>=20
+> lxg@ubuntu:~/travis-dev-kit$ bitbake travis-db1200-2.6
+> NOTE: Handling BitBake files: | (0011/6646) [ 0 %]ERROR: Error Method a=
+lready seen: get_kernelmajorversion in' linux_modules.bbclass' now in 'li=
+nux-kernel-base.bbclass'
+> ERROR: Error Method already seen: linux_module_packages in' linux_modul=
+es.bbclass' now in 'linux-kernel-base.bbclass'
+> NOTE: Handling BitBake files: - (0557/6646) [ 8 %]ERROR: Error Method a=
+lready seen: get_devtable_list in' image_ipk.bbclass' now in 'image.bbcla=
+ss'
+> NOTE: Handling BitBake files: | (6646/6646) [100 %]
+> BB_VERSION        =3D "1.8.10"
+> METADATA_BRANCH   =3D ""
+> METADATA_REVISION =3D ""
+> TARGET_ARCH       =3D "mipsel"
+> TARGET_OS         =3D "linux-uclibc"
+> MACHINE           =3D "db1200"
+> DISTRO            =3D "travis-uclibc"
+> DISTRO_VERSION    =3D ""
+>=20
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of org.openembedded.dev/packages/shasum/shasum-native.bb d=
+o_unpack failed
+> ERROR: Task 20 (org.openembedded.dev/packages/shasum/shasum-native.bb, =
+do_unpack) failed
+> NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rer=
+un and 1 failed.
+> ERROR: 'org.openembedded.dev/packages/shasum/shasum-native.bb' failed
+> lxg@ubuntu:~/travis-dev-kit$
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commit=
+s
+>=20
 
 
+
+--------------enigA8A49073750C535166253059
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAknVXBsACgkQG9cfwmwwEtrdWACfdbAFDDF9qD0gA4xkMlhnIl+q
+0PEAn0YDu1TGrPxOzQl8tSqsqOdPCNq0
+=aq/y
+-----END PGP SIGNATURE-----
+
+--------------enigA8A49073750C535166253059--
