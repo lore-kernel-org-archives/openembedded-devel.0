@@ -1,23 +1,31 @@
-Received: from [204.187.63.106] (helo=mail.evertz.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rlott@evertz.com>) id 1LpnAY-0005Fn-SY
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 19:31:15 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpnaL-0003jm-CN
+	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 19:53:47 +0200
+Received: (qmail 22898 invoked by uid 813007); 3 Apr 2009 17:51:12 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 3 Apr 2009 17:51:12 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 3 Apr 2009 19:51:05 +0200
+User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
+References: <200903311837.28324.marcin@juszkiewicz.com.pl>
+	<200904021325.22988.marcin@juszkiewicz.com.pl>
+	<d2b9ea600904030918s2f45debak2f76d45022fbe850@mail.gmail.com>
+In-Reply-To: <d2b9ea600904030918s2f45debak2f76d45022fbe850@mail.gmail.com>
 MIME-Version: 1.0
-Date: Fri, 3 Apr 2009 13:22:30 -0400
-Message-ID: <069B6B31F6201B4389D7EEB9AD827BCA0500604A@otis.burlington.evertz.tv>
-In-Reply-To: <ac9c93b10904030956g2e8a1663g7877947b1a17775c@mail.gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [STABLE] Where is the python-zopeinterface recipe?
-Thread-Index: Acm0fhcg3oIN9umlRpeqHnrsJobVRAAAjSZg
-From: "Rodney Lott" <rlott@evertz.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 204.187.63.106
-X-SA-Exim-Mail-From: rlott@evertz.com
-X-SA-Exim-Scanned: No (on linuxtogo.org); SA Timed out after 240 secs
-Subject: Re: [STABLE] Where is the python-zopeinterface recipe?
+Message-Id: <200904031951.12061.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
+X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
+X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Subject: Re: [STABLE] branch created: stable/2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,82 +39,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 17:33:58 -0000
-Content-class: urn:content-classes:message
+X-List-Received-Date: Fri, 03 Apr 2009 17:53:47 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
+  charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Yeah, that's where the zope-interfaces recipe is.  I am looking for the =
-python-zopeinterface.
+Dnia pi=B1tek, 3 kwietnia 2009 o 18:18:49 Esben Haabendal napisa=B3(a):
+> > No, but we require minimal versions of BitBake to be used with OE
+> > metadata so I prefer to have version which is granted to work.
+> > Imagine situation when OE.dev will require BitBake 1.8.22 which
+> > will not work with 'stable/2009' branch.
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org]On Behalf Of
-Frans Meulenbroeks
-Sent: Friday, April 03, 2009 12:56 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [STABLE] Where is the python-zopeinterface recipe?
+> I fully understand the situation, but I am just wondering if we
+> shouldn't be paying more attention to this problem.
+>
+> For the stable branches I need to maintain, I have had to make a
+> solution control which version of bitbake is used with each branch.
+> Maybe it would be worth to try work out a more general version of
+> such a solutin.
+>
+> But, I think it would be great if we "encode" into the OpenEmbedded
+> metadata which version of bitbake is recommended, and maybe even
+> which versions work and which is not expected to work. It could be
+> something as simple as adding a ".bitbake" to the top of the
+> metadata which contains a single line in the style of
+> "tags/bitbake-1.8.10", which would then make it possible for
+> people to know which version to use, and even automate
+> this in their setups.
+>
+> We could then also make bitbake aware of this file, and then print
+> out a warning if a "wrong" version is used.
+>
+> I am sure I am not the only one who have had to debug strange
+> problems before finding out that it would just be easier to go back
+> to an older bitbake version...
+>
+> It is not that it is a big problem to import BitBake into
+> OpenEmbedded, although it generally is not the best solution to many
+> things, as it makes it a bit painful to propagate eventual critical
+> fixes to all the places where it is needed, but I just think that
+> this is an important issue that is worth to find a proper solution
+> for.
+
+sanity.conf sets one variable: BB_MIN_VERSION =3D "1.8.12" and this is=20
+checked on start of each build. We bump that only when BitBake is=20
+released and if change is really required.
 
 
-$ cd recipes; find | grep zope
-/zope/zope-interfaces_3.3.0.bb
-...
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-It used to be part of the zope recipe.
 
-2009/4/3 Rodney Lott <rlott@evertz.com>:
-> Hello.
->
-> I am currently using the origins/stable/2009 branch and was trying to =
-add the python-twisted recipe to my image and I got the following =
-dependency issues:
->
-> OE Build Configuration:
-> BB_VERSION =A0 =A0 =A0 =A0=3D "1.8.13"
-> METADATA_BRANCH =A0 =3D "stable/2009"
-> METADATA_REVISION =3D "e93bd21c7a03b0e78a3097a8f924308841970429"
-> TARGET_ARCH =A0 =A0 =A0 =3D "i486"
-> TARGET_OS =A0 =A0 =A0 =A0 =3D "linux"
-> MACHINE =A0 =A0 =A0 =A0 =A0 =3D "x86"
-> DISTRO =A0 =A0 =A0 =A0 =A0 =A0=3D "minimal"
-> DISTRO_VERSION =A0 =A0=3D ".dev-snapshot-20090403"
->
-> NOTE: Resolving any missing task queue dependencies
-> ERROR: =
-'['/home/rlott/openembedded.git/recipes/python/python-twisted_8.2.0.bb']'=
- RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity =
-'python-zopeinterface' but it wasn't found in any PACKAGE or RPROVIDES =
-variables
-> NOTE: Runtime target 'python-zopeinterface' is unbuildable, =
-removing...
-> Missing or unbuildable dependency chain was: ['python-zopeinterface']
-> NOTE: Runtime target 'python-twisted' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python-twisted', =
-'python-zopeinterface']
-> ERROR: Required build target 'cp2210e-image' has no buildable =
-providers.
-> Missing or unbuildable dependency chain was: ['cp2210e-image', =
-'python-twisted', 'python-zopeinterface']
->
-> In the python-twisted_8.2.0.bb recipe, it references the =
-python-zopeinterface recipe as a dependency. =A0I couldn't find such a =
-recipe in the recipes/python subdirectory of the git branch. =A0So, is =
-this recipe merely a bookmark or is it going to be available, pending =
-approval?
->
-> Regards.
->
-> Rodney
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
