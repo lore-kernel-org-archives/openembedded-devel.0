@@ -1,20 +1,20 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpgHY-0001Ko-AB
-	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 12:05:54 +0200
-Received: (qmail 12670 invoked by uid 813007); 3 Apr 2009 10:03:19 -0000
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpgIR-0001ND-NY
+	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 12:06:55 +0200
+Received: (qmail 14826 invoked by uid 813007); 3 Apr 2009 10:04:16 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO home.localnet)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 3 Apr 2009 10:03:19 -0000
+	by 195.149.226.213 with ESMTPA; 3 Apr 2009 10:04:16 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 3 Apr 2009 12:03:18 +0200
+Date: Fri, 3 Apr 2009 12:04:18 +0200
 User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
-References: <20090403095032.GA12180@sirena.org.uk>
-In-Reply-To: <20090403095032.GA12180@sirena.org.uk>
+References: <1238737335-32556-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+In-Reply-To: <1238737335-32556-1-git-send-email-jeremy.laine@bolloretelecom.eu>
 MIME-Version: 1.0
-Message-Id: <200904031203.21619.marcin@juszkiewicz.com.pl>
+Message-Id: <200904031204.19507.marcin@juszkiewicz.com.pl>
 X-SA-Exim-Connect-IP: 195.149.226.213
 X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
@@ -23,7 +23,7 @@ X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
 	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE commit access
+Subject: Re: [STABLE][PATCH] perl-5.8.8: use LDFLAGS for shared libraries (fixes QA error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 10:05:54 -0000
-X-Groupsio-MsgNum: 9039
-Content-Type: multipart/signed; boundary="nextPart5372599.ddRIy0Sezp";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart5372599.ddRIy0Sezp
+X-List-Received-Date: Fri, 03 Apr 2009 10:06:55 -0000
 Content-Type: text/plain;
   charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Dnia pi=C4=85tek, 3 kwietnia 2009 o 11:50:33 Mark Brown napisa=C5=82(a):
-> I'd like to request OE commit access - several people have told me
-> that I should do so.  I intend to work on audio applications and
-> support for boards that I'm working with.
+Dnia pi=C4=85tek, 3 kwietnia 2009 o 07:42:15 Jeremy Lain=C3=A9 napisa=C5=82=
+(a):
+> From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+>
+>
+> Signed-off-by: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
 
-+1 from me
-
-IIRC Mark had commit access in monotone days.
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
 Regards,=20
 =2D-=20
@@ -64,16 +58,6 @@ JID:      hrw@jabber.org
 Website:  http://marcin.juszkiewicz.com.pl/
 LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
---nextPart5372599.ddRIy0Sezp
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEABECAAYFAknV3ukACgkQeQ6MlGH/2qt5zgCfSzxMBB8xK3RU18DpL1RSUAtn
-CmkAmgKJrC4/OENkhsmcg4Bz/7R4ByTc
-=TEOn
------END PGP SIGNATURE-----
 
---nextPart5372599.ddRIy0Sezp--
