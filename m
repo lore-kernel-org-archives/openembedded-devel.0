@@ -1,31 +1,37 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [130.89.2.13] (helo=mx.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LpnaL-0003jm-CN
-	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 19:53:47 +0200
-Received: (qmail 22898 invoked by uid 813007); 3 Apr 2009 17:51:12 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 3 Apr 2009 17:51:12 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 3 Apr 2009 19:51:05 +0200
-User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
-References: <200903311837.28324.marcin@juszkiewicz.com.pl>
-	<200904021325.22988.marcin@juszkiewicz.com.pl>
-	<d2b9ea600904030918s2f45debak2f76d45022fbe850@mail.gmail.com>
-In-Reply-To: <d2b9ea600904030918s2f45debak2f76d45022fbe850@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200904031951.12061.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+	(envelope-from <k.kooi@student.utwente.nl>) id 1LpncJ-0003nE-Q8
+	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 19:55:55 +0200
+Received: from [172.20.1.5] (vpn006064.vpn.utwente.nl [130.89.6.64])
+	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id n33Hr9pw015418; 
+	Fri, 3 Apr 2009 19:53:09 +0200
+Message-Id: <C449F935-2719-4D1B-ACFE-4515E760F704@student.utwente.nl>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: Otavio Salvador <otavio@ossystems.com.br>
+In-Reply-To: <be7a9f3d0904030534i7d9ea46ar8833a5b83f641d65@mail.gmail.com>
+Mime-Version: 1.0 (Apple Message framework v930.3)
+Date: Fri, 3 Apr 2009 19:53:06 +0200
+References: <1238532011-2963-1-git-send-email-k.kooi@student.utwente.nl>
+	<19c1b8a90903311458k56ee153fkb6977ce7349b78fc@mail.gmail.com>
+	<gr2vdb$k2v$2@ger.gmane.org>
+	<200904022154.03611.raj.khem@gmail.com>
+	<be7a9f3d0904030534i7d9ea46ar8833a5b83f641d65@mail.gmail.com>
+X-Pgp-Agent: GPGMail d55 (v55, Leopard)
+X-Mailer: Apple Mail (2.930.3)
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	servicedesk@icts.utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-SA-Exim-Connect-IP: 130.89.2.13
+X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,RDNS_NONE autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE] branch created: stable/2009
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [STABLE][PATCH] gcc 4.3.x: disable thumb mode for now, glibc builds don't like it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,60 +45,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 17:53:47 -0000
-Content-Type: text/plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 03 Apr 2009 17:55:58 -0000
+X-Groupsio-MsgNum: 9056
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg=pgp-sha1; boundary="Apple-Mail-6-628465266"
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=B1tek, 3 kwietnia 2009 o 18:18:49 Esben Haabendal napisa=B3(a):
-> > No, but we require minimal versions of BitBake to be used with OE
-> > metadata so I prefer to have version which is granted to work.
-> > Imagine situation when OE.dev will require BitBake 1.8.22 which
-> > will not work with 'stable/2009' branch.
+--Apple-Mail-6-628465266
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
-> I fully understand the situation, but I am just wondering if we
-> shouldn't be paying more attention to this problem.
+
+Op 3 apr 2009, om 14:34 heeft Otavio Salvador het volgende geschreven:
+
+> On Fri, Apr 3, 2009 at 1:53 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> On Thursday 02 April 2009 11:16:10 Koen Kooi wrote:
+>>> On 31-03-09 23:58, Khem Raj wrote:
+>>>> can you post the error message and commandline or better  
+>>>> preprocessed
+>>>> file of the error thats happening when compiling libgcc in thumb  
+>>>> mode
+>>>> plz.
+>>>>
+>>>> We could try to fix the libgcc problem.
+>>>
+>>> Any objections to this going into the stable branch till the real  
+>>> bug is
+>>> fixed?
+>>
+>> Not from me.
+>>
+>> Acked-by: Khem Raj  <raj.khem@gmail.com>
 >
-> For the stable branches I need to maintain, I have had to make a
-> solution control which version of bitbake is used with each branch.
-> Maybe it would be worth to try work out a more general version of
-> such a solutin.
+> From my POV if it is going to stable it needs to go to dev too; even
+> if we'll provide a better fix for it later on dev.
+
+Check http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=56ff0ec54b47b82b30fa260d8048a6425e2644c9 
+  :)
+I only pluck from dev -> stable currently.
+
+regards,
+
+Koen
+
 >
-> But, I think it would be great if we "encode" into the OpenEmbedded
-> metadata which version of bitbake is recommended, and maybe even
-> which versions work and which is not expected to work. It could be
-> something as simple as adding a ".bitbake" to the top of the
-> metadata which contains a single line in the style of
-> "tags/bitbake-1.8.10", which would then make it possible for
-> people to know which version to use, and even automate
-> this in their setups.
+> -- 
+> Otavio Salvador                  O.S. Systems
+> E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 >
-> We could then also make bitbake aware of this file, and then print
-> out a warning if a "wrong" version is used.
->
-> I am sure I am not the only one who have had to debug strange
-> problems before finding out that it would just be easier to go back
-> to an older bitbake version...
->
-> It is not that it is a big problem to import BitBake into
-> OpenEmbedded, although it generally is not the best solution to many
-> things, as it makes it a bit painful to propagate eventual critical
-> fixes to all the places where it is needed, but I just think that
-> this is an important issue that is worth to find a proper solution
-> for.
-
-sanity.conf sets one variable: BB_MIN_VERSION =3D "1.8.12" and this is=20
-checked on start of each build. We bump that only when BitBake is=20
-released and if change is really required.
 
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+--Apple-Mail-6-628465266
+content-type: application/pgp-signature; x-mac-type=70674453;
+	name=PGP.sig
+content-description: Dit deel van het bericht is digitaal ondertekend
+content-disposition: inline; filename=PGP.sig
+content-transfer-encoding: 7bit
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFJ1k0EMkyGM64RGpERAscJAKCPaYIK14kcFeWoUQLpPz7tsPgjwwCffrDD
+sTi44dkAGL1hMDKceQcw7Lc=
+=mVhm
+-----END PGP SIGNATURE-----
 
-
+--Apple-Mail-6-628465266--
