@@ -1,48 +1,45 @@
-Received: from [74.125.46.155] (helo=yw-out-1718.google.com)
+Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1LplDV-0006ZP-Rn
+	(envelope-from <esbenhaabendal@gmail.com>) id 1Lpm8v-00031D-VM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 17:22:18 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so784711ywk.42
+	Fri, 03 Apr 2009 18:21:29 +0200
+Received: by yx-out-1718.google.com with SMTP id 3so803743yxi.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Apr 2009 08:19:29 -0700 (PDT)
+	Fri, 03 Apr 2009 09:18:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=fsUFtbUPykQmWa15M3+ZifdriC8DjDG1Lfl0owAok4U=;
-	b=qJo9jkwGh24k+R+nxXE9+EUb3HKerpkSX5hBOqIAehWIRvBjUxb1ZrhfAUlWT3YBss
-	Se3fOZyCtP4fDP1bysOpm7nBO1rFDlXY5vLr1kJ46wuaa4Bjee07nvSn/bKYnSUOLdvN
-	52id9f11+oss2WihsEhwgrZrBniZFGhsxGcrA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=obKskppRevSSeE4ruD4hO/oFLgqLGVLVawDbLdyhcuHebp/3TfWEXUV7kpRk6AHuo1
-	8EM8GhfJpfNFBaSGTmOfmsVGnuyBph3LLiEe/dtxoPHzlRFQ+R9sLQGSxDBgURzTyImk
-	D7JY9rteYimkmT6z9HdTqejqsSUSr6Gd0SQkM=
+	bh=G9SyXd174QCDWKnwefT8IyQztDfsl1UKgqE6JXv79eE=;
+	b=NAc2nv23oIvYs5KwPzmL5sXyDx/dgXmQGeyZlycA0ZlyQJeVvx6w7J9vDJh4CKXdYF
+	bBlLXjGdPUbEXdNFIGDrtSGSO2tFRXvqWHq0P1ZxSCCQkfiMEv57MBrxLoXgEnGrrO/t
+	wlH3zV3OBnTJmSDIu59GSzPWgxSksqaehBD0o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=boZ6iU3HzdLbTsua4OqCLlO5L0Nqp6MBniYSEUrllMozFtEKOhCo7k6Vwcygwh1f3g
+	xKPcF/Ap04QwkzniQDKrlgh3lb6edRaQNyEDv6r/v36g1k6E6owWZaipOzK9qcbzOWwW
+	r78IYQfFQhLpx5HCJy1+G+cQMANMBj42U0bUY=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.151.15.20 with SMTP id s20mr2429523ybi.165.1238771969875; Fri, 
-	03 Apr 2009 08:19:29 -0700 (PDT)
-In-Reply-To: <200904030845.06338.hs4233@mail.mn-solutions.de>
-References: <12386320381719-git-send-email-clarson@mvista.com>
-	<200904030845.06338.hs4233@mail.mn-solutions.de>
-Date: Fri, 3 Apr 2009 08:19:29 -0700
-X-Google-Sender-Auth: 06771f0090c17fd3
-Message-ID: <b6ebd0a50904030819h5aae9dfem810be6ba1821d4b0@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
+Received: by 10.100.240.9 with SMTP id n9mr1780949anh.135.1238775529209; Fri, 
+	03 Apr 2009 09:18:49 -0700 (PDT)
+In-Reply-To: <200904021325.22988.marcin@juszkiewicz.com.pl>
+References: <200903311837.28324.marcin@juszkiewicz.com.pl>
+	<d2b9ea600904020352v79eda72fk2fde69139ac29e10@mail.gmail.com>
+	<200904021325.22988.marcin@juszkiewicz.com.pl>
+Date: Fri, 3 Apr 2009 18:18:49 +0200
+Message-ID: <d2b9ea600904030918s2f45debak2f76d45022fbe850@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.46.155
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 74.125.44.152
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=AWL,BAYES_05,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_20,RDNS_NONE,SPF_PASS
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 1/2] bitbake.conf, collections.inc: Add COLLECTIONS 	mechanism w/ a sane default.
+Subject: Re: [STABLE] branch created: stable/2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,37 +53,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 15:22:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Apr 2009 16:21:32 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 2, 2009 at 11:45 PM, Holger Schurig
-<hs4233@mail.mn-solutions.de> wrote:
->> +# Take a list of directories in COLLECTIONS, in priority order (highest to
->> +# lowest), and use those to populate BBFILES, BBFILE_COLLECTIONS,
->> +# BBFILE_PATTERN_*, and BBFILE_PRIORITY_*.
->> +
+On Thu, Apr 2, 2009 at 1:25 PM, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> Dnia czwartek, 2 kwietnia 2009 o 12:52:51 Esben Haabendal napisa=B3(a):
+>> On Tue, Mar 31, 2009 at 6:37 PM, Marcin Juszkiewicz
+>>
+>> <marcin@juszkiewicz.com.pl> wrote:
+>> > I also imported BitBake 1.8.12 (last release) into "stable/2009"
+>> > branch as this is minimal stable version which works with this
+>> > repository.
+>>
+>> Is this the new strategy for handling depedency on specific versions
+>> of BitBake?
 >
-> I like this idea, but I think that this *.inc file
-> needs a larger comment block, e.g. not only stating
-> what it does, but also why that would be handy. A
-> typical use case or maybe a problem-solution section.
->
-> I think when more of the *.inc and *.bbclass files get
-> such in-file comments it'll be easier for people skimming
-> throught the code to grasp the big picture.
+> No, but we require minimal versions of BitBake to be used with OE
+> metadata so I prefer to have version which is granted to work. Imagine
+> situation when OE.dev will require BitBake 1.8.22 which will not work
+> with 'stable/2009' branch.
 
-Arguably, it could apply to everyone's use cases.  It's more
-convenient to use than BBFILES even when you aren't relying on
-bitbake's collections support to make it prefer the same recipe in one
-collection over another, imo.
--- 
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+I fully understand the situation, but I am just wondering if we shouldn't b=
+e
+paying more attention to this problem.
+
+For the stable branches I need to maintain, I have had to make a solution
+control which version of bitbake is used with each branch. Maybe it would
+be worth to try work out a more general version of such a solutin.
+
+But, I think it would be great if we "encode" into the OpenEmbedded
+metadata which version of bitbake is recommended, and maybe even
+which versions work and which is not expected to work. It could be
+something as simple as adding a ".bitbake" to the top of the
+metadata which contains a single line in the style of
+"tags/bitbake-1.8.10", which would then make it possible for
+people to know which version to use, and even automate
+this in their setups.
+
+We could then also make bitbake aware of this file, and then print
+out a warning if a "wrong" version is used.
+
+I am sure I am not the only one who have had to debug strange
+problems before finding out that it would just be easier to go back
+to an older bitbake version...
+
+It is not that it is a big problem to import BitBake into OpenEmbedded,
+although it generally is not the best solution to many things, as it
+makes it a bit painful to propagate eventual critical fixes to all
+the places where it is needed, but I just think that this is an
+important issue that is worth to find a proper solution for.
+
+Regards,
+--=20
+Esben Haabendal, Senior Software Consultant
+Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
+Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
+WWW: http://www.doredevelopment.dk
 
 
