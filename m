@@ -1,31 +1,29 @@
-Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1Lpgz4-0007cw-Ga
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 12:50:52 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1Lpgwe-0004Ck-8O
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 11:48:20 +0100
-Date: Fri, 3 Apr 2009 11:48:20 +0100
-From: Mark Brown <broonie@sirena.org.uk>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LphT8-0004ws-3J
+	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 13:21:58 +0200
+Received: (qmail 20884 invoked by uid 813007); 3 Apr 2009 11:19:23 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 3 Apr 2009 11:19:23 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090403104820.GB12180@sirena.org.uk>
-References: <20090403095032.GA12180@sirena.org.uk>
-	<200904031203.21619.marcin@juszkiewicz.com.pl>
+Date: Fri, 3 Apr 2009 13:19:21 +0200
+User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
+References: <1238737194-32521-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+In-Reply-To: <1238737194-32521-1-git-send-email-jeremy.laine@bolloretelecom.eu>
 MIME-Version: 1.0
-In-Reply-To: <200904031203.21619.marcin@juszkiewicz.com.pl>
-X-Cookie: I like your SNOOPY POSTER!!
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 80.68.93.111
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
+Message-Id: <200904031319.22215.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
 	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE commit access
+Subject: Re: [STABLE][PATCH] qt4-tools-native: set LFLAGS to pick up zlib from staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,15 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 10:50:52 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 03 Apr 2009 11:21:58 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Fri, Apr 03, 2009 at 12:03:18PM +0200, Marcin Juszkiewicz wrote:
+Dnia pi=C4=85tek, 3 kwietnia 2009 o 07:39:54 Jeremy Lain=C3=A9 napisa=C5=82=
+(a):
+> From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+>
+>
+> Signed-off-by: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-> IIRC Mark had commit access in monotone days.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-I had root on one of the monotone mirrors so technically I was able to
-do commits but that's not quite the same thing :)
+
 
 
