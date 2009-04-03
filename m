@@ -1,34 +1,29 @@
-Received: from [59.124.115.149] (helo=aakash.openmoko.org)
+Received: from [204.187.63.106] (helo=mail.evertz.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nytowl@openmoko.org>) id 1LpjyD-0002n8-Rn
+	(envelope-from <rlott@evertz.com>) id 1Lpkvd-0000uZ-7m
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 16:02:14 +0200
-Received: from s0106001c100a3234.cg.shawcable.net ([70.73.132.19]
-	helo=[172.16.14.116]) by aakash.openmoko.org with esmtpsa (SSL
-	3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <nytowl@openmoko.org>) id 1LpjvW-0004I9-M4
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 21:59:33 +0800
-From: Angus Ainslie <nytowl@openmoko.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <be7a9f3d0904030535v6d51a151v6245e607701714e7@mail.gmail.com>
-References: <20090403095032.GA12180@sirena.org.uk>
-	<200904031203.21619.marcin@juszkiewicz.com.pl>
-	<20090403104820.GB12180@sirena.org.uk>
-	<be7a9f3d0904030535v6d51a151v6245e607701714e7@mail.gmail.com>
-Date: Fri, 03 Apr 2009 07:59:13 -0600
-Message-Id: <1238767153.7128.258.camel@alap>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-SA-Exim-Connect-IP: 59.124.115.149
-X-SA-Exim-Mail-From: nytowl@openmoko.org
+	Fri, 03 Apr 2009 17:03:36 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Fri, 3 Apr 2009 11:00:59 -0400
+Message-ID: <069B6B31F6201B4389D7EEB9AD827BCA05006047@otis.burlington.evertz.tv>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [STABLE] Where is the python-zopeinterface recipe?
+Thread-Index: Acm0bP89mI9OmCq6TP+6+/u/+ejz9w==
+From: "Rodney Lott" <rlott@evertz.com>
+To: "OE-Development Mailing List \(E-mail\)"
+	<openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 204.187.63.106
+X-SA-Exim-Mail-From: rlott@evertz.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_05,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE commit access
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [STABLE] Where is the python-zopeinterface recipe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +37,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 14:02:14 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Apr 2009 15:03:36 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2009-04-03 at 09:35 -0300, Otavio Salvador wrote:
-> On Fri, Apr 3, 2009 at 7:48 AM, Mark Brown <broonie@sirena.org.uk> wrote:
-> > On Fri, Apr 03, 2009 at 12:03:18PM +0200, Marcin Juszkiewicz wrote:
-> >
-> >> IIRC Mark had commit access in monotone days.
-> >
-> > I had root on one of the monotone mirrors so technically I was able to
-> > do commits but that's not quite the same thing :)
-> 
-> +1 from me! :-)
-> 
+Hello.
 
-Not sure if my vote counts but I'd say +1 
+I am currently using the origins/stable/2009 branch and was trying to =
+add the python-twisted recipe to my image and I got the following =
+dependency issues:
 
+OE Build Configuration:
+BB_VERSION        =3D "1.8.13"
+METADATA_BRANCH   =3D "stable/2009"
+METADATA_REVISION =3D "e93bd21c7a03b0e78a3097a8f924308841970429"
+TARGET_ARCH       =3D "i486"
+TARGET_OS         =3D "linux"
+MACHINE           =3D "x86"
+DISTRO            =3D "minimal"
+DISTRO_VERSION    =3D ".dev-snapshot-20090403"
 
+NOTE: Resolving any missing task queue dependencies
+ERROR: =
+'['/home/rlott/openembedded.git/recipes/python/python-twisted_8.2.0.bb']'=
+ RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity =
+'python-zopeinterface' but it wasn't found in any PACKAGE or RPROVIDES =
+variables
+NOTE: Runtime target 'python-zopeinterface' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python-zopeinterface']
+NOTE: Runtime target 'python-twisted' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python-twisted', =
+'python-zopeinterface']
+ERROR: Required build target 'cp2210e-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['cp2210e-image', =
+'python-twisted', 'python-zopeinterface']
+
+In the python-twisted_8.2.0.bb recipe, it references the =
+python-zopeinterface recipe as a dependency.  I couldn't find such a =
+recipe in the recipes/python subdirectory of the git branch.  So, is =
+this recipe merely a bookmark or is it going to be available, pending =
+approval?
+
+Regards.
+
+Rodney
 
