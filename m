@@ -1,45 +1,32 @@
-Received: from [209.85.132.241] (helo=an-out-0708.google.com)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LpifH-0004KP-1k
+	(envelope-from <dp@xora.org.uk>) id 1LpjYI-0002HV-Uh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 14:38:33 +0200
-Received: by an-out-0708.google.com with SMTP id b2so1320458ana.42
+	Fri, 03 Apr 2009 15:35:41 +0200
+Received: by ewy20 with SMTP id 20so1015797ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Apr 2009 05:35:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=X67AT1wLyZ93QpV5NwC2fk3MVfO6rf/qNlFQLcLJpBU=;
-	b=ZZx3rl92seYpwGXTMYx+4erFFMsB+W9Xt0tGffpWkn1nzLT8MSAzpOlwNN4NjV2W6g
-	YCZx7jcssH667I+AHp0ilQiytQCuJCdxlli4zDz4wY/6QvQEBWgwkN4LUFkgrVzGqg8O
-	Pjj3IU1bTX1+0k9FEeKk46CSAamHGNLk7vVXY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=Bi3gvAkWp+UslqWWyvz7PYIiPaj3Oo3ptkjNhoAYM/pCZHVmpw8osH8aZ0Yy3bimu4
-	zdhpOb59qFTtOH5VtmXzuSB+iiBC+U+PqwHbw/Mst2Dt9S013jEY32jrsrMvMM9FJg5G
-	328bssiwVXEVmuaF1YHXRukMqVo3yEKl1HcEQ=
+	Fri, 03 Apr 2009 06:32:49 -0700 (PDT)
+Received: by 10.216.52.203 with SMTP id e53mr399909wec.209.1238765569382;
+	Fri, 03 Apr 2009 06:32:49 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 23sm2936379eya.46.2009.04.03.06.32.48
+	(version=SSLv3 cipher=RC4-MD5); Fri, 03 Apr 2009 06:32:48 -0700 (PDT)
+Message-ID: <49D60FFF.7010404@xora.org.uk>
+Date: Fri, 03 Apr 2009 14:32:47 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.132.4 with SMTP id f4mr1858573and.127.1238762154990; Fri, 
-	03 Apr 2009 05:35:54 -0700 (PDT)
-In-Reply-To: <20090403104820.GB12180@sirena.org.uk>
-References: <20090403095032.GA12180@sirena.org.uk>
-	<200904031203.21619.marcin@juszkiewicz.com.pl>
-	<20090403104820.GB12180@sirena.org.uk>
-Date: Fri, 3 Apr 2009 09:35:54 -0300
-X-Google-Sender-Auth: 395a078bc4e408a7
-Message-ID: <be7a9f3d0904030535v6d51a151v6245e607701714e7@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.132.241
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+References: <20090403095032.GA12180@sirena.org.uk>
+In-Reply-To: <20090403095032.GA12180@sirena.org.uk>
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 209.85.219.172
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: OE commit access
@@ -56,23 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 12:38:33 -0000
+X-List-Received-Date: Fri, 03 Apr 2009 13:35:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 3, 2009 at 7:48 AM, Mark Brown <broonie@sirena.org.uk> wrote:
-> On Fri, Apr 03, 2009 at 12:03:18PM +0200, Marcin Juszkiewicz wrote:
->
->> IIRC Mark had commit access in monotone days.
->
-> I had root on one of the monotone mirrors so technically I was able to
-> do commits but that's not quite the same thing :)
+Mark Brown wrote:
+> I'd like to request OE commit access - several people have told me that
+> I should do so.  I intend to work on audio applications and support for
+> boards that I'm working with.
+>   
 
-+1 from me! :-)
+Being the guy who tells me how to unb0rk my git mistakes +1 from me.
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+I guess with 3 votes you should send your ssh key to mickey!
+
+Graeme
+
 
 
