@@ -1,13 +1,13 @@
 Received: from [128.2.201.16] (helo=jackfruit.srv.cs.cmu.edu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dhuggins@cs.cmu.edu>) id 1LprNj-0005GN-Hl
-	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 23:57:06 +0200
+	(envelope-from <dhuggins@cs.cmu.edu>) id 1LprOf-0005I3-06
+	for openembedded-devel@openembedded.org; Fri, 03 Apr 2009 23:58:00 +0200
 Received: from [128.2.222.132] (LIMA-2.SPEECH.CS.CMU.EDU [128.2.222.132])
 	by jackfruit.srv.cs.cmu.edu (8.13.6/8.13.6) with ESMTP id
-	n33KsvQq014293 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 3 Apr 2009 16:54:57 -0400 (EDT)
-Message-ID: <49D677A3.2070702@cs.cmu.edu>
-Date: Fri, 03 Apr 2009 16:54:59 -0400
+	n33KitcJ014009 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 3 Apr 2009 16:44:55 -0400 (EDT)
+Message-ID: <49D67549.7040001@cs.cmu.edu>
+Date: Fri, 03 Apr 2009 16:44:57 -0400
 From: David Huggins-Daines <dhuggins@cs.cmu.edu>
 User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
@@ -21,7 +21,7 @@ X-Spam-Status: No, score=-6.5 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
 	RDNS_NONE autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: uclibc build failure on armv4t with -mthumb (internal compiler error)
+Subject: /linuxrc link to /bin/busybox causes booting to fail (sysvinit should be used instead)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,40 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 21:57:06 -0000
+X-List-Received-Date: Fri, 03 Apr 2009 21:58:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I'm having trouble building uclibc in thumb mode for armv4t.  It is 
-getting an internal compiler error when compiling ldso.  The error 
-message is:
+Hi,
 
-NOTE: make STRIPTOOL=true LD=arm-angstrom-linux-uclibcgnueabi-ld 
-LOCALE_DATA_FILENAME=uClibc-locale-030818.arm.tgz CC=ccache 
-arm-angstrom-linux-uclibcgnueabi-gcc -march=armv4t -mtune=arm920t 
--mthumb-interwork -mthumb 
-HOSTCFLAGS=-I/home/dhuggins/Projects/TeRK/oe/tmp/staging/x86_64-linux/usr/include
-  CC ldso/ldso/ldso.oS
-ldso/ldso/dl-elf.c: In function '_dl_dprintf':
-ldso/ldso/dl-elf.c:913: error: unable to find a register to spill in 
-class 'LO_REGS'
-ldso/ldso/dl-elf.c:913: error: this is the insn:
-(insn 121 120 122 6 (set (reg/f:SI 406)
-        (plus:SI (reg/f:SI 25 sfp)
-            (reg:SI 405))) 5 {*thumb_addsi3} (nil)
-    (expr_list:REG_DEAD (reg:SI 405)
-        (nil)))
-ldso/ldso/dl-elf.c:913: confused by earlier errors, bailing out
-make: *** [ldso/ldso/ldso.oS] Error 1
-FATAL: oe_runmake failed
+When booting base-image or minimal-image from a ramdisk, I get errors 
+like the following:
 
-I'm using the stable/2009 branch and this is GCC 4.2.4-r5
+RAMDISK: Compressed image found at block 0
+VFS: Mounted root (ext2 filesystem) on device 1:0.
+init started: BusyBox v1.13.2 (2009-04-03 15:54:42 EDT)
+Bad inittab entry at line 5
+can't open /dev/si: No such file or directory
+can't open /dev/~~: No such file or directory
+can't open /dev/l0: No such file or directory
+can't open /dev/l1: No such file or directory
+can't open /dev/l2: No such file or directory
+can't open /dev/l3: No such file or directory
+can't open /dev/l4: No such file or directory
+can't open /dev/l5: No such file or directory
+can't open /dev/l6: No such file or directory
+can't open /dev/z6: No such file or directory
+can't open /dev/S: No such file or directory
+process '/sbin/sulogin' (pid 167) exited. Scheduling for restart.
+process '/sbin/getty 57600 ttyAM0' (pid 168) exited. Scheduling for restart.
 
-I believe there were some patches for this recently (in particular, 
-building ldso with -O0) but I'm still getting the error - note that it 
-is in a different function than the one seen earlier.
+This is because, even though /sbin/init points to /sbin/init.sysvinit, 
+there is also a /linuxrc -> /bin/busybox link, which the kernel uses in 
+preference, causing busybox to run as 'init'.  The problem is that  
+busybox init uses a different syntax from sysvinit.
 
-I worked around this by forcing ldso to compile with the ARM instruction 
-set, but I'm not sure if this is the right approach or not.
+I think this problem might have started when inittab support was added 
+to busybox...
+
+Is there a good reason for that /linuxrc link?  And if not, where is it 
+coming from, so that I can remove it?
+
+Thanks!
 
 
