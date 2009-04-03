@@ -1,40 +1,50 @@
-Received: from [208.51.207.131] (helo=mail.2mi.com.br)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jader@2mi.com.br>) id 1Lpolk-0002KS-KO
+	(envelope-from <raj.khem@gmail.com>) id 1LpopI-0002Sd-VM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Apr 2009 21:09:41 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.2mi.com.br (Postfix) with ESMTP id 1B22F5010901
+	Fri, 03 Apr 2009 21:13:19 +0200
+Received: by rv-out-0708.google.com with SMTP id k29so1176896rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Apr 2009 16:13:51 -0300 (BRT)
-X-Virus-Scanned: amavisd-new at 2mi.com.br
-Received: from mail.2mi.com.br ([127.0.0.1])
-	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 14X9nTZXIKhL
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Apr 2009 16:13:42 -0300 (BRT)
-Received: from [192.168.1.103] (unknown [189.120.39.163])
-	by mail.2mi.com.br (Postfix) with ESMTP id 99A0450277D0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Apr 2009 16:13:41 -0300 (BRT)
-Message-ID: <49D65E44.2080002@2mi.com.br>
-Date: Fri, 03 Apr 2009 16:06:44 -0300
-From: "Jader H. Silva" <jader@2mi.com.br>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	Fri, 03 Apr 2009 12:10:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=GkNRG0LNS6dYbabO9AQaw3yuWMQudxvCeXyQeqYxm4U=;
+	b=OVGKiFhMn40WZpAUiJ5TeoRrmxhabApXrxp46rdROyrKToD81X0QdqYZKpObAQq2yQ
+	u/vrcLbVoF7NV4/ic/C3kqfM+6tBk1KaY2ly5Bl9ZldJl4z0WieIn0fD7d75XD/7tbfl
+	iQtU2zZal08EvKRhtnpgRTnY7PmjGS8GSll18=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=fV9vrPbsSLhyuwaR9b18BgyFtcp5g4617IRM7mNeQ/Z/4tv7kQ9lpPfk0wth3tZXYW
+	ebp3b8SetLbYLOFM7+lJa6+7tS3E+11bG34HE6VjZYSq3gwHDF3gozMYdErunNntU6CM
+	Ri7JoHQMhTZ9Ccvw8Sue+/IHQw4FOu3Bw7Qrw=
+Received: by 10.114.106.13 with SMTP id e13mr749150wac.128.1238785843375;
+	Fri, 03 Apr 2009 12:10:43 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-4-184.dsl.pltn13.sbcglobal.net
+	[71.146.4.184])
+	by mx.google.com with ESMTPS id n33sm2546975wag.18.2009.04.03.12.10.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 03 Apr 2009 12:10:42 -0700 (PDT)
+Date: Fri, 3 Apr 2009 12:10:39 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1236890935.6250.26.camel@northpole>	<1237220171.4020.4.camel@faraday>	<be7a9f3d0903161800i3f6735c8u7eafe009f2cb0b88@mail.gmail.com>	<1237928739.20348.3.camel@northpole>
-	<878wmu48qc.fsf@neumann.lab.ossystems.com.br>
-In-Reply-To: <878wmu48qc.fsf@neumann.lab.ossystems.com.br>
-X-SA-Exim-Connect-IP: 208.51.207.131
-X-SA-Exim-Mail-From: jader@2mi.com.br
+Message-ID: <20090403191039.GB29161@gmail.com>
+References: <20090403171052.GE30840@smtp.west.cox.net>
+MIME-Version: 1.0
+In-Reply-To: <20090403171052.GE30840@smtp.west.cox.net>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+X-SA-Exim-Connect-IP: 209.85.198.245
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,
-	SPF_HELO_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: calibrateproto git tag
+Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: Re: [PATCH] wireless-tools: Fix libiw/ifrename packages, bump	PR.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,100 +58,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 19:09:41 -0000
-Content-Type: multipart/mixed; boundary="------------040900010600040406050105"
+X-List-Received-Date: Fri, 03 Apr 2009 19:13:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------040900010600040406050105
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-
-Otavio Salvador escreveu:
-> "Jader H. Silva" <jader@2mi.com.br> writes:
->
->  =20
->> Em Seg, 2009-03-16 =C3=A0s 22:00 -0300, Otavio Salvador escreveu:
->>    =20
->>> 2009/3/16 Marcos Amorim <marcos@2mi.com.br>:
->>>      =20
->>>> libxcalibrate_git add tag
->>>>
->>>>
->>>> git diff packages/xorg-lib/libxcalibrate_git.bb
->>>> diff --git a/packages/xorg-lib/libxcalibrate_git.bb
->>>> b/packages/xorg-lib/libxcalibrate_git.bb
->>>> index f9e1587..7f889df 100644
->>>> --- a/packages/xorg-lib/libxcalibrate_git.bb
->>>> +++ b/packages/xorg-lib/libxcalibrate_git.bb
->>>> @@ -6,7 +6,7 @@ DEPENDS =3D "virtual/libx11 calibrateproto libxext"
->>>>  PV =3D "0.0+gitr${SRCREV}"
->>>>  PE =3D "1"
->>>>
->>>> -SRC_URI =3D
->>>> "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3D=
-git"
->>>> +SRC_URI =3D
->>>> "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=3D=
-git;tag=3Dmaster"
->>>>        =20
->>> Please use AUTOREV in conf/distro/include/insane-srcrevs.inc and a go=
-od
->>> one at conf/distro/include/sane-srcrevs.inc. This makes images easier=
- to
->>> be reproducable.
->>>      =20
->> Add calibrateproto sane revision to sane-srcrevs.inc, corrected this b=
-ug
->> in my compilation.
->> Patch is attached.
->>    =20
->
-> [...]
->
-> Please send the patch in git format-patch; so I can queue it here in my
-> tree and push it together with other fixes.
->
->  =20
-
-Patch in git format-patch is attached, sorry for the delay.
-
---------------040900010600040406050105
-Content-Type: text/x-patch;
- name="0001-Add-calibrateproto-and-libxcalibrate-sane-srcrevs.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename*0="0001-Add-calibrateproto-and-libxcalibrate-sane-srcrevs.patch"
-
-From 7511e3619f63200239efcff64996616c700024ab Mon Sep 17 00:00:00 2001
-From: Jader H. Silva <vo@northpole.(none)>
-Date: Fri, 3 Apr 2009 16:00:17 -0300
-Subject: [PATCH] Add calibrateproto and libxcalibrate sane srcrevs
-
----
- conf/distro/include/sane-srcrevs.inc |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-index fc341f3..bb9b75b 100644
---- a/conf/distro/include/sane-srcrevs.inc
-+++ b/conf/distro/include/sane-srcrevs.inc
-@@ -19,6 +19,7 @@ SRCREV_pn-assassin ?= "268"
- SRCREV_pn-assassin-thumbnail ?= "4690"
- SRCREV_pn-bfin-uclibc ?= "1857"
- SRCREV_pn-bootchart-lite ?= "4"
-+SRCREV_pn-calibrateproto ?= "1da6fd1e2c7a49648245c98481fabea8b9690a8c"
- SRCREV_pn-clutter-box2d ?= "3197"
- SRCREV_pn-clutter-cairo ?= "3210"
- SRCREV_pn-clutter-gst ?= "3188"
-@@ -98,6 +99,7 @@ SRCREV_pn-libowl ?= "277"
- SRCREV_pn-librfid ?= "2094"
- SRCREV_pn-libw100 ?= "47"
- SRCREV_pn-libowl ?= "277"
-+SRCREV_pn-libxcalibrate ?= "209d83af61ed38a002c8096377deac292b3e396c"
- SRCREV_pn-libxosd ?= "627"
- SRCREV_pn-linux-bfin ?= "3758"
- SRCREV_pn-linux-hackndev-2.6 ?= "1308"
--- 
-1.5.6.3
+On (03/04/09 10:10), Tom Rini wrote:
+> I'm sending this for review since it actually puts ifrename into its own
+> package as was apparently intended, but not happening.  Giving people
+> the weekend + Monday to complain and Tuesday AM (US -0700) I'll push.
+> 
+>  We weren't creating the above packages as we needed to use '=+' not
+>  '+=' here to take things from the default package.  For these
+>  additional packages, add files with '=' not '+=' and we only need to add
+>  ${sysconfdir}/network to the base package glob.  Also we need to run
+>  install-static to get libiw.a to be installed.
+> 
+> ---
+>  recipes/wireless-tools/wireless-tools.inc   |   21 ++++++++++-----------
+>  recipes/wireless-tools/wireless-tools_29.bb |    2 +-
+>  2 files changed, 11 insertions(+), 12 deletions(-)
+> 
+> diff --git a/recipes/wireless-tools/wireless-tools.inc b/recipes/wireless-tools/wireless-tools.inc
+> index d2a7b89..f52c3f1 100644
+> --- a/recipes/wireless-tools/wireless-tools.inc
+> +++ b/recipes/wireless-tools/wireless-tools.inc
+> @@ -31,7 +31,7 @@ do_stage() {
+>  }
+>  
+>  do_install() {
+> -    oe_runmake PREFIX=${D} install-iwmulticall install-dynamic install-man install-hdr
+> +    oe_runmake PREFIX=${D} install-iwmulticall install-dynamic install-static install-man install-hdr
+>      install -d ${D}${sbindir}
+>      install -m 0755 ifrename ${D}${sbindir}/ifrename
+>      install -d ${D}${sysconfdir}/network/if-pre-up.d
+> @@ -39,13 +39,12 @@ do_install() {
+>      install ${WORKDIR}/zzz-wireless.if-pre-up ${D}${sysconfdir}/network/if-pre-up.d/zzz-wireless
+>  }
+>  
+> -PACKAGES += "libiw libiw-dev libiw-doc libiw-dbg ifrename ifrename-dbg ifrename-doc"
+> -FILES_libiw += "${libdir}/*.so.*"
+> -FILES_libiw-dbg += "${libdir}/.debug/*.so.*"
+> -FILES_libiw-dev += "${libdir}/*.a ${libdir}/*.so ${includedir}"
+> -FILES_libiw-doc += "${mandir}/man7"
+> -FILES_ifrename += "${sbindir}/ifrename"
+> -FILES_ifrename-dbg += "${sbindir}/.debug/ifrename"
+> -FILES_ifrename-doc += "${mandir}/man8/ifrename.8 ${mandir}/man5/iftab.5"
+> -FILES_${PN} += "${bindir} ${sbindir}/iw* ${base_sbindir} ${base_bindir} ${sysconfdir}/network"
+> -FILES_${PN}-doc += "${mandir}/man8"
+> +PACKAGES =+ "libiw libiw-dev libiw-doc libiw-dbg ifrename ifrename-dbg ifrename-doc"
+> +FILES_libiw = "${libdir}/*.so.*"
+> +FILES_libiw-dbg = "${libdir}/.debug/*.so.*"
+> +FILES_libiw-dev = "${libdir}/*.a ${libdir}/*.so ${includedir}"
+> +FILES_libiw-doc = "${mandir}/man7"
+> +FILES_ifrename = "${sbindir}/ifrename"
+> +FILES_ifrename-dbg = "${sbindir}/.debug/ifrename"
+> +FILES_ifrename-doc = "${mandir}/man8/ifrename.8 ${mandir}/man5/iftab.5"
+> +FILES_${PN} += "${sysconfdir}/network"
+> diff --git a/recipes/wireless-tools/wireless-tools_29.bb b/recipes/wireless-tools/wireless-tools_29.bb
+> index 196a194..fb68127 100644
+> --- a/recipes/wireless-tools/wireless-tools_29.bb
+> +++ b/recipes/wireless-tools/wireless-tools_29.bb
+> @@ -1,3 +1,3 @@
+>  require wireless-tools.inc
+>  
+> -PR = "r3"
+> +PR = "r4"
 
 
---------------040900010600040406050105--
+Look ok to me.
+
+> -- 
+> 1.5.6.3
+> 
+> -- 
+> Tom Rini
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
