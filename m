@@ -1,39 +1,40 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LqBX5-000742-8r
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 21:28:02 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
+	(envelope-from <trini@kernel.crashing.org>) id 1LqBy8-0007b2-BN
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 21:55:59 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090404192518.KVGW27308.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
+	<20090404195313.KKOI15318.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Sat, 4 Apr 2009 15:25:18 -0400
+	Sat, 4 Apr 2009 15:53:13 -0400
 Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id bXRH1b0034dMFYL04XRHyZ; Sat, 04 Apr 2009 15:25:17 -0400
-X-Authority-Analysis: v=1.0 c=1 a=2yB6cCmgc6EA:10 a=OEGDzFAyAw4A:10
-	a=rKjlFMSrdqnj3h1DRB4A:9 a=ihvHmtRkdj8D1H25o-z7zlELtqgA:4
+	id bXtE1b0064dMFYL04XtEqw; Sat, 04 Apr 2009 15:53:14 -0400
+X-Authority-Analysis: v=1.0 c=1 a=dCPe7Aef5DIA:10 a=3Vc4vK90Be8A:10
+	a=9qJxKk-okkm3dTASPu0A:9 a=ItbMwiYGYptqhIbg-nNWjcnhGRcA:4
 	a=0oFHZcPLJ8YA:10
 X-CM-Score: 0.00
-Date: Sat, 4 Apr 2009 12:25:17 -0700
+Date: Sat, 4 Apr 2009 12:53:14 -0700
 From: Tom Rini <trini@kernel.crashing.org>
 To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090404192517.GP30840@smtp.west.cox.net>
+Message-ID: <20090404195314.GQ30840@smtp.west.cox.net>
 References: <20090403221352.GH30840@smtp.west.cox.net>
 	<20090403221721.GI30840@smtp.west.cox.net>
 	<20090403221751.GJ30840@smtp.west.cox.net>
 	<20090403221813.GK30840@smtp.west.cox.net>
+	<20090404192517.GP30840@smtp.west.cox.net>
 MIME-Version: 1.0
-In-Reply-To: <20090403221813.GK30840@smtp.west.cox.net>
+In-Reply-To: <20090404192517.GP30840@smtp.west.cox.net>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.45
+X-SA-Exim-Connect-IP: 68.230.241.41
 X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_40,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] task-slugos-toolchain-target: Add libstdc++-dev for C++	heades, bump PR
+Subject: [PATCH] meta-toolchain-gpe-sbox: Drop task-sdk-gpephone (to match	m-t-gpe), bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 19:28:02 -0000
+X-List-Received-Date: Sat, 04 Apr 2009 19:55:59 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-After checking with mwester, this is the correct thing to do.
----
-
-task-slugos-toolchain-target: Add libstdc++-dev for C++ heades, bump PR
+After a quick check with Florian Boor, this is also correct.
 
 ---
- recipes/tasks/task-slugos-toolchain-target.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+meta-toolchain-gpe-sbox: Drop task-sdk-gpephone (to match m-t-gpe), bump PR
 
-diff --git a/recipes/tasks/task-slugos-toolchain-target.bb b/recipes/tasks/task-slugos-toolchain-target.bb
-index 489a412..4f9df9b 100644
---- a/recipes/tasks/task-slugos-toolchain-target.bb
-+++ b/recipes/tasks/task-slugos-toolchain-target.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Packages for a standalone SDK or external toolchain"
- LICENSE = "MIT"
- ALLOW_EMPTY = "1"
- 
+---
+ recipes/meta/meta-toolchain-gpe-sbox.bb |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/recipes/meta/meta-toolchain-gpe-sbox.bb b/recipes/meta/meta-toolchain-gpe-sbox.bb
+index 29e39c5..679e50c 100644
+--- a/recipes/meta/meta-toolchain-gpe-sbox.bb
++++ b/recipes/meta/meta-toolchain-gpe-sbox.bb
+@@ -1,12 +1,11 @@
 -PR = "r1"
 +PR = "r2"
+ TOOLCHAIN_TARGET_TASK = "\
+     task-sdk-base \
+     task-sdk-sbox \
+     task-sdk-sbox-gpe \
+     task-sdk-x11 \
+     task-sdk-x11-ext \
+-    task-sdk-gpe \
+-    task-sdk-gpephone"
++    task-sdk-gpe"
  
- PACKAGES = "${PN}"
+ require meta-toolchain.bb
  
-@@ -18,6 +18,7 @@ RDEPENDS_${PN} = "\
-     libcrypto \
-     openssl-dev \
-     libstdc++ \
-+    libstdc++-dev \
-     "
- 
- # Not sure if we need these or not...
 -- 
 1.5.6.3
-
 
 -- 
 Tom Rini
