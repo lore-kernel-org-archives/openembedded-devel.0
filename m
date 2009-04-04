@@ -1,46 +1,37 @@
-Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1LptGa-0001ZH-BD
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Apr 2009 01:57:46 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so944583ywk.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Apr 2009 16:55:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=A7U337huqZDVEVK9X3Xd+DobbikNe37vTkWo+u3BMwE=;
-	b=oD1xJ6kFZUfcftcOSBB0LzWOk8jueFT3UppcvahxUKn8QoZ1isj7CIzsgrarQUD16L
-	jxUyl39a0BKKhxkKIX/ufqI2/gL0mjmxdW6D23XYEwoULN3PuxHUniz7pM0oSDcADtzi
-	xuZUc/aSkkgxgF+J+lfkM7DiPSlC/8TQ+/7eA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=uEjwRiOpihHGG0evDqw0mwPGCSIA+j7iU/hZHSXTTEP4By+HXVCU1OKry/57LbLhyr
-	Rvrs9eF8Pi7v4KPSMsj1y1F2we4rwGRjqhOBS6KyLVr9ww+mR52B30E16hsE1fT+R44T
-	y9ExVyQLI47H8hQqWnO5R43NyZ0N//JxXBDAo=
+	(envelope-from <trini@kernel.crashing.org>) id 1LptR3-0001pt-Dm
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 02:08:36 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090404000558.ITQS16134.fed1rmmtao104.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Fri, 3 Apr 2009 20:05:58 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id bC5w1b0084dMFYL04C5wyK; Fri, 03 Apr 2009 20:05:56 -0400
+X-Authority-Analysis: v=1.0 c=1 a=Ji7YCslGg5QA:10 a=Y9EANamfXBtUqQfQ694A:9
+	a=ZRLf44MKXJlClGRB5NQA:7 a=rbCQm_TAOstiMsEdyuGcCHE4hwAA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Fri, 3 Apr 2009 17:05:56 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090404000556.GM30840@smtp.west.cox.net>
+References: <20090403221352.GH30840@smtp.west.cox.net>
+	<20090403231514.GE12552@denix.org>
 MIME-Version: 1.0
-Received: by 10.100.137.12 with SMTP id k12mr3956310and.55.1238802909963; Fri, 
-	03 Apr 2009 16:55:09 -0700 (PDT)
-In-Reply-To: <200904031951.12061.marcin@juszkiewicz.com.pl>
-References: <200903311837.28324.marcin@juszkiewicz.com.pl>
-	<200904021325.22988.marcin@juszkiewicz.com.pl>
-	<d2b9ea600904030918s2f45debak2f76d45022fbe850@mail.gmail.com>
-	<200904031951.12061.marcin@juszkiewicz.com.pl>
-Date: Sat, 4 Apr 2009 01:55:09 +0200
-Message-ID: <d2b9ea600904031655t4b069034p732eba57c9f5e0f5@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.46.158
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+In-Reply-To: <20090403231514.GE12552@denix.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.42
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE] branch created: stable/2009
+Subject: Re: Fix relocation of our SDK toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,28 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2009 23:57:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 04 Apr 2009 00:08:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2009/4/3 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
+On Fri, Apr 03, 2009 at 07:15:14PM -0400, Denys Dmytriyenko wrote:
+> On Fri, Apr 03, 2009 at 03:13:52PM -0700, Tom Rini wrote:
+> > Hey all.  For some time, myself and others have wished that the
+> > toolchain we install with our SDK target (meta-toolchain*) could be
+> > relocatible.  I've finally spent some time digging into this and I've
+> > come up with the following series of patches.  We had two problems.  The
+> > first is that things like 'as', 'ld', 'cpp', etc that the toolchain
+> > invokes were absolute links rather than relative links within the SDK.
+> > The second issue is that we were using --with-gxx-include-dir in
+> > configuring gcc when really we don't want that, we want to put the C++
+> > includes where GCC is going to look for them already, not in an absolute
+> > path.
+> > 
+> > I've tested this series of patches with gcc-4.1.2 / 4.2.4 and 4.3.3
+> > cross-sdk targets on Linux and 4.2.4 on Windows.  For Linux I've
+> > compiled qtopia-core-4.3.5 as a stand-in for a large complex app.
+> > 
+> > At this point the only thing left is to make the environment-setup setup
+> > based on where it's invoked from.
+> 
+> Thanks! Will you be looking into libtool(-ize)/.la files and pkg-config .pc 
+> files?
 
-> sanity.conf sets one variable: BB_MIN_VERSION = "1.8.12" and this is
-> checked on start of each build. We bump that only when BitBake is
-> released and if change is really required.
+pkg-config is done already, via env variables that we setup in
+environment-setup[1].  I'm not 100% sure on what might or might not need
+doing to the .la files, however.
 
-Ok.
-
-Would it be a sane solution to them simply use the BitBake version specified
-in BB_MIN_VERSION, or do the "if change is really required" mean that
-it sometimes
-makes good sense to use a newer version?
-
-If so, it would be nice to have something like BB_RECOMMENDED_VERSION
-
-Also, is the BB_MIN_VERSION defined so it will/must always be a tagged
-version of bitbake?
-
-/Esben
+[1]: When I tried a while ago, it would get a tiny bit confused if you
+have both host stuff (opkg-sdk) and target stuff (libpng-sdk) and give
+you both.  So it could be possible to have some host stuff try and be
+used if you don't have a target one as the case where you had both host
+and target, the target was used.  Or I could be mis-remembering.
+-- 
+Tom Rini
 
 
