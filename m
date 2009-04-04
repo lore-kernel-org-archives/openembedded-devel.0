@@ -1,44 +1,32 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [83.222.19.8] (helo=mail.asoft.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lq0qx-0005bP-JC
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Apr 2009 10:04:19 +0200
-Received: by bwz19 with SMTP id 19so1222529bwz.12
+	(envelope-from <mad@mail.asoft.ru>) id 1Lq1vU-0003kU-Lb
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 11:12:34 +0200
+Received: from localhost ([95.72.100.66]) (authenticated bits=0)
+	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n3499q03020186
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Apr 2009 01:01:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Z7UlieG8dWYTcgxacJhGRmUiarNLmswE2zevdJG80DQ=;
-	b=p3cflsx0bRlmS2M/MlhZlxohmqy4nk3CtmKJpJGiU1nFeWp4x7Gupu957sA4pE5UVr
-	Xhq9iZtJ6p5kb0Ylg2XfMNp2TRmdufPgNkYC3hPSfDJDy11A1TOoBF0z4XaER+KMPhnZ
-	Ib0b6CFKZfN+97O9Mb7HWRN4gCAhcE/baNK30=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=U80vFetiYAyZ6SXBrGP6q2AT3VoRoBOwX+uK9Do2CgzRGa1tCm571H4aEk3fYJTxR8
-	8y00rDFEEOTHj8W3WEUaZabjEdqMczQi6PsQ/lzG+o4iGPrAJTZbsqm/ErorVnvo48s8
-	c0PHQPF/KF0asd0ou2OHBzz8qLBoBre0U/TMw=
+	Sat, 4 Apr 2009 13:09:55 +0400
+Date: Sat, 4 Apr 2009 13:09:46 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090404090946.GA13413@rainbow>
+References: <1237150071-24115-1-git-send-email-mad_soft@inbox.ru>
+	<gqnn72$f5t$1@ger.gmane.org>
 MIME-Version: 1.0
-Received: by 10.223.122.15 with SMTP id j15mr1767934far.74.1238832069240; Sat, 
-	04 Apr 2009 01:01:09 -0700 (PDT)
-In-Reply-To: <069B6B31F6201B4389D7EEB9AD827BCA0500604A@otis.burlington.evertz.tv>
-References: <ac9c93b10904030956g2e8a1663g7877947b1a17775c@mail.gmail.com>
-	<069B6B31F6201B4389D7EEB9AD827BCA0500604A@otis.burlington.evertz.tv>
-Date: Sat, 4 Apr 2009 10:01:09 +0200
-Message-ID: <ac9c93b10904040101p434f67acrd9cc05602b57ec91@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org, mickey@vanille-media.de
-X-SA-Exim-Connect-IP: 209.85.218.171
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <gqnn72$f5t$1@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-Greylist: Sender succeeded SMTP AUTH authentication, not delayed by
+	milter-greylist-2.0.2 (mail.asoft.ru [0.0.0.0]);
+	Sat, 04 Apr 2009 13:09:56 +0400 (MSD)
+X-SA-Exim-Connect-IP: 83.222.19.8
+X-SA-Exim-Mail-From: mad@mail.asoft.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE] Where is the python-zopeinterface recipe?
+Subject: Re: [PATCH/RFC] base-files: add noatime to rootfs mount	options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,92 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 08:04:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 04 Apr 2009 09:12:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I think what happened is that when zopeinterface was split off the
-zope recipe, the name got changed. Not sure if that was intentional.
+On 13:48 Sun 29 Mar     , Koen Kooi wrote:
+> On 15-03-09 21:47, Dmitry Artamonow wrote:
+>> In most machines' fstabs rootfs mounted with 'defaults' option.
+>> This implies that atime logging is on - i.e. on every read from
+>> filesystem kernel writes atime stamp to files' metadata.
+>> Here in embedded world, where rootfs is usually stored on some
+>> kind of flash (internal NAND/NOR, or external SD/MMC/CF card)
+>> it is a real problem, because higher number of writes causes
+>> flash wearing, higher system load and higher chance of filesystem
+>> corruption.
+>>
+>> Fix it by adding noatime to rootfs mount options in fstab.
+>
+> Isn't 'relatime' a better option?
 
-Mickey, as I am not a python wiz: should baking zopeinterface result
-in a python-zopeinterface package or should we change the name in the
-packages that require zopeinterface (like twisted) ?
+Maybe yes, but we need more care in this case, because relatime has
+been introduced in 2.6.20 [1], and there's still can be machines using
+older kernels (judging solely by looking at the recipes in recipes/linux).
+I fear that we may break booting on these machines by passing
+unsupported option to mount.
 
-FM
+[1] http://kernelnewbies.org/Linux_2_6_20#head-6804816ab4f07548635032afbedd3e1f4eb3d1d7
 
-2009/4/3 Rodney Lott <rlott@evertz.com>:
-> Yeah, that's where the zope-interfaces recipe is. =A0I am looking for the=
- python-zopeinterface.
+> regards,
 >
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org]On Behalf Of
-> Frans Meulenbroeks
-> Sent: Friday, April 03, 2009 12:56 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [STABLE] Where is the python-zopeinterface recipe?
+> Koen
 >
->
-> $ cd recipes; find | grep zope
-> /zope/zope-interfaces_3.3.0.bb
-> ...
->
-> It used to be part of the zope recipe.
->
-> 2009/4/3 Rodney Lott <rlott@evertz.com>:
->> Hello.
->>
->> I am currently using the origins/stable/2009 branch and was trying to ad=
-d the python-twisted recipe to my image and I got the following dependency =
-issues:
->>
->> OE Build Configuration:
->> BB_VERSION =A0 =A0 =A0 =A0=3D "1.8.13"
->> METADATA_BRANCH =A0 =3D "stable/2009"
->> METADATA_REVISION =3D "e93bd21c7a03b0e78a3097a8f924308841970429"
->> TARGET_ARCH =A0 =A0 =A0 =3D "i486"
->> TARGET_OS =A0 =A0 =A0 =A0 =3D "linux"
->> MACHINE =A0 =A0 =A0 =A0 =A0 =3D "x86"
->> DISTRO =A0 =A0 =A0 =A0 =A0 =A0=3D "minimal"
->> DISTRO_VERSION =A0 =A0=3D ".dev-snapshot-20090403"
->>
->> NOTE: Resolving any missing task queue dependencies
->> ERROR: '['/home/rlott/openembedded.git/recipes/python/python-twisted_8.2=
-.0.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'pyt=
-hon-zopeinterface' but it wasn't found in any PACKAGE or RPROVIDES variable=
-s
->> NOTE: Runtime target 'python-zopeinterface' is unbuildable, removing...
->> Missing or unbuildable dependency chain was: ['python-zopeinterface']
->> NOTE: Runtime target 'python-twisted' is unbuildable, removing...
->> Missing or unbuildable dependency chain was: ['python-twisted', 'python-=
-zopeinterface']
->> ERROR: Required build target 'cp2210e-image' has no buildable providers.
->> Missing or unbuildable dependency chain was: ['cp2210e-image', 'python-t=
-wisted', 'python-zopeinterface']
->>
->> In the python-twisted_8.2.0.bb recipe, it references the python-zopeinte=
-rface recipe as a dependency. =A0I couldn't find such a recipe in the recip=
-es/python subdirectory of the git branch. =A0So, is this recipe merely a bo=
-okmark or is it going to be available, pending approval?
->>
->> Regards.
->>
->> Rodney
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+-- 
+Best regards,
+Dmitry "MAD" Artamonow
+
 
 
