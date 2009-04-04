@@ -1,40 +1,40 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Lq4bi-00068L-LE
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Apr 2009 14:04:20 +0200
-Received: by ewy20 with SMTP id 20so1317635ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Apr 2009 05:01:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=RrNrHrGLc3RblHJylb2tD+3Zy8bNYtYxJJKqnMxsdzg=;
-	b=BMJdHMCqkptBlxz7TFpNOJraTM5xEmC2KZESmkyVGaL23sETyRTJ9luSvgivtYfCS0
-	azIyMql6fBSIHN4nBeNycy31whqEMuv+92xL06e2zP23i7iM5QYFUmkQ1Rk2K+YJuawe
-	MwPCMXacx/txKThQ3djxEMcqeOIhOsshdXS2c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=up3EkGZ2xi3Qt2h5O2vjEL7NlTMFxUcSSOEUjOi+9D7HxaXk1cvNPcTOrYXcxCCoMV
-	iNdt7JdEDeSXjCF/OT8LVs+qKPxwgxRNkbDoqEma/onBZ187PIbpy+bJMdloeOBcRNEm
-	sUeSKpF3gIJsxfOOfvMxr4U5unXXEZIY4Rmnk=
-MIME-Version: 1.0
-Received: by 10.210.69.6 with SMTP id r6mr84075eba.61.1238846499450; Sat, 04 
-	Apr 2009 05:01:39 -0700 (PDT)
-In-Reply-To: <gr794f$si$3@ger.gmane.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lq4qX-0006X5-NY
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 14:19:41 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lq4ny-0007NL-Jo
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 12:16:58 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 04 Apr 2009 12:16:58 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 04 Apr 2009 12:16:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 04 Apr 2009 14:16:48 +0200
+Message-ID: <gr7j3f$oh2$1@ger.gmane.org>
 References: <gr794f$si$3@ger.gmane.org>
-Date: Sat, 4 Apr 2009 14:01:39 +0200
-Message-ID: <ac9c93b10904040501h74232b6ei82628e3ec167b6ba@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.172
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	<ac9c93b10904040501h74232b6ei82628e3ec167b6ba@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <ac9c93b10904040501h74232b6ei82628e3ec167b6ba@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: patchwork now has an 'applied' flag
@@ -51,29 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 12:04:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 04 Apr 2009 12:19:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Probably a stupid question, but is there some info on what patchwork
-is and how to use it?
+On 04-04-09 14:01, Frans Meulenbroeks wrote:
+> Probably a stupid question, but is there some info on what patchwork
+> is and how to use it?
 
-2009/4/4 Koen Kooi <k.kooi@student.utwente.nl>:
-> Hi,
->
-> Patchwork allows us to define custom states, so we now have an 'applied'
-> state if you can to explicitly state is has been applied, instead of
-> 'accepted' + 'archived'.
->
-> regards,
->
-> Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+The OE patchwork is located at http://patchwork.openembedded.org/ and 
+collects all patches and follow-up comments to them posted to this 
+mailinglist.
+
+The really neat thing is the 'mbox' option, which scans the replies to 
+the patch for signed-off-by and acked-by lines and puts those in the patch.
+
+What I do nowadays:
+
+wget http://patchwork.openembedded.org/patch/$1/mbox/ -O pw-am-$1.patch
+git am < pw-am-$1.patch
+rm pw-am-$1.patch
+
+Now, if only git-send-email wouldn't strip the commit message...
+
+regards,
+
+Koen
+
 
 
