@@ -1,47 +1,39 @@
-Received: from [209.85.132.244] (helo=an-out-0708.google.com)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LqA6H-0002tw-1W
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 19:56:15 +0200
-Received: by an-out-0708.google.com with SMTP id d11so1430151and.30
+	(envelope-from <trini@kernel.crashing.org>) id 1LqBX5-000742-8r
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 21:28:02 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090404192518.KVGW27308.fed1rmmtao101.cox.net@fed1rmimpo02.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Sat, 04 Apr 2009 10:53:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=Kux8mmUTNaduxyXC0ny1kjPrUNBQFKxMovOhvTpseBM=;
-	b=HSaXRtRk+wVqElnmPVKJbXBPWZmm8mHOpe5rU0D2OnymRUflVKDFdw6Rcdz8+GAcCY
-	hTIp1tGJWKj54dQXxP5l/j2R3pJi3H5LJ30qnbuS8MKlX9lOHIeGnpLLqgSkrAHupz7J
-	zmtfy+ez1e4HhLPqTuD8/Xe7AV9sFC38vtSaM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=uiAT8QX4F6Vie+Wu+8foqQ1C0x6F3uYEFMZvQPJLGGX18IO5y7ZFiwOSxzuUvcAk1J
-	RNqVR195sUIhaObH7KwnK4XYLynrJ4+aT8hXG1t6FdF74fplSWrqWTTfemL1SIkfE+AQ
-	iHyUoAnEo4awO6PwDyzjK5ge32K+WEtOSbPio=
+	Sat, 4 Apr 2009 15:25:18 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id bXRH1b0034dMFYL04XRHyZ; Sat, 04 Apr 2009 15:25:17 -0400
+X-Authority-Analysis: v=1.0 c=1 a=2yB6cCmgc6EA:10 a=OEGDzFAyAw4A:10
+	a=rKjlFMSrdqnj3h1DRB4A:9 a=ihvHmtRkdj8D1H25o-z7zlELtqgA:4
+	a=0oFHZcPLJ8YA:10
+X-CM-Score: 0.00
+Date: Sat, 4 Apr 2009 12:25:17 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090404192517.GP30840@smtp.west.cox.net>
+References: <20090403221352.GH30840@smtp.west.cox.net>
+	<20090403221721.GI30840@smtp.west.cox.net>
+	<20090403221751.GJ30840@smtp.west.cox.net>
+	<20090403221813.GK30840@smtp.west.cox.net>
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.208.8 with SMTP id f8mr5075332ang.42.1238867614090; Sat, 
-	04 Apr 2009 10:53:34 -0700 (PDT)
-In-Reply-To: <20090404090946.GA13413@rainbow>
-References: <1237150071-24115-1-git-send-email-mad_soft@inbox.ru>
-	<gqnn72$f5t$1@ger.gmane.org> <20090404090946.GA13413@rainbow>
-Date: Sat, 4 Apr 2009 14:53:33 -0300
-X-Google-Sender-Auth: 887e42c514f9642a
-Message-ID: <be7a9f3d0904041053k38e2711akba9b549734dc87b@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.132.244
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+In-Reply-To: <20090403221813.GK30840@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.45
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH/RFC] base-files: add noatime to rootfs mount options
+Subject: [PATCH] task-slugos-toolchain-target: Add libstdc++-dev for C++	heades, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,38 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 17:56:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 04 Apr 2009 19:28:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, Apr 4, 2009 at 6:09 AM, Dmitry Artamonow <mad_soft@inbox.ru> wrote:
-> On 13:48 Sun 29 Mar =A0 =A0 , Koen Kooi wrote:
->> On 15-03-09 21:47, Dmitry Artamonow wrote:
-[...]
->>> Fix it by adding noatime to rootfs mount options in fstab.
->>
->> Isn't 'relatime' a better option?
->
-> Maybe yes, but we need more care in this case, because relatime has
-> been introduced in 2.6.20 [1], and there's still can be machines using
-> older kernels (judging solely by looking at the recipes in recipes/linux)=
-.
-> I fear that we may break booting on these machines by passing
-> unsupported option to mount.
->
-> [1] http://kernelnewbies.org/Linux_2_6_20#head-6804816ab4f07548635032afbe=
-dd3e1f4eb3d1d7
+After checking with mwester, this is the correct thing to do.
+---
 
-I belive that if those machines still uses old kernels they have the
-responsability to deal with those things; besides that it is very
-common for machines to provide custom fstab files so it won't
-hurt to put a specific one to workaround it if required.
+task-slugos-toolchain-target: Add libstdc++-dev for C++ heades, bump PR
 
-Regards,
+---
+ recipes/tasks/task-slugos-toolchain-target.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+diff --git a/recipes/tasks/task-slugos-toolchain-target.bb b/recipes/tasks/task-slugos-toolchain-target.bb
+index 489a412..4f9df9b 100644
+--- a/recipes/tasks/task-slugos-toolchain-target.bb
++++ b/recipes/tasks/task-slugos-toolchain-target.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Packages for a standalone SDK or external toolchain"
+ LICENSE = "MIT"
+ ALLOW_EMPTY = "1"
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ PACKAGES = "${PN}"
+ 
+@@ -18,6 +18,7 @@ RDEPENDS_${PN} = "\
+     libcrypto \
+     openssl-dev \
+     libstdc++ \
++    libstdc++-dev \
+     "
+ 
+ # Not sure if we need these or not...
+-- 
+1.5.6.3
+
+
+-- 
+Tom Rini
 
 
