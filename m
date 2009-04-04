@@ -1,32 +1,25 @@
-Received: from [83.222.19.8] (helo=mail.asoft.ru)
+Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad@mail.asoft.ru>) id 1Lq1vU-0003kU-Lb
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 11:12:34 +0200
-Received: from localhost ([95.72.100.66]) (authenticated bits=0)
-	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n3499q03020186
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 4 Apr 2009 13:09:55 +0400
-Date: Sat, 4 Apr 2009 13:09:46 +0400
-From: Dmitry Artamonow <mad_soft@inbox.ru>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090404090946.GA13413@rainbow>
-References: <1237150071-24115-1-git-send-email-mad_soft@inbox.ru>
-	<gqnn72$f5t$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <gqnn72$f5t$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-Greylist: Sender succeeded SMTP AUTH authentication, not delayed by
-	milter-greylist-2.0.2 (mail.asoft.ru [0.0.0.0]);
-	Sat, 04 Apr 2009 13:09:56 +0400 (MSD)
-X-SA-Exim-Connect-IP: 83.222.19.8
-X-SA-Exim-Mail-From: mad@mail.asoft.ru
+	(envelope-from <koen@amethyst.openembedded.net>) id 1Lq20e-0003uQ-Iy
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Apr 2009 11:17:54 +0200
+Received: by amethyst.openembedded.net (Postfix, from userid 1002)
+	id 19D9F189477; Sat,  4 Apr 2009 11:17:54 +0200 (CEST)
+From: Koen Kooi <k.kooi@student.utwente.nl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  4 Apr 2009 11:17:54 +0200
+Message-Id: <1238836674-23507-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 80.81.242.146
+X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH/RFC] base-files: add noatime to rootfs mount	options
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] gstreamer-ti: fix path to codec combos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 09:12:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 04 Apr 2009 09:17:54 -0000
 
-On 13:48 Sun 29 Mar     , Koen Kooi wrote:
-> On 15-03-09 21:47, Dmitry Artamonow wrote:
->> In most machines' fstabs rootfs mounted with 'defaults' option.
->> This implies that atime logging is on - i.e. on every read from
->> filesystem kernel writes atime stamp to files' metadata.
->> Here in embedded world, where rootfs is usually stored on some
->> kind of flash (internal NAND/NOR, or external SD/MMC/CF card)
->> it is a real problem, because higher number of writes causes
->> flash wearing, higher system load and higher chance of filesystem
->> corruption.
->>
->> Fix it by adding noatime to rootfs mount options in fstab.
->
-> Isn't 'relatime' a better option?
+From: Koen Kooi <koen@openembedded.org>
 
-Maybe yes, but we need more care in this case, because relatime has
-been introduced in 2.6.20 [1], and there's still can be machines using
-older kernels (judging solely by looking at the recipes in recipes/linux).
-I fear that we may break booting on these machines by passing
-unsupported option to mount.
 
-[1] http://kernelnewbies.org/Linux_2_6_20#head-6804816ab4f07548635032afbedd3e1f4eb3d1d7
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/dsplink/gstreamer-ti_svn.bb |   10 +++++++++-
+ 1 files changed, 9 insertions(+), 1 deletions(-)
 
-> regards,
->
-> Koen
->
-
+diff --git a/recipes/dsplink/gstreamer-ti_svn.bb b/recipes/dsplink/gstreamer-ti_svn.bb
+index e14f262..ab705f3 100644
+--- a/recipes/dsplink/gstreamer-ti_svn.bb
++++ b/recipes/dsplink/gstreamer-ti_svn.bb
+@@ -4,7 +4,7 @@ SRC_URI = "svn://gforge.ti.com/svn/gstreamer_ti/trunk;module=gstreamer_ti;proto=
+           "
+ SRCREV = "160"
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ # Again, no '.' in PWD allowed :(
+ PV = "0+svnr${SRCREV}"
+@@ -32,6 +32,14 @@ export XDC_PLATFORM
+ #GCArmv5T.cc.opts = "SEDME_CCARCH";
+ #GCArmv5T.cc.$seal("opts");
+ 
++do_configure_prepend() {
++	for i in ${S}/src/*.cfg ; do
++		sed -i -e s:\./encodeCombo.x64P:${datadir}/ti-codec-combos/encodeCombo.x64P:g \
++	           -e s:\./decodeCombo.x64P:${datadir}/ti-codec-combos/decodeCombo.x64P:g \
++	           $i
++	done
++}
++
+ do_compile_prepend() {
+ 	for i in $(find ${S} -name "config.bld") ; do
+ 		    sed -i -e s:SEDME_CCARCH:'${TARGET_CCARCH}': $i
 -- 
-Best regards,
-Dmitry "MAD" Artamonow
+1.5.6.5
 
 
 
