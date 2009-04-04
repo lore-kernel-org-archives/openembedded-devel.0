@@ -1,42 +1,45 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.132.242] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lq91X-0004bN-LK
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 18:48:34 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lq8z0-00081S-9R
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 16:44:38 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 04 Apr 2009 16:44:38 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1Lq9zH-0002gI-K4
+	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 19:49:01 +0200
+Received: by an-out-0708.google.com with SMTP id d11so1428546and.30
 	for <openembedded-devel@openembedded.org>;
-	Sat, 04 Apr 2009 16:44:38 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 04 Apr 2009 18:44:23 +0200
-Message-ID: <gr82p7$2vd$1@ger.gmane.org>
+	Sat, 04 Apr 2009 10:46:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:content-type:content-transfer-encoding;
+	bh=uueAv0RWAhWuCeMLFLjQGdArOpMaQbH5QtJRm+DWJ2g=;
+	b=OFuSaMon7IkiFTdshN22TEp01MeqYG94eaMim2xQtA8k66e8ZrHbt+Cm46wEo8jVSE
+	gozlpftPzOGBebnroEl7ZaRbHcl0Jtve+ISFv6PfUfzGwV7qJK6A1TrICzz7T1vFYCMZ
+	w+m4Ha6OJUXjZgrWzSyaZe6jQE6w2AjogzgIY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=F9GWgLAixZTCEeQmJRV4ZgDcbMHHqV5mv82NOKCZFKCKZiu4ukeTcQqh6CNJOsGs15
+	iGN+h9xJw9AgMGYfPSp68Kk+63k9kJ/xH5zPNwF4HYQ5V/oNUPNPI5rAFPIi65QQlOoO
+	STMMbb1+U0RbX8nb5GRQ/S6ejgjZVcOvsji28=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.132.14 with SMTP id f14mr3729875and.94.1238867180663; Sat, 
+	04 Apr 2009 10:46:20 -0700 (PDT)
+In-Reply-To: <gr7nfd$32a$1@ger.gmane.org>
 References: <gr7nfd$32a$1@ger.gmane.org>
-	<ac9c93b10904040851q4d038367l7ac1d4e80a52dfc4@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <ac9c93b10904040851q4d038367l7ac1d4e80a52dfc4@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sat, 4 Apr 2009 14:46:20 -0300
+X-Google-Sender-Auth: 0433b914a3e635c5
+Message-ID: <be7a9f3d0904041046n65089397g5b82ccab0aec2afb@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.132.242
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: openembedded-devel@openembedded.org
 Subject: Re: [RFC] Rebuild external kernel modules on kernel change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -51,96 +54,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 16:49:20 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 04 Apr 2009 17:49:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 04-04-09 17:51, Frans Meulenbroeks wrote:
-> Hm,
->
-> I don't like that one needs to touch conf/machine/beagleboard.conf
-> each time the kernel is updated.
-> This is likely to be forgotten at some time.
-> Can't we use something in the linux-omap-*.bb file ?
+On Sat, Apr 4, 2009 at 10:31 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> Hi,
+[...]
+> I don't really like this method, but I'm having a hard time coming up with a
+> decent solution that:
+[...]
 
-You can't set global vars in recipes.
+I agree that is not beauty but it works.
 
-regards,
+I also belive it could be used in other recipes too as initramfs-images. This
+way forcing the rebuild of it if the kernel is changed and machine revision
+is bumped.
 
-Koen
+Fully support it.
 
++1
 
-> Btw, I always bump PR if I change something in the config.
->
-> Isn't it possible to add rebuilding those modules to e.g.. virtual/kernel?
->
-> Frans
->
-> 2009/4/4 Koen Kooi<k.kooi@student.utwente.nl>:
->> Hi,
->>
->> For beagleboard I have a few things I need to rebuild everytime the kernel
->> changes:
->>
->> * powervr kerneldrivers
->> * sdma kernel module
->> * dmai kernel module
->> * codec-engine
->>
->> And I have roughly two kinds of kernel changes:
->>
->> 1) version upgrade (e.g. 2.6.29 ->  2.6.29)
->> 2) config changes (e.g. enable ethernet bridging)
->>
->> The first type of change could be solved by putting KERNEL_VERSION in PV or
->> PR, but that needs a non-trivial amount of python since the information
->> isn't available at parsing time (exactly like debian.bbclass).
->> The second kind of change is a lot harder to detect, unless we start storing
->> md5sums for kernel defconfigs.
->>
->> I have a lowtech proposal for this:
->>
->> -----
->>
->> conf/bitbake.conf:
->> # Define a PR for kernels that machines can override so things like
->> # modules get rebuilt
->> MACHINE_KERNEL_PR ?= "r0"
->>
->> conf/machine/beagleboard.conf:
->> # Increase this everytime the kernel changes
->> MACHINE_KERNEL_PR = "r39"
->>
->> classes/kernel.bbclass:
->> # A machine.conf or local.conf can increase MACHINE_KERNEL_PR to force
->> # rebuilds for kernel and external modules
->> PR = "${MACHINE_KERNEL_PR}"
->>
->> class/module-base.bbclass:
->> # A machine.conf or local.conf can increase MACHINE_KERNEL_PR to force
->> # rebuilds for kernel and external modules
->> PR = "${MACHINE_KERNEL_PR}"
->>
->> -----
->>
->> I don't really like this method, but I'm having a hard time coming up with a
->> decent solution that:
->>
->> a) works
->> b) requires less or equal manual work
->> c) keeps PR in sync between different buildhosts
->>
->> regards,
->>
->> Koen
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
