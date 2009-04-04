@@ -1,43 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lq4qX-0006X5-NY
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 14:19:41 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lq4ny-0007NL-Jo
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 12:16:58 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 04 Apr 2009 12:16:58 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 04 Apr 2009 12:16:58 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
+	(envelope-from <koen@amethyst.openembedded.net>) id 1Lq58a-0003fj-EW
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Apr 2009 14:38:19 +0200
+Received: by amethyst.openembedded.net (Postfix, from userid 1002)
+	id 96BF0189477; Sat,  4 Apr 2009 14:38:17 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 04 Apr 2009 14:16:48 +0200
-Message-ID: <gr7j3f$oh2$1@ger.gmane.org>
-References: <gr794f$si$3@ger.gmane.org>
-	<ac9c93b10904040501h74232b6ei82628e3ec167b6ba@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <ac9c93b10904040501h74232b6ei82628e3ec167b6ba@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  4 Apr 2009 14:38:17 +0200
+Message-Id: <1238848697-20191-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 80.81.242.146
+X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patchwork now has an 'applied' flag
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH v2] gstreamer-ti: fix path to codec combos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +33,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 12:19:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 04 Apr 2009 12:38:19 -0000
 
-On 04-04-09 14:01, Frans Meulenbroeks wrote:
-> Probably a stupid question, but is there some info on what patchwork
-> is and how to use it?
+From: Koen Kooi <koen@openembedded.org>
 
-The OE patchwork is located at http://patchwork.openembedded.org/ and 
-collects all patches and follow-up comments to them posted to this 
-mailinglist.
-
-The really neat thing is the 'mbox' option, which scans the replies to 
-the patch for signed-off-by and acked-by lines and puts those in the patch.
-
-What I do nowadays:
-
-wget http://patchwork.openembedded.org/patch/$1/mbox/ -O pw-am-$1.patch
-git am < pw-am-$1.patch
-rm pw-am-$1.patch
-
-Now, if only git-send-email wouldn't strip the commit message...
-
-regards,
-
-Koen
+---
+    gstreamer-ti_svn.bb     |   11 +++++++++--
+    ti-codec-combos_3.16.bb |    7 +++++--
+ 2 files changed, 14 insertions(+), 4 deletions(-)
+   
+diff --git a/recipes/dsplink/gstreamer-ti_svn.bb b/recipes/dsplink/gstreamer-ti_svn.bb
+index e14f262..ab705f3 100644
+--- a/recipes/dsplink/gstreamer-ti_svn.bb
++++ b/recipes/dsplink/gstreamer-ti_svn.bb
+@@ -4,7 +4,7 @@ SRC_URI = "svn://gforge.ti.com/svn/gstreamer_ti/trunk;module=gstreamer_ti;proto=
+           "
+ SRCREV = "160"
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ # Again, no '.' in PWD allowed :(
+ PV = "0+svnr${SRCREV}"
+@@ -32,6 +32,14 @@ export XDC_PLATFORM
+ #GCArmv5T.cc.opts = "SEDME_CCARCH";
+ #GCArmv5T.cc.$seal("opts");
+ 
++do_configure_prepend() {
++	for i in ${S}/src/*.cfg ; do
++		sed -i -e s:\./encodeCombo.x64P:${datadir}/ti-codec-combos/encodeCombo.x64P:g \
++	           -e s:\./decodeCombo.x64P:${datadir}/ti-codec-combos/decodeCombo.x64P:g \
++	           $i
++	done
++}
++
+ do_compile_prepend() {
+ 	for i in $(find ${S} -name "config.bld") ; do
+ 		    sed -i -e s:SEDME_CCARCH:'${TARGET_CCARCH}': $i
+diff --git a/recipes/dsplink/ti-codec-combos_3.16.bb b/recipes/dsplink/ti-codec-combos_3.16.bb
+index dd97a57..6bab35a 100644
+--- a/recipes/dsplink/ti-codec-combos_3.16.bb
++++ b/recipes/dsplink/ti-codec-combos_3.16.bb
+@@ -13,7 +13,7 @@ S = "${WORKDIR}/omap3530_dvsdk_combos_3_16"
+ 
+ # Yes, the xdc stuff still breaks with a '.' in PWD
+ PV = "316"
+-PR = "r14"
++PR = "r15"
+ 
+ TARGET = "all"
+ 
+@@ -77,6 +77,10 @@ do_install () {
+ do_stage () {
+ 	install -d ${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/ti-codec-combos
+ 	cp -pPrf ${S}/* ${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/ti-codec-combos
++	for codec in encode decode ; do
++		mkdir -p  ${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/ti-codec-combos/packages/ti/sdo/servers/$codec/package/info/${datadir}/ti-codec-combos
++		ln -sf ${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/ti-codec-combos/packages/ti/sdo/servers/$codec/package/info/$codec* ${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/ti-codec-combos/packages/ti/sdo/servers/$codec/package/info/${datadir}/ti-codec-combos
++	done
+ }
+ 
+ FILES_ti-codec-combos = "${datadir}/ti-codec-combos/*"
+-- 
+1.5.6.5
 
 
 
