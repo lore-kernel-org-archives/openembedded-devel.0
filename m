@@ -1,40 +1,45 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LqBy8-0007b2-BN
-	for openembedded-devel@openembedded.org; Sat, 04 Apr 2009 21:55:59 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao105.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090404195313.KKOI15318.fed1rmmtao105.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Sat, 4 Apr 2009 15:53:13 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id bXtE1b0064dMFYL04XtEqw; Sat, 04 Apr 2009 15:53:14 -0400
-X-Authority-Analysis: v=1.0 c=1 a=dCPe7Aef5DIA:10 a=3Vc4vK90Be8A:10
-	a=9qJxKk-okkm3dTASPu0A:9 a=ItbMwiYGYptqhIbg-nNWjcnhGRcA:4
-	a=0oFHZcPLJ8YA:10
-X-CM-Score: 0.00
-Date: Sat, 4 Apr 2009 12:53:14 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090404195314.GQ30840@smtp.west.cox.net>
-References: <20090403221352.GH30840@smtp.west.cox.net>
-	<20090403221721.GI30840@smtp.west.cox.net>
-	<20090403221751.GJ30840@smtp.west.cox.net>
-	<20090403221813.GK30840@smtp.west.cox.net>
-	<20090404192517.GP30840@smtp.west.cox.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1LqCMd-0001cL-Re
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Apr 2009 22:21:18 +0200
+Received: by bwz19 with SMTP id 19so1364560bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 04 Apr 2009 13:18:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=vRfCxhv7ebBK3Gnlp/b7VylbDw2yJ9fb+nkKFy3pRbE=;
+	b=qBdNsyRXQAjWuYIEM+iEtlfcdHmMYPMPlcB3uWxu85oFCIE+p6pl7FYWkVdRC/c0FV
+	X9nhbxvyDuLEbrUWI1W/rPRvq0H99EtDBG46sWa54u6wFAvj0N0nlgN+L+2UjCRG0Smv
+	BqFGwFPng3HIxnV01wGtU2VjsXRA9u6b5eVzQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=IivNvRm6vg7+3geKU4S3Q5zd7WejzJC0szjl10GC/UiXlwlY3nCcugLfA3zVIUd3Y6
+	BK7Wfq88Tzxj0IYC8eOmaP67zlTo/YvnD3hW9iZjFtiVxPWqraM6tta3Q1HNj09IPQnc
+	z/ZQkMey0eZD6yF1VM3iHKaWHROEABXscZTIA=
 MIME-Version: 1.0
-In-Reply-To: <20090404192517.GP30840@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.41
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+Received: by 10.223.110.3 with SMTP id l3mr2242525fap.48.1238876314046; Sat, 
+	04 Apr 2009 13:18:34 -0700 (PDT)
+In-Reply-To: <gr82p7$2vd$1@ger.gmane.org>
+References: <gr7nfd$32a$1@ger.gmane.org>
+	<ac9c93b10904040851q4d038367l7ac1d4e80a52dfc4@mail.gmail.com>
+	<gr82p7$2vd$1@ger.gmane.org>
+Date: Sat, 4 Apr 2009 22:18:34 +0200
+Message-ID: <ac9c93b10904041318hd16998cg77f19e0e9196f25f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.171
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_40,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] meta-toolchain-gpe-sbox: Drop task-sdk-gpephone (to match	m-t-gpe), bump PR
+Subject: Re: [RFC] Rebuild external kernel modules on kernel change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,42 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2009 19:55:59 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 04 Apr 2009 20:21:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-After a quick check with Florian Boor, this is also correct.
+2009/4/4 Koen Kooi <k.kooi@student.utwente.nl>:
+> On 04-04-09 17:51, Frans Meulenbroeks wrote:
+>>
+>> Hm,
+>>
+>> I don't like that one needs to touch conf/machine/beagleboard.conf
+>> each time the kernel is updated.
+>> This is likely to be forgotten at some time.
+>> Can't we use something in the linux-omap-*.bb file ?
+>
+> You can't set global vars in recipes.
 
----
-meta-toolchain-gpe-sbox: Drop task-sdk-gpephone (to match m-t-gpe), bump PR
+Thinking of it the real issue is that we do have DEPENDS that takes
+care that if A needs B, B is build before A (and I guess that after
+updating B a bitbake of A will result in a recompile, even if A's PR
+is not changed.
 
----
- recipes/meta/meta-toolchain-gpe-sbox.bb |    5 ++---
- 1 files changed, 2 insertions(+), 3 deletions(-)
+Maybe a solution could be to be able to rebuild a package plus all its
+dependencies (the information is there in the DEPENDS lines).
 
-diff --git a/recipes/meta/meta-toolchain-gpe-sbox.bb b/recipes/meta/meta-toolchain-gpe-sbox.bb
-index 29e39c5..679e50c 100644
---- a/recipes/meta/meta-toolchain-gpe-sbox.bb
-+++ b/recipes/meta/meta-toolchain-gpe-sbox.bb
-@@ -1,12 +1,11 @@
--PR = "r1"
-+PR = "r2"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-base \
-     task-sdk-sbox \
-     task-sdk-sbox-gpe \
-     task-sdk-x11 \
-     task-sdk-x11-ext \
--    task-sdk-gpe \
--    task-sdk-gpephone"
-+    task-sdk-gpe"
- 
- require meta-toolchain.bb
- 
--- 
-1.5.6.3
-
--- 
-Tom Rini
+Frans.
 
 
