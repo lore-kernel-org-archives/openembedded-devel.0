@@ -1,42 +1,43 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [213.91.4.211] (helo=bart.wifirst.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lqpe4-0005JI-Lz
-	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 16:18:32 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LqpbK-0000MQ-9J
-	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 14:15:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 06 Apr 2009 14:15:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 06 Apr 2009 14:15:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 06 Apr 2009 16:02:05 +0200
-Message-ID: <grd20t$rdt$3@ger.gmane.org>
-References: <1239020332-6949-1-git-send-email-jeremy.laine@bolloretelecom.eu>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <1239020332-6949-1-git-send-email-jeremy.laine@bolloretelecom.eu>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LqrpT-0006xm-9n
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Apr 2009 18:37:49 +0200
+Received: from bart.wifirst.net (localhost [127.0.0.1])
+	by bart.wifirst.net (Postfix) with ESMTP id 57C6D5FEDE
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Apr 2009 18:34:54 +0200 (CEST)
+Received: from bart.wifirst.net (localhost [127.0.0.1])
+	by bart.wifirst.net (Postfix) with ESMTP id A6A6A5FF5D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Apr 2009 18:34:52 +0200 (CEST)
+Received: from blini.bolloretelecom.eu (smtp.bolloretelecom.eu
+	[62.210.194.121])
+	by bart.wifirst.net (Postfix) with ESMTP id 882565FEDE
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Apr 2009 18:34:52 +0200 (CEST)
+Received: from [192.168.95.73] (unknown [192.168.95.73])
+	by blini.bolloretelecom.eu (Postfix) with ESMTPSA id 4F00523E4A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Apr 2009 18:34:52 +0200 (CEST)
+Message-ID: <49DA2F2C.60008@bolloretelecom.eu>
+Date: Mon, 06 Apr 2009 18:34:52 +0200
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.19) Gecko/20090103 Thunderbird/2.0.0.19 Mnenhy/0.7.5.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.0
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 213.91.4.211
+X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] dhclient: use LDFLAGS (fixes QA error)
+Subject: [RFC] make "LDFLAGS ignored" QA errors fatal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,42 +51,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 14:18:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 06 Apr 2009 16:37:49 -0000
+X-Groupsio-MsgNum: 9137
+Content-Type: multipart/mixed; boundary="------------090700000604090403000301"
 
-On 06-04-09 14:18, Jeremy Lainé wrote:
-> From: Jeremy Lainé<jeremy.laine@m4x.org>
+--------------090700000604090403000301
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->
->
-> Signed-off-by: Jeremy Lainé<jeremy.laine@m4x.org>
-> ---
->   recipes/dhclient/dhclient_2.0pl5.bb |    2 ++
->   1 files changed, 2 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/dhclient/dhclient_2.0pl5.bb b/recipes/dhclient/dhclient_2.0pl5.bb
-> index 20b0dfc..0b1f614 100644
-> --- a/recipes/dhclient/dhclient_2.0pl5.bb
-> +++ b/recipes/dhclient/dhclient_2.0pl5.bb
-> @@ -1,12 +1,14 @@
->   SECTION = "console/network"
->   DESCRIPTION = "ISC DHCP Distribution (client and server)."
->   LICENSE = "BSD"
-> +PR = "r1"
->
->   SRC_URI = "ftp://ftp.isc.org/isc/dhcp/dhcp-2.0-history/dhcp-${PV}.tar.gz \
->   	   file://make.patch;patch=1"
->   S = "${WORKDIR}/dhcp-${PV}"
->
->   export BINDIR = "${sbindir}"
-> +export LFLAGS = "${LDFLAGS}"
->
->   do_configure () {
->   	./configure ${TARGET_SYS}
+I have spent quite some time cleaning up a bunch of recipes which were
+triggering "LDFLAGS ignored" QA errors, and I don't really want to
+have to do this again in the future. I suggest we stop whitelisting
+this kind of QA error, using the attached patch.
+
+To track down the faulty packages I have made use of oestats output
+(note that not all QA errors are "LDFLAGS ignored"):
+
+http://tinderbox.openembedded.net/packages/?qalog=3D1
+
+In most cases, the problem is that recipes simply pass
+- -L${STAGING_LIBDIR} as LDFLAGS instead of using the full ${LDFLAGS}
+variable. The result is that flags such as --hash-style=3Dgnu are
+getting ignored.
+
+What are your thoughts?
+
+- --
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAknaLysACgkQCL1n3lVB9EZgbQCgoQpUwdae7elUHWag8wqAROY7
+D0sAmQGjH0zrO8OxgI5MPfSAshQz9Fuu
+=3Dto11
+-----END PGP SIGNATURE-----
 
 
+--------------090700000604090403000301
+Content-Type: text/x-diff;
+ name="fatal_ldflags.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="fatal_ldflags.patch"
 
+diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+index 3e519c3..9fc5f07 100644
+--- a/classes/insane.bbclass
++++ b/classes/insane.bbclass
+@@ -184,7 +184,7 @@ def package_qa_make_fatal_error(error_class, name, path,d):
+ 
+     TODO: Load a whitelist of known errors
+     """
+-    return not error_class in [0, 5, 7, 9]
++    return not error_class in [0, 5, 7]
+ 
+ def package_qa_write_error(error_class, name, path, d):
+     """
 
+--------------090700000604090403000301
+Content-Type: application/octet-stream;
+ name="fatal_ldflags.patch.sig"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="fatal_ldflags.patch.sig"
+
+iEYEABECAAYFAknaLysACgkQCL1n3lVB9EYqqACfT+TaGW7/cDCO5kGXatXo1oxQPqgAn1Z7dM8u
+cRBg3p5vubIBdGr5qtFN
+
+--------------090700000604090403000301--
