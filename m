@@ -1,43 +1,29 @@
-Received: from [213.91.4.211] (helo=bart.wifirst.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LqoZK-0006xk-U3
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Apr 2009 15:09:45 +0200
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id B116A5FF53
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Apr 2009 15:06:02 +0200 (CEST)
-Received: from bart.wifirst.net (localhost [127.0.0.1])
-	by bart.wifirst.net (Postfix) with ESMTP id 4F30A5FF5D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Apr 2009 15:06:01 +0200 (CEST)
-Received: from blini.bolloretelecom.eu (smtp.bolloretelecom.eu
-	[62.210.194.121])
-	by bart.wifirst.net (Postfix) with ESMTP id 335845FF53
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Apr 2009 15:06:01 +0200 (CEST)
-Received: from [192.168.95.73] (unknown [192.168.95.73])
-	by blini.bolloretelecom.eu (Postfix) with ESMTPSA id 3628D23E4A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Apr 2009 15:06:00 +0200 (CEST)
-Message-ID: <49D9FE37.9040005@bolloretelecom.eu>
-Date: Mon, 06 Apr 2009 15:05:59 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.19) Gecko/20090103 Thunderbird/2.0.0.19 Mnenhy/0.7.5.0
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lqoue-0004FP-HX
+	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 15:31:26 +0200
+Received: (qmail 27640 invoked by uid 813007); 6 Apr 2009 13:28:05 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 6 Apr 2009 13:28:05 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 213.91.4.211
-X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
+Date: Mon, 6 Apr 2009 15:28:04 +0200
+User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
+References: <49D9FE37.9040005@bolloretelecom.eu>
+In-Reply-To: <49D9FE37.9040005@bolloretelecom.eu>
+MIME-Version: 1.0
+Message-Id: <200904061528.05390.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_NEUTRAL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_20,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Package "pine" has multiple issues
+Subject: Re: Package "pine" has multiple issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,36 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 13:10:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Apr 2009 13:31:33 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia poniedzia=C5=82ek, 6 kwietnia 2009 o 15:05:59 Jeremy Lain=C3=A9 napisa=
+=C5=82(a):
+> While doing some QA work I came up with the following problems:
+>
+> * RDEPENDS_pine =3D "pico" : this looks wrong, should probably be a
+> "+=3D" * pine embeds a copy of libc-client, which is already available
+> as a separate package
+> * LDFLAGS are ignored, resulting in a QA error
 
-While doing some QA work I came up with the following problems:
+I think that we should drop it totally and use Alpine instead. Why?
 
-* RDEPENDS_pine =3D "pico" : this looks wrong, should probably be a "+=3D=
-"
-* pine embeds a copy of libc-client, which is already available as a
-separate package
-* LDFLAGS are ignored, resulting in a QA error
+=2D Pine is not developed anymore
+=2D Pine has license which do not allows to distribute changed binaries
+=2D Alpine replaced Pine
+=2D Alpine uses Apache License 2.0
 
-As I can't find "pine" in the MAINTAINERS file, could someone step
-forward and fix it please?
+> As I can't find "pine" in the MAINTAINERS file, could someone step
+> forward and fix it please?
 
-Cheers,
+IIRC Mickeyl added it long time ago.
 
-- --
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-iEYEARECAAYFAknZ/jcACgkQCL1n3lVB9EZxVACgvh34Fk11nuCzUT/r/DKPicej
-3mgAoNBpISA+o1XKfjySxMA5ZoKYmoDp
-=3DPL5d
------END PGP SIGNATURE-----
+
 
 
