@@ -1,30 +1,53 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [209.85.132.240] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1LqnTz-0008Ms-IH; Mon, 06 Apr 2009 13:59:21 +0200
-Received: from [192.168.2.162] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1Lqnkg-0001Nz-PU; Mon, 06 Apr 2009 14:16:34 +0200
-Message-ID: <49D9EDE7.6080001@kernelconcepts.de>
-Date: Mon, 06 Apr 2009 13:56:23 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+	(envelope-from <mario.goulart@gmail.com>) id 1Lqnej-0000GZ-GY
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Apr 2009 14:10:29 +0200
+Received: by an-out-0708.google.com with SMTP id b2so3395939ana.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Apr 2009 05:07:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:references:date:in-reply-to:message-id:user-agent:mime-version
+	:content-type; bh=ANBjNxVLsPPaFSKO/4ITh9nUKytlQ27eA4kJuSaRl4M=;
+	b=hDLBSHceqahgb8Tppv3ooss9IAlEegZvPSoq5asMrfhpPFvj26POMeiWZ3uBcpqRKU
+	CTuV99grmWfCqaQ/wCVSq45JC0iQlLV8kdB0xkGao2+7v2g3ekQwNx72rm7ZbjYcaiRk
+	OMvwpnDtlREWOPxj3lxLNEoBPOjXgpFSkOads=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:references:date:in-reply-to:message-id
+	:user-agent:mime-version:content-type;
+	b=udLpa8X6RKgcWYJSWUYebYMIprVKf4x3DCQkrDIG3SOUTUBiEVpMbaWkvbDe8PFCG6
+	DC/I8u1fkgzOL3Lyjpahr52v90ixoNutzrGLGzv7ZTLLwg06Wz1NBOdjFzNrNY3BqZ61
+	wFcj0lVkEAXr7YYtX+WezsJaFRw36+nWG/EJ0=
+Received: by 10.100.109.13 with SMTP id h13mr8228831anc.21.1239019655396;
+	Mon, 06 Apr 2009 05:07:35 -0700 (PDT)
+Received: from nachos.gmail.com
+	(189-30-249-8.pltce701.dsl.brasiltelecom.net.br [189.30.249.8])
+	by mx.google.com with ESMTPS id c37sm17933964ana.22.2009.04.06.05.07.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 06 Apr 2009 05:07:34 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: Otavio Salvador <otavio@ossystems.com.br>
+References: <200903242144.29168.marcin@juszkiewicz.com.pl>
+	<200903271748.24641.marcin@juszkiewicz.com.pl>
+	<87d4c25nrs.fsf@neumann.lab.ossystems.com.br>
+Date: Mon, 06 Apr 2009 09:07:29 -0300
+In-Reply-To: <87d4c25nrs.fsf@neumann.lab.ossystems.com.br> (Otavio Salvador's
+	message of "Sat, 28 Mar 2009 00:28:39 -0300")
+Message-ID: <87ljqeq932.fsf@ossystems.com.br>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <20090403221352.GH30840@smtp.west.cox.net>
-In-Reply-To: <20090403221352.GH30840@smtp.west.cox.net>
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+X-SA-Exim-Connect-IP: 209.85.132.240
+X-SA-Exim-Mail-From: mario.goulart@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.7 required=5.0 tests=BAYES_50,RCVD_IN_SORBS_WEB,
+	RDNS_NONE,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Subject: Re: Fix relocation of our SDK toolchains
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: IRC discussion about stable branch - 25.03.2009 12:00 GMT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,43 +61,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 11:59:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 06 Apr 2009 12:10:30 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hi,
+On Sat, 28 Mar 2009 00:28:39 -0300 Otavio Salvador <otavio@ossystems.com.br> wrote:
 
-Tom Rini schrieb:
-> Hey all.  For some time, myself and others have wished that the
-> toolchain we install with our SDK target (meta-toolchain*) could be
-> relocatible.  I've finally spent some time digging into this and I've
+> Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> writes:
+>
+>> - Marcin 'hrw' Juszkiewicz  - own company and Bug Labs Inc.
+>> - Philip 'Crofton' Balister
+>> - Marco 'mckoan' Cavallini  - Koan Software
+>
+> Please put me and Mario Goulart on this list. Mario, please ack this
+> mail.
 
-that's great - I guess you'll make quite some users happy.
+Oops.  Missed this one.  Acked.
 
-> come up with the following series of patches.  We had two problems.  The
-> first is that things like 'as', 'ld', 'cpp', etc that the toolchain
-> invokes were absolute links rather than relative links within the SDK.
-> The second issue is that we were using --with-gxx-include-dir in
-> configuring gcc when really we don't want that, we want to put the C++
-> includes where GCC is going to look for them already, not in an absolute
-> path.
-> 
-> I've tested this series of patches with gcc-4.1.2 / 4.2.4 and 4.3.3
-> cross-sdk targets on Linux and 4.2.4 on Windows.  For Linux I've
-> compiled qtopia-core-4.3.5 as a stand-in for a large complex app.
-
-I didn't find any obvious problems with the patches and since the changes are
-tested I vote for pushing them!
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Best wishes.
+Mario
 
 
