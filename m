@@ -1,42 +1,44 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.44.158] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lqt8V-0005XG-OC
-	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 20:01:35 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lqt5k-00021X-Vd
-	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 17:58:41 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 06 Apr 2009 17:58:40 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 06 Apr 2009 17:58:40 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 06 Apr 2009 19:58:30 +0200
-Message-ID: <grdfs6$flp$1@ger.gmane.org>
-References: <49DA2F2C.60008@bolloretelecom.eu>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <49DA2F2C.60008@bolloretelecom.eu>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <raj.khem@gmail.com>) id 1LquXu-0000kC-8q
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Apr 2009 21:31:52 +0200
+Received: by yx-out-1718.google.com with SMTP id 3so1595661yxi.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Apr 2009 12:28:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=79Csxpy2HOwcGejPT5MQ5Kt3BljtrstJ5x93tBfJ8ek=;
+	b=rIu9iYOEAo2ckzhDiwYBZ+F0Wgm9nbQzPDvNsROtWc0+98nqeUZPJmWXJrbptPv2Ph
+	cGhttg/IjSDjQuPtbW4m31mt2R2RsuVWFPy4y0IkVWd1QMm9qpgcY1xjDqjknp0LtAaA
+	51aVX6FA9EgAbYuOhbBqv+jaBdeTWRp2RQbOM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=oC07hCEdmM5wrg0TuvvRBBRd4+r8Qxv34502a8xpLFFtJzY4y0pkRy95tR3KpU37Hu
+	ay31wHCQ1pZZNfZoqfJMKR4p8rLmz3G4ZDZdl0n3T2oBi/l8WkczH+QliUchpZkO/Psz
+	JZkBblgf3WzUTdudVLA6BQMNQHN2j3wWyDvJU=
+MIME-Version: 1.0
+Received: by 10.101.71.3 with SMTP id y3mr9000099ank.62.1239046137982; Mon, 06 
+	Apr 2009 12:28:57 -0700 (PDT)
+In-Reply-To: <20090403221721.GI30840@smtp.west.cox.net>
+References: <20090403221352.GH30840@smtp.west.cox.net>
+	<20090403221721.GI30840@smtp.west.cox.net>
+Date: Mon, 6 Apr 2009 12:28:57 -0700
+Message-ID: <19c1b8a90904061228q473ea2fey5d69a056c254ba87@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.44.158
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.6 required=5.0 tests=BAYES_20,RDNS_NONE,SPF_PASS
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] make "LDFLAGS ignored" QA errors fatal
+Subject: Re: [PATCH] binutils-cross-sdk: Make relative, not absolute 	symlinks for 'as', etc, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,40 +52,169 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 18:01:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 06 Apr 2009 19:31:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 06-04-09 18:34, Jeremy Lainé wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+looks good.
+
+On 4/3/09, Tom Rini <trini@kernel.crashing.org> wrote:
+> binutils-cross-sdk: Make relative, not absolute symlinks for 'as', etc, bump
+> PR
+>  While I'm in here, make the cvs recipe use FILESPATHPKG not mung FILESDIR.
 >
-> I have spent quite some time cleaning up a bunch of recipes which were
-> triggering "LDFLAGS ignored" QA errors, and I don't really want to
-> have to do this again in the future. I suggest we stop whitelisting
-> this kind of QA error, using the attached patch.
+> ---
+>  recipes/binutils/binutils-cross-sdk.inc            |    2 +-
+>  recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb |    1 +
+>  recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb |    1 +
+>  recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb |    2 +-
+>  recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb |    1 +
+>  recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb |    2 +-
+>  .../binutils/binutils-cross-sdk_2.17.50.0.12.bb    |    2 +-
+>  recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb |    2 +-
+>  recipes/binutils/binutils-cross-sdk_2.18.bb        |    2 +-
+>  recipes/binutils/binutils-cross-sdk_2.19.1.bb      |    2 +-
+>  recipes/binutils/binutils-cross-sdk_2.19.bb        |    2 +-
+>  recipes/binutils/binutils-cross-sdk_cvs.bb         |    4 ++--
+>  12 files changed, 13 insertions(+), 10 deletions(-)
 >
-> To track down the faulty packages I have made use of oestats output
-> (note that not all QA errors are "LDFLAGS ignored"):
+> diff --git a/recipes/binutils/binutils-cross-sdk.inc
+> b/recipes/binutils/binutils-cross-sdk.inc
+> index 5da1d4f..6e9cda0 100644
+> --- a/recipes/binutils/binutils-cross-sdk.inc
+> +++ b/recipes/binutils/binutils-cross-sdk.inc
+> @@ -17,7 +17,7 @@ do_install () {
+>  	rm ${D}${prefix}/${TARGET_SYS}/bin/.debug -Rf
+>  	rm ${D}${prefix}/${TARGET_SYS}/bin/*
+>  	for l in ${D}${bindir}/*; do
+> -		ln -sf "${bindir}/`basename $l`"
+> "${D}${prefix}/${TARGET_SYS}/bin/`basename $l | sed -e
+> 's,${TARGET_PREFIX},,'`"
+> +		ln -sf "../../${layout_base_bindir}/`basename $l`"
+> "${D}${prefix}/${TARGET_SYS}/bin/`basename $l | sed -e
+> 's,${TARGET_PREFIX},,'`"
+>  	done
 >
-> http://tinderbox.openembedded.net/packages/?qalog=1
+>          # Install the libiberty header
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb
+> b/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb
+> index f509566..f84a61d 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb
+> @@ -1,2 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> +PR = "r1"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb
+> b/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb
+> index f509566..f84a61d 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb
+> @@ -1,2 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> +PR = "r1"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb
+> b/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb
+> index f84a61d..40e9889 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb
+> @@ -1,3 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r1"
+> +PR = "r2"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb
+> b/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb
+> index f509566..f84a61d 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb
+> @@ -1,2 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> +PR = "r1"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb
+> b/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb
+> index 574265c..cde4e42 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb
+> @@ -1,3 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r4"
+> +PR = "r5"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb
+> b/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb
+> index 574265c..cde4e42 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb
+> @@ -1,3 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r4"
+> +PR = "r5"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb
+> b/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb
+> index 574265c..cde4e42 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb
+> @@ -1,3 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r4"
+> +PR = "r5"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.18.bb
+> b/recipes/binutils/binutils-cross-sdk_2.18.bb
+> index 574265c..cde4e42 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.18.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.18.bb
+> @@ -1,3 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r4"
+> +PR = "r5"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.19.1.bb
+> b/recipes/binutils/binutils-cross-sdk_2.19.1.bb
+> index 76dff54..f84a61d 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.19.1.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.19.1.bb
+> @@ -1,3 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r0"
+> +PR = "r1"
+> diff --git a/recipes/binutils/binutils-cross-sdk_2.19.bb
+> b/recipes/binutils/binutils-cross-sdk_2.19.bb
+> index 76dff54..f84a61d 100644
+> --- a/recipes/binutils/binutils-cross-sdk_2.19.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_2.19.bb
+> @@ -1,3 +1,3 @@
+>  require binutils_${PV}.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r0"
+> +PR = "r1"
+> diff --git a/recipes/binutils/binutils-cross-sdk_cvs.bb
+> b/recipes/binutils/binutils-cross-sdk_cvs.bb
+> index 6886255..94d2704 100644
+> --- a/recipes/binutils/binutils-cross-sdk_cvs.bb
+> +++ b/recipes/binutils/binutils-cross-sdk_cvs.bb
+> @@ -1,4 +1,4 @@
+>  require binutils_cvs.bb
+>  require binutils-cross-sdk.inc
+> -PR = "r4"
+> -FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-cvs"
+> +PR = "r5"
+> +FILESPATHPKG .= ":binutils-cvs"
+> --
+> 1.6.0.4
 >
-> In most cases, the problem is that recipes simply pass
-> - -L${STAGING_LIBDIR} as LDFLAGS instead of using the full ${LDFLAGS}
-> variable. The result is that flags such as --hash-style=gnu are
-> getting ignored.
+> --
+> Tom Rini
 >
-> What are your thoughts?
-
-I think making them fatal is a good idea. I do have some recipes where I 
-can't fix LDFLAGS properly yet, but I can do INSANE_SKIP = 1 inside 
-those for the time being.
-
-So: +1
-
-regards,
-
-Koen
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
