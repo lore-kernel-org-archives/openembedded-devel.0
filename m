@@ -1,53 +1,42 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mario.goulart@gmail.com>) id 1Lqnej-0000GZ-GY
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Apr 2009 14:10:29 +0200
-Received: by an-out-0708.google.com with SMTP id b2so3395939ana.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Apr 2009 05:07:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:references:date:in-reply-to:message-id:user-agent:mime-version
-	:content-type; bh=ANBjNxVLsPPaFSKO/4ITh9nUKytlQ27eA4kJuSaRl4M=;
-	b=hDLBSHceqahgb8Tppv3ooss9IAlEegZvPSoq5asMrfhpPFvj26POMeiWZ3uBcpqRKU
-	CTuV99grmWfCqaQ/wCVSq45JC0iQlLV8kdB0xkGao2+7v2g3ekQwNx72rm7ZbjYcaiRk
-	OMvwpnDtlREWOPxj3lxLNEoBPOjXgpFSkOads=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:references:date:in-reply-to:message-id
-	:user-agent:mime-version:content-type;
-	b=udLpa8X6RKgcWYJSWUYebYMIprVKf4x3DCQkrDIG3SOUTUBiEVpMbaWkvbDe8PFCG6
-	DC/I8u1fkgzOL3Lyjpahr52v90ixoNutzrGLGzv7ZTLLwg06Wz1NBOdjFzNrNY3BqZ61
-	wFcj0lVkEAXr7YYtX+WezsJaFRw36+nWG/EJ0=
-Received: by 10.100.109.13 with SMTP id h13mr8228831anc.21.1239019655396;
-	Mon, 06 Apr 2009 05:07:35 -0700 (PDT)
-Received: from nachos.gmail.com
-	(189-30-249-8.pltce701.dsl.brasiltelecom.net.br [189.30.249.8])
-	by mx.google.com with ESMTPS id c37sm17933964ana.22.2009.04.06.05.07.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 06 Apr 2009 05:07:34 -0700 (PDT)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: Otavio Salvador <otavio@ossystems.com.br>
-References: <200903242144.29168.marcin@juszkiewicz.com.pl>
-	<200903271748.24641.marcin@juszkiewicz.com.pl>
-	<87d4c25nrs.fsf@neumann.lab.ossystems.com.br>
-Date: Mon, 06 Apr 2009 09:07:29 -0300
-In-Reply-To: <87d4c25nrs.fsf@neumann.lab.ossystems.com.br> (Otavio Salvador's
-	message of "Sat, 28 Mar 2009 00:28:39 -0300")
-Message-ID: <87ljqeq932.fsf@ossystems.com.br>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.60 (gnu/linux)
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.132.240
-X-SA-Exim-Mail-From: mario.goulart@gmail.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lqnln-0000Sv-2c
+	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 14:17:47 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lqnj2-0002Yt-M5
+	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 12:14:52 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 06 Apr 2009 12:14:52 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 06 Apr 2009 12:14:52 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 06 Apr 2009 14:14:39 +0200
+Message-ID: <grcrnh$5it$1@ger.gmane.org>
+References: <1239016820-24813-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <1239016820-24813-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.7 required=5.0 tests=BAYES_50,RCVD_IN_SORBS_WEB,
-	RDNS_NONE,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: IRC discussion about stable branch - 25.03.2009 12:00 GMT
+Subject: Re: [STABLE][PATCH] libnl: use LDFLAGS (fixes QA error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,23 +50,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 12:10:30 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 06 Apr 2009 12:17:47 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Sat, 28 Mar 2009 00:28:39 -0300 Otavio Salvador <otavio@ossystems.com.br> wrote:
+On 06-04-09 13:20, Jeremy Lainé wrote:
+> From: Jeremy Lainé<jeremy.laine@m4x.org>
 
-> Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> writes:
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+
 >
->> - Marcin 'hrw' Juszkiewicz  - own company and Bug Labs Inc.
->> - Philip 'Crofton' Balister
->> - Marco 'mckoan' Cavallini  - Koan Software
+> Signed-off-by: Jeremy Lainé<jeremy.laine@m4x.org>
+> ---
+>   .../local-includes-and-avoid-wrong-ldflags.patch   |   13 -------------
+>   recipes/libnl/files/local-includes.patch           |   12 ++++++++++++
+>   recipes/libnl/files/respect-ldflags.patch          |   12 ++++++++++++
+>   recipes/libnl/libnl_1.1.bb                         |    5 +++--
+>   4 files changed, 27 insertions(+), 15 deletions(-)
+>   delete mode 100644 recipes/libnl/files/local-includes-and-avoid-wrong-ldflags.patch
+>   create mode 100644 recipes/libnl/files/local-includes.patch
+>   create mode 100644 recipes/libnl/files/respect-ldflags.patch
 >
-> Please put me and Mario Goulart on this list. Mario, please ack this
-> mail.
+> diff --git a/recipes/libnl/files/local-includes-and-avoid-wrong-ldflags.patch b/recipes/libnl/files/local-includes-and-avoid-wrong-ldflags.patch
+> deleted file mode 100644
+> index 428df53..0000000
+> --- a/recipes/libnl/files/local-includes-and-avoid-wrong-ldflags.patch
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> ---- libnl-1.0-pre8/Makefile.opts.in.orig	2007-11-21 18:25:39.000000000 +0100
+> -+++ libnl-1.0-pre8/Makefile.opts.in	2008-04-04 23:38:40.000000000 +0200
+> -@@ -10,8 +10,8 @@
+> - #
+> -
+> - CC               := @CC@
+> --CFLAGS           := @CFLAGS@
+> --LDFLAGS          := @LDFLAGS@
+> -+CFLAGS           := -I./include -I. -I../include @CFLAGS@
+> -+LDFLAGS          :=
+> - CPPFLAGS         := @CPPFLAGS@
+> - PACKAGE_NAME     := @PACKAGE_NAME@
+> - PACKAGE_VERSION  := @PACKAGE_VERSION@
+> diff --git a/recipes/libnl/files/local-includes.patch b/recipes/libnl/files/local-includes.patch
+> new file mode 100644
+> index 0000000..85659db
+> --- /dev/null
+> +++ b/recipes/libnl/files/local-includes.patch
+> @@ -0,0 +1,12 @@
+> +diff -urN libnl-1.1.orig/Makefile.opts.in libnl-1.1/Makefile.opts.in
+> +--- libnl-1.1.orig/Makefile.opts.in	2008-01-14 15:48:45.000000000 +0000
+> ++++ libnl-1.1/Makefile.opts.in	2009-04-06 10:20:40.000000000 +0000
+> +@@ -10,7 +10,7 @@
+> + #
+> +
+> + CC               := @CC@
+> +-CFLAGS           := @CFLAGS@
+> ++CFLAGS           := -I./include -I. -I../include @CFLAGS@
+> + LDFLAGS          := @LDFLAGS@
+> + CPPFLAGS         := @CPPFLAGS@
+> + PACKAGE_NAME     := @PACKAGE_NAME@
+> diff --git a/recipes/libnl/files/respect-ldflags.patch b/recipes/libnl/files/respect-ldflags.patch
+> new file mode 100644
+> index 0000000..ba97dc6
+> --- /dev/null
+> +++ b/recipes/libnl/files/respect-ldflags.patch
+> @@ -0,0 +1,12 @@
+> +diff -urN libnl-1.1.orig/lib/Makefile libnl-1.1/lib/Makefile
+> +--- libnl-1.1.orig/lib/Makefile	2008-01-14 15:48:45.000000000 +0000
+> ++++ libnl-1.1/lib/Makefile	2009-04-06 10:16:21.000000000 +0000
+> +@@ -48,7 +48,7 @@
+> +
+> + $(OUT_SLIB): ../Makefile.opts $(OBJ)
+> + 	@echo "  LD $(OUT_SLIB)"; \
+> +-	$(CC) -shared -Wl,-soname,libnl.so.1 -o $(OUT_SLIB) $(OBJ) $(LIBNL_LIB) -lc
+> ++	$(CC) $(LDFLAGS) -shared -Wl,-soname,libnl.so.1 -o $(OUT_SLIB) $(OBJ) $(LIBNL_LIB) -lc
+> + 	@echo "  LN $(OUT_SLIB) $(LN1_SLIB)"; \
+> + 	rm -f $(LN1_SLIB) ; $(LN) -s $(OUT_SLIB) $(LN1_SLIB)
+> + 	@echo "  LN $(LN1_SLIB) $(LN_SLIB)"; \
+> diff --git a/recipes/libnl/libnl_1.1.bb b/recipes/libnl/libnl_1.1.bb
+> index dcca3c6..5f2d6f1 100644
+> --- a/recipes/libnl/libnl_1.1.bb
+> +++ b/recipes/libnl/libnl_1.1.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION = "libnl is a library for applications dealing with netlink sockets"
+>   SECTION = "libs/network"
+>   LICENSE = "LGPL"
+>   HOMEPAGE = "http://people.suug.ch/~tgr/libnl"
+> -PR = "r1"
+> +PR = "r2"
+>
+>   inherit autotools pkgconfig
+>
+> @@ -10,8 +10,9 @@ CFLAGS += '-DVLAN_FLAG_REORDER_HDR=1'
+>
+>   SRC_URI = "\
+>     http://people.suug.ch/~tgr/libnl/files/libnl-${PV}.tar.gz \
+> -  file://local-includes-and-avoid-wrong-ldflags.patch;patch=1 \
+> +  file://local-includes.patch;patch=1 \
+>     file://fix-includes.patch;patch=1 \
+> +  file://respect-ldflags.patch;patch=1 \
+>   "
+>
+>   do_stage () {
 
-Oops.  Missed this one.  Acked.
 
-Best wishes.
-Mario
 
 
