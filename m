@@ -1,33 +1,30 @@
-Received: from [212.27.42.3] (helo=smtp3-g21.free.fr)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sharky@sharky.jerryweb.org>) id 1LqmvJ-0007h8-OD
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Apr 2009 13:23:32 +0200
-Received: from smtp3-g21.free.fr (localhost [127.0.0.1])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id B9F0881805D;
-	Mon,  6 Apr 2009 13:20:37 +0200 (CEST)
-Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
-	[81.56.56.40])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id C9C3F81806D;
-	Mon,  6 Apr 2009 13:20:34 +0200 (CEST)
-Received: by sharky.jerryweb.org (Postfix, from userid 1000)
-	id 120B61840D9; Mon,  6 Apr 2009 13:20:36 +0200 (CEST)
-From: =?utf-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@bolloretelecom.eu>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Apr 2009 13:20:36 +0200
-Message-Id: <1239016836-30285-1-git-send-email-jeremy.laine@bolloretelecom.eu>
-X-Mailer: git-send-email 1.6.2.1
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1LqnTz-0008Ms-IH; Mon, 06 Apr 2009 13:59:21 +0200
+Received: from [192.168.2.162] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1Lqnkg-0001Nz-PU; Mon, 06 Apr 2009 14:16:34 +0200
+Message-ID: <49D9EDE7.6080001@kernelconcepts.de>
+Date: Mon, 06 Apr 2009 13:56:23 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.27.42.3
-X-SA-Exim-Mail-From: sharky@sharky.jerryweb.org
+To: openembedded-devel@lists.openembedded.org
+References: <20090403221352.GH30840@smtp.west.cox.net>
+In-Reply-To: <20090403221352.GH30840@smtp.west.cox.net>
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?utf-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@m4x.org>
-Subject: [STABLE][PATCH] tcp-wrappers: use LDFLAGS (fixes QA error)
+Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: Re: Fix relocation of our SDK toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,101 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 11:23:32 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Apr 2009 11:59:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
+Hi,
 
+Tom Rini schrieb:
+> Hey all.  For some time, myself and others have wished that the
+> toolchain we install with our SDK target (meta-toolchain*) could be
+> relocatible.  I've finally spent some time digging into this and I've
 
-Signed-off-by: Jeremy Lain=C3=A9 <jeremy.laine@m4x.org>
----
- recipes/tcp-wrappers/tcp-wrappers-7.6/ldflags |   43 +++++++++++++++++++=
-++++++
- recipes/tcp-wrappers/tcp-wrappers_7.6.bb      |    3 +-
- 2 files changed, 45 insertions(+), 1 deletions(-)
- create mode 100644 recipes/tcp-wrappers/tcp-wrappers-7.6/ldflags
+that's great - I guess you'll make quite some users happy.
 
-diff --git a/recipes/tcp-wrappers/tcp-wrappers-7.6/ldflags b/recipes/tcp-=
-wrappers/tcp-wrappers-7.6/ldflags
-new file mode 100644
-index 0000000..2e89765
---- /dev/null
-+++ b/recipes/tcp-wrappers/tcp-wrappers-7.6/ldflags
-@@ -0,0 +1,43 @@
-+Index: tcp_wrappers_7.6.orig/Makefile
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- tcp_wrappers_7.6.orig.orig/Makefile	2009-04-06 10:55:47.000000000 +0=
-000
-++++ tcp_wrappers_7.6.orig/Makefile	2009-04-06 10:57:04.000000000 +0000
-+@@ -748,31 +748,31 @@
-+=20
-+ $(SHLIB): $(SHLIB_OBJ)
-+ 	rm -f $(SHLIB)
-+-	$(CC) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ)
-++	$(CC) $(LDFLAGS) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ)
-+ 	ln -sf $(notdir $(SHLIB)) $(SHLIBSOMAJ)
-+ 	ln -sf $(notdir $(SHLIBSOMAJ)) $(SHLIBSO)
-+=20
-+ tcpd:	tcpd.o $(SHLIB)
-+-	$(CC) $(CFLAGS) -o $@ tcpd.o $(SHLIBFLAGS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ tcpd.o $(SHLIBFLAGS)
-+=20
-+ miscd:	miscd.o $(LIB)
-+-	$(CC) $(CFLAGS) -o $@ miscd.o $(LIB) $(LIBS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ miscd.o $(LIB) $(LIBS)
-+=20
-+ safe_finger: safe_finger.o $(SHLIB)
-+-	$(CC) $(CFLAGS) -o $@ safe_finger.o $(SHLIBFLAGS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ safe_finger.o $(SHLIBFLAGS)
-+=20
-+ TCPDMATCH_OBJ =3D tcpdmatch.o fakelog.o inetcf.o scaffold.o
-+=20
-+ tcpdmatch: $(TCPDMATCH_OBJ) $(SHLIB)
-+-	$(CC) $(CFLAGS) -o $@ $(TCPDMATCH_OBJ) $(SHLIBFLAGS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(TCPDMATCH_OBJ) $(SHLIBFLAGS)
-+=20
-+ try-from: try-from.o fakelog.o $(SHLIB)
-+-	$(CC) $(CFLAGS) -o $@ try-from.o fakelog.o $(SHLIBFLAGS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ try-from.o fakelog.o $(SHLIBFLAGS)
-+=20
-+ TCPDCHK_OBJ =3D tcpdchk.o fakelog.o inetcf.o scaffold.o
-+=20
-+ tcpdchk: $(TCPDCHK_OBJ) $(SHLIB)
-+-	$(CC) $(CFLAGS) -o $@ $(TCPDCHK_OBJ) $(SHLIBFLAGS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(TCPDCHK_OBJ) $(SHLIBFLAGS)
-+=20
-+ shar:	$(KIT)
-+ 	@shar $(KIT)
-diff --git a/recipes/tcp-wrappers/tcp-wrappers_7.6.bb b/recipes/tcp-wrapp=
-ers/tcp-wrappers_7.6.bb
-index a047c55..1f1afc1 100644
---- a/recipes/tcp-wrappers/tcp-wrappers_7.6.bb
-+++ b/recipes/tcp-wrappers/tcp-wrappers_7.6.bb
-@@ -3,7 +3,7 @@ DESCRIPTION =3D "Tools for monitoring and filtering incom=
-ing requests for tcp \
- LICENSE =3D "tcp-wrappers"
- PRIORITY =3D "optional"
- SECTION =3D "console/network"
--PR =3D"r2"
-+PR =3D"r3"
-=20
-=20
- PACKAGES =3D "${PN}-dbg libwrap libwrap-doc libwrap-dev tcp-wrappers tcp=
--wrappers-doc"
-@@ -35,6 +35,7 @@ SRC_URI =3D "ftp://ftp.porcupine.org/pub/security/tcp_w=
-rappers_${PV}.tar.gz \
-            file://siglongjmp;patch=3D1 \
-            file://size_t;patch=3D1 \
-            file://tcpdchk_libwrapped;patch=3D1 \
-+           file://ldflags;patch=3D1 \
-            \
-            file://try-from.8 \
-            file://safe_finger.8"
---=20
-1.6.2.1
+> come up with the following series of patches.  We had two problems.  The
+> first is that things like 'as', 'ld', 'cpp', etc that the toolchain
+> invokes were absolute links rather than relative links within the SDK.
+> The second issue is that we were using --with-gxx-include-dir in
+> configuring gcc when really we don't want that, we want to put the C++
+> includes where GCC is going to look for them already, not in an absolute
+> path.
+> 
+> I've tested this series of patches with gcc-4.1.2 / 4.2.4 and 4.3.3
+> cross-sdk targets on Linux and 4.2.4 on Windows.  For Linux I've
+> compiled qtopia-core-4.3.5 as a stand-in for a large complex app.
 
+I didn't find any obvious problems with the patches and since the changes are
+tested I vote for pushing them!
+
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
