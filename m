@@ -1,30 +1,42 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LqpZ2-0005BP-Ka
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Apr 2009 16:12:51 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 6C1DA6837B;
-	Mon,  6 Apr 2009 18:09:08 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Apr 2009 18:09:08 +0400
-Message-Id: <1239026948-12471-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.1
-In-Reply-To: <200904032354.43251.khimov@altell.ru>
-References: <200904032354.43251.khimov@altell.ru>
-MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LqpZE-0005Be-1M
+	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 16:13:20 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LqpWU-00007s-Q2
+	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 14:10:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 06 Apr 2009 14:10:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 06 Apr 2009 14:10:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 06 Apr 2009 16:03:05 +0200
+Message-ID: <grd22p$rdt$4@ger.gmane.org>
+References: <1239020353-6991-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <1239020353-6991-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] ace: New recipe for ACE 5.6.8
+Subject: Re: [STABLE][PATCH] pth: use LDFLAGS (fixes QA error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,70 +50,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 14:12:57 -0000
+X-List-Received-Date: Mon, 06 Apr 2009 14:13:26 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
----
- conf/checksums.ini       |    4 ++++
- recipes/ace/ace.inc      |   18 ++++++++++++++++++
- recipes/ace/ace_5.6.8.bb |    1 +
- 3 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ace/ace.inc
- create mode 100644 recipes/ace/ace_5.6.8.bb
+On 06-04-09 14:19, Jeremy Lainé wrote:
+> From: Jeremy Lainé<jeremy.laine@m4x.org>
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index c3c91e2..f32a8d0 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -62,6 +62,10 @@ sha256=7a960180e7873b1bdb522e76b0423b5c2c1b8efe1d30d7ca80c41eb97d822b2d
- md5=24b0e5bbfe21ea9c5a5c589bcc79c0f2
- sha256=ab877846c6caaff32efbf5be6fc5c63b7dec97a2e78c57c525da7705d2052bfc
- 
-+[ftp://download.dre.vanderbilt.edu/previous_versions/ACE-5.6.8.tar.bz2]
-+md5=81c1ff761c3431cd12c81337aa80d558
-+sha256=96b70582d931a7e83c3ca31b3bc7e23957391e16dee4ae6ddf938c9574d50b27
-+
- [http://www.amd.com/files/connectivitysolutions/geode/geode_lx/AES_Linux_LX_02.01.0100.tar.gz]
- md5=12cb241a9037fffe31ba7c68a48ed614
- sha256=a6068b4aa0e2330eed6e4741bad3191dc9ca7d7326f7bfab578ac55e2b8b91a2
-diff --git a/recipes/ace/ace.inc b/recipes/ace/ace.inc
-new file mode 100644
-index 0000000..fc6ee75
---- /dev/null
-+++ b/recipes/ace/ace.inc
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "C++ network programming framework"
-+SECTION = "net"
-+LICENSE = "ACE license"
-+
-+DEPENDS += "openssl gperf-native"
-+
-+SRC_URI = "ftp://download.dre.vanderbilt.edu/previous_versions/ACE-${PV}.tar.bz2"
-+S = "${WORKDIR}/ACE_wrappers"
-+B = "${WORKDIR}/build.${TARGET_SYS}"
-+
-+EXTRA_OECONF += "--disable-ace-tests --disable-gperf"
-+LEAD_SONAME = "libACE-[0-9.]*.so"
-+
-+inherit autotools
-+
-+do_configure_prepend() {
-+	export ace_cv_linux_event_poll=yes
-+}
-diff --git a/recipes/ace/ace_5.6.8.bb b/recipes/ace/ace_5.6.8.bb
-new file mode 100644
-index 0000000..345abe1
---- /dev/null
-+++ b/recipes/ace/ace_5.6.8.bb
-@@ -0,0 +1 @@
-+require ace.inc
--- 
-1.6.2.1
+You're fixing stuff faster than my buildmachine can build :) Anyway, it 
+has caught up, so:
+
+Acked-by: Koen Kooi <koen@openembedded.org>
 
 
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
+>
+>
+> Signed-off-by: Jeremy Lainé<jeremy.laine@m4x.org>
+> ---
+>   recipes/pth/files/ldflags.patch |   16 ++++++++++++++++
+>   recipes/pth/pth_2.0.2.bb        |    3 ++-
+>   2 files changed, 18 insertions(+), 1 deletions(-)
+>   create mode 100644 recipes/pth/files/ldflags.patch
+>
+> diff --git a/recipes/pth/files/ldflags.patch b/recipes/pth/files/ldflags.patch
+> new file mode 100644
+> index 0000000..9537ca8
+> --- /dev/null
+> +++ b/recipes/pth/files/ldflags.patch
+> @@ -0,0 +1,16 @@
+> +diff -urN pth-2.0.2.orig/Makefile.in pth-2.0.2/Makefile.in
+> +--- pth-2.0.2.orig/Makefile.in	2004-07-13 10:48:10.000000000 +0000
+> ++++ pth-2.0.2/Makefile.in	2009-04-06 12:12:37.000000000 +0000
+> +@@ -168,10 +168,10 @@
+> +
+> + #   build the static and possibly shared libraries
+> + libpth.la: $(LOBJS)
+> +-	$(LIBTOOL) --mode=link --quiet $(CC) -o libpth.la $(LOBJS) \
+> ++	$(LIBTOOL) --mode=link --quiet $(CC) $(LDFLAGS) -o libpth.la $(LOBJS) \
+> + 	-rpath $(libdir) -version-info `$(SHTOOL) version -lc -dlibtool $(_VERSION_FILE)`
+> + libpthread.la: pthread.lo $(LOBJS)
+> +-	$(LIBTOOL) --mode=link --quiet $(CC) -o libpthread.la pthread.lo $(LOBJS) \
+> ++	$(LIBTOOL) --mode=link --quiet $(CC) $(LDFLAGS) -o libpthread.la pthread.lo $(LOBJS) \
+> + 	-rpath $(libdir) -version-info `$(SHTOOL) version -lc -dlibtool $(_VERSION_FILE)`
+> +
+> + #   build the manual pages
+> diff --git a/recipes/pth/pth_2.0.2.bb b/recipes/pth/pth_2.0.2.bb
+> index 81b8a71..2583e03 100644
+> --- a/recipes/pth/pth_2.0.2.bb
+> +++ b/recipes/pth/pth_2.0.2.bb
+> @@ -2,10 +2,11 @@ DESCRIPTION = "GNU Portable Threads"
+>   SECTION = "libs"
+>   PRIORITY = "optional"
+>   LICENSE = "GPL LGPL FDL"
+> -PR = "r1"
+> +PR = "r2"
+>
+>   SRC_URI = "${GNU_MIRROR}/pth/pth-${PV}.tar.gz \
+>   	   file://m4-warning.patch;patch=1 \
+> +	   file://ldflags.patch;patch=1 \
+>   	  "
+>
+>   PARALLEL_MAKE=""
+
 
 
 
