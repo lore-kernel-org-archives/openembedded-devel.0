@@ -1,30 +1,41 @@
-Received: from [216.145.245.200] (helo=mx04.dls.net)
+Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Lqg5f-0003hY-GK
-	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 06:05:46 +0200
-Received: from [209.242.7.134] (helo=[192.168.231.111])
-	by mx04.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1Lqg2x-00016V-HX
-	for openembedded-devel@openembedded.org; Sun, 05 Apr 2009 23:02:55 -0500
-Message-ID: <49D97EF8.4040905@dls.net>
-Date: Sun, 05 Apr 2009 23:03:04 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	(envelope-from <trini@kernel.crashing.org>) id 1LqgP9-0000qj-F2
+	for openembedded-devel@openembedded.org; Mon, 06 Apr 2009 06:25:54 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao106.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090406042301.ZWXC22254.fed1rmmtao106.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 6 Apr 2009 00:23:01 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id c4P01b00H4dMFYL034P0ty; Mon, 06 Apr 2009 00:23:01 -0400
+X-Authority-Analysis: v=1.0 c=1 a=3SGHwq3LWSQA:10 a=OTfRANgV8fkA:10
+	a=3Uw2J-4Qhd4nx_qCSLQA:9 a=LcshubguKskVslyLeU_3ICagtOgA:4
+	a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Sun, 5 Apr 2009 21:23:00 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-References: <20090403221352.GH30840@smtp.west.cox.net>	<20090403221721.GI30840@smtp.west.cox.net>	<20090403221751.GJ30840@smtp.west.cox.net>	<20090403221813.GK30840@smtp.west.cox.net>
+Message-ID: <20090406042300.GS30840@smtp.west.cox.net>
+References: <20090403221352.GH30840@smtp.west.cox.net>
+	<20090403221721.GI30840@smtp.west.cox.net>
+	<20090403221751.GJ30840@smtp.west.cox.net>
+	<20090403221813.GK30840@smtp.west.cox.net>
 	<20090404192517.GP30840@smtp.west.cox.net>
-In-Reply-To: <20090404192517.GP30840@smtp.west.cox.net>
-X-SA-Exim-Connect-IP: 216.145.245.200
-X-SA-Exim-Mail-From: mwester@dls.net
+	<49D97EF8.4040905@dls.net>
+MIME-Version: 1.0
+In-Reply-To: <49D97EF8.4040905@dls.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.40
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=AWL,BAYES_05,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_40,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Re: task-slugos-toolchain-target: Add libstdc++-dev for C++ headers, bump PR
+Subject: Re: [PATCH] Re: task-slugos-toolchain-target: Add	libstdc++-dev for C++ headers, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,93 +49,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 04:05:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 06 Apr 2009 04:25:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Tom Rini wrote:
-> After checking with mwester, this is the correct thing to do.
-> ---
+On Sun, Apr 05, 2009 at 11:03:04PM -0500, Mike (mwester) wrote:
+[snip]
+> Thanks!
 > 
-> task-slugos-toolchain-target: Add libstdc++-dev for C++ heades, bump PR
+> Per our discussion on IRC, I propose the following patch for this, which
+> pulls in task-sdk-bare to address the problem you discovered above, as
+> well as the other things you pointed out.
 > 
-> ---
->  recipes/tasks/task-slugos-toolchain-target.bb |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/tasks/task-slugos-toolchain-target.bb b/recipes/tasks/task-slugos-toolchain-target.bb
-> index 489a412..4f9df9b 100644
-> --- a/recipes/tasks/task-slugos-toolchain-target.bb
-> +++ b/recipes/tasks/task-slugos-toolchain-target.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION = "Packages for a standalone SDK or external toolchain"
->  LICENSE = "MIT"
->  ALLOW_EMPTY = "1"
->  
-> -PR = "r1"
-> +PR = "r2"
->  
->  PACKAGES = "${PN}"
->  
-> @@ -18,6 +18,7 @@ RDEPENDS_${PN} = "\
->      libcrypto \
->      openssl-dev \
->      libstdc++ \
-> +    libstdc++-dev \
->      "
->  
->  # Not sure if we need these or not...
+> Do you want to commit the change, or should I?
 
-Thanks!
+Since this is independant of the main changes I posted (hit this do
+compile tests for all SDKs), please go ahead and push your fix.  Thanks!
 
-Per our discussion on IRC, I propose the following patch for this, which
-pulls in task-sdk-bare to address the problem you discovered above, as
-well as the other things you pointed out.
-
-Do you want to commit the change, or should I?
-
--Mike (mwester)
-
-
-diff --git a/recipes/tasks/task-slugos-toolchain-target.bb b/recipes/tasks/task-slugos-toolchain-target.bb
-index 489a412..fb0418f 100644
---- a/recipes/tasks/task-slugos-toolchain-target.bb
-+++ b/recipes/tasks/task-slugos-toolchain-target.bb
-@@ -2,31 +2,21 @@ DESCRIPTION = "Packages for a standalone SDK or external toolchain"
- LICENSE = "MIT"
- ALLOW_EMPTY = "1"
-
--PR = "r1"
-+PR = "r2"
-
- PACKAGES = "${PN}"
-
--# Stuff contained in this SDK is largely taken from task-sdk-base.bb.
-+DEPENDS = "task-sdk-bare"
-+
- # This is a starting point, and nothing more at present -- please fill
- # this out with a reasonable set of development tools for a SlugOS image.
- # Also feel free to remove stuff that's silly.
-
- RDEPENDS_${PN} = "\
--    libgcc \
-+    task-sdk-bare \
-     linux-libc-headers-dev \
-     libssl \
-     libcrypto \
-     openssl-dev \
--    libstdc++ \
--    "
--
--# Not sure if we need these or not...
--NOT_SURE_ABOUT = "\
--    libsegfault \
--    "
--
--# This one needs further investigation; seems to be some sort
--# of naming problem that breaks the SDK when it is added directly.
--ODDLY_BROKEN_PACKAGES ="\
--    libz-dev \
-+    zlib-dev \
-     "
+-- 
+Tom Rini
 
 
