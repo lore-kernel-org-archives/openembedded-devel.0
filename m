@@ -1,39 +1,40 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1Lr5Vc-0006dh-VA
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 09:18:13 +0200
-Received: by an-out-0708.google.com with SMTP id d11so2488707and.30
-	for <openembedded-devel@openembedded.org>;
-	Tue, 07 Apr 2009 00:11:17 -0700 (PDT)
+	(envelope-from <esbenhaabendal@gmail.com>) id 1Lr5fx-0003jR-A0
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Apr 2009 09:24:57 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so1770352ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Apr 2009 00:21:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=uMbP4bB8oie7XOIAF6zXXQ3FRHerHaUwCtQCxeu2XdE=;
-	b=lrpv+wHh/HZEYr99V33+OYBJcBqVgsbDI+T50yzhEcxr5tN749sOBlJTJliYXii5m/
-	cUuOAKDYO2apz2lxUjc2hT4oJPsqtingTyWAiH9+9e5hHRAOBT0rdbwHoh1TqAs/j2DA
-	V3wKtufP5nrHIDPIrg19up7X3JScFDlCujAjA=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=HtTQ3cFSvouDjHAxGzmdr9ImA7nLKpNvAAil8x5Q2YE=;
+	b=L1XA9KfAk8odnv01xJMzs/KscVQENV5ORz2XrdAFV/g61QJONFLaz9fAs6UJU7Awo4
+	hXx9eCuVQtO12Zgn78lVVwIRpmlRtUxgTNH2gU8YX852kWkZWwdyqEZQIBcarPDz8UjP
+	2B7l6cxOzyHqeirdUvcBsL+WnyP+C+FNcM/4c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=CL3enY0NfGrKrRR0DRWcvZiJFDI7/OkdqmsROlIdR6M3lEDWJx/jji5PVqrvWrnl4q
-	06vZHB0UV1mgFwsFlzyba+30Uni6N4nb8VoBjs1Nb8vlnN/lKkZd1/CUNtK9So02E1BF
-	kmPRsiHHb0OmofJXIjksDrxCrAy1AWY3G4MBU=
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=i4o2s4Nft/J4qAB2p6XZ5y99aEzPAHvOPevj/XWdIAZNLl+LsfbIVvYnG5+6Rk1Zt3
+	tzGbyI7ll2CLdC+f39M1WRduYGcCrcagis3ZAy8OcgLGaQCDP6V8ZIn84LFSDyNedBUC
+	rQUOMkS77siQpq7qhpUpA7hY7ZNakMdkztRpQ=
 MIME-Version: 1.0
-Received: by 10.100.227.18 with SMTP id z18mr7465395ang.49.1239088277362; Tue, 
-	07 Apr 2009 00:11:17 -0700 (PDT)
-In-Reply-To: <20090406235402.GA2195@smtp.west.cox.net>
-References: <d2b9ea600904061614r2839effbla380925d536c3999@mail.gmail.com>
-	<20090406235402.GA2195@smtp.west.cox.net>
-Date: Tue, 7 Apr 2009 09:11:17 +0200
-Message-ID: <d2b9ea600904070011m2233742by5b8af78fa8417261@mail.gmail.com>
+Received: by 10.100.253.7 with SMTP id a7mr5992510ani.136.1239088588103; Tue, 
+	07 Apr 2009 00:16:28 -0700 (PDT)
+Date: Tue, 7 Apr 2009 09:16:28 +0200
+Message-ID: <d2b9ea600904070016j5826cdbex6271177286c66c87@mail.gmail.com>
 From: Esben Haabendal <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.132.240
+X-SA-Exim-Connect-IP: 74.125.46.154
 X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
-X-SA-Exim-Scanned: No (on linuxtogo.org); SA Timed out after 240 secs
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [STABLE][PATCH] mingw-binutils: update to 2.19.1
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
+X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
+X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Subject: [STABLE][PATCH v2] mingw-binutils: update to 2.19.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,72 +48,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 07:18:15 -0000
+X-List-Received-Date: Tue, 07 Apr 2009 07:24:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 7, 2009 at 1:54 AM, Tom Rini <trini@kernel.crashing.org> wrote:
-> On Tue, Apr 07, 2009 at 01:14:07AM +0200, Esben Haabendal wrote:
->
->> Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
->> ---
->> =A0.../mingw-binutils-canadian-cross_2.19.1.bb =A0 =A0 =A0 =A0| =A0 11 +=
-++++++++++
->> =A0recipes/binutils/mingw-binutils_2.19.1.bb =A0 =A0 =A0 =A0 =A0| =A0 12=
- ++++++++++++
->> =A02 files changed, 23 insertions(+), 0 deletions(-)
->> =A0create mode 100644 recipes/binutils/mingw-binutils-canadian-cross_2.1=
-9.1.bb
->> =A0create mode 100644 recipes/binutils/mingw-binutils_2.19.1.bb
->
-> First, this isn't in .dev yet. =A0Second..
+Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
+---
+ conf/checksums.ini                                 |    3 +++
+ .../mingw-binutils-canadian-cross_2.19.1.bb        |   10 ++++++++++
+ recipes/binutils/mingw-binutils_2.19.1.bb          |   12 ++++++++++++
+ 3 files changed, 25 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+ create mode 100644 recipes/binutils/mingw-binutils_2.19.1.bb
 
-I know, it should apply there cleanly as well, but I need to test it...
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 2a119dd..20dc248 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -26886,3 +26886,6 @@
+sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
+ md5=5f7b88ebb2bcd7e8044328482d079661
+ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
 
->> diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
->> b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
->> new file mode 100644
->> index 0000000..27e06c6
->> --- /dev/null
->> +++ b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
->> @@ -0,0 +1,11 @@
->> +require mingw-binutils_${PV}.bb
->> +require binutils-canadian-cross.inc
->> +
->> +DEFAULT_PREFERENCE_sdk-mingw32 =3D "1"
->> +DEFAULT_PREFERENCE_sdk-mingw64 =3D "1"
->
-> That's meaningless atm. =A0Or at least it is for how I've been doing all
-> of the build tests (SDK_OS=3Dmingw32), it would be just _mingw32 (does
-> mingw64 work yet?). =A0Finally, do we really want to make this default
-> when we're still building gcc-3.4.5? =A0I wouldn't think so, but I assume
-> this means a gcc 4 actual release is soon.
-
-The gcc 4 relase from MinGW project seem to have been in the same
-state for quite a while.
-I wonder when they will change it.
-
-Any special reason why we don't want to use a newer binutils for gcc-3.4.5?
-
-I don't remember seeing any problems with that, but maybe I have just
-been lucky on that issue :-)
-
-The reason I pulled in this release was actually that I had a failure
-with ld from the old binutils when building mingw-runtime.
-So unless something points against setting 2.19.1 as default, I think we sh=
-ould.
-
-> Oh, and you forgot to add in checksums :)
-
-Ah, sorry.
-
-/Esben
-
-
---=20
-Esben Haabendal, Senior Software Consultant
-Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
-Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
-WWW: http://www.doredevelopment.dk
++[http://downloads.sourceforge.net/mingw/binutils-2.19.1-src.tar.gz]
++md5=ad3f2b5fdcd599a772ad75fec2c384d8
++sha256=2df529b1ac0a621efb87b5b53dbc0167c566f8bebbd6a8ce19964b05845fd2e7
+diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+new file mode 100644
+index 0000000..130dea5
+--- /dev/null
++++ b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+@@ -0,0 +1,10 @@
++require mingw-binutils_${PV}.bb
++require binutils-canadian-cross.inc
++
++DEFAULT_PREFERENCE_sdk-mingw32 = "1"
++
++require binutils-canadian-cross.inc
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
++
++S = "${WORKDIR}/binutils-${PV}"
+diff --git a/recipes/binutils/mingw-binutils_2.19.1.bb
+b/recipes/binutils/mingw-binutils_2.19.1.bb
+new file mode 100644
+index 0000000..19d1077
+--- /dev/null
++++ b/recipes/binutils/mingw-binutils_2.19.1.bb
+@@ -0,0 +1,12 @@
++PR = "r1"
++
++require binutils.inc
++
++DESCRIPTION = "A GNU collection of binary utilities - MinGW port"
++HOMEPAGE = "http://www.mingw.org/"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
++
++S = "${WORKDIR}/binutils-${PV}"
++
++DEFAULT_PREFERENCE = "0"
+-- 
+1.6.2.2
 
 
