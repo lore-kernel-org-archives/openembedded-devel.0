@@ -1,29 +1,43 @@
-Received: from [128.2.201.117] (helo=chokecherry.srv.cs.cmu.edu)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dhuggins@cs.cmu.edu>) id 1LrEqI-0000kC-2Q
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 19:13:12 +0200
-Received: from [128.2.222.132] (LIMA-2.SPEECH.CS.CMU.EDU [128.2.222.132])
-	by chokecherry.srv.cs.cmu.edu (8.13.6/8.13.6) with ESMTP id
-	n37H9Bnn009716; Tue, 7 Apr 2009 13:09:11 -0400 (EDT)
-Message-ID: <49DB88B9.6000605@cs.cmu.edu>
-Date: Tue, 07 Apr 2009 13:09:13 -0400
-From: David Huggins-Daines <dhuggins@cs.cmu.edu>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>
-References: <mailman.57713.1239046662.4692.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.57713.1239046662.4692.openembedded-devel@lists.openembedded.org>
-X-Scanned-By: mimedefang-cmuscs on 128.2.201.117
-X-SA-Exim-Connect-IP: 128.2.201.117
-X-SA-Exim-Mail-From: dhuggins@cs.cmu.edu
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LrExZ-0000wn-Eo
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 19:20:36 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LrEui-0001Ge-Is
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 17:16:44 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 07 Apr 2009 17:16:44 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 07 Apr 2009 17:16:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 07 Apr 2009 19:16:33 +0200
+Message-ID: <grg1ph$14n$1@ger.gmane.org>
+References: <1239117404-2263-1-git-send-email-dhuggins@cs.cmu.edu>	<20090407164400.GD2195@smtp.west.cox.net>
+	<49DB854A.4070908@cs.cmu.edu>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <49DB854A.4070908@cs.cmu.edu>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
+	FB_WORD1_END_DOLLAR, RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Openembedded-devel Digest, Vol 33, Issue 41
+Subject: Re: [PATCH] fix GCC 4.3.3 sources in stable/2009 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,21 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 17:13:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 07 Apr 2009 17:20:47 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
+On 07-04-09 18:54, David Huggins-Daines wrote:
+> Tom Rini wrote:
+>>
+>> First, this is fixed in .dev now, by fixing all of the gcc recipes
+>> (except for csl ones) to use ${GNU_MIRROR} and updating the checksums
+>> file. Second, ftp.gnu.org/gnu is correct as 'pub' is just a symlink to
+>> '.'.
+> Yeah, actually, after trying to rebuild, I agree. Changing bitbake.conf
+> is a very bad idea.
 >
-> please try with gcc 4.3.3, the fix is just a workaround to get past this error.
-> Looks like fix is not sufficient for all gcc versions
-Yes, gcc 4.3.3 fixes the problem.
+> However I still think the changes to the gcc recipes and checksums.ini
+> should be merged into the stable branch, otherwise it is not possible to
+> build any recent versions of GCC (and in particular, thumb support seems
+> not to work properly without using 4.3.3)
 
-In fact, although I was able to get everything to build with 4.2.4 by 
-building ldso as ARM, the resulting image had a lot of problems.  Most 
-binaries, including ipkg and dropbear, would just segfault.
+Anyone is free to send a patch to this mailinglist to add to stable. 
+It's really easy:
 
-Therefore I think 4.3.3 should be required if you are building things as 
-Thumb.  Using 4.3.3, things all seem to work properly.
+Powerbook-3:openembedded koen$ cat contrib/mail-diff.sh
+#!/bin/sh
+
+# This script will fetch an 'mbox' patch from patchwork and git am it
+# usage: mail-diff.sh <rev>
+# example: 'pw-am.sh 3a485444f0dd07fd2315769db3f6f46e3972134e'
+
+PATCHNAME="$(git format-patch -s -1 $1)"
+sed -i -e 's:\[PATCH:\[STABLE\]\[PATCH:g' $PATCHNAME
+git send-email --from "Koen Kooi <k.kooi@student.utwente.nl>" --to 
+openembedded-devel@lists.openembedded.org $PATCHNAME
+rm $PATCHNAME
+
+regards,
+
+Koen
 
 
 
