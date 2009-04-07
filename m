@@ -1,43 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LrExZ-0000wn-Eo
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 19:20:36 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LrEui-0001Ge-Is
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 17:16:44 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 07 Apr 2009 17:16:44 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 07 Apr 2009 17:16:44 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 07 Apr 2009 19:16:33 +0200
-Message-ID: <grg1ph$14n$1@ger.gmane.org>
-References: <1239117404-2263-1-git-send-email-dhuggins@cs.cmu.edu>	<20090407164400.GD2195@smtp.west.cox.net>
-	<49DB854A.4070908@cs.cmu.edu>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-In-Reply-To: <49DB854A.4070908@cs.cmu.edu>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <denis@denix.org>) id 1LrF5u-0006OA-Qr
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Apr 2009 19:28:31 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KHQ00B2CR189AWY@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	07 Apr 2009 12:24:50 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 345706B83B5; Tue,
+	07 Apr 2009 13:24:44 -0400 (EDT)
+Date: Tue, 07 Apr 2009 13:24:44 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090407172444.GB11203@denix.org>
+References: <mailman.55349.1238837263.4692.openembedded-devel@lists.openembedded.org>
+	<49DB651F.7060408@cs.cmu.edu>
+MIME-version: 1.0
+In-reply-to: <49DB651F.7060408@cs.cmu.edu>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
-	FB_WORD1_END_DOLLAR, RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] fix GCC 4.3.3 sources in stable/2009 branch
+Subject: Re: /linuxrc link to /bin/busybox causes booting to fail, (sysvinit should be used instead)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,44 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 17:20:47 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Apr 2009 17:28:37 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 07-04-09 18:54, David Huggins-Daines wrote:
-> Tom Rini wrote:
+On Tue, Apr 07, 2009 at 10:37:19AM -0400, David Huggins-Daines wrote:
 >>
->> First, this is fixed in .dev now, by fixing all of the gcc recipes
->> (except for csl ones) to use ${GNU_MIRROR} and updating the checksums
->> file. Second, ftp.gnu.org/gnu is correct as 'pub' is just a symlink to
->> '.'.
-> Yeah, actually, after trying to rebuild, I agree. Changing bitbake.conf
-> is a very bad idea.
->
-> However I still think the changes to the gcc recipes and checksums.ini
-> should be merged into the stable branch, otherwise it is not possible to
-> build any recent versions of GCC (and in particular, thumb support seems
-> not to work properly without using 4.3.3)
+>> On 03-04-09 22:44, David Huggins-Daines wrote:
+>>> > Hi,
+>>> >
+>>> > When booting base-image or minimal-image from a ramdisk, I get errors
+>>> > like the following:
+>>
+>> Do you have 
+>> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=5261978d6f9600640c1ea4f1393e18772d4f9657 
+>> in your OE tree?
+>>   
+> I do, I think, but actually I discovered the reason for this.  It's a 
+> subtlety of the Linux boot process which I didn't previously understand.  
+> Basically the kernel will use /linuxrc as init if and only if the root 
+> filesystem on the command line is different from the root partition.  So if 
+> you are using a ramdisk root (and not an initrd), you need to put 
+> root=/dev/ram0 on the kernel command line.
 
-Anyone is free to send a patch to this mailinglist to add to stable. 
-It's really easy:
+As I told you before - your bootargs is to blame. Sorry I was not very 
+specific, but I've seen it fail the same exact way when there was a spelling 
+problem in root= option or it was missing entirely...
 
-Powerbook-3:openembedded koen$ cat contrib/mail-diff.sh
-#!/bin/sh
-
-# This script will fetch an 'mbox' patch from patchwork and git am it
-# usage: mail-diff.sh <rev>
-# example: 'pw-am.sh 3a485444f0dd07fd2315769db3f6f46e3972134e'
-
-PATCHNAME="$(git format-patch -s -1 $1)"
-sed -i -e 's:\[PATCH:\[STABLE\]\[PATCH:g' $PATCHNAME
-git send-email --from "Koen Kooi <k.kooi@student.utwente.nl>" --to 
-openembedded-devel@lists.openembedded.org $PATCHNAME
-rm $PATCHNAME
-
-regards,
-
-Koen
-
+-- 
+Denys
 
 
