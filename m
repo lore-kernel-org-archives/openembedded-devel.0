@@ -1,30 +1,42 @@
-Received: from [128.2.201.16] (helo=jackfruit.srv.cs.cmu.edu)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dhuggins@cs.cmu.edu>) id 1LrEc6-0000IP-Sh
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 18:58:05 +0200
-Received: from [128.2.222.132] (LIMA-2.SPEECH.CS.CMU.EDU [128.2.222.132])
-	by jackfruit.srv.cs.cmu.edu (8.13.6/8.13.6) with ESMTP id
-	n37GsVNj019329; Tue, 7 Apr 2009 12:54:31 -0400 (EDT)
-Message-ID: <49DB854A.4070908@cs.cmu.edu>
-Date: Tue, 07 Apr 2009 12:54:34 -0400
-From: David Huggins-Daines <dhuggins@cs.cmu.edu>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: Tom Rini <trini@kernel.crashing.org>
-References: <1239117404-2263-1-git-send-email-dhuggins@cs.cmu.edu>
-	<20090407164400.GD2195@smtp.west.cox.net>
-In-Reply-To: <20090407164400.GD2195@smtp.west.cox.net>
-X-Scanned-By: mimedefang-cmuscs on 128.2.201.16
-X-SA-Exim-Connect-IP: 128.2.201.16
-X-SA-Exim-Mail-From: dhuggins@cs.cmu.edu
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LrEdw-0000LB-OB
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 19:00:28 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LrEb5-0000Lp-KL
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 16:56:27 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 07 Apr 2009 16:56:27 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 07 Apr 2009 16:56:27 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 07 Apr 2009 18:56:14 +0200
+Message-ID: <grg0jf$sem$1@ger.gmane.org>
+References: <1237835454.6521.9.camel@northpole>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <1237835454.6521.9.camel@northpole>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	RDNS_NONE autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH] fix GCC 4.3.3 sources in stable/2009 branch
+Subject: Re: libxml2-native build against host zlib.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,23 +50,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 16:58:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 07 Apr 2009 17:00:33 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Tom Rini wrote:
->
-> First, this is fixed in .dev now, by fixing all of the gcc recipes
-> (except for csl ones) to use ${GNU_MIRROR} and updating the checksums
-> file.  Second, ftp.gnu.org/gnu is correct as 'pub' is just a symlink to
-> '.'.
->   
-Yeah, actually, after trying to rebuild, I agree.  Changing bitbake.conf 
-is a very bad idea.
+On 23-03-09 20:10, Jader H. Silva wrote:
+>     It seems libxml2-native is built using host zlib.h.
+>     My host have a symbol redefinition in zlib.h (gzopen ->  gzopen64), but
+>     that symbol does not exists in OE compiled library.
+>     Setting --with-zlib=${STAGING_INCIR}/zlib.h in libxml2-native.inc
+>     solved it. There's a patch attached.
 
-However I still think the changes to the gcc recipes and checksums.ini 
-should be merged into the stable branch, otherwise it is not possible to 
-build any recent versions of GCC (and in particular, thumb support seems 
-not to work properly without using 4.3.3)
+The patch seems to solve the problem, could you resend a version that 
+bumps the PR as well? Once this in .dev we should apply it to 
+stable/2008 as well.
+
+regards,
+
+Koen
+
 
 
