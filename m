@@ -1,32 +1,29 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [65.55.90.46] (helo=snt0-omc1-s35.snt0.hotmail.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LrF9K-0006VR-VZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 19:32:01 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KHQ001G1R7QKNTC@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	07 Apr 2009 12:28:39 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3AC846B83A8; Tue,
-	07 Apr 2009 13:28:38 -0400 (EDT)
-Date: Tue, 07 Apr 2009 13:28:38 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090407172838.GC11203@denix.org>
-References: <20090407170655.GG2195@smtp.west.cox.net>
-MIME-version: 1.0
-In-reply-to: <20090407170655.GG2195@smtp.west.cox.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+	(envelope-from <huru_ukko@hotmail.com>) id 1LrFJi-0006kb-Ad
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 19:43:09 +0200
+Received: from SNT105-W64 ([65.55.90.8]) by snt0-omc1-s35.snt0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 7 Apr 2009 10:39:34 -0700
+Message-ID: <SNT105-W64E92C9061ABE0CC32BA6A90850@phx.gbl>
+X-Originating-IP: [91.153.19.197]
+From: Mauri Sandberg <huru_ukko@hotmail.com>
+To: <openembedded-devel@openembedded.org>
+Date: Tue, 7 Apr 2009 20:39:34 +0300
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 07 Apr 2009 17:39:34.0434 (UTC)
+	FILETIME=[D0A00820:01C9B7A7]
+X-SA-Exim-Connect-IP: 65.55.90.46
+X-SA-Exim-Mail-From: huru_ukko@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=AWL,BAYES_40,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,HTML_MESSAGE,
+	RDNS_NONE,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] gcc: Fix 4.1.[012], 4.2.[1234] and	4.3.[123] SRC_URI to use ${GNU_MIRROR}
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: uClibc and 2.6.12.6 linux headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,36 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 17:32:09 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 07 Apr 2009 17:43:14 -0000
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 07, 2009 at 10:06:55AM -0700, Tom Rini wrote:
-> gcc: Fix 4.1.[012], 4.2.[1234] and 4.3.[123] SRC_URI to use ${GNU_MIRROR} and update checksums.ini
->  This fixes a big problem with 4.3.3 as it wasn't using ftp.gnu.org but
->  an alternate mirror that's gone away.  Since I had to fix one I noticed
->  others not calling ${GNU_MIRROR} but ftp.gnu.org.  Also a few weren't
->  using ${PV}, so use that too.
-> 
-> ---
->  conf/checksums.ini        |   20 ++++++++++----------
->  recipes/gcc/gcc-4.1.0.inc |    2 +-
->  recipes/gcc/gcc-4.1.1.inc |    2 +-
->  recipes/gcc/gcc-4.1.2.inc |    2 +-
->  recipes/gcc/gcc-4.2.1.inc |    2 +-
->  recipes/gcc/gcc-4.2.2.inc |    2 +-
->  recipes/gcc/gcc-4.2.3.inc |    2 +-
->  recipes/gcc/gcc-4.2.4.inc |    2 +-
->  recipes/gcc/gcc-4.3.1.inc |    2 +-
->  recipes/gcc/gcc-4.3.2.inc |    2 +-
->  recipes/gcc/gcc-4.3.3.inc |    2 +-
->  11 files changed, 20 insertions(+), 20 deletions(-)
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Hi=2C
 
-I haven't tried this patch on the stable branch yet, but it works fine in .dev
+I have let myself to be told that you need to have matcing kernel headers t=
+o your kernel version when you are building uclibc.
 
--- 
-Denys
+I would need to build uclibc with 2.6.12.6 linux headers as I am trying to =
+put together a system that is based on a kernel with that same version. I h=
+ave tried to use PREFERRED_VERSION etc but bitbake always selects newest he=
+aders and ignores me totally.
 
+How to proceed here?
+
+-- Mauri
+
+
+_________________________________________________________________
+Drag n=92 drop=97Get easy photo sharing with Windows Live=99 Photos.
+
+http://www.microsoft.com/windows/windowslive/products/photos.aspx=
 
