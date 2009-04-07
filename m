@@ -1,37 +1,29 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1Lr7Zx-0008CH-P8
+	(envelope-from <mickey@vanille-media.de>) id 1Lr8Ko-0000wY-Co
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 11:26:52 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Lr7X7-0005L8-U0
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 10:23:54 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1Lr7X7-0006Vj-LB
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 10:23:53 +0100
-From: Phil Blundell <pb@reciva.com>
+	Tue, 07 Apr 2009 12:15:22 +0200
+Received: from andromeda.vanille.de (e180153228.adsl.alicedsl.de
+	[85.180.153.228])
+	by drlauer-research.com (Postfix) with ESMTP id D664B584129
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  7 Apr 2009 12:39:51 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90904061449s1cc1c4e6pb1c04f2c71cc6beb@mail.gmail.com>
-References: <49DA2F2C.60008@bolloretelecom.eu>
-	<19c1b8a90904061449s1cc1c4e6pb1c04f2c71cc6beb@mail.gmail.com>
-Date: Tue, 07 Apr 2009 10:23:53 +0100
-Message-Id: <1239096233.16991.525.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+Date: Tue, 7 Apr 2009 12:12:18 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.27-11-generic; KDE/4.2.2; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <200904071212.18247.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] make "LDFLAGS ignored" QA errors fatal
+Subject: DEPLOY_DIR / packaged staging / persistent toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,24 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 09:26:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Apr 2009 10:15:25 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, 2009-04-06 at 14:49 -0700, Khem Raj wrote:
-> I think we should configure toolchain to pass this flags by gcc driver
-> while linking instead of making it a part of LDFLAGS it should help in
-> recipes which use gcc to link.
+Hi folks,
 
-I'm not sure what that would really buy us.  Unless we're going to
-abandon LDFLAGS altogether then all the packages that are broken today
-would still be broken, it's just that you'd notice the breakage less
-often.  Plus, it would presumably mean that any changes to the value of
-this flag would require a gcc rebuild, which seems like it'd be
-annoying.
+I just stumbled over something that surprises me. I have set DEPLOY_DIR 
+outside TMP for a while (which works fine). Now when I remove the TMPDIR to 
+start a new build from scratch, I can no longer build anything. Apparantly OE 
+thinks I do no longer need a toolchain, since it does not attempt to built 
+one. I need to remove the whole DEPLOY_DIR to be able to do any builds again.
 
-p.
+Wasn't the idea of packaged staging to be able to keep core packages and the 
+toolchain intact when removing TMPDIR? If I understodd this wrong, how can I 
+do something like that these days? Would it be sufficient to set CROSS_DIR 
+outside TMPDIR?
 
+Cheers,
+
+Mickey.
 
 
 
