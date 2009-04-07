@@ -1,40 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lr93p-0008VA-3s
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 13:01:49 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lr90z-0000pS-Bm
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 10:58:49 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 07 Apr 2009 10:58:49 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 07 Apr 2009 10:58:49 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
+	(envelope-from <koen@amethyst.openembedded.net>) id 1Lr95F-00005R-Id
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Apr 2009 13:03:15 +0200
+Received: by amethyst.openembedded.net (Postfix, from userid 1002)
+	id 9A4FF1893CE; Tue,  7 Apr 2009 13:03:07 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 07 Apr 2009 12:58:38 +0200
-Message-ID: <grfbku$fcl$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  7 Apr 2009 13:03:07 +0200
+Message-Id: <1239102187-3803-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 80.81.242.146
+X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Commit policy for contrib and conf/distro/mydistro.conf in stable/2009
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] systray: as the name implies, a systray module for e17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,18 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 11:01:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Apr 2009 11:03:15 -0000
 
-Hi,
+From: Koen Kooi <koen@openembedded.org>
 
-What's the policy for commits to contrib/ in the stable branch? And 
-conf/distro/mydistro.conf?
 
-regards,
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/e17/systray_svn.bb |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/e17/systray_svn.bb
 
-Koen
+diff --git a/recipes/e17/systray_svn.bb b/recipes/e17/systray_svn.bb
+new file mode 100644
+index 0000000..3c0a8c7
+--- /dev/null
++++ b/recipes/e17/systray_svn.bb
+@@ -0,0 +1,8 @@
++LICENSE = "MIT"
++PV = "0.0.1+svnr${SRCREV}"
++
++require e-module.inc
++
++
++
++
+-- 
+1.5.6.5
 
 
 
