@@ -1,25 +1,43 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [209.85.132.245] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1Lr95F-00005R-Id
+	(envelope-from <esbenhaabendal@gmail.com>) id 1LrATK-0003lw-4z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 13:03:15 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id 9A4FF1893CE; Tue,  7 Apr 2009 13:03:07 +0200 (CEST)
-From: Koen Kooi <k.kooi@student.utwente.nl>
+	Tue, 07 Apr 2009 14:32:12 +0200
+Received: by an-out-0708.google.com with SMTP id b2so4313154ana.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Apr 2009 05:29:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=SFoT4LD0Sg3GWYZHk6zmLNuLTX5O8aK9bMuc8z8eatU=;
+	b=KAVy67PDOHR/tyQfe72TqpQkJOGBZB1FrI24pf3vAdMKt2PiCbmbWNb3MUhzvwY+Ap
+	Z/OTHwpjqQcAbvBi0VN50UEhNoBrHNJ+H9zVNTA5KRsCfhhHkym7vyVwbBhvCPp1CSgV
+	DBJUarpQrI5cKwcRWp+JMk3a52dkeqH6qvjug=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=NkEhkIhUkYbf0gIcbZm9M2JzD+g0wOP2hOZ+E+/eg2iDNtutNI1dlA7i9uVWEkoyHo
+	29BJ9rMziVatGxZvFlp8Q+PbUuEd9VgWB08ls/jozdEwGT6Tr7Nx4Qg0E8pvlPTTOpqI
+	g6S0z/ii68dYbnSJQrTr1ydVqOcspE79E7f2U=
+MIME-Version: 1.0
+Received: by 10.100.108.2 with SMTP id g2mr87519anc.137.1239107347886; Tue, 07 
+	Apr 2009 05:29:07 -0700 (PDT)
+In-Reply-To: <d2b9ea600904070016j5826cdbex6271177286c66c87@mail.gmail.com>
+References: <d2b9ea600904070016j5826cdbex6271177286c66c87@mail.gmail.com>
+Date: Tue, 7 Apr 2009 14:29:07 +0200
+Message-ID: <d2b9ea600904070529q6bd7292cy3482074a836803e4@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Apr 2009 13:03:07 +0200
-Message-Id: <1239102187-3803-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
-X-SA-Exim-Connect-IP: 80.81.242.146
-X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
+X-SA-Exim-Connect-IP: 209.85.132.245
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] systray: as the name implies, a systray module for e17
+Subject: Re: [STABLE][PATCH v2] mingw-binutils: update to 2.19.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,33 +51,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 11:03:15 -0000
+X-List-Received-Date: Tue, 07 Apr 2009 12:32:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Koen Kooi <koen@openembedded.org>
+I have now tested it with org.openembedded.dev branch, and this patch
+should be applied there also.
 
-
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/e17/systray_svn.bb |    8 ++++++++
- 1 files changed, 8 insertions(+), 0 deletions(-)
- create mode 100644 recipes/e17/systray_svn.bb
-
-diff --git a/recipes/e17/systray_svn.bb b/recipes/e17/systray_svn.bb
-new file mode 100644
-index 0000000..3c0a8c7
---- /dev/null
-+++ b/recipes/e17/systray_svn.bb
-@@ -0,0 +1,8 @@
-+LICENSE = "MIT"
-+PV = "0.0.1+svnr${SRCREV}"
-+
-+require e-module.inc
-+
-+
-+
-+
--- 
-1.5.6.5
-
+/Esben
 
 
