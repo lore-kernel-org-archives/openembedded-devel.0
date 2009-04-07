@@ -1,40 +1,31 @@
-Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1Lr5fx-0003jR-A0
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 09:24:57 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so1770352ywk.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Apr 2009 00:21:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=HtTQ3cFSvouDjHAxGzmdr9ImA7nLKpNvAAil8x5Q2YE=;
-	b=L1XA9KfAk8odnv01xJMzs/KscVQENV5ORz2XrdAFV/g61QJONFLaz9fAs6UJU7Awo4
-	hXx9eCuVQtO12Zgn78lVVwIRpmlRtUxgTNH2gU8YX852kWkZWwdyqEZQIBcarPDz8UjP
-	2B7l6cxOzyHqeirdUvcBsL+WnyP+C+FNcM/4c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=i4o2s4Nft/J4qAB2p6XZ5y99aEzPAHvOPevj/XWdIAZNLl+LsfbIVvYnG5+6Rk1Zt3
-	tzGbyI7ll2CLdC+f39M1WRduYGcCrcagis3ZAy8OcgLGaQCDP6V8ZIn84LFSDyNedBUC
-	rQUOMkS77siQpq7qhpUpA7hY7ZNakMdkztRpQ=
-MIME-Version: 1.0
-Received: by 10.100.253.7 with SMTP id a7mr5992510ani.136.1239088588103; Tue, 
-	07 Apr 2009 00:16:28 -0700 (PDT)
-Date: Tue, 7 Apr 2009 09:16:28 +0200
-Message-ID: <d2b9ea600904070016j5826cdbex6271177286c66c87@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lr6Sn-0004kt-Oq
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 10:15:28 +0200
+Received: (qmail 9449 invoked by uid 813007); 7 Apr 2009 08:12:26 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 7 Apr 2009 08:12:26 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.46.154
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+Date: Tue, 7 Apr 2009 10:12:21 +0200
+User-Agent: KMail/1.11.0 (Linux/2.6.29; KDE/4.2.1; x86_64; ; )
+References: <200904032354.43251.khimov@altell.ru>
+	<1239026948-12471-1-git-send-email-khimov@altell.ru>
+	<19c1b8a90904061445o242b7eb9td783505faf876089@mail.gmail.com>
+In-Reply-To: <19c1b8a90904061445o242b7eb9td783505faf876089@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200904071012.28361.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
 	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [STABLE][PATCH v2] mingw-binutils: update to 2.19.1
+Subject: Re: [PATCH] ace: New recipe for ACE 5.6.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,68 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 07:24:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Apr 2009 08:15:32 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
----
- conf/checksums.ini                                 |    3 +++
- .../mingw-binutils-canadian-cross_2.19.1.bb        |   10 ++++++++++
- recipes/binutils/mingw-binutils_2.19.1.bb          |   12 ++++++++++++
- 3 files changed, 25 insertions(+), 0 deletions(-)
- create mode 100644 recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
- create mode 100644 recipes/binutils/mingw-binutils_2.19.1.bb
+Dnia poniedzia=C5=82ek, 6 kwietnia 2009 o 23:45:03 Khem Raj napisa=C5=82(a):
+> you could use the url =C2=A0in the license field. if there is one
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 2a119dd..20dc248 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -26886,3 +26886,6 @@
-sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
- md5=5f7b88ebb2bcd7e8044328482d079661
- sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
+You can not. src_distribute.bbclass uses LICENSE field to group archives=20
+of sources and is enabled by default in =C3=85ngstr=C3=B6m. If package has =
+own=20
+license then LICENSE =3D "ace" will be enough - if someone wants to check=20
+it then it is in archive with sources.
 
-+[http://downloads.sourceforge.net/mingw/binutils-2.19.1-src.tar.gz]
-+md5=ad3f2b5fdcd599a772ad75fec2c384d8
-+sha256=2df529b1ac0a621efb87b5b53dbc0167c566f8bebbd6a8ce19964b05845fd2e7
-diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-new file mode 100644
-index 0000000..130dea5
---- /dev/null
-+++ b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-@@ -0,0 +1,10 @@
-+require mingw-binutils_${PV}.bb
-+require binutils-canadian-cross.inc
-+
-+DEFAULT_PREFERENCE_sdk-mingw32 = "1"
-+
-+require binutils-canadian-cross.inc
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
-+
-+S = "${WORKDIR}/binutils-${PV}"
-diff --git a/recipes/binutils/mingw-binutils_2.19.1.bb
-b/recipes/binutils/mingw-binutils_2.19.1.bb
-new file mode 100644
-index 0000000..19d1077
---- /dev/null
-+++ b/recipes/binutils/mingw-binutils_2.19.1.bb
-@@ -0,0 +1,12 @@
-+PR = "r1"
-+
-+require binutils.inc
-+
-+DESCRIPTION = "A GNU collection of binary utilities - MinGW port"
-+HOMEPAGE = "http://www.mingw.org/"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
-+
-+S = "${WORKDIR}/binutils-${PV}"
-+
-+DEFAULT_PREFERENCE = "0"
--- 
-1.6.2.2
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
