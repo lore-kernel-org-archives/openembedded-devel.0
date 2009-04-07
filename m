@@ -1,34 +1,37 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Lr6kt-0001yw-LS
+	(envelope-from <pb@reciva.com>) id 1Lr7Zx-0008CH-P8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 10:34:34 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.115])
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1Lr6i1-000BFS-QH
+	Tue, 07 Apr 2009 11:26:52 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Lr7X7-0005L8-U0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 12:31:06 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Tue, 07 Apr 2009 10:23:54 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1Lr7X7-0006Vj-LB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Apr 2009 10:23:53 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 7 Apr 2009 12:31:01 +0400
-User-Agent: KMail/1.9.9
-References: <200904032354.43251.khimov@altell.ru>
-	<19c1b8a90904061445o242b7eb9td783505faf876089@mail.gmail.com>
-	<200904071012.28361.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200904071012.28361.marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <200904071231.01960.khimov@altell.ru>
-X-SA-Exim-Connect-IP: 83.222.23.61
-X-SA-Exim-Mail-From: khimov@altell.ru
+In-Reply-To: <19c1b8a90904061449s1cc1c4e6pb1c04f2c71cc6beb@mail.gmail.com>
+References: <49DA2F2C.60008@bolloretelecom.eu>
+	<19c1b8a90904061449s1cc1c4e6pb1c04f2c71cc6beb@mail.gmail.com>
+Date: Tue, 07 Apr 2009 10:23:53 +0100
+Message-Id: <1239096233.16991.525.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: pb@reciva.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_SOFTFAIL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ace: New recipe for ACE 5.6.8
+Subject: Re: [RFC] make "LDFLAGS ignored" QA errors fatal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 08:34:45 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Apr 2009 09:26:53 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tuesday 07 April 2009 12:12:21 Marcin Juszkiewicz wrote:
-> Dnia poniedzia=C5=82ek, 6 kwietnia 2009 o 23:45:03 Khem Raj napisa=C5=82(=
-a):
-> > you could use the url =C2=A0in the license field. if there is one
->
-> You can not. src_distribute.bbclass uses LICENSE field to group archives
-> of sources and is enabled by default in =C3=85ngstr=C3=B6m. If package ha=
-s own
-> license then LICENSE =3D "ace" will be enough - if someone wants to check
-> it then it is in archive with sources.
+On Mon, 2009-04-06 at 14:49 -0700, Khem Raj wrote:
+> I think we should configure toolchain to pass this flags by gcc driver
+> while linking instead of making it a part of LDFLAGS it should help in
+> recipes which use gcc to link.
 
-Well, I can do whatever is the best practice, just to note that there are=20
-already recipes with URLs in LICENSE field, like
+I'm not sure what that would really buy us.  Unless we're going to
+abandon LDFLAGS altogether then all the packages that are broken today
+would still be broken, it's just that you'd notice the breakage less
+often.  Plus, it would presumably mean that any changes to the value of
+this flag would require a gcc rebuild, which seems like it'd be
+annoying.
 
-recipes/ixp4xx/ixp-osal_1.5.bb
-recipes/ixp4xx/ixp4xx-csr_2.1.1.bb
-recipes/tango/tango-icon-theme_0.8.1.bb
+p.
 
-Also there are LICENSE_URL and LICENSE_HOMEPAGE found in recipes.
+
 
 
