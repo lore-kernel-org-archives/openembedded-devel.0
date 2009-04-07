@@ -1,36 +1,55 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LqygV-00011E-Js
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 01:57:03 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090406235402.TQXX27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Mon, 6 Apr 2009 19:54:02 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id cPu21b00G4dMFYL04Pu2PQ; Mon, 06 Apr 2009 19:54:02 -0400
-X-Authority-Analysis: v=1.0 c=1 a=0sXtSTLkSA4A:10 a=CEQruDUxg1kA:10
-	a=UTx4xwwqMdLW0ksnr1kA:9 a=lQ5aiCovFx4qYFexEcL0yL_iX2gA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 6 Apr 2009 16:54:02 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090406235402.GA2195@smtp.west.cox.net>
-References: <d2b9ea600904061614r2839effbla380925d536c3999@mail.gmail.com>
+	(envelope-from <otavio.salvador@gmail.com>) id 1Lr0S7-0004a4-Ad
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Apr 2009 03:50:17 +0200
+Received: by qw-out-1920.google.com with SMTP id 5so1775341qwf.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Apr 2009 18:47:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:received:from:to
+	:subject:organization:user-agent:x-url:x-attribution:date:message-id
+	:mime-version:content-type;
+	bh=M6FImHz2Lr2zJfsjc+n3S/QVAr9Bfn8PNDwYTnHL6+k=;
+	b=nfmyuRlJEoQa/KrHUiuFwhFhE7B+Lt8RY7+kuE8wbENRDcQktDEej3qbQfszMEGc3h
+	3ohE4FH1PO8EZRjdQHTeDPvE4tYJjlL67LR32bkXT0Oj5+9M1PI/gaNTCO2beq+2jWvn
+	wwQ6ek5pO6v8Mvzi2hbUCskBWAUcC8QsDDlIs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:subject:organization:user-agent:x-url:x-attribution
+	:date:message-id:mime-version:content-type;
+	b=xSAScVKxWDFizBSZeCIg5W70v+fZ46QlQt2uvP+bW5cxAEAdarryy/ZW/gt02cj97w
+	wQiogjV5pFenjP3LLGBKz+z2qA1t4FNhXvAFnLIifeuyCI373NiJwdbr4Kjq7XOTIT+k
+	jXwlaCkdAiVAwmEVEMgV/vCeoquNe3RP6eMCA=
+Received: by 10.220.44.204 with SMTP id b12mr4874306vcf.42.1239068841327;
+	Mon, 06 Apr 2009 18:47:21 -0700 (PDT)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id 4sm1202503yxd.36.2009.04.06.18.47.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 06 Apr 2009 18:47:20 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 50C1D6101F5; Mon,  6 Apr 2009 22:47:38 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Development Mailing List
+	<openembedded-devel@lists.openembedded.org>
+Organization: O.S. Systems Ltda.
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
+	(x86_64-pc-linux-gnu)
+X-URL: http://www.ossystems.com.br/
+X-Attribution: O.S.
+Date: Mon, 06 Apr 2009 22:47:37 -0300
+Message-ID: <87bpr92q12.fsf@neumann.lab.ossystems.com.br>
 MIME-Version: 1.0
-In-Reply-To: <d2b9ea600904061614r2839effbla380925d536c3999@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.45
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+X-SA-Exim-Connect-IP: 74.125.92.149
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.1 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] mingw-binutils: update to 2.19.1
+Subject: [RFH] Strange bug during full build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,44 +63,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Apr 2009 23:57:03 -0000
+X-List-Received-Date: Tue, 07 Apr 2009 01:50:17 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 
-On Tue, Apr 07, 2009 at 01:14:07AM +0200, Esben Haabendal wrote:
+Hello,
 
-> Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
-> ---
->  .../mingw-binutils-canadian-cross_2.19.1.bb        |   11 +++++++++++
->  recipes/binutils/mingw-binutils_2.19.1.bb          |   12 ++++++++++++
->  2 files changed, 23 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
->  create mode 100644 recipes/binutils/mingw-binutils_2.19.1.bb
+Since our last update, we updated to stable/2009 branch, we started to
+have few strange breakage from time to time on our tree. Bellow is an
+example of one of them.
 
-First, this isn't in .dev yet.  Second..
+Do someone have any idea of what it can be? The strange thing is that if
+we clean and rebuild the package it works.
 
-> diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-> b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-> new file mode 100644
-> index 0000000..27e06c6
-> --- /dev/null
-> +++ b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-> @@ -0,0 +1,11 @@
-> +require mingw-binutils_${PV}.bb
-> +require binutils-canadian-cross.inc
-> +
-> +DEFAULT_PREFERENCE_sdk-mingw32 = "1"
-> +DEFAULT_PREFERENCE_sdk-mingw64 = "1"
+NOTE: package lxde-common-0.3.2.1-r0: task do_package_write_ipk: started
+ERROR: Error in executing: /home/otavio/hacking/ossystems/oe/recipes/lxde/lxde-common_0.3.2.1.bb
+ERROR: Exception:<type 'exceptions.OSError'> Message:[Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/geode-ossystems-linux/openbox-3.4.7.2-r0/install/lxde-common-dbg'
+ERROR: Printing the environment of the function
+ERROR: 	0048:		basedir = os.path.join(os.path.dirname(root))
+ERROR: 	0049:		arch = bb.data.getVar('PACKAGE_ARCH', localdata, 1)
+ERROR: 	0050:		pkgoutdir = "%s/%s" % (outdir, arch)
+ERROR: 	0051:		bb.mkdirhier(pkgoutdir)
+ERROR: 	0052:		os.chdir(root)
+ERROR: 	0053:		from glob import glob
+ERROR: 	0054:		g = glob('*')
+ERROR: 	0055:		try:
+ERROR: 	0056:			del g[g.index('CONTROL')]
+ERROR: Error in executing: /home/otavio/hacking/ossystems/oe/recipes/lxde/lxde-common_0.3.2.1.bb
+ERROR: Exception:<type 'exceptions.OSError'> Message:[Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/geode-ossystems-linux/openbox-3.4.7.2-r0/install/lxde-common-dbg'
+ERROR: Printing the environment of the function
+ERROR: Build of /home/otavio/hacking/ossystems/oe/recipes/lxde/lxde-common_0.3.2.1.bb do_package_write_ipk failed
+Traceback (most recent call last):
+  File "/home/otavio/hacking/bitbake/bin/bitbake", line 143, in <module>
+    main()
+  File "/home/otavio/hacking/bitbake/bin/bitbake", line 140, in main
+    cooker.cook()
+  File "/home/otavio/hacking/bitbake/lib/bb/cooker.py", line 644, in cook
+    return self.buildTargets(pkgs_to_build)
+  File "/home/otavio/hacking/bitbake/lib/bb/cooker.py", line 551, in buildTargets
+    failures = rq.execute_runqueue()
+  File "../../bitbake/lib/bb/runqueue.py", line 842, in execute_runqueue
+  File "../../bitbake/lib/bb/runqueue.py", line 951, in execute_runqueue_internal
+  File "/home/otavio/hacking/bitbake/lib/bb/cooker.py", line 137, in tryBuild
+    return self.tryBuildPackage(fn, item, self.configuration.cmd, the_data)
+  File "/home/otavio/hacking/bitbake/lib/bb/cooker.py", line 111, in tryBuildPackage
+    bb.build.exec_task('do_%s' % task, the_data)
+  File "../../bitbake/lib/bb/build.py", line 278, in exec_task
+  File "../../bitbake/lib/bb/build.py", line 113, in exec_func
+  File "../../bitbake/lib/bb/build.py", line 136, in exec_func_python
+  File "../../bitbake/lib/bb/utils.py", line 171, in better_exec
+  File "do_package_write_ipk", line 11, in <module>
+  File "do_package_write_ipk", line 9, in do_package_write_ipk
+  File "../../bitbake/lib/bb/build.py", line 113, in exec_func
+  File "../../bitbake/lib/bb/build.py", line 136, in exec_func_python
+  File "../../bitbake/lib/bb/utils.py", line 171, in better_exec
+  File "do_package_ipk", line 174, in <module>
+  File "do_package_ipk", line 52, in do_package_ipk
+OSError: [Errno 2] No such file or directory: '/home/otavio/hacking/ossystems/oe/tmp/work/geode-ossystems-linux/openbox-3.4.7.2-r0/install/lxde-common-dbg'
+ERROR: Task 16 (/home/otavio/hacking/ossystems/oe/recipes/lxde/lxde-common_0.3.2.1.bb, do_package_write_ipk) failed
+NOTE: Tasks Summary: Attempted 456 tasks of which 456 didn't need to be rerun and 1 failed.
+ERROR: '/home/otavio/hacking/ossystems/oe/recipes/lxde/lxde-common_0.3.2.1.bb' failed
+NOTE: build 200904062241: completed
 
-That's meaningless atm.  Or at least it is for how I've been doing all
-of the build tests (SDK_OS=mingw32), it would be just _mingw32 (does
-mingw64 work yet?).  Finally, do we really want to make this default
-when we're still building gcc-3.4.5?  I wouldn't think so, but I assume
-this means a gcc 4 actual release is soon.
-
-Oh, and you forgot to add in checksums :)
+Cheers,
 
 -- 
-Tom Rini
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
