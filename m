@@ -1,37 +1,37 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lr20e-00087Q-4q
-	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 05:30:05 +0200
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090407032640.BVKW4363.fed1rmmtao103.cox.net@fed1rmimpo01.cox.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lr5M5-0006RK-MN
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 09:08:23 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lr5JH-00082T-DC
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 07:01:27 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 07 Apr 2009 07:01:27 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 6 Apr 2009 23:26:40 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id cTSd1b00U4dMFYL03TSd72; Mon, 06 Apr 2009 23:26:40 -0400
-X-Authority-Analysis: v=1.0 c=1 a=AISV984gK6YA:10 a=rhgrsgjTw7sA:10
-	a=98VAF6BddhHOJ1mTcCIA:9 a=fb4Fza5nCrQSnwfxrQkA:7
-	a=xmrCe-xoqeh2gHo7rpFRUDF5VGYA:4 a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Mon, 6 Apr 2009 20:26:37 -0700
-From: Tom Rini <trini@kernel.crashing.org>
+	Tue, 07 Apr 2009 07:01:27 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Message-ID: <20090407032637.GB2195@smtp.west.cox.net>
-References: <200903242144.29168.marcin@juszkiewicz.com.pl>
-	<200903271748.24641.marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-In-Reply-To: <200903271748.24641.marcin@juszkiewicz.com.pl>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.43
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_40,RDNS_NONE
-	autolearn=no version=3.2.5
-X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
-X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: IRC discussion about stable branch - 25.03.2009 12:00 GMT
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 07 Apr 2009 09:01:16 +0200
+Message-ID: <gretns$4ts$1@ger.gmane.org>
+References: <49DA2F2C.60008@bolloretelecom.eu>
+	<19c1b8a90904061449s1cc1c4e6pb1c04f2c71cc6beb@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090328 Shredder/3.0b3pre
+In-Reply-To: <19c1b8a90904061449s1cc1c4e6pb1c04f2c71cc6beb@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Scanned: No (on linuxtogo.org); SA Timed out after 240 secs
+Subject: Re: [RFC] make "LDFLAGS ignored" QA errors fatal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 03:30:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Apr 2009 07:08:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, Mar 27, 2009 at 05:48:19PM +0100, Marcin Juszkiewicz wrote:
-[snip]
-> List of developers which wants to be maintainers for stable branch:
-> 
-> - Marcin 'hrw' Juszkiewicz  - own company and Bug Labs Inc.
-> - Philip 'Crofton' Balister
-> - Marco 'mckoan' Cavallini  - Koan Software
+On 06-04-09 23:49, Khem Raj wrote:
+> On 4/6/09, Jeremy Lainé<jeremy.laine@bolloretelecom.eu>  wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> I have spent quite some time cleaning up a bunch of recipes which were
+>> triggering "LDFLAGS ignored" QA errors, and I don't really want to
+>> have to do this again in the future. I suggest we stop whitelisting
+>> this kind of QA error, using the attached patch.
+>>
+>> To track down the faulty packages I have made use of oestats output
+>> (note that not all QA errors are "LDFLAGS ignored"):
+>>
+>> http://tinderbox.openembedded.net/packages/?qalog=1
+>>
+>> In most cases, the problem is that recipes simply pass
+>> - -L${STAGING_LIBDIR} as LDFLAGS instead of using the full ${LDFLAGS}
+>> variable. The result is that flags such as --hash-style=gnu are
+>> getting ignored.
+>
+> I think we should configure toolchain to pass this flags by gcc driver
+> while linking instead of making it a part of LDFLAGS it should help in
+> recipes which use gcc to link.
 
-I've put this on the wiki page just now, but I'll sign up for
-recipes / classes: SDK (*-cross-sdk, meta-toolchain*), Canadian SDK
-related (canadian*bbclass, *canadian*.bb *mingw*.bb) 
+While that would improve the situation a bit, it would also mean that 
+we'll have a harder time detecting which recipes ignore LDFLAGS.
 
--- 
-Tom Rini
+regards,
+
+Koen
+
 
 
