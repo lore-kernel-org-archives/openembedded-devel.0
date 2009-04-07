@@ -1,34 +1,38 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LrE9c-0000AR-KG
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Apr 2009 18:28:17 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KHQ00LLHO8XL9VI@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	07 Apr 2009 11:24:39 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9E6CA6B83A8; Tue,
-	07 Apr 2009 12:24:32 -0400 (EDT)
-Date: Tue, 07 Apr 2009 12:24:32 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090407162432.GA11203@denix.org>
-References: <20090402185006.GA12552@denix.org>
-	<20090402191118.GC30840@smtp.west.cox.net>
-	<20090402203832.GC12552@denix.org>
-MIME-version: 1.0
-In-reply-to: <20090402203832.GC12552@denix.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+	(envelope-from <trini@kernel.crashing.org>) id 1LrEPF-0007A5-Of
+	for openembedded-devel@openembedded.org; Tue, 07 Apr 2009 18:44:20 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090407164114.DUTF6112.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 7 Apr 2009 12:41:14 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id cghB1b00B4dMFYL03ghB0E; Tue, 07 Apr 2009 12:41:13 -0400
+X-Authority-Analysis: v=1.0 c=1 a=0sXtSTLkSA4A:10 a=CEQruDUxg1kA:10
+	a=wMNdZWldAAAA:8 a=V7NSixQb32qxfkKRf8gA:9
+	a=KOD7Xz3jyV4qU70_icZklBvAriUA:4 a=LY0hPdMaydYA:10
+X-CM-Score: 0.00
+Date: Tue, 7 Apr 2009 09:41:11 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090407164111.GC2195@smtp.west.cox.net>
+References: <d2b9ea600904061614r2839effbla380925d536c3999@mail.gmail.com>
+	<20090406235402.GA2195@smtp.west.cox.net>
+	<d2b9ea600904070011m2233742by5b8af78fa8417261@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <d2b9ea600904070011m2233742by5b8af78fa8417261@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.44
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: package_ipk.bbclass fails due to a wrong version of a	package
+Subject: Re: [STABLE][PATCH] mingw-binutils: update to 2.19.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,47 +46,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2009 16:28:18 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 07 Apr 2009 16:44:21 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Thu, Apr 02, 2009 at 04:38:32PM -0400, Denys Dmytriyenko wrote:
-> On Thu, Apr 02, 2009 at 12:11:18PM -0700, Tom Rini wrote:
-> > On Thu, Apr 02, 2009 at 02:50:06PM -0400, Denys Dmytriyenko wrote:
-> > 
-> > > Hi,
-> > > 
-> > > I've been debugging this issue for a while now w/o much success.
-> > > 
-> > > We have following recipes in play:
-> > > curl_7.19.0.bb
-> > > curl-native_7.18.2.bb
-> > > curl-sdk_7.18.2.bb
-> > > 
-> > > None of those set PV explicitly, so they are picked up from the filename.
-> > 
-> > Hmm, if you throw in a -v -DDD and log all the output, do you see both
-> > curl_7.18.2.bb being loaded (for -sdk) and curl_7.19.0.bb (for target)
-> > being loaded up?
+On Tue, Apr 07, 2009 at 09:11:17AM +0200, Esben Haabendal wrote:
+> On Tue, Apr 7, 2009 at 1:54 AM, Tom Rini <trini@kernel.crashing.org> wrote:
+> > On Tue, Apr 07, 2009 at 01:14:07AM +0200, Esben Haabendal wrote:
+> >
+> >> Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
+> >> ---
+> >>  .../mingw-binutils-canadian-cross_2.19.1.bb        |   11 +++++++++++
+> >>  recipes/binutils/mingw-binutils_2.19.1.bb          |   12 ++++++++++++
+> >>  2 files changed, 23 insertions(+), 0 deletions(-)
+> >>  create mode 100644 recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+> >>  create mode 100644 recipes/binutils/mingw-binutils_2.19.1.bb
+> >
+> > First, this isn't in .dev yet.  Second..
 > 
-> Nope. While trying to build curl-sdk_7.18.2.bb there is no mentioning of 
-> 7.19.0 (grepped the output) until the do_package_write_ipk, where it tried to 
-> create a lock file, as I mentioned above:
+> I know, it should apply there cleanly as well, but I need to test it...
 > 
-> NOTE: package curl-sdk-7.18.2-r0: task do_package_write_ipk: started
-> DEBUG: mkdirhier(/oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-sdk-7.18.2-r0/image)
-> DEBUG: mkdirhier(/oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-7.19.0-r1/image)
-> ERROR: Error, lockfile path does not exist!: /oe/tmp/work/i686-i686-sdk-angstrom-linux/curl-7.19.0-r1/install
+> >> diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+> >> b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+> >> new file mode 100644
+> >> index 0000000..27e06c6
+> >> --- /dev/null
+> >> +++ b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
+> >> @@ -0,0 +1,11 @@
+> >> +require mingw-binutils_${PV}.bb
+> >> +require binutils-canadian-cross.inc
+> >> +
+> >> +DEFAULT_PREFERENCE_sdk-mingw32 = "1"
+> >> +DEFAULT_PREFERENCE_sdk-mingw64 = "1"
+> >
+> > That's meaningless atm.  Or at least it is for how I've been doing all
+> > of the build tests (SDK_OS=mingw32), it would be just _mingw32 (does
+> > mingw64 work yet?).  Finally, do we really want to make this default
+> > when we're still building gcc-3.4.5?  I wouldn't think so, but I assume
+> > this means a gcc 4 actual release is soon.
 > 
-> The second mkdirhier() is where it fails and it is called from lockfile(), 
-> which gets called from do_package_ipk()...
-> 
-> BTW, this was a i686-generic build, thus i686-i686-sdk path...
+> The gcc 4 relase from MinGW project seem to have been in the same
+> state for quite a while.
+> I wonder when they will change it.
 
-FYI, I figured it out few days ago, but had some personal matters to resolve 
-first. I'll be sending a detailed explanation and a patch soon.
+Well, any idea why it's still "alpha" ?
+
+> Any special reason why we don't want to use a newer binutils for gcc-3.4.5?
+
+I suppose binutils might be less problematic than gcc but the
+possibility of issues arising when using much newer toolchains to build
+fairly old toolchains is something Khem brought up recently in the
+context of our gcc-cross-kernel-3.* recipes.
+
+> I don't remember seeing any problems with that, but maybe I have just
+> been lucky on that issue :-)
+> 
+> The reason I pulled in this release was actually that I had a failure
+> with ld from the old binutils when building mingw-runtime.
+
+Can you provide some more details on this?
+
+> So unless something points against setting 2.19.1 as default, I think we should.
+
+After some testing, yeah :)
 
 -- 
-Denys
+Tom Rini
 
 
