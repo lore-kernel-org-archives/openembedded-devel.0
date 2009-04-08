@@ -1,44 +1,48 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vhdirk@gmail.com>) id 1LrNcO-0005SW-AR
+	(envelope-from <raj.khem@gmail.com>) id 1LrNfW-0005Zy-QF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Apr 2009 04:34:33 +0200
-Received: by ewy20 with SMTP id 20so2675545ewy.12
+	Wed, 08 Apr 2009 04:37:42 +0200
+Received: by wa-out-1112.google.com with SMTP id n7so1466052wag.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Apr 2009 19:31:21 -0700 (PDT)
+	Tue, 07 Apr 2009 19:34:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=hb/0KWkmZy5yff9wKca7yj919yy2huEYx8Dp1LPrRRE=;
-	b=qgmHDGNxJ0HUlf75T7EDOhRlxzZiZ/CxAhNOaWChAb6V71axsN/vC7EmSSIChyGdye
-	73n9JdUzTwhQPNXvy4kEC2FU4MwauMZOALJvp4EL0Hz0RzVQJ341dMpCZZ++15hUAoOZ
-	ZI8L6W9vSJQJhI+zP58i239E09ow3jlWu7itw=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=+izalOfxXYysvSCCD1Wdqc9z59IyYFVYkVAEtBGkGxU=;
+	b=VIk1Eor6+7refIFnR7zUkybbTVwSNeVvl1AKtjVjjqP2ToA5KO/zeAlIhPN1xrKYcz
+	24MwSD7FSoa5GldliNQbJpv3T4pBcOeaUNrfi3WukDQwR4gmdj+iNyJWemaiYHdpV6N0
+	MZdsR7zvgu47ZgCYN3GffD42MQmIlQZc0vOQY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Ykqgh/qjA4+mOC8ZGGGjON8WboSw7A4mwnPqZt8MtV4tW1tlwGa8B4LjvC1Vy8CWZ0
-	6TLYTkGfgObySdCLid3nBRQpc88Fo4+9RWvR2blabBRJkug1SRCSmCgldskKnemoX06I
-	Wm+PhDtfbBrajmRKlcbToB+kKzuu7CTSrmR5E=
-Received: by 10.210.90.20 with SMTP id n20mr100915ebb.40.1239157881902;
-	Tue, 07 Apr 2009 19:31:21 -0700 (PDT)
-Received: from localhost.localdomain (213.219.146.119.adsl.dyn.edpnet.net
-	[213.219.146.119])
-	by mx.google.com with ESMTPS id 3sm7156801ewy.87.2009.04.07.19.31.21
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 07 Apr 2009 19:31:21 -0700 (PDT)
-From: Dirk 'Virk' Van Haerenborgh <vhdirk@gmail.com>
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:message-id;
+	b=oauNzjiTlapQACdm6SLSt3o+zyviz5XOlihrZsfdLbLp7Ue1LUTdoJ0LSXOLexJWGG
+	LBgMv0iyLeCwWnIpIHwETWwsiKCr9ZhSM1+7DfGWcpm8PXJkirxlVk7MKEGFpFiq3MwU
+	t2wmSsQo2TnenVZO/2njBx+jy8TLTEDVERqcM=
+Received: by 10.114.113.16 with SMTP id l16mr431460wac.164.1239158078316;
+	Tue, 07 Apr 2009 19:34:38 -0700 (PDT)
+Received: from morpheus.localnet (adsl-71-146-24-121.dsl.pltn13.sbcglobal.net
+	[71.146.24.121])
+	by mx.google.com with ESMTPS id m26sm252468pof.10.2009.04.07.19.34.37
+	(version=SSLv3 cipher=RC4-MD5); Tue, 07 Apr 2009 19:34:37 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Apr 2009 04:31:19 +0200
-Message-Id: <1239157879-25742-1-git-send-email-vhdirk@gmail.com>
-X-Mailer: git-send-email 1.6.0.4
-X-SA-Exim-Connect-IP: 209.85.219.172
-X-SA-Exim-Mail-From: vhdirk@gmail.com
+Date: Tue, 7 Apr 2009 19:34:35 -0700
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
+References: <SNT105-W64E92C9061ABE0CC32BA6A90850@phx.gbl>
+In-Reply-To: <SNT105-W64E92C9061ABE0CC32BA6A90850@phx.gbl>
+MIME-Version: 1.0
+Message-Id: <200904071934.36066.raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.146.177
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_PASS
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] add gsoap v2.7.13, generates C/C++ source codes for Web service and client applications
+Subject: Re: uClibc and 2.6.12.6 linux headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,95 +56,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2009 02:34:34 -0000
+X-List-Received-Date: Wed, 08 Apr 2009 02:37:42 -0000
+X-Groupsio-MsgNum: 9213
+Content-Type: multipart/signed; boundary="nextPart1996727.qlcr46VG48";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-gsoap-native: unbreak self-dependency patch included
-FILES_${PN} includes {datadir} as soapcpp2 is some sort of compiler which needs the headers in datadir in order to be able to compile its 
-soap stuff properly
+--nextPart1996727.qlcr46VG48
+Content-Type: text/plain;
+  charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+On Tuesday 07 April 2009 10:39:34 Mauri Sandberg wrote:
+>=20
+> Hi,
+>=20
+> I have let myself to be told that you need to have matcing kernel headers=
+ to your kernel version when you are building uclibc.
+
+yes usually thats best since after kernel 2.6.18+ had support for generatin=
+g sanitized kernel headers
+
+>=20
+> I would need to build uclibc with 2.6.12.6 linux headers as I am trying t=
+o put together a system that is based on a kernel with that same version. I=
+ have tried to use PREFERRED_VERSION etc but bitbake always selects newest =
+headers and ignores me totally.
+
+if you are using angstrom then you have to make this weak assignment in con=
+f/distro/angstrom-2008.1.conf
+
+=2DPREFERRED_VERSION_linux-libc-headers   =3D "2.6.23"
++PREFERRED_VERSION_linux-libc-headers   ?=3D "2.6.23"
+
+then you can override it in you local.conf
 
 
----
- .../use-just-built-binary-2.7.13.patch             |   12 ++++++++++++
- recipes/gsoap/gsoap-native_2.7.13.bb               |   12 ++++++++++++
- recipes/gsoap/gsoap_2.7.13.bb                      |    6 ++++++
- recipes/gsoap/gsoap_2.7.13.inc                     |   15 +++++++++++++++
- 4 files changed, 45 insertions(+), 0 deletions(-)
- create mode 100644 recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
- create mode 100644 recipes/gsoap/gsoap-native_2.7.13.bb
- create mode 100644 recipes/gsoap/gsoap_2.7.13.bb
- create mode 100644 recipes/gsoap/gsoap_2.7.13.inc
-
-diff --git a/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
-new file mode 100644
-index 0000000..25a8ef0
---- /dev/null
-+++ b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
-@@ -0,0 +1,12 @@
-+diff -urN gsoap-2.7.orig/gsoap/wsdl/Makefile.am gsoap-2.7.orig/gsoap/wsdl/Makefile.am
-+--- gsoap-2.7.orig/gsoap/wsdl/Makefile.am	2009-03-21 22:24:42.000000000 +0100
-++++ gsoap-2.7.orig/gsoap/wsdl/Makefile.am	2009-04-07 11:30:50.000000000 +0200
-+@@ -17,7 +17,7 @@ BUILT_SOURCES=$(SOAP_CPP_SRC)
-+ # WSDL2H_EXTRA_LIBS=-lssl -lcrypto -lz # defined in configure.in
-+ 
-+ $(SOAP_CPP_SRC) : $(SOAPHEADER)
-+-	$(SOAP) $(SOAP_FLAGS) $(SOAPHEADER)
-++	../src/soapcpp2 $(SOAP_FLAGS) $(SOAPHEADER)
-+ 
-+ #LIBS=
-+ 
-diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb b/recipes/gsoap/gsoap-native_2.7.13.bb
-new file mode 100644
-index 0000000..3ed78d0
---- /dev/null
-+++ b/recipes/gsoap/gsoap-native_2.7.13.bb
-@@ -0,0 +1,12 @@
-+require gsoap_${PV}.inc
-+
-+DEPENDS = ""
-+
-+SRC_URI += "file://use-just-built-binary-2.7.13.patch;patch=1"
-+
-+inherit native
-+
-+do_install() {
-+	:
-+}
-+
-diff --git a/recipes/gsoap/gsoap_2.7.13.bb b/recipes/gsoap/gsoap_2.7.13.bb
-new file mode 100644
-index 0000000..c5b0ae8
---- /dev/null
-+++ b/recipes/gsoap/gsoap_2.7.13.bb
-@@ -0,0 +1,6 @@
-+require gsoap_${PV}.bb
-+
-+DEPENDS = "gsoap-native"
-+
-+FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
-+FILES_${PN} += "${datadir}"
-diff --git a/recipes/gsoap/gsoap_2.7.13.inc b/recipes/gsoap/gsoap_2.7.13.inc
-new file mode 100644
-index 0000000..a6fbbb5
---- /dev/null
-+++ b/recipes/gsoap/gsoap_2.7.13.inc
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
-+for the development of SOAP Web Services and clients."
-+SECTION = "devel"
-+LICENSE = "GPL"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz"
-+
-+inherit autotools_stage
-+
-+S = "${WORKDIR}/gsoap-2.7"
-+
-+PARALLEL_MAKE = ""
-+
-+EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
-+
--- 
-1.6.0.4
+Closest to your version in linux-libc-headers_2.6.11.1.bb so may be thats w=
+hat you should try first
 
 
 
+>=20
+> How to proceed here?
+>=20
+> -- Mauri
+>=20
+>=20
+> _________________________________________________________________
+> Drag n=92 drop=97Get easy photo sharing with Windows Live=99 Photos.
+>=20
+> http://www.microsoft.com/windows/windowslive/products/photos.aspx
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+
+=2D-=20
+Khem Raj
+
+--nextPart1996727.qlcr46VG48
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAkncDTwACgkQHnJKy6V6em4SsACfbijQxhS3Qb94ARdEco7BH4QF
+bq0AoKKewvMW+ZMh5Khf03VR9Y8D7BLa
+=UyQv
+-----END PGP SIGNATURE-----
+
+--nextPart1996727.qlcr46VG48--
