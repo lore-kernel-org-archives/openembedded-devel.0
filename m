@@ -1,60 +1,57 @@
-Received: from [209.85.132.247] (helo=an-out-0708.google.com)
+Received: from [209.85.132.248] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LrbH6-00088N-Uv
+	(envelope-from <otavio.salvador@gmail.com>) id 1LrbVo-0005OP-MG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Apr 2009 19:09:23 +0200
-Received: by an-out-0708.google.com with SMTP id b2so328791ana.42
+	Wed, 08 Apr 2009 19:24:37 +0200
+Received: by an-out-0708.google.com with SMTP id b2so339237ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Apr 2009 10:06:16 -0700 (PDT)
+	Wed, 08 Apr 2009 10:21:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to
 	:subject:organization:references:user-agent:x-url:x-attribution:date
 	:in-reply-to:message-id:mime-version:content-type;
-	bh=RPPnoa/QsCWIkiZdOXP5akTcTy1XCy0OUnYm1/m0wE0=;
-	b=acgZq8UEHNfEiQx0lhT139ueNPX3sAlR8gFfR7Sv3plT2Of+Fxakbhsc0N3Qto1m4Z
-	7fdIbRiq21i70deVTj4WFDiblFkBHMm2zT/QoHUmHB7TolXtsqF/cj/WuC/DOLZ85dx2
-	o4DlaTiTJ/CZi8JPlQHQK7AkMGsdZ+EAVTPgk=
+	bh=lvMJRHppsOEm9UXzF0jr6rImP6vEEAD0ptRBcbYTa04=;
+	b=xPvNFD4rYwtbDOKxFynjqNWwdTa545h5DEUcCYJ2/qQoeh5H2PF1s+CIdrzf42HcrE
+	BfF5H+U3KVOoJTVgANZN/ludhi0yjDCPJPYWxUvvX0xyMefLOcnh+4iicagyie87Hj5g
+	CO1PuLvX9dPh1Q453BJ3U7MhS1J62hh+VR9B4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:subject:organization:references:user-agent:x-url
 	:x-attribution:date:in-reply-to:message-id:mime-version:content-type;
-	b=oMFLZQX2pM0Jt9s7FbMCr0bdJtVAw5+0GveyrlW6PHyuvsYahZ7J6TWhnSC80UVl4C
-	8CllrODhD/M3CCISm1ZvoGzzzz2N0ZD8ZIqQDM8O7iGGwtHUCXP35UdL5WV1TON/0WS/
-	XeTXL6CzrUP0eXf4DJdfbophML/dr64RMKN+o=
-Received: by 10.100.167.3 with SMTP id p3mr3333521ane.141.1239210376378;
-	Wed, 08 Apr 2009 10:06:16 -0700 (PDT)
+	b=mNXz+xHZWbSGbBIg8BZJVJyWzBxS8fHi6lUVEGlxiBLI2KajHA1qVnQZsKdnLM1V2Y
+	GSsXmRH8a6MBeDMJkVLKvnzjxzSCV6f7iJfFXOyyDDxnAywPY8kQKZZu02cvcZ1pMiUt
+	d7OUMiL6d0aqP1W7SHxbXqDr/nBG+QAy8viVE=
+Received: by 10.100.171.16 with SMTP id t16mr3551040ane.29.1239211288460;
+	Wed, 08 Apr 2009 10:21:28 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id c1sm604336ana.20.2009.04.08.10.06.09
+	by mx.google.com with ESMTPS id d35sm224908and.15.2009.04.08.10.21.27
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 08 Apr 2009 10:06:10 -0700 (PDT)
+	Wed, 08 Apr 2009 10:21:28 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 68D96C48D6E; Wed,  8 Apr 2009 14:06:33 -0300 (BRT)
+	id D4F87C48E3D; Wed,  8 Apr 2009 14:21:49 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 Organization: O.S. Systems Ltda.
-References: <20090402185006.GA12552@denix.org>
-	<20090402191118.GC30840@smtp.west.cox.net>
-	<20090402203832.GC12552@denix.org> <20090407162432.GA11203@denix.org>
-	<20090407213412.GF11203@denix.org>
+References: <1239209556-847-1-git-send-email-clarson@mvista.com>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.0.91 (gnu/linux)
 	(x86_64-pc-linux-gnu)
 X-URL: http://www.ossystems.com.br/
 X-Attribution: O.S.
-Date: Wed, 08 Apr 2009 14:06:33 -0300
-In-Reply-To: <20090407213412.GF11203@denix.org> (Denys Dmytriyenko's message
-	of "Tue, 07 Apr 2009 17:34:12 -0400")
-Message-ID: <87tz4z13dy.fsf@neumann.lab.ossystems.com.br>
+Date: Wed, 08 Apr 2009 14:21:48 -0300
+In-Reply-To: <1239209556-847-1-git-send-email-clarson@mvista.com> (Chris
+	Larson's message of "Wed, 8 Apr 2009 09:52:35 -0700")
+Message-ID: <87prfn12oj.fsf@neumann.lab.ossystems.com.br>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.132.247
+X-SA-Exim-Connect-IP: 209.85.132.248
 X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+X-Spam-Status: No, score=-0.8 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
 	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: package_ipk.bbclass fails due to a wrong version of a	package
+Subject: Re: [PATCH] First pass of cleanup of messages outputted to the user.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -68,31 +65,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2009 17:09:23 -0000
+X-List-Received-Date: Wed, 08 Apr 2009 17:24:39 -0000
 Content-Type: text/plain; charset=us-ascii
 
-Denys Dmytriyenko <denis@denix.org> writes:
+Chris Larson <clarson@mvista.com> writes:
 
-
-[...]
-
-> Ok, the problem comes from the 1af5030de05a1e65d1de734f7675ffc22c8318fc 
-> commit taken from Poky, which seems legitimate, as it "fixes" the generation 
-> of pkgdata/runtime files by adding extra fields, such as PN, PV and PR. It was 
-> commited as part of RPM packaging.
-
-[...]
-
-> The above commit from Poky may unmask some other similar issues, not related 
-> to curl - for example the one Otavio reported recently. It can be easily 
-> verified if it is the rootcause:
+> OpenEmbedded outputs a lot of messages that the user is likely to never
+> care about.  We should only output something when it reflects upon their
+> recipe (i.e. unpacking their sources, applying their patches), or is quite
+> significant or unusual.
 >
-> $ git revert -n 1af5030de05a1e65d1de734f7675ffc22c8318fc
+> Signed-off-by: Chris Larson <clarson@mvista.com>
 
-[...]
-
-I can confirm that it solves my issues here too; please revert it in dev
-and stable.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
 -- 
 Otavio Salvador                  O.S. Systems
