@@ -1,38 +1,46 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LrbyO-0006Pf-RZ
-	for openembedded-devel@openembedded.org; Wed, 08 Apr 2009 19:54:17 +0200
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090408175059.DYZY16134.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 8 Apr 2009 13:50:59 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id d5qv1b00E4dMFYL035qwYT; Wed, 08 Apr 2009 13:50:58 -0400
-X-Authority-Analysis: v=1.0 c=1 a=3yNiNCsWiaUA:10 a=w5m77Bwnh3kA:10
-	a=4o1OIT2LM5owfyoeykkA:9 a=P-43RA1TrqUqycDMWqLra7TYdhEA:4
-	a=LY0hPdMaydYA:10
-X-CM-Score: 0.00
-Date: Wed, 8 Apr 2009 10:50:55 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090408175055.GM2195@smtp.west.cox.net>
+	(envelope-from <esbenhaabendal@gmail.com>) id 1Lrc9z-00035f-F8
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Apr 2009 20:06:17 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so159952ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Apr 2009 11:02:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=TEHCoaxOGZ7fzpdbCel4rKWVchxe0+/D6CZqXIAo7NI=;
+	b=YEuDuct2MNlvOQD8Rl3hQoZX1m9NSyvCRyclHwgq40SN7+ftU808PSfKNiAfQc8otv
+	GnZhjS4tx0iVVbZ/OgMVMJ0W6g/RT/2ebda31apmKigMx0YWWexvgekH8s3VdLIT75y+
+	Zm0gOIISh31ChgD0Iv1Gr7DvKCVF/OtdAl+Wk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Fw6XNFEI3vtPjiJsPPtCJYq5lSFK3Xj7KS2wI6utVgBMHf7rqGEOrnFkVnacf5hRq5
+	/7+bP28318y7LGyJz+BR1TVD1gWhURZWR4UhukLuOLZKC0/cSnRaWafjk7tlgT4xqWuR
+	kIgdqkNTIoKwQAGktK+a8bhg5dLaa8H0pG/oQ=
+MIME-Version: 1.0
+Received: by 10.100.125.9 with SMTP id x9mr3610396anc.35.1239213779150; Wed, 
+	08 Apr 2009 11:02:59 -0700 (PDT)
+In-Reply-To: <20090408175055.GM2195@smtp.west.cox.net>
 References: <d2b9ea600904070016j5826cdbex6271177286c66c87@mail.gmail.com>
 	<20090407165123.GE2195@smtp.west.cox.net>
 	<d2b9ea600904080716y5776086fu8521915fa402f694@mail.gmail.com>
 	<gric5v$qc4$1@ger.gmane.org>
 	<d2b9ea600904080952g656823dby8c15a46b425f76c6@mail.gmail.com>
 	<49DCE11F.90903@balister.org>
-MIME-Version: 1.0
-In-Reply-To: <49DCE11F.90903@balister.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.42
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+	<20090408175055.GM2195@smtp.west.cox.net>
+Date: Wed, 8 Apr 2009 20:02:59 +0200
+Message-ID: <d2b9ea600904081102k6e6e5c95r554c3d9111749e39@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.46.154
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.9 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [STABLE][PATCH v2] mingw-binutils: update to 2.19.1
@@ -49,38 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2009 17:54:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Apr 2009 18:06:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 08, 2009 at 01:38:39PM -0400, Philip Balister wrote:
-> Esben Haabendal wrote:
->> On Wed, Apr 8, 2009 at 4:26 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->>> On 08-04-09 16:16, Esben Haabendal wrote:
+On Wed, Apr 8, 2009 at 7:50 PM, Tom Rini <trini@kernel.crashing.org> wrote:
+> On Wed, Apr 08, 2009 at 01:38:39PM -0400, Philip Balister wrote:
+>> Esben Haabendal wrote:
+>>> On Wed, Apr 8, 2009 at 4:26 PM, Koen Kooi <k.kooi@student.utwente.nl> w=
+rote:
+>>>> On 08-04-09 16:16, Esben Haabendal wrote:
+>>>>
+>>>>> Then, please someone apply this to .dev. =A0But then how are we suppo=
+sed
+>>>>> to remember which patches should also be moved to stable, and when?
+>>>> If you want something in stable, you send the patch to this mailinglis=
+t with
+>>>> [STABLE] in the subject.
 >>>
->>>> Then, please someone apply this to .dev.  But then how are we supposed
->>>> to remember which patches should also be moved to stable, and when?
->>> If you want something in stable, you send the patch to this mailinglist with
->>> [STABLE] in the subject.
+>>> Which is exactly what I did. =A0Now 3 times even.
 >>
->> Which is exactly what I did.  Now 3 times even.
+>> I suspect the problem is most of the people interested in stable do not
+>> know what this patch does. I admit to skimming over things that look
+>> like patches to pieces of OE that I know little about.
+>>
+>> Still, we need a way to get this sort of thing into stable, even when it
+>> is outside the scope of most of the reviewers.
 >
-> I suspect the problem is most of the people interested in stable do not  
-> know what this patch does. I admit to skimming over things that look  
-> like patches to pieces of OE that I know little about.
+> Hang on. =A0I (the guy signed up to own this part of stable) have reviewe=
+d
+> it each time. =A0The problem is there's been both general little problems
+> and Esben has wanted the patch to go in both trees at once, which isn't
+> how I understand Stable to work.
 >
-> Still, we need a way to get this sort of thing into stable, even when it  
-> is outside the scope of most of the reviewers.
+> My plan right now is to fixup the still minor problems in v3 and post
+> for stable momentarily.
 
-Hang on.  I (the guy signed up to own this part of stable) have reviewed
-it each time.  The problem is there's been both general little problems
-and Esben has wanted the patch to go in both trees at once, which isn't
-how I understand Stable to work.
+That is fine.  And it is also good that we improve the quality of the
+metadata when changing stuff.
+But it is just surprising that when I copy an existing recipe file to
+add a new version, it gives rise to so much need for improvement.
+The existing file were committed by yourself, although it originates
+from my canadian sdk work, but I maybe we could use time a bit more
+efficient than nitpicking to much on selected commit(ter)s. That said,
+it is always nice to have the best possible end result :-)
 
-My plan right now is to fixup the still minor problems in v3 and post
-for stable momentarily.
-
--- 
-Tom Rini
+/Esben
 
 
