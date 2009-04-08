@@ -1,42 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LrXfJ-0007LX-1v
-	for openembedded-devel@openembedded.org; Wed, 08 Apr 2009 15:18:12 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LrXcM-0006fQ-8s
-	for openembedded-devel@openembedded.org; Wed, 08 Apr 2009 13:15:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 08 Apr 2009 13:15:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 08 Apr 2009 13:15:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 08 Apr 2009 15:14:40 +0200
-Message-ID: <gri800$a6q$2@ger.gmane.org>
-References: <1239195076-4937-1-git-send-email-vhdirk@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090405 Shredder/3.0b3pre
-In-Reply-To: <1239195076-4937-1-git-send-email-vhdirk@gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <philip@balister.org>) id 1LrXhO-0007Pl-UK
+	for openembedded-devel@openembedded.org; Wed, 08 Apr 2009 15:20:20 +0200
+Received: (qmail 29621 invoked by uid 1003); 8 Apr 2009 13:17:09 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 8 Apr 2009 13:17:09 -0000
+Message-ID: <49DCA3D4.8060807@balister.org>
+Date: Wed, 08 Apr 2009 09:17:08 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1239102187-3803-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1239102187-3803-1-git-send-email-k.kooi@student.utwente.nl>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] add gsoap v2.7.13, generates C/C++ source codes for Web service and client applications
+Subject: Re: [STABLE][PATCH] systray: as the name implies, a systray module for e17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,130 +36,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2009 13:18:12 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 08 Apr 2009 13:20:20 -0000
+X-Groupsio-MsgNum: 9231
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms010907000900020002020602"
+
+--------------ms010907000900020002020602
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 08-04-09 14:51, Dirk 'Virk' Van Haerenborgh wrote:
-> gsoap-native: unbreak self-dependency patch included
->
-> FILES_${PN} includes {datadir} as soapcpp2 is some sort of compiler which needs the headers in datadir in order to be able to compile its
-> soap stuff properly
->
-> (third time's the charm)
+Acked-by: Philip Balister <philip@balister.org>
 
-This looks good enough to me to go in.
-
-regards,
-
-Koen
-
+Koen Kooi wrote:
+> From: Koen Kooi <koen@openembedded.org>
+> 
+> 
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->   conf/checksums.ini                                 |    4 ++++
->   .../use-just-built-binary-2.7.13.patch             |   12 ++++++++++++
->   recipes/gsoap/gsoap-native_2.7.13.bb               |   12 ++++++++++++
->   recipes/gsoap/gsoap_2.7.13.bb                      |   15 +++++++++++++++
->   recipes/gsoap/gsoap_2.7.13.inc                     |   15 +++++++++++++++
->   5 files changed, 58 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
->   create mode 100644 recipes/gsoap/gsoap-native_2.7.13.bb
->   create mode 100644 recipes/gsoap/gsoap_2.7.13.bb
->   create mode 100644 recipes/gsoap/gsoap_2.7.13.inc
->
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index ce78b83..f7f2959 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -9278,6 +9278,10 @@ sha256=5149991a219e8f2059350ed9d52bb110c0695da6eb9fe256e9e213e69f83929f
->   md5=5bfa5605d9565ff01138d7a574cc2614
->   sha256=fc029984019736eab2b0f10ce28d48ff88f8ceed7a1739cb4b71b851c4b89b91
->
-> +[http://downloads.sourceforge.net/gsoap2/gsoap_2.7.13.tar.gz]
-> +md5=fffb49eb1db7ff03643a4313115dc3b1
-> +sha256=3d40a528b8f3309f392945dca2ecaee5a698f4ee00a6036907a57c4f25a6a479
-> +
->   [http://downloads.sourceforge.net/gsoap2/gsoap_2.7.7.tar.gz]
->   md5=a0bbbfdc135034cd778537f979121df7
->   sha256=7b531f1b6481fbe1a21620a86649f42cb2de9cf086e7bdde46335137d3ca11dc
-> diff --git a/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
+>  recipes/e17/systray_svn.bb |    8 ++++++++
+>  1 files changed, 8 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/e17/systray_svn.bb
+> 
+> diff --git a/recipes/e17/systray_svn.bb b/recipes/e17/systray_svn.bb
 > new file mode 100644
-> index 0000000..25a8ef0
+> index 0000000..3c0a8c7
 > --- /dev/null
-> +++ b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
-> @@ -0,0 +1,12 @@
-> +diff -urN gsoap-2.7.orig/gsoap/wsdl/Makefile.am gsoap-2.7.orig/gsoap/wsdl/Makefile.am
-> +--- gsoap-2.7.orig/gsoap/wsdl/Makefile.am	2009-03-21 22:24:42.000000000 +0100
-> ++++ gsoap-2.7.orig/gsoap/wsdl/Makefile.am	2009-04-07 11:30:50.000000000 +0200
-> +@@ -17,7 +17,7 @@ BUILT_SOURCES=$(SOAP_CPP_SRC)
-> + # WSDL2H_EXTRA_LIBS=-lssl -lcrypto -lz # defined in configure.in
+> +++ b/recipes/e17/systray_svn.bb
+> @@ -0,0 +1,8 @@
+> +LICENSE = "MIT"
+> +PV = "0.0.1+svnr${SRCREV}"
 > +
-> + $(SOAP_CPP_SRC) : $(SOAPHEADER)
-> +-	$(SOAP) $(SOAP_FLAGS) $(SOAPHEADER)
-> ++	../src/soapcpp2 $(SOAP_FLAGS) $(SOAPHEADER)
-> +
-> + #LIBS=
-> +
-> diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb b/recipes/gsoap/gsoap-native_2.7.13.bb
-> new file mode 100644
-> index 0000000..3ed78d0
-> --- /dev/null
-> +++ b/recipes/gsoap/gsoap-native_2.7.13.bb
-> @@ -0,0 +1,12 @@
-> +require gsoap_${PV}.inc
-> +
-> +DEPENDS = ""
-> +
-> +SRC_URI += "file://use-just-built-binary-2.7.13.patch;patch=1"
-> +
-> +inherit native
-> +
-> +do_install() {
-> +	:
-> +}
-> +
-> diff --git a/recipes/gsoap/gsoap_2.7.13.bb b/recipes/gsoap/gsoap_2.7.13.bb
-> new file mode 100644
-> index 0000000..54f89c6
-> --- /dev/null
-> +++ b/recipes/gsoap/gsoap_2.7.13.bb
-> @@ -0,0 +1,15 @@
-> +require gsoap_${PV}.inc
-> +
-> +DEPENDS = "gsoap-native"
-> +
-> +do_install_append() {
-> +   install -d ${D}${libdir}
-> +   for lib in libgsoapssl libgsoapssl++ libgsoap libgsoapck++ libgsoap++ libgsoapck
-> +   do
-> +       oe_libinstall -C gsoap $lib ${D}${libdir}
-> +   done
-> +}
+> +require e-module.inc
 > +
 > +
-> +FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
-> +FILES_${PN} += "${datadir}"
-> diff --git a/recipes/gsoap/gsoap_2.7.13.inc b/recipes/gsoap/gsoap_2.7.13.inc
-> new file mode 100644
-> index 0000000..a6fbbb5
-> --- /dev/null
-> +++ b/recipes/gsoap/gsoap_2.7.13.inc
-> @@ -0,0 +1,15 @@
-> +DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
-> +for the development of SOAP Web Services and clients."
-> +SECTION = "devel"
-> +LICENSE = "GPL"
 > +
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz"
-> +
-> +inherit autotools_stage
-> +
-> +S = "${WORKDIR}/gsoap-2.7"
-> +
-> +PARALLEL_MAKE = ""
-> +
-> +EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
 > +
 
+--------------ms010907000900020002020602
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQwODEz
+MTcwOFowIwYJKoZIhvcNAQkEMRYEFBwuyFWq3ITA9AVjO5oYHD9p6vd6MFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQC8XnDX78layR0qeihNShMc+q6o0iiVmmGeQxz4Aph+11dz/V8a
+4WoNQt8FD2MnomjZfTA8i021GgdBDSksWRuYn55IgdYdFJNLIp8mJOXriOZn5Y9GTP2naFGu17AS
+GOzCbXIwvy2HE63j+OFPZkIkNsvIWuuUndWRCe65gKw+5yhUWAN+SlZgxRHE+w1h8lF7Ucqrrky0
+Kb0y+3FbyI/LQHusPyslZsiUAlNK3Wt7TpM7MOxd1EZs/zBFWg1pkM0R6OoVJ2EitieVT7hO5XAC
+Q2pGXvu/W5Kef6Qu7hlWSymSvUkcYMjIYyTrDVlOa29bKy5cO+vOoHt+u0HEJ+meAAAAAAAA
 
-
+--------------ms010907000900020002020602--
