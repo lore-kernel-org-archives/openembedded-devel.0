@@ -1,43 +1,30 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [216.145.245.198] (helo=mx02.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vhdirk@gmail.com>) id 1LrNkD-0005jC-Ig
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Apr 2009 04:42:32 +0200
-Received: by ewy20 with SMTP id 20so2677040ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Apr 2009 19:39:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:from:date:message-id:subject:to:cc:content-type;
-	bh=01uMp71tyBgbYXocobSOSm8BTiF1u3ujRBYPvK134yA=;
-	b=fYE62vM2TqsJmpAztcODYlksJDX2oAZPbeL1Ap4DArFvj4hhDwOifC7n7b4JdWEOWj
-	P706xyYU7AUHdfwGWo6kqielwhicO2FLcDFxKQlpEiGwKT0gSkhPbx4oJopJ+j2rgqtZ
-	9n2ULg34k3YMPzsV9bTYOBau75t1XLyBCZt/A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=b31Ve8zMpcFiJ4b7O3CD9e8vs1nbesO2JL7AWVLYboFPH7EsABmo5d/FxJq7PwChrR
-	PA4TNplsMSBo1kTXfb6BubgWHnO7ekyNNPVRKfOUOUuyib8Fv7C839jJKx0R+tpHxr8T
-	t3GsvZgFiQnQAKIkJrmii8TIxEJR4JeXcFInI=
+	(envelope-from <mwester@dls.net>) id 1LrNtP-0005si-Uw
+	for openembedded-devel@openembedded.org; Wed, 08 Apr 2009 04:52:02 +0200
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx02.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>)
+	id 1LrNqU-0006fU-7y; Tue, 07 Apr 2009 21:48:58 -0500
+Message-ID: <49DC10A0.5020007@dls.net>
+Date: Tue, 07 Apr 2009 21:49:04 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Received: by 10.216.45.71 with SMTP id o49mr196444web.57.1239158367591; Tue, 
-	07 Apr 2009 19:39:27 -0700 (PDT)
-In-Reply-To: <1239157879-25742-1-git-send-email-vhdirk@gmail.com>
-References: <1239157879-25742-1-git-send-email-vhdirk@gmail.com>
-From: Dirk Van Haerenborgh <vhdirk@gmail.com>
-Date: Wed, 8 Apr 2009 04:39:12 +0200
-Message-ID: <eaa8e5210904071939l6d05b88cwfc96d86faaf69eec@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.172
-X-SA-Exim-Mail-From: vhdirk@gmail.com
+To: openembedded-devel@openembedded.org
+References: <1239036480-19478-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+In-Reply-To: <1239036480-19478-1-git-send-email-jeremy.laine@bolloretelecom.eu>
+X-SA-Exim-Connect-IP: 216.145.245.198
+X-SA-Exim-Mail-From: mwester@dls.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	RDNS_NONE,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] add gsoap v2.7.13, generates C/C++ source codes for Web service and client applications
+Cc: =?UTF-8?B?SmVyZW15IExhaW7DqQ==?= <jeremy.laine@m4x.org>
+Subject: Re: [STABLE][PATCH] flite-1.3: use LDFLAGS (fixes QA error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,113 +38,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2009 02:42:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Apr 2009 02:52:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Oops, please discard this one, I forgot something
-
-
--Dirk
-
-2009/4/8 Dirk 'Virk' Van Haerenborgh <vhdirk@gmail.com>
-
-> gsoap-native: unbreak self-dependency patch included
-> FILES_${PN} includes {datadir} as soapcpp2 is some sort of compiler which
-> needs the headers in datadir in order to be able to compile its
-> soap stuff properly
->
->
+Jeremy Lainé wrote:
+> From: Jeremy Lainé <jeremy.laine@m4x.org>
+> 
+> 
+> Signed-off-by: Jeremy Lainé <jeremy.laine@m4x.org>
 > ---
->  .../use-just-built-binary-2.7.13.patch             |   12 ++++++++++++
->  recipes/gsoap/gsoap-native_2.7.13.bb               |   12 ++++++++++++
->  recipes/gsoap/gsoap_2.7.13.bb                      |    6 ++++++
->  recipes/gsoap/gsoap_2.7.13.inc                     |   15 +++++++++++++++
->  4 files changed, 45 insertions(+), 0 deletions(-)
->  create mode 100644
-> recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
->  create mode 100644 recipes/gsoap/gsoap-native_2.7.13.bb
->  create mode 100644 recipes/gsoap/gsoap_2.7.13.bb
->  create mode 100644 recipes/gsoap/gsoap_2.7.13.inc
->
-> diff --git a/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
-> b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
-> new file mode 100644
-> index 0000000..25a8ef0
-> --- /dev/null
-> +++ b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
-> @@ -0,0 +1,12 @@
-> +diff -urN gsoap-2.7.orig/gsoap/wsdl/Makefile.am
-> gsoap-2.7.orig/gsoap/wsdl/Makefile.am
-> +--- gsoap-2.7.orig/gsoap/wsdl/Makefile.am      2009-03-21
-> 22:24:42.000000000 +0100
-> ++++ gsoap-2.7.orig/gsoap/wsdl/Makefile.am      2009-04-07
-> 11:30:50.000000000 +0200
-> +@@ -17,7 +17,7 @@ BUILT_SOURCES=$(SOAP_CPP_SRC)
-> + # WSDL2H_EXTRA_LIBS=-lssl -lcrypto -lz # defined in configure.in
-> +
-> + $(SOAP_CPP_SRC) : $(SOAPHEADER)
-> +-      $(SOAP) $(SOAP_FLAGS) $(SOAPHEADER)
-> ++      ../src/soapcpp2 $(SOAP_FLAGS) $(SOAPHEADER)
-> +
-> + #LIBS=
-> +
-> diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb b/recipes/gsoap/
-> gsoap-native_2.7.13.bb
-> new file mode 100644
-> index 0000000..3ed78d0
-> --- /dev/null
-> +++ b/recipes/gsoap/gsoap-native_2.7.13.bb
-> @@ -0,0 +1,12 @@
-> +require gsoap_${PV}.inc
-> +
-> +DEPENDS = ""
-> +
-> +SRC_URI += "file://use-just-built-binary-2.7.13.patch;patch=1"
-> +
-> +inherit native
-> +
-> +do_install() {
-> +       :
-> +}
-> +
-> diff --git a/recipes/gsoap/gsoap_2.7.13.bb b/recipes/gsoap/gsoap_2.7.13.bb
-> new file mode 100644
-> index 0000000..c5b0ae8
-> --- /dev/null
-> +++ b/recipes/gsoap/gsoap_2.7.13.bb
-> @@ -0,0 +1,6 @@
-> +require gsoap_${PV}.bb
-> +
-> +DEPENDS = "gsoap-native"
-> +
-> +FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
-> +FILES_${PN} += "${datadir}"
-> diff --git a/recipes/gsoap/gsoap_2.7.13.inc
-> b/recipes/gsoap/gsoap_2.7.13.inc
-> new file mode 100644
-> index 0000000..a6fbbb5
-> --- /dev/null
-> +++ b/recipes/gsoap/gsoap_2.7.13.inc
-> @@ -0,0 +1,15 @@
-> +DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language
-> binding \
-> +for the development of SOAP Web Services and clients."
-> +SECTION = "devel"
-> +LICENSE = "GPL"
-> +
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz"
-> +
-> +inherit autotools_stage
-> +
-> +S = "${WORKDIR}/gsoap-2.7"
-> +
-> +PARALLEL_MAKE = ""
-> +
-> +EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
-> +
-> --
-> 1.6.0.4
->
->
+>  recipes/flite/flite-1.3/flite-1.3-Makefile.patch |    3 ++-
+>  recipes/flite/flite_1.3.bb                       |    2 +-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/flite/flite-1.3/flite-1.3-Makefile.patch b/recipes/flite/flite-1.3/flite-1.3-Makefile.patch
+> index 9a1a82e..5b532fd 100644
+> --- a/recipes/flite/flite-1.3/flite-1.3-Makefile.patch
+> +++ b/recipes/flite/flite-1.3/flite-1.3-Makefile.patch
+> @@ -317,9 +317,10 @@ Index: config/common_make_rules
+>   	@ rm -rf shared_os && mkdir shared_os
+>   	@ rm -f $@ $(LIBDIR)/$@.${PROJECT_VERSION} $(LIBDIR)/$@.${PROJECT_SHLIB_VERSION} 
+>   	@ (cd shared_os && ar x ../$<)
+> - 	@ (cd shared_os && $(CC) -shared -Wl,-soname,$@.${PROJECT_SHLIB_VERSION} -o ../$@.${PROJECT_VERSION} *.os)
+> +-	@ (cd shared_os && $(CC) -shared -Wl,-soname,$@.${PROJECT_SHLIB_VERSION} -o ../$@.${PROJECT_VERSION} *.os)
+>  -	@ ln -s $(LIBDIR)/$@.${PROJECT_VERSION} $(LIBDIR)/$@.${PROJECT_SHLIB_VERSION}
+>  -	@ ln -s $(LIBDIR)/$@.${PROJECT_SHLIB_VERSION} $(LIBDIR)/$@
+> ++	@ (cd shared_os && $(CC) $(LDFLAGS) -shared -Wl,-soname,$@.${PROJECT_SHLIB_VERSION} -o ../$@.${PROJECT_VERSION} *.os)
+>  +	#@ ln -s $(LIBDIR)/$@.${PROJECT_VERSION} $(LIBDIR)/$@.${PROJECT_SHLIB_VERSION}
+>  +	#@ ln -s $(LIBDIR)/$@.${PROJECT_SHLIB_VERSION} $(LIBDIR)/$@
+>  +	@ ln -s $@.${PROJECT_VERSION} $@.${PROJECT_SHLIB_VERSION}
+> diff --git a/recipes/flite/flite_1.3.bb b/recipes/flite/flite_1.3.bb
+> index 360ccb0..b553689 100644
+> --- a/recipes/flite/flite_1.3.bb
+> +++ b/recipes/flite/flite_1.3.bb
+> @@ -1,6 +1,6 @@
+>  require flite.inc
+>  
+> -PR = "r3"
+> +PR = "r4"
+>  
+>  EXTRA_OECONF = "--with-audio=oss --enable-shared"
+>  
+
+Results in:
+
+NOTE: make INSTALLBINDIR=/u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/flite-1.3-r4/image/usr/bin INSTALLLIBDIR=/u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/flite-1.3-r4/image/usr/lib INSTALLINCDIR=/u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/flite-1.3-r4/image/usr/include install
+Installing
+mkdir -p /u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/flite-1.3-r4/image/usr/bin
+mkdir -p /u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/flite-1.3-r4/image/usr/lib
+mkdir -p /u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/flite-1.3-r4/image/usr/include
+/u/slug/slugos/tmp/staging/i686-linux/usr/bin/install -c -m 644 include/*.h /u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/flite-1.3-r4/image/usr/include
+`../build/armeb-linux-gnueabi/lib/libflite.a' -> `./libflite.a'
+`../build/armeb-linux-gnueabi/lib/libflite.shared.a' -> `./libflite.shared.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmu_time_awb.a' -> `./libflite_cmu_time_awb.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmu_time_awb.shared.a' -> `./libflite_cmu_time_awb.shared.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmu_us_kal.a' -> `./libflite_cmu_us_kal.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmu_us_kal.shared.a' -> `./libflite_cmu_us_kal.shared.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmu_us_kal16.a' -> `./libflite_cmu_us_kal16.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmu_us_kal16.shared.a' -> `./libflite_cmu_us_kal16.shared.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmulex.a' -> `./libflite_cmulex.a'
+`../build/armeb-linux-gnueabi/lib/libflite_cmulex.shared.a' -> `./libflite_cmulex.shared.a'
+`../build/armeb-linux-gnueabi/lib/libflite_usenglish.a' -> `./libflite_usenglish.a'
+`../build/armeb-linux-gnueabi/lib/libflite_usenglish.shared.a' -> `./libflite_usenglish.shared.a'
+making libflite.so
+/u/slug/slugos/tmp/cross/armv5teb/lib/gcc/armeb-linux-gnueabi/4.2.4/../../../../armeb-linux-gnueabi/bin/ld: cannot find -lflite
+collect2: ld returned 1 exit status
+make[2]: *** [libflite.so] Error 1
+make[1]: *** [install] Error 2
+make: *** [install] Error 2
+FATAL: oe_runmake failed
+
 
