@@ -1,46 +1,24 @@
-Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
+Received: from [65.200.49.156] (helo=Seeker.local)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1Lrb3r-0007fa-Og
+	(envelope-from <kergoth@Seeker.local>) id 1Lrb3y-0007fu-DV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Apr 2009 18:55:42 +0200
-Received: by yx-out-1718.google.com with SMTP id 3so135602yxi.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Apr 2009 09:52:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=pNDs36dvKlTQ8zLOO/SrsqdcI+tqIXN+vcbbYNwkqQM=;
-	b=TCKfZkI7OXoWNe3p2rbNxoK+PboodHzaVcdqhBaZfy0z1mJdmoWaaxgcM4lQwfHqCP
-	MrMj9Krf7bT0USd+0J3eODYEP2Q3/Fr0JhyQPfskP1l6aKCPBWK+Z4HIha/aHKVYxJJP
-	Yc5gy8C19G/IcFqRCsMzpOPAdDcnc1ulwXRJo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=fsDzzlNN239AfHx4ttUupSoWl2JPNXPJXj9z+QUk+aq3XkbSO982m6vSG86eby5Bb9
-	o0QJ/ZctXC6z9wU9AryW/acZlLp5cLDXrauYxzCPjrugBURbvAShYsAIDJp+UHzM+92M
-	PzVBW9WzXhcnSZNbadv0EhR/ujT7SaYsMtuyM=
-MIME-Version: 1.0
-Received: by 10.100.126.15 with SMTP id y15mr3449357anc.27.1239209555379; Wed, 
-	08 Apr 2009 09:52:35 -0700 (PDT)
-In-Reply-To: <gric5v$qc4$1@ger.gmane.org>
-References: <d2b9ea600904070016j5826cdbex6271177286c66c87@mail.gmail.com>
-	<20090407165123.GE2195@smtp.west.cox.net>
-	<d2b9ea600904080716y5776086fu8521915fa402f694@mail.gmail.com>
-	<gric5v$qc4$1@ger.gmane.org>
-Date: Wed, 8 Apr 2009 18:52:35 +0200
-Message-ID: <d2b9ea600904080952g656823dby8c15a46b425f76c6@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+	Wed, 08 Apr 2009 18:55:50 +0200
+Received: by Seeker.local (Postfix, from userid 502)
+	id C210DB4007C; Wed,  8 Apr 2009 09:52:36 -0700 (MST)
+From: Chris Larson <clarson@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.44.152
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+Date: Wed,  8 Apr 2009 09:52:35 -0700
+Message-Id: <1239209556-847-1-git-send-email-clarson@mvista.com>
+X-Mailer: git-send-email 1.6.0.2
+X-SA-Exim-Connect-IP: 65.200.49.156
+X-SA-Exim-Mail-From: kergoth@Seeker.local
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.0 required=5.0 tests=BAYES_00,NO_DNS_FOR_FROM,
+	RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH v2] mingw-binutils: update to 2.19.1
+Subject: [PATCH] First pass of cleanup of messages outputted to the user.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,54 +32,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2009 16:55:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 Apr 2009 16:55:50 -0000
 
-On Wed, Apr 8, 2009 at 4:26 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote=
-:
-> On 08-04-09 16:16, Esben Haabendal wrote:
->
->> Then, please someone apply this to .dev. =A0But then how are we supposed
->> to remember which patches should also be moved to stable, and when?
->
-> If you want something in stable, you send the patch to this mailinglist w=
-ith
-> [STABLE] in the subject.
+OpenEmbedded outputs a lot of messages that the user is likely to never
+care about.  We should only output something when it reflects upon their
+recipe (i.e. unpacking their sources, applying their patches), or is quite
+significant or unusual.
 
-Which is exactly what I did.  Now 3 times even.
+Signed-off-by: Chris Larson <clarson@mvista.com>
+---
+ classes/base.bbclass             |   17 +++--------------
+ classes/insane.bbclass           |   14 +++++++-------
+ classes/package.bbclass          |    4 ++--
+ classes/packaged-staging.bbclass |    6 +++---
+ 4 files changed, 15 insertions(+), 26 deletions(-)
 
-> That way it will show up here:
->
-> http://patchwork.openembedded.org/project/openembedded/list/?state=3D*&q=
-=3Doe%2CSTABLE
->
-> or for a complete historic view:
->
-> http://patchwork.openembedded.org/project/openembedded/list/?q=3Doe,STABL=
-E&archive=3Dboth&state=3D*
->
->> Let's not make it to complicated to maintain stable, so that it will die
->> from us again :-(
->
-> Stuff needs to get into .dev first to receive wider testing. Putting stuf=
-f
-> directly in stable negates the idea of the stable branch.
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 9ec705b..7cfebf2 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -890,22 +890,11 @@ python base_eventhandler() {
+ 	from bb.event import Handled, NotHandled, getName
+ 	import os
+ 
+-	messages = {}
+-	messages["Completed"] = "completed"
+-	messages["Succeeded"] = "completed"
+-	messages["Started"] = "started"
+-	messages["Failed"] = "failed"
+-
+ 	name = getName(e)
+-	msg = ""
+-	if name.startswith("Task"):
+-		msg += "package %s: task %s: " % (data.getVar("PF", e.data, 1), e.task)
+-		msg += messages.get(name[4:]) or name[4:]
+-	elif name.startswith("Build"):
+-		msg += "build %s: " % e.name
+-		msg += messages.get(name[5:]) or name[5:]
++	if name == "TaskCompleted":
++		msg = "package %s: task %s is complete." % (data.getVar("PF", e.data, 1), e.task)
+ 	elif name == "UnsatisfiedDep":
+-		msg += "package %s: dependency %s %s" % (e.pkg, e.dep, name[:-3].lower())
++		msg = "package %s: dependency %s %s" % (e.pkg, e.dep, name[:-3].lower())
+ 	else:
+ 		return NotHandled
+ 
+diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+index 48964af..4496e15 100644
+--- a/classes/insane.bbclass
++++ b/classes/insane.bbclass
+@@ -215,7 +215,7 @@ def package_qa_write_error(error_class, name, path, d):
+ 
+ def package_qa_handle_error(error_class, error_msg, name, path, d):
+     import bb
+-    bb.error("QA Issue: %s" % error_msg)
++    bb.error("QA Issue with %s: %s" % (name, error_msg))
+     package_qa_write_error(error_class, name, path, d)
+     return not package_qa_make_fatal_error(error_class, name, path, d)
+ 
+@@ -481,7 +481,7 @@ def package_qa_check_rdepends(pkg, workdir, d):
+ # The PACKAGE FUNC to scan each package
+ python do_package_qa () {
+     import bb
+-    bb.note("DO PACKAGE QA")
++    bb.debug(2, "DO PACKAGE QA")
+     workdir = bb.data.getVar('WORKDIR', d, True)
+     packages = bb.data.getVar('PACKAGES',d, True)
+ 
+@@ -496,10 +496,10 @@ python do_package_qa () {
+     rdepends_sane = True
+     for package in packages.split():
+         if bb.data.getVar('INSANE_SKIP_' + package, d, True):
+-            bb.note("Package: %s (skipped)" % package)
++            bb.note("package %s skipped" % package)
+             continue
+ 
+-        bb.note("Checking Package: %s" % package)
++        bb.debug(1, "Checking Package: %s" % package)
+         path = "%s/install/%s" % (workdir, package)
+         if not package_qa_walk(path, checks, package, d):
+             walk_sane  = False
+@@ -508,14 +508,14 @@ python do_package_qa () {
+ 
+     if not walk_sane or not rdepends_sane:
+         bb.fatal("QA run found fatal errors. Please consider fixing them.")
+-    bb.note("DONE with PACKAGE QA")
++    bb.debug(2, "DONE with PACKAGE QA")
+ }
+ 
+ 
+ # The Staging Func, to check all staging
+ addtask qa_staging after do_populate_staging before do_build
+ python do_qa_staging() {
+-    bb.note("QA checking staging")
++    bb.debug(2, "QA checking staging")
+ 
+     if not package_qa_check_staged(bb.data.getVar('STAGING_LIBDIR',d,True), d):
+         bb.fatal("QA staging was broken by the package built above")
+@@ -524,7 +524,7 @@ python do_qa_staging() {
+ # Check broken config.log files
+ addtask qa_configure after do_configure before do_compile
+ python do_qa_configure() {
+-    bb.note("Checking sanity of the config.log file")
++    bb.debug(1, "Checking sanity of the config.log file")
+     import os
+     for root, dirs, files in os.walk(bb.data.getVar('WORKDIR', d, True)):
+         statement = "grep 'CROSS COMPILE Badness:' %s > /dev/null" % \
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 7a61c5a..3a30d38 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -166,7 +166,7 @@ def runstrip(file, d):
+     # If the file is in a .debug directory it was already stripped,
+     # don't do it again...
+     if os.path.dirname(file).endswith(".debug"):
+-        bb.note("Already ran strip")
++        bb.debug(2, "Already ran strip on %s" % file)
+         return 0
+ 
+     strip = bb.data.getVar("STRIP", d, 1)
+@@ -560,7 +560,7 @@ python package_do_shlibs() {
+ 
+ 	exclude_shlibs = bb.data.getVar('EXCLUDE_FROM_SHLIBS', d, 0)
+ 	if exclude_shlibs:
+-		bb.note("not generating shlibs")
++		bb.debug(1, "not generating shlibs")
+ 		return
+ 		
+ 	lib_re = re.compile("^lib.*\.so")
+diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bbclass
+index 849f60c..82c1a0d 100644
+--- a/classes/packaged-staging.bbclass
++++ b/classes/packaged-staging.bbclass
+@@ -109,17 +109,17 @@ def pstage_cleanpackage(pkgname, d):
+ 	pstage_set_pkgmanager(d)
+ 	list_cmd = bb.data.getVar("PSTAGE_LIST_CMD", d, True)
+ 
+-	bb.note("Checking if staging package installed")
++	bb.debug(2, "Checking if staging package installed")
+ 	lf = bb.utils.lockfile(bb.data.expand("${STAGING_DIR}/staging.lock", d))
+ 	ret = os.system("PATH=\"%s\" %s | grep %s" % (path, list_cmd, pkgname))
+ 	if ret == 0:
+-		bb.note("Yes. Uninstalling package from staging...")
++		bb.debug(1, "Uninstalling package from staging...")
+ 		removecmd = bb.data.getVar("PSTAGE_REMOVE_CMD", d, 1)
+ 		ret = os.system("PATH=\"%s\" %s %s" % (path, removecmd, pkgname))
+ 		if ret != 0:
+ 			bb.note("Failure removing staging package")
+ 	else:
+-		bb.note("No. Manually removing any installed files")
++		bb.debug(1, "Manually removing any installed files from staging...")
+ 		pstage_manualclean("staging", "STAGING_DIR", d)
+ 		pstage_manualclean("cross", "CROSS_DIR", d)
+ 		pstage_manualclean("deploy", "DEPLOY_DIR", d)
+-- 
+1.6.0.2
 
-Naturally, but (2 but's):
-
-1. When .dev is sufficiently different from stable, some fixes needed
-for stable will not make sense or work on .dev, so this rule will have
-to be bent once in a while, and most likely, more often when
-stable/2009 gets old.
-
-2. There must be a some sensible elastic, as straight out simple fixes
-IMHO, could just go in both at the same time.  But I guess, my opinion
-on this matter does not really matter.
-
-It is quite impressive how difficult it can be made to submit what is
-mainly just a copy action of a file...
-
-/Esben
 
 
