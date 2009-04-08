@@ -1,40 +1,44 @@
-Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1LrYo7-0002a7-Ey
+	(envelope-from <vhdirk@gmail.com>) id 1LrYwG-0002pz-58
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Apr 2009 16:31:18 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so82922ywk.42
+	Wed, 08 Apr 2009 16:39:42 +0200
+Received: by ewy20 with SMTP id 20so234240ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Apr 2009 07:28:12 -0700 (PDT)
+	Wed, 08 Apr 2009 07:36:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=ocrM9omGWBC5WsHlbxclGmX0uWWwFIlr2jxqhh/gucs=;
-	b=O7tvxb2gR+K+VohnyIzNis/CnSboFQFOu87oVAUcuNBw2DdaZ1BGyei7lztC6ppli4
-	6NMm+mgGkY+i3jxIXhXLUKQYCbObHVYz8l5hFTKUYVXQu5fz8QVFONfUxI4aB7tgerhb
-	ekv3Ua5LY22KVUkZmOBwkp2xJHykt2WGNrFMk=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=qBJ4O53GipDEsqmJNxfVc9s/yBZC3Mq7rzAl8pQbRA4=;
+	b=BnI3cDSmtawRlP0uM/ycgizkMMTNnzw/rDog+Qnyoij6U47qmfmWd86qo5be09fBj6
+	e8u1TddfakefKiZzQJF7ElFl8u0UeEBQSGnkeC4F2hhY6Pxww3iA8y86EK0w/5mpMp7t
+	XN/we1SA2QVwsOSlGnIQea55qdBhNFxxAI9mM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=d2ISGvYsaN5H3H3IN1J4bQJmX3TgX/dN+tNHYmTi9xDQ4zIQvgmNZEq/Rs5W/lNDpC
-	1B19AKpuYlS4EI5ogaIPi0KgtOqh1qjKTk5ie8x6m7xmgE1GFVGRscvIqxJQtzwJ1p7t
-	g3Zsnx4bSvIUFdCoDLvFyqmZaEMaDW8JJpCyI=
-MIME-Version: 1.0
-Received: by 10.100.205.15 with SMTP id c15mr1991309ang.82.1239200880529; Wed, 
-	08 Apr 2009 07:28:00 -0700 (PDT)
-Date: Wed, 8 Apr 2009 16:28:00 +0200
-Message-ID: <d2b9ea600904080728vd8fad4n7cd4c1a2bd73276d@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=D39G0DBmIwuE+ipZZ1/7QgGr7cg7QykxzXuWvE0F9GJWds3QznJvXEOZKAUQ+K2JmX
+	h6qBDItKZA5yGjSWKUmIhUGDuCFFsY0CdK+2fq7HEIPomPSFSc6c4e4bhWbGK7SmXpn9
+	IyOoBaROa7aySFo3NqR+xTj0ha0yBhOGj39rw=
+Received: by 10.210.59.14 with SMTP id h14mr5160591eba.81.1239201394443;
+	Wed, 08 Apr 2009 07:36:34 -0700 (PDT)
+Received: from localhost.localdomain (213.219.146.119.adsl.dyn.edpnet.net
+	[213.219.146.119])
+	by mx.google.com with ESMTPS id 18sm7829907ewy.45.2009.04.08.07.36.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 08 Apr 2009 07:36:33 -0700 (PDT)
+From: Dirk 'Virk' Van Haerenborgh <vhdirk@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.46.153
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+Date: Wed,  8 Apr 2009 16:36:33 +0200
+Message-Id: <1239201393-17243-1-git-send-email-vhdirk@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 209.85.219.172
+X-SA-Exim-Mail-From: vhdirk@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS,URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE,SPF_PASS
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [STABLE][PATCH v3] mingw-binutils: restructure and update to 2.19.1
+Subject: [PATCH] pcsc-lite: Update to version 1.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,137 +52,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2009 14:31:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Apr 2009 14:39:42 -0000
 
-Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
+No packaging changes.
 ---
- conf/checksums.ini                                 |    7 ++++---
- ...w-binutils-canadian-cross_2.17.50-20060824-1.bb |    9 +--------
- .../mingw-binutils-canadian-cross_2.19.1.bb        |    8 +-------
- recipes/binutils/mingw-binutils.inc                |   11 +++++++++++
- .../binutils/mingw-binutils_2.17.50-20060824-1.bb  |   12 +-----------
- recipes/binutils/mingw-binutils_2.19.1.bb          |   13 +------------
- 6 files changed, 19 insertions(+), 41 deletions(-)
- create mode 100644 recipes/binutils/mingw-binutils.inc
+ conf/checksums.ini                   |   11 +++++++----
+ recipes/pcsc-lite/pcsc-lite_1.5.2.bb |   30 ++++++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+), 4 deletions(-)
+ create mode 100644 recipes/pcsc-lite/pcsc-lite_1.5.2.bb
 
 diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 20dc248..3249090 100644
+index d08d7bc..3389321 100644
 --- a/conf/checksums.ini
 +++ b/conf/checksums.ini
-@@ -2550,6 +2550,10 @@
-sha256=6fe3c4b2d45a50582f832bc77deb4e3da74a15ea8e09dbb214b9c44e7c3378fc
- md5=9d22ee4dafa3a194457caf4706f9cf01
- sha256=487a33a452f0edcf1f8bb8fc23dff5c7a82edec3f3f8b65632b6c945e961ee9b
-
-+[http://downloads.sourceforge.net/mingw/binutils-2.19.1-src.tar.gz]
-+md5=ad3f2b5fdcd599a772ad75fec2c384d8
-+sha256=2df529b1ac0a621efb87b5b53dbc0167c566f8bebbd6a8ce19964b05845fd2e7
+@@ -18294,6 +18294,10 @@ sha256=362e4b4473f2f7a3bfa28ea73e80ec00a2fe525a1aceb5f66e1c528a900bd735
+ md5=b97d3a725ab93662adf09acfbc49efeb
+ sha256=56fc9e6324539537324b071e5b51c3388df9bfa92fb7e210b989b463122fc333
+ 
++[https://alioth.debian.org/frs/download.php/2795/pcsc-lite-1.5.2.tar.bz2]
++md5=d7d466621bec39354351f09349f6374c
++sha256=a0c11b0b5cc46d4c4ec499b875cfdc4e766fdf12fe2f6ea635e1b11ab7b8821e
 +
- [ftp://ftp.gnu.org/gnu/binutils/binutils-2.19.1.tar.bz2]
- md5=09a8c5821a2dfdbb20665bc0bd680791
- sha256=3e8225b4d7ace0a2039de752e11fd6922d3b89a7259a292c347391c4788739f6
-@@ -26886,6 +26890,3 @@
-sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
- md5=5f7b88ebb2bcd7e8044328482d079661
- sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
-
--[http://downloads.sourceforge.net/mingw/binutils-2.19.1-src.tar.gz]
--md5=ad3f2b5fdcd599a772ad75fec2c384d8
--sha256=2df529b1ac0a621efb87b5b53dbc0167c566f8bebbd6a8ce19964b05845fd2e7
-diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb
-b/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb
-index 385aa1d..7f80a77 100644
---- a/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb
-+++ b/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.bb
-@@ -1,11 +1,4 @@
- require mingw-binutils_${PV}.bb
- require binutils-canadian-cross.inc
-
--DEFAULT_PREFERENCE_sdk-mingw32 = "1"
--DEFAULT_PREFERENCE_sdk-mingw64 = "1"
+ [http://handhelds.org/~zecke/oe_packages/pdamaze_V1.0.0.tar.gz]
+ md5=bf27dd51fe03c8b475080b74de043a13
+ sha256=99d6bc6b360baabd6044e8883d467cc6ed7955f9ab66d8f87f61e3cc757fb97a
+@@ -23462,14 +23466,13 @@ sha256=c762525fdbf5f5dd32c6c950f2a63d8c1b15ec3dc7afca5d2dc3dbd1b129a00d
+ md5=66480128b9dabcced2e4c8db3e60fa50
+ sha256=6c5bfb2edae5c289233b6cd65393bb7414a2d30ad4d1239c207a659a4232d91a
+ 
+-[http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/watchdog_5.3.1.tar.gz]
+-md5=ba97ddce396bfccd8d409bc3141d7ef4
+-sha256=b7bf9feeedea26d7e06935369a1a556089426e94f9ead946018526c96cd9b12e
 -
--require binutils-canadian-cross.inc
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
--
--S = "${WORKDIR}/binutils-${PV}-src"
-+DEFAULT_PREFERENCE_mingw32 = "1"
-diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-index 130dea5..7f80a77 100644
---- a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-+++ b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-@@ -1,10 +1,4 @@
- require mingw-binutils_${PV}.bb
- require binutils-canadian-cross.inc
-
--DEFAULT_PREFERENCE_sdk-mingw32 = "1"
--
--require binutils-canadian-cross.inc
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
--
--S = "${WORKDIR}/binutils-${PV}"
-+DEFAULT_PREFERENCE_mingw32 = "1"
-diff --git a/recipes/binutils/mingw-binutils.inc
-b/recipes/binutils/mingw-binutils.inc
+ [http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/watchdog-5.6.tar.gz]
+ md5=6df285569dd1d85528b983c98c9b2b7c
+ sha256=a2c7d6726e092315dbb047211b754528e4532521678a30e16f60a31bb86a7f74
+ 
++[http://www.ibiblio.org/pub/Linux/system/daemons/watchdog/watchdog_5.3.1.tar.gz]
++md5=ba97ddce396bfccd8d409bc3141d7ef4
++sha256=b7bf9feeedea26d7e06935369a1a556089426e94f9ead946018526c96cd9b12e
+ 
+ [http://downloads.sourceforge.net/wbxmllib/wbxml2-0.9.0-src.tar.gz]
+ md5=3f9b5bf104ec523b8eebe69f93919ded
+diff --git a/recipes/pcsc-lite/pcsc-lite_1.5.2.bb b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
 new file mode 100644
-index 0000000..fbef1ea
+index 0000000..156e463
 --- /dev/null
-+++ b/recipes/binutils/mingw-binutils.inc
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "A GNU collection of binary utilities - MinGW port"
-+HOMEPAGE = "http://www.mingw.org/"
-+PR = "r1"
++++ b/recipes/pcsc-lite/pcsc-lite_1.5.2.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "PC/SC Lite smart card framework and applications"
++HOMEPAGE = "http://pcsclite.alioth.debian.org/"
++LICENSE = "BSD"
 +
-+require binutils.inc
++DEPENDS = "hal"
++RDEPENDS_${PN} = "hal"
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
++SRC_URI = "http://alioth.debian.org/download.php/2479/pcsc-lite-${PV}.tar.bz2 \
++           file://pcscd.init "
 +
-+S = "${WORKDIR}/binutils-${PV}"
++inherit autotools_stage update-rc.d
 +
-+DEFAULT_PREFERENCE = "-1"
-diff --git a/recipes/binutils/mingw-binutils_2.17.50-20060824-1.bb
-b/recipes/binutils/mingw-binutils_2.17.50-20060824-1.bb
-index 9d17873..7021cfe 100644
---- a/recipes/binutils/mingw-binutils_2.17.50-20060824-1.bb
-+++ b/recipes/binutils/mingw-binutils_2.17.50-20060824-1.bb
-@@ -1,12 +1,2 @@
--PR = "r1"
--
--require binutils.inc
--
--DESCRIPTION = "A GNU collection of binary utilities - MinGW port"
--HOMEPAGE = "http://www.mingw.org/"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
--
-+require mingw-binutils.inc
- S = "${WORKDIR}/binutils-${PV}-src"
--
--DEFAULT_PREFERENCE = "0"
-diff --git a/recipes/binutils/mingw-binutils_2.19.1.bb
-b/recipes/binutils/mingw-binutils_2.19.1.bb
-index 19d1077..0f719ed 100644
---- a/recipes/binutils/mingw-binutils_2.19.1.bb
-+++ b/recipes/binutils/mingw-binutils_2.19.1.bb
-@@ -1,12 +1 @@
--PR = "r1"
--
--require binutils.inc
--
--DESCRIPTION = "A GNU collection of binary utilities - MinGW port"
--HOMEPAGE = "http://www.mingw.org/"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
--
--S = "${WORKDIR}/binutils-${PV}"
--
--DEFAULT_PREFERENCE = "0"
-+require mingw-binutils.inc
++INITSCRIPT_NAME = "pcscd"
++INITSCRIPT_PARAMS = "defaults"
++
++EXTRA_OECONF = " \
++	--enable-libhal \
++	--disable-libusb \
++	--enable-usbdropdir=${libdir}/pcsc/drivers \
++	"
++
++do_install() {
++	oe_runmake DESTDIR="${D}" install
++	install -d "${D}/etc/init.d"
++	install -m 755 "${WORKDIR}/pcscd.init" "${D}/etc/init.d/pcscd"
++}
++
++PACKAGES =+ "libpcsclite"
++
++FILES_libpcsclite = "${libdir}/libpcsclite.so.*"
 -- 
-1.6.2.2
+1.6.0.4
+
 
 
