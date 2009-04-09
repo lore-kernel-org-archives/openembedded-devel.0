@@ -1,31 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lrwt4-0006U4-5v
-	for openembedded-devel@openembedded.org; Thu, 09 Apr 2009 18:14:01 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lrwpz-0007Nb-QJ
-	for openembedded-devel@openembedded.org; Thu, 09 Apr 2009 16:10:48 +0000
+	id 1Lrwx9-0006dB-Vf
+	for openembedded-devel@openembedded.org; Thu, 09 Apr 2009 18:18:14 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1Lrwu6-0007ZZ-H9
+	for openembedded-devel@openembedded.org; Thu, 09 Apr 2009 16:15:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 09 Apr 2009 16:10:47 +0000
+	Thu, 09 Apr 2009 16:15:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 09 Apr 2009 16:10:47 +0000
+	Thu, 09 Apr 2009 16:15:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 09 Apr 2009 18:10:31 +0200
-Message-ID: <grl6ln$5qt$1@ger.gmane.org>
-References: <1239292973.4784.178.camel@alap>
+Date: Thu, 09 Apr 2009 18:11:02 +0200
+Message-ID: <grl6mm$5qt$2@ger.gmane.org>
+References: <1239292804-564-1-git-send-email-k.kooi@student.utwente.nl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b4pre) Gecko/20090405 Shredder/3.0b3pre
-In-Reply-To: <1239292973.4784.178.camel@alap>
+In-Reply-To: <1239292804-564-1-git-send-email-k.kooi@student.utwente.nl>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.2
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -36,7 +36,7 @@ X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] zenity: add a new package
+Subject: [STABLE] Re: gnome-panel: Compile idl files against STAGING_DIR_HOST.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,70 +50,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Apr 2009 16:14:01 -0000
+X-List-Received-Date: Thu, 09 Apr 2009 16:18:14 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 09-04-09 18:02, Angus Ainslie wrote:
->> From a1fee691b400a3bc6fd70b01c33802718bacf275 Mon Sep 17 00:00:00 2001
-> From: Previdi Roberto<previdi.roberto@gmail.com>
-> Date: Thu, 9 Apr 2009 09:50:29 -0600
-> Subject: [PATCH] zenity: add a new package
+forgot the [STABLE] tag, sorry
+
+On 09-04-09 18:00, Koen Kooi wrote:
+> From: Stanislav Brabec<utx@penguin.cz>
 >
-> Signed-off-by: Angus Ainslie<nytowl@openmoko.org>
+> Adapted from the .dev patch to gnome-panel 2.24 since 2.26 isn't in stable yet
+>
+> Signed-off-by: Koen Kooi<koen@openembedded.org>
+>
 > ---
->   recipes/zenity/files/makefile.patch |   13 +++++++++++++
->   recipes/zenity/zenity_2.20.1.bb     |   10 ++++++++++
->   2 files changed, 23 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/zenity/files/makefile.patch
->   create mode 100644 recipes/zenity/zenity_2.20.1.bb
+> diff --git a/recipes/gnome/gnome-panel/idl-sysroot.patch b/recipes/gnome/gnome-panel/idl-sysroot.patch
+> new file mode 100644
+> index 0000000..07e5ded
+> --- a/dev/null
+> +++ b/recipes/gnome/gnome-panel/idl-sysroot.patch
+> @@ -0,0 +1,26 @@
+> +Index: gnome-panel-2.24.0/gnome-panel/Makefile.am
+> +===================================================================
+> +--- gnome-panel-2.24.0.orig/gnome-panel/Makefile.am	2009-03-16 22:37:12.000000000 +0000
+> ++++ gnome-panel-2.24.0/gnome-panel/Makefile.am	2009-04-09 14:39:02.000000000 +0000
+> +@@ -43,7 +43,7 @@
+> + 	$(NULL)
+> +
+> + $(CORBA_SRCLIST): $(top_srcdir)/idl/GNOME_Panel.idl $(ORBIT_IDL)
+> +-	$(ORBIT_IDL) -I $(BONOBO_IDLDIR) -I $(BONOBO_ACT_IDLDIR) $(top_srcdir)/idl/GNOME_Panel.idl
+> ++	$(ORBIT_IDL) -I $(SYSROOT)$(BONOBO_IDLDIR) -I $(SYSROOT)$(BONOBO_ACT_IDLDIR) $(top_srcdir)/idl/GNOME_Panel.idl
+> +
+> + BUILT_SOURCES = \
+> + 	$(CORBA_SRCLIST)	\
+> +Index: gnome-panel-2.24.0/libpanel-applet/Makefile.am
+> +===================================================================
+> +--- gnome-panel-2.24.0.orig/libpanel-applet/Makefile.am	2009-03-16 22:37:13.000000000 +0000
+> ++++ gnome-panel-2.24.0/libpanel-applet/Makefile.am	2009-04-09 14:51:18.000000000 +0000
+> +@@ -45,7 +45,7 @@
+> + 	GNOME_Panel.h
+> +
+> + $(CORBA_SRCLIST): $(top_srcdir)/idl/GNOME_Panel.idl $(ORBIT_IDL)
+> +-	$(ORBIT_IDL) -I $(BONOBO_IDLDIR) -I $(BONOBO_ACT_IDLDIR) $(top_srcdir)/idl/GNOME_Panel.idl
+> ++	$(ORBIT_IDL) -I $(SYSROOT)$(BONOBO_IDLDIR) -I $(SYSROOT)$(BONOBO_ACT_IDLDIR) $(top_srcdir)/idl/GNOME_Panel.idl
+> +
+> + noinst_PROGRAMS = test-bonobo-applet
+> +
+> diff --git a/recipes/gnome/gnome-panel_2.24.0.bb b/recipes/gnome/gnome-panel_2.24.0.bb
+> index 743e0fa..473bea4 100644
+> --- a/recipes/gnome/gnome-panel_2.24.0.bb
+> +++ b/recipes/gnome/gnome-panel_2.24.0.bb
+> @@ -5,6 +5,8 @@ inherit gnome pkgconfig
 >
-> diff --git a/recipes/zenity/files/makefile.patch b/recipes/zenity/files/makefile.patch
-> new file mode 100644
-> index 0000000..9bdd5dd
-> --- /dev/null
-> +++ b/recipes/zenity/files/makefile.patch
-> @@ -0,0 +1,13 @@
-> +diff -c -r patcher_original/zenity-2.20.1/src/Makefile.am zenity-2.20.1/src/Makefile.am
-> +*** patcher_original/zenity-2.20.1/src/Makefile.am     Mon Nov 26 22:57:40 2007
-> +--- zenity-2.20.1/src/Makefile.am      Thu Apr  2 00:31:39 2009
-> +***************
-> +*** 21,27 ****
-> +       zenity.h
+>   SRC_URI += "file://scrollkeeper.patch;patch=1"
+>
+> +SRC_URI += "file://idl-sysroot.patch;patch=1"
 > +
-> +  zenity_CPPFLAGS = \
-> +-      -I$(includedir)                                 \
-> +       -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
-> +       -DZENITY_DATADIR=\""$(pkgdatadir)"\"            \
-> +       $(AM_CPPFLAGS)
-> +--- 21,26 ----
-> diff --git a/recipes/zenity/zenity_2.20.1.bb b/recipes/zenity/zenity_2.20.1.bb
-> new file mode 100644
-> index 0000000..7822ee7
-> --- /dev/null
-> +++ b/recipes/zenity/zenity_2.20.1.bb
-> @@ -0,0 +1,10 @@
-> +DESCRIPTION = "A tool to display dialogs from the command line and shell scripts."
-> +HOMEPAGE = "http://freshmeat.net/projects/zenity"
-> +LICENSE = "GPL"
-> +DEPENDS = "libgnomecanvas"
-> +SECTION = "console/utils"
-> +
-> +SRC_URI = "ftp://ftp.gnome.org/pub/gnome/sources/zenity/2.20/zenity-${PV}.tar.bz2 \
-> +           file://makefile.patch;patch=1"
-> +
-> +inherit autotools
-> --
-> 1.5.6.3
+>   do_configure_prepend() {
+>           sed -i -e s:help:: ${S}/Makefile.am
+>   }
+> @@ -16,7 +18,8 @@ FILES_libpanel-applet = "${libdir}/libpanel-applet-2.so.*"
+>   FILES_${PN} =+ "${datadir}/gnome* \
+>                   ${datadir}/icons"
+>
+> -EXTRA_OEMAKE = "ORBIT_IDL=${STAGING_BINDIR_NATIVE}/orbit-idl-2"
+> +export SYSROOT = "${STAGING_DIR_HOST}"
+> +EXTRA_OEMAKE = "ORBIT_IDL=${STAGING_BINDIR_NATIVE}/orbit-idl-2 SYSROOT=${SYSROOT}"
+>   EXTRA_OECONF = "--disable-scrollkeeper"
+>
+>   do_stage() {
 
-NACK:
-
-* missing checksum
-* not using 'inherit gnome'
-
-regards,
-
-Koen
 
 
 
