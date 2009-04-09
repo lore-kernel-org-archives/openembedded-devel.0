@@ -1,43 +1,45 @@
-Received: from [209.85.132.245] (helo=an-out-0708.google.com)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Lrk9W-0001Ds-NB
-	for openembedded-devel@openembedded.org; Thu, 09 Apr 2009 04:38:22 +0200
-Received: by an-out-0708.google.com with SMTP id d11so360980and.30
-	for <openembedded-devel@openembedded.org>;
-	Wed, 08 Apr 2009 19:35:00 -0700 (PDT)
+	(envelope-from <vhdirk@gmail.com>) id 1Lroa4-0007tQ-SJ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Apr 2009 09:23:33 +0200
+Received: by ewy20 with SMTP id 20so563864ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Apr 2009 00:18:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=8eOTfP4NeBxWyf1su968FsDYZsyyDMAPwaWAS7kfcsg=;
-	b=jqexSHNL+rF+JHy/PyyB7KcQSIGl/obMFiOU2BIEkt34dWAKJlAkQj+iRFZKHk3ra5
-	JCuib3v1yyqZuEAskqtgQbUNG0CPiOrrJOlrj35fVeIVaIegXXDlK3sAo2k6UxTmLyce
-	tPXAVqg11fqsoknwlo27zdRvxQ/K5QlCzgVtU=
+	:from:date:message-id:subject:to:content-type;
+	bh=IUjc1iF5ELZrioI4k4dPCY3kBN4Enp0BWlO9CZBpRh4=;
+	b=HaWd0vTlOvbml7LERgPFHUIOqXg69lgZtTOKBLWzZcEIGqSDoe4mHFe93FrEqts3cR
+	JnBZWXENk/bCeij7klmLXY+b6TuJ/m9xRRtjACRDTX6tCE07hjr0GOsqfK5e71zqSA+B
+	LdGuRTrYMZT3jXcFUuX7COc4SbsgpFeDnW6Ug=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=bmWxZqU/EVNddjo1iFZyG1+/nDQk/xDhg8d3DmLVW16FARKE/fN1Nnw5IRp+tHfjZ7
-	vP3gB+g2INItw95U2TePv+pmHivD6KOfb95VnI5T7+LsTqqp2PSsh2/wRWmlOg181VQx
-	VCBExi65QdrjXFek6m4J0asQV660+PQMVD7Vw=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=Ywqod4OufIyzSDeIP6biXayPlyLMCzknPXA7QqlTL6VLt8FlDh4QOrjHrhK4MvcY9N
+	9OcAhK2NfIsEGC3tG/ohzbAZCHACWGHniMB2KMTSd3YAMoV2w1Zw8Ff6oGRHJR9gLXrh
+	NkdoEYSan4IPap3fqJ4iq4zv9PYuG51un2rx4=
 MIME-Version: 1.0
-Received: by 10.100.126.19 with SMTP id y19mr4544546anc.47.1239244494689; Wed, 
-	08 Apr 2009 19:34:54 -0700 (PDT)
-In-Reply-To: <20090408180920.GN2195@smtp.west.cox.net>
-References: <20090408180920.GN2195@smtp.west.cox.net>
-Date: Wed, 8 Apr 2009 19:34:54 -0700
-Message-ID: <19c1b8a90904081934h1e43b22dk87de1bf2266c918c@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+Received: by 10.216.19.130 with SMTP id n2mr529287wen.151.1239261519282; Thu, 
+	09 Apr 2009 00:18:39 -0700 (PDT)
+In-Reply-To: <20090408192324.GG14502@denix.org>
+References: <1239195076-4937-1-git-send-email-vhdirk@gmail.com> 
+	<gri800$a6q$2@ger.gmane.org> <20090408170601.GA14502@denix.org> 
+	<20090408192324.GG14502@denix.org>
+From: Dirk Van Haerenborgh <vhdirk@gmail.com>
+Date: Thu, 9 Apr 2009 09:18:24 +0200
+Message-ID: <eaa8e5210904090018j73fdf868mb8d1c4f9549ac21a@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.132.245
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.219.172
+X-SA-Exim-Mail-From: vhdirk@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS,URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	RDNS_NONE,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Subject: Re: [STABLE][PATCH] mingw-binutils: Add 2.19.1 recipe and split common parts out into mingw-binutils.inc
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] add gsoap v2.7.13, generates C/C++ source codes for Web service and client applications
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,144 +53,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Apr 2009 02:38:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Apr 2009 07:23:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Apr 8, 2009 at 11:09 AM, Tom Rini <trini@kernel.crashing.org> wrote=
-:
-> mingw-binutils: Add 2.19.1 recipe and split common parts out into mingw-b=
-inutils.inc
+It is not needed I guess
+
+the wsdl Makefile already uses AM_LDFLAGS=$(INCLUDES) -L$(srcdir)
+instead of LDFLAGS=$(INCLUDES)
+
+-Dirk
+
+2009/4/8 Denys Dmytriyenko <denis@denix.org>
+
+> On Wed, Apr 08, 2009 at 01:06:01PM -0400, Denys Dmytriyenko wrote:
+> > On Wed, Apr 08, 2009 at 03:14:40PM +0200, Koen Kooi wrote:
+> > > On 08-04-09 14:51, Dirk 'Virk' Van Haerenborgh wrote:
+> > >> gsoap-native: unbreak self-dependency patch included
+> > >>
+> > >> FILES_${PN} includes {datadir} as soapcpp2 is some sort of compiler
+> which
+> > >> needs the headers in datadir in order to be able to compile its
+> > >> soap stuff properly
+> > >>
+> > >> (third time's the charm)
+> > >
+> > > This looks good enough to me to go in.
+> >
+> > Acked-by: Denys Dmytriyenko <denis@denix.org>
 >
-> Signed-off-by: Esben Haabendal <eha@doredevelopment.dk>
-> Signed-off-by: Tom Rini <trini@embeddedalley.com>
-> ---
-> =C2=A0conf/checksums.ini =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =
-=C2=A04 ++++
-> =C2=A0...w-binutils-canadian-cross_2.17.50-20060824-1.bb | =C2=A0 =C2=A09=
- +--------
-> =C2=A0.../mingw-binutils-canadian-cross_2.19.1.bb =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| =C2=A0 =C2=A04 ++++
-> =C2=A0recipes/binutils/mingw-binutils.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 10 ++++++++++
-> =C2=A0.../binutils/mingw-binutils_2.17.50-20060824-1.bb =C2=A0| =C2=A0 12=
- +-----------
-> =C2=A0recipes/binutils/mingw-binutils_2.19.1.bb =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A01 +
-> =C2=A06 files changed, 21 insertions(+), 19 deletions(-)
-> =C2=A0create mode 100644 recipes/binutils/mingw-binutils-canadian-cross_2=
-.19.1.bb
-> =C2=A0create mode 100644 recipes/binutils/mingw-binutils.inc
-> =C2=A0create mode 100644 recipes/binutils/mingw-binutils_2.19.1.bb
+> By the way, is Jeremy Laine's LDFLAGS fix applicable here?
 >
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index c416e16..658aae7 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -2550,6 +2550,10 @@ sha256=3D6fe3c4b2d45a50582f832bc77deb4e3da74a15ea8=
-e09dbb214b9c44e7c3378fc
-> =C2=A0md5=3D9d22ee4dafa3a194457caf4706f9cf01
-> =C2=A0sha256=3D487a33a452f0edcf1f8bb8fc23dff5c7a82edec3f3f8b65632b6c945e9=
-61ee9b
->
-> +[http://downloads.sourceforge.net/mingw/binutils-2.19.1-src.tar.gz]
-> +md5=3Dad3f2b5fdcd599a772ad75fec2c384d8
-> +sha256=3D2df529b1ac0a621efb87b5b53dbc0167c566f8bebbd6a8ce19964b05845fd2e=
-7
-> +
-> =C2=A0[ftp://ftp.gnu.org/gnu/binutils/binutils-2.19.1.tar.bz2]
-> =C2=A0md5=3D09a8c5821a2dfdbb20665bc0bd680791
-> =C2=A0sha256=3D3e8225b4d7ace0a2039de752e11fd6922d3b89a7259a292c347391c478=
-8739f6
-> diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060=
-824-1.bb b/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-=
-1.bb
-> index 385aa1d..7f80a77 100644
-> --- a/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.b=
-b
-> +++ b/recipes/binutils/mingw-binutils-canadian-cross_2.17.50-20060824-1.b=
-b
-> @@ -1,11 +1,4 @@
-> =C2=A0require mingw-binutils_${PV}.bb
-> =C2=A0require binutils-canadian-cross.inc
->
-> -DEFAULT_PREFERENCE_sdk-mingw32 =3D "1"
-> -DEFAULT_PREFERENCE_sdk-mingw64 =3D "1"
-> -
-> -require binutils-canadian-cross.inc
-> -
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
-> -
-> -S =3D "${WORKDIR}/binutils-${PV}-src"
-> +DEFAULT_PREFERENCE_mingw32 =3D "1"
-> diff --git a/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb b/r=
-ecipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-> new file mode 100644
-> index 0000000..7f80a77
-> --- /dev/null
-> +++ b/recipes/binutils/mingw-binutils-canadian-cross_2.19.1.bb
-> @@ -0,0 +1,4 @@
-> +require mingw-binutils_${PV}.bb
-> +require binutils-canadian-cross.inc
-> +
-> +DEFAULT_PREFERENCE_mingw32 =3D "1"
-> diff --git a/recipes/binutils/mingw-binutils.inc b/recipes/binutils/mingw=
--binutils.inc
-> new file mode 100644
-> index 0000000..1e3898a
-> --- /dev/null
-> +++ b/recipes/binutils/mingw-binutils.inc
-> @@ -0,0 +1,10 @@
-> +DESCRIPTION =3D "A GNU collection of binary utilities - MinGW port"
-> +HOMEPAGE =3D "http://www.mingw.org/"
-> +
-> +require binutils.inc
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
-> +
-> +S =3D "${WORKDIR}/binutils-${PV}"
-> +
-> +DEFAULT_PREFERENCE =3D "-1"
-> diff --git a/recipes/binutils/mingw-binutils_2.17.50-20060824-1.bb b/reci=
-pes/binutils/mingw-binutils_2.17.50-20060824-1.bb
-> index 9d17873..7021cfe 100644
-> --- a/recipes/binutils/mingw-binutils_2.17.50-20060824-1.bb
-> +++ b/recipes/binutils/mingw-binutils_2.17.50-20060824-1.bb
-> @@ -1,12 +1,2 @@
-> -PR =3D "r1"
-> -
-> -require binutils.inc
-> -
-> -DESCRIPTION =3D "A GNU collection of binary utilities - MinGW port"
-> -HOMEPAGE =3D "http://www.mingw.org/"
-> -
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/mingw/binutils-${PV}-src.tar.gz"
-> -
-> +require mingw-binutils.inc
-> =C2=A0S =3D "${WORKDIR}/binutils-${PV}-src"
-> -
-> -DEFAULT_PREFERENCE =3D "0"
-> diff --git a/recipes/binutils/mingw-binutils_2.19.1.bb b/recipes/binutils=
-/mingw-binutils_2.19.1.bb
-> new file mode 100644
-> index 0000000..0f719ed
-> --- /dev/null
-> +++ b/recipes/binutils/mingw-binutils_2.19.1.bb
-> @@ -0,0 +1 @@
-> +require mingw-binutils.inc
-> --
-> 1.5.6.3
->
-> --
-> Tom Rini
+> > > regards,
+> > >
+> > > Koen
+> > >
+> > >> ---
+> > >>   conf/checksums.ini                                 |    4 ++++
+> > >>   .../use-just-built-binary-2.7.13.patch             |   12
+> ++++++++++++
+> > >>   recipes/gsoap/gsoap-native_2.7.13.bb               |   12
+> ++++++++++++
+> > >>   recipes/gsoap/gsoap_2.7.13.bb                      |   15
+> > >> +++++++++++++++
+> > >>   recipes/gsoap/gsoap_2.7.13.inc                     |   15
+> > >> +++++++++++++++
+> > >>   5 files changed, 58 insertions(+), 0 deletions(-)
+> > >>   create mode 100644
+> > >> recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
+> > >>   create mode 100644 recipes/gsoap/gsoap-native_2.7.13.bb
+> > >>   create mode 100644 recipes/gsoap/gsoap_2.7.13.bb
+> > >>   create mode 100644 recipes/gsoap/gsoap_2.7.13.inc
+> > >>
+> > >> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> > >> index ce78b83..f7f2959 100644
+> > >> --- a/conf/checksums.ini
+> > >> +++ b/conf/checksums.ini
+> > >> @@ -9278,6 +9278,10 @@
+> > >>
+> sha256=5149991a219e8f2059350ed9d52bb110c0695da6eb9fe256e9e213e69f83929f
+> > >>   md5=5bfa5605d9565ff01138d7a574cc2614
+> > >>
+> sha256=fc029984019736eab2b0f10ce28d48ff88f8ceed7a1739cb4b71b851c4b89b91
+> > >>
+> > >> +[http://downloads.sourceforge.net/gsoap2/gsoap_2.7.13.tar.gz]
+> > >> +md5=fffb49eb1db7ff03643a4313115dc3b1
+> > >>
+> +sha256=3d40a528b8f3309f392945dca2ecaee5a698f4ee00a6036907a57c4f25a6a479
+> > >> +
+> > >>   [http://downloads.sourceforge.net/gsoap2/gsoap_2.7.7.tar.gz]
+> > >>   md5=a0bbbfdc135034cd778537f979121df7
+> > >>
+> sha256=7b531f1b6481fbe1a21620a86649f42cb2de9cf086e7bdde46335137d3ca11dc
+> > >> diff --git
+> a/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
+> > >> b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
+> > >> new file mode 100644
+> > >> index 0000000..25a8ef0
+> > >> --- /dev/null
+> > >> +++ b/recipes/gsoap/gsoap-native/use-just-built-binary-2.7.13.patch
+> > >> @@ -0,0 +1,12 @@
+> > >> +diff -urN gsoap-2.7.orig/gsoap/wsdl/Makefile.am
+> > >> gsoap-2.7.orig/gsoap/wsdl/Makefile.am
+> > >> +--- gsoap-2.7.orig/gsoap/wsdl/Makefile.am 2009-03-21
+> 22:24:42.000000000
+> > >> +0100
+> > >> ++++ gsoap-2.7.orig/gsoap/wsdl/Makefile.am 2009-04-07
+> 11:30:50.000000000
+> > >> +0200
+> > >> +@@ -17,7 +17,7 @@ BUILT_SOURCES=$(SOAP_CPP_SRC)
+> > >> + # WSDL2H_EXTRA_LIBS=-lssl -lcrypto -lz # defined in configure.in
+> > >> +
+> > >> + $(SOAP_CPP_SRC) : $(SOAPHEADER)
+> > >> +- $(SOAP) $(SOAP_FLAGS) $(SOAPHEADER)
+> > >> ++ ../src/soapcpp2 $(SOAP_FLAGS) $(SOAPHEADER)
+> > >> +
+> > >> + #LIBS=
+> > >> +
+> > >> diff --git a/recipes/gsoap/gsoap-native_2.7.13.bb
+> > >> b/recipes/gsoap/gsoap-native_2.7.13.bb
+> > >> new file mode 100644
+> > >> index 0000000..3ed78d0
+> > >> --- /dev/null
+> > >> +++ b/recipes/gsoap/gsoap-native_2.7.13.bb
+> > >> @@ -0,0 +1,12 @@
+> > >> +require gsoap_${PV}.inc
+> > >> +
+> > >> +DEPENDS = ""
+> > >> +
+> > >> +SRC_URI += "file://use-just-built-binary-2.7.13.patch;patch=1"
+> > >> +
+> > >> +inherit native
+> > >> +
+> > >> +do_install() {
+> > >> +  :
+> > >> +}
+> > >> +
+> > >> diff --git a/recipes/gsoap/gsoap_2.7.13.bb b/recipes/gsoap/
+> gsoap_2.7.13.bb
+> > >> new file mode 100644
+> > >> index 0000000..54f89c6
+> > >> --- /dev/null
+> > >> +++ b/recipes/gsoap/gsoap_2.7.13.bb
+> > >> @@ -0,0 +1,15 @@
+> > >> +require gsoap_${PV}.inc
+> > >> +
+> > >> +DEPENDS = "gsoap-native"
+> > >> +
+> > >> +do_install_append() {
+> > >> +   install -d ${D}${libdir}
+> > >> +   for lib in libgsoapssl libgsoapssl++ libgsoap libgsoapck++
+> libgsoap++
+> > >> libgsoapck
+> > >> +   do
+> > >> +       oe_libinstall -C gsoap $lib ${D}${libdir}
+> > >> +   done
+> > >> +}
+> > >> +
+> > >> +
+> > >> +FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
+> > >> +FILES_${PN} += "${datadir}"
+> > >> diff --git a/recipes/gsoap/gsoap_2.7.13.inc
+> > >> b/recipes/gsoap/gsoap_2.7.13.inc
+> > >> new file mode 100644
+> > >> index 0000000..a6fbbb5
+> > >> --- /dev/null
+> > >> +++ b/recipes/gsoap/gsoap_2.7.13.inc
+> > >> @@ -0,0 +1,15 @@
+> > >> +DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++
+> language
+> > >> binding \
+> > >> +for the development of SOAP Web Services and clients."
+> > >> +SECTION = "devel"
+> > >> +LICENSE = "GPL"
+> > >> +
+> > >> +SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.tar.gz"
+> > >> +
+> > >> +inherit autotools_stage
+> > >> +
+> > >> +S = "${WORKDIR}/gsoap-2.7"
+> > >> +
+> > >> +PARALLEL_MAKE = ""
+> > >> +
+> > >> +EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
+> > >> +
+> > >
+> > >
+> > >
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-
-Acked-By: Khem Raj <raj.khem@gmail.com>
-
 
