@@ -1,25 +1,36 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1Lrr7I-0001W1-Ce
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Apr 2009 12:04:19 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id B9D581893E3; Thu,  9 Apr 2009 12:04:06 +0200 (CEST)
-From: Koen Kooi <k.kooi@student.utwente.nl>
+	(envelope-from <utx@penguin.cz>) id 1Lrr8w-0001am-Fj
+	for openembedded-devel@openembedded.org; Thu, 09 Apr 2009 12:06:02 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id CE21A1417186;
+	Thu,  9 Apr 2009 12:04:15 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id QnQJHXzamO-B; Thu,  9 Apr 2009 12:04:15 +0200 (CEST)
+Received: from [10.20.1.86] (unknown [82.119.242.94])
+	by ns.penguin.cz (Postfix) with ESMTP id A8D321416BA5;
+	Thu,  9 Apr 2009 12:04:15 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Apr 2009 12:04:06 +0200
-Message-Id: <1239271446-6732-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
-X-SA-Exim-Connect-IP: 80.81.242.146
-X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
+In-Reply-To: <grijig$lqi$1@ger.gmane.org>
+References: <1239207194-12212-1-git-send-email-vhdirk@gmail.com>
+	<grijig$lqi$1@ger.gmane.org>
+Date: Thu, 09 Apr 2009 12:02:48 +0200
+Message-Id: <1239271368.15436.36.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_05,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] bluez4: add less restrictive (and hence less secure) bluetooth dbus config
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH] ccid: Update to version 1.3.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,84 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Apr 2009 10:04:19 -0000
+X-List-Received-Date: Thu, 09 Apr 2009 10:06:03 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-From: Koen Kooi <koen@openembedded.org>
+Koen Kooi wrote:
 
-* this makes bluetooth actually work for non-root users and when using ssh/vnc/etc
-* this also overwrites the bluetooth.conf in the files/ that wasn't used anymore
-* this also includes the fixup commit from .dev named "bluez4: fix dbus service file" 
+> > +DEPENDS =3D "libusb pcsc-lite"
+> > +RDEPENDS =3D "pcsc-lite"
+>=20
+> > +EXTRA_OECONF =3D "--enable-udev"
+>=20
+> Shouldn't something like RRECOMMENDS_${PN} =3D "udev" be there as well?
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/bluez/bluez4_4.31.bb       |    5 ++++-
- recipes/bluez/files/bluetooth.conf |   29 ++++++++++++++++-------------
- 2 files changed, 20 insertions(+), 14 deletions(-)
+Yes. But I think that the latest pcsc-lite itself has hotplug support
+via udev or hal and hotplug should work without 85-pcscd_ccid.rules. At
+least "opensc-tool -l" see the reader immediately. I have a reader, but
+no supported card. I will be glad if you can confirm that in a real
+application.
 
-diff --git a/recipes/bluez/bluez4_4.31.bb b/recipes/bluez/bluez4_4.31.bb
-index 15e8b00..8c2f656 100644
---- a/recipes/bluez/bluez4_4.31.bb
-+++ b/recipes/bluez/bluez4_4.31.bb
-@@ -4,12 +4,13 @@ PRIORITY = "optional"
- DEPENDS = "gst-plugins-base alsa-lib libusb-compat dbus-glib"
- HOMEPAGE = "http://www.bluez.org"
- LICENSE = "GPL"
--PR = "r4"
-+PR = "r6"
- 
- SRC_URI = "\
-   http://www.kernel.org/pub/linux/bluetooth/bluez-${PV}.tar.gz \
-   file://fix-dfutool-usb-declaration-mismatch.patch;patch=1 \
-   file://sbc-thumb.patch;patch=1 \
-+  file://bluetooth.conf \
- #  file://hid2hci_usb_init.patch;patch=1 \
- "
- S = "${WORKDIR}/bluez-${PV}"
-@@ -43,6 +44,8 @@ do_install_append() {
-         install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
-         install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetooth/
-         install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
-+        # at_console doesn't really work with the current state of OE, so punch some more holes so people can actually use BT
-+        install -m 0644 ${WORKDIR}/bluetooth.conf ${D}/${sysconfdir}/dbus-1/system.d/
- }
- 
- PACKAGES =+ "gst-plugin-bluez libasound-module-bluez"
-diff --git a/recipes/bluez/files/bluetooth.conf b/recipes/bluez/files/bluetooth.conf
-index 8720847..ca5e9e4 100644
---- a/recipes/bluez/files/bluetooth.conf
-+++ b/recipes/bluez/files/bluetooth.conf
-@@ -1,13 +1,16 @@
--#
--# additional cards for /etc/pcmcia/bluetooth.conf
--# Note for OE: This file is _appended_ to the stock
--# bluetooth.conf in bluez-utils, so no need to duplicate
--# entries for individual cards.
--#
--card "CSR BT01x0M Bluetooth CF Card"
--  version "Bluetooth BT0100M", "", ""
--  bind "serial_cs" class "bluetooth"
--
--card "Socket Bluetooth CF Card Rev. G" 
--  manfid 0x0104, 0x0096 
--  bind "serial_cs" class "bluetooth"
-+<!-- This configuration file specifies the required security policies
-+     for Bluetooth core daemon to work. -->
-+
-+<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
-+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
-+<busconfig>
-+
-+  <!-- ../system.conf have denied everything, so we just punch some holes -->
-+
-+  <policy context="default">
-+    <allow own="org.bluez"/>
-+    <allow send_destination="org.bluez"/>
-+    <allow send_interface="org.bluez.Agent"/>
-+  </policy>
-+
-+</busconfig>
--- 
-1.5.6.5
+Another question is DEPENDS. Should it be libusb or libusb1? With libusb
+you will not have interrupt transfers enabled. With libusb1 it should be
+able to use interrupt transfers, but some people reported problems in
+past. In the final 1.0 version it should be fixed.
+
+--=20
+Best Regards / S pozdravem,
+
+Stanislav Brabec
+software developer
+---------------------------------------------------------------------
+SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
+Lihovarsk=E1 1060/12           tel: +420 284 028 966, +49 911 740538747
+190 00 Praha 9                                  fax: +420 284 028 951
+Czech Republic                                    http://www.suse.cz/
 
 
 
