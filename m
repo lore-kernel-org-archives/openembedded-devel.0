@@ -1,40 +1,26 @@
-Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <piero.pezzin@gmail.com>) id 1LsCyn-0004F5-UJ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Apr 2009 11:25:08 +0200
-Received: by bwz19 with SMTP id 19so966618bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Apr 2009 02:21:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=Cc+Pgus7/cB2dxv6B/ifCV7fd91Z/QGboM+fWTBAz4o=;
-	b=d/mKP4taGR6JkobG105Mt0T7EI1hxVjEcri4g4q1jd+lkB5TQuW1Lddjo+/yZjZmPh
-	ZwJnaVaaw3Te+Z4yw1+WBvicF95NAWlSO2wcVgEFYQMmq75P2IgcRB/04qoxAscZzKBL
-	/9rX3V8f1tKKHpDBEYQJkWwS6C9gReWLxOq0o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=fJC3oYmMEnveqY6TFCGJ40FlyBttWulrAAtFZdkUxxDTsyRPajv/i5tJAQreoDoE1B
-	MlWRLTOQlPn6AnixzWv9OlqRStcriC2UdInVJjT3obrScyWleVbkCYW53zCLmEqydbft
-	sVhLVuIBEL7M+/NpUsHD0Rb/7ZLjY/2pB5V+g=
+	(envelope-from <philip@balister.org>) id 1LsG7g-00063T-Jh
+	for openembedded-devel@openembedded.org; Fri, 10 Apr 2009 14:46:25 +0200
+Received: (qmail 19215 invoked by uid 1003); 10 Apr 2009 12:43:01 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 10 Apr 2009 12:43:01 -0000
+Message-ID: <49DF3ED3.2020601@balister.org>
+Date: Fri, 10 Apr 2009 08:42:59 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Received: by 10.204.71.15 with SMTP id f15mr3096073bkj.113.1239355301380; Fri, 
-	10 Apr 2009 02:21:41 -0700 (PDT)
-Date: Fri, 10 Apr 2009 11:21:41 +0200
-Message-ID: <49bdfd00904100221j30d41162u6fb0dc9c5f4a9a9b@mail.gmail.com>
-From: Piero Pezzin <piero.pezzin@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.218.219
-X-SA-Exim-Mail-From: piero.pezzin@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RDNS_NONE,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_05,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Problems with xfbdev building Angstrom for mx31
+Subject: Flite patch for stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,63 +34,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2009 09:25:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 10 Apr 2009 12:46:25 -0000
+X-Groupsio-MsgNum: 9289
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020601030104070307090201"
+
+--------------ms020601030104070307090201
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi all,
+http://patchwork.openembedded.org/patch/282/
 
-I've a problem with Xfbdev I built using the Angstrom distribution
-(bitbaking the gpe-image recipe).
+Is there a later version of this patch? The comments suggest there is, 
+but I did not see it in patchwork.
 
-The host machine is running Ubuntu 8.04 and the following is openembedded
-configuration:
+Philip
 
-BB_VERSION        = "1.8.12"
-METADATA_BRANCH   = "org.openembedded.dev"
-METADATA_REVISION = "3c732c38d8edfc888faf83165b53470da5e96d5d"
-TARGET_ARCH       = "arm"
-TARGET_OS         = "linux-gnueabi"
-MACHINE           = "qong"
-DISTRO            = "angstrom"
-DISTRO_VERSION    = "2009.X-test-20090410"
-TARGET_FPU        = "hard"
+--------------ms020601030104070307090201
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-Qong is a machine config I'm creating, but at the moment is the same as the
-mx31ads except for the kernel (which is 2.6.22.6).
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
+MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
+27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
+u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
+lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
+FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
+qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
+Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
+tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
+/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
+HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
+czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
+n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
+llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
+eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQxMDEy
+NDI1OVowIwYJKoZIhvcNAQkEMRYEFEbC4rTlI0fB13GV70gNZTz7Qa36MFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
+hTANBgkqhkiG9w0BAQEFAASCAQAxXQXXpIoDNGn6+z1LYSx+H2IOugEcBtW70if1hVfeqQxT4lza
+AhsNX05ppDKL2rIEwZesoHY6hhawYn5fwowLZ0dbDbIo48l+y+ZMKFutPVDkBULh0/9ifLsWMpuP
+KzsURHACNGFpXDJUl2+ybE1K5YUHhKJDhzCMGPMfg8fhPWM+Jvp9FE2fugeTwUTimEeUJ4kTkh7U
+H+d69eXnOr0IMWzm8A2VWA/7JVV6DUa52wAoGJSF8NXMTAua6Sy5HYF8YkPRMSXpRnHm4kdCc0sI
+5JErKBon2aJoAn4vaOMlmmyUGYOW4bhGmXqvx3LmLGKmT+Z5c1Wv+zKuYaS0HTMQAAAAAAAA
 
-The build process completes successfully, the root file system si correctly
-mounted but when Xfbdev starts the system hangs. Running strace, I see that
-it crashes on ioctl(6, FBIOPUT_VSCREENINFO:
-
-rt_sigaction(SIGHUP, {0xd83fc, [HUP], 0x4000000 /* SA_??? */}, {SIG_DFL}, 8)
-= 0
-rt_sigaction(SIGINT, {0xd83b0, [INT], 0x4000000 /* SA_??? */}, {SIG_DFL}, 8)
-= 0
-rt_sigaction(SIGTERM, {0xd83b0, [TERM], 0x4000000 /* SA_??? */}, {SIG_DFL},
-8) = 0
-open("/etc/X0.hosts", O_RDONLY)         = -1 ENOENT (No such file or
-directory)
-rt_sigaction(SIGUSR1, {SIG_IGN}, {SIG_DFL}, 8) = 0
-rt_sigaction(SIGUSR1, {SIG_DFL}, {SIG_IGN}, 8) = 0
-getppid()                               = 1512
-gettimeofday({1237298779, 423458}, NULL) = 0
-open("/dev/fb0", O_RDWR)                = 6
-ioctl(6, FBIOGET_FSCREENINFO, 0x123790) = 0
-ioctl(6, FBIOGET_VSCREENINFO, 0x1236f0) = 0
-mmap2(NULL, 307200, PROT_READ|PROT_WRITE, MAP_SHARED, 6, 0) = 0x40360000
-ioctl(6, FBIOGET_VSCREENINFO, 0xbebdea90) = 0
-ioctl(6, FBIOPUT_VSCREENINFO
-
-
-The strange thing is that, Xfbdev included in poky (pinky 3.1.1) runs
-perfectly (using the same kernel).
-
-Could someone help me to solve this issue? Any suggestion will be greatly
-appreciated.
-
-
-Regards,
-
-Piero
-
+--------------ms020601030104070307090201--
