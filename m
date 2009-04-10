@@ -1,33 +1,40 @@
-Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
+Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LsBH0-0000pQ-H0
+	(envelope-from <piero.pezzin@gmail.com>) id 1LsCyn-0004F5-UJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Apr 2009 09:35:41 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KHV00HG9JLXYC99@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	10 Apr 2009 02:32:22 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 290A76B83A8; Fri,
-	10 Apr 2009 03:32:21 -0400 (EDT)
-Date: Fri, 10 Apr 2009 03:32:21 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090410073221.GB28918@denix.org>
-References: <1239347000-27123-1-git-send-email-jeremy.laine@bolloretelecom.eu>
-MIME-version: 1.0
-In-reply-to: <1239347000-27123-1-git-send-email-jeremy.laine@bolloretelecom.eu>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.1
-X-SA-Exim-Mail-From: denis@denix.org
+	Fri, 10 Apr 2009 11:25:08 +0200
+Received: by bwz19 with SMTP id 19so966618bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Apr 2009 02:21:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=Cc+Pgus7/cB2dxv6B/ifCV7fd91Z/QGboM+fWTBAz4o=;
+	b=d/mKP4taGR6JkobG105Mt0T7EI1hxVjEcri4g4q1jd+lkB5TQuW1Lddjo+/yZjZmPh
+	ZwJnaVaaw3Te+Z4yw1+WBvicF95NAWlSO2wcVgEFYQMmq75P2IgcRB/04qoxAscZzKBL
+	/9rX3V8f1tKKHpDBEYQJkWwS6C9gReWLxOq0o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=fJC3oYmMEnveqY6TFCGJ40FlyBttWulrAAtFZdkUxxDTsyRPajv/i5tJAQreoDoE1B
+	MlWRLTOQlPn6AnixzWv9OlqRStcriC2UdInVJjT3obrScyWleVbkCYW53zCLmEqydbft
+	sVhLVuIBEL7M+/NpUsHD0Rb/7ZLjY/2pB5V+g=
+MIME-Version: 1.0
+Received: by 10.204.71.15 with SMTP id f15mr3096073bkj.113.1239355301380; Fri, 
+	10 Apr 2009 02:21:41 -0700 (PDT)
+Date: Fri, 10 Apr 2009 11:21:41 +0200
+Message-ID: <49bdfd00904100221j30d41162u6fb0dc9c5f4a9a9b@mail.gmail.com>
+From: Piero Pezzin <piero.pezzin@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.218.219
+X-SA-Exim-Mail-From: piero.pezzin@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_00,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RDNS_NONE,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Jeremy Lain?? <jeremy.laine@m4x.org>
-Subject: Re: [STABLE][PATCH] ppp: add patch to use LDFLAGS (fixes QA	error)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Problems with xfbdev building Angstrom for mx31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,178 +48,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2009 07:35:41 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 10 Apr 2009 09:25:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 10, 2009 at 09:03:20AM +0200, Jeremy Lain?? wrote:
-> From: Jeremy Lain?? <jeremy.laine@m4x.org>
-> 
-> 
-> Signed-off-by: Jeremy Lain?? <jeremy.laine@m4x.org>
+Hi all,
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+I've a problem with Xfbdev I built using the Angstrom distribution
+(bitbaking the gpe-image recipe).
 
-> ---
->  recipes/ppp/ppp-2.4.3/ldflags.patch |  120 +++++++++++++++++++++++++++++++++++
->  recipes/ppp/ppp_2.4.3.bb            |    3 +-
->  2 files changed, 122 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/ppp/ppp-2.4.3/ldflags.patch
-> 
-> diff --git a/recipes/ppp/ppp-2.4.3/ldflags.patch b/recipes/ppp/ppp-2.4.3/ldflags.patch
-> new file mode 100644
-> index 0000000..202c7f3
-> --- /dev/null
-> +++ b/recipes/ppp/ppp-2.4.3/ldflags.patch
-> @@ -0,0 +1,120 @@
-> +Index: ppp-2.4.3/chat/Makefile.linux
-> +===================================================================
-> +--- ppp-2.4.3.orig/chat/Makefile.linux	2009-04-08 10:00:38.000000000 +0200
-> ++++ ppp-2.4.3/chat/Makefile.linux	2009-04-08 10:01:16.000000000 +0200
-> +@@ -18,7 +18,7 @@
-> + all:	chat
-> + 
-> + chat:	chat.o
-> +-	$(CC) -o chat chat.o
-> ++	$(CC) $(LDFLAGS) -o chat chat.o
-> + 
-> + chat.o:	chat.c
-> + 	$(CC) -c $(CFLAGS) -o chat.o chat.c
-> +Index: ppp-2.4.3/pppd/plugins/Makefile.linux
-> +===================================================================
-> +--- ppp-2.4.3.orig/pppd/plugins/Makefile.linux	2009-04-08 10:00:38.000000000 +0200
-> ++++ ppp-2.4.3/pppd/plugins/Makefile.linux	2009-04-08 10:03:54.000000000 +0200
-> +@@ -1,6 +1,5 @@
-> + COPTS	= -O2 -g
-> + CFLAGS	= $(COPTS) -I.. -I../../include -fPIC
-> +-LDFLAGS	= -shared
-> + INSTALL	= install
-> + 
-> + DESTDIR = @DESTDIR@
-> +@@ -22,7 +21,7 @@
-> + 	for d in $(SUBDIRS); do $(MAKE) $(MFLAGS) -C $$d all; done
-> + 
-> + %.so: %.c
-> +-	$(CC) -o $@ $(LDFLAGS) $(CFLAGS) $^
-> ++	$(CC) -o $@ $(LDFLAGS) -shared $(CFLAGS) $^
-> + 
-> + VERSION = $(shell awk -F '"' '/VERSION/ { print $$2; }' ../patchlevel.h)
-> + 
-> +Index: ppp-2.4.3/pppd/plugins/pppoatm/Makefile.linux
-> +===================================================================
-> +--- ppp-2.4.3.orig/pppd/plugins/pppoatm/Makefile.linux	2009-04-08 10:00:38.000000000 +0200
-> ++++ ppp-2.4.3/pppd/plugins/pppoatm/Makefile.linux	2009-04-08 10:03:15.000000000 +0200
-> +@@ -1,6 +1,5 @@
-> + COPTS	= -O2 -g
-> + CFLAGS	= $(COPTS) -I../.. -I../../../include -fPIC
-> +-LDFLAGS	= -shared
-> + INSTALL	= install
-> + 
-> + #***********************************************************************
-> +@@ -32,7 +31,7 @@
-> + all: $(PLUGIN)
-> + 
-> + $(PLUGIN): $(PLUGIN_OBJS)
-> +-	$(CC) $(CFLAGS) -o $@ -shared $^ $(LIBS)
-> ++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ -shared $^ $(LIBS)
-> + 
-> + install: all
-> + 	$(INSTALL) -d -m 755 $(LIBDIR)
-> +Index: ppp-2.4.3/pppd/plugins/radius/Makefile.linux
-> +===================================================================
-> +--- ppp-2.4.3.orig/pppd/plugins/radius/Makefile.linux	2009-04-08 10:00:38.000000000 +0200
-> ++++ ppp-2.4.3/pppd/plugins/radius/Makefile.linux	2009-04-08 10:01:16.000000000 +0200
-> +@@ -43,13 +43,13 @@
-> + 	$(INSTALL) -m 444 pppd-radattr.8 $(MANDIR)
-> + 
-> + radius.so: radius.o libradiusclient.a
-> +-	$(CC) -o radius.so -shared radius.o libradiusclient.a
-> ++	$(CC) $(LDFLAGS) -o radius.so -shared radius.o libradiusclient.a
-> + 
-> + radattr.so: radattr.o
-> +-	$(CC) -o radattr.so -shared radattr.o
-> ++	$(CC) $(LDFLAGS) -o radattr.so -shared radattr.o
-> + 
-> + radrealms.so: radrealms.o
-> +-	$(CC) -o radrealms.so -shared radrealms.o
-> ++	$(CC) $(LDFLAGS) -o radrealms.so -shared radrealms.o
-> + 
-> + CLIENTOBJS = avpair.o buildreq.o config.o dict.o ip_util.o \
-> + 	clientid.o sendserver.o lock.o util.o md5.o
-> +Index: ppp-2.4.3/pppd/plugins/rp-pppoe/Makefile.linux
-> +===================================================================
-> +--- ppp-2.4.3.orig/pppd/plugins/rp-pppoe/Makefile.linux	2009-04-08 10:00:38.000000000 +0200
-> ++++ ppp-2.4.3/pppd/plugins/rp-pppoe/Makefile.linux	2009-04-08 10:01:16.000000000 +0200
-> +@@ -29,13 +29,13 @@
-> + all: rp-pppoe.so pppoe-discovery
-> + 
-> + pppoe-discovery: libplugin.a pppoe-discovery.o
-> +-	$(CC) -o pppoe-discovery pppoe-discovery.o libplugin.a
-> ++	$(CC) $(LDFLAGS) -o pppoe-discovery pppoe-discovery.o libplugin.a
-> + 
-> + pppoe-discovery.o: pppoe-discovery.c
-> + 	$(CC) $(CFLAGS) '-DVERSION="$(VERSION)"' -c -o pppoe-discovery.o pppoe-discovery.c
-> + 
-> + rp-pppoe.so: libplugin.a plugin.o
-> +-	$(CC) -o rp-pppoe.so -shared plugin.o libplugin.a
-> ++	$(CC) $(LDFLAGS) -o rp-pppoe.so -shared plugin.o libplugin.a
-> + 
-> + install: all
-> + 	$(INSTALL) -d -m 755 $(LIBDIR)
-> +Index: ppp-2.4.3/pppdump/Makefile.linux
-> +===================================================================
-> +--- ppp-2.4.3.orig/pppdump/Makefile.linux	2009-04-08 10:00:38.000000000 +0200
-> ++++ ppp-2.4.3/pppdump/Makefile.linux	2009-04-08 10:01:16.000000000 +0200
-> +@@ -10,7 +10,7 @@
-> + all:	pppdump
-> + 
-> + pppdump: $(OBJS)
-> +-	$(CC) -o pppdump $(OBJS)
-> ++	$(CC) $(LDFLAGS) -o pppdump $(OBJS)
-> + 
-> + clean:
-> + 	rm -f pppdump $(OBJS) *~
-> +Index: ppp-2.4.3/pppstats/Makefile.linux
-> +===================================================================
-> +--- ppp-2.4.3.orig/pppstats/Makefile.linux	2009-04-08 10:00:38.000000000 +0200
-> ++++ ppp-2.4.3/pppstats/Makefile.linux	2009-04-08 10:01:16.000000000 +0200
-> +@@ -26,7 +26,7 @@
-> + 	$(INSTALL) -c -m 444 pppstats.8 $(MANDIR)
-> + 
-> + pppstats: $(PPPSTATSRCS)
-> +-	$(CC) $(CFLAGS) -o pppstats pppstats.c $(LIBS)
-> ++	$(CC) $(CFLAGS) $(LDFLAGS) -o pppstats pppstats.c $(LIBS)
-> + 
-> + clean:
-> + 	rm -f pppstats *~ #* core
-> diff --git a/recipes/ppp/ppp_2.4.3.bb b/recipes/ppp/ppp_2.4.3.bb
-> index f09dcac..295a3fb 100644
-> --- a/recipes/ppp/ppp_2.4.3.bb
-> +++ b/recipes/ppp/ppp_2.4.3.bb
-> @@ -3,7 +3,7 @@ DESCRIPTION = "Point-to-Point Protocol (PPP) daemon"
->  HOMEPAGE = "http://samba.org/ppp/"
->  DEPENDS = "libpcap"
->  LICENSE = "BSD GPLv2"
-> -PR = "r4"
-> +PR = "r5"
->  
->  SRC_URI = "http://ppp.samba.org/ftp/ppp/ppp-${PV}.tar.gz \
->          file://ppp-2.4.3-mppe-mppc-1.1.patch;patch=1 \
-> @@ -14,6 +14,7 @@ SRC_URI = "http://ppp.samba.org/ftp/ppp/ppp-${PV}.tar.gz \
->  	file://pppoatm-makefile.patch;patch=1 \
->  	file://enable-ipv6.patch;patch=1 \
->  	file://makefile-remove-hard-usr-reference.patch;patch=1 \
-> +	file://ldflags.patch;patch=1 \
->  	file://pon \
->  	file://poff \
->  	file://init \
-> -- 
-> 1.6.2.1
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+The host machine is running Ubuntu 8.04 and the following is openembedded
+configuration:
 
+BB_VERSION        = "1.8.12"
+METADATA_BRANCH   = "org.openembedded.dev"
+METADATA_REVISION = "3c732c38d8edfc888faf83165b53470da5e96d5d"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "qong"
+DISTRO            = "angstrom"
+DISTRO_VERSION    = "2009.X-test-20090410"
+TARGET_FPU        = "hard"
+
+Qong is a machine config I'm creating, but at the moment is the same as the
+mx31ads except for the kernel (which is 2.6.22.6).
+
+The build process completes successfully, the root file system si correctly
+mounted but when Xfbdev starts the system hangs. Running strace, I see that
+it crashes on ioctl(6, FBIOPUT_VSCREENINFO:
+
+rt_sigaction(SIGHUP, {0xd83fc, [HUP], 0x4000000 /* SA_??? */}, {SIG_DFL}, 8)
+= 0
+rt_sigaction(SIGINT, {0xd83b0, [INT], 0x4000000 /* SA_??? */}, {SIG_DFL}, 8)
+= 0
+rt_sigaction(SIGTERM, {0xd83b0, [TERM], 0x4000000 /* SA_??? */}, {SIG_DFL},
+8) = 0
+open("/etc/X0.hosts", O_RDONLY)         = -1 ENOENT (No such file or
+directory)
+rt_sigaction(SIGUSR1, {SIG_IGN}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGUSR1, {SIG_DFL}, {SIG_IGN}, 8) = 0
+getppid()                               = 1512
+gettimeofday({1237298779, 423458}, NULL) = 0
+open("/dev/fb0", O_RDWR)                = 6
+ioctl(6, FBIOGET_FSCREENINFO, 0x123790) = 0
+ioctl(6, FBIOGET_VSCREENINFO, 0x1236f0) = 0
+mmap2(NULL, 307200, PROT_READ|PROT_WRITE, MAP_SHARED, 6, 0) = 0x40360000
+ioctl(6, FBIOGET_VSCREENINFO, 0xbebdea90) = 0
+ioctl(6, FBIOPUT_VSCREENINFO
+
+
+The strange thing is that, Xfbdev included in poky (pinky 3.1.1) runs
+perfectly (using the same kernel).
+
+Could someone help me to solve this issue? Any suggestion will be greatly
+appreciated.
+
+
+Regards,
+
+Piero
 
