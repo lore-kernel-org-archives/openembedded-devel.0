@@ -1,34 +1,30 @@
-Received: from [76.96.27.243] (helo=QMTA13.emeryville.ca.mail.comcast.net)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enelson1000@comcast.net>) id 1Ls7IZ-00064D-LF
+	(envelope-from <denis@denix.org>) id 1Ls7rA-0003I0-7y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Apr 2009 05:21:02 +0200
-Received: from OMTA07.emeryville.ca.mail.comcast.net ([76.96.30.59])
-	by QMTA13.emeryville.ca.mail.comcast.net with comcast
-	id dQ4u1b0071GXsucADfHlbq; Fri, 10 Apr 2009 03:17:45 +0000
-Received: from edshome ([71.198.120.50])
-	by OMTA07.emeryville.ca.mail.comcast.net with comcast
-	id dfHk1b00915LFXK8TfHkJP; Fri, 10 Apr 2009 03:17:45 +0000
-From: "ed nelson" <enelson1000@comcast.net>
-To: <openembedded-devel@lists.openembedded.org>
-References: <26925465C0D24F9AAA4610C4CD411DE3@edshome>
-	<49DEB0E7.3060304@balister.org>
-Date: Thu, 9 Apr 2009 20:17:45 -0700
-Message-ID: <9ED1B47457D3489ABE797F3DBF800929@edshome>
-MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 11
-In-Reply-To: <49DEB0E7.3060304@balister.org>
-Thread-Index: Acm5hX3aL/4thzMbRyaVTJZ3+ZlRnAABVU+Q
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-X-SA-Exim-Connect-IP: 76.96.27.243
-X-SA-Exim-Mail-From: enelson1000@comcast.net
+	Fri, 10 Apr 2009 05:56:46 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KHV0014N9H486M2@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	09 Apr 2009 22:53:29 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 737DD6B83A8; Thu,
+	09 Apr 2009 23:53:28 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 09 Apr 2009 23:53:28 -0400
+Message-id: <1239335608-11080-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.0.6
+X-SA-Exim-Connect-IP: 206.46.173.7
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_00,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: What is the best approach when defconfig is changed
+Subject: [STABLE][PATCH] gegl: fix CR+LF newlines in the patch, as it fails to apply
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,50 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2009 03:21:02 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 Apr 2009 03:56:46 -0000
 
-Philip
 
-Thanks, That did it and saved lots of time.
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ recipes/gimp/gegl/gegl-resilience.patch |   22 +++++++++++-----------
+ 1 files changed, 11 insertions(+), 11 deletions(-)
 
-Ed
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Philip Balister
-Sent: Thursday, April 09, 2009 7:37 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] What is the best approach when defconfig is changed
-
-ed nelson wrote:
-> I built a console-image without any failures.  I now want to use a
-different
-> defconfig file (made minor change). Do I need to delete the tmp dir and do
-a
-> new console-image build or is there a better way to handle this.
-
-Do bitbake -c clean virtual/kernel then bitbake console-image.
-
-That should do the trick.
-
-Philip
-
-> 
->  
-> 
-> Thanks
-> 
-> ed
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+diff --git a/recipes/gimp/gegl/gegl-resilience.patch b/recipes/gimp/gegl/gegl-resilience.patch
+index 0e35dd5..70424ec 100644
+--- a/recipes/gimp/gegl/gegl-resilience.patch
++++ b/recipes/gimp/gegl/gegl-resilience.patch
+@@ -1,11 +1,11 @@
+---- trunk/operations/external/ff-load.c	2008-12-20 13:37:05.000000000 -0800
+-+++ trunk/operations/external/ff-load.c	2008-12-20 13:37:22.000000000 -0800
+-@@ -278,7 +278,7 @@
+-       p->enc = p->video_st->codec;
+-       p->codec = avcodec_find_decoder (p->enc->codec_id);
+- 
+--      p->enc->error_resilience = 2;
+-+      p->enc->error_recognition = 2;
+-       p->enc->error_concealment = 3;
+-       p->enc->workaround_bugs = FF_BUG_AUTODETECT;
+- 
++--- trunk/operations/external/ff-load.c	2008-12-20 13:37:05.000000000 -0800
+++++ trunk/operations/external/ff-load.c	2008-12-20 13:37:22.000000000 -0800
++@@ -278,7 +278,7 @@
++       p->enc = p->video_st->codec;
++       p->codec = avcodec_find_decoder (p->enc->codec_id);
++ 
++-      p->enc->error_resilience = 2;
+++      p->enc->error_recognition = 2;
++       p->enc->error_concealment = 3;
++       p->enc->workaround_bugs = FF_BUG_AUTODETECT;
++ 
+-- 
+1.6.0.6
 
 
 
