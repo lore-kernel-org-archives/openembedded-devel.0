@@ -1,25 +1,42 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1LsdxX-0002YZ-9d
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Apr 2009 16:13:30 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id 53919E80C0; Sat, 11 Apr 2009 16:13:13 +0200 (CEST)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lse1B-0002e1-MA
+	for openembedded-devel@openembedded.org; Sat, 11 Apr 2009 16:17:20 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lsdxs-0004jg-IF
+	for openembedded-devel@openembedded.org; Sat, 11 Apr 2009 14:13:48 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 11 Apr 2009 14:13:48 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 11 Apr 2009 14:13:48 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Apr 2009 16:13:13 +0200
-Message-Id: <1239459193-21963-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
-X-SA-Exim-Connect-IP: 80.81.242.146
-X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
+Date: Sat, 11 Apr 2009 16:13:36 +0200
+Message-ID: <grq8ig$eb3$1@ger.gmane.org>
+References: <1239295376.4784.179.camel@alap>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090405 Shredder/3.0b3pre
+In-Reply-To: <1239295376.4784.179.camel@alap>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.7 required=5.0 tests=AWL,BAYES_05,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] midori: use LDFLAGS (fixes QA error)
+Subject: Re: [PATCH] epdfview: add page scrolling patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,40 +50,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Apr 2009 14:13:30 -0000
+X-List-Received-Date: Sat, 11 Apr 2009 14:17:20 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Koen Kooi <koen@openembedded.org>
+On 09-04-09 18:42, Angus Ainslie wrote:
+>> From a3c28e2ab81cf7fd1ff49c6be0380075230722d2 Mon Sep 17 00:00:00 2001
+> From: Previdi Roberto<previdi.roberto@gmail.com>
+> Date: Thu, 9 Apr 2009 10:26:51 -0600
+> Subject: [PATCH] epdfview: add page scrolling patch
 
+What does that patch do?
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/gtk-webcore/midori.inc      |    1 +
- recipes/gtk-webcore/midori_0.1.5.bb |    2 ++
- 2 files changed, 3 insertions(+), 0 deletions(-)
+regards,
 
-diff --git a/recipes/gtk-webcore/midori.inc b/recipes/gtk-webcore/midori.inc
-index a241157..a7ed936 100644
---- a/recipes/gtk-webcore/midori.inc
-+++ b/recipes/gtk-webcore/midori.inc
-@@ -9,3 +9,4 @@ SRC_URI = "http://software.twotoasts.de/media/midori/midori-${PV}.tar.gz"
- 
- EXTRA_OECONF = "  --disable-hildon "
- 
-+TARGET_CC_ARCH += "${LDFLAGS}"
-diff --git a/recipes/gtk-webcore/midori_0.1.5.bb b/recipes/gtk-webcore/midori_0.1.5.bb
-index c1d1f66..61ecb08 100644
---- a/recipes/gtk-webcore/midori_0.1.5.bb
-+++ b/recipes/gtk-webcore/midori_0.1.5.bb
-@@ -1,5 +1,7 @@
- require midori.inc
- 
-+PR = "r1"
-+
- DEPENDS += "python-native python-docutils-native"
- 
- SRC_URI = "http://goodies.xfce.org/releases/midori/midori-${PV}.tar.bz2 \
--- 
-1.5.6.5
+Koen
 
 
 
