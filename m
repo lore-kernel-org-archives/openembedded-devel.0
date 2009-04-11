@@ -1,14 +1,14 @@
 Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1Lsdll-0002GK-OI
+	(envelope-from <koen@amethyst.openembedded.net>) id 1LsdxX-0002YZ-9d
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Apr 2009 16:01:19 +0200
+	Sat, 11 Apr 2009 16:13:30 +0200
 Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id A946D189367; Sat, 11 Apr 2009 16:00:59 +0200 (CEST)
+	id 53919E80C0; Sat, 11 Apr 2009 16:13:13 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Apr 2009 16:00:59 +0200
-Message-Id: <1239458459-2493-1-git-send-email-k.kooi@student.utwente.nl>
+Date: Sat, 11 Apr 2009 16:13:13 +0200
+Message-Id: <1239459193-21963-1-git-send-email-k.kooi@student.utwente.nl>
 X-Mailer: git-send-email 1.5.6.5
 X-SA-Exim-Connect-IP: 80.81.242.146
 X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
@@ -19,7 +19,7 @@ X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] gst-plugins-base: depend on libtheora so gst-plugin theora gets built
+Subject: [STABLE][PATCH] midori: use LDFLAGS (fixes QA error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,34 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Apr 2009 14:01:19 -0000
+X-List-Received-Date: Sat, 11 Apr 2009 14:13:30 -0000
 
 From: Koen Kooi <koen@openembedded.org>
 
 
 Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- recipes/gstreamer/gst-plugins-base_0.10.22.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/gtk-webcore/midori.inc      |    1 +
+ recipes/gtk-webcore/midori_0.1.5.bb |    2 ++
+ 2 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/gstreamer/gst-plugins-base_0.10.22.bb b/recipes/gstreamer/gst-plugins-base_0.10.22.bb
-index 92f2f56..3086d93 100644
---- a/recipes/gstreamer/gst-plugins-base_0.10.22.bb
-+++ b/recipes/gstreamer/gst-plugins-base_0.10.22.bb
-@@ -2,11 +2,11 @@ require gst-plugins.inc
+diff --git a/recipes/gtk-webcore/midori.inc b/recipes/gtk-webcore/midori.inc
+index a241157..a7ed936 100644
+--- a/recipes/gtk-webcore/midori.inc
++++ b/recipes/gtk-webcore/midori.inc
+@@ -9,3 +9,4 @@ SRC_URI = "http://software.twotoasts.de/media/midori/midori-${PV}.tar.gz"
  
- PROVIDES += "gst-plugins"
+ EXTRA_OECONF = "  --disable-hildon "
  
--PR = "r1"
-+PR = "r2"
++TARGET_CC_ARCH += "${LDFLAGS}"
+diff --git a/recipes/gtk-webcore/midori_0.1.5.bb b/recipes/gtk-webcore/midori_0.1.5.bb
+index c1d1f66..61ecb08 100644
+--- a/recipes/gtk-webcore/midori_0.1.5.bb
++++ b/recipes/gtk-webcore/midori_0.1.5.bb
+@@ -1,5 +1,7 @@
+ require midori.inc
  
- # gst-plugins-base only builds the alsa plugin
- # if alsa has been built and is present.  You will
- # not get an error if this is not present, just 
- # a missing alsa plugin
--DEPENDS += "alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv"
-+DEPENDS += "libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs libxv"
++PR = "r1"
++
+ DEPENDS += "python-native python-docutils-native"
  
+ SRC_URI = "http://goodies.xfce.org/releases/midori/midori-${PV}.tar.bz2 \
 -- 
 1.5.6.5
 
