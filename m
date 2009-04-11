@@ -1,26 +1,35 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [85.33.3.5] (helo=smtp-OUT05A.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LsG7g-00063T-Jh
-	for openembedded-devel@openembedded.org; Fri, 10 Apr 2009 14:46:25 +0200
-Received: (qmail 19215 invoked by uid 1003); 10 Apr 2009 12:43:01 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 10 Apr 2009 12:43:01 -0000
-Message-ID: <49DF3ED3.2020601@balister.org>
-Date: Fri, 10 Apr 2009 08:42:59 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+	(envelope-from <GNUtoo@no-log.org>) id 1LsctS-0004m8-77
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Apr 2009 15:05:16 +0200
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-OUT05A.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 11 Apr 2009 14:56:55 +0200
+Received: from FBCMCL01B02.fbc.local ([192.168.69.83]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Sat, 11 Apr 2009 15:01:46 +0200
+Received: from [192.168.1.107] ([79.17.29.155]) by FBCMCL01B02.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 11 Apr 2009 15:01:46 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+In-Reply-To: <20090407212047.6CF5A1893D2@amethyst.openembedded.net>
+References: <20090407212047.6CF5A1893D2@amethyst.openembedded.net>
+Date: Sat, 11 Apr 2009 15:04:19 +0200
+Message-Id: <1239455059.9086.1.camel@port4>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 11 Apr 2009 13:01:46.0445 (UTC)
+	FILETIME=[AB61BFD0:01C9BAA5]
+X-SA-Exim-Connect-IP: 85.33.3.5
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_05,RDNS_NONE
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Flite patch for stable
+Subject: Re: [oe-commits] Stanislav Brabec : autoconf213-native: Added old autoconf for fennec recipe .
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,85 +43,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2009 12:46:25 -0000
-X-Groupsio-MsgNum: 9289
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020601030104070307090201"
-
---------------ms020601030104070307090201
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 11 Apr 2009 13:05:17 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-http://patchwork.openembedded.org/patch/282/
+On Tue, 2009-04-07 at 23:20 +0200, GIT User account wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 949728423681eda38e5e34b84cd3281bba71fdf7
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=949728423681eda38e5e34b84cd3281bba71fdf7
+> 
+> Author: Stanislav Brabec <utx@penguin.cz>
+> Date:   Tue Apr  7 21:16:38 2009 +0000
+> 
+> autoconf213-native: Added old autoconf for fennec recipe.
+> 
+> ---
+> 
+>  conf/checksums.ini                          |    4 ++++
+>  recipes/autoconf/autoconf213-native_2.13.bb |    9 +++++++++
+>  recipes/autoconf/autoconf213_2.13.bb        |    5 +++++
+>  recipes/mozilla/fennec_hg.bb                |    2 +-
+>  4 files changed, 19 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index 0b05edf..48edc83 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -1970,6 +1970,10 @@ sha256=fce50bc26351bbbe31154d9a734cb433ec8fb404efc5febd50c149e5eaf62449
+>  md5=dc3fc7209752207c23e7c94ab886b340
+>  sha256=636eef7f400c2f3df489c0d2fa21507e88692113561e75a40a26c52bc422d7fc
+>  
+> +[ftp://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz]
+> +md5=9de56d4a161a723228220b0f425dc711
+> +sha256=f0611136bee505811e9ca11ca7ac188ef5323a8e2ef19cffd3edb3cf08fd791e
+> +
+>  [ftp://ftp.gnu.org/gnu/autoconf/autoconf-2.57.tar.bz2]
+>  md5=407ea53787ce13f5ca427e9a51e05bc2
+>  sha256=e1035aa2c21fae2a934d1ab56c774ce9d22717881dab8a1a5b16d294fb793489
+> diff --git a/recipes/autoconf/autoconf213-native_2.13.bb b/recipes/autoconf/autoconf213-native_2.13.bb
+> new file mode 100644
+> index 0000000..3954ef3
+> --- /dev/null
+> +++ b/recipes/autoconf/autoconf213-native_2.13.bb
+> @@ -0,0 +1,9 @@
+> +require autoconf213_${PV}.bb
+> +
+> +DEPENDS = "m4-native gnu-config-native"
+> +RDEPENDS_${PN} = "m4-native gnu-config-native"
+> +
+> +S = "${WORKDIR}/autoconf-${PV}"
+> +FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/autoconf-${PV}"
+> +
+> +inherit native
+> diff --git a/recipes/autoconf/autoconf213_2.13.bb b/recipes/autoconf/autoconf213_2.13.bb
+> new file mode 100644
+> index 0000000..022f696
+> --- /dev/null
+> +++ b/recipes/autoconf/autoconf213_2.13.bb
+> @@ -0,0 +1,5 @@
+> +require autoconf.inc
+> +SRC_URI = "${GNU_MIRROR}/autoconf/autoconf-${PV}.tar.gz"
+> +PR = "r1"
+> +EXTRA_OECONF = "--program-transform-name=s/\$/2.13/"
+> +EXTRA_OEMAKE = 'acdatadir="${datadir}/autoconf-${PV}" infodir="${datadir}/autoconf-${PV}/info"'
+> diff --git a/recipes/mozilla/fennec_hg.bb b/recipes/mozilla/fennec_hg.bb
+> index fad2203..18286a0 100644
+> --- a/recipes/mozilla/fennec_hg.bb
+> +++ b/recipes/mozilla/fennec_hg.bb
+> @@ -1,5 +1,5 @@
+>  DESCRIPTION = "Mozilla Mobile browser"
+> -DEPENDS += "cairo alsa-lib "
+> +DEPENDS += "autoconf213-native cairo alsa-lib"
+>  
+>  PV = "0.9+1.0b2pre"
+>  MOZPV = "1.0b2pre"
+> 
+> 
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+I've a question about this commit:
+if someone bitbakes autoconf-2.13 does it overwrite the one that there
+was before?
+Denis.
 
-Is there a later version of this patch? The comments suggest there is, 
-but I did not see it in patchwork.
 
-Philip
 
---------------ms020601030104070307090201
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICEHW4VJIUQV0u11NnfLpF2IUwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA4MDQxNDE5MTkzMVoXDTA5MDQxNDE5MTkz
-MVowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyNViPlSmMq2Kl4m7iDBI3gB7Pwhg+4vnXCKEF3qIoLwNDVl
-27CP8RY0umjENzykOR6ZhzYx4fH8arNV5+nlXsH8KNnbDpd5ICTZvbUJdt1gPETmLczGy4hh8woC
-u7qodyy7YZcGMiUY5LxoL7vIQHysir4rbMRV/JIdmhKfFrHb+glDe8XbfTJ3xKO+BsMgLDaSiRMe
-lH6uFLAVv9oRoIJxHQhwKLvlrOSQj+ek2fL683BzOUsM4BN/fiwvtJ/y3doVEoKUp8ippOXrwLAX
-FPprPAAdIydqufTxHotooFqbQzqSJv4cTNDTxf2fg9YfH2RAs8vTdc/wgIVlL8fJnQIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEASFC7i4DqutUTifbyNtEe+e9bqgqWUScDFl0BTV5fFVBX/mFpM3RBZJfq+iM5q0L7
-qont3sGaXG0cdVvRk2dkuV2i0HwkmTLJ4HTLMyJ57BjMJWY9ydDiY+Ai1pINmjIgq/qI0aireByq
-Nee68q+PaWE7bfW1XvfqZD56QunCijswggL9MIICZqADAgECAhB1uFSSFEFdLtdTZ3y6RdiFMA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wODA0MTQxOTE5MzFaFw0wOTA0MTQxOTE5MzFaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMcjVYj5UpjK
-tipeJu4gwSN4Aez8IYPuL51wihBd6iKC8DQ1Zduwj/EWNLpoxDc8pDkemYc2MeHx/GqzVefp5V7B
-/CjZ2w6XeSAk2b21CXbdYDxE5i3MxsuIYfMKAru6qHcsu2GXBjIlGOS8aC+7yEB8rIq+K2zEVfyS
-HZoSnxax2/oJQ3vF230yd8SjvgbDICw2kokTHpR+rhSwFb/aEaCCcR0IcCi75azkkI/npNny+vNw
-czlLDOATf34sL7Sf8t3aFRKClKfIqaTl68CwFxT6azwAHSMnarn08R6LaKBam0M6kib+HEzQ08X9
-n4PWHx9kQLPL03XP8ICFZS/HyZ0CAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBAEhQu4uA6rrVE4n28jbRHvnvW6oK
-llEnAxZdAU1eXxVQV/5haTN0QWSX6vojOatC+6qJ7d7BmlxtHHVb0ZNnZLldotB8JJkyyeB0yzMi
-eewYzCVmPcnQ4mPgItaSDZoyIKv6iNGoq3gcqjXnuvKvj2lhO231tV736mQ+ekLpwoo7MIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhB1uFSSFEFdLtdTZ3y6RdiFMAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQxMDEy
-NDI1OVowIwYJKoZIhvcNAQkEMRYEFEbC4rTlI0fB13GV70gNZTz7Qa36MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXYhTCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQdbhUkhRBXS7XU2d8ukXY
-hTANBgkqhkiG9w0BAQEFAASCAQAxXQXXpIoDNGn6+z1LYSx+H2IOugEcBtW70if1hVfeqQxT4lza
-AhsNX05ppDKL2rIEwZesoHY6hhawYn5fwowLZ0dbDbIo48l+y+ZMKFutPVDkBULh0/9ifLsWMpuP
-KzsURHACNGFpXDJUl2+ybE1K5YUHhKJDhzCMGPMfg8fhPWM+Jvp9FE2fugeTwUTimEeUJ4kTkh7U
-H+d69eXnOr0IMWzm8A2VWA/7JVV6DUa52wAoGJSF8NXMTAua6Sy5HYF8YkPRMSXpRnHm4kdCc0sI
-5JErKBon2aJoAn4vaOMlmmyUGYOW4bhGmXqvx3LmLGKmT+Z5c1Wv+zKuYaS0HTMQAAAAAAAA
-
---------------ms020601030104070307090201--
