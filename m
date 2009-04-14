@@ -1,32 +1,32 @@
-Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
+Received: from [93.17.128.3] (helo=smtp21.services.sfr.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LtlJ7-0001cy-Pa
+	(envelope-from <ptitjes@free.fr>) id 1Ltm4J-0007fu-Pd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Apr 2009 18:16:24 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KI300JSCMBYWS33@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	14 Apr 2009 11:12:04 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 62D946B83A8; Tue,
-	14 Apr 2009 12:11:57 -0400 (EDT)
-Date: Tue, 14 Apr 2009 12:11:57 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 14 Apr 2009 19:05:10 +0200
+Received: from filter.sfr.fr (localhost [127.0.0.1])
+	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id 45B6E7000098
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Apr 2009 19:01:26 +0200 (CEST)
+Received: from didier.local (unknown [93.6.66.28])
+	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id 1ADD57000094
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Apr 2009 19:01:26 +0200 (CEST)
+X-SFR-UUID: 20090414170126110.1ADD57000094@msfrf2112.sfr.fr
+Message-ID: <49E4C165.5070701@free.fr>
+Date: Tue, 14 Apr 2009 19:01:25 +0200
+From: "Didier \"Ptitjes\"" <ptitjes@free.fr>
+User-Agent: Thunderbird 2.0.0.21 (Macintosh/20090302)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090414161157.GB28306@denix.org>
-References: <20090414050720.GA22247@denix.org> <49E4303C.10600@xora.org.uk>
-MIME-version: 1.0
-In-reply-to: <49E4303C.10600@xora.org.uk>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.7
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 93.17.128.3
+X-SA-Exim-Mail-From: ptitjes@free.fr
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=AWL,BAYES_50,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: e2fsprogs is broken in configure/autoreconf
+Subject: [Darwin] cp -d fix in packaged-staging.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +40,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2009 16:16:24 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 14 Apr 2009 17:05:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 14, 2009 at 07:42:04AM +0100, Graeme Gregory wrote:
-> Denys Dmytriyenko wrote:
-> > Hi,
-> >
-> > XorA's commit[1] seems to break e2fsprogs for me (omap3evm/davinci), not fix. 
-> > I know, it's not a bug, it's a feature! :) All I know it used to work and it's 
-> > too late now for me to debug it...
-> >
-> > Anyway, the logs are at [2] and [3]. Thanks!
-> >
-> > http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=d187eec071bb0afe8bda13cbf7b89170fe99e384
-> > http://tinderbox.openembedded.net/packages/477200/
-> > http://tinderbox.openembedded.net/public/logs/4350191.txt
-> >
-> >   
-> Interesting, but that log isnt an omap log. Looks to me like an
-> incomplete tmp/ directory for armv5te.
+Fix thanks to kergoth.
 
-It is an omap, don't worry. It's just not called such :) Or, you can think 
-about as a generic armv5te machine...
+ From cce22835b4205649a61eb32dd41cd4f991190c85 Mon Sep 17 00:00:00 2001
+From: Didier Villevalois <didier@didier.local>
+Date: Tue, 14 Apr 2009 17:51:57 +0200
+Subject: [PATCH] packaged-staging.bbclass: BSD doesn't support cp -d, so 
+change to -P
 
-Anyway, that was a clean build - removing tmp and deploy directory. I'll check 
-if there any configuration issues.
+Signed-off-by: Didier Villevalois <didier@didier.local>
+---
+  classes/packaged-staging.bbclass |    4 ++--
+  1 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/classes/packaged-staging.bbclass 
+b/classes/packaged-staging.bbclass
+index d6272b8..741abaa 100644
+--- a/classes/packaged-staging.bbclass
++++ b/classes/packaged-staging.bbclass
+@@ -196,7 +196,7 @@ python packagestage_scenefunc () {
+          #
+          # Copy the stamp files into the main stamps directoy
+          #
+-        cmd = bb.data.expand("cp -dpR ${WORKDIR}/tstage/stamps/* 
+${TMPDIR}/stamps/", d)
++        cmd = bb.data.expand("cp -PpR ${WORKDIR}/tstage/stamps/* 
+${TMPDIR}/stamps/", d)
+          ret = os.system(cmd)
+          if ret != 0:
+              bb.fatal("Couldn't copy the staging package stamp files")
+@@ -401,7 +401,7 @@ python do_package_stage () {
+      bb.mkdirhier(destdir)
+      # We need to include the package_stage stamp in the staging 
+package so create one
+      bb.build.make_stamp("do_package_stage", d)
+-    os.system("cp -dpR %s.do_* %s/" % (stampfn, destdir))
++    os.system("cp -PpR %s.do_* %s/" % (stampfn, destdir))
+
+      pstage_set_pkgmanager(d)
+      bb.build.exec_func("staging_helper", d)
 -- 
-Denys
+1.6.2.2
+
+
 
 
