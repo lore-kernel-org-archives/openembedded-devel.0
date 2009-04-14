@@ -1,32 +1,25 @@
-Received: from [93.17.128.3] (helo=smtp21.services.sfr.fr)
+Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ptitjes@free.fr>) id 1Ltm4J-0007fu-Pd
+	(envelope-from <koen@amethyst.openembedded.net>) id 1Ltmd3-0005Bn-EK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Apr 2009 19:05:10 +0200
-Received: from filter.sfr.fr (localhost [127.0.0.1])
-	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id 45B6E7000098
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Apr 2009 19:01:26 +0200 (CEST)
-Received: from didier.local (unknown [93.6.66.28])
-	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id 1ADD57000094
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Apr 2009 19:01:26 +0200 (CEST)
-X-SFR-UUID: 20090414170126110.1ADD57000094@msfrf2112.sfr.fr
-Message-ID: <49E4C165.5070701@free.fr>
-Date: Tue, 14 Apr 2009 19:01:25 +0200
-From: "Didier \"Ptitjes\"" <ptitjes@free.fr>
-User-Agent: Thunderbird 2.0.0.21 (Macintosh/20090302)
-MIME-Version: 1.0
+	Tue, 14 Apr 2009 19:41:03 +0200
+Received: by amethyst.openembedded.net (Postfix, from userid 1002)
+	id CD158E80A5; Tue, 14 Apr 2009 19:40:38 +0200 (CEST)
+From: Koen Kooi <k.kooi@student.utwente.nl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 93.17.128.3
-X-SA-Exim-Mail-From: ptitjes@free.fr
+Date: Tue, 14 Apr 2009 19:40:38 +0200
+Message-Id: <1239730838-15689-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 80.81.242.146
+X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_20,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [Darwin] cp -d fix in packaged-staging.bbclass
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] sato-icon-theme: I doubt sato-icon-theme.inc including sato-icon-theme.inc is helpful.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,52 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2009 17:05:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Apr 2009 17:41:03 -0000
 
-Fix thanks to kergoth.
+From: Chris Larson <clarson@kergoth.com>
 
- From cce22835b4205649a61eb32dd41cd4f991190c85 Mon Sep 17 00:00:00 2001
-From: Didier Villevalois <didier@didier.local>
-Date: Tue, 14 Apr 2009 17:51:57 +0200
-Subject: [PATCH] packaged-staging.bbclass: BSD doesn't support cp -d, so 
-change to -P
-
-Signed-off-by: Didier Villevalois <didier@didier.local>
+Signed-off-by: Chris Larson <clarson@kergoth.com>
+Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
-  classes/packaged-staging.bbclass |    4 ++--
-  1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/sato-icon-theme/sato-icon-theme.inc |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-diff --git a/classes/packaged-staging.bbclass 
-b/classes/packaged-staging.bbclass
-index d6272b8..741abaa 100644
---- a/classes/packaged-staging.bbclass
-+++ b/classes/packaged-staging.bbclass
-@@ -196,7 +196,7 @@ python packagestage_scenefunc () {
-          #
-          # Copy the stamp files into the main stamps directoy
-          #
--        cmd = bb.data.expand("cp -dpR ${WORKDIR}/tstage/stamps/* 
-${TMPDIR}/stamps/", d)
-+        cmd = bb.data.expand("cp -PpR ${WORKDIR}/tstage/stamps/* 
-${TMPDIR}/stamps/", d)
-          ret = os.system(cmd)
-          if ret != 0:
-              bb.fatal("Couldn't copy the staging package stamp files")
-@@ -401,7 +401,7 @@ python do_package_stage () {
-      bb.mkdirhier(destdir)
-      # We need to include the package_stage stamp in the staging 
-package so create one
-      bb.build.make_stamp("do_package_stage", d)
--    os.system("cp -dpR %s.do_* %s/" % (stampfn, destdir))
-+    os.system("cp -PpR %s.do_* %s/" % (stampfn, destdir))
-
-      pstage_set_pkgmanager(d)
-      bb.build.exec_func("staging_helper", d)
+diff --git a/recipes/sato-icon-theme/sato-icon-theme.inc b/recipes/sato-icon-theme/sato-icon-theme.inc
+index 3c3699d..30d0017 100644
+--- a/recipes/sato-icon-theme/sato-icon-theme.inc
++++ b/recipes/sato-icon-theme/sato-icon-theme.inc
+@@ -1,5 +1,3 @@
+-require sato-icon-theme.inc
+-
+ SECTION = "x11"
+ DESCRIPTION = "Sato Icon Theme"
+ LICENSE = "CC-BY-SA3"
 -- 
-1.6.2.2
-
+1.5.6.5
 
 
 
