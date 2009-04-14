@@ -1,29 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LtnIz-0002rr-7S
-	for openembedded-devel@openembedded.org; Tue, 14 Apr 2009 20:24:23 +0200
-Received: (qmail 10343 invoked by uid 813007); 14 Apr 2009 18:20:39 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 14 Apr 2009 18:20:39 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <denis@denix.org>) id 1Lto2t-0003gO-S0
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Apr 2009 21:11:53 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KI3001GPUGUKNK2@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	14 Apr 2009 14:07:48 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6D60B6B83A8; Tue,
+	14 Apr 2009 15:07:42 -0400 (EDT)
+Date: Tue, 14 Apr 2009 15:07:42 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Apr 2009 20:20:51 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc1-dirty; KDE/4.2.2; x86_64; ; )
-References: <1239730838-15689-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1239730838-15689-1-git-send-email-k.kooi@student.utwente.nl>
-MIME-Version: 1.0
-Message-Id: <200904142020.56110.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-id: <20090414190742.GD28306@denix.org>
+References: <20090414050720.GA22247@denix.org> <49E4303C.10600@xora.org.uk>
+	<20090414161157.GB28306@denix.org>
+MIME-version: 1.0
+In-reply-to: <20090414161157.GB28306@denix.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Level: *
+X-Spam-Status: No, score=1.5 required=5.0 tests=AWL,BAYES_50,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] sato-icon-theme: I doubt sato-icon-theme.inc including sato-icon-theme.inc is helpful.
+Subject: Re: e2fsprogs is broken in configure/autoreconf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,42 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2009 18:24:23 -0000
-X-Groupsio-MsgNum: 9340
-Content-Type: multipart/signed; boundary="nextPart2527059.JRr1VFm8fo";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Apr 2009 19:11:57 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---nextPart2527059.JRr1VFm8fo
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+On Tue, Apr 14, 2009 at 12:11:57PM -0400, Denys Dmytriyenko wrote:
+> On Tue, Apr 14, 2009 at 07:42:04AM +0100, Graeme Gregory wrote:
+> > Denys Dmytriyenko wrote:
+> > > Hi,
+> > >
+> > > XorA's commit[1] seems to break e2fsprogs for me (omap3evm/davinci), not fix. 
+> > > I know, it's not a bug, it's a feature! :) All I know it used to work and it's 
+> > > too late now for me to debug it...
+> > >
+> > > Anyway, the logs are at [2] and [3]. Thanks!
+> > >
+> > > http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=d187eec071bb0afe8bda13cbf7b89170fe99e384
+> > > http://tinderbox.openembedded.net/packages/477200/
+> > > http://tinderbox.openembedded.net/public/logs/4350191.txt
+> > >
+> > >   
+> > Interesting, but that log isnt an omap log. Looks to me like an
+> > incomplete tmp/ directory for armv5te.
+> 
+> It is an omap, don't worry. It's just not called such :) Or, you can think 
+> about as a generic armv5te machine...
+> 
+> Anyway, that was a clean build - removing tmp and deploy directory. I'll check 
+> if there any configuration issues.
 
-Dnia wtorek, 14 kwietnia 2009 o 19:40:38 Koen Kooi napisa=C5=82(a):
-> From: Chris Larson <clarson@kergoth.com>
->
-> Signed-off-by: Chris Larson <clarson@kergoth.com>
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+Ah, it now depends on gettext-native, fixed.
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+-- 
+Denys
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
---nextPart2527059.JRr1VFm8fo
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAknk1AQACgkQeQ6MlGH/2qswZgCdE4r6Jz19M26dxdYe46J92+fs
-J+AAnRlCyGKt8y9NnQeOey2QnExGKWbZ
-=PUC1
------END PGP SIGNATURE-----
-
---nextPart2527059.JRr1VFm8fo--
