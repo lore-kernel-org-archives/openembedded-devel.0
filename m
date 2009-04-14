@@ -1,51 +1,30 @@
-Received: from [209.85.198.246] (helo=rv-out-0708.google.com)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ltrus-0004FU-DY
+	(envelope-from <denis@denix.org>) id 1LtsOA-0001TA-9T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 01:19:49 +0200
-Received: by rv-out-0708.google.com with SMTP id k29so2464781rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Apr 2009 16:16:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=z1BYZXr4KC1KGBKr07691tFjftG6k9DpfghEp/82GSo=;
-	b=Ez8LWfASiYs0uCI7tWudLV+iKjO88CzG3Ld+mSeS4uI1zGf1VcukIeyCehoIdPvS+j
-	2K+OFf8mJWKw28GAbLZSdS71V0NOm2SCGAA8qvnjXSSh3Je9QtYymIQOim8/gZrDW3s0
-	RAdMdiBtene5Pzcp/qdVyFF6znZiwKtnDMexc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=iCZ3b2M7fY+07byQwznO1d5UfYHSziidV6FH6psMLWNS1v53CrqbQdWwzAVo3d+GoT
-	bunMT7NkmOGU/c59tvMcAf+GEbYiXNYtq4b29uFxFV5YU89mbEkCvAcpiClJ2FprXgel
-	Mk0cnKKAEr4r3gp6DmXthbfIKuyFV6Pkl5HnU=
-Received: by 10.141.48.10 with SMTP id a10mr56276rvk.250.1239750962559;
-	Tue, 14 Apr 2009 16:16:02 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-24-121.dsl.pltn13.sbcglobal.net
-	[71.146.24.121])
-	by mx.google.com with ESMTPS id k2sm16070050rvb.24.2009.04.14.16.16.01
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 14 Apr 2009 16:16:01 -0700 (PDT)
-Date: Tue, 14 Apr 2009 16:15:57 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 15 Apr 2009 01:50:05 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KI4006M07CYNVAQ@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	14 Apr 2009 18:46:10 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D7F176B83B5; Tue,
+	14 Apr 2009 19:46:09 -0400 (EDT)
+Date: Tue, 14 Apr 2009 19:46:09 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090414231557.GB25757@gmail.com>
-References: <SNT105-W20AA5F2E8A600866EEDD6D907C0@phx.gbl>
-	<20090414224141.GA6479@rhein.zuhause.netz>
-MIME-Version: 1.0
-In-Reply-To: <20090414224141.GA6479@rhein.zuhause.netz>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 209.85.198.246
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-id: <20090414234609.GA27890@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.7
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Level: *
+X-Spam-Status: No, score=1.5 required=5.0 tests=AWL,BAYES_50,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: uclibc build error
+Subject: [RFC] Invalidating udev cache...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,55 +38,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2009 23:19:50 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 14 Apr 2009 23:50:05 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On (15/04/09 00:41), Henning Heinold wrote:
-> On Tue, Apr 14, 2009 at 11:30:49PM +0300, Mauri Sandberg wrote:
-> > 
-> > There are two peculiarities when I am trying to build uclibc for DNS-323 using angstrom stable/2009.
-> > 
-> > For some reason OE chooses version 0.9.30 over 0.9.30.1. I had to specifically choose the latter.
-> > 
-> > Anyhow, both of these fail miserably with something that does not really tell me much.
-> > 
-> > <clip>
-> > NOTE: make STRIPTOOL=true LD=arm-angstrom-linux-uclibcgnueabi-ld LOCALE_DATA_FILENAME=uClibc-locale-030818.arm.tgz CC=ccache arm-angstrom-linux-uclibcgnueabi-gcc -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mthumb HOSTCFLAGS=-I/home/maukka/oe/dns323/build/tmp-dns323/staging/i686-linux/usr/include
-> >   GEN include/bits/sysnum.h
-> >   GEN include/bits/uClibc_config.h
-> >   LN include/pthread.h
-> > ...
-> >   CC ldso/ldso/ldso.oS
-> > ldso/ldso/dl-elf.c: In function '_dl_dprintf':
-> > ldso/ldso/dl-elf.c:913: error: unable to find a register to spill in class 'LO_REGS'
-> > ldso/ldso/dl-elf.c:913: error: this is the insn:
-> > (insn 121 120 122 6 (set (reg/f:SI 406)
-> >         (plus:SI (reg/f:SI 25 sfp)
-> >             (reg:SI 405))) 5 {*thumb_addsi3} (nil)
-> >     (expr_list:REG_DEAD (reg:SI 405)
-> >         (nil)))
-> > ldso/ldso/dl-elf.c:913: confused by earlier errors, bailing out
-> > make: *** [ldso/ldso/ldso.oS] Error 1
-> > FATAL: oe_runmake failed
-> > </clip>
-> > 
-> > Full log at http://tinderbox.openembedded.net/builds/138258/
-> > 
-> > -- Mauri
+On Tue, Mar 03, 2009 at 08:16:48AM -0700, Tom Rini wrote:
+> On Tue, Mar 03, 2009 at 08:24:44AM +0100, Koen Kooi wrote:
+> > On 03-03-09 06:11, Denys Dmytriyenko wrote:
+> >> On Thu, Dec 04, 2008 at 06:41:50PM +0100, Koen Kooi wrote:
+> >>> On 04-12-08 18:09, Mike (mwester) wrote:
+> >>>> Mike (mwester) wrote:
+> >>>>
+> >>>>> A slight improvement would be to make the dev.tar file dependent upon
+> >>>>> the bootargs; i.e. invalidate /etc/dev.tar file if the boot command line
+> >>>>> doesn't match the current command line.  This could be a very fast
+> >>>>> operation, just "cmp /proc/cmdline /etc/dev_cmdline" or similar.
+> >>>> As I consider this further, we could actually just save and compare
+> >>>> /proc/atags if that's present on the device in question (falling back to
+> >>>> /proc/cmdline if not present).  That would catch *any* changes passed in
+> >>>> to the kernel via the bootloader.
+> >>>>
+> >>>> Flashing a new kernel would seem to be another logical place to
+> >>>> invalidate the cache, so adding a comparison of "uname -rv" would be a
+> >>>> reasonable way to catch that.
+> >>> That should indeed take care of bootargs and kernel version changes. I'm
+> >>> still tempted to add option 2) to all that :)
+> >>
+> >> Sorry for bringing up this old discussion. Are there any plans to implement
+> >> the above checks in udev?
+> >
+> > Plans yes, time no :(
 > 
-> This is the error comes from building uclibc with thumb support. Khem started to fix it, but
-> it isnt fixed already yet. Try to use ARM_INSTRUCTION_SET = "arm" in the uclibc.inc for now.
+> Can we make sure they're optional?
 
-alternatively use gcc 4.3.3
+I'd like to revive this old topic and propose a patch, which implements most 
+of the above points. I'm not sure about making it optional and /proc/atags. 
+So, anyway, the patch will follow, please provide comments.
 
-> 
-> 
-> Bye Henning
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Denys
 
 
