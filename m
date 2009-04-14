@@ -1,29 +1,32 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LtbBl-00069J-KZ
+	(envelope-from <dp@xora.org.uk>) id 1LtcOw-0004DP-F6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Apr 2009 07:28:10 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KI200FKQSC338CD@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	14 Apr 2009 00:24:09 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id AD7116B83A8; Tue,
-	14 Apr 2009 01:24:03 -0400 (EDT)
-Date: Tue, 14 Apr 2009 01:24:03 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 14 Apr 2009 08:45:53 +0200
+Received: by ewy20 with SMTP id 20so2426302ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Apr 2009 23:42:05 -0700 (PDT)
+Received: by 10.210.71.12 with SMTP id t12mr2622096eba.3.1239691325327;
+	Mon, 13 Apr 2009 23:42:05 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 11sm7071000ewy.74.2009.04.13.23.42.04
+	(version=SSLv3 cipher=RC4-MD5); Mon, 13 Apr 2009 23:42:04 -0700 (PDT)
+Message-ID: <49E4303C.10600@xora.org.uk>
+Date: Tue, 14 Apr 2009 07:42:04 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090414052403.GB22247@denix.org>
 References: <20090414050720.GA22247@denix.org>
-MIME-version: 1.0
-In-reply-to: <20090414050720.GA22247@denix.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.11
-X-SA-Exim-Mail-From: denis@denix.org
+In-Reply-To: <20090414050720.GA22247@denix.org>
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 209.85.219.172
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=AWL,BAYES_50,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: e2fsprogs is broken in configure/autoreconf
@@ -40,30 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2009 05:28:14 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 14 Apr 2009 06:45:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 14, 2009 at 01:07:20AM -0400, Denys Dmytriyenko wrote:
+Denys Dmytriyenko wrote:
 > Hi,
-> 
+>
 > XorA's commit[1] seems to break e2fsprogs for me (omap3evm/davinci), not fix. 
 > I know, it's not a bug, it's a feature! :) All I know it used to work and it's 
 > too late now for me to debug it...
-> 
+>
 > Anyway, the logs are at [2] and [3]. Thanks!
-> 
+>
 > http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=d187eec071bb0afe8bda13cbf7b89170fe99e384
 > http://tinderbox.openembedded.net/packages/477200/
 > http://tinderbox.openembedded.net/public/logs/4350191.txt
+>
+>   
+Interesting, but that log isnt an omap log. Looks to me like an
+incomplete tmp/ directory for armv5te.
 
-And to add to the confusion, sometimes it builds fine, according to tinderbox:
+Graeme
 
-http://tinderbox.openembedded.net/packages/e2fsprogs/
-
-Any ideas? Or am I doing something completely wrong due to a late hour? :)
-
--- 
-Denys
 
 
