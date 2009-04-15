@@ -1,29 +1,29 @@
 Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Lu1gu-0005aJ-5w
+	(envelope-from <khimov@altell.ru>) id 1Lu1lw-0005hf-M1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 11:46:03 +0200
+	Wed, 15 Apr 2009 11:51:14 +0200
 Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.115])
 	by relay1.mail.masterhost.ru with esmtp 
 	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1Lu1dC-000Bwz-KP
+	message id 1Lu1iG-000FOO-LL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 13:42:10 +0400
+	Wed, 15 Apr 2009 13:47:24 +0400
 From: Roman I Khimov <khimov@altell.ru>
 Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Apr 2009 13:41:56 +0400
+Date: Wed, 15 Apr 2009 13:47:16 +0400
 User-Agent: KMail/1.9.9
 References: <1239784615-19928-1-git-send-email-khimov@altell.ru>
-	<49E5A7C7.6010809@xora.org.uk>
-In-Reply-To: <49E5A7C7.6010809@xora.org.uk>
+	<gs47uf$uv2$1@ger.gmane.org>
+In-Reply-To: <gs47uf$uv2$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200904151341.58878.khimov@altell.ru>
+Message-Id: <200904151347.16942.khimov@altell.ru>
 X-SA-Exim-Connect-IP: 83.222.23.61
 X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
 	SPF_SOFTFAIL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -41,28 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 09:46:03 -0000
+X-List-Received-Date: Wed, 15 Apr 2009 09:51:14 -0000
 Content-Type: text/plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wednesday 15 April 2009 13:24:23 Graeme Gregory wrote:
-> On 04/15/2009 09:36 AM, Roman I Khimov wrote:
-> > +	${@base_contains("COMBINED_FEATURES", "bluetooth", "bluez-libs", "",
+On Wednesday 15 April 2009 13:04:15 Koen Kooi wrote:
+> On 15-04-09 10:36, Roman I Khimov wrote:
+> > libpcap can be used in distros where no bluetooth support will ever
+> > exist. So this dependency should be weakened to only exist in distros
+> > that explicitly need bluetooth.
 >
-> NACK, this doesnt do what you think it does as you don't disable
-> bluetooth via any form of alteration to the build system. 
+> NACK, no USE flags in OE. 
 
-It did exactly what I needed from it - kicked bluez-libs out of my build. With 
-bluetooth-enabled distros it didn't change anything. Therefore I don't think 
-it is true that
+Even if hostap-daemon and wpa-supplicant and tasks already use FEATURES in 
+similar fashion, changing package-task behaviour?
 
-> You have created randomness in your build now.
+> If you want a pcap without bluez you can 
+> either do:
+>
+> libpcap.bb + libpcap-bluetooth.bb OR libpcap.bb + libpcap-no-bluetooth.bb
+>
+> And add the needed virtuals.
 
-Albeit you must be pointing to the fact that if I had bluez-libs already built 
-that might change the behaviour which is true and can be fixed by 
-ac_cv_header_bluetooth_bluetooth_h override in 
-do_configure_prepend_bluetooth.
+Is this a policy? I'm not sure it makes sense to add tons 
+of 'package-this', 'package-that', 'package-yet-another-thing',
+'package-this-that-but-not-yet-another-thing' for every case.
+
+I've used this 'virtual' kind of approach with two another packages but there 
+I'd extended functionality by applying patches, so another package with all 
+virtual stuff makes more sense. But here what I'm doing is configuring the 
+same source to fit my needs and 'bluetooth' thing already exist in FEATURES. 
+So how to use it if not this way?
+
+Though if it is a policy around here, so be it.
 
 
