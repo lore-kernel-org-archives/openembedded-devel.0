@@ -1,44 +1,42 @@
-Received: from [82.71.204.225] (helo=cpanelsmarthost1.zen.co.uk)
+Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chris.sykes@nextstepsolutions.co.uk>)
-	id 1Lu2dj-00046N-RU for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 12:46:49 +0200
-Received: from [82.71.204.21] (helo=zencphosting12.zen.co.uk)
-	by cpanelsmarthost1.zen.co.uk with esmtp (Exim 4.63)
-	(envelope-from <chris.sykes@nextstepsolutions.co.uk>)
-	id 1Lu2a5-0002i4-JR for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 10:43:01 +0000
-Received: from sigsegv.plus.com ([212.159.101.170] helo=[192.168.250.101])
-	by zencphosting12.zen.co.uk with esmtpa (Exim 4.69)
-	(envelope-from <chris.sykes@nextstepsolutions.co.uk>)
-	id 1Lu2a5-0003WY-9L for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 11:43:01 +0100
-From: Chris Sykes <chris.sykes@nextstepsolutions.co.uk>
+	(envelope-from <hs4233@mail.mn-solutions.de>) id 1Lu2iR-0004Ep-Ra
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 12:51:41 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id EA23B238077;
+	Wed, 15 Apr 2009 12:47:53 +0200 (CEST)
+X-Virus-Scanned: by Mittwald Mailscanner
+Received: from mx51.mymxserver.com ([127.0.0.1])
+	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id nUB+05QqR-J5; Wed, 15 Apr 2009 12:47:53 +0200 (CEST)
+Received: from lin01.mn-solutions.de (pD95F99E0.dip0.t-ipconnect.de
+	[217.95.153.224])
+	by mx51.mymxserver.com (Postfix) with ESMTP id 0EFA5238070;
+	Wed, 15 Apr 2009 12:47:53 +0200 (CEST)
+Received: by lin01.mn-solutions.de (Postfix, from userid 116)
+	id 6EC691E04CC; Wed, 15 Apr 2009 12:47:52 +0200 (CEST)
+Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
+	by lin01.mn-solutions.de (Postfix) with ESMTP id C89041E04C8;
+	Wed, 15 Apr 2009 12:47:43 +0200 (CEST)
+From: Holger Schurig <hs4233@mail.mn-solutions.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d1b08f940904150307y125d2297t93b320a3a2ffd473@mail.gmail.com>
-References: <1239788125.3467.8.camel@x60.spackhandychoptubes.co.uk>
-	<gs4al7$76r$1@ger.gmane.org>
-	<d1b08f940904150307y125d2297t93b320a3a2ffd473@mail.gmail.com>
-Organization: Next Step Solutions
-Date: Wed, 15 Apr 2009 11:43:00 +0100
-Message-Id: <1239792180.3467.15.camel@x60.spackhandychoptubes.co.uk>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - zencphosting12.zen.co.uk
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - nextstepsolutions.co.uk
-X-SA-Exim-Connect-IP: 82.71.204.225
-X-SA-Exim-Mail-From: chris.sykes@nextstepsolutions.co.uk
+Date: Wed, 15 Apr 2009 12:47:33 +0200
+User-Agent: KMail/1.9.7
+References: <1239784615-19928-1-git-send-email-khimov@altell.ru>
+	<gs47uf$uv2$1@ger.gmane.org>
+In-Reply-To: <gs47uf$uv2$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200904151247.33585.hs4233@mail.mn-solutions.de>
+X-SA-Exim-Connect-IP: 85.199.173.110
+X-SA-Exim-Mail-From: hs4233@mail.mn-solutions.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: kexec-tools-static build failue for zaurus collie
+Cc: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: [PATCH] libpcap: weaken bluez-libs dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,43 +50,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 10:46:49 -0000
-X-Groupsio-MsgNum: 9376
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-gGXZheLLuIJbLKe+oG0c"
+X-List-Received-Date: Wed, 15 Apr 2009 10:51:42 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---=-gGXZheLLuIJbLKe+oG0c
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+> NACK, no USE flags in OE.
 
-On Wed, 2009-04-15 at 12:07 +0200, Andrea Adami wrote:
-> Yes, problem with recent kernels (>2.6.28 ?) and klibc.
-> See http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-April/00=
-9377.html
->=20
-> As workaround you can build kexecboot against an older kernel.
+I'm not sure if this was a mis-design that I made.
 
-Ah, many thanks for the pointers.  I had done a quick search of the
-archives but was looking for kexec issues rather than klibc.
+When I modeled *.bb and *.bbclass files and wrote parts of the 
+initial bitbake, I thought that USE variables lead even more to 
+a combinatorical explosion (think package tests!) than the 
+overrides I added.
 
---=20
-Chris Sykes
+I thought that overrides are strictly necessary to adapt to 
+invidual board settings. And I thought that USE= is just handy, 
+not neccessary. I also never wrote something about USE= in the 
+design documents we had in the old wiki at that time.
 
-Next Step Solutions Limited
-Email: chris.sykes@nextstepsolutions.co.uk
-Tel: 0870 3146413
+In the mean-time I also had thought from time to time that USE 
+would be nicer. However, partially we have USE, althought it's 
+usually only for defining WHAT comes into image, now HOW to 
+compile something. Examples of Gentoo-USE-like variables are 
+DISTRO_FEATURES or MACHINE_FEATURES.
 
---=-gGXZheLLuIJbLKe+oG0c
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
+However, if we now would add USE like gentoo, I'd like to saner 
+syntax than embedded anonymous python scripts :-)
 
-iD8DBQBJ5bowRhxfZg8kHTARArAFAKDP3EuLn5Ic6tkM+ljG1EE7M2qV4wCgwv2F
-RF6dxRSpDhE7sWJjRo5adWM=
-=URHt
------END PGP SIGNATURE-----
+Also, from quite early on it was clear that usage of overrides 
+will be recorded and will e.g. into the filenames of generated 
+*.ipk files. We'll have to think about how to do that for USE 
+flags ...  (if we ever use them). Or how to circumvent this, 
+e.g. using MACHINE or DISTRO, depending on where the USE flag 
+was defined. But hey, that's all halfbaked, not bitbaked :-)
 
---=-gGXZheLLuIJbLKe+oG0c--
+
+
+All historic mention is "AFAIK", it was several years ago, and 
+other people like Chris or Mickey and some more from the old 
+OPIE community also helped brainstorming.
+
+
