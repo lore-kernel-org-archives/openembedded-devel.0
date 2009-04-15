@@ -1,31 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ltyqa-0000R8-19
-	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 08:43:50 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1Ltymw-000666-Is
-	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 06:40:02 +0000
+	id 1LtyyJ-0003GC-KJ
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 08:51:52 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ltyud-0006PY-FV
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 06:47:59 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Apr 2009 06:40:02 +0000
+	Wed, 15 Apr 2009 06:47:59 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Apr 2009 06:40:02 +0000
+	Wed, 15 Apr 2009 06:47:59 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 15 Apr 2009 08:39:09 +0200
-Message-ID: <gs3ved$7ac$2@ger.gmane.org>
-References: <1239701117-7033-1-git-send-email-k.kooi@student.utwente.nl>
+Date: Wed, 15 Apr 2009 08:47:47 +0200
+Message-ID: <gs3vuj$8tl$1@ger.gmane.org>
+References: <20090414234609.GA27890@denix.org>
+	<1239752998-7677-1-git-send-email-denis@denix.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b4pre) Gecko/20090407 Shredder/3.0b3pre
-In-Reply-To: <1239701117-7033-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1239752998-7677-1-git-send-email-denis@denix.org>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.2
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -36,7 +37,7 @@ X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE] bluez4 and gnome updates for stable
+Subject: Re: [PATCH] udev 124: add cache invalidation logic on kernel change or its bootargs/cmdline
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,14 +51,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 06:43:50 -0000
+X-List-Received-Date: Wed, 15 Apr 2009 06:51:52 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 14-04-09 11:25, Koen Kooi wrote:
-> These 4 patches update the stable/2009 branch bluez4 and gnome bits to what's present in .dev. Build tested for c7x0+beagleboard, runtiem tested on beagleboard and omapzoom
+On 15-04-09 01:49, Denys Dmytriyenko wrote:
 
-ping on all 4 patches
+> +			mv /tmp/uname /etc/uname
+> +			mv /tmp/cmdline /etc/cmdline
+
+I think we should put those in /etc/udev or /var/lib/udev if udev will 
+be the only consumer.
+
+regards,
+
+Koen
 
 
 
