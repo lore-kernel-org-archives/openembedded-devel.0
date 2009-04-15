@@ -1,32 +1,25 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LtsRt-0001XS-N7
+	(envelope-from <koen@amethyst.openembedded.net>) id 1Ltyh6-0003nk-0E
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 01:53:56 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KI400DUN7JBW4X3@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	14 Apr 2009 18:49:59 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id BE0E76B83B5; Tue,
-	14 Apr 2009 19:49:58 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 15 Apr 2009 08:34:02 +0200
+Received: by amethyst.openembedded.net (Postfix, from userid 1002)
+	id 1A6B3189350; Wed, 15 Apr 2009 08:33:38 +0200 (CEST)
+From: Koen Kooi <k.kooi@student.utwente.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Apr 2009 19:49:58 -0400
-Message-id: <1239752998-7677-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.6.0.6
-In-reply-to: <20090414234609.GA27890@denix.org>
-References: <20090414234609.GA27890@denix.org>
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Wed, 15 Apr 2009 08:33:38 +0200
+Message-Id: <1239777218-20213-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 80.81.242.146
+X-SA-Exim-Mail-From: koen@amethyst.openembedded.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=AWL,BAYES_40,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] udev 124: add cache invalidation logic on kernel change or its bootargs/cmdline
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] sysstat: fix build on omap3 to actually work (gnu_hash problem like ltrace)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,48 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2009 23:53:56 -0000
+X-List-Received-Date: Wed, 15 Apr 2009 06:34:02 -0000
+
+From: Carsten Haitzler (Rasterman <raster@rasterman.com>
 
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- recipes/udev/udev-124/init |   10 +++++++++-
- 1 files changed, 9 insertions(+), 1 deletions(-)
+ recipes/sysstat/sysstat_8.1.6.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/udev/udev-124/init b/recipes/udev/udev-124/init
-index 9e11f08..840cddd 100644
---- a/recipes/udev/udev-124/init
-+++ b/recipes/udev/udev-124/init
-@@ -34,7 +34,10 @@ LANG=C awk "\$2 == \"/dev\" && \$4 == \"tmpfs\" { exit 1 }" /proc/mounts && {
-         mkdir -m 0755 /dev/shm
- }
+diff --git a/recipes/sysstat/sysstat_8.1.6.bb b/recipes/sysstat/sysstat_8.1.6.bb
+index 0f394ed..a734d14 100644
+--- a/recipes/sysstat/sysstat_8.1.6.bb
++++ b/recipes/sysstat/sysstat_8.1.6.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "The sysstat utilities are a collection of performance monitoring
+ HOMEPAGE = "http://pagesperso-orange.fr/sebastien.godard/"
+ LICENSE = "GPL"
+ SECTION = "console/utils"
++PR = "r1"
  
--if [ -e /etc/dev.tar ]; then
-+# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
-+[ -x /bin/uname ] && /bin/uname -mrspv > /tmp/uname || touch /tmp/uname
-+[ -r /proc/cmdline ] && cat /proc/cmdline > /tmp/cmdline || touch /tmp/cmdline
-+if [ -e /etc/dev.tar ] && cmp -s /tmp/uname /etc/uname && cmp -s /tmp/cmdline /etc/cmdline; then
- 	(cd /; tar xf /etc/dev.tar)
- 	not_first_boot=1
- fi
-@@ -50,10 +53,15 @@ kill_udevd > "/dev/null" 2>&1
- 		if [ "$not_first_boot" != "" ];then
- 			/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics  --subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
- 			(/sbin/udevadm settle --timeout=3; /sbin/udevadm control env STARTUP=)&
-+			rm -f /tmp/uname
-+			rm -f /tmp/cmdline
- 		else
- 			/sbin/udevadm trigger
- 			/sbin/udevadm settle
-+			echo -n " and populating dev cache"
- 			(cd /; tar cf /etc/dev.tar dev)
-+			mv /tmp/uname /etc/uname
-+			mv /tmp/cmdline /etc/cmdline
- 		fi
+ SRC_URI = "http://pagesperso-orange.fr/sebastien.godard/sysstat-${PV}.tar.gz"
  
- echo
+@@ -13,3 +14,4 @@ do_configure_prepend() {
+ 
+ FILES_${PN} += "${libdir}/sa"
+ 
++TARGET_CC_ARCH += "${LDFLAGS}"
 -- 
-1.6.0.6
+1.5.6.5
 
 
 
