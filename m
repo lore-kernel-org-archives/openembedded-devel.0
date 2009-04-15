@@ -1,40 +1,47 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Lu5ID-0006tm-05
+	(envelope-from <andrea.adami@gmail.com>) id 1Lu5K7-0006wB-OL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 15:36:46 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 02B02140972D
+	Wed, 15 Apr 2009 15:38:45 +0200
+Received: by bwz19 with SMTP id 19so2886013bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2009 15:34:40 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id u7C2QGISIFuv
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2009 15:34:39 +0200 (CEST)
-Received: from [10.20.1.86] (unknown [82.119.242.94])
-	by ns.penguin.cz (Postfix) with ESMTP id CEE361416BA2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2009 15:34:39 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 15 Apr 2009 06:34:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=5+lGL8KHcelq8mZ8erOsMkxO6BbRm9SoPhOxg2IMDAk=;
+	b=S71PQbpZqSiIOjJ6kzvASLIIdlnWlBUIISJ9Tdx3aTRGuSeCVFUCVSqNx1lyfYrDYS
+	VEpDy7wGSZ/VWZvzJhjv4Ctort7NMDBbBWkQS7vBqVC6632qqYCwycQWY0RVaTmoHaPI
+	wdZOfg85J2o1MnolKZZoDf39NVqGiM7mb9koQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=vJNRbONYyMnUyVlH3hTGfRJi4KXNn0K/sIw8YHFTbiXTCN7fvE2V4UDZuGPbmCJsnU
+	IkVsQQdz5/rPNAMUbCIqvKIy3AgOoCqYEngg/CQ/xBYPGg+0ocB9dj2kL9MqH8jjc47O
+	cfOLxlcI+ivF83lpWUtBfsV7LGIljgIhua2BM=
+MIME-Version: 1.0
+Received: by 10.223.127.8 with SMTP id e8mr64776fas.95.1239802494304; Wed, 15 
+	Apr 2009 06:34:54 -0700 (PDT)
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF759@hiob.intern.dresearch.de>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF746@hiob.intern.dresearch.de>
+	<20090326175845.GA6756@denix.org>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF74B@hiob.intern.dresearch.de>
+	<49CCC52F.2000009@balister.org>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF759@hiob.intern.dresearch.de>
+Date: Wed, 15 Apr 2009 15:34:54 +0200
+Message-ID: <d1b08f940904150634scd9c918oc6812c80d4bfdeaa@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1239800506.21612.79.camel@hammer.suse.cz>
-References: <200904151633.49146.khimov@altell.ru>
-	<1239800506.21612.79.camel@hammer.suse.cz>
-Date: Wed, 15 Apr 2009 15:32:56 +0200
-Message-Id: <1239802376.21612.91.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-SA-Exim-Connect-IP: 209.85.218.219
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
 	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] AMD64 and multilib support
+Subject: Re: u-boot update question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 13:36:47 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Apr 2009 13:38:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Stanislav Brabec wrote:
+IMHO this adds bloat to the already over-populated /u-boot dir...
 
-> >Next thing is 'libexec' dir. I propose to set it to point to libdir an=
-d be=20
-> >done with that
+> This would be better than using the git recipe, since someone
+> may change the git tag at a later date.
 
-This is bad, because it forces duplicating of all libexec binaries in
-the system.
+I don't see any risk...just do like other machines
 
-Imagine that you have a library libfoo for both archs:
-/usr/lib/libfoo.so.0 (32 bit)
-/usr/lib64/libfoo.so.0 (64 bit)
+SRC_URI_xy
+SRCREV_xy
 
-Now your library needs to call binary ${libexecdir}/libfoo-helper.
+My 2 cents
 
-If you set libexec to libdir, then you are forced to package libfoo
-helper twice. Both do _exactly_ the same:
-/usr/lib/libfoo-helper (32 bit instance for 32 bit library)
-/usr/lib64/libfoo-helper (64 bit instance for 64 bit library)
 
-libexecdir pointing to prefix/lib is much better:
-/usr/lib/libfoo-helper (64 bit instance for both libraries)
-
-Both 32 bit and 64 bit libfoo will use this helper.
-
---=20
-Best Regards / S pozdravem,
-
-Stanislav Brabec
-software developer
----------------------------------------------------------------------
-SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
-Lihovarsk=E1 1060/12           tel: +420 284 028 966, +49 911 740538747
-190 00 Praha 9                                  fax: +420 284 028 951
-Czech Republic                                    http://www.suse.cz/
-
+Andrea
 
 
