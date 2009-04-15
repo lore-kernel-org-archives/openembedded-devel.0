@@ -1,44 +1,42 @@
-Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
+Received: from [209.85.198.243] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1LuAlD-0002Jm-4H
-	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 21:27:05 +0200
-Received: by rv-out-0708.google.com with SMTP id b17so43589rvf.0
+	(envelope-from <raj.khem@gmail.com>) id 1LuAnB-0002Lj-7s
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 21:29:07 +0200
+Received: by rv-out-0708.google.com with SMTP id b17so44199rvf.0
 	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Apr 2009 12:23:14 -0700 (PDT)
+	Wed, 15 Apr 2009 12:25:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:cc:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=tuNkDMVUc+JQ1KgBxNVNXQzxVYVLBnwiikVGEKXfT4s=;
-	b=mjUPQMBG71n+6W1RwduCE8APXyiC6JP0g/SZLGF3uXLHfjOKh4XN7EHkNj1jBGw3SF
-	RpDtomSeJ8Gna7RRJH4Yo2ZTrqzudJzFrmrHxPkiOdxvU8gMyiAD7T6U9bwnBGUq2Xa0
-	8XLykSTdoiT8aePlk4Lrh9mVW5BQaoF0Ev/j4=
+	bh=HSe+nPP3viEFKaydglaYVBcyi3ja79tGlqw2vFWtO3g=;
+	b=D602UGR6Z/fbHKd23pZRQAhys+wAxPQH7bQFnagagBfmJRIkKo2Qw/kvaCRDAiZPGz
+	wTZIOIP/MwjWFbzGF4EYugcf1WpYL5DWZJvKv6/XYMs8kRPwutNq38vhGlV3oN6RLLf9
+	t6qLTx2L4guj7QS3WoitHN94am6wsu1wHFRIQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=m1992EmqPBrA8QFl3JQmGtdRTXJEhJ/xb/OcYKZrIg85XQXxQTb8eM6aJ3h8Yj2a5x
-	77oHNKdpC0Bp+ZAFHTBezi1vTLKGncB8zWwkcphq4qEvfOJ9ODzRrQ3O9OJ8rEymFYOT
-	1h4In1lOFVKGDkDfz3N+Fg+2MYQDyc8If8wJ0=
-Received: by 10.114.154.1 with SMTP id b1mr241403wae.77.1239823394112;
-	Wed, 15 Apr 2009 12:23:14 -0700 (PDT)
+	b=PylfgIxYtxoo5ry6ffT5VylABi0Y63A7O3pIMniSuePQpIeXEc3XnaxNFNSrf57DPQ
+	p3E/IeLB3ojjQp/z5iEaAx6Jx7RV/S11L2nPgMcAZpoWSlqzfIFh6MHi/G4R+g3zA+84
+	DscmiEnlfrtiQT97o/OQDhjLwqlTBCJ/Sm/Mo=
+Received: by 10.140.164.1 with SMTP id m1mr448555rve.8.1239823516208;
+	Wed, 15 Apr 2009 12:25:16 -0700 (PDT)
 Received: from gmail.com (adsl-71-146-24-121.dsl.pltn13.sbcglobal.net
 	[71.146.24.121])
-	by mx.google.com with ESMTPS id m34sm143196waf.36.2009.04.15.12.23.12
+	by mx.google.com with ESMTPS id c20sm334673rvf.40.2009.04.15.12.25.14
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 15 Apr 2009 12:23:13 -0700 (PDT)
-Date: Wed, 15 Apr 2009 12:23:10 -0700
+	Wed, 15 Apr 2009 12:25:15 -0700 (PDT)
+Date: Wed, 15 Apr 2009 12:25:12 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090415192310.GB29623@gmail.com>
+Message-ID: <20090415192512.GC29623@gmail.com>
 References: <200904151633.49146.khimov@altell.ru>
 	<1239798960-3586-1-git-send-email-khimov@altell.ru>
 	<1239798960-3586-2-git-send-email-khimov@altell.ru>
-	<1239798960-3586-3-git-send-email-khimov@altell.ru>
-	<1239798960-3586-4-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-In-Reply-To: <1239798960-3586-4-git-send-email-khimov@altell.ru>
+In-Reply-To: <1239798960-3586-2-git-send-email-khimov@altell.ru>
 User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-X-SA-Exim-Connect-IP: 209.85.198.245
+X-SA-Exim-Connect-IP: 209.85.198.243
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
@@ -47,7 +45,7 @@ X-Spam-Status: No, score=-0.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 04/11] gcc 4.2.4: add gcc-multilib64dir.patch
+Subject: Re: [PATCH 02/11] binutils: add	binutils-x86_64_i386_biarch.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,82 +59,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 19:27:05 -0000
+X-List-Received-Date: Wed, 15 Apr 2009 19:29:07 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 On (15/04/09 16:35), Roman I Khimov wrote:
 > ---
->  recipes/gcc/files/gcc-multilib64dir.patch |   43 +++++++++++++++++++++++++++++
->  recipes/gcc/gcc-4.2.4.inc                 |    1 +
->  2 files changed, 44 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/gcc/files/gcc-multilib64dir.patch
+>  .../binutils-x86_64_i386_biarch.patch              |   25 ++++++++++++++++++++
+>  recipes/binutils/binutils_2.18.bb                  |    2 +-
+>  2 files changed, 26 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/binutils/binutils-2.18/binutils-x86_64_i386_biarch.patch
 > 
-> diff --git a/recipes/gcc/files/gcc-multilib64dir.patch b/recipes/gcc/files/gcc-multilib64dir.patch
+> diff --git a/recipes/binutils/binutils-2.18/binutils-x86_64_i386_biarch.patch b/recipes/binutils/binutils-2.18/binutils-x86_64_i386_biarch.patch
 > new file mode 100644
-> index 0000000..301e596
+> index 0000000..b79a76a
 > --- /dev/null
-> +++ b/recipes/gcc/files/gcc-multilib64dir.patch
-> @@ -0,0 +1,43 @@
-> +#! /bin/sh -e
-> +
-> +# DP: Use lib instead of lib64 as multilibdir on amd64 and ppc64.
+> +++ b/recipes/binutils/binutils-2.18/binutils-x86_64_i386_biarch.patch
+> @@ -0,0 +1,25 @@
+> +#!/bin/sh -e
+> +## 127_x86_64_i386_biarch.dpatch
+> +##
+> +## DP: Description: Add (/usr)/lib32 to the search paths on x86_64.
+> +## DP: Author: Aurelien Jarno <aurel32.debian.org>
+> +## DP: Upstream status: Debian specific
 > +#
-> +# Taken from Debian, fixed to apply with quilt
+> +# Hacked to apply with quilt
 > +
-> +Index: gcc/config/i386/t-linux64
-> +===================================================================
-> +--- gcc/config/i386/t-linux64	(revision 130706)
-> ++++ gcc/config/i386/t-linux64	(working copy)
-> +@@ -13,7 +13,7 @@
-> + 
-> + MULTILIB_OPTIONS = m64/m32
-> + MULTILIB_DIRNAMES = 64 32 
-> +-MULTILIB_OSDIRNAMES = ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
-> ++MULTILIB_OSDIRNAMES = ../lib $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
-> + 
-> + LIBGCC = stmp-multilib
-> + INSTALL_LIBGCC = install-multilib
-> +Index: gcc/config/rs6000/t-linux64
-> +===================================================================
-> +--- gcc/config/rs6000/t-linux64	(revision 130706)
-> ++++ gcc/config/rs6000/t-linux64	(working copy)
-> +@@ -14,13 +14,13 @@
-> + # it doesn't tell anything about the 32bit libraries on those systems.  Set
-> + # MULTILIB_OSDIRNAMES according to what is found on the target.
-> + 
-> +-MULTILIB_OPTIONS        = m64/m32 msoft-float
-> +-MULTILIB_DIRNAMES       = 64 32 nof
-> ++MULTILIB_OPTIONS        = m64/m32
-> ++MULTILIB_DIRNAMES       = 64 32
-> + MULTILIB_EXTRA_OPTS     = fPIC mstrict-align
-> +-MULTILIB_EXCEPTIONS     = m64/msoft-float
-> +-MULTILIB_EXCLUSIONS     = m64/!m32/msoft-float
-> +-MULTILIB_OSDIRNAMES	= ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib) nof
-> +-MULTILIB_MATCHES        = $(MULTILIB_MATCHES_FLOAT)
-> ++MULTILIB_EXCEPTIONS     =
-> ++MULTILIB_EXCLUSIONS     =
-> ++MULTILIB_OSDIRNAMES	= ../lib $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
-> ++MULTILIB_MATCHES        =
-> + 
-> + softfp_wrap_start := '\#ifndef __powerpc64__'
-> + softfp_wrap_end := '\#endif'
-> diff --git a/recipes/gcc/gcc-4.2.4.inc b/recipes/gcc/gcc-4.2.4.inc
-> index 085f241..20bdfef 100644
-> --- a/recipes/gcc/gcc-4.2.4.inc
-> +++ b/recipes/gcc/gcc-4.2.4.inc
-> @@ -37,6 +37,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->  	file://gcc-4.0.2-e300c2c3.patch;patch=1 \
->  	file://fortran-static-linking.patch;patch=1 \
->  	file://intermask-bigendian.patch;patch=1 \
-> +	file://gcc-multilib64dir.patch;patch=1;pnum=0 \
->  "
+> +--- binutils/ld/emulparams/elf_i386.sh
+> ++++ binutils/ld/emulparams/elf_i386.sh
+> +@@ -12,3 +12,13 @@
+> + GENERATE_PIE_SCRIPT=yes
+> + NO_SMALL_DATA=yes
+> + SEPARATE_GOTPLT=12
+> ++
+> ++# Linux modify the default library search path to first include
+> ++# a 32-bit specific directory.
+> ++case "$target" in
+> ++  x86_64*-linux* | i[3-7]86*-linux* | x86_64*-kfreebsd*-gnu | i[3-7]86*-kfreebsd*-gnu)
+> ++    case "$EMULATION_NAME" in
+> ++      *i386*) LIBPATH_SUFFIX=32 ;;
+> ++    esac
+> ++    ;;
+> ++esac
+> diff --git a/recipes/binutils/binutils_2.18.bb b/recipes/binutils/binutils_2.18.bb
+> index 9367196..562c8ba 100644
+> --- a/recipes/binutils/binutils_2.18.bb
+> +++ b/recipes/binutils/binutils_2.18.bb
+> @@ -12,8 +12,8 @@ SRC_URI = "\
+>       file://binutils-uclibc-300-006_better_file_error.patch;patch=1 \
+>       file://binutils-uclibc-300-012_check_ldrunpath_length.patch;patch=1 \
+>       file://binutils-uclibc-gas-needs-libm.patch;patch=1 \
+> +     file://binutils-x86_64_i386_biarch.patch;patch=1 \
+>       "
 >  
->  SRC_URI_append_ep93xx = " \
+>  # powerpc patches
+>  SRC_URI += "file://binutils-2.16.1-e300c2c3.patch;patch=1"
+> -
 
 
-which multilib are you chosing as default? if it is 64 bit then the
-patch is ok.
+Looks ok. Could you also make this on later versions of toolchains.
+I am not worried about the older ones.
 
 > -- 
 > 1.6.2.1
