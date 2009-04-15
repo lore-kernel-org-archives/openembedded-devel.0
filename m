@@ -1,24 +1,20 @@
 Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Lu4PX-0008Gf-Fq
-	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 14:40:46 +0200
+	(envelope-from <khimov@altell.ru>) id 1Lu4PX-0008Gc-BJ
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 14:40:32 +0200
 Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id D7E2D683D1;
+	by mail.altell.local (Postfix) with ESMTP id A85AF683CD;
 	Wed, 15 Apr 2009 16:36:00 +0400 (MSD)
 From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@openembedded.org
-Date: Wed, 15 Apr 2009 16:35:57 +0400
-Message-Id: <1239798960-3586-8-git-send-email-khimov@altell.ru>
+Date: Wed, 15 Apr 2009 16:35:53 +0400
+Message-Id: <1239798960-3586-4-git-send-email-khimov@altell.ru>
 X-Mailer: git-send-email 1.6.2.1
-In-Reply-To: <1239798960-3586-7-git-send-email-khimov@altell.ru>
+In-Reply-To: <1239798960-3586-3-git-send-email-khimov@altell.ru>
 References: <200904151633.49146.khimov@altell.ru>
 	<1239798960-3586-1-git-send-email-khimov@altell.ru>
 	<1239798960-3586-2-git-send-email-khimov@altell.ru>
 	<1239798960-3586-3-git-send-email-khimov@altell.ru>
-	<1239798960-3586-4-git-send-email-khimov@altell.ru>
-	<1239798960-3586-5-git-send-email-khimov@altell.ru>
-	<1239798960-3586-6-git-send-email-khimov@altell.ru>
-	<1239798960-3586-7-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
 X-Altell-MailScanner: Found to be clean
 X-Altell-MailScanner-From: khimov@altell.ru
@@ -26,11 +22,11 @@ X-SA-Exim-Connect-IP: 80.246.246.162
 X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
 	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 08/11] glibc: move get_glibc_fpu_setting to glibc.inc
+Subject: [PATCH 04/11] gcc 4.2.4: add gcc-multilib64dir.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,42 +43,72 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 X-List-Received-Date: Wed, 15 Apr 2009 12:40:54 -0000
 
 ---
- recipes/glibc/glibc-package.bbclass |    5 -----
- recipes/glibc/glibc.inc             |    5 +++++
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ recipes/gcc/files/gcc-multilib64dir.patch |   43 +++++++++++++++++++++++++++++
+ recipes/gcc/gcc-4.2.4.inc                 |    1 +
+ 2 files changed, 44 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/gcc/files/gcc-multilib64dir.patch
 
-diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
-index 89fbd1c..1690a30 100644
---- a/recipes/glibc/glibc-package.bbclass
-+++ b/recipes/glibc/glibc-package.bbclass
-@@ -58,11 +58,6 @@ DESCRIPTION_ldd = "glibc: print shared library dependencies"
- DESCRIPTION_localedef = "glibc: compile locale definition files"
- DESCRIPTION_glibc-utils = "glibc: misc utilities like iconf, local, gencat, tzselect, rpcinfo, ..."
- 
--def get_glibc_fpu_setting(bb, d):
--    if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
--        return "--without-fp"
--    return ""
--
- EXTRA_OECONF += "${@get_glibc_fpu_setting(bb, d)}"
- 
- OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
-diff --git a/recipes/glibc/glibc.inc b/recipes/glibc/glibc.inc
-index c2ee531..1bdd62b 100644
---- a/recipes/glibc/glibc.inc
-+++ b/recipes/glibc/glibc.inc
-@@ -17,6 +17,11 @@ LEAD_SONAME = "libc.so"
- GLIBC_EXTRA_OECONF ?= ""
- INHIBIT_DEFAULT_DEPS = "1"
- 
-+def get_glibc_fpu_setting(bb, d):
-+	if bb.data.getVar('TARGET_FPU', d, 1) in [ 'soft' ]:
-+		return "--without-fp"
-+	return ""
+diff --git a/recipes/gcc/files/gcc-multilib64dir.patch b/recipes/gcc/files/gcc-multilib64dir.patch
+new file mode 100644
+index 0000000..301e596
+--- /dev/null
++++ b/recipes/gcc/files/gcc-multilib64dir.patch
+@@ -0,0 +1,43 @@
++#! /bin/sh -e
 +
- ARM_INSTRUCTION_SET = "arm"
++# DP: Use lib instead of lib64 as multilibdir on amd64 and ppc64.
++#
++# Taken from Debian, fixed to apply with quilt
++
++Index: gcc/config/i386/t-linux64
++===================================================================
++--- gcc/config/i386/t-linux64	(revision 130706)
+++++ gcc/config/i386/t-linux64	(working copy)
++@@ -13,7 +13,7 @@
++ 
++ MULTILIB_OPTIONS = m64/m32
++ MULTILIB_DIRNAMES = 64 32 
++-MULTILIB_OSDIRNAMES = ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
+++MULTILIB_OSDIRNAMES = ../lib $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
++ 
++ LIBGCC = stmp-multilib
++ INSTALL_LIBGCC = install-multilib
++Index: gcc/config/rs6000/t-linux64
++===================================================================
++--- gcc/config/rs6000/t-linux64	(revision 130706)
+++++ gcc/config/rs6000/t-linux64	(working copy)
++@@ -14,13 +14,13 @@
++ # it doesn't tell anything about the 32bit libraries on those systems.  Set
++ # MULTILIB_OSDIRNAMES according to what is found on the target.
++ 
++-MULTILIB_OPTIONS        = m64/m32 msoft-float
++-MULTILIB_DIRNAMES       = 64 32 nof
+++MULTILIB_OPTIONS        = m64/m32
+++MULTILIB_DIRNAMES       = 64 32
++ MULTILIB_EXTRA_OPTS     = fPIC mstrict-align
++-MULTILIB_EXCEPTIONS     = m64/msoft-float
++-MULTILIB_EXCLUSIONS     = m64/!m32/msoft-float
++-MULTILIB_OSDIRNAMES	= ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib) nof
++-MULTILIB_MATCHES        = $(MULTILIB_MATCHES_FLOAT)
+++MULTILIB_EXCEPTIONS     =
+++MULTILIB_EXCLUSIONS     =
+++MULTILIB_OSDIRNAMES	= ../lib $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)
+++MULTILIB_MATCHES        =
++ 
++ softfp_wrap_start := '\#ifndef __powerpc64__'
++ softfp_wrap_end := '\#endif'
+diff --git a/recipes/gcc/gcc-4.2.4.inc b/recipes/gcc/gcc-4.2.4.inc
+index 085f241..20bdfef 100644
+--- a/recipes/gcc/gcc-4.2.4.inc
++++ b/recipes/gcc/gcc-4.2.4.inc
+@@ -37,6 +37,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
+ 	file://gcc-4.0.2-e300c2c3.patch;patch=1 \
+ 	file://fortran-static-linking.patch;patch=1 \
+ 	file://intermask-bigendian.patch;patch=1 \
++	file://gcc-multilib64dir.patch;patch=1;pnum=0 \
+ "
  
- PACKAGES = "glibc catchsegv sln nscd ldd localedef glibc-utils glibc-dev glibc-doc glibc-locale libsegfault glibc-extra-nss glibc-thread-db glibc-pcprofile"
+ SRC_URI_append_ep93xx = " \
 -- 
 1.6.2.1
 
