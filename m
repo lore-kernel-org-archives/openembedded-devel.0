@@ -1,28 +1,37 @@
-Received: from [83.222.19.8] (helo=mail.asoft.ru)
+Received: from [209.85.132.250] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1Lu2Su-0003nD-Ik
-	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 12:35:38 +0200
-Received: from localhost.localdomain ([62.205.175.245]) (authenticated bits=0)
-	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n3FAVo7a026574
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Apr 2009 14:31:50 +0400
-From: Dmitry Artamonow <mad_soft@inbox.ru>
-To: openembedded-devel@openembedded.org
-Date: Wed, 15 Apr 2009 14:31:50 +0400
-Message-Id: <1239791510-14596-1-git-send-email-mad_soft@inbox.ru>
-X-Mailer: git-send-email 1.6.0.6
-X-Greylist: Sender succeeded SMTP AUTH authentication, not delayed by
-	milter-greylist-2.0.2 (mail.asoft.ru [0.0.0.0]);
-	Wed, 15 Apr 2009 14:31:50 +0400 (MSD)
-X-SA-Exim-Connect-IP: 83.222.19.8
-X-SA-Exim-Mail-From: mad_soft@inbox.ru
+	(envelope-from <dp@xora.org.uk>) id 1Lu2Xy-0003wC-VP
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Apr 2009 12:40:53 +0200
+Received: by an-out-0708.google.com with SMTP id b2so5414100ana.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Apr 2009 03:37:04 -0700 (PDT)
+Received: by 10.100.252.18 with SMTP id z18mr65246anh.111.1239791824210;
+	Wed, 15 Apr 2009 03:37:04 -0700 (PDT)
+Received: from xora-eee.xora-domain (93-97-174-2.zone5.bethere.co.uk
+	[93.97.174.2])
+	by mx.google.com with ESMTPS id c29sm2679788anc.10.2009.04.15.03.37.02
+	(version=SSLv3 cipher=RC4-MD5); Wed, 15 Apr 2009 03:37:03 -0700 (PDT)
+Message-ID: <49E5B8C2.2020709@xora.org.uk>
+Date: Wed, 15 Apr 2009 11:36:50 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1b3pre) Gecko/20090324 Fedora/3.0-2.1.beta2.fc11
+	Thunderbird/3.0b2
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1239788125.3467.8.camel@x60.spackhandychoptubes.co.uk>
+	<gs4al7$76r$1@ger.gmane.org>
+In-Reply-To: <gs4al7$76r$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 209.85.132.250
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_SOFTFAIL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] glista: new recipe
+Subject: Re: kexec-tools-static build failue for zaurus collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,55 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 10:35:38 -0000
+X-List-Received-Date: Wed, 15 Apr 2009 10:40:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add new recipe for glista (v0.4) - a simple personal to-do list manager,
-written using GTK+ widget set. It can be used as an alternative to gpe-todo.
+On 04/15/2009 10:50 AM, Koen Kooi wrote:
+> On 15-04-09 11:35, Chris Sykes wrote:
+>> Hi,
+>>
+>> I'm currently failing in my attempts to get OE built for my Zaurus
+>> collie.  I'm using an up-to-date git checkout on the stable 2009 branch.
+>>
+>> OE Build Configuration:
+>> BB_VERSION        = "1.8.12"
+>> METADATA_BRANCH   = "stable2009"
+>> METADATA_REVISION = "272ae318b03bcd062f8b43258ce54a2cd96b9f45"
+>> TARGET_ARCH       = "arm"
+>> TARGET_OS         = "linux"
+>> MACHINE           = "collie"
+>> DISTRO            = "angstrom"
+>> DISTRO_VERSION    = "2009.X-test-20090415"
+>> TARGET_FPU        = "soft"
+>>
+>> Interestingly (or perhaps not), the kexec-tools build seems to go just
+>> fine, it's just kexec-tools-static that has a problem.
+>>
+>> It seems to be an include path problem as 'mach/memory.h' is not found.
+>
+> Looks like kexectools-static doesn't account for the big arm header 
+> move in the kernel yet.
+>
+Its actually klibc which is broken, this was discussed a couple of weeks 
+ago.
 
-Closes OE bug #4525
-
-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
----
- conf/checksums.ini           |    4 ++++
- recipes/glista/glista_0.4.bb |   10 ++++++++++
- 2 files changed, 14 insertions(+), 0 deletions(-)
- create mode 100644 recipes/glista/glista_0.4.bb
-
-Build and run tested on hx4700.
-
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 6518eb5..3032b0f 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -7718,6 +7718,10 @@ sha256=7ff592b6687caefa367b33d8cb8f66f3c0273fa86d4b688c0758d0d9fee7a2cb
- md5=78fe56143bab9a7df232fa15e35a54a6
- sha256=972da0f1c35df459b99b24f5bbed5ddec150b714540e2254b6b37035117167ed
- 
-+[http://glista.googlecode.com/files/glista-0.4.tar.gz]
-+md5=db4afe3ba157232a6debe58885c693e6
-+sha256=39289c0fc3efd3b003730212201ce7d8a56b06fcf080188ecc76d4ad9375c807
-+
- [http://camaya.net/download/gloox-0.8.1.tar.bz2]
- md5=9054d072f5972d5e567c428531734ad5
- sha256=7f836c8189b55ef4ec8f3387673687d0a5c1a713abc9617144638b28e6857bd2
-diff --git a/recipes/glista/glista_0.4.bb b/recipes/glista/glista_0.4.bb
-new file mode 100644
-index 0000000..c80a1f8
---- /dev/null
-+++ b/recipes/glista/glista_0.4.bb
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "Glista is very simple personal to-do list manager"
-+AUTHOR = "Shahar Evron <shahar@prematureoptimization.org>"
-+HOMEPAGE = "http://prematureoptimization.org/glista/"
-+SECTION = "x11/applications"
-+PRIORITY = "optional"
-+LICENSE = "GPLv3"
-+DEPENDS = "gtk+ (>=2.12.0) libxml2"
-+SRC_URI = "http://glista.googlecode.com/files/glista-${PV}.tar.gz"
-+
-+inherit autotools pkgconfig
--- 
-1.6.0.6
+Graeme
 
 
 
