@@ -1,42 +1,27 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Lu7eL-0003Dl-3O
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 18:07:48 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 9D7C51409731
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2009 18:05:39 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QcRuQLyFL7Sx
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2009 18:05:39 +0200 (CEST)
-Received: from [10.20.1.86] (unknown [82.119.242.94])
-	by ns.penguin.cz (Postfix) with ESMTP id 7D7C71416BA2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2009 18:05:39 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200904151855.34947.khimov@altell.ru>
-References: <200904151633.49146.khimov@altell.ru>
-	<200904151752.13116.khimov@altell.ru>
-	<1239805434.21612.128.camel@hammer.suse.cz>
-	<200904151855.34947.khimov@altell.ru>
-Date: Wed, 15 Apr 2009 18:03:54 +0200
-Message-Id: <1239811434.21612.153.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+	(envelope-from <dhuggins@cs.cmu.edu>) id 1Lu8AW-0000hd-Fz
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 18:41:04 +0200
+Received: from [10.0.1.5] ([71.182.247.84]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KI500981I5X5OQQ@vms173005.mailsrvcs.net> for
+	openembedded-devel@openembedded.org;
+	Wed, 15 Apr 2009 11:37:10 -0500 (CDT)
+Message-id: <49E60CD2.2080806@cs.cmu.edu>
+Date: Wed, 15 Apr 2009 12:35:30 -0400
+From: David Huggins-Daines <dhuggins@cs.cmu.edu>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+MIME-version: 1.0
+To: openembedded-devel@openembedded.org
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: dhuggins@cs.cmu.edu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Level: **
+X-Spam-Status: No, score=2.2 required=5.0 tests=BAYES_50, FM_FAKE_HELO_VERIZON,
+	RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] AMD64 and multilib support
+Subject: Canadian Cross building broken due to PN in pkginfo files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,46 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 16:07:48 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Apr 2009 16:41:04 -0000
+Content-type: text/plain; charset=ISO-8859-1
+Content-transfer-encoding: 7bit
 
-Roman I Khimov wrote:
+This issue:
 
-> Which would require some management for multiple build trees
+http://thread.gmane.org/gmane.comp.handhelds.openembedded/22376/focus=22556
 
-It is not a problem, just build in another directory and your OE build
-trees will be completely independent. You should be even share the same
-tree environment with different config files. The only situation when OE
-will fail would be (host_triplet =3D=3D build_triplet), because staging a=
-nd
-build root will go into the same directory. It needs fix in OE.
+also seems to affect building gcc-canadian-sdk - it leads to a "lockfile
+path does not exist!" error where it's trying to create a lockfile in
+the work directory for gcc-4.2.4-r3.
 
-> and then some=20
-> cross-build-trees dependency things.
+The problem happens here, in read_subpackage_metadata():
 
-Do you really need it? The whole openSUSE project is a bi-arch, but it
-can live without cross-build trees. Baselibs utility operates on final
-binary packages. Only compiler for build system compiler you may want to
-provide 32-bit target support.
+        for pkg in bb.data.getVar('PACKAGES', d, 1).split():
+                sdata = read_subpkgdata(pkg, d)
+                for key in sdata.keys():
+                        bb.data.setVar(key, sdata[key], d)
 
-> Certainly possible, but not sure any=20
-> easier. Or am I missing something?
+The problem is that ${PN} is defined in the subpackage's pkginfo file,
+so it overwrites the definition from the main package.  The last
+subpackage defines PN="gcc", so that's where the packaging stage tries
+to put the lockfile.
 
-If you are trying to build x86_64 compiler for i586 target on an
-arbitrary host, then you may recycle generic support for canadian
-toolchain, that was added few months ago (well I did not tried it yet).
+The original fix suggested in that thread seems to work well:
 
---=20
-Best Regards / S pozdravem,
+git revert -n 1af5030de05a1e65d1de734f7675ffc22c8318fc
 
-Stanislav Brabec
-software developer
----------------------------------------------------------------------
-SUSE LINUX, s. r. o.                          e-mail: sbrabec@suse.cz
-Lihovarsk=E1 1060/12           tel: +420 284 028 966, +49 911 740538747
-190 00 Praha 9                                  fax: +420 284 028 951
-Czech Republic                                    http://www.suse.cz/
 
+I'm not sure what other packages or tasks this change might be affecting.
 
 
