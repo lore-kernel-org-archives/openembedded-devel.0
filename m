@@ -1,34 +1,32 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [83.222.19.8] (helo=mail.asoft.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LuAyh-000310-TF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 21:41:01 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.hex)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LuAuz-0002cH-KI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 23:37:09 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Apr 2009 23:37:07 +0400
-User-Agent: KMail/1.9.9
-References: <200904151633.49146.khimov@altell.ru>
-	<1239798960-3586-8-git-send-email-khimov@altell.ru>
-	<20090415192845.GD29623@gmail.com>
-In-Reply-To: <20090415192845.GD29623@gmail.com>
+	(envelope-from <mad@mail.asoft.ru>) id 1LuCAk-0001Bp-IA
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 22:57:32 +0200
+Received: from localhost ([95.72.100.66]) (authenticated bits=0)
+	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n3FKraJE017733
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Apr 2009 00:53:38 +0400
+Date: Thu, 16 Apr 2009 00:53:36 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090415205336.GB17954@rainbow>
+References: <1239791510-14596-1-git-send-email-mad_soft@inbox.ru>
+	<gs4euu$jbv$2@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200904152337.07252.khimov@altell.ru>
-X-SA-Exim-Connect-IP: 83.222.23.61
-X-SA-Exim-Mail-From: khimov@altell.ru
+In-Reply-To: <gs4euu$jbv$2@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-Greylist: Sender succeeded SMTP AUTH authentication, not delayed by
+	milter-greylist-2.0.2 (mail.asoft.ru [0.0.0.0]);
+	Thu, 16 Apr 2009 00:53:39 +0400 (MSD)
+X-SA-Exim-Connect-IP: 83.222.19.8
+X-SA-Exim-Mail-From: mad@mail.asoft.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
-	SPF_SOFTFAIL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 08/11] glibc: move get_glibc_fpu_setting to	glibc.inc
+Subject: Re: [PATCH] glista: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 19:41:01 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Apr 2009 20:57:32 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wednesday 15 April 2009 23:28:45 Khem Raj wrote:
-> On (15/04/09 16:35), Roman I Khimov wrote:
-> > ---
-> >  recipes/glibc/glibc-package.bbclass |    5 -----
-> >  recipes/glibc/glibc.inc             |    5 +++++
-> >  2 files changed, 5 insertions(+), 5 deletions(-)
+On 13:03 Wed 15 Apr     , Koen Kooi wrote:
+> On 15-04-09 12:31, Dmitry Artamonow wrote:
 >
-> why is this patch required. 
+>> +inherit autotools pkgconfig
+>
+> inheriting pkgconfig should be done:
+>
+> 1) it's for staging .pc files
+> 2) if you *do* want to stage .pc files use AUTOTOOLS_STAGE_PKGCONFIG = "1" 
+> instead
+Thanks for explaining. There's no .pc files in glista, so dropping
+'inherit pkgconfig' should be enough.
+Updated patch follows.
 
-It is required for glibc-multilib as glibc-multilib includes 
-glibc-package-multilib and not glibc-package, it got a bit out of order, 
-maybe need to squash it with glibc-multilib addition.
+-- 
+Best regards,
+Dmitry "MAD" Artamonow
 
-> Can you also do multilib stuff for eglibc too
-
-Well, let's handle glibc first and settle on overall multilib approach. :) 
-Then adding eglibc and uclibc will be routine.
 
 
