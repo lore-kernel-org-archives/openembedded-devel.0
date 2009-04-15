@@ -1,28 +1,42 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Lu0fs-0007cH-Gj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Apr 2009 10:40:55 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 58E4B683CA;
-	Wed, 15 Apr 2009 12:36:56 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Apr 2009 12:36:55 +0400
-Message-Id: <1239784615-19928-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.1
-MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lu16M-00084q-PN
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 11:08:19 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lu12h-0003gf-Gi
+	for openembedded-devel@openembedded.org; Wed, 15 Apr 2009 09:04:27 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 15 Apr 2009 09:04:27 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 15 Apr 2009 09:04:27 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 15 Apr 2009 11:04:15 +0200
+Message-ID: <gs47uf$uv2$1@ger.gmane.org>
+References: <1239784615-19928-1-git-send-email-khimov@altell.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090407 Shredder/3.0b3pre
+In-Reply-To: <1239784615-19928-1-git-send-email-khimov@altell.ru>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libpcap: weaken bluez-libs dependency
+Subject: Re: [PATCH] libpcap: weaken bluez-libs dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,40 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2009 08:40:55 -0000
+X-List-Received-Date: Wed, 15 Apr 2009 09:08:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-libpcap can be used in distros where no bluetooth support will ever
-exist. So this dependency should be weakened to only exist in distros
-that explicitly need bluetooth.
----
- recipes/libpcap/libpcap.inc |    6 +++++-
- 1 files changed, 5 insertions(+), 1 deletions(-)
+On 15-04-09 10:36, Roman I Khimov wrote:
+> libpcap can be used in distros where no bluetooth support will ever
+> exist. So this dependency should be weakened to only exist in distros
+> that explicitly need bluetooth.
 
-diff --git a/recipes/libpcap/libpcap.inc b/recipes/libpcap/libpcap.inc
-index 4468a4b..81bf826 100644
---- a/recipes/libpcap/libpcap.inc
-+++ b/recipes/libpcap/libpcap.inc
-@@ -2,7 +2,11 @@ DESCRIPTION = "Network Packet Capture Library"
- HOMEPAGE = "http://www.tcpdump.org/"
- SECTION = "libs/network"
- LICENSE = "BSD"
--DEPENDS = "bluez-libs flex-native bison-native"
-+DEPENDS = " \
-+	${@base_contains("COMBINED_FEATURES", "bluetooth", "bluez-libs", "", d)} \
-+	flex-native \
-+	bison-native \
-+	"
- 
- PR = "r1"
- 
--- 
-1.6.2.1
+NACK, no USE flags in OE. If you want a pcap without bluez you can 
+either do:
 
+libpcap.bb + libpcap-bluetooth.bb OR libpcap.bb + libpcap-no-bluetooth.bb
 
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
+And add the needed virtuals.
+
+Oh, and with 'distros' you mean 'images'.
+
+regards,
+
+Koen
 
 
 
