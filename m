@@ -1,35 +1,45 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [209.85.200.172] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LuKDZ-0000N8-OA
+	(envelope-from <raj.khem@gmail.com>) id 1LuLQr-0000Ef-TU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Apr 2009 07:33:38 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.hex)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LuK9o-00059v-0Y
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Apr 2009 09:29:04 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Thu, 16 Apr 2009 08:50:51 +0200
+Received: by wf-out-1314.google.com with SMTP id 25so264564wfa.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Apr 2009 23:46:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:mime-version:content-type:content-transfer-encoding
+	:message-id; bh=NIqZLgek/1X4LjjoH4dYsfi16lAGw+7gvknlH5rQfFQ=;
+	b=CeekHldGXfqmc0ly3Nzd5lfxftaoI8ktd8idpfRo0mruocnsd5G9UN0KsQRXdPYvXL
+	CvRg+u9KLUlGyNT2/KPGcPGTpdIgu+N9orS+2aIIXEbkSsoZMfNDSjkVxBm0aBrUL2FG
+	VXMBBCav+74I13JwSHX3115HweJXUR8mR6FDc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	b=iD8scyQ/VgBrggtRJG/TarzY/UsRthmbSyMED5IiE07VRgksVxEU8DLilgyeGC6/3V
+	ppQPFN3J14N4ytmYpz98nHyiLyvfwRbdab+p4sYNtX4ca5T1VcxeYWc7N1tF2XsEBqpm
+	K7R7slIhC6QqfqmpCCpySjwm5epXMEEnojofw=
+Received: by 10.143.8.17 with SMTP id l17mr1708852wfi.173.1239864413710;
+	Wed, 15 Apr 2009 23:46:53 -0700 (PDT)
+Received: from morpheus.localnet (adsl-71-146-24-121.dsl.pltn13.sbcglobal.net
+	[71.146.24.121])
+	by mx.google.com with ESMTPS id 30sm2770250wff.27.2009.04.15.23.46.52
+	(version=SSLv3 cipher=RC4-MD5); Wed, 15 Apr 2009 23:46:52 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Apr 2009 09:28:57 +0400
-User-Agent: KMail/1.9.9
-References: <200904151633.49146.khimov@altell.ru>
-	<1239798960-3586-2-git-send-email-khimov@altell.ru>
-	<20090415192512.GC29623@gmail.com>
-In-Reply-To: <20090415192512.GC29623@gmail.com>
+Date: Wed, 15 Apr 2009 23:46:45 -0700
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
 MIME-Version: 1.0
-Message-Id: <200904160928.57879.khimov@altell.ru>
-X-SA-Exim-Connect-IP: 83.222.23.61
-X-SA-Exim-Mail-From: khimov@altell.ru
+Message-Id: <200904152346.51072.raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.200.172
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=5.0 tests=AWL,BAYES_20,
-	RCVD_IN_BL_SPAMCOP_NET, RDNS_NONE,
-	SPF_SOFTFAIL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 02/11] binutils: add	binutils-x86_64_i386_biarch.patch
+Subject: uclibc/thumb toolchain versions to use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,135 +53,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 05:33:40 -0000
-X-Groupsio-MsgNum: 9419
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_ZIs5Jyx838d2gh3"
-
---Boundary-00=_ZIs5Jyx838d2gh3
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 16 Apr 2009 06:50:55 -0000
+X-Groupsio-MsgNum: 9420
+Content-Type: multipart/signed; boundary="nextPart1416647.lJzFtcUAaA";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
+
+--nextPart1416647.lJzFtcUAaA
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Wednesday 15 April 2009 23:25:12 Khem Raj wrote:
-> On (15/04/09 16:35), Roman I Khimov wrote:
-> > ---
-> >  .../binutils-x86_64_i386_biarch.patch              |   25
-> > ++++++++++++++++++++ recipes/binutils/binutils_2.18.bb                  |
-> >    2 +-
-> >  2 files changed, 26 insertions(+), 1 deletions(-)
-> >  create mode 100644
-> > recipes/binutils/binutils-2.18/binutils-x86_64_i386_biarch.patch
->
-> Looks ok. Could you also make this on later versions of toolchains.
-> I am not worried about the older ones.
+Hi
 
-Works good with 2.19 and 2.19.1, but not 2.18.50.0.7. Not sure it makes sense 
-to adapt it there and add more patch versions to tree. See attached.
+Recently, after switching to thumb mode for some on architectures. I tried =
+to enable thumb for uclibc recipe itself too.
+Unfortunately it does not work with all versions of gcc and binutils we have
 
---Boundary-00=_ZIs5Jyx838d2gh3
-Content-Type: text/x-diff;
-  charset="iso 8859-1";
-  name="0002-binutils-add-binutils-x86_64_i386_biarch.patch.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="0002-binutils-add-binutils-x86_64_i386_biarch.patch.patch"
+The version combos that work are
 
-=46rom 9aec05acf54fede5890297665bf98995f04eba2d Mon Sep 17 00:00:00 2001
-=46rom: Roman I Khimov <khimov@altell.ru>
-Date: Wed, 15 Apr 2009 15:48:22 +0400
-Subject: [PATCH 02/11] binutils: add binutils-x86_64_i386_biarch.patch
+gcc 4.3.x + binutils 2.18
+gcc-4.3.x + binutils_cvs
 
-Adds 'lib32' directories to binutils search paths on x86_64.
-=2D--
- recipes/binutils/binutils_2.18.bb                  |    2 +-
- recipes/binutils/binutils_2.19.1.bb                |    1 +
- recipes/binutils/binutils_2.19.bb                  |    1 +
- .../files/binutils-x86_64_i386_biarch.patch        |   25 ++++++++++++++++=
-++++
- 4 files changed, 28 insertions(+), 1 deletions(-)
- create mode 100644 recipes/binutils/files/binutils-x86_64_i386_biarch.patch
+2.19x does not work and also 2.18.50.x.x does not work because of improper =
+thumb to thumb veneer handling by linker
+gcc 4.2.4 does not work because ldso.c we relaxed optimization level which =
+causes a gcc ICE
 
-diff --git a/recipes/binutils/binutils_2.18.bb b/recipes/binutils/binutils_=
-2.18.bb
-index 9367196..562c8ba 100644
-=2D-- a/recipes/binutils/binutils_2.18.bb
-+++ b/recipes/binutils/binutils_2.18.bb
-@@ -12,8 +12,8 @@ SRC_URI =3D "\
-      file://binutils-uclibc-300-006_better_file_error.patch;patch=3D1 \
-      file://binutils-uclibc-300-012_check_ldrunpath_length.patch;patch=3D1=
- \
-      file://binutils-uclibc-gas-needs-libm.patch;patch=3D1 \
-+     file://binutils-x86_64_i386_biarch.patch;patch=3D1 \
-      "
-=20
- # powerpc patches
- SRC_URI +=3D "file://binutils-2.16.1-e300c2c3.patch;patch=3D1"
-=2D
-diff --git a/recipes/binutils/binutils_2.19.1.bb b/recipes/binutils/binutil=
-s_2.19.1.bb
-index c399ab8..1802dfb 100644
-=2D-- a/recipes/binutils/binutils_2.19.1.bb
-+++ b/recipes/binutils/binutils_2.19.1.bb
-@@ -12,6 +12,7 @@ SRC_URI =3D "\
-      file://binutils-uclibc-300-012_check_ldrunpath_length.patch;patch=3D1=
- \
-      file://binutils-uclibc-gas-needs-libm.patch;patch=3D1 \
-      file://binutils-arm-pr7093.patch;patch=3D1 \
-+     file://binutils-x86_64_i386_biarch.patch;patch=3D1 \
-      "
-=20
- # powerpc patches
-diff --git a/recipes/binutils/binutils_2.19.bb b/recipes/binutils/binutils_=
-2.19.bb
-index aee5840..782d5c7 100644
-=2D-- a/recipes/binutils/binutils_2.19.bb
-+++ b/recipes/binutils/binutils_2.19.bb
-@@ -12,6 +12,7 @@ SRC_URI =3D "\
-      file://binutils-uclibc-300-012_check_ldrunpath_length.patch;patch=3D1=
- \
-      file://binutils-uclibc-gas-needs-libm.patch;patch=3D1 \
-      file://binutils-arm-pr7093.patch;patch=3D1 \
-+     file://binutils-x86_64_i386_biarch.patch;patch=3D1 \
-      "
-=20
- # powerpc patches
-diff --git a/recipes/binutils/files/binutils-x86_64_i386_biarch.patch b/rec=
-ipes/binutils/files/binutils-x86_64_i386_biarch.patch
-new file mode 100644
-index 0000000..b79a76a
-=2D-- /dev/null
-+++ b/recipes/binutils/files/binutils-x86_64_i386_biarch.patch
-@@ -0,0 +1,25 @@
-+#!/bin/sh -e
-+## 127_x86_64_i386_biarch.dpatch
-+##
-+## DP: Description: Add (/usr)/lib32 to the search paths on x86_64.
-+## DP: Author: Aurelien Jarno <aurel32.debian.org>
-+## DP: Upstream status: Debian specific
-+#
-+# Hacked to apply with quilt
-+
-+--- binutils/ld/emulparams/elf_i386.sh
-++++ binutils/ld/emulparams/elf_i386.sh
-+@@ -12,3 +12,13 @@
-+ GENERATE_PIE_SCRIPT=3Dyes
-+ NO_SMALL_DATA=3Dyes
-+ SEPARATE_GOTPLT=3D12
-++
-++# Linux modify the default library search path to first include
-++# a 32-bit specific directory.
-++case "$target" in
-++  x86_64*-linux* | i[3-7]86*-linux* | x86_64*-kfreebsd*-gnu | i[3-7]86*-k=
-freebsd*-gnu)
-++    case "$EMULATION_NAME" in
-++      *i386*) LIBPATH_SUFFIX=3D32 ;;
-++    esac
-++    ;;
-++esac
+default gcc for angstrom is 4.2.4 and binutils 2.18.50.0.7 and unfortunatel=
+y this combo will not work for uclibc thumb
+
+Either we can think of bumping default gcc to 4.3.x and downgrade default b=
+inutils to 2.18 or let uclibc compile in arm mode even though everything el=
+se is in thumb mode.
+
+Thanks
+
 =2D-=20
-1.6.2.1
+Khem Raj
 
+--nextPart1416647.lJzFtcUAaA
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
---Boundary-00=_ZIs5Jyx838d2gh3--
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAknm1FcACgkQHnJKy6V6em6aWgCffHPFQvvCB8WAVgpS/6kb9rN9
+PRMAn2Z6GN3gs4GmgFt7AZ//L0ExT1xv
+=fWvW
+-----END PGP SIGNATURE-----
+
+--nextPart1416647.lJzFtcUAaA--
