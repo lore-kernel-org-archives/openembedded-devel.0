@@ -1,38 +1,37 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LuVBj-0005u2-UG
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 19:15:50 +0200
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090416171152.RDHZ6112.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>;
-	Thu, 16 Apr 2009 13:11:52 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id gHBq1b00P4dMFYL03HBr4J; Thu, 16 Apr 2009 13:11:51 -0400
-X-Authority-Analysis: v=1.0 c=1 a=tid_rkRsmLIA:10 a=mbpeHvT-P2EA:10
-	a=TEVjTEG01Anbt09_RzwA:9 a=PdFsQpZHt2czLae4p5cA:7
-	a=oNZ1DyEISIDEJXk-Io6qdC6OD-0A:4
-X-CM-Score: 0.00
-Date: Thu, 16 Apr 2009 10:11:50 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: David Huggins-Daines <dhuggins@cs.cmu.edu>
-Message-ID: <20090416171150.GI17629@smtp.west.cox.net>
-References: <1239739518-1325-1-git-send-email-dhuggins@cs.cmu.edu>
-	<20090416162942.GF17629@smtp.west.cox.net>
-	<49E76412.50807@cs.cmu.edu>
-MIME-Version: 1.0
-In-Reply-To: <49E76412.50807@cs.cmu.edu>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.44
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+	(envelope-from <utx@penguin.cz>) id 1LuVJN-0002pp-PR
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Apr 2009 19:23:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 57E2D140971A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Apr 2009 19:21:32 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id i6vCrNcmArsP
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Apr 2009 19:21:32 +0200 (CEST)
+Received: from [10.20.1.86] (unknown [82.119.242.94])
+	by ns.penguin.cz (Postfix) with ESMTP id 39D361417196
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Apr 2009 19:21:32 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Apr 2009 19:19:45 +0200
+Message-Id: <1239902385.21612.216.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=AWL,BAYES_40,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.6 required=5.0 tests=AWL,BAYES_05,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH] Supply uclibc-thread-db package expected by	task-sdk-base
+Subject: [CLASSES][PATCH] fully support ${datadir}/pkgconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,39 +45,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 17:15:50 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Apr 2009 17:23:45 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 16, 2009 at 01:00:02PM -0400, David Huggins-Daines wrote:
-> Tom Rini wrote:
-> > On Tue, Apr 14, 2009 at 04:05:18PM -0400, David Huggins-Daines wrote:
-> >
-> >   
-> >> Currently, building task-sdk-base (and by extension meta-toolchain) fails
-> >> for uclibc targets.  This is because task-sdk-base depends on the thread
-> >> debugging library uclibc-thread-db, but this is not built by the uclibc
-> >> recipe unless PTHREADS_DEBUG_SUPPORT is enabled.  In addition, once it is
-> >> built, if you are using Debian version numbers, it will be helpfully
-> >> renamed to "libthread-db1" and the build will still fail.
-> >>
-> >>     
-> As pointed out earlier on this thread (and verified - there was some
-> confusion on my part since I didn't fully clean before rebuilding), the
-> library renaming itself doesn't cause any problems.  The only actual
-> problem is the lack of PTHREADS_DEBUG_SUPPORT.
-> > That's interesting as when I pushed these changes I did test with a
-> > uclibc target too.  What DISTRO/MACHINE are you using?
-> >   
-> I have a custom distro and machine, but broadly speaking it is
-> minimal-uclibc and ep93xx...
+${datadir}/pkgconfig is a legal pkg-config directory for arch
+independent stuff. Only half of its support is done in global stuff (it
+is in PKG_CONFIG_PATH). Attached patch makes its support complete:
 
-OK, that's what I was wondering.  Khem, do we think
-PTHREADS_DEBUG_SUPPORT should get enabled globally?  If so, then we
-should go and audit all of the distro uClibc.distro files and get this
-fixed for everybody.  Thanks.
+- Adding ${datadir}/pkgconfig/*.pc to the default -dev package pattern.
+
+- AUTOTOOLS_STAGE_PKGCONFIG knows about it.
+
+Example of package fixed by this patch: iso-codes-dev
+
+Signed-off-by: Stanislav Brabec <utx@penguin.cz>
+
+
+diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+index 20f371a..e43b289 100644
+--- a/classes/autotools.bbclass
++++ b/classes/autotools.bbclass
+@@ -231,6 +231,10 @@ autotools_stage_all() {
+ 			echo "cp -f ${STAGE_TEMP}/${libdir}/pkgconfig/*.pc ${STAGING_LIBDIR}/pkgconfig/"
+ 			cp -f ${STAGE_TEMP}/${libdir}/pkgconfig/*.pc ${STAGING_LIBDIR}/pkgconfig/
+ 		fi
++		if [ -e ${STAGE_TEMP}/${datadir}/pkgconfig/ ] ; then
++			echo "cp -f ${STAGE_TEMP}/${datadir}/pkgconfig/*.pc ${STAGING_DATADIR}/pkgconfig/"
++			cp -f ${STAGE_TEMP}/${datadir}/pkgconfig/*.pc ${STAGING_DATADIR}/pkgconfig/
++		fi
+ 	fi
+ 	rm -rf ${STAGE_TEMP}/${mandir} || true
+ 	rm -rf ${STAGE_TEMP}/${infodir} || true
+diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-common-base.bbclass
+index 068eac4..cd6bdf2 100644
+--- a/classes/distutils-common-base.bbclass
++++ b/classes/distutils-common-base.bbclass
+@@ -19,6 +19,7 @@ FILES_${PN} = "${bindir}/* ${libdir}/* ${libdir}/${PYTHON_DIR}/*"
+ FILES_${PN}-dev += "\
+   ${libdir}/pkgconfig \
+   ${libdir}/${PYTHON_DIR}/site-packages/*.la \
++  ${datadir}/pkgconfig \
+ "
+ FILES_${PN}-dbg = "\
+   ${libdir}/${PYTHON_DIR}/site-packages/.debug \
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index f31e56d..2e6d38a 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -221,7 +221,7 @@ FILES_${PN}-doc = "${docdir} ${mandir} ${infodir} ${datadir}/gtk-doc \
+ SECTION_${PN}-doc = "doc"
+ 
+ FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
+-                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
++                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig ${datadir}/pkgconfig \
+                 ${base_libdir}/*.a ${base_libdir}/*.o ${datadir}/aclocal"
+ SECTION_${PN}-dev = "devel"
+ ALLOW_EMPTY_${PN}-dev = "1"
 
 -- 
-Tom Rini
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
