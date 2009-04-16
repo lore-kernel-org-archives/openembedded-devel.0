@@ -1,47 +1,35 @@
-Received: from [209.85.200.175] (helo=wf-out-1314.google.com)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1LuFRn-0000G8-IY
+	(envelope-from <khimov@altell.ru>) id 1LuKDZ-0000N8-OA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Apr 2009 02:27:25 +0200
-Received: by wf-out-1314.google.com with SMTP id 25so142320wfa.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2009 17:23:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=43/gHrzmjifbL2zgfCEZWp9Iw8uRSPigd0iRb7OQalY=;
-	b=CmY6VOJ94b6/5BH6Jl4ENCd6Qj+G9KdrS4sq5UsShCNy4IYYdtY/Y5lxDrWOaxTzQt
-	FFMuZ1Ho6ktn5w0QoOsYEXTIuSsqVbo+g8fYo1Mb3js6ZSz6mJCByUNwPS2XOcdHb6bL
-	Qn/j6L7Y1CLixQjebKAJKRd1z92IbzKdlqegY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=ID8fIV1nhugjaOtKKYdcDvD2S126pt4fmnVB8X5i3PnluAFIJT0EuCdqlOwnEuTyby
-	PgHWKmDyIpsxZaz11pgcNOUUdrxOq2LPP8EKoWitg46zdcAvvfXImpQH6QkcdRyRX87Z
-	/4b09hKb0RXCo/xG2T/N0GCKo+e0YGkNkZoiA=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.13.14 with SMTP id 14mr1301883wfm.108.1239841409240; Wed, 
-	15 Apr 2009 17:23:29 -0700 (PDT)
-In-Reply-To: <1239782395-12413-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
-References: <1239782395-12413-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
-Date: Wed, 15 Apr 2009 17:23:29 -0700
-X-Google-Sender-Auth: 9d0e307b5ac67c74
-Message-ID: <b6ebd0a50904151723pe7087adkb69e57d608e8b226@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
+	Thu, 16 Apr 2009 07:33:38 +0200
+Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.hex)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LuK9o-00059v-0Y
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Apr 2009 09:29:04 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.200.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Thu, 16 Apr 2009 09:28:57 +0400
+User-Agent: KMail/1.9.9
+References: <200904151633.49146.khimov@altell.ru>
+	<1239798960-3586-2-git-send-email-khimov@altell.ru>
+	<20090415192512.GC29623@gmail.com>
+In-Reply-To: <20090415192512.GC29623@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200904160928.57879.khimov@altell.ru>
+X-SA-Exim-Connect-IP: 83.222.23.61
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.8 required=5.0 tests=AWL,BAYES_20,
+	RCVD_IN_BL_SPAMCOP_NET, RDNS_NONE,
+	SPF_SOFTFAIL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Petri Lehtinen <petri.lehtinen@inoi.fi>
-Subject: Re: [PATCH] base.bbclass: Combine all checksum.ini files found in BBPATH
+Subject: Re: [PATCH 02/11] binutils: add	binutils-x86_64_i386_biarch.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,26 +43,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 00:27:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 16 Apr 2009 05:33:40 -0000
+X-Groupsio-MsgNum: 9419
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_ZIs5Jyx838d2gh3"
+
+--Boundary-00=_ZIs5Jyx838d2gh3
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, Apr 15, 2009 at 12:59 AM,
-<petri.lehtinen+openembedded-devel@inoi.fi> wrote:
-> From: Petri Lehtinen <petri.lehtinen@inoi.fi>
+On Wednesday 15 April 2009 23:25:12 Khem Raj wrote:
+> On (15/04/09 16:35), Roman I Khimov wrote:
+> > ---
+> >  .../binutils-x86_64_i386_biarch.patch              |   25
+> > ++++++++++++++++++++ recipes/binutils/binutils_2.18.bb                  |
+> >    2 +-
+> >  2 files changed, 26 insertions(+), 1 deletions(-)
+> >  create mode 100644
+> > recipes/binutils/binutils-2.18/binutils-x86_64_i386_biarch.patch
 >
-> This makes it possible for overlays to have checksum.ini.
->
-> Signed-off-by: Petri Lehtinen <petri.lehtinen@inoi.fi>
+> Looks ok. Could you also make this on later versions of toolchains.
+> I am not worried about the older ones.
 
-Nice feature, good to see.
--- 
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+Works good with 2.19 and 2.19.1, but not 2.18.50.0.7. Not sure it makes sense 
+to adapt it there and add more patch versions to tree. See attached.
+
+--Boundary-00=_ZIs5Jyx838d2gh3
+Content-Type: text/x-diff;
+  charset="iso 8859-1";
+  name="0002-binutils-add-binutils-x86_64_i386_biarch.patch.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="0002-binutils-add-binutils-x86_64_i386_biarch.patch.patch"
+
+=46rom 9aec05acf54fede5890297665bf98995f04eba2d Mon Sep 17 00:00:00 2001
+=46rom: Roman I Khimov <khimov@altell.ru>
+Date: Wed, 15 Apr 2009 15:48:22 +0400
+Subject: [PATCH 02/11] binutils: add binutils-x86_64_i386_biarch.patch
+
+Adds 'lib32' directories to binutils search paths on x86_64.
+=2D--
+ recipes/binutils/binutils_2.18.bb                  |    2 +-
+ recipes/binutils/binutils_2.19.1.bb                |    1 +
+ recipes/binutils/binutils_2.19.bb                  |    1 +
+ .../files/binutils-x86_64_i386_biarch.patch        |   25 ++++++++++++++++=
+++++
+ 4 files changed, 28 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/binutils/files/binutils-x86_64_i386_biarch.patch
+
+diff --git a/recipes/binutils/binutils_2.18.bb b/recipes/binutils/binutils_=
+2.18.bb
+index 9367196..562c8ba 100644
+=2D-- a/recipes/binutils/binutils_2.18.bb
++++ b/recipes/binutils/binutils_2.18.bb
+@@ -12,8 +12,8 @@ SRC_URI =3D "\
+      file://binutils-uclibc-300-006_better_file_error.patch;patch=3D1 \
+      file://binutils-uclibc-300-012_check_ldrunpath_length.patch;patch=3D1=
+ \
+      file://binutils-uclibc-gas-needs-libm.patch;patch=3D1 \
++     file://binutils-x86_64_i386_biarch.patch;patch=3D1 \
+      "
+=20
+ # powerpc patches
+ SRC_URI +=3D "file://binutils-2.16.1-e300c2c3.patch;patch=3D1"
+=2D
+diff --git a/recipes/binutils/binutils_2.19.1.bb b/recipes/binutils/binutil=
+s_2.19.1.bb
+index c399ab8..1802dfb 100644
+=2D-- a/recipes/binutils/binutils_2.19.1.bb
++++ b/recipes/binutils/binutils_2.19.1.bb
+@@ -12,6 +12,7 @@ SRC_URI =3D "\
+      file://binutils-uclibc-300-012_check_ldrunpath_length.patch;patch=3D1=
+ \
+      file://binutils-uclibc-gas-needs-libm.patch;patch=3D1 \
+      file://binutils-arm-pr7093.patch;patch=3D1 \
++     file://binutils-x86_64_i386_biarch.patch;patch=3D1 \
+      "
+=20
+ # powerpc patches
+diff --git a/recipes/binutils/binutils_2.19.bb b/recipes/binutils/binutils_=
+2.19.bb
+index aee5840..782d5c7 100644
+=2D-- a/recipes/binutils/binutils_2.19.bb
++++ b/recipes/binutils/binutils_2.19.bb
+@@ -12,6 +12,7 @@ SRC_URI =3D "\
+      file://binutils-uclibc-300-012_check_ldrunpath_length.patch;patch=3D1=
+ \
+      file://binutils-uclibc-gas-needs-libm.patch;patch=3D1 \
+      file://binutils-arm-pr7093.patch;patch=3D1 \
++     file://binutils-x86_64_i386_biarch.patch;patch=3D1 \
+      "
+=20
+ # powerpc patches
+diff --git a/recipes/binutils/files/binutils-x86_64_i386_biarch.patch b/rec=
+ipes/binutils/files/binutils-x86_64_i386_biarch.patch
+new file mode 100644
+index 0000000..b79a76a
+=2D-- /dev/null
++++ b/recipes/binutils/files/binutils-x86_64_i386_biarch.patch
+@@ -0,0 +1,25 @@
++#!/bin/sh -e
++## 127_x86_64_i386_biarch.dpatch
++##
++## DP: Description: Add (/usr)/lib32 to the search paths on x86_64.
++## DP: Author: Aurelien Jarno <aurel32.debian.org>
++## DP: Upstream status: Debian specific
++#
++# Hacked to apply with quilt
++
++--- binutils/ld/emulparams/elf_i386.sh
+++++ binutils/ld/emulparams/elf_i386.sh
++@@ -12,3 +12,13 @@
++ GENERATE_PIE_SCRIPT=3Dyes
++ NO_SMALL_DATA=3Dyes
++ SEPARATE_GOTPLT=3D12
+++
+++# Linux modify the default library search path to first include
+++# a 32-bit specific directory.
+++case "$target" in
+++  x86_64*-linux* | i[3-7]86*-linux* | x86_64*-kfreebsd*-gnu | i[3-7]86*-k=
+freebsd*-gnu)
+++    case "$EMULATION_NAME" in
+++      *i386*) LIBPATH_SUFFIX=3D32 ;;
+++    esac
+++    ;;
+++esac
+=2D-=20
+1.6.2.1
 
 
+--Boundary-00=_ZIs5Jyx838d2gh3--
