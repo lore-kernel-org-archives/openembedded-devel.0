@@ -1,35 +1,31 @@
-Received: from [68.230.241.43] (helo=fed1rmmtao103.cox.net)
+Received: from [128.2.201.16] (helo=jackfruit.srv.cs.cmu.edu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LuYk2-0006bm-Gh
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 23:03:33 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao103.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090416205928.TVBD4363.fed1rmmtao103.cox.net@fed1rmimpo03.cox.net>;
-	Thu, 16 Apr 2009 16:59:28 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id gLzU1b0074dMFYL04LzUhw; Thu, 16 Apr 2009 16:59:28 -0400
-X-Authority-Analysis: v=1.0 c=1 a=jPlMlblrO3oA:10 a=ywbLZgbN88kA:10
-	a=-S8moVqFDP8skU5MU38A:9 a=4luq2qbMRjOb9zoKtids9L5gKmYA:4
-X-CM-Score: 0.00
-Date: Thu, 16 Apr 2009 13:59:28 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090416205928.GM17629@smtp.west.cox.net>
-References: <1239912183-25085-1-git-send-email-dhuggins@cs.cmu.edu>
+	(envelope-from <dhuggins@cs.cmu.edu>) id 1LuYkJ-0006cL-BV
+	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 23:03:48 +0200
+Received: from [128.2.222.132] (LIMA-2.SPEECH.CS.CMU.EDU [128.2.222.132])
+	by jackfruit.srv.cs.cmu.edu (8.13.6/8.13.6) with ESMTP id
+	n3GKxisv018677; Thu, 16 Apr 2009 16:59:44 -0400 (EDT)
+Message-ID: <49E79C40.1050801@cs.cmu.edu>
+Date: Thu, 16 Apr 2009 16:59:44 -0400
+From: David Huggins-Daines <dhuggins@cs.cmu.edu>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-In-Reply-To: <1239912183-25085-1-git-send-email-dhuggins@cs.cmu.edu>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.43
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+To: Tom Rini <trini@kernel.crashing.org>
+References: <1239912183-25085-1-git-send-email-dhuggins@cs.cmu.edu>
+	<1239912183-25085-2-git-send-email-dhuggins@cs.cmu.edu>
+	<20090416205436.GL17629@smtp.west.cox.net>
+In-Reply-To: <20090416205436.GL17629@smtp.west.cox.net>
+X-Scanned-By: mimedefang-cmuscs on 128.2.201.16
+X-SA-Exim-Connect-IP: 128.2.201.16
+X-SA-Exim-Mail-From: dhuggins@cs.cmu.edu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-5.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,RDNS_NONE autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: David Huggins-Daines <dhuggins@cs.cmu.edu>
-Subject: Re: [PATCH] update canadian-sdk to match meta-toolchain
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH] fix do_install for MinGW gcc-canadian-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 21:03:33 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Apr 2009 21:03:48 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 16, 2009 at 04:03:02PM -0400, David Huggins-Daines wrote:
+Tom Rini wrote:
+>
+> Is this using the distro / machine you mentioned before?  This should
+> all be fine and we just end up making a 'C:' dir.  I'm very curious here
+> as at some point prior to pushing canadian stuff originally I had the
+> same patch, but on trying to confirm I needed it, I suddenly didn't need
+> it anymore.
+>
+>   
+Yeah - I can send you the distro, machine, and local.conf if you like, 
+or publish my git repository. I am using these extra definitions in 
+local.conf for building the MinGW SDK:
 
-> This patch synchronizes (to some extent) canadian-sdk.bb with
-> meta-toolchain.bb.  Unlike meta-toolchain, it does not build an
-> -extras package.  There's a lot of code duplication there which I will
-> leave to the experts to sort out :)
+SDK_ARCH = "i686"
+SDK_OS = "mingw32"
+SDK_EXEEXT = ".exe"
+OVERRIDES .= ":sdk-mingw32"
 
-I _think_ this is OK.  I'm iffy at best on if opkg will actually work in
-Windows, but otherwise, yeah.  I'm going to go kick a build or two prior
-to both of these patches then put 'em in and see what happens.
-
--- 
-Tom Rini
 
 
