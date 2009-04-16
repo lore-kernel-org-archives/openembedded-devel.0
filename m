@@ -1,35 +1,42 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LuNNU-0004Cf-GC
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 10:56:38 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id CB39316DFDD
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LuNQ0-0004Fi-1g
+	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 10:59:09 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LuNMF-0004QQ-JG
+	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 08:54:07 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 16 Apr 2009 08:54:07 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 16 Apr 2009 10:51:35 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id A3AC22A422C
-	for <openembedded-devel@openembedded.org>;
-	Thu, 16 Apr 2009 10:51:32 +0200 (CEST)
-MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Thu, 16 Apr 2009 10:51:14 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF75B@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: linux_2.6.24.bb: patch file unavailable
-Thread-Index: Acm+cHpd9j9ccJhNS6aM9IZ2fPvmzQ==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@openembedded.org>
-X-SA-Exim-Connect-IP: 87.193.137.78
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+	Thu, 16 Apr 2009 08:54:07 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 16 Apr 2009 10:53:55 +0200
+Message-ID: <gs6rn3$5tl$1@ger.gmane.org>
+References: <200904152346.51072.raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
+In-Reply-To: <200904152346.51072.raj.khem@gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_20,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: linux_2.6.24.bb: patch file unavailable
+Subject: Re: uclibc/thumb toolchain versions to use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,25 +50,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 08:56:47 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 16 Apr 2009 08:59:15 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-bGludXhfMi42LjI0LmJiIHNpbmNlIDIwMDgtMDItMTYgMTQ6MzM6MzggKzAwMDAgY29udGFpbnMN
-Cg0KU1JDX1VSSSA9ICIke0tFUk5FTE9SR19NSVJST1J9L3B1Yi9saW51eC9rZXJuZWwvdjIuNi9s
-aW51eC0yLjYuMjQudGFyLmJ6MiBcDQogICAgICAgICAgIGh0dHA6Ly9rYW1pa2F6ZS53YW5pbmtv
-a28uaW5mby9wYXRjaGVzLzIuNi4yNC9rYW1pa2F6ZTEvYnJva2VuLW91dC9zcXVhc2hmcy1sem1h
-LTIuNi4yNC5wYXRjaDtwYXRjaD0xIFwNCg0KQnV0IHRoaXMgcGF0Y2ggaXMgbm8gbG9uZ2VyIGF2
-YWlsYWJsZSB0aGVyZToNCg0KJCB3Z2V0IGh0dHA6Ly9rYW1pa2F6ZS53YW5pbmtva28uaW5mby9w
-YXRjaGVzLzIuNi4yNC9rYW1pa2F6ZTEvYnJva2VuLW91dC9zcXVhc2hmcy1sem1hLTIuNi4yNC5w
-YXRjaA0KLS0wNzo1ODozOC0tICBodHRwOi8va2FtaWthemUud2FuaW5rb2tvLmluZm8vcGF0Y2hl
-cy8yLjYuMjQva2FtaWthemUxL2Jyb2tlbi1vdXQvc3F1YXNoZnMtbHptYS0yLjYuMjQucGF0Y2gN
-CiAgICAgICAgICAgPT4gYHNxdWFzaGZzLWx6bWEtMi42LjI0LnBhdGNoJw0KUmVzb2x2aW5nIGth
-bWlrYXplLndhbmlua29rby5pbmZvLi4uIGZhaWxlZDogTmFtZSBvciBzZXJ2aWNlIG5vdCBrbm93
-bi4NCg0KRG9lcyBzb21lYm9keSBrbm93IGEgbmV3IFVSTCBmb3IgdGhhdD8gT3Igc2hvdWxkIGkg
-dXBsb2FkIGEgY29weSB0byB0aGUgT0UgcmVwbyBmcm9tIG15IGxvY2FsIHNvdXJjZXMgY2FjaGU/
-DQoNClN0ZWZmZW4NCg==
+On 16-04-09 08:46, Khem Raj wrote:
+> Hi
+>
+> Recently, after switching to thumb mode for some on architectures. I tried to enable thumb for uclibc recipe itself too.
+> Unfortunately it does not work with all versions of gcc and binutils we have
+>
+> The version combos that work are
+>
+> gcc 4.3.x + binutils 2.18
+> gcc-4.3.x + binutils_cvs
+>
+> 2.19x does not work and also 2.18.50.x.x does not work because of improper thumb to thumb veneer handling by linker
+> gcc 4.2.4 does not work because ldso.c we relaxed optimization level which causes a gcc ICE
+>
+> default gcc for angstrom is 4.2.4 and binutils 2.18.50.0.7 and unfortunately this combo will not work for uclibc thumb
+>
+> Either we can think of bumping default gcc to 4.3.x and downgrade default binutils to 2.18 or let uclibc compile in arm mode even though everything else is in thumb mode.
+
+Graeme and I were working on making 4.3.x the default, so how about this:
+
+* switch everything minus ppc and avr32 to 4.3.3
+* make a snapshot of binutils cvs (or use a 2.19.50.x version) and 
+switch to that (minus avr32).
+* bump DISTRO_PR to force a full rebuild
+
+regards,
+
+Koen
+
 
 
