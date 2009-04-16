@@ -1,38 +1,27 @@
-Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
+Received: from [213.230.128.226] (helo=fep01-svc.tim.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LuZLC-0004WC-FN
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 23:41:52 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao104.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090416213752.NREO16134.fed1rmmtao104.cox.net@fed1rmimpo03.cox.net>;
-	Thu, 16 Apr 2009 17:37:52 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
-	id gMds1b0064dMFYL04MdsDu; Thu, 16 Apr 2009 17:37:52 -0400
-X-Authority-Analysis: v=1.0 c=1 a=jPlMlblrO3oA:10 a=ywbLZgbN88kA:10
-	a=ErWU23JnqNEAOLzs2TIA:9 a=j1Hd4GMVbwqh3JlrSbcA:7
-	a=h_s6l14gB-VVk_SgbCPos9VyvpwA:4
-X-CM-Score: 0.00
-Date: Thu, 16 Apr 2009 14:37:52 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: David Huggins-Daines <dhuggins@cs.cmu.edu>
-Message-ID: <20090416213751.GO17629@smtp.west.cox.net>
-References: <1239912183-25085-1-git-send-email-dhuggins@cs.cmu.edu>
-	<20090416205928.GM17629@smtp.west.cox.net>
-	<49E79C96.5000307@cs.cmu.edu>
+	(envelope-from <gremlin@gremlin.it>) id 1LuZQG-0004dQ-AD
+	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 23:47:07 +0200
+Received: from sesha.loc ([217.203.144.14]) by fep01-svc.tim.it
+	(InterMail vM.6.01.06.03 201-2131-130-104-20060516) with ESMTP
+	id <20090416212404.WHZT3169.fep01-svc.tim.it@sesha.loc>
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Apr 2009 23:24:04 +0200
+Message-ID: <49E7A12F.7080008@gremlin.it>
+Date: Thu, 16 Apr 2009 23:20:47 +0200
+From: Alessandro GARDICH <gremlin@gremlin.it>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
 MIME-Version: 1.0
-In-Reply-To: <49E79C96.5000307@cs.cmu.edu>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.42
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+To: openembedded-devel@openembedded.org
+X-SA-Exim-Connect-IP: 213.230.128.226
+X-SA-Exim-Mail-From: gremlin@gremlin.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.9 required=5.0 tests=BAYES_50,RCVD_IN_DNSWL_LOW,
+	RDNS_NONE autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH] update canadian-sdk to match meta-toolchain
+Subject: [PATCH][STABLE] rpm-native_4.4.2.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 21:41:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Apr 2009 21:47:07 -0000
+Content-Type: multipart/mixed; boundary="------------080408070201030609010506"
 
-On Thu, Apr 16, 2009 at 05:01:10PM -0400, David Huggins-Daines wrote:
-> Tom Rini wrote:
->>
->> I _think_ this is OK.  I'm iffy at best on if opkg will actually work in
->> Windows, but otherwise, yeah.  I'm going to go kick a build or two prior
->> to both of these patches then put 'em in and see what happens.
->>   
-> Yeah, actually I have my doubts about it too. I haven't tried.
->
-> Of course this doesn't preclude a Canadian SDK for some other host  
-> machine where it would work...
+--------------080408070201030609010506
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-True.  Still looking for someone to give that a shot :)
+make rpm-native don't fail on Q&A checj with "non dbg contains .debug, 
+rpm-native, 
+/work/i686-linux/rpm-native-4.4.2.3-r15/install/rpm-native/staging/i686-linux/usr/lib/rpm/.debug/rpmq"
+
+also on x86_64 host
+
+
+
 
 -- 
-Tom Rini
+  /------------------------------------------------\
+|     Alessandro Gardich : gremlin#gremlin!it      |
+  >------------------------------------------------<
+|  I never saw a wild thing sorry for itself.      |
+|  A small bird will drop frozen dead from a bough |
+|  without ever having felt sorry for itself.      |
+  \------------------------------------------------/
 
+diff --git a/recipes/rpm/rpm-native_4.4.2.3.bb b/recipes/rpm/rpm-native_4.4.2.3.bb
+index 287383c..f89a0f1 100644
+--- a/recipes/rpm/rpm-native_4.4.2.3.bb
++++ b/recipes/rpm/rpm-native_4.4.2.3.bb
+@@ -4,5 +4,7 @@ require rpm-${PV}.inc
+ 
+ DEPENDS = "beecrypt-native gettext-native zlib-native file-native popt-native python-native"
+ 
++FILES_${PN}-dbg += "${libdir}/rpm/.debug/*"
++
+ export localstatedir = "${layout_localstatedir}"
+ export varprefix = "${layout_localstatedir}"
 
+--------------080408070201030609010506--
