@@ -1,46 +1,39 @@
-Received: from [202.37.96.11] (helo=gatekeeper.tait.co.nz)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1LuYoW-0006xA-5J
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Apr 2009 23:08:08 +0200
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id 16EFD46753
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2009 09:04:05 +1200 (NZST)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])by 
-	gatekeeper.tait.co.nz (Postfix) with ESMTP id 0617746749for 
-	<openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2009 09:04:05 
-	+1200 (NZST)
-Received: from conversion-daemon.sunstrike.tait.co.nz by 
-	sunstrike.tait.co.nz(Sun Java System Messaging Server 6.1 (built Apr 28
-	2004))id <0KI700901JI7XB00@sunstrike.tait.co.nz>(original mail from 
-	douglas.royds@tait.co.nz)for openembedded-devel@lists.openembedded.org; 
-	Fri,17 Apr 2009 09:04:04 +1200 (NZST)
-Received: from [172.25.116.23] by sunstrike.tait.co.nz(Sun Java System 
-	Messaging Server 6.1 (built Apr 28 2004))with ESMTP id 
-	<0KI700KWCP6PL750@sunstrike.tait.co.nz> 
-	foropenembedded-devel@lists.openembedded.org; Fri,17 Apr 2009 09:04:03 
-	+1200 (NZST)
-Date: Fri, 17 Apr 2009 09:04:00 +1200
-From: Douglas Royds <douglas.royds@tait.co.nz>
-In-reply-to: <49C05843.4030504@tait.co.nz>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <49E79D40.3060003@tait.co.nz>
-MIME-version: 1.0
-References: <49BF280A.7090705@tait.co.nz> <49C05843.4030504@tait.co.nz>
-User-Agent: Thunderbird 2.0.0.19 (X11/20090105)
-X-imss-version: 2.053
-X-imss-result: Passed
-X-imss-approveListMatch: *@tait.co.nz
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
+	(envelope-from <trini@kernel.crashing.org>) id 1LuZFH-0004O1-Dj
+	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 23:35:46 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090416213146.NMZK16134.fed1rmmtao104.cox.net@fed1rmimpo01.cox.net>;
+	Thu, 16 Apr 2009 17:31:46 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id gMXl1b0044dMFYL03MXl2w; Thu, 16 Apr 2009 17:31:45 -0400
+X-Authority-Analysis: v=1.0 c=1 a=Q7dqUReUBcIA:10 a=s9zPVp_aTL4A:10
+	a=gJRV-PLIa5bV3nH0yE0A:9 a=dh41pI35TtRADIN4pPoA:7
+	a=TWGUw6F-it5Ag_ruTlc0s2jHzVMA:4
+X-CM-Score: 0.00
+Date: Thu, 16 Apr 2009 14:31:44 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: David Huggins-Daines <dhuggins@cs.cmu.edu>
+Message-ID: <20090416213144.GN17629@smtp.west.cox.net>
+References: <1239912183-25085-1-git-send-email-dhuggins@cs.cmu.edu>
+	<1239912183-25085-2-git-send-email-dhuggins@cs.cmu.edu>
+	<20090416205436.GL17629@smtp.west.cox.net>
+	<49E79C40.1050801@cs.cmu.edu>
+MIME-Version: 1.0
+In-Reply-To: <49E79C40.1050801@cs.cmu.edu>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 68.230.241.42
+X-SA-Exim-Mail-From: trini@kernel.crashing.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	UNPARSEABLE_RELAY autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Git SRC_TARBALL_STASH filename
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [PATCH] fix do_install for MinGW gcc-canadian-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,55 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 21:08:08 -0000
-Content-type: text/plain;
-	format=flowed;
-	charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Thu, 16 Apr 2009 21:35:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Douglas Royds wrote:
+On Thu, Apr 16, 2009 at 04:59:44PM -0400, David Huggins-Daines wrote:
 > Tom Rini wrote:
->> On Tue, Mar 17, 2009 at 05:33:14PM +1300, Douglas Royds wrote:
->>> Working behind a firewall that doesn't allow Git access (except 
->>> over  http). I've set SRC_TARBALL_STASH so that we only have to 
->>> download the  appropriate source tarball (manually) once.
->>>
->>> While building mtd-utils, BitBake is trying to fetch from the 
->>> tarball stash:
->>>
->>>    http://.../git_git.infradead.org.mtd-utils.git.tar.gz
 >>
->> What's going on is that it's trying to fetch the raw git tree stash,
->> rather than the checkout stash, so you need to mirror the other. 
+>> Is this using the distro / machine you mentioned before?  This should
+>> all be fine and we just end up making a 'C:' dir.  I'm very curious here
+>> as at some point prior to pushing canadian stuff originally I had the
+>> same patch, but on trying to confirm I needed it, I suddenly didn't need
+>> it anymore.
+>>
+>>   
+> Yeah - I can send you the distro, machine, and local.conf if you like,  
+> or publish my git repository. I am using these extra definitions in  
+> local.conf for building the MinGW SDK:
 >
-> I don't have the raw git tree stash (firewall, remember)? Regrettably, 
-> mtd-utils don't appear to provide HTTP access to their repository - 
-> only git and ssh - so I don't appear to have any way of getting it.
+> SDK_ARCH = "i686"
+> SDK_OS = "mingw32"
+> SDK_EXEEXT = ".exe"
+> OVERRIDES .= ":sdk-mingw32"
 
-For the record, I was able to download the mtd-utils Git stash tarball 
-from the Angstrom mirror:
+Looks fine except for the OVERRIDES.  I don't use any special ones, so
+you shouldn't need any either :)  (But yes, there are bits of code that
+reference sdk-mingw32 and need fixing).
 
-    http://www.angstrom-distribution.org/unstable/sources/git_git.infradead.org.mtd-utils.git.tar.gz
-
-Now I can set SRC_TARBALL_STASH, and people (here behind the firewall) 
-can access the appropriate git revision.
-
-Douglas.
-
-
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
-
+-- 
+Tom Rini
 
 
