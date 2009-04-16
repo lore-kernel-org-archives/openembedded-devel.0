@@ -1,43 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LuRKe-0002SU-6O
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 15:08:58 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LuRGt-0007wS-2S
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 13:04:51 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 16 Apr 2009 13:04:51 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <utx@penguin.cz>) id 1LuRPf-0002ck-1l
+	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 15:14:03 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id AB9AF140971A
 	for <openembedded-devel@openembedded.org>;
-	Thu, 16 Apr 2009 13:04:51 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 16 Apr 2009 15:11:45 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id jAdxl7UpFpo7 for <openembedded-devel@openembedded.org>;
+	Thu, 16 Apr 2009 15:11:45 +0200 (CEST)
+Received: from [10.20.1.86] (unknown [82.119.242.94])
+	by ns.penguin.cz (Postfix) with ESMTP id 8F8521417196
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Apr 2009 15:11:45 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 16 Apr 2009 15:04:39 +0200
-Message-ID: <gs7ad8$jre$1@ger.gmane.org>
-References: <20090414234609.GA27890@denix.org>	<1239752998-7677-1-git-send-email-denis@denix.org>	<gs3vuj$8tl$1@ger.gmane.org>	<200904150854.04328.hs4233@mail.mn-solutions.de>	<20090416000646.GB2118@denix.org>
-	<be7a9f3d0904160534s3f0c87fep88051546f0184af5@mail.gmail.com>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF75C@hiob.intern.dresearch.de>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF75C@hiob.intern.dresearch.de>
+Date: Thu, 16 Apr 2009 15:09:59 +0200
+Message-Id: <1239887399.21612.182.camel@hammer.suse.cz>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
-In-Reply-To: <be7a9f3d0904160534s3f0c87fep88051546f0184af5@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.26.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_20,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] udev 124: add cache invalidation logic on kernel change or its bootargs/cmdline
+Subject: Re: wrong shebang in mc-extfs files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 13:09:07 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 16 Apr 2009 13:14:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 16-04-09 14:34, Otavio Salvador wrote:
-> On Wed, Apr 15, 2009 at 9:06 PM, Denys Dmytriyenko<denis@denix.org>  wrote:
->> On Wed, Apr 15, 2009 at 08:54:04AM +0200, Holger Schurig wrote:
->>>> On 15-04-09 01:49, Denys Dmytriyenko wrote:
->>>>> +                 mv /tmp/uname /etc/uname
->>>>> +                 mv /tmp/cmdline /etc/cmdline
->>>>
->>>> I think we should put those in /etc/udev or /var/lib/udev if
->>>> udev will be the only consumer.
->>>
->>> +1, e.g.
->>>
->>> /etc/udev/saved.uname
->>> /etc/udev/saved.cmdline
->>
->> Good point, I'll be sending the update. Are there any other
->> comments/suggestions?
->
-> It would be nice to, while on that, evaluate the possibility
-> of updating udev; 0.141 fixes a serious security whole
-> and even if most embedded systems usually runs as root,
-> there're many that doesn't.
+Sledz, Steffen wrote:
+> Found with mc-4.6.2:
+> 
+> The perl scripts in /usr/share/mc/extfs/ contain wrong shebang headers with pathes into the OE staging area which is not available at the target machine.  :(
+> 
+>   #! /home/sledz/oe/tmp.1/staging/x86_64-linux/usr/bin/perl -w
+> 
+> instead of
+> 
+>   #! /usr/bin/perl -w
+> 
+> I'm not that familiar with this python/bitbake path magic. Can someone please help?
 
-Also 141 will allow us to reduce the recipe to something like 'inherit 
-autotools_stage' :)
+configure magic:
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=a873d2ce9842923b8d0abae7e4cdfca606b3dd90
 
-regards,
+Note: Maybe mc-extfs should RRECOMMEND all these tools: unzip zip perl
+unrar lha apt deb mtools ... But I am not sure whether is will be
+useful.
 
-Koen
-
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
