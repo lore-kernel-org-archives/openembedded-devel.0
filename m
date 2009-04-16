@@ -1,27 +1,32 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LuQ7T-0003Ah-Fw
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 13:51:36 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 60FFB683CA;
-	Thu, 16 Apr 2009 15:47:01 +0400 (MSD)
+	(envelope-from <khimov@altell.ru>) id 1LuQCS-0000S2-Cq
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Apr 2009 13:56:35 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=[192.168.1.115])
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LuQ8f-0004vN-Mh
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Apr 2009 15:52:17 +0400
 From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@openembedded.org
-Date: Thu, 16 Apr 2009 15:47:01 +0400
-Message-Id: <1239882421-19769-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.1
+Organization: Altell Ltd.
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Apr 2009 15:52:17 +0400
+User-Agent: KMail/1.9.9
+References: <1238404723-8814-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1238404723-8814-1-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
+Message-Id: <200904161552.17374.khimov@altell.ru>
+X-SA-Exim-Connect-IP: 83.222.23.61
 X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+	SPF_SOFTFAIL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] image.bbclass: IMAGE_VARS->IMAGE_BOOT, make overridable
+Subject: Re: [PATCH] bitbake.conf: use ROOTFS_SIZE for gzip'd images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,53 +40,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 11:51:37 -0000
+X-List-Received-Date: Thu, 16 Apr 2009 11:56:48 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-IMAGE_VARS usage forces images to have init, dev management, login
-management and other stuff. In cases where you don't need any of those
-(like initramfs images or other special-purpose images) you need to
-override 4 variables in order to get clean image that only installs
-things from IMAGE_INSTALL.
+On Monday 30 March 2009 13:18:43 Roman I Khimov wrote:
+>  conf/bitbake.conf |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
 
-So, this changes IMAGE_VARS to more meaningful IMAGE_BOOT and makes it
-possible to build images without boot components with single
-IMAGE_BOOT="".
----
- classes/image.bbclass |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/classes/image.bbclass b/classes/image.bbclass
-index fd0df4d..9012de2 100644
---- a/classes/image.bbclass
-+++ b/classes/image.bbclass
-@@ -17,16 +17,16 @@ IMAGE_INITSCRIPTS ?= "initscripts"
- #
- IMAGE_LOGIN_MANAGER ?= "tinylogin"
- 
--IMAGE_VARS = "${IMAGE_INITSCRIPTS} \
-+IMAGE_BOOT ?= "${IMAGE_INITSCRIPTS} \
- ${IMAGE_DEV_MANAGER} \
- ${IMAGE_INIT_MANAGER} \
- ${IMAGE_LOGIN_MANAGER} "
- 
--RDEPENDS += "${IMAGE_INSTALL} ${IMAGE_VARS}"
-+RDEPENDS += "${IMAGE_INSTALL} ${IMAGE_BOOT}"
- 
- # "export IMAGE_BASENAME" not supported at this time
- IMAGE_BASENAME[export] = "1"
--export PACKAGE_INSTALL ?= "${IMAGE_INSTALL} ${IMAGE_VARS}"
-+export PACKAGE_INSTALL ?= "${IMAGE_INSTALL} ${IMAGE_BOOT}"
- 
- # We need to recursively follow RDEPENDS and RRECOMMENDS for images
- do_rootfs[recrdeptask] += "do_deploy do_populate_staging"
--- 
-1.6.2.1
-
-
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
-
+ping
 
 
