@@ -1,33 +1,47 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [209.85.200.175] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LuFHE-00039E-D0
+	(envelope-from <kergoth@gmail.com>) id 1LuFRn-0000G8-IY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Apr 2009 02:16:47 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KI6003YH38LETGL@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	15 Apr 2009 19:12:22 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id AB3786B83B5; Wed,
-	15 Apr 2009 20:12:21 -0400 (EDT)
-Date: Wed, 15 Apr 2009 20:12:21 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 16 Apr 2009 02:27:25 +0200
+Received: by wf-out-1314.google.com with SMTP id 25so142320wfa.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Apr 2009 17:23:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:content-type:content-transfer-encoding;
+	bh=43/gHrzmjifbL2zgfCEZWp9Iw8uRSPigd0iRb7OQalY=;
+	b=CmY6VOJ94b6/5BH6Jl4ENCd6Qj+G9KdrS4sq5UsShCNy4IYYdtY/Y5lxDrWOaxTzQt
+	FFMuZ1Ho6ktn5w0QoOsYEXTIuSsqVbo+g8fYo1Mb3js6ZSz6mJCByUNwPS2XOcdHb6bL
+	Qn/j6L7Y1CLixQjebKAJKRd1z92IbzKdlqegY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=ID8fIV1nhugjaOtKKYdcDvD2S126pt4fmnVB8X5i3PnluAFIJT0EuCdqlOwnEuTyby
+	PgHWKmDyIpsxZaz11pgcNOUUdrxOq2LPP8EKoWitg46zdcAvvfXImpQH6QkcdRyRX87Z
+	/4b09hKb0RXCo/xG2T/N0GCKo+e0YGkNkZoiA=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.142.13.14 with SMTP id 14mr1301883wfm.108.1239841409240; Wed, 
+	15 Apr 2009 17:23:29 -0700 (PDT)
+In-Reply-To: <1239782395-12413-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
+References: <1239782395-12413-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
+Date: Wed, 15 Apr 2009 17:23:29 -0700
+X-Google-Sender-Auth: 9d0e307b5ac67c74
+Message-ID: <b6ebd0a50904151723pe7087adkb69e57d608e8b226@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090416001221.GD2118@denix.org>
-References: <1239777218-20213-1-git-send-email-k.kooi@student.utwente.nl>
-MIME-version: 1.0
-In-reply-to: <1239777218-20213-1-git-send-email-k.kooi@student.utwente.nl>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.200.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,
-	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: Re: [STABLE][PATCH] sysstat: fix build on omap3 to actually	work (gnu_hash problem like ltrace)
+Cc: Petri Lehtinen <petri.lehtinen@inoi.fi>
+Subject: Re: [PATCH] base.bbclass: Combine all checksum.ini files found in BBPATH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,46 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 00:16:48 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 16 Apr 2009 00:27:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Apr 15, 2009 at 08:33:38AM +0200, Koen Kooi wrote:
-> From: Carsten Haitzler (Rasterman <raster@rasterman.com>
-> 
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+On Wed, Apr 15, 2009 at 12:59 AM,
+<petri.lehtinen+openembedded-devel@inoi.fi> wrote:
+> From: Petri Lehtinen <petri.lehtinen@inoi.fi>
+>
+> This makes it possible for overlays to have checksum.ini.
+>
+> Signed-off-by: Petri Lehtinen <petri.lehtinen@inoi.fi>
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
-
-> ---
->  recipes/sysstat/sysstat_8.1.6.bb |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/sysstat/sysstat_8.1.6.bb b/recipes/sysstat/sysstat_8.1.6.bb
-> index 0f394ed..a734d14 100644
-> --- a/recipes/sysstat/sysstat_8.1.6.bb
-> +++ b/recipes/sysstat/sysstat_8.1.6.bb
-> @@ -2,6 +2,7 @@ DESCRIPTION = "The sysstat utilities are a collection of performance monitoring
->  HOMEPAGE = "http://pagesperso-orange.fr/sebastien.godard/"
->  LICENSE = "GPL"
->  SECTION = "console/utils"
-> +PR = "r1"
->  
->  SRC_URI = "http://pagesperso-orange.fr/sebastien.godard/sysstat-${PV}.tar.gz"
->  
-> @@ -13,3 +14,4 @@ do_configure_prepend() {
->  
->  FILES_${PN} += "${libdir}/sa"
->  
-> +TARGET_CC_ARCH += "${LDFLAGS}"
-> -- 
-> 1.5.6.5
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Nice feature, good to see.
+-- 
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
