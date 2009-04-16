@@ -1,28 +1,34 @@
-Received: from [128.2.201.16] (helo=jackfruit.srv.cs.cmu.edu)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dhuggins@cs.cmu.edu>) id 1LuXrP-0008PJ-MG
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 22:07:51 +0200
-Received: from localhost.localdomain (LIMA-2.SPEECH.CS.CMU.EDU [128.2.222.132])
-	by jackfruit.srv.cs.cmu.edu (8.13.6/8.13.6) with ESMTP id
-	n3GK33wo017167; Thu, 16 Apr 2009 16:03:03 -0400 (EDT)
-From: David Huggins-Daines <dhuggins@cs.cmu.edu>
-To: openembedded-devel@openembedded.org
-Date: Thu, 16 Apr 2009 16:03:03 -0400
-Message-Id: <1239912183-25085-2-git-send-email-dhuggins@cs.cmu.edu>
-X-Mailer: git-send-email 1.5.6.3
-In-Reply-To: <1239912183-25085-1-git-send-email-dhuggins@cs.cmu.edu>
-References: <1239912183-25085-1-git-send-email-dhuggins@cs.cmu.edu>
-X-Scanned-By: mimedefang-cmuscs on 128.2.201.16
-X-SA-Exim-Connect-IP: 128.2.201.16
-X-SA-Exim-Mail-From: dhuggins@cs.cmu.edu
+	(envelope-from <denis@denix.org>) id 1LuXzm-0000Fc-UH
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Apr 2009 22:16:16 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KI700JOQMRCWETT@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	16 Apr 2009 15:11:41 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D5FF16B83B5; Thu,
+	16 Apr 2009 16:11:35 -0400 (EDT)
+Date: Thu, 16 Apr 2009 16:11:35 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090416201135.GA8535@denix.org>
+References: <20090402005356.GN14278@smtp.west.cox.net>
+	<200904071021.20322.marcin@juszkiewicz.com.pl>
+	<20090416194707.GK17629@smtp.west.cox.net>
+MIME-version: 1.0
+In-reply-to: <20090416194707.GK17629@smtp.west.cox.net>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.5 required=5.0 tests=AWL,BAYES_50,
-	RCVD_IN_DNSWL_MED,RDNS_NONE autolearn=unavailable version=3.2.5
+X-Spam-Level: *
+X-Spam-Status: No, score=1.5 required=5.0 tests=AWL,BAYES_50,
+	FM_FAKE_HELO_VERIZON,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: David Huggins-Daines <dhuggins@cs.cmu.edu>
-Subject: [PATCH] fix do_install for MinGW gcc-canadian-sdk
+Subject: Re: [PATCH] busybox 1.13.2: Add more upstream patches, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,37 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 20:08:05 -0000
+X-List-Received-Date: Thu, 16 Apr 2009 20:16:35 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-When building a Canadian cross SDK for a MinGW host, installation of
-gcc-canadian-sdk fails, because it is configured using a Windows path
-as its ${prefix}.  Therefore it's not sufficient to use DESTDIR to
-install it; this leads to it being installed in ${DESTDIR}C: which
-is not where the rest of the recipe expects it.
+On Thu, Apr 16, 2009 at 12:47:07PM -0700, Tom Rini wrote:
+> On Tue, Apr 07, 2009 at 10:21:19AM +0200, Marcin Juszkiewicz wrote:
+> > Dnia czwartek, 2 kwietnia 2009 o 02:53:56 Tom Rini napisa??(a):
+> > > This adds the awk, killall, printf, syslogd, top24, unzip and wget
+> > > patches from http://busybox.net/downloads/fixes-1.13.2/
+> > 
+> > Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+> > 
+> > I will also Ack it for stable/2009 branch.
+> 
+> Looking for 1 more ack.  The awk patch is needed to fix problems that
+> are seen on MIPS/FPU systems (for example, malta).
 
-This patch forces it to use the Unix ${prefix} variable, which has
-no drive letter, for installation.  I'm not 100% certain this is the
-right solution but it doesn't seem to break normal SDK builds.
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
----
- recipes/gcc/gcc-package-sdk.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/gcc/gcc-package-sdk.inc b/recipes/gcc/gcc-package-sdk.inc
-index 0dc19c7..17d44a1 100644
---- a/recipes/gcc/gcc-package-sdk.inc
-+++ b/recipes/gcc/gcc-package-sdk.inc
-@@ -29,7 +29,7 @@ FILES_${PN}-doc = "\
-     "
- 
- do_install () {
--	oe_runmake 'DESTDIR=${D}' install
-+	oe_runmake 'DESTDIR=${D}' 'prefix=${prefix}' install
- 
- 	# Cleanup some of the ${libdir}{,exec}/gcc stuff ...
- 	rm -r ${D}${libdir}/gcc/${TARGET_SYS}/${BINV}/install-tools
 -- 
-1.5.6.3
-
+Denys
 
 
