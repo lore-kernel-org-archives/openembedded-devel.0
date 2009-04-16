@@ -1,42 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LuOWh-0002M0-CC
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 12:10:41 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LuNgU-0005QV-BO
-	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 09:15:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 16 Apr 2009 09:15:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@DResearch.DE>) id 1LuPML-0001gE-QZ
+	for openembedded-devel@openembedded.org; Thu, 16 Apr 2009 13:02:35 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id C8D0E16E233
 	for <openembedded-devel@openembedded.org>;
-	Thu, 16 Apr 2009 09:15:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 16 Apr 2009 11:11:32 +0200
-Message-ID: <gs6so4$8mb$2@ger.gmane.org>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF75B@hiob.intern.dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF75B@hiob.intern.dresearch.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.2
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Thu, 16 Apr 2009 12:58:32 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 661682A422C
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Apr 2009 12:58:29 +0200 (CEST)
+MIME-Version: 1.0
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Date: Thu, 16 Apr 2009 12:58:11 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF75C@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: wrong shebang in mc-extfs files
+Thread-Index: Acm+gjZgfJybkz15QCuWx16UH/4uDQ==
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@openembedded.org>
+X-SA-Exim-Connect-IP: 87.193.137.78
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_50,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: linux_2.6.24.bb: patch file unavailable
+Subject: wrong shebang in mc-extfs files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,37 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 10:11:11 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Apr 2009 11:02:43 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On 16-04-09 10:51, Sledz, Steffen wrote:
-> linux_2.6.24.bb since 2008-02-16 14:33:38 +0000 contains
->
-> SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.24.tar.bz2 \
->             http://kamikaze.waninkoko.info/patches/2.6.24/kamikaze1/broken-out/squashfs-lzma-2.6.24.patch;patch=1 \
->
-> But this patch is no longer available there:
->
-> $ wget http://kamikaze.waninkoko.info/patches/2.6.24/kamikaze1/broken-out/squashfs-lzma-2.6.24.patch
-> --07:58:38--  http://kamikaze.waninkoko.info/patches/2.6.24/kamikaze1/broken-out/squashfs-lzma-2.6.24.patch
->             =>  `squashfs-lzma-2.6.24.patch'
-> Resolving kamikaze.waninkoko.info... failed: Name or service not known.
->
-> Does somebody know a new URL for that?
-
-http://www.angstrom-distribution.org/unstable/sources/squashfs-lzma-2.6.24.patch
-
-> Or should i upload a copy to the OE repo from my local sources cache?
-
-Personally I strongly dislike using patches from remote hosts, since the 
-get changed/deleted/etc beyond our control.
-
-FWIW: squashfs is now in mainline :)
-
-regards,
-
-Koen
-
+Rm91bmQgd2l0aCBtYy00LjYuMjoNCg0KVGhlIHBlcmwgc2NyaXB0cyBpbiAvdXNyL3NoYXJlL21j
+L2V4dGZzLyBjb250YWluIHdyb25nIHNoZWJhbmcgaGVhZGVycyB3aXRoIHBhdGhlcyBpbnRvIHRo
+ZSBPRSBzdGFnaW5nIGFyZWEgd2hpY2ggaXMgbm90IGF2YWlsYWJsZSBhdCB0aGUgdGFyZ2V0IG1h
+Y2hpbmUuICA6KA0KDQogICMhIC9ob21lL3NsZWR6L29lL3RtcC4xL3N0YWdpbmcveDg2XzY0LWxp
+bnV4L3Vzci9iaW4vcGVybCAtdw0KDQppbnN0ZWFkIG9mDQoNCiAgIyEgL3Vzci9iaW4vcGVybCAt
+dw0KDQpJJ20gbm90IHRoYXQgZmFtaWxpYXIgd2l0aCB0aGlzIHB5dGhvbi9iaXRiYWtlIHBhdGgg
+bWFnaWMuIENhbiBzb21lb25lIHBsZWFzZSBoZWxwPw0KDQpTdGVmZmVuDQo=
 
 
