@@ -1,27 +1,42 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LulH9-0005o9-1X
-	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 12:26:37 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id C555B683CB;
-	Fri, 17 Apr 2009 14:22:21 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LulLp-0005uV-UW
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 12:31:38 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LulHx-0005CD-Cy
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 10:27:17 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 17 Apr 2009 10:27:17 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 17 Apr 2009 10:27:17 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-Date: Fri, 17 Apr 2009 14:22:21 +0400
-Message-Id: <1239963741-12123-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.1
-MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 17 Apr 2009 12:27:06 +0200
+Message-ID: <gs9lhq$2kh$1@ger.gmane.org>
+References: <1239963741-12123-1-git-send-email-khimov@altell.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
+In-Reply-To: <1239963741-12123-1-git-send-email-khimov@altell.ru>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=AWL,BAYES_50,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] icecc.bbclass: fix kernel distributed compilation
+Subject: Re: [PATCH] icecc.bbclass: fix kernel distributed compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,49 +50,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 10:26:40 -0000
+X-List-Received-Date: Fri, 17 Apr 2009 10:31:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
----
- classes/icecc.bbclass |   11 ++++++-----
- 1 files changed, 6 insertions(+), 5 deletions(-)
+On 17-04-09 12:22, Roman I Khimov wrote:
+> ---
+>   classes/icecc.bbclass |   11 ++++++-----
+>   1 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/classes/icecc.bbclass b/classes/icecc.bbclass
-index dce29fb..0eb2d9f 100644
---- a/classes/icecc.bbclass
-+++ b/classes/icecc.bbclass
-@@ -137,7 +137,8 @@ def create_native_env(bb,d):
- 
- def get_cross_kernel_cc(bb,d):
-     kernel_cc = bb.data.expand('${KERNEL_CC}', d)
--    kernel_cc = kernel_cc.replace('ccache', '')
-+    kernel_cc = kernel_cc.replace('ccache', '').strip()
-+    kernel_cc = kernel_cc.split(' ')[0]
-     kernel_cc = kernel_cc.strip()
-     return kernel_cc
- 
-@@ -182,10 +183,10 @@ def create_cross_kernel_env(bb,d):
-     cr_env_script = bb.data.getVar('ICECC_ENV_EXEC',  d) or  bb.data.expand('${STAGING_DIR}', d)+"/ice/icecc-create-env"
-     result=os.popen("%s %s %s %s %s %s" %(cr_env_script,
-            "--silent",
--           os.path.join(ice_dir,'bin',kernel_cc),
--           os.path.join(ice_dir,target_sys,'bin','g++'),
--           os.path.join(ice_dir,target_sys,'bin','as'),
--           os.path.join(ice_dir,"ice",cross_name) ) )
-+           os.path.join(ice_dir, 'bin', kernel_cc),
-+           os.path.join(ice_dir, 'bin', "%s-g++" % target_sys),
-+           os.path.join(ice_dir, 'bin', "%s-as" % target_sys),
-+           os.path.join(ice_dir, "ice", cross_name) ) )
-     return tar_file
- 
- 
--- 
-1.6.2.1
+Acked-by: Koen Kooi <koen@openembedded.org>
 
 
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
+>
+> diff --git a/classes/icecc.bbclass b/classes/icecc.bbclass
+> index dce29fb..0eb2d9f 100644
+> --- a/classes/icecc.bbclass
+> +++ b/classes/icecc.bbclass
+> @@ -137,7 +137,8 @@ def create_native_env(bb,d):
+>
+>   def get_cross_kernel_cc(bb,d):
+>       kernel_cc = bb.data.expand('${KERNEL_CC}', d)
+> -    kernel_cc = kernel_cc.replace('ccache', '')
+> +    kernel_cc = kernel_cc.replace('ccache', '').strip()
+> +    kernel_cc = kernel_cc.split(' ')[0]
+>       kernel_cc = kernel_cc.strip()
+>       return kernel_cc
+>
+> @@ -182,10 +183,10 @@ def create_cross_kernel_env(bb,d):
+>       cr_env_script = bb.data.getVar('ICECC_ENV_EXEC',  d) or  bb.data.expand('${STAGING_DIR}', d)+"/ice/icecc-create-env"
+>       result=os.popen("%s %s %s %s %s %s" %(cr_env_script,
+>              "--silent",
+> -           os.path.join(ice_dir,'bin',kernel_cc),
+> -           os.path.join(ice_dir,target_sys,'bin','g++'),
+> -           os.path.join(ice_dir,target_sys,'bin','as'),
+> -           os.path.join(ice_dir,"ice",cross_name) ) )
+> +           os.path.join(ice_dir, 'bin', kernel_cc),
+> +           os.path.join(ice_dir, 'bin', "%s-g++" % target_sys),
+> +           os.path.join(ice_dir, 'bin', "%s-as" % target_sys),
+> +           os.path.join(ice_dir, "ice", cross_name) ) )
+>       return tar_file
+>
+>
+
 
 
 
