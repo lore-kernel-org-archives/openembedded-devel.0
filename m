@@ -1,28 +1,31 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LumL7-0003lj-4h
+	(envelope-from <mickey@vanille-media.de>) id 1Lumhn-0004Dv-5z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Apr 2009 13:34:39 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 57D02683CB;
-	Fri, 17 Apr 2009 15:30:24 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
+	Fri, 17 Apr 2009 13:58:05 +0200
+Received: from andromeda.vanille.de (e180155229.adsl.alicedsl.de
+	[85.180.155.229])
+	by drlauer-research.com (Postfix) with ESMTP id 1D8CA58413B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2009 14:22:28 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Apr 2009 15:30:24 +0400
-Message-Id: <1239967824-19483-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.1
+Date: Fri, 17 Apr 2009 13:54:04 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.27-11-generic; KDE/4.2.2; x86_64; ; )
+References: <20090417114926.C6D6A189358@amethyst.openembedded.net>
+In-Reply-To: <20090417114926.C6D6A189358@amethyst.openembedded.net>
 MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+Message-Id: <200904171354.04312.mickey@vanille-media.de>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_40,RDNS_NONE,
-	SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] tunctl: new recipe, version 1.5
+Subject: Re: [oe-commits] Koen Kooi : iphone-compat: require angstrom, since minimal is just a copy of angstrom with added bugs, which we don' t need
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,67 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 11:34:39 -0000
+X-List-Received-Date: Fri, 17 Apr 2009 11:58:05 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Tool for controlling the TUN/TAP driver in Linux.
----
- conf/checksums.ini           |    4 ++++
- recipes/tunctl/tunctl.inc    |   14 ++++++++++++++
- recipes/tunctl/tunctl_1.5.bb |    1 +
- 3 files changed, 19 insertions(+), 0 deletions(-)
- create mode 100644 recipes/tunctl/tunctl.inc
- create mode 100644 recipes/tunctl/tunctl_1.5.bb
+On Friday 17 April 2009 13:49:26 GIT User account wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: bd3f0156074826b765687af3ae1b745b5eaf0fa3
+> URL:   
+> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=bd3f015607482
+>6b765687af3ae1b745b5eaf0fa3
+>
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Fri Apr 17 10:41:07 2009 +0000
+>
+> iphone-compat: require angstrom, since minimal is just a copy of angstrom
+> with added bugs, which we don't need
+>
+> From the my jabber logs with Jeremy, the maintainer of iphone-compat:
+>
+> 12:37 Koen: better inherit angstrom, since minimal is just angstrom with
+> added bugs 12:38 Sharky: ah ok
+> 12:38 Sharky: feel free to change it
+>
+> Mickey: next time check things before reverting (and violating the revert
+> policy)
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 948a4bf..fc17727 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -22682,6 +22682,10 @@ sha256=d91b4addcbb241b04b6cf795447163ed890a436b10205d2cd9cc1885ea3d9433
- md5=ee74158c6c55ae16327595c70369ef83
- sha256=ef5e9bf276b65bb831f9c2554cd8784bd5b4ee65353808f82b7e2aef851587ec
- 
-+[http://downloads.sourceforge.net/tunctl/tunctl-1.5.tar.gz]
-+md5=fdbedc263b3e85bb0e087cd567414607
-+sha256=aa2a6c4cc6bfacb11e0d9f62334a6638a0d435475c61230116f00b6af8b14fff
-+
- [http://alioth.debian.org/frs/download.php/2241/tuxmath_w_fonts-1.6.0.tar.gz]
- md5=3aa0e0e488719611f0bc4441b63a6f56
- sha256=f3aae7e2f67cf12f3da98325388c7b2f6718729aa69c5c804d1866d6a49f8592
-diff --git a/recipes/tunctl/tunctl.inc b/recipes/tunctl/tunctl.inc
-new file mode 100644
-index 0000000..c9c7e95
---- /dev/null
-+++ b/recipes/tunctl/tunctl.inc
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "The tunctl tool for controlling the TUN/TAP driver in Linux."
-+SECTION = "net"
-+LICENSE = "GPL"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/tunctl/tunctl-${PV}.tar.gz"
-+
-+do_compile() {
-+	oe_runmake tunctl
-+}
-+
-+do_install() {
-+	install -d ${D}/${sbindir}
-+	install -m 755 tunctl ${D}/${sbindir}
-+}
-diff --git a/recipes/tunctl/tunctl_1.5.bb b/recipes/tunctl/tunctl_1.5.bb
-new file mode 100644
-index 0000000..8a988a8
---- /dev/null
-+++ b/recipes/tunctl/tunctl_1.5.bb
-@@ -0,0 +1 @@
-+require tunctl.inc
--- 
-1.6.2.1
+Will do. And you had better included an Acked-by in the first place, then I 
+would have ignored that commit.
 
+NB, I won't comment on your strategy of pursuing folks into buying your view 
+of the OE-world. Interested readers will hopefully draw their own conclusions.
 
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
+:M:
 
 
 
