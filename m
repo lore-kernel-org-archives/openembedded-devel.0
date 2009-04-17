@@ -1,32 +1,31 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LuiQb-0004cD-2I
-	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 09:25:29 +0200
+	id 1LuiVS-0004ka-25
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 09:29:22 +0200
 Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LuiMk-0005Ht-Ex
-	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 07:20:02 +0000
+	id 1LuiRb-0005S9-0M
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 07:25:03 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 17 Apr 2009 07:20:02 +0000
+	Fri, 17 Apr 2009 07:25:03 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 17 Apr 2009 07:20:02 +0000
+	Fri, 17 Apr 2009 07:25:03 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 17 Apr 2009 09:18:56 +0200
-Message-ID: <gs9ah0$2ps$2@ger.gmane.org>
+Date: Fri, 17 Apr 2009 09:18:25 +0200
+Message-ID: <gs9ag2$2ps$1@ger.gmane.org>
 References: <49E7D1E7.9080604@bolloretelecom.eu>
-	<49E7D944.2080201@bolloretelecom.eu>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
-In-Reply-To: <49E7D944.2080201@bolloretelecom.eu>
+In-Reply-To: <49E7D1E7.9080604@bolloretelecom.eu>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.2
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -51,17 +50,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 07:26:00 -0000
+X-List-Received-Date: Fri, 17 Apr 2009 07:29:30 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 17-04-09 03:20, Jeremy Lainé wrote:
-> Attached is a similar patch for lib_package.bbclass.
->
-> Note: was /lib purposefully hard-coded? I changed it to ${base_libdir} which seemed more
-> correct. Comments?
+On 17-04-09 02:48, Jeremy Lainé wrote:
+> The attached patch does the following:
+> * define SOLIBS and SOLIBSDEV for darwin9 (identical to darwin8)
+> * make use of SOLIBS and SOLIBSDEV to populate FILE_* instead of hardcoded .so.* and .so
 
-looks good to me.
+This one looks good to me.
 
 regards,
 
