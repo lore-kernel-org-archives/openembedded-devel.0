@@ -1,40 +1,35 @@
-Received: from [212.27.42.1] (helo=smtp1-g21.free.fr)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LucoG-0003ea-Mo
+	(envelope-from <khimov@altell.ru>) id 1Lufr0-0005GZ-2B
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Apr 2009 03:24:07 +0200
-Received: from smtp1-g21.free.fr (localhost [127.0.0.1])
-	by smtp1-g21.free.fr (Postfix) with ESMTP id 8C508940048
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2009 03:20:05 +0200 (CEST)
-Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
-	[81.56.56.40])
-	by smtp1-g21.free.fr (Postfix) with ESMTP id 79F5A940034
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2009 03:20:03 +0200 (CEST)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id B48A6184023
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2009 03:20:04 +0200 (CEST)
-Message-ID: <49E7D944.2080201@bolloretelecom.eu>
-Date: Fri, 17 Apr 2009 03:20:04 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
+	Fri, 17 Apr 2009 06:39:08 +0200
+Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.hex)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1Lufn7-0005jQ-J2
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Apr 2009 08:35:05 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-References: <49E7D1E7.9080604@bolloretelecom.eu>
-In-Reply-To: <49E7D1E7.9080604@bolloretelecom.eu>
-X-SA-Exim-Connect-IP: 212.27.42.1
-X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
+Date: Fri, 17 Apr 2009 08:35:01 +0400
+User-Agent: KMail/1.9.9
+References: <200904151633.49146.khimov@altell.ru>
+	<1239798960-3586-4-git-send-email-khimov@altell.ru>
+	<20090416221015.GP17629@smtp.west.cox.net>
+In-Reply-To: <20090416221015.GP17629@smtp.west.cox.net>
+MIME-Version: 1.0
+Message-Id: <200904170835.02172.khimov@altell.ru>
+X-SA-Exim-Connect-IP: 83.222.23.61
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
-	SPF_NEUTRAL autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_BL_SPAMCOP_NET, RDNS_NONE,
+	SPF_SOFTFAIL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] bitbake.conf: pick up correct shared libraries on darwin
+Subject: Re: [PATCH 04/11] gcc 4.2.4: add gcc-multilib64dir.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,47 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 01:24:07 -0000
-Content-Type: multipart/mixed; boundary="------------060406070901020005040402"
-
---------------060406070901020005040402
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-Attached is a similar patch for lib_package.bbclass.
-
-Note: was /lib purposefully hard-coded? I changed it to ${base_libdir} wh=
-ich seemed more
-correct. Comments?
-
-Cheers,
---=20
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
-
---------------060406070901020005040402
-Content-Type: text/x-patch;
- name="lib_package.patch"
+X-List-Received-Date: Fri, 17 Apr 2009 04:39:08 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="lib_package.patch"
+Content-Disposition: inline
 
-diff --git a/classes/lib_package.bbclass b/classes/lib_package.bbclass
-index 9a48408..03ba9d0 100644
---- a/classes/lib_package.bbclass
-+++ b/classes/lib_package.bbclass
-@@ -1,9 +1,9 @@
- PACKAGES += "${PN}-bin"
- 
--FILES_${PN} = "${libexecdir} ${libdir}/lib*.so.* \
-+FILES_${PN} = "${libexecdir} ${libdir}/lib*${SOLIBS} \
- 	    ${sysconfdir} ${sharedstatedir} ${localstatedir} \
--	    /lib/*.so* ${datadir}/${PN} ${libdir}/${PN}"
--FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
-+	    ${base_libdir}/*${SOLIBS} ${datadir}/${PN} ${libdir}/${PN}"
-+FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
- 		${libdir}/*.a ${libdir}/pkgconfig /lib/*.a /lib/*.o \
- 		${datadir}/aclocal ${bindir}/*-config"
- FILES_${PN}-bin = "${bindir}/* ${sbindir}/* /bin/* /sbin/*"
+On Friday 17 April 2009 02:10:15 Tom Rini wrote:
+> On Wed, Apr 15, 2009 at 04:35:53PM +0400, Roman I Khimov wrote:
+> > ---
+> >  recipes/gcc/files/gcc-multilib64dir.patch |   43
+> > +++++++++++++++++++++++++++++ recipes/gcc/gcc-4.2.4.inc                 |
+> >    1 +
+> >  2 files changed, 44 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes/gcc/files/gcc-multilib64dir.patch
+>
+> Does this apply as-is to 4.1 and 4.3 too?  If not, lets name it
+> gcc-4.2.x-multilib64dir.patch.
 
---------------060406070901020005040402--
+Not tried yet. Again, this is primarily for review/feedback on overall 
+approach. If everything is OK, then I can try add more gcc/glibc versions as 
+already done with binutils.
+
+
