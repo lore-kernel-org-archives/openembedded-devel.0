@@ -1,27 +1,34 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Lurro-0000KE-3U
-	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 19:28:49 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 30ACB16DFDC
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LusDW-0000b9-Jy
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 19:51:20 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lus9c-0001KM-B0
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 17:47:08 +0000
+Received: from cuo02-acns-ce1.cisco.com ([64.101.22.72])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 17 Apr 2009 17:47:08 +0000
+Received: from msundius by cuo02-acns-ce1.cisco.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 17 Apr 2009 18:18:57 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 973B42A421B
-	for <openembedded-devel@openembedded.org>;
-	Fri, 17 Apr 2009 18:18:50 +0200 (CEST)
-MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Fri, 17 Apr 2009 18:18:19 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF763@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: initramfs howto?
-Thread-Index: Acm/eCJY66tQzZxuQpOy1XvMBO0z0g==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@openembedded.org>
-Subject: initramfs howto?
+	Fri, 17 Apr 2009 17:47:08 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Michael Sundius <msundius@sundius.com>
+Date: Fri, 17 Apr 2009 17:46:56 +0000 (UTC)
+Message-ID: <loom.20090417T174214-901@post.gmane.org>
+References: <loom.20090417T162838-591@post.gmane.org>
+	<49E8B372.1020908@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 64.101.22.72 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.15) Gecko/20080702 Fedora/2.0.0.15-1.fc8 Firefox/2.0.0.15)
+Sender: news <news@ger.gmane.org>
+Subject: Re: recipe "not available"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,16 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 17:28:56 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 17 Apr 2009 17:51:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-V2Ugd2FudCB0byB1c2UgYSBsaXR0bGUgaW5pdHJhbWZzIGZvciBvdXIgbWFjaGluZSAoaGlwb3gN
-CndpdGggbGludXgtMi42LjI0KSB0byBsb2FkIHNvbWUgbW9kdWxlcy4gSSd2ZSBmb3VuZCBzb21l
-DQpzYW1wbGVzIChlLmcuIGluaXRyYW1mcy1pbWFnZS5iYikuIEJ1dCB0aGUgdXNhZ2UgaXMgdG90
-YWxseQ0KdW5jbGVhciB0byBtZS4NCg0KSXMgdGhlcmUgYSBsaXR0bGUgaG93dG8vdHV0b3JpYWwg
-aG93IHRvIGNyZWF0ZSBhbiBpbml0cmFtZnMNCndpdGggb2U/DQoNClN0ZWZmZW4NCg==
+Philip Balister <philip <at> balister.org> writes:
+
+> 
+> Michael Sundius wrote:
+> > I've added a recipe for glibc to build the tools used by my company
+> > for our set top box. It seems to be parsed by bitbake (since if I
+> > intentionally add an erroneous line, bitbake will complain) however
+> > when it gets time to run the tasks spelled out in the recipe, I get
+> > the following errors, and a different version is used. 
+> 
+> Do you have an overlay in place? I've had similar maddening issues 
+> editing recipes from .dev that were duplicated in an overlay.
+> 
+> Philip
+> 
+why yes, I have a local directory where I'm keeping my recipes. 
+
+oddly enough this is the first recipe where I have a local one
+that has the same name and version as one in the 
+./openembedded/packages/glibc directory. 
+
+I thought that there might be an issue where it was confused by
+which file it should use. but I've since deleted the version
+in the openembedded/packages/glibc directory. I've also 
+removed the tmp directory... is there anything else I need to
+clean out to make sure there are no conflicts?
+
+how did you resolve your problems?
+
+thanks
+Mike
+
+
 
 
