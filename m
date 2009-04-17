@@ -1,39 +1,42 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LuiE4-0007dD-9C
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Apr 2009 09:13:24 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 3873516DFDC
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2009 09:07:12 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 95C0E2A421E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2009 09:07:06 +0200 (CEST)
-MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Fri, 17 Apr 2009 09:06:36 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF760@hiob.intern.dresearch.de>
-In-Reply-To: <1239887399.21612.182.camel@hammer.suse.cz>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] wrong shebang in mc-extfs files
-Thread-Index: Acm+lWiZIy/jrZeVQbax9Wq8rnKR2QAlXIpg
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF75C@hiob.intern.dresearch.de>
-	<1239887399.21612.182.camel@hammer.suse.cz>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 87.193.137.78
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LuiKn-0007jh-Cr
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 09:22:14 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LuiGy-00052n-IM
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 07:14:04 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 17 Apr 2009 07:14:04 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 17 Apr 2009 07:14:04 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 17 Apr 2009 09:13:53 +0200
+Message-ID: <gs9a7h$23k$1@ger.gmane.org>
+References: <49E7A12F.7080008@gremlin.it>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
+In-Reply-To: <49E7A12F.7080008@gremlin.it>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.2
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW, RDNS_NONE, SPF_HELO_PASS,
+	SPF_PASS autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: wrong shebang in mc-extfs files
+Subject: Re: [PATCH][STABLE] rpm-native_4.4.2.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,19 +50,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 07:13:36 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 17 Apr 2009 07:22:58 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> > I'm not that familiar with this python/bitbake path magic.=20
-> > Can someone please help?
->=20
-> configure magic:
-> http://cgit.openembedded.net/cgit.cgi?url=3Dopenembedded/commit/
-> &id=3Da873d2ce9842923b8d0abae7e4cdfca606b3dd90
+On 16-04-09 23:20, Alessandro GARDICH wrote:
+> make rpm-native don't fail on Q&A checj with "non dbg contains .debug,
+> rpm-native,
+> /work/i686-linux/rpm-native-4.4.2.3-r15/install/rpm-native/staging/i686-linux/usr/lib/rpm/.debug/rpmq"
 
-Thx for the fast fix.
+NACK:
+
+1) this isn't in .dev yet
+2) since when do -native recipes generate packages?
+
+regards,
+
+Koen
+
 
 
