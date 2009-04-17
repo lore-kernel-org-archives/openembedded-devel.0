@@ -1,34 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LusDW-0000b9-Jy
-	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 19:51:20 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lus9c-0001KM-B0
-	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 17:47:08 +0000
-Received: from cuo02-acns-ce1.cisco.com ([64.101.22.72])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 17 Apr 2009 17:47:08 +0000
-Received: from msundius by cuo02-acns-ce1.cisco.com with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <trini@kernel.crashing.org>) id 1LusPK-0000mS-6H
+	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 20:03:42 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090417175920.RUIB15318.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Fri, 17 Apr 2009 17:47:08 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 17 Apr 2009 13:59:20 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id ghzJ1b00M4dMFYL04hzJuW; Fri, 17 Apr 2009 13:59:18 -0400
+X-Authority-Analysis: v=1.0 c=1 a=C1szGUHcE44A:10 a=PGPu3ob2VHUA:10
+	a=ViR93OXvZi97mdRGBHsA:9 a=37Tgj2cwji1mhVZRtsh2FdbGqkYA:4
+X-CM-Score: 0.00
+Date: Fri, 17 Apr 2009 10:59:18 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-From: Michael Sundius <msundius@sundius.com>
-Date: Fri, 17 Apr 2009 17:46:56 +0000 (UTC)
-Message-ID: <loom.20090417T174214-901@post.gmane.org>
-References: <loom.20090417T162838-591@post.gmane.org>
-	<49E8B372.1020908@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 64.101.22.72 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.15) Gecko/20080702 Fedora/2.0.0.15-1.fc8 Firefox/2.0.0.15)
-Sender: news <news@ger.gmane.org>
-Subject: Re: recipe "not available"
+Message-ID: <20090417175918.GT17629@smtp.west.cox.net>
+References: <200904151633.49146.khimov@altell.ru>
+	<1239798960-3586-4-git-send-email-khimov@altell.ru>
+	<20090416221015.GP17629@smtp.west.cox.net>
+	<200904170835.02172.khimov@altell.ru>
+MIME-Version: 1.0
+In-Reply-To: <200904170835.02172.khimov@altell.ru>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 04/11] gcc 4.2.4: add gcc-multilib64dir.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,42 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 17:51:46 -0000
+X-List-Received-Date: Fri, 17 Apr 2009 18:06:01 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Philip Balister <philip <at> balister.org> writes:
-
+On Fri, Apr 17, 2009 at 08:35:01AM +0400, Roman I Khimov wrote:
+> On Friday 17 April 2009 02:10:15 Tom Rini wrote:
+> > On Wed, Apr 15, 2009 at 04:35:53PM +0400, Roman I Khimov wrote:
+> > > ---
+> > >  recipes/gcc/files/gcc-multilib64dir.patch |   43
+> > > +++++++++++++++++++++++++++++ recipes/gcc/gcc-4.2.4.inc                 |
+> > >    1 +
+> > >  2 files changed, 44 insertions(+), 0 deletions(-)
+> > >  create mode 100644 recipes/gcc/files/gcc-multilib64dir.patch
+> >
+> > Does this apply as-is to 4.1 and 4.3 too?  If not, lets name it
+> > gcc-4.2.x-multilib64dir.patch.
 > 
-> Michael Sundius wrote:
-> > I've added a recipe for glibc to build the tools used by my company
-> > for our set top box. It seems to be parsed by bitbake (since if I
-> > intentionally add an erroneous line, bitbake will complain) however
-> > when it gets time to run the tasks spelled out in the recipe, I get
-> > the following errors, and a different version is used. 
-> 
-> Do you have an overlay in place? I've had similar maddening issues 
-> editing recipes from .dev that were duplicated in an overlay.
-> 
-> Philip
-> 
-why yes, I have a local directory where I'm keeping my recipes. 
+> Not tried yet. Again, this is primarily for review/feedback on overall 
+> approach. If everything is OK, then I can try add more gcc/glibc versions as 
+> already done with binutils.
 
-oddly enough this is the first recipe where I have a local one
-that has the same name and version as one in the 
-./openembedded/packages/glibc directory. 
+I think we're all in agreement that the approach (do what Debian does)
+is fine.  So lets move on to making sure most distro's can easily take
+this in :)
 
-I thought that there might be an issue where it was confused by
-which file it should use. but I've since deleted the version
-in the openembedded/packages/glibc directory. I've also 
-removed the tmp directory... is there anything else I need to
-clean out to make sure there are no conflicts?
-
-how did you resolve your problems?
-
-thanks
-Mike
-
-
+-- 
+Tom Rini
 
 
