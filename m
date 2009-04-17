@@ -1,35 +1,38 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [212.27.42.2] (helo=smtp2-g21.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LuZrv-0005PM-A7
-	for openembedded-devel@openembedded.org; Fri, 17 Apr 2009 00:15:41 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090416221141.BWWG10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Thu, 16 Apr 2009 18:11:41 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id gNBg1b00J4dMFYL04NBgNt; Thu, 16 Apr 2009 18:11:41 -0400
-X-Authority-Analysis: v=1.0 c=1 a=r3eygV1rdZgA:10 a=ReZai5HaP1skdfGlnsAA:9
-	a=7zqc4a0oHDZ4GU4Yi4F7GyHwiVQA:4
-X-CM-Score: 0.00
-Date: Thu, 16 Apr 2009 15:11:40 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090416221140.GQ17629@smtp.west.cox.net>
-References: <200904151633.49146.khimov@altell.ru>
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LucJs-0006Hb-0V
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Apr 2009 02:52:42 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 049D94B0049
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2009 02:48:41 +0200 (CEST)
+Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
+	[81.56.56.40])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id E07CF4B0028
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2009 02:48:38 +0200 (CEST)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by sharky.jerryweb.org (Postfix) with ESMTP id EAF23184023
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2009 02:48:39 +0200 (CEST)
+Message-ID: <49E7D1E7.9080604@bolloretelecom.eu>
+Date: Fri, 17 Apr 2009 02:48:39 +0200
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
+	Mnenhy/0.7.5.0
 MIME-Version: 1.0
-In-Reply-To: <200904151633.49146.khimov@altell.ru>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 68.230.241.39
-X-SA-Exim-Mail-From: trini@kernel.crashing.org
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=AWL,BAYES_20,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,RDNS_NONE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] AMD64 and multilib support
+Subject: [PATCH] bitbake.conf: pick up correct shared libraries on darwin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +46,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2009 22:15:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 17 Apr 2009 00:52:42 -0000
+Content-Type: multipart/mixed; boundary="------------020706010303070400010300"
 
-On Wed, Apr 15, 2009 at 04:33:48PM +0400, Roman I Khimov wrote:
+--------------020706010303070400010300
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-> Hello all.
-> 
-> This patch series (will follow in replies) tries to bring in AMD64/x86_64 
-> support into OE. This required some intrusive toolchain fixes that I want to 
-> post here for review and feedback as I think (or rather know ;)) I might have 
-> broken something along the way.
+The attached patch does the following:
+* define SOLIBS and SOLIBSDEV for darwin9 (identical to darwin8)
+* make use of SOLIBS and SOLIBSDEV to populate FILE_* instead of hardcode=
+d .so.* and .so
 
-Have you done a build of meta-toolchain as well?
+--=20
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
 
--- 
-Tom Rini
+--------------020706010303070400010300
+Content-Type: text/x-patch;
+ name="solibs.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="solibs.patch"
 
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index f31e56d..e5073a1 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -199,19 +199,21 @@ MULTI_PROVIDER_WHITELIST = "virtual/libintl"
+ SOLIBS = ".so.*"
+ SOLIBS_darwin = ".*.dylib"
+ SOLIBS_darwin8 = ".*.dylib"
++SOLIBS_darwin9 = ".*.dylib"
+ 
+ SOLIBSDEV = ".so"
+ SOLIBSDEV_darwin = ".dylib"
+ SOLIBSDEV_darwin8 = ".dylib"
++SOLIBSDEV_darwin9 = ".dylib"
+ 
+ PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-dev ${PN}-locale"
+ #enable this when bitbake is upgraded to cope with ++ values in the field
+ PACKAGES_DYNAMIC = "${PN}-locale-*"
+ FILES = ""
+ 
+-FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
++FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+-            ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*.so* ${datadir}/${PN} ${libdir}/${PN}/* \
++            ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*${SOLIBS} ${datadir}/${PN} ${libdir}/${PN}/* \
+             ${datadir}/pixmaps ${datadir}/applications \
+             ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
+             ${libdir}/bonobo/servers"
+@@ -220,7 +222,7 @@ FILES_${PN}-doc = "${docdir} ${mandir} ${infodir} ${datadir}/gtk-doc \
+             ${datadir}/gnome/help"
+ SECTION_${PN}-doc = "doc"
+ 
+-FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
++FILES_${PN}-dev = "${includedir} ${libdir}/lib*${SOLIBSDEV} ${libdir}/*.la \
+                 ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
+                 ${base_libdir}/*.a ${base_libdir}/*.o ${datadir}/aclocal"
+ SECTION_${PN}-dev = "devel"
 
+--------------020706010303070400010300--
