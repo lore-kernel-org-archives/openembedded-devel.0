@@ -1,34 +1,39 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [208.51.207.131] (helo=mail.2mi.com.br)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LugKC-0008VM-Hi
+	(envelope-from <marcos@2mi.com.br>) id 1LuhNc-0001uz-RU
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Apr 2009 07:09:20 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.hex)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LugGL-000FKp-Eh
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Apr 2009 09:05:17 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Fri, 17 Apr 2009 08:17:48 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.2mi.com.br (Postfix) with ESMTP id 378505010907
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2009 03:21:00 -0300 (BRT)
+X-Virus-Scanned: amavisd-new at 2mi.com.br
+Received: from mail.2mi.com.br ([127.0.0.1])
+	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id nRspIRTiVcWc
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2009 03:20:56 -0300 (BRT)
+Received: from [192.168.0.108] (201-43-205-94.dsl.telesp.net.br
+	[201.43.205.94])
+	by mail.2mi.com.br (Postfix) with ESMTP id C1FAA50277D0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2009 03:20:54 -0300 (BRT)
+From: Marcos Amorim <marcos@2mi.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Apr 2009 09:05:14 +0400
-User-Agent: KMail/1.9.9
-References: <200904151633.49146.khimov@altell.ru>
-	<20090416221140.GQ17629@smtp.west.cox.net>
-In-Reply-To: <20090416221140.GQ17629@smtp.west.cox.net>
-MIME-Version: 1.0
-Message-Id: <200904170905.15115.khimov@altell.ru>
-X-SA-Exim-Connect-IP: 83.222.23.61
-X-SA-Exim-Mail-From: khimov@altell.ru
+Organization: 2MI Tecnologia
+Date: Fri, 17 Apr 2009 03:12:55 -0300
+Message-Id: <1239948775.4599.12.camel@faraday>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 208.51.207.131
+X-SA-Exim-Mail-From: marcos@2mi.com.br
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on serenity
-X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=AWL,BAYES_50,
-	RCVD_IN_BL_SPAMCOP_NET, RDNS_NONE,
-	SPF_SOFTFAIL autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=0.1 required=5.0 tests=BAYES_50,RDNS_NONE,
+	SPF_HELO_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] AMD64 and multilib support
+Subject: Add missing file to ipkg-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +47,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2009 05:09:28 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 17 Apr 2009 06:18:04 -0000
+X-Groupsio-MsgNum: 9478
+Content-Type: multipart/mixed; boundary="=-mFIHRVrRSdglby7ELBmW"
+
+--=-mFIHRVrRSdglby7ELBmW
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 17 April 2009 02:11:40 Tom Rini wrote:
-> On Wed, Apr 15, 2009 at 04:33:48PM +0400, Roman I Khimov wrote:
-> > Hello all.
-> >
-> > This patch series (will follow in replies) tries to bring in AMD64/x86_64
-> > support into OE. This required some intrusive toolchain fixes that I want
-> > to post here for review and feedback as I think (or rather know ;)) I
-> > might have broken something along the way.
->
-> Have you done a build of meta-toolchain as well?
-
-Not yet. gcc-cross was the main target.
-
-[adding to TODO]
+The arfile.py is required by ipkg.py but not was install
 
 
+
+Thanks
+
+Marcos Amorim
+2MI Tecnologia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--=-mFIHRVrRSdglby7ELBmW
+Content-Disposition: attachment; filename=0001-Add-missing-arfile.py-to-install.patch
+Content-Type: application/mbox; name=0001-Add-missing-arfile.py-to-install.patch
+Content-Transfer-Encoding: 7bit
+
+From 3013527d004712d9d4cf69ec430cd81d9f50bca6 Mon Sep 17 00:00:00 2001
+From: Marcos Amorim <marcos@2mi.com.br>
+Date: Fri, 17 Apr 2009 03:05:33 -0300
+Subject: [PATCH] Add missing arfile.py to install
+
+---
+ recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
+index 8baffd2..f0c72fa 100644
+--- a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
++++ b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL"
+ CONFLICTS = "ipkg-link"
+ RDEPENDS = "python"
+ SRCDATE = "20050404"
+-PR = "r23"
++PR = "r24"
+ 
+ SRC_URI = "${HANDHELDS_CVS};module=ipkg-utils \
+            file://ipkg-utils-fix.patch;patch=1 \
+@@ -19,7 +19,7 @@ SRC_URI = "${HANDHELDS_CVS};module=ipkg-utils \
+ 
+ S = "${WORKDIR}/ipkg-utils"
+ 
+-INSTALL = "ipkg-build ipkg-deb-unbuild ipkg-unbuild ipkg-compare-versions ipkg-upload ipkg-make-index ipkg-link ipkg.py ipkg-list-fields"
++INSTALL = "ipkg-build ipkg-deb-unbuild ipkg-unbuild ipkg-compare-versions ipkg-upload ipkg-make-index ipkg-link ipkg.py arfile.py ipkg-list-fields"
+ 
+ do_compile() {
+ 	oe_runmake ipkg-compare-versions
+-- 
+1.5.6.5
+
+
+--=-mFIHRVrRSdglby7ELBmW--
