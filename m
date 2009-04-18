@@ -1,17 +1,34 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1Lv4tP-0005Dv-FV
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Apr 2009 09:23:15 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id B66B9189358; Sat, 18 Apr 2009 09:22:46 +0200 (CEST)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Lv6xr-0003Yx-8y
+	for openembedded-devel@openembedded.org; Sat, 18 Apr 2009 11:35:59 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lv6tu-0003yh-EV
+	for openembedded-devel@openembedded.org; Sat, 18 Apr 2009 09:31:54 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 18 Apr 2009 09:31:54 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 18 Apr 2009 09:31:54 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Apr 2009 09:22:46 +0200
-Message-Id: <1240039366-5095-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] libelf: fix another GNU_HASH issues while building libelf
+Date: Sat, 18 Apr 2009 11:31:38 +0200
+Message-ID: <gsc6lq$rsp$1@ger.gmane.org>
+References: <20090414234609.GA27890@denix.org>	<1239752998-7677-1-git-send-email-denis@denix.org>
+	<20090416163353.GG17629@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
+In-Reply-To: <20090416163353.GG17629@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] udev 124: add cache invalidation logic on kernel change or its bootargs/cmdline
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,39 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Apr 2009 07:23:17 -0000
+X-List-Received-Date: Sat, 18 Apr 2009 09:35:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Carsten Haitzler (Rasterman <raster@rasterman.com>
+On 16-04-09 18:33, Tom Rini wrote:
+> On Tue, Apr 14, 2009 at 07:49:58PM -0400, Denys Dmytriyenko wrote:
+>
+>> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
+>> ---
+>>   recipes/udev/udev-124/init |   10 +++++++++-
+>>   1 files changed, 9 insertions(+), 1 deletions(-)
+>
+> So, for making it optional, how about adding something to /etc/default
+> to enable / disable dev caching all together?  And, I believe
+> /proc/atags would just be cp /proc/atags /tmp/atags || touch /tmp/atags.
 
+Do we really want atags in there? As the name says, they are ARM TAGs, 
+and only when kexec is enabled. Does it buy us anything over /proc/cmdline?
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/libelf/libelf_0.8.6.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+regards,
 
-diff --git a/recipes/libelf/libelf_0.8.6.bb b/recipes/libelf/libelf_0.8.6.bb
-index 4bd548e..f0903d7 100644
---- a/recipes/libelf/libelf_0.8.6.bb
-+++ b/recipes/libelf/libelf_0.8.6.bb
-@@ -2,6 +2,7 @@ DESCRIPTION = "libelf is an ELF object file access library. \
- The elf library provides routines to access, and manipulate, Elf object files."
- LICENSE = "LGPL"
- SECTION = "libs"
-+PR = "r1"
- 
- SRC_URI = "http://www.mr511.de/software/libelf-${PV}.tar.gz \
-            http://www.stud.uni-hannover.de/~michael/software/libelf-${PV}.tar.gz"
-@@ -10,6 +11,8 @@ inherit autotools
- 
- PARALLEL_MAKE = ""
- 
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
- do_configure_prepend () {
- 	if test ! -e acinclude.m4; then
- 		cp aclocal.m4 acinclude.m4
--- 
-1.5.6.5
+Koen
+
 
 
 
