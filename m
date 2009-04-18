@@ -1,34 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lv6xr-0003Yx-8y
-	for openembedded-devel@openembedded.org; Sat, 18 Apr 2009 11:35:59 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lv6tu-0003yh-EV
-	for openembedded-devel@openembedded.org; Sat, 18 Apr 2009 09:31:54 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 18 Apr 2009 09:31:54 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 18 Apr 2009 09:31:54 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 18 Apr 2009 11:31:38 +0200
-Message-ID: <gsc6lq$rsp$1@ger.gmane.org>
-References: <20090414234609.GA27890@denix.org>	<1239752998-7677-1-git-send-email-denis@denix.org>
-	<20090416163353.GG17629@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090413 Shredder/3.0b3pre
-In-Reply-To: <20090416163353.GG17629@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] udev 124: add cache invalidation logic on kernel change or its bootargs/cmdline
+	(envelope-from <tangx5047@gmail.com>) id 1LvAMn-0008A2-Ky
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Apr 2009 15:13:57 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so173614rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Apr 2009 06:09:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=CSKPRZT2PGtoJODqWZbDl389lNn60sUz4AoAvEEMLWs=;
+	b=ucXUb5PdxlQkm2Q/KzqFC4HWdWG4GEivmnCyRWrzn1t/eWCyQpNtqjpbMsDas39Ur5
+	BBi4p4WRZA5q/ETSDAFD9o82Mdmoldqm8nGB5H9SoE9R1bbJ/UWKCtxB55bI5u4OqMt1
+	rJPbt3PEXWfhELoOjewG7tl8F5eRoM92Y19+4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=doZVy9RTeGfb5PefMHVIsVQqyZFjdOmk6IeeHTESjoCFt8EOs4NrEu8odG3CFQly86
+	pRenmU+UYFbF/pVSId0hVCLig4qOynlbkMUknNggJ5wpz/gdchgrzZiU60D9sENeqkmc
+	68gH2z4Fi2cNFBqM9HO5sR/iyor/Y5JpNe+00=
+MIME-Version: 1.0
+Received: by 10.141.20.7 with SMTP id x7mr1649654rvi.14.1240060191322; Sat, 18 
+	Apr 2009 06:09:51 -0700 (PDT)
+Date: Sat, 18 Apr 2009 21:09:51 +0800
+Message-ID: <f7ed13a10904180609re511797nf29ac52a878a6419@mail.gmail.com>
+From: Victor Tang <tangx5047@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: recipe "not available"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +40,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Apr 2009 09:35:59 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 18 Apr 2009 13:13:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 16-04-09 18:33, Tom Rini wrote:
-> On Tue, Apr 14, 2009 at 07:49:58PM -0400, Denys Dmytriyenko wrote:
->
->> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
->> ---
->>   recipes/udev/udev-124/init |   10 +++++++++-
->>   1 files changed, 9 insertions(+), 1 deletions(-)
->
-> So, for making it optional, how about adding something to /etc/default
-> to enable / disable dev caching all together?  And, I believe
-> /proc/atags would just be cp /proc/atags /tmp/atags || touch /tmp/atags.
-
-Do we really want atags in there? As the name says, they are ARM TAGs, 
-and only when kexec is enabled. Does it buy us anything over /proc/cmdline?
-
-regards,
-
-Koen
+What's bitbake command,bitbake glibc or bitbake -b   *.bb?Try the second.
 
 
 
+-- 
+Victor Tang
 
