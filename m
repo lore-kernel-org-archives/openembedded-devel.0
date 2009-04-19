@@ -1,25 +1,35 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1Lvc75-0005wH-CA
+	(envelope-from <andrea.adami@gmail.com>) id 1LvfbM-0000Ui-LQ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Apr 2009 20:51:38 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id C223B2C7FD;
-	Sun, 19 Apr 2009 18:45:19 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 18cqfHB8sBx3; Sun, 19 Apr 2009 18:45:18 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id C19672C797;
-	Sun, 19 Apr 2009 18:45:17 +0000 (UTC)
-Message-ID: <49EB7194.2030307@gmail.com>
-Date: Sun, 19 Apr 2009 20:46:44 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+	Mon, 20 Apr 2009 00:35:04 +0200
+Received: by bwz19 with SMTP id 19so1638721bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Apr 2009 15:30:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=MzxwuokwUgIgptBBavLcQU9Zro/Z4huaXu2SUItS1yE=;
+	b=KhTYt156nR8I8PBEfE1QwJQHIR4fz8xKnWdna+lq63IPh5Cm6KVcgclhCfi+ur6dd0
+	k8YWY7afCVuAUsa7Hgk0H7AsFQO0Jyuw8bNdpjH4HLxUCzBlaWGA7+9aNBgDoeK98N/R
+	Kb445ELuyT1HYGFfMBJdAhb3yrSbu7Q+KPp/Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=akyQ8k4T/mvKr2qWHJm3punhMhAHYTvWXGydmxW9ICE9RPaX+5aOTVIQ1RWN3ypLV7
+	c5nHa0xglNatMZ+r2bC2D6k2znqaGuxWLE6O0ciY05FvdjyQgDmp1R226yGYL0EnD3Jl
+	nQW84XVEy4vQHKSuSb198ebxw8tsivrVxO5UU=
 MIME-Version: 1.0
+Received: by 10.223.111.134 with SMTP id s6mr1381829fap.37.1240180247571; Sun, 
+	19 Apr 2009 15:30:47 -0700 (PDT)
+In-Reply-To: <49EB7194.2030307@gmail.com>
+References: <49EB7194.2030307@gmail.com>
+Date: Mon, 20 Apr 2009 00:30:47 +0200
+Message-ID: <d1b08f940904191530vc2961fdqffa694a6d8c9fe94@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [BUG][STABLE] bluez-utils fails with stable/2009
+Subject: Re: [BUG][STABLE] bluez-utils fails with stable/2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,24 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Apr 2009 18:51:46 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Sun, 19 Apr 2009 22:35:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
-I am trying to build stable/2009 - qemux86 - x11-image
-but I face to an error in bluez-utils-3.36-r4
+slightly different problem in angstrom-dev : bluez-utils compiles but
+then gnome-bluetooth fails on obexd.
+(At first sight the headers are provided by bluez-utils).
+http://tinderbox.openembedded.net/public/logs/4506615.txt
 
-bitbake -cclean bluez-utils && bitbake bluez-utils
-http://tinderbox.openembedded.net/public/logs/4468808.txt
+Issue Bluez3 vs. Bluez4?
 
-Seems that with org.openembedded.dev branch bluez-utils builds, although
-x11-image is broken
+Regards
 
-I tried some workaround without success, and I need help from someone or
-the mantainer of this recipe.
-TIA
-
-/marco
+Andrea
 
 
