@@ -1,29 +1,22 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LvbwX-0004Td-Bg
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Apr 2009 20:40:47 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id B0EE22C7FD
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Apr 2009 18:34:25 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BDsxxzIsnpAh
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Apr 2009 18:34:19 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id 431492C797
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Apr 2009 18:34:19 +0000 (UTC)
-Message-ID: <49EB6F02.1030402@gmail.com>
-Date: Sun, 19 Apr 2009 20:35:46 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lvc3k-0005Up-PW
+	for openembedded-devel@openembedded.org; Sun, 19 Apr 2009 20:48:09 +0200
+Received: (qmail 3502 invoked by uid 813007); 19 Apr 2009 18:43:54 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 Apr 2009 18:43:54 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: devshell not working with screen remote shell
+Date: Sun, 19 Apr 2009 20:44:37 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <c15f914f0904180744m137b82c5r552a3b8431954165@mail.gmail.com>
+In-Reply-To: <c15f914f0904180744m137b82c5r552a3b8431954165@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200904192044.39103.marcin@juszkiewicz.com.pl>
+Subject: Re: Building python without downloading dependencies for all modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,51 +30,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Apr 2009 18:40:56 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 19 Apr 2009 18:48:13 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-devshell is not working when you run bitbake in a screen remote ssh shell
-(also potest here http://bugs.openembedded.net/show_bug.cgi?id=5084)
+Dnia sobota, 18 kwietnia 2009 o 16:44:29 Bart Staal napisa=C5=82(a):
+
+> I'm a relative new guy to the OE world, but I fairly managed to find
+> my way through it and build images for my NAS (ch3snas).
+
+If it is not in OE then will you merge support for it?
+
+> I want to equip my NAS with the python interpreter. If I 'bitbake
+> python' a big nasty list of dependencies is pulled from the net, eg
+> x11 headers, sqlite, openssl, tcltk, etc, etc. Calling 'bitbake
+> python-core' doesn't work, but I now I understand that this package
+> is created if the python recipe is built.
+
+> I'd like to have a way to only download/build the core python stuff,
+> with only a few modules which I really need. Is there a way to
+> achieve this with the existing python recipes in the OE repository or
+> should I create my own python recipes?
+
+We build Python with lot of extensions. Each module is packaged=20
+separately so you can choose which exactly parts you need. What you see=20
+is build dependencies (which are huge) but result will require all those=20
+extra libs only if you will install all modules.
+
+So live with it or change DEPENDS line in python_VER.bb recipe (but that=20
+way is not so supported by us).
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
-$ bitbake -cdevshell bluez-utils
-NOTE: Handling BitBake files: - (6658/6658) [100 %]
-NOTE: Parsing finished. 6398 cached, 0 parsed, 260 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: build 200904192010: started
-
-OE Build Configuration:
-BB_VERSION        = "1.8.13"
-METADATA_BRANCH   = "stable/2009"
-METADATA_REVISION = "6ea387ca312c4686746c387b56735f7b96f599b3"
-TARGET_ARCH       = "i586"
-TARGET_OS         = "linux"
-MACHINE           = "qemux86"
-DISTRO            = "kaeilos"
-DISTRO_VERSION    = "2008.1-test-20090419"
-
-NOTE: oestats: build 140918
-...snip...
-NOTE: package bluez-utils-3.36-r5: task do_patch: completed
-NOTE: Running task 32 of 32 (ID: 4,
-/home/koan/devel/openembedded/recipes/bluez/bluez-utils_3.36.bb,
-do_devshell)
-NOTE: package bluez-utils-3.36-r5: task do_devshell: started
-ERROR: function do_devshell failed
-ERROR: log data follows
-(/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/bluez-utils-3.36-r5/temp/log.do_devshell.5388)
-| cannot open display:
-| Run 'gnome-terminal --help' to see a full list of available command line
-options.
-
-
-I already tried to solve this time ago using different option in bitbake
-code
-(trying to activate xterm instead of the default x terminal) and trying
-to set
-DISPLAY and xauth in several ways without success.
-
-/marco
 
 
