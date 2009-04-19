@@ -1,22 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lvc3k-0005Up-PW
-	for openembedded-devel@openembedded.org; Sun, 19 Apr 2009 20:48:09 +0200
-Received: (qmail 3502 invoked by uid 813007); 19 Apr 2009 18:43:54 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 19 Apr 2009 18:43:54 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 Apr 2009 20:44:37 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <c15f914f0904180744m137b82c5r552a3b8431954165@mail.gmail.com>
-In-Reply-To: <c15f914f0904180744m137b82c5r552a3b8431954165@mail.gmail.com>
+	(envelope-from <koansoftware@gmail.com>) id 1Lvc75-0005wH-CA
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Apr 2009 20:51:38 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id C223B2C7FD;
+	Sun, 19 Apr 2009 18:45:19 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 18cqfHB8sBx3; Sun, 19 Apr 2009 18:45:18 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id C19672C797;
+	Sun, 19 Apr 2009 18:45:17 +0000 (UTC)
+Message-ID: <49EB7194.2030307@gmail.com>
+Date: Sun, 19 Apr 2009 20:46:44 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-Message-Id: <200904192044.39103.marcin@juszkiewicz.com.pl>
-Subject: Re: Building python without downloading dependencies for all modules
+To: openembedded-devel@lists.openembedded.org
+Subject: [BUG][STABLE] bluez-utils fails with stable/2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,44 +33,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Apr 2009 18:48:13 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sun, 19 Apr 2009 18:51:46 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 18 kwietnia 2009 o 16:44:29 Bart Staal napisa=C5=82(a):
+Hi,
+I am trying to build stable/2009 - qemux86 - x11-image
+but I face to an error in bluez-utils-3.36-r4
 
-> I'm a relative new guy to the OE world, but I fairly managed to find
-> my way through it and build images for my NAS (ch3snas).
+bitbake -cclean bluez-utils && bitbake bluez-utils
+http://tinderbox.openembedded.net/public/logs/4468808.txt
 
-If it is not in OE then will you merge support for it?
+Seems that with org.openembedded.dev branch bluez-utils builds, although
+x11-image is broken
 
-> I want to equip my NAS with the python interpreter. If I 'bitbake
-> python' a big nasty list of dependencies is pulled from the net, eg
-> x11 headers, sqlite, openssl, tcltk, etc, etc. Calling 'bitbake
-> python-core' doesn't work, but I now I understand that this package
-> is created if the python recipe is built.
+I tried some workaround without success, and I need help from someone or
+the mantainer of this recipe.
+TIA
 
-> I'd like to have a way to only download/build the core python stuff,
-> with only a few modules which I really need. Is there a way to
-> achieve this with the existing python recipes in the OE repository or
-> should I create my own python recipes?
-
-We build Python with lot of extensions. Each module is packaged=20
-separately so you can choose which exactly parts you need. What you see=20
-is build dependencies (which are huge) but result will require all those=20
-extra libs only if you will install all modules.
-
-So live with it or change DEPENDS line in python_VER.bb recipe (but that=20
-way is not so supported by us).
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+/marco
 
 
