@@ -1,19 +1,23 @@
 Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LvoB9-0000vV-3o
+	(envelope-from <koansoftware@gmail.com>) id 1LvoK2-0001BE-Kx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Apr 2009 09:44:35 +0200
+	Mon, 20 Apr 2009 09:53:47 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id CA39E2C7FD;
-	Mon, 20 Apr 2009 07:38:14 +0000 (UTC)
+	by wiki.koala.it (Postfix) with ESMTP id 45F4E2C7FD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Apr 2009 07:47:26 +0000 (UTC)
 Received: from wiki.koala.it ([127.0.0.1])
 	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SFRLiXcAwG54; Mon, 20 Apr 2009 07:38:13 +0000 (UTC)
+	with ESMTP id qgOWJQ0FDvRT
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Apr 2009 07:47:24 +0000 (UTC)
 Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 688D82C797;
-	Mon, 20 Apr 2009 07:38:12 +0000 (UTC)
-Message-ID: <49EC26E1.8020909@gmail.com>
-Date: Mon, 20 Apr 2009 09:40:17 +0200
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 8C0B42C797
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Apr 2009 07:47:24 +0000 (UTC)
+Message-ID: <49EC2909.2030903@gmail.com>
+Date: Mon, 20 Apr 2009 09:49:29 +0200
 From: Marco Cavallini <koansoftware@gmail.com>
 Organization: Marco Cavallini - Bergamo - Italia
 User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
@@ -36,7 +40,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 07:44:35 -0000
+X-List-Received-Date: Mon, 20 Apr 2009 07:53:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -50,22 +54,20 @@ s hakkesteegt ha scritto:
 > manually.
 > 
 
-Siebren,
-thank you for answering.
-I am using a remote ssh connection to the OE development server and I
-use screen package inside it.
-I tried adding your lines and now the build stops here
+I already tried all the available option witout success.
+Maybe I'm the only using a remote ssh shell + screen... :-(
 
- NOTE: package bluez-utils-3.36-r5: task do_devshell: started
 
-but nothing happens.
-
-Are you using this with the same conditions (remote ssh + screen) or
-locally?
+# Some common terminal programs to choose from
+GNOME_TERMCMD = 'gnome-terminal --disable-factory -t "$TERMWINDOWTITLE"'
+GNOME_TERMCMDRUN = '${GNOME_TERMCMD} -x $SHELLCMDS'
+SCREEN_TERMCMD = 'screen -D -m -t "$TERMWINDOWTITLE"'
+SCREEN_TERMCMDRUN = '${SCREEN_TERMCMD} $SHELLCMDS'
+XTERM_TERMCMD = 'xterm -T "$TERMWINDOWTITLE"'
+XTERM_TERMCMDRUN = '${XTERM_TERMCMD} -e $SHELLCMDS'
+KONSOLE_TERMCMD = 'konsole -T "$TERMWINDOWTITLE"'
+KONSOLE_TERMCMDRUN = '${KONSOLE_TERMCMD} -e $SHELLCMDS'
 
 /marco
-
-
-
 
 
