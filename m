@@ -1,26 +1,32 @@
-Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
+Received: from [68.230.241.40] (helo=fed1rmmtao106.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Lw1E7-0000eC-8J
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Apr 2009 23:40:31 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KIF006TY5BOGA2A@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	20 Apr 2009 16:35:49 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C691D6B83A8; Mon,
-	20 Apr 2009 17:35:47 -0400 (EDT)
-Date: Mon, 20 Apr 2009 17:35:47 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090420213547.GE6379@denix.org>
+	(envelope-from <trini@kernel.crashing.org>) id 1Lw1Lq-0000zK-6S
+	for openembedded-devel@openembedded.org; Mon, 20 Apr 2009 23:48:30 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao106.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090420214405.HPMA22254.fed1rmmtao106.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 20 Apr 2009 17:44:05 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id hxk41b00K4dMFYL04xk4EQ; Mon, 20 Apr 2009 17:44:06 -0400
+X-Authority-Analysis: v=1.0 c=1 a=wpJ-lJ1ofboA:10 a=Tqv_pNNaqBUA:10
+	a=Q4-j1AaZAAAA:8 a=4HVRqb_MAAAA:8 a=22pK5S-mAAAA:8
+	a=7aR8due0lZMCuoknc6cA:9
+	a=CIPBv1m0B1uCjVqvSboA:7 a=wVZckJH7z-aHfF37eWkYvpWaybYA:4
+	a=UcWZWmDdwLsA:10 a=k-kO48AawpMA:10
+X-CM-Score: 0.00
+Date: Mon, 20 Apr 2009 14:44:04 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090420214404.GE17629@smtp.west.cox.net>
 References: <1240241104-21935-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1240241104-21935-11-git-send-email-marcin@juszkiewicz.com.pl>
-	<gsi85u$ec5$7@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <gsi85u$ec5$7@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [STABLE][PATCH 1/1] irda-utils: add patch to use LDFLAGS	(fixes QA error)
+	<1240241104-21935-3-git-send-email-marcin@juszkiewicz.com.pl>
+	<gsi83l$ec5$2@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gsi83l$ec5$2@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [STABLE][PATCH 1/1] tracker: added libgnomecanvas to	dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,87 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 21:40:31 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 20 Apr 2009 21:48:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Apr 20, 2009 at 06:34:06PM +0200, Koen Kooi wrote:
+On Mon, Apr 20, 2009 at 06:32:52PM +0200, Koen Kooi wrote:
+
 > Acked-by: Koen Kooi <koen@openembedded.org>
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Acked-by: Tom Rini <trini@embeddedalley.com>
 
-
-> On 20-04-09 17:25, Marcin Juszkiewicz wrote:
->> From: Jeremy Lain??<jeremy.laine@m4x.org>
+>
+>
+> On 20-04-09 17:24, Marcin Juszkiewicz wrote:
+>> From: Marcin Juszkiewicz<hrw@openembedded.org>
 >>
 >> ---
->>   recipes/irda-utils/irda-utils/ldflags.patch |   28 
->> +++++++++++++++++++++++++++
->>   recipes/irda-utils/irda-utils_0.9.16.bb     |    3 +-
->>   2 files changed, 30 insertions(+), 1 deletions(-)
->>   create mode 100644 recipes/irda-utils/irda-utils/ldflags.patch
+>>   recipes/tracker/tracker_0.5.4.bb |    2 +-
+>>   1 files changed, 1 insertions(+), 1 deletions(-)
 >>
->> diff --git a/recipes/irda-utils/irda-utils/ldflags.patch 
->> b/recipes/irda-utils/irda-utils/ldflags.patch
->> new file mode 100644
->> index 0000000..bb4f5cd
->> --- /dev/null
->> +++ b/recipes/irda-utils/irda-utils/ldflags.patch
->> @@ -0,0 +1,28 @@
->> +diff -urN irda-utils-0.9.16.orig/irattach/Makefile 
->> irda-utils-0.9.16/irattach/Makefile
->> +--- irda-utils-0.9.16.orig/irattach/Makefile	2004-03-31 
->> 23:55:41.000000000 +0200
->> ++++ irda-utils-0.9.16/irattach/Makefile	2009-04-08 10:17:39.000000000 
->> +0200
->> +@@ -53,10 +53,10 @@
->> + all: $(TARGETS)
->> +
->> + irattach: irattach.o util.o
->> +-	$(CC) $(CFLAGS) irattach.o util.o -o $@
->> ++	$(CC) $(CFLAGS) $(LDFLAGS) irattach.o util.o -o $@
->> +
->> + dongle_attach: dongle_attach.o
->> +-	$(CC) $(CFLAGS) dongle_attach.o -o $@
->> ++	$(CC) $(CFLAGS) $(LDFLAGS) dongle_attach.o -o $@
->> +
->> + .c.o:
->> + 	$(CC) $(CFLAGS) $(INCLUDES) -c $<
->> +diff -urN irda-utils-0.9.16.orig/irdaping/Makefile 
->> irda-utils-0.9.16/irdaping/Makefile
->> +--- irda-utils-0.9.16.orig/irdaping/Makefile	2004-03-31 
->> 23:55:47.000000000 +0200
->> ++++ irda-utils-0.9.16/irdaping/Makefile	2009-04-08 10:17:57.000000000 
->> +0200
->> +@@ -52,7 +52,7 @@
->> + all:: irdaping
->> +
->> + irdaping: $(OBJS)
->> +-	$(CC) $(CFLAGS) $(OBJS) -o $@
->> ++	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $@
->> +
->> + .c.o:
->> + 	$(CC) $(CFLAGS) $(INCLUDES) -c $<
->> diff --git a/recipes/irda-utils/irda-utils_0.9.16.bb 
->> b/recipes/irda-utils/irda-utils_0.9.16.bb
->> index 19bcdf3..1d9d184 100644
->> --- a/recipes/irda-utils/irda-utils_0.9.16.bb
->> +++ b/recipes/irda-utils/irda-utils_0.9.16.bb
->> @@ -3,11 +3,12 @@ IrDA allows communication over Infrared with other 
->> devices \
->>   such as phones and laptops."
->>   SECTION = "base"
->>   LICENSE = "GPL"
->> -PR = "r8"
->> +PR = "r9"
+>> diff --git a/recipes/tracker/tracker_0.5.4.bb b/recipes/tracker/tracker_0.5.4.bb
+>> index 4753280..e1a94b7 100644
+>> --- a/recipes/tracker/tracker_0.5.4.bb
+>> +++ b/recipes/tracker/tracker_0.5.4.bb
+>> @@ -1,6 +1,6 @@
+>>   DESCRIPTION = "Tracker is a tool designed to extract information and metadata about your personal data so that it can be searched easily and quickly."
+>>   LICENSE = "GPLv2"
+>> -DEPENDS = "file gtk+ gstreamer gamin libgmime dbus poppler libexif libgsf"
+>> +DEPENDS = "file gtk+ gstreamer gamin libgmime dbus poppler libexif libgsf libgnomecanvas"
 >>
->>   SRC_URI = "${SOURCEFORGE_MIRROR}/irda/irda-utils-${PV}.tar.gz \
->>   	   file://configure.patch;patch=1 \
->>   	   file://m4.patch;patch=1 \
->> +	   file://ldflags.patch;patch=1 \
->>   	   file://init"
+>>   PR = "r3"
 >>
->>   export SYS_INCLUDES="-I${STAGING_INCDIR}"
 >
 >
 >
@@ -122,5 +78,8 @@ Acked-by: Denys Dmytriyenko <denis@denix.org>
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-- 
+Tom Rini
 
 
