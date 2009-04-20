@@ -1,28 +1,35 @@
-Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rod@whitby.id.au>) id 1LvmUg-0003dw-HO
+	(envelope-from <brandhetlampje@gmail.com>) id 1LvmvN-0000zJ-9M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Apr 2009 07:56:40 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by out1.messagingengine.com (Postfix) with ESMTP id 88BFE31CCC1;
-	Mon, 20 Apr 2009 01:52:21 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Mon, 20 Apr 2009 01:52:21 -0400
-X-Sasl-enc: Fjx9NU0tqXv22uhrNyI6GyD7qQ08XIclGksJNbkfT9ux 1240206740
-Received: from [120.17.222.93] (unknown [120.17.222.93])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 357EF24BB1;
-	Mon, 20 Apr 2009 01:52:19 -0400 (EDT)
-Message-ID: <49EC0D97.8010903@whitby.id.au>
-Date: Mon, 20 Apr 2009 15:22:23 +0930
-From: Rod Whitby <rod@whitby.id.au>
-User-Agent: Thunderbird 2.0.0.21 (Windows/20090302)
+	Mon, 20 Apr 2009 08:24:17 +0200
+Received: by bwz19 with SMTP id 19so1714711bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Apr 2009 23:19:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=BH3nTqiPHgA+vlZER6YiIr3YwexP4NMap/a2qjyqExE=;
+	b=PXnFveU4hjOwxWsoupEAqDD/c0WQd16AUZeqSdG8R8+7eWMx4UHHv8Nb7bRS0U2kZM
+	C1vKYrZM4jddW6+oWMGxVyponbQrf9bUmiW/tqH/odhUvmNlIHxPXab08Yh6NqdP0G5i
+	D+ptNyPMLTcyByiVYr2HHez+ITdRDGA/2P5T4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ECHgFujCzuWDCAtDZE+VG4nvKt4eGTNFRPlDnWbAwHlte9QyzuvPgAmL/GtW2TSelT
+	vRzFEN5AqpKSU8mcCYGE3WX9GBQaErWr4+FdzFbBokvQXHZ/MllBLDSR8BhCDB8r8o1N
+	d7+C44WYLGWlwpZzSTFksze78KZvXQ7fhxPnM=
 MIME-Version: 1.0
+Received: by 10.86.65.9 with SMTP id n9mr3735229fga.43.1240208394285; Sun, 19 
+	Apr 2009 23:19:54 -0700 (PDT)
+In-Reply-To: <49EB6F02.1030402@gmail.com>
+References: <49EB6F02.1030402@gmail.com>
+Date: Mon, 20 Apr 2009 08:19:54 +0200
+Message-ID: <6978a1740904192319w5ed4ec4bs4c854ecdc540aaa4@mail.gmail.com>
+From: s hakkesteegt <brandhetlampje@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>	<45B518A5.8000500@dominion.kabel.utwente.nl>	<45B5528F.3050108@whitby.id.au>
-	<45B59FD0.1000207@whitby.id.au>
-In-Reply-To: <45B59FD0.1000207@whitby.id.au>
-Cc: nslu2-developers@yahoogroups.com
-Subject: Removal of the proprietary Intel IXP ethernet driver (ixp4{00, 25}-eth, ixp-osal, ixp4xx-csr) from OE
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: devshell not working with screen remote shell
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,65 +43,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 05:56:44 -0000
+X-List-Received-Date: Mon, 20 Apr 2009 06:24:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-It seems that I intended to do this, but never got around to it.
+You might want to add this to your local.conf
 
-<http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-January/001279.html>
+TERMCMD = "${SCREEN_TERMCMD}"
+TERMCMDRUN = "${SCREEN_TERMCMDRUN}"
 
-There were no objections at the time (over 2 years ago), so unless there
-are any objections in the next 48 hours it will be enacted.
+devshell will open in a new screen session, witch you can attach to
+manually.
 
--- Rod
+Siebren
 
-Rod Whitby wrote (on 23/01/2007):
-> For a long time, the only way to use the internal ethernet port for
-> ixp4xx devices was to use the proprietary intel driver.  The driver
-> could not be linked with the kernel, and tainted the kernel.
-> 
-> Thankfully, that has now changed with the development of the open source
-> ixp npe kernel driver, which is GPL and can be freely linked with the
-> kernel.  Note that the microcode firmware blob (ixp4xx-npe) which needs
-> to be loaded by the driver is still Intel Proprietary and requires a
-> click-through license on any firmware image that includes it.
-> 
-> The ixp4xx-kernel package (as of 2.6.19) now supports this new driver.
-> It has been tested on the NSLU2, NAS100d, and Loft devices, and as of
-> the 0.3.1 version is considered stable.
-> 
-> Accordingly, I propose to remove the Intel Proprietary driver from the
-> OpenEmbedded metadata.  I also propose to remove versions of the
-> ixp4xx-kernel earlier than 2.6.19.
-> 
-> The following packages will be obsoleted, and then removed:
-> 
-> ixp425-eth/ixp400-eth_1.4
-> ixp425-eth/ixp400-eth_1.5
-> ixp425-eth/ixp400-eth_1.5.1
-> ixp425-eth/ixp425-eth_1.1
-> ixp425-eth/ixp425-eth_1.2
-> ixp4xx/ixp-osal_1.5
-> ixp4xx/ixp-osal_2.0
-> ixp4xx/ixp-osal_2.1
-> ixp4xx/ixp-osal_2.1.1
-> ixp4xx/ixp4xx-csr_1.4
-> ixp4xx/ixp4xx-csr_1.5
-> ixp4xx/ixp4xx-csr_2.0
-> ixp4xx/ixp4xx-csr_2.1
-> ixp4xx/ixp4xx-csr_2.1.1
-> linux/ixp4xx-kernel_2.6.15.3
-> linux/ixp4xx-kernel_2.6.16
-> linux/ixp4xx-kernel_2.6.17
-> linux/ixp4xx-kernel_2.6.18
-> 
-> Any objections?
-> 
-> [Note that this will not affect anyone's ability to build from the
-> SlugOS binary release source code archives - they are in SVN.]
-> 
-> -- Rod
+On Sun, Apr 19, 2009 at 8:35 PM, Marco Cavallini <koansoftware@gmail.com>wrote:
 
-
+> devshell is not working when you run bitbake in a screen remote ssh shell
+> (also potest here http://bugs.openembedded.net/show_bug.cgi?id=5084)
+>
+>
+> $ bitbake -cdevshell bluez-utils
+> NOTE: Handling BitBake files: - (6658/6658) [100 %]
+> NOTE: Parsing finished. 6398 cached, 0 parsed, 260 skipped, 0 masked.
+> NOTE: Cache is clean, not saving.
+> NOTE: build 200904192010: started
+>
+> OE Build Configuration:
+> BB_VERSION        = "1.8.13"
+> METADATA_BRANCH   = "stable/2009"
+> METADATA_REVISION = "6ea387ca312c4686746c387b56735f7b96f599b3"
+> TARGET_ARCH       = "i586"
+> TARGET_OS         = "linux"
+> MACHINE           = "qemux86"
+> DISTRO            = "kaeilos"
+> DISTRO_VERSION    = "2008.1-test-20090419"
+>
+> NOTE: oestats: build 140918
+> ...snip...
+> NOTE: package bluez-utils-3.36-r5: task do_patch: completed
+> NOTE: Running task 32 of 32 (ID: 4,
+> /home/koan/devel/openembedded/recipes/bluez/bluez-utils_3.36.bb,
+> do_devshell)
+> NOTE: package bluez-utils-3.36-r5: task do_devshell: started
+> ERROR: function do_devshell failed
+> ERROR: log data follows
+>
+> (/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/bluez-utils-3.36-r5/temp/log.do_devshell.5388)
+> | cannot open display:
+> | Run 'gnome-terminal --help' to see a full list of available command line
+> options.
+>
+>
+> I already tried to solve this time ago using different option in bitbake
+> code
+> (trying to activate xterm instead of the default x terminal) and trying
+> to set
+> DISPLAY and xauth in several ways without success.
+>
+> /marco
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
