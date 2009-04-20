@@ -1,22 +1,37 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LvvZM-0007Fp-Gs
-	for openembedded-devel@openembedded.org; Mon, 20 Apr 2009 17:38:04 +0200
-Received: (qmail 32653 invoked by uid 813007); 20 Apr 2009 15:33:45 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 20 Apr 2009 15:33:45 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Apr 2009 17:33:43 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <1240241104-21935-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1240241104-21935-1-git-send-email-marcin@juszkiewicz.com.pl>
+	(envelope-from <andrea.adami@gmail.com>) id 1LvvcG-0007RM-NL
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Apr 2009 17:41:04 +0200
+Received: by bwz19 with SMTP id 19so1953342bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Apr 2009 08:36:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=KT1rIh8so+YMy0GNb9mY1tNihblenaekxvtqCHhOahs=;
+	b=JVnXGn0CEsiXe8tJpx84GcbwC2dfqkH+jUG4cvHRBNADeWy6m6PNv1DM5NgYmPp7tV
+	584cJLaApbZFVp+3j2VFt/5v/6Bc6TGXHn5PQtCFjsD3RmdE6kzncENTat6hQLcLyubO
+	zd0DYCNrjGSpRPckx7L3Wl/3SeQmGXTyJEoog=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=dqsJp79ZL4hQ30xmYhos7DUsHLGN6WEWnC4c0F3Uub2++GK0Ty8fOHWTnU0MYXlKQq
+	S1QAuSO2o7ci4ovllqc3TAmJQo4pl/8E5BZPubYEjZBjpTz1A5WXhmmjuPcVXC1NHEkO
+	au2N7kbcMZfuexcka7xLd/yyB/4qdMjHI/lrs=
 MIME-Version: 1.0
-Message-Id: <200904201733.46739.marcin@juszkiewicz.com.pl>
-Subject: Re: [STABLE] Some fixes from .dev tree
+Received: by 10.223.127.4 with SMTP id e4mr1671259fas.100.1240241803254; Mon, 
+	20 Apr 2009 08:36:43 -0700 (PDT)
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF767@hiob.intern.dresearch.de>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF763@hiob.intern.dresearch.de>
+	<20090417183927.GU17629@smtp.west.cox.net>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF767@hiob.intern.dresearch.de>
+Date: Mon, 20 Apr 2009 17:36:43 +0200
+Message-ID: <d1b08f940904200836k6374f731h83342aea89c1f14@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: initramfs howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,44 +45,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 15:38:04 -0000
-X-Groupsio-MsgNum: 9551
-Content-Type: multipart/signed; boundary="nextPart2035674.W2QEzQ69P1";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 20 Apr 2009 15:41:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
---nextPart2035674.W2QEzQ69P1
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+You can look at the initramfs-kexecboot image for a really slim initramfs.
+
+Regards
+
+Andrea
 
 
-O crap.. I forgot to SOB/Ack all patches...
-
-All patches in this thread (sent by me) are:
-
-Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-
-As some were done by me and some by others.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
---nextPart2035674.W2QEzQ69P1
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAknsldcACgkQeQ6MlGH/2qt7LACfeMPrLGqyqI3TWcNFtceQEv+q
-GYsAnj8wfgE5YS5qYag3j9BUlqGf5dwx
-=LaYC
------END PGP SIGNATURE-----
-
---nextPart2035674.W2QEzQ69P1--
