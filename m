@@ -1,24 +1,31 @@
-Received: from [204.2.163.5] (helo=sjogate2.atmel.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Shane.Dixon@atmel.com>) id 1LvvFn-0001Av-Tk
-	for openembedded-devel@openembedded.org; Mon, 20 Apr 2009 17:17:52 +0200
-Received: from csomb01.corp.atmel.com ([10.95.30.150])
-	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id n3KFCC5W014685
-	for <openembedded-devel@openembedded.org>;
-	Mon, 20 Apr 2009 08:12:12 -0700 (PDT)
-Received: from 10.95.105.47 ([10.95.105.47]) by csomb01.corp.atmel.com
-	([10.95.30.150]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon, 20 Apr 2009 15:13:29 +0000
-Received: from homestead.cso.atmel.com by csomb01.corp.atmel.com;
-	20 Apr 2009 09:13:29 -0600
-From: Shane Dixon <shane.dixon@atmel.com>
-To: openembedded-devel@openembedded.org
-Organization: Atmel
-Date: Mon, 20 Apr 2009 09:13:28 -0600
-Message-Id: <1240240408.1220.2.camel@homestead>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.3 
-Subject: at91sam9263ek default defconfig
+	(envelope-from <sledz@DResearch.DE>) id 1LvvOG-0006cV-Ik
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Apr 2009 17:26:37 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 2258416DFDD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Apr 2009 17:22:32 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id D84D82A421B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Apr 2009 17:22:17 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Mon, 20 Apr 2009 17:21:46 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF767@hiob.intern.dresearch.de>
+In-Reply-To: <20090417183927.GU17629@smtp.west.cox.net>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] initramfs howto?
+Thread-Index: Acm/oKOI/3OB//LDT8anRZWUg/qdUgCKo8BA
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF763@hiob.intern.dresearch.de>
+	<20090417183927.GU17629@smtp.west.cox.net>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: initramfs howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,34 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 15:17:52 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Apr 2009 15:26:39 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-I'm not sure what the "typical" distro defconfig should look like, but
-it seems to me like everything ought to work that's on a particular
-board by default.  I found that the I2C_GPIO pins (pins 9 & 10) on the
-9263ek don't work with a fresh build of the bootstrap-image.  I created
-a patch with what I think are the only necessary changes to fix it.
+> I don't think that out of the box, "load some modules" can work.  The
+> current initramfs stuff, if I read it right, makes use of a premade
+> cpio.  It should however, be possible to fix this up, with the hardest
+> part being fixing up of the dev nodes.  What follows is a=20
+> hack I've done to a specific kernel's do_compile:
 
---- defconfig.orig      2009-04-17 11:01:25.000000000 -0600
-+++ defconfig   2009-04-16 14:10:32.000000000 -0600
-@@ -779,7 +779,7 @@
-#
-# I2C system bus drivers (mostly embedded / system-on-chip)
-#
--# CONFIG_I2C_GPIO is not set
-+CONFIG_I2C_GPIO=y
-# CONFIG_I2C_OCORES is not set
-# CONFIG_I2C_SIMTEC is not set
+Would be really nice if you can send me the complete bb as an example =
+(or is it in the git repo?). Some things are not fully clear to me.
 
-Does anyone see any reason why this shouldn't be included in the default
-kernel configuration?
+> This should somehow be generalized a bit and put into kernel.bbclass,
+> quite probably.
 
--- 
-Shane Dixon
-Linux Engineer
-Atmel Corporation
-E-mail: shane.dixon@atmel.com
+That would be a great thing! :)
+
+Steffen
 
 
