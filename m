@@ -1,26 +1,20 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LvoaI-0001fy-9d
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Apr 2009 10:10:39 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with no
-	message id 1LvoW6-000L5S-Hx
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Apr 2009 12:06:14 +0400
-From: Roman I Khimov <khimov@altell.ru>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lvp0k-0007Xp-6l
+	for openembedded-devel@openembedded.org; Mon, 20 Apr 2009 10:37:54 +0200
+Received: (qmail 21841 invoked by uid 813007); 20 Apr 2009 08:33:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 20 Apr 2009 08:33:33 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Apr 2009 12:06:00 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <1239963741-12123-1-git-send-email-khimov@altell.ru>
-	<gs9lhq$2kh$1@ger.gmane.org>
-In-Reply-To: <gs9lhq$2kh$1@ger.gmane.org>
-Organization: Altell Ltd.
+Date: Mon, 20 Apr 2009 10:34:25 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
 MIME-Version: 1.0
-Message-Id: <200904201206.01192.khimov@altell.ru>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] icecc.bbclass: fix kernel distributed compilation
+Message-Id: <200904201034.29011.marcin@juszkiewicz.com.pl>
+Subject: Write access for Roman I Khimov
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,18 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 08:10:47 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 20 Apr 2009 08:38:00 -0000
+X-Groupsio-MsgNum: 9529
+Content-Type: multipart/signed; boundary="nextPart5946492.b3rgFiQh1p";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-On Friday 17 April 2009 14:27:06 Koen Kooi wrote:
-> On 17-04-09 12:22, Roman I Khimov wrote:
-> > ---
-> >   classes/icecc.bbclass |   11 ++++++-----
-> >   1 files changed, 6 insertions(+), 5 deletions(-)
->
-> Acked-by: Koen Kooi <koen@openembedded.org>
+--nextPart5946492.b3rgFiQh1p
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Well, maybe someone will commit it then? :)
 
+I want to propose write access for Roman I Khimov. His patches have good=20
+quality and giving him access should be natural step.
+
+It will also take pushing his work from our hands :)
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+--nextPart5946492.b3rgFiQh1p
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAknsM5IACgkQeQ6MlGH/2qv1nACfQX3sE3qXNB50uq/QL4ZB7c0o
+S5sAnRtP6cQFc71ZcWvfy0KNbCFuAmSk
+=jvlL
+-----END PGP SIGNATURE-----
+
+--nextPart5946492.b3rgFiQh1p--
