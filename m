@@ -1,36 +1,28 @@
-Received: from [209.85.220.220] (helo=mail-fx0-f220.google.com)
+Received: from [66.111.4.25] (helo=out1.smtp.messagingengine.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LvfvJ-000132-NU
+	(envelope-from <rod@whitby.id.au>) id 1LvmUg-0003dw-HO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Apr 2009 00:55:41 +0200
-Received: by fxm20 with SMTP id 20so2050831fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Apr 2009 15:51:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=OXcwVhSTa+T1IgZlVLuNIRDJucHGWiWZ869XnwYC/3A=;
-	b=ec0WkTUj6/k28InKcf8Ph5kMXQUaPaZWfP4H6rNqHxdd+VgdRByhTW/8I7zxtk65fV
-	LyOKSY70uF/38IBzkkEfhFF7zc1xd9Mj4+sYexlrZdhYsaK/NJhtB1EkjMkGtEC56eMj
-	GekM6TCvmIzBVyNAODnkUMzHuaVOZsCtDcUUw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=r6lromzNNE9ztkjvfDDPfZmVM9vEQa9M4r2S2ZnUc4opREyM9zmSOxqbUXG0H/airj
-	2Xzw9b1sOiU5LekunJQ8R5i/Yu8HEsALPHBDhTDULGNvwsxd6LJUOWlaqEqd7VB4mqp4
-	gZU7DTD5VXoQspUwJYCy1aTPtI/vj0nS5I/eM=
+	Mon, 20 Apr 2009 07:56:40 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 88BFE31CCC1;
+	Mon, 20 Apr 2009 01:52:21 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Mon, 20 Apr 2009 01:52:21 -0400
+X-Sasl-enc: Fjx9NU0tqXv22uhrNyI6GyD7qQ08XIclGksJNbkfT9ux 1240206740
+Received: from [120.17.222.93] (unknown [120.17.222.93])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 357EF24BB1;
+	Mon, 20 Apr 2009 01:52:19 -0400 (EDT)
+Message-ID: <49EC0D97.8010903@whitby.id.au>
+Date: Mon, 20 Apr 2009 15:22:23 +0930
+From: Rod Whitby <rod@whitby.id.au>
+User-Agent: Thunderbird 2.0.0.21 (Windows/20090302)
 MIME-Version: 1.0
-Received: by 10.223.113.199 with SMTP id b7mr1380548faq.82.1240181484983; Sun, 
-	19 Apr 2009 15:51:24 -0700 (PDT)
-In-Reply-To: <d1b08f940904191530vc2961fdqffa694a6d8c9fe94@mail.gmail.com>
-References: <49EB7194.2030307@gmail.com>
-	<d1b08f940904191530vc2961fdqffa694a6d8c9fe94@mail.gmail.com>
-Date: Mon, 20 Apr 2009 00:51:24 +0200
-Message-ID: <d1b08f940904191551l6b6a8947q6baf2a5735a81b7e@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [BUG][STABLE] bluez-utils fails with stable/2009
+References: <45B40165.6000506@whitby.id.au>	<45B4EDCD.1060609@dominion.kabel.utwente.nl>	<45B50D16.8060001@whitby.id.au>	<45B518A5.8000500@dominion.kabel.utwente.nl>	<45B5528F.3050108@whitby.id.au>
+	<45B59FD0.1000207@whitby.id.au>
+In-Reply-To: <45B59FD0.1000207@whitby.id.au>
+Cc: nslu2-developers@yahoogroups.com
+Subject: Removal of the proprietary Intel IXP ethernet driver (ixp4{00, 25}-eth, ixp-osal, ixp4xx-csr) from OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,16 +36,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Apr 2009 22:55:41 -0000
+X-List-Received-Date: Mon, 20 Apr 2009 05:56:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-8 days	obexd: add 0.10, needs bluez4	Koen Kooi
+It seems that I intended to do this, but never got around to it.
 
-Something wrong... still using 3.36 here...time to switch?
+<http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-January/001279.html>
 
-Regards
+There were no objections at the time (over 2 years ago), so unless there
+are any objections in the next 48 hours it will be enacted.
 
-Andrea
+-- Rod
+
+Rod Whitby wrote (on 23/01/2007):
+> For a long time, the only way to use the internal ethernet port for
+> ixp4xx devices was to use the proprietary intel driver.  The driver
+> could not be linked with the kernel, and tainted the kernel.
+> 
+> Thankfully, that has now changed with the development of the open source
+> ixp npe kernel driver, which is GPL and can be freely linked with the
+> kernel.  Note that the microcode firmware blob (ixp4xx-npe) which needs
+> to be loaded by the driver is still Intel Proprietary and requires a
+> click-through license on any firmware image that includes it.
+> 
+> The ixp4xx-kernel package (as of 2.6.19) now supports this new driver.
+> It has been tested on the NSLU2, NAS100d, and Loft devices, and as of
+> the 0.3.1 version is considered stable.
+> 
+> Accordingly, I propose to remove the Intel Proprietary driver from the
+> OpenEmbedded metadata.  I also propose to remove versions of the
+> ixp4xx-kernel earlier than 2.6.19.
+> 
+> The following packages will be obsoleted, and then removed:
+> 
+> ixp425-eth/ixp400-eth_1.4
+> ixp425-eth/ixp400-eth_1.5
+> ixp425-eth/ixp400-eth_1.5.1
+> ixp425-eth/ixp425-eth_1.1
+> ixp425-eth/ixp425-eth_1.2
+> ixp4xx/ixp-osal_1.5
+> ixp4xx/ixp-osal_2.0
+> ixp4xx/ixp-osal_2.1
+> ixp4xx/ixp-osal_2.1.1
+> ixp4xx/ixp4xx-csr_1.4
+> ixp4xx/ixp4xx-csr_1.5
+> ixp4xx/ixp4xx-csr_2.0
+> ixp4xx/ixp4xx-csr_2.1
+> ixp4xx/ixp4xx-csr_2.1.1
+> linux/ixp4xx-kernel_2.6.15.3
+> linux/ixp4xx-kernel_2.6.16
+> linux/ixp4xx-kernel_2.6.17
+> linux/ixp4xx-kernel_2.6.18
+> 
+> Any objections?
+> 
+> [Note that this will not affect anyone's ability to build from the
+> SlugOS binary release source code archives - they are in SVN.]
+> 
+> -- Rod
+
 
 
