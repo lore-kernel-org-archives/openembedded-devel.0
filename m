@@ -1,32 +1,26 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LvoK2-0001BE-Kx
+	(envelope-from <khimov@altell.ru>) id 1LvoaI-0001fy-9d
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Apr 2009 09:53:47 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 45F4E2C7FD
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Apr 2009 07:47:26 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qgOWJQ0FDvRT
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Apr 2009 07:47:24 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 8C0B42C797
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Apr 2009 07:47:24 +0000 (UTC)
-Message-ID: <49EC2909.2030903@gmail.com>
-Date: Mon, 20 Apr 2009 09:49:29 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	Mon, 20 Apr 2009 10:10:39 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with no
+	message id 1LvoW6-000L5S-Hx
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Apr 2009 12:06:14 +0400
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <49EB6F02.1030402@gmail.com>
-	<6978a1740904192319w5ed4ec4bs4c854ecdc540aaa4@mail.gmail.com>
-In-Reply-To: <6978a1740904192319w5ed4ec4bs4c854ecdc540aaa4@mail.gmail.com>
-Subject: Re: devshell not working with screen remote shell
+Date: Mon, 20 Apr 2009 12:06:00 +0400
+User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+References: <1239963741-12123-1-git-send-email-khimov@altell.ru>
+	<gs9lhq$2kh$1@ger.gmane.org>
+In-Reply-To: <gs9lhq$2kh$1@ger.gmane.org>
+Organization: Altell Ltd.
+MIME-Version: 1.0
+Message-Id: <200904201206.01192.khimov@altell.ru>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] icecc.bbclass: fix kernel distributed compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +34,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 07:53:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 20 Apr 2009 08:10:47 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-s hakkesteegt ha scritto:
-> You might want to add this to your local.conf
-> 
-> TERMCMD = "${SCREEN_TERMCMD}"
-> TERMCMDRUN = "${SCREEN_TERMCMDRUN}"
-> 
-> devshell will open in a new screen session, witch you can attach to
-> manually.
-> 
+On Friday 17 April 2009 14:27:06 Koen Kooi wrote:
+> On 17-04-09 12:22, Roman I Khimov wrote:
+> > ---
+> >   classes/icecc.bbclass |   11 ++++++-----
+> >   1 files changed, 6 insertions(+), 5 deletions(-)
+>
+> Acked-by: Koen Kooi <koen@openembedded.org>
 
-I already tried all the available option witout success.
-Maybe I'm the only using a remote ssh shell + screen... :-(
-
-
-# Some common terminal programs to choose from
-GNOME_TERMCMD = 'gnome-terminal --disable-factory -t "$TERMWINDOWTITLE"'
-GNOME_TERMCMDRUN = '${GNOME_TERMCMD} -x $SHELLCMDS'
-SCREEN_TERMCMD = 'screen -D -m -t "$TERMWINDOWTITLE"'
-SCREEN_TERMCMDRUN = '${SCREEN_TERMCMD} $SHELLCMDS'
-XTERM_TERMCMD = 'xterm -T "$TERMWINDOWTITLE"'
-XTERM_TERMCMDRUN = '${XTERM_TERMCMD} -e $SHELLCMDS'
-KONSOLE_TERMCMD = 'konsole -T "$TERMWINDOWTITLE"'
-KONSOLE_TERMCMDRUN = '${KONSOLE_TERMCMD} -e $SHELLCMDS'
-
-/marco
-
+Well, maybe someone will commit it then? :)
 
