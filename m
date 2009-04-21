@@ -1,35 +1,36 @@
-Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
+Received: from [202.37.96.11] (helo=gatekeeper.tait.co.nz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Lw3Bv-0006dG-LY
+	(envelope-from <douglas.royds@tait.co.nz>) id 1Lw4ws-000328-BQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 01:46:23 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so1536056ywk.42
+	Tue, 21 Apr 2009 03:38:59 +0200
+Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
+	by localhost.tait.co.nz (Postfix) with ESMTP id 2AD1B46753
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Apr 2009 16:42:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=YoOLXwomCSp4BYOD+ymVq/4ZJZjKDbRW+xc4q3rVjA8=;
-	b=Ab2+xjOnrorBs4Ffayr1wezDbe8I+YcXyjviE+OIV1T91NwGoatgKifLH063QWcBzb
-	61ruxx4zwpzxIPLOOQc9igWeN8xJGCikWILv0DWFcAAS7PywJdGCcITwZYMBVJR0VgVb
-	nUq0bzrLDt9zrpCDTi1j/x81baKeqv+M9u8+4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=tyjrt9wi8TJxefvalbtIZDZczCXDUGbOrjlAcx8t6r9OD9cQ9pUt5IfFC7CKRbIrb5
-	RbOrmAJsMQyODaBymz6eA6LC25ycxuzI7zkV/giY2KBdQnB7NNfq7YgJBcHcdqtBjFJc
-	JS0Ji/X/jMFGRafLuLB5wD30tCxGHxTwpa/Io=
-MIME-Version: 1.0
-Received: by 10.150.201.2 with SMTP id y2mr7283028ybf.160.1240270922040; Mon, 
-	20 Apr 2009 16:42:02 -0700 (PDT)
-In-Reply-To: <c384c5ea0904201542y7d6de263ve1de19745ed29d47@mail.gmail.com>
-References: <c384c5ea0904201542y7d6de263ve1de19745ed29d47@mail.gmail.com>
-Date: Mon, 20 Apr 2009 19:42:02 -0400
-Message-ID: <f96d234e0904201642o7144b20dr18a3ac4308cab3bb@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Tue, 21 Apr 2009 13:34:35 +1200 (NZST)
+Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])by 
+	gatekeeper.tait.co.nz (Postfix) with ESMTP id 1AC5A46752for 
+	<openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2009 13:34:34 
+	+1200 (NZST)
+Received: from conversion-daemon.sunstrike.tait.co.nz by 
+	sunstrike.tait.co.nz(Sun Java System Messaging Server 6.1 (built Apr 28
+	2004))id <0KIF00H01D4M8X00@sunstrike.tait.co.nz>(original mail from 
+	douglas.royds@tait.co.nz)for openembedded-devel@lists.openembedded.org; 
+	Tue,21 Apr 2009 13:34:34 +1200 (NZST)
+Received: from [172.25.116.23] by sunstrike.tait.co.nz(Sun Java System 
+	Messaging Server 6.1 (built Apr 28 2004))with ESMTP id 
+	<0KIF009BFGDIHY50@sunstrike.tait.co.nz> 
+	foropenembedded-devel@lists.openembedded.org; Tue,21 Apr 2009 13:34:32 
+	+1200 (NZST)
+Date: Tue, 21 Apr 2009 13:34:25 +1200
+From: Douglas Royds <douglas.royds@tait.co.nz>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Reflection on MTN to GIT change?
+Message-id: <49ED22A1.7090208@tait.co.nz>
+MIME-version: 1.0
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+X-imss-version: 2.053
+X-imss-result: Passed
+X-imss-approveListMatch: *@tait.co.nz
+Subject: devshell "No protocol specified"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +44,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2009 23:46:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Apr 2009 01:38:59 -0000
+Content-type: text/plain;
+	format=flowed;
+	charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
 
-On Mon, Apr 20, 2009 at 6:42 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hello,
->
-> just wanted to see how we feel about the move to git as our scm?
->
-> Personally, I like the speed of git, I like the very healthy commit
-> rate we have in OE now*. Still struggling with the concept of git
-> though.
-> Overall, a good move I think.
+Failing to get a devshell console. Fails for both XTERM and KONSOLE:
 
-It has been a positive change from my perspective.  About everything I
-do is less pain, and supporting customers using OE is easier.
+| No protocol specified
+| xterm Xt error: Can't open display: :0
 
-Cliff
+The failure is unique to one box (ie. it works fine on a different computer).
 
--- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Invoking run.do_devshell.15108 directly succeeds, so the problem only occurs 
+when we try to launch the devshell from within bitbake.
+
+I used bitbake -D to see the list of environment variables that bitbake was 
+unsetting. I tried listing the whole lot in BB_ENV_EXTRAWHITE, but still no joy.
+
+Suggestions?
+Douglas.
+
+
+$ bitbake zlib -c devshell
+NOTE: Handling BitBake files: \ (6591/6591) [100 %]
+NOTE: Parsing finished. 6305 cached, 0 parsed, 286 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: build 200904211325: started
+fatal: Not a git repository
+
+OE Build Configuration:
+BB_VERSION        = "1.8.12"
+METADATA_BRANCH   = "<unknown>"
+METADATA_REVISION = "25344"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "davinci-dcb"
+DISTRO            = "tait"
+DISTRO_VERSION    = "trunk-20090421"
+TARGET_FPU        = "soft"
+
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 32 of 32 (ID: 4,
+/media/storage/workspace/DBS/org.openembedded.dev/vendor/2009-02-21_dcbeaf393bed4d0b7071c100bf9e5d92ad3c20c5/packages/zlib/zlib_1.2.3.bb, 
+
+do_devshell)
+NOTE: package zlib-1.2.3: started
+NOTE: package zlib-1.2.3-r5: task do_devshell: started
+ERROR: function do_devshell failed
+ERROR: log data follows
+(/media/storage/workspace/DBS/build/tmp/work/armv5te-tait-linux-gnueabi/zlib-1.2.3-r5/temp/log.do_devshell.15108)
+| No protocol specified
+| xterm Xt error: Can't open display: :0
+NOTE: Task failed:
+/media/storage/workspace/DBS/build/tmp/work/armv5te-tait-linux-gnueabi/zlib-1.2.3-r5/temp/log.do_devshell.15108
+NOTE: package zlib-1.2.3-r5: task do_devshell: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package zlib-1.2.3: failed
+ERROR: Build of
+/media/storage/workspace/DBS/org.openembedded.dev/vendor/2009-02-21_dcbeaf393bed4d0b7071c100bf9e5d92ad3c20c5/packages/zlib/zlib_1.2.3.bb 
+
+do_devshell failed
+ERROR: Task 4
+(/media/storage/workspace/DBS/org.openembedded.dev/vendor/2009-02-21_dcbeaf393bed4d0b7071c100bf9e5d92ad3c20c5/packages/zlib/zlib_1.2.3.bb, 
+
+do_devshell) failed
+NOTE: Tasks Summary: Attempted 31 tasks of which 31 didn't need to be
+rerun and 1 failed.
+ERROR:
+'/media/storage/workspace/DBS/org.openembedded.dev/vendor/2009-02-21_dcbeaf393bed4d0b7071c100bf9e5d92ad3c20c5/packages/zlib/zlib_1.2.3.bb' 
+
+failed
+NOTE: build 200904211325: completed
+
+
+
+
+
+=======================================================================
+This email, including any attachments, is only for the intended
+addressee.  It is subject to copyright, is confidential and may be
+the subject of legal or other privilege, none of which is waived or
+lost by reason of this transmission.
+If the receiver is not the intended addressee, please accept our
+apologies, notify us by return, delete all copies and perform no
+other act on the email.
+Unfortunately, we cannot warrant that the email has not been
+ altered or corrupted during transmission.
+=======================================================================
+
 
 
