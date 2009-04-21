@@ -1,33 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LwMpU-0004os-DB
-	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 22:44:32 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LwMl8-0001K9-NO
-	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 20:40:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 21 Apr 2009 20:40:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <trini@kernel.crashing.org>) id 1LwMqw-0004vu-HS
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 22:46:02 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090421204133.DKP27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Tue, 21 Apr 2009 20:40:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 21 Apr 2009 16:41:33 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id iLhY1b00X4dMFYL04LhZMT; Tue, 21 Apr 2009 16:41:33 -0400
+X-Authority-Analysis: v=1.0 c=1 a=cjLNA8OfJ9QA:10 a=ZxtmPpjDU2cA:10
+	a=J7kNMFXqg7cm_wJ7gF4A:9 a=0ZzfA6lg4TxEIOwOg8QA:7
+	a=iM-In8J0MtGXo_SeoqWx_87AlWgA:4
+X-CM-Score: 0.00
+Date: Tue, 21 Apr 2009 13:41:32 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 21 Apr 2009 22:34:06 +0200
-Message-ID: <gslaju$mfs$3@ger.gmane.org>
-References: <1238753080-8005-1-git-send-email-khimov@altell.ru>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
-In-Reply-To: <1238753080-8005-1-git-send-email-khimov@altell.ru>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] ace: New recipe for ACE 5.6.8
+Message-ID: <20090421204132.GL17629@smtp.west.cox.net>
+References: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+MIME-Version: 1.0
+In-Reply-To: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] image.bbclass: reorder do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,70 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 20:44:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Apr 2009 20:46:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 03-04-09 12:04, Roman I Khimov wrote:
+On Mon, Mar 30, 2009 at 11:59:57AM +0400, Roman I Khimov wrote:
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+> Places do_rootfs function before do_install in image creation process.
+> 
+> This change allows multiimage builds, when one image depends on another (before
+> that second image creation raced with do_rootfs for the first one) and uses
+> it for some purpose.
+> 
+> Multiimage builds are useful in situations like creating an installer image
+> with initramfs (built in OE) and an image of the target FS (also built in OE)
+> or for building virtualized system images to be placed on target FS.
 
+So, the problem we have happen is that opkg (or dpkg or ...) gets into a
+race because >1 image are trying to muck around in ${TMPDIR}/rootfs,
+right?  How does this fix the problem?
 
-> ---
->   conf/checksums.ini       |    4 ++++
->   recipes/ace/ace.inc      |   18 ++++++++++++++++++
->   recipes/ace/ace_5.6.8.bb |    1 +
->   3 files changed, 23 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/ace/ace.inc
->   create mode 100644 recipes/ace/ace_5.6.8.bb
->
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 15fff1d..18ea297 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -58,6 +58,10 @@ sha256=7a960180e7873b1bdb522e76b0423b5c2c1b8efe1d30d7ca80c41eb97d822b2d
->   md5=24b0e5bbfe21ea9c5a5c589bcc79c0f2
->   sha256=ab877846c6caaff32efbf5be6fc5c63b7dec97a2e78c57c525da7705d2052bfc
->
-> +[ftp://download.dre.vanderbilt.edu/previous_versions/ACE-5.6.8.tar.bz2]
-> +md5=81c1ff761c3431cd12c81337aa80d558
-> +sha256=96b70582d931a7e83c3ca31b3bc7e23957391e16dee4ae6ddf938c9574d50b27
-> +
->   [http://www.amd.com/files/connectivitysolutions/geode/geode_lx/AES_Linux_LX_02.01.0100.tar.gz]
->   md5=12cb241a9037fffe31ba7c68a48ed614
->   sha256=a6068b4aa0e2330eed6e4741bad3191dc9ca7d7326f7bfab578ac55e2b8b91a2
-> diff --git a/recipes/ace/ace.inc b/recipes/ace/ace.inc
-> new file mode 100644
-> index 0000000..a83eb65
-> --- /dev/null
-> +++ b/recipes/ace/ace.inc
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION = "C++ network programming framework"
-> +SECTION = "net"
-> +LICENSE = "BSD + others"
-> +
-> +DEPENDS += "openssl gperf-native"
-> +
-> +SRC_URI = "ftp://download.dre.vanderbilt.edu/previous_versions/ACE-${PV}.tar.bz2"
-> +S = "${WORKDIR}/ACE_wrappers"
-> +B = "${WORKDIR}/build.${TARGET_SYS}"
-> +
-> +EXTRA_OECONF += "--disable-ace-tests --disable-gperf"
-> +LEAD_SONAME = "libACE-[0-9.]*.so"
-> +
-> +inherit autotools
-> +
-> +do_configure_prepend() {
-> +	export ace_cv_linux_event_poll=yes
-> +}
-> diff --git a/recipes/ace/ace_5.6.8.bb b/recipes/ace/ace_5.6.8.bb
-> new file mode 100644
-> index 0000000..345abe1
-> --- /dev/null
-> +++ b/recipes/ace/ace_5.6.8.bb
-> @@ -0,0 +1 @@
-> +require ace.inc
-
-
+-- 
+Tom Rini
 
 
