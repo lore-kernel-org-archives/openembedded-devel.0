@@ -1,33 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LwNSC-00047c-51
-	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 23:24:32 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LwNNq-0002z5-GN
-	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 21:20:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 21 Apr 2009 21:20:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <trini@kernel.crashing.org>) id 1LwNj6-0005SX-Vu
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 23:42:01 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090421213732.LSX6112.fed1rmmtao102.cox.net@fed1rmimpo01.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Tue, 21 Apr 2009 21:20:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 21 Apr 2009 17:37:32 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id iMdX1b0074dMFYL03MdXU6; Tue, 21 Apr 2009 17:37:31 -0400
+X-Authority-Analysis: v=1.0 c=1 a=cjLNA8OfJ9QA:10 a=ZxtmPpjDU2cA:10
+	a=VW0r-LrmZRzN9_kUWHQA:9 a=lxceld_hI-AiWDxNMg4A:7
+	a=ZphHOA3C8W7_dvOCTls5PNUDj58A:4
+X-CM-Score: 0.00
+Date: Tue, 21 Apr 2009 14:37:31 -0700
+From: Tom Rini <trini@kernel.crashing.org>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 21 Apr 2009 22:33:30 +0200
-Message-ID: <gslair$mfs$2@ger.gmane.org>
-References: <1238580928-1072-1-git-send-email-khimov@altell.ru>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
-In-Reply-To: <1238580928-1072-1-git-send-email-khimov@altell.ru>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] package.bbclass: fix globbing for mask-like files
+Message-ID: <20090421213731.GN17629@smtp.west.cox.net>
+References: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+	<20090421204132.GL17629@smtp.west.cox.net>
+	<gslcfj$t2k$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gslcfj$t2k$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] image.bbclass: reorder do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,45 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 21:24:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Apr 2009 21:42:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 01-04-09 12:15, Roman I Khimov wrote:
-> When a package contains two files like "name*" and "name*smth" OE can't
-> properly package those, looping infinetely trying to build file list. The
-> reason is that first file name globs to two files and OE adds them both
-> into the list, then globs the first one again and gets two same files, etc.
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-
+On Tue, Apr 21, 2009 at 11:05:55PM +0200, Koen Kooi wrote:
+> On 21-04-09 22:41, Tom Rini wrote:
+>> On Mon, Mar 30, 2009 at 11:59:57AM +0400, Roman I Khimov wrote:
+>>
+>>> Places do_rootfs function before do_install in image creation process.
+>>>
+>>> This change allows multiimage builds, when one image depends on another (before
+>>> that second image creation raced with do_rootfs for the first one) and uses
+>>> it for some purpose.
+>>>
+>>> Multiimage builds are useful in situations like creating an installer image
+>>> with initramfs (built in OE) and an image of the target FS (also built in OE)
+>>> or for building virtualized system images to be placed on target FS.
+>>
+>> So, the problem we have happen is that opkg (or dpkg or ...) gets into a
+>> race because>1 image are trying to muck around in ${TMPDIR}/rootfs,
 >
-> Fix that.
-> ---
->   classes/package.bbclass |    8 ++++++--
->   1 files changed, 6 insertions(+), 2 deletions(-)
->
-> diff --git a/classes/package.bbclass b/classes/package.bbclass
-> index 7a61c5a..8a77369 100644
-> --- a/classes/package.bbclass
-> +++ b/classes/package.bbclass
-> @@ -384,8 +384,12 @@ python populate_packages () {
->   			globbed = glob.glob(file)
->   			if globbed:
->   				if [ file ] != globbed:
-> -					files += globbed
-> -					continue
-> +					if not file in globbed:
-> +						files += globbed
-> +						continue
-> +					else:
-> +						globbed.remove(file)
-> +						files += globbed
->   			if (not os.path.islink(file)) and (not os.path.exists(file)):
->   				continue
->   			if file in seen:
+> No, there's a lockfile for that, otherwise 'bitbake foo-image bar-image'  
+> wouldn't work (it didn't for a long time).
 
+My snapshot is slighlty stale, but with BB_NUMBER_THREADS >1 it doesn't.
+Lemme go fire up a build real quick in my current checkout tho..
 
+-- 
+Tom Rini
 
 
