@@ -1,35 +1,40 @@
-Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LwN1o-0005P9-Pz
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1LwN30-0005R8-N7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 22:57:17 +0200
-Received: by yx-out-1718.google.com with SMTP id 36so1022838yxh.42
+	Tue, 21 Apr 2009 22:58:30 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id DC290DB0E1C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 13:52:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=rFjVrKbzp0bP0CSmodmUtIKmUKjAHR36KDryrBGIYFI=;
-	b=SmUlYwKjb34jMlXn1wvYjhOVS319Gs/T+kA7UjXvaelNw2mDkFxMmw/JXzTApWbuA1
-	A9w/C6/eyOHa5aZRZ6aIClsTdKiI7N48tDVLKNi2pFhaErF1hI0ZH61t0wpb1iND3Vn0
-	+ZWB79aCU2vDai/Kv2umVzkaMRajyDxPdMuBA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=qFSPDCvjWFszrv8KBH2Ht+zMcP+sru/+PnbZTKf4dC0sdPgsqIhhC7UcGg8QJIddup
-	7FxIlMCe1D9xmNtkGGdYxbFYuFXxG61EIWiz/QJrWQheKDiNT7jtkdKp/pXFG0XMdIyt
-	Y69k6AkdyuUwNBVMJ9ewy5hxeqeiEI/2gq+vw=
-MIME-Version: 1.0
-Received: by 10.90.70.15 with SMTP id s15mr110064aga.95.1240347169712; Tue, 21 
-	Apr 2009 13:52:49 -0700 (PDT)
-In-Reply-To: <1238399997-6016-1-git-send-email-khimov@altell.ru>
-References: <1238399997-6016-1-git-send-email-khimov@altell.ru>
-Date: Tue, 21 Apr 2009 22:52:49 +0200
-Message-ID: <c384c5ea0904211352o406880cbp2846efd6e0125038@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Tue, 21 Apr 2009 22:54:03 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 14B81DB07A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Apr 2009 22:54:03 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.7 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (g225145114.adsl.alicedsl.de
+	[92.225.145.114]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Apr 2009 22:54:03 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 5A4573C244; Tue, 21 Apr 2009 22:54:02 +0200 (CEST)
+Date: Tue, 21 Apr 2009 22:54:02 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] image.bbclass: reorder do_rootfs
+Message-ID: <20090421205401.GA6560@rhein.zuhause.netz>
+References: <20090421161342.GA5630@rhein.zuhause.netz>
+	<gsl2ps$q6k$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gsl2ps$q6k$1@ger.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Ack for ffmpeg patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +48,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 20:57:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Apr 2009 20:58:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello Roman,
-
-On Mon, Mar 30, 2009 at 9:59 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> Places do_rootfs function before do_install in image creation process.
+On Tue, Apr 21, 2009 at 08:20:44PM +0200, Koen Kooi wrote:
+> On 21-04-09 18:13, Henning Heinold wrote:
+>> Hi,
+>>
+>> is the attached patch okay for dev. The patch removes the install
+>> of the headers to the legacy directories. Without the patch it is very complicated
+>> to compile xine 1.1.16.3.
 >
-> This change allows multiimage builds, when one image depends on another (before
-> that second image creation raced with do_rootfs for the first one) and uses
-> it for some purpose.
+> NACK, it installs to both for a reason. You'll break other ffmpeg  
+> dependants by removing them. I don't think that's worth it to make xine  
+> work.
 >
-> Multiimage builds are useful in situations like creating an installer image
-> with initramfs (built in OE) and an image of the target FS (also built in OE)
-> or for building virtualized system images to be placed on target FS.
-> ---
+> regards,
+>
+> Koen
 
-This looks *very* useful.
+Which one breaks? Then they have to be fixed.
 
-However, this might break stuff as it is intrusive. So HEADS UP everyone! :-)
-
-Acked-by: Leon Woestenberg <leon@sidebranch.com>
-
-Regards,
--- 
-Leon
+Bye Henning
 
 
