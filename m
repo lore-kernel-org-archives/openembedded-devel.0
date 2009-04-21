@@ -1,35 +1,33 @@
-Received: from [209.85.217.180] (helo=mail-gx0-f180.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LwMuD-00057g-4N
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 22:49:25 +0200
-Received: by gxk28 with SMTP id 28so3820020gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 13:44:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=nbw9hHC4cQZIqUjOs7bQ9WUjj5uzfabDdzHSln8U+IE=;
-	b=jNJbCg7UmX3QODyIOdF62UJ0e5K10l1+bAl4GM+GS2WTli8zodOjXDoZdbR/qmF/h7
-	pOtScN1IEDvuuzpsPYsC5btjI4YPGCm9PbuqX6pyWkD5Pj3AMH05lzxFJXSROaWWu4Ur
-	PTynMfDgdBw2pvWjO9JXhDm+dCY4pnWsQP38g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Y8736EKFKiJS05YxvyVrNaUTrQ/U25Lz+K1PWBbfu+R7Go8un3JTFAxQsC0dErsZW6
-	Ea0BCluy8/m9eePl7dBH3FQwiQJ1zbeSEaYl9y6dGq7iaspbr9Ml+62V/NkXR/0dUODv
-	eGwsn3ULrY7M0wLA+FlYBIJrZRvP5oYbz8y7g=
-MIME-Version: 1.0
-Received: by 10.90.113.11 with SMTP id l11mr9344093agc.2.1240346696074; Tue, 
-	21 Apr 2009 13:44:56 -0700 (PDT)
-In-Reply-To: <1239963741-12123-1-git-send-email-khimov@altell.ru>
-References: <1239963741-12123-1-git-send-email-khimov@altell.ru>
-Date: Tue, 21 Apr 2009 22:44:55 +0200
-Message-ID: <c384c5ea0904211344i5e1e4a31vffd3d0e9df37f7e0@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] icecc.bbclass: fix kernel distributed compilation
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LwMuH-00057z-T6
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 22:49:29 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LwMpy-0001VY-6P
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 20:45:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:45:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:45:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Apr 2009 22:29:55 +0200
+Message-ID: <gslac4$lqt$2@ger.gmane.org>
+References: <1238144638-7541-1-git-send-email-khimov@altell.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
+In-Reply-To: <1238144638-7541-1-git-send-email-khimov@altell.ru>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] busybox: update appletlib dependency patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,13 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 20:49:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Apr 2009 20:49:30 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Acked-by: Leon Woestenberg <leon@sidebranch.com>
+Acked-by: Koen Kooi <koen@openembedded.org>
 
--- 
-Leon
+
+On 27-03-09 10:03, Roman I Khimov wrote:
+> Previous version still failed from time to time on clean-start builds
+> with 4 bitbake threads and '-j16'. Building busybox as sole target worked
+> well.
+>
+> The reason is that previous version introduced a race between applets make
+> processes spawned from top-level Makefile and from libbb Makefile.
+>
+> Fix it with high-level dependency that doesn't create races.
+> ---
+>   .../files/busybox-appletlib-dependency.patch       |   24 +++++++++++--------
+>   1 files changed, 14 insertions(+), 10 deletions(-)
+>
+> diff --git a/recipes/busybox/files/busybox-appletlib-dependency.patch b/recipes/busybox/files/busybox-appletlib-dependency.patch
+> index 85a61e8..3efd4c0 100644
+> --- a/recipes/busybox/files/busybox-appletlib-dependency.patch
+> +++ b/recipes/busybox/files/busybox-appletlib-dependency.patch
+> @@ -1,11 +1,15 @@
+> ---- a/libbb/Kbuild	2008-11-09 20:28:09.000000000 +0300
+> -+++ b/libbb/Kbuild	2009-02-17 17:41:48.718747865 +0300
+> -@@ -147,3 +147,8 @@ lib-$(CONFIG_PGREP) += xregcomp.o
+> - lib-$(CONFIG_PKILL) += xregcomp.o
+> - lib-$(CONFIG_DEVFSD) += xregcomp.o
+> - lib-$(CONFIG_FEATURE_FIND_REGEX) += xregcomp.o
+> +Index: busybox-1.13.2/Makefile
+> +===================================================================
+> +--- busybox-1.13.2.orig/Makefile	2009-03-19 15:44:37.419270265 +0300
+> ++++ busybox-1.13.2/Makefile	2009-03-19 15:45:57.737521296 +0300
+> +@@ -471,6 +471,10 @@
+> + 		util-linux/ \
+> + 		util-linux/volume_id/ \
+> +
+> ++# Lib interdeps
+> ++# libbb uses headers generated in applets
+> ++libbb: applets
+>   +
+> -+libbb/appletlib.o: include/usage_compressed.h include/applet_tables.h
+> -+
+> -+include/usage_compressed.h include/applet_tables.h:
+> -+        $(Q)$(MAKE) $(build)=applets $@
+> + endif # KBUILD_EXTMOD
+> +
+> + ifeq ($(dot-config),1)
+
+
 
 
