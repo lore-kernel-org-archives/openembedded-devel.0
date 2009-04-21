@@ -1,36 +1,33 @@
-Received: from [209.85.217.180] (helo=mail-gx0-f180.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1LwMvX-0005CV-Ex
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 22:50:47 +0200
-Received: by gxk28 with SMTP id 28so3821386gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 13:46:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=HqsXlZ5Hzss/JNaMEzaL7M0PiSG5CYyjpr2jGJNiY3w=;
-	b=bi5nD/GhB/Q4Ugp1pfDHzuiO2V7eVbCyp9H3d3GuBGX4k+EBDbFH7vKikpdvVG7tqD
-	WaWO7WEoP3jKfO1e6uVmzrSjFf5V5UT9CYVp0vwuBv1efSN2xwlgwUmShJD1PQQnafaA
-	B3DfOh7BxIBTY4XLOqN6KZmgqDDEe3wcWkwNM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=BYIWsYz4td3+pXhkHdxB6B6xllPVAetEOY794r+jqeHoK5YaIAahbhHjf1kF+Qf0pX
-	NxZrJW6haTmNsCSK0/nQ2EFvnnfxPbPV6z2FkPhDzXmm86f0ivgtZaWuZAqlVp1XjrLT
-	5WG55xbHgmBAhpitVg4oqMUeqiwpZLrh4/Gck=
-MIME-Version: 1.0
-Received: by 10.90.120.17 with SMTP id s17mr2696069agc.63.1240346778262; Tue, 
-	21 Apr 2009 13:46:18 -0700 (PDT)
-In-Reply-To: <1240241104-21935-7-git-send-email-marcin@juszkiewicz.com.pl>
-References: <1240241104-21935-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1240241104-21935-7-git-send-email-marcin@juszkiewicz.com.pl>
-Date: Tue, 21 Apr 2009 22:46:18 +0200
-Message-ID: <c384c5ea0904211346r54de1a2fs517045cc32ae365@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [STABLE][PATCH 1/1] util-linux-ng: Fixed dangling symlinks.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LwMzB-0005JH-Sp
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 22:54:33 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LwMuo-0001hF-Oj
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 20:50:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:50:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:50:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Apr 2009 22:35:49 +0200
+Message-ID: <gslan5$mfs$5@ger.gmane.org>
+References: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
+In-Reply-To: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] image.bbclass: reorder do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,14 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 20:50:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Apr 2009 20:54:34 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Acked-by: Leon Woestenberg <leon@sidebranch.com>
+On 30-03-09 09:59, Roman I Khimov wrote:
+> Places do_rootfs function before do_install in image creation process.
 
-Hehe, I cheat.
--- 
-Leon
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+
+>
+> This change allows multiimage builds, when one image depends on another (before
+> that second image creation raced with do_rootfs for the first one) and uses
+> it for some purpose.
+>
+> Multiimage builds are useful in situations like creating an installer image
+> with initramfs (built in OE) and an image of the target FS (also built in OE)
+> or for building virtualized system images to be placed on target FS.
+> ---
+>   classes/image.bbclass |    3 ++-
+>   1 files changed, 2 insertions(+), 1 deletions(-)
+>
+> diff --git a/classes/image.bbclass b/classes/image.bbclass
+> index fd0df4d..3a0bc32 100644
+> --- a/classes/image.bbclass
+> +++ b/classes/image.bbclass
+> @@ -106,6 +106,7 @@ do_rootfs[nostamp] = "1"
+>   do_rootfs[dirs] = "${TOPDIR}"
+>   do_rootfs[lockfiles] = "${IMAGE_ROOTFS}.lock"
+>   do_build[nostamp] = "1"
+> +do_install[nostamp] = "1"
+>
+>   # Must call real_do_rootfs() from inside here, rather than as a separate
+>   # task, so that we have a single fakeroot context for the whole process.
+> @@ -234,5 +235,5 @@ rootfs_update_timestamp () {
+>   # export the zap_root_password, create_etc_timestamp and remote_init_link
+>   EXPORT_FUNCTIONS zap_root_password create_etc_timestamp remove_init_link do_rootfs make_zimage_symlink_relative set_image_autologin rootfs_update_timestamp
+>
+> -addtask rootfs before do_build after do_install
+> +addtask rootfs after do_compile before do_install
+>   addtask deploy_to after do_rootfs
+
+
 
 
