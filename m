@@ -1,40 +1,33 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1LwN30-0005R8-N7
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 22:58:30 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id DC290DB0E1C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 22:54:03 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 14B81DB07A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 22:54:03 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (g225145114.adsl.alicedsl.de
-	[92.225.145.114]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 22:54:03 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 5A4573C244; Tue, 21 Apr 2009 22:54:02 +0200 (CEST)
-Date: Tue, 21 Apr 2009 22:54:02 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090421205401.GA6560@rhein.zuhause.netz>
-References: <20090421161342.GA5630@rhein.zuhause.netz>
-	<gsl2ps$q6k$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <gsl2ps$q6k$1@ger.gmane.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Ack for ffmpeg patch
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LwN3y-0005SD-0O
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 22:59:30 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1LwMze-0001uZ-FC
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 20:55:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:55:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:55:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Apr 2009 22:50:57 +0200
+Message-ID: <gslbjh$pvu$1@ger.gmane.org>
+References: <gsl3do$sov$1@ger.gmane.org> <200904220025.33983.khimov@altell.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
+In-Reply-To: <200904220025.33983.khimov@altell.ru>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Cleaning out patchwork queue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 20:58:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Apr 2009 20:59:30 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 21, 2009 at 08:20:44PM +0200, Koen Kooi wrote:
-> On 21-04-09 18:13, Henning Heinold wrote:
->> Hi,
->>
->> is the attached patch okay for dev. The patch removes the install
->> of the headers to the legacy directories. Without the patch it is very complicated
->> to compile xine 1.1.16.3.
+On 21-04-09 22:25, Roman I Khimov wrote:
+> On Tuesday 21 April 2009 22:31:20 Koen Kooi wrote:
+>> If you have outstanding patches and no commit access (hi Roman!) ping
+>> them again on this list and pester people in IRC to apply them.
 >
-> NACK, it installs to both for a reason. You'll break other ffmpeg  
-> dependants by removing them. I don't think that's worth it to make xine  
-> work.
->
-> regards,
->
-> Koen
+> Well, don't like to pester people in general, but there you go.
 
-Which one breaks? Then they have to be fixed.
+Could you have a look at your patches listed here: 
+http://patchwork.openembedded.org/project/openembedded/list/?state=3
 
-Bye Henning
+some are still using packages instead of recipes and they seem to fail 
+on checksums.ini since git can't merge its way out of a wet paper bag.
+
+Only sending patches for the recipes and one big patch for checksums.ini 
+would acceptable to me as well.
+
+regards,
+
+Koen
+
+
 
 
