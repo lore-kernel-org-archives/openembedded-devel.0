@@ -1,24 +1,34 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LwMbV-0003jR-Vg
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 22:30:06 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LwMX8-0008V0-6o
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 00:25:34 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Apr 2009 00:25:33 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <gsl3do$sov$1@ger.gmane.org>
-In-Reply-To: <gsl3do$sov$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200904220025.33983.khimov@altell.ru>
-Subject: Re: Cleaning out patchwork queue
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LwMfE-00041e-8P
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 22:33:56 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LwMau-0000nz-Dy
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 20:29:28 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:29:28 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 20:29:28 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Apr 2009 22:29:17 +0200
+Message-ID: <gslaat$lqt$1@ger.gmane.org>
+References: <200902140035.13820.khimov@altell.ru>	<877i2g63wr.fsf@neumann.lab.ossystems.com.br>	<200903261756.23906.khimov@altell.ru>
+	<200904220017.49938.khimov@altell.ru>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
+In-Reply-To: <200904220017.49938.khimov@altell.ru>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] New package: siproxd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,16 +42,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 20:30:06 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 21 Apr 2009 20:33:56 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tuesday 21 April 2009 22:31:20 Koen Kooi wrote:
-> If you have outstanding patches and no commit access (hi Roman!) ping
-> them again on this list and pester people in IRC to apply them.
+On 21-04-09 22:17, Roman I Khimov wrote:
+> On Thursday 26 March 2009 17:56:23 Roman I Khimov wrote:
+>> New recipe for siproxd 0.7.1
+>
+> ping
 
-Well, don't like to pester people in general, but there you go.
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+
 
 
