@@ -1,37 +1,27 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1LwIfl-0001Ii-FI
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 18:18:13 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B3FF4DB0E1C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 18:13:44 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B3320DB07A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 18:13:43 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (g225145114.adsl.alicedsl.de
-	[92.225.145.114]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 18:13:43 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id E0BC73C244; Tue, 21 Apr 2009 18:13:42 +0200 (CEST)
-Date: Tue, 21 Apr 2009 18:13:42 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090421161342.GA5630@rhein.zuhause.netz>
+	(envelope-from <trini@kernel.crashing.org>) id 1LwIvI-000782-2Z
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 18:34:16 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090421162948.PVQS6112.fed1rmmtao102.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 12:29:48 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id iGVl1b00N4dMFYL04GVlUe; Tue, 21 Apr 2009 12:29:47 -0400
+X-Authority-Analysis: v=1.0 c=1 a=JW5XH6fX0PUupc9VQSQA:9
+	a=lQXxxL2nLg1oEe4_8j0A:7 a=pySwZQy97SKo-bJi68oVZqg1fSEA:4
+X-CM-Score: 0.00
+Date: Tue, 21 Apr 2009 09:29:45 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090421162945.GK17629@smtp.west.cox.net>
+References: <20090421161342.GA5630@rhein.zuhause.netz>
 MIME-Version: 1.0
+In-Reply-To: <20090421161342.GA5630@rhein.zuhause.netz>
+Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Ack for ffmpeg patch
+Subject: Re: Ack for ffmpeg patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,81 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 16:18:13 -0000
-X-Groupsio-MsgNum: 9587
-Content-Type: multipart/mixed; boundary="ReaqsoxgOBHFXBhH"
-Content-Disposition: inline
-
---ReaqsoxgOBHFXBhH
+X-List-Received-Date: Tue, 21 Apr 2009 16:34:16 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi,
+On Tue, Apr 21, 2009 at 06:13:42PM +0200, Henning Heinold wrote:
 
-is the attached patch okay for dev. The patch removes the install
-of the headers to the legacy directories. Without the patch it is very complicated
-to compile xine 1.1.16.3.
+> Hi,
+> 
+> is the attached patch okay for dev. The patch removes the install
+> of the headers to the legacy directories. Without the patch it is very complicated
+> to compile xine 1.1.16.3.
 
-Bye Henning
+Did you mean "adds the install of the headers ..." ?  If so, yes, this
+looks good.
 
---ReaqsoxgOBHFXBhH
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="0001-ffmpeg-0.5-install-the-header-to-staging-only-to-th.patch"
-
- recipes/ffmpeg/ffmpeg_0.5.bb |   34 +++++++++++++++++++++++++++++++++-
- 1 files changed, 33 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/ffmpeg/ffmpeg_0.5.bb b/recipes/ffmpeg/ffmpeg_0.5.bb
-index 54db004..244dba1 100644
---- a/recipes/ffmpeg/ffmpeg_0.5.bb
-+++ b/recipes/ffmpeg/ffmpeg_0.5.bb
-@@ -3,7 +3,7 @@ require ffmpeg.inc
- DEPENDS += "schroedinger libgsm"
- 
- PE = "1"
--PR = "r1"
-+PR = "r2"
- 
- DEFAULT_PREFERENCE = "1"
- 
-@@ -59,3 +59,35 @@ do_configure() {
- 		sed -i -e s:Os:O4:g ${B}/config.h
- }
- 
-+do_stage() {
-+        for lib in libavcodec libavdevice libavformat \
-+                   libavutil libpostproc libswscale
-+        do
-+            oe_libinstall -a -so -C $lib $lib ${STAGING_LIBDIR} || true
-+            install -d ${STAGING_INCDIR}/$lib 
-+        done 
-+
-+        install -m 0644 ${S}/libavcodec/avcodec.h ${STAGING_INCDIR}/libavcodec/avcodec.h
-+        install -m 0644 ${S}/libavcodec/opt.h ${STAGING_INCDIR}/libavcodec/opt.h
-+
-+        
-+        for h in avformat.h avio.h rtp.h rtsp.h rtspcodes.h
-+        do
-+           install -m 0644 ${S}/libavformat/$h  ${STAGING_INCDIR}/libavformat/$h        
-+        done
-+
-+                for h in adler32.h avstring.h avutil.h base64.h bswap.h \
-+                 common.h crc.h fifo.h integer.h intfloat_readwrite.h \
-+                 log.h lzo.h mathematics.h md5.h mem.h pixfmt.h random.h \
-+                 rational.h sha1.h
-+                do
-+           install -m 0644 ${S}/libavutil/$h        ${STAGING_INCDIR}/libavutil/$h 
-+        done
-+
-+        install -d ${STAGING_INCDIR}/libswscale/ 
-+        install -m 0644 ${S}/libswscale/*.h ${STAGING_INCDIR}/libswscale/
-+
-+        install -d ${STAGING_INCDIR}/libpostproc
-+        install -m 0644 ${S}/libpostproc/postprocess.h ${STAGING_INCDIR}/libpostproc/postprocess.h
-+}
-+
 -- 
-1.6.2.3
+Tom Rini
 
 
---ReaqsoxgOBHFXBhH--
