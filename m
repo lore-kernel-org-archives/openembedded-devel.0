@@ -1,31 +1,33 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1LwBVn-0000zb-Qr
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Apr 2009 10:39:29 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 5F6502C7FD
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 08:32:58 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rmpW+-Z+4HqV
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 08:32:57 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id C869C2C797
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2009 08:32:55 +0000 (UTC)
-Message-ID: <49ED8539.6000006@gmail.com>
-Date: Tue, 21 Apr 2009 10:35:05 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49ED22A1.7090208@tait.co.nz>
-In-Reply-To: <49ED22A1.7090208@tait.co.nz>
-Subject: Re: devshell "No protocol specified"
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LwCBg-0007Wn-Ac
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 11:22:45 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LwC7Q-0004Lm-Pd
+	for openembedded-devel@openembedded.org; Tue, 21 Apr 2009 09:18:20 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 09:18:20 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 21 Apr 2009 09:18:20 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Apr 2009 11:18:10 +0200
+Message-ID: <gsk30i$7bc$1@ger.gmane.org>
+References: <49D3582F.4070304@xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
+In-Reply-To: <49D3582F.4070304@xora.org.uk>
+Sender: news <news@ger.gmane.org>
+Subject: Re: klibc problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,37 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2009 08:39:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Apr 2009 09:22:48 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Douglas Royds ha scritto:
-> Failing to get a devshell console. Fails for both XTERM and KONSOLE:
->=20
-> | No protocol specified
-> | xterm Xt error: Can't open display: :0
->=20
-> The failure is unique to one box (ie. it works fine on a different
-> computer).
+On 01-04-09 14:03, Graeme Gregory wrote:
+> Ok, its no mystery to some people that klibc has problems with modern
+> kernels.
+>
+> But I think we also have a problem with the package in OE. Seeing as
+> klibc is machine dependent in that it includes mach-XXX/include/mach/*.h
+> files it really should not be staged as part of the base arch. I think
+> we need to stage it into ${MACHINE_ARCH} the same was as the kernel is.
+>
+> We can then work on fixing the application compiles. I think I have a
+> suitable hack.
 
+It will also fail in a multimachine environment and when you change 
+kernels. To address the second point I propose one of the following:
 
+* make klibc nostamp
+* make klibc use MACHINE_KERNEL_PR (and all kernels and machines using 
+klibc)
 
-we recently solved an identical issue
-see thread 20/04/2009 "[oe] devshell not working with screen remote shell=
-"
+To address the first point I think we need to get Graeme's stuff in.
 
-BTW could you descrive better what are you doing?
-are you on local or remote machine?
+regards,
 
-Can you try calling xterm in your console?
-What happens?
+Koen
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
 
 
