@@ -1,25 +1,24 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1LwTCM-0003Wa-BB
+	(envelope-from <khimov@altell.ru>) id 1LwUZm-0002s3-EN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 05:32:34 +0200
-Received: from gandalf.denix.org ([71.255.242.201]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KIH00EPCGA1RIN3@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	21 Apr 2009 22:27:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A7B176B83A8; Tue,
-	21 Apr 2009 23:27:36 -0400 (EDT)
-Date: Tue, 21 Apr 2009 23:27:36 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 22 Apr 2009 07:00:50 +0200
+Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LwUVP-000CZG-2u
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Apr 2009 08:56:19 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090422032736.GB11408@denix.org>
+Date: Wed, 22 Apr 2009 08:56:14 +0400
+User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
 References: <1238399997-6016-1-git-send-email-khimov@altell.ru>
-	<c384c5ea0904211352o406880cbp2846efd6e0125038@mail.gmail.com>
-	<87eivlef8t.fsf@neumann.lab.ossystems.com.br>
-MIME-version: 1.0
-In-reply-to: <87eivlef8t.fsf@neumann.lab.ossystems.com.br>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+	<20090421204132.GL17629@smtp.west.cox.net>
+In-Reply-To: <20090421204132.GL17629@smtp.west.cox.net>
+MIME-Version: 1.0
+Message-Id: <200904220856.15285.khimov@altell.ru>
 Subject: Re: [PATCH] image.bbclass: reorder do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,39 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 03:32:34 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 22 Apr 2009 05:00:50 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, Apr 21, 2009 at 08:52:50PM -0300, Otavio Salvador wrote:
-> Hello Leon,
-> 
-> Leon Woestenberg <leon.woestenberg@gmail.com> writes:
-> 
-> > On Mon, Mar 30, 2009 at 9:59 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> >> Places do_rootfs function before do_install in image creation process.
-> >>
-> >> This change allows multiimage builds, when one image depends on another (before
-> >> that second image creation raced with do_rootfs for the first one) and uses
-> >> it for some purpose.
-> >>
-> >> Multiimage builds are useful in situations like creating an installer image
-> >> with initramfs (built in OE) and an image of the target FS (also built in OE)
-> >> or for building virtualized system images to be placed on target FS.
-> >> ---
+On Wednesday 22 April 2009 00:41:32 Tom Rini wrote:
+> On Mon, Mar 30, 2009 at 11:59:57AM +0400, Roman I Khimov wrote:
+> > Places do_rootfs function before do_install in image creation process.
 > >
-> > This looks *very* useful.
+> > This change allows multiimage builds, when one image depends on another
+> > (before that second image creation raced with do_rootfs for the first
+> > one) and uses it for some purpose.
 > >
-> > However, this might break stuff as it is intrusive. So HEADS UP everyone! :-)
-> 
-> [...]
-> 
-> Mind to explain how it can break things?
+> > Multiimage builds are useful in situations like creating an installer
+> > image with initramfs (built in OE) and an image of the target FS (also
+> > built in OE) or for building virtualized system images to be placed on
+> > target FS.
+>
+> So, the problem we have happen is that opkg (or dpkg or ...) gets into a
+> race because >1 image are trying to muck around in ${TMPDIR}/rootfs,
+> right?  How does this fix the problem?
 
-On the other hand - mind to explain how it can be so very useful? :) Any real 
-word examples?
+The problem was in dependencies between images, currently I have one project 
+with 4 images that depends and packs like this
 
--- 
-Denys
+   /-> 2 -> 3
+1-+
+   \-> 4
+
+What you're talking about is another problem and in another project that I'm 
+converting now to OE I'll try to do something like
+
+IMAGE_ROOTFS = "${TMPDIR}/rootfs.${PN}"
+
+to have parallel image builds.
 
 
