@@ -1,38 +1,27 @@
-Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
+Received: from [194.100.97.46] (helo=mail.inoi.fi)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hs4233@mail.mn-solutions.de>) id 1LwWCd-0004Ih-Nj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 08:45:03 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id 9FB443A010;
-	Wed, 22 Apr 2009 08:40:34 +0200 (CEST)
-X-Virus-Scanned: by Mittwald Mailscanner
-Received: from mx51.mymxserver.com ([127.0.0.1])
-	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FlzlXdpTEc-Q; Wed, 22 Apr 2009 08:40:34 +0200 (CEST)
-Received: from lin01.mn-solutions.de (pD95F9354.dip0.t-ipconnect.de
-	[217.95.147.84])
-	by mx51.mymxserver.com (Postfix) with ESMTP id 2FCD63A017;
-	Wed, 22 Apr 2009 08:40:34 +0200 (CEST)
-Received: by lin01.mn-solutions.de (Postfix, from userid 116)
-	id A847A1E0036; Wed, 22 Apr 2009 08:40:33 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb3 (2006-10-05) on 
-	lin01.mn-logistik.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb3
-Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
-	by lin01.mn-solutions.de (Postfix) with ESMTP id 563201E0010;
-	Wed, 22 Apr 2009 08:40:25 +0200 (CEST)
-From: Holger Schurig <hs4233@mail.mn-solutions.de>
+	(envelope-from <petri.lehtinen+openembedded-devel@inoi.fi>)
+	id 1LwWQB-00083x-Fq for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Apr 2009 08:59:03 +0200
+Received: from mail.inoi.fi (localhost.localdomain [127.0.0.1])
+	by mail.inoi.fi (Postfix) with ESMTP id 92D4E217D4;
+	Wed, 22 Apr 2009 09:42:38 +0300 (EEST)
+Received: from localhost (unknown [10.105.0.205])
+	by mail.inoi.fi (Postfix) with ESMTP id 6CFE920704;
+	Wed, 22 Apr 2009 09:42:38 +0300 (EEST)
+Date: Wed, 22 Apr 2009 09:54:33 +0300
+From: Petri Lehtinen <petri.lehtinen+openembedded-devel@inoi.fi>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Apr 2009 08:40:06 +0200
-User-Agent: KMail/1.9.7
-References: <1238144638-7541-1-git-send-email-khimov@altell.ru>
-In-Reply-To: <1238144638-7541-1-git-send-email-khimov@altell.ru>
+Message-ID: <20090422065433.GC19293@colossus>
+References: <1239782395-12413-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
+	<20090422050423.GB19293@colossus>
+	<20090422054438.GC11408@denix.org>
 MIME-Version: 1.0
-Message-Id: <200904220840.06152.hs4233@mail.mn-solutions.de>
-Subject: Re: [PATCH] busybox: update appletlib dependency patch
+In-Reply-To: <20090422054438.GC11408@denix.org>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: Petri Lehtinen <petri.lehtinen@inoi.fi>
+Subject: Re: [PATCH] base.bbclass: Combine all checksum.ini files	found in BBPATH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,17 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 06:45:03 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Apr 2009 06:59:03 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-> The reason is that previous version introduced a race between
-> applets make processes spawned from top-level Makefile and
-> from libbb Makefile.
+Denys Dmytriyenko wrote:
+> On Wed, Apr 22, 2009 at 08:04:23AM +0300, Petri Lehtinen wrote:
+> > Any more comments on this? Could someone push it?
+> > 
+> > I would like very much to see this in stable, too.
+> 
+> Actually, it was already pushed in 4b48c66ff661c3b88f85dee62517a31ae66db242
 
-Just a question: do you (we?) make sure that such patches end up 
-upstream?
+Ahh, my bad. Many thanks.
+
+Is there any chance on getting this to stable, too?
+
+-- 
+Petri Lehtinen
+Software Specialist
+Inoi Oy
+Tel. : +358 40 758 0229
+Email: petri.lehtinen@inoi.fi
 
 
