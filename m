@@ -1,26 +1,24 @@
 Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LwYDl-0006re-9i
+	(envelope-from <khimov@altell.ru>) id 1LwYbL-0007O0-Ow
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 10:54:21 +0200
+	Wed, 22 Apr 2009 11:18:43 +0200
 Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
 	by relay1.mail.masterhost.ru with esmtp 
 	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LwY9M-000AyN-3R
+	message id 1LwYWx-0003Ar-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 12:49:48 +0400
+	Wed, 22 Apr 2009 13:14:11 +0400
 From: Roman I Khimov <khimov@altell.ru>
 Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Apr 2009 12:49:07 +0400
+Date: Wed, 22 Apr 2009 13:13:33 +0400
 User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF763@hiob.intern.dresearch.de>
-	<d1b08f940904200836k6374f731h83342aea89c1f14@mail.gmail.com>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF76B@hiob.intern.dresearch.de>
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF76B@hiob.intern.dresearch.de>
+References: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1238399997-6016-1-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-Message-Id: <200904221249.07359.khimov@altell.ru>
-Subject: Re: initramfs howto?
+Message-Id: <200904221313.34069.khimov@altell.ru>
+Subject: Re: [PATCH] image.bbclass: reorder do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +32,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 08:54:21 -0000
+X-List-Received-Date: Wed, 22 Apr 2009 09:18:44 -0000
 Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Wednesday 22 April 2009 11:45:38 Sledz, Steffen wrote:
-> Both kernels do have associated modules.
->
-> As i understand OE i have to build two images (for Rootfs-A and Rootfs-B).
-> But ...
->
-> (a) How do i tell those images which kernels (and as a consequence which
-> modules) are associated with it?
->
-> (b) How do i build Kernel-B with it's initramfs?
+On Monday 30 March 2009 11:59:57 Roman I Khimov wrote:
+> -addtask rootfs before do_build after do_install
+> +addtask rootfs after do_compile before do_install
 
-As I understand it's not possible to build multiple kernels currently in OE, 
-as the packages will be named as "kernel-*" and if versions are the same 
-you'll get something completely unusable. Even if not, you'll need to be very 
-careful to get it working right.
+BTW, looking at kernel.bbclass again I think with this applied we can simplify
+a bit INITRAMFS_IMAGE dependency with something like this (untested, not using
+initramfs in this fashion, but would be interested to hear from someone using
+it):
 
-We're doing multikernel builds here, but in sort of primary-secondary fashion, 
-I've split kernel.bbclass into kernel.bbclass and kernel_base.bbclass so that 
-kernel.bbclass works exactly as it worked before split, but if you use 
-kernel_base the packages won't be renamed, so if you have "linux-smth" recipe 
-you'll get "linux-smth-*" packages. Although I should note that our secondary 
-kernel doesn't have any modules and we're installing both of them on one 
-image.
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 954c407..fecf90c 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -11,19 +11,19 @@ python __anonymous () {
+ 
+     import bb
+     
++    depends = bb.data.getVar("DEPENDS", d, 1)
+     kerneltype = bb.data.getVar('KERNEL_IMAGETYPE', d, 1) or ''
+     if kerneltype == 'uImage':
+-    	depends = bb.data.getVar("DEPENDS", d, 1)
+     	depends = "%s u-boot-mkimage-openmoko-native" % depends
+-    	bb.data.setVar("DEPENDS", depends, d)
+ 
+     image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
+     if image != '' and image is not None:
+-        bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
++    	depends = "%s %s" % (depends, image)
++
++    bb.data.setVar("DEPENDS", depends, d)
+ }
+ 
+ INITRAMFS_IMAGE ?= ""
+-INITRAMFS_TASK ?= ""
+ 
+ inherit kernel-arch
+ 
+@@ -90,7 +90,6 @@ kernel_do_compile() {
+ 		oenote "no modules to compile"
+ 	fi
+ }
+-kernel_do_compile[depends] = "${INITRAMFS_TASK}"
+ 
+ kernel_do_stage() {
+ 	ASMDIR=`readlink include/asm`
 
-I can try to make a patch for current OE if interested, unfortunately we 
-diverged a little from time overlay was made, so patches from overlay don't 
-apply easily. 
 
 
