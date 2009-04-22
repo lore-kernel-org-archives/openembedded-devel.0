@@ -1,17 +1,18 @@
-Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <di@fh-wedel.de>) id 1Lwd4V-0001lA-Kq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 16:05:07 +0200
-Received: by mail.fh-wedel.de (Postfix, from userid 959)
-	id 2FD3B547E4; Wed, 22 Apr 2009 16:00:34 +0200 (CEST)
-Date: Wed, 22 Apr 2009 16:00:34 +0200
-From: Martin Dietze <di@fh-wedel.de>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LwdGT-0002Lk-PA
+	for openembedded-devel@openembedded.org; Wed, 22 Apr 2009 16:17:29 +0200
+Received: (qmail 22878 invoked by uid 813007); 22 Apr 2009 14:12:58 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Apr 2009 14:12:58 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090422140034.GA27393@fh-wedel.de>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: default for IPKGBUILDCMD (ipkg-build not found)
+Date: Wed, 22 Apr 2009 16:12:57 +0200
+Message-Id: <1240409577-12275-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.rc0
+Subject: [PATCH 1/1] linux.inc: unset CONFIG_LOCALVERSION_AUTO to not get 2.6.27.2-svn8826-dirty26 like names
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,46 +26,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 14:05:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Apr 2009 14:17:30 -0000
 
-Hi,
+Year ago we removed CONFIG_LOCALVERSION from .config to get more sane names of
+kernels. Today with 2.6.27.2 I got 2.6.27.2-svn8826-dirty26 kernel which was
+2.6.27.2-svn8826-dirty9 on device so no modules ;(
 
- I just stumbled across this here. I try to build
-linux-libc-headers using `bitbake -b /path/to/recipe.bb'. The
-build fails with this message:
+This patch changes this by unsetting CONFIG_LOCALVERSION_AUTO variable.
 
-NOTE: package linux-libc-headers-2.6.18-r3: task do_package: completed
-NOTE: Running task 10 of 18 (ID: 9, /var/src/OE/org.openembedded.dev/recipes/linux-libc-headers/linux-libc-headers_2.6.18.bb, do_populate_staging)
-NOTE: package linux-libc-headers-2.6.18-r3: task do_populate_staging: started
-NOTE: package linux-libc-headers-2.6.18-r3: task do_populate_staging: completed
-NOTE: Running task 11 of 18 (ID: 17, /var/src/OE/org.openembedded.dev/recipes/linux-libc-headers/linux-libc-headers_2.6.18.bb, do_package_write_ipk)
-NOTE: package linux-libc-headers-2.6.18-r3: task do_package_write_ipk: started
-sh: ipkg-build: command not found
-NOTE: Task failed: ipkg-build execution failed
-NOTE: package linux-libc-headers-2.6.18-r3: task do_package_write_ipk: failed
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+Acked-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/linux/linux.inc |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-Searching my tmp/ tree I find that there is no ipkg-build but
-a stage-manager-ipkg-build instead. Grepping through the configuration
-reveals that in conf/bitbake.conf `IPKGBUILDCMD' is set to "ipk-build".
-This variable is used in `package_ipk.bbclass'.
-
-I do not quite understand why I do not get this error when linux-libc-headers
-is implicitly built due to dependencies, but nevertheless it seems that
-either IPKBUILDCMD is deprecated but still used in `package_ipk.bbclass' though
-it should not be, or the default in conf/bitbake.conf is not correct?
-
-Cheers,
-
-Martin
-
+diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
+index 984efac..5a4a11f 100644
+--- a/recipes/linux/linux.inc
++++ b/recipes/linux/linux.inc
+@@ -98,8 +98,11 @@ do_configure_prepend() {
+             -e '/CONFIG_LOGO=/d' \
+             -e '/CONFIG_LOGO_LINUX_CLUT224=/d' \
+             -e '/CONFIG_LOCALVERSION/d' \
++            -e '/CONFIG_LOCALVERSION_AUTO/d' \
+ 	    < '${WORKDIR}/defconfig' >>'${S}/.config'
+ 
++        echo 'CONFIG_LOCALVERSION=""' >>${S}/.config
++        echo '# CONFIG_LOCALVERSION_AUTO is not set' >>${S}/.config
+         #
+         # root-over-nfs-over-usb-eth support. Limited, but should cover some cases.
+         # Enable this by setting a proper CMDLINE_NFSROOT_USB.
 -- 
------------ / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-There's only one serious question. And that is: Who knows how to make love stay?
-Answer me that and I will tell you whether or not to kill yourself. Answer me 
-that and I will ease your mind about the beginning and the end of time. Answer 
-me that and I will reveal to you the purpose of the moon.  -- Tom Robbins
+1.6.3.rc0
+
+
+
 
 
