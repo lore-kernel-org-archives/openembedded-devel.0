@@ -1,32 +1,23 @@
-Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LwfJS-0006Qe-Q4
-	for openembedded-devel@openembedded.org; Wed, 22 Apr 2009 18:28:43 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao102.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
-	id <20090422162408.ZSG6112.fed1rmmtao102.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Wed, 22 Apr 2009 12:24:08 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id igQ61b0014dMFYL04gQ6HK; Wed, 22 Apr 2009 12:24:08 -0400
-X-Authority-Analysis: v=1.0 c=1 a=n9qIqJPtQNMA:10 a=YnjJ1TpyyGYA:10
-	a=Q4-j1AaZAAAA:8 a=4HVRqb_MAAAA:8 a=0gcC27t9AAAA:8 a=22pK5S-mAAAA:8
-	a=QGiNEF9uRetAHR_qvK0A:9 a=obOB9Gc7f0T4DzvR9fO3Z0coZU8A:4
-	a=UcWZWmDdwLsA:10
-	a=k-kO48AawpMA:10 a=4KgpRpU3nOMA:10 a=4LlnTlE8C9c-eeOY:21
-	a=Lp8_gCkHJCDEDPYB:21
-X-CM-Score: 0.00
-Date: Wed, 22 Apr 2009 09:24:05 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090422162405.GS17629@smtp.west.cox.net>
-References: <1240380414-8068-1-git-send-email-denis@denix.org>
-	<gsmd3q$62k$2@ger.gmane.org>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lwfst-00081h-IM
+	for openembedded-devel@openembedded.org; Wed, 22 Apr 2009 19:05:19 +0200
+Received: (qmail 23353 invoked by uid 813007); 22 Apr 2009 17:00:46 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Apr 2009 17:00:46 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Apr 2009 19:00:41 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <1240409577-12275-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<be7a9f3d0904220923s13d4eaa5ld4ae0e8492be4812@mail.gmail.com>
+In-Reply-To: <be7a9f3d0904220923s13d4eaa5ld4ae0e8492be4812@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <gsmd3q$62k$2@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [STABLE][PATCH] base.bbclass: Combine all checksum.ini	files found in BBPATH
+Message-Id: <200904221900.46562.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH 1/1] linux.inc: unset CONFIG_LOCALVERSION_AUTO to not get 2.6.27.2-svn8826-dirty26 like names
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,80 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 16:28:43 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 22 Apr 2009 17:05:19 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Wed, Apr 22, 2009 at 08:22:50AM +0200, Koen Kooi wrote:
-> On 22-04-09 08:06, Denys Dmytriyenko wrote:
->> From: Petri Lehtinen<petri.lehtinen@inoi.fi>
->
-> Acked-by: Koen Kooi <koen@openembedded.org>
+Dnia =C5=9Broda, 22 kwietnia 2009 o 18:23:29 Otavio Salvador napisa=C5=82(a=
+):
+> Please after it gets into dev, propose it to stable since it is quite
+> useful.
 
-Acked-by: Tom Rini <trini@embeddedalley.com>
+It is in reverse :D I did that patch for stable but all things needs to=20
+be in .dev first so... ;D
 
->
->>
->> This makes it possible for overlays to have checksum.ini.
->>
->> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
->> ---
->>   classes/base.bbclass |   22 +++++++++++++---------
->>   1 files changed, 13 insertions(+), 9 deletions(-)
->>
->> diff --git a/classes/base.bbclass b/classes/base.bbclass
->> index 9ec705b..e5fd814 100644
->> --- a/classes/base.bbclass
->> +++ b/classes/base.bbclass
->> @@ -40,12 +40,11 @@ def base_path_relative(src, dest):
->>       return sep.join(relpath)
->>
->>   # for MD5/SHA handling
->> -def base_chk_load_parser(config_path):
->> +def base_chk_load_parser(config_paths):
->>       import ConfigParser, os, bb
->>       parser = ConfigParser.ConfigParser()
->> -    if not len(parser.read(config_path)) == 1:
->> -        bb.note("Can not open the '%s' ini file" % config_path)
->> -        raise Exception("Can not open the '%s'" % config_path)
->> +    if len(parser.read(config_paths))<  1:
->> +        raise ValueError("no ini files could be found")
->>
->>       return parser
->>
->> @@ -620,13 +619,18 @@ python base_do_fetch() {
->>
->>   	# Verify the SHA and MD5 sums we have in OE and check what do
->>   	# in
->> -	check_sum = bb.which(bb.data.getVar('BBPATH', d, True), "conf/checksums.ini")
->> -	if not check_sum:
->> -		bb.note("No conf/checksums.ini found, not checking checksums")
->> -		return
->> +	checksum_paths = bb.data.getVar('BBPATH', d, True).split(":")
->> +
->> +	# reverse the list to give precedence to directories that
->> +	# appear first in BBPATH
->> +	checksum_paths.reverse()
->>
->> +	checksum_files = ["%s/conf/checksums.ini" % path for path in checksum_paths]
->>   	try:
->> -		parser = base_chk_load_parser(check_sum)
->> +		parser = base_chk_load_parser(checksum_files)
->> +	except ValueError:
->> +		bb.note("No conf/checksums.ini found, not checking checksums")
->> +		return
->>   	except:
->>   		bb.note("Creating the CheckSum parser failed")
->>   		return
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
--- 
-Tom Rini
+
 
 
