@@ -1,38 +1,32 @@
-Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LwfIo-0006Ov-Vs
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 18:28:03 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so30457ywk.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Apr 2009 09:23:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=g17O7FuRoMy8fNBtZOBOgz35D1hj4kMKBJvHQlbKAG0=;
-	b=aXZJFIcsBySUZkGRaM67UkpUIO7QJ6HhomMsRH9fXm8yWXlPFrQWi5EOMfE7njUrvH
-	v7R+KmEtsWPyJchT4NY/pdcfFsIm8PweEKcgKISFcD9OevjN3tqL8NKkito5WS8kvy+I
-	wUMHnanRgJJ7pxGpcYB0m/GF2TlhxVDSvTZzo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=D/RN2dbNmcdRGLz+0GOZ2vdAWEp6VipsPlDlexhH6HeU/n1NP1R4f8dPla8U/dIbn1
-	klveouNXUI0UMQ4+JmBggC2x/f3rLBoFlUcWehT8SgDsN1V4Q+m7qwZZDUFo50Z2s6Pt
-	GsrmAPvxsnEXUbUxKH0zGGf+iC00C6zvFCzzw=
+	(envelope-from <trini@kernel.crashing.org>) id 1LwfJS-0006Qe-Q4
+	for openembedded-devel@openembedded.org; Wed, 22 Apr 2009 18:28:43 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090422162408.ZSG6112.fed1rmmtao102.cox.net@fed1rmimpo02.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 22 Apr 2009 12:24:08 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id igQ61b0014dMFYL04gQ6HK; Wed, 22 Apr 2009 12:24:08 -0400
+X-Authority-Analysis: v=1.0 c=1 a=n9qIqJPtQNMA:10 a=YnjJ1TpyyGYA:10
+	a=Q4-j1AaZAAAA:8 a=4HVRqb_MAAAA:8 a=0gcC27t9AAAA:8 a=22pK5S-mAAAA:8
+	a=QGiNEF9uRetAHR_qvK0A:9 a=obOB9Gc7f0T4DzvR9fO3Z0coZU8A:4
+	a=UcWZWmDdwLsA:10
+	a=k-kO48AawpMA:10 a=4KgpRpU3nOMA:10 a=4LlnTlE8C9c-eeOY:21
+	a=Lp8_gCkHJCDEDPYB:21
+X-CM-Score: 0.00
+Date: Wed, 22 Apr 2009 09:24:05 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090422162405.GS17629@smtp.west.cox.net>
+References: <1240380414-8068-1-git-send-email-denis@denix.org>
+	<gsmd3q$62k$2@ger.gmane.org>
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.232.15 with SMTP id e15mr11618797anh.129.1240417410691; 
-	Wed, 22 Apr 2009 09:23:30 -0700 (PDT)
-In-Reply-To: <1240409577-12275-1-git-send-email-marcin@juszkiewicz.com.pl>
-References: <1240409577-12275-1-git-send-email-marcin@juszkiewicz.com.pl>
-Date: Wed, 22 Apr 2009 13:23:29 -0300
-X-Google-Sender-Auth: 6afc786f34c6ef10
-Message-ID: <be7a9f3d0904220923s13d4eaa5ld4ae0e8492be4812@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/1] linux.inc: unset CONFIG_LOCALVERSION_AUTO to not get 2.6.27.2-svn8826-dirty26 like names
+In-Reply-To: <gsmd3q$62k$2@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [STABLE][PATCH] base.bbclass: Combine all checksum.ini	files found in BBPATH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +40,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 16:28:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Apr 2009 16:28:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Please after it gets into dev, propose it to stable since it is quite usefu=
-l.
-
-On Wed, Apr 22, 2009 at 11:12 AM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
-> Year ago we removed CONFIG_LOCALVERSION from .config to get more sane nam=
-es of
-> kernels. Today with 2.6.27.2 I got 2.6.27.2-svn8826-dirty26 kernel which =
-was
-> 2.6.27.2-svn8826-dirty9 on device so no modules ;(
+On Wed, Apr 22, 2009 at 08:22:50AM +0200, Koen Kooi wrote:
+> On 22-04-09 08:06, Denys Dmytriyenko wrote:
+>> From: Petri Lehtinen<petri.lehtinen@inoi.fi>
 >
-> This patch changes this by unsetting CONFIG_LOCALVERSION_AUTO variable.
->
-> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 > Acked-by: Koen Kooi <koen@openembedded.org>
-> ---
-> =A0recipes/linux/linux.inc | =A0 =A03 +++
-> =A01 files changed, 3 insertions(+), 0 deletions(-)
+
+Acked-by: Tom Rini <trini@embeddedalley.com>
+
 >
-> diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
-> index 984efac..5a4a11f 100644
-> --- a/recipes/linux/linux.inc
-> +++ b/recipes/linux/linux.inc
-> @@ -98,8 +98,11 @@ do_configure_prepend() {
-> =A0 =A0 =A0 =A0 =A0 =A0 -e '/CONFIG_LOGO=3D/d' \
-> =A0 =A0 =A0 =A0 =A0 =A0 -e '/CONFIG_LOGO_LINUX_CLUT224=3D/d' \
-> =A0 =A0 =A0 =A0 =A0 =A0 -e '/CONFIG_LOCALVERSION/d' \
-> + =A0 =A0 =A0 =A0 =A0 =A0-e '/CONFIG_LOCALVERSION_AUTO/d' \
-> =A0 =A0 =A0 =A0 =A0 =A0< '${WORKDIR}/defconfig' >>'${S}/.config'
->
-> + =A0 =A0 =A0 =A0echo 'CONFIG_LOCALVERSION=3D""' >>${S}/.config
-> + =A0 =A0 =A0 =A0echo '# CONFIG_LOCALVERSION_AUTO is not set' >>${S}/.con=
-fig
-> =A0 =A0 =A0 =A0 #
-> =A0 =A0 =A0 =A0 # root-over-nfs-over-usb-eth support. Limited, but should=
- cover some cases.
-> =A0 =A0 =A0 =A0 # Enable this by setting a proper CMDLINE_NFSROOT_USB.
-> --
-> 1.6.3.rc0
->
+>>
+>> This makes it possible for overlays to have checksum.ini.
+>>
+>> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
+>> ---
+>>   classes/base.bbclass |   22 +++++++++++++---------
+>>   1 files changed, 13 insertions(+), 9 deletions(-)
+>>
+>> diff --git a/classes/base.bbclass b/classes/base.bbclass
+>> index 9ec705b..e5fd814 100644
+>> --- a/classes/base.bbclass
+>> +++ b/classes/base.bbclass
+>> @@ -40,12 +40,11 @@ def base_path_relative(src, dest):
+>>       return sep.join(relpath)
+>>
+>>   # for MD5/SHA handling
+>> -def base_chk_load_parser(config_path):
+>> +def base_chk_load_parser(config_paths):
+>>       import ConfigParser, os, bb
+>>       parser = ConfigParser.ConfigParser()
+>> -    if not len(parser.read(config_path)) == 1:
+>> -        bb.note("Can not open the '%s' ini file" % config_path)
+>> -        raise Exception("Can not open the '%s'" % config_path)
+>> +    if len(parser.read(config_paths))<  1:
+>> +        raise ValueError("no ini files could be found")
+>>
+>>       return parser
+>>
+>> @@ -620,13 +619,18 @@ python base_do_fetch() {
+>>
+>>   	# Verify the SHA and MD5 sums we have in OE and check what do
+>>   	# in
+>> -	check_sum = bb.which(bb.data.getVar('BBPATH', d, True), "conf/checksums.ini")
+>> -	if not check_sum:
+>> -		bb.note("No conf/checksums.ini found, not checking checksums")
+>> -		return
+>> +	checksum_paths = bb.data.getVar('BBPATH', d, True).split(":")
+>> +
+>> +	# reverse the list to give precedence to directories that
+>> +	# appear first in BBPATH
+>> +	checksum_paths.reverse()
+>>
+>> +	checksum_files = ["%s/conf/checksums.ini" % path for path in checksum_paths]
+>>   	try:
+>> -		parser = base_chk_load_parser(check_sum)
+>> +		parser = base_chk_load_parser(checksum_files)
+>> +	except ValueError:
+>> +		bb.note("No conf/checksums.ini found, not checking checksums")
+>> +		return
+>>   	except:
+>>   		bb.note("Creating the CheckSum parser failed")
+>>   		return
 >
 >
 >
@@ -99,13 +112,8 @@ fig
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
-
-
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+-- 
+Tom Rini
 
 
