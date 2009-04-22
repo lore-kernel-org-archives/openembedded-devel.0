@@ -1,24 +1,38 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LwYbL-0007O0-Ow
+	(envelope-from <andrea.adami@gmail.com>) id 1LwZ5N-0005Lt-Sy
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 11:18:43 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LwYWx-0003Ar-Qw
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 13:14:11 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Apr 2009 13:13:33 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <1238399997-6016-1-git-send-email-khimov@altell.ru>
-In-Reply-To: <1238399997-6016-1-git-send-email-khimov@altell.ru>
+	Wed, 22 Apr 2009 11:49:45 +0200
+Received: by bwz19 with SMTP id 19so2869601bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Apr 2009 02:45:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=CkfEAvSrySVzpehBU+/UPG7Ymt7lJzrZOZw5QcuZYjM=;
+	b=nEe8xD7cGCWj/pgta6senGxSLrwXHNDyytzVATDAzgvRC/p9OghPlpPO172wbGQSxx
+	mge3QtCchooMZWrPMvTPpLCn5niNsI28ciIJ1H59nj4M5efeJa7GFIaNmYBPo7xs+Doy
+	Q7Xxinu6XCwBSBEKumcZYefxJXnw6Gf1SZzNo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=S5ot53NUeLMVScgltxTGOERxM1mofY4exjtbuanAjxD8tWNME7/oLnUoZ4QS4NPq70
+	eGZd7WM/knbNkuYcynnsYMRdrJYxo0bVTB1RAkTpRcOQ2hYmygBy5SODBVrCr/MQaOrS
+	IT87abeY5VCIT7tnpdQStvHeFw6N5t92/l0EE=
 MIME-Version: 1.0
-Message-Id: <200904221313.34069.khimov@altell.ru>
-Subject: Re: [PATCH] image.bbclass: reorder do_rootfs
+Received: by 10.223.114.208 with SMTP id f16mr2436791faq.91.1240393513279; 
+	Wed, 22 Apr 2009 02:45:13 -0700 (PDT)
+In-Reply-To: <200904221249.07359.khimov@altell.ru>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF763@hiob.intern.dresearch.de>
+	<d1b08f940904200836k6374f731h83342aea89c1f14@mail.gmail.com>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF76B@hiob.intern.dresearch.de>
+	<200904221249.07359.khimov@altell.ru>
+Date: Wed, 22 Apr 2009 11:45:13 +0200
+Message-ID: <d1b08f940904220245od7e8c6cw82b65da83fa1faf8@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: initramfs howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,57 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 09:18:44 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 22 Apr 2009 09:49:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Monday 30 March 2009 11:59:57 Roman I Khimov wrote:
-> -addtask rootfs before do_build after do_install
-> +addtask rootfs after do_compile before do_install
+>The mentioned initramfs-kexecboot-image looks to me like a target to build an initramfs. But this does
+>not contain any modules. So it does not involve one of the main questions.
 
-BTW, looking at kernel.bbclass again I think with this applied we can simplify
-a bit INITRAMFS_IMAGE dependency with something like this (untested, not using
-initramfs in this fashion, but would be interested to hear from someone using
-it):
+Including /conf/machine/include/kexecboot.inc in the machine.conf we
+obtain the result of having one extra kernel built in the same image.
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 954c407..fecf90c 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -11,19 +11,19 @@ python __anonymous () {
- 
-     import bb
-     
-+    depends = bb.data.getVar("DEPENDS", d, 1)
-     kerneltype = bb.data.getVar('KERNEL_IMAGETYPE', d, 1) or ''
-     if kerneltype == 'uImage':
--    	depends = bb.data.getVar("DEPENDS", d, 1)
-     	depends = "%s u-boot-mkimage-openmoko-native" % depends
--    	bb.data.setVar("DEPENDS", depends, d)
- 
-     image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
-     if image != '' and image is not None:
--        bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
-+    	depends = "%s %s" % (depends, image)
-+
-+    bb.data.setVar("DEPENDS", depends, d)
- }
- 
- INITRAMFS_IMAGE ?= ""
--INITRAMFS_TASK ?= ""
- 
- inherit kernel-arch
- 
-@@ -90,7 +90,6 @@ kernel_do_compile() {
- 		oenote "no modules to compile"
- 	fi
- }
--kernel_do_compile[depends] = "${INITRAMFS_TASK}"
- 
- kernel_do_stage() {
- 	ASMDIR=`readlink include/asm`
+EXTRA_IMAGEDEPENDS += "linux-kexecboot"
 
+You can create your own recipe linux-kexecboot like and populate the
+cpio.gz as you like. The a.m. image must be as small as possible, thus
+kblic, no shell and no modules, just a custom binary as /init.
+
+BTW it is even possible to concatenate the modules (at the end) of the
+cpio, after creating it.
+
+Regards
+
+Andrea
 
 
