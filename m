@@ -1,23 +1,24 @@
 Received: from [194.100.97.46] (helo=mail.inoi.fi)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <petri.lehtinen+openembedded-devel@inoi.fi>)
-	id 1LwWQB-00083x-Fq for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 08:59:03 +0200
+	id 1LwWWo-0008HN-Bi for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Apr 2009 09:05:54 +0200
 Received: from mail.inoi.fi (localhost.localdomain [127.0.0.1])
-	by mail.inoi.fi (Postfix) with ESMTP id 92D4E217D4;
-	Wed, 22 Apr 2009 09:42:38 +0300 (EEST)
+	by mail.inoi.fi (Postfix) with ESMTP id B9902206C3;
+	Wed, 22 Apr 2009 09:49:29 +0300 (EEST)
 Received: from localhost (unknown [10.105.0.205])
-	by mail.inoi.fi (Postfix) with ESMTP id 6CFE920704;
-	Wed, 22 Apr 2009 09:42:38 +0300 (EEST)
-Date: Wed, 22 Apr 2009 09:54:33 +0300
+	by mail.inoi.fi (Postfix) with ESMTP id 98BCD204CD;
+	Wed, 22 Apr 2009 09:49:29 +0300 (EEST)
+Date: Wed, 22 Apr 2009 10:01:24 +0300
 From: Petri Lehtinen <petri.lehtinen+openembedded-devel@inoi.fi>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090422065433.GC19293@colossus>
+Message-ID: <20090422070124.GD19293@colossus>
 References: <1239782395-12413-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
 	<20090422050423.GB19293@colossus>
 	<20090422054438.GC11408@denix.org>
+	<20090422065433.GC19293@colossus>
 MIME-Version: 1.0
-In-Reply-To: <20090422054438.GC11408@denix.org>
+In-Reply-To: <20090422065433.GC19293@colossus>
 User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
 X-Virus-Scanned: ClamAV using ClamSMTP
 Cc: Petri Lehtinen <petri.lehtinen@inoi.fi>
@@ -35,21 +36,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 06:59:03 -0000
+X-List-Received-Date: Wed, 22 Apr 2009 07:05:54 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Denys Dmytriyenko wrote:
-> On Wed, Apr 22, 2009 at 08:04:23AM +0300, Petri Lehtinen wrote:
-> > Any more comments on this? Could someone push it?
-> > 
-> > I would like very much to see this in stable, too.
+Petri Lehtinen wrote:
+> Ahh, my bad. Many thanks.
 > 
-> Actually, it was already pushed in 4b48c66ff661c3b88f85dee62517a31ae66db242
+> Is there any chance on getting this to stable, too?
 
-Ahh, my bad. Many thanks.
-
-Is there any chance on getting this to stable, too?
+Ok, so you have posted a patch for stable to the ML already. My bad
+again :)
 
 -- 
 Petri Lehtinen
