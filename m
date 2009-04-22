@@ -1,39 +1,30 @@
-Received: from [74.125.44.155] (helo=yx-out-1718.google.com)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LwfH0-0006J6-Fn
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 18:26:10 +0200
-Received: by yx-out-1718.google.com with SMTP id 36so31366yxh.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Apr 2009 09:21:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=aWxcWdzUqc1o6mLN0QlpOqFUlJQhp76AFGryMpKTq/o=;
-	b=aBgADvkknpTMZ8wwy4t79sqIi05HBDaf8/46HIWBv+GKOx8UwE5hSMqHMJFm+RMMr8
-	kGiEkLPGeYcubA6okAlhZH59lQY9sF261w1Mska9rKDg6IwfqnccdY7R2EaoM737dVZS
-	1W7APAS5PCaRaxJJ6+164JlA/HbUvYnvP1jCg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=MYvR9fUVetmzb71/7pN79zUD8hzoRI9PK/N6+jiowfHDhOCHQiI4NwVgDRXo/APzDL
-	mDXfIbF88ejKk5qpfZXNqHMqgkp/YITEacc7uY8KoVTuLSckEjAguKWWKCxd9bIjUUll
-	TSSg6vXF5i0G/TnzMQvOKBvWXyh72D8FTyf6U=
+	(envelope-from <trini@kernel.crashing.org>) id 1LwfI8-0006Nq-Bc
+	for openembedded-devel@openembedded.org; Wed, 22 Apr 2009 18:27:20 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090422162246.BVTX27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 22 Apr 2009 12:22:46 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id igNl1b00C4dMFYL04gNlVy; Wed, 22 Apr 2009 12:22:45 -0400
+X-Authority-Analysis: v=1.0 c=1 a=KarrwNW7oqFZcThUPFMA:9
+	a=_VnsRa4Z96GrSgHo6HQA:7 a=MaHt1ymSJMkUmSZBozUggwnEtXUA:4
+X-CM-Score: 0.00
+Date: Wed, 22 Apr 2009 09:22:45 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090422162245.GR17629@smtp.west.cox.net>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF763@hiob.intern.dresearch.de>
+	<d1b08f940904200836k6374f731h83342aea89c1f14@mail.gmail.com>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF76B@hiob.intern.dresearch.de>
+	<200904221249.07359.khimov@altell.ru>
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.141.10 with SMTP id o10mr11713351and.36.1240417298062; 
-	Wed, 22 Apr 2009 09:21:38 -0700 (PDT)
-In-Reply-To: <186800.19618.qm@web23308.mail.ird.yahoo.com>
-References: <186800.19618.qm@web23308.mail.ird.yahoo.com>
-Date: Wed, 22 Apr 2009 13:21:37 -0300
-X-Google-Sender-Auth: 065b5e8221cfb8b5
-Message-ID: <be7a9f3d0904220921o9bad1ecn8a3ee7bc27c2688@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: intltool dependence: libxml-parser-perl-native
+In-Reply-To: <200904221249.07359.khimov@altell.ru>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: initramfs howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,30 +38,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 16:26:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Apr 2009 16:27:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello Caudiu,
+On Wed, Apr 22, 2009 at 12:49:07PM +0400, Roman I Khimov wrote:
+> On Wednesday 22 April 2009 11:45:38 Sledz, Steffen wrote:
+> > Both kernels do have associated modules.
+> >
+> > As i understand OE i have to build two images (for Rootfs-A and Rootfs-B).
+> > But ...
+> >
+> > (a) How do i tell those images which kernels (and as a consequence which
+> > modules) are associated with it?
+> >
+> > (b) How do i build Kernel-B with it's initramfs?
+> 
+> As I understand it's not possible to build multiple kernels currently in OE, 
+> as the packages will be named as "kernel-*" and if versions are the same 
+> you'll get something completely unusable. Even if not, you'll need to be very 
+> careful to get it working right.
 
-On Wed, Apr 22, 2009 at 1:01 PM, Claudiu mdc <claudiu_fw85@yahoo.it> wrote:
-> Hi,
-> I had a problem when building my image in OE. The build process stopped on "intltool" with this error:
-> checking for perl... /home/claudiu/oeDevel/tmpoe/staging/i686-linux/usr/bin/perl
-> checking for XML::Parser... configure: error: XML::Parser perl module is required for intltoolFATAL: oe_runconf failed
-> To solve this you just have to build "libxml-parser-perl-native" package, clean the previous intltool (bitbake intltool -c clean) and rebuild it.
->
-> ("libxml-parser-perl-native" is a dependence for "intltool")
-
-Yes, you're completely right; I did it here in our overlay but didn't
-manage to prepare a patch to send with that.
-
-Are you willing to provide a patch for that? If yes, you can do that
-and I push it for you.
+The workaround here (and this was OK for our needs) was that the 2nd
+kernel doesn't make any packages, just deploys the final kernel.
+Indeed what I posted should be good for (b), with the caveat that you
+need to either not use kernel.bbclass or hack out a second
+kernel.bbclass that doesn't make any packages.  If you need this kernel
+to be put automagically inside the rootfs you'll need to do something
+like this in rootfs-a.bb:
+ROOTFS_POSTPROCESS_COMMAND += "cp ${DEPLOY_IMG_DIR}/kernelB
+${IMAGE_ROOTFS}/boot/"
 
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Tom Rini
 
 
