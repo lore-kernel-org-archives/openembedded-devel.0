@@ -1,23 +1,18 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lwfst-00081h-IM
-	for openembedded-devel@openembedded.org; Wed, 22 Apr 2009 19:05:19 +0200
-Received: (qmail 23353 invoked by uid 813007); 22 Apr 2009 17:00:46 -0000
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lwhts-0005t3-6f
+	for openembedded-devel@openembedded.org; Wed, 22 Apr 2009 21:14:28 +0200
+Received: (qmail 30743 invoked by uid 813007); 22 Apr 2009 19:09:54 -0000
 X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
+Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Apr 2009 17:00:46 -0000
+	by 195.149.226.213 with ESMTPA; 22 Apr 2009 19:09:54 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Apr 2009 19:00:41 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <1240409577-12275-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<be7a9f3d0904220923s13d4eaa5ld4ae0e8492be4812@mail.gmail.com>
-In-Reply-To: <be7a9f3d0904220923s13d4eaa5ld4ae0e8492be4812@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200904221900.46562.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH 1/1] linux.inc: unset CONFIG_LOCALVERSION_AUTO to not get 2.6.27.2-svn8826-dirty26 like names
+Date: Wed, 22 Apr 2009 21:09:53 +0200
+Message-Id: <1240427393-31060-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.rc0
+Subject: [PATCH 1/1] java.bbclass: Use force (-f) for ln (suggested by Marcin).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,25 +26,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 17:05:19 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Apr 2009 19:14:28 -0000
 
-Dnia =C5=9Broda, 22 kwietnia 2009 o 18:23:29 Otavio Salvador napisa=C5=82(a=
-):
-> Please after it gets into dev, propose it to stable since it is quite
-> useful.
+From: Robert Schuster <rschus@entw2.(none)>
 
-It is in reverse :D I did that patch for stable but all things needs to=20
-be in .dev first so... ;D
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+---
+ classes/java.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+diff --git a/classes/java.bbclass b/classes/java.bbclass
+index 38256d7..cacd2ce 100644
+--- a/classes/java.bbclass
++++ b/classes/java.bbclass
+@@ -72,7 +72,7 @@ oe_jarinstall() {
+       oewarn "file was in the way. removing:" $dir/$1
+       rm $dir/$1
+     fi
+-    ln -s $destname $dir/$1
++    ln -sf $destname $dir/$1
+     shift
+   done
+ }
+-- 
+1.6.3.rc0
+
 
 
 
