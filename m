@@ -1,28 +1,31 @@
-Received: from [194.100.97.46] (helo=mail.inoi.fi)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <petri.lehtinen+openembedded-devel@inoi.fi>)
-	id 1LwWWo-0008HN-Bi for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 09:05:54 +0200
-Received: from mail.inoi.fi (localhost.localdomain [127.0.0.1])
-	by mail.inoi.fi (Postfix) with ESMTP id B9902206C3;
-	Wed, 22 Apr 2009 09:49:29 +0300 (EEST)
-Received: from localhost (unknown [10.105.0.205])
-	by mail.inoi.fi (Postfix) with ESMTP id 98BCD204CD;
-	Wed, 22 Apr 2009 09:49:29 +0300 (EEST)
-Date: Wed, 22 Apr 2009 10:01:24 +0300
-From: Petri Lehtinen <petri.lehtinen+openembedded-devel@inoi.fi>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090422070124.GD19293@colossus>
-References: <1239782395-12413-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
-	<20090422050423.GB19293@colossus>
-	<20090422054438.GC11408@denix.org>
-	<20090422065433.GC19293@colossus>
+	(envelope-from <sledz@DResearch.DE>) id 1LwXE4-0008Bl-GW
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Apr 2009 09:50:36 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 7712716DFDD
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Apr 2009 09:46:25 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id CBEED2A4233
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Apr 2009 09:46:06 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-In-Reply-To: <20090422065433.GC19293@colossus>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Petri Lehtinen <petri.lehtinen@inoi.fi>
-Subject: Re: [PATCH] base.bbclass: Combine all checksum.ini files	found in BBPATH
+Date: Wed, 22 Apr 2009 09:45:38 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF76B@hiob.intern.dresearch.de>
+In-Reply-To: <d1b08f940904200836k6374f731h83342aea89c1f14@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] initramfs howto?
+Thread-Index: AcnBz1YVnlirp5bITYaxZfa8FeZ19gBS0kYg
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF763@hiob.intern.dresearch.de><20090417183927.GU17629@smtp.west.cox.net><69E6C70090A0A14498CC98FAE5E06B6E3CF767@hiob.intern.dresearch.de>
+	<d1b08f940904200836k6374f731h83342aea89c1f14@mail.gmail.com>
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Re: initramfs howto?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,23 +39,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 07:05:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Apr 2009 07:50:37 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Petri Lehtinen wrote:
-> Ahh, my bad. Many thanks.
-> 
-> Is there any chance on getting this to stable, too?
+I'll try to sort my thoughts a little bit. Our final target is this =
+constellation:
 
-Ok, so you have posted a patch for stable to the ML already. My bad
-again :)
+* Kernel-A with Rootfs-A on an UBIFS (without initramfs) shall be able =
+to start Kernel-B using kexec.
 
--- 
-Petri Lehtinen
-Software Specialist
-Inoi Oy
-Tel. : +358 40 758 0229
-Email: petri.lehtinen@inoi.fi
+* Kernel-B with Rootfs-B on initramfs shall be able to start Kernel-A =
+using kexec.
+
+Both kernels do have associated modules.
+
+As i understand OE i have to build two images (for Rootfs-A and =
+Rootfs-B). But ...
+
+(a) How do i tell those images which kernels (and as a consequence which =
+modules) are associated with it?
+
+(b) How do i build Kernel-B with it's initramfs?
+
+The mentioned initramfs-kexecboot-image looks to me like a target to =
+build an initramfs. But this does not contain any modules. So it does =
+not involve one of the main questions.
+
+The sample recipe code from Tom looks like a solution for (b) which =
+expects another recipy myinitramfs-image for building myinitramfs.tar. =
+But the answer to (a) is still unclear to me.
+
+Steffen
+
+PS: The kexec stuff is no problem.
 
 
