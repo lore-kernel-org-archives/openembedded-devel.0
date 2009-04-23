@@ -1,31 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LwyNv-0005MM-Mo
-	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 14:50:35 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LwyJT-0001jR-1n
-	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 12:45:59 +0000
-Received: from iap-pxy-mow1.siemens.ru ([212.248.25.26])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 23 Apr 2009 12:45:59 +0000
-Received: from dbaryshkov by iap-pxy-mow1.siemens.ru with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 23 Apr 2009 12:45:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Thu, 23 Apr 2009 12:45:49 +0000 (UTC)
-Message-ID: <gspnts$2p3$2@ger.gmane.org>
-References: <gspjtp$2p3$1@ger.gmane.org> <49F0557D.4080009@xora.org.uk>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: iap-pxy-mow1.siemens.ru
-User-Agent: Pan/0.132 (Waxed in Black)
-Sender: news <news@ger.gmane.org>
-Subject: Re: kexec-tools-static question
+	(envelope-from <khimov@altell.ru>) id 1LwyWr-0005j2-6z
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Apr 2009 14:59:49 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LwySJ-000EKO-Kr
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Apr 2009 16:55:08 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Apr 2009 16:54:39 +0400
+User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+References: <1240488138-32232-1-git-send-email-khimov@altell.ru>
+	<200904231435.15840.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200904231435.15840.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+Message-Id: <200904231654.39712.khimov@altell.ru>
+Subject: Re: [PATCH] bitbake.conf: use rootfs.${PN} for IMAGE_ROOTFS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,37 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 12:50:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 23 Apr 2009 12:59:49 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Graeme Gregory wrote:
+On Thursday 23 April 2009 16:35:06 Marcin Juszkiewicz wrote:
+> Dnia czwartek, 23 kwietnia 2009 o 14:02:18 Roman I Khimov napisa=C5=82(a):
+> > Allows parallel build for different images.
+> > ---
+> >  conf/bitbake.conf |    2 +-
+> >  1 files changed, 1 insertions(+), 1 deletions(-)
+> >
+> > -IMAGE_ROOTFS =3D "${TMPDIR}/rootfs"
+> > +IMAGE_ROOTFS =3D "${TMPDIR}/rootfs.${PN}"
+>
+> I would suggest ${TMPDIR}/rootfs/${PN}/ to not pollute TMPDIR with lot
+> of directories.
 
-> On 04/23/2009 12:37 PM, Dmitry Eremin-Solenikov wrote:
->> Hi,
->>
->> I've stumbled upon kexec-tools/kexec-tools-static package. Currently
->> it's packaged inside generic feed (e.g. armv5te in my case). However it
->> uses kernel headers and klibc which are machine-specific IIRC.
->> Shouldn't kexec-tools-static be built with PACKAGE_ARCH =
->> "${MACHINE_ARCH}" instead?
->>
->> As a side note: kexec-tools-static fails to build for tosa as the
->> staged 2.6.29 kernel doesn't contain machine-specific headers (will
->> look at it soon).
->>
->>
-> Look back in the mailing list archives, this is/has been/being discussed
-> already!
+This one needs some more care as it fails with
 
-Hmm. That was discussed in the first days of April and we are now facing May.
-In that thread you said that your patches are not finished. Did you have time
-to finish them so that they can be commited?
-
--- 
-With best wishes
-Dmitry
-
-
+ERROR: Error, lockfile path does not exist!: /path-to-oe/tmp/rootfs
 
 
