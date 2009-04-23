@@ -1,26 +1,30 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LwwXS-0007fe-IK
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Apr 2009 12:52:18 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LwwSx-000HhP-88
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Apr 2009 14:47:39 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Apr 2009 14:47:35 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <1238404723-8814-1-git-send-email-khimov@altell.ru>
-	<200904220859.23657.khimov@altell.ru>
-	<c384c5ea0904230326v3742658ah5c8afd8d156a1c08@mail.gmail.com>
-In-Reply-To: <c384c5ea0904230326v3742658ah5c8afd8d156a1c08@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200904231447.35932.khimov@altell.ru>
-Subject: Re: [PATCH] bitbake.conf: use ROOTFS_SIZE for gzip'd images
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LwxJs-0006FK-Fe
+	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 13:42:20 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LwxFM-00074D-L2
+	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 11:37:41 +0000
+Received: from iap-pxy-mow1.siemens.ru ([212.248.25.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 23 Apr 2009 11:37:40 +0000
+Received: from dbaryshkov by iap-pxy-mow1.siemens.ru with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 23 Apr 2009 11:37:40 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Date: Thu, 23 Apr 2009 11:37:30 +0000 (UTC)
+Message-ID: <gspjtp$2p3$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: iap-pxy-mow1.siemens.ru
+User-Agent: Pan/0.132 (Waxed in Black)
+Sender: news <news@ger.gmane.org>
+Subject: kexec-tools-static question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 10:52:18 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Apr 2009 11:42:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thursday 23 April 2009 14:26:55 Leon Woestenberg wrote:
-> On Wed, Apr 22, 2009 at 6:59 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> > IMAGE_EXTRA_SPACE was brought into OE with commit
-> > d38f1dd24dd6ed94408aa49aad33e46634a129ff, see comment for that. This one
-> > just fixes it for compressed images.
->
-> Hmm, this part runs on the host:
->
-> ROOTFS_SIZE=`du -ks ${IMAGE_ROOTFS}
->
-> Would this correctly work if my host has a, say 16kB block, XFS
-> filesystem? I.e. would "du -ks" correctly estimate the amount of
-> ext2/3 blocks needed to layout the rootfs on ext2/3?
+Hi,
 
-Well, my 'du' manual says
+I've stumbled upon kexec-tools/kexec-tools-static package. Currently it's packaged
+inside generic feed (e.g. armv5te in my case). However it uses kernel headers
+and klibc which are machine-specific IIRC. Shouldn't kexec-tools-static be built
+with PACKAGE_ARCH = "${MACHINE_ARCH}" instead?
 
-	-k     like --block-size=1K
+As a side note: kexec-tools-static fails to build for tosa as the staged 2.6.29
+kernel doesn't contain machine-specific headers (will look at it soon).
 
-So it's just kilobytes or at least should be so. And in genext2fs there is
+-- 
+With best wishes
+Dmitry
 
-	#define BLOCKSIZE         1024
 
-For its "-b".
 
 
