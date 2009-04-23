@@ -1,29 +1,24 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Lwvj7-0000gy-AE
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Apr 2009 12:00:17 +0200
-Received: by ewy20 with SMTP id 20so393210ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2009 02:55:38 -0700 (PDT)
-Received: by 10.210.87.19 with SMTP id k19mr7380025ebb.39.1240480538521;
-	Thu, 23 Apr 2009 02:55:38 -0700 (PDT)
-Received: from xora-eee.xora-domain (93-97-174-2.zone5.bethere.co.uk
-	[93.97.174.2])
-	by mx.google.com with ESMTPS id 7sm1590450eyb.45.2009.04.23.02.55.37
-	(version=SSLv3 cipher=RC4-MD5); Thu, 23 Apr 2009 02:55:38 -0700 (PDT)
-Message-ID: <49F03B0C.70306@xora.org.uk>
-Date: Thu, 23 Apr 2009 10:55:24 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1b3pre) Gecko/20090324 Fedora/3.0-2.1.beta2.fc11
-	Thunderbird/3.0b2
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lwvp2-0000uL-05
+	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 12:06:24 +0200
+Received: (qmail 3371 invoked by uid 813007); 23 Apr 2009 10:01:46 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Apr 2009 10:01:46 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF76D@hiob.intern.dresearch.de>
-	<gspddj$ctn$1@ger.gmane.org>
-In-Reply-To: <gspddj$ctn$1@ger.gmane.org>
-Subject: Re: deploy multiple kernel image types
+Date: Thu, 23 Apr 2009 12:01:33 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <1240449461-26116-1-git-send-email-otavio@debian.org>
+	<1240449461-26116-3-git-send-email-otavio@debian.org>
+	<1240449461-26116-4-git-send-email-otavio@debian.org>
+In-Reply-To: <1240449461-26116-4-git-send-email-otavio@debian.org>
+MIME-Version: 1.0
+Message-Id: <200904231201.38503.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH 3/6] machine/geode[gl]x: use more optimization while compiling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 10:00:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 23 Apr 2009 10:06:24 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 04/23/2009 10:46 AM, Koen Kooi wrote:
-> On 23-04-09 09:31, Sledz, Steffen wrote:
->> Is it possible to deploy multiple kernel image types (e.g. zImage and 
->> uImage) at the same time? As i understand it right KERNEL_IMAGETYPE 
->> allows just one argument.
+Dnia czwartek, 23 kwietnia 2009 o 03:17:38 Otavio Salvador napisa=C5=82(a):
+> From: Otavio Salvador <otavio@ossystems.com.br>
 >
-> At the moment: no, but I would be interested in such functionality for 
-> boards using kexecboot initramfs inside a uImage that will load a 
-> zImage from disk.
->
-The deploy part is easy, its the deciding how to handle the packaging 
-that needs some thought!
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  conf/machine/geodegx.conf             |    2 +-
+>  conf/machine/geodelx.conf             |   15 ++++++++-------
+>  conf/machine/include/tune-geodegx.inc |    3 +--
+>  conf/machine/include/tune-geodelx.inc |    6 +-----
+>  4 files changed, 11 insertions(+), 15 deletions(-)
 
-Graeme
+Looks like after those changes both tune files are same. What about=20
+creating tune-geode.inc which will be used instead of both?
+
+And if you use any of those two machines consider moving them to linux=20
+recipe as GeodeLX is working nicely with recent kernels (I have Debian=20
+on alix 1c (geodelx 800) with 2.6.29-debian kernel).
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
