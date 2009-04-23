@@ -1,37 +1,21 @@
-Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1LwyCn-0004pf-5Q
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Apr 2009 14:39:05 +0200
-Received: by yx-out-1718.google.com with SMTP id 36so323976yxh.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2009 05:34:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=LZI2wfly+128jFwHZ45j6f0u8eszz4D2HWxg7O+469k=;
-	b=gMVzcioqw5DlhJIB0WfQL6YyEoz7ZjgIflwEsW4pBfrnHB6Ug1HGPgnRlof31pi2R3
-	mVpKYqIDSscciCGXMT7/F9RZLA2ZDqq9wjfkAXNoDIKAkC/weNRmaSb7KWBYUnD6JS/t
-	FHHgClmRziVGgFvE+MUEcSvqBU91b7PTe/k5w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=Ss/Ilatb5KIUK+dXIjE6Rx52wK9mt9jy3aytHR/Qav8haLdopy725Sx2cXkycKNkeG
-	CGmTf6CxEJB/3VeIZ+ti35sAH9ujmtLz9gv0HQ9WFeIBEmNK1bhl6RRj7dXT1x13StWA
-	D9cNsqXyViX4dogfTAwpkKY6QkbDnfaKNzbDQ=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.205.15 with SMTP id c15mr1430459ang.89.1240490067330; Thu, 
-	23 Apr 2009 05:34:27 -0700 (PDT)
-In-Reply-To: <1240488138-32232-1-git-send-email-khimov@altell.ru>
-References: <1240488138-32232-1-git-send-email-khimov@altell.ru>
-Date: Thu, 23 Apr 2009 09:34:27 -0300
-X-Google-Sender-Auth: 31878d9cf9d70cf6
-Message-ID: <be7a9f3d0904230534u5b877883l99f7036b473a72db@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LwyDk-0004rh-IG
+	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 14:40:04 +0200
+Received: (qmail 22137 invoked by uid 813007); 23 Apr 2009 12:35:25 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Apr 2009 12:35:25 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Apr 2009 14:35:06 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <1240488138-32232-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1240488138-32232-1-git-send-email-khimov@altell.ru>
+MIME-Version: 1.0
+Message-Id: <200904231435.15840.marcin@juszkiewicz.com.pl>
 Subject: Re: [PATCH] bitbake.conf: use rootfs.${PN} for IMAGE_ROOTFS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,53 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 12:39:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 23 Apr 2009 12:40:05 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
-On Thu, Apr 23, 2009 at 9:02 AM, Roman I Khimov <khimov@altell.ru> wrote:
+Dnia czwartek, 23 kwietnia 2009 o 14:02:18 Roman I Khimov napisa=C5=82(a):
 > Allows parallel build for different images.
 > ---
-> =A0conf/bitbake.conf | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index f53f7d6..15bdf56 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -329,7 +329,7 @@ STAGING_KERNEL_DIR =3D "${STAGING_DIR}/${MULTIMACH_TA=
-RGET_SYS}/kernel"
-> =A0# Specific image creation and rootfs population info.
-> =A0##################################################################
->
+>  conf/bitbake.conf |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+
 > -IMAGE_ROOTFS =3D "${TMPDIR}/rootfs"
 > +IMAGE_ROOTFS =3D "${TMPDIR}/rootfs.${PN}"
-> =A0IMAGE_BASENAME =3D "${PN}"
-> =A0IMAGE_NAME =3D "${IMAGE_BASENAME}-${MACHINE}-${DATETIME}"
-> =A0IMAGE_LINK_NAME =3D "${IMAGE_BASENAME}-${MACHINE}"
-> --
-> 1.6.2.3
->
->
-> --
-> This message has been scanned for viruses and
-> dangerous content by MailScanner, and is
-> believed to be clean.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+I would suggest ${TMPDIR}/rootfs/${PN}/ to not pollute TMPDIR with lot=20
+of directories.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
-
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
