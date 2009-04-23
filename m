@@ -1,23 +1,28 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LwysP-0003YF-81
+	(envelope-from <sledz@DResearch.DE>) id 1Lwywl-0003hB-FX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Apr 2009 15:22:05 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 46973683CF;
-	Thu, 23 Apr 2009 17:17:05 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Apr 2009 17:17:05 +0400
-Message-Id: <1240492625-24311-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.2.3
-In-Reply-To: <200904231503.30272.marcin@juszkiewicz.com.pl>
-References: <200904231503.30272.marcin@juszkiewicz.com.pl>
+	Thu, 23 Apr 2009 15:26:35 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 2830516DFDC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Apr 2009 15:22:20 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 576DD2A41FB
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Apr 2009 15:21:58 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-Spam-Status: No
-Subject: [PATCH] bitbake.conf: use rootfs/${PN} for IMAGE_ROOTFS
+Date: Thu, 23 Apr 2009 15:21:26 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF772@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: patch file duplicates
+Thread-Index: AcnEFmjJyJQxPgCSQnWv/XMMUYJiGw==
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: patch file duplicates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,47 +36,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 13:22:05 -0000
+X-List-Received-Date: Thu, 23 Apr 2009 13:26:35 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Allows parallel build for different images.
----
- classes/image.bbclass |    1 -
- conf/bitbake.conf     |    2 +-
- 2 files changed, 1 insertions(+), 2 deletions(-)
-
-diff --git a/classes/image.bbclass b/classes/image.bbclass
-index cbbbbd1..89d2712 100644
---- a/classes/image.bbclass
-+++ b/classes/image.bbclass
-@@ -104,7 +104,6 @@ LINGUAS_INSTALL = "${@" ".join(map(lambda s: "locale-base-%s" % s, bb.data.getVa
- 
- do_rootfs[nostamp] = "1"
- do_rootfs[dirs] = "${TOPDIR}"
--do_rootfs[lockfiles] = "${IMAGE_ROOTFS}.lock"
- do_build[nostamp] = "1"
- do_install[nostamp] = "1"
- 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index f53f7d6..9e026e4 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -329,7 +329,7 @@ STAGING_KERNEL_DIR = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/kernel"
- # Specific image creation and rootfs population info.
- ##################################################################
- 
--IMAGE_ROOTFS = "${TMPDIR}/rootfs"
-+IMAGE_ROOTFS = "${TMPDIR}/rootfs/${PN}"
- IMAGE_BASENAME = "${PN}"
- IMAGE_NAME = "${IMAGE_BASENAME}-${MACHINE}-${DATETIME}"
- IMAGE_LINK_NAME = "${IMAGE_BASENAME}-${MACHINE}"
--- 
-1.6.2.3
-
-
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
-
+SXMgdGhlcmUgYSB3YXkgdG8gYXZvaWQgcGF0Y2ggZmlsZSBkdXBsaWNhdGVzIGluIHRoZSBvZSB0
+cmVlPw0KDQpFLmcuDQogIHJlY2lwZXMvbGludXgvbGludXgtMi42LjI0L3Bvd2VycGMtY2xvY2ty
+ZXMucGF0Y2gNCiAgcmVjaXBlcy9saW51eC9saW51eC1ydC0yLjYuMjQvcG93ZXJwYy1jbG9ja3Jl
+cy5wYXRjaA0KDQphcmUgdGhlIHNhbWUgZmlsZXMuDQoNClN0ZWZmZW4NCg==
 
 
