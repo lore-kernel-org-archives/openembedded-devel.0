@@ -1,23 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lwyf4-00066p-Im
-	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 15:08:19 +0200
-Received: (qmail 9213 invoked by uid 813007); 23 Apr 2009 13:03:39 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Apr 2009 13:03:39 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <khimov@altell.ru>) id 1Lwyk9-0006TF-PK
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Apr 2009 15:13:33 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1Lwyfe-000OHn-H2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Apr 2009 17:08:54 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Apr 2009 15:03:28 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
-	x86_64; ; )
+Date: Thu, 23 Apr 2009 17:08:44 +0400
+User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
 References: <1240488138-32232-1-git-send-email-khimov@altell.ru>
-	<200904231435.15840.marcin@juszkiewicz.com.pl>
 	<200904231654.39712.khimov@altell.ru>
-In-Reply-To: <200904231654.39712.khimov@altell.ru>
+	<200904231503.30272.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200904231503.30272.marcin@juszkiewicz.com.pl>
 MIME-Version: 1.0
-Message-Id: <200904231503.30272.marcin@juszkiewicz.com.pl>
+Message-Id: <200904231708.44971.khimov@altell.ru>
 Subject: Re: [PATCH] bitbake.conf: use rootfs.${PN} for IMAGE_ROOTFS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,40 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 13:08:19 -0000
+X-List-Received-Date: Thu, 23 Apr 2009 13:13:34 -0000
 Content-Type: Text/Plain;
   charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-Dnia czwartek, 23 kwietnia 2009 o 14:54:39 Roman I Khimov napisa=C5=82(a):
-> On Thursday 23 April 2009 16:35:06 Marcin Juszkiewicz wrote:
-> > Dnia czwartek, 23 kwietnia 2009 o 14:02:18 Roman I Khimov=20
-napisa=C5=82(a):
-> > > Allows parallel build for different images.
-> > > ---
-> > >  conf/bitbake.conf |    2 +-
-> > >  1 files changed, 1 insertions(+), 1 deletions(-)
-> > >
-> > > -IMAGE_ROOTFS =3D "${TMPDIR}/rootfs"
-> > > +IMAGE_ROOTFS =3D "${TMPDIR}/rootfs.${PN}"
-> >
-> > I would suggest ${TMPDIR}/rootfs/${PN}/ to not pollute TMPDIR with
-> > lot of directories.
+On Thursday 23 April 2009 17:03:28 Marcin Juszkiewicz wrote:
+> Dnia czwartek, 23 kwietnia 2009 o 14:54:39 Roman I Khimov napisa=C5=82(a):
+> > ERROR: Error, lockfile path does not exist!: /path-to-oe/tmp/rootfs
 >
-> This one needs some more care as it fails with
->
-> ERROR: Error, lockfile path does not exist!: /path-to-oe/tmp/rootfs
+> Note that with separated IMAGE_ROOTFS you probably do not need locking
+> (unless "bitbake console-image console-image" called probably).
 
-Note that with separated IMAGE_ROOTFS you probably do not need locking=20
-(unless "bitbake console-image console-image" called probably).
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+Good point. OK, I'll try it locally.
 
 
