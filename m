@@ -1,44 +1,26 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Lx0IU-0004IX-TZ
-	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 16:53:07 +0200
-Received: by an-out-0708.google.com with SMTP id c3so339017ana.30
+	(envelope-from <trini@kernel.crashing.org>) id 1Lx14Q-0002eV-Cn
+	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 17:42:38 +0200
+Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090423153758.IHDJ6112.fed1rmmtao102.cox.net@fed1rmimpo02.cox.net>
 	for <openembedded-devel@openembedded.org>;
-	Thu, 23 Apr 2009 07:48:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=nHxL+ysLQWfueyJCSXBWARBTLKK0niDDEOmEfAA2tSs=;
-	b=RbmFG6a+N1dksxKQ/X/WOsOsDv+cEMnS7n1WuVlsdWa8wrQ2rlbLN+pUIEPuO/I7as
-	KEQq1P226kkEwJDN4DZr2zXoLB99xYT2oss0O4goKONUdf6gyBZxwFszBvWL5tp4tVsz
-	nGWBE9aO6q2hrdf3HECcUUnulBeDlFoMqh2ic=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=W/8LjVqfauj6HLuoaacYhqs7sAPMBkiThQKTEGyr8A057Z6ffrIYX3pz/QkNLUCPj+
-	Q51KZ71OLXG92w/n8j5YqiOImbTfZC6JXrLnfzez1gJ78bowhG9ZSmCl7MEWTxc+jU8q
-	kinEibC4Axy+mD3AfbF5mBQq/aTi/rukcn54Q=
+	Thu, 23 Apr 2009 11:37:58 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
+	id j3dv1b0044dMFYL043dvFn; Thu, 23 Apr 2009 11:37:57 -0400
+X-Authority-Analysis: v=1.0 c=1 a=OJXpgpEhvlIA:10 a=tbtiFN4IJFoA:10
+	a=4HVRqb_MAAAA:8 a=YeHLNu4KA0Vy5SMvqj4A:9 a=0M4ZRmgkNRrLb3DotrgA:7
+	a=EFr3UQjTlf_n-2poXfanf74jHuoA:4 a=k-kO48AawpMA:10
+X-CM-Score: 0.00
+Date: Thu, 23 Apr 2009 08:37:54 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090423153754.GW17629@smtp.west.cox.net>
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.205.15 with SMTP id c15mr1594988ang.89.1240498108756; Thu, 
-	23 Apr 2009 07:48:28 -0700 (PDT)
-In-Reply-To: <gspug2$bk9$1@ger.gmane.org>
-References: <1240449461-26116-1-git-send-email-otavio@debian.org>
-	<1240449461-26116-2-git-send-email-otavio@debian.org>
-	<1240449461-26116-3-git-send-email-otavio@debian.org>
-	<1240449461-26116-4-git-send-email-otavio@debian.org>
-	<gsp1t1$9fq$1@ger.gmane.org>
-	<873abzedet.fsf@neumann.lab.ossystems.com.br>
-	<gspug2$bk9$1@ger.gmane.org>
-Date: Thu, 23 Apr 2009 11:48:28 -0300
-X-Google-Sender-Auth: fdebe6f594e47761
-Message-ID: <be7a9f3d0904230748q189226f2sb4cc755b283af2c2@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 3/6] machine/geode[gl]x: use more optimization while compiling
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: [RFC][PATCH] Make initscripts banner stop trying to be smart
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,41 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 14:53:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 Apr 2009 15:42:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Apr 23, 2009 at 11:37 AM, Koen Kooi <k.kooi@student.utwente.nl> wro=
-te:
-> On 23-04-09 14:56, Otavio Salvador wrote:
->> Koen Kooi<k.kooi@student.utwente.nl> =A0writes:
->>> On 23-04-09 03:17, Otavio Salvador wrote:
->>> shouldn't that be _pn-glibc?
->>
->> You mean the SELECT_OPTIMIZATION?
->
-> yes ${PN} is only in local overrides (scope: current recipe), pn-${PN} is=
- in
-> global overrides.
+I ran into this on my boards that start out with the really minimal
+(console and null only) set of dev nodes prior to udev running.  The
+banner script looks around for what might be the vtmaster (aka what's
+got console) to say that we're booting.  But that's where things go by
+default anyhow.  This would also let slugos use the normal version, if
+they want.
 
-Ok, point taken.
+Signed-off-by: Tom Rini <trini@embeddedalley.com>
 
->>> And shouldn't you make glibc geode specific after that?
->>
->> Sorry, didn't get what you mean.
->
-> You're changing the way glibc is built for a specific machine, so the
-> resulting glibc package should technically machine specific. But it seems
-> it's compatible with other builds, so there isn't a big impact. This does
-> mean that you'll loose the optimization if you build another i586 arch
-> first.
+diff --git a/recipes/initscripts/initscripts-1.0/banner b/recipes/initscripts/initscripts-1.0/banner
+index 0349ce1..4e69c29 100644
+--- a/recipes/initscripts/initscripts-1.0/banner
++++ b/recipes/initscripts/initscripts-1.0/banner
+@@ -1,17 +1,3 @@
+ #!/bin/sh
+ 
+-if [ ! -e /dev/tty ]; then
+-    /bin/mknod -m 0666 /dev/tty c 5 0
+-fi
+-
+-if ( > /dev/tty0 ) 2>/dev/null; then
+-    vtmaster=/dev/tty0
+-elif ( > /dev/vc/0 ) 2>/dev/null; then
+-    vtmaster=/dev/vc/0
+-elif ( > /dev/console ) 2>/dev/null; then
+-    vtmaster=/dev/console
+-else
+-    vtmaster=/dev/null
+-fi
+-echo > $vtmaster
+-echo "Please wait: booting..." > $vtmaster
++echo "Please wait: booting..."
+diff --git a/recipes/initscripts/initscripts_1.0.bb b/recipes/initscripts/initscripts_1.0.bb
+index cbcfec5..6642144 100644
+--- a/recipes/initscripts/initscripts_1.0.bb
++++ b/recipes/initscripts/initscripts_1.0.bb
+@@ -4,7 +4,7 @@ PRIORITY = "required"
+ DEPENDS = "makedevs"
+ RDEPENDS = "makedevs"
+ LICENSE = "GPL"
+-PR = "r114"
++PR = "r115"
+ 
+ SRC_URI = "file://functions \
+            file://halt \
 
-Not in this specific case since it uses a different base arch; it builds
-all ipk on geode-*.
-
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+-- 
+Tom Rini
 
 
