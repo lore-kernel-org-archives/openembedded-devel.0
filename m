@@ -1,23 +1,42 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lwvq8-0000xo-AB
-	for openembedded-devel@openembedded.org; Thu, 23 Apr 2009 12:07:32 +0200
-Received: (qmail 5753 invoked by uid 813007); 23 Apr 2009 10:02:55 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Apr 2009 10:02:54 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <jay4mail@gmail.com>) id 1Lwvxe-0001FI-FS
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Apr 2009 12:15:18 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so356283rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Apr 2009 03:10:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:message-id;
+	bh=NZfIgbmL+tmmN9Z4yf1tRHpfi7r4E4lcgrr+DmXumnc=;
+	b=diFQ8fCVmDplvBzYu9+/M/+csAh14UtbD/Wf2CWRHcnY7kcdJDjW5pEByL4ykzo8K4
+	qvO8kBN2+1WgzZnD6C5gV2a9D7bpNfEZWySekC1k8dZroNUBGxq6aXJySeTvuiPwJi6N
+	8/GdfvfDz5JfXDl/J30syL092nT6IF+M2/Zio=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:message-id;
+	b=Qw5G9UfDZSBlUPiIXt399AiJXkNTwraYPaIxZO/xX00LdqPgfWBa0+OJ8kp9AENsUH
+	FG8L85l4FC/3lR9MbURUm9OuYiv9f65swCOVb0qmsO8cvQr9yQxIndEsX52dsY61PVlx
+	qPfrhEAgRGrGIwNe2iFh7f9vxeynCM24hDQfM=
+Received: by 10.142.44.11 with SMTP id r11mr287047wfr.186.1240481441265;
+	Thu, 23 Apr 2009 03:10:41 -0700 (PDT)
+Received: from is.home (93-81-142-7.broadband.corbina.ru [93.81.142.7])
+	by mx.google.com with ESMTPS id 24sm1340645wfc.37.2009.04.23.03.10.39
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 23 Apr 2009 03:10:40 -0700 (PDT)
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Apr 2009 12:02:47 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <1240427393-31060-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<be7a9f3d0904221216p1c06df41x54f0a3e5017b5115@mail.gmail.com>
-In-Reply-To: <be7a9f3d0904221216p1c06df41x54f0a3e5017b5115@mail.gmail.com>
+Date: Thu, 23 Apr 2009 14:10:32 +0400
+User-Agent: KMail/1.9.10
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF76D@hiob.intern.dresearch.de>
+	<gspddj$ctn$1@ger.gmane.org>
+In-Reply-To: <gspddj$ctn$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200904231202.48084.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH 1/1] java.bbclass: Use force (-f) for ln (suggested by Marcin).
+Message-Id: <200904231410.32258.jay4mail@gmail.com>
+Subject: Re: deploy multiple kernel image types
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,29 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2009 10:07:32 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 Apr 2009 10:15:18 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Dnia =C5=9Broda, 22 kwietnia 2009 o 21:16:30 Otavio Salvador napisa=C5=82(a=
-):
-> On Wed, Apr 22, 2009 at 4:09 PM, Marcin Juszkiewicz
+Hello!
+
+> On 23-04-09 09:31, Sledz, Steffen wrote:
+> > Is it possible to deploy multiple kernel image types (e.g. zImage and
+> > uImage) at the same time? As i understand it right KERNEL_IMAGETYPE
+> > allows just one argument.
 >
-> <marcin@juszkiewicz.com.pl> wrote:
-> > From: Robert Schuster <rschus@entw2.(none)>
+> At the moment: no, but I would be interested in such functionality for
+> boards using kexecboot initramfs inside a uImage that will load a zImage
+> from disk.
 
-> HACK! The email is (none) :P
+I hope one time I'll find some time and improve kexec tool to allow uImage 
+loading :)
 
-Blame Robert for that - I cherrypicked this change from .dev tree.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+-- 
+Yuri Bushmelev
 
 
