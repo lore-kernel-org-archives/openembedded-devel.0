@@ -1,40 +1,39 @@
-Received: from [209.85.217.180] (helo=mail-gx0-f180.google.com)
+Received: from [74.125.92.144] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michaelhaojie@gmail.com>) id 1LwjTU-0002WT-SV
+	(envelope-from <otavio.salvador@gmail.com>) id 1LwneG-0001MZ-Mn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Apr 2009 22:55:21 +0200
-Received: by gxk28 with SMTP id 28so296798gxk.12
+	Thu, 23 Apr 2009 03:22:44 +0200
+Received: by qw-out-1920.google.com with SMTP id 9so285072qwj.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Apr 2009 13:50:42 -0700 (PDT)
+	Wed, 22 Apr 2009 18:18:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=6dlzchBlIc9as04gTfFYl31YDLS7K34ECdtkpH9n0Uk=;
-	b=dKD8Blnx97dxoBeuWyLVcNkw1od2IzES0P0EAmnZD0xtCAAe9e1zDAevuQhzw2ZuCv
-	TwPa1MyISH9n8PImjvcQR0oxWOS2QmYJYNtdwn3ROYjWypI3Ldb80y2WlcHpDffDaXP/
-	bMmDeMR1PoLqk8/cEiKa0d7Yc7Fu5BkrqW9ho=
+	h=domainkey-signature:received:received:sender:received:from:to
+	:subject:date:message-id:x-mailer;
+	bh=CtcwpDrh6FuGulM3vRcY7Li/GGW4rbwNUwBzIhMGQ3A=;
+	b=lEg4UwY++O1BGMp95iDCqiNC6eGAinQPvddiTangHCmGQx2Dhj41z44jathbRUt2RU
+	gdzfO/RBWcYelTqj6kiUwPF0HnKuebKHTQ8x2FpXlK/85MrCc54VssUs++DGig5qqLXP
+	CmRprm+kFa7HzsCt/E6jzC/ddQxOYYjj4kpL0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=o9U/+VjD2XdH3RmjUB3JSDh6lxNCxEVVKT7jqypWRjFpt+uRa9K+5DTQJfM6B1w6Zl
-	sVuoCAdpnGuMDmi7ZLGQYrZ4lAeYbeSxoRtXflGs72QEQ1/QDh9ikqjfLUecGH97iiSn
-	ownFuGs522owRG5yG/VPv5OO26EBx3oEPLPDM=
-Received: by 10.90.33.15 with SMTP id g15mr189038agg.88.1240433442069;
-	Wed, 22 Apr 2009 13:50:42 -0700 (PDT)
-Received: from ?10.0.0.69? (66.236.178.138.ptr.us.xo.net [66.236.178.138])
-	by mx.google.com with ESMTPS id 38sm1045860agd.9.2009.04.22.13.50.41
+	h=sender:from:to:subject:date:message-id:x-mailer;
+	b=CDOoDwIzrESejkffy3oCkm1agcQCqkzhcYZOkTAcgim6eie/BQ87Dd6JM9C21b03zl
+	CDpvTlbernwPuOKQcViPUdwbsZwvMeNIXvfXWVIcIEBak5WClSXbchx7Z0PeNFUrVJIX
+	COz5J8mkKrKyuQQvVOeOeeXvZdNpz0ioIsZ3o=
+Received: by 10.220.86.129 with SMTP id s1mr750848vcl.109.1240449489755;
+	Wed, 22 Apr 2009 18:18:09 -0700 (PDT)
+Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
+	[201.40.162.47])
+	by mx.google.com with ESMTPS id 9sm1754762yws.23.2009.04.22.18.18.05
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 22 Apr 2009 13:50:41 -0700 (PDT)
-Message-ID: <49EF8312.5080309@gmail.com>
-Date: Wed, 22 Apr 2009 16:50:26 -0400
-From: Jie Hao <michaelhaojie@gmail.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	Wed, 22 Apr 2009 18:18:07 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by ossystems.com.br (Postfix, from userid 1000)
+	id 52A1E61006F; Wed, 22 Apr 2009 22:17:54 -0300 (BRT)
+From: Otavio Salvador <otavio@debian.org>
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.14.1240394403.21785.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.14.1240394403.21785.openembedded-devel@lists.openembedded.org>
-Subject: error when build console-image
+Date: Wed, 22 Apr 2009 22:17:35 -0300
+Message-Id: <1240449461-26116-1-git-send-email-otavio@debian.org>
+X-Mailer: git-send-email 1.6.2.1.303.g63699
+Subject: Small patchset being used at O.S. Systems and ready for pushing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,41 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2009 20:55:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 23 Apr 2009 01:22:45 -0000
 
-Hi,
+Hello,
 
-When I try to build the console-image, it gives me an error like this:
+This patchset is being in use here at O.S. Systems and we're looking
+for pushing it back to OE mainline to avoid diverting for it.
 
-NOTE: package 
-linux-omap-2.6.29-r30+gitr58cf2f1425abfd3a449f9fe985e48be2d2555022: task 
-do_fetch: started
-fatal: Not a git repository
-NOTE: Task failed: Fetch failed: Fetch command export 
-SSH_AUTH_SOCK=/tmp/keyring-mXGBLO/ssh; export 
-PATH=/home/jie/oe/tmp/staging/i686-linux/usr/bin/beagleboard-angstrom-linux-gnueabi:/home/jie/oe/tmp/staging/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/jie/oe/tmp/staging/i686-linux/usr/sbin:/home/jie/oe/tmp/staging/i686-linux/usr/bin:/home/jie/oe/tmp/cross/armv7a/bin:/home/jie/oe/tmp/staging/i686-linux/sbin:/home/jie/oe/tmp/staging/i686-linux/bin:/home/jie/oe/opt/bitbake/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games; 
-git fetch 
-git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git 
-master failed with signal 128, output:
-fatal: Not a git repository
+All change are quite simple but I do want to get feedback from people
+before going forward and pushing it.
 
-NOTE: package 
-linux-omap-2.6.29-r30+gitr58cf2f1425abfd3a449f9fe985e48be2d2555022: task 
-do_fetch: failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of 
-/home/jie/oe/openembedded/recipes/linux/linux-omap_2.6.29.bb do_fetch failed
-ERROR: Task 514 
-(/home/jie/oe/openembedded/recipes/linux/linux-omap_2.6.29.bb, do_fetch) 
-failed
+I belive that following patches might also go to stable:
 
-Any suggestion or remind?
+ [PATCH 1/6] qt4.inc: add translation packages to the dynamic list
+ [PATCH 4/6] qt4-tools-native: add qdbusxml2cpp
+ [PATCH 6/6] acpid: add 1.0.8 (with netlink support)
 
-Thanks,
+The diffstat from the whole patchset is:
 
-Jie
+ classes/qmake2.bbclass                    |    1 +
+ conf/checksums.ini                        |    8 +
+ conf/machine/geodegx.conf                 |    2 +-
+ conf/machine/geodelx.conf                 |   15 +-
+ conf/machine/include/tune-geodegx.inc     |    3 +-
+ conf/machine/include/tune-geodelx.inc     |    6 +-
+ recipes/acpid/acpid/event.c.diff          |   43 +
+ recipes/acpid/acpid/fixfd.diff            |   12 +
+ recipes/acpid/acpid/netlink.diff          | 2797 +++++++++++++++++++++++++++++
+ recipes/acpid/acpid_1.0.8.bb              |    6 +
+ recipes/gtk-engines/gtk-engines_2.18.1.bb |   30 +
+ recipes/qt4/files/linux.conf              |    1 +
+ recipes/qt4/qt4-tools-native.inc          |    4 +-
+ recipes/qt4/qt4-tools-native_4.4.3.bb     |    2 +-
+ recipes/qt4/qt4-tools-native_4.5.0.bb     |    2 +-
+ recipes/qt4/qt4.inc                       |    2 +-
+ 16 files changed, 2915 insertions(+), 19 deletions(-)
+
+Thanks in advance,
+
+--
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
 
