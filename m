@@ -1,17 +1,17 @@
 Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1LxFnh-00068W-4j
+	(envelope-from <koen@amethyst.openembedded.net>) id 1LxFoM-0006AE-J7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Apr 2009 09:26:21 +0200
+	Fri, 24 Apr 2009 09:27:02 +0200
 Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id 7ADB91880DC; Fri, 24 Apr 2009 09:25:34 +0200 (CEST)
+	id 249921880DC; Fri, 24 Apr 2009 09:26:21 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Apr 2009 09:25:34 +0200
-Message-Id: <1240557934-13305-1-git-send-email-k.kooi@student.utwente.nl>
+Date: Fri, 24 Apr 2009 09:26:21 +0200
+Message-Id: <1240557981-13344-1-git-send-email-k.kooi@student.utwente.nl>
 X-Mailer: git-send-email 1.5.6.5
 Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] man: GNU_HASH QA fix.
+Subject: [STABLE][PATCH] unzip: GNU_HASH QA fix.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,36 +25,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2009 07:26:22 -0000
+X-List-Received-Date: Fri, 24 Apr 2009 07:27:02 -0000
 
 From: Stanislav Brabec <utx@penguin.cz>
 
 
 Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- recipes/man/man_1.5p.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ recipes/unzip/unzip_552.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/man/man_1.5p.bb b/recipes/man/man_1.5p.bb
-index 2a1ed7f..c3412a5 100644
---- a/recipes/man/man_1.5p.bb
-+++ b/recipes/man/man_1.5p.bb
-@@ -14,13 +14,14 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/man/man-${PV}.tar.bz2 \
- # Disable parallel make or it tries to link objects before they are built
- PARALLEL_MAKE = ""
+diff --git a/recipes/unzip/unzip_552.bb b/recipes/unzip/unzip_552.bb
+index 2f06e1b..d880919 100644
+--- a/recipes/unzip/unzip_552.bb
++++ b/recipes/unzip/unzip_552.bb
+@@ -6,7 +6,7 @@ PR = "r1"
+ SRC_URI = "http://ftp.info-zip.org/pub/infozip/src/unzip${PV}.tar.gz"
+ S = "${WORKDIR}/unzip-5.52"
  
--EXTRA_OEMAKE = ""
-+EXTRA_OEMAKE = 'LFDLAGS="${LDFLAGS}"'
- GS = "-DGREPSILENT=\"q\""
- DEFS = "-DUSG -DDO_COMPRESS ${GS}"
+-export LD = "${CC}"
++export LD = "${CC} ${LDFLAGS}"
  
- do_configure() {
- 	# this doesn't support cross compilation, so it generates a
- 	# bogus configuration
-+	sed -i /^LDFLAGS/d src/Makefile.in
- 	./configure -d -confdir ${sysconfdir}
- }
- 
+ do_compile() {
+         oe_runmake -f unix/Makefile generic
 -- 
 1.5.6.5
 
