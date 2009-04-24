@@ -1,28 +1,33 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LxK4x-0002GG-2S
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Apr 2009 14:00:27 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 32F8716E234
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2009 13:56:08 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id F07822A4238
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2009 13:55:43 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 24 Apr 2009 13:55:13 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF77C@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
-Thread-Index: AcnE04fqJKgcuT1kS8yEkBpyys8jIQ==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LxLsJ-0001TM-D8
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 15:55:31 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LxLnj-0004pc-7G
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 13:50:47 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 24 Apr 2009 13:50:47 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 24 Apr 2009 13:50:47 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 24 Apr 2009 15:50:34 +0200
+Message-ID: <gssg3a$rpo$1@ger.gmane.org>
+References: <1240560708-14550-1-git-send-email-denis@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
+In-Reply-To: <1240560708-14550-1-git-send-email-denis@denix.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [STABLE][PATCH] udev 124: fix the absolute soname link in libvolume for SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,63 +41,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2009 12:00:27 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 24 Apr 2009 13:55:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Z2NjXzQuMi40LmJiIHJlcG9ydHMgdGhlc2UgZXJyb3JzIGZvciBhIGZldyBkYXlzLiBDYW4gc29t
-ZW9uZSBwbGVhc2UgaGF2ZSBhIGxvb2sgYXQgaXQuDQoNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05V
-X0hBU0ggaW4gdGhlIGVsZiBiaW5hcnk6ICcvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1
-dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMvaW5zdGFsbC9nY2MvdXNyL2Jp
-bi9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1nY2MnDQpFUlJPUjogUUEgSXNzdWU6IE5vIEdO
-VV9IQVNIIGluIHRoZSBlbGYgYmluYXJ5OiAnL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9hcm12
-NXRlLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvZ2NjLTQuMi40LXIzL2luc3RhbGwvZ2NjL3Vzci9s
-aWJleGVjL2djYy9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS80LjIuNC9jb2xsZWN0MicNCkVS
-Uk9SOiBRQSBJc3N1ZTogbm9uIC1kZXYgcGFja2FnZSBjb250YWlucyBzeW1saW5rIC5zbzogZ2Nj
-IHBhdGggJy93b3JrL2FybXY1dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMv
-aW5zdGFsbC9nY2MvdXNyL2xpYi9nY2MvYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvNC4yLjQv
-bGliZ2NjX3Muc28nDQpFUlJPUjogUUEgSXNzdWU6IE5vIEdOVV9IQVNIIGluIHRoZSBlbGYgYmlu
-YXJ5OiAnL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9hcm12NXRlLWFuZ3N0cm9tLWxpbnV4LWdu
-dWVhYmkvZ2NjLTQuMi40LXIzL2luc3RhbGwvZysrL3Vzci9iaW4vYXJtLWFuZ3N0cm9tLWxpbnV4
-LWdudWVhYmktZysrJw0KRVJST1I6IFFBIElzc3VlOiBObyBHTlVfSEFTSCBpbiB0aGUgZWxmIGJp
-bmFyeTogJy9ob21lL3NsZWR6L29lL3RtcC4xL3dvcmsvYXJtdjV0ZS1hbmdzdHJvbS1saW51eC1n
-bnVlYWJpL2djYy00LjIuNC1yMy9pbnN0YWxsL2crKy91c3IvbGliZXhlYy9nY2MvYXJtLWFuZ3N0
-cm9tLWxpbnV4LWdudWVhYmkvNC4yLjQvY2MxcGx1cycNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05V
-X0hBU0ggaW4gdGhlIGVsZiBiaW5hcnk6ICcvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1
-dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMvaW5zdGFsbC9jcHAvdXNyL2Jp
-bi9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1jcHAnDQpFUlJPUjogUUEgSXNzdWU6IE5vIEdO
-VV9IQVNIIGluIHRoZSBlbGYgYmluYXJ5OiAnL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9hcm12
-NXRlLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvZ2NjLTQuMi40LXIzL2luc3RhbGwvY3BwL3Vzci9s
-aWJleGVjL2djYy9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS80LjIuNC9jYzEnDQpFUlJPUjog
-UUEgSXNzdWU6IE5vIEdOVV9IQVNIIGluIHRoZSBlbGYgYmluYXJ5OiAnL2hvbWUvc2xlZHovb2Uv
-dG1wLjEvd29yay9hcm12NXRlLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvZ2NjLTQuMi40LXIzL2lu
-c3RhbGwvZ2ZvcnRyYW4vdXNyL2Jpbi9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1nZm9ydHJh
-bicNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05VX0hBU0ggaW4gdGhlIGVsZiBiaW5hcnk6ICcvaG9t
-ZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2Mt
-NC4yLjQtcjMvaW5zdGFsbC9nZm9ydHJhbi91c3IvbGliZXhlYy9nY2MvYXJtLWFuZ3N0cm9tLWxp
-bnV4LWdudWVhYmkvNC4yLjQvZjk1MScNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05VX0hBU0ggaW4g
-dGhlIGVsZiBiaW5hcnk6ICcvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1dGUtYW5nc3Ry
-b20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMvaW5zdGFsbC9nY292L3Vzci9iaW4vYXJtLWFu
-Z3N0cm9tLWxpbnV4LWdudWVhYmktZ2NvdicNCkVSUk9SOiBRQSBydW4gZm91bmQgZmF0YWwgZXJy
-b3JzLiBQbGVhc2UgY29uc2lkZXIgZml4aW5nIHRoZW0uDQpFUlJPUjogRXJyb3IgaW4gZXhlY3V0
-aW5nOiAvb3B0L29wZW5lbWJlZGRlZC9yZWNpcGVzL2djYy9nY2NfNC4yLjQuYmINCkVSUk9SOiBF
-eGNlcHRpb246PHR5cGUgJ2V4Y2VwdGlvbnMuU3lzdGVtRXhpdCc+IE1lc3NhZ2U6MQ0KRVJST1I6
-IFByaW50aW5nIHRoZSBlbnZpcm9ubWVudCBvZiB0aGUgZnVuY3Rpb24NCkVSUk9SOiBFcnJvciBp
-biBleGVjdXRpbmc6IC9vcHQvb3BlbmVtYmVkZGVkL3JlY2lwZXMvZ2NjL2djY180LjIuNC5iYg0K
-RVJST1I6IEV4Y2VwdGlvbjo8dHlwZSAnZXhjZXB0aW9ucy5TeXN0ZW1FeGl0Jz4gTWVzc2FnZTox
-DQpFUlJPUjogUHJpbnRpbmcgdGhlIGVudmlyb25tZW50IG9mIHRoZSBmdW5jdGlvbg0KRVJST1I6
-IEVycm9yIGluIGV4ZWN1dGluZzogL29wdC9vcGVuZW1iZWRkZWQvcmVjaXBlcy9nY2MvZ2NjXzQu
-Mi40LmJiDQpFUlJPUjogRXhjZXB0aW9uOjx0eXBlICdleGNlcHRpb25zLlN5c3RlbUV4aXQnPiBN
-ZXNzYWdlOjENCkVSUk9SOiBQcmludGluZyB0aGUgZW52aXJvbm1lbnQgb2YgdGhlIGZ1bmN0aW9u
-DQpFUlJPUjogRXJyb3IgaW4gZXhlY3V0aW5nOiAvb3B0L29wZW5lbWJlZGRlZC9yZWNpcGVzL2dj
-Yy9nY2NfNC4yLjQuYmINCkVSUk9SOiBFeGNlcHRpb246PHR5cGUgJ2V4Y2VwdGlvbnMuU3lzdGVt
-RXhpdCc+IE1lc3NhZ2U6MQ0KRVJST1I6IFByaW50aW5nIHRoZSBlbnZpcm9ubWVudCBvZiB0aGUg
-ZnVuY3Rpb24NCkVSUk9SOiBCdWlsZCBvZiAvb3B0L29wZW5lbWJlZGRlZC9yZWNpcGVzL2djYy9n
-Y2NfNC4yLjQuYmIgZG9fcGFja2FnZSBmYWlsZWQNCkVSUk9SOiBUYXNrIDEyODEgKC9vcHQvb3Bl
-bmVtYmVkZGVkL3JlY2lwZXMvZ2NjL2djY180LjIuNC5iYiwgZG9fcGFja2FnZSkgZmFpbGVkDQpF
-UlJPUjogJy9vcHQvb3BlbmVtYmVkZGVkL3JlY2lwZXMvZ2NjL2djY180LjIuNC5iYicgZmFpbGVk
-DQoNClRoeCwNClN0ZWZmZW4NCg==
+On 24-04-09 10:11, Denys Dmytriyenko wrote:
+>
+> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
+
+
+Looks OK to me:
+
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+
+> ---
+>   recipes/udev/udev-124/libvolume-id-soname.patch |   12 ++++++++++++
+>   recipes/udev/udev_124.bb                        |    3 ++-
+>   2 files changed, 14 insertions(+), 1 deletions(-)
+>   create mode 100644 recipes/udev/udev-124/libvolume-id-soname.patch
+>
+> diff --git a/recipes/udev/udev-124/libvolume-id-soname.patch b/recipes/udev/udev-124/libvolume-id-soname.patch
+> new file mode 100644
+> index 0000000..56365a4
+> --- /dev/null
+> +++ b/recipes/udev/udev-124/libvolume-id-soname.patch
+> @@ -0,0 +1,12 @@
+> +diff -uNr udev-124-orig/extras/volume_id/lib/Makefile udev-124/extras/volume_id/lib/Makefile
+> +--- udev-124-orig/extras/volume_id/lib/Makefile	2008-06-12 01:24:30.000000000 -0400
+> ++++ udev-124/extras/volume_id/lib/Makefile	2009-01-14 23:32:42.000000000 -0500
+> +@@ -113,7 +113,7 @@
+> + ifeq ($(libdir),$(usrlibdir))
+> + 	ln -sf $(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
+> + else
+> +-	ln -sf $(libdir)/$(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
+> ++	ln -sf ../..$(libdir)/$(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
+> + endif
+> + 	$(INSTALL) -d $(DESTDIR)$(usrlibdir)/pkgconfig
+> + 	$(INSTALL_DATA) libvolume_id.pc $(DESTDIR)$(usrlibdir)/pkgconfig/libvolume_id.pc
+> diff --git a/recipes/udev/udev_124.bb b/recipes/udev/udev_124.bb
+> index 76edb2f..37dc3a7 100644
+> --- a/recipes/udev/udev_124.bb
+> +++ b/recipes/udev/udev_124.bb
+> @@ -2,13 +2,14 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+>   /dev/, handles hotplug events and loads drivers at boot time. It replaces \
+>   the hotplug package and requires a kernel not older than 2.6.12."
+>   RPROVIDES_${PN} = "hotplug"
+> -PR = "r14"
+> +PR = "r15"
+>
+>   SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+>   	   file://noasmlinkage.patch;patch=1 \
+>   	   file://flags.patch;patch=1 \
+>   	   file://vol_id_ld.patch;patch=1 \
+>   	   file://udevtrigger_add_devname_filtering.patch;patch=1 \
+> +	   file://libvolume-id-soname.patch;patch=1 \
+>   	   file://mount.blacklist \
+>   	   file://run.rules \
+>   	   "
+
+
 
 
