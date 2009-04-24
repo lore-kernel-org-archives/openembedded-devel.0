@@ -1,31 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LxPLb-0005sm-8P
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 19:37:59 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LxPGz-0007fg-5P
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 17:33:13 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 24 Apr 2009 17:33:13 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 24 Apr 2009 17:33:13 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 24 Apr 2009 19:32:57 +0200
-Message-ID: <gsst4a$cvj$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
-Sender: news <news@ger.gmane.org>
-Subject: reverting some csets that kill package upgrade paths
+	(envelope-from <denis@denix.org>) id 1LxPRb-0006H7-Ob
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Apr 2009 19:44:12 +0200
+Received: from gandalf.denix.org ([71.255.242.201]) by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KIM00HQ8918O0KO@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	24 Apr 2009 12:39:09 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 867BB6B83A8; Fri,
+	24 Apr 2009 13:39:08 -0400 (EDT)
+Date: Fri, 24 Apr 2009 13:39:08 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090424173908.GF28636@denix.org>
+References: <1240560708-14550-1-git-send-email-denis@denix.org>
+	<gssg3a$rpo$1@ger.gmane.org>
+MIME-version: 1.0
+In-reply-to: <gssg3a$rpo$1@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [STABLE][PATCH] udev 124: fix the absolute soname link in	libvolume for SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,52 +33,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2009 17:37:59 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Apr 2009 17:44:13 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi,
+On Fri, Apr 24, 2009 at 03:50:34PM +0200, Koen Kooi wrote:
+> On 24-04-09 10:11, Denys Dmytriyenko wrote:
+>>
+>> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
+>
+>
+> Looks OK to me:
+>
+> Acked-by: Koen Kooi <koen@openembedded.org>
 
-Recently the e17 people made a change to how libtool names their 
-libraries by poking in some magic string (ver-pre-svn-00) into SONAME. 
-This has some implications for OE, namely that you get the old *and* new 
-lib in your rootfs. There was one bug that killed everything at runtime:
+Do I need another ack?
 
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=1496aea759adb716453d0fbf85795a5a6e914484
-
-So after that cset you'd get a completely working rootfs again with e17 
-stuff.
-
-Today a few csets have been pushed that break things horribly:
-
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=6898f8ca089d35109b3652d640ebb907d8115736
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=8101ad8e1229b3b9f8aa0be0fdc262b5283034d0
-http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=80c85e0af3865710a189ba536022d326fa996d26
-
-Let's take a look at the generated packages:
-
-before: libecore-evas-ver-pre-svn-00-0_0.9.9.050+svnr40247-r3.1_armv7a.ipk
-after: libecore-ver-pre-svn-00-lib-evas_0.9.9.060+svnr40247-r3.1_armv7a.ipk
-
-So suddenly the library packages (or plugin packages, but no difference 
-in this case) have a new name, but don't set RPROVIDES or RREPLACES to 
-the old packages containing *the same files*. This means that 'opkg 
-install <foo>' or 'opkg upgrade' doesn't work anymore. It will abort 
-saying to package <foo> wants to overwrite files belonging to <bar>. 
-Depending on the way you build your images in OE, your build will break.
-
-My position is that breaking upgrade patch unacceptable without prior 
-notice and that the above 3 csets get reverted ASAP.
-The changes in question are not intrinsically bad, and the autosplitting 
-is way better than manually poking at FILES_foo, but right now they 
-break way too much at runtime.
-
-regards,
-
-Koen
-
-
-
-
+>> ---
+>>   recipes/udev/udev-124/libvolume-id-soname.patch |   12 ++++++++++++
+>>   recipes/udev/udev_124.bb                        |    3 ++-
+>>   2 files changed, 14 insertions(+), 1 deletions(-)
+>>   create mode 100644 recipes/udev/udev-124/libvolume-id-soname.patch
+>>
+>> diff --git a/recipes/udev/udev-124/libvolume-id-soname.patch 
+>> b/recipes/udev/udev-124/libvolume-id-soname.patch
+>> new file mode 100644
+>> index 0000000..56365a4
+>> --- /dev/null
+>> +++ b/recipes/udev/udev-124/libvolume-id-soname.patch
+>> @@ -0,0 +1,12 @@
+>> +diff -uNr udev-124-orig/extras/volume_id/lib/Makefile 
+>> udev-124/extras/volume_id/lib/Makefile
+>> +--- udev-124-orig/extras/volume_id/lib/Makefile	2008-06-12 
+>> 01:24:30.000000000 -0400
+>> ++++ udev-124/extras/volume_id/lib/Makefile	2009-01-14 23:32:42.000000000 
+>> -0500
+>> +@@ -113,7 +113,7 @@
+>> + ifeq ($(libdir),$(usrlibdir))
+>> + 	ln -sf $(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
+>> + else
+>> +-	ln -sf $(libdir)/$(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
+>> ++	ln -sf ../..$(libdir)/$(SHLIB) $(DESTDIR)$(usrlibdir)/libvolume_id.so
+>> + endif
+>> + 	$(INSTALL) -d $(DESTDIR)$(usrlibdir)/pkgconfig
+>> + 	$(INSTALL_DATA) libvolume_id.pc 
+>> $(DESTDIR)$(usrlibdir)/pkgconfig/libvolume_id.pc
+>> diff --git a/recipes/udev/udev_124.bb b/recipes/udev/udev_124.bb
+>> index 76edb2f..37dc3a7 100644
+>> --- a/recipes/udev/udev_124.bb
+>> +++ b/recipes/udev/udev_124.bb
+>> @@ -2,13 +2,14 @@ DESCRIPTION = "udev is a daemon which dynamically 
+>> creates and removes device nod
+>>   /dev/, handles hotplug events and loads drivers at boot time. It 
+>> replaces \
+>>   the hotplug package and requires a kernel not older than 2.6.12."
+>>   RPROVIDES_${PN} = "hotplug"
+>> -PR = "r14"
+>> +PR = "r15"
+>>
+>>   SRC_URI = 
+>> "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+>>   	   file://noasmlinkage.patch;patch=1 \
+>>   	   file://flags.patch;patch=1 \
+>>   	   file://vol_id_ld.patch;patch=1 \
+>>   	   file://udevtrigger_add_devname_filtering.patch;patch=1 \
+>> +	   file://libvolume-id-soname.patch;patch=1 \
+>>   	   file://mount.blacklist \
+>>   	   file://run.rules \
+>>   	   "
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
