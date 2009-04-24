@@ -1,31 +1,31 @@
-Received: from [212.27.42.6] (helo=smtp6-g21.free.fr)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1LxP9T-0005AD-8s
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Apr 2009 19:25:28 +0200
-Received: from smtp6-g21.free.fr (localhost [127.0.0.1])
-	by smtp6-g21.free.fr (Postfix) with ESMTP id 1506EE080A7;
-	Fri, 24 Apr 2009 19:20:39 +0200 (CEST)
-Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
-	[81.56.56.40])
-	by smtp6-g21.free.fr (Postfix) with ESMTP id 34F06E0812C;
-	Fri, 24 Apr 2009 19:20:37 +0200 (CEST)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by sharky.jerryweb.org (Postfix) with ESMTP id 859C11841EC;
-	Fri, 24 Apr 2009 19:20:23 +0200 (CEST)
-Message-ID: <49F1F4D7.102@bolloretelecom.eu>
-Date: Fri, 24 Apr 2009 19:20:23 +0200
-From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.8.1.19) Gecko/20090103 Lightning/0.8 Thunderbird/2.0.0.19
-	Mnenhy/0.7.5.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1240449461-26116-1-git-send-email-otavio@debian.org>	<1240449461-26116-2-git-send-email-otavio@debian.org>	<1240449461-26116-3-git-send-email-otavio@debian.org>	<1240449461-26116-4-git-send-email-otavio@debian.org>
-	<1240449461-26116-5-git-send-email-otavio@debian.org>
-In-Reply-To: <1240449461-26116-5-git-send-email-otavio@debian.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 4/6] qt4-tools-native: add qdbusxml2cpp
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LxPCk-0005Nz-NL
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 19:28:51 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LxP8A-0007Eg-8e
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 17:24:06 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 24 Apr 2009 17:24:06 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 24 Apr 2009 17:24:06 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 24 Apr 2009 19:23:48 +0200
+Message-ID: <gsssj5$auh$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
+Sender: news <news@ger.gmane.org>
+Subject: reverting some csets that kill package upgrade paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2009 17:25:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Apr 2009 17:28:53 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Acked-by: Jeremy Lain=E9 <jeremy.laine@bolloretelecom.eu>
+Hi,
 
-I have updated your patch for qt 4.5.1, added a DEPENDS on dbus-native an=
-d applied your
-patch to .dev.
+Recently the e17 people made a change to how libtool names their 
+libraries by poking in some magic string (ver-pre-svn-00) into SONAME. 
+This has some implications for OE, namely that you get the old *and* new 
+lib in your rootfs. There was one bug that killed everything at runtime:
 
-Thanks for the patch!
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=1496aea759adb716453d0fbf85795a5a6e914484
 
---=20
-Jeremy LAINE
-Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+So after that cset you'd get a completely working rootfs again with e17 
+stuff.
+
+
 
 
