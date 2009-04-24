@@ -1,33 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LxPzB-0008V5-2k
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 20:18:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LxPuZ-00012F-TG
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:14:07 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 24 Apr 2009 18:14:07 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 24 Apr 2009 18:14:07 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 24 Apr 2009 20:13:58 +0200
-Message-ID: <gssvh6$kgv$1@ger.gmane.org>
-References: <f96d234e0904241109m29424bb3h368e30e50d8ec660@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090415 Shredder/3.0b3pre
-In-Reply-To: <f96d234e0904241109m29424bb3h368e30e50d8ec660@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: does omap3-sgx-modules_1.3.13.1397.bb need DEPENDS=virtual/kernel
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1LxQDK-0005sq-JF
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 20:33:30 +0200
+Received: (qmail 31361 invoked from network); 24 Apr 2009 18:28:44 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by  with SMTP; 24 Apr 2009 11:28:44 -0700
+Date: Fri, 24 Apr 2009 11:28:43 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090424182843.GA15489@smtp.west.cox.net>
+References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
+MIME-Version: 1.0
+In-Reply-To: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH][STABLE] Various SDK-related updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +28,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2009 18:18:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Apr 2009 18:33:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 24-04-09 20:09, Cliff Brake wrote:
+On Fri, Apr 24, 2009 at 09:11:48AM -0700, Tom Rini wrote:
+> The following series brings stable up to date with dev, with respect to
+> SDK and Canadian SDK changes.  The only not directly SDK related change
+> is the bugfix to wireless-tools so that libiw can be used.  mwester said
+> I should pull the SlugOS-related fix in myself rather than wait for him
+> to update SlugOS stuff in stable.  These changes have been build-tested
+> for gcc 4.1.2/4.2.4/4.3.3 and at91sam9263ek qemuarm omap5912osk
+> beagleboard vortex86sx qemux86 mpc8313e-rdb with DISTRO=angstrom-2008.1
+> in both dev and stable with identical results.  These changes are also
+> in the trini/stable/2009/sdk-updates branch.
 
-  > Should DEPENDS=virtual/kernel be added to the recipe,
+Also now in
+http://patchwork.openembedded.org/bundle/trini/trini-stable-2009-sdk-updates/
 
-No:
-
-recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1397.bb:
-inherit module
-
-classes/module.bbclass:
-RDEPENDS += "kernel (${KERNEL_VERSION}) update-modules"
-DEPENDS += "virtual/kernel"
-
-Looks like something else is going wrong.
-
-regards,
-
-Koen
-
+-- 
+Tom Rini
 
 
