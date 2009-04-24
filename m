@@ -1,25 +1,31 @@
 Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LxOWP-0006dz-GV
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:45:10 +0200
+	(envelope-from <trini@kernel.crashing.org>) id 1LxOWQ-0006e9-K5
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:45:11 +0200
 Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090424164018.ZFXM27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Fri, 24 Apr 2009 12:40:18 -0400
+	<20090424164019.ZFXZ27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>;
+	Fri, 24 Apr 2009 12:40:19 -0400
 Received: from localhost.localdomain ([68.230.63.214])
 	by fed1rmimpo03.cox.net with bizsmtp
-	id jUgH1b00L4dMFYL04UgJth; Fri, 24 Apr 2009 12:40:18 -0400
-X-Authority-Analysis: v=1.0 c=1 a=wtXCIhg2TaQA:10 a=9UqVfD8MlV0A:10
-	a=WdFtJyupwkyhbagIkEYA:9 a=KyRmvWhjPJ85RaoiM_sA:7
-	a=_g_ILGwRnX_mLLB7llBmh2kpi00A:4
+	id jUgH1b00L4dMFYL04UgKu6; Fri, 24 Apr 2009 12:40:19 -0400
+X-Authority-Analysis: v=1.0 c=1 a=LjpFH7613IIA:10 a=mK-FWCaCVDUA:10
+	a=4HVRqb_MAAAA:8 a=AXGi9Kt-gAR-AjXNOxoA:9
+	a=DUhyUngBQ8ZKiXDMzMhsTdnQ43kA:4 a=k-kO48AawpMA:10
 X-CM-Score: 0.00
 From: Tom Rini <trini@kernel.crashing.org>
 To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Date: Fri, 24 Apr 2009 09:11:48 -0700
-Message-Id: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
+Date: Fri, 24 Apr 2009 09:11:54 -0700
+Message-Id: <1240589520-1104-7-git-send-email-trini@kernel.crashing.org>
 X-Mailer: git-send-email 1.6.0.4
-Subject: [PATCH][STABLE] Various SDK-related updates
+In-Reply-To: <1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
+References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-2-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-3-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-4-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-5-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
+Subject: [PATCH][STABLE] canadian-sdk: Add SDK_REALPATH_MINGW variable, so that we can prepend a drive letter for sysroot.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,18 +41,35 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 24 Apr 2009 16:46:06 -0000
 
-The following series brings stable up to date with dev, with respect to
-SDK and Canadian SDK changes.  The only not directly SDK related change
-is the bugfix to wireless-tools so that libiw can be used.  mwester said
-I should pull the SlugOS-related fix in myself rather than wait for him
-to update SlugOS stuff in stable.  These changes have been build-tested
-for gcc 4.1.2/4.2.4/4.3.3 and at91sam9263ek qemuarm omap5912osk
-beagleboard vortex86sx qemux86 mpc8313e-rdb with DISTRO=angstrom-2008.1
-in both dev and stable with identical results.  These changes are also
-in the trini/stable/2009/sdk-updates branch.
+From: Tom Rini <trini@embeddedalley.com>
 
+
+Signed-off-by: Tom Rini <trini@embeddedalley.com>
+---
+ classes/canadian-sdk.bbclass |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/classes/canadian-sdk.bbclass b/classes/canadian-sdk.bbclass
+index d73b62f..6b4fdf8 100644
+--- a/classes/canadian-sdk.bbclass
++++ b/classes/canadian-sdk.bbclass
+@@ -24,9 +24,12 @@ LDFLAGS = "${SDK_LDFLAGS}"
+ # and otherwise just
+ DEPENDS_prepend = "virtual/${HOST_PREFIX}binutils "
+ 
+-SDK_PATH_sdk-mingw32 = "/OpenEmbedded/${SDK_NAME}"
++
++# On mingw systems we want to have the real sysroot default to c:/... and
++# assume that the default install will be on the C drive.  This can be changed
++# by setting SDK_REALPATH_MINGW.
+ SDK_REALPATH = "${SDK_PATH}"
+-SDK_REALPATH_sdk-mingw32 = "C:/OpenEmbedded/${SDK_NAME}"
++SDK_REALPATH_MINGW ?= "C:"
+ 
+ # Path prefixes
+ prefix = "${SDK_PATH}"
 -- 
-Tom Rini
+1.5.6.3
 
 
 
