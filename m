@@ -1,38 +1,25 @@
-Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
+Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LxOWR-0006eJ-Lq
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:45:11 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
+	(envelope-from <trini@kernel.crashing.org>) id 1LxOWP-0006dz-GV
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:45:10 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090424164021.HRXL15318.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>;
-	Fri, 24 Apr 2009 12:40:21 -0400
+	<20090424164018.ZFXM27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Fri, 24 Apr 2009 12:40:18 -0400
 Received: from localhost.localdomain ([68.230.63.214])
 	by fed1rmimpo03.cox.net with bizsmtp
-	id jUgH1b00L4dMFYL04UgLuZ; Fri, 24 Apr 2009 12:40:20 -0400
-X-Authority-Analysis: v=1.0 c=1 a=tI54MbwbmjEA:10 a=WLlRkF-OUZYA:10
-	a=pFzjghP5AAAA:8 a=4HVRqb_MAAAA:8 a=QizmSyIbjff1UW5d2FgA:9
-	a=by_69zT8_J1yJkAKxIAA:7 a=MEAR9TtSgERwk8nfMsxQ0VwH1qsA:4
-	a=FHE9wvvwwxcA:10 a=k-kO48AawpMA:10
+	id jUgH1b00L4dMFYL04UgJth; Fri, 24 Apr 2009 12:40:18 -0400
+X-Authority-Analysis: v=1.0 c=1 a=wtXCIhg2TaQA:10 a=9UqVfD8MlV0A:10
+	a=WdFtJyupwkyhbagIkEYA:9 a=KyRmvWhjPJ85RaoiM_sA:7
+	a=_g_ILGwRnX_mLLB7llBmh2kpi00A:4
 X-CM-Score: 0.00
 From: Tom Rini <trini@kernel.crashing.org>
 To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Date: Fri, 24 Apr 2009 09:12:00 -0700
-Message-Id: <1240589520-1104-13-git-send-email-trini@kernel.crashing.org>
+Date: Fri, 24 Apr 2009 09:11:48 -0700
+Message-Id: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
 X-Mailer: git-send-email 1.6.0.4
-In-Reply-To: <1240589520-1104-12-git-send-email-trini@kernel.crashing.org>
-References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-2-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-3-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-4-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-5-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-7-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-8-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-9-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-10-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-11-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-12-git-send-email-trini@kernel.crashing.org>
-Subject: [PATCH][STABLE] SlugOS: toolchain/sdk - add a number of missing components
+Subject: [PATCH][STABLE] Various SDK-related updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,57 +35,18 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 24 Apr 2009 16:46:06 -0000
 
-From: Mike Westerhof <mwester@dls.net>
+The following series brings stable up to date with dev, with respect to
+SDK and Canadian SDK changes.  The only not directly SDK related change
+is the bugfix to wireless-tools so that libiw can be used.  mwester said
+I should pull the SlugOS-related fix in myself rather than wait for him
+to update SlugOS stuff in stable.  These changes have been build-tested
+for gcc 4.1.2/4.2.4/4.3.3 and at91sam9263ek qemuarm omap5912osk
+beagleboard vortex86sx qemux86 mpc8313e-rdb with DISTRO=angstrom-2008.1
+in both dev and stable with identical results.  These changes are also
+in the trini/stable/2009/sdk-updates branch.
 
-
-Signed-off-by: Tom Rini <trini@embeddedalley.com>
----
- recipes/tasks/task-slugos-toolchain-target.bb |   20 +++++---------------
- 1 files changed, 5 insertions(+), 15 deletions(-)
-
-diff --git a/recipes/tasks/task-slugos-toolchain-target.bb b/recipes/tasks/task-slugos-toolchain-target.bb
-index 489a412..fb0418f 100644
---- a/recipes/tasks/task-slugos-toolchain-target.bb
-+++ b/recipes/tasks/task-slugos-toolchain-target.bb
-@@ -2,31 +2,21 @@ DESCRIPTION = "Packages for a standalone SDK or external toolchain"
- LICENSE = "MIT"
- ALLOW_EMPTY = "1"
- 
--PR = "r1"
-+PR = "r3"
- 
- PACKAGES = "${PN}"
- 
--# Stuff contained in this SDK is largely taken from task-sdk-base.bb.
-+DEPENDS = "task-sdk-bare"
-+
- # This is a starting point, and nothing more at present -- please fill
- # this out with a reasonable set of development tools for a SlugOS image.
- # Also feel free to remove stuff that's silly.
- 
- RDEPENDS_${PN} = "\
--    libgcc \
-+    task-sdk-bare \
-     linux-libc-headers-dev \
-     libssl \
-     libcrypto \
-     openssl-dev \
--    libstdc++ \
--    "
--
--# Not sure if we need these or not...
--NOT_SURE_ABOUT = "\
--    libsegfault \
--    "
--
--# This one needs further investigation; seems to be some sort
--# of naming problem that breaks the SDK when it is added directly.
--ODDLY_BROKEN_PACKAGES ="\
--    libz-dev \
-+    zlib-dev \
-     "
 -- 
-1.5.6.3
+Tom Rini
 
 
 
