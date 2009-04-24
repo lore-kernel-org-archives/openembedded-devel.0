@@ -1,33 +1,30 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LxOWR-0006eI-GW
+	(envelope-from <trini@kernel.crashing.org>) id 1LxOWQ-0006e6-GN
 	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:45:11 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao107.cox.net
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090424164020.JENQ10385.fed1rmmtao107.cox.net@fed1rmimpo03.cox.net>;
-	Fri, 24 Apr 2009 12:40:20 -0400
+	<20090424164019.HRXF15318.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>;
+	Fri, 24 Apr 2009 12:40:19 -0400
 Received: from localhost.localdomain ([68.230.63.214])
 	by fed1rmimpo03.cox.net with bizsmtp
-	id jUgH1b00L4dMFYL04UgKuE; Fri, 24 Apr 2009 12:40:19 -0400
-X-Authority-Analysis: v=1.0 c=1 a=FQC8or-5r7kA:10 a=Z5z2-s0K3j0A:10
-	a=4HVRqb_MAAAA:8 a=N-iWbnfpFarC2E4c8t8A:9
-	a=d3c8q5J4ck2_PrempC2EvIiQEg0A:4 a=k-kO48AawpMA:10
+	id jUgH1b00L4dMFYL04UgKu2; Fri, 24 Apr 2009 12:40:19 -0400
+X-Authority-Analysis: v=1.0 c=1 a=lDE0WW7hEnwA:10 a=b36yVlBc07IA:10
+	a=4HVRqb_MAAAA:8 a=jAuJt-RD0KGZ2T9NQWYA:9
+	a=hM6F7AAeimraLFzAAhLpj4vaAQcA:4 a=k-kO48AawpMA:10
 X-CM-Score: 0.00
 From: Tom Rini <trini@kernel.crashing.org>
 To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Date: Fri, 24 Apr 2009 09:11:56 -0700
-Message-Id: <1240589520-1104-9-git-send-email-trini@kernel.crashing.org>
+Date: Fri, 24 Apr 2009 09:11:53 -0700
+Message-Id: <1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
 X-Mailer: git-send-email 1.6.0.4
-In-Reply-To: <1240589520-1104-8-git-send-email-trini@kernel.crashing.org>
+In-Reply-To: <1240589520-1104-5-git-send-email-trini@kernel.crashing.org>
 References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
 	<1240589520-1104-2-git-send-email-trini@kernel.crashing.org>
 	<1240589520-1104-3-git-send-email-trini@kernel.crashing.org>
 	<1240589520-1104-4-git-send-email-trini@kernel.crashing.org>
 	<1240589520-1104-5-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-7-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-8-git-send-email-trini@kernel.crashing.org>
-Subject: [PATCH][STABLE] gcc-canadian-sdk: Fix C++ relocation, add SYSROOT, use SDK_REALPATH_MINGW, bump PR.
+Subject: [PATCH][STABLE] wireless-tools: Fix libiw/ifrename packages, bump PR.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,45 +42,57 @@ X-List-Received-Date: Fri, 24 Apr 2009 16:46:06 -0000
 
 From: Tom Rini <trini@embeddedalley.com>
 
-
 Signed-off-by: Tom Rini <trini@embeddedalley.com>
 ---
- recipes/gcc/gcc-canadian-sdk_4.2.4.bb      |    2 +-
- recipes/gcc/gcc-configure-canadian-sdk.inc |    7 ++++---
- 2 files changed, 5 insertions(+), 4 deletions(-)
+ recipes/wireless-tools/wireless-tools.inc   |   21 ++++++++++-----------
+ recipes/wireless-tools/wireless-tools_29.bb |    2 +-
+ 2 files changed, 11 insertions(+), 12 deletions(-)
 
-diff --git a/recipes/gcc/gcc-canadian-sdk_4.2.4.bb b/recipes/gcc/gcc-canadian-sdk_4.2.4.bb
-index ae3245b..d78ab75 100644
---- a/recipes/gcc/gcc-canadian-sdk_4.2.4.bb
-+++ b/recipes/gcc/gcc-canadian-sdk_4.2.4.bb
-@@ -1,6 +1,6 @@
- inherit canadian-sdk
+diff --git a/recipes/wireless-tools/wireless-tools.inc b/recipes/wireless-tools/wireless-tools.inc
+index d2a7b89..f52c3f1 100644
+--- a/recipes/wireless-tools/wireless-tools.inc
++++ b/recipes/wireless-tools/wireless-tools.inc
+@@ -31,7 +31,7 @@ do_stage() {
+ }
  
--PR = "r1"
-+PR = "r2"
+ do_install() {
+-    oe_runmake PREFIX=${D} install-iwmulticall install-dynamic install-man install-hdr
++    oe_runmake PREFIX=${D} install-iwmulticall install-dynamic install-static install-man install-hdr
+     install -d ${D}${sbindir}
+     install -m 0755 ifrename ${D}${sbindir}/ifrename
+     install -d ${D}${sysconfdir}/network/if-pre-up.d
+@@ -39,13 +39,12 @@ do_install() {
+     install ${WORKDIR}/zzz-wireless.if-pre-up ${D}${sysconfdir}/network/if-pre-up.d/zzz-wireless
+ }
  
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/gcc-${PV}"
+-PACKAGES += "libiw libiw-dev libiw-doc libiw-dbg ifrename ifrename-dbg ifrename-doc"
+-FILES_libiw += "${libdir}/*.so.*"
+-FILES_libiw-dbg += "${libdir}/.debug/*.so.*"
+-FILES_libiw-dev += "${libdir}/*.a ${libdir}/*.so ${includedir}"
+-FILES_libiw-doc += "${mandir}/man7"
+-FILES_ifrename += "${sbindir}/ifrename"
+-FILES_ifrename-dbg += "${sbindir}/.debug/ifrename"
+-FILES_ifrename-doc += "${mandir}/man8/ifrename.8 ${mandir}/man5/iftab.5"
+-FILES_${PN} += "${bindir} ${sbindir}/iw* ${base_sbindir} ${base_bindir} ${sysconfdir}/network"
+-FILES_${PN}-doc += "${mandir}/man8"
++PACKAGES =+ "libiw libiw-dev libiw-doc libiw-dbg ifrename ifrename-dbg ifrename-doc"
++FILES_libiw = "${libdir}/*.so.*"
++FILES_libiw-dbg = "${libdir}/.debug/*.so.*"
++FILES_libiw-dev = "${libdir}/*.a ${libdir}/*.so ${includedir}"
++FILES_libiw-doc = "${mandir}/man7"
++FILES_ifrename = "${sbindir}/ifrename"
++FILES_ifrename-dbg = "${sbindir}/.debug/ifrename"
++FILES_ifrename-doc = "${mandir}/man8/ifrename.8 ${mandir}/man5/iftab.5"
++FILES_${PN} += "${sysconfdir}/network"
+diff --git a/recipes/wireless-tools/wireless-tools_29.bb b/recipes/wireless-tools/wireless-tools_29.bb
+index 196a194..fb68127 100644
+--- a/recipes/wireless-tools/wireless-tools_29.bb
++++ b/recipes/wireless-tools/wireless-tools_29.bb
+@@ -1,3 +1,3 @@
+ require wireless-tools.inc
  
-diff --git a/recipes/gcc/gcc-configure-canadian-sdk.inc b/recipes/gcc/gcc-configure-canadian-sdk.inc
-index c95a6c4..738b120 100644
---- a/recipes/gcc/gcc-configure-canadian-sdk.inc
-+++ b/recipes/gcc/gcc-configure-canadian-sdk.inc
-@@ -61,11 +61,12 @@ export WINDRES_FOR_TARGET="${TARGET_PREFIX}windres"
- EXTRA_OECONF_DEP ?= ""
- 
- EXTRA_OECONF += ""
-+# On MinGW hosts we want to prepend a drive letter, in ${SDK_REALPATH_MINGW}
-+# to the sysroot path.
-+SYSROOT = "${@['${SDK_REALPATH}/${TARGET_SYS}', '${SDK_REALPATH_MINGW}${SDK_REALPATH}/${TARGET_SYS}'][bb.data.getVar('SDK_OS', d, 1) in ['mingw32', 'mingw64']]}"
- EXTRA_OECONF_PATHS = " \
--	--with-local-prefix=$dollar{prefix}/local \
--	--with-gxx-include-dir=$dollar{prefix}/${TARGET_SYS}/usr/include/c++/${BINV} \
- 	--with-build-sysroot=${STAGING_DIR_TARGET} \
--	--with-sysroot=${SDK_REALPATH}/${TARGET_SYS} \
-+	--with-sysroot=${SYSROOT} \
- "
- 
- do_configure () {
+-PR = "r3"
++PR = "r4"
 -- 
 1.5.6.3
 
