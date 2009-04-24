@@ -1,24 +1,24 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LxRTz-0005ML-05
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 21:54:47 +0200
+	id 1LxRYq-0005iY-P6
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 21:59:48 +0200
 Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1LxRPO-0004vB-9F
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 19:50:02 +0000
+	id 1LxRUE-00058H-VL
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 19:55:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 24 Apr 2009 19:50:02 +0000
+	Fri, 24 Apr 2009 19:55:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Fri, 24 Apr 2009 19:50:02 +0000
+	Fri, 24 Apr 2009 19:55:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 24 Apr 2009 21:48:02 +0200
-Message-ID: <gst51i$67b$2@ger.gmane.org>
+Date: Fri, 24 Apr 2009 21:53:33 +0200
+Message-ID: <gst5bt$76o$1@ger.gmane.org>
 References: <gsst4a$cvj$1@ger.gmane.org>
 	<49F1FCFB.9000205@balister.org>	<gst2dn$u4j$1@ger.gmane.org>
 	<20090424193245.GD15489@smtp.west.cox.net>
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2009 19:54:50 -0000
+X-List-Received-Date: Fri, 24 Apr 2009 19:59:48 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -59,8 +59,19 @@ On 24-04-09 21:32, Tom Rini wrote:
 > and just hope things work out fine.  No, they're going to point at their
 > supported feeds with updates they've tested and fixed any bugs that they
 > happened to have found (and pushed back because they're Good Guys).
->
 
+My point is that OE won't make it 'into' the commercial device since the 
+evaluating came out negative.
+BTW, I've already seen a company messing up the feeds for their 
+commercial device by broken upgrade paths.
+
+regards,
+
+Koen
+
+And why is the spellcheck button next to the send button in thunderbird? 
+I've already sent 3 bogus mails today because my motoric skills suffer 
+from a lack of coffee
 
 
 
