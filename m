@@ -1,21 +1,28 @@
-Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <di@fh-wedel.de>) id 1LxJhV-0001HY-BM
+	(envelope-from <sledz@DResearch.DE>) id 1LxK4x-0002GG-2S
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Apr 2009 13:36:14 +0200
-Received: by mail.fh-wedel.de (Postfix, from userid 959)
-	id 764D9547D3; Fri, 24 Apr 2009 13:31:28 +0200 (CEST)
-Date: Fri, 24 Apr 2009 13:31:28 +0200
-From: Martin Dietze <di@fh-wedel.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090424113128.GA13714@fh-wedel.de>
-References: <20090424092913.GA8700@fh-wedel.de>
-	<200904241145.28702.marcin@juszkiewicz.com.pl>
-	<20090424112301.GI12936@fh-wedel.de>
+	Fri, 24 Apr 2009 14:00:27 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 32F8716E234
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Apr 2009 13:56:08 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id F07822A4238
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Apr 2009 13:55:43 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-In-Reply-To: <20090424112301.GI12936@fh-wedel.de>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: modprobe: invalid lines in etc/modutils/hostap_cs.conf?
+Date: Fri, 24 Apr 2009 13:55:13 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF77C@hiob.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
+Thread-Index: AcnE04fqJKgcuT1kS8yEkBpyys8jIQ==
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,66 +36,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2009 11:36:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Apr 2009 12:00:27 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Fri, April 24, 2009, Martin Dietze wrote:
-
-> On Fri, April 24, 2009, Marcin Juszkiewicz wrote:
-> 
-> > That was done for 2.6 kernel.
-> 
-> ... which means that we could actually make this configuration
-> file kernel version dependent and provide none or a different
-> version of it for 2.4 kernels? Actually in my case the file
-
-How about this patch?
-
-> ---------- SNIP ----------
-
-diff --git a/recipes/hostap/hostap-conf_1.0.bb b/recipes/hostap/hostap-conf_1.0.bb
-index e0909dd..b13eb1d 100644
---- a/recipes/hostap/hostap-conf_1.0.bb
-+++ b/recipes/hostap/hostap-conf_1.0.bb
-@@ -7,20 +7,23 @@ PACKAGE_ARCH = "all"
- PR = "r9"
-
- SRC_URI = "file://hostap_cs.conf \
--           file://hostap_cs.modalias \
-            file://hostap_cs.conf-upstream"
-
-+SRC_URI_append = '${@base_conditional("KERNEL_MAJOR_VERSION", "2.6", " file://hostap_cs.modalias  ", "",d)}'
-+
- do_compile() {
- }
-
- do_install() {
-         install -d ${D}${sysconfdir}/pcmcia
--        install -d ${D}${sysconfdir}/modutils
-
-         install -m 0644 ${WORKDIR}/hostap_cs.conf-upstream ${D}${sysconfdir}/pcmcia/hostap_cs.conf
-        cat ${WORKDIR}/hostap_cs.conf >>${D}${sysconfdir}/pcmcia/hostap_cs.conf
-
--       install -m 0644 ${WORKDIR}/hostap_cs.modalias ${D}${sysconfdir}/modutils/hostap_cs.conf
-+        if [ -r ${WORKDIR}/hostap_cs.modalias ]; then
-+               install -d ${D}${sysconfdir}/modutils
-+               install -m 0644 ${WORKDIR}/hostap_cs.modalias ${D}${sysconfdir}/modutils/hostap_cs.conf
-+       fi
- }
-
- pkg_postinst () {
-
-> ---------- SNIP ----------
-
-Cheers,
-
-Martin
-
--- 
------------ / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-Wie verhindert man, dass einem die Geige gestohlen wird?
-Man legt sie in einen Bratschenkasten...
+Z2NjXzQuMi40LmJiIHJlcG9ydHMgdGhlc2UgZXJyb3JzIGZvciBhIGZldyBkYXlzLiBDYW4gc29t
+ZW9uZSBwbGVhc2UgaGF2ZSBhIGxvb2sgYXQgaXQuDQoNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05V
+X0hBU0ggaW4gdGhlIGVsZiBiaW5hcnk6ICcvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1
+dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMvaW5zdGFsbC9nY2MvdXNyL2Jp
+bi9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1nY2MnDQpFUlJPUjogUUEgSXNzdWU6IE5vIEdO
+VV9IQVNIIGluIHRoZSBlbGYgYmluYXJ5OiAnL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9hcm12
+NXRlLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvZ2NjLTQuMi40LXIzL2luc3RhbGwvZ2NjL3Vzci9s
+aWJleGVjL2djYy9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS80LjIuNC9jb2xsZWN0MicNCkVS
+Uk9SOiBRQSBJc3N1ZTogbm9uIC1kZXYgcGFja2FnZSBjb250YWlucyBzeW1saW5rIC5zbzogZ2Nj
+IHBhdGggJy93b3JrL2FybXY1dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMv
+aW5zdGFsbC9nY2MvdXNyL2xpYi9nY2MvYXJtLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvNC4yLjQv
+bGliZ2NjX3Muc28nDQpFUlJPUjogUUEgSXNzdWU6IE5vIEdOVV9IQVNIIGluIHRoZSBlbGYgYmlu
+YXJ5OiAnL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9hcm12NXRlLWFuZ3N0cm9tLWxpbnV4LWdu
+dWVhYmkvZ2NjLTQuMi40LXIzL2luc3RhbGwvZysrL3Vzci9iaW4vYXJtLWFuZ3N0cm9tLWxpbnV4
+LWdudWVhYmktZysrJw0KRVJST1I6IFFBIElzc3VlOiBObyBHTlVfSEFTSCBpbiB0aGUgZWxmIGJp
+bmFyeTogJy9ob21lL3NsZWR6L29lL3RtcC4xL3dvcmsvYXJtdjV0ZS1hbmdzdHJvbS1saW51eC1n
+bnVlYWJpL2djYy00LjIuNC1yMy9pbnN0YWxsL2crKy91c3IvbGliZXhlYy9nY2MvYXJtLWFuZ3N0
+cm9tLWxpbnV4LWdudWVhYmkvNC4yLjQvY2MxcGx1cycNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05V
+X0hBU0ggaW4gdGhlIGVsZiBiaW5hcnk6ICcvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1
+dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMvaW5zdGFsbC9jcHAvdXNyL2Jp
+bi9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1jcHAnDQpFUlJPUjogUUEgSXNzdWU6IE5vIEdO
+VV9IQVNIIGluIHRoZSBlbGYgYmluYXJ5OiAnL2hvbWUvc2xlZHovb2UvdG1wLjEvd29yay9hcm12
+NXRlLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvZ2NjLTQuMi40LXIzL2luc3RhbGwvY3BwL3Vzci9s
+aWJleGVjL2djYy9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS80LjIuNC9jYzEnDQpFUlJPUjog
+UUEgSXNzdWU6IE5vIEdOVV9IQVNIIGluIHRoZSBlbGYgYmluYXJ5OiAnL2hvbWUvc2xlZHovb2Uv
+dG1wLjEvd29yay9hcm12NXRlLWFuZ3N0cm9tLWxpbnV4LWdudWVhYmkvZ2NjLTQuMi40LXIzL2lu
+c3RhbGwvZ2ZvcnRyYW4vdXNyL2Jpbi9hcm0tYW5nc3Ryb20tbGludXgtZ251ZWFiaS1nZm9ydHJh
+bicNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05VX0hBU0ggaW4gdGhlIGVsZiBiaW5hcnk6ICcvaG9t
+ZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1dGUtYW5nc3Ryb20tbGludXgtZ251ZWFiaS9nY2Mt
+NC4yLjQtcjMvaW5zdGFsbC9nZm9ydHJhbi91c3IvbGliZXhlYy9nY2MvYXJtLWFuZ3N0cm9tLWxp
+bnV4LWdudWVhYmkvNC4yLjQvZjk1MScNCkVSUk9SOiBRQSBJc3N1ZTogTm8gR05VX0hBU0ggaW4g
+dGhlIGVsZiBiaW5hcnk6ICcvaG9tZS9zbGVkei9vZS90bXAuMS93b3JrL2FybXY1dGUtYW5nc3Ry
+b20tbGludXgtZ251ZWFiaS9nY2MtNC4yLjQtcjMvaW5zdGFsbC9nY292L3Vzci9iaW4vYXJtLWFu
+Z3N0cm9tLWxpbnV4LWdudWVhYmktZ2NvdicNCkVSUk9SOiBRQSBydW4gZm91bmQgZmF0YWwgZXJy
+b3JzLiBQbGVhc2UgY29uc2lkZXIgZml4aW5nIHRoZW0uDQpFUlJPUjogRXJyb3IgaW4gZXhlY3V0
+aW5nOiAvb3B0L29wZW5lbWJlZGRlZC9yZWNpcGVzL2djYy9nY2NfNC4yLjQuYmINCkVSUk9SOiBF
+eGNlcHRpb246PHR5cGUgJ2V4Y2VwdGlvbnMuU3lzdGVtRXhpdCc+IE1lc3NhZ2U6MQ0KRVJST1I6
+IFByaW50aW5nIHRoZSBlbnZpcm9ubWVudCBvZiB0aGUgZnVuY3Rpb24NCkVSUk9SOiBFcnJvciBp
+biBleGVjdXRpbmc6IC9vcHQvb3BlbmVtYmVkZGVkL3JlY2lwZXMvZ2NjL2djY180LjIuNC5iYg0K
+RVJST1I6IEV4Y2VwdGlvbjo8dHlwZSAnZXhjZXB0aW9ucy5TeXN0ZW1FeGl0Jz4gTWVzc2FnZTox
+DQpFUlJPUjogUHJpbnRpbmcgdGhlIGVudmlyb25tZW50IG9mIHRoZSBmdW5jdGlvbg0KRVJST1I6
+IEVycm9yIGluIGV4ZWN1dGluZzogL29wdC9vcGVuZW1iZWRkZWQvcmVjaXBlcy9nY2MvZ2NjXzQu
+Mi40LmJiDQpFUlJPUjogRXhjZXB0aW9uOjx0eXBlICdleGNlcHRpb25zLlN5c3RlbUV4aXQnPiBN
+ZXNzYWdlOjENCkVSUk9SOiBQcmludGluZyB0aGUgZW52aXJvbm1lbnQgb2YgdGhlIGZ1bmN0aW9u
+DQpFUlJPUjogRXJyb3IgaW4gZXhlY3V0aW5nOiAvb3B0L29wZW5lbWJlZGRlZC9yZWNpcGVzL2dj
+Yy9nY2NfNC4yLjQuYmINCkVSUk9SOiBFeGNlcHRpb246PHR5cGUgJ2V4Y2VwdGlvbnMuU3lzdGVt
+RXhpdCc+IE1lc3NhZ2U6MQ0KRVJST1I6IFByaW50aW5nIHRoZSBlbnZpcm9ubWVudCBvZiB0aGUg
+ZnVuY3Rpb24NCkVSUk9SOiBCdWlsZCBvZiAvb3B0L29wZW5lbWJlZGRlZC9yZWNpcGVzL2djYy9n
+Y2NfNC4yLjQuYmIgZG9fcGFja2FnZSBmYWlsZWQNCkVSUk9SOiBUYXNrIDEyODEgKC9vcHQvb3Bl
+bmVtYmVkZGVkL3JlY2lwZXMvZ2NjL2djY180LjIuNC5iYiwgZG9fcGFja2FnZSkgZmFpbGVkDQpF
+UlJPUjogJy9vcHQvb3BlbmVtYmVkZGVkL3JlY2lwZXMvZ2NjL2djY180LjIuNC5iYicgZmFpbGVk
+DQoNClRoeCwNClN0ZWZmZW4NCg==
 
 
