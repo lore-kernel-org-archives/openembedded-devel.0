@@ -1,29 +1,27 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [68.230.241.41] (helo=fed1rmmtao105.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LxOWQ-0006e4-3m
-	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:45:11 +0200
-Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao101.cox.net
+	(envelope-from <trini@kernel.crashing.org>) id 1LxOWP-0006e0-IE
+	for openembedded-devel@openembedded.org; Fri, 24 Apr 2009 18:45:10 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao105.cox.net
 	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090424164019.ZFXS27308.fed1rmmtao101.cox.net@fed1rmimpo03.cox.net>;
-	Fri, 24 Apr 2009 12:40:19 -0400
+	<20090424164018.HRWY15318.fed1rmmtao105.cox.net@fed1rmimpo03.cox.net>;
+	Fri, 24 Apr 2009 12:40:18 -0400
 Received: from localhost.localdomain ([68.230.63.214])
 	by fed1rmimpo03.cox.net with bizsmtp
-	id jUgH1b00L4dMFYL04UgJtv; Fri, 24 Apr 2009 12:40:18 -0400
-X-Authority-Analysis: v=1.0 c=1 a=mNPykItSPH8A:10 a=KYTzC4MK2aEA:10
-	a=4HVRqb_MAAAA:8 a=pGLkceISAAAA:8 a=DRi_eEeSPefMijpgFhwA:9
-	a=6mK5LvVlk5GCqyiI0MAA:7 a=2jKFNxAu7d8XD5NYD9b5U5H1fg0A:4
+	id jUgH1b00L4dMFYL04UgJtl; Fri, 24 Apr 2009 12:40:18 -0400
+X-Authority-Analysis: v=1.0 c=1 a=EC_Ls_ZbL-UA:10 a=OWzvGqeLN-YA:10
+	a=4HVRqb_MAAAA:8 a=pGLkceISAAAA:8 a=8IFUabOSF-BAsCQdFIgA:9
+	a=BTDXMKIMaAK2n5W9Ho0A:7 a=-KNFWKQM63VmTih6jiuRslGoDf0A:4
 	a=k-kO48AawpMA:10 a=0pA2U7TmfLoA:10 a=MSl-tDqOz04A:10
 X-CM-Score: 0.00
 From: Tom Rini <trini@kernel.crashing.org>
 To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Date: Fri, 24 Apr 2009 09:11:51 -0700
-Message-Id: <1240589520-1104-4-git-send-email-trini@kernel.crashing.org>
+Date: Fri, 24 Apr 2009 09:11:49 -0700
+Message-Id: <1240589520-1104-2-git-send-email-trini@kernel.crashing.org>
 X-Mailer: git-send-email 1.6.0.4
-In-Reply-To: <1240589520-1104-3-git-send-email-trini@kernel.crashing.org>
+In-Reply-To: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
 References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-2-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-3-git-send-email-trini@kernel.crashing.org>
-Subject: [PATCH][STABLE] meta-toolchain, canadian-sdk: Move C++ headers into the correct location, bump PR
+Subject: [PATCH][STABLE] binutils-cross-sdk: Make relative, not absolute symlinks for 'as', etc, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,142 +44,131 @@ Acked-by: Khem Raj <raj.khem@gmail.com>
 
 Signed-off-by: Tom Rini <trini@embeddedalley.com>
 ---
- recipes/meta/canadian-sdk.bb            |    8 +++++++-
- recipes/meta/meta-toolchain-fso.bb      |    2 +-
- recipes/meta/meta-toolchain-gpe-sbox.bb |    3 ++-
- recipes/meta/meta-toolchain-gpe.bb      |    3 ++-
- recipes/meta/meta-toolchain-neuros.bb   |    2 +-
- recipes/meta/meta-toolchain-openmoko.bb |    2 +-
- recipes/meta/meta-toolchain-opie.bb     |    1 +
- recipes/meta/meta-toolchain-sbox.bb     |    1 +
- recipes/meta/meta-toolchain.bb          |    6 ++++++
- 9 files changed, 22 insertions(+), 6 deletions(-)
+ recipes/binutils/binutils-cross-sdk.inc            |    2 +-
+ recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb |    1 +
+ recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb |    1 +
+ recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb |    2 +-
+ recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb |    1 +
+ recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb |    2 +-
+ .../binutils/binutils-cross-sdk_2.17.50.0.12.bb    |    2 +-
+ recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb |    2 +-
+ recipes/binutils/binutils-cross-sdk_2.18.bb        |    2 +-
+ recipes/binutils/binutils-cross-sdk_2.19.1.bb      |    2 +-
+ recipes/binutils/binutils-cross-sdk_2.19.bb        |    2 +-
+ recipes/binutils/binutils-cross-sdk_cvs.bb         |    4 ++--
+ 12 files changed, 13 insertions(+), 10 deletions(-)
 
-diff --git a/recipes/meta/canadian-sdk.bb b/recipes/meta/canadian-sdk.bb
-index 150c752..9126c7e 100644
---- a/recipes/meta/canadian-sdk.bb
-+++ b/recipes/meta/canadian-sdk.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Meta package for building a installable toolchain"
- LICENSE = "MIT"
- DEPENDS = "ipkg-native ipkg-utils-native fakeroot-native sed-native zip-native"
--PR = "r2"
-+PR = "r3"
+diff --git a/recipes/binutils/binutils-cross-sdk.inc b/recipes/binutils/binutils-cross-sdk.inc
+index 5da1d4f..6e9cda0 100644
+--- a/recipes/binutils/binutils-cross-sdk.inc
++++ b/recipes/binutils/binutils-cross-sdk.inc
+@@ -17,7 +17,7 @@ do_install () {
+ 	rm ${D}${prefix}/${TARGET_SYS}/bin/.debug -Rf
+ 	rm ${D}${prefix}/${TARGET_SYS}/bin/*
+ 	for l in ${D}${bindir}/*; do
+-		ln -sf "${bindir}/`basename $l`" "${D}${prefix}/${TARGET_SYS}/bin/`basename $l | sed -e 's,${TARGET_PREFIX},,'`"
++		ln -sf "../../${layout_base_bindir}/`basename $l`" "${D}${prefix}/${TARGET_SYS}/bin/`basename $l | sed -e 's,${TARGET_PREFIX},,'`"
+ 	done
  
- inherit canadian-sdk meta
- 
-@@ -100,6 +100,12 @@ do_populate_sdk() {
- 	# gcc-cross-sdk get built :( (30/11/07)
- 	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/lib/libgcc_s.so
- 
-+	# With sysroot support, gcc expects the default C++ headers to be
-+	# in a specific place.
-+	install -d ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include
-+	mv ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/usr/include/c++ \
-+		${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include/
-+
- 	# Fix or remove broken .la files
- 	for i in `find ${SDK_OUTPUT}/${prefix}/${TARGET_SYS} -name \*.la`; do
- 		sed -i 	-e "/^dependency_libs=/s,\([[:space:]']\)${layout_base_libdir},\1${prefix}/${TARGET_SYS}${layout_base_libdir},g" \
-diff --git a/recipes/meta/meta-toolchain-fso.bb b/recipes/meta/meta-toolchain-fso.bb
-index fbfbb0a..4873c42 100644
---- a/recipes/meta/meta-toolchain-fso.bb
-+++ b/recipes/meta/meta-toolchain-fso.bb
-@@ -1,4 +1,4 @@
--PR = "r0"
+         # Install the libiberty header
+diff --git a/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb b/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb
+index f509566..f84a61d 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.14.90.0.6.bb
+@@ -1,2 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
 +PR = "r1"
- 
- TOOLCHAIN_TARGET_TASK = "task-fso-toolchain-target"
- TOOLCHAIN_HOST_TASK = "task-fso-toolchain-host"
-diff --git a/recipes/meta/meta-toolchain-gpe-sbox.bb b/recipes/meta/meta-toolchain-gpe-sbox.bb
-index 74ba038..29e39c5 100644
---- a/recipes/meta/meta-toolchain-gpe-sbox.bb
-+++ b/recipes/meta/meta-toolchain-gpe-sbox.bb
-@@ -1,3 +1,4 @@
+diff --git a/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb b/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb
+index f509566..f84a61d 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.14.90.0.7.bb
+@@ -1,2 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
 +PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-base \
-     task-sdk-sbox \
-@@ -9,4 +10,4 @@ TOOLCHAIN_TARGET_TASK = "\
- 
- require meta-toolchain.bb
- 
--SDK_SUFFIX = "toolchain-gpe-sbox"
-\ No newline at end of file
-+SDK_SUFFIX = "toolchain-gpe-sbox"
-diff --git a/recipes/meta/meta-toolchain-gpe.bb b/recipes/meta/meta-toolchain-gpe.bb
-index bcfb1e1..7b962bf 100644
---- a/recipes/meta/meta-toolchain-gpe.bb
-+++ b/recipes/meta/meta-toolchain-gpe.bb
-@@ -1,3 +1,4 @@
-+PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-base \
-     task-sdk-x11 \
-@@ -6,4 +7,4 @@ TOOLCHAIN_TARGET_TASK = "\
- 
- require meta-toolchain.bb
- 
--SDK_SUFFIX = "toolchain-gpe"
-\ No newline at end of file
-+SDK_SUFFIX = "toolchain-gpe"
-diff --git a/recipes/meta/meta-toolchain-neuros.bb b/recipes/meta/meta-toolchain-neuros.bb
-index f60fbf0..161231a 100644
---- a/recipes/meta/meta-toolchain-neuros.bb
-+++ b/recipes/meta/meta-toolchain-neuros.bb
-@@ -1,6 +1,6 @@
- # Toolchain for neuros-osd devices
- 
--PR = "r3"
-+PR = "r6"
- 
- TOOLCHAIN_HOST_TASK = "task-sdk-host \
-                        qmake2-sdk uicmoc4-sdk"
-diff --git a/recipes/meta/meta-toolchain-openmoko.bb b/recipes/meta/meta-toolchain-openmoko.bb
-index b7e5626..b265615 100644
---- a/recipes/meta/meta-toolchain-openmoko.bb
-+++ b/recipes/meta/meta-toolchain-openmoko.bb
-@@ -1,4 +1,4 @@
+diff --git a/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb b/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb
+index f84a61d..40e9889 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.15.94.0.1.bb
+@@ -1,3 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
 -PR = "r1"
 +PR = "r2"
- 
- TOOLCHAIN_TARGET_TASK = "task-openmoko-toolchain-target"
- TOOLCHAIN_HOST_TASK = "task-openmoko-toolchain-host"
-diff --git a/recipes/meta/meta-toolchain-opie.bb b/recipes/meta/meta-toolchain-opie.bb
-index c72208c..9f4b9ac 100644
---- a/recipes/meta/meta-toolchain-opie.bb
-+++ b/recipes/meta/meta-toolchain-opie.bb
-@@ -1,3 +1,4 @@
+diff --git a/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb b/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb
+index f509566..f84a61d 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.16.91.0.6.bb
+@@ -1,2 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
 +PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-base \
-     task-sdk-opie"
-diff --git a/recipes/meta/meta-toolchain-sbox.bb b/recipes/meta/meta-toolchain-sbox.bb
-index 1283c59..0138329 100644
---- a/recipes/meta/meta-toolchain-sbox.bb
-+++ b/recipes/meta/meta-toolchain-sbox.bb
-@@ -1,3 +1,4 @@
+diff --git a/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb b/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb
+index 574265c..cde4e42 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.16.91.0.7.bb
+@@ -1,3 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
+-PR = "r4"
++PR = "r5"
+diff --git a/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb b/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb
+index 574265c..cde4e42 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.17.50.0.12.bb
+@@ -1,3 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
+-PR = "r4"
++PR = "r5"
+diff --git a/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb b/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb
+index 574265c..cde4e42 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.18.50.0.7.bb
+@@ -1,3 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
+-PR = "r4"
++PR = "r5"
+diff --git a/recipes/binutils/binutils-cross-sdk_2.18.bb b/recipes/binutils/binutils-cross-sdk_2.18.bb
+index 574265c..cde4e42 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.18.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.18.bb
+@@ -1,3 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
+-PR = "r4"
++PR = "r5"
+diff --git a/recipes/binutils/binutils-cross-sdk_2.19.1.bb b/recipes/binutils/binutils-cross-sdk_2.19.1.bb
+index 76dff54..f84a61d 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.19.1.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.19.1.bb
+@@ -1,3 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
+-PR = "r0"
 +PR = "r1"
- TOOLCHAIN_TARGET_TASK = "\
-     task-sdk-bare \
-     task-sdk-sbox"
-diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
-index f892d22..b641be1 100644
---- a/recipes/meta/meta-toolchain.bb
-+++ b/recipes/meta/meta-toolchain.bb
-@@ -117,6 +117,12 @@ do_populate_sdk() {
- 	# gcc-cross-sdk get built :( (30/11/07)
- 	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/lib/libgcc_s.so
- 
-+	# With sysroot support, gcc expects the default C++ headers to be
-+	# in a specific place.
-+	install -d ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include
-+	mv ${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/usr/include/c++ \
-+		${SDK_OUTPUT}/${prefix}/${TARGET_SYS}/include/
-+
- 	# Fix or remove broken .la files
- 	for i in `find ${SDK_OUTPUT}/${prefix}/${TARGET_SYS} -name \*.la`; do
- 		sed -i 	-e "/^dependency_libs=/s,\([[:space:]']\)${layout_base_libdir},\1${prefix}/${TARGET_SYS}${layout_base_libdir},g" \
+diff --git a/recipes/binutils/binutils-cross-sdk_2.19.bb b/recipes/binutils/binutils-cross-sdk_2.19.bb
+index 76dff54..f84a61d 100644
+--- a/recipes/binutils/binutils-cross-sdk_2.19.bb
++++ b/recipes/binutils/binutils-cross-sdk_2.19.bb
+@@ -1,3 +1,3 @@
+ require binutils_${PV}.bb
+ require binutils-cross-sdk.inc
+-PR = "r0"
++PR = "r1"
+diff --git a/recipes/binutils/binutils-cross-sdk_cvs.bb b/recipes/binutils/binutils-cross-sdk_cvs.bb
+index 6886255..94d2704 100644
+--- a/recipes/binutils/binutils-cross-sdk_cvs.bb
++++ b/recipes/binutils/binutils-cross-sdk_cvs.bb
+@@ -1,4 +1,4 @@
+ require binutils_cvs.bb
+ require binutils-cross-sdk.inc
+-PR = "r4"
+-FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-cvs"
++PR = "r5"
++FILESPATHPKG .= ":binutils-cvs"
 -- 
 1.5.6.3
 
