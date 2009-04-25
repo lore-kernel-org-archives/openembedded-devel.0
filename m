@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LxhDH-0004lt-53
-	for openembedded-devel@openembedded.org; Sat, 25 Apr 2009 14:42:35 +0200
-Received: (qmail 2888 invoked by uid 1003); 25 Apr 2009 12:37:42 -0000
+	(envelope-from <philip@balister.org>) id 1Lxi46-0003D0-4K
+	for openembedded-devel@openembedded.org; Sat, 25 Apr 2009 15:37:10 +0200
+Received: (qmail 23566 invoked by uid 1003); 25 Apr 2009 13:32:17 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 25 Apr 2009 12:37:42 -0000
-Message-ID: <49F30414.8070305@balister.org>
-Date: Sat, 25 Apr 2009 08:37:40 -0400
+	by mail.geekisp.com with SMTP; 25 Apr 2009 13:32:17 -0000
+Message-ID: <49F310E0.6030909@balister.org>
+Date: Sat, 25 Apr 2009 09:32:16 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20090424162257.54FFC1880DC@amethyst.openembedded.net>
-	<49F1EFAD.30800@bolloretelecom.eu>
-In-Reply-To: <49F1EFAD.30800@bolloretelecom.eu>
-Subject: =?UTF-8?B?UmU6IFtvZS1jb21taXRzXSBKZXJlbXkgTGFpbsOpIDogcXQ0LmluYzogYWRkIHRyYW5zbGF0aW9uIHBhY2thZ2VzIHRvIHRoZSBkeW5hbWljIGxpc3Q=?=
+References: <20090425075933.E6E18188456@amethyst.openembedded.net>
+	<200904251304.17624.mickey@vanille-media.de>
+In-Reply-To: <200904251304.17624.mickey@vanille-media.de>
+Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the new SONAMEs; move to autosplitting"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,36 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Apr 2009 12:42:35 -0000
-X-Groupsio-MsgNum: 9777
+X-List-Received-Date: Sat, 25 Apr 2009 13:37:10 -0000
+X-Groupsio-MsgNum: 9778
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms070203030504040101030907"
+	micalg=sha1; boundary="------------ms070200010903030802090402"
 
---------------ms070203030504040101030907
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+--------------ms070200010903030802090402
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Jeremy Lain=C3=A9 wrote:
-> I have applied your patch but I don't seem to be able to change the pat=
-ch's status to
-> "Applied" in patchwork, no idea why..
+Michael 'Mickey' Lauer wrote:
+> I have net seen you getting a majority for this revert :(
 
-Basically, I need to mark your patchwork account as an admin so you can=20
-make the change.
+I did not ack it outright because I was hoping we could have resolved 
+the upgradability issue first, without turning this into you versus Koen 
+again. Both Graeme and I have expressed concern that the commits in 
+question should be reviewed.
 
-BUT, the patchwork admin interface tthrows an error when I try to edit=20
-an account when the username contains "foreign" characters. Do you mind=20
-creating an account without the accented characters?
-
-If you create an account and need to change a patch state drop me a note =
-
-with the account name. I do go through and update the ones I recognize=20
-from time to time,
+There are a lot of people using OE, with divergent goals. Some people 
+use it for developing software and do not need package upgrade paths, 
+others are maintaining distros for people that do use the upgrade paths. 
+People need to be sensitive to others needs when deleting "old" recipes, 
+breaking upgraded paths, etc.
 
 Philip
 
-
---------------ms070203030504040101030907
+--------------ms070200010903030802090402
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -109,18 +105,18 @@ HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
 rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQyNTEy
-Mzc0MVowIwYJKoZIhvcNAQkEMRYEFPIksTzIopNda116PViPnr+x057XMFIGCSqGSIb3DQEJDzFF
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDQyNTEz
+MzIxNlowIwYJKoZIhvcNAQkEMRYEFNc6pPlt1O3iGhQMN7EjLOn3HzuAMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQC/y6TBRRyEfQP+koiQz3K294kW2AsLj6h0d78mwhUlI4XAnmpY
-WtMm1nP7Ilbw+HvyaoC4GXsrPV7zd93qCQImvIuztgrNoN4NV63jtNEjMTQg+GbzbKuaJlutbkQs
-UnYAoOJ+MwBIVBXMhYMT6Or2GgXs3Kh9zcY2i6BFkNZH+iRYmn3TUK2oTqBaJvYogAbMGCOfCFG+
-HBz67LG4UMQfVM7m4YuGgbJE05R8NF/u67uNTZsLerH2HSwHIUOAjGCwAOEuJJXhI4njq9ZoZNUr
-pSA/aZYvh43uCvC8WCT4zxfMAlxyJZdr4eG58Cfd+vCEKiOkSSZq/T/CY+4BXnlgAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQAXxHclzWOwdKCOIB7TlH1FvgXYrdPevgi+CO6bIb25x0RmfJSr
+gZiyPA6y+8Cu8eN69eelX6Xb2ZfsFiECXmOwrPMHoLX1cKqzsbIsalOl6mXDAWuxMRI6dMfKCPma
+ibMzuGDnNnsNvNb+6OiPx0nseZFF/TFYlOK+34KKI6LqT7bY8lmXu2cxsL2eCjwymOl7CEonugC0
+isJbGADjfRUIDHv8mhBDsTtjkc2gYWP3w/Mz/rlEWN5xdlhfYaIINRIMJ/Hh/y4Fe4IiCxpUu4Mj
+8Fgno/rHBslvdbbnnTfhlR5d8WyqInxiQGCKw5MdVERfWALNEOWyDUyCTI9zHF/PAAAAAAAA
 
---------------ms070203030504040101030907--
+--------------ms070200010903030802090402--
