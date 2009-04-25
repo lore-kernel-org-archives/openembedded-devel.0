@@ -1,24 +1,40 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LxnsX-0003JE-Le
+	(envelope-from <otavio.salvador@gmail.com>) id 1Lxo8q-0003hG-GH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Apr 2009 21:49:39 +0200
-Received: from andromeda.vanille.de (e180133179.adsl.alicedsl.de
-	[85.180.133.179])
-	by drlauer-research.com (Postfix) with ESMTP id A350E584A0F
+	Sat, 25 Apr 2009 22:06:28 +0200
+Received: by an-out-0708.google.com with SMTP id b6so1054448ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Apr 2009 22:13:51 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Apr 2009 21:44:45 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
+	Sat, 25 Apr 2009 13:01:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=JxuIglVLmYWGQmaJeDxADCdjJB5l7g0I54BvFRU5PVo=;
+	b=iHju4gLxGZjNX6Rda693QtaqBlNu1DFN+rFLrcqoayBLPs9Ymln2C54Yy360fl2OWX
+	O9OTI8nFW7FV0v/o3ldNZjp36UhRI3rRg3h5ImUNOXHfXHgUM2YRzKKrYmyzx9tyIYv9
+	iegCiP76Wjr7zdvqoGwaSVCgYaQZv952rbW4s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=i08HjwvU0CT7yjfk/xFcQnlBcySqoKnVru/GwlMh8/D+87loSNEp4ytf1oLoFQqCNs
+	shvHhfkFORY+2kLES+xlV2T6+8mSxR56DdBm/bXQAu6vUnN4Ddaqm1WDJZfb7qq8u0zE
+	y2es2andHJd6+GGqlvPL8uxTWaKKeEmXocl2Q=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.213.18 with SMTP id l18mr5476967ang.59.1240689696117; Sat, 
+	25 Apr 2009 13:01:36 -0700 (PDT)
+In-Reply-To: <200904252144.45513.mickey@vanille-media.de>
 References: <20090425075933.E6E18188456@amethyst.openembedded.net>
 	<200904252034.35801.mickey@vanille-media.de>
 	<49F35A2B.7070907@xora.org.uk>
-In-Reply-To: <49F35A2B.7070907@xora.org.uk>
-MIME-Version: 1.0
-Message-Id: <200904252144.45513.mickey@vanille-media.de>
+	<200904252144.45513.mickey@vanille-media.de>
+Date: Sat, 25 Apr 2009 17:01:36 -0300
+X-Google-Sender-Auth: e32df9a42cbc8f02
+Message-ID: <be7a9f3d0904251301l19094360s2d9d7df2666290da@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the new SONAMEs; move to autosplitting"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,53 +49,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Apr 2009 19:49:46 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
+X-List-Received-Date: Sat, 25 Apr 2009 20:06:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Saturday 25 April 2009 20:44:59 Graeme Gregory wrote:
-> Michael 'Mickey' Lauer wrote:
-> > On Saturday 25 April 2009 20:17:22 Otavio Salvador wrote:
-> >> This all is not a justification to break the whole World at dev. dev
-> >> will be the basis of next stable, and even more, it is the source of
-> >> changes for stable. So if we mess it up we'll end up with an very
-> >> difficult to maintain stable branch and an unusable dev.
-> >
-> > Yes, and I agree with all that, however there is the need to balance
-> > between breaking everything and letting everything through. If -- like it
-> > is happening right now -- people are paranoid about upgrade paths, then
-> > .dev moves to something where no actual development happens.
-> >
-> > If you want to move forward, you will have to allow breakage now and
-> > then. This is the way with all projects. If you don't allow that, people
-> > will move elsewhere with their contributions and .dev will get stale
-> > rather than stable.
->
-> In this case was it actually necessary to change the names?
+Hello Mickey,
 
-Yes. Upstream changed their SONAME in a freaky way, hence we needed to catch 
-up.
+On Sat, Apr 25, 2009 at 4:44 PM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+> This solution has now been reverted for the sake of the upgrade path. And just
+> for the records, the technical issue wasn't the reason for me leaving the OE
+> core team and resigning from all duties -- it was the way how this situation
+> was handled. Again the core team pretty much stood watching in apathy and let
+> the most vocal decide on his own, letting him carry his own way again.
 
-> I'm afraid I try and ignore E stuff as much as possible so I am totally
-> unclear about its state of development.
+Are you being serious? Are you leaving OE? you must be joking.
 
-All was clear and calm until last week. It took Angus two days to come up with 
-a solution in MS5.5 were E-Wm was starting again and everything necessary was 
-installed in the image (RRECOMMENDS and friends...). His solution involved 
-turning off the debian renaming for each and every package -- a solution that 
-works fine but that was unacceptable for me in .dev -- hence I went forward and 
-worked on a better solution that involved keeping debian naming and even 
-removed the verbosity in ecore.inc.
-
-This solution has now been reverted for the sake of the upgrade path. And just 
-for the records, the technical issue wasn't the reason for me leaving the OE 
-core team and resigning from all duties -- it was the way how this situation 
-was handled. Again the core team pretty much stood watching in apathy and let 
-the most vocal decide on his own, letting him carry his own way again.
-
-:M:
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
