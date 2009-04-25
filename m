@@ -1,25 +1,24 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1LxoK2-00042O-HA
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Apr 2009 22:18:02 +0200
-Received: from andromeda.vanille.de (e180133179.adsl.alicedsl.de
-	[85.180.133.179])
-	by drlauer-research.com (Postfix) with ESMTP id D5C6358417D
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Apr 2009 22:42:16 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LxolB-00025F-1l
+	for openembedded-devel@openembedded.org; Sat, 25 Apr 2009 22:46:05 +0200
+Received: (qmail 4801 invoked by uid 813007); 25 Apr 2009 20:41:12 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 25 Apr 2009 20:41:12 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Apr 2009 22:13:10 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
-References: <20090425075933.E6E18188456@amethyst.openembedded.net>
-	<200904252144.45513.mickey@vanille-media.de>
-	<be7a9f3d0904251301l19094360s2d9d7df2666290da@mail.gmail.com>
-In-Reply-To: <be7a9f3d0904251301l19094360s2d9d7df2666290da@mail.gmail.com>
+Date: Sat, 25 Apr 2009 22:40:58 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <gsst4a$cvj$1@ger.gmane.org>
+	<20090424193245.GD15489@smtp.west.cox.net>
+	<gst5bt$76o$1@ger.gmane.org>
+In-Reply-To: <gst5bt$76o$1@ger.gmane.org>
 MIME-Version: 1.0
-Message-Id: <200904252213.10616.mickey@vanille-media.de>
-Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the new SONAMEs; move to autosplitting"
+Message-Id: <200904252240.59120.marcin@juszkiewicz.com.pl>
+Subject: Re: reverting some csets that kill package upgrade paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,35 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Apr 2009 20:18:02 -0000
+X-List-Received-Date: Sat, 25 Apr 2009 20:46:05 -0000
 Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Saturday 25 April 2009 22:01:36 Otavio Salvador wrote:
-> Hello Mickey,
->
-> On Sat, Apr 25, 2009 at 4:44 PM, Michael 'Mickey' Lauer
->
-> <mickey@vanille-media.de> wrote:
-> > This solution has now been reverted for the sake of the upgrade path. And
-> > just for the records, the technical issue wasn't the reason for me
-> > leaving the OE core team and resigning from all duties -- it was the way
-> > how this situation was handled. Again the core team pretty much stood
-> > watching in apathy and let the most vocal decide on his own, letting him
-> > carry his own way again.
->
-> Are you being serious? Are you leaving OE? you must be joking.
+Dnia pi=C4=85tek, 24 kwietnia 2009 o 21:53:33 Koen Kooi napisa=C5=82(a):
+> And why is the spellcheck button next to the send button in
+> thunderbird? I've already sent 3 bogus mails today because my motoric
+> skills suffer from a lack of coffee
 
-Unfortunately not. I'm seriously pissed off this time -- which is quite an 
-achievement considering my general thick skin. The lack of support from the so 
-called "core team" was just too much. See also
+RMB on toolbar and you can edit that toolbar to have them on different=20
+sides of toolbar...
 
-http://www.vanille-media.de/site/index.php/2009/04/25/resigning-from-oe-core-
-team/
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-:M:
 
 
 
