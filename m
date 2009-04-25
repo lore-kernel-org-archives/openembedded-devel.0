@@ -1,24 +1,21 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [216.145.245.199] (helo=mx03.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lxore-0002HW-Pa
-	for openembedded-devel@openembedded.org; Sat, 25 Apr 2009 22:52:46 +0200
-Received: (qmail 10249 invoked by uid 813007); 25 Apr 2009 20:47:54 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 25 Apr 2009 20:47:54 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Apr 2009 22:47:40 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <20090425075933.E6E18188456@amethyst.openembedded.net>
-	<49F35A2B.7070907@xora.org.uk>
-	<200904252144.45513.mickey@vanille-media.de>
-In-Reply-To: <200904252144.45513.mickey@vanille-media.de>
+	(envelope-from <mwester@dls.net>) id 1Lxp4h-0002hW-NI
+	for openembedded-devel@openembedded.org; Sat, 25 Apr 2009 23:06:15 +0200
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx03.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1Lxozy-0000cP-Rk
+	for openembedded-devel@openembedded.org; Sat, 25 Apr 2009 16:01:22 -0500
+Message-ID: <49F37A22.4050003@dls.net>
+Date: Sat, 25 Apr 2009 16:01:22 -0500
+From: "Mike (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Message-Id: <200904252247.40760.marcin@juszkiewicz.com.pl>
-Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the new SONAMEs; move to autosplitting"
+To: openembedded-devel@openembedded.org
+References: <20090423153754.GW17629@smtp.west.cox.net>
+In-Reply-To: <20090423153754.GW17629@smtp.west.cox.net>
+Subject: Re: [RFC][PATCH] Make initscripts banner stop trying to be smart
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,36 +29,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Apr 2009 20:52:47 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 25 Apr 2009 21:06:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 25 kwietnia 2009 o 21:44:45 Michael 'Mickey' Lauer=20
-napisa=C5=82(a):
-> This solution has now been reverted for the sake of the upgrade path.
-> And just for the records, the technical issue wasn't the reason for
-> me leaving the OE core team and resigning from all duties -- it was
-> the way how this situation was handled. Again the core team pretty
-> much stood watching in apathy and let the most vocal decide on his
-> own, letting him carry his own way again.
+Tom Rini wrote:
+> I ran into this on my boards that start out with the really minimal
+> (console and null only) set of dev nodes prior to udev running.  The
+> banner script looks around for what might be the vtmaster (aka what's
+> got console) to say that we're booting.  But that's where things go by
+> default anyhow.  This would also let slugos use the normal version, if
+> they want.
+> 
+> Signed-off-by: Tom Rini <trini@embeddedalley.com>
 
-And the whole 'fun' happened during Friday evening and Saturday when=20
-some members of so called 'core team' are not reading mails at all. Calm=20
-down Mickeyl - it is not worth your nerves.
+Acked-by: Mike Westerhof <mwester@dls.net>
 
-It is 22:46 here, normally I would be sleeping (because I have no idea=20
-will my daughter wake me up during night or not) but today I saw=20
-Mickeyl's resignation mail on my cellphone and desided to check what is=20
-going on.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Yes, SlugOS will happily return to using the normal version. :)
 
 
+> diff --git a/recipes/initscripts/initscripts-1.0/banner b/recipes/initscripts/initscripts-1.0/banner
+> index 0349ce1..4e69c29 100644
+> --- a/recipes/initscripts/initscripts-1.0/banner
+> +++ b/recipes/initscripts/initscripts-1.0/banner
+> @@ -1,17 +1,3 @@
+>  #!/bin/sh
+>  
+> -if [ ! -e /dev/tty ]; then
+> -    /bin/mknod -m 0666 /dev/tty c 5 0
+> -fi
+> -
+> -if ( > /dev/tty0 ) 2>/dev/null; then
+> -    vtmaster=/dev/tty0
+> -elif ( > /dev/vc/0 ) 2>/dev/null; then
+> -    vtmaster=/dev/vc/0
+> -elif ( > /dev/console ) 2>/dev/null; then
+> -    vtmaster=/dev/console
+> -else
+> -    vtmaster=/dev/null
+> -fi
+> -echo > $vtmaster
+> -echo "Please wait: booting..." > $vtmaster
+> +echo "Please wait: booting..."
+> diff --git a/recipes/initscripts/initscripts_1.0.bb b/recipes/initscripts/initscripts_1.0.bb
+> index cbcfec5..6642144 100644
+> --- a/recipes/initscripts/initscripts_1.0.bb
+> +++ b/recipes/initscripts/initscripts_1.0.bb
+> @@ -4,7 +4,7 @@ PRIORITY = "required"
+>  DEPENDS = "makedevs"
+>  RDEPENDS = "makedevs"
+>  LICENSE = "GPL"
+> -PR = "r114"
+> +PR = "r115"
+>  
+>  SRC_URI = "file://functions \
+>             file://halt \
+> 
 
 
