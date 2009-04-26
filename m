@@ -1,28 +1,22 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [202.4.237.240] (helo=kirsty.vergenet.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Lxt6U-0002T8-8l
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Apr 2009 03:24:22 +0200
-Received: by ewy20 with SMTP id 20so1618912ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Apr 2009 18:19:26 -0700 (PDT)
-Received: by 10.210.115.17 with SMTP id n17mr962552ebc.81.1240708766704;
-	Sat, 25 Apr 2009 18:19:26 -0700 (PDT)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id 24sm4100955eyx.43.2009.04.25.18.19.23
-	(version=SSLv3 cipher=RC4-MD5); Sat, 25 Apr 2009 18:19:26 -0700 (PDT)
-Message-ID: <49F3B693.6050700@xora.org.uk>
-Date: Sun, 26 Apr 2009 02:19:15 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	(envelope-from <raster@vergenet.net>) id 1LxtvR-0003kN-PT
+	for openembedded-devel@openembedded.org; Sun, 26 Apr 2009 04:17:02 +0200
+Received: by kirsty.vergenet.net (Postfix, from userid 1001)
+	id A514624066; Sun, 26 Apr 2009 12:12:06 +1000 (EST)
+Date: Sun, 26 Apr 2009 11:53:00 +1000
+From: Carsten Haitzler (The Rasterman) <raster@rasterman.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20090425075933.E6E18188456@amethyst.openembedded.net>	<49F35A2B.7070907@xora.org.uk>	<200904252144.45513.mickey@vanille-media.de>
-	<200904252247.40760.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200904252247.40760.marcin@juszkiewicz.com.pl>
-X-Enigmail-Version: 0.95.0
-Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the new SONAMEs; move to autosplitting"
+Message-Id: <20090426115300.0d2df2b2.raster@rasterman.com>
+In-Reply-To: <gsst4a$cvj$1@ger.gmane.org>
+References: <gsst4a$cvj$1@ger.gmane.org>
+Organization: You expect me to be organized?
+X-Mailer: Sylpheed 2.5.0 (GTK+ 2.14.4; i486-pc-linux-gnu)
+X-Pants: on
+X-Cluestick: Get jiggy with it!
+Mime-Version: 1.0
+Cc: openembedded-devel@openembedded.org, Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: reverting some csets that kill package upgrade paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,42 +30,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Apr 2009 01:24:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 26 Apr 2009 02:17:02 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz wrote:
-> Dnia sobota, 25 kwietnia 2009 o 21:44:45 Michael 'Mickey' Lauer 
-> napisał(a):
->   
->> This solution has now been reverted for the sake of the upgrade path.
->> And just for the records, the technical issue wasn't the reason for
->> me leaving the OE core team and resigning from all duties -- it was
->> the way how this situation was handled. Again the core team pretty
->> much stood watching in apathy and let the most vocal decide on his
->> own, letting him carry his own way again.
->>     
->
-> And the whole 'fun' happened during Friday evening and Saturday when 
-> some members of so called 'core team' are not reading mails at all. Calm 
-> down Mickeyl - it is not worth your nerves.
->
-> It is 22:46 here, normally I would be sleeping (because I have no idea 
-> will my daughter wake me up during night or not) but today I saw 
-> Mickeyl's resignation mail on my cellphone and desided to check what is 
-> going on.
->
->   
-I would kind of agree with this sentiment. For the past 3 days I have
-been basically too drunk to enter into sensible discussion of these changes.
+On Fri, 24 Apr 2009 19:32:57 +0200 Koen Kooi <k.kooi@student.utwente.nl> said:
 
-And for the record I am also drunk tonight :-) Its taken a lot of work
-to type this :-)
+here's my take - koen's original change was pretty much good - it just adapted
+to the naming scheme packaging the right stuff in the right place. linbker and
+ld.so seem to happily cope with the naming scheme and for us it means less
+"breakage" as we have very explicit namings of .so's between snapshots - on oe
+and purely package managed distros this doesn't matter that much but for a lot
+of people who compile AND install from source (from tarballs or svn) it will
+mean much more stability as things link with what they were meant to link with
+and not "whatever is there at the time".
 
-Can we agree to leave the earth shattering announcement to monday
-mornings when I'm normally more sober?
+this is meant to bring more stability during development as we break api's and
+so on. a simple adapting to it with FILES_* = ... stuff works just fine and
+probably is a good way to go.
 
-Graeme
+> Hi,
+> 
+> Recently the e17 people made a change to how libtool names their 
+> libraries by poking in some magic string (ver-pre-svn-00) into SONAME. 
+> This has some implications for OE, namely that you get the old *and* new 
+> lib in your rootfs. There was one bug that killed everything at runtime:
+> 
+> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=1496aea759adb716453d0fbf85795a5a6e914484
+> 
+> So after that cset you'd get a completely working rootfs again with e17 
+> stuff.
+> 
+> Today a few csets have been pushed that break things horribly:
+> 
+> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=6898f8ca089d35109b3652d640ebb907d8115736
+> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=8101ad8e1229b3b9f8aa0be0fdc262b5283034d0
+> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=80c85e0af3865710a189ba536022d326fa996d26
+> 
+> Let's take a look at the generated packages:
+> 
+> before: libecore-evas-ver-pre-svn-00-0_0.9.9.050+svnr40247-r3.1_armv7a.ipk
+> after: libecore-ver-pre-svn-00-lib-evas_0.9.9.060+svnr40247-r3.1_armv7a.ipk
+> 
+> So suddenly the library packages (or plugin packages, but no difference 
+> in this case) have a new name, but don't set RPROVIDES or RREPLACES to 
+> the old packages containing *the same files*. This means that 'opkg 
+> install <foo>' or 'opkg upgrade' doesn't work anymore. It will abort 
+> saying to package <foo> wants to overwrite files belonging to <bar>. 
+> Depending on the way you build your images in OE, your build will break.
+> 
+> My position is that breaking upgrade patch unacceptable without prior 
+> notice and that the above 3 csets get reverted ASAP.
+> The changes in question are not intrinsically bad, and the autosplitting 
+> is way better than manually poking at FILES_foo, but right now they 
+> break way too much at runtime.
+> 
+> regards,
+> 
+> Koen
+> 
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+
+
+-- 
+------------- Codito, ergo sum - "I code, therefore I am" --------------
+The Rasterman (Carsten Haitzler)    raster@rasterman.com
 
 
 
