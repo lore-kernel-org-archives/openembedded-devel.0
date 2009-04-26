@@ -1,31 +1,33 @@
 Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hariseldon78@gmail.com>) id 1Ly6MQ-00074W-8r
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LyDx8-0001QF-6u
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 26 Apr 2009 17:33:42 +0200
-Received: by ewy20 with SMTP id 20so2360677ewy.12
+	Mon, 27 Apr 2009 01:40:06 +0200
+Received: by ewy20 with SMTP id 20so2908914ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Apr 2009 08:28:43 -0700 (PDT)
+	Sun, 26 Apr 2009 16:35:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=GQVGeWP4OI9ikshnCC+5i+WQ4S16FSGLD+1yUu0BDGI=;
-	b=hz2avaDEpbNyVnmzXDje7XSTzkF3W2jDPU2TBPI8cvM+zIrF/iQ/DLAV3HEtKLtgJw
-	LvDmEzaH/xBUCokouEDuXTq8Ck8/WUO05TORztMpoVm3MMa9DTxdG+5SVz8u50iB4n71
-	xcOudA0ywGygszwFddYbwwRDpCt3hF8H2Z75M=
+	h=domainkey-signature:received:received:message-id:date:to:from
+	:subject; bh=5maYHwmkPvTwJ5hNohb5r+7PJReVhxNF1kwetuupTY8=;
+	b=wIl+ht7WG6JWYDAAaUkJTCcu46FDbqj8OEq+WOwbt3uUrRaSoEaChkmHnuTXhBa40H
+	8rXL1LiTl8GMcU8oa85HXPg04L+xst9hE+3bQDvZiOve+xXxz4J/vVbcYISfrUJPzeFP
+	rZsWrOl8YCM3LzuUA9zQZLhO1Ur3AQA6EilP4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Tf4ITl2GbwHTRfrvdmG3gsV3TDBMnapQqM6jBAsSRcYvKgmzKfGUnlVoa5INobbXp8
-	DGEKd0xI942omqjZtGtRXwIh0G+Kk825FUq5aH4aL8MmtJfC0PxkSV/TcVteNqWrYPd4
-	1ro0jTrRzwzGXHp5S161pMrtfbh6HEKXtU0Sw=
-MIME-Version: 1.0
-Received: by 10.216.74.71 with SMTP id w49mr349107wed.135.1240759723094; Sun, 
-	26 Apr 2009 08:28:43 -0700 (PDT)
-Date: Sun, 26 Apr 2009 17:28:43 +0200
-Message-ID: <aee831ab0904260828x1aacfe5fs3e4abeae5814fbc@mail.gmail.com>
-From: roby <hariseldon78@gmail.com>
+	h=message-id:date:to:from:subject;
+	b=wP+gOBd5WRcZjZ0OafI1+RHCPvgOG+UwmhTLhtCEFTD3XUXdzE3v2FDt9tN9alfpU/
+	GCRdJJqBGZzLEUA+YFWA5OV5XqAq0C5W2yXChy20AIRIHZ2xbHUZn6qbvddmTsBECEBx
+	x7XmiKO7wwcuy6zbOFQEnVHwCAdh2L5H22W5c=
+Received: by 10.210.53.1 with SMTP id b1mr5101173eba.48.1240788905094;
+	Sun, 26 Apr 2009 16:35:05 -0700 (PDT)
+Received: from localhost (82-171-51-231.ip.telfort.nl [82.171.51.231])
+	by mx.google.com with ESMTPS id 24sm5528816eyx.53.2009.04.26.16.35.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 26 Apr 2009 16:35:04 -0700 (PDT)
+Message-ID: <49f4efa8.1818d00a.3e97.4971@mx.google.com>
+Date: Sun, 26 Apr 2009 16:35:04 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Subject: zenity package with finger-scroll patch
+From: leon.woestenberg@gmail.com
+Subject: [PATCH] madwifi-ng_r3837: Fix for LDFLAGS / GNU_HASH QA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,162 +41,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Apr 2009 15:33:42 -0000
-X-Groupsio-MsgNum: 9810
-Content-Type: multipart/mixed; boundary=0016e6d7eea68bf43a046876e2ae
+X-List-Received-Date: Sun, 26 Apr 2009 23:40:06 -0000
 
---0016e6d7eea68bf43a046876e2ae
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Submit LDFLAGS variable to make.
+Remove the cleaning of LDFLAGS in the binary Makefiles.
+Unset LDFLAGS for the kernel modules compile.
 
-hello list. i made some changes to the zenity package to get
-finger-scrolling in the --list dialogs. i also wrote a patch to
-disable the doc generation because that broke the build looking for
-gnome-doc-utils on the host side. if somebody could test the build and
-commit them it would be cool..
-the makefile.patch was already committed in the recipes/gnome/zenity
-folder, i resend it for clarity
+Compile tested on powerpc (mpc8313e-rdb).
 
--- 
-roby
+Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
 
---0016e6d7eea68bf43a046876e2ae
-Content-Type: application/octet-stream; name="zenity_2.20.1.bb"
-Content-Disposition: attachment; filename="zenity_2.20.1.bb"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_ftzw75d90
+diff --git a/recipes/madwifi/files/respect-ldflags.patch b/recipes/madwifi/files/respect-ldflags.patch
+new file mode 100644
+index 0000000..1e5e360
+--- /dev/null
++++ b/recipes/madwifi/files/respect-ldflags.patch
+@@ -0,0 +1,39 @@
++Index: madwifi-trunk-r3837-20080802/Makefile
++===================================================================
++--- madwifi-trunk-r3837-20080802.orig/Makefile	2009-04-27 00:34:19.000000000 +0200
+++++ madwifi-trunk-r3837-20080802/Makefile	2009-04-27 00:34:31.000000000 +0200
++@@ -61,7 +61,7 @@
++ 		$(MAKE) -C $$i || exit 1; \
++ 	done
++ else
++-	$(MAKE) -C $(KERNELPATH) SUBDIRS=$(shell pwd) modules
+++	$(MAKE) -C $(KERNELPATH) LDFLAGS= SUBDIRS=$(shell pwd) modules
++ endif
++ 
++ $(addprefix $(obj)/, $(obj-y:/=)): $(TOP)/svnversion.h
++Index: madwifi-trunk-r3837-20080802/tools/Makefile
++===================================================================
++--- madwifi-trunk-r3837-20080802.orig/tools/Makefile	2009-04-27 00:34:19.000000000 +0200
+++++ madwifi-trunk-r3837-20080802/tools/Makefile	2009-04-27 00:34:36.000000000 +0200
++@@ -55,7 +55,7 @@
++ INCS = -I. -I$(HAL) -I$(TOP) -I$(ATH_HAL)
++ CFLAGS = -g -O2 -Wall
++ ALL_CFLAGS = $(CFLAGS) $(INCS)
++-LDFLAGS =
+++#LDFLAGS =
++ 
++ all: all-subdirs $(PROGRAMS)
++ 
++Index: madwifi-trunk-r3837-20080802/tools/ath_info/Makefile
++===================================================================
++--- madwifi-trunk-r3837-20080802.orig/tools/ath_info/Makefile	2009-04-27 00:34:19.000000000 +0200
+++++ madwifi-trunk-r3837-20080802/tools/ath_info/Makefile	2009-04-27 00:34:40.000000000 +0200
++@@ -5,7 +5,7 @@
++ USER_CROSS_COMPILE ?= $(CROSS_COMPILE)
++ CC = $(USER_CROSS_COMPILE)gcc
++ CFLAGS = -g -O2 -W -Wall
++-LDFLAGS =
+++#LDFLAGS =
++ PREFIX = /usr/local
++ BINDIR = $(PREFIX)/bin
++ MANDIR = $(PREFIX)/share/man
+diff --git a/recipes/madwifi/madwifi-ng_r.inc b/recipes/madwifi/madwifi-ng_r.inc
+index 8fc3065..59f8bc5 100644
+--- a/recipes/madwifi/madwifi-ng_r.inc
++++ b/recipes/madwifi/madwifi-ng_r.inc
+@@ -4,7 +4,7 @@ PRIORITY = "optional"
+ LICENSE = "GPL"
+ RDEPENDS = "kernel (${KERNEL_VERSION})"
+ DEPENDS = "virtual/kernel"
+-PR ="r5"
++PR ="r6"
+ 
+ WACKELF_SRC_URI = ""
+ WACKELF_SRC_URI_ixp4xx = " file://20-xscale-VFP-wackelf.patch;patch=1"
+@@ -21,19 +21,19 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
+ inherit module-base
+ 
+-ARCH_efika="powerpc"
+ ARCH_dht-walnut="ppc"
++ARCH_efika="powerpc"
+ ARCH_magicbox="ppc"
++ARCH_mpc8313e-rdb="powerpc"
++ARCH_mpc8315e-rdb="powerpc"
+ ARCH_sequoia="ppc"
+ 
+-EXTRA_OEMAKE = "LDFLAGS= KERNELPATH=${STAGING_KERNEL_DIR} KERNELRELEASE=${KERNEL_VERSION} TOOLPREFIX=${TARGET_PREFIX}"
++EXTRA_OEMAKE = "KERNELPATH=${STAGING_KERNEL_DIR} KERNELRELEASE=${KERNEL_VERSION} TOOLPREFIX=${TARGET_PREFIX}"
+ 
+ EXTRA_OEMAKE_prepend_ixp4xxle = "TARGET=xscale-le-elf "
+ EXTRA_OEMAKE_prepend_ixp4xxbe = "TARGET=xscale-be-elf "
+ 
+-
+ do_compile() {
+-	unset LDFLAGS
+ 	oe_runmake all
+ }
+ 
+@@ -61,3 +61,4 @@ fi
+ PACKAGES += "${PN}-modules ${PN}-tools"
+ FILES_${PN}-modules = "/lib/modules/"
+ FILES_${PN}-tools = "/usr/"
++
+diff --git a/recipes/madwifi/madwifi-ng_r3837-20080802.bb b/recipes/madwifi/madwifi-ng_r3837-20080802.bb
+index bf14c33..d79ff3c 100644
+--- a/recipes/madwifi/madwifi-ng_r3837-20080802.bb
++++ b/recipes/madwifi/madwifi-ng_r3837-20080802.bb
+@@ -12,7 +12,9 @@ require madwifi-ng_r.inc
+ WACKELF_SRC_URI_ixp4xx =          " file://20-xscale-VFP-wackelf-v2.patch;patch=1"
+ WACKELF_SRC_URI_compulab-pxa270 = " file://20-xscale-VFP-wackelf-v2.patch;patch=1"
+ 
++SRC_URI += "file://respect-ldflags.patch;patch=1"
++
+ SRCNAME = "madwifi-trunk"
+ 
+ # PR set after the include, to override what's set in the included file.
+-PR = "r1"
++PR = "r2"
 
-REVTQ1JJUFRJT04gPSAiQSB0b29sIHRvIGRpc3BsYXkgZGlhbG9ncyBmcm9tIHRoZSBjb21tYW5k
-IGxpbmUgYW5kIHNoZWxsIHNjcmlwdHMuIgpIT01FUEFHRSA9ICJodHRwOi8vZnJlc2htZWF0Lm5l
-dC9wcm9qZWN0cy96ZW5pdHkiCkxJQ0VOU0UgPSAiR1BMIgpERVBFTkRTID0gImxpYmdub21lY2Fu
-dmFzIgpTRUNUSU9OID0gImNvbnNvbGUvdXRpbHMiCgpTUkNfVVJJID0gImZ0cDovL2Z0cC5nbm9t
-ZS5vcmcvcHViL2dub21lL3NvdXJjZXMvemVuaXR5LzIuMjAvemVuaXR5LSR7UFZ9LnRhci5iejIg
-XAoJICAgIGZpbGU6Ly9tYWtlZmlsZS5wYXRjaDtwYXRjaD0xIFwKCSAgICBmaWxlOi8vbm8tZ25v
-bWUtZG9jLnBhdGNoO3BhdGNoPTEgXAoJICAgIGZpbGU6Ly9maW5nZXJzY3JvbGwucGF0Y2g7cGF0
-Y2g9MCIKCmluaGVyaXQgYXV0b3Rvb2xzCgpkb19jb25maWd1cmVfcHJlcGVuZCAoKSB7CiAgICBy
-bSAtZiAke1N9L2dub21lLWRvYy11dGlscy5tYWtlCiAgICB0b3VjaCAke1N9L2dub21lLWRvYy11
-dGlscy5tYWtlCn0=
 
---0016e6d7eea68bf43a046876e2ae
-Content-Type: text/x-patch; charset=US-ASCII; name="fingerscroll.patch"
-Content-Disposition: attachment; filename="fingerscroll.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_ftzw8a2f1
-
-ZGlmZiAtLWdpdCBhL3NyYy90cmVlLmMgYi9zcmMvdHJlZS5jCmluZGV4IDZkZDNmNjQuLjMyZTQ4
-MjYgMTAwNjQ0Ci0tLSBhL3NyYy90cmVlLmMKKysrIGIvc3JjL3RyZWUuYwpAQCAtNDYsNiArNDYs
-OSBAQCBzdGF0aWMgZ2Jvb2xlYW4gemVuaXR5X3RyZWVfY29sdW1uX2lzX2hpZGRlbiAoZ2ludCBj
-b2x1bW5faW5kZXgpOwogc3RhdGljIHZvaWQgemVuaXR5X3RyZWVfZGlhbG9nX3Jlc3BvbnNlIChH
-dGtXaWRnZXQgKndpZGdldCwgaW50IHJlc3BvbnNlLCBncG9pbnRlciBkYXRhKTsKIHN0YXRpYyB2
-b2lkIHplbml0eV90cmVlX3Jvd19hY3RpdmF0ZWQgKEd0a1RyZWVWaWV3ICp0cmVlX3ZpZXcsIEd0
-a1RyZWVQYXRoICp0cmVlX3BhdGgsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgR3RrVHJlZVZpZXdDb2x1bW4gKnRyZWVfY29sLCBncG9pbnRlciBkYXRhKTsKK3N0YXRp
-YyB2b2lkIHplbml0eV90cmVlX2RyYWdfc3RhcnQgKEd0a1dpZGdldCAqd2lkZ2V0LCBHZGtFdmVu
-dEJ1dHRvbiAqZXZlbnQsIGdwb2ludGVyIGRhdGEpOworc3RhdGljIHZvaWQgemVuaXR5X3RyZWVf
-ZHJhZyAoR3RrV2lkZ2V0ICp3aWRnZXQsIEdka0V2ZW50TW90aW9uICpldmVudCwgZ3BvaW50ZXIg
-ZGF0YSk7CitzdGF0aWMgdm9pZCB6ZW5pdHlfdHJlZV9kcmFnX3N0b3AgKEd0a1dpZGdldCAqd2lk
-Z2V0LCBHZGtFdmVudEJ1dHRvbiAqZXZlbnQsIGdwb2ludGVyIGRhdGEpOwogCiBzdGF0aWMgZ2Jv
-b2xlYW4KIHplbml0eV90cmVlX2RpYWxvZ191bnRvZ2dsZSAoR3RrVHJlZU1vZGVsICptb2RlbCwg
-R3RrVHJlZVBhdGggKnBhdGgsIEd0a1RyZWVJdGVyICppdGVyLCBncG9pbnRlciBkYXRhKQpAQCAt
-MzUzLDcgKzM1NiwxMiBAQCB6ZW5pdHlfdHJlZSAoWmVuaXR5RGF0YSAqZGF0YSwgWmVuaXR5VHJl
-ZURhdGEgKnRyZWVfZGF0YSkKICAgaWYgKCEodHJlZV9kYXRhLT5yYWRpb2JveCB8fCB0cmVlX2Rh
-dGEtPmNoZWNrYm94KSkgCiAgICAgZ19zaWduYWxfY29ubmVjdCAoR19PQkpFQ1QgKHRyZWVfdmll
-dyksICJyb3ctYWN0aXZhdGVkIiwgCiAgICAgICAgICAgICAgICAgICAgICAgR19DQUxMQkFDSyAo
-emVuaXR5X3RyZWVfcm93X2FjdGl2YXRlZCksIGRhdGEpOwotIAorCisgIC8qIENvbm5lY3QgZHJh
-Zy1kcm9wIHNpZ25hbHMgZm9yIGZpbmdlciBzY3JvbGxpbmcgKi8KKyAgdHJlZV9kYXRhLT5pc19z
-Y3JvbGxpbmc9RkFMU0U7CisgIGdfc2lnbmFsX2Nvbm5lY3QgKEdfT0JKRUNUICh0cmVlX3ZpZXcp
-LCAibW90aW9uLW5vdGlmeS1ldmVudCIsCisgICAgICAgICAgICAgICAgICAgICAgR19DQUxMQkFD
-SyAoemVuaXR5X3RyZWVfZHJhZyksIHRyZWVfZGF0YSk7CisKICAgLyogQ3JlYXRlIGFuIGVtcHR5
-IGxpc3Qgc3RvcmUgKi8KICAgbW9kZWwgPSBnX29iamVjdF9uZXcgKEdUS19UWVBFX0xJU1RfU1RP
-UkUsIE5VTEwpOwogCkBAIC02ODUsMyArNjkzLDU2IEBAIHplbml0eV90cmVlX2V4dHJhY3RfY29s
-dW1uX2luZGV4ZXMgKGNoYXIgKmluZGV4ZXMsIGludCBuX2NvbHVtbnMpCiAKICAgcmV0dXJuIHJl
-c3VsdDsKIH0KK3ZvaWQKK3plbml0eV90cmVlX2RyYWdfc3RhcnQgKEd0a1dpZGdldCAqd2lkZ2V0
-LCBHZGtFdmVudEJ1dHRvbiAqZXZlbnQsIGdwb2ludGVyIGRhdGEpCit7CisJWmVuaXR5VHJlZURh
-dGEgKnplbl9kYXRhPWRhdGE7CisJemVuX2RhdGEtPmlzX3Njcm9sbGluZz1UUlVFOworCXplbl9k
-YXRhLT5zdGFydF9zY3JvbGxfeD1ldmVudC0+eDsKKwl6ZW5fZGF0YS0+c3RhcnRfc2Nyb2xsX3k9
-ZXZlbnQtPnk7CisJCisJR3RrVHJlZVZpZXcgKnRyZWVfdmlldz1HVEtfVFJFRV9WSUVXKHdpZGdl
-dCk7CisJemVuX2RhdGEtPnN0YXJ0X3Njcm9sbF92X2FkanVzdG1lbnQ9CisJCWd0a19hZGp1c3Rt
-ZW50X2dldF92YWx1ZSAoZ3RrX3RyZWVfdmlld19nZXRfdmFkanVzdG1lbnQodHJlZV92aWV3KSk7
-CisJemVuX2RhdGEtPnN0YXJ0X3Njcm9sbF9oX2FkanVzdG1lbnQ9CisJCWd0a19hZGp1c3RtZW50
-X2dldF92YWx1ZSAoZ3RrX3RyZWVfdmlld19nZXRfaGFkanVzdG1lbnQodHJlZV92aWV3KSk7CisJ
-emVuX2RhdGEtPmxhc3Rfc2Nyb2xsX3RpbWU9ZXZlbnQtPnRpbWU7Cit9CisKK3ZvaWQKK3plbml0
-eV90cmVlX2RyYWcgKEd0a1dpZGdldCAqd2lkZ2V0LCBHZGtFdmVudE1vdGlvbiAqZXZlbnQsIGdw
-b2ludGVyIGRhdGEpCit7CisJWmVuaXR5VHJlZURhdGEgKnplbl9kYXRhPWRhdGE7CisKKwlpZiAo
-KGV2ZW50LT5zdGF0ZSAmIEdES19CVVRUT04xX01BU0spICYmIAorCQkJKGV2ZW50LT50aW1lLXpl
-bl9kYXRhLT5sYXN0X3Njcm9sbF90aW1lPjUwKSkKKwl7CisJCWlmICghemVuX2RhdGEtPmlzX3Nj
-cm9sbGluZykKKwkJCXplbml0eV90cmVlX2RyYWdfc3RhcnQod2lkZ2V0LGV2ZW50LGRhdGEpICA7
-IAkKKyAgIAkKKwkJCisJCWdpbnQgZHk9ZXZlbnQtPnktemVuX2RhdGEtPnN0YXJ0X3Njcm9sbF95
-OworCQlnaW50IGR4PWV2ZW50LT54LXplbl9kYXRhLT5zdGFydF9zY3JvbGxfeDsKKwkJCisJCUd0
-a1RyZWVWaWV3ICp0cmVlX3ZpZXc9R1RLX1RSRUVfVklFVyh3aWRnZXQpOworCQlHdGtBZGp1c3Rt
-ZW50ICp2QWRqdXN0bWVudCA9IGd0a190cmVlX3ZpZXdfZ2V0X3ZhZGp1c3RtZW50KHRyZWVfdmll
-dyk7CisJCUd0a0FkanVzdG1lbnQgKmhBZGp1c3RtZW50ID0gZ3RrX3RyZWVfdmlld19nZXRfaGFk
-anVzdG1lbnQodHJlZV92aWV3KTsKKwkJZ3RrX2FkanVzdG1lbnRfc2V0X3ZhbHVlICh2QWRqdXN0
-bWVudCwKKwkJCQkJCUNMQU1QICh6ZW5fZGF0YS0+c3RhcnRfc2Nyb2xsX3ZfYWRqdXN0bWVudC1k
-eSwKKwkJCQkJCQl2QWRqdXN0bWVudC0+bG93ZXIsCisJCQkJCQkJdkFkanVzdG1lbnQtPnVwcGVy
-IC0gdkFkanVzdG1lbnQtPnBhZ2Vfc2l6ZSkpOworCQlndGtfYWRqdXN0bWVudF9zZXRfdmFsdWUg
-KGhBZGp1c3RtZW50LAorCQkJCQkJQ0xBTVAgKHplbl9kYXRhLT5zdGFydF9zY3JvbGxfaF9hZGp1
-c3RtZW50LWR4LAorCQkJCQkJCWhBZGp1c3RtZW50LT5sb3dlciwKKwkJCQkJCQloQWRqdXN0bWVu
-dC0+dXBwZXIgLSBoQWRqdXN0bWVudC0+cGFnZV9zaXplKSk7CisJCXplbl9kYXRhLT5sYXN0X3Nj
-cm9sbF90aW1lPWV2ZW50LT50aW1lOworCX0KKwlpZiAoemVuX2RhdGEtPmlzX3Njcm9sbGluZyAm
-JiAhKGV2ZW50LT5zdGF0ZSAmIEdES19CVVRUT04xX01BU0spKQorCQl6ZW5pdHlfdHJlZV9kcmFn
-X3N0b3Aod2lkZ2V0LGV2ZW50LGRhdGEpOworfQordm9pZAoremVuaXR5X3RyZWVfZHJhZ19zdG9w
-IChHdGtXaWRnZXQgKndpZGdldCwgR2RrRXZlbnRCdXR0b24gKmV2ZW50LCBncG9pbnRlciBkYXRh
-KQoreworCVplbml0eVRyZWVEYXRhICp6ZW5fZGF0YT1kYXRhOworCXplbl9kYXRhLT5pc19zY3Jv
-bGxpbmc9RkFMU0U7Cit9CmRpZmYgLS1naXQgYS9zcmMvemVuaXR5LmggYi9zcmMvemVuaXR5LmgK
-aW5kZXggYWM2YzRmOC4uZDQwZDhkZiAxMDA2NDQKLS0tIGEvc3JjL3plbml0eS5oCisrKyBiL3Ny
-Yy96ZW5pdHkuaApAQCAtMTEzLDYgKzExMywxMiBAQCB0eXBlZGVmIHN0cnVjdCB7CiAgIGdib29s
-ZWFuICAgICAgZWRpdGFibGU7CiAgIGdjaGFyCSAgICAgICAqcHJpbnRfY29sdW1uOwogICBnY2hh
-cgkgICAgICAgKmhpZGVfY29sdW1uOworICBnaW50ICAgICAgICAgIHN0YXJ0X3Njcm9sbF94Owor
-ICBnaW50ICAgICAgICAgIHN0YXJ0X3Njcm9sbF95OworICBnZG91YmxlICAgICAgIHN0YXJ0X3Nj
-cm9sbF92X2FkanVzdG1lbnQ7CisgIGdkb3VibGUgICAgICAgc3RhcnRfc2Nyb2xsX2hfYWRqdXN0
-bWVudDsKKyAgZ2Jvb2xlYW4JaXNfc2Nyb2xsaW5nOworICBndWludDMyCWxhc3Rfc2Nyb2xsX3Rp
-bWU7CiAgIGNvbnN0IGdjaGFyICoqZGF0YTsKIH0gWmVuaXR5VHJlZURhdGE7CiAK
-
---0016e6d7eea68bf43a046876e2ae
-Content-Type: text/x-patch; charset=US-ASCII; name="makefile.patch"
-Content-Disposition: attachment; filename="makefile.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_ftzw8qmt2
-
-ZGlmZiAtYyAtciBwYXRjaGVyX29yaWdpbmFsL3plbml0eS0yLjIwLjEvc3JjL01ha2VmaWxlLmFt
-IHplbml0eS0yLjIwLjEvc3JjL01ha2VmaWxlLmFtCioqKiBwYXRjaGVyX29yaWdpbmFsL3plbml0
-eS0yLjIwLjEvc3JjL01ha2VmaWxlLmFtCU1vbiBOb3YgMjYgMjI6NTc6NDAgMjAwNwotLS0gemVu
-aXR5LTIuMjAuMS9zcmMvTWFrZWZpbGUuYW0JVGh1IEFwciAgMiAwMDozMTozOSAyMDA5CioqKioq
-KioqKioqKioqKgoqKiogMjEsMjcgKioqKgogIAl6ZW5pdHkuaAogIAogIHplbml0eV9DUFBGTEFH
-UyA9IFwKLSAJLUkkKGluY2x1ZGVkaXIpCQkJCQlcCiAgCS1ER05PTUVMT0NBTEVESVI9XCIiJChk
-YXRhZGlyKS9sb2NhbGUiXCIJXAogIAktRFpFTklUWV9EQVRBRElSPVwiIiQocGtnZGF0YWRpciki
-XCIJCVwKICAJJChBTV9DUFBGTEFHUykKLS0tIDIxLDI2IC0tLS0K
-
---0016e6d7eea68bf43a046876e2ae
-Content-Type: text/x-patch; charset=US-ASCII; name="no-gnome-doc.patch"
-Content-Disposition: attachment; filename="no-gnome-doc.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_ftzw8xi83
-
-KioqIHBhdGNoZXJfb3JpZ2luYWwvemVuaXR5LTIuMjAuMS9jb25maWd1cmUuaW4JMjAwNy0xMS0y
-NiAyMjo1Nzo0NS4wMDAwMDAwMDAgKzAxMDAKLS0tIHplbml0eS0yLjIwLjEvY29uZmlndXJlLmlu
-CTIwMDktMDQtMTAgMjM6MDg6MTEuMDAwMDAwMDAwICswMjAwCioqKioqKioqKioqKioqKgoqKiog
-OCwxNCAqKioqCiAgQU1fSU5JVF9BVVRPTUFLRShbMS45IGZvcmVpZ24gZGlzdC1iemlwMiBuby1k
-aXN0LWd6aXBdKQogIAogIEdOT01FX0NPTU1PTl9JTklUCiEgR05PTUVfRE9DX0lOSVQKICAKICBB
-TV9NQUlOVEFJTkVSX01PREUKICAKLS0tIDgsMTQgLS0tLQogIEFNX0lOSVRfQVVUT01BS0UoWzEu
-OSBmb3JlaWduIGRpc3QtYnppcDIgbm8tZGlzdC1nemlwXSkKICAKICBHTk9NRV9DT01NT05fSU5J
-VAohICNHTk9NRV9ET0NfSU5JVAogIAogIEFNX01BSU5UQUlORVJfTU9ERQogIAoqKiogcGF0Y2hl
-cl9vcmlnaW5hbC96ZW5pdHktMi4yMC4xL01ha2VmaWxlLmFtCTIwMDctMTEtMjYgMjI6NTc6NDUu
-MDAwMDAwMDAwICswMTAwCi0tLSB6ZW5pdHktMi4yMC4xL01ha2VmaWxlLmFtCTIwMDktMDQtMTAg
-MjM6MzA6MjAuMDAwMDAwMDAwICswMjAwCioqKioqKioqKioqKioqKgoqKiogMSw4ICoqKioKICBT
-VUJESVJTID0gXAogIAlzcmMJXAogIAlwbwlcCiEgCWRhdGEJXAohIAloZWxwCiAgCiAgRVhUUkFf
-RElTVCA9IFwKICAJYXV0b2dlbi5zaAkJXAotLS0gMSw4IC0tLS0KICBTVUJESVJTID0gXAogIAlz
-cmMJXAogIAlwbwlcCiEgCWRhdGEJCiEgIwloZWxwCiAgCiAgRVhUUkFfRElTVCA9IFwKICAJYXV0
-b2dlbi5zaAkJXAoqKioqKioqKioqKioqKioKKioqIDE2LDI4ICoqKioKICAJQ2hhbmdlTG9nCQlc
-CiAgCU5FV1MJCQlcCiAgCVJFQURNRQkJCVwKISAJQVVUSE9SUwkJCVwKISAJZ25vbWUtZG9jLXV0
-aWxzLm1ha2UKICAKICBESVNUQ0xFQU5GSUxFUyA9ICAgICAgICAgICAgICAgIFwKICAJaW50bHRv
-b2wtZXh0cmFjdCAgICAgICAgXAogIAlpbnRsdG9vbC1tZXJnZSAgICAgICAgICBcCiEgCWludGx0
-b29sLXVwZGF0ZQkJXAohIAlnbm9tZS1kb2MtdXRpbHMubWFrZQogIAogIERJU1RDSEVDS19DT05G
-SUdVUkVfRkxBR1MgPSAtLWRpc2FibGUtc2Nyb2xsa2VlcGVyCi0tLSAxNiwyOCAtLS0tCiAgCUNo
-YW5nZUxvZwkJXAogIAlORVdTCQkJXAogIAlSRUFETUUJCQlcCiEgCUFVVEhPUlMJCQkKISAjCWdu
-b21lLWRvYy11dGlscy5tYWtlCiAgCiAgRElTVENMRUFORklMRVMgPSAgICAgICAgICAgICAgICBc
-CiAgCWludGx0b29sLWV4dHJhY3QgICAgICAgIFwKICAJaW50bHRvb2wtbWVyZ2UgICAgICAgICAg
-XAohIAlpbnRsdG9vbC11cGRhdGUJCQohICMJZ25vbWUtZG9jLXV0aWxzLm1ha2UKICAKICBESVNU
-Q0hFQ0tfQ09ORklHVVJFX0ZMQUdTID0gLS1kaXNhYmxlLXNjcm9sbGtlZXBlcgo=
-
---0016e6d7eea68bf43a046876e2ae--
