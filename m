@@ -1,29 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LyRd2-0005By-G3
-	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 16:16:16 +0200
+	id 1LyRgl-0005IR-Lc
+	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 16:20:08 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LyRY9-0002pn-7z
-	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 14:11:13 +0000
-Received: from iap-pxy-mow1.siemens.ru ([212.248.25.26])
+	id 1LyRbs-0003Ai-BG
+	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 14:15:04 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 27 Apr 2009 14:11:13 +0000
-Received: from dbaryshkov by iap-pxy-mow1.siemens.ru with local (Gmexim 0.1
+	Mon, 27 Apr 2009 14:15:04 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 27 Apr 2009 14:11:13 +0000
+	Mon, 27 Apr 2009 14:15:04 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Mon, 27 Apr 2009 14:10:59 +0000 (UTC)
-Message-ID: <gt4edj$k8f$1@ger.gmane.org>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF77C@hiob.intern.dresearch.de>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 27 Apr 2009 16:14:52 +0200
+Message-ID: <gt4ekt$ba2$1@ger.gmane.org>
+References: <49F59B68.1010208@balister.org>	<69E6C70090A0A14498CC98FAE5E06B6E3CF793@hiob.intern.dresearch.de>
+	<20090427134352.GE18788@smtp.west.cox.net>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: iap-pxy-mow1.siemens.ru
-User-Agent: Pan/0.132 (Waxed in Black)
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090421 Shredder/3.0b3pre
+In-Reply-To: <20090427134352.GE18788@smtp.west.cox.net>
 Sender: news <news@ger.gmane.org>
 Subject: Re: gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -39,60 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 14:16:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 27 Apr 2009 14:20:10 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Sledz, Steffen wrote:
+On 27-04-09 15:43, Tom Rini wrote:
+> On Mon, Apr 27, 2009 at 03:37:25PM +0200, Sledz, Steffen wrote:
+>>>> At the moment we are not able to make a build out of the
+>>>> .dev tree. :(
+>>>
+>>> For what machine and distro?
+>>
+>> hipox and angstrom
+>>
+>> But does this problem really depends on them? I thought it's a problem in the gcc-4.2.4 recipe.
+>
+> It's in all gcc versions, really.
 
-> gcc_4.2.4.bb reports these errors for a few days. Can someone please
-> have a look at it.
-> 
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gcc/usr/bin/arm-angstrom-linux-gnueabi-gcc'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gcc/usr/libexec/gcc/arm-angstrom-linux-gnueabi/4.2.4/collect2'
-> ERROR: QA Issue: non -dev package contains symlink .so: gcc path
-> '/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gcc/usr/lib/gcc/arm-angstrom-linux-gnueabi/4.2.4/libgcc_s.so'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/g++/usr/bin/arm-angstrom-linux-gnueabi-g++'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/g++/usr/libexec/gcc/arm-angstrom-linux-gnueabi/4.2.4/cc1plus'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/cpp/usr/bin/arm-angstrom-linux-gnueabi-cpp'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/cpp/usr/libexec/gcc/arm-angstrom-linux-gnueabi/4.2.4/cc1'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gfortran/usr/bin/arm-angstrom-linux-gnueabi-gfortran'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gfortran/usr/libexec/gcc/arm-angstrom-linux-gnueabi/4.2.4/f951'
-> ERROR: QA Issue: No GNU_HASH in the elf binary:
-> '/home/sledz/oe/tmp.1/work/armv5te-angstrom-linux-gnueabi/gcc-4.2.4-r3/install/gcov/usr/bin/arm-angstrom-linux-gnueabi-gcov'
-> ERROR: QA run found fatal errors. Please consider fixing them. ERROR:
-> Error in executing: /opt/openembedded/recipes/gcc/gcc_4.2.4.bb ERROR:
-> Exception:<type 'exceptions.SystemExit'> Message:1 ERROR: Printing the
-> environment of the function ERROR: Error in executing:
-> /opt/openembedded/recipes/gcc/gcc_4.2.4.bb ERROR: Exception:<type
-> 'exceptions.SystemExit'> Message:1 ERROR: Printing the environment of
-> the function ERROR: Error in executing:
-> /opt/openembedded/recipes/gcc/gcc_4.2.4.bb ERROR: Exception:<type
-> 'exceptions.SystemExit'> Message:1 ERROR: Printing the environment of
-> the function ERROR: Error in executing:
-> /opt/openembedded/recipes/gcc/gcc_4.2.4.bb ERROR: Exception:<type
-> 'exceptions.SystemExit'> Message:1 ERROR: Printing the environment of
-> the function ERROR: Build of /opt/openembedded/recipes/gcc/gcc_4.2.4.bb
-> do_package failed ERROR: Task 1281
-> (/opt/openembedded/recipes/gcc/gcc_4.2.4.bb, do_package) failed ERROR:
-> '/opt/openembedded/recipes/gcc/gcc_4.2.4.bb' failed
-> 
+No, it isn't:
 
-Confirmed here for at91sam9g20-ek and for collie
+NOTE: package gcc-4.3.3-r0: task do_build: completed
 
+Anyway, isn't ldflags.patch supposed to fix missing ldflags?
 
+regards,
 
--- 
-With best wishes
-Dmitry
+Koen
 
 
 
