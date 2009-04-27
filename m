@@ -1,29 +1,23 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LyHV5-0001tr-N9
-	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 05:27:24 +0200
-Received: from fed1rmimpo02.cox.net ([70.169.32.72]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090427032221.HVXM10385.fed1rmmtao107.cox.net@fed1rmimpo02.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Sun, 26 Apr 2009 23:22:21 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo02.cox.net with bizsmtp
-	id kTNL1b00L4dMFYL04TNLnG; Sun, 26 Apr 2009 23:22:20 -0400
-X-Authority-Analysis: v=1.0 c=1 a=KjjrOjXTx8cA:10 a=jExYjHyISV8A:10
-	a=VefabwgEu-H70KupQHwA:9 a=OlPrQzSNfA2SHE_kBvFTsFLy8X0A:4
-X-CM-Score: 0.00
-Date: Sun, 26 Apr 2009 20:22:20 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090427032220.GC18788@smtp.west.cox.net>
-References: <gsst4a$cvj$1@ger.gmane.org> <49F1FCFB.9000205@balister.org>
-	<gst2dn$u4j$1@ger.gmane.org>
-	<20090424193245.GD15489@smtp.west.cox.net>
-	<49F223CA.8020202@balister.org>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LyMZF-0000l3-2P
+	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 10:52:06 +0200
+Received: (qmail 30506 invoked by uid 813007); 27 Apr 2009 08:46:58 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 Apr 2009 08:46:58 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Apr 2009 10:46:29 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <gsst4a$cvj$1@ger.gmane.org>
+	<200904252318.18413.marcin@juszkiewicz.com.pl>
+	<gt19e9$u1e$1@ger.gmane.org>
+In-Reply-To: <gt19e9$u1e$1@ger.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <49F223CA.8020202@balister.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+Message-Id: <200904271046.30672.marcin@juszkiewicz.com.pl>
 Subject: Re: reverting some csets that kill package upgrade paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,33 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 03:27:24 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 27 Apr 2009 08:52:22 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
 
-On Fri, Apr 24, 2009 at 04:40:42PM -0400, Philip Balister wrote:
-> Tom Rini wrote:
->> On Fri, Apr 24, 2009 at 09:03:18PM +0200, Koen Kooi wrote:
->>
->>> Upgrade paths are the foundation of package management, breaking them 
->>> is  stabbing people using your binaries in the eye. Do you want to 
->>> tell the  companies evaluating OE using .dev that they can't use the 
->>> feature  anymore that drew them to OE, namely package management?
->>
->> Red Herring.  No commerical device is going to point to some random feed
->> and just hope things work out fine.  No, they're going to point at their
->> supported feeds with updates they've tested and fixed any bugs that they
->> happened to have found (and pushed back because they're Good Guys).
+Dnia niedziela, 26 kwietnia 2009 o 11:27:36 Koen Kooi napisa=C5=82(a):
+> On 25-04-09 23:18, Marcin Juszkiewicz wrote:
+> >> http://cgit.openembedded.net/cgit.cgi?url=3Dopenembedded/commit/&id=3D
+> >> 8101ad8e1229b3b9f8aa0be0fdc262b5283034d0
+> >
+> > This one looks quite sane.
 >
-> I disagree. Angstrom is usable and depends on stable having sane upgrade  
-> paths as a community supported distro.
+> Maybe if you use debian.bbclass, if you don't -> broken upgrade paths
 
-The key being stable.  If I wasn't clear, a feed based on .dev is most
-certainly random.  A feed for a specific release would hopefully not be
-based on .dev.  A company working with Angstrom is feasible and would be
-what I said :)
+Ah, right - I am too used to debian.bbclass being in use...
 
--- 
-Tom Rini
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
