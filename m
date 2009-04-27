@@ -1,22 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LyV59-0000O7-Rp
-	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 19:57:32 +0200
-Received: (qmail 7197 invoked by uid 813007); 27 Apr 2009 17:52:26 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 27 Apr 2009 17:52:26 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Apr 2009 19:51:49 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <1240854636-20070-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1240854636-20070-1-git-send-email-k.kooi@student.utwente.nl>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LyWm6-0005yF-RE
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Apr 2009 21:45:58 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so75057yxh.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Apr 2009 12:40:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=RmuhkE7mpE1gBT0ztBU6Gt4ltvHz5Z70pP6UEzKgmxA=;
+	b=TKkFqIb94B6WkubRukZ8ZCBA+bHmgSS8pEEfob64QL5FI/eyX8s3hQLgdYXwk4r8nx
+	OjpsTqdJCCm0I29Lb1rrC6Husc/g9aJ4YoKk1Vow85V1lhrVeR1qgYWCC46mKfaPZVtj
+	C/SXo0jG8wHiA2RKBrxeMNWwXPQyRZUlWjv5k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=nboBDZ9/ZbYZ78rEfE672+ziHYC+hYvAiwGDuJSNBJ0cKuknrIxMJH84yJr2edzpKk
+	ELuOTWb1ZZSibrk1n4ORc/tFC7MrP0h4UmPCNYHQhRYwEa5pBUw/xWOwm++2+99RFsen
+	mzamM3i/6gBqm5Aerq5/OWNOXICI6fA2HRPCU=
 MIME-Version: 1.0
-Message-Id: <200904271951.54626.marcin@juszkiewicz.com.pl>
-Subject: Re: [STABLE][PATCH] cherokee: fix init script, daemonize is '-d', not '-b'
+Received: by 10.90.118.8 with SMTP id q8mr7454581agc.40.1240861254084; Mon, 27 
+	Apr 2009 12:40:54 -0700 (PDT)
+Date: Mon, 27 Apr 2009 21:40:53 +0200
+Message-ID: <c384c5ea0904271240p7450829fn26a7a7f6bf6752c3@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	"Denis 'Gnutoo' Carikli" <GNUtoo@no-log.org>
+Subject: TARGET_CC_ARCH += "${LDFLAGS}" ??
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,27 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 17:57:32 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 27 Apr 2009 19:45:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=C5=82ek, 27 kwietnia 2009 o 19:50:36 Koen Kooi napisa=C5=82(=
-a):
-> From: Koen Kooi <koen@openembedded.org>
->
->
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+Hello,
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+I just came across this fix:
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=413cc98aa563c9e6104d1104d5b24987ab9d12f8
 
+which does:
 
++TARGET_CC_ARCH += "${LDFLAGS}"
+
+to fix LDFLAGS QA(GNU-hash).
+
+but doesn't this approach abuse TARGET_CC_ARCH?
+
+Regards,
+-- 
+Leon
 
 
