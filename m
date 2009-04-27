@@ -1,30 +1,18 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LyRkV-0002Ga-JB
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Apr 2009 16:23:59 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 3AD3616DFDC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2009 16:19:29 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id EE20D2A4211
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2009 16:18:56 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1LyRlH-0002Iu-TP
+	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 16:24:48 +0200
+Received: (qmail 6906 invoked from network); 27 Apr 2009 14:19:44 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by  with SMTP; 27 Apr 2009 07:19:44 -0700
+Date: Mon, 27 Apr 2009 07:19:43 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090427141943.GG18788@smtp.west.cox.net>
 MIME-Version: 1.0
-Date: Mon, 27 Apr 2009 16:18:32 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF795@hiob.intern.dresearch.de>
-In-Reply-To: <49EB6F02.1030402@gmail.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] devshell not working with screen remote shell
-Thread-Index: AcnBIRvawu/8hH9dS+S6kPRxfTez0wGIZfHQ
-References: <49EB6F02.1030402@gmail.com>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: devshell not working with screen remote shell
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: [RFC] Bring PREFERRED_LIBC to all distros
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,19 +26,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 14:23:59 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Apr 2009 14:24:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I'm not sure if this problem is solved meanwhile. If so and the solution =
-is interesting for other people please describe it in the FAQ part of =
-the new devshell page in the wiki.
+Hey all.  I've created a new branch, trini/add-libc-overrides which does
+the following:
+- Make every distro declare PREFERRED_LIBC, either outright or
+  overridable.
+- For Angstrom/foonas have DISTROVAR ?= ${PREFERRED_LIBC},
+  PREFERRED_LIBC ?= default
+- Add conf/distro/include/{eglibc,glibc,uclibc}.inc that have:
+  - Add 'glibc' to OVERRIDES for eglibc/glibc and 'uclibc' for
+    uclibc.inc
+  - Default providers.
+  NOTE: ${TARGET_PREFIX} includes ${TARGET_VENDOR} so ...
+- Switch all distros to have:
+  require conf/distro/include/${PREFERED_LIBC}.inc
+  - Clean up distro-specific includes, and sane-toolchain.inc a little
+    bit by removing all of the PREFERRED_PROVIDER stuff it no longer
+    needs.
+- For glibc*.bb older than 2.5, add in some missing RPROVIDES.
 
-<http://wiki.openembedded.net/index.php/Devshell#FAQ>
+That last change was required so that a number of distros would parse
+without trying to build say both glibc_2.3.3 and glibc_2.9 (for
+virtual-libc-dev) when I ran bitbake -g meta-toolchain minimal-image.
 
-Thx,
-Steffen
+The next step, once something like this goes in, would be to change all
+of the overrides that test for uclibc (or glibc) from
+linux/linux-gnueabi vs linux-uclibc/linux-uclibcgnueabi to just
+linux_glibc vs linux_uclibc.
+
+That branch has been tested with bitbake -g meta-toolchain minimal image
+for every distro for nslu2be nslu2le and beagleboard (arm/armeb/newer
+arm) before and after, and the only differences are the stuff that now
+parses thanks to the glibc changes.  I've got a loop going now with
+qemux86 db1200 and mpc8313e-rdb but don't expect any problems.  I'll be
+following up with the patches shortly.
+
+-- 
+Tom Rini
 
 
