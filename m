@@ -1,23 +1,41 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1LyRpY-0002i5-De
-	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 16:29:13 +0200
-Received: (qmail 6932 invoked from network); 27 Apr 2009 14:24:08 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by  with SMTP; 27 Apr 2009 07:24:08 -0700
-Date: Mon, 27 Apr 2009 07:24:08 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090427142408.GL18788@smtp.west.cox.net>
-References: <20090427141943.GG18788@smtp.west.cox.net>
-	<20090427142200.GI18788@smtp.west.cox.net>
-	<20090427142307.GJ18788@smtp.west.cox.net>
-	<20090427142337.GK18788@smtp.west.cox.net>
+Received: from [209.85.132.245] (helo=an-out-0708.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <otavio.salvador@gmail.com>) id 1LyStL-0001hJ-SO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Apr 2009 17:37:12 +0200
+Received: by an-out-0708.google.com with SMTP id b6so1486515ana.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Apr 2009 08:32:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=ZIXeyn36xgoHM2SNf7vn4AqslVjLpmGArNBtT2XJkoQ=;
+	b=PMRocohhHT/exnxs/EyJmC3VJS2kcE3NAWzCFvWuVMeUjvW4ei5tJ0auqQQXM0oQg8
+	QSCJiDvH3AMinhLeafeh85sBJGtfUYXRttbCZD3KAku/jvJ7XE3/h6fIchr+ARUIOHY0
+	RFvBVlROxfZwqJYKvqX4ZwxrimjSA8l/Lioew=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Vh6P3fJyo0p554rfWngwO9/DP+mZjUCX9xcJq/+57N2GgV61vsAP0jkL4xZOADLbl8
+	1Vi5K27F980dpd3GbwS52AmJiIDj+B1xaKTBOLw7vfJw8jU2h9XAVs1CR3hsE9sDyWJK
+	GbHs4AoogaIloYGB1q7QDAnlXYUQ/Zh20C8cI=
 MIME-Version: 1.0
-In-Reply-To: <20090427142337.GK18788@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: [RFC][PATCH] glibc: In various old recipes add RPROVIDES	virtual-libc-dev, bump PR.
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.164.20 with SMTP id m20mr8827048ane.31.1240846328234; Mon, 
+	27 Apr 2009 08:32:08 -0700 (PDT)
+In-Reply-To: <200904271803.49498.khimov@altell.ru>
+References: <200904271340.28227.khimov@altell.ru>
+	<200904271729.33673.khimov@altell.ru>
+	<20090427135030.GF18788@smtp.west.cox.net>
+	<200904271803.49498.khimov@altell.ru>
+Date: Mon, 27 Apr 2009 12:32:08 -0300
+X-Google-Sender-Auth: 62cb0af6506cd52f
+Message-ID: <be7a9f3d0904270832j4832bc6fqcf058fdfc3d8479@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] install-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,285 +49,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 14:29:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 27 Apr 2009 15:37:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
- glibc: In various old recipes add RPROVIDES virtual-libc-dev, bump PR.
- In some cases we also add in 'libc-dev' if nothing was being provided and
- add RDEPENDS += linux-libc-headers-dev if that was missing.
+On Mon, Apr 27, 2009 at 11:03 AM, Roman I Khimov <khimov@altell.ru> wrote:
+> On Monday 27 April 2009 17:50:30 Tom Rini wrote:
+>> We have coreutils-native already, why not use install from that and
+>> stick coreutils-native into default deps?
+>
+> Works fine with me also (guaranteed sane coreutils is very good), it's just a
+> thing that we need to agree upon.
 
----
- recipes/glibc/glibc_2.2.5.bb             |    5 +++--
- recipes/glibc/glibc_2.3.2+cvs20040726.bb |    5 ++++-
- recipes/glibc/glibc_2.3.2.bb             |    5 +++--
- recipes/glibc/glibc_2.3.3+cvs20041128.bb |    5 ++++-
- recipes/glibc/glibc_2.3.3+cvs20050221.bb |    5 ++++-
- recipes/glibc/glibc_2.3.3+cvs20050420.bb |    5 ++++-
- recipes/glibc/glibc_2.3.3.bb             |    5 +++--
- recipes/glibc/glibc_2.3.5+cvs20050627.bb |    6 +++++-
- recipes/glibc/glibc_2.3.6.bb             |    5 ++++-
- recipes/glibc/glibc_2.4.bb               |    3 ++-
- recipes/glibc/glibc_cvs.bb               |    3 ++-
- 11 files changed, 38 insertions(+), 14 deletions(-)
-
-diff --git a/recipes/glibc/glibc_2.2.5.bb b/recipes/glibc/glibc_2.2.5.bb
-index 7cb6681..5b3fbb4 100644
---- a/recipes/glibc/glibc_2.2.5.bb
-+++ b/recipes/glibc/glibc_2.2.5.bb
-@@ -1,7 +1,7 @@
- require glibc.inc
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glibc-cvs"
--PR = "r20"
-+PR = "r21"
- 
- DEFAULT_PREFERENCE_sh3 = "-99"
- 
-@@ -41,7 +41,8 @@ DEPENDS_catchsegv = "libsegfault"
- FILES_glibc-pcprofile = "/lib/libpcprofile.so"
- FILES_glibc-thread-db = "/lib/libthread_db*"
- FILES_localedef = "${bindir}/localedef"
--RPROVIDES_glibc-dev += "libc-dev"
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
- 
- #	   file://noinfo.patch;patch=1 \
- #	   file://ldconfig.patch;patch=1;pnum=0 \
-diff --git a/recipes/glibc/glibc_2.3.2+cvs20040726.bb b/recipes/glibc/glibc_2.3.2+cvs20040726.bb
-index f0521d4..754c85f 100644
---- a/recipes/glibc/glibc_2.3.2+cvs20040726.bb
-+++ b/recipes/glibc/glibc_2.3.2+cvs20040726.bb
-@@ -3,7 +3,7 @@ require glibc.inc
- DEFAULT_PREFERENCE_sh3 = "-99"
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glibc-cvs"
--PR = "r30"
-+PR = "r31"
- 
- GLIBC_ADDONS ?= "linuxthreads"
- 
-@@ -31,6 +31,9 @@ SRC_URI_append_openmn = " file://ldsocache-varrun.patch;patch=1"
- S = "${WORKDIR}/libc"
- B = "${WORKDIR}/build-${TARGET_SYS}"
- 
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
-+
- EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
- 	        --without-cvs --disable-profile --disable-debug --without-gd \
- 		--enable-clocale=gnu \
-diff --git a/recipes/glibc/glibc_2.3.2.bb b/recipes/glibc/glibc_2.3.2.bb
-index 891d9da..2d2663f 100644
---- a/recipes/glibc/glibc_2.3.2.bb
-+++ b/recipes/glibc/glibc_2.3.2.bb
-@@ -1,6 +1,6 @@
- require glibc.inc
- 
--PR = "r19"
-+PR = "r20"
- 
- DEFAULT_PREFERENCE_sh3 = "-99"
- 
-@@ -38,7 +38,8 @@ DEPENDS_catchsegv = "libsegfault"
- FILES_glibc-pcprofile = "/lib/libpcprofile.so"
- FILES_glibc-thread-db = "/lib/libthread_db*"
- FILES_localedef = "${bindir}/localedef"
--RPROVIDES_glibc-dev += "libc-dev"
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
- 
- SRC_URI = "ftp://ftp.gnu.org/gnu/glibc/glibc-${PV}.tar.gz \
- 	   ftp://ftp.gnu.org/pub/gnu/glibc/glibc-linuxthreads-2.3.2.tar.gz \
-diff --git a/recipes/glibc/glibc_2.3.3+cvs20041128.bb b/recipes/glibc/glibc_2.3.3+cvs20041128.bb
-index 560347d..02be256 100644
---- a/recipes/glibc/glibc_2.3.3+cvs20041128.bb
-+++ b/recipes/glibc/glibc_2.3.3+cvs20041128.bb
-@@ -3,7 +3,7 @@ require glibc.inc
- DEFAULT_PREFERENCE_sh3 = "-99"
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glibc-cvs"
--PR = "r15"
-+PR = "r16"
- 
- GLIBC_ADDONS ?= "linuxthreads"
- 
-@@ -50,6 +50,9 @@ SRC_URI_append_openmn = " file://ldsocache-varrun.patch;patch=1"
- S = "${WORKDIR}/libc"
- B = "${WORKDIR}/build-${TARGET_SYS}"
- 
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
-+
- EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
- 	        --without-cvs --disable-profile --disable-debug --without-gd \
- 		--enable-clocale=gnu \
-diff --git a/recipes/glibc/glibc_2.3.3+cvs20050221.bb b/recipes/glibc/glibc_2.3.3+cvs20050221.bb
-index e0becb8..4eff27f 100644
---- a/recipes/glibc/glibc_2.3.3+cvs20050221.bb
-+++ b/recipes/glibc/glibc_2.3.3+cvs20050221.bb
-@@ -3,7 +3,7 @@ require glibc.inc
- DEFAULT_PREFERENCE_sh3 = "-99"
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glibc-cvs"
--PR = "r15"
-+PR = "r16"
- 
- GLIBC_ADDONS ?= "linuxthreads"
- 
-@@ -35,6 +35,9 @@ SRC_URI_append_openmn = " file://ldsocache-varrun.patch;patch=1"
- S = "${WORKDIR}/libc"
- B = "${WORKDIR}/build-${TARGET_SYS}"
- 
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
-+
- EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
- 	        --without-cvs --disable-profile --disable-debug --without-gd \
- 		--enable-clocale=gnu \
-diff --git a/recipes/glibc/glibc_2.3.3+cvs20050420.bb b/recipes/glibc/glibc_2.3.3+cvs20050420.bb
-index 1ae3518..65654dc 100644
---- a/recipes/glibc/glibc_2.3.3+cvs20050420.bb
-+++ b/recipes/glibc/glibc_2.3.3+cvs20050420.bb
-@@ -5,7 +5,7 @@ DEFAULT_PREFERENCE_i586 = "0"
- DEFAULT_PREFERENCE_sh3 = "-99"
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glibc-cvs"
--PR = "r13"
-+PR = "r14"
- 
- GLIBC_ADDONS ?= "linuxthreads"
- 
-@@ -36,6 +36,9 @@ SRC_URI_append_openmn = " file://ldsocache-varrun.patch;patch=1"
- S = "${WORKDIR}/libc"
- B = "${WORKDIR}/build-${TARGET_SYS}"
- 
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
-+
- EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
- 	        --without-cvs --disable-profile --disable-debug --without-gd \
- 		--enable-clocale=gnu \
-diff --git a/recipes/glibc/glibc_2.3.3.bb b/recipes/glibc/glibc_2.3.3.bb
-index 03711f7..05a8581 100644
---- a/recipes/glibc/glibc_2.3.3.bb
-+++ b/recipes/glibc/glibc_2.3.3.bb
-@@ -1,6 +1,6 @@
- require glibc.inc
- 
--PR = "r16"
-+PR = "r17"
- 
- DEFAULT_PREFERENCE_sh3 = "-99"
- 
-@@ -41,7 +41,8 @@ DEPENDS_catchsegv = "libsegfault"
- FILES_glibc-pcprofile = "/lib/libpcprofile.so"
- FILES_glibc-thread-db = "/lib/libthread_db*"
- FILES_localedef = "${bindir}/localedef"
--RPROVIDES_glibc-dev += "libc-dev"
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
- 
- SRC_URI = "ftp://ftp.gnu.org/gnu/glibc/glibc-${PV}.tar.gz \
- 	   ftp://ftp.gnu.org/pub/gnu/glibc/glibc-linuxthreads-${PV}.tar.gz \
-diff --git a/recipes/glibc/glibc_2.3.5+cvs20050627.bb b/recipes/glibc/glibc_2.3.5+cvs20050627.bb
-index c9d0b66..5fa4010 100644
---- a/recipes/glibc/glibc_2.3.5+cvs20050627.bb
-+++ b/recipes/glibc/glibc_2.3.5+cvs20050627.bb
-@@ -2,7 +2,7 @@ require glibc.inc
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glibc-cvs-2.3.5"
- SRCDATE = "20050627"
--PR = "r22"
-+PR = "r23"
- 
- #Doesnt build for sh3
- DEFAULT_PREFERENCE_sh3="-1"
-@@ -28,6 +28,7 @@ python __anonymous () {
- }
- 
- RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
- 
- #	   file://noinfo.patch;patch=1
- #	   file://ldconfig.patch;patch=1;pnum=0
-@@ -66,6 +67,9 @@ SRC_URI_append_sh4 = " file://no-z-defs.patch;patch=1 \
- S = "${WORKDIR}/libc"
- B = "${WORKDIR}/build-${TARGET_SYS}"
- 
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
-+
- EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
- 	        --without-cvs --disable-profile --disable-debug --without-gd \
- 		--enable-clocale=gnu \
-diff --git a/recipes/glibc/glibc_2.3.6.bb b/recipes/glibc/glibc_2.3.6.bb
-index 8442a15..ab167da 100644
---- a/recipes/glibc/glibc_2.3.6.bb
-+++ b/recipes/glibc/glibc_2.3.6.bb
-@@ -1,6 +1,6 @@
- require glibc.inc
- 
--PR = "r4"
-+PR = "r5"
- 
- #FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.3.6', '${FILE_DIRNAME}/orig/glibc', '${FILE_DIRNAME}/orig/files', '${FILE_DIRNAME}/orig' ], d)}"
- 
-@@ -35,6 +35,9 @@ SRC_URI = "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.tar.bz2 \
- S = "${WORKDIR}/glibc-${PV}"
- B = "${WORKDIR}/build-${TARGET_SYS}"
- 
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
-+
- EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
- 	        --without-cvs --disable-profile --disable-debug --without-gd \
- 		--enable-clocale=gnu \
-diff --git a/recipes/glibc/glibc_2.4.bb b/recipes/glibc/glibc_2.4.bb
-index 8ee1000..54fe487 100644
---- a/recipes/glibc/glibc_2.4.bb
-+++ b/recipes/glibc/glibc_2.4.bb
-@@ -1,6 +1,6 @@
- require glibc.inc
- 
--PR = "r20"
-+PR = "r21"
- 
- #add the hosts that are confirmed to be working to COMPATIBLE_HOSTi
- COMPATIBLE_HOST = '(i.86.*-linux|sh.*-linux)'
-@@ -34,6 +34,7 @@ python __anonymous () {
- }
- 
- RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
- 
- #	   file://noinfo.patch;patch=1
- #	   file://ldconfig.patch;patch=1;pnum=0
-diff --git a/recipes/glibc/glibc_cvs.bb b/recipes/glibc/glibc_cvs.bb
-index 186c7d6..26d29f0 100644
---- a/recipes/glibc/glibc_cvs.bb
-+++ b/recipes/glibc/glibc_cvs.bb
-@@ -1,7 +1,7 @@
- require glibc.inc
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glibc-cvs-2.3.5"
--PR = "r11"
-+PR = "r12"
- PV = "2.3.5+cvs${SRCDATE}"
- 
- GLIBC_ADDONS ?= "ports,linuxthreads"
-@@ -25,6 +25,7 @@ python __anonymous () {
- }
- 
- RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+RPROVIDES_${PN}-dev += "libc-dev virtual-libc-dev"
- 
- #	   file://noinfo.patch;patch=1
- #	   file://ldconfig.patch;patch=1;pnum=0
--- 
-1.6.2.1.469.gdffc
++1
 
 -- 
-Tom Rini
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
