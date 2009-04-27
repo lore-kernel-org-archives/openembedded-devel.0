@@ -1,25 +1,29 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [68.230.241.44] (helo=fed1rmmtao102.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LyQyr-0003OZ-Rt
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Apr 2009 15:34:45 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1LyQtw-0006xA-NC
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Apr 2009 17:29:40 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Apr 2009 17:29:33 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <200904271340.28227.khimov@altell.ru>
-	<be7a9f3d0904270546u33935630ua3f0b1fee1d3e430@mail.gmail.com>
-In-Reply-To: <be7a9f3d0904270546u33935630ua3f0b1fee1d3e430@mail.gmail.com>
+	(envelope-from <trini@kernel.crashing.org>) id 1LyR37-0003Zg-On
+	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 15:39:10 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao102.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090427133405.YLQO6112.fed1rmmtao102.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 27 Apr 2009 09:34:05 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id kda41b0014dMFYL04da4y1; Mon, 27 Apr 2009 09:34:04 -0400
+X-Authority-Analysis: v=1.0 c=1 a=BJU0Syc8Wz4A:10 a=oofs9C6kbiIA:10
+	a=yw9q3FIxmcTpkhe4HDgA:9 a=428Spdff3xgKIznTqAZkdYN6wt0A:4
+X-CM-Score: 0.00
+Date: Mon, 27 Apr 2009 06:34:03 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090427133403.GD18788@smtp.west.cox.net>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF77C@hiob.intern.dresearch.de>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF78E@hiob.intern.dresearch.de>
+	<49F59B68.1010208@balister.org>
 MIME-Version: 1.0
-Message-Id: <200904271729.33673.khimov@altell.ru>
-Subject: Re: [RFC] install-native
+In-Reply-To: <49F59B68.1010208@balister.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,28 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 13:34:46 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Apr 2009 13:39:10 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Monday 27 April 2009 16:46:50 Otavio Salvador wrote:
-> Hello Roman,
+On Mon, Apr 27, 2009 at 07:47:52AM -0400, Philip Balister wrote:
+> Sledz, Steffen wrote:
+>> Ping.
+>>
+>> At the moment we are not able to make a build out of the .dev tree. :(
 >
-> On Mon, Apr 27, 2009 at 6:40 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> [...]
->
-> > But maybe we can just remove 'install-native' completely?
->
-> I belive the right way to handle it to fix install-native to support
-> what is required.
+> For what machine and distro?
 
-Well, current install-native is unmaintained shell thingie. Hacking that to 
-mimic behavior of install from coreutils requires serious effort. Another 
-approach could be bringing install from some kind of coreutils-native and 
-depending every package on it. Certainly possible, but not sure it gives us 
-any benefits as we're already using host's 'install' (starting right up from 
-shasum-native) intensively and it works in general. Thus my proposal.
+Any and all.
+
+-- 
+Tom Rini
 
 
