@@ -1,17 +1,22 @@
-Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@amethyst.openembedded.net>) id 1LyUzF-00009Q-6G
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Apr 2009 19:51:25 +0200
-Received: by amethyst.openembedded.net (Postfix, from userid 1002)
-	id 3BED7189333; Mon, 27 Apr 2009 19:50:36 +0200 (CEST)
-From: Koen Kooi <k.kooi@student.utwente.nl>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1LyV59-0000O7-Rp
+	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 19:57:32 +0200
+Received: (qmail 7197 invoked by uid 813007); 27 Apr 2009 17:52:26 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 Apr 2009 17:52:26 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Apr 2009 19:50:36 +0200
-Message-Id: <1240854636-20070-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.5.6.5
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] cherokee: fix init script, daemonize is '-d', not '-b'
+Date: Mon, 27 Apr 2009 19:51:49 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc2-00199-g51f1622-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <1240854636-20070-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1240854636-20070-1-git-send-email-k.kooi@student.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200904271951.54626.marcin@juszkiewicz.com.pl>
+Subject: Re: [STABLE][PATCH] cherokee: fix init script, daemonize is '-d', not '-b'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,44 +30,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 17:51:25 -0000
+X-List-Received-Date: Mon, 27 Apr 2009 17:57:32 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-From: Koen Kooi <koen@openembedded.org>
+Dnia poniedzia=C5=82ek, 27 kwietnia 2009 o 19:50:36 Koen Kooi napisa=C5=82(=
+a):
+> From: Koen Kooi <koen@openembedded.org>
+>
+>
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
 
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/cherokee/cherokee_0.98.0.bb  |    2 ++
- recipes/cherokee/files/cherokee.init |    2 +-
- 2 files changed, 3 insertions(+), 1 deletions(-)
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-diff --git a/recipes/cherokee/cherokee_0.98.0.bb b/recipes/cherokee/cherokee_0.98.0.bb
-index 7a29694..a8ebaa8 100644
---- a/recipes/cherokee/cherokee_0.98.0.bb
-+++ b/recipes/cherokee/cherokee_0.98.0.bb
-@@ -1,5 +1,7 @@
- require cherokee.inc
- 
-+PR = "r1"
-+
- SRC_URI = "http://www.cherokee-project.com/download/0.98/${PV}/cherokee-${PV}.tar.gz \
-            file://cherokee.init "
- 
-diff --git a/recipes/cherokee/files/cherokee.init b/recipes/cherokee/files/cherokee.init
-index ea1263a..93603b8 100644
---- a/recipes/cherokee/files/cherokee.init
-+++ b/recipes/cherokee/files/cherokee.init
-@@ -12,7 +12,7 @@ test ! -r "$CONFIG" && exit 0
- case "$1" in
-   start)
-     echo "Starting $DESC: "
--    start-stop-daemon --oknodo -S -x $DAEMON -- -b -C $CONFIG
-+    start-stop-daemon --oknodo -S -x $DAEMON -- -d -C $CONFIG
-     ;;
- 
-   stop)
--- 
-1.5.6.5
 
 
 
