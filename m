@@ -1,21 +1,25 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1LyRJ1-0004GP-HK
-	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 15:55:36 +0200
-Received: (qmail 6777 invoked from network); 27 Apr 2009 13:50:31 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by  with SMTP; 27 Apr 2009 06:50:31 -0700
-Date: Mon, 27 Apr 2009 06:50:30 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <khimov@altell.ru>) id 1LyRVy-0004st-85
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Apr 2009 16:08:58 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1LyRR3-0001aK-Iu
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Apr 2009 18:03:53 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090427135030.GF18788@smtp.west.cox.net>
+Date: Mon, 27 Apr 2009 18:03:49 +0400
+User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
 References: <200904271340.28227.khimov@altell.ru>
-	<be7a9f3d0904270546u33935630ua3f0b1fee1d3e430@mail.gmail.com>
 	<200904271729.33673.khimov@altell.ru>
+	<20090427135030.GF18788@smtp.west.cox.net>
+In-Reply-To: <20090427135030.GF18788@smtp.west.cox.net>
 MIME-Version: 1.0
-In-Reply-To: <200904271729.33673.khimov@altell.ru>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+Message-Id: <200904271803.49498.khimov@altell.ru>
 Subject: Re: [RFC] install-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,33 +34,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 13:55:41 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 27 Apr 2009 14:08:58 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Mon, Apr 27, 2009 at 05:29:33PM +0400, Roman I Khimov wrote:
-> On Monday 27 April 2009 16:46:50 Otavio Salvador wrote:
-> > Hello Roman,
-> >
-> > On Mon, Apr 27, 2009 at 6:40 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> > [...]
-> >
-> > > But maybe we can just remove 'install-native' completely?
-> >
-> > I belive the right way to handle it to fix install-native to support
-> > what is required.
-> 
-> Well, current install-native is unmaintained shell thingie. Hacking that to 
-> mimic behavior of install from coreutils requires serious effort. Another 
-> approach could be bringing install from some kind of coreutils-native and 
-> depending every package on it. Certainly possible, but not sure it gives us 
-> any benefits as we're already using host's 'install' (starting right up from 
-> shasum-native) intensively and it works in general. Thus my proposal.
+On Monday 27 April 2009 17:50:30 Tom Rini wrote:
+> We have coreutils-native already, why not use install from that and
+> stick coreutils-native into default deps?
 
-We have coreutils-native already, why not use install from that and
-stick coreutils-native into default deps?
-
--- 
-Tom Rini
+Works fine with me also (guaranteed sane coreutils is very good), it's just a 
+thing that we need to agree upon.
 
 
