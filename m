@@ -1,30 +1,27 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [68.230.241.42] (helo=fed1rmmtao104.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1LyR6i-0003lv-R3
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Apr 2009 15:42:52 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 8AE1716E237
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2009 15:38:22 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 5FA6E2A41FB
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2009 15:37:50 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <trini@kernel.crashing.org>) id 1LyRCb-000422-V7
+	for openembedded-devel@openembedded.org; Mon, 27 Apr 2009 15:48:58 +0200
+Received: from fed1rmimpo03.cox.net ([70.169.32.75]) by fed1rmmtao104.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP
+	id <20090427134353.QBS16134.fed1rmmtao104.cox.net@fed1rmimpo03.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Mon, 27 Apr 2009 09:43:53 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo03.cox.net with bizsmtp
+	id kdjs1b0044dMFYL04djsUs; Mon, 27 Apr 2009 09:43:52 -0400
+X-Authority-Analysis: v=1.0 c=1 a=BJU0Syc8Wz4A:10 a=oofs9C6kbiIA:10
+	a=KnRDxRxoFxVgRGkhjosA:9 a=rBuDoR7IFJXL255pxd1uZKDoK_kA:4
+X-CM-Score: 0.00
+Date: Mon, 27 Apr 2009 06:43:52 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090427134352.GE18788@smtp.west.cox.net>
+References: <49F59B68.1010208@balister.org>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF793@hiob.intern.dresearch.de>
 MIME-Version: 1.0
-Date: Mon, 27 Apr 2009 15:37:25 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF793@hiob.intern.dresearch.de>
-In-Reply-To: <49F59B68.1010208@balister.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
-Thread-Index: AcnHLqui9d8RXSMbSaS1N3lO8VESqgAACL2Q
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF77C@hiob.intern.dresearch.de><69E6C70090A0A14498CC98FAE5E06B6E3CF78E@hiob.intern.dresearch.de>
-	<49F59B68.1010208@balister.org>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF793@hiob.intern.dresearch.de>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,22 +36,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2009 13:42:53 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Apr 2009 13:48:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> > At the moment we are not able to make a build out of the=20
-> > .dev tree. :(
->=20
-> For what machine and distro?
+On Mon, Apr 27, 2009 at 03:37:25PM +0200, Sledz, Steffen wrote:
+> > > At the moment we are not able to make a build out of the 
+> > > .dev tree. :(
+> > 
+> > For what machine and distro?
+> 
+> hipox and angstrom
+> 
+> But does this problem really depends on them? I thought it's a problem in the gcc-4.2.4 recipe.
 
-hipox and angstrom
+It's in all gcc versions, really.
 
-But does this problem really depends on them? I thought it's a problem =
-in the gcc-4.2.4 recipe.
-
-Steffen
+-- 
+Tom Rini
 
 
