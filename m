@@ -1,24 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lypq6-00060B-MQ
-	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 18:07:24 +0200
-Received: (qmail 5588 invoked by uid 813007); 28 Apr 2009 16:02:11 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 28 Apr 2009 16:02:11 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Apr 2009 18:02:04 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-5-git-send-email-trini@kernel.crashing.org>
-	<1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
-In-Reply-To: <1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
-MIME-Version: 1.0
-Message-Id: <200904281802.10489.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH][STABLE] wireless-tools: Fix libiw/ifrename packages, bump PR.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LyqC2-0008Cg-82
+	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 18:30:13 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Lyq72-00035M-4g
+	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 16:24:52 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 28 Apr 2009 16:24:52 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 28 Apr 2009 16:24:52 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 28 Apr 2009 18:24:38 +0200
+Message-ID: <gt7ak6$ik1$1@ger.gmane.org>
+References: <49F71CF8.7030707@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090421 Shredder/3.0b3pre
+In-Reply-To: <49F71CF8.7030707@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [STABLE][PATCH] modified kaeilos distro configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,41 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2009 16:07:34 -0000
-X-Groupsio-MsgNum: 9875
-Content-Type: multipart/signed; boundary="nextPart1763156.kgQJ2XG4jP";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 28 Apr 2009 16:30:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
---nextPart1763156.kgQJ2XG4jP
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+NACK, this hasn't been in .dev yet, and further:
 
-Dnia pi=C4=85tek, 24 kwietnia 2009 o 18:11:53 Tom Rini napisa=C5=82(a):
-> From: Tom Rini <trini@embeddedalley.com>
->
-> Signed-off-by: Tom Rini <trini@embeddedalley.com>
+On 28-04-09 16:36, Marco Cavallini wrote:
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+ > +#PREFERRED_PROVIDER_virtual/psplash   ?= "psplash-kaeilos"
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+That one doesn't exist in OE.
 
---nextPart1763156.kgQJ2XG4jP
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+ > +PREFERRED_PROVIDER_bluez-libs            = "bluez4"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
+And that only works in angstrom.
 
-iEYEABECAAYFAkn3KH0ACgkQeQ6MlGH/2qtItQCfZ02KK/O7zPqLfKUtZ7lCf3/D
-1NIAnivQSoWfz1Tz9DkjhCdF1VJ0YD+E
-=d6E0
------END PGP SIGNATURE-----
+regards,
 
---nextPart1763156.kgQJ2XG4jP--
+Koen
+
+
+
