@@ -1,28 +1,28 @@
-Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1LyuPq-0004Bo-Aj
-	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 23:00:34 +0200
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao107.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090428205520.XKUK10385.fed1rmmtao107.cox.net@fed1rmimpo01.cox.net>
-	for <openembedded-devel@openembedded.org>;
-	Tue, 28 Apr 2009 16:55:20 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id l8vL1b0094dMFYL038vLC0; Tue, 28 Apr 2009 16:55:20 -0400
-X-Authority-Analysis: v=1.0 c=1 a=FWpWOkutOBYA:10 a=GclPNJOSj40A:10
-	a=ZkfgYe9bbhQ5YjfCQh0A:9 a=BhSxu5EzzIZCihcPY_uipCLzhSUA:4
-X-CM-Score: 0.00
-Date: Tue, 28 Apr 2009 13:55:20 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090428205520.GV18788@smtp.west.cox.net>
-References: <20090427141943.GG18788@smtp.west.cox.net>
-	<20090428203009.GH26082@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20090428203009.GH26082@gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] Bring PREFERRED_LIBC to all distros
+	(envelope-from <philb@gnu.org>) id 1Lyud8-0004bw-Ca
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Apr 2009 23:14:19 +0200
+Received: from 79-79-173-112.dynamic.dsl.as9105.com ([79.79.173.112]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1LyuXu-0002Gr-BI
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 28 Apr 2009 22:08:55 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <f96d234e0904281123sb23e07fw89fe856e6c851ae5@mail.gmail.com>
+References: <20090425075933.E6E18188456@amethyst.openembedded.net>
+	<200904252034.35801.mickey@vanille-media.de>
+	<49F35A2B.7070907@xora.org.uk>
+	<200904252144.45513.mickey@vanille-media.de>
+	<1240929710.30742.102.camel@mill.internal.reciva.com>
+	<f96d234e0904281123sb23e07fw89fe856e6c851ae5@mail.gmail.com>
+Date: Tue, 28 Apr 2009 22:08:38 +0100
+Message-Id: <1240952918.4289.351.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the	new SONAMEs; move to autosplitting"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,49 +36,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2009 21:00:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Apr 2009 21:14:19 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 28, 2009 at 01:30:09PM -0700, Khem Raj wrote:
-> On (27/04/09 07:19), Tom Rini wrote:
-> > Hey all.  I've created a new branch, trini/add-libc-overrides which does
-> > the following:
-> > - Make every distro declare PREFERRED_LIBC, either outright or
-> >   overridable.
+On Tue, 2009-04-28 at 14:23 -0400, Cliff Brake wrote:
+> On Tue, Apr 28, 2009 at 10:41 AM, Phil Blundell <philb@gnu.org> wrote:
 > 
-> may be you should call it something like SYSTEM_LIBC
-
-OK, will rework and get a new branch up sometime soon.
-
-> > - For Angstrom/foonas have DISTROVAR ?= ${PREFERRED_LIBC},
-> >   PREFERRED_LIBC ?= default
-> > - Add conf/distro/include/{eglibc,glibc,uclibc}.inc that have:
-> >   - Add 'glibc' to OVERRIDES for eglibc/glibc and 'uclibc' for
-> >     uclibc.inc
+> > If we are to have a core team as the governing body for OE then I would
+> > like to see it taking a more active role in overseeing the project (in
+> > particular, to guide policies for technical issues and not merely focus
+> > on administrivia such as the formatting of commit messages or
+> > Signed-off-by lines), and for this to be done in a more transparent way.
+> > If the current members of the core team are, for whatever reason, not
+> > willing or able to discharge those duties then (much as I hesitate to
+> > call for this) perhaps it's time to hold elections and appoint new
+> > members in their place.
 > 
-> what about klibc so some distro's use klibc too ?
-
-Not that I could see.  At least not as the only libc.
-
-> > That last change was required so that a number of distros would parse
-> > without trying to build say both glibc_2.3.3 and glibc_2.9 (for
-> > virtual-libc-dev) when I ran bitbake -g meta-toolchain minimal-image.
-> > 
-> > The next step, once something like this goes in, would be to change all
-> > of the overrides that test for uclibc (or glibc) from
-> > linux/linux-gnueabi vs linux-uclibc/linux-uclibcgnueabi to just
-> > linux_glibc vs linux_uclibc.
+> One possible path is to:
 > 
-> only those two ? or one for each libc we have.
+> 1) figure out how to get members added to the eV that is already in place.
+> 2) hold elections for a board
 
-Until eglibc / glibc need different overrides, there's no need to have
-them be different.  uClibc isn't always done correctly however as you
-have to catch both (ie the USE_NLS thing in the gcc recipes isn't right
-for every version).  And if we add another libc, we'll add another
-override of course.
+Agreed, that sounds like a good thing.  But, I'm not sure that the eV
+board would necessarily be the same thing as the core team or "steering
+committee" that would make the day-to-day decisions.  
 
--- 
-Tom Rini
+My understanding of German law is pretty sketchy but I'm guessing that
+the main function of the eV board is to be legally responsible for the
+operation of the organisation and, as such, it probably requires a
+rather different set of skills than one would need to provide technical
+or even administrative oversight for the operation of the OE development
+project itself.  In particular, given that the eV is (obviously)
+constituted in Germany and hence that the authoritative copies of all
+the legal documents are presumably those drafted in German, I suspect
+that it would probably be a dim idea for anybody with a less than fluent
+grasp of that language to serve on the board.  
+
+> We also need to stop waiting on the next OSS event to take the next
+> step.  We can host conf calls, etc -- whatever it takes.  Documents
+> can be scanned/emailed -- we don't have to be in person to sign.  KDE
+> seems to have a process for adding eV members.
+
+Yes, I think this is absolutely right.  This is the year 2009 and we
+have telephones, faxes, FedEx, email, VoIP, IRC and no doubt many other
+things at our disposal.  It does seem silly for progress to be dependent
+on everybody being able to meet face-to-face.
+
+p.
+
+
 
 
