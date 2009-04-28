@@ -1,18 +1,33 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1Lyeiq-0000sY-94
-	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 06:15:08 +0200
-Received: (qmail 15331 invoked from network); 28 Apr 2009 04:10:00 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 27 Apr 2009 21:10:00 -0700
-Date: Mon, 27 Apr 2009 21:09:59 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090428040959.GT18788@smtp.west.cox.net>
-MIME-Version: 1.0
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: [PATCH] Enable PTHREADS_DEBUG_SUPPORT on all uClibc builds
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LyhXe-0003Yh-5z
+	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 09:15:46 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LyhSg-0003Yt-Qr
+	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 07:10:38 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 28 Apr 2009 07:10:38 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 28 Apr 2009 07:10:38 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 28 Apr 2009 09:10:18 +0200
+Message-ID: <gt6a4q$sbd$1@ger.gmane.org>
+References: <20090423175928.GE12956@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b4pre) Gecko/20090421 Shredder/3.0b3pre
+In-Reply-To: <20090423175928.GE12956@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] Teach insane.bbclass to ignore SDK packages wrt -dev and .so check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,224 +41,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2009 04:15:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Apr 2009 07:15:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-As has been reported, building uClibc with PTHREADS_DEBUG_SUPPORT=n
-means that task-sdk-bare won't install due to missing uclibc-thread-db.
-The following enables it everywhere it was disabled and bumps PRs.  This
-should be fine given that we already have separate debug packages and
-the extra files end up in an additional package.
+On 23-04-09 19:59, Tom Rini wrote:
+> With the change to make having libfoo.so symlinks in the main package
+> become fatal (along with GNU_HASH) SDK stuff is broken now.  At Richard's
+> suggestion, the following patch teaches insane.bbclass to not run the
+> -dev check on sdk||canadian-sdk recipes.
 
-Signed-off-by: Tom Rini <trini@embeddedalley.com>
 
-diff --git a/recipes/uclibc/uclibc-0.9.27/wrt54/uClibc.config b/recipes/uclibc/uclibc-0.9.27/wrt54/uClibc.config
-index 5fddbed..1a24121 100644
---- a/recipes/uclibc/uclibc-0.9.27/wrt54/uClibc.config
-+++ b/recipes/uclibc/uclibc-0.9.27/wrt54/uClibc.config
-@@ -63,7 +63,7 @@ LDSO_BASE_FILENAME="ld.so"
- UCLIBC_CTOR_DTOR=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- UCLIBC_HAS_LFS=y
- # MALLOC is not set
- # MALLOC_SIMPLE is not set
-diff --git a/recipes/uclibc/uclibc-0.9.28/avr32/uClibc.config b/recipes/uclibc/uclibc-0.9.28/avr32/uClibc.config
-index 478c713..065b961 100644
---- a/recipes/uclibc/uclibc-0.9.28/avr32/uClibc.config
-+++ b/recipes/uclibc/uclibc-0.9.28/avr32/uClibc.config
-@@ -63,7 +63,7 @@ LDSO_RUNPATH=y
- UCLIBC_CTOR_DTOR=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- UCLIBC_HAS_LFS=y
- UCLIBC_STATIC_LDCONFIG=y
- # MALLOC is not set
-diff --git a/recipes/uclibc/uclibc-0.9.28/wrt54/uClibc.config b/recipes/uclibc/uclibc-0.9.28/wrt54/uClibc.config
-index 14779b7..d28b0a1 100644
---- a/recipes/uclibc/uclibc-0.9.28/wrt54/uClibc.config
-+++ b/recipes/uclibc/uclibc-0.9.28/wrt54/uClibc.config
-@@ -66,7 +66,7 @@ LDSO_RUNPATH=y
- UCLIBC_CTOR_DTOR=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- UCLIBC_HAS_LFS=y
- UCLIBC_STATIC_LDCONFIG=y
- # MALLOC is not set
-diff --git a/recipes/uclibc/uclibc-0.9.29/bfin/uClibc.machine b/recipes/uclibc/uclibc-0.9.29/bfin/uClibc.machine
-index 0c56523..33a294f 100644
---- a/recipes/uclibc/uclibc-0.9.29/bfin/uClibc.machine
-+++ b/recipes/uclibc/uclibc-0.9.29/bfin/uClibc.machine
-@@ -73,7 +73,7 @@ LDSO_RUNPATH=y
- UCLIBC_CTOR_DTOR=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- LINUXTHREADS_OLD=y
- UCLIBC_HAS_LFS=y
- MALLOC=y
-diff --git a/recipes/uclibc/uclibc-0.9.30.1/bfin/uClibc.machine b/recipes/uclibc/uclibc-0.9.30.1/bfin/uClibc.machine
-index 0c56523..33a294f 100644
---- a/recipes/uclibc/uclibc-0.9.30.1/bfin/uClibc.machine
-+++ b/recipes/uclibc/uclibc-0.9.30.1/bfin/uClibc.machine
-@@ -73,7 +73,7 @@ LDSO_RUNPATH=y
- UCLIBC_CTOR_DTOR=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- LINUXTHREADS_OLD=y
- UCLIBC_HAS_LFS=y
- MALLOC=y
-diff --git a/recipes/uclibc/uclibc-0.9.30.1/uClibc.distro b/recipes/uclibc/uclibc-0.9.30.1/uClibc.distro
-index 77f6091..31029a3 100644
---- a/recipes/uclibc/uclibc-0.9.30.1/uClibc.distro
-+++ b/recipes/uclibc/uclibc-0.9.30.1/uClibc.distro
-@@ -17,7 +17,7 @@ UCLIBC_CTOR_DTOR=y
- LDSO_GNU_HASH_SUPPORT=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- LINUXTHREADS_OLD=y
- UCLIBC_HAS_LFS=y
- # MALLOC is not set
-diff --git a/recipes/uclibc/uclibc-0.9.30/bfin/uClibc.machine b/recipes/uclibc/uclibc-0.9.30/bfin/uClibc.machine
-index 0c56523..33a294f 100644
---- a/recipes/uclibc/uclibc-0.9.30/bfin/uClibc.machine
-+++ b/recipes/uclibc/uclibc-0.9.30/bfin/uClibc.machine
-@@ -73,7 +73,7 @@ LDSO_RUNPATH=y
- UCLIBC_CTOR_DTOR=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- LINUXTHREADS_OLD=y
- UCLIBC_HAS_LFS=y
- MALLOC=y
-diff --git a/recipes/uclibc/uclibc-0.9.30/uClibc.distro b/recipes/uclibc/uclibc-0.9.30/uClibc.distro
-index b072b2f..d8eed91 100644
---- a/recipes/uclibc/uclibc-0.9.30/uClibc.distro
-+++ b/recipes/uclibc/uclibc-0.9.30/uClibc.distro
-@@ -17,7 +17,7 @@ UCLIBC_CTOR_DTOR=y
- LDSO_GNU_HASH_SUPPORT=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- LINUXTHREADS_OLD=y
- UCLIBC_HAS_LFS=y
- # MALLOC is not set
-diff --git a/recipes/uclibc/uclibc-nptl/uClibc.distro b/recipes/uclibc/uclibc-nptl/uClibc.distro
-index 8537080..e52db5c 100644
---- a/recipes/uclibc/uclibc-nptl/uClibc.distro
-+++ b/recipes/uclibc/uclibc-nptl/uClibc.distro
-@@ -18,7 +18,7 @@ LDSO_GNU_HASH_SUPPORT=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
- UCLIBC_HAS_THREADS_NATIVE=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- # LINUXTHREADS_OLD is not set
- UCLIBC_HAS_LFS=y
- # MALLOC is not set
-diff --git a/recipes/uclibc/uclibc-svn/uClibc.distro b/recipes/uclibc/uclibc-svn/uClibc.distro
-index 2b1406c..2f5e073 100644
---- a/recipes/uclibc/uclibc-svn/uClibc.distro
-+++ b/recipes/uclibc/uclibc-svn/uClibc.distro
-@@ -17,7 +17,7 @@ UCLIBC_CTOR_DTOR=y
- LDSO_GNU_HASH_SUPPORT=y
- # HAS_NO_THREADS is not set
- UCLIBC_HAS_THREADS=y
--# PTHREADS_DEBUG_SUPPORT is not set
-+PTHREADS_DEBUG_SUPPORT=y
- LINUXTHREADS_OLD=y
- UCLIBC_HAS_LFS=y
- # MALLOC is not set
-diff --git a/recipes/uclibc/uclibc_0.9.27.bb b/recipes/uclibc/uclibc_0.9.27.bb
-index 1357e58..56575da 100644
---- a/recipes/uclibc/uclibc_0.9.27.bb
-+++ b/recipes/uclibc/uclibc_0.9.27.bb
-@@ -1,5 +1,5 @@
- DEFAULT_PREFERENCE = "1"
--PR = "r12"
-+PR = "r13"
- 
- require uclibc.inc
- 
-diff --git a/recipes/uclibc/uclibc_0.9.28.bb b/recipes/uclibc/uclibc_0.9.28.bb
-index 1b0f2e0..adf7a74 100644
---- a/recipes/uclibc/uclibc_0.9.28.bb
-+++ b/recipes/uclibc/uclibc_0.9.28.bb
-@@ -1,5 +1,5 @@
- DEFAULT_PREFERENCE = "1"
--PR = "r17"
-+PR = "r18"
- 
- require uclibc.inc
- 
-diff --git a/recipes/uclibc/uclibc_0.9.29.bb b/recipes/uclibc/uclibc_0.9.29.bb
-index aba1830..f6bc689 100644
---- a/recipes/uclibc/uclibc_0.9.29.bb
-+++ b/recipes/uclibc/uclibc_0.9.29.bb
-@@ -7,7 +7,7 @@
- # on whether the base patches apply to the selected (SRCDATE) svn release.
- #
- UCLIBC_BASE ?= "0.9.29"
--PR = "r30"
-+PR = "r31"
- 
- require uclibc.inc
- 
-diff --git a/recipes/uclibc/uclibc_0.9.30.1.bb b/recipes/uclibc/uclibc_0.9.30.1.bb
-index d159ab3..ab6dcb9 100644
---- a/recipes/uclibc/uclibc_0.9.30.1.bb
-+++ b/recipes/uclibc/uclibc_0.9.30.1.bb
-@@ -7,7 +7,7 @@
- # on whether the base patches apply to the selected (SRCDATE) svn release.
- #
- UCLIBC_BASE ?= "0.9.30.1"
--PR = "r1"
-+PR = "r2"
- DEFAULT_PREFERENCE = "1"
- 
- require uclibc.inc
-diff --git a/recipes/uclibc/uclibc_0.9.30.bb b/recipes/uclibc/uclibc_0.9.30.bb
-index bbe809f..0a374ce 100644
---- a/recipes/uclibc/uclibc_0.9.30.bb
-+++ b/recipes/uclibc/uclibc_0.9.30.bb
-@@ -7,7 +7,7 @@
- # on whether the base patches apply to the selected (SRCDATE) svn release.
- #
- UCLIBC_BASE ?= "0.9.30"
--PR = "r6"
-+PR = "r7"
- DEFAULT_PREFERENCE = "1"
- 
- require uclibc.inc
-diff --git a/recipes/uclibc/uclibc_svn.bb b/recipes/uclibc/uclibc_svn.bb
-index 654cb6e..127cea7 100644
---- a/recipes/uclibc/uclibc_svn.bb
-+++ b/recipes/uclibc/uclibc_svn.bb
-@@ -8,7 +8,7 @@
- #
- UCLIBC_BASE ?= "0.9.30"
- PV = "${UCLIBC_BASE}+svnr${SRCREV}"
--PR = "r0"
-+PR = "r1"
- #DEFAULT_PREFERENCE = "2"
- #DEFAULT_PREFERENCE is 0 (empty), releases have a preference of 1 so take
- # precedence.
+Acked-by: Koen Kooi <koen@openembedded.org>
 
--- 
-Tom Rini
+
+> I did this by splitting the devdbg check into two separate checks
+> (rather than re-order the checks as we do want to pull dbg stuff out).
+> This also clarifies the comments to both.  As an aside, yes we bail out
+> if say a file named Kconfig.debug ends up in a package.
+>
+> Signed-off-by: Tom Rini<trini@embeddedalley.com>
+>
+> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+> index 584a5f1..cc881dc 100644
+> --- a/classes/insane.bbclass
+> +++ b/classes/insane.bbclass
+> @@ -250,21 +250,35 @@ def package_qa_check_rpath(file,name,d, elf):
+>
+>       return sane
+>
+> -def package_qa_check_devdbg(path, name,d, elf):
+> +def package_qa_check_dev(path, name,d, elf):
+>       """
+> -    Check for debug remains inside the binary or
+> -    non dev packages containing
+> +    Check for ".so" library symlinks in non-dev packages
+>       """
+>
+>       import bb, os
+>       sane = True
+>
+> +    # SDK packages are special.
+> +    for s in ['sdk', 'canadian-sdk']:
+> +        if bb.data.inherits_class(s, d):
+> +            return True
+> +
+>       if not "-dev" in name:
+>           if path[-3:] == ".so" and os.path.islink(path):
+>               error_msg = "non -dev package contains symlink .so: %s path '%s'" % \
+>                        (name, package_qa_clean_path(path,d))
+>               sane = package_qa_handle_error(0, error_msg, name, path, d)
+>
+> +    return sane
+> +
+> +def package_qa_check_dbg(path, name,d, elf):
+> +    """
+> +    Check for ".debug" files or directories outside of the dbg package
+> +    """
+> +
+> +    import bb, os
+> +    sane = True
+> +
+>       if not "-dbg" in name:
+>           if '.debug' in path:
+>               error_msg = "non debug package contains .debug directory: %s path %s" % \
+> @@ -493,9 +507,10 @@ python do_package_qa () {
+>       if not packages:
+>           return
+>
+> -    checks = [package_qa_check_rpath, package_qa_check_devdbg,
+> +    checks = [package_qa_check_rpath, package_qa_check_dev,
+>                 package_qa_check_perm, package_qa_check_arch,
+> -              package_qa_check_desktop, package_qa_hash_style]
+> +              package_qa_check_desktop, package_qa_hash_style,
+> +              package_qa_check_dbg]
+>       walk_sane = True
+>       rdepends_sane = True
+>       for package in packages.split():
+>
+
+
 
 
