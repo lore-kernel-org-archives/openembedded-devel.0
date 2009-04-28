@@ -1,34 +1,44 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Lyson-0003lx-O5
+	(envelope-from <raj.khem@gmail.com>) id 1Lytao-0002xE-7Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Apr 2009 21:18:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 77E981409730
+	Tue, 28 Apr 2009 22:07:50 +0200
+Received: by wa-out-1112.google.com with SMTP id j4so279053wah.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2009 21:15:20 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id w3H5SoYHATVD
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2009 21:15:20 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 49BAF1416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2009 21:15:20 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Tue, 28 Apr 2009 13:02:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=pWmt51P+R5VtAxRL+/P8yToRhgydtd8WVDRBe7r4Yqc=;
+	b=MlL6ungawU+GcvIOYqWIQbfhBY1Pb/KA51vzJWE/cQ1/jraD748fN8Q6XA2bG63v1L
+	BLEzY1BFuG1sCheIjwN3eGZOil0eFBQ3pOYdD749TuL9q0KQuo87UglKwUAM/kkWMEb+
+	NkC5275cJSvq/Z2XYx9qYvqGmCFPAVe3ftv3c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=M8wamsNdMMf+da5T2zvvPiBW37/n706XNxV+3cdLaMP8vUD2Q9B99XH3FWl5qX8O5n
+	funfuNK61N+1QKWd68FPUNihtlPw3wPu2saK9lYCQlL7khqEtGnMJ3ap94yO6sxjoGOV
+	wVaa1iSo8/tR93tBr0a88JDnNY5Gasq9/2L0g=
+Received: by 10.115.16.14 with SMTP id t14mr3522677wai.14.1240948958656;
+	Tue, 28 Apr 2009 13:02:38 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-25-44.dsl.pltn13.sbcglobal.net
+	[71.146.25.44])
+	by mx.google.com with ESMTPS id v9sm224437wah.1.2009.04.28.13.02.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 28 Apr 2009 13:02:37 -0700 (PDT)
+Date: Tue, 28 Apr 2009 13:02:32 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <69E6C70090A0A14498CC98FAE5E06B6E3CF796@hiob.intern.dresearch.de>
-References: <49F59B68.1010208@balister.org>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF793@hiob.intern.dresearch.de>
-	<20090427134352.GE18788@smtp.west.cox.net> <gt4ekt$ba2$1@ger.gmane.org>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF796@hiob.intern.dresearch.de>
-Date: Tue, 28 Apr 2009 21:13:02 +0200
-Message-Id: <1240945982.12505.23.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf	binary
+Message-ID: <20090428200232.GA26082@gmail.com>
+References: <200904151633.49146.khimov@altell.ru>
+	<20090423044201.GA22270@gmail.com>
+	<200904231337.07189.khimov@altell.ru>
+	<200904271428.32644.khimov@altell.ru>
+MIME-Version: 1.0
+In-Reply-To: <200904271428.32644.khimov@altell.ru>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH	02/11]?binutils:?add?binutils-x86_64_i386_biarch.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,50 +52,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2009 19:18:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 28 Apr 2009 20:07:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Sledz, Steffen wrote:
-> > > It's in all gcc versions, really.
-> >=20
-> > No, it isn't:
-> >=20
-> > NOTE: package gcc-4.3.3-r0: task do_build: completed
+On (27/04/09 14:28), Roman I Khimov wrote:
+> On Thursday 23 April 2009 13:37:06 Roman I Khimov wrote:
+> > New binutils were introduced recently, so I've upgraded patch to handle
+> > those as well, please ACK new version and I'll commit it then.
+> 
+> ping
 
-I can confirm the failure in the default angstrom build for spitz from
-the last week. Linking of gcc wrapper and few other utilities reported
-the standard GNU_HASH QA error.
-
-Here is a possible fix or work-around. It's tested and it works, but
-maybe it is not fully correct.
-
-It may be one of following problems. I did not search deeper which one
-is true:
-- Ignoring LDFLAGS passed to configure
-- LDFLAGS x LDFLAGS_FOR_TARGET clash
-- =EF=BB=BFLDFLAGS_FOR_TARGET are not set in cross builds of native gcc c=
-ompiler
-  (i. e. not canadian)
-
-diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-confi=
-gure-common.inc
-index e88cee5..ef42210 100644
---- a/recipes/gcc/gcc-configure-common.inc
-+++ b/recipes/gcc/gcc-configure-common.inc
-@@ -73,6 +73,7 @@ do_configure () {
- 	export CPPFLAGS_FOR_BUILD=3D"${BUILD_CPPFLAGS}"
- 	export CXXFLAGS_FOR_BUILD=3D"${BUILD_CXXFLAGS}"
- 	export LDFLAGS_FOR_BUILD=3D"${BUILD_LDFLAGS}"
-+	export CC=3D"${CC} ${LDFLAGS}"
- 	export ARCH_FLAGS_FOR_TARGET=3D"${ARCH_FLAGS_FOR_TARGET}"
- 	(cd ${S} && gnu-configize) || die "failure running gnu-configize"
-=20
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+Acked-By: Khem Raj <raj.khem@gmail.com>
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
