@@ -1,44 +1,49 @@
-Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
+Received: from [209.85.198.248] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Lytao-0002xE-7Q
+	(envelope-from <raj.khem@gmail.com>) id 1LytjP-0005GW-G3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Apr 2009 22:07:50 +0200
-Received: by wa-out-1112.google.com with SMTP id j4so279053wah.12
+	Tue, 28 Apr 2009 22:16:43 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so532760rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2009 13:02:38 -0700 (PDT)
+	Tue, 28 Apr 2009 13:11:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
+	h=domainkey-signature:received:received:date:from:to:cc:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=pWmt51P+R5VtAxRL+/P8yToRhgydtd8WVDRBe7r4Yqc=;
-	b=MlL6ungawU+GcvIOYqWIQbfhBY1Pb/KA51vzJWE/cQ1/jraD748fN8Q6XA2bG63v1L
-	BLEzY1BFuG1sCheIjwN3eGZOil0eFBQ3pOYdD749TuL9q0KQuo87UglKwUAM/kkWMEb+
-	NkC5275cJSvq/Z2XYx9qYvqGmCFPAVe3ftv3c=
+	bh=Wnheso1VTkrqvLV2LrmOk/FhzZoutEIIcyG27O/0LME=;
+	b=ZKj98s8Wc5r2dblNdQ+0XoqrEtdqOYGCrUbrgI14z4WncWQ0/pD9pW2Fu8g2+Svxd+
+	PjFJAvtFWu3fx1gD5fB+NNdRUriL53GQNUTce0wd1SY6IQjTXDlWbclWk36eaDq+8T9f
+	+/ITynlEkZO1AZ919q9+eMkseNSrpCj+i8JLw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=M8wamsNdMMf+da5T2zvvPiBW37/n706XNxV+3cdLaMP8vUD2Q9B99XH3FWl5qX8O5n
-	funfuNK61N+1QKWd68FPUNihtlPw3wPu2saK9lYCQlL7khqEtGnMJ3ap94yO6sxjoGOV
-	wVaa1iSo8/tR93tBr0a88JDnNY5Gasq9/2L0g=
-Received: by 10.115.16.14 with SMTP id t14mr3522677wai.14.1240948958656;
-	Tue, 28 Apr 2009 13:02:38 -0700 (PDT)
+	b=KHkiDvcD8edWzmi3lut980MmET6UpeBwFc+0i96D1g7vKh2E2fF7ihHNooHuWlNpWa
+	QFFOIRVl0cI/+aNd/ryYOEo1z6Q016aqaUYetMD18dflgMsFi4+iuhZqFIKD/zz1aY9r
+	kwVY3BU2CO2+RDnATk9GompmdhqsK7il7jJ/s=
+Received: by 10.143.11.11 with SMTP id o11mr1623035wfi.193.1240949492085;
+	Tue, 28 Apr 2009 13:11:32 -0700 (PDT)
 Received: from gmail.com (adsl-71-146-25-44.dsl.pltn13.sbcglobal.net
 	[71.146.25.44])
-	by mx.google.com with ESMTPS id v9sm224437wah.1.2009.04.28.13.02.37
+	by mx.google.com with ESMTPS id 30sm392604wff.29.2009.04.28.13.11.30
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 28 Apr 2009 13:02:37 -0700 (PDT)
-Date: Tue, 28 Apr 2009 13:02:32 -0700
+	Tue, 28 Apr 2009 13:11:31 -0700 (PDT)
+Date: Tue, 28 Apr 2009 13:11:28 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090428200232.GA26082@gmail.com>
-References: <200904151633.49146.khimov@altell.ru>
-	<20090423044201.GA22270@gmail.com>
-	<200904231337.07189.khimov@altell.ru>
-	<200904271428.32644.khimov@altell.ru>
+Message-ID: <20090428201128.GB26082@gmail.com>
+References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-2-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-3-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-4-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-5-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-6-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-7-git-send-email-trini@kernel.crashing.org>
+	<1240589520-1104-8-git-send-email-trini@kernel.crashing.org>
 MIME-Version: 1.0
-In-Reply-To: <200904271428.32644.khimov@altell.ru>
+In-Reply-To: <1240589520-1104-8-git-send-email-trini@kernel.crashing.org>
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH	02/11]?binutils:?add?binutils-x86_64_i386_biarch.patch
+Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: Re: [PATCH][STABLE] binutils-canadian-sdk: Use add SYSROOT, use SDK_REALPATH_MINGW, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,18 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2009 20:07:50 -0000
+X-List-Received-Date: Tue, 28 Apr 2009 20:16:43 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (27/04/09 14:28), Roman I Khimov wrote:
-> On Thursday 23 April 2009 13:37:06 Roman I Khimov wrote:
-> > New binutils were introduced recently, so I've upgraded patch to handle
-> > those as well, please ACK new version and I'll commit it then.
+On (24/04/09 09:11), Tom Rini wrote:
+> From: Tom Rini <trini@embeddedalley.com>
 > 
-> ping
+> 
+> Signed-off-by: Tom Rini <trini@embeddedalley.com>
 
-Acked-By: Khem Raj <raj.khem@gmail.com>
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes/binutils/binutils-canadian-sdk_2.18.bb |    7 +++++--
+>  1 files changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/binutils/binutils-canadian-sdk_2.18.bb b/recipes/binutils/binutils-canadian-sdk_2.18.bb
+> index cf27cd0..e44e7b7 100644
+> --- a/recipes/binutils/binutils-canadian-sdk_2.18.bb
+> +++ b/recipes/binutils/binutils-canadian-sdk_2.18.bb
+> @@ -9,9 +9,12 @@ DEPENDS="\
+>  "
+>  
+>  FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-${PV}"
+> -EXTRA_OECONF = "--with-sysroot=${prefix}/${TARGET_SYS} \
+> +# On MinGW hosts we want to prepend a drive letter, in ${SDK_REALPATH_MINGW}
+> +# to the sysroot path.
+> +SYSROOT = "${@['${SDK_REALPATH}/${TARGET_SYS}', '${SDK_REALPATH_MINGW}${SDK_REALPATH}/${TARGET_SYS}'][bb.data.getVar('SDK_OS', d, 1) in ['mingw32', 'mingw64']]}"
+> +EXTRA_OECONF = "--with-sysroot=${SYSROOT} \
+>  		--program-prefix=${TARGET_PREFIX}"
+> -PR = "r3"
+> +PR = "r4"
+>  
+>  FILES_${PN}-dbg += "${prefix}/${TARGET_SYS}/bin/.debug"
+>  
+> -- 
+> 1.5.6.3
+> 
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
