@@ -1,29 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.142.187] (helo=ti-out-0910.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1LyvKH-0002fh-Sq
+	(envelope-from <rod@whitby.name>) id 1LywoH-0006wd-GI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Apr 2009 23:58:55 +0200
-Received: from 79-79-173-112.dynamic.dsl.as9105.com ([79.79.173.112]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1LyvF6-0003QK-6p
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Apr 2009 22:53:35 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49F7748A.4000405@balister.org>
-References: <20090425075933.E6E18188456@amethyst.openembedded.net>
-	<200904252034.35801.mickey@vanille-media.de>	<49F35A2B.7070907@xora.org.uk>
-	<200904252144.45513.mickey@vanille-media.de>
-	<1240929710.30742.102.camel@mill.internal.reciva.com>
-	<f96d234e0904281123sb23e07fw89fe856e6c851ae5@mail.gmail.com>
-	<1240952918.4289.351.camel@lenovo.internal.reciva.com>
-	<49F7748A.4000405@balister.org>
-Date: Tue, 28 Apr 2009 22:53:18 +0100
-Message-Id: <1240955598.4289.373.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with	the	new SONAMEs; move to autosplitting"
+	Wed, 29 Apr 2009 01:33:58 +0200
+Received: by ti-out-0910.google.com with SMTP id u3so82274tia.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Apr 2009 16:28:43 -0700 (PDT)
+Received: by 10.110.17.6 with SMTP id 6mr507362tiq.28.1240961323957;
+	Tue, 28 Apr 2009 16:28:43 -0700 (PDT)
+Received: from ?120.16.162.113? ([120.16.162.113])
+	by mx.google.com with ESMTPS id i6sm28242tid.13.2009.04.28.16.28.36
+	(version=SSLv3 cipher=RC4-MD5); Tue, 28 Apr 2009 16:28:43 -0700 (PDT)
+Sender: Rod Whitby <rod@whitby.name>
+From: "Rod Whitby" <rod@whitby.id.au>
+Date: Tue, 28 Apr 2009 16:28:43 -0700 (PDT)
+To: <openembedded-devel@lists.openembedded.org>
+X-Mailer: ChatterEmail+ for Treo 6xx/700p (3.0.10)
+Message-ID: <3323840366.282325@smtp.gmail.com>
+Cc: ka6sox@gmail.com
+Subject: Hosting OE services
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,48 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2009 21:58:55 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Apr 2009 23:34:03 -0000
 
-On Tue, 2009-04-28 at 17:26 -0400, Philip Balister wrote:
-> Phil Blundell wrote:
-> > In particular, given that the eV is (obviously)
-> > constituted in Germany and hence that the authoritative copies of all
-> > the legal documents are presumably those drafted in German, I suspect
-> > that it would probably be a dim idea for anybody with a less than fluent
-> > grasp of that language to serve on the board.  
-> 
-> The kde ev documents are here: http://ev.kde.org/. I don't think there 
-> is any issue having non-German's on the board. In fact I would be 
-> unhappy if there was such a restriction in place.
+The nslu2-linux project has previously offered a virtual xen instance on a powerful and well connected machine at OSUOSL for hosting OE services.
+Mickey took up the offer temporarily when the main OE server went offline temporarily some months ago.
+The offer still stands - the instance we used then is still active.
+Core team members please contact myself and Tom King (ka6sox) for details either on email or IRC.
+-- Rod
 
-Just to clarify what I wrote before, I certainly didn't mean that I
-thought non-Germans were prohibited from serving on the board; indeed, I
-would be very surprised if there was any specific restriction of that
-kind.
+-----Original Message-----
+From: Philip Balister <philip@balister.org>
+Date: Wednesday, Apr 29, 2009 6:58 am
+Subject: Re: [oe] [oe-commits] Koen Kooi : Revert "ecore: catch up with	the  new SONAMEs; move to autosplitting"
+To: openembedded-devel@lists.openembedded.orgReply-To: openembedded-devel@lists.openembedded.org
 
-However, personally, I would be very reluctant to serve as a board
-member for any organisation whose official documentation was drafted in
-a language of which I had a less than perfect command, and/or which was
-operating in a jurisdiction whose laws I knew very little about.  The
-risk of screwing something up through ignorance or misunderstanding
-would just be too great.  And, for that matter, if I were casting a vote
-for the board members of such an organisation, I'd want to be confident
-that the people I was voting for had the knowledge and ability to
-discharge their duties appropriately.
-
-Since OE eV is a German organisation, the language of its official
-documents and any related legal processes is almost inescapably going to
-be German.  Indeed, for example, note that
-http://ev.kde.org/corporate/statutes.php (the "Articles of association"
-link from the page you mentioned above) says:
-
- The original and legally binding version is the German version, the
- "Satzung" (PDF). The following translation is for information only.
-
-p.
-
+This is a cryptographically signed message in MIME format.
+>
+>--------------ms060305030306050807040902
+>Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+>Content-Transfer-Encoding: 7bit
+>
+>Phil Blundell wrote:
+> On Tue, 2009-04-28 at 14:23 -0400, Cliff Brake wrote:
+>> On Tue, Apr 28, 2009 at 10:41 AM, Phil Blundell <philb@gnu.org> wrote:
+>
+>I think people are going two different directions. Mickey has resigned 
+>from the eV board and said we need to replace him on the eV board. Also, 
+>we need to make arrangements for hosting the OE services. Obviously, 
+>we'd like the hosting responsibility moved to the group, and not be 
+>dependent on individual generosity. This is as good a time as ever to 
+>resolve the few remaining eV issues.
+>
+>Philip
+>
+>--------------ms060305030306050807040902
+>Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+>Content-Transfer-Encoding: base64
+>Content-Disposition: attachment; filename="smime.p7s"
+>Content-Description: S/MIME Cryptographic Signature
+>
+>MIAGCSq
 
 
 
