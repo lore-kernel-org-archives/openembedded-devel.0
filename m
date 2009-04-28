@@ -1,38 +1,20 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Lyrsn-0004wC-WC
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Apr 2009 20:18:23 +0200
-Received: from p5b03691e.dip.t-dialin.net ([91.3.105.30] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Lyrnj-0002K3-QO by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2009 20:13:06 +0200
-Received: from stefan by excalibur.local with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1Lyrni-0001eh-HS
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Apr 2009 20:13:02 +0200
-Date: Tue, 28 Apr 2009 20:13:02 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090428181302.GA5449@excalibur.local>
-References: <20090425075933.E6E18188456@amethyst.openembedded.net>
-	<200904252034.35801.mickey@vanille-media.de>
-	<49F35A2B.7070907@xora.org.uk>
-	<200904252144.45513.mickey@vanille-media.de>
-	<1240929710.30742.102.camel@mill.internal.reciva.com>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1Lyrwu-0001rV-BS
+	for openembedded-devel@openembedded.org; Tue, 28 Apr 2009 20:22:36 +0200
+Received: (qmail 5318 invoked from network); 28 Apr 2009 18:17:20 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 28 Apr 2009 11:17:20 -0700
+Date: Tue, 28 Apr 2009 11:17:19 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090428181718.GU18788@smtp.west.cox.net>
+References: <20090428040959.GT18788@smtp.west.cox.net>
 MIME-Version: 1.0
-In-Reply-To: <1240929710.30742.102.camel@mill.internal.reciva.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
+In-Reply-To: <20090428040959.GT18788@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the	new SONAMEs; move to autosplitting"
+Subject: Re: [PATCH] Enable PTHREADS_DEBUG_SUPPORT on all uClibc builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +28,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2009 18:18:46 -0000
+X-List-Received-Date: Tue, 28 Apr 2009 18:23:27 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello.
+On Mon, Apr 27, 2009 at 09:09:59PM -0700, Tom Rini wrote:
 
-On Tue, 2009-04-28 at 15:41, Phil Blundell wrote:
-> On Sat, 2009-04-25 at 21:44 +0200, Michael 'Mickey' Lauer wrote:
-> > Again the core team pretty much stood watching in apathy and let 
-> > the most vocal decide on his own, letting him carry his own way again.
-> 
-> Also, I don't think that the external impression one gains of the core
-> team is helped by the fact that its operations are somewhat opaque to
-> non-members: there doesn't seem to be any public record of the decisions
-> that the core team have made (if indeed it has made any) or the
-> rationale for them.
+> As has been reported, building uClibc with PTHREADS_DEBUG_SUPPORT=n
+> means that task-sdk-bare won't install due to missing uclibc-thread-db.
+> The following enables it everywhere it was disabled and bumps PRs.  This
+> should be fine given that we already have separate debug packages and
+> the extra files end up in an additional package.
 
-I have to agree here. I even had to search the wiki for records who actually is
-part of this team.
+wogline had a bit of a concern on IRC, so some grepping in
+0.9.{27,28,29} (I had checked 30 before) shows that really all that
+changes is that libpthread is built so that libpthread_db is used for
+debugging (and thus some debug stuff, that we would have end up in the
+-dbg packages anyhow) ends up in a different file.
 
-I seems that such discussions take place on the oe-private list. That is fine as
-long as the issue needs to be addressed in a smaller circle until it came to a
-conclusion. Still I miss a mail or similar once such a conclusion was done.
-
-A trivial item was the new logo. An offer was posted to this very list that a
-company was in favour of paying a designer for creating a logo. Great thing. The
-next time I came in contact with this was as the new logo was used on the
-website, wiki, etc. I was wondering what happened in between.
-
-For such a trivial issue it was not even a needed to write a mail about it, but
-it would have been nice to have a short report on what is/was going on. If a
-coreteam of a project does not communicate what it is doing or plans to do it
-leaves an aftertaste of missing transparency.
-
-regards
-Stefan Schmidt
+-- 
+Tom Rini
 
 
