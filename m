@@ -1,32 +1,22 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [194.100.97.46] (helo=mail.inoi.fi)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <matthieu.poullet@gmail.com>) id 1Lz5gQ-0002eI-Jb
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Apr 2009 11:02:27 +0200
-Received: by bwz19 with SMTP id 19so1177453bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 01:57:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:from:date:message-id
-	:subject:to:content-type:content-transfer-encoding;
-	bh=hn+d0OGey+VEy3iXXO+6V4rDQNLwG5o3kRUCBjVTXb0=;
-	b=WjUh4GPIxbaDrworHwYTrfutRrGKADzXMoJNC0zh3ReEwiy3gTO3dGhwWyyePw9UeF
-	P6snciIp+1Ex0xY0EHMdkdIYoG9Xr6jB1QLk6hgiCPLnyCRwdideOD6GCfTytECZMyM+
-	byu3pQkA4qtSSx4RjV9TKP+Z++W0gAAu+ZHtM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=XpRl1KxLPAWVpw0P7ElKxfXTTZnGNDTePRZDh5gy8dykfO2dUUZRiCNJa9Y6o8UzNo
-	cRNN5ndaRRK2/r1zvsq2Mdo8ykd82NELr+GvuOnD18jtzv3GA/Zs5/Wc7tm5Foglv+ZG
-	GtJO5B9p4Y3uObYfc9ouTPO//cNCCdIttIus4=
-MIME-Version: 1.0
-Received: by 10.204.31.201 with SMTP id z9mr91587bkc.79.1240995430151; Wed, 29 
-	Apr 2009 01:57:10 -0700 (PDT)
-From: Matthieu Poullet <matthieu.poullet@gmail.com>
-Date: Wed, 29 Apr 2009 10:56:50 +0200
-Message-ID: <80a0c20d0904290156j7a217a9ex9569753d7c1091fd@mail.gmail.com>
+	(envelope-from <petri.lehtinen+openembedded-devel@inoi.fi>)
+	id 1Lz5uN-0003C7-Dc for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Apr 2009 11:16:51 +0200
+Received: from mail.inoi.fi (localhost.localdomain [127.0.0.1])
+	by mail.inoi.fi (Postfix) with ESMTP id 04E532127E;
+	Wed, 29 Apr 2009 11:59:26 +0300 (EEST)
+Received: from localhost.localdomain (unknown [10.105.0.205])
+	by mail.inoi.fi (Postfix) with ESMTP id DFCA820794;
+	Wed, 29 Apr 2009 11:59:25 +0300 (EEST)
+From: Petri Lehtinen <petri.lehtinen+openembedded-devel@inoi.fi>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH, repost] dsplink: change path to the XDC tools directory
+Date: Wed, 29 Apr 2009 12:11:36 +0300
+Message-Id: <1240996296-20550-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
+X-Mailer: git-send-email 1.6.0.4
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: Petri Lehtinen <petri.lehtinen@inoi.fi>
+Subject: [PATCH] uclibc-initial: Fix FILESPATH mangling in all versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +30,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 09:02:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Apr 2009 09:16:51 -0000
 
-This way the naming convention is more coherent:
-TIBIOSDIR -> BIOS_INSTALL_DIR
-TIXDCTOOLSDIR  -> XDC_INSTALL_DIR
+From: Petri Lehtinen <petri.lehtinen@inoi.fi>
 
-Signed-off-by: Matthieu Poullet <m.poullet@avm.de>
+Make uclibc-initial use uclibc FILESPATH by setting correct
+FILESPATHPKG instead of altering FILESPATH directly via
+base_set_filespath.
+
+This makes it possible to provide custom
+uClibc.{config,machine,distro} in an overlay, for example.
+
+Signed-off-by: Petri Lehtinen <petri.lehtinen@inoi.fi>
 ---
- recipes/dsplink/ti-paths.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/uclibc/uclibc-initial_0.9.26.bb   |    2 +-
+ recipes/uclibc/uclibc-initial_0.9.27.bb   |    2 +-
+ recipes/uclibc/uclibc-initial_0.9.28.bb   |    2 +-
+ recipes/uclibc/uclibc-initial_0.9.29.bb   |    2 +-
+ recipes/uclibc/uclibc-initial_0.9.30.1.bb |    2 +-
+ recipes/uclibc/uclibc-initial_0.9.30.bb   |    2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/recipes/dsplink/ti-paths.inc b/recipes/dsplink/ti-paths.inc
-index 2f1a0e5..20a453f 100644
---- a/recipes/dsplink/ti-paths.inc
-+++ b/recipes/dsplink/ti-paths.inc
-@@ -9,7 +9,7 @@
- TITOOLSDIR ?= "/OE/TI"
- # Path under TITOOLSDIR where dspbios is unpacked
- TIBIOSDIR ?= "bios_5_33_02"
--TIXDCTOOLSDIR ?= "${TITOOLSDIR}/xdctools_3_10_03"
-+TIXDCTOOLSDIR ?= "xdctools_3_10_03"
- # Path under TITOOLSDIR where the dsp toolchain is unpacked
- TICGTOOLSDIR ?= "cg6x_6_0_16"
-
-@@ -20,7 +20,7 @@ TICGTOOLSDIR ?= "cg6x_6_0_16"
- # export some more variable to point to external TI tools
- # information is duplicated between the js and make based tools
- export CE_INSTALL_DIR=${S}
--export XDC_INSTALL_DIR=${TIXDCTOOLSDIR}
-+export XDC_INSTALL_DIR=${TITOOLSDIR}/${TIXDCTOOLSDIR}
- export BIOS_INSTALL_DIR=${TITOOLSDIR}/${TIBIOSDIR}
- # needed for configuro:
- export CGTOOLS_V5T="${CROSS_DIR}"
+diff --git a/recipes/uclibc/uclibc-initial_0.9.26.bb b/recipes/uclibc/uclibc-initial_0.9.26.bb
+index a6a83bd..8600549 100644
+--- a/recipes/uclibc/uclibc-initial_0.9.26.bb
++++ b/recipes/uclibc/uclibc-initial_0.9.26.bb
+@@ -1,7 +1,7 @@
+ SECTION = "base"
+ require uclibc_${PV}.bb
+ 
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+ 
+ DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+diff --git a/recipes/uclibc/uclibc-initial_0.9.27.bb b/recipes/uclibc/uclibc-initial_0.9.27.bb
+index 3aecd80..fdb3936 100644
+--- a/recipes/uclibc/uclibc-initial_0.9.27.bb
++++ b/recipes/uclibc/uclibc-initial_0.9.27.bb
+@@ -1,7 +1,7 @@
+ SECTION = "base"
+ require uclibc_${PV}.bb
+ 
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+ 
+ DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+diff --git a/recipes/uclibc/uclibc-initial_0.9.28.bb b/recipes/uclibc/uclibc-initial_0.9.28.bb
+index b996f64..ee95af7 100644
+--- a/recipes/uclibc/uclibc-initial_0.9.28.bb
++++ b/recipes/uclibc/uclibc-initial_0.9.28.bb
+@@ -1,7 +1,7 @@
+ SECTION = "base"
+ require uclibc_${PV}.bb
+ 
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+ 
+ DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+diff --git a/recipes/uclibc/uclibc-initial_0.9.29.bb b/recipes/uclibc/uclibc-initial_0.9.29.bb
+index c56e5fb..a7d140c 100644
+--- a/recipes/uclibc/uclibc-initial_0.9.29.bb
++++ b/recipes/uclibc/uclibc-initial_0.9.29.bb
+@@ -1,7 +1,7 @@
+ SECTION = "base"
+ require uclibc_${PV}.bb
+ 
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+ 
+ DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+diff --git a/recipes/uclibc/uclibc-initial_0.9.30.1.bb b/recipes/uclibc/uclibc-initial_0.9.30.1.bb
+index c56e5fb..a7d140c 100644
+--- a/recipes/uclibc/uclibc-initial_0.9.30.1.bb
++++ b/recipes/uclibc/uclibc-initial_0.9.30.1.bb
+@@ -1,7 +1,7 @@
+ SECTION = "base"
+ require uclibc_${PV}.bb
+ 
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+ 
+ DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+diff --git a/recipes/uclibc/uclibc-initial_0.9.30.bb b/recipes/uclibc/uclibc-initial_0.9.30.bb
+index c56e5fb..a7d140c 100644
+--- a/recipes/uclibc/uclibc-initial_0.9.30.bb
++++ b/recipes/uclibc/uclibc-initial_0.9.30.bb
+@@ -1,7 +1,7 @@
+ SECTION = "base"
+ require uclibc_${PV}.bb
+ 
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+ 
+ DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
 -- 
 1.6.0.4
+
 
 
