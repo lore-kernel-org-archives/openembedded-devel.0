@@ -1,32 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.44.158] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1LzIWF-0007za-PI
-	for openembedded-devel@openembedded.org; Thu, 30 Apr 2009 00:44:48 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1LzIR7-0002Eo-4o
-	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 22:39:29 +0000
-Received: from cuo02-acns-ce1.cisco.com ([64.101.22.72])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 29 Apr 2009 22:39:29 +0000
-Received: from msundius by cuo02-acns-ce1.cisco.com with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <leon.woestenberg@gmail.com>) id 1LzJER-00060w-DT
+	for openembedded-devel@openembedded.org; Thu, 30 Apr 2009 01:30:27 +0200
+Received: by yx-out-1718.google.com with SMTP id 4so855981yxp.30
 	for <openembedded-devel@openembedded.org>;
-	Wed, 29 Apr 2009 22:39:29 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Michael Sundius <msundius@sundius.com>
-Date: Wed, 29 Apr 2009 22:39:16 +0000 (UTC)
-Message-ID: <loom.20090429T222752-306@post.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 64.101.22.72 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.15) Gecko/20080702 Fedora/2.0.0.15-1.fc8 Firefox/2.0.0.15)
-Sender: news <news@ger.gmane.org>
-Subject: problem building an image
+	Wed, 29 Apr 2009 16:25:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=He6qkw2SurxvRNIAUugs2id+v2hWKyZdwtPPLxRJ45M=;
+	b=Xu4/GUK1TvP9BZiCJcT6l8raplP8KyEN6oSfoQpzjtY0x33Xx46GEgAdDugIsFb85x
+	o5qPHCp3XH640eh1ThCtv3CnYUwbkRVwqJgGASoHaYT5jUZSCHjyX3fAFXJXuglLYadZ
+	+0yrx0JrY0+mr820fGif9nzeWkUxxn31K5YGs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=n08dqf3VLSfceUqMbGV2645axtOrpZCS1YG7GqzOTm0HHe3jyBlJdx/09kvgx/Hq4p
+	DRF/WjVzquCK8fUIULeEbjJeoGNZ9XQlM3DqIZpMApNgZNG3VR+Zdq/0ya/GIIpuA86X
+	q30zn/np2aYQ4u6RcbYwpFd4TlGr8Bpad45w8=
+MIME-Version: 1.0
+Received: by 10.231.17.65 with SMTP id r1mr1111602iba.14.1241047508860; Wed, 
+	29 Apr 2009 16:25:08 -0700 (PDT)
+In-Reply-To: <20090429161224.GB18788@smtp.west.cox.net>
+References: <20090427141943.GG18788@smtp.west.cox.net>
+	<20090429161224.GB18788@smtp.west.cox.net>
+Date: Thu, 30 Apr 2009 01:25:08 +0200
+Message-ID: <c384c5ea0904291625m427a7834ie3d06dbc309fcc6f@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: Re: [RFC] Bring PREFERRED_LIBC to all distros
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,126 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 22:44:48 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 29 Apr 2009 23:30:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-I seem to be getting a build problem when I build an image. It does it
-on any image, even the helloworld-image. anyone can help?
+Hello Tom,
 
-please see below the bitbake output as well as the logfile contents:
+On Wed, Apr 29, 2009 at 6:12 PM, Tom Rini <trini@embeddedalley.com> wrote:
+> On Mon, Apr 27, 2009 at 07:19:43AM -0700, Tom Rini wrote:
+> - Change PREFERRED_LIBC to LIBC
+>
+Yes, this approach is simple and sane, and doesn't confuse people. Thanks Koen.
 
-bitbake out:
-------------------------------------------------
+> I'm now looking for ack's to pull this branch into .dev
+>
+Acked-by: Leon Woestenberg <leon@sidebranch.com>
 
-msundius@CUPLXSUNDISM01 build]$ bitbake helloworld-image
-NOTE: Handling BitBake files: \ (6625/6625) [100 %]
-NOTE: Parsing finished. 6339 cached, 0 parsed, 286 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: build 200904291528: started
-
-OE Build Configuration:
-BB_VERSION        = "1.8.12"
-METADATA_BRANCH   = "work"
-METADATA_REVISION = "e8f9ef39737cdfb72d0906456e9890615a615471"
-TARGET_ARCH       = "mips"
-TARGET_OS         = "linux"
-MACHINE           = "8kg6-ngp"
-DISTRO            = "sciatl"
-DISTRO_VERSION    = "1"
-TARGET_FPU        = "soft"
-
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 533 of 535 (ID: 9,
-/home/sundism/oe/openembedded/packages/images/helloworld-image.bb, do_rootfs)
-NOTE: package helloworld-image-1.0: started
-NOTE: package helloworld-image-1.0-r0: task do_rootfs: started
-ERROR: function do_rootfs failed
-ERROR: see log in
-/home/sundism/oe/out/work/8kg6-ngp-linux/helloworld-image-1.0-r0/temp/log.
-do_rootfs.17498
-NOTE: Task failed:
-/home/sundism/oe/out/work/8kg6-ngp-linux/helloworld-image-1.0-r0/temp/log.
-do_rootfs.17498
-NOTE: package helloworld-image-1.0-r0: task do_rootfs: failed
-ERROR: TaskFailed event exception, aborting
-NOTE: package helloworld-image-1.0: failed
-ERROR: Build of
-/home/sundism/oe/openembedded/packages/images/helloworld-image.bb do_rootfs
- failed
-ERROR: Task 9
-(/home/sundism/oe/openembedded/packages/images/helloworld-image.bb, 
-do_rootfs)failed
-NOTE: Tasks Summary: Attempted 532 tasks of which 532 didn't need to be 
-rerun and 1 failed.
-ERROR: '/home/sundism/oe/openembedded/packages/images/helloworld-image.bb' 
-failed
-NOTE: build 200904291528: completed
-
-logfile out:
--------------------------------
-+ rm -rf /home/sundism/oe/out/rootfs
-+ mkdir -p /home/sundism/oe/out/rootfs
-+ mkdir -p /home/sundism/oe/out/deploy/images
-+ '[' 0 '!=' 1 ']'
-+ for devtable in /home/sundism/oe/openembedded/files/device_table-minimal.
-txt
-+ makedevs -r /home/sundism/oe/out/rootfs -D
-
-/home/sundism/oe/openembedded/files/device_table-minimal.txt
-+ rootfs_ipk_do_rootfs
-+ set -x
-+ package_update_index_ipk
-+ set -x
-+ ipkgarchs='all any noarch mips  8kg6-ngp'
-+ '[' '!' -z '' ']'
-+ touch /home/sundism/oe/out/deploy/ipk/Packages
-+ ipkg-make-index -r /home/sundism/oe/out/deploy/ipk/Packages -p
-
-/home/sundism/oe/out/deploy/ipk/Packages -l
-
-/home/sundism/oe/out/deploy/ipk/Packages.filelist -m 
-
-/home/sundism/oe/out/deploy/ipk
-
-+ for arch in '$ipkgarchs'
-+ '[' -e /home/sundism/oe/out/deploy/ipk/all/ ']'
-+ touch /home/sundism/oe/out/deploy/ipk/all/Packages
-+ ipkg-make-index -r /home/sundism/oe/out/deploy/ipk/all/Packages -p
-
-/home/sundism/oe/out/deploy/ipk/all/Packages -l
-
-/home/sundism/oe/out/deploy/ipk/all/Packages.filelist -m
-
-/home/sundism/oe/out/deploy/ipk/all/
-
-Reading info for package
-/home/sundism/oe/out/deploy/ipk/all/update-modules-dbg_1.0-r8_all.ipk 
-Traceback (most recent call last):
-  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/ipkg-make-index", 
-line
-114, in <module>
-    pkg = ipkg.Package(filename)
-  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/ipkg.py", line 161, 
-in 
-__init__
-    tarStream = ar.open("control.tar.gz")
-  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/arfile.py", line 59,
-in open
-    f = self._scan(fname)
-  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/arfile.py", line 80,
-in
-_scan
-    size = int(descriptor[5])
-ValueError: invalid literal for int() with base 10: '`'
-
-----------------------------
-I printed out what descriptor[5] was and it was a "'"  
-
-thanks  for your help
-Mike
-
+Regards,
+-- 
+Leon
 
 
