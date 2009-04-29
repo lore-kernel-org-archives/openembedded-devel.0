@@ -1,36 +1,18 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1LzEAq-0007xQ-8V
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Apr 2009 20:06:24 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id C3BF91409729
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 19:35:08 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VUWIVhC5ZNsK
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 19:35:08 +0200 (CEST)
-Received: from [10.20.1.86] (unknown [82.119.242.94])
-	by ns.penguin.cz (Postfix) with ESMTP id A72BF1416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 19:34:46 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	(envelope-from <philip@balister.org>) id 1LzH6A-0003WV-8T
+	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 23:13:46 +0200
+Received: (qmail 21751 invoked by uid 1003); 29 Apr 2009 21:08:05 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 29 Apr 2009 21:08:04 -0000
+Message-ID: <49F8C1B3.1060808@balister.org>
+Date: Wed, 29 Apr 2009 17:08:03 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090429164500.GE18788@smtp.west.cox.net>
-References: <1240945982.12505.23.camel@utx.utx.cz>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF7A7@hiob.intern.dresearch.de>
-	<49F8463B.7040102@balister.org>
-	<20090429141544.GZ18788@smtp.west.cox.net>
-	<1241022375.4064.21.camel@hammer.suse.cz>
-	<20090429164500.GE18788@smtp.west.cox.net>
-Date: Wed, 29 Apr 2009 19:32:25 +0200
-Message-Id: <1241026345.4064.45.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1.1 
-Subject: Re: [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf binary
+Subject: [Fwd: HEADS UP: svn->git transition]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +26,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 18:06:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 Apr 2009 21:13:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Tom Rini wrote:
-> > +	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.in ${S}/Makefile.tpl
+Busybox is moving from svn to git. Do we have any busybox svn recipes?
 
-> I'll pull this in locally, and build everything today.  Just need to
-> have the buildbot finish the failure on everything first.
+Philip
 
-Well, without "if test -f" it will fail for gcc-4.4.0. This one would be
-safer for the final commit. Patching each gcc version separately would
-be even more safe, but also more work.
+-------- Original Message --------
+Subject: HEADS UP: svn->git transition
+Date: Wed, 29 Apr 2009 13:38:49 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+To: busybox@busybox.net
+CC: uclibc@uclibc.org, buildroot@uclibc.org
+Newsgroups: 
+gmane.comp.lib.uclibc.general,gmane.linux.busybox,gmane.comp.lib.uclibc.buildroot
 
-Note: gcc-4.4.0 already contains exactly this fix.
+Hi,
 
-diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configure-common.inc
-index e88cee5..f468a6b 100644
---- a/recipes/gcc/gcc-configure-common.inc
-+++ b/recipes/gcc/gcc-configure-common.inc
-@@ -74,6 +74,9 @@ do_configure () {
- 	export CXXFLAGS_FOR_BUILD="${BUILD_CXXFLAGS}"
- 	export LDFLAGS_FOR_BUILD="${BUILD_LDFLAGS}"
- 	export ARCH_FLAGS_FOR_TARGET="${ARCH_FLAGS_FOR_TARGET}"
-+	# gcc before 4.4.0 ignores LDFLAGS:
-+	if test -f ${S}/Makefile.in ; then sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.in ; fi
-+	if test -f ${S}/Makefile.tpl ; then sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.tpl ; fi
- 	(cd ${S} && gnu-configize) || die "failure running gnu-configize"
- 
- 	# splice our idea of where the headers live into gcc's world
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+We will be switching to git (instead of svn) for our repositories.
+Svn will be frozen during the conversion which is scheduled to begin
+on wednesday (10am, probably PDT which is approximately GMT-7).
 
 
