@@ -1,27 +1,32 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1LzI2B-0001zI-D4
-	for openembedded-devel@openembedded.org; Thu, 30 Apr 2009 00:13:43 +0200
-Received: (qmail 10738 invoked from network); 29 Apr 2009 20:21:43 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 29 Apr 2009 13:21:43 -0700
-Date: Wed, 29 Apr 2009 13:21:43 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090429202142.GH18788@smtp.west.cox.net>
-References: <1240945982.12505.23.camel@utx.utx.cz>
-	<69E6C70090A0A14498CC98FAE5E06B6E3CF7A7@hiob.intern.dresearch.de>
-	<49F8463B.7040102@balister.org>
-	<20090429141544.GZ18788@smtp.west.cox.net>
-	<1241022375.4064.21.camel@hammer.suse.cz>
-	<20090429164500.GE18788@smtp.west.cox.net>
-	<1241026345.4064.45.camel@hammer.suse.cz>
-	<20090429201712.GG18788@smtp.west.cox.net>
-MIME-Version: 1.0
-In-Reply-To: <20090429201712.GG18788@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf	binary
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1LzIWF-0007za-PI
+	for openembedded-devel@openembedded.org; Thu, 30 Apr 2009 00:44:48 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1LzIR7-0002Eo-4o
+	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 22:39:29 +0000
+Received: from cuo02-acns-ce1.cisco.com ([64.101.22.72])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 29 Apr 2009 22:39:29 +0000
+Received: from msundius by cuo02-acns-ce1.cisco.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 29 Apr 2009 22:39:29 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Michael Sundius <msundius@sundius.com>
+Date: Wed, 29 Apr 2009 22:39:16 +0000 (UTC)
+Message-ID: <loom.20090429T222752-306@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 64.101.22.72 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.15) Gecko/20080702 Fedora/2.0.0.15-1.fc8 Firefox/2.0.0.15)
+Sender: news <news@ger.gmane.org>
+Subject: problem building an image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +40,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 22:13:43 -0000
+X-List-Received-Date: Wed, 29 Apr 2009 22:44:48 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Wed, Apr 29, 2009 at 01:17:12PM -0700, Tom Rini wrote:
-> On Wed, Apr 29, 2009 at 07:32:25PM +0200, Stanislav Brabec wrote:
-> > Tom Rini wrote:
-> > > > +	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.in ${S}/Makefile.tpl
-> > 
-> > > I'll pull this in locally, and build everything today.  Just need to
-> > > have the buildbot finish the failure on everything first.
-> > 
-> > Well, without "if test -f" it will fail for gcc-4.4.0. This one would be
-> > safer for the final commit. Patching each gcc version separately would
-> > be even more safe, but also more work.
-> 
-> OK, some unpacking and grepping and such done.  4.3.x, 4.4.0 and oddly,
-> 4.0.x are good.  The rest are not.  But, I don't see how the if works,
+I seem to be getting a build problem when I build an image. It does it
+on any image, even the helloworld-image. anyone can help?
 
-I take that back.  The 4.0.x ldflags.patch is good.  What I get for
-doing a -c patch unstead of -c unpack :)
+please see below the bitbake output as well as the logfile contents:
 
--- 
-Tom Rini
+bitbake out:
+------------------------------------------------
+
+msundius@CUPLXSUNDISM01 build]$ bitbake helloworld-image
+NOTE: Handling BitBake files: \ (6625/6625) [100 %]
+NOTE: Parsing finished. 6339 cached, 0 parsed, 286 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: build 200904291528: started
+
+OE Build Configuration:
+BB_VERSION        = "1.8.12"
+METADATA_BRANCH   = "work"
+METADATA_REVISION = "e8f9ef39737cdfb72d0906456e9890615a615471"
+TARGET_ARCH       = "mips"
+TARGET_OS         = "linux"
+MACHINE           = "8kg6-ngp"
+DISTRO            = "sciatl"
+DISTRO_VERSION    = "1"
+TARGET_FPU        = "soft"
+
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 533 of 535 (ID: 9,
+/home/sundism/oe/openembedded/packages/images/helloworld-image.bb, do_rootfs)
+NOTE: package helloworld-image-1.0: started
+NOTE: package helloworld-image-1.0-r0: task do_rootfs: started
+ERROR: function do_rootfs failed
+ERROR: see log in
+/home/sundism/oe/out/work/8kg6-ngp-linux/helloworld-image-1.0-r0/temp/log.
+do_rootfs.17498
+NOTE: Task failed:
+/home/sundism/oe/out/work/8kg6-ngp-linux/helloworld-image-1.0-r0/temp/log.
+do_rootfs.17498
+NOTE: package helloworld-image-1.0-r0: task do_rootfs: failed
+ERROR: TaskFailed event exception, aborting
+NOTE: package helloworld-image-1.0: failed
+ERROR: Build of
+/home/sundism/oe/openembedded/packages/images/helloworld-image.bb do_rootfs
+ failed
+ERROR: Task 9
+(/home/sundism/oe/openembedded/packages/images/helloworld-image.bb, 
+do_rootfs)failed
+NOTE: Tasks Summary: Attempted 532 tasks of which 532 didn't need to be 
+rerun and 1 failed.
+ERROR: '/home/sundism/oe/openembedded/packages/images/helloworld-image.bb' 
+failed
+NOTE: build 200904291528: completed
+
+logfile out:
+-------------------------------
++ rm -rf /home/sundism/oe/out/rootfs
++ mkdir -p /home/sundism/oe/out/rootfs
++ mkdir -p /home/sundism/oe/out/deploy/images
++ '[' 0 '!=' 1 ']'
++ for devtable in /home/sundism/oe/openembedded/files/device_table-minimal.
+txt
++ makedevs -r /home/sundism/oe/out/rootfs -D
+
+/home/sundism/oe/openembedded/files/device_table-minimal.txt
++ rootfs_ipk_do_rootfs
++ set -x
++ package_update_index_ipk
++ set -x
++ ipkgarchs='all any noarch mips  8kg6-ngp'
++ '[' '!' -z '' ']'
++ touch /home/sundism/oe/out/deploy/ipk/Packages
++ ipkg-make-index -r /home/sundism/oe/out/deploy/ipk/Packages -p
+
+/home/sundism/oe/out/deploy/ipk/Packages -l
+
+/home/sundism/oe/out/deploy/ipk/Packages.filelist -m 
+
+/home/sundism/oe/out/deploy/ipk
+
++ for arch in '$ipkgarchs'
++ '[' -e /home/sundism/oe/out/deploy/ipk/all/ ']'
++ touch /home/sundism/oe/out/deploy/ipk/all/Packages
++ ipkg-make-index -r /home/sundism/oe/out/deploy/ipk/all/Packages -p
+
+/home/sundism/oe/out/deploy/ipk/all/Packages -l
+
+/home/sundism/oe/out/deploy/ipk/all/Packages.filelist -m
+
+/home/sundism/oe/out/deploy/ipk/all/
+
+Reading info for package
+/home/sundism/oe/out/deploy/ipk/all/update-modules-dbg_1.0-r8_all.ipk 
+Traceback (most recent call last):
+  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/ipkg-make-index", 
+line
+114, in <module>
+    pkg = ipkg.Package(filename)
+  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/ipkg.py", line 161, 
+in 
+__init__
+    tarStream = ar.open("control.tar.gz")
+  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/arfile.py", line 59,
+in open
+    f = self._scan(fname)
+  File "/home/sundism/oe/out/staging/i686-linux/usr/bin/arfile.py", line 80,
+in
+_scan
+    size = int(descriptor[5])
+ValueError: invalid literal for int() with base 10: '`'
+
+----------------------------
+I printed out what descriptor[5] was and it was a "'"  
+
+thanks  for your help
+Mike
+
 
 
