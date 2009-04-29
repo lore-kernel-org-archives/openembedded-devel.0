@@ -1,32 +1,28 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [195.160.190.3] (helo=111.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Lz7g4-0000gs-Gt
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1Lz8qK-0004yz-Ti
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Apr 2009 13:10:12 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 317F716E233
+	Wed, 29 Apr 2009 14:24:52 +0200
+Received: from acn.212.98.42.40.adslpremium.ch (unknown [212.98.42.40])
+	by 111.com (Postfix) with ESMTPA id D5AD93706D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 13:05:35 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 14A092A4238
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 13:04:58 +0200 (CEST)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Wed, 29 Apr 2009 14:19:37 +0200 (CEST)
+Received: from cruiser.hq.acn-group.ch ([172.16.145.92] helo=localhost)
+	by van.hq.acn-group.ch with esmtp (Exim 3.36 #1 (Debian))
+	id 1Lz8l7-00054N-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2009 14:19:30 +0200
+Received: from localhost ([127.0.0.1]) by localhost with esmtp (Exim 4.63)
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1Lz8o6-0004Eu-TR
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Apr 2009 14:22:34 +0200
+Message-ID: <49F8468A.7060305@acn-group.ch>
+Date: Wed, 29 Apr 2009 14:22:34 +0200
+From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
+Organization: ACN S.A.
+User-Agent: Icedove 1.5.0.14eol (X11/20080724)
 MIME-Version: 1.0
-Date: Wed, 29 Apr 2009 13:04:27 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF7A7@hiob.intern.dresearch.de>
-In-Reply-To: <1240945982.12505.23.camel@utx.utx.cz>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf	binary
-Thread-Index: AcnIOd+09Ce4HgrJS++XWLF985ekmQAgENXQ
-References: <49F59B68.1010208@balister.org><69E6C70090A0A14498CC98FAE5E06B6E3CF793@hiob.intern.dresearch.de><20090427134352.GE18788@smtp.west.cox.net>
-	<gt4ekt$ba2$1@ger.gmane.org><69E6C70090A0A14498CC98FAE5E06B6E3CF796@hiob.intern.dresearch.de>
-	<1240945982.12505.23.camel@utx.utx.cz>
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf	binary
+To: openembedded-devel@lists.openembedded.org
+Subject: do_rootfs : (offline root mode: not running openntpd.postinst)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +36,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 11:10:13 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 29 Apr 2009 12:24:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-PiBJIGNhbiBjb25maXJtIHRoZSBmYWlsdXJlIGluIHRoZSBkZWZhdWx0IGFuZ3N0cm9tIGJ1aWxk
-IGZvciBzcGl0eiBmcm9tDQo+IHRoZSBsYXN0IHdlZWsuIExpbmtpbmcgb2YgZ2NjIHdyYXBwZXIg
-YW5kIGZldyBvdGhlciB1dGlsaXRpZXMgcmVwb3J0ZWQNCj4gdGhlIHN0YW5kYXJkIEdOVV9IQVNI
-IFFBIGVycm9yLg0KPiANCj4gSGVyZSBpcyBhIHBvc3NpYmxlIGZpeCBvciB3b3JrLWFyb3VuZC4g
-SXQncyB0ZXN0ZWQgYW5kIGl0IHdvcmtzLCBidXQNCj4gbWF5YmUgaXQgaXMgbm90IGZ1bGx5IGNv
-cnJlY3QuDQo+IA0KPiBJdCBtYXkgYmUgb25lIG9mIGZvbGxvd2luZyBwcm9ibGVtcy4gSSBkaWQg
-bm90IHNlYXJjaCBkZWVwZXIgd2hpY2ggb25lDQo+IGlzIHRydWU6DQo+IC0gSWdub3JpbmcgTERG
-TEFHUyBwYXNzZWQgdG8gY29uZmlndXJlDQo+IC0gTERGTEFHUyB4IExERkxBR1NfRk9SX1RBUkdF
-VCBjbGFzaA0KPiAtIO+7v0xERkxBR1NfRk9SX1RBUkdFVCBhcmUgbm90IHNldCBpbiBjcm9zcyBi
-dWlsZHMgb2YgbmF0aXZlIA0KPiBnY2MgY29tcGlsZXINCj4gICAoaS4gZS4gbm90IGNhbmFkaWFu
-KQ0KDQpGaXggd29ya3MgZm9yIG1lLiBCdXQgaXQgd291bGQgYmUgbmljZSBpZiBzb21lIG1lbWJl
-cnMgb2YgdGhlIGNvcmUgdGVhbSBjb3VsZCBhY2sgaXQuDQoNClN0ZWZmZW4NCg==
+Hi,
+
+I'm facing a problem with the openntpd recipe (version 3.9p1). When I select 
+this recipe to be build in my image it builds correctly and is present on my 
+jffs2 image file which is great. But then it won't run on the target because 
+openntpd requires a special user to be created and it is not. (as stated in the 
+recipe by the build configuration this user should be named "ntpd").
+
+By checking the recipe I saw that pkg_postinst is defined and should create the 
+user in the passwd file after the package has been installed. So far so good. 
+But then I realized that this function was never called when the do_rootfs is 
+done for my image file.
+
+It seems that when the packages are installed in the rootfs directory 
+(do_rootfs) all the pkg_postinst functions of the recipes are skipped with the 
+following message :
+
+(offline root mode: not running base-passwd.postinst)
+(offline root mode: not running busybox.postinst)
+(offline root mode: not running dropbear.postinst)
+[stripped]
+(offline root mode: not running openntpd.postinst)
+etc...
+
+I guess that this a feature and not a bug but I'd like to understand why these 
+functions are not called ?
+
+Of course I can modify the recipe so it will change my passwd file during 
+install or add some initialization script to check that this user is created 
+before ntpd runs but I'm more curious about why we skip all the postinst scripts.
+
+Thanks for any comments,
+
+Christophe
+
+
+
+
+
+
+
+
 
 
