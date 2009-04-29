@@ -1,20 +1,34 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1LzCTd-00029Y-Nf
-	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 18:17:42 +0200
-Received: (qmail 9947 invoked from network); 29 Apr 2009 16:12:24 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 29 Apr 2009 09:12:24 -0700
-Date: Wed, 29 Apr 2009 09:12:24 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Message-ID: <20090429161224.GB18788@smtp.west.cox.net>
-References: <20090427141943.GG18788@smtp.west.cox.net>
-MIME-Version: 1.0
-In-Reply-To: <20090427141943.GG18788@smtp.west.cox.net>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] Bring PREFERRED_LIBC to all distros
+Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <utx@penguin.cz>) id 1LzCh3-0007ud-6X
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Apr 2009 18:31:33 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 8D0291409734
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2009 18:28:36 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id jZe7mF84IMQA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2009 18:28:36 +0200 (CEST)
+Received: from [10.20.1.86] (unknown [82.119.242.94])
+	by ns.penguin.cz (Postfix) with ESMTP id 647EF1409731
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2009 18:28:36 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20090429141544.GZ18788@smtp.west.cox.net>
+References: <1240945982.12505.23.camel@utx.utx.cz>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF7A7@hiob.intern.dresearch.de>
+	<49F8463B.7040102@balister.org>
+	<20090429141544.GZ18788@smtp.west.cox.net>
+Date: Wed, 29 Apr 2009 18:26:15 +0200
+Message-Id: <1241022375.4064.21.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1.1 
+Subject: Re: [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,41 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 16:17:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 29 Apr 2009 16:31:33 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, Apr 27, 2009 at 07:19:43AM -0700, Tom Rini wrote:
+Tom Rini wrote: 
+> On Wed, Apr 29, 2009 at 08:21:15AM -0400, Philip Balister wrote:
+> > Sledz, Steffen wrote:
 
-> Hey all.  I've created a new branch, trini/add-libc-overrides which does
-> the following:
-> - Make every distro declare PREFERRED_LIBC, either outright or
->   overridable.
-> - For Angstrom/foonas have DISTROVAR ?= ${PREFERRED_LIBC},
->   PREFERRED_LIBC ?= default
-> - Add conf/distro/include/{eglibc,glibc,uclibc}.inc that have:
->   - Add 'glibc' to OVERRIDES for eglibc/glibc and 'uclibc' for
->     uclibc.inc
->   - Default providers.
->   NOTE: ${TARGET_PREFIX} includes ${TARGET_VENDOR} so ...
-> - Switch all distros to have:
->   require conf/distro/include/${PREFERED_LIBC}.inc
->   - Clean up distro-specific includes, and sane-toolchain.inc a little
->     bit by removing all of the PREFERRED_PROVIDER stuff it no longer
->     needs.
-> - For glibc*.bb older than 2.5, add in some missing RPROVIDES.
+> >> Fix works for me. But it would be nice if some members of the core team could ack it.
+> >
+> > Does anyone see any downside for this patch? Have other people tested  
+> > it? I hate blind acking things.
+> 
+> Khem has a patch for this issue too but wants to test it more.
 
-I've pushed a trini/add-libc-overrides-2 branch with the following
-changes:
-- Change PREFERRED_LIBC to LIBC
-- Fold fixing up minimal/minimal-uclibc into the commit that brings in
-  the libc inc file.
-- Re-order commits so that everything is functional from commit to
-  commit.
+I just tested another way to fix. It looks like a gcc bug - LDFLAGS nor
+LDFLAGS_FOR_TARGET are not used in gcc/Makefile.
 
-I'm now looking for ack's to pull this branch into .dev
+diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configure-common.inc
+index e88cee5..9ede6a2 100644
+--- a/recipes/gcc/gcc-configure-common.inc
++++ b/recipes/gcc/gcc-configure-common.inc
+@@ -73,7 +73,18 @@ do_configure () {
+ 	export CPPFLAGS_FOR_BUILD="${BUILD_CPPFLAGS}"
+ 	export CXXFLAGS_FOR_BUILD="${BUILD_CXXFLAGS}"
+ 	export LDFLAGS_FOR_BUILD="${BUILD_LDFLAGS}"
+ 	export ARCH_FLAGS_FOR_TARGET="${ARCH_FLAGS_FOR_TARGET}"
++	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.in ${S}/Makefile.tpl
+ 	(cd ${S} && gnu-configize) || die "failure running gnu-configize"
+ 
+ 	# splice our idea of where the headers live into gcc's world
+
+
+My previous patch built the whole feed. But I did not test it with
+canadian recipes.
 
 -- 
-Tom Rini
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
