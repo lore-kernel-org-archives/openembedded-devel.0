@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Lz2cj-0004F8-QK
-	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 07:46:25 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Lz2Xf-0001rT-LP
-	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 05:41:11 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 29 Apr 2009 05:41:11 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 29 Apr 2009 05:41:11 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 29 Apr 2009 07:40:54 +0200
-Message-ID: <gt8p96$go1$1@ger.gmane.org>
-References: <20090427141943.GG18788@smtp.west.cox.net>	<20090428203009.GH26082@gmail.com>
-	<20090428205520.GV18788@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090421 Shredder/3.0b3pre
-In-Reply-To: <20090428205520.GV18788@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Bring PREFERRED_LIBC to all distros
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lz4zg-0004M2-Lb
+	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 10:18:16 +0200
+Received: (qmail 11664 invoked by uid 813007); 29 Apr 2009 08:13:01 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 29 Apr 2009 08:13:01 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Apr 2009 10:12:39 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <20090425075933.E6E18188456@amethyst.openembedded.net>
+	<1240929710.30742.102.camel@mill.internal.reciva.com>
+	<20090428181302.GA5449@excalibur.local>
+In-Reply-To: <20090428181302.GA5449@excalibur.local>
+MIME-Version: 1.0
+Message-Id: <200904291012.56927.marcin@juszkiewicz.com.pl>
+Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the	new SONAMEs; move to autosplitting"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 05:46:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Apr 2009 08:18:16 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 28-04-09 22:55, Tom Rini wrote:
-> On Tue, Apr 28, 2009 at 01:30:09PM -0700, Khem Raj wrote:
->> On (27/04/09 07:19), Tom Rini wrote:
->>> Hey all.  I've created a new branch, trini/add-libc-overrides which does
->>> the following:
->>> - Make every distro declare PREFERRED_LIBC, either outright or
->>>    overridable.
->>
->> may be you should call it something like SYSTEM_LIBC
->
-> OK, will rework and get a new branch up sometime soon
+Dnia wtorek, 28 kwietnia 2009 o 20:13:02 Stefan Schmidt napisa=C5=82(a):
+> A trivial item was the new logo. An offer was posted to this very
+> list that a company was in favour of paying a designer for creating a
+> logo. Great thing. The next time I came in contact with this was as
+> the new logo was used on the website, wiki, etc. I was wondering what
+> happened in between.
 
-Or just plain 'LIBC', avoids underscores as well :)
+=46irst we got offer, then we got few versions of logo. We chosen two and=20
+one colour scheme. Then we got another set of propositions and selected=20
+current logo. Thats in short.
 
-regards,
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Koen
 
 
 
