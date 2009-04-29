@@ -1,14 +1,14 @@
 Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1LzHxt-0001qW-QG
-	for openembedded-devel@openembedded.org; Thu, 30 Apr 2009 00:09:18 +0200
-Received: (qmail 10733 invoked from network); 29 Apr 2009 20:17:13 -0000
+	(envelope-from <trini@embeddedalley.com>) id 1LzI2B-0001zI-D4
+	for openembedded-devel@openembedded.org; Thu, 30 Apr 2009 00:13:43 +0200
+Received: (qmail 10738 invoked from network); 29 Apr 2009 20:21:43 -0000
 Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 29 Apr 2009 13:17:13 -0700
-Date: Wed, 29 Apr 2009 13:17:12 -0700
+	by easi.embeddedalley.com with SMTP; 29 Apr 2009 13:21:43 -0700
+Date: Wed, 29 Apr 2009 13:21:43 -0700
 From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090429201712.GG18788@smtp.west.cox.net>
+Message-ID: <20090429202142.GH18788@smtp.west.cox.net>
 References: <1240945982.12505.23.camel@utx.utx.cz>
 	<69E6C70090A0A14498CC98FAE5E06B6E3CF7A7@hiob.intern.dresearch.de>
 	<49F8463B.7040102@balister.org>
@@ -16,8 +16,9 @@ References: <1240945982.12505.23.camel@utx.utx.cz>
 	<1241022375.4064.21.camel@hammer.suse.cz>
 	<20090429164500.GE18788@smtp.west.cox.net>
 	<1241026345.4064.45.camel@hammer.suse.cz>
+	<20090429201712.GG18788@smtp.west.cox.net>
 MIME-Version: 1.0
-In-Reply-To: <1241026345.4064.45.camel@hammer.suse.cz>
+In-Reply-To: <20090429201712.GG18788@smtp.west.cox.net>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf	binary
@@ -34,36 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 22:09:18 -0000
+X-List-Received-Date: Wed, 29 Apr 2009 22:13:43 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Apr 29, 2009 at 07:32:25PM +0200, Stanislav Brabec wrote:
-> Tom Rini wrote:
-> > > +	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.in ${S}/Makefile.tpl
+On Wed, Apr 29, 2009 at 01:17:12PM -0700, Tom Rini wrote:
+> On Wed, Apr 29, 2009 at 07:32:25PM +0200, Stanislav Brabec wrote:
+> > Tom Rini wrote:
+> > > > +	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.in ${S}/Makefile.tpl
+> > 
+> > > I'll pull this in locally, and build everything today.  Just need to
+> > > have the buildbot finish the failure on everything first.
+> > 
+> > Well, without "if test -f" it will fail for gcc-4.4.0. This one would be
+> > safer for the final commit. Patching each gcc version separately would
+> > be even more safe, but also more work.
 > 
-> > I'll pull this in locally, and build everything today.  Just need to
-> > have the buildbot finish the failure on everything first.
-> 
-> Well, without "if test -f" it will fail for gcc-4.4.0. This one would be
-> safer for the final commit. Patching each gcc version separately would
-> be even more safe, but also more work.
+> OK, some unpacking and grepping and such done.  4.3.x, 4.4.0 and oddly,
+> 4.0.x are good.  The rest are not.  But, I don't see how the if works,
 
-OK, some unpacking and grepping and such done.  4.3.x, 4.4.0 and oddly,
-4.0.x are good.  The rest are not.  But, I don't see how the if works,
-unless ${S} isn't right in gcc-4.4.0, as all versions have
-gcc-$VERSION/Makefile.{in,tpl}.
-
-Regardless, I think the approach we should go with is a fixup, per
-gcc-version.inc.  Roughly:
-
-do_configure_prepend() {
-	# Make sure we don't ignore ldflags.
-	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.in
-	sed -i 's/^LDFLAGS = $/LDFLAGS = @LDFLAGS@/' ${S}/Makefile.tpl
-}
-
-And I'll check if we can drop the incomplete ldflags.patch too.
+I take that back.  The 4.0.x ldflags.patch is good.  What I get for
+doing a -c patch unstead of -c unpack :)
 
 -- 
 Tom Rini
