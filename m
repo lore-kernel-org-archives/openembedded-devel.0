@@ -1,31 +1,29 @@
-Received: from [195.160.190.3] (helo=111.com)
+Received: from [68.230.241.39] (helo=fed1rmmtao107.cox.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <c.aeschlimann@acn-group.ch>) id 1Lz9zB-0003wc-3Q
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Apr 2009 15:38:05 +0200
-Received: from acn.212.98.42.40.adslpremium.ch (unknown [212.98.42.40])
-	by 111.com (Postfix) with ESMTPA id 3BBBF37046
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 15:32:48 +0200 (CEST)
-Received: from cruiser.hq.acn-group.ch ([172.16.145.92] helo=localhost)
-	by van.hq.acn-group.ch with esmtp (Exim 3.36 #1 (Debian))
-	id 1Lz9tx-00058Y-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2009 15:32:41 +0200
-Received: from localhost ([127.0.0.1]) by localhost with esmtp (Exim 4.63)
-	(envelope-from <c.aeschlimann@acn-group.ch>) id 1Lz9ww-0004GT-CX
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Apr 2009 15:35:46 +0200
-Message-ID: <49F857B2.1070708@acn-group.ch>
-Date: Wed, 29 Apr 2009 15:35:46 +0200
-From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
-Organization: ACN S.A.
-User-Agent: Icedove 1.5.0.14eol (X11/20080724)
+	(envelope-from <trini@kernel.crashing.org>) id 1LzAel-0005P3-DI
+	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 16:21:03 +0200
+Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao107.cox.net
+	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
+	<20090429141544.YCQY10385.fed1rmmtao107.cox.net@fed1rmimpo01.cox.net>
+	for <openembedded-devel@openembedded.org>;
+	Wed, 29 Apr 2009 10:15:44 -0400
+Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
+	id lSFk1b00K4dMFYL03SFknL; Wed, 29 Apr 2009 10:15:45 -0400
+X-Authority-Analysis: v=1.0 c=1 a=9VPdEZR8EBsA:10 a=eQmQFGOYtZwA:10
+	a=ZceZqKTTYryabFTKGBIA:9 a=bF7KAhC9bUMiHcwp-0Vsl5Ann7IA:4
+X-CM-Score: 0.00
+Date: Wed, 29 Apr 2009 07:15:44 -0700
+From: Tom Rini <trini@kernel.crashing.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090429141544.GZ18788@smtp.west.cox.net>
+References: <1240945982.12505.23.camel@utx.utx.cz>
+	<69E6C70090A0A14498CC98FAE5E06B6E3CF7A7@hiob.intern.dresearch.de>
+	<49F8463B.7040102@balister.org>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <49F8468A.7060305@acn-group.ch>
-	<1241009859.30742.168.camel@mill.internal.reciva.com>
-In-Reply-To: <1241009859.30742.168.camel@mill.internal.reciva.com>
-Subject: Re: do_rootfs : (offline root mode: not	running	openntpd.postinst)
+In-Reply-To: <49F8463B.7040102@balister.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 13:38:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Apr 2009 14:21:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Phil Blundell wrote:
-> On Wed, 2009-04-29 at 14:22 +0200, Christophe Aeschlimann wrote:
->> Of course I can modify the recipe so it will change my passwd file during 
->> install or add some initialization script to check that this user is created 
->> before ntpd runs but I'm more curious about why we skip all the postinst scripts.
-> 
-> The postinst scripts are primarily intended to execute on the target
-> device (during "ipkg configure" or equivalent) and, in general, they
-> won't run correctly on the build host.  So, when ipkg is running in
-> offline root mode, it skips the postinsts and leaves the packages
-> installed but not configured.
-> 
-> [...]
-> 
-> p.
-> 
-> 
+On Wed, Apr 29, 2009 at 08:21:15AM -0400, Philip Balister wrote:
+> Sledz, Steffen wrote:
+>>> I can confirm the failure in the default angstrom build for spitz from
+>>> the last week. Linking of gcc wrapper and few other utilities reported
+>>> the standard GNU_HASH QA error.
+>>>
+>>> Here is a possible fix or work-around. It's tested and it works, but
+>>> maybe it is not fully correct.
+>>>
+>>> It may be one of following problems. I did not search deeper which one
+>>> is true:
+>>> - Ignoring LDFLAGS passed to configure
+>>> - LDFLAGS x LDFLAGS_FOR_TARGET clash
+>>> - ???LDFLAGS_FOR_TARGET are not set in cross builds of native gcc 
+>>> compiler
+>>>   (i. e. not canadian)
+>>
+>> Fix works for me. But it would be nice if some members of the core team could ack it.
+>
+> Does anyone see any downside for this patch? Have other people tested  
+> it? I hate blind acking things.
 
-Thank you for the quick and very detailed answer.
+Khem has a patch for this issue too but wants to test it more.
 
-Regards,
-
-Christophe
-
+-- 
+Tom Rini
 
 
