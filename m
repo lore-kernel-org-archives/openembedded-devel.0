@@ -1,28 +1,38 @@
-Received: from [68.230.241.45] (helo=fed1rmmtao101.cox.net)
+Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <trini@kernel.crashing.org>) id 1Lz0nM-0008Oz-Tw
-	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 05:49:17 +0200
-Received: from fed1rmimpo01.cox.net ([70.169.32.71]) by fed1rmmtao101.cox.net
-	(InterMail vM.7.08.02.01 201-2186-121-102-20070209) with ESMTP id
-	<20090429034402.CMBH27308.fed1rmmtao101.cox.net@fed1rmimpo01.cox.net>
+	(envelope-from <otavio.salvador@gmail.com>) id 1Lz0zT-0000BC-Qo
+	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 06:01:47 +0200
+Received: by yx-out-1718.google.com with SMTP id 4so559727yxp.30
 	for <openembedded-devel@openembedded.org>;
-	Tue, 28 Apr 2009 23:44:02 -0400
-Received: from localhost ([68.230.63.214]) by fed1rmimpo01.cox.net with bizsmtp
-	id lFjz1b0074dMFYL03Fk1i7; Tue, 28 Apr 2009 23:44:01 -0400
-X-Authority-Analysis: v=1.0 c=1 a=hIENGkm314AA:10 a=TzmGqyqdOwcA:10
-	a=alK4_DS-AAAA:8 a=IQzxOcdqz3W_wDuvCfUA:9
-	a=6d7cSQhVPPhXrtnt8CO3z8ar85wA:4
-	a=djP8yJPOCv2S4OPs:21 a=4l0IfBN8DGYnEtkB:21
-X-CM-Score: 0.00
-Date: Tue, 28 Apr 2009 20:43:58 -0700
-From: Tom Rini <trini@kernel.crashing.org>
-To: openembedded-devel@openembedded.org
-Message-ID: <20090429034358.GX18788@smtp.west.cox.net>
-References: <87r5zckux9.fsf@neumann.lab.ossystems.com.br>
+	Tue, 28 Apr 2009 20:56:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:content-type:content-transfer-encoding;
+	bh=JGl17gjPnyPPwM7Cz0+Nur8S4OAAj0/ouz/0eCRVMMg=;
+	b=Im2gkvi+4+pDRLu2745iy06VZMQHiOMga1bxfLArgLekZ3tk46fnp7v13dhUyn3z87
+	1sDmikLX/sTTcblooFCcsosUvUARRaSg7yRmd1dqc9IMIUTGMScXi/8jPaZjWBX5+wod
+	169+uqspxEMb4f9KyqbkrX+TW9mlOPS/HOwEI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=lTNITchbRQxqCj3qOP5+5pTFCOjIzUdUq5e9zydxSYctkevvuD6hlnOUwr9CyJOxy+
+	TyMJi8Viu3ExZDZCvki3uJbnvMvchGEDQFF7EmwEMOZ7eLyYT6WhZt0OHjyYLJsP0LCs
+	s1Re71hqA9i1usMzdWCwCBaNBSTbHeO0iZ/Ts=
 MIME-Version: 1.0
-In-Reply-To: <87r5zckux9.fsf@neumann.lab.ossystems.com.br>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.152.12 with SMTP id z12mr11501678and.141.1240977394627; 
+	Tue, 28 Apr 2009 20:56:34 -0700 (PDT)
+In-Reply-To: <20090429034358.GX18788@smtp.west.cox.net>
+References: <87r5zckux9.fsf@neumann.lab.ossystems.com.br>
+	<20090429034358.GX18788@smtp.west.cox.net>
+Date: Wed, 29 Apr 2009 00:56:34 -0300
+X-Google-Sender-Auth: e22d15d078041ae8
+Message-ID: <be7a9f3d0904282056s6cd809d0w71164b38720c37a0@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@openembedded.org
 Subject: Re: Pull request from O.S. Systems tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -37,47 +47,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 03:49:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 29 Apr 2009 04:01:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 29, 2009 at 12:20:18AM -0300, Otavio Salvador wrote:
+Hello Tom,
 
-> [ To easy PatchWork people I preferred to use a pull request and let
->   people to review the branch. Once people ack it, I do the pull on the
->   dev tree. ]
-> 
-> The following changes since commit 6422fe2b0a110c3a611c0e98cd96b489d4f11880:
->   Andrea Adami (1):
->         linux-kexecboot.inc: force CONFIG_KEXEC=y just in case  - no runtime changes, no PR BUMP
-> 
-> are available in the git repository at:
-> 
->   git://projetos.ossystems.com.br/git/users/otavio/org.openembedded.dev.git master
-> 
-> Otavio Salvador (11):
->       gtk-engines: add 2.18.1
->       machine/geode[gl]x: use more optimization while compiling
->       acpid: add 1.0.8 (with netlink support)
->       hal-info: add 20080414
->       python-pycups: add
->       checksums.ini: add flash-plugin
->       checksums.ini: add sun-jdk
->       checksums.ini: firefox-l10n-pt-br
->       system-config-printer: add to provide python-cupshelpers to hal-cups-utils
->       hal-cups-utils: add
->       cups: split backends and models
+On Wed, Apr 29, 2009 at 12:43 AM, Tom Rini <trini@kernel.crashing.org> wrot=
+e:
+> To summarize our IRC chat just now:
+> - cups should RRECOMMENDS in some stuff that's dynamic now and used to
+> =A0be included in another package.
 
-To summarize our IRC chat just now:
-- cups should RRECOMMENDS in some stuff that's dynamic now and used to
-  be included in another package.
-- GPLv2 is in licenses.conf, GPL-2 isn't, change please :)
+I'll wait to change that to hear some suggestions how we could some it
+in better way. I don't like the RRECOMMENDS on this case since it
+reduces the flexibility.
 
-Otherwise, everything looks fine (and I recall Koen looking at, and I
-think agreeing with the geode optimization changes, including the glibc
-build change).
+In our specific case we do need to not include things of cups in our
+image. One idea that come to my mind was to change cups package to
+really include all stuff and add a new package like cups-daemon that
+depends on nothing. I just fail to see how I can do it dynamicaly for
+backends.
 
--- 
-Tom Rini
+> - GPLv2 is in licenses.conf, GPL-2 isn't, change please :)
+
+Done and updated the branch according (I've also add two new commits
+about licenses on the tree too, take a look plz).
+
+> Otherwise, everything looks fine (and I recall Koen looking at, and I
+> think agreeing with the geode optimization changes, including the glibc
+> build change).
+
+I belive I've done them all. Koen please take a look.
+
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
