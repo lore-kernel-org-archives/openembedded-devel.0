@@ -1,24 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Lz4zg-0004M2-Lb
-	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 10:18:16 +0200
-Received: (qmail 11664 invoked by uid 813007); 29 Apr 2009 08:13:01 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 29 Apr 2009 08:13:01 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Apr 2009 10:12:39 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <20090425075933.E6E18188456@amethyst.openembedded.net>
-	<1240929710.30742.102.camel@mill.internal.reciva.com>
-	<20090428181302.GA5449@excalibur.local>
-In-Reply-To: <20090428181302.GA5449@excalibur.local>
+	(envelope-from <matthieu.poullet@gmail.com>) id 1Lz5VC-0002JD-HE
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Apr 2009 10:50:51 +0200
+Received: by bwz19 with SMTP id 19so1171689bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2009 01:45:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:from:date:message-id
+	:subject:to:content-type:content-transfer-encoding;
+	bh=X4As8ppvsrYd3i3lGvUDwcNehQMh0m4ge37lGE461Qg=;
+	b=p3LZIE2dDuPvGOk6tna0EtnydDiE9GB2kXQp5gc2f1bg/HZOxr6kvK/l2QdsIYwITW
+	nX/nQS6X/YOFFphpQLxRmDRdMcBtCj5Qh2WrUovQFlZ55NwNX+CDilU6SEIqfQEW5CQx
+	EyninuN5NMlBvic8wxwSSJqRCaqxAcLj+AAcs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=Iex0mUSoR8Bwl0mWwvFd8pKd98X4p2SOdabZQItqXqzsn/LwXfSEJLbTmgNtEQSnp4
+	ur6EniUlSMcrVESRF26VcniVcjpVTa6UwJD89UYEsITXzlYUcH1eCioQZWlDFD40H749
+	5NWY3SAlY9y/CHR6Y+rXCMyMPILTIzkXHdySc=
 MIME-Version: 1.0
-Message-Id: <200904291012.56927.marcin@juszkiewicz.com.pl>
-Subject: Re: [oe-commits] Koen Kooi : Revert "ecore: catch up with the	new SONAMEs; move to autosplitting"
+Received: by 10.204.63.209 with SMTP id c17mr88757bki.47.1240994734090; Wed, 
+	29 Apr 2009 01:45:34 -0700 (PDT)
+From: Matthieu Poullet <matthieu.poullet@gmail.com>
+Date: Wed, 29 Apr 2009 10:45:14 +0200
+Message-ID: <80a0c20d0904290145p41042612m976c066baf001133@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] dsplink: change path to the XDC tools directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 08:18:16 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 29 Apr 2009 08:50:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 28 kwietnia 2009 o 20:13:02 Stefan Schmidt napisa=C5=82(a):
-> A trivial item was the new logo. An offer was posted to this very
-> list that a company was in favour of paying a designer for creating a
-> logo. Great thing. The next time I came in contact with this was as
-> the new logo was used on the website, wiki, etc. I was wondering what
-> happened in between.
+This way the naming convention is more coherent:
+TIBIOSDIR -> BIOS_INSTALL_DIR
+TIXDCTOOLSDIR  -> XDC_INSTALL_DIR
 
-=46irst we got offer, then we got few versions of logo. We chosen two and=20
-one colour scheme. Then we got another set of propositions and selected=20
-current logo. Thats in short.
+Signed-off-by: Matthieu Poullet <m.poullet@avm.de>
+---
+ recipes/dsplink/ti-paths.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+diff --git a/recipes/dsplink/ti-paths.inc b/recipes/dsplink/ti-paths.inc
+index 2f1a0e5..b403732 100644
+--- a/recipes/dsplink/ti-paths.inc
++++ b/recipes/dsplink/ti-paths.inc
+@@ -9,7 +9,7 @@
+ TITOOLSDIR ?= "/OE/TI"
+ # Path under TITOOLSDIR where dspbios is unpacked
+ TIBIOSDIR ?= "bios_5_33_02"
+-TIXDCTOOLSDIR ?= "${TITOOLSDIR}/xdctools_3_10_03"
++TIXDCTOOLSDIR ?= "xdctools_3_10_03"
+ # Path under TITOOLSDIR where the dsp toolchain is unpacked
+ TICGTOOLSDIR ?= "cg6x_6_0_16"
 
-
+@@ -20,7 +20,7 @@ TICGTOOLSDIR ?= "cg6x_6_0_16"
+ # export some more variable to point to external TI tools
+ # information is duplicated between the js and make based tools
+ export CE_INSTALL_DIR=${S}
+-export XDC_INSTALL_DIR=${TIXDCTOOLSDIR}
++export XDC_INSTALL_DIR=${TITOOLSDIR}/{TIXDCTOOLSDIR}
+ export BIOS_INSTALL_DIR=${TITOOLSDIR}/${TIBIOSDIR}
+ # needed for configuro:
+ export CGTOOLS_V5T="${CROSS_DIR}"
+-- 
+1.6.0.4
 
 
