@@ -1,18 +1,20 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1LzH6A-0003WV-8T
-	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 23:13:46 +0200
-Received: (qmail 21751 invoked by uid 1003); 29 Apr 2009 21:08:05 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 29 Apr 2009 21:08:04 -0000
-Message-ID: <49F8C1B3.1060808@balister.org>
-Date: Wed, 29 Apr 2009 17:08:03 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1LzHZv-00014O-Gx
+	for openembedded-devel@openembedded.org; Wed, 29 Apr 2009 23:44:31 +0200
+Received: (qmail 10892 invoked from network); 29 Apr 2009 21:12:24 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 29 Apr 2009 14:12:24 -0700
+Date: Wed, 29 Apr 2009 14:12:24 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [Fwd: HEADS UP: svn->git transition]
+Message-ID: <20090429211224.GI18788@smtp.west.cox.net>
+References: <49F8C1B3.1060808@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <49F8C1B3.1060808@balister.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [Fwd: HEADS UP: svn->git transition]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,27 +28,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2009 21:13:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Apr 2009 21:44:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Busybox is moving from svn to git. Do we have any busybox svn recipes?
+On Wed, Apr 29, 2009 at 05:08:03PM -0400, Philip Balister wrote:
 
-Philip
+> Busybox is moving from svn to git. Do we have any busybox svn recipes?
 
--------- Original Message --------
-Subject: HEADS UP: svn->git transition
-Date: Wed, 29 Apr 2009 13:38:49 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: busybox@busybox.net
-CC: uclibc@uclibc.org, buildroot@uclibc.org
-Newsgroups: 
-gmane.comp.lib.uclibc.general,gmane.linux.busybox,gmane.comp.lib.uclibc.buildroot
+uClibc, yes, which also looks to be in the move.
 
-Hi,
-
-We will be switching to git (instead of svn) for our repositories.
-Svn will be frozen during the conversion which is scheduled to begin
-on wednesday (10am, probably PDT which is approximately GMT-7).
+-- 
+Tom Rini
 
 
