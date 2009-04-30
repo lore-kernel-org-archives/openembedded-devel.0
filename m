@@ -1,17 +1,27 @@
-Received: from [147.162.13.20] (helo=pcimg12.dei.unipd.it)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bott@pcimg12.dei.unipd.it>) id 1LzWxa-0001tB-8U
+	(envelope-from <dp@xora.org.uk>) id 1LzXEz-0007sH-2E
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 16:09:58 +0200
-Received: by pcimg12.dei.unipd.it (Postfix, from userid 1000)
-	id 5D7B7806F87A; Thu, 30 Apr 2009 16:04:36 +0200 (CEST)
-Date: Thu, 30 Apr 2009 16:04:36 +0200
-From: Ottavio Campana <ottavio@campana.vi.it>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090430140436.GA7335@pcimg12.dei.unipd.it>
+	Thu, 30 Apr 2009 16:27:57 +0200
+Received: by ewy20 with SMTP id 20so3855382ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Apr 2009 07:22:32 -0700 (PDT)
+Received: by 10.210.71.11 with SMTP id t11mr271656eba.49.1241101352558;
+	Thu, 30 Apr 2009 07:22:32 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 7sm3983099eyg.47.2009.04.30.07.22.31
+	(version=SSLv3 cipher=RC4-MD5); Thu, 30 Apr 2009 07:22:31 -0700 (PDT)
+Message-ID: <49F9B426.5020602@xora.org.uk>
+Date: Thu, 30 Apr 2009 15:22:30 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Subject: receipe for libmicrohttpd
+To: openembedded-devel@lists.openembedded.org
+References: <20090430140436.GA7335@pcimg12.dei.unipd.it>
+In-Reply-To: <20090430140436.GA7335@pcimg12.dei.unipd.it>
+X-Enigmail-Version: 0.95.0
+Subject: Re: receipe for libmicrohttpd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,41 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2009 14:10:00 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 30 Apr 2009 14:27:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-I wrote the receipe for libmicrohttpd, a LPGL library used to embedded a
-web server in programs.
+Ottavio Campana wrote:
+> I wrote the receipe for libmicrohttpd, a LPGL library used to embedded a
+> web server in programs.
+>
+> It works for me, but I'd like to have some feedback from you, if it is
+> good or not and if you'd like to add it to OE.
+>
+> Ottavio
+>
+> PR = "r1"
+> PN = "libmicrohttpd"
+> DESCRIPTION = "GNU libmicrohttpd is a small C library that is supposed to make it easy to run an HTTP server as part of another application"
+> HOMEPAGE = "http://www.gnu.org/software/libmicrohttpd/"
+> SECTION = "libs"
+> LICENSE = "LGPL"
+>
+> SRC_URI = "ftp://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.4.1.tar.gz"
+>
+> inherit autotools pkgconfig
+>
+> do_stage() {
+>         oe_runmake DESTDIR="${D}" install
+>         autotools_stage_all
+> }
+>
+> do_qa_staging () {
+> }
+>
+>   
+You need to run the recipe through oe-stylize (found in contrib directory).
 
-It works for me, but I'd like to have some feedback from you, if it is
-good or not and if you'd like to add it to OE.
+Why did you override do_qa_staging() ?
 
-Ottavio
+Apart from this recipe looks good, cleanup and submit as a git-diff.
 
-PR =3D "r1"
-PN =3D "libmicrohttpd"
-DESCRIPTION =3D "GNU libmicrohttpd is a small C library that is supposed =
-to make it easy to run an HTTP server as part of another application"
-HOMEPAGE =3D "http://www.gnu.org/software/libmicrohttpd/"
-SECTION =3D "libs"
-LICENSE =3D "LGPL"
+Graeme
 
-SRC_URI =3D "ftp://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.4.1.tar.=
-gz"
-
-inherit autotools pkgconfig
-
-do_stage() {
-        oe_runmake DESTDIR=3D"${D}" install
-        autotools_stage_all
-}
-
-do_qa_staging () {
-}
-
---=20
-Non c'=E8 pi=F9 forza nella normalit=E0, c'=E8 solo monotonia.
 
 
