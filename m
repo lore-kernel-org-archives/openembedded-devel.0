@@ -1,28 +1,20 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [82.223.190.26] (helo=llsa735-a03.servidoresdns.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1LzXJF-0007yT-9Q
+	(envelope-from <jaume@fqingenieria.es>) id 1LzXqz-0000YR-4a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 16:32:21 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1LzXE3-0005pS-0C
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 15:26:59 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1LzXE2-0000CZ-RG
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 15:26:58 +0100
-From: Phil Blundell <philb@gnu.org>
+	Thu, 30 Apr 2009 17:07:13 +0200
+Received: from [127.0.0.1] (228.Red-217-126-71.staticIP.rima-tde.net
+	[217.126.71.228])
+	by smtp-03.servidoresdns.net (Postfix) with ESMTP id 3B29E95159
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Apr 2009 17:01:28 +0200 (CEST)
+Message-ID: <49F9BD47.5060401@fqingenieria.es>
+Date: Thu, 30 Apr 2009 17:01:27 +0200
+From: Jaume Ribot <jaume@fqingenieria.es>
+User-Agent: Thunderbird 2.0.0.21 (Windows/20090302)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
-References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
-Date: Thu, 30 Apr 2009 15:26:58 +0100
-Message-Id: <1241101618.30742.241.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: progress on OE organization issues
+Subject: RRECOMENDS packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,24 +28,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2009 14:32:21 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Apr 2009 15:07:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2009-04-30 at 08:44 -0400, Cliff Brake wrote:
-> 2) we are trying to push forward with some form of structure for
-> membership, and effective decision making:
-> http://wiki.openembedded.net/index.php/Organization.  Florian Boor has
-> offered to take care of the membership tasks.
+Dear members,
 
-Thanks for the update, and thanks also for your efforts in getting
-things moving.
+How I can force the building of the RRECOMENDS packages? I need to=20
+compile some of the reccomended packages in task-base in order to=20
+generate my custom root_fs and I don't want to build them one by one.
 
-Do you have any kind of estimated timeline for putting these
-organisational structures in place?
+Using the original 2009.X stable branch, using a ep93xx kernel.
 
-p.
+Thanks in advance.
 
+--=20
+Jaume Ribot
+R&D Engineer
+
+FQ Ingenier=EDa Electr=F3nica, SA
+Corsega, 372
+08037 Barcelona ( Spain )
+www.fqingenieria.es
+
+Tf  + 34 93 208 02 58
+Fx  + 34 93 459 28 93
+E-mail: jaume@fqingenieria.es
 
 
 
