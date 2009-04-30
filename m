@@ -1,32 +1,39 @@
-Received: from [209.85.220.220] (helo=mail-fx0-f220.google.com)
+Received: from [74.125.44.152] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1LzRub-0008MR-AU
+	(envelope-from <otavio.salvador@gmail.com>) id 1LzTRF-0003vl-4U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 10:46:33 +0200
-Received: by fxm20 with SMTP id 20so2107067fxm.12
+	Thu, 30 Apr 2009 12:24:21 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so1088671yxh.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Apr 2009 01:41:11 -0700 (PDT)
+	Thu, 30 Apr 2009 03:18:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=HAoKbEOLpTxUgwDtG45AL3qPY8nHcu7av4CZ47TGsA8=;
-	b=fjukJ2NyBKK2kIBr+zoa+66M+/mFwMxmHNNAkTaDjKFigLjgm/eke9L2KujF3s75wu
-	5hn0Ta07d5OMtN69MUETEz0oZj0QaRqYUoZ7wdhBkmbHHJuZh2wtP5P7yii51ozWjXlo
-	XaxzX/G5CXMtT2UaoAQ6gTXS8+NSvF9+arcdo=
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=CGmNTjUooipiv/SVE/SUiFrmBU0jFnxtpooCFCdrFfk=;
+	b=q94hUVyv2Xlu6AdZj4DMMup4vOLFR0oim3tkQypSZe2c7ANdhH8wnrPTkdHXat7Pe6
+	4JFrQ+s1r/cIPZrsHf1YLGN70aEKsiDQzM9klV4CeokMTS9/NpkylBmAHdiowSLFxo04
+	oHdqf7sU4n2lUdGzXdQub+SV+Q4NtfkPnMNtY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=jfPrQrsp3n5icopahQnzU6EJEZTe/vEooOB1ilUnlFPdkOecBTTd09ZIpzmKDzCDtr
-	D9TqGYeaGWyHceOM+rekfAxRB0ASkpRUAQ0KEfmUTjtACXvrmSkeZe3SGEEq6JuEW0oy
-	20f66oAKJnG5GoCxZRLvfr0khrLTIw4toEH2w=
+	b=noTORUCFMfoQ7V5M/b0vZl+K1x0uZAbx2c6Skpce2lgoTwjt+jq1kd24syi8xhCoIf
+	5c2sOgLiNAxZHk6IvJ2FC4/7w0WmClAuWmYoNtlMgpo8fdKlnjryAbW0m9+jtKZ3mGMY
+	haIZzEQu6RDVdXYblBzFCClTSt9dD1P+T48BY=
 MIME-Version: 1.0
-Received: by 10.223.110.200 with SMTP id o8mr584693fap.56.1241080870912; Thu, 
-	30 Apr 2009 01:41:10 -0700 (PDT)
-Date: Thu, 30 Apr 2009 10:41:10 +0200
-Message-ID: <d1b08f940904300141v5a0ce7b7pdf78d5f8918280f3@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+Sender: otavio.salvador@gmail.com
+Received: by 10.231.30.198 with SMTP id v6mr1198497ibc.26.1241086739626; Thu, 
+	30 Apr 2009 03:18:59 -0700 (PDT)
+In-Reply-To: <1241079609-5912-1-git-send-email-khimov@altell.ru>
+References: <be7a9f3d0904270832j4832bc6fqcf058fdfc3d8479@mail.gmail.com>
+	<1241079609-5912-1-git-send-email-khimov@altell.ru>
+Date: Thu, 30 Apr 2009 07:18:59 -0300
+X-Google-Sender-Auth: b7cd59e76f1f9722
+Message-ID: <be7a9f3d0904300318m4916cf61vc0fd0d099f69f3fe@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Tinderbox timestamps?
+Subject: Re: [PATCH 1/4] coreutils: add version 7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2009 08:46:33 -0000
+X-List-Received-Date: Thu, 30 Apr 2009 10:24:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hello Roman,
 
-I'm following the build from scratch identified as 2009-04-30
-08:43:01.108367 and I see something definitely strange with the
-timestamps:
+On Thu, Apr 30, 2009 at 5:20 AM, Roman I Khimov <khimov@altell.ru> wrote:
+> ---
+> =A0conf/checksums.ini =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 | =A0 =A04 +
+> =A0.../coreutils/coreutils-7.2/automake-version.patch | =A0 13 +++
+> =A0recipes/coreutils/coreutils-7.2/man.patch =A0 =A0 =A0 =A0 =A0| =A0 47 =
++++++++++++
+> =A0recipes/coreutils/coreutils-7.2/onceonly.m4 =A0 =A0 =A0 =A0| =A0 63 ++=
+++++++++++++
+> =A0recipes/coreutils/coreutils-native_7.2.bb =A0 =A0 =A0 =A0 =A0| =A0 =A0=
+5 +
+> =A0recipes/coreutils/coreutils_7.2.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =
+=A0 88 ++++++++++++++++++++
+> =A06 files changed, 220 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/coreutils/coreutils-7.2/automake-version.pa=
+tch
+> =A0create mode 100644 recipes/coreutils/coreutils-7.2/man.patch
+> =A0create mode 100644 recipes/coreutils/coreutils-7.2/onceonly.m4
+> =A0create mode 100644 recipes/coreutils/coreutils-native_7.2.bb
+> =A0create mode 100644 recipes/coreutils/coreutils_7.2.bb
+[...]
 
-First package built is
-2009-04-30 08:45:26.945632 shasum-native
+Please take a look at #525048 Debian's bug about sort segfault. It
+should be included on this to avoid problems.
 
-..all fine...but the last packages appear built in the future!
-2009-04-30 18:20:16.835303 libgpg-error
-
-
-http://tinderbox.openembedded.net/builds/146342/
-
-This also messes the ordering of the builds.
-
-Regards
-
-Andrea
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
