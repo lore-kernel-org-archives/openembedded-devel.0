@@ -1,23 +1,26 @@
 Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1LzRaZ-0007h6-0G
+	(envelope-from <khimov@altell.ru>) id 1LzRaZ-0007h3-0H
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 30 Apr 2009 10:25:51 +0200
 Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id A499668429;
+	by mail.altell.local (Postfix) with ESMTP id CE4D06842D;
 	Thu, 30 Apr 2009 12:20:09 +0400 (MSD)
 From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Apr 2009 12:20:06 +0400
-Message-Id: <1241079609-5912-1-git-send-email-khimov@altell.ru>
+Date: Thu, 30 Apr 2009 12:20:09 +0400
+Message-Id: <1241079609-5912-4-git-send-email-khimov@altell.ru>
 X-Mailer: git-send-email 1.6.2.4
-In-Reply-To: <be7a9f3d0904270832j4832bc6fqcf058fdfc3d8479@mail.gmail.com>
+In-Reply-To: <1241079609-5912-3-git-send-email-khimov@altell.ru>
 References: <be7a9f3d0904270832j4832bc6fqcf058fdfc3d8479@mail.gmail.com>
+	<1241079609-5912-1-git-send-email-khimov@altell.ru>
+	<1241079609-5912-2-git-send-email-khimov@altell.ru>
+	<1241079609-5912-3-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
 X-Altell-MailScanner: Found to be clean
 X-Altell-MailScanner-From: khimov@altell.ru
 X-Spam-Status: No
-Subject: [PATCH 1/4] coreutils: add version 7.2
+Subject: [PATCH 4/4] remove install-native package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,281 +36,522 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 30 Apr 2009 08:25:51 -0000
 
+Sane 'install' program is provided by coreutils-native now.
 ---
- conf/checksums.ini                                 |    4 +
- .../coreutils/coreutils-7.2/automake-version.patch |   13 +++
- recipes/coreutils/coreutils-7.2/man.patch          |   47 +++++++++++
- recipes/coreutils/coreutils-7.2/onceonly.m4        |   63 ++++++++++++++
- recipes/coreutils/coreutils-native_7.2.bb          |    5 +
- recipes/coreutils/coreutils_7.2.bb                 |   88 ++++++++++++++++++++
- 6 files changed, 220 insertions(+), 0 deletions(-)
- create mode 100644 recipes/coreutils/coreutils-7.2/automake-version.patch
- create mode 100644 recipes/coreutils/coreutils-7.2/man.patch
- create mode 100644 recipes/coreutils/coreutils-7.2/onceonly.m4
- create mode 100644 recipes/coreutils/coreutils-native_7.2.bb
- create mode 100644 recipes/coreutils/coreutils_7.2.bb
+ conf/distro/include/preferred-om-2008-versions.inc |    1 -
+ recipes/beep/beep_1.2.2.bb                         |    1 -
+ recipes/callweaver/callweaver-perl.bb              |    1 -
+ recipes/cron/cron_3.0pl1.bb                        |    1 -
+ recipes/cups/cups.inc                              |    2 +-
+ recipes/cups/cups_1.1.23.bb                        |    2 +-
+ recipes/cups/cups_1.2.7.bb                         |    2 +-
+ recipes/cyrus-imapd/cyrus-imapd_2.2.12.bb          |    1 -
+ recipes/gnome/libart-lgpl.inc                      |    2 -
+ recipes/install/files/install-sh                   |  334 --------------------
+ recipes/install/install-native_0.1.bb              |   27 --
+ recipes/netpbm/netpbm_10.28.bb                     |    2 +-
+ 12 files changed, 4 insertions(+), 372 deletions(-)
+ delete mode 100644 recipes/install/files/install-sh
+ delete mode 100644 recipes/install/install-native_0.1.bb
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index ffc84c6..9a2c473 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -3990,6 +3990,10 @@ sha256=efa27532ec6dc12a21f703ad4a0f612e613e9cc2575147685db81cc701952ac9
- md5=cbb2b3d1718ee1237b808e00b5c11b1e
- sha256=813cb19fa19a885f342664109c7c5810f0081b624ff317bba8d1b6ccd83c2a05
+diff --git a/conf/distro/include/preferred-om-2008-versions.inc b/conf/distro/include/preferred-om-2008-versions.inc
+index e3e2187..8c5c4f7 100644
+--- a/conf/distro/include/preferred-om-2008-versions.inc
++++ b/conf/distro/include/preferred-om-2008-versions.inc
+@@ -712,7 +712,6 @@ PREFERRED_VERSION_inkscape ?= "0.43"
+ PREFERRED_VERSION_inkwp ?= "0.1.1"
+ PREFERRED_VERSION_inotify-tools ?= "2.1"
+ PREFERRED_VERSION_inputproto ?= "1.4.4"
+-PREFERRED_VERSION_install-native ?= "0.1"
+ PREFERRED_VERSION_insttrain ?= "1.0.5"
+ PREFERRED_VERSION_interbench ?= "0.30"
+ PREFERRED_VERSION_intercom ?= "0.15"
+diff --git a/recipes/beep/beep_1.2.2.bb b/recipes/beep/beep_1.2.2.bb
+index 759f74f..e3ffdce 100644
+--- a/recipes/beep/beep_1.2.2.bb
++++ b/recipes/beep/beep_1.2.2.bb
+@@ -4,7 +4,6 @@ DESCRIPTION = "A console utility to make a beep noise"
+ SECTION = "console/utils"
+ LICENSE = "GPL"
+ PR = "r2"
+-DEPENDS = "install-native"
  
-+[ftp://ftp.gnu.org/gnu/coreutils/coreutils-7.2.tar.gz]
-+md5=427c2914d3eab956f317c9ec6a45e62a
-+sha256=dd77bfec92e5a3ad48abd8a5bda3f8d40149c4e24744e4173abc3cc6a731fdb2
-+
- [http://www.rpsys.net/openzaurus/patches/archive/corgi_rearrange_lcd-r0.patch]
- md5=c1bec44c92f5da5abad97137c73b1365
- sha256=d4dc8f0583e616e74ea41b103d5f6a29b6d079ce37eaf9f362825514c7082490
-diff --git a/recipes/coreutils/coreutils-7.2/automake-version.patch b/recipes/coreutils/coreutils-7.2/automake-version.patch
-new file mode 100644
-index 0000000..497ef15
---- /dev/null
-+++ b/recipes/coreutils/coreutils-7.2/automake-version.patch
-@@ -0,0 +1,13 @@
-+Index: coreutils-7.1/configure.ac
-+===================================================================
-+--- coreutils-7.1.orig/configure.ac
-++++ coreutils-7.1/configure.ac
-+@@ -32,7 +32,7 @@
-+ AC_CONFIG_AUX_DIR([build-aux])
-+ AC_CONFIG_HEADERS([lib/config.h:lib/config.hin])
-+ 
-+-AM_INIT_AUTOMAKE([1.10a dist-xz])
-++AM_INIT_AUTOMAKE([1.10.2])
-+ 
-+ AC_PROG_CC_STDC
-+ AM_PROG_CC_C_O
-diff --git a/recipes/coreutils/coreutils-7.2/man.patch b/recipes/coreutils/coreutils-7.2/man.patch
-new file mode 100644
-index 0000000..3de7c01
---- /dev/null
-+++ b/recipes/coreutils/coreutils-7.2/man.patch
-@@ -0,0 +1,47 @@
-+
-+#
-+# Patch managed by http://www.holgerschurig.de/patcher.html
-+#
-+
-+Index: coreutils-7.1/configure.ac
-+===================================================================
-+--- coreutils-7.1.orig/configure.ac
-++++ coreutils-7.1/configure.ac
-+@@ -373,6 +373,20 @@
-+ # For a test of uniq: it uses the $LOCALE_FR envvar.
-+ gt_LOCALE_FR
-+ 
-++AC_MSG_CHECKING([whether to build man pages])
-++AC_ARG_WITH(manpages, 
-++	AS_HELP_STRING([--with-manpages],
-++		[Enable building of manpages (default=yes)]),
-++	[cu_cv_build_manpages=$enableval],
-++	[cu_cv_build_manpages=yes])
-++# help2man doesn't work when crosscompiling, as it needs to run the
-++# binary that was built.
-++if test x"$cross_compiling" = x"yes"; then
-++  cu_cv_build_manpages=no
-++fi
-++AC_MSG_RESULT($cu_cv_build_manpages)
-++AM_CONDITIONAL(ENABLE_MANPAGES, test x"$cu_cv_build_manpages" = x"yes")
-++
-+ AC_CONFIG_FILES(
-+   Makefile
-+   doc/Makefile
-+Index: coreutils-7.1/Makefile.am
-+===================================================================
-+--- coreutils-7.1.orig/Makefile.am
-++++ coreutils-7.1/Makefile.am
-+@@ -15,7 +15,12 @@
-+ # You should have received a copy of the GNU General Public License
-+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+ 
-++if ENABLE_MANPAGES
-+ SUBDIRS = lib src doc man po tests gnulib-tests
-++else
-++SUBDIRS = lib src doc po tests gnulib-tests
-++endif
-++
-+ EXTRA_DIST = cfg.mk maint.mk \
-+   .prev-version THANKS-to-translators THANKStt.in \
-+   .version \
-diff --git a/recipes/coreutils/coreutils-7.2/onceonly.m4 b/recipes/coreutils/coreutils-7.2/onceonly.m4
-new file mode 100644
-index 0000000..f6fec37
---- /dev/null
-+++ b/recipes/coreutils/coreutils-7.2/onceonly.m4
-@@ -0,0 +1,63 @@
-+# onceonly.m4 serial 3
-+dnl Copyright (C) 2002, 2003 Free Software Foundation, Inc.
-+dnl This file is free software, distributed under the terms of the GNU
-+dnl General Public License.  As a special exception to the GNU General
-+dnl Public License, this file may be distributed as part of a program
-+dnl that contains a configuration script generated by Autoconf, under
-+dnl the same distribution terms as the rest of that program.
-+
-+dnl This file defines some "once only" variants of standard autoconf macros.
-+dnl   AC_CHECK_HEADERS_ONCE         like  AC_CHECK_HEADERS
-+dnl   AC_CHECK_FUNCS_ONCE           like  AC_CHECK_FUNCS
-+dnl   AC_CHECK_DECLS_ONCE           like  AC_CHECK_DECLS
-+dnl   AC_REQUIRE([AC_HEADER_STDC])  like  AC_HEADER_STDC
-+dnl The advantage is that the check for each of the headers/functions/decls
-+dnl will be put only once into the 'configure' file. It keeps the size of
-+dnl the 'configure' file down, and avoids redundant output when 'configure'
-+dnl is run.
-+dnl The drawback is that the checks cannot be conditionalized. If you write
-+dnl   if some_condition; then gl_CHECK_HEADERS(stdlib.h); fi
-+dnl inside an AC_DEFUNed function, the gl_CHECK_HEADERS macro call expands to
-+dnl empty, and the check will be inserted before the body of the AC_DEFUNed
-+dnl function.
-+
-+dnl Autoconf version 2.57 or newer is recommended.
-+AC_PREREQ(2.54)
-+
-+# AC_CHECK_HEADERS_ONCE(HEADER1 HEADER2 ...) is a once-only variant of
-+# AC_CHECK_HEADERS(HEADER1 HEADER2 ...).
-+AC_DEFUN([AC_CHECK_HEADERS_ONCE], [
-+  :
-+  AC_FOREACH([gl_HEADER_NAME], [$1], [
-+    AC_DEFUN([gl_CHECK_HEADER_]m4_quote(translit(defn([gl_HEADER_NAME]),
-+                                                 [-./], [___])), [
-+      AC_CHECK_HEADERS(gl_HEADER_NAME)
-+    ])
-+    AC_REQUIRE([gl_CHECK_HEADER_]m4_quote(translit(gl_HEADER_NAME,
-+                                                   [-./], [___])))
-+  ])
-+])
-+
-+# AC_CHECK_FUNCS_ONCE(FUNC1 FUNC2 ...) is a once-only variant of
-+# AC_CHECK_FUNCS(FUNC1 FUNC2 ...).
-+AC_DEFUN([AC_CHECK_FUNCS_ONCE], [
-+  :
-+  AC_FOREACH([gl_FUNC_NAME], [$1], [
-+    AC_DEFUN([gl_CHECK_FUNC_]defn([gl_FUNC_NAME]), [
-+      AC_CHECK_FUNCS(defn([gl_FUNC_NAME]))
-+    ])
-+    AC_REQUIRE([gl_CHECK_FUNC_]defn([gl_FUNC_NAME]))
-+  ])
-+])
-+
-+# AC_CHECK_DECLS_ONCE(DECL1 DECL2 ...) is a once-only variant of
-+# AC_CHECK_DECLS(DECL1, DECL2, ...).
-+AC_DEFUN([AC_CHECK_DECLS_ONCE], [
-+  :
-+  AC_FOREACH([gl_DECL_NAME], [$1], [
-+    AC_DEFUN([gl_CHECK_DECL_]defn([gl_DECL_NAME]), [
-+      AC_CHECK_DECLS(defn([gl_DECL_NAME]))
-+    ])
-+    AC_REQUIRE([gl_CHECK_DECL_]defn([gl_DECL_NAME]))
-+  ])
-+])
-diff --git a/recipes/coreutils/coreutils-native_7.2.bb b/recipes/coreutils/coreutils-native_7.2.bb
-new file mode 100644
-index 0000000..057dfa6
---- /dev/null
-+++ b/recipes/coreutils/coreutils-native_7.2.bb
-@@ -0,0 +1,5 @@
-+FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/coreutils-${PV}"
-+S = "${WORKDIR}/coreutils-${PV}"
-+
-+require coreutils_${PV}.bb
-+inherit native
-diff --git a/recipes/coreutils/coreutils_7.2.bb b/recipes/coreutils/coreutils_7.2.bb
-new file mode 100644
-index 0000000..0e13400
---- /dev/null
-+++ b/recipes/coreutils/coreutils_7.2.bb
-@@ -0,0 +1,88 @@
-+require coreutils.inc
-+
-+SRC_URI = "\
-+  ftp://ftp.gnu.org/gnu/coreutils/coreutils-${PV}.tar.gz \
-+  file://automake-version.patch;patch=1 \
-+  file://man.patch;patch=1 \
-+  file://onceonly.m4 \
-+"
-+
-+# [ gets a special treatment and is not included in this
-+bindir_progs = "basename cksum comm csplit cut df dir dircolors dirname du \
-+		env expand expr factor fmt fold groups head hostid id install \
-+		join link logname md5sum mkfifo nice nl nohup od paste pathchk \
-+		pinky pr printenv printf ptx readlink seq sha1sum shred sort \
-+		split stat sum tac tail tee test tr tsort tty unexpand uniq \
-+		unlink users vdir wc who whoami yes \
-+		"
-+
-+# hostname gets a special treatment and is not included in this
-+base_bindir_progs = "cat chgrp chmod chown cp date dd echo false kill \
-+		     ln ls mkdir mknod mv pwd rm rmdir sleep stty sync touch \
-+		     true uname \
-+		     "
-+
-+sbindir_progs= "chroot"
-+
-+do_configure_prepend() {
-+	install -m 0644 ${WORKDIR}/onceonly.m4 ${S}/m4
-+}
-+
-+do_install () {
-+	autotools_do_install
-+
-+	# Renaming the utilities that should go in /usr/bin
-+	for i in ${bindir_progs}; do mv ${D}${bindir}/$i ${D}${bindir}/$i.${PN}; done
-+
-+	# Renaming and moving the utilities that should go in /bin (FHS)
-+	install -d ${D}${base_bindir}
-+	for i in ${base_bindir_progs}; do mv ${D}${bindir}/$i ${D}${base_bindir}/$i.${PN}; done
-+
-+	# Renaming and moving the utilities that should go in /usr/sbin (FHS)
-+	install -d ${D}${sbindir}
-+	for i in ${sbindir_progs}; do mv ${D}${bindir}/$i ${D}${sbindir}/$i.${PN}; done
-+
-+	# [ requires special handling because [.coreutils will cause the sed stuff
-+	# in update-alternatives to fail, therefore use lbracket - the name used
-+	# for the actual source file.
-+	mv ${D}${bindir}/[ ${D}${bindir}/lbracket.${PN}
-+	# hostname and uptime separated. busybox's versions are preferred
-+	if [ -e ${D}${bindir}/hostname ]; then
-+		mv ${D}${bindir}/hostname ${D}${base_bindir}/hostname.${PN}
-+	fi
-+	if [ -e ${D}${bindir}/uptime ]; then
-+		mv ${D}${bindir}/uptime ${D}${bindir}/uptime.${PN}
-+	fi
-+}
-+
-+pkg_postinst_${PN} () {
-+	# The utilities in /usr/bin
-+	for i in ${bindir_progs}; do update-alternatives --install ${bindir}/$i $i $i.${PN} 100; done
-+
-+	# The utilities in /bin
-+	for i in ${base_bindir_progs}; do update-alternatives --install ${base_bindir}/$i $i $i.${PN} 100; done
-+
-+	# The utilities in /usr/sbin
-+	for i in ${sbindir_progs}; do update-alternatives --install ${sbindir}/$i $i $i.${PN} 100; done
-+
-+	# Special cases. uptime and hostname is broken, prefer busybox's version. [ needs to be treated separately.
-+	update-alternatives --install ${bindir}/uptime uptime uptime.${PN} 10
-+	update-alternatives --install ${base_bindir}/hostname hostname hostname.${PN} 10
-+	update-alternatives --install '${bindir}/[' '[' 'lbracket.${PN}' 100
-+}
-+
-+pkg_prerm_${PN} () {
-+	# The utilities in /usr/bin
-+	for i in ${bindir_progs}; do update-alternatives --remove $i $i.${PN}; done
-+
-+	# The utilities in /bin
-+	for i in ${base_bindir_progs}; do update-alternatives --remove $i $i.${PN}; done
-+
-+	# The utilities in /usr/sbin
-+	for i in ${sbindir_progs}; do update-alternatives --remove $i $i.${PN}; done
-+
-+	# The special cases
-+	update-alternatives --remove hostname hostname.${PN}
-+	update-alternatives --remove uptime uptime.${PN}
-+	update-alternatives --remove '[' 'lbracket.${PN}'
-+}
+ SRC_URI  = "http://johnath.com/beep/beep-${PV}.tar.gz"
+ SRC_URI += "file://linux-input.patch;patch=1"
+diff --git a/recipes/callweaver/callweaver-perl.bb b/recipes/callweaver/callweaver-perl.bb
+index 99e2fb7..7ff077b 100644
+--- a/recipes/callweaver/callweaver-perl.bb
++++ b/recipes/callweaver/callweaver-perl.bb
+@@ -2,7 +2,6 @@ DESCRIPTION = "Callweaver::OGI Perl Gateway Interface Module"
+ HOMEPAGE = "http://www.callweaver.org"
+ SECTION = "libs"
+ LICENSE = "GPL"
+-DEPENDS = "install-native"
+ RDEPENDS = "perl callweaver-ogi"
+ PR = "r0"
+ S = "${WORKDIR}/callweaver-1.2-${CWRCV}/contrib/ogi-perl/callweaver-perl-0.0.1"
+diff --git a/recipes/cron/cron_3.0pl1.bb b/recipes/cron/cron_3.0pl1.bb
+index f7c2ccc..ff1d380 100644
+--- a/recipes/cron/cron_3.0pl1.bb
++++ b/recipes/cron/cron_3.0pl1.bb
+@@ -2,7 +2,6 @@ SECTION = "base"
+ DESCRIPTION = "Vixie cron."
+ LICENSE = "cron"
+ PR ="r8"
+-DEPENDS += "install-native"
+ 
+ SRC_URI = "http://ibiblio.org/pub/Linux/system/daemons/cron/cron${PV}.tar.gz \
+ 	   file://nonrootinstall.patch;patch=1 \
+diff --git a/recipes/cups/cups.inc b/recipes/cups/cups.inc
+index 59075fb..8e2a7a8 100644
+--- a/recipes/cups/cups.inc
++++ b/recipes/cups/cups.inc
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "An Internet printing system for Unix."
+ SECTION = "console/utils"
+ LICENSE = "GPL LGPL"
+-DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib install-native fakeroot-native"
++DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib fakeroot-native"
+ 
+ SRC_URI = "ftp://ftp.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
+ 	  "
+diff --git a/recipes/cups/cups_1.1.23.bb b/recipes/cups/cups_1.1.23.bb
+index b17d899..d6f0de8 100644
+--- a/recipes/cups/cups_1.1.23.bb
++++ b/recipes/cups/cups_1.1.23.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "An Internet printing system for Unix."
+ SECTION = "console/utils"
+ LICENSE = "GPL LGPL"
+-DEPENDS = "openssl jpeg libpng zlib install-native fakeroot-native"
++DEPENDS = "openssl jpeg libpng zlib fakeroot-native"
+ PR = "r6"
+ 
+ SRC_URI = "ftp://ftp3.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
+diff --git a/recipes/cups/cups_1.2.7.bb b/recipes/cups/cups_1.2.7.bb
+index 24249fa..8559bfc 100644
+--- a/recipes/cups/cups_1.2.7.bb
++++ b/recipes/cups/cups_1.2.7.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "An Internet printing system for Unix."
+ SECTION = "console/utils"
+ LICENSE = "GPL LGPL"
+-DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib install-native fakeroot-native"
++DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib fakeroot-native"
+ PR = "r1"
+ 
+ SRC_URI = "ftp://ftp3.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
+diff --git a/recipes/cyrus-imapd/cyrus-imapd_2.2.12.bb b/recipes/cyrus-imapd/cyrus-imapd_2.2.12.bb
+index e80340f..2247ea9 100644
+--- a/recipes/cyrus-imapd/cyrus-imapd_2.2.12.bb
++++ b/recipes/cyrus-imapd/cyrus-imapd_2.2.12.bb
+@@ -2,7 +2,6 @@ SECTION = "console/network"
+ DEPENDS = "cyrus-sasl virtual/db"
+ LICENSE = "BSD"
+ PR = "r12"
+-DEPENDS += "install-native"
+ 
+ SRC_URI = "ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-imapd-${PV}.tar.gz \
+            file://autotools.patch;patch=1 \
+diff --git a/recipes/gnome/libart-lgpl.inc b/recipes/gnome/libart-lgpl.inc
+index 710656b..4613156 100644
+--- a/recipes/gnome/libart-lgpl.inc
++++ b/recipes/gnome/libart-lgpl.inc
+@@ -11,8 +11,6 @@ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libart_lgpl/2.3/libart_lgpl-${
+ 
+ inherit autotools pkgconfig
+ 
+-DEPENDS = "install-native"
+-
+ FILES_${PN} = "${libdir}/*.so.*"
+ FILES_${PN}-dev += "${bindir}/libart2-config"
+ 
+diff --git a/recipes/install/files/install-sh b/recipes/install/files/install-sh
+deleted file mode 100644
+index 8de386e..0000000
+--- a/recipes/install/files/install-sh
++++ /dev/null
+@@ -1,334 +0,0 @@
+-#!/bin/sh
+-# install - install a program, script, or datafile
+-
+-scriptversion=2004-10-22.00
+-
+-# This originates from X11R5 (mit/util/scripts/install.sh), which was
+-# later released in X11R6 (xc/config/util/install.sh) with the
+-# following copyright and license.
+-#
+-# Copyright (C) 1994 X Consortium
+-#
+-# Permission is hereby granted, free of charge, to any person obtaining a copy
+-# of this software and associated documentation files (the "Software"), to
+-# deal in the Software without restriction, including without limitation the
+-# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+-# sell copies of the Software, and to permit persons to whom the Software is
+-# furnished to do so, subject to the following conditions:
+-#
+-# The above copyright notice and this permission notice shall be included in
+-# all copies or substantial portions of the Software.
+-#
+-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+-# X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+-# AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNEC-
+-# TION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-#
+-# Except as contained in this notice, the name of the X Consortium shall not
+-# be used in advertising or otherwise to promote the sale, use or other deal-
+-# ings in this Software without prior written authorization from the X Consor-
+-# tium.
+-#
+-#
+-# FSF changes to this file are in the public domain.
+-#
+-# Calling this script install-sh is preferred over install.sh, to prevent
+-# `make' implicit rules from creating a file called install from it
+-# when there is no Makefile.
+-#
+-# This script is compatible with the BSD install script, but was written
+-# from scratch.  It can only install one file at a time, a restriction
+-# shared with many OS's install programs.
+-
+-# set DOITPROG to echo to test this script
+-
+-# Don't use :- since 4.3BSD and earlier shells don't like it.
+-doit="${DOITPROG-}"
+-
+-# put in absolute paths if you don't have them in your path; or use env. vars.
+-
+-mvprog="${MVPROG-mv}"
+-cpprog="${CPPROG-cp}"
+-chmodprog="${CHMODPROG-chmod}"
+-chownprog="${CHOWNPROG-chown}"
+-chgrpprog="${CHGRPPROG-chgrp}"
+-stripprog="${STRIPPROG-strip}"
+-rmprog="${RMPROG-rm}"
+-mkdirprog="${MKDIRPROG-mkdir}"
+-
+-chmodcmd="$chmodprog 0755"
+-chowncmd=
+-chgrpcmd=
+-stripcmd=
+-rmcmd="$rmprog -f"
+-mvcmd="$mvprog"
+-src=
+-dst=
+-dir_arg=
+-preserve_arg=
+-dstarg=
+-no_target_directory=
+-
+-usage="Usage: $0 [OPTION]... [-T] SRCFILE DSTFILE
+-   or: $0 [OPTION]... SRCFILES... DIRECTORY
+-   or: $0 [OPTION]... -t DIRECTORY SRCFILES...
+-   or: $0 [OPTION]... -d DIRECTORIES...
+-
+-In the 1st form, copy SRCFILE to DSTFILE.
+-In the 2nd and 3rd, copy all SRCFILES to DIRECTORY.
+-In the 4th, create DIRECTORIES.
+-
+-Options:
+--c         (ignored)
+--D         (ignored)
+--d         create directories instead of installing files.
+--g GROUP   $chgrpprog installed files to GROUP.
+--m MODE    $chmodprog installed files to MODE.
+--o USER    $chownprog installed files to USER.
+--p         apply access/modification times of SRCFILE files
+-           to corresponding DSTFILE files
+--s         $stripprog installed files.
+--t DIRECTORY  install into DIRECTORY.
+--T         report an error if DSTFILE is a directory.
+---help     display this help and exit.
+---version  display version info and exit.
+-
+-Environment variables override the default commands:
+-  CHGRPPROG CHMODPROG CHOWNPROG CPPROG MKDIRPROG MVPROG RMPROG STRIPPROG
+-"
+-
+-while test -n "$1"; do
+-  case $1 in
+-    -c) shift
+-        continue;;
+-
+-    -D) shift
+-    	continue;;
+-
+-    -d) dir_arg=true
+-        shift
+-        continue;;
+-
+-    -g) chgrpcmd="$chgrpprog $2"
+-        shift
+-        shift
+-        continue;;
+-
+-    --help) echo "$usage"; exit 0;;
+-
+-    -m) chmodcmd="$chmodprog $2"
+-        shift
+-        shift
+-        continue;;
+-
+-    -o) chowncmd="$chownprog $2"
+-        shift
+-        shift
+-        continue;;
+-
+-    -p) preserve_arg="-p"
+-    	shift
+-	continue;;
+-
+-    -s) stripcmd=$stripprog
+-        shift
+-        continue;;
+-
+-    -t) dstarg=$2
+-	shift
+-	shift
+-	continue;;
+-
+-    -T) no_target_directory=true
+-	shift
+-	continue;;
+-
+-    --version) echo "$0 $scriptversion"; exit 0;;
+-
+-    *)  # When -d is used, all remaining arguments are directories to create.
+-	# When -t is used, the destination is already specified.
+-	test -n "$dir_arg$dstarg" && break
+-        # Otherwise, the last argument is the destination.  Remove it from $@.
+-	for arg
+-	do
+-          if test -n "$dstarg"; then
+-	    # $@ is not empty: it contains at least $arg.
+-	    set fnord "$@" "$dstarg"
+-	    shift # fnord
+-	  fi
+-	  shift # arg
+-	  dstarg=$arg
+-	done
+-	break;;
+-  esac
+-done
+-
+-if test -z "$1"; then
+-  if test -z "$dir_arg"; then
+-    echo "$0: no input file specified." >&2
+-    exit 1
+-  fi
+-  # It's OK to call `install-sh -d' without argument.
+-  # This can happen when creating conditional directories.
+-  exit 0
+-fi
+-
+-for src
+-do
+-  # Protect names starting with `-'.
+-  case $src in
+-    -*) src=./$src ;;
+-  esac
+-
+-  if test -n "$dir_arg"; then
+-    dst=$src
+-    src=
+-
+-    if test -d "$dst"; then
+-      mkdircmd=:
+-      chmodcmd=
+-    else
+-      mkdircmd=$mkdirprog
+-    fi
+-  else
+-    # Waiting for this to be detected by the "$cpprog $src $dsttmp" command
+-    # might cause directories to be created, which would be especially bad
+-    # if $src (and thus $dsttmp) contains '*'.
+-    if test ! -f "$src" && test ! -d "$src"; then
+-      echo "$0: $src does not exist." >&2
+-      exit 1
+-    fi
+-
+-    if test -z "$dstarg"; then
+-      echo "$0: no destination specified." >&2
+-      exit 1
+-    fi
+-
+-    dst=$dstarg
+-    # Protect names starting with `-'.
+-    case $dst in
+-      -*) dst=./$dst ;;
+-    esac
+-
+-    # If destination is a directory, append the input filename; won't work
+-    # if double slashes aren't ignored.
+-    if test -d "$dst"; then
+-      if test -n "$no_target_directory"; then
+-	echo "$0: $dstarg: Is a directory" >&2
+-	exit 1
+-      fi
+-      dst=$dst/`basename "$src"`
+-    fi
+-  fi
+-
+-  # This sed command emulates the dirname command.
+-  dstdir=`echo "$dst" | sed -e 's,/*$,,;s,[^/]*$,,;s,/*$,,;s,^$,.,'`
+-
+-  # Make sure that the destination directory exists.
+-
+-  # Skip lots of stat calls in the usual case.
+-  if test ! -d "$dstdir"; then
+-    defaultIFS='
+-	 '
+-    IFS="${IFS-$defaultIFS}"
+-
+-    oIFS=$IFS
+-    # Some sh's can't handle IFS=/ for some reason.
+-    IFS='%'
+-    set x `echo "$dstdir" | sed -e 's@/@%@g' -e 's@^%@/@'`
+-    shift
+-    IFS=$oIFS
+-
+-    pathcomp=
+-
+-    while test $# -ne 0 ; do
+-      pathcomp=$pathcomp$1
+-      shift
+-      if test ! -d "$pathcomp"; then
+-        $mkdirprog "$pathcomp"
+-	# mkdir can fail with a `File exist' error in case several
+-	# install-sh are creating the directory concurrently.  This
+-	# is OK.
+-	test -d "$pathcomp" || exit
+-      fi
+-      pathcomp=$pathcomp/
+-    done
+-  fi
+-
+-  if test -n "$dir_arg"; then
+-    $doit $mkdircmd "$dst" \
+-      && { test -z "$chowncmd" || $doit $chowncmd "$dst"; } \
+-      && { test -z "$chgrpcmd" || $doit $chgrpcmd "$dst"; } \
+-      && { test -z "$stripcmd" || $doit $stripcmd "$dst"; } \
+-      && { test -z "$chmodcmd" || $doit $chmodcmd "$dst"; }
+-
+-  else
+-    dstfile=`basename "$dst"`
+-
+-    # Make a couple of temp file names in the proper directory.
+-    dsttmp=$dstdir/_inst.$$_
+-    rmtmp=$dstdir/_rm.$$_
+-
+-    # Trap to clean up those temp files at exit.
+-    trap 'ret=$?; rm -f "$dsttmp" "$rmtmp" && exit $ret' 0
+-    trap '(exit $?); exit' 1 2 13 15
+-
+-    # Copy the file name to the temp name.
+-    $doit $cpprog $preserve_arg "$src" "$dsttmp" &&
+-
+-    # and set any options; do chmod last to preserve setuid bits.
+-    #
+-    # If any of these fail, we abort the whole thing.  If we want to
+-    # ignore errors from any of these, just make sure not to ignore
+-    # errors from the above "$doit $cpprog $src $dsttmp" command.
+-    #
+-    { test -z "$chowncmd" || $doit $chowncmd "$dsttmp"; } \
+-      && { test -z "$chgrpcmd" || $doit $chgrpcmd "$dsttmp"; } \
+-      && { test -z "$stripcmd" || $doit $stripcmd "$dsttmp"; } \
+-      && { test -z "$chmodcmd" || $doit $chmodcmd "$dsttmp"; } &&
+-
+-    # Now rename the file to the real destination.
+-    { $doit $mvcmd -f "$dsttmp" "$dstdir/$dstfile" 2>/dev/null \
+-      || {
+-	   # The rename failed, perhaps because mv can't rename something else
+-	   # to itself, or perhaps because mv is so ancient that it does not
+-	   # support -f.
+-
+-	   # Now remove or move aside any old file at destination location.
+-	   # We try this two ways since rm can't unlink itself on some
+-	   # systems and the destination file might be busy for other
+-	   # reasons.  In this case, the final cleanup might fail but the new
+-	   # file should still install successfully.
+-	   {
+-	     if test -f "$dstdir/$dstfile"; then
+-	       $doit $rmcmd -f "$dstdir/$dstfile" 2>/dev/null \
+-	       || $doit $mvcmd -f "$dstdir/$dstfile" "$rmtmp" 2>/dev/null \
+-	       || {
+-		 echo "$0: cannot unlink or rename $dstdir/$dstfile" >&2
+-		 (exit 1); exit
+-	       }
+-	     else
+-	       :
+-	     fi
+-	   } &&
+-
+-	   # Now rename the file to the real destination.
+-	   $doit $mvcmd "$dsttmp" "$dstdir/$dstfile"
+-	 }
+-    }
+-  fi || { (exit 1); exit; }
+-done
+-
+-# The final little trick to "correctly" pass the exit status to the exit trap.
+-{
+-  (exit 0); exit
+-}
+-
+-# Local variables:
+-# eval: (add-hook 'write-file-hooks 'time-stamp)
+-# time-stamp-start: "scriptversion="
+-# time-stamp-format: "%:y-%02m-%02d.%02H"
+-# time-stamp-end: "$"
+-# End:
+diff --git a/recipes/install/install-native_0.1.bb b/recipes/install/install-native_0.1.bb
+deleted file mode 100644
+index 70c027b..0000000
+--- a/recipes/install/install-native_0.1.bb
++++ /dev/null
+@@ -1,27 +0,0 @@
+-# This package uses the GNU autotools install-sh script to implement
+-# a target-capable 'install' command.
+-DESCRIPTION = "Target install command"
+-SECTION = "devel"
+-PRIORITY = "optional"
+-LICENSE = "MIT"
+-INHIBIT_DEFAULT_DEPS = "1"
+-PR = "r1"
+-
+-SRC_URI = "file://install-sh"
+-
+-inherit native
+-
+-PACKAGES = ""
+-S = "${WORKDIR}"
+-
+-do_stage() {
+-	# When the install command is executed 'STRIP' is defined correctly in
+-	# the environment
+-	rm -f ${STAGING_BINDIR}/install-sh
+-	cp install-sh ${STAGING_BINDIR}/install-sh
+-	chmod 755 ${STAGING_BINDIR}/install-sh
+-	rm -f ${STAGING_BINDIR}/install
+-	echo '#!/bin/sh' >${STAGING_BINDIR}/install
+-	echo 'STRIPPROG="$STRIP" exec sh "${STAGING_BINDIR}/install-sh" "$@"' >>${STAGING_BINDIR}/install
+-	chmod 755 ${STAGING_BINDIR}/install
+-}
+diff --git a/recipes/netpbm/netpbm_10.28.bb b/recipes/netpbm/netpbm_10.28.bb
+index ff90310..cceac41 100644
+--- a/recipes/netpbm/netpbm_10.28.bb
++++ b/recipes/netpbm/netpbm_10.28.bb
+@@ -9,7 +9,7 @@ LICENSE = "GPL MIT Artistic"
+ # licenses.  The compiled and linked command line utilties are
+ # subject to the licenses of the libraries they use too - including
+ # libpng libz, IJG, and libtiff licenses
+-DEPENDS = "jpeg zlib libpng tiff install-native flex-native"
++DEPENDS = "jpeg zlib libpng tiff flex-native"
+ RDEPENDS = "perl\
+ 	perl-module-cwd\
+ 	perl-module-english\
 -- 
 1.6.2.4
 
