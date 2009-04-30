@@ -1,19 +1,32 @@
-Received: from [130.225.51.26] (helo=mta1.es.aau.dk)
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <kim@khh.dk>)
-	id 1LzVUj-0002C7-NI for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 14:36:05 +0200
-Received: from dupont.control.auc.dk ([130.225.50.60] helo=[127.0.0.1])
-	by mta1.es.aau.dk with esmtps (TLSv1:AES256-SHA:256) (Exim 4.63)
-	(envelope-from <kim@khh.dk>) id 1LzVPX-0000el-TT
+Received: from [209.85.217.225] (helo=mail-gx0-f225.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <cliff.brake@gmail.com>) id 1LzViX-0002Yx-9L
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 14:30:43 +0200
-Message-ID: <49F999AD.6000305@khh.dk>
-Date: Thu, 30 Apr 2009 14:29:33 +0200
-From: =?ISO-8859-1?Q?Kim_H=F8jgaard-Hansen?= <kim@khh.dk>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+	Thu, 30 Apr 2009 14:50:21 +0200
+Received: by gxk25 with SMTP id 25so2959150gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Apr 2009 05:44:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=XTouAqnkirWE6GNSNOI4/cfds7FglzDTFH9hY7IwiXo=;
+	b=t2oxMAcWGQeD2oy6su1sxZMVlMSO4xCI7TdmycQ/bf5eW2fi8vvDQ17xiTIkG28L4r
+	o5AgynFjGSyrCJxVDCo2zYuJ6cIrfNHdmUblFSbEW1Oz0SXmhAPUbRy5uOTKohCFGXxr
+	bn/ayEWMPxhsNhtkuWUTL2ZmJ0D1KLgQsTZnk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=jn1xkwZpzbpxquqAxGJekLsT5LnZrkVZHt5igXsFz6RSgpRxALdBVbioEQ0n1pLqYk
+	rY0ANs+CnKHDY20WRBPsECvOlbTEStbuzz6aiELyLnkS7uEQXP9Qh1/x8dfJmhaEqleh
+	G3WP/R9NI7/ir7P87yug7ifllCadW6eu/Y5Gc=
 MIME-Version: 1.0
+Received: by 10.151.130.2 with SMTP id h2mr3470841ybn.224.1241095496478; Thu, 
+	30 Apr 2009 05:44:56 -0700 (PDT)
+Date: Thu, 30 Apr 2009 08:44:56 -0400
+Message-ID: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] enable zlib in python-native to fix image building, cannot import gzip module
+Subject: progress on OE organization issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,26 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2009 12:36:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 30 Apr 2009 12:50:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+We are making progress on some of the OE organizational issues.
 
----
- recipes/python/python.inc |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+1) we have been offered a VM at OSUOSL for hosting OE infrastructure.
+Same rack as kernel.org machines, and has a good reputation for
+support and uptime.  See
+http://wiki.openembedded.net/index.php/Infrastructure for more
+details.
+2) we are trying to push forward with some form of structure for
+membership, and effective decision making:
+http://wiki.openembedded.net/index.php/Organization.  Florian Boor has
+offered to take care of the membership tasks.
 
-diff --git a/recipes/python/python.inc b/recipes/python/python.inc
-index f113451..d609f1b 100644
---- a/recipes/python/python.inc
-+++ b/recipes/python/python.inc
-@@ -20,4 +20,5 @@ EXTRA_OECONF = "\
-   --with-signal-module \
-   --with-wctype-functions \
-   --enable-shared \
-+  --with-zlib \
- "
---
-1.5.6.5
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
