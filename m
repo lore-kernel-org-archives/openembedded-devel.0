@@ -1,20 +1,20 @@
-Received: from [82.223.190.26] (helo=llsa735-a03.servidoresdns.net)
+Received: from [147.162.13.20] (helo=pcimg12.dei.unipd.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaume@fqingenieria.es>) id 1LzXqz-0000YR-4a
+	(envelope-from <bott@pcimg12.dei.unipd.it>) id 1LzYep-0007Zc-4X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Apr 2009 17:07:13 +0200
-Received: from [127.0.0.1] (228.Red-217-126-71.staticIP.rima-tde.net
-	[217.126.71.228])
-	by smtp-03.servidoresdns.net (Postfix) with ESMTP id 3B29E95159
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Apr 2009 17:01:28 +0200 (CEST)
-Message-ID: <49F9BD47.5060401@fqingenieria.es>
-Date: Thu, 30 Apr 2009 17:01:27 +0200
-From: Jaume Ribot <jaume@fqingenieria.es>
-User-Agent: Thunderbird 2.0.0.21 (Windows/20090302)
-MIME-Version: 1.0
+	Thu, 30 Apr 2009 17:58:43 +0200
+Received: by pcimg12.dei.unipd.it (Postfix, from userid 1000)
+	id 903F8806F87A; Thu, 30 Apr 2009 17:53:20 +0200 (CEST)
+Date: Thu, 30 Apr 2009 17:53:20 +0200
+From: Ottavio Campana <ottavio@campana.vi.it>
 To: openembedded-devel@lists.openembedded.org
-Subject: RRECOMENDS packages
+Message-ID: <20090430155320.GA7550@pcimg12.dei.unipd.it>
+References: <20090430140436.GA7335@pcimg12.dei.unipd.it>
+	<49F9B426.5020602@xora.org.uk>
+MIME-Version: 1.0
+In-Reply-To: <49F9B426.5020602@xora.org.uk>
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Subject: Re: receipe for libmicrohttpd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,32 +28,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2009 15:07:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 30 Apr 2009 15:58:43 -0000
+X-Groupsio-MsgNum: 9958
+Content-Type: multipart/mixed; boundary="EVF5PPMfhYS0aIcm"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+
+--EVF5PPMfhYS0aIcm
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Dear members,
+On Thu, Apr 30, 2009 at 03:22:30PM +0100, Graeme Gregory wrote:
+> Ottavio Campana wrote:
+> > I wrote the receipe for libmicrohttpd, a LPGL library used to embedde=
+d a
+> > web server in programs.
+> >
+> > It works for me, but I'd like to have some feedback from you, if it i=
+s
+> > good or not and if you'd like to add it to OE.
+> >
+> > Ottavio
+> >
+> > PR =3D "r1"
+> > PN =3D "libmicrohttpd"
+> > DESCRIPTION =3D "GNU libmicrohttpd is a small C library that is suppo=
+sed to make it easy to run an HTTP server as part of another application"
+> > HOMEPAGE =3D "http://www.gnu.org/software/libmicrohttpd/"
+> > SECTION =3D "libs"
+> > LICENSE =3D "LGPL"
+> >
+> > SRC_URI =3D "ftp://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.4.1.=
+tar.gz"
+> >
+> > inherit autotools pkgconfig
+> >
+> > do_stage() {
+> >         oe_runmake DESTDIR=3D"${D}" install
+> >         autotools_stage_all
+> > }
+> >
+> > do_qa_staging () {
+> > }
+> >
+> >  =20
+> You need to run the recipe through oe-stylize (found in contrib directo=
+ry).
+>=20
+> Why did you override do_qa_staging() ?
+>
+> Apart from this recipe looks good, cleanup and submit as a git-diff.
 
-How I can force the building of the RRECOMENDS packages? I need to=20
-compile some of the reccomended packages in task-base in order to=20
-generate my custom root_fs and I don't want to build them one by one.
+here it is. I hope it's good.
 
-Using the original 2009.X stable branch, using a ep93xx kernel.
-
-Thanks in advance.
+Ottavio
 
 --=20
-Jaume Ribot
-R&D Engineer
+Non c'=E8 pi=F9 forza nella normalit=E0, c'=E8 solo monotonia.
 
-FQ Ingenier=EDa Electr=F3nica, SA
-Corsega, 372
-08037 Barcelona ( Spain )
-www.fqingenieria.es
+--EVF5PPMfhYS0aIcm
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="libmicrohttpd.patch"
 
-Tf  + 34 93 208 02 58
-Fx  + 34 93 459 28 93
-E-mail: jaume@fqingenieria.es
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index ffc84c6..395ace5 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -1,3 +1,7 @@
++[ftp://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.4.1.tar.gz]
++md5=d11d2ee8632c13a60630607a99f500be
++sha256=8c8a3081fb65c78d85063690838363e979935aca023bc5e9639bc834c7947929
++
+ [http://www.directfb.org/downloads/Extras/++DFB-0.9.25.tar.gz]
+ md5=c6a2705f6210d8ede50a947b375f1c0b
+ sha256=b3dbf01563dd60d63cff543ea8cd0c885381e78ecbbab8ff176e46df3f198a88
+diff --git a/recipes/libmicrohttpd/libmicrohttpd_0.4.1.bb b/recipes/libmicrohttpd/libmicrohttpd_0.4.1.bb
+new file mode 100644
+index 0000000..39860dc
+--- /dev/null
++++ b/recipes/libmicrohttpd/libmicrohttpd_0.4.1.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "GNU libmicrohttpd is a small C library that is supposed to make it easy to run an HTTP server as part of another application"
++HOMEPAGE = "http://www.gnu.org/software/libmicrohttpd/"
++SECTION = "libs"
++LICENSE = "LGPL"
++PR = "r1"
++
++SRC_URI = "ftp://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.4.1.tar.gz"
++
++inherit autotools pkgconfig
++
++do_stage() {
++        oe_runmake DESTDIR="${D}" install
++        autotools_stage_all
++}
++
++PN = "libmicrohttpd"
 
-
-
+--EVF5PPMfhYS0aIcm--
