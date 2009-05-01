@@ -1,38 +1,21 @@
-Received: from [74.125.44.158] (helo=yx-out-1718.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Lzvp1-0005AH-3C
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 May 2009 18:42:47 +0200
-Received: by yx-out-1718.google.com with SMTP id 36so1554688yxh.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 May 2009 09:37:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=1JTxYA/jW9YDxn8yR4+30AJfitWCYU6hOj3kHu2odsU=;
-	b=oa1gc3e9cU+v84prdi/JBC6A3ztiuaHYr2cFz60ukdvfXWocbb28nJ8wbxShDoBt7q
-	/Q6XSj7hoazIOCjlgFP8w0J1rLcKRSJrBEBArwEJD3UPPVAgfThvMLpggGv68/EFf2kI
-	ZDqjr5YAjlpuqKogzPkllvAv9DSa1FiMeJybU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=QUgmc9GAAMATyViADFGbrWBprTuB0ptPV3sBDa7nZ/1yKad0XV2Et9R8wzv5KysanO
-	I9rWc/hhq6uU5gzsHDtyk9xjF5DQhdAEAfK7D0Co9ZDSdiJsfqPY//WmHHQwbG/DT4R/
-	HVk1vhKQgGddG5ExVMFF1dwKymuVsJbgek1i0=
+	(envelope-from <philip@balister.org>) id 1LzwZE-0004B6-Iq
+	for openembedded-devel@openembedded.org; Fri, 01 May 2009 19:30:33 +0200
+Received: (qmail 28943 invoked by uid 1003); 1 May 2009 17:25:00 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 1 May 2009 17:25:00 -0000
+Message-ID: <49FB306B.5050309@balister.org>
+Date: Fri, 01 May 2009 13:24:59 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.151.8 with SMTP id y8mr6257891and.94.1241195837776; Fri, 
-	01 May 2009 09:37:17 -0700 (PDT)
-In-Reply-To: <1241181034-25945-1-git-send-email-khimov@altell.ru>
-References: <1241181034-25945-1-git-send-email-khimov@altell.ru>
-Date: Fri, 1 May 2009 13:37:17 -0300
-X-Google-Sender-Auth: d3add449396b001f
-Message-ID: <be7a9f3d0905010937xae89ee2q9a6b0ff70028485@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] bridge-utils: remove old versions
+References: <49FAE94F.2090101@doredevelopment.dk> <49FAEFDE.70605@balister.org>
+	<49FAFF1A.5080406@doredevelopment.dk>
+In-Reply-To: <49FAFF1A.5080406@doredevelopment.dk>
+Subject: =?UTF-8?B?UmU6IFB1bGwgcmVxdWVzdCBmcm9tIERvcsOpRGV2ZWxvcG1lbnQgLSBOZXc6IE1pY3JvIGRpc3Ryby9pbWFnZQ==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,107 +29,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2009 16:42:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 May 2009 17:30:36 -0000
+X-Groupsio-MsgNum: 9974
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms000902020400080600060805"
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+--------------ms000902020400080600060805
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 1, 2009 at 9:30 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> Version 1.0.4 FTBFS and both with 0.9.7 are very old. No distro sets any
-> version as preferred, so it's safe to assume that everyone is on 1.2 now.
-> ---
-> =A0.../bridge-utils/bridge-utils-0.9.7/failout.patch =A0| =A0 16 --------=
---------
-> =A0recipes/bridge-utils/bridge-utils_0.9.7.bb =A0 =A0 =A0 =A0 | =A0 10 --=
---------
-> =A0recipes/bridge-utils/bridge-utils_1.0.4.bb =A0 =A0 =A0 =A0 | =A0 14 --=
-------------
-> =A03 files changed, 0 insertions(+), 40 deletions(-)
-> =A0delete mode 100644 recipes/bridge-utils/bridge-utils-0.9.7/failout.pat=
-ch
-> =A0delete mode 100644 recipes/bridge-utils/bridge-utils_0.9.7.bb
-> =A0delete mode 100644 recipes/bridge-utils/bridge-utils_1.0.4.bb
->
-> diff --git a/recipes/bridge-utils/bridge-utils-0.9.7/failout.patch b/reci=
-pes/bridge-utils/bridge-utils-0.9.7/failout.patch
-> deleted file mode 100644
-> index ca6e958..0000000
-> --- a/recipes/bridge-utils/bridge-utils-0.9.7/failout.patch
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -
-> -#
-> -# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
-> -#
-> -
-> ---- bridge-utils-0.9.7/Makefile.in~failout =A0 =A0 2002-04-03 10:19:36.0=
-00000000 -0600
-> -+++ bridge-utils-0.9.7/Makefile.in =A0 =A0 2004-06-03 14:17:35.000000000=
- -0500
-> -@@ -13,7 +13,7 @@
-> - SUBDIRS=3Dlibbridge brctl doc
-> -
-> - all:
-> -- =A0 =A0 =A0for x in $(SUBDIRS); do (cd $$x && $(MAKE) ); done
-> -+ =A0 =A0 =A0for x in $(SUBDIRS); do (cd $$x && $(MAKE) ) || exit 1; don=
-e
-> -
-> - clean:
-> - =A0 =A0 =A0 for x in $(SUBDIRS); do (cd $$x && $(MAKE) clean ); done
-> diff --git a/recipes/bridge-utils/bridge-utils_0.9.7.bb b/recipes/bridge-=
-utils/bridge-utils_0.9.7.bb
-> deleted file mode 100644
-> index 1ab9424..0000000
-> --- a/recipes/bridge-utils/bridge-utils_0.9.7.bb
-> +++ /dev/null
-> @@ -1,10 +0,0 @@
-> -DESCRIPTION =3D "Tools for ethernet bridging."
-> -LICENSE =3D "GPL"
-> -SECTION =3D "console/network"
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tgz \
-> - =A0 =A0 =A0 =A0 =A0file://failout.patch;patch=3D1"
-> -S =3D "${WORKDIR}/bridge-utils-${PV}"
-> -
-> -inherit autotools
-> -
-> -EXTRA_OECONF =3D "--with-linux-headers=3D${STAGING_INCDIR}"
-> diff --git a/recipes/bridge-utils/bridge-utils_1.0.4.bb b/recipes/bridge-=
-utils/bridge-utils_1.0.4.bb
-> deleted file mode 100644
-> index d72a627..0000000
-> --- a/recipes/bridge-utils/bridge-utils_1.0.4.bb
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -DESCRIPTION =3D "Tools for ethernet bridging."
-> -HOMEPAGE =3D "http://bridge.sourceforge.net/"
-> -SECTION =3D "console/network"
-> -LICENSE =3D "GPL"
-> -DEPENDS =3D "sysfsutils"
-> -RRECOMMENDS =3D "kernel-module-bridge"
-> -PR =3D "r1"
-> -
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
-> -S =3D "${WORKDIR}/bridge-utils-${PV}"
-> -
-> -inherit autotools
-> -
-> -EXTRA_OECONF =3D "--with-linux-headers=3D${STAGING_INCDIR}"
-> --
-> 1.6.2.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Martin Lund wrote:
+> Philip Balister wrote:
+>> Martin Lund wrote:
+>> I'm also curious what happens if you build the micro-image against 
+>> Angstrom.
+>>
+> Sorry, I never tried that and never intended to do so. You will most 
+> likely end up with a different image or the build might break.
 
+I built micro-image for the omap5912osk with Angstrom (glibc) and it 
+created a 2.5M jffs2 file. My OSK isn't working at the moment so I can't 
+boot test it.
 
+Should this image work when used on a nfsroot system?
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Philip
 
+--------------ms000902020400080600060805
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
+OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
+Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
+MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
+EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
+V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
+ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
+ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
+SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
+n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
+R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
+/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
+kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
+Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
+urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwMTE3
+MjQ1OVowIwYJKoZIhvcNAQkEMRYEFM756JnD/6mb5LhymUyIEz38kBFZMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
+/DANBgkqhkiG9w0BAQEFAASCAQArTE3VMxPuTDDg1lwxsN+ABVADYc2eiig8qSh8RXjfgURXws1t
+ZC+w0xsfakyDcoPNdcx6EC+LRfgms7AWPS/XsqzZYkfL391v++UFWOCL4OUl/x4epPxzF4Nb8eGP
+rFXy64Ie3Dk6eQhoR9RcZkTm4gnvkfBobcX5SDhKIBVs488q/bK/ri+td2R7VWCF/mESYVs97g3j
+xn68qtWVL79ftvudou0WrSqTzn8jrCUDbi/LyAq3GtUY7Q3lASg/3TM5Z11/f7E6HS9ZF52c15CR
+Gt+M754DoN3evXfcZgtlpIevaJ+jHHfy+SVN0MlfHy0fqBtYunhtGHlYnsn3epVUAAAAAAAA
+
+--------------ms000902020400080600060805--
