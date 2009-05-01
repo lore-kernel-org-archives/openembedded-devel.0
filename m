@@ -1,20 +1,36 @@
-Received: from [209.85.217.234] (helo=mail-gx0-f234.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from
-	<3jlL6SQsJACUDMJGG.CSBLFHNBJM.DPN@trix.bounces.google.com>)
-	id 1Lzhn3-0000U8-71 for openembedded-devel@lists.openembedded.org;
-	Fri, 01 May 2009 03:43:49 +0200
-Received: by gxk14 with SMTP id 14so1633829gxk.0
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <cliff.brake@gmail.com>) id 1Lzhrc-0000YV-6v
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 May 2009 03:48:32 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so1368781ywk.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Apr 2009 18:38:22 -0700 (PDT)
+	Thu, 30 Apr 2009 18:43:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=AK3OCIn5jUfp8iSkdpVdpa6FLdK5Pvg0T+BPZd7+44A=;
+	b=GQOai4wf+BlNFqlORGBiuDLvJhZC4HDKgk5vCHqhR05eC3v0QCAh+zH4kSWh+phAEP
+	3xSKSnceGzTpq16zutK5afPV9LZQIiBvdlpbNURRT6LXm72Mh7dBtKxpJEWVdNITkKqF
+	HMrO1uAF+A7lWMZjWVs71wJMtQ6IkxEshqXh4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=NMOY/RNKe41Gyc34v/XNOprMB1b4Mrq5UouweJtAVVB63BIRBTMgnAuaTpqTHif7lD
+	JZ1/q5112FeZtw+89VnWU7D3BjbTRQ0lA8xGIW0+P2sNt5jMan50iFhJsfPdo1W/Yr9q
+	Q7+/85UFNigDXgyOdCRhGZGMUhLVjDxoOvxvk=
 MIME-Version: 1.0
-Received: by 10.150.199.16 with SMTP id w16mr1927030ybf.29.1241141902086; Thu, 
-	30 Apr 2009 18:38:22 -0700 (PDT)
-Message-ID: <000e0cd30af630952b0468cfde1b@google.com>
-Date: Fri, 01 May 2009 01:38:22 +0000
-From: cliff.brake@gmail.com
+Received: by 10.151.125.12 with SMTP id c12mr4619650ybn.213.1241142186827; 
+	Thu, 30 Apr 2009 18:43:06 -0700 (PDT)
+In-Reply-To: <1241101618.30742.241.camel@mill.internal.reciva.com>
+References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
+	<1241101618.30742.241.camel@mill.internal.reciva.com>
+Date: Thu, 30 Apr 2009 21:43:06 -0400
+Message-ID: <f96d234e0904301843q27803491xe14c09bf75193fe7@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: OE Infrastructure Move to OSUOSL Poll
+Subject: Re: progress on OE organization issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,24 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2009 01:43:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed; delsp=yes
+X-List-Received-Date: Fri, 01 May 2009 01:48:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Please share your thoughts in this poll if we should move the OE  
-infrastructure to OSUOSL?  We have been offered a VM on a fairly high end  
-server.  Uptime is reported to be very good, and there are several on-site  
-admins who provide good support.  Mickey has asked that we move the OE  
-infrastructure off his server so we need to go somewhere.  Just fill in  
-this form with a yes or no and your email address, then click submit.
+On Thu, Apr 30, 2009 at 10:26 AM, Phil Blundell <philb@gnu.org> wrote:
 
-The results of this poll will be published, so please be aware as you vote  
-or enter comments.  Anonymous entries will be discarded.
+> Do you have any kind of estimated timeline for putting these
+> organisational structures in place?
 
+The server changes can happen as I/others have time.  I hope to have
+most of the services mirrored over the next couple weeks, and kept in
+sync with rsync.  After a period of testing, we can then make the
+switch.
 
+The eV stuff is a little less known, as about all I can do keep
+hassling those who started the process.  I did note your thoughts
+about the eV, and have asked the http://www.softwarefreedom.org/ for
+any advice they might have.  An organized way to handle funding does
+not seen super critical at this time with the nslu2-linux server
+offer, but something we should get in place.
 
-I've invited you to fill out the form OE Infrastructure Move to OSUOSL  
-Poll. To fill it out, visit:
-http://spreadsheets.google.com/viewform?formkey=cnFRNVQxdklockhqSXhSODBld1d5eVE6MA..
+I have been pondering doing a series of polls to get feedback from the
+OE community and users.  The first one should be coming out shortly.
+Perhaps we can use a mechanism like this for voting, etc eventually.
+
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
