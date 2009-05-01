@@ -1,37 +1,36 @@
-Received: from [209.85.132.251] (helo=an-out-0708.google.com)
+Received: from [74.125.44.153] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M00bx-0008H9-2G
-	for openembedded-devel@openembedded.org; Fri, 01 May 2009 23:49:37 +0200
-Received: by an-out-0708.google.com with SMTP id c3so1522021ana.30
-	for <openembedded-devel@openembedded.org>;
-	Fri, 01 May 2009 14:44:06 -0700 (PDT)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1M013Z-0000iU-Ry
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 02 May 2009 00:18:09 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so1654234yxh.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 May 2009 15:12:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=Cy0XgZAUerRdul2jYFJ5o/NZHoby15fTLwbaIKOYT+o=;
-	b=a4ILLzczDJaW0MMxj5c0f4Zz2jomT22cDBH3InFvd/279oKdxu8Hyy042WG1XI8ald
-	ONGr7Y9vos9Zk/c2tu4SxySx3XWhyXt9kbzyEpCMEqnmu+z53PVIpn85A+3iRq4o4UWq
-	O8D4+7us9spFujC1JPzn5b1Wu8lqKdyk2Ues8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=NPmbce4+IMaw5Vfd/cJYRNmrs6YFaUFrGsWY2Bv1eTr4hqVXslnB7b1yb0nenCF8hh
-	OS24XB5cBkqZa0ztYHSgc08U30MNswj8sugmTJIciscFlGMwqbndxiVxjxR3nrMud8PO
-	VXLNWCd1MbrIB9Hoh2BXp4RbpxwU6z/vqTdpk=
+	bh=IHSUlNG4PYOD88W4cLiYry6WVJZmixwoQUdJKrnhk08=;
+	b=nUUtdIBsRZPrA9kq8xMHe3w3NeP8f2FULrjVBUGGpN7F6HnZRfGp31t5jyvFzqV942
+	u7bYbngqnW/OxZihWXr13SD4K8GhOFxO6HNZ0t2HxC5Xjqr+qPIyL7OuQ+SmfQ+BEBG2
+	41Lc42vfRcdLypOYWfceE5cxjqRlCywytzVHQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=QVAoZuXZ9Jzr7H+iVRKMNx8uCPiv+7seaUHLq+G16pC3gcuW0h0rkjRK4iCsuL/B2g
+	S1sy06ySWhKnmkRHhTXQ8Hz6rORl1S7IYN+ajQZeZBdGuyMaaet6yMRA87EKYv3CZOQx
+	M6fzlQqjPRidT5IJ880Jib9SpDX2aT3SudMSg=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.189.10 with SMTP id m10mr6878616anf.47.1241214246090; Fri, 
-	01 May 2009 14:44:06 -0700 (PDT)
-In-Reply-To: <49FAE94F.2090101@doredevelopment.dk>
+Received: by 10.231.35.75 with SMTP id o11mr442127ibd.16.1241215959036; Fri, 
+	01 May 2009 15:12:39 -0700 (PDT)
+In-Reply-To: <49FB6AB5.6040607@balister.org>
 References: <49FAE94F.2090101@doredevelopment.dk>
-Date: Fri, 1 May 2009 18:44:06 -0300
-X-Google-Sender-Auth: e6acdd559da50789
-Message-ID: <be7a9f3d0905011444l31afb6eby4b2638e0288be038@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	<c384c5ea0905011430h57c5165bp6d455fc47ada91@mail.gmail.com>
+	<49FB6AB5.6040607@balister.org>
+Date: Sat, 2 May 2009 00:12:39 +0200
+Message-ID: <c384c5ea0905011512s46ace2e0n917fc049a5b400a9@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
 Subject: =?UTF-8?B?UmU6IFB1bGwgcmVxdWVzdCBmcm9tIERvcsOpRGV2ZWxvcG1lbnQgLSBOZXc6IE1pY3JvIGRpc3Ryby9pbWFnZQ==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,30 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2009 21:49:37 -0000
+X-List-Received-Date: Fri, 01 May 2009 22:18:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello Martin,
+Hello,
 
-On Fri, May 1, 2009 at 9:21 AM, Martin Lund <mgl@doredevelopment.dk> wrote:
-> Hello OE dev,
+On Fri, May 1, 2009 at 11:33 PM, Philip Balister <philip@balister.org> wrote:
+> Leon Woestenberg wrote:
+>> On Fri, May 1, 2009 at 2:21 PM, Martin Lund <mgl@doredevelopment.dk>
+>> I'm not sure what the exact GIT workflow is for such a pull, anyone?
 >
-> Please pull the changes from the following repository:
+> I wouldn't be that hard to submit two patches, one for the distro and
+> another for the image.
 >
-> git pull git://dev.doredevelopment.dk/oe-micro.git master
+OK, do your thing :-)
 
-I believe it would be better if you could get commit access and just
-use the mailing list for review. So you can commit it yourself :-)
-What others think?
 
-Besides that, after it gets in ... it would be nice to port it to our
-stable branch and propose it to get added to it. It is quite nice as
-basis for a system so please keep it going :-D
+I thought a pull neatly remembers the remote history, or links to it,
+or <magic here>?
+At least that is what I would expect from a distributed version
+control system. :)
 
+Regards,
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Leon
 
 
