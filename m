@@ -1,36 +1,23 @@
-Received: from [74.125.44.153] (helo=yx-out-1718.google.com)
+Received: from [193.201.35.47] (helo=bq8.dotserv.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1M013Z-0000iU-Ry
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 May 2009 00:18:09 +0200
-Received: by yx-out-1718.google.com with SMTP id 36so1654234yxh.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 May 2009 15:12:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=IHSUlNG4PYOD88W4cLiYry6WVJZmixwoQUdJKrnhk08=;
-	b=nUUtdIBsRZPrA9kq8xMHe3w3NeP8f2FULrjVBUGGpN7F6HnZRfGp31t5jyvFzqV942
-	u7bYbngqnW/OxZihWXr13SD4K8GhOFxO6HNZ0t2HxC5Xjqr+qPIyL7OuQ+SmfQ+BEBG2
-	41Lc42vfRcdLypOYWfceE5cxjqRlCywytzVHQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=QVAoZuXZ9Jzr7H+iVRKMNx8uCPiv+7seaUHLq+G16pC3gcuW0h0rkjRK4iCsuL/B2g
-	S1sy06ySWhKnmkRHhTXQ8Hz6rORl1S7IYN+ajQZeZBdGuyMaaet6yMRA87EKYv3CZOQx
-	M6fzlQqjPRidT5IJ880Jib9SpDX2aT3SudMSg=
+	(envelope-from <mgl@doredevelopment.dk>) id 1M01vE-00081X-Cd
+	for openembedded-devel@openembedded.org; Sat, 02 May 2009 01:13:36 +0200
+Received: from [10.0.0.4] (port80.ds1-abc.adsl.cybercity.dk [212.242.125.19])
+	(authenticated bits=0)
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id n41N7tE9013608
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Sat, 2 May 2009 01:08:05 +0200
+Message-ID: <49FB80C7.5050808@doredevelopment.dk>
+Date: Sat, 02 May 2009 01:07:51 +0200
+From: Martin Lund <mgl@doredevelopment.dk>
+Organization: =?ISO-8859-1?Q?Dor=E9Development?=
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
-Received: by 10.231.35.75 with SMTP id o11mr442127ibd.16.1241215959036; Fri, 
-	01 May 2009 15:12:39 -0700 (PDT)
-In-Reply-To: <49FB6AB5.6040607@balister.org>
+To: openembedded-devel@openembedded.org
 References: <49FAE94F.2090101@doredevelopment.dk>
-	<c384c5ea0905011430h57c5165bp6d455fc47ada91@mail.gmail.com>
-	<49FB6AB5.6040607@balister.org>
-Date: Sat, 2 May 2009 00:12:39 +0200
-Message-ID: <c384c5ea0905011512s46ace2e0n917fc049a5b400a9@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<be7a9f3d0905011444l31afb6eby4b2638e0288be038@mail.gmail.com>
+In-Reply-To: <be7a9f3d0905011444l31afb6eby4b2638e0288be038@mail.gmail.com>
 Subject: =?UTF-8?B?UmU6IFB1bGwgcmVxdWVzdCBmcm9tIERvcsOpRGV2ZWxvcG1lbnQgLSBOZXc6IE1pY3JvIGRpc3Ryby9pbWFnZQ==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -45,30 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2009 22:18:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 01 May 2009 23:13:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Hello Otavio and all,
 
-On Fri, May 1, 2009 at 11:33 PM, Philip Balister <philip@balister.org> wrote:
-> Leon Woestenberg wrote:
->> On Fri, May 1, 2009 at 2:21 PM, Martin Lund <mgl@doredevelopment.dk>
->> I'm not sure what the exact GIT workflow is for such a pull, anyone?
+Otavio Salvador wrote:
+> Hello Martin,
 >
-> I wouldn't be that hard to submit two patches, one for the distro and
-> another for the image.
+> On Fri, May 1, 2009 at 9:21 AM, Martin Lund <mgl@doredevelopment.dk> wrote:
+>   
+>> Hello OE dev,
+>>
+>> Please pull the changes from the following repository:
+>>
+>> git pull git://dev.doredevelopment.dk/oe-micro.git master
+>>     
 >
-OK, do your thing :-)
+> I believe it would be better if you could get commit access and just
+> use the mailing list for review. So you can commit it yourself :-)
+> What others think?
+>
+>   
+Starting with a pull request in this list seemed like the most sensible 
+thing to do for a start :)
 
+If someone grants me commit access surely I will maintain it.
 
-I thought a pull neatly remembers the remote history, or links to it,
-or <magic here>?
-At least that is what I would expect from a distributed version
-control system. :)
-
-Regards,
--- 
-Leon
+> Besides that, after it gets in ... it would be nice to port it to our
+> stable branch and propose it to get added to it. It is quite nice as
+> basis for a system so please keep it going :-D
+>
+>   
+Sounds like a good idea to me too =)
 
 
