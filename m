@@ -1,23 +1,18 @@
-Received: from [193.201.35.47] (helo=bq8.dotserv.com)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mgl@doredevelopment.dk>) id 1Lzrpl-0008DH-MR
-	for openembedded-devel@openembedded.org; Fri, 01 May 2009 14:27:18 +0200
-Received: from [192.168.18.34] (07723322604.hef.nianet.dk [77.233.226.4] (may
-	be forged)) (authenticated bits=0)
-	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id n41CLbVX031438
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 May 2009 14:21:49 +0200
-Message-ID: <49FAE94F.2090101@doredevelopment.dk>
-Date: Fri, 01 May 2009 14:21:35 +0200
-From: Martin Lund <mgl@doredevelopment.dk>
-Organization: =?ISO-8859-1?Q?Dor=E9Development?=
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-X-MIME-Autoconverted: from 8bit to quoted-printable by bq8.dotserv.com id
-	n41CLbVX031438
-Subject: =?UTF-8?B?UHVsbCByZXF1ZXN0IGZyb20gRG9yw6lEZXZlbG9wbWVudCAtIE5ldzogTWljcm8gZGlzdHJvL2ltYWdl?=
+	(envelope-from <khimov@altell.ru>) id 1LzryJ-0008V4-QN
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 May 2009 14:36:07 +0200
+Received: from [UNAVAILABLE] ([84.17.11.114] helo=localhost.localdomain)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1Lzrsz-0004rH-Jt; Fri, 01 May 2009 16:30:37 +0400
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 May 2009 16:30:33 +0400
+Message-Id: <1241181034-25945-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.2.4
+Subject: [PATCH 1/2] bridge-utils: remove old versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,71 +26,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2009 12:27:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 01 May 2009 12:36:08 -0000
 
-Hello OE dev,
+Version 1.0.4 FTBFS and both with 0.9.7 are very old. No distro sets any
+version as preferred, so it's safe to assume that everyone is on 1.2 now.
+---
+ .../bridge-utils/bridge-utils-0.9.7/failout.patch  |   16 ----------------
+ recipes/bridge-utils/bridge-utils_0.9.7.bb         |   10 ----------
+ recipes/bridge-utils/bridge-utils_1.0.4.bb         |   14 --------------
+ 3 files changed, 0 insertions(+), 40 deletions(-)
+ delete mode 100644 recipes/bridge-utils/bridge-utils-0.9.7/failout.patch
+ delete mode 100644 recipes/bridge-utils/bridge-utils_0.9.7.bb
+ delete mode 100644 recipes/bridge-utils/bridge-utils_1.0.4.bb
 
-Please pull the changes from the following repository:
-
-git pull git://dev.doredevelopment.dk/oe-micro.git master
-
-This oe-micro repository adds the following files to current dev:
-
-conf/distro/micro-uclibc.conf |   43 +++++++++++++++++
-conf/distro/micro.conf        |  100=20
-+++++++++++++++++++++++++++++++++++++++++
-recipes/images/micro-image.bb |   34 ++++++++++++++
-3 files changed, 177 insertions(+), 0 deletions(-)
-
-There should be no conflicts with the current OE dev branch.
-
-These files constitute a new distribution named "Micro" and a=20
-corresponding buildable image target: micro-image
-
-
-
-The "Micro" distribution/image is created because we feel that there is=20
-a need for a truly tiny and clean distro and image definition in OE for=20
-those users out there that needs a _very_ tiny Linux rootfs with=20
-virtually nothing installed except busybox, libc, udev, and a few init=20
-scripts. On arm the jffs2 image size is only 1 MB (uclibc based). No=20
-bloat allowed.
-
-The micro-image is ideal for users who wants this type of tiny Linux=20
-rootfs system with only a few custom applications added.
-
-It has been tested to build and run on the following machine types:
-
-    * at91sam9263ek [glibc, uclibc]
-    * x86 [glibc]
-
-As everything else OE it should build for most other machine types as=20
-well (no guarantee of course).
-
-The micro distribution/image is inspired by the "minimal" distro and=20
-image configuration - but it takes that one step further as contents are=20
-heavily stripped down and non needed definitions removed. Thanks to=20
-those who contributed to minimal distro - good work.
-
-More details on micro can be found in the following wiki:
-http://dev.doredevelopment.dk/wiki/OpenEmbeddedMicro
-
-Note: It is still work in progress and there are things to improve on=20
-the todo list (see wiki).
-
-We intend to maintain this distro/image in the future - please pull :)
-
-Thanks.
-
-Best regards, Dor=E9Development
-
---=20
-Martin Lund, Senior Software Consultant
-Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
-Phone: +45 51 92 84 24, Email: mgl@doredevelopment.dk
-WWW: http://www.doredevelopment.dk
+diff --git a/recipes/bridge-utils/bridge-utils-0.9.7/failout.patch b/recipes/bridge-utils/bridge-utils-0.9.7/failout.patch
+deleted file mode 100644
+index ca6e958..0000000
+--- a/recipes/bridge-utils/bridge-utils-0.9.7/failout.patch
++++ /dev/null
+@@ -1,16 +0,0 @@
+-
+-#
+-# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
+-#
+-
+---- bridge-utils-0.9.7/Makefile.in~failout	2002-04-03 10:19:36.000000000 -0600
+-+++ bridge-utils-0.9.7/Makefile.in	2004-06-03 14:17:35.000000000 -0500
+-@@ -13,7 +13,7 @@
+- SUBDIRS=libbridge brctl doc
+- 
+- all:
+--	for x in $(SUBDIRS); do (cd $$x && $(MAKE) ); done
+-+	for x in $(SUBDIRS); do (cd $$x && $(MAKE) ) || exit 1; done
+- 
+- clean:
+- 	for x in $(SUBDIRS); do (cd $$x && $(MAKE) clean ); done
+diff --git a/recipes/bridge-utils/bridge-utils_0.9.7.bb b/recipes/bridge-utils/bridge-utils_0.9.7.bb
+deleted file mode 100644
+index 1ab9424..0000000
+--- a/recipes/bridge-utils/bridge-utils_0.9.7.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-DESCRIPTION = "Tools for ethernet bridging."
+-LICENSE = "GPL"
+-SECTION = "console/network"
+-SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tgz \
+-	   file://failout.patch;patch=1"
+-S = "${WORKDIR}/bridge-utils-${PV}"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "--with-linux-headers=${STAGING_INCDIR}"
+diff --git a/recipes/bridge-utils/bridge-utils_1.0.4.bb b/recipes/bridge-utils/bridge-utils_1.0.4.bb
+deleted file mode 100644
+index d72a627..0000000
+--- a/recipes/bridge-utils/bridge-utils_1.0.4.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "Tools for ethernet bridging."
+-HOMEPAGE = "http://bridge.sourceforge.net/"
+-SECTION = "console/network"
+-LICENSE = "GPL"
+-DEPENDS = "sysfsutils"
+-RRECOMMENDS = "kernel-module-bridge"
+-PR = "r1"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
+-S = "${WORKDIR}/bridge-utils-${PV}"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "--with-linux-headers=${STAGING_INCDIR}"
+-- 
+1.6.2.4
 
 
 
