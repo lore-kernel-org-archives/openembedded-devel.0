@@ -1,25 +1,39 @@
-Received: from [193.201.35.47] (helo=bq8.dotserv.com)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mgl@doredevelopment.dk>) id 1LztHm-00008I-SL
-	for openembedded-devel@openembedded.org; Fri, 01 May 2009 16:00:18 +0200
-Received: from [192.168.18.34] (07723322604.hef.nianet.dk [77.233.226.4] (may
-	be forged)) (authenticated bits=0)
-	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id n41DscS0020759
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 1 May 2009 15:54:49 +0200
-Message-ID: <49FAFF1A.5080406@doredevelopment.dk>
-Date: Fri, 01 May 2009 15:54:34 +0200
-From: Martin Lund <mgl@doredevelopment.dk>
-Organization: =?ISO-8859-1?Q?Dor=E9Development?=
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+	(envelope-from <otavio.salvador@gmail.com>) id 1LzvoP-00058h-8w
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 01 May 2009 18:42:09 +0200
+Received: by an-out-0708.google.com with SMTP id b6so1546773ana.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 May 2009 09:36:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=vV4Lt+Fylg01RI19Qor56a0B6CTbozRkQPYInRhLz/Y=;
+	b=DqDb45y/1YilNtouRmfwfZlk3DhyCxSXKryFM3BLk9P72EMh5VhuF0tboBwF04pbY1
+	MR0XEvlV+Ubs+7F+JtlH0eurFPc73zqwLH1j28nc9hcX/be0+CphnIla8/zW6vhNxh+o
+	Us0EkjSlVlY5+nAffauGObL7B2fCWZGN6yGE0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=AGoZZFa+Ygpa/TjcRzXvlOpTNVo2h0lbqI6le4Cin/ihNxN7ceJSUu9Dz45mu1AGoq
+	64ectAb/Xyf9p0REF8WSrAeT93cPz3Kj32FCUYQ7MfeEMVf4bw3y9HJYb3jUjenjV+TL
+	CdK7S3fiOrawE29bO2Kakf0O/gL0lYJ82vm/Q=
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <49FAE94F.2090101@doredevelopment.dk> <49FAEFDE.70605@balister.org>
-In-Reply-To: <49FAEFDE.70605@balister.org>
-X-MIME-Autoconverted: from 8bit to quoted-printable by bq8.dotserv.com id
-	n41DscS0020759
-Subject: =?UTF-8?B?UmU6IFB1bGwgcmVxdWVzdCBmcm9tIERvcsOpRGV2ZWxvcG1lbnQgLSBOZXc6IE1pY3JvIGRpc3Ryby9pbWFnZQ==?=
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.153.9 with SMTP id a9mr6273965ane.139.1241195799761; Fri, 
+	01 May 2009 09:36:39 -0700 (PDT)
+In-Reply-To: <1241181034-25945-2-git-send-email-khimov@altell.ru>
+References: <1241181034-25945-1-git-send-email-khimov@altell.ru>
+	<1241181034-25945-2-git-send-email-khimov@altell.ru>
+Date: Fri, 1 May 2009 13:36:39 -0300
+X-Google-Sender-Auth: 9dce15c3436d3e72
+Message-ID: <be7a9f3d0905010936v2cfb14can492f41735b6d7cf8@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] bridge-utils: add version 1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,119 +47,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2009 14:00:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 01 May 2009 16:42:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Philip Balister wrote:
-> Martin Lund wrote:
->> Hello OE dev,
->>
->> Please pull the changes from the following repository:
->>
->> git pull git://dev.doredevelopment.dk/oe-micro.git master
->>
->> This oe-micro repository adds the following files to current dev:
->>
->> conf/distro/micro-uclibc.conf |   43 +++++++++++++++++
->> conf/distro/micro.conf        |  100=20
->> +++++++++++++++++++++++++++++++++++++++++
->> recipes/images/micro-image.bb |   34 ++++++++++++++
->> 3 files changed, 177 insertions(+), 0 deletions(-)
->>
->> There should be no conflicts with the current OE dev branch.
->>
->> These files constitute a new distribution named "Micro" and a=20
->> corresponding buildable image target: micro-image
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
+On Fri, May 1, 2009 at 9:30 AM, Roman I Khimov <khimov@altell.ru> wrote:
+> ---
+> =A0conf/checksums.ini =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =
+=A04 ++++
+> =A0recipes/bridge-utils/bridge-utils.inc =A0 =A0| =A0 24 ++++++++++++++++=
+++++++++
+> =A0recipes/bridge-utils/bridge-utils_1.2.bb | =A0 28 ++------------------=
+--------
+> =A0recipes/bridge-utils/bridge-utils_1.4.bb | =A0 =A01 +
+> =A04 files changed, 31 insertions(+), 26 deletions(-)
+> =A0create mode 100644 recipes/bridge-utils/bridge-utils.inc
+> =A0create mode 100644 recipes/bridge-utils/bridge-utils_1.4.bb
 >
-> Why can't we make the needed changes to the minimal distro? I'd hate=20
-> to see us have minimal and really-minimal distros, when they are=20
-> trying to do the same thing.
-
-Yes - the two distro definitions are closely related.
-
-The main goal of micro is to be able to build a _very_ tiny rootfs. A=20
-secondary goal is to do this with as little distro/image definition as=20
-possible - why make it complex if you can do it simple.
-
-The downside of having one distro to build it all is that the distro=20
-configuration becomes fairly complex - and as we know complex includes=20
-more maintenance and configuration becomes difficult to read/customize=20
-for non OE maintainers.
-
-Of course introducing too many distros is a bad idea but I do think we=20
-need a few good _generic_ distro choices to choose from - currently I=20
-dont see that.
-
-I would like something small (micro), medium (mini), big (...), huge=20
-(angstrom) to choose from in terms of supported generic OE distro=20
-definitions. Actually, I would love to help out doing these generic=20
-distro choices - provided that they are kept clean and sane. Consider=20
-micro the first contribution in this direction.
-
-Today I feel that OE users are kind of left behind if they do not choose=20
-Angstrom distro. For developers like me Angstrom is no option because I=20
-dont want everything-but-the-kitchen-sink - I want tiny!
-
-> What changes did you make to minimal.conf to to get to micro.conf?=20
-> I'll admit to not looking closely at the insides of the distro files,=20
-> but I want to learn more.
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index 9a2c473..9485f6b 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -3034,6 +3034,10 @@ sha256=3Dc93b9fab6b12a80bcf69114aab66d1d298455e926=
+9c44f9e5f6430c142f9e349
+> =A0md5=3D1e6cff57ac90d7ab984d9512fdd9f2dd
+> =A0sha256=3Dc93b9fab6b12a80bcf69114aab66d1d298455e9269c44f9e5f6430c142f9e=
+349
 >
-Please make a quick diff and have a look  ;)
-> I'm also curious what happens if you build the micro-image against=20
-> Angstrom.
+> +[http://downloads.sourceforge.net/bridge/bridge-utils-1.4.tar.gz]
+> +md5=3D0182fcac3a2b307113bbec34e5f1c673
+> +sha256=3D876975e9bcc302aa8b829161ea3348b12b9b879f1db0dc98feaed8d0e5dd593=
+3
+> +
+> =A0[http://www.ludd.luth.se/~torger/files/brutefir-1.0i.tar.gz]
+> =A0md5=3D33fcf84a41d38f5aac24c57a66a2c3ee
+> =A0sha256=3De0f3988afb0a84a89f38153fd5617615e9bcf32bb747ee981c99c44d3c423=
+6f6
+> diff --git a/recipes/bridge-utils/bridge-utils.inc b/recipes/bridge-utils=
+/bridge-utils.inc
+> new file mode 100644
+> index 0000000..ba4d582
+> --- /dev/null
+> +++ b/recipes/bridge-utils/bridge-utils.inc
+> @@ -0,0 +1,24 @@
+> +DESCRIPTION =3D "Tools for ethernet bridging."
+> +HOMEPAGE =3D "http://bridge.sourceforge.net/"
+> +SECTION =3D "console/network"
+> +LICENSE =3D "GPL"
+> +DEPENDS =3D "sysfsutils"
+> +RRECOMMENDS =3D "kernel-module-bridge"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
+> +
+> +inherit autotools
+> +
+> +EXTRA_OECONF =3D "--with-linux-headers=3D${STAGING_INCDIR}"
+> +
+> +do_install_append () {
+> + =A0 =A0 =A0 mv ${D}${sbindir}/brctl ${D}${sbindir}/brctl.${PN}
+> +}
+> +
+> +pkg_postinst_${PN} () {
+> + =A0 =A0 =A0 update-alternatives --install ${sbindir}/brctl brctl brctl.=
+${PN} 100
+> +}
+> +
+> +pkg_prerm_${PN} () {
+> + =A0 =A0 =A0 update-alternatives --remove brctl brctl.${PN}
+> +}
+> diff --git a/recipes/bridge-utils/bridge-utils_1.2.bb b/recipes/bridge-ut=
+ils/bridge-utils_1.2.bb
+> index 51414f5..dd1def4 100644
+> --- a/recipes/bridge-utils/bridge-utils_1.2.bb
+> +++ b/recipes/bridge-utils/bridge-utils_1.2.bb
+> @@ -1,26 +1,2 @@
+> -DESCRIPTION =3D "Tools for ethernet bridging."
+> -HOMEPAGE =3D "http://bridge.sourceforge.net/"
+> -SECTION =3D "console/network"
+> -LICENSE =3D "GPL"
+> -DEPENDS =3D "sysfsutils"
+> -RRECOMMENDS =3D "kernel-module-bridge"
+> -PR =3D "r1"
+> -
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
+> -
+> -inherit autotools
+> -
+> -EXTRA_OECONF =3D "--with-linux-headers=3D${STAGING_INCDIR}"
+> -
+> -do_install () {
+> - =A0 =A0 =A0 autotools_do_install
+> - =A0 =A0 =A0 mv ${D}${sbindir}/brctl ${D}${sbindir}/brctl.${PN}
+> -}
+> -
+> -pkg_postinst_${PN} () {
+> - =A0 =A0 =A0 update-alternatives --install ${sbindir}/brctl brctl brctl.=
+${PN} 100
+> -}
+> -
+> -pkg_prerm_${PN} () {
+> - =A0 =A0 =A0 update-alternatives --remove brctl brctl.${PN}
+> -}
+> +require bridge-utils.inc
+> +PR =3D "r2"
+> diff --git a/recipes/bridge-utils/bridge-utils_1.4.bb b/recipes/bridge-ut=
+ils/bridge-utils_1.4.bb
+> new file mode 100644
+> index 0000000..1c2dea6
+> --- /dev/null
+> +++ b/recipes/bridge-utils/bridge-utils_1.4.bb
+> @@ -0,0 +1 @@
+> +require bridge-utils.inc
+> --
+> 1.6.2.4
 >
-Sorry, I never tried that and never intended to do so. You will most=20
-likely end up with a different image or the build might break.
-
-> Philip
->
->>
->>
->>
->> The "Micro" distribution/image is created because we feel that there=20
->> is a need for a truly tiny and clean distro and image definition in=20
->> OE for those users out there that needs a _very_ tiny Linux rootfs=20
->> with virtually nothing installed except busybox, libc, udev, and a=20
->> few init scripts. On arm the jffs2 image size is only 1 MB (uclibc=20
->> based). No bloat allowed.
->>
->> The micro-image is ideal for users who wants this type of tiny Linux=20
->> rootfs system with only a few custom applications added.
->>
->> It has been tested to build and run on the following machine types:
->>
->>    * at91sam9263ek [glibc, uclibc]
->>    * x86 [glibc]
->>
->> As everything else OE it should build for most other machine types as=20
->> well (no guarantee of course).
->>
->> The micro distribution/image is inspired by the "minimal" distro and=20
->> image configuration - but it takes that one step further as contents=20
->> are heavily stripped down and non needed definitions removed. Thanks=20
->> to those who contributed to minimal distro - good work.
->>
->> More details on micro can be found in the following wiki:
->> http://dev.doredevelopment.dk/wiki/OpenEmbeddedMicro
->>
->> Note: It is still work in progress and there are things to improve on=20
->> the todo list (see wiki).
->>
->> We intend to maintain this distro/image in the future - please pull :)
->>
->> Thanks.
->>
->> Best regards, Dor=E9Development
->>
->
-> -----------------------------------------------------------------------=
--
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->  =20
+>
+
+
+
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
