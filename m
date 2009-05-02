@@ -1,22 +1,21 @@
-Received: from [216.145.245.199] (helo=mx03.dls.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1M0LOU-0004BC-GT
-	for openembedded-devel@openembedded.org; Sat, 02 May 2009 22:01:06 +0200
-Received: from [209.242.7.139] (helo=[192.168.231.111])
-	by mx03.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1M0LJ2-00049H-Im
-	for openembedded-devel@openembedded.org; Sat, 02 May 2009 14:55:28 -0500
-Message-ID: <49FCA524.10102@dls.net>
-Date: Sat, 02 May 2009 14:55:16 -0500
-From: "Mike (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M0Mqn-0000Rd-Qr
+	for openembedded-devel@openembedded.org; Sat, 02 May 2009 23:34:26 +0200
+Received: (qmail 25926 invoked from network); 2 May 2009 21:28:48 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 2 May 2009 14:28:48 -0700
+Date: Sat, 2 May 2009 14:28:47 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090502212847.GC20619@smtp.west.cox.net>
+References: <1240589520-1104-1-git-send-email-trini@kernel.crashing.org>
+	<20090424182843.GA15489@smtp.west.cox.net>
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
-References: <20090427141943.GG18788@smtp.west.cox.net>
-	<20090429161224.GB18788@smtp.west.cox.net>
-In-Reply-To: <20090429161224.GB18788@smtp.west.cox.net>
-Subject: Re: [RFC] Bring PREFERRED_LIBC to all distros
+In-Reply-To: <20090424182843.GA15489@smtp.west.cox.net>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH][STABLE] Various SDK-related updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,44 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 May 2009 20:01:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 02 May 2009 21:34:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Acked-by: Mike Westerhof <mwester@dls.net>
+On Fri, Apr 24, 2009 at 11:28:43AM -0700, Tom Rini wrote:
+> On Fri, Apr 24, 2009 at 09:11:48AM -0700, Tom Rini wrote:
+> > The following series brings stable up to date with dev, with respect to
+> > SDK and Canadian SDK changes.  The only not directly SDK related change
+> > is the bugfix to wireless-tools so that libiw can be used.  mwester said
+> > I should pull the SlugOS-related fix in myself rather than wait for him
+> > to update SlugOS stuff in stable.  These changes have been build-tested
+> > for gcc 4.1.2/4.2.4/4.3.3 and at91sam9263ek qemuarm omap5912osk
+> > beagleboard vortex86sx qemux86 mpc8313e-rdb with DISTRO=angstrom-2008.1
+> > in both dev and stable with identical results.  These changes are also
+> > in the trini/stable/2009/sdk-updates branch.
+> 
+> Also now in
+> http://patchwork.openembedded.org/bundle/trini/trini-stable-2009-sdk-updates/
 
-(Tested fine for the SlugOS distro)
+If I read the Stable wiki page correctly, changes like this need a
+maintainer ack (Khem has) and a second ack.  Still looking for a second
+ack.
 
-Tom Rini wrote:
-> On Mon, Apr 27, 2009 at 07:19:43AM -0700, Tom Rini wrote:
-> 
->> Hey all.  I've created a new branch, trini/add-libc-overrides which does
->> the following:
->> - Make every distro declare PREFERRED_LIBC, either outright or
->>   overridable.
->> - For Angstrom/foonas have DISTROVAR ?= ${PREFERRED_LIBC},
->>   PREFERRED_LIBC ?= default
->> - Add conf/distro/include/{eglibc,glibc,uclibc}.inc that have:
->>   - Add 'glibc' to OVERRIDES for eglibc/glibc and 'uclibc' for
->>     uclibc.inc
->>   - Default providers.
->>   NOTE: ${TARGET_PREFIX} includes ${TARGET_VENDOR} so ...
->> - Switch all distros to have:
->>   require conf/distro/include/${PREFERED_LIBC}.inc
->>   - Clean up distro-specific includes, and sane-toolchain.inc a little
->>     bit by removing all of the PREFERRED_PROVIDER stuff it no longer
->>     needs.
->> - For glibc*.bb older than 2.5, add in some missing RPROVIDES.
-> 
-> I've pushed a trini/add-libc-overrides-2 branch with the following
-> changes:
-> - Change PREFERRED_LIBC to LIBC
-> - Fold fixing up minimal/minimal-uclibc into the commit that brings in
->   the libc inc file.
-> - Re-order commits so that everything is functional from commit to
->   commit.
-> 
-> I'm now looking for ack's to pull this branch into .dev
-> 
+-- 
+Tom Rini
 
 
