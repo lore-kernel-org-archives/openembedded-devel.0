@@ -1,20 +1,36 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M0bjR-00005o-E8
-	for openembedded-devel@openembedded.org; Sun, 03 May 2009 15:27:49 +0200
-Received: (qmail 17779 invoked by uid 1003); 3 May 2009 13:22:00 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 3 May 2009 13:21:59 -0000
-Message-ID: <49FD9A75.3000609@balister.org>
-Date: Sun, 03 May 2009 09:21:57 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+Received: from [220.181.12.12] (helo=m12-12.163.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <lida_mail@163.com>) id 1M0bvT-0000Pp-3W
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 May 2009 15:40:15 +0200
+Received: from [192.168.58.103] (unknown [116.227.146.13])
+	by smtp8 (Coremail) with SMTP id DMCowLA7h5Zhnf1JSLpXEQ--.37994S2;
+	Sun, 03 May 2009 21:34:27 +0800 (CST)
+From: "Daniel.Li" <lida_mail@163.com>
 To: openembedded-devel@lists.openembedded.org
-References: <c384c5ea0905030555t48379d37o700254a1c49a4600@mail.gmail.com>
-In-Reply-To: <c384c5ea0905030555t48379d37o700254a1c49a4600@mail.gmail.com>
-Subject: Re: [RFC]: Remove #####...##### lines
+Organization: PALFocus (http://palfocus.oicp.net)
+Date: Sun, 03 May 2009 21:34:29 +0800
+Message-Id: <1241357669.13222.0.camel@daniel-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-CM-TRANSID: DMCowLA7h5Zhnf1JSLpXEQ--.37994S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxtrykur1fWry8XF4xWw1DGFg_yoW7Cr4rpF
+	Z8try5A3ykuayUXF95Cr40vr1FgryUGrW7Ww1kGrs7JFy5J3yxXwsFkry3KFy3Cwn8WrW8
+	uFn5X3yj934fWaDanT9S1TB71UUUUUUv73VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UU
+	UYr7k042IEc7kJM7k042IE42xK82IY6r43WwAYjxAI6xAIw28IcVAK0I8IjxAxM7k042IE
+	4IxYO2xFxVAqjxCEw4Av424lb7Iv0xC_Jr1lb4IE77IF4wAFF20E14v26r1j6r4UM7C26x
+	Cjj4IEI4klw4CSwwAFxVCaYxvI4VCIwcAKzIAtM7CIcVAFz4kK6r1j6r18M28EF7xvwVC0
+	I7IYx2IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW0oVCq3wA2z4x0Y4
+	vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAawVAYYI1S
+	6c8GOVWUur45Jryln4vEF2I2jVAIwVAKzxkI7VAqrcv_JFW8Xr15Mc804VCqF7xvr2I5Mc
+	8Ir4CE8sxKj4xv1VCF748vxVAv7wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8I
+	cVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UM4x0Y48IcxkI7VAKI48JM4IEnf9ElV
+	AFpTB2q-sK649IAas0WaI_GwCjxxvEw4Wlc7Ca8VAvwVCjb41lc2xSY4AK67AK6ry8MxkI
+	7II2jI8vz4v_Jr0_Jryl42xK82IYc2Ij64vIr41l4x8a6c8ajcxJMI8E67AF67kF1VAFwI
+	0_Jr0_JrylIxkGc2Ij64vIr41lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY
+	1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxU9fHUUUUUU
+X-CM-SenderInfo: 5olgtshpdlzqqrwthudrp/
+Subject: qemu-native build fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,90 +44,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 May 2009 13:27:49 -0000
-X-Groupsio-MsgNum: 9993
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090001030906070007020804"
-
---------------ms090001030906070007020804
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 03 May 2009 13:40:16 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Leon Woestenberg wrote:
-> #############################################################################
-> #I am a bit annoyed by the hash lines in some of the files
-> #############################################################################
-> # They distract me from the real content of the files.
-> #############################################################################
-> RFC_REMOVE_HASHLINES ?= 1
+Dear List,
 
-Although this might start a coding style war, I also find them distracting.
+I have found that qemu-native failed with gcc 3.4, see below.
+Originally, qemu failed with 4.* gcc, now qemu is ok with gcc3.4 but
+qemu-native failed. 
 
-Philip
+I googled, only found this http://pastebin.com/f75407ece# , which seems
+failed on 20 Apr.
 
---------------ms090001030906070007020804
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Now, I'm confused. Is there anyone can help me out this problem?  I'm
+build fso-gta02-testing-image, with Jaunty (ubuntu 9.04). Thanks.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwMzEz
-MjE1OFowIwYJKoZIhvcNAQkEMRYEFHOoNAvrlL/8GOc6mjcQPA5YvVQZMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCmo4yv6Yno2PHYTMGUPmbAKr9Sg1FuQRfE+jlnwNvFgGeOYU2x
-RxwGJzC+xtLBcCrEuQOYFZJ+9you1rxsiohOI8LLlsjjMrTEyogOeJCjnxEoR5BQ7MHBQ8jdHuh9
-3ivYFdwhcW/dFvsDqjIqGkBeSDKcHABJZWn/ncH4R57FhEXbZOgjVTrafrWDzYu5cKO+asOke8BX
-h1DyT1HXA6HbtQyWXjrHa0SYpLKmuQFPSSZBpWjvzOVwFY1gmqYMW0yvUlcjo8JH+u7B5H+eSm0i
-EiLFJOFpIPbZ0pkDG+kUyZRYYX5NuhY2VA2n3OsVa2RgnSoARA8HctrdLnC8V2WEAAAAAAAA
+NOTE: Running task 241 of 253 (ID:
+8, /home/daniel/work4/fso/fso-testing/openembedded/recipes/qemu/qemu-native_svn.bb, do_compile)
+NOTE: package qemu-native-0.9.1+svnr4242-r15: task do_compile: started
+ERROR: function do_compile failed
+ERROR: see log
+in /home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/temp/log.do_compile.10467
+NOTE: Task
+failed: /home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/temp/log.do_compile.10467
+NOTE: package qemu-native-0.9.1+svnr4242-r15: task do_compile: failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build
+of /home/daniel/work4/fso/fso-testing/openembedded/recipes/qemu/qemu-native_svn.bb do_compile failed
+ERROR: Task 8
+(/home/daniel/work4/fso/fso-testing/openembedded/recipes/qemu/qemu-native_svn.bb, do_compile) failed
+NOTE: Tasks Summary: Attempted 240 tasks of which 0 didn't need to be
+rerun and 1 failed.
+ERROR:
+'/home/daniel/work4/fso/fso-testing/openembedded/recipes/qemu/qemu-native_svn.bb' failed
 
---------------ms090001030906070007020804--
+
+
+From log, we can see
+
+gcc-3.4 -I. -I..
+-I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/target-i386 -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk -MMD -MP -DNEED_CPU_H -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/tcg -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/tcg/i386 -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/fpu -DHAS_AUDIO -DHAS_AUDIO_CHOICE -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/slirp -isystem/home/daniel/work4/fso/fso-testing/tmp/staging/i686-linux/usr/include -O2 -Wall -O2 -g -fno-strict-aliasing  -m32 -c -o kqemu.o /home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/kqemu.c
+gcc-3.4 -Wall -O2 -g -fno-strict-aliasing  -fno-reorder-blocks
+-fno-gcse    -fno-optimize-sibling-calls  -fno-crossjumping
+-fno-align-labels  -fno-align-jumps  -fno-align-functions
+-mpreferred-stack-boundary=2 -fomit-frame-pointer  -m32 -I. -I..
+-I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/target-i386 -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk -MMD -MP -DNEED_CPU_H -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/tcg -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/tcg/i386 -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/fpu -DHAS_AUDIO -DHAS_AUDIO_CHOICE -I/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/slirp -c -o op.o /home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/target-i386/op.c
+/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1
++svnr4242-r15/trunk/target-i386/ops_sse.h: In function `op_pshufw_mmx':
+/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1
++svnr4242-r15/trunk/target-i386/ops_sse.h:597: error: unable to find a
+register to spill in class `GENERAL_REGS'
+/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1
++svnr4242-r15/trunk/target-i386/ops_sse.h:597: error: this is the insn:
+(insn:HI 18 17 19
+0 /home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/target-i386/ops_sse.h:592 (set (strict_low_part (subreg:HI (reg/v:DI 58 [ r ]) 0))
+        (mem/s/j:HI (plus:SI (mult:SI (reg:SI 62)
+                    (const_int 2 [0x2]))
+                (reg/v/f:SI 60 [ s ])) [0 <variable>._w S2 A16])) 54
+{*movstricthi_1} (insn_list 16 (insn_list 12 (insn_list 50 (nil))))
+    (expr_list:REG_DEAD (reg:SI 62)
+        (nil)))
+/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1
++svnr4242-r15/trunk/target-i386/ops_sse.h:597: confused by earlier
+errors, bailing out
+make[1]: *** [op.o] Error 1
+make[1]: Leaving directory
+`/home/daniel/work4/fso/fso-testing/tmp/work/i686-linux/qemu-native-0.9.1+svnr4242-r15/trunk/i386-softmmu'
+make: *** [subdir-i386-softmmu] Error 2
+FATAL: oe_runmake failed
+
+-- 
+Daniel.Li <lida_mail@163.com>
+PALFocus (http://palfocus.oicp.net)
+
+
+
+
