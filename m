@@ -1,22 +1,41 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M0fgq-0003yc-Vo
-	for openembedded-devel@openembedded.org; Sun, 03 May 2009 19:41:26 +0200
-Received: (qmail 10031 invoked by uid 1003); 3 May 2009 17:35:40 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 3 May 2009 17:35:40 -0000
-Message-ID: <49FDD5EB.4010504@balister.org>
-Date: Sun, 03 May 2009 13:35:39 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+Received: from [220.181.12.12] (helo=m12-12.163.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <lida_mail@163.com>) id 1M0knl-00062Q-6I
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 May 2009 01:08:54 +0200
+Received: from [192.168.58.103] (unknown [116.227.146.13])
+	by smtp8 (Coremail) with SMTP id DMCowLDLyaWmIv5Jdy_nEQ--.8857S2;
+	Mon, 04 May 2009 07:03:03 +0800 (CST)
+From: "Daniel.Li" <lida_mail@163.com>
 To: openembedded-devel@lists.openembedded.org
-References: <49FAE94F.2090101@doredevelopment.dk>
-	<49FC8D88.3050608@gmail.com>	<c384c5ea0905030526v68304d0em5fd630ec8aef821@mail.gmail.com>
-	<49FDD575.2000108@doredevelopment.dk>
-In-Reply-To: <49FDD575.2000108@doredevelopment.dk>
-Subject: =?UTF-8?B?UmU6IFB1bGwgcmVxdWVzdCBmcm9tIERvcsOpRGV2ZWxvcG1lbnQgLSBOZXc6IE1pY3JvIGRpc3Ryby9pbWFnZQ==?=
+In-Reply-To: <20090503165548.GB7973@smtp.west.cox.net>
+References: <1241357669.13222.0.camel@daniel-laptop>
+	<20090503165548.GB7973@smtp.west.cox.net>
+Organization: PALFocus (http://palfocus.oicp.net)
+Date: Mon, 04 May 2009 07:03:03 +0800
+Message-Id: <1241391783.13222.4.camel@daniel-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-CM-TRANSID: DMCowLDLyaWmIv5Jdy_nEQ--.8857S2
+X-Coremail-Antispam: 1Uf129KBjvdXoWrKFW3Wr13Cr1rtr18Kw18AFb_yoWDAwcE9a
+	yDua4vvrn2qa4qy3Wktr15J34rKFW8Aw1Fyayvqr1jva4Du3W3Wa4vkr4xA3Wagr48K342
+	vrn0qFWqqas8KjkaLaAFLSUrUUUUUbIjqfuFe4nvWSU5nxnvy29KBjDU0xBIdaVrnRJUUU
+	PEb7IF0VCYb41lb7IF0VCF04k20xv_GFyrM7k042IE42xK82IY64kIx2x0424lb7IF0VCF
+	I7km07C26c804VAKzcIF0wAYjsxI4VWUJwAYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1I0E4x
+	80FVCIwcAKzIAtM7C26IkvcIIF6IxKo4kEV4yl1IIY67AEw4v_Jr0_Jr4l84ACjcxK6xII
+	jxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26rxl6s0DM28EF7xvwV
+	C2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2kK67kvxFCE
+	548m6r1fGryUXwAawVACjsI_Ar4v6c8GOVW06r1DJrWUAwAawVACjsI_Ar4v6c8GOVWY6r
+	1DJrWUAwAawVAC0I8062xK64kEc2Ij6c8GOVWUur45Jrylnx0Ec2IEnICE548m6r1DJrWU
+	ZwAqjxCE34x0Y48IcwAq048E620vw7xCY7CE4x8GYI0EYx1l5I8CrVACY4xI64kE6c02F4
+	0Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwACjcxG0xvY
+	0x0EwIxGrwAC62BYpTIE1TZKA3svLVAKvSnIqfZI6r4l7I0Y64k_MxkFs20EY4vE77kJMx
+	kIecxEwVAFwVWfMxkI7II2jI8vz4v_Jr0_Jryl42xK82IYc2Ij64vIr41l4x8a6c8ajcxJ
+	MI8E67AF67kF1VAFwI0_Jr0_JrylIxkGc2Ij64vIr41lIxAIcVC2z280aVAFwI0_Jr0_Gr
+	1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUB2-eUUUU
+	U
+X-CM-SenderInfo: 5olgtshpdlzqqrwthudrp/
+Subject: Re: qemu-native build fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,125 +49,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 May 2009 17:41:26 -0000
-X-Groupsio-MsgNum: 10001
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060306070400050400020504"
-
---------------ms060306070400050400020504
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 03 May 2009 23:08:54 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Martin Lund wrote:
-> Hello Leon and all,
+On Sun, 2009-05-03 at 09:55 -0700, Tom Rini wrote:
+> On Sun, May 03, 2009 at 09:34:29PM +0800, Daniel.Li wrote:
+> > Dear List,
+> > 
+> > I have found that qemu-native failed with gcc 3.4, see below.
+> > Originally, qemu failed with 4.* gcc, now qemu is ok with gcc3.4 but
+> > qemu-native failed. 
+> > 
+> > I googled, only found this http://pastebin.com/f75407ece# , which seems
+> > failed on 20 Apr.
 > 
-> Thanks for pulling and thanks for all the acks and positive responses.
-> 
-> Now that its included I will turn my attention to fine tuning the 
-> contents in the coming updates. Additionally I expect to reduce the 
-> image about 10-20%.
-> 
-> Regarding the hash lines I think maybe something less distracting can be 
-> introduced - its kind of an art issue for the artists out there :)
-> 
-> Regardless, I believe that some sort of section seperation helps to make 
-> conf files more readable.
+> This sounds like a host-provided gcc-3.4, which isn't new enough, is
+> being used, rather than the 3.4.6 that OE builds.  I thought this had
+> been fixed, but perhaps not.  Can you confirm that you have a gcc-3.4
+> package installed on your host?  Thanks.
 
-Vertical white space :)
+Thanks Tom.
+Yes,you are right. OE is using gcc-3.4 (host) instead of gcc-3.4 build
+by OE.
+Cause, I removed gcc3.4 from host, it reports command gcc3.4 not found.
 
-Philip
+Well, I'm new to OE. Could you please let me know how to build
+qemu-native with it's internal gcc3.4? 
 
-
+Any configuration change? Thanks in advance.
 > 
-> Br, Martin
-> 
-> Leon Woestenberg wrote:
->> Hello,
->>
->> On Sat, May 2, 2009 at 8:14 PM, Marco Cavallini 
->> <koansoftware@gmail.com> wrote:
->>  
->>> Martin Lund ha scritto:
->>> +1 from me and I'll be glad to contribute with you to this effort.
->>>
->>>     
->> Enough ACKs.
->>
->> Although it touches (core) distro's, it does not affect anything we
->> already have, so I pulled(/merged) and just pushed this into OE.
->>
->> Thanks,
->>   
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+-- 
+Daniel.Li <lida_mail@163.com>
+PALFocus (http://palfocus.oicp.net)
 
---------------ms060306070400050400020504
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwMzE3
-MzUzOVowIwYJKoZIhvcNAQkEMRYEFL/MjSnppep3t1Mr2Gkg24aqEXK6MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBg7r/MWxRTnnkdCrA3WWcEituGvdbhS1gwsHIt44hSPyKpqTme
-sTlmpdJmQtUyTu4zs8sJz2xzsyX1NEUw8fdAPDkGFag487BER2CQ+g2kbkN2Ugtbz5KlEFSNezru
-F0MS24iiuFm1vFr54kwa4tlovKmKWCf70+UlbIptLV+YrIfbRabqksEEmRycIyVpm/N21IyTsk1y
-JELNjkHF+/Uec2FdyEnVYNn2Ymbgpp9pPIhDphq3DfsYgH88PMeURV8h3iLc27rbfthbmzJ0SG9Z
-dU1gZFZxrq4tSQYUL+Y8fg5tgEELrHsV62Yj6v5sXFXlN8XOEw1jNy0zyKrW1l02AAAAAAAA
 
---------------ms060306070400050400020504--
+
