@@ -1,20 +1,24 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M0f4F-0005sM-GL
-	for openembedded-devel@openembedded.org; Sun, 03 May 2009 19:01:31 +0200
-Received: (qmail 19551 invoked from network); 3 May 2009 16:55:49 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 3 May 2009 09:55:49 -0700
-Date: Sun, 3 May 2009 09:55:49 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090503165548.GB7973@smtp.west.cox.net>
-References: <1241357669.13222.0.camel@daniel-laptop>
+Received: from [193.201.35.47] (helo=bq8.dotserv.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mgl@doredevelopment.dk>) id 1M0ffA-0003vJ-7S
+	for openembedded-devel@openembedded.org; Sun, 03 May 2009 19:39:40 +0200
+Received: from [10.0.0.4] (port80.ds1-abc.adsl.cybercity.dk [212.242.125.19])
+	(authenticated bits=0)
+	by bq8.dotserv.com (8.13.1/8.13.1) with ESMTP id n43HXiJZ018142
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Sun, 3 May 2009 19:33:58 +0200
+Message-ID: <49FDD575.2000108@doredevelopment.dk>
+Date: Sun, 03 May 2009 19:33:41 +0200
+From: Martin Lund <mgl@doredevelopment.dk>
+Organization: =?ISO-8859-1?Q?Dor=E9Development?=
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
-In-Reply-To: <1241357669.13222.0.camel@daniel-laptop>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: qemu-native build fail
+To: openembedded-devel@openembedded.org
+References: <49FAE94F.2090101@doredevelopment.dk> <49FC8D88.3050608@gmail.com>
+	<c384c5ea0905030526v68304d0em5fd630ec8aef821@mail.gmail.com>
+In-Reply-To: <c384c5ea0905030526v68304d0em5fd630ec8aef821@mail.gmail.com>
+Subject: =?UTF-8?B?UmU6IFB1bGwgcmVxdWVzdCBmcm9tIERvcsOpRGV2ZWxvcG1lbnQgLSBOZXc6IE1pY3JvIGRpc3Ryby9pbWFnZQ==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,26 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 May 2009 17:01:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 03 May 2009 17:39:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, May 03, 2009 at 09:34:29PM +0800, Daniel.Li wrote:
-> Dear List,
-> 
-> I have found that qemu-native failed with gcc 3.4, see below.
-> Originally, qemu failed with 4.* gcc, now qemu is ok with gcc3.4 but
-> qemu-native failed. 
-> 
-> I googled, only found this http://pastebin.com/f75407ece# , which seems
-> failed on 20 Apr.
+Hello Leon and all,
 
-This sounds like a host-provided gcc-3.4, which isn't new enough, is
-being used, rather than the 3.4.6 that OE builds.  I thought this had
-been fixed, but perhaps not.  Can you confirm that you have a gcc-3.4
-package installed on your host?  Thanks.
+Thanks for pulling and thanks for all the acks and positive responses.
 
--- 
-Tom Rini
+Now that its included I will turn my attention to fine tuning the 
+contents in the coming updates. Additionally I expect to reduce the 
+image about 10-20%.
+
+Regarding the hash lines I think maybe something less distracting can be 
+introduced - its kind of an art issue for the artists out there :)
+
+Regardless, I believe that some sort of section seperation helps to make 
+conf files more readable.
+
+Br, Martin
+
+Leon Woestenberg wrote:
+> Hello,
+>
+> On Sat, May 2, 2009 at 8:14 PM, Marco Cavallini <koansoftware@gmail.com> wrote:
+>   
+>> Martin Lund ha scritto:
+>> +1 from me and I'll be glad to contribute with you to this effort.
+>>
+>>     
+> Enough ACKs.
+>
+> Although it touches (core) distro's, it does not affect anything we
+> already have, so I pulled(/merged) and just pushed this into OE.
+>
+> Thanks,
+>   
 
 
