@@ -1,24 +1,36 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1M0TZy-0004dh-HS
+	(envelope-from <leon.woestenberg@gmail.com>) id 1M0apQ-0001QM-BT
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 03 May 2009 06:45:30 +0200
-Received: from gandalf.denix.org ([71.251.49.215]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KJ10054RWY6ANQB@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	02 May 2009 23:39:48 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 24EF46B804A; Sun,
-	03 May 2009 00:39:42 -0400 (EDT)
-Date: Sun, 03 May 2009 00:39:42 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090503043941.GA10690@denix.org>
+	Sun, 03 May 2009 14:29:56 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so2037818ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 May 2009 05:24:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=QI18qxpXNO3K2vRRlPwJLD3N1yJARcOSvd5h0DK2g94=;
+	b=FCE+rJWjM0kGTPCi4aL/cs+qgZwzecSb1zIReWsQ48V4jmIsno2/HNZoBZ1oJeDD7G
+	5Vyu8AUcQISAEg4OrsCkTDXRGcScMEhAmSBxtJcl/c0oHQmYB2SkfXCoSWoLgKu0wH7d
+	v0RnGRi5esKmlov5+lmqmMkIgBqfeGuAgPsPo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=cu9OENPrSAAllBtAR/s5nBKfSGlKsoPuQW/+eZ27WEQ1kgz4DU8mwBM+EUQUyk02Jd
+	U1vlU//1YNBn8R1hU/8kM74hdpfl0Xd+r5u3zHSsR4qIFvFw+dWQtzRhH06/k+SBoOwL
+	TgLzD/rtlpHv/tUhjG8Si9PEr3sk5lC9/1Fvg=
+MIME-Version: 1.0
+Received: by 10.90.34.11 with SMTP id h11mr4111145agh.57.1241353455669; Sun, 
+	03 May 2009 05:24:15 -0700 (PDT)
+In-Reply-To: <20090503043941.GA10690@denix.org>
 References: <49FAE94F.2090101@doredevelopment.dk>
-MIME-version: 1.0
-In-reply-to: <49FAE94F.2090101@doredevelopment.dk>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Pull request from Dor?Development - New: Micro	distro/image
+	<20090503043941.GA10690@denix.org>
+Date: Sun, 3 May 2009 14:24:15 +0200
+Message-ID: <c384c5ea0905030524h709069dcjbc91bff37c71d96b@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Pull request from Dor?Development - New: Micro distro/image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,28 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 May 2009 04:45:30 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 03 May 2009 12:29:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 01, 2009 at 02:21:35PM +0200, Martin Lund wrote:
-> The "Micro" distribution/image is created because we feel that there is a 
-> need for a truly tiny and clean distro and image definition in OE for those 
-> users out there that needs a _very_ tiny Linux rootfs with virtually 
-> nothing installed except busybox, libc, udev, and a few init scripts. On 
-> arm the jffs2 image size is only 1 MB (uclibc based). No bloat allowed.
+Hello Denys,
+
+On Sun, May 3, 2009 at 6:39 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+>> The micro-image is ideal for users who wants this type of tiny Linux rootfs
+>> system with only a few custom applications added.
 >
-> The micro-image is ideal for users who wants this type of tiny Linux rootfs 
-> system with only a few custom applications added.
+> Hmm, about 7 years ago I was working on a project of a Linux-based DSL router,
+>
+Your email reply didn't end up in the email thread. Maybe check your
+email client.
 
-Hmm, about 7 years ago I was working on a project of a Linux-based DSL router, 
-which had a filesystem of about 1 MB in size with all the possible networking 
-apps plus some custom management, control and diagnostic apps... It was also 
-busybox and uclibc based, but was squash+lzma to squeeze every bit out of it.
-And back then busybox didn't have all the networking tools integrated yet, as 
-it has these days...
-
+Regards,
 -- 
-Denys
+Leon
 
 
