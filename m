@@ -1,22 +1,26 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M0opX-0006Au-W8
-	for openembedded-devel@openembedded.org; Mon, 04 May 2009 05:27:00 +0200
-Received: (qmail 24162 invoked from network); 4 May 2009 03:21:14 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 3 May 2009 20:21:14 -0700
-Date: Sun, 3 May 2009 20:21:14 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [194.100.97.46] (helo=mail.inoi.fi)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <petri.lehtinen+openembedded-devel@inoi.fi>)
+	id 1M0qty-00077Q-Ua for openembedded-devel@lists.openembedded.org;
+	Mon, 04 May 2009 07:39:43 +0200
+Received: from mail.inoi.fi (localhost.localdomain [127.0.0.1])
+	by mail.inoi.fi (Postfix) with ESMTP id EF96920B29
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 May 2009 08:21:35 +0300 (EEST)
+Received: from localhost (unknown [10.105.0.205])
+	by mail.inoi.fi (Postfix) with ESMTP id D840320B26
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 May 2009 08:21:35 +0300 (EEST)
+Date: Mon, 4 May 2009 08:33:56 +0300
+From: Petri Lehtinen <petri.lehtinen+openembedded-devel@inoi.fi>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090504032113.GG7973@smtp.west.cox.net>
-References: <20090503233009.B15601880DC@amethyst.openembedded.net>
-	<20090503233017.GE7973@smtp.west.cox.net>
-	<19c1b8a90905032001x496ed10cp7d132d2ae176572a@mail.gmail.com>
+Message-ID: <20090504053356.GH19293@colossus>
+References: <1240996296-20550-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
 MIME-Version: 1.0
-In-Reply-To: <19c1b8a90905032001x496ed10cp7d132d2ae176572a@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [oe-commits] Tom Rini : base.bbclass: check_gcc3 needs to	check for gcc-3.4.6 first.
+In-Reply-To: <1240996296-20550-1-git-send-email-petri.lehtinen+openembedded-devel@inoi.fi>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [PATCH] uclibc-initial: Fix FILESPATH mangling in all	versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,49 +34,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2009 03:27:00 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Mon, 04 May 2009 05:39:43 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Sun, May 03, 2009 at 08:01:15PM -0700, Khem Raj wrote:
-> On Sun, May 3, 2009 at 4:30 PM, Tom Rini <trini@embeddedalley.com> wrote:
-> > On Mon, May 04, 2009 at 01:30:09AM +0200, GIT User account wrote:
-> >
-> >> Module: openembedded.git
-> >> Branch: org.openembedded.dev
-> >> Commit: 714bed6ab1174ec126ea7d8c8655d1cfd6900325
-> >> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=714bed6ab1174ec126ea7d8c8655d1cfd6900325
-> >>
-> >> Author: Tom Rini <trini@embeddedalley.com>
-> >> Date:   Sun May  3 19:23:57 2009 -0400
-> >>
-> >> base.bbclass: check_gcc3 needs to check for gcc-3.4.6 first.
-> >> Comment on what this function is used for primarily.  The default
-> >> gcc3-native that we build is called 'gcc-3.4.6' so look for that one
-> >> first.
-> >
-> > I thought we had fixed this before, but apparently we had not.  I'd like
-> > to propose two related changes, and then pull this all out for
-> > stable/2009.  First, no distro has a preferred version for gcc3-native,
-> > so I would like to drop gcc-native_3.4.4 and just use 3.4.6.  Second,
-> > I'd like to change the order to:
-> > 'gcc-3.4.6 gcc-3.4.7 gcc-3.4 gcc34' as I'm unconvinced that anything
+ping
+
+Petri Lehtinen wrote:
+> From: Petri Lehtinen <petri.lehtinen@inoi.fi>
 > 
-> there was no 3.4.7. Does qemu work with any gcc 3.4.x ?
+> Make uclibc-initial use uclibc FILESPATH by setting correct
+> FILESPATHPKG instead of altering FILESPATH directly via
+> base_set_filespath.
 > 
-
-There's no 'real' 3.4.7, but I did a quick google and saw there were
-somethings calling themselves that, apparently.  And presumably they're
-"new" enough to work.  qemu does not work with any 3.4.x, as the problem
-that was reported was due to too old of a 3.4.x being on the system.
-
-> It would be good if its fixed.
-
-And I really wish qemu would get fixed / rewritten to work with some
-sort of modern compiler, yeah :(
+> This makes it possible to provide custom
+> uClibc.{config,machine,distro} in an overlay, for example.
+> 
+> Signed-off-by: Petri Lehtinen <petri.lehtinen@inoi.fi>
+> ---
+>  recipes/uclibc/uclibc-initial_0.9.26.bb   |    2 +-
+>  recipes/uclibc/uclibc-initial_0.9.27.bb   |    2 +-
+>  recipes/uclibc/uclibc-initial_0.9.28.bb   |    2 +-
+>  recipes/uclibc/uclibc-initial_0.9.29.bb   |    2 +-
+>  recipes/uclibc/uclibc-initial_0.9.30.1.bb |    2 +-
+>  recipes/uclibc/uclibc-initial_0.9.30.bb   |    2 +-
+>  6 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/recipes/uclibc/uclibc-initial_0.9.26.bb b/recipes/uclibc/uclibc-initial_0.9.26.bb
+> index a6a83bd..8600549 100644
+> --- a/recipes/uclibc/uclibc-initial_0.9.26.bb
+> +++ b/recipes/uclibc/uclibc-initial_0.9.26.bb
+> @@ -1,7 +1,7 @@
+>  SECTION = "base"
+>  require uclibc_${PV}.bb
+>  
+> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+> +FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+>  
+>  DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial"
+>  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+> diff --git a/recipes/uclibc/uclibc-initial_0.9.27.bb b/recipes/uclibc/uclibc-initial_0.9.27.bb
+> index 3aecd80..fdb3936 100644
+> --- a/recipes/uclibc/uclibc-initial_0.9.27.bb
+> +++ b/recipes/uclibc/uclibc-initial_0.9.27.bb
+> @@ -1,7 +1,7 @@
+>  SECTION = "base"
+>  require uclibc_${PV}.bb
+>  
+> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+> +FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+>  
+>  DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial"
+>  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+> diff --git a/recipes/uclibc/uclibc-initial_0.9.28.bb b/recipes/uclibc/uclibc-initial_0.9.28.bb
+> index b996f64..ee95af7 100644
+> --- a/recipes/uclibc/uclibc-initial_0.9.28.bb
+> +++ b/recipes/uclibc/uclibc-initial_0.9.28.bb
+> @@ -1,7 +1,7 @@
+>  SECTION = "base"
+>  require uclibc_${PV}.bb
+>  
+> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+> +FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+>  
+>  DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+>  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+> diff --git a/recipes/uclibc/uclibc-initial_0.9.29.bb b/recipes/uclibc/uclibc-initial_0.9.29.bb
+> index c56e5fb..a7d140c 100644
+> --- a/recipes/uclibc/uclibc-initial_0.9.29.bb
+> +++ b/recipes/uclibc/uclibc-initial_0.9.29.bb
+> @@ -1,7 +1,7 @@
+>  SECTION = "base"
+>  require uclibc_${PV}.bb
+>  
+> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+> +FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+>  
+>  DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+>  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+> diff --git a/recipes/uclibc/uclibc-initial_0.9.30.1.bb b/recipes/uclibc/uclibc-initial_0.9.30.1.bb
+> index c56e5fb..a7d140c 100644
+> --- a/recipes/uclibc/uclibc-initial_0.9.30.1.bb
+> +++ b/recipes/uclibc/uclibc-initial_0.9.30.1.bb
+> @@ -1,7 +1,7 @@
+>  SECTION = "base"
+>  require uclibc_${PV}.bb
+>  
+> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+> +FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+>  
+>  DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+>  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+> diff --git a/recipes/uclibc/uclibc-initial_0.9.30.bb b/recipes/uclibc/uclibc-initial_0.9.30.bb
+> index c56e5fb..a7d140c 100644
+> --- a/recipes/uclibc/uclibc-initial_0.9.30.bb
+> +++ b/recipes/uclibc/uclibc-initial_0.9.30.bb
+> @@ -1,7 +1,7 @@
+>  SECTION = "base"
+>  require uclibc_${PV}.bb
+>  
+> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/uclibc-${PV}', '${FILE_DIRNAME}/uclibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+> +FILESPATHPKG = "uclibc-${PV}:uclibc:files:."
+>  
+>  DEPENDS = "linux-libc-headers ncurses-native virtual/${TARGET_PREFIX}gcc-initial"
+>  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+> -- 
+> 1.6.0.4
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -- 
-Tom Rini
+Petri Lehtinen
+Software Specialist
+Inoi Oy
+Tel. : +358 40 758 0229
+Email: petri.lehtinen@inoi.fi
 
 
