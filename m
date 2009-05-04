@@ -1,38 +1,41 @@
-Received: from [85.199.173.110] (helo=mx51.mymxserver.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hs4233@mail.mn-solutions.de>) id 1M0vNo-0005oA-Ot
-	for openembedded-devel@openembedded.org; Mon, 04 May 2009 12:26:49 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by localhost.mx51.mymxserver.com (Postfix) with ESMTP id DB35E4B006;
-	Mon,  4 May 2009 12:21:02 +0200 (CEST)
-X-Virus-Scanned: by Mittwald Mailscanner
-Received: from mx51.mymxserver.com ([127.0.0.1])
-	by localhost (mx51.mymxserver.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id on3Aw97SWSXs; Mon,  4 May 2009 12:21:02 +0200 (CEST)
-Received: from lin01.mn-solutions.de (pD95FA076.dip0.t-ipconnect.de
-	[217.95.160.118])
-	by mx51.mymxserver.com (Postfix) with ESMTP id 2C1F24B01B;
-	Mon,  4 May 2009 12:21:02 +0200 (CEST)
-Received: by lin01.mn-solutions.de (Postfix, from userid 116)
-	id 296FE1E004B; Mon,  4 May 2009 09:52:18 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.1.7-deb3 (2006-10-05) on 
-	lin01.mn-logistik.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00 
-	autolearn=ham version=3.1.7-deb3
-Received: from mnz66.mn-solutions.de (mnz66.mn-solutions.de [192.168.233.66])
-	by lin01.mn-solutions.de (Postfix) with ESMTP id 749321E0037;
-	Mon,  4 May 2009 09:52:09 +0200 (CEST)
-From: Holger Schurig <hs4233@mail.mn-solutions.de>
+Received: from [220.181.12.13] (helo=m12-13.163.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <lida_mail@163.com>) id 1M0vsz-0006Yx-4S
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 May 2009 12:59:03 +0200
+Received: from [192.168.58.100] (unknown [116.227.146.13])
+	by smtp9 (Coremail) with SMTP id DcCowLBLCegZyf5Jgt7tEQ--.12324S2;
+	Mon, 04 May 2009 18:53:15 +0800 (CST)
+From: "Daniel.Li" <lida_mail@163.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 4 May 2009 09:52:08 +0200
-User-Agent: KMail/1.9.7
-References: <49FAE94F.2090101@doredevelopment.dk>
-In-Reply-To: <49FAE94F.2090101@doredevelopment.dk>
-MIME-Version: 1.0
-Message-Id: <200905040952.08258.hs4233@mail.mn-solutions.de>
-Cc: openembedded-devel@openembedded.org
-Subject: =?UTF-8?B?UmU6IFB1bGwgcmVxdWVzdCBmcm9tIERvcsOpRGV2ZWxvcG1lbnQgLSBOZXc6IE1pY3JvIGRpc3Ryby9pbWFnZQ==?=
+In-Reply-To: <20090503235917.GF7973@smtp.west.cox.net>
+References: <1241357669.13222.0.camel@daniel-laptop>
+	<20090503165548.GB7973@smtp.west.cox.net>
+	<1241391783.13222.4.camel@daniel-laptop>
+	<20090503231743.GC7973@smtp.west.cox.net>
+	<1241394401.12036.11.camel@daniel-laptop>
+	<20090503235917.GF7973@smtp.west.cox.net>
+Organization: PALFocus (http://palfocus.oicp.net)
+Date: Mon, 04 May 2009 18:53:09 +0800
+Message-Id: <1241434389.4551.0.camel@daniel-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-CM-TRANSID: DcCowLBLCegZyf5Jgt7tEQ--.12324S2
+X-Coremail-Antispam: 1Uf129KBjDUn29KB7ZKAUJUUUUUYxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbcxYjxAI6xkYrwAYjxAI6xAIw28IcVW8ZrWlb7IF0VCF04k20xvE
+	w2I207IF0wAYjxAI6xCIbckI1I0E57IF64kEYxAxM7k0a2IF6r1UM7kC6x804xWl14x267
+	AKxVWUJVW8JwAFxVCF77xC6IxKo4kEV4yl1I0EscIYIxCEI4klw4CSwwAFIxvE14AKwVWU
+	JVWUGwA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_GcCE3s1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+	GcCE3s1ln4vEbcI7uVAqrcv_JFW8Xr15M2kK64x0aVW7GwIE548m6rI_Jw1UWr17M2kK64
+	xIx7IE04vEw4CY0x0E548m6r1fGryUXwAa7VCY0VAaVVAqrcv_Jw1UWr13Mc804VCqF7xv
+	r2I5Mc8Ir4CE8sxKj4xv1VCF748vxVAv7wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+	x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UM4x0Y48IcxkI7VAKI48JM4IE
+	nf9ElVAFpTB2q-sK649IAas0WaI_GwCjxxvEw4Wlc7Ca8VAvwVCjb41lc2xSY4AK67AK6r
+	4DMxkI7II2jI8vz4v_Jr0_Jryl42xK82IYc2Ij64vIr41l4x8a6c8ajcxJMI8E67AF67kF
+	1VAFwI0_Jr0_JrylIxkGc2Ij64vIr4UvcSsGvfC2KfnxnUUI43ZEXa7IUYIdgJUUUUU==
+X-CM-SenderInfo: 5olgtshpdlzqqrwthudrp/
+Subject: Re: qemu-native build fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +49,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2009 10:26:50 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 04 May 2009 10:59:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 01 May 2009 14:21:35 Martin Lund wrote:
-> The "Micro" distribution/image is created because we feel that
-> there is a need for a truly tiny and clean distro and image
-> definition in OE for those users out there that needs a _very_
-> tiny Linux rootfs with virtually nothing installed except
-> busybox, libc, udev, and a few init scripts. On arm the jffs2
-> image size is only 1 MB (uclibc based). No bloat allowed.
+On Sun, 2009-05-03 at 16:59 -0700, Tom Rini wrote:
+> If you're using the org.openembedded.dev branch, you need to do:
+> bitbake -c clean qemu-native
+> Then try again.  
 
-Isn't "udev" already bloat?  I have made something similar for a 
-custom board, but there I used "mdev" from Busybox.
-
-My whole avr32 image is just about 3 MB, and that includes a 
-rather hefty libQtCore.so.4.5.0 with 1.1 MB.
+Thanks Tom. It works :)
+-- 
+Daniel.Li <lida_mail@163.com>
+PALFocus (http://palfocus.oicp.net)
 
 
-As a side note, I also use busybox' init instead of sysvinit. And 
-because my board is so tiny and has a very custom role to 
-fulfill, I don't even have /etc/rcX.d, except /etc/rcS.d which I 
-renamed to /etc/startup.d to avoid confusion.
 
 
