@@ -1,24 +1,26 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M0lg6-0004js-Mn
-	for openembedded-devel@openembedded.org; Mon, 04 May 2009 02:05:03 +0200
-Received: (qmail 23653 invoked from network); 3 May 2009 23:59:18 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 3 May 2009 16:59:18 -0700
-Date: Sun, 3 May 2009 16:59:17 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <denis@denix.org>) id 1M0nfg-0001u0-NO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 May 2009 04:12:44 +0200
+Received: from gandalf.denix.org ([71.251.49.215]) by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KJ300DVSKIYPXVK@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	03 May 2009 21:06:34 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A42CF6B8049; Sun,
+	03 May 2009 22:06:33 -0400 (EDT)
+Date: Sun, 03 May 2009 22:06:33 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090503235917.GF7973@smtp.west.cox.net>
-References: <1241357669.13222.0.camel@daniel-laptop>
-	<20090503165548.GB7973@smtp.west.cox.net>
-	<1241391783.13222.4.camel@daniel-laptop>
-	<20090503231743.GC7973@smtp.west.cox.net>
-	<1241394401.12036.11.camel@daniel-laptop>
-MIME-Version: 1.0
-In-Reply-To: <1241394401.12036.11.camel@daniel-laptop>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: qemu-native build fail
+Message-id: <20090504020633.GA7313@denix.org>
+References: <49FAE94F.2090101@doredevelopment.dk>
+	<20090503043941.GA10690@denix.org>
+	<c384c5ea0905030524h709069dcjbc91bff37c71d96b@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <c384c5ea0905030524h709069dcjbc91bff37c71d96b@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Pull request from Dor?Development - New: Micro	distro/image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,64 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2009 00:05:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 May 2009 02:12:44 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Mon, May 04, 2009 at 07:46:41AM +0800, Daniel.Li wrote:
-> On Sun, 2009-05-03 at 16:17 -0700, Tom Rini wrote:
-> > On Mon, May 04, 2009 at 07:03:03AM +0800, Daniel.Li wrote:
-> > > On Sun, 2009-05-03 at 09:55 -0700, Tom Rini wrote:
-> > > > On Sun, May 03, 2009 at 09:34:29PM +0800, Daniel.Li wrote:
-> > > > > Dear List,
-> > > > > 
-> > > > > I have found that qemu-native failed with gcc 3.4, see below.
-> > > > > Originally, qemu failed with 4.* gcc, now qemu is ok with gcc3.4 but
-> > > > > qemu-native failed. 
-> > > > > 
-> > > > > I googled, only found this http://pastebin.com/f75407ece# , which seems
-> > > > > failed on 20 Apr.
-> > > > 
-> > > > This sounds like a host-provided gcc-3.4, which isn't new enough, is
-> > > > being used, rather than the 3.4.6 that OE builds.  I thought this had
-> > > > been fixed, but perhaps not.  Can you confirm that you have a gcc-3.4
-> > > > package installed on your host?  Thanks.
-> > > 
-> > > Thanks Tom.
-> > > Yes,you are right. OE is using gcc-3.4 (host) instead of gcc-3.4 build
-> > > by OE.
-> > > Cause, I removed gcc3.4 from host, it reports command gcc3.4 not found.
-> > > 
-> > > Well, I'm new to OE. Could you please let me know how to build
-> > > qemu-native with it's internal gcc3.4? 
-> > > 
-> > > Any configuration change? Thanks in advance.
-> > 
-> > Do you have "ASSUME_PROVIDED += gcc3-native" or similar in your
-> > local.conf?  If so, remove that.
+On Sun, May 03, 2009 at 02:24:15PM +0200, Leon Woestenberg wrote:
+> Hello Denys,
 > 
-> It seems there is no line at all.
+> On Sun, May 3, 2009 at 6:39 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> >> The micro-image is ideal for users who wants this type of tiny Linux rootfs
+> >> system with only a few custom applications added.
+> >
+> > Hmm, about 7 years ago I was working on a project of a Linux-based DSL router,
+> >
+> Your email reply didn't end up in the email thread. Maybe check your
+> email client.
 
-OK.
-
-[snip]
-> But I found gcc3-native in bb file, see below:
-> $ grep "gcc3-native" openembedded/recipes/qemu/ -R
-> openembedded/recipes/qemu/qemu-native.inc:DEPENDS = "libsdl-native
-> zlib-native gcc3-native"
-
-This line is fine.
-
-> Still failed with 
-[snip]
-
-If you're using the org.openembedded.dev branch, you need to do:
-bitbake -c clean qemu-native
-Then try again.  If you're using the fso branch you'll need to go into
-the openembedded dir and 'git cherry-pick
-714bed6ab1174ec126ea7d8c8655d1cfd6900325' first, then do the clean.
+My email had the correct header - In-reply-to: <49FAE94F.2090101@doredevelopment.dk>
+And it is showing in the proper thread here... As well as at gmane,org:
+http://thread.gmane.org/gmane.comp.handhelds.openembedded/23319/focus=23342
+May be you should check your email client? :)
 
 -- 
-Tom Rini
+Denys
 
 
