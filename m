@@ -1,21 +1,18 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M1Jhr-0005Du-85
-	for openembedded-devel@openembedded.org; Tue, 05 May 2009 14:25:07 +0200
-Received: (qmail 18224 invoked by uid 1003); 5 May 2009 12:19:11 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 5 May 2009 12:19:11 -0000
-Message-ID: <4A002EBE.70808@balister.org>
-Date: Tue, 05 May 2009 08:19:10 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M1Nnr-0003Du-C6
+	for openembedded-devel@openembedded.org; Tue, 05 May 2009 18:47:36 +0200
+Received: (qmail 5731 invoked from network); 5 May 2009 16:41:39 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 5 May 2009 09:41:39 -0700
+Date: Tue, 5 May 2009 09:41:38 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090505164137.GJ7973@smtp.west.cox.net>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1241519336-28278-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1241519336-28278-4-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1241519336-28278-4-git-send-email-marcin@juszkiewicz.com.pl>
-Subject: Re: [STABLE][PATCH 2/2] linux-bug: switch to proper SVN branch
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: [PATCH] Fix staging of binutils static libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,110 +26,308 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2009 12:25:08 -0000
-X-Groupsio-MsgNum: 10028
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090303000803050706070606"
+X-List-Received-Date: Tue, 05 May 2009 16:47:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------ms090303000803050706070606
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+binutils-cross: Stage libbfd/opcodes/iberty correctly, bump PR
 
-Acked-by: Philip Balister <philip@balister.org>
+Changes the staging path for libbfd and libopcodes to ${CROSS_DIR}/lib.
+Disables staging native libiberty.a to ${STAGING_DIR_TARGET} as this doesn't
+make sense to do.  Cleans up empty directories.
 
-Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz <marcin@buglabs.net>
-> 
-> 
-> Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
-> ---
->  recipes/linux/linux-bug_2.6.27.2.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/linux/linux-bug_2.6.27.2.bb b/recipes/linux/linux-bug_2.6.27.2.bb
-> index db49e63..655defa 100644
-> --- a/recipes/linux/linux-bug_2.6.27.2.bb
-> +++ b/recipes/linux/linux-bug_2.6.27.2.bb
-> @@ -2,13 +2,13 @@ DESCRIPTION = "Linux kernel for bug"
->  
->  PV_append = "+svnr${SRCREV}"
->  KV = "2.6.27.2"
-> -PR = "r26"
-> +PR = "r27"
->  
->  COMPATIBLE_MACHINE = "bug"
->  
->  SVN_PRJ = "bug-linux-${KV}"
->  
-> -SRC_URI = "svn://svn.buglabs.net/bug/trunk;module=${SVN_PRJ};proto=svn \
-> +SRC_URI = "svn://svn.buglabs.net/bug/branches/R1.4/qa;module=${SVN_PRJ};proto=svn \
->             file://defconfig \
->             "
->  
+Signed-off-by: Nikita Shulga <nshulga@embeddedalley.com>
+Signed-off-by: Tom Rini <trini@embeddedalley.com>
+---
+ recipes/binutils/binutils-cross.inc           |   28 +++++++++++++++++++-----
+ recipes/binutils/binutils_2.14.90.0.6.bb      |    2 +-
+ recipes/binutils/binutils_2.14.90.0.7.bb      |    2 +-
+ recipes/binutils/binutils_2.15.94.0.1.bb      |    2 +-
+ recipes/binutils/binutils_2.16.1.bb           |    2 +-
+ recipes/binutils/binutils_2.16.91.0.6.bb      |    2 +-
+ recipes/binutils/binutils_2.16.91.0.7.bb      |    2 +-
+ recipes/binutils/binutils_2.16.bb             |    2 +-
+ recipes/binutils/binutils_2.17.50.0.1.bb      |    2 +-
+ recipes/binutils/binutils_2.17.50.0.12.bb     |    2 +-
+ recipes/binutils/binutils_2.17.50.0.5.bb      |    2 +-
+ recipes/binutils/binutils_2.17.50.0.8.bb      |    2 +-
+ recipes/binutils/binutils_2.17.bb             |    2 +-
+ recipes/binutils/binutils_2.18.50.0.7.bb      |    2 +-
+ recipes/binutils/binutils_2.18.bb             |    2 +-
+ recipes/binutils/binutils_2.19.1.bb           |    2 +-
+ recipes/binutils/binutils_2.19.bb             |    2 +-
+ recipes/binutils/binutils_csl-arm-20050416.bb |    2 +-
+ recipes/binutils/binutils_csl-arm-20050603.bb |    2 +-
+ recipes/binutils/binutils_cvs.bb              |    2 +-
+ 20 files changed, 41 insertions(+), 25 deletions(-)
 
---------------ms090303000803050706070606
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+diff --git a/recipes/binutils/binutils-cross.inc b/recipes/binutils/binutils-cross.inc
+index 384d18c..872b04a 100644
+--- a/recipes/binutils/binutils-cross.inc
++++ b/recipes/binutils/binutils-cross.inc
+@@ -23,12 +23,28 @@ do_stage () {
+ 	rmdir ${CROSS_DIR}/${libdir}64 || :
+ 	rmdir ${CROSS_DIR}/${prefix} || :
+ 
+-	# We want to move this into the target specific location
+-	mkdir -p ${STAGING_DIR_TARGET}/lib
+-	mv -f ${CROSS_DIR}/lib/libiberty.a ${STAGING_DIR_TARGET}/lib || \
+-		mv -f ${CROSS_DIR}/lib64/libiberty.a ${STAGING_DIR_TARGET}/lib
+-	rmdir ${CROSS_DIR}/lib || :
+-	rmdir ${CROSS_DIR}/lib64 || :
++	LIBBFD_DIR_BASE=${CROSS_DIR}/${BUILD_SYS}/${TARGET_SYS}
++	# We want to move libbfd and libopcodes to  ${CROSS_DIR}/lib
++	mkdir -p ${CROSS_DIR}/lib
++	mv -f ${LIBBFD_DIR_BASE}/lib/* ${CROSS_DIR}/lib || \
++		mv -f ${LIBBFD_DIR_BASE}/lib64/* ${CROSS_DIR}/lib
++	rmdir ${LIBBFD_DIR_BASE}/lib || :
++	rmdir ${LIBBFD_DIR_BASE}/lib64 || :
++	
++	# Adjust libbfd.la and libopcodes.la
++	for i in libbfd.la libopcodes.la; do
++	sed -i -e "s@${LIBBFD_DIR_BASE}/lib64@${CROSS_DIR}/lib@" ${CROSS_DIR}/lib/$i
++	sed -i -e "s@${LIBBFD_DIR_BASE}/lib@${CROSS_DIR}/lib@" ${CROSS_DIR}/lib/$i
++	done
++
++	# libbfd headers should be moved as well
++	mkdir -p ${CROSS_DIR}/include
++	mv -f ${LIBBFD_DIR_BASE}/include/* ${CROSS_DIR}/include
++	rmdir ${LIBBFD_DIR_BASE}/include 
++
++	# Remove empty directories
++	rmdir ${CROSS_DIR}/${BUILD_SYS}/${TARGET_SYS} || :
++	rmdir ${CROSS_DIR}/${BUILD_SYS} || :
+ }
+ 
+ do_install () {
+diff --git a/recipes/binutils/binutils_2.14.90.0.6.bb b/recipes/binutils/binutils_2.14.90.0.6.bb
+index eb72082..bdbbcff 100644
+--- a/recipes/binutils/binutils_2.14.90.0.6.bb
++++ b/recipes/binutils/binutils_2.14.90.0.6.bb
+@@ -1,7 +1,7 @@
+ SECTION = "devel"
+ inherit autotools gettext
+ 
+-PR = "r5"
++PR = "r6"
+ 
+ DESCRIPTION = "A GNU collection of binary utilities"
+ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+diff --git a/recipes/binutils/binutils_2.14.90.0.7.bb b/recipes/binutils/binutils_2.14.90.0.7.bb
+index f940c87..e58d0cc 100644
+--- a/recipes/binutils/binutils_2.14.90.0.7.bb
++++ b/recipes/binutils/binutils_2.14.90.0.7.bb
+@@ -4,7 +4,7 @@ inherit autotools gettext
+ DESCRIPTION = "A GNU collection of binary utilities"
+ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+ LICENSE = "GPL"
+-PR = "r6"
++PR = "r7"
+ 
+ PACKAGES = "${PN} ${PN}-dev ${PN}-doc ${PN}-symlinks"
+ 
+diff --git a/recipes/binutils/binutils_2.15.94.0.1.bb b/recipes/binutils/binutils_2.15.94.0.1.bb
+index 74a902b..b73e862 100644
+--- a/recipes/binutils/binutils_2.15.94.0.1.bb
++++ b/recipes/binutils/binutils_2.15.94.0.1.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "A GNU collection of binary utilities"
+ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+ SECTION = "devel"
+ LICENSE = "GPL"
+-PR = "r5"
++PR = "r6"
+ 
+ inherit autotools gettext
+ 
+diff --git a/recipes/binutils/binutils_2.16.1.bb b/recipes/binutils/binutils_2.16.1.bb
+index 8235300..64ae34d 100644
+--- a/recipes/binutils/binutils_2.16.1.bb
++++ b/recipes/binutils/binutils_2.16.1.bb
+@@ -1,4 +1,4 @@
+-PR = "r1"
++PR = "r2"
+ 
+ CROSSTOOL_PATCH_URL = "http://www.kegel.com/crosstool/crosstool-0.43/patches/binutils-2.16.1/"
+ SRC_URI = \
+diff --git a/recipes/binutils/binutils_2.16.91.0.6.bb b/recipes/binutils/binutils_2.16.91.0.6.bb
+index b251149..d2701c2 100644
+--- a/recipes/binutils/binutils_2.16.91.0.6.bb
++++ b/recipes/binutils/binutils_2.16.91.0.6.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "A GNU collection of binary utilities"
+ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+ SECTION = "devel"
+ LICENSE = "GPL"
+-PR = "r3"
++PR = "r4"
+ 
+ # glibc 2.3 has issues with this version
+ # of binutils.
+diff --git a/recipes/binutils/binutils_2.16.91.0.7.bb b/recipes/binutils/binutils_2.16.91.0.7.bb
+index 76c1285..7a53dd0 100644
+--- a/recipes/binutils/binutils_2.16.91.0.7.bb
++++ b/recipes/binutils/binutils_2.16.91.0.7.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+ SECTION = "devel"
+ LICENSE = "GPL"
+ DEFAULT_PREFERENCE = "-1"
+-PR = "r2"
++PR = "r3"
+ 
+ inherit autotools gettext
+ 
+diff --git a/recipes/binutils/binutils_2.16.bb b/recipes/binutils/binutils_2.16.bb
+index 9035b44..c3dd6df 100644
+--- a/recipes/binutils/binutils_2.16.bb
++++ b/recipes/binutils/binutils_2.16.bb
+@@ -1,4 +1,4 @@
+-PR = "r10"
++PR = "r11"
+ 
+ SRC_URI = \
+     "${GNU_MIRROR}/binutils/binutils-${PV}.tar.bz2 \
+diff --git a/recipes/binutils/binutils_2.17.50.0.1.bb b/recipes/binutils/binutils_2.17.50.0.1.bb
+index 76c1285..7a53dd0 100644
+--- a/recipes/binutils/binutils_2.17.50.0.1.bb
++++ b/recipes/binutils/binutils_2.17.50.0.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+ SECTION = "devel"
+ LICENSE = "GPL"
+ DEFAULT_PREFERENCE = "-1"
+-PR = "r2"
++PR = "r3"
+ 
+ inherit autotools gettext
+ 
+diff --git a/recipes/binutils/binutils_2.17.50.0.12.bb b/recipes/binutils/binutils_2.17.50.0.12.bb
+index d24d24e..84f608b 100644
+--- a/recipes/binutils/binutils_2.17.50.0.12.bb
++++ b/recipes/binutils/binutils_2.17.50.0.12.bb
+@@ -1,5 +1,5 @@
+ require binutils.inc
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = \
+     "${KERNELORG_MIRROR}/pub/linux/devel/binutils/binutils-${PV}.tar.bz2 \
+diff --git a/recipes/binutils/binutils_2.17.50.0.5.bb b/recipes/binutils/binutils_2.17.50.0.5.bb
+index 1d1c3fb..041c5d7 100644
+--- a/recipes/binutils/binutils_2.17.50.0.5.bb
++++ b/recipes/binutils/binutils_2.17.50.0.5.bb
+@@ -1,6 +1,6 @@
+ require binutils.inc
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = \
+     "${KERNELORG_MIRROR}/pub/linux/devel/binutils/binutils-${PV}.tar.bz2 \
+diff --git a/recipes/binutils/binutils_2.17.50.0.8.bb b/recipes/binutils/binutils_2.17.50.0.8.bb
+index f659b3b..1d1c3fb 100644
+--- a/recipes/binutils/binutils_2.17.50.0.8.bb
++++ b/recipes/binutils/binutils_2.17.50.0.8.bb
+@@ -1,6 +1,6 @@
+ require binutils.inc
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = \
+     "${KERNELORG_MIRROR}/pub/linux/devel/binutils/binutils-${PV}.tar.bz2 \
+diff --git a/recipes/binutils/binutils_2.17.bb b/recipes/binutils/binutils_2.17.bb
+index 0f0b5d6..fdee8a5 100644
+--- a/recipes/binutils/binutils_2.17.bb
++++ b/recipes/binutils/binutils_2.17.bb
+@@ -1,7 +1,7 @@
+ require binutils.inc
+ require binutils-avr32.inc
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI = \
+     "http://ftp.gnu.org/gnu/binutils/binutils-${PV}.tar.bz2 \
+diff --git a/recipes/binutils/binutils_2.18.50.0.7.bb b/recipes/binutils/binutils_2.18.50.0.7.bb
+index a89431e..d9a9cec 100644
+--- a/recipes/binutils/binutils_2.18.50.0.7.bb
++++ b/recipes/binutils/binutils_2.18.50.0.7.bb
+@@ -1,4 +1,4 @@
+-PR = "r6"
++PR = "r7"
+ 
+ require binutils.inc
+ 
+diff --git a/recipes/binutils/binutils_2.18.bb b/recipes/binutils/binutils_2.18.bb
+index 9367196..b746f9b 100644
+--- a/recipes/binutils/binutils_2.18.bb
++++ b/recipes/binutils/binutils_2.18.bb
+@@ -1,4 +1,4 @@
+-PR = "r4"
++PR = "r5"
+ 
+ require binutils.inc
+ 
+diff --git a/recipes/binutils/binutils_2.19.1.bb b/recipes/binutils/binutils_2.19.1.bb
+index c399ab8..aee5840 100644
+--- a/recipes/binutils/binutils_2.19.1.bb
++++ b/recipes/binutils/binutils_2.19.1.bb
+@@ -1,4 +1,4 @@
+-PR = "r0"
++PR = "r1"
+ 
+ require binutils.inc
+ 
+diff --git a/recipes/binutils/binutils_2.19.bb b/recipes/binutils/binutils_2.19.bb
+index aee5840..ef07600 100644
+--- a/recipes/binutils/binutils_2.19.bb
++++ b/recipes/binutils/binutils_2.19.bb
+@@ -1,4 +1,4 @@
+-PR = "r1"
++PR = "r2"
+ 
+ require binutils.inc
+ 
+diff --git a/recipes/binutils/binutils_csl-arm-20050416.bb b/recipes/binutils/binutils_csl-arm-20050416.bb
+index 2c7c207..342572d 100644
+--- a/recipes/binutils/binutils_csl-arm-20050416.bb
++++ b/recipes/binutils/binutils_csl-arm-20050416.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+ LICENSE = "GPL"
+ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-cvs"
+ PV = "2.15.99+csl-arm+cvs20050416"
+-PR = "r3"
++PR = "r4"
+ OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_arm-linux = "-1"
+diff --git a/recipes/binutils/binutils_csl-arm-20050603.bb b/recipes/binutils/binutils_csl-arm-20050603.bb
+index 13759b4..8a9c0ce 100644
+--- a/recipes/binutils/binutils_csl-arm-20050603.bb
++++ b/recipes/binutils/binutils_csl-arm-20050603.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://www.gnu.org/software/binutils/"
+ LICENSE = "GPL"
+ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-cvs"
+ PV = "2.15.99+csl-arm+cvs20050603"
+-PR = "r3"
++PR = "r4"
+ OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
+ DEFAULT_PREFERENCE = "-1"
+ #DEFAULT_PREFERENCE_arm-linux = "1"
+diff --git a/recipes/binutils/binutils_cvs.bb b/recipes/binutils/binutils_cvs.bb
+index 75c8886..0c2064b 100644
+--- a/recipes/binutils/binutils_cvs.bb
++++ b/recipes/binutils/binutils_cvs.bb
+@@ -1,6 +1,6 @@
+ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/binutils-cvs"
+ PV = "0.0+cvs${SRCDATE}"
+-PR = "r0"
++PR = "r1"
+ 
+ require binutils.inc
+ 
+-- 
+1.6.0.4
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwNTEy
-MTkxMFowIwYJKoZIhvcNAQkEMRYEFFPrZ7XGnBXV9Io/cChydbduoOZbMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAnCuzdwiHoB/h8I7kUH4eCFeTxFZ/0HNNg7PzPqUZ6i2loKo4z
-pM+GvfXA7voPR+YeOWDtyJa6MkvcH8fItINkBjnLo17C4IBEmA+vexT5Nq4rkJQImAt7KgdlMLfM
-HSDcJkiU7rRhw1dUp8rBdhChDbIapwwY8GzRxHpg4DMKCpacxgL7WNk+6H5F21iV0Zyrmz1fJQvB
-Q8Sr/VUaD8imNhtEAVklQxCdhG6YVj+VyqaCatC+a+pGZMALTRkMhGa+1yszviTfijNh/z/wa407
-JsXqAmJfJoE/mbRvbvw1xK7UksVGSLu1XIui+HY1h6F2ehyoWqAn+bas2qSiofH5AAAAAAAA
+-- 
+Tom Rini
 
---------------ms090303000803050706070606--
+
