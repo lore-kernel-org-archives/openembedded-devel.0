@@ -1,19 +1,27 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1M1OSG-0001kF-9O
-	for openembedded-devel@openembedded.org; Tue, 05 May 2009 19:29:20 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1M1OO3-00067H-6G
-	for openembedded-devel@openembedded.org; Tue, 05 May 2009 19:24:59 +0200
-Message-ID: <4A007612.60502@kernelconcepts.de>
-Date: Tue, 05 May 2009 19:23:30 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.7
-Subject: OpenEmbedded at Linuxtag 2009
+	(envelope-from <denis@denix.org>) id 1M1RMp-0006FY-64
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 May 2009 22:35:55 +0200
+Received: from gandalf.denix.org ([71.251.49.215]) by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KJ600LMKU9CL68L@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	05 May 2009 15:29:42 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3600F6B8049; Tue,
+	05 May 2009 16:29:36 -0400 (EDT)
+Date: Tue, 05 May 2009 16:29:36 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090505202936.GA22698@denix.org>
+References: <c384c5ea0905030555t48379d37o700254a1c49a4600@mail.gmail.com>
+	<49FD9A75.3000609@balister.org> <49FD9EEA.4030608@dls.net>
+	<ac9c93b10905030918t25211118yc27bb1177f1e65cb@mail.gmail.com>
+	<49FDCB08.4010803@opensimpad.org>
+MIME-version: 1.0
+In-reply-to: <49FDCB08.4010803@opensimpad.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [RFC]: Remove #####...##### lines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,33 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2009 17:29:20 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 May 2009 20:35:55 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi!
+On Sun, May 03, 2009 at 06:49:12PM +0200, Bernhard Guillon wrote:
+> Frans Meulenbroeks wrote:
+>> I do agree that PR = "r0" in a recipe should be ok. (actually I think
+>> that unaware of this I violated that rule a number of times :-) )
+>>
+>>   
+> I like PR = "r0"
+> Else it is easy to forget to bump it on updates. The manual also mention it 
+> [1].
 
-I have some good news: We have been accepted for a project booth at LinuxTag.
-This means that we have a booth at the largest Linux fair in Europe and the
-opportunity to get in touch with users, companies and other projects there.
-
-LinuxTag takes place in Berlin, Germany from June 24 to 27.
-
-I can take care about organising this event for us and about some basic
-equipment and a few devices. It would be great to have some more of us there to
-man the booth. I can order exhibitor passes for us, so if you like to help
-please let me know soon: In contrast to last year we do not get a defined number
-of these but we have to register one by one by submitting the name.
-
-Greetings
-
-Florian
++1 - I agree it's easy to forget to bump it, if it's not there...
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Denys
 
 
