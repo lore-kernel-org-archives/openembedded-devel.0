@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M1Irq-0005u7-6V
-	for openembedded-devel@openembedded.org; Tue, 05 May 2009 13:31:25 +0200
-Received: (qmail 29470 invoked by uid 1003); 5 May 2009 11:25:27 -0000
+	(envelope-from <philip@balister.org>) id 1M1J9z-0006RI-Un
+	for openembedded-devel@openembedded.org; Tue, 05 May 2009 13:50:10 +0200
+Received: (qmail 31863 invoked by uid 1003); 5 May 2009 11:44:12 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 5 May 2009 11:25:26 -0000
-Message-ID: <4A002225.7020503@balister.org>
-Date: Tue, 05 May 2009 07:25:25 -0400
+	by mail.geekisp.com with SMTP; 5 May 2009 11:44:12 -0000
+Message-ID: <4A00268B.6090303@balister.org>
+Date: Tue, 05 May 2009 07:44:11 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1241519336-28278-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1241519336-28278-3-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1241519336-28278-3-git-send-email-marcin@juszkiewicz.com.pl>
-Subject: Re: [STABLE][PATCH 1/1] u-boot-bug: Added U-Boot for BUG (from BUG	Labs SVN)
+	<1241519336-28278-2-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1241519336-28278-2-git-send-email-marcin@juszkiewicz.com.pl>
+Subject: Re: [STABLE][PATCH 1/2] sane-srcrevs.inc: bump linux-bug to get	Ethernet using MAC from U-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2009 11:31:29 -0000
-X-Groupsio-MsgNum: 10026
+X-List-Received-Date: Tue, 05 May 2009 11:50:14 -0000
+X-Groupsio-MsgNum: 10027
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms080104060603060507090403"
+	micalg=sha1; boundary="------------ms010308090306030107070905"
 
---------------ms080104060603060507090403
+--------------ms010308090306030107070905
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -46,68 +46,24 @@ Marcin Juszkiewicz wrote:
 > 
 > Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
 > ---
->  conf/distro/include/sane-srcrevs.inc |    1 +
->  recipes/u-boot/u-boot-bug_svn.bb     |   37 ++++++++++++++++++++++++++++++++++
->  2 files changed, 38 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/u-boot/u-boot-bug_svn.bb
+>  conf/distro/include/sane-srcrevs.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
 > diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-> index 64781eb..d924070 100644
+> index 8962174..64781eb 100644
 > --- a/conf/distro/include/sane-srcrevs.inc
 > +++ b/conf/distro/include/sane-srcrevs.inc
-> @@ -239,6 +239,7 @@ SRCREV_pn-table ?= "2191"
->  SRCREV_pn-tichy ?= "ab68d849502009cf3214df48ffa8075a10cc2177"
->  SRCREV_pn-tmut ?= "60"
->  SRCREV_pn-toscoterm ?= "f02add76f365a2fecd2dbefc230ceaab20244f96"
-> +SRCREV_pn-u-boot-bug ?= "8674"
->  SRCREV_pn-u-boot-openmoko ?= "650149a53dbdd48bf6dfef90930c8ab182adb512"
->  SRCREV_pn-u-boot-openmoko-devel ?= "ba029a1426bfca169572bf80d50a8b190a6b0e19"
->  SRCREV_pn-uclibc ?= "25712"
-> diff --git a/recipes/u-boot/u-boot-bug_svn.bb b/recipes/u-boot/u-boot-bug_svn.bb
-> new file mode 100644
-> index 0000000..c1930f4
-> --- /dev/null
-> +++ b/recipes/u-boot/u-boot-bug_svn.bb
-> @@ -0,0 +1,37 @@
-> +DESCRIPTION = "U-boot bootloader w/ BUG support"
-> +LICENSE = "GPL"
-> +SECTION = "bootloader"
-> +PRIORITY = "optional"
-> +PV = "1.3.2+svnr${SRCREV}"
-> +SRCREV = "${AUTOREV}"
-> +PR = "r6"
-> +
-> +SRC_URI = "\
-> +  svn://svn.buglabs.net/bug/branches/R1.4/qa;module=u-boot;proto=svn \
-> +"
-> +S = "${WORKDIR}/u-boot"
-> +
-> +COMPATIBLE_MACHINE = "bug"
-> +PACKAGE_ARCH = "${MACHINE}"
-> +
-> +EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
-> +TARGET_LDFLAGS = ""
-> +
-> +do_compile () {
-> +    oe_runmake mx31_bug2_config
-> +    oe_runmake clean
-> +    oe_runmake all
-> +}
-> +
-> +do_deploy () {
-> +    install -d ${DEPLOY_DIR_IMAGE}
-> +    install -m 0644 ${S}/u-boot.bin ${DEPLOY_DIR_IMAGE}/u-boot-${PV}-${PR}.bin
-> +    ln -sf ${DEPLOY_DIR_IMAGE}/u-boot-${PV}-${PR}.bin ${DEPLOY_DIR_IMAGE}/uboot-latest.bin
-> +}
-> +
-> +do_stage() {
-> +    install -m 0755 tools/mkimage ${STAGING_BINDIR_NATIVE}/mkimage
-> +}
-> +
-> +do_deploy[dirs] = "${S}"
-> +addtask deploy before do_package after do_install
+> @@ -111,7 +111,7 @@ SRCREV_pn-libowl ?= "277"
+>  SRCREV_pn-libxcalibrate ?= "209d83af61ed38a002c8096377deac292b3e396c"
+>  SRCREV_pn-libxosd ?= "627"
+>  SRCREV_pn-linux-bfin ?= "3758"
+> -SRCREV_pn-linux-bug ?= "8918"
+> +SRCREV_pn-linux-bug ?= "8996"
+>  SRCREV_pn-linux-hackndev-2.6 ?= "1308"
+>  SRCREV_pn-linux-ixp4xx ?= "1089"
+>  SRCREV_pn-linux-openmoko-2.6.24 ?= "fb42ce6724576fc173faf8abfb04aa2c36d213b7"
 
---------------ms080104060603060507090403
+--------------ms010308090306030107070905
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -159,17 +115,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwNTEx
-MjUyNVowIwYJKoZIhvcNAQkEMRYEFD5lvbCZkmurfZqeSTw1qUXrzBwpMFIGCSqGSIb3DQEJDzFF
+NDQxMVowIwYJKoZIhvcNAQkEMRYEFO4cjdG5fIy6Q5z0oniG9HxpDebnMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQB+voY8RKxb2wKBEsFeetvgVBeX6YLBlS3OtST/tYJjbhzY6P5f
-EmeAhDatwzmdO4oEyZrmKLCiQJS9LaSEb9mJ33g2CNuqN6QqpdEVdSxnQWn3c0XMaMkLJ7T3nKpi
-d0Jyt2kI1syglpRRuN7mdbm2N6Luu/x3nKlLCOunLDSjVOw63sGfFTIKMVMDs0aZxnkME+cyQaQi
-5kzpocPht3BFsUN/2FdRE3g30m4pJCo4SaKH+IoDJk7dobNWX7NNyqEbF6gtKVovEazH0Bz7f+ni
-aLOBMaxrHAlxLVU/iTiBz1n8AtNMHkz351rUXm1PVuYGRHnYIvCxkJNglh5AKq72AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQAZUx7MCiXkLHf2Xf+LVIfk+qy37HppLBjViIPDGZohoLrDRj2Z
+kDhRry6GOm4ZoARKkQM+a24e5vzCcdC4ikEHVVd7BUbL13hCW5P1KHZrPTfaBUmGkWp7rw3LSBHG
+/xEy9kLf6dagFIYIFH8b1pzbte86nXCgND37bVXja3+9DhQ8YqKAa58bBmRjypDG6Bd/m24Cg0CG
+ooTw00qz2CSVyDKQhsvbOUtwA+2nGaWylFlJ9p1CDuA3KKMHj5tHNamrp8CPIIKZKa6dS1PZjKWx
+cF6k092ZRdS62r1EHYIRpDzhFoVgVEnfuI3JfkyxpMVuPOgO1Mls9RjWiSo8J6X+AAAAAAAA
 
---------------ms080104060603060507090403--
+--------------ms010308090306030107070905--
