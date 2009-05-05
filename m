@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M1J9z-0006RI-Un
-	for openembedded-devel@openembedded.org; Tue, 05 May 2009 13:50:10 +0200
-Received: (qmail 31863 invoked by uid 1003); 5 May 2009 11:44:12 -0000
+	(envelope-from <philip@balister.org>) id 1M1Jhr-0005Du-85
+	for openembedded-devel@openembedded.org; Tue, 05 May 2009 14:25:07 +0200
+Received: (qmail 18224 invoked by uid 1003); 5 May 2009 12:19:11 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 5 May 2009 11:44:12 -0000
-Message-ID: <4A00268B.6090303@balister.org>
-Date: Tue, 05 May 2009 07:44:11 -0400
+	by mail.geekisp.com with SMTP; 5 May 2009 12:19:11 -0000
+Message-ID: <4A002EBE.70808@balister.org>
+Date: Tue, 05 May 2009 08:19:10 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1241519336-28278-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1241519336-28278-2-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1241519336-28278-2-git-send-email-marcin@juszkiewicz.com.pl>
-Subject: Re: [STABLE][PATCH 1/2] sane-srcrevs.inc: bump linux-bug to get	Ethernet using MAC from U-boot
+	<1241519336-28278-4-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1241519336-28278-4-git-send-email-marcin@juszkiewicz.com.pl>
+Subject: Re: [STABLE][PATCH 2/2] linux-bug: switch to proper SVN branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2009 11:50:14 -0000
-X-Groupsio-MsgNum: 10027
+X-List-Received-Date: Tue, 05 May 2009 12:25:08 -0000
+X-Groupsio-MsgNum: 10028
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms010308090306030107070905"
+	micalg=sha1; boundary="------------ms090303000803050706070606"
 
---------------ms010308090306030107070905
+--------------ms090303000803050706070606
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -46,24 +46,31 @@ Marcin Juszkiewicz wrote:
 > 
 > Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
 > ---
->  conf/distro/include/sane-srcrevs.inc |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
+>  recipes/linux/linux-bug_2.6.27.2.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-> index 8962174..64781eb 100644
-> --- a/conf/distro/include/sane-srcrevs.inc
-> +++ b/conf/distro/include/sane-srcrevs.inc
-> @@ -111,7 +111,7 @@ SRCREV_pn-libowl ?= "277"
->  SRCREV_pn-libxcalibrate ?= "209d83af61ed38a002c8096377deac292b3e396c"
->  SRCREV_pn-libxosd ?= "627"
->  SRCREV_pn-linux-bfin ?= "3758"
-> -SRCREV_pn-linux-bug ?= "8918"
-> +SRCREV_pn-linux-bug ?= "8996"
->  SRCREV_pn-linux-hackndev-2.6 ?= "1308"
->  SRCREV_pn-linux-ixp4xx ?= "1089"
->  SRCREV_pn-linux-openmoko-2.6.24 ?= "fb42ce6724576fc173faf8abfb04aa2c36d213b7"
+> diff --git a/recipes/linux/linux-bug_2.6.27.2.bb b/recipes/linux/linux-bug_2.6.27.2.bb
+> index db49e63..655defa 100644
+> --- a/recipes/linux/linux-bug_2.6.27.2.bb
+> +++ b/recipes/linux/linux-bug_2.6.27.2.bb
+> @@ -2,13 +2,13 @@ DESCRIPTION = "Linux kernel for bug"
+>  
+>  PV_append = "+svnr${SRCREV}"
+>  KV = "2.6.27.2"
+> -PR = "r26"
+> +PR = "r27"
+>  
+>  COMPATIBLE_MACHINE = "bug"
+>  
+>  SVN_PRJ = "bug-linux-${KV}"
+>  
+> -SRC_URI = "svn://svn.buglabs.net/bug/trunk;module=${SVN_PRJ};proto=svn \
+> +SRC_URI = "svn://svn.buglabs.net/bug/branches/R1.4/qa;module=${SVN_PRJ};proto=svn \
+>             file://defconfig \
+>             "
+>  
 
---------------ms010308090306030107070905
+--------------ms090303000803050706070606
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -114,18 +121,18 @@ HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
 rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwNTEx
-NDQxMVowIwYJKoZIhvcNAQkEMRYEFO4cjdG5fIy6Q5z0oniG9HxpDebnMFIGCSqGSIb3DQEJDzFF
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwNTEy
+MTkxMFowIwYJKoZIhvcNAQkEMRYEFFPrZ7XGnBXV9Io/cChydbduoOZbMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAZUx7MCiXkLHf2Xf+LVIfk+qy37HppLBjViIPDGZohoLrDRj2Z
-kDhRry6GOm4ZoARKkQM+a24e5vzCcdC4ikEHVVd7BUbL13hCW5P1KHZrPTfaBUmGkWp7rw3LSBHG
-/xEy9kLf6dagFIYIFH8b1pzbte86nXCgND37bVXja3+9DhQ8YqKAa58bBmRjypDG6Bd/m24Cg0CG
-ooTw00qz2CSVyDKQhsvbOUtwA+2nGaWylFlJ9p1CDuA3KKMHj5tHNamrp8CPIIKZKa6dS1PZjKWx
-cF6k092ZRdS62r1EHYIRpDzhFoVgVEnfuI3JfkyxpMVuPOgO1Mls9RjWiSo8J6X+AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQAnCuzdwiHoB/h8I7kUH4eCFeTxFZ/0HNNg7PzPqUZ6i2loKo4z
+pM+GvfXA7voPR+YeOWDtyJa6MkvcH8fItINkBjnLo17C4IBEmA+vexT5Nq4rkJQImAt7KgdlMLfM
+HSDcJkiU7rRhw1dUp8rBdhChDbIapwwY8GzRxHpg4DMKCpacxgL7WNk+6H5F21iV0Zyrmz1fJQvB
+Q8Sr/VUaD8imNhtEAVklQxCdhG6YVj+VyqaCatC+a+pGZMALTRkMhGa+1yszviTfijNh/z/wa407
+JsXqAmJfJoE/mbRvbvw1xK7UksVGSLu1XIui+HY1h6F2ehyoWqAn+bas2qSiofH5AAAAAAAA
 
---------------ms010308090306030107070905--
+--------------ms090303000803050706070606--
