@@ -1,35 +1,26 @@
-Received: from [74.125.78.146] (helo=ey-out-1920.google.com)
+Received: from [212.227.126.188] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dbaryshkov@gmail.com>) id 1M1hvn-0007E9-GH
+	(envelope-from <christian.glindkamp@taskit.de>) id 1M1i6Z-0004Mg-Sg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 May 2009 16:17:07 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so59791eyw.36
+	Wed, 06 May 2009 16:28:16 +0200
+Received: from localhost.localdomain (port-87-234-225-18.static.qsc.de
+	[87.234.225.18])
+	by mrelayeu.kundenserver.de (node=mreu1) with ESMTP (Nemesis)
+	id 0MKv1o-1M1i0j0Tm2-000jAN; Wed, 06 May 2009 16:22:13 +0200
+Received: from christian.taskit.de (unknown [192.168.4.114])
+	by localhost.localdomain (Postfix) with ESMTP id 3E55A7B78B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 May 2009 07:11:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=SCH+wbJ9+Duru/CY2JpJyzj7arIEIDAsUFThDrs+gbA=;
-	b=ann91jMrDmZgQWQfWwUXv3DQapiHwzm/a8GBsZVezH6I3nOIJdQVtpMGOqdY4AvcfQ
-	+9FgqwwxAFl5qYoMmiWqyuNi641g2Ujxf3KnAXof9IRC20O7/S3Z96CzWjkTiGnSeI6S
-	rtd8gtMz4ZYg/cuEg9tqNJKwtlNzX4fui7Y2k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=PsOhWl/pB6poxjQQIBwFDS+vr1B7MMVZ270HRop4qYN9kdnFBVyFovP3sc7d2SnVST
-	mRt7upvs6hRyVbiPcJBuRgQT118WijGU86Jw5UdjXWU3po1p6kwY/o2ax9KkCwwDiZJz
-	sRUJMGlLX3AWPrIxqxt6qUkx17ECs3wpFxxo4=
-Received: by 10.210.65.2 with SMTP id n2mr6043038eba.94.1241619067484;
-	Wed, 06 May 2009 07:11:07 -0700 (PDT)
-Received: from localhost.localdomain (iap-pxy-mow1.siemens.ru [212.248.25.26])
-	by mx.google.com with ESMTPS id 7sm2300679eyg.57.2009.05.06.07.11.05
-	(version=SSLv3 cipher=RC4-MD5); Wed, 06 May 2009 07:11:06 -0700 (PDT)
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+	Wed,  6 May 2009 16:20:41 +0200 (CEST)
+Date: Wed, 6 May 2009 16:22:12 +0200
+From: Christian Glindkamp <christian.glindkamp@taskit.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 May 2009 18:11:00 +0400
-Message-Id: <1241619060-6672-1-git-send-email-dbaryshkov@gmail.com>
-X-Mailer: git-send-email 1.5.6.5
-Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Subject: [PATCH] kernel.bbclass: also stage include/trace if it's available
+Message-ID: <20090506162212.7cd43f30@christian.taskit.de>
+X-Mailer: Claws Mail 3.7.1 (GTK+ 2.14.4; i486-pc-linux-gnu)
+Mime-Version: 1.0
+X-Provags-ID: V01U2FsdGVkX19jop64E+tse2j2I6s2gOKtrL7zmIpqdklQ2y7
+	mi+iD8e8oMRoCZaFuBOi11PXuU4DEKpokUy6t4yQK0TV+owjh0
+	+ChgvtA/9Fd3kjD5WfDnw==
+Subject: Building jamvm and cacao (cacao is missing a patch)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2009 14:17:09 -0000
+X-List-Received-Date: Wed, 06 May 2009 14:28:16 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
----
- classes/kernel.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Hi,
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 954c407..1323228 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -118,7 +118,7 @@ kernel_do_stage() {
- 	mkdir -p ${STAGING_KERNEL_DIR}/include/pcmcia
- 	cp -fR include/pcmcia/* ${STAGING_KERNEL_DIR}/include/pcmcia/
- 
--	for entry in drivers/crypto drivers/media include/media include/acpi include/sound include/video include/scsi; do
-+	for entry in drivers/crypto drivers/media include/media include/acpi include/sound include/video include/scsi include/trace; do
- 		if [ -d $entry ]; then
- 			mkdir -p ${STAGING_KERNEL_DIR}/$entry
- 			cp -fR $entry/* ${STAGING_KERNEL_DIR}/$entry/
--- 
-1.5.6.5
+I'm trying to build jamvm from stable/2009. This implicitly builds cacao.
+As I see it this happens because cacao provides java2-runtime and classpath
+rdepends on it. The problem is, that cacao does not build because of a missing
+patch. In revision af5fcda66139e002d098c0df952b43c455806aba
+cacao-disable-stackbase-check.patch was added to SRC_URI but the patch itself
+was not committed. Reverting the commit at least allowed me to continue the
+build of jamvm.
+
+I also checked the dev branch and it is missing the patch, too. So this patch
+should be added to both branches (or the patch removed from SRC_URI if it is
+obsolete).
+
+On a sidenote: Why is bitbake building cacao at all, jamvm already provides
+java2-runtime?
+
+Regards,
+Christian Glindkamp
 
 
 
