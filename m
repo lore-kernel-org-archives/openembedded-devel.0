@@ -1,30 +1,25 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1M1lwP-0007c0-G1
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 06 May 2009 20:34:02 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id B1ABD2C80C
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2009 18:27:44 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KJePwpjd8Rth
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2009 18:27:43 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTP id 37CFD2C7FE
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2009 18:27:41 +0000 (UTC)
-Message-ID: <4A01D689.60409@gmail.com>
-Date: Wed, 06 May 2009 20:27:21 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [PATCH] Added myself in MANTAINERS as KaeilOS mantainer
+	(envelope-from <pb@reciva.com>) id 1M1lwR-0007c1-Pm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 May 2009 20:34:04 +0200
+Received: from 79-79-173-112.dynamic.dsl.as9105.com ([79.79.173.112]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M1lqa-0000tA-Cf
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 May 2009 19:28:01 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A01CF95.4000003@balister.org>
+References: <4A0196B0.4010202@balister.org>
+	<1241626055.16805.134.camel@mill.internal.reciva.com>
+	<4A01CF95.4000003@balister.org>
+Date: Wed, 06 May 2009 18:27:57 +0100
+Message-Id: <1241630877.23982.43.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: FILESPATHPKG question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,43 +33,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2009 18:34:02 -0000
-Content-Type: text/x-diff;
-	name="0001-Added-myself-in-MANTAINERS-as-KaeilOS-mantainer.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline;
-	filename*0="0001-Added-myself-in-MANTAINERS-as-KaeilOS-mantainer.patch"
+X-List-Received-Date: Wed, 06 May 2009 18:34:05 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-From 15418612f838a3fceef87d2e59986e3f5c0944d7 Mon Sep 17 00:00:00 2001
-From: Marco Cavallini <m.cavallini@koansoftware.com>
-Date: Wed, 6 May 2009 20:24:40 +0200
-Subject: [PATCH] Added myself in MANTAINERS as KaeilOS mantainer
+On Wed, 2009-05-06 at 13:57 -0400, Philip Balister wrote:
+> What's the difference between =+ ad =.? Both work and I see more of the 
+> =+ form?
+
+See the fine manual:
+
+http://bitbake.berlios.de/manual/ch02.html#id868981
+
+p.
 
 
-Signed-off-by: Marco Cavallini <m.cavallini@koansoftware.com>
----
- MAINTAINERS |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2447434..5086136 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -163,6 +163,13 @@ Website:    http://marcin.juszkiewicz.com.pl/
- Machines:   progear, alix, at91sam9263ek
- Distros:    Poky, =C3=85ngstr=C3=B6m
-=20
-+Person:     Marco Cavallini
-+Mail:       m.cavallini@koansoftware.com
-+Website:    http://www.koansoftware.com - http://www.embedded.it
-+Machines:   ronetix-pm9263, vortex86sx, at91sam9g20ek
-+Distros:    KaeilOS, =C3=85ngstr=C3=B6m
-+Interests:  x86, ARM, wxWidgets
-+
- Person:     Matthias 'CoreDump' Hentges
- Website:    http://www.hentges.net
- Distros:    Sonkei
---=20
-1.5.6.5
 
 
