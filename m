@@ -1,26 +1,35 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [74.125.44.157] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M1Sav-0005TU-Uj
+	(envelope-from <cliff.brake@gmail.com>) id 1M1gZp-0007iV-JJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 May 2009 23:54:35 +0200
-Received: from 79-79-173-112.dynamic.dsl.as9105.com ([79.79.173.112]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M1SUu-0002zl-4T
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 May 2009 22:48:22 +0100
-From: Phil Blundell <philb@gnu.org>
+	Wed, 06 May 2009 14:50:22 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so36868yxh.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 May 2009 05:44:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=rHiaZiGukYQspdjVjcT4M1qx2jPv2A2rrhXfGHvTX4E=;
+	b=Za12FCpy9SoteqbdfnTm8tsDdCFLdLJDrOG2tFws9PQxmjOccIJZNlFlmseJS//VKZ
+	KZEEolk5RPXKYg6KkNLvKxRpkJSWDbaS27FnMveVu/mk2SD/i8FFEP6R38m/TngI5E+7
+	yHlotxy1ElvJUTInUTr6nKTZXmhb+nwS7zTxY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=l6TPuVMY1AAZXhqCZ1DJR86w44Yo9xma4Y96M/4uxzSXzgNsCgT6xfRUhkKOOn4FRA
+	r6oohl4yIVaWTb1h+uSftbQuDIUJ8fd/cmec4o9jdQuTfqDIYKLbwgvZ45rTZNSvTPno
+	nOA0DwD0EY+K82RbI56RFy8fQ67pl8c+B9np0=
+MIME-Version: 1.0
+Received: by 10.151.121.12 with SMTP id y12mr2311611ybm.123.1241613861446; 
+	Wed, 06 May 2009 05:44:21 -0700 (PDT)
+In-Reply-To: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
+References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
+Date: Wed, 6 May 2009 08:44:21 -0400
+Message-ID: <f96d234e0905060544t21a91d25r8b8d1251f43b3e11@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <49FDCB08.4010803@opensimpad.org>
-References: <c384c5ea0905030555t48379d37o700254a1c49a4600@mail.gmail.com>
-	<49FD9A75.3000609@balister.org> <49FD9EEA.4030608@dls.net>
-	<ac9c93b10905030918t25211118yc27bb1177f1e65cb@mail.gmail.com>
-	<49FDCB08.4010803@opensimpad.org>
-Date: Tue, 05 May 2009 21:47:57 +0100
-Message-Id: <1241556477.23982.41.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [RFC]: Remove #####...##### lines
+Subject: Re: progress on OE organization issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,30 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2009 21:54:35 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 May 2009 12:50:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, 2009-05-03 at 18:49 +0200, Bernhard Guillon wrote:
-> Frans Meulenbroeks wrote:
-> > I do agree that PR = "r0" in a recipe should be ok. (actually I think
-> > that unaware of this I violated that rule a number of times :-) )
-> >
-> >   
-> I like PR = "r0"
-> Else it is easy to forget to bump it on updates. The manual also mention 
-> it [1].
+A new OE server has set up for testing at:
 
-Yes, agreed.  I don't know where this idea came from that it's somehow a
-bad thing to set PR = "r0" explicitly, but whatever its source I think
-it is a mistaken belief.  It seems obviously silly to delete the PR
-definition whenever a package is upgraded to a new upstream version, and
-then re-insert it again on the next packaging change; aside from
-anything else, it's just more typing than keeping the line intact and
-just changing the value.
+new.openembedded.org
 
-p.
+The git repo has been set up (accessible via git and ssh).  Please do
+not commit anything to this repo yet.  Currently I'm just syncing from
+the main server with rsync.
 
+Next will be cgit followed by mediawiki, patchwork, and bugzilla.
 
+Thanks to nslu2-linux folks for providing this server.
+
+Thanks,
+Cliff
+
+On Thu, Apr 30, 2009 at 8:44 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> We are making progress on some of the OE organizational issues.
+>
+> 1) we have been offered a VM at OSUOSL for hosting OE infrastructure.
+> Same rack as kernel.org machines, and has a good reputation for
+> support and uptime. =A0See
+> http://wiki.openembedded.net/index.php/Infrastructure for more
+> details.
+> 2) we are trying to push forward with some form of structure for
+> membership, and effective decision making:
+> http://wiki.openembedded.net/index.php/Organization. =A0Florian Boor has
+> offered to take care of the membership tasks.
+>
+> Thanks,
+> Cliff
+>
+> --
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Cliff Brake
+> http://bec-systems.com
+>
 
 
