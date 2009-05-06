@@ -1,36 +1,31 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1M1nJZ-0007PC-DQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 May 2009 22:02:01 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id C04094A24C2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2009 15:55:59 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 08793-01 for <openembedded-devel@lists.openembedded.org>; 
-	Wed,  6 May 2009 15:55:59 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 85AB44D09A; Wed,  6 May 2009 15:55:59 -0400 (EDT)
-X-Spam-Score: 
-X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00,
-	UPPERCASE_25_50 autolearn=ham version=3.1.8
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 7C49C38A99D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2009 15:55:57 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id 7588C41733; Wed,  6 May 2009 15:55:57 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 May 2009 15:55:56 -0400
-Message-Id: <0977f5062aba3031df4132b6571b5c88ff4866c8.1241639516.git.msmith@cbnco.com>
-X-Mailer: git-send-email 1.5.6.5
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH 1/2] Remove unused grub-0.93.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M1oqL-0004eG-74
+	for openembedded-devel@openembedded.org; Wed, 06 May 2009 23:39:57 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M1okV-0004q1-PC
+	for openembedded-devel@openembedded.org; Wed, 06 May 2009 21:33:56 +0000
+Received: from 64.101.21.60 ([64.101.21.60])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 06 May 2009 21:33:55 +0000
+Received: from msundius by 64.101.21.60 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 06 May 2009 21:33:55 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Michael Sundius <msundius@sundius.com>
+Date: Wed, 6 May 2009 21:33:45 +0000 (UTC)
+Message-ID: <loom.20090506T211326-740@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 64.101.21.60 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.15) Gecko/20080702 Fedora/2.0.0.15-1.fc8 Firefox/2.0.0.15)
+Sender: news <news@ger.gmane.org>
+Subject: Development and Open Embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,254 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2009 20:02:01 -0000
+X-List-Received-Date: Wed, 06 May 2009 21:39:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-As far as I can tell, only the wrap board and gpe-phone-image are using
-grub, and they use the default version, 0.97.
+Hi, 
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/grub/grub-0.93/autohell.patch |  166 ---------------------------------
- recipes/grub/grub-0.93/memcpy.patch   |   13 ---
- recipes/grub/grub-0.93/reiserfs.patch |   11 --
- recipes/grub/grub_0.93.bb             |   15 ---
- 4 files changed, 0 insertions(+), 205 deletions(-)
- delete mode 100644 recipes/grub/grub-0.93/autohell.patch
- delete mode 100644 recipes/grub/grub-0.93/memcpy.patch
- delete mode 100644 recipes/grub/grub-0.93/reiserfs.patch
- delete mode 100644 recipes/grub/grub_0.93.bb
+I'm helping my organization move our platform build 
+infrastructure to better than the complicated and 
+disparate make jumble of make files and tarballs
+that we currently use. I've integrated much of it
+to Open Embedded (basic root fs image, kernel, tools).
 
-diff --git a/recipes/grub/grub-0.93/autohell.patch b/recipes/grub/grub-0.93/autohell.patch
-deleted file mode 100644
-index ca1f2d1..0000000
---- a/recipes/grub/grub-0.93/autohell.patch
-+++ /dev/null
-@@ -1,166 +0,0 @@
----- grub-0.93/configure.in~	2002-11-29 20:12:08.000000000 +0000
--+++ grub-0.93/configure.in	2004-01-04 12:03:05.000000000 +0000
--@@ -54,7 +54,7 @@
-- _AM_DEPENDENCIES(CC)
-- 
-- dnl Because recent automake complains about AS, set it here.
---AS="$CC"
--+AM_PROG_AS
-- AC_SUBST(AS)
-- 
-- AC_ARG_WITH(binutils,
----- grub-0.93/stage1/Makefile.am~	2002-09-08 02:58:08.000000000 +0100
--+++ grub-0.93/stage1/Makefile.am	2004-01-04 12:31:38.000000000 +0000
--@@ -4,7 +4,7 @@
-- CLEANFILES = $(nodist_pkgdata_DATA)
-- 
-- # We can't use builtins or standard includes.
---AM_ASFLAGS = $(STAGE1_CFLAGS) -fno-builtin -nostdinc
--+AM_CCASFLAGS = $(STAGE1_CFLAGS) -fno-builtin -nostdinc $(DEFAULT_INCLUDES)
-- LDFLAGS = -nostdlib -Wl,-N,-Ttext,7C00
-- 
-- noinst_PROGRAMS = stage1.exec
----- grub-0.93/stage2/Makefile.am~	2002-11-29 18:00:53.000000000 +0000
--+++ grub-0.93/stage2/Makefile.am	2004-01-04 12:30:29.000000000 +0000
--@@ -12,6 +12,7 @@
-- 
-- # For <stage1.h>.
-- INCLUDES = -I$(top_srcdir)/stage1
--+AM_CCASFLAGS = $(DEFAULT_INCLUDES) $(INCLUDES)
-- 
-- # The library for /sbin/grub.
-- noinst_LIBRARIES = libgrub.a
--@@ -88,7 +89,7 @@
-- 	fsys_vstafs.c fsys_xfs.c gunzip.c hercules.c md5.c serial.c \
-- 	smp-imps.c stage2.c terminfo.c tparm.c
-- pre_stage2_exec_CFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS)
---pre_stage2_exec_ASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS)
--+pre_stage2_exec_CCASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) $(AM_CCASFLAGS)
-- pre_stage2_exec_LDFLAGS = $(PRE_STAGE2_LINK)
-- 
-- if NETBOOT_SUPPORT
--@@ -109,7 +110,7 @@
-- 	echo "#define STAGE2_SIZE $$6" > stage2_size.h
-- 
-- start_exec_SOURCES = start.S
---start_exec_ASFLAGS = $(STAGE2_COMPILE)
--+start_exec_CCASFLAGS = $(STAGE2_COMPILE) $(AM_CCASFLAGS)
-- start_exec_LDFLAGS = $(START_LINK)
-- 
-- # XXX: automake doesn't provide a way to specify dependencies for object
--@@ -127,8 +128,8 @@
-- 	stage1_5.c fsys_ext2fs.c bios.c
-- e2fs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_EXT2FS=1 \
-- 	-DNO_BLOCK_FILES=1
---e2fs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_EXT2FS=1 \
---	-DNO_BLOCK_FILES=1
--+e2fs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_EXT2FS=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- e2fs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For fat_stage1_5 target.
--@@ -136,8 +137,8 @@
-- 	stage1_5.c fsys_fat.c bios.c
-- fat_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FAT=1 \
-- 	-DNO_BLOCK_FILES=1
---fat_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FAT=1 \
---	-DNO_BLOCK_FILES=1
--+fat_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FAT=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- fat_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For ffs_stage1_5 target.
--@@ -145,8 +146,8 @@
-- 	stage1_5.c fsys_ffs.c bios.c
-- ffs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FFS=1 \
-- 	-DNO_BLOCK_FILES=1
---ffs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FFS=1 \
---	-DNO_BLOCK_FILES=1
--+ffs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FFS=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- ffs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For minix_stage1_5 target.
--@@ -154,8 +155,8 @@
-- 	stage1_5.c fsys_minix.c bios.c
-- minix_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_MINIX=1 \
-- 	-DNO_BLOCK_FILES=1
---minix_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_MINIX=1 \
---	-DNO_BLOCK_FILES=1
--+minix_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_MINIX=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- minix_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For reiserfs_stage1_5 target.
--@@ -163,8 +164,8 @@
-- 	disk_io.c stage1_5.c fsys_reiserfs.c bios.c
-- reiserfs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_REISERFS=1 \
-- 	-DNO_BLOCK_FILES=1
---reiserfs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_REISERFS=1 \
---	-DNO_BLOCK_FILES=1
--+reiserfs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_REISERFS=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- reiserfs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For vstafs_stage1_5 target.
--@@ -172,8 +173,8 @@
-- 	disk_io.c stage1_5.c fsys_vstafs.c bios.c
-- vstafs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_VSTAFS=1 \
-- 	-DNO_BLOCK_FILES=1
---vstafs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_VSTAFS=1 \
---	-DNO_BLOCK_FILES=1
--+vstafs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_VSTAFS=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- vstafs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For jfs_stage1_5 target.
--@@ -181,8 +182,8 @@
-- 	disk_io.c stage1_5.c fsys_jfs.c bios.c
-- jfs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_JFS=1 \
-- 	-DNO_BLOCK_FILES=1
---jfs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_JFS=1 \
---	-DNO_BLOCK_FILES=1
--+jfs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_JFS=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- jfs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For xfs_stage1_5 target.
--@@ -190,16 +191,16 @@
-- 	disk_io.c stage1_5.c fsys_xfs.c bios.c
-- xfs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_XFS=1 \
-- 	-DNO_BLOCK_FILES=1
---xfs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_XFS=1 \
---	-DNO_BLOCK_FILES=1
--+xfs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_XFS=1 \
--+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
-- xfs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
-- 
-- # For diskless target.
-- diskless_exec_SOURCES = $(pre_stage2_exec_SOURCES)
-- diskless_exec_CFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) \
-- 	-DSUPPORT_DISKLESS=1
---diskless_exec_ASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) \
---	-DSUPPORT_DISKLESS=1
--+diskless_exec_CCASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) \
--+	-DSUPPORT_DISKLESS=1 $(AM_CCASFLAGS)
-- diskless_exec_LDFLAGS = $(PRE_STAGE2_LINK)
-- diskless_exec_LDADD = ../netboot/libdrivers.a
-- 
--@@ -210,7 +211,7 @@
-- 
-- # For nbloader target.
-- nbloader_exec_SOURCES = nbloader.S
---nbloader_exec_ASFLAGS = $(STAGE2_COMPILE)
--+nbloader_exec_CCASFLAGS = $(STAGE2_COMPILE) $(AM_CCASFLAGS)
-- nbloader_exec_LDFLAGS = $(NBLOADER_LINK)
-- 
-- # XXX: See the comment for start_exec-start.o.
--@@ -223,7 +224,7 @@
-- 
-- # For pxeloader target.
-- pxeloader_exec_SOURCES = pxeloader.S
---pxeloader_exec_ASFLAGS = $(STAGE2_COMPILE)
--+pxeloader_exec_CCASFLAGS = $(STAGE2_COMPILE) $(AM_CCASFLAGS)
-- pxeloader_exec_LDFLAGS = $(PXELOADER_LINK)
-- 
-- # XXX: See the comment for start_exec-start.o.
-diff --git a/recipes/grub/grub-0.93/memcpy.patch b/recipes/grub/grub-0.93/memcpy.patch
-deleted file mode 100644
-index dd5da33..0000000
---- a/recipes/grub/grub-0.93/memcpy.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
----- grub-0.93/stage2/asm.S~	2002-12-02 23:18:56.000000000 +0000
--+++ grub-0.93/stage2/asm.S	2004-01-04 12:50:11.000000000 +0000
--@@ -62,6 +62,10 @@
-- start:
-- _start:
-- #endif /* ! STAGE1_5 */
--+
--+#undef memcpy
--+ENTRY(memcpy)
--+	jmp EXT_C(grub_memmove)
-- 	
-- ENTRY(main)
-- 	/*
-diff --git a/recipes/grub/grub-0.93/reiserfs.patch b/recipes/grub/grub-0.93/reiserfs.patch
-deleted file mode 100644
-index 5b4fb5b..0000000
---- a/recipes/grub/grub-0.93/reiserfs.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- grub-0.93/stage2/fsys_reiserfs.c~	2002-11-29 17:46:01.000000000 +0000
--+++ grub-0.93/stage2/fsys_reiserfs.c	2004-01-04 12:16:34.000000000 +0000
--@@ -112,7 +112,7 @@
--   /* offset in the log of where to start replay after a crash */
--   __u32 j_first_unflushed_offset;
--   /* mount id to detect very old transactions */
---  __u32 long j_mount_id;
--+  __u32 j_mount_id;
-- };
-- 
-- /* magic string to find desc blocks in the journal */
-diff --git a/recipes/grub/grub_0.93.bb b/recipes/grub/grub_0.93.bb
-deleted file mode 100644
-index 9fc0084..0000000
---- a/recipes/grub/grub_0.93.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--DESCRIPTION = "GRUB is the GRand Unified Bootloader"
--HOMEPAGE = "http://www.gnu.org/software/grub"
--SECTION = "bootloaders"
--PRIORITY = "optional"
--
--SRC_URI = "ftp://alpha.gnu.org/gnu/grub/grub-${PV}.tar.gz; \
--	   file://autohell.patch;patch=1 \
--	   file://memcpy.patch;patch=1 \
--	   file://reiserfs.patch;patch=1"
--
--inherit autotools
--
--COMPATIBLE_HOST = 'i.86.*-linux'
--
--FILES_${PN}-doc = "${datadir}"
--- 
-1.5.6.5
+This all works well, but it seems to me (a kernel hacker
+mostly) that the hacking cycle of code, compile, run
+is a bit difficult if you are working within the confines
+of source control systems. 
+
+that is, say I modify a file within my kernel development (git)
+tree and then want to compile it. under OE, the whole tree is 
+going to be copied to the sources dir, tarballed, and then
+extracted into the ${S} directory.  Further, when compiling,
+all the output files are left in the ${S} dir, instead of 
+directing them to an output directory. 
+
+I find that most of the engineers I know start to grumble when
+the have to wait any longer than status quo in any one of the 
+steps for turning around a small change to their source. My
+experience is mostly inside the kernel, but I suppose other
+projects are similar on embedded systems.
+
+I'm wondering if anyone has done such a thing as creating a
+recipe that forgoes the "fetch" task and point the ${S} to
+a local devel tree.. then adds an extra onto the make command
+to place the object in another directory (maybe ${O})... 
+
+Maybe people have solved this problem in other ways or a similar
+way. I'd love to get some insight into how this is done in 
+other organizations... It would be great to beable to inherit
+a class that allows use of an efficient dev cycle.
+
+Thanks
 
 
 
