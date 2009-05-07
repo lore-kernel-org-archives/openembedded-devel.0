@@ -1,40 +1,31 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1M22wx-0002Vp-2o
-	for openembedded-devel@openembedded.org; Thu, 07 May 2009 14:43:43 +0200
-Received: (qmail 17029 invoked from network); 7 May 2009 14:37:37 +0200
-Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
-	by leibniz.math.fu-berlin.de with SMTP; 7 May 2009 14:37:37 +0200
-Received: (qmail 1983 invoked by uid 9804); 7 May 2009 14:37:37 +0200
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 7 May 2009 14:37:31 +0200
-Received: (qmail 1975 invoked by uid 9804); 7 May 2009 14:37:30 +0200
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by luzin.mi.fu-berlin.de with SMTP; 7 May 2009 14:37:30 +0200
-Received: (qmail 17019 invoked from network); 7 May 2009 14:37:30 +0200
-Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
-	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
-	7 May 2009 12:37:30 -0000
-Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1M22qw-0005ep-D0
+	(envelope-from <msmith@cbnco.com>) id 1M28NA-0002WK-0I
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 May 2009 20:31:10 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 686844A1B07
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 May 2009 14:37:30 +0200
-Date: Thu, 7 May 2009 14:37:30 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090507123730.GA21520@mi.fu-berlin.de>
-References: <2e69630d0905060801w29e0719fqc4f3904e784fa7b8@mail.gmail.com>
-	<2e69630d0905070510x3c161a2atbbb7b9a0edf7578e@mail.gmail.com>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[1978](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.206
+	Thu,  7 May 2009 14:25:00 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 13322-07 for <openembedded-devel@lists.openembedded.org>; 
+	Thu,  7 May 2009 14:25:00 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 42CF33BC562
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 May 2009 14:25:00 -0400 (EDT)
+Message-ID: <4A03277B.1090402@cbnco.com>
+Date: Thu, 07 May 2009 14:24:59 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
 MIME-Version: 1.0
-In-Reply-To: <2e69630d0905070510x3c161a2atbbb7b9a0edf7578e@mail.gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-Subject: Re: problem with opie for qemuarm
+To: openembedded-devel@lists.openembedded.org
+References: <0977f5062aba3031df4132b6571b5c88ff4866c8.1241639516.git.msmith@cbnco.com>	<84090287fafa5bca668308285fcfa06650df22cd.1241639516.git.msmith@cbnco.com>
+	<20090506223838.GA15339@denix.org>
+In-Reply-To: <20090506223838.GA15339@denix.org>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH 2/2] grub: allow menu.lst to be overridden	using GRUB_CONFIG_PACKAGE.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,37 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 12:43:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 May 2009 18:31:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 07, 2009 at 02:10:06PM +0200, sledge wrote:
-> Hello all,
-> 
-> I have bitbaked opie-image for qemuarm. Resized the resulted
-> opie-image.rootfs.ext2 partition, launched qemu with these parameters:
-> http://linuxtogo.org/gowiki/Angstrom/qemu-system-arm
-> 
-> I have also tried extracting modules*.tgz into that ext2 rootfs. Same result:
-> 
-> It has configured and launched the init.d processes, stopping any
-> output after the bluetooth. Apparently opie did not start, nor any
-> other rc processes; hence no graphical interface nor command-line
-> login prompt
-> 
-> Where should I start with? I tried to mv etc/init.d/bluetooth
-> etc/init.d, but it still starts (thought it was a blocker). I suppose
-> it is because the modules are being loaded.
-> 
-> 
-> 
-> Thanks!
-> 
-> --
-> sledge
+Denys Dmytriyenko wrote:
+> On Wed, May 06, 2009 at 03:55:57PM -0400, Michael Smith wrote:
+>> If GRUB_CONFIG_PACKAGE is set, don't ship menu.lst with grub.
 
-Try start qemu with serielle card support and get you login shell via this.
+> It was discussed many times here - no USE flags in OE.
 
-Bye Henning
+> One way to solve it would be to always have menu.lst as a separate package and 
+> then replace it with your own from the overlay.
+
+Fair enough -- in this particular case it's quite easy to avoid the USE 
+flag by adding a separate package for the config file. One less 
+combinatorial to explode.
+
+Since there are few users of the grub package, and menu.lst is a recent 
+addition to the package anyway, I don't think anyone will mind.
+
+Mike
 
 
