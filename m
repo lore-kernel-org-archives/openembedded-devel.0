@@ -1,33 +1,17 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.81.242.146] (helo=amethyst.openembedded.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M1yve-0005Tj-D0
-	for openembedded-devel@openembedded.org; Thu, 07 May 2009 10:26:07 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1M1ypm-0004R9-9C
-	for openembedded-devel@openembedded.org; Thu, 07 May 2009 08:20:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 07 May 2009 08:20:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 07 May 2009 08:20:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
+	(envelope-from <koen@amethyst.openembedded.net>) id 1M1zJr-000672-W0
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 07 May 2009 10:51:08 +0200
+Received: by amethyst.openembedded.net (Postfix, from userid 1002)
+	id E53E41880DC; Thu,  7 May 2009 10:49:57 +0200 (CEST)
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 07 May 2009 10:11:07 +0200
-Message-ID: <gtu52i$coc$2@ger.gmane.org>
-References: <1240929390-16041-1-git-send-email-k.kooi@student.utwente.nl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b4pre) Gecko/20090421 Shredder/3.0b3pre
-In-Reply-To: <1240929390-16041-1-git-send-email-k.kooi@student.utwente.nl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH] recipes/unifdef/files/unifdef.c : more modern glibc expose getline from
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 May 2009 10:49:57 +0200
+Message-Id: <1241686197-14065-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.5.6.5
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] zaurusd: point tskeys to the real ts device instead hardcoding it to event1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,53 +25,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 08:26:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 May 2009 08:51:12 -0000
 
-ping
+From: Koen Kooi <koen@openembedded.org>
 
-On 28-04-09 16:36, Koen Kooi wrote:
-> From: Graeme Gregory<dp@xora.org.uk>
->
->
-> Signed-off-by: Koen Kooi<koen@openembedded.org>
-> ---
->   recipes/unifdef/files/unifdef.c |    6 +++---
->   1 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes/unifdef/files/unifdef.c b/recipes/unifdef/files/unifdef.c
-> index 552025e..977e682 100644
-> --- a/recipes/unifdef/files/unifdef.c
-> +++ b/recipes/unifdef/files/unifdef.c
-> @@ -206,7 +206,7 @@ static void             done(void);
->   static void             error(const char *);
->   static int              findsym(const char *);
->   static void             flushline(bool);
-> -static Linetype         getline(void);
-> +static Linetype         parseline(void);
->   static Linetype         ifeval(const char **);
->   static void             ignoreoff(void);
->   static void             ignoreon(void);
-> @@ -512,7 +512,7 @@ process(void)
->
->   	for (;;) {
->   		linenum++;
-> -		lineval = getline();
-> +		lineval = parseline();
->   		trans_table[ifstate[depth]][lineval]();
->   		debug("process %s ->  %s depth %d",
->   		    linetype_name[lineval],
-> @@ -526,7 +526,7 @@ process(void)
->    * help from skipcomment().
->    */
->   static Linetype
-> -getline(void)
-> +parseline(void)
->   {
->   	const char *cp;
->   	int cursym;
 
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ .../use-ts-symlink-instead-of-hardcoding.diff      |   88 ++++++++++++++++++++
+ recipes/zaurusd/zaurusd_svn.bb                     |    5 +-
+ 2 files changed, 91 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff
+
+diff --git a/recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff b/recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff
+new file mode 100644
+index 0000000..b49a21f
+--- /dev/null
++++ b/recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff
+@@ -0,0 +1,88 @@
++--- /tmp/mach-akita-vars.in	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-akita-vars.in	2009-04-28 16:40:06.000000000 +0200
++@@ -5,6 +5,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
++-TSKEYS_DEVICE=/dev/input/event1
+++TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
++\ No newline at end of file
++--- /tmp/mach-borzoi-vars.in	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-borzoi-vars.in	2009-04-28 16:40:06.000000000 +0200
++@@ -5,6 +5,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
++-TSKEYS_DEVICE=/dev/input/event1
+++TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
++\ No newline at end of file
++--- /tmp/mach-corgi-vars.in	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-corgi-vars.in	2009-04-28 16:40:06.000000000 +0200
++@@ -5,6 +5,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
++-TSKEYS_DEVICE=/dev/input/event1
+++TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
++\ No newline at end of file
++--- /tmp/mach-husky-vars.in	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-husky-vars.in	2009-04-28 16:40:06.000000000 +0200
++@@ -5,6 +5,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
++-TSKEYS_DEVICE=/dev/input/event1
+++TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
++\ No newline at end of file
++--- /tmp/mach-poodle-vars	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-poodle-vars	2009-04-28 16:40:06.000000000 +0200
++@@ -4,6 +4,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
++-#TSKEYS_DEVICE=/dev/input/event1
+++#TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/poodle-default.state
++\ No newline at end of file
++--- /tmp/mach-shepherd-vars.in	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-shepherd-vars.in	2009-04-28 16:40:06.000000000 +0200
++@@ -5,6 +5,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
++-TSKEYS_DEVICE=/dev/input/event1
+++TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
++\ No newline at end of file
++--- /tmp/mach-spitz-vars.in	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-spitz-vars.in	2009-04-28 16:40:06.000000000 +0200
++@@ -5,6 +5,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
++-TSKEYS_DEVICE=/dev/input/event1
+++TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
++\ No newline at end of file
++--- /tmp/mach-tosa-vars.in	2009-04-28 16:39:58.000000000 +0200
+++++ zaurusd/config/mach-config/mach-tosa-vars.in	2009-04-28 16:40:06.000000000 +0200
++@@ -4,6 +4,6 @@
++ SWITCH_EVENT_DEVICE=/dev/input/event0
++ 
++ #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
++-#TSKEYS_DEVICE=/dev/input/event1
+++#TSKEYS_DEVICE=/dev/input/touchscreen0
++ 
++ ALSA_MIXER_INIT=@appconfdir@/alsa/6000x-default.state
++\ No newline at end of file
+diff --git a/recipes/zaurusd/zaurusd_svn.bb b/recipes/zaurusd/zaurusd_svn.bb
+index 2ad405e..b2b1622 100644
+--- a/recipes/zaurusd/zaurusd_svn.bb
++++ b/recipes/zaurusd/zaurusd_svn.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL"
+ DEPENDS = "tslib"
+ RDEPENDS = "procps"
+ PV = "0.0+svn${SRCDATE}"
+-PR = "r18"
++PR = "r19"
+ 
+ SRC_URI = "svn://svn.o-hand.com/repos/misc/trunk;module=zaurusd;proto=http \
+            file://zaurus-hinge.in \
+@@ -18,7 +18,8 @@ SRC_URI = "svn://svn.o-hand.com/repos/misc/trunk;module=zaurusd;proto=http \
+ 	   file://zaurus-hinge.bl-on \
+ 	   file://zaurus-hinge.bl-off \
+ 	   file://01-check-toggle-landscape \
+-	   file://01-check-toggle-portait"
++	   file://01-check-toggle-portait \
++       file://use-ts-symlink-instead-of-hardcoding.diff;patch=1 "
+ 
+ 
+ S = "${WORKDIR}/${PN}"
+-- 
+1.5.6.5
 
 
 
