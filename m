@@ -1,40 +1,21 @@
-Received: from [74.125.44.153] (helo=yx-out-1718.google.com)
+Received: from [87.194.255.144] (helo=honeysuckle.london.02.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1M29wl-0003M0-Vn
+	(envelope-from <bluelightning@bluelightning.org>) id 1M2BU2-0008Mj-6O
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 May 2009 22:12:00 +0200
-Received: by yx-out-1718.google.com with SMTP id 36so601381yxh.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 May 2009 13:05:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=fdh3zWgS/DXcW4QMaEKT2lNCHThzoHV+MN5yKJx9SPo=;
-	b=uTVNr+J80QXo5BqR4Ec2+Xcyc3h6BbkNvc5JFErBAVRQzPDzPPFwg97zBpY86zStaa
-	S2h8fRBv7yebgvfHbnQq14x2Pa1uEFMSjuTAXhqjRoKDlrjEY7Qvw6vPqYGBF9vGRxVW
-	KVqsVnbXfwfzhcfzvUhLr1pQlNLSfNI62fJKo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=V7ueoMicd5ze70muQ9T+rhkc80nvN3wEUbMpxatJC6XRxSfmV4LqrvgihZSBBWDJxw
-	It/5hSv8e+ZX4wLqqcvdeF+B6/7TUAw6ZAg2D8wXFeqN7f77NuXuqQA8kslSA7c8VKNC
-	04K3GEPVY6lWyGxjTrpoqDwXALf2nfw6X9gTs=
-MIME-Version: 1.0
-Received: by 10.90.25.11 with SMTP id 11mr520502agy.60.1241726751956; Thu, 07 
-	May 2009 13:05:51 -0700 (PDT)
-In-Reply-To: <4A033D54.2000709@cbnco.com>
-References: <4A03277B.1090402@cbnco.com>
-	<1241720835-17998-1-git-send-email-msmith@cbnco.com>
-	<1241720835-17998-2-git-send-email-msmith@cbnco.com>
-	<c384c5ea0905071218v3978ea4cpe791a5283f05c2df@mail.gmail.com>
-	<be7a9f3d0905071226m78b94d44u50a4e63c927200f5@mail.gmail.com>
-	<4A033D54.2000709@cbnco.com>
-Date: Thu, 7 May 2009 22:05:51 +0200
-Message-ID: <c384c5ea0905071305s1b180deal8c5fd09b5d646308@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Thu, 07 May 2009 23:50:26 +0200
+Received: from shodan.localnet (93.96.131.185) by honeysuckle.london.02.net
+	(8.5.016.1)
+	id 49D39F4E01B9B809 for openembedded-devel@lists.openembedded.org;
+	Thu, 7 May 2009 22:44:15 +0100
+From: Paul Eggleton <bluelightning@bluelightning.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/3] grub: use ${libdir}, not /usr/lib
+Date: Thu, 7 May 2009 22:44:14 +0100
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; i686; ; )
+References: <1241686197-14065-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1241686197-14065-1-git-send-email-k.kooi@student.utwente.nl>
+MIME-Version: 1.0
+Message-Id: <200905072244.14692.bluelightning@bluelightning.org>
+Subject: Re: [STABLE][PATCH] zaurusd: point tskeys to the real ts device instead hardcoding it to event1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,46 +29,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 20:12:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 07 May 2009 21:50:29 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello all,
-
-On Thu, May 7, 2009 at 9:58 PM, Michael Smith <msmith@cbnco.com> wrote:
-> Otavio Salvador wrote:
->>
->> On Thu, May 7, 2009 at 4:18 PM, Leon Woestenberg
->> <leon.woestenberg@gmail.com> wrote:
->>>
->>> Why do we install menu.cfg in ${libdir} anyway?
->>>
->>> All desktop distro's I have seen have the menu.lst in /boot/grub/ on the
->>> rootfs.
->>
->> I second this change; it makes easier for people to find it.
+On Thu, 07 May 2009, Koen Kooi wrote:
+> From: Koen Kooi <koen@openembedded.org>
 >
-> All of the stage1/stage1_5/stage2 files are installed by grub into
-> /usr/lib/grub/i386-oe/. I believe they're then copied to /boot during the
-> grub install process.
-
-I think we can agree that we do not install GRUB by and on the target itself.
-
-Proposal: add a new package "grub-install" that contains
-"grub-install" and the {libdir} stuff.
-
-The usual embedded target would void this package.
-
-> I think what the original 0.97 packager was going for
-> was to avoid having duplicate copies of the files, so /boot/grub became a
-> symlink to /usr/lib/grub/i386-oe, and then menu.lst needed to go there, too.
 >
-We can have both with the proposal. Thanks for the explanation, btw.
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
 
-This might be desirable for more-PC like targets (think big iron Atom).
+Acked-by; Paul Eggleton <bluelightning@bluelightning.org>
 
-Regards.
--- 
-Leon
+
+
+> ---
+>  .../use-ts-symlink-instead-of-hardcoding.diff      |   88
+> ++++++++++++++++++++ recipes/zaurusd/zaurusd_svn.bb                     |  
+>  5 +-
+>  2 files changed, 91 insertions(+), 2 deletions(-)
+>  create mode 100644
+> recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff
+>
+> diff --git
+> a/recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff
+> b/recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff new file
+> mode 100644
+> index 0000000..b49a21f
+> --- /dev/null
+> +++ b/recipes/zaurusd/files/use-ts-symlink-instead-of-hardcoding.diff
+> @@ -0,0 +1,88 @@
+> +--- /tmp/mach-akita-vars.in	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-akita-vars.in	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -5,6 +5,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
+> +-TSKEYS_DEVICE=/dev/input/event1
+> ++TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
+> +\ No newline at end of file
+> +--- /tmp/mach-borzoi-vars.in	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-borzoi-vars.in	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -5,6 +5,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
+> +-TSKEYS_DEVICE=/dev/input/event1
+> ++TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
+> +\ No newline at end of file
+> +--- /tmp/mach-corgi-vars.in	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-corgi-vars.in	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -5,6 +5,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
+> +-TSKEYS_DEVICE=/dev/input/event1
+> ++TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
+> +\ No newline at end of file
+> +--- /tmp/mach-husky-vars.in	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-husky-vars.in	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -5,6 +5,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
+> +-TSKEYS_DEVICE=/dev/input/event1
+> ++TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
+> +\ No newline at end of file
+> +--- /tmp/mach-poodle-vars	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-poodle-vars	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -4,6 +4,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
+> +-#TSKEYS_DEVICE=/dev/input/event1
+> ++#TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/poodle-default.state
+> +\ No newline at end of file
+> +--- /tmp/mach-shepherd-vars.in	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-shepherd-vars.in	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -5,6 +5,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
+> +-TSKEYS_DEVICE=/dev/input/event1
+> ++TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
+> +\ No newline at end of file
+> +--- /tmp/mach-spitz-vars.in	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-spitz-vars.in	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -5,6 +5,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
+> +-TSKEYS_DEVICE=/dev/input/event1
+> ++TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
+> +\ No newline at end of file
+> +--- /tmp/mach-tosa-vars.in	2009-04-28 16:39:58.000000000 +0200
+> ++++ zaurusd/config/mach-config/mach-tosa-vars.in	2009-04-28
+> 16:40:06.000000000 +0200 +@@ -4,6 +4,6 @@
+> + SWITCH_EVENT_DEVICE=/dev/input/event0
+> +
+> + #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
+> +-#TSKEYS_DEVICE=/dev/input/event1
+> ++#TSKEYS_DEVICE=/dev/input/touchscreen0
+> +
+> + ALSA_MIXER_INIT=@appconfdir@/alsa/6000x-default.state
+> +\ No newline at end of file
+> diff --git a/recipes/zaurusd/zaurusd_svn.bb
+> b/recipes/zaurusd/zaurusd_svn.bb index 2ad405e..b2b1622 100644
+> --- a/recipes/zaurusd/zaurusd_svn.bb
+> +++ b/recipes/zaurusd/zaurusd_svn.bb
+> @@ -4,7 +4,7 @@ LICENSE = "GPL"
+>  DEPENDS = "tslib"
+>  RDEPENDS = "procps"
+>  PV = "0.0+svn${SRCDATE}"
+> -PR = "r18"
+> +PR = "r19"
+>
+>  SRC_URI = "svn://svn.o-hand.com/repos/misc/trunk;module=zaurusd;proto=http
+> \ file://zaurus-hinge.in \
+> @@ -18,7 +18,8 @@ SRC_URI =
+> "svn://svn.o-hand.com/repos/misc/trunk;module=zaurusd;proto=http \
+> file://zaurus-hinge.bl-on \
+>  	   file://zaurus-hinge.bl-off \
+>  	   file://01-check-toggle-landscape \
+> -	   file://01-check-toggle-portait"
+> +	   file://01-check-toggle-portait \
+> +       file://use-ts-symlink-instead-of-hardcoding.diff;patch=1 "
+>
+>
+>  S = "${WORKDIR}/${PN}"
+
 
 
