@@ -1,37 +1,35 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1M28PO-0002ZI-Sn
+	(envelope-from <michael@sles10-64.ott.cti.com>) id 1M28PR-0002ZN-07
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 May 2009 20:33:28 +0200
+	Thu, 07 May 2009 20:33:30 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 880AF4A7214;
-	Thu,  7 May 2009 14:27:17 -0400 (EDT)
+	by smtp.cbnco.com (Postfix) with ESMTP id 81CE04A7759;
+	Thu,  7 May 2009 14:27:21 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 13901-03; Thu,  7 May 2009 14:27:17 -0400 (EDT)
+	with ESMTP id 13901-04; Thu,  7 May 2009 14:27:21 -0400 (EDT)
 Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 651CE4A7B21; Thu,  7 May 2009 14:27:17 -0400 (EDT)
+	id 3BA7449B4AA; Thu,  7 May 2009 14:27:21 -0400 (EDT)
 X-Spam-Score: 
 X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
+X-Spam-Status: No, score=-3.7 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00,
+	UPPERCASE_25_50 autolearn=ham version=3.1.8
 Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id D5BAD49B4AA;
+	by smtp.cbnco.com (Postfix) with ESMTP id C48EF48CCC9;
 	Thu,  7 May 2009 14:27:15 -0400 (EDT)
 Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id C687441733; Thu,  7 May 2009 14:27:15 -0400 (EDT)
+	id B217141715; Thu,  7 May 2009 14:27:15 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 May 2009 14:27:15 -0400
-Message-Id: <1241720835-17998-3-git-send-email-msmith@cbnco.com>
+Date: Thu,  7 May 2009 14:27:13 -0400
+Message-Id: <1241720835-17998-1-git-send-email-msmith@cbnco.com>
 X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <1241720835-17998-2-git-send-email-msmith@cbnco.com>
+In-Reply-To: <4A03277B.1090402@cbnco.com>
 References: <4A03277B.1090402@cbnco.com>
-	<1241720835-17998-1-git-send-email-msmith@cbnco.com>
-	<1241720835-17998-2-git-send-email-msmith@cbnco.com>
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH 3/3] grub: split menu.lst into a separate package, grub-config.
+Subject: [PATCH 1/3] Remove unused grub-0.93.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,96 +43,252 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 18:33:32 -0000
+X-List-Received-Date: Thu, 07 May 2009 18:33:34 -0000
 
-This makes it easier for overlays to override the configuration.
+As far as I can tell, only the wrap board and gpe-phone-image are using
+grub, and they use the default version, 0.97.
 
 Signed-off-by: Michael Smith <msmith@cbnco.com>
 ---
- recipes/grub/files/menu.lst     |    6 ++++++
- recipes/grub/grub-0.97/menu.lst |    6 ------
- recipes/grub/grub-config_1.0.bb |   13 +++++++++++++
- recipes/grub/grub_0.97.bb       |   12 +++++-------
- 4 files changed, 24 insertions(+), 13 deletions(-)
- create mode 100644 recipes/grub/files/menu.lst
- delete mode 100644 recipes/grub/grub-0.97/menu.lst
- create mode 100644 recipes/grub/grub-config_1.0.bb
+ recipes/grub/grub-0.93/autohell.patch |  166 ---------------------------------
+ recipes/grub/grub-0.93/memcpy.patch   |   13 ---
+ recipes/grub/grub-0.93/reiserfs.patch |   11 --
+ recipes/grub/grub_0.93.bb             |   15 ---
+ 4 files changed, 0 insertions(+), 205 deletions(-)
+ delete mode 100644 recipes/grub/grub-0.93/autohell.patch
+ delete mode 100644 recipes/grub/grub-0.93/memcpy.patch
+ delete mode 100644 recipes/grub/grub-0.93/reiserfs.patch
+ delete mode 100644 recipes/grub/grub_0.93.bb
 
-diff --git a/recipes/grub/files/menu.lst b/recipes/grub/files/menu.lst
-new file mode 100644
-index 0000000..510e8f8
---- /dev/null
-+++ b/recipes/grub/files/menu.lst
-@@ -0,0 +1,6 @@
-+# menu.lst
-+default 0
-+timeout 5
-+title   OpenEmbedded Linux (hda1)
-+root    (hd0,0)
-+kernel  /boot/bzImage root=/dev/hda1 ro 
-diff --git a/recipes/grub/grub-0.97/menu.lst b/recipes/grub/grub-0.97/menu.lst
+diff --git a/recipes/grub/grub-0.93/autohell.patch b/recipes/grub/grub-0.93/autohell.patch
 deleted file mode 100644
-index 510e8f8..0000000
---- a/recipes/grub/grub-0.97/menu.lst
+index ca1f2d1..0000000
+--- a/recipes/grub/grub-0.93/autohell.patch
 +++ /dev/null
-@@ -1,6 +0,0 @@
--# menu.lst
--default 0
--timeout 5
--title   OpenEmbedded Linux (hda1)
--root    (hd0,0)
--kernel  /boot/bzImage root=/dev/hda1 ro 
-diff --git a/recipes/grub/grub-config_1.0.bb b/recipes/grub/grub-config_1.0.bb
-new file mode 100644
-index 0000000..f6e82a7
---- /dev/null
-+++ b/recipes/grub/grub-config_1.0.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "Configuration file for grub"
-+SECTION = "bootloaders"
-+PRIORITY = "optional"
-+PR = "r0"
-+
-+SRC_URI = "file://menu.lst"
-+
-+do_install() {
-+	install -D -m 0644 ${WORKDIR}/menu.lst \
-+		${D}${libdir}/grub/i386${TARGET_VENDOR}/menu.lst
-+}
-+
-+FILES_${PN} += "${libdir}"
-diff --git a/recipes/grub/grub_0.97.bb b/recipes/grub/grub_0.97.bb
-index e1162ef..8822b7e 100644
---- a/recipes/grub/grub_0.97.bb
-+++ b/recipes/grub/grub_0.97.bb
-@@ -3,11 +3,13 @@ HOMEPAGE = "http://www.gnu.org/software/grub"
- SECTION = "bootloaders"
- PRIORITY = "optional"
- RDEPENDS = "diffutils"
--PR = "r4"
-+PR = "r5"
-+
-+# menu.lst is shipped in a separate package that overlays can override.
-+RRECOMMENDS = "grub-config"
- 
- SRC_URI = "ftp://alpha.gnu.org/gnu/grub/grub-${PV}.tar.gz \
--           file://automake-1.10.patch;patch=1 \
--           file://menu.lst"
-+           file://automake-1.10.patch;patch=1"
- 
- inherit autotools
- 
-@@ -21,10 +23,6 @@ python __anonymous () {
- do_install_append() {
-         install -d ${D}/boot/
- 	ln -sf ..${libdir}/grub/i386${TARGET_VENDOR}/ ${D}/boot/grub
+@@ -1,166 +0,0 @@
+---- grub-0.93/configure.in~	2002-11-29 20:12:08.000000000 +0000
+-+++ grub-0.93/configure.in	2004-01-04 12:03:05.000000000 +0000
+-@@ -54,7 +54,7 @@
+- _AM_DEPENDENCIES(CC)
+- 
+- dnl Because recent automake complains about AS, set it here.
+--AS="$CC"
+-+AM_PROG_AS
+- AC_SUBST(AS)
+- 
+- AC_ARG_WITH(binutils,
+---- grub-0.93/stage1/Makefile.am~	2002-09-08 02:58:08.000000000 +0100
+-+++ grub-0.93/stage1/Makefile.am	2004-01-04 12:31:38.000000000 +0000
+-@@ -4,7 +4,7 @@
+- CLEANFILES = $(nodist_pkgdata_DATA)
+- 
+- # We can't use builtins or standard includes.
+--AM_ASFLAGS = $(STAGE1_CFLAGS) -fno-builtin -nostdinc
+-+AM_CCASFLAGS = $(STAGE1_CFLAGS) -fno-builtin -nostdinc $(DEFAULT_INCLUDES)
+- LDFLAGS = -nostdlib -Wl,-N,-Ttext,7C00
+- 
+- noinst_PROGRAMS = stage1.exec
+---- grub-0.93/stage2/Makefile.am~	2002-11-29 18:00:53.000000000 +0000
+-+++ grub-0.93/stage2/Makefile.am	2004-01-04 12:30:29.000000000 +0000
+-@@ -12,6 +12,7 @@
+- 
+- # For <stage1.h>.
+- INCLUDES = -I$(top_srcdir)/stage1
+-+AM_CCASFLAGS = $(DEFAULT_INCLUDES) $(INCLUDES)
+- 
+- # The library for /sbin/grub.
+- noinst_LIBRARIES = libgrub.a
+-@@ -88,7 +89,7 @@
+- 	fsys_vstafs.c fsys_xfs.c gunzip.c hercules.c md5.c serial.c \
+- 	smp-imps.c stage2.c terminfo.c tparm.c
+- pre_stage2_exec_CFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS)
+--pre_stage2_exec_ASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS)
+-+pre_stage2_exec_CCASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) $(AM_CCASFLAGS)
+- pre_stage2_exec_LDFLAGS = $(PRE_STAGE2_LINK)
+- 
+- if NETBOOT_SUPPORT
+-@@ -109,7 +110,7 @@
+- 	echo "#define STAGE2_SIZE $$6" > stage2_size.h
+- 
+- start_exec_SOURCES = start.S
+--start_exec_ASFLAGS = $(STAGE2_COMPILE)
+-+start_exec_CCASFLAGS = $(STAGE2_COMPILE) $(AM_CCASFLAGS)
+- start_exec_LDFLAGS = $(START_LINK)
+- 
+- # XXX: automake doesn't provide a way to specify dependencies for object
+-@@ -127,8 +128,8 @@
+- 	stage1_5.c fsys_ext2fs.c bios.c
+- e2fs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_EXT2FS=1 \
+- 	-DNO_BLOCK_FILES=1
+--e2fs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_EXT2FS=1 \
+--	-DNO_BLOCK_FILES=1
+-+e2fs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_EXT2FS=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- e2fs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For fat_stage1_5 target.
+-@@ -136,8 +137,8 @@
+- 	stage1_5.c fsys_fat.c bios.c
+- fat_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FAT=1 \
+- 	-DNO_BLOCK_FILES=1
+--fat_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FAT=1 \
+--	-DNO_BLOCK_FILES=1
+-+fat_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FAT=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- fat_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For ffs_stage1_5 target.
+-@@ -145,8 +146,8 @@
+- 	stage1_5.c fsys_ffs.c bios.c
+- ffs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FFS=1 \
+- 	-DNO_BLOCK_FILES=1
+--ffs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FFS=1 \
+--	-DNO_BLOCK_FILES=1
+-+ffs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_FFS=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- ffs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For minix_stage1_5 target.
+-@@ -154,8 +155,8 @@
+- 	stage1_5.c fsys_minix.c bios.c
+- minix_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_MINIX=1 \
+- 	-DNO_BLOCK_FILES=1
+--minix_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_MINIX=1 \
+--	-DNO_BLOCK_FILES=1
+-+minix_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_MINIX=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- minix_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For reiserfs_stage1_5 target.
+-@@ -163,8 +164,8 @@
+- 	disk_io.c stage1_5.c fsys_reiserfs.c bios.c
+- reiserfs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_REISERFS=1 \
+- 	-DNO_BLOCK_FILES=1
+--reiserfs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_REISERFS=1 \
+--	-DNO_BLOCK_FILES=1
+-+reiserfs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_REISERFS=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- reiserfs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For vstafs_stage1_5 target.
+-@@ -172,8 +173,8 @@
+- 	disk_io.c stage1_5.c fsys_vstafs.c bios.c
+- vstafs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_VSTAFS=1 \
+- 	-DNO_BLOCK_FILES=1
+--vstafs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_VSTAFS=1 \
+--	-DNO_BLOCK_FILES=1
+-+vstafs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_VSTAFS=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- vstafs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For jfs_stage1_5 target.
+-@@ -181,8 +182,8 @@
+- 	disk_io.c stage1_5.c fsys_jfs.c bios.c
+- jfs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_JFS=1 \
+- 	-DNO_BLOCK_FILES=1
+--jfs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_JFS=1 \
+--	-DNO_BLOCK_FILES=1
+-+jfs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_JFS=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- jfs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For xfs_stage1_5 target.
+-@@ -190,16 +191,16 @@
+- 	disk_io.c stage1_5.c fsys_xfs.c bios.c
+- xfs_stage1_5_exec_CFLAGS = $(STAGE1_5_COMPILE) -DFSYS_XFS=1 \
+- 	-DNO_BLOCK_FILES=1
+--xfs_stage1_5_exec_ASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_XFS=1 \
+--	-DNO_BLOCK_FILES=1
+-+xfs_stage1_5_exec_CCASFLAGS = $(STAGE1_5_COMPILE) -DFSYS_XFS=1 \
+-+	-DNO_BLOCK_FILES=1 $(AM_CCASFLAGS)
+- xfs_stage1_5_exec_LDFLAGS = $(STAGE1_5_LINK)
+- 
+- # For diskless target.
+- diskless_exec_SOURCES = $(pre_stage2_exec_SOURCES)
+- diskless_exec_CFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) \
+- 	-DSUPPORT_DISKLESS=1
+--diskless_exec_ASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) \
+--	-DSUPPORT_DISKLESS=1
+-+diskless_exec_CCASFLAGS = $(STAGE2_COMPILE) $(FSYS_CFLAGS) \
+-+	-DSUPPORT_DISKLESS=1 $(AM_CCASFLAGS)
+- diskless_exec_LDFLAGS = $(PRE_STAGE2_LINK)
+- diskless_exec_LDADD = ../netboot/libdrivers.a
+- 
+-@@ -210,7 +211,7 @@
+- 
+- # For nbloader target.
+- nbloader_exec_SOURCES = nbloader.S
+--nbloader_exec_ASFLAGS = $(STAGE2_COMPILE)
+-+nbloader_exec_CCASFLAGS = $(STAGE2_COMPILE) $(AM_CCASFLAGS)
+- nbloader_exec_LDFLAGS = $(NBLOADER_LINK)
+- 
+- # XXX: See the comment for start_exec-start.o.
+-@@ -223,7 +224,7 @@
+- 
+- # For pxeloader target.
+- pxeloader_exec_SOURCES = pxeloader.S
+--pxeloader_exec_ASFLAGS = $(STAGE2_COMPILE)
+-+pxeloader_exec_CCASFLAGS = $(STAGE2_COMPILE) $(AM_CCASFLAGS)
+- pxeloader_exec_LDFLAGS = $(PXELOADER_LINK)
+- 
+- # XXX: See the comment for start_exec-start.o.
+diff --git a/recipes/grub/grub-0.93/memcpy.patch b/recipes/grub/grub-0.93/memcpy.patch
+deleted file mode 100644
+index dd5da33..0000000
+--- a/recipes/grub/grub-0.93/memcpy.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+---- grub-0.93/stage2/asm.S~	2002-12-02 23:18:56.000000000 +0000
+-+++ grub-0.93/stage2/asm.S	2004-01-04 12:50:11.000000000 +0000
+-@@ -62,6 +62,10 @@
+- start:
+- _start:
+- #endif /* ! STAGE1_5 */
+-+
+-+#undef memcpy
+-+ENTRY(memcpy)
+-+	jmp EXT_C(grub_memmove)
+- 	
+- ENTRY(main)
+- 	/*
+diff --git a/recipes/grub/grub-0.93/reiserfs.patch b/recipes/grub/grub-0.93/reiserfs.patch
+deleted file mode 100644
+index 5b4fb5b..0000000
+--- a/recipes/grub/grub-0.93/reiserfs.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- grub-0.93/stage2/fsys_reiserfs.c~	2002-11-29 17:46:01.000000000 +0000
+-+++ grub-0.93/stage2/fsys_reiserfs.c	2004-01-04 12:16:34.000000000 +0000
+-@@ -112,7 +112,7 @@
+-   /* offset in the log of where to start replay after a crash */
+-   __u32 j_first_unflushed_offset;
+-   /* mount id to detect very old transactions */
+--  __u32 long j_mount_id;
+-+  __u32 j_mount_id;
+- };
+- 
+- /* magic string to find desc blocks in the journal */
+diff --git a/recipes/grub/grub_0.93.bb b/recipes/grub/grub_0.93.bb
+deleted file mode 100644
+index 9fc0084..0000000
+--- a/recipes/grub/grub_0.93.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-DESCRIPTION = "GRUB is the GRand Unified Bootloader"
+-HOMEPAGE = "http://www.gnu.org/software/grub"
+-SECTION = "bootloaders"
+-PRIORITY = "optional"
 -
--	# TODO: better use grub-set-default script here?
--	install -m 0644 ${WORKDIR}/menu.lst \
--		${D}${libdir}/grub/i386${TARGET_VENDOR}/
- }
- 
- FILES_${PN}-doc = "${datadir}"
+-SRC_URI = "ftp://alpha.gnu.org/gnu/grub/grub-${PV}.tar.gz; \
+-	   file://autohell.patch;patch=1 \
+-	   file://memcpy.patch;patch=1 \
+-	   file://reiserfs.patch;patch=1"
+-
+-inherit autotools
+-
+-COMPATIBLE_HOST = 'i.86.*-linux'
+-
+-FILES_${PN}-doc = "${datadir}"
 -- 
 1.5.6.5
 
