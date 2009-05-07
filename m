@@ -1,31 +1,31 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1M2C2R-0006Ex-0n
+	(envelope-from <msmith@cbnco.com>) id 1M2C7A-0006LY-Nq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 May 2009 00:26:01 +0200
+	Fri, 08 May 2009 00:30:53 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 7F6B84A2E92
+	by smtp.cbnco.com (Postfix) with ESMTP id 408854A335A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 May 2009 18:19:50 -0400 (EDT)
+	Thu,  7 May 2009 18:24:44 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 12799-10 for <openembedded-devel@lists.openembedded.org>; 
-	Thu,  7 May 2009 18:19:50 -0400 (EDT)
+	with ESMTP id 13307-08 for <openembedded-devel@lists.openembedded.org>; 
+	Thu,  7 May 2009 18:24:44 -0400 (EDT)
 Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 501F847E698
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 1B4D3450CE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 May 2009 18:19:50 -0400 (EDT)
-Message-ID: <4A035E86.6020105@cbnco.com>
-Date: Thu, 07 May 2009 18:19:50 -0400
+	Thu,  7 May 2009 18:24:44 -0400 (EDT)
+Message-ID: <4A035FAB.4040405@cbnco.com>
+Date: Thu, 07 May 2009 18:24:43 -0400
 From: Michael Smith <msmith@cbnco.com>
 User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4A03277B.1090402@cbnco.com>	<1241720835-17998-1-git-send-email-msmith@cbnco.com>	<1241720835-17998-2-git-send-email-msmith@cbnco.com>	<1241720835-17998-3-git-send-email-msmith@cbnco.com>
-	<b6ebd0a50905071202l6d595de3v66d2ac043a84a2af@mail.gmail.com>
-In-Reply-To: <b6ebd0a50905071202l6d595de3v66d2ac043a84a2af@mail.gmail.com>
+References: <4A03277B.1090402@cbnco.com>	<1241720835-17998-1-git-send-email-msmith@cbnco.com>	<1241720835-17998-2-git-send-email-msmith@cbnco.com>	<c384c5ea0905071218v3978ea4cpe791a5283f05c2df@mail.gmail.com>	<be7a9f3d0905071226m78b94d44u50a4e63c927200f5@mail.gmail.com>	<4A033D54.2000709@cbnco.com>
+	<c384c5ea0905071305s1b180deal8c5fd09b5d646308@mail.gmail.com>
+In-Reply-To: <c384c5ea0905071305s1b180deal8c5fd09b5d646308@mail.gmail.com>
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH 3/3] grub: split menu.lst into a separate package, grub-config.
+Subject: Re: [PATCH 2/3] grub: use ${libdir}, not /usr/lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,27 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 22:26:07 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 07 May 2009 22:30:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Chris Larson wrote:
-> I'm not sure if you realize, but you can let your overlay override
-> file:// files by manipulating FILESPATH.  You don't need to split up
-> all the recipes.
+Leon Woestenberg wrote:
 
-Hi Chris,
+> Proposal: add a new package "grub-install" that contains
+> "grub-install" and the {libdir} stuff.
+> 
+> The usual embedded target would void this package.
 
-That's awesome. I didn't know that. I've added this to my local.conf:
+Sounds good to me. I'll send a patch later.
 
-FILESPATHBASE =. "${@ \
-     ':'.join([os.path.join(recipedir, \
-                         os.path.basename(os.path.dirname( \
-                                             d.getVar('FILE', 1)))) \ 
+Otavio Salvador wrote:
+ > Another thing, since we're revamping GRUB packaging, why not move to
+ > grub2? It also has the benefit of providing multi-arch support and
+ > being active.
 
-	for recipedir in d.getVar('COLLECTIONS', 1).split()])}:"
+Hi Otavio,
 
-Problem solved. I have no need to split a separate grub-config package.
+I'd prefer not to work with grub2 for now. From the website, it looks 
+like it might still be a bit alpha. Grub 0.9x is also alpha, but at 
+least I've already learned some of its secrets. :)
 
 Mike
 
