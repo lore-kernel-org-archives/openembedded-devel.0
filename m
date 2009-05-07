@@ -1,24 +1,25 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1M1wCt-00011y-RN
+	(envelope-from <philb@gnu.org>) id 1M1yjc-0008F9-E5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 May 2009 07:31:43 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1M1w6z-0001AP-Aq
+	Thu, 07 May 2009 10:13:42 +0200
+Received: from 79-79-173-112.dynamic.dsl.as9105.com ([79.79.173.112]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M1yIF-0007M0-TE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 May 2009 09:25:37 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Thu, 07 May 2009 08:45:24 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 7 May 2009 09:25:32 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <loom.20090506T211326-740@post.gmane.org>
-In-Reply-To: <loom.20090506T211326-740@post.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200905070925.32935.khimov@altell.ru>
-Subject: Re: Development and Open Embedded
+In-Reply-To: <20090506223838.GA15339@denix.org>
+References: <0977f5062aba3031df4132b6571b5c88ff4866c8.1241639516.git.msmith@cbnco.com>
+	<84090287fafa5bca668308285fcfa06650df22cd.1241639516.git.msmith@cbnco.com>
+	<20090506223838.GA15339@denix.org>
+Date: Thu, 07 May 2009 07:45:21 +0100
+Message-Id: <1241678721.23982.71.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH 2/2] grub: allow menu.lst to be overridden	using	GRUB_CONFIG_PACKAGE.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,56 +33,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 05:31:44 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 07 May 2009 08:13:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thursday 07 May 2009 01:33:45 Michael Sundius wrote:
-> I'm wondering if anyone has done such a thing as creating a
-> recipe that forgoes the "fetch" task and point the ${S} to
-> a local devel tree.. then adds an extra onto the make command
-> to place the object in another directory (maybe ${O})...
+On Wed, 2009-05-06 at 18:38 -0400, Denys Dmytriyenko wrote:
+> On Wed, May 06, 2009 at 03:55:57PM -0400, Michael Smith wrote:
+> > If GRUB_CONFIG_PACKAGE is set, don't ship menu.lst with grub. Instead,
+> > RRECOMMEND the config package. This allows overlays to override menu.lst
+> > in a separate package, rather than copying the whole grub package into
+> > the overlay.
+> 
+> It was discussed many times here - no USE flags in OE. You'll end up with 2 
+> grub packages of the same name but with different contents - with menu.lst 
+> and without.
 
-One of our engineers (Alexey Zaytsev <zaytsev@altell.ru>) have done this for 
-kernel:
+Although you're right that it comes up here frequently, I think this "no
+USE flags" dogma is somewhat misguided.  It seems, frankly, absurd to
+require people to effectively fork a recipe whenever they want to make
+some or other configuration change.  Firstly, this is just tiresome to
+do; secondly, it leads to source tree clutter and corresponding
+maintenance headaches because you end up with large numbers of
+possibly-defunct recipes lying around; and thirdly it leads to a worse
+end-user experience because suddenly their binary packages end up with
+crazy names that encode some aspect of the distro configuration. 
 
-==================================================================
-python do_fetch() {
-        linux_prefetch = bb.data.getVar('LINUX_PREFETCH', d)
+Also, it simply isn't reasonable to expect that you can encode
+everything about a binary package into its filename: there are too many
+unknown inputs for this to be feasible.  If you want to know whether two
+packages are the same then you should compare the md5sums, and if it's
+vital (for whatever reason) for you to have an unambiguous, unique
+fingerprint for each binary package then you should probably consider
+making the md5sum be part of the output filename.
 
-        if not linux_prefetch:
-                bb.build.exec_func('base_do_fetch', d)
-}
+I do understand the desire to have package builds be repeatable and
+deterministic, and that's clearly a reasonable thing to want.  But USE
+flags at the recipe level don't materially alter the situation here: if
+you use a given distro configuration, unmodified, then you're going to
+get the same values of the USE flags as everybody else who builds for
+that distro.  If you start randomly flipping USE flags in your local
+copy of the distro configuration or overriding them from local.conf then
+sure, you will lose, but if your source tree contains arbitrary local
+hacks then there already countless ways in which you could lose by, for
+example, selecting a different compiler, C library or global build
+options to everybody else.
 
-python do_unpack() {
-        import os
+And, indeed, we do already have a certain number of USE-type flags in OE
+today: the most obvious one that comes to mind is
+ENABLE_BINARY_LOCALE_GENERATION, which impacts the way that glibc is
+packaged and yet doesn't seem to be causing any significant grief at the
+moment.
 
-        linux_prefetch = bb.data.getVar('LINUX_PREFETCH', d)
+p.
 
-        if not linux_prefetch:
-                bb.build.exec_func('base_do_unpack', d)
-        else:
-                s = bb.data.expand(bb.data.getVar('S', d), d)
-                os.system("ln -sf %s %s" % (linux_prefetch, s))
-                config = "file://" + bb.data.getVar('LINUX_CONFIG', d)
-                oe_unpack_file(bb.fetch.localpath(config, d), d)
-}
-==================================================================
 
-You set LINUX_PREFETCH to point to git tree in local.conf and LINUX_CONFIG to 
-config file (LINUX_CONFIG is set in kernel .bb file). That's it. I think it's 
-very hacky and generally don't like the approach, but the thing works and he's 
-been working successfully with this hack building two kernels from the same 
-source base. Of course, there is also separate directory building there, but 
-that's done in classes (will try to extract a good patch).
-
-Also, just to give more hack directions, there is "git/git_repo/.git" in 
-sources directory that can be symlinked into "${S}/git/.git", that would allow 
-using "bitbake -c compile -f" to rebuild the package working with sources in 
-normal way. I think making bitbake patch to add this symlink would be a bit 
-better to start with, but then there should be some enforcement of local HEAD 
-usage without constant "rev=..." specifying in .bb.
 
 
