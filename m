@@ -1,27 +1,31 @@
-Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1M29jl-0002jm-Hd
+	(envelope-from <msmith@cbnco.com>) id 1M29pN-0002v4-2M
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 May 2009 21:58:34 +0200
-Received: from gandalf.denix.org ([71.251.49.215]) by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KJA00EETHUXCZBK@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	07 May 2009 14:52:14 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 199226B8004; Thu,
-	07 May 2009 15:52:09 -0400 (EDT)
-Date: Thu, 07 May 2009 15:52:09 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 07 May 2009 22:04:21 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 28AB742CA45
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 May 2009 15:58:13 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 28219-08 for <openembedded-devel@lists.openembedded.org>; 
+	Thu,  7 May 2009 15:58:12 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 65E112E5E13
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 May 2009 15:58:12 -0400 (EDT)
+Message-ID: <4A033D54.2000709@cbnco.com>
+Date: Thu, 07 May 2009 15:58:12 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090507195209.GC5394@denix.org>
-References: <4A03277B.1090402@cbnco.com>
-	<1241720835-17998-1-git-send-email-msmith@cbnco.com>
-	<1241720835-17998-2-git-send-email-msmith@cbnco.com>
-	<1241720835-17998-3-git-send-email-msmith@cbnco.com>
-MIME-version: 1.0
-In-reply-to: <1241720835-17998-3-git-send-email-msmith@cbnco.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH 3/3] grub: split menu.lst into a separate package, grub-config.
+References: <4A03277B.1090402@cbnco.com>	<1241720835-17998-1-git-send-email-msmith@cbnco.com>	<1241720835-17998-2-git-send-email-msmith@cbnco.com>	<c384c5ea0905071218v3978ea4cpe791a5283f05c2df@mail.gmail.com>
+	<be7a9f3d0905071226m78b94d44u50a4e63c927200f5@mail.gmail.com>
+In-Reply-To: <be7a9f3d0905071226m78b94d44u50a4e63c927200f5@mail.gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH 2/3] grub: use ${libdir}, not /usr/lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 19:58:35 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 07 May 2009 20:04:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 07, 2009 at 02:27:15PM -0400, Michael Smith wrote:
-> This makes it easier for overlays to override the configuration.
+Otavio Salvador wrote:
+> On Thu, May 7, 2009 at 4:18 PM, Leon Woestenberg
+> <leon.woestenberg@gmail.com> wrote:
+>> Why do we install menu.cfg in ${libdir} anyway?
+>>
+>> All desktop distro's I have seen have the menu.lst in /boot/grub/ on the rootfs.
 > 
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> ---
->  recipes/grub/files/menu.lst     |    6 ++++++
->  recipes/grub/grub-0.97/menu.lst |    6 ------
->  recipes/grub/grub-config_1.0.bb |   13 +++++++++++++
+> I second this change; it makes easier for people to find it.
 
-Oh, I meant a separate package, not recipe. But then again, grub directory is 
-not crowded yet... :)
+All of the stage1/stage1_5/stage2 files are installed by grub into 
+/usr/lib/grub/i386-oe/. I believe they're then copied to /boot during 
+the grub install process. I think what the original 0.97 packager was 
+going for was to avoid having duplicate copies of the files, so 
+/boot/grub became a symlink to /usr/lib/grub/i386-oe, and then menu.lst 
+needed to go there, too.
 
->  recipes/grub/grub_0.97.bb       |   12 +++++-------
->  4 files changed, 24 insertions(+), 13 deletions(-)
->  create mode 100644 recipes/grub/files/menu.lst
->  delete mode 100644 recipes/grub/grub-0.97/menu.lst
->  create mode 100644 recipes/grub/grub-config_1.0.bb
+I would prefer to install all the files to /boot/grub rather than 
+/usr/lib, since that's where they're used. I'll have to check if the 
+grub install script is OK with that.
 
--- 
-Denys
+Mike
 
 
