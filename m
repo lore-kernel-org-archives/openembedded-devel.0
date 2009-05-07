@@ -1,17 +1,17 @@
 Received: from [203.143.174.143] (helo=lemon.ken.nicta.com.au)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <peter.chubb@nicta.com.au>) id 1M1vxz-00064X-HQ
+	(envelope-from <peter.chubb@nicta.com.au>) id 1M1vyE-000699-SJ
 	for openembedded-devel@lists.linuxtogo.org;
-	Thu, 07 May 2009 07:16:20 +0200
+	Thu, 07 May 2009 07:16:35 +0200
 Received: from c220-237-0-198.randw1.nsw.optusnet.com.au
-	([220.237.0.198]:35485 helo=hippo.chubb.wattle.id.au)
+	([220.237.0.198]:35486 helo=hippo.chubb.wattle.id.au)
 	by lemon.ken.nicta.com.au with esmtpsa
 	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <peter.chubb@nicta.com.au>) id 1M1vs1-0002mL-ED
+	(envelope-from <peter.chubb@nicta.com.au>) id 1M1vsG-0002mQ-SI
 	for openembedded-devel@lists.linuxtogo.org;
-	Thu, 07 May 2009 15:10:12 +1000
-Date: Thu, 07 May 2009 15:10:08 +1000
-Message-ID: <87fxfh33db.wl%peter@chubb.wattle.id.au>
+	Thu, 07 May 2009 15:10:28 +1000
+Date: Thu, 07 May 2009 15:10:24 +1000
+Message-ID: <87eiv133cv.wl%peter@chubb.wattle.id.au>
 From: Peter Chubb <peter.chubb@nicta.com.au>
 To: openembedded-devel@lists.linuxtogo.org
 User-Agent: Wanderlust/2.14.0 (Africa) SEMI/1.14.6 (Maruoka) FLIM/1.14.9
@@ -32,7 +32,7 @@ X-Spam-Status: No, score=0.0 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_99
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:11 +0000)
 X-SA-Exim-Scanned: Yes (on lemon.ken.nicta.com.au)
-Subject: [PATCH] Allow use of Itanium as build machine
+Subject: [PATCH] fixing klibc/kexec-tools-static
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +46,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 05:16:21 -0000
+X-List-Received-Date: Thu, 07 May 2009 05:16:35 -0000
 Content-Type: text/plain; charset=US-ASCII
 
 
-Hi,
-	I have access to a cluster of Itaniums that I want to use as
-build machines for openembedded.  This patch enables Itanium as a
-build environment.
+Currently when you try to build linux-kexecboot or similar for an ARM
+platform, you get failures because of a missing header subdirectory.
+This is a known problem.  However, the missing directory full of
+kernel headers (e.g., mach/memory.h) that probably shouldn't be
+exposed anyway.
 
-diff --git a/classes/siteinfo.bbclass b/classes/siteinfo.bbclass
-index 82a1616..0221b12 100644
---- a/classes/siteinfo.bbclass
-+++ b/classes/siteinfo.bbclass
-@@ -49,6 +49,7 @@ def get_siteinfo_list(d):
-                "i486-mingw32":            "endian-little bit-32 common-mingw ix86-common",\
-                "i586-mingw32":            "endian-little bit-32 common-mingw ix86-common",\
-                "i686-mingw32":            "endian-little bit-32 common-mingw ix86-common",\
-+	       "ia64-linux":		  "endian-little bit-64 common-linux common-glibc",\
-                "mipsel-linux":            "endian-little bit-32 common-linux common-glibc",\
-                "mipsel-linux-uclibc":     "endian-little bit-32 common-linux common-uclibc",\
-                "mips-linux":              "endian-big bit-32 common-linux common-glibc",\
+This patch removes the #include of the file that's a problem.  The
+resulting image seems to work on Collie.
+
+--- /dev/null
++++ b/recipes/kexec/files/kexec-klibc-new-kernels.patch
+@@ -0,0 +1,26 @@
++Index: kexec-tools-1.101/kexec/arch/arm/kexec-zImage-arm.c
++===================================================================
++--- kexec-tools-1.101.orig/kexec/arch/arm/kexec-zImage-arm.c	2009-05-07 14:28:21.000000000 +1000
+++++ kexec-tools-1.101/kexec/arch/arm/kexec-zImage-arm.c	2009-05-07 14:28:27.000000000 +1000
++@@ -8,21 +8,20 @@
++ 
++ #define _GNU_SOURCE
++ #include <stdio.h>
++ #include <string.h>
++ #include <stdlib.h>
++ #include <errno.h>
++ #include <limits.h>
++ #include <stdint.h>
++ #include <getopt.h>
++ #include <arch/options.h>
++-#include <asm/page.h>
++ #include "../../kexec.h"
++ 
++ #define COMMAND_LINE_SIZE 1024
++ #define BOOT_PARAMS_SIZE 1536
++ 
++ struct tag_header {
++ 	uint32_t size;
++ 	uint32_t tag;
++ };
++ 
+
+
 
 --
 Dr Peter Chubb  http://www.gelato.unsw.edu.au  peterc AT gelato.unsw.edu.au
