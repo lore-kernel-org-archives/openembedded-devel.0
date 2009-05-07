@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M22gd-000223-5Y
-	for openembedded-devel@openembedded.org; Thu, 07 May 2009 14:26:51 +0200
-Received: (qmail 10872 invoked by uid 1003); 7 May 2009 12:20:43 -0000
+	(envelope-from <philip@balister.org>) id 1M22gy-00022j-BP
+	for openembedded-devel@openembedded.org; Thu, 07 May 2009 14:27:12 +0200
+Received: (qmail 20453 invoked by uid 1003); 7 May 2009 12:21:04 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 7 May 2009 12:20:42 -0000
-Message-ID: <4A02D219.50401@balister.org>
-Date: Thu, 07 May 2009 08:20:41 -0400
+	by mail.geekisp.com with SMTP; 7 May 2009 12:21:03 -0000
+Message-ID: <4A02D22F.9000703@balister.org>
+Date: Thu, 07 May 2009 08:21:03 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1240929390-16041-1-git-send-email-k.kooi@student.utwente.nl>
-	<gtu52i$coc$2@ger.gmane.org>
-In-Reply-To: <gtu52i$coc$2@ger.gmane.org>
-Subject: Re: [STABLE][PATCH] recipes/unifdef/files/unifdef.c : more modern glibc expose getline from
+References: <1240929391-17101-1-git-send-email-k.kooi@student.utwente.nl>
+	<gtugca$fk0$1@ger.gmane.org>
+In-Reply-To: <gtugca$fk0$1@ger.gmane.org>
+Subject: Re: [STABLE][PATCH] linux-libc-headers_2.6.23.bb : more modern glibc expose getline from
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2009 12:26:51 -0000
-X-Groupsio-MsgNum: 10067
+X-List-Received-Date: Thu, 07 May 2009 12:27:13 -0000
+X-Groupsio-MsgNum: 10068
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060509010106080509020602"
+	micalg=sha1; boundary="------------ms000300090107080204090008"
 
---------------ms060509010106080509020602
+--------------ms000300090107080204090008
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -54,41 +54,70 @@ Koen Kooi wrote:
 >>
 >> Signed-off-by: Koen Kooi<koen@openembedded.org>
 >> ---
->>   recipes/unifdef/files/unifdef.c |    6 +++---
->>   1 files changed, 3 insertions(+), 3 deletions(-)
+>>   recipes/linux-libc-headers/files/unifdef.patch     |   31 
+>> ++++++++++++++++++++
+>>   .../linux-libc-headers_2.6.23.bb                   |    5 ++-
+>>   2 files changed, 34 insertions(+), 2 deletions(-)
+>>   create mode 100644 recipes/linux-libc-headers/files/unifdef.patch
 >>
->> diff --git a/recipes/unifdef/files/unifdef.c 
->> b/recipes/unifdef/files/unifdef.c
->> index 552025e..977e682 100644
->> --- a/recipes/unifdef/files/unifdef.c
->> +++ b/recipes/unifdef/files/unifdef.c
->> @@ -206,7 +206,7 @@ static void             done(void);
->>   static void             error(const char *);
->>   static int              findsym(const char *);
->>   static void             flushline(bool);
->> -static Linetype         getline(void);
->> +static Linetype         parseline(void);
->>   static Linetype         ifeval(const char **);
->>   static void             ignoreoff(void);
->>   static void             ignoreon(void);
->> @@ -512,7 +512,7 @@ process(void)
+>> diff --git a/recipes/linux-libc-headers/files/unifdef.patch 
+>> b/recipes/linux-libc-headers/files/unifdef.patch
+>> new file mode 100644
+>> index 0000000..800c3c8
+>> --- /dev/null
+>> +++ b/recipes/linux-libc-headers/files/unifdef.patch
+>> @@ -0,0 +1,31 @@
+>> +Index: linux-2.6.23/scripts/unifdef.c
+>> +===================================================================
+>> +--- linux-2.6.23.orig/scripts/unifdef.c
+>> ++++ linux-2.6.23/scripts/unifdef.c
+>> +@@ -206,7 +206,7 @@ static void             done(void);
+>> + static void             error(const char *);
+>> + static int              findsym(const char *);
+>> + static void             flushline(bool);
+>> +-static Linetype         getline(void);
+>> ++static Linetype         parseline(void);
+>> + static Linetype         ifeval(const char **);
+>> + static void             ignoreoff(void);
+>> + static void             ignoreon(void);
+>> +@@ -512,7 +512,7 @@ process(void)
+>> +
+>> +     for (;;) {
+>> +         linenum++;
+>> +-        lineval = getline();
+>> ++        lineval = parseline();
+>> +         trans_table[ifstate[depth]][lineval]();
+>> +         debug("process %s ->  %s depth %d",
+>> +             linetype_name[lineval],
+>> +@@ -526,7 +526,7 @@ process(void)
+>> +  * help from skipcomment().
+>> +  */
+>> + static Linetype
+>> +-getline(void)
+>> ++parseline(void)
+>> + {
+>> +     const char *cp;
+>> +     int cursym;
+>> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb 
+>> b/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+>> index 13579f9..95152f1 100644
+>> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+>> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+>> @@ -2,10 +2,11 @@ require linux-libc-headers.inc
 >>
->>       for (;;) {
->>           linenum++;
->> -        lineval = getline();
->> +        lineval = parseline();
->>           trans_table[ifstate[depth]][lineval]();
->>           debug("process %s ->  %s depth %d",
->>               linetype_name[lineval],
->> @@ -526,7 +526,7 @@ process(void)
->>    * help from skipcomment().
->>    */
->>   static Linetype
->> -getline(void)
->> +parseline(void)
->>   {
->>       const char *cp;
->>       int cursym;
+>>   INHIBIT_DEFAULT_DEPS = "1"
+>>   DEPENDS += "unifdef-native"
+>> -PR = "r3"
+>> +PR = "r4"
+>>
+>>   SRC_URI = 
+>> "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+>> -           file://procinfo.h"
+>> +           file://procinfo.h \
+>> +           file://unifdef.patch;patch=1"
+>>
+>>   S = "${WORKDIR}/linux-${PV}"
+>>
 > 
 > 
 > 
@@ -98,7 +127,7 @@ Koen Kooi wrote:
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 > 
 
---------------ms060509010106080509020602
+--------------ms000300090107080204090008
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -150,17 +179,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUwNzEy
-MjA0MVowIwYJKoZIhvcNAQkEMRYEFHsipzjerIVjgGVI83Z4ofyMPGsnMFIGCSqGSIb3DQEJDzFF
+MjEwM1owIwYJKoZIhvcNAQkEMRYEFJ5+y7mR6GmWqAyWF159ZVUxDyT6MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAG8m10+VoEgGT3j3cmlCXddJrzUl4VLPl3HAhc25fxspY1ZR1x
-OT1Yu8EVrqrBV/o0R9ecMB88FMa3as/d8ZiaqHfCALPvx2C6Zc4qmPyzygPNcAesdhyVVWKTRm1+
-ZfU+PIs7BF3XWC9Q5PIaJ0u4FjdqzgxfxHQO8IXMn9y/ELnHuJqm1RUIkf+wXUejXyxUQ6njHKBF
-VgOi4+S8pS4fHD8NFCJW+7gOSooZwbvF6i1FnHqpf7YZA9dsRLip2j4be29HJOn2Yo6I4C8kXm5j
-kRkl4z1Z1v9+9QnjoMV5XbR7W8q1YimHkRQOXi1mPVlxTamwELoLSILWNsnM2W0XAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQByZJUDFtQIqXyxvDxGluRC3oma5pja+hfZYRGUDshN/TzVOnMH
+WKgVQyPw/UpBRbkc0vKiD0o06zxeBX5YmWkYMHcaWvcJTqNOhzy05kFyM0WFzDK/LadajSOVnn8B
+oCsgrknDJ94BaF+uwu1Naf5K3kI7COyGYxYkxpwHLwGKsu/NLohkuT9a7szjj4+WnE/DDw9J5ilA
+9XNJkY8q/XhVTa0SrZp2Y0VGo7Gx9mfVx9kV5DwRrj8r71fGcqkhh9T/0MVYV0pHNZRsQe8o+H1n
+YxJfhkUy6sPZlRg0rHacoJVIFn1fu+OF23fRrcAqWiwnM58gdSTr394rqvo8fS0jAAAAAAAA
 
---------------ms060509010106080509020602--
+--------------ms000300090107080204090008--
