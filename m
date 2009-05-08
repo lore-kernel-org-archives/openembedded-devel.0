@@ -1,27 +1,26 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M2Qp4-0000DQ-0u
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <g.eismann@gmx.net>) id 1M2QtH-0000Kl-Qo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 May 2009 16:13:10 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M2Qj3-0001JF-ED
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 May 2009 15:06:57 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1M2Qj3-0008Ni-5q
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 May 2009 15:06:57 +0100
-From: Phil Blundell <philb@gnu.org>
+	Fri, 08 May 2009 16:17:31 +0200
+Received: (qmail invoked by alias); 08 May 2009 14:11:16 -0000
+Received: from 247.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
+	[87.222.70.247]
+	by mail.gmx.net (mp062) with SMTP; 08 May 2009 16:11:16 +0200
+X-Authenticated: #21729387
+X-Provags-ID: V01U2FsdGVkX1+kikhqM5akIhIoxJi/WIdSO0cGb4C6Ys0HTgOU8y
+	R7/YFXMD00+6Qn
+From: "G. Eismann" <g.eismann@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200905081536.58988.g.eismann@gmx.net>
+Date: Fri, 8 May 2009 16:11:14 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; i686; ; )
 References: <200905081536.58988.g.eismann@gmx.net>
-Date: Fri, 08 May 2009 15:06:56 +0100
-Message-Id: <1241791617.9080.25.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+In-Reply-To: <200905081536.58988.g.eismann@gmx.net>
+MIME-Version: 1.0
+Message-Id: <200905081611.14943.g.eismann@gmx.net>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.82,0.82
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: micro image with ssh server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -36,24 +35,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2009 14:13:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 08 May 2009 14:17:31 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-05-08 at 15:36 +0200, G. Eismann wrote:
-> I have created an image for the micro dist adding dropbear to the image.
-> When I try to connect with ssh, I have this error:
-> PTY allocation request failed on channel 0
-> shell request failed on channel 0
-> 
-> With the minimal distro it woks OK. Do I need to add some more software or is 
-> a problem of the micro distribution?
 
-Sounds like you need to mount /dev/pts, and/or create the /dev/ptmx
-node.  I guess minimal is doing this for you but micro isn't.
+I have disabled udev so I can login via serial port.
+Creating /dev/pts and mounting it ssh server works.
 
-p.
+So I think is an udev problem. Running /etc/init.d/udev start does nothing.
+
+Is udev working properly with micro dist or is it only my problem?
 
 
-
+-- 
+  - Eismann -
 
