@@ -1,38 +1,43 @@
-Received: from [209.85.198.243] (helo=rv-out-0708.google.com)
+Received: from [209.85.221.136] (helo=mail-qy0-f136.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1M2RxT-0004Lg-2h
+	(envelope-from <leon.woestenberg@gmail.com>) id 1M2Vdv-0003Jb-VT
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 May 2009 17:25:55 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so1160114rvb.12
+	Fri, 08 May 2009 21:22:00 +0200
+Received: by qyk42 with SMTP id 42so2693696qyk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 May 2009 08:19:41 -0700 (PDT)
+	Fri, 08 May 2009 12:15:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=3nEYj3zC5pIPtuz87VXmoMRK/szwoZf62ThGBCoohrA=;
-	b=Hb23HJSKpDR+6RZ2husw4xAj7q3fORML9akBFXcQQNszu645PAexHOpqNrZ6mR9leu
-	zwdfvIIlwyMKtHlvpCkqiJ376KcWn4SAK1BXU0y/g7x0zSq47HTN/cVP00y6pPXMNZC5
-	EZvv/vOyFWzjYhPU/SXgXYyhctBkKsmJZksnU=
+	bh=rGOAftTlC84VQdaDYkN0AzKt8GNo2V9n2r167rbt/Wg=;
+	b=DIgHxwlnK0ap8riX8l7q+yCitfTDWnCFuCISXPWb1ztm6IcgV888crxsaYjQ6NR+sE
+	B08zoafIiRh9W5cNQeammQANI35R5noTgIQEpkH0mDFDjVMLnrR1eY4iPSyPJj7BA2rf
+	GfLQVyOP5K1yMrWRZ9TXuHiXDy8JiuS2bGuCI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=W8Sbs49f9Voi72e7C+gkeoPc/gEYQuRA8GQnnx0cFD+JUIENlvgxei09cBP8tpOhOx
-	CYYjxGLEWSx0nBI/wyKYo5hXdFHFsfqEF6g2jO8Ko7peB3q/uoWb9y9OZpZk7uUY/alc
-	jrq/EOllAxH6i/uqeBnMzSP80ErlIvBLng/84=
+	b=ai2Od1rXdVJjbtnCBmJsn4I5b8Qoi6wt6ZHJyFJXolFgRaO4tm9bn6EWsL3BJ8Hafm
+	MQoV8TeyWYBJYR+9+66rX6q8snGPticY/r/9X1Fg2xtVyx22e1cfx+uHQJb9PYQcHsbT
+	cCPQqQnzyi+BsSa0bPw9IgXQQCSHcs//kSyZg=
 MIME-Version: 1.0
-Received: by 10.141.36.17 with SMTP id o17mr1670468rvj.261.1241795978614; Fri, 
-	08 May 2009 08:19:38 -0700 (PDT)
-In-Reply-To: <200905080911.10487.khimov@altell.ru>
-References: <be7a9f3d0904270832j4832bc6fqcf058fdfc3d8479@mail.gmail.com>
-	<1241079609-5912-4-git-send-email-khimov@altell.ru>
-	<f96d234e0905071458l22022a9gd5b7e77a4607c3c0@mail.gmail.com>
-	<200905080911.10487.khimov@altell.ru>
-Date: Fri, 8 May 2009 11:19:38 -0400
-Message-ID: <f96d234e0905080819t46478d85xa1eb2233f826ea97@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Received: by 10.231.39.141 with SMTP id g13mr310965ibe.34.1241810143415; Fri, 
+	08 May 2009 12:15:43 -0700 (PDT)
+In-Reply-To: <be7a9f3d0905071835x5d551897l84bf64f9133c13e4@mail.gmail.com>
+References: <4A03277B.1090402@cbnco.com>
+	<1241720835-17998-1-git-send-email-msmith@cbnco.com>
+	<1241720835-17998-2-git-send-email-msmith@cbnco.com>
+	<c384c5ea0905071218v3978ea4cpe791a5283f05c2df@mail.gmail.com>
+	<be7a9f3d0905071226m78b94d44u50a4e63c927200f5@mail.gmail.com>
+	<4A033D54.2000709@cbnco.com>
+	<c384c5ea0905071305s1b180deal8c5fd09b5d646308@mail.gmail.com>
+	<4A035FAB.4040405@cbnco.com>
+	<be7a9f3d0905071835x5d551897l84bf64f9133c13e4@mail.gmail.com>
+Date: Fri, 8 May 2009 21:15:43 +0200
+Message-ID: <c384c5ea0905081215j21443cdes8ab78f31d0bda632@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 4/4] remove install-native package
+Subject: Re: [PATCH 2/3] grub: use ${libdir}, not /usr/lib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,48 +51,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2009 15:25:57 -0000
+X-List-Received-Date: Fri, 08 May 2009 19:22:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, May 8, 2009 at 1:11 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> On Friday 08 May 2009 01:58:24 Cliff Brake wrote:
->> We have run into several problems that may be related to this patch.
->>
->> bitbake libart-lgpl fails on a clean build with following message:
->
-> Please try either removing
->
-> export INSTALL = "${STAGING_BINDIR_NATIVE}/install-sh"
->
-> from recipe (recipes/gnome/libart-lgpl.inc), or setting it like this
->
-> export INSTALL = "${STAGING_BINDIR_NATIVE}/install"
+Hello,
 
-Thanks!  The above works, but after a bit of discussion on IRC, a more
-correct solution is to remove the INSTALL variable from this recipe.
+On Fri, May 8, 2009 at 3:35 AM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> On Thu, May 7, 2009 at 7:24 PM, Michael Smith <msmith@cbnco.com> wrote:
+>
+>> I'd prefer not to work with grub2 for now. From the website, it looks like
+>> it might still be a bit alpha. Grub 0.9x is also alpha, but at least I've
+>> already learned some of its secrets. :)
+>
+GRUB is a bootloader. Stability is extremely important and any 0.9x
+has worked fine.
 
-09:49 < kergoth> install-sh/install.sh is not that complex.  any
-autotools package that uses AC_PROG_INSTALL should be including
-install-sh/install.sh in its build tree under
-                 ./ or AC_CONFIG_AUXDIR, for the case where the build
-system doesn't have its own bsd install.  we, of course, have install,
-so that install-sh/install.sh
-                 won't actually be used
-09:50 < kergoth> if any packages hardcode INSTALL like that one in the
-email, they're broken
-09:50 < kergoth> the 'install' tool is often used to install files
-from one place to another
-09:50 < kergoth> autotools comes with a shell script called install-sh
-for its makefiles to use if your machine has no 'install'
-09:51 < kergoth> thats all there is to this
+> Not really; it is the probably choice of Debian for next release and
+> it has few missing features[1] only. It adds much nice features and is
+> a more clear codebase.
+>
+> I'd say that technically speaking grub2 is the right choose for OE
+> since it will demand less work to maintain and keep it up to date.
+>
+GRUB1 just works - no need to maintain (unless new filesystems appear
+- I think btrfs etc.).
 
-Thanks,
-Cliff
+I think GRUB 1 or 2 *highly* depends on the application, and again, we
+should be able to
+handle both, by preference of the OE developer / user.
 
+My 0.02EUR,
+
+Regards
 -- 
-=======================
-Cliff Brake
-http://bec-systems.com
+Leon
 
 
