@@ -1,26 +1,41 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [209.85.132.243] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1M2ISd-0006t4-Ly
+	(envelope-from <jay4mail@gmail.com>) id 1M2KxL-0001W4-Ot
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 May 2009 07:17:29 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1M2IMd-000CpE-9m
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 May 2009 09:11:15 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Fri, 08 May 2009 09:57:19 +0200
+Received: by an-out-0708.google.com with SMTP id b6so734000ana.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 May 2009 00:51:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:message-id;
+	bh=YY/DDT1B9Uvts7rDlD9aEFgKgxqbwiS5l3y45Hj7euY=;
+	b=cxvyfCp87J7UiIZ0quExJshMe89TD017Y08xy7vsoVWBXN0IkA124/HLZhuYz44AYO
+	CUTYOBgo+t3EJWzg78tczTmzi4PHz+L1nkO5aH6T3gv7az9KwYTWyeCzNrAV5R91K2sS
+	EOXbiOa22uvG9LfkNrbJItG1cyOMss8swFyK0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:message-id;
+	b=KQoUoSHyN25Iily3prOm/SDoypWQZ4dKFK+M1c8K0TvhkvfRdRCD6cP5zcYr3Ud+XE
+	v6bI2HDVEPSiDoG6ghgGUR8wOSKXxmxj234pKNW6EG2LcrJQ8JFzLuKwDjSN/bFFVfaF
+	8YMEUTtgb4P5XQbj22uA6dQHmowI0ndU3E8GQ=
+Received: by 10.100.141.12 with SMTP id o12mr577038and.141.1241769068627;
+	Fri, 08 May 2009 00:51:08 -0700 (PDT)
+Received: from is.home (93-81-71-33.broadband.corbina.ru [93.81.71.33])
+	by mx.google.com with ESMTPS id c1sm2416890ana.27.2009.05.08.00.51.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 08 May 2009 00:51:07 -0700 (PDT)
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 8 May 2009 09:11:10 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <be7a9f3d0904270832j4832bc6fqcf058fdfc3d8479@mail.gmail.com>
-	<1241079609-5912-4-git-send-email-khimov@altell.ru>
-	<f96d234e0905071458l22022a9gd5b7e77a4607c3c0@mail.gmail.com>
-In-Reply-To: <f96d234e0905071458l22022a9gd5b7e77a4607c3c0@mail.gmail.com>
+Date: Fri, 8 May 2009 11:50:56 +0400
+User-Agent: KMail/1.9.10
+References: <87eiv05wna.wl%peter@chubb.wattle.id.au>
+In-Reply-To: <87eiv05wna.wl%peter@chubb.wattle.id.au>
 MIME-Version: 1.0
-Message-Id: <200905080911.10487.khimov@altell.ru>
-Subject: Re: [PATCH 4/4] remove install-native package
+Message-Id: <200905081150.56405.jay4mail@gmail.com>
+Subject: Re: How to boot Cacko from KexecBoot on Collie?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,23 +49,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2009 05:17:32 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 08 May 2009 07:57:20 -0000
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On Friday 08 May 2009 01:58:24 Cliff Brake wrote:
-> We have run into several problems that may be related to this patch.
->
-> bitbake libart-lgpl fails on a clean build with following message:
+Hello!
+> 	Is there a trick to kexecbooting Cacko on collie?  The issue
+> at present is the filesystem on /dev/mtdblk0p1 --- which should
+> contain CACKO's root file system (it's hard coded in various scripts)
+> --- but which contains the kexecboot initrd.
 
-Please try either removing
+Kexecboot have no separate initrd. It is kernel+initramfs 'all-in-one'. 
+Kexecboot is 'flashed' as ordinary (e.g. Cacko) kernel.
 
-export INSTALL = "${STAGING_BINDIR_NATIVE}/install-sh"
+But I have no collie so I can miss something specific..
 
-from recipe (recipes/gnome/libart-lgpl.inc), or setting it like this
+BTW, I know that some peoples have kexecboot that starting Cacko from NAND 
+on akita.
 
-export INSTALL = "${STAGING_BINDIR_NATIVE}/install"
+-- 
+Yuri Bushmelev
 
 
