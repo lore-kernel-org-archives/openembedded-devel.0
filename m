@@ -1,33 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M2heX-0007I0-UJ
-	for openembedded-devel@openembedded.org; Sat, 09 May 2009 10:11:25 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1M2hYM-0008Ke-Hb
-	for openembedded-devel@openembedded.org; Sat, 09 May 2009 08:05:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 09 May 2009 08:05:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 09 May 2009 08:05:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 09 May 2009 10:00:26 +0200
-Message-ID: <gu3d6s$893$1@ger.gmane.org>
-References: <1241830239-5594-1-git-send-email-otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090427 Shredder/3.0b3pre
-In-Reply-To: <1241830239-5594-1-git-send-email-otavio@ossystems.com.br>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] Ready to commit patches from O.S. Systems
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <g.eismann@gmx.net>) id 1M2lGW-0000Wd-AY
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 09 May 2009 14:02:52 +0200
+Received: (qmail invoked by alias); 09 May 2009 11:56:31 -0000
+Received: from 247.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
+	[87.222.70.247]
+	by mail.gmx.net (mp015) with SMTP; 09 May 2009 13:56:31 +0200
+X-Authenticated: #21729387
+X-Provags-ID: V01U2FsdGVkX1/kd+0xWnXk4/Z5M238ciltr27fdZNW2aUqBZplAu
+	LOIYONypr2M/Ud
+From: "G. Eismann" <g.eismann@gmx.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 9 May 2009 13:56:28 +0200
+User-Agent: KMail/1.11.3 (Linux/2.6.28-11-generic; KDE/4.2.3; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200905091356.28839.g.eismann@gmx.net>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.82,0.82
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: dash source uri not available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +33,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2009 08:11:26 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 09 May 2009 12:02:52 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 09-05-09 02:50, Otavio Salvador wrote:
-> Hello,
->
-> We'd like to push those patches into dev tree and want some review on
-> them. I'd also would like to hear advices about:
->
->     [PATCH 11/23] cups: split backends and models
 
-That one looks good, I've given comments on others in seperate mails.
+Dash version is 0.5.2 in openembedded, but the oldest source version in debian 
+ftp is 0.5.3 
 
-regards,
+The original source is still at 
+http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.2.tar.gz
 
-Koen
-
-
+-- 
+  - Eismann -
 
