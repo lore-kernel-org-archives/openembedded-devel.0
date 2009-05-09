@@ -1,43 +1,44 @@
-Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
+Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M2ard-0000U7-Cz
+	(envelope-from <otavio.salvador@gmail.com>) id 1M2ard-0000U5-DB
 	for openembedded-devel@lists.openembedded.org;
 	Sat, 09 May 2009 02:56:29 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so1075455ywk.42
+Received: by yw-out-1718.google.com with SMTP id 9so1075454ywk.42
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 08 May 2009 17:50:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to:cc
 	:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=rFHNaUP2d+uGKHNVSQk2mPT006TfJgGIX/O0eSEh0+8=;
-	b=cXuU7rUAnhybKlCALXzimmk6EQG6m/e7mzIE0ADuz9k9zACTXyWfKnZ891O0wFPn0w
-	UKFASOAJz6puopccK/2HNhVlXDPEaaU58MRuKSA3ceITMWMz3DpNXSneINRuOIAp/peH
-	inOFm1Fh/Rp5Uq6craMBmUukKUnLHt0kux14A=
+	bh=1eSj5Na494tFs5wjj3nmKIOaPSuveABM+nAlgZAEwwA=;
+	b=FAeVa9DtpEUMxFsKI5E05SIl9J3mqLoxuBPSe8yk9FxJQn7gI/JLRDofKlLRo6AkAj
+	vky5540SHcxBSeQ53TUTPNewcmVHBeFz4bZ0iVHNSs/kfoF54rgOjEJMVPT6z1ceJg3e
+	aEGNz+Y7UPHMD/1eouypkJYBnPSy5gAPH9YoE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=sTm/rGzERfzWuKuemCCZseFTtHgnQ/zsVZ8Daqu2UEJ6mgeG0HvapxBAofLHlpLh2K
-	QGkCC29L1DPRm9KZtG61mH17NtMq3xde7JmnIo7M9CoiyknntA23j5Qz8e/eIe9nQS4I
-	Dc09WPLaifKbGdmXzl3dq+LkvveQPD7DWt9xc=
-Received: by 10.100.32.6 with SMTP id f6mr9904395anf.143.1241830213435;
+	b=XJc6Ye2QENrrgoH5KVjId1b9RK83avgd0m1zarzSDKRlpGT9z14c4QdJ4YhDEM7TVg
+	iKTzMwpvYEj0Oung/OuegLfAjGutZ0J4cVk9phVXQ/gIh/M3IruGjDiYkkF2pkywKahF
+	b7sXiB8KWgzY+hfQKA1Migg2KQ1NS60XFRokI=
+Received: by 10.100.9.11 with SMTP id 11mr5174584ani.72.1241830213222;
 	Fri, 08 May 2009 17:50:13 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id 6sm1657756ywi.58.2009.05.08.17.50.12
+	by mx.google.com with ESMTPS id 6sm1653938ywc.1.2009.05.08.17.50.11
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
 	Fri, 08 May 2009 17:50:12 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 8CB21610199; Fri,  8 May 2009 21:50:52 -0300 (BRT)
+	id A29B6610194; Fri,  8 May 2009 21:50:52 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 May 2009 21:50:17 -0300
-Message-Id: <1241830239-5594-2-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  8 May 2009 21:50:18 -0300
+Message-Id: <1241830239-5594-3-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.6.3.rc1.51.gea0b7
-In-Reply-To: <1241830239-5594-1-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1241830239-5594-2-git-send-email-otavio@ossystems.com.br>
 References: <1241830239-5594-1-git-send-email-otavio@ossystems.com.br>
+	<1241830239-5594-2-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 01/23] gtk-engines: add 2.18.1
+Subject: [PATCH 02/23] machine/geode[gl]x: use more optimization while compiling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,64 +54,106 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 09 May 2009 00:56:29 -0000
 
+Since the code is now the same for Geode GX and Geode LX we also
+merged the tunning files in a single tune-geode.inc, making it easy to
+improve from now on.
+
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- conf/checksums.ini                        |    4 +++
- recipes/gtk-engines/gtk-engines_2.18.1.bb |   30 +++++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+), 0 deletions(-)
- create mode 100644 recipes/gtk-engines/gtk-engines_2.18.1.bb
+ conf/machine/geodegx.conf             |    4 ++--
+ conf/machine/geodelx.conf             |   15 ++++++++-------
+ conf/machine/include/tune-geode.inc   |    5 +++++
+ conf/machine/include/tune-geodegx.inc |    6 ------
+ conf/machine/include/tune-geodelx.inc |    9 ---------
+ 5 files changed, 15 insertions(+), 24 deletions(-)
+ create mode 100644 conf/machine/include/tune-geode.inc
+ delete mode 100644 conf/machine/include/tune-geodegx.inc
+ delete mode 100644 conf/machine/include/tune-geodelx.inc
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 9cac3c7..c47b118 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -9774,6 +9774,10 @@ sha256=15aa3a926307b4b3e40f3a9b05c604df6811eb48814b1534db32aed414aefb0c
- md5=060ea25c471e5f4cf5c1baeac27d0345
- sha256=0d8b6630c546327ddc67c700859731036eebdf77e51ad8b71e4d19d28ca2ff2c
+diff --git a/conf/machine/geodegx.conf b/conf/machine/geodegx.conf
+index 6fe6a83..0ec6782 100644
+--- a/conf/machine/geodegx.conf
++++ b/conf/machine/geodegx.conf
+@@ -4,7 +4,7 @@
  
-+[http://ftp.gnome.org/pub/GNOME/sources/gtk-engines/2.18/gtk-engines-2.18.1.tar.bz2]
-+md5=5dc748cfb0587bb412adc49b666fb6f8
-+sha256=d7e2672fcf80f5c35d481c24e0ab5b7d0f6526dcc3d8821ab76468c1816dc3bc
-+
- [http://ftp.gnome.org/pub/GNOME/sources/gtk-engines/2.2/gtk-engines-2.2.0.tar.bz2]
- md5=78e9276c28b509f3203de4873c20a263
- sha256=140541cae8b003d2f7210e2ef060ac328d7e45a04e2cf5fa943fff73c9955dd6
-diff --git a/recipes/gtk-engines/gtk-engines_2.18.1.bb b/recipes/gtk-engines/gtk-engines_2.18.1.bb
+ TARGET_ARCH =  "i486"
+ 
+-require conf/machine/include/tune-geodegx.inc
++require conf/machine/include/tune-geode.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-geodegx"
+ BOOTSTRAP_EXTRA_RDEPENDS = "kernel pciutils udev kernel-modules"
+@@ -14,4 +14,4 @@ udevdir = "/dev"
+ KERNEL_IMAGETYPE = "bzImage"
+ 
+ GLIBC_ADDONS = "nptl"
+-GLIBC_EXTRA_OECONF = "--with-tls"
++GLIBC_EXTRA_OECONF = "--with-tls --with-cpu=geode"
+diff --git a/conf/machine/geodelx.conf b/conf/machine/geodelx.conf
+index de4d9ca..f8874fd 100644
+--- a/conf/machine/geodelx.conf
++++ b/conf/machine/geodelx.conf
+@@ -1,14 +1,15 @@
+-TARGET_ARCH = "i486"
++# Machine file for devices with the AMD Geode LX processor 
++# Copyright (C) 2005, Advanced Micro Devices, Inc.  All Rights Reserved
++# Released under the MIT license (see packages/COPYING)
+ 
+-require conf/machine/include/tune-geodelx.inc
++TARGET_ARCH =  "i486"
+ 
+-PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
++require conf/machine/include/tune-geode.inc
+ 
+-PREFERRED_PROVIDER_virtual/kernel="linux-geodelx"
+-
+-SELECTED_OPTIMIZATION_glibc := "${@'${SELECTED_OPTIMIZATION}'.replace('-fomit-frame-pointer', '')}"
++PREFERRED_PROVIDER_virtual/kernel = "linux-geodelx"
+ 
+ KERNEL_IMAGETYPE = "bzImage"
+ 
+ GLIBC_ADDONS = "nptl"
+-GLIBC_EXTRA_OECONF = "--with-tls"
++GLIBC_EXTRA_OECONF = "--with-tls --with-cpu=geode"
++SELECTED_OPTIMIZATION_pn-glibc := "${@'${SELECTED_OPTIMIZATION}'.replace('-fomit-frame-pointer', '')}"
+diff --git a/conf/machine/include/tune-geode.inc b/conf/machine/include/tune-geode.inc
 new file mode 100644
-index 0000000..177c5b8
+index 0000000..eda332a
 --- /dev/null
-+++ b/recipes/gtk-engines/gtk-engines_2.18.1.bb
-@@ -0,0 +1,30 @@
-+LICENSE = "GPL"
-+SECTION = "x11/base"
-+DESCRIPTION = "GTK theme engines"
-+DEPENDS = "gtk+ cairo"
++++ b/conf/machine/include/tune-geode.inc
+@@ -0,0 +1,5 @@
++TARGET_CC_ARCH = "-march=geode -mtune=geode"
++BASE_PACKAGE_ARCH = "geode"
++PACKAGE_EXTRA_ARCHS += "x86 i386 geode"
 +
-+RDEPENDS_gtk-theme-redmond = "gtk-engine-redmond95"
-+RDEPENDS_gtk-theme-metal = "gtk-engine-metal"
-+RDEPENDS_gtk-theme-mist = "gtk-engine-mist"
-+RDEPENDS_gtk-theme-crux = "gtk-engine-crux-engine"
-+RDEPENDS_gtk-theme-lighthouseblue = "gtk-engine-lighthouseblue"
-+RDEPENDS_gtk-theme-thinice = "gtk-engine-thinice"
-+RDEPENDS_gtk-theme-industrial = "gtk-engine-industrial"
-+RDEPENDS_gtk-theme-clearlooks = "gtk-engine-clearlooks"
-+
-+inherit gnome  gtk-binver
-+
-+PACKAGES_DYNAMIC = "gtk-engine-* gtk-theme-*"
-+
-+python populate_packages_prepend() {
-+	import os.path
-+
-+	engines_ver = ['gtk-2.0/', gtkbinver_find(d), '/engines']
-+
-+	engines_root = os.path.join(bb.data.getVar('libdir', d, 1), ''.join(engines_ver))
-+	themes_root = os.path.join(bb.data.getVar('datadir', d, 1), "themes")
-+
-+	do_split_packages(d, engines_root, '^lib(.*)\.so$', 'gtk-engine-%s', 'GTK %s theme engine', extra_depends='')
-+	do_split_packages(d, themes_root, '(.*)', 'gtk-theme-%s', 'GTK theme %s', allow_dirs=True, extra_depends='')
-+}
-+
++FEED_ARCH = "geode"
+diff --git a/conf/machine/include/tune-geodegx.inc b/conf/machine/include/tune-geodegx.inc
+deleted file mode 100644
+index cae285a..0000000
+--- a/conf/machine/include/tune-geodegx.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-TARGET_CC_ARCH = "-march=geode"
+-BASE_PACKAGE_ARCH = "geode"
+-PACKAGE_EXTRA_ARCHS += "x86 i386 geode"
+-
+-FEED_ARCH = "geode"
+-
+diff --git a/conf/machine/include/tune-geodelx.inc b/conf/machine/include/tune-geodelx.inc
+deleted file mode 100644
+index 63e6678..0000000
+--- a/conf/machine/include/tune-geodelx.inc
++++ /dev/null
+@@ -1,9 +0,0 @@
+-# Geode CPU has it's own target in GCC 4.3
+-# in older versions k6-2 is closest
+-#
+-TARGET_CC_ARCH = "-march=geode"
+-BASE_PACKAGE_ARCH = "geode"
+-PACKAGE_EXTRA_ARCHS += "x86 i386 geode"
+-
+-FEED_ARCH = "geode"
+-
 -- 
 1.6.3.rc1.51.gea0b7
 
