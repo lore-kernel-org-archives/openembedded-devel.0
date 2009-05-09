@@ -1,40 +1,40 @@
-Received: from [209.85.132.244] (helo=an-out-0708.google.com)
+Received: from [209.85.132.246] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M2arj-0000U1-LP
+	(envelope-from <otavio.salvador@gmail.com>) id 1M2ark-0000Uf-Df
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 May 2009 02:56:35 +0200
-Received: by an-out-0708.google.com with SMTP id b6so1008350ana.42
+	Sat, 09 May 2009 02:56:36 +0200
+Received: by an-out-0708.google.com with SMTP id b6so1008390ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 May 2009 17:50:20 -0700 (PDT)
+	Fri, 08 May 2009 17:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to:cc
 	:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=TAB42SFZnMWa9XEG5E9ips28lKxF3WEeHyHLHjwzWNY=;
-	b=C/3DUHqvmbuv28vFT8nD8C6PtwdCskFO21m+jM+F0aJWWyZOoAe6CF2QmGreyGVBsW
-	tutLu8NURFNFCIQyWLmdNu/cYegrTjn9NyAu+DM3qYSO52QPBptejuf/Q9PhAjgMG+XC
-	5syy6NfRzFoSMbi1OeyJnizpHn48vf0Fmne8M=
+	bh=Q3YFRGlOqLLTbUXFQ70f5Yc8ucOhvkna6/80JohIi2c=;
+	b=PbjErOBkqOkTxqgF8RKjwFl9gSDGpAmOCKeTG9Qbdqm5rNdzmMgpLK1TFZJUSGSDsa
+	bSahWvJ1O/iXmg4QnUYztGuyaCaKPrIsr3dKlpss0SKUK6cy54WJcQdMoZfp3LnBUfzE
+	mbQFnD6cbABQCb4ICqLL5zz0CIcKa1odMGqCc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=DiiXDdAMDsy9IKpdYA5fIAw2nfW9M3kOoTTMPUqhyxIqAF+oZL4JMWbWbSdeHrn545
-	YAFpR7IwPGU14EswSjFVyXMa0jqXAmbOGjOg9v0Vitos3Tpg0Wx0TVl028HBimtOW9p4
-	qRVTpqxwp6j5MSJcVUSy3a/J0dopjHee3+9P0=
-Received: by 10.100.128.18 with SMTP id a18mr7401529and.12.1241830220577;
+	b=kU1hVXexT31JrPUBE1BqgXbE0im/IcUsSxW9C0NhTg/iHenYrrrhDQv6WHhqPHQycr
+	e8Cu/AZsqrt4IzpB7dKfGYZ8ZIQuO6w1LNlNhAs5Yv6G1AEMGlnl4Nsfz4KlaLRIhy6h
+	U2dIvPnEjN1loJVZNLwma+pGYfhtE50Dv13ww=
+Received: by 10.100.227.18 with SMTP id z18mr10033026ang.67.1241830220122;
 	Fri, 08 May 2009 17:50:20 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id 5sm1644292ywd.45.2009.05.08.17.50.18
+	by mx.google.com with ESMTPS id 7sm3652937ywo.16.2009.05.08.17.50.16
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 08 May 2009 17:50:20 -0700 (PDT)
+	Fri, 08 May 2009 17:50:18 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id F3A516101A0; Fri,  8 May 2009 21:50:52 -0300 (BRT)
+	id EBC3B6101A4; Fri,  8 May 2009 21:50:52 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 May 2009 21:50:28 -0300
-Message-Id: <1241830239-5594-13-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  8 May 2009 21:50:31 -0300
+Message-Id: <1241830239-5594-16-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.6.3.rc1.51.gea0b7
-In-Reply-To: <1241830239-5594-12-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1241830239-5594-15-git-send-email-otavio@ossystems.com.br>
 References: <1241830239-5594-1-git-send-email-otavio@ossystems.com.br>
 	<1241830239-5594-2-git-send-email-otavio@ossystems.com.br>
 	<1241830239-5594-3-git-send-email-otavio@ossystems.com.br>
@@ -47,8 +47,11 @@ References: <1241830239-5594-1-git-send-email-otavio@ossystems.com.br>
 	<1241830239-5594-10-git-send-email-otavio@ossystems.com.br>
 	<1241830239-5594-11-git-send-email-otavio@ossystems.com.br>
 	<1241830239-5594-12-git-send-email-otavio@ossystems.com.br>
+	<1241830239-5594-13-git-send-email-otavio@ossystems.com.br>
+	<1241830239-5594-14-git-send-email-otavio@ossystems.com.br>
+	<1241830239-5594-15-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 12/23] conf/licenses.conf: add CUPS license
+Subject: [PATCH 15/23] rt61-firmware: fix installation of binary files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -66,21 +69,22 @@ X-List-Received-Date: Sat, 09 May 2009 00:56:36 -0000
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- conf/licenses.conf |    3 +--
- 1 files changed, 1 insertions(+), 2 deletions(-)
+ recipes/rt2x00/rt61-firmware_1.2.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/licenses.conf b/conf/licenses.conf
-index 01c4747..c067627 100644
---- a/conf/licenses.conf
-+++ b/conf/licenses.conf
-@@ -1,6 +1,5 @@
- SRC_DISTRIBUTE_LICENSES += "GPL GPLv2 GPLv3 LGPL LGPLv2.1 LGPLv3"
--SRC_DISTRIBUTE_LICENSES += "BSD Apache-2.0 QPL AFL"
-+SRC_DISTRIBUTE_LICENSES += "BSD Apache-2.0 QPL AFL CUPS"
- SRC_DISTRIBUTE_LICENSES += "MIT Sleepycat Classpath Perl PSF PD Artistic"
- SRC_DISTRIBUTE_LICENSES += "bzip2 zlib ntp cron libpng netperf openssl"
- SRC_DISTRIBUTE_LICENSES += "Info-ZIP tcp-wrappers"
--
+diff --git a/recipes/rt2x00/rt61-firmware_1.2.bb b/recipes/rt2x00/rt61-firmware_1.2.bb
+index ae683c8..9fad60d 100644
+--- a/recipes/rt2x00/rt61-firmware_1.2.bb
++++ b/recipes/rt2x00/rt61-firmware_1.2.bb
+@@ -7,7 +7,7 @@ S = "${WORKDIR}/RT61_Firmware_V${PV}"
+ 
+ do_install() {
+ 	install -d ${D}/${base_libdir}/firmware
+-	install -m 0644 rt61.bin ${D}/${base_libdir}/firmware/
++	install -m 0644 *.bin ${D}/${base_libdir}/firmware/
+ }
+ 
+ FILES_${PN} = "${base_libdir}/firmware/"
 -- 
 1.6.3.rc1.51.gea0b7
 
