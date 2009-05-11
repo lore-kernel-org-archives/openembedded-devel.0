@@ -1,29 +1,35 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <g.eismann@gmx.net>) id 1M3cDR-0004sV-2S
+Received: from [209.85.128.184] (helo=fk-out-0910.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1M3dfs-0004GZ-3b
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 May 2009 22:35:13 +0200
-Received: (qmail invoked by alias); 11 May 2009 20:28:37 -0000
-Received: from 247.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
-	[87.222.70.247]
-	by mail.gmx.net (mp005) with SMTP; 11 May 2009 22:28:37 +0200
-X-Authenticated: #21729387
-X-Provags-ID: V01U2FsdGVkX1/cxwI1mPjcXyNrj8nzYQ67H1NYwt7JW3zCuB+Lcp
-	Cguophttij942R
-From: "G. Eismann" <g.eismann@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 May 2009 22:28:33 +0200
-User-Agent: KMail/1.11.3 (Linux/2.6.28-11-generic; KDE/4.2.3; i686; ; )
-References: <200905111744.00650.g.eismann@gmx.net>
-	<200905112052.53485.g.eismann@gmx.net>
-	<f96d234e0905111309u1ae4805bnaeb9adc1bf1ceca3@mail.gmail.com>
-In-Reply-To: <f96d234e0905111309u1ae4805bnaeb9adc1bf1ceca3@mail.gmail.com>
+	Tue, 12 May 2009 00:08:40 +0200
+Received: by fk-out-0910.google.com with SMTP id z22so1384850fkz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 May 2009 15:02:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=TDOnfyCXynu9tUCmdwFgA8KXHRlcmLJV15T5BKwgN8M=;
+	b=W8J/JOPOkxxJ9DVHACDDMgRKJ7VT05gZjM413G7NrwXYnWKqAM1whFryTv5neciEnj
+	+s/ZVM2L9+bnXmBR+DUAf1itz3bE+RfFMIQk1E1jgnzbcfAcJ2F8SeEhR1e9s+mNvKP3
+	2GpAQroEcpiNczOlUWaer4Zi1SqivtIrGBNyk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=bugQrRe9+qS5kcbf2ddPlmCXklTsmoA1/z+/w7emoOmRqKaMPBu/N3KnaHmxx4vcPZ
+	SgDfE3ZrVAwHye1F5kKGNqWdsrus+Glfqaqt3Tt95rIRJEXp1Ud1R0pFKooJiGrVfJEi
+	dibs2yFsWWGbC3+CFQpYJ5SOuDjY1F2PDz5rs=
 MIME-Version: 1.0
-Message-Id: <200905112228.33758.g.eismann@gmx.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.52,0.52
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: image generation
+Received: by 10.223.108.75 with SMTP id e11mr3856290fap.97.1242079326718; Mon, 
+	11 May 2009 15:02:06 -0700 (PDT)
+In-Reply-To: <d1b08f940905110131h13a6b314q64e74a2bd9919433@mail.gmail.com>
+References: <d1b08f940905110131h13a6b314q64e74a2bd9919433@mail.gmail.com>
+Date: Tue, 12 May 2009 00:02:06 +0200
+Message-ID: <d1b08f940905111502r3b29564fy6e36d101934909e2@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: x11-gpe-java-image: gdk-pixbuf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,66 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 20:35:13 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 May 2009 22:08:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Lunes 11 Mayo 2009 22:09:47 Cliff Brake escribi=F3:
+diff --git a/recipes/maemo4/hildon-thumbnail_0.14.bb
+b/recipes/maemo4/hildon-thumbnail_0.14.bb
+index d3af031..06f8482 100644
+--- a/recipes/maemo4/hildon-thumbnail_0.14.bb
++++ b/recipes/maemo4/hildon-thumbnail_0.14.bb
+@@ -1,6 +1,6 @@
+ require hildon-thumbnail.inc
 
-> >
-> > When building the image, the release 5 (the last one) of the package is
-> > built, but in the "do_package_write_ipk" step there is an error because
-> > is looking for the install directory for the release 1.
->
-> Can you post your recipe, and we'll take a look?
+-DEPENDS = "libosso gnome-vfs gconf gdk-pixbuf glib-2.0"
++DEPENDS = "libosso gnome-vfs gconf gtk+ glib-2.0"
 
-=46inally I have "fixed" it copying the recipe to a new one with a new name=
-; so=20
-I am not sure if the problem has something to do with the recipe.
-
-bitbake was looking for release 1 of the recipe, while the release number i=
-s=20
-5.
-I dont know why it did only for "do_package_write_ipk" step and not for all=
- of=20
-them.
-
-Anyway, the recipe:
-
-=2D----
-DESCRIPTION =3D "foo"
-SECTION =3D "base"
-LICENSE =3D "GPL"
-PR =3D "r5"
-
-RDEPENDS =3D "haserl dash"
-
-SRC_URI =3D "file://www/*    \
-           file://init/*   \
-           file://config/* \
-          "
-
-do_install () {
-        install -d ${D}${localstatedir}/www/
-        install -d ${D}${sysconfdir}/config/
-        install -d ${D}${sysconfdir}/init.d/
-
-        install -m 0644 ${WORKDIR}/www/*html ${D}${localstatedir}/www/
-        install -m 0644 ${WORKDIR}/www/*css ${D}${localstatedir}/www/
-        install -m 0755 ${WORKDIR}/www/*cgi ${D}${localstatedir}/www/
-        install -m 0644 ${WORKDIR}/config/* ${D}${sysconfdir}/config/
-        install -m 0755 ${WORKDIR}/init/* ${D}${sysconfdir}/init.d/
-        for level in S 0 2 3 4 5 6; do
-            install -d ${D}${sysconfdir}/rc$level.d
-        done
-}
-
-PACKAGE_ARCH =3D "all"
-=2D----
+ PR = "r1"
 
 
+seems to solve the nasty dependency
 
-=2D-=20
-  - Eismann -
+BTW, this image needs more care:
+
+andrea@mizar /oe/build $ bitbake -g x11-gpe-java-image
+NOTE: Handling BitBake files: \ (6738/6738) [100 %]
+NOTE: Parsing finished. 6474 cached, 0 parsed, 264 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: Resolving any missing task queue dependencies
+NOTE: multiple providers are available for classpath (classpath,
+classpath-minimal);
+NOTE: consider defining PREFERRED_PROVIDER_classpath
+NOTE: multiple providers are available for virtual/javac-native
+(ecj-bootstrap-native, openjdk-javac-native);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/javac-native
+NOTE: multiple providers are available for virtual/java-native
+(cacao-native, jamvm-native);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/java-native
+NOTE: multiple providers are available for virtual/java-initial
+(cacao-initial, jamvm-initial);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/java-initial
+NOTE: Preparing runqueue
+
+Regards
+
+Andrea
+
 
