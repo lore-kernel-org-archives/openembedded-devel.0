@@ -1,25 +1,23 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1M3Rr1-0001Aj-DU
+Received: from [78.47.116.26] (helo=drlauer-research.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1M3SZI-0006F2-QL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 May 2009 11:31:23 +0200
-Received: (qmail invoked by alias); 11 May 2009 09:24:50 -0000
-Received: from p5DDC6E93.dip.t-dialin.net (EHLO [192.168.4.51])
-	[93.220.110.147]
-	by mail.gmx.net (mp023) with SMTP; 11 May 2009 11:24:50 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX19oVldPqQVodqBYbeR70WxUG2TdJQu0TYvN7cj833
-	0L/1tiiqDQp3Gn
-Message-ID: <4A07EE70.2010408@gmx.net>
-Date: Mon, 11 May 2009 11:22:56 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-MIME-Version: 1.0
+	Mon, 11 May 2009 12:17:08 +0200
+Received: from andromeda.vanille.de (e180182051.adsl.alicedsl.de
+	[85.180.182.51])
+	by drlauer-research.com (Postfix) with ESMTP id E546F5849D1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 May 2009 12:41:02 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.7
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.65
-Subject: python 2.6 warning
+Date: Mon, 11 May 2009 12:10:44 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
+References: <4A07EE70.2010408@gmx.net>
+In-Reply-To: <4A07EE70.2010408@gmx.net>
+MIME-Version: 1.0
+Message-Id: <200905111210.44913.mickey@vanille-media.de>
+Subject: Re: python 2.6 warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,45 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 09:31:23 -0000
-X-Groupsio-MsgNum: 10155
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig2721B9FFAB1D37C6B42853BB"
+X-List-Received-Date: Mon, 11 May 2009 10:17:09 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---------------enig2721B9FFAB1D37C6B42853BB
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+On Monday 11 May 2009 11:22:56 Robert Schuster wrote:
+> Hi all,
+> those who are using bitbake with Python 2.6 (e.g. Ubuntu 09.04, Debian
+> sid) will notice this warning:
+>
+> /home/rschus/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
+> module is deprecated
+>   import types, sets
+>
+> Is anyone from OE in the know how to fix that properly?
 
-Hi all,
-those who are using bitbake with Python 2.6 (e.g. Ubuntu 09.04, Debian
-sid) will notice this warning:
+Basically you need to rewrite COW.py to work with the new built-in sets. Might 
+be a chance to get another BitBake release out.
 
-/home/rschus/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
-module is deprecated
-  import types, sets
-
-Is anyone from OE in the know how to fix that properly? I know its only
-a warning but imagine an OE newbie reading this .... I would like to fix
-it myself but even after years of contributing to OE my Pyhton skills
-are severely limited. :|
-
-Regards
-Robert
+:M:
 
 
---------------enig2721B9FFAB1D37C6B42853BB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAkoH7nIACgkQG9cfwmwwEtoIIQCfaUN7iiceBjB6zsIOB4ZWuzy/
-nbIAnRSKWNGWWzURfYQSKkaa8nSNUo4J
-=w37K
------END PGP SIGNATURE-----
-
---------------enig2721B9FFAB1D37C6B42853BB--
