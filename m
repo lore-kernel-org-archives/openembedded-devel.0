@@ -1,21 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M3WTi-00044L-DG
-	for openembedded-devel@openembedded.org; Mon, 11 May 2009 16:27:38 +0200
-Received: (qmail 30420 invoked by uid 813007); 11 May 2009 14:21:06 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 11 May 2009 14:21:06 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 May 2009 16:20:38 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M3XE1-0005f0-Pp
+	for openembedded-devel@openembedded.org; Mon, 11 May 2009 17:15:29 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M3X7d-0002KO-AX
+	for openembedded-devel@openembedded.org; Mon, 11 May 2009 15:08:53 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 11 May 2009 15:08:53 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 11 May 2009 15:08:53 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 11 May 2009 17:08:38 +0200
+Message-ID: <gu9f1m$d1q$1@ger.gmane.org>
 References: <d1b08f940905110120t2a2162a6rbc2bd7237b2df09e@mail.gmail.com>
-In-Reply-To: <d1b08f940905110120t2a2162a6rbc2bd7237b2df09e@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200905111620.39699.marcin@juszkiewicz.com.pl>
+	<200905111620.39699.marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090427 Shredder/3.0b3pre
+In-Reply-To: <200905111620.39699.marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
 Subject: Re: locale_base_ar_kw
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,30 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 14:27:38 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 11 May 2009 15:15:29 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Dnia poniedzia=C5=82ek, 11 maja 2009 o 10:20:45 Andrea Adami napisa=C5=82(a=
-):
-> Inspecting the .dot files I discovered in my recent builds locale
-> base is ar_KW. I did not know the new default locale is Arabic for
-> Kuwait...
-
-It is not default locale... this package contains files which had to be=20
-in libc6 package... So it is *critical* level of bug.
-
-> Not yet found out if it's angstrom-specific issue, will test.
+On 11-05-09 16:20, Marcin Juszkiewicz wrote:
+> Dnia poniedziałek, 11 maja 2009 o 10:20:45 Andrea Adami napisał(a):
+>> Inspecting the .dot files I discovered in my recent builds locale
+>> base is ar_KW. I did not know the new default locale is Arabic for
+>> Kuwait...
+>
+> It is not default locale... this package contains files which had to be
+> in libc6 package... So it is *critical* level of bug.
 
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Isn't that a side effect of the double glibc override?
 
+regards,
+
+KOen
 
 
 
