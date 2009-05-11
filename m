@@ -1,24 +1,33 @@
-Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1M3ZQY-0000L5-PZ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 May 2009 19:36:34 +0200
-Received: from gandalf.denix.org ([71.127.60.148]) by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KJH00DVRPXDRTJE@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	11 May 2009 12:29:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3267C14AF5F; Mon,
-	11 May 2009 13:29:37 -0400 (EDT)
-Date: Mon, 11 May 2009 13:29:37 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090511172937.GA23731@denix.org>
-References: <alpine.DEB.1.00.0905111020490.11037@localhost.localdomain>
-MIME-version: 1.0
-In-reply-to: <alpine.DEB.1.00.0905111020490.11037@localhost.localdomain>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] evtest: Fixed GNU_HASH QA error.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M3aBo-0007T0-LR
+	for openembedded-devel@openembedded.org; Mon, 11 May 2009 20:25:24 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M3a5U-0002wd-9D
+	for openembedded-devel@openembedded.org; Mon, 11 May 2009 18:18:52 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 11 May 2009 18:18:52 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 11 May 2009 18:18:52 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 11 May 2009 20:18:35 +0200
+Message-ID: <gu9q5s$o98$1@ger.gmane.org>
+References: <1242058903-17716-1-git-send-email-denis@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090427 Shredder/3.0b3pre
+In-Reply-To: <1242058903-17716-1-git-send-email-denis@denix.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [STABLE][PATCH] curl: move PACKAGES and FILES_* from the .inc file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,59 +41,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 17:36:35 -0000
-X-Groupsio-MsgNum: 10167
-Content-type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary=cWoXeonUoKmBZSoM
-Content-disposition: inline
+X-List-Received-Date: Mon, 11 May 2009 18:25:25 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---cWoXeonUoKmBZSoM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 11-05-09 18:21, Denys Dmytriyenko wrote:
+> this resolves the lockfile() trying to access the wrong directory
+> when building sdk version after target one was built
+>
+> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
+> Acked-by: Tom Rini<trini@embeddedalley.com>
 
-On Mon, May 11, 2009 at 10:23:18AM -0700, Theodore A. Roth wrote:
->=20
-> Signed-off-by: Theodore A. Roth <taroth@gmail.com>
-
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Acked-by: Koen Kooi <koen@openembedded.org>
 
 > ---
->  recipes/evtest/evtest_1.23.bb |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
->=20
-> diff --git a/recipes/evtest/evtest_1.23.bb b/recipes/evtest/evtest_1.23.bb
-> index 4c5d195..6cf87be 100644
-> --- a/recipes/evtest/evtest_1.23.bb
-> +++ b/recipes/evtest/evtest_1.23.bb
-> @@ -11,6 +11,8 @@ PR =3D "r0"
->  SRC_URI =3D "http://beagleboard.googlecode.com/files/evtest.c"
->  S =3D "${WORKDIR}"
-> =20
-> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+>   recipes/curl/{curl.inc =>  curl-common.inc} |   23 -----------------------
+>   recipes/curl/curl-native_7.18.2.bb         |    4 ++--
+>   recipes/curl/curl-sdk_7.18.2.bb            |    4 ++--
+>   recipes/curl/curl-target.inc               |   22 ++++++++++++++++++++++
+>   recipes/curl/curl_7.18.2.bb                |    4 +++-
+>   recipes/curl/curl_7.19.0.bb                |    6 +++---
+>   6 files changed, 32 insertions(+), 31 deletions(-)
+>   rename recipes/curl/{curl.inc =>  curl-common.inc} (73%)
+>   create mode 100644 recipes/curl/curl-target.inc
+>
+> diff --git a/recipes/curl/curl.inc b/recipes/curl/curl-common.inc
+> similarity index 73%
+> rename from recipes/curl/curl.inc
+> rename to recipes/curl/curl-common.inc
+> index d3edaef..ce4f5f2 100644
+> --- a/recipes/curl/curl.inc
+> +++ b/recipes/curl/curl-common.inc
+> @@ -55,26 +55,3 @@ do_stage () {
+>   	install -m 0644 ${S}/include/curl/*.h ${STAGING_INCDIR}/curl/
+>   	oe_libinstall -so -a -C lib libcurl ${STAGING_LIBDIR}
+>   }
+> -
+> -PACKAGES += "${PN}-certs libcurl libcurl-dev libcurl-doc"
+> -
+> -FILES_${PN} = "${bindir}/curl"
+> -
+> -FILES_${PN}-certs = "${datadir}/curl/curl-*"
+> -PACKAGE_ARCH_${PN}-certs = "all"
+> -
+> -FILES_${PN}-doc = "${mandir}/man1/curl.1"
+> -
+> -FILES_lib${PN} = "${libdir}/lib*.so.*"
+> -RRECOMMENDS_lib${PN} += "${PN}-certs"
+> -FILES_lib${PN}-dev = "${includedir} \
+> -                      ${libdir}/lib*.so \
+> -                      ${libdir}/lib*.a \
+> -                      ${libdir}/lib*.la \
+> -                      ${libdir}/pkgconfig \
+> -                      ${datadir}/aclocal \
+> -                      ${bindir}/*-config"
+> -
+> -FILES_lib${PN}-doc = "${mandir}/man3 \
+> -                      ${mandir}/man1/curl-config.1"
+> -
+> diff --git a/recipes/curl/curl-native_7.18.2.bb b/recipes/curl/curl-native_7.18.2.bb
+> index f0e2b89..c95591b 100644
+> --- a/recipes/curl/curl-native_7.18.2.bb
+> +++ b/recipes/curl/curl-native_7.18.2.bb
+> @@ -1,6 +1,7 @@
+> -require curl_${PV}.bb
+> +require curl-common.inc
+>   inherit native
+>   DEPENDS = "zlib-native"
+> +PR = "r1"
+>
+>   do_stage () {
+>   	autotools_stage_all
+> @@ -9,4 +10,3 @@ do_stage () {
+>   do_install() {
+>   	:
+>   }
+> -
+> diff --git a/recipes/curl/curl-sdk_7.18.2.bb b/recipes/curl/curl-sdk_7.18.2.bb
+> index 816fe64..35b0d88 100644
+> --- a/recipes/curl/curl-sdk_7.18.2.bb
+> +++ b/recipes/curl/curl-sdk_7.18.2.bb
+> @@ -1,6 +1,7 @@
+> -require curl_${PV}.bb
+> +require curl-common.inc
+>   inherit sdk
+>   DEPENDS = "zlib-sdk"
+> +PR = "r1"
+>
+>   do_stage () {
+>           install -d ${STAGING_INCDIR}/curl
+> @@ -11,4 +12,3 @@ do_stage () {
+>   do_install() {
+>   	:
+>   }
+> -
+> diff --git a/recipes/curl/curl-target.inc b/recipes/curl/curl-target.inc
+> new file mode 100644
+> index 0000000..88877e5
+> --- /dev/null
+> +++ b/recipes/curl/curl-target.inc
+> @@ -0,0 +1,22 @@
+> +PACKAGES += "${PN}-certs libcurl libcurl-dev libcurl-doc"
 > +
->  do_compile() {
->      ${CC} evtest.c -o evtest -I${STAGING_INCDIR} -L${STAGING_LIBDIR}
->  }
-> --=20
-> 1.5.4.3
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> +FILES_${PN} = "${bindir}/curl"
+> +
+> +FILES_${PN}-certs = "${datadir}/curl/curl-*"
+> +PACKAGE_ARCH_${PN}-certs = "all"
+> +
+> +FILES_${PN}-doc = "${mandir}/man1/curl.1"
+> +
+> +FILES_lib${PN} = "${libdir}/lib*.so.*"
+> +RRECOMMENDS_lib${PN} += "${PN}-certs"
+> +FILES_lib${PN}-dev = "${includedir} \
+> +                      ${libdir}/lib*.so \
+> +                      ${libdir}/lib*.a \
+> +                      ${libdir}/lib*.la \
+> +                      ${libdir}/pkgconfig \
+> +                      ${datadir}/aclocal \
+> +                      ${bindir}/*-config"
+> +
+> +FILES_lib${PN}-doc = "${mandir}/man3 \
+> +                      ${mandir}/man1/curl-config.1"
+> +
+> diff --git a/recipes/curl/curl_7.18.2.bb b/recipes/curl/curl_7.18.2.bb
+> index 2c3ec41..3de6da4 100644
+> --- a/recipes/curl/curl_7.18.2.bb
+> +++ b/recipes/curl/curl_7.18.2.bb
+> @@ -1,2 +1,4 @@
+> -require curl.inc
+> +require curl-common.inc
+> +require curl-target.inc
+>
+> +PR = "r1"
+> diff --git a/recipes/curl/curl_7.19.0.bb b/recipes/curl/curl_7.19.0.bb
+> index a99a68b..1944efe 100644
+> --- a/recipes/curl/curl_7.19.0.bb
+> +++ b/recipes/curl/curl_7.19.0.bb
+> @@ -1,5 +1,5 @@
+> -require curl.inc
+> +require curl-common.inc
+> +require curl-target.inc
+>
+>   SRC_URI += "file://off_t_abi_fix.patch;patch=1;pnum=0"
+> -PR = "r1"
+> -
+> +PR = "r2"
 
---cWoXeonUoKmBZSoM
-Content-Type: application/pgp-signature
-Content-Disposition: inline
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.11 (GNU/Linux)
 
-iEYEARECAAYFAkoIYIEACgkQQypAvBzwgeyRmwCfUySjC5e5cCIf/x438rhqKzK+
-JL0AnR98PCAUlFkTTbQ/WoxpNgAddd3v
-=jKVy
------END PGP SIGNATURE-----
 
---cWoXeonUoKmBZSoM--
