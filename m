@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M3XE1-0005f0-Pp
-	for openembedded-devel@openembedded.org; Mon, 11 May 2009 17:15:29 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M3X7d-0002KO-AX
-	for openembedded-devel@openembedded.org; Mon, 11 May 2009 15:08:53 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 15:08:53 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 15:08:53 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <g.eismann@gmx.net>) id 1M3Xm1-0003Ym-Dw
+	for openembedded-devel@openembedded.org; Mon, 11 May 2009 17:50:37 +0200
+Received: (qmail invoked by alias); 11 May 2009 15:44:03 -0000
+Received: from 247.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
+	[87.222.70.247]
+	by mail.gmx.net (mp069) with SMTP; 11 May 2009 17:44:03 +0200
+X-Authenticated: #21729387
+X-Provags-ID: V01U2FsdGVkX1/JSW9zvhjJnUk8c+kGPNgnTt1bHRGEWFJ6rH8XCi
+	IW52qvmSzJTMp5
+From: "G. Eismann" <g.eismann@gmx.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 11 May 2009 17:08:38 +0200
-Message-ID: <gu9f1m$d1q$1@ger.gmane.org>
-References: <d1b08f940905110120t2a2162a6rbc2bd7237b2df09e@mail.gmail.com>
-	<200905111620.39699.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090427 Shredder/3.0b3pre
-In-Reply-To: <200905111620.39699.marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: locale_base_ar_kw
+Date: Mon, 11 May 2009 17:44:00 +0200
+User-Agent: KMail/1.11.3 (Linux/2.6.28-11-generic; KDE/4.2.3; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200905111744.00650.g.eismann@gmx.net>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.77,0.77
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: image generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 15:15:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-On 11-05-09 16:20, Marcin Juszkiewicz wrote:
-> Dnia poniedziałek, 11 maja 2009 o 10:20:45 Andrea Adami napisał(a):
->> Inspecting the .dot files I discovered in my recent builds locale
->> base is ar_KW. I did not know the new default locale is Arabic for
->> Kuwait...
->
-> It is not default locale... this package contains files which had to be
-> in libc6 package... So it is *critical* level of bug.
+X-List-Received-Date: Mon, 11 May 2009 15:50:37 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
 
-Isn't that a side effect of the double glibc override?
+Hi,
 
-regards,
+I am generating a image based in the micro-image.
+I have added a new package to the image and worked OK.
+Now, I have added several files to that package, but they are not in the final 
+image.
 
-KOen
+I can see the files in the install directory of the package, so I guess they 
+are into the package.
+
+I have cleaned the package and the image, and built again the image. In the 
+process, the package is being built again, but the new files are lost.
+
+The files I have added are into /etc and /etc/init.d/, Dont know if there is a 
+special way to add files there. 
 
 
+-- 
+  - Eismann -
 
