@@ -1,33 +1,21 @@
-Received: from [93.97.173.237] (helo=tim.rpsys.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1M3V7k-0007kc-Iq
-	for openembedded-devel@openembedded.org; Mon, 11 May 2009 15:00:52 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n4BCsKiI011629
-	for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 13:54:20 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 11330-04 for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 13:54:16 +0100 (BST)
-Received: from [192.168.1.30] (dynamic0.rpnet.com [192.168.1.30])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n4BCsAHS011622
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 13:54:12 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <4A080E5F.6080602@balister.org>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M3WSw-00042n-0L
+	for openembedded-devel@openembedded.org; Mon, 11 May 2009 16:26:50 +0200
+Received: (qmail 28890 invoked by uid 813007); 11 May 2009 14:20:17 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 11 May 2009 14:20:17 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 May 2009 16:19:41 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
+	x86_64; ; )
 References: <4A07EE70.2010408@gmx.net>
-	<200905111210.44913.mickey@vanille-media.de>
-	<4A080E5F.6080602@balister.org>
-Date: Mon, 11 May 2009 13:54:09 +0100
-Message-Id: <1242046449.5824.29.camel@ted>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
+In-Reply-To: <4A07EE70.2010408@gmx.net>
+MIME-Version: 1.0
+Message-Id: <200905111619.42187.marcin@juszkiewicz.com.pl>
 Subject: Re: python 2.6 warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,35 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 13:00:52 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 May 2009 14:26:50 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Mon, 2009-05-11 at 07:39 -0400, Philip Balister wrote:
-> Michael 'Mickey' Lauer wrote:
-> > On Monday 11 May 2009 11:22:56 Robert Schuster wrote:
-> >> Hi all,
-> >> those who are using bitbake with Python 2.6 (e.g. Ubuntu 09.04, Debian
-> >> sid) will notice this warning:
-> >>
-> >> /home/rschus/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
-> >> module is deprecated
-> >>   import types, sets
-> >>
-> >> Is anyone from OE in the know how to fix that properly?
-> > 
-> > Basically you need to rewrite COW.py to work with the new built-in sets. Might 
-> > be a chance to get another BitBake release out.
-> 
-> Will this still work with python 2.5?
+Dnia poniedzia=C5=82ek, 11 maja 2009 o 11:22:56 Robert Schuster napisa=C5=
+=82(a):
+> Hi all,
+> those who are using bitbake with Python 2.6 (e.g. Ubuntu 09.04,
+> Debian sid) will notice this warning:
+>
+> /home/rschus/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the
+> sets module is deprecated
+>   import types, sets
+>
+> Is anyone from OE in the know how to fix that properly? I know its
+> only a warning but imagine an OE newbie reading this .... I would
+> like to fix it myself but even after years of contributing to OE my
+> Pyhton skills are severely limited. :|
 
-There were patches for this on the bitbake list. I suspect 2.5 will be
-fine, not sure about 2.4 or earlier. I've not had a chance to look into
-this yet :(
+BitBake trunk has it fixed by me. Backporting to 1.8.x and to=20
+stable/2009 are on my todolist. And yes - it works fine with Python 2.5=20
+and even should with Python 2.4 which is minimal required version=20
+(should works with 2.3 but we do not support it).
 
-Cheers,
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Richard
 
 
 
