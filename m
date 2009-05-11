@@ -1,32 +1,25 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1M3R1p-0008CD-6u
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1M3Rr1-0001Aj-DU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 May 2009 10:38:29 +0200
-Received: by fxm20 with SMTP id 20so2491559fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2009 01:31:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=ZcTsq0EDBrtnyaI7VONSHpWcna2Iig7ixUu/lHzeAkc=;
-	b=MHVJ4Gv6WPQ5sBcIXAgMDNsi7FvunFOqrj6WKk0FjdvO4T0IP1IbbaOlcsp67jUuig
-	ZAF04sTC+n33BN0QW0KJNsMdyXx9B7RM1BJU4ex8lANVcSKS/GB4SIfadb3USBGV9pak
-	pGE+yF03AjEmhfIU+MRrlmlPp0wmLd0kKNvUM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=BONlwOcaY2LzfO2j+0Jw28sTHL2r7D0msDOOO/5p1Y/7y65fw+bsMme2eqUXehZleF
-	qL6TDyppwe9hF77KsSrreiSJKBYadvr+aul8jhH02i4FB1kxIKDEqL6PpFjHojcu+DIR
-	vbzYMiojBMy51nF9tzMOV+vOaSoLFWk7WUKys=
+	Mon, 11 May 2009 11:31:23 +0200
+Received: (qmail invoked by alias); 11 May 2009 09:24:50 -0000
+Received: from p5DDC6E93.dip.t-dialin.net (EHLO [192.168.4.51])
+	[93.220.110.147]
+	by mail.gmx.net (mp023) with SMTP; 11 May 2009 11:24:50 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX19oVldPqQVodqBYbeR70WxUG2TdJQu0TYvN7cj833
+	0L/1tiiqDQp3Gn
+Message-ID: <4A07EE70.2010408@gmx.net>
+Date: Mon, 11 May 2009 11:22:56 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
-Received: by 10.223.105.75 with SMTP id s11mr3293214fao.4.1242030716918; Mon, 
-	11 May 2009 01:31:56 -0700 (PDT)
-Date: Mon, 11 May 2009 10:31:56 +0200
-Message-ID: <d1b08f940905110131h13a6b314q64e74a2bd9919433@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: x11-gpe-java-image: gdk-pixbuf
+X-Enigmail-Version: 0.95.7
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.65
+Subject: python 2.6 warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,27 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 08:38:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 May 2009 09:31:23 -0000
+X-Groupsio-MsgNum: 10155
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig2721B9FFAB1D37C6B42853BB"
 
-Hello,
+--------------enig2721B9FFAB1D37C6B42853BB
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-I was testing the general buildability when I stumbled in a strange
-issue: the gtk+/gdk .pc files are overwritten with an older version ,
-ending up with target=linux-fb. Wrong...
+Hi all,
+those who are using bitbake with Python 2.6 (e.g. Ubuntu 09.04, Debian
+sid) will notice this warning:
 
-FWIW the default gtk+ is:
+/home/rschus/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
+module is deprecated
+  import types, sets
 
-./distro/include/angstrom-2008-preferred-versions.inc:PREFERRED_VERSION_gtk+
-= "2.16.0"
-
-I think to have identified the culprit: maemo/hildon/libosso,
-requiring somehow the old gdk-pixbuf_2.10.14.
-I suspect this conflicts with the loaders installed by gtk+_2.1.6.
+Is anyone from OE in the know how to fix that properly? I know its only
+a warning but imagine an OE newbie reading this .... I would like to fix
+it myself but even after years of contributing to OE my Pyhton skills
+are severely limited. :|
 
 Regards
+Robert
 
-Andrea
 
+--------------enig2721B9FFAB1D37C6B42853BB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkoH7nIACgkQG9cfwmwwEtoIIQCfaUN7iiceBjB6zsIOB4ZWuzy/
+nbIAnRSKWNGWWzURfYQSKkaa8nSNUo4J
+=w37K
+-----END PGP SIGNATURE-----
+
+--------------enig2721B9FFAB1D37C6B42853BB--
