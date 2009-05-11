@@ -1,28 +1,34 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [93.97.173.237] (helo=tim.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1M3Ugx-0005Ji-TU
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 May 2009 14:33:12 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 0883D16DFDC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2009 14:27:48 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 3B0E72A4242
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2009 14:26:41 +0200 (CEST)
-MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Mon, 11 May 2009 14:26:08 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF7BC@hiob.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [Wiki users] Wiki naming conventions
-Thread-Index: AcnSM6kkQkcVMuQDQUGjFG88XAVUEQ==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [Wiki users] Wiki naming conventions
+	(envelope-from <rpurdie@rpsys.net>) id 1M3V7k-0007kc-Iq
+	for openembedded-devel@openembedded.org; Mon, 11 May 2009 15:00:52 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n4BCsKiI011629
+	for <openembedded-devel@openembedded.org>;
+	Mon, 11 May 2009 13:54:20 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 11330-04 for <openembedded-devel@openembedded.org>;
+	Mon, 11 May 2009 13:54:16 +0100 (BST)
+Received: from [192.168.1.30] (dynamic0.rpnet.com [192.168.1.30])
+	(authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n4BCsAHS011622
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@openembedded.org>;
+	Mon, 11 May 2009 13:54:12 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <4A080E5F.6080602@balister.org>
+References: <4A07EE70.2010408@gmx.net>
+	<200905111210.44913.mickey@vanille-media.de>
+	<4A080E5F.6080602@balister.org>
+Date: Mon, 11 May 2009 13:54:09 +0100
+Message-Id: <1242046449.5824.29.camel@ted>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-Virus-Scanned: amavisd-new at rpsys.net
+Subject: Re: python 2.6 warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,19 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 12:33:12 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 11 May 2009 13:00:52 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-SGkgT0Ugd2lraSB1c2VycyBhbmQgYWRtaW5zLA0KDQppJ2QgbGlrZSB0byBkaXJlY3QgeW91ciBh
-dHRlbnRpb24gdG8gdGhlc2UgdGFsa3MgdG8gZ2V0IHNvbWUgZmVlZGJhY2sgZm9yIHN1Z2dlc3Rp
-b25zIHRvIGltcHJvdmUgdGhlIHdpa2kgdXNhYmlsaXR5LiANCg0KPGh0dHA6Ly93aWtpLm9wZW5l
-bWJlZGRlZC5uZXQvaW5kZXgucGhwL0NhdGVnb3J5X3RhbGs6RGV2I0Rldl92cy5fRGV2ZWxvcGVy
-cz4NCjxodHRwOi8vd2lraS5vcGVuZW1iZWRkZWQubmV0L2luZGV4LnBocC9PcGVuZW1iZWRkZWRf
-dGFsazpIZWxwI05hbWluZ19Db252ZW50aW9ucz4NCg0KUGxlYXNlIGNvbnRyaWJ1dGUgeW91ciBv
-cGluaW9ucyB0byB0aGUgd2lraSB0YWxrIHBhZ2VzIGl0c2VsZiBpbnN0ZWFkIG9mIGJyaW5naW5n
-IHRoZSBkaXNjdXNzaW9uIHRvIHRoZSBtYWlsaW5nIGxpc3QuDQoNClRoeCwNClN0ZWZmZW4NCg==
+On Mon, 2009-05-11 at 07:39 -0400, Philip Balister wrote:
+> Michael 'Mickey' Lauer wrote:
+> > On Monday 11 May 2009 11:22:56 Robert Schuster wrote:
+> >> Hi all,
+> >> those who are using bitbake with Python 2.6 (e.g. Ubuntu 09.04, Debian
+> >> sid) will notice this warning:
+> >>
+> >> /home/rschus/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
+> >> module is deprecated
+> >>   import types, sets
+> >>
+> >> Is anyone from OE in the know how to fix that properly?
+> > 
+> > Basically you need to rewrite COW.py to work with the new built-in sets. Might 
+> > be a chance to get another BitBake release out.
+> 
+> Will this still work with python 2.5?
+
+There were patches for this on the bitbake list. I suspect 2.5 will be
+fine, not sure about 2.4 or earlier. I've not had a chance to look into
+this yet :(
+
+Cheers,
+
+Richard
+
 
 
