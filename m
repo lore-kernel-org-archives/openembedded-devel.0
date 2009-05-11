@@ -1,26 +1,35 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <g.eismann@gmx.net>) id 1M3aj5-0008Mv-RQ
+Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <cliff.brake@gmail.com>) id 1M3bvA-0007Uo-MJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 May 2009 20:59:48 +0200
-Received: (qmail invoked by alias); 11 May 2009 18:53:11 -0000
-Received: from 247.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
-	[87.222.70.247]
-	by mail.gmx.net (mp058) with SMTP; 11 May 2009 20:53:11 +0200
-X-Authenticated: #21729387
-X-Provags-ID: V01U2FsdGVkX1963y4cIiB6Y7ue0pTQMdAuVrjwB3N4kDCT2xPtO5
-	DR/8BFm4GxiCf+
-From: "G. Eismann" <g.eismann@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 May 2009 20:52:53 +0200
-User-Agent: KMail/1.11.3 (Linux/2.6.28-11-generic; KDE/4.2.3; i686; ; )
-References: <200905111744.00650.g.eismann@gmx.net>
-In-Reply-To: <200905111744.00650.g.eismann@gmx.net>
+	Mon, 11 May 2009 22:16:20 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so1839192ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 May 2009 13:09:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=roM0MzqXhst6Zlkuyz8Ro84PM18Z46HgFpLvXj7UxT8=;
+	b=EjaCYkA1iEokzsbon4UlZLNAA0B0p+DAg7Mpbl7sRok6NgAXSQlZpmMlOA63FaxWR1
+	lboxf7YhshDRZtjqm3r+c1QJ1qirZacoz7Vnb4iLy5+ok7Pp8t66mUzvZyua8IGcnxrx
+	gYQVDmJF5QMmhjA1IaFxuLZoY5P7jCi/11qEA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Sejd/XBTexR/CNR5qtbVnxRCsPXrQpy5KCdEYE+tcsA73AQvkD6i64/dHquvk4RO2v
+	pi8lTj31hdY9fH7Xn0uvz1b7BldFQkXGvY1/AmiDsLY4559hgobnze2sDrN1XgqjUhXD
+	Si9VnO0om+292gtMP8FZ69nBla1RTowTEwdqQ=
 MIME-Version: 1.0
-Message-Id: <200905112052.53485.g.eismann@gmx.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.67,0.67
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Received: by 10.150.156.5 with SMTP id d5mr13882870ybe.119.1242072587358; Mon, 
+	11 May 2009 13:09:47 -0700 (PDT)
+In-Reply-To: <200905112052.53485.g.eismann@gmx.net>
+References: <200905111744.00650.g.eismann@gmx.net>
+	<200905112052.53485.g.eismann@gmx.net>
+Date: Mon, 11 May 2009 16:09:47 -0400
+Message-ID: <f96d234e0905111309u1ae4805bnaeb9adc1bf1ceca3@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: image generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -35,37 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 18:59:50 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 11 May 2009 20:16:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Lunes 11 Mayo 2009 17:44:00 G. Eismann escribi=F3:
-> Hi,
+On Mon, May 11, 2009 at 2:52 PM, G. Eismann <g.eismann@gmx.net> wrote:
+> On Lunes 11 Mayo 2009 17:44:00 G. Eismann escribi=F3:
+>> Hi,
+>>
+>> I am generating a image based in the micro-image.
+>> I have added a new package to the image and worked OK.
+>> Now, I have added several files to that package, but they are not in the
+>> final image.
+>>
+>> I can see the files in the install directory of the package, so I guess
+>> they are into the package.
+>>
+>> I have cleaned the package and the image, and built again the image. In =
+the
+>> process, the package is being built again, but the new files are lost.
 >
-> I am generating a image based in the micro-image.
-> I have added a new package to the image and worked OK.
-> Now, I have added several files to that package, but they are not in the
-> final image.
+> Well, I have found the problem, but I dont know why it's happening nor ho=
+w to
+> solve it.
 >
-> I can see the files in the install directory of the package, so I guess
-> they are into the package.
->
-> I have cleaned the package and the image, and built again the image. In t=
-he
-> process, the package is being built again, but the new files are lost.
+> When building the image, the release 5 (the last one) of the package is b=
+uilt,
+> but in the "do_package_write_ipk" step there is an error because is looki=
+ng
+> for the install directory for the release 1.
 
-Well, I have found the problem, but I dont know why it's happening nor how =
-to=20
-solve it.
+Can you post your recipe, and we'll take a look?
 
-When building the image, the release 5 (the last one) of the package is bui=
-lt,=20
-but in the "do_package_write_ipk" step there is an error because is looking=
-=20
-for the install directory for the release 1.
+Thanks,
+Cliff
 
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Cliff Brake
+http://bec-systems.com
 
-=2D-=20
-  - Eismann -
 
