@@ -1,24 +1,24 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1M3gN9-0007Ab-FA
+	(envelope-from <denis@denix.org>) id 1M3gNE-0007Ax-FO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 May 2009 03:01:31 +0200
-Received: from gandalf.denix.org ([71.127.60.148]) by vms173003.mailsrvcs.net
+	Tue, 12 May 2009 03:01:36 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173005.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KJI00BPLAIY9AFL@vms173003.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KJI00GAZAIUCDCU@vms173005.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	11 May 2009 19:54:40 -0500 (CDT)
+	11 May 2009 19:54:35 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 3D9A314AF66; Mon,
+	by gandalf.denix.org (Postfix) with ESMTP id 25FB314AF63; Mon,
 	11 May 2009 20:54:28 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 May 2009 20:54:28 -0400
-Message-id: <1242089668-11610-9-git-send-email-denis@denix.org>
+Date: Mon, 11 May 2009 20:54:25 -0400
+Message-id: <1242089668-11610-6-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.6.0.6
 In-reply-to: <1242089668-11610-1-git-send-email-denis@denix.org>
 References: <1242089668-11610-1-git-send-email-denis@denix.org>
-Subject: [PATCH 8/8] u-boot: update git recipe with the new DaVinci EVMs
+Subject: [PATCH 5/8] dm365-evm: add new machine definition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,34 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2009 01:01:31 -0000
+X-List-Received-Date: Tue, 12 May 2009 01:01:36 -0000
 
+kernel support is on the way
 
 Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 ---
- recipes/u-boot/u-boot_git.bb |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+ conf/machine/dm365-evm.conf |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/dm365-evm.conf
 
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 3d99067..ba31577 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -1,11 +1,13 @@
- require u-boot.inc
--PR ="r23"
-+PR ="r24"
- 
- FILESPATHPKG =. "u-boot-git:"
- 
- SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git "
- SRCREV_davinci-sffsdr = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
--SRCREV_davinci-dvevm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
-+SRCREV_dm6446-evm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
-+SRCREV_dm6467-evm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
-+SRCREV_dm355-evm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
- SRCREV_akita = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
- SRCREV_spitz = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
- SRCREV_c7x0 = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
+diff --git a/conf/machine/dm365-evm.conf b/conf/machine/dm365-evm.conf
+new file mode 100644
+index 0000000..8c05a69
+--- /dev/null
++++ b/conf/machine/dm365-evm.conf
+@@ -0,0 +1,13 @@
++#@TYPE: Machine
++#@NAME: DM365 CPUs on a Davinci DM365 EVM board
++#@DESCRIPTION: Machine configuration for the TI Davinci DM365 EVM board
++
++require conf/machine/include/davinci.inc
++
++PREFERRED_PROVIDER_xserver = "xserver-kdrive"
++PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
++
++PREFERRED_VERSION_u-boot = "git"
++UBOOT_MACHINE = "davinci_dvevm_config"
++
++#MACHINE_EXTRA_RRECOMMENDS = ""
 -- 
 1.6.0.6
 
