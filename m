@@ -1,22 +1,36 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M3u8r-0003T4-L2
-	for openembedded-devel@openembedded.org; Tue, 12 May 2009 17:43:41 +0200
-Received: (qmail 2081 invoked by uid 813007); 12 May 2009 15:37:02 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 May 2009 15:37:02 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 May 2009 17:36:28 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <4A007612.60502@kernelconcepts.de>
-In-Reply-To: <4A007612.60502@kernelconcepts.de>
+	(envelope-from <taroth@gmail.com>) id 1M3uGG-0003cP-Jg
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 May 2009 17:51:21 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so27362yxh.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 May 2009 08:44:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=nkanajkhPzbsYjK2MPDMTofn4nSO3eexMi2HWEaSgBU=;
+	b=ZIMvgCNs7dwBu6yIvH16341WIx9oRUz3OiIsSq1Vfv7h6agRNO0+F74qk+w9th3t4d
+	wKSb9evh14Gy4ywGWs1ubLKwZm3NNDIedZujwr3srObRQffx2dU2ZGVhLmOLZUeFF93N
+	4+/+eqhHFmV89zcw100c6hhjJOwWZYoYbBaxU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=jSLvlDuftOD0Ry0iqRMnyX6+EEWIWoUZSmQHtd+EPK12AK2r1Ev3HZyKb++PhW5TTl
+	58Jw/cQ5wc0NqpzDKBMOwFflmrZ/zKh4CLKzIOBWTGgYAVz3659c40X164tyDLu8qypK
+	Sy1V35lqYVjRUGYCNGsjODCACEFZNxBbC/QC0=
 MIME-Version: 1.0
-Message-Id: <200905121736.29683.marcin@juszkiewicz.com.pl>
-Subject: Re: OpenEmbedded at Linuxtag 2009
+Received: by 10.150.148.7 with SMTP id v7mr12595ybd.66.1242143082186; Tue, 12 
+	May 2009 08:44:42 -0700 (PDT)
+In-Reply-To: <20090511172937.GA23731@denix.org>
+References: <alpine.DEB.1.00.0905111020490.11037@localhost.localdomain>
+	<20090511172937.GA23731@denix.org>
+Date: Tue, 12 May 2009 08:44:42 -0700
+Message-ID: <f46da1cf0905120844m41413452o2eb88da084bc5c06@mail.gmail.com>
+From: "Theodore A. Roth" <taroth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] evtest: Fixed GNU_HASH QA error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,39 +44,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2009 15:43:41 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Tue, 12 May 2009 15:51:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia wtorek, 5 maja 2009 o 19:23:30 Florian Boor napisa=C5=82(a):
+On Mon, May 11, 2009 at 10:29 AM, Denys Dmytriyenko <denis@denix.org> wrote=
+:
+> On Mon, May 11, 2009 at 10:23:18AM -0700, Theodore A. Roth wrote:
+>>
+>> Signed-off-by: Theodore A. Roth <taroth@gmail.com>
+>
+> Acked-by: Denys Dmytriyenko <denis@denix.org>
 
-> I have some good news: We have been accepted for a project booth at
-> LinuxTag. This means that we have a booth at the largest Linux fair
-> in Europe and the opportunity to get in touch with users, companies
-> and other projects there.
+I do not have commit access so someone will need to apply this.
 
-Cool!
+Thanks,
 
-> I can take care about organising this event for us and about some
-> basic equipment and a few devices. It would be great to have some
-> more of us there to man the booth. I can order exhibitor passes for
-> us, so if you like to help please let me know soon: In contrast to
-> last year we do not get a defined number of these but we have to
-> register one by one by submitting the name.
+Ted Roth
 
-I will attend LinuxTag this year and will help to man the booth. Can=20
-take some devices with me too.
-
-Can we think about hotel near Berlin Messe to group in one place?
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+>
+>> ---
+>> =A0recipes/evtest/evtest_1.23.bb | =A0 =A02 ++
+>> =A01 files changed, 2 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/recipes/evtest/evtest_1.23.bb b/recipes/evtest/evtest_1.23.=
+bb
+>> index 4c5d195..6cf87be 100644
+>> --- a/recipes/evtest/evtest_1.23.bb
+>> +++ b/recipes/evtest/evtest_1.23.bb
+>> @@ -11,6 +11,8 @@ PR =3D "r0"
+>> =A0SRC_URI =3D "http://beagleboard.googlecode.com/files/evtest.c"
+>> =A0S =3D "${WORKDIR}"
+>>
+>> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+>> +
+>> =A0do_compile() {
+>> =A0 =A0 =A0${CC} evtest.c -o evtest -I${STAGING_INCDIR} -L${STAGING_LIBD=
+IR}
+>> =A0}
+>> --
+>> 1.5.4.3
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
