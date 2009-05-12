@@ -1,24 +1,37 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M3jTG-0002qc-Bj
-	for openembedded-devel@openembedded.org; Tue, 12 May 2009 06:20:02 +0200
-Received: (qmail 4006 invoked from network); 12 May 2009 04:13:26 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 11 May 2009 21:13:26 -0700
-Date: Mon, 11 May 2009 21:13:25 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090512041325.GG7973@smtp.west.cox.net>
-References: <c384c5ea0905071305s1b180deal8c5fd09b5d646308@mail.gmail.com>
-	<1242096804-27041-1-git-send-email-msmith@cbnco.com>
-	<1242096804-27041-2-git-send-email-msmith@cbnco.com>
-	<20090512030227.GF7973@smtp.west.cox.net>
-	<Pine.LNX.4.64.0905112317500.6446@juice.ott.cti.com>
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1M3mQW-0004Eb-Q9
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 May 2009 09:29:24 +0200
+Received: by bwz19 with SMTP id 19so3070143bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 May 2009 00:22:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Y1/EHjH05VN8Z4Z8hHBFS8qO5ECR5kcM51W4xpBCljA=;
+	b=aTGl75sOK0LxzhB2S8fUcZlULlQffY9LAXqN24pMgxQThrd4B2vvNwYovGh1/3u5/j
+	OLNf2z3FnRgieojU9YBgo06PLD7PSz2sYn69mZuaJdO7MokWszwPypY+tPt3ecS2teMg
+	8nOhMoUUyxR1p+4oe1l23OtIIX2H+DUtojI5k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=upTOUOVOuXNDuT7CRsDwyxxo2mBTBJjAA4AvO32Zka4cFUv58Ov4l2A8A/Dq/zaxd+
+	wl13OD75aa4TxHergZY+Dg5HIBziVFcF29w05rZyXgby7wFpdtMW1W3bnLK+eelChIPy
+	yftch85DGfpqTxnY+1LU2b5Oevxpl/dsI56sU=
 MIME-Version: 1.0
-In-Reply-To: <Pine.LNX.4.64.0905112317500.6446@juice.ott.cti.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] grub: Split the grub-install script and friends	into a separate package.
+Received: by 10.223.122.15 with SMTP id j15mr4411219far.10.1242112966449; Tue, 
+	12 May 2009 00:22:46 -0700 (PDT)
+In-Reply-To: <gu9f1m$d1q$1@ger.gmane.org>
+References: <d1b08f940905110120t2a2162a6rbc2bd7237b2df09e@mail.gmail.com>
+	<200905111620.39699.marcin@juszkiewicz.com.pl>
+	<gu9f1m$d1q$1@ger.gmane.org>
+Date: Tue, 12 May 2009 09:22:46 +0200
+Message-ID: <d1b08f940905120022x218d7bf2k8e155ba5e34f2547@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: locale_base_ar_kw
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,24 +45,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2009 04:20:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 May 2009 07:29:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, May 11, 2009 at 11:18:29PM -0400, Michael Smith wrote:
-> On Mon, 11 May 2009, Tom Rini wrote:
-> 
-> > >  SRC_URI = "ftp://alpha.gnu.org/gnu/grub/grub-${PV}.tar.gz \
-> > 
-> > Please switch to ${GNU_MIRROR}/grub/...
-> 
-> grub is not on ${GNU_MIRROR}, only alpha.
-> 
-> I can only guess because it never had an official release.
+>Isn't that a side effect of the double glibc override?
 
-Oh right, my bad.
+I'd say yes...locale_base_ar_kw disappeared in today's build
+Seems fixed by yesterday's commit.
 
--- 
-Tom Rini
+Thx
+
+Andrea
 
 
