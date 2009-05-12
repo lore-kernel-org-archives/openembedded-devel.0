@@ -1,34 +1,37 @@
-Received: from [93.97.173.237] (helo=tim.rpsys.net)
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1M3eEP-0001rf-T7
-	for openembedded-devel@openembedded.org; Tue, 12 May 2009 00:44:22 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n4BMblnP016368
+	(envelope-from <otavio.salvador@gmail.com>) id 1M3fhT-0000yu-3G
+	for openembedded-devel@openembedded.org; Tue, 12 May 2009 02:18:27 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so1701093ywm.30
 	for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 23:37:47 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16247-03 for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 23:37:43 +0100 (BST)
-Received: from [192.168.1.30] (dynamic0.rpnet.com [192.168.1.30])
-	(authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n4BMbdHI016362
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Mon, 11 May 2009 23:37:40 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200905111619.42187.marcin@juszkiewicz.com.pl>
+	Mon, 11 May 2009 17:11:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:content-type; bh=cmEyul5Kmnkz/5HEWXwQzzE7DySNafhT/OSFhCFfxyU=;
+	b=WfmiH0wdXWN2IAJsUVj4tH9O7LYnPVe9ZvPeE/0erA7eAX8F+OmfbHTlomiHTJ2HUj
+	21lYrvUn1qqCsIJpKWdLNCLlSis2yyv3vJOGoiu1MxFQEi3+D9HpSg362r+qxOdAsMwk
+	luGVZMnoCgAThZHhNe4b+ePTrln1/fWhE3T/Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
+	b=aQRn1hjcJZnArfxpgK7LDMSIOkz+9F5ANzSXmEF5JCDrIRwerLaL5tYYGcfOyxJ3M5
+	9IMMdbsvgSHfHUvFAkKlmSqudDudGEI3oAmE/5pA6LpxJrAll5/fKCNNOOfj6Ib3nuE9
+	uDixN62VnFXYfD1vTFRCwQOE0+0ZDZmsRp1bM=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.140.15 with SMTP id n15mr12396053and.105.1242087109346; 
+	Mon, 11 May 2009 17:11:49 -0700 (PDT)
+In-Reply-To: <1242081458.5824.37.camel@ted>
 References: <4A07EE70.2010408@gmx.net>
 	<200905111619.42187.marcin@juszkiewicz.com.pl>
-Date: Mon, 11 May 2009 23:37:38 +0100
-Message-Id: <1242081458.5824.37.camel@ted>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	n4BMblnP016368
+	<1242081458.5824.37.camel@ted>
+Date: Mon, 11 May 2009 21:11:49 -0300
+X-Google-Sender-Auth: 0042bfdbe7dd7218
+Message-ID: <be7a9f3d0905111711r77d0230eif76b4551d3f05c2c@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@openembedded.org
 Subject: Re: python 2.6 warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,47 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2009 22:44:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 May 2009 00:18:27 -0000
+X-Groupsio-MsgNum: 10175
+Content-Type: multipart/mixed; boundary=0016e64355deefa3010469abf057
 
-On Mon, 2009-05-11 at 16:19 +0200, Marcin Juszkiewicz wrote:
-> Dnia poniedzia=C5=82ek, 11 maja 2009 o 11:22:56 Robert Schuster napisa=C5=
-=82(a):
-> > Hi all,
-> > those who are using bitbake with Python 2.6 (e.g. Ubuntu 09.04,
-> > Debian sid) will notice this warning:
-> >
-> > /home/rschus/oe/bitbake/lib/bb/COW.py:29: DeprecationWarning: the
-> > sets module is deprecated
-> >   import types, sets
-> >
-> > Is anyone from OE in the know how to fix that properly? I know its
-> > only a warning but imagine an OE newbie reading this .... I would
-> > like to fix it myself but even after years of contributing to OE my
-> > Pyhton skills are severely limited. :|
->=20
-> BitBake trunk has it fixed by me. Backporting to 1.8.x and to=20
-> stable/2009 are on my todolist. And yes - it works fine with Python 2.5=
-=20
-> and even should with Python 2.4 which is minimal required version=20
-> (should works with 2.3 but we do not support it).
+--0016e64355deefa3010469abf057
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-It won't work with 2.3 but we don't care about 2.3, it will work with
-2.4 onwards. I have no idea why we were using long deprecated stuff :/.
+Hello Richard,
 
-I've backported it to bitbake 1.8 and it seems to work along with
-merging a number of fixes lurking in Poky.
+On Mon, May 11, 2009 at 7:37 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> I've backported it to bitbake 1.8 and it seems to work along with
+> merging a number of fixes lurking in Poky.
 
-I'm also intending to merge the virtual class extension stuff soon
-unless anyone has a major objection (none were raised previously when I
-proposed this).
+Please push the attached fix too.
 
-Cheers,
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
-Richard
+--0016e64355deefa3010469abf057
+Content-Type: text/x-diff; name="proper-skip-regext.diff"
+Content-Disposition: attachment; filename="proper-skip-regext.diff"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_fulul8d90
 
+SW5kZXg6IGxpYi9iYi9wcm92aWRlcnMucHkKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQotLS0gbGliL2JiL3Byb3ZpZGVy
+cy5weQkocmV2aXPDo28gMTE3OCkKKysrIGxpYi9iYi9wcm92aWRlcnMucHkJKGPDs3BpYSBkZSB0
+cmFiYWxobykKQEAgLTI5Nyw5ICsyOTcsOCBAQAogCiAgICAgIyBPbmx5IHNlYXJjaCBkeW5hbWlj
+IHBhY2thZ2VzIGlmIHdlIGNhbid0IGZpbmQgYW55dGhpbmcgaW4gb3RoZXIgdmFyaWFibGVzCiAg
+ICAgZm9yIHBhdHRlcm4gaW4gZGF0YUNhY2hlLnBhY2thZ2VzX2R5bmFtaWM6Ci0gICAgICAgIHBh
+dHRlcm4gPSBwYXR0ZXJuLnJlcGxhY2UoJysnLCAiXCsiKQogICAgICAgICB0cnk6Ci0gICAgICAg
+ICAgICByZWdleHAgPSByZS5jb21waWxlKHBhdHRlcm4pCisgICAgICAgICAgICByZWdleHAgPSBy
+ZS5jb21waWxlKHBhdHRlcm4ucmVwbGFjZSgnKycsICJcKyIpKQogICAgICAgICBleGNlcHQ6CiAg
+ICAgICAgICAgICBiYi5tc2cuZXJyb3IoYmIubXNnLmRvbWFpbi5Qcm92aWRlciwgIkVycm9yIHBh
+cnNpbmcgcmUgZXhwcmVzc2lvbjogJXMiICUgcGF0dGVybikKICAgICAgICAgICAgIHJhaXNlCg==
 
-
-
-
+--0016e64355deefa3010469abf057--
