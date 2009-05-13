@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FT0-00055p-3N
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:29:54 +0200
-Received: (qmail 12991 invoked by uid 1003); 13 May 2009 14:23:07 -0000
+	(envelope-from <philip@balister.org>) id 1M4FTI-0005BX-Eq
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:30:13 +0200
+Received: (qmail 22402 invoked by uid 1003); 13 May 2009 14:23:25 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:23:07 -0000
-Message-ID: <4A0AD7CA.9080604@balister.org>
-Date: Wed, 13 May 2009 10:23:06 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:23:25 -0000
+Message-ID: <4A0AD7DC.4030306@balister.org>
+Date: Wed, 13 May 2009 10:23:24 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-33-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-33-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 32/37] gpe-watch: Fix install: don't do install -s
+	<1242207556-15601-34-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-34-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 33/37] gpe-mixer: fix Makefile - don't strip on	install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,38 +29,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:29:55 -0000
-X-Groupsio-MsgNum: 10296
+X-List-Received-Date: Wed, 13 May 2009 14:30:13 -0000
+X-Groupsio-MsgNum: 10297
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020200070603040501000605"
+	micalg=sha1; boundary="------------ms090703030603010709010101"
 
---------------ms020200070603040501000605
+--------------ms090703030603010709010101
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister <philip@balister.org>
 
 koen.kooi@gmail.com wrote:
-> From: Steve Sakoman <steve@sakoman.com>
+> From: Andrea Adami <andrea.adami@gmail.com>
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-watch/gpe-watch-0.10/fix_install.patch |   13 +++++++++++++
->  recipes/gpe-watch/gpe-watch_0.10.bb                |    5 ++++-
->  2 files changed, 17 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/gpe-watch/gpe-watch-0.10/fix_install.patch
+>  recipes/gpe-mixer/gpe-mixer/fix-install.patch |   11 +++++++++++
+>  recipes/gpe-mixer/gpe-mixer_0.42.bb           |    3 ++-
+>  2 files changed, 13 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/gpe-mixer/gpe-mixer/fix-install.patch
 > 
-> diff --git a/recipes/gpe-watch/gpe-watch-0.10/fix_install.patch b/recipes/gpe-watch/gpe-watch-0.10/fix_install.patch
+> diff --git a/recipes/gpe-mixer/gpe-mixer/fix-install.patch b/recipes/gpe-mixer/gpe-mixer/fix-install.patch
 > new file mode 100644
-> index 0000000..3ae63a8
+> index 0000000..ec5ea2c
 > --- /dev/null
-> +++ b/recipes/gpe-watch/gpe-watch-0.10/fix_install.patch
-> @@ -0,0 +1,13 @@
-> +diff --git gpe-watch-0.10/Makefile-orig gpe-watch-0.10/Makefile
-> +index 2f74616..58fa802 100644
-> +--- gpe-watch-0.10/Makefile-orig
-> ++++ gpe-watch-0.10/Makefile
-> +@@ -39,7 +39,7 @@ $(PACKAGE): $(OBJS) $(LIB)
+> +++ b/recipes/gpe-mixer/gpe-mixer/fix-install.patch
+> @@ -0,0 +1,11 @@
+> +--- Makefile.old	2009-05-09 21:11:12.000000000 +0200
+> ++++ Makefile	2009-05-09 21:11:39.000000000 +0200
+> +@@ -36,7 +36,7 @@
 > + 
 > + install-program: all $(PACKAGE).desktop
 > + 	mkdir -p $(DESTDIR)$(PREFIX)/bin
@@ -68,28 +66,23 @@ koen.kooi@gmail.com wrote:
 > ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 > + 	mkdir -p $(DESTDIR)$(PREFIX)/share/pixmaps
 > + 	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/$(PACKAGE).png
-> + 	#mkdir -p $(DESTDIR)$(PREFIX)/share/$(PACKAGE)
-> diff --git a/recipes/gpe-watch/gpe-watch_0.10.bb b/recipes/gpe-watch/gpe-watch_0.10.bb
-> index e0d5147..9b386a2 100644
-> --- a/recipes/gpe-watch/gpe-watch_0.10.bb
-> +++ b/recipes/gpe-watch/gpe-watch_0.10.bb
-> @@ -1,5 +1,6 @@
->  LICENSE = "GPL"
+> + 	mkdir -p $(DESTDIR)$(PREFIX)/share/$(PACKAGE)
+> diff --git a/recipes/gpe-mixer/gpe-mixer_0.42.bb b/recipes/gpe-mixer/gpe-mixer_0.42.bb
+> index 5fe0e98..c2f7bbe 100644
+> --- a/recipes/gpe-mixer/gpe-mixer_0.42.bb
+> +++ b/recipes/gpe-mixer/gpe-mixer_0.42.bb
+> @@ -3,7 +3,8 @@ PR = "r1"
+>  
 >  inherit gpe pkgconfig
-> +PR = "r1"
 >  
->  DESCRIPTION = "GPE analog clock-watch"
+> -SRC_URI += "file://gpemixer-no-host-includes.patch;patch=1"
+> +SRC_URI += "file://gpemixer-no-host-includes.patch;patch=1 \
+> +	    file://fix-install.patch;patch=1"
+>  
+>  DESCRIPTION = "GPE audio mixer"
 >  DEPENDS = "gtk+ libgpewidget"
-> @@ -7,4 +8,6 @@ SECTION = "gpe"
->  PRIORITY = "optional"
->  
->  SRC_URI += "file://fix_makefile.patch;patch=1 \
-> -            file://no-render-h.patch;patch=1"
-> +            file://fix_install.patch;patch=1 \
-> +            file://no-render-h.patch;patch=1 \
-> +           "
 
---------------ms020200070603040501000605
+--------------ms090703030603010709010101
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -141,17 +134,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MjMwNlowIwYJKoZIhvcNAQkEMRYEFJyBXtq8UIxGra9A9Y76ZQlfZo4DMFIGCSqGSIb3DQEJDzFF
+MjMyNFowIwYJKoZIhvcNAQkEMRYEFKePR7n1ol2j2UE9jhBKyuTrzxsQMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQC5xUgKoH9Hk7XTNEbFINduasNnHCZ7F6pJYXGwPlUn1V0xwkfR
-vYhr8aEta0paSXDRJ4jv8Qewt4moECh/9wRVYAE4zzDAsnaTFMbAMxsyLpeoZKWHsVDlEfqkv6bQ
-8IW14+nZY02g05g6jY3fgYIdMdziuBZTDhxJcO0VtAJ/xWuAowTUPIP2q1j55bL4oGE/v2weYpus
-TXXEUZiiFoaSOWic7sHFk4PDfuDftyD5A1YU0KQWS4NEnOPdF+QHlH45nYuH0e6VV6+Zs2GW4s76
-9I5DE6wo2iUJzkNYamk8hSRckwQm88AAmp0JA1hAiwwRM5uJM3FRn07RSa9IsdL8AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCVPfBegfM8jC6KWa4B7ucr/EpclaagIySzIMJui9o3frNhmO9y
+TQT1Tl80h9YnT1XIq7/n6WJdklfBveBBl+sGjy0jAkO+WUYIzEDtNl6pXZRTtDL1PagC2N3m9mgF
+HHT9IeCHBPHchHreCHYpUGdf1GfdbjUYfnFNDZzLSku1S3it6cXugvw2Rl+5VjqojJi510qRsIfj
+jUe1XKQH7vfKJy+Gylu0OH+mTQ9oYNWgwf4RLJ7+w/g8B6/VMtqFzcWaB6TVsVQ6g/Eh7ipKo946
+zx5jiCOk1eqNe48dzRYebniIH1TH3Hm0mhrZLS9cfqAhyHvv+60K4GDH5xgh71gJAAAAAAAA
 
---------------ms020200070603040501000605--
+--------------ms090703030603010709010101--
