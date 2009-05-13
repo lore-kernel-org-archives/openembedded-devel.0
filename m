@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FTI-0005BX-Eq
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:30:13 +0200
-Received: (qmail 22402 invoked by uid 1003); 13 May 2009 14:23:25 -0000
+	(envelope-from <philip@balister.org>) id 1M4FTm-0005Iw-8Q
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:30:42 +0200
+Received: (qmail 18083 invoked by uid 1003); 13 May 2009 14:23:55 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:23:25 -0000
-Message-ID: <4A0AD7DC.4030306@balister.org>
-Date: Wed, 13 May 2009 10:23:24 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:23:55 -0000
+Message-ID: <4A0AD7FA.5020906@balister.org>
+Date: Wed, 13 May 2009 10:23:54 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-34-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-34-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 33/37] gpe-mixer: fix Makefile - don't strip on	install
+	<1242207556-15601-35-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-35-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 34/37] startup-monitor: fix makefile - don't strip on install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:30:13 -0000
-X-Groupsio-MsgNum: 10297
+X-List-Received-Date: Wed, 13 May 2009 14:30:42 -0000
+X-Groupsio-MsgNum: 10298
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090703030603010709010101"
+	micalg=sha1; boundary="------------ms000601090402070309090805"
 
---------------ms090703030603010709010101
+--------------ms000601090402070309090805
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,44 +45,40 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-mixer/gpe-mixer/fix-install.patch |   11 +++++++++++
->  recipes/gpe-mixer/gpe-mixer_0.42.bb           |    3 ++-
->  2 files changed, 13 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/gpe-mixer/gpe-mixer/fix-install.patch
+>  recipes/startup-monitor/files/makefile-fix.patch  |   11 +++++++++++
+>  recipes/startup-monitor/startup-monitor_0.18-2.bb |    2 ++
+>  2 files changed, 13 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/startup-monitor/files/makefile-fix.patch
 > 
-> diff --git a/recipes/gpe-mixer/gpe-mixer/fix-install.patch b/recipes/gpe-mixer/gpe-mixer/fix-install.patch
+> diff --git a/recipes/startup-monitor/files/makefile-fix.patch b/recipes/startup-monitor/files/makefile-fix.patch
 > new file mode 100644
-> index 0000000..ec5ea2c
+> index 0000000..6d50c8f
 > --- /dev/null
-> +++ b/recipes/gpe-mixer/gpe-mixer/fix-install.patch
+> +++ b/recipes/startup-monitor/files/makefile-fix.patch
 > @@ -0,0 +1,11 @@
-> +--- Makefile.old	2009-05-09 21:11:12.000000000 +0200
-> ++++ Makefile	2009-05-09 21:11:39.000000000 +0200
-> +@@ -36,7 +36,7 @@
+> +--- /tmp/Makefile.old	2006-01-16 13:40:16.000000000 +0100
+> ++++ startup-monitor/Makefile	2009-05-09 23:08:22.000000000 +0200
+> +@@ -41,7 +41,7 @@
 > + 
-> + install-program: all $(PACKAGE).desktop
+> + install-program: all
 > + 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 > +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 > ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> + 	mkdir -p $(DESTDIR)$(PREFIX)/share/pixmaps
-> + 	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/$(PACKAGE).png
-> + 	mkdir -p $(DESTDIR)$(PREFIX)/share/$(PACKAGE)
-> diff --git a/recipes/gpe-mixer/gpe-mixer_0.42.bb b/recipes/gpe-mixer/gpe-mixer_0.42.bb
-> index 5fe0e98..c2f7bbe 100644
-> --- a/recipes/gpe-mixer/gpe-mixer_0.42.bb
-> +++ b/recipes/gpe-mixer/gpe-mixer_0.42.bb
-> @@ -3,7 +3,8 @@ PR = "r1"
->  
+> + 	mkdir -p $(DESTDIR)/etc/X11/Xsession.d
+> + 	install $(PACKAGE).xsession $(DESTDIR)/etc/X11/Xsession.d/70startup-monitor
+> + 
+> diff --git a/recipes/startup-monitor/startup-monitor_0.18-2.bb b/recipes/startup-monitor/startup-monitor_0.18-2.bb
+> index 34e7656..38ec504 100644
+> --- a/recipes/startup-monitor/startup-monitor_0.18-2.bb
+> +++ b/recipes/startup-monitor/startup-monitor_0.18-2.bb
+> @@ -7,3 +7,5 @@ DEPENDS = "virtual/libx11 startup-notification glib-2.0 libmatchbox"
 >  inherit gpe pkgconfig
 >  
-> -SRC_URI += "file://gpemixer-no-host-includes.patch;patch=1"
-> +SRC_URI += "file://gpemixer-no-host-includes.patch;patch=1 \
-> +	    file://fix-install.patch;patch=1"
->  
->  DESCRIPTION = "GPE audio mixer"
->  DEPENDS = "gtk+ libgpewidget"
+>  #SRC_URI = "http://www.freedesktop.org/software/startup-notification/releases/${P}.tar.gz"
+> +
+> +SRC_URI += "file://makefile-fix.patch;patch=1"
 
---------------ms090703030603010709010101
+--------------ms000601090402070309090805
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -134,17 +130,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MjMyNFowIwYJKoZIhvcNAQkEMRYEFKePR7n1ol2j2UE9jhBKyuTrzxsQMFIGCSqGSIb3DQEJDzFF
+MjM1NFowIwYJKoZIhvcNAQkEMRYEFHJVE5AGjhN5Ye+24ecpCeOb3iiFMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCVPfBegfM8jC6KWa4B7ucr/EpclaagIySzIMJui9o3frNhmO9y
-TQT1Tl80h9YnT1XIq7/n6WJdklfBveBBl+sGjy0jAkO+WUYIzEDtNl6pXZRTtDL1PagC2N3m9mgF
-HHT9IeCHBPHchHreCHYpUGdf1GfdbjUYfnFNDZzLSku1S3it6cXugvw2Rl+5VjqojJi510qRsIfj
-jUe1XKQH7vfKJy+Gylu0OH+mTQ9oYNWgwf4RLJ7+w/g8B6/VMtqFzcWaB6TVsVQ6g/Eh7ipKo946
-zx5jiCOk1eqNe48dzRYebniIH1TH3Hm0mhrZLS9cfqAhyHvv+60K4GDH5xgh71gJAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQA4+lBlEgaxp3X/9O2B/JDBuli3BTPhTclPfeUK0Scz9pdlMrBw
+BKlRk14GecsJEcXvWOX9Nzx3ZvuuCd+jZsPpFIBcntonsF4doLFanUTYpWDTBtuia9jQWquEo8Hz
+G9XXlpuwGl8vMMAsZj9uM7fGkdvywI6OSioldusnAtuNLvTwcHBhxCwHLI5ydOLyeeZ4VkK+9g1r
+yAC3pT3j8y+mh83cz/t/OIKeoae+ZBPS2WSG4xzYlucRV0VenJhflzXkMqD28701orNegEGJm11G
+P90Sm2l+n+SCffThzOXO/RIbhPfJYCvYQPAPVOP2eBmsWsDI93vwbunbjohXIYy2AAAAAAAA
 
---------------ms090703030603010709010101--
+--------------ms000601090402070309090805--
