@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FDN-00065t-2H
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:13:45 +0200
-Received: (qmail 21387 invoked by uid 1003); 13 May 2009 14:06:58 -0000
+	(envelope-from <philip@balister.org>) id 1M4FDt-00069y-3F
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:14:17 +0200
+Received: (qmail 15417 invoked by uid 1003); 13 May 2009 14:07:30 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:06:58 -0000
-Message-ID: <4A0AD401.9030508@balister.org>
-Date: Wed, 13 May 2009 10:06:57 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:07:30 -0000
+Message-ID: <4A0AD421.7060502@balister.org>
+Date: Wed, 13 May 2009 10:07:29 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-10-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-10-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 09/37] libdisplaymigration: Makefile fix -	don't strip on install
+	<1242207556-15601-11-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-11-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 10/37] gpe-confd: Makefile fix - don't strip on	install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:13:45 -0000
-X-Groupsio-MsgNum: 10273
+X-List-Received-Date: Wed, 13 May 2009 14:14:17 -0000
+X-Groupsio-MsgNum: 10274
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020306090107020005090303"
+	micalg=sha1; boundary="------------ms000303030902060406000608"
 
---------------ms020306090107020005090303
+--------------ms000303030902060406000608
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,57 +45,39 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  .../libdisplaymigration/files/makefile-fix.patch   |   11 +++++++++++
->  .../libdisplaymigration_0.28.bb                    |    2 ++
->  .../libdisplaymigration_0.99.bb                    |    2 ++
->  3 files changed, 15 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/libdisplaymigration/files/makefile-fix.patch
+>  recipes/gpe-confd/files/makefile-fix.patch |   11 +++++++++++
+>  recipes/gpe-confd/gpe-confd_0.16.bb        |    1 +
+>  2 files changed, 12 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/gpe-confd/files/makefile-fix.patch
 > 
-> diff --git a/recipes/libdisplaymigration/files/makefile-fix.patch b/recipes/libdisplaymigration/files/makefile-fix.patch
+> diff --git a/recipes/gpe-confd/files/makefile-fix.patch b/recipes/gpe-confd/files/makefile-fix.patch
 > new file mode 100644
-> index 0000000..5a79ab2
+> index 0000000..ac3483e
 > --- /dev/null
-> +++ b/recipes/libdisplaymigration/files/makefile-fix.patch
+> +++ b/recipes/gpe-confd/files/makefile-fix.patch
 > @@ -0,0 +1,11 @@
-> +--- /tmp/Makefile	2005-02-28 20:32:13.000000000 +0100
-> ++++ libdisplaymigration-0.99/Makefile	2009-05-01 14:26:17.000000000 +0200
-> +@@ -36,7 +36,7 @@
+> +--- /tmp/Makefile.old	2004-08-29 13:59:52.000000000 +0200
+> ++++ gpe-confd-0.16/Makefile	2009-05-01 15:33:00.000000000 +0200
+> +@@ -32,7 +32,7 @@
 > + 
-> + install-program: $(SONAME)
-> + 	install -d $(DESTDIR)$(PREFIX)/lib
-> +-	install -s $(SONAME) $(DESTDIR)$(PREFIX)/lib/$(SONAME)
-> ++	install $(SONAME) $(DESTDIR)$(PREFIX)/lib/$(SONAME)
+> + install-program: $(PACKAGE)
+> + 	install -d $(DESTDIR)$(PREFIX)/bin
+> +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> + 	mkdir -p $(DESTDIR)/etc/X11/Xsession.d
+> + 	install $(PACKAGE).xs $(DESTDIR)/etc/X11/Xsession.d/70gpe-confd
 > + 
-> + install-devel:
-> + 	for i in $(HEADERS); do install -m 644 -D $$i $(DESTDIR)$(PREFIX)/include/$$i; done
-> diff --git a/recipes/libdisplaymigration/libdisplaymigration_0.28.bb b/recipes/libdisplaymigration/libdisplaymigration_0.28.bb
-> index e92cf57..8f85dff 100644
-> --- a/recipes/libdisplaymigration/libdisplaymigration_0.28.bb
-> +++ b/recipes/libdisplaymigration/libdisplaymigration_0.28.bb
-> @@ -7,6 +7,8 @@ PR = "r1"
->  
->  inherit pkgconfig gpe
+> diff --git a/recipes/gpe-confd/gpe-confd_0.16.bb b/recipes/gpe-confd/gpe-confd_0.16.bb
+> index b9c3102..6b50107 100644
+> --- a/recipes/gpe-confd/gpe-confd_0.16.bb
+> +++ b/recipes/gpe-confd/gpe-confd_0.16.bb
+> @@ -6,3 +6,4 @@ DESCRIPTION = "GPE configuration daemon"
+>  LICENSE = "GPL"
+>  PR = "r1"
 >  
 > +SRC_URI += "file://makefile-fix.patch;patch=1"
-> +
->  headers = "displaymigration.h auth.h crypt.h"
->  
->  do_install() {
-> diff --git a/recipes/libdisplaymigration/libdisplaymigration_0.99.bb b/recipes/libdisplaymigration/libdisplaymigration_0.99.bb
-> index 0563ba3..033005d 100644
-> --- a/recipes/libdisplaymigration/libdisplaymigration_0.99.bb
-> +++ b/recipes/libdisplaymigration/libdisplaymigration_0.99.bb
-> @@ -7,6 +7,8 @@ PR = "r0"
->  
->  inherit pkgconfig gpe
->  
-> +SRC_URI += "file://makefile-fix.patch;patch=1"
-> +
->  headers = "displaymigration.h auth.h crypt.h"
->  
->  do_install() {
 
---------------ms020306090107020005090303
+--------------ms000303030902060406000608
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -147,17 +129,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MDY1N1owIwYJKoZIhvcNAQkEMRYEFNuEciyvWMLfQEVV3GcarG/pEIhzMFIGCSqGSIb3DQEJDzFF
+MDcyOVowIwYJKoZIhvcNAQkEMRYEFA4ZMyT0AKW1tnm815A8VS43QqUeMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBNDnTt9fQRdy2OJuDVYq7ejZ2JwYq/gyiDQUQED+sATq4mO9uo
-UJ6FNMlHzPHwYw4yxT+QxQKWd+uN9wdU8M4DQO3EM5+QrS43z5EPtmOaeLxfAfPg8j9QxIie55Mj
-CwfrIaQ/swjtj953ovk6sPB3iNmt3TzWHmVeHHShHMQoLa/ZdQQzqyJCv/A5q5QqgPVQXgWTTHBV
-XOMHHejmA1+LTOX/sqfEsvD4rb9uzVajdpkHN17aF5nyTIJMaUgZpO23QABbDofBVglB6T7/NbuK
-qh1QRBQwAjkEFNy/fr6+rCx6eW3eRsnYpR16FofIEGHxHK+skR/cnAhcxVZBe9T/AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCdaTjMe7vue4M66hUsNseDraCIo73ckXcATRaVPFHfvqX/VveE
+D9bjC2x1KGnBR25r6T3laxi4RTcElZDI9NMcmlItSS0JENRE95zDmL0xKpGi1FRf8Le2jOkmlN+m
+FwXQoFD8FcEM2tTb3PYfXmAsyrPn0xiFAZvpl2iAvU+BS6mfJq+KJ6t619ctTLAurbUjFf+MALVu
+W342+ZGObmGWxolnWXkuycsTrbj6/Z+m7idrmZ/8B+2eEuhS1tSCN+nP3oSJ71q8Bjlz8M/S0a2X
+NTeekBq4/vGxqpMy3AQUSHZ0vOVXehBk3O0v8GIkFrezEA1S7RuVsqcWlxcQ/tZqAAAAAAAA
 
---------------ms020306090107020005090303--
+--------------ms000303030902060406000608--
