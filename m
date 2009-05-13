@@ -1,38 +1,24 @@
-Received: from [209.85.132.244] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M4Gj5-0007Yy-Ko
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 May 2009 17:50:35 +0200
-Received: by an-out-0708.google.com with SMTP id b6so218798ana.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 May 2009 08:43:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=ynBG28zPiVJKqoJvwbUIA8gpF2C0+1/JRH63O8SV0+E=;
-	b=u+d2DGpdYSiLhiowjlCi+IFEBabLYKeJg/nY3B0D0PNOM25rz0elWkGcbxQyYvABCy
-	iOukuYLtWZ6NH0Pq5fife8CMM9/3+nCWee2X1jWgwEl5oqrkHY8wtwY8+pLUkgrQo5JE
-	CqcB1y75EgKgIh5AE1F1SRRuO4te6puoLukjk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=nnPM5ZMz0HT9mE0KOtzRQDvpoNU2f2BT9sIKVfL6Lw501A0hmFQ5BATNoO1yhECmK0
-	Ve8WiWbpRsD9FNnC/VXdZW2sxkcbIYQ3OJPIuhCcZFCRGh1pNRIWDZKLqN/MKVrv2Qpz
-	4sqgkU2DAReXbEPMZa0Q/GmajCiKDuLrtTDms=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.13.2 with SMTP id 2mr1528156anm.132.1242229430690; Wed, 13 
-	May 2009 08:43:50 -0700 (PDT)
-In-Reply-To: <87octxewd7.wl%peter@chubb.wattle.id.au>
-References: <87octxewd7.wl%peter@chubb.wattle.id.au>
-Date: Wed, 13 May 2009 12:43:50 -0300
-X-Google-Sender-Auth: 3a2d89d8502e5ff7
-Message-ID: <be7a9f3d0905130843h6d117abdyd752054150a4784c@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M4Gno-0007jc-3a
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 17:55:28 +0200
+Received: (qmail 5440 invoked from network); 13 May 2009 15:48:42 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 13 May 2009 08:48:42 -0700
+Date: Wed, 13 May 2009 08:48:42 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] mtools now an FSF project
+Message-ID: <20090513154842.GJ7973@smtp.west.cox.net>
+References: <1242226019-10881-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1242226019-10881-7-git-send-email-marcin@juszkiewicz.com.pl>
+	<guen3q$p5u$1@ger.gmane.org>
+	<20090513151848.GI7973@smtp.west.cox.net>
+	<4A0AE5CC.5010407@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <4A0AE5CC.5010407@balister.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 6/6] angstrom: use GCC 4.3.3 for Geode devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,26 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 15:50:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 May 2009 15:55:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
-
-On Tue, May 12, 2009 at 8:26 PM, Peter Chubb <peter.chubb@nicta.com.au> wro=
-te:
+On Wed, May 13, 2009 at 11:22:52AM -0400, Philip Balister wrote:
+> Tom Rini wrote:
+>> On Wed, May 13, 2009 at 04:56:58PM +0200, Koen Kooi wrote:
+>>> On 13-05-09 16:46, Marcin Juszkiewicz wrote:
+>>>> From: Marcin Juszkiewicz<hrw@openembedded.org>
+>>>>
+>>>>
+>>>> Signed-off-by: Marcin Juszkiewicz<hrw@openembedded.org>
+>>>> ---
+>>>>   conf/distro/angstrom-2008.1.conf |    1 +
+>>>>   1 files changed, 1 insertions(+), 0 deletions(-)
+>>>>
+>>>> diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+>>>> index a466834..b5dbc48 100644
+>>>> --- a/conf/distro/angstrom-2008.1.conf
+>>>> +++ b/conf/distro/angstrom-2008.1.conf
+>>>> @@ -101,6 +101,7 @@ ANGSTROM_GCC_VERSION_bfin			= "4.1.2"
+>>>>
+>>>>   ANGSTROM_GCC_VERSION_486sx      = "4.3.3"
+>>>>   ANGSTROM_GCC_VERSION_armv7a     = "4.3.3"
+>>>> +ANGSTROM_GCC_VERSION_geode      = "4.3.3"
+>>>>
+>>>>   # Uncomment this if want need to build an armv7a kernel with CSL toolchain (<2.6.27 don't boot with mainline gcc)
+>>>>   #KERNEL_CCSUFFIX_armv7a= "-4.2.1+csl-arm-2007q3-53"
+>>> NAK, this would interfere with an outstanding patch that Graeme and I 
+>>>  are testing:
+>>>
+>>> http://dominion.thruhere.net/koen/OE/angstrom-dev-toolchain.diff
+>>
+>> wrt that patch, is there a reason you aren't bumping ppc as well?  As an
+>> old PPC guy, that's always had me perplexed..
 >
-> mtools version 3.9.11 is no longer available upstream, and the old
-> website merely redirects to the FSF homepage. =A0This means that mtools
-> is currently not buildable (unless youalready have cached copy o the
-> source somewhere).
+> There are rumours of problems. But I suspect we do not know specifics.  
+> Any testing would be great :)
 
-This same patch is already queued in the O.S. Systems tree and will be
-pushed once I finish the last fixes that people has asked for.
+OK, I've got a 405GP eval board dug up, I'll get a 'make check' going
+sometime soon and report back.  That should cover the xilinx case too,
+fwiw.
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+-- 
+Tom Rini
 
 
