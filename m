@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4F3g-0005P3-U9
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:03:45 +0200
-Received: (qmail 1710 invoked by uid 1003); 13 May 2009 13:56:58 -0000
+	(envelope-from <philip@balister.org>) id 1M4F3w-0005PL-H0
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:04:01 +0200
+Received: (qmail 26480 invoked by uid 1003); 13 May 2009 13:57:14 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 13:56:58 -0000
-Message-ID: <4A0AD1A9.7070300@balister.org>
-Date: Wed, 13 May 2009 09:56:57 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 13:57:13 -0000
+Message-ID: <4A0AD1B8.1070004@balister.org>
+Date: Wed, 13 May 2009 09:57:12 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-3-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-3-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 02/37] gpe-question: don't strip during install - this breaks now with new install - strip is done in packaging
+	<1242207556-15601-4-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-4-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 03/37] gpe-othello: don't strip during install - this breaks now with new install - strip is done in packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:03:45 -0000
-X-Groupsio-MsgNum: 10265
+X-List-Received-Date: Wed, 13 May 2009 14:04:01 -0000
+X-Groupsio-MsgNum: 10266
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000403070200020005070206"
+	micalg=sha1; boundary="------------ms070207000900040405060200"
 
---------------ms000403070200020005070206
+--------------ms070207000900040405060200
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,24 +45,24 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-question/files/makefile-fix.patch |    2 +-
+>  .../gpe-othello-0.2-1/fix-makefiles.patch          |    2 +-
 >  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> diff --git a/recipes/gpe-question/files/makefile-fix.patch b/recipes/gpe-question/files/makefile-fix.patch
-> index a8d1ead..f501e12 100644
-> --- a/recipes/gpe-question/files/makefile-fix.patch
-> +++ b/recipes/gpe-question/files/makefile-fix.patch
-> @@ -5,7 +5,7 @@
->   
->   install-program: all
->  -	install -Ds $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> -+	install -D -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> diff --git a/recipes/gpe-othello/gpe-othello-0.2-1/fix-makefiles.patch b/recipes/gpe-othello/gpe-othello-0.2-1/fix-makefiles.patch
+> index 1c43724..def1915 100644
+> --- a/recipes/gpe-othello/gpe-othello-0.2-1/fix-makefiles.patch
+> +++ b/recipes/gpe-othello/gpe-othello-0.2-1/fix-makefiles.patch
+> @@ -278,7 +278,7 @@ diff -urNd ../gpe-othello-0.2-1-r0/gpe-othello-0.2-1/Makefile gpe-othello-0.2-1/
+>   install-program: all 
+>  -	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+>  -	strip $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> -+	install -s -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 > ++	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
->   
->   clean:
->   	rm -f $(PACKAGE).o $(PACKAGE) $(DEPS)
+>   	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
+>   	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/
+>   	install -d $(DESTDIR)$(PREFIX)/share/applications
 
---------------ms000403070200020005070206
+--------------ms070207000900040405060200
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -114,17 +114,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzEz
-NTY1N1owIwYJKoZIhvcNAQkEMRYEFJFSqHsOsFhIrnvv7bBXaK3P2BM6MFIGCSqGSIb3DQEJDzFF
+NTcxMlowIwYJKoZIhvcNAQkEMRYEFM6G8W+ZlcTxsrZ4/tBh5VYxfsnGMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCuLy+317kfrVS+Vo7eV24jThd1OUAcfrM9NjElECQhxYq9gRGr
-Osa0OemhcCDoHZlI2W/4RS+DoGnULQm9/a5CwQppVMdAmKaG2Udbfb49MBLWiU19/ohSSSk0itU1
-et5GU4CuNnC3K17kl4dnaVbVxEVm2gwTdmTobtPt9pypWnCp0bYFp1ZoWY/vOEbQkuAEa+bBsA//
-l5wXpdllHsi9FV0nWFMToX+Vl5RB/VMf7ndqWgUbtXwym+vukCj2eBifAw03erksu5gg1zY3/OB+
-t5F3v84ZA2eBfFZ1V1sVzzX8RrLrDtW4PSjAOu/jrGxIr9r0hE9e+yabjQh2VCjlAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCmPYvJopJ+Rv07zb8CZPsuD0YnppjShj/s5KYUSPmhHytsrARO
+FSAvxqH+5CsQuYyrttqdyYZMYQAfneq8HS7X8Pikv6H/qlCq/0iehc9Sh/rg222jZNZz/1VJdAWT
+RrpIPlbAvd3x8luHvPHwZ3lg4w3R0XwSL/yftqlSl7YZB8WZZFHkgehnEK8fbO4DFHjauTeC1tXU
+ppCHkfn5nq1ctRbHZAjUj2DHtrKSrmLafVGycTjg2tO+ecFgwWFG3yRnZJAPylYuv/9cGS/wjqCz
+YHWNZQoE+zUOnyQDU9ApbHW9P+SjJCU4UPl2yYNGjJIV5xWmeumk23l4e1Z0ZQ12AAAAAAAA
 
---------------ms000403070200020005070206--
+--------------ms070207000900040405060200--
