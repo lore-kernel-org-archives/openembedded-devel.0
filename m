@@ -1,38 +1,34 @@
-Received: from [209.85.222.115] (helo=mail-pz0-f115.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1M4L0F-00058x-PL
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 May 2009 22:24:35 +0200
-Received: by pzk13 with SMTP id 13so351476pzk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 May 2009 13:17:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JMz0bCsUCJBl3UpI7aYF4eElFYzGT1zE/h28Tq1sTwk=;
-	b=m5+GrLPJhfmithSiDaXxxtvZ3RB2vQ7p5QT8NaDNSIi0E1OuaUSHMZBHNAFzTauApN
-	A2PUZCZiNiMOoKSMSF8biOq9KREXecvktfEuEhrfzt94YvIMN4QTsUHsjnHq3LMTwo++
-	7mz7Zo4NvTCwEiwlcwVY2EaVcY1cdZf4nCvvU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=X5sDmKI0D9HjiEE5OSp9fDEEndFoBbkmiQg37zgmyR2/YGTaDrUPiZRUvkT74HfA1b
-	WwbhfTw3c1odfOIgfu6RdnQ3mvCv8wRtJGfkd6Tlhkw0wfdPGFHYwl+dSzC+0aZgkEVH
-	eju/MBz+2TvWbiGdH+mc9Avd7MZ45H8NKMxlo=
-MIME-Version: 1.0
-Received: by 10.115.108.1 with SMTP id k1mr1384329wam.122.1242245867131; Wed, 
-	13 May 2009 13:17:47 -0700 (PDT)
-In-Reply-To: <9505B049-D8D0-4722-9F03-706F096A2F2E@ngndg.com>
-References: <000e0cd30af630952b0468cfde1b@google.com>
-	<f96d234e0905040921t61c92979o832e8361ee3e4a5a@mail.gmail.com>
-	<f96d234e0905131124x27965cach4eccec2ce02fefb6@mail.gmail.com>
-	<9505B049-D8D0-4722-9F03-706F096A2F2E@ngndg.com>
-Date: Wed, 13 May 2009 22:17:47 +0200
-Message-ID: <ac9c93b10905131317q1e930588gee8724dff7a4085b@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: OE Infrastructure Move to OSUOSL Poll
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M4LPd-0006BZ-7m
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 22:50:49 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M4LJ1-0004a2-82
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 20:43:59 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 13 May 2009 20:43:59 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 13 May 2009 20:43:59 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 13 May 2009 22:43:44 +0200
+Message-ID: <gufbe0$1ap$1@ger.gmane.org>
+References: <1242226019-10881-1-git-send-email-marcin@juszkiewicz.com.pl>	<1242226019-10881-7-git-send-email-marcin@juszkiewicz.com.pl>	<guen3q$p5u$1@ger.gmane.org>	<20090513151848.GI7973@smtp.west.cox.net>	<4A0AE5CC.5010407@balister.org>	<20090513154842.GJ7973@smtp.west.cox.net>
+	<20090513193625.GL7973@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090427 Shredder/3.0b3pre
+In-Reply-To: <20090513193625.GL7973@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 6/6] angstrom: use GCC 4.3.3 for Geode devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,12 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 20:24:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 May 2009 20:50:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Is this enough quorum ?
+On 13-05-09 21:36, Tom Rini wrote:
+> On Wed, May 13, 2009 at 08:48:42AM -0700, Tom Rini wrote:
+> [snip]
+>> OK, I've got a 405GP eval board dug up, I'll get a 'make check' going
+>> sometime soon and report back.  That should cover the xilinx case too,
+>> fwiw.
+>
+> OK, console-image built, but only with hdparm_6.6 as I'm getting a
+> checksum mismatch with 6.9.  Digging up good hardware is taking a bit
+> longer, but I'll hopefully have something soon.
 
-FM
+Thanks!
+
+
 
 
