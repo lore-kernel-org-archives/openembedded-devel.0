@@ -1,37 +1,37 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [74.125.78.145] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1M4B3H-0006OF-1y
+	(envelope-from <koen.kooi@gmail.com>) id 1M4B3K-0006Q0-Gm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 May 2009 11:47:03 +0200
-Received: by mail-ew0-f172.google.com with SMTP id 20so593907ewy.12
+	Wed, 13 May 2009 11:47:06 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so226051eyw.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 May 2009 02:40:20 -0700 (PDT)
+	Wed, 13 May 2009 02:40:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=NY4/75WkBWhVI9gdeUPUkTjUZUfnI/eTq4qcs5HpCjk=;
-	b=r5dI1XnAXp59OMyJPffXoY2Fr+J3O6eblbj2AuguSsEvqTe5njBUxdSNbNHi1jeU+U
-	ail/lJa7GfroT40bPqeBGHrht50fIKpON/cm3DBwJ7dLUxipvMymoYLj6r2tDOzSDQgK
-	rdy6+dZcFNR/UYM2Vh75CrB9rnSpKTXTauk1A=
+	bh=6a57sSn28mhsHaFGUZqnEYoTZSwKU9jorN32TB/0nwA=;
+	b=lv9qQqrZJw5Us/AiXm0vaVJrYVrvo6w4vj4C3XCJAln34cqAXb/eZ//XNqwM/yqLtk
+	9+RHLYUgsVB3tMnUVp42WpRmSJMtDJK1v87nBqWFwm6XQtU9LV9Z8gI3r+PKkTcRwBId
+	ySQr0RxlKhkKrIfbX3X4qqBSED2Nia/b82GOo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=I6n6oxZLBCKMKgPLmWbTxx7DOjjt2tF5e57H+ty5yshIfTx1tvIWxgZ+QNApawTkfS
-	uQgIdj8euEWTubfh9xnbRu0tpiDfGC0ZaYzXoOd6abFIn5peUpT+XmAjBn0SFLniz6tv
-	tflzK3APvQDiE0+XJkxBQ2YCWJwlxtGscxR6Q=
-Received: by 10.210.87.14 with SMTP id k14mr896212ebb.89.1242207620539;
-	Wed, 13 May 2009 02:40:20 -0700 (PDT)
+	b=iLUJAPBwDmB/tq9WD7+g+WH60E9FjVRgahMTgjGlqU/OQwjJlkLwIr3/8oRUChFfEW
+	EEuhLD7YvKDitG2OjolpJes+64X74Ez4HJ6RUYoecs1RfEKgMFhfwmf2PFFohDgUQUgO
+	+a3jqwNP3KvoeEPqx2mvhMYrs9fLToS02UjeY=
+Received: by 10.210.79.3 with SMTP id c3mr932951ebb.41.1242207624031;
+	Wed, 13 May 2009 02:40:24 -0700 (PDT)
 Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 28sm2183835eye.56.2009.05.13.02.40.19
+	by mx.google.com with ESMTPS id 28sm1233541eyg.24.2009.05.13.02.40.23
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 13 May 2009 02:40:20 -0700 (PDT)
+	Wed, 13 May 2009 02:40:23 -0700 (PDT)
 From: koen.kooi@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 May 2009 11:39:02 +0200
-Message-Id: <1242207556-15601-24-git-send-email-k.kooi@student.utwente.nl>
+Date: Wed, 13 May 2009 11:39:04 +0200
+Message-Id: <1242207556-15601-26-git-send-email-k.kooi@student.utwente.nl>
 X-Mailer: git-send-email 1.6.1
 In-Reply-To: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: [STABLE][PATCH 23/37] libart-lgpl: fix install issue, switch to INC_PR scheme
+Subject: [STABLE][PATCH 25/37] libart-lgpl: remove INSTALL variable as install should be provided by autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,59 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 09:47:03 -0000
+X-List-Received-Date: Wed, 13 May 2009 09:47:06 -0000
 
 From: Cliff Brake <cbrake@bec-systems.com>
 
 Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- recipes/gnome/libart-lgpl.inc       |    4 +++-
- recipes/gnome/libart-lgpl_2.3.16.bb |    3 ++-
- recipes/gnome/libart-lgpl_2.3.19.bb |    3 ++-
- 3 files changed, 7 insertions(+), 3 deletions(-)
+ recipes/gnome/libart-lgpl.inc |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
 diff --git a/recipes/gnome/libart-lgpl.inc b/recipes/gnome/libart-lgpl.inc
-index 710656b..8ff3b21 100644
+index 8ff3b21..1af5b0e 100644
 --- a/recipes/gnome/libart-lgpl.inc
 +++ b/recipes/gnome/libart-lgpl.inc
-@@ -4,6 +4,8 @@ LICENSE = "LGPL"
+@@ -4,7 +4,7 @@ LICENSE = "LGPL"
  
  ART_CONFIG = "${HOST_ARCH}/art_config.h"
  
-+INC_PR = "r3"
-+
+-INC_PR = "r3"
++INC_PR = "r4"
+ 
  # can't use gnome.oeclass due to _ in filename
  SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libart_lgpl/2.3/libart_lgpl-${PV}.tar.bz2 \
-        file://${ART_CONFIG} \
-@@ -29,7 +31,7 @@ EXTRA_OECONF = "--disable-gtk-doc"
+@@ -31,7 +31,6 @@ EXTRA_OECONF = "--disable-gtk-doc"
  # enforced.
  export MKDIR_P = "mkdir -p"
  export mkdir_p = "mkdir -p"
--export INSTALL = "${STAGING_BINDIR_NATIVE}/install-sh"
-+export INSTALL = "${STAGING_BINDIR_NATIVE}/install"
+-export INSTALL = "${STAGING_BINDIR_NATIVE}/install"
  
  do_stage() {
  	autotools_stage_includes
-diff --git a/recipes/gnome/libart-lgpl_2.3.16.bb b/recipes/gnome/libart-lgpl_2.3.16.bb
-index 3605a38..99f8f8b 100644
---- a/recipes/gnome/libart-lgpl_2.3.16.bb
-+++ b/recipes/gnome/libart-lgpl_2.3.16.bb
-@@ -1,3 +1,4 @@
- require libart-lgpl.inc
- 
--PR = "r2"
-+PR = "${INC_PR}.1"
-+
-diff --git a/recipes/gnome/libart-lgpl_2.3.19.bb b/recipes/gnome/libart-lgpl_2.3.19.bb
-index 3605a38..99f8f8b 100644
---- a/recipes/gnome/libart-lgpl_2.3.19.bb
-+++ b/recipes/gnome/libart-lgpl_2.3.19.bb
-@@ -1,3 +1,4 @@
- require libart-lgpl.inc
- 
--PR = "r2"
-+PR = "${INC_PR}.1"
-+
 -- 
 1.6.1
 
