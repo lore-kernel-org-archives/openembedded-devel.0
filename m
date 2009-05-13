@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FRI-0004mr-Qd
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:28:11 +0200
-Received: (qmail 20923 invoked by uid 1003); 13 May 2009 14:21:22 -0000
+	(envelope-from <philip@balister.org>) id 1M4FSG-0004wI-Vs
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:29:09 +0200
+Received: (qmail 26163 invoked by uid 1003); 13 May 2009 14:22:21 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:21:22 -0000
-Message-ID: <4A0AD761.2090807@balister.org>
-Date: Wed, 13 May 2009 10:21:21 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:22:21 -0000
+Message-ID: <4A0AD79C.50304@balister.org>
+Date: Wed, 13 May 2009 10:22:20 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-30-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-30-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 29/37] gpe-announce: Fix install: don't do install -s
+	<1242207556-15601-31-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-31-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 30/37] gpe-clock: Fix install: Don't do install -s
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:28:11 -0000
-X-Groupsio-MsgNum: 10293
+X-List-Received-Date: Wed, 13 May 2009 14:29:09 -0000
+X-Groupsio-MsgNum: 10294
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020504090208040908070501"
+	micalg=sha1; boundary="------------ms000504080105060900090604"
 
---------------ms020504090208040908070501
+--------------ms000504080105060900090604
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,45 +45,42 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-announce/files/fix-install.diff |   13 +++++++++++++
->  recipes/gpe-announce/gpe-announce_0.13.bb   |    5 ++++-
->  2 files changed, 17 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/gpe-announce/files/fix-install.diff
+>  recipes/gpe-clock/files/fix-install.patch |   13 +++++++++++++
+>  recipes/gpe-clock/gpe-clock.inc           |    2 ++
+>  2 files changed, 15 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/gpe-clock/files/fix-install.patch
 > 
-> diff --git a/recipes/gpe-announce/files/fix-install.diff b/recipes/gpe-announce/files/fix-install.diff
+> diff --git a/recipes/gpe-clock/files/fix-install.patch b/recipes/gpe-clock/files/fix-install.patch
 > new file mode 100644
-> index 0000000..3827f55
+> index 0000000..2d3e303
 > --- /dev/null
-> +++ b/recipes/gpe-announce/files/fix-install.diff
+> +++ b/recipes/gpe-clock/files/fix-install.patch
 > @@ -0,0 +1,13 @@
-> +diff --git gpe-announce-0.13/Makefile-orig gpe-announce-0.13/Makefile
-> +index 56e016a..f8bade4 100644
-> +--- gpe-announce-0.13/Makefile-orig
-> ++++ gpe-announce-0.13/Makefile
-> +@@ -47,7 +47,7 @@ $(PACKAGE): $(OBJS)
+> +diff --git gpe-clock-0.25/Makefile-orig gpe-clock-0.25/Makefile
+> +index 4fa59bf..e716fcb 100644
+> +--- gpe-clock-0.25/Makefile-orig
+> ++++ gpe-clock-0.25/Makefile
+> +@@ -36,7 +36,7 @@ $(PACKAGE): $(OBJS)
 > + 
-> + install-program: all 
+> + install-program: all
 > + 	install -d $(DESTDIR)$(PREFIX)/bin
 > +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 > ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> + 
-> + clean:
-> + 	rm -f $(PACKAGE) $(OBJS) $(DEPS)
-> diff --git a/recipes/gpe-announce/gpe-announce_0.13.bb b/recipes/gpe-announce/gpe-announce_0.13.bb
-> index 6ffe317..21538c4 100644
-> --- a/recipes/gpe-announce/gpe-announce_0.13.bb
-> +++ b/recipes/gpe-announce/gpe-announce_0.13.bb
-> @@ -4,4 +4,7 @@ DEPENDS = "libsoundgen libschedule gtk+ libgpewidget"
->  LICENSE = "GPL"
->  PR = "r1"
+> + 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
+> + 	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/
+> + 	install -d $(DESTDIR)$(PREFIX)/share/applications
+> diff --git a/recipes/gpe-clock/gpe-clock.inc b/recipes/gpe-clock/gpe-clock.inc
+> index d4ae3da..b36fa7d 100644
+> --- a/recipes/gpe-clock/gpe-clock.inc
+> +++ b/recipes/gpe-clock/gpe-clock.inc
+> @@ -6,3 +6,5 @@ DEPENDS = "gtk+ libschedule libgpewidget gpe-announce atd libgpelaunch"
+>  RDEPENDS = "gpe-announce"
 >  
-> -SRC_URI += "file://fix-esound.diff;patch=1"
-> +SRC_URI += " \
-> +            file://fix-esound.diff;patch=1 \
-> +            file://fix-install.diff;patch=1 \
-> +           "
+>  inherit gpe
+> +
+> +SRC_URI += "file://fix-install.patch;patch=1"
 
---------------ms020504090208040908070501
+--------------ms000504080105060900090604
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -135,17 +132,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MjEyMVowIwYJKoZIhvcNAQkEMRYEFGyq2jn3mrCGDO6maTXiGnw4Lz4nMFIGCSqGSIb3DQEJDzFF
+MjIyMFowIwYJKoZIhvcNAQkEMRYEFPdiNuxNfi4h/WrpJAqprxJ4ioOJMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQB1GTgp4BJMCU95MaL6U/zLDhg7NClrJC/suA6KZjsmAXQc2Y/n
-uLMs4ccxn4tNlQKDDNP/57eM/u5cN5iAKMP6QpZX2/5OMEfOB1U2C8T6PG5QW69WpAVG9i3drndr
-U3Juje55XL0LWZLFbu57irCzLMBYdl7caWTadejaKV4i6Jk5YmG2X5y+lmXJO2ySQ/bNJswCamkl
-Nw86FTNBCoHgK3Zvyl97Adaif6Z++UatvR4HzJyM/b3Iut/c1i+GzF+pK/WCn9T7Mc8q8TKKtf3W
-sUe1iuzmXxXZCyLTcIFyarAA4jpuU9vLbJ4A2UJy9kaQPUs4MLRBTj/dS5Hf+DcYAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQAVtBpqjeBUJN89J3NbEgwhV2wxZcsQFK0VBKc/Dsjd/HQiLANP
+DLj5Tnw2IqNi5p8xashI7x2mrjk7OAmBYF8eUTKx9gaiD1erApvZQ97GXm9RbNKzm0KOUgdjTZTM
+kcfRDAA4hKZ60C5jeX7eJb8DNNldvakkGZXBLpQnQONsq0sReufnJAwSkOGwfZ4FX/oYREl8nif3
+QXe7nYnoLLOrrzUvytuZjAYUbjVvTb/9QyQZSnkOv6cb4aq/hQ2bD6vifEQMm+Dx378JXH9dswqL
+xw5IZpMLkFBS/2K8A0VLiqX9aKnr+egtnz+St42L9lLZDy0FwnD73e4dnQV7kxujAAAAAAAA
 
---------------ms020504090208040908070501--
+--------------ms000504080105060900090604--
