@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FSd-00051j-Pt
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:29:32 +0200
-Received: (qmail 4026 invoked by uid 1003); 13 May 2009 14:22:45 -0000
+	(envelope-from <philip@balister.org>) id 1M4FT0-00055p-3N
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:29:54 +0200
+Received: (qmail 12991 invoked by uid 1003); 13 May 2009 14:23:07 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:22:44 -0000
-Message-ID: <4A0AD7B4.3080709@balister.org>
-Date: Wed, 13 May 2009 10:22:44 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:23:07 -0000
+Message-ID: <4A0AD7CA.9080604@balister.org>
+Date: Wed, 13 May 2009 10:23:06 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-32-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-32-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 31/37] gpe-tetris: Fix install: don't di install -s
+	<1242207556-15601-33-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-33-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 32/37] gpe-watch: Fix install: don't do install -s
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:29:32 -0000
-X-Groupsio-MsgNum: 10295
+X-List-Received-Date: Wed, 13 May 2009 14:29:55 -0000
+X-Groupsio-MsgNum: 10296
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060009020909020303040401"
+	micalg=sha1; boundary="------------ms020200070603040501000605"
 
---------------ms060009020909020303040401
+--------------ms020200070603040501000605
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,49 +45,51 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  .../gpe-tetris/gpe-tetris-0.6-4/fix-install.patch  |   13 +++++++++++++
->  recipes/gpe-tetris/gpe-tetris_0.6-4.bb             |    4 +++-
->  2 files changed, 16 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch
+>  recipes/gpe-watch/gpe-watch-0.10/fix_install.patch |   13 +++++++++++++
+>  recipes/gpe-watch/gpe-watch_0.10.bb                |    5 ++++-
+>  2 files changed, 17 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/gpe-watch/gpe-watch-0.10/fix_install.patch
 > 
-> diff --git a/recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch b/recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch
+> diff --git a/recipes/gpe-watch/gpe-watch-0.10/fix_install.patch b/recipes/gpe-watch/gpe-watch-0.10/fix_install.patch
 > new file mode 100644
-> index 0000000..2e32aa5
+> index 0000000..3ae63a8
 > --- /dev/null
-> +++ b/recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch
+> +++ b/recipes/gpe-watch/gpe-watch-0.10/fix_install.patch
 > @@ -0,0 +1,13 @@
-> +diff --git gpe-tetris-0.6-4/Makefile-orig gpe-tetris-0.6-4/Makefile
-> +index 82c7245..27de49f 100644
-> +--- gpe-tetris-0.6-4/Makefile-orig
-> ++++ gpe-tetris-0.6-4/Makefile
-> +@@ -46,7 +46,7 @@ install-program: all
-> + 	install -m 644 pixmaps/stop.png $(DESTDIR)$(PREFIX)/share/gpe/pixmaps/default/tetris/stop.png
-> + 	install -m 644 pixmaps/pause.png $(DESTDIR)$(PREFIX)/share/gpe/pixmaps/default/tetris/pause.png
-> + 	install -m 644 pixmaps/highscores.png $(DESTDIR)$(PREFIX)/share/gpe/pixmaps/default/tetris/highscores.png
-> +-	install -s $(PACKAGE) $(BIN_PATH)/$(PACKAGE)
-> ++	install $(PACKAGE) $(BIN_PATH)/$(PACKAGE)
-> + 	install -d $(DESTDIR)$(PREFIX)/share/applications
-> + 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-> + 	install -m 644 gpe-tetris.desktop $(DESTDIR)$(PREFIX)/share/applications/
-> diff --git a/recipes/gpe-tetris/gpe-tetris_0.6-4.bb b/recipes/gpe-tetris/gpe-tetris_0.6-4.bb
-> index 4a13d24..aa33b1f 100644
-> --- a/recipes/gpe-tetris/gpe-tetris_0.6-4.bb
-> +++ b/recipes/gpe-tetris/gpe-tetris_0.6-4.bb
-> @@ -1,9 +1,11 @@
+> +diff --git gpe-watch-0.10/Makefile-orig gpe-watch-0.10/Makefile
+> +index 2f74616..58fa802 100644
+> +--- gpe-watch-0.10/Makefile-orig
+> ++++ gpe-watch-0.10/Makefile
+> +@@ -39,7 +39,7 @@ $(PACKAGE): $(OBJS) $(LIB)
+> + 
+> + install-program: all $(PACKAGE).desktop
+> + 	mkdir -p $(DESTDIR)$(PREFIX)/bin
+> +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> + 	mkdir -p $(DESTDIR)$(PREFIX)/share/pixmaps
+> + 	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/$(PACKAGE).png
+> + 	#mkdir -p $(DESTDIR)$(PREFIX)/share/$(PACKAGE)
+> diff --git a/recipes/gpe-watch/gpe-watch_0.10.bb b/recipes/gpe-watch/gpe-watch_0.10.bb
+> index e0d5147..9b386a2 100644
+> --- a/recipes/gpe-watch/gpe-watch_0.10.bb
+> +++ b/recipes/gpe-watch/gpe-watch_0.10.bb
+> @@ -1,5 +1,6 @@
 >  LICENSE = "GPL"
->  inherit gpe
+>  inherit gpe pkgconfig
 > +PR = "r1"
-> +
 >  
->  DESCRIPTION = "GTK+2 port of the well known game, Tetris."
->  DEPENDS = "gtk+ libgpewidget gpe-icons"
->  SECTION = "gpe"
+>  DESCRIPTION = "GPE analog clock-watch"
+>  DEPENDS = "gtk+ libgpewidget"
+> @@ -7,4 +8,6 @@ SECTION = "gpe"
 >  PRIORITY = "optional"
 >  
-> -
-> +SRC_URI += "file://fix-install.patch;patch=1"
+>  SRC_URI += "file://fix_makefile.patch;patch=1 \
+> -            file://no-render-h.patch;patch=1"
+> +            file://fix_install.patch;patch=1 \
+> +            file://no-render-h.patch;patch=1 \
+> +           "
 
---------------ms060009020909020303040401
+--------------ms020200070603040501000605
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -139,17 +141,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MjI0NFowIwYJKoZIhvcNAQkEMRYEFKIdthvH3FveKSwybtfdqUz0Yej0MFIGCSqGSIb3DQEJDzFF
+MjMwNlowIwYJKoZIhvcNAQkEMRYEFJyBXtq8UIxGra9A9Y76ZQlfZo4DMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBW8GSz4UnPQuXU/w+MHdHTyLm+V5nBS+nki3kydvUlFlC8xYe4
-h2BCOPenooy0RrAoalaF8xidw5Hu5BUP1haq0uP2KkCP0GCUk5nVtoWfs2wYmjgic845/8KvvQjl
-RrayyWK93Z99/9ucBkM7L7WpGhpnbSz9tNDWwv2JA3EgCIMp8aeNQn92vqqtQThJreqse0Qj8vpb
-EUnnRY/+CVGOpLf47U/ysAQ5hkzNruFhwKK19NcsYxtA7P3mOHckH9RBAi8LTRiRxfhyez9nBB+H
-a2HbtA7c5ADjKPK1Qg6k5KXQ5G34dgDd1W+6e9kmcg1JuLl9UGc+HtAERnfaonNzAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQC5xUgKoH9Hk7XTNEbFINduasNnHCZ7F6pJYXGwPlUn1V0xwkfR
+vYhr8aEta0paSXDRJ4jv8Qewt4moECh/9wRVYAE4zzDAsnaTFMbAMxsyLpeoZKWHsVDlEfqkv6bQ
+8IW14+nZY02g05g6jY3fgYIdMdziuBZTDhxJcO0VtAJ/xWuAowTUPIP2q1j55bL4oGE/v2weYpus
+TXXEUZiiFoaSOWic7sHFk4PDfuDftyD5A1YU0KQWS4NEnOPdF+QHlH45nYuH0e6VV6+Zs2GW4s76
+9I5DE6wo2iUJzkNYamk8hSRckwQm88AAmp0JA1hAiwwRM5uJM3FRn07RSa9IsdL8AAAAAAAA
 
---------------ms060009020909020303040401--
+--------------ms020200070603040501000605--
