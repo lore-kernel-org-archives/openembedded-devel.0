@@ -1,34 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M4Fzw-0007VE-FI
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 17:03:56 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M4FtP-0004Bd-Ip
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 14:57:11 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 13 May 2009 14:57:11 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 13 May 2009 14:57:11 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 13 May 2009 16:56:58 +0200
-Message-ID: <guen3q$p5u$1@ger.gmane.org>
-References: <1242226019-10881-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1242226019-10881-7-git-send-email-marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090427 Shredder/3.0b3pre
-In-Reply-To: <1242226019-10881-7-git-send-email-marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 6/6] angstrom: use GCC 4.3.3 for Geode devices
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M4G0T-0007Wr-07
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 17:04:29 +0200
+Received: (qmail 5401 invoked from network); 13 May 2009 14:57:43 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 13 May 2009 07:57:43 -0700
+Date: Wed, 13 May 2009 07:57:42 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090513145742.GH7973@smtp.west.cox.net>
+References: <87bppxe07v.wl%peter@chubb.wattle.id.au>
+MIME-Version: 1.0
+In-Reply-To: <87bppxe07v.wl%peter@chubb.wattle.id.au>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Building older glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +28,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 15:03:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 May 2009 15:04:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 13-05-09 16:46, Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz<hrw@openembedded.org>
->
->
-> Signed-off-by: Marcin Juszkiewicz<hrw@openembedded.org>
-> ---
->   conf/distro/angstrom-2008.1.conf |    1 +
->   1 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
-> index a466834..b5dbc48 100644
-> --- a/conf/distro/angstrom-2008.1.conf
-> +++ b/conf/distro/angstrom-2008.1.conf
-> @@ -101,6 +101,7 @@ ANGSTROM_GCC_VERSION_bfin			= "4.1.2"
->
->   ANGSTROM_GCC_VERSION_486sx      = "4.3.3"
->   ANGSTROM_GCC_VERSION_armv7a     = "4.3.3"
-> +ANGSTROM_GCC_VERSION_geode      = "4.3.3"
->
->   # Uncomment this if want need to build an armv7a kernel with CSL toolchain (<2.6.27 don't boot with mainline gcc)
->   #KERNEL_CCSUFFIX_armv7a= "-4.2.1+csl-arm-2007q3-53"
+On Wed, May 13, 2009 at 09:00:52PM +1000, Peter Chubb wrote:
+> 
+> Is there a trick to building an older glibc than the head?  I'm
+> building for x86, and I need a libc.a that'll run against a 2.6.10
+> kernel --- so I've tried
+> 	bitbake glibc-2.3.2
+> (and 2.3.5)
 
-NAK, this would interfere with an outstanding patch that Graeme and I 
-are testing:
+You shouldn't need to get that old.  2.5 or 2.6, with
+OLDEST_KERNEL=2.6.10 should work (make sure your machine.conf isn't
+overriding the default of 2.4.0).
 
-http://dominion.thruhere.net/koen/OE/angstrom-dev-toolchain.diff
-
-regards,
-
-Koen
-
+-- 
+Tom Rini
 
 
