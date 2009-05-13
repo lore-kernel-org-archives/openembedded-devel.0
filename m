@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FNC-00043L-Ir
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:23:54 +0200
-Received: (qmail 20264 invoked by uid 1003); 13 May 2009 14:17:08 -0000
+	(envelope-from <philip@balister.org>) id 1M4FOs-0004KI-5u
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:25:38 +0200
+Received: (qmail 12132 invoked by uid 1003); 13 May 2009 14:18:51 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:17:07 -0000
-Message-ID: <4A0AD65F.3030708@balister.org>
-Date: Wed, 13 May 2009 10:17:03 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:18:51 -0000
+Message-ID: <4A0AD6CA.9040208@balister.org>
+Date: Wed, 13 May 2009 10:18:50 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-22-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-22-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 21/37] gpe-autostarter_svn: remove 'no strip patch' and hope they fix upstream
+	<1242207556-15601-24-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-24-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 23/37] libart-lgpl: fix install issue, switch to INC_PR scheme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,40 +29,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:23:54 -0000
-X-Groupsio-MsgNum: 10286
+X-List-Received-Date: Wed, 13 May 2009 14:25:38 -0000
+X-Groupsio-MsgNum: 10287
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms030906020305090402030005"
+	micalg=sha1; boundary="------------ms010609090507050106090606"
 
---------------ms030906020305090402030005
+--------------ms010609090507050106090606
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister <philip@balister.org>
 
 koen.kooi@gmail.com wrote:
-> From: Andrea Adami <andrea.adami@gmail.com>
+> From: Cliff Brake <cbrake@bec-systems.com>
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-autostarter/gpe-autostarter_svn.bb |    2 --
->  1 files changed, 0 insertions(+), 2 deletions(-)
+>  recipes/gnome/libart-lgpl.inc       |    4 +++-
+>  recipes/gnome/libart-lgpl_2.3.16.bb |    3 ++-
+>  recipes/gnome/libart-lgpl_2.3.19.bb |    3 ++-
+>  3 files changed, 7 insertions(+), 3 deletions(-)
 > 
-> diff --git a/recipes/gpe-autostarter/gpe-autostarter_svn.bb b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
-> index 8d275b5..2742952 100644
-> --- a/recipes/gpe-autostarter/gpe-autostarter_svn.bb
-> +++ b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
-> @@ -8,8 +8,6 @@ inherit gpe
->  SRC_URI = "${GPE_SVN} \
->             file://svn-build.patch;patch=1"
+> diff --git a/recipes/gnome/libart-lgpl.inc b/recipes/gnome/libart-lgpl.inc
+> index 710656b..8ff3b21 100644
+> --- a/recipes/gnome/libart-lgpl.inc
+> +++ b/recipes/gnome/libart-lgpl.inc
+> @@ -4,6 +4,8 @@ LICENSE = "LGPL"
 >  
-> -SRC_URI += "file://makefile-fix.patch;patch=1"
-> -
->  S = "${WORKDIR}/${PN}"
+>  ART_CONFIG = "${HOST_ARCH}/art_config.h"
 >  
->  export CVSBUILD="no"
+> +INC_PR = "r3"
+> +
+>  # can't use gnome.oeclass due to _ in filename
+>  SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libart_lgpl/2.3/libart_lgpl-${PV}.tar.bz2 \
+>         file://${ART_CONFIG} \
+> @@ -29,7 +31,7 @@ EXTRA_OECONF = "--disable-gtk-doc"
+>  # enforced.
+>  export MKDIR_P = "mkdir -p"
+>  export mkdir_p = "mkdir -p"
+> -export INSTALL = "${STAGING_BINDIR_NATIVE}/install-sh"
+> +export INSTALL = "${STAGING_BINDIR_NATIVE}/install"
+>  
+>  do_stage() {
+>  	autotools_stage_includes
+> diff --git a/recipes/gnome/libart-lgpl_2.3.16.bb b/recipes/gnome/libart-lgpl_2.3.16.bb
+> index 3605a38..99f8f8b 100644
+> --- a/recipes/gnome/libart-lgpl_2.3.16.bb
+> +++ b/recipes/gnome/libart-lgpl_2.3.16.bb
+> @@ -1,3 +1,4 @@
+>  require libart-lgpl.inc
+>  
+> -PR = "r2"
+> +PR = "${INC_PR}.1"
+> +
+> diff --git a/recipes/gnome/libart-lgpl_2.3.19.bb b/recipes/gnome/libart-lgpl_2.3.19.bb
+> index 3605a38..99f8f8b 100644
+> --- a/recipes/gnome/libart-lgpl_2.3.19.bb
+> +++ b/recipes/gnome/libart-lgpl_2.3.19.bb
+> @@ -1,3 +1,4 @@
+>  require libart-lgpl.inc
+>  
+> -PR = "r2"
+> +PR = "${INC_PR}.1"
+> +
 
---------------ms030906020305090402030005
+--------------ms010609090507050106090606
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -114,17 +145,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MTcwM1owIwYJKoZIhvcNAQkEMRYEFHVy/ow6y4KevV8x76LqnHqnQWMVMFIGCSqGSIb3DQEJDzFF
+MTg1MFowIwYJKoZIhvcNAQkEMRYEFLttfoO7EuA68tHn2cv5ppqyLtGxMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAlpxwzMSg+Txv+D6SJYdLtox6Mf2jKWdooWEapdK1AnY+w7RAh
-weum/TFVrAjZJ1kPNulGEmib30aQRvupzXbP9w/ytxOJwpvxMaj6ELD4zgtivoCScVVycIxqrX6S
-W37vGbmAs2T3xzVBw4z7LgGmpygXh3HPmPkysU3GlAbuPcJeP27fP0JYocmDgFrAs6WSPQyWpMK7
-6XaalP8ZMfPdCP52yOY50lI7TaxzVzxh5rnf6pzB8hfhm9JPc3qmlX7Rc990uCPhECMmXjKJOthg
-8+LynPIfbM6ha7vdzSmNkhiYFNQeibUG+POXmlR5e1JNb4w1GfOsUk/+u4VQyE53AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCY1i6M2J/A8+S5qqFKeqKz5va51C0XVjP9FQ2OE1eJ/qEYRiRX
+grKMilF9g1LthNvsilPLdCAWdtyLxSUcdJ+jTP65yH6bqsrDBCEb68bI6yiZ44IkiGoGWNVHOI/f
+YqPdTt0PDkR1xyAm213im/S9psgMvf9/24c+YUZkC+5zp0mJ9Lnm0G/dKz1xckcaJYU9Kipa7O7U
+1kMTUstsogJfG+3PeVRCQsoVZBKoHdeBXjkp08E086GTgyQ5Ocq2nsR7nfgbt4lLANP2ESoWTDrB
+A/RitIBBbgWQLq6IQIlgY4aOF0V662nOPDFmlHQLzFwZMnl37z8SidT7wP24lvWuAAAAAAAA
 
---------------ms030906020305090402030005--
+--------------ms010609090507050106090606--
