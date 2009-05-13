@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FLh-0003on-8O
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:22:21 +0200
-Received: (qmail 27689 invoked by uid 1003); 13 May 2009 14:15:34 -0000
+	(envelope-from <philip@balister.org>) id 1M4FLw-0003qg-GC
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:22:36 +0200
+Received: (qmail 19389 invoked by uid 1003); 13 May 2009 14:15:50 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:15:34 -0000
-Message-ID: <4A0AD605.3060303@balister.org>
-Date: Wed, 13 May 2009 10:15:33 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:15:49 -0000
+Message-ID: <4A0AD614.6000804@balister.org>
+Date: Wed, 13 May 2009 10:15:48 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-19-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-19-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 18/37] gpe-soundserver: Makefile fix - don't strip on install
+	<1242207556-15601-20-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-20-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 19/37] gpe-aerial: fix Makefiles - don't strip	on install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:22:21 -0000
-X-Groupsio-MsgNum: 10284
+X-List-Received-Date: Wed, 13 May 2009 14:22:37 -0000
+X-Groupsio-MsgNum: 10285
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090009010906020108040602"
+	micalg=sha1; boundary="------------ms090404040603010708040406"
 
---------------ms090009010906020108040602
+--------------ms090404040603010708040406
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,43 +45,61 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-soundserver/files/makefile-fix.patch |   13 +++++++++++++
->  recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb |    3 ++-
->  2 files changed, 15 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/gpe-soundserver/files/makefile-fix.patch
+>  recipes/gpe-aerial/files/fix_makefile.patch |    2 +-
+>  recipes/gpe-aerial/gpe-aerial_0.2.11.bb     |    3 ++-
+>  recipes/gpe-aerial/gpe-aerial_0.2.12.bb     |    3 ++-
+>  recipes/gpe-aerial/gpe-aerial_0.2.13.bb     |    3 ++-
+>  4 files changed, 7 insertions(+), 4 deletions(-)
 > 
-> diff --git a/recipes/gpe-soundserver/files/makefile-fix.patch b/recipes/gpe-soundserver/files/makefile-fix.patch
-> new file mode 100644
-> index 0000000..c150886
-> --- /dev/null
-> +++ b/recipes/gpe-soundserver/files/makefile-fix.patch
-> @@ -0,0 +1,13 @@
-> +--- /tmp/Makefile.old	2004-08-18 16:28:08.000000000 +0200
-> ++++ gpe-soundserver-0.4-1/Makefile	2009-05-01 22:44:27.000000000 +0200
-> +@@ -37,8 +37,8 @@
-> + 
-> + install-program: all
-> + 	install -d $(DESTDIR)$(PREFIX)/bin
-> +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> +-	install -s wrapesd $(DESTDIR)$(PREFIX)/bin/wrapesd
-> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> ++	install wrapesd $(DESTDIR)$(PREFIX)/bin/wrapesd
-> + 	install -d $(DESTDIR)/etc/X11/Xsession.d
-> + 	install $(PACKAGE).xsession $(DESTDIR)/etc/X11/Xsession.d/50sound-server
-> + 
-> diff --git a/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb b/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb
-> index e239f21..1ec4cf3 100644
-> --- a/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb
-> +++ b/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb
-> @@ -4,4 +4,5 @@ inherit gpe
+> diff --git a/recipes/gpe-aerial/files/fix_makefile.patch b/recipes/gpe-aerial/files/fix_makefile.patch
+> index dec0099..bbb0840 100644
+> --- a/recipes/gpe-aerial/files/fix_makefile.patch
+> +++ b/recipes/gpe-aerial/files/fix_makefile.patch
+> @@ -15,7 +15,7 @@ diff -urNd ../gpe-aerial-0.2.11-r0/gpe-aerial-0.2.11/Makefile gpe-aerial-0.2.11/
+>   	mkdir -p $(DESTDIR)/$(PREFIX)/bin
+>  -	$(INSTALL) $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
+>  -	$(STRIP) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> -+	$(INSTALL) -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
+> ++	$(INSTALL) $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
+>   	mkdir -p $(DESTDIR)$(PREFIX)/share/pixmaps/
+>   	for i in $(PIXMAPS); do install -m 644 -D pixmaps/$$i $(DESTDIR)$(PREFIX)/share/pixmaps/$$i; done
+>   	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
+> diff --git a/recipes/gpe-aerial/gpe-aerial_0.2.11.bb b/recipes/gpe-aerial/gpe-aerial_0.2.11.bb
+> index 543dc09..b61331f 100644
+> --- a/recipes/gpe-aerial/gpe-aerial_0.2.11.bb
+> +++ b/recipes/gpe-aerial/gpe-aerial_0.2.11.bb
+> @@ -9,4 +9,5 @@ SECTION = "gpe"
+>  PRIORITY = "optional"
+>  LICENSE = "GPL"
 >  
->  DEPENDS = "virtual/libx11 esound"
+> -SRC_URI += "file://fix_makefile.patch;patch=1"
+> +SRC_URI += "file://iconlist.patch;patch=1;pnum=0 \
+> +	    file://fix_makefile.patch;patch=1"
+> diff --git a/recipes/gpe-aerial/gpe-aerial_0.2.12.bb b/recipes/gpe-aerial/gpe-aerial_0.2.12.bb
+> index 543dc09..b61331f 100644
+> --- a/recipes/gpe-aerial/gpe-aerial_0.2.12.bb
+> +++ b/recipes/gpe-aerial/gpe-aerial_0.2.12.bb
+> @@ -9,4 +9,5 @@ SECTION = "gpe"
+>  PRIORITY = "optional"
+>  LICENSE = "GPL"
 >  
-> -SRC_URI += "file://makefile-breakage.patch;patch=1"
-> +SRC_URI += "file://makefile-breakage.patch;patch=1 \
-> +	    file://makefile-fix.patch;patch=1"
+> -SRC_URI += "file://fix_makefile.patch;patch=1"
+> +SRC_URI += "file://iconlist.patch;patch=1;pnum=0 \
+> +	    file://fix_makefile.patch;patch=1"
+> diff --git a/recipes/gpe-aerial/gpe-aerial_0.2.13.bb b/recipes/gpe-aerial/gpe-aerial_0.2.13.bb
+> index 1f79de8..84f7985 100644
+> --- a/recipes/gpe-aerial/gpe-aerial_0.2.13.bb
+> +++ b/recipes/gpe-aerial/gpe-aerial_0.2.13.bb
+> @@ -10,4 +10,5 @@ SECTION = "gpe"
+>  PRIORITY = "optional"
+>  LICENSE = "GPL"
+>  
+> -SRC_URI += "file://iconlist.patch;patch=1;pnum=0"
+> \ No newline at end of file
+> +SRC_URI += "file://iconlist.patch;patch=1;pnum=0 \
+> +	    file://fix_makefile.patch;patch=1"
 
---------------ms090009010906020108040602
+--------------ms090404040603010708040406
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -133,17 +151,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MTUzM1owIwYJKoZIhvcNAQkEMRYEFJj4UmMhNLH+uODh24sAqouPHQ5YMFIGCSqGSIb3DQEJDzFF
+MTU0OFowIwYJKoZIhvcNAQkEMRYEFJWdAql1p0tSuAPrYWBW8cfdI3fOMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCvrkjSlIqVeZLRy4C1EGoRLeNSOfXUtGljadKMnrqyVdmcJA/l
-BkKJ//fYTWXF8Xg2OWU2rkjoPrWhwvj0nyPA/iCKU753YObZxjZadBG1gg59eS8xzs+v2VZwmFYf
-bLN+LihzkOY0TDTsHSJilNZZa9YVPFOEhjMbIcPzZkbAUtcayB9NGg1DSAf3CWC4dr1MpGKhQNWr
-gaEL2jXoXQ583Gs9BcM6SFnZGnWooVYcAf+aI90UiMgiTS/46kOmG92IxckpUSvdI3jwx/6P3a7q
-i1dbJxz7BPM9/V/M4thTxJWAfZvCkJdi5+YmhWCmP40pViHuiXnVNE3J2N7EXz7lAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQAd1mL221tGjTUIYY/ktiCt1MU2oFKhYn/yKdsllKii4Mpc9R4U
+En4g+GFfs849cNWwXZy6fBEgk173+PKgXURxKoTNyEroS4f03m5N5RyDrDKkFMDs+k75ehLp0z7G
+DKm++TAkFx0Eew2Ty/kGGFwamYsF+OAj2vqpRG2BNtyA8YTSSW1jjcV3Kn6qY7+gWq1ByvsAA14K
+bQuJAOnqNynBM+N7H280TYHlLNAfZwLJZtybY2H8TmckwUYhvjfkHCYsVtrsW2JnVvuAnN0ztLNB
+Vq/9ABZ4o9fUj/HCiAUzJuDPh4M9VjLh9TsLA9pNOos1wwM6Nj4f9LtSyac91GGqAAAAAAAA
 
---------------ms090009010906020108040602--
+--------------ms090404040603010708040406--
