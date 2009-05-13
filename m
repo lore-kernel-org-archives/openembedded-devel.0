@@ -1,22 +1,35 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M4APA-0008EC-O6
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 11:05:36 +0200
-Received: (qmail 25464 invoked by uid 813007); 13 May 2009 08:58:52 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 13 May 2009 08:58:52 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <koen.kooi@gmail.com>) id 1M4B2K-0006OE-5l
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 May 2009 11:46:04 +0200
+Received: by ewy20 with SMTP id 20so593886ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 May 2009 02:39:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=Z6QxUk2aSqLUQEBqpLbTyTSj2uloGbneWgFsMI50FEU=;
+	b=Xp+Lg9lp8uDeC+Z8xGnZmoGhb8I+epTZ7565omWEGPKeVfGzTI736+3SszDjavviyh
+	MQFZ69dfgk4R4c0lyuYXyLhgS6ZdesTrAzfsLbin0zYvIGqV+nroyVKIp9nzAtnakLLW
+	c5GxTxUno3jHHHSO6fkDwBfCglQMmGUtU8K+U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=SS0tUSNR9p4rakdLcUquSfjId/P3OpzkRTMDAyXLqGpEIa1F/Zd1pWok51Qwyb+xkM
+	Ix9CivSZsdW6Fv+uTCn0SxbPmPB+PGZiNEQGcOlpUmL2aDwY/L5cf2zjH1AVXEmfm6zD
+	qo9uB/1D8GFcN2q5aQBxJSSRGME3HGh5vqltw=
+Received: by 10.210.115.17 with SMTP id n17mr85676ebc.55.1242207559252;
+	Wed, 13 May 2009 02:39:19 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id 24sm2185015eyx.33.2009.05.13.02.39.17
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 May 2009 02:39:18 -0700 (PDT)
+From: koen.kooi@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 May 2009 10:58:09 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <4A09D17C.8000204@gmail.com>
-In-Reply-To: <4A09D17C.8000204@gmail.com>
-MIME-Version: 1.0
-Message-Id: <200905131058.13745.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH][STABLE] Modified conf/distro/kaeilos.conf
+Date: Wed, 13 May 2009 11:38:39 +0200
+Message-Id: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.6.1
+Subject: [STABLE][PATCH 00/37] Fix install -s problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,23 +43,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 09:05:37 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 May 2009 09:46:04 -0000
 
+Hi,
 
-As this is his distro I would ack it.
-
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+In preparation to merging the coreutils-native improvements to stable/2009 we need to fix the associated problems with it. This series cherry-picks 37 patches from .dev to do so.
 
 
 
