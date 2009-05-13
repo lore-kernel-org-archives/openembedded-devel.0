@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FIH-0006X7-72
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:18:49 +0200
-Received: (qmail 6298 invoked by uid 1003); 13 May 2009 14:12:02 -0000
+	(envelope-from <philip@balister.org>) id 1M4FJk-0006ju-K5
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:20:20 +0200
+Received: (qmail 61 invoked by uid 1003); 13 May 2009 14:13:34 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:12:02 -0000
-Message-ID: <4A0AD531.1030008@balister.org>
-Date: Wed, 13 May 2009 10:12:01 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:13:33 -0000
+Message-ID: <4A0AD58D.1050408@balister.org>
+Date: Wed, 13 May 2009 10:13:33 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-13-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-13-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 12/37] gpe-su: Makefile fix - don't strip on	install
+	<1242207556-15601-14-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-14-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 13/37] minilite: Makefile fix - don't strip on	install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:18:49 -0000
-X-Groupsio-MsgNum: 10278
+X-List-Received-Date: Wed, 13 May 2009 14:20:21 -0000
+X-Groupsio-MsgNum: 10279
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050906090907080704020700"
+	micalg=sha1; boundary="------------ms000706060301070800040801"
 
---------------ms050906090907080704020700
+--------------ms000706060301070800040801
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,40 +45,113 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-su/files/makefile-fix.patch |   11 +++++++++++
->  recipes/gpe-su/gpe-su.inc               |    2 ++
->  2 files changed, 13 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/gpe-su/files/makefile-fix.patch
+>  recipes/minilite/files/makefile-fix.patch |   11 +++++++++++
+>  recipes/minilite/minilite_0.41.bb         |    2 ++
+>  recipes/minilite/minilite_0.43.bb         |    2 ++
+>  recipes/minilite/minilite_0.44.bb         |    2 ++
+>  recipes/minilite/minilite_0.47.bb         |    2 ++
+>  recipes/minilite/minilite_0.48.bb         |    2 ++
+>  recipes/minilite/minilite_0.49.bb         |    2 ++
+>  recipes/minilite/minilite_0.50.bb         |    2 ++
+>  8 files changed, 25 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/minilite/files/makefile-fix.patch
 > 
-> diff --git a/recipes/gpe-su/files/makefile-fix.patch b/recipes/gpe-su/files/makefile-fix.patch
+> diff --git a/recipes/minilite/files/makefile-fix.patch b/recipes/minilite/files/makefile-fix.patch
 > new file mode 100644
-> index 0000000..cce98b1
+> index 0000000..1be6cea
 > --- /dev/null
-> +++ b/recipes/gpe-su/files/makefile-fix.patch
+> +++ b/recipes/minilite/files/makefile-fix.patch
 > @@ -0,0 +1,11 @@
-> +--- /tmp/Makefile.old	2008-07-14 22:34:47.000000000 +0200
-> ++++ gpe-su-0.20/Makefile	2009-05-01 16:02:11.000000000 +0200
-> +@@ -34,7 +34,7 @@
+> +--- /tmp/Makefile.old	2006-01-16 22:51:34.000000000 +0100
+> ++++ minilite-050/Makefile	2009-05-01 16:36:32.000000000 +0200
+> +@@ -45,7 +45,7 @@
 > + 
-> + install-program: all $(PACKAGE).desktop
+> + install-program: all
 > + 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-> +-	install -m 755 -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> ++	install -m 755 $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> +-	$(INSTALL) -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> ++	$(INSTALL) $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 > + 	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
-> + 	install -m 644 $(PACKAGE).desktop $(DESTDIR)$(PREFIX)/share/applications
-> + 	mkdir -p $(DESTDIR)$(PREFIX)/share/pixmaps
-> diff --git a/recipes/gpe-su/gpe-su.inc b/recipes/gpe-su/gpe-su.inc
-> index 3daa0b9..287915e 100644
-> --- a/recipes/gpe-su/gpe-su.inc
-> +++ b/recipes/gpe-su/gpe-su.inc
-> @@ -6,3 +6,5 @@ DEPENDS = "libgpewidget virtual/libintl"
+> + 	$(INSTALL) -m 644 $(PACKAGE).desktop $(DESTDIR)$(PREFIX)/share/applications/$(PACKAGE).desktop
+> + 	mkdir -p $(DESTDIR)$(PREFIX)/share/pixmaps/
+> diff --git a/recipes/minilite/minilite_0.41.bb b/recipes/minilite/minilite_0.41.bb
+> index 0f5b126..997ae93 100644
+> --- a/recipes/minilite/minilite_0.41.bb
+> +++ b/recipes/minilite/minilite_0.41.bb
+> @@ -7,4 +7,6 @@ DESCRIPTION = "GPE Screen light control dockapp"
+>  
 >  SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.gz"
 >  
->  inherit gpe pkgconfig
+> +SRC_URI += "file://makefile-fix.patch;patch=1" 
 > +
-> +SRC_URI += "file://makefile-fix.patch;patch=1"
+>  export CVSBUILD="no"
+> diff --git a/recipes/minilite/minilite_0.43.bb b/recipes/minilite/minilite_0.43.bb
+> index 0f5b126..997ae93 100644
+> --- a/recipes/minilite/minilite_0.43.bb
+> +++ b/recipes/minilite/minilite_0.43.bb
+> @@ -7,4 +7,6 @@ DESCRIPTION = "GPE Screen light control dockapp"
+>  
+>  SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.gz"
+>  
+> +SRC_URI += "file://makefile-fix.patch;patch=1" 
+> +
+>  export CVSBUILD="no"
+> diff --git a/recipes/minilite/minilite_0.44.bb b/recipes/minilite/minilite_0.44.bb
+> index 0f5b126..997ae93 100644
+> --- a/recipes/minilite/minilite_0.44.bb
+> +++ b/recipes/minilite/minilite_0.44.bb
+> @@ -7,4 +7,6 @@ DESCRIPTION = "GPE Screen light control dockapp"
+>  
+>  SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.gz"
+>  
+> +SRC_URI += "file://makefile-fix.patch;patch=1" 
+> +
+>  export CVSBUILD="no"
+> diff --git a/recipes/minilite/minilite_0.47.bb b/recipes/minilite/minilite_0.47.bb
+> index 0f5b126..997ae93 100644
+> --- a/recipes/minilite/minilite_0.47.bb
+> +++ b/recipes/minilite/minilite_0.47.bb
+> @@ -7,4 +7,6 @@ DESCRIPTION = "GPE Screen light control dockapp"
+>  
+>  SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.gz"
+>  
+> +SRC_URI += "file://makefile-fix.patch;patch=1" 
+> +
+>  export CVSBUILD="no"
+> diff --git a/recipes/minilite/minilite_0.48.bb b/recipes/minilite/minilite_0.48.bb
+> index 0f5b126..997ae93 100644
+> --- a/recipes/minilite/minilite_0.48.bb
+> +++ b/recipes/minilite/minilite_0.48.bb
+> @@ -7,4 +7,6 @@ DESCRIPTION = "GPE Screen light control dockapp"
+>  
+>  SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.gz"
+>  
+> +SRC_URI += "file://makefile-fix.patch;patch=1" 
+> +
+>  export CVSBUILD="no"
+> diff --git a/recipes/minilite/minilite_0.49.bb b/recipes/minilite/minilite_0.49.bb
+> index 0f5b126..997ae93 100644
+> --- a/recipes/minilite/minilite_0.49.bb
+> +++ b/recipes/minilite/minilite_0.49.bb
+> @@ -7,4 +7,6 @@ DESCRIPTION = "GPE Screen light control dockapp"
+>  
+>  SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.gz"
+>  
+> +SRC_URI += "file://makefile-fix.patch;patch=1" 
+> +
+>  export CVSBUILD="no"
+> diff --git a/recipes/minilite/minilite_0.50.bb b/recipes/minilite/minilite_0.50.bb
+> index 0f5b126..997ae93 100644
+> --- a/recipes/minilite/minilite_0.50.bb
+> +++ b/recipes/minilite/minilite_0.50.bb
+> @@ -7,4 +7,6 @@ DESCRIPTION = "GPE Screen light control dockapp"
+>  
+>  SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.gz"
+>  
+> +SRC_URI += "file://makefile-fix.patch;patch=1" 
+> +
+>  export CVSBUILD="no"
 
---------------ms050906090907080704020700
+--------------ms000706060301070800040801
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -130,17 +203,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MTIwMVowIwYJKoZIhvcNAQkEMRYEFF9QC+Iqo+PFufwh1FrlhcusjKWSMFIGCSqGSIb3DQEJDzFF
+MTMzM1owIwYJKoZIhvcNAQkEMRYEFGHbo9RzZ4ILn19N9B/RMNj2f2V+MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCIZUWbJXt1f6W2m3tqaarXKcRMOgHd1ZonETU7Q4uwJOWAKA8f
-/kmb++r/B1KQ997q6/NTJmhLGAqpU+I7uqAGD6FBv10nojYbL4STEe2rpqMMi51r517mjKaU72dO
-6Kl2jqZmBne2hyWgkzOCU0gktoJt2pqoi3gnAuVfuCTlln6+3Pp6Wu+PyVvYjYITa0Ip5Yk9NWCt
-GaYrNa3syhsZKAC5FADNhtQ0N3YGaoSIF0aFBs//XwHpsIkmKOdS/bWQJ2/ZKWekTAUJyY60oPlT
-i6jceGmq/HRp2MHhFMHYZkZ1YVIdZPF8ShTVWcOhirW6hqnnJV73p2wZmqKkqVcYAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCmGSolOLni8m+J5cH3D4r0U1HK0U73n5T2q/KTVcxWQ/w7Cx9s
+w2dp2N2Xdtn3HtUGamUOfONZETcoYaAZvL/sd+tTgqwXp3reOmA9L8F2yK81QxGk4mnrDIOE+U+y
+uSA67Xat2Or1BVcrRUO4SO5epD7LBWzyK3wWkC933zAon37cMCCU2425IzqjduWyTZZL3Y115t2H
+nrKXAWUgxbz0db7Kgv+gA9kJYBpzP4hh65YvspUYiKUI/K5ikCkpod2fafcHrM6/qygXMh69y7HY
+6pg8Zv9KmG6xRhrsShqasIrxmr33IRKiVLVqLlEWcdIDXeh9xuu96uKLD02R4LqMAAAAAAAA
 
---------------ms050906090907080704020700--
+--------------ms000706060301070800040801--
