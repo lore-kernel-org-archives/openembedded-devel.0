@@ -1,23 +1,37 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [74.125.44.154] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M4IVW-0007By-LJ
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 19:44:42 +0200
-Received: (qmail 8060 invoked by uid 813007); 13 May 2009 17:37:57 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 13 May 2009 17:37:57 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 May 2009 19:37:00 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
+	(envelope-from <leon.woestenberg@gmail.com>) id 1M4IsT-0008Bx-La
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 May 2009 20:08:26 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so439770yxh.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 May 2009 11:01:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=CjPkD5FAFKs9Op1GqbgGk85qKWI+t4Jf0ffntqoZsxM=;
+	b=w2MhC/Cl6i14OJ8IZbwYGO4yG3kPgtTevy/EpgjQPISa0/uCCqszuWneizxETcquHl
+	/aToU6xvBdZvhs9NsUgPpNT64slpvfE8NDPUBJaDefW0T5/zZLtrxFacQDFXayRD5XOP
+	bc4H/rFY1PSnX5l5fsx0+OWWgmXy/EWoGB+Hg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=wnh/aX1OpIeIsaRlpM/7VttuOUHiaN7hVqLlEpFfcYzxbz6yoSfUxZAaAYaScwhzpM
+	S62Hn6tQBiDuOImYNBnhaULdKA3csc9bU/Il6GjdSSACnW6fXlvxdxPL3OxTG2Eiq40+
+	7t66kRl5rDg2D2R978GUYT6pEDc/ksXQ8qDmg=
+MIME-Version: 1.0
+Received: by 10.90.34.11 with SMTP id h11mr987875agh.57.1242237700209; Wed, 13 
+	May 2009 11:01:40 -0700 (PDT)
+In-Reply-To: <gueuv0$mjh$1@ger.gmane.org>
 References: <1242226019-10881-1-git-send-email-marcin@juszkiewicz.com.pl>
 	<1242226019-10881-7-git-send-email-marcin@juszkiewicz.com.pl>
-	<guen3q$p5u$1@ger.gmane.org>
-In-Reply-To: <guen3q$p5u$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200905131937.17911.marcin@juszkiewicz.com.pl>
+	<guen3q$p5u$1@ger.gmane.org> <20090513151848.GI7973@smtp.west.cox.net>
+	<gueuv0$mjh$1@ger.gmane.org>
+Date: Wed, 13 May 2009 20:01:40 +0200
+Message-ID: <c384c5ea0905131101k6ec8b858lbd335e51c255b5b9@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 6/6] angstrom: use GCC 4.3.3 for Geode devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,32 +46,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 17:44:42 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 13 May 2009 18:08:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia =C5=9Broda, 13 maja 2009 o 16:56:58 Koen Kooi napisa=C5=82(a):
+Hello,
 
-> > +++ b/conf/distro/angstrom-2008.1.conf
-
-> > +ANGSTROM_GCC_VERSION_geode      =3D "4.3.3"
-
-> NAK, this would interfere with an outstanding patch that Graeme and I
-> are testing:
+On Wed, May 13, 2009 at 7:10 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
+e:
+> On 13-05-09 17:18, Tom Rini wrote:
+>> On Wed, May 13, 2009 at 04:56:58PM +0200, Koen Kooi wrote:
+>>> On 13-05-09 16:46, Marcin Juszkiewicz wrote:
+>>>> From: Marcin Juszkiewicz<hrw@openembedded.org>
+>>>> Signed-off-by: Marcin Juszkiewicz<hrw@openembedded.org>
+>>
+>> wrt that patch, is there a reason you aren't bumping ppc as well? =A0As =
+an
+>> old PPC guy, that's always had me perplexed..
 >
-> http://dominion.thruhere.net/koen/OE/angstrom-dev-toolchain.diff
 
-OK, I dropped 6/6 patch from local branch and added your change. Will do=20
-build from scratch and test on device.
+Being old and having PPC boards on my desktop spaces as well I
+recently got the same level of perplexity, but there's only myself to
+blame.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+I did recently look elsewhere:
+http://www.oselas.com/oselas/toolchain/index_en.html
+
+That OSELAS toolchain shows the following in its support grid:
+
+gcc-4.3.2
+glibc-2.8
+linux-2.6.27
+
+I extracted and built that toolchain. I saw no patches needed for ppc.
+
+It doesn't mention binutils version - I can check my build.
+
+> When adding PPC support I had loads of troubles compiling gcc and glibc d=
+ue
+> to sqrt and type size problems.
+>
+Ah, I remember.
+
+> My efika is too busy serving stuff to serve as a testbed and my dht-walnu=
+t
+> lacks a psu currently, so I'm a bit apprehensive about bumping toolchains
+> without runtime testing them.
+> If console-image actually builds with gcc 4.3.3 + binutils 2.18, that wou=
+ld
+> be a *huge* step forward.
+>
+Agreed. The old PPC guys should check this first. :-) It's on my todo
+(which gives zero information on if it ever gets of).
+
+I only have e300 targets to test.
+
+I (also) blew my EFIKA.
 
 
+Regards,
+--=20
+Leon
 
 
