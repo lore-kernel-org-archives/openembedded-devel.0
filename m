@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FU4-0005Km-9V
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:31:00 +0200
-Received: (qmail 31482 invoked by uid 1003); 13 May 2009 14:24:13 -0000
+	(envelope-from <philip@balister.org>) id 1M4FUP-0005N6-Lz
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:31:22 +0200
+Received: (qmail 7457 invoked by uid 1003); 13 May 2009 14:24:35 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:24:13 -0000
-Message-ID: <4A0AD80C.1070604@balister.org>
-Date: Wed, 13 May 2009 10:24:12 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:24:34 -0000
+Message-ID: <4A0AD821.7010202@balister.org>
+Date: Wed, 13 May 2009 10:24:33 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-36-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-36-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 35/37] netpbm: remove -s on install (sigh)
+	<1242207556-15601-37-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-37-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 36/37] logrotate: remove -s on install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:31:01 -0000
-X-Groupsio-MsgNum: 10299
+X-List-Received-Date: Wed, 13 May 2009 14:31:22 -0000
+X-Groupsio-MsgNum: 10300
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020800000409020808010307"
+	micalg=sha1; boundary="------------ms090302030404070807090702"
 
---------------ms020800000409020808010307
+--------------ms090302030404070807090702
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,33 +45,33 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/netpbm/netpbm_10.28.bb |    4 ++--
+>  recipes/logrotate/logrotate_3.7.1.bb |    4 ++--
 >  1 files changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/recipes/netpbm/netpbm_10.28.bb b/recipes/netpbm/netpbm_10.28.bb
-> index ff90310..78bb26b 100644
-> --- a/recipes/netpbm/netpbm_10.28.bb
-> +++ b/recipes/netpbm/netpbm_10.28.bb
-> @@ -25,7 +25,7 @@ RDEPENDS = "perl\
->  RDEPENDS += "perl-module-exporter-heavy"
->  RDEPENDS += "perl-module-file-spec-unix"
+> diff --git a/recipes/logrotate/logrotate_3.7.1.bb b/recipes/logrotate/logrotate_3.7.1.bb
+> index 0a1647e..61a1306 100644
+> --- a/recipes/logrotate/logrotate_3.7.1.bb
+> +++ b/recipes/logrotate/logrotate_3.7.1.bb
+> @@ -5,7 +5,7 @@ DEPENDS = "popt"
+>  RDEPENDS = "cron"
+>  SECTION = "admin"
+>  LICENSE = "GPL"
+> -PR = "r1"
+> +PR = "r2"
 >  
-> -PR = "r5"
-> +PR = "r6"
+>  SRC_URI = "http://ftp.debian.org/debian/pool/main/l/logrotate/logrotate_${PV}.orig.tar.gz \
+>  	   file://logrotate-3.7.1.patch;patch=1 \
+> @@ -21,7 +21,7 @@ do_compile() {
 >  
->  SRC_URI = "${SOURCEFORGE_MIRROR}/netpbm/netpbm-${PV}.tgz \
->  	   file://ppmtojpeg.patch;patch=42 \
-> @@ -34,7 +34,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/netpbm/netpbm-${PV}.tgz \
->  
->  PARALLEL_MAKE = ""
->  
-> -EXTRA_OEMAKE = "ENDIANGEN=${S}/buildtools/oeendiangen TARGET_LD=${LD}"
-> +EXTRA_OEMAKE = "ENDIANGEN=${S}/buildtools/oeendiangen TARGET_LD=${LD} 'STRIPFLAG='"
->  
->  do_configure() {
->  	install -c -m 644 ../Makefile.config .
+>  do_install () {
+>      # Install the binary and conf file
+> -    install -D -s -m 0755 ${S}/logrotate ${D}${base_sbindir}/logrotate
+> +    install -D -m 0755 ${S}/logrotate ${D}${base_sbindir}/logrotate
+>      install -D -m 0644 ${WORKDIR}/logrotate.conf ${D}${sysconfdir}/logrotate.conf
+>      install -m 0755 -d ${D}${sysconfdir}/logrotate.d
+>  }
 
---------------ms020800000409020808010307
+--------------ms090302030404070807090702
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -123,17 +123,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MjQxMlowIwYJKoZIhvcNAQkEMRYEFNp1LmHcs9bGWX4b1zxoKhlDcDljMFIGCSqGSIb3DQEJDzFF
+MjQzM1owIwYJKoZIhvcNAQkEMRYEFFIWZbrQz27Hg1SDoHeg1qady5ZuMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQB2ypaE0Sj4ZU0GxmV2hBHBw6ctIJP7o09XBdKoOiPZ/XYdJ3yd
-1t3uMZo58zPF5/pWXx9657CoSqRidowlF6Twm/FLEuppEfIEKLKVfFyE3nhSclz2irT/JH23t9Cx
-SXU1w3pD803okQDQvlfHHlssHDla7FMFRJTx7KZKS7zYr35SPAlQf4+rYdcT70pTB9vJMfOHgW6w
-N3QcSc7Ywzrg2GHjKXRmTre3pN4jrTmaW8+23Rt3KAW0KgO8eV2pQRQEuItWL149H1Wjp4GQgpWl
-Wix+dsiY424S+bEqV0k0n4qq8u90oPk9dZW9zFMr2REyNqtq+s8Ibya0lvykW4jRAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCgnpUFYDcbmSB0P48VlpW0IWpTFsgMrYuwqTAyugIcMWQW8LCV
+7iPHcshfKRVm2qzicLpgu7mEXY9pnA/erRl0fGgPy6B/GjfL+xTxXSPbtonwAAV3JECVb/tmKZDm
++pJpeFy7fVoM3cNghZNbrLFDJBPpTIo/VoC2ZN2PXLz96vS78pYJPZtJGlRThNua/R28osh5FKsC
+6iFgDzrehb2AkfrDJ/aoX9IlFv8F0qzYUEt7ozrXfv6w1LhJldqWCzvLJt269khMutt45qHRGZ6Y
+DwZ2EPVqiieR8aRhUJ6G5HkJhxtwCTjG9LWrHWb9YM/dJXQ8aK/CuUU76d4WEguTAAAAAAAA
 
---------------ms020800000409020808010307--
+--------------ms090302030404070807090702--
