@@ -1,37 +1,37 @@
 Received: from [74.125.78.145] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1M4B3B-0006Q0-QX
+	(envelope-from <koen.kooi@gmail.com>) id 1M4B3D-0006Q0-7P
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 May 2009 11:46:57 +0200
+	Wed, 13 May 2009 11:46:59 +0200
 Received: by ey-out-1920.google.com with SMTP id 26so226051eyw.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 May 2009 02:40:15 -0700 (PDT)
+	Wed, 13 May 2009 02:40:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=MlperEHScdFmvlLFiCMlnT+jQYn9hiBFEAYT1oP3rxw=;
-	b=iyghBhi6lOo5yIk2VeIMpB1/9LtHTTjnjP23f3FAHpKB+OGJ2L+dVOmin5ki9XWAoX
-	uEwTv2XK6ue2AWz6ggp2rmk9UuHz6FOQVl88QV/a561rc4G3ujDVgWj6nF8i9oN0BJb0
-	2gUQz9Zv49czr6cGNl116ICK8g4ukuQBy7F5I=
+	bh=yWsUZMZOcGCDoTcY8sNUQ2fwYYST3f2xW7hTglTuO5g=;
+	b=Hyw8gQTe7y6CPaBtHgowYE6ptY7cZT5NdP9MrtqYKzAc+magzyGDgciSe89CvW3oax
+	qoNfaUbEyscKAb7e0zb1WB1AQ/rnEFP+zqzv+bkTn9y0MocPKpXQ0am8pt1i11se7JN0
+	+C+VqihkWpqVl894yv3GzcdsyJAkM33iMZu+8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=g/mwCl5MvsdGuSboinnCkXx0O+3R6Bx2j4dQ8K+aWkV2esMmuiuKmB3/0Ii/WpkIpH
-	/h21xD0EcoE7OhdHY1nO4iIjaEfEW9Q3ZI95iWkLQXzb3Sn0s1/7+sA+iGYOWSPde9t2
-	PAcf0zhS3LAU/oh/DULvqcBKcjmKIHbMbeadw=
-Received: by 10.210.143.11 with SMTP id q11mr4689271ebd.65.1242207614958;
-	Wed, 13 May 2009 02:40:14 -0700 (PDT)
+	b=MeDjJWJtpRtMA9BfdwbK2AS6zzxsePuhHfYWSSVC0AYNUxd2auiyOadS5LYkilPDWZ
+	HpVqdbLoXSOdPLyp3Tj+rN9D7Xmcn/XP5QgDBmZmyl+O8rjGEG8GwkwGU5Wfg8PKqZCK
+	+mzPRqq5PA8BCNr06twZP79V00y65eJaZkjoE=
+Received: by 10.210.142.10 with SMTP id p10mr84173ebd.99.1242207616741;
+	Wed, 13 May 2009 02:40:16 -0700 (PDT)
 Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 5sm1475967eyf.58.2009.05.13.02.40.13
+	by mx.google.com with ESMTPS id 10sm2200715eyz.51.2009.05.13.02.40.16
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 13 May 2009 02:40:13 -0700 (PDT)
+	Wed, 13 May 2009 02:40:16 -0700 (PDT)
 From: koen.kooi@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 May 2009 11:38:59 +0200
-Message-Id: <1242207556-15601-21-git-send-email-k.kooi@student.utwente.nl>
+Date: Wed, 13 May 2009 11:39:00 +0200
+Message-Id: <1242207556-15601-22-git-send-email-k.kooi@student.utwente.nl>
 X-Mailer: git-send-email 1.6.1
 In-Reply-To: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: [STABLE][PATCH 20/37] teleport: reorder patches for old version 0.33 (still breaks compiling)
+Subject: [STABLE][PATCH 21/37] gpe-autostarter_svn: remove 'no strip patch' and hope they fix upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,489 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 09:46:58 -0000
+X-List-Received-Date: Wed, 13 May 2009 09:46:59 -0000
 
 From: Andrea Adami <andrea.adami@gmail.com>
 
 Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- recipes/teleport/files/crypt.c                     |  158 --------------------
- recipes/teleport/files/fix-desktop.patch           |   12 --
- recipes/teleport/files/makefile-fix.patch          |   13 --
- recipes/teleport/files/remove-tododb.patch         |   12 --
- recipes/teleport/teleport-0.33/crypt.c             |  158 ++++++++++++++++++++
- recipes/teleport/teleport-0.33/fix-desktop.patch   |   12 ++
- recipes/teleport/teleport-0.33/makefile-fix.patch  |   13 ++
- recipes/teleport/teleport-0.33/remove-tododb.patch |   12 ++
- recipes/teleport/teleport-0.34/makefile-fix.patch  |   13 ++
- 9 files changed, 208 insertions(+), 195 deletions(-)
- delete mode 100644 recipes/teleport/files/crypt.c
- delete mode 100644 recipes/teleport/files/fix-desktop.patch
- delete mode 100644 recipes/teleport/files/makefile-fix.patch
- delete mode 100644 recipes/teleport/files/remove-tododb.patch
- create mode 100644 recipes/teleport/teleport-0.33/crypt.c
- create mode 100644 recipes/teleport/teleport-0.33/fix-desktop.patch
- create mode 100644 recipes/teleport/teleport-0.33/makefile-fix.patch
- create mode 100644 recipes/teleport/teleport-0.33/remove-tododb.patch
- create mode 100644 recipes/teleport/teleport-0.34/makefile-fix.patch
+ recipes/gpe-autostarter/gpe-autostarter_svn.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/teleport/files/crypt.c b/recipes/teleport/files/crypt.c
-deleted file mode 100644
-index 359c5ee..0000000
---- a/recipes/teleport/files/crypt.c
-+++ /dev/null
-@@ -1,158 +0,0 @@
--/*
-- * Copyright (C) 2003 Philip Blundell <philb@gnu.org>
-- *
-- * This program is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU General Public License
-- * as published by the Free Software Foundation; either version
-- * 2 of the License, or (at your option) any later version.
-- */
+diff --git a/recipes/gpe-autostarter/gpe-autostarter_svn.bb b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
+index 8d275b5..2742952 100644
+--- a/recipes/gpe-autostarter/gpe-autostarter_svn.bb
++++ b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
+@@ -8,8 +8,6 @@ inherit gpe
+ SRC_URI = "${GPE_SVN} \
+            file://svn-build.patch;patch=1"
+ 
+-SRC_URI += "file://makefile-fix.patch;patch=1"
 -
--#include <stdlib.h>
--#include <string.h>
--#include <glib.h>
--#include <assert.h>
--
--#include "libdisplaymigration/auth.h"
--#include "libdisplaymigration/crypt.h"
--
--static gcry_mpi_t
--mpi_from_sexp (gcry_sexp_t r, char *tag)
--{
--  gcry_sexp_t s = gcry_sexp_find_token (r, tag, 0);
--  return gcry_sexp_nth_mpi (s, 1, GCRYMPI_FMT_USG);
--}
--
--static char *
--hex_from_mpi (gcry_mpi_t m)
--{
--  char *buf;
--  gcry_mpi_aprint (GCRYMPI_FMT_HEX, (void *)&buf, NULL, m);
--  return buf;
--}
--
--void
--displaymigration_crypt_create_hash (char *display, char *challenge, size_t len, char *result)
--{
--  size_t dlen = strlen (display);
--  gchar *buf = g_malloc (dlen + 1 + len);
--  strcpy (buf, display);
--  memcpy (buf + dlen + 1, challenge, len);
--  gcry_md_hash_buffer (GCRY_MD_SHA1, result, buf, len + dlen + 1);
--  g_free (buf);
--}
--
--static int
--do_encode_md (const unsigned char *digest, size_t digestlen, int algo,
--              unsigned int nbits, gcry_mpi_t *r_val)
--{
--  int nframe = (nbits+7) / 8;
--  unsigned char *frame;
--  int i, n;
--  unsigned char asn[100];
--  size_t asnlen;
--
--  asnlen = sizeof(asn);
--  if (gcry_md_algo_info (algo, GCRYCTL_GET_ASNOID, asn, &asnlen))
--    return -1;
--
--  if (digestlen + asnlen + 4  > nframe )
--    return -1;
--  
--  /* We encode the MD in this way:
--   *
--   *	   0  1 PAD(n bytes)   0  ASN(asnlen bytes)  MD(len bytes)
--   *
--   * PAD consists of FF bytes.
--   */
--  frame = g_malloc (nframe);
--  n = 0;
--  frame[n++] = 0;
--  frame[n++] = 1; /* block type */
--  i = nframe - digestlen - asnlen -3 ;
--  assert ( i > 1 );
--  memset ( frame+n, 0xff, i ); n += i;
--  frame[n++] = 0;
--  memcpy ( frame+n, asn, asnlen ); n += asnlen;
--  memcpy ( frame+n, digest, digestlen ); n += digestlen;
--  assert ( n == nframe );
--      
--  gcry_mpi_scan (r_val, GCRYMPI_FMT_USG, frame, nframe, &nframe);
--  g_free (frame);
--  return 0;
--}
--
--gboolean
--displaymigration_crypt_sign_hash (struct rsa_key *k, char *hash, gchar **result)
--{
--  gcry_mpi_t mpi;
--  gcry_sexp_t data, sig, key;
--  int rc;
--  char *hex;
--
--  do_encode_md (hash, 20, GCRY_MD_SHA1, 1024, &mpi);
--
--  if (gcry_sexp_build (&data, NULL, "(data (value %m))", mpi))
--    return FALSE;
-- 
--  gcry_mpi_release (mpi);
--
--  if (gcry_sexp_build (&key, NULL, "(private-key (rsa (n %m) (e %m) (d %m) (p %m) (q %m) (u %m)))",
--		       k->n, k->e, k->d, k->p, k->q, k->u))
--    {
--      gcry_sexp_release (data);
--      return FALSE;
--    }
--  
--  rc = gcry_pk_sign (&sig, data, key);
--
--  gcry_sexp_release (data);
--  gcry_sexp_release (key);
--
--  if (rc)
--    return FALSE;
--
--  mpi = mpi_from_sexp (sig, "s");
--  hex = hex_from_mpi (mpi);
--  *result = g_strdup (hex);
--  gcry_free (hex);
--  gcry_mpi_release (mpi);
--  gcry_sexp_release (sig);
--
--  return TRUE;
--}
--
--gboolean
--displaymigration_crypt_check_signature (struct rsa_key *k, char *hash, char *sigbuf)
--{
--  gcry_mpi_t mpi, mpi2;
--  gcry_sexp_t data, sig, key;
--  int rc;
--
--  do_encode_md (hash, 20, GCRY_MD_SHA1, 1024, &mpi);
--
--  gcry_sexp_build (&data, NULL, "(data (value %m))", mpi);
--  
--  gcry_mpi_release (mpi);
--
--  gcry_sexp_build (&key, NULL, "(public-key (rsa (n %m) (e %m)))", k->n, k->e);
--
--  if (gcry_mpi_scan (&mpi2, GCRYMPI_FMT_HEX, sigbuf, 0, NULL))
--    {
--      gcry_sexp_release (data);
--      return FALSE;
--    }
--
--  gcry_sexp_build (&sig, NULL, "(sig-val (rsa (s %m)))", mpi2);
--
--  rc = gcry_pk_verify (sig, data, key);
--
--  gcry_sexp_release (data);
--  gcry_sexp_release (key);
--  gcry_sexp_release (sig);
--  gcry_mpi_release (mpi2);
--
--  if (rc)
--    return FALSE;
--
--  return TRUE;
--}
-diff --git a/recipes/teleport/files/fix-desktop.patch b/recipes/teleport/files/fix-desktop.patch
-deleted file mode 100644
-index c12434f..0000000
---- a/recipes/teleport/files/fix-desktop.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
----- teleport-0.33/teleport.desktop      2003-07-06 23:47:14.000000000 +0200
--+++ /tmp/teleport.desktop       2005-03-04 17:34:32.193817208 +0100
--@@ -1,7 +1,7 @@
-- [Desktop Entry]
-- Name=Teleport
-- Comment=Move applications between displays
---Exec=monolaunch -k /usr/share/pixmaps/teleport.png teleport
--+Exec=mb-applet-launcher -k /usr/share/pixmaps/teleport.png teleport
-- Type=PanelApp
-- Icon=teleport.png
-- Categories=Panel;Utility;GPE
--
-diff --git a/recipes/teleport/files/makefile-fix.patch b/recipes/teleport/files/makefile-fix.patch
-deleted file mode 100644
-index 9dc232d..0000000
---- a/recipes/teleport/files/makefile-fix.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
----- /tmp/Makefile.old	2005-03-04 20:19:01.000000000 +0100
--+++ teleport-0.34/Makefile	2009-05-01 22:19:16.000000000 +0200
--@@ -37,8 +37,8 @@
-- 
-- install-program: all
-- 	install -d $(DESTDIR)$(PREFIX)/bin
---	install -s teleport $(DESTDIR)$(PREFIX)/bin/
---	install -s tp-keygen $(DESTDIR)$(PREFIX)/bin/
--+	install teleport $(DESTDIR)$(PREFIX)/bin/
--+	install tp-keygen $(DESTDIR)$(PREFIX)/bin/
-- 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-- 	install -m 644 teleport.png $(DESTDIR)$(PREFIX)/share/pixmaps
-- 	install -d $(DESTDIR)$(PREFIX)/share/applications
-diff --git a/recipes/teleport/files/remove-tododb.patch b/recipes/teleport/files/remove-tododb.patch
-deleted file mode 100644
-index 87e4f74..0000000
---- a/recipes/teleport/files/remove-tododb.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
----- teleport-0.33/Makefile    2004-07-20 22:01:25.000000000 +0200
--+++ teleport-0.33/Makefile       2005-03-04 17:03:17.316841832 +0100
--@@ -13,7 +13,7 @@
-- endif
-- PACKAGE_CPPFLAGS += $(STANDARD_CPPFLAGS)
-- PACKAGE_CFLAGS += $(STANDARD_CFLAGS) $(GPECFLAGS) `libgcrypt-config --cflags`
---PACKAGE_LDFLAGS += $(STANDARD_LDFLAGS) $(GPELIBS) -ltododb -ldisplaymigration -lgpepimc `libgcrypt-config --libs` -lsqlite
--+PACKAGE_LDFLAGS += $(STANDARD_LDFLAGS) $(GPELIBS) -ldisplaymigration `libgcrypt-config --libs` -lsqlite
-- 
-- MEMBERS = teleport crypt displays keygen tp-keygen
-- 
--
-diff --git a/recipes/teleport/teleport-0.33/crypt.c b/recipes/teleport/teleport-0.33/crypt.c
-new file mode 100644
-index 0000000..359c5ee
---- /dev/null
-+++ b/recipes/teleport/teleport-0.33/crypt.c
-@@ -0,0 +1,158 @@
-+/*
-+ * Copyright (C) 2003 Philip Blundell <philb@gnu.org>
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License
-+ * as published by the Free Software Foundation; either version
-+ * 2 of the License, or (at your option) any later version.
-+ */
-+
-+#include <stdlib.h>
-+#include <string.h>
-+#include <glib.h>
-+#include <assert.h>
-+
-+#include "libdisplaymigration/auth.h"
-+#include "libdisplaymigration/crypt.h"
-+
-+static gcry_mpi_t
-+mpi_from_sexp (gcry_sexp_t r, char *tag)
-+{
-+  gcry_sexp_t s = gcry_sexp_find_token (r, tag, 0);
-+  return gcry_sexp_nth_mpi (s, 1, GCRYMPI_FMT_USG);
-+}
-+
-+static char *
-+hex_from_mpi (gcry_mpi_t m)
-+{
-+  char *buf;
-+  gcry_mpi_aprint (GCRYMPI_FMT_HEX, (void *)&buf, NULL, m);
-+  return buf;
-+}
-+
-+void
-+displaymigration_crypt_create_hash (char *display, char *challenge, size_t len, char *result)
-+{
-+  size_t dlen = strlen (display);
-+  gchar *buf = g_malloc (dlen + 1 + len);
-+  strcpy (buf, display);
-+  memcpy (buf + dlen + 1, challenge, len);
-+  gcry_md_hash_buffer (GCRY_MD_SHA1, result, buf, len + dlen + 1);
-+  g_free (buf);
-+}
-+
-+static int
-+do_encode_md (const unsigned char *digest, size_t digestlen, int algo,
-+              unsigned int nbits, gcry_mpi_t *r_val)
-+{
-+  int nframe = (nbits+7) / 8;
-+  unsigned char *frame;
-+  int i, n;
-+  unsigned char asn[100];
-+  size_t asnlen;
-+
-+  asnlen = sizeof(asn);
-+  if (gcry_md_algo_info (algo, GCRYCTL_GET_ASNOID, asn, &asnlen))
-+    return -1;
-+
-+  if (digestlen + asnlen + 4  > nframe )
-+    return -1;
-+  
-+  /* We encode the MD in this way:
-+   *
-+   *	   0  1 PAD(n bytes)   0  ASN(asnlen bytes)  MD(len bytes)
-+   *
-+   * PAD consists of FF bytes.
-+   */
-+  frame = g_malloc (nframe);
-+  n = 0;
-+  frame[n++] = 0;
-+  frame[n++] = 1; /* block type */
-+  i = nframe - digestlen - asnlen -3 ;
-+  assert ( i > 1 );
-+  memset ( frame+n, 0xff, i ); n += i;
-+  frame[n++] = 0;
-+  memcpy ( frame+n, asn, asnlen ); n += asnlen;
-+  memcpy ( frame+n, digest, digestlen ); n += digestlen;
-+  assert ( n == nframe );
-+      
-+  gcry_mpi_scan (r_val, GCRYMPI_FMT_USG, frame, nframe, &nframe);
-+  g_free (frame);
-+  return 0;
-+}
-+
-+gboolean
-+displaymigration_crypt_sign_hash (struct rsa_key *k, char *hash, gchar **result)
-+{
-+  gcry_mpi_t mpi;
-+  gcry_sexp_t data, sig, key;
-+  int rc;
-+  char *hex;
-+
-+  do_encode_md (hash, 20, GCRY_MD_SHA1, 1024, &mpi);
-+
-+  if (gcry_sexp_build (&data, NULL, "(data (value %m))", mpi))
-+    return FALSE;
-+ 
-+  gcry_mpi_release (mpi);
-+
-+  if (gcry_sexp_build (&key, NULL, "(private-key (rsa (n %m) (e %m) (d %m) (p %m) (q %m) (u %m)))",
-+		       k->n, k->e, k->d, k->p, k->q, k->u))
-+    {
-+      gcry_sexp_release (data);
-+      return FALSE;
-+    }
-+  
-+  rc = gcry_pk_sign (&sig, data, key);
-+
-+  gcry_sexp_release (data);
-+  gcry_sexp_release (key);
-+
-+  if (rc)
-+    return FALSE;
-+
-+  mpi = mpi_from_sexp (sig, "s");
-+  hex = hex_from_mpi (mpi);
-+  *result = g_strdup (hex);
-+  gcry_free (hex);
-+  gcry_mpi_release (mpi);
-+  gcry_sexp_release (sig);
-+
-+  return TRUE;
-+}
-+
-+gboolean
-+displaymigration_crypt_check_signature (struct rsa_key *k, char *hash, char *sigbuf)
-+{
-+  gcry_mpi_t mpi, mpi2;
-+  gcry_sexp_t data, sig, key;
-+  int rc;
-+
-+  do_encode_md (hash, 20, GCRY_MD_SHA1, 1024, &mpi);
-+
-+  gcry_sexp_build (&data, NULL, "(data (value %m))", mpi);
-+  
-+  gcry_mpi_release (mpi);
-+
-+  gcry_sexp_build (&key, NULL, "(public-key (rsa (n %m) (e %m)))", k->n, k->e);
-+
-+  if (gcry_mpi_scan (&mpi2, GCRYMPI_FMT_HEX, sigbuf, 0, NULL))
-+    {
-+      gcry_sexp_release (data);
-+      return FALSE;
-+    }
-+
-+  gcry_sexp_build (&sig, NULL, "(sig-val (rsa (s %m)))", mpi2);
-+
-+  rc = gcry_pk_verify (sig, data, key);
-+
-+  gcry_sexp_release (data);
-+  gcry_sexp_release (key);
-+  gcry_sexp_release (sig);
-+  gcry_mpi_release (mpi2);
-+
-+  if (rc)
-+    return FALSE;
-+
-+  return TRUE;
-+}
-diff --git a/recipes/teleport/teleport-0.33/fix-desktop.patch b/recipes/teleport/teleport-0.33/fix-desktop.patch
-new file mode 100644
-index 0000000..c12434f
---- /dev/null
-+++ b/recipes/teleport/teleport-0.33/fix-desktop.patch
-@@ -0,0 +1,12 @@
-+--- teleport-0.33/teleport.desktop      2003-07-06 23:47:14.000000000 +0200
-++++ /tmp/teleport.desktop       2005-03-04 17:34:32.193817208 +0100
-+@@ -1,7 +1,7 @@
-+ [Desktop Entry]
-+ Name=Teleport
-+ Comment=Move applications between displays
-+-Exec=monolaunch -k /usr/share/pixmaps/teleport.png teleport
-++Exec=mb-applet-launcher -k /usr/share/pixmaps/teleport.png teleport
-+ Type=PanelApp
-+ Icon=teleport.png
-+ Categories=Panel;Utility;GPE
-+
-diff --git a/recipes/teleport/teleport-0.33/makefile-fix.patch b/recipes/teleport/teleport-0.33/makefile-fix.patch
-new file mode 100644
-index 0000000..31973c4
---- /dev/null
-+++ b/recipes/teleport/teleport-0.33/makefile-fix.patch
-@@ -0,0 +1,13 @@
-+--- /tmp/Makefile.old	2004-07-20 22:01:25.000000000 +0200
-++++ teleport-0.33/Makefile	2009-05-02 00:16:57.000000000 +0200
-+@@ -40,8 +40,8 @@
-+ 
-+ install-program: all
-+ 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-+-	install -s teleport $(DESTDIR)$(PREFIX)/bin/
-+-	install -s tp-keygen $(DESTDIR)$(PREFIX)/bin/
-++	install teleport $(DESTDIR)$(PREFIX)/bin/
-++	install tp-keygen $(DESTDIR)$(PREFIX)/bin/
-+ 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-+ 	install -m 644 teleport.png $(DESTDIR)$(PREFIX)/share/pixmaps
-+ 	install -d $(DESTDIR)$(PREFIX)/share/applications
-diff --git a/recipes/teleport/teleport-0.33/remove-tododb.patch b/recipes/teleport/teleport-0.33/remove-tododb.patch
-new file mode 100644
-index 0000000..87e4f74
---- /dev/null
-+++ b/recipes/teleport/teleport-0.33/remove-tododb.patch
-@@ -0,0 +1,12 @@
-+--- teleport-0.33/Makefile    2004-07-20 22:01:25.000000000 +0200
-++++ teleport-0.33/Makefile       2005-03-04 17:03:17.316841832 +0100
-+@@ -13,7 +13,7 @@
-+ endif
-+ PACKAGE_CPPFLAGS += $(STANDARD_CPPFLAGS)
-+ PACKAGE_CFLAGS += $(STANDARD_CFLAGS) $(GPECFLAGS) `libgcrypt-config --cflags`
-+-PACKAGE_LDFLAGS += $(STANDARD_LDFLAGS) $(GPELIBS) -ltododb -ldisplaymigration -lgpepimc `libgcrypt-config --libs` -lsqlite
-++PACKAGE_LDFLAGS += $(STANDARD_LDFLAGS) $(GPELIBS) -ldisplaymigration `libgcrypt-config --libs` -lsqlite
-+ 
-+ MEMBERS = teleport crypt displays keygen tp-keygen
-+ 
-+
-diff --git a/recipes/teleport/teleport-0.34/makefile-fix.patch b/recipes/teleport/teleport-0.34/makefile-fix.patch
-new file mode 100644
-index 0000000..9dc232d
---- /dev/null
-+++ b/recipes/teleport/teleport-0.34/makefile-fix.patch
-@@ -0,0 +1,13 @@
-+--- /tmp/Makefile.old	2005-03-04 20:19:01.000000000 +0100
-++++ teleport-0.34/Makefile	2009-05-01 22:19:16.000000000 +0200
-+@@ -37,8 +37,8 @@
-+ 
-+ install-program: all
-+ 	install -d $(DESTDIR)$(PREFIX)/bin
-+-	install -s teleport $(DESTDIR)$(PREFIX)/bin/
-+-	install -s tp-keygen $(DESTDIR)$(PREFIX)/bin/
-++	install teleport $(DESTDIR)$(PREFIX)/bin/
-++	install tp-keygen $(DESTDIR)$(PREFIX)/bin/
-+ 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-+ 	install -m 644 teleport.png $(DESTDIR)$(PREFIX)/share/pixmaps
-+ 	install -d $(DESTDIR)$(PREFIX)/share/applications
+ S = "${WORKDIR}/${PN}"
+ 
+ export CVSBUILD="no"
 -- 
 1.6.1
 
