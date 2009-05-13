@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FC5-0005yZ-Nf
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:12:26 +0200
-Received: (qmail 13433 invoked by uid 1003); 13 May 2009 14:05:38 -0000
+	(envelope-from <philip@balister.org>) id 1M4FCd-00062U-2n
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:12:59 +0200
+Received: (qmail 26108 invoked by uid 1003); 13 May 2009 14:06:12 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:05:38 -0000
-Message-ID: <4A0AD3B0.8000708@balister.org>
-Date: Wed, 13 May 2009 10:05:36 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:06:12 -0000
+Message-ID: <4A0AD3D2.40105@balister.org>
+Date: Wed, 13 May 2009 10:06:10 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-8-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-8-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 07/37] gpe-soundbite: don't strip during install - this breaks now with new install - strip is done in	packaging
+	<1242207556-15601-9-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-9-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 08/37] gpe-calculator: don't strip during install - this breaks now with new install - strip is done in	packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:12:26 -0000
-X-Groupsio-MsgNum: 10271
+X-List-Received-Date: Wed, 13 May 2009 14:13:00 -0000
+X-Groupsio-MsgNum: 10272
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms070605020301030409070909"
+	micalg=sha1; boundary="------------ms000402070508010600070500"
 
---------------ms070605020301030409070909
+--------------ms000402070508010600070500
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,24 +45,24 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-soundbite/files/makefile-fix.patch |    2 +-
+>  .../gpe-calculator-0.2/fix_makefile.patch          |    2 +-
 >  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> diff --git a/recipes/gpe-soundbite/files/makefile-fix.patch b/recipes/gpe-soundbite/files/makefile-fix.patch
-> index c2f14d1..69a82b3 100644
-> --- a/recipes/gpe-soundbite/files/makefile-fix.patch
-> +++ b/recipes/gpe-soundbite/files/makefile-fix.patch
-> @@ -5,7 +5,7 @@
+> diff --git a/recipes/gpe-calculator/gpe-calculator-0.2/fix_makefile.patch b/recipes/gpe-calculator/gpe-calculator-0.2/fix_makefile.patch
+> index b8c6d1a..8b4ebf7 100644
+> --- a/recipes/gpe-calculator/gpe-calculator-0.2/fix_makefile.patch
+> +++ b/recipes/gpe-calculator/gpe-calculator-0.2/fix_makefile.patch
+> @@ -41,7 +41,7 @@ diff -urNd ../gpe-calculator-0.2-r0/gpe-calculator-0.2/Makefile gpe-calculator-0
+>   	install -m 644 $(PACKAGE).desktop $(DESTDIR)$(PREFIX)/share/applications
+>  -	strip $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+>  +	mkdir -p $(DESTDIR)$(PREFIX)/bin
+> -+	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 >   
->   install-program: all $(PACKAGE)-play.desktop  $(PACKAGE)-record.desktop
->  -	install -Ds $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> -+	install -D -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> ++	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
->   	install -D $(PACKAGE)-play $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)-play
->   	install -D $(PACKAGE)-record $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)-record
->   	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
+>   clean:
+>   	rm -f $(PACKAGE) $(OBJS) $(DEPS)
 
---------------ms070605020301030409070909
+--------------ms000402070508010600070500
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -114,17 +114,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MDUzNlowIwYJKoZIhvcNAQkEMRYEFAOUmaMrgx+ysbE7/gwyKcej2Q+nMFIGCSqGSIb3DQEJDzFF
+MDYxMFowIwYJKoZIhvcNAQkEMRYEFCvLA+afOVhKCgbziALglUY0aSvJMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAVzMCi/XVSL1qVdD4UqnyOYbDuW+xkefEFfAOz3pcr29BuGUwT
-IqUMMj/n2BaO+bt+GyQAxywl55F/dnkYYukO6/TEB9mBkGCbj3ajv5rV8/GuYw54FNVkoTMbbMs6
-+nPAwuTVzdugourqnxDJNgYVFeIBtjXQaNZ+KhiItxOczZhzf3RXl9JHjsVyOUMwRzVN/f5fZcdS
-ry1NCfg0k9j7o6lMmXtRBkcm20SOJTn7SRfZS/WMC8b4lIIEqyn42XORIwq6EorTl/yIEExeNm9q
-m15bfUHUQ6GXSnG3isT0OXawfKTvyR96XRyBbR9hrvLBTdVFq6ePFW1Nl4lLAP8FAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQBVCqObV7NcuYHIA/oowIbZoMuaP0GNVPqBXwlX0uHMfkwGgVCU
+61zTY0Uq2kgpZbpJ/QY98JNEscDM3eZdsjH46+xf7wDYCTulteFVFstfEqAor8bN7jamvt8Tb0jP
+FHX5sP6QSUfYIKPN57j/9OhiBThKe8KUqpu3q7LaBr5x+rg7TzKPCtyGLYfqxM83KveiCex1cn75
+Apqo6Qbywq9RsXzT7bmE1D5bmAeV5ggIwHsWQ+dpenQfg1JmyYOaxIG3YdiDupxCpmTuUQgije1i
+BDpEL8VtiqHLZiQtxLSwWnFKrk3XrfU7DyyhRZzVPAXMVRoionrLtF8j4+ihehUzAAAAAAAA
 
---------------ms070605020301030409070909--
+--------------ms000402070508010600070500--
