@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FTm-0005Iw-8Q
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:30:42 +0200
-Received: (qmail 18083 invoked by uid 1003); 13 May 2009 14:23:55 -0000
+	(envelope-from <philip@balister.org>) id 1M4FU4-0005Km-9V
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:31:00 +0200
+Received: (qmail 31482 invoked by uid 1003); 13 May 2009 14:24:13 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:23:55 -0000
-Message-ID: <4A0AD7FA.5020906@balister.org>
-Date: Wed, 13 May 2009 10:23:54 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:24:13 -0000
+Message-ID: <4A0AD80C.1070604@balister.org>
+Date: Wed, 13 May 2009 10:24:12 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-35-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-35-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 34/37] startup-monitor: fix makefile - don't strip on install
+	<1242207556-15601-36-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-36-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 35/37] netpbm: remove -s on install (sigh)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,56 +29,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:30:42 -0000
-X-Groupsio-MsgNum: 10298
+X-List-Received-Date: Wed, 13 May 2009 14:31:01 -0000
+X-Groupsio-MsgNum: 10299
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000601090402070309090805"
+	micalg=sha1; boundary="------------ms020800000409020808010307"
 
---------------ms000601090402070309090805
+--------------ms020800000409020808010307
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister <philip@balister.org>
 
 koen.kooi@gmail.com wrote:
-> From: Andrea Adami <andrea.adami@gmail.com>
+> From: Mike Westerhof <mwester@dls.net>
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/startup-monitor/files/makefile-fix.patch  |   11 +++++++++++
->  recipes/startup-monitor/startup-monitor_0.18-2.bb |    2 ++
->  2 files changed, 13 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/startup-monitor/files/makefile-fix.patch
+>  recipes/netpbm/netpbm_10.28.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/recipes/startup-monitor/files/makefile-fix.patch b/recipes/startup-monitor/files/makefile-fix.patch
-> new file mode 100644
-> index 0000000..6d50c8f
-> --- /dev/null
-> +++ b/recipes/startup-monitor/files/makefile-fix.patch
-> @@ -0,0 +1,11 @@
-> +--- /tmp/Makefile.old	2006-01-16 13:40:16.000000000 +0100
-> ++++ startup-monitor/Makefile	2009-05-09 23:08:22.000000000 +0200
-> +@@ -41,7 +41,7 @@
-> + 
-> + install-program: all
-> + 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-> +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> + 	mkdir -p $(DESTDIR)/etc/X11/Xsession.d
-> + 	install $(PACKAGE).xsession $(DESTDIR)/etc/X11/Xsession.d/70startup-monitor
-> + 
-> diff --git a/recipes/startup-monitor/startup-monitor_0.18-2.bb b/recipes/startup-monitor/startup-monitor_0.18-2.bb
-> index 34e7656..38ec504 100644
-> --- a/recipes/startup-monitor/startup-monitor_0.18-2.bb
-> +++ b/recipes/startup-monitor/startup-monitor_0.18-2.bb
-> @@ -7,3 +7,5 @@ DEPENDS = "virtual/libx11 startup-notification glib-2.0 libmatchbox"
->  inherit gpe pkgconfig
+> diff --git a/recipes/netpbm/netpbm_10.28.bb b/recipes/netpbm/netpbm_10.28.bb
+> index ff90310..78bb26b 100644
+> --- a/recipes/netpbm/netpbm_10.28.bb
+> +++ b/recipes/netpbm/netpbm_10.28.bb
+> @@ -25,7 +25,7 @@ RDEPENDS = "perl\
+>  RDEPENDS += "perl-module-exporter-heavy"
+>  RDEPENDS += "perl-module-file-spec-unix"
 >  
->  #SRC_URI = "http://www.freedesktop.org/software/startup-notification/releases/${P}.tar.gz"
-> +
-> +SRC_URI += "file://makefile-fix.patch;patch=1"
+> -PR = "r5"
+> +PR = "r6"
+>  
+>  SRC_URI = "${SOURCEFORGE_MIRROR}/netpbm/netpbm-${PV}.tgz \
+>  	   file://ppmtojpeg.patch;patch=42 \
+> @@ -34,7 +34,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/netpbm/netpbm-${PV}.tgz \
+>  
+>  PARALLEL_MAKE = ""
+>  
+> -EXTRA_OEMAKE = "ENDIANGEN=${S}/buildtools/oeendiangen TARGET_LD=${LD}"
+> +EXTRA_OEMAKE = "ENDIANGEN=${S}/buildtools/oeendiangen TARGET_LD=${LD} 'STRIPFLAG='"
+>  
+>  do_configure() {
+>  	install -c -m 644 ../Makefile.config .
 
---------------ms000601090402070309090805
+--------------ms020800000409020808010307
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -130,17 +123,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MjM1NFowIwYJKoZIhvcNAQkEMRYEFHJVE5AGjhN5Ye+24ecpCeOb3iiFMFIGCSqGSIb3DQEJDzFF
+MjQxMlowIwYJKoZIhvcNAQkEMRYEFNp1LmHcs9bGWX4b1zxoKhlDcDljMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQA4+lBlEgaxp3X/9O2B/JDBuli3BTPhTclPfeUK0Scz9pdlMrBw
-BKlRk14GecsJEcXvWOX9Nzx3ZvuuCd+jZsPpFIBcntonsF4doLFanUTYpWDTBtuia9jQWquEo8Hz
-G9XXlpuwGl8vMMAsZj9uM7fGkdvywI6OSioldusnAtuNLvTwcHBhxCwHLI5ydOLyeeZ4VkK+9g1r
-yAC3pT3j8y+mh83cz/t/OIKeoae+ZBPS2WSG4xzYlucRV0VenJhflzXkMqD28701orNegEGJm11G
-P90Sm2l+n+SCffThzOXO/RIbhPfJYCvYQPAPVOP2eBmsWsDI93vwbunbjohXIYy2AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQB2ypaE0Sj4ZU0GxmV2hBHBw6ctIJP7o09XBdKoOiPZ/XYdJ3yd
+1t3uMZo58zPF5/pWXx9657CoSqRidowlF6Twm/FLEuppEfIEKLKVfFyE3nhSclz2irT/JH23t9Cx
+SXU1w3pD803okQDQvlfHHlssHDla7FMFRJTx7KZKS7zYr35SPAlQf4+rYdcT70pTB9vJMfOHgW6w
+N3QcSc7Ywzrg2GHjKXRmTre3pN4jrTmaW8+23Rt3KAW0KgO8eV2pQRQEuItWL149H1Wjp4GQgpWl
+Wix+dsiY424S+bEqV0k0n4qq8u90oPk9dZW9zFMr2REyNqtq+s8Ibya0lvykW4jRAAAAAAAA
 
---------------ms000601090402070309090805--
+--------------ms020800000409020808010307--
