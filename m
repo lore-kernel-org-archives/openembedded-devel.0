@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FLw-0003qg-GC
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:22:36 +0200
-Received: (qmail 19389 invoked by uid 1003); 13 May 2009 14:15:50 -0000
+	(envelope-from <philip@balister.org>) id 1M4FNC-00043L-Ir
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:23:54 +0200
+Received: (qmail 20264 invoked by uid 1003); 13 May 2009 14:17:08 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:15:49 -0000
-Message-ID: <4A0AD614.6000804@balister.org>
-Date: Wed, 13 May 2009 10:15:48 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:17:07 -0000
+Message-ID: <4A0AD65F.3030708@balister.org>
+Date: Wed, 13 May 2009 10:17:03 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-20-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-20-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 19/37] gpe-aerial: fix Makefiles - don't strip	on install
+	<1242207556-15601-22-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-22-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 21/37] gpe-autostarter_svn: remove 'no strip patch' and hope they fix upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:22:37 -0000
-X-Groupsio-MsgNum: 10285
+X-List-Received-Date: Wed, 13 May 2009 14:23:54 -0000
+X-Groupsio-MsgNum: 10286
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090404040603010708040406"
+	micalg=sha1; boundary="------------ms030906020305090402030005"
 
---------------ms090404040603010708040406
+--------------ms030906020305090402030005
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,61 +45,24 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-aerial/files/fix_makefile.patch |    2 +-
->  recipes/gpe-aerial/gpe-aerial_0.2.11.bb     |    3 ++-
->  recipes/gpe-aerial/gpe-aerial_0.2.12.bb     |    3 ++-
->  recipes/gpe-aerial/gpe-aerial_0.2.13.bb     |    3 ++-
->  4 files changed, 7 insertions(+), 4 deletions(-)
+>  recipes/gpe-autostarter/gpe-autostarter_svn.bb |    2 --
+>  1 files changed, 0 insertions(+), 2 deletions(-)
 > 
-> diff --git a/recipes/gpe-aerial/files/fix_makefile.patch b/recipes/gpe-aerial/files/fix_makefile.patch
-> index dec0099..bbb0840 100644
-> --- a/recipes/gpe-aerial/files/fix_makefile.patch
-> +++ b/recipes/gpe-aerial/files/fix_makefile.patch
-> @@ -15,7 +15,7 @@ diff -urNd ../gpe-aerial-0.2.11-r0/gpe-aerial-0.2.11/Makefile gpe-aerial-0.2.11/
->   	mkdir -p $(DESTDIR)/$(PREFIX)/bin
->  -	$(INSTALL) $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
->  -	$(STRIP) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> -+	$(INSTALL) -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
-> ++	$(INSTALL) $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
->   	mkdir -p $(DESTDIR)$(PREFIX)/share/pixmaps/
->   	for i in $(PIXMAPS); do install -m 644 -D pixmaps/$$i $(DESTDIR)$(PREFIX)/share/pixmaps/$$i; done
->   	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
-> diff --git a/recipes/gpe-aerial/gpe-aerial_0.2.11.bb b/recipes/gpe-aerial/gpe-aerial_0.2.11.bb
-> index 543dc09..b61331f 100644
-> --- a/recipes/gpe-aerial/gpe-aerial_0.2.11.bb
-> +++ b/recipes/gpe-aerial/gpe-aerial_0.2.11.bb
-> @@ -9,4 +9,5 @@ SECTION = "gpe"
->  PRIORITY = "optional"
->  LICENSE = "GPL"
+> diff --git a/recipes/gpe-autostarter/gpe-autostarter_svn.bb b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
+> index 8d275b5..2742952 100644
+> --- a/recipes/gpe-autostarter/gpe-autostarter_svn.bb
+> +++ b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
+> @@ -8,8 +8,6 @@ inherit gpe
+>  SRC_URI = "${GPE_SVN} \
+>             file://svn-build.patch;patch=1"
 >  
-> -SRC_URI += "file://fix_makefile.patch;patch=1"
-> +SRC_URI += "file://iconlist.patch;patch=1;pnum=0 \
-> +	    file://fix_makefile.patch;patch=1"
-> diff --git a/recipes/gpe-aerial/gpe-aerial_0.2.12.bb b/recipes/gpe-aerial/gpe-aerial_0.2.12.bb
-> index 543dc09..b61331f 100644
-> --- a/recipes/gpe-aerial/gpe-aerial_0.2.12.bb
-> +++ b/recipes/gpe-aerial/gpe-aerial_0.2.12.bb
-> @@ -9,4 +9,5 @@ SECTION = "gpe"
->  PRIORITY = "optional"
->  LICENSE = "GPL"
+> -SRC_URI += "file://makefile-fix.patch;patch=1"
+> -
+>  S = "${WORKDIR}/${PN}"
 >  
-> -SRC_URI += "file://fix_makefile.patch;patch=1"
-> +SRC_URI += "file://iconlist.patch;patch=1;pnum=0 \
-> +	    file://fix_makefile.patch;patch=1"
-> diff --git a/recipes/gpe-aerial/gpe-aerial_0.2.13.bb b/recipes/gpe-aerial/gpe-aerial_0.2.13.bb
-> index 1f79de8..84f7985 100644
-> --- a/recipes/gpe-aerial/gpe-aerial_0.2.13.bb
-> +++ b/recipes/gpe-aerial/gpe-aerial_0.2.13.bb
-> @@ -10,4 +10,5 @@ SECTION = "gpe"
->  PRIORITY = "optional"
->  LICENSE = "GPL"
->  
-> -SRC_URI += "file://iconlist.patch;patch=1;pnum=0"
-> \ No newline at end of file
-> +SRC_URI += "file://iconlist.patch;patch=1;pnum=0 \
-> +	    file://fix_makefile.patch;patch=1"
+>  export CVSBUILD="no"
 
---------------ms090404040603010708040406
+--------------ms030906020305090402030005
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -151,17 +114,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MTU0OFowIwYJKoZIhvcNAQkEMRYEFJWdAql1p0tSuAPrYWBW8cfdI3fOMFIGCSqGSIb3DQEJDzFF
+MTcwM1owIwYJKoZIhvcNAQkEMRYEFHVy/ow6y4KevV8x76LqnHqnQWMVMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAd1mL221tGjTUIYY/ktiCt1MU2oFKhYn/yKdsllKii4Mpc9R4U
-En4g+GFfs849cNWwXZy6fBEgk173+PKgXURxKoTNyEroS4f03m5N5RyDrDKkFMDs+k75ehLp0z7G
-DKm++TAkFx0Eew2Ty/kGGFwamYsF+OAj2vqpRG2BNtyA8YTSSW1jjcV3Kn6qY7+gWq1ByvsAA14K
-bQuJAOnqNynBM+N7H280TYHlLNAfZwLJZtybY2H8TmckwUYhvjfkHCYsVtrsW2JnVvuAnN0ztLNB
-Vq/9ABZ4o9fUj/HCiAUzJuDPh4M9VjLh9TsLA9pNOos1wwM6Nj4f9LtSyac91GGqAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQAlpxwzMSg+Txv+D6SJYdLtox6Mf2jKWdooWEapdK1AnY+w7RAh
+weum/TFVrAjZJ1kPNulGEmib30aQRvupzXbP9w/ytxOJwpvxMaj6ELD4zgtivoCScVVycIxqrX6S
+W37vGbmAs2T3xzVBw4z7LgGmpygXh3HPmPkysU3GlAbuPcJeP27fP0JYocmDgFrAs6WSPQyWpMK7
+6XaalP8ZMfPdCP52yOY50lI7TaxzVzxh5rnf6pzB8hfhm9JPc3qmlX7Rc990uCPhECMmXjKJOthg
+8+LynPIfbM6ha7vdzSmNkhiYFNQeibUG+POXmlR5e1JNb4w1GfOsUk/+u4VQyE53AAAAAAAA
 
---------------ms090404040603010708040406--
+--------------ms030906020305090402030005--
