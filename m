@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FSG-0004wI-Vs
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:29:09 +0200
-Received: (qmail 26163 invoked by uid 1003); 13 May 2009 14:22:21 -0000
+	(envelope-from <philip@balister.org>) id 1M4FSd-00051j-Pt
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:29:32 +0200
+Received: (qmail 4026 invoked by uid 1003); 13 May 2009 14:22:45 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:22:21 -0000
-Message-ID: <4A0AD79C.50304@balister.org>
-Date: Wed, 13 May 2009 10:22:20 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:22:44 -0000
+Message-ID: <4A0AD7B4.3080709@balister.org>
+Date: Wed, 13 May 2009 10:22:44 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-31-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-31-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 30/37] gpe-clock: Fix install: Don't do install -s
+	<1242207556-15601-32-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-32-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 31/37] gpe-tetris: Fix install: don't di install -s
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:29:09 -0000
-X-Groupsio-MsgNum: 10294
+X-List-Received-Date: Wed, 13 May 2009 14:29:32 -0000
+X-Groupsio-MsgNum: 10295
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000504080105060900090604"
+	micalg=sha1; boundary="------------ms060009020909020303040401"
 
---------------ms000504080105060900090604
+--------------ms060009020909020303040401
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,42 +45,49 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-clock/files/fix-install.patch |   13 +++++++++++++
->  recipes/gpe-clock/gpe-clock.inc           |    2 ++
->  2 files changed, 15 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/gpe-clock/files/fix-install.patch
+>  .../gpe-tetris/gpe-tetris-0.6-4/fix-install.patch  |   13 +++++++++++++
+>  recipes/gpe-tetris/gpe-tetris_0.6-4.bb             |    4 +++-
+>  2 files changed, 16 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch
 > 
-> diff --git a/recipes/gpe-clock/files/fix-install.patch b/recipes/gpe-clock/files/fix-install.patch
+> diff --git a/recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch b/recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch
 > new file mode 100644
-> index 0000000..2d3e303
+> index 0000000..2e32aa5
 > --- /dev/null
-> +++ b/recipes/gpe-clock/files/fix-install.patch
+> +++ b/recipes/gpe-tetris/gpe-tetris-0.6-4/fix-install.patch
 > @@ -0,0 +1,13 @@
-> +diff --git gpe-clock-0.25/Makefile-orig gpe-clock-0.25/Makefile
-> +index 4fa59bf..e716fcb 100644
-> +--- gpe-clock-0.25/Makefile-orig
-> ++++ gpe-clock-0.25/Makefile
-> +@@ -36,7 +36,7 @@ $(PACKAGE): $(OBJS)
-> + 
-> + install-program: all
-> + 	install -d $(DESTDIR)$(PREFIX)/bin
-> +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
-> + 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-> + 	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/
+> +diff --git gpe-tetris-0.6-4/Makefile-orig gpe-tetris-0.6-4/Makefile
+> +index 82c7245..27de49f 100644
+> +--- gpe-tetris-0.6-4/Makefile-orig
+> ++++ gpe-tetris-0.6-4/Makefile
+> +@@ -46,7 +46,7 @@ install-program: all
+> + 	install -m 644 pixmaps/stop.png $(DESTDIR)$(PREFIX)/share/gpe/pixmaps/default/tetris/stop.png
+> + 	install -m 644 pixmaps/pause.png $(DESTDIR)$(PREFIX)/share/gpe/pixmaps/default/tetris/pause.png
+> + 	install -m 644 pixmaps/highscores.png $(DESTDIR)$(PREFIX)/share/gpe/pixmaps/default/tetris/highscores.png
+> +-	install -s $(PACKAGE) $(BIN_PATH)/$(PACKAGE)
+> ++	install $(PACKAGE) $(BIN_PATH)/$(PACKAGE)
 > + 	install -d $(DESTDIR)$(PREFIX)/share/applications
-> diff --git a/recipes/gpe-clock/gpe-clock.inc b/recipes/gpe-clock/gpe-clock.inc
-> index d4ae3da..b36fa7d 100644
-> --- a/recipes/gpe-clock/gpe-clock.inc
-> +++ b/recipes/gpe-clock/gpe-clock.inc
-> @@ -6,3 +6,5 @@ DEPENDS = "gtk+ libschedule libgpewidget gpe-announce atd libgpelaunch"
->  RDEPENDS = "gpe-announce"
->  
+> + 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
+> + 	install -m 644 gpe-tetris.desktop $(DESTDIR)$(PREFIX)/share/applications/
+> diff --git a/recipes/gpe-tetris/gpe-tetris_0.6-4.bb b/recipes/gpe-tetris/gpe-tetris_0.6-4.bb
+> index 4a13d24..aa33b1f 100644
+> --- a/recipes/gpe-tetris/gpe-tetris_0.6-4.bb
+> +++ b/recipes/gpe-tetris/gpe-tetris_0.6-4.bb
+> @@ -1,9 +1,11 @@
+>  LICENSE = "GPL"
 >  inherit gpe
+> +PR = "r1"
 > +
+>  
+>  DESCRIPTION = "GTK+2 port of the well known game, Tetris."
+>  DEPENDS = "gtk+ libgpewidget gpe-icons"
+>  SECTION = "gpe"
+>  PRIORITY = "optional"
+>  
+> -
 > +SRC_URI += "file://fix-install.patch;patch=1"
 
---------------ms000504080105060900090604
+--------------ms060009020909020303040401
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -132,17 +139,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MjIyMFowIwYJKoZIhvcNAQkEMRYEFPdiNuxNfi4h/WrpJAqprxJ4ioOJMFIGCSqGSIb3DQEJDzFF
+MjI0NFowIwYJKoZIhvcNAQkEMRYEFKIdthvH3FveKSwybtfdqUz0Yej0MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAVtBpqjeBUJN89J3NbEgwhV2wxZcsQFK0VBKc/Dsjd/HQiLANP
-DLj5Tnw2IqNi5p8xashI7x2mrjk7OAmBYF8eUTKx9gaiD1erApvZQ97GXm9RbNKzm0KOUgdjTZTM
-kcfRDAA4hKZ60C5jeX7eJb8DNNldvakkGZXBLpQnQONsq0sReufnJAwSkOGwfZ4FX/oYREl8nif3
-QXe7nYnoLLOrrzUvytuZjAYUbjVvTb/9QyQZSnkOv6cb4aq/hQ2bD6vifEQMm+Dx378JXH9dswqL
-xw5IZpMLkFBS/2K8A0VLiqX9aKnr+egtnz+St42L9lLZDy0FwnD73e4dnQV7kxujAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQBW8GSz4UnPQuXU/w+MHdHTyLm+V5nBS+nki3kydvUlFlC8xYe4
+h2BCOPenooy0RrAoalaF8xidw5Hu5BUP1haq0uP2KkCP0GCUk5nVtoWfs2wYmjgic845/8KvvQjl
+RrayyWK93Z99/9ucBkM7L7WpGhpnbSz9tNDWwv2JA3EgCIMp8aeNQn92vqqtQThJreqse0Qj8vpb
+EUnnRY/+CVGOpLf47U/ysAQ5hkzNruFhwKK19NcsYxtA7P3mOHckH9RBAi8LTRiRxfhyez9nBB+H
+a2HbtA7c5ADjKPK1Qg6k5KXQ5G34dgDd1W+6e9kmcg1JuLl9UGc+HtAERnfaonNzAAAAAAAA
 
---------------ms000504080105060900090604--
+--------------ms060009020909020303040401--
