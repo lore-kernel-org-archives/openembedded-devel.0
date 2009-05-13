@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4F3N-0005Ol-Hg
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:03:26 +0200
-Received: (qmail 26103 invoked by uid 1003); 13 May 2009 13:56:38 -0000
+	(envelope-from <philip@balister.org>) id 1M4F3g-0005P3-U9
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:03:45 +0200
+Received: (qmail 1710 invoked by uid 1003); 13 May 2009 13:56:58 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 13:56:37 -0000
-Message-ID: <4A0AD194.6040309@balister.org>
-Date: Wed, 13 May 2009 09:56:36 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 13:56:58 -0000
+Message-ID: <4A0AD1A9.7070300@balister.org>
+Date: Wed, 13 May 2009 09:56:57 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-2-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-2-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 01/37] ipaq-sleep: don't strip during install -	using coreutils this now breaks (strip: unable to recognise	the format of the input file)
+	<1242207556-15601-3-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-3-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 02/37] gpe-question: don't strip during install - this breaks now with new install - strip is done in packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,40 +29,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:03:26 -0000
-X-Groupsio-MsgNum: 10264
+X-List-Received-Date: Wed, 13 May 2009 14:03:45 -0000
+X-Groupsio-MsgNum: 10265
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000207050904010308000102"
+	micalg=sha1; boundary="------------ms000403070200020005070206"
 
---------------ms000207050904010308000102
+--------------ms000403070200020005070206
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
+
+Acked-by: Philip Balister <philip@balister.org>
 
 koen.kooi@gmail.com wrote:
 > From: Andrea Adami <andrea.adami@gmail.com>
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
-
-Acked-by: Philip Balister <philip@balister.org>
 > ---
->  recipes/ipaq-sleep/files/install-fix.patch |    2 +-
+>  recipes/gpe-question/files/makefile-fix.patch |    2 +-
 >  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> diff --git a/recipes/ipaq-sleep/files/install-fix.patch b/recipes/ipaq-sleep/files/install-fix.patch
-> index 59eb17b..68e57af 100644
-> --- a/recipes/ipaq-sleep/files/install-fix.patch
-> +++ b/recipes/ipaq-sleep/files/install-fix.patch
+> diff --git a/recipes/gpe-question/files/makefile-fix.patch b/recipes/gpe-question/files/makefile-fix.patch
+> index a8d1ead..f501e12 100644
+> --- a/recipes/gpe-question/files/makefile-fix.patch
+> +++ b/recipes/gpe-question/files/makefile-fix.patch
 > @@ -5,7 +5,7 @@
 >   
 >   install-program: all
 >  -	install -Ds $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 > -+	install -D -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
 > ++	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
->   	mkdir -p $(DESTDIR)/etc/init.d
->   	install $(PACKAGE).init $(DESTDIR)/etc/init.d/$(PACKAGE)
->   	install $(PACKAGE).conf $(DESTDIR)/etc/$(PACKAGE).conf
+>   
+>   clean:
+>   	rm -f $(PACKAGE).o $(PACKAGE) $(DEPS)
 
---------------ms000207050904010308000102
+--------------ms000403070200020005070206
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -114,17 +114,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzEz
-NTYzNlowIwYJKoZIhvcNAQkEMRYEFId8DChNT21ljAbZYMYU4nYKiaZwMFIGCSqGSIb3DQEJDzFF
+NTY1N1owIwYJKoZIhvcNAQkEMRYEFJFSqHsOsFhIrnvv7bBXaK3P2BM6MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQApw9h48oXKfJYM78xQUyXJm4JLMjS/FLbPOHVOGAS/BrRTaU4j
-+tcLCb9PeGZ25clTE2tT7vCzQSGFxYlt4AyytLgKtSu2ZJdWUsjFi3PM0v991cxvJEW45aDlwHSo
-IdchuJj3NfIs41yMP+6frb5bahOdIbVFGgNbq6ZD4Dd2BPtjxkcaUlGKIqIu5xInHnRTZ74TSr8U
-QKcV6J6+cdnGQVDmiv4eilrR4UsjTR3RR1YjF2hjQcGYdXHPrThZ+fpXKdAv7isOB9Lh/94K2nD+
-mVZU3hUA1NHLAdPjn+o5K8P4MR7V2lFKoDyiEoCQYwN9sNRe8pqXa4M0JGquw34yAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCuLy+317kfrVS+Vo7eV24jThd1OUAcfrM9NjElECQhxYq9gRGr
+Osa0OemhcCDoHZlI2W/4RS+DoGnULQm9/a5CwQppVMdAmKaG2Udbfb49MBLWiU19/ohSSSk0itU1
+et5GU4CuNnC3K17kl4dnaVbVxEVm2gwTdmTobtPt9pypWnCp0bYFp1ZoWY/vOEbQkuAEa+bBsA//
+l5wXpdllHsi9FV0nWFMToX+Vl5RB/VMf7ndqWgUbtXwym+vukCj2eBifAw03erksu5gg1zY3/OB+
+t5F3v84ZA2eBfFZ1V1sVzzX8RrLrDtW4PSjAOu/jrGxIr9r0hE9e+yabjQh2VCjlAAAAAAAA
 
---------------ms000207050904010308000102--
+--------------ms000403070200020005070206--
