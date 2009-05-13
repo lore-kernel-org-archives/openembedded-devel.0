@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FPR-0004RI-AT
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:26:13 +0200
-Received: (qmail 24353 invoked by uid 1003); 13 May 2009 14:19:26 -0000
+	(envelope-from <philip@balister.org>) id 1M4FPz-0004Xl-Nj
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:26:48 +0200
+Received: (qmail 22041 invoked by uid 1003); 13 May 2009 14:20:00 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:19:26 -0000
-Message-ID: <4A0AD6ED.9070003@balister.org>
-Date: Wed, 13 May 2009 10:19:25 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:19:59 -0000
+Message-ID: <4A0AD70E.2040909@balister.org>
+Date: Wed, 13 May 2009 10:19:58 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-26-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-26-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 25/37] libart-lgpl: remove INSTALL variable as	install should be provided by autotools
+	<1242207556-15601-27-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-27-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 26/37] gsoko: don't do "install -s"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,48 +29,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:26:13 -0000
-X-Groupsio-MsgNum: 10289
+X-List-Received-Date: Wed, 13 May 2009 14:26:48 -0000
+X-Groupsio-MsgNum: 10290
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060708010807010308090602"
+	micalg=sha1; boundary="------------ms020701090207000208010208"
 
---------------ms060708010807010308090602
+--------------ms020701090207000208010208
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister <philip@balister.org>
 
 koen.kooi@gmail.com wrote:
-> From: Cliff Brake <cbrake@bec-systems.com>
+> From: Florian Boor <florian.boor@kernelconcepts.de>
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gnome/libart-lgpl.inc |    3 +--
->  1 files changed, 1 insertions(+), 2 deletions(-)
+>  recipes/gsoko/gsoko-0.4.2-gpe6/fix_makefiles.patch |   13 +++++++++++++
+>  recipes/gsoko/gsoko_0.4.2-gpe6.bb                  |    1 +
+>  2 files changed, 14 insertions(+), 0 deletions(-)
 > 
-> diff --git a/recipes/gnome/libart-lgpl.inc b/recipes/gnome/libart-lgpl.inc
-> index 8ff3b21..1af5b0e 100644
-> --- a/recipes/gnome/libart-lgpl.inc
-> +++ b/recipes/gnome/libart-lgpl.inc
-> @@ -4,7 +4,7 @@ LICENSE = "LGPL"
+> diff --git a/recipes/gsoko/gsoko-0.4.2-gpe6/fix_makefiles.patch b/recipes/gsoko/gsoko-0.4.2-gpe6/fix_makefiles.patch
+> index 78506a8..f734be4 100644
+> --- a/recipes/gsoko/gsoko-0.4.2-gpe6/fix_makefiles.patch
+> +++ b/recipes/gsoko/gsoko-0.4.2-gpe6/fix_makefiles.patch
+> @@ -27,3 +27,16 @@ diff -urNd ../gsoko-0.4.2-gpe5-r0/gsoko-0.4.2-gpe5/Makefile gsoko-0.4.2-gpe5/Mak
+>   
+>   clean:
+>   	rm -f *.o
+> +Index: Makefile
+> +===================================================================
+> +--- a/Makefile	(Revision 9905)
+> ++++ b/Makefile	(Arbeitskopie)
+> +@@ -29,7 +29,7 @@
+> + 
+> + install-program: gsoko gsoko.desktop
+> + 	install -d $(DESTDIR)$(PREFIX)/bin
+> +-	install -s gsoko $(DESTDIR)$(PREFIX)/bin/gsoko
+> ++	install  gsoko $(DESTDIR)$(PREFIX)/bin/gsoko
+> + 	install -d $(DESTDIR)$(PREFIX)/share/gsoko/img
+> + 	install -d $(DESTDIR)$(PREFIX)/share/gsoko/levels
+> + 	for i in $(LEVELS); do install -m 644 levels/$$i.lev $(DESTDIR)$(PREFIX)/share/gsoko/levels/$$i.lev; done
+> diff --git a/recipes/gsoko/gsoko_0.4.2-gpe6.bb b/recipes/gsoko/gsoko_0.4.2-gpe6.bb
+> index 0d12a6f..6a34be2 100644
+> --- a/recipes/gsoko/gsoko_0.4.2-gpe6.bb
+> +++ b/recipes/gsoko/gsoko_0.4.2-gpe6.bb
+> @@ -4,5 +4,6 @@ DEPENDS = "gtk+ libgpewidget"
+>  SECTION = "gpe"
+>  DESCRIPTION = "Sokoban game for GTK"
+>  PRIORITY = "optional"
+> +PR = "r1"
 >  
->  ART_CONFIG = "${HOST_ARCH}/art_config.h"
->  
-> -INC_PR = "r3"
-> +INC_PR = "r4"
->  
->  # can't use gnome.oeclass due to _ in filename
->  SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libart_lgpl/2.3/libart_lgpl-${PV}.tar.bz2 \
-> @@ -31,7 +31,6 @@ EXTRA_OECONF = "--disable-gtk-doc"
->  # enforced.
->  export MKDIR_P = "mkdir -p"
->  export mkdir_p = "mkdir -p"
-> -export INSTALL = "${STAGING_BINDIR_NATIVE}/install"
->  
->  do_stage() {
->  	autotools_stage_includes
+>  SRC_URI += "file://fix_makefiles.patch;patch=1"
 
---------------ms060708010807010308090602
+--------------ms020701090207000208010208
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -122,17 +134,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MTkyNVowIwYJKoZIhvcNAQkEMRYEFN+l8Uih41JmdGOQMXHlBuI42SA0MFIGCSqGSIb3DQEJDzFF
+MTk1OFowIwYJKoZIhvcNAQkEMRYEFFrM5c0cCtlD0ErnLf8goznEvQkaMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCNpmGbqmCGEN0jUSrpvRnbFth8vcTztZxck9y/ZhqCBw6OngP5
-ond0tfcFkr12LQuB1C+W2yc+dDJTNuc+Ufhs0pintjOAV/ApJCUmLxlbcOAm/XmyDEDWhtltBjJW
-VcIJKLFTjnREAcRdsUroiH+oRer8DYau5olUmMeNW7mhNWQA9scAmw3zuU0hvS+gqLQOJiEfacXV
-YQsll3Y6eVOGNSORcpfE1iSMH7E5/78/UUTE2Warx0zyTCIYbPw1x76DnI0J5ycRCOjIkkDRe+SZ
-sLl/DrG52z9eWUBu7lXDU5q9aCgqHmQ9ooYsvGUCVh7l2wBN8TkzoMhoRkipYKizAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQBYKG2XqKpbMXFnBXzOEp8Rsf5zpwE9rsDD3EKmVouKLit12CuR
+lpEyyaJE0sTRJrQ72z6+Vr/RSEBXJyw882dRKWSFFlkRE14OPiQQSdCyABq3QxlMuOz9ND2GpyzA
+PQ2ZM7pMsufqMgyJzDd2gmxws69yKVKBXeAyRCmAHMbzjRnUnGGuZQ6KLWE7qpP9l3LtwuBzjVoz
+GwADB7As8sy/y6Hqn8eFOiCKwYIo22d1Kvr45PvQXzH1/h2nh+2anMePxd0epmvB8jB+q/i/D7d2
+ZCU2m/2YpRo1yMntZ3cVSz5NURMQx8fiaO4Ervk+6l+IPwqBk3tKTlYBS9R55sdHAAAAAAAA
 
---------------ms060708010807010308090602--
+--------------ms020701090207000208010208--
