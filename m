@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FAX-0005oB-QN
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:10:50 +0200
-Received: (qmail 12338 invoked by uid 1003); 13 May 2009 14:04:03 -0000
+	(envelope-from <philip@balister.org>) id 1M4FBP-0005t8-FC
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:11:43 +0200
+Received: (qmail 5394 invoked by uid 1003); 13 May 2009 14:04:56 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:04:01 -0000
-Message-ID: <4A0AD34C.8010306@balister.org>
-Date: Wed, 13 May 2009 10:03:56 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:04:56 -0000
+Message-ID: <4A0AD386.5080109@balister.org>
+Date: Wed, 13 May 2009 10:04:54 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-5-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-5-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 04/37] gpe-nmf: don't strip during install -	this breaks now with new install - strip is done in packaging
+	<1242207556-15601-6-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-6-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 05/37] gpe-lights: don't strip during install -	this breaks now with new install - strip is done in packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:10:50 -0000
-X-Groupsio-MsgNum: 10268
+X-List-Received-Date: Wed, 13 May 2009 14:11:44 -0000
+X-Groupsio-MsgNum: 10269
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000103070600010901080506"
+	micalg=sha1; boundary="------------ms070005020501020109020008"
 
---------------ms000103070600010901080506
+--------------ms070005020501020109020008
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,26 +45,38 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-nmf/gpe-nmf-0.17/fix_makefiles.patch |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
+>  .../gpe-lights/gpe-lights-0.12/fix-makefiles.patch |    2 +-
+>  .../gpe-lights/gpe-lights-0.13/fix-makefiles.patch |    2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/recipes/gpe-nmf/gpe-nmf-0.17/fix_makefiles.patch b/recipes/gpe-nmf/gpe-nmf-0.17/fix_makefiles.patch
-> index 42b5c36..b6dc568 100644
-> --- a/recipes/gpe-nmf/gpe-nmf-0.17/fix_makefiles.patch
-> +++ b/recipes/gpe-nmf/gpe-nmf-0.17/fix_makefiles.patch
-> @@ -8,8 +8,8 @@ diff -urNd ../gpe-nmf-0.17-r0/gpe-nmf-0.17/backend/Makefile gpe-nmf-0.17/backend
->  -install_program: all
->  +install-program: all
->   	mkdir -p $(DESTDIR)$(PREFIX)/lib
-> - 	install -s $(BACKEND) $(DESTDIR)$(PREFIX)/lib/$(BACKEND)
-> - 	for i in $(CODECS); do install -s $$i $(DESTDIR)$(PREFIX)/lib/gpe-nmf/decoders/$$i; done
-> + 	install $(BACKEND) $(DESTDIR)$(PREFIX)/lib/$(BACKEND)
-> + 	for i in $(CODECS); do install $$i $(DESTDIR)$(PREFIX)/lib/gpe-nmf/decoders/$$i; done
->  diff -urNd ../gpe-nmf-0.17-r0/gpe-nmf-0.17/Makefile gpe-nmf-0.17/Makefile
->  --- ../gpe-nmf-0.17-r0/gpe-nmf-0.17/Makefile	2004-08-03 03:31:46.000000000 +0100
->  +++ gpe-nmf-0.17/Makefile	2004-08-03 12:37:33.000000000 +0100
+> diff --git a/recipes/gpe-lights/gpe-lights-0.12/fix-makefiles.patch b/recipes/gpe-lights/gpe-lights-0.12/fix-makefiles.patch
+> index d2fdd54..4ec5b3a 100644
+> --- a/recipes/gpe-lights/gpe-lights-0.12/fix-makefiles.patch
+> +++ b/recipes/gpe-lights/gpe-lights-0.12/fix-makefiles.patch
+> @@ -278,7 +278,7 @@ diff -urNd ../gpe-lights-0.12-r0/gpe-lights-0.12/Makefile gpe-lights-0.12/Makefi
+>   install-program: all 
+>  -	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+>  -	strip $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> -+	install -s -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> ++	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+>   	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
+>   	install -d $(DESTDIR)$(PREFIX)/share/applications
+>   	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/
+> diff --git a/recipes/gpe-lights/gpe-lights-0.13/fix-makefiles.patch b/recipes/gpe-lights/gpe-lights-0.13/fix-makefiles.patch
+> index bb0ec19..3c4581e 100644
+> --- a/recipes/gpe-lights/gpe-lights-0.13/fix-makefiles.patch
+> +++ b/recipes/gpe-lights/gpe-lights-0.13/fix-makefiles.patch
+> @@ -278,7 +278,7 @@ diff -urNd ../gpe-lights-0.12-r0/gpe-lights-0.12/Makefile gpe-lights-0.12/Makefi
+>   install-program: all 
+>  -	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+>  -	strip $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> -+	install -s -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> ++	install -D $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+>   	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
+>   	install -d $(DESTDIR)$(PREFIX)/share/applications
+>   	install -m 644 $(PACKAGE).png $(DESTDIR)$(PREFIX)/share/pixmaps/
 
---------------ms000103070600010901080506
+--------------ms070005020501020109020008
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -116,17 +128,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MDM1NlowIwYJKoZIhvcNAQkEMRYEFOvy9LYEdub8OkzbJH48opbnpAQcMFIGCSqGSIb3DQEJDzFF
+MDQ1NFowIwYJKoZIhvcNAQkEMRYEFNN36ddE/bhMHxcKtDDotRsQ3YmiMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQDFUkcW3LcAkgGfzNDSpB56Kha63Wb3Kf+obsMKKB7RxZLXz64w
-q61uXAVWEM1nQE0VXxuiRPgaiQ/zeGFrxz9ofXOa92XoMzhF3f5CHwYUcY7z3IhtO9dwHM1ZU1a1
-wX2wi7zg5mKOwCHlV+FH/0B89VisyqI+S7lCZV05f0YVgw/12xNh7ES9HYHB+xMW08p4nmRLr4HX
-rEhZ7DFqp+pM8exUC6ASZ8RGFlV4FOJyaiCRNNgVjDTg8iYsiamCQBMJcukoATUmxX7ijRUwomRI
-+UVtQNsmdjmkA+gLENaVbu0A6BeaVj1V7FbUEWAZ9pRgCnWt7P2c3PgTYuKd3SNMAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQBbbO4h2oU9e4bszxXWito+iwM33wNc1QrqedxQEHf2occCr0/T
+zRXj/c8jf2N3rhuj0FnXfxzUFEddCgWTnkY0oE9cQ/N3TtHK6vj/r1gB+aZ/RiMNAPra4BdIZgOL
+zYdqDYhTo1r1vfuWOrSbEfQmCBX848IQqhTbwDeRiuhY/M8l3WvI4i5tywc7l4wKeU5YSo4FBd3G
+hiW5Yc6g7bmr9siGASIprnT4CQsqWjHLGdANJ/raTExzuqFCr54wcx6NN7M+Wa/EgEmP/LoRItaU
+0u9YJnpcJQWC+cXmI0zHkD/Z+K0VAx3YYa1GA519NruT1uH1ypf7WvBlo37xjUz6AAAAAAAA
 
---------------ms000103070600010901080506--
+--------------ms070005020501020109020008--
