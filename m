@@ -1,34 +1,17 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M4LPd-0006BZ-7m
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 22:50:49 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M4LJ1-0004a2-82
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 20:43:59 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 13 May 2009 20:43:59 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 13 May 2009 20:43:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 13 May 2009 22:43:44 +0200
-Message-ID: <gufbe0$1ap$1@ger.gmane.org>
-References: <1242226019-10881-1-git-send-email-marcin@juszkiewicz.com.pl>	<1242226019-10881-7-git-send-email-marcin@juszkiewicz.com.pl>	<guen3q$p5u$1@ger.gmane.org>	<20090513151848.GI7973@smtp.west.cox.net>	<4A0AE5CC.5010407@balister.org>	<20090513154842.GJ7973@smtp.west.cox.net>
-	<20090513193625.GL7973@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090427 Shredder/3.0b3pre
-In-Reply-To: <20090513193625.GL7973@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 6/6] angstrom: use GCC 4.3.3 for Geode devices
+	(envelope-from <clarson@mvista.com>) id 1M4LZn-0006gM-Sx
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 May 2009 23:01:20 +0200
+Received: from localhost.localdomain (unknown [10.50.1.118])
+	by hermes.mvista.com (Postfix) with ESMTP
+	id C18A31ACF4; Wed, 13 May 2009 13:54:28 -0700 (PDT)
+From: Chris Larson <clarson@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 May 2009 13:53:18 -0700
+Message-Id: <1242247998-30548-1-git-send-email-clarson@mvista.com>
+X-Mailer: git-send-email 1.6.0
+Subject: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +25,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 20:50:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 May 2009 21:01:20 -0000
 
-On 13-05-09 21:36, Tom Rini wrote:
-> On Wed, May 13, 2009 at 08:48:42AM -0700, Tom Rini wrote:
-> [snip]
->> OK, I've got a 405GP eval board dug up, I'll get a 'make check' going
->> sometime soon and report back.  That should cover the xilinx case too,
->> fwiw.
->
-> OK, console-image built, but only with hdparm_6.6 as I'm getting a
-> checksum mismatch with 6.9.  Digging up good hardware is taking a bit
-> longer, but I'll hopefully have something soon.
+For each recipe which completes a task successfully, this emits the current
+version into ${TMPDIR}/versions.conf as a PREFERRED_VERSION line.
+${TMPDIR}/versions.conf and conf/versions.conf are automatically included,
+in that order, in subsequent builds, to provide more deterinistic builds by
+default, and to let the user make the lockdown persist via a simple cp
+command.
 
-Thanks!
+Assuming that the latest ncurses in the recipes is 5.7, and that 5.7 is
+preferred over 5.3 by default given any distro version preferences, if they
+exist, the following are examples of its behavior:
 
+$ rm -rf tmp
+$ bitbake ncurses-5.3
+$ bitbake -c clean ncurses
+$ bitbake ncurses # builds ncurses 5.3
+
+$ cp tmp/versions.conf conf/
+$ rm -rf tmp
+$ bitbake ncurses # builds ncurses 5.3
+
+Signed-off-by: Chris Larson <clarson@mvista.com>
+---
+ conf/bitbake.conf |    1 +
+ conf/freeze.inc   |   71 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 72 insertions(+), 0 deletions(-)
+ create mode 100644 conf/freeze.inc
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index f7df60c..9b6ffcc 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -618,6 +618,7 @@ OVERRIDES = "local:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUIL
+ ##################################################################
+ 
+ require conf/collections.inc
++require conf/freeze.inc
+ include conf/site.conf
+ include conf/auto.conf
+ include conf/local.conf
+diff --git a/conf/freeze.inc b/conf/freeze.inc
+new file mode 100644
+index 0000000..82acebf
+--- /dev/null
++++ b/conf/freeze.inc
+@@ -0,0 +1,71 @@
++# Recipe version "freeze" aka lockdown implementation.
++#
++# For each recipe which completes a task successfully, this emits the current
++# version into ${TMPDIR}/versions.conf as a PREFERRED_VERSION line.
++# ${TMPDIR}/versions.conf and conf/versions.conf are automatically included,
++# in that order, in subsequent builds, to provide more deterinistic builds by
++# default, and to let the user make the lockdown persist via a simple cp
++# command.
++#
++# Assuming that the latest ncurses in the recipes is 5.7, and that 5.7 is
++# preferred over 5.3 by default given any distro version preferences, if they
++# exist, the following are examples of its behavior:
++#
++# $ rm -rf tmp
++# $ bitbake ncurses-5.3
++# $ bitbake -c clean ncurses
++# $ bitbake ncurses # builds ncurses 5.3
++#
++# $ cp tmp/versions.conf conf/
++# $ rm -rf tmp
++# $ bitbake ncurses # builds ncurses 5.3
++
++__FREEZEFN ?= "versions.conf"
++__FREEZEFILE = "${TMPDIR}/${__FREEZEFN}"
++__FREEZELINE = 'PREFERRED_VERSION_%s = "%s"'
++__FREEZELINERE = '^PREFERRED_VERSION_(.*) = "(.*)"$'
++
++include ${__FREEZEFILE}
++include conf/${__FREEZEFN}
++
++def freeze_add(d):
++    fn = d.getVar("__FREEZEFILE", 1)
++    f = open(fn, "a")
++    f.write("%s\n" % (d.getVar("__FREEZELINE", 1) % (d.getVar("PN", 1), d.getVar("PV", 1))))
++    f.close()
++
++def freeze_finish(d):
++    import re
++
++    # Cleaning up the freezefile
++    freezefile = d.getVar("__FREEZEFILE", 1)
++    verdata = {}
++
++    try:
++        f = open(freezefile, "r")
++    except (OSError, IOError):
++        pass
++
++    regexp = re.compile(d.getVar("__FREEZELINERE", 1))
++    for line in f:
++        m = regexp.match(line)
++        verdata[m.group(1)] = m.group(2)
++    f.close()
++
++    fl = d.getVar("__FREEZELINE", 1)
++    f = open(freezefile, "w")
++    f.writelines([("%s\n" % (fl % (pn, pv))) for (pn, pv) in verdata.items()])
++    f.close()
++
++addhandler freeze_eventhandler
++python freeze_eventhandler () {
++    from bb.event import BuildCompleted
++    from bb.build import TaskSucceeded
++
++    if isinstance(e, TaskSucceeded):
++        freeze_add(e.data)
++    elif isinstance(e, BuildCompleted):
++        freeze_finish(e.data)
++}
++
++# vim: set ft=bitbake fenc=utf-8 sts=4 sw=4 et :
+-- 
+1.6.2
 
 
 
