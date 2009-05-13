@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FPE-0004NO-7o
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:26:00 +0200
-Received: (qmail 581 invoked by uid 1003); 13 May 2009 14:19:13 -0000
+	(envelope-from <philip@balister.org>) id 1M4FPR-0004RI-AT
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:26:13 +0200
+Received: (qmail 24353 invoked by uid 1003); 13 May 2009 14:19:26 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:19:13 -0000
-Message-ID: <4A0AD6DF.4020804@balister.org>
-Date: Wed, 13 May 2009 10:19:11 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:19:26 -0000
+Message-ID: <4A0AD6ED.9070003@balister.org>
+Date: Wed, 13 May 2009 10:19:25 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-25-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-25-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 24/37] xdemineur: Don't do "install -s"
+	<1242207556-15601-26-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-26-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 25/37] libart-lgpl: remove INSTALL variable as	install should be provided by autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,52 +29,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:26:00 -0000
-X-Groupsio-MsgNum: 10288
+X-List-Received-Date: Wed, 13 May 2009 14:26:13 -0000
+X-Groupsio-MsgNum: 10289
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060801020509050807010406"
+	micalg=sha1; boundary="------------ms060708010807010308090602"
 
---------------ms060801020509050807010406
+--------------ms060708010807010308090602
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister <philip@balister.org>
 
 koen.kooi@gmail.com wrote:
-> From: Florian Boor <florian.boor@kernelconcepts.de>
+> From: Cliff Brake <cbrake@bec-systems.com>
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/xdemineur/xdemineur-2.1.1/Makefile |    2 +-
->  recipes/xdemineur/xdemineur_2.1.1.bb       |    1 +
->  2 files changed, 2 insertions(+), 1 deletions(-)
+>  recipes/gnome/libart-lgpl.inc |    3 +--
+>  1 files changed, 1 insertions(+), 2 deletions(-)
 > 
-> diff --git a/recipes/xdemineur/xdemineur-2.1.1/Makefile b/recipes/xdemineur/xdemineur-2.1.1/Makefile
-> index 10d34b2..218df56 100644
-> --- a/recipes/xdemineur/xdemineur-2.1.1/Makefile
-> +++ b/recipes/xdemineur/xdemineur-2.1.1/Makefile
-> @@ -22,7 +22,7 @@ xdemineur: $(OBJS)
+> diff --git a/recipes/gnome/libart-lgpl.inc b/recipes/gnome/libart-lgpl.inc
+> index 8ff3b21..1af5b0e 100644
+> --- a/recipes/gnome/libart-lgpl.inc
+> +++ b/recipes/gnome/libart-lgpl.inc
+> @@ -4,7 +4,7 @@ LICENSE = "LGPL"
 >  
->  install: all
->  	install -d $(DESTDIR)$(PREFIX)/bin
-> -	install -s xdemineur $(DESTDIR)$(PREFIX)/bin/xdemineur
-> +	install xdemineur $(DESTDIR)$(PREFIX)/bin/xdemineur
->  	install -D -m 644 xdemineur.xpm $(DESTDIR)$(PREFIX)/share/pixmaps/xdemineur.xpm
->  	install -D -m 644 familiar/xdemineur.png $(DESTDIR)$(PREFIX)/share/pixmaps/xdemineur.png
->  	install -d $(DESTDIR)$(PREFIX)/share/applications
-> diff --git a/recipes/xdemineur/xdemineur_2.1.1.bb b/recipes/xdemineur/xdemineur_2.1.1.bb
-> index 73e3276..23846df 100644
-> --- a/recipes/xdemineur/xdemineur_2.1.1.bb
-> +++ b/recipes/xdemineur/xdemineur_2.1.1.bb
-> @@ -1,5 +1,6 @@
->  inherit gpe
->  LICENSE = "BSD-X"
-> +PR = "r1"
+>  ART_CONFIG = "${HOST_ARCH}/art_config.h"
 >  
->  DEPENDS = "virtual/libx11 libxpm"
->  SECTION = "gpe/games"
+> -INC_PR = "r3"
+> +INC_PR = "r4"
+>  
+>  # can't use gnome.oeclass due to _ in filename
+>  SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libart_lgpl/2.3/libart_lgpl-${PV}.tar.bz2 \
+> @@ -31,7 +31,6 @@ EXTRA_OECONF = "--disable-gtk-doc"
+>  # enforced.
+>  export MKDIR_P = "mkdir -p"
+>  export mkdir_p = "mkdir -p"
+> -export INSTALL = "${STAGING_BINDIR_NATIVE}/install"
+>  
+>  do_stage() {
+>  	autotools_stage_includes
 
---------------ms060801020509050807010406
+--------------ms060708010807010308090602
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -126,17 +122,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MTkxMVowIwYJKoZIhvcNAQkEMRYEFO/HVx7Owa2vyesx1h9iJmCyaKrnMFIGCSqGSIb3DQEJDzFF
+MTkyNVowIwYJKoZIhvcNAQkEMRYEFN+l8Uih41JmdGOQMXHlBuI42SA0MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQA7LCnQOo1F1tYnSeEp3xqDEAMf98PEmdXSlT8TFET6HPEKDCwf
-s9nDUZSbn1SI91QXcoYICS29QbcKm9xFw8ekEY7yWvrtrpshVY89LRdxwujLSddlW6l0bZOm18Pu
-Z9F+nK/fRHo8/PFEI1VuZGOCTj5cxz4pn1rNG7GuNOocj+Zd9bFjpvbaisdkO+l8cMLYBFOsUv7O
-QGkfP/bB1VwYpPmdg9tndP3wC8hYHUp1lagjQaZI1Xr3DGTEz6ODX8mYGkt29u51oy9y/ICIldRy
-mXRTY4mbod7f+RjPixw5WqhUtHZhbWMwKNrsIpg2Azchh+7WFiqOt8e2OIkLDL5lAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCNpmGbqmCGEN0jUSrpvRnbFth8vcTztZxck9y/ZhqCBw6OngP5
+ond0tfcFkr12LQuB1C+W2yc+dDJTNuc+Ufhs0pintjOAV/ApJCUmLxlbcOAm/XmyDEDWhtltBjJW
+VcIJKLFTjnREAcRdsUroiH+oRer8DYau5olUmMeNW7mhNWQA9scAmw3zuU0hvS+gqLQOJiEfacXV
+YQsll3Y6eVOGNSORcpfE1iSMH7E5/78/UUTE2Warx0zyTCIYbPw1x76DnI0J5ycRCOjIkkDRe+SZ
+sLl/DrG52z9eWUBu7lXDU5q9aCgqHmQ9ooYsvGUCVh7l2wBN8TkzoMhoRkipYKizAAAAAAAA
 
---------------ms060801020509050807010406--
+--------------ms060708010807010308090602--
