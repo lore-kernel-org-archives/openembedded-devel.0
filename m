@@ -1,21 +1,32 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4Jz6-0008N7-Jq
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 21:19:20 +0200
-Received: (qmail 6797 invoked by uid 1003); 13 May 2009 19:12:32 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 19:12:32 -0000
-Message-ID: <4A0B1B9D.9070305@balister.org>
-Date: Wed, 13 May 2009 15:12:29 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <cliff.brake@gmail.com>) id 1M4K2j-0004KA-7E
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 May 2009 21:23:05 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so469963ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 May 2009 12:16:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=jKPKeUm3z5/bne/qLJoqvTlwTpBeCCMC0K2xpBJUbTA=;
+	b=aEIC+Xy7ZJ8YjZAc+YOOfefA+zLPR1zDddzOy4DJmWQJHXLIMbOtAD7adDZ4M5vSU2
+	qSsjMtU/+GwrFMa+MzDRRIeQH1GIp2pVGD2WCD3CRxsSP83o8fh9B/qMwhjWbJWKgqNX
+	2mFyL5TXUlZVeCocVpK1SPUDnrlnhdMpzvM6c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Fz//ri0EsKvcokLwaOom54K8DZoMQLLgAL4hzk5UmTXbB6oeVGZhiK6ftMitypFmys
+	YbFzOQOt20twiGiwvyXP9y5NTN7ZJ7VSROcCJ+wOIrwpPpE6cGaDTPlTaKbulDrBuZ/k
+	j6ymh6qzMnXtxBJMpK5ApU1ec1cfoxreDsQA0=
 MIME-Version: 1.0
+Received: by 10.150.225.5 with SMTP id x5mr1709680ybg.321.1242242179253; Wed, 
+	13 May 2009 12:16:19 -0700 (PDT)
+Date: Wed, 13 May 2009 15:16:19 -0400
+Message-ID: <f96d234e0905131216o2111c9d8medac9b4450d5aaa@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <000e0cd30af630952b0468cfde1b@google.com>	<f96d234e0905040921t61c92979o832e8361ee3e4a5a@mail.gmail.com>
-	<f96d234e0905131124x27965cach4eccec2ce02fefb6@mail.gmail.com>
-In-Reply-To: <f96d234e0905131124x27965cach4eccec2ce02fefb6@mail.gmail.com>
-Subject: Re: OE Infrastructure Move to OSUOSL Poll
+Subject: OE git move to OSUOSL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,134 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 19:19:21 -0000
-X-Groupsio-MsgNum: 10319
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000007030309050802070504"
-
---------------ms000007030309050802070504
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 13 May 2009 19:23:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-btw, I'm too lazy to click on the poll. Move the services :)
+Hello,
 
-Philip
+The oe git infrastructure is set up at OSUOSL, so I propose we move
+git.oe.org, and cgit.oe.org this Fri @ 3PM.  I've cordinated the DNS
+changes with Philip Balister.  You can test at:
 
-Cliff Brake wrote:
-> Results to date attached.
-> 
-> Thanks,
-> Cliff
-> 
-> On Mon, May 4, 2009 at 12:21 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
->> Results to date attached.  I'll leave this poll open this week yet.
->>
->> Thanks,
->> Cliff
->>
->> On Thu, Apr 30, 2009 at 9:38 PM,  <cliff.brake@gmail.com> wrote:
->>> Please share your thoughts in this poll if we should move the OE
->>> infrastructure to OSUOSL?  We have been offered a VM on a fairly high end
->>> server.  Uptime is reported to be very good, and there are several on-site
->>> admins who provide good support.  Mickey has asked that we move the OE
->>> infrastructure off his server so we need to go somewhere.  Just fill in this
->>> form with a yes or no and your email address, then click submit.
->>>
->>> The results of this poll will be published, so please be aware as you vote
->>> or enter comments.  Anonymous entries will be discarded.
->>>
->>>
->>>
->>> I've invited you to fill out the form OE Infrastructure Move to OSUOSL Poll.
->>> To fill it out, visit:
->>> http://spreadsheets.google.com/viewform?formkey=cnFRNVQxdklockhqSXhSODBld1d5eVE6MA..
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->>
->> --
->> =======================
->> Cliff Brake
->> http://bec-systems.com
->>
-> 
-> 
-> 
-> 
-> ------------------------------------------------------------------------
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+http://new.openembedded.org/cgit/
 
---------------ms000007030309050802070504
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+and git URI's
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE5
-MTIyOVowIwYJKoZIhvcNAQkEMRYEFL/oVaVUKm1LDLn2Hu5ZPo2JELG9MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQDHQ02e3Q3ISnsh9qsWtmYO24fZLMTNIedR9alQrFQEkXTG25tj
-WdngVhwIoKBzuItP7rvGoaMLu/Vp9KgJYsjapMaOCQ/ClnatM4x3JlKmHf3iGTDx9LFIpK0qvlz8
-8YCXYte8uIP5sCWZNM96HnGkOn4AAR+ueSJ7FaMVvpXQBGwuAyeaaCl8ckoRpg8y+EEmJfXfy/Vv
-47lQfWDwBgHumA5ZJArM3tX/66nxMuSokVT9poWRLCb6v3ZYBkKz09mAzEtRQ1K1NjkbNTC4TWlc
-FbGMtrP4qFJRfDUmwcd3cZcDEGBxX1SUTymCRLMh5RzRF2IkKm8RdEVM5aZHFcdGAAAAAAAA
+git://new.openembedded.org/openembedded
+git@new.openembedded.org/openembedded
 
---------------ms000007030309050802070504--
+Feel free to push changes or whatever to test, as I plan to re-rsync
+the git repository from the current server right before the
+switchover.  The OE git server may be unavailable for a couple hours
+during the switchover, and DNS propagation.
+
+Thanks,
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
+
+
