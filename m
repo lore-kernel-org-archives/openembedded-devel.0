@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4FLA-0000oG-Sb
-	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:21:49 +0200
-Received: (qmail 22931 invoked by uid 1003); 13 May 2009 14:15:02 -0000
+	(envelope-from <philip@balister.org>) id 1M4FLh-0003on-8O
+	for openembedded-devel@openembedded.org; Wed, 13 May 2009 16:22:21 +0200
+Received: (qmail 27689 invoked by uid 1003); 13 May 2009 14:15:34 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 May 2009 14:15:01 -0000
-Message-ID: <4A0AD5E4.1040006@balister.org>
-Date: Wed, 13 May 2009 10:15:00 -0400
+	by mail.geekisp.com with SMTP; 13 May 2009 14:15:34 -0000
+Message-ID: <4A0AD605.3060303@balister.org>
+Date: Wed, 13 May 2009 10:15:33 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-18-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1242207556-15601-18-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH 17/37] gpe-autostarter: Makefile fix - don't strip on install
+	<1242207556-15601-19-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1242207556-15601-19-git-send-email-k.kooi@student.utwente.nl>
+Subject: Re: [STABLE][PATCH 18/37] gpe-soundserver: Makefile fix - don't strip on install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2009 14:21:49 -0000
-X-Groupsio-MsgNum: 10283
+X-List-Received-Date: Wed, 13 May 2009 14:22:21 -0000
+X-Groupsio-MsgNum: 10284
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040107030805030300050705"
+	micalg=sha1; boundary="------------ms090009010906020108040602"
 
---------------ms040107030805030300050705
+--------------ms090009010906020108040602
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -45,91 +45,43 @@ koen.kooi@gmail.com wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/gpe-autostarter/files/makefile-fix.patch |   11 +++++++++++
->  recipes/gpe-autostarter/gpe-autostarter_0.11.bb  |    4 +++-
->  recipes/gpe-autostarter/gpe-autostarter_0.12.bb  |    4 +++-
->  recipes/gpe-autostarter/gpe-autostarter_0.6.bb   |    2 ++
->  recipes/gpe-autostarter/gpe-autostarter_0.7.bb   |    2 ++
->  recipes/gpe-autostarter/gpe-autostarter_svn.bb   |    2 ++
->  6 files changed, 23 insertions(+), 2 deletions(-)
->  create mode 100644 recipes/gpe-autostarter/files/makefile-fix.patch
+>  recipes/gpe-soundserver/files/makefile-fix.patch |   13 +++++++++++++
+>  recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb |    3 ++-
+>  2 files changed, 15 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/gpe-soundserver/files/makefile-fix.patch
 > 
-> diff --git a/recipes/gpe-autostarter/files/makefile-fix.patch b/recipes/gpe-autostarter/files/makefile-fix.patch
+> diff --git a/recipes/gpe-soundserver/files/makefile-fix.patch b/recipes/gpe-soundserver/files/makefile-fix.patch
 > new file mode 100644
-> index 0000000..97ee907
+> index 0000000..c150886
 > --- /dev/null
-> +++ b/recipes/gpe-autostarter/files/makefile-fix.patch
-> @@ -0,0 +1,11 @@
-> +--- /tmp/Makefile.old	2006-08-23 15:08:36.000000000 +0200
-> ++++ gpe-autostarter-0.12/Makefile	2009-05-01 22:32:50.000000000 +0200
-> +@@ -28,7 +28,7 @@
+> +++ b/recipes/gpe-soundserver/files/makefile-fix.patch
+> @@ -0,0 +1,13 @@
+> +--- /tmp/Makefile.old	2004-08-18 16:28:08.000000000 +0200
+> ++++ gpe-soundserver-0.4-1/Makefile	2009-05-01 22:44:27.000000000 +0200
+> +@@ -37,8 +37,8 @@
 > + 
 > + install-program: all
 > + 	install -d $(DESTDIR)$(PREFIX)/bin
-> +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
-> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/
+> +-	install -s $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> +-	install -s wrapesd $(DESTDIR)$(PREFIX)/bin/wrapesd
+> ++	install $(PACKAGE) $(DESTDIR)$(PREFIX)/bin/$(PACKAGE)
+> ++	install wrapesd $(DESTDIR)$(PREFIX)/bin/wrapesd
 > + 	install -d $(DESTDIR)/etc/X11/Xsession.d
-> + 	install $(PACKAGE).xsession $(DESTDIR)/etc/X11/Xsession.d/50$(PACKAGE)
+> + 	install $(PACKAGE).xsession $(DESTDIR)/etc/X11/Xsession.d/50sound-server
 > + 
-> diff --git a/recipes/gpe-autostarter/gpe-autostarter_0.11.bb b/recipes/gpe-autostarter/gpe-autostarter_0.11.bb
-> index b228b3d..26a9e97 100644
-> --- a/recipes/gpe-autostarter/gpe-autostarter_0.11.bb
-> +++ b/recipes/gpe-autostarter/gpe-autostarter_0.11.bb
-> @@ -5,4 +5,6 @@ LICENSE = "GPL"
+> diff --git a/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb b/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb
+> index e239f21..1ec4cf3 100644
+> --- a/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb
+> +++ b/recipes/gpe-soundserver/gpe-soundserver_0.4-1.bb
+> @@ -4,4 +4,5 @@ inherit gpe
 >  
->  inherit gpe
+>  DEPENDS = "virtual/libx11 esound"
 >  
-> -SRC_URI += " file://dbus-new-api.patch;patch=1"
-> +SRC_URI += "file://dbus-new-api.patch;patch=1 \
+> -SRC_URI += "file://makefile-breakage.patch;patch=1"
+> +SRC_URI += "file://makefile-breakage.patch;patch=1 \
 > +	    file://makefile-fix.patch;patch=1"
-> +
-> diff --git a/recipes/gpe-autostarter/gpe-autostarter_0.12.bb b/recipes/gpe-autostarter/gpe-autostarter_0.12.bb
-> index c47f757..4c4293e 100644
-> --- a/recipes/gpe-autostarter/gpe-autostarter_0.12.bb
-> +++ b/recipes/gpe-autostarter/gpe-autostarter_0.12.bb
-> @@ -5,4 +5,6 @@ RDEPENDS = "hotplug-dbus"
->  
->  inherit gpe
->  
-> -SRC_URI += "file://wireless.patch;patch=1"
-> +SRC_URI += "file://wireless.patch;patch=1 \
-> +	    file://makefile-fix.patch;patch=1"
-> +
-> diff --git a/recipes/gpe-autostarter/gpe-autostarter_0.6.bb b/recipes/gpe-autostarter/gpe-autostarter_0.6.bb
-> index ef7f255..0ba68b7 100644
-> --- a/recipes/gpe-autostarter/gpe-autostarter_0.6.bb
-> +++ b/recipes/gpe-autostarter/gpe-autostarter_0.6.bb
-> @@ -4,3 +4,5 @@ DEPENDS = "glib-2.0 dbus-glib hotplug-dbus"
->  RDEPENDS = "hotplug-dbus"
->  
->  inherit gpe
-> +
-> +SRC_URI += "file://makefile-fix.patch;patch=1"
-> diff --git a/recipes/gpe-autostarter/gpe-autostarter_0.7.bb b/recipes/gpe-autostarter/gpe-autostarter_0.7.bb
-> index f92b5df..9e92740 100644
-> --- a/recipes/gpe-autostarter/gpe-autostarter_0.7.bb
-> +++ b/recipes/gpe-autostarter/gpe-autostarter_0.7.bb
-> @@ -4,3 +4,5 @@ DEPENDS = "glib-2.0 dbus-glib hotplug-dbus virtual/libx11"
->  RDEPENDS = "hotplug-dbus"
->  
->  inherit gpe
-> +
-> +SRC_URI += "file://makefile-fix.patch;patch=1"
-> diff --git a/recipes/gpe-autostarter/gpe-autostarter_svn.bb b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
-> index 2742952..8d275b5 100644
-> --- a/recipes/gpe-autostarter/gpe-autostarter_svn.bb
-> +++ b/recipes/gpe-autostarter/gpe-autostarter_svn.bb
-> @@ -8,6 +8,8 @@ inherit gpe
->  SRC_URI = "${GPE_SVN} \
->             file://svn-build.patch;patch=1"
->  
-> +SRC_URI += "file://makefile-fix.patch;patch=1"
-> +
->  S = "${WORKDIR}/${PN}"
->  
->  export CVSBUILD="no"
 
---------------ms040107030805030300050705
+--------------ms090009010906020108040602
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -181,17 +133,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxMzE0
-MTUwMFowIwYJKoZIhvcNAQkEMRYEFCv9ctc4jB+J2+lbkR8ExIpZEPI9MFIGCSqGSIb3DQEJDzFF
+MTUzM1owIwYJKoZIhvcNAQkEMRYEFJj4UmMhNLH+uODh24sAqouPHQ5YMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQB6GKqtyp1VHQeQfTAKYmn6OmFtfREZKeu4Hcqnn4EpOWrfSFU6
-p+eA8w0W63/60JGWpF0AfZ+BpKemAn0cFM3oPjqLY3G2y7mFg5leCKp/7jwLlEyh5wpPD3mguUed
-3kO0Dj11C3xp3J6YGvGVb/7GXmmKPxWNKnYmJzt2j9S2dNv7XSRzvej0ksNlsagCv1wXMwhqzmIf
-xbo3vLYjpLxRSzqrjB37V7c32J6FdwXx9CGfA3REOhv4UWzvASvS3qrIrEvl+OaStBkmldqJU6rZ
-rW67ZmSSapSMYFIGD8N91oV+2Rhn+B4FKFQ7zfqzYrK0uS47ZTDDQdmxtwmn/RMMAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCvrkjSlIqVeZLRy4C1EGoRLeNSOfXUtGljadKMnrqyVdmcJA/l
+BkKJ//fYTWXF8Xg2OWU2rkjoPrWhwvj0nyPA/iCKU753YObZxjZadBG1gg59eS8xzs+v2VZwmFYf
+bLN+LihzkOY0TDTsHSJilNZZa9YVPFOEhjMbIcPzZkbAUtcayB9NGg1DSAf3CWC4dr1MpGKhQNWr
+gaEL2jXoXQ583Gs9BcM6SFnZGnWooVYcAf+aI90UiMgiTS/46kOmG92IxckpUSvdI3jwx/6P3a7q
+i1dbJxz7BPM9/V/M4thTxJWAfZvCkJdi5+YmhWCmP40pViHuiXnVNE3J2N7EXz7lAAAAAAAA
 
---------------ms040107030805030300050705--
+--------------ms090009010906020108040602--
