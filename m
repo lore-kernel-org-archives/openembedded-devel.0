@@ -1,36 +1,36 @@
-Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
+Received: from [74.125.78.149] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1M4ipV-0000xK-Kc
+	(envelope-from <slapinid@gmail.com>) id 1M4jH6-00025u-2U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 May 2009 23:51:05 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so882475ywk.42
+	Fri, 15 May 2009 00:19:36 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so713042eyw.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2009 14:44:13 -0700 (PDT)
+	Thu, 14 May 2009 15:12:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=T/CgmG7LtUdgHRud6KYG4WfzHxPVu22m8ScHETtLFL4=;
-	b=S7W3XbzBdowS0OuWJHL9+W5amGmCS+wuJ4onEpEW2urLT9a/tcIc01z7q/qMJNDdFs
-	1QoV+luc+ufrDRjJJOlCVSthAe+ZtXP5LhjXYHah8MBcHMAmn1iTl7E/MF1sdg3JhHul
-	q8OrkZqMXvOlIkhKyrXt8pUcuCBNg/Dk5stoU=
+	bh=Oy8n7NUeqYGX0BG7W3jRcqT7fHST3+nlM7ZMuZBXuv4=;
+	b=JjtPslrj6SzQl6JbRXAPjrhzQk1XZMJYKGzty41drjVnnNT27+nCuPOehxenjNHUbv
+	5XLoU5R+ERUrOgOn0hNOdPhnupinQzwNwZgjOElkLxnplrax1uaDw1AJWhO52jMJyxP4
+	NpwCk2fqqSbAA0pQp2+X3Vd2yvHtOrpwacE34=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=yBzhW5RffiCyDNHX0+WHMDSAXuWZAc181aPNAMdzKPw9YI5sKy9jrtTFxwT7qBxLOf
-	Fvsd9MUAuH19eTrThZwpBej5A45jJUDJwnreQu1bWW2Ep8LAVOJEhTp7EClplpejXXfy
-	Hn69jCulNhgb1eAGDW/4u2b8SfKsfmYdvVT2c=
+	b=oTKwgLAmILP+4Bfegq6rh6XSywW590ruGvhu8rywrE2na54LR700LOCRQ/2WGCdYZ1
+	INkKCnc9K5QRGq+NUFcoUWNtnXOn+V7FN+l9F1oZeMsN89PRpH2j5Or8OsRFieXCStFO
+	hPc5r4lhi8j2C7pzsow7V0uehKTVxVzVUc3Rg=
 MIME-Version: 1.0
-Received: by 10.150.49.1 with SMTP id w1mr4469513ybw.323.1242337054761; Thu, 
-	14 May 2009 14:37:34 -0700 (PDT)
-In-Reply-To: <4A0B21AB.70602@balister.org>
-References: <f96d234e0905131216o2111c9d8medac9b4450d5aaa@mail.gmail.com>
-	<4A0B21AB.70602@balister.org>
-Date: Thu, 14 May 2009 17:37:34 -0400
-Message-ID: <f96d234e0905141437g211d48ffgc598c0f9e69beabe@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Received: by 10.210.43.11 with SMTP id q11mr2784993ebq.37.1242339163379; Thu, 
+	14 May 2009 15:12:43 -0700 (PDT)
+In-Reply-To: <guhvju$ibq$1@ger.gmane.org>
+References: <20090514144631.E363E1893D6@amethyst.openembedded.net>
+	<guhvju$ibq$1@ger.gmane.org>
+Date: Fri, 15 May 2009 02:12:43 +0400
+Message-ID: <48239d390905141512xc4c995el68929d72efb7e632@mail.gmail.com>
+From: Sergey Lapin <slapinid@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: OE git move to OSUOSL
+Subject: Re: Sergey Lapin : AFEB9260 is not supported with 2.6.28-rc6 kernel anymore
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,75 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 21:51:06 -0000
+X-List-Received-Date: Thu, 14 May 2009 22:19:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-While mapping this out, we discovered that the OE documentation is
-pointing to git.oe.net, and cgit.oe.net instead of *.org.  Thus, we
-are going to postpone the move until Wed (2009-05-14) to give people
-time to switch their setups to *.org.  I'll be updating the
-documentation shortly.
-
-IMPORTANT, PLEASE READ!!!!
-
-Please change your git workspaces to point to .org instead of .net.
-One way to do this, is edit .git/config and change the URI.  There is
-probably a "proper" way to do this.
-
-Also, if you have any autobuilders, etc, please change those.
-
-I apologise for the hassle, but it is difficult enough to schedule the
-move just worrying about *.org, without having to coordinate the *.net
-DNS changes as well.  We will likely be dropping the use of the *.net
-URI's.
-
-Thanks,
-Cliff
-
-On Wed, May 13, 2009 at 3:38 PM, Philip Balister <philip@balister.org> wrot=
-e:
-> Cliff Brake wrote:
->>
->> Hello,
->>
->> The oe git infrastructure is set up at OSUOSL, so I propose we move
->> git.oe.org, and cgit.oe.org this Fri @ 3PM. =A0I've cordinated the DNS
->> changes with Philip Balister. =A0You can test at:
+On Fri, May 15, 2009 at 12:40 AM, Dmitry Eremin-Solenikov
+<dbaryshkov@gmail.com> wrote:
+> GIT User account wrote:
 >
-> That is 3PM EDT. 1900 UTC :)
->
-> Philip
->
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: 215a464bbd090a3e9c6344f78fd36c8074ce5537 URL:
+>> http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3D215a=
+464bbd090a3e9c6344f78fd36c8074ce5537
 >>
->> http://new.openembedded.org/cgit/
+>> Author: Sergey Lapin <slapin@ossfans.org>
+>> Date: =A0 Thu May 14 17:12:34 2009 +0400
 >>
->> and git URI's
->>
->> git://new.openembedded.org/openembedded
->> git@new.openembedded.org/openembedded
->>
->> Feel free to push changes or whatever to test, as I plan to re-rsync
->> the git repository from the current server right before the
->> switchover. =A0The OE git server may be unavailable for a couple hours
->> during the switchover, and DNS propagation.
->>
->> Thanks,
->> Cliff
+>> AFEB9260 is not supported with 2.6.28-rc6 kernel anymore
 >>
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Is it really "not supported" or you just prefer another kernel version?
+> In the second case you can simply change DEFAULT_PREFERENCE_afeb9260 to "=
+-1".
+DEFAULT_PREFERENCE =3D "-1" is enough already (see near top of recipe).
 >
->
+> And BTW: as you seem to be the only user of this image, it seems you can =
+just
+> drop this rc kernel recipe completely.
+I feel very bad about dropping recipes at all if not really necessary.
 
-
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Cliff Brake
-http://bec-systems.com
+S.
 
 
