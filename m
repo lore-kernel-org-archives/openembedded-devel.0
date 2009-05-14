@@ -1,34 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M4V6f-00043D-IY
-	for openembedded-devel@openembedded.org; Thu, 14 May 2009 09:11:55 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1M4V02-0003c4-7m
-	for openembedded-devel@openembedded.org; Thu, 14 May 2009 07:05:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 14 May 2009 07:05:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 14 May 2009 07:05:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 14 May 2009 09:00:23 +0200
-Message-ID: <gugfi7$hsu$2@ger.gmane.org>
-References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>
-	<1242207556-15601-38-git-send-email-k.kooi@student.utwente.nl>
+	(envelope-from <philb@gnu.org>) id 1M4W42-0005tF-Vh
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 May 2009 10:13:30 +0200
+Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M4VxR-0007LX-UH
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 14 May 2009 09:06:26 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20090513211342.GN7973@smtp.west.cox.net>
+References: <20090513205603.AAC121893A7@amethyst.openembedded.net>
+	<20090513211342.GN7973@smtp.west.cox.net>
+Date: Thu, 14 May 2009 09:06:00 +0100
+Message-Id: <1242288360.4514.18.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
-In-Reply-To: <1242207556-15601-38-git-send-email-k.kooi@student.utwente.nl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH 37/37] monit: add patch to remove -s in install.
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [oe-commits] Koen Kooi : gcc 4.3.3: fix regression from	4.3. 1	that caused fortran to get disabled for linux-gnueabi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 07:12:01 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 14 May 2009 08:14:15 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 13-05-09 11:39, koen.kooi@gmail.com wrote:
-> From: Mike Westerhof<mwester@dls.net>
+On Wed, 2009-05-13 at 14:13 -0700, Tom Rini wrote:
+> On Wed, May 13, 2009 at 10:56:03PM +0200, GIT User account wrote:
+> 
+> > Author: Koen Kooi <koen@openembedded.org>
+> > Date:   Wed May 13 22:49:19 2009 +0200
+> > 
+> > gcc 4.3.3: fix regression from 4.3.1 that caused fortran to get disabled for linux-gnueabi
+> 
+> This came up on IRC today for something else.  Why do we only build a
+> fortran compiler on ARM (EABI)?  Should it just be disabled on a few
+> platforms perhaps?
 
-ping
+Yes: all these options (JAVA, FORTRAN, OBJC) ought really to be
+defaulting to on and only suppressed when necessary for the specific
+platform/version combinations where they're known to be broken beyond
+economic repair.  
 
-> Signed-off-by: Koen Kooi<koen@openembedded.org>
-> ---
->   .../monit/monit-4.10.1/no-strip-in-makefile.patch  |   11 +++++++++++
->   recipes/monit/monit_4.10.1.bb                      |    2 ++
->   2 files changed, 13 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/monit/monit-4.10.1/no-strip-in-makefile.patch
->
-> diff --git a/recipes/monit/monit-4.10.1/no-strip-in-makefile.patch b/recipes/monit/monit-4.10.1/no-strip-in-makefile.patch
-> new file mode 100644
-> index 0000000..26f5108
-> --- /dev/null
-> +++ b/recipes/monit/monit-4.10.1/no-strip-in-makefile.patch
-> @@ -0,0 +1,11 @@
-> +--- monit-4.10.1/Makefile.in.orig	2009-05-10 21:19:00.000000000 -0500
-> ++++ monit-4.10.1/Makefile.in	2009-05-10 21:19:11.000000000 -0500
-> +@@ -39,7 +39,7 @@ MODE_CONF       = 600
-> + MODE_DIRS       = 755
-> +
-> + INSTALL         = @INSTALL@
-> +-INSTALL_PROG    = $(INSTALL) -m $(MODE_PROGS) -s
-> ++INSTALL_PROG    = $(INSTALL) -m $(MODE_PROGS)
-> + INSTALL_FILE    = $(INSTALL) -m $(MODE_FILES)
-> + INSTALL_DIR     = $(INSTALL) -m $(MODE_DIRS) -d
-> +
-> diff --git a/recipes/monit/monit_4.10.1.bb b/recipes/monit/monit_4.10.1.bb
-> index bb18491..06d382f 100644
-> --- a/recipes/monit/monit_4.10.1.bb
-> +++ b/recipes/monit/monit_4.10.1.bb
-> @@ -1,7 +1,9 @@
->   LICENSE = "GPL"
->   DEPENDS = "openssl"
-> +PR = "r1"
->
->   SRC_URI = "http://www.tildeslash.com/monit/dist/monit-${PV}.tar.gz\
-> +	file://no-strip-in-makefile.patch;patch=1 \
->   	file://init"
->
->   INITSCRIPT_NAME = "monit"
+In fact gcc-configure-common.inc is doing the right thing, but it does
+seem that some joker has decided to turn them off by default in the
+gcc-4.x.x.inc files.  I'd certainly be in favour of deleting those
+assignments for new versions of gcc-4.x.x.inc, and perhaps even
+retrospectively deleting them for the existing versions too.
+
+p.
 
 
 
