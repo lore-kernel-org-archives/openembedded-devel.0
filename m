@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M4aGa-00008A-93
-	for openembedded-devel@openembedded.org; Thu, 14 May 2009 14:42:28 +0200
-Received: (qmail 31573 invoked by uid 1003); 14 May 2009 12:35:36 -0000
+	(envelope-from <philip@balister.org>) id 1M4aQd-0000ci-T2
+	for openembedded-devel@openembedded.org; Thu, 14 May 2009 14:52:52 +0200
+Received: (qmail 15006 invoked by uid 1003); 14 May 2009 12:45:59 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 14 May 2009 12:35:35 -0000
-Message-ID: <4A0C1016.9000609@balister.org>
-Date: Thu, 14 May 2009 08:35:34 -0400
+	by mail.geekisp.com with SMTP; 14 May 2009 12:45:59 -0000
+Message-ID: <4A0C1286.6040902@balister.org>
+Date: Thu, 14 May 2009 08:45:58 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1242207556-15601-1-git-send-email-k.kooi@student.utwente.nl>	<1242207556-15601-38-git-send-email-k.kooi@student.utwente.nl>
-	<gugfi7$hsu$2@ger.gmane.org>
-In-Reply-To: <gugfi7$hsu$2@ger.gmane.org>
-Subject: Re: [STABLE][PATCH 37/37] monit: add patch to remove -s in	install.
+References: <20090513152443.E8DE11893A9@amethyst.openembedded.net>
+	<48239d390905140352k60f3c63crd2337be420d63bef@mail.gmail.com>
+In-Reply-To: <48239d390905140352k60f3c63crd2337be420d63bef@mail.gmail.com>
+Subject: Re: [oe-commits] Koen Kooi : angstrom 2009.X: toolchain	updates:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,76 +29,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 12:42:28 -0000
-X-Groupsio-MsgNum: 10346
+X-List-Received-Date: Thu, 14 May 2009 12:52:53 -0000
+X-Groupsio-MsgNum: 10347
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms070207080205020608070305"
+	micalg=sha1; boundary="------------ms060608090008030905090503"
 
---------------ms070207080205020608070305
+--------------ms060608090008030905090503
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Acked-by: Philip Balister <philip@balister.org>
-
-Thought I did this one yesterday .....
-
-Koen Kooi wrote:
-> On 13-05-09 11:39, koen.kooi@gmail.com wrote:
->> From: Mike Westerhof<mwester@dls.net>
+Sergey Lapin wrote:
+> Hi, all!
 > 
-> ping
-> 
->> Signed-off-by: Koen Kooi<koen@openembedded.org>
->> ---
->>   .../monit/monit-4.10.1/no-strip-in-makefile.patch  |   11 +++++++++++
->>   recipes/monit/monit_4.10.1.bb                      |    2 ++
->>   2 files changed, 13 insertions(+), 0 deletions(-)
->>   create mode 100644 
->> recipes/monit/monit-4.10.1/no-strip-in-makefile.patch
+> On Wed, May 13, 2009 at 7:24 PM, GIT User account
+> <git@amethyst.openembedded.net> wrote:
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: 448b9103e494765fe589283d399c90e9b6e9cd84
+>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=448b9103e494765fe589283d399c90e9b6e9cd84
 >>
->> diff --git a/recipes/monit/monit-4.10.1/no-strip-in-makefile.patch 
->> b/recipes/monit/monit-4.10.1/no-strip-in-makefile.patch
->> new file mode 100644
->> index 0000000..26f5108
->> --- /dev/null
->> +++ b/recipes/monit/monit-4.10.1/no-strip-in-makefile.patch
->> @@ -0,0 +1,11 @@
->> +--- monit-4.10.1/Makefile.in.orig    2009-05-10 21:19:00.000000000 -0500
->> ++++ monit-4.10.1/Makefile.in    2009-05-10 21:19:11.000000000 -0500
->> +@@ -39,7 +39,7 @@ MODE_CONF       = 600
->> + MODE_DIRS       = 755
->> +
->> + INSTALL         = @INSTALL@
->> +-INSTALL_PROG    = $(INSTALL) -m $(MODE_PROGS) -s
->> ++INSTALL_PROG    = $(INSTALL) -m $(MODE_PROGS)
->> + INSTALL_FILE    = $(INSTALL) -m $(MODE_FILES)
->> + INSTALL_DIR     = $(INSTALL) -m $(MODE_DIRS) -d
->> +
->> diff --git a/recipes/monit/monit_4.10.1.bb 
->> b/recipes/monit/monit_4.10.1.bb
->> index bb18491..06d382f 100644
->> --- a/recipes/monit/monit_4.10.1.bb
->> +++ b/recipes/monit/monit_4.10.1.bb
->> @@ -1,7 +1,9 @@
->>   LICENSE = "GPL"
->>   DEPENDS = "openssl"
->> +PR = "r1"
+>> Author: Koen Kooi <koen@openembedded.org>
+>> Date:   Wed May 13 13:36:43 2009 +0200
 >>
->>   SRC_URI = "http://www.tildeslash.com/monit/dist/monit-${PV}.tar.gz\
->> +    file://no-strip-in-makefile.patch;patch=1 \
->>       file://init"
->>
->>   INITSCRIPT_NAME = "monit"
+>> angstrom 2009.X: toolchain updates:
+>>  * make gcc 4.3.3 the default compiler (except for ppc and avr32)
+>>  * make binutils 2.18 the default (except for armv7a and avr32)
+>>  * disable thumb for armv4t/5te since there's no gcc/binutils combo that works 100% with thumb
+> Could I have some details please regarding thumb?
+> I remember there was a discussion regarding enabling thumb. Then we
+> have silent rollback.
+> Do I miss something?
 > 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+> All the best,
 
---------------ms070207080205020608070305
+
+The commit message says there is no working gcc/binutils combination 
+that builds thumb reliably for armv4/5te. I'm sure if you search through 
+the list archives you might find more detail.
+
+Is this clearer?
+
+Philip
+
+--------------ms060608090008030905090503
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -150,17 +123,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxNDEy
-MzUzNFowIwYJKoZIhvcNAQkEMRYEFKJAUqMBwMIaUl+UInw5+/mZMCxnMFIGCSqGSIb3DQEJDzFF
+NDU1OFowIwYJKoZIhvcNAQkEMRYEFLYJs52Hxbtwcmm8mbWqN54bmNHkMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQACRHSawAifBFT/wVaiUcgFj5xEsSPxeD9IBbQCwlHfRPGMqWoG
-kJoeEWLx7ZN1aP6kqnCGBmHzBvdUcCG/zN1fPSIIYzawuDJpdmSRVYAkc0R3leqWJFaAWYeI2qdt
-4X6B0HcMTCqog3mWkp6uN0ftCgfT4h5oCRytyiQocT5w5tpeiDCxa4DZMqyW8iBpQcSvcCt7LhEJ
-qnxcrKEnsUCyc8V0G+g7GwAH3+8iQfOSiQZpeJH412W4EjtaMbP4PMdRjm5kMeyXYfAjaZ+GOcjv
-vNWkSpj7BqOQ4XFU/wL4ozoBZ0g/GR7TcfnZ9Z+1OKd7eOOfuSID5TwHRjvu4pT8AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQDCDkW2byO8MwOU7kyFo0CNZCuwJBRguLagmpoaQC8me++jILEa
+LlqbsJqNGI3zOML6FX0Q40xHWoP/AN0OF5uW3h6xueOQkqIdPL5oYGB1EGEERzl6/MwGUD6e6VPY
+UXss+TB49xA/uMPESQWT/F0DTK8OR4bOodgurGUShgoSQ5j3/2p6SBjx9bKDi2O/1X7pMJNh945p
+tnWDO9FW2kOcxsDx4+Ktfe4kky6d//WEy7tg8Q0yNGvE2PZa9E0bqf8A2EFdAOsrSTwrJ5AeauHP
+UuJAfWyKfcFS08IflMA9iLD8p/Z8r6Ca2X7pHN4R4SiPQu103gWdbBeRCF7o+gtBAAAAAAAA
 
---------------ms070207080205020608070305--
+--------------ms060608090008030905090503--
