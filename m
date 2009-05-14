@@ -1,37 +1,27 @@
-Received: from [74.125.78.146] (helo=ey-out-1920.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elena.valhalla@gmail.com>) id 1M4Wiz-0000ha-UP
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1M4XOQ-0001iY-RX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 May 2009 10:55:45 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so509859eyw.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2009 01:48:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=n5frsDIs9TUBpPiADemvpOxSPpxnIfE+wKB5fv3fh0k=;
-	b=kIOXKXIjZR3bczwtKUurrNm8KfZQzJTlgSjIwKioRKWOvvimsgVlwXoE8taWT9xflF
-	ZC57jtwjfvioh9+lQ3pjLpd8jhJ2JsEKaBQLInzPeUQ1/QActVywqk0tQnQe0hV4Xv2j
-	7ggepKLJbxpOcGEm3iUuv3jCWnUOVuRnceOv8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Q08WOBKTsIuify7KLJEIjyavCg5SfDUk/wHJhlIBffJfmedDbzeCePD//tgMgiEivY
-	pbnGD268H5VJ4TGH5ghkwu+kDEX0mqwvStN1YougFAqCKsXhXcPNZlyGPtB9OyFbZJV7
-	M8zNjV6dSmTNFAwk05Q9qlZQa9n2zVfyURayc=
+	Thu, 14 May 2009 11:38:22 +0200
+Received: (qmail invoked by alias); 14 May 2009 09:31:31 -0000
+Received: from f053011139.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[78.53.11.139]
+	by mail.gmx.net (mp006) with SMTP; 14 May 2009 11:31:31 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1829Ehcrns2CLr8mA5ekw8znKEWKUNJ2RIiq5NJb6
+	Z32aHEkMKbuNnC
+Message-ID: <4A0BE509.8010406@gmx.net>
+Date: Thu, 14 May 2009 11:31:53 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-Received: by 10.216.16.212 with SMTP id h62mr757404weh.201.1242290924121; Thu, 
-	14 May 2009 01:48:44 -0700 (PDT)
-In-Reply-To: <1242288896-6347-3-git-send-email-elena.valhalla@gmail.com>
-References: <1242288896-6347-1-git-send-email-elena.valhalla@gmail.com>
-	<1242288896-6347-2-git-send-email-elena.valhalla@gmail.com>
-	<1242288896-6347-3-git-send-email-elena.valhalla@gmail.com>
-Date: Thu, 14 May 2009 10:48:43 +0200
-Message-ID: <5c5e5c350905140148g778799erb4ed9dd84ad15e40@mail.gmail.com>
-From: Elena of Valhalla <elena.valhalla@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] gtksourceview: renamed the 1.x tree to gtksourceview1
+References: <20090514101502.133dd3e0@christian.taskit.de>
+In-Reply-To: <20090514101502.133dd3e0@christian.taskit.de>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.55
+Subject: Re: [PATCH] cacao: add missing patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +35,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 08:55:50 -0000
+X-List-Received-Date: Thu, 14 May 2009 09:38:23 -0000
+X-Groupsio-MsgNum: 10340
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigA9F7572F3653BF166B35F499"
+
+--------------enigA9F7572F3653BF166B35F499
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Sorry, I did something wrong with git-send-email and this part wasn't sent:
+Hi Christian,
+sorry for this glitch. I added the missing file.
 
-GtkSourceView[1] currently maintains a stable 2.x tree and an old stable
-1.x tree for compatibility with older applications[2] and they can be
-installed together on a computer.
+Regards
+Robert
 
-I need to add the recipe for the latest 2.x version, and since the old
-stable is used just in 2 recipes (gobby_0.4.1.bb and tea_17.3.5.bb) and
-mentioned as a preferred version in preferred-om-2008-versions.inc
-it seems to me that this could be a good time to rename it to
-gtksourceview1 with minimal breakage.
+Christian Glindkamp schrieb:
+> In revision af5fcda66139e002d098c0df952b43c455806aba the patch
+> cacao-disable-stackbase-check.patch was added to SRC_URI of all
+> cacao recipes without committing the patch itself. This patch
+> adds it to make cacao buildable again. The patch comes from the
+> jalimo overlay.
+>=20
+> Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
+> ---
+>  .../files/cacao-disable-stackbase-check.patch      |   12 ++++++++++++=
 
-(I also hope I've used correctly the git tools for patch sending by
-email: sorry if I've done something wrong)
+>  1 files changed, 12 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/cacao/files/cacao-disable-stackbase-check.p=
+atch
+>=20
+> diff --git a/recipes/cacao/files/cacao-disable-stackbase-check.patch b/=
+recipes/cacao/files/cacao-disable-stackbase-check.patch
+> new file mode 100644
+> index 0000000..8eb2089
+> --- /dev/null
+> +++ b/recipes/cacao/files/cacao-disable-stackbase-check.patch
+> @@ -0,0 +1,12 @@
+> +Index: cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- cacao-0.99.3+hg20090109.orig/src/mm/boehm-gc/os_dep.c	2009-02-15 1=
+6:29:15.000000000 +0100
+> ++++ cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:=
+24.000000000 +0100
+> +@@ -1077,7 +1077,6 @@
+> +       c =3D stat_buf[buf_offset++];
+> +     }
+> +     close(f);
+> +-    if (result < 0x10000000) ABORT("Absurd stack bottom value");
+> +     return (ptr_t)result;
+> +   }
+> +=20
 
-[1] http://projects.gnome.org/gtksourceview/
-[2] http://projects.gnome.org/gtksourceview/download.html
 
 
--- 
-Elena ``of Valhalla''
+--------------enigA9F7572F3653BF166B35F499
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-homepage: http://www.trueelena.org
-email: elena.valhalla@gmail.com
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEYEAREIAAYFAkoL5QwACgkQG9cfwmwwEtqXkgCeKUEwpl/v1HzkYvxKjD9mYRZN
+XegAoJRPK6Jvow/KbVp7ZetMJSFSs64h
+=kQLL
+-----END PGP SIGNATURE-----
 
+--------------enigA9F7572F3653BF166B35F499--
