@@ -1,24 +1,26 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [212.227.126.187] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M4W42-0005tF-Vh
+	(envelope-from <christian.glindkamp@taskit.de>) id 1M4WCQ-0004Ej-1i
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 May 2009 10:13:30 +0200
-Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M4VxR-0007LX-UH
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 May 2009 09:06:26 +0100
-From: Phil Blundell <philb@gnu.org>
+	Thu, 14 May 2009 10:21:54 +0200
+Received: from localhost.localdomain (port-87-234-225-18.static.qsc.de
+	[87.234.225.18])
+	by mrelayeu.kundenserver.de (node=mreu1) with ESMTP (Nemesis)
+	id 0MKv1o-1M4W5n1BBy-000jZo; Thu, 14 May 2009 10:15:03 +0200
+Received: from christian.taskit.de (unknown [192.168.4.114])
+	by localhost.localdomain (Postfix) with ESMTP id 969847B7F0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 May 2009 10:13:05 +0200 (CEST)
+Date: Thu, 14 May 2009 10:15:02 +0200
+From: Christian Glindkamp <christian.glindkamp@taskit.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090513211342.GN7973@smtp.west.cox.net>
-References: <20090513205603.AAC121893A7@amethyst.openembedded.net>
-	<20090513211342.GN7973@smtp.west.cox.net>
-Date: Thu, 14 May 2009 09:06:00 +0100
-Message-Id: <1242288360.4514.18.camel@lenovo.internal.reciva.com>
+Message-ID: <20090514101502.133dd3e0@christian.taskit.de>
+X-Mailer: Claws Mail 3.7.1 (GTK+ 2.14.4; i486-pc-linux-gnu)
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [oe-commits] Koen Kooi : gcc 4.3.3: fix regression from	4.3. 1	that caused fortran to get disabled for linux-gnueabi
+X-Provags-ID: V01U2FsdGVkX1+wgeqiqc1biIKKecnNIfnFpbfSdQvVtp7QIIo
+	NRS/lbEAX1RBN9jSRRZRBDT/9JcHLj4bkRlo9stk6u0XZ13gPw
+	z2CLQzYcczrH7BfkfXWsQ==
+Subject: [PATCH] cacao: add missing patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,35 +34,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 08:14:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 14 May 2009 08:22:00 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-05-13 at 14:13 -0700, Tom Rini wrote:
-> On Wed, May 13, 2009 at 10:56:03PM +0200, GIT User account wrote:
-> 
-> > Author: Koen Kooi <koen@openembedded.org>
-> > Date:   Wed May 13 22:49:19 2009 +0200
-> > 
-> > gcc 4.3.3: fix regression from 4.3.1 that caused fortran to get disabled for linux-gnueabi
-> 
-> This came up on IRC today for something else.  Why do we only build a
-> fortran compiler on ARM (EABI)?  Should it just be disabled on a few
-> platforms perhaps?
+In revision af5fcda66139e002d098c0df952b43c455806aba the patch
+cacao-disable-stackbase-check.patch was added to SRC_URI of all
+cacao recipes without committing the patch itself. This patch
+adds it to make cacao buildable again. The patch comes from the
+jalimo overlay.
 
-Yes: all these options (JAVA, FORTRAN, OBJC) ought really to be
-defaulting to on and only suppressed when necessary for the specific
-platform/version combinations where they're known to be broken beyond
-economic repair.  
+Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
+---
+ .../files/cacao-disable-stackbase-check.patch      |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/cacao/files/cacao-disable-stackbase-check.patch
 
-In fact gcc-configure-common.inc is doing the right thing, but it does
-seem that some joker has decided to turn them off by default in the
-gcc-4.x.x.inc files.  I'd certainly be in favour of deleting those
-assignments for new versions of gcc-4.x.x.inc, and perhaps even
-retrospectively deleting them for the existing versions too.
-
-p.
-
-
+diff --git a/recipes/cacao/files/cacao-disable-stackbase-check.patch b/recipes/cacao/files/cacao-disable-stackbase-check.patch
+new file mode 100644
+index 0000000..8eb2089
+--- /dev/null
++++ b/recipes/cacao/files/cacao-disable-stackbase-check.patch
+@@ -0,0 +1,12 @@
++Index: cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c
++===================================================================
++--- cacao-0.99.3+hg20090109.orig/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:15.000000000 +0100
+++++ cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:24.000000000 +0100
++@@ -1077,7 +1077,6 @@
++       c = stat_buf[buf_offset++];
++     }
++     close(f);
++-    if (result < 0x10000000) ABORT("Absurd stack bottom value");
++     return (ptr_t)result;
++   }
++ 
+-- 
+1.5.6.5
 
 
