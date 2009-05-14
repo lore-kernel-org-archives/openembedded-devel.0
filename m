@@ -1,20 +1,37 @@
-Received: from [88.149.128.34] (helo=smtpi4.ngi.it)
+Received: from [74.125.78.146] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elena.valhalla@gmail.com>) id 1M4WCT-0005af-LO
+	(envelope-from <elena.valhalla@gmail.com>) id 1M4Wiz-0000ha-UP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 May 2009 10:22:02 +0200
-Received: from localhost.localdomain (81-174-25-145.dynamic.ngi.it
-	[81.174.25.145]) by smtpi4.ngi.it (Postfix) with ESMTP id 753224205E;
-	Thu, 14 May 2009 10:15:08 +0200 (CEST)
-From: Elena Grandi <elena.valhalla@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 May 2009 10:14:55 +0200
-Message-Id: <1242288896-6347-3-git-send-email-elena.valhalla@gmail.com>
-X-Mailer: git-send-email 1.6.0.6
-In-Reply-To: <1242288896-6347-2-git-send-email-elena.valhalla@gmail.com>
+	Thu, 14 May 2009 10:55:45 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so509859eyw.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 May 2009 01:48:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=n5frsDIs9TUBpPiADemvpOxSPpxnIfE+wKB5fv3fh0k=;
+	b=kIOXKXIjZR3bczwtKUurrNm8KfZQzJTlgSjIwKioRKWOvvimsgVlwXoE8taWT9xflF
+	ZC57jtwjfvioh9+lQ3pjLpd8jhJ2JsEKaBQLInzPeUQ1/QActVywqk0tQnQe0hV4Xv2j
+	7ggepKLJbxpOcGEm3iUuv3jCWnUOVuRnceOv8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Q08WOBKTsIuify7KLJEIjyavCg5SfDUk/wHJhlIBffJfmedDbzeCePD//tgMgiEivY
+	pbnGD268H5VJ4TGH5ghkwu+kDEX0mqwvStN1YougFAqCKsXhXcPNZlyGPtB9OyFbZJV7
+	M8zNjV6dSmTNFAwk05Q9qlZQa9n2zVfyURayc=
+MIME-Version: 1.0
+Received: by 10.216.16.212 with SMTP id h62mr757404weh.201.1242290924121; Thu, 
+	14 May 2009 01:48:44 -0700 (PDT)
+In-Reply-To: <1242288896-6347-3-git-send-email-elena.valhalla@gmail.com>
 References: <1242288896-6347-1-git-send-email-elena.valhalla@gmail.com>
 	<1242288896-6347-2-git-send-email-elena.valhalla@gmail.com>
-Subject: [PATCH] gtksourceview: renamed the 1.x tree to gtksourceview1
+	<1242288896-6347-3-git-send-email-elena.valhalla@gmail.com>
+Date: Thu, 14 May 2009 10:48:43 +0200
+Message-ID: <5c5e5c350905140148g778799erb4ed9dd84ad15e40@mail.gmail.com>
+From: Elena of Valhalla <elena.valhalla@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] gtksourceview: renamed the 1.x tree to gtksourceview1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,103 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 08:22:10 -0000
+X-List-Received-Date: Thu, 14 May 2009 08:55:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-GtkSourceView 1.x is an older stable version that is still required
-by some packages and is currently used in 2 recipes.
+Sorry, I did something wrong with git-send-email and this part wasn't sent:
 
-Signed-off-by: Elena Grandi <elena.valhalla@gmail.com>
----
- conf/distro/include/preferred-om-2008-versions.inc |    2 +-
- recipes/gobby/gobby_0.4.1.bb                       |    3 ++-
- recipes/gobby/gtksourceview_1.7.2.bb               |    9 ---------
- recipes/gtksourceview/gtksourceview1_1.7.2.bb      |   16 ++++++++++++++++
- recipes/tea/tea_17.3.5.bb                          |    4 ++--
- 5 files changed, 21 insertions(+), 13 deletions(-)
- delete mode 100644 recipes/gobby/gtksourceview_1.7.2.bb
- create mode 100644 recipes/gtksourceview/gtksourceview1_1.7.2.bb
+GtkSourceView[1] currently maintains a stable 2.x tree and an old stable
+1.x tree for compatibility with older applications[2] and they can be
+installed together on a computer.
 
-diff --git a/conf/distro/include/preferred-om-2008-versions.inc b/conf/distro/include/preferred-om-2008-versions.inc
-index 8c5c4f7..d226cff 100644
---- a/conf/distro/include/preferred-om-2008-versions.inc
-+++ b/conf/distro/include/preferred-om-2008-versions.inc
-@@ -635,7 +635,7 @@ PREFERRED_VERSION_gtkmm ?= "2.10.10"
- PREFERRED_VERSION_gtk-sato-engine ?= "0.1"
- PREFERRED_VERSION_gtk-sharp ?= "2.10.2"
- PREFERRED_VERSION_gtk-smooth-engine ?= "0.5.8"
--PREFERRED_VERSION_gtksourceview ?= "1.7.2"
-+PREFERRED_VERSION_gtksourceview1 ?= "1.7.2"
- PREFERRED_VERSION_gtkterm2 ?= "0.2.3"
- PREFERRED_VERSION_gtk-xfce-engine ?= "2.4.1"
- PREFERRED_VERSION_gtracer ?= "0.0.10"
-diff --git a/recipes/gobby/gobby_0.4.1.bb b/recipes/gobby/gobby_0.4.1.bb
-index f9474c8..87f0fb9 100644
---- a/recipes/gobby/gobby_0.4.1.bb
-+++ b/recipes/gobby/gobby_0.4.1.bb
-@@ -1,7 +1,8 @@
- LICENSE = "LGPL"
- HOMEPAGE = "http://darcs.0x539.de/trac/obby/cgi-bin/trac.cgi/wiki/"
-+PR = "r1"
- 
--DEPENDS = "net6 gtkmm obby gtksourceview libxml++"
-+DEPENDS = "net6 gtkmm obby gtksourceview1 libxml++"
- inherit autotools pkgconfig
- 
- SRC_URI = "http://releases.0x539.de/gobby/gobby-${PV}.tar.gz"
-diff --git a/recipes/gobby/gtksourceview_1.7.2.bb b/recipes/gobby/gtksourceview_1.7.2.bb
-deleted file mode 100644
-index 6b4c8e6..0000000
---- a/recipes/gobby/gtksourceview_1.7.2.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--LICENSE = "GPL"
--
--DEPENDS = "gtk+ libgnomeprint"
--
--inherit gnome pkgconfig
--
--do_stage() {
--autotools_stage_all
--}
-diff --git a/recipes/gtksourceview/gtksourceview1_1.7.2.bb b/recipes/gtksourceview/gtksourceview1_1.7.2.bb
-new file mode 100644
-index 0000000..44d88fb
---- /dev/null
-+++ b/recipes/gtksourceview/gtksourceview1_1.7.2.bb
-@@ -0,0 +1,16 @@
-+LICENSE = "GPL"
-+
-+PNAME = "gtksourceview"
-+
-+DEPENDS = "gtk+ libgnomeprint"
-+
-+S = "${WORKDIR}/${PNAME}-${PV}"
-+
-+inherit gnome pkgconfig
-+
-+# overrule SRC_URI from gnome.conf
-+SRC_URI = "${GNOME_MIRROR}/${PNAME}/${@gnome_verdir("${PV}")}/${PNAME}-${PV}.tar.bz2"
-+
-+do_stage() {
-+autotools_stage_all
-+}
-diff --git a/recipes/tea/tea_17.3.5.bb b/recipes/tea/tea_17.3.5.bb
-index c8dac8c..6412db0 100644
---- a/recipes/tea/tea_17.3.5.bb
-+++ b/recipes/tea/tea_17.3.5.bb
-@@ -1,8 +1,8 @@
- DESCRIPTION = "Tea - a GTK based text editor with highlighting and a lot of processing features"
- SECTION = "gpe"
- LICENSE = "GPL"
--DEPENDS = "gtk+ gtksourceview"
--PR = "r1"
-+DEPENDS = "gtk+ gtksourceview1"
-+PR = "r2"
- 
- inherit autotools
- 
+I need to add the recipe for the latest 2.x version, and since the old
+stable is used just in 2 recipes (gobby_0.4.1.bb and tea_17.3.5.bb) and
+mentioned as a preferred version in preferred-om-2008-versions.inc
+it seems to me that this could be a good time to rename it to
+gtksourceview1 with minimal breakage.
+
+(I also hope I've used correctly the git tools for patch sending by
+email: sorry if I've done something wrong)
+
+[1] http://projects.gnome.org/gtksourceview/
+[2] http://projects.gnome.org/gtksourceview/download.html
+
+
 -- 
-1.6.0.6
+Elena ``of Valhalla''
 
+homepage: http://www.trueelena.org
+email: elena.valhalla@gmail.com
 
 
