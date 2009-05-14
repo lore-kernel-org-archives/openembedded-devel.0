@@ -1,26 +1,21 @@
-Received: from [212.227.126.187] (helo=moutng.kundenserver.de)
+Received: from [88.149.128.34] (helo=smtpi4.ngi.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <christian.glindkamp@taskit.de>) id 1M4WCQ-0004Ej-1i
+	(envelope-from <elena.valhalla@gmail.com>) id 1M4WCT-0005ah-LQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 May 2009 10:21:54 +0200
-Received: from localhost.localdomain (port-87-234-225-18.static.qsc.de
-	[87.234.225.18])
-	by mrelayeu.kundenserver.de (node=mreu1) with ESMTP (Nemesis)
-	id 0MKv1o-1M4W5n1BBy-000jZo; Thu, 14 May 2009 10:15:03 +0200
-Received: from christian.taskit.de (unknown [192.168.4.114])
-	by localhost.localdomain (Postfix) with ESMTP id 969847B7F0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2009 10:13:05 +0200 (CEST)
-Date: Thu, 14 May 2009 10:15:02 +0200
-From: Christian Glindkamp <christian.glindkamp@taskit.de>
+	Thu, 14 May 2009 10:22:02 +0200
+Received: from localhost.localdomain (81-174-25-145.dynamic.ngi.it
+	[81.174.25.145]) by smtpi4.ngi.it (Postfix) with ESMTP id C0C2542092;
+	Thu, 14 May 2009 10:15:08 +0200 (CEST)
+From: Elena Grandi <elena.valhalla@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090514101502.133dd3e0@christian.taskit.de>
-X-Mailer: Claws Mail 3.7.1 (GTK+ 2.14.4; i486-pc-linux-gnu)
-Mime-Version: 1.0
-X-Provags-ID: V01U2FsdGVkX1+wgeqiqc1biIKKecnNIfnFpbfSdQvVtp7QIIo
-	NRS/lbEAX1RBN9jSRRZRBDT/9JcHLj4bkRlo9stk6u0XZ13gPw
-	z2CLQzYcczrH7BfkfXWsQ==
-Subject: [PATCH] cacao: add missing patch
+Date: Thu, 14 May 2009 10:14:56 +0200
+Message-Id: <1242288896-6347-4-git-send-email-elena.valhalla@gmail.com>
+X-Mailer: git-send-email 1.6.0.6
+In-Reply-To: <1242288896-6347-3-git-send-email-elena.valhalla@gmail.com>
+References: <1242288896-6347-1-git-send-email-elena.valhalla@gmail.com>
+	<1242288896-6347-2-git-send-email-elena.valhalla@gmail.com>
+	<1242288896-6347-3-git-send-email-elena.valhalla@gmail.com>
+Subject: [PATCH] checksums.ini: added entry for gtksourceview2_2.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,41 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 08:22:00 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 May 2009 08:22:10 -0000
 
-In revision af5fcda66139e002d098c0df952b43c455806aba the patch
-cacao-disable-stackbase-check.patch was added to SRC_URI of all
-cacao recipes without committing the patch itself. This patch
-adds it to make cacao buildable again. The patch comes from the
-jalimo overlay.
-
-Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
+Signed-off-by: Elena Grandi <elena.valhalla@gmail.com>
 ---
- .../files/cacao-disable-stackbase-check.patch      |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 recipes/cacao/files/cacao-disable-stackbase-check.patch
+ conf/checksums.ini |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/cacao/files/cacao-disable-stackbase-check.patch b/recipes/cacao/files/cacao-disable-stackbase-check.patch
-new file mode 100644
-index 0000000..8eb2089
---- /dev/null
-+++ b/recipes/cacao/files/cacao-disable-stackbase-check.patch
-@@ -0,0 +1,12 @@
-+Index: cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c
-+===================================================================
-+--- cacao-0.99.3+hg20090109.orig/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:15.000000000 +0100
-++++ cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:24.000000000 +0100
-+@@ -1077,7 +1077,6 @@
-+       c = stat_buf[buf_offset++];
-+     }
-+     close(f);
-+-    if (result < 0x10000000) ABORT("Absurd stack bottom value");
-+     return (ptr_t)result;
-+   }
-+ 
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index b087213..72f2db9 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -9942,6 +9942,10 @@ sha256=c1c2e1fb0168ecb3a5e773ac0cd74a0e5caeaaf402f108479337794dab8aa75f
+ md5=a56ea78c74fe93a604357d7c555af0e5
+ sha256=38c238ec57bf22023bbc50f70ecbaee8c06b817b9e11f1a3a0ae7faf95cc1f26
+ 
++[http://ftp.gnome.org/pub/GNOME/sources/gtksourceview/2.6/gtksourceview-2.6.0.tar.bz2]
++md5=dd065ab2e96e51aade949249c5556439
++sha256=92ddd976721e26377eaa59fea07707a0caa85eb874500868c1e6fdd9a21fe0dd
++
+ [http://downloads.sourceforge.net/gtkterm/gtkterm2-0.2.3.tar.gz]
+ md5=a49f93d15909dbd2e7011428ae01f0f0
+ sha256=fb68b18d752ae2379f144186b94743be991af1a42c88bc1e6f0685e45cb1d573
 -- 
-1.5.6.5
+1.6.0.6
+
 
 
