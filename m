@@ -1,27 +1,28 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1M4XOQ-0001iY-RX
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <dp@xora.org.uk>) id 1M4Xlv-0003Qj-BI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 May 2009 11:38:22 +0200
-Received: (qmail invoked by alias); 14 May 2009 09:31:31 -0000
-Received: from f053011139.adsl.alicedsl.de (EHLO [192.168.4.110])
-	[78.53.11.139]
-	by mail.gmx.net (mp006) with SMTP; 14 May 2009 11:31:31 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1829Ehcrns2CLr8mA5ekw8znKEWKUNJ2RIiq5NJb6
-	Z32aHEkMKbuNnC
-Message-ID: <4A0BE509.8010406@gmx.net>
-Date: Thu, 14 May 2009 11:31:53 +0200
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+	Thu, 14 May 2009 12:02:39 +0200
+Received: by ewy20 with SMTP id 20so1376325ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 May 2009 02:55:48 -0700 (PDT)
+Received: by 10.210.18.18 with SMTP id 18mr2090968ebr.31.1242294948044;
+	Thu, 14 May 2009 02:55:48 -0700 (PDT)
+Received: from xora-eee.xora-domain (93-97-174-2.zone5.bethere.co.uk
+	[93.97.174.2])
+	by mx.google.com with ESMTPS id 10sm1673211eyz.1.2009.05.14.02.55.46
+	(version=SSLv3 cipher=RC4-MD5); Thu, 14 May 2009 02:55:47 -0700 (PDT)
+Message-ID: <4A0BEA95.1050708@xora.org.uk>
+Date: Thu, 14 May 2009 10:55:33 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1b3pre) Gecko/20090324 Fedora/3.0-2.1.beta2.fc11
+	Thunderbird/3.0b2
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20090514101502.133dd3e0@christian.taskit.de>
-In-Reply-To: <20090514101502.133dd3e0@christian.taskit.de>
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.55
-Subject: Re: [PATCH] cacao: add missing patch
+References: <20090514093136.6F959188456@amethyst.openembedded.net>
+In-Reply-To: <20090514093136.6F959188456@amethyst.openembedded.net>
+Subject: Re: [oe-commits] Robert Schuster : llvm2.6-native: SRCREV -> SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,75 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2009 09:38:23 -0000
-X-Groupsio-MsgNum: 10340
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enigA9F7572F3653BF166B35F499"
+X-List-Received-Date: Thu, 14 May 2009 10:02:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enigA9F7572F3653BF166B35F499
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On 05/14/2009 10:31 AM, GIT User account wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 73a335bf9f8e73a977e8a090bd03226bed074188
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=73a335bf9f8e73a977e8a090bd03226bed074188
+>
+> Author: Robert Schuster<thebohemian@gmx.net>
+> Date:   Thu May 14 11:25:10 2009 +0200
+>
+> llvm2.6-native: SRCREV ->  SRCPV
+> llvm2.6: SRCREV ->  SRCPV
+>
+>    
+Ooops wrong branch for these changes :-)
 
-Hi Christian,
-sorry for this glitch. I added the missing file.
-
-Regards
-Robert
-
-Christian Glindkamp schrieb:
-> In revision af5fcda66139e002d098c0df952b43c455806aba the patch
-> cacao-disable-stackbase-check.patch was added to SRC_URI of all
-> cacao recipes without committing the patch itself. This patch
-> adds it to make cacao buildable again. The patch comes from the
-> jalimo overlay.
->=20
-> Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
-> ---
->  .../files/cacao-disable-stackbase-check.patch      |   12 ++++++++++++=
-
->  1 files changed, 12 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/cacao/files/cacao-disable-stackbase-check.p=
-atch
->=20
-> diff --git a/recipes/cacao/files/cacao-disable-stackbase-check.patch b/=
-recipes/cacao/files/cacao-disable-stackbase-check.patch
-> new file mode 100644
-> index 0000000..8eb2089
-> --- /dev/null
-> +++ b/recipes/cacao/files/cacao-disable-stackbase-check.patch
-> @@ -0,0 +1,12 @@
-> +Index: cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- cacao-0.99.3+hg20090109.orig/src/mm/boehm-gc/os_dep.c	2009-02-15 1=
-6:29:15.000000000 +0100
-> ++++ cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:=
-24.000000000 +0100
-> +@@ -1077,7 +1077,6 @@
-> +       c =3D stat_buf[buf_offset++];
-> +     }
-> +     close(f);
-> +-    if (result < 0x10000000) ABORT("Absurd stack bottom value");
-> +     return (ptr_t)result;
-> +   }
-> +=20
+Graeme
 
 
 
---------------enigA9F7572F3653BF166B35F499
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEAREIAAYFAkoL5QwACgkQG9cfwmwwEtqXkgCeKUEwpl/v1HzkYvxKjD9mYRZN
-XegAoJRPK6Jvow/KbVp7ZetMJSFSs64h
-=kQLL
------END PGP SIGNATURE-----
-
---------------enigA9F7572F3653BF166B35F499--
