@@ -1,29 +1,29 @@
-Received: from [212.227.126.186] (helo=moutng.kundenserver.de)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <christian.glindkamp@taskit.de>) id 1M4scK-0004gk-VH
+	(envelope-from <dp@xora.org.uk>) id 1M4spP-0001xj-4o
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 10:18:09 +0200
-Received: from localhost.localdomain (port-87-234-225-18.static.qsc.de
-	[87.234.225.18])
-	by mrelayeu.kundenserver.de (node=mreu2) with ESMTP (Nemesis)
-	id 0MKv5w-1M4sVa2XxI-0001qu; Fri, 15 May 2009 10:11:11 +0200
-Received: from christian.taskit.de (unknown [192.168.4.114])
-	by localhost.localdomain (Postfix) with ESMTP id AAAB87B742
+	Fri, 15 May 2009 10:31:39 +0200
+Received: by ewy20 with SMTP id 20so2172640ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2009 10:09:09 +0200 (CEST)
-Date: Fri, 15 May 2009 10:11:09 +0200
-From: Christian Glindkamp <christian.glindkamp@taskit.de>
+	Fri, 15 May 2009 01:24:41 -0700 (PDT)
+Received: by 10.210.11.17 with SMTP id 17mr602442ebk.49.1242375881800;
+	Fri, 15 May 2009 01:24:41 -0700 (PDT)
+Received: from xora-eee.xora-domain (93-97-174-2.zone5.bethere.co.uk
+	[93.97.174.2])
+	by mx.google.com with ESMTPS id 23sm1313717eya.59.2009.05.15.01.24.40
+	(version=SSLv3 cipher=RC4-MD5); Fri, 15 May 2009 01:24:41 -0700 (PDT)
+Message-ID: <4A0D26BB.8010009@xora.org.uk>
+Date: Fri, 15 May 2009 09:24:27 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1b3pre) Gecko/20090324 Fedora/3.0-2.1.beta2.fc11
+	Thunderbird/3.0b2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090515101109.10cde089@christian.taskit.de>
-In-Reply-To: <4A0BE509.8010406@gmx.net>
-References: <20090514101502.133dd3e0@christian.taskit.de>
-	<4A0BE509.8010406@gmx.net>
-X-Mailer: Claws Mail 3.7.1 (GTK+ 2.14.4; i486-pc-linux-gnu)
-Mime-Version: 1.0
-X-Provags-ID: V01U2FsdGVkX19Rt0EPLbQ5LAL/bFBluO2hVbkDL+mVC6HqzRs
-	zkK6mHtO6EfBk8Af23QJnh/Mz9jVIeBSuVBEGkOqzF26gusdnY
-	6TaDjyJV798OmpCkTjfvQ==
-Subject: Re: [PATCH] cacao: add missing patch
+References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
+	<4A0CE800.5040407@dls.net>
+In-Reply-To: <4A0CE800.5040407@dls.net>
+Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by	default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,60 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 08:18:09 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 15 May 2009 08:31:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Robert,
+On 05/15/2009 04:56 AM, Mike Westerhof (mwester) wrote:
+>
+> I say "sort of expect" because I think they would rather see the
+> management of the versions.conf file be done by bitbake.  For example,
+> the "bitbake crystallize" command (to choose a name) might do no build
+> at all, but just generate, or re-generate, the versions.conf file.  But
+> that's a trivial point; they'll have to remember to cp or rm
+> versions.conf as necessary themselves.
+>
+>    
+Holger (zecke) wrote exactly this task for openmoko, it is most likely 
+still in the openmoko git tree.
 
-I think this should also go to the stable branch.
-
-Regards,
-Christian
-
-On Thu, 14 May 2009 11:31:53 +0200
-Robert Schuster <theBohemian@gmx.net> wrote:
-
-> Hi Christian,
-> sorry for this glitch. I added the missing file.
-> 
-> Regards
-> Robert
-> 
-> Christian Glindkamp schrieb:
-> > In revision af5fcda66139e002d098c0df952b43c455806aba the patch
-> > cacao-disable-stackbase-check.patch was added to SRC_URI of all
-> > cacao recipes without committing the patch itself. This patch
-> > adds it to make cacao buildable again. The patch comes from the
-> > jalimo overlay.
-> > 
-> > Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
-> > ---
-> >  .../files/cacao-disable-stackbase-check.patch      |   12 ++++++++++++
-> >  1 files changed, 12 insertions(+), 0 deletions(-)
-> >  create mode 100644 recipes/cacao/files/cacao-disable-stackbase-check.patch
-> > 
-> > diff --git a/recipes/cacao/files/cacao-disable-stackbase-check.patch b/recipes/cacao/files/cacao-disable-stackbase-check.patch
-> > new file mode 100644
-> > index 0000000..8eb2089
-> > --- /dev/null
-> > +++ b/recipes/cacao/files/cacao-disable-stackbase-check.patch
-> > @@ -0,0 +1,12 @@
-> > +Index: cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c
-> > +===================================================================
-> > +--- cacao-0.99.3+hg20090109.orig/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:15.000000000 +0100
-> > ++++ cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:24.000000000 +0100
-> > +@@ -1077,7 +1077,6 @@
-> > +       c = stat_buf[buf_offset++];
-> > +     }
-> > +     close(f);
-> > +-    if (result < 0x10000000) ABORT("Absurd stack bottom value");
-> > +     return (ptr_t)result;
-> > +   }
-> > + 
-> 
-> 
-
+Graeme
 
 
 
