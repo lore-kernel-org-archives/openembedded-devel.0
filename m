@@ -1,29 +1,42 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.198.250] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M55Tt-0007RP-FX
+	(envelope-from <kergoth@gmail.com>) id 1M55so-0004tj-V4
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 May 2009 00:02:19 +0200
-Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M55Mt-0005IH-TH
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 22:55:06 +0100
-From: Phil Blundell <philb@gnu.org>
+	Sat, 16 May 2009 00:28:03 +0200
+Received: by rv-out-0708.google.com with SMTP id f25so1161931rvb.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 May 2009 15:21:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=kkPSD8uv8Cps/vD3whSVmvtAHH/RmsNuUAbI/9FADZs=;
+	b=giLfFMAV+PhmLAvaiMkFunhUsPjc+uYj1IGQnexLrfbCwNLWTpFGMTszCB87uz7nsG
+	JZD2QeTjawMFaMmUMZ1SwEp8jPYUlqkGv1uAHrNXeviSCNQdqEbTQ/f8rDQr9+JYRfHg
+	mSjdgq2DEbKwmBxW835AXLyq0NYAdQsQl2Org=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=UxjRpv8+bJ8IP5TkksR0kgIe2JkSXGQTIS3vVzgaqp2RNeakwChi6TPFvoJagnhc+M
+	w/fBCzv8HfvQXmeD7YaO/0x5pUt/5qjFa3HL1/JOtKDA0AxFkoI/sN40Zuv38wlwtcJq
+	gD2Y+MDi9jfS2VYNW5gzBCURdpE0N19dqYNd0=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.143.40.5 with SMTP id s5mr1354005wfj.19.1242426063503; Fri, 15 
+	May 2009 15:21:03 -0700 (PDT)
+In-Reply-To: <4A033076.1080604@cbnco.com>
+References: <0977f5062aba3031df4132b6571b5c88ff4866c8.1241639516.git.msmith@cbnco.com>
+	<84090287fafa5bca668308285fcfa06650df22cd.1241639516.git.msmith@cbnco.com>
+	<20090506223838.GA15339@denix.org>
+	<1241678721.23982.71.camel@lenovo.internal.reciva.com>
+	<4A033076.1080604@cbnco.com>
+Date: Fri, 15 May 2009 15:21:03 -0700
+X-Google-Sender-Auth: 8cee30ba91ba8503
+Message-ID: <b6ebd0a50905151521v725c075dxabc2e2f20c51a327@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A0DBCAC.5000403@balister.org>
-References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
-	<1241101618.30742.241.camel@mill.internal.reciva.com>
-	<f96d234e0904301843q27803491xe14c09bf75193fe7@mail.gmail.com>
-	<1241695142.16805.170.camel@mill.internal.reciva.com>
-	<4A02CF2A.70804@balister.org>
-	<1242410201.4514.79.camel@lenovo.internal.reciva.com>
-	<4A0DBCAC.5000403@balister.org>
-Date: Fri, 15 May 2009 22:54:44 +0100
-Message-Id: <1242424484.4514.117.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: progress on OE organization issues
+Subject: Re: [PATCH 2/2] grub: allow menu.lst to be overridden using GRUB_CONFIG_PACKAGE.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 22:02:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 May 2009 22:28:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-05-15 at 15:04 -0400, Philip Balister wrote:
-> What exactly are you proposing to do?
+On Thu, May 7, 2009 at 12:03 PM, Michael Smith <msmith@cbnco.com> wrote:
+[snip]
+> My grub_0.97.bb could reference file://some.patch in its SRC_URI and bitbake
+> could look in the next COLLECTION after failing to find it in the local one.
+> In fact, I wouldn't even really need a bbfile in the overlay; just having
+> files/menu.lst in the overlay could be enough to replace it. I guess this
+> might just require some fudging to how FILESPATH is set up in base.bbclass.
 
-I think I've outlined in previous mails what I see as the most pressing
-problem with the status quo: basically, lack of direction and
-leadership.  
+This piece is covered relatively easily by manipulating FILESPATHBASE.
 
-The easiest and quickest way to fix that seems to simply be to have some
-kind of steering group be directly elected by the developers and given a
-suitable mandate to make decisions (both big and small) and carry out
-general project oversight.
+> Second, if a recipe could include a recipe of the same name and let bitbake
+> search for it in the next COLLECTION, overlay packages could get a lot
+> smaller. Say I need to add a private patch to grub -- my overlay
+> grub_0.97.bb, if I had one, could just look like this:
 
-Unlike with the e.V. board there would be no regulatory, legal, or
-(directly) fiscal responsibilities attached to these positions, which
-should make them somewhat easier to fill since the pool of candidates
-would be bigger.  About five members is probably the right size for this
-committee: you want it to be an odd number ideally, and certainly no
-less than 3 or more than 7.  I would also suggest that the appointment
-be for a relatively short period, maybe 3 or 6 months, to try to limit
-any problems caused by people "drifting off" because their interest in
-OE has taken a back seat to other commitments.  The steering group would
-be operated in as open a fashion as possible, with at least its
-decisions and a brief rationale (if not details of its full
-deliberations) being published.
-
-Absent any more formal membership criteria, the easiest way to define
-the pool of "members" seems to be to do what Cliff did with his recent
-poll about moving the servers: to take the list of keys with write
-access to the git repository, and grant one vote to each developer.  (In
-this case we would probably want to use some kind of STV scheme since we
-are looking for multiple winners rather than a simple yes/no answer.)
-
-p.
-
+This piece I believe I have a solution for.  I just wrote a 15 line
+.inc file that when loaded in a .conf, automatically searches any
+recipe's FILESPATH for an amend.inc, and if it exists, parses that in
+after the recipe itself is parsed, so you can amend the recipe with
+tweaks and things at the end of the parse.  So this coupled with the
+aforementioned FILESPATHBASE alterations and you should be able to
+supply overlay specific changes to a recipe without having to copy the
+recipe itself into the overlay.
+-- 
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
