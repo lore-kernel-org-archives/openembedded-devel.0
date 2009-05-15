@@ -1,38 +1,38 @@
-Received: from [209.85.217.225] (helo=mail-gx0-f225.google.com)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1M53ob-0002HL-AO
+	(envelope-from <andrea.adami@gmail.com>) id 1M54ji-0000q4-LN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 22:15:45 +0200
-Received: by gxk25 with SMTP id 25so1948448gxk.12
+	Fri, 15 May 2009 23:14:34 +0200
+Received: by bwz19 with SMTP id 19so2144239bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2009 13:08:03 -0700 (PDT)
+	Fri, 15 May 2009 14:07:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=7+Uu9dF/gy3UatpwUQfAufzrr+2U+zPx4EI2kgZNM10=;
-	b=lMsJUi26H/eqh/d31YRn0z6m5VArqJafU1g5O2RV/Zq3R43/LP3InniADVzI2ppdds
-	Oe9vRdqVPQshoWp0y2ZCzLX2q/opds8u5j0cPzkjcgZiCMbBJ//RjAEfBzFXYN4bTryO
-	XZTWFBrrBHuBdkwy/0XdjDDh7ylf+oG2IYcYA=
+	bh=GLLYf4aiJy1g2viVQ7pthMr0o2vvNF8lQ2zTnFD6owM=;
+	b=jrQaPoM9eM6oYB+HYvEGd90kudmo4mTlJBEFgU72GOflOsJzTTdzqbhcbNrHM5mGg2
+	JNHYzsKMCQNdDgjPnAdX50+vtaKhPUdhTtLWJo7bN8qyt5t+whzXCI6mDkRaQYfjWx71
+	qzWo2yZsovvBoF3fjBvtwAxW3t/FLjA3B2pgs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=Ho62q+7CcWjWzbNCZHF8FToosqyy293s+1i6IIUbyDWMwS90VqRv7G79e83WxKtRV2
-	pHG2avjPurSn1UMT1niXU6iZ5SwhPDn1iFL9STjrWJnWl/rPIjWuOeT+9sz2qvaOukwW
-	lykH8g9OAdiSkJ3oVB32eaPbEhni8gt4QEPYI=
+	b=Xvwj4+6EF5jNTcw863m8WqfeO9YdmQfmDyw5/H0jCFdq97VsM+SXG1AQlmiAcxzjw6
+	M9UVRez+GJ6K+6QjKuQHIG8n1ZXjpm2CaIL4nqvM4cTLQmsEBZeZZK57pCMj/BgM4erG
+	t5O9zkPVMHbOlap44B14jVsGg7A2y2FH9K3Wc=
 MIME-Version: 1.0
-Received: by 10.151.137.6 with SMTP id p6mr6812572ybn.214.1242418051680; Fri, 
-	15 May 2009 13:07:31 -0700 (PDT)
-In-Reply-To: <200905112228.33758.g.eismann@gmx.net>
-References: <200905111744.00650.g.eismann@gmx.net>
-	<200905112052.53485.g.eismann@gmx.net>
-	<f96d234e0905111309u1ae4805bnaeb9adc1bf1ceca3@mail.gmail.com>
-	<200905112228.33758.g.eismann@gmx.net>
-Date: Fri, 15 May 2009 16:07:31 -0400
-Message-ID: <f96d234e0905151307y6a9a032ay61e5f58386d19490@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Received: by 10.223.117.14 with SMTP id o14mr2926600faq.21.1242421653522; Fri, 
+	15 May 2009 14:07:33 -0700 (PDT)
+In-Reply-To: <b6ebd0a50905150809y36426e69u96ac070414b96029@mail.gmail.com>
+References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
+	<4A0CE800.5040407@dls.net>
+	<d1b08f940905150033r570ee6d7ta83eb4948b8e2d5a@mail.gmail.com>
+	<b6ebd0a50905150809y36426e69u96ac070414b96029@mail.gmail.com>
+Date: Fri, 15 May 2009 23:07:33 +0200
+Message-ID: <d1b08f940905151407o4b2135bcqd18c8a1c32dfe86c@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: image generation
+Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 20:15:45 -0000
+X-List-Received-Date: Fri, 15 May 2009 21:14:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 11, 2009 at 4:28 PM, G. Eismann <g.eismann@gmx.net> wrote:
-> On Lunes 11 Mayo 2009 22:09:47 Cliff Brake escribi=F3:
+>> What about adding a -u (update) option? This would just give old behavio=
+ur.
 >
->> >
->> > When building the image, the release 5 (the last one) of the package i=
-s
->> > built, but in the "do_package_write_ipk" step there is an error becaus=
-e
->> > is looking for the install directory for the release 1.
->>
->> Can you post your recipe, and we'll take a look?
->
-> Finally I have "fixed" it copying the recipe to a new one with a new name=
-; so
-> I am not sure if the problem has something to do with the recipe.
->
-> bitbake was looking for release 1 of the recipe, while the release number=
- is
-> 5.
-> I dont know why it did only for "do_package_write_ipk" step and not for a=
-ll of
-> them.
->
-> Anyway, the recipe:
+> I don't understand what you'd want -u to do? =A0This patch doesn't
+> modify bitbake,
 
-Its not obvious to me yet what is causing this issue, but you may get
-some more clues by running bitbake -DDDD
+Why? Taboo?
+Adding the 'update' option to bitbake would be logic at this point.
+Buildscripts would just have to change to 'bitbake -u'.
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Cliff Brake
-http://bec-systems.com
+(see Gentoo's emerge)
+
+Regards
+
+Andrea
 
 
