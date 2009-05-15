@@ -1,26 +1,26 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1M52xa-0003TH-2P
+	(envelope-from <pb@reciva.com>) id 1M53Rg-0001L3-QI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 21:20:46 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1M52qo-000Hth-1G
+	Fri, 15 May 2009 21:51:54 +0200
+Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M53Kv-0008Mw-Sm
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 23:13:46 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Fri, 15 May 2009 20:44:54 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 May 2009 23:13:47 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+In-Reply-To: <200905152313.47847.khimov@altell.ru>
 References: <1242390849-28989-1-git-send-email-khimov@altell.ru>
 	<200905151727.34871.khimov@altell.ru>
 	<1242401534.4514.50.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1242401534.4514.50.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <200905152313.47847.khimov@altell.ru>
-Subject: Re: [PATCH 2/2] glibc-package: set LD_LIBRARY_PATH on binary	locale generation
+	<200905152313.47847.khimov@altell.ru>
+Date: Fri, 15 May 2009 20:44:50 +0100
+Message-Id: <1242416690.4514.88.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH 2/2] glibc-package: set LD_LIBRARY_PATH on	binary	locale generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,30 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 19:20:46 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 15 May 2009 19:51:56 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 15 May 2009 19:32:14 Phil Blundell wrote:
-> On Fri, 2009-05-15 at 17:27 +0400, Roman I Khimov wrote:
-> > BTW, while at glibc-package, is there any reason for
-> > BINARY_LOCALE_ARCHES? We're using binary locale generation even for
-> > x86_64 and it is useful for us there. There is
-> > ENABLE_BINARY_LOCALE_GENERATION switch already to control whether one
-> > wants binary locales generated and if one does, why not on all
-> > architectures?
->
-> BINARY_LOCALE_ARCHES is intended to stop glibc-package from trying to
-> generate the locales for targets where this is known in advance to be a
-> losing proposition (generally because qemu doesn't support the target
-> processor family).  If we didn't do that, since
-> ENABLE_BINARY_LOCALE_GENERATION defaults to on, people trying to build
-> for non-qemu-enabled targets would just get some cryptic error during
-> the packaging process.
+On Fri, 2009-05-15 at 23:13 +0400, Roman I Khimov wrote:
+> On Friday 15 May 2009 19:32:14 Phil Blundell wrote:
+> > On Fri, 2009-05-15 at 17:27 +0400, Roman I Khimov wrote:
+> > > BTW, while at glibc-package, is there any reason for
+> > > BINARY_LOCALE_ARCHES? We're using binary locale generation even for
+> > > x86_64 and it is useful for us there. There is
+> > > ENABLE_BINARY_LOCALE_GENERATION switch already to control whether one
+> > > wants binary locales generated and if one does, why not on all
+> > > architectures?
+> >
+> > BINARY_LOCALE_ARCHES is intended to stop glibc-package from trying to
+> > generate the locales for targets where this is known in advance to be a
+> > losing proposition (generally because qemu doesn't support the target
+> > processor family).  If we didn't do that, since
+> > ENABLE_BINARY_LOCALE_GENERATION defaults to on, people trying to build
+> > for non-qemu-enabled targets would just get some cryptic error during
+> > the packaging process.
+> 
+> OK, then I guess we should extend it at least with "i?86" and "x86_64", 
+> because that work perfect with QEMU.
 
-OK, then I guess we should extend it at least with "i?86" and "x86_64", 
-because that work perfect with QEMU.
+Yes, that'd be a fine plan. 
+
+In an ideal world, you'd arrange for each version of qemu-native to
+PROVIDE "virtual/qemu-native-TARGET-SYS" for each architecture that the
+version in question supported, then make glibc RECOMMEND
+virtual/qemu-native-${TARGET_SYS} and enable binary locales by default
+if that recommendation was satisfied at runtime.  But, obviously,
+bitbake doesn't currently do RECOMMENDS so some infrastructure would be
+needed to make this work.
+
+p.
+
+
 
 
