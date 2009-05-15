@@ -1,27 +1,25 @@
 Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M51l1-0003ZV-2T
+	(envelope-from <philb@gnu.org>) id 1M51mQ-0003eT-6O
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 20:03:43 +0200
+	Fri, 15 May 2009 20:05:10 +0200
 Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
 	helo=[192.168.2.154])
 	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M51eG-0003ZX-TF
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M51fg-0003bK-2r
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 18:56:45 +0100
+	Fri, 15 May 2009 18:58:12 +0100
 From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A02CF2A.70804@balister.org>
-References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
-	<1241101618.30742.241.camel@mill.internal.reciva.com>
-	<f96d234e0904301843q27803491xe14c09bf75193fe7@mail.gmail.com>
-	<1241695142.16805.170.camel@mill.internal.reciva.com>
-	<4A02CF2A.70804@balister.org>
-Date: Fri, 15 May 2009 18:56:41 +0100
-Message-Id: <1242410201.4514.79.camel@lenovo.internal.reciva.com>
+In-Reply-To: <200905152146.52710.khimov@altell.ru>
+References: <1242390849-28989-1-git-send-email-khimov@altell.ru>
+	<20090515152626.GU7973@smtp.west.cox.net>
+	<200905152146.52710.khimov@altell.ru>
+Date: Fri, 15 May 2009 18:58:09 +0100
+Message-Id: <1242410289.4514.81.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
-Subject: Re: progress on OE organization issues
+Subject: Re: [PATCH 1/2] glibc-package: fix kernel version passed	to	qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,30 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 18:03:43 -0000
+X-List-Received-Date: Fri, 15 May 2009 18:05:10 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-05-07 at 08:08 -0400, Philip Balister wrote:
-> My number one concern is that we not create multiple membership groups 
-> and committees. There is no sense creating groups independent of the eV. 
+On Fri, 2009-05-15 at 21:46 +0400, Roman I Khimov wrote:
+> On Friday 15 May 2009 19:26:26 Tom Rini wrote:
+> > On Fri, May 15, 2009 at 04:34:08PM +0400, Roman I Khimov wrote:
+> > > Binary locale generation fails with
+> > >
+> > > FATAL: kernel too old
+> > >
+> > > if glibc is configured for kernels newer then 2.6.16.
+> > >
+> > > Fix qemu "-r" parameter to match OLDEST_KERNEL.
+> >
+> > Just to be sure, this is happy with 2.4.0 too, right?
+> 
+> Hmmm. It's untested on 2.4, obviously. But OLDEST_KERNEL is the kernel glibc 
+> built against, so whatever it is, it should be a perfect match.
 
-I guess my problem with this point of view is that I haven't ever really
-seen a clear roadmap or timeline for getting the e.V. "deployed" in
-practice, nor a definitive statement of what exactly the e.V.'s mission
-will be once it is up and running.  (In particular there seems to be
-some unclarity about whether the e.V. is intended as purely an
-administrative vehicle for managing funds, organising servers and the
-like, or whether it is to be more of a general project governance
-organisation.)  So it seems like we might be waiting a long time, only
-to discover in the end that, when the e.V. is up and running, it doesn't
-actually help us with solving the problems at hand and we are no better
-off than if we'd just acted straight away.  
-
-Presumably the existing core team must have some kind of vision for the
-exact role that the e.V. would play in this new world, and how we get
-there from here, but I've never seen it articulated anywhere.  Can you
-shed any light on that?
+Do you know what the reason is for passing this -r parameter in the
+first place?  It seems like we should just be letting qemu use the most
+recent kernel emulation that it knows about, since a glibc compiled
+against any given kernel version should always run with newer versions.
 
 p.
 
