@@ -1,30 +1,22 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1M4zrZ-0005WE-Fq
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 18:02:23 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 0E98A4B2E2A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2009 11:55:24 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 14111-09 for <openembedded-devel@lists.openembedded.org>; 
-	Fri, 15 May 2009 11:55:23 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id DCD1C494637
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2009 11:55:23 -0400 (EDT)
-Message-ID: <4A0D906B.7060908@cbnco.com>
-Date: Fri, 15 May 2009 11:55:23 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
-MIME-Version: 1.0
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M4zyR-0005kP-Mb
+	for openembedded-devel@openembedded.org; Fri, 15 May 2009 18:09:32 +0200
+Received: (qmail 24167 invoked from network); 15 May 2009 16:02:29 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 15 May 2009 09:02:29 -0700
+Date: Fri, 15 May 2009 09:02:29 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090515160229.GV7973@smtp.west.cox.net>
 References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
-In-Reply-To: <1242247998-30548-1-git-send-email-clarson@mvista.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by	default.
+	<4A0CE800.5040407@dls.net>
+	<b6ebd0a50905150808s16773addp27a1f06a6476e12f@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <b6ebd0a50905150808s16773addp27a1f06a6476e12f@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown	implementation and use it by default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,36 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 16:02:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 May 2009 16:09:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Chris Larson wrote:
-> For each recipe which completes a task successfully, this emits the current
-> version into ${TMPDIR}/versions.conf as a PREFERRED_VERSION line.
-> ${TMPDIR}/versions.conf and conf/versions.conf are automatically included,
-> in that order, in subsequent builds, to provide more deterinistic builds by
-> default, and to let the user make the lockdown persist via a simple cp
-> command.
+On Fri, May 15, 2009 at 08:08:29AM -0700, Chris Larson wrote:
+[snip]
+> It does change behavior, but only within the context of a single tmp
+> directory existance.  I doubt anyone in particular relies on their
+> build suddenly switching to a newer version of something when the
+> newer version shows up in the repository, but perhaps they do.  I
 
-Hi Chris,
+People with buildbots (hrw, myself, I'm sure others) do, for our
+incremental builds.  But of course, the reason for incremental builds is
+the behavior that this would change.
 
-If a distro doesn't lock down a particular version of a package, I 
-figure after a "git pull" I'll be building the latest version of 
-everything. At least, if I do a "bitbake -c clean somepkg" followed by a 
-"bitbake somepkg", I'll get the latest version of somepkg.
-
-If I understand the patch correctly, that won't happen anymore unless I 
-remember to remove tmp/versions.conf. It adds an extra step to the 
-process when one developer is using another's package.
-
-I can see it leading to confusion between developers. Any time there's a 
-multi-step process, humans will find a way to forget a step. :)
-
-What's the problem the versions.conf is meant to solve? I would think if 
-I'm doing a git pull and then rebuilding a package, it's because I want 
-to get the latest version, but I think I'm missing something here.
-
-Mike
+-- 
+Tom Rini
 
 
