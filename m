@@ -1,39 +1,39 @@
-Received: from [209.85.198.240] (helo=rv-out-0708.google.com)
+Received: from [209.85.200.174] (helo=wf-out-1314.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1M4z8B-0007NK-9U
+	(envelope-from <kergoth@gmail.com>) id 1M4z9J-0007Qh-Jh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 17:15:28 +0200
-Received: by rv-out-0708.google.com with SMTP id f25so1052793rvb.12
+	Fri, 15 May 2009 17:16:39 +0200
+Received: by wf-out-1314.google.com with SMTP id 25so1219232wfa.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2009 08:08:29 -0700 (PDT)
+	Fri, 15 May 2009 08:09:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:references:date:x-google-sender-auth:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	bh=WTK/7+Nbjy6RTCX+EHGJ7qwZixePSbTjheEi3e3bHRE=;
-	b=Y3BTG5M5XBb9CV05y/KZ1JmT6bOPUu+xfNc/TB+vbSGSvD2GHKz50zI15q+UVf1MJ/
-	F4cEc8YJGBimW5sP/yKELuUZHl3vHd2BM0HowTtScxkRImtGbSDbcVE1F7vPAvN3GAec
-	lhIYpiX8qXJWqvfFNZT0fL/PdmGNjLxtioFEw=
+	bh=swKtgOdYc+Z2xZ/CN/zNDig1ermxprtrYTOQoABgGjo=;
+	b=Vqh6OCE6KqvPdnkch2Im8tj2qZD2l8zaegQXYBAOdlDn8a5FM8rEoZy1bVAK0p3UsE
+	08cwyKsduTh+XMfHbmstMQTDgjDa0LZDFCR2ytR/Jken+CWQy4JRD3O8tQravJuVCEKU
+	MldeweYwr4TBUMi8uZsXy5ikZ+4ogjBZchGhk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:x-google-sender-auth:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=P+Gp0OE32JdsOYkIWQNHYmimxfr2+84bkxNYGk93tYKKEI30PBxQT7Ftesa6XW008z
-	PvQKnpWGLf5XFqY0XtTwTIG0vUfmzrQJ7wmoxvkYLU9GbEyRoa48bhq2tJJC3M7fwJcB
-	xXK02z/uF34NCbwPN0MTpoNiqwnuUweyHYGOQ=
+	b=jbqotMXhYep8od9d7mXyZGM1QhK7gHBNJvcJCNqq/IeMvCgMtR5iPDSxtjQnNUTULD
+	yPsPF36hnNdFUe/6w+umbHWoX8hFtkrvqZZXWaIaZ/PTFtt9KNOGFfNrU8f/ef+VVOHZ
+	1VI0U6+C/Xq631tD7Om3MO8SIEuCaxvy1b1v4=
 MIME-Version: 1.0
 Sender: kergoth@gmail.com
-Received: by 10.143.158.2 with SMTP id k2mr1086533wfo.245.1242400109578; Fri, 
-	15 May 2009 08:08:29 -0700 (PDT)
-In-Reply-To: <4A0CE800.5040407@dls.net>
+Received: by 10.142.221.11 with SMTP id t11mr1063708wfg.115.1242400179911; 
+	Fri, 15 May 2009 08:09:39 -0700 (PDT)
+In-Reply-To: <d1b08f940905150033r570ee6d7ta83eb4948b8e2d5a@mail.gmail.com>
 References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
 	<4A0CE800.5040407@dls.net>
-Date: Fri, 15 May 2009 08:08:29 -0700
-X-Google-Sender-Auth: cd005a17c69c7a16
-Message-ID: <b6ebd0a50905150808s16773addp27a1f06a6476e12f@mail.gmail.com>
+	<d1b08f940905150033r570ee6d7ta83eb4948b8e2d5a@mail.gmail.com>
+Date: Fri, 15 May 2009 08:09:39 -0700
+X-Google-Sender-Auth: 9ace225b687c1b16
+Message-ID: <b6ebd0a50905150809y36426e69u96ac070414b96029@mail.gmail.com>
 From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
 Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,66 +48,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 15:15:47 -0000
+X-List-Received-Date: Fri, 15 May 2009 15:16:43 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 14, 2009 at 8:56 PM, Mike Westerhof (mwester)
-<mwester@dls.net> wrote:
-> Chris Larson wrote:
->> For each recipe which completes a task successfully, this emits the curr=
-ent
->> version into ${TMPDIR}/versions.conf as a PREFERRED_VERSION line.
->> ${TMPDIR}/versions.conf and conf/versions.conf are automatically include=
-d,
->> in that order, in subsequent builds, to provide more deterinistic builds=
- by
->> default, and to let the user make the lockdown persist via a simple cp
->> command...
+On Fri, May 15, 2009 at 12:33 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
+>>How do we
+>>propose to roll out this change?
 >
-> Excellent! This is much needed as a feature. =C2=A0The usage model seems =
-to
-> be a very reasonable one, and would tend to be consistent with what
-> users sort of expect for a workflow.
->
-> I say "sort of expect" because I think they would rather see the
-> management of the versions.conf file be done by bitbake. =C2=A0For exampl=
-e,
-> the "bitbake crystallize" command (to choose a name) might do no build
-> at all, but just generate, or re-generate, the versions.conf file. =C2=A0=
-But
-> that's a trivial point; they'll have to remember to cp or rm
-> versions.conf as necessary themselves.
+> What about adding a -u (update) option? This would just give old behaviour.
 
-Aye, Phil Blundell and I were discussing this on IRC yesterday.  This
-is mostly a hack around the fact that bitbake should never have
-defaulted to the latest version of a package to begin with.  But in
-order to fix that, we'd need a new/better mechanism for the user to
-express what they want in a build.
-
-> The only big concern that I have is that this is really quite a drastic
-> change in behavior for the "cookbook-type" OE user community out there
-> (the folks who have memorized a set of procedures to build their distro
-> images without any real understanding of how it works). =C2=A0How do we
-> propose to roll out this change?
-
-It does change behavior, but only within the context of a single tmp
-directory existance.  I doubt anyone in particular relies on their
-build suddenly switching to a newer version of something when the
-newer version shows up in the repository, but perhaps they do.  I
-expect the biggest change is that doing "bitbake foo-1.0" rather than
-the default of foo 1.2 would result in it continuing to build foo 1.0
-going forward, rather than that being a temporary change.
-
-Honestly, I'm not sure how best to smoothly roll something like this
-out.  I don't think you can make it any less intrusive for a default
-behavior without modifying bitbake.  Obviously, we could make it not
-be default, but I don't know how I feel about that, either.  I guess
-thatd be best, to avoid breaking people's scripts, but I still quite
-dislike the current bitbake version behavior, personally.
-
-Anyone have any ideas on this?
---=20
+I don't understand what you'd want -u to do?  This patch doesn't
+modify bitbake, so it doesn't mess with commandline arguments at all.
+Are you arguing for a variable which could be set to disable this
+functionality?  That would seem like a reasonable thing to do, though
+I doubt anyone would actually want to disable it, once they get used
+to it.
+-- 
 Chris Larson
 clarson at kergoth dot com
 clarson at mvista dot com
