@@ -1,36 +1,29 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [212.227.126.186] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1M4s1j-0003Qy-SO
+	(envelope-from <christian.glindkamp@taskit.de>) id 1M4scK-0004gk-VH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 May 2009 09:40:19 +0200
-Received: by bwz19 with SMTP id 19so1726837bwz.12
+	Fri, 15 May 2009 10:18:09 +0200
+Received: from localhost.localdomain (port-87-234-225-18.static.qsc.de
+	[87.234.225.18])
+	by mrelayeu.kundenserver.de (node=mreu2) with ESMTP (Nemesis)
+	id 0MKv5w-1M4sVa2XxI-0001qu; Fri, 15 May 2009 10:11:11 +0200
+Received: from christian.taskit.de (unknown [192.168.4.114])
+	by localhost.localdomain (Postfix) with ESMTP id AAAB87B742
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2009 00:33:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=54kl9EZUC4WLlZCZI/eoGdM/nOwU52QkKM7RK6p5uiY=;
-	b=KvNqGuK6VeiE57KMAboKOz59nSuVGeUsUaG4gKA+HfAZvENBIUqZ/gPNkIl20rkJyZ
-	JmuPR/8NR8TPXrdcHeajTJxGaHIzx6FcVEbee458slxsBW0hllAVDmLBPrWNoyNvZSPD
-	CQhOfJgAfviDqD7f1xm0bldo3hMqRYxGMmCdo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=dJi9aJf8KZe8vXCi+UwzOE4LFOk9M2ml/X6ajSwmR9czdxGZm6PD/AD9HD1OU5nqe9
-	79Jq9lteFJRxZ3R5Y/vW4MRHe3+8hNyKFYdYH6FYLYeJleb4UlKwFQ7eO3RbXPOGtPcp
-	Wf049Wzms/wLp2ZWvXmXe5PGiqpqGiWy3OAcE=
-MIME-Version: 1.0
-Received: by 10.223.121.6 with SMTP id f6mr2203044far.77.1242372802548; Fri, 
-	15 May 2009 00:33:22 -0700 (PDT)
-In-Reply-To: <4A0CE800.5040407@dls.net>
-References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
-	<4A0CE800.5040407@dls.net>
-Date: Fri, 15 May 2009 09:33:22 +0200
-Message-ID: <d1b08f940905150033r570ee6d7ta83eb4948b8e2d5a@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 15 May 2009 10:09:09 +0200 (CEST)
+Date: Fri, 15 May 2009 10:11:09 +0200
+From: Christian Glindkamp <christian.glindkamp@taskit.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by default.
+Message-ID: <20090515101109.10cde089@christian.taskit.de>
+In-Reply-To: <4A0BE509.8010406@gmx.net>
+References: <20090514101502.133dd3e0@christian.taskit.de>
+	<4A0BE509.8010406@gmx.net>
+X-Mailer: Claws Mail 3.7.1 (GTK+ 2.14.4; i486-pc-linux-gnu)
+Mime-Version: 1.0
+X-Provags-ID: V01U2FsdGVkX19Rt0EPLbQ5LAL/bFBluO2hVbkDL+mVC6HqzRs
+	zkK6mHtO6EfBk8Af23QJnh/Mz9jVIeBSuVBEGkOqzF26gusdnY
+	6TaDjyJV798OmpCkTjfvQ==
+Subject: Re: [PATCH] cacao: add missing patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,17 +37,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 07:40:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 15 May 2009 08:18:09 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
->How do we
->propose to roll out this change?
+Hi Robert,
 
-What about adding a -u (update) option? This would just give old behaviour.
+I think this should also go to the stable branch.
 
-My 2 (euro)cents
+Regards,
+Christian
 
-Andrea
+On Thu, 14 May 2009 11:31:53 +0200
+Robert Schuster <theBohemian@gmx.net> wrote:
+
+> Hi Christian,
+> sorry for this glitch. I added the missing file.
+> 
+> Regards
+> Robert
+> 
+> Christian Glindkamp schrieb:
+> > In revision af5fcda66139e002d098c0df952b43c455806aba the patch
+> > cacao-disable-stackbase-check.patch was added to SRC_URI of all
+> > cacao recipes without committing the patch itself. This patch
+> > adds it to make cacao buildable again. The patch comes from the
+> > jalimo overlay.
+> > 
+> > Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
+> > ---
+> >  .../files/cacao-disable-stackbase-check.patch      |   12 ++++++++++++
+> >  1 files changed, 12 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes/cacao/files/cacao-disable-stackbase-check.patch
+> > 
+> > diff --git a/recipes/cacao/files/cacao-disable-stackbase-check.patch b/recipes/cacao/files/cacao-disable-stackbase-check.patch
+> > new file mode 100644
+> > index 0000000..8eb2089
+> > --- /dev/null
+> > +++ b/recipes/cacao/files/cacao-disable-stackbase-check.patch
+> > @@ -0,0 +1,12 @@
+> > +Index: cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c
+> > +===================================================================
+> > +--- cacao-0.99.3+hg20090109.orig/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:15.000000000 +0100
+> > ++++ cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:24.000000000 +0100
+> > +@@ -1077,7 +1077,6 @@
+> > +       c = stat_buf[buf_offset++];
+> > +     }
+> > +     close(f);
+> > +-    if (result < 0x10000000) ABORT("Absurd stack bottom value");
+> > +     return (ptr_t)result;
+> > +   }
+> > + 
+> 
+> 
+
+
 
 
