@@ -1,20 +1,25 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M4zPZ-0004rn-Cb
-	for openembedded-devel@openembedded.org; Fri, 15 May 2009 17:33:27 +0200
-Received: (qmail 24048 invoked from network); 15 May 2009 15:26:27 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 15 May 2009 08:26:27 -0700
-Date: Fri, 15 May 2009 08:26:26 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [82.71.203.194] (helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <pb@reciva.com>) id 1M4zVE-0004zt-BZ
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 May 2009 17:39:16 +0200
+Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M4zOT-0005US-4A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 May 2009 16:32:17 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090515152626.GU7973@smtp.west.cox.net>
+In-Reply-To: <200905151727.34871.khimov@altell.ru>
 References: <1242390849-28989-1-git-send-email-khimov@altell.ru>
-MIME-Version: 1.0
-In-Reply-To: <1242390849-28989-1-git-send-email-khimov@altell.ru>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH 1/2] glibc-package: fix kernel version passed to	qemu
+	<1242390849-28989-2-git-send-email-khimov@altell.ru>
+	<200905151727.34871.khimov@altell.ru>
+Date: Fri, 15 May 2009 16:32:14 +0100
+Message-Id: <1242401534.4514.50.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH 2/2] glibc-package: set LD_LIBRARY_PATH on binary	locale generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,22 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 15:33:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 15 May 2009 15:39:16 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 15, 2009 at 04:34:08PM +0400, Roman I Khimov wrote:
-> Binary locale generation fails with
-> 
-> FATAL: kernel too old
-> 
-> if glibc is configured for kernels newer then 2.6.16.
-> 
-> Fix qemu "-r" parameter to match OLDEST_KERNEL.
+On Fri, 2009-05-15 at 17:27 +0400, Roman I Khimov wrote:
+> BTW, while at glibc-package, is there any reason for BINARY_LOCALE_ARCHES? 
+> We're using binary locale generation even for x86_64 and it is useful for us 
+> there. There is ENABLE_BINARY_LOCALE_GENERATION switch already to control 
+> whether one wants binary locales generated and if one does, why not on all 
+> architectures?
 
-Just to be sure, this is happy with 2.4.0 too, right?
+BINARY_LOCALE_ARCHES is intended to stop glibc-package from trying to
+generate the locales for targets where this is known in advance to be a
+losing proposition (generally because qemu doesn't support the target
+processor family).  If we didn't do that, since
+ENABLE_BINARY_LOCALE_GENERATION defaults to on, people trying to build
+for non-qemu-enabled targets would just get some cryptic error during
+the packaging process.
 
--- 
-Tom Rini
+p.
+
+
 
 
