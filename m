@@ -1,21 +1,36 @@
-Received: from [216.145.245.200] (helo=mx04.dls.net)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1M4oe3-0000V3-Og
-	for openembedded-devel@openembedded.org; Fri, 15 May 2009 06:03:39 +0200
-Received: from [209.242.7.134] (helo=[192.168.231.111])
-	by mx04.dls.net with esmtpa (Exim 4.69)
-	(envelope-from <mwester@dls.net>) id 1M4oXN-0000hU-Ht
-	for openembedded-devel@openembedded.org; Thu, 14 May 2009 22:56:45 -0500
-Message-ID: <4A0CE800.5040407@dls.net>
-Date: Thu, 14 May 2009 22:56:48 -0500
-From: "Mike Westerhof (mwester)" <mwester@dls.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
+	(envelope-from <andrea.adami@gmail.com>) id 1M4s1j-0003Qy-SO
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 May 2009 09:40:19 +0200
+Received: by bwz19 with SMTP id 19so1726837bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 May 2009 00:33:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=54kl9EZUC4WLlZCZI/eoGdM/nOwU52QkKM7RK6p5uiY=;
+	b=KvNqGuK6VeiE57KMAboKOz59nSuVGeUsUaG4gKA+HfAZvENBIUqZ/gPNkIl20rkJyZ
+	JmuPR/8NR8TPXrdcHeajTJxGaHIzx6FcVEbee458slxsBW0hllAVDmLBPrWNoyNvZSPD
+	CQhOfJgAfviDqD7f1xm0bldo3hMqRYxGMmCdo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=dJi9aJf8KZe8vXCi+UwzOE4LFOk9M2ml/X6ajSwmR9czdxGZm6PD/AD9HD1OU5nqe9
+	79Jq9lteFJRxZ3R5Y/vW4MRHe3+8hNyKFYdYH6FYLYeJleb4UlKwFQ7eO3RbXPOGtPcp
+	Wf049Wzms/wLp2ZWvXmXe5PGiqpqGiWy3OAcE=
 MIME-Version: 1.0
-To: openembedded-devel@openembedded.org
+Received: by 10.223.121.6 with SMTP id f6mr2203044far.77.1242372802548; Fri, 
+	15 May 2009 00:33:22 -0700 (PDT)
+In-Reply-To: <4A0CE800.5040407@dls.net>
 References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
-In-Reply-To: <1242247998-30548-1-git-send-email-clarson@mvista.com>
-Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by	default.
+	<4A0CE800.5040407@dls.net>
+Date: Fri, 15 May 2009 09:33:22 +0200
+Message-ID: <d1b08f940905150033r570ee6d7ta83eb4948b8e2d5a@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown implementation and use it by default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,35 +44,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 04:03:40 -0000
+X-List-Received-Date: Fri, 15 May 2009 07:40:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Chris Larson wrote:
-> For each recipe which completes a task successfully, this emits the current
-> version into ${TMPDIR}/versions.conf as a PREFERRED_VERSION line.
-> ${TMPDIR}/versions.conf and conf/versions.conf are automatically included,
-> in that order, in subsequent builds, to provide more deterinistic builds by
-> default, and to let the user make the lockdown persist via a simple cp
-> command...
+>How do we
+>propose to roll out this change?
 
-Excellent! This is much needed as a feature.  The usage model seems to
-be a very reasonable one, and would tend to be consistent with what
-users sort of expect for a workflow.
+What about adding a -u (update) option? This would just give old behaviour.
 
-I say "sort of expect" because I think they would rather see the
-management of the versions.conf file be done by bitbake.  For example,
-the "bitbake crystallize" command (to choose a name) might do no build
-at all, but just generate, or re-generate, the versions.conf file.  But
-that's a trivial point; they'll have to remember to cp or rm
-versions.conf as necessary themselves.
+My 2 (euro)cents
 
-The only big concern that I have is that this is really quite a drastic
-change in behavior for the "cookbook-type" OE user community out there
-(the folks who have memorized a set of procedures to build their distro
-images without any real understanding of how it works).  How do we
-propose to roll out this change?
-
--Mike (mwester)
+Andrea
 
 
