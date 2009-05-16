@@ -1,29 +1,35 @@
-Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1M5PI6-0007Rc-DF
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M5QPw-0003P3-ND
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 May 2009 21:11:26 +0200
-Received: from gandalf.denix.org ([71.127.60.148]) by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KJR00BFH3MNHWFB@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	16 May 2009 14:04:04 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0FC8F14AF5D; Sat,
-	16 May 2009 15:03:59 -0400 (EDT)
-Date: Sat, 16 May 2009 15:03:59 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Sat, 16 May 2009 22:23:36 +0200
+Received: by ewy20 with SMTP id 20so3154080ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 May 2009 13:16:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=TJJTrjuauhkilxdZNrZwZH099B9xXcmhRyzbIa/DSlg=;
+	b=siVcgu/K2MMjLXEUt1S2mB+QQphaxKPviPeMEkZLwe4/QHkZBENZg6tJy5vkdqgI94
+	BjGrQXguHN1mMWy5Qltl1XAc7VzKqAXtahncqA/gdYXrk+SkevUA29tgqzsKhEIptS0g
+	r00RJ63uQUkZiC7j71vPP2w1O6SsLfMkD8EbE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ni1mQaQjxlH6kRtd3oVTFle5esRxJinGraSE++Hk9+BzSOJQWJQp9FO1+RqLxjm8Jq
+	82dxbWS6Z9S9bfI0GhAkFfBw4K+NC0EU5YqoZdL8q7IFU10ooAv0Q3wSypsc643P7Xl9
+	CZItTuMk16+S6nHGPdF1sIb425wkbC3oWQUzA=
+Received: by 10.216.3.65 with SMTP id 43mr1613846weg.149.1242504989990;
+	Sat, 16 May 2009 13:16:29 -0700 (PDT)
+Received: from localhost ([80.249.93.57])
+	by mx.google.com with ESMTPS id m5sm5358834gve.3.2009.05.16.13.16.14
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 16 May 2009 13:16:29 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090516190358.GA2564@denix.org>
-References: <0977f5062aba3031df4132b6571b5c88ff4866c8.1241639516.git.msmith@cbnco.com>
-	<84090287fafa5bca668308285fcfa06650df22cd.1241639516.git.msmith@cbnco.com>
-	<20090506223838.GA15339@denix.org>
-	<1241678721.23982.71.camel@lenovo.internal.reciva.com>
-	<4A033076.1080604@cbnco.com>
-	<b6ebd0a50905151521v725c075dxabc2e2f20c51a327@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <b6ebd0a50905151521v725c075dxabc2e2f20c51a327@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH 2/2] grub: allow menu.lst to be overridden using	GRUB_CONFIG_PACKAGE.
+Date: Sat, 16 May 2009 23:16:09 +0300
+Message-Id: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.0.6
+Subject: [PATCH] xserver-kdrive-common: fixed xTs_Calibrate script name.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,49 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 May 2009 19:11:26 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
-Content-transfer-encoding: quoted-printable
+X-List-Received-Date: Sat, 16 May 2009 20:23:36 -0000
 
-On Fri, May 15, 2009 at 03:21:03PM -0700, Chris Larson wrote:
-> On Thu, May 7, 2009 at 12:03 PM, Michael Smith <msmith@cbnco.com> wrote:
-> [snip]
-> > My grub_0.97.bb could reference file://some.patch in its SRC_URI and bi=
-tbake
-> > could look in the next COLLECTION after failing to find it in the local=
- one.
-> > In fact, I wouldn't even really need a bbfile in the overlay; just havi=
-ng
-> > files/menu.lst in the overlay could be enough to replace it. I guess th=
-is
-> > might just require some fudging to how FILESPATH is set up in base.bbcl=
-ass.
->=20
-> This piece is covered relatively easily by manipulating FILESPATHBASE.
->=20
-> > Second, if a recipe could include a recipe of the same name and let bit=
-bake
-> > search for it in the next COLLECTION, overlay packages could get a lot
-> > smaller. Say I need to add a private patch to grub -- my overlay
-> > grub_0.97.bb, if I had one, could just look like this:
->=20
-> This piece I believe I have a solution for.  I just wrote a 15 line
-> .inc file that when loaded in a .conf, automatically searches any
-> recipe's FILESPATH for an amend.inc, and if it exists, parses that in
-> after the recipe itself is parsed, so you can amend the recipe with
-> tweaks and things at the end of the parse.  So this coupled with the
-> aforementioned FILESPATHBASE alterations and you should be able to
-> supply overlay specific changes to a recipe without having to copy the
-> recipe itself into the overlay.
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ .../xserver-kdrive-common_0.1.bb                   |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Chris,
+diff --git a/recipes/xserver-kdrive-common/xserver-kdrive-common_0.1.bb b/recipes/xserver-kdrive-common/xserver-kdrive-common_0.1.bb
+index 33c0a40..a6fbc6d 100644
+--- a/recipes/xserver-kdrive-common/xserver-kdrive-common_0.1.bb
++++ b/recipes/xserver-kdrive-common/xserver-kdrive-common_0.1.bb
+@@ -9,9 +9,9 @@ SRC_URI = "\
+   file://Xserver \
+   file://Xsession \
+   \
+-  file://30xTs_Calibrate \
+   file://60xXDefaults \
+   file://90xXWindowManager \
++  file://98xTs_Calibrate \
+   "
+ S = "${WORKDIR}"
+ 
+@@ -22,9 +22,9 @@ etcFiles = "\
+   Xsession \
+   "
+ sessionFiles = "\
+-  30xTs_Calibrate \
+   60xXDefaults \
+   90xXWindowManager \
++  98xTs_Calibrate \
+   "
+ 
+ do_install() {
+-- 
+1.6.0.6
 
-You are on the roll! This is another very welcomed feature for anyone who=
-=20
-manages overlays. Thanks!
-
---=20
-Denys
 
 
