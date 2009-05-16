@@ -1,21 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M5ETW-0001sy-Uy
-	for openembedded-devel@openembedded.org; Sat, 16 May 2009 09:38:31 +0200
-Received: (qmail 32496 invoked by uid 813007); 16 May 2009 07:31:28 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 16 May 2009 07:31:28 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 May 2009 09:31:24 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M5FnY-0002kz-Uk
+	for openembedded-devel@openembedded.org; Sat, 16 May 2009 11:03:21 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M5Fgj-0003UH-LB
+	for openembedded-devel@openembedded.org; Sat, 16 May 2009 08:56:13 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 16 May 2009 08:56:13 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 16 May 2009 08:56:13 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 16 May 2009 10:55:58 +0200
+Message-ID: <gulv2v$l9r$1@ger.gmane.org>
 References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
 In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
-MIME-Version: 1.0
-Message-Id: <200905160931.25224.marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,31 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 May 2009 07:38:31 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 16 May 2009 09:03:29 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 16 maja 2009 o 01:22:46 Chuck Kamas napisa=C5=82(a):
+On 16-05-09 01:22, Chuck Kamas wrote:
 > Hi all,
 >
 > I am trying to compile a very small kernel.  To do this I have a few
-> kernel modules I would like in the root file system.  But when I load
-> OE I see that there are no kernel modules in the fs.  I found a way
-> to include them by adding a RDEPENDS line with
-> kernel-module-i2c-core. This places it in the rootfs.  My question is
-> there a better, automatic way, to have all kernel modules included in
-> the rootfs?
+> kernel modules I would like in the root file system.  But when I load OE
+> I see that there are no kernel modules in the fs.  I found a way to
+> include them by adding a RDEPENDS line with kernel-module-i2c-core.
 
-"kernel-modules" package depends on all packages with kernel modules.
+And it can't be said enough:
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+NEVER use rdepends to drag in kernelmodules, use rrecommends instead
 
 
 
