@@ -1,29 +1,36 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <g.eismann@gmx.net>) id 1M5RtI-0002iD-Vl
+Received: from [209.85.217.225] (helo=mail-gx0-f225.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1M5Tyd-0007tk-UO
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 May 2009 23:58:01 +0200
-Received: (qmail invoked by alias); 16 May 2009 21:50:53 -0000
-Received: from 247.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
-	[87.222.70.247]
-	by mail.gmx.net (mp008) with SMTP; 16 May 2009 23:50:53 +0200
-X-Authenticated: #21729387
-X-Provags-ID: V01U2FsdGVkX1+m5QJOAJimrRpy81R69prbx1g3EB5tk7mbkMkdHs
-	eSRvqT6HBKqBlL
-From: "G. Eismann" <g.eismann@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 May 2009 23:50:50 +0200
-User-Agent: KMail/1.11.3 (Linux/2.6.28-11-generic; KDE/4.2.3; i686; ; )
-References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
-	<200905161121.55689.g.eismann@gmx.net>
-	<f96d234e0905161438u2bd28611lb3041e4dc5d0afe8@mail.gmail.com>
-In-Reply-To: <f96d234e0905161438u2bd28611lb3041e4dc5d0afe8@mail.gmail.com>
+	Sun, 17 May 2009 02:11:45 +0200
+Received: by gxk25 with SMTP id 25so2480578gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 May 2009 17:04:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=92xcRsAjUj1HJiH3ysCDGG7vNHNUy7COhcNqDJTgfVA=;
+	b=hOaNEOyxVa0OWB9sjQAHWYbNyRZQVgSP0az1GiPo/eOwb3QMVPndpMKDinPXaURFvC
+	/LpnfyDJ8V4aGwPpRSayYbv7xZwMTK2wwBl3K9lSKNYsHyOUN4Jq0a/iJXs59TFJfMqI
+	y1eL+rZ3XKVgX9KSebOoPHH8vueFbBGKjqJTA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=fDHxtthhY8UUBq1XtnWlc0xx/QB6/pAWRxNXuDdYajIptUERVu7m6axYrcquVvBwzN
+	55pXzA16NasQkDtllOSGP8GDpzC62Q0J9c8xnh+lmOU5Pu2dq35PJnXyYk7PfWHW/SOr
+	Pg8R/LzHZ+ZW08olI9tRTlr4MQP9AcpWLNu+o=
 MIME-Version: 1.0
-Message-Id: <200905162350.51366.g.eismann@gmx.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.64,0.63
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Kernel modules
+Received: by 10.90.56.16 with SMTP id e16mr4300352aga.77.1242518217598; Sat, 
+	16 May 2009 16:56:57 -0700 (PDT)
+In-Reply-To: <49FD9EEA.4030608@dls.net>
+References: <c384c5ea0905030555t48379d37o700254a1c49a4600@mail.gmail.com>
+	<49FD9A75.3000609@balister.org> <49FD9EEA.4030608@dls.net>
+Date: Sun, 17 May 2009 01:56:57 +0200
+Message-ID: <c384c5ea0905161656g33e1fc8dk573e89a440c3333e@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC]: Remove #####...##### lines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,22 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 May 2009 21:58:01 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 17 May 2009 00:11:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On S=E1bado 16 Mayo 2009 23:38:20 Cliff Brake escribi=F3:
-> On Sat, May 16, 2009 at 5:21 AM, G. Eismann <g.eismann@gmx.net> wrote:
-> > BTW, is there any way to install the modules but not the kernel image?
-> > I have the kernel in a separate partition, so I don't need it into the
-> > rootfs.
->
-> One way is to put the following in the kernel recipe:
->
-> FILES_kernel-image_<machine_name> =3D ""
+Hello,
 
-Thanks for the response. I'll try it.
-=2D-=20
-  - Eismann -
+On Sun, May 3, 2009 at 3:40 PM, Mike (mwester) <mwester@dls.net> wrote:
+> Philip Balister wrote:
+>> Leon Woestenberg wrote:
+>>> #############################################################################
+>>>
+>>> #I am a bit annoyed by the hash lines in some of the files
+>>> #############################################################################
+>>>
+>>> # They distract me from the real content of the files.
+>>> #############################################################################
+>>>
+>>> RFC_REMOVE_HASHLINES ?= 1
+>>
+>> Although this might start a coding style war, I also find them distracting.
+>
+> Let's replace them with prettier formats:
+>
+
+My proposal was to *remove* the hash lines, so we cannot have wars on them. :-)
+
+Regards,
+-- 
+Leon 'peacekeeper' Woestenberg
+
 
