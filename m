@@ -1,23 +1,37 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [74.125.44.155] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1M5R5g-0004cT-2p
+	(envelope-from <cliff.brake@gmail.com>) id 1M5Rh7-0002Q6-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 May 2009 23:06:44 +0200
-Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M5Qya-0006we-IE
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 May 2009 21:59:26 +0100
-From: Phil Blundell <pb@reciva.com>
+	Sat, 16 May 2009 23:45:25 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so1466657yxh.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 May 2009 14:38:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=/rjU5gF32uZr9K9CIlfPDuFzlJyqbucBHXvSv2RSFTM=;
+	b=OJWf1f52HXWh4/ctXJ/78SF3Ndra13yLSVq9iKfaFvPA3v4elp0yitcDwKNZ2UdY51
+	NHFt/li9C7vvkBBZVfy1OzX80S3vsymEYhZcZrVOCguKbgVnEliztoJJiS/yzIYPrRki
+	rADawyFG62oYgE2nljj7zV3DlYeMu2IDZGrsc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=rK9PcitPbbt6UzNl0Z6S853EcLmlNpqlkDlc7T3kPUBfT5AShFk2FBwaqze1xvigL5
+	cEHHCsTx/mCAjfUJ06MGbVmoKLDnKP1nUO9UNg7H63BW/GwgHHSrLaHlcBM0HLvltxwB
+	Px1BdpLPJmma1e4Z3n8n3mf2ktxdI0d5e7a3E=
+MIME-Version: 1.0
+Received: by 10.151.124.4 with SMTP id b4mr9008854ybn.244.1242509900316; Sat, 
+	16 May 2009 14:38:20 -0700 (PDT)
+In-Reply-To: <200905161121.55689.g.eismann@gmx.net>
+References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
+	<200905160931.25224.marcin@juszkiewicz.com.pl>
+	<200905161121.55689.g.eismann@gmx.net>
+Date: Sat, 16 May 2009 17:38:20 -0400
+Message-ID: <f96d234e0905161438u2bd28611lb3041e4dc5d0afe8@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
-References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
-Date: Sat, 16 May 2009 21:59:07 +0100
-Message-Id: <1242507547.4226.1.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH] xserver-kdrive-common: fixed xTs_Calibrate script	name.
+Subject: Re: Kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,24 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 May 2009 21:06:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 16 May 2009 21:45:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2009-05-16 at 23:16 +0300, Ihar Hrachyshka wrote:
->  sessionFiles = "\
-> -  30xTs_Calibrate \
->    60xXDefaults \
->    90xXWindowManager \
-> +  98xTs_Calibrate \
->    "
+On Sat, May 16, 2009 at 5:21 AM, G. Eismann <g.eismann@gmx.net> wrote:
 
-What's the reason for this?  Your email was a bit short on explanation
-but it seems a little strange to be starting the window manager and
-suchlike before calibration runs.
+> BTW, is there any way to install the modules but not the kernel image?
+> I have the kernel in a separate partition, so I don't need it into the rootfs.
 
-p.
+One way is to put the following in the kernel recipe:
 
+FILES_kernel-image_<machine_name> = ""
 
+Cliff
+
+-- 
+=======================
+Cliff Brake
+http://bec-systems.com
 
 
