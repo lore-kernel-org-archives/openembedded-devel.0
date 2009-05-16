@@ -1,19 +1,22 @@
-Received: from [209.172.120.180] (helo=skymoon.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ckamas@finesse.com>) id 1M56oQ-0003WH-I6
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 May 2009 01:27:34 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M5ETW-0001sy-Uy
+	for openembedded-devel@openembedded.org; Sat, 16 May 2009 09:38:31 +0200
+Received: (qmail 32496 invoked by uid 813007); 16 May 2009 07:31:28 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 16 May 2009 07:31:28 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 16 May 2009 09:31:24 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
+In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
 MIME-Version: 1.0
-Date: Fri, 15 May 2009 16:22:46 -0700
-Message-ID: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Kernel modules
-thread-index: AcnVtA5cS5u1VsM/QX6hsd3N2pu/Mg==
-From: "Chuck Kamas" <ckamas@finesse.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Kernel modules
+Message-Id: <200905160931.25224.marcin@juszkiewicz.com.pl>
+Subject: Re: Kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,22 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2009 23:27:34 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Sat, 16 May 2009 07:38:31 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi all,
+Dnia sobota, 16 maja 2009 o 01:22:46 Chuck Kamas napisa=C5=82(a):
+> Hi all,
+>
+> I am trying to compile a very small kernel.  To do this I have a few
+> kernel modules I would like in the root file system.  But when I load
+> OE I see that there are no kernel modules in the fs.  I found a way
+> to include them by adding a RDEPENDS line with
+> kernel-module-i2c-core. This places it in the rootfs.  My question is
+> there a better, automatic way, to have all kernel modules included in
+> the rootfs?
 
-I am trying to compile a very small kernel.  To do this I have a few
-kernel modules I would like in the root file system.  But when I load OE
-I see that there are no kernel modules in the fs.  I found a way to
-include them by adding a RDEPENDS line with kernel-module-i2c-core.
-This places it in the rootfs.  My question is there a better, automatic
-way, to have all kernel modules included in the rootfs?
+"kernel-modules" package depends on all packages with kernel modules.
 
-Chuck
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
