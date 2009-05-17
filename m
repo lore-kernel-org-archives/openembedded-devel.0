@@ -1,25 +1,22 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <g.eismann@gmx.net>) id 1M5iIX-0003EW-DY
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 May 2009 17:29:09 +0200
-Received: (qmail invoked by alias); 17 May 2009 15:21:56 -0000
-Received: from 247.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
-	[87.222.70.247]
-	by mail.gmx.net (mp065) with SMTP; 17 May 2009 17:21:56 +0200
-X-Authenticated: #21729387
-X-Provags-ID: V01U2FsdGVkX1+3cxlqg6e3K5skHQwnCPbYyGpQQM3Mr+N5868rrT
-	VVOIxaMQrrNWrH
-From: "G. Eismann" <g.eismann@gmx.net>
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M5kkY-0001qf-U6
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:06:15 +0200
+Received: (qmail 11801 invoked by uid 813007); 17 May 2009 17:59:03 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 17 May 2009 17:59:03 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 May 2009 17:21:47 +0200
-User-Agent: KMail/1.11.3 (Linux/2.6.28-11-generic; KDE/4.2.3; i686; ; )
+Date: Sun, 17 May 2009 19:58:54 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <4A0FF622.40609@nospam.arcornews.de> <4A0FFF7D.9090001@xora.org.uk>
+In-Reply-To: <4A0FFF7D.9090001@xora.org.uk>
 MIME-Version: 1.0
-Message-Id: <200905171721.48073.g.eismann@gmx.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.78,0.78
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: libxcb fails compiling
+Message-Id: <200905171958.55711.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH][STABLE] bitbake.conf: update GENTOO_MIRROR setting. (Closes: #5054)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,27 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 15:29:10 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 May 2009 18:06:15 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Dnia niedziela, 17 maja 2009 o 14:13:49 Graeme Gregory napisa=C5=82(a):
+> Rolf Leggewie wrote:
+> > From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+
+> > The old GENTOO_MIRROR URL is 404.  Patch should go to .dev and then
+> > to .stable
+
+> > Acked for .dev
+>
+> I'm not a stable developer so Ill leave that for someone else.
+
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+
+=46or both .dev and stable/2009.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
-The error:
 
-ln -s -f /usr/share/xcb/xproto.xml xproto.xml                                                                                               
-/usr/bin/xsltproc --stringparam mode source \                                                                                                                 
---stringparam base-path /usr/share/xcb/ \                                                                                                   
---stringparam extension-path /usr/share/xcb/ \                                                                                              
--o xproto.c ./c-client.xsl xproto.xml                                                                                     
-warning: failed to load external entity "xproto.xml"                                                                                       
- unable to parse xproto.xml 
-
-Is trying to make a link to a file that doesn't exist.
-I have installed xcb-proto in my machine, and it works now, but I guess that 
-is not the right way to fix the problem.
-
-
--- 
-  - Eismann -
 
