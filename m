@@ -1,28 +1,30 @@
-Received: from [67.222.38.31] (helo=outbound-mail-141.bluehost.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <chow.ming@linuxbj.com>) id 1M5bjK-0006NW-Gi
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 10:28:23 +0200
-Received: (qmail 4656 invoked by uid 0); 17 May 2009 08:21:14 -0000
-Received: from unknown (HELO host285.hostmonster.com) (74.220.215.85)
-	by outboundproxy5.bluehost.com with SMTP; 17 May 2009 08:21:14 -0000
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=default; d=linuxbj.com;
-	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:Content-Type:X-Identified-User;
-	b=U7InPFJSBmKnI2c0dxL32U6VEWwvvW7SYbbNGaaS1AqK9aIJgva0+Z+I6qskw46NCTjOv+PyKAN40EpJvvDDD1p2q+mvOIoQa+1bDUZzxZfRUqT7EL6wUm2t6eXvTr6S;
-Received: from [125.33.187.228] (helo=[192.168.200.199])
-	by host285.hostmonster.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <chow.ming@linuxbj.com>)
-	id 1M5bcP-00032s-C2 for openembedded-devel@lists.openembedded.org;
-	Sun, 17 May 2009 02:21:13 -0600
-Message-ID: <4A0FC8F6.6080003@linuxbj.com>
-Date: Sun, 17 May 2009 16:21:10 +0800
-From: =?UTF-8?B?TWluZyBDaG93IOWRqOaYjg==?= <chow.ming@linuxbj.com>
+Received: from [151.189.21.50] (helo=mail-in-10.arcor-online.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <no2spam@nospam.arcornews.de>) id 1M5ejv-0007rn-LS
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 17 May 2009 13:41:11 +0200
+Received: from mail-in-12-z2.arcor-online.net (mail-in-12-z2.arcor-online.net
+	[151.189.8.29]) by mx.arcor.de (Postfix) with ESMTP id E26E728EE48
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 May 2009 13:33:59 +0200 (CEST)
+Received: from mail-in-04.arcor-online.net (mail-in-04.arcor-online.net
+	[151.189.21.44])
+	by mail-in-12-z2.arcor-online.net (Postfix) with ESMTP id C9BE227944C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 May 2009 13:33:59 +0200 (CEST)
+Received: from [192.168.1.12] (p5B3B31B9.dip.t-dialin.net [91.59.49.185])
+	(Authenticated sender: leggewie@arcor.de)
+	by mail-in-04.arcor-online.net (Postfix) with ESMTPSA id 85CDE33A663
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 May 2009 13:33:59 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-04.arcor-online.net 85CDE33A663
+Message-ID: <4A0FF622.40609@nospam.arcornews.de>
+Date: Sun, 17 May 2009 13:33:54 +0200
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
 User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Identified-User: {2055:host285.hostmonster.com:linuxbjc:linuxbj.com}
-	{sentby:smtp auth 125.33.187.228 authed with
-	chow.ming@linuxbj.com}
-Subject: wvstreams fix
+Subject: [PATCH][STABLE] bitbake.conf: update GENTOO_MIRROR setting. (Closes: #5054)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,71 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 08:28:23 -0000
-Content-Type: multipart/mixed; boundary="------------040101000501060300030500"
-
---------------040101000501060300030500
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 17 May 2009 11:41:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-wvstreams compile failed with gcc-4.3.x.
-here is my patch to fix it up.
+From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+
+---
+
+The old GENTOO_MIRROR URL is 404.  Patch should go to .dev and then to
+.stable
+
+   conf/bitbake.conf |    2 +-
+   1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 95ee9c6..5d4ec2b 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -508,7 +508,7 @@ E_URI = "http://enlightenment.freedesktop.org/files"
+   FREEBSD_MIRROR = "ftp://ftp.freebsd.org/pub/FreeBSD/"
+   FREEDESKTOP_CVS = "cvs://anoncvs:anoncvs@anoncvs.freedesktop.org/cvs"
+   FREESMARTPHONE_GIT = "git://git.freesmartphone.org"
+-GENTOO_MIRROR =
+"http://distro.ibiblio.org/pub/linux/distributions/gentoo/distfiles"
++GENTOO_MIRROR = "http://distfiles.gentoo.org/distfiles"
+   GNOME_GIT = "git://git.gnome.org"
+   GNOME_MIRROR = "http://ftp.gnome.org/pub/GNOME/sources"
+   GNU_MIRROR = "ftp://ftp.gnu.org/gnu"
 
 
---------------040101000501060300030500
-Content-Type: text/x-patch;
- name="wvstreams.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="wvstreams.patch"
 
-diff --git a/recipes/wvstreams/wvstreams-4.4.1/wvstreams-4.4.1-gcc-4.3-compile.patch b/recipes/wvstreams/wvstreams-4.4.1/wvstreams-4.4.1-gcc-4.3-compile.patch
-new file mode 100644
-index 0000000..fd6f951
---- /dev/null
-+++ b/recipes/wvstreams/wvstreams-4.4.1/wvstreams-4.4.1-gcc-4.3-compile.patch
-@@ -0,0 +1,23 @@
-+diff -urN wvstreams-4.4.1-orig/include/uniconfkey.h wvstreams-4.4.1/include/uniconfkey.h
-+--- wvstreams-4.4.1-orig/include/uniconfkey.h	2009-05-17 15:52:15.761594425 +0800
-++++ wvstreams-4.4.1/include/uniconfkey.h	2009-05-17 15:51:49.290819209 +0800
-+@@ -9,6 +9,7 @@
-+ 
-+ #include "wvstring.h"
-+ #include "wvlinklist.h"
-++#include <limits.h>
-+ 
-+ 
-+ // The Python headers try to #define ANY as void.  If we're building Python
-+diff -urN wvstreams-4.4.1-orig/include/wvserialize.h wvstreams-4.4.1/include/wvserialize.h
-+--- wvstreams-4.4.1-orig/include/wvserialize.h	2009-05-17 15:52:21.970914867 +0800
-++++ wvstreams-4.4.1/include/wvserialize.h	2009-05-17 15:51:49.300819143 +0800
-+@@ -349,7 +349,7 @@
-+  * except as the last character.
-+  */
-+ template <>
-+-extern WvString _wv_deserialize<WvString>(WvBuf &buf);
-++WvString _wv_deserialize<WvString>(WvBuf &buf);
-+ 
-+ 
-+ /** Deserialize a WvBuf. */
-diff --git a/recipes/wvstreams/wvstreams_4.4.1.bb b/recipes/wvstreams/wvstreams_4.4.1.bb
-index 8cf1d1b..7dcc126 100644
---- a/recipes/wvstreams/wvstreams_4.4.1.bb
-+++ b/recipes/wvstreams/wvstreams_4.4.1.bb
-@@ -3,10 +3,11 @@ LICENSE = "LGPL"
- DESCRIPTION = "WvStreams is a network programming library in C++"
- DEPENDS = "zlib openssl (>= 0.9.8)"
- 
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
--           file://build-fixes-and-sanity.patch;patch=1 "
-+           file://build-fixes-and-sanity.patch;patch=1 \
-+           file://wvstreams-4.4.1-gcc-4.3-compile.patch;patch=1 "
- 
- inherit autotools pkgconfig
- 
-
-
---------------040101000501060300030500--
