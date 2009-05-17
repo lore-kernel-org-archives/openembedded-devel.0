@@ -1,22 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M5nik-0006mo-MX
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 23:16:34 +0200
-Received: (qmail 17888 invoked by uid 1003); 17 May 2009 21:09:21 -0000
+	(envelope-from <philip@balister.org>) id 1M5nn6-000708-NP
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 23:21:05 +0200
+Received: (qmail 22760 invoked by uid 1003); 17 May 2009 21:13:51 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 17 May 2009 21:09:20 -0000
-Message-ID: <4A107CFA.8060101@balister.org>
-Date: Sun, 17 May 2009 17:09:14 -0400
+	by mail.geekisp.com with SMTP; 17 May 2009 21:13:50 -0000
+Message-ID: <4A107E0D.1050605@balister.org>
+Date: Sun, 17 May 2009 17:13:49 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4A0FF622.40609@nospam.arcornews.de>
-	<4A0FFF7D.9090001@xora.org.uk>	<200905171958.55711.marcin@juszkiewicz.com.pl>
-	<guptb7$7q8$1@ger.gmane.org>
-In-Reply-To: <guptb7$7q8$1@ger.gmane.org>
-Subject: Re: [PATCH][STABLE] bitbake.conf: update GENTOO_MIRROR setting. (Closes: #5054)
+References: <4A107C14.90108@nospam.arcornews.de>
+In-Reply-To: <4A107C14.90108@nospam.arcornews.de>
+Subject: Re: [RFC] nuke dpkg prior to 1.14.25 in org.oe.dev branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,53 +28,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 21:16:35 -0000
-X-Groupsio-MsgNum: 10440
+X-List-Received-Date: Sun, 17 May 2009 21:21:05 -0000
+X-Groupsio-MsgNum: 10441
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms080505000701000903000606"
+	micalg=sha1; boundary="------------ms070804000306000902080508"
 
---------------ms080505000701000903000606
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-
-
+--------------ms070804000306000902080508
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
 Rolf Leggewie wrote:
-> Marcin Juszkiewicz wrote:
->> Dnia niedziela, 17 maja 2009 o 14:13:49 Graeme Gregory napisa=C5=82(a)=
-:
->=20
->>>> Acked for .dev
->>> I'm not a stable developer so Ill leave that for someone else.
->>
->> Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
->>
->> For both .dev and stable/2009.
->=20
-> Thank you, pushed to .dev and bug closed.
->=20
-> remaining steps:
->=20
-> 1) one more ACK for .stable and push there
+> Hi,
+> 
+> we have a number of bb recipes for very old dpkg versions.  According to 
+> bug 5026 even the second most recent version in OE has been removed from 
+> the mirrors for quite a while now.  I don't see any value in bb files 
+> that aren't even fetchable and thus suggest to drop all but the most 
+> recent dpkg recipe which in this case is 1.14.25.
 
-Acked-by: Philip Balister <philip@balister.org>
+Not commenting directly on the delete issue, but remember distros the 
+generate binary products do need to keep source tarballs for packages 
+they deliver in binary form to satisfy GPL requirements.
 
-> 2) update patchwork
->    (created my account only yesterday and I think I lack privs)
+So just because a recipe is not buildable today, does not mean that it 
+is unbuildable with the correct distro config and may be needed to help 
+meet GPL requirements.
 
-Done.
+(Note I do not know what the dpkg license is)
 
 Philip
 
->=20
->=20
+> 
+> cc: openmoko (1.13.22 is listed in preferred-om-2008-versions.inc)
+> 
+> jlime-shrek.conf lists 1.10.23 as PREFERRED_VERSION but that one is not 
+> available anyway.
+> 
+> Regards
+> 
+> Rolf
+> 
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
-
---------------ms080505000701000903000606
+--------------ms070804000306000902080508
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -128,17 +127,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxNzIx
-MDkxNFowIwYJKoZIhvcNAQkEMRYEFA9T9Mq8efa1xwtmReuaX/LDTTnNMFIGCSqGSIb3DQEJDzFF
+MTM0OVowIwYJKoZIhvcNAQkEMRYEFO85Qrim9u88NKhjgx3cqbkPGqBMMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCJGySCXTHl/o0JGGuHlSUJGB6J6YHrSXOvefiv8TP7jvyOBlfi
-EISTwnCVwujuaDGjvkMAt3d7VTAcCMKwqHcemdLHZkJdO/XG8D2K1NHq1yqLOGCUt9YcLACl7DqT
-5B/8LtLnWCR9mo7UjVaQn3kZ+h3Uhin/vx3KJD6vF0/Cy1TyEkoyNLBahMA1zyRjJee+gExvf5Fk
-9lh2nIC8Bp4ke4XGu2fFxD16VG6HniQzAPNQuDCyyHb9pYwewWAw7+URiohZFh65kryEegUPkFcY
-MM8dRATNNU58uNm2kikwY9Mg33ET1J+gMKUXHAvug9Ngm4B2z0RUD5i38V2TGQY4AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCdIzC8WzAQE8XvJwu/5jWPT+I/wInsmkvYCpPhvD0FQRav/byv
+q/gZT1zovg9ZE1fg3xubrYDSR4gRAY4bvufpxkVIihPkTFgdHarTjLIFx8wG4EnFjV4oXHuWSw9C
+CXw37uFAdkZ2JBuXQY22fF7FJthzxvRA++OEHRLwV9nsjZ0CbSPa+HEgBkT6ySi5v+QT62EfmkGM
+F5+iDTfFJVZUQBxocQRqy7hs5fcKXTmRT5qi9bM+sYkXPn3z3eozC/1n0Bs0SxrlD7v2zp+PUdor
+T/SnYDyENKDcdV4bbBhbuxSnwki79LhZPlq1yoMOt3n7PRlFiets7k/EhCSqIqc6AAAAAAAA
 
---------------ms080505000701000903000606--
+--------------ms070804000306000902080508--
