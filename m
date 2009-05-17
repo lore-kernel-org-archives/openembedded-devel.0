@@ -1,20 +1,23 @@
-Received: from [209.172.120.180] (helo=skymoon.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ckamas@finesse.com>) id 1M5l0m-0007Rf-Ln
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:23:04 +0200
-MIME-Version: 1.0
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-Date: Sun, 17 May 2009 11:13:27 -0700
-Message-ID: <C62896630644CE43BF64B0FF0AC27F0E01C6E5@mail.ad.skymv.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Kernel modules
-Thread-Index: AcnWBWzpwdhL5A5URKiZLJ0xkmHp1wBFb/83
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M5l9U-0008P2-5j
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:32:00 +0200
+Received: (qmail 20173 invoked from network); 17 May 2009 18:24:48 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 17 May 2009 11:24:48 -0700
+Date: Sun, 17 May 2009 11:24:48 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090517182448.GF23842@smtp.west.cox.net>
 References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
-	<gulv2v$l9r$1@ger.gmane.org>
-From: "Chuck Kamas" <ckamas@finesse.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<openembedded-devel@openembedded.org>
+	<200905160931.25224.marcin@juszkiewicz.com.pl>
+	<200905161121.55689.g.eismann@gmx.net>
+	<f96d234e0905161438u2bd28611lb3041e4dc5d0afe8@mail.gmail.com>
+	<guoe44$ff1$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <guoe44$ff1$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: Kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,50 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 18:23:11 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 17 May 2009 18:32:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Thanks,  I add a rrecommends for each kernel module I have in my =
-.config.
-=20
-BTW, is there a way to have OE scan the kernel .config and automatically =
-pull in all the kernel modules?
-=20
-Chuck
-=20
-
-________________________________
-
-From: openembedded-devel-bounces@lists.openembedded.org on behalf of =
-Koen Kooi
-Sent: Sat 5/16/2009 1:55 AM
-To: openembedded-devel@openembedded.org
-Subject: Re: [oe] Kernel modules
-
-
-
-On 16-05-09 01:22, Chuck Kamas wrote:
-> Hi all,
+On Sun, May 17, 2009 at 09:24:51AM +0200, Koen Kooi wrote:
+> On 16-05-09 23:38, Cliff Brake wrote:
+>> On Sat, May 16, 2009 at 5:21 AM, G. Eismann<g.eismann@gmx.net>  wrote:
+>>
+>>> BTW, is there any way to install the modules but not the kernel image?
+>>> I have the kernel in a separate partition, so I don't need it into the rootfs.
+>>
+>> One way is to put the following in the kernel recipe:
+>>
+>> FILES_kernel-image_<machine_name>  = ""
 >
-> I am trying to compile a very small kernel.  To do this I have a few
-> kernel modules I would like in the root file system.  But when I load =
-OE
-> I see that there are no kernel modules in the fs.  I found a way to
-> include them by adding a RDEPENDS line with kernel-module-i2c-core.
+> Please don't do that, it breaks all sorts of things, one of which is  
+> field upgrades.
 
-And it can't be said enough:
+If and only if it's what your distro wants, of course.
 
-NEVER use rdepends to drag in kernelmodules, use rrecommends instead
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+-- 
+Tom Rini
 
 
