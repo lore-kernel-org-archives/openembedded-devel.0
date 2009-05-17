@@ -1,28 +1,28 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1M5bf5-0006FW-6y
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 May 2009 10:23:59 +0200
-Received: by ewy20 with SMTP id 20so3330250ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 May 2009 01:16:48 -0700 (PDT)
-Received: by 10.210.116.14 with SMTP id o14mr6280162ebc.32.1242548208601;
-	Sun, 17 May 2009 01:16:48 -0700 (PDT)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id 10sm4240563eyd.32.2009.05.17.01.16.47
-	(version=SSLv3 cipher=RC4-MD5); Sun, 17 May 2009 01:16:47 -0700 (PDT)
-Message-ID: <4A0FC7EE.6090903@xora.org.uk>
-Date: Sun, 17 May 2009 09:16:46 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+Received: from [67.222.38.31] (helo=outbound-mail-141.bluehost.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <chow.ming@linuxbj.com>) id 1M5bjK-0006NW-Gi
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 10:28:23 +0200
+Received: (qmail 4656 invoked by uid 0); 17 May 2009 08:21:14 -0000
+Received: from unknown (HELO host285.hostmonster.com) (74.220.215.85)
+	by outboundproxy5.bluehost.com with SMTP; 17 May 2009 08:21:14 -0000
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=default; d=linuxbj.com;
+	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:Content-Type:X-Identified-User;
+	b=U7InPFJSBmKnI2c0dxL32U6VEWwvvW7SYbbNGaaS1AqK9aIJgva0+Z+I6qskw46NCTjOv+PyKAN40EpJvvDDD1p2q+mvOIoQa+1bDUZzxZfRUqT7EL6wUm2t6eXvTr6S;
+Received: from [125.33.187.228] (helo=[192.168.200.199])
+	by host285.hostmonster.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <chow.ming@linuxbj.com>)
+	id 1M5bcP-00032s-C2 for openembedded-devel@lists.openembedded.org;
+	Sun, 17 May 2009 02:21:13 -0600
+Message-ID: <4A0FC8F6.6080003@linuxbj.com>
+Date: Sun, 17 May 2009 16:21:10 +0800
+From: =?UTF-8?B?TWluZyBDaG93IOWRqOaYjg==?= <chow.ming@linuxbj.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>	<200905160931.25224.marcin@juszkiewicz.com.pl>	<200905161121.55689.g.eismann@gmx.net>	<f96d234e0905161438u2bd28611lb3041e4dc5d0afe8@mail.gmail.com>	<guoe44$ff1$1@ger.gmane.org>
-	<fce2a370905170058r407d6b02qa9116bad2d64d292@mail.gmail.com>
-In-Reply-To: <fce2a370905170058r407d6b02qa9116bad2d64d292@mail.gmail.com>
-X-Enigmail-Version: 0.95.0
-Subject: Re: Kernel modules
+X-Identified-User: {2055:host285.hostmonster.com:linuxbjc:linuxbj.com}
+	{sentby:smtp auth 125.33.187.228 authed with
+	chow.ming@linuxbj.com}
+Subject: wvstreams fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,38 +36,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 08:23:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 17 May 2009 08:28:23 -0000
+Content-Type: multipart/mixed; boundary="------------040101000501060300030500"
+
+--------------040101000501060300030500
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Ihar Hrachyshka wrote:
-> On Sun, May 17, 2009 at 10:24 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->   
->> On 16-05-09 23:38, Cliff Brake wrote:
->>     
->>> On Sat, May 16, 2009 at 5:21 AM, G. Eismann<g.eismann@gmx.net>  wrote:
->>>
->>>       
->>>> BTW, is there any way to install the modules but not the kernel image?
->>>> I have the kernel in a separate partition, so I don't need it into the
->>>> rootfs.
->>>>         
->>> One way is to put the following in the kernel recipe:
->>>
->>> FILES_kernel-image_<machine_name>  = ""
->>>       
->> Please don't do that, it breaks all sorts of things, one of which is field
->> upgrades.
->>     
->
-> Your suggestion?
->
->   
-As nothing depends on kernel-image other than kernel I would suggest
-breaking this dependency. Then if you want the image of the kernel on
-your rootfs you can explicitly depend on kernel-image in a task.
-
-Graeme
+wvstreams compile failed with gcc-4.3.x.
+here is my patch to fix it up.
 
 
+--------------040101000501060300030500
+Content-Type: text/x-patch;
+ name="wvstreams.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="wvstreams.patch"
 
+diff --git a/recipes/wvstreams/wvstreams-4.4.1/wvstreams-4.4.1-gcc-4.3-compile.patch b/recipes/wvstreams/wvstreams-4.4.1/wvstreams-4.4.1-gcc-4.3-compile.patch
+new file mode 100644
+index 0000000..fd6f951
+--- /dev/null
++++ b/recipes/wvstreams/wvstreams-4.4.1/wvstreams-4.4.1-gcc-4.3-compile.patch
+@@ -0,0 +1,23 @@
++diff -urN wvstreams-4.4.1-orig/include/uniconfkey.h wvstreams-4.4.1/include/uniconfkey.h
++--- wvstreams-4.4.1-orig/include/uniconfkey.h	2009-05-17 15:52:15.761594425 +0800
+++++ wvstreams-4.4.1/include/uniconfkey.h	2009-05-17 15:51:49.290819209 +0800
++@@ -9,6 +9,7 @@
++ 
++ #include "wvstring.h"
++ #include "wvlinklist.h"
+++#include <limits.h>
++ 
++ 
++ // The Python headers try to #define ANY as void.  If we're building Python
++diff -urN wvstreams-4.4.1-orig/include/wvserialize.h wvstreams-4.4.1/include/wvserialize.h
++--- wvstreams-4.4.1-orig/include/wvserialize.h	2009-05-17 15:52:21.970914867 +0800
+++++ wvstreams-4.4.1/include/wvserialize.h	2009-05-17 15:51:49.300819143 +0800
++@@ -349,7 +349,7 @@
++  * except as the last character.
++  */
++ template <>
++-extern WvString _wv_deserialize<WvString>(WvBuf &buf);
+++WvString _wv_deserialize<WvString>(WvBuf &buf);
++ 
++ 
++ /** Deserialize a WvBuf. */
+diff --git a/recipes/wvstreams/wvstreams_4.4.1.bb b/recipes/wvstreams/wvstreams_4.4.1.bb
+index 8cf1d1b..7dcc126 100644
+--- a/recipes/wvstreams/wvstreams_4.4.1.bb
++++ b/recipes/wvstreams/wvstreams_4.4.1.bb
+@@ -3,10 +3,11 @@ LICENSE = "LGPL"
+ DESCRIPTION = "WvStreams is a network programming library in C++"
+ DEPENDS = "zlib openssl (>= 0.9.8)"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "http://wvstreams.googlecode.com/files/${PN}-${PV}.tar.gz \
+-           file://build-fixes-and-sanity.patch;patch=1 "
++           file://build-fixes-and-sanity.patch;patch=1 \
++           file://wvstreams-4.4.1-gcc-4.3-compile.patch;patch=1 "
+ 
+ inherit autotools pkgconfig
+ 
+
+
+--------------040101000501060300030500--
