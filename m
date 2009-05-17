@@ -1,23 +1,33 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M5l9U-0008P2-5j
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:32:00 +0200
-Received: (qmail 20173 invoked from network); 17 May 2009 18:24:48 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 17 May 2009 11:24:48 -0700
-Date: Sun, 17 May 2009 11:24:48 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090517182448.GF23842@smtp.west.cox.net>
-References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
-	<200905160931.25224.marcin@juszkiewicz.com.pl>
-	<200905161121.55689.g.eismann@gmx.net>
-	<f96d234e0905161438u2bd28611lb3041e4dc5d0afe8@mail.gmail.com>
-	<guoe44$ff1$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <guoe44$ff1$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M5lBf-0008UO-Qk
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:34:15 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M5l4j-0003z1-HG
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 18:27:05 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 17 May 2009 18:27:05 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 17 May 2009 18:27:05 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 17 May 2009 20:26:53 +0200
+Message-ID: <gupktd$gr8$1@ger.gmane.org>
+References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>	<gulv2v$l9r$1@ger.gmane.org>
+	<C62896630644CE43BF64B0FF0AC27F0E01C6E5@mail.ad.skymv.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
+In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E01C6E5@mail.ad.skymv.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,27 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 18:32:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 17 May 2009 18:34:15 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, May 17, 2009 at 09:24:51AM +0200, Koen Kooi wrote:
-> On 16-05-09 23:38, Cliff Brake wrote:
->> On Sat, May 16, 2009 at 5:21 AM, G. Eismann<g.eismann@gmx.net>  wrote:
->>
->>> BTW, is there any way to install the modules but not the kernel image?
->>> I have the kernel in a separate partition, so I don't need it into the rootfs.
->>
->> One way is to put the following in the kernel recipe:
->>
->> FILES_kernel-image_<machine_name>  = ""
+On 17-05-09 20:13, Chuck Kamas wrote:
+> Thanks,  I add a rrecommends for each kernel module I have in my .config.
 >
-> Please don't do that, it breaks all sorts of things, one of which is  
-> field upgrades.
+> BTW, is there a way to have OE scan the kernel .config and automatically pull in all the kernel modules?
 
-If and only if it's what your distro wants, of course.
+RRECOMMENDS = "kernel-modules"
 
--- 
-Tom Rini
+regards,
+
+Koen
+
 
 
