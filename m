@@ -1,31 +1,30 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M5eqL-00083w-Ex
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 13:47:49 +0200
+	id 1M5eu8-0008Eq-8w
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 13:51:44 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M5ejQ-0004Gr-Fr
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 11:40:40 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1M5enB-0004Q5-Bo
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 11:44:33 +0000
+Received: from p5b3b31b9.dip.t-dialin.net ([91.59.49.185])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 17 May 2009 11:40:40 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Sun, 17 May 2009 11:44:33 +0000
+Received: from no2spam by p5b3b31b9.dip.t-dialin.net with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sun, 17 May 2009 11:40:40 +0000
+	Sun, 17 May 2009 11:44:33 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 17 May 2009 13:40:29 +0200
-Message-ID: <guot3d$gr3$1@ger.gmane.org>
-References: <4A0FF622.40609@nospam.arcornews.de>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 17 May 2009 13:44:14 +0200
+Message-ID: <guotai$h6g$1@ger.gmane.org>
+References: <4A0FF622.40609@nospam.arcornews.de> <guot3d$gr3$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
-In-Reply-To: <4A0FF622.40609@nospam.arcornews.de>
+X-Gmane-NNTP-Posting-Host: p5b3b31b9.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+In-Reply-To: <guot3d$gr3$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
 Subject: Re: [PATCH][STABLE] bitbake.conf: update GENTOO_MIRROR setting. (Closes: #5054)
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -41,39 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 11:47:49 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 17 May 2009 11:51:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 17-05-09 13:33, Rolf Leggewie wrote:
-> From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Koen Kooi wrote:
 
-NAK, this isn't in .dev yet. Only propose fixes that are already in .dev
+> NAK, this isn't in .dev yet. Only propose fixes that are already in .dev
+> 
+>> ---
+>>
+>> The old GENTOO_MIRROR URL is 404. Patch should go to .dev and then to
+>> .stable
 
->
-> ---
->
-> The old GENTOO_MIRROR URL is 404. Patch should go to .dev and then to
-> .stable
->
-> conf/bitbake.conf | 2 +-
-> 1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 95ee9c6..5d4ec2b 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -508,7 +508,7 @@ E_URI = "http://enlightenment.freedesktop.org/files"
-> FREEBSD_MIRROR = "ftp://ftp.freebsd.org/pub/FreeBSD/"
-> FREEDESKTOP_CVS = "cvs://anoncvs:anoncvs@anoncvs.freedesktop.org/cvs"
-> FREESMARTPHONE_GIT = "git://git.freesmartphone.org"
-> -GENTOO_MIRROR =
-> "http://distro.ibiblio.org/pub/linux/distributions/gentoo/distfiles"
-> +GENTOO_MIRROR = "http://distfiles.gentoo.org/distfiles"
-> GNOME_GIT = "git://git.gnome.org"
-> GNOME_MIRROR = "http://ftp.gnome.org/pub/GNOME/sources"
-> GNU_MIRROR = "ftp://ftp.gnu.org/gnu"
-
+You quoted it ;-)  First .dev, then .stable is exactly what I am proposing.
 
 
 
