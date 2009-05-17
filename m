@@ -1,34 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M5lBf-0008UO-Qk
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:34:15 +0200
+	id 1M5nR1-0006Ei-FX
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 22:58:15 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M5l4j-0003z1-HG
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 18:27:05 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1M5nK0-0001n4-2R
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:51:00 +0000
+Received: from p5b3b31b9.dip.t-dialin.net ([91.59.49.185])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 17 May 2009 18:27:05 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Sun, 17 May 2009 20:51:00 +0000
+Received: from no2spam by p5b3b31b9.dip.t-dialin.net with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sun, 17 May 2009 18:27:05 +0000
+	Sun, 17 May 2009 20:51:00 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 17 May 2009 20:26:53 +0200
-Message-ID: <gupktd$gr8$1@ger.gmane.org>
-References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>	<gulv2v$l9r$1@ger.gmane.org>
-	<C62896630644CE43BF64B0FF0AC27F0E01C6E5@mail.ad.skymv.com>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 17 May 2009 22:50:41 +0200
+Message-ID: <guptb7$7q8$1@ger.gmane.org>
+References: <4A0FF622.40609@nospam.arcornews.de> <4A0FFF7D.9090001@xora.org.uk>
+	<200905171958.55711.marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
-In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E01C6E5@mail.ad.skymv.com>
+X-Gmane-NNTP-Posting-Host: p5b3b31b9.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+In-Reply-To: <200905171958.55711.marcin@juszkiewicz.com.pl>
 Sender: news <news@ger.gmane.org>
-Subject: Re: Kernel modules
+Subject: Re: [PATCH][STABLE] bitbake.conf: update GENTOO_MIRROR setting. (Closes: #5054)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,20 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 18:34:15 -0000
+X-List-Received-Date: Sun, 17 May 2009 20:58:15 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 17-05-09 20:13, Chuck Kamas wrote:
-> Thanks,  I add a rrecommends for each kernel module I have in my .config.
->
-> BTW, is there a way to have OE scan the kernel .config and automatically pull in all the kernel modules?
+Marcin Juszkiewicz wrote:
+> Dnia niedziela, 17 maja 2009 o 14:13:49 Graeme Gregory napisał(a):
 
-RRECOMMENDS = "kernel-modules"
+>>> Acked for .dev
+>> I'm not a stable developer so Ill leave that for someone else.
+> 
+> Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+> 
+> For both .dev and stable/2009.
 
-regards,
+Thank you, pushed to .dev and bug closed.
 
-Koen
+remaining steps:
+
+1) one more ACK for .stable and push there
+2) update patchwork
+    (created my account only yesterday and I think I lack privs)
 
 
 
