@@ -1,22 +1,21 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.172.120.180] (helo=skymoon.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M5kkY-0001qf-U6
-	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:06:15 +0200
-Received: (qmail 11801 invoked by uid 813007); 17 May 2009 17:59:03 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 17 May 2009 17:59:03 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 May 2009 19:58:54 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <4A0FF622.40609@nospam.arcornews.de> <4A0FFF7D.9090001@xora.org.uk>
-In-Reply-To: <4A0FFF7D.9090001@xora.org.uk>
+	(envelope-from <ckamas@finesse.com>) id 1M5l0m-0007Rf-Ln
+	for openembedded-devel@openembedded.org; Sun, 17 May 2009 20:23:04 +0200
 MIME-Version: 1.0
-Message-Id: <200905171958.55711.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH][STABLE] bitbake.conf: update GENTOO_MIRROR setting. (Closes: #5054)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Date: Sun, 17 May 2009 11:13:27 -0700
+Message-ID: <C62896630644CE43BF64B0FF0AC27F0E01C6E5@mail.ad.skymv.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Kernel modules
+Thread-Index: AcnWBWzpwdhL5A5URKiZLJ0xkmHp1wBFb/83
+References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>
+	<gulv2v$l9r$1@ger.gmane.org>
+From: "Chuck Kamas" <ckamas@finesse.com>
+To: <openembedded-devel@lists.openembedded.org>,
+	<openembedded-devel@openembedded.org>
+Subject: Re: Kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,32 +29,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 May 2009 18:06:15 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sun, 17 May 2009 18:23:11 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia niedziela, 17 maja 2009 o 14:13:49 Graeme Gregory napisa=C5=82(a):
-> Rolf Leggewie wrote:
-> > From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Thanks,  I add a rrecommends for each kernel module I have in my =
+.config.
+=20
+BTW, is there a way to have OE scan the kernel .config and automatically =
+pull in all the kernel modules?
+=20
+Chuck
+=20
 
-> > The old GENTOO_MIRROR URL is 404.  Patch should go to .dev and then
-> > to .stable
+________________________________
 
-> > Acked for .dev
+From: openembedded-devel-bounces@lists.openembedded.org on behalf of =
+Koen Kooi
+Sent: Sat 5/16/2009 1:55 AM
+To: openembedded-devel@openembedded.org
+Subject: Re: [oe] Kernel modules
+
+
+
+On 16-05-09 01:22, Chuck Kamas wrote:
+> Hi all,
 >
-> I'm not a stable developer so Ill leave that for someone else.
+> I am trying to compile a very small kernel.  To do this I have a few
+> kernel modules I would like in the root file system.  But when I load =
+OE
+> I see that there are no kernel modules in the fs.  I found a way to
+> include them by adding a RDEPENDS line with kernel-module-i2c-core.
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+And it can't be said enough:
 
-=46or both .dev and stable/2009.
+NEVER use rdepends to drag in kernelmodules, use rrecommends instead
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
