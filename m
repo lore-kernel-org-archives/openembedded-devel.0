@@ -1,31 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M62nh-0003be-5H
-	for openembedded-devel@openembedded.org; Mon, 18 May 2009 15:22:41 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M62gf-0005jB-Js
-	for openembedded-devel@openembedded.org; Mon, 18 May 2009 13:15:25 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 18 May 2009 13:15:25 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 18 May 2009 13:15:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 18 May 2009 15:15:14 +0200
-Message-ID: <gurn12$ifq$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
-Sender: news <news@ger.gmane.org>
-Subject: [RFT] udev 141 for the unstable feed
+	(envelope-from <khimov@altell.ru>) id 1M62ok-0003eB-P7
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 15:23:49 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1M62hg-0000Xp-TQ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 17:16:28 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 May 2009 17:16:24 +0400
+User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+	<4A115165.9070300@kernelconcepts.de>
+In-Reply-To: <4A115165.9070300@kernelconcepts.de>
+MIME-Version: 1.0
+Message-Id: <200905181716.24601.khimov@altell.ru>
+Subject: Re: [oe-commits] Roman I Khimov : (e)glibc-package: fix kernel version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,26 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 13:22:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 18 May 2009 13:23:50 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+On Monday 18 May 2009 16:15:33 Florian Boor wrote:
+> Hi,
+>
+> GIT User account schrieb:
+> > +		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
+> > +		if kernel_ver is None:
+> > +			qemu = "qemu-%s  -s 1048576" % target_arch
+> > +		else:
+> > +			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
+>
+> are you sure this is a good idea?
+> OLDEST_KERNEL defaults to "2.4.0", so this change is likely to break locale
+> generation for every machine that doesn't have OLDEST_KERNEL set.
 
-More and more projects are starting to use libudev for their magic 
-(devicekit-*, connman, hal and more), but the udev we are currently 
-using (124) is too old for that.
-
-After a lot of fiddling and reading debian/rules and .spec files I have 
-udev 141 working well on my beagleboard.
-
-I'd like more people to test udev 141 on their hardware to iron out bugs 
-:) If you have something that's using hal, upgrade to 0.5.12 to make it 
-work again.
-
-regards,
-
-Koen
-
+I've not heard yet of this really breaking something. And frankly I don't see 
+any reason for that. If it actually does - feel free to shout and scream of 
+course, we'll think how to handle it better.
 
 
