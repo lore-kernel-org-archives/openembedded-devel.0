@@ -1,24 +1,31 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1M62KF-0005BV-Vx
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 14:52:16 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1M62GT-00073Y-Ky
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 14:48:21 +0200
-Message-ID: <4A11584D.9070604@kernelconcepts.de>
-Date: Mon, 18 May 2009 14:45:01 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1242507547.4226.1.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1242507547.4226.1.camel@lenovo.internal.reciva.com>
-X-Enigmail-Version: 0.95.7
-Subject: Re: [PATCH] xserver-kdrive-common: fixed xTs_Calibrate	script name.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M62nh-0003be-5H
+	for openembedded-devel@openembedded.org; Mon, 18 May 2009 15:22:41 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M62gf-0005jB-Js
+	for openembedded-devel@openembedded.org; Mon, 18 May 2009 13:15:25 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 18 May 2009 13:15:25 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 18 May 2009 13:15:25 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 18 May 2009 15:15:14 +0200
+Message-ID: <gurn12$ifq$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
+Sender: news <news@ger.gmane.org>
+Subject: [RFT] udev 141 for the unstable feed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,31 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 12:52:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 18 May 2009 13:22:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-Phil Blundell schrieb:
-> What's the reason for this?  Your email was a bit short on explanation
-> but it seems a little strange to be starting the window manager and
-> suchlike before calibration runs.
+More and more projects are starting to use libudev for their magic 
+(devicekit-*, connman, hal and more), but the udev we are currently 
+using (124) is too old for that.
 
-I guess because I moved it in xserver-common as well. In fact there it still
-runs before the window manager. Moving it after the window manager is a bug
-(introduced by myself) and needs to be fixed. I'll do this now...
+After a lot of fiddling and reading debian/rules and .spec files I have 
+udev 141 working well on my beagleboard.
 
-Greetings
+I'd like more people to test udev 141 on their hardware to iron out bugs 
+:) If you have something that's using hal, upgrade to 0.5.12 to make it 
+work again.
 
-Florian
+regards,
 
+Koen
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
 
 
