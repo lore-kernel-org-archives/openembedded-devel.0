@@ -1,23 +1,24 @@
 Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1M61rn-0004am-GF
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1M62KF-0005BV-Vx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 14:22:51 +0200
+	Mon, 18 May 2009 14:52:16 +0200
 Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
 	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1M61o1-0006og-2e
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1M62GT-00073Y-Ky
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 14:18:57 +0200
-Message-ID: <4A115165.9070300@kernelconcepts.de>
-Date: Mon, 18 May 2009 14:15:33 +0200
+	Mon, 18 May 2009 14:48:21 +0200
+Message-ID: <4A11584D.9070604@kernelconcepts.de>
+Date: Mon, 18 May 2009 14:45:01 +0200
 From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
-In-Reply-To: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1242507547.4226.1.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1242507547.4226.1.camel@lenovo.internal.reciva.com>
 X-Enigmail-Version: 0.95.7
-Subject: Re: [oe-commits] Roman I Khimov : (e)glibc-package: fix kernel version passed to qemu
+Subject: Re: [PATCH] xserver-kdrive-common: fixed xTs_Calibrate	script name.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,26 +32,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 12:22:52 -0000
+X-List-Received-Date: Mon, 18 May 2009 12:52:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Hi,
 
-GIT User account schrieb:
-> +		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
-> +		if kernel_ver is None:
-> +			qemu = "qemu-%s  -s 1048576" % target_arch
-> +		else:
-> +			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
+Phil Blundell schrieb:
+> What's the reason for this?  Your email was a bit short on explanation
+> but it seems a little strange to be starting the window manager and
+> suchlike before calibration runs.
 
-are you sure this is a good idea?
-OLDEST_KERNEL defaults to "2.4.0", so this change is likely to break locale
-generation for every machine that doesn't have OLDEST_KERNEL set.
+I guess because I moved it in xserver-common as well. In fact there it still
+runs before the window manager. Moving it after the window manager is a bug
+(introduced by myself) and needs to be fixed. I'll do this now...
 
 Greetings
 
 Florian
+
 
 -- 
 The dream of yesterday                  Florian Boor
