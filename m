@@ -1,33 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M633w-0004UR-Mf
-	for openembedded-devel@openembedded.org; Mon, 18 May 2009 15:39:32 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M62wu-0006Vr-Qu
-	for openembedded-devel@openembedded.org; Mon, 18 May 2009 13:32:12 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 18 May 2009 13:32:12 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 18 May 2009 13:32:12 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 18 May 2009 15:31:59 +0200
-Message-ID: <guro0f$m4d$1@ger.gmane.org>
-References: <gurn12$ifq$1@ger.gmane.org>
+	(envelope-from <pb@reciva.com>) id 1M63DB-0001FU-NR
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 15:49:03 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M635x-0003oY-0A
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 14:41:33 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1M635t-0001vf-Pt
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 14:41:29 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200905181716.24601.khimov@altell.ru>
+References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+	<4A115165.9070300@kernelconcepts.de>
+	<200905181716.24601.khimov@altell.ru>
+Date: Mon, 18 May 2009 14:41:29 +0100
+Message-Id: <1242654089.9080.111.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
-In-Reply-To: <gurn12$ifq$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFT] udev 141 for the unstable feed
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [oe-commits] Roman I Khimov : (e)glibc-package: fix	kernel version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,29 +38,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 13:39:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 18 May 2009 13:49:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-That should have gone to angstrom-devel, no oe-devel, sorry
+On Mon, 2009-05-18 at 17:16 +0400, Roman I Khimov wrote:
+> On Monday 18 May 2009 16:15:33 Florian Boor wrote:
+> > Hi,
+> >
+> > GIT User account schrieb:
+> > > +		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
+> > > +		if kernel_ver is None:
+> > > +			qemu = "qemu-%s  -s 1048576" % target_arch
+> > > +		else:
+> > > +			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
+> >
+> > are you sure this is a good idea?
+> > OLDEST_KERNEL defaults to "2.4.0", so this change is likely to break locale
+> > generation for every machine that doesn't have OLDEST_KERNEL set.
+> 
+> I've not heard yet of this really breaking something. And frankly I don't see 
+> any reason for that. If it actually does - feel free to shout and scream of 
+> course, we'll think how to handle it better.
 
-On 18-05-09 15:15, Koen Kooi wrote:
-> Hi,
->
-> More and more projects are starting to use libudev for their magic
-> (devicekit-*, connman, hal and more), but the udev we are currently
-> using (124) is too old for that.
->
-> After a lot of fiddling and reading debian/rules and .spec files I have
-> udev 141 working well on my beagleboard.
->
-> I'd like more people to test udev 141 on their hardware to iron out bugs
-> :) If you have something that's using hal, upgrade to 0.5.12 to make it
-> work again.
->
-> regards,
->
-> Koen
+I guess it'd break on targets where OLDEST_KERNEL isn't set (and hence
+defaults to 2.4.0) but you need a kernel newer than 2.4.0 for correct
+operation.  Presumably all ARM EABI targets fall into that latter
+category, since the TLS syscalls weren't in 2.4.x, and there might be
+some others where glibc's default setting for --enable-kernel is
+something newer than 2.4.0.
+
+All in all I'd be happier with this change if it enforced a minimum
+kernel version of 2.6.16 (i.e. what it used to be) so that there is no
+possibility of versions going backwards for any target.
+
+Incidentally, if there is a default value for OLDEST_KERNEL in
+bitbake.conf then checking the retrieved value against None seems fairly
+futile since that will never be true.
+
+p.
 
 
 
