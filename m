@@ -1,22 +1,23 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M5qKp-00026U-Qg
-	for openembedded-devel@openembedded.org; Mon, 18 May 2009 02:04:04 +0200
-Received: (qmail 21637 invoked from network); 17 May 2009 23:56:50 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 17 May 2009 16:56:50 -0700
-Date: Sun, 17 May 2009 16:56:49 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090517235649.GJ23842@smtp.west.cox.net>
-References: <go498c$bqq$1@ger.gmane.org>
-	<200902261144.46548.openembedded@haerwu.biz>
-	<guq6vh$tmi$1@ger.gmane.org>
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1M61rn-0004am-GF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 14:22:51 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1M61o1-0006og-2e
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 14:18:57 +0200
+Message-ID: <4A115165.9070300@kernelconcepts.de>
+Date: Mon, 18 May 2009 14:15:33 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
-In-Reply-To: <guq6vh$tmi$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] renaming packages/ to recipes/
+To: openembedded-devel@lists.openembedded.org
+References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+In-Reply-To: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+X-Enigmail-Version: 0.95.7
+Subject: Re: [oe-commits] Roman I Khimov : (e)glibc-package: fix kernel version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,42 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 00:04:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 May 2009 12:22:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, May 18, 2009 at 01:35:07AM +0200, Rolf Leggewie wrote:
-> Marcin Juszkiewicz wrote:
->> My addition to this:
->>
->> mkdir recipes-broken
->> git add  recipes-broken
->> git mv recipes/obsolete recipes-broken/obsolete
->> git mv recipes/nonworking recipes-broken/nonworking
->>
->> As this will allow users to set:
->>
->> BBFILES = "/somewhere/oe/recipes/"
->>
->> which is supported by BitBake for years.
->
-> I'd like to revisit this suggestion from Marcin which came up during the  
-> discussion of the packages->recipes renaming.  I think the above makes  
-> sense and should be committed.  I think it would be nice if the folder  
-> was named broken-recipes instead of recipes-broken.  First of all, it  
-> sounds nicer IMHO ;-) but more importantly, this works better with  
-> bash-completion.
+Hi,
 
-I believe with the collection stuff we don't need to do this kind of
-move for easier / smaller local.conf files.
+GIT User account schrieb:
+> +		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
+> +		if kernel_ver is None:
+> +			qemu = "qemu-%s  -s 1048576" % target_arch
+> +		else:
+> +			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
 
-I think what we really need to do (in part because I think there's some
-bitbake changes needed for compelete functionality) we need to bump
-dev's minimum bitbake and update local.conf.sample and the wiki.  Oh,
-and check with Chris to make sure everything he's got in these areas is
-in :)
+are you sure this is a good idea?
+OLDEST_KERNEL defaults to "2.4.0", so this change is likely to break locale
+generation for every machine that doesn't have OLDEST_KERNEL set.
+
+Greetings
+
+Florian
 
 -- 
-Tom Rini
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
