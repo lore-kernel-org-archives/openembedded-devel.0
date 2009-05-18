@@ -1,26 +1,26 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1M692E-00047Q-K4
+	(envelope-from <philb@gnu.org>) id 1M698V-0004JH-47
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 22:02:06 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1M68v9-000J5L-ES
+	Mon, 18 May 2009 22:08:36 +0200
+Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M6917-0003Yg-DS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 23:54:47 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Mon, 18 May 2009 21:01:03 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 May 2009 23:54:48 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+In-Reply-To: <200905182337.25460.khimov@altell.ru>
 References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+	<200905182242.14829.khimov@altell.ru>
 	<1242672893.4226.52.camel@lenovo.internal.reciva.com>
-	<1242675429.4226.56.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1242675429.4226.56.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <200905182354.48480.khimov@altell.ru>
-Subject: Re: [oe-commits] Roman I Khimov : (e) 	glibc-package:	fix	kernel version passed to qemu
+	<200905182337.25460.khimov@altell.ru>
+Date: Mon, 18 May 2009 21:00:35 +0100
+Message-Id: <1242676835.4226.59.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [oe-commits] Roman I Khimov : (e)	glibc-package:	fix	kernel version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,40 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 20:02:07 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 18 May 2009 20:08:37 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Monday 18 May 2009 23:37:09 Phil Blundell wrote:
-> On Mon, 2009-05-18 at 19:54 +0100, Phil Blundell wrote:
-> > On Mon, 2009-05-18 at 22:42 +0400, Roman I Khimov wrote:
-> > > Now, I think that this should be fixed on target level. OLDEST_KERNEL
-> > > should be something sane. Global 2.4.0 from bitbake.conf is good enough
-> > > for most targets, but if we know that none of ARM EABI works with
-> > > kernel versions prior to 2.6.14, we should set OLDEST_KERNEL to 2.6.14
-> > > for that targets. Or higher, of course, if target needs/wants that. If
-> > > that's OK with all, I'm doing a patch.
-> >
-> > I'm still not convinced this is either practical or desirable.  The
-> > kernel versions you mentioned are the minimum required for the
-> > particular version of glibc you were looking at, but different libcs or
-> > different versions of the same libc will have different minimum kernel
-> > requirements even for the same target.  (As an obvious example, the m68k
-> > port has been supported in glibc since its inception and clearly didn't
-> > require a 2.6.18 kernel to start with.)
->
-> The other thing to say about OLDEST_KERNEL is that it was intended to be
-> controlled by the DISTRO, not by the MACHINE.  In other words, it's a
-> policy control ("kernel x.xx is the earliest one we care about; it's
-> okay to omit the compatibility bits for older ones") and not a target
-> attribute ("kernel x.xx is the minimum required for correct
-> functionality").  We don't currently have a variable with the latter
-> semantics and nor am I very convinced that it would be a good idea to
-> introduce one.
+On Mon, 2009-05-18 at 23:37 +0400, Roman I Khimov wrote:
+> On Monday 18 May 2009 22:54:53 Phil Blundell wrote:
+> > I think it would be better to leave the semantics of OLDEST_KERNEL alone
+> > and just teach qemu to use either the same __LINUX_KERNEL_VERSION as
+> > glibc's configure script has settled on, or (perhaps better) just the
+> > newest version that it supports for the given target.
+> 
+> Well, from my point of view, any static version is bad, because it's magic 
+> thrown in. When I've stumbled upon this, I've scratched my head a bit on why 
+> the hell is it 2.6.16, not 2.6.10, not 2.6.20, not anything else but 2.6.16. 
+> Sure enough, it's just something that worked some time ago for someone and was 
+> hardcoded then.
 
-We can add soft 'sane' assignments to machines and then distros can override 
-that to whatever they want if they want to, or not?
+Agreed, a static version is clearly wrong.
+
+> Of course, we can take version from __LINUX_KERNEL_VERSION, but that's more 
+> work and it doesn't fix misconfiguration we have when glibc has to decide that 
+> it knows better its minimal requirements for target.
+
+I'm not sure what you're saying here.  __LINUX_KERNEL_VERSION (from
+config.h) is precisely the version that glibc is compiled to expect (and
+what dl-sysdep checks against).  So, if you run qemu as that same kernel
+version, it is guaranteed to always be compatible with the glibc build
+in question.
+
+p.
+
+
 
 
