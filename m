@@ -1,26 +1,23 @@
-Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
+Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1M658P-0007qQ-CH
+	(envelope-from <denis@denix.org>) id 1M65xI-0005zf-Vw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 17:52:17 +0200
-Received: from gandalf.denix.org ([71.127.60.148]) by vms173015.mailsrvcs.net
+	Mon, 18 May 2009 18:44:53 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KJU00EQKJQ6FGF0@vms173015.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KJU00AVLJWXEJ30@vms173017.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	18 May 2009 10:44:43 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 514B114AF5F; Mon,
-	18 May 2009 11:44:30 -0400 (EDT)
-Date: Mon, 18 May 2009 11:44:30 -0400
+	18 May 2009 10:48:34 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A61E214AF5F; Mon,
+	18 May 2009 11:48:33 -0400 (EDT)
+Date: Mon, 18 May 2009 11:48:33 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <d1b08f940905151407o4b2135bcqd18c8a1c32dfe86c@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090518154430.GB19357@denix.org>
-MIME-version: 1.0
+Message-id: <20090518154833.GC19357@denix.org>
 References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
-	<4A0CE800.5040407@dls.net>
-	<d1b08f940905150033r570ee6d7ta83eb4948b8e2d5a@mail.gmail.com>
-	<b6ebd0a50905150809y36426e69u96ac070414b96029@mail.gmail.com>
-	<d1b08f940905151407o4b2135bcqd18c8a1c32dfe86c@mail.gmail.com>
+	<20090513212546.GF32320@denix.org>
+MIME-version: 1.0
+In-reply-to: <20090513212546.GF32320@denix.org>
 User-Agent: Mutt/1.5.16 (2007-06-09)
 Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown	implementation and use it by default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,31 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 15:52:27 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
+X-List-Received-Date: Mon, 18 May 2009 16:44:58 -0000
+Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Fri, May 15, 2009 at 11:07:33PM +0200, Andrea Adami wrote:
-> >> What about adding a -u (update) option? This would just give old=
- behaviour.
-> >
-> > I don't understand what you'd want -u to do? =A0This patch doesn'=
-t
-> > modify bitbake,
->=20
-> Why? Taboo?
-> Adding the 'update' option to bitbake would be logic at this point.
-> Buildscripts would just have to change to 'bitbake -u'.
->=20
-> (see Gentoo's emerge)
+On Wed, May 13, 2009 at 05:25:46PM -0400, Denys Dmytriyenko wrote:
+> On Wed, May 13, 2009 at 01:53:18PM -0700, Chris Larson wrote:
+> > For each recipe which completes a task successfully, this emits the current
+> > version into ${TMPDIR}/versions.conf as a PREFERRED_VERSION line.
+> > ${TMPDIR}/versions.conf and conf/versions.conf are automatically included,
+> > in that order, in subsequent builds, to provide more deterinistic builds by
+> > default, and to let the user make the lockdown persist via a simple cp
+> > command.
+> > 
+> > Assuming that the latest ncurses in the recipes is 5.7, and that 5.7 is
+> > preferred over 5.3 by default given any distro version preferences, if they
+> > exist, the following are examples of its behavior:
+> > 
+> > $ rm -rf tmp
+> > $ bitbake ncurses-5.3
+> > $ bitbake -c clean ncurses
+> > $ bitbake ncurses # builds ncurses 5.3
+> > 
+> > $ cp tmp/versions.conf conf/
+> > $ rm -rf tmp
+> > $ bitbake ncurses # builds ncurses 5.3
+> 
+> Very nice! Let me try it here...
+> 
+> > Signed-off-by: Chris Larson <clarson@mvista.com>
 
-I guess since bitbake is not part of OE (unlike Gentoo's emerge/porta=
-ge), it=20
-is less transparent for introducing new features like this one...
+Chris,
 
---=20
+Will you be sending an updated version of the patch, which handles TMPDIR 
+overwritten in local.conf, as we discussed last week? Thanks.
+
+-- 
 Denys
-
 
 
