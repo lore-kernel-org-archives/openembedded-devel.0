@@ -1,26 +1,26 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M686G-0004yD-Em
+	(envelope-from <denis@denix.org>) id 1M68A2-000546-CN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 21:02:12 +0200
-Received: from 88-109-251-122.dynamic.dsl.as9105.com ([88.109.251.122]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M67zC-0000jI-EK
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 19:54:54 +0100
-From: Phil Blundell <philb@gnu.org>
+	Mon, 18 May 2009 21:06:06 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KJU00GPDSPFUH01@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	18 May 2009 13:58:32 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EF72814AF5F; Mon,
+	18 May 2009 14:58:26 -0400 (EDT)
+Date: Mon, 18 May 2009 14:58:26 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200905182242.14829.khimov@altell.ru>
-References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
-	<200905181812.54222.khimov@altell.ru>
-	<1242657603.9080.122.camel@mill.internal.reciva.com>
-	<200905182242.14829.khimov@altell.ru>
-Date: Mon, 18 May 2009 19:54:53 +0100
-Message-Id: <1242672893.4226.52.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [oe-commits] Roman I Khimov : (e)	glibc-package:	fix	kernel version passed to qemu
+Message-id: <20090518185826.GD19357@denix.org>
+References: <1242247998-30548-1-git-send-email-clarson@mvista.com>
+	<20090513212546.GF32320@denix.org> <20090518154833.GC19357@denix.org>
+	<4A11A22B.7000206@mvista.com>
+MIME-version: 1.0
+In-reply-to: <4A11A22B.7000206@mvista.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] bitbake.conf, freeze.inc: Add version lockdown	implementation and use it by default.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,33 +34,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 19:02:12 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 May 2009 19:06:06 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Mon, 2009-05-18 at 22:42 +0400, Roman I Khimov wrote:
-> Now, I think that this should be fixed on target level. OLDEST_KERNEL should 
-> be something sane. Global 2.4.0 from bitbake.conf is good enough for most 
-> targets, but if we know that none of ARM EABI works with kernel versions prior 
-> to 2.6.14, we should set OLDEST_KERNEL to 2.6.14 for that targets. Or higher, 
-> of course, if target needs/wants that. If that's OK with all, I'm doing a 
-> patch.
+On Mon, May 18, 2009 at 11:00:11AM -0700, Christopher Larson wrote:
+> Denys Dmytriyenko wrote:
+>> On Wed, May 13, 2009 at 05:25:46PM -0400, Denys Dmytriyenko wrote:
+>>   
+>>> On Wed, May 13, 2009 at 01:53:18PM -0700, Chris Larson wrote:
+>>>     
+>>>> For each recipe which completes a task successfully, this emits the 
+>>>> current
+>>>> version into ${TMPDIR}/versions.conf as a PREFERRED_VERSION line.
+>>>> ${TMPDIR}/versions.conf and conf/versions.conf are automatically 
+>>>> included,
+>>>> in that order, in subsequent builds, to provide more deterinistic builds 
+>>>> by
+>>>> default, and to let the user make the lockdown persist via a simple cp
+>>>> command.
+>>>>
+>>>> Assuming that the latest ncurses in the recipes is 5.7, and that 5.7 is
+>>>> preferred over 5.3 by default given any distro version preferences, if 
+>>>> they
+>>>> exist, the following are examples of its behavior:
+>>>>
+>>>> $ rm -rf tmp
+>>>> $ bitbake ncurses-5.3
+>>>> $ bitbake -c clean ncurses
+>>>> $ bitbake ncurses # builds ncurses 5.3
+>>>>
+>>>> $ cp tmp/versions.conf conf/
+>>>> $ rm -rf tmp
+>>>> $ bitbake ncurses # builds ncurses 5.3
+>>>>       
+>>> Very nice! Let me try it here...
+>>>
+>>>     
+>>>> Signed-off-by: Chris Larson <clarson@mvista.com>
+>>>>       
+>>
+>> Chris,
+>>
+>> Will you be sending an updated version of the patch, which handles TMPDIR 
+>> overwritten in local.conf, as we discussed last week? Thanks.
+> Yep, I'm going to make the thing opt-in rather than default, since 
+> apparently not everyone wants it as default behavior, and change it to use 
+> ?= assignments, and leave it at that.
 
-I'm still not convinced this is either practical or desirable.  The
-kernel versions you mentioned are the minimum required for the
-particular version of glibc you were looking at, but different libcs or
-different versions of the same libc will have different minimum kernel
-requirements even for the same target.  (As an obvious example, the m68k
-port has been supported in glibc since its inception and clearly didn't
-require a 2.6.18 kernel to start with.)
+Hmm, I'm using the updated version of freeze.inc with weak assignments and 
+there seems to be an issue with picking the correct version. Or maybe I'm 
+doing something wrong...
 
-I think it would be better to leave the semantics of OLDEST_KERNEL alone
-and just teach qemu to use either the same __LINUX_KERNEL_VERSION as
-glibc's configure script has settled on, or (perhaps better) just the
-newest version that it supports for the given target.
+I have a customized u-boot recipe, based on 1.3.4, which sets PV as "1.3.4" 
+and PR as "myX.Y.Z". Having 2 revisions of the above recipe with X.Y.Z = 
+"2.0.0" and "2.1.0", by default BitBake picks the correct one with higher PR - 
+i.e. "1.3.4-my2.1.0". Then when freeze.inc sets PREFERRED_VERSION to "1.3.4", 
+it starts picking the lowest version, i.e. "1.3.4-my2.0.0". What gives? Any 
+ideas?
 
-p.
-
-
+-- 
+Denys
 
 
