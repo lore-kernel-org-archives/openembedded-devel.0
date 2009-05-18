@@ -1,30 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1M63DB-0001FU-NR
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 15:49:03 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M635x-0003oY-0A
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 14:41:33 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1M635t-0001vf-Pt
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 14:41:29 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200905181716.24601.khimov@altell.ru>
-References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
-	<4A115165.9070300@kernelconcepts.de>
-	<200905181716.24601.khimov@altell.ru>
-Date: Mon, 18 May 2009 14:41:29 +0100
-Message-Id: <1242654089.9080.111.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [oe-commits] Roman I Khimov : (e)glibc-package: fix	kernel version passed to qemu
+	(envelope-from <hariseldon78@gmail.com>) id 1M63RM-0001uI-1j
+	for openembedded-devel@openembedded.org; Mon, 18 May 2009 16:03:40 +0200
+Received: by ewy20 with SMTP id 20so4007806ewy.12
+	for <openembedded-devel@openembedded.org>;
+	Mon, 18 May 2009 06:56:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=VIXbunvPmmLNzScwZJkl7ub1dvdvAcuzBXaTbncv3Cw=;
+	b=HLc98FKlJP/NnTZHLU8U/SYD+3hLzqCdJDOnx+9uUl6rWv15IXXtUfEJ617RwTsYPw
+	ZiRV4gf8DxAPGvEjguvVCpiuE3Y8/MCuEeBRA3TIUyAtYEGjYGzslgMVGlCFWOM//sc3
+	iht2OdhSuZkekTdfWbG4IBo0vjCAV3vZFSjb8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=QNpbapKDUHTDkPmGeyDEklZzyHBWyPHT1pJycfqnRZMoqXaSaw2Vh62UY6eXk52x9X
+	vLQ3VRTjTje7YHV2hy27ko1K3N59USRKtkawHs9yMDcrNMXMAOBcV6q9n43kAQm/KQQh
+	w1bdxGaVuspG8N1NF54gHQihUr43npTtAubIc=
+MIME-Version: 1.0
+Sender: hariseldon78@gmail.com
+Received: by 10.216.18.195 with SMTP id l45mr2107995wel.59.1242654981889; Mon, 
+	18 May 2009 06:56:21 -0700 (PDT)
+Date: Mon, 18 May 2009 15:56:21 +0200
+X-Google-Sender-Auth: 7a9429770d9006b3
+Message-ID: <aee831ab0905180656q31941a95jeedf18f65343c27f@mail.gmail.com>
+From: Previdi Roberto <previdi.roberto@gmail.com>
+To: openembedded-devel@openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: asking for patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,46 +42,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 13:49:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 18 May 2009 14:03:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-05-18 at 17:16 +0400, Roman I Khimov wrote:
-> On Monday 18 May 2009 16:15:33 Florian Boor wrote:
-> > Hi,
-> >
-> > GIT User account schrieb:
-> > > +		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
-> > > +		if kernel_ver is None:
-> > > +			qemu = "qemu-%s  -s 1048576" % target_arch
-> > > +		else:
-> > > +			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
-> >
-> > are you sure this is a good idea?
-> > OLDEST_KERNEL defaults to "2.4.0", so this change is likely to break locale
-> > generation for every machine that doesn't have OLDEST_KERNEL set.
-> 
-> I've not heard yet of this really breaking something. And frankly I don't see 
-> any reason for that. If it actually does - feel free to shout and scream of 
-> course, we'll think how to handle it better.
+Hello. Please could someone give a look at this patch for the zenity
+package?
+http://patchwork.openembedded.org/patch/433/
+It's been queued since 20 days ago, and many more recent patches have
+already been reviewed..
 
-I guess it'd break on targets where OLDEST_KERNEL isn't set (and hence
-defaults to 2.4.0) but you need a kernel newer than 2.4.0 for correct
-operation.  Presumably all ARM EABI targets fall into that latter
-category, since the TLS syscalls weren't in 2.4.x, and there might be
-some others where glibc's default setting for --enable-kernel is
-something newer than 2.4.0.
-
-All in all I'd be happier with this change if it enforced a minimum
-kernel version of 2.6.16 (i.e. what it used to be) so that there is no
-possibility of versions going backwards for any target.
-
-Incidentally, if there is a default value for OLDEST_KERNEL in
-bitbake.conf then checking the retrieved value against None seems fairly
-futile since that will never be true.
-
-p.
-
-
-
+-- 
+roby
 
