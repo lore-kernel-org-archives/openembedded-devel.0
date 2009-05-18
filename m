@@ -1,26 +1,31 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1M63hu-0002XH-7i
+	(envelope-from <pb@reciva.com>) id 1M647c-0000Rl-Rm
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 16:20:47 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1M63aq-000Exd-LL
+	Mon, 18 May 2009 16:47:21 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M640Z-0006X2-LG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 May 2009 18:13:28 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Mon, 18 May 2009 15:40:03 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1M640Z-0002QH-Ds
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 18 May 2009 15:40:03 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 May 2009 18:12:53 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+In-Reply-To: <200905181812.54222.khimov@altell.ru>
 References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
 	<200905181716.24601.khimov@altell.ru>
 	<1242654089.9080.111.camel@mill.internal.reciva.com>
-In-Reply-To: <1242654089.9080.111.camel@mill.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <200905181812.54222.khimov@altell.ru>
-Subject: Re: [oe-commits] Roman I Khimov : (e)glibc-package: fix	kernel version passed to qemu
+	<200905181812.54222.khimov@altell.ru>
+Date: Mon, 18 May 2009 15:40:03 +0100
+Message-Id: <1242657603.9080.122.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [oe-commits] Roman I Khimov : (e)glibc-package:	fix	kernel version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,57 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 14:20:48 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 18 May 2009 14:47:21 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Monday 18 May 2009 17:41:29 Phil Blundell wrote:
-> On Mon, 2009-05-18 at 17:16 +0400, Roman I Khimov wrote:
-> > On Monday 18 May 2009 16:15:33 Florian Boor wrote:
-> > > Hi,
-> > >
-> > > GIT User account schrieb:
-> > > > +		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
-> > > > +		if kernel_ver is None:
-> > > > +			qemu = "qemu-%s  -s 1048576" % target_arch
-> > > > +		else:
-> > > > +			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
-> > >
-> > > are you sure this is a good idea?
-> > > OLDEST_KERNEL defaults to "2.4.0", so this change is likely to break
-> > > locale generation for every machine that doesn't have OLDEST_KERNEL
-> > > set.
-> >
-> > I've not heard yet of this really breaking something. And frankly I don't
-> > see any reason for that. If it actually does - feel free to shout and
-> > scream of course, we'll think how to handle it better.
->
-> I guess it'd break on targets where OLDEST_KERNEL isn't set (and hence
-> defaults to 2.4.0) but you need a kernel newer than 2.4.0 for correct
-> operation.  Presumably all ARM EABI targets fall into that latter
-> category, since the TLS syscalls weren't in 2.4.x, and there might be
-> some others where glibc's default setting for --enable-kernel is
-> something newer than 2.4.0.
+On Mon, 2009-05-18 at 18:12 +0400, Roman I Khimov wrote:
+> If any target device requires kernel version not less then $SMTH, it must set 
+> it via OLDEST_KERNEL, isn't it?
 
-If any target device requires kernel version not less then $SMTH, it must set 
-it via OLDEST_KERNEL, isn't it? So if target device doesn't specify any 
-OLDEST_KERNEL, it should be OK with 2.4.0. And then if glibc is configured for 
-2.4.0 it either runs on host's 2.6.smth or not (presumably runs fine), 
-regardless of what it thinks about the kernel version. Or am I missing 
-something?
+No, this has never previously been a constraint.  ${OLDEST_KERNEL}
+exists as a hint to say "there is no need to include support for kernels
+older than this one", but it doesn't necessarily work the other way
+around: there is no guarantee that ${OLDEST_KERNEL} is actually a
+sufficient version for correct operation.
 
-> Incidentally, if there is a default value for OLDEST_KERNEL in
-> bitbake.conf then checking the retrieved value against None seems fairly
-> futile since that will never be true.
+If OLDEST_KERNEL were to be interpreted more widely, as you propose, it
+would not make much sense to have a global default of 2.4.0 since there
+are all kinds of targets that won't run with such an old version.
 
-Well, things happen. We can change it to
+p.
 
-if kernel_ver is None:
-	bb.fatal("Your config is completely broken")
-...
 
-of course.
 
 
