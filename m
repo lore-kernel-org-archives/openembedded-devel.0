@@ -1,22 +1,25 @@
-Received: from [209.172.120.180] (helo=skymoon.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ckamas@finesse.com>) id 1M6CId-00060Q-Va
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 01:31:16 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M6GMc-0007Pw-6J
+	for openembedded-devel@openembedded.org; Tue, 19 May 2009 05:51:38 +0200
+Received: (qmail 655 invoked from network); 19 May 2009 03:44:18 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 18 May 2009 20:44:18 -0700
+Date: Mon, 18 May 2009 20:44:17 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090519034417.GM23842@smtp.west.cox.net>
+References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+	<200905181812.54222.khimov@altell.ru>
+	<1242657603.9080.122.camel@mill.internal.reciva.com>
+	<200905182242.14829.khimov@altell.ru>
+	<1242672893.4226.52.camel@lenovo.internal.reciva.com>
+	<1242675429.4226.56.camel@lenovo.internal.reciva.com>
 MIME-Version: 1.0
-Date: Mon, 18 May 2009 16:23:56 -0700
-Message-ID: <C62896630644CE43BF64B0FF0AC27F0E05AF89@mail.ad.skymv.com>
-In-Reply-To: <gupktd$gr8$1@ger.gmane.org>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Kernel modules
-Thread-Index: AcnXHWaMTkeYyStEQCmEbp1SEi1gjwA8jETQ
-References: <C62896630644CE43BF64B0FF0AC27F0E05AF1C@mail.ad.skymv.com>	<gulv2v$l9r$1@ger.gmane.org><C62896630644CE43BF64B0FF0AC27F0E01C6E5@mail.ad.skymv.com>
-	<gupktd$gr8$1@ger.gmane.org>
-From: "Chuck Kamas" <ckamas@finesse.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Kernel modules
+In-Reply-To: <1242675429.4226.56.camel@lenovo.internal.reciva.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [oe-commits] Roman I Khimov : (e) glibc-package: fix kernel	version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,44 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2009 23:31:16 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 May 2009 03:51:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Koen,
+On Mon, May 18, 2009 at 08:37:09PM +0100, Phil Blundell wrote:
+> On Mon, 2009-05-18 at 19:54 +0100, Phil Blundell wrote:
+> > On Mon, 2009-05-18 at 22:42 +0400, Roman I Khimov wrote:
+> > > Now, I think that this should be fixed on target level. OLDEST_KERNEL should 
+> > > be something sane. Global 2.4.0 from bitbake.conf is good enough for most 
+> > > targets, but if we know that none of ARM EABI works with kernel versions prior 
+> > > to 2.6.14, we should set OLDEST_KERNEL to 2.6.14 for that targets. Or higher, 
+> > > of course, if target needs/wants that. If that's OK with all, I'm doing a 
+> > > patch.
+> > 
+> > I'm still not convinced this is either practical or desirable.  The
+> > kernel versions you mentioned are the minimum required for the
+> > particular version of glibc you were looking at, but different libcs or
+> > different versions of the same libc will have different minimum kernel
+> > requirements even for the same target.  (As an obvious example, the m68k
+> > port has been supported in glibc since its inception and clearly didn't
+> > require a 2.6.18 kernel to start with.)
+> 
+> The other thing to say about OLDEST_KERNEL is that it was intended to be
+> controlled by the DISTRO, not by the MACHINE.  In other words, it's a
+> policy control ("kernel x.xx is the earliest one we care about; it's
+> okay to omit the compatibility bits for older ones") and not a target
+> attribute ("kernel x.xx is the minimum required for correct
+> functionality").  We don't currently have a variable with the latter
+> semantics and nor am I very convinced that it would be a good idea to
+> introduce one.
 
-Thanks, I'll give that a try.
+I've re-read most of the thread, and I think what we need to do is:
 
-Chuck
+- Acknowledge we've not set OLDEST_KERNEL in a sane way for a while.
+  Except in some _machines_ we just use the 2.4.0 default, and glibc
+  corrects it up.
 
+- Acknowledge this is a GLIBC / EGLIBC only variable and move it over,
+  with weak assignments to sane values in glibc.inc / eglibc.inc.  We
+  might have to have some other possibilities commented out explaining
+  what they do.  For example, arm-linux (oabi), non-nptl x86, etc.
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Koen Kooi
-Sent: Sunday, May 17, 2009 11:27 AM
-To: openembedded-devel@openembedded.org
-Subject: Re: [oe] Kernel modules
-
-On 17-05-09 20:13, Chuck Kamas wrote:
-> Thanks,  I add a rrecommends for each kernel module I have in my
-.config.
->
-> BTW, is there a way to have OE scan the kernel .config and
-automatically pull in all the kernel modules?
-
-RRECOMMENDS =3D "kernel-modules"
-
-regards,
-
-Koen
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Tom Rini
 
 
