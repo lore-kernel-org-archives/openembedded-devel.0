@@ -1,38 +1,20 @@
-Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <taroth@gmail.com>) id 1M6VPw-0007w3-C8
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 21:56:04 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so5816ywk.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2009 12:48:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=xXURgnkYbUCkT2rUt8Jeiog5NAYK+Xu5wIZumS0hPv8=;
-	b=Phizm+nRnQEOOQGx/pDOmDiPu91JmKsMiBSvldupQUJor9umA46vk1lWd6EOJVb7yZ
-	bkkLkpMzQ9TNZkjRfCN6qa50W/1S/CdI7IIufpG+A1t543X3/A8Aqlg+y7hHdSmSUCMF
-	gBFymo7PMmcaHssDb9jPBKKXGWl3+L0yhQdgE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=YW0hTVF+GhNY1FDtzhJ4vI+yzHYi5DVaYtydxaM7fEfDwjWW+CuRQ3k79ClBtqvILq
-	kV4Z5dFDwUzRghIikVSn+hnAvrvCKnYx7Lunmdk2OxmXXxDK1OvvtK6REFve3bOji/Lp
-	RcPc+L230m9GAx78dYGNTbBgXxF1qB+G+GjSg=
+	(envelope-from <philip@balister.org>) id 1M6VQf-0007xX-U5
+	for openembedded-devel@openembedded.org; Tue, 19 May 2009 21:56:50 +0200
+Received: (qmail 7431 invoked by uid 1003); 19 May 2009 19:49:23 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 19 May 2009 19:49:23 -0000
+Message-ID: <4A130D42.5080806@balister.org>
+Date: Tue, 19 May 2009 15:49:22 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Received: by 10.150.219.8 with SMTP id r8mr837155ybg.330.1242762520501; Tue, 
-	19 May 2009 12:48:40 -0700 (PDT)
-In-Reply-To: <20090518153156.GA19357@denix.org>
-References: <alpine.DEB.1.00.0905111020490.11037@localhost.localdomain>
-	<20090511172937.GA23731@denix.org>
-	<f46da1cf0905120844m41413452o2eb88da084bc5c06@mail.gmail.com>
-	<20090518153156.GA19357@denix.org>
-Date: Tue, 19 May 2009 12:48:40 -0700
-Message-ID: <f46da1cf0905191248h1c8d5e95s4038913d2111fbc5@mail.gmail.com>
-From: "Theodore A. Roth" <taroth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] evtest: Fixed GNU_HASH QA error.
+References: <guuctg$d52$1@ger.gmane.org> <guv1td$p0n$1@ger.gmane.org>
+In-Reply-To: <guv1td$p0n$1@ger.gmane.org>
+Subject: Re: Patches in patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +28,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 19:56:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 19 May 2009 19:56:50 -0000
+X-Groupsio-MsgNum: 10504
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms060702020006070003000605"
+
+--------------ms060702020006070003000605
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, May 18, 2009 at 8:31 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Tue, May 12, 2009 at 08:44:42AM -0700, Theodore A. Roth wrote:
->> On Mon, May 11, 2009 at 10:29 AM, Denys Dmytriyenko <denis@denix.org> wrote:
->> > On Mon, May 11, 2009 at 10:23:18AM -0700, Theodore A. Roth wrote:
->> >>
->> >> Signed-off-by: Theodore A. Roth <taroth@gmail.com>
->> >
->> > Acked-by: Denys Dmytriyenko <denis@denix.org>
+Dmitry Eremin-Solenikov wrote:
+> Koen Kooi wrote:
+> 
+>> Hi,
 >>
->> I do not have commit access so someone will need to apply this.
->
-> Theodore,
->
-> I believe Mickey offered you a commit access last time. Not sure if it went
-> through though:
->
-> http://thread.gmane.org/gmane.comp.handhelds.openembedded/21915/focus=21920
+>> The following patches in patchwork still have the 'new' status:
+>>
+> 
+> What is the policy/process for gaining the ability to change/comment
+> other people patches in patchwork? I'd like to do some work on it
+> but I'd like to have ability to reflect the status of applied patches
+> in the patchwork.
 
-Yes. I sent him my public ssh key, but got no response.
+I don't think you can directly comment in patchwork. If you want to 
+change status you need to register. I've been changing everyone to be 
+able to change patch status. Please note, if you have accents in your 
+username, I cannot change your patchwork privileges.
 
-Ted Roth
+Does this answer your question?
 
+Philip
 
+--------------ms060702020006070003000605
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
+OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
+Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
+MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
+EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
+V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
+ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
+ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
+SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
+n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
+R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
+/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
+kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
+Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
+urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxOTE5
+NDkyMlowIwYJKoZIhvcNAQkEMRYEFFfaUtXrvWNTjf4c1CgeMiPPiotNMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
+/DANBgkqhkiG9w0BAQEFAASCAQBYax1zApJ+Z4S/pRGsuPYCp9yp2oHvHX1Q/zrAu8X2CuPuxfQc
+N2rmead0hv1Nz8akkrrXu0CIHpTKw8dJjopC0V2icq5mCHI58c6VmIA5FTvol9nhqazmguLczNA3
+GaySMo8uRWcmCe3Eh2frNqv0NZmqphHKnQrfGtCALOM+6q0LW5dmn1/RXrx2oj5rUhTCPsPLG37p
++YK/FTesVdpswtIjD/dGeAZPdmp9sSp3EEEtcBiNOJLy1znAz+BdW0tLeItQElJfO8DceCJjlluL
+1EzKX53cPCkdBb5JbV9Tc4klVkO7RzDp6lpDQsj6l1MbW5LZxYJVQtWopoRkRUCTAAAAAAAA
+
+--------------ms060702020006070003000605--
