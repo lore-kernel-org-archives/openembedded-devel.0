@@ -1,37 +1,20 @@
-Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
+Received: from [81.169.183.159] (helo=coruscant.onosendai.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1M6OOs-00047W-4M
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 14:26:30 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so2187275ywk.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2009 05:19:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=6veP/t9NE/rd8nPgT9WgKFkxUuZvgdleick9eW0Ml4I=;
-	b=uNy6Vzx5UQV+p5RuJqZcbGWZQkOKC6gkAdy6EzbyywR8cCuCmHoQ+WrRNyX0KpI0Hw
-	Y3rhf8xBve7qSCfLWd6+ePNClpdbugvI1d1Vqe9EuB1Hyay6UwkrYe3wzRWWEd6jCRGP
-	KqeyRWDxInW28WBCrP8Qk3pDsZYwlRNdIgMFY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=n9yDKqJkTlxrgpVacBm+GRkWYeZkdIC37RGQ9aLE8VhTU+EJ8x7Guf//fUkFpmBwm/
-	9YhBlqJKBVq8p2bI8VmE0PxuC+J9eqG9RiYrxox5JkKkB9yZGkynEo7KjloXX9GcSRAy
-	hQ83TMkiExgPt21qM67fiUdJul+1xiMWypTAk=
+	(envelope-from <zecke@selfish.org>) id 1M6OWZ-0003Dv-At
+	for openembedded-devel@openembedded.org; Tue, 19 May 2009 14:34:27 +0200
+Received: from 123-192-147-94.dynamic.kbronet.com.tw ([123.192.147.94]
+	helo=tamarin.localnet) by coruscant.onosendai.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <zecke@selfish.org>)
+	id 1M6OPR-0004wh-5i; Tue, 19 May 2009 14:27:05 +0200
+From: Holger Freyther <zecke@selfish.org>
+To: bitbake-dev@lists.berlios.de,
+ openembedded-devel@openembedded.org
+Date: Tue, 19 May 2009 14:26:58 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; i686; ; )
 MIME-Version: 1.0
-Received: by 10.100.241.17 with SMTP id o17mr8246359anh.134.1242735548116; 
-	Tue, 19 May 2009 05:19:08 -0700 (PDT)
-In-Reply-To: <guq6vh$tmi$1@ger.gmane.org>
-References: <go498c$bqq$1@ger.gmane.org>
-	<200902261144.46548.openembedded@haerwu.biz>
-	<guq6vh$tmi$1@ger.gmane.org>
-Date: Tue, 19 May 2009 14:19:08 +0200
-Message-ID: <ac9c93b10905190519h5cfa8a96h688bbc00271de76d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] renaming packages/ to recipes/
+Message-Id: <200905191426.59382.zecke@selfish.org>
+Subject: Bitbake parser work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,51 +28,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 12:26:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 May 2009 12:34:28 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-2009/5/18 Rolf Leggewie <no2spam@nospam.arcornews.de>:
-> Marcin Juszkiewicz wrote:
->>
->> My addition to this:
->>
->> mkdir recipes-broken
->> git add =A0recipes-broken
->> git mv recipes/obsolete recipes-broken/obsolete
->> git mv recipes/nonworking recipes-broken/nonworking
->>
->> As this will allow users to set:
->>
->> BBFILES =3D "/somewhere/oe/recipes/"
->>
->> which is supported by BitBake for years.
->
-> I'd like to revisit this suggestion from Marcin which came up during the
-> discussion of the packages->recipes renaming. =A0I think the above makes =
-sense
-> and should be committed. =A0I think it would be nice if the folder was na=
-med
-> broken-recipes instead of recipes-broken. =A0First of all, it sounds nice=
-r
-> IMHO ;-) but more importantly, this works better with bash-completion.
->
-> Reopening discussion for this change.
+Hey,
 
-I think adding recipes-broken (or broken-recipes) is a bad idea.
-It is quite possible that a recipe is broken only for some platforms
-(e.g. because they use an older libc or gcc, or because functionality
-is not working in the machine specific parts.
-In that case I can image we end up in a recipe being shifted around.
-Not really a good plan.
-Unless of course we end up with some good rules on when a recipe
-should be moved to broken.
+some brief notes about the horror of the current bitbake parser. I don't know 
+what state of the art parsers do, I don't have a book on compiler design but I 
+would be surprised if they work like bitbake.
 
-If I look at tinderbox I see various recipes that do not build for
-some archtectures or configurations.
+What is so horrible about our parser?
 
-Just my two cents
+	- It is line based, using python file.readline
+	- Each line gets matched against several regexps
+	- Then some state to only match a subset of regexps
+	- It is parsing the same files all over again(*)
+	- Every regexp that got matched is directly converted to
+	  calls into bb.data.setVar*.
 
-Frans
+What have I done this time:
+	1.) In the function that match a line of input, move all bb.data.set*
+	     to methods
+	2.) move these methods to ast.py
+	3.) convert the methods to create nodes for our abstract syntax list
+	4.) immediately evaluate these nodes...
+	5.) kill the data parameter from feeder (line based matching) and
+            evaluate all nodes after they have been parsed
+	6.) on top of these I'm able to implement a cache to not reparse
+	    files I have seen...
+
+What are known problems:
+       classes/package.bbclass messes with internals of the parser
+       and needs to be changed.
+
+	I still search for a good cache class in python, currently all .bbclass and 
+       .inc are cached.
+
+Where can it be found:
+	http://page.mi.fu-berlin.de/~freyther/bitbake/parser
+
+What other tricks can we play:
+	- We should ply to get the lexing time down... 
+	- Or cache the parsed statement list..
+
+obviously please review the patches, fix OE, get it merged :)
+
+z.
+
+
+
+(*) Every file doing inherit autotools, pkgconfig will lead to parsing these two 
+classes again
 
 
