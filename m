@@ -1,26 +1,20 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1M6RJz-0002RY-8k
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 17:33:39 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1M6RCp-0007a2-1j
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 19:26:15 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M6TB7-000127-RI
+	for openembedded-devel@openembedded.org; Tue, 19 May 2009 19:32:38 +0200
+Received: (qmail 4816 invoked from network); 19 May 2009 17:25:13 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 19 May 2009 10:25:13 -0700
+Date: Tue, 19 May 2009 10:25:13 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 May 2009 19:26:15 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
-References: <20090515183512.GZ7973@smtp.west.cox.net>
-	<1242497080-28506-2-git-send-email-khimov@altell.ru>
-	<1242745717.18648.151.camel@hammer.suse.cz>
-In-Reply-To: <1242745717.18648.151.camel@hammer.suse.cz>
+Message-ID: <20090519172513.GO23842@smtp.west.cox.net>
+References: <1242094570-12734-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-Message-Id: <200905191926.15486.khimov@altell.ru>
-Subject: Re: [PATCH 2/3] (e)glibc-package: set LD_LIBRARY_PATH on binary locale generation
+In-Reply-To: <1242094570-12734-1-git-send-email-raj.khem@gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] python-native_2.6.1.bb: Add zlib-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +28,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 15:33:39 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 May 2009 17:32:39 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tuesday 19 May 2009 19:08:37 Stanislav Brabec wrote:
-> Roman I Khimov wrote:
-> >  		localedef_opts = "--force --old-style --no-archive --prefix=%s
-> > --inputfile=%s/i18n/locales/%s --charmap=%s %s" % (treedir, datadir,
-> > locale, encoding, name) -		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s
-> > %s/bin/localedef %s" % (path, i18npath, qemu, treedir, treedir,
-> > localedef_opts) +		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s -E
-> > LD_LIBRARY_PATH=%s %s/bin/localedef %s" % (path, i18npath, qemu, treedir,
-> > ldlibdir, treedir, localedef_opts)
->
-> It breaks in angstrom build for spitz. My qemu-arm from
-> qemu-native-0.9.1+svnr4242-r15 (default for angstrom) apparently does
-> not understand "-E". After reverting this patch (or removing -E argument
-> from the command line manually) it works again.
+On Mon, May 11, 2009 at 07:16:10PM -0700, Khem Raj wrote:
 
-Sorry for breaking the build, working on fix. Can you try qemu-native 0.10.3, 
-maybe it'll work right out of the box for you?
+> 	Do not use --with-zlib instead depend on zlib-native
+
+Acked-by: Tom Rini <trini@embeddedalley.com>
+
+And please push this soon, I need to propose adding readline-native :)
+
+> ---
+>  recipes/python/python-native_2.6.1.bb |    3 +--
+>  1 files changed, 1 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/python/python-native_2.6.1.bb b/recipes/python/python-native_2.6.1.bb
+> index febe271..ca567a1 100644
+> --- a/recipes/python/python-native_2.6.1.bb
+> +++ b/recipes/python/python-native_2.6.1.bb
+> @@ -1,5 +1,5 @@
+>  require python.inc
+> -DEPENDS = "openssl-native bzip2-full-native"
+> +DEPENDS = "openssl-native bzip2-full-native zlib-native"
+>  
+>  SRC_URI = "\
+>    http://www.python.org/ftp/python/${PV}/Python-${PV}.tar.bz2 \
+> @@ -22,7 +22,6 @@ EXTRA_OEMAKE = '\
+>    STAGING_LIBDIR=${STAGING_LIBDIR_NATIVE} \
+>    STAGING_INCDIR=${STAGING_INCDIR_NATIVE} \
+>  '
+> -EXTRA_OECONF += "--with-zlib"
+>  
+>  do_stage_append() {
+>  	install -m 0755 Parser/pgen ${STAGING_BINDIR_NATIVE}/pgen
+> -- 
+> 1.6.0.4
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+
+-- 
+Tom Rini
 
 
