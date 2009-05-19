@@ -1,26 +1,31 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1M6LDn-00063M-8s
+	(envelope-from <pb@reciva.com>) id 1M6LRz-0006c3-Kt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 11:02:51 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1M6L6b-0005Fp-KT
+	Tue, 19 May 2009 11:17:31 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M6LKs-0007fb-RN
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 12:55:25 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Tue, 19 May 2009 10:10:10 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1M6LKs-0004WD-Am
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 May 2009 10:10:10 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 May 2009 12:55:22 +0400
-User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+In-Reply-To: <200905191255.23223.khimov@altell.ru>
 References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
 	<877i0e2ejf.wl%peter@chubb.wattle.id.au>
 	<1242718731.4226.72.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1242718731.4226.72.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <200905191255.23223.khimov@altell.ru>
-Subject: Re: [oe-commits] Roman I Khimov	: (e) 	glibc-package:	fix	kernel version passed to qemu
+	<200905191255.23223.khimov@altell.ru>
+Date: Tue, 19 May 2009 10:10:09 +0100
+Message-Id: <1242724209.9080.172.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [oe-commits] Roman I Khimov	: (e)	glibc-package:	fix	kernel version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,23 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 09:02:51 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 19 May 2009 09:17:32 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Tuesday 19 May 2009 11:38:51 Phil Blundell wrote:
-> I think you misunderstood what I was proposing.  Glibc would continue to
-> be configured just as it is now: the only difference would be that
-> _qemu_ would be set to emulate the newest kernel version that it
-> supports, rather than a fixed version as previously.
+On Tue, 2009-05-19 at 12:55 +0400, Roman I Khimov wrote:
+> As I can tell from a quick glance, there is no special handling for different 
+> kernel versions in QEMU. It translates syscalls from target application to 
+> host kernel and if we tell it to fake kernel version reported to application 
+> it does so and nothing more (linux-user/syscall.c in qemu). So I don't think 
+> there is any newest kernel version supported by QEMU for any target, it just 
+> doesn't care.
 
-As I can tell from a quick glance, there is no special handling for different 
-kernel versions in QEMU. It translates syscalls from target application to 
-host kernel and if we tell it to fake kernel version reported to application 
-it does so and nothing more (linux-user/syscall.c in qemu). So I don't think 
-there is any newest kernel version supported by QEMU for any target, it just 
-doesn't care.
+Oh right.  Well, in that case, it's very easy: we can just tell qemu to
+report itself as 9999.9999.9999 or something.  Or have a NEWEST_KERNEL
+variable that's set (globally in bitbake.conf or somesuch) to the newest
+kernel that might conceivably be used.
+
+p.
+
+
 
 
