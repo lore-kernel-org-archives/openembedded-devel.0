@@ -1,27 +1,28 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1M6WDc-0006bo-L5
+	(envelope-from <denis@denix.org>) id 1M6Wmk-0004ha-12
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 May 2009 22:47:24 +0200
-Received: by ewy20 with SMTP id 20so59741ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2009 13:39:58 -0700 (PDT)
-Received: by 10.210.113.19 with SMTP id l19mr6404143ebc.56.1242765598248;
-	Tue, 19 May 2009 13:39:58 -0700 (PDT)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id 5sm693955eyh.50.2009.05.19.13.39.56
-	(version=SSLv3 cipher=RC4-MD5); Tue, 19 May 2009 13:39:57 -0700 (PDT)
-Message-ID: <4A13191B.5060404@xora.org.uk>
-Date: Tue, 19 May 2009 21:39:55 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	Tue, 19 May 2009 23:23:42 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KJW003J3TQ5B7E3@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	19 May 2009 16:15:47 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5336C14AF5F; Tue,
+	19 May 2009 17:15:41 -0400 (EDT)
+Date: Tue, 19 May 2009 17:15:41 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4A131034.7040905@balister.org> <guv4l1$58c$1@ger.gmane.org>
-In-Reply-To: <guv4l1$58c$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.0
-Subject: Re: eV Membership
+Message-id: <20090519211541.GA23803@denix.org>
+References: <alpine.DEB.1.00.0905111020490.11037@localhost.localdomain>
+	<20090511172937.GA23731@denix.org>
+	<f46da1cf0905120844m41413452o2eb88da084bc5c06@mail.gmail.com>
+	<20090518153156.GA19357@denix.org>
+	<f46da1cf0905191248h1c8d5e95s4038913d2111fbc5@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <f46da1cf0905191248h1c8d5e95s4038913d2111fbc5@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] evtest: Fixed GNU_HASH QA error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,19 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 20:47:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 May 2009 21:23:42 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Koen Kooi wrote:
-> On 19-05-09 22:01, Philip Balister wrote:
->> ) Active members are natural persons,
->
-> No androids allowed :)
->
-We should make all new members pass a turing test!
+On Tue, May 19, 2009 at 12:48:40PM -0700, Theodore A. Roth wrote:
+> On Mon, May 18, 2009 at 8:31 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> > On Tue, May 12, 2009 at 08:44:42AM -0700, Theodore A. Roth wrote:
+> >> On Mon, May 11, 2009 at 10:29 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> >> > On Mon, May 11, 2009 at 10:23:18AM -0700, Theodore A. Roth wrote:
+> >> >>
+> >> >> Signed-off-by: Theodore A. Roth <taroth@gmail.com>
+> >> >
+> >> > Acked-by: Denys Dmytriyenko <denis@denix.org>
+> >>
+> >> I do not have commit access so someone will need to apply this.
+> >
+> > Theodore,
+> >
+> > I believe Mickey offered you a commit access last time. Not sure if it went
+> > through though:
+> >
+> > http://thread.gmane.org/gmane.comp.handhelds.openembedded/21915/focus=21920
+> 
+> Yes. I sent him my public ssh key, but got no response.
 
-G
+Ah, lets ping admin people then... :)
 
+-- 
+Denys
 
 
