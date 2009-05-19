@@ -1,20 +1,18 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M6VQf-0007xX-U5
-	for openembedded-devel@openembedded.org; Tue, 19 May 2009 21:56:50 +0200
-Received: (qmail 7431 invoked by uid 1003); 19 May 2009 19:49:23 -0000
+	(envelope-from <philip@balister.org>) id 1M6Vcr-0000CK-3p
+	for openembedded-devel@openembedded.org; Tue, 19 May 2009 22:09:25 +0200
+Received: (qmail 19402 invoked by uid 1003); 19 May 2009 20:01:58 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 19 May 2009 19:49:23 -0000
-Message-ID: <4A130D42.5080806@balister.org>
-Date: Tue, 19 May 2009 15:49:22 -0400
+	by mail.geekisp.com with SMTP; 19 May 2009 20:01:58 -0000
+Message-ID: <4A131034.7040905@balister.org>
+Date: Tue, 19 May 2009 16:01:56 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <guuctg$d52$1@ger.gmane.org> <guv1td$p0n$1@ger.gmane.org>
-In-Reply-To: <guv1td$p0n$1@ger.gmane.org>
-Subject: Re: Patches in patchwork
+Subject: eV Membership
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,38 +26,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 19:56:50 -0000
-X-Groupsio-MsgNum: 10504
+X-List-Received-Date: Tue, 19 May 2009 20:09:25 -0000
+X-Groupsio-MsgNum: 10505
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060702020006070003000605"
+	micalg=sha1; boundary="------------ms010504000301000908090507"
 
---------------ms060702020006070003000605
+--------------ms010504000301000908090507
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Dmitry Eremin-Solenikov wrote:
-> Koen Kooi wrote:
-> 
->> Hi,
->>
->> The following patches in patchwork still have the 'new' status:
->>
-> 
-> What is the policy/process for gaining the ability to change/comment
-> other people patches in patchwork? I'd like to do some work on it
-> but I'd like to have ability to reflect the status of applied patches
-> in the patchwork.
+I'd like to propose increasing the eV membership by adding people who 
+have commit access to OE and who are also interested in becoming an eV 
+member.
 
-I don't think you can directly comment in patchwork. If you want to 
-change status you need to register. I've been changing everyone to be 
-able to change patch status. Please note, if you have accents in your 
-username, I cannot change your patchwork privileges.
+In order to do so, if you have commit access to OE and would like to 
+join the eV, please send me an email with full name, irc nick, and 
+committer id. I'll collect these and propose the list for membership.
 
-Does this answer your question?
+The eV is described at:
+
+http://wiki.openembedded.net/index.php/Organization
+
+I've also added a babelfish translation of the membership portion of the 
+statutes at the end of this email.
 
 Philip
 
---------------ms060702020006070003000605
+) Active members are natural persons, who support the association
+purpose and the implementation of the association goals by cooperation
+and the full obligations of a club member take over. In particular
+becomes of them cooperation, which and the practice of the right to
+vote expects participation in the meetings of the members.
+
+B) Extraordinary members are natural and legal entities, who explain
+the support of the association purpose and the association goals by
+their membership in the association, but do without on the practice of
+the rights of the active members, here the practice of the right to
+vote. Legal entities designate a natural person as representatives to
+the practice remaining rights and obligations.
+
+C) Promoting members are extraordinary members, that promote the
+association purpose and the association goals in particular by a
+financial or a special contribution. They are published on own desire
+on the web page of the association and to have the right to the
+participation in the meeting of the members, without acquiring thereby
+a right to vote.
+
+How to obtain membership:  Active membership is acquired on proposal
+of an active member with agreement of two of other active members by
+resolution of the meeting of the members or the active members by
+Internet choice with simple majority. Main decision criterion for the
+admission should be the commitment shown by the photograph candidates
+during a longer period and the contribution made thereby in the sense
+of the association goals.
+
+--------------ms010504000301000908090507
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -110,18 +131,18 @@ HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
 rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxOTE5
-NDkyMlowIwYJKoZIhvcNAQkEMRYEFFfaUtXrvWNTjf4c1CgeMiPPiotNMFIGCSqGSIb3DQEJDzFF
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUxOTIw
+MDE1NlowIwYJKoZIhvcNAQkEMRYEFLAWLtkOOJG1CMkqPrB3m2NUFXOYMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBYax1zApJ+Z4S/pRGsuPYCp9yp2oHvHX1Q/zrAu8X2CuPuxfQc
-N2rmead0hv1Nz8akkrrXu0CIHpTKw8dJjopC0V2icq5mCHI58c6VmIA5FTvol9nhqazmguLczNA3
-GaySMo8uRWcmCe3Eh2frNqv0NZmqphHKnQrfGtCALOM+6q0LW5dmn1/RXrx2oj5rUhTCPsPLG37p
-+YK/FTesVdpswtIjD/dGeAZPdmp9sSp3EEEtcBiNOJLy1znAz+BdW0tLeItQElJfO8DceCJjlluL
-1EzKX53cPCkdBb5JbV9Tc4klVkO7RzDp6lpDQsj6l1MbW5LZxYJVQtWopoRkRUCTAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQBG6CycmMn+QcGGU5zO67ir+H0xSmbheIJfSOqkWdOOKoQLlpXQ
+O9pbux7/omWtaydYTNH8UMPBfUyA6S/65IqaD1KqUWSOM3Q1TRPAIU3Z7tWT9m9M9v51OXV0JCoE
+1mn5gn41MRzX5vp9kRJQwlKA6HaRxSmI/NYTiN+BMKK9QiJ1eRs0Ayins8gzmUc6wNhQyPcFIB0t
+7f3TZ/S7FvNAwJ+QURodS/2Wq9bCkZCppmxrotfHs8p8GTH8xWUbjXhZ5CT59O7mdW1wrsU4w9d+
+Y8oNiwXtlAjAgpGGjcAloYMzLht1NAFWomRPCj8t8H7TYFRSRPSR61wddipMSyftAAAAAAAA
 
---------------ms060702020006070003000605--
+--------------ms010504000301000908090507--
