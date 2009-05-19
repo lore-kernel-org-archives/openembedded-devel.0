@@ -1,33 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M6KPt-0006dr-9e
-	for openembedded-devel@openembedded.org; Tue, 19 May 2009 10:11:24 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M6KIm-0003Vc-6I
-	for openembedded-devel@openembedded.org; Tue, 19 May 2009 08:03:56 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 19 May 2009 08:03:56 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 19 May 2009 08:03:56 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 19 May 2009 10:03:38 +0200
-Message-ID: <gutp4q$bri$1@ger.gmane.org>
-References: <aee831ab0905180656q31941a95jeedf18f65343c27f@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090510 Shredder/3.0b3pre
-In-Reply-To: <aee831ab0905180656q31941a95jeedf18f65343c27f@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: asking for patch review
+	(envelope-from <khimov@altell.ru>) id 1M6LDn-00063M-8s
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 May 2009 11:02:51 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1M6L6b-0005Fp-KT
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 May 2009 12:55:25 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 May 2009 12:55:22 +0400
+User-Agent: KMail/1.11.2 (Linux/2.6.29; KDE/4.2.2; x86_64; ; )
+References: <20090517212442.6E35A1893E6@amethyst.openembedded.net>
+	<877i0e2ejf.wl%peter@chubb.wattle.id.au>
+	<1242718731.4226.72.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1242718731.4226.72.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <200905191255.23223.khimov@altell.ru>
+Subject: Re: [oe-commits] Roman I Khimov	: (e) 	glibc-package:	fix	kernel version passed to qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 08:11:37 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 19 May 2009 09:02:51 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 18-05-09 15:56, Previdi Roberto wrote:
-> Hello. Please could someone give a look at this patch for the zenity
-> package?
-> http://patchwork.openembedded.org/patch/433/
-> It's been queued since 20 days ago, and many more recent patches have
-> already been reviewed..
+On Tuesday 19 May 2009 11:38:51 Phil Blundell wrote:
+> I think you misunderstood what I was proposing.  Glibc would continue to
+> be configured just as it is now: the only difference would be that
+> _qemu_ would be set to emulate the newest kernel version that it
+> supports, rather than a fixed version as previously.
 
-I just pushed the zenity 2.26.0 recipe I had lying around, could you 
-base your patch on that version?
-
-regards,
-
-Koen
-
+As I can tell from a quick glance, there is no special handling for different 
+kernel versions in QEMU. It translates syscalls from target application to 
+host kernel and if we tell it to fake kernel version reported to application 
+it does so and nothing more (linux-user/syscall.c in qemu). So I don't think 
+there is any newest kernel version supported by QEMU for any target, it just 
+doesn't care.
 
 
