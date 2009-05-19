@@ -1,31 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M6PgK-0002UC-0e
-	for openembedded-devel@openembedded.org; Tue, 19 May 2009 15:48:41 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M6PZD-0001iF-0y
-	for openembedded-devel@openembedded.org; Tue, 19 May 2009 13:41:15 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 19 May 2009 13:41:15 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 19 May 2009 13:41:15 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 19 May 2009 15:41:03 +0200
-Message-ID: <guuctg$d52$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090515 Shredder/3.0b3pre
-Sender: news <news@ger.gmane.org>
-Subject: Patches in patchwork
+	(envelope-from <elena.valhalla@gmail.com>) id 1M6Q1O-0003ZQ-T0
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 May 2009 16:10:23 +0200
+Received: by ewy20 with SMTP id 20so4830635ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 May 2009 07:02:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=gZBrd/0WAxM/Y4TBATX8CRyZpKDyFJYjkF7JclaqZhY=;
+	b=t0eLy7NFOZAdjPCeywRqHkpX06ui7R94JpyMkqp4lVdWTdn6HLkoWUL6JoEhUzcSeS
+	SzhA2Xx7gTM0pTWJ1Zm3DLWybjOF9QLdrcCBOJS+yjKLR/zZ9mhWmodh5+N6fxYhB2vf
+	9BtG27WjNe1x+RTbReXYRaQCTJSYRhAy/4xXc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=eNhh21QFqhjEROiDuA4xh9H0eFoCChhJzgE28+KiG5qZhMAeg+yUvxJjDsX/q7IZUh
+	Lyli1iUUxRZiWibBvcjCevA9xk/2VrjWZUm0UD5l7AeAlYQwQ3Egk42A1Li+/v8Y5Dch
+	kxN3YO2wo+i3fyyaajtnhOYnuXvZuW9L4v6H0=
+MIME-Version: 1.0
+Received: by 10.216.71.82 with SMTP id q60mr17861wed.169.1242741778556; Tue, 
+	19 May 2009 07:02:58 -0700 (PDT)
+In-Reply-To: <ac9c93b10905190519h5cfa8a96h688bbc00271de76d@mail.gmail.com>
+References: <go498c$bqq$1@ger.gmane.org>
+	<200902261144.46548.openembedded@haerwu.biz>
+	<guq6vh$tmi$1@ger.gmane.org>
+	<ac9c93b10905190519h5cfa8a96h688bbc00271de76d@mail.gmail.com>
+Date: Tue, 19 May 2009 16:02:58 +0200
+Message-ID: <5c5e5c350905190702q56506baaja5a0abaff11e0d9c@mail.gmail.com>
+From: Elena of Valhalla <elena.valhalla@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] renaming packages/ to recipes/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,69 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 13:48:55 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 19 May 2009 14:10:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On Tue, May 19, 2009 at 2:19 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> I think adding recipes-broken (or broken-recipes) is a bad idea.
+> [...]
 
-The following patches in patchwork still have the 'new' status:
+How is this different from having recipes/nonworking and
+recipes/obsolete as it currently happens?
 
-(e)glibc.inc: add minimal sane kernel versions	
-  wvstreams fix	
-  cacao: add missing patch	
-  checksums.ini: added entry for gtksourceview2_2.6.0	
-  gtksourceview: renamed the 1.x tree to gtksourceview1	
-  gtksourceview2 2.6.0: new recipe for the current stable version.	
-  bitbake.conf, freeze.inc: Add version lockdown implementation and use 
-it by default.	
-  linux: drop alix, move geodelx to 2.6.29	
-  kaeilos: use include/sane-feed.inc	
-  kaeilos.inc/sane-feed.inc: use spaces instead of tabs	
-  kaeilos/sane-feed: remove alix, mark geodelx as i586	
-  Remove alix machine, update geodelx one to use Alix settings	
-  at2440evb.conf: Add AT2440EVB machine config.	
-  mtools now an FSF project	
-  grub: Split the grub-install script and friends into a separate package.	
-  Remove unused grub-0.93.	
-  python-native_2.6.1.bb: Add zlib-native to DEPENDS	
-  u-boot: update git recipe with the new DaVinci EVMs	
-  linux-davinci: build linux-davinci kernels for dm6446, dm6467 and 
-dm355 EVMs	
-  dm357-evm: add new machine definition	
-  dm365-evm: add new machine definition	
-  dm355-evm: add new machine definition and defconfig	
-  dm6467-evm: add new machine definition and defconfig	
-  dm6446-evm: rename machine from davinci-dvevm and add defconfig	
-  davinci.inc: add common DaVinci machine configuration	
-  x11-gpe-java-image: gdk-pixbuf	
-  python-native_2.6.1.bb: Configure with --with-zlib	
-  grub: split menu.lst into a separate package, grub-config.	
-  grub: use ${libdir}, not /usr/lib	
-  Remove unused grub-0.93.	
-  at2440evb.conf: Add AT2440EVB machine config.	
-  grub: allow menu.lst to be overridden using GRUB_CONFIG_PACKAGE.	
-  Remove unused grub-0.93.	
-  kernel.bbclass: also stage include/trace if it's available	
-  kernel.bbclass: stage more include files for x86 in 2.6.27+	
-  Fix staging of binutils static libraries	
-  enable zlib in python-native to fix image building, cannot import 
-gzip module	
-  gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf binary	
-  gcc_4.2.4.bb: QA Issue: No GNU_HASH in theelf binary	
-  uclibc-initial: Fix FILESPATH mangling in all versions	
-  dsplink: change path to the XDC tools directory	
-  gcc_4.2.4.bb: QA Issue: No GNU_HASH in the elf binary	
+more visibility?
 
-All: please have a look at them and update the status/mail 
-comments/apply/whatever.
+-- 
+Elena ``of Valhalla''
 
-The oldest ones are nearly a month old now...
-
-
-regards,
-
-Koen
-
+homepage: http://www.trueelena.org
+email: elena.valhalla@gmail.com
 
 
