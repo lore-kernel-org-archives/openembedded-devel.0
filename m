@@ -1,20 +1,33 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M6kM6-0006x4-5D
-	for openembedded-devel@openembedded.org; Wed, 20 May 2009 13:53:42 +0200
-Received: (qmail 21874 invoked by uid 1003); 20 May 2009 11:45:35 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 20 May 2009 11:45:34 -0000
-Message-ID: <4A13ED5C.60405@balister.org>
-Date: Wed, 20 May 2009 07:45:32 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4A131034.7040905@balister.org>
-In-Reply-To: <4A131034.7040905@balister.org>
-Subject: [Please Read]Re: eV Membership
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M6n7k-0001bK-EM
+	for openembedded-devel@openembedded.org; Wed, 20 May 2009 16:50:29 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M6n0S-0008Fz-67
+	for openembedded-devel@openembedded.org; Wed, 20 May 2009 14:42:56 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 20 May 2009 14:42:56 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 20 May 2009 14:42:56 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 20 May 2009 16:42:45 +0200
+Message-ID: <gv14t5$8pn$1@ger.gmane.org>
+References: <1242805678-20645-1-git-send-email-denis@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090515 Shredder/3.0b3pre
+In-Reply-To: <1242805678-20645-1-git-send-email-denis@denix.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCHv2 0/8] Restructure TI DaVinci platforms and introduce new EVMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,134 +41,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 11:55:47 -0000
-X-Groupsio-MsgNum: 10537
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms030904050806060802000605"
-
---------------ms030904050806060802000605
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 20 May 2009 14:50:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Nagging ...
+On 20-05-09 09:47, Denys Dmytriyenko wrote:
+> Second version of the patches, addressing all the previous comments.
+>
+> This set of patches restructures the support for Texas Instruments DaVinci
+> platforms by reusing the existing davinci-dvevm machine (renaming it along
+> the way to a more specific dm6446-evm) and introducing new EVM boards -
+> dm6467-evm, dm355-evm, dm365-evm and dm357-evm. Not all the boards have
+> proper support in the upstream kernel/u-boot yet.
 
-Philip Balister wrote:
-> I'd like to propose increasing the eV membership by adding people who 
-> have commit access to OE and who are also interested in becoming an eV 
-> member.
-> 
-> In order to do so, if you have commit access to OE and would like to 
-> join the eV, please send me an email with full name, irc nick, and 
-> committer id. I'll collect these and propose the list for membership.
-> 
-> The eV is described at:
-> 
-> http://wiki.openembedded.net/index.php/Organization
-> 
-> I've also added a babelfish translation of the membership portion of the 
-> statutes at the end of this email.
-> 
-> Philip
-> 
-> ) Active members are natural persons, who support the association
-> purpose and the implementation of the association goals by cooperation
-> and the full obligations of a club member take over. In particular
-> becomes of them cooperation, which and the practice of the right to
-> vote expects participation in the meetings of the members.
-> 
-> B) Extraordinary members are natural and legal entities, who explain
-> the support of the association purpose and the association goals by
-> their membership in the association, but do without on the practice of
-> the rights of the active members, here the practice of the right to
-> vote. Legal entities designate a natural person as representatives to
-> the practice remaining rights and obligations.
-> 
-> C) Promoting members are extraordinary members, that promote the
-> association purpose and the association goals in particular by a
-> financial or a special contribution. They are published on own desire
-> on the web page of the association and to have the right to the
-> participation in the meeting of the members, without acquiring thereby
-> a right to vote.
-> 
-> How to obtain membership:  Active membership is acquired on proposal
-> of an active member with agreement of two of other active members by
-> resolution of the meeting of the members or the active members by
-> Internet choice with simple majority. Main decision criterion for the
-> admission should be the commitment shown by the photograph candidates
-> during a longer period and the contribution made thereby in the sense
-> of the association goals.
-> 
-> 
-> ------------------------------------------------------------------------
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Looks good to me
 
---------------ms030904050806060802000605
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+regards,
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUyMDEx
-NDUzMlowIwYJKoZIhvcNAQkEMRYEFK8AKzkZTrdMKghRfcSXWKO6Cy78MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAxfLxgnTHby7FZDRex3HDejKjnys3cC0mLD0Qm7HhxqOcoHAXI
-0NaJJfn0orO/0v4HklqU1hw0OWqY7CVnhj1aKouycex/Q6HDrvKPZ1ISWygM4eo900ngo8BjF05b
-Up6+U+r1JCtuM7yhttOT9jC/a/Wyz9jB8auS8hosFXCV91P8ZRSZuEVfIXfT5AmA2kTHMEM9l6vD
-5pKRgssxLmHeV30m0OqLIHrS854YXBWuEJuPI0G9VQ6JZ6F1Wn0IG0Timi3ekPJArwuNRtDHbFD8
-U/nUiTM7fMtP0+X3U35YoP3GOBVzB+3ULCoV1mCcxZz9Kh6RzwFIzkCT4NnX/jjLAAAAAAAA
+Koen
 
---------------ms030904050806060802000605--
+
+
+>
+> Denys Dmytriyenko (8):
+>    davinci.inc: add common DaVinci machine configuration
+>    dm6446-evm: rename machine from davinci-dvevm and add defconfig
+>    dm6467-evm: add new machine definition and defconfig
+>    dm355-evm: add new machine definition and defconfig
+>    dm365-evm: add new machine definition
+>    dm357-evm: add new machine definition
+>    linux-davinci: build linux-davinci kernels for dm6446, dm6467 and
+>      dm355 EVMs
+>    u-boot: update git recipe with the new DaVinci EVMs
+>
+>   conf/machine/davinci-dvevm.conf                  |   24 -
+>   conf/machine/dm355-evm.conf                      |    7 +
+>   conf/machine/dm357-evm.conf                      |    7 +
+>   conf/machine/dm365-evm.conf                      |    7 +
+>   conf/machine/dm6446-evm.conf                     |    7 +
+>   conf/machine/dm6467-evm.conf                     |    7 +
+>   conf/machine/include/davinci.inc                 |   26 +
+>   recipes/linux/linux-davinci/dm355-evm/defconfig  | 1223 +++++++++++++++
+>   recipes/linux/linux-davinci/dm6446-evm/defconfig | 1738 ++++++++++++++++++++++
+>   recipes/linux/linux-davinci/dm6467-evm/defconfig | 1241 +++++++++++++++
+>   recipes/linux/linux-davinci_2.6.28.bb            |    4 +-
+>   recipes/linux/linux-davinci_git.bb               |   11 +-
+>   recipes/u-boot/u-boot_git.bb                     |    6 +-
+>   13 files changed, 4278 insertions(+), 30 deletions(-)
+>   delete mode 100644 conf/machine/davinci-dvevm.conf
+>   create mode 100644 conf/machine/dm355-evm.conf
+>   create mode 100644 conf/machine/dm357-evm.conf
+>   create mode 100644 conf/machine/dm365-evm.conf
+>   create mode 100644 conf/machine/dm6446-evm.conf
+>   create mode 100644 conf/machine/dm6467-evm.conf
+>   create mode 100644 conf/machine/include/davinci.inc
+>   create mode 100644 recipes/linux/linux-davinci/dm355-evm/defconfig
+>   create mode 100644 recipes/linux/linux-davinci/dm6446-evm/defconfig
+>   create mode 100644 recipes/linux/linux-davinci/dm6467-evm/defconfig
+
+
+
+
