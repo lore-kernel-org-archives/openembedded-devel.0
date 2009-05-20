@@ -1,22 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M6iYh-000297-Pa
-	for openembedded-devel@openembedded.org; Wed, 20 May 2009 11:58:24 +0200
-Received: (qmail 29502 invoked by uid 813007); 20 May 2009 09:50:32 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 20 May 2009 09:50:31 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 May 2009 11:50:21 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <8f4584b50905192359w46f238b0x85fcd709d5e30c5b@mail.gmail.com>
-In-Reply-To: <8f4584b50905192359w46f238b0x85fcd709d5e30c5b@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200905201150.22222.marcin@juszkiewicz.com.pl>
-Subject: Re: How to use the native package?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M6ijD-0002Ol-ID
+	for openembedded-devel@openembedded.org; Wed, 20 May 2009 12:09:01 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M6iby-0004U7-6s
+	for openembedded-devel@openembedded.org; Wed, 20 May 2009 10:01:22 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 20 May 2009 10:01:22 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 20 May 2009 10:01:22 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 20 May 2009 12:01:10 +0200
+Message-ID: <gv0kd6$gn4$1@ger.gmane.org>
+References: <c384c5ea0905150520k3e38f4f3q2d2279f714eded1a@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090515 Shredder/3.0b3pre
+In-Reply-To: <c384c5ea0905150520k3e38f4f3q2d2279f714eded1a@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [HEADS UP] zecke-no-host-includes.patch is not compiled-in for gcc 4.3.2+ (4.3.x?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,36 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 09:58:47 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 May 2009 10:09:40 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia =C5=9Broda, 20 maja 2009 o 08:59:29 =E4=BB=A3=E5=B0=94=E6=AC=A3 napisa=
-=C5=82(a):
-> Hi all,
->      Is it the right place to ask? I have a question about the OE
-> compile. Hope I can tell you the case clearly.
-> I have a package. Let's say it "mypackage". The compile process is:
+On 15-05-09 14:20, Leon Woestenberg wrote:
+> Hello,
 >
-> When make "mypackage", it will generate a intermedia tool. Let's call
-> it mytools.bin through Makefile.
+> I got a heads-up from one of the ptxdist guys that:
 >
-> %.c: %.tmp
->     ./mytools.bin $< > $@
+> http://cgit.openembedded.org/cgit.cgi?url=openembedded/tree/recipes/gcc/gcc-4.3.2/zecke-no-host-includes.patch
 >
-> Then it will use mytools.bin generate some c files.  Using those
-> generated c files compile out  the final bin file.
+> no longer works for GCC 4.3.2 as GCC upstream changed "CROSS_COMPILE"
+> to "CROSS_DIRECTORY_STRUCTURE".
+>
+> and the patch uses #ifdef CROSS_COMPILE
+>
+>
+> The patch code thus is not compiled-in.
+>
+>
+> I currently have no gcc 4.3.x oe builds, maybe someone who does can
+> verify this quickly?
 
-I would hack^Wpatch makefile to build "mytools.bin" as host binary.
+I can confirm that the code doesn't get compiled in for 4.3.3.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+could anyone confirm that my checkin from this morning fixes it? (it 
+doesn't break, I've tested that)
 
+regards,
+
+Koen
 
 
 
