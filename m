@@ -1,35 +1,38 @@
-Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
+Received: from [209.85.132.247] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1M6sh0-0005jt-PS
+	(envelope-from <otavio.salvador@gmail.com>) id 1M6tNm-00046I-5M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 May 2009 22:47:14 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so379175ywk.42
+	Wed, 20 May 2009 23:31:26 +0200
+Received: by an-out-0708.google.com with SMTP id b6so402408ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 May 2009 13:39:44 -0700 (PDT)
+	Wed, 20 May 2009 14:23:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=tnRJPvUyUV2ONZRrIC4OtVDPdxYQojmu7b/TclAH38E=;
-	b=ARNFlb3akcrjlv9768nbIXOz/JfnHtOJxZxfs7e9pJMUj+RAVyrLxVaUPx7iNm0CfN
-	c+oxmoKr0FYLAT8HbJyI0O6G1N0x8hdqnZ4iSCzUmYJCEd6m3vGJ5Oun56Kdc/rTx42i
-	67isUcklTPr0DZ+GPHiZlI/9LJO/1Kf8kY4gQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=EfUHonYPq9m/37sS5W5kQIjyKsJ8LvbOir9rwdEtfutYOvk06UkfubNzBmMAbe5BXM
-	luOxninoPhJmoVFG3yjBusV6MAo+ewwYhpuKfy5B52g01oqLGhrrYcorV6LtkEtpODof
-	mh4VJ2BIIw+MYorJWbqL2fVZzFbN1yoGunCr0=
+	bh=GDFWFNMHkM7vkwvn46MZWUZ0rtQ5D24N0ZTuoGwzTa0=;
+	b=lNJ1D46AxP1JDFB2R6gzNtQGNcY1Q4QktWUWryQHmGR32O5dYmdkU1+f9qXLTxdDJ6
+	FipbtOnIxt+AFkO463ViaScMDyeuiFWZmnRoPZzXlD+3qLxpg1mSGrj5p5+Np3pmoFN3
+	e28OXg5lHI6v4vfjT3unMUHw0VKtLqsoqkP0Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Rd/PDgAgQSxam9mfVr3oSB8AzxVYdzsWsQF4jCdbpP8rcKdz0eH2KvaWtWlj3Md7dx
+	6IUUqrs7nH07i9OvmW8vl62PhHC0yocGcWncQU3592X8DfEvk6eH+xvFwLiiZ/ZoxlW3
+	ug0HWlAkswUMZQDNrq9N1StrMQ+tQVpvgVhbw=
 MIME-Version: 1.0
-Received: by 10.151.98.17 with SMTP id a17mr3347003ybm.302.1242851563083; Wed, 
-	20 May 2009 13:32:43 -0700 (PDT)
-In-Reply-To: <f96d234e0905192000u56f4dfa7m2f9f4d38ee8a2107@mail.gmail.com>
-References: <f96d234e0905192000u56f4dfa7m2f9f4d38ee8a2107@mail.gmail.com>
-Date: Wed, 20 May 2009 16:32:43 -0400
-Message-ID: <f96d234e0905201332tbb3a548nad7a82c18e32c59d@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.131.13 with SMTP id e13mr3501856and.93.1242854635485; Wed, 
+	20 May 2009 14:23:55 -0700 (PDT)
+In-Reply-To: <200905201528180000@3248121022>
+References: <200905201528180000@3248121022>
+Date: Wed, 20 May 2009 18:23:55 -0300
+X-Google-Sender-Auth: f99e8dc70acb73d5
+Message-ID: <be7a9f3d0905201423g6af4f666o754449e1b8519b23@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: reminder git move to OSUOSL Wed (PLEASE READ)
+Subject: Re: [STABLE][PATCH] kernel, module-base class, bitbake.conf: 	introduce MACHINE_KERNEL_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,79 +46,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 20:47:15 -0000
+X-List-Received-Date: Wed, 20 May 2009 21:31:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-http://new.openembedded.org/cgit/
-git://new.openembedded.org/openembedded
-git@new.openembedded.org/openembedded
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-The above should now work as soon as DNS changes propagate to your
-machine.  New machine IP address is: 140.211.169.165
-
-You will see the WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! if
-using ssh, please remove entry as the ssh keys have changed.
-
-notifications to IRC seem to work.
-
-notifications to the maillist do not.
-
-Florian, can you check the openembedded-commits setup, and see what is goin=
-g on?
-
-this is from my mail log:
-2009-05-20 20:24:32 1M6sL1-0001OY-Nl <=3D git@new.openembedded.org U=3Dgit
-P=3Dlocal S=3D1219
-2009-05-20 20:24:32 1M6sL2-0001Oe-4V <=3D git@new.openembedded.org U=3Dgit
-P=3Dlocal S=3D1067
-2009-05-20 20:24:35 1M6sL1-0001OY-Nl =3D>
-openembedded-commits@openembedded.org R=3Ddnslookup T=3Dremote_smtp
-H=3Dopenembedded.org [85.214.40.226]
-2009-05-20 20:24:35 1M6sL1-0001OY-Nl Completed
-2009-05-20 20:24:48 1M6sL2-0001Oe-4V =3D> cia@cia.navi.cx R=3Ddnslookup
-T=3Dremote_smtp H=3Dcia.navi.cx [208.69.182.149]
-2009-05-20 20:24:48 1M6sL2-0001Oe-4V Completed
-
-I suspect they are waiting for moderation, or something as the cia one work=
-s.
-
-I still need to sort the gitweb forwarding as well.
-
-Let me know of any other problems.
-
-Thanks,
-Cliff
-
-
-On Tue, May 19, 2009 at 11:00 PM, Cliff Brake <cliff.brake@gmail.com> wrote=
-:
-> As announced last week, baring no major problems, we plan to move the
-> git service to OSUOSL Wed, 2009-05-20 @ 1900 UTC (3PM EDT). =A0The new
-> server can be tested/accessed at:
+On Wed, May 20, 2009 at 4:28 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> Acked-by: Denys Dmytriyenko <denis@denix.org>
 >
-> http://new.openembedded.org/cgit/
-> git://new.openembedded.org/openembedded
-> git@new.openembedded.org/openembedded
+>> ------- Original Message -------
+>> From: Koen Kooi <koen.kooi@gmail.com>
+>> To: openembedded-devel@lists.openembedded.org
+>> Sent: 20-May-09, 14:51:23
+>> Subject: [oe] [STABLE][PATCH] kernel, module-base class,bitbake.conf: in=
+troduce MACHINE_KERNEL_PR
+>>
+>> From: Koen Kooi <koen@openembedded.org>
+>>
+>>
+>> Signed-off-by: Koen Kooi <koen@openembedded.org>
+>> ---
+>> =A0classes/kernel.bbclass =A0 =A0 =A0| =A0 =A04 ++++
+>> =A0classes/module-base.bbclass | =A0 =A04 ++++
+>> =A0conf/bitbake.conf =A0 =A0 =A0 =A0 =A0 | =A0 =A04 ++++
+>> =A03 files changed, 12 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+>> index 17e8941..954c407 100644
+>> --- a/classes/kernel.bbclass
+>> +++ b/classes/kernel.bbclass
+>> @@ -64,6 +64,10 @@ export CMDLINE_CONSOLE =3D "console=3D${@bb.data.getV=
+ar("KERNEL_CONSOLE",d,1) or "tt
+>> =A0KERNEL_VERSION =3D "${@get_kernelversion('${S}')}"
+>> =A0KERNEL_MAJOR_VERSION =3D "${@get_kernelmajorversion('${KERNEL_VERSION=
+}')}"
+>>
+>> +# A machine.conf or local.conf can increase MACHINE_KERNEL_PR to force
+>> +# rebuilds for kernel and external modules
+>> +PR =3D "${MACHINE_KERNEL_PR}"
+>> +
+>> =A0KERNEL_LOCALVERSION ?=3D ""
+>>
+>> =A0# kernels are generally machine specific
+>> diff --git a/classes/module-base.bbclass b/classes/module-base.bbclass
+>> index c98bace..bc53e1b 100644
+>> --- a/classes/module-base.bbclass
 >
-> The server will likely be off-line for up to 2 hours while changes are
-> made and DNS entries propagate.
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> The original URIs will take effect then on the new server:
->
-> http://cgit.openembedded.org/
-> git://git.openembedded.org/openembedded
-> git@git.openembedded.org/openembedded
->
-> Note, the .net versions may or may not follow depending on Mickey. =A0At
-> any rate, the TTL for the .net entries are 24 hours, so it will take
-> some time for them to catch up if they are changed.
->
-> Please use the *.org URI's going forward. =A0The wiki and documentation
-> have already been modified to reference the *.org URIs.
->
-> Thanks,
-> Cliff
->
+
+
+
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
