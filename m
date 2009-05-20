@@ -1,32 +1,25 @@
-Received: from [74.125.44.156] (helo=yx-out-1718.google.com)
+Received: from [192.67.63.129] (helo=rampart2.timecastle.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1M6cAw-0006rJ-99
+	(envelope-from <jeff@taupro.com>) id 1M6evl-0008Ia-BS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 May 2009 05:09:04 +0200
-Received: by yx-out-1718.google.com with SMTP id 36so122824yxh.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2009 20:01:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=T3ox3J17GmuarM5I0+IesZwuQGtbAQSJisFHxWzpUYQ=;
-	b=lw2pASp0OLIwvZ9Ie3SX0baNaYiuTE9dMr0IHG68htXafwKi2X7uE5yl+pROUDj7XR
-	crCtWipHo7Yrx6n5Ed9t51WMp/LFwz6I2Z920mdNv3//rOih5ItMnd/19RRHfgcxKAye
-	9KTHcnBhnTMdZuGG3wKfoiNHFWiLvBnixJRUE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=uCQ2nglKUlxDx/sxuAwYKxxYgFVRwiJQDdp6K7EEs7x543eRDtRrvbrp8pRrRJBTee
-	QP5ccE8Nbx/A8ifT2vSlTXYz/1iMBRT4t6kLou9Eaf2fOItf+3gh12iFx0axLCCbWTLm
-	vgGwM/ubfOrUhtskhVS12YhfMMDtUuCeNyYBE=
+	Wed, 20 May 2009 08:05:33 +0200
+Received: from [192.168.3.100] (adsl-68-95-128-31.dsl.rcsntx.swbell.net
+	[68.95.128.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(Client did not present a certificate)
+	by rampart2.timecastle.net (Postfix) with ESMTPSA id DBBAE70043;
+	Wed, 20 May 2009 00:58:06 -0500 (CDT)
+Message-ID: <4A139BEC.9060902@taupro.com>
+Date: Wed, 20 May 2009 00:58:04 -0500
+From: Jeff Rush <jeff@taupro.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090509)
 MIME-Version: 1.0
-Received: by 10.151.74.11 with SMTP id b11mr61439ybl.151.1242788453070; Tue, 
-	19 May 2009 20:00:53 -0700 (PDT)
-Date: Tue, 19 May 2009 23:00:53 -0400
-Message-ID: <f96d234e0905192000u56f4dfa7m2f9f4d38ee8a2107@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: reminder git move to OSUOSL Wed (PLEASE READ)
+References: <4A12BC2C.5020402@taupro.com> <20090520002538.GF23803@denix.org>
+In-Reply-To: <20090520002538.GF23803@denix.org>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=AA9D62B9
+Subject: Re: rootfs_tar.bbclass not found?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +33,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 03:09:07 -0000
+X-List-Received-Date: Wed, 20 May 2009 06:05:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-As announced last week, baring no major problems, we plan to move the
-git service to OSUOSL Wed, 2009-05-20 @ 1900 UTC (3PM EDT).  The new
-server can be tested/accessed at:
+Denys Dmytriyenko wrote:
+> On Tue, May 19, 2009 at 09:03:24AM -0500, Jeff Rush wrote:
+>> Hopefully a trivial question.
+>>
+>> What can I add to my local.conf to 'short circuit' this logic related to the
+>> building of images?
+> 
+> Can you try setting BBMASK = "image" in your local.conf?
 
-http://new.openembedded.org/cgit/
-git://new.openembedded.org/openembedded
-git@new.openembedded.org/openembedded
+Thanks that worked!  I was afraid it might just remove the build target but
+not the actual parsing but it actually did both.
 
-The server will likely be off-line for up to 2 hours while changes are
-made and DNS entries propagate.
-
-The original URIs will take effect then on the new server:
-
-http://cgit.openembedded.org/
-git://git.openembedded.org/openembedded
-git@git.openembedded.org/openembedded
-
-Note, the .net versions may or may not follow depending on Mickey.  At
-any rate, the TTL for the .net entries are 24 hours, so it will take
-some time for them to catch up if they are changed.
-
-Please use the *.org URI's going forward.  The wiki and documentation
-have already been modified to reference the *.org URIs.
-
-Thanks,
-Cliff
+-Jeff
 
 
