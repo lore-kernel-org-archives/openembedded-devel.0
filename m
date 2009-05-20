@@ -1,28 +1,22 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1M6hwF-0004NN-QO
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 May 2009 11:18:16 +0200
-Received: by ewy20 with SMTP id 20so376953ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 May 2009 02:10:46 -0700 (PDT)
-Received: by 10.210.116.14 with SMTP id o14mr3651349ebc.54.1242810646716;
-	Wed, 20 May 2009 02:10:46 -0700 (PDT)
-Received: from xora-eee.xora-domain (93-97-174-2.zone5.bethere.co.uk
-	[93.97.174.2])
-	by mx.google.com with ESMTPS id 5sm1764092eyh.40.2009.05.20.02.10.44
-	(version=SSLv3 cipher=RC4-MD5); Wed, 20 May 2009 02:10:45 -0700 (PDT)
-Message-ID: <4A13C909.5030103@xora.org.uk>
-Date: Wed, 20 May 2009 10:10:33 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1b3pre) Gecko/20090513 Fedora/3.0-2.3.beta2.fc11
-	Thunderbird/3.0b2
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M6iXQ-000270-FV
+	for openembedded-devel@openembedded.org; Wed, 20 May 2009 11:56:47 +0200
+Received: (qmail 26790 invoked by uid 813007); 20 May 2009 09:49:12 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 20 May 2009 09:49:12 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <20090520002850.71F7F1880A4@amethyst.openembedded.net>
-In-Reply-To: <20090520002850.71F7F1880A4@amethyst.openembedded.net>
-Subject: Re: [oe-commits] Angus Ainslie : paroli-elementary : set SRCPV
+Date: Wed, 20 May 2009 11:49:01 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc3-00005-g51bc6b7-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <1242805678-20645-1-git-send-email-denis@denix.org>
+In-Reply-To: <1242805678-20645-1-git-send-email-denis@denix.org>
+MIME-Version: 1.0
+Message-Id: <200905201149.02624.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCHv2 0/8] Restructure TI DaVinci platforms and introduce new EVMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,50 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 09:18:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 May 2009 09:56:56 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 05/20/2009 01:28 AM, GIT User account wrote:
-> Module: openembedded.git
-> Branch: fso/milestone5.5
-> Commit: 11eb31d33cd40eb91bbe3033b622e7a4e8d3f4a3
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=11eb31d33cd40eb91bbe3033b622e7a4e8d3f4a3
->
-> Author: Angus Ainslie<nytowl@openmoko.org>
-> Date:   Tue May 19 18:28:02 2009 -0600
->
-> paroli-elementary : set SRCPV
->
-> ---
->
->   recipes/openmoko-projects/paroli-elementary_git.bb |    6 +++---
->   1 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes/openmoko-projects/paroli-elementary_git.bb b/recipes/openmoko-projects/paroli-elementary_git.bb
-> index f9cf3a4..305302d 100644
-> --- a/recipes/openmoko-projects/paroli-elementary_git.bb
-> +++ b/recipes/openmoko-projects/paroli-elementary_git.bb
-> @@ -1,10 +1,10 @@
->   DESCRIPTION = "python-elementary paroli bindings"
->   DEPENDS = "python-cython-native python-pyrex-native python-numeric eina elementary"
->   RDEPENDS = "python-lang python-evas python-ecore python-edje"
-> -PV = "0.1+gitr${SRCREV}"
-> -PR = "r0"
-> +PV = "0.1+gitr${SRCPV}"
-> +PR = "r1"
->
-> -inherit distutils
-> +inherit setuptools
->
->   SRC_URI = "git://git.paroli-project.org/python-elementary.git;protocol=http"
->
->    
-I know this is your branch so you can do what you like, but this wont 
-actually work unless you increment the PE of the recipe as well because 
-git?+??????? can possibly sort lower than the random hash.
+Dnia =C5=9Broda, 20 maja 2009 o 09:47:50 Denys Dmytriyenko napisa=C5=82(a):
+> Second version of the patches, addressing all the previous comments.
 
-Graeme
+Looks ok for me.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
