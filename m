@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M6Y8c-0003lN-90
-	for openembedded-devel@openembedded.org; Wed, 20 May 2009 00:50:22 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M6Y1R-0002MD-SY
-	for openembedded-devel@openembedded.org; Tue, 19 May 2009 22:42:57 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 19 May 2009 22:42:57 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 19 May 2009 22:42:57 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 20 May 2009 00:42:45 +0200
-Message-ID: <guvcl5$652$1@ger.gmane.org>
-References: <200905192258.11747.bluelightning@bluelightning.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090515 Shredder/3.0b3pre
-In-Reply-To: <200905192258.11747.bluelightning@bluelightning.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] [PATCH] update zaurusd to latest SVN
+	(envelope-from <denis@denix.org>) id 1M6ZkV-0000m0-AF
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 May 2009 02:33:35 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KJX00IEO2IQKZX2@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	19 May 2009 19:25:43 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 378C014AF5F; Tue,
+	19 May 2009 20:25:38 -0400 (EDT)
+Date: Tue, 19 May 2009 20:25:38 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090520002538.GF23803@denix.org>
+References: <4A12BC2C.5020402@taupro.com>
+MIME-version: 1.0
+In-reply-to: <4A12BC2C.5020402@taupro.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: rootfs_tar.bbclass not found?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +32,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2009 22:50:22 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 May 2009 00:33:35 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 19-05-09 23:58, Paul Eggleton wrote:
-> Hi all,
->
-> I'd like to update zaurusd to the latest SVN version in .dev. Attached is a
-> patch that does this, which I have tested on my SL-C3000. Note that I had to
-> update several of the patches; I did so based on the assumption that the
-> versions of a few files (eg. alsa state files) were already correct as
-> previously built in OE.
->
-> Any objections?
+On Tue, May 19, 2009 at 09:03:24AM -0500, Jeff Rush wrote:
+> Hopefully a trivial question.
+> 
+> Objective: I am trying to generate a tarball of an executable program, the
+> helloworld.bb program, for installation onto a system that lacks support for
+> ipk files.
+> 
+> To get a tarball package, I add to my local.conf:
+> 
+>    INHERIT += "package_tar package_ipk"
+> 
+> but when I do:
+> 
+>    bitbake helloworld
+> 
+> or indeed any target, I get the following error during the parse stage:
+> 
+> ERROR: Could not inherit file classes/rootfs_tar.bbclass while parsing
+> /home/jeff/Projects/OpenEmbedded/openembedded/recipes/images/slugos-image.bb
+> 
+> This error is repeated for every *-image.bb file parsed.  The reason is
+> because the file classes/image.bbclass has this line at the top of the file:
+> 
+>   inherit rootfs_${IMAGE_PKGTYPE}
+> 
+> so it is looking for "rootfs_tar.bbclass" but the only rootfs-*.bbclass files
+> that exist are:
+> 
+>   classes/rootfs_deb.bbclass
+>   classes/rootfs_ipk.bbclass
+>   classes/rootfs_rpm.bbclass
+> 
+> So building an image from tar'd packages is not support - fine, because in
+> this case I really do not want to build an image, just a single helloworld.tar
+> package.  But I cannot get past the parsing phase because of this problem.
+> 
+> What can I add to my local.conf to 'short circuit' this logic related to the
+> building of images?
 
-You tested it on a device, so go ahead.
+Can you try setting BBMASK = "image" in your local.conf?
 
-regards,
-
-Koen
-
+-- 
+Denys
 
 
