@@ -1,33 +1,32 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M6ijD-0002Ol-ID
-	for openembedded-devel@openembedded.org; Wed, 20 May 2009 12:09:01 +0200
+	id 1M6k5g-0006dc-Qr
+	for openembedded-devel@openembedded.org; Wed, 20 May 2009 13:36:15 +0200
 Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M6iby-0004U7-6s
-	for openembedded-devel@openembedded.org; Wed, 20 May 2009 10:01:22 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1M6jyT-0008VS-G7
+	for openembedded-devel@openembedded.org; Wed, 20 May 2009 11:28:41 +0000
+Received: from iap-pxy-mow1.siemens.ru ([212.248.25.26])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 20 May 2009 10:01:22 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Wed, 20 May 2009 11:28:41 +0000
+Received: from dbaryshkov by iap-pxy-mow1.siemens.ru with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 20 May 2009 10:01:22 +0000
+	Wed, 20 May 2009 11:28:41 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 20 May 2009 12:01:10 +0200
-Message-ID: <gv0kd6$gn4$1@ger.gmane.org>
-References: <c384c5ea0905150520k3e38f4f3q2d2279f714eded1a@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Date: Wed, 20 May 2009 11:28:30 +0000 (UTC)
+Message-ID: <gv0pgt$2j5$1@ger.gmane.org>
+References: <guuctg$d52$1@ger.gmane.org> <guv1td$p0n$1@ger.gmane.org>
+	<4A130D42.5080806@balister.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090515 Shredder/3.0b3pre
-In-Reply-To: <c384c5ea0905150520k3e38f4f3q2d2279f714eded1a@mail.gmail.com>
+X-Gmane-NNTP-Posting-Host: iap-pxy-mow1.siemens.ru
+User-Agent: Pan/0.132 (Waxed in Black)
 Sender: news <news@ger.gmane.org>
-Subject: Re: [HEADS UP] zecke-no-host-includes.patch is not compiled-in for gcc 4.3.2+ (4.3.x?)
+Subject: Re: Patches in patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 10:09:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 May 2009 11:36:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 15-05-09 14:20, Leon Woestenberg wrote:
-> Hello,
->
-> I got a heads-up from one of the ptxdist guys that:
->
-> http://cgit.openembedded.org/cgit.cgi?url=openembedded/tree/recipes/gcc/gcc-4.3.2/zecke-no-host-includes.patch
->
-> no longer works for GCC 4.3.2 as GCC upstream changed "CROSS_COMPILE"
-> to "CROSS_DIRECTORY_STRUCTURE".
->
-> and the patch uses #ifdef CROSS_COMPILE
->
->
-> The patch code thus is not compiled-in.
->
->
-> I currently have no gcc 4.3.x oe builds, maybe someone who does can
-> verify this quickly?
+Philip Balister wrote:
 
-I can confirm that the code doesn't get compiled in for 4.3.3.
+> Dmitry Eremin-Solenikov wrote:
+>> Koen Kooi wrote:
+>> 
+>>> Hi,
+>>>
+>>> The following patches in patchwork still have the 'new' status:
+>>>
+>>>
+>> What is the policy/process for gaining the ability to change/comment
+>> other people patches in patchwork? I'd like to do some work on it but
+>> I'd like to have ability to reflect the status of applied patches in
+>> the patchwork.
+> 
+> I don't think you can directly comment in patchwork. If you want to
+> change status you need to register. I've been changing everyone to be
+> able to change patch status. Please note, if you have accents in your
+> username, I cannot change your patchwork privileges.
+> 
+> Does this answer your question?
 
-could anyone confirm that my checkin from this morning fixes it? (it 
-doesn't break, I've tested that)
+Yes, thank you.
 
-regards,
+-- 
+With best wishes
+Dmitry
 
-Koen
 
 
 
