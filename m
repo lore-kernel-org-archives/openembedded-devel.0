@@ -1,24 +1,24 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1M6gea-0005Bc-Qb
+	(envelope-from <denis@denix.org>) id 1M6gew-0005DR-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 May 2009 09:56:00 +0200
-Received: from gandalf.denix.org ([71.127.60.148]) by vms173005.mailsrvcs.net
+	Wed, 20 May 2009 09:56:20 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173007.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KJX000WSMZZC5X8@vms173005.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KJX00I11MZZVZ4A@vms173007.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Wed,
 	20 May 2009 02:48:01 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 1C99F14AF62; Wed,
+	by gandalf.denix.org (Postfix) with ESMTP id 1342414AF60; Wed,
 	20 May 2009 03:47:59 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 May 2009 03:47:54 -0400
-Message-id: <1242805678-20645-5-git-send-email-denis@denix.org>
+Date: Wed, 20 May 2009 03:47:52 -0400
+Message-id: <1242805678-20645-3-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.6.0.6
 In-reply-to: <1242805678-20645-1-git-send-email-denis@denix.org>
 References: <1242805678-20645-1-git-send-email-denis@denix.org>
-Subject: [PATCHv2 4/8] dm355-evm: add new machine definition and defconfig
+Subject: [PATCHv2 2/8] dm6446-evm: rename machine from davinci-dvevm and add defconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,40 +32,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 07:56:09 -0000
+X-List-Received-Date: Wed, 20 May 2009 07:56:25 -0000
 
 
 Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 ---
- conf/machine/dm355-evm.conf                     |    7 +
- recipes/linux/linux-davinci/dm355-evm/defconfig | 1223 +++++++++++++++++++++++
- 2 files changed, 1230 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/dm355-evm.conf
- create mode 100644 recipes/linux/linux-davinci/dm355-evm/defconfig
+ conf/machine/davinci-dvevm.conf                  |   24 -
+ conf/machine/dm6446-evm.conf                     |    7 +
+ recipes/linux/linux-davinci/dm6446-evm/defconfig | 1738 ++++++++++++++++++++++
+ 3 files changed, 1745 insertions(+), 24 deletions(-)
+ delete mode 100644 conf/machine/davinci-dvevm.conf
+ create mode 100644 conf/machine/dm6446-evm.conf
+ create mode 100644 recipes/linux/linux-davinci/dm6446-evm/defconfig
 
-diff --git a/conf/machine/dm355-evm.conf b/conf/machine/dm355-evm.conf
+diff --git a/conf/machine/davinci-dvevm.conf b/conf/machine/davinci-dvevm.conf
+deleted file mode 100644
+index f52efc2..0000000
+--- a/conf/machine/davinci-dvevm.conf
++++ /dev/null
+@@ -1,24 +0,0 @@
+-#@TYPE: Machine
+-#@NAME: DM6446 cpu on a Davinci EVM board
+-#@DESCRIPTION: Machine configuration for the TI Davinci EVM board
+-
+-TARGET_ARCH = "arm"
+-
+-HOTPLUG = "udev"
+-
+-PREFERRED_PROVIDER_virtual/kernel = "linux-davinci"
+-PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
+-
+-#PREFERRED_VERSION_u-boot = "1.3.2"
+-UBOOT_MACHINE = "davinci_dvevm_config"
+-UBOOT_ENTRYPOINT="0x80008000"
+-
+-SERIAL_CONSOLE ?= "115200 ttyS0"
+-EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
+-
+-#ROOT_FLASH_SIZE = "29"
+-
+-MACHINE_FEATURES = "kernel26 pcmcia usbhost alsa"
+-
+-require conf/machine/include/tune-arm926ejs.inc
+-
+diff --git a/conf/machine/dm6446-evm.conf b/conf/machine/dm6446-evm.conf
 new file mode 100644
-index 0000000..d509152
+index 0000000..8b048a5
 --- /dev/null
-+++ b/conf/machine/dm355-evm.conf
++++ b/conf/machine/dm6446-evm.conf
 @@ -0,0 +1,7 @@
 +#@TYPE: Machine
-+#@NAME: DM355 CPUs on a Davinci DM355 EVM board
-+#@DESCRIPTION: Machine configuration for the TI Davinci DM355 EVM board
++#@NAME: DM644x CPUs on a Davinci DM6446 EVM board
++#@DESCRIPTION: Machine configuration for the TI Davinci DM6446 EVM board
 +
 +require conf/machine/include/davinci.inc
 +
 +UBOOT_MACHINE = "davinci_dvevm_config"
-diff --git a/recipes/linux/linux-davinci/dm355-evm/defconfig b/recipes/linux/linux-davinci/dm355-evm/defconfig
+diff --git a/recipes/linux/linux-davinci/dm6446-evm/defconfig b/recipes/linux/linux-davinci/dm6446-evm/defconfig
 new file mode 100644
-index 0000000..cbf12de
+index 0000000..130a010
 --- /dev/null
-+++ b/recipes/linux/linux-davinci/dm355-evm/defconfig
-@@ -0,0 +1,1223 @@
++++ b/recipes/linux/linux-davinci/dm6446-evm/defconfig
+@@ -0,0 +1,1738 @@
 +#
 +# Automatically generated make config: don't edit
 +# Linux kernel version: 2.6.29-rc7-davinci1
-+# Wed Apr 22 15:49:34 2009
++# Wed Apr 22 16:40:17 2009
 +#
 +CONFIG_ARM=y
 +CONFIG_SYS_SUPPORTS_APM_EMULATION=y
@@ -137,6 +169,7 @@ index 0000000..cbf12de
 +CONFIG_UID16=y
 +CONFIG_SYSCTL_SYSCALL=y
 +CONFIG_KALLSYMS=y
++# CONFIG_KALLSYMS_ALL is not set
 +# CONFIG_KALLSYMS_EXTRA_PASS is not set
 +CONFIG_HOTPLUG=y
 +CONFIG_PRINTK=y
@@ -241,14 +274,15 @@ index 0000000..cbf12de
 +#
 +# DaVinci Core Type
 +#
-+# CONFIG_ARCH_DAVINCI_DM644x is not set
++CONFIG_ARCH_DAVINCI_DM644x=y
 +# CONFIG_ARCH_DAVINCI_DM646x is not set
-+CONFIG_ARCH_DAVINCI_DM355=y
++# CONFIG_ARCH_DAVINCI_DM355 is not set
 +
 +#
 +# DaVinci Board Type
 +#
-+CONFIG_MACH_DAVINCI_DM355_EVM=y
++CONFIG_MACH_DAVINCI_EVM=y
++# CONFIG_MACH_SFFSDR is not set
 +CONFIG_DAVINCI_MUX=y
 +# CONFIG_DAVINCI_MUX_DEBUG is not set
 +# CONFIG_DAVINCI_MUX_WARNINGS is not set
@@ -300,7 +334,7 @@ index 0000000..cbf12de
 +CONFIG_PREEMPT=y
 +CONFIG_HZ=100
 +CONFIG_AEABI=y
-+CONFIG_OABI_COMPAT=y
++# CONFIG_OABI_COMPAT is not set
 +CONFIG_ARCH_FLATMEM_HAS_HOLES=y
 +# CONFIG_ARCH_SPARSEMEM_DEFAULT is not set
 +# CONFIG_ARCH_SELECT_MEMORY_MODEL is not set
@@ -342,8 +376,6 @@ index 0000000..cbf12de
 +#
 +# At least one emulation must be selected
 +#
-+# CONFIG_FPE_NWFPE is not set
-+# CONFIG_FPE_FASTFPE is not set
 +# CONFIG_VFP is not set
 +
 +#
@@ -497,15 +529,110 @@ index 0000000..cbf12de
 +CONFIG_STANDALONE=y
 +CONFIG_PREVENT_FIRMWARE_BUILD=y
 +# CONFIG_FW_LOADER is not set
++# CONFIG_DEBUG_DRIVER is not set
++# CONFIG_DEBUG_DEVRES is not set
 +# CONFIG_SYS_HYPERVISOR is not set
 +# CONFIG_CONNECTOR is not set
-+# CONFIG_MTD is not set
++CONFIG_MTD=m
++# CONFIG_MTD_DEBUG is not set
++# CONFIG_MTD_CONCAT is not set
++CONFIG_MTD_PARTITIONS=y
++# CONFIG_MTD_TESTS is not set
++# CONFIG_MTD_REDBOOT_PARTS is not set
++# CONFIG_MTD_AFS_PARTS is not set
++# CONFIG_MTD_AR7_PARTS is not set
++
++#
++# User Modules And Translation Layers
++#
++CONFIG_MTD_CHAR=m
++CONFIG_MTD_BLKDEVS=m
++CONFIG_MTD_BLOCK=m
++# CONFIG_MTD_BLOCK_RO is not set
++# CONFIG_FTL is not set
++# CONFIG_NFTL is not set
++# CONFIG_INFTL is not set
++# CONFIG_RFD_FTL is not set
++# CONFIG_SSFDC is not set
++# CONFIG_MTD_OOPS is not set
++
++#
++# RAM/ROM/Flash chip drivers
++#
++CONFIG_MTD_CFI=m
++# CONFIG_MTD_JEDECPROBE is not set
++CONFIG_MTD_GEN_PROBE=m
++# CONFIG_MTD_CFI_ADV_OPTIONS is not set
++CONFIG_MTD_MAP_BANK_WIDTH_1=y
++CONFIG_MTD_MAP_BANK_WIDTH_2=y
++CONFIG_MTD_MAP_BANK_WIDTH_4=y
++# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
++# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
++# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
++CONFIG_MTD_CFI_I1=y
++CONFIG_MTD_CFI_I2=y
++# CONFIG_MTD_CFI_I4 is not set
++# CONFIG_MTD_CFI_I8 is not set
++# CONFIG_MTD_CFI_INTELEXT is not set
++CONFIG_MTD_CFI_AMDSTD=m
++# CONFIG_MTD_CFI_STAA is not set
++CONFIG_MTD_CFI_UTIL=m
++# CONFIG_MTD_RAM is not set
++# CONFIG_MTD_ROM is not set
++# CONFIG_MTD_ABSENT is not set
++
++#
++# Mapping drivers for chip access
++#
++# CONFIG_MTD_COMPLEX_MAPPINGS is not set
++CONFIG_MTD_PHYSMAP=m
++# CONFIG_MTD_PHYSMAP_COMPAT is not set
++# CONFIG_MTD_ARM_INTEGRATOR is not set
++# CONFIG_MTD_PLATRAM is not set
++
++#
++# Self-contained MTD device drivers
++#
++# CONFIG_MTD_SLRAM is not set
++# CONFIG_MTD_PHRAM is not set
++# CONFIG_MTD_MTDRAM is not set
++# CONFIG_MTD_BLOCK2MTD is not set
++
++#
++# Disk-On-Chip Device Drivers
++#
++# CONFIG_MTD_DOC2000 is not set
++# CONFIG_MTD_DOC2001 is not set
++# CONFIG_MTD_DOC2001PLUS is not set
++CONFIG_MTD_NAND=m
++# CONFIG_MTD_NAND_VERIFY_WRITE is not set
++# CONFIG_MTD_NAND_ECC_SMC is not set
++# CONFIG_MTD_NAND_MUSEUM_IDS is not set
++# CONFIG_MTD_NAND_GPIO is not set
++CONFIG_MTD_NAND_IDS=m
++# CONFIG_MTD_NAND_DISKONCHIP is not set
++# CONFIG_MTD_NAND_NANDSIM is not set
++# CONFIG_MTD_NAND_PLATFORM is not set
++# CONFIG_MTD_ALAUDA is not set
++CONFIG_MTD_NAND_DAVINCI=m
++# CONFIG_MTD_ONENAND is not set
++
++#
++# LPDDR flash memory drivers
++#
++# CONFIG_MTD_LPDDR is not set
++
++#
++# UBI - Unsorted block images
++#
++# CONFIG_MTD_UBI is not set
 +# CONFIG_PARPORT is not set
 +CONFIG_BLK_DEV=y
 +# CONFIG_BLK_DEV_COW_COMMON is not set
 +CONFIG_BLK_DEV_LOOP=m
 +# CONFIG_BLK_DEV_CRYPTOLOOP is not set
 +# CONFIG_BLK_DEV_NBD is not set
++# CONFIG_BLK_DEV_UB is not set
 +CONFIG_BLK_DEV_RAM=y
 +CONFIG_BLK_DEV_RAM_COUNT=1
 +CONFIG_BLK_DEV_RAM_SIZE=32768
@@ -524,7 +651,28 @@ index 0000000..cbf12de
 +# CONFIG_EEPROM_LEGACY is not set
 +# CONFIG_EEPROM_93CX6 is not set
 +CONFIG_HAVE_IDE=y
-+# CONFIG_IDE is not set
++CONFIG_IDE=m
++
++#
++# Please see Documentation/ide/ide.txt for help/info on IDE drives
++#
++CONFIG_IDE_TIMINGS=y
++# CONFIG_BLK_DEV_IDE_SATA is not set
++CONFIG_IDE_GD=m
++CONFIG_IDE_GD_ATA=y
++# CONFIG_IDE_GD_ATAPI is not set
++# CONFIG_BLK_DEV_IDECD is not set
++# CONFIG_BLK_DEV_IDETAPE is not set
++# CONFIG_IDE_TASK_IOCTL is not set
++CONFIG_IDE_PROC_FS=y
++
++#
++# IDE chipset support/bugfixes
++#
++# CONFIG_BLK_DEV_PLATFORM is not set
++CONFIG_BLK_DEV_IDEDMA_SFF=y
++CONFIG_BLK_DEV_PALMCHIP_BK3710=m
++CONFIG_BLK_DEV_IDEDMA=y
 +
 +#
 +# SCSI device support
@@ -577,12 +725,31 @@ index 0000000..cbf12de
 +# CONFIG_EQUALIZER is not set
 +CONFIG_TUN=m
 +# CONFIG_VETH is not set
-+# CONFIG_PHYLIB is not set
++CONFIG_PHYLIB=y
++
++#
++# MII PHY device drivers
++#
++# CONFIG_MARVELL_PHY is not set
++# CONFIG_DAVICOM_PHY is not set
++# CONFIG_QSEMI_PHY is not set
++CONFIG_LXT_PHY=y
++# CONFIG_CICADA_PHY is not set
++# CONFIG_VITESSE_PHY is not set
++# CONFIG_SMSC_PHY is not set
++# CONFIG_BROADCOM_PHY is not set
++# CONFIG_ICPLUS_PHY is not set
++# CONFIG_REALTEK_PHY is not set
++# CONFIG_NATIONAL_PHY is not set
++# CONFIG_STE10XP is not set
++# CONFIG_LSI_ET1011C_PHY is not set
++# CONFIG_FIXED_PHY is not set
++# CONFIG_MDIO_BITBANG is not set
 +CONFIG_NET_ETHERNET=y
 +# CONFIG_MII is not set
 +# CONFIG_AX88796 is not set
 +# CONFIG_SMC91X is not set
-+# CONFIG_TI_DAVINCI_EMAC is not set
++CONFIG_TI_DAVINCI_EMAC=y
 +# CONFIG_DM9000 is not set
 +# CONFIG_SMC911X is not set
 +# CONFIG_SMSC911X is not set
@@ -607,6 +774,15 @@ index 0000000..cbf12de
 +#
 +# Enable WiMAX (Networking options) to see the WiMAX drivers
 +#
++
++#
++# USB Network Adapters
++#
++# CONFIG_USB_CATC is not set
++# CONFIG_USB_KAWETH is not set
++# CONFIG_USB_PEGASUS is not set
++# CONFIG_USB_RTL8150 is not set
++# CONFIG_USB_USBNET is not set
 +# CONFIG_WAN is not set
 +CONFIG_PPP=m
 +# CONFIG_PPP_MULTILINK is not set
@@ -670,6 +846,7 @@ index 0000000..cbf12de
 +# CONFIG_TOUCHSCREEN_PENMOUNT is not set
 +# CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
 +# CONFIG_TOUCHSCREEN_TOUCHWIN is not set
++# CONFIG_TOUCHSCREEN_USB_COMPOSITE is not set
 +# CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
 +# CONFIG_TOUCHSCREEN_TSC2007 is not set
 +# CONFIG_INPUT_MISC is not set
@@ -739,6 +916,7 @@ index 0000000..cbf12de
 +#
 +# CONFIG_I2C_PARPORT_LIGHT is not set
 +# CONFIG_I2C_TAOS_EVM is not set
++# CONFIG_I2C_TINY_USB is not set
 +
 +#
 +# Other I2C/SMBus bus drivers
@@ -761,6 +939,7 @@ index 0000000..cbf12de
 +# CONFIG_SPI is not set
 +CONFIG_ARCH_REQUIRE_GPIOLIB=y
 +CONFIG_GPIOLIB=y
++# CONFIG_DEBUG_GPIO is not set
 +# CONFIG_GPIO_SYSFS is not set
 +
 +#
@@ -839,7 +1018,19 @@ index 0000000..cbf12de
 +# CONFIG_HWMON_DEBUG_CHIP is not set
 +# CONFIG_THERMAL is not set
 +# CONFIG_THERMAL_HWMON is not set
-+# CONFIG_WATCHDOG is not set
++CONFIG_WATCHDOG=y
++# CONFIG_WATCHDOG_NOWAYOUT is not set
++
++#
++# Watchdog Device Drivers
++#
++# CONFIG_SOFT_WATCHDOG is not set
++CONFIG_DAVINCI_WATCHDOG=m
++
++#
++# USB-based Watchdog Cards
++#
++# CONFIG_USBPCWATCHDOG is not set
 +CONFIG_SSB_POSSIBLE=y
 +
 +#
@@ -853,7 +1044,6 @@ index 0000000..cbf12de
 +# CONFIG_MFD_CORE is not set
 +# CONFIG_MFD_SM501 is not set
 +# CONFIG_MFD_ASIC3 is not set
-+# CONFIG_MFD_DM355EVM_MSP is not set
 +# CONFIG_HTC_EGPIO is not set
 +# CONFIG_HTC_PASIC3 is not set
 +# CONFIG_TPS65010 is not set
@@ -904,11 +1094,14 @@ index 0000000..cbf12de
 +# CONFIG_VIDEO_VIVI is not set
 +# CONFIG_VIDEO_VPFE_CAPTURE is not set
 +# CONFIG_VIDEO_CPIA is not set
++# CONFIG_VIDEO_CPIA2 is not set
 +# CONFIG_VIDEO_SAA5246A is not set
 +# CONFIG_VIDEO_SAA5249 is not set
 +# CONFIG_SOC_CAMERA is not set
++# CONFIG_V4L_USB_DRIVERS is not set
 +# CONFIG_RADIO_ADAPTERS is not set
 +CONFIG_DAB=y
++# CONFIG_USB_DABUSB is not set
 +
 +#
 +# Graphics support
@@ -919,9 +1112,9 @@ index 0000000..cbf12de
 +CONFIG_FIRMWARE_EDID=y
 +# CONFIG_FB_DDC is not set
 +# CONFIG_FB_BOOT_VESA_SUPPORT is not set
-+# CONFIG_FB_CFB_FILLRECT is not set
-+# CONFIG_FB_CFB_COPYAREA is not set
-+# CONFIG_FB_CFB_IMAGEBLIT is not set
++CONFIG_FB_CFB_FILLRECT=y
++CONFIG_FB_CFB_COPYAREA=y
++CONFIG_FB_CFB_IMAGEBLIT=y
 +# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
 +# CONFIG_FB_SYS_FILLRECT is not set
 +# CONFIG_FB_SYS_COPYAREA is not set
@@ -938,7 +1131,7 @@ index 0000000..cbf12de
 +# Frame buffer hardware drivers
 +#
 +# CONFIG_FB_S1D13XXX is not set
-+# CONFIG_FB_DAVINCI is not set
++CONFIG_FB_DAVINCI=y
 +# CONFIG_FB_VIRTUAL is not set
 +# CONFIG_FB_METRONOME is not set
 +# CONFIG_FB_MB862XX is not set
@@ -965,17 +1158,316 @@ index 0000000..cbf12de
 +CONFIG_LOGO_LINUX_VGA16=y
 +CONFIG_LOGO_LINUX_CLUT224=y
 +CONFIG_SOUND=m
-+CONFIG_SOUND_OSS_CORE=y
-+# CONFIG_SND is not set
-+CONFIG_SOUND_PRIME=m
-+# CONFIG_HID_SUPPORT is not set
-+# CONFIG_USB_SUPPORT is not set
-+# CONFIG_MMC is not set
++# CONFIG_SOUND_OSS_CORE is not set
++CONFIG_SND=m
++CONFIG_SND_TIMER=m
++CONFIG_SND_PCM=m
++# CONFIG_SND_SEQUENCER is not set
++# CONFIG_SND_MIXER_OSS is not set
++# CONFIG_SND_PCM_OSS is not set
++# CONFIG_SND_HRTIMER is not set
++# CONFIG_SND_DYNAMIC_MINORS is not set
++CONFIG_SND_SUPPORT_OLD_API=y
++CONFIG_SND_VERBOSE_PROCFS=y
++# CONFIG_SND_VERBOSE_PRINTK is not set
++# CONFIG_SND_DEBUG is not set
++CONFIG_SND_DRIVERS=y
++# CONFIG_SND_DUMMY is not set
++# CONFIG_SND_MTPAV is not set
++# CONFIG_SND_SERIAL_U16550 is not set
++# CONFIG_SND_MPU401 is not set
++CONFIG_SND_ARM=y
++CONFIG_SND_USB=y
++# CONFIG_SND_USB_AUDIO is not set
++# CONFIG_SND_USB_CAIAQ is not set
++CONFIG_SND_SOC=m
++CONFIG_SND_DAVINCI_SOC=m
++CONFIG_SND_DAVINCI_SOC_I2S=m
++CONFIG_SND_DAVINCI_SOC_EVM=m
++CONFIG_SND_SOC_I2C_AND_SPI=m
++# CONFIG_SND_SOC_ALL_CODECS is not set
++CONFIG_SND_SOC_TLV320AIC3X=m
++# CONFIG_SOUND_PRIME is not set
++CONFIG_HID_SUPPORT=y
++CONFIG_HID=m
++# CONFIG_HID_DEBUG is not set
++# CONFIG_HIDRAW is not set
++
++#
++# USB Input Devices
++#
++CONFIG_USB_HID=m
++# CONFIG_HID_PID is not set
++# CONFIG_USB_HIDDEV is not set
++
++#
++# USB HID Boot Protocol drivers
++#
++# CONFIG_USB_KBD is not set
++# CONFIG_USB_MOUSE is not set
++
++#
++# Special HID drivers
++#
++CONFIG_HID_COMPAT=y
++# CONFIG_HID_A4TECH is not set
++# CONFIG_HID_APPLE is not set
++# CONFIG_HID_BELKIN is not set
++# CONFIG_HID_CHERRY is not set
++# CONFIG_HID_CHICONY is not set
++# CONFIG_HID_CYPRESS is not set
++# CONFIG_HID_EZKEY is not set
++# CONFIG_HID_GYRATION is not set
++# CONFIG_HID_LOGITECH is not set
++# CONFIG_HID_MICROSOFT is not set
++# CONFIG_HID_MONTEREY is not set
++# CONFIG_HID_NTRIG is not set
++# CONFIG_HID_PANTHERLORD is not set
++# CONFIG_HID_PETALYNX is not set
++# CONFIG_HID_SAMSUNG is not set
++# CONFIG_HID_SONY is not set
++# CONFIG_HID_SUNPLUS is not set
++# CONFIG_GREENASIA_FF is not set
++# CONFIG_HID_TOPSEED is not set
++# CONFIG_THRUSTMASTER_FF is not set
++# CONFIG_ZEROPLUS_FF is not set
++CONFIG_USB_SUPPORT=y
++CONFIG_USB_ARCH_HAS_HCD=y
++# CONFIG_USB_ARCH_HAS_OHCI is not set
++# CONFIG_USB_ARCH_HAS_EHCI is not set
++CONFIG_USB=m
++# CONFIG_USB_DEBUG is not set
++# CONFIG_USB_ANNOUNCE_NEW_DEVICES is not set
++
++#
++# Miscellaneous USB options
++#
++CONFIG_USB_DEVICEFS=y
++CONFIG_USB_DEVICE_CLASS=y
++# CONFIG_USB_DYNAMIC_MINORS is not set
++# CONFIG_USB_OTG is not set
++# CONFIG_USB_OTG_WHITELIST is not set
++# CONFIG_USB_OTG_BLACKLIST_HUB is not set
++CONFIG_USB_MON=m
++# CONFIG_USB_WUSB is not set
++# CONFIG_USB_WUSB_CBAF is not set
++
++#
++# USB Host Controller Drivers
++#
++# CONFIG_USB_C67X00_HCD is not set
++# CONFIG_USB_OXU210HP_HCD is not set
++# CONFIG_USB_ISP116X_HCD is not set
++# CONFIG_USB_SL811_HCD is not set
++# CONFIG_USB_R8A66597_HCD is not set
++# CONFIG_USB_HWA_HCD is not set
++CONFIG_USB_MUSB_HDRC=m
++CONFIG_USB_MUSB_SOC=y
++
++#
++# DaVinci 35x and 644x USB support
++#
++# CONFIG_USB_MUSB_HOST is not set
++CONFIG_USB_MUSB_PERIPHERAL=y
++# CONFIG_USB_MUSB_OTG is not set
++CONFIG_USB_GADGET_MUSB_HDRC=y
++CONFIG_MUSB_PIO_ONLY=y
++# CONFIG_USB_MUSB_DEBUG is not set
++
++#
++# USB Device Class drivers
++#
++# CONFIG_USB_ACM is not set
++# CONFIG_USB_PRINTER is not set
++# CONFIG_USB_WDM is not set
++# CONFIG_USB_TMC is not set
++
++#
++# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may also be needed;
++#
++
++#
++# see USB_STORAGE Help for more information
++#
++CONFIG_USB_STORAGE=m
++# CONFIG_USB_STORAGE_DEBUG is not set
++# CONFIG_USB_STORAGE_DATAFAB is not set
++# CONFIG_USB_STORAGE_FREECOM is not set
++# CONFIG_USB_STORAGE_ISD200 is not set
++# CONFIG_USB_STORAGE_USBAT is not set
++# CONFIG_USB_STORAGE_SDDR09 is not set
++# CONFIG_USB_STORAGE_SDDR55 is not set
++# CONFIG_USB_STORAGE_JUMPSHOT is not set
++# CONFIG_USB_STORAGE_ALAUDA is not set
++# CONFIG_USB_STORAGE_ONETOUCH is not set
++# CONFIG_USB_STORAGE_KARMA is not set
++# CONFIG_USB_STORAGE_CYPRESS_ATACB is not set
++# CONFIG_USB_LIBUSUAL is not set
++
++#
++# USB Imaging devices
++#
++# CONFIG_USB_MDC800 is not set
++# CONFIG_USB_MICROTEK is not set
++
++#
++# USB port drivers
++#
++# CONFIG_USB_SERIAL is not set
++
++#
++# USB Miscellaneous drivers
++#
++# CONFIG_USB_EMI62 is not set
++# CONFIG_USB_EMI26 is not set
++# CONFIG_USB_ADUTUX is not set
++# CONFIG_USB_SEVSEG is not set
++# CONFIG_USB_RIO500 is not set
++# CONFIG_USB_LEGOTOWER is not set
++# CONFIG_USB_LCD is not set
++# CONFIG_USB_BERRY_CHARGE is not set
++# CONFIG_USB_LED is not set
++# CONFIG_USB_CYPRESS_CY7C63 is not set
++# CONFIG_USB_CYTHERM is not set
++# CONFIG_USB_PHIDGET is not set
++# CONFIG_USB_IDMOUSE is not set
++# CONFIG_USB_FTDI_ELAN is not set
++# CONFIG_USB_APPLEDISPLAY is not set
++# CONFIG_USB_LD is not set
++# CONFIG_USB_TRANCEVIBRATOR is not set
++# CONFIG_USB_IOWARRIOR is not set
++# CONFIG_USB_TEST is not set
++# CONFIG_USB_ISIGHTFW is not set
++# CONFIG_USB_VST is not set
++CONFIG_USB_GADGET=m
++# CONFIG_USB_GADGET_DEBUG is not set
++CONFIG_USB_GADGET_DEBUG_FILES=y
++# CONFIG_USB_GADGET_DEBUG_FS is not set
++CONFIG_USB_GADGET_VBUS_DRAW=2
++CONFIG_USB_GADGET_SELECTED=y
++# CONFIG_USB_GADGET_AT91 is not set
++# CONFIG_USB_GADGET_ATMEL_USBA is not set
++# CONFIG_USB_GADGET_FSL_USB2 is not set
++# CONFIG_USB_GADGET_LH7A40X is not set
++# CONFIG_USB_GADGET_OMAP is not set
++# CONFIG_USB_GADGET_PXA25X is not set
++# CONFIG_USB_GADGET_PXA27X is not set
++# CONFIG_USB_GADGET_S3C2410 is not set
++# CONFIG_USB_GADGET_IMX is not set
++# CONFIG_USB_GADGET_M66592 is not set
++# CONFIG_USB_GADGET_AMD5536UDC is not set
++# CONFIG_USB_GADGET_FSL_QE is not set
++# CONFIG_USB_GADGET_CI13XXX is not set
++# CONFIG_USB_GADGET_NET2280 is not set
++# CONFIG_USB_GADGET_GOKU is not set
++# CONFIG_USB_GADGET_DUMMY_HCD is not set
++CONFIG_USB_GADGET_DUALSPEED=y
++CONFIG_USB_ZERO=m
++CONFIG_USB_ETH=m
++CONFIG_USB_ETH_RNDIS=y
++CONFIG_USB_GADGETFS=m
++CONFIG_USB_FILE_STORAGE=m
++# CONFIG_USB_FILE_STORAGE_TEST is not set
++CONFIG_USB_G_SERIAL=m
++# CONFIG_USB_MIDI_GADGET is not set
++CONFIG_USB_G_PRINTER=m
++# CONFIG_USB_CDC_COMPOSITE is not set
++
++#
++# OTG and related infrastructure
++#
++CONFIG_USB_OTG_UTILS=y
++# CONFIG_USB_GPIO_VBUS is not set
++CONFIG_MMC=m
++# CONFIG_MMC_DEBUG is not set
++# CONFIG_MMC_UNSAFE_RESUME is not set
++
++#
++# MMC/SD/SDIO Card Drivers
++#
++CONFIG_MMC_BLOCK=m
++CONFIG_MMC_BLOCK_BOUNCE=y
++# CONFIG_SDIO_UART is not set
++# CONFIG_MMC_TEST is not set
++
++#
++# MMC/SD/SDIO Host Controller Drivers
++#
++# CONFIG_MMC_SDHCI is not set
++CONFIG_MMC_DAVINCI=m
 +# CONFIG_MEMSTICK is not set
 +# CONFIG_ACCESSIBILITY is not set
-+# CONFIG_NEW_LEDS is not set
++CONFIG_NEW_LEDS=y
++CONFIG_LEDS_CLASS=m
++
++#
++# LED drivers
++#
++# CONFIG_LEDS_PCA9532 is not set
++CONFIG_LEDS_GPIO=m
++# CONFIG_LEDS_PCA955X is not set
++
++#
++# LED Triggers
++#
++CONFIG_LEDS_TRIGGERS=y
++CONFIG_LEDS_TRIGGER_TIMER=m
++# CONFIG_LEDS_TRIGGER_IDE_DISK is not set
++CONFIG_LEDS_TRIGGER_HEARTBEAT=m
++# CONFIG_LEDS_TRIGGER_BACKLIGHT is not set
++# CONFIG_LEDS_TRIGGER_DEFAULT_ON is not set
 +CONFIG_RTC_LIB=y
-+# CONFIG_RTC_CLASS is not set
++CONFIG_RTC_CLASS=m
++
++#
++# RTC interfaces
++#
++CONFIG_RTC_INTF_SYSFS=y
++CONFIG_RTC_INTF_PROC=y
++CONFIG_RTC_INTF_DEV=y
++# CONFIG_RTC_INTF_DEV_UIE_EMUL is not set
++# CONFIG_RTC_DRV_TEST is not set
++
++#
++# I2C RTC drivers
++#
++# CONFIG_RTC_DRV_DAVINCI_EVM is not set
++# CONFIG_RTC_DRV_DS1307 is not set
++# CONFIG_RTC_DRV_DS1374 is not set
++# CONFIG_RTC_DRV_DS1672 is not set
++# CONFIG_RTC_DRV_MAX6900 is not set
++# CONFIG_RTC_DRV_RS5C372 is not set
++# CONFIG_RTC_DRV_ISL1208 is not set
++# CONFIG_RTC_DRV_X1205 is not set
++# CONFIG_RTC_DRV_PCF8563 is not set
++# CONFIG_RTC_DRV_PCF8583 is not set
++# CONFIG_RTC_DRV_M41T80 is not set
++# CONFIG_RTC_DRV_S35390A is not set
++# CONFIG_RTC_DRV_FM3130 is not set
++# CONFIG_RTC_DRV_RX8581 is not set
++
++#
++# SPI RTC drivers
++#
++
++#
++# Platform RTC drivers
++#
++# CONFIG_RTC_DRV_CMOS is not set
++# CONFIG_RTC_DRV_DS1286 is not set
++# CONFIG_RTC_DRV_DS1511 is not set
++# CONFIG_RTC_DRV_DS1553 is not set
++# CONFIG_RTC_DRV_DS1742 is not set
++# CONFIG_RTC_DRV_STK17TA8 is not set
++# CONFIG_RTC_DRV_M48T86 is not set
++# CONFIG_RTC_DRV_M48T35 is not set
++# CONFIG_RTC_DRV_M48T59 is not set
++# CONFIG_RTC_DRV_BQ4802 is not set
++# CONFIG_RTC_DRV_V3020 is not set
++
++#
++# on-CPU RTC drivers
++#
 +# CONFIG_DMADEVICES is not set
 +# CONFIG_REGULATOR is not set
 +# CONFIG_UIO is not set
@@ -993,6 +1485,7 @@ index 0000000..cbf12de
 +# CONFIG_EXT3_FS_SECURITY is not set
 +# CONFIG_EXT4_FS is not set
 +CONFIG_JBD=y
++# CONFIG_JBD_DEBUG is not set
 +CONFIG_FS_MBCACHE=y
 +# CONFIG_REISERFS_FS is not set
 +# CONFIG_JFS_FS is not set
@@ -1048,6 +1541,17 @@ index 0000000..cbf12de
 +# CONFIG_BEFS_FS is not set
 +# CONFIG_BFS_FS is not set
 +# CONFIG_EFS_FS is not set
++CONFIG_JFFS2_FS=m
++CONFIG_JFFS2_FS_DEBUG=0
++CONFIG_JFFS2_FS_WRITEBUFFER=y
++# CONFIG_JFFS2_FS_WBUF_VERIFY is not set
++# CONFIG_JFFS2_SUMMARY is not set
++# CONFIG_JFFS2_FS_XATTR is not set
++# CONFIG_JFFS2_COMPRESSION_OPTIONS is not set
++CONFIG_JFFS2_ZLIB=y
++# CONFIG_JFFS2_LZO is not set
++CONFIG_JFFS2_RTIME=y
++# CONFIG_JFFS2_RUBIN is not set
 +CONFIG_CRAMFS=y
 +# CONFIG_SQUASHFS is not set
 +# CONFIG_VXFS_FS is not set
@@ -1150,29 +1654,72 @@ index 0000000..cbf12de
 +# Kernel hacking
 +#
 +# CONFIG_PRINTK_TIME is not set
-+# CONFIG_ENABLE_WARN_DEPRECATED is not set
-+# CONFIG_ENABLE_MUST_CHECK is not set
++CONFIG_ENABLE_WARN_DEPRECATED=y
++CONFIG_ENABLE_MUST_CHECK=y
 +CONFIG_FRAME_WARN=1024
 +# CONFIG_MAGIC_SYSRQ is not set
 +# CONFIG_UNUSED_SYMBOLS is not set
-+# CONFIG_DEBUG_FS is not set
++CONFIG_DEBUG_FS=y
 +# CONFIG_HEADERS_CHECK is not set
-+# CONFIG_DEBUG_KERNEL is not set
-+# CONFIG_DEBUG_BUGVERBOSE is not set
++CONFIG_DEBUG_KERNEL=y
++# CONFIG_DEBUG_SHIRQ is not set
++CONFIG_DETECT_SOFTLOCKUP=y
++# CONFIG_BOOTPARAM_SOFTLOCKUP_PANIC is not set
++CONFIG_BOOTPARAM_SOFTLOCKUP_PANIC_VALUE=0
++CONFIG_SCHED_DEBUG=y
++# CONFIG_SCHEDSTATS is not set
++CONFIG_TIMER_STATS=y
++# CONFIG_DEBUG_OBJECTS is not set
++# CONFIG_DEBUG_SLAB is not set
++CONFIG_DEBUG_PREEMPT=y
++# CONFIG_DEBUG_RT_MUTEXES is not set
++# CONFIG_RT_MUTEX_TESTER is not set
++# CONFIG_DEBUG_SPINLOCK is not set
++# CONFIG_DEBUG_MUTEXES is not set
++# CONFIG_DEBUG_LOCK_ALLOC is not set
++# CONFIG_PROVE_LOCKING is not set
++# CONFIG_LOCK_STAT is not set
++# CONFIG_DEBUG_SPINLOCK_SLEEP is not set
++# CONFIG_DEBUG_LOCKING_API_SELFTESTS is not set
++# CONFIG_DEBUG_KOBJECT is not set
++CONFIG_DEBUG_BUGVERBOSE=y
++# CONFIG_DEBUG_INFO is not set
++# CONFIG_DEBUG_VM is not set
++# CONFIG_DEBUG_WRITECOUNT is not set
 +# CONFIG_DEBUG_MEMORY_INIT is not set
++# CONFIG_DEBUG_LIST is not set
++# CONFIG_DEBUG_SG is not set
++# CONFIG_DEBUG_NOTIFIERS is not set
 +CONFIG_FRAME_POINTER=y
++# CONFIG_BOOT_PRINTK_DELAY is not set
++# CONFIG_RCU_TORTURE_TEST is not set
 +# CONFIG_RCU_CPU_STALL_DETECTOR is not set
++# CONFIG_BACKTRACE_SELF_TEST is not set
++# CONFIG_DEBUG_BLOCK_EXT_DEVT is not set
++# CONFIG_FAULT_INJECTION is not set
 +# CONFIG_LATENCYTOP is not set
-+CONFIG_SYSCTL_SYSCALL_CHECK=y
++# CONFIG_SYSCTL_SYSCALL_CHECK is not set
 +CONFIG_HAVE_FUNCTION_TRACER=y
 +
 +#
 +# Tracers
 +#
++# CONFIG_FUNCTION_TRACER is not set
++# CONFIG_IRQSOFF_TRACER is not set
++# CONFIG_PREEMPT_TRACER is not set
++# CONFIG_SCHED_TRACER is not set
++# CONFIG_CONTEXT_SWITCH_TRACER is not set
++# CONFIG_BOOT_TRACER is not set
++# CONFIG_TRACE_BRANCH_PROFILING is not set
++# CONFIG_STACK_TRACER is not set
 +# CONFIG_DYNAMIC_PRINTK_DEBUG is not set
 +# CONFIG_SAMPLES is not set
 +CONFIG_HAVE_ARCH_KGDB=y
++# CONFIG_KGDB is not set
 +# CONFIG_DEBUG_USER is not set
++CONFIG_DEBUG_ERRORS=y
++# CONFIG_DEBUG_STACK_USAGE is not set
++# CONFIG_DEBUG_LL is not set
 +
 +#
 +# Security options
@@ -1274,7 +1821,7 @@ index 0000000..cbf12de
 +CONFIG_GENERIC_FIND_LAST_BIT=y
 +CONFIG_CRC_CCITT=m
 +# CONFIG_CRC16 is not set
-+# CONFIG_CRC_T10DIF is not set
++CONFIG_CRC_T10DIF=m
 +# CONFIG_CRC_ITU_T is not set
 +CONFIG_CRC32=y
 +# CONFIG_CRC7 is not set
