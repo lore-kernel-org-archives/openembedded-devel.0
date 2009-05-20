@@ -1,36 +1,24 @@
-Received: from [220.181.12.15] (helo=m5-85.163.com)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lida_mail@163.com>) id 1M6gUD-0004xS-Ic
+	(envelope-from <denis@denix.org>) id 1M6geA-0005BI-Eq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 May 2009 09:45:15 +0200
-Received: from [192.168.58.100] (unknown [61.171.145.149])
-	by smtp11 (Coremail) with SMTP id D8CowLDrOk1HsxNKH0KnAQ--.32368S2;
-	Wed, 20 May 2009 15:37:44 +0800 (CST)
-From: "Daniel.Li" <lida_mail@163.com>
-To: openembedded-issues <openembedded-devel@lists.openembedded.org>
-Organization: PALFocus (http://palfocus.oicp.net)
-Date: Wed, 20 May 2009 15:37:38 +0800
-Message-Id: <1242805059.4619.12.camel@daniel-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-CM-TRANSID: D8CowLDrOk1HsxNKH0KnAQ--.32368S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
-	VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUOw7k042IEc7kJM7k042IE42xK82IY6r43
-	WwAYjxAI6xAIw28IcVAK0I8IjxAxM7k042IE4IxYO2xFxVAqjxCEw4Av424lb7Iv0xC_JF
-	4lb4IE77IF4wAFYI0v6xAqj4kS57xkM7AC8VAFwI0_Jr0_Gr1l1I0E4x80FVCIwcAKzIAt
-	M7C26IkvcIIF6IxKo4kEV4yl1IIY67AEw4v_Jr0_Jr4l84ACjcxK6xIIjxv20xvE14v26w
-	1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26rxl6s0DM28EF7xvwVC2z280aVAFwI0_
-	GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2kK67kvxFCE548m6r1fGryUXw
-	AawVACjsI_Ar4v6c8GOVW06r1DJrWUAwAqjxCE34x0Y48IcwAq048E620vw7xCY7CEYx80
-	8205XwAq048E620vw7xCY7CE4x8GYI0EYx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
-	IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwACjcxG0xvY0x0EwIxGrwAC
-	62BYpTIE1TZKA3svLVAKvSnIqfZI6r4l7I0Y6sxI4wCY1Ik26cxK620vw7xCY7Wlc7Ca8V
-	AvwVCjb41lc7Ca8VAvwVCFzxkY4VA2I41lc2xSY4AK67AK6r4xMxkI7II2jI8vz4v_Cr0_
-	Zr1l42xK82IYc2Ij64vIr41l4x8a6c8ajcxJMI8E67AF67kF1VAFwI0_Jr0_JrylIxkGc2
-	Ij64vIr41lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8
-	JbIYCTnIWIevJa73UjIFyTuYvjxUsPrcUUUUU
-X-CM-SenderInfo: 5olgtshpdlzqqrwthudrp/
-Subject: BT device supported
+	Wed, 20 May 2009 09:55:33 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KJX0027XN0071K8@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	20 May 2009 02:48:01 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 3532814AF65; Wed,
+	20 May 2009 03:47:59 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 May 2009 03:47:57 -0400
+Message-id: <1242805678-20645-8-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.0.6
+In-reply-to: <1242805678-20645-1-git-send-email-denis@denix.org>
+References: <1242805678-20645-1-git-send-email-denis@denix.org>
+Subject: [PATCHv2 7/8] linux-davinci: build linux-davinci kernels for dm6446, dm6467 and dm355 EVMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,33 +32,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2009 07:45:21 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
-
-Dear List,
-
-I have checked Getting started page [1] and search bluetooth related
-page [2]
-
-But I didn't find any useful info to let me know which type of BT device
-I should buy.
-
-Maybe it has been discussed before, if so, please send me a link. Or
-please let me know which BT device I should buy.
-
-I think there might be some difference between type of device, as I have
-posted before BL-5C battery issue :(
+X-List-Received-Date: Wed, 20 May 2009 07:55:43 -0000
 
 
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ recipes/linux/linux-davinci_2.6.28.bb |    4 +++-
+ recipes/linux/linux-davinci_git.bb    |   11 ++++++++---
+ 2 files changed, 11 insertions(+), 4 deletions(-)
 
-[1]
-http://wiki.openmoko.org/wiki/Getting_Started_with_your_Neo_FreeRunner
-[2] http://wiki.openmoko.org/wiki/Bluetooth 
+diff --git a/recipes/linux/linux-davinci_2.6.28.bb b/recipes/linux/linux-davinci_2.6.28.bb
+index a5fe57b..ef0e002 100644
+--- a/recipes/linux/linux-davinci_2.6.28.bb
++++ b/recipes/linux/linux-davinci_2.6.28.bb
+@@ -3,10 +3,12 @@ require linux.inc
+ DESCRIPTION = "Linux kernel for Davinci processors"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-COMPATIBLE_MACHINE = "davinci-sffsdr"
++COMPATIBLE_MACHINE = "(dm6446-evm|dm6467-evm|davinci-sffsdr)"
+ 
+ SRCREV = "0fc192ac07c977ad6f14333651b53096a6027bc6"
+ 
++PR = "r1"
++
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/khilman/linux-davinci.git;protocol=git \
+            file://defconfig"
+ 
+diff --git a/recipes/linux/linux-davinci_git.bb b/recipes/linux/linux-davinci_git.bb
+index 332aeb6..8d074d7 100644
+--- a/recipes/linux/linux-davinci_git.bb
++++ b/recipes/linux/linux-davinci_git.bb
+@@ -3,14 +3,14 @@ require linux.inc
+ DESCRIPTION = "Linux kernel for Davinci processors"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-COMPATIBLE_MACHINE = "(davinci-dvevm|davinci-sffsdr|dm355-leopard)"
++COMPATIBLE_MACHINE = "(dm6446-evm|dm6467-evm|dm355-evm|davinci-sffsdr|dm355-leopard)"
+ 
+-DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE = "1"
+ 
+ SRCREV = "486afa37130356662213cc1a2199a285b4fd72af"
+ 
+ PV = "2.6.29+2.6.29-rc7-${PR}+gitr${SRCREV}"
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/khilman/linux-davinci.git;protocol=git \
+            file://update-mach-types.patch;patch=1 \
+@@ -23,6 +23,11 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/khilman/linux-davinci.g
+            file://vfpe7.patch;patch=1 \
+            file://defconfig"
+ 
++# No vfpe patches for DM6467
++SRC_URI_dm6467-evm = "git://git.kernel.org/pub/scm/linux/kernel/git/khilman/linux-davinci.git;protocol=git \
++           file://update-mach-types.patch;patch=1 \
++           file://defconfig"
++
+ SRC_URI_append_davinci-sffsdr = " \
+            file://0001-USB-musb-cppi-bugfixes.patch;patch=1 \
+            file://0002-ARM-Mark-unsupported-syscalls-as-IGNORE.patch;patch=1 \
 -- 
-Daniel.Li <lida_mail@163.com>
-PALFocus (http://palfocus.oicp.net)
-
+1.6.0.6
 
 
 
