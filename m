@@ -1,35 +1,35 @@
-Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
+Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philipp.zabel@gmail.com>) id 1M76n9-00047b-1W
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M78L4-0000jo-B2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 13:50:33 +0200
-Received: by ewy20 with SMTP id 20so1193053ewy.12
+	Thu, 21 May 2009 15:29:50 +0200
+Received: by fxm20 with SMTP id 20so1060651fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2009 04:42:54 -0700 (PDT)
+	Thu, 21 May 2009 06:22:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=eiWX9DGs2rEAkhsCnbEBy9scHxwis1Xh2mHOwknnATI=;
-	b=AeQ3eWmOzmdv4kU4CpCAn8F/tA5tQ6Q1tQX7rOY3u6mUaAD2sybQalYLaC7g8FP1UY
-	wgFdQy45j9z/3AunrXDUVrGOcumU8QdwnO8YvHD0PmRspyUjv+wJw6H1EX6ZCYCoR+l6
-	rQsbkYUp1MW34XQqCEB/zh+WvY6BCqWlUDzt0=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=5RwnPDtXiCSo0HhN5WqsJHj4g6kxE7L22pBzjPFGKog=;
+	b=uD5AGYOwO1uajFAWDJuJYLcVZog6vRK4l5um1UVtsMax7IOU4soKwCT/TO73z0FWLJ
+	rswM0lzVQTk0ppuMGCM8Fxj+hD4g6m8M0c8jUUp5UlpkE15w8tktgDWTFpr/GScjhC/G
+	ZGUR1/3n9V95055C0hcoK05+adttc0mjuiFtc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=YTipWyBMWxUyf+h8IezZj6SbundQSYKw+wEvvlUq4puNHlTELdd9QCeFvBbGbtZUCF
-	zJxDUY0TBNKczQfuLkNVoHE+BZhOQQlDYMbFTOTIEiwGpVdvYp8uEKxxSZJNXpIWy2tO
-	7NTDQ4AR2C2/4IqoQKaS8jm76qLu+qZjL6qIU=
-MIME-Version: 1.0
-Received: by 10.210.87.11 with SMTP id k11mr3174628ebb.7.1242906173907; Thu, 
-	21 May 2009 04:42:53 -0700 (PDT)
-In-Reply-To: <1242810278-22217-1-git-send-email-khimov@altell.ru>
-References: <1242810278-22217-1-git-send-email-khimov@altell.ru>
-Date: Thu, 21 May 2009 13:42:53 +0200
-Message-ID: <74d0deb30905210442h5f6deda5if6ec8c74d8712020@mail.gmail.com>
-From: pHilipp Zabel <philipp.zabel@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=dt0sg9xP6XcwM9o/gbcpBd1AdfFIKU65t1FMK87vTGLi8PS0pScl0dnT2kuylPQW1W
+	A8VzWv2+2FE3eW9yQXkWE7dleFWXWfWK2YtzDtmAVG23j6osXahZZt4eOOVhmQXkLC+4
+	BHcfpVtpX7Y/IHoXWtbR9BfgvuuSdWJv4MZ7U=
+Received: by 10.103.174.18 with SMTP id b18mr1343110mup.132.1242912121755;
+	Thu, 21 May 2009 06:22:01 -0700 (PDT)
+Received: from localhost (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id j10sm2646547muh.15.2009.05.21.06.22.00
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 21 May 2009 06:22:01 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] qemu 0.10.3: port OE patches, make preferable 	version
+Date: Thu, 21 May 2009 16:21:34 +0300
+Message-Id: <1242912094-26435-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.3.1
+Subject: [PATCH] gst-plugins: fixed pattern for meta package dependencies.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2009 11:50:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 May 2009 13:30:33 -0000
 
-On Wed, May 20, 2009 at 11:04 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> Fixes binary locale generation broken by
-> 6065fa491c009118ae282ae933215649cccfcd24.
+This fixes package name matching so that gst-plugins-*-meta
+packages include all the plugin ones. The current matching
+implementation doesn't make meta packages depend on gst-plugins
+with 'locale' and 'dev' in their names (f.e. gstfbdevsink).
 
-Please consider doing it the other way around next time :)
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ recipes/gstreamer/gst-plugins.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-> Tested to work on ARM OABI (simpad), ARM EABI (qemuarm), PowerPC (efika)
-> and i686 (x86-prescott).
+diff --git a/recipes/gstreamer/gst-plugins.inc b/recipes/gstreamer/gst-plugins.inc
+index bcb3e39..0156cff 100644
+--- a/recipes/gstreamer/gst-plugins.inc
++++ b/recipes/gstreamer/gst-plugins.inc
+@@ -33,7 +33,7 @@ python populate_packages_prepend () {
+ 	metapkg_rdepends = []
+ 	packages = bb.data.getVar('PACKAGES', d, 1).split()
+ 	for pkg in packages[1:]:
+-		if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count('dev') and not pkg.count( 'locale' ):
++		if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-locale'):
+ 			metapkg_rdepends.append(pkg)
+ 	bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
+ 	bb.data.setVar('DESCRIPTION_' + metapkg, pn + ' meta package', d)
+-- 
+1.6.3.1
 
-Tested on ARM EABI (magician, hx4700), x68_64 host.
-
-> Please ACK.
-
-ACK. Please push.
-
-cheers
-Philipp
 
 
