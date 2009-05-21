@@ -1,36 +1,36 @@
-Received: from [209.85.134.184] (helo=mu-out-0910.google.com)
+Received: from [72.14.220.156] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M7ARh-0008Fm-DG
+	(envelope-from <matthieu.poullet@gmail.com>) id 1M7AYk-0008Sg-Tw
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 17:44:39 +0200
-Received: by mu-out-0910.google.com with SMTP id g7so439650muf.2
+	Thu, 21 May 2009 17:52:00 +0200
+Received: by fg-out-1718.google.com with SMTP id e12so1263184fga.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2009 08:37:02 -0700 (PDT)
+	Thu, 21 May 2009 08:44:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=xW+PtyO6efObvend4Lh8un2QMkV6GEn0NMPs8vvwd4s=;
-	b=L7fuxVDkeuP8QXoM1+oUT3Jdc/OdAysRQ+1hSCT5eJEqApvACeK3Uu4bBOjLuij1SB
-	J3sT1U2GmdXNm6XGLeL0rm+99bDZc8KNcIXsuqzas4JFd7jdyrtyDuTclcBmOgwvLaIX
-	2TCPljMREXGX37hKc2Bbjk8lheGKlnziYW0hI=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=V7kCQpUGZfbnJ4Y8lR/ShyWU4M4QETKaBekFWGnSdAY=;
+	b=qdp5zVx7WzWQK0mjHl+GzV+E2GxHZpoVuMxDRY+wKPl5QvcVbtWVhQF17h3BoOdJvx
+	wgCaT9oNOxs/X713vNnUKK8NyKO963DArhHfdaz0io8qS5zRbQvdBjFWZ71D3RIC4P9t
+	YZfjQuyU5pC/n1TDV04GwFG+yLlsKnPWScgAE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=nB3TSgevT1kOgfMPfOzm5Q5CapdcTYHmc22mMdP2DxvdQHLuiq1j0wguudQ36AVlDv
-	VkrqoAPB7PAJDpCkQji+K/RnaPbzNneMDi5vAfaOvEJ1plzFe9ieVL0lpykUEVg/bd8F
-	RvGYCknUwnj1z+/FotSyfb7n/daQvz1LW4Xgs=
-MIME-Version: 1.0
-Received: by 10.103.174.16 with SMTP id b16mr1447593mup.28.1242920222006; Thu, 
-	21 May 2009 08:37:02 -0700 (PDT)
-In-Reply-To: <1242917441-29996-1-git-send-email-ihar.hrachyshka@gmail.com>
-References: <gv3n7s$1gg$1@ger.gmane.org>
-	<1242917441-29996-1-git-send-email-ihar.hrachyshka@gmail.com>
-Date: Thu, 21 May 2009 18:37:01 +0300
-Message-ID: <fce2a370905210837w24570b90u33ee641630dfe19@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=I+RuS+WKjO0L1pUmnWhlGUxw9bHY/p3A65hcZLzjvauQEj+sZU6I13AEoC6aTIuPEB
+	To1trmqZ/ZqOWIZ1JySizhMeldAE9IhBgqbOOd38l0y1PCyj9M7jup8aZz32S6lPNOoe
+	6EX0WRhnRP5tCZTtWusu4vAaUSlIzUClpJciA=
+Received: by 10.86.27.6 with SMTP id a6mr2297471fga.18.1242920659271;
+	Thu, 21 May 2009 08:44:19 -0700 (PDT)
+Received: from localhost.localdomain (77-22-121-59-dynip.superkabel.de
+	[77.22.121.59])
+	by mx.google.com with ESMTPS id d6sm4110941fga.27.2009.05.21.08.44.18
+	(version=SSLv3 cipher=RC4-MD5); Thu, 21 May 2009 08:44:18 -0700 (PDT)
+From: Matthieu Poullet <matthieu.poullet@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] gst-plugins: fixed pattern for meta package dependencies.
+Date: Thu, 21 May 2009 17:44:17 +0200
+Message-Id: <1242920657-24148-1-git-send-email-matthieu.poullet@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+Cc: Matthieu Poullet <matthieu.poullet@gmail.com>
+Subject: [PATCH] wget: update to version 1.11.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,219 +44,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2009 15:44:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 May 2009 15:52:04 -0000
 
-I just got that locale packages _don't_ end with 'locale'. Resending
-reworked patch.
+The actual version was released in 2003, so I think it's time to update it.
+This patch prepares the transition and allows other to test the latest release.
 
-On Thu, May 21, 2009 at 5:50 PM, Ihar Hrachyshka
-<ihar.hrachyshka@gmail.com> wrote:
-> This fixes package name matching so that gst-plugins-*-meta
-> packages include all the plugin ones. The current matching
-> implementation doesn't make meta packages depend on gst-plugins
-> with 'locale' and 'dev' in their names (f.e. gstfbdevsink).
-> Also use INC_PR for gstremer-plugins as requested on ML.
->
-> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-> ---
-> =C2=A0recipes/gstreamer/gst-plugins-bad_0.10.11.bb =C2=A0 =C2=A0 | =C2=A0=
- =C2=A02 ++
-> =C2=A0recipes/gstreamer/gst-plugins-bad_0.10.6.bb =C2=A0 =C2=A0 =C2=A0| =
-=C2=A0 =C2=A03 ++-
-> =C2=A0recipes/gstreamer/gst-plugins-base_0.10.17.bb =C2=A0 =C2=A0| =C2=A0=
- =C2=A02 ++
-> =C2=A0recipes/gstreamer/gst-plugins-base_0.10.22.bb =C2=A0 =C2=A0| =C2=A0=
- =C2=A02 ++
-> =C2=A0recipes/gstreamer/gst-plugins-base_0.10.23.bb =C2=A0 =C2=A0| =C2=A0=
- =C2=A02 ++
-> =C2=A0recipes/gstreamer/gst-plugins-good_0.10.13.bb =C2=A0 =C2=A0| =C2=A0=
- =C2=A02 +-
-> =C2=A0recipes/gstreamer/gst-plugins-good_0.10.14.bb =C2=A0 =C2=A0| =C2=A0=
- =C2=A02 ++
-> =C2=A0recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb | =C2=A0 =C2=A03 +=
-+-
-> =C2=A0recipes/gstreamer/gst-plugins-ugly_0.10.10.bb =C2=A0 =C2=A0| =C2=A0=
- =C2=A02 +-
-> =C2=A0recipes/gstreamer/gst-plugins-ugly_0.10.11.bb =C2=A0 =C2=A0| =C2=A0=
- =C2=A02 ++
-> =C2=A0recipes/gstreamer/gst-plugins.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A04 +++-
-> =C2=A011 files changed, 21 insertions(+), 5 deletions(-)
->
-> diff --git a/recipes/gstreamer/gst-plugins-bad_0.10.11.bb b/recipes/gstre=
-amer/gst-plugins-bad_0.10.11.bb
-> index dbfe6a9..a90b88e 100644
-> --- a/recipes/gstreamer/gst-plugins-bad_0.10.11.bb
-> +++ b/recipes/gstreamer/gst-plugins-bad_0.10.11.bb
-> @@ -1,5 +1,7 @@
-> =C2=A0require gst-plugins.inc
->
-> +PR =3D "${INC_PR}.1"
-> +
-> =C2=A0SRC_URI +=3D "file://vorbisenc.h file://vorbisdec.h \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://ivorbis-thumb.patch;patc=
-h=3D1"
-> =C2=A0DEPENDS +=3D "gst-plugins-base directfb"
-> diff --git a/recipes/gstreamer/gst-plugins-bad_0.10.6.bb b/recipes/gstrea=
-mer/gst-plugins-bad_0.10.6.bb
-> index df7bf75..bfc7217 100644
-> --- a/recipes/gstreamer/gst-plugins-bad_0.10.6.bb
-> +++ b/recipes/gstreamer/gst-plugins-bad_0.10.6.bb
-> @@ -1,5 +1,6 @@
-> =C2=A0require gst-plugins.inc
-> -PR =3D "r2"
-> +
-> +PR =3D "${INC_PR}.1"
->
-> =C2=A0SRC_URI +=3D "file://vorbisenc.h file://vorbisdec.h \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://gst-plugins-directfb-fix=
-.patch;patch=3D1;pnum=3D2 \
-> diff --git a/recipes/gstreamer/gst-plugins-base_0.10.17.bb b/recipes/gstr=
-eamer/gst-plugins-base_0.10.17.bb
-> index 0a1f17f..3b07668 100644
-> --- a/recipes/gstreamer/gst-plugins-base_0.10.17.bb
-> +++ b/recipes/gstreamer/gst-plugins-base_0.10.17.bb
-> @@ -1,5 +1,7 @@
-> =C2=A0require gst-plugins.inc
->
-> +PR =3D "${INC_PR}.1"
-> +
-> =C2=A0PROVIDES +=3D "gst-plugins"
->
-> =C2=A0# gst-plugins-base only builds the alsa plugin
-> diff --git a/recipes/gstreamer/gst-plugins-base_0.10.22.bb b/recipes/gstr=
-eamer/gst-plugins-base_0.10.22.bb
-> index 3086d93..bcbfd68 100644
-> --- a/recipes/gstreamer/gst-plugins-base_0.10.22.bb
-> +++ b/recipes/gstreamer/gst-plugins-base_0.10.22.bb
-> @@ -1,5 +1,7 @@
-> =C2=A0require gst-plugins.inc
->
-> +PR =3D "${INC_PR}.1"
-> +
-> =C2=A0PROVIDES +=3D "gst-plugins"
->
-> =C2=A0PR =3D "r2"
-> diff --git a/recipes/gstreamer/gst-plugins-base_0.10.23.bb b/recipes/gstr=
-eamer/gst-plugins-base_0.10.23.bb
-> index d3bfb6c..26dcfe3 100644
-> --- a/recipes/gstreamer/gst-plugins-base_0.10.23.bb
-> +++ b/recipes/gstreamer/gst-plugins-base_0.10.23.bb
-> @@ -1,5 +1,7 @@
-> =C2=A0require gst-plugins.inc
->
-> +PR =3D "${INC_PR}.1"
-> +
-> =C2=A0PROVIDES +=3D "gst-plugins"
->
-> =C2=A0# gst-plugins-base only builds the alsa plugin
-> diff --git a/recipes/gstreamer/gst-plugins-good_0.10.13.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.13.bb
-> index b77d1fc..d077d06 100644
-> --- a/recipes/gstreamer/gst-plugins-good_0.10.13.bb
-> +++ b/recipes/gstreamer/gst-plugins-good_0.10.13.bb
-> @@ -1,6 +1,6 @@
-> =C2=A0require gst-plugins.inc
->
-> -PR =3D "r1"
-> +PR =3D "${INC_PR}.1"
->
-> =C2=A0inherit gconf
->
-> diff --git a/recipes/gstreamer/gst-plugins-good_0.10.14.bb b/recipes/gstr=
-eamer/gst-plugins-good_0.10.14.bb
-> index d9f0349..d077d06 100644
-> --- a/recipes/gstreamer/gst-plugins-good_0.10.14.bb
-> +++ b/recipes/gstreamer/gst-plugins-good_0.10.14.bb
-> @@ -1,5 +1,7 @@
-> =C2=A0require gst-plugins.inc
->
-> +PR =3D "${INC_PR}.1"
-> +
-> =C2=A0inherit gconf
->
-> =C2=A0EXTRA_OECONF +=3D " --enable-experimental =C2=A0--enable-gst_v4l2 -=
--enable-gconftool =C2=A0--enable-external --with-check=3Dno"
-> diff --git a/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb b/recipes/g=
-streamer/gst-plugins-ugly-sid_0.10.7.bb
-> index 77c4184..40a4eb2 100644
-> --- a/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
-> +++ b/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
-> @@ -1,7 +1,8 @@
-> =C2=A0require gst-plugins.inc
-> =C2=A0DEPENDS +=3D "gst-plugins-base libsidplay"
-> =C2=A0PROVIDES +=3D "gst-plugin-sid"
-> -PR =3D "r5"
-> +
-> +PR =3D "${INC_PR}.1"
->
-> =C2=A0SRC_URI =3D "\
-> =C2=A0 http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-=
-ugly-${PV}.tar.bz2 \
-> diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb b/recipes/gstr=
-eamer/gst-plugins-ugly_0.10.10.bb
-> index 0678e22..9c28d20 100644
-> --- a/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
-> +++ b/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
-> @@ -1,6 +1,6 @@
-> =C2=A0require gst-plugins.inc
->
-> -PR =3D "r1"
-> +PR =3D "${INC_PR}.1"
->
-> =C2=A0DEPENDS +=3D "gst-plugins-base mpeg2dec libsidplay"
->
-> diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb b/recipes/gstr=
-eamer/gst-plugins-ugly_0.10.11.bb
-> index 0624041..9c28d20 100644
-> --- a/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
-> +++ b/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
-> @@ -1,5 +1,7 @@
-> =C2=A0require gst-plugins.inc
->
-> +PR =3D "${INC_PR}.1"
-> +
-> =C2=A0DEPENDS +=3D "gst-plugins-base mpeg2dec libsidplay"
->
-> =C2=A0SRC_URI +=3D "\
-> diff --git a/recipes/gstreamer/gst-plugins.inc b/recipes/gstreamer/gst-pl=
-ugins.inc
-> index bcb3e39..536555c 100644
-> --- a/recipes/gstreamer/gst-plugins.inc
-> +++ b/recipes/gstreamer/gst-plugins.inc
-> @@ -3,6 +3,8 @@ DESCRIPTION =3D "Plugins for GStreamer"
-> =C2=A0DEPENDS =3D "gstreamer libmikmod liboil libogg tremor libvorbis"
-> =C2=A0DEPENDS +=3D "${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'li=
-bmad libid3tag', d)}"
->
-> +INC_PR =3D "r5"
-> +
-> =C2=A0PACKAGES_DYNAMIC =3D "gst-plugin-*"
->
-> =C2=A0SRC_URI =3D "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}=
-.tar.bz2"
-> @@ -33,7 +35,7 @@ python populate_packages_prepend () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0metapkg_rdepends =3D []
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0packages =3D bb.data.getVar('PACKAGES', d, 1).=
-split()
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0for pkg in packages[1:]:
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if not pkg in blacklis=
-t and not pkg in metapkg_rdepends and not pkg.count('dev') and not pkg.coun=
-t( 'locale' ):
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if not pkg in blacklis=
-t and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.=
-endswith('-locale'):
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0metapkg_rdepends.append(pkg)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.setVar('RDEPENDS_' + metapkg, ' '.join=
-(metapkg_rdepends), d)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.setVar('DESCRIPTION_' + metapkg, pn + =
-' meta package', d)
-> --
-> 1.6.3.1
->
->
+Regards,
+Matthieu.
+
+Signed-off-by: Matthieu Poullet <matthieu.poullet@gmail.com>
+---
+ conf/checksums.ini          |    4 ++++
+ recipes/wget/wget.inc       |   34 ++++++++++++++++++++++++++++++++++
+ recipes/wget/wget_1.11.4.bb |    8 ++++++++
+ recipes/wget/wget_1.9.1.bb  |   41 ++++++++++-------------------------------
+ 4 files changed, 56 insertions(+), 31 deletions(-)
+ create mode 100644 recipes/wget/wget.inc
+ create mode 100644 recipes/wget/wget_1.11.4.bb
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 2764372..64fb7f5 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -24026,6 +24026,10 @@ sha256=87caf592bd81922908e7ee6ff356c7d46cf5a2cbe46847df7d64aff537ca16b6
+ md5=e6051f1e1487ec0ebfdbda72bedc70ad
+ sha256=69044b87c517b986dbc17a5f7e4de430cb56e605330c19c6bb0d384d5c37e638
+ 
++[ftp://ftp.gnu.org/gnu/wget/wget-1.11.4.tar.gz]
++md5=69e8a7296c0e12c53bd9ffd786462e87
++sha256=7315963b6eefb7530b4a4f63a5d5ccdab30078784cf41ccb5297873f9adea2f3
++
+ [ftp://ftp.debian.org/debian/pool/main/w/whois/whois_4.5.25.tar.gz]
+ md5=516fc54ce709e874133fc3b3c7c05447
+ sha256=99979ff161ee209da21ae118eff9ca6de7c5cb1b0dc3397de18df534e0afaf76
+diff --git a/recipes/wget/wget.inc b/recipes/wget/wget.inc
+new file mode 100644
+index 0000000..21814c8
+--- /dev/null
++++ b/recipes/wget/wget.inc
+@@ -0,0 +1,34 @@
++DESCRIPTION = "A console URL download utility featuring HTTP, FTP, and more."
++SECTION = "console/network"
++DEPENDS = ""
++INC_PR = "r7"
++LICENSE = "GPL"
++
++S = "${WORKDIR}/wget-${PV}"
++
++inherit autotools gettext
++
++# Disable checking for SSL since that searches the system paths
++EXTRA_OECONF = "--enable-ipv6 --without-ssl"
++
++# The unslung kernel does not support ipv6
++EXTRA_OECONF_unslung = "--without-ssl"
++# SlugOS kernels do not support ipv6. Can be loaded as a module.
++EXTRA_OECONF_slugos = "--without-ssl"
++
++do_configure() {
++	autotools_do_configure
++}
++
++do_install () {
++	autotools_do_install
++	mv ${D}${bindir}/wget ${D}${bindir}/wget.${PN}
++}
++
++pkg_postinst_${PN} () {
++	update-alternatives --install ${bindir}/wget wget wget.${PN} 100
++}
++
++pkg_prerm_${PN} () {
++	update-alternatives --remove wget wget.${PN}
++}
+diff --git a/recipes/wget/wget_1.11.4.bb b/recipes/wget/wget_1.11.4.bb
+new file mode 100644
+index 0000000..4a20bab
+--- /dev/null
++++ b/recipes/wget/wget_1.11.4.bb
+@@ -0,0 +1,8 @@
++PR="${INC_PR}.1"
++
++DEFAULT_PREFERENCE="-1"
++SRC_URI = " \
++	${GNU_MIRROR}/wget/wget-${PV}.tar.gz \
++"
++
++require wget.inc
+diff --git a/recipes/wget/wget_1.9.1.bb b/recipes/wget/wget_1.9.1.bb
+index b1e9404..50974ed 100644
+--- a/recipes/wget/wget_1.9.1.bb
++++ b/recipes/wget/wget_1.9.1.bb
+@@ -1,40 +1,19 @@
+-DESCRIPTION = "A console URL download utility featuring HTTP, FTP, and more."
+-SECTION = "console/network"
+-DEPENDS = ""
+-PR = "r7"
+-LICENSE = "GPL"
++PR = "${INC_PR}.1"
+ 
+-SRC_URI = "${GNU_MIRROR}/wget/wget-${PV}.tar.gz \
+-	   file://m4macros.patch;patch=1 \
+-	   file://autotools.patch;patch=1 \
+-           file://ipv6-fix.patch;patch=1"
+-S = "${WORKDIR}/wget-${PV}"
+-
+-inherit autotools gettext
+-
+-# Disable checking for SSL since that searches the system paths
+-EXTRA_OECONF = "--enable-ipv6 --without-ssl"
++SRC_URI = " \
++	${GNU_MIRROR}/wget/wget-${PV}.tar.gz \
++	file://m4macros.patch;patch=1 \
++	file://autotools.patch;patch=1 \
++        file://ipv6-fix.patch;patch=1 \
++"
+ 
+-# SlugOS kernels do not support ipv6. Can be loaded as a module.
+-EXTRA_OECONF_slugos = "--without-ssl"
++S = "${WORKDIR}/wget-${PV}"
+ 
+-do_configure () {
++do_configure_prepend () {
+ 	if [ ! -e acinclude.m4 ]; then
+ 		mv aclocal.m4 acinclude.m4
+ 	fi
+ 	rm -f libtool.m4
+-	autotools_do_configure
+ }
+ 
+-do_install () {
+-	autotools_do_install
+-	mv ${D}${bindir}/wget ${D}${bindir}/wget.${PN}
+-}
+-
+-pkg_postinst_${PN} () {
+-	update-alternatives --install ${bindir}/wget wget wget.${PN} 100
+-}
+-
+-pkg_prerm_${PN} () {
+-	update-alternatives --remove wget wget.${PN}
+-}
++require wget.inc
+-- 
+1.6.0.4
+
 
 
