@@ -1,35 +1,35 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [209.85.132.248] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M78L4-0000jo-B2
+	(envelope-from <leon.woestenberg@gmail.com>) id 1M78tZ-0002JK-QX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 15:29:50 +0200
-Received: by fxm20 with SMTP id 20so1060651fxm.12
+	Thu, 21 May 2009 16:05:17 +0200
+Received: by an-out-0708.google.com with SMTP id b6so636764ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2009 06:22:01 -0700 (PDT)
+	Thu, 21 May 2009 06:57:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=5RwnPDtXiCSo0HhN5WqsJHj4g6kxE7L22pBzjPFGKog=;
-	b=uD5AGYOwO1uajFAWDJuJYLcVZog6vRK4l5um1UVtsMax7IOU4soKwCT/TO73z0FWLJ
-	rswM0lzVQTk0ppuMGCM8Fxj+hD4g6m8M0c8jUUp5UlpkE15w8tktgDWTFpr/GScjhC/G
-	ZGUR1/3n9V95055C0hcoK05+adttc0mjuiFtc=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=eewQyeqMO8qIuGGtDXb8jQ5jcbKPu8SDnLNNz96Jmjw=;
+	b=Fs2V3rh7NQrXrrsaqBgmTEQVZ/Mbu6kS+nBKglamo/IbdYmuT0PlQqfMORRmlWtfy4
+	M1doRAagai0bd9a8anR5AnMyNGSlFFpy0Pv9LmtixB6WT+KGqDbp44BGznODj4JTKLfS
+	UL72HnSp/jChN1KmCEhSplREbxJmb9BRqb8MQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=dt0sg9xP6XcwM9o/gbcpBd1AdfFIKU65t1FMK87vTGLi8PS0pScl0dnT2kuylPQW1W
-	A8VzWv2+2FE3eW9yQXkWE7dleFWXWfWK2YtzDtmAVG23j6osXahZZt4eOOVhmQXkLC+4
-	BHcfpVtpX7Y/IHoXWtbR9BfgvuuSdWJv4MZ7U=
-Received: by 10.103.174.18 with SMTP id b18mr1343110mup.132.1242912121755;
-	Thu, 21 May 2009 06:22:01 -0700 (PDT)
-Received: from localhost (cpmsq.epam.com [217.21.56.2])
-	by mx.google.com with ESMTPS id j10sm2646547muh.15.2009.05.21.06.22.00
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 May 2009 06:22:01 -0700 (PDT)
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=jUM47JiSf9+uG9stUeMZsR4eKuM4iqy9oQ/ozWC767o2J24uJB+lNr2ZvGRjxDBO83
+	evq6NkA92PAvlrxXdrkMmz9EfKvFthG7PeTZVwZ6fSuwZChCgdzpoXOD3M7JO9c06iK9
+	bKk2a2Fj7rKQGbbuTZQa+njYsdsELgsr+HU8g=
+MIME-Version: 1.0
+Received: by 10.100.151.8 with SMTP id y8mr4792601and.147.1242914262892; Thu, 
+	21 May 2009 06:57:42 -0700 (PDT)
+In-Reply-To: <4A143640.3040606@mta.it>
+References: <4A143640.3040606@mta.it>
+Date: Thu, 21 May 2009 15:57:42 +0200
+Message-ID: <c384c5ea0905210657k1dea4d73ncfd51c50b74e29c9@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 May 2009 16:21:34 +0300
-Message-Id: <1242912094-26435-1-git-send-email-ihar.hrachyshka@gmail.com>
-X-Mailer: git-send-email 1.6.3.1
-Subject: [PATCH] gst-plugins: fixed pattern for meta package dependencies.
+Subject: Re: rrdtool fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2009 13:30:33 -0000
+X-List-Received-Date: Thu, 21 May 2009 14:05:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-This fixes package name matching so that gst-plugins-*-meta
-packages include all the plugin ones. The current matching
-implementation doesn't make meta packages depend on gst-plugins
-with 'locale' and 'dev' in their names (f.e. gstfbdevsink).
+Hello,
 
-Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
----
- recipes/gstreamer/gst-plugins.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Wed, May 20, 2009 at 6:56 PM, Matteo Fortini <matteo.fortini@mta.it> wrote:
+> Hi all,
+> I'm trying to build rrdtool on Angstrom on a powerpc target, and it
+> mysteriously fails even before unpacking the sources.
+>
+> If I try to build it manually, I get some ./configure errors about missing
+> ieee math support.
+>
+Could you be a bit more specific?
 
-diff --git a/recipes/gstreamer/gst-plugins.inc b/recipes/gstreamer/gst-plugins.inc
-index bcb3e39..0156cff 100644
---- a/recipes/gstreamer/gst-plugins.inc
-+++ b/recipes/gstreamer/gst-plugins.inc
-@@ -33,7 +33,7 @@ python populate_packages_prepend () {
- 	metapkg_rdepends = []
- 	packages = bb.data.getVar('PACKAGES', d, 1).split()
- 	for pkg in packages[1:]:
--		if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count('dev') and not pkg.count( 'locale' ):
-+		if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-locale'):
- 			metapkg_rdepends.append(pkg)
- 	bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
- 	bb.data.setVar('DESCRIPTION_' + metapkg, pn + ' meta package', d)
+Machine, distro?
+
+Regards,
 -- 
-1.6.3.1
-
+Leon
 
 
