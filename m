@@ -1,40 +1,40 @@
 Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJc-0005cc-6h
+	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJc-0005ca-LR
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 21 May 2009 04:47:28 +0200
-Received: by mail-fx0-f172.google.com with SMTP id 20so805180fxm.12
+Received: by mail-fx0-f172.google.com with SMTP id 20so805174fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 20 May 2009 19:39:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to:cc
 	:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=q5n555eWXVLMOzqzGuX6RBbgK4AQaq5O4h6wFjhQoNE=;
-	b=wKbhl5HruOAqt/edQDyFu+brav8gKb8V2U7GJYBEwEQq1QMjK1KCSNTwPlLRp5ayL8
-	ABvxl/NM2JCrlmG49hFK9aRQCfSK8jaiPCJ42OeR3feqMfSrOvwbCv/R3WjVqQbNrAis
-	sdtFqRpp+Y1kXqtzIJyTM0YbrUmQpgs1fPxs4=
+	bh=Ig2+DmkX8fa9XH/s+fpvC5TWi0TvgbJqaTccNJn61AQ=;
+	b=ZznW0SI0Jg7YKVOSfE47dcce+1/5spgaGIp/NP8r537GV8apuKlKiqwMN+Hkvj7oJu
+	+tZjQFA1YqvWRCX//YnRVErehSXcc7tOMsKj8voNq8Cqyx3wGzD1jyuEd3oN3qT0WxkJ
+	FmuZY38AcScvc3Yb+l0TVaD7JvBw4Ihova7oM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=Yc/QmUAmElBIPNdIQHSBAmvI6Tygr5cGjvkMKee88c9sVyNnPvOappAlgkKncCToeb
-	crydCspwIytvQDdhBcn8jFR5OsHAyV2lKzWJZ+fsckZTtAyp/x+eIV3BlDPz7QGJUleF
-	4a5ljs+5sVG99fy1T901MbUlUHJv0SnP3g7Ho=
-Received: by 10.103.171.6 with SMTP id y6mr1048136muo.110.1242873596610;
-	Wed, 20 May 2009 19:39:56 -0700 (PDT)
+	b=doWiLUx14yensGwSvwhVDv1DySVMZ193G+0hP3bmOnFSbvlqGeNdtwRuz0EHEKRnMY
+	7QH2Dqbf9v7+HK2set6QxuKJ9xALogI9sE9X3X/fdXABQCXtTt4oWgdeEl7wOuwurlrb
+	FDhGakgxxz7FZjMyp80SW+68GpO6o6N9t/nJE=
+Received: by 10.103.229.12 with SMTP id g12mr1080181mur.16.1242873597374;
+	Wed, 20 May 2009 19:39:57 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id n7sm1824115mue.28.2009.05.20.19.39.49
+	by mx.google.com with ESMTPS id e10sm5481545muf.44.2009.05.20.19.39.50
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
 	Wed, 20 May 2009 19:39:53 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 0E1626103C4; Wed, 20 May 2009 23:39:42 -0300 (BRT)
+	id 0CB6A6103C1; Wed, 20 May 2009 23:39:42 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 May 2009 23:39:38 -0300
-Message-Id: <1242873578-17444-24-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 20 May 2009 23:39:32 -0300
+Message-Id: <1242873578-17444-18-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.6.3.1.54.g99dd
-In-Reply-To: <1242873578-17444-23-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1242873578-17444-17-git-send-email-otavio@ossystems.com.br>
 References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-3-git-send-email-otavio@ossystems.com.br>
@@ -52,14 +52,8 @@ References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-15-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-16-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-17-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-18-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-19-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-20-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-21-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-22-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-23-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 23/23] cups: use INC_PR due cups.inc being used in many recipes
+Subject: [PATCH 17/23] initramfs-uniboot: properly setup sysfs and tmp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -75,83 +69,44 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 21 May 2009 02:47:28 -0000
 
-To be easier to update the recipes we use a INC_PR in cups.inc that is
-included in all PR fields in all recipes. Since currently the oldest
-revision was 'r6' INC_PR starts in 'r7'.
+To make life easier for everybody it is nice to have early_setup to
+avoid problems with mdev/udev usage. As a bonus, it also adds a /tmp
+dir since some tools require it to exist and it won't hurt anyway.
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes/cups/cups.inc       |    3 ++-
- recipes/cups/cups_1.1.23.bb |    2 +-
- recipes/cups/cups_1.2.12.bb |    2 +-
- recipes/cups/cups_1.2.7.bb  |    2 +-
- recipes/cups/cups_1.3.8.bb  |    2 +-
- 5 files changed, 6 insertions(+), 5 deletions(-)
+ recipes/initrdscripts/files/init.sh            |    6 ++++--
+ recipes/initrdscripts/initramfs-uniboot_1.0.bb |    2 +-
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/cups/cups.inc b/recipes/cups/cups.inc
-index 56450f7..cbec781 100644
---- a/recipes/cups/cups.inc
-+++ b/recipes/cups/cups.inc
-@@ -3,6 +3,8 @@ SECTION = "console/utils"
- LICENSE = "GPL LGPL"
- DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib fakeroot-native"
+diff --git a/recipes/initrdscripts/files/init.sh b/recipes/initrdscripts/files/init.sh
+index 221b8f5..26fd57f 100644
+--- a/recipes/initrdscripts/files/init.sh
++++ b/recipes/initrdscripts/files/init.sh
+@@ -5,9 +5,11 @@ BOOT_ROOT=
+ ROOT_DEVICE=
  
-+INC_PR = "r7"
+ early_setup() {
+-    mkdir /proc
++    mkdir -p /proc /sys /mnt /tmp
 +
- SRC_URI = "ftp://ftp.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
- 	  "
+     mount -t proc proc /proc
+-    mkdir /mnt
++    mount -t sysfs sysfs /sys
++
+     modprobe -q mtdblock
+ }
  
-@@ -89,4 +91,3 @@ FILES_${PN} += "${datadir}/doc/cups/images \
- 		${datadir}/doc/cups/*.css \
-                 ${datadir}/icons/ \
- 	       "
--
-diff --git a/recipes/cups/cups_1.1.23.bb b/recipes/cups/cups_1.1.23.bb
-index d6f0de8..bc1053c 100644
---- a/recipes/cups/cups_1.1.23.bb
-+++ b/recipes/cups/cups_1.1.23.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "An Internet printing system for Unix."
- SECTION = "console/utils"
- LICENSE = "GPL LGPL"
- DEPENDS = "openssl jpeg libpng zlib fakeroot-native"
--PR = "r6"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "ftp://ftp3.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
-            file://strftime_fix.patch;patch=1"
-diff --git a/recipes/cups/cups_1.2.12.bb b/recipes/cups/cups_1.2.12.bb
-index 4f7d0d4..773f97e 100644
---- a/recipes/cups/cups_1.2.12.bb
-+++ b/recipes/cups/cups_1.2.12.bb
-@@ -1,2 +1,2 @@
- require cups.inc
--PR = "r2"
-+PR = "${INC_PR}.1"
-diff --git a/recipes/cups/cups_1.2.7.bb b/recipes/cups/cups_1.2.7.bb
-index 8559bfc..7084032 100644
---- a/recipes/cups/cups_1.2.7.bb
-+++ b/recipes/cups/cups_1.2.7.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "An Internet printing system for Unix."
- SECTION = "console/utils"
- LICENSE = "GPL LGPL"
- DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib fakeroot-native"
--PR = "r1"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "ftp://ftp3.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
- 	  "
-diff --git a/recipes/cups/cups_1.3.8.bb b/recipes/cups/cups_1.3.8.bb
-index 79cbc32..c921133 100644
---- a/recipes/cups/cups_1.3.8.bb
-+++ b/recipes/cups/cups_1.3.8.bb
-@@ -1,7 +1,7 @@
- require cups.inc
- 
- SRC_URI += "file://use_echo_only_in_init.patch;patch=1"
--PR = "r2"
-+PR = "${INC_PR}.1"
- 
- DEFAULT_PREFERENCE = "-1"
+diff --git a/recipes/initrdscripts/initramfs-uniboot_1.0.bb b/recipes/initrdscripts/initramfs-uniboot_1.0.bb
+index 07e94f1..fcbbdbd 100644
+--- a/recipes/initrdscripts/initramfs-uniboot_1.0.bb
++++ b/recipes/initrdscripts/initramfs-uniboot_1.0.bb
+@@ -1,5 +1,5 @@
+ SRC_URI = "file://init.sh"
+-PR = "r10"
++PR = "r11"
+ DESCRIPTON = "A modular initramfs init script system."
+ RRECOMMENDS = "kernel-module-mtdblock"
  
 -- 
 1.6.3.1.54.g99dd
