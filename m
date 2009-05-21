@@ -1,43 +1,56 @@
 Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJQ-0005cc-8I
+	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJR-0005ca-GR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 04:47:16 +0200
-Received: by mail-fx0-f172.google.com with SMTP id 20so805180fxm.12
+	Thu, 21 May 2009 04:47:17 +0200
+Received: by mail-fx0-f172.google.com with SMTP id 20so805174fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 May 2009 19:39:45 -0700 (PDT)
+	Wed, 20 May 2009 19:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to:cc
 	:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=i6fYqpiTHEqUlWjly2IiyYs+0M106eaFDUrMdDV6qMg=;
-	b=E1VqdiZmDYufe1DtJeCG/Kl4AtJiE4FY/yeAiawVYfAJXe5NNFCCSBgNWT1MLEzo1j
-	2N8JH8A+aLpi9wQze9A5gRfXz21Mf/aL5Hv8bo834GJBJcS9HE0jWOZO92q6tlIxSBHt
-	kncbZFPDLE/P9Lreh/m/6zLMQ5BMpxOc7DAoY=
+	bh=imkfufZBJtHDeLUjVGzPn2//xftpcnAXJ1Y1APEaNpQ=;
+	b=O24oUW0J3jK33Qq/6ULdbJjHyv1E9jcWNhGBucENfnx1KY3/HXzo08TAM0ahdX5hYY
+	tA/7U4H9LuLuLz2Wsx++Y3eCtLCXuM44Yq4GZzDjAWlmBcDfWtEpb9IEdYfB5CalAG/6
+	QfWVB6kAGlmi124i77BotntN8QFCFNBr7q/+8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=efILAvcpPnDgxbFzHbt4971n/rv5sXejfbqIDVdZouxNEDTRCqhfyp8AaphD5elt6N
-	TPjqWxfdNiqnH90bwrR+V8JwYuK8K0MVj5eyDbpc/XIqaArHkBppZoBQuhmJi3FnoisN
-	quq7u7DLQsek9jRDE95SNJCTSu5QCjkmP5v0M=
-Received: by 10.103.52.13 with SMTP id e13mr1071231muk.52.1242873584871;
-	Wed, 20 May 2009 19:39:44 -0700 (PDT)
+	b=UBdZEAfSy2A3pBSd+38Q6CguGKx7nGQw8+74ZMSiEa4IRY/Sr40DGFqMiQ3Nx+49F0
+	moCpTvxvFOL0gfRvgnkDb84AqNfbmhEz5Z6Mx1c+cELMFLWIrAy23Ht4Q/sfuAa9wlU3
+	2qCeENNlbqAifejcsIu7NGKYUJpS0rAvOtZlM=
+Received: by 10.103.168.12 with SMTP id v12mr1061575muo.130.1242873586011;
+	Wed, 20 May 2009 19:39:46 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id n7sm1823961mue.28.2009.05.20.19.39.43
+	by mx.google.com with ESMTPS id 14sm1192811muo.33.2009.05.20.19.39.43
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
 	Wed, 20 May 2009 19:39:44 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 959006103B0; Wed, 20 May 2009 23:39:41 -0300 (BRT)
+	id 9CD776103AE; Wed, 20 May 2009 23:39:42 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 May 2009 23:39:16 -0300
-Message-Id: <1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 20 May 2009 23:39:29 -0300
+Message-Id: <1242873578-17444-15-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.6.3.1.54.g99dd
-In-Reply-To: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1242873578-17444-14-git-send-email-otavio@ossystems.com.br>
 References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-3-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-4-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-5-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-6-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-7-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-8-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-9-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-10-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-11-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-12-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-13-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-14-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 01/23] gtk-engines: add 2.18.1
+Subject: [PATCH 14/23] s/IPKG_INSTALL/PACKAGE_INSTALL/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,66 +64,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2009 02:47:16 -0000
+X-List-Received-Date: Thu, 21 May 2009 02:47:17 -0000
 
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+
+According to the git log (e.g.,
+7302c6263934c237da66719bd42505b6c05d10cc), there was a change in the
+variable naming.  IPKG_INSTALL was renamed to PACKAGE_INSTALL some time
+ago. classes/rootfs_ipk.bbclass currently uses PACKAGE_INSTALL instead
+of IPKG_INSTALL.
+
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- conf/checksums.ini                        |    4 +++
- recipes/gtk-engines/gtk-engines_2.18.1.bb |   30 +++++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+), 0 deletions(-)
- create mode 100644 recipes/gtk-engines/gtk-engines_2.18.1.bb
+ docs/usermanual/reference/class_rootfs_ipkg.xml |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index ec6d883..855c726 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -9882,6 +9882,10 @@ sha256=15aa3a926307b4b3e40f3a9b05c604df6811eb48814b1534db32aed414aefb0c
- md5=060ea25c471e5f4cf5c1baeac27d0345
- sha256=0d8b6630c546327ddc67c700859731036eebdf77e51ad8b71e4d19d28ca2ff2c
+diff --git a/docs/usermanual/reference/class_rootfs_ipkg.xml b/docs/usermanual/reference/class_rootfs_ipkg.xml
+index b60adf8..98e6e25 100644
+--- a/docs/usermanual/reference/class_rootfs_ipkg.xml
++++ b/docs/usermanual/reference/class_rootfs_ipkg.xml
+@@ -41,7 +41,7 @@
  
-+[http://ftp.gnome.org/pub/GNOME/sources/gtk-engines/2.18/gtk-engines-2.18.1.tar.bz2]
-+md5=5dc748cfb0587bb412adc49b666fb6f8
-+sha256=d7e2672fcf80f5c35d481c24e0ab5b7d0f6526dcc3d8821ab76468c1816dc3bc
-+
- [http://ftp.gnome.org/pub/GNOME/sources/gtk-engines/2.2/gtk-engines-2.2.0.tar.bz2]
- md5=78e9276c28b509f3203de4873c20a263
- sha256=140541cae8b003d2f7210e2ef060ac328d7e45a04e2cf5fa943fff73c9955dd6
-diff --git a/recipes/gtk-engines/gtk-engines_2.18.1.bb b/recipes/gtk-engines/gtk-engines_2.18.1.bb
-new file mode 100644
-index 0000000..177c5b8
---- /dev/null
-+++ b/recipes/gtk-engines/gtk-engines_2.18.1.bb
-@@ -0,0 +1,30 @@
-+LICENSE = "GPL"
-+SECTION = "x11/base"
-+DESCRIPTION = "GTK theme engines"
-+DEPENDS = "gtk+ cairo"
-+
-+RDEPENDS_gtk-theme-redmond = "gtk-engine-redmond95"
-+RDEPENDS_gtk-theme-metal = "gtk-engine-metal"
-+RDEPENDS_gtk-theme-mist = "gtk-engine-mist"
-+RDEPENDS_gtk-theme-crux = "gtk-engine-crux-engine"
-+RDEPENDS_gtk-theme-lighthouseblue = "gtk-engine-lighthouseblue"
-+RDEPENDS_gtk-theme-thinice = "gtk-engine-thinice"
-+RDEPENDS_gtk-theme-industrial = "gtk-engine-industrial"
-+RDEPENDS_gtk-theme-clearlooks = "gtk-engine-clearlooks"
-+
-+inherit gnome  gtk-binver
-+
-+PACKAGES_DYNAMIC = "gtk-engine-* gtk-theme-*"
-+
-+python populate_packages_prepend() {
-+	import os.path
-+
-+	engines_ver = ['gtk-2.0/', gtkbinver_find(d), '/engines']
-+
-+	engines_root = os.path.join(bb.data.getVar('libdir', d, 1), ''.join(engines_ver))
-+	themes_root = os.path.join(bb.data.getVar('datadir', d, 1), "themes")
-+
-+	do_split_packages(d, engines_root, '^lib(.*)\.so$', 'gtk-engine-%s', 'GTK %s theme engine', extra_depends='')
-+	do_split_packages(d, themes_root, '(.*)', 'gtk-theme-%s', 'GTK theme %s', allow_dirs=True, extra_depends='')
-+}
-+
+     <listitem>
+       <para>Installs the list of requested <command>.ipkg</command> packages,
+-      <command>${IPKG_INSTALL}</command>;</para>
++      <command>${PACKAGE_INSTALL}</command>;</para>
+     </listitem>
+ 
+     <listitem>
+@@ -89,7 +89,7 @@
+ 
+   <variablelist>
+     <varlistentry>
+-      <term>IPKG_INSTALL</term>
++      <term>PACKAGE_INSTALL</term>
+ 
+       <listitem>
+         <para>The list of packages which will be installed into the root
+@@ -212,4 +212,4 @@
+   which is executed without <xref linkend="fakeroot" /> and therefore can be
+   used from other classes, such as <xref linkend="image_class" />, that
+   are already running under the control of <xref linkend="fakeroot" />.</para>
+-</section>
+\ No newline at end of file
++</section>
 -- 
 1.6.3.1.54.g99dd
 
