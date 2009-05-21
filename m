@@ -1,46 +1,44 @@
 Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJO-0005cc-RL
+	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJN-0005ca-HA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 04:47:14 +0200
-Received: by fxm20 with SMTP id 20so805180fxm.12
+	Thu, 21 May 2009 04:47:13 +0200
+Received: by mail-fx0-f172.google.com with SMTP id 20so805174fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 May 2009 19:39:41 -0700 (PDT)
+	Wed, 20 May 2009 19:39:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to:cc
 	:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=1f2pLEMO2HNnQABWOp6Zg+v/3vi2zlclYHeJwz/gZDY=;
-	b=xpEsvR2kK4os+okEjbzrFTHqK74RLWMH2TIulIo9EWn6zIZRMxxLgvGCBvidu5N9xd
-	7bGZSX+1NqUFMoCqPbqI5fZQxBLtFzUS+KpLM8lhD7UXPVUcDFg8ZX7LLRo0o8Dey7Oa
-	3nFNphIn7Vu2WMJIVmGlUoNvIVN6R8JNnTkAA=
+	bh=fEtLaWDRr775Zt0Q7flgX76e33yQO7mvO4z8rq5jj4E=;
+	b=Y9sZ0QcQtJCfJeUHNG7OTK35xOLV/cnp1LoesgDYgZD6tCo+MRz7M7f+NfgY5zgusn
+	GAchJiYwOyn2m8MzDleIU0C72NwQSsnhmRSbw4Onj2i/MYrqqCFOvJYjyJuYqRezGeye
+	RegiOq5YxU/FnNQsWDVG9/MJWGACukVY3qkxU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=nsnRex1D7tmQgnAIYIoLt6sprQbXSjs2P/uLbPV7DL3W5fW3NjrNo/xelKBLcqd+9v
-	T57lFtGGXeR1R0Homw2LC54D5S1A+97JLNWj92ftCfZDdLq7Z2vWniGiFB5WDucmqnPx
-	yoohONHg2SnLuYQbCMJIFskw9OskNILx5ZbbY=
-Received: by 10.103.227.10 with SMTP id e10mr417999mur.56.1242873581270;
-	Wed, 20 May 2009 19:39:41 -0700 (PDT)
+	b=XhLoXk0+tMj9Ru4JxWzrRr91ySbmRMAnZJJlr2QzAwH7xHT2yns143rM83YHdiDlBP
+	uIFpIrdT+u6VQtURN8jUU1DVxluXkitQnbKklgwVzJKTtgUOrg2p3a5kJOo4YoNjvvR3
+	HNyXKXr6dyrXesdlhmEvmlQK6uVNLTcrQ2kKk=
+Received: by 10.103.24.17 with SMTP id b17mr1053704muj.112.1242873582237;
+	Wed, 20 May 2009 19:39:42 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id j2sm5575617mue.12.2009.05.20.19.39.38
+	by mx.google.com with ESMTPS id s10sm4591516mue.38.2009.05.20.19.39.38
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
 	Wed, 20 May 2009 19:39:39 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 3F2386103AD; Wed, 20 May 2009 23:39:42 -0300 (BRT)
+	id 4E46B6103B2; Wed, 20 May 2009 23:39:42 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 May 2009 23:39:19 -0300
-Message-Id: <1242873578-17444-5-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 20 May 2009 23:39:17 -0300
+Message-Id: <1242873578-17444-3-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.6.3.1.54.g99dd
-In-Reply-To: <1242873578-17444-4-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
 References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-3-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-4-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 04/23] python-pycups: add
+Subject: [PATCH 02/23] machine/geode[gl]x: use more optimization while compiling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,50 +54,106 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 21 May 2009 02:47:15 -0000
 
+Since the code is now the same for Geode GX and Geode LX we also
+merged the tunning files in a single tune-geode.inc, making it easy to
+improve from now on.
+
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- conf/checksums.ini                     |    4 ++++
- recipes/python/python-pycups_1.9.45.bb |   16 ++++++++++++++++
- 2 files changed, 20 insertions(+), 0 deletions(-)
- create mode 100644 recipes/python/python-pycups_1.9.45.bb
+ conf/machine/geodegx.conf             |    4 ++--
+ conf/machine/geodelx.conf             |   15 ++++++++-------
+ conf/machine/include/tune-geode.inc   |    5 +++++
+ conf/machine/include/tune-geodegx.inc |    6 ------
+ conf/machine/include/tune-geodelx.inc |    9 ---------
+ 5 files changed, 15 insertions(+), 24 deletions(-)
+ create mode 100644 conf/machine/include/tune-geode.inc
+ delete mode 100644 conf/machine/include/tune-geodegx.inc
+ delete mode 100644 conf/machine/include/tune-geodelx.inc
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 4bce0ee..2070cfd 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -19698,6 +19698,10 @@ sha256=a6d7db68c87699e283a1f58b637a7e730c350899fd7b35b88e63caa0e85a9ab9
- md5=4d5674f3898a573691ffb335e8d749cd
- sha256=b08d4ed54c9403c77778a3803e53a4f33f359b42d94f6f3e14abb1bf4941e6ea
+diff --git a/conf/machine/geodegx.conf b/conf/machine/geodegx.conf
+index 6fe6a83..0ec6782 100644
+--- a/conf/machine/geodegx.conf
++++ b/conf/machine/geodegx.conf
+@@ -4,7 +4,7 @@
  
-+[http://cyberelk.net/tim/data/pycups/pycups-1.9.45.tar.bz2]
-+md5=ff634a6751f8a859ed26751bf03abef0
-+sha256=ef6e576e5465da9c338ac8ff9f162825cfb7997359efc52e6a110c295a9f363b
-+
- [http://pycurl.sourceforge.net/download/pycurl-7.14.0.tar.gz]
- md5=6f73d518fb520af14634a06ee1b7ddce
- sha256=a60e08b01fc3355ec18ec0e447349b6f8bff3f9628eb42891cff1eb51b9618b1
-diff --git a/recipes/python/python-pycups_1.9.45.bb b/recipes/python/python-pycups_1.9.45.bb
+ TARGET_ARCH =  "i486"
+ 
+-require conf/machine/include/tune-geodegx.inc
++require conf/machine/include/tune-geode.inc
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux-geodegx"
+ BOOTSTRAP_EXTRA_RDEPENDS = "kernel pciutils udev kernel-modules"
+@@ -14,4 +14,4 @@ udevdir = "/dev"
+ KERNEL_IMAGETYPE = "bzImage"
+ 
+ GLIBC_ADDONS = "nptl"
+-GLIBC_EXTRA_OECONF = "--with-tls"
++GLIBC_EXTRA_OECONF = "--with-tls --with-cpu=geode"
+diff --git a/conf/machine/geodelx.conf b/conf/machine/geodelx.conf
+index de4d9ca..f8874fd 100644
+--- a/conf/machine/geodelx.conf
++++ b/conf/machine/geodelx.conf
+@@ -1,14 +1,15 @@
+-TARGET_ARCH = "i486"
++# Machine file for devices with the AMD Geode LX processor 
++# Copyright (C) 2005, Advanced Micro Devices, Inc.  All Rights Reserved
++# Released under the MIT license (see packages/COPYING)
+ 
+-require conf/machine/include/tune-geodelx.inc
++TARGET_ARCH =  "i486"
+ 
+-PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
++require conf/machine/include/tune-geode.inc
+ 
+-PREFERRED_PROVIDER_virtual/kernel="linux-geodelx"
+-
+-SELECTED_OPTIMIZATION_glibc := "${@'${SELECTED_OPTIMIZATION}'.replace('-fomit-frame-pointer', '')}"
++PREFERRED_PROVIDER_virtual/kernel = "linux-geodelx"
+ 
+ KERNEL_IMAGETYPE = "bzImage"
+ 
+ GLIBC_ADDONS = "nptl"
+-GLIBC_EXTRA_OECONF = "--with-tls"
++GLIBC_EXTRA_OECONF = "--with-tls --with-cpu=geode"
++SELECTED_OPTIMIZATION_pn-glibc := "${@'${SELECTED_OPTIMIZATION}'.replace('-fomit-frame-pointer', '')}"
+diff --git a/conf/machine/include/tune-geode.inc b/conf/machine/include/tune-geode.inc
 new file mode 100644
-index 0000000..bd127d5
+index 0000000..eda332a
 --- /dev/null
-+++ b/recipes/python/python-pycups_1.9.45.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "cups Python Bindings"
-+SECTION = "devel/python"
-+PRIORITY = "optional"
-+LICENSE = "GPLv2"
-+DEPENDS = "cups"
-+SRCNAME = "pycups"
++++ b/conf/machine/include/tune-geode.inc
+@@ -0,0 +1,5 @@
++TARGET_CC_ARCH = "-march=geode -mtune=geode"
++BASE_PACKAGE_ARCH = "geode"
++PACKAGE_EXTRA_ARCHS += "x86 i386 geode"
 +
-+SRC_URI = "http://cyberelk.net/tim/data/pycups/pycups-${PV}.tar.bz2"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit distutils
-+
-+# used during compilation
-+CFLAGS += -DVERSION=\\"${PV}\\"
-+
-+RDEPENDS = "python-core cups"
++FEED_ARCH = "geode"
+diff --git a/conf/machine/include/tune-geodegx.inc b/conf/machine/include/tune-geodegx.inc
+deleted file mode 100644
+index cae285a..0000000
+--- a/conf/machine/include/tune-geodegx.inc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-TARGET_CC_ARCH = "-march=geode"
+-BASE_PACKAGE_ARCH = "geode"
+-PACKAGE_EXTRA_ARCHS += "x86 i386 geode"
+-
+-FEED_ARCH = "geode"
+-
+diff --git a/conf/machine/include/tune-geodelx.inc b/conf/machine/include/tune-geodelx.inc
+deleted file mode 100644
+index 63e6678..0000000
+--- a/conf/machine/include/tune-geodelx.inc
++++ /dev/null
+@@ -1,9 +0,0 @@
+-# Geode CPU has it's own target in GCC 4.3
+-# in older versions k6-2 is closest
+-#
+-TARGET_CC_ARCH = "-march=geode"
+-BASE_PACKAGE_ARCH = "geode"
+-PACKAGE_EXTRA_ARCHS += "x86 i386 geode"
+-
+-FEED_ARCH = "geode"
+-
 -- 
 1.6.3.1.54.g99dd
 
