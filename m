@@ -1,40 +1,40 @@
 Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJc-0005ca-5N
+	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJc-0005cc-6h
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 21 May 2009 04:47:28 +0200
-Received: by mail-fx0-f172.google.com with SMTP id 20so805174fxm.12
+Received: by mail-fx0-f172.google.com with SMTP id 20so805180fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 20 May 2009 19:39:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to:cc
 	:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=pI4tO6Z4ZRMpLLtC536tPy++GoambOac6TjXOuOZtW8=;
-	b=Aft5Vg+nQDQxAzE/oU59wvOne+JJRpfg1tkOIr6W7/KWSFrPiCjE9hkTxQc7hIe3vy
-	OPqy5UQ1JxiGF8iv/2WBuvJSQTj2pQphVmp+7baAFt0ILX+Ya5xL+1yBDjYQmdQicghq
-	5Byr3acZDlmWBePP6mm+/BgEOSutXm5AyLL8s=
+	bh=q5n555eWXVLMOzqzGuX6RBbgK4AQaq5O4h6wFjhQoNE=;
+	b=wKbhl5HruOAqt/edQDyFu+brav8gKb8V2U7GJYBEwEQq1QMjK1KCSNTwPlLRp5ayL8
+	ABvxl/NM2JCrlmG49hFK9aRQCfSK8jaiPCJ42OeR3feqMfSrOvwbCv/R3WjVqQbNrAis
+	sdtFqRpp+Y1kXqtzIJyTM0YbrUmQpgs1fPxs4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=xCQTMGUxYd+MgjNsHZvIVTdkuTe8AHvViIQuUuPrR2a//MmygJhBBa2CDmGyA1bJng
-	Voke+Ks9GTBwFzQbDkJ+tOYo7EwGFhLDcQpXJGqVudrseJQnMTKDsQ23n4jndOT6epU6
-	05P67NnZz5CZsSq5hWhCRg7AZ7sUwmnX4ddJ8=
-Received: by 10.103.49.12 with SMTP id b12mr1075686muk.51.1242873595971;
-	Wed, 20 May 2009 19:39:55 -0700 (PDT)
+	b=Yc/QmUAmElBIPNdIQHSBAmvI6Tygr5cGjvkMKee88c9sVyNnPvOappAlgkKncCToeb
+	crydCspwIytvQDdhBcn8jFR5OsHAyV2lKzWJZ+fsckZTtAyp/x+eIV3BlDPz7QGJUleF
+	4a5ljs+5sVG99fy1T901MbUlUHJv0SnP3g7Ho=
+Received: by 10.103.171.6 with SMTP id y6mr1048136muo.110.1242873596610;
+	Wed, 20 May 2009 19:39:56 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id i7sm1299063mue.48.2009.05.20.19.39.49
+	by mx.google.com with ESMTPS id n7sm1824115mue.28.2009.05.20.19.39.49
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 20 May 2009 19:39:52 -0700 (PDT)
+	Wed, 20 May 2009 19:39:53 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id 0D3026103BF; Wed, 20 May 2009 23:39:42 -0300 (BRT)
+	id 0E1626103C4; Wed, 20 May 2009 23:39:42 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 May 2009 23:39:33 -0300
-Message-Id: <1242873578-17444-19-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 20 May 2009 23:39:38 -0300
+Message-Id: <1242873578-17444-24-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.6.3.1.54.g99dd
-In-Reply-To: <1242873578-17444-18-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1242873578-17444-23-git-send-email-otavio@ossystems.com.br>
 References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-3-git-send-email-otavio@ossystems.com.br>
@@ -53,8 +53,13 @@ References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-16-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-17-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-18-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-19-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-20-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-21-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-22-git-send-email-otavio@ossystems.com.br>
+	<1242873578-17444-23-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 18/23] cups: undo mangle of cups_{datadir, serverbin} in cups-config
+Subject: [PATCH 23/23] cups: use INC_PR due cups.inc being used in many recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -70,29 +75,84 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 21 May 2009 02:47:28 -0000
 
+To be easier to update the recipes we use a INC_PR in cups.inc that is
+included in all PR fields in all recipes. Since currently the oldest
+revision was 'r6' INC_PR starts in 'r7'.
+
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes/cups/cups.inc |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
+ recipes/cups/cups.inc       |    3 ++-
+ recipes/cups/cups_1.1.23.bb |    2 +-
+ recipes/cups/cups_1.2.12.bb |    2 +-
+ recipes/cups/cups_1.2.7.bb  |    2 +-
+ recipes/cups/cups_1.3.8.bb  |    2 +-
+ 5 files changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/recipes/cups/cups.inc b/recipes/cups/cups.inc
-index 8e2a7a8..56450f7 100644
+index 56450f7..cbec781 100644
 --- a/recipes/cups/cups.inc
 +++ b/recipes/cups/cups.inc
-@@ -62,6 +62,13 @@ python do_package_append() {
- 	os.system('chmod 0511 %s/install/cups/var/run/cups/certs' % workdir)
- }
+@@ -3,6 +3,8 @@ SECTION = "console/utils"
+ LICENSE = "GPL LGPL"
+ DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib fakeroot-native"
  
-+do_stage_append() {
-+	# Undo mangle of cups_datadir and cups_serverbin
-+	sed -e 's:cups_datadir=.*:cups_datadir=${datadir}/cups:g' \
-+	    -e 's:cups_serverbin=.*:cups_serverbin=${libdir}/cups:g' \
-+	    -i ${STAGING_BINDIR_CROSS}/cups-config
-+}
++INC_PR = "r7"
 +
- PACKAGES =+ "${PN}-lib ${PN}-libimage"
+ SRC_URI = "ftp://ftp.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
+ 	  "
  
- FILES_${PN}-lib = "${libdir}/libcups.so.*"
+@@ -89,4 +91,3 @@ FILES_${PN} += "${datadir}/doc/cups/images \
+ 		${datadir}/doc/cups/*.css \
+                 ${datadir}/icons/ \
+ 	       "
+-
+diff --git a/recipes/cups/cups_1.1.23.bb b/recipes/cups/cups_1.1.23.bb
+index d6f0de8..bc1053c 100644
+--- a/recipes/cups/cups_1.1.23.bb
++++ b/recipes/cups/cups_1.1.23.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "An Internet printing system for Unix."
+ SECTION = "console/utils"
+ LICENSE = "GPL LGPL"
+ DEPENDS = "openssl jpeg libpng zlib fakeroot-native"
+-PR = "r6"
++PR = "${INC_PR}.1"
+ 
+ SRC_URI = "ftp://ftp3.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
+            file://strftime_fix.patch;patch=1"
+diff --git a/recipes/cups/cups_1.2.12.bb b/recipes/cups/cups_1.2.12.bb
+index 4f7d0d4..773f97e 100644
+--- a/recipes/cups/cups_1.2.12.bb
++++ b/recipes/cups/cups_1.2.12.bb
+@@ -1,2 +1,2 @@
+ require cups.inc
+-PR = "r2"
++PR = "${INC_PR}.1"
+diff --git a/recipes/cups/cups_1.2.7.bb b/recipes/cups/cups_1.2.7.bb
+index 8559bfc..7084032 100644
+--- a/recipes/cups/cups_1.2.7.bb
++++ b/recipes/cups/cups_1.2.7.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "An Internet printing system for Unix."
+ SECTION = "console/utils"
+ LICENSE = "GPL LGPL"
+ DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib fakeroot-native"
+-PR = "r1"
++PR = "${INC_PR}.1"
+ 
+ SRC_URI = "ftp://ftp3.easysw.com/pub/cups/${PV}/cups-${PV}-source.tar.bz2 \
+ 	  "
+diff --git a/recipes/cups/cups_1.3.8.bb b/recipes/cups/cups_1.3.8.bb
+index 79cbc32..c921133 100644
+--- a/recipes/cups/cups_1.3.8.bb
++++ b/recipes/cups/cups_1.3.8.bb
+@@ -1,7 +1,7 @@
+ require cups.inc
+ 
+ SRC_URI += "file://use_echo_only_in_init.patch;patch=1"
+-PR = "r2"
++PR = "${INC_PR}.1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
 -- 
 1.6.3.1.54.g99dd
 
