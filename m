@@ -1,48 +1,33 @@
-Received: from [74.125.78.146] (helo=ey-out-1920.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1M7262-0001XO-Az
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 08:49:42 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so885191eyw.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 May 2009 23:42:09 -0700 (PDT)
-Received: by 10.210.13.9 with SMTP id 9mr2769363ebm.75.1242888129300;
-	Wed, 20 May 2009 23:42:09 -0700 (PDT)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id 21sm1408081ewy.18.2009.05.20.23.42.08
-	(version=SSLv3 cipher=RC4-MD5); Wed, 20 May 2009 23:42:08 -0700 (PDT)
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1242873578-17444-23-git-send-email-otavio@ossystems.com.br>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M72QT-00031x-BX
+	for openembedded-devel@openembedded.org; Thu, 21 May 2009 09:10:49 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M72J5-0008S3-QE
+	for openembedded-devel@openembedded.org; Thu, 21 May 2009 07:03:11 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 21 May 2009 07:03:11 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 21 May 2009 07:03:11 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 21 May 2009 09:03:00 +0200
+Message-ID: <gv2ub5$1la$1@ger.gmane.org>
 References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-3-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-4-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-5-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-6-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-7-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-8-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-9-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-10-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-11-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-12-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-13-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-14-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-15-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-16-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-17-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-18-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-19-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-20-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-21-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-22-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-23-git-send-email-otavio@ossystems.com.br>
-Date: Thu, 21 May 2009 07:42:06 +0100
-Message-Id: <1242888127.3337.1.camel@xora-desktop.xora.org.uk>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 (2.26.1-2.fc11) 
-Subject: Re: [PATCH 22/23] xf86-video-geode: add 2.11.2
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090515 Shredder/3.0b3pre
+In-Reply-To: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Final sent before pushing, please ack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,16 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2009 06:49:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 May 2009 07:10:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-05-20 at 23:39 -0300, Otavio Salvador wrote:
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+On 21-05-09 04:39, Otavio Salvador wrote:
+> Hello,
+>
+> I believe that all requested changes/fixes were done and I'd like to
+> push this patchset as soon as possible so some of them could be ported
+> to stable.
+>
+> Please ack the patchset or point anything missing. I'll try to take it
+> into account as soon as possible and push it.
 
-Acked-by: Graeme Gregory <dp@xora.org.uk>
+You have my global ack for the whole patchset :)
 
+regards,
 
+Koen
 
 
 
