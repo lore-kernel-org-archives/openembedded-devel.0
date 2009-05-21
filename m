@@ -1,40 +1,40 @@
 Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJS-0005cb-Vr
+	(envelope-from <otavio.salvador@gmail.com>) id 1M6yJT-0005cb-8G
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 21 May 2009 04:47:19 +0200
 Received: by mail-bw0-f171.google.com with SMTP id 19so784003bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 May 2009 19:39:47 -0700 (PDT)
+	Wed, 20 May 2009 19:39:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:received:from:to:cc
 	:subject:date:message-id:x-mailer:in-reply-to:references;
-	bh=Pg2ryhHhNEl3Q3uRdO9JpPixXmU3LGnfoIdxJxbw8nk=;
-	b=ogPG/0qtFEaCpPziU6jIrzEDjYyjYjhmEKihfVI4N89aDV0d0vtXboI91k+iqGL4hJ
-	M+g0Dtuc8+79xu6AVAcaKzmKR6YYeYP/sW+DdqCD1QQu2MiyfrZZzqUKLJR8MMQnErAa
-	4nYm6zQF75Y1TcHBaO1S1yU/H8tH9AoHQrbuo=
+	bh=BaYoCul6iulRFD0u8EJgXlFB5/q0ydUZgECi/5S2ZCA=;
+	b=bYmFjoYjt8xig3WmHSuH/N7iLYlk9W9aTkHSu0PvI10Rdrzf1gYDtZFY7A3Aa+o+A7
+	FABqe4JHdg4uhV89buwA3aTjkPWDucwkREgzYuUUv3RRLe55yDdan9uaRnkVzLPnBUVJ
+	Wm5OKifnyWznZydICvIlcreeB5EK5uAwX42Oo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=NOiAjDiDhyJu2z+QxwYZ/mCmoVaMMcBaFNBtWLY3QdNFXZvn1ZniZlxtwNAlot6tZh
-	R/eiPGVsDTQVfmoWM7c882WdVY4y98s8CoW+wex/OKtKa0vGN0FHevQOCODQuVOYGj/j
-	N8RnlThsCHZJJFiRsZTeFm9ZSrVGW/m7ZC9jQ=
-Received: by 10.103.168.5 with SMTP id v5mr1087451muo.77.1242873587620;
+	b=YVzkE+iGmEOlwGssQrc2SXhY0VMtZ59Ycq1WoGU3KLL740R9xpXys7VirlXVES9OFl
+	4h0aIidfZRgeYISwa+R9irxQEcn5I/jdO8KPuS0u7W3q0YKLpaF0qbDGVuX/ggXHEhsW
+	9Xah+J1rRBIDZmmeVBGAOEuhD/vuVfOafQS+E=
+Received: by 10.103.197.17 with SMTP id z17mr1094313mup.19.1242873587278;
 	Wed, 20 May 2009 19:39:47 -0700 (PDT)
 Received: from ossystems.com.br (201-40-162-47.cable.viacabocom.com.br
 	[201.40.162.47])
-	by mx.google.com with ESMTPS id j9sm289771mue.51.2009.05.20.19.39.44
+	by mx.google.com with ESMTPS id i7sm1298899mue.48.2009.05.20.19.39.44
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 20 May 2009 19:39:46 -0700 (PDT)
+	Wed, 20 May 2009 19:39:45 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by ossystems.com.br (Postfix, from userid 1000)
-	id DC2B86103B6; Wed, 20 May 2009 23:39:42 -0300 (BRT)
+	id A58A56103BC; Wed, 20 May 2009 23:39:42 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 May 2009 23:39:28 -0300
-Message-Id: <1242873578-17444-14-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 20 May 2009 23:39:27 -0300
+Message-Id: <1242873578-17444-13-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.6.3.1.54.g99dd
-In-Reply-To: <1242873578-17444-13-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1242873578-17444-12-git-send-email-otavio@ossystems.com.br>
 References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-2-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-3-git-send-email-otavio@ossystems.com.br>
@@ -47,9 +47,8 @@ References: <1242873578-17444-1-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-10-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-11-git-send-email-otavio@ossystems.com.br>
 	<1242873578-17444-12-git-send-email-otavio@ossystems.com.br>
-	<1242873578-17444-13-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 13/23] rt61-firmware: fix installation of binary files
+Subject: [PATCH 12/23] mtools: update to 4.0.10 since 3.9.11 was not available anymore
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -65,24 +64,253 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 21 May 2009 02:47:19 -0000
 
+During the updating we've also grabed two patches from Debian that
+improves the stability of mtools in recent kernels. Those are:
+
+ - plainio.patch
+ - use-sg_io.patch
+
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes/rt2x00/rt61-firmware_1.2.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ conf/checksums.ini                     |    4 ++
+ recipes/mtools/files/no-x11.patch      |   19 --------
+ recipes/mtools/files/plainio.patch     |   13 +++++
+ recipes/mtools/files/use-sg_io.patch   |   80 ++++++++++++++++++++++++++++++++
+ recipes/mtools/mtools-native_3.9.11.bb |    7 ---
+ recipes/mtools/mtools-native_4.0.10.bb |    7 +++
+ recipes/mtools/mtools_3.9.11.bb        |   19 --------
+ recipes/mtools/mtools_4.0.10.bb        |   20 ++++++++
+ 8 files changed, 124 insertions(+), 45 deletions(-)
+ delete mode 100644 recipes/mtools/files/no-x11.patch
+ create mode 100644 recipes/mtools/files/plainio.patch
+ create mode 100644 recipes/mtools/files/use-sg_io.patch
+ delete mode 100644 recipes/mtools/mtools-native_3.9.11.bb
+ create mode 100644 recipes/mtools/mtools-native_4.0.10.bb
+ delete mode 100644 recipes/mtools/mtools_3.9.11.bb
+ create mode 100644 recipes/mtools/mtools_4.0.10.bb
 
-diff --git a/recipes/rt2x00/rt61-firmware_1.2.bb b/recipes/rt2x00/rt61-firmware_1.2.bb
-index ae683c8..9fad60d 100644
---- a/recipes/rt2x00/rt61-firmware_1.2.bb
-+++ b/recipes/rt2x00/rt61-firmware_1.2.bb
-@@ -7,7 +7,7 @@ S = "${WORKDIR}/RT61_Firmware_V${PV}"
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 77b4b4f..447957e 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -16902,6 +16902,10 @@ sha256=af083a73425d664d4607ef6c6564fd9319a0e47ee7c105259a45356cb834690e
+ md5=3e68b857b4e1f3a6521d1dfefbd30a36
+ sha256=af083a73425d664d4607ef6c6564fd9319a0e47ee7c105259a45356cb834690e
  
- do_install() {
- 	install -d ${D}/${base_libdir}/firmware
--	install -m 0644 rt61.bin ${D}/${base_libdir}/firmware/
-+	install -m 0644 *.bin ${D}/${base_libdir}/firmware/
- }
- 
- FILES_${PN} = "${base_libdir}/firmware/"
++[http://ftp.gnu.org/gnu/mtools/mtools-4.0.10.tar.bz2]
++md5=750c2beba968a5d46dbaae24551a82b9
++sha256=860fee13acb39365bd28763070e24011ea55f381f96714d2841937525aa02ded
++
+ [http://downloads.sourceforge.net/mtpaint/mtpaint-3.02.tar.bz2]
+ md5=828013176f135fc24ffdf16a011c51e6
+ sha256=991a1376dc23d0663d45b3b395c0e5c5542fee3906a120889583d67f854f5206
+diff --git a/recipes/mtools/files/no-x11.patch b/recipes/mtools/files/no-x11.patch
+deleted file mode 100644
+index 300f43f..0000000
+--- a/recipes/mtools/files/no-x11.patch
++++ /dev/null
+@@ -1,19 +0,0 @@
+----
+- Makefile.in |    2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+---- mtools-3.9.9.orig/Makefile.in
+-+++ mtools-3.9.9/Makefile.in
+-@@ -128,11 +128,11 @@ X_EXTRA_LIBS = @X_EXTRA_LIBS@
+- X_PRE_LIBS = @X_PRE_LIBS@
+- CFLAGS = $(CPPFLAGS) $(DEFS) $(MYCFLAGS) -I. @extraincludedir@ -I@srcdir@ $(USERCFLAGS) 
+- CXXFLAGS  = $(CPPFLAGS) $(DEFS) $(MYCXXFLAGS) -I. @extraincludedir@ -I@srcdir@ $(USERCFLAGS) 
+- LINK      = $(CC) $(LDFLAGS) $(USERLDFLAGS) @extralibdir@
+- ALLLIBS   = $(USERLDLIBS) $(MACHDEPLIBS) $(SHLIB) $(LIBS)
+--X_LDFLAGS = $(X_EXTRA_LIBS) $(X_LIBS) $(X_PRE_LIBS) -lXau -lX11 $(LIBS) 
+-+X_LDFLAGS = $(X_EXTRA_LIBS) $(X_LIBS) $(X_PRE_LIBS) $(LIBS)
+- X_CCFLAGS = $(X_CFLAGS) $(CFLAGS)
+- 
+- all:    mtools $(LINKS) mkmanifest @FLOPPYD@
+- 
+- %.o: %.c
+diff --git a/recipes/mtools/files/plainio.patch b/recipes/mtools/files/plainio.patch
+new file mode 100644
+index 0000000..b4bd1d6
+--- /dev/null
++++ b/recipes/mtools/files/plainio.patch
+@@ -0,0 +1,13 @@
++01_plainio.dpatch by Martin Pitt <mpitt@debian.org>
++Fixes garbage output of mtype under certain circumstances; closes #217413
++
++--- mtools-3.9.9/plain_io.c	2003-02-16 17:18:58.000000000 +0100
+++++ mtools-3.9.9/plain_io.c	2004-01-14 00:56:11.000000000 +0100
++@@ -524,6 +524,7 @@
++ 		printOom();
++ 		return 0;
++ 	}
+++    memset((void*)This, 0, sizeof(SimpleFile_t));
++ 	This->scsi_sector_size = 512;
++ 	This->seekable = 1;
++ #ifdef OS_hpux
+diff --git a/recipes/mtools/files/use-sg_io.patch b/recipes/mtools/files/use-sg_io.patch
+new file mode 100644
+index 0000000..33867de
+--- /dev/null
++++ b/recipes/mtools/files/use-sg_io.patch
+@@ -0,0 +1,80 @@
++08.scsi.c.dpatch by Thomas Richter <thor@mail.math.tu-berlin.de>
++#393878 mzip unreliable on 2.6.18
++
++--- mtools-3.9.10/scsi.c	2002-11-02 13:09:28.000000000 +0100
+++++ mtools-3.9.10/scsi.c	2006-10-17 21:11:01.000000000 +0200
++@@ -37,12 +37,7 @@
++ #endif
++ 
++ #ifdef OS_linux
++-#define SCSI_IOCTL_SEND_COMMAND 1
++-struct scsi_ioctl_command {
++-    int  inlen;
++-    int  outlen;
++-    char cmd[5008];
++-};
+++#include <scsi/sg.h>
++ #endif
++ 
++ #ifdef _SCO_DS
++--- mtools-3.9.10/scsi.c	2007-05-26 19:02:56.000000000 +1000
+++++ mtools-3.9.10/scsi.c	2008-04-08 20:30:16.000000000 +1000
++@@ -148,37 +148,33 @@ int scsi_cmd(int fd, unsigned char *cdb,
++ 	return 0;
++ 	
++ #elif defined OS_linux
++-	struct scsi_ioctl_command my_scsi_cmd;
+++	struct sg_io_hdr scsi_cmd;
++ 
+++	/*
+++	** Init the command
+++	*/
+++	memset(&scsi_cmd,0,sizeof(scsi_cmd));
+++	scsi_cmd.interface_id    = 'S';
+++	scsi_cmd.dxfer_direction = (mode == SCSI_IO_READ)?(SG_DXFER_FROM_DEV):(SG_DXFER_TO_DEV);
+++	scsi_cmd.cmd_len         = cmdlen;
+++	scsi_cmd.mx_sb_len       = 0;
+++	scsi_cmd.dxfer_len       = len;
+++	scsi_cmd.dxferp          = data;
+++	scsi_cmd.cmdp            = cdb;
+++	scsi_cmd.timeout         = ~0; /* where is MAX_UINT defined??? */
+++
+++#if DEBUG
+++	printf("CMD(%d): %02x%02x%02x%02x%02x%02x %sdevice\n",cmdlen,cdb[0],cdb[1],cdb[2],cdb[3],cdb[4],cdb[5],
+++		(mode==SCSI_IO_READ)?("<-"):("->"));
+++	printf("DATA   : len = %d\n",len);
+++#endif
++ 
++-	memcpy(my_scsi_cmd.cmd, cdb, cmdlen);        /* copy command */
++-
++-	switch (mode) {
++-		case SCSI_IO_READ:
++-			my_scsi_cmd.inlen = 0;
++-			my_scsi_cmd.outlen = len;
++-			break;
++-		case SCSI_IO_WRITE:
++-			my_scsi_cmd.inlen = len;
++-			my_scsi_cmd.outlen = 0;
++-			memcpy(my_scsi_cmd.cmd + cmdlen,data,len);
++-			break;
++-	}
++-	
++-	if (ioctl(fd, SCSI_IOCTL_SEND_COMMAND, &my_scsi_cmd) < 0) {
+++	if (ioctl(fd, SG_IO,&scsi_cmd) < 0) {
++ 		perror("scsi_io");
++ 		return -1;
++ 	}
++ 	
++-	switch (mode) {
++-		case SCSI_IO_READ:
++-			memcpy(data, &my_scsi_cmd.cmd[0], len);
++-			break;
++-		case SCSI_IO_WRITE:
++-			break;
++-    }
++-
++-	return 0;  /* where to get scsi status? */
+++	return 0;
++ 
++ #elif (defined _SCO_DS) && (defined SCSIUSERCMD)
++ 	struct scsicmd my_scsi_cmd;
+diff --git a/recipes/mtools/mtools-native_3.9.11.bb b/recipes/mtools/mtools-native_3.9.11.bb
+deleted file mode 100644
+index c82f740..0000000
+--- a/recipes/mtools/mtools-native_3.9.11.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-# mtools-native OE build file
+-# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
+-# Released under the MIT license (see packages/COPYING)
+-
+-require mtools_${PV}.bb
+-
+-inherit autotools native
+diff --git a/recipes/mtools/mtools-native_4.0.10.bb b/recipes/mtools/mtools-native_4.0.10.bb
+new file mode 100644
+index 0000000..c82f740
+--- /dev/null
++++ b/recipes/mtools/mtools-native_4.0.10.bb
+@@ -0,0 +1,7 @@
++# mtools-native OE build file
++# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
++# Released under the MIT license (see packages/COPYING)
++
++require mtools_${PV}.bb
++
++inherit autotools native
+diff --git a/recipes/mtools/mtools_3.9.11.bb b/recipes/mtools/mtools_3.9.11.bb
+deleted file mode 100644
+index 4d1822f..0000000
+--- a/recipes/mtools/mtools_3.9.11.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-# mtools OE build file
+-# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
+-# Released under the MIT license (see packages/COPYING)
+-
+-DESCRIPTION="Mtools is a collection of utilities for accessing MS-DOS disks from Unix without mounting them."
+-HOMEPAGE="http://mtools.linux.lu"
+-LICENSE="GPL"
+-PR = "r4"
+-
+-SRC_URI="http://mtools.linux.lu/mtools-${PV}.tar.gz \
+-	file://m486.patch;patch=1 \
+-	file://mtools-makeinfo.patch;patch=1 \
+-	file://no-x11.patch;patch=1"
+-
+-S = "${WORKDIR}/mtools-${PV}"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "--without-x"
+diff --git a/recipes/mtools/mtools_4.0.10.bb b/recipes/mtools/mtools_4.0.10.bb
+new file mode 100644
+index 0000000..5b7f0cd
+--- /dev/null
++++ b/recipes/mtools/mtools_4.0.10.bb
+@@ -0,0 +1,20 @@
++# mtools OE build file
++# Copyright (C) 2004-2006, Advanced Micro Devices, Inc.  All Rights Reserved
++# Copyright (C) 2009, O.S. Systems Software Ltda. All Rights Reserved
++# Released under the MIT license (see packages/COPYING)
++
++DESCRIPTION="Mtools is a collection of utilities for accessing MS-DOS disks from Unix without mounting them."
++HOMEPAGE="http://mtools.linux.lu"
++LICENSE="GPL"
++
++SRC_URI="http://ftp.gnu.org/gnu/mtools/mtools-${PV}.tar.bz2 \
++	file://m486.patch;patch=1 \
++	file://mtools-makeinfo.patch;patch=1 \
++	file://plainio.patch;patch=1 \
++	file://use-sg_io.patch;patch=1"
++
++S = "${WORKDIR}/mtools-${PV}"
++
++inherit autotools
++
++EXTRA_OECONF = "--without-x"
 -- 
 1.6.3.1.54.g99dd
 
