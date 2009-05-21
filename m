@@ -1,35 +1,33 @@
-Received: from [209.85.217.225] (helo=mail-gx0-f225.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1M792d-0003GL-8I
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 16:14:43 +0200
-Received: by gxk25 with SMTP id 25so731291gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2009 07:06:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=vbG+MOVxqR6q9WP+Itl3P4rJJPDReTpXjPSox+R0gzU=;
-	b=MjflAqWhrxRTO8p0uN/wu3qxUOixs1dqGfWHGgHZ9rbBGrrUOxlzOMeebKXnSbaleJ
-	Eh2wNFcmUKi3G2/pbx9Hdla1OFzSFsqZwTRQbtA4C79+1F4c7uLydPF/XaSOLk+yWGi5
-	GVsnPjf5MauscCLomQFOwvwcq07tnjqEC88XU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=JchPFrFO7iOrl7FME7l7b79ecGIHjvYj9oOZOv9inYsMGcu3fmgWn843rn5EUH3uly
-	V2+60cvt4P51Yo3wvLJ2ucKQKVuGU2/kqnKlv9/AbZtTNsFDavN1Ud5qc8K2AkXk2JqQ
-	ZrbE2EVBgaRj14XZqLNOEHbRtvxLnVV+B5f3I=
-MIME-Version: 1.0
-Received: by 10.90.72.3 with SMTP id u3mr2132698aga.90.1242914336120; Thu, 21 
-	May 2009 06:58:56 -0700 (PDT)
-In-Reply-To: <gv0f5k$vi9$1@ger.gmane.org>
-References: <gv0f5k$vi9$1@ger.gmane.org>
-Date: Thu, 21 May 2009 15:58:56 +0200
-Message-ID: <c384c5ea0905210658o355feed3nf540e07eea77de2f@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Write access for Martin Dietze
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M7946-0003Ly-9e
+	for openembedded-devel@openembedded.org; Thu, 21 May 2009 16:16:12 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M78wh-0002G8-O2
+	for openembedded-devel@openembedded.org; Thu, 21 May 2009 14:08:31 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 21 May 2009 14:08:31 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 21 May 2009 14:08:31 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 21 May 2009 16:07:56 +0200
+Message-ID: <gv3n7s$1gg$1@ger.gmane.org>
+References: <1242912094-26435-1-git-send-email-ihar.hrachyshka@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090515 Shredder/3.0b3pre
+In-Reply-To: <1242912094-26435-1-git-send-email-ihar.hrachyshka@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] gst-plugins: fixed pattern for meta package dependencies.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2009 14:14:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 May 2009 14:16:14 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+On 21-05-09 15:21, Ihar Hrachyshka wrote:
+> This fixes package name matching so that gst-plugins-*-meta
+> packages include all the plugin ones. The current matching
+> implementation doesn't make meta packages depend on gst-plugins
+> with 'locale' and 'dev' in their names (f.e. gstfbdevsink).
 
-On Wed, May 20, 2009 at 10:31 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> Hi,
+This patch looks OK, but you need to bump PR for the affected recipes as 
+well. (Someone will probably mention INC_PR soon ;))
+
+regards,
+
+Koen
+
+> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+> ---
+>   recipes/gstreamer/gst-plugins.inc |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
 >
-> Martin wants to get write access again to start maintaining his nylon distro
-> and the meshcubes again. Any objections?
->
-No objections from me, maintenance is good.
+> diff --git a/recipes/gstreamer/gst-plugins.inc b/recipes/gstreamer/gst-plugins.inc
+> index bcb3e39..0156cff 100644
+> --- a/recipes/gstreamer/gst-plugins.inc
+> +++ b/recipes/gstreamer/gst-plugins.inc
+> @@ -33,7 +33,7 @@ python populate_packages_prepend () {
+>   	metapkg_rdepends = []
+>   	packages = bb.data.getVar('PACKAGES', d, 1).split()
+>   	for pkg in packages[1:]:
+> -		if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count('dev') and not pkg.count( 'locale' ):
+> +		if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-locale'):
+>   			metapkg_rdepends.append(pkg)
+>   	bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
+>   	bb.data.setVar('DESCRIPTION_' + metapkg, pn + ' meta package', d)
 
-+1 in favor of write access for Martin.
 
-Regards,
--- 
-Leon
 
 
