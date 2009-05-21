@@ -1,38 +1,22 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M7Auy-0000qO-6V
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2009 18:14:54 +0200
-Received: by fxm20 with SMTP id 20so1163871fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2009 09:07:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=eFwbInX1ntEdLb4LUzpGCZmFWKAFtJEkdltuI0vWD5M=;
-	b=LrcZ+RPoi0SDWR2vzY0CVnliNmcV9jwTfoZZlbQqwW31ieViYhSJ1/klN78WFTYBlo
-	Qd1LIjPMLsEsRNcEvDKflDf6hRWI4ewT66BA9eKnYupuNzEARYlaMJeNuybj9A7T+lR4
-	dIX88emfte8Yy+cuyl2yqS25MTYK2zkdgbNbA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=xgOC64htgASVWy65KuTMm2RQg0kal1EQUU2Pjjgu/VZBNHW3wC2+EUnLgEBtpYC2CF
-	LtcyCYL3Y0Ta6fto0s3SmYCiALOWqhwkulzsxY74bsNj6nplXTZCV+rH9hw8x653iyga
-	OjNw/YttAu7zabfOElqnqaelBMJeM15RkCZk0=
-MIME-Version: 1.0
-Received: by 10.103.181.2 with SMTP id i2mr1463692mup.20.1242922035071; Thu, 
-	21 May 2009 09:07:15 -0700 (PDT)
-In-Reply-To: <gv3sse$qs0$1@ger.gmane.org>
-References: <gv3n7s$1gg$1@ger.gmane.org>
-	<1242917441-29996-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<fce2a370905210837w24570b90u33ee641630dfe19@mail.gmail.com>
-	<gv3sse$qs0$1@ger.gmane.org>
-Date: Thu, 21 May 2009 19:07:15 +0300
-Message-ID: <fce2a370905210907i637dcf17m874ae162b423a5cb@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M7AwG-0000v7-H5
+	for openembedded-devel@openembedded.org; Thu, 21 May 2009 18:16:14 +0200
+Received: (qmail 3317 invoked by uid 813007); 21 May 2009 16:08:36 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 21 May 2009 16:08:36 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] gst-plugins: fixed pattern for meta package dependencies.
+Date: Thu, 21 May 2009 18:08:43 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <4A1014BA.50905@nospam.arcornews.de>
+In-Reply-To: <4A1014BA.50905@nospam.arcornews.de>
+MIME-Version: 1.0
+Message-Id: <200905211808.43502.marcin@juszkiewicz.com.pl>
+Subject: Re: [RFC] rw for Lynn Lin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,247 +30,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2009 16:15:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 May 2009 16:16:22 -0000
+X-Groupsio-MsgNum: 10593
+Content-Type: multipart/signed; boundary="nextPart6625994.8SuMWvnm4h";
+	protocol="application/pkcs7-signature"; micalg=sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart6625994.8SuMWvnm4h
+Content-Type: text/plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Thu, May 21, 2009 at 6:44 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> On 21-05-09 17:37, Ihar Hrachyshka wrote:
->>
->> I just got that locale packages _don't_ end with 'locale'. Resending
->> reworked patch.
->
-> *facepalm* I just realized the same *after* applying the patch. Oops...
+Dnia niedziela, 17 maja 2009 o 15:44:26 Rolf Leggewie napisa=C5=82(a):
+> I went through the bugtracker again and there as many open bugs with
+> patches as ever :-(  One name that I ran across frequently for
+> providing many patches was that of Lynn Lin.  I wonder if it isn't
+> time to grant rw access.  Contributions in the bug tracker are at
+> http://tinyurl.com/qwd94k
 
-Just fix it by yourself.
++1
 
->
->>
->> On Thu, May 21, 2009 at 5:50 PM, Ihar Hrachyshka
->> <ihar.hrachyshka@gmail.com> =C2=A0wrote:
->>>
->>> This fixes package name matching so that gst-plugins-*-meta
->>> packages include all the plugin ones. The current matching
->>> implementation doesn't make meta packages depend on gst-plugins
->>> with 'locale' and 'dev' in their names (f.e. gstfbdevsink).
->>> Also use INC_PR for gstremer-plugins as requested on ML.
->>>
->>> Signed-off-by: Ihar Hrachyshka<ihar.hrachyshka@gmail.com>
->>> ---
->>> =C2=A0recipes/gstreamer/gst-plugins-bad_0.10.11.bb =C2=A0 =C2=A0 | =C2=
-=A0 =C2=A02 ++
->>> =C2=A0recipes/gstreamer/gst-plugins-bad_0.10.6.bb =C2=A0 =C2=A0 =C2=A0|=
- =C2=A0 =C2=A03 ++-
->>> =C2=A0recipes/gstreamer/gst-plugins-base_0.10.17.bb =C2=A0 =C2=A0| =C2=
-=A0 =C2=A02 ++
->>> =C2=A0recipes/gstreamer/gst-plugins-base_0.10.22.bb =C2=A0 =C2=A0| =C2=
-=A0 =C2=A02 ++
->>> =C2=A0recipes/gstreamer/gst-plugins-base_0.10.23.bb =C2=A0 =C2=A0| =C2=
-=A0 =C2=A02 ++
->>> =C2=A0recipes/gstreamer/gst-plugins-good_0.10.13.bb =C2=A0 =C2=A0| =C2=
-=A0 =C2=A02 +-
->>> =C2=A0recipes/gstreamer/gst-plugins-good_0.10.14.bb =C2=A0 =C2=A0| =C2=
-=A0 =C2=A02 ++
->>> =C2=A0recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb | =C2=A0 =C2=A03=
- ++-
->>> =C2=A0recipes/gstreamer/gst-plugins-ugly_0.10.10.bb =C2=A0 =C2=A0| =C2=
-=A0 =C2=A02 +-
->>> =C2=A0recipes/gstreamer/gst-plugins-ugly_0.10.11.bb =C2=A0 =C2=A0| =C2=
-=A0 =C2=A02 ++
->>> =C2=A0recipes/gstreamer/gst-plugins.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A04 +++-
->>> =C2=A011 files changed, 21 insertions(+), 5 deletions(-)
->>>
->>> diff --git a/recipes/gstreamer/gst-plugins-bad_0.10.11.bb
->>> b/recipes/gstreamer/gst-plugins-bad_0.10.11.bb
->>> index dbfe6a9..a90b88e 100644
->>> --- a/recipes/gstreamer/gst-plugins-bad_0.10.11.bb
->>> +++ b/recipes/gstreamer/gst-plugins-bad_0.10.11.bb
->>> @@ -1,5 +1,7 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> +PR =3D "${INC_PR}.1"
->>> +
->>> =C2=A0SRC_URI +=3D "file://vorbisenc.h file://vorbisdec.h \
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://ivorbis-thumb.patch;pa=
-tch=3D1"
->>> =C2=A0DEPENDS +=3D "gst-plugins-base directfb"
->>> diff --git a/recipes/gstreamer/gst-plugins-bad_0.10.6.bb
->>> b/recipes/gstreamer/gst-plugins-bad_0.10.6.bb
->>> index df7bf75..bfc7217 100644
->>> --- a/recipes/gstreamer/gst-plugins-bad_0.10.6.bb
->>> +++ b/recipes/gstreamer/gst-plugins-bad_0.10.6.bb
->>> @@ -1,5 +1,6 @@
->>> =C2=A0require gst-plugins.inc
->>> -PR =3D "r2"
->>> +
->>> +PR =3D "${INC_PR}.1"
->>>
->>> =C2=A0SRC_URI +=3D "file://vorbisenc.h file://vorbisdec.h \
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://gst-plugins-directfb-f=
-ix.patch;patch=3D1;pnum=3D2 \
->>> diff --git a/recipes/gstreamer/gst-plugins-base_0.10.17.bb
->>> b/recipes/gstreamer/gst-plugins-base_0.10.17.bb
->>> index 0a1f17f..3b07668 100644
->>> --- a/recipes/gstreamer/gst-plugins-base_0.10.17.bb
->>> +++ b/recipes/gstreamer/gst-plugins-base_0.10.17.bb
->>> @@ -1,5 +1,7 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> +PR =3D "${INC_PR}.1"
->>> +
->>> =C2=A0PROVIDES +=3D "gst-plugins"
->>>
->>> =C2=A0# gst-plugins-base only builds the alsa plugin
->>> diff --git a/recipes/gstreamer/gst-plugins-base_0.10.22.bb
->>> b/recipes/gstreamer/gst-plugins-base_0.10.22.bb
->>> index 3086d93..bcbfd68 100644
->>> --- a/recipes/gstreamer/gst-plugins-base_0.10.22.bb
->>> +++ b/recipes/gstreamer/gst-plugins-base_0.10.22.bb
->>> @@ -1,5 +1,7 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> +PR =3D "${INC_PR}.1"
->>> +
->>> =C2=A0PROVIDES +=3D "gst-plugins"
->>>
->>> =C2=A0PR =3D "r2"
->>> diff --git a/recipes/gstreamer/gst-plugins-base_0.10.23.bb
->>> b/recipes/gstreamer/gst-plugins-base_0.10.23.bb
->>> index d3bfb6c..26dcfe3 100644
->>> --- a/recipes/gstreamer/gst-plugins-base_0.10.23.bb
->>> +++ b/recipes/gstreamer/gst-plugins-base_0.10.23.bb
->>> @@ -1,5 +1,7 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> +PR =3D "${INC_PR}.1"
->>> +
->>> =C2=A0PROVIDES +=3D "gst-plugins"
->>>
->>> =C2=A0# gst-plugins-base only builds the alsa plugin
->>> diff --git a/recipes/gstreamer/gst-plugins-good_0.10.13.bb
->>> b/recipes/gstreamer/gst-plugins-good_0.10.13.bb
->>> index b77d1fc..d077d06 100644
->>> --- a/recipes/gstreamer/gst-plugins-good_0.10.13.bb
->>> +++ b/recipes/gstreamer/gst-plugins-good_0.10.13.bb
->>> @@ -1,6 +1,6 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> -PR =3D "r1"
->>> +PR =3D "${INC_PR}.1"
->>>
->>> =C2=A0inherit gconf
->>>
->>> diff --git a/recipes/gstreamer/gst-plugins-good_0.10.14.bb
->>> b/recipes/gstreamer/gst-plugins-good_0.10.14.bb
->>> index d9f0349..d077d06 100644
->>> --- a/recipes/gstreamer/gst-plugins-good_0.10.14.bb
->>> +++ b/recipes/gstreamer/gst-plugins-good_0.10.14.bb
->>> @@ -1,5 +1,7 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> +PR =3D "${INC_PR}.1"
->>> +
->>> =C2=A0inherit gconf
->>>
->>> =C2=A0EXTRA_OECONF +=3D " --enable-experimental =C2=A0--enable-gst_v4l2
->>> --enable-gconftool =C2=A0--enable-external --with-check=3Dno"
->>> diff --git a/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
->>> b/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
->>> index 77c4184..40a4eb2 100644
->>> --- a/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
->>> +++ b/recipes/gstreamer/gst-plugins-ugly-sid_0.10.7.bb
->>> @@ -1,7 +1,8 @@
->>> =C2=A0require gst-plugins.inc
->>> =C2=A0DEPENDS +=3D "gst-plugins-base libsidplay"
->>> =C2=A0PROVIDES +=3D "gst-plugin-sid"
->>> -PR =3D "r5"
->>> +
->>> +PR =3D "${INC_PR}.1"
->>>
->>> =C2=A0SRC_URI =3D "\
->>>
->>> http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-=
-${PV}.tar.bz2
->>> \
->>> diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
->>> b/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
->>> index 0678e22..9c28d20 100644
->>> --- a/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
->>> +++ b/recipes/gstreamer/gst-plugins-ugly_0.10.10.bb
->>> @@ -1,6 +1,6 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> -PR =3D "r1"
->>> +PR =3D "${INC_PR}.1"
->>>
->>> =C2=A0DEPENDS +=3D "gst-plugins-base mpeg2dec libsidplay"
->>>
->>> diff --git a/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
->>> b/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
->>> index 0624041..9c28d20 100644
->>> --- a/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
->>> +++ b/recipes/gstreamer/gst-plugins-ugly_0.10.11.bb
->>> @@ -1,5 +1,7 @@
->>> =C2=A0require gst-plugins.inc
->>>
->>> +PR =3D "${INC_PR}.1"
->>> +
->>> =C2=A0DEPENDS +=3D "gst-plugins-base mpeg2dec libsidplay"
->>>
->>> =C2=A0SRC_URI +=3D "\
->>> diff --git a/recipes/gstreamer/gst-plugins.inc
->>> b/recipes/gstreamer/gst-plugins.inc
->>> index bcb3e39..536555c 100644
->>> --- a/recipes/gstreamer/gst-plugins.inc
->>> +++ b/recipes/gstreamer/gst-plugins.inc
->>> @@ -3,6 +3,8 @@ DESCRIPTION =3D "Plugins for GStreamer"
->>> =C2=A0DEPENDS =3D "gstreamer libmikmod liboil libogg tremor libvorbis"
->>> =C2=A0DEPENDS +=3D "${@base_conditional('ENTERPRISE_DISTRO', '1', '', '=
-libmad
->>> libid3tag', d)}"
->>>
->>> +INC_PR =3D "r5"
->>> +
->>> =C2=A0PACKAGES_DYNAMIC =3D "gst-plugin-*"
->>>
->>> =C2=A0SRC_URI =3D
->>> "http://gstreamer.freedesktop.org/src/${PN}/${PN}-${PV}.tar.bz2"
->>> @@ -33,7 +35,7 @@ python populate_packages_prepend () {
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0metapkg_rdepends =3D []
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0packages =3D bb.data.getVar('PACKAGES', d, 1=
-).split()
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0for pkg in packages[1:]:
->>> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if not pkg in blackl=
-ist and not pkg in metapkg_rdepends
->>> and not pkg.count('dev') and not pkg.count( 'locale' ):
->>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if not pkg in blackl=
-ist and not pkg in metapkg_rdepends
->>> and not pkg.endswith('-dev') and not pkg.endswith('-locale'):
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0metapkg_rdepends.append(pkg)
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.setVar('RDEPENDS_' + metapkg, ' '.jo=
-in(metapkg_rdepends),
->>> d)
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.setVar('DESCRIPTION_' + metapkg, pn =
-+ ' meta package', d)
->>> --
->>> 1.6.3.1
->>>
->>>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
+--nextPart6625994.8SuMWvnm4h
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
 
+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
+
+--nextPart6625994.8SuMWvnm4h--
