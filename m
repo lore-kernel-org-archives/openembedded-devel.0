@@ -1,21 +1,35 @@
-Received: from [87.194.255.145] (helo=woodbine.london.02.net)
+Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bluelightning@bluelightning.org>) id 1M7cgl-0003SC-Le
+	(envelope-from <andrea.adami@gmail.com>) id 1M7dKS-0001NT-CK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 May 2009 23:54:03 +0200
-Received: from shodan.localnet (93.96.131.185) by woodbine.london.02.net
-	(8.5.016.1)
-	id 49D39EA902131B47 for openembedded-devel@lists.openembedded.org;
-	Fri, 22 May 2009 22:46:18 +0100
-From: Paul Eggleton <bluelightning@bluelightning.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 May 2009 22:46:17 +0100
-User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; i686; ; )
-References: <1243013494-7590-1-git-send-email-mad_soft@inbox.ru>
-In-Reply-To: <1243013494-7590-1-git-send-email-mad_soft@inbox.ru>
+	Sat, 23 May 2009 00:35:04 +0200
+Received: by fxm20 with SMTP id 20so1975912fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 May 2009 15:27:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=wsJn37u31QqBi2satXFT3KX+QiXOOFC1D7t4kAGgowI=;
+	b=oGitH3a8LyOt39Qlmc/oQJQVK2VupDHPYyd0FIlykK1n2DZ3iBOZ4too4ja+4rnBQb
+	h6DeRXdWYp/qcGV1bVziisfIjBqYjDLmPaR8MqxfCNSHsGL8YJlpb3KFHrQayIhRUog9
+	ixlrknfKGCfLAEA4+hfYH+ojdMYAC6wzYpEIQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ivV5RVF4WVN0+IYnakw3pL5P5wvGaNxDIkewJuklVANbgQ6uFAaxYNz/H8GkwhZJmv
+	JbfG8lEiYFr7qkXbQbubcdyG76TtNpv6x0j7ODJU1crLuvGTOy3HYVaKwykl6NrGdo1K
+	kaLLK6yoXaz+cKJ83x4zvauVv6TY6ap6bPVwE=
 MIME-Version: 1.0
-Message-Id: <200905222246.17530.bluelightning@bluelightning.org>
-Subject: Re: [PATCH] linux-handhelds-2.6: fix compilation with gcc-4.3
+Received: by 10.223.110.4 with SMTP id l4mr2607750fap.47.1243031239284; Fri, 
+	22 May 2009 15:27:19 -0700 (PDT)
+In-Reply-To: <20090522213142.GF23842@smtp.west.cox.net>
+References: <20090522213142.GF23842@smtp.west.cox.net>
+Date: Sat, 23 May 2009 00:27:19 +0200
+Message-ID: <d1b08f940905221527v147487e3n128cf91e6a7a6e1d@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Kernel recipes with broken PRs now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,112 +43,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2009 21:54:03 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 22 May 2009 22:35:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Acked-by: Paul Eggleton <bluelightning@bluelightning.org>
+I think the side-effects of the patch are blessing too much...I'd
+propose a rethink of the patch as opt-in.
 
-On Fri, 22 May 2009, Dmitry Artamonow wrote:
-> Backport time.h patch from 2.6.25 kernel
-> (commit 38332cb98772f5ea757e6486bed7ed0381cb5f98)
->
-> It fixes following error during compilation:
->   LD      .tmp_vmlinux1
-> kernel/built-in.o: In function `getnstimeofday':
-> utsname_sysctl.c:(.text+0xf110): undefined reference to `__aeabi_uldivmod'
-> kernel/built-in.o: In function `do_gettimeofday':
-> utsname_sysctl.c:(.text+0xf1d0): undefined reference to `__aeabi_uldivmod'
-> utsname_sysctl.c:(.text+0xf1ec): undefined reference to `__aeabi_uldivmod'
-> kernel/built-in.o: In function `do_timer':
-> utsname_sysctl.c:(.text+0x100ec): undefined reference to `__aeabi_uldivmod'
-> utsname_sysctl.c:(.text+0x1010c): undefined reference to `__aeabi_uldivmod'
-> make: *** [.tmp_vmlinux1] Error 1
->
-> See also similar OE bug #4333
->
-> Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
-> ---
->  ...vent-the-loop-in-timespec_add_ns-from-bei.patch |   34
-> ++++++++++++++++++++ recipes/linux/linux-handhelds-2.6_2.6.21-hh20.bb   |  
->  3 +-
->  2 files changed, 36 insertions(+), 1 deletions(-)
->  create mode 100644
-> recipes/linux/linux-handhelds-2.6-2.6.21/0001-time-prevent-the-loop-in-time
->spec_add_ns-from-bei.patch
->
-> diff --git
-> a/recipes/linux/linux-handhelds-2.6-2.6.21/0001-time-prevent-the-loop-in-ti
->mespec_add_ns-from-bei.patch
-> b/recipes/linux/linux-handhelds-2.6-2.6.21/0001-time-prevent-the-loop-in-ti
->mespec_add_ns-from-bei.patch new file mode 100644
-> index 0000000..ad10b67
-> --- /dev/null
-> +++
-> b/recipes/linux/linux-handhelds-2.6-2.6.21/0001-time-prevent-the-loop-in-ti
->mespec_add_ns-from-bei.patch @@ -0,0 +1,34 @@
-> +From 38332cb98772f5ea757e6486bed7ed0381cb5f98 Mon Sep 17 00:00:00 2001
-> +From: Segher Boessenkool <segher@kernel.crashing.org>
-> +Date: Tue, 4 Mar 2008 14:59:54 -0800
-> +Subject: [PATCH] time: prevent the loop in timespec_add_ns() from being
-> optimised away +
-> +Since some architectures don't support __udivdi3().
-> +
-> +Signed-off-by: Segher Boessenkool <segher@kernel.crashing.org>
-> +Cc: john stultz <johnstul@us.ibm.com>
-> +Cc: Ingo Molnar <mingo@elte.hu>
-> +Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
-> +Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-> +---
-> + include/linux/time.h |    4 ++++
-> + 1 files changed, 4 insertions(+), 0 deletions(-)
-> +
-> +diff --git a/include/linux/time.h b/include/linux/time.h
-> +index 2091a19..d32ef0a 100644
-> +--- a/include/linux/time.h
-> ++++ b/include/linux/time.h
-> +@@ -174,6 +174,10 @@ static inline void timespec_add_ns(struct timespec
-> *a, u64 ns) + {
-> + 	ns += a->tv_nsec;
-> + 	while(unlikely(ns >= NSEC_PER_SEC)) {
-> ++		/* The following asm() prevents the compiler from
-> ++		 * optimising this loop into a modulo operation.  */
-> ++		asm("" : "+r"(ns));
-> ++
-> + 		ns -= NSEC_PER_SEC;
-> + 		a->tv_sec++;
-> + 	}
-> +--
-> +1.6.0.6
-> +
-> diff --git a/recipes/linux/linux-handhelds-2.6_2.6.21-hh20.bb
-> b/recipes/linux/linux-handhelds-2.6_2.6.21-hh20.bb index f6bb173..d955c0a
-> 100644
-> --- a/recipes/linux/linux-handhelds-2.6_2.6.21-hh20.bb
-> +++ b/recipes/linux/linux-handhelds-2.6_2.6.21-hh20.bb
-> @@ -1,7 +1,7 @@
->  SECTION = "kernel"
->  DESCRIPTION = "handhelds.org Linux kernel 2.6 for PocketPCs and other
-> consumer handheld devices." LICENSE = "GPL"
-> -PR = "r25"
-> +PR = "r26"
->
->  DEFAULT_PREFERENCE = "-1"
->
-> @@ -13,6 +13,7 @@ SRC_URI =
-> "${HANDHELDS_CVS};module=linux/kernel26;tag=${@'K' + bb.data.getVar('P
-> file://linux-2.6.git-9d20fdd58e74d4d26dc5216efaaa0f800c23dd3a.patch;patch=1
-> \
-> http://www.rpsys.net/openzaurus/patches/archive/export_atags-r0a.patch;patc
->h=1 \ file://gcc4x-limits.patch;patch=1 \
-> +          
-> file://0001-time-prevent-the-loop-in-timespec_add_ns-from-bei.patch;patch=1
-> \ file://defconfig"
->
->  require linux-handhelds-2.6.inc
-
-
+Andrea
 
 
