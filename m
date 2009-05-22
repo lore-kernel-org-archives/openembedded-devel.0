@@ -1,28 +1,27 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [151.189.21.41] (helo=mail-in-01.arcor-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M7UbW-0004ln-Ue
+	(envelope-from <no2spam@nospam.arcornews.de>) id 1M7VFT-0003HK-2f
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 May 2009 15:16:07 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M7UU6-0005p0-57
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 May 2009 14:08:26 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1M7UU6-0000iD-0D
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 May 2009 14:08:26 +0100
-From: Phil Blundell <philb@gnu.org>
+	Fri, 22 May 2009 15:57:23 +0200
+Received: from mail-in-13-z2.arcor-online.net (mail-in-13-z2.arcor-online.net
+	[151.189.8.30]) by mx.arcor.de (Postfix) with ESMTP id E6F49332AAA;
+	Fri, 22 May 2009 15:49:39 +0200 (CEST)
+Received: from mail-in-09.arcor-online.net (mail-in-09.arcor-online.net
+	[151.189.21.49])
+	by mail-in-13-z2.arcor-online.net (Postfix) with ESMTP id D5AA11B8E00; 
+	Fri, 22 May 2009 15:49:39 +0200 (CEST)
+Received: from localhost.localdomain (p5B3B25B5.dip.t-dialin.net
+	[91.59.37.181]) (Authenticated sender: leggewie@arcor.de)
+	by mail-in-09.arcor-online.net (Postfix) with ESMTPSA id 356A81AF6C5;
+	Fri, 22 May 2009 15:49:39 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-09.arcor-online.net 356A81AF6C5
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
-References: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
-Date: Fri, 22 May 2009 14:08:25 +0100
-Message-Id: <1242997705.9080.347.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: New hal is not buildable (needs new blkid version)
+Date: Fri, 22 May 2009 15:49:36 +0200
+Message-Id: <1243000176-32603-1-git-send-email-no2spam@nospam.arcornews.de>
+X-Mailer: git-send-email 1.6.0.4
+Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Subject: [PATCH] bluez: document that hciattach-ti-bts.patch has landed upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2009 13:16:08 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 May 2009 13:57:23 -0000
 
-On Fri, 2009-05-22 at 15:55 +0300, Ihar Hrachyshka wrote:
-> The problem is that the new hal was also set as preferred for
-> angstrom distro. Please either add new e2fsprogs-libs or set
-> hal-0.5.11 as preferred.
+From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
 
-It's up to the angstrom distro maintainers to choose the preferred
-versions that they want.  You should probably take this up with them on
-their own mailing list rather than here.
+---
+ .../bluez/bluez-utils-3.33/hciattach-ti-bts.patch  |    3 +++
+ .../bluez/bluez-utils-3.x/hciattach-ti-bts.patch   |    3 +++
+ 2 files changed, 6 insertions(+), 0 deletions(-)
 
-p.
-
+diff --git a/recipes/bluez/bluez-utils-3.33/hciattach-ti-bts.patch b/recipes/bluez/bluez-utils-3.33/hciattach-ti-bts.patch
+index 1b208f7..3d84a4c 100644
+--- a/recipes/bluez/bluez-utils-3.33/hciattach-ti-bts.patch
++++ b/recipes/bluez/bluez-utils-3.33/hciattach-ti-bts.patch
+@@ -1,3 +1,6 @@
++upstream: accepted, this patch has landed upstream albeit in a different form
++sometime between 3.35 and 3.36. see the commit message in "git log e1d12d8bb5b40a6313cce52974f174fd76cbf32c"
++
+ --- bluez-utils-3.1/tools/hciattach.c.orig	2006-07-23 14:02:14.000000000 +0200
+ +++ bluez-utils-3.1/tools/hciattach.c	2006-07-23 14:06:29.000000000 +0200
+ @@ -60,6 +60,8 @@
+diff --git a/recipes/bluez/bluez-utils-3.x/hciattach-ti-bts.patch b/recipes/bluez/bluez-utils-3.x/hciattach-ti-bts.patch
+index 8fe37de..f3a417d 100644
+--- a/recipes/bluez/bluez-utils-3.x/hciattach-ti-bts.patch
++++ b/recipes/bluez/bluez-utils-3.x/hciattach-ti-bts.patch
+@@ -1,3 +1,6 @@
++upstream: accepted, this patch has landed upstream albeit in a different form
++sometime between 3.35 and 3.36. see the commit message in "git log e1d12d8bb5b40a6313cce52974f174fd76cbf32c"
++
+ --- bluez-utils-2.24/tools/hciattach.c.orig	2005-12-10 15:14:36.000000000 +0100
+ +++ bluez-utils-2.24/tools/hciattach.c	2006-01-22 13:56:13.000000000 +0100
+ @@ -57,6 +57,8 @@
+-- 
+1.6.0.4
 
 
 
