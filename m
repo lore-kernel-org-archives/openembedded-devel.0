@@ -1,32 +1,33 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M7UPV-00042S-8Y
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 May 2009 15:03:42 +0200
-Received: by fxm20 with SMTP id 20so1678793fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 May 2009 05:55:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=PRx916vHjetSh4WYEP2GiW5v8Z4+0r/xpnsuHCAtm1w=;
-	b=jgU2agy5ydR1wrfIoBZmSaQUFIhfRUVP6AKaAdAn4Nh//Nti6wMuYhKjVPnejXCN8b
-	C0GRePFaPSuIPcoYoLVez7/4w0AAHWB1UU0nzPzzSC7pX6sXiUvZx8CRwLSbks1WeJBd
-	ZlCrCZQlNBFDlzwpIoJ0TgiyL2aKx8jM6/E/Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=bKy0it1diNrnqgCLt2jq2rzzYPG0sMcDErSvLrA8UhGoT4H3Qd/IkY/N0LrwAu2O2Q
-	GoqSOuhUfnRiM0IwQu8fzvATCSt6LHdYcAz1fjecAuspeW4gkUKr1KwmHs9b8xxzX0a5
-	nRGaw7xQegmPksQHLvYb/ZdIBMA47yiZDp14g=
-MIME-Version: 1.0
-Received: by 10.103.52.2 with SMTP id e2mr952628muk.33.1242996958141; Fri, 22 
-	May 2009 05:55:58 -0700 (PDT)
-Date: Fri, 22 May 2009 15:55:58 +0300
-Message-ID: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org, koen@openembedded.org
-Subject: New hal is not buildable (needs new blkid version)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M7UZK-0004YW-L9
+	for openembedded-devel@openembedded.org; Fri, 22 May 2009 15:13:50 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M7URt-00012S-Ib
+	for openembedded-devel@openembedded.org; Fri, 22 May 2009 13:06:09 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 22 May 2009 13:06:09 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 22 May 2009 13:06:09 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 22 May 2009 15:05:56 +0200
+Message-ID: <gv67vm$a4v$1@ger.gmane.org>
+References: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
+In-Reply-To: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: New hal is not buildable (needs new blkid version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,19 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2009 13:03:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 May 2009 13:13:51 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello!
+On 22-05-09 14:55, Ihar Hrachyshka wrote:
+> Hello!
+>
+> After Koen committed new hal (0.5.12) to .dev branch it becomes
+> unbuildable.
 
-After Koen committed new hal (0.5.12) to .dev branch it becomes
-unbuildable. The reason is that this new version depends on new blkid
-library (version >=1.43) but there is no e2fsprogs-libs-1.43* in the
-tree. The problem is that the new hal was also set as preferred for
-angstrom distro. Please either add new e2fsprogs-libs or set
-hal-0.5.11 as preferred.
+Hal 0.5.12 is disabled by default, btw, only angstrom sets a def-pref 
+for it.
 
-Thanks.
+> The reason is that this new version depends on new blkid
+> library (version>=1.43)
+
+It's part of util-linux-ng:
+
+koen@dominion:/OE/angstrom-dev/deploy/glibc$ dpkg-deb -I 
+ipk/armv7a/libblkid1_2.15-r2.2_armv7a.ipk
+  new debian package, version 2.0.
+  size 38512 bytes: control archive= 547 bytes.
+      476 bytes,    12 lines      control
+      118 bytes,     6 lines   *  postinst             #!/bin/sh
+  Package: libblkid1
+  Version: 2.15-r2.2
+  Description: util-linux-ng blkid library
+  Section: base
+  Priority: optional
+  Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
+  License: GPL
+  Architecture: armv7a
+  OE: util-linux-ng
+  Homepage: unknown
+  Depends: libuuid1 (>= 1.41.5), libgcc1 (>= 4.3.3), libc6 (>= 2.6.1)
+  Source: 
+http://kernel.org/pub/linux/utils/util-linux-ng/v2.15/util-linux-ng-2.15.tar.bz2 
+file://fix-make-c.patch;patch=1 file://optional-uuid.patch;patch=1
+
+and:
+
+koen@dominion:/OE/org.openembedded.dev/recipes/hal$ grep util-linux *
+hal.inc:DEPENDS = "virtual/kernel util-linux-ng dbus-glib udev intltool 
+intltool-native expat libusb gperf-native"
+
+So you'll have to see why it didn't get built for you.
+
+regards,
+
+Koen
+
 
 
