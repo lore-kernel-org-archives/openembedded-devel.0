@@ -1,32 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M7UZK-0004YW-L9
-	for openembedded-devel@openembedded.org; Fri, 22 May 2009 15:13:50 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M7URt-00012S-Ib
-	for openembedded-devel@openembedded.org; Fri, 22 May 2009 13:06:09 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 22 May 2009 13:06:09 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 22 May 2009 13:06:09 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 22 May 2009 15:05:56 +0200
-Message-ID: <gv67vm$a4v$1@ger.gmane.org>
-References: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
+	(envelope-from <philb@gnu.org>) id 1M7UbW-0004ln-Ue
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 May 2009 15:16:07 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M7UU6-0005p0-57
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 May 2009 14:08:26 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1M7UU6-0000iD-0D
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 May 2009 14:08:26 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+References: <fce2a370905220555o3d234765y6fbeadb0c41629d3@mail.gmail.com>
+Date: Fri, 22 May 2009 14:08:25 +0100
+Message-Id: <1242997705.9080.347.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: New hal is not buildable (needs new blkid version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,56 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2009 13:13:51 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 22 May 2009 13:16:08 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 22-05-09 14:55, Ihar Hrachyshka wrote:
-> Hello!
->
-> After Koen committed new hal (0.5.12) to .dev branch it becomes
-> unbuildable.
+On Fri, 2009-05-22 at 15:55 +0300, Ihar Hrachyshka wrote:
+> The problem is that the new hal was also set as preferred for
+> angstrom distro. Please either add new e2fsprogs-libs or set
+> hal-0.5.11 as preferred.
 
-Hal 0.5.12 is disabled by default, btw, only angstrom sets a def-pref 
-for it.
+It's up to the angstrom distro maintainers to choose the preferred
+versions that they want.  You should probably take this up with them on
+their own mailing list rather than here.
 
-> The reason is that this new version depends on new blkid
-> library (version>=1.43)
+p.
 
-It's part of util-linux-ng:
-
-koen@dominion:/OE/angstrom-dev/deploy/glibc$ dpkg-deb -I 
-ipk/armv7a/libblkid1_2.15-r2.2_armv7a.ipk
-  new debian package, version 2.0.
-  size 38512 bytes: control archive= 547 bytes.
-      476 bytes,    12 lines      control
-      118 bytes,     6 lines   *  postinst             #!/bin/sh
-  Package: libblkid1
-  Version: 2.15-r2.2
-  Description: util-linux-ng blkid library
-  Section: base
-  Priority: optional
-  Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
-  License: GPL
-  Architecture: armv7a
-  OE: util-linux-ng
-  Homepage: unknown
-  Depends: libuuid1 (>= 1.41.5), libgcc1 (>= 4.3.3), libc6 (>= 2.6.1)
-  Source: 
-http://kernel.org/pub/linux/utils/util-linux-ng/v2.15/util-linux-ng-2.15.tar.bz2 
-file://fix-make-c.patch;patch=1 file://optional-uuid.patch;patch=1
-
-and:
-
-koen@dominion:/OE/org.openembedded.dev/recipes/hal$ grep util-linux *
-hal.inc:DEPENDS = "virtual/kernel util-linux-ng dbus-glib udev intltool 
-intltool-native expat libusb gperf-native"
-
-So you'll have to see why it didn't get built for you.
-
-regards,
-
-Koen
 
 
 
