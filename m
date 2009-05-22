@@ -1,36 +1,42 @@
-Received: from [209.85.217.225] (helo=mail-gx0-f225.google.com)
+Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1M7JG3-0007Oc-0Z
-	for openembedded-devel@openembedded.org; Fri, 22 May 2009 03:09:15 +0200
-Received: by gxk25 with SMTP id 25so1107603gxk.12
-	for <openembedded-devel@openembedded.org>;
-	Thu, 21 May 2009 18:01:13 -0700 (PDT)
+	(envelope-from <jay4mail@gmail.com>) id 1M7Pkq-0002Hc-P1
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 May 2009 10:05:25 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so904219ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 May 2009 00:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=hTEt7OtG7za0GocKH5QkOCphhwG4v9Br8AsypP6n2sM=;
-	b=gwa/ZQ5c0SP9XygcMB2U5KDz6pbiLEDOqJ3BcA8EAfWY1Crl8TVPNyGfW3JnHNsQgi
-	Uwm9Mn2FESX1rHjvFahKLMSylwEfRPZQdEoCJFY2ehieNkSHtnYq/6wTrr7e4m1rxUvt
-	el2EqvjHyUE4az6K5GOb8VF2/MQMMzfEACFnA=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:content-disposition:message-id;
+	bh=s0/Se/cnWao2nGtkUseeErexBcUn5VWpB2+VpvUGF/o=;
+	b=wZ20rHYTECNrXR46Vvu4aQ8gX1ISxXjmj8OIkaQybvffETFLduUl917jyEx3qvEIH1
+	wI9QwvIfrd917VQtYrOPYb+Pi9zeGs+tM6q1oKZ0VvxRzN09wJzLkhLDJEeOJWDsjO+6
+	adwRN5CakwA2AVDSch08oqyMx2w+zUY1V0Flw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=ZmOtq681WoNQa/KuJu0y/G77HSLa5oob8u7oPhiM01kBuD/9I6g80G66132dvZbLm2
-	EjtQW93Ohgl/+F3VIvVIqsAT1N87C8FNY1aHoMzSFkTGn5MHn3bgcYgWUUtfALRZ0Xea
-	1r3Mxi6nAeEF/7mVODNGDQC3eT3xQpVuNfFs4=
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:content-disposition
+	:message-id;
+	b=wxKNaBj4zUIdZ1Sq6nPa6irfGd4Fdu+cc0XWDdi7CPBq5DJz0CAjmGWjm5RFfYp9Im
+	2gusmQaZcg55BnuyLr3r0bFMHTjaBsumK2Bj6ALsnfcbcgeCfddNHH4d46cyzMGEqhnt
+	6YipcmW+nwW1sS8Dv9u1L1KIOmFnm+4c6x6JY=
+Received: by 10.90.68.20 with SMTP id q20mr2919034aga.93.1242979061504;
+	Fri, 22 May 2009 00:57:41 -0700 (PDT)
+Received: from is.home (93-81-140-165.broadband.corbina.ru [93.81.140.165])
+	by mx.google.com with ESMTPS id 40sm7084192aga.23.2009.05.22.00.57.40
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 22 May 2009 00:57:40 -0700 (PDT)
+From: Yuri Bushmelev <jay4mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 22 May 2009 11:57:31 +0400
+User-Agent: KMail/1.9.10
+References: <gv4d2h$oft$1@ger.gmane.org> <gv4i2t$90h$1@ger.gmane.org>
+	<gv4md5$jmq$1@ger.gmane.org>
+In-Reply-To: <gv4md5$jmq$1@ger.gmane.org>
 MIME-Version: 1.0
-Received: by 10.90.90.4 with SMTP id n4mr2618922agb.46.1242952839294; Thu, 21 
-	May 2009 17:40:39 -0700 (PDT)
-In-Reply-To: <4A15EED8.7040709@dls.net>
-References: <c384c5ea0905211455i5ba72709jc0b985cf097e9e3f@mail.gmail.com>
-	<4A15EED8.7040709@dls.net>
-Date: Fri, 22 May 2009 02:40:39 +0200
-Message-ID: <c384c5ea0905211740w5f3c46f5g6c96919f8774636@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: mwester@dls.net
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Re: madwifi: Aggressive revert of my aggresive fix :-)
+Message-Id: <200905221157.32033.jay4mail@gmail.com>
+Subject: Re: [RFC] policy about nonworking recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +50,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2009 01:09:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 22 May 2009 08:05:26 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello Mike,
+Hello!
 
-On Fri, May 22, 2009 at 2:16 AM, Mike Westerhof (mwester)
-<mwester@dls.net> wrote:
-> Leon Woestenberg wrote:
+> we're still discussing to find a good solution.  No need to get all
+> worked up yet and calling other people pendantic[sic].  Is it really too
+> much to ask that the data in OE should generally be such that "bitbake
+> $target" at least builds?
 >
-> So, you want _me_ to revert _my_ fix (after it was broken by someone
-> else), and then spend my time sorting through the maze of Makefile
+> If the distribution's settings are responsible for a build failing then
+> it's the distribution's responsibility to fix this.  The pulseaudio and
+> autoconf example you gave is essentially bug 3722 but can otherwise be
+> handled.  BTW, the workflow you then described is not what I'm
+> suggesting.
 >
+> My intention is not to abuse COMPATIBLE_MACHINE if that is not the right
+> place.  I can only go by the well-defined meaning in the documentation
+> which at least does not mention build-time vs. run-time.
+> conf/documentation.conf:COMPATIBLE_MACHINE[doc] = "A regular expression
+> which matches the MACHINES support by the package/file. Failure to match
+> will cause the file to be skipped by the parser."  IMHO setting it to an
+> empty string to indicate that no compatible machines are (currently!)
+> known does not conflict with that.
 
-Sorry, I meant to write "revert locally" in my request: "Please revert
- your commit _locally_ (i.e. unsetting LDFLAGS) and see which part of
-madwifi needs LDFLAGS unset.", but never mind;
+Another portion of FreeBSD ports examples :)
+I hope it can be useful.
 
-In my goal to make the recipe work again for other machines after the
-GNU_HASH / LDFLAGS check (I tested powerpc and x86),  I thereby broke
-it for the initial combo it was written for (slugos). I should have
-tested that combo for sure.
+ATM FreeBSD ports have such knobs in similar area:
 
-Mea culpa and excuse me for breaking it for you.
+# FORBIDDEN     - Package build should not be attempted because of
+#                 security vulnerabilities.
+# IGNORE        - Package build should be skipped entirely (e.g.
+#                 because of serious unfixable problems in the build,
+#                 because it cannot be manually fetched, etc).  Error
+#                 logs will not appear on pointyhat, so this should be
+#                 used sparingly.
+# BROKEN        - Port is believed to be broken.  Package builds will
+#                 still be attempted on the pointyhat package cluster to
+#                 test this assumption.
+# DEPRECATED    - Port is deprecated to install. Advisory only.
+# EXPIRATION_DATE
+#               - If DEPRECATED is set, determines a date when
+#                 the port is planed to remove. The date format is
+#                 ISO 8601 (YYYY-MM-DD).
 
-I largely agree with your points, especially after your email explanation.
+# Set these if your port only makes sense to certain architectures.
+# They are lists containing names for them (e.g., "alpha i386").
+# (Defaults: not set.)
+#
+# ONLY_FOR_ARCHS
+#               - Only build ports if ${ARCH} matches one of these.
+# NOT_FOR_ARCHS - Only build ports if ${ARCH} doesn't match one of these.
+# ONLY_FOR_ARCHS_REASON
+# ONLY_FOR_ARCHS_REASON_${ARCH}
+#               - Reason why it's only for ${ONLY_FOR_ARCHS}s
+# NOT_FOR_ARCHS_REASON
+# NOT_FOR_ARCHS_REASON_${ARCH}
+#               - Reason why it's not for ${NOT_FOR_ARCHS}s
 
-Regards,
+Typical examples from real life:
+IGNORE=           needs at least FreeBSD 5.3-RELEASE
+BROKEN=           Does not compile with GCC 4.2
+DEPRECATED=       author has abandoned this program
+ONLY_FOR_ARCHS=        i386
+ONLY_FOR_ARCHS_REASON= Rebuild of i386 package provided by Nominum.
+
 -- 
-Leon
+Yuri Bushmelev
 
 
