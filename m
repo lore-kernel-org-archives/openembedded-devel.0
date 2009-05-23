@@ -1,30 +1,35 @@
-Received: from [85.37.17.114] (helo=smtp-out114.alice.it)
+Received: from [209.85.132.246] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1M7r29-0005vK-Q3
+	(envelope-from <leon.woestenberg@gmail.com>) id 1M7r3F-0005wK-2p
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 May 2009 15:13:05 +0200
-Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out114.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 23 May 2009 15:04:50 +0200
-Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO01.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 23 May 2009 15:04:50 +0200
-Received: from [192.168.1.155] ([79.54.130.51]) by FBCMCL01B08.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 23 May 2009 15:00:14 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Sat, 23 May 2009 15:14:13 +0200
+Received: by an-out-0708.google.com with SMTP id b6so1323359ana.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 May 2009 06:06:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=KDSQndeAi/5lNM6uBaPl6n7fAICgyE7OGa9ffpcVAnQ=;
+	b=hfY0Ggf6f8z5m/qHRlAu65mIb3ZbQEbw+5+daIk8QGn21DOMW03tHj+v3FNVqRC7jt
+	r9LzxxP9nxfjjWYkZ21KowgSVWXXBxkUM5geMbeVXPNoXw7wus2f3Q/oO0NhkFdlhwFd
+	Znmj3XQfNF78y1Tv6y++ZNwecYt9Wc6aIhSmQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=EMCtQ9qq9CxhohXlLytoqaff2+Hx1Zbk11KhwEhe2t5CjJmd0K2onqZLuh6cprCjsQ
+	ddp4E1S8Z7Rh4cXt+UwABkgvdI3OgGVC97JN06d+OaXq4BFo3Br+wxoN3VrfD/Te3FuJ
+	v1aHo9FdyTV1EGGoM3iY5LE7XqJs94VcCuXMw=
+MIME-Version: 1.0
+Received: by 10.100.105.4 with SMTP id d4mr9284371anc.39.1243083985660; Sat, 
+	23 May 2009 06:06:25 -0700 (PDT)
+In-Reply-To: <20090522213142.GF23842@smtp.west.cox.net>
+References: <20090522213142.GF23842@smtp.west.cox.net>
+Date: Sat, 23 May 2009 15:06:25 +0200
+Message-ID: <c384c5ea0905230606t48e57c58y658282e25c97fbee@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1242679257.9986.8.camel@port4>
-References: <43954.AFRVDw5RXnw=.1235749389.squirrel@webmail.no-log.org>
-	<go9m74$k03$1@ger.gmane.org>
-	<39983.AFRVDw5RXnw=.1235775042.squirrel@webmail.no-log.org>
-	<1242679257.9986.8.camel@port4>
-Date: Sat, 23 May 2009 15:06:27 +0200
-Message-Id: <1243083987.14502.0.camel@port4>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.4 
-X-OriginalArrivalTime: 23 May 2009 13:00:14.0437 (UTC)
-	FILETIME=[69E3F150:01C9DBA6]
-Subject: Emacs updated recipe (was: [patch](or sort of): emacs didn't compile[second part: qemu recipe])
+Subject: Re: Kernel recipes with broken PRs now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,164 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 May 2009 13:13:06 -0000
-X-Groupsio-MsgNum: 10640
-Content-Type: multipart/mixed; boundary="=-GoQWl63YEawa1maQTT+y"
+X-List-Received-Date: Sat, 23 May 2009 13:14:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
---=-GoQWl63YEawa1maQTT+y
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+Hello all,
 
-On Mon, 2009-05-18 at 22:40 +0200, GNUtoo wrote:
-> On Fri, 2009-02-27 at 23:50 +0100, GNUtoo wrote:
-> > > On 27-02-09 16:43, GNUtoo wrote:
-> > >
-> > >> +EXTRA_OECONF += "--target-list=arm-linux-user"
-> > >
-> > > NACK, OE handles more than ARM
-> > >
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > >
-> > yes I know...the qemu recipe is very problematic...that's why I asked what
-> > to do
-> > I'd like to integrate the necessary arm patches that permit the build of
-> > emacs...but I don't know which ones of the patches I should integrate...
-> > Denis.
-> I've news:
-> I've tried the last qemu: qemu-native-0.10.3
-> and it worked...
-> but it need a modified emacs[-x11] recipe that is attached...
-> Comments are welcome
-> 
-> Denis
-Ping
-I'll re-attach the same diff.
+On Fri, May 22, 2009 at 11:31 PM, Tom Rini <trini@embeddedalley.com> wrote:
+> Hey all. =A0With the MACHINE_KERNEL_PR stuff, the following recipes will
 
-Denis.
+I don't get the use case for MACHINE_KERNEL_PR, can someone explain?
 
---=-GoQWl63YEawa1maQTT+y
-Content-Disposition: attachment; filename="emacs.diff"
-Content-Type: text/x-patch; name="emacs.diff"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Why would a machine or local.conf want to force rebuild by increasing
+this MACHINE_KERNEL_PR variable??
 
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs-22.3/use-qemu.patch b/emacs/emacs-22.3/use-qemu.patch
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs-x11_20060801.bb b/emacs/emacs-x11_20060801.bb
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs-x11_22.3.bb b/emacs/emacs-x11_22.3.bb
-index 03102bf..4475e08 100644
---- a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs-x11_22.3.bb
-+++ b/emacs/emacs-x11_22.3.bb
-@@ -1,12 +1,14 @@
- require emacs.inc
- 
- # full X (non-diet) is needed for X support
--DEPENDS += "gtk+ libungif"
-+DEPENDS += "gtk+ libungif libxpm"
- 
--EXTRA_OECONF = "--without-sound --with-x-toolkit=gtk"
-+EXTRA_OECONF = "--without-sound --with-x-toolkit=gtk --with-xpm"
- 
- RREPLACES = "emacs"
- 
-+PR="r1"
-+
- FILESPATH = "${FILE_DIRNAME}/emacs-${PV}:${FILE_DIRNAME}/files"
- SRC_URI = "${GNU_MIRROR}/emacs/emacs-${PV}.tar.gz \
- 	   file://use-qemu.patch;patch=1 \
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs-x11_cvs.bb b/emacs/emacs-x11_cvs.bb
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs.inc b/emacs/emacs.inc
-index 05acd82..0464a26 100644
---- a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs.inc
-+++ b/emacs/emacs.inc
-@@ -5,6 +5,8 @@ SECTION = "editor"
- # and it needs to run some generated binaries..
- DEPENDS += "qemu-native"
- 
-+DEPENDS +=" liblockfile"
-+
- inherit autotools
- 
- PACKAGES =+ "${PN}-el"
-@@ -16,8 +18,12 @@ FILES_${PN} += "${datadir}/emacs"
- 
- FILES_${PN}-dbg += "${libexecdir}/emacs/*/*/.debug ${datadir}/emacs/*/*/.debug"
- 
-+TREEDIR = "${WORKDIR}/qemu-treedir"
-+
- # Large stack is required at least on x86_64 host, otherwise random segfaults appear:
--QEMU = "qemu-${TARGET_ARCH} ${QEMU_OPTIONS} -s 1048576 -L ${STAGING_DIR_TARGET}"
-+QEMU = "qemu-${TARGET_ARCH} ${QEMU_OPTIONS} -s 1048576 -L ${TREEDIR}"
-+
-+export LOGNAME = "$(whoami)"
- 
- do_compile_prepend() {
- 	sed -i ':1;s:\(START.* \|LIB_STANDARD.* \|LIBES.* \)/usr/lib:\1${STAGING_LIBDIR}:;t1' ${S}/src/s/gnu-linux.h `find "${S}" -name Makefile`
-@@ -26,6 +32,19 @@ do_compile_prepend() {
- 	ln -sf ../src/emacs lisp/emacs
- 	ln -sf ../src/emacs lib-src/emacs
- 	ln -sf ../src/emacs leim/emacs
-+#copy STAGING_DIR_TARGET and libgcc_s.so* to WORKDIR/qemu-treedir #copied code from glibc-package.bbclass
-+	treedir=${TREEDIR}
-+	if [ -e $treedir ];then
-+		rm -rf $treedir
-+	fi
-+	mkdir $treedir
-+	cp -pPR ${STAGING_DIR_TARGET}/* $treedir
-+	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so ]; then
-+                cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so $treedir/lib
-+        fi
-+        if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so.* ]; then
-+                cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so.* $treedir/lib
-+        fi
- }
- 
- EXTRA_OEMAKE += 'QEMU="${QEMU}"'
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs_20060801.bb b/emacs/emacs_20060801.bb
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs_22.3.bb b/emacs/emacs_22.3.bb
-index da8de39..4eeff7b 100644
---- a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs_22.3.bb
-+++ b/emacs/emacs_22.3.bb
-@@ -1,5 +1,7 @@
- require emacs.inc
- 
-+PR="r1"
-+
- EXTRA_OECONF = "--without-sound --without-x"
- 
- SRC_URI = "${GNU_MIRROR}/emacs/emacs-${PV}.tar.gz \
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs_cvs.bb b/emacs/emacs_cvs.bb
-index 4a406d6..dca13b1 100644
---- a/home/embedded/oe/org.openembedded.dev/recipes/emacs/emacs_cvs.bb
-+++ b/emacs/emacs_cvs.bb
-@@ -6,6 +6,7 @@ SECTION = "editor"
- DEPENDS += "qemu-native"
- #NOTE: I have found that this only works with qemu-0.8.0. If I use 0.8.1 or 0.8.2
- # the build gets hung up on compiling certain .el files
-+DEPENDS +="liblockfile"
- 
- PV = "22.0.50+cvs${SRCDATE}" 
- PE = "1"
-@@ -31,6 +32,8 @@ LDFLAGS += "-L${CROSS_DIR}/${TARGET_SYS}/lib"
- 
- EXTRA_OECONF = "--without-sound --without-x"
- 
-+#export LOGNAME:-$USERNAME = "${LOGNAME:-$USERNAME}"
-+
- do_bootstrap() {
-     cp "${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so.1" "${S}"
-     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${S}"
-@@ -50,3 +53,7 @@ do_compile_prepend() {
-     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${S}"
-     export QEMU="${QEMU}"
- }
-+
-+#do_install_prepend(){
-+#    export LOGNAME:-$USERNAME = "${LOGNAME:-$USERNAME}"
-+#}
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/files/nostdlib-unwind.patch b/emacs/files/nostdlib-unwind.patch
-diff --git a/home/embedded/oe/org.openembedded.dev/recipes/emacs/files/use-qemu.patch b/emacs/files/use-qemu.patch
+Why does bitbake -c rebuild fail for this use case?
 
---=-GoQWl63YEawa1maQTT+y--
+
+Also, if it makes sense, is this patch handy?
+
+"[oe] [PATCH 1/1] bitbake.conf: make MACHINE_KERNEL_PR defaults to PR'
+
+Regards,
+--=20
+Leon
+
+
