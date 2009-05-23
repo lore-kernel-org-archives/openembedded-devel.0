@@ -1,23 +1,24 @@
 Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M7yIY-0004gv-39
-	for openembedded-devel@openembedded.org; Sat, 23 May 2009 22:58:32 +0200
-Received: (qmail 5675 invoked from network); 23 May 2009 20:50:40 -0000
+	(envelope-from <trini@embeddedalley.com>) id 1M7yKO-0004kB-Gt
+	for openembedded-devel@openembedded.org; Sat, 23 May 2009 23:00:38 +0200
+Received: (qmail 5680 invoked from network); 23 May 2009 20:52:34 -0000
 Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 23 May 2009 13:50:40 -0700
-Date: Sat, 23 May 2009 13:50:39 -0700
+	by easi.embeddedalley.com with SMTP; 23 May 2009 13:52:34 -0700
+Date: Sat, 23 May 2009 13:52:34 -0700
 From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090523205039.GK23842@smtp.west.cox.net>
+Message-ID: <20090523205234.GL23842@smtp.west.cox.net>
 References: <1243110920-18111-1-git-send-email-mad_soft@inbox.ru>
 	<1243110920-18111-2-git-send-email-mad_soft@inbox.ru>
 	<1243110920-18111-3-git-send-email-mad_soft@inbox.ru>
 	<1243110920-18111-4-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-5-git-send-email-mad_soft@inbox.ru>
 MIME-Version: 1.0
-In-Reply-To: <1243110920-18111-4-git-send-email-mad_soft@inbox.ru>
+In-Reply-To: <1243110920-18111-5-git-send-email-mad_soft@inbox.ru>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH] libnsgif: add recipe for version 0.0.1
+Subject: Re: [PATCH] libparserutils: add recipe for version 0.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,51 +32,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 May 2009 20:58:36 -0000
+X-List-Received-Date: Sat, 23 May 2009 21:01:23 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sun, May 24, 2009 at 12:35:17AM +0400, Dmitry Artamonow wrote:
+On Sun, May 24, 2009 at 12:35:18AM +0400, Dmitry Artamonow wrote:
 
-> libnsgif is GIF decoding library.
-> Currently only Netsurf browser is using it, so we build just static
-> library.
+> LibParserUtils is a library for building efficient parsers.
+> Currently only Netsurf browser is using it (via hubbub), so we build just
+> static library.
 > 
-> Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+> Please note that this build doesn't use external iconv(), so only
+> few built-in charsets are supported (UTF-8/16, windows-125x, iso-8859-*)
+> We may revisit this later, if there's a need.
 
 Acked-by: Tom Rini <trini@embeddedalley.com>
 
-> ---
->  recipes/netsurf/libnsgif_0.0.1.bb |   24 ++++++++++++++++++++++++
->  1 files changed, 24 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/netsurf/libnsgif_0.0.1.bb
 > 
-> diff --git a/recipes/netsurf/libnsgif_0.0.1.bb b/recipes/netsurf/libnsgif_0.0.1.bb
+> Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+> ---
+>  recipes/netsurf/libparserutils_0.0.1.bb |   36 +++++++++++++++++++++++++++++++
+>  1 files changed, 36 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/netsurf/libparserutils_0.0.1.bb
+> 
+> diff --git a/recipes/netsurf/libparserutils_0.0.1.bb b/recipes/netsurf/libparserutils_0.0.1.bb
 > new file mode 100644
-> index 0000000..3b9cfc2
+> index 0000000..5317364
 > --- /dev/null
-> +++ b/recipes/netsurf/libnsgif_0.0.1.bb
-> @@ -0,0 +1,24 @@
-> +DESCRIPTION = "Libnsgif is a decoding library for the GIF image file format"
-> +HOMEPAGE = "http://www.netsurf-browser.org/projects/libnsgif/"
+> +++ b/recipes/netsurf/libparserutils_0.0.1.bb
+> @@ -0,0 +1,36 @@
+> +DESCRIPTION = "LibParserUtils is a library for building efficient parsers"
+> +HOMEPAGE = "http://www.netsurf-browser.org/projects/libparserutils/"
 > +SECTION = "libs"
 > +PRIORITY = "optional"
 > +LICENSE = "MIT"
 > +
-> +SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsgif-${PV}-src.tar.gz"
+> +SRC_URI = "http://www.netsurf-browser.org/projects/releases/libparserutils-${PV}-src.tar.gz"
 > +
 > +inherit pkgconfig
 > +
 > +EXTRA_OEMAKE = "CURDIR=${S} DESTDIR=${D} PREFIX=${prefix} BUILDDIR=build-OE"
 > +
 > +# NOTE: we're using default buildmode here, which results in building only
-> +# static libraries (.a) Not a problem as libnsbmp is only used by Netsurf
+> +# static libraries (.a) Not a problem as libparserutils is only used by Netsurf
 > +# at the moment
 > +
-> +do_stage() {
-> +	oe_libinstall -a -C build-OE/ libnsgif ${STAGING_LIBDIR}
-> +	install -m 0644 include/*.h ${STAGING_INCDIR}/
+> +do_stage () {
+> +        oe_libinstall -a -C build-OE/ libparserutils ${STAGING_LIBDIR}
+> +
+> +	install -d ${STAGING_INCDIR}/parserutils
+> +	install -d ${STAGING_INCDIR}/parserutils/charset
+> +	install -d ${STAGING_INCDIR}/parserutils/input
+> +	install -d ${STAGING_INCDIR}/parserutils/utils
+> +	install -m 0644 include/parserutils/*.h ${STAGING_INCDIR}/parserutils
+> +	install -m 0644 include/parserutils/charset/*.h \
+> +		${STAGING_INCDIR}/parserutils/charset
+> +	install -m 0644 include/parserutils/input/*.h \
+> +		${STAGING_INCDIR}/parserutils/input
+> +	install -m 0644 include/parserutils/utils/*.h \
+> +		${STAGING_INCDIR}/parserutils/utils
 > +}
+> +
 > +
 > +do_install() {
 > +	oe_runmake install
