@@ -1,35 +1,30 @@
-Received: from [209.85.132.246] (helo=an-out-0708.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1M7r3F-0005wK-2p
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 May 2009 15:14:13 +0200
-Received: by an-out-0708.google.com with SMTP id b6so1323359ana.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 May 2009 06:06:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=KDSQndeAi/5lNM6uBaPl6n7fAICgyE7OGa9ffpcVAnQ=;
-	b=hfY0Ggf6f8z5m/qHRlAu65mIb3ZbQEbw+5+daIk8QGn21DOMW03tHj+v3FNVqRC7jt
-	r9LzxxP9nxfjjWYkZ21KowgSVWXXBxkUM5geMbeVXPNoXw7wus2f3Q/oO0NhkFdlhwFd
-	Znmj3XQfNF78y1Tv6y++ZNwecYt9Wc6aIhSmQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=EMCtQ9qq9CxhohXlLytoqaff2+Hx1Zbk11KhwEhe2t5CjJmd0K2onqZLuh6cprCjsQ
-	ddp4E1S8Z7Rh4cXt+UwABkgvdI3OgGVC97JN06d+OaXq4BFo3Br+wxoN3VrfD/Te3FuJ
-	v1aHo9FdyTV1EGGoM3iY5LE7XqJs94VcCuXMw=
-MIME-Version: 1.0
-Received: by 10.100.105.4 with SMTP id d4mr9284371anc.39.1243083985660; Sat, 
-	23 May 2009 06:06:25 -0700 (PDT)
-In-Reply-To: <20090522213142.GF23842@smtp.west.cox.net>
-References: <20090522213142.GF23842@smtp.west.cox.net>
-Date: Sat, 23 May 2009 15:06:25 +0200
-Message-ID: <c384c5ea0905230606t48e57c58y658282e25c97fbee@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Kernel recipes with broken PRs now
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M7tZQ-0001gP-0g
+	for openembedded-devel@openembedded.org; Sat, 23 May 2009 17:55:36 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M7tRr-0006wL-UL
+	for openembedded-devel@openembedded.org; Sat, 23 May 2009 15:47:47 +0000
+Received: from ppp89-110-14-143.pppoe.avangarddsl.ru ([89.110.14.143])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 23 May 2009 15:47:47 +0000
+Received: from dbaryshkov by ppp89-110-14-143.pppoe.avangarddsl.ru with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 23 May 2009 15:47:47 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Date: Sat, 23 May 2009 15:47:36 +0000 (UTC)
+Message-ID: <gv95qo$q7c$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ppp89-110-14-143.pppoe.avangarddsl.ru
+User-Agent: Pan/0.132 (Waxed in Black)
+Sender: news <news@ger.gmane.org>
+Subject: update hook br0ken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +38,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 May 2009 13:14:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 23 May 2009 15:55:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello all,
+Hi,
 
-On Fri, May 22, 2009 at 11:31 PM, Tom Rini <trini@embeddedalley.com> wrote:
-> Hey all. =A0With the MACHINE_KERNEL_PR stuff, the following recipes will
+It seems during move to OSUOSL the update hook somehow got broken.
+At least I don't see any commit-regarding mails since long ago. Could one
+blessed with administratie powers check for the state of the hook/mailer?
 
-I don't get the use case for MACHINE_KERNEL_PR, can someone explain?
+Thanks!
 
-Why would a machine or local.conf want to force rebuild by increasing
-this MACHINE_KERNEL_PR variable??
+-- 
+With best wishes
+Dmitry
 
-Why does bitbake -c rebuild fail for this use case?
 
-
-Also, if it makes sense, is this patch handy?
-
-"[oe] [PATCH 1/1] bitbake.conf: make MACHINE_KERNEL_PR defaults to PR'
-
-Regards,
---=20
-Leon
 
 
