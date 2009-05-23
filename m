@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M7jos-0002QB-0X
-	for openembedded-devel@openembedded.org; Sat, 23 May 2009 07:30:54 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M7jhM-0000Af-4J
-	for openembedded-devel@openembedded.org; Sat, 23 May 2009 05:23:08 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 23 May 2009 05:23:08 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 23 May 2009 05:23:08 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 23 May 2009 07:22:56 +0200
-Message-ID: <gv817h$vbi$1@ger.gmane.org>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1M7jxB-0004Ut-V4
+	for openembedded-devel@openembedded.org; Sat, 23 May 2009 07:39:30 +0200
+Received: (qmail 32539 invoked from network); 23 May 2009 05:31:43 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 22 May 2009 22:31:43 -0700
+Date: Fri, 22 May 2009 22:31:43 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090523053143.GH23842@smtp.west.cox.net>
 References: <20090522213142.GF23842@smtp.west.cox.net>
 	<d1b08f940905221527v147487e3n128cf91e6a7a6e1d@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
-In-Reply-To: <d1b08f940905221527v147487e3n128cf91e6a7a6e1d@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+	<gv817h$vbi$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <gv817h$vbi$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Subject: Re: Kernel recipes with broken PRs now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,24 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 May 2009 05:30:54 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 May 2009 05:39:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 23-05-09 00:27, Andrea Adami wrote:
-> I think the side-effects of the patch are blessing too much...
+On Sat, May 23, 2009 at 07:22:56AM +0200, Koen Kooi wrote:
+> On 23-05-09 00:27, Andrea Adami wrote:
+>> I think the side-effects of the patch are blessing too much...
+>
+> That's called 'incentive' :) You are always complaining about  
+> unmaintained kernel recipes, now you have a way to identify them :)
+>
+>> I'd propose a rethink of the patch as opt-in.
+>
+> Due to the way OE is structured, that's sadly impossible.
 
-That's called 'incentive' :) You are always complaining about 
-unmaintained kernel recipes, now you have a way to identify them :)
+Can we please get a little write-up on the new variable on the wiki, to
+point people at when they hit a broken recipe.
 
-> I'd propose a rethink of the patch as opt-in.
-
-Due to the way OE is structured, that's sadly impossible.
-
-regards,
-
-Koen
-
-
+-- 
+Tom Rini
 
 
