@@ -1,23 +1,26 @@
 Received: from [83.222.19.8] (helo=mail.asoft.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1M7y3j-0004B5-Hs
+	(envelope-from <mad_soft@inbox.ru>) id 1M7y3j-0004B8-Pi
 	for openembedded-devel@openembedded.org; Sat, 23 May 2009 22:43:11 +0200
 Received: from localhost.localdomain ([62.205.175.245]) (authenticated bits=0)
-	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n4NKZK4r015936
+	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n4NKZK4u015936
 	for <openembedded-devel@openembedded.org>;
 	Sun, 24 May 2009 00:35:22 +0400
 From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@openembedded.org
-Date: Sun, 24 May 2009 00:35:16 +0400
-Message-Id: <1243110920-18111-3-git-send-email-mad_soft@inbox.ru>
+Date: Sun, 24 May 2009 00:35:19 +0400
+Message-Id: <1243110920-18111-6-git-send-email-mad_soft@inbox.ru>
 X-Mailer: git-send-email 1.6.0.6
-In-Reply-To: <1243110920-18111-2-git-send-email-mad_soft@inbox.ru>
+In-Reply-To: <1243110920-18111-5-git-send-email-mad_soft@inbox.ru>
 References: <1243110920-18111-1-git-send-email-mad_soft@inbox.ru>
 	<1243110920-18111-2-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-3-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-4-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-5-git-send-email-mad_soft@inbox.ru>
 X-Greylist: Sender succeeded SMTP AUTH authentication, not delayed by
 	milter-greylist-2.0.2 (mail.asoft.ru [0.0.0.0]);
 	Sun, 24 May 2009 00:35:22 +0400 (MSD)
-Subject: [PATCH] libnsbmp: add recipe for version 0.0.1
+Subject: [PATCH] hubbub: add recipe for version 0.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,41 +36,45 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 23 May 2009 20:43:12 -0000
 
-libnsbmp is BMP and ICO decoding library.
+Hubbub is an HTML5 compliant parsing library, written in C.
 Currently only Netsurf browser is using it, so we build just static library.
 
 Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
 ---
- recipes/netsurf/libnsbmp_0.0.1.bb |   24 ++++++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
- create mode 100644 recipes/netsurf/libnsbmp_0.0.1.bb
+ recipes/netsurf/hubbub_0.0.1.bb |   28 ++++++++++++++++++++++++++++
+ 1 files changed, 28 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/netsurf/hubbub_0.0.1.bb
 
-diff --git a/recipes/netsurf/libnsbmp_0.0.1.bb b/recipes/netsurf/libnsbmp_0.0.1.bb
+diff --git a/recipes/netsurf/hubbub_0.0.1.bb b/recipes/netsurf/hubbub_0.0.1.bb
 new file mode 100644
-index 0000000..a17cd31
+index 0000000..0d70b41
 --- /dev/null
-+++ b/recipes/netsurf/libnsbmp_0.0.1.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Libnsbmp is a decoding library for the BMP and ICO image file formats"
-+HOMEPAGE = "http://www.netsurf-browser.org/projects/libnsbmp/"
++++ b/recipes/netsurf/hubbub_0.0.1.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "Hubbub is an HTML5 compliant parsing library"
++HOMEPAGE = "http://www.netsurf-browser.org/projects/hubbub/"
 +SECTION = "libs"
 +PRIORITY = "optional"
 +LICENSE = "MIT"
++DEPENDS = "libparserutils"
 +
-+SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsbmp-${PV}-src.tar.gz"
++SRC_URI = "http://www.netsurf-browser.org/projects/releases/hubbub-${PV}-src.tar.gz"
 +
 +inherit pkgconfig
 +
 +EXTRA_OEMAKE = "CURDIR=${S} DESTDIR=${D} PREFIX=${prefix} BUILDDIR=build-OE"
 +
 +# NOTE: we're using default buildmode here, which results in building only
-+# static libraries (.a) Not a problem as libnsbmp is only used by Netsurf
++# static libraries (.a) Not a problem as hubbub is only used by Netsurf
 +# at the moment
 +
 +do_stage() {
-+	oe_libinstall -a -C build-OE/ libnsbmp ${STAGING_LIBDIR}
-+	install -m 0644 include/*.h ${STAGING_INCDIR}/
++        oe_libinstall -a -C build-OE/ libhubbub ${STAGING_LIBDIR}
++
++        install -d ${STAGING_INCDIR}/hubbub
++        install -m 0644 include/hubbub/*.h ${STAGING_INCDIR}/hubbub
 +}
++
 +
 +do_install() {
 +	oe_runmake install
