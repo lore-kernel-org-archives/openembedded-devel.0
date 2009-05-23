@@ -1,22 +1,25 @@
 Received: from [83.222.19.8] (helo=mail.asoft.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1M7y3j-0004B4-Hs
+	(envelope-from <mad_soft@inbox.ru>) id 1M7y3j-0004B7-MI
 	for openembedded-devel@openembedded.org; Sat, 23 May 2009 22:43:11 +0200
 Received: from localhost.localdomain ([62.205.175.245]) (authenticated bits=0)
-	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n4NKZK4q015936
+	by mail.asoft.ru (8.13.4/8.13.4) with ESMTP id n4NKZK4t015936
 	for <openembedded-devel@openembedded.org>;
 	Sun, 24 May 2009 00:35:22 +0400
 From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@openembedded.org
-Date: Sun, 24 May 2009 00:35:15 +0400
-Message-Id: <1243110920-18111-2-git-send-email-mad_soft@inbox.ru>
+Date: Sun, 24 May 2009 00:35:18 +0400
+Message-Id: <1243110920-18111-5-git-send-email-mad_soft@inbox.ru>
 X-Mailer: git-send-email 1.6.0.6
-In-Reply-To: <1243110920-18111-1-git-send-email-mad_soft@inbox.ru>
+In-Reply-To: <1243110920-18111-4-git-send-email-mad_soft@inbox.ru>
 References: <1243110920-18111-1-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-2-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-3-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-4-git-send-email-mad_soft@inbox.ru>
 X-Greylist: Sender succeeded SMTP AUTH authentication, not delayed by
 	milter-greylist-2.0.2 (mail.asoft.ru [0.0.0.0]);
 	Sun, 24 May 2009 00:35:22 +0400 (MSD)
-Subject: [PATCH] checksums.ini: add checksums for netsurf-2.1 and related libs
+Subject: [PATCH] libparserutils: add recipe for version 0.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,70 +35,62 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 23 May 2009 20:43:12 -0000
 
-Full list:
- * netsurf-2.1
- * hubbub-0.0.1
- * libparserutils-0.0.1
- * libnsbmp-0.0.1
- * libnsgif-0.0.1
+LibParserUtils is a library for building efficient parsers.
+Currently only Netsurf browser is using it (via hubbub), so we build just
+static library.
+
+Please note that this build doesn't use external iconv(), so only
+few built-in charsets are supported (UTF-8/16, windows-125x, iso-8859-*)
+We may revisit this later, if there's a need.
 
 Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
 ---
- conf/checksums.ini |   20 ++++++++++++++++++++
- 1 files changed, 20 insertions(+), 0 deletions(-)
+ recipes/netsurf/libparserutils_0.0.1.bb |   36 +++++++++++++++++++++++++++++++
+ 1 files changed, 36 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/netsurf/libparserutils_0.0.1.bb
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 964f728..32601b3 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -10574,6 +10574,10 @@ sha256=bedfd45364948a08ecaa212c5eda6667a83ac8bb547e2eb8478ade885898cad7
- md5=f720686c841e9fefc06db76458fd9908
- sha256=1f8259a3a8ae583170816f5028329f3a7157f87f927da9c0a911a5fb9be263a1
- 
-+[http://www.netsurf-browser.org/projects/releases/hubbub-0.0.1-src.tar.gz]
-+md5=58c6e2b5a5906f3f0bf136c0c71b5403
-+sha256=3ba0bdf71376429bb3ce8ae51595fc25e6a5147cdcc26e47b6da17386eb78cdf
+diff --git a/recipes/netsurf/libparserutils_0.0.1.bb b/recipes/netsurf/libparserutils_0.0.1.bb
+new file mode 100644
+index 0000000..5317364
+--- /dev/null
++++ b/recipes/netsurf/libparserutils_0.0.1.bb
+@@ -0,0 +1,36 @@
++DESCRIPTION = "LibParserUtils is a library for building efficient parsers"
++HOMEPAGE = "http://www.netsurf-browser.org/projects/libparserutils/"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "MIT"
 +
- [http://cvs.haskell.org/Hugs/downloads/Nov2003/hugs98-Nov2003.tar.gz]
- md5=e80a6739ead9a260087fe4d3fc6a8359
- sha256=9f90613de73e1b8e90d9bbcb09046e83680f15a46fc630c3e26e9aa4ca0e6a1d
-@@ -13806,6 +13810,14 @@ sha256=15b0492ac252f6e8ce57c106bda0722413196d16d198c97f20a05908d1b977af
- md5=ba76f68b7e3bd284ac2c2a1b9c5ecb06
- sha256=2389a9b8220f776033f728a8d46352cfee5c8705066e34887bfb188f9f0d3856
- 
-+[http://www.netsurf-browser.org/projects/releases/libnsbmp-0.0.1-src.tar.gz]
-+md5=61e1e5703580c1bc7d950a1aacea7bad
-+sha256=424d12aae7a6ea8c90438cf4ccff486dc01a3a2a7b68eb602ee2b8c28178b6d1
++SRC_URI = "http://www.netsurf-browser.org/projects/releases/libparserutils-${PV}-src.tar.gz"
 +
-+[http://www.netsurf-browser.org/projects/releases/libnsgif-0.0.1-src.tar.gz]
-+md5=a547da766fccacd00fd05190baf644da
-+sha256=54f316f530caaacd55dc23f546537759382a45ac6378ead249b5a5d51cf4db52
++inherit pkgconfig
 +
- [http://www2.autistici.org/bakunin/libnxml/libnxml-0.16.tar.gz]
- md5=85b6a42a9e17a23c01b2f2ed0ece0563
- sha256=6154872089834b0ffd34e92612d07e2d1ccec572698bd861da752eeeaab7ca78
-@@ -14018,6 +14030,10 @@ sha256=7a61e8b686ae7d659835175018da3a1baa959329b77c18e6e9381a197937296f
- md5=7075f580606a84e63b7d6d9fa3124c31
- sha256=7ff5f355bb254a3d4ed4541377e6304432ee8678e7c9ec29e7d43488903004c9
- 
-+[http://www.netsurf-browser.org/projects/releases/libparserutils-0.0.1-src.tar.gz]
-+md5=5999c2d52f8c07eeef2a8808fee4f858
-+sha256=5aed4edfd2023ed3ccd566fe76131d10faf43c8c3efa2e90978eed37c5503165
++EXTRA_OEMAKE = "CURDIR=${S} DESTDIR=${D} PREFIX=${prefix} BUILDDIR=build-OE"
 +
- [http://www.at.tcpdump.org/release/libpcap-0.9.3.tar.gz]
- md5=0ad921c881fdd3d278046afcd352a151
- sha256=f20d19b1f32e4ee465169ff1e17a3755bfda8c697cfed11fe36cbf6959c80441
-@@ -17258,6 +17274,10 @@ sha256=844ba97e745a0b9f37afc7daa323cafcef00108cd0254667da0a00558eb323a7
- md5=36f7b3120e00c9c74cb6619334de419f
- sha256=6eed89b661ae9f2ac0d383414ca964abea8a115f8fba0f7ab37b49b565ffb2a8
- 
-+[http://www.netsurf-browser.org/downloads/releases/netsurf-2.1-src.tar.gz]
-+md5=f0a34fd076b492c1a13b45432e8d7e49
-+sha256=cda2cf41c852938c226c47c2b995d527387120141f68b416ea745e50a7165a81
++# NOTE: we're using default buildmode here, which results in building only
++# static libraries (.a) Not a problem as libparserutils is only used by Netsurf
++# at the moment
 +
- [http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/0.6/network-manager-applet-0.6.5.tar.bz2]
- md5=1c94a41e2399d261985a75f0cd3b895b
- sha256=9cca3e34e23f00c82bc5e7237aa81639874e90d43a689e26fbfd938279ca31c9
++do_stage () {
++        oe_libinstall -a -C build-OE/ libparserutils ${STAGING_LIBDIR}
++
++	install -d ${STAGING_INCDIR}/parserutils
++	install -d ${STAGING_INCDIR}/parserutils/charset
++	install -d ${STAGING_INCDIR}/parserutils/input
++	install -d ${STAGING_INCDIR}/parserutils/utils
++	install -m 0644 include/parserutils/*.h ${STAGING_INCDIR}/parserutils
++	install -m 0644 include/parserutils/charset/*.h \
++		${STAGING_INCDIR}/parserutils/charset
++	install -m 0644 include/parserutils/input/*.h \
++		${STAGING_INCDIR}/parserutils/input
++	install -m 0644 include/parserutils/utils/*.h \
++		${STAGING_INCDIR}/parserutils/utils
++}
++
++
++do_install() {
++	oe_runmake install
++}
 -- 
 1.6.0.6
 
