@@ -1,22 +1,34 @@
-Received: from [213.230.128.226] (helo=fep02-svc.tim.it)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gremlin@gremlin.it>) id 1M88NY-0007xY-2R
-	for openembedded-devel@openembedded.org; Sun, 24 May 2009 09:44:20 +0200
-Received: from deunan.loc ([217.203.151.193]) by fep02-svc.tim.it
-	(InterMail vM.6.01.06.03 201-2131-130-104-20060516) with ESMTP
-	id <20090524073342.DPF1577.fep02-svc.tim.it@deunan.loc>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M897J-0007wd-Rz
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 10:31:37 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M88zh-0000h2-Hp
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 08:23:45 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 24 May 2009 08:23:45 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Sun, 24 May 2009 09:33:42 +0200
-Message-ID: <4A18F75D.6020103@gremlin.it>
-Date: Sun, 24 May 2009 09:29:33 +0200
-From: Alessandro GARDICH <gremlin@gremlin.it>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
-MIME-Version: 1.0
+	Sun, 24 May 2009 08:23:45 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-References: <4A185B31.8050003@gremlin.it>
-	<1243111410.4226.109.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1243111410.4226.109.camel@lenovo.internal.reciva.com>
-Subject: Re: trouble with ext2 filesystem
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 24 May 2009 10:23:34 +0200
+Message-ID: <gvb066$tov$1@ger.gmane.org>
+References: <20090522213142.GF23842@smtp.west.cox.net>	<c384c5ea0905230606t48e57c58y658282e25c97fbee@mail.gmail.com>	<1243095832.4226.105.camel@lenovo.internal.reciva.com>
+	<c384c5ea0905231525u2248fcf7ycf512bd48ef05e56@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
+In-Reply-To: <c384c5ea0905231525u2248fcf7ycf512bd48ef05e56@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Kernel recipes with broken PRs now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,65 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 07:44:20 -0000
-Content-Type: multipart/mixed; boundary="------------000805040006040200000400"
-
---------------000805040006040200000400
-Content-Type: text/plain; charset=us-ascii; format=flowed
+X-List-Received-Date: Sun, 24 May 2009 08:31:38 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Phil Blundell wrote:
-> On Sat, 2009-05-23 at 22:23 +0200, Alessandro GARDICH wrote:
->> At now I modify qemux86.conf cause usually EXTRA_IMAGECMD is in the 
->> machine config file, but to add hardware specific parameters (flash size 
->>   and erase size). I'm not sure if is the right place. Probably in the 
->> distro configuration could be better.
-> 
-> The distro config probably is the right place for this.  After all, the
-> number of inodes you need depends primarily on the number of files that
-> you're going to ship in the rootfs, and that in turn is primarily
-> influenced by the DISTRO's policies rather than by any inherent aspect
-> of the MACHINE.
-> 
-> The other uses of EXTRA_IMAGECMD that I guess you're thinking of are
-> mostly to do with jffs2 parameters, which are rather different in that
-> they're determined by the specifics of the hardware in use and hence do
-> go with the MACHINE rather than the DISTRO.
-> 
-> p.
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On 24-05-09 00:25, Leon Woestenberg wrote:
 
-true, reform the patch for kaeilos.conf
+> Marcin wrote a patch that solves this.
+
+Marcins patch doesn't solve anything, it only breaks MACHINE_KERNEL_PR, 
+so all your external modules and associated apps don't get rebuilt if 
+you change your kernel.
+
+Now, if people posting in this thread would bother to read the original 
+RFC (that got approved for .dev as well as stable/2009), we wouldn't be 
+having this discussion.
+
+regards,
+
+Koen
 
 
 
--- 
-  /------------------------------------------------\
-|     Alessandro Gardich : gremlin#gremlin!it      |
-  >------------------------------------------------<
-|  I never saw a wild thing sorry for itself.      |
-|  A small bird will drop frozen dead from a bough |
-|  without ever having felt sorry for itself.      |
-  \------------------------------------------------/
-
-diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
-index 718239b..94387e3 100644
---- a/conf/distro/kaeilos.conf
-+++ b/conf/distro/kaeilos.conf
-@@ -42,6 +42,8 @@ DISTRO_TYPE ?= "debug"
- # Also, it appears that no locales fit in 16Mb for now. "C" locale rules!
- IMAGE_LINGUAS = '${@base_less_or_equal("ROOT_FLASH_SIZE", "16", "", "en-us", d)}'
- 
-+# increase inode/block ratio for ext2 filesystem 
-+EXTRA_IMAGECMD_ext2 = "-i 4096"
- 
- # set feed path variables
- FEED_BASEPATH = "feeds/2008/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
-
---------------000805040006040200000400--
