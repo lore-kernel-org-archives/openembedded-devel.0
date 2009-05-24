@@ -1,14 +1,14 @@
 Received: from [213.230.128.226] (helo=fep02-svc.tim.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gremlin@gremlin.it>) id 1M88N3-0007ve-K8
-	for openembedded-devel@openembedded.org; Sun, 24 May 2009 09:43:49 +0200
+	(envelope-from <gremlin@gremlin.it>) id 1M88NY-0007xY-2R
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 09:44:20 +0200
 Received: from deunan.loc ([217.203.151.193]) by fep02-svc.tim.it
 	(InterMail vM.6.01.06.03 201-2131-130-104-20060516) with ESMTP
-	id <20090524073322.DLW1577.fep02-svc.tim.it@deunan.loc>
+	id <20090524073342.DPF1577.fep02-svc.tim.it@deunan.loc>
 	for <openembedded-devel@openembedded.org>;
-	Sun, 24 May 2009 09:33:22 +0200
-Message-ID: <4A18F746.4050507@gremlin.it>
-Date: Sun, 24 May 2009 09:29:10 +0200
+	Sun, 24 May 2009 09:33:42 +0200
+Message-ID: <4A18F75D.6020103@gremlin.it>
+Date: Sun, 24 May 2009 09:29:33 +0200
 From: Alessandro GARDICH <gremlin@gremlin.it>
 User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
 MIME-Version: 1.0
@@ -30,10 +30,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 07:43:49 -0000
-Content-Type: multipart/mixed; boundary="------------040508070500080809020901"
+X-List-Received-Date: Sun, 24 May 2009 07:44:20 -0000
+Content-Type: multipart/mixed; boundary="------------000805040006040200000400"
 
---------------040508070500080809020901
+--------------000805040006040200000400
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -91,4 +91,4 @@ index 718239b..94387e3 100644
  # set feed path variables
  FEED_BASEPATH = "feeds/2008/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
 
---------------040508070500080809020901--
+--------------000805040006040200000400--
