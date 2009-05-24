@@ -1,35 +1,39 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [74.125.44.153] (helo=yx-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8Lkb-00042S-JG
+	(envelope-from <otavio.salvador@gmail.com>) id 1M8MDV-0002Hm-D1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 00:01:01 +0200
-Received: by fxm20 with SMTP id 20so2787311fxm.12
+	Mon, 25 May 2009 00:30:53 +0200
+Received: by yx-out-1718.google.com with SMTP id 36so1560673yxh.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 May 2009 14:53:04 -0700 (PDT)
+	Sun, 24 May 2009 15:22:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=AtNTahJKRbtDwfX9k6uMDpGFfWNt6mG/zenOHxdbcy0=;
-	b=p2WIYe/YaMpmIqaP8z9wf4ekh3EWtrUNZH4fcLZ1pz4dNL4Rh5OGUAZwZNoIYGH3HO
-	7OPQ3OZQEJLkTkAkcadShevSNdwmCMmmgRh0DSUGahYcZK9tYWVNKOS0W5MiN6LVY1QP
-	DK26Ixg1QOI9RPWJze3Rbju4OSpYD/fU9n1Wg=
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=JOyap24idIdFcwOuucJ2/6fMSANutWTmeAflNaAd61c=;
+	b=sGSjAdFD3YRsFXiWAOOcCAjOSPiIGQw+Fp8u5FQhYo8scAvbWjfhMpa/dPMvPQS2VZ
+	Y++kqhk+4MZYN3rERv4O0ucUYtip3AEM4ye1dgRQ01qODTiMZcUQb3Vgpih58PYwi/9d
+	QetSMaUT4UMgDKG7ZjGtlFFdNWsXnWRxt4Rlw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=TmYOT5YTYKRTF/3CuPYyxUoO0pLH3RW5ma2KZXKZfkKDNMRMgaw/xyG/2Bg48ozosN
-	KzqO1kCXQG12t2y88c8xmhau6TJSeJEIIoorAtsW/raKkuRLr/VIJbrMUIVmTy/Mkj+C
-	y0DMnKKLY22yqnFoNUDo6ELu7dR7HsEh8HzOs=
-Received: by 10.103.121.19 with SMTP id y19mr2234075mum.107.1243201983909;
-	Sun, 24 May 2009 14:53:03 -0700 (PDT)
-Received: from localhost ([80.249.91.57])
-	by mx.google.com with ESMTPS id g1sm1749501muf.26.2009.05.24.14.53.03
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 24 May 2009 14:53:03 -0700 (PDT)
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=szNIcq30MXYfTgfp9LThWTUHpJ1UvaQOTLytkUCQBRTOAliZidw8tJ42ilSBHRvN5j
+	AiDmt7ldw4tx+L7g0O493AfBl4a1bnMebSEWZCOLJGozVyDsjA0N5Kt34RUw9AQQ669Y
+	UryvwhWVtOmtsKXXH5NQ4Rr9/medrv7ngkxCU=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.207.15 with SMTP id e15mr11344899ang.30.1243203777160; 
+	Sun, 24 May 2009 15:22:57 -0700 (PDT)
+In-Reply-To: <1243192526-31196-2-git-send-email-ihar.hrachyshka@gmail.com>
+References: <1243192526-31196-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1243192526-31196-2-git-send-email-ihar.hrachyshka@gmail.com>
+Date: Sun, 24 May 2009 19:22:57 -0300
+X-Google-Sender-Auth: fa2373774d1ca222
+Message-ID: <be7a9f3d0905241522i10fa5ff7re486c07fdef1db92@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 May 2009 00:52:59 +0300
-Message-Id: <1243201979-12136-1-git-send-email-ihar.hrachyshka@gmail.com>
-X-Mailer: git-send-email 1.6.3.1
-Subject: [PATCH] qt4: fixed pattern matching for gfxdrivers packaging.
+Subject: Re: [PATCH 2/2] qt4-embedded: added directfb gfx driver support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +47,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 22:01:01 -0000
+X-List-Received-Date: Sun, 24 May 2009 22:30:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The current pattern doesn't include gfxdrivers packages for directfb and
-qvfb.
+Hello,
 
-Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
----
- recipes/qt4/qt4.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+People has been using PR =3D "${INC_PR}.1" to avoid repeating the r twice.
 
-diff --git a/recipes/qt4/qt4.inc b/recipes/qt4/qt4.inc
-index 3deffa6..7c83625 100644
---- a/recipes/qt4/qt4.inc
-+++ b/recipes/qt4/qt4.inc
-@@ -173,7 +173,7 @@ python populate_packages_prepend() {
- 	qtopia_split('codecs',      'codec',       '^libq(.*)\.so$')
- 	qtopia_split('decorations', 'decoration',  '^libqdecoration(.*)\.so$')
- 	qtopia_split('designer',    'designer',    '^lib(.*)\.so$')
--	qtopia_split('gfxdrivers',  'gfxdriver',   '^libqgfx(.*)\.so$')
-+	qtopia_split('gfxdrivers',  'gfxdriver',   '^libq(.*)\.so$')
- 	qtopia_split('mousedrivers','mousedriver', '^libq(.*)mousedriver\.so$')
- 	qtopia_split('iconengines', 'iconengine',  '^libq(.*)\.so$')
- 	qtopia_split('imageformats','imageformat', '^libq(.*)\.so$')
--- 
-1.6.3.1
+Except from that it looks nice.
 
+On Sun, May 24, 2009 at 4:15 PM, Ihar Hrachyshka
+<ihar.hrachyshka@gmail.com> wrote:
+> This fix adds qdirectfbscreen gfx driver to qt4-embedded.
+> Also moved recipes versioning to INC_PR.
+>
+> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+> ---
+> =A0recipes/qt4/qt4-embedded.inc =A0 =A0 =A0| =A0 =A06 ++++--
+> =A0recipes/qt4/qt4-embedded_4.4.3.bb | =A0 =A02 +-
+> =A0recipes/qt4/qt4-embedded_4.5.1.bb | =A0 =A01 +
+> =A03 files changed, 6 insertions(+), 3 deletions(-)
+>
+> diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
+> index 0280dc4..c4112f7 100644
+> --- a/recipes/qt4/qt4-embedded.inc
+> +++ b/recipes/qt4/qt4-embedded.inc
+> @@ -1,11 +1,13 @@
+> -DEPENDS +=3D "tslib"
+> +DEPENDS +=3D "directfb tslib"
+>
+> =A0S =3D "${WORKDIR}/qt-embedded-linux-opensource-src-${PV}"
+>
+> +INC_PR =3D "r11"
+> +
+> =A0QT_CONFIG_FLAGS +=3D " \
+> =A0 =A0 -qtlibinfix E \
+> =A0 =A0 -qt-decoration-styled -plugin-decoration-default -plugin-decorati=
+on-windows \
+> - =A0 =A0-plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc \
+> + =A0 =A0-plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc -plugin=
+-gfx-directfb \
+> =A0 =A0 -plugin-mouse-tslib -qt-mouse-pc -qt-mouse-qvfb \
+> =A0 =A0 -qt-kbd-tty -qt-kbd-usb -qt-kbd-qvfb \
+> =A0 =A0 -DQT_KEYPAD_NAVIGATION \
+> diff --git a/recipes/qt4/qt4-embedded_4.4.3.bb b/recipes/qt4/qt4-embedded=
+_4.4.3.bb
+> index 994372c..e156575 100644
+> --- a/recipes/qt4/qt4-embedded_4.4.3.bb
+> +++ b/recipes/qt4/qt4-embedded_4.4.3.bb
+> @@ -3,7 +3,7 @@ SECTION =3D "libs"
+> =A0LICENSE =3D "GPL QPL"
+> =A0PRIORITY =3D "optional"
+> =A0HOMEPAGE =3D "http://www.trolltech.com"
+> -PR =3D "r11"
+> +PR =3D "${INC_PR}.r1"
+>
+> =A0SRC_URI =3D "ftp://ftp.trolltech.com/qt/source/qt-embedded-linux-opens=
+ource-src-${PV}.tar.bz2 \
+> =A0 =A0 =A0 =A0 =A0 =A0file://0001-cross-compile.patch;patch=3D1 \
+> diff --git a/recipes/qt4/qt4-embedded_4.5.1.bb b/recipes/qt4/qt4-embedded=
+_4.5.1.bb
+> index 5073ad1..9463a58 100644
+> --- a/recipes/qt4/qt4-embedded_4.5.1.bb
+> +++ b/recipes/qt4/qt4-embedded_4.5.1.bb
+> @@ -3,6 +3,7 @@ SECTION =3D "libs"
+> =A0LICENSE =3D "GPL LGPL QPL"
+> =A0PRIORITY =3D "optional"
+> =A0HOMEPAGE =3D "http://www.trolltech.com"
+> +PR =3D "${INC_PR}.r1"
+>
+> =A0SRC_URI =3D "ftp://ftp.trolltech.com/qt/source/qt-embedded-linux-opens=
+ource-src-${PV}.tar.bz2 \
+> =A0 =A0 =A0 =A0 =A0 =A0file://0001-cross-compile.patch;patch=3D1 \
+> --
+> 1.6.3.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
