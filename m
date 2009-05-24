@@ -1,32 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [213.230.128.226] (helo=fep02-svc.tim.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M86mX-0000ZO-8P
-	for openembedded-devel@openembedded.org; Sun, 24 May 2009 08:02:01 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M86ev-0004Xh-EL
-	for openembedded-devel@openembedded.org; Sun, 24 May 2009 05:54:09 +0000
-Received: from p5b3b3ffc.dip.t-dialin.net ([91.59.63.252])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 24 May 2009 05:54:09 +0000
-Received: from no2spam by p5b3b3ffc.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <gremlin@gremlin.it>) id 1M88N3-0007ve-K8
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 09:43:49 +0200
+Received: from deunan.loc ([217.203.151.193]) by fep02-svc.tim.it
+	(InterMail vM.6.01.06.03 201-2131-130-104-20060516) with ESMTP
+	id <20090524073322.DLW1577.fep02-svc.tim.it@deunan.loc>
 	for <openembedded-devel@openembedded.org>;
-	Sun, 24 May 2009 05:54:09 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 24 May 2009 09:33:22 +0200
+Message-ID: <4A18F746.4050507@gremlin.it>
+Date: Sun, 24 May 2009 09:29:10 +0200
+From: Alessandro GARDICH <gremlin@gremlin.it>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
+MIME-Version: 1.0
 To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 24 May 2009 07:53:50 +0200
-Message-ID: <gvandm$f73$1@ger.gmane.org>
-References: <065E68EB87448440A3E75B4DBB5E871C3DA962@CORPUSMX100C.corp.emc.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b3ffc.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-In-Reply-To: <065E68EB87448440A3E75B4DBB5E871C3DA962@CORPUSMX100C.corp.emc.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [patch] fix rpm package in qa stage error
+References: <4A185B31.8050003@gremlin.it>
+	<1243111410.4226.109.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1243111410.4226.109.camel@lenovo.internal.reciva.com>
+Subject: Re: trouble with ext2 filesystem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,17 +30,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 06:02:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 24 May 2009 07:43:49 -0000
+Content-Type: multipart/mixed; boundary="------------040508070500080809020901"
+
+--------------040508070500080809020901
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Lin_Lynn@emc.com wrote:
-> In rpm package,some .debug file weren't in any .debug package
-> The following patch to fix this bug,pls review ,thanks
+Phil Blundell wrote:
+> On Sat, 2009-05-23 at 22:23 +0200, Alessandro GARDICH wrote:
+>> At now I modify qemux86.conf cause usually EXTRA_IMAGECMD is in the 
+>> machine config file, but to add hardware specific parameters (flash size 
+>>   and erase size). I'm not sure if is the right place. Probably in the 
+>> distro configuration could be better.
+> 
+> The distro config probably is the right place for this.  After all, the
+> number of inodes you need depends primarily on the number of files that
+> you're going to ship in the rootfs, and that in turn is primarily
+> influenced by the DISTRO's policies rather than by any inherent aspect
+> of the MACHINE.
+> 
+> The other uses of EXTRA_IMAGECMD that I guess you're thinking of are
+> mostly to do with jffs2 parameters, which are rather different in that
+> they're determined by the specifics of the hardware in use and hence do
+> go with the MACHINE rather than the DISTRO.
+> 
+> p.
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Lynn, thank you for this patch.  This is bug 5069.  It generally looks 
-sane to me.  I can't verify it, though, because rpm fails do_configure 
-for me.  Does it work for you?
+true, reform the patch for kaeilos.conf
 
 
 
+-- 
+  /------------------------------------------------\
+|     Alessandro Gardich : gremlin#gremlin!it      |
+  >------------------------------------------------<
+|  I never saw a wild thing sorry for itself.      |
+|  A small bird will drop frozen dead from a bough |
+|  without ever having felt sorry for itself.      |
+  \------------------------------------------------/
+
+diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
+index 718239b..94387e3 100644
+--- a/conf/distro/kaeilos.conf
++++ b/conf/distro/kaeilos.conf
+@@ -42,6 +42,8 @@ DISTRO_TYPE ?= "debug"
+ # Also, it appears that no locales fit in 16Mb for now. "C" locale rules!
+ IMAGE_LINGUAS = '${@base_less_or_equal("ROOT_FLASH_SIZE", "16", "", "en-us", d)}'
+ 
++# increase inode/block ratio for ext2 filesystem 
++EXTRA_IMAGECMD_ext2 = "-i 4096"
+ 
+ # set feed path variables
+ FEED_BASEPATH = "feeds/2008/${ANGSTROM_PKG_FORMAT}/${LIBC}/"
+
+--------------040508070500080809020901--
