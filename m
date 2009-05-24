@@ -1,37 +1,22 @@
-Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8Ihj-0004u4-7B
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 May 2009 20:45:55 +0200
-Received: by bwz19 with SMTP id 19so2683609bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 May 2009 11:37:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=BmYcuezeUheap48ZcQ1tv/1RkG+7GwJ4Ap9x7/OmAxQ=;
-	b=MVjdxPvXjgAv6kSrEOGdpuHmQSGGcCWJLcHfYbU9H54HfRZIO30s/kijYSiU/eHOQa
-	BF/nDdwrXo9+HV7jyaOOCmCCVVKipBuCuM+mwhMcyyyoIxv5qBmj0AH1hR4QZhXn0DYG
-	+iFGfCuMu6ExE15cjF3aZbMHyxzSREqgVnABM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=vPfn6V7sfR+7mZvdAUMyPF8w6wrWRtvTbgcXz1/D0+/QxV2N3IGeNAq+HW5YGD449r
-	KeuAZXgwfydBH+msaZZhAatgJ3ALhOgCQXYCg3d/urNAKVzAsKygECsBz0FaBvuNTdy1
-	Mi/R2hzL1TW6v6AycnyfFeNJQrboiHqG8Oa80=
-MIME-Version: 1.0
-Received: by 10.103.169.18 with SMTP id w18mr3199470muo.101.1243190273689; 
-	Sun, 24 May 2009 11:37:53 -0700 (PDT)
-In-Reply-To: <1242920910.9080.332.camel@mill.internal.reciva.com>
-References: <1242912094-26435-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1242920823.9080.330.camel@mill.internal.reciva.com>
-	<1242920910.9080.332.camel@mill.internal.reciva.com>
-Date: Sun, 24 May 2009 21:37:53 +0300
-Message-ID: <fce2a370905241137s75e9e58ds6ab8a12f36389549@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1M8IsY-0005ST-1p
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 20:57:04 +0200
+Received: (qmail 21379 invoked by uid 813007); 24 May 2009 18:49:06 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 24 May 2009 18:49:06 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] gst-plugins: fixed pattern for meta package dependencies.
+Date: Sun, 24 May 2009 20:49:29 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <20090522213142.GF23842@smtp.west.cox.net>
+In-Reply-To: <20090522213142.GF23842@smtp.west.cox.net>
+MIME-Version: 1.0
+Message-Id: <200905242049.30726.marcin@juszkiewicz.com.pl>
+Subject: Re: Kernel recipes with broken PRs now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 18:46:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 24 May 2009 18:57:14 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Thu, May 21, 2009 at 6:48 PM, Phil Blundell <pb@reciva.com> wrote:
-> On Thu, 2009-05-21 at 16:47 +0100, Phil Blundell wrote:
->> This kind of matching on the package name is a bit unwholesome in
->> general. =C2=A0It would be better to handle these excluded packages by
->> maintaining them in the blacklist at the point where they're actually
->> created, rather than trying to recreate that information again after the
->> fact.
->
-> Or, actually, in this specific case, just maintain a positive list of
-> the plugin packages that you _do_ want the metapackage to depend on, and
-> make it depend on those packages alone rather than starting from
-> ${PACKAGES} and filtering things out.
+Dnia pi=C4=85tek, 22 maja 2009 o 23:31:43 Tom Rini napisa=C5=82(a):
+> Hey all.  With the MACHINE_KERNEL_PR stuff, the following recipes
+> will now revert to r0 rather than:
 
-I think -meta package should depend on *all* the plugins. That's what
--meta is made for. I think it's not very efficient to test every new
-gst-plugins-* release if there are any new or obsolete plugins there.
+One solution is to set PR after 'inherit kernel'. But thats workaround.
 
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Other would be checking is MACHINE_KERNEL_PR !=3D 'r0' and use it as PR.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
