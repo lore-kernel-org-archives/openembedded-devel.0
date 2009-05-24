@@ -1,26 +1,27 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1M8Jym-0005k1-Qk
+	(envelope-from <denis@denix.org>) id 1M8KHs-0003TF-1p
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 May 2009 22:07:32 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M8Jr7-0006yX-Ja
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 May 2009 20:59:37 +0100
-From: Phil Blundell <pb@reciva.com>
+	Sun, 24 May 2009 22:27:16 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KK60021C0G5F3G1@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	24 May 2009 15:19:18 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id A778414AF5F; Sun,
+	24 May 2009 16:19:17 -0400 (EDT)
+Date: Sun, 24 May 2009 16:19:17 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fce2a370905241137s75e9e58ds6ab8a12f36389549@mail.gmail.com>
-References: <1242912094-26435-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1242920823.9080.330.camel@mill.internal.reciva.com>
-	<1242920910.9080.332.camel@mill.internal.reciva.com>
-	<fce2a370905241137s75e9e58ds6ab8a12f36389549@mail.gmail.com>
-Date: Sun, 24 May 2009 20:59:36 +0100
-Message-Id: <1243195176.4869.12.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH] gst-plugins: fixed pattern for meta package	dependencies.
+Message-id: <20090524201917.GB1445@denix.org>
+References: <A24693684029E5489D1D202277BE8944404C82BA@dlee02.ent.ti.com>
+	<gv6j7v$hkq$2@ger.gmane.org>
+	<A24693684029E5489D1D202277BE8944404C850E@dlee02.ent.ti.com>
+	<gv6to9$iev$2@ger.gmane.org>
+MIME-version: 1.0
+In-reply-to: <gv6to9$iev$2@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Force clean of dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,37 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 20:07:33 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 24 May 2009 20:27:16 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Sun, 2009-05-24 at 21:37 +0300, Ihar Hrachyshka wrote:
-> On Thu, May 21, 2009 at 6:48 PM, Phil Blundell <pb@reciva.com> wrote:
-> > On Thu, 2009-05-21 at 16:47 +0100, Phil Blundell wrote:
-> >> This kind of matching on the package name is a bit unwholesome in
-> >> general.  It would be better to handle these excluded packages by
-> >> maintaining them in the blacklist at the point where they're actually
-> >> created, rather than trying to recreate that information again after the
-> >> fact.
-> >
-> > Or, actually, in this specific case, just maintain a positive list of
-> > the plugin packages that you _do_ want the metapackage to depend on, and
-> > make it depend on those packages alone rather than starting from
-> > ${PACKAGES} and filtering things out.
-> 
-> I think -meta package should depend on *all* the plugins. That's what
-> -meta is made for. I think it's not very efficient to test every new
-> gst-plugins-* release if there are any new or obsolete plugins there.
+On Fri, May 22, 2009 at 09:17:29PM +0200, Koen Kooi wrote:
+> On 22-05-09 20:30, Ambrose, Martin wrote:
+>> On Fri, May 22, 2009 at 11:18:07, Koen Kooi wrote:
+>>
+>>>> I have searched this list and googled but can't find a way
+>>>> to force a clean of
+>>>> a package's dependencies.
+>>>
+>>> BB_STAMP_POLICY = "whitelist"?
+>>
+>> Thanks for the suggestion but it doesn't seem to work for me.
+>> Looking at the mplayer recipe, e.g, the DEPENDS list includes freetype.
+>> So my hope is that the latter 'ls' command in the following sequence
+>> would be empty but it  is not.
+>>
+>> $ ls work/armv5te-none-linux-gnueabi | grep freetype
+>> freetype-2.3.6-r0
+>>
+>> $ BB_STAMP_POLICY="whitelist" bitbake mplayer -c clean
+>
+> Is BB_STAMP_POLICY in BB_ENV_*WHITE for you? If not, you need to set it in 
+> local.conf.
 
-Yes, indeed, clearly -meta should depend on all the plugins: as you say,
-that's exactly what it's for.  The point I was making was that, rather
-than starting with ${PACKAGES} (i.e. all the subpackages) and trying to
-find suitable heuristics to take out the things that aren't plugins, you
-would be better off just computing a list of packages that _are_ plugins
-and using that directly.
+I believe Martin has BB_PRESERVE_ENV=1 set, which is default in Arago for now.
 
-p.
+> Also, BB_STAMP_POLICY works in the other direction, it will invalidate 
+> mplayer if you touch freetype.
 
-
+-- 
+Denys
 
 
