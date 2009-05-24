@@ -1,37 +1,22 @@
-Received: from [74.125.78.148] (helo=ey-out-1920.google.com)
+Received: from [213.230.128.226] (helo=fep01-svc.tim.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hariseldon78@gmail.com>) id 1M8G1w-0000Hb-Mv
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 May 2009 17:54:32 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so1734938eyw.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 May 2009 08:46:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type;
-	bh=MH4j41RVZ0QcGbkwGJPRzeu6TdpW3snNE2zx+vsSz4U=;
-	b=TRys3m7omOMJH+PN9RVcSkaa2DjzCwnfqGqnGZ99D+JA9aOB427/inW1Bz6rqPbYLo
-	653ktu3idoxbWDkfKWZAZ9pYY4Si2DyByqgak89LJAnSCelNSb1y7E+6o93zqS0PEUZ/
-	bIzEBJZhVDTteovWAQH861X9JmYFCtvGluviA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=TJKhQv0CfQ8SOrkHh08nwhhe7yGEi3qDL4J6CSbRUrGzTEOcKrMOgFmk11pOzy3+DR
-	Xc0d7GCh0B33PMw12tXyFO6InUNp8MSDl44FNV0VdTzj54KCtclqnSfZ9GVj0WaG9yXE
-	R7ITPQdqG/i0O39D2WJTaS/MsqZUXB1IWMOQU=
+	(envelope-from <gremlin@gremlin.it>) id 1M8GIL-0000uq-Al
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 18:11:32 +0200
+Received: from deunan.loc ([217.203.151.193]) by fep01-svc.tim.it
+	(InterMail vM.6.01.06.03 201-2131-130-104-20060516) with ESMTP
+	id <20090524155313.DSPC15078.fep01-svc.tim.it@deunan.loc>
+	for <openembedded-devel@openembedded.org>;
+	Sun, 24 May 2009 17:53:13 +0200
+Message-ID: <4A196C71.7050108@gremlin.it>
+Date: Sun, 24 May 2009 17:49:05 +0200
+From: Alessandro GARDICH <gremlin@gremlin.it>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
 MIME-Version: 1.0
-Received: by 10.216.11.213 with SMTP id 63mr1173145wex.176.1243179998344; Sun, 
-	24 May 2009 08:46:38 -0700 (PDT)
-In-Reply-To: <gutp4q$bri$1@ger.gmane.org>
-References: <aee831ab0905180656q31941a95jeedf18f65343c27f@mail.gmail.com>
-	<gutp4q$bri$1@ger.gmane.org>
-Date: Sun, 24 May 2009 17:46:38 +0200
-Message-ID: <aee831ab0905240846q100b779eq69a4f110a5cb664d@mail.gmail.com>
-From: roby <hariseldon78@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-devel@openembedded.org
-Subject: Re: asking for patch review
+To: openembedded-devel@openembedded.org
+References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>	<1241101618.30742.241.camel@mill.internal.reciva.com>	<f96d234e0904301843q27803491xe14c09bf75193fe7@mail.gmail.com>	<1241695142.16805.170.camel@mill.internal.reciva.com>	<4A02CF2A.70804@balister.org>	<1242410201.4514.79.camel@lenovo.internal.reciva.com>
+	<f96d234e0905151248s6962d25ck309197268d475e9b@mail.gmail.com>
+In-Reply-To: <f96d234e0905151248s6962d25ck309197268d475e9b@mail.gmail.com>
+Subject: Re: progress on OE organization issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 15:54:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 24 May 2009 16:11:43 -0000
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, May 19, 2009 at 10:03 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
+Cliff Brake wrote:
+> One thing about OE that may not be typical is the rate at which key
+> people come and go.  That said, it seems like the structure needs to
+> accommodate this -- perhaps by electing a new core team every 3
+> months.  I propose we make this real simple -- everyone with commit
+> access gets one vote, and we elect a core team (5 people).  Eventually
+> this could be expanded to "members".  Thoughts?
+> 
 
-> On 18-05-09 15:56, Previdi Roberto wrote:
->
->> http://patchwork.openembedded.org/patch/433/
->> It's been queued since 20 days ago, and many more recent patches have
->>
-> I just pushed the zenity 2.26.0 recipe I had lying around, could you base
-> your patch on that version?
->
+Maybe a such high rate of elections could be annoying, maybe better have 
+a valid board with also 3 or 4 members if someone move away ...
+I think is realistic that board members will be elected from more 
+present developers so probably the high rate of turn over shouldn't 
+affect the boards.
 
-ok, i'll try, but i'm a bit disappointed.. why cannot the patch be applied
-to the old version in the while?
-and if i write another patch and it takes a month to be applied it's
-possible that it will be old by that time, and another zenity version will
-be there..
-From what i see from oe-commit list my patch has been applied and then
-reverted after some days.. why? is it invalid? maybe the patches for old
-packages' versions are automatically considered invalid?
-Anyway i don't want to start any flame, i'll try to port the patch to the
-new version, i just feel there is something odd in this patch review
-system..
+just my 2 cent
+
+
+
 -- 
-roby
+  /------------------------------------------------\
+|     Alessandro Gardich : gremlin#gremlin!it      |
+  >------------------------------------------------<
+|  I never saw a wild thing sorry for itself.      |
+|  A small bird will drop frozen dead from a bough |
+|  without ever having felt sorry for itself.      |
+  \------------------------------------------------/
+
+
 
