@@ -1,34 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [94.100.176.47] (helo=mx33.mail.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M897J-0007wd-Rz
-	for openembedded-devel@openembedded.org; Sun, 24 May 2009 10:31:37 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M88zh-0000h2-Hp
-	for openembedded-devel@openembedded.org; Sun, 24 May 2009 08:23:45 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 24 May 2009 08:23:45 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 24 May 2009 08:23:45 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 24 May 2009 10:23:34 +0200
-Message-ID: <gvb066$tov$1@ger.gmane.org>
-References: <20090522213142.GF23842@smtp.west.cox.net>	<c384c5ea0905230606t48e57c58y658282e25c97fbee@mail.gmail.com>	<1243095832.4226.105.camel@lenovo.internal.reciva.com>
-	<c384c5ea0905231525u2248fcf7ycf512bd48ef05e56@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
-In-Reply-To: <c384c5ea0905231525u2248fcf7ycf512bd48ef05e56@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Kernel recipes with broken PRs now
+	(envelope-from <mad_soft@inbox.ru>) id 1M89Rx-00008I-5Z
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 24 May 2009 10:52:57 +0200
+Received: from [95.72.100.202] (port=8619 helo=localhost)
+	by mx33.mail.ru with asmtp id 1M89KI-000H1N-00
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 24 May 2009 12:45:03 +0400
+Date: Sun, 24 May 2009 12:45:00 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090524084500.GA30448@rainbow>
+References: <1243110920-18111-1-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-2-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-3-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-4-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-5-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-6-git-send-email-mad_soft@inbox.ru>
+	<1243110920-18111-7-git-send-email-mad_soft@inbox.ru>
+	<20090523210658.GO23842@smtp.west.cox.net>
+MIME-Version: 1.0
+In-Reply-To: <20090523210658.GO23842@smtp.west.cox.net>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-Spam: Not detected
+X-Mras: Ok
+Subject: Re: [PATCH] netsurf: add recipe for version 2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 08:31:38 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 24 May 2009 08:52:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 24-05-09 00:25, Leon Woestenberg wrote:
+On 14:06 Sat 23 May     , Tom Rini wrote:
+> On Sun, May 24, 2009 at 12:35:20AM +0400, Dmitry Artamonow wrote:
+> 
+> [snip]
+> > +++ b/recipes/netsurf/netsurf_2.1.bb
+> [snip]
+> > +DEPENDS = "gtk+ (>=2.12.0) lemon-native re2c-native jpeg openssl curl libxml2 \
+> > +	   libglade (>=2.0) hubbub libnsgif libnsbmp lcms"
+> 
+> You can't currently do versioned dependancies.  While this didn't error
+> out, it's not doing what you think.
 
-> Marcin wrote a patch that solves this.
+OK. Then better drop versions for now - updated patch follows.
 
-Marcins patch doesn't solve anything, it only breaks MACHINE_KERNEL_PR, 
-so all your external modules and associated apps don't get rebuilt if 
-you change your kernel.
+BTW, is there any work in this direction? I think it's important
+feature missing. It would solve some problems with recipes broken with
+certain PREFERRED_VERSIONs of toolchain/toolkit/etc in distro.conf
+or local.conf, and working well with another...
 
-Now, if people posting in this thread would bother to read the original 
-RFC (that got approved for .dev as well as stable/2009), we wouldn't be 
-having this discussion.
-
-regards,
-
-Koen
+-- 
+Best regards,
+Dmitry "MAD" Artamonow
 
 
 
