@@ -1,37 +1,23 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8JIB-0003Vs-C3
+	(envelope-from <philb@gnu.org>) id 1M8JKg-0003h9-PA
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 May 2009 21:23:31 +0200
-Received: by mail-fx0-f172.google.com with SMTP id 20so2730357fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 May 2009 12:15:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=F9IhDdxglvkbZFMem6YykJLtLC4MSYXhWmmPKD5KEL4=;
-	b=MvAb8boxJK3U6ZXrDBN2+yzAKpXjhR3HEzU1YeO9brpkFBzQSARNbuEsGSKsAT8dHQ
-	wl2754YtoqDSJ/pMRhl5f0NxVzcO6gWFMLxyXLSOyoB48+4l68qJewSPcx3QlmpXdseg
-	0uNpRaAlQWIK02/Q9D8Vk3m5JXfNnisZPqJ7U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=NIaRQrQ4KGYdD5gQlDTfg4ObYoQ59+c5jZM0Y2ddhE0otbPf1mH64lnX98ogFHnpUb
-	ubb33QHlEST4a1atSWMoEpEZe0v18colDtD7Fj0InhAu074NK0TSeFIY4nGEtlyOF481
-	uYJFcpF3CvHRFJEue/3kKuel620kidQvDNGV4=
-Received: by 10.103.240.15 with SMTP id s15mr3202542mur.93.1243192536742;
-	Sun, 24 May 2009 12:15:36 -0700 (PDT)
-Received: from localhost ([80.249.91.57])
-	by mx.google.com with ESMTPS id y2sm7573328mug.43.2009.05.24.12.15.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 24 May 2009 12:15:36 -0700 (PDT)
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	Sun, 24 May 2009 21:26:06 +0200
+Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M8JD1-0005V8-PH
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 24 May 2009 20:18:11 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 May 2009 22:15:26 +0300
-Message-Id: <1243192526-31196-2-git-send-email-ihar.hrachyshka@gmail.com>
-X-Mailer: git-send-email 1.6.3.1
-In-Reply-To: <1243192526-31196-1-git-send-email-ihar.hrachyshka@gmail.com>
-References: <1243192526-31196-1-git-send-email-ihar.hrachyshka@gmail.com>
-Subject: [PATCH 2/2] qt4-embedded: added directfb gfx driver support.
+In-Reply-To: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
+References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
+Date: Sun, 24 May 2009 20:18:10 +0100
+Message-Id: <1243192690.4869.8.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH 1/2] udev: fixed obsolete udevadm syntax for udev	init.d script.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,65 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 19:23:31 -0000
+X-List-Received-Date: Sun, 24 May 2009 19:26:06 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-This fix adds qdirectfbscreen gfx driver to qt4-embedded.
-Also moved recipes versioning to INC_PR.
+On Sun, 2009-05-24 at 21:33 +0300, Ihar Hrachyshka wrote:
+> Fixed the following warning message when executing udev init script:
+> "udevadm control commands requires the --<command> format, this will
+> stop working in a future release."
+> 
+> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+> ---
+>  recipes/udev/udev-124/init |    4 ++--
+>  recipes/udev/udev-141/init |    4 ++--
+>  recipes/udev/udev_124.bb   |    2 +-
+>  recipes/udev/udev_141.bb   |    2 +-
+>  4 files changed, 6 insertions(+), 6 deletions(-)
 
-Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
----
- recipes/qt4/qt4-embedded.inc      |    6 ++++--
- recipes/qt4/qt4-embedded_4.4.3.bb |    2 +-
- recipes/qt4/qt4-embedded_4.5.1.bb |    1 +
- 3 files changed, 6 insertions(+), 3 deletions(-)
+There doesn't seem much point in patching udev 124 for this: that
+version doesn't actually emit the warning as far as I can tell.  If the
+initscript is maintained separately for different versions then you
+might as well just patch the -141 version and save a rebuild/reinstall
+for people using 124.  Or, alternatively, if the two initscripts are
+actually the same, maybe you could unify them and save on future
+maintenance.
 
-diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
-index 0280dc4..c4112f7 100644
---- a/recipes/qt4/qt4-embedded.inc
-+++ b/recipes/qt4/qt4-embedded.inc
-@@ -1,11 +1,13 @@
--DEPENDS += "tslib"
-+DEPENDS += "directfb tslib"
- 
- S = "${WORKDIR}/qt-embedded-linux-opensource-src-${PV}"
- 
-+INC_PR = "r11"
-+
- QT_CONFIG_FLAGS += " \
-     -qtlibinfix E \
-     -qt-decoration-styled -plugin-decoration-default -plugin-decoration-windows \
--    -plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc \
-+    -plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc -plugin-gfx-directfb \
-     -plugin-mouse-tslib -qt-mouse-pc -qt-mouse-qvfb \
-     -qt-kbd-tty -qt-kbd-usb -qt-kbd-qvfb \
-     -DQT_KEYPAD_NAVIGATION \
-diff --git a/recipes/qt4/qt4-embedded_4.4.3.bb b/recipes/qt4/qt4-embedded_4.4.3.bb
-index 994372c..e156575 100644
---- a/recipes/qt4/qt4-embedded_4.4.3.bb
-+++ b/recipes/qt4/qt4-embedded_4.4.3.bb
-@@ -3,7 +3,7 @@ SECTION = "libs"
- LICENSE = "GPL QPL"
- PRIORITY = "optional"
- HOMEPAGE = "http://www.trolltech.com"
--PR = "r11"
-+PR = "${INC_PR}.r1"
- 
- SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-embedded-linux-opensource-src-${PV}.tar.bz2 \
-            file://0001-cross-compile.patch;patch=1 \
-diff --git a/recipes/qt4/qt4-embedded_4.5.1.bb b/recipes/qt4/qt4-embedded_4.5.1.bb
-index 5073ad1..9463a58 100644
---- a/recipes/qt4/qt4-embedded_4.5.1.bb
-+++ b/recipes/qt4/qt4-embedded_4.5.1.bb
-@@ -3,6 +3,7 @@ SECTION = "libs"
- LICENSE = "GPL LGPL QPL"
- PRIORITY = "optional"
- HOMEPAGE = "http://www.trolltech.com"
-+PR = "${INC_PR}.r1"
- 
- SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-embedded-linux-opensource-src-${PV}.tar.bz2 \
-            file://0001-cross-compile.patch;patch=1 \
--- 
-1.6.3.1
+p.
+
 
 
 
