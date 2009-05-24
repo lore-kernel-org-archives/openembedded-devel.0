@@ -1,23 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M8C3f-0004XB-KB
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 May 2009 13:40:03 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M8Bw0-0007Zx-04
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 May 2009 12:32:08 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1242288896-6347-1-git-send-email-elena.valhalla@gmail.com>
-References: <1242288896-6347-1-git-send-email-elena.valhalla@gmail.com>
-Date: Sun, 24 May 2009 12:32:02 +0100
-Message-Id: <1243164722.4226.129.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M8C8k-0004hD-HG
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 13:45:18 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M8C16-0000UU-T0
+	for openembedded-devel@openembedded.org; Sun, 24 May 2009 11:37:24 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 24 May 2009 11:37:24 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 24 May 2009 11:37:24 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 24 May 2009 13:37:12 +0200
+Message-ID: <gvbbh9$m3s$1@ger.gmane.org>
+References: <20090522213142.GF23842@smtp.west.cox.net>	<c384c5ea0905230606t48e57c58y658282e25c97fbee@mail.gmail.com>	<1243095832.4226.105.camel@lenovo.internal.reciva.com>	<c384c5ea0905231525u2248fcf7ycf512bd48ef05e56@mail.gmail.com>	<gvb066$tov$1@ger.gmane.org>
+	<1243157020.4226.124.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: Add gtksourceview 2.x and rename the 1.x tree recipe
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
+In-Reply-To: <1243157020.4226.124.camel@lenovo.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Kernel recipes with broken PRs now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,27 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 May 2009 11:40:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 24 May 2009 11:45:18 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-05-14 at 10:14 +0200, Elena Grandi wrote:
-> GtkSourceView[1] currently maintains a stable 2.x tree and an old stable
-> 1.x tree for compatibility with older applications[2] and they can be
-> installed together on a computer.
-> 
-> I need to add the recipe for the latest 2.x version, and since the old
-> stable is used just in 2 recipes (gobby_0.4.1.bb and tea_17.3.5.bb) and
-> mentioned as a preferred version in preferred-om-2008-versions.inc
-> it seems to me that this could be a good time to rename it to
-> gtksourceview1 with minimal breakage.
+On 24-05-09 11:23, Phil Blundell wrote:
+>  This seems
+> particularly pertinent for the stable branch where, as I understood it,
+> intrusive changes were supposed to be avoided.
 
-Is there really any need to rename the old one?  It seems like it would
-be better just to leave the existing gtksourceview alone and add the new
-one as gtksourceview2 or some such.
+Wrong, the stable branch can get intrusive changes as well, the only 
+prereq is review and testing, which most changes in .dev never get.
 
-p.
+> Per my previous email, though, I think there are probably better ways of
+> solving the original problem that don't require this kind of global
+> variable in the first place, and could at least be made to fail in a
+> "safe" way for users who aren't aware of the change.
 
+That's nice and all, but I see no actual patch that implements that, or 
+even a proposal with pseudocode. I'm sure there are better ways, but 
+till someone actually takes the time to cook up a patch instead of 
+handwaving, the situation won't change.
 
 
 
