@@ -1,32 +1,31 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1M8dwx-00047f-G0
+	(envelope-from <philb@gnu.org>) id 1M8e9m-0004dL-HT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 19:26:59 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 2FE91140971F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2009 19:20:13 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9vgkD9BYb+PG
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2009 19:20:13 +0200 (CEST)
-Received: from [10.20.1.86] (styx-ext.suse.cz [82.119.242.94])
-	by ns.penguin.cz (Postfix) with ESMTP id 07D3E1409715
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2009 19:20:13 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Mon, 25 May 2009 19:40:14 +0200
+Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M8e20-0007aS-D0
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 May 2009 18:32:13 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090524204821.GC1445@denix.org>
-References: <fce2a370905231344i3eced2bci5e1997d520be705e@mail.gmail.com>
-	<20090524204821.GC1445@denix.org>
-Date: Mon, 25 May 2009 19:18:57 +0200
-Message-Id: <1243271937.28070.9.camel@hammer.suse.cz>
+In-Reply-To: <be7a9f3d0905250959i19d01ebbr1b3b065f2135e294@mail.gmail.com>
+References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1243189985-19060-2-git-send-email-ihar.hrachyshka@gmail.com>
+	<200905251125.45665.marcin@juszkiewicz.com.pl>
+	<fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
+	<1243247426.4869.23.camel@lenovo.internal.reciva.com>
+	<fce2a370905250355h5edd949cq40bcb52882e1e623@mail.gmail.com>
+	<be7a9f3d0905250931wbedccdfg9f8b0a0f562b6aab@mail.gmail.com>
+	<1243270407.4869.57.camel@lenovo.internal.reciva.com>
+	<be7a9f3d0905250959i19d01ebbr1b3b065f2135e294@mail.gmail.com>
+Date: Mon, 25 May 2009 18:32:11 +0100
+Message-Id: <1243272731.4869.59.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.27.1 
-Subject: Re: [PATCH] locality of python{} variables (was e2fsprogs-libs is unbuildable for .dev)
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH 2/2] udev: moved udevadm to the main udev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,71 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 17:26:59 -0000
+X-List-Received-Date: Mon, 25 May 2009 17:40:14 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Denys Dmytriyenko wrote:
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=61f0ac5601f6c03871d084f879ef618664d9b2c6
+On Mon, 2009-05-25 at 13:59 -0300, Otavio Salvador wrote:
+> Hello,
+> 
+> On Mon, May 25, 2009 at 1:53 PM, Phil Blundell <philb@gnu.org> wrote:
+> > On Mon, 2009-05-25 at 13:31 -0300, Otavio Salvador wrote:
+> [...]
+> >> I belive that the right way to fix it is add a binary package only for
+> >> udevadm
+> >
+> > That's pretty much what udev-utils is: it doesn't contain any binaries
+> > apart from udevadm.
+> 
+> In this case the binary package is wrong.
 
-Blindly guessing that variables inside python statement may be global. I
-see no other explanation, how variables can get a value defined in
-another .bb file.
+Why so?
 
-Here is a partial fix (just a variable rename) that allowed to continue
-the build. If my guess is true, then possible problems of
-do_split_packages() may be pretty widespread.
+> >> and make udev depends on it and mdev suggests it.
+> >
+> > Mdev itself doesn't have any use for udevadm, so having mdev Recommend
+> > udev-utils wouldn't be the right thing; this would just be a waste of
+> > space for people who are using mdev without HAL (which, I suspect, is
+> > actually the majority of mdev users).
+> 
+> Agreed. But AFAIK suggested packages do not get installed by bitbake by default.
 
-diff --git a/recipes/e2fsprogs-libs/e2fsprogs-libs.inc b/recipes/e2fsprogs-libs/e2fsprogs-libs.inc
-index 8b214c1..5b82c11 100644
---- a/recipes/e2fsprogs-libs/e2fsprogs-libs.inc
-+++ b/recipes/e2fsprogs-libs/e2fsprogs-libs.inc
-@@ -15,12 +15,12 @@ FILES_e2fsprogs-libs-dev_append = " ${datadir}/et ${datadir}/ss"
- FILES_${PN} = "${bindir}"
- 
- python populate_packages_prepend () {
--	cv_libdir = bb.data.expand('${libdir}', d)
--	cv_libdir_dbg = bb.data.expand('${libdir}/.debug', d)
--	do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'e2fsprogs-libs %s development package', extra_depends='${PN}-dev', allow_links=True)
--	do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'e2fsprogs-libs %s development package', extra_depends='${PN}-dev')
--	do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'e2fsprogs-libs %s development package', extra_depends='${PN}-dev')
--	do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'e2fsprogs-libs %s library', extra_depends='', allow_links=True)
-+	e2fs_libdir = bb.data.expand('${libdir}', d)
-+	e2fs_libdir_dbg = bb.data.expand('${libdir}/.debug', d)
-+	do_split_packages(d, e2fs_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'e2fsprogs-libs %s development package', extra_depends='${PN}-dev', allow_links=True)
-+	do_split_packages(d, e2fs_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'e2fsprogs-libs %s development package', extra_depends='${PN}-dev')
-+	do_split_packages(d, e2fs_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'e2fsprogs-libs %s development package', extra_depends='${PN}-dev')
-+	do_split_packages(d, e2fs_libdir, '^lib(.*)\.so\.*', 'lib%s', 'e2fsprogs-libs %s library', extra_depends='', allow_links=True)
- }
- 
- do_stage () {
-diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
-index 45fd1a6..9c70b9e 100644
---- a/recipes/util-linux-ng/util-linux-ng.inc
-+++ b/recipes/util-linux-ng/util-linux-ng.inc
-@@ -123,12 +123,12 @@ do_install () {
- }
- 
- python populate_packages_prepend () {
--	cv_libdir = bb.data.expand('${libdir}', d)
--	cv_libdir_dbg = bb.data.expand('${libdir}/.debug', d)
--	do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev', allow_links=True)
--	do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev')
--	do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev')
--	do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'util-linux-ng %s library', extra_depends='', allow_links=True)
-+	ulinxng_libdir = bb.data.expand('${libdir}', d)
-+	ulinxng_libdir_dbg = bb.data.expand('${libdir}/.debug', d)
-+	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev', allow_links=True)
-+	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev')
-+	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev')
-+	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.so\.*', 'lib%s', 'util-linux-ng %s library', extra_depends='', allow_links=True)
- }
- 
- 
+Ah yes, sorry, I misread your first mail.  Having mdev Suggest
+udev-utils would indeed be harmless since you're right, ipkg doesn't
+install suggestions automatically.  It would still be fairly pointless
+though since nothing in mdev makes any use of udev-utils.
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+p.
+
 
 
 
