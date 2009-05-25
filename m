@@ -1,20 +1,36 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M8XrZ-0007Nt-Sm
-	for openembedded-devel@openembedded.org; Mon, 25 May 2009 12:57:05 +0200
-Received: (qmail 22699 invoked by uid 1003); 25 May 2009 10:49:00 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 25 May 2009 10:49:00 -0000
-Message-ID: <4A1A779A.1090402@balister.org>
-Date: Mon, 25 May 2009 06:48:58 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <c384c5ea0905241450p281a0606re27efd076627fcf2@mail.gmail.com>
-In-Reply-To: <c384c5ea0905241450p281a0606re27efd076627fcf2@mail.gmail.com>
-Subject: Re: [RFC] Post a heads-up [HEADS UP] mail when an intrusive patch	has landed in dev or stable
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8Xts-0007Uc-A4
+	for openembedded-devel@openembedded.org; Mon, 25 May 2009 12:59:24 +0200
+Received: by fxm20 with SMTP id 20so3050038fxm.12
+	for <openembedded-devel@openembedded.org>;
+	Mon, 25 May 2009 03:51:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=JWkdsogIMNuygW8zMYU6b0Gs78/VS0ICYC9P0hlc5p8=;
+	b=CIo4PPBo9fYvqNOLNP82IsObgHeXFEa30XJPh5xlcu1nnS+hgHNwtYtx+N6ZZGYeZX
+	LtSwrIFU7ER2pa8ggZgkvxlU9D0ufWNHBF8UURITg7nqopWgri2xCh6TssRkPvVh85O9
+	Pv3hr8X0pi6tiH+bXFhKIoYmb8NsAZYJdZEvU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=G4G/JKQSKu4xHZ8O6LarduJRRRhDvYI7L+Fe6u5mTeDX8E/or6RtSvapq/bu/GeTFl
+	X10S9F8d3WscA/vBBvgIN/c5FZa+s38iu04MdB7FIshNFWeMajlEH37RleRbpOg+S5FO
+	hxjmuRLKDCpHZ+yrJUl1xfKs/wQQjm8Kc543E=
+Received: by 10.103.1.5 with SMTP id d5mr3561860mui.113.1243248683149;
+	Mon, 25 May 2009 03:51:23 -0700 (PDT)
+Received: from localhost (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id y2sm14998575mug.13.2009.05.25.03.51.22
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 25 May 2009 03:51:22 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@openembedded.org
+Date: Mon, 25 May 2009 13:51:19 +0300
+Message-Id: <1243248679-28230-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <1243248515-28181-1-git-send-email-ihar.hrachyshka@gmail.com>
+References: <1243248515-28181-1-git-send-email-ihar.hrachyshka@gmail.com>
+Subject: [PATCH] udev: include udev-utils into udev rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,100 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 10:57:10 -0000
-X-Groupsio-MsgNum: 10714
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040601070106010201040000"
+X-List-Received-Date: Mon, 25 May 2009 10:59:25 -0000
 
---------------ms040601070106010201040000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+The reason for the move is that udevadm binary is executed from udev
+init.d script.
 
-Leon Woestenberg wrote:
-> RFC:
-> 
-> we have had some proposed intrusive patches land in the metadata with
-> only a few people aware of the fact they landed at all (or why).
-> 
-> Proposal is to post a "[HEADS UP] Description of changed behaviour"
-> email on the -devel mailing list when you pushed an intrusive patch.
-> 
-> Do this in a new thread (not replying to an old thread).
-> 
-> 
-> The current situation is that the intrusive push go-ahead is often at
-> the tail of a thread, and not every dev can track all RFC's.
-> 
-> It helps people jump in on the change early.
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ recipes/udev/udev_141.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-I'm not really sure this will help matters. In some cases, people do not 
-realize the nasty side effect will occur.
+diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+index 7e26798..068d23c 100644
+--- a/recipes/udev/udev_141.bb
++++ b/recipes/udev/udev_141.bb
+@@ -6,7 +6,10 @@ LICENSE = "GPL"
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+ 
+-PR = "r7"
++PR = "r8"
++
++# needed for init.d script
++RDEPENDS_udev += "udev-utils"
+ 
+ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+ 	   file://mount.blacklist \
+-- 
+1.6.3.1
 
-Philip
 
---------------ms040601070106010201040000
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUyNTEw
-NDg1OFowIwYJKoZIhvcNAQkEMRYEFNCq5wQcaXPf6PUJh8gB1aLc1w0IMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQABzHabWd0HdrGzleSlV06JRmkjPYd3jygowrAm8CY2xMdJ4Ve+
-Bq6AutlDoonHh6HOUGGhZacwB6MA3bGtgKPh7FL2bupeSzT5wfQE8UXbht2NfCZB5CgzlG5lPLh3
-5YQGs46kFNbwxtyDhwWGw8co4Lmeh8Vctg8uFzfIn+1Z/i/98ab3htDo3oMaqsUef/S5iRcNB89m
-IWl+MihhQwOdNrduTUoHI5owZuhlKZSsTZPphtZj4Jw1gpqis8IognccbAZz4VPpKsG9yyayWgLy
-0q1OvDxDrLEEz6/y+0537tuRENdC/WzlqPqFTVd9dNaUBKl0x0Dg7SesZQM61jg7AAAAAAAA
-
---------------ms040601070106010201040000--
