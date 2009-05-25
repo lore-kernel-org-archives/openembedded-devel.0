@@ -1,21 +1,20 @@
 Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1M8PhX-00005C-77
-	for openembedded-devel@openembedded.org; Mon, 25 May 2009 04:14:07 +0200
-Received: (qmail 29489 invoked from network); 25 May 2009 02:06:09 -0000
+	(envelope-from <trini@embeddedalley.com>) id 1M8Pk3-0000CK-Rl
+	for openembedded-devel@openembedded.org; Mon, 25 May 2009 04:16:44 +0200
+Received: (qmail 29494 invoked from network); 25 May 2009 02:08:46 -0000
 Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 24 May 2009 19:06:09 -0700
-Date: Sun, 24 May 2009 19:06:08 -0700
+	by easi.embeddedalley.com with SMTP; 24 May 2009 19:08:46 -0700
+Date: Sun, 24 May 2009 19:08:46 -0700
 From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090525020608.GR23842@smtp.west.cox.net>
-References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1243192690.4869.8.camel@lenovo.internal.reciva.com>
+Message-ID: <20090525020845.GS23842@smtp.west.cox.net>
+References: <1243199407-28031-1-git-send-email-ihar.hrachyshka@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1243192690.4869.8.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1243199407-28031-1-git-send-email-ihar.hrachyshka@gmail.com>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH 1/2] udev: fixed obsolete udevadm syntax for udev	init.d script.
+Subject: Re: [PATCH] directfb: added new version 1.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,37 +28,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 02:14:07 -0000
+X-List-Received-Date: Mon, 25 May 2009 02:16:44 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sun, May 24, 2009 at 08:18:10PM +0100, Phil Blundell wrote:
-> On Sun, 2009-05-24 at 21:33 +0300, Ihar Hrachyshka wrote:
-> > Fixed the following warning message when executing udev init script:
-> > "udevadm control commands requires the --<command> format, this will
-> > stop working in a future release."
-> > 
-> > Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-> > ---
-> >  recipes/udev/udev-124/init |    4 ++--
-> >  recipes/udev/udev-141/init |    4 ++--
-> >  recipes/udev/udev_124.bb   |    2 +-
-> >  recipes/udev/udev_141.bb   |    2 +-
-> >  4 files changed, 6 insertions(+), 6 deletions(-)
-> 
-> There doesn't seem much point in patching udev 124 for this: that
-> version doesn't actually emit the warning as far as I can tell.  If the
-> initscript is maintained separately for different versions then you
-> might as well just patch the -141 version and save a rebuild/reinstall
-> for people using 124.  Or, alternatively, if the two initscripts are
-> actually the same, maybe you could unify them and save on future
-> maintenance.
+On Mon, May 25, 2009 at 12:10:07AM +0300, Ihar Hrachyshka wrote:
 
-I disagree.  There are, I assume, things that could be done on top of
-the -141 script as further enchancements/cleanups that would not apply
-to -124.  But keeping older files in sync, so long as (a) it works and
-(b) the older version is cared about makes future buging easier, I've
-found.
+> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+> ---
+>  conf/checksums.ini                                 |    4 +++
+>  .../directfb/directfb-1.2.8/ts_lib_autotools.patch |   22 ++++++++++++++++
+>  recipes/directfb/directfb_1.2.8.bb                 |   27 ++++++++++++++++++++
+>  3 files changed, 53 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/directfb/directfb-1.2.8/ts_lib_autotools.patch
+>  create mode 100644 recipes/directfb/directfb_1.2.8.bb
+
+NAK.  Can you please add in:
+    file://directfb-1.2.x-fix-pkgconfig-cflags.patch;patch=1 \
+    file://mkdfiff.patch;patch=1 \
+    file://dont-use-linux-config.patch;patch=1 \
+(from the files/ dir).  Thanks.
 
 -- 
 Tom Rini
