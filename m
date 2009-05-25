@@ -1,37 +1,23 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8X0V-0008KF-Pd
+	(envelope-from <pb@reciva.com>) id 1M8XQ3-0006Cw-TW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 12:02:13 +0200
-Received: by fxm20 with SMTP id 20so3017107fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2009 02:54:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=DeTnZ7nhAh491c8sh6cydaprOg1172sSDp1g+B5Czsg=;
-	b=AsWEwAxh1AGq3hJtdaQ9DmABr5yrTumtxsI3T91Hycgb2LMVatTle3CphfgrrfGntI
-	SIepZ6AVmbld0ETyRJiA+oOdsvUfx8y475f9/yK1Xb/YG5Qejfk6dk1Q3cgFRJzhE1IS
-	fHNPNOG4Z/NzA7uUAyeleqxU0XVE6XfogpaI8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=IhJfF5Ficm6YHOD4mY9mLjkH1JJrQyCsQ6yhqZXP5ytZaJkP7V9bKnFdE41QxzzHiW
-	mXcwseVL7RQ1wV21gN6PC7bHkisXKtOw0eCJGD++GniowhKXMEMXTN+h9SvKq4vwyS6c
-	AFtARB2go03kxvXriFXCK9vgcWnrJfw+TYFQg=
-MIME-Version: 1.0
-Received: by 10.103.167.14 with SMTP id u14mr3545512muo.38.1243245250484; Mon, 
-	25 May 2009 02:54:10 -0700 (PDT)
-In-Reply-To: <200905251125.45665.marcin@juszkiewicz.com.pl>
-References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1243189985-19060-2-git-send-email-ihar.hrachyshka@gmail.com>
-	<200905251125.45665.marcin@juszkiewicz.com.pl>
-Date: Mon, 25 May 2009 12:54:10 +0300
-Message-ID: <fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	Mon, 25 May 2009 12:28:36 +0200
+Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M8XID-0008VE-J9
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 May 2009 11:20:30 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] udev: moved udevadm to the main udev package
+In-Reply-To: <fce2a370905250207g211af74fg29c1f0cd2593a4ae@mail.gmail.com>
+References: <fce2a370905250207g211af74fg29c1f0cd2593a4ae@mail.gmail.com>
+Date: Mon, 25 May 2009 11:20:22 +0100
+Message-Id: <1243246822.4869.19.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [RFC] gnome.bbclass change broke lots of package	dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 10:02:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 25 May 2009 10:28:37 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, May 25, 2009 at 12:25 PM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
-> Dnia niedziela, 24 maja 2009 o 20:33:05 Ihar Hrachyshka napisa=C5=82(a):
->> The reason for the move is that udevadm binary is executed from udev
->> init.d script.
->
-> NACK, NACK, NACK - udevadm is also udevinfo and is used by HAL. Your
-> patch will make my mdev images not working properly because I would need
-> to install mdev and udev to get HAL working and then find a way to not
-> run udev at boot time (even after package upgrades).
+On Mon, 2009-05-25 at 12:07 +0300, Ihar Hrachyshka wrote:
+> @@ -17,6 +17,9 @@ inherit autotools gtk-icon-cache pkgconfig gconf mime
+> 
+>  AUTOTOOLS_STAGE_PKGCONFIG = "1"
+> 
+> +PACKAGES =+ "${PN}-scrollkeeper-leftovers"
+> +FILES_${PN}-scrollkeeper-leftovers = "${localstatedir}/lib/scrollkeeper"
+> +
+>  gnome_stage_includes() {
+>         autotools_stage_includes
+>  }
+> 
+> As we can see, there is now ${PN}-scrollkeeper-leftovers package for
+> every recipe that inherited gnome.bbclass. And this -leftovers package
+> is in the current dependency chains (at least for qt4-embedded-dev
+> package).
 
-I tried to understand your complain (really) but don't get it. What do
-you mean when saying "udevadm is also udevinfo and is used by HAL"?
-And also please provide your solution for the problem of broken images
-with unfuctional udev subsystem.
+Where is your dependency on -scrollkeeper-leftovers coming from?
+Nothing in the patch that you quoted looks like it ought to be causing
+that.
 
->
-> Regards,
-> --
-> JID: =C2=A0 =C2=A0 =C2=A0hrw@jabber.org
-> Website: =C2=A0http://marcin.juszkiewicz.com.pl/
-> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+That said, the patch does look a bit bizarre: as a general rule we don't
+package things from ${localstatedir} since lots of targets have that as
+a ramdisk.  It isn't obvious to me what this is going to achieve.
+
+> As for the 1st problem, I suggest adding ALLOW_EMPTY = "1" to
+> gnome.bbclass (it works for my current setup, and if you will approve
+> the change then I'll send the patch immediately).
+
+No, this would be a poor solution since it will cause a mass of empty
+(and hence useless) packages to be generated.  It would be better to
+identify the place where the dependency on this package is generated,
+and suppress that at its source if the package is empty.
+
+> As for the 2nd problem, there is a big question what should we do.
+> Revision bumping for every recipe that inherits gnome.bbclass is not
+> an elegant thing (though it will really push the change for all the
+> users). Maybe there is another, better way to handle such tasks. If
+> you know it please provide me with the info.
+
+The right answer to this probably depends on the answer to what the
+patch was trying to accomplish in the first place.  It's possible that
+no rebuild is actually necessary for already-deployed packages if this
+is intended to deal with some fringe case that only occurs on particular
+targets or under rare circumstances.
+
+p.
+
+
 
 
