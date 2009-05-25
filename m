@@ -1,26 +1,36 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M8Xa9-0006Xn-44
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 12:39:03 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M8XSA-0000Vw-7g
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 11:30:48 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
-References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1243189985-19060-2-git-send-email-ihar.hrachyshka@gmail.com>
-	<200905251125.45665.marcin@juszkiewicz.com.pl>
-	<fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
-Date: Mon, 25 May 2009 11:30:26 +0100
-Message-Id: <1243247426.4869.23.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH 2/2] udev: moved udevadm to the main udev package
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8XrH-0007Mx-9L
+	for openembedded-devel@openembedded.org; Mon, 25 May 2009 12:56:45 +0200
+Received: by bwz19 with SMTP id 19so3014360bwz.12
+	for <openembedded-devel@openembedded.org>;
+	Mon, 25 May 2009 03:48:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=w4RyW4zuuo9jky5fiqRjuSx0Qzd8dL5Oy1CYlRlr+gE=;
+	b=MckqFWF3p7V5v0AE+NacP754T/D5kJe6xGpaT6wjTlQJScGzXzVZWhLHk4j2EFemLe
+	hc/+pHm5ToDtnXN6q48ztEJUFgO2XzKsaLLbsHMlodS+buacbNnKca6BOv/Xa/uoVrb4
+	hd3I+PRbGnehEt69tOvT+Kv8Nc2cMn+4v6rDQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=Oljc67neCeVbF6oNRkdL4S5NddTb86ibYxG62Pd6wN18yvyR/dxy0z1KlTnuYxWhBX
+	ARLH4wY0ERrjWewFze93YPTt4K70k2OJMy3Jb5eArav1im3IkOhwMzPKJ7falt2x85lz
+	Kj7cOEjxSE1f9OLGAeQT36DE/apCAgCM2HoIg=
+Received: by 10.103.90.10 with SMTP id s10mr1280461mul.64.1243248519772;
+	Mon, 25 May 2009 03:48:39 -0700 (PDT)
+Received: from localhost (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id j10sm16950621muh.45.2009.05.25.03.48.39
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 25 May 2009 03:48:39 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@openembedded.org
+Date: Mon, 25 May 2009 13:48:35 +0300
+Message-Id: <1243248515-28181-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <gvdrl3$h2c$1@ger.gmane.org>
+References: <gvdrl3$h2c$1@ger.gmane.org>
+Subject: [PATCH] udev: include udev-utils into udev rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,40 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 10:39:04 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 25 May 2009 10:56:54 -0000
 
-On Mon, 2009-05-25 at 12:54 +0300, Ihar Hrachyshka wrote:
-> On Mon, May 25, 2009 at 12:25 PM, Marcin Juszkiewicz
-> <marcin@juszkiewicz.com.pl> wrote:
-> > Dnia niedziela, 24 maja 2009 o 20:33:05 Ihar Hrachyshka napisa=C5=82(a)=
-:
-> >> The reason for the move is that udevadm binary is executed from udev
-> >> init.d script.
-> >
-> > NACK, NACK, NACK - udevadm is also udevinfo and is used by HAL. Your
-> > patch will make my mdev images not working properly because I would nee=
-d
-> > to install mdev and udev to get HAL working and then find a way to not
-> > run udev at boot time (even after package upgrades).
->=20
-> I tried to understand your complain (really) but don't get it. What do
-> you mean when saying "udevadm is also udevinfo and is used by HAL"?
-> And also please provide your solution for the problem of broken images
-> with unfuctional udev subsystem.
+The reason for the move is that udevadm binary is executed from udev
+init.d script.
 
-I think he's saying that udevadm is needed by HAL for correct operation,
-even if you're using mdev instead of udev itself.
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ recipes/udev/udev_141.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-It looks like udev used to Depend on udev-utils due to the existence
-of /sbin/udevsettle in version 124.  But, in version 141, that symlink
-has gone away and hence the dependency is no longer created.  The right
-fix is probably to add an explicit RDEPENDS_${PN} +=3D "udev-utils" or
-some such.
-
-p.
-
+diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+index 7e26798..068d23c 100644
+--- a/recipes/udev/udev_141.bb
++++ b/recipes/udev/udev_141.bb
+@@ -6,7 +6,10 @@ LICENSE = "GPL"
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+ 
+-PR = "r7"
++PR = "r8"
++
++# needed for init.d script
++RDEPENDS += "udev-utils"
+ 
+ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+ 	   file://mount.blacklist \
+-- 
+1.6.3.1
 
 
 
