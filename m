@@ -1,31 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.135.220.2] (helo=mx1.suse.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M8ZMM-0007KM-5C
-	for openembedded-devel@openembedded.org; Mon, 25 May 2009 14:32:54 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M8ZEa-0003bj-Ed
-	for openembedded-devel@openembedded.org; Mon, 25 May 2009 12:24:52 +0000
-Received: from iap-pxy-mow1.siemens.ru ([212.248.25.26])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 25 May 2009 12:24:52 +0000
-Received: from dbaryshkov by iap-pxy-mow1.siemens.ru with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 25 May 2009 12:24:52 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Mon, 25 May 2009 12:24:41 +0000 (UTC)
-Message-ID: <gve2m9$cuo$2@ger.gmane.org>
-References: <d1b08f940905250229o2482fda0l7ec6e57804542665@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: iap-pxy-mow1.siemens.ru
-User-Agent: Pan/0.132 (Waxed in Black)
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC][Zaurus] (Re)move obsolete kernels
+	(envelope-from <mhrusecky@suse.cz>) id 1M8ZXH-0007qT-4U
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 May 2009 14:44:11 +0200
+Received: from relay1.suse.de (mail2.suse.de [195.135.221.8])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.suse.de (Postfix) with ESMTP id D8619749C2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 May 2009 14:36:09 +0200 (CEST)
+Date: Mon, 25 May 2009 14:36:05 +0200
+From: Michal Hrusecky <mhrusecky@suse.cz>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090525123605.GA26583@misibook.miska.isageek.net>
+MIME-Version: 1.0
+X-Operating-System: WindowsKiller Linux
+User-Agent: Mutt - the best e-mail client in the world
+Subject: [PATCH] linux-hackndev: fixed SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,21 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 12:32:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 25 May 2009 12:44:11 -0000
+X-Groupsio-MsgNum: 10725
+Content-Type: multipart/mixed; boundary="CE+1k2dSO48ffgeK"
+Content-Disposition: inline
 
-Andrea Adami wrote:
+--CE+1k2dSO48ffgeK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> This would lead to unbuildability of  'sharprom-compatible'
-> distro...which noone seems to be using now in 2009.
+Hi,
 
-Used two or three months ago.
+structure on our server was changed, sou we've got different URI now.
 
 -- 
-With best wishes
-Dmitry
+Michal Hrusecky
+
+--CE+1k2dSO48ffgeK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="linux-hnd.patch"
+
+From ac5f1e8010ce665c54a4fd729c99eea69898e197 Mon Sep 17 00:00:00 2001
+From: Michal Hrusecky <Michal@hrusecky.net>
+Date: Sun, 24 May 2009 20:17:08 +0200
+Subject: [PATCH] linux-hackndev-2.6: fixing SRC_URI
+
+---
+ recipes/linux/linux-hackndev-2.6_git.bb |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/recipes/linux/linux-hackndev-2.6_git.bb b/recipes/linux/linux-hackndev-2.6_git.bb
+index 71e1235..2f9f902 100644
+--- a/recipes/linux/linux-hackndev-2.6_git.bb
++++ b/recipes/linux/linux-hackndev-2.6_git.bb
+@@ -6,9 +6,8 @@ PR = "r14"
+ 
+ COMPATIBLE_MACHINE = "(palmld|palmtc|palmtt3|palmtt5|palmtx|palmz31|palmz72|palmt650)"
+ 
+-SRC_URI = "git://git.hackndev.com/linux-hnd;protocol=git;tag=master \
+-	   file://defconfig"
+-
++SRC_URI = "git://git.hackndev.com/hackndev/linux-hnd.git;protocol=git;tag=master \
++           file://defconfig "
+ S = "${WORKDIR}/git"
+ 
+ K_MAJOR = "2"
+-- 
+1.6.3.1
 
 
-
-
+--CE+1k2dSO48ffgeK--
