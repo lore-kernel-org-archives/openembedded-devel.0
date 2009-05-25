@@ -1,23 +1,23 @@
-Received: from [82.130.70.14] (helo=XSMTP0.ethz.ch)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sebastian@sspaeth.de>) id 1M8Zx1-0000Rb-U6
+	(envelope-from <philb@gnu.org>) id 1M8dA1-0004nY-2D
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 15:10:47 +0200
-Received: from xfe0.d.ethz.ch ([82.130.124.40]) by XSMTP0.ethz.ch with
-	Microsoft SMTPSVC(6.0.3790.3959); Mon, 25 May 2009 15:02:48 +0200
-Received: from [82.130.121.195] ([82.130.121.195]) by xfe0.d.ethz.ch over TLS
-	secured channel with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 25 May 2009 15:02:48 +0200
-Message-ID: <4A1A96F6.5030001@sspaeth.de>
-Date: Mon, 25 May 2009 15:02:46 +0200
-From: Sebastian Spaeth <sebastian@sspaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-MIME-Version: 1.0
+	Mon, 25 May 2009 18:36:25 +0200
+Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M8d2E-00054u-Ui
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 May 2009 17:28:23 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 25 May 2009 13:02:48.0312 (UTC)
-	FILETIME=[1A6EE780:01C9DD39]
-Subject: self introduction / request for commit access
+In-Reply-To: <d1b08f940905250229o2482fda0l7ec6e57804542665@mail.gmail.com>
+References: <d1b08f940905250229o2482fda0l7ec6e57804542665@mail.gmail.com>
+Date: Mon, 25 May 2009 17:28:20 +0100
+Message-Id: <1243268900.4869.47.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [RFC][Zaurus] (Re)move obsolete kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,30 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 13:10:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 25 May 2009 16:36:25 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello all,
+On Mon, 2009-05-25 at 11:29 +0200, Andrea Adami wrote:
+> I was testing a build for some Zaurus models (akita,spitz) and
+> re-discovered an old issue (oebug 4784):
+> 
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
+> 'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' but it wasn't found in any
+> PACKAGE or RPROVIDES variables
+> NOTE: Runtime target 'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' is
+> unbuildable, removing...
+> Missing or unbuildable dependency chain was:
+> ['virtual/arm-angstrom-linux-gnueabi-gcc-2.95']
+> 
+> The c7x0 model is already 'fixed' - no error
+> We know the error is not fatal but still...so, my proposal is to move
+> the old stuff to 'obsolete' or to patch the recipes as done for c7x0
+> (see a.m. bug).
+> This would lead to unbuildability of  'sharprom-compatible'
+> distro...which noone seems to be using now in 2009.
 
-sorry for basically copying mrmoku's introduction email, but I'm in the
-same situation as he is :). My name is Sebastian 'spaetz' Spaeth and I
-participate in the development of SHR (shr-project.org). (personal web
-site sspaeth.de)
+I'm not quite sure what the issue is here.  Are you saying that you see
+this diagnostic about gcc-2.95 even when the kernel that needs it isn't
+selected for building?  If so, that seems like it would be a bitbake bug
+and should be fixed as such.  (The fact that it's showing an empty list
+for the dependent packages does indicate that something is a bit wrong
+in bitbake, anyway.)
 
-Until some day ago we were building our distro with the help of an OE
-overlay. Now we are happy to be a 'full' member of the OE distro family.
-I am helping to bump package versions and apply patches to  fix build
-issues for some recipe in SHR, it would be very helpfull, if I would
-have commit access to the OE git repo. (SHR-import branch)
+p.
 
-If you want to check out some OE related stuff I did for SHR you can
-check our overlay repository at
-http://git.shr-project.org/git/?p=shr-overlay.git;a=summary
 
-I'll get up to speed on the OE commit policies before I meddle with
-stuff, and will likely be restricted to minor package bumps and build fixes.
-
-spaetz
 
 
