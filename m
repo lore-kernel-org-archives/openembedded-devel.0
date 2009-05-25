@@ -1,38 +1,47 @@
-Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
+Received: from [209.85.132.244] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8fGq-00049l-8T
+	(envelope-from <otavio.salvador@gmail.com>) id 1M8fUK-0004ok-MX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 20:51:36 +0200
-Received: by fxm20 with SMTP id 20so3322403fxm.12
+	Mon, 25 May 2009 21:05:32 +0200
+Received: by an-out-0708.google.com with SMTP id b6so1898289ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2009 11:43:33 -0700 (PDT)
+	Mon, 25 May 2009 11:57:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=TDZxqe6Gj63VJFtuXIuTxKN6HihraFAWh769QCJrVgQ=;
-	b=Xm4pRw2M4U7vqsxqWlyZrwhO5EB3FkNBC3JH2BHUU0fC3xf8lpT+ApaDJ/Lxa4Pcqb
-	Q51w1ewQex0XXvw4TLtTjhLICzlCWvbELvIHkIsEl01OI2cmYEz2YQS7u8H0IugSR4ER
-	oXbyw9sEWF8a8T28TYazmuZxICjrqIfe1Q5lA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=otQNC0GxKIIiM3D8yx4W1/ahjtL5ndcwjMsLLDJ+RjrOshnQwPTSbAyz1QCDeYGOhu
-	72r8TqC4o2mDXGY8+bHHPwSEKlRdBIXz45vCrg3OM6R2jQ3Y9KxtyCCH5Hz841fDTYmN
-	ohiyIKM0xTgLwvJGGaC8Ospidx/3sLU/jdNHk=
+	bh=Txe44dh6wlmevq4kDBhwh6ISBVu0+P1fNa0jmv5KIuU=;
+	b=B8YKEowp7UEypoLlMBDXEBTY5+2bYQrWFZIdiDNCCrA2ND5iB2kGiENhdFItRiIRw5
+	Y7X4uxJPTjHuo2R6CCTIN1vhw+XL1jBgx2UOhokFO39Bw+PWXjDW3bSDKoJnpA7w6Htx
+	syEz9kYEuzLvutJcMb3Q5bWb2ceBbMRybTw3A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=dDSlq/5gi3Pwj/okTw9ez6KVfw1nQqUsUeDpG9GuAvqPFWI0+zUskdxhPQok8wyDMY
+	3fB7NNtub1e1bce2tyOIlXdjfWI5jY/J+Uye0Fk9XmSjC66tiPznKL1AP2AHFOFBEYz/
+	XwjStxUEUpbOF8YbHNirgkhw0C5Fovzw/vjBg=
 MIME-Version: 1.0
-Received: by 10.103.105.1 with SMTP id h1mr3870597mum.13.1243277013057; Mon, 
-	25 May 2009 11:43:33 -0700 (PDT)
-In-Reply-To: <be7a9f3d0905250928h62ec5d0ev2b7103c5be4abb5a@mail.gmail.com>
-References: <1243248515-28181-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1243248679-28230-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<gvduim$pdi$1@ger.gmane.org>
-	<be7a9f3d0905250928h62ec5d0ev2b7103c5be4abb5a@mail.gmail.com>
-Date: Mon, 25 May 2009 21:43:33 +0300
-Message-ID: <fce2a370905251143td440c67kb6ed67897e4e69d5@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.227.18 with SMTP id z18mr13024350ang.67.1243277851085; 
+	Mon, 25 May 2009 11:57:31 -0700 (PDT)
+In-Reply-To: <1243272731.4869.59.camel@lenovo.internal.reciva.com>
+References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1243189985-19060-2-git-send-email-ihar.hrachyshka@gmail.com>
+	<200905251125.45665.marcin@juszkiewicz.com.pl>
+	<fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
+	<1243247426.4869.23.camel@lenovo.internal.reciva.com>
+	<fce2a370905250355h5edd949cq40bcb52882e1e623@mail.gmail.com>
+	<be7a9f3d0905250931wbedccdfg9f8b0a0f562b6aab@mail.gmail.com>
+	<1243270407.4869.57.camel@lenovo.internal.reciva.com>
+	<be7a9f3d0905250959i19d01ebbr1b3b065f2135e294@mail.gmail.com>
+	<1243272731.4869.59.camel@lenovo.internal.reciva.com>
+Date: Mon, 25 May 2009 15:57:31 -0300
+X-Google-Sender-Auth: ecfee763c8fd64f7
+Message-ID: <be7a9f3d0905251157t7178a81ah22ff6ab699e2c5f2@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] udev: include udev-utils into udev rootfs
+Subject: Re: [PATCH 2/2] udev: moved udevadm to the main udev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,49 +55,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 18:51:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 25 May 2009 19:05:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 25, 2009 at 7:28 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> Hello,
->
-> NACK!
->
-> On Mon, May 25, 2009 at 8:14 AM, Koen Kooi <k.kooi@student.utwente.nl> wr=
-ote:
->> On 25-05-09 12:51, Ihar Hrachyshka wrote:
->>>
->>> The reason for the move is that udevadm binary is executed from udev
->>> init.d script.
->
-> Wouldn't be better to move udevadm to udev binary?
->
-> It makes non-sense to have another package installed by default and
-> bring more things then required. If it is used by init.d, and this is
-> ok, so please move the required binary for the udev package and that's
-> solved.
+Hello,
 
-We *already* clarified the reasons to do the exact thing (in another
-thread): some people (f.e. with mdev rather udev) wants to be able to
-install udev stuff needed by HAL but with no udev as a default device
-manager.
+On Mon, May 25, 2009 at 2:32 PM, Phil Blundell <philb@gnu.org> wrote:
+> On Mon, 2009-05-25 at 13:59 -0300, Otavio Salvador wrote:
+>> Hello,
+>>
+>> On Mon, May 25, 2009 at 1:53 PM, Phil Blundell <philb@gnu.org> wrote:
+>> > On Mon, 2009-05-25 at 13:31 -0300, Otavio Salvador wrote:
+>> [...]
+>> >> I belive that the right way to fix it is add a binary package only fo=
+r
+>> >> udevadm
+>> >
+>> > That's pretty much what udev-utils is: it doesn't contain any binaries
+>> > apart from udevadm.
+>>
+>> In this case the binary package is wrong.
+>
+> Why so?
 
+I think udev-udevadm is more sound for me.
+
+>> >> and make udev depends on it and mdev suggests it.
+>> >
+>> > Mdev itself doesn't have any use for udevadm, so having mdev Recommend
+>> > udev-utils wouldn't be the right thing; this would just be a waste of
+>> > space for people who are using mdev without HAL (which, I suspect, is
+>> > actually the majority of mdev users).
+>>
+>> Agreed. But AFAIK suggested packages do not get installed by bitbake by =
+default.
 >
-> My 2c.
->
-> --
-> Otavio Salvador =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0O.S. Systems
-> E-mail: otavio@ossystems.com.br =C2=A0http://www.ossystems.com.br
-> Mobile: +55 53 9981-7854 =C2=A0 =C2=A0 =C2=A0 =C2=A0 http://projetos.ossy=
-stems.com.br
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Ah yes, sorry, I misread your first mail. =A0Having mdev Suggest
+> udev-utils would indeed be harmless since you're right, ipkg doesn't
+> install suggestions automatically. =A0It would still be fairly pointless
+> though since nothing in mdev makes any use of udev-utils.
+
+Or maybe hal ought to depends on udev-(utils|udevadm) instead ;-)
+
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
