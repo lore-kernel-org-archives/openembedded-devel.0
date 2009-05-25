@@ -1,20 +1,32 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [74.125.46.157] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M8gwE-0002Qp-CJ
+	(envelope-from <otavio.salvador@gmail.com>) id 1M8hDh-0003Tc-QE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 22:38:27 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M8goE-0005JN-T8
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 21:30:14 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <be7a9f3d0905251322h27b36f0eyc780895bb05b50d7@mail.gmail.com>
+	Mon, 25 May 2009 22:56:29 +0200
+Received: by yw-out-1718.google.com with SMTP id 9so1813447ywk.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 May 2009 13:48:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=wk+iWRWZlkLSHiUiGVuJjBP+r26rJzBrvZEY+/06GFk=;
+	b=I0tm7qRsMWJug2dEajeHV5aNovRz2C32jF6Vu/knZpm3TBEPVBm0lM9mDCGaZcx6M8
+	V8+9CeArj0whX7inQ+aCV9zLgUmyRKDsYDHw8ig5UjssKPTS/HkPB4eyg4gG/8dXqMh8
+	2MLom+v17BRxed7VCY2BeqH/z3dr8B65mjQ8s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=NccQ5O01EvZMpUADfQNXA3oDB39CeOYeWpAVBuiOnL834u2TxqEdYwHQRvN8x/F4we
+	4/fZRt2lo2Lnq8nh2NX1TSioeFFJwUIGgOoWivdvtAo1KI50hrw2gmH4h/aP4sTPiMZE
+	L/kl2d5W4Px2Qga9fd8aDiqFeq+O3ERfnpgKI=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.207.17 with SMTP id e17mr12684411ang.137.1243284504735; 
+	Mon, 25 May 2009 13:48:24 -0700 (PDT)
+In-Reply-To: <fce2a370905251329t2cd85ef1m943dc9a61ba7f8a8@mail.gmail.com>
 References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
-	<1243247426.4869.23.camel@lenovo.internal.reciva.com>
 	<fce2a370905250355h5edd949cq40bcb52882e1e623@mail.gmail.com>
 	<be7a9f3d0905250931wbedccdfg9f8b0a0f562b6aab@mail.gmail.com>
 	<1243270407.4869.57.camel@lenovo.internal.reciva.com>
@@ -23,10 +35,12 @@ References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
 	<be7a9f3d0905251157t7178a81ah22ff6ab699e2c5f2@mail.gmail.com>
 	<1243281147.4869.64.camel@lenovo.internal.reciva.com>
 	<be7a9f3d0905251322h27b36f0eyc780895bb05b50d7@mail.gmail.com>
-Date: Mon, 25 May 2009 21:29:55 +0100
-Message-Id: <1243283395.4869.67.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+	<fce2a370905251329t2cd85ef1m943dc9a61ba7f8a8@mail.gmail.com>
+Date: Mon, 25 May 2009 17:48:24 -0300
+X-Google-Sender-Auth: 8e55badb9d9bc738
+Message-ID: <be7a9f3d0905251348y1a4753dfh2393e7207eb1d540@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH 2/2] udev: moved udevadm to the main udev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,24 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 20:38:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 25 May 2009 20:56:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-05-25 at 17:22 -0300, Otavio Salvador wrote:
-> Well, I think it makes sense. What does not make sense to me is to
-> install udevtest and udevinfo in a system that doesn't use them.
-> 
-> FILES_udev-utils = "${usrbindir}/udevinfo ${sbindir}/udevadm
-> ${usrbindir}/udevtest"
+Hello,
 
-I don't know what udevtest is for but, notwithstanding its presence in
-FILES, no recent version of udev (at least, not 124 or 141) seems to
-ship it.  udevinfo is just a symlink to udevadm in -124, and seems to be
-missing entirely in -141, so again that doesn't seem like a big deal.
+On Mon, May 25, 2009 at 5:29 PM, Ihar Hrachyshka
+<ihar.hrachyshka@gmail.com> wrote:
+> Do you suggest splitting uboot-utils like "uboot-udevadm +
+> uboot-utils" where uboot-utils contains udevinfo and udevtest? Or do
+> you suggest creating separate packages for every udev* binary? What's
+> your point?
 
-p.
+uboot-udevadm + uboot-utils
 
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
