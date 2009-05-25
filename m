@@ -1,34 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M8YGR-0005xb-E7
-	for openembedded-devel@openembedded.org; Mon, 25 May 2009 13:22:43 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M8Y8i-0000QO-7E
-	for openembedded-devel@openembedded.org; Mon, 25 May 2009 11:14:44 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 25 May 2009 11:14:44 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 25 May 2009 11:14:44 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 25 May 2009 13:14:30 +0200
-Message-ID: <gvduim$pdi$1@ger.gmane.org>
-References: <1243248515-28181-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1243248679-28230-1-git-send-email-ihar.hrachyshka@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
-In-Reply-To: <1243248679-28230-1-git-send-email-ihar.hrachyshka@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] udev: include udev-utils into udev rootfs
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8YKE-00065Y-Rr
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 May 2009 13:26:40 +0200
+Received: by bwz19 with SMTP id 19so3031221bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 May 2009 04:18:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=20OnF1n2LPEmBYAy1npTnxig/ea5ZLvnP4r+Ti5cYiQ=;
+	b=hpLDebEcjJdeW+5k06FTZxgQGrFryT5xeSelzcMxL5dyR3xBUE0Cyq4O4cvIy9F9zy
+	o/slpO3vSdd8ZCIzOYKszhmzOlyJ1SW0VJqq3cwd2mno8aR+wwBHJQnR93ayIyElerfP
+	UFyEr7Y03OrFMaLu5UpnmEDA6T0XVHtqE40uM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=k/xQpD8500bNvWwikjZ1nENE23TaN4asJwV8QMvs5rbaJdWf41OxT6/IgzZwGIlJJ5
+	F2RLlK6TAL9rzWbLPaByVY4cSsLXMkTHK2w2X94nqumU6G6rE7x3dS8TNiCHN3ghBMeK
+	49CEuXsIAnlulcVzEZW2joViGZCP2RvEpJ7vM=
+Received: by 10.103.222.1 with SMTP id z1mr3636818muq.44.1243250317292;
+	Mon, 25 May 2009 04:18:37 -0700 (PDT)
+Received: from localhost (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id j9sm5027201mue.21.2009.05.25.04.18.36
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 25 May 2009 04:18:36 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 25 May 2009 14:18:33 +0300
+Message-Id: <1243250313-10392-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <1243246822.4869.19.camel@lenovo.internal.reciva.com>
+References: <1243246822.4869.19.camel@lenovo.internal.reciva.com>
+Subject: [PATCH] gnome.bbclass: remove unneeded scrollkeeper stuff from gnome packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,40 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 11:22:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 May 2009 11:26:43 -0000
 
-On 25-05-09 12:51, Ihar Hrachyshka wrote:
-> The reason for the move is that udevadm binary is executed from udev
-> init.d script.
+Scrollkeeper generates its XML database for every package when
+installing it. The problem is that while building it sees only specific
+package scrollkeeper stuff so we get wrong scrollkeeper xml file
+generated for every gnome.bbclass package. Including the file into every
+gnome package results in package contents conflicts.
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+This patch removes a quick hack made by Koen with previous commit.
 
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ classes/gnome.bbclass |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
 
->
-> Signed-off-by: Ihar Hrachyshka<ihar.hrachyshka@gmail.com>
-> ---
->   recipes/udev/udev_141.bb |    5 ++++-
->   1 files changed, 4 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
-> index 7e26798..068d23c 100644
-> --- a/recipes/udev/udev_141.bb
-> +++ b/recipes/udev/udev_141.bb
-> @@ -6,7 +6,10 @@ LICENSE = "GPL"
->   # Untested
->   DEFAULT_PREFERENCE = "-1"
->
-> -PR = "r7"
-> +PR = "r8"
-> +
-> +# needed for init.d script
-> +RDEPENDS_udev += "udev-utils"
->
->   SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
->   	   file://mount.blacklist \
-
+diff --git a/classes/gnome.bbclass b/classes/gnome.bbclass
+index d2ca739..da88884 100644
+--- a/classes/gnome.bbclass
++++ b/classes/gnome.bbclass
+@@ -17,9 +17,11 @@ inherit autotools gtk-icon-cache pkgconfig gconf mime
+ 
+ AUTOTOOLS_STAGE_PKGCONFIG = "1"
+ 
+-PACKAGES =+ "${PN}-scrollkeeper-leftovers"
+-FILES_${PN}-scrollkeeper-leftovers = "${localstatedir}/lib/scrollkeeper"
+-
+ gnome_stage_includes() {
+ 	autotools_stage_includes
+ }
++
++do_install_append() {
++	rm -rf ${D}${localstatedir}/lib/scrollkeeper/*
++}
++
+-- 
+1.6.3.1
 
 
 
