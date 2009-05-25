@@ -1,37 +1,32 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8YKE-00065Y-Rr
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 13:26:40 +0200
-Received: by bwz19 with SMTP id 19so3031221bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2009 04:18:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=20OnF1n2LPEmBYAy1npTnxig/ea5ZLvnP4r+Ti5cYiQ=;
-	b=hpLDebEcjJdeW+5k06FTZxgQGrFryT5xeSelzcMxL5dyR3xBUE0Cyq4O4cvIy9F9zy
-	o/slpO3vSdd8ZCIzOYKszhmzOlyJ1SW0VJqq3cwd2mno8aR+wwBHJQnR93ayIyElerfP
-	UFyEr7Y03OrFMaLu5UpnmEDA6T0XVHtqE40uM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=k/xQpD8500bNvWwikjZ1nENE23TaN4asJwV8QMvs5rbaJdWf41OxT6/IgzZwGIlJJ5
-	F2RLlK6TAL9rzWbLPaByVY4cSsLXMkTHK2w2X94nqumU6G6rE7x3dS8TNiCHN3ghBMeK
-	49CEuXsIAnlulcVzEZW2joViGZCP2RvEpJ7vM=
-Received: by 10.103.222.1 with SMTP id z1mr3636818muq.44.1243250317292;
-	Mon, 25 May 2009 04:18:37 -0700 (PDT)
-Received: from localhost (cpmsq.epam.com [217.21.56.2])
-	by mx.google.com with ESMTPS id j9sm5027201mue.21.2009.05.25.04.18.36
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 25 May 2009 04:18:36 -0700 (PDT)
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 May 2009 14:18:33 +0300
-Message-Id: <1243250313-10392-1-git-send-email-ihar.hrachyshka@gmail.com>
-X-Mailer: git-send-email 1.6.3.1
-In-Reply-To: <1243246822.4869.19.camel@lenovo.internal.reciva.com>
-References: <1243246822.4869.19.camel@lenovo.internal.reciva.com>
-Subject: [PATCH] gnome.bbclass: remove unneeded scrollkeeper stuff from gnome packages.
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M8YMg-0006A8-83
+	for openembedded-devel@openembedded.org; Mon, 25 May 2009 13:29:11 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M8YEw-0000fj-L2
+	for openembedded-devel@openembedded.org; Mon, 25 May 2009 11:21:10 +0000
+Received: from iap-pxy-mow1.siemens.ru ([212.248.25.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 25 May 2009 11:21:10 +0000
+Received: from dbaryshkov by iap-pxy-mow1.siemens.ru with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 25 May 2009 11:21:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Date: Mon, 25 May 2009 11:21:00 +0000 (UTC)
+Message-ID: <gvduus$cuo$1@ger.gmane.org>
+References: <fce2a370905250207g211af74fg29c1f0cd2593a4ae@mail.gmail.com>
+	<1243246822.4869.19.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: iap-pxy-mow1.siemens.ru
+User-Agent: Pan/0.132 (Waxed in Black)
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] gnome.bbclass change broke lots of	package	dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,42 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 11:26:43 -0000
+X-List-Received-Date: Mon, 25 May 2009 11:29:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Scrollkeeper generates its XML database for every package when
-installing it. The problem is that while building it sees only specific
-package scrollkeeper stuff so we get wrong scrollkeeper xml file
-generated for every gnome.bbclass package. Including the file into every
-gnome package results in package contents conflicts.
+Phil Blundell wrote:
 
-This patch removes a quick hack made by Koen with previous commit.
+> On Mon, 2009-05-25 at 12:07 +0300, Ihar Hrachyshka wrote:
+>> @@ -17,6 +17,9 @@ inherit autotools gtk-icon-cache pkgconfig gconf mime
+>> 
+>>  AUTOTOOLS_STAGE_PKGCONFIG = "1"
+>> 
+>> +PACKAGES =+ "${PN}-scrollkeeper-leftovers"
+>> +FILES_${PN}-scrollkeeper-leftovers =
+>> "${localstatedir}/lib/scrollkeeper" +
+>>  gnome_stage_includes() {
+>>         autotools_stage_includes
+>>  }
+>> 
+>> As we can see, there is now ${PN}-scrollkeeper-leftovers package for
+>> every recipe that inherited gnome.bbclass. And this -leftovers package
+>> is in the current dependency chains (at least for qt4-embedded-dev
+>> package).
+> 
+> Where is your dependency on -scrollkeeper-leftovers coming from? Nothing
+> in the patch that you quoted looks like it ought to be causing that.
+> 
+> That said, the patch does look a bit bizarre: as a general rule we don't
+> package things from ${localstatedir} since lots of targets have that as
+> a ramdisk.  It isn't obvious to me what this is going to achieve.
 
-Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
----
- classes/gnome.bbclass |    8 +++++---
- 1 files changed, 5 insertions(+), 3 deletions(-)
+I can confirm the dependency part of this report. It's causing build
+failures for me: see bug 5123. I've traced this to strange dependancies on
+pango-scrollkeeper-leftovers from most of pango packages.
 
-diff --git a/classes/gnome.bbclass b/classes/gnome.bbclass
-index d2ca739..da88884 100644
---- a/classes/gnome.bbclass
-+++ b/classes/gnome.bbclass
-@@ -17,9 +17,11 @@ inherit autotools gtk-icon-cache pkgconfig gconf mime
- 
- AUTOTOOLS_STAGE_PKGCONFIG = "1"
- 
--PACKAGES =+ "${PN}-scrollkeeper-leftovers"
--FILES_${PN}-scrollkeeper-leftovers = "${localstatedir}/lib/scrollkeeper"
--
- gnome_stage_includes() {
- 	autotools_stage_includes
- }
-+
-+do_install_append() {
-+	rm -rf ${D}${localstatedir}/lib/scrollkeeper/*
-+}
-+
+
+
 -- 
-1.6.3.1
+With best wishes
+Dmitry
+
 
 
 
