@@ -1,23 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1M8XQ3-0006Cw-TW
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 12:28:36 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M8XID-0008VE-J9
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 11:20:30 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fce2a370905250207g211af74fg29c1f0cd2593a4ae@mail.gmail.com>
-References: <fce2a370905250207g211af74fg29c1f0cd2593a4ae@mail.gmail.com>
-Date: Mon, 25 May 2009 11:20:22 +0100
-Message-Id: <1243246822.4869.19.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M8XU7-0006Ma-Tk
+	for openembedded-devel@openembedded.org; Mon, 25 May 2009 12:32:50 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M8XMN-0006h9-Ob
+	for openembedded-devel@openembedded.org; Mon, 25 May 2009 10:24:47 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 25 May 2009 10:24:47 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 25 May 2009 10:24:47 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 25 May 2009 12:24:32 +0200
+Message-ID: <gvdrl3$h2c$1@ger.gmane.org>
+References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>	<1243189985-19060-2-git-send-email-ihar.hrachyshka@gmail.com>	<200905251125.45665.marcin@juszkiewicz.com.pl>
+	<fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [RFC] gnome.bbclass change broke lots of package	dependencies
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
+In-Reply-To: <fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 2/2] udev: moved udevadm to the main udev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,58 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 10:28:37 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 May 2009 10:32:55 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Mon, 2009-05-25 at 12:07 +0300, Ihar Hrachyshka wrote:
-> @@ -17,6 +17,9 @@ inherit autotools gtk-icon-cache pkgconfig gconf mime
-> 
->  AUTOTOOLS_STAGE_PKGCONFIG = "1"
-> 
-> +PACKAGES =+ "${PN}-scrollkeeper-leftovers"
-> +FILES_${PN}-scrollkeeper-leftovers = "${localstatedir}/lib/scrollkeeper"
-> +
->  gnome_stage_includes() {
->         autotools_stage_includes
->  }
-> 
-> As we can see, there is now ${PN}-scrollkeeper-leftovers package for
-> every recipe that inherited gnome.bbclass. And this -leftovers package
-> is in the current dependency chains (at least for qt4-embedded-dev
-> package).
+On 25-05-09 11:54, Ihar Hrachyshka wrote:
+> On Mon, May 25, 2009 at 12:25 PM, Marcin Juszkiewicz
+> <marcin@juszkiewicz.com.pl>  wrote:
+>> Dnia niedziela, 24 maja 2009 o 20:33:05 Ihar Hrachyshka napisał(a):
+>>> The reason for the move is that udevadm binary is executed from udev
+>>> init.d script.
+>>
+>> NACK, NACK, NACK - udevadm is also udevinfo and is used by HAL. Your
+>> patch will make my mdev images not working properly because I would need
+>> to install mdev and udev to get HAL working and then find a way to not
+>> run udev at boot time (even after package upgrades).
+>
+> I tried to understand your complain (really) but don't get it. What do
+> you mean when saying "udevadm is also udevinfo and is used by HAL"?
+> And also please provide your solution for the problem of broken images
+> with unfuctional udev subsystem.
 
-Where is your dependency on -scrollkeeper-leftovers coming from?
-Nothing in the patch that you quoted looks like it ought to be causing
-that.
+If you want to have a system that uses mdev as /dev manager and hal, you 
+need to install udevadm to make hal happy. I think the solution is to do 
+something like this:
 
-That said, the patch does look a bit bizarre: as a general rule we don't
-package things from ${localstatedir} since lots of targets have that as
-a ramdisk.  It isn't obvious to me what this is going to achieve.
+RDEPENDS_udev += "udev-utils" in udev_141.bb
 
-> As for the 1st problem, I suggest adding ALLOW_EMPTY = "1" to
-> gnome.bbclass (it works for my current setup, and if you will approve
-> the change then I'll send the patch immediately).
+regards,
 
-No, this would be a poor solution since it will cause a mass of empty
-(and hence useless) packages to be generated.  It would be better to
-identify the place where the dependency on this package is generated,
-and suppress that at its source if the package is empty.
+Koen
 
-> As for the 2nd problem, there is a big question what should we do.
-> Revision bumping for every recipe that inherits gnome.bbclass is not
-> an elegant thing (though it will really push the change for all the
-> users). Maybe there is another, better way to handle such tasks. If
-> you know it please provide me with the info.
+PS: mdev users need to start thinking about how devicekit and 
+util-linux-ng will integrate into their systems, since the hal world 
+seems to be moving away from hal to libudev + util-linux-ng
 
-The right answer to this probably depends on the answer to what the
-patch was trying to accomplish in the first place.  It's possible that
-no rebuild is actually necessary for already-deployed packages if this
-is intended to deal with some fringe case that only occurs on particular
-targets or under rare circumstances.
+regards,
 
-p.
-
+Koen
 
 
 
