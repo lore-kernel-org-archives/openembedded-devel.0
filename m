@@ -1,32 +1,37 @@
-Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
+Received: from [209.85.220.172] (helo=mail-fx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1M8WcB-0007Iv-Te
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1M8X0V-0008KF-Pd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 May 2009 11:37:05 +0200
-Received: by bwz19 with SMTP id 19so2969853bwz.12
+	Mon, 25 May 2009 12:02:13 +0200
+Received: by fxm20 with SMTP id 20so3017107fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2009 02:29:02 -0700 (PDT)
+	Mon, 25 May 2009 02:54:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=roKxloDXPVjH/7IOrq+5E+kiCQ1JvIA/EeDdsd4N2/A=;
-	b=uEIdWFyj9yCzCKZ0K7OUkB/3xH87ZEp7G/URYvlOoUBpUMcXaV3xJ1K1lOBqSbdRC5
-	lGE6Cn0ie/9g2XZBxkAoZvHrTc3QotV+d9sbccDfr4ZsthRgT1uf84EZgn5Xx/3sU9+s
-	Bih9TA6ef9kzz2F2+PTvM8G6OoP9SPPyR7njM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=Lk1fk/6XPo0Lr+yMS8oeNmcCrLscH4iyrI/xvvk/heqPjzTLp/dTF7vSPoYln6itmY
-	hc2hUwpta68ViqHCA9zU86ncLWB80+ByeUZ1JEW/gXFPlDQbAmkHu8gg1eyEnkVNcX7O
-	O9Jc8j04zSwu5DnpR6O+rYYu1wfqyO5ZFlq7c=
+	bh=DeTnZ7nhAh491c8sh6cydaprOg1172sSDp1g+B5Czsg=;
+	b=AsWEwAxh1AGq3hJtdaQ9DmABr5yrTumtxsI3T91Hycgb2LMVatTle3CphfgrrfGntI
+	SIepZ6AVmbld0ETyRJiA+oOdsvUfx8y475f9/yK1Xb/YG5Qejfk6dk1Q3cgFRJzhE1IS
+	fHNPNOG4Z/NzA7uUAyeleqxU0XVE6XfogpaI8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=IhJfF5Ficm6YHOD4mY9mLjkH1JJrQyCsQ6yhqZXP5ytZaJkP7V9bKnFdE41QxzzHiW
+	mXcwseVL7RQ1wV21gN6PC7bHkisXKtOw0eCJGD++GniowhKXMEMXTN+h9SvKq4vwyS6c
+	AFtARB2go03kxvXriFXCK9vgcWnrJfw+TYFQg=
 MIME-Version: 1.0
-Received: by 10.223.103.194 with SMTP id l2mr3345705fao.55.1243243741944; Mon, 
-	25 May 2009 02:29:01 -0700 (PDT)
-Date: Mon, 25 May 2009 11:29:01 +0200
-Message-ID: <d1b08f940905250229o2482fda0l7ec6e57804542665@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+Received: by 10.103.167.14 with SMTP id u14mr3545512muo.38.1243245250484; Mon, 
+	25 May 2009 02:54:10 -0700 (PDT)
+In-Reply-To: <200905251125.45665.marcin@juszkiewicz.com.pl>
+References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1243189985-19060-2-git-send-email-ihar.hrachyshka@gmail.com>
+	<200905251125.45665.marcin@juszkiewicz.com.pl>
+Date: Mon, 25 May 2009 12:54:10 +0300
+Message-ID: <fce2a370905250254p4c51b706q399b14d9b0bb20e5@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [RFC][Zaurus] (Re)move obsolete kernels
+Subject: Re: [PATCH 2/2] udev: moved udevadm to the main udev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,33 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2009 09:37:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 May 2009 10:02:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I was testing a build for some Zaurus models (akita,spitz) and
-re-discovered an old issue (oebug 4784):
+On Mon, May 25, 2009 at 12:25 PM, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> Dnia niedziela, 24 maja 2009 o 20:33:05 Ihar Hrachyshka napisa=C5=82(a):
+>> The reason for the move is that udevadm binary is executed from udev
+>> init.d script.
+>
+> NACK, NACK, NACK - udevadm is also udevinfo and is used by HAL. Your
+> patch will make my mdev images not working properly because I would need
+> to install mdev and udev to get HAL working and then find a way to not
+> run udev at boot time (even after package upgrades).
 
-NOTE: Resolving any missing task queue dependencies
-ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
-'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' but it wasn't found in any
-PACKAGE or RPROVIDES variables
-NOTE: Runtime target 'virtual/arm-angstrom-linux-gnueabi-gcc-2.95' is
-unbuildable, removing...
-Missing or unbuildable dependency chain was:
-['virtual/arm-angstrom-linux-gnueabi-gcc-2.95']
+I tried to understand your complain (really) but don't get it. What do
+you mean when saying "udevadm is also udevinfo and is used by HAL"?
+And also please provide your solution for the problem of broken images
+with unfuctional udev subsystem.
 
-The c7x0 model is already 'fixed' - no error
-We know the error is not fatal but still...so, my proposal is to move
-the old stuff to 'obsolete' or to patch the recipes as done for c7x0
-(see a.m. bug).
-This would lead to unbuildability of  'sharprom-compatible'
-distro...which noone seems to be using now in 2009.
-
-Other options?
-
-Regards
-
-Andrea
+>
+> Regards,
+> --
+> JID: =C2=A0 =C2=A0 =C2=A0hrw@jabber.org
+> Website: =C2=A0http://marcin.juszkiewicz.com.pl/
+> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
