@@ -1,33 +1,33 @@
-Received: from [74.125.78.149] (helo=ey-out-1920.google.com)
+Received: from [74.125.78.145] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ainulindale@gmail.com>) id 1M8srz-0006yV-Mq
+	(envelope-from <ainulindale@gmail.com>) id 1M8ssH-0006yk-Ro
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 May 2009 11:23:15 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so2194740eyw.36
+	Tue, 26 May 2009 11:23:29 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so2194811eyw.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2009 02:14:46 -0700 (PDT)
+	Tue, 26 May 2009 02:15:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=6lbkGpxaPF4a/tcgoF8eVtpgKggbcNzX+dvHLZegolA=;
-	b=D9aDJ6k5IG0x+Ai/lDr8lFdov5g/+je9aePL6M0ReCFXzTKA/w1g0BShbPqqiyO+89
-	CFjLXTapMyvUusdWo6Rr2GxayM69CFb1PHTYeti/RzqIfZoNJRJS0JEgw6ZZuHmLD73g
-	FwaerfqopGIsj/CgykitO/ReJIUWzT2AJ3Y5s=
+	bh=XNcCOID484N9qinEP6AyioYdMNVi35S6dmOR7WtgHPc=;
+	b=OU7hGA2l1dzoizgTatFp/0/F5iCPQiwZTQOjihOY4pwkf6/F4MwFz148HFrXVM/rHX
+	6xikK/VGT4ckCn/5hX8Bn8J+OAOwbNDIejB7WADuo/++DvLhmI2zUd6NJKGoTjxpueBi
+	/aMW8mRW8H8kDGaDJY2TFT8RMgx3nB6SZD4MI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=R7Ask9Zv2qbzdqbmEp/eWO7aVCm3byMYtxbdlF11i+Fyl9p7sHCDP0LRcVU+96AJ3C
-	UB6lrQDcrZifrxYbKUqknGz7JV3JUUTyWC81M+lFcwgllI0+pZ7CObKx7zbrQmywWiHB
-	HWcn0fFqCdIpH9xpPffntMx7UcBjHfiBMnghc=
+	b=Mne+tmSnYB43My3xGXCY93/49SqTOanYjsz8+s//VXh4c+SDb9C4cOXdoQqa038OnO
+	R7SP706bDE/UwMi3LZWicgGaVr77JkkfdkQV/tFcHGEdM+sEVU5mO3qteQClQ7wHEjMd
+	wwmL4VxiNjyQKdnE1Yo19+dEV8BIRczpml7wM=
 MIME-Version: 1.0
-Received: by 10.216.1.202 with SMTP id 52mr3115324wed.15.1243329286477; Tue, 
-	26 May 2009 02:14:46 -0700 (PDT)
-In-Reply-To: <200905252149.15681.mickey@vanille-media.de>
-References: <200905251437.03660.mok@mnet-online.de>
-	<200905252149.15681.mickey@vanille-media.de>
-Date: Tue, 26 May 2009 11:14:46 +0200
-Message-ID: <76a8cde90905260214g3e7c9a94v29225ac2f77686d7@mail.gmail.com>
+Received: by 10.216.9.66 with SMTP id 44mr2998630wes.73.1243329304369; Tue, 26 
+	May 2009 02:15:04 -0700 (PDT)
+In-Reply-To: <200905252149.24581.mickey@vanille-media.de>
+References: <4A1A96F6.5030001@sspaeth.de>
+	<200905252149.24581.mickey@vanille-media.de>
+Date: Tue, 26 May 2009 11:15:04 +0200
+Message-ID: <76a8cde90905260215q516ff2a3t6a5d64a40104d9a3@mail.gmail.com>
 From: Julien Cassignol <ainulindale@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: self introduction / request for commit access
@@ -44,15 +44,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2009 09:24:18 -0000
+X-List-Received-Date: Tue, 26 May 2009 09:24:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 On Mon, May 25, 2009 at 9:49 PM, Michael 'Mickey' Lauer
 <mickey@vanille-media.de> wrote:
-> +1.
+> +1
 
-+1 as well!
++1 again.
 
 -- 
 Julien Cassignol
