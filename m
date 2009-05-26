@@ -1,35 +1,37 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1M8qNM-0001r2-Kj
+	(envelope-from <michael@sles10-64.ott.cti.com>) id 1M8qNR-0001rW-My
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 May 2009 08:43:05 +0200
+	Tue, 26 May 2009 08:43:10 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 226E94C012A;
-	Tue, 26 May 2009 02:35:00 -0400 (EDT)
+	by smtp.cbnco.com (Postfix) with ESMTP id 3F2654BFEED;
+	Tue, 26 May 2009 02:35:05 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 08709-05; Tue, 26 May 2009 02:35:00 -0400 (EDT)
+	with ESMTP id 08709-06; Tue, 26 May 2009 02:35:05 -0400 (EDT)
 Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id DAA644C0121; Tue, 26 May 2009 02:34:59 -0400 (EDT)
+	id 17C754BF70E; Tue, 26 May 2009 02:35:04 -0400 (EDT)
 X-Spam-Score: 
 X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
+X-Spam-Status: No, score=-3.8 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00,
+	UPPERCASE_25_50 autolearn=ham version=3.1.8
 Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id A3D084C00E8;
+	by smtp.cbnco.com (Postfix) with ESMTP id BA0474C011D;
 	Tue, 26 May 2009 02:34:56 -0400 (EDT)
 Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id B0D3041570; Tue, 26 May 2009 02:34:56 -0400 (EDT)
+	id C794D1AC4C0; Tue, 26 May 2009 02:34:56 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 May 2009 02:34:53 -0400
-Message-Id: <1243319696-16223-1-git-send-email-msmith@cbnco.com>
+Date: Tue, 26 May 2009 02:34:55 -0400
+Message-Id: <1243319696-16223-3-git-send-email-msmith@cbnco.com>
 X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <Pine.LNX.4.64.0905260228240.6446@juice.ott.cti.com>
+In-Reply-To: <1243319696-16223-2-git-send-email-msmith@cbnco.com>
 References: <Pine.LNX.4.64.0905260228240.6446@juice.ott.cti.com>
+	<1243319696-16223-1-git-send-email-msmith@cbnco.com>
+	<1243319696-16223-2-git-send-email-msmith@cbnco.com>
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH 1/4] Remove references to base_set_filespath() from recipes that don't need it.
+Subject: [PATCH 3/4] glibc/eglibc: remove calls to obsolete base_set_filespath()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,252 +45,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2009 06:43:05 -0000
+X-List-Received-Date: Tue, 26 May 2009 06:43:10 -0000
 
-These recipes are covered by the default FILESPATHPKG setting.
+Some recipes can use the default FILESPATHPKG, others need to override.
 
 Signed-off-by: Michael Smith <msmith@cbnco.com>
 ---
 
 Of these, the following were build tested:
+ recipes/glibc/glibc-initial.inc                  |    2 +-
+  (for glibc 2.6.1)
 
- recipes/db/db3-native_3.2.9.bb                     |    1 -
- .../e2fsprogs-libs/e2fsprogs-libs-native_1.41.2.bb |    1 -
- recipes/e2fsprogs/e2fsprogs-native_1.41.5.bb       |    1 -
- recipes/mysql/mysql_4.1.22.bb                      |    2 --
- recipes/recode/recode_3.6.bb                       |    7 ++-----
+The rest were not.
 
- recipes/e2tools/e2tools-native_0.0.16.bb           |    1 -
-   (this build was broken before, and is still broken -- seems
-    e2fsprogs-native isn't staging the include files for some reason)
+I think something might be dicey here: glibc-2.4 was being prepended
+to the FILESPATH in many recipes, including glibc-initial.inc (and still
+is -- I just converted it to FILESPATHPKG). It's at the start of the
+path, so for example glibc-2.4/blah.patch would override
+glibc-2.999/blah.patch for glibc-initial_2.999.
 
+So far there are no duplicate files between glibc-2.4 and the higher
+versions, so it hasn't bitten anybody yet.
 
-The rest were not:
+ recipes/glibc/glibc-initial_2.3.2.bb             |    1 -
+ recipes/glibc/glibc-initial_2.3.6.bb             |    2 --
+ recipes/glibc/glibc-initial_cvs.bb               |    3 ++-
+ recipes/glibc/glibc_2.3.6.bb                     |    2 --
+ recipes/glibc/glibc_2.7.bb                       |    2 +-
+ recipes/glibc/glibc_2.9.bb                       |    2 +-
+ 10 files changed, 5 insertions(+), 12 deletions(-)
 
- .../e2fsprogs-libs/e2fsprogs-libs-native_1.35.bb   |    1 -
- recipes/e2fsprogs/e2fsprogs-native_1.38.bb         |    1 -
- recipes/e2fsprogs/e2fsprogs-native_1.41.2.bb       |    1 -
- recipes/genext2fs/genext2fs-native_1.3.bb          |    1 -
- recipes/slugimage/slugimage-native.bb              |    2 --
- recipes/slugtool/slugtool-native.bb                |    1 -
- .../squashfs-tools/squashfs-tools-native_2.0r2.bb  |    2 --
- .../squashfs-tools/squashfs-tools-native_2.2r2.bb  |    1 -
- .../squashfs-tools/squashfs-tools-native_3.1r2.bb  |    1 -
- .../squashfs-tools/squashfs-tools-native_3.3.bb    |    1 -
- .../squashfs-tools/squashfs-tools-native_4.0.bb    |    1 -
- 17 files changed, 2 insertions(+), 24 deletions(-)
-
-diff --git a/recipes/db/db3-native_3.2.9.bb b/recipes/db/db3-native_3.2.9.bb
-index 492f740..f16b19f 100644
---- a/recipes/db/db3-native_3.2.9.bb
-+++ b/recipes/db/db3-native_3.2.9.bb
-@@ -4,5 +4,4 @@ CONFLICTS = "db-native"
- inherit native
- require db3_${PV}.bb
+diff --git a/recipes/eglibc/eglibc-initial.inc b/recipes/eglibc/eglibc-initial.inc
+index 5fbb5db..7a5a7b2 100644
+--- a/recipes/eglibc/eglibc-initial.inc
++++ b/recipes/eglibc/eglibc-initial.inc
+@@ -1,7 +1,6 @@
+ SECTION = "libs"
+ DEPENDS = "linux-libc-headers virtual/${TARGET_PREFIX}gcc-initial"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/eglibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
  
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/db3-${PV}', '${FILE_DIRNAME}/db3', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
  PACKAGES = ""
-diff --git a/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.35.bb b/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.35.bb
-index 9d0afa8..5f94c08 100644
---- a/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.35.bb
-+++ b/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.35.bb
-@@ -2,5 +2,4 @@ SECTION = "base"
- require e2fsprogs-libs_${PV}.bb
- inherit native
+ PACKAGES_DYNAMIC = ""
+diff --git a/recipes/glibc/glibc-initial.inc b/recipes/glibc/glibc-initial.inc
+index 5528cf8..cd65924 100644
+--- a/recipes/glibc/glibc-initial.inc
++++ b/recipes/glibc/glibc-initial.inc
+@@ -1,7 +1,7 @@
+ SECTION = "libs"
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial linux-libc-headers"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.4', '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG =. "glibc-2.4:"
  
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/e2fsprogs-libs-${PV}', '${FILE_DIRNAME}/e2fsprogs-libs', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
  PACKAGES = ""
-diff --git a/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.41.2.bb b/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.41.2.bb
-index 3db9e02..2632db4 100644
---- a/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.41.2.bb
-+++ b/recipes/e2fsprogs-libs/e2fsprogs-libs-native_1.41.2.bb
-@@ -2,7 +2,6 @@ SECTION = "base"
- require e2fsprogs-libs_${PV}.bb
- inherit native
+ PACKAGES_DYNAMIC = ""
+diff --git a/recipes/glibc/glibc-initial_2.2.5.bb b/recipes/glibc/glibc-initial_2.2.5.bb
+index 84412bd..c7dde23 100644
+--- a/recipes/glibc/glibc-initial_2.2.5.bb
++++ b/recipes/glibc/glibc-initial_2.2.5.bb
+@@ -2,4 +2,3 @@ require glibc_${PV}.bb
+ require glibc-initial.inc
  
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/e2fsprogs-libs-${PV}', '${FILE_DIRNAME}/e2fsprogs-libs', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
+ DEFAULT_PREFERENCE_sh3 = "-99"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+diff --git a/recipes/glibc/glibc-initial_2.3.2+cvs20040726.bb b/recipes/glibc/glibc-initial_2.3.2+cvs20040726.bb
+index 4d7129b..c7dde23 100644
+--- a/recipes/glibc/glibc-initial_2.3.2+cvs20040726.bb
++++ b/recipes/glibc/glibc-initial_2.3.2+cvs20040726.bb
+@@ -2,4 +2,3 @@ require glibc_${PV}.bb
+ require glibc-initial.inc
  
- DEPENDS = "gettext-native"
-diff --git a/recipes/e2fsprogs/e2fsprogs-native_1.38.bb b/recipes/e2fsprogs/e2fsprogs-native_1.38.bb
-index af49b0d..13fd2be 100644
---- a/recipes/e2fsprogs/e2fsprogs-native_1.38.bb
-+++ b/recipes/e2fsprogs/e2fsprogs-native_1.38.bb
-@@ -11,7 +11,6 @@ SRC_URI += "file://no-hardlinks.patch;patch=1 \
+ DEFAULT_PREFERENCE_sh3 = "-99"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-cvs', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+diff --git a/recipes/glibc/glibc-initial_2.3.2.bb b/recipes/glibc/glibc-initial_2.3.2.bb
+index 84412bd..c7dde23 100644
+--- a/recipes/glibc/glibc-initial_2.3.2.bb
++++ b/recipes/glibc/glibc-initial_2.3.2.bb
+@@ -2,4 +2,3 @@ require glibc_${PV}.bb
+ require glibc-initial.inc
  
- EXTRA_OECONF = ""
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/e2fsprogs-${PV}', '${FILE_DIRNAME}/e2fsprogs', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- DEPENDS = ""
- 
-diff --git a/recipes/e2fsprogs/e2fsprogs-native_1.41.2.bb b/recipes/e2fsprogs/e2fsprogs-native_1.41.2.bb
-index e79958c..4ff399b 100644
---- a/recipes/e2fsprogs/e2fsprogs-native_1.41.2.bb
-+++ b/recipes/e2fsprogs/e2fsprogs-native_1.41.2.bb
-@@ -7,7 +7,6 @@ DEFAULT_PREFERENCE = "-1"
- 
- EXTRA_OECONF = ""
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/e2fsprogs-${PV}', '${FILE_DIRNAME}/e2fsprogs', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- DEPENDS = ""
- 
-diff --git a/recipes/e2fsprogs/e2fsprogs-native_1.41.5.bb b/recipes/e2fsprogs/e2fsprogs-native_1.41.5.bb
-index b29064f..2951363 100644
---- a/recipes/e2fsprogs/e2fsprogs-native_1.41.5.bb
-+++ b/recipes/e2fsprogs/e2fsprogs-native_1.41.5.bb
-@@ -6,7 +6,6 @@ SRC_URI += "file://mkinstalldirs.patch;patch=1"
- 
- EXTRA_OECONF = ""
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/e2fsprogs-${PV}', '${FILE_DIRNAME}/e2fsprogs', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- DEPENDS = ""
- 
-diff --git a/recipes/e2tools/e2tools-native_0.0.16.bb b/recipes/e2tools/e2tools-native_0.0.16.bb
-index e37eed2..f23a0b1 100644
---- a/recipes/e2tools/e2tools-native_0.0.16.bb
-+++ b/recipes/e2tools/e2tools-native_0.0.16.bb
-@@ -3,7 +3,6 @@ require e2tools_${PV}.bb
- inherit native
- 
- DEPENDS = "e2fsprogs-libs-native e2fsprogs-native"
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/e2tools-${PV}', '${FILE_DIRNAME}/e2tools', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- 
- e2links = "e2ln e2ls e2mkdir e2mv e2rm e2tail"
-diff --git a/recipes/genext2fs/genext2fs-native_1.3.bb b/recipes/genext2fs/genext2fs-native_1.3.bb
-index 2e26fa0..50b371b 100644
---- a/recipes/genext2fs/genext2fs-native_1.3.bb
-+++ b/recipes/genext2fs/genext2fs-native_1.3.bb
-@@ -1,6 +1,5 @@
- require genext2fs_${PV}.bb
- inherit native
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/genext2fs-${PV}', '${FILE_DIRNAME}/genext2fs', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- 
- do_stage () {
- 	install -m 0755 genext2fs ${STAGING_BINDIR}/
-diff --git a/recipes/mysql/mysql_4.1.22.bb b/recipes/mysql/mysql_4.1.22.bb
-index 7f32b4d..09c52ec 100644
---- a/recipes/mysql/mysql_4.1.22.bb
-+++ b/recipes/mysql/mysql_4.1.22.bb
-@@ -14,8 +14,6 @@ SRC_URI = "http://downloads.mysql.com/archives/mysql-4.1/mysql-${PV}.tar.gz \
- 
- S = "${WORKDIR}/mysql-${PV}"
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/mysql-${PV}', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+ DEFAULT_PREFERENCE_sh3 = "-99"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+diff --git a/recipes/glibc/glibc-initial_2.3.6.bb b/recipes/glibc/glibc-initial_2.3.6.bb
+index 8249cd6..fa7836a 100644
+--- a/recipes/glibc/glibc-initial_2.3.6.bb
++++ b/recipes/glibc/glibc-initial_2.3.6.bb
+@@ -1,4 +1,2 @@
+ require glibc_${PV}.bb
+ require glibc-initial.inc
 -
- BINCONFIG_GLOB = "mysql_config"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+diff --git a/recipes/glibc/glibc-initial_cvs.bb b/recipes/glibc/glibc-initial_cvs.bb
+index 81be5fc..0bfd665 100644
+--- a/recipes/glibc/glibc-initial_cvs.bb
++++ b/recipes/glibc/glibc-initial_cvs.bb
+@@ -1,4 +1,5 @@
+ require glibc_${PV}.bb
+ require glibc-initial.inc
  
- inherit autotools binconfig update-rc.d
-diff --git a/recipes/recode/recode_3.6.bb b/recipes/recode/recode_3.6.bb
-index 6fd60ae..37e3b2a 100644
---- a/recipes/recode/recode_3.6.bb
-+++ b/recipes/recode/recode_3.6.bb
-@@ -3,11 +3,8 @@ SECTION = "console/utils"
- LICENSE = "GPL"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-cvs', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++# glibc_cvs.bb overrides PV; glibc-cvs won't automatically be in FILESPATHPKG
++FILESPATHPKG =. "glibc-cvs:"
+diff --git a/recipes/glibc/glibc_2.3.6.bb b/recipes/glibc/glibc_2.3.6.bb
+index ab167da..8d64540 100644
+--- a/recipes/glibc/glibc_2.3.6.bb
++++ b/recipes/glibc/glibc_2.3.6.bb
+@@ -2,8 +2,6 @@ require glibc.inc
  
- PR = "r1"
--SRC_URI = "${GNU_MIRROR}/recode/recode-${PV}.tar.gz"
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/recode-${PV}', '${FILE_DIRNAME}' ], d)}"
+ PR = "r5"
+ 
+-#FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.3.6', '${FILE_DIRNAME}/orig/glibc', '${FILE_DIRNAME}/orig/files', '${FILE_DIRNAME}/orig' ], d)}"
 -
--SRC_URI += "file://recode-bitfield-width.patch;patch=1 \
--            "
-+SRC_URI = "${GNU_MIRROR}/recode/recode-${PV}.tar.gz \
-+	file://recode-bitfield-width.patch;patch=1"
+ GLIBC_ADDONS ?= "linuxthreads"
  
- inherit autotools
+ #           ${CROSSTOOL_PATCH_URL}glibc-2.3.5-cygwin.patch;patch=1
+diff --git a/recipes/glibc/glibc_2.7.bb b/recipes/glibc/glibc_2.7.bb
+index 8ae84c1..1a2902d 100644
+--- a/recipes/glibc/glibc_2.7.bb
++++ b/recipes/glibc/glibc_2.7.bb
+@@ -12,7 +12,7 @@ BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
+ TARGET_CPPFLAGS = "-I${STAGING_DIR_TARGET}${layout_includedir}"
  
-diff --git a/recipes/slugimage/slugimage-native.bb b/recipes/slugimage/slugimage-native.bb
-index 8b60ff1..f8408a1 100644
---- a/recipes/slugimage/slugimage-native.bb
-+++ b/recipes/slugimage/slugimage-native.bb
-@@ -6,8 +6,6 @@ RDEPENDS = ""
  
- inherit native
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.4', '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG =. "glibc-2.4:"
  
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/slugimage-${PV}', '${FILE_DIRNAME}/slugimage', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
--
- do_stage () {
- 	install -m 0755 slugimage ${STAGING_BINDIR}/
- }
-diff --git a/recipes/slugtool/slugtool-native.bb b/recipes/slugtool/slugtool-native.bb
-index 2d1fe91..088839c 100644
---- a/recipes/slugtool/slugtool-native.bb
-+++ b/recipes/slugtool/slugtool-native.bb
-@@ -2,7 +2,6 @@ SECTION = "unknown"
- require slugtool.bb
- inherit native
+ GLIBC_ADDONS ?= "ports,nptl,libidn"
  
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/slugtool-${PV}', '${FILE_DIRNAME}/slugtool', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
+diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
+index 7859876..7709d26 100644
+--- a/recipes/glibc/glibc_2.9.bb
++++ b/recipes/glibc/glibc_2.9.bb
+@@ -12,7 +12,7 @@ BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
+ TARGET_CPPFLAGS = "-I${STAGING_DIR_TARGET}${layout_includedir}"
  
- do_stage () {
-diff --git a/recipes/squashfs-tools/squashfs-tools-native_2.0r2.bb b/recipes/squashfs-tools/squashfs-tools-native_2.0r2.bb
-index 2423e47..9ba5684 100644
---- a/recipes/squashfs-tools/squashfs-tools-native_2.0r2.bb
-+++ b/recipes/squashfs-tools/squashfs-tools-native_2.0r2.bb
-@@ -1,11 +1,9 @@
- require squashfs-tools_${PV}.bb
  
- DEPENDS = "lzma-native"
--PN_BASE = "squashfs-tools"
+-FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.4', '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
++FILESPATHPKG =. "glibc-2.4:"
  
- inherit native
+ GLIBC_ADDONS ?= "ports,nptl,libidn"
  
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/${PN_BASE}-${PV}', '${FILE_DIRNAME}/${PN_BASE}', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- 
- do_stage () {
-diff --git a/recipes/squashfs-tools/squashfs-tools-native_2.2r2.bb b/recipes/squashfs-tools/squashfs-tools-native_2.2r2.bb
-index b6ee6e7..9ba5684 100644
---- a/recipes/squashfs-tools/squashfs-tools-native_2.2r2.bb
-+++ b/recipes/squashfs-tools/squashfs-tools-native_2.2r2.bb
-@@ -4,7 +4,6 @@ DEPENDS = "lzma-native"
- 
- inherit native
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/squashfs-tools-${PV}', '${FILE_DIRNAME}/squashfs-tools', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- 
- do_stage () {
-diff --git a/recipes/squashfs-tools/squashfs-tools-native_3.1r2.bb b/recipes/squashfs-tools/squashfs-tools-native_3.1r2.bb
-index c35d183..c171e43 100644
---- a/recipes/squashfs-tools/squashfs-tools-native_3.1r2.bb
-+++ b/recipes/squashfs-tools/squashfs-tools-native_3.1r2.bb
-@@ -2,7 +2,6 @@ require squashfs-tools_${PV}.bb
- 
- inherit native
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/squashfs-tools-${PV}', '${FILE_DIRNAME}/squashfs-tools', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- 
- do_stage () {
-diff --git a/recipes/squashfs-tools/squashfs-tools-native_3.3.bb b/recipes/squashfs-tools/squashfs-tools-native_3.3.bb
-index 87ba761..5858bb1 100644
---- a/recipes/squashfs-tools/squashfs-tools-native_3.3.bb
-+++ b/recipes/squashfs-tools/squashfs-tools-native_3.3.bb
-@@ -3,7 +3,6 @@ PR = "r0"
- 
- inherit native
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/squashfs-tools-${PV}', '${FILE_DIRNAME}/squashfs-tools', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- 
- do_stage () {
-diff --git a/recipes/squashfs-tools/squashfs-tools-native_4.0.bb b/recipes/squashfs-tools/squashfs-tools-native_4.0.bb
-index 87ba761..5858bb1 100644
---- a/recipes/squashfs-tools/squashfs-tools-native_4.0.bb
-+++ b/recipes/squashfs-tools/squashfs-tools-native_4.0.bb
-@@ -3,7 +3,6 @@ PR = "r0"
- 
- inherit native
- 
--FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/squashfs-tools-${PV}', '${FILE_DIRNAME}/squashfs-tools', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
- PACKAGES = ""
- 
- do_stage () {
 -- 
 1.5.6.5
 
