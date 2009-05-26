@@ -1,37 +1,29 @@
-Received: from [212.18.0.10] (helo=mail-out.m-online.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1M8yu4-0006qu-9e
+	(envelope-from <pb@reciva.com>) id 1M8zDu-0007Ya-3r
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 May 2009 17:49:24 +0200
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id B39ED1C00432;
-	Tue, 26 May 2009 17:41:17 +0200 (CEST)
-Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
-	by mail.m-online.net (Postfix) with ESMTP id A842A903A6;
-	Tue, 26 May 2009 17:41:17 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.3.149])
-	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
-	port 10024)
-	with ESMTP id OE5WRVCh29vc; Tue, 26 May 2009 17:41:16 +0200 (CEST)
-Received: from mrdenker.localdomain (ppp-93-104-113-85.dynamic.mnet-online.de
-	[93.104.113.85])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTP;
-	Tue, 26 May 2009 17:41:16 +0200 (CEST)
-From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
+	Tue, 26 May 2009 18:09:54 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1M8z63-0006lK-85
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 May 2009 17:01:47 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1M8z63-0005kQ-1f
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 May 2009 17:01:47 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 May 2009 17:41:14 +0200
-User-Agent: KMail/1.11.3 (Linux/2.6.27.21-170.2.56.fc10.x86_64; KDE/4.2.3;
-	x86_64; ; )
-References: <200905251437.03660.mok@mnet-online.de>
-	<76a8cde90905260214g3e7c9a94v29225ac2f77686d7@mail.gmail.com>
-	<c384c5ea0905260407l52d43f16xcf18a158ea0e0bba@mail.gmail.com>
-In-Reply-To: <c384c5ea0905260407l52d43f16xcf18a158ea0e0bba@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200905261741.15461.mok@mnet-online.de>
-Subject: Re: self introduction / request for commit access
+In-Reply-To: <Pine.LNX.4.64.0905252339270.6446@juice.ott.cti.com>
+References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
+	<Pine.LNX.4.64.0905252339270.6446@juice.ott.cti.com>
+Date: Tue, 26 May 2009 17:01:46 +0100
+Message-Id: <1243353706.9080.367.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH] busybox: allow building when prefix is "", not	"/usr".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2009 15:49:24 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 26 May 2009 16:09:54 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Am Dienstag 26 Mai 2009 13:07:33 schrieb Leon Woestenberg:
-> Hello,
->
-> On Tue, May 26, 2009 at 11:14 AM, Julien Cassignol
->
-> <ainulindale@gmail.com> wrote:
-> > On Mon, May 25, 2009 at 9:49 PM, Michael 'Mickey' Lauer
-> >
-> > <mickey@vanille-media.de> wrote:
-> >> +1.
-> >
-> > +1 as well!
->
-> +1
->
-> Welcome aboard, I guess :-)
-Thanks a lot :-)
+On Mon, 2009-05-25 at 23:40 -0400, Michael Smith wrote:
+> On Mon, 25 May 2009, Michael Smith wrote:
+> 
+> > +	for i in ${D}${base_bindir} ${D}${base_sbindir} ${prefix:+${D}${prefix}}
+> > +	do
+> >  		if [ -d $i ]; then
+> > -			cp -dPr $i ${D}/busybox/
+> > +			cp -pPR $i ${D}/busybox/
+> >  		fi
+> >  	done
+> 
+> I missed this in the commit message: I changed cp -dPr -> -pPR to match 
+> the options given a few lines above. -d implies -P, and -r/-R are 
+> equivalent, so I suspected a typo. I'll resend with a new description.
 
-How to continue from here? Who would like to receive an email with my SSH 
-public key?
+Good spotting.  There seems to be more wrong with this code than that,
+though: the comment above says "Move everything to /busybox...", but the
+code (both before and after your change) seems to copy rather than
+moving which would appear to defeat the point of this whole block of
+code.  We had a discussion about this on IRC a few weeks ago but I don't
+think there was any real conclusion to that.
 
-Thanks again
--- 
+It looks from the git history as though this stuff has been broken for a
+while (since busybox_1.9.1 at least) but I didn't have the patience to
+chase it back any further than that. 
 
-Klaus 'mrmoku' Kurzmann
+Anyway, if you felt like having a go at fixing this too, that'd be
+awesome. 
+
+p.
+
+
 
 
