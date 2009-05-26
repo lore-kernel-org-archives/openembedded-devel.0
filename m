@@ -1,29 +1,30 @@
-Received: from [85.115.52.190] (helo=cluster-a.mailcontrol.com)
+Received: from [212.227.126.187] (helo=moutng.kundenserver.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Matteo.Fortini@mta.it>) id 1M8rh5-0002T5-4d
-	for openembedded-devel@openembedded.org; Tue, 26 May 2009 10:07:31 +0200
-Received: from mailserver.mta.int (mail.mta.it [89.96.171.250])
-	by rly14a.srv.mailcontrol.com (MailControl) with ESMTP id
-	n4Q7xOLD017161 for <openembedded-devel@openembedded.org>;
-	Tue, 26 May 2009 08:59:26 +0100
-Received: from mta-digicas.MTA.INT ([172.26.10.13]) by mailserver.mta.int with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 26 May 2009 09:59:24 +0200
-Received: from [172.26.6.74] (172.26.6.74) by mta-digicas.mta.int
-	(172.26.10.8) with Microsoft SMTP Server (TLS) id 8.1.336.0;
-	Tue, 26 May 2009 09:59:23 +0200
-Message-ID: <4A1BA15A.6080905@mta.it>
-Date: Tue, 26 May 2009 09:59:22 +0200
-From: Matteo Fortini <matteo.fortini@mta.it>
-User-Agent: Thunderbird 2.0.0.21 (Windows/20090302)
-MIME-Version: 1.0
-To: "openembedded-devel@openembedded.org" <openembedded-devel@openembedded.org>
-References: <4A143640.3040606@mta.it>
-	<c384c5ea0905210657k1dea4d73ncfd51c50b74e29c9@mail.gmail.com>
-In-Reply-To: <c384c5ea0905210657k1dea4d73ncfd51c50b74e29c9@mail.gmail.com>
-X-OriginalArrivalTime: 26 May 2009 07:59:24.0259 (UTC)
-	FILETIME=[E2629B30:01C9DDD7]
-X-Scanned-By: MailControl A-06-00-00 (www.mailcontrol.com) on 10.65.0.124
-Subject: Re: rrdtool fails to build
+	(envelope-from <christian.glindkamp@taskit.de>) id 1M8rnS-0002s2-HN
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 26 May 2009 10:14:08 +0200
+Received: from localhost.localdomain (port-87-234-225-18.static.qsc.de
+	[87.234.225.18])
+	by mrelayeu.kundenserver.de (node=mreu1) with ESMTP (Nemesis)
+	id 0MKv1o-1M8rfa2vQv-000kEp; Tue, 26 May 2009 10:05:59 +0200
+Received: from christian.taskit.de (unknown [192.168.4.114])
+	by localhost.localdomain (Postfix) with ESMTP id A77BB7B6F1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 May 2009 10:03:21 +0200 (CEST)
+Date: Tue, 26 May 2009 10:05:56 +0200
+From: Christian Glindkamp <christian.glindkamp@taskit.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090526100556.4c203e99@christian.taskit.de>
+In-Reply-To: <20090515101109.10cde089@christian.taskit.de>
+References: <20090514101502.133dd3e0@christian.taskit.de>
+	<4A0BE509.8010406@gmx.net>
+	<20090515101109.10cde089@christian.taskit.de>
+X-Mailer: Claws Mail 3.7.1 (GTK+ 2.14.4; i486-pc-linux-gnu)
+Mime-Version: 1.0
+X-Provags-ID: V01U2FsdGVkX18VPge8i2bAMHVisYvyzHtWQ2qbNJjEsM9J1zi
+	8xoUysXrGUKddqiUknouq7Z9g5siZYkWrJ4Vd0/qaXGVK9S+ww
+	8e204uU4Az5WOGBTpNFxw==
+Subject: Re: [PATCH] cacao: add missing patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,34 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2009 08:07:31 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Tue, 26 May 2009 08:14:09 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-distro is Angstrom console-image on stable/2009
-The target is a ppc-e300c3 (mpc5121)
+On Fri, 15 May 2009 10:11:09 +0200
+Christian Glindkamp <christian.glindkamp@taskit.de> wrote:
 
-Regards
+> I think this should also go to the stable branch.
 
-Leon Woestenberg ha scritto:
-> Hello,
->
-> On Wed, May 20, 2009 at 6:56 PM, Matteo Fortini <matteo.fortini@mta.it> wrote:
->   
->> Hi all,
->> I'm trying to build rrdtool on Angstrom on a powerpc target, and it
->> mysteriously fails even before unpacking the sources.
->>
->> If I try to build it manually, I get some ./configure errors about missing
->> ieee math support.
->>
->>     
-> Could you be a bit more specific?
->
-> Machine, distro?
->
-> Regards,
->   
+ping 
 
+
+> > > In revision af5fcda66139e002d098c0df952b43c455806aba the patch
+> > > cacao-disable-stackbase-check.patch was added to SRC_URI of all
+> > > cacao recipes without committing the patch itself. This patch
+> > > adds it to make cacao buildable again. The patch comes from the
+> > > jalimo overlay.
+> > > 
+> > > Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
+> > > ---
+> > >  .../files/cacao-disable-stackbase-check.patch      |   12 ++++++++++++
+> > >  1 files changed, 12 insertions(+), 0 deletions(-)
+> > >  create mode 100644 recipes/cacao/files/cacao-disable-stackbase-check.patch
+> > > 
+> > > diff --git a/recipes/cacao/files/cacao-disable-stackbase-check.patch b/recipes/cacao/files/cacao-disable-stackbase-check.patch
+> > > new file mode 100644
+> > > index 0000000..8eb2089
+> > > --- /dev/null
+> > > +++ b/recipes/cacao/files/cacao-disable-stackbase-check.patch
+> > > @@ -0,0 +1,12 @@
+> > > +Index: cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c
+> > > +===================================================================
+> > > +--- cacao-0.99.3+hg20090109.orig/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:15.000000000 +0100
+> > > ++++ cacao-0.99.3+hg20090109/src/mm/boehm-gc/os_dep.c	2009-02-15 16:29:24.000000000 +0100
+> > > +@@ -1077,7 +1077,6 @@
+> > > +       c = stat_buf[buf_offset++];
+> > > +     }
+> > > +     close(f);
+> > > +-    if (result < 0x10000000) ABORT("Absurd stack bottom value");
+> > > +     return (ptr_t)result;
+> > > +   }
+> > > + 
 
 
