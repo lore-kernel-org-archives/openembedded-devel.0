@@ -1,32 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [76.96.53.8] (helo=mq01.hmc1.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M9465-0008Le-Eu
-	for openembedded-devel@openembedded.org; Tue, 26 May 2009 23:22:09 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M93yA-0001QS-QB
-	for openembedded-devel@openembedded.org; Tue, 26 May 2009 21:13:58 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 26 May 2009 21:13:58 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 26 May 2009 21:13:58 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 26 May 2009 23:13:47 +0200
-Message-ID: <gvhm2b$f2m$1@ger.gmane.org>
-References: <4A1C49B6.5050108@soundmetrics.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
-In-Reply-To: <4A1C49B6.5050108@soundmetrics.com>
-Sender: news <news@ger.gmane.org>
+	(envelope-from <john@soundmetrics.com>) id 1M94k7-0001VM-1u
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 May 2009 00:03:32 +0200
+Received: from omta01.westchester.pa.hmc1.comcast.net ([76.96.53.6])
+	by mq01.hmc1.comcast.net with comcast
+	id wCkS1b00E082Dic08MuouD; Tue, 26 May 2009 21:54:48 +0000
+Received: from [192.168.10.129] ([75.147.191.205])
+	by omta01.westchester.pa.hmc1.comcast.net with bizsmtp
+	id wMvL1b0014SLwm306MvLFR; Tue, 26 May 2009 21:55:21 +0000
+Message-ID: <4A1C6548.7070802@soundmetrics.com>
+Date: Tue, 26 May 2009 14:55:20 -0700
+From: John Faith <john@soundmetrics.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.21) Gecko/20090303 SeaMonkey/1.1.15
+	(Ubuntu-1.1.15+nobinonly-0ubuntu0.8.04.2)
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <4A1C49B6.5050108@soundmetrics.com> <gvhm2b$f2m$1@ger.gmane.org>
+In-Reply-To: <gvhm2b$f2m$1@ger.gmane.org>
 Subject: Re: [PATCH] PowerVR init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,21 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2009 21:22:09 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 26 May 2009 22:03:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 26-05-09 21:57, John Faith wrote:
-> Hello,
-> Please review the attached patch which lets the PowerVR init script
-> handle start, stop and restart.
+Koen Kooi wrote:
+> On 26-05-09 21:57, John Faith wrote:
+>   
+>> Hello,
+>> Please review the attached patch which lets the PowerVR init script
+>> handle start, stop and restart.
+>>     
+>
+> Why did you replace the modprobe with insmod? insmod is waaaaaay more
+> fragile than modprobe.
+>
+> regards,
+>
+> Koen
+>
+>   
+Using the insmod the same way as done for pvrsrvkm.ko worked in my 
+environment, but I guess that's not the right general solution even 
+though it also uses 'find'.  I wonder why insmod is in the script to 
+begin with, assuming depmod was run.
 
-Why did you replace the modprobe with insmod? insmod is waaaaaay more 
-fragile than modprobe.
+,
+John
 
-regards,
-
-Koen
 
 
 
