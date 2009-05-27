@@ -1,31 +1,31 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1M9GFX-0001UF-0c
+	(envelope-from <philb@gnu.org>) id 1M9GdA-0007IM-I8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 May 2009 12:20:46 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id BC63D2C816
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2009 10:11:31 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id avUWrpKwBMrW
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2009 10:11:30 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 9D34F2C814
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2009 10:11:29 +0000 (UTC)
-Message-ID: <4A1D1217.6060609@gmail.com>
-Date: Wed, 27 May 2009 12:12:39 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
+	Wed, 27 May 2009 12:45:09 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M9GVE-0003f4-Aq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 May 2009 11:36:56 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1M9GVE-0006yP-5T
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 May 2009 11:36:56 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4A1C4DB6.6080005@gremlin.it>
-In-Reply-To: <4A1C4DB6.6080005@gremlin.it>
-Subject: Re: [PATCH] kaeilos.conf and SPLASH
+In-Reply-To: <Pine.LNX.4.64.0905262144170.6446@juice.ott.cti.com>
+References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
+	<Pine.LNX.4.64.0905252339270.6446@juice.ott.cti.com>
+	<1243353706.9080.367.camel@mill.internal.reciva.com>
+	<Pine.LNX.4.64.0905262144170.6446@juice.ott.cti.com>
+Date: Wed, 27 May 2009 11:36:55 +0100
+Message-Id: <1243420616.14104.9.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH] busybox: allow building when prefix is "", not	"/usr".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,36 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2009 10:20:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 May 2009 10:45:30 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Alessandro GARDICH ha scritto:
-> Hi
->=20
-> Make kaeilos.conf be aware of the new SPASH variable used in images
-> recipes.
->=20
-> At least it make bitbake start work, as soon as build the x11-image I'l=
-l
-> check if also the image is working proper
->=20
-> Alessandro
->=20
->=20
-> -----------------------------------------------------------------------=
--
+On Tue, 2009-05-26 at 21:53 -0400, Michael Smith wrote:
+> I changed the "cp" back to "mv" and the package looks a bit lighter on 
+> symlinks, and the final rootfs is the same. I'd still want to play a bit 
+> with upgrades though, and that may be a while. If it looks OK, I'll send 
+> it up as a separate patch later.
+> 
+> This is where it changed from mv to cp:
+> 
+> commit f7f1ac27e90f042fa1c4322b193b5b6a27cd4c07
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Sat Aug 26 14:02:37 2006 +0000
+> 
+>     busybox 1.2.1: replace mv with a non-gnu-ish cp
 
-Thank you Alessandro.
-I'm going to test it :-D
+Okay, great.  Yeah, that commit f7f1ac27e90f042fa1c4322b193b5b6a27cd4c07
+looks fairly bogus: I don't know what the intent of it was, but it
+doesn't seem like it can be the right way to solve any problem.
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+Keep us posted once you've had a chance to test the upgrades.
+
+p.
+
 
 
 
