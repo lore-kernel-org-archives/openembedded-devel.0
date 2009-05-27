@@ -1,32 +1,34 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1M98SA-0003V5-6k
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 May 2009 04:01:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 899294C1D83
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2009 21:53:04 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 16430-04 for <openembedded-devel@lists.openembedded.org>; 
-	Tue, 26 May 2009 21:53:04 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 46F6E4BF29F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2009 21:53:04 -0400 (EDT)
-Date: Tue, 26 May 2009 21:53:04 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1243353706.9080.367.camel@mill.internal.reciva.com>
-Message-ID: <Pine.LNX.4.64.0905262144170.6446@juice.ott.cti.com>
-References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
-	<Pine.LNX.4.64.0905252339270.6446@juice.ott.cti.com>
-	<1243353706.9080.367.camel@mill.internal.reciva.com>
-MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH] busybox: allow building when prefix is "", not "/usr".
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1M9Cvt-0000NJ-8q
+	for openembedded-devel@openembedded.org; Wed, 27 May 2009 08:48:13 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1M9Cnx-0006b4-JZ
+	for openembedded-devel@openembedded.org; Wed, 27 May 2009 06:40:01 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 27 May 2009 06:40:01 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 27 May 2009 06:40:01 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 27 May 2009 08:39:45 +0200
+Message-ID: <gvin7h$m6u$1@ger.gmane.org>
+References: <aee831ab0905180656q31941a95jeedf18f65343c27f@mail.gmail.com>	<gutp4q$bri$1@ger.gmane.org>
+	<aee831ab0905240846q100b779eq69a4f110a5cb664d@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1b5pre) Gecko/20090519 Shredder/3.0b3pre
+In-Reply-To: <aee831ab0905240846q100b779eq69a4f110a5cb664d@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: asking for patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,36 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2009 02:01:14 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 27 May 2009 06:48:13 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 26 May 2009, Phil Blundell wrote:
+On 24-05-09 17:46, roby wrote:
+> On Tue, May 19, 2009 at 10:03 AM, Koen Kooi<k.kooi@student.utwente.nl>wrote:
+>
+>> On 18-05-09 15:56, Previdi Roberto wrote:
+>>
+>>> http://patchwork.openembedded.org/patch/433/
+>>> It's been queued since 20 days ago, and many more recent patches have
+>>>
+>> I just pushed the zenity 2.26.0 recipe I had lying around, could you base
+>> your patch on that version?
+>>
+>
+> ok, i'll try, but i'm a bit disappointed.. why cannot the patch be applied
+> to the old version in the while?
+> and if i write another patch and it takes a month to be applied it's
+> possible that it will be old by that time, and another zenity version will
+> be there..
 
-> Good spotting.  There seems to be more wrong with this code than that,
-> though: the comment above says "Move everything to /busybox...", but the
-> code (both before and after your change) seems to copy rather than
-> moving which would appear to defeat the point of this whole block of
-> code.  We had a discussion about this on IRC a few weeks ago but I don't
-> think there was any real conclusion to that.
+Zenity is on the GNOME release schedule, so it will release 2.28.0 
+exactly 6 months after 2.26.0 was released, just just 2.26.0 came 6 
+months after 2.24.0.
 
-Oh yeah... heh... I guess that copy kind of defeats the purpose. The 
-package ends up containing all the symlinks instead of letting 
-update-alternatives take care of it in postinst.
+regards,
 
-I changed the "cp" back to "mv" and the package looks a bit lighter on 
-symlinks, and the final rootfs is the same. I'd still want to play a bit 
-with upgrades though, and that may be a while. If it looks OK, I'll send 
-it up as a separate patch later.
+Koen
 
-This is where it changed from mv to cp:
-
-commit f7f1ac27e90f042fa1c4322b193b5b6a27cd4c07
-Author: Koen Kooi <koen@openembedded.org>
-Date:   Sat Aug 26 14:02:37 2006 +0000
-
-    busybox 1.2.1: replace mv with a non-gnu-ish cp
-
-
-Mike
 
 
