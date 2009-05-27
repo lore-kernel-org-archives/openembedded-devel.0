@@ -1,33 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.219.172] (helo=mail-ew0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1M9N0W-0001eM-V7
-	for openembedded-devel@openembedded.org; Wed, 27 May 2009 19:33:41 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1M9Msa-0002pz-B2
-	for openembedded-devel@openembedded.org; Wed, 27 May 2009 17:25:28 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 27 May 2009 17:25:28 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 27 May 2009 17:25:28 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 27 May 2009 19:25:17 +0200
-Message-ID: <gvjt1t$h21$1@ger.gmane.org>
-References: <gvivan$clg$1@ger.gmane.org> <4A1D768E.4050101@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090522 Shredder/3.0b3pre
-In-Reply-To: <4A1D768E.4050101@balister.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH] linux-omap: sync everything with .dev
+	(envelope-from <koen.kooi@gmail.com>) id 1M9NEu-0002DB-Be
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 May 2009 19:48:33 +0200
+Received: by ewy20 with SMTP id 20so4656146ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 May 2009 10:40:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=+LP0ECGLuvzFvgcM59VmEwIixHxKpIWGIr6FdsdZFI4=;
+	b=MT6UH/qC+M5btJlJIxNBJenxsi25UdovYA8Z9VQhXLJSZQbhpVUYaiySep7N79FOGO
+	aTkvq111CjgYakcbmSNF6EFGUdv9lMz3a8baaP4N4I9OTc1MUBosJxoiFbfplX4alZNB
+	L66MM2TNVbDelmDpYvXG4HW/G76blvzix94aI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=GFEtwp+3FZSNtYqfX61sOcHRWgnorGJrACDsPyiUgQnLnO6wwunh2b7Lna6bh2qig0
+	hXn6YjanSt1SyYr8AItZQXZWw5kMmgcsFnz8wDwvNOqjZuIx+jE+OQgpm8a1Bg5ACFmP
+	v9yBHxzzGp2ltm/nYL4aNTODsUz+z1PWJUuek=
+Received: by 10.216.53.199 with SMTP id g49mr119697wec.49.1243446016662;
+	Wed, 27 May 2009 10:40:16 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id j8sm4845845gvb.11.2009.05.27.10.40.14
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 27 May 2009 10:40:15 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 27 May 2009 19:40:12 +0200
+Message-Id: <1243446012-9317-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.6.1
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] omap3sgx-modules: sync with .dev * update to build against newer kernels * switch to MACHINE_KERNEL_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2009 17:33:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 27 May 2009 17:48:35 -0000
 
-On 27-05-09 19:21, Philip Balister wrote:
-> Koen Kooi wrote:
->> [ This is only the diffstat, the complete 4 megabyte big patch is at
->> http://dominion.thruhere.net/koen/OE/0001-linux-omap-sync-everything-with-.dev.patch
->> ]
->>
->> linux-omap: sync everything with .dev
->> * also sync the machine files to match the kernels
->
-> Koen,
->
-> I patched .stable and tried building console-image. This build failed on
-> omap3-sgx-modules. Is there a way we can avoid building this? I suspect
-> I can make it build by reading the bb file and downloading something
-> from the TI website, but I'd like stable to build without having to do
-> that.
+From: Koen Kooi <koen@openembedded.org>
 
-The sgx modules don't need any evil bits :) My plan was to update the 
-sgx modules and codec-engine, dmai, etc in seperate patches along the way.
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ .../omap3-sgx-modules_1.3.13.1397.bb               |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
 
-regards,
-
-Koen
+diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1397.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1397.bb
+index 985a0c0..3f9a3cd 100644
+--- a/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1397.bb
++++ b/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1397.bb
+@@ -1,8 +1,6 @@
+ DESCRIPTION = "Kernel drivers for the PowerVR SGX chipset found in the omap3 SoCs"
+ LICENSE = "GPLv2"
+ 
+-PR = "r6"
+-
+ inherit module
+ 
+ SRC_URI = "http://dominion.thruhere.net/koen/OE/omap3-sgx-modules-${PV}.tar.bz2 \
+@@ -16,7 +14,10 @@ PVRBUILD = "release"
+ MAKE_TARGETS = " BUILD=${PVRBUILD}"
+ 
+ do_compile_prepend() {
+-	find ${S} -name "*.*o" | xargs rm
++	find ${S} -name "*.*o" | xargs rm || true
++	if [ $(echo ${KERNEL_VERSION} | cut -c5,6) -gt 28 ] ; then
++		sed -i -e 's:omap_dispc_unregister_isr(OMAPLFBVSyncISR):omap_dispc_unregister_isr(OMAPLFBVSyncISR, psSwapChain, DISPC_IRQ_VSYNC):g' services4/3rdparty/dc_omap3430_linux/omaplfb_linux.c
++	fi
+ }
+ 
+ do_install() {
+-- 
+1.6.1
 
 
 
