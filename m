@@ -1,31 +1,39 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1M9GdA-0007IM-I8
+	(envelope-from <castroenrico@gmail.com>) id 1M9L7P-0003Vj-8H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 May 2009 12:45:09 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1M9GVE-0003f4-Aq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 May 2009 11:36:56 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1M9GVE-0006yP-5T
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 May 2009 11:36:56 +0100
-From: Phil Blundell <philb@gnu.org>
+	Wed, 27 May 2009 17:32:39 +0200
+Received: by bwz19 with SMTP id 19so4676489bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 May 2009 08:24:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=ctGq/XxHofsDqZHiTVn3Zh52RWats0OsKCf6QMUrjo0=;
+	b=hyHVn50M6B3PpCUWykTgmtjRfcyz3WXQoB1H2zERRSgG4C/4w7GHRh6WfF5S4jfpVy
+	/z7kBHPT0XsXBy1E8S/wm6ZXDPYVU2/AfH6qPukB81ep0MZAUMITDh+wx9GWSDjqYeR/
+	Y9PZjdycK5Ic18LXnElB73AKcKXTC/sbxufH4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=JlCcXWzELtWo+4rSLllV5tfGOMiSBUd1mHH9pYhebPY2hlbPN3EwfbRe6Ih9v5wCfW
+	mVfAwbOTcOmn+G0r18+KhACPlJyQ8vx9wk45tzht+6JKutE1QIEBO/AwibAlpMju4aak
+	LPu3rrOAXPwjrpgrzDwjmVgln0zPJUxPYSAKE=
+Received: by 10.223.106.15 with SMTP id v15mr193365fao.15.1243437859463;
+	Wed, 27 May 2009 08:24:19 -0700 (PDT)
+Received: from ubuntu.redarrow (net-93-144-30-123.t2.dsl.vodafone.it
+	[93.144.30.123])
+	by mx.google.com with ESMTPS id 28sm4000819fkx.54.2009.05.27.08.24.17
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 27 May 2009 08:24:17 -0700 (PDT)
+Message-ID: <4A1D5B1F.4060608@gmail.com>
+Date: Wed, 27 May 2009 17:24:15 +0200
+From: Enrico Castro <castroenrico@gmail.com>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <Pine.LNX.4.64.0905262144170.6446@juice.ott.cti.com>
-References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
-	<Pine.LNX.4.64.0905252339270.6446@juice.ott.cti.com>
-	<1243353706.9080.367.camel@mill.internal.reciva.com>
-	<Pine.LNX.4.64.0905262144170.6446@juice.ott.cti.com>
-Date: Wed, 27 May 2009 11:36:55 +0100
-Message-Id: <1243420616.14104.9.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH] busybox: allow building when prefix is "", not	"/usr".
+Subject: ti-codec-engine_2.23.bb failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +47,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2009 10:45:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 27 May 2009 15:32:39 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-05-26 at 21:53 -0400, Michael Smith wrote:
-> I changed the "cp" back to "mv" and the package looks a bit lighter on 
-> symlinks, and the final rootfs is the same. I'd still want to play a bit 
-> with upgrades though, and that may be a while. If it looks OK, I'll send 
-> it up as a separate patch later.
-> 
-> This is where it changed from mv to cp:
-> 
-> commit f7f1ac27e90f042fa1c4322b193b5b6a27cd4c07
-> Author: Koen Kooi <koen@openembedded.org>
-> Date:   Sat Aug 26 14:02:37 2006 +0000
-> 
->     busybox 1.2.1: replace mv with a non-gnu-ish cp
+I build ti-codec-engine_2.23.bb, but the source codec_engine_2_23_01.tar.gz did not found in 
+www.angstrom-distribution.org
 
-Okay, great.  Yeah, that commit f7f1ac27e90f042fa1c4322b193b5b6a27cd4c07
-looks fairly bogus: I don't know what the intent of it was, but it
-doesn't seem like it can be the right way to solve any problem.
+NOTE: Running task 1786 of 5760 (ID: 475, 
+/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, do_fetch)
+NOTE: fetch http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
+--16:48:23--  http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
+            => `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
+Resolving install.tarball.in.source.dir... failed: Name or service not known.
+NOTE: fetch http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz
+--16:48:23--  http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz
+            => `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
+Resolving www.angstrom-distribution.org... 85.214.40.226
+Connecting to www.angstrom-distribution.org|85.214.40.226|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+16:48:36 ERROR 404: Not Found.
 
-Keep us posted once you've had a chance to test the upgrades.
+NOTE: Task failed: Fetch failed: http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb do_fetch failed
+ERROR: Task 475 (/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, do_fetch) failed
+NOTE: Tasks Summary: Attempted 1785 tasks of which 1785 didn't need to be rerun and 1 failed.
+ERROR: '/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb' failed
 
-p.
+Regards,
 
+Enrico
 
 
 
