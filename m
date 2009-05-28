@@ -1,40 +1,20 @@
-Received: from [209.85.220.220] (helo=mail-fx0-f220.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <castroenrico@gmail.com>) id 1M9hTN-0000Fu-U4
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 May 2009 17:24:49 +0200
-Received: by fxm20 with SMTP id 20so5463944fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 May 2009 08:16:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=p2X5d6a0TMf++YVGRPvXt8ml3271o8b8vwQUg8lm45w=;
-	b=FlodbfP5DlkiFYGzZX4dt9/3U0s7nKnZ3Gvz9PHbloD86R8VaCM1GGzGUEgdz+lW7G
-	WRnr3WHM5Cbd9ZjIfkzJ4s9br+2oIy/AIPetI/zFguKHf0OvAwzk3/aLJCgfvmA5Lg7H
-	xKSWWWKUrJSOHfPSnbJ4jS1CdPCW6tFh09rQM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=I4fdwNCb094g1ihFnLkT4y6ugxXU96k4F4AboqnxuilxINOMbM+i6KGR0FEi0mjKdf
-	PHa8tpocQfZ3qP1H1xKvdYyb4vSJdh8Ii5ct4PJ4qWh7CVuoWD1FOrdg/Q73oylpugds
-	HWE6hpegRBezEEAz9/q9eYEqjfFbioqExk30g=
-Received: by 10.103.248.17 with SMTP id a17mr865001mus.97.1243523788369;
-	Thu, 28 May 2009 08:16:28 -0700 (PDT)
-Received: from ubuntu.redarrow (net-93-144-7-97.t2.dsl.vodafone.it
-	[93.144.7.97])
-	by mx.google.com with ESMTPS id t10sm287984muh.0.2009.05.28.08.16.25
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 28 May 2009 08:16:26 -0700 (PDT)
-Message-ID: <4A1EAAC8.8010700@gmail.com>
-Date: Thu, 28 May 2009 17:16:24 +0200
-From: Enrico Castro <castroenrico@gmail.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+	(envelope-from <philip@balister.org>) id 1M9hlD-0001JM-FS
+	for openembedded-devel@openembedded.org; Thu, 28 May 2009 17:43:17 +0200
+Received: (qmail 8910 invoked by uid 1003); 28 May 2009 15:34:52 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 28 May 2009 15:34:51 -0000
+Message-ID: <4A1EAF18.4070206@balister.org>
+Date: Thu, 28 May 2009 11:34:48 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4A1D5B1F.4060608@gmail.com> <4A1D5C7B.9010504@balister.org>
-In-Reply-To: <4A1D5C7B.9010504@balister.org>
+	<4A1EAAC8.8010700@gmail.com>
+In-Reply-To: <4A1EAAC8.8010700@gmail.com>
 Subject: Re: ti-codec-engine_2.23.bb failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,86 +29,172 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2009 15:24:50 -0000
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+X-List-Received-Date: Thu, 28 May 2009 15:43:19 -0000
+X-Groupsio-MsgNum: 10800
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms060208030601070101070203"
+
+--------------ms060208030601070101070203
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Thank for your immediately reply. Can I follow this steps[1]?
-
-Regards,
-
-Enrico
-
-[1] https://gstreamer.ti.com/gf/project/gstreamer_ti/wiki/?pagename=BuildingWithAngstrom
-
-Philip Balister wrote:
-> Enrico Castro wrote:
->> I build ti-codec-engine_2.23.bb, but the source 
->> codec_engine_2_23_01.tar.gz did not found in 
->> www.angstrom-distribution.org
+Enrico Castro wrote:
+> Thank for your immediately reply. Can I follow this steps[1]?
 > 
-> You need to read the instructions in the bb file. You will need an 
-> account on the TI website and download the source yourself. You will 
-> also need to download the DSP toolchain.
+
+I haven't used that set of instructions, but it should be a good start.
+
+Philip
+
+> Regards,
 > 
-> Philip
+> Enrico
 > 
+> [1] 
+> https://gstreamer.ti.com/gf/project/gstreamer_ti/wiki/?pagename=BuildingWithAngstrom 
+> 
+> 
+> Philip Balister wrote:
+>> Enrico Castro wrote:
+>>> I build ti-codec-engine_2.23.bb, but the source 
+>>> codec_engine_2_23_01.tar.gz did not found in 
+>>> www.angstrom-distribution.org
 >>
->> NOTE: Running task 1786 of 5760 (ID: 475, 
->> /home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, 
->> do_fetch)
->> NOTE: fetch 
->> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
->> --16:48:23--  
->> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
->>            => `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
->> Resolving install.tarball.in.source.dir... failed: Name or service not 
->> known.
->> NOTE: fetch 
->> http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz 
+>> You need to read the instructions in the bb file. You will need an 
+>> account on the TI website and download the source yourself. You will 
+>> also need to download the DSP toolchain.
 >>
->> --16:48:23--  
->> http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz 
+>> Philip
 >>
->>            => `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
->> Resolving www.angstrom-distribution.org... 85.214.40.226
->> Connecting to www.angstrom-distribution.org|85.214.40.226|:80... 
->> connected.
->> HTTP request sent, awaiting response... 404 Not Found
->> 16:48:36 ERROR 404: Not Found.
+>>>
+>>> NOTE: Running task 1786 of 5760 (ID: 475, 
+>>> /home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, 
+>>> do_fetch)
+>>> NOTE: fetch 
+>>> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
+>>> --16:48:23--  
+>>> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
+>>>            => 
+>>> `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
+>>> Resolving install.tarball.in.source.dir... failed: Name or service 
+>>> not known.
+>>> NOTE: fetch 
+>>> http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz 
+>>>
+>>> --16:48:23--  
+>>> http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz 
+>>>
+>>>            => 
+>>> `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
+>>> Resolving www.angstrom-distribution.org... 85.214.40.226
+>>> Connecting to www.angstrom-distribution.org|85.214.40.226|:80... 
+>>> connected.
+>>> HTTP request sent, awaiting response... 404 Not Found
+>>> 16:48:36 ERROR 404: Not Found.
+>>>
+>>> NOTE: Task failed: Fetch failed: 
+>>> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
+>>> ERROR: TaskFailed event exception, aborting
+>>> ERROR: Build of 
+>>> /home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb 
+>>> do_fetch failed
+>>> ERROR: Task 475 
+>>> (/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, 
+>>> do_fetch) failed
+>>> NOTE: Tasks Summary: Attempted 1785 tasks of which 1785 didn't need 
+>>> to be rerun and 1 failed.
+>>> ERROR: 
+>>> '/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb' 
+>>> failed
+>>>
+>>> Regards,
+>>>
+>>> Enrico
+>>>
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>>
 >>
->> NOTE: Task failed: Fetch failed: 
->> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
->> ERROR: TaskFailed event exception, aborting
->> ERROR: Build of 
->> /home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb 
->> do_fetch failed
->> ERROR: Task 475 
->> (/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, 
->> do_fetch) failed
->> NOTE: Tasks Summary: Attempted 1785 tasks of which 1785 didn't need to 
->> be rerun and 1 failed.
->> ERROR: 
->> '/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb' 
->> failed
->>
->> Regards,
->>
->> Enrico
->>
+>> ------------------------------------------------------------------------
 >>
 >> _______________________________________________
 >> Openembedded-devel mailing list
 >> Openembedded-devel@lists.openembedded.org
 >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
 > 
-> ------------------------------------------------------------------------
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
+--------------ms060208030601070101070203
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
+OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
+Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
+MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
+EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
+V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
+ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
+ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
+SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
+n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
+R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
+/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
+kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
+Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
+urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUyODE1
+MzQ0OFowIwYJKoZIhvcNAQkEMRYEFIVlWywzvlorF+I/UnAKi9o+ZpXxMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
+/DANBgkqhkiG9w0BAQEFAASCAQCAwRR1bZwGuSYmNr2U+wmhU1dNBOJcooyvklhUmDidvEcRyieJ
+cIDy48+v7Yb3JGIhkVLn5zBo/mBPya4XAhGD7Cq9xwmqjK7sa/IyR0b5NTbkevY33pekMABUWyVu
+SXlSI9kW2tbQ6+UYILc5g1nuQht3zxqrWlSvIkvDsPKTr9POaHuhsnU0gJLnn47AwwmdlfZDZ3pc
+nNkUm1khVn8mGPcP4oyQoP3B4sCr55BSMGAkTCgg9mXCn1PUwGPfdPj8o66ggZEHF2m2S0HP3hkk
+rI1qHFH7xEHCgfLZoWGuyJiNIi+/77Zg4ItQWpVh94Hc9lBKCuHx4bC7v4AvngIyAAAAAAAA
 
+--------------ms060208030601070101070203--
