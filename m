@@ -1,21 +1,21 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [216.145.245.197] (helo=mx01.dls.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1M9hlD-0001JM-FS
-	for openembedded-devel@openembedded.org; Thu, 28 May 2009 17:43:17 +0200
-Received: (qmail 8910 invoked by uid 1003); 28 May 2009 15:34:52 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 28 May 2009 15:34:51 -0000
-Message-ID: <4A1EAF18.4070206@balister.org>
-Date: Thu, 28 May 2009 11:34:48 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <mwester@dls.net>) id 1M9hoh-0001SL-7u
+	for openembedded-devel@openembedded.org; Thu, 28 May 2009 17:46:51 +0200
+Received: from [209.242.7.134] (helo=[192.168.231.111])
+	by mx01.dls.net with esmtpa (Exim 4.69)
+	(envelope-from <mwester@dls.net>) id 1M9hgZ-0005ts-E9
+	for openembedded-devel@openembedded.org; Thu, 28 May 2009 10:38:28 -0500
+Message-ID: <4A1EAFEF.8010902@dls.net>
+Date: Thu, 28 May 2009 10:38:23 -0500
+From: "Mike Westerhof (mwester)" <mwester@dls.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.21) Gecko/20090302 Thunderbird/2.0.0.21 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4A1D5B1F.4060608@gmail.com> <4A1D5C7B.9010504@balister.org>
-	<4A1EAAC8.8010700@gmail.com>
-In-Reply-To: <4A1EAAC8.8010700@gmail.com>
-Subject: Re: ti-codec-engine_2.23.bb failed
+To: openembedded-devel@openembedded.org
+References: <87d49uaq9f.wl%peter@chubb.wattle.id.au>
+In-Reply-To: <87d49uaq9f.wl%peter@chubb.wattle.id.au>
+Subject: Re: console-image trying to build X?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,172 +29,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2009 15:43:19 -0000
-X-Groupsio-MsgNum: 10800
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060208030601070101070203"
-
---------------ms060208030601070101070203
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 28 May 2009 15:46:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Enrico Castro wrote:
-> Thank for your immediately reply. Can I follow this steps[1]?
-> 
+Peter Chubb wrote:
+> Hi,
+> 	I'm using the tip-of-tree as of this morning openembedded
+> recipes to build a console image for the Beagleboard.  After a while,
+> I see:
+> ...
+> NOTE: collecting binary locales from locale tree
+> NOTE: Multiple libraries (libnss_nis.so.2, libnss_nisplus.so.2, libnss_hesiod.so.2) found, but LEAD_SONAME 'libc.so' doesn't match any of them
+> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+> NOTE: Tasks Summary: Attempted 554 tasks of which 0 didn't need to be rerun and 1 failed.
+> ERROR: '/home/peterc/src/OpenEmbedded/openembedded/recipes/xorg-proto/xproto-native_7.0.15.bb' failed
 
-I haven't used that set of instructions, but it should be a good start.
+xproto-native is missing the dependency on util-macros-native.
 
-Philip
+I lack the familiarity with the X recipes to know where this dependency
+should be added; perhaps someone who knows this better can just add that.
 
-> Regards,
-> 
-> Enrico
-> 
-> [1] 
-> https://gstreamer.ti.com/gf/project/gstreamer_ti/wiki/?pagename=BuildingWithAngstrom 
-> 
-> 
-> Philip Balister wrote:
->> Enrico Castro wrote:
->>> I build ti-codec-engine_2.23.bb, but the source 
->>> codec_engine_2_23_01.tar.gz did not found in 
->>> www.angstrom-distribution.org
->>
->> You need to read the instructions in the bb file. You will need an 
->> account on the TI website and download the source yourself. You will 
->> also need to download the DSP toolchain.
->>
->> Philip
->>
->>>
->>> NOTE: Running task 1786 of 5760 (ID: 475, 
->>> /home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, 
->>> do_fetch)
->>> NOTE: fetch 
->>> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
->>> --16:48:23--  
->>> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
->>>            => 
->>> `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
->>> Resolving install.tarball.in.source.dir... failed: Name or service 
->>> not known.
->>> NOTE: fetch 
->>> http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz 
->>>
->>> --16:48:23--  
->>> http://www.angstrom-distribution.org/unstable/sources/codec_engine_2_23_01.tar.gz 
->>>
->>>            => 
->>> `/home/enrico/oe/tmp/downloads/codec_engine_2_23_01.tar.gz'
->>> Resolving www.angstrom-distribution.org... 85.214.40.226
->>> Connecting to www.angstrom-distribution.org|85.214.40.226|:80... 
->>> connected.
->>> HTTP request sent, awaiting response... 404 Not Found
->>> 16:48:36 ERROR 404: Not Found.
->>>
->>> NOTE: Task failed: Fetch failed: 
->>> http://install.tarball.in.source.dir/codec_engine_2_23_01.tar.gz
->>> ERROR: TaskFailed event exception, aborting
->>> ERROR: Build of 
->>> /home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb 
->>> do_fetch failed
->>> ERROR: Task 475 
->>> (/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb, 
->>> do_fetch) failed
->>> NOTE: Tasks Summary: Attempted 1785 tasks of which 1785 didn't need 
->>> to be rerun and 1 failed.
->>> ERROR: 
->>> '/home/enrico/oe/openembedded/recipes/dsplink/ti-codec-engine_2.23.bb' 
->>> failed
->>>
->>> Regards,
->>>
->>> Enrico
->>>
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->> ------------------------------------------------------------------------
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+In the meantime, just "bitbake util-macros-native", and restart your
+original build; this time xorg-proto will build correctly.
 
---------------ms060208030601070101070203
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+> Why are the recipes even trying to build X for a console-image?  (to
+> me, console means no X or graphics) And how can I work out how to fix
+> the error? 
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUyODE1
-MzQ0OFowIwYJKoZIhvcNAQkEMRYEFIVlWywzvlorF+I/UnAKi9o+ZpXxMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCAwRR1bZwGuSYmNr2U+wmhU1dNBOJcooyvklhUmDidvEcRyieJ
-cIDy48+v7Yb3JGIhkVLn5zBo/mBPya4XAhGD7Cq9xwmqjK7sa/IyR0b5NTbkevY33pekMABUWyVu
-SXlSI9kW2tbQ6+UYILc5g1nuQht3zxqrWlSvIkvDsPKTr9POaHuhsnU0gJLnn47AwwmdlfZDZ3pc
-nNkUm1khVn8mGPcP4oyQoP3B4sCr55BSMGAkTCgg9mXCn1PUwGPfdPj8o66ggZEHF2m2S0HP3hkk
-rI1qHFH7xEHCgfLZoWGuyJiNIi+/77Zg4ItQWpVh94Hc9lBKCuHx4bC7v4AvngIyAAAAAAAA
+This has been a topic of discussion from time-to-time.  In all
+likelihood, X is being pulled in to satisfy dbus or bluez (I don't
+recall which off the top of my head).  You probably will not end up with
+the full X packages on your resulting image; OE just need to build that
+in order to satisfy some very specific build-time dependencies.
 
---------------ms060208030601070101070203--
+As a side note, I have been meaning for some time to create a "no-X"
+version of the particular package that causes this, to suit my own
+needs; once that gets done there might be an easy way to do a build that
+won't have this dependency.
+
+Regards,
+Mike (mwester)
+
+
