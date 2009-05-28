@@ -1,35 +1,24 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1M9kP4-0000Ac-Vz
+	(envelope-from <denis@denix.org>) id 1M9lzo-0000kt-9a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 May 2009 20:32:36 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id C1D054C67DA;
-	Thu, 28 May 2009 14:24:14 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 11137-03; Thu, 28 May 2009 14:24:14 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 9F2D73F38FD; Thu, 28 May 2009 14:24:14 -0400 (EDT)
-X-Spam-Score: 
-X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id ED6E64C67CE;
-	Thu, 28 May 2009 14:24:11 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id E20971B48AE; Thu, 28 May 2009 14:24:11 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
+	Thu, 28 May 2009 22:14:36 +0200
+Received: from gandalf.denix.org ([71.127.60.148]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KKD00BSED44Y8M0@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	28 May 2009 14:36:09 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2C21714AF5F; Thu,
+	28 May 2009 15:36:04 -0400 (EDT)
+Date: Thu, 28 May 2009 15:36:04 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 May 2009 14:24:11 -0400
-Message-Id: <1243535051-10168-2-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <1243535051-10168-1-git-send-email-msmith@cbnco.com>
-References: <1243535051-10168-1-git-send-email-msmith@cbnco.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH] vim: be an alternative to /bin/vi; switch to INC_PR
+Message-id: <20090528193604.GB2625@denix.org>
+References: <1243535013-10090-1-git-send-email-msmith@cbnco.com>
+MIME-version: 1.0
+In-reply-to: <1243535013-10090-1-git-send-email-msmith@cbnco.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH 1/2] tcpdump: fix mix of tabs and spaces in	do_configure()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,86 +32,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2009 18:32:38 -0000
+X-List-Received-Date: Thu, 28 May 2009 20:14:36 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/vim/gvim_7.0.bb |    2 +-
- recipes/vim/vim.inc     |    9 ++++++++-
- recipes/vim/vim_6.4.bb  |    2 ++
- recipes/vim/vim_7.0.bb  |    2 +-
- 4 files changed, 12 insertions(+), 3 deletions(-)
+On Thu, May 28, 2009 at 02:23:32PM -0400, Michael Smith wrote:
+> I randomly picked tabs.
+> 
+> Signed-off-by: Michael Smith <msmith@cbnco.com>
 
-diff --git a/recipes/vim/gvim_7.0.bb b/recipes/vim/gvim_7.0.bb
-index a073e65..60aa041 100644
---- a/recipes/vim/gvim_7.0.bb
-+++ b/recipes/vim/gvim_7.0.bb
-@@ -3,7 +3,7 @@ VIMVER = "70"
- require vim.inc
- 
- DEPENDS += "gtk+ xt"
--PR = "r1"
-+PR = "${INC_PR}.1"
- FILESPATHPKG =. "vim-${PV}:vim:"
- 
- EXTRA_OECONF = "--enable-gui=gtk2 --enable-gtk2-test --disable-gtktest \
-diff --git a/recipes/vim/vim.inc b/recipes/vim/vim.inc
-index f675ce8..a766acc 100644
---- a/recipes/vim/vim.inc
-+++ b/recipes/vim/vim.inc
-@@ -3,12 +3,14 @@ SECTION = "console/utils"
- DEPENDS = "ncurses"
- LICENSE = "vim"
- 
-+INC_PR = "r2"
-+
- SRC_URI = "ftp://ftp.vim.org/pub/vim/unix/vim-${PV}.tar.bz2 \
- 	   file://configure.patch;patch=1"
- 
- S = "${WORKDIR}/vim${VIMVER}/src"
- 
--inherit autotools
-+inherit autotools update-alternatives
- 
- do_configure () {
- 	rm -f auto/*
-@@ -28,3 +30,8 @@ FILES_vim-tutor = "${datadir}/vim/vim${VIMVER}/tutor ${bindir}/vimtutor"
- #FILES_${PN} = "${bindir} ${sbindir} ${libexecdir} ${libdir}/lib*.so.* \
- #	       ${libdir}/*/ ${sysconfdir} ${sharedstatedir} ${localstatedir} \
- #	       /bin /sbin /lib/*/ /lib/*.so* ${datadir}/vim"
-+
-+ALTERNATIVE_NAME = "vi"
-+ALTERNATIVE_PATH = "vim"
-+ALTERNATIVE_LINK = "${base_bindir}/vi"
-+ALTERNATIVE_PRIORITY = "100"
-diff --git a/recipes/vim/vim_6.4.bb b/recipes/vim/vim_6.4.bb
-index 4cf6591..d062bc5 100644
---- a/recipes/vim/vim_6.4.bb
-+++ b/recipes/vim/vim_6.4.bb
-@@ -2,6 +2,8 @@ VIMVER = "64"
- 
- require vim.inc
- 
-+PR = "${INC_PR}.1"
-+
- EXTRA_OECONF = "--enable-gui=none --disable-gtktest \
- 		--disable-xim --with-features=normal \
- 		--disable-gpm --without-x --disable-netbeans \
-diff --git a/recipes/vim/vim_7.0.bb b/recipes/vim/vim_7.0.bb
-index c821f6e..e3fa7ab 100644
---- a/recipes/vim/vim_7.0.bb
-+++ b/recipes/vim/vim_7.0.bb
-@@ -2,7 +2,7 @@ VIMVER = "70"
- 
- require vim.inc
- 
--PR = "r1"
-+PR = "${INC_PR}.1"
- 
- EXTRA_OECONF = "--enable-gui=none --disable-gtktest \
- 		--disable-xim --with-features=big \
--- 
-1.5.6.5
+I'm not sure this kind of cleanup requires patch review...
 
+> ---
+>  recipes/tcpdump/tcpdump_3.9.7.bb |    4 ++--
+>  recipes/tcpdump/tcpdump_4.0.0.bb |    6 +++---
+>  2 files changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/recipes/tcpdump/tcpdump_3.9.7.bb b/recipes/tcpdump/tcpdump_3.9.7.bb
+> index ba9710d..962663f 100644
+> --- a/recipes/tcpdump/tcpdump_3.9.7.bb
+> +++ b/recipes/tcpdump/tcpdump_3.9.7.bb
+> @@ -15,6 +15,6 @@ EXTRA_OECONF = "--without-crypto"
+>  do_configure() {
+>  	gnu-configize
+>  	oe_runconf
+> -        sed -i 's:/usr/lib:${STAGING_LIBDIR}:' ./Makefile
+> -        sed -i 's:/usr/include:${STAGING_INCDIR}:' ./Makefile
+> +	sed -i 's:/usr/lib:${STAGING_LIBDIR}:' ./Makefile
+> +	sed -i 's:/usr/include:${STAGING_INCDIR}:' ./Makefile
+>  }
+> diff --git a/recipes/tcpdump/tcpdump_4.0.0.bb b/recipes/tcpdump/tcpdump_4.0.0.bb
+> index 537cb36..c807fb1 100644
+> --- a/recipes/tcpdump/tcpdump_4.0.0.bb
+> +++ b/recipes/tcpdump/tcpdump_4.0.0.bb
+> @@ -18,8 +18,8 @@ EXTRA_OECONF = "--without-crypto"
+>  
+>  do_configure() {
+>  	gnu-configize
+> -    autoconf
+> +	autoconf
+>  	oe_runconf
+> -        sed -i 's:/usr/lib:${STAGING_LIBDIR}:' ./Makefile
+> -        sed -i 's:/usr/include:${STAGING_INCDIR}:' ./Makefile
+> +	sed -i 's:/usr/lib:${STAGING_LIBDIR}:' ./Makefile
+> +	sed -i 's:/usr/include:${STAGING_INCDIR}:' ./Makefile
+>  }
+> -- 
+> 1.5.6.5
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
