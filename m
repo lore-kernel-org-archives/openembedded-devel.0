@@ -1,40 +1,20 @@
-Received: from [128.222.32.20] (helo=mexforward.lss.emc.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Lin_Lynn@emc.com>) id 1M9Utb-00009I-FC
-	for openembedded-devel@openembedded.org; Thu, 28 May 2009 03:59:08 +0200
-Received: from hop04-l1d11-si02.isus.emc.com (HOP04-L1D11-SI02.isus.emc.com
-	[10.254.111.55])
-	by mexforward.lss.emc.com (Switch-3.2.5/Switch-3.1.7) with ESMTP id
-	n4S1ojKH010787
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Wed, 27 May 2009 21:50:45 -0400 (EDT)
-From: Lin_Lynn@emc.com
-Received: from mailhub.lss.emc.com (nagas.lss.emc.com [10.254.144.15]) by
-	hop04-l1d11-si02.isus.emc.com (Tablus Interceptor) for
-	<openembedded-devel@openembedded.org>;
-	Wed, 27 May 2009 21:50:35 -0400
-Received: from corpussmtp2.corp.emc.com (corpussmtp2.corp.emc.com
-	[128.221.14.146])
-	by mailhub.lss.emc.com (Switch-3.3.2mp/Switch-3.3.2mp) with ESMTP id
-	n4S1oZvc019564 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2009 21:50:35 -0400
-Received: from CORPUSMX100C.corp.emc.com ([128.222.76.50]) by
-	corpussmtp2.corp.emc.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 27 May 2009 21:50:35 -0400
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <philip@balister.org>) id 1M9VRW-0006Nd-Az
+	for openembedded-devel@openembedded.org; Thu, 28 May 2009 04:34:11 +0200
+Received: (qmail 7831 invoked by uid 1003); 28 May 2009 02:25:47 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 28 May 2009 02:25:47 -0000
+Message-ID: <4A1DF629.2080406@balister.org>
+Date: Wed, 27 May 2009 22:25:45 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Date: Wed, 27 May 2009 21:50:23 -0400
-Message-ID: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe][patch] remove dirty .swp file in mini-httpd recipe
-Thread-Index: AcnfNqoN0HAnmwbOSUCdy3giihI4cA==
-To: <openembedded-devel@openembedded.org>
-X-OriginalArrivalTime: 28 May 2009 01:50:35.0183 (UTC)
-	FILETIME=[B14113F0:01C9DF36]
-X-EMM-EM: Active
-Subject: [patch] remove dirty .swp file in mini-httpd recipe
+To: openembedded-devel@lists.openembedded.org
+References: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>
+In-Reply-To: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>
+Subject: Re: [patch] remove dirty .swp file in mini-httpd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,67 +28,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2009 01:59:20 -0000
-X-Groupsio-MsgNum: 10793
-Content-class: urn:content-classes:message
-Content-Type: multipart/mixed; boundary="----_=_NextPart_001_01C9DF36.B13D6E7A"
+X-List-Received-Date: Thu, 28 May 2009 02:34:16 -0000
+X-Groupsio-MsgNum: 10794
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms040406080906010908070209"
 
-------_=_NextPart_001_01C9DF36.B13D6E7A
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+--------------ms040406080906010908070209
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Acked-by: Philip Balister <philip@balister.org>
 
-In mini-httpd recipe,there is a .mini-httpd_1.19.bb.swp dirty file,the
-patch in the attach is to remove this dirty file.
+Lin_Lynn@emc.com wrote:
+> In mini-httpd recipe,there is a .mini-httpd_1.19.bb.swp dirty file,the
+> patch in the attach is to remove this dirty file.
+> 
+> Thanks
+> 
+> Lynn Lin
+> 
+>  <<0001-remove-dirty-.swp-file.patch>> 
+> 
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Thanks
-
-Lynn Lin
-
- <<0001-remove-dirty-.swp-file.patch>>=20
-
-
-------_=_NextPart_001_01C9DF36.B13D6E7A
-Content-Type: application/octet-stream;
-	name="0001-remove-dirty-.swp-file.patch"
+--------------ms040406080906010908070209
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
-Content-Description: 0001-remove-dirty-.swp-file.patch
-Content-Disposition: attachment;
-	filename="0001-remove-dirty-.swp-file.patch"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-RnJvbSBlZmMyNWI1MmFjN2RiNzBmYzRjYzg1YTA2Mzg3MjEwMTVjMThjZDExIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBMeW5uIExpbiA8TGluX0x5bm5AZW1jLmNvbT4KRGF0ZTogVGh1
-LCAyOCBNYXkgMjAwOSAwOToyMjoyOCArMDgwMApTdWJqZWN0OiBbUEFUQ0hdIHJlbW92ZSBkaXJ0
-eSAuc3dwIGZpbGUKCi0tLQogcmVjaXBlcy9taW5pLWh0dHBkLy5taW5pLWh0dHBkXzEuMTkuYmIu
-c3dwIHwgIEJpbiAxMjI4OCAtPiAwIGJ5dGVzCiAxIGZpbGVzIGNoYW5nZWQsIDAgaW5zZXJ0aW9u
-cygrKSwgMCBkZWxldGlvbnMoLSkKIGRlbGV0ZSBtb2RlIDEwMDY0NCByZWNpcGVzL21pbmktaHR0
-cGQvLm1pbmktaHR0cGRfMS4xOS5iYi5zd3AKCmRpZmYgLS1naXQgYS9yZWNpcGVzL21pbmktaHR0
-cGQvLm1pbmktaHR0cGRfMS4xOS5iYi5zd3AgYi9yZWNpcGVzL21pbmktaHR0cGQvLm1pbmktaHR0
-cGRfMS4xOS5iYi5zd3AKZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0CmluZGV4IGQzODQ1NzcxMjQw
-OTE1Y2NlZjIwYmU1MWY4MDExYzc1MDE0MmEzNDUuLjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw
-MDAwMDAwMDAwMDAwMDAKR0lUIGJpbmFyeSBwYXRjaApsaXRlcmFsIDAKSGNtVj9kMDAwMDEKCmxp
-dGVyYWwgMTIyODgKemNtZUkyT15AM3w3e3tOJlgkOT84QVImJHFabHY4ayNMZ30lWkdsQ2tQU2pk
-JHZYLTU7RHlrR3M7entEaEZPZmFqCnooMXlTajJgKyNUZDt2Wk1GWEYteCZSaT9MMTZPIylQOERs
-ZWItNjtIa15iPyNKb0JISy07NTdkWDMpNm5ibnVGSwp6MEYqOFF7UTEjMCZNIX0xZ3hBe3UoQFo/
-bilufSMwRzZ+aD50U0Vxd3dWfTAwdiNGSXpFMWsoaSNzZTd5R08lVzEKekkyQmA9VFhDMyNeQCZv
-bXBweHpIb0JQK3khUWt2NklEIWM8Znp0QGcpdT97O0ppS3xaLV9Yc01qNXFNclNNSG5eCnokI3FQ
-QzJgflhCenl6Mjg2SlA+TmZDPkNoMzg+alFfPU1LPiFnX3RSXzRDfGA9ZW8hYkNjcCVrMDI1I1dP
-bj9iNgp6MFZjbyVtO2UpQzAhLWpQTkkoUHQrYjtvcFB0eVBZS21HcHlic09NdyhyMlc1cX1ORWxV
-alg9eF5leVJBKHVic2cKel5hMUhVPT5xQUdeOGkxU3o5VzUyYGpZZW9ESUB0TGtKS1BwQiRJVEp2
-YHpaIVdxPkU3QTRwJTN4K0VhfHhTcmNqCnpkVlpYazAyNSNXT24/YjYwVmNvJW44NVEoVTxGJkw+
-fVReTjdFXzVrKlBVKzVAZVhVdCl+ZEc1MlZvTH4qPWglTwp6ST9ZT2JFWXtVd2t9REJLdShpJSRK
-O3VoQiVhXmdYeW0jYz9CQnhkNTA8SmtzbE15dSkpe2s7cygoV2ZDcDZOeXgKemQofGx4eTRveCtg
-fVRgX3paSHw8bD0jZ0I7V0drRDw3V3Aha29LUGYqeGtiPUskdUtxTWlVaXRtOHZ3MmEtN2NzCnpw
-PTNROW4pSW16SnwzY1JmPkFsfGRUcl82VF5Sc1EqWGpBVD1lV0pUK3dfezlxRHZyMFZqaWo3czVX
-PC1vd29NVgp6WWJzNXNgPDRNKUkwX15Bd3ErSH05JkV+KyNne3UkWTA2fXI5P1FDSW49XyQ/bFhy
-XlchK29yVEJ5diROJnFjakYKejJtYzg1Si1kSSRhfUV1PzZFeXh9dWB0Q2ptTlomeTw+XlEqTD8o
-K31GUTsze21kaUpsJGp0RiQ4V21obUZEK3tyCnomfXpId1ptWW5jRk1hMkVXUHNuY2QoS2Y7aGFe
-JU5hTkR1bFVCOTRsLUVTRmleUWhCeW4+VUp6ZT4paXN1MXVTcAp6cWlgcV42ajdleUslemRtO2Rx
-fE8wOUFAWGlvU29feTRtWndLR0tfa2ooaHg7U3MqS1lzQ085OEF7b20+PHp5MH0Kem5uKWFvSlJJ
-VWszUG5hYXJYJVckKzV+ZiU5bXxYaVRKNz0jdGUzZGlVPH1Del5IX1VUeTY4ZFM1XyZSe0JCI21D
-CnpsWW81bVU+JkUyUTgqLVE1X2ZZYyhMUXFUSktZPG1aV3lJeWtkaiVQP34jRj4mS19tcWMlcEZF
-LW90fU47fkwoWQpiJFFWOEc1WnxUU192VnlKP35oezxNck45Zy0tRXZhUCRgXm8KCi0tIAoxLjUu
-NC4zCgo=
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
+OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
+Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
+MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
+EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
+V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
+ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
+ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
+SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
+n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
+R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
+/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
+kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
+Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
+urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDUyODAy
+MjU0NlowIwYJKoZIhvcNAQkEMRYEFM99i6BqyDTthAy8Vl/gQResciBKMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
+/DANBgkqhkiG9w0BAQEFAASCAQBm2km9e7F8Xp6zZHDWRbICGS06Cl1I5K0F/CDvVJCNGcmuu5C0
+Rdy1eJpAEqe+/oFcP8W7CJoE7DakM4Ql2EJ8lx3mh4Gl8QbnLWevjIiF962Tb9wJkhuVMrxTz4w2
+ZWt8SdOrwN7lvDEKjM60f7NzH1HprYChplgwr3VG7RUOKhPurk6vOLji2FBuSHh0vNK+zUZBGZwM
+52hp3SvfLNifijZ9ERSubEvYknyUib4/y7W5OCAgWt0onrsQ0ViyE1OkGdPbeAPSZXbMKnqW7gMJ
+f4GPMp9aeARaSq6O4SXYO7yeCFR2fb99l0T3KYo3/aHxcfLA0E/3mWcJt1bAnqttAAAAAAAA
 
-------_=_NextPart_001_01C9DF36.B13D6E7A--
+--------------ms040406080906010908070209--
