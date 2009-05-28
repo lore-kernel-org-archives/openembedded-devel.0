@@ -1,33 +1,32 @@
-Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
+Received: from [209.85.218.171] (helo=mail-bw0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1M9jmp-0001kN-GR
+	(envelope-from <aapo.rantalainen@gmail.com>) id 1M9k3K-0002NX-Sr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 May 2009 19:53:03 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so2807357ywk.42
+	Thu, 28 May 2009 20:10:08 +0200
+Received: by bwz19 with SMTP id 19so5544163bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 May 2009 10:44:43 -0700 (PDT)
+	Thu, 28 May 2009 11:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:date:message-id:subject
 	:from:to:content-type:content-transfer-encoding;
-	bh=yQD5xWZbeEz8YpPrl6x1Cbbv/gRHrDPkAhZ3nM0TS9I=;
-	b=p0gQmb4fdHshovZItnjUjPoUq+im9vUE6b4qjSxw31cZN2FQfaL94k4NCUjpGvDWOD
-	disrxhNOxeRMB3qKAcxc0Wq1P0w+miqNHRAUZvTD+GMIGimu3Sh4LPjKJJRBve/hJ+Jm
-	1z65ckjlxsztFHeFC1Z3KG2tg4CGJqsF3Vo4E=
+	bh=Ya/ndwhzZW4bx55ov/ZNy1ZUZLXBDoXY0ofuqNOndw4=;
+	b=gMXukNWQ6yFV+AwmtrXI5bhkOk5e3FU3mSmWjt0hHV1NplzVNuRMYqJyAg23MIpykO
+	mYxAuSofSk2UKTWJUl25Z0OesnTPDygoh7+P+Wz5AgQQkt2D3c6WrRD9fArmCx4FptuG
+	kj8PSxwXTHCe6wfH8TLboEHxb9xU+FzDVPvwY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=es174OJ4y7zGk8i6qjp4lnHxhSCJEy+7QNcCs/9W65Pin8BT/YR3DDpEornX30AKUb
-	i9i1KtYldotGl1jmV8bm2T+cjrMmIEQnxP5tA8E1sJA7OrQy4D42p2d6dra2rTJPXqWz
-	eEzUkYa4I3DhC/HW772s/p5U2h35cd/okumAk=
+	b=l3vvp8AlOLOeJWVXy3PEm/vAg34ZVURwZjwhs9oW8AKdtQIhyn0N/65kJOAO04u3Ub
+	CEb7JA1ZoF21mnmXM7oxUQjKMbzrhjm3k6mZ259bdHQF6El0HFJpeY0TAKBGFSZzIsYg
+	LpbP0iilNcY8+13RFMsvf5cHYaRPMwzMNb5hM=
 MIME-Version: 1.0
-Received: by 10.100.152.1 with SMTP id z1mr2657333and.69.1243532683217; Thu, 
-	28 May 2009 10:44:43 -0700 (PDT)
-Date: Thu, 28 May 2009 19:44:43 +0200
-Message-ID: <ac9c93b10905281044m82d0125jd395a9229bcabea5@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: "beagleboard@googlegroups.com" <beagleboard@googlegroups.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: DUTCH: Seminar 'Embedded Linux voor het MKB - 2', Vrijdagmiddag 3 	Juli 2009
+Received: by 10.223.112.130 with SMTP id w2mr1357636fap.65.1243533703452; Thu, 
+	28 May 2009 11:01:43 -0700 (PDT)
+Date: Thu, 28 May 2009 21:01:43 +0300
+Message-ID: <d67d61f10905281101o93474adu7d9ebdbca6fd0a1@mail.gmail.com>
+From: Aapo Rantalainen <aapo.rantalainen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: openttd in openembedded. new version on upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2009 17:53:03 -0000
+X-List-Received-Date: Thu, 28 May 2009 18:10:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Dear all.
+Hi, there are new version of openttd (0.7.0)  [www.openttd.org].
+Most important is feature to scroll map with left mouse button. So the
+game is playable with stylus or some other pointer with only one
+button.
+For some reason configure detects icu wrongly, even it is not
+installed, it tries to use it. Configure --without-icu or bitbake icu
+works.
 
-Fontys hogescholen has an afternoon seminar on embedded linux for
-small businesses on friday afternoon jul 3, 2009.
-The event is probably in dutch. A dutch web page can be found at
-http://www.fontys.nl/embeddedsystems/default.asp?idsitestructurenode=306637
-This page contains the schedule and how to register (free of charge).
-Locaion is Fontys Hogeschool ICT in Eindhoven (Rachelsmolen).
+Openttd can be packed with gpl-data files (without data files, it
+can't be even started). Data files has 89% ready graphics, but no
+sounds yet. User can still use original/proprietary data from
+Transport Tycoon.
 
-I will most likely attend, but if there are other OE or beagleboard
-developers or users that would like to visit, please let me know.
-Maybe we can grab some food or so afterwards.
+Now user must do after installing:
+cd usr/share/games/openttd/data
+wget http://dev.openttdcoop.org/attachments/download/90/OpenGFX_Alpha4.2.tar
+touch sample.cat
+openttd
 
-Best regards, Frans
+I suggest this data pack is provided with binary.
+
+http://wiki.openttd.org/Graphics_Replacement
+
+-Aapo Rantalainen
 
 
