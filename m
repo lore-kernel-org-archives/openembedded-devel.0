@@ -1,40 +1,40 @@
 Received: from [128.222.32.20] (helo=mexforward.lss.emc.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Lin_Lynn@emc.com>) id 1M9Ufg-0008EP-3B
-	for openembedded-devel@openembedded.org; Thu, 28 May 2009 03:44:40 +0200
-Received: from hop04-l1d11-si01.isus.emc.com (HOP04-L1D11-SI01.isus.emc.com
-	[10.254.111.54])
+	(envelope-from <Lin_Lynn@emc.com>) id 1M9Utb-00009I-FC
+	for openembedded-devel@openembedded.org; Thu, 28 May 2009 03:59:08 +0200
+Received: from hop04-l1d11-si02.isus.emc.com (HOP04-L1D11-SI02.isus.emc.com
+	[10.254.111.55])
 	by mexforward.lss.emc.com (Switch-3.2.5/Switch-3.1.7) with ESMTP id
-	n4S1aMIh004554
+	n4S1ojKH010787
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@openembedded.org>;
-	Wed, 27 May 2009 21:36:22 -0400 (EDT)
+	Wed, 27 May 2009 21:50:45 -0400 (EDT)
 From: Lin_Lynn@emc.com
-Received: from mailhub.lss.emc.com (numailhub.lss.emc.com [10.254.144.16]) by
-	hop04-l1d11-si01.isus.emc.com (Tablus Interceptor) for
+Received: from mailhub.lss.emc.com (nagas.lss.emc.com [10.254.144.15]) by
+	hop04-l1d11-si02.isus.emc.com (Tablus Interceptor) for
 	<openembedded-devel@openembedded.org>;
-	Wed, 27 May 2009 21:36:12 -0400
+	Wed, 27 May 2009 21:50:35 -0400
 Received: from corpussmtp2.corp.emc.com (corpussmtp2.corp.emc.com
 	[128.221.14.146])
-	by mailhub.lss.emc.com (Switch-3.3.2/Switch-3.3.2) with ESMTP id
-	n4S1aCTu032542 for <openembedded-devel@openembedded.org>;
-	Wed, 27 May 2009 21:36:12 -0400
+	by mailhub.lss.emc.com (Switch-3.3.2mp/Switch-3.3.2mp) with ESMTP id
+	n4S1oZvc019564 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 May 2009 21:50:35 -0400
 Received: from CORPUSMX100C.corp.emc.com ([128.222.76.50]) by
 	corpussmtp2.corp.emc.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 27 May 2009 21:36:12 -0400
+	Wed, 27 May 2009 21:50:35 -0400
 X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Date: Wed, 27 May 2009 21:35:59 -0400
-Message-ID: <065E68EB87448440A3E75B4DBB5E871C45A406@CORPUSMX100C.corp.emc.com>
+Date: Wed, 27 May 2009 21:50:23 -0400
+Message-ID: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>
 X-MS-Has-Attach: yes
 X-MS-TNEF-Correlator: 
-Thread-Topic: [oe][patch] remove dirty .swp file
-Thread-Index: AcnfNKcDMgUHdJORSoSGQiemsaD8vg==
+Thread-Topic: [oe][patch] remove dirty .swp file in mini-httpd recipe
+Thread-Index: AcnfNqoN0HAnmwbOSUCdy3giihI4cA==
 To: <openembedded-devel@openembedded.org>
-X-OriginalArrivalTime: 28 May 2009 01:36:12.0142 (UTC)
-	FILETIME=[AED778E0:01C9DF34]
+X-OriginalArrivalTime: 28 May 2009 01:50:35.0183 (UTC)
+	FILETIME=[B14113F0:01C9DF36]
 X-EMM-EM: Active
-Subject: [patch] remove dirty .swp file
+Subject: [patch] remove dirty .swp file in mini-httpd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +48,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2009 01:44:40 -0000
-X-Groupsio-MsgNum: 10792
+X-List-Received-Date: Thu, 28 May 2009 01:59:20 -0000
+X-Groupsio-MsgNum: 10793
 Content-class: urn:content-classes:message
-Content-Type: multipart/mixed; boundary="----_=_NextPart_001_01C9DF34.AED8657A"
+Content-Type: multipart/mixed; boundary="----_=_NextPart_001_01C9DF36.B13D6E7A"
 
-------_=_NextPart_001_01C9DF34.AED8657A
+------_=_NextPart_001_01C9DF36.B13D6E7A
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
 
-In mini-httpd package,there is a dirty .swp file.the patch is to remove
-this file
- <<0001-remove-dirty-.swp-file.patch>>=20
+In mini-httpd recipe,there is a .mini-httpd_1.19.bb.swp dirty file,the
+patch in the attach is to remove this dirty file.
+
+Thanks
 
 Lynn Lin
 
+ <<0001-remove-dirty-.swp-file.patch>>=20
 
-------_=_NextPart_001_01C9DF34.AED8657A
+
+------_=_NextPart_001_01C9DF36.B13D6E7A
 Content-Type: application/octet-stream;
 	name="0001-remove-dirty-.swp-file.patch"
 Content-Transfer-Encoding: base64
@@ -108,4 +111,4 @@ CnpsWW81bVU+JkUyUTgqLVE1X2ZZYyhMUXFUSktZPG1aV3lJeWtkaiVQP34jRj4mS19tcWMlcEZF
 LW90fU47fkwoWQpiJFFWOEc1WnxUU192VnlKP35oezxNck45Zy0tRXZhUCRgXm8KCi0tIAoxLjUu
 NC4zCgo=
 
-------_=_NextPart_001_01C9DF34.AED8657A--
+------_=_NextPart_001_01C9DF36.B13D6E7A--
