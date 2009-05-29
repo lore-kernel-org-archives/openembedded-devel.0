@@ -1,33 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.135.220.15] (helo=mx2.suse.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MABhh-0007fx-VZ
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 01:41:38 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MABZX-0003Qk-2C
-	for openembedded-devel@openembedded.org; Fri, 29 May 2009 23:33:11 +0000
-Received: from p7073-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.122.73])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 29 May 2009 23:33:11 +0000
-Received: from no2spam by p7073-ipngn201marunouchi.tokyo.ocn.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 29 May 2009 23:33:11 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 30 May 2009 08:32:56 +0900
-Message-ID: <gvprba$12c$1@ger.gmane.org>
-References: <1243002791-519-1-git-send-email-no2spam@nospam.arcornews.de>
-	<gv6dd7$rbq$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p7073-ipngn201marunouchi.tokyo.ocn.ne.jp
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-In-Reply-To: <gv6dd7$rbq$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] bluez: 3.36 does not need the hciattach-ti-bts.patch. Fixes do_patch.
+	(envelope-from <mhrusecky@suse.cz>) id 1MABoO-0007vb-Kq
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 30 May 2009 01:48:32 +0200
+Received: from relay1.suse.de (relay-ext.suse.de [195.135.221.8])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx2.suse.de (Postfix) with ESMTP id EE9DD74862
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 May 2009 01:40:04 +0200 (CEST)
+Date: Sat, 30 May 2009 01:39:58 +0200
+From: Michal Hrusecky <mhrusecky@suse.cz>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090529233958.GA16815@misibook.miska.isageek.net>
+MIME-Version: 1.0
+X-Operating-System: WindowsKiller Linux
+User-Agent: Mutt - the best e-mail client in the world
+Subject: [PATCH] zuc: fixed build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,16 +30,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 May 2009 23:41:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 May 2009 23:48:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Rolf Leggewie wrote:
-> Explanation: The TI patch is not necessary for 3.36.  My patch to OE is 
-> necessary to make sure that recipes/bluez/bluez-cups-backend_3.33.bb 
-> actually succeeds in do_patch.
+Corrected include name so it can be found and package can be built again.
 
-no objections in about a week, so I took the liberty to push this.
+Signed-off-by: Michal Hrusecky <Michal@Hrusecky.net>
+---
+ recipes/zuc/zuc/fixed-include.patch |   11 +++++++++++
+ recipes/zuc/zuc_1.1.2ern.bb         |    3 ++-
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/zuc/zuc/fixed-include.patch
 
+diff --git a/recipes/zuc/zuc/fixed-include.patch b/recipes/zuc/zuc/fixed-include.patch
+new file mode 100644
+index 0000000..8e62a68
+--- /dev/null
++++ b/recipes/zuc/zuc/fixed-include.patch
+@@ -0,0 +1,11 @@
++--- a/conv_matrix.cpp	2003-01-27 21:18:45.000000000 +0100
+++++ b/conv_matrix.cpp	2009-05-30 00:57:23.311764092 +0200
++@@ -27,7 +27,7 @@
++ #include <qmap.h>
++ #include <qcombobox.h>
++ #include <qpopupmenu.h>
++-#include <iostream.h>
+++#include <iostream>
++ #include <stdlib.h>
++ 
++ 
+diff --git a/recipes/zuc/zuc_1.1.2ern.bb b/recipes/zuc/zuc_1.1.2ern.bb
+index 32c8f98..eebab1a 100644
+--- a/recipes/zuc/zuc_1.1.2ern.bb
++++ b/recipes/zuc/zuc_1.1.2ern.bb
+@@ -8,7 +8,8 @@ APPDESKTOP = "${S}"
+ PR = "r3"
+ 
+ SRC_URI = "http://www.linux-solutions.at/projects/zaurus/source/zuc_V${PV}.tar.gz \
+-           http://nick.kreucher.net/zuc/zuc_units"
++           http://nick.kreucher.net/zuc/zuc_units \
++           file://fixed-include.patch;patch=1"
+ S = "${WORKDIR}/zuc_V${PV}"
+ 
+ inherit opie
+-- 
+1.6.3.1
 
 
