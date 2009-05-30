@@ -1,26 +1,35 @@
-Received: from [195.135.220.2] (helo=mx1.suse.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mhrusecky@suse.cz>) id 1MAUZw-0007HQ-U5
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 May 2009 21:50:52 +0200
-Received: from relay2.suse.de (mail2.suse.de [195.135.221.8])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.suse.de (Postfix) with ESMTP id EFC035362F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2009 21:42:19 +0200 (CEST)
-Date: Sat, 30 May 2009 21:42:15 +0200
-From: Michal Hrusecky <mhrusecky@suse.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090530194215.GA1186@misibook.miska.isageek.net>
-References: <20090529233958.GA16815@misibook.miska.isageek.net>
-	<200905301417.14796.bluelightning@bluelightning.org>
-	<gvrgts$7uc$2@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <gvrgts$7uc$2@ger.gmane.org>
-X-Operating-System: WindowsKiller Linux
-User-Agent: Mutt - the best e-mail client in the world
-Subject: Re: [PATCH] zuc: fixed build
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MAUcO-0007Ku-VB
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 21:53:25 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MAUU7-0007BL-Kz
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 19:44:51 +0000
+Received: from CPE00045a927e3e-CM001225463986.cpe.net.cable.rogers.com
+	([99.245.234.255]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 30 May 2009 19:44:51 +0000
+Received: from msmith by
+	CPE00045a927e3e-CM001225463986.cpe.net.cable.rogers.com with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 30 May 2009 19:44:51 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Michael Smith <msmith@cbnco.com>
+Date: Sat, 30 May 2009 19:44:40 +0000 (UTC)
+Message-ID: <loom.20090530T193103-897@post.gmane.org>
+References: <1243535013-10090-1-git-send-email-msmith@cbnco.com>	<20090528193604.GB2625@denix.org>
+	<4A1EF22E.2040500@balister.org> <4A1EF581.30503@cbnco.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 99.245.234.255 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.14) Gecko/20080417 BonEcho/2.0.0.14)
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 1/2] tcpdump: fix mix of tabs	and	spaces	in	do_configure()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,51 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 19:50:53 -0000
-X-Groupsio-MsgNum: 10857
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RnlQjJ0d97Da+TV1"
-Content-Disposition: inline
-
---RnlQjJ0d97Da+TV1
+X-List-Received-Date: Sat, 30 May 2009 19:53:25 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Rolf Leggewie - 23:47 30.05.09 wrote:
-> Paul Eggleton wrote:
-> > On Sat, 30 May 2009, Michal Hrusecky wrote:
-> >> Corrected include name so it can be found and package can be built aga=
-in.
->=20
-> > Applied, thanks.
->=20
-> do_fetch fails for this package.  Can you guys please look into this?
+Michael Smith <msmith <at> cbnco.com> writes:
 
-You are right, it seems like sources are no longer available on original
-URL. I got them in my download directory. I found that it has
-sourceforge pages. There is some downloadable version but it is older
-then version which was on URL in bitbake file. Will try to contact
-original author and if he wouldn't respond, will try to merge it
-somehow...
+> Philip Balister wrote:
+> > It doesn't look like Michael has commit access. I did try applying it, 
+> > and git-am said there was a mix of tabs and spaces.
 
---=20
-Michal Hrusecky
+> Yes, the SRC_URI lines were lined up with spaces. It looked nice enough 
+> that I didn't fix it;
 
-Package Maintainer
-SUSE LINUX, s.r.o
-e-mail: mhrusecky@suse.cz
+Hi Philip,
 
---RnlQjJ0d97Da+TV1
-Content-Type: application/pgp-signature
-Content-Disposition: inline
+How can I get git am to warn about the mixing? I tried git am
+--whitespace=error-all on the mbox file from patchwork, but it doesn't seem to
+find a mix; actually, in the patch files there are no added lines with spaces,
+only removed lines and a context line.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.11 (GNU/Linux)
+Mike
 
-iEYEARECAAYFAkohjBcACgkQJkqfF/7WVvZcOQCeKKNSXqNn7M8EnSZpQDf8WdZw
-70YAnA3U77hsgU3lPaszvUDI1QvkFj+f
-=p7Tj
------END PGP SIGNATURE-----
 
---RnlQjJ0d97Da+TV1--
+
