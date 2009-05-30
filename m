@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MATgU-0008Kv-Fg
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 20:53:34 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MATYE-0004qm-6I
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 18:45:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 30 May 2009 18:45:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 30 May 2009 18:45:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 30 May 2009 20:40:42 +0200
-Message-ID: <gvruj9$aj3$2@ger.gmane.org>
-References: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>
-	<gvrtqn$8oh$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
-In-Reply-To: <gvrtqn$8oh$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [patch] remove dirty .swp file in mini-httpd recipe
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MAU3r-0000nG-0L
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 21:17:43 +0200
+Received: (qmail 27833 invoked from network); 30 May 2009 19:09:09 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 30 May 2009 12:09:09 -0700
+Date: Sat, 30 May 2009 12:09:08 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090530190908.GJ23842@smtp.west.cox.net>
+References: <1243535051-10168-1-git-send-email-msmith@cbnco.com>
+	<1243535051-10168-2-git-send-email-msmith@cbnco.com>
+	<20090530164513.GH23842@smtp.west.cox.net>
+	<Pine.LNX.4.64.0905301437110.27204@juice.ott.cti.com>
+MIME-Version: 1.0
+In-Reply-To: <Pine.LNX.4.64.0905301437110.27204@juice.ott.cti.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] vim: be an alternative to /bin/vi; switch to INC_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 18:53:34 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 30 May 2009 19:17:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 30-05-09 20:27, Rolf Leggewie wrote:
-> Lin_Lynn@emc.com wrote:
->> In mini-httpd recipe,there is a .mini-httpd_1.19.bb.swp dirty file,the
->> patch in the attach is to remove this dirty file.
->
-> Acked-by: Rolf Leggewie
+On Sat, May 30, 2009 at 02:41:12PM -0400, Michael Smith wrote:
+> On Sat, 30 May 2009, Tom Rini wrote:
+> 
+> > On Thu, May 28, 2009 at 02:24:11PM -0400, Michael Smith wrote:
+> > >  DEPENDS += "gtk+ xt"
+> > > -PR = "r1"
+> > > +PR = "${INC_PR}.1"
+> > >  FILESPATHPKG =. "vim-${PV}:vim:"
+> > 
+> > The FILESPATHPKG change here hasn't been submitted yet :)
+> 
+> Oops, that was sloppy on my part -- would you mind trying to am again now 
+> that the FILESPATHPKG series is applied? This is the URL:
+> 
+> http://patchwork.openembedded.org/patch/655/mbox/
+> 
+> (thanks for applying that series, btw)
 
-Acked-by and S-o-b take an email address as well so people can start 
-sending hatemail when things introduce bugs ;)
+Done, thanks for the good work :)
 
-regards,
-
-Koen
-
+-- 
+Tom Rini
 
 
