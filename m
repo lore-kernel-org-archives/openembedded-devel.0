@@ -1,24 +1,24 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MAXAT-0003xC-IE
-	for openembedded-devel@openembedded.org; Sun, 31 May 2009 00:36:45 +0200
-Received: (qmail 28280 invoked from network); 30 May 2009 22:28:11 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 30 May 2009 15:28:11 -0700
-Date: Sat, 30 May 2009 15:28:10 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [82.71.203.194] (helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <philb@gnu.org>) id 1MAXlI-0005Wa-GI
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 31 May 2009 01:14:48 +0200
+Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MAXbW-0001OP-1X
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 31 May 2009 00:04:42 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090530222810.GV23842@smtp.west.cox.net>
+In-Reply-To: <20090530191647.GL23842@smtp.west.cox.net>
 References: <20090522213142.GF23842@smtp.west.cox.net>
 	<200905242049.30726.marcin@juszkiewicz.com.pl>
 	<20090530191647.GL23842@smtp.west.cox.net>
-	<gvs7gu$3ha$2@ger.gmane.org>
-	<20090530213323.GR23842@smtp.west.cox.net>
-	<be7a9f3d0905301516r30b0f82fv8227f2a3ba28a89f@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <be7a9f3d0905301516r30b0f82fv8227f2a3ba28a89f@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+Date: Sun, 31 May 2009 00:04:40 +0100
+Message-Id: <1243724680.4869.91.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: Kernel recipes with broken PRs now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,31 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 22:36:46 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 30 May 2009 23:14:48 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Sat, May 30, 2009 at 07:16:29PM -0300, Otavio Salvador wrote:
-> Hello Tom,
+On Sat, 2009-05-30 at 12:16 -0700, Tom Rini wrote:
+> On Sun, May 24, 2009 at 08:49:29PM +0200, Marcin Juszkiewicz wrote:
+> > Dnia pi??tek, 22 maja 2009 o 23:31:43 Tom Rini napisa??(a):
+> > > Hey all.  With the MACHINE_KERNEL_PR stuff, the following recipes
+> > > will now revert to r0 rather than:
+> > 
+> > One solution is to set PR after 'inherit kernel'. But thats workaround.
 > 
-> On Sat, May 30, 2009 at 6:33 PM, Tom Rini <trini@embeddedalley.com> wrote:
-> [...]
-> > Every machine might be able to make use of it, if it either depends on
-> > unstable / in development programs or modules, OR it can use some
-> > external kernel module (IMHO the right answer for this is versioned
-> > dependancies, having the PR be increasing from 2.6.29 to 2.6.30 is
-> > different than normal behavior).  This isn't always going to be an
-> > option.
-> 
-> I agree that a versioned dependency would be the optimal solution for
-> it, even better would be if we could use ABI versions for those
-> depends (somewhat as done for X packages in Debian) however AFAIK
-> bitbake doesn't support it yet, does it?
+> Perhaps this isn't so much a workaround but an opt-out ?  The more I
+> think about it, while this is a useful mechanism for machines that need
+> it, it's also a PITA for machines that don't (now you need to modify
+> your kernel recipe and bump something in your machine.conf, meaning full
+> cache rebuild just for a feature you aren't even using).  Comments?  I'm
+> tempted to just do that re-org next weekend, if no one beats me to it.
 
-No, it does not.
+Yes, I agree that this is a PITA for machines (or, maybe more
+accurately, distros) that don't want it.  As I wrote before, the
+underlying problem is a legitimate one but, as currently implemented,
+MACHINE_KERNEL_PR seems like a fairly poor solution to it.
 
--- 
-Tom Rini
+My personal preference would still be just to make MACHINE_KERNEL_PR be
+an opt-in thing per DISTRO.  I guess angstrom wants this: are there any
+other distros that do?
+
+p.
+
+
 
 
