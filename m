@@ -1,32 +1,34 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MATcn-000888-RY
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 May 2009 20:49:45 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id AFE964C95DA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2009 14:41:12 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 19429-09 for <openembedded-devel@lists.openembedded.org>; 
-	Sat, 30 May 2009 14:41:12 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 8BC4C4C86D3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2009 14:41:12 -0400 (EDT)
-Date: Sat, 30 May 2009 14:41:12 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090530164513.GH23842@smtp.west.cox.net>
-Message-ID: <Pine.LNX.4.64.0905301437110.27204@juice.ott.cti.com>
-References: <1243535051-10168-1-git-send-email-msmith@cbnco.com>
-	<1243535051-10168-2-git-send-email-msmith@cbnco.com>
-	<20090530164513.GH23842@smtp.west.cox.net>
-MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH] vim: be an alternative to /bin/vi; switch to	INC_PR
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MATgU-0008Kv-Fg
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 20:53:34 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MATYE-0004qm-6I
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 18:45:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 30 May 2009 18:45:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 30 May 2009 18:45:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 30 May 2009 20:40:42 +0200
+Message-ID: <gvruj9$aj3$2@ger.gmane.org>
+References: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>
+	<gvrtqn$8oh$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
+In-Reply-To: <gvrtqn$8oh$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [patch] remove dirty .swp file in mini-httpd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 18:49:46 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sat, 30 May 2009 18:53:34 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, 30 May 2009, Tom Rini wrote:
+On 30-05-09 20:27, Rolf Leggewie wrote:
+> Lin_Lynn@emc.com wrote:
+>> In mini-httpd recipe,there is a .mini-httpd_1.19.bb.swp dirty file,the
+>> patch in the attach is to remove this dirty file.
+>
+> Acked-by: Rolf Leggewie
 
-> On Thu, May 28, 2009 at 02:24:11PM -0400, Michael Smith wrote:
-> >  DEPENDS += "gtk+ xt"
-> > -PR = "r1"
-> > +PR = "${INC_PR}.1"
-> >  FILESPATHPKG =. "vim-${PV}:vim:"
-> 
-> The FILESPATHPKG change here hasn't been submitted yet :)
+Acked-by and S-o-b take an email address as well so people can start 
+sending hatemail when things introduce bugs ;)
 
-Oops, that was sloppy on my part -- would you mind trying to am again now 
-that the FILESPATHPKG series is applied? This is the URL:
+regards,
 
-http://patchwork.openembedded.org/patch/655/mbox/
+Koen
 
-(thanks for applying that series, btw)
-
-Mike
 
 
