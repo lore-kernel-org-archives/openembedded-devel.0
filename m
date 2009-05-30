@@ -1,42 +1,17 @@
-Received: from [209.85.132.244] (helo=an-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MAX3s-0003QA-4z
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 May 2009 00:29:56 +0200
-Received: by an-out-0708.google.com with SMTP id b6so3725455ana.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2009 15:21:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=XTemil46APcivfYYcrfD4VQlp2ZI7r/0H2c8HzQ0+S8=;
-	b=FcIl+0nBwbEgCeA/354DIbK+kmazATKV7sD46nyaATi0C7vOQJrZQVSchYJSDl6N9h
-	7WMJwVqTmWFCmp92cx+v35pzwVOEu5Q3m38ga/EBq+sI8WUR7SgCHAvpSypk78DxxBwt
-	d7PVweruUddcL3KMFx6zaZHaDJas3ifXg8zvw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=RE3ajP4a/JplbYvX0S6mcYR8sNPWe7zo4UIiyEXQxDmchbdS+GNZ5GuL1LakB3SEQ/
-	mEEEWgM1X/jTnAURWsgbop9bvaAxrqg8pk1wdfcxe7pQK6oSZ3dwYjFK1U4kB12317Y2
-	sauL6MjNy+5UaMjI6CmLgYLOlaxqDcxzZFTAY=
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MAX6l-0003Z5-LL
+	for openembedded-devel@openembedded.org; Sun, 31 May 2009 00:32:56 +0200
+Received: (qmail 28270 invoked from network); 30 May 2009 22:24:21 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 30 May 2009 15:24:21 -0700
+Date: Sat, 30 May 2009 15:24:20 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Message-ID: <20090530222420.GT23842@smtp.west.cox.net>
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.125.14 with SMTP id x14mr5372018anc.136.1243722081814; 
-	Sat, 30 May 2009 15:21:21 -0700 (PDT)
-In-Reply-To: <gvs7m5$3ha$4@ger.gmane.org>
-References: <1243535013-10090-1-git-send-email-msmith@cbnco.com>
-	<20090528193604.GB2625@denix.org> <4A1EF22E.2040500@balister.org>
-	<4A1EF581.30503@cbnco.com> <loom.20090530T193103-897@post.gmane.org>
-	<gvs7m5$3ha$4@ger.gmane.org>
-Date: Sat, 30 May 2009 19:21:21 -0300
-X-Google-Sender-Auth: dc8c1ea2d57b8816
-Message-ID: <be7a9f3d0905301521q4b0f6581g4d3a655bd7e9880@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH 1/2] tcpdump: fix mix of tabs and spaces in do_configure()
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: (e)glibc-package: enable binary locale generation for powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,30 +25,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 22:29:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 30 May 2009 22:32:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello Koen,
+On Tue, May 19, 2009 at 11:04:38PM -0000, Roman Khimov wrote:
 
-On Sat, May 30, 2009 at 6:15 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> Ignore git-am "errors" about whitespace. If I add a patch to a recipe and do
-> git format-patch in that commit (so you get a patch in a patch) git-am will
-> scream bloody murder for something that has no actual whitespace errors.
-> I suspect that the only time you can trust git output is when your name is
-> Linus and work on kernel code.
+> It works there, so add to whitelist.
 
-Well, not 100% true.
+Acked-by: Tom Rini <trini@embeddedalley.com>
 
-Basically when you're adding patch files this is really possible to
-have warnings that cannot be solved, mostly because the patch itself
-also has context of the code on it. However, in case those warnings
-come from your bb files, classes, conf, ini or whatever, it would be
-nice to be checked and fixed before pushing it.
+(And pushed just now, forgot to Ackby, wait for patchwork then push).
 
+> 
+> ---
+> recipes/eglibc/eglibc-package.bbclass |    4 +++-
+>  recipes/glibc/glibc-package.bbclass   |    6 ++++--
+>  2 files changed, 7 insertions(+), 3 deletions(-)
+> 
+> diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
+> index 22ff52b..f2acc96 100644
+> --- a/recipes/eglibc/eglibc-package.bbclass
+> +++ b/recipes/eglibc/eglibc-package.bbclass
+> @@ -24,7 +24,7 @@ python __anonymous () {
+>  ENABLE_BINARY_LOCALE_GENERATION ?= "0"
+>  
+>  # BINARY_LOCALE_ARCHES is a space separated list of regular expressions
+> -BINARY_LOCALE_ARCHES ?= "arm.* i[3-6]86 x86_64"
+> +BINARY_LOCALE_ARCHES ?= "arm.* i[3-6]86 x86_64 powerpc"
+>  
+>  PACKAGES = "eglibc-dbg eglibc catchsegv sln nscd ldd localedef eglibc-utils eglibc-dev eglibc-doc eglibc-locale libsegfault eglibc-extra-nss eglibc-thread-db eglibc-pcprofile"
+>  PACKAGES_DYNAMIC = "glibc-gconv-* glibc-charmap-* glibc-localedata-* glibc-binary-localedata-* eglibc-gconv-* eglibc-charmap-* eglibc-localedata-* eglibc-binary-localedata-* locale-base-*"
+> @@ -289,6 +289,8 @@ python package_do_split_gconvs () {
+>  		target_arch = bb.data.getVar("TARGET_ARCH", d, 1)
+>  		if target_arch in ("i486", "i586", "i686"):
+>  			target_arch = "i386"
+> +		elif target_arch == "powerpc":
+> +			target_arch = "ppc"
+>  		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
+>  		if kernel_ver is None:
+>  			qemu = "qemu-%s  -s 1048576" % target_arch
+> diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
+> index ac7e0f3..78738c2 100644
+> --- a/recipes/glibc/glibc-package.bbclass
+> +++ b/recipes/glibc/glibc-package.bbclass
+> @@ -24,7 +24,7 @@ python __anonymous () {
+>  ENABLE_BINARY_LOCALE_GENERATION ?= "0"
+>  
+>  # BINARY_LOCALE_ARCHES is a space separated list of regular expressions
+> -BINARY_LOCALE_ARCHES ?= "arm.* i[3-6]86 x86_64"
+> +BINARY_LOCALE_ARCHES ?= "arm.* i[3-6]86 x86_64 powerpc"
+>  
+>  # Set this to zero if you don't want ldconfig in the output package
+>  USE_LDCONFIG ?= "1"
+> @@ -250,7 +250,9 @@ python package_do_split_gconvs () {
+>  	def output_locale_binary(name, locale, encoding):
+>  		target_arch = bb.data.getVar("TARGET_ARCH", d, 1)
+>  		if target_arch in ("i486", "i586", "i686"):
+> -		   target_arch = "i386"
+> +			target_arch = "i386"
+> +		elif target_arch == "powerpc":
+> +			target_arch = "ppc"
+>  
+>  		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
+>  		if kernel_ver is None:
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Tom Rini
 
 
