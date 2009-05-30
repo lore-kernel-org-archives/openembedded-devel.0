@@ -1,35 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.220.220] (helo=mail-fx0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MAUcO-0007Ku-VB
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 21:53:25 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MAUU7-0007BL-Kz
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 19:44:51 +0000
-Received: from CPE00045a927e3e-CM001225463986.cpe.net.cable.rogers.com
-	([99.245.234.255]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 30 May 2009 19:44:51 +0000
-Received: from msmith by
-	CPE00045a927e3e-CM001225463986.cpe.net.cable.rogers.com with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 30 May 2009 19:44:51 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Michael Smith <msmith@cbnco.com>
-Date: Sat, 30 May 2009 19:44:40 +0000 (UTC)
-Message-ID: <loom.20090530T193103-897@post.gmane.org>
-References: <1243535013-10090-1-git-send-email-msmith@cbnco.com>	<20090528193604.GB2625@denix.org>
-	<4A1EF22E.2040500@balister.org> <4A1EF581.30503@cbnco.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 99.245.234.255 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.14) Gecko/20080417 BonEcho/2.0.0.14)
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 1/2] tcpdump: fix mix of tabs	and	spaces	in	do_configure()
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MAVKB-0005W3-OX
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 30 May 2009 22:38:39 +0200
+Received: by fxm20 with SMTP id 20so6765347fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 May 2009 13:30:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=zLgT5w3oypt5VW+4nW0xBhMFOtdVPZx6Xv+Ugdokm7Q=;
+	b=sUWtNtI2L05SZAWCB3ZcvUwyqWWf/L+3n4zopUSrhWfNE6rJE/fwu+wv7HrtNuWd/A
+	3UYacIo1RNpA+5Dp8mmjEC3oNJQa9zdatDLU4WJh3tJAm5KotqMDwK87qZo9iLizDUiD
+	i2Pekum8wYaAH05lO9guKpgLyagldYzqO0q9M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=cxRYNTU2kj7P4IsOUzGj4X56upqLv4/rkPczqkkVIu+ZcrCkUrs5778GsdpcdJIsHq
+	yziBYSIGZE72ViHeThniHqLyZjMq4Lr5K6MXUQ2Q58sW747WU/rfi1lFgDWP6fnB65+t
+	9Bmhe7SWqGxxuqvmBzZn9U77sJCeslbi4LQqE=
+MIME-Version: 1.0
+Received: by 10.103.172.7 with SMTP id z7mr2430922muo.15.1243715403376; Sat, 
+	30 May 2009 13:30:03 -0700 (PDT)
+In-Reply-To: <1243198440-8833-1-git-send-email-ihar.hrachyshka@gmail.com>
+References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1243198440-8833-1-git-send-email-ihar.hrachyshka@gmail.com>
+Date: Sat, 30 May 2009 23:30:03 +0300
+Message-ID: <fce2a370905301330s3b97729fq53be735044773d55@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/4] udev: fixed obsolete udevadm syntax for udev init.d script.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,27 +44,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 19:53:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 30 May 2009 20:38:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Michael Smith <msmith <at> cbnco.com> writes:
+Any change we can get it in tree?
 
-> Philip Balister wrote:
-> > It doesn't look like Michael has commit access. I did try applying it, 
-> > and git-am said there was a mix of tabs and spaces.
-
-> Yes, the SRC_URI lines were lined up with spaces. It looked nice enough 
-> that I didn't fix it;
-
-Hi Philip,
-
-How can I get git am to warn about the mixing? I tried git am
---whitespace=error-all on the mbox file from patchwork, but it doesn't seem to
-find a mix; actually, in the patch files there are no added lines with spaces,
-only removed lines and a context line.
-
-Mike
-
+On Sun, May 24, 2009 at 11:54 PM, Ihar Hrachyshka
+<ihar.hrachyshka@gmail.com> wrote:
+> Fixed the following warning message when executing udev init script:
+> "udevadm control commands requires the --<command> format, this will
+> stop working in a future release."
+>
+> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+> ---
+> =C2=A0recipes/udev/udev-141/init | =C2=A0 =C2=A04 ++--
+> =C2=A0recipes/udev/udev_141.bb =C2=A0 | =C2=A0 =C2=A02 +-
+> =C2=A02 files changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/recipes/udev/udev-141/init b/recipes/udev/udev-141/init
+> index efe4470..7188b5a 100644
+> --- a/recipes/udev/udev-141/init
+> +++ b/recipes/udev/udev-141/init
+> @@ -56,10 +56,10 @@ kill_udevd > "/dev/null" 2>&1
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo -e '\000\000\000\000' > /proc/sys/kernel=
+/hotplug
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 /sbin/udevd -d
+>
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0/sbin/udevadm control env STARTUP=3D1
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0/sbin/udevadm control --env STARTUP=3D1
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ "$not_first_b=
+oot" !=3D "" ];then
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0/sbin/udevadm trigger --subsystem-nomatch=3Dtty --subsystem-nomat=
+ch=3Dmem --subsystem-nomatch=3Dvc --subsystem-nomatch=3Dvtconsole --subsyst=
+em-nomatch=3Dmisc --subsystem-nomatch=3Ddcon --subsystem-nomatch=3Dpci_bus =
+=C2=A0--subsystem-nomatch=3Dgraphics =C2=A0--subsystem-nomatch=3Dbacklight =
+--subsystem-nomatch=3Dvideo4linux =C2=A0--subsystem-nomatch=3Dplatform
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 (/sbin/udevadm settle --timeout=3D3; /sbin/udevadm control env START=
+UP=3D)&
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 (/sbin/udevadm settle --timeout=3D3; /sbin/udevadm control --env STA=
+RTUP=3D)&
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0if [ "$DEVCACHE" !=3D "" ]; then
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rm -f /tmp/uname
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rm -f /tmp/cmdline
+> diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+> index e7438fb..7e26798 100644
+> --- a/recipes/udev/udev_141.bb
+> +++ b/recipes/udev/udev_141.bb
+> @@ -6,7 +6,7 @@ LICENSE =3D "GPL"
+> =C2=A0# Untested
+> =C2=A0DEFAULT_PREFERENCE =3D "-1"
+>
+> -PR =3D "r6"
+> +PR =3D "r7"
+>
+> =C2=A0SRC_URI =3D "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-=
+${PV}.tar.gz \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://mount.blacklist \
+> --
+> 1.6.3.1
+>
+>
 
 
