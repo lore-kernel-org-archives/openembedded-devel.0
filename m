@@ -1,21 +1,22 @@
 Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MAVUZ-00060r-Uj
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 22:49:24 +0200
-Received: (qmail 27969 invoked from network); 30 May 2009 20:40:48 -0000
+	(envelope-from <trini@embeddedalley.com>) id 1MAVgc-0006QH-BK
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 23:01:50 +0200
+Received: (qmail 27979 invoked from network); 30 May 2009 20:53:16 -0000
 Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 30 May 2009 13:40:48 -0700
-Date: Sat, 30 May 2009 13:40:47 -0700
+	by easi.embeddedalley.com with SMTP; 30 May 2009 13:53:16 -0700
+Date: Sat, 30 May 2009 13:53:15 -0700
 From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090530204047.GM23842@smtp.west.cox.net>
-References: <1243189985-19060-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1243198440-8833-1-git-send-email-ihar.hrachyshka@gmail.com>
+Message-ID: <20090530205315.GO23842@smtp.west.cox.net>
+References: <1243246822.4869.19.camel@lenovo.internal.reciva.com>
+	<1243250313-10392-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1243253873.4869.31.camel@lenovo.internal.reciva.com>
 MIME-Version: 1.0
-In-Reply-To: <1243198440-8833-1-git-send-email-ihar.hrachyshka@gmail.com>
+In-Reply-To: <1243253873.4869.31.camel@lenovo.internal.reciva.com>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH 1/4] udev: fixed obsolete udevadm syntax for udev	init.d script.
+Subject: Re: [PATCH] gnome.bbclass: remove unneeded scrollkeeper stuff	from gnome packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,67 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 20:49:24 -0000
+X-List-Received-Date: Sat, 30 May 2009 21:01:50 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sun, May 24, 2009 at 11:54:00PM +0300, Ihar Hrachyshka wrote:
+On Mon, May 25, 2009 at 01:17:53PM +0100, Phil Blundell wrote:
+> On Mon, 2009-05-25 at 14:18 +0300, Ihar Hrachyshka wrote:
+> > Scrollkeeper generates its XML database for every package when
+> > installing it. The problem is that while building it sees only specific
+> > package scrollkeeper stuff so we get wrong scrollkeeper xml file
+> > generated for every gnome.bbclass package. Including the file into every
+> > gnome package results in package contents conflicts.
+> >  
+> > -PACKAGES =+ "${PN}-scrollkeeper-leftovers"
+> > -FILES_${PN}-scrollkeeper-leftovers = "${localstatedir}/lib/scrollkeeper"
+> > -
+> >  gnome_stage_includes() {
+> >  	autotools_stage_includes
+> >  }
+> > +
+> > +do_install_append() {
+> > +	rm -rf ${D}${localstatedir}/lib/scrollkeeper/*
+> > +}
+> > +
+> 
+> That change looks pretty reasonable to me, though maybe you want to
+> delete ${localstatedir}/lib/scrollkeeper itself (and its parents, if
+> they're empty) as well as the contents of the directory.
+> 
+> In the longer term I guess we should figure out a general-purpose
+> solution to all this scrollkeeper stuff.  I see that some packages are
+> configuring themselves --disable-scrollkeeper, others seem to be
+> patching the scrollkeeper bits out of their configure scripts and yet
+> others (notably empathy) have, effectively, a local copy of the bits
+> you've just removed from gnome.bbclass.
 
-> Fixed the following warning message when executing udev init script:
-> "udevadm control commands requires the --<command> format, this will
-> stop working in a future release."
-> 
-> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-
-So, while I would have preferred we fixup both, looking more long-term I
-think dev is going to move towards dropping some old programs, so..:
-
-Acked-by: Tom Rini <trini@embeddedalley.com>
-
-> ---
->  recipes/udev/udev-141/init |    4 ++--
->  recipes/udev/udev_141.bb   |    2 +-
->  2 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes/udev/udev-141/init b/recipes/udev/udev-141/init
-> index efe4470..7188b5a 100644
-> --- a/recipes/udev/udev-141/init
-> +++ b/recipes/udev/udev-141/init
-> @@ -56,10 +56,10 @@ kill_udevd > "/dev/null" 2>&1
->          echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
->          /sbin/udevd -d
->  
-> -        /sbin/udevadm control env STARTUP=1
-> +        /sbin/udevadm control --env STARTUP=1
->  		if [ "$not_first_boot" != "" ];then
->  			/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics  --subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
-> -			(/sbin/udevadm settle --timeout=3; /sbin/udevadm control env STARTUP=)&
-> +			(/sbin/udevadm settle --timeout=3; /sbin/udevadm control --env STARTUP=)&
->  			if [ "$DEVCACHE" != "" ]; then
->  				rm -f /tmp/uname
->  				rm -f /tmp/cmdline
-> diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
-> index e7438fb..7e26798 100644
-> --- a/recipes/udev/udev_141.bb
-> +++ b/recipes/udev/udev_141.bb
-> @@ -6,7 +6,7 @@ LICENSE = "GPL"
->  # Untested
->  DEFAULT_PREFERENCE = "-1"
->  
-> -PR = "r6"
-> +PR = "r7"
->  
->  SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
->  	   file://mount.blacklist \
-> -- 
-> 1.6.3.1
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Do you want more changes still?  I don't see a SOB line, so...  Thanks.
 
 -- 
 Tom Rini
