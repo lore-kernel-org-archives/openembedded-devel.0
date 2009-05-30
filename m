@@ -1,21 +1,36 @@
-Received: from [87.194.255.144] (helo=honeysuckle.london.02.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bluelightning@bluelightning.org>) id 1MACqZ-0007pO-TG
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 May 2009 02:54:51 +0200
-Received: from shodan.localnet (93.96.131.185) by honeysuckle.london.02.net
-	(8.5.016.1)
-	id 4A20303F00028D6F for openembedded-devel@lists.openembedded.org;
-	Sat, 30 May 2009 01:46:21 +0100
-From: Paul Eggleton <bluelightning@bluelightning.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 May 2009 01:46:20 +0100
-User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; i686; ; )
-References: <20090529223531.GA951@misibook.miska.isageek.net>
-In-Reply-To: <20090529223531.GA951@misibook.miska.isageek.net>
-MIME-Version: 1.0
-Message-Id: <200905300146.20637.bluelightning@bluelightning.org>
-Subject: Re: [PATCH] opie-sheet: fixed compilation error
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MAFP0-0002W3-KD
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 05:38:34 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MAFGk-0003VC-Io
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 03:30:02 +0000
+Received: from CPE00045a927e3e-CM001225463986.cpe.net.cable.rogers.com
+	([99.245.234.255]) by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 30 May 2009 03:30:02 +0000
+Received: from msmith by
+	CPE00045a927e3e-CM001225463986.cpe.net.cable.rogers.com with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 30 May 2009 03:30:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Michael Smith <msmith@cbnco.com>
+Date: Sat, 30 May 2009 00:48:44 +0000 (UTC)
+Message-ID: <loom.20090530T004559-114@post.gmane.org>
+References: <Pine.LNX.4.64.0905260228240.6446@juice.ott.cti.com>
+	<1243319696-16223-1-git-send-email-msmith@cbnco.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 99.245.234.255 (Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7;
+	en-us) AppleWebKit/525.28.3 (KHTML, like Gecko) Version/3.2.3
+	Safari/525.28.3)
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 1/4] Remove references to base_set_filespath()from	recipes that don't need it.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,59 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 00:54:52 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 30 May 2009 03:38:34 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Fri, 29 May 2009, Michal Hrusecky wrote:
-> Compilation originally fails and complains about two arguments with the
-> same name.
->
-> Signed-off-by: Michal Hrusecky <Michal@Hrusecky.net>
+Michael Smith <msmith <at> cbnco.com> writes:
 
-Acked-by: Paul Eggleton <bluelightning@bluelightning.org>
-
+> 
+> These recipes are covered by the default FILESPATHPKG setting.
+> 
+> Signed-off-by: Michael Smith <msmith <at> cbnco.com>
 > ---
->  .../opie-sheet/different-arg-names.patch           |   11 +++++++++++
->  recipes/opie-sheet/opie-sheet_1.2.4.bb             |    3 ++-
->  2 files changed, 13 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/opie-sheet/opie-sheet/different-arg-names.patch
->
-> diff --git a/recipes/opie-sheet/opie-sheet/different-arg-names.patch
-> b/recipes/opie-sheet/opie-sheet/different-arg-names.patch new file mode
-> 100644
-> index 0000000..f190960
-> --- /dev/null
-> +++ b/recipes/opie-sheet/opie-sheet/different-arg-names.patch
-> @@ -0,0 +1,11 @@
-> +--- a/opie-sheet/sheet.h	2009-05-25 07:47:12.042719009 +0200
-> ++++ b/opie-sheet/sheet.h	2009-05-25 08:07:19.291516199 +0200
-> +@@ -209,7 +207,7 @@
-> +     void insertRows(int no=1, bool allColumns=TRUE);
-> +     void insertColumns(int no=1, bool allRows=TRUE);
-> +
-> +-    void dataFindReplace(const QString &find, const QString &replace,
-> bool matchCase=TRUE, bool allCells=TRUE, bool entireCell=FALSE, bool
-> replace=FALSE, bool replaceAll=FALSE); ++    void dataFindReplace(const
-> QString &find, const QString &replacestr, bool matchCase=TRUE, bool
-> allCells=TRUE, bool entireCell=FALSE, bool replace=FALSE, bool
-> replaceAll=FALSE); +
-> +     // Static functions
-> +     static int getHeaderColumn(const QString &section);
-> diff --git a/recipes/opie-sheet/opie-sheet_1.2.4.bb
-> b/recipes/opie-sheet/opie-sheet_1.2.4.bb index ca0cdaf..c52c166 100644
-> --- a/recipes/opie-sheet/opie-sheet_1.2.4.bb
-> +++ b/recipes/opie-sheet/opie-sheet_1.2.4.bb
-> @@ -3,4 +3,5 @@ require ${PN}.inc
->
->  SRC_URI = "${HANDHELDS_CVS};tag=${TAG};module=opie/noncore/apps/opie-sheet
-> \ ${HANDHELDS_CVS};tag=${TAG};module=opie/pics \
-> -           ${HANDHELDS_CVS};tag=${TAG};module=opie/apps"
-> +           ${HANDHELDS_CVS};tag=${TAG};module=opie/apps \
-> +           file://different-arg-names.patch;patch=1 "
 
+ping
+
+(patchbundle here: 
+http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/nuke_base_set_filespath_usage/ )
+
+Mike
 
 
 
