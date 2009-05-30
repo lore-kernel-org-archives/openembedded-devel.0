@@ -1,33 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MAQ16-00041q-HS
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 16:58:36 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MAPsp-0003Qm-2X
-	for openembedded-devel@openembedded.org; Sat, 30 May 2009 14:50:03 +0000
-Received: from p7073-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.122.73])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 30 May 2009 14:50:03 +0000
-Received: from no2spam by p7073-ipngn201marunouchi.tokyo.ocn.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 30 May 2009 14:50:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 30 May 2009 23:47:23 +0900
-Message-ID: <gvrgts$7uc$2@ger.gmane.org>
-References: <20090529233958.GA16815@misibook.miska.isageek.net>
-	<200905301417.14796.bluelightning@bluelightning.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p7073-ipngn201marunouchi.tokyo.ocn.ne.jp
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-In-Reply-To: <200905301417.14796.bluelightning@bluelightning.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] zuc: fixed build
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MARc4-00013R-Kz
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 18:40:53 +0200
+Received: (qmail 27413 invoked from network); 30 May 2009 16:32:14 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 30 May 2009 09:32:14 -0700
+Date: Sat, 30 May 2009 09:32:13 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090530163212.GC23842@smtp.west.cox.net>
+References: <20090523210658.GO23842@smtp.west.cox.net>
+	<1243154705-20600-1-git-send-email-mad_soft@inbox.ru>
+	<20090524154104.GQ23842@smtp.west.cox.net>
+	<20090525085530.GA23441@lighthouse.office.asoft.ru>
+MIME-Version: 1.0
+In-Reply-To: <20090525085530.GA23441@lighthouse.office.asoft.ru>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH v2] netsurf: add recipe for version 2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,17 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 14:58:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 30 May 2009 16:40:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Paul Eggleton wrote:
-> On Sat, 30 May 2009, Michal Hrusecky wrote:
->> Corrected include name so it can be found and package can be built again.
+On Mon, May 25, 2009 at 12:55:30PM +0400, Dmitry Artamonow wrote:
+> On Sun, May 24, 2009 at 08:41:04AM -0700, Tom Rini wrote:
+> > On Sun, May 24, 2009 at 12:45:05PM +0400, Dmitry Artamonow wrote:
+> > > It's gtk+ version built with GIF,JPEG,PNG and without SVG,MNG and
+> > > PDF printing support.
+> > > 
+> > > Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+> > 
+> > Acked-by: Tom Rini <trini@embeddedalley.com>
+> > 
+> > Do you have commit access?
+> 
+> No.
 
-> Applied, thanks.
+Sorry for the delay, pushed.
 
-do_fetch fails for this package.  Can you guys please look into this?
-
+-- 
+Tom Rini
 
 
