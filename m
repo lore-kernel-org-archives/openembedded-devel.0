@@ -1,32 +1,22 @@
-Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MARym-0001j7-0S
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 May 2009 19:04:20 +0200
-Received: by bwz19 with SMTP id 19so6672125bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2009 09:55:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=EbMDiLW5zDt6ekpOzQ45SNMjg47nJUeSxtA2A/ayNhI=;
-	b=GqY3dL+TfUVs++0mf7HpRcKjfxTVBSnVT4RNRlK7qKcvlu0jaKZk3Y68plpioKHGrU
-	78I2w3oUPcPSkn8SyCDNJxJuLpCIsYbFtfFx0FgZOgLhqok8Xk24b2BJfzserxZosf1P
-	pyK7SBx1Wx1zA4ciYNBL/pN+IaxfsH9MVBELY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=wxsdbo++rezlOTFlPV0ErBbQ3wGiJZdHiFhTRWRPh0sW/+IFC4dfxSQ2ZQ0DKWrEtn
-	7AgtKpWySyYcewHaRvmZrNkSCK8PoaKoU/E9K8rWilsepsnxfp5Gj5UfSm5/Rz+lX/OB
-	VmJ6D4Yl/eObfsqPkbaH1AL6t0NEXvTsaqqHo=
-MIME-Version: 1.0
-Received: by 10.103.175.8 with SMTP id c8mr2255975mup.117.1243702545396; Sat, 
-	30 May 2009 09:55:45 -0700 (PDT)
-Date: Sat, 30 May 2009 19:55:45 +0300
-Message-ID: <fce2a370905300955v7ccc4cauebe5468b74b62e4b@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MASYj-0000EX-0i
+	for openembedded-devel@openembedded.org; Sat, 30 May 2009 19:41:29 +0200
+Received: (qmail 27582 invoked from network); 30 May 2009 17:32:55 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 30 May 2009 10:32:55 -0700
+Date: Sat, 30 May 2009 10:32:55 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Pull request for new qt4 toolchain (and other mostly qt4 fixes)
+Message-ID: <20090530173254.GI23842@smtp.west.cox.net>
+References: <1243319696-16223-1-git-send-email-msmith@cbnco.com>
+	<loom.20090530T004559-114@post.gmane.org>
+	<b6ebd0a50905292229o2eb248f0le26870ccca102657@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <b6ebd0a50905292229o2eb248f0le26870ccca102657@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 1/4] Remove references to base_set_filespath()from	recipes that don't need it.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,16 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 17:04:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 30 May 2009 17:41:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello!
+On Fri, May 29, 2009 at 10:29:56PM -0700, Chris Larson wrote:
+> On Fri, May 29, 2009 at 5:48 PM, Michael Smith <msmith@cbnco.com> wrote:
+> > Michael Smith <msmith <at> cbnco.com> writes:
+> >
+> >>
+> >> These recipes are covered by the default FILESPATHPKG setting.
+> >>
+> >> Signed-off-by: Michael Smith <msmith <at> cbnco.com>
+> >> ---
+> >
+> > ping
+> >
+> > (patchbundle here:
+> > http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/nuke_base_set_filespath_usage/ )
+> 
+> Looks fine to me.
 
-Please pull qt4 toolchain support from the following repository:
-git://github.com/booxter/oedev.git
-If you want me to send patches to the ML please tell me then.
+I've ack'd them all too, pushed.
 
-Thanks.
+-- 
+Tom Rini
 
 
