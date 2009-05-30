@@ -1,42 +1,39 @@
-Received: from [209.85.132.242] (helo=an-out-0708.google.com)
+Received: from [209.85.132.246] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MAWzA-0003En-A5
+	(envelope-from <otavio.salvador@gmail.com>) id 1MAX1B-0003JI-PO
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 May 2009 00:25:06 +0200
-Received: by an-out-0708.google.com with SMTP id b6so3724566ana.42
+	Sun, 31 May 2009 00:27:10 +0200
+Received: by an-out-0708.google.com with SMTP id b6so3724961ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2009 15:16:30 -0700 (PDT)
+	Sat, 30 May 2009 15:18:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
 	:content-type:content-transfer-encoding;
-	bh=1JLjwqJOcZK1M4uPVtTp+Dyy+mdmNZOXKK9M4noNPqo=;
-	b=DFsZKHa34ah2erdFJTvj5GeVYfYc39LJGUBqB2kTgGr4otPfE5pD/TMSShfSR4MY/t
-	KAqyYwqhc6j3//ZssQLbAyILh1Zop1DhB20Bq3p2dAG+ctCRNjzsxpk33qOwrVYCc1Pj
-	YlvKoEJZ50Ig58p+qpwSY9WbBowpstAEFr7zI=
+	bh=l08Ctz8+32vLnEUVY4Bz77IB75gqYG7I7tcLk1252EI=;
+	b=PUjshJU/hN17wrv8+aBlyLNvD0dtTXwtcsaSC6K3ZpK2jJfEm1q6fcEph3aM5oNG1A
+	PCtvWRBUqN0aKXFjB5OLsmyRp68SAPy72qLbyPQH+uXVUpKrPuxxW2qBC8JVOaXQjDgw
+	JQwO8sORZzV2EeVC37kVfAXKt3p+TCUJZhFf0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	b=X5bGWMnkksxwNrAKFlSZFELcKbtr16k4BGKj2cKExaROf+QR7y/PbkSoUY8W2VcjWK
-	WFTPZ+wTGn8iL+9gIkrtnLakUwX36/yq1U/ctC+AqYfm2ZuxHU7Iz/9w9U2e7I6UxHbo
-	hdIDXVIiy3fZOLIu5seUodN+/yoJuSflqGFbg=
+	b=CVhNZVQxxFvjXvKZRi4Lh7mcfvq4VDLJRBx0jSkVMZeKMmg+iDpqNuSn3+y68cUJTo
+	JS1soxOaItU57u1u54p/ekMlHWj+6PZuObhz+AedAhz/30jMx7H2nuTgmtTWjPLIu/U5
+	9AgHcY4FJjGMmEmF6bJDbu3RXaqvDxJDOhQFQ=
 MIME-Version: 1.0
 Sender: otavio.salvador@gmail.com
-Received: by 10.100.120.9 with SMTP id s9mr2913499anc.190.1243721790113; Sat, 
-	30 May 2009 15:16:30 -0700 (PDT)
-In-Reply-To: <20090530213323.GR23842@smtp.west.cox.net>
-References: <20090522213142.GF23842@smtp.west.cox.net>
-	<200905242049.30726.marcin@juszkiewicz.com.pl>
-	<20090530191647.GL23842@smtp.west.cox.net>
-	<gvs7gu$3ha$2@ger.gmane.org>
-	<20090530213323.GR23842@smtp.west.cox.net>
-Date: Sat, 30 May 2009 19:16:29 -0300
-X-Google-Sender-Auth: f9e28440355d6070
-Message-ID: <be7a9f3d0905301516r30b0f82fv8227f2a3ba28a89f@mail.gmail.com>
+Received: by 10.100.125.14 with SMTP id x14mr5369989anc.136.1243721915713; 
+	Sat, 30 May 2009 15:18:35 -0700 (PDT)
+In-Reply-To: <20090530215243.GS23842@smtp.west.cox.net>
+References: <20090530215243.GS23842@smtp.west.cox.net>
+Date: Sat, 30 May 2009 19:18:35 -0300
+X-Google-Sender-Auth: dc83369dfb77d001
+Message-ID: <be7a9f3d0905301518g48862da6s9b51fe38dc0ee1e9@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Kernel recipes with broken PRs now
+Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
+Subject: Re: (e)glibc.inc: add minimal sane kernel versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,27 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2009 22:25:14 -0000
+X-List-Received-Date: Sat, 30 May 2009 22:27:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
 Hello Tom,
 
-On Sat, May 30, 2009 at 6:33 PM, Tom Rini <trini@embeddedalley.com> wrote:
-[...]
-> Every machine might be able to make use of it, if it either depends on
-> unstable / in development programs or modules, OR it can use some
-> external kernel module (IMHO the right answer for this is versioned
-> dependancies, having the PR be increasing from 2.6.29 to 2.6.30 is
-> different than normal behavior). =A0This isn't always going to be an
-> option.
+On Sat, May 30, 2009 at 6:52 PM, Tom Rini <trini@embeddedalley.com> wrote:
+> On Tue, May 19, 2009 at 12:52:07AM -0000, Roman Khimov wrote:
+>
+>> (e)glibc is configured for OLDEST_KERNEL, certain target architectures have
+>> specific requirements for kernel versions, if that are not satisfied (e)glibc
+>> reconfigures itself with what it think more appropriate and warns user that
+>> there is misconfiguration on his side.
+>>
+>> Add minimal sane kernel versions for architectures requiring that.
+>
+> Sorry for the late reply, I'd make one last request however, move
+> OLDEST_KERNEL from bitbake.conf to these files as well.
 
-I agree that a versioned dependency would be the optimal solution for
-it, even better would be if we could use ABI versions for those
-depends (somewhat as done for X packages in Debian) however AFAIK
-bitbake doesn't support it yet, does it?
+Fully agreed; it is not distro dependant and neither is suppose to be
+adjusted very ofthen and then this ought to be set in the class files
+to make it clear where it is used.
 
---=20
+-- 
 Otavio Salvador                  O.S. Systems
 E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
 Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
