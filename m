@@ -1,41 +1,38 @@
-Received: from [74.125.46.154] (helo=yw-out-1718.google.com)
+Received: from [209.85.198.246] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MAZNg-0002dt-NP
+	(envelope-from <hvontres@gmail.com>) id 1MAcne-0004If-HJ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 May 2009 02:58:32 +0200
-Received: by yw-out-1718.google.com with SMTP id 9so3478472ywk.42
+	Sun, 31 May 2009 06:37:34 +0200
+Received: by rv-out-0708.google.com with SMTP id l33so1487629rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2009 17:49:58 -0700 (PDT)
+	Sat, 30 May 2009 21:28:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=5y8SXUCRVf0o24cumMbHIMC7No9zSvPdakKk37X8loQ=;
-	b=ZD67kpYZPrqJml0UQSJdOCMkh37oW6veB4kmQbOdASa+bxK+OD07iVsqhj1ZIrlnZo
-	uxiM2eG2/55264o52wdbkEq+DGwJR4rJvkRI8BqV+b3aU/CkHvtcsZo/HCwFLWfRn7B4
-	264KJW6NR2LroYr21r9jvgBPnSOAXtxh+Brws=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=k6pw4AWmkWOmW4yN00U10vop7IlgYhlJOgfCvsdLnmw=;
+	b=hszI8L/4x4KLsMPET8ERwVX58RDaqVwByEWPzUMcPZ+zudtoaeTtGo3udrYe/m7Mkr
+	CPbcaLOUeCLRPvk+1coDOPe+97JKXMc1OkHGaUbC7NO+uIwcXuHCX4QQYOXHwxyMgZRq
+	UXKo5EcYk/O85fuYOfQi8QsBEilD+6EZ+JWIk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=imkXF1I9p4P/i3ABVTZB5DI/RnHkBZgc0+sSs5kr9552oRQkTfrQ6Sigsjhc3d/NEJ
-	k9UOstSKev0tt0gVMR5M0AhTllOBGDvpTUSQHCKt6i+LQDfmnBwATMI/2ub5fDTEu7th
-	sMIfNTDf0K6N5wuTOZ7uvOvsfRO5/INpcueXM=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.120.9 with SMTP id s9mr2987410anc.190.1243730997777; Sat, 
-	30 May 2009 17:49:57 -0700 (PDT)
-In-Reply-To: <1243724680.4869.91.camel@lenovo.internal.reciva.com>
-References: <20090522213142.GF23842@smtp.west.cox.net>
-	<200905242049.30726.marcin@juszkiewicz.com.pl>
-	<20090530191647.GL23842@smtp.west.cox.net>
-	<1243724680.4869.91.camel@lenovo.internal.reciva.com>
-Date: Sat, 30 May 2009 21:49:57 -0300
-X-Google-Sender-Auth: 108bc84669daa4f3
-Message-ID: <be7a9f3d0905301749u6a92f2ey59a96d2cde6069a2@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=U3VrzAFbiLKOnEXCTq7O+UtSJIlUCGCcBRvwgVTQW4IK78hAZY4AQCshup/rt0qLBq
+	eaHSJcOdz7u6+6t9UBnhW7qSp17tH9y9juliWrI7XMmIFyvWXtFg7RpuX2wAOmr/ZBkV
+	9rdFcjz9T8EkFtBfFWxVvFXfhIz9vEbg1yGZI=
+Received: by 10.141.84.21 with SMTP id m21mr3861908rvl.284.1243744138332;
+	Sat, 30 May 2009 21:28:58 -0700 (PDT)
+Received: from localhost (adsl-75-8-123-171.dsl.sndg02.sbcglobal.net
+	[75.8.123.171])
+	by mx.google.com with ESMTPS id k21sm4244099waf.24.2009.05.30.21.28.57
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 30 May 2009 21:28:57 -0700 (PDT)
+From: Henry von Tresckow <hvontres@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Kernel recipes with broken PRs now
+Date: Sat, 30 May 2009 21:28:55 -0700
+Message-Id: <1243744135-13096-1-git-send-email-hvontres@gmail.com>
+X-Mailer: git-send-email 1.5.4.3
+In-Reply-To: <>
+References: <>
+Subject: [PATCH] linux-rp_2.6.24: added fix for gcc 4.3 compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,27 +46,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 May 2009 00:58:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 31 May 2009 04:37:34 -0000
 
-Hello,
+ * Added patch to include/linux/time.h to make gcc 4.3 happy. This may
+ be needed for other 2.6.24 or older kernel recipies.
+ Original source of patch: http://lkml.org/lkml/2008/2/22/464
 
-On Sat, May 30, 2009 at 8:04 PM, Phil Blundell <philb@gnu.org> wrote:
-> My personal preference would still be just to make MACHINE_KERNEL_PR be
-> an opt-in thing per DISTRO. =A0I guess angstrom wants this: are there any
-> other distros that do?
+---
+ recipes/linux/linux-rp-2.6.24/gcc-4.3-fix.patch |   27 +++++++++++++++++++++++
+ recipes/linux/linux-rp_2.6.24.bb                |    3 +-
+ 2 files changed, 29 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/linux/linux-rp-2.6.24/gcc-4.3-fix.patch
 
-My understand is that every distro that uses anything that needs ABI
-compatibility with kernel needs it, or is suppose to use it. By ABI
-compatibility I mean:
+diff --git a/recipes/linux/linux-rp-2.6.24/gcc-4.3-fix.patch b/recipes/linux/linux-rp-2.6.24/gcc-4.3-fix.patch
+new file mode 100644
+index 0000000..8ac2600
+--- /dev/null
++++ b/recipes/linux/linux-rp-2.6.24/gcc-4.3-fix.patch
+@@ -0,0 +1,27 @@
++Prevent the loop in timespec_add_ns() to be optimised away 
++since some architectures don't support __udivdi3() (and
++we don't want to use that, anyway).
++
++Signed-off-by: Segher Boessenkool <segher@kernel.crashing.org>
++---
++ include/linux/time.h |    4 ++++
++ 1 files changed, 4 insertions(+), 0 deletions(-)
++diff --git a/include/linux/time.h b/include/linux/time.h
++index 2091a19..d32ef0a 100644
++--- a/include/linux/time.h
+++++ b/include/linux/time.h
++@@ -174,6 +174,10 @@ static inline void timespec_add_ns(struct timespec *a, u64 ns)
++ {
++ 	ns += a->tv_nsec;
++ 	while(unlikely(ns >= NSEC_PER_SEC)) {
+++		/* The following asm() prevents the compiler from
+++		 * optimising this loop into a modulo operation.  */
+++		asm("" : "+r"(ns));
+++
++ 		ns -= NSEC_PER_SEC;
++ 		a->tv_sec++;
++ 	}
++-- 
++1.5.4.2.184.gb23b
++
++
+diff --git a/recipes/linux/linux-rp_2.6.24.bb b/recipes/linux/linux-rp_2.6.24.bb
+index 7b06916..6f9b3c5 100644
+--- a/recipes/linux/linux-rp_2.6.24.bb
++++ b/recipes/linux/linux-rp_2.6.24.bb
+@@ -1,6 +1,6 @@
+ require linux-rp.inc
+ 
+-PR = "r22"
++PR = "r23"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_collie = "1"
+@@ -48,6 +48,7 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.24.tar.bz2 \
+            ${RPSRC}/poodle_pm-r5.patch;patch=1 \
+            ${RPSRC}/poodle_lcd_hack-r0.patch;patch=1 \
+            ${RPSRC}/poodle_asoc_fix-r1.patch;patch=1 \
++           file://gcc-4.3-fix.patch;patch=1 \
+            file://pxa27x-resume.patch;patch=1;status=external \
+            file://mtd-module.patch;patch=1;status=external \
+            file://wm8750-treble.patch;patch=1;status=external \
+-- 
+1.5.4.3
 
- - external kernel modules
- - binaries that require not stable symbols in kernel
-
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
