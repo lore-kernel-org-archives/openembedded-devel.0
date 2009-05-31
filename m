@@ -1,27 +1,36 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MAhy7-0008WC-3G
+	(envelope-from <koen.kooi@gmail.com>) id 1MAkae-0003YI-CA
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 May 2009 12:08:43 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MAhpl-0005a1-C1
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 May 2009 11:00:05 +0100
-From: Phil Blundell <philb@gnu.org>
+	Sun, 31 May 2009 14:56:40 +0200
+Received: by ewy20 with SMTP id 20so7341062ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 31 May 2009 05:48:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=ZvgcjMA8UY6Sa2GsakMfGyNT0TlNjDeQQVq+vDD37dA=;
+	b=A5XmoVrnrN2aZDMgCJXnaLJE/wQZaHqNkc6lRYGkfEnhuLbKvOynApejbJNkaBJ1/a
+	7WAXeLDOEfKVY8NmU/YtT7t32UHyQjG24ocOYYyPlMvGgjSLFZqO1jF3h5bVzVj1Z/lo
+	k0vDD2YZ64fuRMHNGBQlwjqzX2KTG8JiSJhLo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=sMSS2ptoz4bJt7H6X42wT3hrbTSMI8duav0ImpIMbk4ii+XsH572SRpAYl0pwV3Grg
+	FdaNpFrOgxP80z4sAnd5ws0Q3bNT3irAQcyA/0IQmoZL9M7Kdwq86tMqUBojp5joKNRw
+	TlA05zb/m5qi66b01RbWZszogZ+/SUxHUtdAw=
+Received: by 10.210.61.8 with SMTP id j8mr5023762eba.22.1243774080602;
+	Sun, 31 May 2009 05:48:00 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id 7sm5788234eyb.5.2009.05.31.05.47.58
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 31 May 2009 05:47:59 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <be7a9f3d0905301749u6a92f2ey59a96d2cde6069a2@mail.gmail.com>
-References: <20090522213142.GF23842@smtp.west.cox.net>
-	<200905242049.30726.marcin@juszkiewicz.com.pl>
-	<20090530191647.GL23842@smtp.west.cox.net>
-	<1243724680.4869.91.camel@lenovo.internal.reciva.com>
-	<be7a9f3d0905301749u6a92f2ey59a96d2cde6069a2@mail.gmail.com>
-Date: Sun, 31 May 2009 11:00:03 +0100
-Message-Id: <1243764003.4869.130.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: Kernel recipes with broken PRs now
+Date: Sun, 31 May 2009 14:47:57 +0200
+Message-Id: <1243774077-19022-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.6.1
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] xserver-common: add 1.24 from .dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,73 +44,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 May 2009 10:08:43 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 31 May 2009 12:56:40 -0000
 
-On Sat, 2009-05-30 at 21:49 -0300, Otavio Salvador wrote:
-> Hello,
-> 
-> On Sat, May 30, 2009 at 8:04 PM, Phil Blundell <philb@gnu.org> wrote:
-> > My personal preference would still be just to make MACHINE_KERNEL_PR be
-> > an opt-in thing per DISTRO.  I guess angstrom wants this: are there any
-> > other distros that do?
-> 
-> My understand is that every distro that uses anything that needs ABI
-> compatibility with kernel needs it, or is suppose to use it.
+From: Koen Kooi <koen@openembedded.org>
 
-As I understand it, the situation that MACHINE_KERNEL_PR is meant to fix
-is where both the following are true:
 
-1) you have an external package (be that an out-of-tree module or some
-other binary) which depends on some detail of the kernel ABI; and
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/xserver-common/files/89xdgautostart.sh |    9 +++++++++
+ recipes/xserver-common/xserver-common_1.24.bb  |   19 +++++++++++++++++++
+ 2 files changed, 28 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/xserver-common/files/89xdgautostart.sh
+ create mode 100644 recipes/xserver-common/xserver-common_1.24.bb
 
-2) the ABI in question is in fact changing, necessitating a rebuild,
-even though the advertised ABI version (what we save in
-kernel-abiversion) isn't
-
-Emperically, since most DISTROs have been managing fine without
-MACHINE_KERNEL_PR until now, it seems that either this situation isn't
-arising very often in practice or the maintainers are managing to work
-around it in some other way.  Whichever of those is the case, the need
-for a solution to this problem doesn't seem to be very acute right
-now.  
-
-Further, it seems clear that the MACHINE_KERNEL_PR approach, as
-currently implemented, has at least a few deficiencies:
-
-a) it will cause PR to go backwards for kernel packages which haven't
-been updated to match, and this will happen silently so the maintainers
-may not realise at first what is going on;
-
-b) it doesn't scale very well to the situation where you have either a
-single kernel used by multiple MACHINEs, or a single MACHINE with
-multiple kernels.  I suspect the former might be the case for some of
-the ipaqs, and I'm fairly sure that the latter can be the case for some
-models of zaurus.
-
-c) it causes the kernel metadata to be scattered around the tree in a
-slightly weird way, rather than localised to the kernel's own .bb file
-where it arguably belongs.
-
-d) it requires a rebuild of all out-of-tree modules for any kernel
-change at all, even if the ABI was unaffected.
-
-Now, none of these deficiencies are absolutely intolerable, and it's
-perfectly understandable that some distro maintainers might decide to
-put up with them in order to gain the perceived benefits of
-MACHINE_KERNEL_PR.  But, for DISTROs and/or MACHINEs that weren't
-suffering from the original problem in the first place, this patch will
-simply introduce annoyances with no compensating benefits.
-
-I think it would be quite possible to write a patch to fix the original
-problems without introducing the deficiencies above, and if that were
-done then there should be no downsides to enabling the patch globally.
-But, as it stands today, I don't think that MACHINE_KERNEL_PR is
-something that should be foisted on folks who don't want or need it.
-
-p.
-
+diff --git a/recipes/xserver-common/files/89xdgautostart.sh b/recipes/xserver-common/files/89xdgautostart.sh
+new file mode 100644
+index 0000000..9886f9f
+--- /dev/null
++++ b/recipes/xserver-common/files/89xdgautostart.sh
+@@ -0,0 +1,9 @@
++#!/bin/sh
++
++XDGAUTOSTART=/etc/xdg/autostart
++if [ -d $XDGAUTOSTART ] ; then
++    for SCRIPT in $XDGAUTOSTART/*; do
++        CMD=`grep ^Exec= $SCRIPT | cut -d '=' -f 2`
++        $CMD &
++    done
++fi
+diff --git a/recipes/xserver-common/xserver-common_1.24.bb b/recipes/xserver-common/xserver-common_1.24.bb
+new file mode 100644
+index 0000000..1059160
+--- /dev/null
++++ b/recipes/xserver-common/xserver-common_1.24.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Common X11 scripts and support files"
++LICENSE = "GPL"
++SECTION = "x11"
++RDEPENDS_${PN} = "xmodmap xrandr xdpyinfo"
++PR = "r3"
++
++PACKAGE_ARCH = "all"
++
++# we are using a gpe-style Makefile
++inherit gpe
++
++SRC_URI_append = " file://setDPI.sh \
++                   file://89xdgautostart.sh \
++"
++
++do_install_append() {
++	install -m 0755 "${WORKDIR}/setDPI.sh" "${D}/etc/X11/Xinit.d/50setdpi"
++	install -m 0755 "${WORKDIR}/89xdgautostart.sh" "${D}/etc/X11/Xsession.d/89xdgautostart"
++}
+-- 
+1.6.1
 
 
 
