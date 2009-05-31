@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [87.194.255.145] (helo=woodbine.london.02.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MAqQS-0003xk-Pk
-	for openembedded-devel@openembedded.org; Sun, 31 May 2009 21:10:32 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MAqI3-00064b-PO
-	for openembedded-devel@openembedded.org; Sun, 31 May 2009 19:01:51 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 31 May 2009 19:01:51 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 31 May 2009 19:01:51 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 31 May 2009 21:01:40 +0200
-Message-ID: <gvuk6k$hfc$1@ger.gmane.org>
-References: <1243774077-19022-1-git-send-email-k.kooi@student.utwente.nl>	<gvu149$nlk$1@ger.gmane.org>	<be7a9f3d0905311100j91409d3n8011a9cffdba6fbc@mail.gmail.com>	<gvuhfg$bf$1@ger.gmane.org>
-	<be7a9f3d0905311134u767facd2j44807b0756f9d78f@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
-In-Reply-To: <be7a9f3d0905311134u767facd2j44807b0756f9d78f@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH] xserver-common: add 1.24 from .dev
+	(envelope-from <bluelightning@bluelightning.org>) id 1MAuyk-0004fp-KZ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Jun 2009 02:02:14 +0200
+Received: from shodan.localnet (93.96.131.185) by woodbine.london.02.net
+	(8.5.016.1)
+	id 4A203296001A5E1E for openembedded-devel@lists.openembedded.org;
+	Mon, 1 Jun 2009 00:53:32 +0100
+From: Paul Eggleton <bluelightning@bluelightning.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 1 Jun 2009 00:53:30 +0100
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; i686; ; )
+References: <20090529233958.GA16815@misibook.miska.isageek.net>
+	<gvrgts$7uc$2@ger.gmane.org>
+	<20090530194215.GA1186@misibook.miska.isageek.net>
+In-Reply-To: <20090530194215.GA1186@misibook.miska.isageek.net>
+MIME-Version: 1.0
+Message-Id: <200906010053.30975.bluelightning@bluelightning.org>
+Subject: Re: [PATCH] zuc: fixed build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,53 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 May 2009 19:10:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 01 Jun 2009 00:02:14 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 31-05-09 20:34, Otavio Salvador wrote:
-> Hello,
+On Sat, 30 May 2009, Michal Hrusecky wrote:
+> Rolf Leggewie - 23:47 30.05.09 wrote:
+> > do_fetch fails for this package.  Can you guys please look into this?
 >
-> On Sun, May 31, 2009 at 3:15 PM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
->> On 31-05-09 20:00, Otavio Salvador wrote:
->>>
->>> Hello,
->>>
->>> On Sun, May 31, 2009 at 10:36 AM, Koen Kooi<k.kooi@student.utwente.nl>
->>>   wrote:
->>>>
->>>> On 31-05-09 14:47, Koen Kooi wrote:
->>>>>
->>>>> From: Koen Kooi<koen@openembedded.org>
->>>>
->>>> Grrrrr. git send-email stripped the comment again:
->>>> * This makes xdg autostart applications autostart
->>>
->>> I think it ought to be enabled; in case someone uses a session manager
->>> (xfce-session, lxde-session or a own manager) it will reopen them.
->>
->> question: does anyone use that in stable/2009 together with xserver-common?
->
-> I use :-)
->
->>> I suggest it to have a /etc/defaults/xserver-common that makes it
->>> optional.
->>
->> That would be nice in .dev, but what's your thought on getting this change
->> from .dev to stable/2009 first?
->
-> I think it needs to be fixed in dev and then this ought to be done in
-> stable all together to avoid issues for current users. I'm one that
-> will have problems with this change.
+> You are right, it seems like sources are no longer available on original
+> URL. I got them in my download directory. I found that it has
+> sourceforge pages. There is some downloadable version but it is older
+> then version which was on URL in bitbake file. Will try to contact
+> original author and if he wouldn't respond, will try to merge it
+> somehow...
 
-Fair enough, want to cook up a patch for that?
+Another alternative is to fetch it from one of the source directories for 
+OpenZaurus (eg. http://www.openzaurus.org/download/3.5.4/sources/ , looking 
+through checksums.ini there are a few other mirrors around as well). 
 
-regards,
+I did notice that we are using an OZ sources mirror on ewi546.ewi.utwente.nl 
+for a few recipes but it doesn't seem to be responding right now for me. 
+Should we still be fetching from this server or do we need to switch to a 
+different mirror? Koen, is this your machine?
 
-Koen
-
-
-
-
+Cheers,
+Paul
 
 
