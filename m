@@ -1,32 +1,38 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MAlLR-0001qZ-Q7
-	for openembedded-devel@openembedded.org; Sun, 31 May 2009 15:45:02 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MAlD4-0003e8-CP
-	for openembedded-devel@openembedded.org; Sun, 31 May 2009 13:36:22 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 31 May 2009 13:36:22 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <otavio.salvador@gmail.com>) id 1MApSz-00056H-0I
+	for openembedded-devel@openembedded.org; Sun, 31 May 2009 20:09:05 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so3340945ywm.30
 	for <openembedded-devel@openembedded.org>;
-	Sun, 31 May 2009 13:36:22 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 31 May 2009 15:36:08 +0200
-Message-ID: <gvu149$nlk$1@ger.gmane.org>
+	Sun, 31 May 2009 11:00:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
+	:content-type:content-transfer-encoding;
+	bh=tHsAn7tIQEuuz1xinsVMb/qzt2we3itJIIveK6L9d9A=;
+	b=gctL1Xfsm9/FQS70rG8Ogx8qFaxfplQxVKx3nq/gduTOx3ftXErBW3n5XYtu8ulpY/
+	a1rGglVQhWN7qot/4PULbZxY6L043gtGcLRGT9lloOBF3qDQERBoNPIsUGdcJol4CMJU
+	USsMM4ybvVrPGrbbwA7cvcAWhvlq4R5K02+Nc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=nJ5CvD4HV6QYc/5NUofJlmn8BhCPk3BM3DcfUcwY/RFRBE3OfnI8ugSbwQOPX7cMT5
+	sqWa5mdH2lZfW1aBbScGqhYGRLB9MHx7LbFsqVrfIHLZV3WsVrXalwWnjCGpACS0nNIf
+	cKwOUqmHZguSLeixgBiOep1hVvnjdh5+aeFo8=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.12.17 with SMTP id 17mr6208182anl.2.1243792825501; Sun, 31 
+	May 2009 11:00:25 -0700 (PDT)
+In-Reply-To: <gvu149$nlk$1@ger.gmane.org>
 References: <1243774077-19022-1-git-send-email-k.kooi@student.utwente.nl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
-In-Reply-To: <1243774077-19022-1-git-send-email-k.kooi@student.utwente.nl>
-Sender: news <news@ger.gmane.org>
+	<gvu149$nlk$1@ger.gmane.org>
+Date: Sun, 31 May 2009 15:00:25 -0300
+X-Google-Sender-Auth: 6343f9f32bb78c34
+Message-ID: <be7a9f3d0905311100j91409d3n8011a9cffdba6fbc@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@openembedded.org
 Subject: Re: [STABLE][PATCH] xserver-common: add 1.24 from .dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,70 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 May 2009 13:45:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 31 May 2009 18:09:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 31-05-09 14:47, Koen Kooi wrote:
-> From: Koen Kooi<koen@openembedded.org>
+Hello,
 
-Grrrrr. git send-email stripped the comment again:
-* This makes xdg autostart applications autostart
-
-Note that the checksum is already in.
-
-
+On Sun, May 31, 2009 at 10:36 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> On 31-05-09 14:47, Koen Kooi wrote:
+>>
+>> From: Koen Kooi<koen@openembedded.org>
 >
->
-> Signed-off-by: Koen Kooi<koen@openembedded.org>
-> ---
->   recipes/xserver-common/files/89xdgautostart.sh |    9 +++++++++
->   recipes/xserver-common/xserver-common_1.24.bb  |   19 +++++++++++++++++++
->   2 files changed, 28 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/xserver-common/files/89xdgautostart.sh
->   create mode 100644 recipes/xserver-common/xserver-common_1.24.bb
->
-> diff --git a/recipes/xserver-common/files/89xdgautostart.sh b/recipes/xserver-common/files/89xdgautostart.sh
-> new file mode 100644
-> index 0000000..9886f9f
-> --- /dev/null
-> +++ b/recipes/xserver-common/files/89xdgautostart.sh
-> @@ -0,0 +1,9 @@
-> +#!/bin/sh
-> +
-> +XDGAUTOSTART=/etc/xdg/autostart
-> +if [ -d $XDGAUTOSTART ] ; then
-> +    for SCRIPT in $XDGAUTOSTART/*; do
-> +        CMD=`grep ^Exec= $SCRIPT | cut -d '=' -f 2`
-> +        $CMD&
-> +    done
-> +fi
-> diff --git a/recipes/xserver-common/xserver-common_1.24.bb b/recipes/xserver-common/xserver-common_1.24.bb
-> new file mode 100644
-> index 0000000..1059160
-> --- /dev/null
-> +++ b/recipes/xserver-common/xserver-common_1.24.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION = "Common X11 scripts and support files"
-> +LICENSE = "GPL"
-> +SECTION = "x11"
-> +RDEPENDS_${PN} = "xmodmap xrandr xdpyinfo"
-> +PR = "r3"
-> +
-> +PACKAGE_ARCH = "all"
-> +
-> +# we are using a gpe-style Makefile
-> +inherit gpe
-> +
-> +SRC_URI_append = " file://setDPI.sh \
-> +                   file://89xdgautostart.sh \
-> +"
-> +
-> +do_install_append() {
-> +	install -m 0755 "${WORKDIR}/setDPI.sh" "${D}/etc/X11/Xinit.d/50setdpi"
-> +	install -m 0755 "${WORKDIR}/89xdgautostart.sh" "${D}/etc/X11/Xsession.d/89xdgautostart"
-> +}
+> Grrrrr. git send-email stripped the comment again:
+> * This makes xdg autostart applications autostart
 
+I think it ought to be enabled; in case someone uses a session manager
+(xfce-session, lxde-session or a own manager) it will reopen them.
 
+I suggest it to have a /etc/defaults/xserver-common that makes it optional.
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
