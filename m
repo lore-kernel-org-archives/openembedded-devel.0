@@ -1,19 +1,35 @@
-Received: from [209.172.120.180] (helo=skymoon.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ckamas@finesse.com>) id 1MBESY-0003ae-5P
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 01 Jun 2009 22:50:21 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 1 Jun 2009 13:41:24 -0700
-Message-ID: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: bitbake virtual/kernel -c menuconfig
-Thread-Index: Acni+VQiKmDhUTS9QsiWV0OV/CUcvw==
-From: "Chuck Kamas" <ckamas@finesse.com>
-To: <Openembedded-devel@lists.openembedded.org>
-Subject: bitbake virtual/kernel -c menuconfig
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MBEd0-0003wF-Qo
+	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 23:01:08 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MBEUS-0006ta-I0
+	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 20:52:16 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 01 Jun 2009 20:52:16 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 01 Jun 2009 20:52:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 01 Jun 2009 22:52:04 +0200
+Message-ID: <h01f1l$7t1$1@ger.gmane.org>
+References: <gr7nfd$32a$1@ger.gmane.org>	<20090601165809.GZ23842@smtp.west.cox.net>
+	<h012tn$v40$1@ger.gmane.org>
+	<1243887426.5049.18.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
+In-Reply-To: <1243887426.5049.18.camel@lenovo.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [RFC] Rebuild external kernel modules on kernel change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,33 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2009 20:50:27 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Jun 2009 21:01:16 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+On 01-06-09 22:17, Phil Blundell wrote:
+  Then, your kernel package could
+> Provide: kernel-abi-123456abc, all your module packages could Depend: on
+> the same thing, and (modulo a little bit of package manager tweaking
+> along roughly the same lines as we use for locales) everything would
+> "just work".
 
-I have recently upgraded from using the Angstrom distribution to the
-minimal and now micro distribution.  One thing that now fails in both of
-these distros is:
-
-bitbake virtual/kernel -c menuconfig
-
-They both now complain that it can not open a display.  I have traced
-this to the fact that DISPLAY is not set to 0.0 in either the minimal or
-the micro distributions.  The only place I can find display set in the
-recopies is in xqtlauncher and startxqt.  So how do I set up an export
-DISPLAY=3D0.0 such that menuconfig gets it?
-
-Also I noticed that the patch files are being applied before menuconfig
-in Angstrom but not in minimal and micro.  How do I fix this?
-
-Thanks!
-Chuck
-
-
+only if you use {o,i}pkg, which isn't good enough.
 
 
 
