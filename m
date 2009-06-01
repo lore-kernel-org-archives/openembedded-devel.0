@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MBF3q-0001ZX-30
-	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 23:28:51 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MBEvK-0008Eb-Fl
-	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 21:20:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 01 Jun 2009 21:20:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 01 Jun 2009 21:20:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 01 Jun 2009 23:18:01 +0200
-Message-ID: <h01gia$ckf$1@ger.gmane.org>
-References: <200905191405.15699.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
-In-Reply-To: <200905191405.15699.marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] task-proper-tools fixing
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MBFG0-0001zQ-Rl
+	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 23:41:26 +0200
+Received: (qmail 20747 invoked from network); 1 Jun 2009 21:32:37 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 1 Jun 2009 14:32:37 -0700
+Date: Mon, 1 Jun 2009 14:32:37 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090601213236.GE26065@smtp.west.cox.net>
+References: <gr7nfd$32a$1@ger.gmane.org>
+	<20090601165809.GZ23842@smtp.west.cox.net>
+	<h012tn$v40$1@ger.gmane.org>
+	<1243887426.5049.18.camel@lenovo.internal.reciva.com>
+	<h01f1l$7t1$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <h01f1l$7t1$1@ger.gmane.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] Rebuild external kernel modules on kernel change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,48 +32,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2009 21:28:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Jun 2009 21:41:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 19-05-09 14:05, Marcin Juszkiewicz wrote:
+On Mon, Jun 01, 2009 at 10:52:04PM +0200, Koen Kooi wrote:
+> On 01-06-09 22:17, Phil Blundell wrote:
+>  Then, your kernel package could
+>> Provide: kernel-abi-123456abc, all your module packages could Depend: on
+>> the same thing, and (modulo a little bit of package manager tweaking
+>> along roughly the same lines as we use for locales) everything would
+>> "just work".
 >
-> During work on 'task-proper-tools' I found a problem.
->
-> This task tries to replace busybox applets with full versions of
-> applications. I am adding new entries to this recipe to get better
-> coverage and found some commands which are placed in different places.
->
-> command   | busybox | command   | Debian    | package
-> ----------|---------|-----------|-----------|-------------
-> chattr    | /bin/   | /usr/bin/ | /usr/bin/ | coreutils
-> df        | /bin/   | /usr/bin/ | /bin/     | coreutils
-> getopt    | /bin/   | /usr/bin/ | /usr/bin/ | util-linux-ng
-> mktemp    | /bin/   | /usr/bin/ | /bin/     | coreutils
-> nice      | /bin/   | /usr/bin/ | /usr/bin/ | coreutils
-> run-parts | /bin/   | /usr/bin/ | /bin/     | debianutils
-> watch     | /bin/   | /usr/bin/ | /usr/bin/ | procps
->
-> The question is: what do we do with those commands? Move all of them to
-> /bin/ directory or move them to Debian locations?
+> only if you use {o,i}pkg, which isn't good enough.
 
-Any updates on this? Do_rootfs currently breaks because of this:
+Similar stuff should be doable for deb and rpm.
 
-Collected errors:
-update-alternatives: Error: cannot register alternative df to 
-/usr/bin/df since it is already registered to /bin/df
-update-alternatives: Error: cannot register alternative nice to 
-/usr/bin/nice since it is already registered to /bin/nice
-update-alternatives: Error: cannot register alternative stat to 
-/usr/bin/stat since it is already registered to /bin/stat
-update-alternatives: Error: cannot register alternative run-parts to 
-/usr/bin/run-parts since it is already registered to /bin/run-parts
-
-log_check: There were error messages in the logfile
-
-regards,
-
-Koen
-
+-- 
+Tom Rini
 
 
