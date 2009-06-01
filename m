@@ -1,21 +1,21 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MB8xJ-00012j-QB
-	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 16:57:41 +0200
-Received: (qmail 24997 invoked by uid 813007); 1 Jun 2009 14:48:57 -0000
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MB8xK-00012m-1r
+	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 16:57:42 +0200
+Received: (qmail 25005 invoked by uid 813007); 1 Jun 2009 14:48:57 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
 	by 195.149.226.213 with ESMTPA; 1 Jun 2009 14:48:57 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon,  1 Jun 2009 16:49:18 +0200
-Message-Id: <1243867762-16540-3-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Mon,  1 Jun 2009 16:49:19 +0200
+Message-Id: <1243867762-16540-4-git-send-email-marcin@juszkiewicz.com.pl>
 X-Mailer: git-send-email 1.6.3.1
 In-Reply-To: <1243867762-16540-1-git-send-email-marcin@juszkiewicz.com.pl>
 References: <1243867762-16540-1-git-send-email-marcin@juszkiewicz.com.pl>
 Cc: Marcin Juszkiewicz <hrw@openembedded.org>
-Subject: [PATCH 02/13] ep93xx: use Maverick FP
+Subject: [PATCH 03/13] tune-ep9312: use flags from Martin W. Guy work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,23 +36,24 @@ From: Marcin Juszkiewicz <hrw@openembedded.org>
 
 Signed-off-by: Marcin Juszkiewicz <hrw@openembedded.org>
 ---
- conf/machine/ep93xx.conf |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ conf/machine/include/tune-ep9312.inc |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/conf/machine/ep93xx.conf b/conf/machine/ep93xx.conf
-index 268ed52..11bae2f 100644
---- a/conf/machine/ep93xx.conf
-+++ b/conf/machine/ep93xx.conf
-@@ -23,7 +23,7 @@ EXTRA_IMAGECMD_jffs2 = "--eraseblock=0x40000 --pad=0x500000 "
+diff --git a/conf/machine/include/tune-ep9312.inc b/conf/machine/include/tune-ep9312.inc
+index cf3de9c..fd9c1cc 100644
+--- a/conf/machine/include/tune-ep9312.inc
++++ b/conf/machine/include/tune-ep9312.inc
+@@ -1,8 +1,7 @@
+-TARGET_CC_ARCH = "-march=ep9312 -mtune=ep9312 -mcpu=ep9312"
+-# add "-mfp=maverick" for newer gcc versions > 4.0
++TARGET_CC_ARCH = "-mcpu=ep9312 -mfpu=maverick -mfloat-abi=softfp -fno-signed-zeros -O"
  
- #tune for ep93xx cpus
- #can be used for crunch support later on
--#require conf/machine/include/tune-ep9312.inc
-+require conf/machine/include/tune-ep9312.inc
+ #set arch to ep9312 for all generated packages
+-PACKAGE_EXTRA_ARCHS += "armv4 armv4t ep9312"
++PACKAGE_EXTRA_ARCHS += "armv4 armv4t ep93xx"
+ BASE_PACKAGE_ARCH = "ep9312"
+ FEED_ARCH = "ep9312"
  
- 
--require conf/machine/include/tune-arm920t.inc
-+#require conf/machine/include/tune-arm920t.inc
 -- 
 1.6.3.1
 
