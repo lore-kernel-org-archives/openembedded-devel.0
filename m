@@ -1,23 +1,26 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [74.125.78.145] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MB3iq-0006tS-Nt
+	(envelope-from <dp@xora.org.uk>) id 1MB46K-0007di-HM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Jun 2009 11:22:24 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 0100868584;
-	Mon,  1 Jun 2009 13:13:34 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
+	Mon, 01 Jun 2009 11:46:40 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so3615084eyw.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Jun 2009 02:37:57 -0700 (PDT)
+Received: by 10.210.89.4 with SMTP id m4mr344346ebb.54.1243849076975;
+	Mon, 01 Jun 2009 02:37:56 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 10sm6730141ewy.60.2009.06.01.02.37.53
+	(version=SSLv3 cipher=RC4-MD5); Mon, 01 Jun 2009 02:37:54 -0700 (PDT)
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Jun 2009 13:13:35 +0400
-Message-Id: <1243847615-8450-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.3.1
-In-Reply-To: <20090530215243.GS23842@smtp.west.cox.net>
-References: <20090530215243.GS23842@smtp.west.cox.net>
-MIME-Version: 1.0
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-Spam-Status: No
-Subject: [PATCH] (e)glibc.inc: add minimal sane kernel versions, move from bitbake.conf
+In-Reply-To: <E1MB0v2-0003dQ-Mk@melo.nslu2-linux.org>
+References: <E1MB0v2-0003dQ-Mk@melo.nslu2-linux.org>
+Date: Mon, 01 Jun 2009 10:37:52 +0100
+Message-Id: <1243849072.2828.1.camel@xora-desktop.xora.org.uk>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 (2.26.1-2.fc11) 
+Subject: Re: [oe-commits] Mike Westerhof : SHR: linux kernel - add linux-openmoko-shr-devel kernel recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,82 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2009 09:22:25 -0000
+X-List-Received-Date: Mon, 01 Jun 2009 09:46:40 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-(e)glibc is configured for OLDEST_KERNEL, certain target architectures have
-specific requirements for kernel versions, if that are not satisfied (e)glibc
-reconfigures itself with what it think more appropriate and warns user that
-there is misconfiguration on his side.
+On Mon, 2009-06-01 at 06:22 +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: shr/import
+> Commit: f1fa5981d57286c49fd5191d37538680f7835efd
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=f1fa5981d57286c49fd5191d37538680f7835efd
+> 
+> Author: Mike Westerhof <mwester@dls.net>
+> Date:   Mon Jun  1 01:21:06 2009 -0500
+> 
+> SHR: linux kernel - add linux-openmoko-shr-devel kernel recipe.
+> This obsoletes the patches in the SHR overlay.
 
-Add minimal sane kernel versions for architectures requiring that.
+>  .../linux-openmoko-shr-devel/fix-install.patch     |   23 ++++++++++++++++++
 
-Also move (e)glibc-specific OLDEST_KERNEL variable from bitbake.conf to
-(e)glibc.inc files that are more appropriate for this.
----
- conf/bitbake.conf              |    2 --
- conf/distro/include/eglibc.inc |   11 +++++++++++
- conf/distro/include/glibc.inc  |   11 +++++++++++
- 3 files changed, 22 insertions(+), 2 deletions(-)
+Just a small note, in core OE these sort of patches should no longer be
+required. install-native was obsoleted in favor of real install in
+coreutils.
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 0caa162..e711a1f 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -656,8 +656,6 @@ require conf/enterprise.conf
- # Weak variables (usually to retain backwards compatibility)
- ##################################################################
- 
--OLDEST_KERNEL ?= "2.4.0"
--
- DL_DIR ?= "${TMPDIR}/downloads"
- IMAGE_FSTYPES ?= "tar.gz"
- PCMCIA_MANAGER ?= "pcmcia-cs"
-diff --git a/conf/distro/include/eglibc.inc b/conf/distro/include/eglibc.inc
-index 0d2087e..0443140 100644
---- a/conf/distro/include/eglibc.inc
-+++ b/conf/distro/include/eglibc.inc
-@@ -7,3 +7,14 @@ PREFERRED_PROVIDER_virtual/libintl ?= "eglibc"
- PREFERRED_PROVIDER_virtual/libc = "eglibc"
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-initial = "eglibc-initial"
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "eglibc"
-+
-+# eglibc is configured for OLDEST_KERNEL kernel version, so we set minimal
-+# sane versions there
-+
-+OLDEST_KERNEL ?= "2.4.0"
-+
-+# ARM OABI is fine with 2.4.0, EABI is not, so we override on "-gnueabi"
-+# TARGET_OS here, not on architecture which is 'arm' in both cases
-+OLDEST_KERNEL_linux-gnueabi ?= "2.6.16"
-+OLDEST_KERNEL_sparc64 ?= "2.4.21"
-+OLDEST_KERNEL_ppc64 ?= "2.4.21"
-diff --git a/conf/distro/include/glibc.inc b/conf/distro/include/glibc.inc
-index f9140ff..2cb6502 100644
---- a/conf/distro/include/glibc.inc
-+++ b/conf/distro/include/glibc.inc
-@@ -7,3 +7,14 @@ PREFERRED_PROVIDER_virtual/libintl ?= "glibc"
- PREFERRED_PROVIDER_virtual/libc = "glibc"
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-initial = "glibc-initial"
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "glibc"
-+
-+# glibc is configured for OLDEST_KERNEL kernel version, so we set minimal
-+# sane versions there
-+
-+OLDEST_KERNEL ?= "2.4.0"
-+
-+# ARM OABI is fine with 2.4.0, EABI is not, so we override on "-gnueabi"
-+# TARGET_OS here, not on architecture which is 'arm' in both cases
-+OLDEST_KERNEL_linux-gnueabi ?= "2.6.14"
-+OLDEST_KERNEL_sparc64 ?= "2.4.21"
-+OLDEST_KERNEL_ppc64 ?= "2.4.21"
--- 
-1.6.3.1
+Graeme
 
-
--- 
-This message has been scanned for viruses and
-dangerous content by MailScanner, and is
-believed to be clean.
 
 
 
