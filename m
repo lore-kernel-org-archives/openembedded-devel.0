@@ -1,21 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MB9EE-0001zJ-5f
-	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 17:15:10 +0200
-Received: (qmail 22478 invoked by uid 813007); 1 Jun 2009 15:06:25 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 1 Jun 2009 15:06:25 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 1 Jun 2009 17:06:53 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.2;
-	x86_64; ; )
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MB9lr-0008L3-7m
+	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 17:49:55 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MB9dM-0008Kw-Dq
+	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 15:41:09 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 01 Jun 2009 15:41:08 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 01 Jun 2009 15:41:08 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 01 Jun 2009 17:40:54 +0200
+Message-ID: <h00sq7$9mv$1@ger.gmane.org>
 References: <1243867762-16540-1-git-send-email-marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
 In-Reply-To: <1243867762-16540-1-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <200906011706.54319.marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
 Subject: Re: EP93xx - update of GCC support for this sick CPU/FPU
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,25 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2009 15:15:10 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Jun 2009 15:49:56 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=C5=82ek, 1 czerwca 2009 o 16:49:16 Marcin Juszkiewicz=20
-napisa=C5=82(a):
+On 01-06-09 16:49, Marcin Juszkiewicz wrote:
+> Hi
+>
+> This patchset is taken from http://martinwguy.co.uk/martin/crunch/
+>
+> It is enabled by default for ep93xx devices as EDB9301 boots into rootfs
+> built with this toolchain without problems. Running "openssl speed"
+> works but end table with results contains broken calculations.
+>
+> Binary locales do not work as QEMU do not handle ep93xx cpu.
+>
+> Patches are a bit ugly maybe (in conf/machine/include/*) but I want to
+> show it finally to people before it rust.
 
-> Patches are a bit ugly maybe
+maverick *is* ugly :) The patches look OK, so feel free to add my 
+Acked-by to all of them.
 
-Sorry for mess - numbering is broken - there are only those 6 patches.
+regards,
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+Koen
 
 
 
