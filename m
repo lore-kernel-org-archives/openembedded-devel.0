@@ -1,21 +1,19 @@
 Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>)
-	id 1MBD2h-00073R-Jw; Mon, 01 Jun 2009 21:19:31 +0200
+	(envelope-from <philb@gnu.org>)
+	id 1MBE5S-0002tW-Bm; Mon, 01 Jun 2009 22:26:27 +0200
 Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
 	helo=[192.168.2.154])
 	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1MBCuD-0006c3-NM; Mon, 01 Jun 2009 20:10:45 +0100
-From: Phil Blundell <pb@reciva.com>
+	(Exim 4.63) (envelope-from <philb@gnu.org>)
+	id 1MBDwl-0008KB-0N; Mon, 01 Jun 2009 21:17:28 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <h017kn$emm$1@ger.gmane.org>
+In-Reply-To: <h012tn$v40$1@ger.gmane.org>
 References: <gr7nfd$32a$1@ger.gmane.org>
 	<20090601165809.GZ23842@smtp.west.cox.net> <h012tn$v40$1@ger.gmane.org>
-	<1243880254.5049.1.camel@lenovo.internal.reciva.com>
-	<h017kn$emm$1@ger.gmane.org>
-Date: Mon, 01 Jun 2009 20:10:44 +0100
-Message-Id: <1243883444.5049.8.camel@lenovo.internal.reciva.com>
+Date: Mon, 01 Jun 2009 21:17:06 +0100
+Message-Id: <1243887426.5049.18.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
 Cc: openembedded-devel@openembedded.org
@@ -33,32 +31,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2009 19:19:32 -0000
+X-List-Received-Date: Mon, 01 Jun 2009 20:26:29 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-06-01 at 20:45 +0200, Koen Kooi wrote:
-> On 01-06-09 20:17, Phil Blundell wrote:
-> > On Mon, 2009-06-01 at 19:25 +0200, Koen Kooi wrote:
-> >> So far I've only seen suggestions that will trigger a rebuild of recipes
-> >> using module*bbclass, but no solutions for automagic version changes so
-> >> that the package manager will pick it up as well.
-> >
-> > I don't quite understand why this is so complicated; can't you just
-> > append the kernel's ABI version to either ${PR} or ${PV} (depending on
-> > whether or not you want parallel installability) for the modules?
-> 
-> No, since PV and PR need to be known at parsing time when the kernel 
-> hasn't been built yet.
+On Mon, 2009-06-01 at 19:25 +0200, Koen Kooi wrote:
+> 2) is *very* hard to track down, e.g. people don't expect that enabling 
+> netfilter as modules breaks external wifi drivers since struct sk_buff 
+> will change (ask nokia 770 tablet users).
+> I bet there are a lot more cases where kernel runtime abi changes, so 
+> every kernel PR bump will trigger a rebuild *and* (here's comes the most 
+> important bit) an automatic PR bump for recipes using module*.bbclass.
 
-I can't think offhand of any reason why it's important to have PR
-available at parse time, but if that's the case then you could splice it
-into DISTRO_PR (or some equivalent variable) instead.
+The networking code is indeed particularly bad in that respect.  But in
+general Tom is right, the vast majority of kernel config changes
+(enabling drivers, adjusting command line parameters or default
+settings, that kind of thing) don't have ABI impact and there is no need
+to rebuild everything as a result.
 
-My reference to PV above was spurious; it's no different to PR in this
-context.  If you want parallel installation then it's actually PKG_xx
-that you need to modify (or, conceptually, PN, but fiddling with that
-would almost certainly be a bad idea).
+The easiest way to deal with that issue is probably to have a separate
+KERNEL_PACKAGE_ABIVERSION variable which is set locally in the kernel's
+own .bb file, which is appended to the regular kernel-abiversion, and
+which you can manually increment when making a change that causes, or is
+likely to cause, an ABI change.  If you, as a kernel package maintainer,
+want to take a particularly conservative line with your own kernels then
+you can simply set KERNEL_PACKAGE_ABIVERSION = "${PR}" and it will act
+as you describe above; other maintainers who want to avoid unnecessary
+rebuilds can use their own judgement about when to increment it.  
+
+For folks who use MODVERSIONS, it'd probably be easy enough to add an
+extra check to detect when the symbol hashes have changed since the last
+build and emit an error.  In an ideal world, you'd even be able to
+generate a single ABI footprint by, say, taking a sha256 hash of the
+catenation of all the symbol versions.  Then, your kernel package could
+Provide: kernel-abi-123456abc, all your module packages could Depend: on
+the same thing, and (modulo a little bit of package manager tweaking
+along roughly the same lines as we use for locales) everything would
+"just work".
 
 p.
 
