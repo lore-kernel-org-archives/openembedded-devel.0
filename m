@@ -1,32 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MAxa8-0007xE-GR
-	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 04:49:00 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MAxRj-0003Ln-Uk
-	for openembedded-devel@openembedded.org; Mon, 01 Jun 2009 02:40:19 +0000
-Received: from p4225-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.119.225])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 01 Jun 2009 02:40:19 +0000
-Received: from no2spam by p4225-ipngn201marunouchi.tokyo.ocn.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 01 Jun 2009 02:40:19 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 01 Jun 2009 11:40:01 +0900
-Message-ID: <gvvf23$n0p$1@ger.gmane.org>
-References: <20090526193632.GA23428@misibook.miska.isageek.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p4225-ipngn201marunouchi.tokyo.ocn.ne.jp
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-In-Reply-To: <20090526193632.GA23428@misibook.miska.isageek.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] xmms-embedded: fixed build
+	(envelope-from <khimov@altell.ru>) id 1MB3iq-0006tS-Nt
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Jun 2009 11:22:24 +0200
+Received: from localhost.localdomain (unknown [192.168.1.115])
+	by mail.altell.local (Postfix) with ESMTP id 0100868584;
+	Mon,  1 Jun 2009 13:13:34 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 Jun 2009 13:13:35 +0400
+Message-Id: <1243847615-8450-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <20090530215243.GS23842@smtp.west.cox.net>
+References: <20090530215243.GS23842@smtp.west.cox.net>
+MIME-Version: 1.0
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-Spam-Status: No
+Subject: [PATCH] (e)glibc.inc: add minimal sane kernel versions, move from bitbake.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,17 +31,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2009 02:49:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Jun 2009 09:22:25 -0000
 
-Michal Hrusecky wrote:
-> There was some .debug directories packaged in non-debug package. QA
-> error fixed by adding them to debug package.
+(e)glibc is configured for OLDEST_KERNEL, certain target architectures have
+specific requirements for kernel versions, if that are not satisfied (e)glibc
+reconfigures itself with what it think more appropriate and warns user that
+there is misconfiguration on his side.
 
-Builds fine for me as-is.
+Add minimal sane kernel versions for architectures requiring that.
 
-http://tinderbox.openembedded.net/packages/xmms-embedded/
+Also move (e)glibc-specific OLDEST_KERNEL variable from bitbake.conf to
+(e)glibc.inc files that are more appropriate for this.
+---
+ conf/bitbake.conf              |    2 --
+ conf/distro/include/eglibc.inc |   11 +++++++++++
+ conf/distro/include/glibc.inc  |   11 +++++++++++
+ 3 files changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 0caa162..e711a1f 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -656,8 +656,6 @@ require conf/enterprise.conf
+ # Weak variables (usually to retain backwards compatibility)
+ ##################################################################
+ 
+-OLDEST_KERNEL ?= "2.4.0"
+-
+ DL_DIR ?= "${TMPDIR}/downloads"
+ IMAGE_FSTYPES ?= "tar.gz"
+ PCMCIA_MANAGER ?= "pcmcia-cs"
+diff --git a/conf/distro/include/eglibc.inc b/conf/distro/include/eglibc.inc
+index 0d2087e..0443140 100644
+--- a/conf/distro/include/eglibc.inc
++++ b/conf/distro/include/eglibc.inc
+@@ -7,3 +7,14 @@ PREFERRED_PROVIDER_virtual/libintl ?= "eglibc"
+ PREFERRED_PROVIDER_virtual/libc = "eglibc"
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-initial = "eglibc-initial"
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "eglibc"
++
++# eglibc is configured for OLDEST_KERNEL kernel version, so we set minimal
++# sane versions there
++
++OLDEST_KERNEL ?= "2.4.0"
++
++# ARM OABI is fine with 2.4.0, EABI is not, so we override on "-gnueabi"
++# TARGET_OS here, not on architecture which is 'arm' in both cases
++OLDEST_KERNEL_linux-gnueabi ?= "2.6.16"
++OLDEST_KERNEL_sparc64 ?= "2.4.21"
++OLDEST_KERNEL_ppc64 ?= "2.4.21"
+diff --git a/conf/distro/include/glibc.inc b/conf/distro/include/glibc.inc
+index f9140ff..2cb6502 100644
+--- a/conf/distro/include/glibc.inc
++++ b/conf/distro/include/glibc.inc
+@@ -7,3 +7,14 @@ PREFERRED_PROVIDER_virtual/libintl ?= "glibc"
+ PREFERRED_PROVIDER_virtual/libc = "glibc"
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-initial = "glibc-initial"
+ PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "glibc"
++
++# glibc is configured for OLDEST_KERNEL kernel version, so we set minimal
++# sane versions there
++
++OLDEST_KERNEL ?= "2.4.0"
++
++# ARM OABI is fine with 2.4.0, EABI is not, so we override on "-gnueabi"
++# TARGET_OS here, not on architecture which is 'arm' in both cases
++OLDEST_KERNEL_linux-gnueabi ?= "2.6.14"
++OLDEST_KERNEL_sparc64 ?= "2.4.21"
++OLDEST_KERNEL_ppc64 ?= "2.4.21"
+-- 
+1.6.3.1
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
 
 
 
