@@ -1,22 +1,33 @@
-Received: from [208.30.173.93] (helo=na.colfaxcorporation.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <james.newell@colfaxcorp.com>) id 1MBJEf-0006yj-V9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jun 2009 03:56:18 +0200
-Received: from ([192.168.3.77])
-	by susmnrap020.na.colfaxcorporation.net with ESMTP  id 5s6d1j1.3556457; 
-	Mon, 01 Jun 2009 21:47:24 -0400
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 1 Jun 2009 21:47:23 -0400
-Message-ID: <F006973C7BA4F048BE0A9AF40B69189C23DA61@susmnrex004.na.colfaxcorporation.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: How do you  add libstdc++ to the micro-image distro?
-Thread-Index: AcnjJBNDtAeqOJaUTYiV9+VVWZtdqA==
-From: "Newell, James C." <James.Newell@colfaxcorp.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: How do you add libstdc++ to the micro-image distro?
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MBLnr-0001mU-Jb
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 06:40:47 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MBLfK-0006gi-MS
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 04:31:58 +0000
+Received: from p3077-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.118.77])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jun 2009 04:31:58 +0000
+Received: from no2spam by p3077-ipngn201marunouchi.tokyo.ocn.ne.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jun 2009 04:31:58 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 02 Jun 2009 13:31:38 +0900
+Message-ID: <h029vb$4ej$1@ger.gmane.org>
+References: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>	<gvrtqn$8oh$1@ger.gmane.org>	<gvruj9$aj3$2@ger.gmane.org>
+	<4A2185B0.40406@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+In-Reply-To: <4A2185B0.40406@balister.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [patch] remove dirty .swp file in mini-httpd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,25 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 01:56:18 -0000
-Content-class: urn:content-classes:message
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Tue, 02 Jun 2009 04:40:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,=0D=0A=0D=0AI am fairly new to the openembedded project=2E  I'm attem=
-pting to add a=0D=0Ac++ application to the micro-image distro for experimen=
-ting with oe,=0D=0Abut it doesn't include a stdc++=2E   How would one add l=
-ibstdc++ to the=0D=0Amicro image distro?  Adding libstdc++ and a few other =
-attempts to the=0D=0AIMAGE_INSTALL variable in recipes/images/micro-image=
-=2Ebb doesn't seem to=0D=0Awork=2E  Any help is appreciated=2E=0D=0A=0D=0AR=
-egards,=0D=0A=0D=0AJim=0D=0A=0D=0A=0D=0A-----------------------------------=
-------=0D=0ACONFIDENTIALITY NOTICE: If you have received this e-mail in err=
-or,=0Aplease immediately notify the sender by e-mail at the address=0Ashown=
-=2E  This e-mail transmission may contain confidential=0Ainformation=2E  Th=
-is information is intended only for the use of the=0Aindividual(s) or entit=
-y to whom it is intended even if addressed=0Aincorrectly=2E  Please delete =
-it from your files if you are not the=0Aintended recipient=2E  Thank you fo=
-r your compliance=2E=0D=0A
+Philip Balister wrote:
+> or in other words, use the form: Acked-by: Rolf Leggewie 
+> <some@email.address>
+> 
+> And yes, the brackets are important. THey help patchwork pick up the 
+> patches.
+
+OK,, thanks.  Can the ACK be done from patchwork while I am logged in? 
+I kind of hate to have to type all this or copy it from somewhere every 
+time.
+
 
 
