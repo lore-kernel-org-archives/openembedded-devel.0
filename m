@@ -1,22 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MBOwl-000635-JW
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jun 2009 10:02:11 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MBOoB-000865-PY
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jun 2009 08:53:20 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>
-References: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>
-Date: Tue, 02 Jun 2009 08:53:18 +0100
-Message-Id: <1243929198.5049.45.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MBOxw-00065M-ND
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 10:03:25 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MBOpP-0005pQ-DM
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 07:54:35 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jun 2009 07:54:35 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jun 2009 07:54:35 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 02 Jun 2009 09:54:23 +0200
+Message-ID: <h02lrg$qs$1@ger.gmane.org>
+References: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>	<h01g9t$c2a$1@ger.gmane.org>
+	<C62896630644CE43BF64B0FF0AC27F0E01C6E7@mail.ad.skymv.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
+In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E01C6E7@mail.ad.skymv.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: bitbake virtual/kernel -c menuconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,27 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 08:02:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 02 Jun 2009 08:03:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-06-01 at 13:41 -0700, Chuck Kamas wrote:
-> They both now complain that it can not open a display.  I have traced
-> this to the fact that DISPLAY is not set to 0.0 in either the minimal or
-> the micro distributions.  The only place I can find display set in the
-> recopies is in xqtlauncher and startxqt.  So how do I set up an export
-> DISPLAY=0.0 such that menuconfig gets it?
+On 02-06-09 07:18, Chuck Kamas wrote:
+> :-)
+>
+> But there is too much bloat in angstrom.  I need a lean mean fighting machine.
 
-I'd have thought you would be able to put it in the environment, but
-failing that local.conf should work.
+That is just bullshit. You said you switched from angstrom to minimal to 
+'upgrade', well minimal is just a copy of angstrom with some sed 
+s:angstrom:minimal: applied. And if you look real close at micro you'll 
+see that the only real differences with angstrom are:
 
-> Also I noticed that the patch files are being applied before menuconfig
-> in Angstrom but not in minimal and micro.  How do I fix this?
+1) different uclibc config
+2) more applets in busybox
+3) doesn't touch task-base.
 
-That's a bit odd.  Which particular kernel are you trying to build?
+And further more, their 'micro-image' is using features of image.bbclass 
+that were done by angstrom developers for the angstrom distribution, but 
+in such a way that they were generally applicable.
 
-p.
+So, knowing all this, please elaborate on the 'bloat' you are talking 
+about.
 
+regards,
+
+Koen
 
 
 
