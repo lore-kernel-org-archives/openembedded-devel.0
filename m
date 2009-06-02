@@ -1,19 +1,19 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MBUPC-0005jP-13
-	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 15:51:54 +0200
-Received: (qmail 6880 invoked by uid 813007); 2 Jun 2009 13:43:03 -0000
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MBUQ1-0005k9-4q
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 15:52:45 +0200
+Received: (qmail 8894 invoked by uid 813007); 2 Jun 2009 13:43:54 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 2 Jun 2009 13:43:03 -0000
+	by 195.149.226.213 with ESMTPA; 2 Jun 2009 13:43:54 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Jun 2009 15:43:34 +0200
-Message-Id: <1243950214-11794-1-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Tue,  2 Jun 2009 15:44:28 +0200
+Message-Id: <1243950268-13201-1-git-send-email-marcin@juszkiewicz.com.pl>
 X-Mailer: git-send-email 1.6.3.1
 Cc: Marcin Juszkiewicz <marcin@buglabs.net>
-Subject: [PATCH 1/1] fbprogress: BUG only tool to show boot progress on built-in monochrome LCD
+Subject: [STABLE][PATCH 1/1] fbprogress: BUG only tool to show boot progress on built-in monochrome LCD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,7 +27,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 13:51:54 -0000
+X-List-Received-Date: Tue, 02 Jun 2009 13:52:45 -0000
 
 From: Marcin Juszkiewicz <marcin@buglabs.net>
 
