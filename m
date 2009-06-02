@@ -1,20 +1,22 @@
-Received: from [209.172.120.180] (helo=skymoon.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ckamas@finesse.com>) id 1MBMXM-0008Hs-RN
+	(envelope-from <pb@reciva.com>) id 1MBOwl-000635-JW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jun 2009 07:27:49 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 1 Jun 2009 22:18:15 -0700
-Message-ID: <C62896630644CE43BF64B0FF0AC27F0E01C6E7@mail.ad.skymv.com>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: <C62896630644CE43BF64B0FF0AC27F0E01C6E7@mail.ad.skymv.com>
-Thread-Topic: [oe] bitbake virtual/kernel -c menuconfig
-Thread-Index: AcnjA/5UThl4LAPJSDqQ3X1Qv9ms4gAPYm/K
+	Tue, 02 Jun 2009 10:02:11 +0200
+Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MBOoB-000865-PY
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Jun 2009 08:53:20 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>
 References: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>
-	<h01g9t$c2a$1@ger.gmane.org>
-From: "Chuck Kamas" <ckamas@finesse.com>
-To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 02 Jun 2009 08:53:18 +0100
+Message-Id: <1243929198.5049.45.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: bitbake virtual/kernel -c menuconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,125 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 05:27:49 -0000
-X-Groupsio-MsgNum: 10930
-Content-class: urn:content-classes:message
-Content-Type: multipart/mixed; boundary="----_=_NextPart_001_01C9E341.A29F3934"
+X-List-Received-Date: Tue, 02 Jun 2009 08:02:12 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-------_=_NextPart_001_01C9E341.A29F3934
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+On Mon, 2009-06-01 at 13:41 -0700, Chuck Kamas wrote:
+> They both now complain that it can not open a display.  I have traced
+> this to the fact that DISPLAY is not set to 0.0 in either the minimal or
+> the micro distributions.  The only place I can find display set in the
+> recopies is in xqtlauncher and startxqt.  So how do I set up an export
+> DISPLAY=0.0 such that menuconfig gets it?
 
-:-)
-=20
-But there is too much bloat in angstrom.  I need a lean mean fighting =
-machine.
-=20
-Chuck
-=20
+I'd have thought you would be able to put it in the environment, but
+failing that local.conf should work.
 
-________________________________
-
-From: openembedded-devel-bounces@lists.openembedded.org on behalf of =
-Koen Kooi
-Sent: Mon 6/1/2009 2:13 PM
-To: openembedded-devel@openembedded.org
-Subject: Re: [oe] bitbake virtual/kernel -c menuconfig
-
-
-
-On 01-06-09 22:41, Chuck Kamas wrote:
-
-> Also I noticed that the patch files are being applied before =
-menuconfig
+> Also I noticed that the patch files are being applied before menuconfig
 > in Angstrom but not in minimal and micro.  How do I fix this?
 
-By going back to angstrom
+That's a bit odd.  Which particular kernel are you trying to build?
 
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+p.
 
 
 
-------_=_NextPart_001_01C9E341.A29F3934
-Content-Type: application/ms-tnef;
-	name="winmail.dat"
-Content-Transfer-Encoding: base64
 
-eJ8+IgEFAQaQCAAEAAAAAAABAAEAAQeQBgAIAAAA5AQAAAAAAADoAAEIgAcAGAAAAElQTS5NaWNy
-b3NvZnQgTWFpbC5Ob3RlADEIAQ2ABAACAAAAAgACAAEEgAEALgAAAFJFOiBbb2VdIGJpdGJha2Ug
-dmlydHVhbC9rZXJuZWwgLWMgbWVudWNvbmZpZwBBEAEFgAMADgAAANkHBgABABYAEgAPAAEAHwEB
-IIADAA4AAADZBwYAAQAWABIAOwABAEsBAQmAAQAhAAAAMzE2QUM2RDM3RDJDOTg0Q0FGNEEyNzlC
-NzZEQzMyMjMAQQcBA5AGAMAOAAA4AAAAAwA2AAAAAABAADkAfccRiEHjyQEeAD0AAQAAAAUAAABS
-RTogAAAAAAIBRwABAAAANgAAAGM9dXM7YT0gO3A9U2t5bW9vbiBWZW50dXJlcztsPU1BSUwtMDkw
-NjAyMDUxODU5Wi0xNjY4AAAAHgBJAAEAAAAuAAAAUmU6IFtvZV0gYml0YmFrZSB2aXJ0dWFsL2tl
-cm5lbCAtYyBtZW51Y29uZmlnAAAAQABOAABmIdH94skBHgBaAAEAAAAyAAAAb3BlbmVtYmVkZGVk
-LWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZwAAAAIBWwABAAAAgQAAAAAAAACB
-Kx+kvqMQGZ1uAN0BD1QCAAAAAG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcAU01UUABvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1i
-ZWRkZWQub3JnAAAAAAIBXAABAAAANwAAAFNNVFA6T1BFTkVNQkVEREVELURFVkVMLUJPVU5DRVNA
-TElTVFMuT1BFTkVNQkVEREVELk9SRwAAHgBdAAEAAAAKAAAAS29lbiBLb29pAAAAAgFeAAEAAABB
-AAAAAAAAAIErH6S+oxAZnW4A3QEPVAIAAAAAS29lbiBLb29pAFNNVFAAay5rb29pQHN0dWRlbnQu
-dXR3ZW50ZS5ubAAAAAACAV8AAQAAAB8AAABTTVRQOksuS09PSUBTVFVERU5ULlVUV0VOVEUuTkwA
-AB4AZgABAAAABQAAAFNNVFAAAAAAHgBnAAEAAAAyAAAAb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5j
-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
-T/t/gUEw4IES5jL/Uy9UP1VP+57mP/1PWN9Z7yM2Tx1QQSBoepBmPYIiPRB0cDovL1xEOdWRdXh6
-8EXQ51IvY+xnaeWge+AvV1KBUGRAl1xCe+AycC/7b2wiqtx3MhDUkByCZtSQe+B8QHsASFlQRVJM
-SU58SyBiL2M/ZE9lX2ZifZPYIWgBcnMc8Fxj0/H/1IDeOWk/ak9rX2xv5YAV7/cfChZ/BCpBHYBd
-r16/X8//DG8Nf3SeE24dr3ovEnR7od8dcRRvFX9/7xzUNalBBNBIT0RZd40yN3uhSChUTUwdgH2H
-oAAAAB4ANRABAAAAOwAAADxDNjI4OTY2MzA2NDRDRTQzQkY2NEIwRkYwQUMyN0YwRTAxQzZFN0Bt
-YWlsLmFkLnNreW12LmNvbT4AAB4AORABAAAAWAAAADxDNjI4OTY2MzA2NDRDRTQzQkY2NEIwRkYw
-QUMyN0YwRTA1QjREMkBtYWlsLmFkLnNreW12LmNvbT4gPGgwMWc5dCRjMmEkMUBnZXIuZ21hbmUu
-b3JnPgAeAEcQAQAAAA8AAABtZXNzYWdlL3JmYzgyMgAACwDyEAEAAAAfAPMQAQAAAGgAAABSAEUA
-JQAzAEEAIABbAG8AZQBdACAAYgBpAHQAYgBhAGsAZQAgAHYAaQByAHQAdQBhAGwA//hrAGUAcgBu
-AGUAbAAgAC0AYwAgAG0AZQBuAHUAYwBvAG4AZgBpAGcALgBFAE0ATAAAAAsA9hAAAAAAQAAHMH3H
-EYhB48kBQAAIMKjCqKJB48kBAwDeP69vAAADAPE/CQQAAB4A+D8BAAAADAAAAENodWNrIEthbWFz
-AAIB+T8BAAAAZgAAAAAAAADcp0DIwEIQGrS5CAArL+GCAQAAAAAAAAAvTz1TS1lNT09OIFZFTlRV
-UkVTL09VPUZJUlNUIEFETUlOSVNUUkFUSVZFIEdST1VQL0NOPVJFQ0lQSUVOVFMvQ049Q0tBTUFT
-AAAAHgD6PwEAAAAVAAAAU3lzdGVtIEFkbWluaXN0cmF0b3IAAAAAAgH7PwEAAAAeAAAAAAAAANyn
-QMjAQhAatLkIACsv4YIBAAAAAAAAAC4AAAADAP0/5AQAAAMAGUAAAAAAAwAaQAAAAAADAB1AAAAA
-AAMAHkAAAAAAHgAwQAEAAAAHAAAAQ0tBTUFTAAAeADFAAQAAAAcAAABDS0FNQVMAAB4AMkABAAAA
-MgAAAG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcAAAAe
-ADNAAQAAABoAAABrLmtvb2lAc3R1ZGVudC51dHdlbnRlLm5sAAAAHgA4QAEAAAAHAAAAQ0tBTUFT
-AAAeADlAAQAAAAIAAAAuAAAAAwB2QP////8LACkAAAAAAAsAIwAAAAAAAwAGEIZGfTUDAAcQHAIA
-AAMAEBAAAAAAAwAREAAAAAAeAAgQAQAAAGUAAAA6LSlCVVRUSEVSRUlTVE9PTVVDSEJMT0FUSU5B
-TkdTVFJPTUlORUVEQUxFQU5NRUFORklHSFRJTkdNQUNISU5FQ0hVQ0tGUk9NOk9QRU5FTUJFRERF
-RC1ERVZFTC1CT1VOQ0VTAAAAAAIBfwABAAAAOwAAADxDNjI4OTY2MzA2NDRDRTQzQkY2NEIwRkYw
-QUMyN0YwRTAxQzZFN0BtYWlsLmFkLnNreW12LmNvbT4AAEio
-
-------_=_NextPart_001_01C9E341.A29F3934--
