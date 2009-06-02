@@ -1,13 +1,13 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MBRbZ-0001bg-Hd
-	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 12:52:30 +0200
-Received: (qmail 8898 invoked by uid 1003); 2 Jun 2009 10:43:37 -0000
+	(envelope-from <philip@balister.org>) id 1MBRcb-0001ci-0T
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 12:53:33 +0200
+Received: (qmail 6367 invoked by uid 1003); 2 Jun 2009 10:44:40 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 2 Jun 2009 10:43:37 -0000
-Message-ID: <4A250258.1060705@balister.org>
-Date: Tue, 02 Jun 2009 06:43:36 -0400
+	by mail.geekisp.com with SMTP; 2 Jun 2009 10:44:38 -0000
+Message-ID: <4A250295.7060302@balister.org>
+Date: Tue, 02 Jun 2009 06:44:37 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
@@ -29,12 +29,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 10:52:30 -0000
-X-Groupsio-MsgNum: 10934
+X-List-Received-Date: Tue, 02 Jun 2009 10:53:35 -0000
+X-Groupsio-MsgNum: 10935
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020805050008020107040401"
+	micalg=sha1; boundary="------------ms030304030106050002090105"
 
---------------ms020805050008020107040401
+--------------ms030304030106050002090105
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -49,12 +49,12 @@ Rolf Leggewie wrote:
 > OK,, thanks.  Can the ACK be done from patchwork while I am logged in? I 
 > kind of hate to have to type all this or copy it from somewhere every time.
 
-No, this is an annoying feature. Patchwork is designed to track mailing 
-list traffic, not replace it.
+I manage the problem of acking patches I deleted by subscribing to 
+oe.dev via gmane nntp using thunderbird. Then I can ack patches from there.
 
 Philip
 
---------------ms020805050008020107040401
+--------------ms030304030106050002090105
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -106,17 +106,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYwMjEw
-NDMzNlowIwYJKoZIhvcNAQkEMRYEFLDu++RSOJuQOGQYKBxWWqcyLpFyMFIGCSqGSIb3DQEJDzFF
+NDQzN1owIwYJKoZIhvcNAQkEMRYEFBHqkofuHm495k6SClxLCJj/RdQcMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCcrC7xZ812BbFA0mwrKG7HbimfRrqelCE4/jpID37bS0lZIXUL
-9M1x23hRQvcyYNd5D9B/NEz8n2K3L26oQGle9ja6QNOKhRZV7+syERRQq6973RxFtCVcqLKtEf9x
-GHxTv6M1A7K1cr/5I5aW2M+/pFVZzgHyXf9pBOpkz1Cn3X5FFcRNuEXs0o4NPMUOOFFIcMdNcDAw
-RcA0A46UWUJigN3xd5sITkFPgEyLg+12ifp+gs6pUq1/bdihC32KAAR09dT0q8MRJTqhxQpDygPr
-/ZRvNZZskxMZ9MnFuv60Xs/BldBZOdMhB+1tQm/ZWWIZEhLN9oIrYBj6v6XEq+gYAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQApZszgCqJTaYFBowp5aYfZ4UvBg8aw2mGUQO6/XhumEql/tl+8
+6Phlu6hqil058Tn1VQGdjDrkVSmC+L3niyi5PExOoAEE+r5CC/PC7M3E1B/VXoX6Z7Yt/+ZZ6EFa
+pAfL4hgc3nrHQuK7AM+G0QhSdKv8agFo4nGsW2v3dt1LqKfB0ucUQPuSgAub6LenG221I2nCs/Kw
+vSrovbetsKT26l0OjQqkMieh9pdX3xGvJxMUcmsXUNhHLYQIlrhNmsvcU8MCDsFcJYvd29O9OW0+
+rcFA838vqpDsXf9g35+wekA44UuCmUURqxk6zZOIJ+/zLPrnsfxmgDcWIpsABRovAAAAAAAA
 
---------------ms020805050008020107040401--
+--------------ms030304030106050002090105--
