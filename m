@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MBRZT-0001YE-9J
-	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 12:50:19 +0200
-Received: (qmail 10938 invoked by uid 1003); 2 Jun 2009 10:41:27 -0000
+	(envelope-from <philip@balister.org>) id 1MBRbZ-0001bg-Hd
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 12:52:30 +0200
+Received: (qmail 8898 invoked by uid 1003); 2 Jun 2009 10:43:37 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 2 Jun 2009 10:41:26 -0000
-Message-ID: <4A2501D5.2050907@balister.org>
-Date: Tue, 02 Jun 2009 06:41:25 -0400
+	by mail.geekisp.com with SMTP; 2 Jun 2009 10:43:37 -0000
+Message-ID: <4A250258.1060705@balister.org>
+Date: Tue, 02 Jun 2009 06:43:36 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>	<h01g9t$c2a$1@ger.gmane.org>
-	<C62896630644CE43BF64B0FF0AC27F0E01C6E7@mail.ad.skymv.com>
-In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E01C6E7@mail.ad.skymv.com>
-Subject: Re: bitbake virtual/kernel -c menuconfig
+References: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>	<gvrtqn$8oh$1@ger.gmane.org>	<gvruj9$aj3$2@ger.gmane.org>	<4A2185B0.40406@balister.org>
+	<h029vb$4ej$1@ger.gmane.org>
+In-Reply-To: <h029vb$4ej$1@ger.gmane.org>
+Subject: Re: [patch] remove dirty .swp file in mini-httpd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,64 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 10:50:19 -0000
-X-Groupsio-MsgNum: 10933
+X-List-Received-Date: Tue, 02 Jun 2009 10:52:30 -0000
+X-Groupsio-MsgNum: 10934
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms090409000503090202000105"
+	micalg=sha1; boundary="------------ms020805050008020107040401"
 
---------------ms090409000503090202000105
+--------------ms020805050008020107040401
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Chuck Kamas wrote:
-> :-)
->  
-> But there is too much bloat in angstrom.  I need a lean mean fighting machine.
+Rolf Leggewie wrote:
+> Philip Balister wrote:
+>> or in other words, use the form: Acked-by: Rolf Leggewie 
+>> <some@email.address>
+>>
+>> And yes, the brackets are important. THey help patchwork pick up the 
+>> patches.
+> 
+> OK,, thanks.  Can the ACK be done from patchwork while I am logged in? I 
+> kind of hate to have to type all this or copy it from somewhere every time.
 
-Build micro-image against Angstrom.
-
-Angstrom is not bloated, only a number of images people build. And they 
-are building these images to support user requests.
+No, this is an annoying feature. Patchwork is designed to track mailing 
+list traffic, not replace it.
 
 Philip
 
->  
-> Chuck
->  
-> 
-> ________________________________
-> 
-> From: openembedded-devel-bounces@lists.openembedded.org on behalf of Koen Kooi
-> Sent: Mon 6/1/2009 2:13 PM
-> To: openembedded-devel@openembedded.org
-> Subject: Re: [oe] bitbake virtual/kernel -c menuconfig
-> 
-> 
-> 
-> On 01-06-09 22:41, Chuck Kamas wrote:
-> 
->> Also I noticed that the patch files are being applied before menuconfig
->> in Angstrom but not in minimal and micro.  How do I fix this?
-> 
-> By going back to angstrom
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
-> 
-> 
-> ------------------------------------------------------------------------
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---------------ms090409000503090202000105
+--------------ms020805050008020107040401
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -138,17 +106,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYwMjEw
-NDEyNVowIwYJKoZIhvcNAQkEMRYEFDx2iDCgXMnRCeviJMpTwN7ny21hMFIGCSqGSIb3DQEJDzFF
+NDMzNlowIwYJKoZIhvcNAQkEMRYEFLDu++RSOJuQOGQYKBxWWqcyLpFyMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQC+wrrgHfIwc9iSpj14oQ14FX3gV53SvF8Lpa6WEOhozl+MB8Qi
-pzMycvlhBwpckNMoIdNoEoSYQf+wIdiTNiE0S9xNdZ0LU9PHeMmj4HAoWVM68w10LQfrpIW3l8MO
-Q/MioJz7FKN6iuYoIm52lb2KOgtCGYO7dZm+GwqBy/0En785xp7B72riB9rPSavZeUnYYz/LeLpo
-hf23uZv3nZ+JG/8V65HM4cXG3kLFlVzpZqEQ1EGgiU4UGaLsOyPih5AMzxrHYT4PUpAwD+beZZ/p
-+Jq1G9ju5vYTW33q3FrUy0qKnztAboKN7XfCuNVmr7OWJuVuk9VkbBV6hoiQ8OLbAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCcrC7xZ812BbFA0mwrKG7HbimfRrqelCE4/jpID37bS0lZIXUL
+9M1x23hRQvcyYNd5D9B/NEz8n2K3L26oQGle9ja6QNOKhRZV7+syERRQq6973RxFtCVcqLKtEf9x
+GHxTv6M1A7K1cr/5I5aW2M+/pFVZzgHyXf9pBOpkz1Cn3X5FFcRNuEXs0o4NPMUOOFFIcMdNcDAw
+RcA0A46UWUJigN3xd5sITkFPgEyLg+12ifp+gs6pUq1/bdihC32KAAR09dT0q8MRJTqhxQpDygPr
+/ZRvNZZskxMZ9MnFuv60Xs/BldBZOdMhB+1tQm/ZWWIZEhLN9oIrYBj6v6XEq+gYAAAAAAAA
 
---------------ms090409000503090202000105--
+--------------ms020805050008020107040401--
