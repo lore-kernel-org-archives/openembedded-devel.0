@@ -1,33 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MBUVz-00061e-JI
-	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 15:58:57 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MBUNR-00051O-5j
-	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 13:50:05 +0000
+	id 1MBUan-0006FP-3w
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 16:03:53 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MBUSE-0005E7-NK
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 13:55:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 02 Jun 2009 13:50:05 +0000
+	Tue, 02 Jun 2009 13:55:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 02 Jun 2009 13:50:05 +0000
+	Tue, 02 Jun 2009 13:55:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 02 Jun 2009 15:49:51 +0200
-Message-ID: <h03alv$1cg$1@ger.gmane.org>
-References: <1243950214-11794-1-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Tue, 02 Jun 2009 15:50:11 +0200
+Message-ID: <h03amj$1cg$2@ger.gmane.org>
+References: <1243950268-13201-1-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
-In-Reply-To: <1243950214-11794-1-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1243950268-13201-1-git-send-email-marcin@juszkiewicz.com.pl>
 Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 1/1] fbprogress: BUG only tool to show boot progress on built-in monochrome LCD
+Subject: Re: [STABLE][PATCH 1/1] fbprogress: BUG only tool to show boot progress on built-in monochrome LCD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,17 +41,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 13:59:01 -0000
+X-List-Received-Date: Tue, 02 Jun 2009 14:03:53 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02-06-09 15:43, Marcin Juszkiewicz wrote:
+On 02-06-09 15:44, Marcin Juszkiewicz wrote:
 > From: Marcin Juszkiewicz<marcin@buglabs.net>
+
+Provided you apply it to .dev first:
 
 Acked-by: Koen Kooi <koen@openembedded.org>
 
 
->
 >
 > Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
 > ---
