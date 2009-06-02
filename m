@@ -1,27 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MBYCo-0002Fp-8A
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jun 2009 19:55:22 +0200
-Received: from 88-109-34-80.dynamic.dsl.as9105.com ([88.109.34.80]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MBY4D-0008QG-59
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Jun 2009 18:46:29 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <C62896630644CE43BF64B0FF0AC27F0E05B52C@mail.ad.skymv.com>
-References: <C62896630644CE43BF64B0FF0AC27F0E05B4D2@mail.ad.skymv.com>
-	<1243929198.5049.45.camel@lenovo.internal.reciva.com>
-	<C62896630644CE43BF64B0FF0AC27F0E05B514@mail.ad.skymv.com>
-	<1243956322.2611.11.camel@mill.internal.reciva.com>
-	<C62896630644CE43BF64B0FF0AC27F0E05B52C@mail.ad.skymv.com>
-Date: Tue, 02 Jun 2009 18:46:27 +0100
-Message-Id: <1243964788.5049.48.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MBZ3s-0000db-Pb
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 20:50:12 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MBYvG-0001Qv-0b
+	for openembedded-devel@openembedded.org; Tue, 02 Jun 2009 18:41:18 +0000
+Received: from p3077-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.118.77])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jun 2009 18:41:18 +0000
+Received: from no2spam by p3077-ipngn201marunouchi.tokyo.ocn.ne.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 02 Jun 2009 18:41:18 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 03 Jun 2009 03:41:03 +0900
+Message-ID: <h03ro1$thh$1@ger.gmane.org>
+References: <065E68EB87448440A3E75B4DBB5E871C45A407@CORPUSMX100C.corp.emc.com>	<gvrtqn$8oh$1@ger.gmane.org>	<gvruj9$aj3$2@ger.gmane.org>	<4A2185B0.40406@balister.org>	<h029vb$4ej$1@ger.gmane.org>
+	<4A250258.1060705@balister.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: bitbake virtual/kernel -c menuconfig
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+In-Reply-To: <4A250258.1060705@balister.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [patch] remove dirty .swp file in mini-httpd recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,31 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Jun 2009 17:55:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 02 Jun 2009 18:50:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-06-02 at 10:05 -0700, Chuck Kamas wrote:
-> > I just did "bitbake -c menuconfig
-> > -b ../org.openembedded.dev/recipes/linux/linux_2.6.28.bb" 
-> > using DISTRO=minimal, MACHINE=at91sam9263ek and it seemed to 
-> > apply the patches
-> > correctly:
-> > 
+Philip Balister wrote:
+>> OK,, thanks.  Can the ACK be done from patchwork while I am logged in? I 
+>> kind of hate to have to type all this or copy it from somewhere every time.
 > 
-> Interesting.  I must have something configured incorrectly (no
-> kidding!).  
-> Are you working on the STABLE/2009 branch? 
-> Did you remove the tmp directory between builds?
+> No, this is an annoying feature. 
 
-Ah, no, I'm on the org.openembedded.dev branch.  That might be the
-difference.
+:-/
 
-I didn't remove the whole of tmp/ between builds but I did clean the
-linux-2.6.28 package.
+I'm starting to miss the old and simple days of "+1"  I don't think I'm 
+capable of more than that ;-)
 
-p.
+> Patchwork is designed to track mailing list traffic, not replace it.
 
+valid point, but then again patchwork could be made to send the mail on 
+my behalf.
 
 
 
