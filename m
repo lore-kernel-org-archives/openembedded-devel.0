@@ -1,36 +1,28 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sakoman@gmail.com>) id 1MBhZu-0003yD-Pt
+	(envelope-from <pb@reciva.com>) id 1MBnEm-00005F-Vx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Jun 2009 05:55:50 +0200
-Received: by qw-out-1920.google.com with SMTP id 14so3479959qwa.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jun 2009 20:46:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ilQB/vsubAsgPdxOLDOa1ETV74zhTPL/WsGKcigXaPQ=;
-	b=Rda7ZMfVcvaKpQguwWyfghdZaeWg1sAr0XEuqRGnz3ji9hBdyViP6wBv27h9n5n0/Z
-	7HjmOK2sqpieyyBbGygPeFQQVb6OVhGnpGa+UTr8pQpTdmI0VNTyTotIQHnF/klfoLQw
-	+apxaPHwAw6/A/6enWsZbOFoia+iDHj2K/rPY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=LdLAN/VNfzOBwtSAO6rIkfwqg6uraps9wA4EabaLOnYJffPs2+V7MR1zOxklvWzVxP
-	detmQJUR9f+HYHKDvgSilic9+lK8sL5v9e/dK1OWkEInwZcJ812vEMl9M0FF1FfepiLr
-	o0PvkYagEzBvM27ezx8CXV4PpGm58kF24LRyY=
-MIME-Version: 1.0
-Received: by 10.229.97.80 with SMTP id k16mr256016qcn.17.1244000815943; Tue, 
-	02 Jun 2009 20:46:55 -0700 (PDT)
-In-Reply-To: <h03dh4$c4q$1@ger.gmane.org>
-References: <5e088bd90906020626m6f180330w61f7ab77391737da@mail.gmail.com>
-	<h03dh4$c4q$1@ger.gmane.org>
-Date: Tue, 2 Jun 2009 20:46:55 -0700
-Message-ID: <5e088bd90906022046x36787d6dq1144528c968d9719@mail.gmail.com>
-From: Steve Sakoman <sakoman@gmail.com>
+	Wed, 03 Jun 2009 11:58:25 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MBn60-0007GK-80
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Jun 2009 10:49:20 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MBn5y-0002va-6j
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Jun 2009 10:49:18 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: guile-native (as well as a few others) failing after pull last night
+In-Reply-To: <Pine.LNX.4.64.0906022113520.27204@juice.ott.cti.com>
+References: <Pine.LNX.4.64.0906022113520.27204@juice.ott.cti.com>
+Date: Wed, 03 Jun 2009 10:49:17 +0100
+Message-Id: <1244022557.2611.14.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: Re: busybox & syslog init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,30 +36,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jun 2009 03:55:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Jun 2009 09:58:25 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jun 2, 2009 at 7:38 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote=
-:
-> On 02-06-09 15:26, Steve Sakoman wrote:
->>
->> The failures are all in do_configure and seem quite similar (see log
->> below).
->>
->> I tried wiping tmp, same failure.
->>
->> I'm an autotools idiot :-( =A0Any suggestions?
->
->> | configure.in:795: error: possibly undefined macro: AM_GNU_GETTEXT
->
-> That implies that gettext-native hasn't been staged yet.
+On Tue, 2009-06-02 at 21:27 -0400, Michael Smith wrote:
+> 1) split the syslog initscript into busybox-syslog, as is already done for 
+> busybox-httpd and busybox-udhcpd;
+> 2) or, manually handle the stuff the update-rc.d class would normally take 
+> care of for busybox, so the syslog initscript stays in the busybox 
+> package.
+> 
+> I'd prefer #1, but I don't think I could ever track down all the in-tree 
+> and out-of-tree images that depend on busybox, and add "busybox-syslog" to 
+> all of them. I guess I'll try #2. Just checking if someone has a better 
+> idea.
 
-Thanks Koen.
+The only practical way to do #1 is to make busybox Depend: on the
+newly-created busybox-syslog package.  Otherwise, folks who do "ipkg
+install busybox" in the expectation of getting the syslog bits will be
+disappointed.  This means that there's no need to root out all the
+images and add busybox-syslog explicitly; it'll be pulled in
+automatically when the images are created.
 
-I added gettext-native to the DEPENDS list in the guile-native recipe
-and the build continued successfully from that point.
+If that works for you then I think you might as well go ahead and do #1.
+Otherwise, yes, I agree that #2 sounds like the only other viable
+option.
 
-Steve
+p.
+
+
 
 
