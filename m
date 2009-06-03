@@ -1,35 +1,36 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1MBxFo-0000Jj-81
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Jun 2009 22:40:08 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 5D2E54A7EC4;
-	Wed,  3 Jun 2009 16:31:09 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 14635-03; Wed,  3 Jun 2009 16:31:09 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 207DF493D8D; Wed,  3 Jun 2009 16:31:08 -0400 (EDT)
-X-Spam-Score: 
-X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id C139D4C81D4;
-	Wed,  3 Jun 2009 16:31:05 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id B96301B48A0; Wed,  3 Jun 2009 16:31:05 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MBxSA-0000nW-5U
+	for openembedded-devel@openembedded.org; Wed, 03 Jun 2009 22:52:54 +0200
+Received: by wa-out-1112.google.com with SMTP id j4so58118wah.12
+	for <openembedded-devel@openembedded.org>;
+	Wed, 03 Jun 2009 13:43:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=E82GocotYoU5c1kiClgqwCITtFOLV8Sh9iE4JZQvcYw=;
+	b=PTmuATnIuaLHJ+XSXBJ+pssHZE4VVnl72gCJ7/pRHlU201HzgDAgEDypsvaeUl14aE
+	V24D8RH4Jbi6CJK5bfuLJWSn8h2nNgpO2xieZqIs0eQ7ot8m//Hg7PZ6iowwBTDcUZpt
+	M5CX43e1yY6vj70MiuDhVmgtWZ+zwASJgnvGg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=slXpIusqSnFWJrnwfDd5PLX+7uigwtkGGOMR35pws/7g5RnhP4oEZ4yuarmDNSR7aM
+	oZCgytOpAJzQJ85841ZfcmiVAZsM+x3l6Otr0X4wq/dJd0g51wdyDOvz4Q8mcDK1DMSX
+	TCyAU3ZVCmcKPAjeEyoNKBxO2t8UgnMRu32yA=
+MIME-Version: 1.0
+Received: by 10.231.36.198 with SMTP id u6mr355780ibd.29.1244061834466; Wed, 
+	03 Jun 2009 13:43:54 -0700 (PDT)
+In-Reply-To: <1244060602.5049.64.camel@lenovo.internal.reciva.com>
+References: <4A26ACDA.2060806@kernelconcepts.de>
+	<1244060602.5049.64.camel@lenovo.internal.reciva.com>
+Date: Wed, 3 Jun 2009 22:43:54 +0200
+Message-ID: <c384c5ea0906031343y49bf2bf7jef61480de3860471@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Jun 2009 16:31:03 -0400
-Message-Id: <1244061064-25155-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-In-Reply-To: <1244060096.5049.60.camel@lenovo.internal.reciva.com>
-References: <1244060096.5049.60.camel@lenovo.internal.reciva.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH 1/2] busybox: let update-alternatives create all symlinks, and use INC_PR
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Re: [RFC] gtk+ and gdk-pixbuf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,202 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jun 2009 20:40:08 -0000
+X-List-Received-Date: Wed, 03 Jun 2009 20:52:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Back in 2005, commit 5e01906b set this up; in f7f1ac27 the recipe
-was changed to keep all the links in the package.
+Hello,
 
-This changes it back, and also removes special treatment of the
-links for crond, httpd, udhcpd, hwclock, and udhcpc.
+On Wed, Jun 3, 2009 at 10:23 PM, Phil Blundell <pb@reciva.com> wrote:
+> On Wed, 2009-06-03 at 19:03 +0200, Florian Boor wrote:
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/busybox/busybox-static_1.11.3.bb |    2 +-
- recipes/busybox/busybox.inc              |   46 ++++-------------------------
- recipes/busybox/busybox_1.11.3.bb        |    2 +-
- recipes/busybox/busybox_1.13.2.bb        |    2 +-
- recipes/busybox/busybox_1.2.1.bb         |    2 +-
- recipes/busybox/busybox_1.2.2.bb         |    2 +-
- recipes/busybox/busybox_1.3.1.bb         |    2 +-
- recipes/busybox/busybox_1.7.2.bb         |    2 +-
- recipes/busybox/busybox_1.9.2.bb         |    2 +-
- 9 files changed, 15 insertions(+), 47 deletions(-)
+> bundled with GTK+. =A0I guess the standalone gdk-pixbuf recipe was added
+> to eliminate the requirement for building X and the whole other
+> dependency stack that GTK requires if you just want the pixbuf
+> functions.
+>
+Exactly.
 
-diff --git a/recipes/busybox/busybox-static_1.11.3.bb b/recipes/busybox/busybox-static_1.11.3.bb
-index 9529ab7..6523fa9 100644
---- a/recipes/busybox/busybox-static_1.11.3.bb
-+++ b/recipes/busybox/busybox-static_1.11.3.bb
-@@ -1,5 +1,5 @@
- require busybox_${PV}.bb
--PR = "r4"
-+PR = "${INC_PR}.1"
- 
- FILESPATH = "${FILE_DIRNAME}/busybox-${PV}:${FILE_DIRNAME}/files:${FILE_DIRNAME}"
- S = "${WORKDIR}/busybox-${PV}"
-diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-index 04f2cf4..e312147 100644
---- a/recipes/busybox/busybox.inc
-+++ b/recipes/busybox/busybox.inc
-@@ -11,6 +11,8 @@ LICENSE = "GPL"
- SECTION = "base"
- PRIORITY = "required"
- 
-+INC_PR = "r20"
-+
- SRC_URI = "\
-   http://www.busybox.net/downloads/busybox-${PV}.tar.gz \
-   file://busybox-cron \
-@@ -71,64 +73,30 @@ do_install () {
- 		mv busybox.links.new busybox.links
- 	fi
- 
--	unset CFLAGS CPPFLAGS CXXFLAGS
- 	install -d ${D}${sysconfdir}/init.d
--	oe_runmake "PREFIX=${D}" install
--	cp -pPR ${S}/_install/* ${D}/
--
--	# Move everything to /busybox (not supposed to end up in any package)
--	install -d ${D}/busybox
--	ls ${D} -R
- 
--	# Copy /bin and /sbin -- and /usr, if prefix is not "".
--	for i in ${D}${base_bindir} ${D}${base_sbindir} ${prefix:+${D}${prefix}}
--	do
--		if [ -d $i ]; then
--			cp -pPR $i ${D}/busybox/
--		fi
--	done
--	# Move the busybox binary back to /bin
-+	# Install /bin/busybox, and the /bin/sh link so the postinst script
-+	# can run. Let update-alternatives handle the rest.
- 	install -d ${D}${base_bindir}
--	mv ${D}/busybox${base_bindir}/busybox ${D}${base_bindir}/
--	# Move back the sh symlink
--	test -h ${D}/busybox${base_bindir}/sh && mv ${D}/busybox${base_bindir}/sh ${D}${base_bindir}/
-+	install -m 0755 ${S}/busybox ${D}${base_bindir}
-+	ln -sf busybox ${D}${base_bindir}/sh
- 
- 	install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/
- 	install -m 644 ${WORKDIR}/syslog.conf ${D}${sysconfdir}/
- 	if grep "CONFIG_CROND=y" ${WORKDIR}/defconfig; then
--		# Move crond back to /usr/sbin/crond
--		install -d ${D}${sbindir}
--		mv ${D}/busybox${sbindir}/crond ${D}${sbindir}/
--
- 		install -m 0755 ${WORKDIR}/busybox-cron ${D}${sysconfdir}/init.d/
- 	fi
- 	if grep "CONFIG_HTTPD=y" ${WORKDIR}/defconfig; then
--		# Move httpd back to /usr/sbin/httpd
--		install -d ${D}${sbindir}
--		mv ${D}/busybox${sbindir}/httpd ${D}${sbindir}/
--
- 		install -m 0755 ${WORKDIR}/busybox-httpd ${D}${sysconfdir}/init.d/
- 		install -d ${D}/srv/www
- 	fi
- 	if grep "CONFIG_APP_UDHCPD=y" ${WORKDIR}/defconfig; then
--		# Move udhcpd back to /usr/sbin/udhcpd
--		install -d ${D}${sbindir}
--		mv ${D}/busybox${sbindir}/udhcpd ${D}${sbindir}/
--
- 		install -m 0755 ${WORKDIR}/busybox-udhcpd ${D}${sysconfdir}/init.d/
- 	fi
- 	if grep "CONFIG_HWCLOCK=y" ${WORKDIR}/defconfig; then
--		# Move hwclock back to /sbin/hwclock
--		install -d ${D}${base_sbindir}
--		mv ${D}/busybox${base_sbindir}/hwclock ${D}${base_sbindir}/
--
- 		install -m 0755 ${WORKDIR}/hwclock.sh ${D}${sysconfdir}/init.d/
- 	fi
- 	if grep "CONFIG_APP_UDHCPC=y" ${WORKDIR}/defconfig; then
--		# Move dhcpc back to /usr/sbin/udhcpc
--		install -d ${D}${base_sbindir}
--		mv ${D}/busybox${base_sbindir}/udhcpc ${D}${base_sbindir}/
--
- 		install -d ${D}${sysconfdir}/udhcpc.d
- 		install -d ${D}${datadir}/udhcpc
- 		install -m 0755 ${S}/examples/udhcp/simple.script ${D}${sysconfdir}/udhcpc.d/50default
-diff --git a/recipes/busybox/busybox_1.11.3.bb b/recipes/busybox/busybox_1.11.3.bb
-index bd03aa8..673fe15 100644
---- a/recipes/busybox/busybox_1.11.3.bb
-+++ b/recipes/busybox/busybox_1.11.3.bb
-@@ -1,5 +1,5 @@
- require busybox.inc
--PR = "r15"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "\
-   http://www.busybox.net/downloads/busybox-${PV}.tar.gz \
-diff --git a/recipes/busybox/busybox_1.13.2.bb b/recipes/busybox/busybox_1.13.2.bb
-index 96d0f0b..c1cc51b 100644
---- a/recipes/busybox/busybox_1.13.2.bb
-+++ b/recipes/busybox/busybox_1.13.2.bb
-@@ -1,5 +1,5 @@
- require busybox.inc
--PR = "r19"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "\
-   http://www.busybox.net/downloads/busybox-${PV}.tar.gz \
-diff --git a/recipes/busybox/busybox_1.2.1.bb b/recipes/busybox/busybox_1.2.1.bb
-index 63a93df..3630a46 100644
---- a/recipes/busybox/busybox_1.2.1.bb
-+++ b/recipes/busybox/busybox_1.2.1.bb
-@@ -1,6 +1,6 @@
- require busybox.inc
- 
--PR = "r19"
-+PR = "${INC_PR}.1"
- 
- SRC_URI += "file://wget-long-options.patch;patch=1 \
- 	   file://df_rootfs.patch;patch=1 \
-diff --git a/recipes/busybox/busybox_1.2.2.bb b/recipes/busybox/busybox_1.2.2.bb
-index fe9d07e..43a15d0 100644
---- a/recipes/busybox/busybox_1.2.2.bb
-+++ b/recipes/busybox/busybox_1.2.2.bb
-@@ -1,6 +1,6 @@
- require busybox.inc
- 
--PR = "r5"
-+PR = "${INC_PR}.1"
- 
- DEFAULT_PREFERENCE = "-1"
- 
-diff --git a/recipes/busybox/busybox_1.3.1.bb b/recipes/busybox/busybox_1.3.1.bb
-index 2cdb81b..e0fd63b 100644
---- a/recipes/busybox/busybox_1.3.1.bb
-+++ b/recipes/busybox/busybox_1.3.1.bb
-@@ -1,6 +1,6 @@
- require busybox.inc
- 
--PR = "r5"
-+PR = "${INC_PR}.1"
- 
- DEFAULT_PREFERENCE = "-1"
- 
-diff --git a/recipes/busybox/busybox_1.7.2.bb b/recipes/busybox/busybox_1.7.2.bb
-index 87d336b..6af073f 100644
---- a/recipes/busybox/busybox_1.7.2.bb
-+++ b/recipes/busybox/busybox_1.7.2.bb
-@@ -1,5 +1,5 @@
- require busybox.inc
--PR = "r13"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "http://www.busybox.net/downloads/busybox-${PV}.tar.gz \
-            file://busybox-cron \
-diff --git a/recipes/busybox/busybox_1.9.2.bb b/recipes/busybox/busybox_1.9.2.bb
-index e9aa820..64f9c62 100644
---- a/recipes/busybox/busybox_1.9.2.bb
-+++ b/recipes/busybox/busybox_1.9.2.bb
-@@ -1,5 +1,5 @@
- require busybox.inc
--PR = "r6"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = "http://www.busybox.net/downloads/busybox-${PV}.tar.gz \
-            file://udhcpscript.patch;patch=1 \
--- 
-1.6.3
+The pixbuf stuff is still handy for framebuffer devices, but the
+gdk-pixbuf recipe should not DEPEND on the complete X11 stuff.
 
+Regards,
+--=20
+Leon
 
 
