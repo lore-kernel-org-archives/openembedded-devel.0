@@ -1,21 +1,34 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MBtBe-0002hC-5i
-	for openembedded-devel@openembedded.org; Wed, 03 Jun 2009 18:19:34 +0200
-Received: (qmail 30746 invoked from network); 3 Jun 2009 16:10:35 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 3 Jun 2009 09:10:35 -0700
-Date: Wed, 3 Jun 2009 09:10:35 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090603161035.GL26065@smtp.west.cox.net>
-References: <20090603151754.GI26065@smtp.west.cox.net>
-	<1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH 00/12] different qt4 related patches
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MBtqw-0004md-Cv
+	for openembedded-devel@openembedded.org; Wed, 03 Jun 2009 19:02:14 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MBtiG-0006vY-Q1
+	for openembedded-devel@openembedded.org; Wed, 03 Jun 2009 16:53:17 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 03 Jun 2009 16:53:16 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 03 Jun 2009 16:53:16 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 03 Jun 2009 18:53:01 +0200
+Message-ID: <h069pd$tf0$1@ger.gmane.org>
+References: <20090603151754.GI26065@smtp.west.cox.net>	<1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>	<1244043442-3868-2-git-send-email-ihar.hrachyshka@gmail.com>	<1244043442-3868-3-git-send-email-ihar.hrachyshka@gmail.com>
+	<20090603160007.GJ26065@smtp.west.cox.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090526 Shredder/3.0b3pre
+In-Reply-To: <20090603160007.GJ26065@smtp.west.cox.net>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 02/12] qt4-embedded: added directfb plugin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,26 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jun 2009 16:19:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Jun 2009 17:02:14 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 03, 2009 at 06:37:10PM +0300, Ihar Hrachyshka wrote:
+On 03-06-09 18:00, Tom Rini wrote:
+> On Wed, Jun 03, 2009 at 06:37:12PM +0300, Ihar Hrachyshka wrote:
+>> Signed-off-by: Ihar Hrachyshka<ihar.hrachyshka@gmail.com>
+>> ---
+>>   recipes/qt4/qt4-embedded.inc |    4 ++--
+>>   1 files changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
+>> index bae52ab..3d986b2 100644
+>> --- a/recipes/qt4/qt4-embedded.inc
+>> +++ b/recipes/qt4/qt4-embedded.inc
+>> @@ -3,7 +3,7 @@ SECTION = "libs"
+>>   LICENSE = "GPL QPL"
+>>   PRIORITY = "optional"
+>>   HOMEPAGE = "http://www.trolltech.com"
+>> -DEPENDS += "tslib"
+>> +DEPENDS += "directfb tslib"
+>>   INC_PR = "r11"
+>
+> So, here's a problem.  We both don't allow use flags and we force
+> directfb stuff to be done in foo-directfb (libxine / synaesthesia seems
+> to be the exception to this rule) rather than the main foo package.
 
-> This patchset:
-> - adds meta-toolchain-qte.bb to install toolchain with Qt/Embedded and
->   all the needed tools ready to use for qt4-embedded development;
-> - adds directfb support for qt4-embedded;
-> - includes missing files to qt4 packages;
-> - fixes code style, generalize qt4 recipes and classes, reworked directory
->   layout;
-> - occasionally ports pkg-config to INC_PR.
+Isn't this just creating a qt-gfxdriver-directfb.so and not impose 
+runtime deps on directfb in ${PN}?
 
-What machine / distro combinations have you tested all of this with, and
-what recipes (other than meta-toolchain-qte) have you explicitly built
-after?  ie have you built / run some QtE images or similar too?  Thanks.
+regards,
 
--- 
-Tom Rini
+Koen
+
+
 
 
