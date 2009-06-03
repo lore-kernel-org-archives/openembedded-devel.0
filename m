@@ -1,24 +1,36 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [209.85.219.228] (helo=mail-ew0-f228.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MBzF3-0007ay-U5
+	(envelope-from <andrea.adami@gmail.com>) id 1MBzXW-0000eo-Je
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 00:47:30 +0200
-Received: from [78.49.77.53] (helo=[192.168.1.6])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MBzBr-0001zK-BU
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 00:44:11 +0200
-Message-ID: <4A26FB66.8020203@kernelconcepts.de>
-Date: Thu, 04 Jun 2009 00:38:30 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+	Thu, 04 Jun 2009 01:06:34 +0200
+Received: by ewy28 with SMTP id 28so556424ewy.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Jun 2009 15:57:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Yn4LnOVAhkOfrFSDt4m/i3jMwWCJaSRSTa8W5/BpF0c=;
+	b=uTAQFGwYdebW6eDDRjy38w9XfJqkU/QiHaa1X1EzA81130dUlabUA8mZrKK3In6NOL
+	JZNrQpegAyEaXIU06lGBX5AFzNCezJYCfNSqvimcOCMJsAY3/fkSiC8DRFpGhfmn2KIL
+	+13cZhJ7SS9YzGNjqqBIxOa6BQyXpXzht6uqw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=m0ZCKy14kJraS5Hp0KUXNGtyvSS93NV06VOPpALMYh4pkswkUh0Ue1ERTVtgUAEQOq
+	UnSwn9kgngqiM9kpBDxDzQoo1fNN4JiryNWxzzMydRdO/jiU1lTI+aaYwfXVtJsUyYIU
+	AHhJlDPw12uHvGElVs5CgDSJgENGwXJjtQ9qs=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.216.46.79 with SMTP id q57mr513984web.212.1244069853067; Wed, 
+	03 Jun 2009 15:57:33 -0700 (PDT)
+In-Reply-To: <4A26FB66.8020203@kernelconcepts.de>
 References: <4A26ACDA.2060806@kernelconcepts.de>
 	<1244060602.5049.64.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1244060602.5049.64.camel@lenovo.internal.reciva.com>
-X-Enigmail-Version: 0.95.7
+	<4A26FB66.8020203@kernelconcepts.de>
+Date: Thu, 4 Jun 2009 00:57:33 +0200
+Message-ID: <d1b08f940906031557m1f6e803ax364b91fd56850f82@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [RFC] gtk+ and gdk-pixbuf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,30 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jun 2009 22:47:33 -0000
+X-List-Received-Date: Wed, 03 Jun 2009 23:06:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Please elaborate how to handle such cases (hildon-thumbnail):
 
-Phil Blundell schrieb:
-> Adding PROVIDES = "gdk-pixbuf" to gtk would probably clear it up.  I
-> don't think bitbake really understands conflicts so that's probably as
-> good as it gets.
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=6e13bf0bd8e0c147aabe7324df3a29ee338e2056
 
-yes indeed, that's a good idea. I'll do it in this way.
+Patch to be reverted ?
 
-Greetings
+Thanks in advance
 
-Florian
-
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+Andrea
 
 
