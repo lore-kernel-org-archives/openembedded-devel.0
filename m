@@ -1,31 +1,35 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MCGct-00079P-IX
+	(envelope-from <michael@sles10-64.ott.cti.com>) id 1MCGnj-00037t-C3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 19:21:15 +0200
+	Thu, 04 Jun 2009 19:32:27 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 1C615310886
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2009 13:12:11 -0400 (EDT)
+	by smtp.cbnco.com (Postfix) with ESMTP id E2E944075B4;
+	Thu,  4 Jun 2009 13:23:22 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 00488-10 for <openembedded-devel@lists.openembedded.org>; 
-	Thu,  4 Jun 2009 13:12:11 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id F27EC308226
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2009 13:12:10 -0400 (EDT)
-Message-ID: <4A28006A.3090003@cbnco.com>
-Date: Thu, 04 Jun 2009 13:12:10 -0400
+	with ESMTP id 02228-08; Thu,  4 Jun 2009 13:23:22 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id C4F84407B11; Thu,  4 Jun 2009 13:23:22 -0400 (EDT)
+X-Spam-Score: 
+X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.1.8
+Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 5167F4057D5;
+	Thu,  4 Jun 2009 13:23:21 -0400 (EDT)
+Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
+	id 44FEA1B471D; Thu,  4 Jun 2009 13:23:21 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<h08u4t$oui$1@ger.gmane.org>
+Date: Thu,  4 Jun 2009 13:23:19 -0400
+Message-Id: <1244136199-20093-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.6.3
 In-Reply-To: <h08u4t$oui$1@ger.gmane.org>
+References: <h08u4t$oui$1@ger.gmane.org>
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: Set of patches for stable/2009
+Subject: [PATCH] vim: fix alternative when prefix is /usr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 17:21:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Jun 2009 17:32:27 -0000
 
-Koen Kooi wrote:
-> On 04-06-09 18:38, Marcin Juszkiewicz wrote:
+Fix 2d3750e3dae84c89c9c749f95cf6b3b6cca3e8ce.
 
-> patch 98 is broken 'vim' doesn't exist, '/usr/bin/vim' does.
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/vim/vim.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Hey yeah. I screwed that up; my prefix is "" not "/usr" so it worked for 
-me anyway. I'll fix that for dev. (patch # is actually 86 in Marcin's list)
+diff --git a/recipes/vim/vim.inc b/recipes/vim/vim.inc
+index a766acc..c160448 100644
+--- a/recipes/vim/vim.inc
++++ b/recipes/vim/vim.inc
+@@ -3,7 +3,7 @@ SECTION = "console/utils"
+ DEPENDS = "ncurses"
+ LICENSE = "vim"
+ 
+-INC_PR = "r2"
++INC_PR = "r3"
+ 
+ SRC_URI = "ftp://ftp.vim.org/pub/vim/unix/vim-${PV}.tar.bz2 \
+ 	   file://configure.patch;patch=1"
+@@ -32,6 +32,6 @@ FILES_vim-tutor = "${datadir}/vim/vim${VIMVER}/tutor ${bindir}/vimtutor"
+ #	       /bin /sbin /lib/*/ /lib/*.so* ${datadir}/vim"
+ 
+ ALTERNATIVE_NAME = "vi"
+-ALTERNATIVE_PATH = "vim"
++ALTERNATIVE_PATH = "${bindir}/vim"
+ ALTERNATIVE_LINK = "${base_bindir}/vi"
+ ALTERNATIVE_PRIORITY = "100"
+-- 
+1.6.3
 
-Mike
 
 
