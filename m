@@ -1,22 +1,35 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.220.220] (helo=mail-fx0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MCBBC-0007u3-Eh
-	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 13:32:18 +0200
-Received: (qmail 6154 invoked by uid 813007); 4 Jun 2009 11:23:16 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 4 Jun 2009 11:23:16 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MCDqD-0006IR-I2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jun 2009 16:22:49 +0200
+Received: by fxm20 with SMTP id 20so787461fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Jun 2009 07:13:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=/VylBeYdC9usHEn1tvqGEjufJjwjeJwvIbDCrilmrcw=;
+	b=gpLVGBroNMc/HcfkF+jsmN0Vue2uykQ3/ai9Es7Om6ekp9QAn7Tv5ffqMEjPwAXcuO
+	lcYUHJvmj9pdyBtGLDAlOO85bH2jsKntKpyQPZZKvOCekmxkyjIJHn/Y3F1sM9FvuVO7
+	sMBDojL6xa2NJDalLrppVPqURdwFTG9hnDOFA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=niQXTMaraqGNuiIfsMN681tKtW/Uo8ZeA8gCo+ay9TsZq5NRz0rVtxp/j+rkJVccs2
+	ZJD/ScAMfr9cpYZX3KA2C5yHUSCFynodJSwBhAwB+O+nY4pVjzbFWgu40mQyxmoud62l
+	m6Gq090BPIx0Zk2mu/gGOLIwsZ2STGPd3TLTQ=
+Received: by 10.103.8.17 with SMTP id l17mr1402993mui.125.1244124823962;
+	Thu, 04 Jun 2009 07:13:43 -0700 (PDT)
+Received: from localhost (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id j9sm4473841mue.21.2009.06.04.07.13.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 04 Jun 2009 07:13:43 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 4 Jun 2009 13:24:00 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.2;
-	x86_64; ; )
-References: <20090525123605.GA26583@misibook.miska.isageek.net>
-In-Reply-To: <20090525123605.GA26583@misibook.miska.isageek.net>
-MIME-Version: 1.0
-Message-Id: <200906041324.00963.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH] linux-hackndev: fixed SRC_URI
+Date: Thu,  4 Jun 2009 17:13:40 +0300
+Message-Id: <1244124820-13930-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.3.1
+Subject: [PATCH] guile-native: added missing gettext-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,24 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 11:32:18 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 04 Jun 2009 14:22:49 -0000
 
-Dnia poniedzia=C5=82ek, 25 maja 2009 o 14:36:05 Michal Hrusecky napisa=C5=
-=82(a):
-> structure on our server was changed, sou we've got different URI now.
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ recipes/guile/guile-native_1.8.5.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-pushed
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+diff --git a/recipes/guile/guile-native_1.8.5.bb b/recipes/guile/guile-native_1.8.5.bb
+index e73616e..bf21c6a 100644
+--- a/recipes/guile/guile-native_1.8.5.bb
++++ b/recipes/guile/guile-native_1.8.5.bb
+@@ -1,6 +1,6 @@
+ SECTION = "unknown"
+ LICENSE = "GPL"
+-DEPENDS = "gmp-native"
++DEPENDS = "gmp-native gettext-native"
+ SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \
+            file://configure-fix.patch;patch=1 \
+ "
+-- 
+1.6.3.1
 
 
 
