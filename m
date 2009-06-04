@@ -1,37 +1,20 @@
-Received: from [209.85.219.228] (helo=mail-ew0-f228.google.com)
+Received: from [17.148.16.97] (helo=asmtpout022.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1MBzXW-0000eo-Je
+	(envelope-from <elvis.dowson@mac.com>) id 1MC4pj-0005rH-9H
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 01:06:34 +0200
-Received: by ewy28 with SMTP id 28so556424ewy.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Jun 2009 15:57:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Yn4LnOVAhkOfrFSDt4m/i3jMwWCJaSRSTa8W5/BpF0c=;
-	b=uTAQFGwYdebW6eDDRjy38w9XfJqkU/QiHaa1X1EzA81130dUlabUA8mZrKK3In6NOL
-	JZNrQpegAyEaXIU06lGBX5AFzNCezJYCfNSqvimcOCMJsAY3/fkSiC8DRFpGhfmn2KIL
-	+13cZhJ7SS9YzGNjqqBIxOa6BQyXpXzht6uqw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=m0ZCKy14kJraS5Hp0KUXNGtyvSS93NV06VOPpALMYh4pkswkUh0Ue1ERTVtgUAEQOq
-	UnSwn9kgngqiM9kpBDxDzQoo1fNN4JiryNWxzzMydRdO/jiU1lTI+aaYwfXVtJsUyYIU
-	AHhJlDPw12uHvGElVs5CgDSJgENGwXJjtQ9qs=
-MIME-Version: 1.0
-Received: by 10.216.46.79 with SMTP id q57mr513984web.212.1244069853067; Wed, 
-	03 Jun 2009 15:57:33 -0700 (PDT)
-In-Reply-To: <4A26FB66.8020203@kernelconcepts.de>
-References: <4A26ACDA.2060806@kernelconcepts.de>
-	<1244060602.5049.64.camel@lenovo.internal.reciva.com>
-	<4A26FB66.8020203@kernelconcepts.de>
-Date: Thu, 4 Jun 2009 00:57:33 +0200
-Message-ID: <d1b08f940906031557m1f6e803ax364b91fd56850f82@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] gtk+ and gdk-pixbuf
+	Thu, 04 Jun 2009 06:45:43 +0200
+MIME-version: 1.0
+Received: from [87.201.169.145] by asmtp022.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KKP00GJH650WG50@asmtp022.mac.com> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	03 Jun 2009 21:36:40 -0700 (PDT)
+Message-id: <58E23116-2D95-4C1C-8C17-EDA168C129F9@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Date: Thu, 04 Jun 2009 08:36:35 +0400
+X-Mailer: Apple Mail (2.935.3)
+Subject: How to fix OE missing checksum error for some rt2570-k2wrlz recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,18 +28,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jun 2009 23:06:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Jun 2009 04:45:43 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-Please elaborate how to handle such cases (hildon-thumbnail):
+Hi,
+	I am getting a missing checksum error.
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=6e13bf0bd8e0c147aabe7324df3a29ee338e2056
+NOTE: Running task 358 of 558 (ID: 2, /tool/overo-oe/user.collection/ 
+recipes/rt2x00/rt2570-k2wrlz_1.6.4.bb, do_fetch)
+NOTE: Missing checksum
+ERROR: rt2570-k2wrlz-1.6.4: http://homepages.tu-darmstadt.de/~p_larbig/wlan/rt2570-k2wrlz-1.6.4.tar.bz2 
+  has no entry in conf/checksums.ini, not checking URI
+ERROR: Error in executing: /tool/overo-oe/user.collection/recipes/ 
+rt2x00/rt2570-k2wrlz_1.6.4.bb
 
-Patch to be reverted ?
+I realize I can get past this error by setting  
+OE_ALLOW_INSECURE_DOWNLOADS="1", but how can I fix things so I don't  
+have to disable this check just to get past the OE build error and  
+properly check the checksum?
 
-Thanks in advance
+Here is the contents of my bitbake recipe:
 
-Andrea
+File: rt2570-k2wrlz_1.6.4.bb
+--------------------------------------
+
+DESCRIPTION = "Enhanced Driver for Ralink rt2570 USB 802.11g WiFi  
+sticks"
+HOMEPAGE = "http://homepages.tu-darmstadt.de/~p_larbig/wlan"
+SECTION = "kernel/modules"
+LICENSE = "GPL"
+
+PR = "r1"
+
+SRC_URI = "http://homepages.tu-darmstadt.de/~p_larbig/wlan/${PN}-$ 
+{PV}.tar.bz2"
+
+inherit module
+
+S = "${WORKDIR}/${PN}-${PV}/Module/"
+
+do_compile_prepend_arm () {
+MAKE_TARGETS="arm"
+}
+
+do_compile() {
+export KERNDIR=${STAGING_KERNEL_DIR}
+module_do_compile
+}
+
+do_install() {
+	install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra
+	install -m 0644 rt2570${KERNEL_OBJECT_SUFFIX} ${D}${base_libdir}/ 
+modules/${KERNEL_VERSION}/extra/
+}
+
+
+Best regards,
+
+Elvis
+
+
+
+
 
 
