@@ -1,23 +1,32 @@
-Received: from [17.148.16.97] (helo=asmtpout022.mac.com)
+Received: from [91.121.247.18] (helo=posta.altrarete.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MC5pI-0000o5-4n
+	(envelope-from <ottavio@campana.vi.it>) id 1MC87r-0006Bp-Gi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 07:49:20 +0200
-MIME-version: 1.0
-Received: from [87.201.169.145] by asmtp022.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KKP00FFA9307V90@asmtp022.mac.com> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	03 Jun 2009 22:40:16 -0700 (PDT)
-Message-id: <E1863E56-343C-41E8-8E9E-2E911CD12F39@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
+	Thu, 04 Jun 2009 10:16:39 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by posta.altrarete.it (Postfix) with ESMTP id E84F957C191
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  4 Jun 2009 10:07:37 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at posta.altrarete.it
+Received: from posta.altrarete.it ([127.0.0.1])
+	by localhost (posta.altrarete.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id w8PbUGKNpMMP
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  4 Jun 2009 10:07:37 +0200 (CEST)
+Received: from computer-di-ottavio-campana.local
+	(host19-88-static.184-82-b.business.telecomitalia.it [82.184.88.19])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by posta.altrarete.it (Postfix) with ESMTPSA id B84E957C043
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  4 Jun 2009 10:07:34 +0200 (CEST)
+Message-ID: <4A2780E0.3000709@campana.vi.it>
+Date: Thu, 04 Jun 2009 10:08:00 +0200
+From: Ottavio Campana <ottavio@campana.vi.it>
+User-Agent: Postbox 1.0b12 (Macintosh/2009051120)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-reply-to: <200906040644.46800.zecke@selfish.org>
-Date: Thu, 04 Jun 2009 09:40:12 +0400
-References: <58E23116-2D95-4C1C-8C17-EDA168C129F9@mac.com>
-	<200906040644.46800.zecke@selfish.org>
-X-Mailer: Apple Mail (2.935.3)
-Subject: Re: How to fix OE missing checksum error for some	rt2570-k2wrlz recipe
+Subject: unable to build codec engine 2.21 in stable/2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,54 +40,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 05:49:20 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Thu, 04 Jun 2009 08:16:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Holger,
-			Thanks for the tip.
+Hi,
 
-Here is what I can see in my tmp/checksums.ini.
+I'm having problems building coded engine 2.21 using stable/2009 and
+angstrong distribution.
 
-[http://homepages.tu-darmstadt.de/~p_larbig/wlan/rt2570-k2wrlz-1.6.4.tar.bz2 
-]
-md5=21f6e873ad7ee34843dbcd1204f9eda3
-sha256=5b2d382504d0aee14cf24f0eb3c483a79c712f8aa1ca027a7d4425891f1bb2ec
+I cut and paste the final error that I have:
 
-I've added it to conf/checksums.ini
+| make -C
+/db/toolsrc/library/toolsC38/vendors/mvl/arm/dm6446/REL_LSP_02_00_00_010/montavista/pro/devkit/lsp/ti-davinci/linux-2.6.18_pro500
+M=/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/ti/bios/power/modules/dm6446/lpm
+ARCH=arm
+CROSS_COMPILE=/db/toolsrc/library/toolsC38/vendors/mvl/arm/mvl5.0/montavista/pro/devkit/arm/v5t_le/bin/arm_v5t_le-
+\
+|         EXTRA_CFLAGS="-DUSE_UDEV -DOS_LINUX -DLINUX_KERNEL -DRELEASE
+-DOS_LINUX -DMAX_DSPS=1 -DMAX_PROCESSORS=2 -DID_GPP=1 -DDAVINCI
+-DDSPLINK_LEGACY_SUPPORT -DPROC_COMPONENT -DPOOL_COMPONENT
+-DNOTIFY_COMPONENT -DMPCS_COMPONENT -DRINGIO_COMPONENT
+-DMPLIST_COMPONENT -DMSGQ_COMPONENT -DMSGQ_ZCPY_LINK -DZCPY_LINK
+-DKFILE_DEFAULT -DDM6446GEM -DDM6446GEM_PHYINTERFACE=SHMEM_INTERFACE
+-D__KERNEL__ -DMODULE -DTRACE_KERNEL -DDDSP_DEBUG
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc/sys/arch
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc/usr
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc/sys
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc/sys/Linux
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc/sys/Linux/2.6.18
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc/sys/arch/DM6446GEM
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/inc/sys/arch/DM6446GEM/Linux
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/pmgr
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/pmgr/Linux
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/src/pmgr/Linux/2.6.18
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/BUILD/INCLUDE
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/BUILD/INCLUDE/USER
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/BUILD/INCLUDE/KRNL
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/export/INCLUDE/Linux/DAVINCI/internal
+-I/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/codec_engine_2_21/cetools/packages/dsplink/../dsplink/gpp/export/INCLUDE/Linux/OMAP3530/internal"
+modules
+| make: ***
+/db/toolsrc/library/toolsC38/vendors/mvl/arm/dm6446/REL_LSP_02_00_00_010/montavista/pro/devkit/lsp/ti-davinci/linux-2.6.18_pro500:
+No such file or directory.  Stop.
+| make: *** [default] Error 2
+| FATAL: oe_runmake failed
+NOTE: Task failed:
+/home/ottavio/Projects/stuff/openembedded/tmp/work/davinci-dvevm-angstrom-linux-gnueabi/ti-codec-engine-221-r19/temp/log.do_compile.23591
+NOTE: package ti-codec-engine-221-r19: task do_compile: failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/ottavio/Projects/stuff/openembedded/recipes/dsplink/ti-codec-engine_2.21.bb
+do_compile failed
+ERROR: Task 249
+(/home/ottavio/Projects/stuff/openembedded/recipes/dsplink/ti-codec-engine_2.21.bb,
+do_compile) failed
+NOTE: Tasks Summary: Attempted 1490 tasks of which 1490 didn't need to
+be rerun and 1 failed.
+ERROR:
+'/home/ottavio/Projects/stuff/openembedded/recipes/dsplink/ti-codec-engine_2.21.bb'
+failed
+NOTE: build 200906040933: completed
+ottavio@debian2:~/Projects/stuff/openembedded$
 
-Best regards,
-
-Elvis
 
 
-On Jun 4, 2009, at 8:44 AM, Holger Freyther wrote:
+So the question is: what is the directory
+/db/toolsrc/library/toolsC38/vendors/mvl/arm/dm6446/REL_LSP_02_00_00_010/montavista/pro/devkit/lsp/ti-davinci/linux-2.6.18_pro500
+required by make in the first line that I pasted?
 
-> On Thursday 04 June 2009 06:36:35 Elvis Dowson wrote:
->> Hi,
->> 	I am getting a missing checksum error.
->>
->> NOTE: Running task 358 of 558 (ID: 2, /tool/overo-oe/user.collection/
->> recipes/rt2x00/rt2570-k2wrlz_1.6.4.bb, do_fetch)
->> NOTE: Missing checksum
->> ERROR: rt2570-k2wrlz-1.6.4:
->> http://homepages.tu-darmstadt.de/~p_larbig/wlan/rt2570-k2wrlz-1.6.4.tar.bz2
->> has no entry in conf/checksums.ini, not checking URI
->> ERROR: Error in executing: /tool/overo-oe/user.collection/recipes/
->> rt2x00/rt2570-k2wrlz_1.6
->
-> In your build directory you have tmp/checksums.ini, you can copy the  
-> entry for
-> rt... to conf/checksums.ini in the OE metadata... and obviously send  
-> a patch
-> if that makes sense.
->
-> z.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Thanks,
+
+Ottavio
 
 
 
