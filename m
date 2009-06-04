@@ -1,33 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MCEZ0-0007Ns-B1
-	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 17:09:06 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MCEQE-0002Dc-KB
-	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 15:00:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 04 Jun 2009 15:00:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 04 Jun 2009 15:00:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 04 Jun 2009 16:58:30 +0200
-Message-ID: <h08nem$9d$2@ger.gmane.org>
-References: <1244124820-13930-1-git-send-email-ihar.hrachyshka@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090531 Shredder/3.0b3pre
+	(envelope-from <pb@reciva.com>) id 1MCFmW-0003lp-KZ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jun 2009 18:27:08 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MCFdj-0001td-U5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jun 2009 17:18:04 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MCFdj-0003Yp-Mi
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jun 2009 17:18:03 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1244124820-13930-1-git-send-email-ihar.hrachyshka@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] guile-native: added missing gettext-native dependency
+References: <1244124820-13930-1-git-send-email-ihar.hrachyshka@gmail.com>
+Date: Thu, 04 Jun 2009 17:18:03 +0100
+Message-Id: <1244132283.2611.127.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: [patch] autotools: detect missing depends for aclocal packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,35 +36,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 15:09:06 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 04 Jun 2009 16:27:08 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 04-06-09 16:13, Ihar Hrachyshka wrote:
-> Signed-off-by: Ihar Hrachyshka<ihar.hrachyshka@gmail.com>
-> ---
->   recipes/guile/guile-native_1.8.5.bb |    2 +-
->   1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/guile/guile-native_1.8.5.bb b/recipes/guile/guile-native_1.8.5.bb
-> index e73616e..bf21c6a 100644
-> --- a/recipes/guile/guile-native_1.8.5.bb
-> +++ b/recipes/guile/guile-native_1.8.5.bb
-> @@ -1,6 +1,6 @@
->   SECTION = "unknown"
->   LICENSE = "GPL"
+On Thu, 2009-06-04 at 17:13 +0300, Ihar Hrachyshka wrote:
 > -DEPENDS = "gmp-native"
 > +DEPENDS = "gmp-native gettext-native"
->   SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \
->              file://configure-fix.patch;patch=1 \
->   "
 
-I already have that fix queued up: 
-http://dominion.thruhere.net/git/cgit.cgi/openembedded/commit/?id=c1643b0dba7286af8c7a9e26e6aa96c0315df14f
+For laughs, here's a small patch to detect this kind of thing
+automatically in at least some cases.
 
-regards,
+p.
 
-Koen
+--
+
+diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+index e43b289..214da3c 100644
+--- a/classes/autotools.bbclass
++++ b/classes/autotools.bbclass
+@@ -67,6 +67,49 @@ oe_runconf () {
+ 	fi
+ }
+ 
++python autotools_do_check_aclocal() {
++        frags = bb.data.expand('${T}/acfragments', d)
++        bb.note(frags)
++        if os.path.exists(frags):
++                pcproviders = {}
++                needed = []
++                f = open(frags, "r")
++                import re
++                sr = re.compile("aclocal: saw macro (.*)")
++                fr = re.compile("aclocal: found macro (.*) in .*/(.*).m4")
++                for l in f.readlines():
++                        l = l.rstrip()
++                        m = sr.match(l)
++                        if m:
++                                if not m.group(1) in needed:
++                                        needed.append(m.group(1))
++                        else:
++                                m = fr.match(l)
++                                if m:
++                                        pcproviders[m.group(1)] = m.group(2)
++                f.close()
++                needed_pkgs = []
++                for n in needed:
++                        if not pcproviders.has_key(n):
++                                continue
++                        fn = bb.data.expand("${STAGING_DIR}/${HOST_SYS}/acdeps/%s.m4" % pcproviders[n], d)
++                        if os.path.exists(fn):
++                                f = open(fn, "r")
++                                p = f.readline().rstrip()
++                                f.close()
++                                if not p in needed_pkgs:
++                                        needed_pkgs.append(p)
++                deps = bb.data.getVar("DEPENDS", d, True).split()
++                lost = []
++                for n in needed_pkgs:
++                        if not n in deps:
++                                lost.append(n)
++                if lost:
++                        bb.note("possibly missing dependencies: %s" % " ".join(lost))
++}
++
++addtask check_aclocal after do_configure
++
+ autotools_do_configure() {
+ 	case ${PN} in
+ 	autoconf*)
+@@ -126,6 +169,8 @@ autotools_do_configure() {
+ 			  oenote Executing intltoolize --copy --force --automake
+ 			  intltoolize --copy --force --automake
+ 			fi
++                        oenote Extracting list of required m4 fragments
++                        aclocal --output=/dev/null --verbose 2>&1 | egrep '(^aclocal: found macro)|(^aclocal: saw macro)' > ${T}/acfragments || true
+ 			oenote Executing autoreconf --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
+ 			mkdir -p m4
+ 			autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths || oefatal "autoreconf execution failed."
+@@ -239,8 +284,14 @@ autotools_stage_all() {
+ 	rm -rf ${STAGE_TEMP}/${mandir} || true
+ 	rm -rf ${STAGE_TEMP}/${infodir} || true
+ 	autotools_stage_dir ${STAGE_TEMP}/${datadir} ${STAGING_DATADIR}
++        if [ -d ${STAGE_TEMP}/${datadir}/aclocal ]; then
++                mkdir -p ${STAGING_DIR}/${HOST_SYS}/acdeps
++                for i in `find ${STAGE_TEMP}/${datadir}/aclocal/ -name '*.m4'`; do
++                        echo ${PN} > ${STAGING_DIR}/${HOST_SYS}/acdeps/`basename $i`
++                done
++        fi
+ 	rm -rf ${STAGE_TEMP}
+ }
+ 
+-EXPORT_FUNCTIONS do_configure do_install
++EXPORT_FUNCTIONS do_configure do_install do_check_aclocal
+ 
+
 
 
 
