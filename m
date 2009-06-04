@@ -1,30 +1,33 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MCEGc-00073I-JY
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 16:50:06 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 3B1AF4D0727
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2009 10:41:02 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 06624-02 for <openembedded-devel@lists.openembedded.org>; 
-	Thu,  4 Jun 2009 10:41:02 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id F24274D0726
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2009 10:41:01 -0400 (EDT)
-Message-ID: <4A27DCFD.6030808@cbnco.com>
-Date: Thu, 04 Jun 2009 10:41:01 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1244114520.2611.114.camel@mill.internal.reciva.com>
-In-Reply-To: <1244114520.2611.114.camel@mill.internal.reciva.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [patch] glibc: correct paths in FILES
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MCEZ0-0007Ns-B1
+	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 17:09:06 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MCEQE-0002Dc-KB
+	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 15:00:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 04 Jun 2009 15:00:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 04 Jun 2009 15:00:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 04 Jun 2009 16:58:30 +0200
+Message-ID: <h08nem$9d$2@ger.gmane.org>
+References: <1244124820-13930-1-git-send-email-ihar.hrachyshka@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090531 Shredder/3.0b3pre
+In-Reply-To: <1244124820-13930-1-git-send-email-ihar.hrachyshka@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] guile-native: added missing gettext-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,24 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 14:50:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 04 Jun 2009 15:09:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Phil Blundell wrote:
-> It turns out that glibc-package contains a bunch of hard-coded
-> references to /lib.  This patch replaces them with the appropriate
-> ${base_libdir}.  Also, the globs in ${libc_baselibs} were a bit too
-> permissive and would accept, for example, "libc.a" which isn't something
-> that we want in the main library package.
+On 04-06-09 16:13, Ihar Hrachyshka wrote:
+> Signed-off-by: Ihar Hrachyshka<ihar.hrachyshka@gmail.com>
+> ---
+>   recipes/guile/guile-native_1.8.5.bb |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/guile/guile-native_1.8.5.bb b/recipes/guile/guile-native_1.8.5.bb
+> index e73616e..bf21c6a 100644
+> --- a/recipes/guile/guile-native_1.8.5.bb
+> +++ b/recipes/guile/guile-native_1.8.5.bb
+> @@ -1,6 +1,6 @@
+>   SECTION = "unknown"
+>   LICENSE = "GPL"
+> -DEPENDS = "gmp-native"
+> +DEPENDS = "gmp-native gettext-native"
+>   SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \
+>              file://configure-fix.patch;patch=1 \
+>   "
 
-Build and board tested with glibc 2.6.1. Getting rid of the .a files 
-saved 3.9 MB out of my root image on x86.
+I already have that fix queued up: 
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/commit/?id=c1643b0dba7286af8c7a9e26e6aa96c0315df14f
 
-I guess eglibc would need the same, but I haven't tried it.
+regards,
 
-Acked-By: Michael Smith <msmith@cbnco.com>
+Koen
 
-Mike
 
 
