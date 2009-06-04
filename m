@@ -1,24 +1,32 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MCKO1-0005MV-MZ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 23:22:09 +0200
-Received: from 212-139-89-247.dynamic.dsl.as9105.com ([212.139.89.247]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MCKFB-0001cK-6D
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 22:13:01 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1244136199-20093-1-git-send-email-msmith@cbnco.com>
-References: <h08u4t$oui$1@ger.gmane.org>
-	<1244136199-20093-1-git-send-email-msmith@cbnco.com>
-Date: Thu, 04 Jun 2009 22:12:58 +0100
-Message-Id: <1244149978.5049.71.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MCKk1-0005t5-ID
+	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 23:44:53 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MCKbD-0004kK-Fc
+	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 21:35:47 +0000
+Received: from cuo02-acns-ce1.cisco.com ([64.101.22.72])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 04 Jun 2009 21:35:47 +0000
+Received: from msundius by cuo02-acns-ce1.cisco.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 04 Jun 2009 21:35:47 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Michael Sundius <msundius@sundius.com>
+Date: Thu, 4 Jun 2009 21:35:36 +0000 (UTC)
+Message-ID: <loom.20090604T211010-224@post.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH] vim: fix alternative when prefix is /usr
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 64.101.22.72 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.15) Gecko/20080702 Fedora/2.0.0.15-1.fc8 Firefox/2.0.0.15)
+Sender: news <news@ger.gmane.org>
+Subject: development process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,23 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 21:22:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 Jun 2009 21:44:53 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-06-04 at 13:23 -0400, Michael Smith wrote:
-> Fix 2d3750e3dae84c89c9c749f95cf6b3b6cca3e8ce.
-> +ALTERNATIVE_PATH = "${bindir}/vim"
->  ALTERNATIVE_LINK = "${base_bindir}/vi"
->  ALTERNATIVE_PRIORITY = "100"
+I have two issues with open embedded that I'm wondering if there is already a
+solution for, or rather, am I totally missing the boat on how things work:
 
-It seems a bit weird to have a symlink in ${base_bindir} pointing to a
-target in ${bindir}, since the link will be broken if /usr isn't mounted
-yet.  I wonder if it'd be better to either move vim to /bin, or
-move /bin/vi to /usr/bin.
+1) regarding toolchains:
+my understanding is that if you don't want to go through the exercise of
+building gcc and glibc everytime you create a distribution, then you should use
+the meta-toolchain.bb recipe to create a installable (tools) distribution and
+then others can install the resultant on their own machine and use the
+external-toolchain.bb recipe to integrate it w/ OE, populating the staging area
+and creating the appropriate packages and what not. (part a: is this correct?)
 
-p.
+what if the boss says you gotta use the xyz toolchain from blowco inc (that
+while complete, was not built w/ OE in mind and does not work w/ the
+external-toolchain.bb recipe). I'm sure someone asked this question before, but
+is the only recourse to package up the libraries (ala write a recipe) yourself
+and put them in to oe? is there an example recipe in the openembedded tree that
+does this already? does someone have an example that they could share?, is there
+a doc explaining what needs to go where? (or of course am I just off base on my
+question). could someone please educate me on best way to proceed (ie. the path
+or least resistance).
 
+2) in a more general sense. 
+as with most embedded systems, a developer working on a single component rarely
+cares (or knows) about how to build/configure the rest of the systems. it should
+just work. further when I have a task to fix a bug in said version of my small
+little corner of the world I don't want to wait hours for the rest of the
+software to be built before I can test my fix. is there a way to indicate my
+PREFERRED_PROVIDER for a package/recipe (or even better all by default) is a
+package feed? again maybe this is done on a regular basis or maybe its a special
+thing, but I really didn't see any documentation/examples for it. It seems the
+only reference to a package feed is to allow for easy installation of a system
+that is already up and running... 
+
+Thanks for reading my rambling questions and for your help all... 
+Mike
 
 
 
