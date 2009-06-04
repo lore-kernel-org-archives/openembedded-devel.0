@@ -1,27 +1,33 @@
-Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
+Received: from [85.33.2.25] (helo=smtp-out25.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MCJ8f-0001Az-2V
+	(envelope-from <GNUtoo@no-log.org>) id 1MCJDQ-0001Pz-G7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 22:02:13 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KKQ0037KCK7NBFC@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	04 Jun 2009 14:52:55 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4719814AF5F; Thu,
-	04 Jun 2009 15:52:55 -0400 (EDT)
-Date: Thu, 04 Jun 2009 15:52:55 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 04 Jun 2009 22:07:08 +0200
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out25.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 4 Jun 2009 21:58:00 +0200
+Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Thu, 4 Jun 2009 21:57:57 +0200
+Received: from [192.168.1.166] ([80.117.37.182]) by FBCMCL01B01.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 4 Jun 2009 21:57:57 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090604195255.GA24772@denix.org>
-References: <58E23116-2D95-4C1C-8C17-EDA168C129F9@mac.com>
-	<200906040644.46800.zecke@selfish.org>
-	<E1863E56-343C-41E8-8E9E-2E911CD12F39@mac.com>
-	<200906041108.35572.zecke@selfish.org>
-MIME-version: 1.0
-In-reply-to: <200906041108.35572.zecke@selfish.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: How to fix OE missing checksum error for	some?rt2570-k2wrlz recipe
+In-Reply-To: <1243977526.5049.53.camel@lenovo.internal.reciva.com>
+References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
+	<4A0DBCAC.5000403@balister.org>
+	<1242424484.4514.117.camel@lenovo.internal.reciva.com>
+	<200905160037.25213.mickey@vanille-media.de>
+	<1242475355.4514.133.camel@lenovo.internal.reciva.com>
+	<4A0EB79C.8030308@balister.org>
+	<1243977526.5049.53.camel@lenovo.internal.reciva.com>
+Date: Thu, 04 Jun 2009 21:57:51 +0200
+Message-Id: <1244145476.6678.4.camel@port4>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 04 Jun 2009 19:57:57.0449 (UTC)
+	FILETIME=[C1911390:01C9E54E]
+Subject: Re: progress on OE organization issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,26 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 20:02:13 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 04 Jun 2009 20:07:08 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jun 04, 2009 at 11:08:35AM +0200, Holger Freyther wrote:
-> On Thursday 04 June 2009 07:40:12 Elvis Dowson wrote:
-> > Here is what I can see in my tmp/checksums.ini.
-> >
-> > [http://homepages.tu-darmstadt.de/~p_larbig/wlan/rt2570-k2wrlz-1.6.4.tar.bz
-> >2 ]
-> > md5=21f6e873ad7ee34843dbcd1204f9eda3
-> > sha256=5b2d382504d0aee14cf24f0eb3c483a79c712f8aa1ca027a7d4425891f1bb2ec
+On Tue, 2009-06-02 at 22:18 +0100, Phil Blundell wrote:
+> On Sat, 2009-05-16 at 08:54 -0400, Philip Balister wrote:
+> > Phil Blundell wrote:
+> > > On Sat, 2009-05-16 at 00:37 +0200, Michael 'Mickey' Lauer wrote:
+> > >> My view on that is: The ideal situation would be that everyone interested in 
+> > >> OE -- no matter on which level, technically, supportive, or administrative, 
+> > >> becomes a member of the e.V.  This is relatively straightforward and does not 
+> > >> require any financial commitments per se as our status include that a member 
+> > >> can chose its own membership fee.
+> > > 
+> > > Sounds good to me.  What exactly needs to be done in order to make this
+> > > happen?
+> > 
+> > Translate the eV papers into English. Someone did feed it through an 
+> > internet translator, but I can't find the output on the web. We should 
+> > go ahead and put them on the wiki.
 > 
-> Please send a patch, it is more easy to apply, it will be recorded by 
-> patchwork and will not fall through the cracks.
+> What's the current status with this?  I guess as a first step we should
+> at least get the German articles online, if that hasn't already been
+> done.  That would make it easier to solicit volunteers for producing an
+> English translation.
+> 
+> p.
+There is an interresting part on Legal status here:
+http://www.softwarefreedom.org/resources/2008/foss-primer.html#x1-190003
 
-And don't forget to sort the checksums file before making the patch with the 
-contrib/source-checker/oe-checksums-sorter.py
+by the way why don't we join an umbrella organization?
 
--- 
-Denys
+Denis.
+
+
 
 
