@@ -1,24 +1,26 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1MC94z-0004mo-7N
+	(envelope-from <pb@reciva.com>) id 1MCBA1-0007sb-DB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 11:17:45 +0200
-Received: from tamarin.localnet (123-192-147-94.dynamic.kbronet.com.tw
-	[123.192.147.94])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C3F3D1B10C1C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2009 09:09:48 +0000 (UTC)
-From: Holger Freyther <zecke@selfish.org>
+	Thu, 04 Jun 2009 13:31:05 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MCB1E-0000ij-Pd
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jun 2009 12:22:00 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MCB1E-0000tb-PP
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Jun 2009 12:22:00 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 4 Jun 2009 11:08:35 +0200
-User-Agent: KMail/1.11.90 (Linux/2.6.30-rc7; KDE/4.2.85; i686; ; )
-References: <58E23116-2D95-4C1C-8C17-EDA168C129F9@mac.com>
-	<200906040644.46800.zecke@selfish.org>
-	<E1863E56-343C-41E8-8E9E-2E911CD12F39@mac.com>
-In-Reply-To: <E1863E56-343C-41E8-8E9E-2E911CD12F39@mac.com>
-MIME-Version: 1.0
-Message-Id: <200906041108.35572.zecke@selfish.org>
-Subject: Re: How to fix OE missing checksum error for some	rt2570-k2wrlz recipe
+Date: Thu, 04 Jun 2009 12:22:00 +0100
+Message-Id: <1244114520.2611.114.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: [patch] glibc: correct paths in FILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,25 +34,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 09:17:45 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 04 Jun 2009 11:31:05 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Thursday 04 June 2009 07:40:12 Elvis Dowson wrote:
-> Hi Holger,
-> 			Thanks for the tip.
->
-> Here is what I can see in my tmp/checksums.ini.
->
-> [http://homepages.tu-darmstadt.de/~p_larbig/wlan/rt2570-k2wrlz-1.6.4.tar.bz
->2 ]
-> md5=21f6e873ad7ee34843dbcd1204f9eda3
-> sha256=5b2d382504d0aee14cf24f0eb3c483a79c712f8aa1ca027a7d4425891f1bb2ec
+It turns out that glibc-package contains a bunch of hard-coded
+references to /lib.  This patch replaces them with the appropriate
+${base_libdir}.  Also, the globs in ${libc_baselibs} were a bit too
+permissive and would accept, for example, "libc.a" which isn't something
+that we want in the main library package.
 
-Please send a patch, it is more easy to apply, it will be recorded by 
-patchwork and will not fall through the cracks.
+p.
 
-z.
+--
+
+diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
+index 78738c2..793401f 100644
+--- a/recipes/glibc/glibc-package.bbclass
++++ b/recipes/glibc/glibc-package.bbclass
+@@ -32,12 +32,12 @@ USE_LDCONFIG ?= "1"
+ PACKAGES = "glibc-dbg glibc catchsegv sln nscd ldd localedef glibc-utils glibc-dev glibc-doc glibc-locale libsegfault glibc-extra-nss glibc-thread-db glibc-pcprofile"
+ PACKAGES_DYNAMIC = "glibc-gconv-* glibc-charmap-* glibc-localedata-* locale-base-* glibc-binary-localedata-*"
+ 
+-libc_baselibs = "/lib/libc* /lib/libm* /lib/ld* /lib/libpthread* /lib/libresolv* /lib/librt* /lib/libutil* /lib/libnsl* /lib/libnss_files* /lib/libnss_compat* /lib/libnss_dns* /lib/libdl* /lib/libanl* /lib/libBrokenLocale*"
++libc_baselibs = "${base_libdir}/libcrypt*.so.* ${base_libdir}/libcrypt-*.so ${base_libdir}/libc*.so.* ${base_libdir}/libc-*.so ${base_libdir}/libm*.so.* ${base_libdir}/libm-*.so ${base_libdir}/ld*.so.* ${base_libdir}/ld-*.so ${base_libdir}/libpthread*.so.* ${base_libdir}/libpthread-*.so ${base_libdir}/libresolv*.so.* ${base_libdir}/libresolv-*.so ${base_libdir}/librt*.so.* ${base_libdir}/librt-*.so ${base_libdir}/libutil*.so.* ${base_libdir}/libutil-*.so ${base_libdir}/libnsl*.so.* ${base_libdir}/libnsl-*.so ${base_libdir}/libnss_files*.so.* ${base_libdir}/libnss_files-*.so ${base_libdir}/libnss_compat*.so.* ${base_libdir}/libnss_compat-*.so ${base_libdir}/libnss_dns*.so.* ${base_libdir}/libnss_dns-*.so ${base_libdir}/libdl*.so.* ${base_libdir}/libdl-*.so ${base_libdir}/libanl*.so.* ${base_libdir}/libanl-*.so ${base_libdir}/libBrokenLocale*.so.* ${base_libdir}/libBrokenLocale-*.so"
+ 
+ FILES_${PN} = "${libc_baselibs} ${libexecdir}/* ${datadir}/zoneinfo ${@base_conditional('USE_LDCONFIG', '1', '/sbin/ldconfig', '', d)}"
+ FILES_ldd = "${bindir}/ldd"
+-FILES_libsegfault = "/lib/libSegFault*"
+-FILES_glibc-extra-nss = "/lib/libnss*"
++FILES_libsegfault = "${base_libdir}/libSegFault*"
++FILES_glibc-extra-nss = "${base_libdir}/libnss*"
+ FILES_sln = "/sbin/sln"
+ FILES_glibc-dev_append = " ${libdir}/*.o ${bindir}/rpcgen"
+ FILES_nscd = "${sbindir}/nscd*"
+@@ -46,8 +46,8 @@ FILES_glibc-gconv = "${libdir}/gconv/*"
+ FILES_${PN}-dbg += " ${libdir}/gconv/.debug ${libexecdir}/*/.debug"
+ FILES_catchsegv = "${bindir}/catchsegv"
+ RDEPENDS_catchsegv = "libsegfault"
+-FILES_glibc-pcprofile = "/lib/libpcprofile.so"
+-FILES_glibc-thread-db = "/lib/libthread_db*"
++FILES_glibc-pcprofile = "${base_libdir}/libpcprofile.so"
++FILES_glibc-thread-db = "${base_libdir}/libthread_db*"
+ FILES_localedef = "${bindir}/localedef"
+ RPROVIDES_glibc-dev += "libc-dev"
+ 
+@@ -145,7 +145,7 @@ do_prep_locale_tree() {
+ 	for i in $treedir/${datadir}/i18n/charmaps/*gz; do 
+ 		gunzip $i
+ 	done
+-	ls ${D}/lib/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
++	ls ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
+ 	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so ]; then
+ 		cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so $treedir/lib
+ 	fi
+
+
 
 
