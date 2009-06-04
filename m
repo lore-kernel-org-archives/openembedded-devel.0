@@ -1,32 +1,33 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MCKk1-0005t5-ID
-	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 23:44:53 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MCKbD-0004kK-Fc
-	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 21:35:47 +0000
-Received: from cuo02-acns-ce1.cisco.com ([64.101.22.72])
+	id 1MCN4S-0002dC-EY
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 02:14:08 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MCMve-0001k2-QL
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 00:05:03 +0000
+Received: from h24-207-4-118.primesignal.com ([24.207.4.118])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 04 Jun 2009 21:35:47 +0000
-Received: from msundius by cuo02-acns-ce1.cisco.com with local (Gmexim 0.1
+	Fri, 05 Jun 2009 00:05:02 +0000
+Received: from quickx by h24-207-4-118.primesignal.com with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Thu, 04 Jun 2009 21:35:47 +0000
+	Fri, 05 Jun 2009 00:05:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-From: Michael Sundius <msundius@sundius.com>
-Date: Thu, 4 Jun 2009 21:35:36 +0000 (UTC)
-Message-ID: <loom.20090604T211010-224@post.gmane.org>
+From: NBeing <quickx@hotmail.com>
+Date: Thu, 4 Jun 2009 23:56:15 +0000 (UTC)
+Message-ID: <loom.20090604T233316-304@post.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: main.gmane.org
 User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 64.101.22.72 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.15) Gecko/20080702 Fedora/2.0.0.15-1.fc8 Firefox/2.0.0.15)
+X-Loom-IP: 24.207.4.118 (Mozilla/5.0 (Windows; U; Windows NT 5.1;
+	en-US) AppleWebKit/525.19 (KHTML, like Gecko) Chrome/1.0.154.65
+	Safari/525.19)
 Sender: news <news@ger.gmane.org>
-Subject: development process
+Subject: GPE Application Development Questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,45 +41,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 21:44:53 -0000
+X-List-Received-Date: Fri, 05 Jun 2009 00:14:08 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-I have two issues with open embedded that I'm wondering if there is already a
-solution for, or rather, am I totally missing the boat on how things work:
+The "angstrom-2008.1-test-20090104-armv5te-linux-gnueabi-toolchain-gpe.tar.bz2" 
+sets up the environment like so:
 
-1) regarding toolchains:
-my understanding is that if you don't want to go through the exercise of
-building gcc and glibc everytime you create a distribution, then you should use
-the meta-toolchain.bb recipe to create a installable (tools) distribution and
-then others can install the resultant on their own machine and use the
-external-toolchain.bb recipe to integrate it w/ OE, populating the staging area
-and creating the appropriate packages and what not. (part a: is this correct?)
+export PATH=/usr/local/angstrom/arm/bin:$PATH
 
-what if the boss says you gotta use the xyz toolchain from blowco inc (that
-while complete, was not built w/ OE in mind and does not work w/ the
-external-toolchain.bb recipe). I'm sure someone asked this question before, but
-is the only recourse to package up the libraries (ala write a recipe) yourself
-and put them in to oe? is there an example recipe in the openembedded tree that
-does this already? does someone have an example that they could share?, is there
-a doc explaining what needs to go where? (or of course am I just off base on my
-question). could someone please educate me on best way to proceed (ie. the path
-or least resistance).
+export PKG_CONFIG_SYSROOT_DIR=/usr/local/angstrom/arm/arm-angstrom-linux-
+gnueabi
 
-2) in a more general sense. 
-as with most embedded systems, a developer working on a single component rarely
-cares (or knows) about how to build/configure the rest of the systems. it should
-just work. further when I have a task to fix a bug in said version of my small
-little corner of the world I don't want to wait hours for the rest of the
-software to be built before I can test my fix. is there a way to indicate my
-PREFERRED_PROVIDER for a package/recipe (or even better all by default) is a
-package feed? again maybe this is done on a regular basis or maybe its a special
-thing, but I really didn't see any documentation/examples for it. It seems the
-only reference to a package feed is to allow for easy installation of a system
-that is already up and running... 
+export PKG_CONFIG_PATH=/usr/local/angstrom/arm/arm-angstrom-linux-
+gnueabi/usr/lib/pkgconfig
 
-Thanks for reading my rambling questions and for your help all... 
-Mike
+export CONFIG_SITE=/usr/local/angstrom/arm/site-config
+
+alias opkg='LD_LIBRARY_PATH=/usr/local/angstrom/arm/lib 
+/usr/local/angstrom/arm/bin/opkg-cl -f /usr/local/angstrom/arm/etc/opkg-
+sdk.conf -o /usr/local/angstrom/arm'
+
+alias opkg-target='LD_LIBRARY_PATH=/usr/local/angstrom/arm/lib 
+/usr/local/angstrom/arm/bin/opkg-cl -f /usr/local/angstrom/arm/arm-angstrom-
+linux-gnueabi/etc/opkg.conf -o /usr/local/angstrom/arm/arm-angstrom-linux-
+gnueabi'
+
+
+
+I'm using an "angstrom-2009.X-test-XXXX" image so believe I need to build my 
+own toolchain.  I built the image with the latest OE and everything runs on the 
+board, however, I'm unable to build the simple "gpe-hello" app.  I believe the 
+problem has to do with my mapping of the above paths.  This is what I have, 
+would someone be able to confirm, fix, give advance on what I have wrong with 
+them?  Or a different way/tutorial I should be following on GPE Application 
+Developemnt?  Basically I used the "cross" folder when I could, then staging, 
+then rootfs.
+
+export PATH=${HOME}/oe/build/tmp/cross/armv5te/bin:$PATH
+
+export PKG_CONFIG_SYSROOT_DIR=${HOME}/oe/build/tmp/cross/armv5te/arm-angstrom-
+linux-gnueabi
+
+export PKG_CONFIG_PATH=${HOME}/oe/build/tmp/staging/armv5te-angstrom-linux-
+gnueabi/usr/lib/pkgconfig
+
+export CONFIG_SITE= ???? (Left Out)
+
+alias opkg='LD_LIBRARY_PATH=${HOME}/oe/build/tmp/cross/armv5te/lib 
+${HOME}/oe/build/tmp/rootfs/x11-image/usr/bin/opkg-cl -f 
+${HOME}/oe/build/tmp/staging/i686-linux/etc/opkg-sdk.conf -o 
+${HOME}/oe/build/tmp/cross/armv5te'
+
+alias opkg-target='LD_LIBRARY_PATH=${HOME}/oe/build/tmp/cross/armv5te/lib 
+${HOME}/oe/build/tmp/rootfs/x11-image/usr/bin/opkg-cl -f 
+${HOME}/oe/build/tmp/rootfs/x11-image/etc/opkg.conf -o 
+${HOME}/oe/build/tmp/cross/armv5te/arm-angstrom-linux-gnueabi'
+
+
+
+Also while I'm here, in the deploy directory there is a "modules-2.6.28-r9-
+at91sam9261ek.tgz" file build, however, I'm unsure what I'm suppose to do with 
+it?  If I'm suppose to flash it to my board where would I find the address to 
+flash too?  Thanks
 
 
 
