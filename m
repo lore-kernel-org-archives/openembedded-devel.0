@@ -1,26 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MCBA1-0007sb-DB
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 13:31:05 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MCB1E-0000ij-Pd
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 12:22:00 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MCB1E-0000tb-PP
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Jun 2009 12:22:00 +0100
-From: Phil Blundell <pb@reciva.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MCBAw-0007tc-R3
+	for openembedded-devel@openembedded.org; Thu, 04 Jun 2009 13:32:02 +0200
+Received: (qmail 5718 invoked by uid 813007); 4 Jun 2009 11:23:00 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 4 Jun 2009 11:23:00 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 04 Jun 2009 12:22:00 +0100
-Message-Id: <1244114520.2611.114.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: [patch] glibc: correct paths in FILES
+Date: Thu, 4 Jun 2009 13:23:43 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.2;
+	x86_64; ; )
+References: <1241659800-17298-1-git-send-email-ramaxlo@gmail.com>
+	<200905121420.22677.marcin@juszkiewicz.com.pl>
+	<901c91090905121817n4c9775c2t4591313636c06788@mail.gmail.com>
+In-Reply-To: <901c91090905121817n4c9775c2t4591313636c06788@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200906041323.44441.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] at2440evb.conf: Add AT2440EVB machine config.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,60 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2009 11:31:05 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Jun 2009 11:32:03 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-It turns out that glibc-package contains a bunch of hard-coded
-references to /lib.  This patch replaces them with the appropriate
-${base_libdir}.  Also, the globs in ${libc_baselibs} were a bit too
-permissive and would accept, for example, "libc.a" which isn't something
-that we want in the main library package.
+Dnia =C5=9Broda, 13 maja 2009 o 03:17:58 Ramax Lo napisa=C5=82(a):
+> 2009/5/12 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+>
+> > Dnia czwartek, 7 maja 2009 o 03:30:00 Ramax Lo napisa=C5=82(a):
+> > > ---
+> > >  conf/machine/at2440evb.conf |   19 +++++++++++++++++++
+> > >  1 files changed, 19 insertions(+), 0 deletions(-)
+> > >  create mode 100644 conf/machine/at2440evb.conf
+> >
+> > Can you send also kernel config?
+>
+> Ok, please see the attached file. And a patch for this is also
+> attached.
 
-p.
+pushed both
 
---
 
-diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
-index 78738c2..793401f 100644
---- a/recipes/glibc/glibc-package.bbclass
-+++ b/recipes/glibc/glibc-package.bbclass
-@@ -32,12 +32,12 @@ USE_LDCONFIG ?= "1"
- PACKAGES = "glibc-dbg glibc catchsegv sln nscd ldd localedef glibc-utils glibc-dev glibc-doc glibc-locale libsegfault glibc-extra-nss glibc-thread-db glibc-pcprofile"
- PACKAGES_DYNAMIC = "glibc-gconv-* glibc-charmap-* glibc-localedata-* locale-base-* glibc-binary-localedata-*"
- 
--libc_baselibs = "/lib/libc* /lib/libm* /lib/ld* /lib/libpthread* /lib/libresolv* /lib/librt* /lib/libutil* /lib/libnsl* /lib/libnss_files* /lib/libnss_compat* /lib/libnss_dns* /lib/libdl* /lib/libanl* /lib/libBrokenLocale*"
-+libc_baselibs = "${base_libdir}/libcrypt*.so.* ${base_libdir}/libcrypt-*.so ${base_libdir}/libc*.so.* ${base_libdir}/libc-*.so ${base_libdir}/libm*.so.* ${base_libdir}/libm-*.so ${base_libdir}/ld*.so.* ${base_libdir}/ld-*.so ${base_libdir}/libpthread*.so.* ${base_libdir}/libpthread-*.so ${base_libdir}/libresolv*.so.* ${base_libdir}/libresolv-*.so ${base_libdir}/librt*.so.* ${base_libdir}/librt-*.so ${base_libdir}/libutil*.so.* ${base_libdir}/libutil-*.so ${base_libdir}/libnsl*.so.* ${base_libdir}/libnsl-*.so ${base_libdir}/libnss_files*.so.* ${base_libdir}/libnss_files-*.so ${base_libdir}/libnss_compat*.so.* ${base_libdir}/libnss_compat-*.so ${base_libdir}/libnss_dns*.so.* ${base_libdir}/libnss_dns-*.so ${base_libdir}/libdl*.so.* ${base_libdir}/libdl-*.so ${base_libdir}/libanl*.so.* ${base_libdir}/libanl-*.so ${base_libdir}/libBrokenLocale*.so.* ${base_libdir}/libBrokenLocale-*.so"
- 
- FILES_${PN} = "${libc_baselibs} ${libexecdir}/* ${datadir}/zoneinfo ${@base_conditional('USE_LDCONFIG', '1', '/sbin/ldconfig', '', d)}"
- FILES_ldd = "${bindir}/ldd"
--FILES_libsegfault = "/lib/libSegFault*"
--FILES_glibc-extra-nss = "/lib/libnss*"
-+FILES_libsegfault = "${base_libdir}/libSegFault*"
-+FILES_glibc-extra-nss = "${base_libdir}/libnss*"
- FILES_sln = "/sbin/sln"
- FILES_glibc-dev_append = " ${libdir}/*.o ${bindir}/rpcgen"
- FILES_nscd = "${sbindir}/nscd*"
-@@ -46,8 +46,8 @@ FILES_glibc-gconv = "${libdir}/gconv/*"
- FILES_${PN}-dbg += " ${libdir}/gconv/.debug ${libexecdir}/*/.debug"
- FILES_catchsegv = "${bindir}/catchsegv"
- RDEPENDS_catchsegv = "libsegfault"
--FILES_glibc-pcprofile = "/lib/libpcprofile.so"
--FILES_glibc-thread-db = "/lib/libthread_db*"
-+FILES_glibc-pcprofile = "${base_libdir}/libpcprofile.so"
-+FILES_glibc-thread-db = "${base_libdir}/libthread_db*"
- FILES_localedef = "${bindir}/localedef"
- RPROVIDES_glibc-dev += "libc-dev"
- 
-@@ -145,7 +145,7 @@ do_prep_locale_tree() {
- 	for i in $treedir/${datadir}/i18n/charmaps/*gz; do 
- 		gunzip $i
- 	done
--	ls ${D}/lib/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
-+	ls ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
- 	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so ]; then
- 		cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so $treedir/lib
- 	fi
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
 
