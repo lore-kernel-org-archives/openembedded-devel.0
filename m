@@ -1,29 +1,36 @@
-Received: from [85.33.3.5] (helo=smtp-OUT05A.alice.it)
+Received: from [209.85.220.220] (helo=mail-fx0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1MCZ4h-0002ow-Cj
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MCZ62-0002rG-R2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 15:03:11 +0200
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-OUT05A.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 5 Jun 2009 14:54:00 +0200
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.1830); 
-	Fri, 5 Jun 2009 14:53:59 +0200
-Received: from [192.168.1.166] ([80.117.37.182]) by FBCMCL01B06.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 5 Jun 2009 14:53:59 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Fri, 05 Jun 2009 15:04:34 +0200
+Received: by fxm20 with SMTP id 20so1489874fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Jun 2009 05:55:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=LtHYdNLS6uLTNYo8l8PHIDMHrZkcCWvCjN8KqI6489Y=;
+	b=ZoC5N3EQzOX+6abR570cREfiaLi+tsCs3hUvcblOWUGckHy53pIAx0TZfS89zP8vHD
+	BfJT6ZrO0dqG+wf+3XBIsTzJe5/varcyA4maoKUhX2tNGONNJu/SVWKzrwo7PnLglEu8
+	km+oi5pDs0PUruUWKq9jXxU9ruB+rs+shui8I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=jKOKZFjYR5IeIaxcRgZqVzubrsiDFqtiNHelitRaji1p6ZU7xMReA7YHZm9uP0l+gY
+	1Ng9PqXQKAiSLEIWf9PosJ/CLrQ6+PnFqKAbksTQFc3jgmjhINxEjcNp3UJSbU6BEu7h
+	kVVkQcLi8SyZ6PjlZHlDVViYfwQGeuxtgbyac=
+MIME-Version: 1.0
+Received: by 10.103.227.10 with SMTP id e10mr1319084mur.9.1244206523608; Fri, 
+	05 Jun 2009 05:55:23 -0700 (PDT)
+In-Reply-To: <974C3B6C9F0A4A43918BACCA33390AC270D44F3464@mail.microsol.ie>
+References: <974C3B6C9F0A4A43918BACCA33390AC270D44F3464@mail.microsol.ie>
+Date: Fri, 5 Jun 2009 15:55:23 +0300
+Message-ID: <fce2a370906050555j7d6bf453o4c5f69c3d3d2e546@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>
-References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
-	<1244144325.6678.0.camel@port4>
-	<BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>
-Date: Fri, 05 Jun 2009 14:53:53 +0200
-Message-Id: <1244206438.6643.46.camel@port4>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.4 
-X-OriginalArrivalTime: 05 Jun 2009 12:53:59.0332 (UTC)
-	FILETIME=[B1AE3640:01C9E5DC]
-Subject: Re: How to convert OE hardware platform from ARM into X86
+Cc: "lucian_ion_2000@yahoo.com" <lucian_ion_2000@yahoo.com>
+Subject: Re: add log4cxx recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,38 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 13:03:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Jun 2009 13:04:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-06-05 at 10:12 +0800, =E5=88=98=E8=8A=B3=E5=8D=8E wrote:
-> NOTE: Runtime target 'gnome-system-tools' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['gnome-system-tools',
-> 'liboobs-1']
-> ERROR: Required build target 'millos-image' has no buildable
-> providers.
-> Missing or unbuildable dependency chain was: ['millos-image',
-> 'gnome-system-tools', 'liboobs-1']
-I've done a fake recipe named gnutoo with a non-existent rdepend and I
-got:
-$ bitbake gnutoo
-__builtin__:74: DeprecationWarning: the sets module is deprecated
-__builtin__:74: DeprecationWarning: the sets module is deprecated
-NOTE: Handling BitBake files: - (6881/6881) [100 %]
-NOTE: Parsing finished. 6602 cached, 1 parsed, 278 skipped, 0 masked.
-NOTE: Resolving any missing task queue dependencies
-ERROR:
-'['/home/embedded/oe/local_recipes/recipes/test/gnutoo_1.0.0.bb']'
-RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
-'aslkjdalskdj' but it wasn't found in any PACKAGE or RPROVIDES variables
-NOTE: Runtime target 'aslkjdalskdj' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['aslkjdalskdj']
-ERROR: Required build target 'gnutoo' has no buildable providers.
-Missing or unbuildable dependency chain was: ['gnutoo', 'aslkjdalskdj']
-so...it seems that you don't have gnome-system-tools and liboobs-1
-already built(by the way I don't find them in oe) or at all
-Denis.
+I think that by sending patches from your workplace you violate your
+company rules. Don't you?
 
-
+On Fri, Jun 5, 2009 at 3:42 PM, Lucian Ion<luciani@microsol.ie> wrote:
+> I apologize for the extra confidential message added automatically by our mail server to all outgoing messages.
+> For the moment I don't have another solution to send this patches.
+> All outgoing ports are blocked.
+> My sendmail (git-send-email) is not working.
+> We don't have smtp server that accepts entries (all ip locked)
+>
+> I've attached the patch for log4cxx new recipe.
+> This is the only way I can contribute.
+> If you don't like this method I'll stop sending patches.
 
 
