@@ -1,24 +1,25 @@
-Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
+Received: from [65.55.111.175] (helo=blu0-omc4-s36.blu0.hotmail.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MCOtT-0006vf-BS
+	(envelope-from <tiankongever@hotmail.com>) id 1MCP42-0003ch-Oh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 04:10:55 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KKQ007Y4TMRY0U7@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	04 Jun 2009 21:01:39 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A0E7C14AF5F; Thu,
-	04 Jun 2009 22:01:38 -0400 (EDT)
-Date: Thu, 04 Jun 2009 22:01:38 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090605020138.GB3406@denix.org>
-References: <loom.20090604T211010-224@post.gmane.org>
-MIME-version: 1.0
-In-reply-to: <loom.20090604T211010-224@post.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: development process
+	Fri, 05 Jun 2009 04:21:50 +0200
+Received: from BLU137-W9 ([65.55.111.137]) by blu0-omc4-s36.blu0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 4 Jun 2009 19:12:42 -0700
+Message-ID: <BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>
+X-Originating-IP: [219.142.122.100]
+From: =?gb2312?B?wfW3vLuq?= <tiankongever@hotmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 5 Jun 2009 10:12:42 +0800
+Importance: Normal
+In-Reply-To: <1244144325.6678.0.camel@port4>
+References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
+	<1244144325.6678.0.camel@port4>
+MIME-Version: 1.0
+X-OriginalArrivalTime: 05 Jun 2009 02:12:42.0124 (UTC)
+	FILETIME=[1B7A34C0:01C9E583]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: How to convert OE hardware platform from ARM into X86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,69 +33,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 02:10:55 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 05 Jun 2009 02:21:51 -0000
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jun 04, 2009 at 09:35:36PM +0000, Michael Sundius wrote:
-> I have two issues with open embedded that I'm wondering if there is already a
-> solution for, or rather, am I totally missing the boat on how things work:
+
+
+
+Hi,Denis:
+   Thank you for you attention!
+   Let me describe the details for you now:
+   The hardware target of OE in my system is ARM.And it was configured and changed by ourselves for some purpose.Now we need to convert the hardware target into X86 on the base of current environment. I didn't  know the exactly step,just tried by myself.But while I go back to the  ARM hardware target environment,after I build ,I meet error:
+
+NOTE: Handling BitBake files: - (6654/6654) [100 %]
+NOTE: Parsing finished. 6367 cached, 1 parsed, 286 skipped, 0 masked.
+NOTE: build 200906051003: started
+sh: git: command not found
+sh: git: command not found
+
+OE Build Configuration:
+BB_VERSION        = "1.8.13"
+METADATA_BRANCH   = "<unknown>"
+METADATA_REVISION = "<unknown>"
+TARGET_ARCH       = "arm"
+TARGET_OS         = "linux-gnueabi"
+MACHINE           = "qsd8x50"
+DISTRO            = "millos"
+DISTRO_VERSION    = "20090605020341"
+TARGET_FPU        = "hard"
+
+NOTE: Resolving any missing task queue dependencies
+NOTE: preferred version 6.5.2 of mesa-dri not available (for item libgl)
+NOTE: preferred version 6.5.2 of mesa-dri not available (for item libglu)
+NOTE: preferred version 1.15 of lcms not available (for item lcms)
+NOTE: preferred version 0.2 of ttf-liberation not available (for item ttf-liberation)
+NOTE: preferred version 2.34 of gpsd not available (for item python-pygps)
+NOTE: preferred version 2.34 of gpsd not available (for item gpsd)
+NOTE: preferred version 2.1.4 of libmusicbrainz not available (for item libmusicbrainz)
+NOTE: preferred version 0.1.5 of vala not available (for item vala)
+NOTE: preferred version 1.15 of lcms not available (for item lcms)
+NOTE: Runtime target 'gnome-system-tools' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['gnome-system-tools', 'liboobs-1']
+ERROR: Required build target 'millos-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['millos-image', 'gnome-system-tools', 'liboobs-1']
+
+
+I tried my best,but still can't resovel the error,help me please,and tell me the correct step for this convert!
+
+ FangHua
+
+
+
+
+> From: GNUtoo@no-log.org
+> To: openembedded-devel@lists.openembedded.org
+> Date: Thu, 4 Jun 2009 21:38:40 +0200
+> Subject: Re: [oe] How to convert OE hardware platform from ARM into X86
 > 
-> 1) regarding toolchains:
-> my understanding is that if you don't want to go through the exercise of
-> building gcc and glibc everytime you create a distribution, then you should use
-> the meta-toolchain.bb recipe to create a installable (tools) distribution and
-> then others can install the resultant on their own machine and use the
-> external-toolchain.bb recipe to integrate it w/ OE, populating the staging area
-> and creating the appropriate packages and what not. (part a: is this correct?)
-
-That is pretty much correct.
-
-> what if the boss says you gotta use the xyz toolchain from blowco inc (that
-> while complete, was not built w/ OE in mind and does not work w/ the
-> external-toolchain.bb recipe). I'm sure someone asked this question before, but
-
-Yep, I went through this before. You may check http://arago-project.org if you 
-are interested, where I have it set up to use pre-built CodeSourcery Lite 
-toolchain.
-
-> is the only recourse to package up the libraries (ala write a recipe) yourself
-
-I had to package the necessary libraries and provide them as a tarball.
-
-> and put them in to oe? is there an example recipe in the openembedded tree that
-> does this already? does someone have an example that they could share?, is there
-
-My process of packaging the libraries is still very hacky and the recipe to do 
-it automatically is buggy and not finished...
-
-If you do it yourself before I find some time to finish mine, please share. :)
-
-> a doc explaining what needs to go where? (or of course am I just off base on my
-> question). could someone please educate me on best way to proceed (ie. the path
-> or least resistance).
+> On Mon, 2009-06-01 at 18:39 +0800, 刘芳华 wrote:
+> > Hi!
+> > 
+> > I need to convert OE hardware platform from ARM into X86,but I don't know the correct step, I tried as follows:
+> >       Change the contents of file  ~/stuff/build/conf/local.conf, the changes are:
+> >                            MACHINE = "i586-generic";
+> >                            #TARGET_ARCH = "arm"
+> >                            TARGET_OS = "linux"
+> > then, build ,but a error occured:
+> >   ERROR: Build of /home/build/stuff/openembedded/packages/xorg-lib/libx11_1.2.1.bb do_compile failed
+> >   ERROR: Task 3164 (/home/build/stuff/openembedded/packages/xorg-lib/libx11_1.2.1.bb, do_compile) failed
+> we need more info on the build error
+> such as the log of the build
+> Denis.
 > 
-> 2) in a more general sense. 
-> as with most embedded systems, a developer working on a single component rarely
-> cares (or knows) about how to build/configure the rest of the systems. it should
-> just work. further when I have a task to fix a bug in said version of my small
-> little corner of the world I don't want to wait hours for the rest of the
-> software to be built before I can test my fix. is there a way to indicate my
-> PREFERRED_PROVIDER for a package/recipe (or even better all by default) is a
-> package feed? again maybe this is done on a regular basis or maybe its a special
-> thing, but I really didn't see any documentation/examples for it. It seems the
-> only reference to a package feed is to allow for easy installation of a system
-> that is already up and running... 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-There was a "freeze" patch few weeks ago from Chris, which generates 
-versions.txt with necessary PREFERRED_VERSION lines for all the packages 
-built. That file can then be included to lock the versions down. I tried this 
-and it worked for me for the most part.
+_________________________________________________________________
+Messenger安全保护中心，免费修复系统漏洞，保护Messenger安全！
+http://im.live.cn/safe/
+From elvis.dowson@mac.com Fri Jun 05 09:12:25 2009
+Received: from [17.148.16.89] (helo=asmtpout014.mac.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <elvis.dowson@mac.com>) id 1MCTbE-0004Ln-Ju
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jun 2009 09:12:25 +0200
+MIME-version: 1.0
+Received: from [87.201.169.29] by asmtp014.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KKR00GWB7L9FF50@asmtp014.mac.com> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	05 Jun 2009 00:03:14 -0700 (PDT)
+Message-id: <A98BBCED-33BD-498A-A42F-2BFB11C2D1ED@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Date: Fri, 05 Jun 2009 11:03:07 +0400
+X-Mailer: Apple Mail (2.935.3)
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7BIT
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [oe] How to copy Ralink RT2571w firmware image to /lib/firmware
+	folder
+X-BeenThere: openembedded-devel@lists.openembedded.org
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: openembedded-devel@lists.openembedded.org
+List-Id: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel.lists.openembedded.org>
+List-Unsubscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/options/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=unsubscribe>
+List-Archive: <http://lists.linuxtogo.org/pipermail/openembedded-devel>
+List-Post: <mailto:openembedded-devel@lists.openembedded.org>
+List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
+List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
+X-List-Received-Date: Fri, 05 Jun 2009 07:12:25 -0000
 
-Later on Koen merged in a different "lockdown" implementation. For that you'd 
-need to inherit lockdown class. I haven't tried this one yet though.
+Hi,
+	I have created a bitbake recipe for the Ralink RT2571w 1.6.4 WiFi  
+network module.
 
--- 
-Denys
+Part of the installation process requires me to copy the a firmware  
+file called rt73.bin to the /lib/firmware folder.
+
+How can I do this?
+
+Here is a link to the firmware file: http://www.ralinktech.com.tw/data/RT71W_Firmware_V1.8.zip
+
+Here is a copy of my bitbake recipe:
+
+Filename: rt2570-k2wrlz_1.6.4.bb
+
+DESCRIPTION = "Enhanced Driver for Ralink rt2570 USB 802.11g WiFi  
+sticks"
+HOMEPAGE = "http://homepages.tu-darmstadt.de/~p_larbig/wlan"
+SECTION = "kernel/modules"
+LICENSE = "GPL"
+
+PR = "r1"
+
+SRC_URI = "http://homepages.tu-darmstadt.de/~p_larbig/wlan/${PN}-$ 
+{PV}.tar.bz2"
+
+inherit module
+
+S = "${WORKDIR}/${PN}-${PV}/Module/"
+
+do_compile_prepend_arm () {
+   MAKE_TARGETS="arm"
+}
+
+do_compile() {
+   export KERNDIR=${STAGING_KERNEL_DIR}
+   module_do_compile
+}
+
+do_install() {
+	install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra
+	install -m 0644 rt2570${KERNEL_OBJECT_SUFFIX} ${D}${base_libdir}/ 
+modules/${KERNEL_VERSION}/extra/
+}
+
+
+Best regards,
+
+Elvis
+
 
 
