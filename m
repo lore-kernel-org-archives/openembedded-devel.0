@@ -1,30 +1,29 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MCZcY-0003E2-Jq
+	(envelope-from <philb@gnu.org>) id 1MCa3o-0006Ct-Cr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 15:38:10 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 7A6214D21DF
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jun 2009 09:29:00 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 13215-01 for <openembedded-devel@lists.openembedded.org>; 
-	Fri,  5 Jun 2009 09:29:00 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 53E304D1E2A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jun 2009 09:29:00 -0400 (EDT)
-Message-ID: <4A291D9C.7040900@cbnco.com>
-Date: Fri, 05 Jun 2009 09:29:00 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
-MIME-Version: 1.0
+	Fri, 05 Jun 2009 16:06:20 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MCZuw-0001wZ-M0
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jun 2009 14:57:10 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MCZuw-0007m6-Ea
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jun 2009 14:57:10 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A291D9C.7040900@cbnco.com>
 References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
 	<1244207469.2611.163.camel@mill.internal.reciva.com>
-In-Reply-To: <1244207469.2611.163.camel@mill.internal.reciva.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
+	<4A291D9C.7040900@cbnco.com>
+Date: Fri, 05 Jun 2009 14:57:10 +0100
+Message-Id: <1244210230.2611.169.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
 Subject: Re: [PATCH] busybox: allow building when prefix is "", not "/usr".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,37 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 13:38:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 05 Jun 2009 14:06:20 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Phil Blundell wrote:
-> On Mon, 2009-05-25 at 23:35 -0400, Michael Smith wrote:
->> For insane backwards compatibility reasons (my own fault) I would like
->> to be able to create packages with no /usr and /sbin == /bin. Most
->> autoconf packages are happy about this; busybox just needs a little
-> 
-> I found one more issuette: busybox udhcpc still expects to find its
-> scripts in /usr/share/udhcpc irrespective of where ${datadir} actually
-> points to (/share in my case).  Can I persuade you to take a look at
-> that?
+On Fri, 2009-06-05 at 09:29 -0400, Michael Smith wrote:
+> This is in the defconfig (CONFIG_UDHCPC_DEFAULT_SCRIPT). We might be 
+> able to get around it by passing 
+> -DCONFIG_UDHCPC_DEFAULT_SCRIPT=${datadir}/udhcpc/default.script as a CFLAG.
 
-This is in the defconfig (CONFIG_UDHCPC_DEFAULT_SCRIPT). We might be 
-able to get around it by passing 
--DCONFIG_UDHCPC_DEFAULT_SCRIPT=${datadir}/udhcpc/default.script as a CFLAG.
+Ah, so it is.
 
-It would make it a bit harder for someone to change the script name for 
-their distro. Should just leave it up to distros to fix the script name, 
-or should I force it as a CFLAG? (BTW, in my distro I pass a flag to 
-udhcpc to use an entirely different script path.)
+How about changing the defconfig file to read:
 
-I've also found it makes life easier to have symlinks for /usr pointing 
-to ., and /sbin pointing to /bin. It means if I miss a hardcoded path in 
-a binary like this, the package still works. But I have to chase down 
-any packages that actually install files to /usr or /sbin -- otherwise 
-when they're upgraded, dpkg removes the symlink and creates a /usr/bin 
-or /sbin with one file in it :)
+CONFIG_UDHCPC_DEFAULT_SCRIPT="!DATADIR!/udhcpc/default.script"
 
-Mike
+and then, in do_configure, replacing the straight "install" with
+something like:
+
+sed 's#!DATADIR!#${datadir}#' < ${WORKDIR}/defconfig > ${S}/.config
+
+Those folks with custom defconfigs shouldn't notice any difference
+unless they were unlucky enough to have written "!DATADIR!" somewhere in
+them. :-}
+
+p.
+
+
 
 
