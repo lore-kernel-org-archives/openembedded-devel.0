@@ -1,20 +1,34 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MCbm9-000490-4i
-	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 17:56:13 +0200
-Received: (qmail 11389 invoked from network); 5 Jun 2009 15:47:02 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 5 Jun 2009 08:47:02 -0700
-Date: Fri, 5 Jun 2009 08:47:02 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090605154701.GV26065@smtp.west.cox.net>
-References: <A98BBCED-33BD-498A-A42F-2BFB11C2D1ED@mac.com>
-MIME-Version: 1.0
-In-Reply-To: <A98BBCED-33BD-498A-A42F-2BFB11C2D1ED@mac.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: How to copy Ralink RT2571w firmware image to	/lib/firmware folder
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MCc3Z-0004im-Kb
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 18:14:13 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MCbug-0004nZ-Mp
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 16:05:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 05 Jun 2009 16:05:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 05 Jun 2009 16:05:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 05 Jun 2009 17:59:54 +0200
+Message-ID: <h0bfdr$mbg$2@ger.gmane.org>
+References: <1243867762-16540-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1244208273-14048-1-git-send-email-marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090531 Shredder/3.0b3pre
+In-Reply-To: <1244208273-14048-1-git-send-email-marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Next set of EP93xx patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,19 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 15:56:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Jun 2009 16:14:13 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jun 05, 2009 at 11:03:07AM +0400, Elvis Dowson wrote:
+On 05-06-09 15:24, Marcin Juszkiewicz wrote:
+> Here I am with another set of patches to make EP93xx cpus working better
+> in OpenEmbedded.
+>
+> This time I merged glibc 2.6.1 and binutils 2.18 patches done by Hasjim
+> Williams and changed a bit Ångström configs for building with Maverick
+> tuning enabled.
+>
+> After rebuilding whole rootfs I got system which works and even gives
+> proper output from 'openssl speed md5' command.
 
-> Hi,
-> 	I have created a bitbake recipe for the Ralink RT2571w 1.6.4 WiFi  
-> network module.
+You can add my acked-by to all 4 patches.
 
-This is already done in the rt73-firmware recipe.
+regards,
 
--- 
-Tom Rini
+Koen
+
 
 
