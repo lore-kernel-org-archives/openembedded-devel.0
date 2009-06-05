@@ -1,28 +1,20 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MCZLH-0003ez-W8
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 15:20:20 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MCZCP-0000Ew-IU
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 14:11:09 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1MCZCP-0007Ps-BC
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 14:11:09 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
-References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
-Date: Fri, 05 Jun 2009 14:11:09 +0100
-Message-Id: <1244207469.2611.163.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: [PATCH] busybox: allow building when prefix is "", not "/usr".
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MCZXU-0002FY-IH
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 15:32:57 +0200
+Received: (qmail 29817 invoked by uid 813007); 5 Jun 2009 13:23:47 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 5 Jun 2009 13:23:47 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri,  5 Jun 2009 15:24:32 +0200
+Message-Id: <1244208273-14048-4-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <1243867762-16540-1-git-send-email-marcin@juszkiewicz.com.pl>
+References: <1243867762-16540-1-git-send-email-marcin@juszkiewicz.com.pl>
+Subject: [PATCH 3/4] angstrom: disable binary locales for ep9312 (tuning) instead of ep93xx (machine)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +28,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 13:20:20 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 05 Jun 2009 13:32:57 -0000
 
-On Mon, 2009-05-25 at 23:35 -0400, Michael Smith wrote:
-> For insane backwards compatibility reasons (my own fault) I would like
-> to be able to create packages with no /usr and /sbin == /bin. Most
-> autoconf packages are happy about this; busybox just needs a little
+ep93xx can be built for armv4t which supports binary locales
 
-I found one more issuette: busybox udhcpc still expects to find its
-scripts in /usr/share/udhcpc irrespective of where ${datadir} actually
-points to (/share in my case).  Can I persuade you to take a look at
-that?
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+---
+ conf/distro/include/angstrom.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-p.
+diff --git a/conf/distro/include/angstrom.inc b/conf/distro/include/angstrom.inc
+index a91efe4..9d4668b 100644
+--- a/conf/distro/include/angstrom.inc
++++ b/conf/distro/include/angstrom.inc
+@@ -54,7 +54,7 @@ THUMB_INTERWORK = "yes"
+ #Use this variable in feeds and other parts that need a URI
+ ANGSTROM_URI ?= "http://www.angstrom-distribution.org"
+ 
+-#Use this variable to select which recipe you want to use to get feed configs (/etc/ipkg/*, /etc/apt/sources.list)
++#Use this variable to select which recipe you want to use to get feed configs (/etc/ipkg/, /etc/apt/sources.list)
+ # usefull for derivative distros and local testing
+ # As this is runtime we can't and won't use virtual/feed-configs
+ ANGSTROM_FEED_CONFIGS ?= "angstrom-feed-configs"
+@@ -100,7 +100,7 @@ ENABLE_BINARY_LOCALE_GENERATION ?= "1"
+ LOCALE_UTF8_ONLY = "1"
+ 
+ #qemu doesn't like this fp
+-ENABLE_BINARY_LOCALE_GENERATION_ep93xx = "0"
++ENABLE_BINARY_LOCALE_GENERATION_ep9312 = "0"
+ 
+ #qemu has taken a dislike to armeb as well
+ ENABLE_BINARY_LOCALE_GENERATION_armeb = "0"
+-- 
+1.6.3.1
+
 
 
 
