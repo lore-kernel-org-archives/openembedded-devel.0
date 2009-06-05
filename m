@@ -1,30 +1,29 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MCa3o-0006Ct-Cr
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 16:06:20 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MCZuw-0001wZ-M0
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 14:57:10 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1MCZuw-0007m6-Ea
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 14:57:10 +0100
-From: Phil Blundell <philb@gnu.org>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MCbkY-00046u-FF
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 17:54:34 +0200
+Received: (qmail 11381 invoked from network); 5 Jun 2009 15:45:23 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 5 Jun 2009 08:45:23 -0700
+Date: Fri, 5 Jun 2009 08:45:23 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A291D9C.7040900@cbnco.com>
-References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
-	<1244207469.2611.163.camel@mill.internal.reciva.com>
-	<4A291D9C.7040900@cbnco.com>
-Date: Fri, 05 Jun 2009 14:57:10 +0100
-Message-Id: <1244210230.2611.169.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: [PATCH] busybox: allow building when prefix is "", not "/usr".
+Message-ID: <20090605154522.GU26065@smtp.west.cox.net>
+References: <20090603151754.GI26065@smtp.west.cox.net>
+	<1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1244043442-3868-2-git-send-email-ihar.hrachyshka@gmail.com>
+	<1244043442-3868-3-git-send-email-ihar.hrachyshka@gmail.com>
+	<1244043442-3868-4-git-send-email-ihar.hrachyshka@gmail.com>
+	<1244043442-3868-5-git-send-email-ihar.hrachyshka@gmail.com>
+	<1244043442-3868-6-git-send-email-ihar.hrachyshka@gmail.com>
+	<1244043442-3868-7-git-send-email-ihar.hrachyshka@gmail.com>
+	<20090603160458.GK26065@smtp.west.cox.net>
+	<fce2a370906050147v358df2f5s9433626b25fe9003@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <fce2a370906050147v358df2f5s9433626b25fe9003@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 06/12] meta-toolchain-qte: initial qt embedded	toolchain version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,32 +37,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 14:06:20 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 05 Jun 2009 15:54:34 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Fri, 2009-06-05 at 09:29 -0400, Michael Smith wrote:
-> This is in the defconfig (CONFIG_UDHCPC_DEFAULT_SCRIPT). We might be 
-> able to get around it by passing 
-> -DCONFIG_UDHCPC_DEFAULT_SCRIPT=${datadir}/udhcpc/default.script as a CFLAG.
+On Fri, Jun 05, 2009 at 11:47:04AM +0300, Ihar Hrachyshka wrote:
+> On Wed, Jun 3, 2009 at 7:04 PM, Tom Rini<trini@embeddedalley.com> wrote:
+> > On Wed, Jun 03, 2009 at 06:37:16PM +0300, Ihar Hrachyshka wrote:
+> >
+> >> +do_populate_sdk_append() {
+> >> +       script = "${SDK_OUTPUT}/${prefix}/environment-setup"
+> >> +       touch $script
+> >> +       echo 'export OE_QMAKE_CC=${TARGET_SYS}-gcc' >> $script
+> >> +       echo 'export OE_QMAKE_CXX=${TARGET_SYS}-g++' >> $script
+> >> +       echo 'export OE_QMAKE_LINK=${TARGET_SYS}-g++' >> $script
+> >> +       echo 'export OE_QMAKE_LIBDIR_QT=${prefix}/${TARGET_SYS}/${layout_libdir}' >> $script
+> >> +       echo 'export OE_QMAKE_INCDIR_QT=${prefix}/${TARGET_SYS}/${layout_includedir}/${QT_DIR_NAME}' >> $script
+> >> +       echo 'export OE_QMAKE_MOC=${prefix}/${layout_bindir}/moc4' >> $script
+> >> +       echo 'export OE_QMAKE_UIC=${prefix}/${layout_bindir}/uic4' >> $script
+> >> +
+> >> +       # Repack SDK with new environment-setup
+> >> +       cd ${SDK_OUTPUT}
+> >> +       fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.bz2 .
+> >> +}
+> >
+> > I see two minor problems.  First, environment-setup is going to exist so
+> > we don't need to touch it again.  In fact, the variable should still be
+> > set, but for clarity we should just comment (in case the file gets
+> > renamed to say environment-setup.sh (if we add in a *csh style one
+> > too)).  Second, we should update, not recreate the tarball (tar -jf ...
+> > --add-file=${prefix}/environment-setup, I think).
+> 
+> 1) Touching existing file is not a problem.
 
-Ah, so it is.
+But changing the name (for say once my *csh using cowork or customer
+bugs me about it) will break here.
 
-How about changing the defconfig file to read:
+> 2) You can't append to compressed tar files.
 
-CONFIG_UDHCPC_DEFAULT_SCRIPT="!DATADIR!/udhcpc/default.script"
+Ah, true.
 
-and then, in do_configure, replacing the straight "install" with
-something like:
-
-sed 's#!DATADIR!#${datadir}#' < ${WORKDIR}/defconfig > ${S}/.config
-
-Those folks with custom defconfigs shouldn't notice any difference
-unless they were unlucky enough to have written "!DATADIR!" somewhere in
-them. :-}
-
-p.
-
-
+-- 
+Tom Rini
 
 
