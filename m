@@ -1,35 +1,28 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MCZIY-0003Zn-P8
+	(envelope-from <philb@gnu.org>) id 1MCZLH-0003ez-W8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 15:17:30 +0200
-Received: by qw-out-1920.google.com with SMTP id 14so865473qwa.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jun 2009 06:08:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=hBCZpJxG/qvczYFI+mOBOCMdWjwcWnxLwUUt5URX4b4=;
-	b=hZ57enteF+5k0TTY9MXAqi2Ov1t5iJ3YBfci3Z5ZelTmTHOy7oTVVE/mRLjgq7mavz
-	1IFFST5mckYClxCycq2frQaq086meIwaRbnRh/JkkyTM96wbo9UIcE1FfKH7H8AV/GpX
-	0jT+eRjLmK+qk0XfsT8ygbasLz+QFpYmbEwmU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=NwJC4DI8IdacGCyJ50UCCcPHOU4V6xFbyqB+Pw/VNdsL6gLLljdWOe8LU65z94sxI/
-	jgr7zdVxLmr8fhLEDm91/129i2LNCZ5wuQg/xt/KOONKRLyU232ve0YtBbw5d/5Na2rJ
-	85CRKqOfSI5jYOaaobqAWUBIIrVH/LIeq64wM=
-MIME-Version: 1.0
-Received: by 10.231.11.140 with SMTP id t12mr919625ibt.44.1244207300501; Fri, 
-	05 Jun 2009 06:08:20 -0700 (PDT)
-In-Reply-To: <1244206798.2611.160.camel@mill.internal.reciva.com>
-References: <1244206798.2611.160.camel@mill.internal.reciva.com>
-Date: Fri, 5 Jun 2009 15:08:20 +0200
-Message-ID: <c384c5ea0906050608j3b3ace50x81e5ac4983a174ec@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Fri, 05 Jun 2009 15:20:20 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MCZCP-0000Ew-IU
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jun 2009 14:11:09 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MCZCP-0007Ps-BC
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jun 2009 14:11:09 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [patch] micro: eliminate some further bloat
+In-Reply-To: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
+References: <1243308909-9724-1-git-send-email-msmith@cbnco.com>
+Date: Fri, 05 Jun 2009 14:11:09 +0100
+Message-Id: <1244207469.2611.163.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: Re: [PATCH] busybox: allow building when prefix is "", not "/usr".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,17 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 13:17:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Jun 2009 13:20:20 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jun 5, 2009 at 2:59 PM, Phil Blundell<philb@gnu.org> wrote:
-> Almost the entire contents of the base-files package is unnecessary in a
-> micro-type environment, some of it (e.g. /usr/games) laughably so. =A0The
+On Mon, 2009-05-25 at 23:35 -0400, Michael Smith wrote:
+> For insane backwards compatibility reasons (my own fault) I would like
+> to be able to create packages with no /usr and /sbin == /bin. Most
+> autoconf packages are happy about this; busybox just needs a little
 
-Acked-by: Leon Woestenberg <leon@sidebranch.com>
+I found one more issuette: busybox udhcpc still expects to find its
+scripts in /usr/share/udhcpc irrespective of where ${datadir} actually
+points to (/share in my case).  Can I persuade you to take a look at
+that?
 
---=20
-Leon
+p.
+
+
 
 
