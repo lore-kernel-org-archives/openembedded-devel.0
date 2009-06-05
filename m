@@ -1,29 +1,20 @@
 Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MCbkY-00046u-FF
-	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 17:54:34 +0200
-Received: (qmail 11381 invoked from network); 5 Jun 2009 15:45:23 -0000
+	(envelope-from <trini@embeddedalley.com>) id 1MCbm9-000490-4i
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 17:56:13 +0200
+Received: (qmail 11389 invoked from network); 5 Jun 2009 15:47:02 -0000
 Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 5 Jun 2009 08:45:23 -0700
-Date: Fri, 5 Jun 2009 08:45:23 -0700
+	by easi.embeddedalley.com with SMTP; 5 Jun 2009 08:47:02 -0700
+Date: Fri, 5 Jun 2009 08:47:02 -0700
 From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090605154522.GU26065@smtp.west.cox.net>
-References: <20090603151754.GI26065@smtp.west.cox.net>
-	<1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-2-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-3-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-4-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-5-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-6-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-7-git-send-email-ihar.hrachyshka@gmail.com>
-	<20090603160458.GK26065@smtp.west.cox.net>
-	<fce2a370906050147v358df2f5s9433626b25fe9003@mail.gmail.com>
+Message-ID: <20090605154701.GV26065@smtp.west.cox.net>
+References: <A98BBCED-33BD-498A-A42F-2BFB11C2D1ED@mac.com>
 MIME-Version: 1.0
-In-Reply-To: <fce2a370906050147v358df2f5s9433626b25fe9003@mail.gmail.com>
+In-Reply-To: <A98BBCED-33BD-498A-A42F-2BFB11C2D1ED@mac.com>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [PATCH 06/12] meta-toolchain-qte: initial qt embedded	toolchain version
+Subject: Re: How to copy Ralink RT2571w firmware image to	/lib/firmware folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,46 +28,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 15:54:34 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Fri, 05 Jun 2009 15:56:13 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Fri, Jun 05, 2009 at 11:47:04AM +0300, Ihar Hrachyshka wrote:
-> On Wed, Jun 3, 2009 at 7:04 PM, Tom Rini<trini@embeddedalley.com> wrote:
-> > On Wed, Jun 03, 2009 at 06:37:16PM +0300, Ihar Hrachyshka wrote:
-> >
-> >> +do_populate_sdk_append() {
-> >> +       script = "${SDK_OUTPUT}/${prefix}/environment-setup"
-> >> +       touch $script
-> >> +       echo 'export OE_QMAKE_CC=${TARGET_SYS}-gcc' >> $script
-> >> +       echo 'export OE_QMAKE_CXX=${TARGET_SYS}-g++' >> $script
-> >> +       echo 'export OE_QMAKE_LINK=${TARGET_SYS}-g++' >> $script
-> >> +       echo 'export OE_QMAKE_LIBDIR_QT=${prefix}/${TARGET_SYS}/${layout_libdir}' >> $script
-> >> +       echo 'export OE_QMAKE_INCDIR_QT=${prefix}/${TARGET_SYS}/${layout_includedir}/${QT_DIR_NAME}' >> $script
-> >> +       echo 'export OE_QMAKE_MOC=${prefix}/${layout_bindir}/moc4' >> $script
-> >> +       echo 'export OE_QMAKE_UIC=${prefix}/${layout_bindir}/uic4' >> $script
-> >> +
-> >> +       # Repack SDK with new environment-setup
-> >> +       cd ${SDK_OUTPUT}
-> >> +       fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.bz2 .
-> >> +}
-> >
-> > I see two minor problems.  First, environment-setup is going to exist so
-> > we don't need to touch it again.  In fact, the variable should still be
-> > set, but for clarity we should just comment (in case the file gets
-> > renamed to say environment-setup.sh (if we add in a *csh style one
-> > too)).  Second, we should update, not recreate the tarball (tar -jf ...
-> > --add-file=${prefix}/environment-setup, I think).
-> 
-> 1) Touching existing file is not a problem.
+On Fri, Jun 05, 2009 at 11:03:07AM +0400, Elvis Dowson wrote:
 
-But changing the name (for say once my *csh using cowork or customer
-bugs me about it) will break here.
+> Hi,
+> 	I have created a bitbake recipe for the Ralink RT2571w 1.6.4 WiFi  
+> network module.
 
-> 2) You can't append to compressed tar files.
-
-Ah, true.
+This is already done in the rt73-firmware recipe.
 
 -- 
 Tom Rini
