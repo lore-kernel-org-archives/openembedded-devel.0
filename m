@@ -1,43 +1,32 @@
-Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MCVDi-0000mf-SY
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Jun 2009 10:56:14 +0200
-Received: by bwz19 with SMTP id 19so1331126bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jun 2009 01:47:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=pEWiQmR+tqXhA6cipaONVzZ76hZ5uSSOLoGjRMSP0c8=;
-	b=oyCk0/pT/T5QALcMo2sFnkOJinatxHLcnDdepe4YTrhKs2x1iiOfDGXWK99a4mRziR
-	+nUuxhUqp2aGXn3jEoaGIPnqWA4G8lrgUSWG0tGnOZYzvxrt/GjorhS+r5vS39w7hJDq
-	fHaoCS00OVQd7saFrwNJWgOJy2g3I2qoZekKc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=cXu2bkaCOLPSQlPrLgXAFWqHOhyI7OO+KHPEBsOWaDvTq2WdUOP6z+MYhqy7QATLlq
-	KmgQ59l4jKr5TMuoKlbXsFiUHI0aMi+z2APeGEAAAAEvo4kUUtonEN39JBEtmFlYmuzp
-	sjFQnJaaY2hajlXU91q3M7KhScCWprjPpkNWI=
-MIME-Version: 1.0
-Received: by 10.102.228.19 with SMTP id a19mr2032189muh.10.1244191624293; Fri, 
-	05 Jun 2009 01:47:04 -0700 (PDT)
-In-Reply-To: <20090603160458.GK26065@smtp.west.cox.net>
-References: <20090603151754.GI26065@smtp.west.cox.net>
-	<1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-2-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-3-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-4-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-5-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-6-git-send-email-ihar.hrachyshka@gmail.com>
-	<1244043442-3868-7-git-send-email-ihar.hrachyshka@gmail.com>
-	<20090603160458.GK26065@smtp.west.cox.net>
-Date: Fri, 5 Jun 2009 11:47:04 +0300
-Message-ID: <fce2a370906050147v358df2f5s9433626b25fe9003@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 06/12] meta-toolchain-qte: initial qt embedded toolchain version
+	(envelope-from <rpurdie@rpsys.net>) id 1MCVa1-0001JI-HQ
+	for openembedded-devel@openembedded.org; Fri, 05 Jun 2009 11:19:17 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5599xs5005829 for <openembedded-devel@openembedded.org>;
+	Fri, 5 Jun 2009 10:09:59 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id G+W1StUiDghK for <openembedded-devel@openembedded.org>;
+	Fri,  5 Jun 2009 10:09:59 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5599pm4005793
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>;
+	Fri, 5 Jun 2009 10:09:55 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20090605020138.GB3406@denix.org>
+References: <loom.20090604T211010-224@post.gmane.org>
+	<20090605020138.GB3406@denix.org>
+Date: Fri, 05 Jun 2009 10:08:53 +0100
+Message-Id: <1244192933.5971.12.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: development process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,59 +40,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2009 08:56:15 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 Jun 2009 09:19:17 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 3, 2009 at 7:04 PM, Tom Rini<trini@embeddedalley.com> wrote:
-> On Wed, Jun 03, 2009 at 06:37:16PM +0300, Ihar Hrachyshka wrote:
->
->> +do_populate_sdk_append() {
->> + =C2=A0 =C2=A0 =C2=A0 script =3D "${SDK_OUTPUT}/${prefix}/environment-s=
-etup"
->> + =C2=A0 =C2=A0 =C2=A0 touch $script
->> + =C2=A0 =C2=A0 =C2=A0 echo 'export OE_QMAKE_CC=3D${TARGET_SYS}-gcc' >> =
-$script
->> + =C2=A0 =C2=A0 =C2=A0 echo 'export OE_QMAKE_CXX=3D${TARGET_SYS}-g++' >>=
- $script
->> + =C2=A0 =C2=A0 =C2=A0 echo 'export OE_QMAKE_LINK=3D${TARGET_SYS}-g++' >=
-> $script
->> + =C2=A0 =C2=A0 =C2=A0 echo 'export OE_QMAKE_LIBDIR_QT=3D${prefix}/${TAR=
-GET_SYS}/${layout_libdir}' >> $script
->> + =C2=A0 =C2=A0 =C2=A0 echo 'export OE_QMAKE_INCDIR_QT=3D${prefix}/${TAR=
-GET_SYS}/${layout_includedir}/${QT_DIR_NAME}' >> $script
->> + =C2=A0 =C2=A0 =C2=A0 echo 'export OE_QMAKE_MOC=3D${prefix}/${layout_bi=
-ndir}/moc4' >> $script
->> + =C2=A0 =C2=A0 =C2=A0 echo 'export OE_QMAKE_UIC=3D${prefix}/${layout_bi=
-ndir}/uic4' >> $script
->> +
->> + =C2=A0 =C2=A0 =C2=A0 # Repack SDK with new environment-setup
->> + =C2=A0 =C2=A0 =C2=A0 cd ${SDK_OUTPUT}
->> + =C2=A0 =C2=A0 =C2=A0 fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUT=
-NAME}.tar.bz2 .
->> +}
->
-> I see two minor problems. =C2=A0First, environment-setup is going to exis=
-t so
-> we don't need to touch it again. =C2=A0In fact, the variable should still=
- be
-> set, but for clarity we should just comment (in case the file gets
-> renamed to say environment-setup.sh (if we add in a *csh style one
-> too)). =C2=A0Second, we should update, not recreate the tarball (tar -jf =
-...
-> --add-file=3D${prefix}/environment-setup, I think).
+On Thu, 2009-06-04 at 22:01 -0400, Denys Dmytriyenko wrote:
+> On Thu, Jun 04, 2009 at 09:35:36PM +0000, Michael Sundius wrote:
+> > I have two issues with open embedded that I'm wondering if there is already a
+> > solution for, or rather, am I totally missing the boat on how things work:
+> > 
+> > 1) regarding toolchains:
+> > my understanding is that if you don't want to go through the exercise of
+> > building gcc and glibc everytime you create a distribution, then you should use
+> > the meta-toolchain.bb recipe to create a installable (tools) distribution and
+> > then others can install the resultant on their own machine and use the
+> > external-toolchain.bb recipe to integrate it w/ OE, populating the staging area
+> > and creating the appropriate packages and what not. (part a: is this correct?)
+> 
+> That is pretty much correct.
+> 
+> > what if the boss says you gotta use the xyz toolchain from blowco inc (that
+> > while complete, was not built w/ OE in mind and does not work w/ the
+> > external-toolchain.bb recipe). I'm sure someone asked this question before, but
+> 
+> Yep, I went through this before. You may check http://arago-project.org if you 
+> are interested, where I have it set up to use pre-built CodeSourcery Lite 
+> toolchain.
 
-1) Touching existing file is not a problem.
-2) You can't append to compressed tar files.
+Most toolchains can be made to work with OE. Poky has recipes for
+external CSL coolchains for example:
 
->
-> --
-> Tom Rini
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+http://git.pokylinux.org/cgit.cgi/poky/tree/meta/packages/meta/external-csl-toolchain_2008q3-72.bb
+
+> > is the only recourse to package up the libraries (ala write a recipe) yourself
+> 
+> I had to package the necessary libraries and provide them as a tarball.
+> 
+> > and put them in to oe? is there an example recipe in the openembedded tree that
+> > does this already? does someone have an example that they could share?, is there
+> 
+> My process of packaging the libraries is still very hacky and the recipe to do 
+> it automatically is buggy and not finished...
+> 
+> If you do it yourself before I find some time to finish mine, please share. :)
+
+See above. That packages up the needed bits for the CSL toolchain and
+should be adaptable to other situations.
+
+> > a doc explaining what needs to go where? (or of course am I just off base on my
+> > question). could someone please educate me on best way to proceed (ie. the path
+> > or least resistance).
+> > 
+> > 2) in a more general sense. 
+> > as with most embedded systems, a developer working on a single component rarely
+> > cares (or knows) about how to build/configure the rest of the systems. it should
+> > just work. further when I have a task to fix a bug in said version of my small
+> > little corner of the world I don't want to wait hours for the rest of the
+> > software to be built before I can test my fix. is there a way to indicate my
+> > PREFERRED_PROVIDER for a package/recipe (or even better all by default) is a
+> > package feed? again maybe this is done on a regular basis or maybe its a special
+> > thing, but I really didn't see any documentation/examples for it. It seems the
+> > only reference to a package feed is to allow for easy installation of a system
+> > that is already up and running... 
+> 
+> There was a "freeze" patch few weeks ago from Chris, which generates 
+> versions.txt with necessary PREFERRED_VERSION lines for all the packages 
+> built. That file can then be included to lock the versions down. I tried this 
+> and it worked for me for the most part.
+> 
+> Later on Koen merged in a different "lockdown" implementation. For that you'd 
+> need to inherit lockdown class. I haven't tried this one yet though.
+
+What is really being requested here is packaged-staging.
+Packaged-staging will build packages which can reconstruct the key OE
+build directories. What it doesn't yet support is autodownloading of the
+staging packages from a remote server but that shouldn't be hard to add.
+
+There is a ton of documentation about packaged staging out there so I'd
+suggest finding and reading it before reinventing the wheel.
+
+Cheers,
+
+Richard
+
+
 
 
