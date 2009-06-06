@@ -1,25 +1,24 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
+Received: from [17.148.16.93] (helo=asmtpout018.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MCrwj-0008V3-27
+	(envelope-from <elvis.dowson@mac.com>) id 1MCsBG-0005iO-Qi
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Jun 2009 11:12:13 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KKT00KJ77SVJB99@vms173011.mailsrvcs.net> for
+	Sat, 06 Jun 2009 11:27:15 +0200
+MIME-version: 1.0
+Received: from [87.201.169.139] by asmtp018.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KKT00AW98HTR340@asmtp018.mac.com> for
 	openembedded-devel@lists.openembedded.org; Sat,
-	06 Jun 2009 04:02:56 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id DB8D214AF5F; Sat,
-	06 Jun 2009 05:02:54 -0400 (EDT)
-Date: Sat, 06 Jun 2009 05:02:54 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	06 Jun 2009 02:17:57 -0700 (PDT)
+Message-id: <32C63161-F52F-47E5-BEE8-229FA59A6758@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090606090254.GA14042@denix.org>
+In-reply-to: <20090606090254.GA14042@denix.org>
+Date: Sat, 06 Jun 2009 13:17:49 +0400
 References: <046B8D02-FF75-4D9E-BBB9-2D2DF22E37BC@mac.com>
 	<20090606074606.GF4988@denix.org>
 	<EE778AE5-9E7A-4138-A500-2466E830C8DA@mac.com>
-MIME-version: 1.0
-In-reply-to: <EE778AE5-9E7A-4138-A500-2466E830C8DA@mac.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+	<20090606090254.GA14042@denix.org>
+X-Mailer: Apple Mail (2.935.3)
 Subject: Re: Where do the extra #include <mach/board-overo.h> come	from in linux-omap3-2.6.29.bb recipe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,33 +33,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jun 2009 09:12:13 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 06 Jun 2009 09:27:15 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-On Sat, Jun 06, 2009 at 12:00:46PM +0400, Elvis Dowson wrote:
-> Thanks Denys,
-> 				So shall I just comment out the SRCREV entry? How do I find out what 
-> the current SRCREV value is, as of today, to lock down on a particular 
-> SRCREV version?
+Hi Denys,
+			
+On Jun 6, 2009, at 1:02 PM, Denys Dmytriyenko wrote:
 
-$ git log -1
-
-That would show you the last commit with its hash#.
-
-Or you can go to gitweb and select any commit from the list and get its hash#:
-http://git.kernel.org/?p=linux/kernel/git/tmlind/linux-omap-2.6.git 
-
-
-> On Jun 6, 2009, at 11:46 AM, Denys Dmytriyenko wrote:
+>>
 >
->>> aster branch?
->>
->> The recipe pulls 2.6.29 version (specified by SRCREV), while you are 
->> looking
->> at the latest source after git clone. Somewhere in between the file was
->> removed:
->>
->> http://git.kernel.org/?p=linux/kernel/git/tmlind/linux-omap-2.6.git;a=commitdiff;h=ed99db8e5c53acced1a7c02aa9a94d50bea48409
+> $ git log -1
+>
+> That would show you the last commit with its hash#.
+>
+> Or you can go to gitweb and select any commit from the list and get  
+> its hash#:
+> http://git.kernel.org/?p=linux/kernel/git/tmlind/linux-omap-2.6.git
+>
+
+I tried that but I get a  "fatal: Not a git repository" error:
+
+bitbake -c rebuild linux-omap3-2.6.29
+NOTE: Handling BitBake files: | (6810/6810) [100 %]
+NOTE: Parsing finished. 6541 cached, 0 parsed, 269 skipped, 2 masked.
+NOTE: Cache is clean, not saving.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 305 of 546 (ID: 2, /tool/overo-oe/user.collection/ 
+recipes/linux/linux-omap3_2.6.29.bb, do_setscene)
+NOTE: Running task 527 of 546 (ID: 3, /tool/overo-oe/user.collection/ 
+recipes/linux/linux-omap3_2.6.29.bb, do_fetch)
+fatal: Not a git repository
+NOTE: Task failed: Fetch failed: Fetch command export HOME=/home/ 
+elvis; export SSH_AUTH_SOCK=/tmp/keyring-M40Rvw/ssh; export PATH=/tool/ 
+overo-oe/tmp/staging/i686-linux/usr/bin/overo-angstrom-linux-gnueabi:/ 
+tool/overo-oe/tmp/staging/i686-linux/usr/bin/armv7a-angstrom-linux- 
+gnueabi:/tool/overo-oe/tmp/staging/i686-linux/usr/sbin:/tool/overo-oe/ 
+tmp/staging/i686-linux/usr/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
+tool/overo-oe/tmp/staging/i686-linux/sbin:/tool/overo-oe/tmp/staging/ 
+i686-linux/bin:/tool/repo:/tool/android/out/host/linux-x86/bin:/tool/ 
+script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
+usr/java/jdk1.6.0_12/bin:/tool/repo:/tool/android/out/host/linux-x86/ 
+bin:/tool/script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/ 
+armv7a/bin:/usr/java/jdk1.6.0_12/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/ 
+bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/ 
+sbin:/sbin:/home/elvis/bin; git fetch git://git.kernel.org/pub/scm/ 
+linux/kernel/git/tmlind/linux-omap-2.6.git master failed with signal  
+128, output:
+fatal: Not a git repository
+
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /tool/overo-oe/user.collection/recipes/linux/linux- 
+omap3_2.6.29.bb do_fetch failed
+ERROR: Task 3 (/tool/overo-oe/user.collection/recipes/linux/linux- 
+omap3_2.6.29.bb, do_fetch) failed
+NOTE: Tasks Summary: Attempted 526 tasks of which 525 didn't need to  
+be rerun and 1 failed.
+ERROR: '/tool/overo-oe/user.collection/recipes/linux/linux- 
+omap3_2.6.29.bb' failed
+
+What should I do?
+
+Best regards,
+
+Elvis
 
 
