@@ -1,25 +1,21 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [17.148.16.93] (helo=asmtpout018.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1MCpoS-00033J-Ip
+	(envelope-from <elvis.dowson@mac.com>) id 1MCqRC-0008Pk-7j
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Jun 2009 08:55:32 +0200
-Received: from andromeda.vanille.de (e180144208.adsl.alicedsl.de
-	[85.180.144.208])
-	by drlauer-research.com (Postfix) with ESMTP id 75D315849CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Jun 2009 09:18:48 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 6 Jun 2009 08:46:30 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
-References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
-	<1244145476.6678.4.camel@port4>
-	<f96d234e0906051443y3d0cfcf0m595469c780c9fed@mail.gmail.com>
-In-Reply-To: <f96d234e0906051443y3d0cfcf0m595469c780c9fed@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200906060846.30822.mickey@vanille-media.de>
-Subject: Re: progress on OE organization issues
+	Sat, 06 Jun 2009 09:35:34 +0200
+MIME-version: 1.0
+Received: from [87.201.169.139] by asmtp018.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KKT00BPG3BI1270@asmtp018.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	06 Jun 2009 00:26:17 -0700 (PDT)
+Message-id: <046B8D02-FF75-4D9E-BBB9-2D2DF22E37BC@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Date: Sat, 06 Jun 2009 11:26:12 +0400
+X-Mailer: Apple Mail (2.935.3)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Where do the extra #include <mach/board-overo.h> come from in linux-omap3-2.6.29.bb recipe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,35 +29,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jun 2009 06:55:33 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sat, 06 Jun 2009 07:35:34 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7BIT
 
-On Friday 05 June 2009 23:43:58 Cliff Brake wrote:
-> On Thu, Jun 4, 2009 at 3:57 PM, GNUtoo<GNUtoo@no-log.org> wrote:
-> > by the way why don't we join an umbrella organization?
->
-> The is the response I received from SFC folks:
->
-> ========================
-> As for your question with regard to how long an application takes,
-> typically we are 6-8 month backlogged.  I can tell you though, that
-> we've had another application pending for more than a year in the same
-> eV situation you are considering here.  We simply don't have the
-> resources yet to devote to that question, despite a project still
-> awaiting that answer.
-> ========================
->
-> So, I guess you get what you pay for.  Not that we are moving any
-> faster with the eV, but I guess the bottom line is that it is not easy
-> unless you are paying someone to dedicate time to keeping it moving.
+Hi,
+	I am using the overo-oe repository.
 
-Indeed. Not to mention that we evaluated all the options (including joining 
-one of the umbrella orgs) alreadyy before attempting to create the e.V.
+I have a linux-omap3-2.6.29.bb recipe that pulls in the sources from  
+the master branch of the linux-omap-2.6 repository, as follows:
 
-:M:
+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux- 
+omap-2.6.git;branch=master;protocol=git \
+	   file://defconfig \
+
+If I run the bitbake linux-omap3-2.6.29 command in the /tool/overo-oe/ 
+tmp/work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.29-r41/git/arch/ 
+arm/mach-omap2/board-overo.c file,
+
+on line 41, there is a #include <mach/board-overo.h> entry as shown  
+below.
+
+39 #include <asm/mach/map.h>
+40
+41 #include <mach/board-overo.h>
+42 #include <mach/board.h>
+
+
+Now, I have in a separate folder, cloned the same repository using the  
+following command:
+
+$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux- 
+omap-2.6.git
+
+However, when I look at arch/arm/mach-omap2/board-overo.c file, the  
+#include <mach/board-overo.h> entry is missing
+
+39 #include <asm/mach/map.h>
+40
+41 #include <mach/board.h>
+
+What task is contributing to this extra code, when I run the bitbake  
+recipe, compared to the original linux-omap-2.6 master branch?
+
+I'm trying to patch in Tomi's DSS2 and Kevin's PM patches, for the  
+Overo by modifying the linux-omap3-2.6.29.bb recipe. I'm getting stuck  
+because of this apparent difference, and cannot make modifications to  
+Tomi's patch files without first being able to manually fast forward  
+to the appropriate state.
+
+Best regards,
+
+Elvis
+
+
+# Linux OMAP3 2.6.29 recipie
+DEFAULT_PREFERENCE = 1
+
+# Required packages
+require linux.inc
+
+# Package information
+DESCRIPTION = "Linux kernel for OMAP3 processors"
+KERNEL_IMAGETYPE = "uImage"
+
+COMPATIBLE_MACHINE = "beagleboard|omap3evm|overo"
+
+SRCREV = "90e758af52ba803cba233fabee81176d99589f09"
+
+PN = "linux-omap3"
+PV = "2.6.29"
+PR = "r41"
+
+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux- 
+omap-2.6.git;branch=master;protocol=git \
+	   file://defconfig \
+           "
+
+SRC_URI_append = " \
+            "
+
+
+SRC_URI_append_beagleboard = " \
+            file://beagle-ehci.patch;patch=1 \
+           "
+
+SRC_URI_append_omap3evm = " \
+           "
+
+SRC_URI_append_overo = " \
+           "
+
+
+S = "${WORKDIR}/git"
 
 
 
