@@ -1,20 +1,32 @@
-Received: from [17.148.16.91] (helo=asmtpout016.mac.com)
+Received: from [209.85.220.220] (helo=mail-fx0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MD1tk-0004a0-Dg
+	(envelope-from <mateusz.kijowski@gmail.com>) id 1MD3Gb-0003fB-04
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Jun 2009 21:49:48 +0200
-MIME-version: 1.0
-Received: from [87.201.169.139] by asmtp016.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KKU00IH419KE350@asmtp016.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	06 Jun 2009 12:39:47 -0700 (PDT)
-Message-id: <566B08B2-D65A-449D-B2B8-53C2AFF7DD67@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
+	Sat, 06 Jun 2009 23:17:29 +0200
+Received: by fxm20 with SMTP id 20so2244471fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Jun 2009 14:08:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=dLwFWoylAWsUS81Q5uNVacZwrfXDohkZPYRHT5EvJKw=;
+	b=PXDw+KT2bpfM1IJ3fXmOgXUmxGcs4m5/EMTmq0VI4bKtRn9G/sxsRBywwvWwosUcyR
+	MHVLo0j6enLx2Q+pfgwD8Pz9AMvaY+ymeakTgpBA9W6F7CYiFHgW3z0/1UVKgcDEEgst
+	J4yNlax9x/bpS7kY6f3qoOFkhE1xzs8eAvO7I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Ad+/iGht2lv0R6aU+QlaugCOyGHUXMGwpX8OtLCv+WEQySzVCQKd82CSP8zpH8FY1F
+	Pe/XodtodqTPcdsyzykzR4H++4qVcbJU8Pz2Ud71CU+GAVdqtKxDW1L0ecaox8tw5UIm
+	01DZDUrOud2c3Ypc7ClsTfcVRmH97nrSK0Etc=
+MIME-Version: 1.0
+Received: by 10.223.116.72 with SMTP id l8mr2890709faq.33.1244322489137; Sat, 
+	06 Jun 2009 14:08:09 -0700 (PDT)
+Date: Sat, 6 Jun 2009 23:08:09 +0200
+Message-ID: <921557650906061408x129a09c6j53d0e0a971a5eac8@mail.gmail.com>
+From: Mateusz Kijowski <mateusz.kijowski@gmail.com>
 To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Sat, 06 Jun 2009 23:39:40 +0400
-X-Mailer: Apple Mail (2.935.3)
-Subject: How to create recipe for linux-omap3-2.6.30
+Subject: [PATCH] netvista 8363/N2200 machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,89 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jun 2009 19:49:48 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Sat, 06 Jun 2009 21:17:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
 Hi,
-	I'm trying to create a recipe to for linux-omap3-2.6.30-rc6. But I  
-get a fatal: Not a git repository error each time. I've based this off  
-the linux-omap3_git.bb recipe.
-
-In my user.collection/recipes/linux/linux-omap3_2.6.30.bb file, I have  
-the following entries:
-
-# Linux OMAP3 2.6.30 recipie
-DEFAULT_PREFERENCE = 1
-
-# Required packages
-require linux.inc
-
-# Package information
-DESCRIPTION = "Linux kernel for OMAP3 processors"
-KERNEL_IMAGETYPE = "uImage"
-
-COMPATIBLE_MACHINE = "beagleboard|omap3evm|overo"
-
-# Specify the source revision tag
-SRCREV = "efea6e3fd0f22b45f2a9f01962603b564b3a25a0"
-
-PN = "linux-omap3"
-PV = "2.6.30-rc6+${PR}+git${SRCREV}"
-#PV = "2.6.30"
-PR = "r01"
-
-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux- 
-omap-2.6.git;branch=master;protocol=git \
-	   file://defconfig \	
-           "
-
-running bitbake linux-omap3 gives me the following error:
-
-[elvis@zeus overo-oe]$ bitbake linux-omap3
-NOTE: Handling BitBake files: / (6811/6811) [100 %]
-NOTE: Parsing finished. 6541 cached, 1 parsed, 269 skipped, 2 masked.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 305 of 545 (ID: 1, /tool/overo-oe/user.collection/ 
-recipes/linux/linux-omap3_2.6.30.bb, do_setscene)
-NOTE: Running task 527 of 545 (ID: 2, /tool/overo-oe/user.collection/ 
-recipes/linux/linux-omap3_2.6.30.bb, do_fetch)
-fatal: Not a git repository
-NOTE: Task failed: Fetch failed: Fetch command export HOME=/home/ 
-elvis; export SSH_AUTH_SOCK=/tmp/keyring-PVwYzf/ssh; export PATH=/tool/ 
-overo-oe/tmp/staging/i686-linux/usr/bin/overo-angstrom-linux-gnueabi:/ 
-tool/overo-oe/tmp/staging/i686-linux/usr/bin/armv7a-angstrom-linux- 
-gnueabi:/tool/overo-oe/tmp/staging/i686-linux/usr/sbin:/tool/overo-oe/ 
-tmp/staging/i686-linux/usr/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
-tool/overo-oe/tmp/staging/i686-linux/sbin:/tool/overo-oe/tmp/staging/ 
-i686-linux/bin:/tool/repo:/tool/android/out/host/linux-x86/bin:/tool/ 
-script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
-usr/java/jdk1.6.0_12/bin:/tool/repo:/tool/android/out/host/linux-x86/ 
-bin:/tool/script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/ 
-armv7a/bin:/usr/java/jdk1.6.0_12/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/ 
-bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/ 
-sbin:/sbin:/home/elvis/bin; git fetch git://git.kernel.org/pub/scm/ 
-linux/kernel/git/tmlind/linux-omap-2.6.git master failed with signal  
-128, output:
-fatal: Not a git repository
-
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /tool/overo-oe/user.collection/recipes/linux/linux- 
-omap3_2.6.30.bb do_fetch failed
-ERROR: Task 2 (/tool/overo-oe/user.collection/recipes/linux/linux- 
-omap3_2.6.30.bb, do_fetch) failed
-NOTE: Tasks Summary: Attempted 526 tasks of which 525 didn't need to  
-be rerun and 1 failed.
-ERROR: '/tool/overo-oe/user.collection/recipes/linux/linux- 
-omap3_2.6.30.bb' failed
 
 
-Best regards,
+This patch adds support for the IBM Netvista 8363/N2200 internet
+appliance. Its a PC-like thin client based on NSC/Cyrix Geode GX1
+chip with a CF slot and SDRAM additional memory socket. Firmware
+is somewhat broken - it expects a file named kernel.2x00 with peculiar
+ELF header values (object count has to be set to 1) on a ext2 filesystem
+on /dev/sda1.
 
-Elvis
+This is my first patch for OpenEmbedded, but I've been lurking this
+list for quite a while. I suppose I could merge linux-netvista8363 recipe
+to linux recipe but I am not sure if it's a better apporach when the latest
+bootable kernel version is not recent (2.6.24.7). Please be gentle :-)
 
-
+--
+Mateusz
 
 
