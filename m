@@ -1,32 +1,25 @@
-Received: from [63.80.53.70] (helo=smtp-relay1.palm.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <prvs=Michael.Morrell=4017be958@palm.com>)
-	id 1MCpIH-0006gf-Cl
-	for openembedded-devel@openembedded.org; Sat, 06 Jun 2009 08:22:17 +0200
-X-IronPort-AV: E=Sophos;i="4.41,314,1241420400"; d="scan'208";a="14501288"
-Received: from unknown (HELO mailhost02.palm.com) ([148.92.223.90])
-	by smtp-relay1.palm.com with ESMTP; 05 Jun 2009 23:13:00 -0700
-Received: from ushqwmh02.palm1.palmone.com (ushqwmh02.palm1.palmone.com
-	[148.92.223.143])
-	by mailhost02.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
-	n566Cc66028300 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 5 Jun 2009 23:13:00 -0700 (PDT)
-Received: from ushqwmb02.palm1.palmone.com ([148.92.223.121]) by
-	ushqwmh02.palm1.palmone.com ([148.92.223.143]) with mapi;
-	Fri, 5 Jun 2009 23:12:38 -0700
-From: Michael Morrell <Michael.Morrell@palm.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@openembedded.org>
-Date: Fri, 5 Jun 2009 23:12:37 -0700
-Thread-Topic: populate_staging history question
-Thread-Index: AcnmbcoFxIfyr5E7SOSUUI6TCmKLSg==
-Message-ID: <D15778FFF6A6CA4FAF01B8D2C378030033D06FF8AE@ushqwmb02.palm1.palmone.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	(envelope-from <mickey@vanille-media.de>) id 1MCpoS-00033J-Ip
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Jun 2009 08:55:32 +0200
+Received: from andromeda.vanille.de (e180144208.adsl.alicedsl.de
+	[85.180.144.208])
+	by drlauer-research.com (Postfix) with ESMTP id 75D315849CB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Jun 2009 09:18:48 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 6 Jun 2009 08:46:30 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
+References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>
+	<1244145476.6678.4.camel@port4>
+	<f96d234e0906051443y3d0cfcf0m595469c780c9fed@mail.gmail.com>
+In-Reply-To: <f96d234e0906051443y3d0cfcf0m595469c780c9fed@mail.gmail.com>
 MIME-Version: 1.0
-Subject: populate_staging history question
+Message-Id: <200906060846.30822.mickey@vanille-media.de>
+Subject: Re: progress on OE organization issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jun 2009 06:22:17 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 06 Jun 2009 06:55:33 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I have a question about the history of when populate_staging gets run.  A l=
-ong time ago, it was run after package_write, but in August of 2007, Richar=
-d changed it in Poky to be runnable after compile, then shortly thereafter =
-changed it to be runnable after install (there's a note about conflicts bet=
-ween install and populate_staging).  This change was ported to OE in Septem=
-ber 2007.
+On Friday 05 June 2009 23:43:58 Cliff Brake wrote:
+> On Thu, Jun 4, 2009 at 3:57 PM, GNUtoo<GNUtoo@no-log.org> wrote:
+> > by the way why don't we join an umbrella organization?
+>
+> The is the response I received from SFC folks:
+>
+> ========================
+> As for your question with regard to how long an application takes,
+> typically we are 6-8 month backlogged.  I can tell you though, that
+> we've had another application pending for more than a year in the same
+> eV situation you are considering here.  We simply don't have the
+> resources yet to devote to that question, despite a project still
+> awaiting that answer.
+> ========================
+>
+> So, I guess you get what you pay for.  Not that we are moving any
+> faster with the eV, but I guess the bottom line is that it is not easy
+> unless you are paying someone to dedicate time to keeping it moving.
 
-Can someone explain what the conflict was? -- it seems that install and pop=
-ulate_staging should be able to be run at the same time.
+Indeed. Not to mention that we evaluated all the options (including joining 
+one of the umbrella orgs) alreadyy before attempting to create the e.V.
 
-Also, why is the build task scheduled to be after populate_staging?  Since =
-package_write is the final task, I expected build to be after that task.
+:M:
 
-Thanks,
-
-  Michael
 
 
