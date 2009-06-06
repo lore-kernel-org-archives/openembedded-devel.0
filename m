@@ -1,25 +1,36 @@
-Received: from [17.148.16.93] (helo=asmtpout018.mac.com)
+Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MCsBG-0005iO-Qi
+	(envelope-from <koen.kooi@gmail.com>) id 1MCsUz-00066Q-Sj
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Jun 2009 11:27:15 +0200
-MIME-version: 1.0
-Received: from [87.201.169.139] by asmtp018.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KKT00AW98HTR340@asmtp018.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	06 Jun 2009 02:17:57 -0700 (PDT)
-Message-id: <32C63161-F52F-47E5-BEE8-229FA59A6758@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
+	Sat, 06 Jun 2009 11:47:37 +0200
+Received: by ewy20 with SMTP id 20so2921844ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Jun 2009 02:38:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=L3AbDbWxt1h6QGZdT3bUA6c6JxDRjBTM8/oIHZF3MrY=;
+	b=GVdJUqyr1qK9GuPwkC3Px5NQaekf/tGB1XB5UzaO6CZ8DcHOGngvfftgR0lj6GvEh6
+	lsWwxm971k93z56KUdB2ZOac8ERLOfIEhc0nQ638AS1UB7jifQJq8i84a6iKw6AZHYhE
+	RqjXNSmRaeJG4aDwpsQ/6liYwv4lBkQH4NMMs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=gkwj1aNe/P3yG5TqUBGpPAgkqwGNYi9lLGXQ5a3JOcZvr+izx6KZPMx2OmZfg4joQS
+	GhiB/PUdS9IiU5nH76u/2+OXzbYp4Tqv9Ra7RMzdjRrVPGPaOfHfbKbNEJi0tOxZRoaA
+	e/9acJzVEHA9GzC2GGsZcdGOODmPf4+FvSQOo=
+Received: by 10.216.44.211 with SMTP id n61mr1572761web.133.1244281100714;
+	Sat, 06 Jun 2009 02:38:20 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id f13sm58135gvd.23.2009.06.06.02.38.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 06 Jun 2009 02:38:19 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-reply-to: <20090606090254.GA14042@denix.org>
-Date: Sat, 06 Jun 2009 13:17:49 +0400
-References: <046B8D02-FF75-4D9E-BBB9-2D2DF22E37BC@mac.com>
-	<20090606074606.GF4988@denix.org>
-	<EE778AE5-9E7A-4138-A500-2466E830C8DA@mac.com>
-	<20090606090254.GA14042@denix.org>
-X-Mailer: Apple Mail (2.935.3)
-Subject: Re: Where do the extra #include <mach/board-overo.h> come	from in linux-omap3-2.6.29.bb recipe?
+Date: Sat,  6 Jun 2009 11:38:16 +0200
+Message-Id: <1244281096-16000-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.6.1
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] omapfbplay: update for 2.6.29 header location change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,71 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Jun 2009 09:27:15 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Sat, 06 Jun 2009 09:47:38 -0000
 
-Hi Denys,
-			
-On Jun 6, 2009, at 1:02 PM, Denys Dmytriyenko wrote:
+From: Koen Kooi <koen@openembedded.org>
 
->>
->
-> $ git log -1
->
-> That would show you the last commit with its hash#.
->
-> Or you can go to gitweb and select any commit from the list and get  
-> its hash#:
-> http://git.kernel.org/?p=linux/kernel/git/tmlind/linux-omap-2.6.git
->
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/ffmpeg/omapfbplay_git.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-I tried that but I get a  "fatal: Not a git repository" error:
+diff --git a/recipes/ffmpeg/omapfbplay_git.bb b/recipes/ffmpeg/omapfbplay_git.bb
+index 202c29f..67189c5 100644
+--- a/recipes/ffmpeg/omapfbplay_git.bb
++++ b/recipes/ffmpeg/omapfbplay_git.bb
+@@ -20,6 +20,7 @@ CFLAGS += " -I. -I${STAGING_KERNEL_DIR}/include "
+ do_compile() {
+ 	cp ${STAGING_KERNEL_DIR}/arch/arm/plat-omap/include/mach/omapfb.h ${S} || true
+ 	cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.h ${S} || true
++	cp ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ${S} || true
+ 	oe_runmake -e
+ }
+ 
+-- 
+1.6.1
 
-bitbake -c rebuild linux-omap3-2.6.29
-NOTE: Handling BitBake files: | (6810/6810) [100 %]
-NOTE: Parsing finished. 6541 cached, 0 parsed, 269 skipped, 2 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 305 of 546 (ID: 2, /tool/overo-oe/user.collection/ 
-recipes/linux/linux-omap3_2.6.29.bb, do_setscene)
-NOTE: Running task 527 of 546 (ID: 3, /tool/overo-oe/user.collection/ 
-recipes/linux/linux-omap3_2.6.29.bb, do_fetch)
-fatal: Not a git repository
-NOTE: Task failed: Fetch failed: Fetch command export HOME=/home/ 
-elvis; export SSH_AUTH_SOCK=/tmp/keyring-M40Rvw/ssh; export PATH=/tool/ 
-overo-oe/tmp/staging/i686-linux/usr/bin/overo-angstrom-linux-gnueabi:/ 
-tool/overo-oe/tmp/staging/i686-linux/usr/bin/armv7a-angstrom-linux- 
-gnueabi:/tool/overo-oe/tmp/staging/i686-linux/usr/sbin:/tool/overo-oe/ 
-tmp/staging/i686-linux/usr/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
-tool/overo-oe/tmp/staging/i686-linux/sbin:/tool/overo-oe/tmp/staging/ 
-i686-linux/bin:/tool/repo:/tool/android/out/host/linux-x86/bin:/tool/ 
-script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
-usr/java/jdk1.6.0_12/bin:/tool/repo:/tool/android/out/host/linux-x86/ 
-bin:/tool/script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/ 
-armv7a/bin:/usr/java/jdk1.6.0_12/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/ 
-bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/ 
-sbin:/sbin:/home/elvis/bin; git fetch git://git.kernel.org/pub/scm/ 
-linux/kernel/git/tmlind/linux-omap-2.6.git master failed with signal  
-128, output:
-fatal: Not a git repository
-
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /tool/overo-oe/user.collection/recipes/linux/linux- 
-omap3_2.6.29.bb do_fetch failed
-ERROR: Task 3 (/tool/overo-oe/user.collection/recipes/linux/linux- 
-omap3_2.6.29.bb, do_fetch) failed
-NOTE: Tasks Summary: Attempted 526 tasks of which 525 didn't need to  
-be rerun and 1 failed.
-ERROR: '/tool/overo-oe/user.collection/recipes/linux/linux- 
-omap3_2.6.29.bb' failed
-
-What should I do?
-
-Best regards,
-
-Elvis
 
 
