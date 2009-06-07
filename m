@@ -1,36 +1,21 @@
-Received: from [209.85.132.240] (helo=an-out-0708.google.com)
+Received: from [17.148.16.95] (helo=asmtpout020.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MD5uI-0006Yj-Lt
+	(envelope-from <elvis.dowson@mac.com>) id 1MD996-0005pz-Jz
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 02:06:38 +0200
-Received: by an-out-0708.google.com with SMTP id b6so1286467ana.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Jun 2009 16:57:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=QlLm0KHPmF90ith7tviVNi8+HgsZaV9/RMzx0oX5b9Q=;
-	b=Ezn+wc+GenetDU5bPm6hE5NsHrhrobUVmZe81uMj1nPNx36lIXPmLKRyKQYRhxplH3
-	SdZMm21TfVo/WQNgR9z1m6OpaJZIQc9iLWCwYqXxsy4A8KuGDxa2RTn6ce1tYUFNIrYg
-	5Us8pclgyyk/z9bN81EsslSHxccSfUfyMizOY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=pQHD70fXDrd3tPF9UdxPp9kscXAxtWr9mB8gNvDOJQysjVyNMkltOpFS3QFNJKFciF
-	kc6TFU/e3Xq5eQjlrm6aR+9Rm7OWQHJrUOQ849C3UgyUNEzXxrEI/pXFXgFL1jwO50m2
-	C7Kh2sDDsMcN7QYQUcw62ANvTcYz2PzScFgpw=
-MIME-Version: 1.0
-Received: by 10.231.15.7 with SMTP id i7mr1318713iba.43.1244332639500; Sat, 06 
-	Jun 2009 16:57:19 -0700 (PDT)
-In-Reply-To: <1244281096-16000-1-git-send-email-k.kooi@student.utwente.nl>
-References: <1244281096-16000-1-git-send-email-k.kooi@student.utwente.nl>
-Date: Sun, 7 Jun 2009 01:57:19 +0200
-Message-ID: <c384c5ea0906061657t2e117281m3de566d968848258@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: Re: [STABLE][PATCH] omapfbplay: update for 2.6.29 header location change
+	Sun, 07 Jun 2009 05:34:08 +0200
+MIME-version: 1.0
+Received: from [87.201.169.139] by asmtp020.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KKU00KWCMT6JM00@asmtp020.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	06 Jun 2009 20:24:46 -0700 (PDT)
+Message-id: <4E17E8CF-AA3B-4929-BC22-B9B28A757035@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>,
+	Steve Sakoman <sakoman@gmail.com>
+Date: Sun, 07 Jun 2009 07:24:39 +0400
+X-Mailer: Apple Mail (2.935.3)
+Subject: linux-omap3_git.bb doesn't work when copied to user.collection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,47 +29,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 00:06:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 07 Jun 2009 03:34:08 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-On Sat, Jun 6, 2009 at 11:38 AM, Koen Kooi<koen.kooi@gmail.com> wrote:
-> From: Koen Kooi <koen@openembedded.org>
->
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
-> =A0recipes/ffmpeg/omapfbplay_git.bb | =A0 =A01 +
-> =A01 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/ffmpeg/omapfbplay_git.bb b/recipes/ffmpeg/omapfbplay=
-_git.bb
-> index 202c29f..67189c5 100644
-> --- a/recipes/ffmpeg/omapfbplay_git.bb
-> +++ b/recipes/ffmpeg/omapfbplay_git.bb
-> @@ -20,6 +20,7 @@ CFLAGS +=3D " -I. -I${STAGING_KERNEL_DIR}/include "
-> =A0do_compile() {
-> =A0 =A0 =A0 =A0cp ${STAGING_KERNEL_DIR}/arch/arm/plat-omap/include/mach/o=
-mapfb.h ${S} || true
-> =A0 =A0 =A0 =A0cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.=
-h ${S} || true
-> + =A0 =A0 =A0 cp ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ${S} || tru=
-e
-> =A0 =A0 =A0 =A0oe_runmake -e
-> =A0}
->
-> --
-> 1.6.1
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-Acked-by: Leon Woestenberg <leon@sidebranch.com>
+Hi,
+	I've been faced with a problem for the past day, where I'm trying to  
+use linux-omap3_git.bb, after it has been copied to my user.collection/ 
+recipes/linux folder, I set the DEFAULT_PREFERENCE =  "1"
+
+but it gives me a fatal: not a git repository error. I have even  
+deleted the entire org.openembedded.dev and synchronize the repository  
+as of Sunday, to pull in Steve's latest changes.
+
+What could be causing this?
+
+Best regards,
+
+Elvis
 
 
---=20
-Leon
+
+
+[elvis@zeus overo-oe]$ bitbake linux-omap3
+NOTE: Handling BitBake files: \ (6881/6881) [100 %]
+NOTE: Parsing finished. 6608 cached, 1 parsed, 272 skipped, 2 masked.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 115 of 545 (ID: 497, /tool/overo-oe/ 
+org.openembedded.dev/recipes/gettext/gettext-native_0.17.bb,  
+do_qa_configure)
+NOTE: Running task 231 of 545 (ID: 205, /tool/overo-oe/ 
+org.openembedded.dev/recipes/u-boot/u-boot-mkimage-openmoko- 
+native_oe.bb, do_unpack)
+NOTE: Running task 261 of 545 (ID: 1, /tool/overo-oe/user.collection/ 
+recipes/linux/linux-omap3_git.bb, do_setscene)
+NOTE: Unpacking /usr/share/sources/git_www.denx.de.git.u- 
+boot.git._9912121f7ed804ea58fd62f3f230b5dcfc357d88.tar.gz to tmp/work/ 
+i686-linux/u-boot-mkimage-openmoko- 
+native-1.2.0+git9912121f7ed804ea58fd62f3f230b5dcfc357d88svn2238-r1/
+NOTE: Running task 400 of 545 (ID: 2, /tool/overo-oe/user.collection/ 
+recipes/linux/linux-omap3_git.bb, do_fetch)
+fatal: Not a git repository
+NOTE: Task failed: Fetch failed: Fetch command export HOME=/home/ 
+elvis; export SSH_AUTH_SOCK=/tmp/keyring-C4wDro/ssh; export PATH=/tool/ 
+overo-oe/tmp/staging/i686-linux/usr/bin/overo-angstrom-linux-gnueabi:/ 
+tool/overo-oe/tmp/staging/i686-linux/usr/bin/armv7a-angstrom-linux- 
+gnueabi:/tool/overo-oe/tmp/staging/i686-linux/usr/sbin:/tool/overo-oe/ 
+tmp/staging/i686-linux/usr/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
+tool/overo-oe/tmp/staging/i686-linux/sbin:/tool/overo-oe/tmp/staging/ 
+i686-linux/bin:/tool/repo:/tool/android/out/host/linux-x86/bin:/tool/ 
+script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/armv7a/bin:/ 
+usr/java/jdk1.6.0_12/bin:/tool/repo:/tool/android/out/host/linux-x86/ 
+bin:/tool/script:/tool/overo-oe/bitbake/bin:/tool/overo-oe/tmp/cross/ 
+armv7a/bin:/usr/java/jdk1.6.0_12/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/ 
+bin:/usr/lib/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/ 
+sbin:/sbin:/home/elvis/bin; git fetch git://git.kernel.org/pub/scm/ 
+linux/kernel/git/tmlind/linux-omap-2.6.git master failed with signal  
+128, output:
+fatal: Not a git repository
+
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /tool/overo-oe/user.collection/recipes/linux/linux- 
+omap3_git.bb do_fetch failed
+NOTE: Running task 401 of 545 (ID: 498, /tool/overo-oe/ 
+org.openembedded.dev/recipes/gettext/gettext-native_0.17.bb, do_compile)
+ERROR: Task 2 (/tool/overo-oe/user.collection/recipes/linux/linux- 
+omap3_git.bb, do_fetch) failed
+NOTE: Waiting for 2 active tasks to finish
+NOTE: 1: /tool/overo-oe/org.openembedded.dev/recipes/gettext/gettext- 
+native_0.17.bb, do_compile (22535)
+NOTE: 2: /tool/overo-oe/org.openembedded.dev/recipes/u-boot/u-boot- 
+mkimage-openmoko-native_oe.bb, do_unpack (22471)
+NOTE: Waiting for 1 active tasks to finish
+NOTE: 1: /tool/overo-oe/org.openembedded.dev/recipes/gettext/gettext- 
+native_0.17.bb, do_compile (22535)
+
+
+
 
 
