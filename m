@@ -1,26 +1,28 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [17.148.16.87] (helo=asmtpout012.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MDG9w-00070y-If
+	(envelope-from <elvis.dowson@mac.com>) id 1MDGR5-0007Tv-Uc
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 13:03:28 +0200
-Received: from 212-139-89-247.dynamic.dsl.as9105.com ([212.139.89.247]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MDG0s-0008KM-KW
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 11:54:06 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090606234437.GO26065@smtp.west.cox.net>
-References: <921557650906061408x129a09c6j53d0e0a971a5eac8@mail.gmail.com>
-	<20090606212856.GM26065@smtp.west.cox.net>
-	<921557650906061610l26165cb7odab17b271ce7ee13@mail.gmail.com>
-	<20090606234437.GO26065@smtp.west.cox.net>
-Date: Sun, 07 Jun 2009 11:54:05 +0100
-Message-Id: <1244372045.4151.19.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH] netvista 8363/N2200 machine support
+	Sun, 07 Jun 2009 13:21:12 +0200
+MIME-version: 1.0
+Received: from [87.201.169.74] by asmtp012.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KKV00AKD8FJ4B50@asmtp012.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	07 Jun 2009 04:11:48 -0700 (PDT)
+Message-id: <1F1DD9C5-164F-4137-88B5-FD9C7F60BCDC@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: Phil Blundell <pb@reciva.com>
+In-reply-to: <1244371661.4151.14.camel@lenovo.internal.reciva.com>
+Date: Sun, 07 Jun 2009 15:11:39 +0400
+References: <4E17E8CF-AA3B-4929-BC22-B9B28A757035@mac.com>
+	<1244367963.4151.5.camel@lenovo.internal.reciva.com>
+	<618E409A-94E7-486B-B6CF-6D2F01FF08B6@mac.com>
+	<1244369313.4151.9.camel@lenovo.internal.reciva.com>
+	<94920284-2A1B-4EFC-83A0-F445BFDE92B9@mac.com>
+	<1244371661.4151.14.camel@lenovo.internal.reciva.com>
+X-Mailer: Apple Mail (2.935.3)
+Cc: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Subject: Re: linux-omap3_git.bb	doesn't	work	when	copied	to	user.collection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,18 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 11:03:28 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 07 Jun 2009 11:21:12 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-On Sat, 2009-06-06 at 16:44 -0700, Tom Rini wrote:
-> I'd think do_install_machinename will override, but it's been a while
-> since I've tried something like that.
+Hi Phil,
+		Yes, I deleted the entire /usr/share/sources/git folder. Still same  
+error. Tried deleting both /usr/share/sources/git  and /tmp and ran  
+the bitbake comman, still fails.
 
-Yes, exactly that.  Functions are just variables and you can manipulate
-them with OVERRIDES in the same way as anything else. 
+Any suggestions on how to fix this?
 
-p.
+If I download a snapshot and temporarily put it there, what name  
+should I give it?
 
+Elvis
+
+
+On Jun 7, 2009, at 2:47 PM, Phil Blundell wrote:
+
+> Apparently /usr/share/sources/
+> git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux-
+> omap-2.6.git.tar.gz is corrupt.  Have you tried deleting that file as
+> well?
+>
+> p.
+>
 
 
