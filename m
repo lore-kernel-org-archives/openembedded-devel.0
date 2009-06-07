@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MDN8t-0007rv-Dg
-	for openembedded-devel@openembedded.org; Sun, 07 Jun 2009 20:30:51 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MDMzl-0006gZ-RN
-	for openembedded-devel@openembedded.org; Sun, 07 Jun 2009 18:21:25 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 07 Jun 2009 18:21:25 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 07 Jun 2009 18:21:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 07 Jun 2009 20:21:09 +0200
-Message-ID: <h0h0el$60i$1@ger.gmane.org>
-References: <20090607175542.GA26712@fh-wedel.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090531 Shredder/3.0b3pre
-In-Reply-To: <20090607175542.GA26712@fh-wedel.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Still not solved: glibc-dbg and insane.bbclass
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MDNrp-0000tB-BL
+	for openembedded-devel@openembedded.org; Sun, 07 Jun 2009 21:17:17 +0200
+Received: (qmail 13867 invoked by uid 813007); 7 Jun 2009 19:07:53 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 7 Jun 2009 19:07:53 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 7 Jun 2009 21:08:39 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.4;
+	x86_64; ; )
+References: <921557650906061408x129a09c6j53d0e0a971a5eac8@mail.gmail.com>
+	<1244372045.4151.19.camel@lenovo.internal.reciva.com>
+	<921557650906070935r60adc48enb8ac30fc56a7d319@mail.gmail.com>
+In-Reply-To: <921557650906070935r60adc48enb8ac30fc56a7d319@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200906072108.55900.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] netvista 8363/N2200 machine support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,31 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 18:30:51 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 07 Jun 2009 19:17:17 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 07-06-09 19:55, Martin Dietze wrote:
-> Hi,
->
->   just as my build broke again wiht this issue:
-> glibc-package.bbclass defines PACKAGES which always contains
-> glibc-dbg, however the build is without debug symbols for build
-> time reasons. I guess eventually we'd like to configure from
-> somewhere whether or not we want debug code and the glibc-dbg
-> package.
->
-> Do we have any "official" mechanism we can use to accomplish
-> this? Since this is something which *always* breaks builds I'd
-> think we should do something about this sooner rather than
-> later.
+Dnia niedziela, 7 czerwca 2009 o 18:35:37 Mateusz Kijowski napisa=C5=82(a):
+> Ok, I rearranged things a bit.
 
-What's exactly breaking? It's perfectly legal (and needed for 
-depchains!) for -dbg package to be empty.
+You can use tune-geode.inc instead of tune-x86.inc file. Also please add=20
+those URLs from commit description into machine description so other=20
+will get them without 'git log'. I am also not sure are=20
+"FILES_kernel-image" works in this way which you use.
 
-regards,
+> Right now the patch and defconfig are in
+> recipes/linux/linux/netvista8363 and all kernel related stuff is in
+> linux_2.6.24.bb including the overriden do_install().
 
-Koen
+=46ix indenting in linux_2.6.24.bb in do_kernel_2x00_image().
+
+Instead of copying kernel_do_install() as do_install_netvista8363() use=20
+do_install_append_netvista8363() which will do only required stuff. It=20
+will allow you to concentrate on your device working instead of having=20
+to track kernel.bbclass do_install() changes (when they will happen).
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
