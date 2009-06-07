@@ -1,16 +1,19 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [17.148.16.86] (helo=asmtpout011.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MDGbL-0004Yb-FQ
+	(envelope-from <elvis.dowson@mac.com>) id 1MDGcA-0004Z2-RZ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 13:31:50 +0200
-Received: from 212-139-89-247.dynamic.dsl.as9105.com ([212.139.89.247]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1MDGSH-0000VI-A3; Sun, 07 Jun 2009 12:22:25 +0100
-From: Phil Blundell <pb@reciva.com>
-To: Elvis Dowson <elvis.dowson@mac.com>
-In-Reply-To: <1F1DD9C5-164F-4137-88B5-FD9C7F60BCDC@mac.com>
+	Sun, 07 Jun 2009 13:32:39 +0200
+MIME-version: 1.0
+Received: from [87.201.169.74] by asmtp011.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KKV0044W8YDR760@asmtp011.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	07 Jun 2009 04:23:15 -0700 (PDT)
+Message-id: <402ACA05-0C64-4995-B71A-C061A2DD8C4E@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: Phil Blundell <pb@reciva.com>
+In-reply-to: <1F1DD9C5-164F-4137-88B5-FD9C7F60BCDC@mac.com>
+Date: Sun, 07 Jun 2009 15:22:56 +0400
 References: <4E17E8CF-AA3B-4929-BC22-B9B28A757035@mac.com>
 	<1244367963.4151.5.camel@lenovo.internal.reciva.com>
 	<618E409A-94E7-486B-B6CF-6D2F01FF08B6@mac.com>
@@ -18,10 +21,7 @@ References: <4E17E8CF-AA3B-4929-BC22-B9B28A757035@mac.com>
 	<94920284-2A1B-4EFC-83A0-F445BFDE92B9@mac.com>
 	<1244371661.4151.14.camel@lenovo.internal.reciva.com>
 	<1F1DD9C5-164F-4137-88B5-FD9C7F60BCDC@mac.com>
-Date: Sun, 07 Jun 2009 12:22:23 +0100
-Message-Id: <1244373743.4151.24.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+X-Mailer: Apple Mail (2.935.3)
 Cc: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
 Subject: Re: linux-omap3_git.bb	doesn't	work	when	copied	to	user.collection
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -37,45 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 11:31:52 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 07 Jun 2009 11:32:40 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-Just to be clear, the file I mentioned below (and the one which is
-mentioned in the error message you quoted originally) is not
-in /usr/share/sources/git so it wouldn't have been deleted along with
-the other bits.  Did you remove this file as well?
+Hi Phil,
+		What I did is manually copy the .git folder from a separately clone  
+linux-omap-2.6 repository, on the master branch, and the copied the  
+entire .git folder to the /usr/share/sources/git/ 
+git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux-omap-2.6.git/  
+folder.
 
-Assuming yes, it seems that this file must be getting corrupted (or
-generated wrongly in the first place) for some reason.  In that case I
-think you'll just have to trace back through the bitbake logs to see
-what's happening.
+Now when I run bitbake -c clean linux-omap3 and bitbake -c rebuild  
+linux-omap3, it works.
 
-p.
+Doesn't this mean that there is some problem or bug with OpenEmbedded?
 
-On Sun, 2009-06-07 at 15:11 +0400, Elvis Dowson wrote:
-> Hi Phil,
-> 		Yes, I deleted the entire /usr/share/sources/git folder. Still same  
-> error. Tried deleting both /usr/share/sources/git  and /tmp and ran  
-> the bitbake comman, still fails.
-> 
-> Any suggestions on how to fix this?
-> 
-> If I download a snapshot and temporarily put it there, what name  
-> should I give it?
-> 
-> Elvis
-> 
-> 
-> On Jun 7, 2009, at 2:47 PM, Phil Blundell wrote:
-> 
-> > Apparently /usr/share/sources/
-> > git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux-
-> > omap-2.6.git.tar.gz is corrupt.  Have you tried deleting that file as
-> > well?
-> >
-> > p.
-> >
+Best regards,
+
+Elvis
+
 
 
 
