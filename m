@@ -1,20 +1,26 @@
-Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <di@fh-wedel.de>) id 1MDO23-0006Us-3O
+	(envelope-from <philb@gnu.org>) id 1MDO3n-0006X1-Dg
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 21:27:51 +0200
-Received: by mail.fh-wedel.de (Postfix, from userid 959)
-	id 39BC2547D3; Sun,  7 Jun 2009 21:18:25 +0200 (CEST)
-Date: Sun, 7 Jun 2009 21:18:25 +0200
-From: Martin Dietze <di@fh-wedel.de>
+	Sun, 07 Jun 2009 21:29:39 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MDNuh-0001V6-Ds
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 07 Jun 2009 20:20:15 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090607191824.GB28536@fh-wedel.de>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <20090607175542.GA26712@fh-wedel.de> <h0h0el$60i$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <h0h0el$60i$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Still not solved: glibc-dbg and insane.bbclass
+In-Reply-To: <1244402010.4463.36.camel@utx.utx.cz>
+References: <1244366174.4412.11.camel@daniel-laptop>
+	<1244384219.4431.46.camel@utx.utx.cz>
+	<1244385233.4151.27.camel@lenovo.internal.reciva.com>
+	<1244402010.4463.36.camel@utx.utx.cz>
+Date: Sun, 07 Jun 2009 20:20:13 +0100
+Message-Id: <1244402413.4151.36.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: e2fsprogs-libs failed	on	latest	org.openembedded.dev	branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,48 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 19:27:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 07 Jun 2009 19:29:39 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, June 07, 2009, Koen Kooi wrote:
+On Sun, 2009-06-07 at 21:13 +0200, Stanislav Brabec wrote:
+> 1. This path apparently mixes path elements defined by two different
+> recipes. I was under impression, that there exists some type of
+> unintended =EF=BB=BFcv_libdir inheritance between these two recipes. Mayb=
+e my
+> impression was incorrect, but
 
-> What's exactly breaking? It's perfectly legal (and needed for depchains!) 
-> for -dbg package to be empty.
+There certainly shouldn't be any such inheritance.  If there is, that's
+a bug and we should fix it.
 
-This is the QA error I am getting:
+> 2. After applying of this patch, I did not see this error any more.
+> I even tested rebuild from scratch with no error. And finally
 
-| % cat log.qa_package
-| wrong architecture, glibc-dbg, /work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so
-| wrong architecture, glibc-dbg, /work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so
+I suspect that was probably just coincidence.  This bug seems to be
+somewhat intermittent; I don't know exactly what's causing it, and it's
+never actually happened for me, but (re)building things in a different
+order seems to clear it up.
 
-And this is what the files look like:
+> 3. The =EF=BB=BFvariable name cv_libdir is deduded from "libcv" in opencv=
+ recipe
+> and has no relation to e2fsprogs nor util-linux-ng.
 
-| % file  /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so
-| /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so: ELF 32-bit LSB no file type, no machine, invalid version (SYSV)
-| % file  /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so
-| /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so: ELF 32-bit LSB no file type, no machine, invalid version (SYSV)
+Yeah, it's very possibly true that all this code was cut'n'pasted from
+opencv.  That oughtn't to be a problem though.
 
-The files are practicall empty (here libc-2.3.3.so): 
+p.
 
-7f 45 4c 46  01 01 01 00  00 00 00 00  00 00 00 00  .ELF............
-00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
-00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
-00 00 00 00  01 00 00 00  03 00 00 00  00 00 00 00  ................
-00 00 00 00  00 00 00 00  0b 00 00 00  00 00 00 00  ................
-00 00 00 00  01 00 00 00  00 00 00 00               ............
 
-For whatever reason the build creates those files in .debug
-even though the build is performed without debug code.
-
-Cheers,
-
-M'bert
-
--- 
------------ / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-"This has been the most frustrating week in my life for a very long time."
- -- Australian soccer legend Paul Wade at Australia vs. Brazil in 1999 --
 
 
