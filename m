@@ -1,38 +1,21 @@
-Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
+Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MDLZa-0003ai-6A
+	(envelope-from <di@fh-wedel.de>) id 1MDM3H-0004Ic-QV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 18:50:18 +0200
-Received: by bwz19 with SMTP id 19so2581532bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Jun 2009 09:40:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=1BztqArjtbr9WDRMhljiwSzQLsw9f9jI8JRGzSEbp5M=;
-	b=kVjVJpL6jqYSwch0IfRtmlooT734lnhj3TjJe+7VVgeZzhPlZINFz0CPKZVofR+Oix
-	1uyrCAZrdWw7NzuMnXn2niDvCZzMZ7btolB2BKWqbN1Bc57LNQjVqUnpQB43zHEguey6
-	gb3UUdXmgLpgjeuQK9ZDoURibs9HwSyvuU+xk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=QVeVI2j0x45wtbpvAvBiVaxKS298N6aFGO1SyAb+P5mnuDRAS3TVbEMHBiURc4BCST
-	wo6BJPFVL2tga9T35PJXPPFA0XbmM+w2YwrCWNZIvWz6pleeqhiTHZ4TwI2VngDwQxC7
-	1cJXvpdBh9g7FP7vyPijk58khakUVvpzEQuZI=
-MIME-Version: 1.0
-Received: by 10.223.110.11 with SMTP id l11mr3208857fap.50.1244392852380; Sun, 
-	07 Jun 2009 09:40:52 -0700 (PDT)
-In-Reply-To: <fce2a370906031027y1e28cc6cre5aad0a1465c806b@mail.gmail.com>
-References: <20090603151754.GI26065@smtp.west.cox.net>
-	<1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<20090603161035.GL26065@smtp.west.cox.net>
-	<fce2a370906031027y1e28cc6cre5aad0a1465c806b@mail.gmail.com>
-Date: Sun, 7 Jun 2009 19:40:52 +0300
-Message-ID: <fce2a370906070940i3f5d7faud81d010af727b66a@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	Sun, 07 Jun 2009 19:20:59 +0200
+Received: by mail.fh-wedel.de (Postfix, from userid 959)
+	id 8EE80547D3; Sun,  7 Jun 2009 19:11:34 +0200 (CEST)
+Date: Sun, 7 Jun 2009 19:11:34 +0200
+From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 00/12] different qt4 related patches
+Message-ID: <20090607171134.GA25357@fh-wedel.de>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <20090607132212.GA20762@fh-wedel.de>
+	<Pine.LNX.4.64.0906071216430.27204@juice.ott.cti.com>
+MIME-Version: 1.0
+In-Reply-To: <Pine.LNX.4.64.0906071216430.27204@juice.ott.cti.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: glibc-initial-2.3.2 build failes (wrong patch)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,48 +29,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 16:50:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 07 Jun 2009 17:20:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Jun 3, 2009 at 8:27 PM, Ihar
-Hrachyshka<ihar.hrachyshka@gmail.com> wrote:
-> On Wed, Jun 3, 2009 at 7:10 PM, Tom Rini <trini@embeddedalley.com> wrote:
->> On Wed, Jun 03, 2009 at 06:37:10PM +0300, Ihar Hrachyshka wrote:
->>
->>> This patchset:
->>> - adds meta-toolchain-qte.bb to install toolchain with Qt/Embedded and
->>> =C2=A0 all the needed tools ready to use for qt4-embedded development;
->>> - adds directfb support for qt4-embedded;
->>> - includes missing files to qt4 packages;
->>> - fixes code style, generalize qt4 recipes and classes, reworked direct=
-ory
->>> =C2=A0 layout;
->>> - occasionally ports pkg-config to INC_PR.
->>
->> What machine / distro combinations have you tested all of this with, and
->> what recipes (other than meta-toolchain-qte) have you explicitly built
->> after? =C2=A0ie have you built / run some QtE images or similar too? =C2=
-=A0Thanks.
->
-> I built and tested qt4-embedded (with directfb and linuxfb), meta-toolcha=
-in-qte.
-> I also built (but not tested) qt4-x11-free.
-> My machine is beagleboard.
+On Sun, June 07, 2009, Michael Smith wrote:
 
-What's the status of the patchset? Is there any problems pending before com=
-mit?
+> I think the solution is to remove the FILESPATHPKG override from 
+> glibc-initial.inc. After looking through the rest of the files again, it 
+> looks like the glibc_2.[5-9]*.bb (not -initial) each add glibc-2.4 to the 
+> search path one way or another, and they are included by -initial, so 
+> there's no need to do it in the initial.inc. Can you give it a shot and 
+> see if it fixes the build for 2.3.2?
 
->
->>
->> --
->> Tom Rini
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
+Did so, and it looks good!
+
+Cheers,
+
+M'bert
+
+-- 
+----------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
+Chinese is a lousy language for scrabble
+           -- Neal Stephenson
 
 
