@@ -1,19 +1,19 @@
-Received: from [17.148.16.96] (helo=asmtpout021.mac.com)
+Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MDGjr-0004rx-73
+	(envelope-from <elvis.dowson@mac.com>) id 1MDH4E-0005Ei-Oo
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 13:40:35 +0200
+	Sun, 07 Jun 2009 14:01:39 +0200
 MIME-version: 1.0
-Received: from [87.201.169.74] by asmtp021.mac.com
+Received: from [87.201.169.74] by asmtp019.mac.com
 	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KKV0043N9BPMJ60@asmtp021.mac.com> for
+	32bit)) with ESMTPSA id <0KKV002DSAAYPF60@asmtp019.mac.com> for
 	openembedded-devel@lists.openembedded.org; Sun,
-	07 Jun 2009 04:31:11 -0700 (PDT)
-Message-id: <7D51D20F-49F8-467E-AFEB-2F07485A8840@mac.com>
+	07 Jun 2009 04:52:14 -0700 (PDT)
+Message-id: <E220332E-DED8-4228-A749-61DB4896A02A@mac.com>
 From: Elvis Dowson <elvis.dowson@mac.com>
 To: Phil Blundell <pb@reciva.com>
 In-reply-to: <1244373743.4151.24.camel@lenovo.internal.reciva.com>
-Date: Sun, 07 Jun 2009 15:30:57 +0400
+Date: Sun, 07 Jun 2009 15:52:06 +0400
 References: <4E17E8CF-AA3B-4929-BC22-B9B28A757035@mac.com>
 	<1244367963.4151.5.camel@lenovo.internal.reciva.com>
 	<618E409A-94E7-486B-B6CF-6D2F01FF08B6@mac.com>
@@ -23,7 +23,6 @@ References: <4E17E8CF-AA3B-4929-BC22-B9B28A757035@mac.com>
 	<1F1DD9C5-164F-4137-88B5-FD9C7F60BCDC@mac.com>
 	<1244373743.4151.24.camel@lenovo.internal.reciva.com>
 X-Mailer: Apple Mail (2.935.3)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Cc: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
 Subject: Re: linux-omap3_git.bb	doesn't	work	when	copied	to	user.collection
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -39,48 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 11:40:35 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Sun, 07 Jun 2009 12:01:40 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
 Hi Phil,
-		Yes, you're right. I missed those files. There were some incomplete  
-tar balls. So I just deleted all the ${GITDIR}/ 
-git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux- 
-omap-2.6.git_* tar ball files.
+		I think I know how this might have happened. While developing a new  
+recipe based on linux-omap3_bit.bb, I aborted a download, once I saw  
+that it was working.
 
-Thank you so much for you help! I couldn't have solved this without  
-your assistance!! :-)
+After that, all subsequent attempts were trying to probably use that  
+aborted tar ball and extracting the git repository and that repository  
+probably was corrupted or something.
+
+Can OE be enhanced to avoid this situation, by comparing the checksum  
+of the tar ball, before attempting to extract and use it?
 
 Best regards,
 
 Elvis
 
 
-On Jun 7, 2009, at 3:22 PM, Phil Blundell wrote:
-
-> Just to be clear, the file I mentioned below (and the one which is
-> mentioned in the error message you quoted originally) is not
-> in /usr/share/sources/git so it wouldn't have been deleted along with
-> the other bits.  Did you remove this file as well?
->
-> Assuming yes, it seems that this file must be getting corrupted (or
-> generated wrongly in the first place) for some reason.  In that case I
-> think you'll just have to trace back through the bitbake logs to see
-> what's happening.
->
-> p.
->
->>
->>
->>> Apparently /usr/share/sources/
->>> git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux-
->>> omap-2.6.git.tar.gz is corrupt.  Have you tried deleting that file  
->>> as
->>> well?
->>>
->>> p.
->>>
->
 
 
