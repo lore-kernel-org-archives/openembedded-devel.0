@@ -1,18 +1,31 @@
-Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <di@fh-wedel.de>) id 1MDITI-0000jV-Gp
+	(envelope-from <utx@penguin.cz>) id 1MDJKI-00075k-BZ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Jun 2009 15:31:36 +0200
-Received: by mail.fh-wedel.de (Postfix, from userid 959)
-	id 168F9547D9; Sun,  7 Jun 2009 15:22:12 +0200 (CEST)
-Date: Sun, 7 Jun 2009 15:22:12 +0200
-From: Martin Dietze <di@fh-wedel.de>
+	Sun, 07 Jun 2009 16:26:22 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 9A05D1422AA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  7 Jun 2009 16:17:37 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id iZsv9UmiXzo0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  7 Jun 2009 16:17:37 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 5D33614171A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  7 Jun 2009 16:17:37 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090607132212.GA20762@fh-wedel.de>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: glibc-initial-2.3.2 build failes (wrong patch)
+In-Reply-To: <1244366174.4412.11.camel@daniel-laptop>
+References: <1244366174.4412.11.camel@daniel-laptop>
+Date: Sun, 07 Jun 2009 16:16:59 +0200
+Message-Id: <1244384219.4431.46.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: e2fsprogs-libs failed on latest org.openembedded.dev	branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,43 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Jun 2009 13:31:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 07 Jun 2009 14:26:22 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Daniel.Li wrote:
+> Hi List,
+> 
+> What's wrong with this? How can I fix the problem?
+> 
+> $ bitbake e2fsprogs-libs
+> ERROR: 	0048:		basedir = os.path.join(os.path.dirname(root))
 
- I just pulled from the git and started a rebuild, found that
-glibc-initial-2.3.2 no longer builds on my system (nylon,
-mtx-1). It looks like the wrong patch is picked for applying:
+I was hoping that it was fixed by this commit:
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3ac37564039127c80eb5cf109fddf23a8e438bf8
 
-| NOTE: Applying patch 'hppa-syscall.patch' (org.openembedded.dev/recipes/glibc/glibc-2.3.2/hppa-syscall.patch)
-| NOTE: Applying patch 'glibc23-errno-hack.patch' (org.openembedded.dev/recipes/glibc/glibc-2.3.2/glibc23-errno-hack.patch)
-| NOTE: Applying patch '90_glibc232-statvfs.patch' (org.openembedded.dev/recipes/glibc/glibc-2.3.2/90_glibc232-statvfs.patch)
-| NOTE: Applying patch '90_glibc232-timezones.patch' (org.openembedded.dev/recipes/glibc/glibc-2.3.2/90_glibc232-timezones.patch)
-| NOTE: Applying patch 'arm-memcpy.patch' (org.openembedded.dev/recipes/glibc/glibc-2.4/arm-memcpy.patch)
-| NOTE: Applying patch 'arm-longlong.patch' (org.openembedded.dev/recipes/glibc/glibc-2.4/arm-longlong.patch)
-| ERROR: Error in executing: /var/src/OE/org.openembedded.dev/recipes/glibc/glibc-initial_2.3.2.bb
-| ERROR: Exception:<class 'CmdError'> Message:Command Error: exit status: 1  Output:
-| Applying patch arm-longlong.patch
-| can't find file to patch at input line 3
-| Perhaps you used the wrong -p or --strip option?
-| The text leading up to this was:
-| --------------------------
-| |--- glibc-2.4/stdlib/longlong.h.ark    2006-03-11 22:49:27.000000000 +0100
-| |+++ glibc-2.4/stdlib/longlong.h        2006-03-11 22:55:12.000000000 +0100
+Can you confirm, that you have a newer snapshot?
 
-I cannot find any reason why arm-memcpy.patch and arm-longlong.patch
-from the glibc-2.4 directory are used while both files are available
-in glibc-2.3.2. Any idea anyone?
 
-Cheers,
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
-M'bert
-
--- 
------------ / http://herbert.the-little-red-haired-girl.org / -------------
-=+= 
-Ed, the greatest WYGIWYG editor of all.
 
 
