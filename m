@@ -1,29 +1,21 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [213.39.232.198] (helo=mail.fh-wedel.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MDbg8-0007Rx-HK
+	(envelope-from <di@fh-wedel.de>) id 1MDbli-0007Zt-Ld
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jun 2009 12:02:08 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MDbWx-0002d0-MF
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jun 2009 10:52:39 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MDbWx-0003Wl-G3
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jun 2009 10:52:39 +0100
-From: Phil Blundell <pb@reciva.com>
+	Mon, 08 Jun 2009 12:07:54 +0200
+Received: by mail.fh-wedel.de (Postfix, from userid 959)
+	id 86072547DF; Mon,  8 Jun 2009 11:58:25 +0200 (CEST)
+Date: Mon, 8 Jun 2009 11:58:25 +0200
+From: Martin Dietze <di@fh-wedel.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1244407406-23717-1-git-send-email-msmith@cbnco.com>
-References: <Pine.LNX.4.64.0906071637260.27204@juice.ott.cti.com>
-	<1244407406-23717-1-git-send-email-msmith@cbnco.com>
-Date: Mon, 08 Jun 2009 10:52:39 +0100
-Message-Id: <1244454759.2611.178.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: [PATCH] busybox: Split syslog initscript into busybox-syslog
+Message-ID: <20090608095825.GA14821@fh-wedel.de>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <20090607175542.GA26712@fh-wedel.de> <h0h0el$60i$1@ger.gmane.org>
+	<20090607191824.GB28536@fh-wedel.de> <h0i7ub$lu6$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <h0i7ub$lu6$1@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Still not solved: glibc-dbg and insane.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,21 +29,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2009 10:02:08 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Jun 2009 10:07:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, 2009-06-07 at 16:43 -0400, Michael Smith wrote:
-> +# Make busybox recommend busybox-syslog for those images that expect it
-> +RRECOMMENDS_${PN} += "libgcc ${PN}-syslog"
+On Mon, June 08, 2009, Koen Kooi wrote:
 
-I guess it'd be a good idea to make this conditional on
-CONFIG_SYSLOGD=y.  Otherwise, folks who build with syslogd off will see
-a confusing "unsatisfied recommendation" diagnostic whenever they
-install busybox.
+> INSANE_SKIP_glibc-dbg = True
+>
+> In the offending glibc recipe
 
-p.
+I modified glibc-package.bbclass as you proposed, this is the diff:
+
+diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
+index 793401f..2bf08ce 100644
+--- a/recipes/glibc/glibc-package.bbclass
++++ b/recipes/glibc/glibc-package.bbclass
+@@ -32,6 +32,8 @@ USE_LDCONFIG ?= "1"
+ PACKAGES = "glibc-dbg glibc catchsegv sln nscd ldd localedef glibc-utils glibc-dev glibc-doc glibc-locale libsegfault glibc-extra-nss glibc-thread-db glibc-pcprofile"
+ PACKAGES_DYNAMIC = "glibc-gconv-* glibc-charmap-* glibc-localedata-* locale-base-* glibc-binary-localedata-*"
+
++INSANE_SKIP_glibc-dbg = True
++
+ libc_baselibs = "${base_libdir}/libcrypt*.so.* ${base_libdir}/libcrypt-*.so ${base_libdir}/libc*.so.* ${base_libdir}/libc-*.so ${base_libdir}/libm*.so.* ${base_libdir}/libm-*.so ${base_libdir}/ld*.so.* ${base_libdir}/ld-*.so ${base_libdir}/lib
+
+ FILES_${PN} = "${libc_baselibs} ${libexecdir}/* ${datadir}/zoneinfo ${@base_conditional('USE_LDCONFIG', '1', '/sbin/ldconfig', '', d)}"
 
 
+The code works well, and if nobody objects, I may commit it later today?
+
+Cheers,
+
+M'bert
+
+-- 
+----------- / http://herbert.the-little-red-haired-girl.org / -------------
+=+= 
 
 
