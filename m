@@ -1,28 +1,28 @@
-Received: from [206.190.48.174] (helo=web52411.mail.re2.yahoo.com)
+Received: from [206.190.48.172] (helo=web52409.mail.re2.yahoo.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <lucian_ion_2000@yahoo.com>) id 1MDdLT-0003xJ-6g
-	for openembedded-devel@openembedded.org; Mon, 08 Jun 2009 13:48:55 +0200
-Received: (qmail 31647 invoked by uid 60001); 8 Jun 2009 11:39:25 -0000
+	(envelope-from <lucian_ion_2000@yahoo.com>) id 1MDdOq-00041d-QT
+	for openembedded-devel@openembedded.org; Mon, 08 Jun 2009 13:52:25 +0200
+Received: (qmail 20391 invoked by uid 60001); 8 Jun 2009 11:42:54 -0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1244461164; bh=UAK7LzNV0Q1SZ105FHKo9nVpZYFc0GuFcgKDaZYcMN8=;
+	t=1244461374; bh=NvPdk7NgjgAX8zaHdP3CKZ1wBbpg6oRzxIGJ9P7fWHA=;
 	h=Message-ID:X-YMail-OSG:Received:X-Mailer:References:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type;
-	b=ZvOVS3422+rGH4X5JAp3kfnhRmjEHRA3mhdblHVdd8RCMHxYtylYf7tFqSWFSPF43gUucJ37IPlIlu633DNOJhjOAtj5v1vTctV/ZfUxfd3x1sYVpE+67wcPpWZZJj0Kwjzaz7BWpS5zuI4g0g6uuVIhxtq6wAr/Bn3/Z3y/hBY=
+	b=4c3Uyx8/b6BHGaCIkXqLnOyqxehiavYxGdmd9AhSL+2v2etyggfTRQPHTCxz5dunb1ejFTlRCl8PfyrV60LtGMRjo/FKxeWnizB27RsPcG4EIq6RQz5nj9Ns5824rT4sGBe8esUIeBidcHo5NSc430JY5NixSC43z46bTZMmSUE=
 DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
 	h=Message-ID:X-YMail-OSG:Received:X-Mailer:References:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type;
-	b=1lGakfgvHtHiRCbzrx8JnNk5ZVAJSedSi2NOfEiqolOjP62lr9CR+cdu9G6q/DSn58vcr0QSP+e8Ipi779ddte0ajAwfLhpFd87IYeMTYieF7oDfliFdcyNwGWp+ag9v7lM4eWNEyGG3lKo7GEsU8EFb3Ao9OBF8iVsiWal2L+w=;
-Message-ID: <972133.30302.qm@web52411.mail.re2.yahoo.com>
-X-YMail-OSG: 8o.du4IVM1nwityr7KJXVId5IwtJjP3Ie2qU24scB5U9hdELHOdGs_yl7SBOUH0CDkKRwAZzKCoeR20sGoyiNxLfRH0Qy21DSG9stCGXKL7Y.Q2HnCAp4zHyYKx6IfooT3.KFWHiP6UZwsHXFvA79FYEZ0hUtbNSWoQ2GyVMohceei1b.kV0CVVp9yoH.f5z5XsYhtYBzBUIsBGi3e682UeO5CCxIxxCy.f2mxOeAQMtl.dZ6w7kgD1sjQCqfUVamGjjs41Fhb1ZFv3HtsmB2n.0if518IlM7bQsYnQ07iY8ebxa4jWT_P2Jztru8fTcSAid8jQ_
-Received: from [87.198.251.22] by web52411.mail.re2.yahoo.com via HTTP;
-	Mon, 08 Jun 2009 04:39:24 PDT
+	b=0yBwCFX6gX5kM960iJm0S8qBUJrtV4ahhFVX44FZi9l9g1+UscT4ht5PVzJA/GXCcmmBrcZHbnxXoai0BYA6iFsCNCD1TBn3b7m39lpDgy9YGqk56QU5h3E1Bo+DhSgHpsvmWZ/9G7MPLK4g7ne4lmSeLUASbRRSwlUQlYkAmjQ=;
+Message-ID: <622079.19927.qm@web52409.mail.re2.yahoo.com>
+X-YMail-OSG: Y2T4mUwVM1mhWx83uIzC9IqUHPB7w6rMm4ufHSZFnn0hvNZX7b0nCDrv0YfCELNaqNE5FyA411iRcZwjwfCef4WeMBSOt2BSSKTTo9yGJ24G1MnxndiYGsRQH31yqJUSBYCEoAwASvTOcvQpjtSGaCEYbKGYjlAhdORDYPOV8wsBYzPiYpVRXmUgOl8FuZ1yofYAIpqWtHlxV9S6Oh6ETBR5vOZlsZN3uUi7feGzvxsnzbFPn8tfR.uBMhVdG6I28zJ26XfqfPn901b_vojTAsA_E2_obbszvZj_LO3NoTyURnDKnjpw2UBUbr12WQp3dDrP._ZIvR052caEyD1UuavzX5W6NEZF.K1Waw--
+Received: from [87.198.251.22] by web52409.mail.re2.yahoo.com via HTTP;
+	Mon, 08 Jun 2009 04:42:54 PDT
 X-Mailer: YahooMailRC/1277.43 YahooMailWebService/0.7.289.15
 References: <bug-3010-13@http.bugs.openembedded.net/>
 	<20090608113350.8F7061880A7@amethyst.openembedded.net>
-Date: Mon, 8 Jun 2009 04:39:24 -0700 (PDT)
+Date: Mon, 8 Jun 2009 04:42:54 -0700 (PDT)
 From: Lucian Ion <lucian_ion_2000@yahoo.com>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <20090608113350.8F7061880A7@amethyst.openembedded.net>
 MIME-Version: 1.0
-Subject: update-apr-library-version-to-1.3.5
+Subject: update apr util library to version 1.3.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,81 +36,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2009 11:48:55 -0000
-X-Groupsio-MsgNum: 11134
-Content-Type: multipart/mixed; boundary="0-1524127941-1244461164=:30302"
+X-List-Received-Date: Mon, 08 Jun 2009 11:52:25 -0000
+X-Groupsio-MsgNum: 11135
+Content-Type: multipart/mixed; boundary="0-1529672844-1244461374=:19927"
 
---0-1524127941-1244461164=:30302
+--0-1529672844-1244461374=:19927
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-+[http://www.apache.org/dist/apr/apr-1.3.5.tar.bz2]=0A+md5=3D9ac9a00eaa1909=
-37fdbbde7b4f03ac1e=0A+sha256=3Da33d360b70a9c7971651b3810513d7a85ca84d13ddfc=
-1cb96d6cb0af76aab574=0A+=0A=0Adiff --git a/recipes/apr/apr_1.3.5.bb b/recip=
-es/apr/apr_1.3.5.bb=0Anew file mode 100644=0Aindex 0000000..f77647f=0A--- /=
-dev/null=0A+++ b/recipes/apr/apr_1.3.5.bb=0A@@ -0,0 +1,32 @@=0A+DESCRIPTION=
- =3D "Apache Portable Runtime (APR) library"=0A+SECTION =3D "libs"=0A+LICEN=
-SE =3D "Apache License, Version 2.0"=0A+=0A+PR =3D "r4"=0A+=0A...=0A=0A=0A =
-     
+=0A+[http://www.apache.org/dist/apr/apr-util-1.3.7.tar.gz]=0A+md5=3D0a6802e=
+f6d874db645150ae4a75f41fa=0A+sha256=3Dfadd6a0c55596b2c21375942e3acefc33715e=
+647ed4770dc398d08d8783a39e0=0A+=0A=0Adiff --git a/recipes/apr/apr-util_1.3.=
+7.bb b/recipes/apr/apr-util_1.3.7.bb=0Anew file mode 100644=0Aindex 0000000=
+..6b2e9cc=0A--- /dev/null=0A+++ b/recipes/apr/apr-util_1.3.7.bb=0A@@ -0,0 +=
+1,34 @@=0A+DESCRIPTION =3D "Apache Portable Runtime (APR) companion library=
+"=0A+SECTION =3D "libs"=0A+DEPENDS =3D "apr expat gdbm"=0A+LICENSE =3D "Apa=
+che License, Version 2.0"=0A+=0A...=0A=0ARegards,=0ALucian Ion=0A=0A=0A    =
+  
 
---0-1524127941-1244461164=:30302
-Content-Type: text/x-diff; name="0007-update-apr-library-version-to-1.3.5-add-checksum.patch"
+--0-1529672844-1244461374=:19927
+Content-Type: text/x-diff; name="0009-apr-util-update-to-version-1.3.7-add-checksum.patch"
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="0007-update-apr-library-version-to-1.3.5-add-checksum.patch"
+Content-Disposition: attachment; filename="0009-apr-util-update-to-version-1.3.7-add-checksum.patch"
 
-RnJvbSBlOWE3ZDg0YjY3M2U2MzE5ZmMwNDAyNzEwNmZiYWE1NDM1ZmY2NWVkIE1vbiBTZXAgMTcg
+RnJvbSBhNDQ4NDY1ZDlmZjZkMDZmZmNkMzk2MzRiOTBlNWIyMWUxZGM2MGVmIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBMdWNpYW4gSW9uIDxsdWNpYW5faW9uXzIwMDBAeWFob28uY29t
-PgpEYXRlOiBNb24sIDggSnVuIDIwMDkgMTE6NTc6MzcgKzAxMDAKU3ViamVjdDogW1BBVENIXSB1
-cGRhdGUgYXByIGxpYnJhcnkgdmVyc2lvbiB0byAxLjMuNSAtIGFkZCBjaGVja3N1bQoKLS0tCiBj
-b25mL2NoZWNrc3Vtcy5pbmkgfCAgICA0ICsrKysKIDEgZmlsZXMgY2hhbmdlZCwgNCBpbnNlcnRp
-b25zKCspLCAwIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2NvbmYvY2hlY2tzdW1zLmluaSBi
-L2NvbmYvY2hlY2tzdW1zLmluaQppbmRleCAwZDc3YjEzLi43NDFjOGQwIDEwMDY0NAotLS0gYS9j
-b25mL2NoZWNrc3Vtcy5pbmkKKysrIGIvY29uZi9jaGVja3N1bXMuaW5pCkBAIC0xNjAyLDYgKzE2
-MDIsMTAgQEAgc2hhMjU2PWJiMGM1OGVmZGQyNTJmY2FmNmYwZmYwNjY4MWQwZWJlY2JlY2JhYTM4
-NjQwNDdmMzJkZWM3ZjgyZDFjNDk5NGMKIG1kNT0yMDkwYzIxZGVlNGYwZWIxNTEyNjA0MTI3ZGNk
-MTU4Zgogc2hhMjU2PWQ5NWYzYjc4MzY2Yzg2MzE3MDQzMzA0ODY0YmIwOGNiODM2MzEyYzg3ZWE3
-ZDE0MmE0YzAyMTU0ZTdlMGRkMzcKIAorW2h0dHA6Ly93d3cuYXBhY2hlLm9yZy9kaXN0L2Fwci9h
-cHItMS4zLjUudGFyLmJ6Ml0KK21kNT05YWM5YTAwZWFhMTkwOTM3ZmRiYmRlN2I0ZjAzYWMxZQor
-c2hhMjU2PWEzM2QzNjBiNzBhOWM3OTcxNjUxYjM4MTA1MTNkN2E4NWNhODRkMTNkZGZjMWNiOTZk
-NmNiMGFmNzZhYWI1NzQKKwogW2h0dHA6Ly93d3cuYXBhY2hlLm9yZy9kaXN0L2Fwci9hcHItdXRp
-bC0wLjkuMTIudGFyLmd6XQogbWQ1PThlOWNjNzFhMTMwM2I2N2IzMjc4ZmJlYWI5Nzk5ZjJlCiBz
-aGEyNTY9NTc2OGZjYzRkMzhmYTZmODExYjBhODllMmVmNDUwZDBmNTI2ODhmZjkyNjNlNTQ4ODE5
-YWRiMDk2ZmJmYzljMwotLSAKMS42LjAuNAoK
+PgpEYXRlOiBNb24sIDggSnVuIDIwMDkgMTI6MTM6MDcgKzAxMDAKU3ViamVjdDogW1BBVENIXSBh
+cHItdXRpbCB1cGRhdGUgdG8gdmVyc2lvbiAxLjMuNyAtIGFkZCBjaGVja3N1bQoKLS0tCiBjb25m
+L2NoZWNrc3Vtcy5pbmkgfCAgICA0ICsrKysKIDEgZmlsZXMgY2hhbmdlZCwgNCBpbnNlcnRpb25z
+KCspLCAwIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2NvbmYvY2hlY2tzdW1zLmluaSBiL2Nv
+bmYvY2hlY2tzdW1zLmluaQppbmRleCA3NDFjOGQwLi4xNWE3YjEwIDEwMDY0NAotLS0gYS9jb25m
+L2NoZWNrc3Vtcy5pbmkKKysrIGIvY29uZi9jaGVja3N1bXMuaW5pCkBAIC0xNjIyLDYgKzE2MjIs
+MTAgQEAgc2hhMjU2PThjZDg0ZWIyMDMxYTkxNTcyZTFiZTI5NzVmNDE3MTczMGE5YmU3MmM0Y2Q4
+ODcxOGM0YzQwYWM3ZGM0ZmQ3ZDMKIG1kNT1hMTBlMmNhMTUwZmYwN2Y0ODRjNzI0YzM2MTQyMjEx
+Zgogc2hhMjU2PTNmMDdmZmRiMThmYjg1MzI5MGM5YjgzZTgyY2Q1Y2FlNjZiOGZiYzM1N2JkMzkx
+ZTg0NmMwYWZkZDI0ZmVkN2UKIAorW2h0dHA6Ly93d3cuYXBhY2hlLm9yZy9kaXN0L2Fwci9hcHIt
+dXRpbC0xLjMuNy50YXIuZ3pdCittZDU9MGE2ODAyZWY2ZDg3NGRiNjQ1MTUwYWU0YTc1ZjQxZmEK
+K3NoYTI1Nj1mYWRkNmEwYzU1NTk2YjJjMjEzNzU5NDJlM2FjZWZjMzM3MTVlNjQ3ZWQ0NzcwZGMz
+OThkMDhkODc4M2EzOWUwCisKIFtmdHA6Ly9mdHAuZGViaWFuLm9yZy9kZWJpYW4vcG9vbC9tYWlu
+L2EvYXB0L2FwdF8wLjUuMjguNi50YXIuZ3pdCiBtZDU9MjZiMzc1MjUzNzFjZGFhZWM1NTIyMzdl
+MDY2NzMwNWQKIHNoYTI1Nj01N2RlMDg0ODYwODcwY2NjZjUxMGRlNjJlYjhkZWQyNTJmNTk1MWE2
+ZTU5ZTM0YTk2M2Q2MWQ2OWRlM2FmZjEwCi0tIAoxLjYuMC40Cgo=
 
---0-1524127941-1244461164=:30302
-Content-Type: text/x-diff; name="0008-update-apr-library-version-to-1.3.5-new-recipe.patch"
+--0-1529672844-1244461374=:19927
+Content-Type: text/x-diff; name="0010-apr-util-update-to-version-1.3.7-new-recipe.patch"
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="0008-update-apr-library-version-to-1.3.5-new-recipe.patch"
+Content-Disposition: attachment; filename="0010-apr-util-update-to-version-1.3.7-new-recipe.patch"
 
-RnJvbSA2MTkzYTI1ZTA2NWI0NGRhMGE0YjNiOGE5NWQ4ZjAwYzY0ZjNmOTgyIE1vbiBTZXAgMTcg
+RnJvbSBkZThhNzc1YWFjNWRkYTI5OTdjYjhjMTMyMDcwYjEyY2IyZTEzZGQwIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBMdWNpYW4gSW9uIDxsdWNpYW5faW9uXzIwMDBAeWFob28uY29t
-PgpEYXRlOiBNb24sIDggSnVuIDIwMDkgMTE6NTk6MTYgKzAxMDAKU3ViamVjdDogW1BBVENIXSB1
-cGRhdGUgYXByIGxpYnJhcnkgdmVyc2lvbiB0byAxLjMuNSAtIG5ldyByZWNpcGUKCi0tLQogcmVj
-aXBlcy9hcHIvYXByXzEuMy41LmJiIHwgICAzMiArKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKwogMSBmaWxlcyBjaGFuZ2VkLCAzMiBpbnNlcnRpb25zKCspLCAwIGRlbGV0aW9ucygtKQog
-Y3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMvYXByL2Fwcl8xLjMuNS5iYgoKZGlmZiAtLWdpdCBh
-L3JlY2lwZXMvYXByL2Fwcl8xLjMuNS5iYiBiL3JlY2lwZXMvYXByL2Fwcl8xLjMuNS5iYgpuZXcg
-ZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwLi5mNzc2NDdmCi0tLSAvZGV2L251bGwKKysr
-IGIvcmVjaXBlcy9hcHIvYXByXzEuMy41LmJiCkBAIC0wLDAgKzEsMzIgQEAKK0RFU0NSSVBUSU9O
-ID0gIkFwYWNoZSBQb3J0YWJsZSBSdW50aW1lIChBUFIpIGxpYnJhcnkiCitTRUNUSU9OID0gImxp
-YnMiCitMSUNFTlNFID0gIkFwYWNoZSBMaWNlbnNlLCBWZXJzaW9uIDIuMCIKKworUFIgPSAicjQi
-CisKK1NSQ19VUkkgPSAiJHtBUEFDSEVfTUlSUk9SfS9hcHIvJHtQfS50YXIuYnoyIFwKKyAgICAg
-ICAgICAgZmlsZTovL2NvbmZpZ3VyZV9maXhlcy5wYXRjaDtwYXRjaD0xIFwKKyMJICAgZmlsZTov
-L2NsZWFudXAucGF0Y2g7cGF0Y2g9MSBcCisgICAgICAgICAgIGZpbGU6Ly9jb25maWdmaXgucGF0
-Y2g7cGF0Y2g9MSIKKworaW5oZXJpdCBhdXRvdG9vbHMgbGliX3BhY2thZ2UgYmluY29uZmlnCisK
-K09FX0JJTkNPTkZJR19FWFRSQV9NQU5HTEUgPSAiIC1lICdzOmxvY2F0aW9uPXNvdXJjZTpsb2Nh
-dGlvbj1pbnN0YWxsZWQ6JyIKKworZG9fY29uZmlndXJlX3ByZXBlbmQoKSB7CisJY2QgJHtTfQor
-CS4vYnVpbGRjb25mCit9CisKK2RvX3N0YWdlKCkgeworCWF1dG90b29sc19zdGFnZV9hbGwKKwlp
-bnN0YWxsIC1kICR7U1RBR0lOR19EQVRBRElSfS9hcHIKKwljcCAke1N9L2J1aWxkL2Fwcl9ydWxl
-cy5tayAke1NUQUdJTkdfREFUQURJUn0vYXByLworCXNlZCAtaSBzLGFwcl9idWlsZGRpcj0uKixh
-cHJfYnVpbGRkaXI9LGcgJHtTVEFHSU5HX0RBVEFESVJ9L2Fwci9hcHJfcnVsZXMubWsKKwlzZWQg
-LWkgcyxhcHJfYnVpbGRlcnM9LiosYXByX2J1aWxkZXJzPSxnICR7U1RBR0lOR19EQVRBRElSfS9h
-cHIvYXByX3J1bGVzLm1rCisJc2VkIC1pIHMsTElCVE9PTD0uKixMSUJUT09MPVwkXChTSEVMTFwp
-XCAke1RBUkdFVF9QUkVGSVh9bGlidG9vbCxnICR7U1RBR0lOR19EQVRBRElSfS9hcHIvYXByX3J1
-bGVzLm1rCisJc2VkIC1pIHMsXCRcKGFwcl9idWlsZGVyc1wpLCR7U1RBR0lOR19EQVRBRElSfS9h
-cHIvLGcgJHtTVEFHSU5HX0RBVEFESVJ9L2Fwci9hcHJfcnVsZXMubWsKKwljcCAke1N9L2J1aWxk
-L21rZGlyLnNoICR7U1RBR0lOR19EQVRBRElSfS9hcHIvCisJY3AgJHtTfS9idWlsZC9tYWtlX2V4
-cG9ydHMuYXdrICR7U1RBR0lOR19EQVRBRElSfS9hcHIvCisJY3AgJHtTfS9idWlsZC9tYWtlX3Zh
-cl9leHBvcnQuYXdrICR7U1RBR0lOR19EQVRBRElSfS9hcHIvCit9Ci0tIAoxLjYuMC40Cgo=
+PgpEYXRlOiBNb24sIDggSnVuIDIwMDkgMTI6MTQ6MjEgKzAxMDAKU3ViamVjdDogW1BBVENIXSBh
+cHItdXRpbCB1cGRhdGUgdG8gdmVyc2lvbiAxLjMuNyAtIG5ldyByZWNpcGUKCi0tLQogcmVjaXBl
+cy9hcHIvYXByLXV0aWxfMS4zLjcuYmIgfCAgIDM0ICsrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysKIDEgZmlsZXMgY2hhbmdlZCwgMzQgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMo
+LSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCByZWNpcGVzL2Fwci9hcHItdXRpbF8xLjMuNy5iYgoKZGlm
+ZiAtLWdpdCBhL3JlY2lwZXMvYXByL2Fwci11dGlsXzEuMy43LmJiIGIvcmVjaXBlcy9hcHIvYXBy
+LXV0aWxfMS4zLjcuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uNmIyZTlj
+YwotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lwZXMvYXByL2Fwci11dGlsXzEuMy43LmJiCkBAIC0w
+LDAgKzEsMzQgQEAKK0RFU0NSSVBUSU9OID0gIkFwYWNoZSBQb3J0YWJsZSBSdW50aW1lIChBUFIp
+IGNvbXBhbmlvbiBsaWJyYXJ5IgorU0VDVElPTiA9ICJsaWJzIgorREVQRU5EUyA9ICJhcHIgZXhw
+YXQgZ2RibSIKK0xJQ0VOU0UgPSAiQXBhY2hlIExpY2Vuc2UsIFZlcnNpb24gMi4wIgorCitQUiA9
+ICJyNSIKKworU1JDX1VSSSA9ICIke0FQQUNIRV9NSVJST1J9L2Fwci8ke1B9LnRhci5neiBcCisg
+ICAgICAgICAgIGZpbGU6Ly9jb25maWdmaXgucGF0Y2g7cGF0Y2g9MSBcCisgICAgICAgICAgIGZp
+bGU6Ly9jb25maWd1cmVfZml4ZXMucGF0Y2g7cGF0Y2g9MSIKKworRVhUUkFfT0VDT05GID0gIi0t
+d2l0aC1hcHI9JHtTVEFHSU5HX0JJTkRJUl9DUk9TU30vYXByLTEtY29uZmlnIFwgCisJCS0td2l0
+aC1kYm09Z2RibSBcCisJCS0td2l0aC1nZGJtPSR7U1RBR0lOR19ESVJfSE9TVH0ke2xheW91dF9w
+cmVmaXh9IFwKKwkJLS13aXRob3V0LXNxbGl0ZTIgXAorCQktLXdpdGhvdXQtc3FsaXRlMyBcCisJ
+CS0td2l0aC1leHBhdD0ke1NUQUdJTkdfRElSX0hPU1R9JHtsYXlvdXRfcHJlZml4fSIKKworCitp
+bmhlcml0IGF1dG90b29sc19zdGFnZSBsaWJfcGFja2FnZSBiaW5jb25maWcKKworT0VfQklOQ09O
+RklHX0VYVFJBX01BTkdMRSA9ICIgLWUgJ3M6bG9jYXRpb249c291cmNlOmxvY2F0aW9uPWluc3Rh
+bGxlZDonIgorCitkb19jb25maWd1cmVfcHJlcGVuZCgpIHsKKwljcCAke1NUQUdJTkdfREFUQURJ
+Un0vYXByL2Fwcl9ydWxlcy5tayAke1N9L2J1aWxkL3J1bGVzLm1rCisJZWNobyAiQUNfUFJPR19M
+SUJUT09MIiA+PiAke1N9L2NvbmZpZ3VyZS5pbgorfQorCitkb19jb25maWd1cmVfYXBwZW5kKCkg
+eworCXNlZCAtaSAtZSAgczphcHJfYnVpbGRlcnM9L3Vzci9zaGFyZS9idWlsZC0xOmFwcl9idWls
+ZGVycz0ke1NUQUdJTkdfREFUQURJUn0vYnVpbGQtMTpnICR7U30vYnVpbGQvcnVsZXMubWsKKwlz
+ZWQgLWkgL15MSUJUT09ML2QgJHtTfS9idWlsZC9ydWxlcy5taworCWVjaG8gTElCVE9PTD0iJHtT
+VEFHSU5HX0JJTkRJUl9OQVRJVkV9LyR7VEFSR0VUX1BSRUZJWH1saWJ0b29sIC0tdGFnPUNDIiA+
+PiAke1N9L2J1aWxkL3J1bGVzLm1rCit9CisKLS0gCjEuNi4wLjQKCg==
 
---0-1524127941-1244461164=:30302--
+--0-1529672844-1244461374=:19927--
