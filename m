@@ -1,38 +1,34 @@
-Received: from [209.85.200.174] (helo=wf-out-1314.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ramaxlo@gmail.com>) id 1MDX9j-0003iJ-PU
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jun 2009 07:12:23 +0200
-Received: by wf-out-1314.google.com with SMTP id 25so1250129wfa.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Jun 2009 22:02:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=NXnr8H3KjJSxb+8JJCkRezMQ0yI7SZz1qwMO7Z9IO/c=;
-	b=rpC4WcSmWSTIE7GRsLb17uDgT0gpC5EdzovX32/OtwGfoBkaJo67l5rZsOWEf24z8N
-	yqkOAsDU8OeXpruAUqwPdSLTEPPWsbN9bWJMXpIeHHwBpoK1DUoQaGWsQRfwxC/8nO7S
-	DsIgDNupH67UR0h4N8CTAQfq1+DuocWjy+CAY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=mG5mCs8Q7tJ+tu0MKDzaoUZVNz7EFn6yiIQZgHb3b8ujixw9Z1gwp1OLtwRRZofVFb
-	DCq4IntsFtgbhI/qnXOEQtuxNTn4add5ZY8r6p4b36rBnjwIn3w6uGG4xWKCSdojbm1n
-	Q8dilw+FhHs+ieqTB8MzpnZomAJWsbM6/JULQ=
-Received: by 10.142.14.18 with SMTP id 18mr2113901wfn.35.1244437376880;
-	Sun, 07 Jun 2009 22:02:56 -0700 (PDT)
-Received: from renaisance1 (220-128-119-163.HINET-IP.hinet.net
-	[220.128.119.163])
-	by mx.google.com with ESMTPS id 22sm8119854wfi.32.2009.06.07.22.02.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 07 Jun 2009 22:02:55 -0700 (PDT)
-From: Ramax Lo <ramaxlo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jun 2009 13:03:17 +0800
-Message-Id: <1244437397-7409-1-git-send-email-ramaxlo@gmail.com>
-X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <>
-References: <>
-Subject: [PATCH] u-boot-mkimage-openmoko: Fix SRC_URI
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MDXf5-00057s-CN
+	for openembedded-devel@openembedded.org; Mon, 08 Jun 2009 07:44:47 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MDXVt-0003jG-0a
+	for openembedded-devel@openembedded.org; Mon, 08 Jun 2009 05:35:17 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 08 Jun 2009 05:35:17 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 08 Jun 2009 05:35:17 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 08 Jun 2009 07:35:07 +0200
+Message-ID: <h0i7ub$lu6$1@ger.gmane.org>
+References: <20090607175542.GA26712@fh-wedel.de> <h0h0el$60i$1@ger.gmane.org>
+	<20090607191824.GB28536@fh-wedel.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090531 Shredder/3.0b3pre
+In-Reply-To: <20090607191824.GB28536@fh-wedel.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Still not solved: glibc-dbg and insane.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2009 05:12:24 -0000
+X-List-Received-Date: Mon, 08 Jun 2009 05:44:47 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
----
- .../u-boot/u-boot-mkimage-openmoko-native_oe.bb    |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On 07-06-09 21:18, Martin Dietze wrote:
+> On Sun, June 07, 2009, Koen Kooi wrote:
+>
+>> What's exactly breaking? It's perfectly legal (and needed for depchains!)
+>> for -dbg package to be empty.
+>
+> This is the QA error I am getting:
+>
+> | % cat log.qa_package
+> | wrong architecture, glibc-dbg, /work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so
+> | wrong architecture, glibc-dbg, /work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so
+>
+> And this is what the files look like:
+>
+> | % file  /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so
+> | /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so: ELF 32-bit LSB no file type, no machine, invalid version (SYSV)
+> | % file  /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so
+> | /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so: ELF 32-bit LSB no file type, no machine, invalid version (SYSV)
+>
+> The files are practicall empty (here libc-2.3.3.so):
+>
+> 7f 45 4c 46  01 01 01 00  00 00 00 00  00 00 00 00  .ELF............
+> 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+> 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+> 00 00 00 00  01 00 00 00  03 00 00 00  00 00 00 00  ................
+> 00 00 00 00  00 00 00 00  0b 00 00 00  00 00 00 00  ................
+> 00 00 00 00  01 00 00 00  00 00 00 00               ............
+>
+> For whatever reason the build creates those files in .debug
+> even though the build is performed without debug code.
 
-diff --git a/recipes/u-boot/u-boot-mkimage-openmoko-native_oe.bb b/recipes/u-boot/u-boot-mkimage-openmoko-native_oe.bb
-index 8b5564c..4005c37 100644
---- a/recipes/u-boot/u-boot-mkimage-openmoko-native_oe.bb
-+++ b/recipes/u-boot/u-boot-mkimage-openmoko-native_oe.bb
-@@ -5,7 +5,7 @@ inherit native
- PV = "1.2.0+git9912121f7ed804ea58fd62f3f230b5dcfc357d88svn2238"
- PR = "r1"
- 
--SRC_URI = "git://www.denx.de/git/u-boot.git/;protocol=git;tag=9912121f7ed804ea58fd62f3f230b5dcfc357d88 \
-+SRC_URI = "git://git.denx.de/u-boot.git;protocol=git;tag=9912121f7ed804ea58fd62f3f230b5dcfc357d88 \
- file://uboot-machtypes.patch;patch=1 \
- file://ext2load_hex.patch;patch=1 \
- file://uboot-s3c2410-warnings-fix.patch;patch=1 \
--- 
-1.5.4.3
+Ahh, it creates empty .debug/foo.so files. In that case do:
+
+# The files are empty except for the elf header
+INSANE_SKIP_glibc-dbg = True
+
+In the offending glibc recipe
+
+regards,
+
+Koen
 
 
 
