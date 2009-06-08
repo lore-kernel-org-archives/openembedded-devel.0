@@ -1,34 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MDXf5-00057s-CN
-	for openembedded-devel@openembedded.org; Mon, 08 Jun 2009 07:44:47 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MDXVt-0003jG-0a
-	for openembedded-devel@openembedded.org; Mon, 08 Jun 2009 05:35:17 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 08 Jun 2009 05:35:17 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 08 Jun 2009 05:35:17 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 08 Jun 2009 07:35:07 +0200
-Message-ID: <h0i7ub$lu6$1@ger.gmane.org>
-References: <20090607175542.GA26712@fh-wedel.de> <h0h0el$60i$1@ger.gmane.org>
-	<20090607191824.GB28536@fh-wedel.de>
+	(envelope-from <pb@reciva.com>) id 1MDb1m-00018Q-Kl
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jun 2009 11:20:26 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MDasa-0001VF-Si
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jun 2009 10:10:57 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MDasa-00036Q-30
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jun 2009 10:10:56 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1244429571-27482-1-git-send-email-msmith@cbnco.com>
+References: <1244429571-27482-1-git-send-email-msmith@cbnco.com>
+Date: Mon, 08 Jun 2009 10:10:55 +0100
+Message-Id: <1244452255.2611.175.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090531 Shredder/3.0b3pre
-In-Reply-To: <20090607191824.GB28536@fh-wedel.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Still not solved: glibc-dbg and insane.bbclass
+X-Mailer: Evolution 2.26.2 
+Subject: Re: [PATCH] Add bwm-ng 0.6: lightweight network and disk bandwidth monitor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +36,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2009 05:44:47 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 08 Jun 2009 09:20:26 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 07-06-09 21:18, Martin Dietze wrote:
-> On Sun, June 07, 2009, Koen Kooi wrote:
->
->> What's exactly breaking? It's perfectly legal (and needed for depchains!)
->> for -dbg package to be empty.
->
-> This is the QA error I am getting:
->
-> | % cat log.qa_package
-> | wrong architecture, glibc-dbg, /work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so
-> | wrong architecture, glibc-dbg, /work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so
->
-> And this is what the files look like:
->
-> | % file  /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so
-> | /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/ld-2.3.3.so: ELF 32-bit LSB no file type, no machine, invalid version (SYSV)
-> | % file  /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so
-> | /var/src/OE/tmp/work/mipsel-nylon-linux/glibc-2.3.3-r17/install/glibc-dbg/lib/.debug/libc-2.3.3.so: ELF 32-bit LSB no file type, no machine, invalid version (SYSV)
->
-> The files are practicall empty (here libc-2.3.3.so):
->
-> 7f 45 4c 46  01 01 01 00  00 00 00 00  00 00 00 00  .ELF............
-> 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
-> 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
-> 00 00 00 00  01 00 00 00  03 00 00 00  00 00 00 00  ................
-> 00 00 00 00  00 00 00 00  0b 00 00 00  00 00 00 00  ................
-> 00 00 00 00  01 00 00 00  00 00 00 00               ............
->
-> For whatever reason the build creates those files in .debug
-> even though the build is performed without debug code.
+On Sun, 2009-06-07 at 22:52 -0400, Michael Smith wrote:
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "Lightweight console network and disk bandwidth monitor"
+> +LICENSE = "GPLv2"
 
-Ahh, it creates empty .debug/foo.so files. In that case do:
+Thanks for the patch.  I checked this in.
 
-# The files are empty except for the elf header
-INSANE_SKIP_glibc-dbg = True
+p.
 
-In the offending glibc recipe
-
-regards,
-
-Koen
 
 
 
