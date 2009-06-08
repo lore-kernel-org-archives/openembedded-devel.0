@@ -1,23 +1,31 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MDfXD-0001Oo-EU
-	for openembedded-devel@openembedded.org; Mon, 08 Jun 2009 16:09:11 +0200
-Received: (qmail 25446 invoked by uid 813007); 8 Jun 2009 13:59:42 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 8 Jun 2009 13:59:41 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <pb@reciva.com>) id 1MDfeE-0001hs-QA
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jun 2009 16:16:26 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MDfV3-000092-8T
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jun 2009 15:06:57 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MDfV3-0005cB-3a
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Jun 2009 15:06:57 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 8 Jun 2009 16:00:42 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.4;
-	x86_64; ; )
-References: <d741b6090902221034t224cd1e5ja6b3e863fd54bbda@mail.gmail.com>
-	<49A1C706.6000906@techworks.ie>
-In-Reply-To: <49A1C706.6000906@techworks.ie>
-MIME-Version: 1.0
-Message-Id: <200906081600.49096.marcin@juszkiewicz.com.pl>
-Subject: Re: ep93xx, ts72xx, gesbc-9302 and more (was Re: Angstrom, ep93xx, broken rootfs)
+In-Reply-To: <4A2D111A.3030003@cbnco.com>
+References: <Pine.LNX.4.64.0906071637260.27204@juice.ott.cti.com>
+	<1244407406-23717-1-git-send-email-msmith@cbnco.com>
+	<1244454759.2611.178.camel@mill.internal.reciva.com>
+	<4A2D111A.3030003@cbnco.com>
+Date: Mon, 08 Jun 2009 15:06:50 +0100
+Message-Id: <1244470012.2611.187.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: Re: [PATCH] busybox: Split syslog initscript into busybox-syslog
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,59 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2009 14:09:11 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 08 Jun 2009 14:16:26 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia niedziela, 22 lutego 2009 o 22:43:34 Christian Gagneraud=20
-napisa=C5=82(a):
+On Mon, 2009-06-08 at 09:24 -0400, Michael Smith wrote:
+> What I'm wondering is how would that modification get persisted if, say, 
+> bitbake failed during do_compile, and then I restarted it? Would it 
+> think from the stamp that it's already done do_mangle_rrecommmends, and 
+> not bother running it again? Then RRECOMMENDS_${PN} would go back to 
+> whatever it was at parse time, i.e. no busybox-syslog. Is there a way 
+> around that?
 
-> I would like to highlight an "issue" to oe developpers: The machine
-> name "ep93xx" is completely misleading, because it refers to a CPU
-> name not a board/machine name, the conf/machine/ep93xx.conf file says
-> that this is for the "Cirrus Logic EP-93xx Development Platform",
-> which is the vendor development board for the EP-93xx CPU, so the
-> name should be something like "ep93xxevb" or "devkit-ep93xx", or
-> whatever saying it refers to a dev board not to all EP-93xx based
-> machine.
+Ah, yes, right.  The easiest way to deal with that would be to have the
+function that does the mangling be called during do_package (i.e. listed
+in PACKAGEFUNCS) rather than as a separate task.  This is where things
+like the shared library dependencies are computed as well.
 
-I use EDB9301 here. 2.6.29 kernel from OE should works on all EDB93xx=20
-boards made by Cirrus Logic (I enabled their support).
-
-> As well, there is a conf/machine/include/tune-ep9312.inc which is not
-> used by any machine conf file, does anyone know why?
-> That's  a pity because this serie of CPU (EP93xx) has FP support
-> support through maverick crunch. Which is supported by linux and
-> gcc4, and this is exactly the purpose of this tune-ep9312.inc file (i
-> did not test it yet, see below).
-
-As you noted in next email the problem is with toolchain. The good thing=20
-is that Martin Guy and Hasjim Williams got it sorted. I merged their=20
-work recently into OpenEmbedded. By default "ep93xx" machine do not use=20
-it because cpu cycles are then wasted in context switches and there is=20
-no big speedup in normal applications (those which use heavy FP can be=20
-compiled for Maverick optimisations).
-
-> I'm currently working with a TS-7260 and a TS-7800 boards.
-
-> Later on, i would like to experiment with maverick crunch, to check
-> if it is usable and really brings noticable FP performance. If so,
-> then: - rename the conf/machine/include/tune-ep9312.inc to
-> conf/machine/include/tune-ep93xx.inc
-> - make the machine conf files use tune-ep93xx.inc instead of
-> tune-arm920t.inc
-
-tune-ep3912 is named like this because -march=3Dep3912 which it uses.=20
-Please update to recent OE and test MaverickCrunch on your board.
-
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+p.
 
 
 
