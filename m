@@ -1,22 +1,23 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MDw4K-0002BS-KB
+	(envelope-from <philb@gnu.org>) id 1MDwAq-0002Mv-4f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 09:48:29 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KKY00H7PNWRU0V0@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	09 Jun 2009 02:38:52 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id B565614AF5D; Tue,
-	09 Jun 2009 03:38:51 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 09 Jun 2009 09:55:12 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>)
+	id 1MDw1Y-000160-Kd; Tue, 09 Jun 2009 08:45:36 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 09 Jun 2009 03:38:51 -0400
-Message-id: <1244533131-18950-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.6.0.6
-Subject: [PATCH] u-boot: add support for DaVinci EVMs, provided by a staging tree
+In-Reply-To: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
+References: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
+Date: Tue, 09 Jun 2009 08:45:34 +0100
+Message-Id: <1244533534.4151.46.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Subject: Re: [PATCH] rootfs_ipk.bbclass: use force-defaults (Bug 5133)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,111 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 07:48:33 -0000
+X-List-Received-Date: Tue, 09 Jun 2009 07:55:14 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-This staging tree holds the patches submitted to the upstream U-Boot
+On Tue, 2009-06-09 at 13:45 +0900, Rolf Leggewie wrote:
+> From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+> 
+> Without -force-defaults, I currently cannot build any image because opkg hangs, waiting for
+> user input that of course never comes.
+> 
+> I'm explicitly not sure if this is the right way to fix this, but we should we fix it soon.
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- conf/machine/dm355-evm.conf      |    2 +-
- conf/machine/dm365-evm.conf      |    2 +-
- conf/machine/dm6467-evm.conf     |    2 +-
- conf/machine/include/davinci.inc |    2 +-
- recipes/u-boot/u-boot_git.bb     |   22 +++++++++++++++++-----
- 5 files changed, 21 insertions(+), 9 deletions(-)
+In theory this patch oughtn't to be necessary, in that opkg shouldn't be
+asking for user input unless there is something wrong with the packages
+it's trying to install (i.e. overlapping contents).  So, the "right" way
+to fix the underlying issue is to address whatever is wrong with the
+packages.  
 
-diff --git a/conf/machine/dm355-evm.conf b/conf/machine/dm355-evm.conf
-index d509152..9ef4ff7 100644
---- a/conf/machine/dm355-evm.conf
-+++ b/conf/machine/dm355-evm.conf
-@@ -4,4 +4,4 @@
- 
- require conf/machine/include/davinci.inc
- 
--UBOOT_MACHINE = "davinci_dvevm_config"
-+UBOOT_MACHINE = "davinci_dm355_evm_config"
-diff --git a/conf/machine/dm365-evm.conf b/conf/machine/dm365-evm.conf
-index 09f4a35..de2cc4a 100644
---- a/conf/machine/dm365-evm.conf
-+++ b/conf/machine/dm365-evm.conf
-@@ -4,4 +4,4 @@
- 
- require conf/machine/include/davinci.inc
- 
--UBOOT_MACHINE = "davinci_dvevm_config"
-+UBOOT_MACHINE = "davinci_dm365_evm_config"
-diff --git a/conf/machine/dm6467-evm.conf b/conf/machine/dm6467-evm.conf
-index 66ed1fe..a7596f1 100644
---- a/conf/machine/dm6467-evm.conf
-+++ b/conf/machine/dm6467-evm.conf
-@@ -4,4 +4,4 @@
- 
- require conf/machine/include/davinci.inc
- 
--UBOOT_MACHINE = "davinci_dvevm_config"
-+UBOOT_MACHINE = "davinci_dm6467_evm_config"
-diff --git a/conf/machine/include/davinci.inc b/conf/machine/include/davinci.inc
-index 3134c28..af9dc0f 100644
---- a/conf/machine/include/davinci.inc
-+++ b/conf/machine/include/davinci.inc
-@@ -9,7 +9,7 @@ KERNEL_IMAGETYPE = "uImage"
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-davinci"
- 
--PREFERRED_VERSION_u-boot = "git"
-+PREFERRED_PROVIDER_virtual/bootloader = "u-boot"
- UBOOT_MACHINE = "davinci_dvevm_config"
- 
- UBOOT_ENTRYPOINT = "0x80008000"
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 9f1bd61..12ebcfe 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -1,13 +1,10 @@
- require u-boot.inc
--PR ="r25"
-+PR ="r26"
- 
- FILESPATHPKG =. "u-boot-git:"
- 
- SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git "
- SRCREV_davinci-sffsdr = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
--SRCREV_dm6446-evm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
--SRCREV_dm6467-evm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
--SRCREV_dm355-evm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
- SRCREV_akita = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
- SRCREV_spitz = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
- SRCREV_c7x0 = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
-@@ -38,6 +35,22 @@ SRC_URI_overo = "git://gitorious.org/u-boot-omap3/mainline.git;branch=omap3-dev;
- SRCREV_overo = "2dea1db2a3b7c12ed70bbf8ee50755089c5e5170"
- PV_overo = "2009.03+${PR}+gitr${SRCREV}"
- 
-+SRC_URI_dm6446-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
-+SRCREV_dm6446-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
-+PV_dm6446-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
-+
-+SRC_URI_dm6467-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
-+SRCREV_dm6467-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
-+PV_dm6467-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
-+
-+SRC_URI_dm355-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
-+SRCREV_dm355-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
-+PV_dm355-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
-+
-+SRC_URI_dm365-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
-+SRCREV_dm365-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
-+PV_dm365-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
-+
- SRC_URI_dm355-leopard = "git://www.denx.de/git/u-boot-arm.git;protocol=git;branch=next \
-                         file://leopardboard-support.patch;patch=1 \
- "
-@@ -95,4 +108,3 @@ do_deploy_prepend_mini2440() {
- do_deploy_prepend_micro2440() {
- 	cp ${S}/u-boot-nand16k.bin ${S}/u-boot.bin
- }
--
--- 
-1.6.0.6
+However, no matter how broken the packages are, it clearly isn't
+desirable for opkg to hang indefinitely and your patch seems like it
+should indeed stop that from happening.  So yes, please go ahead and
+check it in.
+
+p.
+
 
 
 
