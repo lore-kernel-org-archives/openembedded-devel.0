@@ -1,27 +1,28 @@
-Received: from [151.189.21.54] (helo=mail-in-14.arcor-online.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <no2spam@nospam.arcornews.de>) id 1MDtMl-0007bC-Iz
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 06:55:19 +0200
-Received: from mail-in-18-z2.arcor-online.net (mail-in-18-z2.arcor-online.net
-	[151.189.8.35]) by mx.arcor.de (Postfix) with ESMTP id 43A2A28B133;
-	Tue,  9 Jun 2009 06:45:44 +0200 (CEST)
-Received: from mail-in-17.arcor-online.net (mail-in-17.arcor-online.net
-	[151.189.21.57])
-	by mail-in-18-z2.arcor-online.net (Postfix) with ESMTP id 366D3510886; 
-	Tue,  9 Jun 2009 06:45:44 +0200 (CEST)
-Received: from localhost.localdomain (p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
-	[114.177.118.77]) (Authenticated sender: leggewie@arcor.de)
-	by mail-in-17.arcor-online.net (Postfix) with ESMTPSA id E7D4B3B2697;
-	Tue,  9 Jun 2009 06:45:42 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-17.arcor-online.net E7D4B3B2697
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Received: from [91.121.30.210] (helo=27.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <ebenard@free.fr>) id 1MDuJN-0005pe-0h
+	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 07:55:53 +0200
+Received: (qmail 22870 invoked by uid 503); 9 Jun 2009 06:51:13 -0000
+Received: from b9.ovh.net (HELO mail91.ha.ovh.net) (213.186.33.59)
+	by 27.mail-out.ovh.net with SMTP; 9 Jun 2009 06:51:13 -0000
+Received: from b0.ovh.net (HELO queue-out) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Jun 2009 05:46:18 -0000
+Received: from tal33-2-82-228-175-43.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.228.175.43)
+	by ns0.ovh.net with SMTP; 9 Jun 2009 05:46:17 -0000
+Message-ID: <4A2DF729.2070201@free.fr>
+Date: Tue, 09 Jun 2009 07:46:17 +0200
+From: Eric BENARD <ebenard@free.fr>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Jun 2009 13:45:37 +0900
-Message-Id: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
-X-Mailer: git-send-email 1.6.0.4
-Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Subject: [PATCH] rootfs_ipk.bbclass: use force-defaults (Bug 5133)
+References: <loom.20090609T033622-449@post.gmane.org>
+In-Reply-To: <loom.20090609T033622-449@post.gmane.org>
+X-Ovh-Tracer-Id: 17809766202750425417
+X-Ovh-Remote: 82.228.175.43 (tal33-2-82-228-175-43.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|H 0.5/N
+Subject: Re: Support for Davinci DM357/365
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,34 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 04:55:19 -0000
+X-List-Received-Date: Tue, 09 Jun 2009 05:55:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Hi Kwan,
 
-Without -force-defaults, I currently cannot build any image because opkg hangs, waiting for
-user input that of course never comes.
+Kwan wrote :
+> I have 2 Davinci boards DM357 & DM365. I'm thinking of using OE but I 
+> understand that currently OE does not have support for these boards yet. May I 
+> know if there are any plans to support these boards & if yes, roughly when will 
+> it be ready?
+> 
+check http://arago-project.org/ which is TI's overlay for support of 
+their evaluation boards.
 
-I'm explicitly not sure if this is the right way to fix this, but we should we fix it soon.
-
----
- classes/rootfs_ipk.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
-index f5714bd..bdb4f57 100644
---- a/classes/rootfs_ipk.bbclass
-+++ b/classes/rootfs_ipk.bbclass
-@@ -8,7 +8,7 @@
- do_rootfs[depends] += "opkg-native:do_populate_staging ipkg-utils-native:do_populate_staging"
- do_rootfs[recrdeptask] += "do_package_write_ipk"
- 
--IPKG_ARGS = "-f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", "-nodeps", "", d)}"
-+IPKG_ARGS = "-f ${IPKGCONF_TARGET} -force-defaults -o ${IMAGE_ROOTFS} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", "-nodeps", "", d)}"
- 
- PACKAGE_INSTALL_NO_DEPS ?= "0"
- 
--- 
-1.6.0.4
-
+Eric
 
 
