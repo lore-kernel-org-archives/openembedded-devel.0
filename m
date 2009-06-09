@@ -1,22 +1,35 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MDwAq-0002Mv-4f
+	(envelope-from <andrea.adami@gmail.com>) id 1MDwMY-0002dG-0c
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 09:55:12 +0200
-Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>)
-	id 1MDw1Y-000160-Kd; Tue, 09 Jun 2009 08:45:36 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
+	Tue, 09 Jun 2009 10:07:19 +0200
+Received: by ewy20 with SMTP id 20so5157849ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Jun 2009 00:57:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=NZSnfr049mhVEI+5JBDZjuts+u4F12safW9BoCQV5nM=;
+	b=hTyP13dJ7EzrP3/m23vmuUzsFjxrlTwnfVYfHe414pXEPv0frnszhfZhkfjHM5af4g
+	YZwkbNyMwk7GaGcGQC5BpgVQ7jMS+toLwg/8aajwkkpCgUOBQtRu5FNodvXp2yYdsEvO
+	kkZAbFynIXYvCMab56IEPXbtUIqhnU7AlHaJA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Z6uXjUmNsrnrMyfG1uaIMAm/1SA4YkfoE6cRsxaszRmBEEIy7BXeL3sx95/+vBZGGF
+	b18NT0FlcipbKSAQAqt6Gx3TF8OLU/n97rcq9cNvD47x6isNWgcsw/U/Dgsdk/blEX/m
+	+8EZOpZqgcuS7f5Z216TUi6MC3SnFaEQoLuw4=
+MIME-Version: 1.0
+Received: by 10.216.1.69 with SMTP id 47mr2624530wec.224.1244534262390; Tue, 
+	09 Jun 2009 00:57:42 -0700 (PDT)
+In-Reply-To: <1244533534.4151.46.camel@lenovo.internal.reciva.com>
 References: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
-Date: Tue, 09 Jun 2009 08:45:34 +0100
-Message-Id: <1244533534.4151.46.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+	<1244533534.4151.46.camel@lenovo.internal.reciva.com>
+Date: Tue, 9 Jun 2009 09:57:42 +0200
+Message-ID: <d1b08f940906090057n12d4dab0q1a5a0799a102a737@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] rootfs_ipk.bbclass: use force-defaults (Bug 5133)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,31 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 07:55:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 Jun 2009 08:07:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-06-09 at 13:45 +0900, Rolf Leggewie wrote:
-> From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-> 
-> Without -force-defaults, I currently cannot build any image because opkg hangs, waiting for
-> user input that of course never comes.
-> 
-> I'm explicitly not sure if this is the right way to fix this, but we should we fix it soon.
+I suppose is the missing PREFERRED_PROVIDER.
 
-In theory this patch oughtn't to be necessary, in that opkg shouldn't be
-asking for user input unless there is something wrong with the packages
-it's trying to install (i.e. overlapping contents).  So, the "right" way
-to fix the underlying issue is to address whatever is wrong with the
-packages.  
+In my case angstrom-opie-image installs bluez4 in rootfs but opkc-cl
+is waiting input about bluez3 upgrade...
 
-However, no matter how broken the packages are, it clearly isn't
-desirable for opkg to hang indefinitely and your patch seems like it
-should indeed stop that from happening.  So yes, please go ahead and
-check it in.
+http://tinderbox.openembedded.net/public/logs/5832846.txt
 
-p.
+After 30 mins I killed the process but don't have here the stdout...
 
 
+Andrea
 
 
