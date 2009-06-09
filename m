@@ -1,17 +1,33 @@
-Received: from [85.17.141.90] (helo=mzh.zlo.nu)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1MDy7u-0008Hg-Aw
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 12:00:18 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id CD39214030; Tue,  9 Jun 2009 11:50:42 +0200 (CEST)
-Date: Tue, 9 Jun 2009 11:50:42 +0200
-From: Marc Olzheim <zlo@zlo.nu>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090609095042.GB1405@zlo.nu>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: [Patch] (e)glibc's do_prep_locale_tree() in bbclass
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MDyAg-0008Or-0s
+	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 12:03:10 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MDy1O-00051z-F6
+	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 09:53:34 +0000
+Received: from p3077-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.118.77])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 09 Jun 2009 09:53:34 +0000
+Received: from no2spam by p3077-ipngn201marunouchi.tokyo.ocn.ne.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 09 Jun 2009 09:53:34 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 09 Jun 2009 18:53:20 +0900
+Message-ID: <h0lbei$e89$1@ger.gmane.org>
+References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>	<f96d234e0906051443y3d0cfcf0m595469c780c9fed@mail.gmail.com>	<200906060846.30822.mickey@vanille-media.de>
+	<200906091121.59329.mickey@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+In-Reply-To: <200906091121.59329.mickey@vanille-media.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: progress on OE organization issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,74 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 10:00:21 -0000
-X-Groupsio-MsgNum: 11175
-Content-Type: multipart/mixed; boundary="WIyZ46R2i8wDzkSu"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Jun 2009 10:03:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---WIyZ46R2i8wDzkSu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Mickey, thank you for the update.
 
-Hi,
+Michael 'Mickey' Lauer wrote:
+> members, however since it should reflect the broad range of interested parties, 
+> it should be voted by a majority, not a minority.
 
-do_prep_locale_tree() in both recipes/eglibc/eglibc-package.bbclass and
-recipes/glibc/glibc-package.bbclass do an
-"ls ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib"
+so, here are the next steps
 
-That works fine as longs as there are no directories in there. When
-there are directories in there (which is the case in my situation at
-least, using org.openembedded.dev), ls produces "directory:" lines which
-obviously confuse the cp command.
+0) post eV statutes online and translate to English
+    cbrake? florian?
+1) make eV membership more representative of OE stakeholders.
+    goal: 50% of those with RW access should be a member of the eV
+2) discuss policies, number of committee members, etc.
+3) nominate candidates
+4) vote
 
-Simply adding a "-d" flag to ls solves this issue.
 
-Patch attached.
 
-Marc
-
---WIyZ46R2i8wDzkSu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=p
-
-commit b4098e51e5bc76dda6755e2f949b107ccd85a088
-Author: Marc Olzheim <marc@iphion.nl>
-Date:   Tue Jun 9 11:39:11 2009 +0200
-
-    Fix do_prep_locale_tree() for eglibc as well.
-
-diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
-index f2acc96..e8bb333 100644
---- a/recipes/eglibc/eglibc-package.bbclass
-+++ b/recipes/eglibc/eglibc-package.bbclass
-@@ -156,7 +156,7 @@ do_prep_locale_tree() {
- 	for i in $treedir/${datadir}/i18n/charmaps/*gz; do 
- 		gunzip $i
- 	done
--	ls ${D}/lib/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
-+	ls -d ${D}/lib/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
- 	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.* ]; then
- 		cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.* $treedir/lib
- 	fi
-
-commit 6a703c95b135290b617d5b9dd14a4d08a8b1131b
-Author: Marc Olzheim <marc@iphion.nl>
-Date:   Tue Jun 9 10:47:24 2009 +0200
-
-    Fix do_prep_locale_tree().
-
-diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
-index 2bf08ce..2da6818 100644
---- a/recipes/glibc/glibc-package.bbclass
-+++ b/recipes/glibc/glibc-package.bbclass
-@@ -147,7 +147,7 @@ do_prep_locale_tree() {
- 	for i in $treedir/${datadir}/i18n/charmaps/*gz; do 
- 		gunzip $i
- 	done
--	ls ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
-+	ls -d ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
- 	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so ]; then
- 		cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so $treedir/lib
- 	fi
-
---WIyZ46R2i8wDzkSu--
