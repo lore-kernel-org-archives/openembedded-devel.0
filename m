@@ -1,36 +1,17 @@
-Received: from [209.85.217.206] (helo=mail-gx0-f206.google.com)
+Received: from [85.17.141.90] (helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MDy4I-00089E-OC
+	(envelope-from <marcolz@zlo.nu>) id 1MDy7u-0008Hg-Aw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 11:56:34 +0200
-Received: by gxk2 with SMTP id 2so3542815gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jun 2009 02:46:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=0MXxaPxdDocNnhtt2EO0o/pagneCL+febaZwnnqJmls=;
-	b=aXxo5cOb8CUt6ODsonvhXVc07+72OyjRhGouUiMp3VTD8Yc4CVGUcfzunFGvNnHOAz
-	6D8ZmC2hOGyzChd1j3QJxoMGbvyQhdwjs2G0jwjFAyiLaPeBB28HunsoYnnv5pKd2BDM
-	O86zp/AWCLsjj8VD1n8j45Emq8k6dbprGFGjY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=nxGd8U2snN0FbXf9WjsvA+R/bJMnexbIloZmO1vdVfUmQZx54w52giIlwhHSxqK+9U
-	N9Q/VLGXg6NIV5X0iynwTY2A5maySL39AQpfY3zyLzyFf0RehNEX8I2ozsmYdT9xwlJj
-	ScY/uZiZFSShD3P6v18KhIOfgbntyi6Yn32ck=
-MIME-Version: 1.0
-Received: by 10.231.13.198 with SMTP id d6mr2161009iba.32.1244540818118; Tue, 
-	09 Jun 2009 02:46:58 -0700 (PDT)
-In-Reply-To: <F006973C7BA4F048BE0A9AF40B69189C23DA61@susmnrex004.na.colfaxcorporation.net>
-References: <AcnjJBNDtAeqOJaUTYiV9+VVWZtdqA==>
-	<F006973C7BA4F048BE0A9AF40B69189C23DA61@susmnrex004.na.colfaxcorporation.net>
-Date: Tue, 9 Jun 2009 11:46:58 +0200
-Message-ID: <c384c5ea0906090246u53c678a2jc537012e5893834b@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Tue, 09 Jun 2009 12:00:18 +0200
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id CD39214030; Tue,  9 Jun 2009 11:50:42 +0200 (CEST)
+Date: Tue, 9 Jun 2009 11:50:42 +0200
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: How do you add libstdc++ to the micro-image distro?
+Message-ID: <20090609095042.GB1405@zlo.nu>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: [Patch] (e)glibc's do_prep_locale_tree() in bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +25,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 09:56:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 Jun 2009 10:00:21 -0000
+X-Groupsio-MsgNum: 11175
+Content-Type: multipart/mixed; boundary="WIyZ46R2i8wDzkSu"
+Content-Disposition: inline
 
-Hello James,
+--WIyZ46R2i8wDzkSu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, Jun 2, 2009 at 3:47 AM, Newell, James
-C.<James.Newell@colfaxcorp.com> wrote:
-> I am fairly new to the openembedded project. =A0I'm attempting to add a
-> c++ application to the micro-image distro for experimenting with oe,
-> but it doesn't include a stdc++. =A0 How would one add libstdc++ to the
-> micro image distro? =A0Adding libstdc++ and a few other attempts to the
-> IMAGE_INSTALL variable in recipes/images/micro-image.bb doesn't seem to
-> work. =A0Any help is appreciated.
->
-Add a recipe for your C++ application.
+Hi,
 
-Add the application package to your IMAGE_INSTALL.
+do_prep_locale_tree() in both recipes/eglibc/eglibc-package.bbclass and
+recipes/glibc/glibc-package.bbclass do an
+"ls ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib"
 
-OpenEmbedded will then automatically find out about the shared library
-dependencies and will include
-libstdc++ in the image.
+That works fine as longs as there are no directories in there. When
+there are directories in there (which is the case in my situation at
+least, using org.openembedded.dev), ls produces "directory:" lines which
+obviously confuse the cp command.
 
-Regards,
---=20
-Leon
+Simply adding a "-d" flag to ls solves this issue.
 
+Patch attached.
 
+Marc
+
+--WIyZ46R2i8wDzkSu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=p
+
+commit b4098e51e5bc76dda6755e2f949b107ccd85a088
+Author: Marc Olzheim <marc@iphion.nl>
+Date:   Tue Jun 9 11:39:11 2009 +0200
+
+    Fix do_prep_locale_tree() for eglibc as well.
+
+diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
+index f2acc96..e8bb333 100644
+--- a/recipes/eglibc/eglibc-package.bbclass
++++ b/recipes/eglibc/eglibc-package.bbclass
+@@ -156,7 +156,7 @@ do_prep_locale_tree() {
+ 	for i in $treedir/${datadir}/i18n/charmaps/*gz; do 
+ 		gunzip $i
+ 	done
+-	ls ${D}/lib/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
++	ls -d ${D}/lib/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
+ 	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.* ]; then
+ 		cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.* $treedir/lib
+ 	fi
+
+commit 6a703c95b135290b617d5b9dd14a4d08a8b1131b
+Author: Marc Olzheim <marc@iphion.nl>
+Date:   Tue Jun 9 10:47:24 2009 +0200
+
+    Fix do_prep_locale_tree().
+
+diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
+index 2bf08ce..2da6818 100644
+--- a/recipes/glibc/glibc-package.bbclass
++++ b/recipes/glibc/glibc-package.bbclass
+@@ -147,7 +147,7 @@ do_prep_locale_tree() {
+ 	for i in $treedir/${datadir}/i18n/charmaps/*gz; do 
+ 		gunzip $i
+ 	done
+-	ls ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
++	ls -d ${D}${base_libdir}/* | xargs -iBLAH cp -pPR BLAH $treedir/lib
+ 	if [ -f ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so ]; then
+ 		cp -pPR ${CROSS_DIR}/${TARGET_SYS}/lib/libgcc_s.so $treedir/lib
+ 	fi
+
+--WIyZ46R2i8wDzkSu--
