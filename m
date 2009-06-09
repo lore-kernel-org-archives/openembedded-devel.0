@@ -1,33 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [151.189.21.54] (helo=mail-in-14.arcor-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MDt7b-0007ON-3I
-	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 06:39:39 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MDsyJ-0000cl-1s
-	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 04:30:03 +0000
-Received: from ip70-187-140-240.oc.oc.cox.net ([70.187.140.240])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jun 2009 04:30:03 +0000
-Received: from microvis by ip70-187-140-240.oc.oc.cox.net with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jun 2009 04:30:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Nikolas <microvis@cox.net>
-Date: Tue, 9 Jun 2009 04:01:44 +0000 (UTC)
-Message-ID: <loom.20090609T035246-124@post.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 70.187.140.240 (Mozilla/5.0 (Windows; U; Windows NT 5.1;
-	en-US) AppleWebKit/525.19 (KHTML, like Gecko) Chrome/1.0.154.65
-	Safari/525.19)
-Sender: news <news@ger.gmane.org>
-Subject: BitBake error: "python-native_2.6.1.bb failed"
+	(envelope-from <no2spam@nospam.arcornews.de>) id 1MDtMl-0007bC-Iz
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Jun 2009 06:55:19 +0200
+Received: from mail-in-18-z2.arcor-online.net (mail-in-18-z2.arcor-online.net
+	[151.189.8.35]) by mx.arcor.de (Postfix) with ESMTP id 43A2A28B133;
+	Tue,  9 Jun 2009 06:45:44 +0200 (CEST)
+Received: from mail-in-17.arcor-online.net (mail-in-17.arcor-online.net
+	[151.189.21.57])
+	by mail-in-18-z2.arcor-online.net (Postfix) with ESMTP id 366D3510886; 
+	Tue,  9 Jun 2009 06:45:44 +0200 (CEST)
+Received: from localhost.localdomain (p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
+	[114.177.118.77]) (Authenticated sender: leggewie@arcor.de)
+	by mail-in-17.arcor-online.net (Postfix) with ESMTPSA id E7D4B3B2697;
+	Tue,  9 Jun 2009 06:45:42 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-17.arcor-online.net E7D4B3B2697
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Jun 2009 13:45:37 +0900
+Message-Id: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
+X-Mailer: git-send-email 1.6.0.4
+Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Subject: [PATCH] rootfs_ipk.bbclass: use force-defaults (Bug 5133)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,48 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 04:39:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Jun 2009 04:55:19 -0000
 
-Hello all, 
+From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
 
-Just started with OE, trying to build first Angstrom distro. After 470 tasks 
-completed, bitbake fails as follows:
+Without -force-defaults, I currently cannot build any image because opkg hangs, waiting for
+user input that of course never comes.
 
-Compiling /home/nicolae/overo-oe/tmp/work/i686-linux/python-native-2.6.1-
-ml3.1/temp-staging/home/nicolae/overo-oe/tmp/staging/i686-
-linux//usr/lib/python2.6/zipfile.py ...
-| make: *** [libinstall] Error 1
-| FATAL: oe_runmake failed
-NOTE: Task
-failed: /home/nicolae/overo-oe/tmp/work/i686-linux/python-native-2.6.1-
-ml3.1/temp/log.do_stage.7641
-ERROR: TaskFailed event exception, aborting
-ERROR: Build
-of /home/nicolae/overo-oe/org.openembedded.dev/recipes/python/python-
-native_2.6.1.bb do_populate_staging failed
-ERROR: Task 1438 (/home/nicolae/overo-
-oe/org.openembedded.dev/recipes/python/python-native_2.6.1.bb, 
-do_populate_staging) failed
-NOTE: Tasks Summary: Attempted 470 tasks of which 470 didn't need to be rerun 
-and 1 failed.
-ERROR: '/home/nicolae/overo-oe/org.openembedded.dev/recipes/python/python-
-native_2.6.1.bb' failed
+I'm explicitly not sure if this is the right way to fix this, but we should we fix it soon.
 
-Last lines of the log file are:
+---
+ classes/rootfs_ipk.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Compiling /home/nicolae/overo-oe/tmp/work/i686-linux/python-native-2.6.1-
-ml3.1/temp-staging/home/nicolae/overo-oe/tmp/staging/i686-
-linux//usr/lib/python2.6/zipfile.py ...
-make: *** [libinstall] Error 1
-FATAL: oe_runmake failed
-
-Can anybody help, please. 
-
-
-
-
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index f5714bd..bdb4f57 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -8,7 +8,7 @@
+ do_rootfs[depends] += "opkg-native:do_populate_staging ipkg-utils-native:do_populate_staging"
+ do_rootfs[recrdeptask] += "do_package_write_ipk"
+ 
+-IPKG_ARGS = "-f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", "-nodeps", "", d)}"
++IPKG_ARGS = "-f ${IPKGCONF_TARGET} -force-defaults -o ${IMAGE_ROOTFS} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", "-nodeps", "", d)}"
+ 
+ PACKAGE_INSTALL_NO_DEPS ?= "0"
+ 
+-- 
+1.6.0.4
 
 
 
