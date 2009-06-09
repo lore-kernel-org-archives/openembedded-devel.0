@@ -1,32 +1,28 @@
-Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
+Received: from [85.37.17.114] (helo=smtp-out114.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MDyvr-0006Ej-5N
+	(envelope-from <GNUtoo@no-log.org>) id 1ME8w2-0001DP-LY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 12:51:55 +0200
-Received: by bwz19 with SMTP id 19so3803232bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jun 2009 03:42:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=HH1/g3CmFL4r5sk1Z/hNjkB6iRJrzHqJdSrlyFTgQu0=;
-	b=bx4OfsWZwtnFXKA2xhyL+oJisA+AyokXycSqE7CW0P+6PX1Ey3RD/N9anSkV0BFpV6
-	T0gsBYKMCA067uYmg7a6Aja+BOZ2uMxXDuoKwcb2UlKDB4cfcGhig7QUORIH5ULgjXfC
-	9z/7JOwqP1BL2LcoQhxWfK0GyCyRpvMyUBIFs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=g/v4YEg1kg/WOuigNCTwyR0V+V+Hgbk1YSW/OaGD8bTf3qkgoXn+CY9Y7VkEzcGn04
-	py19zfVobJPJPTYXLRlJ+m1TjT1TlMeeKbXGquY9fqRjHLEioIhQNru1Z+A57CoMVlLB
-	euqdT9nm6u9sSGfyBimD8kGVE2uu5Ju00Z40E=
-MIME-Version: 1.0
-Received: by 10.103.168.12 with SMTP id v12mr2865292muo.130.1244544138446; 
-	Tue, 09 Jun 2009 03:42:18 -0700 (PDT)
-Date: Tue, 9 Jun 2009 13:42:18 +0300
-Message-ID: <fce2a370906090342xee12c47k4d6a2cccb6e3abb2@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	Tue, 09 Jun 2009 23:33:08 +0200
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out114.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 9 Jun 2009 23:16:08 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Tue, 9 Jun 2009 23:16:07 +0200
+Received: from [192.168.1.166] ([79.51.84.248]) by FBCMCL01B07.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Tue, 9 Jun 2009 23:16:07 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: bitbake -c clean doesn't clean all stuff
+In-Reply-To: <200906081747.04528.marcin@juszkiewicz.com.pl>
+References: <f96d234e0906080759q40afd1dau930f93999048fbd9@mail.gmail.com>
+	<200906081747.04528.marcin@juszkiewicz.com.pl>
+Date: Tue, 09 Jun 2009 23:16:00 +0200
+Message-Id: <1244582165.6677.3.camel@port4>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 09 Jun 2009 21:16:07.0463 (UTC)
+	FILETIME=[81192B70:01C9E947]
+Subject: Re: OE weekly changelog 2009-06-01 to 2009-06-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +36,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 10:51:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 09 Jun 2009 21:35:14 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello!
-'Bitbake -c clean' cleans all staging, work... files but not ipks.
-What's the reason for such behaviour?
-1) If I clean my recipe I want to be pretty sure build system won't
-use any files from the old build process. But it's not. F.e. if I
-built '1.1.2' recipe, then removed it and built '1.1.1' I want to be
-sure my rootfs uses '1.1.1'. But old-new ipks are in deploy dir, and I
-get 1.1.2 in my rootfs.
-2) If I built recipe with 'PACKAGES = ${PN}', then cleaned it, edited
-my recipe to have "PACKAGES += ${PN}-xxx", and my ${PN} is empty and
-OE doesn't generate ipk for it, but old ipk is still there, ready to
-be installed to my rootfs through obsolete deps of other recipes! I
-don't see the problem until I rebuild my rootfs from scratch.
-So my question is: why doesn't OE clean ipks when cleaning?
+On Mon, 2009-06-08 at 17:46 +0200, Marcin Juszkiewicz wrote:
+> Maybe will also teach contributors to write shorter summaries ;)
+I often(but not always) write long summaries for giving info on why I
+did it this way to it's easier to maintain...
+So If it's better to write shorter summaries...where should I write the
+long version?
+Denis.
+
+
 
 
