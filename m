@@ -1,25 +1,26 @@
-Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MDums-0003JN-MO
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <g.eismann@gmx.net>) id 1MDuqm-0003TR-Tj
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 08:26:22 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KKY004R6K3E9STK@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	09 Jun 2009 01:16:32 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9EDE614AF5F; Tue,
-	09 Jun 2009 02:16:26 -0400 (EDT)
-Date: Tue, 09 Jun 2009 02:16:26 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 09 Jun 2009 08:30:25 +0200
+Received: (qmail invoked by alias); 09 Jun 2009 06:20:49 -0000
+Received: from 97.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
+	[87.222.70.97]
+	by mail.gmx.net (mp060) with SMTP; 09 Jun 2009 08:20:49 +0200
+X-Authenticated: #21729387
+X-Provags-ID: V01U2FsdGVkX1+6oxVq1Fy6A1EEr3lnguIjxshwl4jPKAl1mjniAS
+	4jNgZM4ZhCHgKK
+From: "G. Eismann" <g.eismann@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090609061626.GA32080@denix.org>
-References: <loom.20090609T033622-449@post.gmane.org>
-	<4A2DF729.2070201@free.fr>
-MIME-version: 1.0
-In-reply-to: <4A2DF729.2070201@free.fr>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Support for Davinci DM357/365
+Date: Tue, 9 Jun 2009 08:20:43 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.28-11-generic; KDE/4.2.4; i686; ; )
+References: <loom.20090609T035246-124@post.gmane.org>
+In-Reply-To: <loom.20090609T035246-124@post.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200906090820.43460.g.eismann@gmx.net>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.59
+Subject: Re: BitBake error: "python-native_2.6.1.bb failed"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,24 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 06:26:23 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 09 Jun 2009 06:30:27 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Tue, Jun 09, 2009 at 07:46:17AM +0200, Eric BENARD wrote:
-> Hi Kwan,
+On Martes 09 Junio 2009 06:01:44 Nikolas escribi=F3:
+> Hello all,
 >
-> Kwan wrote :
->> I have 2 Davinci boards DM357 & DM365. I'm thinking of using OE but I 
->> understand that currently OE does not have support for these boards yet. 
->> May I know if there are any plans to support these boards & if yes, 
->> roughly when will it be ready?
-> check http://arago-project.org/ which is TI's overlay for support of their 
-> evaluation boards.
+> Just started with OE, trying to build first Angstrom distro. After 470
+> tasks completed, bitbake fails as follows:
 
-357 and 365 are not yet fully supported, but the support is coming soon.
 
--- 
-Denys
+> Compiling /home/nicolae/overo-oe/tmp/work/i686-linux/python-native-2.6.1-
+> ml3.1/temp-staging/home/nicolae/overo-oe/tmp/staging/i686-
+> linux//usr/lib/python2.6/zipfile.py ...
+> make: *** [libinstall] Error 1
+> FATAL: oe_runmake failed
+>
+> Can anybody help, please.
+
+I dont know about the error, but you can use your native python installed i=
+n=20
+your system adding this line to build/conf/local.conf:
+ASSUME_PROVIDED +=3D "python-native"
+
+
+=2D-=20
+  - Eismann -
 
 
