@@ -1,32 +1,36 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [209.85.217.206] (helo=mail-gx0-f206.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1MDy06-00082u-Jz
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MDy4I-00089E-OC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 11:52:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 040FC2C81A
+	Tue, 09 Jun 2009 11:56:34 +0200
+Received: by gxk2 with SMTP id 2so3542815gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jun 2009 09:41:14 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GYKZErLg0V1b
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jun 2009 09:41:12 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 287412C814
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jun 2009 09:41:11 +0000 (UTC)
-Message-ID: <4A2E2E93.1090005@gmail.com>
-Date: Tue, 09 Jun 2009 11:42:43 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
+	Tue, 09 Jun 2009 02:46:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=0MXxaPxdDocNnhtt2EO0o/pagneCL+febaZwnnqJmls=;
+	b=aXxo5cOb8CUt6ODsonvhXVc07+72OyjRhGouUiMp3VTD8Yc4CVGUcfzunFGvNnHOAz
+	6D8ZmC2hOGyzChd1j3QJxoMGbvyQhdwjs2G0jwjFAyiLaPeBB28HunsoYnnv5pKd2BDM
+	O86zp/AWCLsjj8VD1n8j45Emq8k6dbprGFGjY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=nxGd8U2snN0FbXf9WjsvA+R/bJMnexbIloZmO1vdVfUmQZx54w52giIlwhHSxqK+9U
+	N9Q/VLGXg6NIV5X0iynwTY2A5maySL39AQpfY3zyLzyFf0RehNEX8I2ozsmYdT9xwlJj
+	ScY/uZiZFSShD3P6v18KhIOfgbntyi6Yn32ck=
 MIME-Version: 1.0
+Received: by 10.231.13.198 with SMTP id d6mr2161009iba.32.1244540818118; Tue, 
+	09 Jun 2009 02:46:58 -0700 (PDT)
+In-Reply-To: <F006973C7BA4F048BE0A9AF40B69189C23DA61@susmnrex004.na.colfaxcorporation.net>
+References: <AcnjJBNDtAeqOJaUTYiV9+VVWZtdqA==>
+	<F006973C7BA4F048BE0A9AF40B69189C23DA61@susmnrex004.na.colfaxcorporation.net>
+Date: Tue, 9 Jun 2009 11:46:58 +0200
+Message-ID: <c384c5ea0906090246u53c678a2jc537012e5893834b@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4A185B31.8050003@gremlin.it>	<1243111410.4226.109.camel@lenovo.internal.reciva.com>
-	<4A18F6B7.8060708@gremlin.it>
-In-Reply-To: <4A18F6B7.8060708@gremlin.it>
-Subject: Re: trouble with ext2 filesystem
+Subject: Re: How do you add libstdc++ to the micro-image distro?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 09:52:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Jun 2009 09:56:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Alessandro GARDICH ha scritto:
-> Phil Blundell wrote:
->> On Sat, 2009-05-23 at 22:23 +0200, Alessandro GARDICH wrote:
->>> At now I modify qemux86.conf cause usually EXTRA_IMAGECMD is in the
->>> machine config file, but to add hardware specific parameters (flash
->>> size   and erase size). I'm not sure if is the right place. Probably
->>> in the distro configuration could be better.
->>
->> The distro config probably is the right place for this.  After all, the
->> number of inodes you need depends primarily on the number of files that
->> you're going to ship in the rootfs, and that in turn is primarily
->> influenced by the DISTRO's policies rather than by any inherent aspect
->> of the MACHINE.
->>
->> The other uses of EXTRA_IMAGECMD that I guess you're thinking of are
->> mostly to do with jffs2 parameters, which are rather different in that
->> they're determined by the specifics of the hardware in use and hence do
->> go with the MACHINE rather than the DISTRO.
->>
->> p.
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> true, reform the patch for kaeilos.conf
-> 
-> 
-> 
-> 
+Hello James,
 
-Thank you for the patch.
+On Tue, Jun 2, 2009 at 3:47 AM, Newell, James
+C.<James.Newell@colfaxcorp.com> wrote:
+> I am fairly new to the openembedded project. =A0I'm attempting to add a
+> c++ application to the micro-image distro for experimenting with oe,
+> but it doesn't include a stdc++. =A0 How would one add libstdc++ to the
+> micro image distro? =A0Adding libstdc++ and a few other attempts to the
+> IMAGE_INSTALL variable in recipes/images/micro-image.bb doesn't seem to
+> work. =A0Any help is appreciated.
+>
+Add a recipe for your C++ application.
 
-Acked-by: Marco Cavallini  <m.cavallini@koansoftware.com>
+Add the application package to your IMAGE_INSTALL.
+
+OpenEmbedded will then automatically find out about the shared library
+dependencies and will include
+libstdc++ in the image.
+
+Regards,
+--=20
+Leon
 
 
