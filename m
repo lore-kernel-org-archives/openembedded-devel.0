@@ -1,36 +1,22 @@
-Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1MDwMY-0002dG-0c
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 10:07:19 +0200
-Received: by ewy20 with SMTP id 20so5157849ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jun 2009 00:57:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=NZSnfr049mhVEI+5JBDZjuts+u4F12safW9BoCQV5nM=;
-	b=hTyP13dJ7EzrP3/m23vmuUzsFjxrlTwnfVYfHe414pXEPv0frnszhfZhkfjHM5af4g
-	YZwkbNyMwk7GaGcGQC5BpgVQ7jMS+toLwg/8aajwkkpCgUOBQtRu5FNodvXp2yYdsEvO
-	kkZAbFynIXYvCMab56IEPXbtUIqhnU7AlHaJA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Z6uXjUmNsrnrMyfG1uaIMAm/1SA4YkfoE6cRsxaszRmBEEIy7BXeL3sx95/+vBZGGF
-	b18NT0FlcipbKSAQAqt6Gx3TF8OLU/n97rcq9cNvD47x6isNWgcsw/U/Dgsdk/blEX/m
-	+8EZOpZqgcuS7f5Z216TUi6MC3SnFaEQoLuw4=
-MIME-Version: 1.0
-Received: by 10.216.1.69 with SMTP id 47mr2624530wec.224.1244534262390; Tue, 
-	09 Jun 2009 00:57:42 -0700 (PDT)
-In-Reply-To: <1244533534.4151.46.camel@lenovo.internal.reciva.com>
-References: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
-	<1244533534.4151.46.camel@lenovo.internal.reciva.com>
-Date: Tue, 9 Jun 2009 09:57:42 +0200
-Message-ID: <d1b08f940906090057n12d4dab0q1a5a0799a102a737@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MDwVS-0002z6-7F
+	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 10:16:30 +0200
+Received: (qmail 8923 invoked by uid 813007); 9 Jun 2009 08:06:56 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 9 Jun 2009 08:06:55 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] rootfs_ipk.bbclass: use force-defaults (Bug 5133)
+Date: Tue, 9 Jun 2009 10:07:58 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.30-rc6-00082-g7aff192-dirty; KDE/4.2.4;
+	x86_64; ; )
+References: <20090526163916.5789c875@christian.taskit.de>
+In-Reply-To: <20090526163916.5789c875@christian.taskit.de>
+MIME-Version: 1.0
+Message-Id: <200906091008.04630.marcin@juszkiewicz.com.pl>
+Subject: Re: [STABLE][PATCH] cacao: add missing patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,20 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 08:07:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Jun 2009 08:16:30 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-I suppose is the missing PREFERRED_PROVIDER.
+Dnia wtorek, 26 maja 2009 o 16:39:16 Christian Glindkamp napisa=C5=82(a):
+> In revision af5fcda66139e002d098c0df952b43c455806aba the patch
+> cacao-disable-stackbase-check.patch was added to SRC_URI of all
+> cacao recipes without committing the patch itself. This patch
+> adds it to make cacao buildable again. The patch comes from the
+> jalimo overlay.
+>
+> Signed-off-by: Christian Glindkamp <christian.glindkamp@taskit.de>
 
-In my case angstrom-opie-image installs bluez4 in rootfs but opkc-cl
-is waiting input about bluez3 upgrade...
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-http://tinderbox.openembedded.net/public/logs/5832846.txt
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-After 30 mins I killed the process but don't have here the stdout...
 
-
-Andrea
 
 
