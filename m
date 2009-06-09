@@ -1,26 +1,33 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <g.eismann@gmx.net>) id 1MDuqm-0003TR-Tj
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Jun 2009 08:30:25 +0200
-Received: (qmail invoked by alias); 09 Jun 2009 06:20:49 -0000
-Received: from 97.70.222.87.dynamic.jazztel.es (EHLO inferno.localnet)
-	[87.222.70.97]
-	by mail.gmx.net (mp060) with SMTP; 09 Jun 2009 08:20:49 +0200
-X-Authenticated: #21729387
-X-Provags-ID: V01U2FsdGVkX1+6oxVq1Fy6A1EEr3lnguIjxshwl4jPKAl1mjniAS
-	4jNgZM4ZhCHgKK
-From: "G. Eismann" <g.eismann@gmx.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 9 Jun 2009 08:20:43 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.28-11-generic; KDE/4.2.4; i686; ; )
-References: <loom.20090609T035246-124@post.gmane.org>
-In-Reply-To: <loom.20090609T035246-124@post.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200906090820.43460.g.eismann@gmx.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.59
-Subject: Re: BitBake error: "python-native_2.6.1.bb failed"
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MDvbR-0004WD-Ou
+	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 09:18:37 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MDvSC-0006AV-Lf
+	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 07:09:04 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 09 Jun 2009 07:09:04 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 09 Jun 2009 07:09:04 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 09 Jun 2009 09:08:53 +0200
+Message-ID: <h0l1q5$gld$1@ger.gmane.org>
+References: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090531 Shredder/3.0b3pre
+In-Reply-To: <1244522737-19251-1-git-send-email-no2spam@nospam.arcornews.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] rootfs_ipk.bbclass: use force-defaults (Bug 5133)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 06:30:27 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Jun 2009 07:18:37 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Martes 09 Junio 2009 06:01:44 Nikolas escribi=F3:
-> Hello all,
+On 09-06-09 06:45, Rolf Leggewie wrote:
+> From: Rolf Leggewie<oe-devel@rolf.leggewie.biz>
 >
-> Just started with OE, trying to build first Angstrom distro. After 470
-> tasks completed, bitbake fails as follows:
+> Without -force-defaults, I currently cannot build any image because opkg hangs, waiting for
+> user input that of course never comes.
 
+If opkg expects input during offline installation, the packages are 
+buggy and we should fix the offending recipes.
 
-> Compiling /home/nicolae/overo-oe/tmp/work/i686-linux/python-native-2.6.1-
-> ml3.1/temp-staging/home/nicolae/overo-oe/tmp/staging/i686-
-> linux//usr/lib/python2.6/zipfile.py ...
-> make: *** [libinstall] Error 1
-> FATAL: oe_runmake failed
->
-> Can anybody help, please.
+regards,
 
-I dont know about the error, but you can use your native python installed i=
-n=20
-your system adding this line to build/conf/local.conf:
-ASSUME_PROVIDED +=3D "python-native"
+Koen
 
-
-=2D-=20
-  - Eismann -
 
 
