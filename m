@@ -1,33 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.218.219] (helo=mail-bw0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MDyAg-0008Or-0s
-	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 12:03:10 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MDy1O-00051z-F6
-	for openembedded-devel@openembedded.org; Tue, 09 Jun 2009 09:53:34 +0000
-Received: from p3077-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.118.77])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jun 2009 09:53:34 +0000
-Received: from no2spam by p3077-ipngn201marunouchi.tokyo.ocn.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 09 Jun 2009 09:53:34 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 09 Jun 2009 18:53:20 +0900
-Message-ID: <h0lbei$e89$1@ger.gmane.org>
-References: <f96d234e0904300544g4f933c15x1abaa430373868fa@mail.gmail.com>	<f96d234e0906051443y3d0cfcf0m595469c780c9fed@mail.gmail.com>	<200906060846.30822.mickey@vanille-media.de>
-	<200906091121.59329.mickey@vanille-media.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-In-Reply-To: <200906091121.59329.mickey@vanille-media.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: progress on OE organization issues
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MDyvr-0006Ej-5N
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Jun 2009 12:51:55 +0200
+Received: by bwz19 with SMTP id 19so3803232bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Jun 2009 03:42:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=HH1/g3CmFL4r5sk1Z/hNjkB6iRJrzHqJdSrlyFTgQu0=;
+	b=bx4OfsWZwtnFXKA2xhyL+oJisA+AyokXycSqE7CW0P+6PX1Ey3RD/N9anSkV0BFpV6
+	T0gsBYKMCA067uYmg7a6Aja+BOZ2uMxXDuoKwcb2UlKDB4cfcGhig7QUORIH5ULgjXfC
+	9z/7JOwqP1BL2LcoQhxWfK0GyCyRpvMyUBIFs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=g/v4YEg1kg/WOuigNCTwyR0V+V+Hgbk1YSW/OaGD8bTf3qkgoXn+CY9Y7VkEzcGn04
+	py19zfVobJPJPTYXLRlJ+m1TjT1TlMeeKbXGquY9fqRjHLEioIhQNru1Z+A57CoMVlLB
+	euqdT9nm6u9sSGfyBimD8kGVE2uu5Ju00Z40E=
+MIME-Version: 1.0
+Received: by 10.103.168.12 with SMTP id v12mr2865292muo.130.1244544138446; 
+	Tue, 09 Jun 2009 03:42:18 -0700 (PDT)
+Date: Tue, 9 Jun 2009 13:42:18 +0300
+Message-ID: <fce2a370906090342xee12c47k4d6a2cccb6e3abb2@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: bitbake -c clean doesn't clean all stuff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,25 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 10:03:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 09 Jun 2009 10:51:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Mickey, thank you for the update.
-
-Michael 'Mickey' Lauer wrote:
-> members, however since it should reflect the broad range of interested parties, 
-> it should be voted by a majority, not a minority.
-
-so, here are the next steps
-
-0) post eV statutes online and translate to English
-    cbrake? florian?
-1) make eV membership more representative of OE stakeholders.
-    goal: 50% of those with RW access should be a member of the eV
-2) discuss policies, number of committee members, etc.
-3) nominate candidates
-4) vote
-
+Hello!
+'Bitbake -c clean' cleans all staging, work... files but not ipks.
+What's the reason for such behaviour?
+1) If I clean my recipe I want to be pretty sure build system won't
+use any files from the old build process. But it's not. F.e. if I
+built '1.1.2' recipe, then removed it and built '1.1.1' I want to be
+sure my rootfs uses '1.1.1'. But old-new ipks are in deploy dir, and I
+get 1.1.2 in my rootfs.
+2) If I built recipe with 'PACKAGES = ${PN}', then cleaned it, edited
+my recipe to have "PACKAGES += ${PN}-xxx", and my ${PN} is empty and
+OE doesn't generate ipk for it, but old ipk is still there, ready to
+be installed to my rootfs through obsolete deps of other recipes! I
+don't see the problem until I rebuild my rootfs from scratch.
+So my question is: why doesn't OE clean ipks when cleaning?
 
 
