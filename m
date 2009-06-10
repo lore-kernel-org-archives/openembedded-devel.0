@@ -1,28 +1,21 @@
 Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MEQeo-0007bV-Os
+	(envelope-from <pb@reciva.com>) id 1MEVoV-00018z-HL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Jun 2009 18:28:10 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MEQVP-0002ux-GU
+	Wed, 10 Jun 2009 23:58:31 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MEVeo-0001Yk-EE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Jun 2009 17:18:27 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MEQVP-0001rk-De
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Jun 2009 17:18:27 +0100
+	Wed, 10 Jun 2009 22:48:34 +0100
 From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <h0ok27$3ue$1@ger.gmane.org>
-References: <h0ok27$3ue$1@ger.gmane.org>
-Date: Wed, 10 Jun 2009 17:18:27 +0100
-Message-Id: <1244650707.21585.72.camel@mill.internal.reciva.com>
+Date: Wed, 10 Jun 2009 22:48:17 +0100
+Message-Id: <1244670497.4151.74.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: fortran problem on hardy build machine (gcc-cross fails do_compile)
+X-Mailer: Evolution 2.22.3.1 
+Subject: [patch] uclibc: fix glob for FILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,38 +29,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2009 16:28:11 -0000
+X-List-Received-Date: Wed, 10 Jun 2009 21:58:32 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-The error message contains good advice:
+As with glibc, the globs used for uclibc_baselibs were rather too
+permissive and were causing development files (*.so) to leak into the
+main library package.  Rather bizarrely, libdl.so, libm.so,
+libpthread.so and libutil.so - though not any of the other .so files -
+were also being explicitly mentioned in ${uclibc_baselibs}.
 
-configure: error: GNU Fortran is not working; please report a bug [...]
-attaching /export/oe/tmp/angstrom/org.openembedded.dev/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r4.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-gnueabi/arm-angstrom-linux-gnueabi/libgfortran/config.log
-
-What does the config.log file in question say?
+Anyway, this patch corrects that and also replaces some hardcoded paths
+with variable references.
 
 p.
 
-On Thu, 2009-06-11 at 00:38 +0900, Rolf Leggewie wrote:
-> Hi,
-> 
-> I've been struggling with gcc-cross failing do_compile on my hardy build
-> machine for about half a year now.  It has something to do with fortran.
-> I have installed every fortran package I could find in aptitude, yet
-> the issue is unresolved.  I'd appreciate if you'd take a look at the
-> compile log in http://oss.leggewie.org/oe/gcc-cross-4.3.3-r4.1/temp/ and
-> let me know if you have any suggestion.
-> 
-> Regards
-> 
-> Rolf
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--
+
+diff --git a/recipes/uclibc/uclibc.inc b/recipes/uclibc/uclibc.inc
+index bf8df8e..05442ff 100644
+--- a/recipes/uclibc/uclibc.inc
++++ b/recipes/uclibc/uclibc.inc
+@@ -35,15 +35,18 @@ PACKAGES =+ "ldd uclibc-utils-dbg uclibc-utils uclibc-gconv uclibc-thread-db"
+ LEAD_SONAME = "libc.so"
+ 
+ # The last line (gdb and lib1) is for uclinux-uclibc builds 
+-uclibc_baselibs = "/lib/libcrypt*.so* /lib/libdl*.so \
+-		   /lib/libintl*.so* /lib/libm*.so \
+-		   /lib/libnsl*.so* /lib/libpthread*.so \
+-		   /lib/libresolv*.so* /lib/libutil*.so \
+-		   /lib/libuClibc*.so* /lib/ld*.so* \
+-		   /lib/libc*.so* /lib/libdl*.so* \
+-		   /lib/libm*.so* /lib/libutil*.so* \
+-		   /lib/libpthread*.so* /lib/librt*.so* \
+-                   /usr/lib/libc.gdb /usr/lib/libc /lib/lib1.so \
++uclibc_baselibs = "${base_libdir}/libcrypt*.so.* ${base_libdir}/libcrypt-*.so \
++		   ${base_libdir}/libintl*.so.* ${base_libdir}/libintl-*.so \
++		   ${base_libdir}/libnsl*.so.* ${base_libdir}/libnsl-*.so \
++		   ${base_libdir}/libresolv*.so.* ${base_libdir}/libresolv-*.so \
++                   ${base_libdir}/ld*.so.* ${base_libdir}/ld-*.so \
++		   ${base_libdir}/libc*.so.* ${base_libdir}/libuClibc-*.so \
++                   ${base_libdir}/libdl*.so.* ${base_libdir}/libdl-*.so \
++		   ${base_libdir}/libm*.so.* ${base_libdir}/libm-*.so \
++                   ${base_libdir}/libutil*.so.* ${base_libdir}/libutil-*.so \
++		   ${base_libdir}/libpthread*.so.* ${base_libdir}/libpthread-*.so \
++                   ${base_libdir}/librt*.so.* ${base_libdir}/librt-*.so \
++                   ${libdir}/libc.gdb ${libdir}/libc ${base_libdir}/lib1.so \
+                    "
+ FILES_${PN} = "${sysconfdir} ${uclibc_baselibs} /sbin/ldconfig \
+ 	       ${libexecdir} ${datadir}/zoneinfo ${libdir}/locale"
+diff --git a/recipes/uclibc/uclibc_0.9.30.1.bb b/recipes/uclibc/uclibc_0.9.30.1.bb
+index ab6dcb9..dbdcbb6 100644
+--- a/recipes/uclibc/uclibc_0.9.30.1.bb
++++ b/recipes/uclibc/uclibc_0.9.30.1.bb
+@@ -7,7 +7,7 @@
+ # on whether the base patches apply to the selected (SRCDATE) svn release.
+ #
+ UCLIBC_BASE ?= "0.9.30.1"
+-PR = "r2"
++PR = "r3"
+ DEFAULT_PREFERENCE = "1"
+ 
+ require uclibc.inc
+
 
 
 
