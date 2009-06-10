@@ -1,20 +1,30 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MEN9a-0006mU-PV
-	for openembedded-devel@openembedded.org; Wed, 10 Jun 2009 14:43:43 +0200
-Received: (qmail 24858 invoked from network); 10 Jun 2009 12:33:50 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 10 Jun 2009 05:33:50 -0700
-Date: Wed, 10 Jun 2009 05:33:50 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [82.71.203.194] (helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <pb@reciva.com>) id 1MENBr-0006rI-5O
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Jun 2009 14:46:03 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MEN2U-0006Gk-8c
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Jun 2009 13:36:22 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MEN2U-0008G5-2d
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Jun 2009 13:36:22 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090610123349.GT26065@smtp.west.cox.net>
-References: <h0nft3$jso$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <h0nft3$jso$1@ger.gmane.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: deduce git revision from mtn revision
+In-Reply-To: <ac9c93b10906100243n2dc3ee20ve99cb0a7bf77042@mail.gmail.com>
+References: <4A007612.60502@kernelconcepts.de>
+	<200906101124.36919.marcin@juszkiewicz.com.pl>
+	<ac9c93b10906100243n2dc3ee20ve99cb0a7bf77042@mail.gmail.com>
+Date: Wed, 10 Jun 2009 13:36:21 +0100
+Message-Id: <1244637381.21585.32.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: Re: OpenEmbedded at Linuxtag 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,23 +38,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2009 12:43:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Jun 2009 12:46:03 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 10, 2009 at 02:21:37PM +0900, Rolf Leggewie wrote:
+On Wed, 2009-06-10 at 11:43 +0200, Frans Meulenbroeks wrote:
+> regular adges is sooo outdated.
+> techies go for led badges
 
-> Hi,
->
-> is there any way to know which git revision corresponds to mtn commit  
-> 53dccbcb3344fa9a96f7f2c544d3dfec1b100fca?  I guess googling for the  
-> revision and then using git log can eventually yield that info. Anything 
-> simpler and more straight-forward?
+Ah, TFT badges are what you need.  Should be easy to arrange with all
+these surplus collies.
 
-I used mtn to find the whole commit, copy the commit message info and
-then search for that commit message in git.
+p.
 
--- 
-Tom Rini
+
 
 
