@@ -1,35 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MEC9k-0004CC-Vg
-	for openembedded-devel@openembedded.org; Wed, 10 Jun 2009 02:59:09 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MEC0R-0000aJ-Hl
-	for openembedded-devel@openembedded.org; Wed, 10 Jun 2009 00:49:31 +0000
-Received: from h24-207-4-118.primesignal.com ([24.207.4.118])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 10 Jun 2009 00:49:31 +0000
-Received: from quickx by h24-207-4-118.primesignal.com with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 10 Jun 2009 00:49:31 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: NBeing <quickx@hotmail.com>
-Date: Wed, 10 Jun 2009 00:49:20 +0000 (UTC)
-Message-ID: <loom.20090610T001710-529@post.gmane.org>
-References: <loom.20090604T233316-304@post.gmane.org>
-	<20090605014437.GA3406@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 24.207.4.118 (Mozilla/5.0 (Windows; U; Windows NT 5.1;
-	en-US) AppleWebKit/530.5 (KHTML, like Gecko) Chrome/2.0.172.30
-	Safari/530.5)
-Sender: news <news@ger.gmane.org>
-Subject: Re: GPE Application Development Questions
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MEDsl-00086x-9o
+	for openembedded-devel@openembedded.org; Wed, 10 Jun 2009 04:49:43 +0200
+Received: (qmail 22780 invoked from network); 10 Jun 2009 02:40:03 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 9 Jun 2009 19:40:03 -0700
+Date: Tue, 9 Jun 2009 19:40:03 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090610024002.GR26065@smtp.west.cox.net>
+References: <20090603151754.GI26065@smtp.west.cox.net>
+	<1244043442-3868-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<20090603161035.GL26065@smtp.west.cox.net>
+	<fce2a370906031027y1e28cc6cre5aad0a1465c806b@mail.gmail.com>
+	<fce2a370906070940i3f5d7faud81d010af727b66a@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <fce2a370906070940i3f5d7faud81d010af727b66a@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH 00/12] different qt4 related patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2009 00:59:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Jun 2009 02:49:44 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Denys Dmytriyenko <denis <at> denix.org> writes:
-
->
-> The whole point of the toolchain/SDK is to be able to build apps 
-> like "gpe-hello" w/o having OE around, i.e. w/o cross, staging or rootfs.
+On Sun, Jun 07, 2009 at 07:40:52PM +0300, Ihar Hrachyshka wrote:
+> On Wed, Jun 3, 2009 at 8:27 PM, Ihar
+> Hrachyshka<ihar.hrachyshka@gmail.com> wrote:
+> > On Wed, Jun 3, 2009 at 7:10 PM, Tom Rini <trini@embeddedalley.com> wrote:
+> >> On Wed, Jun 03, 2009 at 06:37:10PM +0300, Ihar Hrachyshka wrote:
+> >>
+> >>> This patchset:
+> >>> - adds meta-toolchain-qte.bb to install toolchain with Qt/Embedded and
+> >>>   all the needed tools ready to use for qt4-embedded development;
+> >>> - adds directfb support for qt4-embedded;
+> >>> - includes missing files to qt4 packages;
+> >>> - fixes code style, generalize qt4 recipes and classes, reworked directory
+> >>>   layout;
+> >>> - occasionally ports pkg-config to INC_PR.
+> >>
+> >> What machine / distro combinations have you tested all of this with, and
+> >> what recipes (other than meta-toolchain-qte) have you explicitly built
+> >> after?  ie have you built / run some QtE images or similar too?  Thanks.
+> >
+> > I built and tested qt4-embedded (with directfb and linuxfb), meta-toolchain-qte.
+> > I also built (but not tested) qt4-x11-free.
+> > My machine is beagleboard.
 > 
+> What's the status of the patchset? Is there any problems pending before commit?
 
-Ahh I see.  I was able to make a simple bitbake recipe to compile the gpe-hello 
-app and it works on the board.  I'm still interested in compiling manually 
-though.
+I have no problem and Acked-by the whole series.  I do not however, have
+time to commit this right now, sorry.  But anyone else, please feel free
+to add:
+Acked-by: Tom Rini <trini@embeddedalley.com>
 
-I ran the "bitbake meta-toolchain" recipe and it completed with no errors.  It 
-generates two files "angstrom-2009.X-test-20090609-armv5te-linux-gnueabi-
-toolchain.tar.bz2" and "angstrom-2009.X-test-20090609-armv5te-linux-gnueabi-
-toolchain-extras.tar.bz2".  The -extras file seems to be empty.
+And push.
 
-I extract the non-empty *.tar.bz2 into my "/usr" directory and sourced the 
-environment-setup file.  All the paths seems to get set correctly, except one.  
-The "$PKG_CONFIG_PATH" variable gets set to the below:
-/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/lib/pkgconfig
-
-However, the "pkgconfig" directory in "...gnueabi/usr/lib/" doesn't exists.  In 
-fact there isn't any relevant *.pc in *.tar.bz2...  Would anyone have run into 
-this problem before?  I checked the toolchain online and it does have this 
-folder.
-
-Is there any log files I can supply that would help, or something someone can 
-suggest I try.  If you issue the following commands you'll probably see the 
-problem yourself:
-
-Edit local.conf to set "at91sam9261ek", use latest dev branch + set env vars.
-bitbake x11-image
-bitbake meta-toolchain
-Look in the resulting .../sdk/*.tar.bz2 package for the above folder.
-
-Thanks
-
-
+-- 
+Tom Rini
 
 
