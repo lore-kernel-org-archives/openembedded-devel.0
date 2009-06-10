@@ -1,30 +1,35 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MEMYC-0000dT-Oj
+	(envelope-from <utx@penguin.cz>) id 1MEMdN-0000tN-2r
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Jun 2009 14:05:04 +0200
+	Wed, 10 Jun 2009 14:10:25 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 8D8A839F81E
+	by ns.penguin.cz (Postfix) with ESMTP id 5B7951416BAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jun 2009 07:55:23 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 32186-06 for <openembedded-devel@lists.openembedded.org>; 
-	Wed, 10 Jun 2009 07:55:23 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 5AEF937C6CE
+	Wed, 10 Jun 2009 14:01:30 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1TqqV5C8qFrk
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jun 2009 07:55:23 -0400 (EDT)
-Date: Wed, 10 Jun 2009 07:55:23 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
+	Wed, 10 Jun 2009 14:01:30 +0200 (CEST)
+Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
+	by ns.penguin.cz (Postfix) with ESMTP id 21D131416BA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Jun 2009 14:01:30 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <h0nft3$jso$1@ger.gmane.org>
-Message-ID: <Pine.LNX.4.64.0906100752570.27204@juice.ott.cti.com>
-References: <h0nft3$jso$1@ger.gmane.org>
-MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: deduce git revision from mtn revision
+In-Reply-To: <BLU137-W29570FDEF1300363D893E4D4450@phx.gbl>
+References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
+	<1244144325.6678.0.camel@port4>
+	<BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>
+	<1244206438.6643.46.camel@port4>
+	<BLU137-W29570FDEF1300363D893E4D4450@phx.gbl>
+Date: Wed, 10 Jun 2009 14:00:40 +0200
+Message-Id: <1244635240.28486.7.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.27.2 
+Subject: Re: OE Build :error configure failed to discover size of unix socket path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,37 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2009 12:05:05 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 10 Jun 2009 12:10:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 10 Jun 2009, Rolf Leggewie wrote:
+=E5=88=98=E8=8A=B3=E5=8D=8E wrote:
+>=20
+> Hi!
+>=20
+>    I met a error while I build:
+>=20
+> /mono/io-layer/wapi-private.h:22:2: error: #error configure failed to d=
+iscover size of unix socket path
 
-> is there any way to know which git revision corresponds to mtn commit
-> 53dccbcb3344fa9a96f7f2c544d3dfec1b100fca?  I guess googling for the revision
-> and then using git log can eventually yield that info. Anything simpler and
-> more straight-forward?
+MONO_SIZEOF_SUNPATH was not detected.
 
-It ended up in a log message by chance:
+While cross-compiling you have to provide this value manually - for
+example run configure once on the target platform and then read the
+value in config.h.
 
-git log --grep=53dccbcb3344fa9a96f7f2c544d3dfec1b100fca
-commit d7d081c7ea40ea61365ca51b892cf7af8a802298
-Merge: 06c89ee c3e353c
-Author: Henning Heinold <heinold@inf.fu-berlin.de>
-Date:   Wed May 7 20:07:39 2008 +0000
+Then you need to set mono_cv_sizeof_sunpath in
+conf/{your_platform_file}. See site/arm-linux for example. If it works,
+you can submit a patch.
 
-    merge of '53dccbcb3344fa9a96f7f2c544d3dfec1b100fca'
-         and 'fea7dedc0a856ea56969779e97c888a16ffc63de'
+--=20
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
-I guess it's probably this one:
-
-commit 06c89ee737a0f595efee34ea1a250c190825db7c
-Author: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Date:   Wed May 7 19:27:30 2008 +0000
-
-    pointercal: backpush pointercal files for qemuarm and htcuniversal 
-from poky
-.  Closes 3742 (it at least masks the superficial problem).
-
-Mike
 
 
