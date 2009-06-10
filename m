@@ -1,35 +1,38 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.217.206] (helo=mail-gx0-f206.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MEMdN-0000tN-2r
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MEMtA-0006SP-Io
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Jun 2009 14:10:25 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 5B7951416BAB
+	Wed, 10 Jun 2009 14:26:44 +0200
+Received: by gxk2 with SMTP id 2so821169gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jun 2009 14:01:30 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1TqqV5C8qFrk
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jun 2009 14:01:30 +0200 (CEST)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id 21D131416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jun 2009 14:01:30 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 10 Jun 2009 05:17:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ZxpssfqJJ787L6en9dOXnO1zAQFuGDzoJUl2ganGSrc=;
+	b=SehQLE2JP1ca5+6TwxRjO7haPZkoKu/egS96sUUCpDPsVPOGOSURDk1GL4p3jJuked
+	9bELEXDHYiqLsgH+C1tSHqq0yS3xaYTw3apoUPSQkuZW4w428zSeP+7oeptRW5KxAHDJ
+	FHrPykRFXT7bIJlMNYwAoAP93w9CgMYsFICPo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=uAPHcEQM83Wv5VEgPXJ+rXYnLYWtnUd0rjtXjrkOccaX1HqsmxedHQGZgttFSHQZ/S
+	/UhJ/gV8owYU2DUa1kaYqWRZKfDtnLFoioSmY+7XeppIEqph2oMasSAT/z6eJAuqr+an
+	InTiAEnH9M3XXGN4F6+PQm1xbF/AbnIEIob4c=
+MIME-Version: 1.0
+Received: by 10.100.41.9 with SMTP id o9mr1146109ano.155.1244636221269; Wed, 
+	10 Jun 2009 05:17:01 -0700 (PDT)
+In-Reply-To: <200906101202.03252.marcin@juszkiewicz.com.pl>
+References: <4A007612.60502@kernelconcepts.de>
+	<200906101124.36919.marcin@juszkiewicz.com.pl>
+	<ac9c93b10906100243n2dc3ee20ve99cb0a7bf77042@mail.gmail.com>
+	<200906101202.03252.marcin@juszkiewicz.com.pl>
+Date: Wed, 10 Jun 2009 14:17:01 +0200
+Message-ID: <ac9c93b10906100517h4961f614sb636717c15f314b4@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BLU137-W29570FDEF1300363D893E4D4450@phx.gbl>
-References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
-	<1244144325.6678.0.camel@port4>
-	<BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>
-	<1244206438.6643.46.camel@port4>
-	<BLU137-W29570FDEF1300363D893E4D4450@phx.gbl>
-Date: Wed, 10 Jun 2009 14:00:40 +0200
-Message-Id: <1244635240.28486.7.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.27.2 
-Subject: Re: OE Build :error configure failed to discover size of unix socket path
+Subject: Re: OpenEmbedded at Linuxtag 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2009 12:10:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 10 Jun 2009 12:26:45 -0000
+Content-Type: text/plain; charset=ISO-8859-2
 Content-Transfer-Encoding: quoted-printable
 
-=E5=88=98=E8=8A=B3=E5=8D=8E wrote:
->=20
-> Hi!
->=20
->    I met a error while I build:
->=20
-> /mono/io-layer/wapi-private.h:22:2: error: #error configure failed to d=
-iscover size of unix socket path
+2009/6/10 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
+> Dnia =B6roda, 10 czerwca 2009 o 11:43:32 Frans Meulenbroeks napisa=B3(a):
+>> regular adges is sooo outdated.
+>> techies go for led badges
+>
+> What about AMOLED badges? That would be more up to date with technology.
 
-MONO_SIZEOF_SUNPATH was not detected.
+Better. Much better.
+Don't know a good and inexpensive source though.
 
-While cross-compiling you have to provide this value manually - for
-example run configure once on the target platform and then read the
-value in config.h.
-
-Then you need to set mono_cv_sizeof_sunpath in
-conf/{your_platform_file}. See site/arm-linux for example. If it works,
-you can submit a patch.
-
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+FM
 
 
