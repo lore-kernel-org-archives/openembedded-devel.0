@@ -1,37 +1,35 @@
-Received: from [209.85.221.196] (helo=mail-qy0-f196.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1ME9Og-0001no-2t
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Jun 2009 00:02:22 +0200
-Received: by qyk34 with SMTP id 34so467617qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Jun 2009 14:52:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=zrgfRPOUDQ9I7WvG9Q6AAzonk6spBsaLWYPEWMWlSxo=;
-	b=MUgkC3zxFYc8jpA5wF41ueeGuGBkPIScnu1JwDGnv6J40vDPGSU0N10BaOmuF9+CTn
-	DYWHpoPmgld6uWRGLG0bQLAHZKS05Eo3myzkGWKhySYw2eKBaI0p4uO+a2RZdiJgF7uR
-	uz1Pt8PndZIUVPRHPzVDh87iduTc52YDUEy2o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=fKEImHcHN9Zfwvi0t0/rn8fntyxddPLen1kEfW9drqxZ09nHo2vtsFoijQhngmOmFk
-	sW2/XhGTtL5Ta0XzhfeaXZqaZRJC4fszg61TYvjAalWqNtjaicEK+vKhTdy/Mnx/eNDf
-	jCZrZ4MRAU7Ns1UCjyYrJrJ+djVG3BXsAiUbQ=
-MIME-Version: 1.0
-Received: by 10.231.38.77 with SMTP id a13mr222196ibe.51.1244584362075; Tue, 
-	09 Jun 2009 14:52:42 -0700 (PDT)
-In-Reply-To: <1244582165.6677.3.camel@port4>
-References: <f96d234e0906080759q40afd1dau930f93999048fbd9@mail.gmail.com>
-	<200906081747.04528.marcin@juszkiewicz.com.pl>
-	<1244582165.6677.3.camel@port4>
-Date: Tue, 9 Jun 2009 23:52:42 +0200
-Message-ID: <c384c5ea0906091452j441b50a2q60a66ef0ab87fdbd@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: OE weekly changelog 2009-06-01 to 2009-06-08
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MEC9k-0004CC-Vg
+	for openembedded-devel@openembedded.org; Wed, 10 Jun 2009 02:59:09 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MEC0R-0000aJ-Hl
+	for openembedded-devel@openembedded.org; Wed, 10 Jun 2009 00:49:31 +0000
+Received: from h24-207-4-118.primesignal.com ([24.207.4.118])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 10 Jun 2009 00:49:31 +0000
+Received: from quickx by h24-207-4-118.primesignal.com with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 10 Jun 2009 00:49:31 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: NBeing <quickx@hotmail.com>
+Date: Wed, 10 Jun 2009 00:49:20 +0000 (UTC)
+Message-ID: <loom.20090610T001710-529@post.gmane.org>
+References: <loom.20090604T233316-304@post.gmane.org>
+	<20090605014437.GA3406@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: main.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 24.207.4.118 (Mozilla/5.0 (Windows; U; Windows NT 5.1;
+	en-US) AppleWebKit/530.5 (KHTML, like Gecko) Chrome/2.0.172.30
+	Safari/530.5)
+Sender: news <news@ger.gmane.org>
+Subject: Re: GPE Application Development Questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2009 22:02:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 10 Jun 2009 00:59:09 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Denys Dmytriyenko <denis <at> denix.org> writes:
 
-On Tue, Jun 9, 2009 at 11:16 PM, GNUtoo<GNUtoo@no-log.org> wrote:
-> On Mon, 2009-06-08 at 17:46 +0200, Marcin Juszkiewicz wrote:
->> Maybe will also teach contributors to write shorter summaries ;)
-> I often(but not always) write long summaries for giving info on why I
-> did it this way to it's easier to maintain...
-> So If it's better to write shorter summaries...where should I write the
-> long version?
-> Denis.
 >
-some-package: short description typically 76 chars or less
+> The whole point of the toolchain/SDK is to be able to build apps 
+> like "gpe-hello" w/o having OE around, i.e. w/o cross, staging or rootfs.
+> 
 
-A longer description of the fix or feature this commit brings to
-the OpenEmbedded community, and what it solves, how you
-did it, what you would like people to read when they browse
-through the commit logs.
+Ahh I see.  I was able to make a simple bitbake recipe to compile the gpe-hello 
+app and it works on the board.  I'm still interested in compiling manually 
+though.
 
-Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
+I ran the "bitbake meta-toolchain" recipe and it completed with no errors.  It 
+generates two files "angstrom-2009.X-test-20090609-armv5te-linux-gnueabi-
+toolchain.tar.bz2" and "angstrom-2009.X-test-20090609-armv5te-linux-gnueabi-
+toolchain-extras.tar.bz2".  The -extras file seems to be empty.
 
-Regards,
--- 
-Leon
+I extract the non-empty *.tar.bz2 into my "/usr" directory and sourced the 
+environment-setup file.  All the paths seems to get set correctly, except one.  
+The "$PKG_CONFIG_PATH" variable gets set to the below:
+/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/lib/pkgconfig
+
+However, the "pkgconfig" directory in "...gnueabi/usr/lib/" doesn't exists.  In 
+fact there isn't any relevant *.pc in *.tar.bz2...  Would anyone have run into 
+this problem before?  I checked the toolchain online and it does have this 
+folder.
+
+Is there any log files I can supply that would help, or something someone can 
+suggest I try.  If you issue the following commands you'll probably see the 
+problem yourself:
+
+Edit local.conf to set "at91sam9261ek", use latest dev branch + set env vars.
+bitbake x11-image
+bitbake meta-toolchain
+Look in the resulting .../sdk/*.tar.bz2 package for the above folder.
+
+Thanks
+
+
 
 
