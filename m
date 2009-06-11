@@ -1,16 +1,16 @@
 Received: from [203.143.174.143] (helo=lemon.ken.nicta.com.au)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <peter.chubb@nicta.com.au>) id 1MEa67-0006ps-EI
+	(envelope-from <peter.chubb@nicta.com.au>) id 1MEaZS-0007Gt-GG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jun 2009 04:33:00 +0200
-Received: from vampire.ertos.nicta.com.au ([203.143.161.65]:49157
+	Thu, 11 Jun 2009 05:03:19 +0200
+Received: from vampire.ertos.nicta.com.au ([203.143.161.65]:60667
 	helo=hippo.chubb.wattle.id.au)
 	by lemon.ken.nicta.com.au with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <peter.chubb@nicta.com.au>)
-	id 1MEZwj-0004FH-5H for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jun 2009 12:23:19 +1000
-Date: Thu, 11 Jun 2009 12:23:08 +1000
-Message-ID: <87ljnzik4z.wl%peter@chubb.wattle.id.au>
+	id 1MEaQ5-0005Es-O2 for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Jun 2009 12:53:38 +1000
+Date: Thu, 11 Jun 2009 12:53:29 +1000
+Message-ID: <87k53jiiqe.wl%peter@chubb.wattle.id.au>
 From: Peter Chubb <peter.chubb@nicta.com.au>
 To: openembedded-devel@lists.openembedded.org
 User-Agent: Wanderlust/2.14.0 (Africa) SEMI/1.14.6 (Maruoka) FLIM/1.14.9
@@ -27,11 +27,11 @@ X-SA-Exim-Mail-From: peter.chubb@nicta.com.au
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
 	lemon.ken.nicta.com.au
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_40
+X-Spam-Status: No, score=-3.1 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:11 +0000)
 X-SA-Exim-Scanned: Yes (on lemon.ken.nicta.com.au)
-Subject: [PATCH] Micro image needs some help
+Subject: How do I modifly kernel config?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,58 +45,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2009 02:33:05 -0000
+X-List-Received-Date: Thu, 11 Jun 2009 03:03:26 -0000
 Content-Type: text/plain; charset=US-ASCII
 
 
-I've been attempting to use the micro-image on a BeagleBoard.  I have
-a couple of problems:
- -- not all the kernel modules necessary are installed (in fact, none
-    are.)
- -- Nothing mounts /sys or /proc so udev bombs out early.
-
-I don't know how to fix the modules problem yet, but the udev script
-can easily be fixed to mount /proc and /sys instead of exiting.  This
-may not be the right fix, but it does work.
-
-Signed-off-by: Peter Chubb <peter.chubb@nicta.com.au>
-
-Index: openembedded/recipes/udev/udev-141/init
-===================================================================
---- openembedded,orig/recipes/udev/udev-141/init	2009-06-11 12:13:28.000000000 +1000
-+++ openembedded/recipes/udev/udev-141/init	2009-06-11 12:14:19.000000000 +1000
-@@ -4,22 +4,28 @@
- # Provides:          udev
- # Required-Start:    mountvirtfs
- # Required-Stop:     
- # Default-Start:     S
- # Default-Stop:
- # Short-Description: Start udevd, populate /dev and load drivers.
- ### END INIT INFO
- 
- export TZ=/etc/localtime
- 
--[ -d /sys/class ] || exit 1
--[ -r /proc/mounts ] || exit 1
-+[ -d /sys/class ] || {
-+    mount -t sysfs sys /sys || exit 1
-+}
-+
-+[ -r /proc/mounts ] || {
-+   mount -t procfs proc /proc || exit 1
-+}
-+
- [ -x /sbin/udevd ] || exit 1
- [ -f /etc/default/udev ] && . /etc/default/udev
- [ -f /etc/udev/udev.conf ] && . /etc/udev/udev.conf
- 
- kill_udevd() {
-         if [ -x /sbin/pidof ]; then
-                 pid=`/sbin/pidof -x udevd`
-                 [ -n "$pid" ] && kill $pid
-         fi
- }
-
+Hi,
+   Is there an easy way to make a recipe that builds a kernel with a
+different .config ?  I know I can copy an entire recipe with my own
+file://defconfig --- but is that the best way to proceed?
 --
 Dr Peter Chubb                              peter DOT chubb AT nicta.com.au
 http://www.ertos.nicta.com.au           ERTOS within National ICT Australia
