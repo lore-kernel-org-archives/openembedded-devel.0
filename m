@@ -1,35 +1,40 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.132.250] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MEjCS-0006Pf-IT
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MEjXl-0003bi-R6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jun 2009 14:16:08 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id BCCB1140972D
+	Thu, 11 Jun 2009 14:38:09 +0200
+Received: by an-out-0708.google.com with SMTP id b6so754742ana.42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2009 14:07:10 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PK3M9UmZCzZ3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2009 14:07:10 +0200 (CEST)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id A197A140972B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2009 14:07:10 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1244402413.4151.36.camel@lenovo.internal.reciva.com>
+	Thu, 11 Jun 2009 05:28:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=dK0cgyIxr3e2LqBz8VtM2s0TT3UCxXnqLxoFEC5mU/0=;
+	b=kg5+vl86cjKMsFW1Jyum4XtcI7bX0I/n/uUBD3WLOFe0G0PHeiXKBhQ7JqDEzkxNEw
+	8SlOLnjqypofBKi09m6KZ8UcIGMyE85XfCIYw6/nmIAafXoAKqhQw3f0cFQJpnXCLaFu
+	9J4jkc74v/SG3AIKYluUICgzo5VqEnTv3BtKs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=aFQMiN1iTWCivarPigm7z8efXFkH8EnQFeb6hVIqqhF8zMQwWjFFNRjVXCEaQJ42Jo
+	gsCc68kW5gVlW3alZZdivUueFIsIgirJ+/qgGLrbK4lIHqHg4b/4S2ny2dKp2ZNdHdI+
+	Pd+5MpuWU7qgRIRbkXJsj2gFeRz6eWvBnHyls=
+MIME-Version: 1.0
+Received: by 10.231.36.77 with SMTP id s13mr1232938ibd.1.1244723302082; Thu, 
+	11 Jun 2009 05:28:22 -0700 (PDT)
+In-Reply-To: <1244721978.28486.107.camel@hammer.suse.cz>
 References: <1244366174.4412.11.camel@daniel-laptop>
 	<1244384219.4431.46.camel@utx.utx.cz>
 	<1244385233.4151.27.camel@lenovo.internal.reciva.com>
 	<1244402010.4463.36.camel@utx.utx.cz>
 	<1244402413.4151.36.camel@lenovo.internal.reciva.com>
-Date: Thu, 11 Jun 2009 14:06:18 +0200
-Message-Id: <1244721978.28486.107.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.27.2 
-Subject: Re: e2fsprogs-libs failed	on	latest	org.openembedded.dev	branch
+	<1244721978.28486.107.camel@hammer.suse.cz>
+Date: Thu, 11 Jun 2009 14:28:22 +0200
+Message-ID: <c384c5ea0906110528u105b1a97lc1e86fc3413b3b18@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: e2fsprogs-libs failed on latest org.openembedded.dev branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,56 +48,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2009 12:16:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Jun 2009 12:38:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Phil Blundell wrote:
-> On Sun, 2009-06-07 at 21:13 +0200, Stanislav Brabec wrote:
-> > 1. This path apparently mixes path elements defined by two different
-> > recipes. I was under impression, that there exists some type of
-> > unintended =EF=BB=BFcv_libdir inheritance between these two recipes. =
-Maybe my
-> > impression was incorrect, but
->=20
-> There certainly shouldn't be any such inheritance.  If there is, that's
-> a bug and we should fix it.
->=20
-> > 2. After applying of this patch, I did not see this error any more.
-> > I even tested rebuild from scratch with no error. And finally
->=20
-> I suspect that was probably just coincidence.  This bug seems to be
-> somewhat intermittent; I don't know exactly what's causing it, and it's
-> never actually happened for me, but (re)building things in a different
-> order seems to clear it up.
+Hello,
 
-I can confirm it. It appeared again.
+On Thu, Jun 11, 2009 at 2:06 PM, Stanislav Brabec<utx@penguin.cz> wrote:
+> bitbake -v e2fsprogs-libs
+> bitbake -v util-linux-ng
 
-But it really looks like a cross package inheritance:
+I just have seen both fail, and only succeed after a clean and retry.
 
-bitbake -v x11-image
-fails
+I think we are looking at a race condition considering sub-packaging.
 
-Let's try it separately:
+Updated http://bugs.openembedded.net/show_bug.cgi?id=5101 on this.
 
-bitbake -v e2fsprogs-libs
-fails
-
-Now I do following work-around, which allows me to continue:
-
-bitbake -v util-linux-ng
-succeeds
-
-rm -rf tmp/{stamps/*,work/*,deploy/*/pstage/*}/*e2fsprogs-libs*
-bitbake -v e2fsprogs-libs
-Wow, it successds!
-
-bitbake -v x11-image
-It successds as well!
-
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+Regards,
+-- 
+Leon
 
 
