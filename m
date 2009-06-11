@@ -1,41 +1,40 @@
-Received: from [209.85.132.243] (helo=an-out-0708.google.com)
+Received: from [209.85.216.193] (helo=mail-px0-f193.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MElK6-0000uO-RI
+	(envelope-from <kergoth@gmail.com>) id 1MElq0-0001iw-2K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jun 2009 16:32:11 +0200
-Received: by an-out-0708.google.com with SMTP id b6so789761ana.42
+	Thu, 11 Jun 2009 17:05:08 +0200
+Received: by pxi31 with SMTP id 31so745010pxi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2009 07:22:22 -0700 (PDT)
+	Thu, 11 Jun 2009 07:55:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=orGwJlU6yf0VQzDeJeIIUHg8YFQUD7FgerfsbvMWvy8=;
-	b=quzNxaWJ6o//3fdOq4R0Uwu1wznwfSWTRVdt+RzTrPxDgsZItl4uQEdLSjK2O3KY44
-	GIF8cHG7XA4dRl6uBZf+NuUJDqLCX5nMG07JbUPR12CYy5oj5KSGZxzTrfju7T329paC
-	sGho4gagt1du0sulA019j3mhU1FbixMObJ+0E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=UCyZ+d9Dv5i9Jlt+ASNv2GjN/KHdpwZVve4fhf987C7TRAgZE8vAfwuyTtk9zg2F+t
-	qO5HwOXhtoNx59F5ubec3jyyIz4Q1BXxUgElwSJi3iQvrTiBjmNuGizFdF0up1CaDl9h
-	CD+mAOM/Tci9HrL9c9mDrBHs1PgLsTOT1M8Ns=
+	bh=/lRsPziTkbXPsWEeO4eEBCXdvR0+F2omtTknjnACPCk=;
+	b=Ynp4DQzCZezyz8u6uO044x7sb1OtOjEv6Iecioh3IZyO6aT1xm2uVl1Shq/N1war6/
+	D1yMUf6o/69Bl26HxDKNpQOvdTOb3Z6NyiYQHTkyU5lcW/qjwknRlmCjKH3e4tzEVKxZ
+	jD7rQtPf0nCfhHhbgZvZvhLylaqtOKtk1gPuU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=V+oBzcQUitY8SORPRgM2ir+j1pg1SGVSJMfzvJyuhUM4Nx4Xoj8HUxk/9dR5KoZtk3
+	ozpkjhcHZ6aUFDUF3EpcFYEX7Tn85EH/swNmBOOJxQTdLUCHD11JfZp4nq47dCg03E+C
+	FKUoc6x/gBvami8weusmXHD4N+yZJfVIrk2o8=
 MIME-Version: 1.0
-Received: by 10.100.213.13 with SMTP id l13mr2957518ang.110.1244730142700; 
-	Thu, 11 Jun 2009 07:22:22 -0700 (PDT)
-In-Reply-To: <CEB81C4F-48EC-4D42-84C2-F7779D133565@mac.com>
-References: <1244366174.4412.11.camel@daniel-laptop>
-	<1244384219.4431.46.camel@utx.utx.cz>
-	<1244385233.4151.27.camel@lenovo.internal.reciva.com>
-	<1244402010.4463.36.camel@utx.utx.cz>
-	<1244402413.4151.36.camel@lenovo.internal.reciva.com>
-	<1244721978.28486.107.camel@hammer.suse.cz>
-	<CEB81C4F-48EC-4D42-84C2-F7779D133565@mac.com>
-Date: Thu, 11 Jun 2009 16:22:22 +0200
-Message-ID: <ac9c93b10906110722g77626187m50f92b8f20c9579c@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.142.155.8 with SMTP id c8mr989037wfe.1.1244732117572; Thu, 11 
+	Jun 2009 07:55:17 -0700 (PDT)
+In-Reply-To: <878wjzoyam.wl%peter@chubb.wattle.id.au>
+References: <87k53jiiqe.wl%peter@chubb.wattle.id.au>
+	<4A307A57.2040908@mvista.com> <4A307A97.8030804@mvista.com>
+	<878wjzoyam.wl%peter@chubb.wattle.id.au>
+Date: Thu, 11 Jun 2009 07:55:17 -0700
+X-Google-Sender-Auth: 64145b74f2918030
+Message-ID: <b6ebd0a50906110755x6dc978f4w49524f3e1bce02d0@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: e2fsprogs-libs failed on latest org.openembedded.dev branch
+Subject: Re: How do I modifly kernel config?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,19 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2009 14:32:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Jun 2009 15:05:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I had the build problem too 2 days ago. bitbake console-image
-repeatedly gave this problem.
-yesterday I was about to dig into this, I did a git pull just to be
-sure that if things were fixed, I would have the fix.
-After that the problem mysteriously disappeared.(for me)
+On Thu, Jun 11, 2009 at 3:33 AM, Peter Chubb<peter.chubb@nicta.com.au> wrot=
+e:
+>>>>>> "Christopher" =3D=3D Christopher Larson <clarson@mvista.com> writes:
+>
+> Christopher> Christopher Larson wrote:
+>>> Peter Chubb wrote:
+>>>> Hi, Is there an easy way to make a recipe that builds a kernel
+>>>> with a different .config ? =C2=A0I know I can copy an entire recipe
+>>>> with my own file://defconfig --- but is that the best way to
+>>>> proceed?
+>>>
+>>> FILESPATHBASE =3D. "${TOPDIR}/files"
+>
+> Christopher> Erm, make that FILESPATHBASE =3D. "${TOPDIR}/files:". =C2=A0=
+It's
+> Christopher> colon separated.
+>
+> Thanks, but where do I put this? =C2=A0In build/conf/local.conf? =C2=A0or
+> somewhere else? (because it seems to be being ignored for me)
 
-Guess it is something in the python code, but I have little knowledge
-about this.
-
-Frans
+Local.conf is fine, yes.  It's unlikely that it's actually being
+ignored, though.  Run a bitbake -e|grep FILESPATH=3D, and see what it's
+set to.  Note that it will only list the items in the search path that
+actually exist, so ensure you mkdir the ${TOPDIR}/files directory
+referred to there.  Also note that the default TOPDIR is $PWD, which
+is where you're building from, which is most commonly your build
+directory.
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
