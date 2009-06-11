@@ -1,40 +1,29 @@
-Received: from [209.85.216.193] (helo=mail-px0-f193.google.com)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MElq0-0001iw-2K
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jun 2009 17:05:08 +0200
-Received: by pxi31 with SMTP id 31so745010pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2009 07:55:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=/lRsPziTkbXPsWEeO4eEBCXdvR0+F2omtTknjnACPCk=;
-	b=Ynp4DQzCZezyz8u6uO044x7sb1OtOjEv6Iecioh3IZyO6aT1xm2uVl1Shq/N1war6/
-	D1yMUf6o/69Bl26HxDKNpQOvdTOb3Z6NyiYQHTkyU5lcW/qjwknRlmCjKH3e4tzEVKxZ
-	jD7rQtPf0nCfhHhbgZvZvhLylaqtOKtk1gPuU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=V+oBzcQUitY8SORPRgM2ir+j1pg1SGVSJMfzvJyuhUM4Nx4Xoj8HUxk/9dR5KoZtk3
-	ozpkjhcHZ6aUFDUF3EpcFYEX7Tn85EH/swNmBOOJxQTdLUCHD11JfZp4nq47dCg03E+C
-	FKUoc6x/gBvami8weusmXHD4N+yZJfVIrk2o8=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.155.8 with SMTP id c8mr989037wfe.1.1244732117572; Thu, 11 
-	Jun 2009 07:55:17 -0700 (PDT)
-In-Reply-To: <878wjzoyam.wl%peter@chubb.wattle.id.au>
-References: <87k53jiiqe.wl%peter@chubb.wattle.id.au>
-	<4A307A57.2040908@mvista.com> <4A307A97.8030804@mvista.com>
-	<878wjzoyam.wl%peter@chubb.wattle.id.au>
-Date: Thu, 11 Jun 2009 07:55:17 -0700
-X-Google-Sender-Auth: 64145b74f2918030
-Message-ID: <b6ebd0a50906110755x6dc978f4w49524f3e1bce02d0@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: How do I modifly kernel config?
+	(envelope-from <rpurdie@rpsys.net>) id 1MEm8P-0007fs-0U
+	for openembedded-devel@openembedded.org; Thu, 11 Jun 2009 17:24:09 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5BFE4GB028629 for <openembedded-devel@openembedded.org>;
+	Thu, 11 Jun 2009 16:14:04 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id Gp9myEowJ5G1 for <openembedded-devel@openembedded.org>;
+	Thu, 11 Jun 2009 16:14:04 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5BFE1X9028590
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 11 Jun 2009 16:14:03 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: OE-Devel <openembedded-devel@openembedded.org>
+Date: Thu, 11 Jun 2009 16:12:56 +0100
+Message-Id: <1244733177.6018.35.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: [Fwd: [poky] Packaged Staging Improvements]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +37,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2009 15:05:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Jun 2009 15:24:10 -0000
+X-Groupsio-MsgNum: 11227
+Content-Type: multipart/mixed; boundary="=-RxQknHo35vCAgh8z+uyE"
 
-On Thu, Jun 11, 2009 at 3:33 AM, Peter Chubb<peter.chubb@nicta.com.au> wrot=
-e:
->>>>>> "Christopher" =3D=3D Christopher Larson <clarson@mvista.com> writes:
->
-> Christopher> Christopher Larson wrote:
->>> Peter Chubb wrote:
->>>> Hi, Is there an easy way to make a recipe that builds a kernel
->>>> with a different .config ? =C2=A0I know I can copy an entire recipe
->>>> with my own file://defconfig --- but is that the best way to
->>>> proceed?
->>>
->>> FILESPATHBASE =3D. "${TOPDIR}/files"
->
-> Christopher> Erm, make that FILESPATHBASE =3D. "${TOPDIR}/files:". =C2=A0=
-It's
-> Christopher> colon separated.
->
-> Thanks, but where do I put this? =C2=A0In build/conf/local.conf? =C2=A0or
-> somewhere else? (because it seems to be being ignored for me)
+--=-RxQknHo35vCAgh8z+uyE
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Local.conf is fine, yes.  It's unlikely that it's actually being
-ignored, though.  Run a bitbake -e|grep FILESPATH=3D, and see what it's
-set to.  Note that it will only list the items in the search path that
-actually exist, so ensure you mkdir the ${TOPDIR}/files directory
-referred to there.  Also note that the default TOPDIR is $PWD, which
-is where you're building from, which is most commonly your build
-directory.
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+Forwarding this as there is problem some interest here too...
 
 
+--=-RxQknHo35vCAgh8z+uyE
+Content-Disposition: inline
+Content-Description: Forwarded message - [poky] Packaged Staging
+	Improvements
+Content-Type: message/rfc822
+
+Return-Path: <richard@o-hand.com>
+X-Spam-Checker-Version: SpamAssassin 3.2.4 (2008-01-01) on dan.rpsys.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.4
+Received: from localhost (dan.rpsys.net [127.0.0.1]) by dan.rpsys.net
+	(8.14.2/8.14.2/Debian-2build1) with ESMTP id n5BExhc2027124 for
+	<o-hand@[127.0.0.1]>; Thu, 11 Jun 2009 15:59:43 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1]) by localhost (dan.rpsys.net
+	[127.0.0.1]) (amavisd-new, port 10024) with LMTP id z9HOY6jX20ko for
+	<o-hand@[127.0.0.1]>; Thu, 11 Jun 2009 15:59:43 +0100 (BST)
+Received: from pug.o-hand.com (postfix@3a.49.1343.static.theplanet.com
+	[67.19.73.58]) by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP
+	id n5BExe3L027121 (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256
+	verify=NOT) for <o-hand@rpsys.net>; Thu, 11 Jun 2009 15:59:42 +0100
+Received: by pug.o-hand.com (Postfix, from userid 1008) id 4367C12EC415;
+	Thu, 11 Jun 2009 10:07:25 -0500 (CDT)
+X-Original-To: richard@openedhand.com
+Delivered-To: richard@openedhand.com
+Received: from pug.o-hand.com (localhost [127.0.0.1]) by pug.o-hand.com
+	(Postfix) with SMTP id 65D5812EC3FD for <richard@openedhand.com>; Thu, 11
+	Jun 2009 10:07:22 -0500 (CDT)
+X-Original-To: poky@o-hand.com
+Delivered-To: poky@o-hand.com
+Received: from [192.168.1.3] (93-97-173-237.zone5.bethere.co.uk
+	[93.97.173.237]) (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256
+	bits)) (No client certificate requested) by pug.o-hand.com (Postfix) with
+	ESMTP id 7BD3B12EC35D for <poky@o-hand.com>; Thu, 11 Jun 2009 10:07:12
+	-0500 (CDT)
+Subject: [poky] Packaged Staging Improvements
+From: Richard Purdie <richard@openedhand.com>
+To: poky@o-hand.com
+Content-Type: text/plain
+Date: Thu, 11 Jun 2009 15:58:22 +0100
+Message-Id: <1244732302.6018.32.camel@dax.rpnet.com>
+Reply-To: poky@o-hand.com
+Precedence: list
+List-Id: Poky mailing list
+List-Unsubscribe: <mailto:poky+unsubscribe@o-hand.com>
+List-Archive: http://lists.o-hand.com/poky/
+List-Post: <mailto:poky@o-hand.com>
+List-Help: <mailto:poky+help@o-hand.com>
+List-Subscribe: <mailto:poky+subscribe@o-hand.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-Loop: richard@o-hand.com
+Content-Transfer-Encoding: 7bit
+
+When packaged staging was written there was a performance bottleneck
+introduced which I always wanted to fix at some point. I've just started
+the ball rolling with this commit in Poky:
+
+http://git.pokylinux.org/cgit.cgi/poky/commit/?id=5a4c688958a7dc1258575c0f6c3bd1af165b2585
+
+and related commits from about that time.
+
+The idea is that instead of do_stage looking like:
+
+1. Take staging lock
+2. Take snapshot of staging files
+3. Run real staging function
+4. Take snapshot of staging files, see what changed
+5. Save changed files for staging package
+6. Release staging lock
+
+It looks like:
+
+1. Run real staging function to a DESTDIR
+2. Take staging lock
+3. Install files into staging from DESTDIR
+4. Save files from DESTDIR for staging package
+5. Release staging lock
+
+which removes the need for the snapshot and reduces the time the lock is
+held. This speedup currently only works for packages which have a
+do_stage just calling autotools_stage_all so an aim would be to increase
+the number of packages we have using this function only.
+
+I noticed one thing stopping this from happening in many cases which was
+"inherit pkgconfig" which changes do_stage. The do_stage_append from
+pkgconfig.bbclass shouldn't be needed for any sane package using uses
+autotools_stage_all. I also noticed that:
+
+* pkgconfig.bbclass does an "inherit base" which is totally pointless 
+  as base is *always* inherited
+* After the sysroot support addition to pkgconfig, the do_install 
+  mangling in pkgconfig.bbclass in OE shouldn't be needed. If it is, 
+  code should be patched. Poky doesn't have this but I'll mention to 
+  the OE people.
+
+Patches improving the do_stage functions welcome and hopefully this will
+give a significant speedup to builds which people can enjoy.
+
+Cheers,
+
+Richard
+
+
+-- 
+To unsubscribe send a mail to poky+unsubscribe@o-hand.com
+
+
+--=-RxQknHo35vCAgh8z+uyE--
