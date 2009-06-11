@@ -1,33 +1,31 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [85.33.2.28] (helo=smtp-out28.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MEoXM-00040Y-Tu
-	for openembedded-devel@openembedded.org; Thu, 11 Jun 2009 19:58:05 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n5BHlxiG004857 for <openembedded-devel@openembedded.org>;
-	Thu, 11 Jun 2009 18:47:59 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id or+r85+Iel0E for <openembedded-devel@openembedded.org>;
-	Thu, 11 Jun 2009 18:47:59 +0100 (BST)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n5BHlqjk004853
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 11 Jun 2009 18:47:55 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <45E16D13-5F20-47D5-99C3-725DAB6D345C@mvista.com>
-References: <1244733177.6018.35.camel@dax.rpnet.com>
-	<200906111827.06763.mickey@vanille-media.de>
-	<45E16D13-5F20-47D5-99C3-725DAB6D345C@mvista.com>
-Date: Thu, 11 Jun 2009 18:46:46 +0100
-Message-Id: <1244742406.6018.40.camel@dax.rpnet.com>
+	(envelope-from <GNUtoo@no-log.org>) id 1MEqN2-0008BM-Pl
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Jun 2009 21:55:32 +0200
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out28.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 11 Jun 2009 21:45:41 +0200
+Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Thu, 11 Jun 2009 21:45:41 +0200
+Received: from [192.168.1.171] ([79.51.84.248]) by FBCMCL01B06.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 11 Jun 2009 21:45:40 +0200
+From: GNUtoo <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1244584036.5998.44.camel@dax.rpnet.com>
+References: <f96d234e0906080759q40afd1dau930f93999048fbd9@mail.gmail.com>
+	<200906081747.04528.marcin@juszkiewicz.com.pl>
+	<1244582165.6677.3.camel@port4>
+	<1244584036.5998.44.camel@dax.rpnet.com>
+Date: Thu, 11 Jun 2009 21:46:17 +0200
+Message-Id: <1244749582.13175.6.camel@port4>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [Fwd: [poky] Packaged Staging Improvements]
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 11 Jun 2009 19:45:41.0226 (UTC)
+	FILETIME=[33A29CA0:01C9EACD]
+Cc: openembedded-devel@openembedded.org
+Subject: Re: OE weekly changelog 2009-06-01 to 2009-06-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,41 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2009 17:58:05 -0000
+X-List-Received-Date: Thu, 11 Jun 2009 19:55:33 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-06-11 at 09:38 -0700, Christopher Larson wrote:
-> On Jun 11, 2009, at 9:27 AM, Michael 'Mickey' Lauer wrote:
+On Tue, 2009-06-09 at 22:47 +0100, Richard Purdie wrote:
+> On Tue, 2009-06-09 at 23:16 +0200, GNUtoo wrote:
+> > On Mon, 2009-06-08 at 17:46 +0200, Marcin Juszkiewicz wrote:
+> > > Maybe will also teach contributors to write shorter summaries ;)
+> > I often(but not always) write long summaries for giving info on why I
+> > did it this way to it's easier to maintain...
+> > So If it's better to write shorter summaries...where should I write the
+> > long version?
 > 
-> > On Thursday 11 June 2009 17:12:56 Richard Purdie wrote:
-> >> Forwarding this as there is problem some interest here too...
-> >
-> > Sounds cool, will any of this also fix the deploy-area-out-of-tmpdir  
-> > issue
-> > which makes packaged staging completely not working for the typical  
-> > usecase of
-> > removing tmpdir and then expecting packages to be filled up from  
-> > staging area
-> > on rebuild?
+> You write a short summary as the first line of your commit message and
+> the longer description then goes underneath. Both are useful.
 > 
-> You can use pstage for that use case without moving the entire deploy  
-> area out of tmp, with a minor tweak, at least thats what I do here.   
-> Change the PSTAGE_PKG assignment to ?= in packaged-staging.bbclass,  
-> then set PSTAGE_PKG=${TOPDIR}/prebuilt/${PSTAGE_PKGNAME} or so.
-
-Right, as Chris says, you just override the path. I'm surprised its not
-a ?= in there already...
-
-I'm certainly happy to use a better default. Personally, I just remove
-directories except tmp/deploy/pstage or change DEPLOY_DIR itself outside
-TMPDIR...
-
-Cheers,
-
-Richard
-
-
+> Cheers,
+> 
+> Richard
+thanks a lot.
+Denis.
 
 
 
