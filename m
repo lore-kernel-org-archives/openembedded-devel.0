@@ -1,30 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MFAwg-0006Pe-1Z
-	for openembedded-devel@openembedded.org; Fri, 12 Jun 2009 19:53:42 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MFAn3-0001oH-QM
-	for openembedded-devel@openembedded.org; Fri, 12 Jun 2009 17:43:45 +0000
-Received: from p3077-ipngn201marunouchi.tokyo.ocn.ne.jp ([114.177.118.77])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 12 Jun 2009 17:43:45 +0000
-Received: from no2spam by p3077-ipngn201marunouchi.tokyo.ocn.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 12 Jun 2009 17:43:45 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 13 Jun 2009 02:43:31 +0900
-Message-ID: <h0u447$bg0$1@ger.gmane.org>
+	(envelope-from <philb@gnu.org>) id 1MFB53-0006cH-VJ
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Jun 2009 20:02:22 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MFAvS-00030e-Bs
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Jun 2009 18:52:26 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 12 Jun 2009 18:52:24 +0100
+Message-Id: <1244829144.4151.109.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-Sender: news <news@ger.gmane.org>
-Subject: bugzilla moved to melo
+X-Mailer: Evolution 2.22.3.1 
+Subject: [patch] disable ONLINE_PACKAGE_MANAGEMENT for micro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jun 2009 17:53:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 12 Jun 2009 18:02:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+I guess this patch is fairly self-explanatory.
 
-our bugzilla installation moved to melo (and was updated in the 
-process).  DNS updates have been made but may take a little while to 
-propagate.  The old installation at amethyst is still there, but 
-deactivated.
+p.
 
-Regards
+--
 
-Rolf
+diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
+index a6fb64e..f8b293d 100644
+--- a/conf/distro/micro.conf
++++ b/conf/distro/micro.conf
+@@ -107,3 +107,6 @@ layout_exec_prefix = ""
+ 
+ # Don't install ldconfig and associated gubbins
+ USE_LDCONFIG = "0"
++
++# Disable online package management
++ONLINE_PACKAGE_MANAGEMENT = "none"
+
 
 
 
