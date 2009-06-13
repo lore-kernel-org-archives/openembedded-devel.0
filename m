@@ -1,35 +1,27 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [151.189.21.47] (helo=mail-in-07.arcor-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1MFDiE-000116-Ov
+	(envelope-from <no2spam@nospam.arcornews.de>) id 1MFJ2s-0004n4-To
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Jun 2009 22:50:59 +0200
-Received: from p5b03474e.dip.t-dialin.net ([91.3.71.78] helo=dodger)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1MFDYX-0002uM-O2 by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2009 22:41:00 +0200
-Received: from stefan by dodger with local (Exim 4.69)
-	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
-	id 1MFDZ2-00028l-A8 for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Jun 2009 22:41:28 +0200
-Date: Fri, 12 Jun 2009 22:41:28 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sat, 13 Jun 2009 04:32:38 +0200
+Received: from mail-in-07-z2.arcor-online.net (mail-in-07-z2.arcor-online.net
+	[151.189.8.19]) by mx.arcor.de (Postfix) with ESMTP id A59CF3CA1CD;
+	Sat, 13 Jun 2009 04:22:39 +0200 (CEST)
+Received: from mail-in-02.arcor-online.net (mail-in-02.arcor-online.net
+	[151.189.21.42])
+	by mail-in-07-z2.arcor-online.net (Postfix) with ESMTP id 9D6DD2C712F; 
+	Sat, 13 Jun 2009 04:22:39 +0200 (CEST)
+Received: from localhost.localdomain (p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
+	[114.177.118.77]) (Authenticated sender: leggewie@arcor.de)
+	by mail-in-02.arcor-online.net (Postfix) with ESMTPSA id 711623FE2D7;
+	Sat, 13 Jun 2009 04:22:38 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-02.arcor-online.net 711623FE2D7
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090612204128.GD12863@dodger.lab.datenfreihafen.org>
-References: <1244836535.4151.140.camel@lenovo.internal.reciva.com>
-	<1244838263.5958.34.camel@dax.rpnet.com>
-MIME-Version: 1.0
-In-Reply-To: <1244838263.5958.34.camel@dax.rpnet.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.19 (2009-01-05)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: [rfc] change default for BUILD_OPTIMIZATION, remove	spurious assignments
+Date: Sat, 13 Jun 2009 11:22:33 +0900
+Message-Id: <1244859753-28054-1-git-send-email-no2spam@nospam.arcornews.de>
+X-Mailer: git-send-email 1.6.0.4
+Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Subject: [PATCH] preferred-xorg-versions-X11R7.4.inc: pin xextproto-native and xtrans-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,36 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jun 2009 20:50:59 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 13 Jun 2009 02:32:39 -0000
 
-Hello.
+From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
 
-On Fri, 2009-06-12 at 21:24, Richard Purdie wrote:
-> On Fri, 2009-06-12 at 20:55 +0100, Phil Blundell wrote:
-> > I'd like to propose changing the bitbake.conf default for
-> > BUILD_OPTIMIZATION from "-O2" to "-O2 -g".  There seems no harm in
-> > building debuggable binaries for host-side utilities and it makes life
-> > somewhat easier when things go wrong.
-> > 
-> > Also, while investigating why assignments to this variable from
-> > local.conf didn't do what I was expecting, I discovered that a whole lot
-> > of files inside conf/, notably all of the sane-toolchain-*.inc files,
-> > contain their own assignments to BUILD_OPTIMIZATION for no good reason
-> > that I can see.  I would also propose to delete the assignments from
-> > those files.  (There are a few other assignments in files that are
-> > either DISTRO or MACHINE specific but I intend to leave those alone.)
-> 
-> Acked-by: Richard Purdie <rpurdie@linux.intel.com>
-> 
-> Poky actually uses -ggdb now which makes the -dbg packages useful (if
-> huge).
+This file is sourced by the jlime, kaleios and minimal distribution.
 
-Perhaps go directly for -ggdb3? (There is always magic to learn if you hack some
-time with zecke. :))
+Pin down
+* xextproto-native: 7.0.3
+* xtrans: 1.2.1
 
-regards
-Stefan Schmidt
+These are the latest two versions to successfully compile in the Xorg 7.4 context.
+Others require a more recent xorg-macros.m4.
+
+http://tinderbox.openembedded.net/builds/158904/
+http://tinderbox.openembedded.net/builds/159024/
+---
+ .../include/preferred-xorg-versions-X11R7.4.inc    |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc b/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
+index 46fa8d4..21f9758 100644
+--- a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
++++ b/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
+@@ -195,6 +195,7 @@ PREFERRED_VERSION_xtrans ?= "1.2.1"
+ # This should be here but is needed until bitbake can do
+ # versioned depends
+ PREFERRED_VERSION_mesa ?= "7.2"
++PREFERRED_VERSION_xtrans-native ?= "1.2.1"
+ 
+ # proto
+ PREFERRED_VERSION_applewmproto ?= "1.0.3"
+@@ -218,6 +219,7 @@ PREFERRED_VERSION_videoproto ?= "2.2.2"
+ PREFERRED_VERSION_windowswmproto ?= "1.0.3"
+ PREFERRED_VERSION_xmiscproto ?= "1.1.2"
+ PREFERRED_VERSION_xextproto ?= "7.0.3"
++PREFERRED_VERSION_xextproto-native ?= "7.0.3"
+ PREFERRED_VERSION_xf86dgaproto ?= "2.0.3"
+ PREFERRED_VERSION_xf86driproto ?= "2.0.4"
+ PREFERRED_VERSION_xf86miscproto ?= "0.9.2"
+-- 
+1.6.0.4
+
 
 
