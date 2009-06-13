@@ -1,27 +1,21 @@
-Received: from [151.189.21.47] (helo=mail-in-07.arcor-online.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <no2spam@nospam.arcornews.de>) id 1MFJ2s-0004n4-To
+	(envelope-from <pb@reciva.com>) id 1MFPej-0006IK-RM
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Jun 2009 04:32:38 +0200
-Received: from mail-in-07-z2.arcor-online.net (mail-in-07-z2.arcor-online.net
-	[151.189.8.19]) by mx.arcor.de (Postfix) with ESMTP id A59CF3CA1CD;
-	Sat, 13 Jun 2009 04:22:39 +0200 (CEST)
-Received: from mail-in-02.arcor-online.net (mail-in-02.arcor-online.net
-	[151.189.21.42])
-	by mail-in-07-z2.arcor-online.net (Postfix) with ESMTP id 9D6DD2C712F; 
-	Sat, 13 Jun 2009 04:22:39 +0200 (CEST)
-Received: from localhost.localdomain (p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
-	[114.177.118.77]) (Authenticated sender: leggewie@arcor.de)
-	by mail-in-02.arcor-online.net (Postfix) with ESMTPSA id 711623FE2D7;
-	Sat, 13 Jun 2009 04:22:38 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-02.arcor-online.net 711623FE2D7
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+	Sat, 13 Jun 2009 11:36:10 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MFPV3-0003Rk-VO
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 13 Jun 2009 10:26:10 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Jun 2009 11:22:33 +0900
-Message-Id: <1244859753-28054-1-git-send-email-no2spam@nospam.arcornews.de>
-X-Mailer: git-send-email 1.6.0.4
-Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Subject: [PATCH] preferred-xorg-versions-X11R7.4.inc: pin xextproto-native and xtrans-native
+Date: Sat, 13 Jun 2009 10:26:08 +0100
+Message-Id: <1244885168.4151.149.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: [patch] util-linux-ng: repair do_install for prefix=/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,47 +29,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jun 2009 02:32:39 -0000
+X-List-Received-Date: Sat, 13 Jun 2009 09:36:10 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+The current util-linux recipe loses quite badly if ${sbindir} and
+${base_sbindir} are the same location.  I think this patch should
+correct the behaviour, but there didn't seem to be any clear pattern to
+which files should go where and hence I'm not quite sure that I've got
+it right.
 
-This file is sourced by the jlime, kaleios and minimal distribution.
+p.
 
-Pin down
-* xextproto-native: 7.0.3
-* xtrans: 1.2.1
+--
 
-These are the latest two versions to successfully compile in the Xorg 7.4 context.
-Others require a more recent xorg-macros.m4.
-
-http://tinderbox.openembedded.net/builds/158904/
-http://tinderbox.openembedded.net/builds/159024/
----
- .../include/preferred-xorg-versions-X11R7.4.inc    |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
-
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc b/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-index 46fa8d4..21f9758 100644
---- a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-+++ b/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-@@ -195,6 +195,7 @@ PREFERRED_VERSION_xtrans ?= "1.2.1"
- # This should be here but is needed until bitbake can do
- # versioned depends
- PREFERRED_VERSION_mesa ?= "7.2"
-+PREFERRED_VERSION_xtrans-native ?= "1.2.1"
+diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
+index 7e949d1..ae2742c 100644
+--- a/recipes/util-linux-ng/util-linux-ng.inc
++++ b/recipes/util-linux-ng/util-linux-ng.inc
+@@ -83,39 +83,42 @@ do_install () {
+ 	oe_runmake ARCH=${TARGET_ARCH} CPU= CPUOPT= \
+ 		'OPT=${CFLAGS}' 'CC=${CC}' 'LD=${LD}' \
+ 		'LDFLAGS=${LDFLAGS}' 'DESTDIR=${D}' install
+-	mkdir ${D}${base_bindir}
+-	mkdir ${D}${base_sbindir}
+-	test -f ${D}${sbindir}/pivot_root && \
+-	mv ${D}${sbindir}/pivot_root ${D}${base_sbindir}/pivot_root.${PN}
+-	mv ${D}${bindir}/dmesg ${D}${base_bindir}/dmesg.${PN}
+-	mv ${D}${bindir}/kill ${D}${base_bindir}/kill.${PN}
+-	mv ${D}${bindir}/more ${D}${base_bindir}/more.${PN}
+-	mv ${D}${sbindir}/hwclock ${D}${base_sbindir}/hwclock.${PN}
+-	mv ${D}${sbindir}/mkswap ${D}${base_sbindir}/mkswap.${PN}
+-	mv ${D}${sbindir}/shutdown ${D}${base_sbindir}/shutdown.${PN}
+-#	mv ${D}${sbindir}/sln ${D}${base_sbindir}/sln.${PN}
+-	mv ${D}${sbindir}/mkfs.minix ${D}${base_sbindir}/mkfs.minix.${PN}
+-	mv ${D}${sbindir}/fsck.minix ${D}${base_sbindir}/fsck.minix.${PN}
+-	mv ${D}${bindir}/hexdump ${D}${bindir}/hexdump.${PN}
+-	mv ${D}${bindir}/last ${D}${bindir}/last.${PN}
+-	mv ${D}${bindir}/logger ${D}${bindir}/logger.${PN}
+-	mv ${D}${bindir}/mesg ${D}${bindir}/mesg.${PN}
+-	mv ${D}${bindir}/renice ${D}${bindir}/renice.${PN}
+-	mv ${D}${bindir}/wall ${D}${bindir}/wall.${PN}
+-
+-	mv ${D}${sbindir}/losetup ${D}${base_sbindir}/losetup.${PN}
+-	mv ${D}${sbindir}/swapon ${D}${base_sbindir}/swapon.${PN}
+-	mv ${D}${bindir}/umount ${D}${base_bindir}/umount.${PN}
+-	mv ${D}${bindir}/mount ${D}${base_bindir}/mount.${PN}
+-	mv ${D}${sbindir}/fdisk ${D}${base_sbindir}/fdisk.${PN}
+-
+-	mv ${D}${sbindir}/agetty ${D}${base_sbindir}/ 
+-	mv ${D}${sbindir}/blockdev ${D}${base_sbindir}/
+-	mv ${D}${sbindir}/cfdisk ${D}${base_sbindir}/
+-	mv ${D}${sbindir}/ctrlaltdel ${D}${base_sbindir}/
+-
+-	mv ${D}${sbindir}/readprofile ${D}${sbindir}/readprofile.${PN}
+-	
++	mkdir -p ${D}${base_bindir}
++
++        sbinprogs="agetty blkdev ctrlaltdel cfdisk"
++        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk readprofile"
++        binprogs_a="dmesg kill more hexdump last logger mesg renice wall umount mount"
++
++        if [ "${base_sbindir}" != "${sbindir}" ]; then
++        	mkdir -p ${D}${base_sbindir}
++                for p in $sbinprogs $sbinprogs_a; do
++                        if [ -f "${D}${sbindir}/$p" ]; then
++                                mv "${D}${sbindir}/$p" "${D}${base_sbindir}/$p"
++                        fi
++                done
++        fi
++
++        if [ "${base_bindir}" != "${bindir}" ]; then
++        	mkdir -p ${D}${base_bindir}
++                for p in $binprogs_a; do
++                        if [ -f "${D}${bindir}/$p" ]; then
++                                mv "${D}${bindir}/$p" "${D}${base_bindir}/$p"
++                        fi
++                done
++        fi
++
++        for p in $binprogs_a; do
++                if [ -f "${D}${base_bindir}/$p" ]; then
++                        mv "${D}${base_bindir}/$p" "${D}${base_bindir}/$p.${PN}"
++                fi
++        done
++
++        for p in $sbinprogs_a; do
++                if [ -f "${D}${base_sbindir}/$p" ]; then
++                        mv "${D}${base_sbindir}/$p" "${D}${base_sbindir}/$p.${PN}"
++                fi
++        done
++
+ 	install -d ${D}${sysconfdir}/default/
+ 	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall
  
- # proto
- PREFERRED_VERSION_applewmproto ?= "1.0.3"
-@@ -218,6 +219,7 @@ PREFERRED_VERSION_videoproto ?= "2.2.2"
- PREFERRED_VERSION_windowswmproto ?= "1.0.3"
- PREFERRED_VERSION_xmiscproto ?= "1.1.2"
- PREFERRED_VERSION_xextproto ?= "7.0.3"
-+PREFERRED_VERSION_xextproto-native ?= "7.0.3"
- PREFERRED_VERSION_xf86dgaproto ?= "2.0.3"
- PREFERRED_VERSION_xf86driproto ?= "2.0.4"
- PREFERRED_VERSION_xf86miscproto ?= "0.9.2"
--- 
-1.6.0.4
+
 
 
 
