@@ -1,27 +1,21 @@
-Received: from [151.189.21.57] (helo=mail-in-17.arcor-online.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <no2spam@nospam.arcornews.de>) id 1MFWcZ-0002wa-8D
+	(envelope-from <philb@gnu.org>) id 1MFZri-0003B5-NX
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Jun 2009 19:02:23 +0200
-Received: from mail-in-20-z2.arcor-online.net (mail-in-20-z2.arcor-online.net
-	[151.189.8.85]) by mx.arcor.de (Postfix) with ESMTP id BC47A3B258F;
-	Sat, 13 Jun 2009 18:52:19 +0200 (CEST)
-Received: from mail-in-10.arcor-online.net (mail-in-10.arcor-online.net
-	[151.189.21.50])
-	by mail-in-20-z2.arcor-online.net (Postfix) with ESMTP id AA437107E0F; 
-	Sat, 13 Jun 2009 18:52:19 +0200 (CEST)
-Received: from localhost.localdomain (p3077-ipngn201marunouchi.tokyo.ocn.ne.jp
-	[114.177.118.77]) (Authenticated sender: leggewie@arcor.de)
-	by mail-in-10.arcor-online.net (Postfix) with ESMTPSA id 427E628EF35;
-	Sat, 13 Jun 2009 18:52:17 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-10.arcor-online.net 427E628EF35
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+	Sat, 13 Jun 2009 22:30:15 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>)
+	id 1MFZhi-00085a-HV; Sat, 13 Jun 2009 21:20:00 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Jun 2009 01:52:08 +0900
-Message-Id: <1244911928-18691-1-git-send-email-no2spam@nospam.arcornews.de>
-X-Mailer: git-send-email 1.6.0.4
-Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Subject: [PATCH] siteinfo.bbclass: add support for via C3 host
+Date: Sat, 13 Jun 2009 21:19:38 +0100
+Message-Id: <1244924378.29153.12.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: Jeremy =?ISO-8859-1?Q?Lain=E9?= <jeremy.laine@m4x.org>
+Subject: lib*.so in FILES_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,44 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jun 2009 17:02:23 -0000
+X-List-Received-Date: Sat, 13 Jun 2009 20:30:15 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+This recent checkin:
 
-the bfin line is changed only for cosmetic reasons while we're at it.
+http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=ba434bd1dc9dc8ed61953a1579ea9e993e81cbb2
 
-Adding viac3-linux to siteinfo.bbclass is what helped me get past
-the gfortran/gcc-cross issues on my Via C3 host (big thank you to
-Phil Blundell for helping to fix this).
+added ${base_libdir}/lib*.so to the default FILES_${PN}, on the grounds
+that this is necessary to get procps packaged correctly.
 
-http://tinderbox.openembedded.net/builds/158350/
----
- classes/siteinfo.bbclass |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+However, I think this cure is worse than the original disease, in that
+it's now virtually impossible to prevent *.so development symlinks
+(which obviously belong in ${PN}-dev) from leaking into ${PN}.  This
+situation is particularly bad if ${base_libdir} and ${libdir} are the
+same, since you then end up with a useless .so symlink being installed
+in your rootfs for virtually every library on the system.
 
-diff --git a/classes/siteinfo.bbclass b/classes/siteinfo.bbclass
-index 0221b12..e51d7ab 100644
---- a/classes/siteinfo.bbclass
-+++ b/classes/siteinfo.bbclass
-@@ -32,7 +32,7 @@ def get_siteinfo_list(d):
-                "arm-linux-uclibc":        "endian-little bit-32 common-linux common-uclibc arm-common",\
-                "arm-linux-uclibcgnueabi": "endian-little bit-32 common-linux common-uclibc arm-common arm-linux-uclibc",\
-                "avr32-linux-uclibc":      "endian-big bit-32 common-linux common-uclibc avr32-common",\
--               "bfin-uclinux-uclibc":       "endian-little bit-32 common-uclibc bfin-common",\
-+               "bfin-uclinux-uclibc":     "endian-little bit-32 common-uclibc bfin-common",\
-                "i386-linux":              "endian-little bit-32 common-linux common-glibc ix86-common",\
-                "i486-linux":              "endian-little bit-32 common-linux common-glibc ix86-common",\
-                "i586-linux":              "endian-little bit-32 common-linux common-glibc ix86-common",\
-@@ -64,6 +64,7 @@ def get_siteinfo_list(d):
-                "sh4-linux":               "endian-little bit-32 common-linux common-glibc sh-common",\
-                "sh4-linux-uclibc":        "endian-little bit-32 common-linux common-uclibc sh-common",\
-                "sparc-linux":             "endian-big bit-32 common-linux common-glibc",\
-+               "viac3-linux":             "endian-little bit-32 common-linux common-glibc ix86-common",\
-                "x86_64-linux":            "endian-little bit-64 common-linux common-glibc",\
-                "x86_64-linux-uclibc":     "endian-little bit-64 common-linux common-uclibc"}
-        if target in targetinfo:
--- 
-1.6.0.4
+I propose to revert the patch in question, and instead just let
+procps.bb adjust its own local setting of FILES as necessary.
+
+Comments?
+
+p.
+
 
 
 
