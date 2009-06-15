@@ -1,35 +1,22 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1MFndS-0007j4-Rx
+	(envelope-from <elvis.dowson@mac.com>) id 1MG6ce-00018G-EJ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Jun 2009 13:12:26 +0200
-Received: from p5b037781.dip.t-dialin.net ([91.3.119.129] helo=dodger)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1MFnTT-0002ZH-Nj by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Jun 2009 13:02:19 +0200
-Received: from stefan by dodger with local (Exim 4.69)
-	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
-	id 1MFnU4-0001TF-Il for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Jun 2009 13:02:44 +0200
-Date: Sun, 14 Jun 2009 13:02:44 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090614110244.GA5302@dodger.lab.datenfreihafen.org>
-References: <64d5b90a0906132251l51316419nb38733dfc1e49004@mail.gmail.com>
-	<1244967611.29153.21.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-In-Reply-To: <1244967611.29153.21.camel@lenovo.internal.reciva.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.19 (2009-01-05)
-X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.3
-Subject: Re: OpenSSL recipe : files not being shipped in any package
+	Mon, 15 Jun 2009 09:28:52 +0200
+MIME-version: 1.0
+Received: from [87.201.169.122] by asmtp019.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KL9008J1QYX0F20@asmtp019.mac.com> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	15 Jun 2009 00:18:38 -0700 (PDT)
+Message-id: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Date: Mon, 15 Jun 2009 11:18:24 +0400
+X-Mailer: Apple Mail (2.935.3)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: EmbeddedMicro <justin@embeddedmicro.com>
+Subject: Help required to create recipe for FANN library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +30,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Jun 2009 11:12:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Jun 2009 07:28:52 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7BIT
 
-Hello.
+Hi,
+	Would someone be able to help us create an oe bitbake recipe for the  
+Fast Artificial Neural Network Library ?
 
-On Sun, 2009-06-14 at 09:20, Phil Blundell wrote:
-> On Sun, 2009-06-14 at 11:21 +0530, Kirtika Ruchandani wrote:
-> > NOTE: package openssl-0.9.8j-r2: task do_package: started
-> > NOTE: the following files were installed but not shipped in any package:
-> > NOTE:   /usr/lib/ssl/openssl.cnf
-> > NOTE:   /usr/lib/ssl/misc/CA.sh
-> > NOTE:   /usr/lib/ssl/misc/CA.pl
-> > NOTE: package openssl-0.9.8j-r2: task do_package: completed
-> > 
-> > Are these files deliberately excluded ?
-> 
-> No, it's probably a bug.  Want to send a patch?
+We have created an initial recipe, but the problem is don't know how  
+to get this recipe to configure and install the library for the  
+gumstix overo board.
 
-The CA scripts you only need to setup new CA certificates. Please put them in a
-separate package or is anybody seeing a cuse case for them on the device?
+If I look at the logs, nothing got configure or compiled when I look  
+at the logs in the overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/ 
+libfann-2.0.0-r01/tmp folder.
 
-regards
-Stefan Schmidt
+I've looked at a couple of recipes and it all looks the same, so can't  
+figure out why this particular library is unable to get configured or  
+built.
+
+Any help would be much appreciated!
+
+Best regards,
+
+Elvis
+
+
+
+# libfann-2.0.0 recipie
+SECTION = "libs"
+DEFAULT_PREFERENCE = "1"
+
+# Package information
+DESCRIPTION = "libfann, Fast Artificial Neural Network Library is a  
+free open source neural network library, which implements multilayer  
+artificial neural networks in C with support for both fully connected  
+and sparsely connected networks."
+LICENSE = "BSD"
+
+PN = "libfann"
+PV = "2.0.0"
+PR = "r01"
+
+SRC_URI = "http://prdownloads.sourceforge.net/fann/fann-${PV}.tar.bz2"
+
+inherit autotools_stage pkgconfig
+
+do_stage () {
+	oe_libinstall -a -so -C lib libfann ${STAGING_LIBDIR}	
+	install -d ${STAGING_INCDIR}/fann
+	install -m 0644 src/include/vorbis/vorbisenc.h \
+			src/include/vorbis/vorbisfile.h \
+			src/include/vorbis/codec.h
+			src/include/compat_time.h \
+			src/include/config.h \
+			src/include/doublefann.h \
+			src/include/fann.h \
+			src/include/fann_activation.h \
+			src/include/fann_cascade.h \
+			src/include/fann_data.h \
+			src/include/fann_error.h \
+			src/include/fann_internal.h \
+			src/include/fann_io.h \
+			src/include/fann_train.h \
+			src/include/fixedfann.h \
+			src/include/floatfann.h ${STAGING_INCDIR}/fann/
+	install -d ${STAGING_DATADIR}/aclocal
+	install -m 0644 aclocal.m4 ${STAGING_DATADIR}/aclocal/
+}
+
 
 
