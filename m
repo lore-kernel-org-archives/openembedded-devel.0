@@ -1,33 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MG8uu-0006NV-Fi
-	for openembedded-devel@openembedded.org; Mon, 15 Jun 2009 11:55:52 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MG8l0-0005UZ-Kh
-	for openembedded-devel@openembedded.org; Mon, 15 Jun 2009 09:45:39 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 15 Jun 2009 09:45:38 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 15 Jun 2009 09:45:38 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Jun 2009 11:45:27 +0200
-Message-ID: <h1557n$fir$1@ger.gmane.org>
-References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
+	(envelope-from <philb@gnu.org>)
+	id 1MG93q-0006as-AF; Mon, 15 Jun 2009 12:05:06 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>)
+	id 1MG8tv-0001ls-ML; Mon, 15 Jun 2009 10:54:51 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>)
+	id 1MG8tv-0007JE-Da; Mon, 15 Jun 2009 10:54:51 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1245053324.5971.0.camel@dax.rpnet.com>
+References: <1244924378.29153.12.camel@lenovo.internal.reciva.com>
+	<1245053324.5971.0.camel@dax.rpnet.com>
+Date: Mon, 15 Jun 2009 10:54:50 +0100
+Message-Id: <1245059690.21585.156.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090604 Shredder/3.0b3pre
-In-Reply-To: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Help required to create recipe for FANN library
+X-Mailer: Evolution 2.26.2 
+Cc: openembedded-devel@openembedded.org,
+	Jeremy =?ISO-8859-1?Q?Lain=E9?= <jeremy.laine@m4x.org>
+Subject: Re: lib*.so in FILES_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2009 09:55:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 15 Jun 2009 10:05:06 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 15-06-09 09:18, Elvis Dowson wrote:
-
-> inherit autotools_stage pkgconfig
+On Mon, 2009-06-15 at 09:08 +0100, Richard Purdie wrote:
+> On Sat, 2009-06-13 at 21:19 +0100, Phil Blundell wrote:
+> > I propose to revert the patch in question, and instead just let
+> > procps.bb adjust its own local setting of FILES as necessary.
 >
-> do_stage () {
-> oe_libinstall -a -so -C lib libfann ${STAGING_LIBDIR}
-> install -d ${STAGING_INCDIR}/fann
-> install -m 0644 src/include/vorbis/vorbisenc.h \
-> src/include/vorbis/vorbisfile.h \
-> src/include/vorbis/codec.h
-> src/include/compat_time.h \
-> src/include/config.h \
-> src/include/doublefann.h \
-> src/include/fann.h \
-> src/include/fann_activation.h \
-> src/include/fann_cascade.h \
-> src/include/fann_data.h \
-> src/include/fann_error.h \
-> src/include/fann_internal.h \
-> src/include/fann_io.h \
-> src/include/fann_train.h \
-> src/include/fixedfann.h \
-> src/include/floatfann.h ${STAGING_INCDIR}/fann/
-> install -d ${STAGING_DATADIR}/aclocal
-> install -m 0644 aclocal.m4 ${STAGING_DATADIR}/aclocal/
-> }
+> Agreed, that shouldn't be a default.
 
-Why are you using autotools_stage if you're not going to use its staging 
-method?
+Thanks to you and Leon for the feedback.  I've reverted that patch now.
+
+p.
+
 
 
 
