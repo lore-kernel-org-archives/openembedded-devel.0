@@ -1,28 +1,25 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [17.148.16.95] (helo=asmtpout020.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>)
-	id 1MG93q-0006as-AF; Mon, 15 Jun 2009 12:05:06 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>)
-	id 1MG8tv-0001ls-ML; Mon, 15 Jun 2009 10:54:51 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>)
-	id 1MG8tv-0007JE-Da; Mon, 15 Jun 2009 10:54:51 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1245053324.5971.0.camel@dax.rpnet.com>
-References: <1244924378.29153.12.camel@lenovo.internal.reciva.com>
-	<1245053324.5971.0.camel@dax.rpnet.com>
-Date: Mon, 15 Jun 2009 10:54:50 +0100
-Message-Id: <1245059690.21585.156.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Cc: openembedded-devel@openembedded.org,
-	Jeremy =?ISO-8859-1?Q?Lain=E9?= <jeremy.laine@m4x.org>
-Subject: Re: lib*.so in FILES_${PN}
+	(envelope-from <elvis.dowson@mac.com>) id 1MG9sy-0004kC-R2
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Jun 2009 12:57:57 +0200
+MIME-version: 1.0
+Received: from [87.201.169.122] by asmtp020.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLA00B460NDWX20@asmtp020.mac.com> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	15 Jun 2009 03:47:42 -0700 (PDT)
+Message-id: <A333C385-1DED-40D9-AD9E-08DF830A732E@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+In-reply-to: <h1557n$fir$1@ger.gmane.org>
+Date: Mon, 15 Jun 2009 14:47:27 +0400
+References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
+	<h1557n$fir$1@ger.gmane.org>
+X-Mailer: Apple Mail (2.935.3)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel@openembedded.org
+Subject: Re: Help required to create recipe for FANN library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2009 10:05:06 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Jun 2009 10:57:57 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7BIT
 
-On Mon, 2009-06-15 at 09:08 +0100, Richard Purdie wrote:
-> On Sat, 2009-06-13 at 21:19 +0100, Phil Blundell wrote:
-> > I propose to revert the patch in question, and instead just let
-> > procps.bb adjust its own local setting of FILES as necessary.
+Hi Koen,
+		
+On Jun 15, 2009, at 1:45 PM, Koen Kooi wrote:
+
+> On 15-06-09 09:18, Elvis Dowson wrote:
 >
-> Agreed, that shouldn't be a default.
+>> inherit autotools_stage pkgconfig
+>>
+>> do_stage () {
+>> oe_libinstall -a -so -C lib libfann ${STAGING_LIBDIR}
+>> install -d ${STAGING_INCDIR}/fann
+>> install -m 0644 src/include/vorbis/vorbisenc.h \
+>> src/include/vorbis/vorbisfile.h \
+>> src/include/vorbis/codec.h
+>> src/include/compat_time.h \
+>> src/include/config.h \
+>> src/include/doublefann.h \
+>> src/include/fann.h \
+>> src/include/fann_activation.h \
+>> src/include/fann_cascade.h \
+>> src/include/fann_data.h \
+>> src/include/fann_error.h \
+>> src/include/fann_internal.h \
+>> src/include/fann_io.h \
+>> src/include/fann_train.h \
+>> src/include/fixedfann.h \
+>> src/include/floatfann.h ${STAGING_INCDIR}/fann/
+>> install -d ${STAGING_DATADIR}/aclocal
+>> install -m 0644 aclocal.m4 ${STAGING_DATADIR}/aclocal/
+>> }
+>
+> Why are you using autotools_stage if you're not going to use its  
+> staging method?
+>
 
-Thanks to you and Leon for the feedback.  I've reverted that patch now.
+I don't know these command. Could you help me correct this recipe?
 
-p.
+Best regards,
 
-
-
+Elvis
 
