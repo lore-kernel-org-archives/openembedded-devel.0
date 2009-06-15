@@ -1,22 +1,29 @@
-Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MG6ce-00018G-EJ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Jun 2009 09:28:52 +0200
-MIME-version: 1.0
-Received: from [87.201.169.122] by asmtp019.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KL9008J1QYX0F20@asmtp019.mac.com> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	15 Jun 2009 00:18:38 -0700 (PDT)
-Message-id: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jun 2009 11:18:24 +0400
-X-Mailer: Apple Mail (2.935.3)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: EmbeddedMicro <justin@embeddedmicro.com>
-Subject: Help required to create recipe for FANN library
+	(envelope-from <rpurdie@rpsys.net>) id 1MG7Qc-0002G3-VO
+	for openembedded-devel@openembedded.org; Mon, 15 Jun 2009 10:20:31 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5F89r0b027625; Mon, 15 Jun 2009 09:09:53 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id C+zAuk3RJcVm; Mon, 15 Jun 2009 09:09:53 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5F89ikN027452
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Mon, 15 Jun 2009 09:09:47 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1244924378.29153.12.camel@lenovo.internal.reciva.com>
+References: <1244924378.29153.12.camel@lenovo.internal.reciva.com>
+Date: Mon, 15 Jun 2009 09:08:44 +0100
+Message-Id: <1245053324.5971.0.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Cc: Jeremy =?ISO-8859-1?Q?Lain=E9?= <jeremy.laine@m4x.org>
+Subject: Re: lib*.so in FILES_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,75 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2009 07:28:52 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Mon, 15 Jun 2009 08:20:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
-	Would someone be able to help us create an oe bitbake recipe for the  
-Fast Artificial Neural Network Library ?
+On Sat, 2009-06-13 at 21:19 +0100, Phil Blundell wrote:
+> This recent checkin:
+> 
+> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=ba434bd1dc9dc8ed61953a1579ea9e993e81cbb2
+> 
+> added ${base_libdir}/lib*.so to the default FILES_${PN}, on the grounds
+> that this is necessary to get procps packaged correctly.
+> 
+> However, I think this cure is worse than the original disease, in that
+> it's now virtually impossible to prevent *.so development symlinks
+> (which obviously belong in ${PN}-dev) from leaking into ${PN}.  This
+> situation is particularly bad if ${base_libdir} and ${libdir} are the
+> same, since you then end up with a useless .so symlink being installed
+> in your rootfs for virtually every library on the system.
+> 
+> I propose to revert the patch in question, and instead just let
+> procps.bb adjust its own local setting of FILES as necessary.
+> 
+> Comments?
 
-We have created an initial recipe, but the problem is don't know how  
-to get this recipe to configure and install the library for the  
-gumstix overo board.
+Agreed, that shouldn't be a default.
 
-If I look at the logs, nothing got configure or compiled when I look  
-at the logs in the overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/ 
-libfann-2.0.0-r01/tmp folder.
-
-I've looked at a couple of recipes and it all looks the same, so can't  
-figure out why this particular library is unable to get configured or  
-built.
-
-Any help would be much appreciated!
-
-Best regards,
-
-Elvis
-
-
-
-# libfann-2.0.0 recipie
-SECTION = "libs"
-DEFAULT_PREFERENCE = "1"
-
-# Package information
-DESCRIPTION = "libfann, Fast Artificial Neural Network Library is a  
-free open source neural network library, which implements multilayer  
-artificial neural networks in C with support for both fully connected  
-and sparsely connected networks."
-LICENSE = "BSD"
-
-PN = "libfann"
-PV = "2.0.0"
-PR = "r01"
-
-SRC_URI = "http://prdownloads.sourceforge.net/fann/fann-${PV}.tar.bz2"
-
-inherit autotools_stage pkgconfig
-
-do_stage () {
-	oe_libinstall -a -so -C lib libfann ${STAGING_LIBDIR}	
-	install -d ${STAGING_INCDIR}/fann
-	install -m 0644 src/include/vorbis/vorbisenc.h \
-			src/include/vorbis/vorbisfile.h \
-			src/include/vorbis/codec.h
-			src/include/compat_time.h \
-			src/include/config.h \
-			src/include/doublefann.h \
-			src/include/fann.h \
-			src/include/fann_activation.h \
-			src/include/fann_cascade.h \
-			src/include/fann_data.h \
-			src/include/fann_error.h \
-			src/include/fann_internal.h \
-			src/include/fann_io.h \
-			src/include/fann_train.h \
-			src/include/fixedfann.h \
-			src/include/floatfann.h ${STAGING_INCDIR}/fann/
-	install -d ${STAGING_DATADIR}/aclocal
-	install -m 0644 aclocal.m4 ${STAGING_DATADIR}/aclocal/
-}
+Richard
 
 
 
