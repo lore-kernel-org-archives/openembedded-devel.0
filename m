@@ -1,19 +1,19 @@
-Received: from [17.148.16.88] (helo=asmtpout013.mac.com)
+Received: from [17.148.16.91] (helo=asmtpout016.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MGG4i-0001qE-RM
+	(envelope-from <elvis.dowson@mac.com>) id 1MGGBs-000242-1s
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Jun 2009 19:34:29 +0200
+	Mon, 15 Jun 2009 19:41:52 +0200
 MIME-version: 1.0
-Received: from [87.201.169.122] by asmtp013.mac.com
+Received: from [87.201.169.122] by asmtp016.mac.com
 	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLA00441IZQMZ00@asmtp013.mac.com> for
+	32bit)) with ESMTPSA id <0KLA001Q4JCGSB80@asmtp016.mac.com> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	15 Jun 2009 10:23:59 -0700 (PDT)
-Message-id: <00B31CC4-0799-453F-9CAE-A120C4566D1A@mac.com>
+	15 Jun 2009 10:31:34 -0700 (PDT)
+Message-id: <4ED72898-D5DA-4833-AADC-679686ABA128@mac.com>
 From: Elvis Dowson <elvis.dowson@mac.com>
 To: openembedded-devel@lists.openembedded.org
 In-reply-to: <c384c5ea0906150932p1d9cf9e9u2f02da4ffe21d27c@mail.gmail.com>
-Date: Mon, 15 Jun 2009 21:23:40 +0400
+Date: Mon, 15 Jun 2009 21:31:19 +0400
 References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
 	<h1557n$fir$1@ger.gmane.org>
 	<A333C385-1DED-40D9-AD9E-08DF830A732E@mac.com>
@@ -37,7 +37,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2009 17:34:29 -0000
+X-List-Received-Date: Mon, 15 Jun 2009 17:41:52 -0000
 Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7BIT
 
@@ -46,31 +46,13 @@ Hi Leon,
 On Jun 15, 2009, at 8:32 PM, Leon Woestenberg wrote:
 >>
 > Try setting the S variable in the recipe.
+>
 
-I tried this, it didn't work, still gave the same error because the  
-image folder is empty so there is nothing to install. When I look at  
-the log files, nothing got configured and nothing got compiled. This  
-is a strange one!! :-)
+It worked. I set the S variable wrong. The correct one is
 
-ERROR: function do_install failed
-ERROR: log data follows (/tool/overo-oe/tmp/work/armv7a-angstrom-linux- 
-gnueabi/libfann-2.0.0-r01/temp/log.do_install.7946)
-| NOTE: make DESTDIR=/tool/overo-oe/tmp/work/armv7a-angstrom-linux- 
-gnueabi/libfann-2.0.0-r01/image install
-| make: *** No rule to make target `install'.  Stop.
-| FATAL: oe_runmake failed
-NOTE: Task failed: /tool/overo-oe/tmp/work/armv7a-angstrom-linux- 
-gnueabi/libfann-2.0.0-r01/temp/log.do_install.7946
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /tool/overo-oe/user.collection/recipes/libfann/ 
-libfann_2.0.0.bb do_install failed
-ERROR: Task 8 (/tool/overo-oe/user.collection/recipes/libfann/ 
-libfann_2.0.0.bb, do_install) failed
-NOTE: Tasks Summary: Attempted 426 tasks of which 418 didn't need to  
-be rerun and 1 failed.
-ERROR: '/tool/overo-oe/user.collection/recipes/libfann/ 
-libfann_2.0.0.bb' failed
+S = "${WORKDIR}/fann-${PV}"
 
+I'm attaching the working recipe below.
 
 Best regards,
 
@@ -93,10 +75,8 @@ PR = "r01"
 
 SRC_URI = "http://prdownloads.sourceforge.net/fann/fann-${PV}.tar.bz2"
 
-S = "${WORKDIR}/libfann-${PV}"
+S = "${WORKDIR}/fann-${PV}"
 
 inherit autotools_stage pkgconfig
-
-
 
 
