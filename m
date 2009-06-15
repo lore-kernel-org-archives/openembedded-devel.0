@@ -1,29 +1,41 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.210.200] (helo=mail-yx0-f200.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MGHSx-0001Sz-KD
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MGIBx-0007zq-3O
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Jun 2009 21:03:35 +0200
-Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MGHJ3-00059p-1k
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Jun 2009 19:53:21 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A3695E3.9070500@balister.org>
+	Mon, 15 Jun 2009 21:50:05 +0200
+Received: by yxe38 with SMTP id 38so2316657yxe.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Jun 2009 12:39:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=XWE1WEyuRcR7hBdr7r8CQEy0zxpVFQHb5TLfib5vnpY=;
+	b=BizoxZqVLZU1f0Rl/ybRPkjYOqg8lVWTuTzesLXYW1Tz5SU4FuJeScWy5Zm8HEA5Yw
+	rIJTReI9IuGkn0OiKU7qLLM0F6QkxwFpQJUK1ThZkFZGuT3qsWO1Xn+/t34IDEK3+1SV
+	sAC31zeynwJS+jXgKV5F6IIAdcIHtqoUzjtO8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=d5fPhpehWqP0Ma9syW1S+rFTs0GQ491Vw7IJbYiMvZKU8mmznOE0Mcipv6xvKeHzuG
+	3l5Y7dQu6isvfSIshH01nkQeF4AtFIlQQXWtmA0WVh3u1czer4q4JU5TcbyqI3UzriMo
+	rBSjxRxo1Q/UvMbBJUpAGzkRz5eqv3EgnKt98=
+MIME-Version: 1.0
+Received: by 10.231.11.139 with SMTP id t11mr2632376ibt.25.1245094788028; Mon, 
+	15 Jun 2009 12:39:48 -0700 (PDT)
+In-Reply-To: <1245088339.29153.39.camel@lenovo.internal.reciva.com>
 References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
-	<h1557n$fir$1@ger.gmane.org>	<A333C385-1DED-40D9-AD9E-08DF830A732E@mac.com>
+	<h1557n$fir$1@ger.gmane.org>
+	<A333C385-1DED-40D9-AD9E-08DF830A732E@mac.com>
 	<4A3665DF.7040109@balister.org>
 	<522EC177-58EA-4408-857C-5A010D5C2A1A@mac.com>
 	<c384c5ea0906150932p1d9cf9e9u2f02da4ffe21d27c@mail.gmail.com>
 	<A53836B7-5B08-42CA-A09B-EABF97DC52D0@mac.com>
 	<1245088339.29153.39.camel@lenovo.internal.reciva.com>
-	<4A3695E3.9070500@balister.org>
-Date: Mon, 15 Jun 2009 19:53:19 +0100
-Message-Id: <1245091999.29153.48.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+Date: Mon, 15 Jun 2009 21:39:47 +0200
+Message-ID: <c384c5ea0906151239vfe2a940n2ea42a4183cf6f38@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: Help required to create recipe for FANN library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,49 +50,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2009 19:03:35 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Jun 2009 19:50:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2009-06-15 at 14:41 -0400, Philip Balister wrote:
-> Phil Blundell wrote:
-> > On Mon, 2009-06-15 at 21:34 +0400, Elvis Dowson wrote:
-> >> Hi,
-> >> 	When building the FANN library, I get the following message:
-> >>
-> >> NOTE: Multiple libraries (libfann.so.2, libdoublefann.so.2,  
-> >> libfixedfann.so.2, libfloatfann.so.2) found and LEAD_SONAME not defined
-> >>
-> >> What is the use of the LEAD_SONAME?
-> > 
-> > You should probably ignore LEAD_SONAME; this mechanism seemed like a
-> > good idea at the time but with hindsight it was not such a clever plan.
-> > The right way to fix this warning is to put each of the libraries in its
-> > own output package.
-> 
-> Do you have a hint on how to do that? I've had the same question.
+Hello,
 
-Right now, I think the only way is to do it by steam, something like:
+On Mon, Jun 15, 2009 at 7:52 PM, Phil Blundell<philb@gnu.org> wrote:
+> On Mon, 2009-06-15 at 21:34 +0400, Elvis Dowson wrote:
+>> =A0 =A0 =A0 When building the FANN library, I get the following message:
+>>
+>> NOTE: Multiple libraries (libfann.so.2, libdoublefann.so.2,
+>> libfixedfann.so.2, libfloatfann.so.2) found and LEAD_SONAME not defined
+>>
+>> What is the use of the LEAD_SONAME?
+>
+> You should probably ignore LEAD_SONAME; this mechanism seemed like a
+> good idea at the time but with hindsight it was not such a clever plan.
 
-PACKAGES =+ "libfann libdoublefann libfixedfann libfloatfann"
-FILES_libfann = "${libdir}/libfann${SOLIBS}"
-FILES_libdoublefan = "${libdir}/libdoublefan${SOLIBS}"
-...
+In an OpenEmbedded world with new variables appearing at a weekly
+rate, let's try to clean out those who were a bad idea in hindsight
+:-)
 
-You can leave the -dev bits alone, it doesn't really hurt for them to go
-into one big package.
-
-Obviously there's some scope for automating this a bit: it'd be nice to
-be able to just say
-
-PACKAGE_SHLIBS = "libfann libdoublefann libfixedfann libfloatfann"
-
-and have the other stuff be generated automatically.  That'd probably be
-a fairly straightforward patch to package.bbclass if someone wanted to
-have a go.
-
-p.
+If there is consensus on this (and this is reviewed by a few core
+people) how about we do some refactoring to clean things up and have
+LEAD_SONAME removed?
 
 
+Regards,
+--=20
+Leon
 
 
