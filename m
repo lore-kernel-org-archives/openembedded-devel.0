@@ -1,29 +1,33 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MG7Qc-0002G3-VO
-	for openembedded-devel@openembedded.org; Mon, 15 Jun 2009 10:20:31 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n5F89r0b027625; Mon, 15 Jun 2009 09:09:53 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id C+zAuk3RJcVm; Mon, 15 Jun 2009 09:09:53 +0100 (BST)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n5F89ikN027452
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Mon, 15 Jun 2009 09:09:47 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MG8uu-0006NV-Fi
+	for openembedded-devel@openembedded.org; Mon, 15 Jun 2009 11:55:52 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MG8l0-0005UZ-Kh
+	for openembedded-devel@openembedded.org; Mon, 15 Jun 2009 09:45:39 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 15 Jun 2009 09:45:38 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 15 Jun 2009 09:45:38 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <1244924378.29153.12.camel@lenovo.internal.reciva.com>
-References: <1244924378.29153.12.camel@lenovo.internal.reciva.com>
-Date: Mon, 15 Jun 2009 09:08:44 +0100
-Message-Id: <1245053324.5971.0.camel@dax.rpnet.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Jun 2009 11:45:27 +0200
+Message-ID: <h1557n$fir$1@ger.gmane.org>
+References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: Jeremy =?ISO-8859-1?Q?Lain=E9?= <jeremy.laine@m4x.org>
-Subject: Re: lib*.so in FILES_${PN}
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090604 Shredder/3.0b3pre
+In-Reply-To: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Help required to create recipe for FANN library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,33 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2009 08:20:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Jun 2009 09:55:52 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2009-06-13 at 21:19 +0100, Phil Blundell wrote:
-> This recent checkin:
-> 
-> http://cgit.openembedded.net/cgit.cgi?url=openembedded/commit/&id=ba434bd1dc9dc8ed61953a1579ea9e993e81cbb2
-> 
-> added ${base_libdir}/lib*.so to the default FILES_${PN}, on the grounds
-> that this is necessary to get procps packaged correctly.
-> 
-> However, I think this cure is worse than the original disease, in that
-> it's now virtually impossible to prevent *.so development symlinks
-> (which obviously belong in ${PN}-dev) from leaking into ${PN}.  This
-> situation is particularly bad if ${base_libdir} and ${libdir} are the
-> same, since you then end up with a useless .so symlink being installed
-> in your rootfs for virtually every library on the system.
-> 
-> I propose to revert the patch in question, and instead just let
-> procps.bb adjust its own local setting of FILES as necessary.
-> 
-> Comments?
+On 15-06-09 09:18, Elvis Dowson wrote:
 
-Agreed, that shouldn't be a default.
+> inherit autotools_stage pkgconfig
+>
+> do_stage () {
+> oe_libinstall -a -so -C lib libfann ${STAGING_LIBDIR}
+> install -d ${STAGING_INCDIR}/fann
+> install -m 0644 src/include/vorbis/vorbisenc.h \
+> src/include/vorbis/vorbisfile.h \
+> src/include/vorbis/codec.h
+> src/include/compat_time.h \
+> src/include/config.h \
+> src/include/doublefann.h \
+> src/include/fann.h \
+> src/include/fann_activation.h \
+> src/include/fann_cascade.h \
+> src/include/fann_data.h \
+> src/include/fann_error.h \
+> src/include/fann_internal.h \
+> src/include/fann_io.h \
+> src/include/fann_train.h \
+> src/include/fixedfann.h \
+> src/include/floatfann.h ${STAGING_INCDIR}/fann/
+> install -d ${STAGING_DATADIR}/aclocal
+> install -m 0644 aclocal.m4 ${STAGING_DATADIR}/aclocal/
+> }
 
-Richard
+Why are you using autotools_stage if you're not going to use its staging 
+method?
 
 
 
