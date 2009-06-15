@@ -1,21 +1,29 @@
-Received: from [17.148.16.90] (helo=asmtpout015.mac.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MGGSx-0002hK-HL
+	(envelope-from <philb@gnu.org>) id 1MGGVw-0002lp-Nb
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Jun 2009 19:59:31 +0200
-MIME-version: 1.0
-Received: from [87.201.169.122] by asmtp015.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLA0032KK5JQB00@asmtp015.mac.com> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	15 Jun 2009 10:49:00 -0700 (PDT)
-Message-id: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jun 2009 21:48:45 +0400
-X-Mailer: Apple Mail (2.935.3)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: classpath_0.98 recipe failure
+	Mon, 15 Jun 2009 20:02:36 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MGGM1-0003cw-1Y
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Jun 2009 18:52:21 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <A53836B7-5B08-42CA-A09B-EABF97DC52D0@mac.com>
+References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
+	<h1557n$fir$1@ger.gmane.org>
+	<A333C385-1DED-40D9-AD9E-08DF830A732E@mac.com>
+	<4A3665DF.7040109@balister.org>
+	<522EC177-58EA-4408-857C-5A010D5C2A1A@mac.com>
+	<c384c5ea0906150932p1d9cf9e9u2f02da4ffe21d27c@mail.gmail.com>
+	<A53836B7-5B08-42CA-A09B-EABF97DC52D0@mac.com>
+Date: Mon, 15 Jun 2009 18:52:19 +0100
+Message-Id: <1245088339.29153.39.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Help required to create recipe for FANN library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,37 +37,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2009 17:59:31 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Mon, 15 Jun 2009 18:02:38 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
-	I'm trying to build the classpath_0.98 recipe, but it doesn't work. I  
-get a failure that is a really long list of java exceptions, to big to  
-reproduce here. Here are the last few lines.
+On Mon, 2009-06-15 at 21:34 +0400, Elvis Dowson wrote:
+> Hi,
+> 	When building the FANN library, I get the following message:
+> 
+> NOTE: Multiple libraries (libfann.so.2, libdoublefann.so.2,  
+> libfixedfann.so.2, libfloatfann.so.2) found and LEAD_SONAME not defined
+> 
+> What is the use of the LEAD_SONAME?
 
-Could someone please help me resolve this error?
+You should probably ignore LEAD_SONAME; this mechanism seemed like a
+good idea at the time but with hindsight it was not such a clever plan.
+The right way to fix this warning is to put each of the libraries in its
+own output package.
 
-checking if javac - 
-Xlint:unchecked,cast,divzero,empty,finally,overrides works...  
-configure: error: The Java compiler javac - 
-Xlint:unchecked,cast,divzero,empty,finally,overrides failed (see  
-config.log, check the CLASSPATH?)
-| FATAL: oe_runconf failed
-NOTE: Task failed: /tool/overo-oe/tmp/work/armv7a-angstrom-linux- 
-gnueabi/classpath-0.98-r0/temp/log.do_configure.14142
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /tool/overo-oe/org.openembedded.dev/recipes/classpath/ 
-classpath_0.98.bb do_configure failed
-ERROR: Task 6 (/tool/overo-oe/org.openembedded.dev/recipes/classpath/ 
-classpath_0.98.bb, do_configure) failed
-NOTE: Tasks Summary: Attempted 1703 tasks of which 1698 didn't need to  
-be rerun and 1 failed.
-ERROR: '/tool/overo-oe/org.openembedded.dev/recipes/classpath/ 
-classpath_0.98.bb' failed
+p.
 
 
-Best regards,
 
-Elvis
 
