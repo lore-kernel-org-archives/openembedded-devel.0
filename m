@@ -1,37 +1,25 @@
-Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
+Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1MGVzp-0003qI-AD
+	(envelope-from <elvis.dowson@mac.com>) id 1MGWt9-0001pM-D2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Jun 2009 12:34:29 +0200
-Received: by ewy20 with SMTP id 20so5313494ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jun 2009 03:24:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=mdHBl1XG7Z2Gyn7JwGtDi6ybTv0qWE2qojsR66d4yU0=;
-	b=io96kuxj9+GSZqz1xvxIUU2l/F1KBTuH78wvRrmKtCxvt70dQXVsbJOd7uFE8zk8WS
-	OUYk7KlKIemgWTNWkC5xrohjt5okVMI393RJYFCt1+9/EWTIpXZmoO2ZJhzwT548bpO5
-	jp+5sfVSsCn4boHDKlOVJY3P6YdO38OvnedEg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=OYq7wbwIJuOiu8Z6VUsj6H1WiTnMau68Fb/VDA/QPmuNXqg+D+Zsg/s03/EPMuO4pt
-	LOAbZdDSLOScMs039iqjdzUlqjLNlngWuAXqzmzXkBTMhHXnyQXGVrJ7yC/5FGGhx2qE
-	tTQJMPaIuGrfNjDA6xtcuG47rR/8n9Mh9enBk=
-MIME-Version: 1.0
-Received: by 10.216.45.73 with SMTP id o51mr2788949web.10.1245147848738; Tue, 
-	16 Jun 2009 03:24:08 -0700 (PDT)
-In-Reply-To: <303CFF24-F38E-46D2-A01D-16756614815F@mac.com>
+	Tue, 16 Jun 2009 13:31:39 +0200
+MIME-version: 1.0
+Received: from [87.201.169.67] by asmtp019.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLB00E1KWUMZX80@asmtp019.mac.com> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	16 Jun 2009 04:20:50 -0700 (PDT)
+Message-id: <8C98050F-2C26-4376-9A32-BAC900B5E832@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: openembedded-devel@lists.openembedded.org
+In-reply-to: <d1b08f940906160324h11f182e2i82f92d2f65575724@mail.gmail.com>
+Date: Tue, 16 Jun 2009 15:20:35 +0400
 References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
 	<D34E12F3-25C1-4B11-BC85-7D45664905DE@mac.com>
 	<A2AED021-1D87-4921-A330-FE9AF01C9FCD@mac.com>
 	<303CFF24-F38E-46D2-A01D-16756614815F@mac.com>
-Date: Tue, 16 Jun 2009 12:24:08 +0200
-Message-ID: <d1b08f940906160324h11f182e2i82f92d2f65575724@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<d1b08f940906160324h11f182e2i82f92d2f65575724@mail.gmail.com>
+X-Mailer: Apple Mail (2.935.3)
 Subject: Re: classpath_0.98 recipe failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -46,18 +34,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2009 10:34:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Jun 2009 11:31:39 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-Elvis,
+Hi Andrea,
+			Tired that, it fails miserably!! :-(
 
-the status-of-the art is described in two pages here:
+For example, going by the instructions on that wiki, I set the  
+following preferred providers and still cannot build classpath!
 
-http://wiki.openembedded.net/index.php/Category:Java
+#PREFERRED_PROVIDER_classpath = "classpath"
+#PREFERRED_VERSION_classpath = "0.98"
+PREFERRED_PROVIDER_classpath = "classpath-minimal"
+PREFERRED_VERSION_classpath-minimal = "0.97.2"
+PREFERRED_VERSION_classpath-initial = "0.93"
 
-Regards
+#PREFERRED_PROVIDER_virtual/javac-native = "openjdk-javac-native"
+PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+PREFERRED_VERSION_libecj-bootstrap = "3.4"
 
-Andrea
+#PREFERRED_PROVIDER_virtual/java-initial = "cacao-initial"
+#PREFERRED_VERSION_cacao-initial = "0.98"
+PREFERRED_PROVIDER_virtual/java-initial = "jamvm-initial"
+PREFERRED_VERSION_jamvm-initial = "1.4.5"
+
+#PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
+#PREFERRED_VERSION_cacao-native = "0.99.3"
+PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+PREFERRED_VERSION_jamvm-native = "1.5.1"
+
+
+As you can see, from the commented code, I've tried both jamvm and  
+cacao and both of them dont work. :-(
+
+I've been stuck with this problem for 2 days now. My goal is to get  
+RXTX working for the overo, but I'm stuck with these basic libraries  
+not building, so I'm stuck at the moment.
+
+Elvis
+
+On Jun 16, 2009, at 2:24 PM, Andrea Adami wrote:
+
+> Elvis,
+>
+> the status-of-the art is described in two pages here:
+>
+> http://wiki.openembedded.net/index.php/Category:Java
+>
+> Regards
+>
+> Andrea
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
