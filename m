@@ -1,33 +1,38 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MGT9j-0000aA-2q
+	(envelope-from <andrea.adami@gmail.com>) id 1MGVzp-0003qI-AD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Jun 2009 09:32:31 +0200
-Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MGSzj-0001DY-Ln
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Jun 2009 08:22:11 +0100
-From: Phil Blundell <pb@reciva.com>
+	Tue, 16 Jun 2009 12:34:29 +0200
+Received: by ewy20 with SMTP id 20so5313494ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Jun 2009 03:24:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=mdHBl1XG7Z2Gyn7JwGtDi6ybTv0qWE2qojsR66d4yU0=;
+	b=io96kuxj9+GSZqz1xvxIUU2l/F1KBTuH78wvRrmKtCxvt70dQXVsbJOd7uFE8zk8WS
+	OUYk7KlKIemgWTNWkC5xrohjt5okVMI393RJYFCt1+9/EWTIpXZmoO2ZJhzwT548bpO5
+	jp+5sfVSsCn4boHDKlOVJY3P6YdO38OvnedEg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=OYq7wbwIJuOiu8Z6VUsj6H1WiTnMau68Fb/VDA/QPmuNXqg+D+Zsg/s03/EPMuO4pt
+	LOAbZdDSLOScMs039iqjdzUlqjLNlngWuAXqzmzXkBTMhHXnyQXGVrJ7yC/5FGGhx2qE
+	tTQJMPaIuGrfNjDA6xtcuG47rR/8n9Mh9enBk=
+MIME-Version: 1.0
+Received: by 10.216.45.73 with SMTP id o51mr2788949web.10.1245147848738; Tue, 
+	16 Jun 2009 03:24:08 -0700 (PDT)
+In-Reply-To: <303CFF24-F38E-46D2-A01D-16756614815F@mac.com>
+References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
+	<D34E12F3-25C1-4B11-BC85-7D45664905DE@mac.com>
+	<A2AED021-1D87-4921-A330-FE9AF01C9FCD@mac.com>
+	<303CFF24-F38E-46D2-A01D-16756614815F@mac.com>
+Date: Tue, 16 Jun 2009 12:24:08 +0200
+Message-ID: <d1b08f940906160324h11f182e2i82f92d2f65575724@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BA30CC78-BC16-4681-A750-C964E6E32CE1@mac.com>
-References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
-	<h1557n$fir$1@ger.gmane.org>
-	<A333C385-1DED-40D9-AD9E-08DF830A732E@mac.com>
-	<4A3665DF.7040109@balister.org>
-	<522EC177-58EA-4408-857C-5A010D5C2A1A@mac.com>
-	<c384c5ea0906150932p1d9cf9e9u2f02da4ffe21d27c@mail.gmail.com>
-	<A53836B7-5B08-42CA-A09B-EABF97DC52D0@mac.com>
-	<1245088339.29153.39.camel@lenovo.internal.reciva.com>
-	<4A3695E3.9070500@balister.org>
-	<1245091999.29153.48.camel@lenovo.internal.reciva.com>
-	<BA30CC78-BC16-4681-A750-C964E6E32CE1@mac.com>
-Date: Tue, 16 Jun 2009 08:22:10 +0100
-Message-Id: <1245136930.29153.86.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: Help required to create recipe for FANN library
+Subject: Re: classpath_0.98 recipe failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,37 +46,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2009 07:32:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Jun 2009 10:34:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-06-16 at 07:25 +0400, Elvis Dowson wrote:
-> Hi Phil,
-> 		
-> On Jun 15, 2009, at 10:53 PM, Phil Blundell wrote:
-> 
-> >
-> > Right now, I think the only way is to do it by steam, something like:
-> >
-> > PACKAGES =+ "libfann libdoublefann libfixedfann libfloatfann"
-> > FILES_libfann = "${libdir}/libfann${SOLIBS}"
-> > FILES_libdoublefan = "${libdir}/libdoublefan${SOLIBS}"
-> > ...
-> 
-> I did as you suggested but get the following errors:
-> 
->   -------------------
-> ERROR: libfann is listed in PACKAGES multiple times, this leads to  
-> packaging errors.
-> ERROR: Please fix the metadata/report this as bug to OE bugtracker.
-> ERROR: -------------------
-> 
+Elvis,
 
-If your recipe itself is named "libfann" then it will appear in PACKAGES
-automatically (as ${PN}); you don't need to add it explicitly.
+the status-of-the art is described in two pages here:
 
-p.
+http://wiki.openembedded.net/index.php/Category:Java
 
+Regards
 
+Andrea
 
 
