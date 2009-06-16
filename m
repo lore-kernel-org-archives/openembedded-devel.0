@@ -1,20 +1,33 @@
-Received: from [17.148.16.97] (helo=asmtpout022.mac.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MGcPZ-0007xN-1S
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Jun 2009 19:25:30 +0200
-MIME-version: 1.0
-Received: from [87.201.169.67] by asmtp022.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLC00FNRD8YD110@asmtp022.mac.com> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	16 Jun 2009 10:15:05 -0700 (PDT)
-Message-id: <C960916A-B754-4AD4-9751-67D7025AC8C1@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Tue, 16 Jun 2009 21:14:47 +0400
-X-Mailer: Apple Mail (2.935.3)
-Subject: Patch for libfann-2.0.0 recipe
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MGdWt-0006oA-OZ
+	for openembedded-devel@openembedded.org; Tue, 16 Jun 2009 20:37:07 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MGdMs-0006pZ-PR
+	for openembedded-devel@openembedded.org; Tue, 16 Jun 2009 18:26:47 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 16 Jun 2009 18:26:46 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 16 Jun 2009 18:26:46 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 16 Jun 2009 20:26:31 +0200
+Message-ID: <h18o4n$oos$1@ger.gmane.org>
+References: <1245167160-2871-1-git-send-email-philip@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090604 Shredder/3.0b3pre
+In-Reply-To: <1245167160-2871-1-git-send-email-philip@balister.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] u-boot_git.bb : Update recipe from .dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,85 +41,262 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2009 17:25:34 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Tue, 16 Jun 2009 18:37:08 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
-	I'm attaching a patch for the libfann-2.0.0 recipe for inclusion into  
-the oe repository.
+On 16-06-09 17:46, Philip Balister wrote:
+> Updates u-boot revision for omap3 machines. Adds support for overo and
+> several TI davinci boards. Adds support for mini2440 and micro2440 machines.
+> Add afeb9260 machine.
+>
+> Signed-off-by: Philip Balister<philip@balister.org>
 
-Best regards,
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-Elvis
 
- From edb273d68849fd968f83a0bf59efba120b578fa3 Mon Sep 17 00:00:00 2001
-From: Elvis Dowson <elvis.dowson@gmail.com>
-Date: Tue, 16 Jun 2009 21:12:52 +0400
-Subject: [PATCH] Added libfann-2.0.0 recipe
-
----
-  conf/checksums.ini               |    4 ++++
-  recipes/libfann/libfann_2.0.0.bb |   23 +++++++++++++++++++++++
-  2 files changed, 27 insertions(+), 0 deletions(-)
-  create mode 100644 recipes/libfann/libfann_2.0.0.bb
-
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 37d55c7..7c38ea9 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -286,6 +286,10 @@  
-sha256=1f8504c7f08d2d59c71a70915fc834a285b99587444ee33e23ee3f135c071da0
-  md5=a8cf945d09c6458cb27228218e9a2f45
-   
-sha256=8416e162d6fc921f14a61c8905e9f9a28dc25e67e1c71b75574360a13f0c28c7
-
-+[http://prdownloads.sourceforge.net/fann/fann-2.0.0.tar.bz2]
-+md5=4224efa533265dcf39237667973d0e20
-+sha256=762a1313a9b935300cb66ebf052d469d04823ca721fe6dd2a49c01e13e8ab30a
-+
-  [http://downloads.sourceforge.net/fordiac/FORTE-0.3.5.zip]
-  md5=d207d3b389ee9f2702df095681459f99
-   
-sha256=2b87b331e931db2db07408c1b07bdb557227e0c16f8fe37f72e40b08fca0a09c
-diff --git a/recipes/libfann/libfann_2.0.0.bb b/recipes/libfann/ 
-libfann_2.0.0.bb
-new file mode 100644
-index 0000000..d3166ec
---- /dev/null
-+++ b/recipes/libfann/libfann_2.0.0.bb
-@@ -0,0 +1,23 @@
-+# libfann-2.0.0 recipie
-+SECTION = "libs"
-+DEFAULT_PREFERENCE = "1"
-+
-+# Package information
-+DESCRIPTION = "libfann, Fast Artificial Neural Network Library is a  
-free open source neural network library, which implements multilayer  
-artificial neural networks in C with support for both fully connected  
-and sparsely connected networks."
-+LICENSE = "BSD"
-+PN = "libfann"
-+PV = "2.0.0"
-+PR = "r01"
-+
-+SRC_URI = "http://prdownloads.sourceforge.net/fann/fann-${PV}.tar.bz2"
-+
-+S = "${WORKDIR}/fann-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+do_stage () {
-+	oe_libinstall -a -so -C src libfann ${STAGING_LIBDIR}
-+	install -d ${STAGING_INCDIR}/fann
-+	(cd ${S}/src/include; cp compat_time.h config.h doublefann.h fann.h  
-fann_activation.h fann_cascade.h fann_data.h fann_error.h  
-fann_internal.h fann_io.h fann_train.h fixedfann.h floatfann.h $ 
-{STAGING_INCDIR}/fann/)
-+	install -m 0644 ${S}/aclocal.m4 ${STAGING_DATADIR}/aclocal/
-+}
--- 
-1.6.0.3
+> ---
+>   recipes/u-boot/files/dss2.patch                    |   61 ++++++++++++++++++
+>   recipes/u-boot/files/fw-env.patch                  |   12 ++++
+>   .../u-boot-git/afeb9260/AFEB9260-network-fix.patch |   40 ++++++++++++
+>   recipes/u-boot/u-boot_git.bb                       |   68 +++++++++++++++++---
+>   4 files changed, 172 insertions(+), 9 deletions(-)
+>   create mode 100644 recipes/u-boot/files/dss2.patch
+>   create mode 100644 recipes/u-boot/files/fw-env.patch
+>   create mode 100644 recipes/u-boot/u-boot-git/afeb9260/AFEB9260-network-fix.patch
+>
+> diff --git a/recipes/u-boot/files/dss2.patch b/recipes/u-boot/files/dss2.patch
+> new file mode 100644
+> index 0000000..4dfc5d6
+> --- /dev/null
+> +++ b/recipes/u-boot/files/dss2.patch
+> @@ -0,0 +1,61 @@
+> +diff --git a/include/configs/omap3_overo.h b/include/configs/omap3_overo.h
+> +index dee0417..2f8a952 100644
+> +--- a/include/configs/omap3_overo.h
+> ++++ b/include/configs/omap3_overo.h
+> +@@ -149,14 +149,21 @@
+> + #define CONFIG_EXTRA_ENV_SETTINGS \
+> + 	"loadaddr=0x82000000\0" \
+> + 	"console=ttyS2,115200n8\0" \
+> +-	"videomode=1024x768@60,vxres=1024,vyres=768\0" \
+> +-	"videospec=omapfb:vram:2M,vram:4M\0" \
+> ++	"vram=12M\0" \
+> ++	"dvimode=1024x768MR-16@60\0" \
+> ++	"defaultdisplay=dvi\0" \
+> + 	"mmcargs=setenv bootargs console=${console} " \
+> +-		"video=${videospec},mode:${videomode} " \
+> ++		"vram=${vram} " \
+> ++		"omapfb.mode=dvi:${dvimode} " \
+> ++		"omapfb.debug=y " \
+> ++		"omapdss.def_disp=${defaultdisplay} " \
+> + 		"root=/dev/mmcblk0p2 rw " \
+> + 		"rootfstype=ext3 rootwait\0" \
+> + 	"nandargs=setenv bootargs console=${console} " \
+> +-		"video=${videospec},mode:${videomode} " \
+> ++		"vram=${vram} " \
+> ++		"omapfb.mode=dvi:${dvimode} " \
+> ++		"omapfb.debug=y " \
+> ++		"omapdss.def_disp=${defaultdisplay} " \
+> + 		"root=/dev/mtdblock4 rw " \
+> + 		"rootfstype=jffs2\0" \
+> + 	"loadbootscript=fatload mmc 0 ${loadaddr} boot.scr\0" \
+> +diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
+> +index dee0417..2f8a952 100644
+> +--- a/include/configs/omap3_beagle.h
+> ++++ b/include/configs/omap3_beagle.h
+> +@@ -149,14 +149,21 @@
+> + #define CONFIG_EXTRA_ENV_SETTINGS \
+> + 	"loadaddr=0x82000000\0" \
+> + 	"console=ttyS2,115200n8\0" \
+> +-	"videomode=1024x768@60,vxres=1024,vyres=768\0" \
+> +-	"videospec=omapfb:vram:2M,vram:4M\0" \
+> ++	"vram=12M\0" \
+> ++	"dvimode=1024x768MR-16@60\0" \
+> ++	"defaultdisplay=dvi\0" \
+> + 	"mmcargs=setenv bootargs console=${console} " \
+> +-		"video=${videospec},mode:${videomode} " \
+> ++		"vram=${vram} " \
+> ++		"omapfb.mode=dvi:${dvimode} " \
+> ++		"omapfb.debug=y " \
+> ++		"omapdss.def_disp=${defaultdisplay} " \
+> + 		"root=/dev/mmcblk0p2 rw " \
+> + 		"rootfstype=ext3 rootwait\0" \
+> + 	"nandargs=setenv bootargs console=${console} " \
+> +-		"video=${videospec},mode:${videomode} " \
+> ++		"vram=${vram} " \
+> ++		"omapfb.mode=dvi:${dvimode} " \
+> ++		"omapfb.debug=y " \
+> ++		"omapdss.def_disp=${defaultdisplay} " \
+> + 		"root=/dev/mtdblock4 rw " \
+> + 		"rootfstype=jffs2\0" \
+> + 	"loadbootscript=fatload mmc 0 ${loadaddr} boot.scr\0" \
+> +
+> diff --git a/recipes/u-boot/files/fw-env.patch b/recipes/u-boot/files/fw-env.patch
+> new file mode 100644
+> index 0000000..f3dd335
+> --- /dev/null
+> +++ b/recipes/u-boot/files/fw-env.patch
+> @@ -0,0 +1,12 @@
+> +--- git/tools/env/fw_env.config.orig	2009-02-04 09:42:50.000000000 -0700
+> ++++ git/tools/env/fw_env.config	2009-02-04 14:25:09.000000000 -0700
+> +@@ -4,8 +4,4 @@
+> + # Notice, that the "Number of sectors" is ignored on NOR.
+> +
+> + # MTD device name	Device offset	Env. size	Flash sector size	Number of sectors
+> +-/dev/mtd1		0x0000		0x4000		0x4000
+> +-/dev/mtd2		0x0000		0x4000		0x4000
+> +-
+> +-# NAND example
+> +-#/dev/mtd0		0x4000		0x4000		0x20000			2
+> ++/dev/mtd2		0x0000		0x20000		0x40000
+> diff --git a/recipes/u-boot/u-boot-git/afeb9260/AFEB9260-network-fix.patch b/recipes/u-boot/u-boot-git/afeb9260/AFEB9260-network-fix.patch
+> new file mode 100644
+> index 0000000..ffd2f02
+> --- /dev/null
+> +++ b/recipes/u-boot/u-boot-git/afeb9260/AFEB9260-network-fix.patch
+> @@ -0,0 +1,40 @@
+> +From d0a09ac9587fbfc19970456e17f0ecc957a5549b Mon Sep 17 00:00:00 2001
+> +From: Sergey Lapin<slapin@ossfans.org>
+> +Date: Tue, 12 May 2009 01:12:50 +0400
+> +Subject: [PATCH] AFEB9260 network fix
+> +
+> +Signed-off-by: Sergey Lapin<slapin@ossfans.org>
+> +---
+> + board/afeb9260/afeb9260.c             |    2 +-
+> + cpu/arm926ejs/at91/at91sam9260_macb.c |    2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/board/afeb9260/afeb9260.c b/board/afeb9260/afeb9260.c
+> +index 024db2b..a247663 100644
+> +--- a/board/afeb9260/afeb9260.c
+> ++++ b/board/afeb9260/afeb9260.c
+> +@@ -177,7 +177,7 @@ int board_eth_init(bd_t *bis)
+> + {
+> + 	int rc = 0;
+> + #ifdef CONFIG_MACB
+> +-	rc = macb_eth_initialize(0, (void *)AT91SAM9260_BASE_EMAC, 0x00);
+> ++	rc = macb_eth_initialize(0, (void *)AT91SAM9260_BASE_EMAC, 0x01);
+> + #endif
+> + 	return rc;
+> + }
+> +diff --git a/cpu/arm926ejs/at91/at91sam9260_macb.c b/cpu/arm926ejs/at91/at91sam9260_macb.c
+> +index ab60fb7..ea5e767 100644
+> +--- a/cpu/arm926ejs/at91/at91sam9260_macb.c
+> ++++ b/cpu/arm926ejs/at91/at91sam9260_macb.c
+> +@@ -47,7 +47,7 @@ void at91_macb_hw_init(void)
+> + 	at91_set_B_periph(AT91_PIN_PA25, 0);	/* ERX2 */
+> + 	at91_set_B_periph(AT91_PIN_PA26, 0);	/* ERX3 */
+> + 	at91_set_B_periph(AT91_PIN_PA27, 0);	/* ERXCK */
+> +-#if defined(CONFIG_AT91SAM9260EK)
+> ++#if defined(CONFIG_AT91SAM9260EK) || defined(CONFIG_AFEB9260)
+> + 	/*
+> + 	 * use PA10, PA11 for ETX2, ETX3.
+> + 	 * PA23 and PA24 are for TWI EEPROM
+> +--
+> +1.5.6.5
+> +
+> diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+> index e5a8d5d..12ebcfe 100644
+> --- a/recipes/u-boot/u-boot_git.bb
+> +++ b/recipes/u-boot/u-boot_git.bb
+> @@ -1,26 +1,62 @@
+>   require u-boot.inc
+> -PR ="r22"
+> +PR ="r26"
+> +
+> +FILESPATHPKG =. "u-boot-git:"
+>
+>   SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git "
+>   SRCREV_davinci-sffsdr = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
+> -SRCREV_davinci-dvevm = "4b50cd12a3b3c644153c4cf393f4a4c12289e5aa"
+>   SRCREV_akita = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
+>   SRCREV_spitz = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
+>   SRCREV_c7x0 = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
+> -SRCREV_afeb9260 = "2077e348c2a84901022ad95311b47b70361e6daa"
+> +SRCREV_afeb9260 = "6b8edfde22acc574b5532e9f086e6a7287a9bc78"
+> +SRCREV_afeb9260-180 = "6b8edfde22acc574b5532e9f086e6a7287a9bc78"
+> +SRC_URI_append_afeb9260 = " file://AFEB9260-network-fix.patch;patch=1"
+> +SRC_URI_append_afeb9260-180 = " file://AFEB9260-network-fix.patch;patch=1"
+>
+> -SRC_URI_beagleboard = "git://www.sakoman.net/git/u-boot-omap3.git;branch=omap3-dev;protocol=git"
+> -SRCREV_beagleboard = "b7038cff739684bb95853eb5bee924c2574a222e"
+> -PV_beagleboard = "2008.10+${PR}+gitr${SRCREV}"
+> +SRC_URI_beagleboard = "git://gitorious.org/u-boot-omap3/mainline.git;branch=omap3-dev;protocol=git \
+> +                 file://fw-env.patch;patch=1 \
+> +                 file://dss2.patch;patch=1 \
+> +"
+> +SRCREV_beagleboard = "d363f9cb0918a1b6b92e2e20d01543d0c4f53274"
+> +PV_beagleboard = "2009.05+${PR}+gitr${SRCREV}"
+>
+> -SRC_URI_omap3evm = "git://www.sakoman.net/git/u-boot-omap3.git;branch=omap3;protocol=git"
+> -SRCREV_omap3evm = "1e329ec630b31803ee191d2ee335214662b5bfea"
+> -PV_omap3evm = "2008.10+${PR}+gitr${SRCREV}"
+> +SRC_URI_omap3evm = "git://gitorious.org/u-boot-omap3/mainline.git;branch=omap3-dev;protocol=git"
+> +SRCREV_omap3evm = "2dea1db2a3b7c12ed70bbf8ee50755089c5e5170"
+> +PV_omap3evm = "2009.03+${PR}+gitr${SRCREV}"
+>
+>   SRC_URI_omapzoom = "git://www.sakoman.net/git/u-boot-omap3.git;branch=omap3-dev;protocol=git"
+>   SRCREV_omapzoom = "d691b424f1f5bf7eea3a4131dfc578d272e8f335"
+>   PV_omapzoom = "2009.01+${PR}+gitr${SRCREV}"
+>
+> +SRC_URI_overo = "git://gitorious.org/u-boot-omap3/mainline.git;branch=omap3-dev;protocol=git \
+> +                 file://fw-env.patch;patch=1 \
+> +                 file://dss2.patch;patch=1 \
+> +"
+> +SRCREV_overo = "2dea1db2a3b7c12ed70bbf8ee50755089c5e5170"
+> +PV_overo = "2009.03+${PR}+gitr${SRCREV}"
+> +
+> +SRC_URI_dm6446-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
+> +SRCREV_dm6446-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
+> +PV_dm6446-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
+> +
+> +SRC_URI_dm6467-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
+> +SRCREV_dm6467-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
+> +PV_dm6467-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
+> +
+> +SRC_URI_dm355-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
+> +SRCREV_dm355-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
+> +PV_dm355-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
+> +
+> +SRC_URI_dm365-evm = "git://arago-project.org/git/people/sandeep/u-boot-davinci.git;protocol=git"
+> +SRCREV_dm365-evm = "6dc7c97635b46ed00117e326d16d092a963fb6d4"
+> +PV_dm365-evm = "2009.05+2009.06-rc0+${PR}+gitr${SRCREV}"
+> +
+> +SRC_URI_dm355-leopard = "git://www.denx.de/git/u-boot-arm.git;protocol=git;branch=next \
+> +                        file://leopardboard-support.patch;patch=1 \
+> +"
+> +SRCREV_dm355-leopard = "86d5c98d3d97d631b1d3a5f5e6a17e87c99b42cf"
+> +PV_dm355-leopard = "2009.05+2009.06-rc2+gitr${SRCREV}"
+> +
+>   SRC_URI_neuros-osd2 = "git://github.com/neuros/u-boot.git;protocol=git;branch=neuros"
+>   SRCREV_neuros-osd2 = "8de979d346624c0e4cfe2e5c0f08ce20ca4b5d14"
+>
+> @@ -30,6 +66,12 @@ SRCREV_sequoa = "cf3b41e0c1111dbb865b6e34e9f3c3d3145a6093"
+>   SRC_URI = "git://www.denx.de/git/u-boot.git;protocol=git "
+>   SRC_URI_sequoia = "git://www.denx.de/git/u-boot.git;protocol=git;tag=cf3b41e0c1111dbb865b6e34e9f3c3d3145a6093 "
+>
+> +SRC_URI_mini2440 = "git://repo.or.cz/u-boot-openmoko/mini2440.git;protocol=git;branch=dev-mini2440-stable"
+> +SRCREV_mini2440 = "3516c35fb777ca959e5cadf2156a792ca10e1cff"
+> +
+> +SRC_URI_micro2440 = "git://repo.or.cz/u-boot-openmoko/mini2440.git;protocol=git;branch=dev-mini2440-stable"
+> +SRCREV_micro2440 = "3516c35fb777ca959e5cadf2156a792ca10e1cff"
+> +
+>   SRC_URI_neuros-osd2 += "file://Makefile-fix.patch;patch=1"
+>   SRC_URI_append_akita = "file://pdaXrom-u-boot.patch;patch=1 \
+>                           file://uboot-eabi-fix-HACK2.patch;patch=1 \
+> @@ -58,3 +100,11 @@ do_configure_prepend_spitz() {
+>   do_configure_prepend_c7x0() {
+>           sed -i s:ROOT_FLASH_SIZE:${ROOT_FLASH_SIZE}:g ${S}/include/configs/corgi.h
+>   }
+> +
+> +do_deploy_prepend_mini2440() {
+> +	cp ${S}/u-boot-nand16k.bin ${S}/u-boot.bin
+> +}
+> +
+> +do_deploy_prepend_micro2440() {
+> +	cp ${S}/u-boot-nand16k.bin ${S}/u-boot.bin
+> +}
 
 
 
