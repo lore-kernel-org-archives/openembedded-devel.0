@@ -1,24 +1,33 @@
-Received: from [17.148.16.92] (helo=asmtpout017.mac.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MGRWW-0003UU-9A
+	(envelope-from <pb@reciva.com>) id 1MGT9j-0000aA-2q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Jun 2009 07:47:56 +0200
-MIME-version: 1.0
-Received: from [87.201.169.122] by asmtp017.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLB0093HGYK1Q90@asmtp017.mac.com> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	15 Jun 2009 22:37:36 -0700 (PDT)
-Message-id: <303CFF24-F38E-46D2-A01D-16756614815F@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-In-reply-to: <A2AED021-1D87-4921-A330-FE9AF01C9FCD@mac.com>
-Date: Tue, 16 Jun 2009 09:37:23 +0400
-References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
-	<D34E12F3-25C1-4B11-BC85-7D45664905DE@mac.com>
-	<A2AED021-1D87-4921-A330-FE9AF01C9FCD@mac.com>
-X-Mailer: Apple Mail (2.935.3)
-Subject: Re: classpath_0.98 recipe failure
+	Tue, 16 Jun 2009 09:32:31 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MGSzj-0001DY-Ln
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Jun 2009 08:22:11 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <BA30CC78-BC16-4681-A750-C964E6E32CE1@mac.com>
+References: <D661B752-90B3-4974-B31E-2B136D05B47F@mac.com>
+	<h1557n$fir$1@ger.gmane.org>
+	<A333C385-1DED-40D9-AD9E-08DF830A732E@mac.com>
+	<4A3665DF.7040109@balister.org>
+	<522EC177-58EA-4408-857C-5A010D5C2A1A@mac.com>
+	<c384c5ea0906150932p1d9cf9e9u2f02da4ffe21d27c@mail.gmail.com>
+	<A53836B7-5B08-42CA-A09B-EABF97DC52D0@mac.com>
+	<1245088339.29153.39.camel@lenovo.internal.reciva.com>
+	<4A3695E3.9070500@balister.org>
+	<1245091999.29153.48.camel@lenovo.internal.reciva.com>
+	<BA30CC78-BC16-4681-A750-C964E6E32CE1@mac.com>
+Date: Tue, 16 Jun 2009 08:22:10 +0100
+Message-Id: <1245136930.29153.86.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Help required to create recipe for FANN library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,16 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2009 05:47:56 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Tue, 16 Jun 2009 07:32:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
-	It is the PREFERRED_PROVIDER_virtual/javac-native option that is  
-causing the problem. The problems are with the javac compiler.
+On Tue, 2009-06-16 at 07:25 +0400, Elvis Dowson wrote:
+> Hi Phil,
+> 		
+> On Jun 15, 2009, at 10:53 PM, Phil Blundell wrote:
+> 
+> >
+> > Right now, I think the only way is to do it by steam, something like:
+> >
+> > PACKAGES =+ "libfann libdoublefann libfixedfann libfloatfann"
+> > FILES_libfann = "${libdir}/libfann${SOLIBS}"
+> > FILES_libdoublefan = "${libdir}/libdoublefan${SOLIBS}"
+> > ...
+> 
+> I did as you suggested but get the following errors:
+> 
+>   -------------------
+> ERROR: libfann is listed in PACKAGES multiple times, this leads to  
+> packaging errors.
+> ERROR: Please fix the metadata/report this as bug to OE bugtracker.
+> ERROR: -------------------
+> 
 
-Can someone please help me get classpath to build for the overo?
+If your recipe itself is named "libfann" then it will appear in PACKAGES
+automatically (as ${PN}); you don't need to add it explicitly.
 
-Elvis
+p.
+
+
 
 
