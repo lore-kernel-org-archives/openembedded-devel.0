@@ -1,36 +1,36 @@
 Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1MGt1M-0000go-4U
+	(envelope-from <koen.kooi@gmail.com>) id 1MGt2R-0000kv-G5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 13:09:36 +0200
-Received: by ewy20 with SMTP id 20so321635ewy.12
+	Wed, 17 Jun 2009 13:10:43 +0200
+Received: by ewy20 with SMTP id 20so322375ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2009 03:59:09 -0700 (PDT)
+	Wed, 17 Jun 2009 04:00:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer;
-	bh=DkO6t9j8Qw+J6Es2dPPpIoFS2A3bL+jvL+UG5vQfD2k=;
-	b=Q47nnB6zZpTM87BubIy50Kzh5XDZn0ARJYlBvawp9UCqW1XxlpZzqD1L4pihW++Zm6
-	C1t+SNB4tWP2Qw3pUKKh1paWhb43UdCB1pZXMhr6VH9UixudHW4QSPGJXsTzzKf7YIKB
-	hv5WfpcbRHtstNwVKwaQHgcHGLq+tgbwsEtxg=
+	bh=k2ORmBBiFWrTwPtT/fxfCf9ifjYf+kUq7NyedX9obhs=;
+	b=hz2sWSnEtuBZ6B/28GuD4Sr6hOy+WHqmYyFFX3CMuU6wH3q0A14qUte1U8/jD7q4KV
+	eAmVylL8bQMAVbg7i5exI4QupRV07np1zkY5mohGdMCQE2IKCB8CNuqHpZGb0GsJDGdT
+	KftmBi88CbzSPUbGVQYV155cCgykYD5p+X1W4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=oJDUhBulXow1qedfy+1OYWA6Nge4or+ZTqWHDsvG8wD3L3HAuc7dS4CKjvm+yX74NT
-	ahGAWtK13OgZX5cSOymuNUUXeogSNCtWLxEcpnzwuMedQNa22id4Mces6qZMyCvPVICG
-	n4j5pGw2O1BjzUt9yZ+sLZNRGhDrjU7nGVXGA=
-Received: by 10.210.17.14 with SMTP id 14mr2696648ebq.8.1245236348918;
-	Wed, 17 Jun 2009 03:59:08 -0700 (PDT)
+	b=WDyUk74LVfwvJGWECvziJ/4mA/t4RBill+XMmxrw3LNfH6ckvn+3CeG9z8rtFCOp54
+	XEnKuo1naN89NRfP3nHN0ZupU9O311HdlvUEvgNq3PouiR6+OWsnoYkJY7P4z9zrlsug
+	KJvL5gRWyHXo0GqsY59RKeZz8924ZoAjCVC7I=
+Received: by 10.210.39.8 with SMTP id m8mr2700727ebm.16.1245236415883;
+	Wed, 17 Jun 2009 04:00:15 -0700 (PDT)
 Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 23sm107695eya.59.2009.06.17.03.59.03
+	by mx.google.com with ESMTPS id 28sm72670eyg.14.2009.06.17.04.00.11
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 17 Jun 2009 03:59:08 -0700 (PDT)
+	Wed, 17 Jun 2009 04:00:14 -0700 (PDT)
 From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Jun 2009 12:58:59 +0200
-Message-Id: <1245236339-21074-1-git-send-email-k.kooi@student.utwente.nl>
+Date: Wed, 17 Jun 2009 13:00:06 +0200
+Message-Id: <1245236406-21118-1-git-send-email-k.kooi@student.utwente.nl>
 X-Mailer: git-send-email 1.6.1
 Cc: Koen Kooi <koen@openembedded.org>, Gregoire Gentil <gregoire@gentil.com>
-Subject: [STABLE][PATCH] gst-omapfb: add recipe to build gst sink for the omapfb overlay
+Subject: [STABLE][PATCH] mplayer: reenable vo_omapfb patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,1166 +44,493 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 11:09:36 -0000
+X-List-Received-Date: Wed, 17 Jun 2009 11:10:43 -0000
 
 From: Gregoire Gentil <gregoire@gentil.com>
 
 
 Signed-off-by: Koen Kooi <koen@openembedded.org>
 ---
- ...Overlay-and-I420-to-422-colorspace-conver.patch | 1097 ++++++++++++++++++++
- recipes/gstreamer/gst-omapfb_1.0.bb                |   38 +
- 2 files changed, 1135 insertions(+), 0 deletions(-)
- create mode 100644 recipes/gstreamer/gst-omapfb/0001-Implement-XOverlay-and-I420-to-422-colorspace-conver.patch
- create mode 100644 recipes/gstreamer/gst-omapfb_1.0.bb
+ recipes/mplayer/files/omapfb.patch |   19 +++
+ recipes/mplayer/files/vo_omapfb.c  |  269 ++++++++++-------------------------
+ recipes/mplayer/mplayer_svn.bb     |    6 +-
+ 3 files changed, 100 insertions(+), 194 deletions(-)
 
-diff --git a/recipes/gstreamer/gst-omapfb/0001-Implement-XOverlay-and-I420-to-422-colorspace-conver.patch b/recipes/gstreamer/gst-omapfb/0001-Implement-XOverlay-and-I420-to-422-colorspace-conver.patch
-new file mode 100644
-index 0000000..d9854f8
---- /dev/null
-+++ b/recipes/gstreamer/gst-omapfb/0001-Implement-XOverlay-and-I420-to-422-colorspace-conver.patch
-@@ -0,0 +1,1097 @@
-+From 7c8f0e13cd2558851ab3277a14a8929e14f5428f Mon Sep 17 00:00:00 2001
-+From: Tim Yamin <plasm@roo.me.uk>
-+Date: Sat, 25 Apr 2009 01:19:09 -0700
-+Subject: [STABLE][PATCH] Implement XOverlay and I420 to 422 colorspace conversion.
-+
-+---
-+ Makefile |    8 +-
-+ omapfb.c |  700 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
-+ omapfb.h |   78 +++++++-
-+ yuv.S    |  117 +++++++++++
-+ 4 files changed, 878 insertions(+), 25 deletions(-)
-+ create mode 100644 yuv.S
-+
-+diff --git a/Makefile b/Makefile
-+index 0ad129b..37b8746 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -1,12 +1,12 @@
-+-GST_LIBS := $(shell pkg-config --libs gstreamer-0.10 gstreamer-base-0.10)
-+-GST_CFLAGS := $(shell pkg-config --cflags gstreamer-0.10 gstreamer-base-0.10)
-++GST_LIBS := $(shell pkg-config --libs gstreamer-0.10 gstreamer-base-0.10 gstreamer-interfaces-0.10) -lX11
-++GST_CFLAGS := $(shell pkg-config --cflags gstreamer-0.10 gstreamer-base-0.10 gstreamer-interfaces-0.10)
-+ KERNEL := /data/public/dev/omap/linux-omap
-+ 
-+-CC := arm-linux-gcc
-++CC ?= arm-linux-gcc
-+-CFLAGS := -Wall -ggdb -ansi -std=c99
-++CFLAGS := -Wall -ggdb -O3 -Wall -fomit-frame-pointer -mcpu=cortex-a8 -mfpu=neon
-+ 
-+ plugin := libgstomapfb.so
-+-objects := omapfb.o
-++objects := omapfb.o yuv.o
-+ 
-+ plugin_dir := $(DESTDIR)/usr/lib/gstreamer-0.10
-+ 
-+diff --git a/omapfb.c b/omapfb.c
-+index cbd6936..020a9bb 100644
-+--- a/omapfb.c
-++++ b/omapfb.c
-+@@ -1,5 +1,9 @@
-+ /*
-+  * Copyright (C) 2008 Felipe Contreras <felipe.contreras@gmail.com>
-++ * Copyright (C) 2009 Tim Yamin <plasm@roo.me.uk>
-++ *
-++ * X code largely copied from ximagesink by Julien Moutte and
-++ * vo_omapfb.c by Gregoire Gentil.
-+  *
-+  * This library is free software; you can redistribute it and/or
-+  * modify it under the terms of the GNU Lesser General Public
-+@@ -20,10 +24,398 @@
-+ #include <sys/ioctl.h>
-+ #include <sys/mman.h>
-+ #include <unistd.h>
-++#include <string.h>
-++#include <sys/types.h>
-++#include <malloc.h>
-++#include <stdlib.h>
-+ 
-+ #include "omapfb.h"
-++#include <gst/interfaces/xoverlay.h>
-+ 
-+ static GstVideoSinkClass *parent_class = NULL;
-++extern void yuv420_to_yuv422(__uint8_t *yuv, __uint8_t *y, __uint8_t *u, __uint8_t *v,
-++                             int w, int h, int yw, int cw, int dw);
-++
-++static void x11_get_window_abs_position(Display *display, Window window,
-++                                        int *wx, int *wy, int *ww, int *wh)
-++{
-++    Window root, parent;
-++    Window *child;
-++    unsigned int n_children;
-++    XWindowAttributes attribs;
-++
-++    /* Get window attributes */
-++    XGetWindowAttributes(display, window, &attribs);
-++
-++    /* Get relative position of given window */
-++    *wx = attribs.x;
-++    *wy = attribs.y;
-++    if (ww)
-++        *ww = attribs.width;
-++    if (wh)
-++        *wh = attribs.height;
-++
-++    /* Query window tree information */
-++    XQueryTree(display, window, &root, &parent, &child, &n_children);
-++    if (parent)
-++    {
-++        int x, y;
-++
-++	/* If we have a parent we must go there and discover his position */
-++	x11_get_window_abs_position(display, parent, &x, &y, NULL, NULL);
-++	*wx += x;
-++	*wy += y;
-++    }
-++
-++    /* If we had children, free them */
-++    if(n_children)
-++        XFree(child);
-++}
-++
-++static GstXWindow *
-++gst_omapfbsink_xwindow_new (GstOmapFbSink * omapfbsink, gint width, gint height)
-++{
-++    GstXWindow *xwindow = NULL;
-++    XGCValues values;
-++
-++    if(!omapfbsink->xcontext)
-++        return NULL;
-++
-++    xwindow = g_new0 (GstXWindow, 1);
-++    xwindow->width = width;
-++    xwindow->height = height;
-++    xwindow->internal = TRUE;
-++
-++    g_mutex_lock (omapfbsink->x_lock);
-++    xwindow->win = XCreateSimpleWindow (omapfbsink->xcontext->disp,
-++					omapfbsink->xcontext->root,
-++					0, 0, xwindow->width, xwindow->height,
-++					0, 0, omapfbsink->colorKey);
-++
-++    /* We have to do that to prevent X from redrawing the background on
-++       ConfigureNotify. This takes away flickering of video when resizing. */
-++    XSetWindowBackgroundPixmap (omapfbsink->xcontext->disp, xwindow->win, None);
-++
-++    if (omapfbsink->handle_events) {
-++        Atom wm_delete;
-++
-++	XSelectInput (omapfbsink->xcontext->disp, xwindow->win, ExposureMask |
-++		      StructureNotifyMask | PointerMotionMask | KeyPressMask |
-++		      KeyReleaseMask | ButtonPressMask | ButtonReleaseMask);
-++
-++	/* Tell the window manager we'd like delete client messages instead of
-++	 * being killed */
-++	wm_delete = XInternAtom (omapfbsink->xcontext->disp,
-++				 "WM_DELETE_WINDOW", False);
-++	(void) XSetWMProtocols (omapfbsink->xcontext->disp, xwindow->win,
-++				&wm_delete, 1);
-++    }
-++
-++    xwindow->gc = XCreateGC (omapfbsink->xcontext->disp, xwindow->win,
-++			     0, &values);
-++
-++    XMapRaised (omapfbsink->xcontext->disp, xwindow->win);
-++    XSync (omapfbsink->xcontext->disp, FALSE);
-++
-++    g_mutex_unlock (omapfbsink->x_lock);
-++    gst_x_overlay_got_xwindow_id (GST_X_OVERLAY (omapfbsink), xwindow->win);
-++
-++    return xwindow;
-++}
-++
-++static gboolean gst_omapfbsink_update_plane (GstOmapFbSink *omapfbsink)
-++{
-++    int wx, wy, ww, wh;
-++    if (!omapfbsink->xcontext)
-++    {
-++        if (ioctl (omapfbsink->overlay_fd, OMAPFB_SETUP_PLANE, &omapfbsink->plane_info))
-++            return FALSE;
-++        return TRUE;
-++    }
-++
-++    if (omapfbsink->plane_info.enabled != 1)
-++        return FALSE;
-++
-++    x11_get_window_abs_position(omapfbsink->xcontext->disp,
-++				omapfbsink->xwindow->win, &wx, &wy, &ww, &wh);
-++
-++    if (wx != omapfbsink->xwindow->wx || wy != omapfbsink->xwindow->wy ||
-++	wh != omapfbsink->xwindow->height || ww != omapfbsink->xwindow->width) {
-++        omapfbsink->plane_info.out_width = omapfbsink->xwindow->width = ww;
-++	omapfbsink->plane_info.out_height = omapfbsink->xwindow->height = wh;
-++        omapfbsink->plane_info.pos_x = omapfbsink->xwindow->wx = wx;
-++        omapfbsink->plane_info.pos_y = omapfbsink->xwindow->wy = wy;
-++
-++        GST_DEBUG_OBJECT(omapfbsink, "updating geometry to: (%d,%d) %dx%d", wx, wy, ww, wh);
-++
-++        XSetForeground (omapfbsink->xcontext->disp, omapfbsink->xwindow->gc, omapfbsink->colorKey);
-++        XFillRectangle (omapfbsink->xcontext->disp, omapfbsink->xwindow->win, omapfbsink->xwindow->gc, 0, 0, ww, wh);
-++
-++        if (ioctl (omapfbsink->overlay_fd, OMAPFB_SETUP_PLANE, &omapfbsink->plane_info))
-++	  return FALSE;
-++    }
-++
-++    return TRUE;
-++}
-++
-++static void
-++gst_omapfbsink_expose (GstXOverlay * overlay)
-++{
-++    gst_omapfbsink_update_plane(GST_OMAPFB_SINK (overlay));
-++}
-++
-++static void
-++gst_omapfbsink_xwindow_destroy (GstOmapFbSink * omapfbsink,
-++    GstXWindow * xwindow)
-++{
-++    g_return_if_fail (xwindow != NULL);
-++    g_mutex_lock (omapfbsink->x_lock);
-++
-++    /* If we did not create that window we just free the GC and let it live */
-++    if (xwindow->internal)
-++        XDestroyWindow (omapfbsink->xcontext->disp, xwindow->win);
-++    else
-++        XSelectInput (omapfbsink->xcontext->disp, xwindow->win, 0);
-++
-++    XFreeGC (omapfbsink->xcontext->disp, xwindow->gc);
-++    XSync (omapfbsink->xcontext->disp, FALSE);
-++    g_mutex_unlock (omapfbsink->x_lock);
-++    g_free (xwindow);
-++}
-++
-++/* This function handles XEvents that might be in the queue. It generates
-++   GstEvent that will be sent upstream in the pipeline to handle interactivity
-++   and navigation.*/
-++static void
-++gst_omapfbsink_handle_xevents (GstOmapFbSink * omapfbsink)
-++{
-++    XEvent e;
-++    g_mutex_lock (omapfbsink->flow_lock);
-++    g_mutex_lock (omapfbsink->x_lock);
-++
-++    while (XCheckWindowEvent (omapfbsink->xcontext->disp,
-++           omapfbsink->xwindow->win, ExposureMask | StructureNotifyMask, &e)) {
-++        switch (e.type) {
-++            case Expose:
-++            case ConfigureNotify:
-++                gst_omapfbsink_update_plane (omapfbsink);
-++                break;
-++            default:
-++                break;
-++        }
-++    }
-++
-++    /* Handle Display events */
-++    while (XPending (omapfbsink->xcontext->disp)) {
-++        XNextEvent (omapfbsink->xcontext->disp, &e);
-++
-++        switch (e.type) {
-++            case ClientMessage:{
-++                Atom wm_delete;
-++
-++                wm_delete = XInternAtom (omapfbsink->xcontext->disp,
-++                        "WM_DELETE_WINDOW", False);
-++                if (wm_delete == (Atom) e.xclient.data.l[0]) {
-++                    /* Handle window deletion by posting an error on the bus */
-++                    GST_ELEMENT_ERROR (omapfbsink, RESOURCE, NOT_FOUND,
-++                            ("Output window was closed"), (NULL));
-++
-++                    g_mutex_unlock (omapfbsink->x_lock);
-++                    gst_omapfbsink_xwindow_destroy (omapfbsink, omapfbsink->xwindow);
-++                    omapfbsink->xwindow = NULL;
-++                    g_mutex_lock (omapfbsink->x_lock);
-++                }
-++                break;
-++            }
-++            default:
-++                break;
-++        }
-++    }
-++
-++    g_mutex_unlock (omapfbsink->x_lock);
-++    g_mutex_unlock (omapfbsink->flow_lock);
-++}
-++
-++static gpointer
-++gst_omapfbsink_event_thread (GstOmapFbSink * omapfbsink)
-++{
-++    GST_OBJECT_LOCK (omapfbsink);
-++    while (omapfbsink->running) {
-++        GST_OBJECT_UNLOCK (omapfbsink);
-++
-++	if (omapfbsink->xwindow)
-++	  gst_omapfbsink_handle_xevents (omapfbsink);
-++	g_usleep (100000);
-++
-++	GST_OBJECT_LOCK (omapfbsink);
-++    }
-++    GST_OBJECT_UNLOCK (omapfbsink);
-++
-++    return NULL;
-++}
-++
-++/* This function gets the X Display and global info about it. Everything is
-++   stored in our object and will be cleaned when the object is disposed. */
-++static GstXContext *
-++gst_omapfbsink_xcontext_get (GstOmapFbSink * omapfbsink)
-++{
-++    GstXContext *xcontext = g_new0 (GstXContext, 1);
-++    g_mutex_lock (omapfbsink->x_lock);
-++
-++    xcontext->disp = XOpenDisplay (omapfbsink->display_name);
-++
-++    if (!xcontext->disp) {
-++        g_mutex_unlock (omapfbsink->x_lock);
-++	g_free (xcontext);
-++	GST_ELEMENT_WARNING (omapfbsink, RESOURCE, WRITE,
-++			     ("Could not initialise X output"),
-++			     ("Could not open display"));
-++	return NULL;
-++    }
-++
-++    xcontext->screen = DefaultScreenOfDisplay (xcontext->disp);
-++    xcontext->screen_num = DefaultScreen (xcontext->disp);
-++    xcontext->visual = DefaultVisual (xcontext->disp, xcontext->screen_num);
-++    xcontext->root = DefaultRootWindow (xcontext->disp);
-++
-++    xcontext->width = DisplayWidth (xcontext->disp, xcontext->screen_num);
-++    xcontext->height = DisplayHeight (xcontext->disp, xcontext->screen_num);
-++
-++    g_mutex_unlock (omapfbsink->x_lock);
-++
-++    /* Setup our event listening thread */
-++    GST_OBJECT_LOCK (omapfbsink);
-++    omapfbsink->running = TRUE;
-++    omapfbsink->event_thread = g_thread_create (
-++      (GThreadFunc) gst_omapfbsink_event_thread, omapfbsink, TRUE, NULL);
-++    GST_OBJECT_UNLOCK (omapfbsink);
-++
-++    return xcontext;
-++}
-++
-++static void
-++gst_omapfbsink_set_xwindow_id (GstXOverlay * overlay, XID xwindow_id)
-++{
-++    GstOmapFbSink *omapfbsink = GST_OMAPFB_SINK (overlay);
-++    GstXWindow *xwindow = NULL;
-++    XWindowAttributes attr;
-++
-++    /* If we already use that window, return */
-++    if (omapfbsink->xwindow && (xwindow_id == omapfbsink->xwindow->win))
-++        return;
-++
-++    /* If the element has not initialized the X11 context try to do so */
-++    if (!omapfbsink->xcontext &&
-++	!(omapfbsink->xcontext = gst_omapfbsink_xcontext_get (omapfbsink))) {
-++      g_mutex_unlock (omapfbsink->flow_lock);
-++      return;
-++    }
-++
-++    /* If a window is there already we destroy it */
-++    if (omapfbsink->xwindow) {
-++      gst_omapfbsink_xwindow_destroy (omapfbsink, omapfbsink->xwindow);
-++      omapfbsink->xwindow = NULL;
-++    }
-++
-++    /* If the xid is 0 we go back to an internal window */
-++    if (xwindow_id == 0) {
-++      /* If no width/height caps nego did not happen window will be created
-++	 during caps nego then */
-++      if (GST_VIDEO_SINK_WIDTH (omapfbsink) && GST_VIDEO_SINK_HEIGHT (omapfbsink)) {
-++	xwindow = gst_omapfbsink_xwindow_new (omapfbsink,
-++          GST_VIDEO_SINK_WIDTH (omapfbsink),
-++          GST_VIDEO_SINK_HEIGHT (omapfbsink));
-++      }
-++    } else {
-++        xwindow = g_new0 (GstXWindow, 1);
-++	xwindow->wx = xwindow->wy = -1;
-++	xwindow->win = xwindow_id;
-++
-++	/* We get window geometry, set the event we want to receive,
-++	   and create a GC */
-++	g_mutex_lock (omapfbsink->x_lock);
-++	XGetWindowAttributes (omapfbsink->xcontext->disp, xwindow->win, &attr);
-++	xwindow->width = attr.width;
-++	xwindow->height = attr.height;
-++	xwindow->internal = FALSE;
-++	if (omapfbsink->handle_events) {
-++	    XSelectInput (omapfbsink->xcontext->disp, xwindow->win, ExposureMask |
-++			  StructureNotifyMask | PointerMotionMask | KeyPressMask |
-++			  KeyReleaseMask);
-++	}
-++
-++        xwindow->gc = XCreateGC (omapfbsink->xcontext->disp, xwindow->win, 0, NULL);
-++	g_mutex_unlock (omapfbsink->x_lock);
-++    }
-++
-++    if (xwindow) {
-++        omapfbsink->xwindow = xwindow;
-++
-++	g_mutex_lock (omapfbsink->x_lock);
-++	gst_omapfbsink_update_plane(omapfbsink);
-++	g_mutex_unlock (omapfbsink->x_lock);
-++    }
-++}
-++
-++static void
-++gst_omapfbsink_xwindow_clear (GstOmapFbSink * omapfbsink,
-++			      GstXWindow * xwindow)
-++{
-++    g_return_if_fail (xwindow != NULL);
-++    g_mutex_lock (omapfbsink->x_lock);
-++
-++    XSetForeground (omapfbsink->xcontext->disp, xwindow->gc,
-++		    XBlackPixel (omapfbsink->xcontext->disp,
-++				 omapfbsink->xcontext->screen_num));
-++
-++    XFillRectangle (omapfbsink->xcontext->disp, xwindow->win, xwindow->gc,
-++		    0, 0, xwindow->width, xwindow->height);
-++
-++    XSync (omapfbsink->xcontext->disp, FALSE);
-++    g_mutex_unlock (omapfbsink->x_lock);
-++}
-++
-++static void
-++gst_omapfbsink_set_event_handling (GstXOverlay * overlay,
-++    gboolean handle_events)
-++{
-++    GstOmapFbSink *omapfbsink = GST_OMAPFB_SINK (overlay);
-++    omapfbsink->handle_events = handle_events;
-++
-++    g_mutex_lock (omapfbsink->flow_lock);
-++
-++    if (G_UNLIKELY (!omapfbsink->xwindow)) {
-++        g_mutex_unlock (omapfbsink->flow_lock);
-++	return;
-++    }
-++
-++    g_mutex_lock (omapfbsink->x_lock);
-++
-++    if (handle_events) {
-++        if (omapfbsink->xwindow->internal) {
-++	  XSelectInput (omapfbsink->xcontext->disp, omapfbsink->xwindow->win,
-++			ExposureMask | StructureNotifyMask | PointerMotionMask |
-++			KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask);
-++	} else {
-++	  XSelectInput (omapfbsink->xcontext->disp, omapfbsink->xwindow->win,
-++			ExposureMask | StructureNotifyMask | PointerMotionMask |
-++			KeyPressMask | KeyReleaseMask);
-++	}
-++    } else {
-++        XSelectInput (omapfbsink->xcontext->disp, omapfbsink->xwindow->win, 0);
-++    }
-++
-++    g_mutex_unlock (omapfbsink->x_lock);
-++    g_mutex_unlock (omapfbsink->flow_lock);
-++}
-++
-++static void
-++gst_omapfbsink_xoverlay_init (GstXOverlayClass * iface)
-++{
-++    iface->set_xwindow_id = gst_omapfbsink_set_xwindow_id;
-++    iface->expose = gst_omapfbsink_expose;
-++    iface->handle_events = gst_omapfbsink_set_event_handling;
-++}
-+ 
-+ static GstCaps *
-+ generate_sink_template (void)
-+@@ -49,15 +441,12 @@ generate_sink_template (void)
-+         g_value_init (&val, GST_TYPE_FOURCC);
-+ 
-+ #if 0
-+-        gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('I', '4', '2', '0'));
-+-        gst_value_list_append_value (&list, &val);
-+-
-+         gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('Y', 'U', 'Y', '2'));
-+         gst_value_list_append_value (&list, &val);
-+-
-+-        gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('U', 'Y', 'V', 'Y'));
-+-        gst_value_list_append_value (&list, &val);
-+ #else
-++	gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('I', '4', '2', '0'));
-++	gst_value_list_append_value (&list, &val);
-++
-+         gst_value_set_fourcc (&val, GST_MAKE_FOURCC ('U', 'Y', 'V', 'Y'));
-+         gst_value_list_append_value (&list, &val);
+diff --git a/recipes/mplayer/files/omapfb.patch b/recipes/mplayer/files/omapfb.patch
+index 860cf07..2356d80 100644
+--- a/recipes/mplayer/files/omapfb.patch
++++ b/recipes/mplayer/files/omapfb.patch
+@@ -8,3 +8,22 @@
+  extern vo_functions_t video_out_svga;
+  extern vo_functions_t video_out_png;
+  extern vo_functions_t video_out_ggi;
++@@ -177,6 +178,7 @@
++ #ifdef CONFIG_FBDEV
++         &video_out_fbdev,
++         &video_out_fbdev2,
+++        &video_out_omapfb,
 + #endif
-+@@ -81,28 +470,112 @@ buffer_alloc (GstBaseSink *bsink,
-+               GstBuffer **buf)
-+ {
-+     GstOmapFbSink *self;
-+-    GstBuffer *buffer;
-++    GstBuffer *buffer = NULL;
-+     GstFlowReturn ret = GST_FLOW_OK;
-+-
-+     self = GST_OMAPFB_SINK (bsink);
-+ 
-+-    buffer = gst_buffer_new ();
-+-    GST_BUFFER_DATA (buffer) = self->framebuffer;
-+-    GST_BUFFER_SIZE (buffer) = size;
-+-    gst_buffer_set_caps (buffer, caps);
-++    if(self->row_skip) {
-++        buffer = gst_buffer_new ();
-++        GST_BUFFER_DATA (buffer) = self->buffer = self->framebuffer;
-++        GST_BUFFER_SIZE (buffer) = self->buffer_size = size;
-++        gst_buffer_set_caps (buffer, caps);
-++    } else {
-++        if(self->buffer && size == self->buffer_size) {
-++            buffer = gst_buffer_new ();
-++            GST_BUFFER_DATA (buffer) = self->buffer;
-++            GST_BUFFER_SIZE (buffer) = size;
-++            gst_buffer_set_caps (buffer, caps);
-++        } else {
-++            if(self->buffer)
-++                free(self->buffer);
-++            if(posix_memalign(&self->buffer, 16, (size_t) size) == 0) {
-++                buffer = gst_buffer_new ();
-++                GST_BUFFER_DATA (buffer) = self->buffer;
-++                GST_BUFFER_SIZE (buffer) = self->buffer_size = size;
-++                gst_buffer_set_caps (buffer, caps);
-++            } else {
-++                GST_ELEMENT_ERROR (self, RESOURCE, WRITE, ("Could not allocate aligned buf!"),
-++                                  ("Could not alloc aligned buf!"));
-++            }
-++        }
-++    }
-+ 
-+     *buf = buffer;
-+-
-+     return ret;
-+ }
-+ 
-++static GstFlowReturn
-++render (GstBaseSink * bsink, GstBuffer * buf)
-++{
-++    int i, w, h;
-++    GstOmapFbSink *omapfbsink = GST_OMAPFB_SINK(bsink);
-++    __uint8_t *fb = omapfbsink->framebuffer, *data = GST_BUFFER_DATA(buf);
-++
-++    if(omapfbsink->plane_info.enabled == 2)
-++    {
-++        omapfbsink->plane_info.enabled = 1;
-++
-++        g_mutex_lock (omapfbsink->x_lock);
-++        gst_omapfbsink_update_plane(omapfbsink);
-++        g_mutex_unlock (omapfbsink->x_lock);
-++    }
-++
-++    /* If a buffer which wasn't supplied by us is given to us to render with,
-++       we need to copy to our buffer first so that memory alignment constraints
-++       are met. */
-++    if(data != omapfbsink->buffer && GST_BUFFER_SIZE(buf) <= omapfbsink->buffer_size)
-++    {
-++        memcpy(omapfbsink->buffer, data, GST_BUFFER_SIZE(buf));
-++        data = omapfbsink->buffer;
-++    }
-++
-++    /* buffer_alloc gave a direct buffer, so we have nothing to
-++       do here... */
-++    if(omapfbsink->row_skip)
-++        return GST_FLOW_OK;
-++
-++    switch(omapfbsink->image_format) {
-++        case GST_MAKE_FOURCC('I', '4', '2', '0'):
-++            /* Convert to YUV422 and send to FB */
-++
-++            h = GST_VIDEO_SINK_HEIGHT (omapfbsink);
-++            w = GST_VIDEO_SINK_WIDTH (omapfbsink);
-++
-++            __uint8_t *y, *u, *v;
-++            y = data;
-++            u = y + w * h;
-++            v = u + w / 2 * h / 2;
-++
-++            yuv420_to_yuv422(fb, y, u, v, w & ~15, h, w, w / 2, omapfbsink->fixinfo.line_length);
-++            break;
-++
-++        case GST_MAKE_FOURCC('U', 'Y', 'V', 'Y'):
-++            /* Send to FB, taking into account line_length */
-++
-++            w = 2 * GST_VIDEO_SINK_WIDTH (omapfbsink);
-++            for(i = 0; i < GST_VIDEO_SINK_HEIGHT (omapfbsink); i++)
-++            {
-++                memcpy(fb, data, w);
-++
-++                fb += omapfbsink->fixinfo.line_length;
-++                data += w;
-++            }
-++
-++            break;
-++    }
-++
-++    return GST_FLOW_OK;
-++}
-++
-+ static gboolean
-+ setcaps (GstBaseSink *bsink,
-+          GstCaps *vscapslist)
-+ {
-+     GstOmapFbSink *self;
-+     GstStructure *structure;
-++
-+     gint width, height;
-++    struct omapfb_color_key color_key;
-+ 
-+     self = GST_OMAPFB_SINK (bsink);
-+ 
-+@@ -118,22 +591,54 @@ setcaps (GstBaseSink *bsink,
-+ 
-+     self->overlay_info.xoffset = 0;
-+     self->overlay_info.yoffset = 0;
-+-    self->overlay_info.nonstd = OMAPFB_COLOR_YUV422;
-++
-++    gst_structure_get_fourcc (structure, "format", &self->image_format);
-++    switch(self->image_format) {
-++        case GST_MAKE_FOURCC('I', '4', '2', '0'):
-++            self->row_skip = FALSE; /* Colorspace conversion required */
-++            self->overlay_info.nonstd = OMAPFB_COLOR_YUY422;
-++            break;
-++        case GST_MAKE_FOURCC('U', 'Y', 'V', 'Y'):
-++            /* Can data be pushed straight to the FB or do we need to interleave? */
-++            if (self->fixinfo.line_length != 2 * width)
-++                self->row_skip = FALSE;
-++            else
-++                self->row_skip = TRUE;
-++            self->overlay_info.nonstd = OMAPFB_COLOR_YUV422;
-++            break;
-++    }
-+ 
-+     if (ioctl (self->overlay_fd, FBIOPUT_VSCREENINFO, &self->overlay_info))
-+         return FALSE;
-+ 
-+-    self->plane_info.enabled = 1;
-++    GST_VIDEO_SINK_WIDTH (self) = width;
-++    GST_VIDEO_SINK_HEIGHT (self) = height;
-++    if (!self->xwindow) {
-++        self->xwindow = gst_omapfbsink_xwindow_new (self,
-++            GST_VIDEO_SINK_WIDTH (self), GST_VIDEO_SINK_HEIGHT (self));
-++    }
-++
-++    color_key.channel_out = OMAPFB_CHANNEL_OUT_LCD;
-++    color_key.background = 0x0;
-++    color_key.trans_key = self->colorKey;
-++    if (self->xwindow)
-++        color_key.key_type = OMAPFB_COLOR_KEY_GFX_DST;
-++    else
-++        color_key.key_type = OMAPFB_COLOR_KEY_DISABLED;
-++
-++    if (ioctl (self->overlay_fd, OMAPFB_SET_COLOR_KEY, &color_key))
-++        return FALSE;
-++
-+     self->plane_info.pos_x = 0;
-+     self->plane_info.pos_y = 0;
-+     self->plane_info.out_width = self->overlay_info.xres;
-+     self->plane_info.out_height = self->overlay_info.yres;
-++    self->plane_info.enabled = 2;
-+ 
-+-    if (ioctl (self->overlay_fd, OMAPFB_SETUP_PLANE, &self->plane_info))
-++    if (ioctl (self->overlay_fd, FBIOGET_FSCREENINFO, &self->fixinfo))
-+         return FALSE;
-+ 
-+     self->enabled = TRUE;
-+-
-+     return TRUE;
-+ }
-+ 
-+@@ -204,20 +709,126 @@ stop (GstBaseSink *bsink)
-+     return TRUE;
-+ }
-+ 
-++/* This function cleans the X context. Closing the Display and unrefing the
-++   caps for supported formats. */
-++static void
-++gst_omapfbsink_xcontext_clear (GstOmapFbSink * omapfbsink)
-++{
-++    GstXContext *xcontext;
-++    GST_OBJECT_LOCK (omapfbsink);
-++    if (omapfbsink->xcontext == NULL) {
-++      GST_OBJECT_UNLOCK (omapfbsink);
-++      return;
-++    }
-++
-++    xcontext = omapfbsink->xcontext;
-++    omapfbsink->xcontext = NULL;
-++
-++    GST_OBJECT_UNLOCK (omapfbsink);
-++    g_mutex_lock (omapfbsink->x_lock);
-++
-++    XCloseDisplay (xcontext->disp);
-++    g_mutex_unlock (omapfbsink->x_lock);
-++    g_free (xcontext);
-++}
-++
-++static void
-++gst_omapfbsink_reset (GstOmapFbSink *omapfbsink)
-++{
-++    GThread *thread;
-++
-++    GST_OBJECT_LOCK (omapfbsink);
-++    omapfbsink->running = FALSE;
-++    /* grab thread and mark it as NULL */
-++    thread = omapfbsink->event_thread;
-++    omapfbsink->event_thread = NULL;
-++    GST_OBJECT_UNLOCK (omapfbsink);
-++
-++    /* Wait for our event thread to finish before we clean up our stuff. */
-++    if (thread)
-++      g_thread_join (thread);
-++
-++    g_mutex_lock (omapfbsink->flow_lock);
-++    if (omapfbsink->xwindow) {
-++        gst_omapfbsink_xwindow_clear (omapfbsink, omapfbsink->xwindow);
-++        gst_omapfbsink_xwindow_destroy (omapfbsink, omapfbsink->xwindow);
-++        omapfbsink->xwindow = NULL;
-++    }
-++    g_mutex_unlock (omapfbsink->flow_lock);
-++    gst_omapfbsink_xcontext_clear (omapfbsink);
-++}
-++
-++static GstStateChangeReturn
-++gst_omapfbsink_change_state (GstElement * element, GstStateChange transition)
-++{
-++    GstOmapFbSink *omapfbsink;
-++    GstStateChangeReturn ret = GST_STATE_CHANGE_SUCCESS;
-++    GstXContext *xcontext = NULL;
-++
-++    omapfbsink = GST_OMAPFB_SINK (element);
-++
-++    switch (transition) {
-++    case GST_STATE_CHANGE_NULL_TO_READY:
-++
-++        /* Initializing the XContext */
-++        if (omapfbsink->xcontext == NULL) {
-++            xcontext = gst_omapfbsink_xcontext_get (omapfbsink);
-++
-++            GST_OBJECT_LOCK (omapfbsink);
-++            omapfbsink->xcontext = xcontext;
-++            GST_OBJECT_UNLOCK (omapfbsink);
-++        }
-++        break;
-++    case GST_STATE_CHANGE_READY_TO_PAUSED:
-++        g_mutex_lock (omapfbsink->flow_lock);
-++        if (omapfbsink->xwindow)
-++            gst_omapfbsink_xwindow_clear (omapfbsink, omapfbsink->xwindow);
-++        g_mutex_unlock (omapfbsink->flow_lock);
-++        break;
-++    case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
-++        break;
-++    default:
-++        break;
-++    }
-++
-++    ret = GST_ELEMENT_CLASS (parent_class)->change_state (element, transition);
-++
-++    switch (transition) {
-++    case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
-++        break;
-++    case GST_STATE_CHANGE_PAUSED_TO_READY:
-++        GST_VIDEO_SINK_WIDTH (omapfbsink) = 0;
-++        GST_VIDEO_SINK_HEIGHT (omapfbsink) = 0;
-++        break;
-++    case GST_STATE_CHANGE_READY_TO_NULL:
-++        gst_omapfbsink_reset (omapfbsink);
-++        break;
-++    default:
-++        break;
-++    }
-++
-++    return ret;
-++}
-++
-+ static void
-+ type_class_init (gpointer g_class,
-+                  gpointer class_data)
-+ {
-++    GstElementClass *element_class;
-+     GstBaseSinkClass *base_sink_class;
-+ 
-++    element_class = (GstElementClass *) g_class;
-+     base_sink_class = (GstBaseSinkClass *) g_class;
-+ 
-+-    parent_class = g_type_class_ref (GST_OMAPFB_SINK_TYPE);
-++    parent_class = g_type_class_peek_parent (g_class);
-+ 
-+     base_sink_class->set_caps = GST_DEBUG_FUNCPTR (setcaps);
-+     base_sink_class->buffer_alloc = GST_DEBUG_FUNCPTR (buffer_alloc);
-++    base_sink_class->render = GST_DEBUG_FUNCPTR (render);
-+     base_sink_class->start = GST_DEBUG_FUNCPTR (start);
-+     base_sink_class->stop = GST_DEBUG_FUNCPTR (stop);
-++
-++    element_class->change_state = gst_omapfbsink_change_state;
-+ }
-+ 
-+ static void
-+@@ -247,6 +858,42 @@ type_base_init (gpointer g_class)
-+     }
-+ }
-+ 
-++static gboolean
-++gst_omapfbsink_interface_supported (GstImplementsInterface * iface, GType type)
-++{
-++    g_assert (type == GST_TYPE_X_OVERLAY);
-++    return TRUE;
-++}
-++
-++static void
-++gst_omapfbsink_interface_init (GstImplementsInterfaceClass * klass)
-++{
-++    klass->supported = gst_omapfbsink_interface_supported;
-++}
-++
-++static void
-++gst_omapfbsink_init (GstOmapFbSink * omapfbsink)
-++{
-++    omapfbsink->display_name = NULL;
-++    omapfbsink->xcontext = NULL;
-++    omapfbsink->xwindow = NULL;
-++
-++    omapfbsink->event_thread = NULL;
-++    omapfbsink->running = FALSE;
-++
-++    omapfbsink->x_lock = g_mutex_new ();
-++    omapfbsink->flow_lock = g_mutex_new ();
-++
-++    omapfbsink->handle_events = TRUE;
-++    omapfbsink->colorKey = 0xff0;
-++
-++    omapfbsink->plane_info.enabled = 0;
-++    omapfbsink->row_skip = FALSE;
-++
-++    omapfbsink->buffer = NULL;
-++    omapfbsink->buffer_size = 0;
-++}
-++
-+ GType
-+ gst_omapfbsink_get_type (void)
-+ {
-+@@ -255,14 +902,27 @@ gst_omapfbsink_get_type (void)
-+     if (G_UNLIKELY (type == 0))
-+     {
-+         GTypeInfo *type_info;
-++        static const GInterfaceInfo iface_info = {
-++            (GInterfaceInitFunc) gst_omapfbsink_interface_init,
-++            NULL,
-++            NULL,
-++        };
-++        static const GInterfaceInfo overlay_info = {
-++            (GInterfaceInitFunc) gst_omapfbsink_xoverlay_init,
-++            NULL,
-++            NULL,
-++        };
-+ 
-+         type_info = g_new0 (GTypeInfo, 1);
-+         type_info->class_size = sizeof (GstOmapFbSinkClass);
-+         type_info->base_init = type_base_init;
-+         type_info->class_init = type_class_init;
-+         type_info->instance_size = sizeof (GstOmapFbSink);
-++        type_info->instance_init = (GInstanceInitFunc) gst_omapfbsink_init;
-+ 
-+         type = g_type_register_static (GST_TYPE_BASE_SINK, "GstOmapFbSink", type_info, 0);
-++        g_type_add_interface_static (type, GST_TYPE_IMPLEMENTS_INTERFACE, &iface_info);
-++        g_type_add_interface_static (type, GST_TYPE_X_OVERLAY, &overlay_info);
-+ 
-+         g_free (type_info);
-+     }
-+@@ -273,13 +933,13 @@ gst_omapfbsink_get_type (void)
-+ static gboolean
-+ plugin_init (GstPlugin *plugin)
-+ {
-+-    if (!gst_element_register (plugin, "omapfbsink", GST_RANK_NONE, GST_OMAPFB_SINK_TYPE))
-++    if (!gst_element_register (plugin, "omapfbsink", GST_RANK_PRIMARY, GST_OMAPFB_SINK_TYPE))
-+         return FALSE;
-+ 
-+     return TRUE;
-+ }
-+ 
-+-GstPluginDesc gst_plugin_desc =
-++GST_PLUGIN_EXPORT GstPluginDesc gst_plugin_desc =
-+ {
-+     GST_VERSION_MAJOR,
-+     GST_VERSION_MINOR,
-+diff --git a/omapfb.h b/omapfb.h
-+index 8dd91da..3e6af7f 100644
-+--- a/omapfb.h
-++++ b/omapfb.h
-+@@ -23,21 +23,79 @@
-+ #include <gst/video/gstvideosink.h>
-+ #include <gst/video/video.h>
-+ 
-++#include <X11/Xlib.h>
-++#include <X11/Xutil.h>
-++
-+ #include <linux/fb.h>
-+-#include <mach/omapfb.h>
-++#include <linux/omapfb.h>
-+ 
-+ G_BEGIN_DECLS
-+ 
-+ #define GST_OMAPFB_SINK_TYPE (gst_omapfbsink_get_type ())
-+ #define GST_OMAPFB_SINK(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_OMAPFB_SINK_TYPE, GstOmapFbSink))
-+ 
-++typedef struct GstXContext GstXContext;
-++typedef struct GstXWindow GstXWindow;
-+ typedef struct GstOmapFbSink GstOmapFbSink;
-+ typedef struct GstOmapFbSinkClass GstOmapFbSinkClass;
-+ 
-++/**
-++ * GstXWindow:
-++ * @win: the Window ID of this X11 window
-++ * @width: the width in pixels of Window @win
-++ * @height: the height in pixels of Window @win
-++ * @internal: used to remember if Window @win was created internally or passed
-++ * through the #GstXOverlay interface
-++ * @gc: the Graphical Context of Window @win
-++ *
-++ * Structure used to store informations about a Window.
-++ */
-++struct GstXWindow {
-++    Window win;
-++    gint width, height;
-++    gboolean internal;
-++    GC gc;
-++
-++    gint wx, wy;
-++};
-++
-++/**
-++ * GstXContext:
-++ * @disp: the X11 Display of this context
-++ * @screen: the default Screen of Display @disp
-++ * @screen_num: the Screen number of @screen
-++ * @visual: the default Visual of Screen @screen
-++ * @root: the root Window of Display @disp
-++ * @white: the value of a white pixel on Screen @screen
-++ * @black: the value of a black pixel on Screen @screen
-++ * @depth: the color depth of Display @disp
-++ * @bpp: the number of bits per pixel on Display @disp
-++ * @endianness: the endianness of image bytes on Display @disp
-++ * @width: the width in pixels of Display @disp
-++ * @height: the height in pixels of Display @disp
-++ *
-++ * Structure used to store various informations collected/calculated for a
-++ * Display.
-++ */
-++struct GstXContext {
-++    Display *disp;
-++    Screen *screen;
-++    gint screen_num;
-++
-++    Visual *visual;
-++    Window root;
-++
-++    gint depth;
-++    gint bpp;
-++
-++    gint width, height;
-++};
-++
-+ struct GstOmapFbSink
-+ {
-+     GstVideoSink videosink;
-+ 
-++    struct fb_fix_screeninfo fixinfo;
-+     struct fb_var_screeninfo varinfo;
-+     struct fb_var_screeninfo overlay_info;
-+     struct omapfb_mem_info mem_info;
-+@@ -46,6 +104,24 @@ struct GstOmapFbSink
-+     int overlay_fd;
-+     unsigned char *framebuffer;
-+     gboolean enabled;
-++
-++    GMutex *x_lock;
-++    GMutex *flow_lock;
-++
-++    GstXContext *xcontext;
-++    GstXWindow *xwindow;
-++
-++    gulong colorKey;
-++    char *display_name;
-++    GThread *event_thread;
-++
-++    void *buffer;
-++    guint buffer_size;
-++    guint image_format;
-++
-++    gboolean row_skip;
-++    gboolean handle_events;
-++    gboolean running;
-+ };
-+ 
-+ struct GstOmapFbSinkClass
-+diff --git a/yuv.S b/yuv.S
-+new file mode 100644
-+index 0000000..52113fa
-+--- /dev/null
-++++ b/yuv.S
-+@@ -0,0 +1,117 @@
-++/*
-++    Copyright (C) 2008 Mans Rullgard
-++
-++    Permission is hereby granted, free of charge, to any person
-++    obtaining a copy of this software and associated documentation
-++    files (the "Software"), to deal in the Software without
-++    restriction, including without limitation the rights to use, copy,
-++    modify, merge, publish, distribute, sublicense, and/or sell copies
-++    of the Software, and to permit persons to whom the Software is
-++    furnished to do so, subject to the following conditions:
-++
-++    The above copyright notice and this permission notice shall be
-++    included in all copies or substantial portions of the Software.
-++
-++    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-++    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-++    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-++    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-++    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-++    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-++    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-++    DEALINGS IN THE SOFTWARE.
-++*/
-++
-++        .fpu neon
-++        .text
-++
-++@ yuv420_to_yuv422(uint8_t *yuv, uint8_t *y, uint8_t *u, uint8_t *v,
-++@                  int w, int h, int yw, int cw, int dw)
-++
-++#define yuv  r0
-++#define y    r1
-++#define u    r2
-++#define v    r3
-++#define w    r4
-++#define h    r5
-++#define yw   r6
-++#define cw   r7
-++#define dw   r8
-++
-++#define tyuv r9
-++#define ty   r10
-++#define tu   r11
-++#define tv   r12
-++#define i    lr
-++
-++        .global yuv420_to_yuv422
-++        .func   yuv420_to_yuv422
-++yuv420_to_yuv422:
-++        push            {r4-r11,lr}
-++        add             r4,  sp,  #36
-++        ldm             r4, {r4-r8}
-++1:
-++        mov             tu,   u
-++        mov             tv,   v
-++        vld1.64         {d2}, [u,:64], cw               @ u0
-++        vld1.64         {d3}, [v,:64], cw               @ v0
-++        mov             tyuv, yuv
-++        mov             ty,   y
-++        vzip.8          d2,   d3                        @ u0v0
-++        mov             i,    #16
-++2:
-++        pld             [y, #64]
-++        vld1.64         {d0, d1},   [y,:128], yw        @ y0
-++        pld             [u, #64]
-++        subs            i,    i,    #4
-++        vld1.64         {d6},       [u,:64],  cw        @ u2
-++        pld             [y, #64]
-++        vld1.64         {d4, d5},   [y,:128], yw        @ y1
-++        pld             [v, #64]
-++        vld1.64         {d7},       [v,:64],  cw        @ v2
-++        pld             [y, #64]
-++        vld1.64         {d16,d17},  [y,:128], yw        @ y2
-++        vzip.8          d6,   d7                        @ u2v2
-++        pld             [u, #64]
-++        vld1.64         {d22},      [u,:64],  cw        @ u4
-++        pld             [v, #64]
-++        vld1.64         {d23},      [v,:64],  cw        @ v4
-++        pld             [y, #64]
-++        vld1.64         {d20,d21},  [y,:128], yw        @ y3
-++        vmov            q9,   q3                        @ u2v2
-++        vzip.8          d22,  d23                       @ u4v4
-++        vrhadd.u8       q3,   q1,   q3                  @ u1v1
-++        vzip.8          q0,   q1                        @ y0u0y0v0
-++        vmov            q12,  q11                       @ u4v4
-++        vzip.8          q2,   q3                        @ y1u1y1v1
-++        vrhadd.u8       q11,  q9,   q11                 @ u3v3
-++        vst1.64         {d0-d3},    [yuv,:128], dw      @ y0u0y0v0
-++        vzip.8          q8,   q9                        @ y2u2y2v2
-++        vst1.64         {d4-d7},    [yuv,:128], dw      @ y1u1y1v1
-++        vzip.8          q10,  q11                       @ y3u3y3v3
-++        vst1.64         {d16-d19},  [yuv,:128], dw      @ y2u2y2v2
-++        vmov            q1,   q12
-++        vst1.64         {d20-d23},  [yuv,:128], dw      @ y3u3y3v3
-++        bgt             2b
-++        subs            w,    w,    #16
-++        add             yuv,  tyuv, #32
-++        add             y,    ty,   #16
-++        add             u,    tu,   #8
-++        add             v,    tv,   #8
-++        bgt             1b
-++
-++        ldr             w,    [sp, #36]
-++        subs            h,    h,    #16
-++        add             yuv,  yuv,  dw, lsl #4
-++        sub             yuv,  yuv,  w,  lsl #1
-++        add             y,    y,    yw, lsl #4
-++        sub             y,    y,    w
-++        add             u,    u,    cw, lsl #3
-++        sub             u,    u,    w,  asr #1
-++        add             v,    v,    cw, lsl #3
-++        sub             v,    v,    w,  asr #1
-++        bgt             1b
-++
-++        pop             {r4-r11,pc}
-++        .endfunc
-++
-+-- 
-+1.5.6.3
++ #ifdef CONFIG_SVGALIB
++         &video_out_svga,
++--- a/Makefile	2009-02-03 13:45:48.000000000 -0800
+++++ b/Makefile	2009-02-03 13:45:50.000000000 -0800
++@@ -551,7 +551,7 @@
++ SRCS_MPLAYER-$(DXR2)         += libao2/ao_dxr2.c libvo/vo_dxr2.c
++ SRCS_MPLAYER-$(DXR3)         += libvo/vo_dxr3.c
++ SRCS_MPLAYER-$(ESD)          += libao2/ao_esd.c
++-SRCS_MPLAYER-$(FBDEV)        += libvo/vo_fbdev.c libvo/vo_fbdev2.c
+++SRCS_MPLAYER-$(FBDEV)        += libvo/vo_fbdev.c libvo/vo_fbdev2.c libvo/vo_omapfb.c libvo/yuv.S
++ SRCS_MPLAYER-$(GGI)          += libvo/vo_ggi.c
++ SRCS_MPLAYER-$(GIF)          += libvo/vo_gif89a.c
++ SRCS_MPLAYER-$(GL)           += libvo/gl_common.c libvo/vo_gl.c libvo/vo_gl2.c
+diff --git a/recipes/mplayer/files/vo_omapfb.c b/recipes/mplayer/files/vo_omapfb.c
+index 5a43404..127e550 100644
+--- a/recipes/mplayer/files/vo_omapfb.c
++++ b/recipes/mplayer/files/vo_omapfb.c
+@@ -58,8 +58,8 @@ It's an interpolation bug in the color conversion that needs to be fixed
+ #include "fastmemcpy.h"
+ #include "sub.h"
+ #include "mp_msg.h"
+-
+ #include "omapfb.h"
++#include "x11_common.h"
+ 
+ #include "libswscale/swscale.h"
+ #include "libmpcodecs/vf_scale.h"
+@@ -87,10 +87,12 @@ static int fb_overlay_only = 0; // if set, we need only framebuffer overlay, but
+ static int dbl_buffer = 0;
+ static int fullscreen_flag = 0;
+ static int plane_ready = 0;
++static uint32_t drwX, drwY;
+ 
+ extern void yuv420_to_yuv422(uint8_t *yuv, uint8_t *y, uint8_t *u, uint8_t *v, int w, int h, int yw, int cw, int dw);
+ static struct fb_var_screeninfo sinfo_p0;
+ static struct fb_var_screeninfo sinfo;
++static struct fb_fix_screeninfo finfo;
+ static struct omapfb_mem_info minfo;
+ static struct omapfb_plane_info pinfo;
+ static struct {
+@@ -155,155 +157,20 @@ static void x11_get_window_abs_position(Display *display, Window window,
+         XFree(child);
+ }
+ 
+-
+-/**
+- * Function that controls fullscreen state for x11 window
+- * action = 1 (set fullscreen)
+- * action = 0 (set windowed mode)
+- */
+-static void x11_set_fullscreen_state(Display *display, Window window, int action)
+-{
+-    XEvent xev;
+-
+-    /* init X event structure for _NET_WM_FULLSCREEN client msg */
+-    xev.xclient.type = ClientMessage;
+-    xev.xclient.serial = 0;
+-    xev.xclient.send_event = True;
+-    xev.xclient.message_type = XInternAtom(display, "_NET_WM_STATE", False);
+-    xev.xclient.window = window;
+-    xev.xclient.format = 32;
+-    xev.xclient.data.l[0] = action;
+-    xev.xclient.data.l[1] = XInternAtom(display, "_NET_WM_STATE_FULLSCREEN", False);
+-    xev.xclient.data.l[2] = 0;
+-    xev.xclient.data.l[3] = 0;
+-    xev.xclient.data.l[4] = 0;
+-
+-    /* finally send that damn thing */
+-    if (!XSendEvent(display, DefaultRootWindow(display), False, SubstructureRedirectMask | SubstructureNotifyMask, &xev)) {
+-        mp_msg(MSGT_VO, MSGL_ERR, "[omapfb] failure in x11_set_fullscreen_state\n");
+-        exit(1);
+-    }
+-    XSync(display, False);
+-}
+-
+-
+-XClassHint classhint = {"mediaplayer-ui", "mediaplayer-ui"};
+-
+-
+-/**
+- * Initialize x11 window (it is used to allocate some screen area for framebuffer overlay)
+- */
+-static void x11_init()
++static void x11_check_events(void)
+ {
+-    display = XOpenDisplay(getenv("DISPLAY"));
+-    if (display == NULL) {
+-        mp_msg(MSGT_VO, MSGL_ERR, "[omapfb] failure in x11_init, can't open display\n");
+-        exit(1);
+-    }
++    int e = vo_x11_check_events(mDisplay);
+ 
+-    screen_num = DefaultScreen(display);
++    if (e & VO_EVENT_RESIZE)
++        vo_calc_drwXY(&drwX, &drwY);
+ 
+-    if (WinID > 0)
++    if (e & VO_EVENT_EXPOSE || e & VO_EVENT_RESIZE)
+     {
+-        Window root;
+-        Window *child;
+-        unsigned int n_children;
+-
+-        win = WinID;
+-
+-        /* Query window tree information */
+-        XQueryTree(display, win, &root, &parent, &child, &n_children);
+-        if (n_children)
+-            XFree(child);
+-
+-        XUnmapWindow(display, win);
+-        if (parent)
+-            XSelectInput(display, parent, StructureNotifyMask);
+-        XMapWindow(display, win);
+-
+-        wm_delete_window = XInternAtom(display, "WM_DELETE_WINDOW", False);
+-        XSetWMProtocols(display, win, &wm_delete_window, 1);
+-    } else {
+-        win = XCreateSimpleWindow(display, RootWindow(display, screen_num),
+-                                  sinfo_p0.xres / 2 - sinfo.xres / 2, sinfo_p0.yres / 2 - sinfo.yres / 2, sinfo.xres, sinfo.yres, 0,
+-                                  WhitePixel(display, screen_num),
+-                                  TRANSPARENT_COLOR_KEY);
+-
+-        XSetClassHint(display, win, &classhint);
+-
+-        XStoreName(display, win, "MPlayer");
+-        XMapWindow(display, win);
+-
+-        /* Set WM_DELETE_WINDOW atom in WM_PROTOCOLS property (to get window_delete requests).  */
+-        wm_delete_window = XInternAtom(display, "WM_DELETE_WINDOW", False);
+-        XSetWMProtocols(display, win, &wm_delete_window, 1);
+-        XSelectInput(display, win, StructureNotifyMask | KeyPressMask);
+-    }
+-}
+-
+-
+-void print_properties(Window win2)
+-{
+-	Atom *p;
+-	int num, j;
+-	char *aname;
+-	Atom type;
+-	int format;
+-	unsigned long nitems, bytes_after;
+-	unsigned char *ret = NULL;
+-
+-	p = XListProperties(display, win2, &num);
+-	printf("found %d properties for window %d\n", num, (int)win2);
+-	for (j = 0; j < num; j++) {
+-		aname = XGetAtomName(display, p[j]);
+-		if (aname) {
+-			if(Success == XGetWindowProperty(display, win2, XInternAtom(display, aname, False),
+-						0L, ~0L, False, XA_STRING,
+-						&type, &format, &nitems,
+-						&bytes_after, &ret))
+-			{
+-/*				printf("format = %d, nitems = %d, bytes_after = %d\n", format, nitems, bytes_after);*/
+-				printf("%s = %s\n", aname, ret);
+-				XFree(ret);
+-			}
+-			XFree(aname);
+-		} else printf("NULL\n");
+-	}
+-	XFree(p);
+-}
+-
+-
+-static int x11_check_events()
+-{
+-    if (!display) {
+-        mp_msg(MSGT_VO, MSGL_ERR, "[omapfb] 'x11_check_events' called out of sequence\n");
+-        exit(1);
+-    }
+-
+-    int ret = 0;
+-    XEvent Event;
+-    while (XPending(display)) {
+-        XNextEvent(display, &Event);
+-        if (Event.type == UnmapNotify)
+-            omapfb_update(0, 0, 0, 0, 0);
+-        else if ((Event.type == MapNotify) || (Event.type == ConfigureNotify))
+-            omapfb_update(0, 0, 0, 0, 1);
+-        else if (Event.type == KeyPress) {
+-            int key;
+-            KeySym keySym = XKeycodeToKeysym(display, Event.xkey.keycode, 0);
+-            key = ((keySym & 0xff00) != 0 ? ((keySym & 0x00ff) + 256) : (keySym));
+-            ret |= VO_EVENT_KEYPRESS;
+-            vo_x11_putkey(key);
+-        } else if (Event.type == ClientMessage) {
+-            if ((Atom)Event.xclient.data.l[0] == wm_delete_window) {
+-                mplayer_put_key(KEY_ESC);
+-            }
+-        }
++        vo_xv_draw_colorkey(drwX, drwY, vo_dwidth - 1, vo_dheight - 1);
++        omapfb_update(0, 0, 0, 0, 1);
+     }
+-    return ret;
+ }
+ 
+-
+ static void x11_uninit()
+ {
+     if (display) {
+@@ -312,13 +179,11 @@ static void x11_uninit()
+     }
+ }
+ 
+-
+ /**
+  * Initialize framebuffer
+  */
+ static int preinit(const char *arg)
+ {
+-
+     opt_t subopts[] = {
+         {"fb_overlay_only", OPT_ARG_BOOL, &fb_overlay_only, NULL},
+         {"dbl_buffer", OPT_ARG_BOOL, &dbl_buffer, NULL},
+@@ -351,49 +216,28 @@ static int preinit(const char *arg)
+     ioctl(dev_fd, OMAPFB_QUERY_PLANE, &pinfo);
+     ioctl(dev_fd, OMAPFB_QUERY_MEM, &minfo);
+ 
+-    if (!fb_overlay_only)
+-        x11_init();
++    if (!fb_overlay_only && !vo_init())
++    {
++        mp_msg(MSGT_VO, MSGL_FATAL, "[omapfb] Could not open X, overlay only...\n");        
++        fb_overlay_only = 1;
++    }
+ 
+     return 0;
+ }
+ 
+-
+ static void omapfb_update(int x, int y, int out_w, int out_h, int show)
+ {
+     if (!fb_overlay_only)
+-        x11_get_window_abs_position(display, win, &x, &y, &out_w, &out_h);
+-
+-    if ((x < 0) || (y < 0)
+-
+-// If you develop the right scaling-down patch in kernel, uncomment the line below and comment the next one
+-//        || (out_w < sinfo.xres / 4) || (out_h < sinfo.yres / 4)
+-        || (out_w < sinfo.xres) || (out_h < sinfo.yres)
+-
+-// If you don't have the right scaling-up patch in kernel, comment the line below and uncomment the next one
+-/* Kernel patch to enable scaling up on the omap3
+-======================================================
+---- a/drivers/video/omap/dispc.c	2008-11-01 20:08:04.000000000 -0700
+-+++ b/drivers/video/omap/dispc.c	2008-11-01 20:09:02.000000000 -0700
+-@@ -523,9 +523,6 @@
+- 	if ((unsigned)plane > OMAPFB_PLANE_NUM)
+- 		return -ENODEV;
+- 
+--	if (out_width != orig_width || out_height != orig_height)
+--		return -EINVAL;
+--
+- 	enable_lcd_clocks(1);
+- 	if (orig_width < out_width) {
+- 		/*
+-======================================================
+-*/
+-        || (out_w > sinfo.xres * 8) || (out_h > sinfo.yres * 8)
+-//        || (out_w > sinfo.xres) || (out_h > sinfo.yres)
++        x11_get_window_abs_position(mDisplay, vo_window, &x, &y, &out_w, &out_h);
+ 
+-        || (x + out_w > sinfo_p0.xres) || (y + out_h > sinfo_p0.yres)) {
++    if (x < 0 || y < 0 || (x + out_w > sinfo_p0.xres) || (y + out_h > sinfo_p0.yres) || /* Clipping not currently supported */
++        (out_w < sinfo.xres / 4) || (out_h < sinfo.yres / 4) ||  /* HW can't scale down by more than 4x */
++        (out_w > sinfo.xres * 8) || (out_h > sinfo.yres * 8) ) { /* HW can't scale up by more than 8x */
+         pinfo.enabled = 0;
+         pinfo.pos_x = 0;
+         pinfo.pos_y = 0;
+         ioctl(dev_fd, OMAPFB_SETUP_PLANE, &pinfo);
++        ioctl(dev_fd, FBIOGET_FSCREENINFO, &finfo);
+         return;
+     }
+ 
+@@ -403,9 +247,9 @@ static void omapfb_update(int x, int y, int out_w, int out_h, int show)
+     pinfo.out_width  = out_w;
+     pinfo.out_height = out_h;
+     ioctl(dev_fd, OMAPFB_SETUP_PLANE, &pinfo);
++    ioctl(dev_fd, FBIOGET_FSCREENINFO, &finfo);
+ }
+ 
+-
+ static int config(uint32_t width, uint32_t height, uint32_t d_width,
+ 		uint32_t d_height, uint32_t flags, char *title,
+ 		uint32_t format)
+@@ -414,7 +258,56 @@ static int config(uint32_t width, uint32_t height, uint32_t d_width,
+     int i;
+     struct omapfb_color_key color_key;
+ 
++    XVisualInfo vinfo;
++    XSetWindowAttributes xswa;
++    XWindowAttributes attribs;
++    unsigned long xswamask;
++    int depth;
 +
-diff --git a/recipes/gstreamer/gst-omapfb_1.0.bb b/recipes/gstreamer/gst-omapfb_1.0.bb
-new file mode 100644
-index 0000000..f00ac7f
---- /dev/null
-+++ b/recipes/gstreamer/gst-omapfb_1.0.bb
-@@ -0,0 +1,38 @@
-+DESCRIPTION = "GST output sink for Omapfb"
-+LICENSE = "GPL"
++    Window root, parent;
++    Window *child;
++    unsigned int n_children;
 +
-+inherit autotools
+     fullscreen_flag = flags & VOFLAG_FULLSCREEN;
++    if (!fb_overlay_only)
++    {
++        if (!title)
++            title = "MPlayer OMAPFB (X11/FB) render";
 +
-+DEPENDS = "gstreamer virtual/libx11 virtual/kernel"
++        XGetWindowAttributes(mDisplay, mRootWin, &attribs);
++        depth = attribs.depth;
++        if (depth != 15 && depth != 16 && depth != 24 && depth != 32)
++            depth = 24;
++        XMatchVisualInfo(mDisplay, mScreen, depth, TrueColor, &vinfo);
 +
-+SRCREV = "6f0b1cb50d1c67c3a3db2f11246256060ac871de"
-+PV = "0.0+${PR}+gitr${SRCREV}"
++        xswa.border_pixel = 0;
++        xswa.background_pixel = xv_colorkey = TRANSPARENT_COLOR_KEY;
 +
-+SRC_URI = "git://github.com/felipec/${PN}.git;protocol=git \
-+           file://0001-Implement-XOverlay-and-I420-to-422-colorspace-conver.patch;patch=1"
++        xswamask = CWBackPixel | CWBorderPixel;
++        xv_ck_info.method = CK_METHOD_BACKGROUND;
 +
-+S  ="${WORKDIR}/git"
++        vo_x11_create_vo_window(&vinfo, vo_dx, vo_dy, vo_dwidth, vo_dheight,
++                                flags, CopyFromParent, "omapfb", title);
++        XChangeWindowAttributes(mDisplay, vo_window, xswamask, &xswa);
 +
-+# We want a kernel header for armv7a, but we don't want to make gst-omapfb machine specific for that
-+STAGING_KERNEL_DIR = "${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"
++        /* Need to receive events on the parent window -- so when it is
++           moved / resized / etc., we know. */
++        if(WinID > 0)
++        {
++            /* Query window tree information */
++            XQueryTree(mDisplay, vo_window, &root, &parent, &child, &n_children);
++            if (n_children)
++                XFree(child);
 +
-+EXTRA_OEMAKE = " KERNEL=${STAGING_KERNEL_DIR}"
-+CFLAGS += "-I${S}"
++            XUnmapWindow(mDisplay, vo_window);
++            if (parent)
++                XSelectInput(mDisplay, parent, StructureNotifyMask);
++            XMapWindow(mDisplay, vo_window);
++        }
 +
-+TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
-+
-+do_configure_prepend() {
-+	install -d ${S}/linux
-+    cp ${STAGING_KERNEL_DIR}/arch/arm/plat-omap/include/mach/omapfb.h ${S}/linux || true
-+    cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.h ${S}/linux || true
-+    cp ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ${S}/linux || true
-+ 	sed -e 's/__user//g' -i ${S}/linux/omapfb.h
-+}
-+
-+do_install() {
-+	install -d ${D}${libdir}/gstreamer-0.10
-+	install -m 0755 libgstomapfb.so ${D}${libdir}/gstreamer-0.10
-+}
-+
-+FILES_${PN} += "${libdir}/gstreamer-0.10/libgstomapfb.so"
-+FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
++        vo_calc_drwXY(&drwX, &drwY);
++        vo_xv_draw_colorkey(drwX, drwY, vo_dwidth - 1, vo_dheight - 1);
++    }
+ 
+     fbmem = mmap(NULL, minfo.size, PROT_READ|PROT_WRITE, MAP_SHARED, dev_fd, 0);
+     if (fbmem == MAP_FAILED) {
+@@ -452,12 +345,8 @@ static int config(uint32_t width, uint32_t height, uint32_t d_width,
+ 
+     if (WinID <= 0) {
+         if (fullscreen_flag) {
+-            if (!fb_overlay_only)
+-                x11_set_fullscreen_state(display, win, 1);
+             omapfb_update(0, 0, sinfo_p0.xres, sinfo_p0.yres, 1);
+         } else {
+-            if (!fb_overlay_only)
+-                x11_set_fullscreen_state(display, win, 0);
+             omapfb_update(sinfo_p0.xres / 2 - sinfo.xres / 2, sinfo_p0.yres / 2 - sinfo.yres / 2, sinfo.xres, sinfo.yres, 1);
+         }
+     }
+@@ -475,25 +364,21 @@ static int config(uint32_t width, uint32_t height, uint32_t d_width,
+     return 0;
+ }
+ 
+-
+ static void draw_alpha(int x0, int y0, int w, int h, unsigned char *src, unsigned char *srca, int stride)
+ {
+-    vo_draw_alpha_yuy2(w, h, src, srca, stride, fb_pages[page].buf + sinfo.xres * y0 * 2 + x0 * 2, sinfo.xres);
++    vo_draw_alpha_yuy2(w, h, src, srca, stride, fb_pages[page].buf + y0 * finfo.line_length + x0 * 2, finfo.line_length);
+ }
+ 
+-
+ static void draw_osd(void)
+ {
+     vo_draw_text(sinfo.xres, sinfo.yres, draw_alpha);
+ }
+ 
+-
+ static int draw_frame(uint8_t *src[])
+ {
+     return 1;
+ }
+ 
+-
+ static int draw_slice(uint8_t *src[], int stride[], int w, int h, int x, int y)
+ {
+     if (x!=0)
+@@ -504,12 +389,10 @@ static int draw_slice(uint8_t *src[], int stride[], int w, int h, int x, int y)
+ 
+     ioctl(dev_fd, OMAPFB_SYNC_GFX);
+ 
+-    yuv420_to_yuv422(fb_pages[page].buf + 2 * sinfo.xres * y, src[0], src[1], src[2], w & ~15, h, stride[0], stride[1], 2 * sinfo.xres_virtual);
+-
++    yuv420_to_yuv422(fb_pages[page].buf + y * finfo.line_length, src[0], src[1], src[2], w & ~15, h, stride[0], stride[1], finfo.line_length);
+     return 0;
+ }
+ 
+-
+ static void flip_page(void)
+ {
+     if (fb_page_flip) {
+@@ -520,7 +403,6 @@ static void flip_page(void)
+     }
+ }
+ 
+-
+ static int query_format(uint32_t format)
+ {
+     // For simplicity pretend that we can only do YV12, support for
+@@ -563,17 +445,20 @@ static int control(uint32_t request, void *data, ...)
+             if (WinID > 0) return VO_FALSE;
+             if (fullscreen_flag) {
+                 if (!fb_overlay_only)
+-                    x11_set_fullscreen_state(display, win, 0);
++                    vo_x11_fullscreen();
+                 fullscreen_flag = 0;
+                 omapfb_update(sinfo_p0.xres / 2 - sinfo.xres / 2, sinfo_p0.yres / 2 - sinfo.yres / 2, sinfo.xres, sinfo.yres, 1);
+             } else {
+                 if (!fb_overlay_only)
+-                    x11_set_fullscreen_state(display, win, 1);
++                    vo_x11_fullscreen();
+                 fullscreen_flag = 1;
+                 omapfb_update(0, 0, sinfo_p0.xres, sinfo_p0.yres, 1);
+             }
+             return VO_TRUE;
+         }
++        case VOCTRL_UPDATE_SCREENINFO:
++            update_xinerama_info();
++            return VO_TRUE;
+     }
+     return VO_NOTIMPL;
+ }
+diff --git a/recipes/mplayer/mplayer_svn.bb b/recipes/mplayer/mplayer_svn.bb
+index fa39d79..3042a3c 100644
+--- a/recipes/mplayer/mplayer_svn.bb
++++ b/recipes/mplayer/mplayer_svn.bb
+@@ -16,7 +16,7 @@ SRC_URI = "svn://svn.mplayerhq.hu/mplayer;module=trunk \
+ 	   "
+ 
+ SRC_URI_append_armv7a = " \
+-#		file://omapfb.patch;patch=1 \
++		file://omapfb.patch;patch=1 \
+ 	   file://vo_omapfb.c \
+ 	   file://yuv.S \
+ 	  "
+@@ -37,7 +37,7 @@ RCONFLICTS_${PN} = "mplayer-atty"
+ RREPLACES_${PN} = "mplayer-atty"
+ 
+ PV = "0.0+1.0rc2+svnr${SRCREV}"
+-PR = "r9"
++PR = "r10"
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_armv7a = "1"
+ 
+@@ -198,6 +198,8 @@ do_configure_prepend_armv7a() {
+  	cp ${WORKDIR}/vo_omapfb.c ${S}/libvo
+ 	cp ${STAGING_KERNEL_DIR}/arch/arm/plat-omap/include/mach/omapfb.h ${S}/libvo/omapfb.h || true
+  	cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.h ${S}/libvo/omapfb.h || true
++	cp ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ${S}/libvo/omapfb.h || true
++ 	sed -e 's/__user//g' -i ${S}/libvo/omapfb.h || true
+ }
+ 
+ CFLAGS_append = " -I${S}/libdvdread4 "
 -- 
 1.6.1
 
