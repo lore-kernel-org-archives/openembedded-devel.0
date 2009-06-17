@@ -1,36 +1,20 @@
-Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1MGyvq-0006rT-SP
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 19:28:19 +0200
-Received: by ewy20 with SMTP id 20so599627ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2009 10:17:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=8pB5nr4aCuqI8V8eJ3DUHeo60BZFmpYlNBYPyFPqa3o=;
-	b=K+Bu83X8vrzZnjSLwCifT6ltzFwvD/c8+EIPV/wNgxCKcBAjx35eC/1hbxcxjQzQ3M
-	rpEpjQkLbpjdiW5+Ttcdaffc8avxOR13eH609+LsgRA/KhEaRdTqGuQom8P9upvj20kg
-	L4fpsWpweU/OMK/SYAs/bF+NRHWgObdHvvb/c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=NNGCEgeXDTl8Cz2y0yT47uTAgPs/wYkM5dl5VN+D0721FE50OM9GKqRlEVzLl5dUyx
-	PNC+LySEJhuFJuoGu16/Ztn95RNGoewU1XVxs9dhtcjxyaGf+jK+APje4Nc/bRuF2LYS
-	/byOS7k6f13fhUrA4t2QYWvMmpWQqogSu7SYI=
-Received: by 10.210.43.11 with SMTP id q11mr3138961ebq.73.1245259069932;
-	Wed, 17 Jun 2009 10:17:49 -0700 (PDT)
-Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 23sm81577eya.29.2009.06.17.10.17.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 17 Jun 2009 10:17:48 -0700 (PDT)
-From: Koen Kooi <koen.kooi@gmail.com>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MGz6k-0007IX-4w
+	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 19:39:34 +0200
+Received: (qmail 28510 invoked from network); 17 Jun 2009 17:29:06 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 17 Jun 2009 10:29:06 -0700
+Date: Wed, 17 Jun 2009 10:29:05 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Jun 2009 19:17:40 +0200
-Message-Id: <1245259060-23210-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.6.1
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] Angstrom: fix OESTATS_SERVER host
+Message-ID: <20090617172905.GE15477@smtp.west.cox.net>
+References: <1245258640-1623-1-git-send-email-clarson@mvista.com>
+MIME-Version: 1.0
+In-Reply-To: <1245258640-1623-1-git-send-email-clarson@mvista.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH] image.bbclass: remove tmp/rootfs after image	creation unless you set a variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +28,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 17:28:20 -0000
+X-List-Received-Date: Wed, 17 Jun 2009 17:39:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Koen Kooi <koen@openembedded.org>
+On Wed, Jun 17, 2009 at 10:10:40AM -0700, Chris Larson wrote:
 
+> Set IMAGE_KEEPROOTFS to something other than the empty string to keep
+> tmp/rootfs around after image creation, otherwise it will be removed, as it's
+> not a fully functional filesystem, and causes much confusion among users as a
+> result.
+> 
+> Signed-off-by: Chris Larson <clarson@mvista.com>
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- conf/distro/include/angstrom.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Acked-by: Tom Rini <trini@embeddedalley.com>
 
-diff --git a/conf/distro/include/angstrom.inc b/conf/distro/include/angstrom.inc
-index 60f2e55..18c2af1 100644
---- a/conf/distro/include/angstrom.inc
-+++ b/conf/distro/include/angstrom.inc
-@@ -342,7 +342,7 @@ SEPPUKU_AUTOBUILD    = "1"
- SEPPUKU_PRODUCT      = "Openembedded"
- SEPPUKU_COMPONENT    = "org.openembedded.dev"
- 
--OESTATS_SERVER      ?= "tinderbox.openembedded.net"
-+OESTATS_SERVER      ?= "tinderbox.openembedded.org"
- 
- 
- 
 -- 
-1.6.1
-
+Tom Rini
 
 
