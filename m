@@ -1,30 +1,27 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MH3js-0001Al-Id
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1MH3oc-0001JU-5s
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 00:36:16 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 2A64E4CF58D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2009 18:25:48 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 23277-10 for <openembedded-devel@lists.openembedded.org>; 
-	Wed, 17 Jun 2009 18:25:48 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id E19D14AC009
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2009 18:25:47 -0400 (EDT)
-Message-ID: <4A396D6B.2030505@cbnco.com>
-Date: Wed, 17 Jun 2009 18:25:47 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090302)
+	Thu, 18 Jun 2009 00:41:10 +0200
+Received: (qmail invoked by alias); 17 Jun 2009 22:30:39 -0000
+Received: from g225130211.adsl.alicedsl.de (EHLO [192.168.4.110])
+	[92.225.130.211]
+	by mail.gmx.net (mp066) with SMTP; 18 Jun 2009 00:30:39 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+jqtk7+lajyo1/5vq5OfC1y4ajl5gGuVo4/Z+cZS
+	sgRTb1G5E/cO2o
+Message-ID: <4A396EBD.2010207@gmx.net>
+Date: Thu, 18 Jun 2009 00:31:25 +0200
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <05DB01B9-1334-4650-873E-96B20CAC9D8C@mac.com>
-In-Reply-To: <05DB01B9-1334-4650-873E-96B20CAC9D8C@mac.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: glibc_2.6.1.bb - dangling symlink to /lib/libcidn-2.6.1.so
+References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
+In-Reply-To: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.51
+Subject: Re: classpath_0.98 recipe failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,61 +35,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 22:36:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 17 Jun 2009 22:41:10 -0000
+X-Groupsio-MsgNum: 11362
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigFA550ED224170E1326C89249"
 
-Elvis Dowson wrote:
-
-> NOTE: the following files were installed but not shipped in any package:
-> NOTE:   /lib/libmemusage.so
-> NOTE:   /lib/libcidn-2.6.1.so
- > NOTE: glibc contains dangling symlink to /lib/libcidn-2.6.1.so
+--------------enigFA550ED224170E1326C89249
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
 Hi Elvis,
+you are writing a lot of mails but really vital information is missing
+from them.
 
-I don't think it's going to hurt. Bottom line, the fix is probably to 
-add ${base_libdir}/libcidn-*.so and ${base_libdir}/libcidn*.so.* to 
-libc_baselibs in glibc-package.bbclass, but you aren't likely to use the 
-functionality provided by this library.
+First thing to know is: What version of OE are you using? Is this the
+development branch (org.openembedded.dev)?
 
-libcidn is a glibc add-on that allows getaddrinfo() to resolve domain 
-names with special characters. It's enabled by default in libc_2.6.1.bb:
+If so I am wondering why you are not seeing a recipe for jamvm-native
+1.5.3. Such a recipe should be there and work just fine.
 
-GLIBC_ADDONS ?= "ports,nptl,libidn"
+In one of the later mails you write that you missing the 'ecj-initial'
+binary. Rebuild the recipe ecj-initial then (bitbake -c clean
+ecj-initial && bitbake ecj-initial). If the script does not exist
+afterwards something is strange at you place.
 
-But a lot of machines override it, so I guess many people never see this 
-libcidn:
+Btw: Take care if you change between cacao-native and jamvm-native. At
+this time cacao does not work nicely together with classpath 0.98. So
+you need to rebuilt classpath as well (when switching from jamvm+classpat=
+h).
 
-conf/machine/x86.conf:GLIBC_ADDONS = "nptl"
+Regards
+Robert
 
-Recently glibc-package.bbclass was changed to have a whitelist of 
-libraries in order to prevent unneeded .a files from being shipped. The 
-whitelist doesn't contain libcidn-*.so. It does contain "libc*.so.*" 
-which is why you get the symlink (libcidn.so.1).
+Elvis Dowson schrieb:
+> Hi,
+>     I'm trying to build the classpath_0.98 recipe, but it doesn't work.=
 
-> NOTE: Multiple libraries (libnss_nisplus.so.2, libnss_hesiod.so.2, 
-> libnss_nis.so.2) found, but LEAD_SONAME 'libc.so' doesn't match any of them
-> NOTE: Running task 548 of 581 (ID: 204, 
-> /tool/overo-oe/org.openembedded.dev/recipes/gcc/gcc-cross_4.3.3.bb, 
-> do_configure)
+> I get a failure that is a really long list of java exceptions, to big t=
+o
+> reproduce here. Here are the last few lines.
+>=20
+> Could someone please help me resolve this error?
+>=20
+> checking if javac -Xlint:unchecked,cast,divzero,empty,finally,overrides=
 
-LEAD_SONAME is set to "libc.so", but maybe it should be 
-LEAD_SONAME_${PN} instead so it doesn't leak into glibc-extra-nss, etc. 
-I don't use this feature so I can't say for sure, but I doubt it really 
-breaks anything.
+> works... configure: error: The Java compiler javac
+> -Xlint:unchecked,cast,divzero,empty,finally,overrides failed (see
+> config.log, check the CLASSPATH?)
+> | FATAL: oe_runconf failed
+> NOTE: Task failed:
+> /tool/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/classpath-0.98-r0=
+/temp/log.do_configure.14142
+>=20
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of
+> /tool/overo-oe/org.openembedded.dev/recipes/classpath/classpath_0.98.bb=
 
-> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+> do_configure failed
+> ERROR: Task 6
+> (/tool/overo-oe/org.openembedded.dev/recipes/classpath/classpath_0.98.b=
+b,
+> do_configure) failed
+> NOTE: Tasks Summary: Attempted 1703 tasks of which 1698 didn't need to
+> be rerun and 1 failed.
+> ERROR:
+> '/tool/overo-oe/org.openembedded.dev/recipes/classpath/classpath_0.98.b=
+b'
+> failed
+>=20
+>=20
+> Best regards,
+>=20
+> Elvis
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 
-Do you have /lib/libgcc_s.so.1 in your rootfs? If so, it found a way in 
-somehow in spite of this warning.
-
-You could also set:
-
-ASSUME_SHLIBS += "libgcc_s.so.1:libgcc"
-
-(cribbed from openwrt-sdk -- but I wonder if it should be global?)
-
-Mike
 
 
+--------------enigFA550ED224170E1326C89249
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAko5bsAACgkQG9cfwmwwEtquNQCgiw0vfeROALEIeNw9Gt+2hILv
+k3cAnAskQzz/OuFRewuOQGSIbadaVeYV
+=GSOo
+-----END PGP SIGNATURE-----
+
+--------------enigFA550ED224170E1326C89249--
