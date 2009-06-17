@@ -1,20 +1,39 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.222.172] (helo=mail-pz0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MH0qg-00054W-IC
-	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 21:31:06 +0200
-Received: (qmail 12395 invoked by uid 1003); 17 Jun 2009 19:20:37 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 17 Jun 2009 19:20:36 -0000
-Message-ID: <4A394202.20807@balister.org>
-Date: Wed, 17 Jun 2009 15:20:34 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <kergoth@gmail.com>) id 1MH0wx-0005Kh-6W
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Jun 2009 21:37:36 +0200
+Received: by pzk2 with SMTP id 2so442759pzk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Jun 2009 12:27:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=xTCEe54ci+FXAudc1wNyGXEncTfVeQEJm0wOHSudqGU=;
+	b=tePCccAaKQaA2Ct7KcsMX1DAVYGbqaGl20yq5lSXiSmPtDJg0Cxi8a+J2JiGJW+FF2
+	t4AWfdH+ZuAeKNcgaGmm1bpsvEH5AI6BXRiLfUXUUYmB7tyzYbgQgfZ3Pb0VvDSdDMwS
+	j2YNAu2Hqr3/b9sGMi1tlaUK4tdSbdCTn58/g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=a/YAnF6d+1KRgb5UqQa8xKPS+9zc+xEq7Za6V4/jFFqI4O7NxFJkZLNcj7IacFArxs
+	MndX0emF/dpe12OQDzejZ4xtN3SZgZBjIybsFctQFcr0ZdWB/92QHttwaW8dsQSjru1L
+	3U/sJ1wDz3QKeeim1TGavWMzOvHsdW8uhvLO4=
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.142.225.11 with SMTP id x11mr509506wfg.210.1245266825371; Wed, 
+	17 Jun 2009 12:27:05 -0700 (PDT)
+In-Reply-To: <c384c5ea0906171207j416bd6a3ke98d39ec75f9d1a@mail.gmail.com>
+References: <1245258640-1623-1-git-send-email-clarson@mvista.com>
+	<c384c5ea0906171207j416bd6a3ke98d39ec75f9d1a@mail.gmail.com>
+Date: Wed, 17 Jun 2009 12:27:05 -0700
+X-Google-Sender-Auth: 4d594c33eb5146b4
+Message-ID: <b6ebd0a50906171227y628fda7bvbe0ce18be2e913ca@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1245259060-23210-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1245259060-23210-1-git-send-email-k.kooi@student.utwente.nl>
-Subject: Re: [STABLE][PATCH] Angstrom: fix OESTATS_SERVER host
+Subject: Re: [PATCH] image.bbclass: remove tmp/rootfs after image creation unless you set a variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,103 +47,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 19:31:07 -0000
-X-Groupsio-MsgNum: 11351
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms000805040503010601060108"
-
---------------ms000805040503010601060108
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 17 Jun 2009 19:37:38 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Acked-by: Philip Balister <philip@balister.org>
+On Wed, Jun 17, 2009 at 12:07 PM, Leon
+Woestenberg<leon.woestenberg@gmail.com> wrote:
+> Hello,
+>
+> On Wed, Jun 17, 2009 at 7:10 PM, Chris Larson<clarson@mvista.com> wrote:
+>> Set IMAGE_KEEPROOTFS to something other than the empty string to keep
+>>
+> +1 for the idea, but "something other than the empty string" is a very
+> bad user interface.
+>
+>
+> If users see:
+>
+> IMAGE_KEEPROOTFS = "1"
+>
+> in most cases they'll do:
+>
+> IMAGE_KEEPROOTFS = "0"
+>
+> instead of
+>
+> #IMAGE_KEEPROOTFS = "1"
+>
+>
+> Do we have more of these?? It never occured to me before.
 
-Koen Kooi wrote:
-> From: Koen Kooi <koen@openembedded.org>
-> 
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
->  conf/distro/include/angstrom.inc |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/conf/distro/include/angstrom.inc b/conf/distro/include/angstrom.inc
-> index 60f2e55..18c2af1 100644
-> --- a/conf/distro/include/angstrom.inc
-> +++ b/conf/distro/include/angstrom.inc
-> @@ -342,7 +342,7 @@ SEPPUKU_AUTOBUILD    = "1"
->  SEPPUKU_PRODUCT      = "Openembedded"
->  SEPPUKU_COMPONENT    = "org.openembedded.dev"
->  
-> -OESTATS_SERVER      ?= "tinderbox.openembedded.net"
-> +OESTATS_SERVER      ?= "tinderbox.openembedded.org"
->  
->  
->  
+Over the past day or so I've been thinking about putting together a
+proof of concept variable type checking .inc.  Something like:
 
---------------ms000805040503010601060108
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+IMAGE_KEEPROOTFS ?= "0"
+IMAGE_KEEPROOTFS[type] = "bool"
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYxNzE5
-MjAzNFowIwYJKoZIhvcNAQkEMRYEFAEby46FPZ2W+Ll5ljVCQT+PhpSgMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBqTdO0IwTF14e/A5IH8Cvw2qyP7SiB+F5gyuxP/+L9pyXRllp5
-UmqjMUcNnTGwxFn4aaQ2xW5G2ijYEoJRWq7p2bxZMaL4Wmu5IgLNEQLr6f3od/eW1vnrjcYnaEc0
-qPOKRPAFPMOjsOBX+yd9UIqISlNMpG4/eBALNr9ol3Y998/8vG99yIsaCHmfznbqCf916B1reoGe
-tH097NBLGQMQC78Es4Vyll6K5m+tFA/QOhUrk8u0zlwteejAA8UFpNFKYRdcipPlOaOkIEYymRqy
-8F4ogTvm+Z+dB++/MhIPWkylmGMj8JNu904FGOm1nabv6aCT237aJdGe03x3wm1mAAAAAAAA
+Then it would freak if it's not set to something valid for that type.
+It wouldn't be hard to throw such a thing together.
+-- 
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
---------------ms000805040503010601060108--
+
