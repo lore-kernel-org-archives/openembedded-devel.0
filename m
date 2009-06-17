@@ -1,20 +1,19 @@
-Received: from [17.148.16.91] (helo=asmtpout016.mac.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MGtz2-0007zL-SI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 14:11:17 +0200
-MIME-version: 1.0
-Received: from [87.201.169.51] by asmtp016.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLD00ESITCWBG00@asmtp016.mac.com> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	17 Jun 2009 05:00:38 -0700 (PDT)
-Message-id: <05DB01B9-1334-4650-873E-96B20CAC9D8C@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Jun 2009 16:00:20 +0400
-X-Mailer: Apple Mail (2.935.3)
-Subject: glibc_2.6.1.bb - dangling symlink to /lib/libcidn-2.6.1.so
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MGu5d-0008C3-D7
+	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 14:18:05 +0200
+Received: (qmail 15858 invoked by uid 813007); 17 Jun 2009 12:07:39 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 17 Jun 2009 12:07:39 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Jun 2009 14:07:22 +0200
+Message-Id: <1245240442-32628-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.1
+Cc: Marcin Juszkiewicz <marcin@buglabs.net>
+Subject: [STABLE][PATCH] fbprogress: make it work better
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,30 +27,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 12:11:17 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Wed, 17 Jun 2009 12:18:05 -0000
 
-Hi,
-	When I'm building glibc I get the following error message:
+From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-NOTE: Running task 547 of 581 (ID: 223, /tool/overo-oe/ 
-org.openembedded.dev/recipes/glibc/glibc_2.6.1.bb, do_package)
-NOTE: generation of binary locales disabled. this may break i18n!
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /lib/libmemusage.so
-NOTE:   /lib/libcidn-2.6.1.so
-NOTE: Multiple libraries (libnss_nisplus.so.2, libnss_hesiod.so.2,  
-libnss_nis.so.2) found, but LEAD_SONAME 'libc.so' doesn't match any of  
-them
-NOTE: glibc contains dangling symlink to /lib/libcidn-2.6.1.so
-NOTE: Running task 548 of 581 (ID: 204, /tool/overo-oe/ 
-org.openembedded.dev/recipes/gcc/gcc-cross_4.3.3.bb, do_configure)
-NOTE: Couldn't find shared library provider for libgcc_s.so.1
+- images are kept in /usr/share/fbprogress
+- proper framebuffer is used
+- include paths and libraries to link with are given in recipe instead
+  of makefile
 
-Is this significant?
+Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
+---
+ recipes/fbprogress/fbprogress_1.1.bb |   19 +++++++++++--------
+ 1 files changed, 11 insertions(+), 8 deletions(-)
 
-Elvis Dowson
+diff --git a/recipes/fbprogress/fbprogress_1.1.bb b/recipes/fbprogress/fbprogress_1.1.bb
+index 8d603b8..855d1ca 100644
+--- a/recipes/fbprogress/fbprogress_1.1.bb
++++ b/recipes/fbprogress/fbprogress_1.1.bb
+@@ -3,8 +3,8 @@ AUTHOR = "Angel Roman"
+ HOMEPAGE = "http://www.buglabs.net/"
+ LICENSE = "GPL"
+ DEPENDS = "freetype zlib virtual/kernel"
+-SRCREV = "9118"
+-PR = "r1"
++SRCREV = "9405"
++PR = "r2"
+ 
+ SRC_URI = "svn://svn.buglabs.net/bug/trunk;module=com.buglabs.bug.native.fbprogress;proto=svn \
+            file://fbprogress-init"
+@@ -13,14 +13,17 @@ S = "${WORKDIR}/com.buglabs.bug.native.fbprogress"
+ 
+ inherit update-rc.d
+ 
+-EXTRA_OEMAKE = "BUG_LINUX_SRC=${STAGING_KERNEL_DIR}"
++TARGET_CXXFLAGS += "-I${STAGING_INCDIR}/freetype2 -I${STAGING_KERNEL_DIR}/include"
++TARGET_LDFLAGS  += "-L${STAGING_LIBDIR} -lfreetype -lz"
+ 
+ do_install() {
+-  install -d ${D}/${sysconfdir}/fbprogress
+-  install -m 0644 ${S}/images/* ${D}/${sysconfdir}/fbprogress/
+-  install -d ${D}${layout_bindir}
+-  install -m 0755 fbprogress ${D}${layout_bindir}
+-  install -m 0755 fbprogress.sh ${D}${layout_bindir}
++  install -d ${D}/${datadir}/fbprogress
++  install -m 0644 ${S}/images/* ${D}/${datadir}/fbprogress/
++
++  install -d ${D}${bindir}
++  install -m 0755 fbprogress ${D}${bindir}
++  install -m 0755 fbprogress.sh ${D}${bindir}
++
+   install -d ${D}/${sysconfdir}/init.d
+   install -m 0755 ${WORKDIR}/fbprogress-init ${D}/${sysconfdir}/init.d/fbprogress
+ }
+-- 
+1.6.3.1
+
 
 
 
