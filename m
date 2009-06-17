@@ -1,21 +1,26 @@
-Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1MH0hv-0004cz-Gq
+	(envelope-from <pb@reciva.com>) id 1MH0iT-0004eC-DN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 21:22:03 +0200
-Received: from [10.50.1.165] (unknown [10.50.1.165])
-	by hermes.mvista.com (Postfix) with ESMTP
-	id A683619405; Wed, 17 Jun 2009 12:11:33 -0700 (PDT)
-Message-Id: <005EAB22-A6E9-4C92-B91B-37537A60BFC8@mvista.com>
-From: Christopher Larson <clarson@mvista.com>
+	Wed, 17 Jun 2009 21:22:37 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MH0YK-000264-PF
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Jun 2009 20:12:09 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0906171207j416bd6a3ke98d39ec75f9d1a@mail.gmail.com>
-Mime-Version: 1.0 (Apple Message framework v935.3)
-Date: Wed, 17 Jun 2009 12:11:33 -0700
-References: <1245258640-1623-1-git-send-email-clarson@mvista.com>
-	<c384c5ea0906171207j416bd6a3ke98d39ec75f9d1a@mail.gmail.com>
-X-Mailer: Apple Mail (2.935.3)
-Subject: Re: [PATCH] image.bbclass: remove tmp/rootfs after image creation unless you set a variable
+In-Reply-To: <h1b7fr$qjo$1@ger.gmane.org>
+References: <1245248446.15129.1.camel@mill.internal.reciva.com>
+	<h1b0c2$va$1@ger.gmane.org>
+	<1245251936.15129.7.camel@mill.internal.reciva.com>
+	<h1b7fr$qjo$1@ger.gmane.org>
+Date: Wed, 17 Jun 2009 20:12:06 +0100
+Message-Id: <1245265926.29153.120.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: rfc: delete flow-lossage.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,48 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 19:22:03 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Wed, 17 Jun 2009 19:22:37 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+On Wed, 2009-06-17 at 19:00 +0200, Koen Kooi wrote:
+> On 17-06-09 17:18, Phil Blundell wrote:
+> > On Wed, 2009-06-17 at 16:59 +0200, Koen Kooi wrote:
+> >> On 17-06-09 16:20, Phil Blundell wrote:
+> >>> I think this class has probably outlived its usefulness and I propose to
+> >>> delete it.  Any objections?
+> >>
+> >> There are still recipes using it, are you going to fix those as well?
+> >
+> > Depends what you mean by "fix".  I would remove "inherit flow-lossage"
+> > from the recipes in question, obviously, but I don't plan to do any more
+> > than that.
+> 
+> You are sure nobody is using gcc 3.4 in OE anymore?
 
-On Jun 17, 2009, at 12:07 PM, Leon Woestenberg wrote:
+I imagine there probably are people using gcc-3.4 still, but I doubt
+there are many, if any, who are using gcc-3.4 on an affected target and
+building the packages that suffered from this problem (predominantly
+gnome).
 
-> Hello,
->
-> On Wed, Jun 17, 2009 at 7:10 PM, Chris Larson<clarson@mvista.com>  
-> wrote:
->> Set IMAGE_KEEPROOTFS to something other than the empty string to keep
->>
-> +1 for the idea, but "something other than the empty string" is a very
-> bad user interface.
->
->
-> If users see:
->
-> IMAGE_KEEPROOTFS = "1"
->
-> in most cases they'll do:
->
-> IMAGE_KEEPROOTFS = "0"
->
-> instead of
->
-> #IMAGE_KEEPROOTFS = "1"
->
->
-> Do we have more of these?? It never occured to me before.
+But, if there's consensus on this list that the flow-lossage thing is
+likely to still be a real issue for some folks, I guess an alternative
+plan would be to rework the class so that it simply has no effect with
+newer compilers. 
 
+p.
 
-We have this sort of thing all over the place.  It needs an audit.   
-Some vars expect set/empty, some expect 0/1, some expect yes/no, some  
-just have a *convention* of yes/no.. afaik, anyway.
--- 
-Chris Larson
-Software Engineer
-MontaVista Software, Inc.
-Email: clarson AT mvista DOT com
-Email: clarson AT kergoth DOT com
 
 
 
