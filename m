@@ -1,26 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MGwAT-0001EM-Lk
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 16:31:13 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MGw0M-00037X-Vm
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 15:20:47 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MGw0M-0003Bj-LR
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 15:20:46 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Jun 2009 15:20:46 +0100
-Message-Id: <1245248446.15129.1.camel@mill.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MGwls-0002P4-U2
+	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 17:09:53 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MGwbl-0007Vk-V1
+	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 14:59:25 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 17 Jun 2009 14:59:25 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 17 Jun 2009 14:59:25 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 17 Jun 2009 16:59:13 +0200
+Message-ID: <h1b0c2$va$1@ger.gmane.org>
+References: <1245248446.15129.1.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: rfc: delete flow-lossage.bbclass
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090604 Shredder/3.0b3pre
+In-Reply-To: <1245248446.15129.1.camel@mill.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: rfc: delete flow-lossage.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,14 +41,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 14:31:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 17 Jun 2009 15:09:54 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I think this class has probably outlived its usefulness and I propose to
-delete it.  Any objections?
+On 17-06-09 16:20, Phil Blundell wrote:
+> I think this class has probably outlived its usefulness and I propose to
+> delete it.  Any objections?
 
-p.
+There are still recipes using it, are you going to fix those as well?
+
+regards,
+
+Koen
 
 
 
