@@ -1,25 +1,22 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MGkM0-0003m7-0A
+	(envelope-from <denis@denix.org>) id 1MGn6N-00066A-Or
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 03:54:20 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173005.mailsrvcs.net
+	Wed, 17 Jun 2009 06:50:23 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173007.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KLC006V6Y2O7SF2@vms173005.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KLD001ND8GLKUU7@vms173007.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	16 Jun 2009 19:44:54 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 626EB14AF5F; Tue,
-	16 Jun 2009 20:44:48 -0400 (EDT)
-Date: Tue, 16 Jun 2009 20:44:48 -0400
+	16 Jun 2009 23:29:14 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1510814AF5F; Wed,
+	17 Jun 2009 00:29:09 -0400 (EDT)
+Date: Wed, 17 Jun 2009 00:29:09 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090617004448.GA19217@denix.org>
-References: <37367b3a0906161523p3bca0c45k69f0415fa5796e85@mail.gmail.com>
-	<20090617003646.GA15477@smtp.west.cox.net>
+Message-id: <20090617042909.GA21132@denix.org>
 MIME-version: 1.0
-In-reply-to: <20090617003646.GA15477@smtp.west.cox.net>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] Add basic support for i.MX27ADS board
+Subject: update-rc.d: don't add runtime dependency if not doing online	package management; only add it to ${PN} in any case.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 01:54:20 -0000
+X-List-Received-Date: Wed, 17 Jun 2009 04:50:24 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, Jun 16, 2009 at 05:36:47PM -0700, Tom Rini wrote:
-> On Tue, Jun 16, 2009 at 07:23:27PM -0300, Alan Carvalho de Assis wrote:
-> 
-> > This patch adds basic support on OpenEmbedded for i.MX27ADS board.
-> > 
-> > It uses the mainline kernel instead Freescale one. The mainline doesn't
-> > have support for USB, Camera, etc.
-> 
-> Since this is using mainline kernel, you should start a linux_2.6.30.bb
-> (based on 2.6.29) and add DEFAULT_PREFERENCE_mx27ads = "1" to that,
-> rather than adding a new kernel recipe.  The machine.conf looks fine
-> otherwise, however.
+Hi,
 
-There is linux_2.6.30.bb already:
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=492df3085e1a7125d44a592a883032e93e8bc0e9
+The commit ee690abcef0df80271729ca869f19164b1c15bbe[1] (update-rc.d: don't 
+add runtime dependency if not doing online package management; only add it to 
+${PN} in any case) breaks one important feature - additional runtime 
+dependencies for packages, inheriting update-rc.d class.
+
+One of the examples is udev (udev-utils is no longer a dependency):
+
+$ dpkg-deb -I old/udev_141-r10.2_armv5te.ipk |grep Depends
+ Depends: udev-utils, libc6, libvolume-id1 (>= 141)
+$ dpkg-deb -I angstrom/udev_141-r10.2_armv5te.ipk |grep Depends
+ Depends: udev-utils, libc6 (>= 2.6.1), libvolume-id1 (>= 141)
+
+$ dpkg-deb -I new/udev_141-r10.2_armv5te.ipk |grep Depends
+ Depends: update-rc.d, libc6, libvolume-id1 (>= 141)
+
+The problem comes from the fact that either RDEPENDS_{PN}_append = "blah" or 
+RDEPENDS_{PN} += "blah" used in the class overwrite the value set in 
+inheriting recipe, instead of appending to it. The position of the inherit 
+command in the recipe relative to its own RDEPENDS does not matter. And I 
+don't think this issue only applies to RDEPENDS variable...
+
+It used to "work" before, because update-rc.d.bbclass had the wrong 
+RDEPENDS_append and "update-rc.d" was never added to the runtime dependencies, 
+while more important udev-utils was.
+
+I tried latest branches/bitbake-1.8 - no difference.
+
+The short-term solution is to revert the commit in question. The correct 
+solution is to find the underlying problem. Any takers?
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=ee690abcef0df80271729ca869f19164b1c15bbe
 
 -- 
 Denys
