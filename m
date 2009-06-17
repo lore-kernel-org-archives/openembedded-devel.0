@@ -1,20 +1,31 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MGz9C-0007OR-DE
-	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 19:42:06 +0200
-Received: (qmail 30225 invoked by uid 813007); 17 Jun 2009 17:31:39 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 17 Jun 2009 17:31:39 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Jun 2009 19:31:27 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.30-00002-g9396b7b; KDE/4.2.4; x86_64; ; )
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MGzIR-0007n4-D5
+	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 19:51:39 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MGz8J-0007Dk-PH
+	for openembedded-devel@openembedded.org; Wed, 17 Jun 2009 17:41:11 +0000
+Received: from p17194-ipngn801marunouchi.tokyo.ocn.ne.jp ([114.162.172.194])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 17 Jun 2009 17:41:11 +0000
+Received: from no2spam by p17194-ipngn801marunouchi.tokyo.ocn.ne.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 17 Jun 2009 17:41:11 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 18 Jun 2009 02:40:58 +0900
+Message-ID: <h1b9rb$39u$1@ger.gmane.org>
 References: <1245258640-1623-1-git-send-email-clarson@mvista.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p17194-ipngn801marunouchi.tokyo.ocn.ne.jp
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 In-Reply-To: <1245258640-1623-1-git-send-email-clarson@mvista.com>
-MIME-Version: 1.0
-Message-Id: <200906171931.28562.marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [PATCH] image.bbclass: remove tmp/rootfs after image creation unless you set a variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -29,47 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 17:42:06 -0000
-X-Groupsio-MsgNum: 11335
-Content-Type: multipart/signed; boundary="nextPart2164804.yKt9XefziN";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 17 Jun 2009 17:51:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
---nextPart2164804.yKt9XefziN
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-Dnia =C5=9Broda, 17 czerwca 2009 o 19:10:40 Chris Larson napisa=C5=82(a):
+Chris Larson wrote:
 > Set IMAGE_KEEPROOTFS to something other than the empty string to keep
-> tmp/rootfs around after image creation, otherwise it will be removed,
-> as it's not a fully functional filesystem, and causes much confusion
-> among users as a result.
->
-> Signed-off-by: Chris Larson <clarson@mvista.com>
+> tmp/rootfs around after image creation, otherwise it will be removed
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+We had something like this proposed a while ago by I think Lynn Lin. 
+This is already a bit more evolved since it is conditional on a 
+variable.  The proposal then was rejected on the grounds of breaking 
+concurrent builds and I think this will likely be the case here, too.
 
-I am also tired of explaining to users why tmp/rootfs should not be used=20
-as nfsroot.
+comments?
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
---nextPart2164804.yKt9XefziN
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEABECAAYFAko5KHAACgkQeQ6MlGH/2qtpSQCeJwxvZskNfpW07DcF297khkfp
-j30An24cunDatCaczxBn1vuPv8Sj/kDg
-=Lf2z
------END PGP SIGNATURE-----
-
---nextPart2164804.yKt9XefziN--
