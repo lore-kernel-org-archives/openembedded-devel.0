@@ -1,24 +1,32 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MH3r1-0001Nf-6w
+	(envelope-from <acassis@gmail.com>) id 1MH5EG-0008RQ-GO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 00:43:39 +0200
-Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MH3gg-0006qj-JJ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Jun 2009 23:33:00 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A396D6B.2030505@cbnco.com>
-References: <05DB01B9-1334-4650-873E-96B20CAC9D8C@mac.com>
-	<4A396D6B.2030505@cbnco.com>
-Date: Wed, 17 Jun 2009 23:32:44 +0100
-Message-Id: <1245277964.29153.144.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: glibc_2.6.1.bb - dangling symlink to /lib/libcidn-2.6.1.so
+	Thu, 18 Jun 2009 02:11:44 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so306819ywr.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Jun 2009 17:01:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=/WS+OPVxo+J6jSsQQi1OqPIHUg02DJ4NX/ai8u9zK6A=;
+	b=SDJ787/VC/H3Kdje3xTZ4P76rG+s48DveKRAmbmFVMZ1FrS0tBroR5XHH5qVUKAR2e
+	6AuoJAjWm1Gp7/PsMXjNomn3VAKCGNebuX4THl7zEhaV7YYmHUU2yPqix/ZZYRFnta6H
+	4uPSmhk5NsyIa5zY5PLFA2lVTqk2UHV2vItLA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Fhva68uoWr2Krhnt8T1Gll4QHjWlPoWY0ketm5Wge9NYwAi0mlLceLCYuplc+6aPLp
+	LxmxUL3UeWL0Ba0zczDFc8Nfy24nZ4PBeyrNdOqIA/0EQY+ldc1/SmZnJknEkTgThi85
+	UJWCwkK7T70DV2W9kfYgsJvvPS6WSCEp3ura8=
+MIME-Version: 1.0
+Received: by 10.151.7.10 with SMTP id k10mr2255015ybi.260.1245283274385; Wed, 
+	17 Jun 2009 17:01:14 -0700 (PDT)
+Date: Wed, 17 Jun 2009 21:01:14 -0300
+Message-ID: <37367b3a0906171701h2a5b7f38wf1f52ebeead3972d@mail.gmail.com>
+From: Alan Carvalho de Assis <acassis@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Error building busybox_1.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +40,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2009 22:43:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 Jun 2009 00:11:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-06-17 at 18:25 -0400, Michael Smith wrote:
-> You could also set:
-> 
-> ASSUME_SHLIBS += "libgcc_s.so.1:libgcc"
-> 
-> (cribbed from openwrt-sdk -- but I wonder if it should be global?)
+Hi list,
 
-This thing with the shlibs data for libgcc going missing is a
-long-standing, intermittent yet annoying bug.  Ideally it would be nice
-to figure out why it happens and stop it; I don't think there's any good
-reason why libgcc's shlibs data should behave any different to any other
-libraries.
+I am updating mx27ads as suggested by Tom Rini, but I found an issue.
 
-I'd be a bit reluctant to add a global ASSUME_SHLIBS for this unless it
-turns out that the underlying issue is really an intractable one and
-there's some particular reason why it can't be fixed.
+The busybox_1.13.2 is broking during the do_install phase.
 
-p.
+It is looking for:
+tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/simple.script
+
+instead:
+tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/busybox-1.13.2/examples/udhcp/simple.script
+(see error log below for further information)
+
+I fixed it editing "openembedded/recipes/busybox/busybox.inc" and replacing:
+
+install -m 0755 ${WORKDIR}/simple.script ${D}${sysconfdir}/udhcpc.d/50default
+
+by this one:
+
+install -m 0755 ${S}/examples/udhcp/simple.script
+${D}${sysconfdir}/udhcpc.d/50default
 
 
+Is this fix right? Or would be better to create a specific
+busybox_1.13.2.bb to solve it?
+
+Regards,
+
+Alan
+
+NOTE: Running task 324 of 461 (ID: 8,
+/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb,
+do_install)
+ERROR: function do_install failed
+ERROR: log data follows
+(/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/temp/log.do_install.15786)
+| NOTE: make -e MAKEFLAGS= V=1 ARCH=arm
+CROSS_COMPILE=arm-angstrom-linux-gnueabi-
+CROSS=arm-angstrom-linux-gnueabi- busybox.links
+| make: `busybox.links' is up to date.
+| CONFIG_HTTPD=y
+| CONFIG_APP_UDHCPD=y
+| CONFIG_HWCLOCK=y
+| CONFIG_APP_UDHCPC=y
+| install: cannot stat
+`/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/simple.script':
+No such file or directory
+NOTE: Task failed:
+/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/temp/log.do_install.15786
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb
+do_install failed
+ERROR: Task 8 (/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb,
+do_install) failed
+NOTE: Tasks Summary: Attempted 323 tasks of which 323 didn't need to
+be rerun and 1 failed.
+ERROR: '/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb'
+failed
+BB>> exit
+alan@metropolis:~/oe/stuff$ cd
+/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/
+alan@metropolis:~/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1$
+find . -name simple.script
+./busybox-1.13.2/examples/udhcp/simple.script
+./busybox-1.13.2/.pc/udhcpscript.patch/examples/udhcp/simple.script
+./busybox-1.13.2/.pc/udhcpc-fix-nfsroot.patch/examples/udhcp/simple.script
 
 
