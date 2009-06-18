@@ -1,26 +1,32 @@
-Received: from [17.148.16.96] (helo=asmtpout021.mac.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MHA4y-0002Ln-VA
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 07:22:30 +0200
-MIME-version: 1.0
-Received: from [87.201.169.51] by asmtp021.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLF00H2852UUY70@asmtp021.mac.com> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	17 Jun 2009 22:11:26 -0700 (PDT)
-Message-id: <64C3C67F-454D-401D-A284-9D4B39C4A905@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: Robert Schuster <theBohemian@gmx.net>
-In-reply-to: <E701E0BB-B8EC-482B-8808-47449E0FD322@mac.com>
-Date: Thu, 18 Jun 2009 09:11:06 +0400
-References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
-	<4A396EBD.2010207@gmx.net>
-	<E701E0BB-B8EC-482B-8808-47449E0FD322@mac.com>
-X-Mailer: Apple Mail (2.935.3)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Subject: Re: classpath_0.98 recipe failure
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MHAHF-0004hB-2w
+	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 07:35:10 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MHA74-00010Z-Gl
+	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 05:24:38 +0000
+Received: from p17194-ipngn801marunouchi.tokyo.ocn.ne.jp ([114.162.172.194])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Thu, 18 Jun 2009 05:24:38 +0000
+Received: from no2spam by p17194-ipngn801marunouchi.tokyo.ocn.ne.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Thu, 18 Jun 2009 05:24:38 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 18 Jun 2009 14:24:11 +0900
+Message-ID: <h1cj1r$mps$1@ger.gmane.org>
+References: <37367b3a0906171701h2a5b7f38wf1f52ebeead3972d@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p17194-ipngn801marunouchi.tokyo.ocn.ne.jp
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
+In-Reply-To: <37367b3a0906171701h2a5b7f38wf1f52ebeead3972d@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Error building busybox_1.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,51 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 05:22:33 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Thu, 18 Jun 2009 05:35:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Robert,
-			Here is what is working so far: ecj-initial, classpath-initial-0.93
+Alan Carvalho de Assis wrote:
+> Hi list,
+> 
+> I am updating mx27ads as suggested by Tom Rini, but I found an issue.
+> 
+> The busybox_1.13.2 is broking during the do_install phase.
+> 
+> It is looking for:
+> tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/simple.script
 
-Here is what is not working: classpath-native-0.98, classpath-0.98.
-
-classpath-native-0.98 has a compilation failure. I've copied the error  
-messages for this below:
-
-NOTE: Running task 257 of 267 (ID: 8, /tool/overo-oe/user.collection/ 
-recipes/classpath/classpath-native_0.98.bb, do_compile)
-ERROR: function do_compile failed
-ERROR: log data follows (/tool/overo-oe/tmp/work/i686-linux/classpath- 
-native-0.98-r0/temp/log.do_compile.14214)
-
-  Making all in tools
-| make[1]: Entering directory `/tool/overo-oe/tmp/work/i686-linux/ 
-classpath-native-0.98-r0/classpath-0.98/tools'
-| /tool/overo-oe/tmp/staging/i686-linux/usr/bin/mkdir -p classes asm
-| /tool/overo-oe/tmp/staging/i686-linux/usr/bin/mkdir -p ../tools/ 
-generated/gnu/classpath/tools/gjdoc/expr
-| /tool/overo-oe/tmp/staging/i686-linux/usr/bin/java-initial - 
-classpath  antlr.Tool -o ../tools/generated/gnu/classpath/tools/gjdoc/ 
-expr/ \
-| 	  ./gnu/classpath/tools/gjdoc/expr/java-expression.g
-| Unrecognised command line option: -o
-| Usage: jamvm-initial [-options] class [arg1 arg2 ...]
-|                  (to run a class file)
-|    or  jamvm-initial [-options] -jar jarfile [arg1 arg2 ...]
-|                  (to run a standalone jar file)
-
-  make[1]: *** [tools.zip] Error 1
-| make[1]: Leaving directory `/tool/overo-oe/tmp/work/i686-linux/ 
-classpath-native-0.98-r0/classpath-0.98/tools'
-| make: *** [all-recursive] Error 1
-| FATAL: oe_runmake failed
-
-
-
-classpath--0.98 has a configuration failure.
-
-Elvis
+Pull and retry.  It should be fixed in .dev
 
 
 
