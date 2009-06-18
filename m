@@ -1,36 +1,21 @@
-Received: from [74.125.46.152] (helo=yw-out-1718.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <acassis@gmail.com>) id 1MHGfE-0002Fj-NX
-	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 14:24:20 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so394670ywm.30
-	for <openembedded-devel@openembedded.org>;
-	Thu, 18 Jun 2009 05:13:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=K42DU/D7KqtpHBwklcJDiv/jm+m4K/aM/xg7JVP6ays=;
-	b=v7OBa7H595J72SInK5uHoQvl4qjH5536xwF9KowdMvmIqACiY0yoUOOBegxew6qgFi
-	7eVKV4Nej/m5qBzvXkt0n5YP/opFzWG/K5w1s2YngjF0Cod/1XADaJ5I4JYfS+WhZCG7
-	Szu8H1T5RurH9kxa/bI+s/LHfSr0Y6OoNMV9w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=Q28XQ32M37w+gr8yX4FLMJWSXTpuSjl4sRnCcpRAdVQ6vnxj0nQQ22WYhEWJWOfNCD
-	1FHpaIfraYJqSlp1afAPi8o2nr+6gq0T+fsGTb37stK05kB/Foexn/yt6FBrulpsS3ge
-	P4jyw/uUd4i6uQs+CC2cRdLXMTcP/UFZK3hqQ=
-MIME-Version: 1.0
-Received: by 10.151.46.15 with SMTP id y15mr3413456ybj.302.1245327228805; Thu, 
-	18 Jun 2009 05:13:48 -0700 (PDT)
-In-Reply-To: <h1cj1r$mps$1@ger.gmane.org>
-References: <37367b3a0906171701h2a5b7f38wf1f52ebeead3972d@mail.gmail.com>
-	<h1cj1r$mps$1@ger.gmane.org>
-Date: Thu, 18 Jun 2009 09:13:48 -0300
-Message-ID: <37367b3a0906180513r5cc4c8f0td11695a468bb8a3e@mail.gmail.com>
-From: Alan Carvalho de Assis <acassis@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MHH3K-0003Im-Lp
+	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 14:49:14 +0200
+Received: (qmail 17573 invoked by uid 813007); 18 Jun 2009 12:38:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 18 Jun 2009 12:38:42 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Error building busybox_1.13.2
+Date: Thu, 18 Jun 2009 14:38:26 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.30-00002-g9396b7b; KDE/4.2.4; x86_64; ; )
+References: <37367b3a0906180511n7ed19782j28fcf902cb9077fd@mail.gmail.com>
+In-Reply-To: <37367b3a0906180511n7ed19782j28fcf902cb9077fd@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200906181438.27000.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH v2] Add basic support for i.MX27ADS board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,30 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 12:24:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Jun 2009 12:49:15 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 6/18/09, Rolf Leggewie <no2spam@nospam.arcornews.de> wrote:
-> Alan Carvalho de Assis wrote:
->> Hi list,
->>
->> I am updating mx27ads as suggested by Tom Rini, but I found an issue.
->>
->> The busybox_1.13.2 is broking during the do_install phase.
->>
->> It is looking for:
->> tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/simple.script
->
-> Pull and retry.  It should be fixed in .dev
->
+Dnia czwartek, 18 czerwca 2009 o 14:11:58 Alan Carvalho de Assis=20
+napisa=C5=82(a):
+> +CONFIG_SYSFS_DEPRECATED=3Dy
+> +CONFIG_SYSFS_DEPRECATED_V2=3Dy
 
-Thank you Rolf!
+Removal of those two would be handly but linux.inc takes care of it=20
+anyway.
 
-It worked like a charm!
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-Regards,
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Alan
+
 
 
