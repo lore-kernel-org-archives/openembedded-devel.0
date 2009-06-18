@@ -1,21 +1,20 @@
-Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
+Received: from [17.148.16.87] (helo=asmtpout012.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1MHJfy-0006yY-5m
+	(envelope-from <elvis.dowson@mac.com>) id 1MHJnI-0007Ay-Tf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 17:37:18 +0200
-Received: from [10.50.1.165] (unknown [10.50.1.165])
-	by hermes.mvista.com (Postfix) with ESMTP
-	id 1006A18182; Thu, 18 Jun 2009 08:26:42 -0700 (PDT)
-Message-Id: <7EEC2685-FA35-4C80-8D16-2935F9A0EE1F@mvista.com>
-From: Christopher Larson <clarson@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200906181000.23470.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0 (Apple Message framework v935.3)
-Date: Thu, 18 Jun 2009 08:26:40 -0700
-References: <1245265221-19129-1-git-send-email-clarson@mvista.com>
-	<200906181000.23470.marcin@juszkiewicz.com.pl>
+	Thu, 18 Jun 2009 17:44:53 +0200
+MIME-version: 1.0
+Received: from [87.201.169.51] by asmtp012.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLF000R7XWQDQ10@asmtp012.mac.com> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	18 Jun 2009 08:34:18 -0700 (PDT)
+Message-id: <23B067EF-8C0C-4FE0-BA0E-842B494B7889@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 Jun 2009 19:33:51 +0400
 X-Mailer: Apple Mail (2.935.3)
-Subject: Re: [PATCH] bitbake.conf, package_ipk.bbclass: rather than including FILE in SRC_URI, move that fallback to package_ipk.
+Subject: How to remove check for ecj
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,32 +28,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 15:37:18 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Jun 2009 15:44:53 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+
+Hi,
+	How can I remove a check for ecj compiler feature. This is related to  
+the errors that I am getting with trying to configure a version of  
+classpath.
+
+I have narrowed the problem down to the build system failing at the  
+following point. By this time, I have run all combinations of ecj- 
+bootstrap-native 3.3, 3.4, 3.4.1, and classpath-0.98, 0.97.2, 0.96.1  
+and I get the same failure at this point.
+
+| make use of stdint.h in include/config-int.h (assuming C99  
+compatible system)
+| checking for ecj... ecj -warn:-deprecation,serial,unusedImport
+| checking if ecj -warn:-deprecation,serial,unusedImport works...  
+configure: error: The Java compiler ecj -warn:- 
+deprecation,serial,unusedImport failed (see config.log, check the  
+CLASSPATH?)
+| FATAL: oe_runconf failed
+NOTE: Task failed: /tool/overo-oe/tmp/work/armv7a-angstrom-linux- 
+gnueabi/classpath-minimal-0.97.2-r3/temp/log.do_configure.8978
+ERROR: TaskFailed event exception, aborting
 
 
-On Jun 18, 2009, at 1:00 AM, Marcin Juszkiewicz wrote:
+Can any one suggestion how I can disable this check? I have a  
+deadline, and if I can't get past this error, I'll have to completely  
+abandon attempting to use java support for the project.
 
-> Dnia =C5=9Broda, 17 czerwca 2009 o 21:00:21 Chris Larson napisa=C5=82(a)=
-:
->> classes/package_ipk.bbclass |    3 ++-
->> conf/bitbake.conf           |    2 +-
->> 2 files changed, 3 insertions(+), 2 deletions(-)
->
-> What if I use package_deb or package_rpm?
+Best regards,
 
-Good question, I'll test.  The reason I only went with package_ipk is =20=
-
-that package_ipk is why SRC_URI got set that way to begin with, due to =20=
-
-ipkg requiring Source to create a package :)
---=20
-Chris Larson
-Software Engineer
-MontaVista Software, Inc.
-Email: clarson AT mvista DOT com
-Email: clarson AT kergoth DOT com
-
+Elvis
 
 
