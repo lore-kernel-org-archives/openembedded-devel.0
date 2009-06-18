@@ -1,35 +1,27 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MHDTR-0005fi-UT
+	(envelope-from <elvis.dowson@mac.com>) id 1MHDVS-0005hB-B1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 10:59:58 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1MHDJE-000BP1-Gk
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 12:49:24 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Jun 2009 12:49:20 +0400
-User-Agent: KMail/1.11.4 (Linux/2.6.29; KDE/4.2.4; x86_64; ; )
-References: <1245267720-13612-1-git-send-email-khimov@altell.ru>
-	<1245267720-13612-3-git-send-email-khimov@altell.ru>
-	<20090617210805.GJ15477@smtp.west.cox.net>
-In-Reply-To: <20090617210805.GJ15477@smtp.west.cox.net>
-MIME-Version: 1.0
-Message-Id: <200906181249.20393.khimov@altell.ru>
-X-SpamTest-Envelope-From: khimov@altell.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 8773 [Jun 18 2009]
-X-SpamTest-Info: helo_type=3
-X-SpamTest-Method: none
-X-SpamTest-Rate: 0
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Subject: Re: [PATCH 3/3] package_ipk: fix race in opkg.conf creation
+	Thu, 18 Jun 2009 11:02:02 +0200
+MIME-version: 1.0
+Received: from [87.201.169.51] by asmtp019.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLF00J6IF9MO080@asmtp019.mac.com> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	18 Jun 2009 01:51:29 -0700 (PDT)
+Message-id: <05A2CED6-0B36-4DF7-8B57-CFD20002E88E@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: Robert Schuster <theBohemian@gmx.net>, Phil Blundell <pb@reciva.com>
+In-reply-to: <64C3C67F-454D-401D-A284-9D4B39C4A905@mac.com>
+Date: Thu, 18 Jun 2009 12:51:11 +0400
+References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
+	<4A396EBD.2010207@gmx.net>
+	<E701E0BB-B8EC-482B-8808-47449E0FD322@mac.com>
+	<64C3C67F-454D-401D-A284-9D4B39C4A905@mac.com>
+X-Mailer: Apple Mail (2.935.3)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Subject: Re: classpath_0.98 recipe failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +35,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 09:00:00 -0000
-Content-Disposition: inline
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Jun 2009 09:02:03 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7BIT
 
-On =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 18 =D0=B8=D1=8E=D0=BD=D1=8F 2=
-009 01:08:05 Tom Rini wrote:
-> On Wed, Jun 17, 2009 at 11:42:00PM +0400, Roman I Khimov wrote:
-> > It's a very little race, but one can hit it anyway on concurrent image
-> > builds.
->
-> So, the way this works is we do cp template ${IPKGCONF_TARGET} and use
-> it, or so? =20
+Hi Robert & Phil,
+			       I've tried once again, with the latest oe repository sync,  
+and classpath-0.98.bb recipe fails at this point.
 
-See package_generate_ipkg_conf in package_ipk.bbclass, it's echo-ing things=
- in=20
-destination files sequentially.
+checking if ecj -warn:-deprecation,serial,unusedImport is a version of  
+gcj... Exception in thread "main" java.lang.NoClassDefFoundError: org/ 
+eclipse/jdt/internal/compiler/batch/Main
+|    <<No stacktrace available>>
+| Caused by: java.lang.ClassNotFoundException:  
+org.eclipse.jdt.internal.compiler.batch.Main not found in  
+java.lang.ClassLoader$1{urls=[], parent=null}
+|    at java.net.URLClassLoader.findClass(URLClassLoader.java:529)
+|    at java.lang.ClassLoader.loadClass(ClassLoader.java:341)
+|    at java.lang.ClassLoader$1.loadClass(ClassLoader.java:1112)
+|    at java.lang.ClassLoader.loadClass(ClassLoader.java:293)
+|
+| checking if ecj -warn:-deprecation,serial,unusedImport works...  
+configure: error: The Java compiler ecj -warn:- 
+deprecation,serial,unusedImport failed (see config.log, check the  
+CLASSPATH?)
+| FATAL: oe_runconf failed
 
-> And IPKGCONF_SDK / IPKGCONF_CANSDK won't race because we're
-> cp'ing them to a final destination ?
+Are you able to compile classpath-0.98 on your machines? If so, can  
+you give me your PREFERRED_PROVIDER/VERSION settings?
 
-I've thought that we're not doing multi-sdk, so it shouldn't be a problem.=
-=20
-Although if some build would need to do some images plus an SDK it might be=
-=20
-invoking package_generate_ipkg_conf from several places.
+There are my current settings.
 
-Maybe we can merge it with package_update_index_ipk (or just invoke=20
-package_generate_ipkg_conf from there leaving the function itself)? Everyth=
-ing=20
-except package-index meta-recipe does
+PREFERRED_PROVIDER_classpath = "classpath"
+PREFERRED_VERSION_classpath = "0.98"
+PREFERRED_VERSION_classpath-initial = "0.93"
+PREFERRED_VERSION_classpath-native = "0.97.2"
 
-package_update_index_ipk
-package_generate_ipkg_conf
+PREFERRED_PROVIDER_virtual/java-initial = "jamvm-initial"
+PREFERRED_VERSION_jamvm-initial = "1.5.0"
 
-anyway.
+PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+PREFERRED_VERSION_libecj-bootstrap = "3.4.1"
+
+PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+PREFERRED_VERSION_jamvm-native = "1.5.3"
+
+PREFERRED_VERSION_jamvm = "1.5.2"
+
+Best regards,
+
+Elvis
 
 
