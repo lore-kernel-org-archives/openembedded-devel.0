@@ -1,22 +1,25 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
+Received: from [17.148.16.87] (helo=asmtpout012.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MH5Ji-0000B7-59
+	(envelope-from <elvis.dowson@mac.com>) id 1MH9VQ-0006VK-DT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 02:17:23 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KLE009NVQYUR1F1@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	17 Jun 2009 19:06:35 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3B01E14AF5F; Wed,
-	17 Jun 2009 20:06:30 -0400 (EDT)
-Date: Wed, 17 Jun 2009 20:06:30 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090618000630.GD21132@denix.org>
+	Thu, 18 Jun 2009 06:45:44 +0200
 MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Suppress kernel image from the filesystem image
+Received: from [87.201.169.51] by asmtp012.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLF00K1B3EG6560@asmtp012.mac.com> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	17 Jun 2009 21:35:10 -0700 (PDT)
+Message-id: <E701E0BB-B8EC-482B-8808-47449E0FD322@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: Robert Schuster <theBohemian@gmx.net>
+In-reply-to: <4A396EBD.2010207@gmx.net>
+Date: Thu, 18 Jun 2009 08:34:52 +0400
+References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
+	<4A396EBD.2010207@gmx.net>
+X-Mailer: Apple Mail (2.935.3)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Subject: Re: classpath_0.98 recipe failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,43 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 00:17:28 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 18 Jun 2009 04:45:44 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7BIT
 
-Hi,
+Hi Robert,
 
-When discussing the issue of suppressing the kernel image from the filesystem 
-image, it was suggested it is still an open question:
+On Jun 18, 2009, at 2:31 AM, Robert Schuster wrote:
 
-<Crofton|work> the kernel image getting installed in the image has been a long 
-standing headache
+> First thing to know is: What version of OE are you using? Is this the
+> development branch (org.openembedded.dev)?
 
-Several ways were mentioned, like fiddling with FILES variable and using 
-BAD_RECOMMENDATIONS. But the correct method is supposed to be overriding the 
-RDEPENDS_kernel-base from kernel.bbclass:
+I was using the overo-oe repository
 
-<pb___> denix0: these lines seem to suggest what the intended behaviour was:
-<pb___> # Allow machines to override this dependency if kernel image files are
-<pb___> # not wanted in images as standard
-<pb___> RDEPENDS_kernel-base ?= "kernel-image"
-<pb___> but, for reasons that are not entirely clear to me at the moment, my 
-efforts to override RDEPENDS_kernel-base did not meet with success.
+git clone git://gitorious.org/gumstix-oe/mainline.git  
+org.openembedded.dev
 
-I played with it for some time and realized that in order for it to work, the 
-kernel needs to be rebuilt before the new dependencies take place. So, I 
-added this to the local.conf:
+After you email, I also checked the openembedded repository
 
-RDEPENDS_kernel-base = ""
+git://git.openembedded.org/openembedded
 
-And after rebuilding the kernel and the filesystem I no longer see kernel 
-image in the filesystem!
 
-The only problem I see with this approach is it builds the kernel packages 
-differently (USE-flags, anyone?) and if I use a public feed, I may end up 
-installing kernel image into the system again...
+> If so I am wondering why you are not seeing a recipe for jamvm-native
+> 1.5.3. Such a recipe should be there and work just fine.
 
--- 
-Denys
+Both these repositories don't have a jamvm_1.5.3.bb recipe.
+
+I am on the org.openembedded.dev branch.
+
+Can you point me to a location where I can get the latest recipes for  
+jamvm and classpath?
+
+Best regards,
+
+Elvis
+
 
 
