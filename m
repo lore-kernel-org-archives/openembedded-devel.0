@@ -1,32 +1,31 @@
 Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MHHPv-00045S-Lj
-	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 15:12:35 +0200
+	(envelope-from <rpurdie@rpsys.net>) id 1MHHUo-0004Gy-PP
+	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 15:17:39 +0200
 Received: from localhost (dan.rpsys.net [127.0.0.1])
 	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n5ID1dCd005076 for <openembedded-devel@openembedded.org>;
-	Thu, 18 Jun 2009 14:01:39 +0100
+	n5ID6gLT005767 for <openembedded-devel@openembedded.org>;
+	Thu, 18 Jun 2009 14:06:42 +0100
 X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id QFOnbjH4ooa9 for <openembedded-devel@openembedded.org>;
-	Thu, 18 Jun 2009 14:01:39 +0100 (BST)
+	with LMTP id H26ptVElFsNI for <openembedded-devel@openembedded.org>;
+	Thu, 18 Jun 2009 14:06:42 +0100 (BST)
 Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
 	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n5ID1bIF005062
+	n5ID6Z8r005718
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@openembedded.org>;
-	Thu, 18 Jun 2009 14:01:38 +0100
+	Thu, 18 Jun 2009 14:06:37 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-In-Reply-To: <1245267720-13612-2-git-send-email-khimov@altell.ru>
+In-Reply-To: <1245267720-13612-1-git-send-email-khimov@altell.ru>
 References: <1245267720-13612-1-git-send-email-khimov@altell.ru>
-	<1245267720-13612-2-git-send-email-khimov@altell.ru>
-Date: Thu, 18 Jun 2009 14:00:36 +0100
-Message-Id: <1245330036.11257.21.camel@dax.rpnet.com>
+Date: Thu, 18 Jun 2009 14:05:35 +0100
+Message-Id: <1245330335.11257.26.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH 2/3] package_ipk: optimize	do_package_update_index_ipk
+Subject: Re: [PATCH 1/3] Make package_update_index_ipk proper task	with locking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 13:12:35 -0000
+X-List-Received-Date: Thu, 18 Jun 2009 13:17:39 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
 On Wed, 2009-06-17 at 23:41 +0400, Roman I Khimov wrote:
-> If there are no package updates since last index update, don't re-create
-> indexes. Really helps when building something like 10 images.
+> Parallel image builds race in package_update_index_ipk, so locking is
+> needed and for a proper lock package_update_index_ipk needs to be a
+> proper task.
 
-ipkg-make-index should have caching internally such that it only
-rebuilds the segments of packages that have changed. If this patch makes
-a significant difference, we should fix ipkg-make-index.
+Can I suggest we actually add the ability to lock from shell scripts? A
+couple of python scripts (bitbake-lock/bitbake-unlock) which just call
+the python locking functions should be trivial to write and then mean we
+can add sane locking to specialist functions much more easily. It should
+allow us to solve the opkg.conf file issue you were seeing easily too.
 
-Also, just because the number of .ipk files matches the number of files
-in the index it doesn't mean nothing changed (think about a package
-being rebuilt and having just its dependencies changes).
+Adding those shell scripts is slightly trickt - I'm happy to have them
+in bitbake but we'll need another release before OE.dev can depend on
+use them. We're overdue a bitbake release so perhaps we can get this
+done quite quickly though...
 
-Finally, using date stamps also doesn't work with packaged staging.
-
-So a definite NAK I'm afraid, please fix ipkg-make-index.
+Cheers,
 
 Richard
-
 
 
 
