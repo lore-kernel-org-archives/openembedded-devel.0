@@ -1,21 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MHH3K-0003Im-Lp
-	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 14:49:14 +0200
-Received: (qmail 17573 invoked by uid 813007); 18 Jun 2009 12:38:42 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 18 Jun 2009 12:38:42 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Jun 2009 14:38:26 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.30-00002-g9396b7b; KDE/4.2.4; x86_64; ; )
-References: <37367b3a0906180511n7ed19782j28fcf902cb9077fd@mail.gmail.com>
-In-Reply-To: <37367b3a0906180511n7ed19782j28fcf902cb9077fd@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200906181438.27000.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH v2] Add basic support for i.MX27ADS board
+	(envelope-from <rpurdie@rpsys.net>) id 1MHH9n-0003SR-Jm
+	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 14:55:55 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5ICixU0003119 for <openembedded-devel@openembedded.org>;
+	Thu, 18 Jun 2009 13:44:59 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 07m3SFY8tB+0 for <openembedded-devel@openembedded.org>;
+	Thu, 18 Jun 2009 13:44:59 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n5ICitbx003113
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 18 Jun 2009 13:44:57 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20090617190830.GG15477@smtp.west.cox.net>
+References: <1245258640-1623-1-git-send-email-clarson@mvista.com>
+	<1245261716.27027.18.camel@dax.rpnet.com>
+	<20090617190830.GG15477@smtp.west.cox.net>
+Date: Thu, 18 Jun 2009 13:43:55 +0100
+Message-Id: <1245329035.11257.14.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH] image.bbclass: remove tmp/rootfs after	image	creation unless you set a variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,27 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 12:49:15 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Jun 2009 12:55:56 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia czwartek, 18 czerwca 2009 o 14:11:58 Alan Carvalho de Assis=20
-napisa=C5=82(a):
-> +CONFIG_SYSFS_DEPRECATED=3Dy
-> +CONFIG_SYSFS_DEPRECATED_V2=3Dy
+On Wed, 2009-06-17 at 12:08 -0700, Tom Rini wrote:
+> On Wed, Jun 17, 2009 at 07:01:56PM +0100, Richard Purdie wrote:
+> > Something I've been thinking about for a while is moving rootfs into
+> > ${WORKDIR}/. That way you can have concurrent image generation for a
+> > start and rm_work could be taught to clean it up...
+> 
+> Isn't the other part of that the need to serialize making the package
+> index files?
 
-Removal of those two would be handly but linux.inc takes care of it=20
-anyway.
+I thought we'd done that? If not we should, its not difficult as we have
+locking functions in bitbake.
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+-- 
+RP
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
 
