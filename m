@@ -1,37 +1,21 @@
-Received: from [209.85.217.206] (helo=mail-gx0-f206.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1MHMDr-000655-6d
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 20:20:27 +0200
-Received: by gxk2 with SMTP id 2so1716584gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jun 2009 11:09:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=O6uQj7Z9QayYrld6+O2CxfV3wGHyC+K6ANcBanXJTTU=;
-	b=LjrD4wPnDNtzXB/3gxIX/a2IiigXxIX0UQkBILl/5IzgUQrQI+i88Zh9KiYBHBlg37
-	kjoeDi6/Nz+m05TPuoTG1t6WMs9AAn2cSg/enkzGgZH0MZP1ndqI2cXFcLUs97QDJjID
-	9QxGBMu/6wry0R2uhCCw/8Rr5v8r1VMkQTfeQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=WbgiJL2TlzSVYts8K4eNHW3xjrZ8vXbiaAXwj5AWTu8oj5WXDa258fI++9OZX6EiWs
-	xekcobhP5d9WvJKFoB1q+I6IHzUuOAYGBBE6HCAzA6Ep1VXgXYtd4rlLuyVLF4qEa7Tc
-	EDoYllwNUDBEoL/IxfFGvkebhKtORYAZwo7Kc=
+	(envelope-from <philip@balister.org>) id 1MHMDz-00065Q-Bo
+	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 20:20:35 +0200
+Received: (qmail 15616 invoked by uid 1003); 18 Jun 2009 18:09:59 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 18 Jun 2009 18:09:59 -0000
+Message-ID: <4A3A82F6.1010306@balister.org>
+Date: Thu, 18 Jun 2009 14:09:58 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Received: by 10.150.229.21 with SMTP id b21mr4040912ybh.263.1245348591579; 
-	Thu, 18 Jun 2009 11:09:51 -0700 (PDT)
-In-Reply-To: <1244838263.5958.34.camel@dax.rpnet.com>
-References: <1244836535.4151.140.camel@lenovo.internal.reciva.com>
-	<1244838263.5958.34.camel@dax.rpnet.com>
-Date: Thu, 18 Jun 2009 14:09:51 -0400
-Message-ID: <f96d234e0906181109y4ee832bcu7b53037c917709be@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [rfc] change default for BUILD_OPTIMIZATION, remove spurious 	assignments
+References: <C960916A-B754-4AD4-9751-67D7025AC8C1@mac.com>	<h19s8q$jd7$1@ger.gmane.org>	<4593EC5C-D89E-4947-AA92-3AD423A196B5@mac.com>
+	<h1dr55$nue$1@ger.gmane.org>
+In-Reply-To: <h1dr55$nue$1@ger.gmane.org>
+Subject: Re: Patch for libfann-2.0.0 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,93 +29,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 18:20:27 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Jun 2009 18:20:36 -0000
+X-Groupsio-MsgNum: 11406
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms010309070903050004070102"
 
-On Fri, Jun 12, 2009 at 4:24 PM, Richard Purdie<rpurdie@rpsys.net> wrote:
-> On Fri, 2009-06-12 at 20:55 +0100, Phil Blundell wrote:
->> I'd like to propose changing the bitbake.conf default for
->> BUILD_OPTIMIZATION from "-O2" to "-O2 -g". =A0There seems no harm in
->> building debuggable binaries for host-side utilities and it makes life
->> somewhat easier when things go wrong.
+--------------ms010309070903050004070102
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Koen Kooi wrote:
+> On 18-06-09 18:05, Elvis Dowson wrote:
+>> Hi Rolf,
 >>
->> Also, while investigating why assignments to this variable from
->> local.conf didn't do what I was expecting, I discovered that a whole lot
->> of files inside conf/, notably all of the sane-toolchain-*.inc files,
->> contain their own assignments to BUILD_OPTIMIZATION for no good reason
->> that I can see. =A0I would also propose to delete the assignments from
->> those files. =A0(There are a few other assignments in files that are
->> either DISTRO or MACHINE specific but I intend to leave those alone.)
->
-> Acked-by: Richard Purdie <rpurdie@linux.intel.com>
->
-> Poky actually uses -ggdb now which makes the -dbg packages useful (if
-> huge).
+>> On Jun 17, 2009, at 8:43 AM, Rolf Leggewie wrote:
+>>
+>>> Can you please take a look at
+>>> http://wiki.openembedded.net/index.php/Styleguide and reorder the
+>>> fields accordingly? I think there is also a script in the contrib
+>>> directory to help with this.
+>>
+>> Here is the modified recipe: recipes/libfann/libfann-2.0.0.bb
+>>
+>> DESCRIPTION = "Fast Artificial Neural Network Library"
+>> HOMEPAGE = "http://leenissen.dk/fann/"
+>> SECTION = "libs"
+>> LICENSE = "BSD"
+>> SRCDATE = "20090618"
+>> PV = "2.0.0"
+> 
+>> PR = "r01"
+> 
+> Don't set PR to that.
+> 
+>> SRC_URI = "http://prdownloads.sourceforge.net/fann/fann-${PV}.tar.bz2"
+>>
+>> S = "${WORKDIR}/fann-${PV}"
+>>
+>> inherit autotools pkgconfig
+> 
+> use AUTOTOOLS_STAGE_PKGCONFIG = "1"
+> 
+>> do_stage () {
+>> oe_libinstall -a -so -C src libfann ${STAGING_LIBDIR}
+>> install -d ${STAGING_INCDIR}/fann
+>> (cd ${S}/src/include; cp compat_time.h config.h doublefann.h fann.h
+>> fann_activation.h fann_cascade.h fann_data.h fann_error.h
+>> fann_internal.h fann_io.h fann_train.h fixedfann.h floatfann.h
+>> ${STAGING_INCDIR}/fann/)
+>> install -m 0644 ${S}/aclocal.m4 ${STAGING_DATADIR}/aclocal/
+>> }
+> 
+> Again, don't use custom staging methods for silly reasons.
 
-Poky currently uses:
-##################################################################
-# Optimization flags.
-##################################################################
+I don't think the reason here is silly. I checked on my Fedora box and 
+it installs the headers in include/fann/*.h also. The headers may need 
+installing here so we can avoid patching existing software. I'm not 
+intimately familiar with fann, so it would be great if people who are 
+could look at this.
 
-FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-pointer
--frename-registers -O2 -ggdb -feliminate-unused-debug-types"
-DEBUG_OPTIMIZATION =3D "-O -fno-omit-frame-pointer -g"
-SELECTED_OPTIMIZATION =3D "${@bb.data.getVar(['FULL_OPTIMIZATION',
-'DEBUG_OPTIMIZATION'][bb.data.getVar('DEBUG_BUILD', d, 1) =3D=3D '1'], d,
-1)}"
-BUILD_OPTIMIZATION =3D "-O2"
+If there is not an existing set of sw using fann, then creating a custom 
+staging method should be avoided.
 
-OE uses:
-##################################################################
-# Optimization flags.
-##################################################################
+Philip
 
-FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-pointer
--frename-registers -O2"
-DEBUG_OPTIMIZATION =3D "-O -fno-omit-frame-pointer -g"
-SELECTED_OPTIMIZATION =3D "${@bb.data.getVar(['FULL_OPTIMIZATION',
-'DEBUG_OPTIMIZATION'][bb.data.getVar('DEBUG_BUILD', d, 1) =3D=3D '1'], d,
-1)}"
-BUILD_OPTIMIZATION =3D "-O2 -g"
+--------------ms010309070903050004070102
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-I agree, debug symbols are nice in *dbg packages.  Are there any other
-thoughts pro/con for changing OE to match Poky FULL_OPTIMIZATION
-settings?
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
+OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
+Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
+MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
+EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
+V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
+ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
+ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
+SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
+n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
+R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
+/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
+kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
+Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
+urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYxODE4
+MDk1OFowIwYJKoZIhvcNAQkEMRYEFIfxLWpW3xYkoklKU2Ye6YhLP9RbMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
+/DANBgkqhkiG9w0BAQEFAASCAQBgOIN6rtOEaOTMxA/iyTHncfPazHLs76pTxN0EKDOcnvLdwT0D
+jILvO7Z3Do4iN1P8he4m1fxG4w0oBu3cUwIPO24bFFjPcYP/pFMGMnhnzIE+EPA+47ef5jh9+9b5
+g0oM6uMx1OyXz6Kb4awdpT864GaKERE4UWGBd2fiU7qdVY+63WSoJpdCxBeNGpjj2OxJhHwi2HPO
++hpX4aUeS+HX/qhPfcpU9D2OqGPe9q0sTp61g59ey3OnRpfrTly/ALL+wi0Nyzs9aU/8hO+tzF7c
+EhlTSkYaUdnB+IHdhMYVblAHiwNQqdWQmrMOyqJlyTjQ/yNDfh1UsXv31uYuDfINAAAAAAAA
 
-As to -ggdb3, the following information may be helpful.
-
--ggdblevel
-
-           Request debugging information and also use level to specify
-how much information.  The default level is 2.
-
-           Level 0 produces no debug information at all.  Thus, -g0 negates=
- -g.
-
-           Level 1 produces minimal information, enough for making
-backtraces in parts of the program that you don=92t plan to debug.
-           This includes descriptions of functions and external
-variables, but no information about local variables and no line
-numbers.
-
-           Level 3 includes extra information, such as all the macro
-definitions present in the program.  Some debuggers support macro
-           expansion when you use -g3.
-
-So maybe a good way to do this is:
-FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-pointer
--frename-registers -O2 -ggdb -feliminate-unused-debug-types"
-DEBUG_OPTIMIZATION =3D "-O -fno-omit-frame-pointer -ggdb3"
-BUILD_OPTIMIZATION =3D "-O2 -ggdb"
-
-That way with *dbg packages installed, you could at least get a back
-trace with a normal build.  If you needed line numbers, you could set
-DEBUG_BUILD and rebuild packages of interest.
-
-Any thoughts on -g vs -ggdb for BUILD_OPTIMIZATION?
-
-Thanks,
-Cliff
-
-
+--------------ms010309070903050004070102--
