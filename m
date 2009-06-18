@@ -1,25 +1,26 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [17.148.16.92] (helo=asmtpout017.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MHMaG-000453-JM
+	(envelope-from <elvis.dowson@mac.com>) id 1MHMe2-0004Nh-I9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 20:43:37 +0200
-Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MHMQ2-0000ct-2a
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 19:33:02 +0100
-From: Phil Blundell <pb@reciva.com>
+	Thu, 18 Jun 2009 20:47:30 +0200
+MIME-version: 1.0
+Received: from [87.201.169.51] by asmtp017.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLG00IGN6CNR700@asmtp017.mac.com> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	18 Jun 2009 11:36:27 -0700 (PDT)
+Message-id: <332330BB-4014-47FE-9E52-19B485312460@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <f96d234e0906181109y4ee832bcu7b53037c917709be@mail.gmail.com>
-References: <1244836535.4151.140.camel@lenovo.internal.reciva.com>
-	<1244838263.5958.34.camel@dax.rpnet.com>
-	<f96d234e0906181109y4ee832bcu7b53037c917709be@mail.gmail.com>
-Date: Thu, 18 Jun 2009 19:33:01 +0100
-Message-Id: <1245349981.29153.162.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [rfc] change default for BUILD_OPTIMIZATION, remove	spurious 	assignments
+In-reply-to: <h1e06a$9ja$1@ger.gmane.org>
+Date: Thu, 18 Jun 2009 22:36:11 +0400
+References: <C960916A-B754-4AD4-9751-67D7025AC8C1@mac.com>
+	<h19s8q$jd7$1@ger.gmane.org>
+	<4593EC5C-D89E-4947-AA92-3AD423A196B5@mac.com>
+	<h1dr55$nue$1@ger.gmane.org> <4A3A82F6.1010306@balister.org>
+	<h1e06a$9ja$1@ger.gmane.org>
+X-Mailer: Apple Mail (2.935.3)
+Subject: Re: Patch for libfann-2.0.0 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,26 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 18:43:38 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Jun 2009 18:47:30 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-On Thu, 2009-06-18 at 14:09 -0400, Cliff Brake wrote:
-> I agree, debug symbols are nice in *dbg packages.  Are there any other
-> thoughts pro/con for changing OE to match Poky FULL_OPTIMIZATION
-> settings?
+Hi Koen,
 
-The Poky setting does look better.  I can't see any harm in changing OE
-to match that.
+On Jun 18, 2009, at 10:14 PM, Koen Kooi wrote:
+>
+> I think the fann authors know best where to install their to, which  
+> means using autotools_stage_all.
+>
 
-> Any thoughts on -g vs -ggdb for BUILD_OPTIMIZATION?
+Not really, atleast I'm new to oe, and it took me a while to get to  
+this stage. I can find my way around a bit now, but I really can't  
+understand the pros and cons of using PR, INC_PR, etc. Most of the  
+recipes in oe all use PR anyway.
 
-Looking at what gcc actually does with those options, it doesn't seem
-like there's much difference for the common targets that we support.  So
-I don't really have a view on it either way.
+I just pitched in to help Justin out. And thought I'd just submit the  
+patch back. You may alter it and incorporate it as you see fit.
 
-p.
-
+Elvis
 
 
 
