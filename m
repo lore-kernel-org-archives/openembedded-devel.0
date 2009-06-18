@@ -1,32 +1,22 @@
-Received: from [74.125.46.158] (helo=yw-out-1718.google.com)
+Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <acassis@gmail.com>) id 1MH5EG-0008RQ-GO
+	(envelope-from <denis@denix.org>) id 1MH5Ji-0000B7-59
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Jun 2009 02:11:44 +0200
-Received: by yw-out-1718.google.com with SMTP id 5so306819ywr.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2009 17:01:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=/WS+OPVxo+J6jSsQQi1OqPIHUg02DJ4NX/ai8u9zK6A=;
-	b=SDJ787/VC/H3Kdje3xTZ4P76rG+s48DveKRAmbmFVMZ1FrS0tBroR5XHH5qVUKAR2e
-	6AuoJAjWm1Gp7/PsMXjNomn3VAKCGNebuX4THl7zEhaV7YYmHUU2yPqix/ZZYRFnta6H
-	4uPSmhk5NsyIa5zY5PLFA2lVTqk2UHV2vItLA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=Fhva68uoWr2Krhnt8T1Gll4QHjWlPoWY0ketm5Wge9NYwAi0mlLceLCYuplc+6aPLp
-	LxmxUL3UeWL0Ba0zczDFc8Nfy24nZ4PBeyrNdOqIA/0EQY+ldc1/SmZnJknEkTgThi85
-	UJWCwkK7T70DV2W9kfYgsJvvPS6WSCEp3ura8=
-MIME-Version: 1.0
-Received: by 10.151.7.10 with SMTP id k10mr2255015ybi.260.1245283274385; Wed, 
-	17 Jun 2009 17:01:14 -0700 (PDT)
-Date: Wed, 17 Jun 2009 21:01:14 -0300
-Message-ID: <37367b3a0906171701h2a5b7f38wf1f52ebeead3972d@mail.gmail.com>
-From: Alan Carvalho de Assis <acassis@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Error building busybox_1.13.2
+	Thu, 18 Jun 2009 02:17:23 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KLE009NVQYUR1F1@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	17 Jun 2009 19:06:35 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3B01E14AF5F; Wed,
+	17 Jun 2009 20:06:30 -0400 (EDT)
+Date: Wed, 17 Jun 2009 20:06:30 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090618000630.GD21132@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Suppress kernel image from the filesystem image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,76 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 00:11:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Jun 2009 00:17:28 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi list,
+Hi,
 
-I am updating mx27ads as suggested by Tom Rini, but I found an issue.
+When discussing the issue of suppressing the kernel image from the filesystem 
+image, it was suggested it is still an open question:
 
-The busybox_1.13.2 is broking during the do_install phase.
+<Crofton|work> the kernel image getting installed in the image has been a long 
+standing headache
 
-It is looking for:
-tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/simple.script
+Several ways were mentioned, like fiddling with FILES variable and using 
+BAD_RECOMMENDATIONS. But the correct method is supposed to be overriding the 
+RDEPENDS_kernel-base from kernel.bbclass:
 
-instead:
-tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/busybox-1.13.2/examples/udhcp/simple.script
-(see error log below for further information)
+<pb___> denix0: these lines seem to suggest what the intended behaviour was:
+<pb___> # Allow machines to override this dependency if kernel image files are
+<pb___> # not wanted in images as standard
+<pb___> RDEPENDS_kernel-base ?= "kernel-image"
+<pb___> but, for reasons that are not entirely clear to me at the moment, my 
+efforts to override RDEPENDS_kernel-base did not meet with success.
 
-I fixed it editing "openembedded/recipes/busybox/busybox.inc" and replacing:
+I played with it for some time and realized that in order for it to work, the 
+kernel needs to be rebuilt before the new dependencies take place. So, I 
+added this to the local.conf:
 
-install -m 0755 ${WORKDIR}/simple.script ${D}${sysconfdir}/udhcpc.d/50default
+RDEPENDS_kernel-base = ""
 
-by this one:
+And after rebuilding the kernel and the filesystem I no longer see kernel 
+image in the filesystem!
 
-install -m 0755 ${S}/examples/udhcp/simple.script
-${D}${sysconfdir}/udhcpc.d/50default
+The only problem I see with this approach is it builds the kernel packages 
+differently (USE-flags, anyone?) and if I use a public feed, I may end up 
+installing kernel image into the system again...
 
-
-Is this fix right? Or would be better to create a specific
-busybox_1.13.2.bb to solve it?
-
-Regards,
-
-Alan
-
-NOTE: Running task 324 of 461 (ID: 8,
-/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb,
-do_install)
-ERROR: function do_install failed
-ERROR: log data follows
-(/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/temp/log.do_install.15786)
-| NOTE: make -e MAKEFLAGS= V=1 ARCH=arm
-CROSS_COMPILE=arm-angstrom-linux-gnueabi-
-CROSS=arm-angstrom-linux-gnueabi- busybox.links
-| make: `busybox.links' is up to date.
-| CONFIG_HTTPD=y
-| CONFIG_APP_UDHCPD=y
-| CONFIG_HWCLOCK=y
-| CONFIG_APP_UDHCPC=y
-| install: cannot stat
-`/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/simple.script':
-No such file or directory
-NOTE: Task failed:
-/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/temp/log.do_install.15786
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb
-do_install failed
-ERROR: Task 8 (/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb,
-do_install) failed
-NOTE: Tasks Summary: Attempted 323 tasks of which 323 didn't need to
-be rerun and 1 failed.
-ERROR: '/home/alan/oe/stuff/openembedded/recipes/busybox/busybox_1.13.2.bb'
-failed
-BB>> exit
-alan@metropolis:~/oe/stuff$ cd
-/home/alan/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1/
-alan@metropolis:~/oe/stuff/tmp/work/armv5te-angstrom-linux-gnueabi/busybox-1.13.2-r22.1$
-find . -name simple.script
-./busybox-1.13.2/examples/udhcp/simple.script
-./busybox-1.13.2/.pc/udhcpscript.patch/examples/udhcp/simple.script
-./busybox-1.13.2/.pc/udhcpc-fix-nfsroot.patch/examples/udhcp/simple.script
+-- 
+Denys
 
 
