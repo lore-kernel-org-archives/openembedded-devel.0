@@ -1,31 +1,25 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MHBQa-0003RJ-BK
-	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 08:48:52 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MHBGQ-0003PX-0W
-	for openembedded-devel@openembedded.org; Thu, 18 Jun 2009 06:38:22 +0000
-Received: from p17194-ipngn801marunouchi.tokyo.ocn.ne.jp ([114.162.172.194])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 18 Jun 2009 06:38:22 +0000
-Received: from no2spam by p17194-ipngn801marunouchi.tokyo.ocn.ne.jp with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 18 Jun 2009 06:38:22 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 18 Jun 2009 15:38:05 +0900
-Message-ID: <4A39E0CD.3080101@nospam.arcornews.de>
+	(envelope-from <pb@reciva.com>) id 1MHCO8-00025O-Ny
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Jun 2009 09:50:25 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MHCDw-0001Ap-HL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Jun 2009 08:39:53 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <E701E0BB-B8EC-482B-8808-47449E0FD322@mac.com>
+References: <9050EA3F-01E5-479A-8AF2-C6553F347FE7@mac.com>
+	<4A396EBD.2010207@gmx.net>
+	<E701E0BB-B8EC-482B-8808-47449E0FD322@mac.com>
+Date: Thu, 18 Jun 2009 08:39:51 +0100
+Message-Id: <1245310791.29153.146.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p17194-ipngn801marunouchi.tokyo.ocn.ne.jp
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-Sender: news <news@ger.gmane.org>
-Cc: mlauer@vanille-media.de
-Subject: tinderbox moved
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: classpath_0.98 recipe failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,34 +33,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2009 06:48:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 18 Jun 2009 07:50:25 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+I think you must be looking at either the wrong repository or an old
+checkout.  The org.openembedded.dev tree does indeed contain
+jamvm-native 1.5.3, see:
 
-the next service moved from amethyst to melo: tinderbox.
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/jamvm
 
-There should be no disruptions in service.  The new installation is 
-already live.  Both tinderbox.openembedded.net and 
-tinderbox.openembedded.org should be accessible.  .net redirects to .org 
-until mickey can set up a proper CNAME.
+You can download the file from the web interface there if you want.
 
-While I would have liked to carry over the old data, I decided against 
-it for two reasons.  The old installation used the Postgres backend, 
-while melo has access to a separate mysql database server.  Conversion 
-may have well been possible, but logs are only kept for three months 
-anyway.   Thus, I did not feel it was worth the effort.
+p.
 
-The old data is still accessible.  I have set up 
-http://oe-tinderbox-old.leggewie.org for now.  If it is important to 
-anybody, we can set up a proper domain under openembedded.org or .net
-
-Please let me know of any problems.
-
-Regards
-
-Rolf
+On Thu, 2009-06-18 at 08:34 +0400, Elvis Dowson wrote:
+> Hi Robert,
+> 
+> On Jun 18, 2009, at 2:31 AM, Robert Schuster wrote:
+> 
+> > First thing to know is: What version of OE are you using? Is this the
+> > development branch (org.openembedded.dev)?
+> 
+> I was using the overo-oe repository
+> 
+> git clone git://gitorious.org/gumstix-oe/mainline.git  
+> org.openembedded.dev
+> 
+> After you email, I also checked the openembedded repository
+> 
+> git://git.openembedded.org/openembedded
+> 
+> 
+> > If so I am wondering why you are not seeing a recipe for jamvm-native
+> > 1.5.3. Such a recipe should be there and work just fine.
+> 
+> Both these repositories don't have a jamvm_1.5.3.bb recipe.
+> 
+> I am on the org.openembedded.dev branch.
+> 
+> Can you point me to a location where I can get the latest recipes for  
+> jamvm and classpath?
+> 
+> Best regards,
+> 
+> Elvis
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
