@@ -1,35 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MHiS7-00075d-V9
-	for openembedded-devel@openembedded.org; Fri, 19 Jun 2009 20:04:40 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MHiHo-0000Dx-4G
-	for openembedded-devel@openembedded.org; Fri, 19 Jun 2009 17:54:00 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 19 Jun 2009 17:54:00 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 19 Jun 2009 17:54:00 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 19 Jun 2009 19:53:49 +0200
-Message-ID: <h1gjbd$qpu$1@ger.gmane.org>
-References: <C960916A-B754-4AD4-9751-67D7025AC8C1@mac.com>	<h19s8q$jd7$1@ger.gmane.org>	<4593EC5C-D89E-4947-AA92-3AD423A196B5@mac.com>	<h1dr55$nue$1@ger.gmane.org>	<be7a9f3d0906180952v1bbb0611kd7079d5d947f83b8@mail.gmail.com>	<h1dusl$4lp$1@ger.gmane.org>
-	<4A3A8348.8080502@balister.org>	<h1e0ot$bjn$1@ger.gmane.org>	<20090618230514.GP15477@smtp.west.cox.net>	<h1fgtp$b83$2@ger.gmane.org>
-	<20090619174723.GR15477@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <20090619174723.GR15477@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Patch for libfann-2.0.0 recipe
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MHlWj-0002LK-6P
+	for openembedded-devel@openembedded.org; Fri, 19 Jun 2009 23:21:37 +0200
+Received: (qmail 17763 invoked from network); 19 Jun 2009 21:10:55 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 19 Jun 2009 14:10:55 -0700
+Date: Fri, 19 Jun 2009 14:10:55 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090619211055.GT15477@smtp.west.cox.net>
+References: <E1MHjjt-00019r-UN@melo.nslu2-linux.org>
+MIME-Version: 1.0
+In-Reply-To: <E1MHjjt-00019r-UN@melo.nslu2-linux.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [oe-commits] Phil Blundell : micro-uclibc: avoid selection of	crazy iphone stuff as provider for iconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +28,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jun 2009 18:04:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Jun 2009 21:21:37 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 19-06-09 19:47, Tom Rini wrote:
+On Fri, Jun 19, 2009 at 07:27:05PM +0000, git version control wrote:
 
-> I would have assumed that since changing a package without changing the
-> PR can wreck havoc on public feeds you would be in favor of helping to
-> keep those problems at bay.
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 91cdbe63a724125d65d3ec7bf81d84cef16ec653
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=91cdbe63a724125d65d3ec7bf81d84cef16ec653
+> 
+> Author: Phil Blundell <philb@gnu.org>
+> Date:   Fri Jun 19 20:26:26 2009 +0100
+> 
+> micro-uclibc: avoid selection of crazy iphone stuff as provider for iconv
 
-Check contrib/angstrom/upload-packages.sh :) It won't upload any 
-duplicate filenames, so angstrom public feeds don't suffer from such 
-things (they did, that's why Graeme and I added that logic).
-Anyway, if you aren't paying enough attention to bump PR, you shouldn't 
-be pushing that commit!
-There are a lot more things that warrant attention than not including PR 
-= "r0" in the recipe, inheriting pkgconfig being one of them.
+So, micro and micro-uclibc have a bug that's masked by this commit.
+Both use PREFERRED_LIBC rather than LIBC.  Switching to LIBC should
+allow for a few things to be removed from both confs (the libintl
+settings in the main one and the iconv one in uclibc, possibly the
+libintl one if you want to use gettext instead).
 
-regards,
-
-Koen
-
-
+-- 
+Tom Rini
 
 
