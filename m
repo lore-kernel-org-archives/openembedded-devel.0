@@ -1,35 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [65.55.34.211] (helo=col0-omc4-s9.col0.hotmail.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MHZKx-0005Wy-Pw
-	for openembedded-devel@openembedded.org; Fri, 19 Jun 2009 10:20:39 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MHZAg-0000c9-CX
-	for openembedded-devel@openembedded.org; Fri, 19 Jun 2009 08:10:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 19 Jun 2009 08:10:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 19 Jun 2009 08:10:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 19 Jun 2009 10:06:18 +0200
-Message-ID: <h1fgtp$b83$2@ger.gmane.org>
-References: <C960916A-B754-4AD4-9751-67D7025AC8C1@mac.com>	<h19s8q$jd7$1@ger.gmane.org>	<4593EC5C-D89E-4947-AA92-3AD423A196B5@mac.com>	<h1dr55$nue$1@ger.gmane.org>	<be7a9f3d0906180952v1bbb0611kd7079d5d947f83b8@mail.gmail.com>	<h1dusl$4lp$1@ger.gmane.org>
-	<4A3A8348.8080502@balister.org>	<h1e0ot$bjn$1@ger.gmane.org>
-	<20090618230514.GP15477@smtp.west.cox.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <20090618230514.GP15477@smtp.west.cox.net>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Patch for libfann-2.0.0 recipe
+	(envelope-from <pascal_kesseli@hotmail.com>) id 1MHc99-0001nO-Er
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Jun 2009 13:20:39 +0200
+Received: from COL109-DS9 ([65.55.34.200]) by col0-omc4-s9.col0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 19 Jun 2009 04:09:59 -0700
+X-Originating-IP: [213.3.31.124]
+X-Originating-Email: [pascal_kesseli@hotmail.com]
+Message-ID: <COL109-DS950449B65B62F9BEEB07AF23A0@phx.gbl>
+From: "Pascal Kesseli" <pascal_kesseli@hotmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Jun 2009 13:09:56 +0200
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcnwznpQcvu+mTLuRR28MhjPm67kow==
+X-OriginalArrivalTime: 19 Jun 2009 11:09:59.0014 (UTC)
+	FILETIME=[7BF1C060:01C9F0CE]
+Subject: classpath-minimum fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,61 +31,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jun 2009 08:20:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Jun 2009 11:20:39 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Language: de-ch
 
-On 19-06-09 01:05, Tom Rini wrote:
-> On Thu, Jun 18, 2009 at 08:24:29PM +0200, Koen Kooi wrote:
->> On 18-06-09 20:11, Philip Balister wrote:
->>> Koen Kooi wrote:
->>>> On 18-06-09 18:52, Otavio Salvador wrote:
->>>>> Hello Koen,
->>>>>
->>>>> On Thu, Jun 18, 2009 at 1:48 PM, Koen Kooi<k.kooi@student.utwente.nl>
->>>>> wrote:
->>>>>>> PR = "r01"
->>>>>>
->>>>>> Don't set PR to that.
->>>>>
->>>>> I believe that most people prefer to always have PR field included;
->>>>> obviously it ought to be PR = "r1" or PR = "r0" but it is harder to
->>>>> forget to update it when it shows in the recipe.
->>>>
->>>> That's nonsense. Not setting PR = "r0" in recipes makes maintenance a
->>>> lot easier, e.g. forcing rebuild or all xorg libs. If every recipe was
->>>> already using INC_PR, I might agree with you, but since that isn't the
->>>> case adding PR = "r0" is creating more work.
->>>
->>> Can you explain this a little clearer? I know a number of people on the
->>> list feel like Otavio and it would be really helpful for people to
->>> understand what the downside is to starting with PR = "r0" instead of
->>> leaving it out.
->>
->> Suppose you want to bump PR on every xorg lib recipe, do you want to
->> edit 70 recipes or do you only want to edit 1 .inc file and 3 recipes?
->> If you're in the 'edit 70 recipes' crowd, add PR = "r0" to all recipes
->> in OE. If not, leave it out, bitbake defaults to it anyway.
->> Also, does anyone remember how much pain we had when adding ${PN}-dbg
->> into the default PACKAGES only to discover that lots of recipes were
->> needlessly copying defaults?
->
-> But there's no .inc file here.  How about saying:
-> - Adding an .inc file MUST switch all the recipes now using it to INC_PR
-> - If you're modifying recipes that really should be INC_PR, make them
->    INC_PR while you're in there (the 70 xorg lib recipes not using INC_PR
->    today for example).
-> - New recipes that also create a .inc must set INC_PR = "r0" / PR =
->    "${INC_PR}.0"
-> - New recipes that are just a single .bb must set PR = "r0"
->
-> The arguement against "leave it out, bitbake defaults to it anyway." is
-> that "once you make a change it's easier to forget to bump PR/INC_PR if
-> it's not staring you in the face".
+Hi everyone=20
 
-Shall we start putting every var in a recipe then? Setting vars to their 
-default is just bloat and wastes parse time.
+Using the following DISTRO:=20
 
+DISTRO =3D ewbmeter=20
+DISTRO_NAME =3D EwbMeter=20
+DISTRO_VERSION =3D "3.0"=20
+TARGET_OS =3D linux=20
+INHERIT +=3D " package_ipk"=20
+PREFERRED_VERSION_gcc =3D "3.3.2"=20
+PREFERRED_VERSION_gcc-cross =3D "3.3.2"=20
+PREFERRED_VERSION_glibc =3D "2.2.5"=20
+PREFERRED_PROVIDER_virtual/libc =3D "glibc"=20
+PREFERRED_PROVIDER_classpath =3D classpath-minimal=20
+PREFERRED_VERSION_classpath-minimal =3D 0.96.1.bb=20
+PREFERRED_PROVIDER_virtual/java-initial =3D jamvm-initial=20
+PREFERRED_VERSION_jamvm-initial =3D 1.5.0=20
+PREFERRED_PROVIDER_classpath-initial =3D classpath=20
+PREFERRED_PROVIDER_virtual/java-native =3D jamvm-native=20
+PREFERRED_VERSION_jamvm-native =3D 1.5.3=20
+PREFERRED_PROVIDER_virtual/javac-native =3D openjdk-javac-native=20
+
+PREFERRED_PROVIDER_gtk+ =3D gtk+=20
+PREFERRED_PROVIDER_gconf =3D gconf=20
+PREFERRED_PROVIDER_virtual/libintl =3D glibc=20
+PREFERRED_PROVIDER_linux-libc-headers =3D linux-libc-headers=20
+PREFERRED_PROVIDER_virtual/libiconv =3D glibc=20
+PREFERRED_PROVIDER_virtual/libx11 =3D libx11=20
+PREFERRED_PROVIDER_virtual/arm-linux-binutils =3D binutils-cross=20
+PREFERRED_PROVIDER_virtual/arm-linux-libc-initial =3D glibc-initial=20
+PREFERRED_PROVIDER_virtual/db-native =3D db-native
+
+the classpath-minimal build fails with a Java compiler error:=20
+
+| 3205. ERROR in ../java/nio/ShortViewBufferImpl.java (at line 57)=20
+| this.address =3D VMDirectByteBuffer.adjustAddress(bb.address, offset); =
+
+| =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0^^^^^^^^^^^^^=20
+| The method adjustAddress(RawData, int) in the type VMDirectByteBuffer =
+is
+not applicable for the arguments (Pointer, int)=20
+| ----------=20
+| 3206. ERROR in ../java/nio/ShortViewBufferImpl.java (at line 70)=20
+| this.address =3D VMDirectByteBuffer.adjustAddress(bb.address, offset); =
+
+| =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0^^^^^^^^^^^^^=20
+| The method adjustAddress(RawData, int) in the type VMDirectByteBuffer =
+is
+not applicable for the arguments (Pointer, int)
+
+What am I missing?=20
+
+Thanks for any help and best regards=20
+Kessi
 
 
 
