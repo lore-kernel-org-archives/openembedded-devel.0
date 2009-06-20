@@ -1,20 +1,21 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MHlWj-0002LK-6P
-	for openembedded-devel@openembedded.org; Fri, 19 Jun 2009 23:21:37 +0200
-Received: (qmail 17763 invoked from network); 19 Jun 2009 21:10:55 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 19 Jun 2009 14:10:55 -0700
-Date: Fri, 19 Jun 2009 14:10:55 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [82.71.203.194] (helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <philb@gnu.org>) id 1MHxGR-0004nI-5b
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Jun 2009 11:53:35 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MHx5w-0000xz-JC
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Jun 2009 10:42:45 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090619211055.GT15477@smtp.west.cox.net>
-References: <E1MHjjt-00019r-UN@melo.nslu2-linux.org>
-MIME-Version: 1.0
-In-Reply-To: <E1MHjjt-00019r-UN@melo.nslu2-linux.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [oe-commits] Phil Blundell : micro-uclibc: avoid selection of	crazy iphone stuff as provider for iconv
+Date: Sat, 20 Jun 2009 10:42:33 +0100
+Message-Id: <1245490953.29153.235.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [oe-commits] Koen Kooi : util-linux-ng: fix packaging, u-a and	replace hardcoded paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,29 +29,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jun 2009 21:21:37 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 20 Jun 2009 09:53:37 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jun 19, 2009 at 07:27:05PM +0000, git version control wrote:
+> @@ -129,7 +131,8 @@ do_install () {
+>  	install -d ${D}${sysconfdir}/default/
+>  	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall
+>  
+> -	ln -sf ${sbindir}/swapon ${D}${sbindir}/swapoff.${PN}
+> +	rm ${D}${sbindir}/swap* -f
+> +	ln -sf ${base_sbindir}/swapon.${PN} ${D}${base_sbindir}/swapoff.${PN}
+>  	ln -sf ${sbindir}/shutdown ${D}${sbindir}/reboot.${PN}
+>  	ln -sf ${sbindir}/shutdown ${D}${sbindir}/halt.${PN}
+>  	ln -sf ${sbindir}/shutdown ${D}${sbindir}/fastboot
 
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 91cdbe63a724125d65d3ec7bf81d84cef16ec653
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=91cdbe63a724125d65d3ec7bf81d84cef16ec653
-> 
-> Author: Phil Blundell <philb@gnu.org>
-> Date:   Fri Jun 19 20:26:26 2009 +0100
-> 
-> micro-uclibc: avoid selection of crazy iphone stuff as provider for iconv
+What's the reason for that "rm"?  This looks like it will lose when
+${base_sbindir} and ${sbindir} are the same directory.
 
-So, micro and micro-uclibc have a bug that's masked by this commit.
-Both use PREFERRED_LIBC rather than LIBC.  Switching to LIBC should
-allow for a few things to be removed from both confs (the libintl
-settings in the main one and the iconv one in uclibc, possibly the
-libintl one if you want to use gettext instead).
+p.
 
--- 
-Tom Rini
+
 
 
