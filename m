@@ -1,28 +1,20 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [17.148.16.91] (helo=asmtpout016.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MI4bH-0005pd-AG
+	(envelope-from <elvis.dowson@mac.com>) id 1MI51E-0006Y4-W2
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Jun 2009 19:43:35 +0200
-Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MI4Qp-0004rT-NW
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Jun 2009 18:32:48 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <h1j5no$4k3$1@ger.gmane.org>
-References: <20090617042909.GA21132@denix.org>
-	<1245224450.29153.99.camel@lenovo.internal.reciva.com>
-	<20090617214104.GC21132@denix.org>
-	<1245396977.29153.192.camel@lenovo.internal.reciva.com>
-	<1245492507.29153.244.camel@lenovo.internal.reciva.com>
-	<4A3CFE82.2050106@mvista.com>  <h1j5no$4k3$1@ger.gmane.org>
-Date: Sat, 20 Jun 2009 18:32:46 +0100
-Message-Id: <1245519166.29153.278.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: update-rc.d: don't add runtime dependency if not doing	online package management; only add it to ${PN} in any case.
+	Sat, 20 Jun 2009 20:10:25 +0200
+MIME-version: 1.0
+Received: from [87.201.169.152] by asmtp016.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLJ00C6ETYZ7R10@asmtp016.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	20 Jun 2009 10:59:28 -0700 (PDT)
+Message-id: <B7B72D38-62FD-4B6B-9856-DF4F470F832F@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Date: Sat, 20 Jun 2009 21:59:08 +0400
+X-Mailer: Apple Mail (2.935.3)
+Subject: Recipe for libserial_0.6.0rc1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +28,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jun 2009 17:43:35 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 20 Jun 2009 18:10:25 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-On Sat, 2009-06-20 at 19:19 +0200, Koen Kooi wrote:
-> Why is it complaining about RDEPENDS? If some app needs external 
-> datafiles to run it sure as hell needs to set RDEPENDS.
+Hi,
+	I'm trying to create a recipe for libserial-0.6.0rc1. There is a  
+folder called sip in the package. How can I modify the recipe to  
+remove the sip folder from the list of files to be configured and  
+compiled?
 
-In almost all cases the app ought to be setting RDEPENDS_${PN}, not
-RDEPENDS.  Otherwise the documentation, debug data and suchlike will end
-up getting the same dependency, which is seldom useful.  The same goes
-for most of the other R* variables.
+DESCRIPTION = "C++ library for serial port support."
+SECTION = "libs"
+LICENSE = "GPL"
+HOMEPAGE = "http://libserial.sourceforge.net/mediawiki/index.php/Main_Page 
+"
 
-p.
+SRC_URI = "${SOURCEFORGE_MIRROR}/libserial/libserial-${PV}.tar.gz"
 
+S = "${WORKDIR}/libserial-${PV}"
+
+inherit autotools pkgconfig
+
+do_stage() {
+	autotools_stage_all
+}
+
+Best regards,
+
+Elvis
 
 
 
