@@ -1,23 +1,24 @@
-Received: from [17.148.16.86] (helo=asmtpout011.mac.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MI5SN-00040H-2e
+	(envelope-from <pb@reciva.com>) id 1MI5cT-0004Ly-Mm
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Jun 2009 20:38:27 +0200
-MIME-version: 1.0
-Received: from [87.201.169.152] by asmtp011.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLJ00LAFV9ZZZ50@asmtp011.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	20 Jun 2009 11:27:39 -0700 (PDT)
-Message-id: <3186A9DE-F7A1-4400-8B6B-ABE119EDA16A@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
+	Sat, 20 Jun 2009 20:48:54 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MI5S0-0006cx-7r
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Jun 2009 19:38:06 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-reply-to: <1245521341.29153.288.camel@lenovo.internal.reciva.com>
-Date: Sat, 20 Jun 2009 22:27:20 +0400
+In-Reply-To: <3186A9DE-F7A1-4400-8B6B-ABE119EDA16A@mac.com>
 References: <B7B72D38-62FD-4B6B-9856-DF4F470F832F@mac.com>
 	<1245521341.29153.288.camel@lenovo.internal.reciva.com>
-X-Mailer: Apple Mail (2.935.3)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+	<3186A9DE-F7A1-4400-8B6B-ABE119EDA16A@mac.com>
+Date: Sat, 20 Jun 2009 19:37:49 +0100
+Message-Id: <1245523070.29153.290.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: Recipe for libserial_0.6.0rc1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,24 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jun 2009 18:38:27 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Sat, 20 Jun 2009 18:48:56 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi Phil,
+On Sat, 2009-06-20 at 22:27 +0400, Elvis Dowson wrote:
+> Hi Phil,
+> 
+> On Jun 20, 2009, at 10:09 PM, Phil Blundell wrote:
+> 
+> > Try:
+> >
+> > do_compile() {
+> > 	oe_runmake SUBDIRS="src doc examples"
+> > }
+> 
+> It compiled all the files in src, doc and example, and then went  
+> looking for another sub dir called src.
 
-On Jun 20, 2009, at 10:09 PM, Phil Blundell wrote:
+I'm not quite sure what you mean by "another" subdir called src.  Can
+you post the actual log output that you're seeing?
 
-> Try:
->
-> do_compile() {
-> 	oe_runmake SUBDIRS="src doc examples"
-> }
+p.
 
-It compiled all the files in src, doc and example, and then went  
-looking for another sub dir called src.
-
-Elvis
 
 
 
