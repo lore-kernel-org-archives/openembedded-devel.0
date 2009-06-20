@@ -1,21 +1,23 @@
-Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MI7Ke-0000fr-TW
+	(envelope-from <pb@reciva.com>) id 1MI7jj-0001M4-EG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Jun 2009 22:38:37 +0200
-MIME-version: 1.0
-Received: from [87.201.169.152] by asmtp019.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLK00HLA0U7SQ40@asmtp019.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	20 Jun 2009 13:27:48 -0700 (PDT)
-Message-id: <7DD56667-6DAE-4017-B636-C82258C4E15F@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Sun, 21 Jun 2009 00:27:27 +0400
-X-Mailer: Apple Mail (2.935.3)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Writing a test program for libserial
+	Sat, 20 Jun 2009 23:04:31 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MI7ZG-00018K-Vo
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Jun 2009 21:53:43 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <7DD56667-6DAE-4017-B636-C82258C4E15F@mac.com>
+References: <7DD56667-6DAE-4017-B636-C82258C4E15F@mac.com>
+Date: Sat, 20 Jun 2009 21:53:38 +0100
+Message-Id: <1245531218.29153.296.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Writing a test program for libserial
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,59 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jun 2009 20:38:37 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Sat, 20 Jun 2009 21:04:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
-	What is the best way to write a test program recipe for libserial.  
-I've taken the read_port.cpp file, and would like to package it as a  
-separate recipe for testing purposes. Not that I'm going to submit  
-this test recipe, its just for me to learn how to write a test recipe  
-that uses an existing library.
+On Sun, 2009-06-21 at 00:27 +0400, Elvis Dowson wrote:
+> SRC_URI = "file://* "
+> 
+> S = "${WORKDIR}/${PN}-${PV}"
 
+Try:
 
-DESCRIPTION = "Read serial port test program for libserial"
-SECTION = "bin"
-LICENSE = "GPL"
-HOMEPAGE = ""
-DEPENDS = "libserial"
+SRC_URI = "file://read_port.cpp"
+S = "${WORKDIR}"
 
-#LDFLAGS_append += "-llibserial"
-#CFLAGS_append  += "-I${STAGING_INCDIR}"
+If you have multiple source files, just list them all in SRC_URI,
+separated by spaces.
 
-SRC_URI = "file://* "
-
-S = "${WORKDIR}/${PN}-${PV}"
-
-do_compile () {
-    ${CC} ${CFLAGS} ${LDFLAGS} -o libserial-test-read-port read_port.cpp
-}
-
-do_install () {
-    install -d ${D}${bindir}/
-    install -m 0755 ${S}/libserial-test-read-port ${D}${bindir}
-}
-
-FILES_${PN} = "${bindir}/libserial-test-read-port"
-
-When I try to build the recipe, I get the following error:
-
-ERROR: function do_compile failed
-ERROR: log data follows (/tool/overo-oe/tmp/work/armv7a-angstrom-linux- 
-gnueabi/libserial-test-read-port-1.6.0rc1-1.0-r0/temp/log.do_compile. 
-31500)
-| arm-angstrom-linux-gnueabi-gcc: read_port.cpp: No such file or  
-directory
+p.
 
 
-Where should I put my test program sources ? and how should I include  
-it in the SRC_URI field? Currently it is in the same level as the test  
-program recipe file.
-
-
-Best regards,
-
-Elvis
 
 
