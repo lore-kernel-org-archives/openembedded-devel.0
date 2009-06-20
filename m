@@ -1,24 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MHxKA-0004s9-Jc
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Jun 2009 11:57:26 +0200
-Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MHx9l-00010o-2I
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Jun 2009 10:46:41 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090619211055.GT15477@smtp.west.cox.net>
-References: <E1MHjjt-00019r-UN@melo.nslu2-linux.org>
-	<20090619211055.GT15477@smtp.west.cox.net>
-Date: Sat, 20 Jun 2009 10:46:39 +0100
-Message-Id: <1245491199.29153.237.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MHxdN-0005LT-I2
+	for openembedded-devel@openembedded.org; Sat, 20 Jun 2009 12:17:17 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MHxSy-0001vU-4E
+	for openembedded-devel@openembedded.org; Sat, 20 Jun 2009 10:06:32 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sat, 20 Jun 2009 10:06:32 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sat, 20 Jun 2009 10:06:32 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 20 Jun 2009 12:06:19 +0200
+Message-ID: <h1icar$in$1@ger.gmane.org>
+References: <1245490953.29153.235.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [oe-commits] Phil Blundell : micro-uclibc: avoid	selection of	crazy iphone stuff as provider for iconv
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
+In-Reply-To: <1245490953.29153.235.camel@lenovo.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [oe-commits] Koen Kooi : util-linux-ng: fix packaging, u-a and replace hardcoded paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,23 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jun 2009 09:57:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 20 Jun 2009 10:17:17 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-06-19 at 14:10 -0700, Tom Rini wrote:
-> So, micro and micro-uclibc have a bug that's masked by this commit.
-> Both use PREFERRED_LIBC rather than LIBC.  Switching to LIBC should
-> allow for a few things to be removed from both confs (the libintl
-> settings in the main one and the iconv one in uclibc, possibly the
-> libintl one if you want to use gettext instead).
+On 20-06-09 11:42, Phil Blundell wrote:
+>> @@ -129,7 +131,8 @@ do_install () {
+>>   	install -d ${D}${sysconfdir}/default/
+>>   	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"'>  ${D}${sysconfdir}/default/mountall
+>>
+>> -	ln -sf ${sbindir}/swapon ${D}${sbindir}/swapoff.${PN}
+>> +	rm ${D}${sbindir}/swap* -f
+>> +	ln -sf ${base_sbindir}/swapon.${PN} ${D}${base_sbindir}/swapoff.${PN}
+>>   	ln -sf ${sbindir}/shutdown ${D}${sbindir}/reboot.${PN}
+>>   	ln -sf ${sbindir}/shutdown ${D}${sbindir}/halt.${PN}
+>>   	ln -sf ${sbindir}/shutdown ${D}${sbindir}/fastboot
+>
+> What's the reason for that "rm"?  This looks like it will lose when
+> ${base_sbindir} and ${sbindir} are the same directory.
 
-Thanks for pointing that out.  I've changed the conf files to use
-${LIBC} now and I'll remove the redundant definitions over the next
-couple of days.
+u-l-ng installs a symlink there that breaks finding swapoff at runtime. 
+base_sbindir and sbindir aren't the same for me, so I can't test what 
+happens if they are.
 
-p.
+regards,
 
+Koen
 
 
 
