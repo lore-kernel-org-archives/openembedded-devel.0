@@ -1,33 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MHxdN-0005LT-I2
-	for openembedded-devel@openembedded.org; Sat, 20 Jun 2009 12:17:17 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MHxSy-0001vU-4E
-	for openembedded-devel@openembedded.org; Sat, 20 Jun 2009 10:06:32 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 20 Jun 2009 10:06:32 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 20 Jun 2009 10:06:32 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 20 Jun 2009 12:06:19 +0200
-Message-ID: <h1icar$in$1@ger.gmane.org>
-References: <1245490953.29153.235.camel@lenovo.internal.reciva.com>
+	(envelope-from <philb@gnu.org>) id 1MHxfV-0005Nj-8k
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Jun 2009 12:19:29 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MHxV6-0001Yw-4F
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Jun 2009 11:08:44 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1245396977.29153.192.camel@lenovo.internal.reciva.com>
+References: <20090617042909.GA21132@denix.org>
+	<1245224450.29153.99.camel@lenovo.internal.reciva.com>
+	<20090617214104.GC21132@denix.org>
+	<1245396977.29153.192.camel@lenovo.internal.reciva.com>
+Date: Sat, 20 Jun 2009 11:08:27 +0100
+Message-Id: <1245492507.29153.244.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <1245490953.29153.235.camel@lenovo.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] Koen Kooi : util-linux-ng: fix packaging, u-a and replace hardcoded paths
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: update-rc.d: don't add runtime dependency if not	doing	online package management; only add it to ${PN} in any case.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jun 2009 10:17:17 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sat, 20 Jun 2009 10:19:29 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 20-06-09 11:42, Phil Blundell wrote:
->> @@ -129,7 +131,8 @@ do_install () {
->>   	install -d ${D}${sysconfdir}/default/
->>   	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"'>  ${D}${sysconfdir}/default/mountall
->>
->> -	ln -sf ${sbindir}/swapon ${D}${sbindir}/swapoff.${PN}
->> +	rm ${D}${sbindir}/swap* -f
->> +	ln -sf ${base_sbindir}/swapon.${PN} ${D}${base_sbindir}/swapoff.${PN}
->>   	ln -sf ${sbindir}/shutdown ${D}${sbindir}/reboot.${PN}
->>   	ln -sf ${sbindir}/shutdown ${D}${sbindir}/halt.${PN}
->>   	ln -sf ${sbindir}/shutdown ${D}${sbindir}/fastboot
->
-> What's the reason for that "rm"?  This looks like it will lose when
-> ${base_sbindir} and ${sbindir} are the same directory.
+On Fri, 2009-06-19 at 08:36 +0100, Phil Blundell wrote:
+> On Wed, 2009-06-17 at 17:41 -0400, Denys Dmytriyenko wrote:
+> > Any ideas why RDEPENDS_{PN} in "udev" recipe works, but RDEPENDS_udev doesn't? 
+> > It only happens with inherit update-rc.d.bbclass, which also changes 
+> > RDEPENDS_{PN}... I have the same issue with my own recipes, which I need to 
+> > fix similarly.
+> 
+> It's a side effect of the way that overrides work in bitbake. 
 
-u-l-ng installs a symlink there that breaks finding swapoff at runtime. 
-base_sbindir and sbindir aren't the same for me, so I can't test what 
-happens if they are.
+... and Chris Larson, being the great guy that he is, has now added a
+check for this issue to recipe_sanity.bbclass.  If you have sanity
+checking enabled, this situation will now elicit a diagnostic along the
+lines of:
 
-regards,
+NOTE: glibc-2.9: recipe_sanity: rename of variable 'RPROVIDES_${PN}-dev'
+to 'RPROVIDES_glibc-dev' overwrote existing value ' libc-dev' with
+'libc6-dev virtual-libc-dev'. 
 
-Koen
+which should make it easy to identify such issues in the future.  Thanks
+Chris!
+
+p.
+
 
 
 
