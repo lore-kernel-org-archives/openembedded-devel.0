@@ -1,20 +1,23 @@
-Received: from [17.148.16.91] (helo=asmtpout016.mac.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MI51E-0006Y4-W2
+	(envelope-from <pb@reciva.com>) id 1MI5AP-0006r0-5U
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Jun 2009 20:10:25 +0200
-MIME-version: 1.0
-Received: from [87.201.169.152] by asmtp016.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLJ00C6ETYZ7R10@asmtp016.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	20 Jun 2009 10:59:28 -0700 (PDT)
-Message-id: <B7B72D38-62FD-4B6B-9856-DF4F470F832F@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Sat, 20 Jun 2009 21:59:08 +0400
-X-Mailer: Apple Mail (2.935.3)
-Subject: Recipe for libserial_0.6.0rc1
+	Sat, 20 Jun 2009 20:19:53 +0200
+Received: from 88-109-80-94.dynamic.dsl.as9105.com ([88.109.80.94]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MI4zw-0005oA-1Q
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Jun 2009 19:09:04 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <B7B72D38-62FD-4B6B-9856-DF4F470F832F@mac.com>
+References: <B7B72D38-62FD-4B6B-9856-DF4F470F832F@mac.com>
+Date: Sat, 20 Jun 2009 19:09:01 +0100
+Message-Id: <1245521341.29153.288.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Recipe for libserial_0.6.0rc1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,35 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jun 2009 18:10:25 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Sat, 20 Jun 2009 18:19:53 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
-	I'm trying to create a recipe for libserial-0.6.0rc1. There is a  
-folder called sip in the package. How can I modify the recipe to  
-remove the sip folder from the list of files to be configured and  
-compiled?
+Try:
 
-DESCRIPTION = "C++ library for serial port support."
-SECTION = "libs"
-LICENSE = "GPL"
-HOMEPAGE = "http://libserial.sourceforge.net/mediawiki/index.php/Main_Page 
-"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/libserial/libserial-${PV}.tar.gz"
-
-S = "${WORKDIR}/libserial-${PV}"
-
-inherit autotools pkgconfig
-
-do_stage() {
-	autotools_stage_all
+do_compile() {
+	oe_runmake SUBDIRS="src doc examples"
 }
 
-Best regards,
+p.
 
-Elvis
+On Sat, 2009-06-20 at 21:59 +0400, Elvis Dowson wrote:
+> Hi,
+> 	I'm trying to create a recipe for libserial-0.6.0rc1. There is a  
+> folder called sip in the package. How can I modify the recipe to  
+> remove the sip folder from the list of files to be configured and  
+> compiled?
+> 
+> DESCRIPTION = "C++ library for serial port support."
+> SECTION = "libs"
+> LICENSE = "GPL"
+> HOMEPAGE = "http://libserial.sourceforge.net/mediawiki/index.php/Main_Page 
+> "
+> 
+> SRC_URI = "${SOURCEFORGE_MIRROR}/libserial/libserial-${PV}.tar.gz"
+> 
+> S = "${WORKDIR}/libserial-${PV}"
+> 
+> inherit autotools pkgconfig
+> 
+> do_stage() {
+> 	autotools_stage_all
+> }
+> 
+> Best regards,
+> 
+> Elvis
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
