@@ -1,18 +1,18 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MIOIc-0006UF-2e
-	for openembedded-devel@openembedded.org; Sun, 21 Jun 2009 16:45:38 +0200
-Received: (qmail 21446 invoked by uid 1003); 21 Jun 2009 14:34:44 -0000
+	(envelope-from <philip@balister.org>) id 1MIPll-0006Lv-Uu
+	for openembedded-devel@openembedded.org; Sun, 21 Jun 2009 18:19:51 +0200
+Received: (qmail 30896 invoked by uid 1003); 21 Jun 2009 16:08:55 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 21 Jun 2009 14:34:43 -0000
-Message-ID: <4A3E4502.5000908@balister.org>
-Date: Sun, 21 Jun 2009 10:34:42 -0400
+	by mail.geekisp.com with SMTP; 21 Jun 2009 16:08:55 -0000
+Message-ID: <4A3E5B16.2060803@balister.org>
+Date: Sun, 21 Jun 2009 12:08:54 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Linuxtag booth setup
+Subject: [Fwd: [Gumstix-users] Small patch to fix DirectFB]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,22 +26,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jun 2009 14:45:38 -0000
-X-Groupsio-MsgNum: 11476
+X-List-Received-Date: Sun, 21 Jun 2009 16:19:52 -0000
+X-Groupsio-MsgNum: 11477
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms040707060603080109060700"
+	micalg=sha1; boundary="------------ms050303040602040605040807"
 
---------------ms040707060603080109060700
+--------------ms050303040602040605040807
+Content-Type: multipart/mixed;
+ boundary="------------020903090805060803070604"
+
+--------------020903090805060803070604
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-What are the plans for setting up the OE booth at Linuxtag? I'm arriving 
-in Berlin Tuesday afternoon and can help out if needed. Mind you, I 
-might be sort of incoherent, but it will help me stay awake.
+I'd look at this, but I really need to start packing for Linuxtag .....
 
 Philip
 
---------------ms040707060603080109060700
+-------- Original Message --------
+Subject: [Gumstix-users] Small patch to fix DirectFB
+Date: Sun, 21 Jun 2009 17:42:06 +0200
+From: Vincent <vincent.stehle@laposte.net>
+Reply-To: General mailing list for gumstix users.=20
+<gumstix-users@lists.sourceforge.net>
+To: gumstix-users@lists.sourceforge.net
+
+
+Hi,
+
+Here is a small patch (against commit
+af278f54d6bec590640dfc920e251e29890f7316), which fixes the DirectFB
+1.2.8 recipes (URL has changed).
+
+I don't know where to submit this kind of fix, hence my posting here, in
+the hope that someone will push it somewhere :)
+
+Best regards,
+
+--=20
+Vincent Stehl=E9
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 4463dbd..00e9f34 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -226,7 +226,7 @@ sha256=3D80ab8e34246a280bc380020cf331bcc0014cf816380ce=
+e3935ad455c108e661e
+ md5=3D59ca16f600e96c8c104a485ff7c322c6
+ sha256=3D80ab8e34246a280bc380020cf331bcc0014cf816380cee3935ad455c108e661e
+=20
+-[http://directfb.org/downloads/Core/DirectFB-1.2/DirectFB-1.2.8.tar.gz]
++[http://directfb.org/downloads/Core/DirectFB-1.2.8.tar.gz]
+ md5=3Dac13d21682aa368df4e177ae5b51ad2d
+ sha256=3Dcbf94eb10e9c305c81b24e298e55c7825df5ab9060d82443f7b9734f760f859d
+=20
+diff --git a/recipes/directfb/directfb_1.2.8.bb b/recipes/directfb/directf=
+b_1.2.8.bb
+index 4d3eb90..bf0b95e 100644
+--- a/recipes/directfb/directfb_1.2.8.bb
++++ b/recipes/directfb/directfb_1.2.8.bb
+@@ -5,7 +5,7 @@ RV =3D "1.2-0"
+ DEPENDS +=3D "sysfsutils"
+=20
+ SRC_URI =3D " \
+-    http://directfb.org/downloads/Core/DirectFB-1.2/DirectFB-${PV}.tar.gz=
+ \
++    http://directfb.org/downloads/Core/DirectFB-${PV}.tar.gz \
+     file://directfb-1.2.x-fix-pkgconfig-cflags.patch;patch=3D1 \
+     file://mkdfiff.patch;patch=3D1 \
+     file://dont-use-linux-config.patch;patch=3D1 \
+
+--------------------------------------------------------------------------=
+----
+Are you an open source citizen? Join us for the Open Source Bridge confere=
+nce!
+Portland, OR, June 17-19. Two days of sessions, one day of unconference: $=
+250.
+Need another reason to go? 24-hour hacker lounge. Register today!
+http://ad.doubleclick.net/clk;215844324;13503038;v?http://opensourcebridge=
+.org
+_______________________________________________
+gumstix-users mailing list
+gumstix-users@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/gumstix-users
+
+
+--------------020903090805060803070604--
+
+--------------ms050303040602040605040807
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -92,18 +164,18 @@ HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
 rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYyMTE0
-MzQ0MlowIwYJKoZIhvcNAQkEMRYEFC3b4euTooywpuqR8j4zufTExI2QMFIGCSqGSIb3DQEJDzFF
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYyMTE2
+MDg1NFowIwYJKoZIhvcNAQkEMRYEFIr0KL4EWYFdpBD6ifnYXNYyBSsmMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAoKEes6G3s/Ie3QzrGeG5yQMHK9DERI4JgKM4LuzcC55xEEQtP
-S4fCfsuuFD/9yzeMF7q38RgmL0ez1rxjgWE8JZf/tyiwVEdko6dNIJXcr3rkaDi2G4evgJn2luFj
-Qoi9JCjSCBcfEytUDPY7mkD48zRPScOCxfT6XhxxxRhUWdun8zXLj1gXKQ4tr0IzYylK6lEVRpyq
-rSQqO+OlQMbFA0qxdFvrTtje3IQqB4iXNFqFhaoDVb9YbF4KeLQs0qobT9rFbZEx2ZehNKEnLDIh
-K017ZkeWttu+nWdiLrwgocqR4m1I41d4E08ALzCgKw23e+piQXAKdRsyrB3EclRjAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQC143W9UW22eXb77qd6NsQXxpi3CkbyqK9UDofs433w1iLQnGgT
+7GKluSWU+/N8czNc3CzN6HP+IItfzicd/YHgE4GquGGmJsX6Dyrn//TsG3qVwJjc+jbVaTnOnAVM
+slQtaQDMDYxwyau89o8gMyBoWtn15wtBOlyB1Jfwgpo9h5qbXf57afZnJ9Gwla6tDWq6AolUfeW3
+IAIVaW9HZMJLzYpAtrw4ajV4nZ1Kd7cTdZF+vlmoVZsMyPMcWZc8ArG8OLxEyquDCgO9e6SCOsSo
+kz8DPITjTRwiw0gfa8U9eme4pjjdMjpu9fSwUvz02g2E1CFCLX341h7poLbjfIOXAAAAAAAA
 
---------------ms040707060603080109060700--
+--------------ms050303040602040605040807--
