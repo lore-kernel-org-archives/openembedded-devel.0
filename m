@@ -1,34 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.46.153] (helo=yw-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MIhyK-0006Oo-Ep
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 13:46:00 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MIhni-0002ty-VU
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 11:35:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 22 Jun 2009 11:35:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 22 Jun 2009 11:35:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 22 Jun 2009 13:04:26 +0200
-Message-ID: <h1nofq$af4$2@ger.gmane.org>
-References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-11-git-send-email-marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <1245664435-30183-11-git-send-email-marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH 034/125] fixes wrong license value usage for GPLv2
+	(envelope-from <acassis@gmail.com>) id 1MIiTZ-0007Fy-K5
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Jun 2009 14:18:17 +0200
+Received: by yw-out-1718.google.com with SMTP id 5so1403075ywr.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jun 2009 05:07:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=JBEiQOWt1HIvgYX3CK7ghC+m5s7EhHMhyVzzMT/gOVw=;
+	b=Nq0n83YizUKosy5CslL2Q7V3v+lF+/7R1CAdIszIE2aezTKaWd2hDc8ecZQt/icysu
+	kdiHcPAgH9JEZPdSbsPwojkMU838upGtpgbHvuQI/d8AykFHjE1DTLhFXbjkw0HNQwPR
+	SufpngzNvaeUxqYThZ3hrxFkHF1Mmr21sdW5M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=KhSvnQLckIZ7CLo9cjQWJLRlJV/zTYJibEXhGAF+aQHzt4oVY6pYTri1cmSHU2s7IV
+	NY0GaBJkqQROA/qQZbE/E+VHaRCKSoO4jLMx1Y5QGr2z7E4ZWISBLboo9SkZFybAtHl0
+	cYx34sv0XfYuHMgZCPh8AJt12p5cBoECfNs7k=
+MIME-Version: 1.0
+Received: by 10.151.153.8 with SMTP id f8mr11171851ybo.343.1245672440297; Mon, 
+	22 Jun 2009 05:07:20 -0700 (PDT)
+In-Reply-To: <h1e5il$snr$1@ger.gmane.org>
+References: <37367b3a0906181219s4fc7f87cic3ca34d596fb6150@mail.gmail.com>
+	<h1e5il$snr$1@ger.gmane.org>
+Date: Mon, 22 Jun 2009 09:07:20 -0300
+Message-ID: <37367b3a0906220507m50134694m48893c9176d6a04e@mail.gmail.com>
+From: Alan Carvalho de Assis <acassis@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH v3] Add basic support for i.MX27ADS board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,75 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 11:46:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 22 Jun 2009 12:18:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 22-06-09 11:53, Marcin Juszkiewicz wrote:
-> From: Otavio Salvador<otavio@ossystems.com.br>
+On 6/18/09, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+<sic>
+>>
+>> Signed-off-by: Alan Carvalho de Assis<acassis@gmail.com>
+>> ---
 >
-> Signed-off-by: Otavio Salvador<otavio@ossystems.com.br>
-> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-> ---
->   classes/xfce.bbclass                  |    2 +-
->   recipes/gnash/gnash-minimal.inc       |    2 +-
->   recipes/gnash/gnash.inc               |    2 +-
->   recipes/linphone/linphone_1.3.99.8.bb |    2 +-
->   4 files changed, 4 insertions(+), 4 deletions(-)
+>>   contrib/angstrom/sort.sh                     |    2 +-
 >
-> diff --git a/classes/xfce.bbclass b/classes/xfce.bbclass
-> index 48e012e..b18313f 100644
-> --- a/classes/xfce.bbclass
-> +++ b/classes/xfce.bbclass
-> @@ -5,7 +5,7 @@
->   # Global class to make it easier to maintain XFCE packages
->
->   HOMEPAGE = "http://www.xfce.org"
-> -LICENSE = "LGPL-2"
-> +LICENSE = "LGPLv2"
->   DEPENDS += "startup-notification"
->
->   XFCE_VERSION = ${PV}
-> diff --git a/recipes/gnash/gnash-minimal.inc b/recipes/gnash/gnash-minimal.inc
-> index a8e5229..5a8a91e 100644
-> --- a/recipes/gnash/gnash-minimal.inc
-> +++ b/recipes/gnash/gnash-minimal.inc
-> @@ -1,6 +1,6 @@
->   DESCRIPTION = "Gnash is a GNU Flash movie player that supports many SWF v7 features"
->   HOMEPAGE = "http://www.gnu.org/software/gnash"
-> -LICENSE = "GPL-2"
-> +LICENSE = "GPLv2"
->
->   DEPENDS = "virtual/libiconv virtual/libintl libtool agg libxml2 zlib boost jpeg pango curl freetype \
->              ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'ffmpeg libmad', d)}"
-> diff --git a/recipes/gnash/gnash.inc b/recipes/gnash/gnash.inc
-> index 3602f6f..ea20524 100644
-> --- a/recipes/gnash/gnash.inc
-> +++ b/recipes/gnash/gnash.inc
-> @@ -1,6 +1,6 @@
->   DESCRIPTION = "Gnash is a GNU Flash movie player that supports many SWF v7 features"
->   HOMEPAGE = "http://www.gnu.org/software/gnash"
-> -LICENSE = "GPL-2"
-> +LICENSE = "GPLv2"
->   DEPENDS = "giflib libtool gtk+ cairo libxml2 libsdl-mixer zlib boost jpeg pango curl freetype \
->              ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'ffmpeg libmad', d)}"
->
-> diff --git a/recipes/linphone/linphone_1.3.99.8.bb b/recipes/linphone/linphone_1.3.99.8.bb
-> index f96bd66..4e9b130 100644
-> --- a/recipes/linphone/linphone_1.3.99.8.bb
-> +++ b/recipes/linphone/linphone_1.3.99.8.bb
-> @@ -1,6 +1,6 @@
->   DESCRIPTION = "SIP-based IP phone (Console edition)"
->   HOMEPAGE = "http://www.linphone.org/?lang=us"
-> -LICENSE = "GPL-2"
-> +LICENSE = "GPLv2"
->   DEPENDS = "libosip2 speex libogg alsa-lib readline"
->   PR = "r0"
+> Awesome! Save's me from having to update it :)
 >
 
+Thanks to "git grep" :-)
 
+BTW, Could someone apply it?
+
+Regards,
+
+Alan
 
 
