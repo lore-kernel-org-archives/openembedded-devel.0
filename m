@@ -1,20 +1,20 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MIgP8-0000Au-6i
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MIgP8-0000B8-M2
 	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 12:05:34 +0200
-Received: (qmail 27692 invoked by uid 813007); 22 Jun 2009 09:54:37 -0000
+Received: (qmail 27751 invoked by uid 813007); 22 Jun 2009 09:54:38 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Jun 2009 09:54:37 -0000
+	by 195.149.226.213 with ESMTPA; 22 Jun 2009 09:54:38 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Jun 2009 11:53:46 +0200
-Message-Id: <1245664435-30183-3-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Mon, 22 Jun 2009 11:53:47 +0200
+Message-Id: <1245664435-30183-4-git-send-email-marcin@juszkiewicz.com.pl>
 X-Mailer: git-send-email 1.6.3.1
 In-Reply-To: <200906041838.05838.marcin@juszkiewicz.com.pl>
 References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-Subject: [STABLE][PATCH 026/125] gettext: 0.17 is GPLv3
+Subject: [STABLE][PATCH 027/125] gmp: 4.2.4 is GPLv3 LGPLv3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,22 +35,18 @@ From: Tom Rini <trini@embeddedalley.com>
 
 Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 ---
- recipes/gettext/gettext_0.17.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/gmp/gmp_4.2.4.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/gettext/gettext_0.17.bb b/recipes/gettext/gettext_0.17.bb
-index 55ffb7d..29cd58a 100644
---- a/recipes/gettext/gettext_0.17.bb
-+++ b/recipes/gettext/gettext_0.17.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "The GNU internationalization library."
- HOMEPAGE = "http://www.gnu.org/software/gettext/gettext.html"
- SECTION = "libs"
--LICENSE = "GPL"
-+LICENSE = "GPLv3"
- PR = "r2"
- DEPENDS = "gettext-native virtual/libiconv ncurses expat"
- PROVIDES = "virtual/libintl"
+diff --git a/recipes/gmp/gmp_4.2.4.bb b/recipes/gmp/gmp_4.2.4.bb
+index b37c266..a7aa712 100644
+--- a/recipes/gmp/gmp_4.2.4.bb
++++ b/recipes/gmp/gmp_4.2.4.bb
+@@ -3,3 +3,4 @@ PR = "r0"
+ SRC_URI_append += "file://sh4-asmfix.patch;patch=1 \
+ 		  "
+ require gmp.inc
++LICENSE = "GPLv3 LGPLv3"
 -- 
 1.6.3.1
 
