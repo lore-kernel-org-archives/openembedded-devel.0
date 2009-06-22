@@ -1,34 +1,34 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MIge5-0001Kv-5G
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 12:21:01 +0200
+	id 1MIgiu-0006ib-NL
+	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 12:26:00 +0200
 Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MIgTT-00088A-3R
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 10:10:03 +0000
+	id 1MIgYI-0008IW-PJ
+	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 10:15:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 22 Jun 2009 10:10:03 +0000
+	Mon, 22 Jun 2009 10:15:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Mon, 22 Jun 2009 10:10:03 +0000
+	Mon, 22 Jun 2009 10:15:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 22 Jun 2009 12:04:14 +0200
-Message-ID: <h1nkuu$vdi$3@ger.gmane.org>
+Date: Mon, 22 Jun 2009 12:04:08 +0200
+Message-ID: <h1nkuo$vdi$2@ger.gmane.org>
 References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-3-git-send-email-marcin@juszkiewicz.com.pl>
+	<1245664435-30183-4-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <1245664435-30183-3-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1245664435-30183-4-git-send-email-marcin@juszkiewicz.com.pl>
 Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH 026/125] gettext: 0.17 is GPLv3
+Subject: Re: [STABLE][PATCH 027/125] gmp: 4.2.4 is GPLv3 LGPLv3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 10:21:01 -0000
+X-List-Received-Date: Mon, 22 Jun 2009 10:26:00 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
@@ -56,22 +56,18 @@ Acked-by: Koen Kooi <koen@openembedded.org>
 
 
 > ---
->   recipes/gettext/gettext_0.17.bb |    2 +-
->   1 files changed, 1 insertions(+), 1 deletions(-)
+>   recipes/gmp/gmp_4.2.4.bb |    1 +
+>   1 files changed, 1 insertions(+), 0 deletions(-)
 >
-> diff --git a/recipes/gettext/gettext_0.17.bb b/recipes/gettext/gettext_0.17.bb
-> index 55ffb7d..29cd58a 100644
-> --- a/recipes/gettext/gettext_0.17.bb
-> +++ b/recipes/gettext/gettext_0.17.bb
-> @@ -1,7 +1,7 @@
->   DESCRIPTION = "The GNU internationalization library."
->   HOMEPAGE = "http://www.gnu.org/software/gettext/gettext.html"
->   SECTION = "libs"
-> -LICENSE = "GPL"
-> +LICENSE = "GPLv3"
->   PR = "r2"
->   DEPENDS = "gettext-native virtual/libiconv ncurses expat"
->   PROVIDES = "virtual/libintl"
+> diff --git a/recipes/gmp/gmp_4.2.4.bb b/recipes/gmp/gmp_4.2.4.bb
+> index b37c266..a7aa712 100644
+> --- a/recipes/gmp/gmp_4.2.4.bb
+> +++ b/recipes/gmp/gmp_4.2.4.bb
+> @@ -3,3 +3,4 @@ PR = "r0"
+>   SRC_URI_append += "file://sh4-asmfix.patch;patch=1 \
+>   		  "
+>   require gmp.inc
+> +LICENSE = "GPLv3 LGPLv3"
 
 
 
