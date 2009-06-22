@@ -1,34 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MIha8-0008Qj-Ci
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 13:21:00 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MIhPW-0001yA-AG
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 11:10:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 22 Jun 2009 11:10:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 22 Jun 2009 11:10:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 22 Jun 2009 13:05:00 +0200
-Message-ID: <h1nogs$af4$8@ger.gmane.org>
-References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-5-git-send-email-marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <1245664435-30183-5-git-send-email-marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH 028/125] gdb: 6.8 is GPLv3
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MIhcJ-0005OA-Nw
+	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 13:23:15 +0200
+Received: (qmail 26793 invoked by uid 813007); 22 Jun 2009 11:12:18 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Jun 2009 11:12:18 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Jun 2009 13:11:36 +0200
+Message-Id: <1245669099-30990-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <200906221206.37496.marcin@juszkiewicz.com.pl>
+References: <200906221206.37496.marcin@juszkiewicz.com.pl>
+Cc: Martin Dietze <martin@the-little-red-haired-girl.org>
+Subject: [STABLE][PATCH 079/125] Fixed broken download URL for elvis
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,32 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 11:21:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Jun 2009 11:23:16 -0000
 
-On 22-06-09 11:53, Marcin Juszkiewicz wrote:
-> From: Tom Rini<trini@embeddedalley.com>
->
->
-> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+From: Martin Dietze <martin@the-little-red-haired-girl.org>
 
-Acked-by: Koen Kooi <koen@openembedded.org>
 
-> ---
->   recipes/gdb/gdb_6.8.bb |    1 +
->   1 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/gdb/gdb_6.8.bb b/recipes/gdb/gdb_6.8.bb
-> index a969651..afa4286 100644
-> --- a/recipes/gdb/gdb_6.8.bb
-> +++ b/recipes/gdb/gdb_6.8.bb
-> @@ -1,4 +1,5 @@
->   require gdb.inc
-> +LICENSE = "GPLv3"
->
->   SRC_URI += "file://gcc-4.3-build-error.patch;patch=1;pnum=0"
->
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+---
+ recipes/elvis/elvis_2.2.0.bb |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/elvis/elvis_2.2.0.bb b/recipes/elvis/elvis_2.2.0.bb
+index c0f9262..f038c6b 100644
+--- a/recipes/elvis/elvis_2.2.0.bb
++++ b/recipes/elvis/elvis_2.2.0.bb
+@@ -4,8 +4,7 @@ PRIORITY = "optional"
+ LICENSE = "Perl Clarified Artistic License"
+ DEPENDS = "ncurses"
+ 
+-#SRC_URI = "ftp://ftp.cs.pdx.edu/pub/elvis/elvis-2.2_0.tar.gz"
+-SRC_URI = "http://www.fh-wedel.de/pub/elvis/elvis-2.2_0.tar.gz"
++SRC_URI = "ftp://ftp.cs.pdx.edu/pub/elvis/elvis-2.2_0.tar.gz"
+ S = "${WORKDIR}/elvis-2.2_0"
+ 
+ CFLAGS_prepend = " -I. -Iosunix -L${STAGING_LIBDIR} "
+-- 
+1.6.3.1
+
 
 
 
