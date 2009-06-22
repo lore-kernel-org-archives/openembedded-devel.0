@@ -1,21 +1,34 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MIgPB-0000Bn-Cf
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 12:05:37 +0200
-Received: (qmail 28011 invoked by uid 813007); 22 Jun 2009 09:54:41 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO localhost.localdomain)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Jun 2009 09:54:41 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Jun 2009 11:53:55 +0200
-Message-Id: <1245664435-30183-12-git-send-email-marcin@juszkiewicz.com.pl>
-X-Mailer: git-send-email 1.6.3.1
-In-Reply-To: <200906041838.05838.marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MIgZD-0000n4-S0
+	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 12:15:59 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MIgOc-0007wO-Fd
+	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 10:05:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 22 Jun 2009 10:05:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 22 Jun 2009 10:05:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 22 Jun 2009 12:04:20 +0200
+Message-ID: <h1nkv4$vdi$4@ger.gmane.org>
 References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Subject: [STABLE][PATCH 035/125] atd: fix spelling of LICENSE
+	<1245664435-30183-2-git-send-email-marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
+In-Reply-To: <1245664435-30183-2-git-send-email-marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [STABLE][PATCH 025/125] alsa-lib: This is LGPL not GPL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,54 +42,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 10:05:37 -0000
+X-List-Received-Date: Mon, 22 Jun 2009 10:16:00 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+On 22-06-09 11:53, Marcin Juszkiewicz wrote:
+> From: Tom Rini<trini@embeddedalley.com>
+>
+>
+> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+
+Acked-by: Koen Kooi <koen@openembedded.org>
 
 
-Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
----
- recipes/atd/atd_0.70.bb |    4 ++--
- recipes/atd/atd_0.80.bb |    4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes/atd/atd_0.70.bb b/recipes/atd/atd_0.70.bb
-index 9862fac..7f2193d 100644
---- a/recipes/atd/atd_0.70.bb
-+++ b/recipes/atd/atd_0.70.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "Lightweight At Daemon"
- SECTION = "base"
--LICENSE = "GPLV2"
-+LICENSE = "GPLv2"
- RCONFLICTS = "at"
- RREPLACES = "at"
- 
--PR = "r4"
-+PR = "r5"
- 
- SRC_URI = "${HANDHELDS_CVS};module=apps/atd;tag=ATD-0_70 \
- 			file://atd-startup.patch;patch=1;pnum=0"
-diff --git a/recipes/atd/atd_0.80.bb b/recipes/atd/atd_0.80.bb
-index f3adbd7..23cf7c4 100644
---- a/recipes/atd/atd_0.80.bb
-+++ b/recipes/atd/atd_0.80.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "Lightweight At Daemon"
- SECTION = "base"
--LICENSE = "GPLV2"
-+LICENSE = "GPLv2"
- RCONFLICTS = "at"
- RREPLACES = "at"
- 
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "http://projects.linuxtogo.org/frs/download.php/222/${P}.tar.gz"
- 
--- 
-1.6.3.1
-
+> ---
+>   recipes/alsa/alsa-lib_1.0.11.bb |    2 +-
+>   recipes/alsa/alsa-lib_1.0.13.bb |    2 +-
+>   recipes/alsa/alsa-lib_1.0.14.bb |    2 +-
+>   recipes/alsa/alsa-lib_1.0.15.bb |    2 +-
+>   recipes/alsa/alsa-lib_1.0.17.bb |    2 +-
+>   recipes/alsa/alsa-lib_1.0.18.bb |    2 +-
+>   6 files changed, 6 insertions(+), 6 deletions(-)
+>
+> diff --git a/recipes/alsa/alsa-lib_1.0.11.bb b/recipes/alsa/alsa-lib_1.0.11.bb
+> index b9169e6..4d7c2e8 100644
+> --- a/recipes/alsa/alsa-lib_1.0.11.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.11.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Alsa sound library"
+>   HOMEPAGE = "http://www.alsa-project.org"
+>   SECTION = "libs/multimedia"
+> -LICENSE = "GPL"
+> +LICENSE = "LGPL"
+>   PR = "r4"
+>
+>   # configure.in sets -D__arm__ on the command line for any arm system
+> diff --git a/recipes/alsa/alsa-lib_1.0.13.bb b/recipes/alsa/alsa-lib_1.0.13.bb
+> index 860ef11..03ab74f 100644
+> --- a/recipes/alsa/alsa-lib_1.0.13.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.13.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Alsa sound library"
+>   HOMEPAGE = "http://www.alsa-project.org"
+>   SECTION = "libs/multimedia"
+> -LICENSE = "GPL"
+> +LICENSE = "LGPL"
+>   PR = "r4"
+>
+>   # configure.in sets -D__arm__ on the command line for any arm system
+> diff --git a/recipes/alsa/alsa-lib_1.0.14.bb b/recipes/alsa/alsa-lib_1.0.14.bb
+> index ba46342..284ddd9 100644
+> --- a/recipes/alsa/alsa-lib_1.0.14.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.14.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Alsa sound library"
+>   HOMEPAGE = "http://www.alsa-project.org"
+>   SECTION = "libs/multimedia"
+> -LICENSE = "GPL"
+> +LICENSE = "LGPL"
+>
+>   PR = "r2"
+>
+> diff --git a/recipes/alsa/alsa-lib_1.0.15.bb b/recipes/alsa/alsa-lib_1.0.15.bb
+> index 4cf3938..b502adb 100644
+> --- a/recipes/alsa/alsa-lib_1.0.15.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.15.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Alsa sound library"
+>   HOMEPAGE = "http://www.alsa-project.org"
+>   SECTION = "libs/multimedia"
+> -LICENSE = "GPL"
+> +LICENSE = "LGPL"
+>   PR = "r1"
+>
+>   # configure.in sets -D__arm__ on the command line for any arm system
+> diff --git a/recipes/alsa/alsa-lib_1.0.17.bb b/recipes/alsa/alsa-lib_1.0.17.bb
+> index f4ae21b..eff114d 100644
+> --- a/recipes/alsa/alsa-lib_1.0.17.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.17.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Alsa sound library"
+>   HOMEPAGE = "http://www.alsa-project.org"
+>   SECTION = "libs/multimedia"
+> -LICENSE = "GPL"
+> +LICENSE = "LGPL"
+>
+>   # configure.in sets -D__arm__ on the command line for any arm system
+>   # (not just those with the ARM instruction set), this should be removed,
+> diff --git a/recipes/alsa/alsa-lib_1.0.18.bb b/recipes/alsa/alsa-lib_1.0.18.bb
+> index f4ae21b..eff114d 100644
+> --- a/recipes/alsa/alsa-lib_1.0.18.bb
+> +++ b/recipes/alsa/alsa-lib_1.0.18.bb
+> @@ -1,7 +1,7 @@
+>   DESCRIPTION = "Alsa sound library"
+>   HOMEPAGE = "http://www.alsa-project.org"
+>   SECTION = "libs/multimedia"
+> -LICENSE = "GPL"
+> +LICENSE = "LGPL"
+>
+>   # configure.in sets -D__arm__ on the command line for any arm system
+>   # (not just those with the ARM instruction set), this should be removed,
 
 
 
