@@ -1,23 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MIprN-00021i-HH
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 22:11:22 +0200
-Received: (qmail 12692 invoked by uid 813007); 22 Jun 2009 20:00:22 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Jun 2009 20:00:22 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Jun 2009 21:59:44 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.30-00002-g9396b7b; KDE/4.2.4; x86_64; ; )
-References: <37367b3a0906181219s4fc7f87cic3ca34d596fb6150@mail.gmail.com>
-	<h1e5il$snr$1@ger.gmane.org>
-	<37367b3a0906220507m50134694m48893c9176d6a04e@mail.gmail.com>
-In-Reply-To: <37367b3a0906220507m50134694m48893c9176d6a04e@mail.gmail.com>
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1MIreo-0000aL-W8
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jun 2009 00:06:31 +0200
+Received: from [95.89.44.245] (helo=[192.168.0.101])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1MIrcH-0005xL-DF
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jun 2009 00:03:53 +0200
+Message-ID: <4A3FFDD1.4030107@kernelconcepts.de>
+Date: Mon, 22 Jun 2009 23:55:29 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
-Message-Id: <200906222159.45616.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH v3] Add basic support for i.MX27ADS board
+To: openembedded-devel@lists.openembedded.org
+References: <4A3E4502.5000908@balister.org>
+In-Reply-To: <4A3E4502.5000908@balister.org>
+X-Enigmail-Version: 0.95.7
+Subject: Re: Linuxtag booth setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,24 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 20:11:24 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 22 Jun 2009 22:06:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=C5=82ek, 22 czerwca 2009 o 14:07:20 Alan Carvalho de Assis=20
-napisa=C5=82(a):
-> BTW, Could someone apply it?
+Hi,
 
-pushed
+missed you again via irc. I hope you had a good flight.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Philip Balister schrieb:
+> What are the plans for setting up the OE booth at Linuxtag? I'm arriving
+> in Berlin Tuesday afternoon and can help out if needed. Mind you, I
+> might be sort of incoherent, but it will help me stay awake.
+
+I guess there is not much we can do apart from visiting the booth, picking up
+the exhibitor passes and maybe taping a poster to some wall.
+
+I have no idea when I'll make it there but the plan is to be there early in the
+afternoon. Maybe drop me a mail when you have the chance to do so, I'll read
+mail be fore I leave for ICC.
+If we don't meet tomorrow we should try to meet outside on Wednesday morning. I
+guess I should write another email about this to all of us... need some sleep
+before doing this.
+If we somehow miss each other Wednesday please call me to get in. +49 176 63311063
+
+Greetings
+
+Florian
 
 
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
