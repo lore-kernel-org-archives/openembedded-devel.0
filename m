@@ -1,45 +1,20 @@
-Received: from [128.222.32.20] (helo=mexforward.lss.emc.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Lin_Lynn@emc.com>) id 1MIa2a-0003DT-I6
-	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 05:17:52 +0200
-Received: from hop04-l1d11-si01.isus.emc.com (HOP04-L1D11-SI01.isus.emc.com
-	[10.254.111.54])
-	by mexforward.lss.emc.com (Switch-3.3.2/Switch-3.1.7) with ESMTP id
-	n5M36t0m004529
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Sun, 21 Jun 2009 23:06:55 -0400
-Received: from mailhub.lss.emc.com (numailhub.lss.emc.com [10.254.144.16]) by
-	hop04-l1d11-si01.isus.emc.com (Tablus Interceptor) for
-	<openembedded-devel@openembedded.org>;
-	Sun, 21 Jun 2009 23:06:48 -0400
-Received: from corpussmtp2.corp.emc.com (corpussmtp2.corp.emc.com
-	[128.221.14.146])
-	by mailhub.lss.emc.com (Switch-3.3.2/Switch-3.3.2) with ESMTP id
-	n5M36mLb023981 for <openembedded-devel@openembedded.org>;
-	Sun, 21 Jun 2009 23:06:48 -0400
-Received: from CORPUSMX100C.corp.emc.com ([128.222.76.57]) by
-	corpussmtp2.corp.emc.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 21 Jun 2009 23:06:47 -0400
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Sun, 21 Jun 2009 23:06:45 -0400
-Message-ID: <065E68EB87448440A3E75B4DBB5E871C635A3B@CORPUSMX100C.corp.emc.com>
-In-Reply-To: <20090621184902.GY15477@smtp.west.cox.net>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH] update IMAGE_ROOTFS variable to
-	fixinconsistent	IMAGE_ROOTFS variable content in apt-native
-	package
-Thread-Index: AcnyoWhOL+w7iKYmRoa70wkbZnR0RAAROolw
-References: <065E68EB87448440A3E75B4DBB5E871C26C83A@CORPUSMX100C.corp.emc.com>
-	<20090621184902.GY15477@smtp.west.cox.net>
-From: <Lin_Lynn@emc.com>
-To: <openembedded-devel@openembedded.org>
-X-OriginalArrivalTime: 22 Jun 2009 03:06:47.0827 (UTC)
-	FILETIME=[7B16EE30:01C9F2E6]
-X-EMM-EM: Active
-Subject: Re: [PATCH] update IMAGE_ROOTFS variable to fixinconsistent	IMAGE_ROOTFS variable content in apt-native package
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MIgP8-0000Av-6r
+	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 12:05:34 +0200
+Received: (qmail 27663 invoked by uid 813007); 22 Jun 2009 09:54:37 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Jun 2009 09:54:37 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 22 Jun 2009 11:53:45 +0200
+Message-Id: <1245664435-30183-2-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <200906041838.05838.marcin@juszkiewicz.com.pl>
+References: <200906041838.05838.marcin@juszkiewicz.com.pl>
+Subject: [STABLE][PATCH 025/125] alsa-lib: This is LGPL not GPL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,55 +28,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 03:17:52 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 22 Jun 2009 10:05:34 -0000
+
+From: Tom Rini <trini@embeddedalley.com>
 
 
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+---
+ recipes/alsa/alsa-lib_1.0.11.bb |    2 +-
+ recipes/alsa/alsa-lib_1.0.13.bb |    2 +-
+ recipes/alsa/alsa-lib_1.0.14.bb |    2 +-
+ recipes/alsa/alsa-lib_1.0.15.bb |    2 +-
+ recipes/alsa/alsa-lib_1.0.17.bb |    2 +-
+ recipes/alsa/alsa-lib_1.0.18.bb |    2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
------Original Message-----
-From: openembedded-devel-bounces@openembedded.org
-[mailto:openembedded-devel-bounces@openembedded.org] On Behalf Of Tom
-Rini
-Sent: Monday, June 22, 2009 2:49 AM
-To: openembedded-devel@openembedded.org
-Subject: Re: [oe] [PATCH] update IMAGE_ROOTFS variable to
-fixinconsistent IMAGE_ROOTFS variable content in apt-native package
+diff --git a/recipes/alsa/alsa-lib_1.0.11.bb b/recipes/alsa/alsa-lib_1.0.11.bb
+index b9169e6..4d7c2e8 100644
+--- a/recipes/alsa/alsa-lib_1.0.11.bb
++++ b/recipes/alsa/alsa-lib_1.0.11.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Alsa sound library"
+ HOMEPAGE = "http://www.alsa-project.org"
+ SECTION = "libs/multimedia"
+-LICENSE = "GPL"
++LICENSE = "LGPL"
+ PR = "r4"
+ 
+ # configure.in sets -D__arm__ on the command line for any arm system
+diff --git a/recipes/alsa/alsa-lib_1.0.13.bb b/recipes/alsa/alsa-lib_1.0.13.bb
+index 860ef11..03ab74f 100644
+--- a/recipes/alsa/alsa-lib_1.0.13.bb
++++ b/recipes/alsa/alsa-lib_1.0.13.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Alsa sound library"
+ HOMEPAGE = "http://www.alsa-project.org"
+ SECTION = "libs/multimedia"
+-LICENSE = "GPL"
++LICENSE = "LGPL"
+ PR = "r4"
+ 
+ # configure.in sets -D__arm__ on the command line for any arm system
+diff --git a/recipes/alsa/alsa-lib_1.0.14.bb b/recipes/alsa/alsa-lib_1.0.14.bb
+index ba46342..284ddd9 100644
+--- a/recipes/alsa/alsa-lib_1.0.14.bb
++++ b/recipes/alsa/alsa-lib_1.0.14.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Alsa sound library"
+ HOMEPAGE = "http://www.alsa-project.org"
+ SECTION = "libs/multimedia"
+-LICENSE = "GPL"
++LICENSE = "LGPL"
+ 
+ PR = "r2"
+ 
+diff --git a/recipes/alsa/alsa-lib_1.0.15.bb b/recipes/alsa/alsa-lib_1.0.15.bb
+index 4cf3938..b502adb 100644
+--- a/recipes/alsa/alsa-lib_1.0.15.bb
++++ b/recipes/alsa/alsa-lib_1.0.15.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Alsa sound library"
+ HOMEPAGE = "http://www.alsa-project.org"
+ SECTION = "libs/multimedia"
+-LICENSE = "GPL"
++LICENSE = "LGPL"
+ PR = "r1"
+ 
+ # configure.in sets -D__arm__ on the command line for any arm system
+diff --git a/recipes/alsa/alsa-lib_1.0.17.bb b/recipes/alsa/alsa-lib_1.0.17.bb
+index f4ae21b..eff114d 100644
+--- a/recipes/alsa/alsa-lib_1.0.17.bb
++++ b/recipes/alsa/alsa-lib_1.0.17.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Alsa sound library"
+ HOMEPAGE = "http://www.alsa-project.org"
+ SECTION = "libs/multimedia"
+-LICENSE = "GPL"
++LICENSE = "LGPL"
+ 
+ # configure.in sets -D__arm__ on the command line for any arm system
+ # (not just those with the ARM instruction set), this should be removed,
+diff --git a/recipes/alsa/alsa-lib_1.0.18.bb b/recipes/alsa/alsa-lib_1.0.18.bb
+index f4ae21b..eff114d 100644
+--- a/recipes/alsa/alsa-lib_1.0.18.bb
++++ b/recipes/alsa/alsa-lib_1.0.18.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Alsa sound library"
+ HOMEPAGE = "http://www.alsa-project.org"
+ SECTION = "libs/multimedia"
+-LICENSE = "GPL"
++LICENSE = "LGPL"
+ 
+ # configure.in sets -D__arm__ on the command line for any arm system
+ # (not just those with the ARM instruction set), this should be removed,
+-- 
+1.6.3.1
 
-On Sun, Jun 21, 2009 at 06:32:32AM -0400, Lin_Lynn@emc.com wrote:
 
-> From 5f5d0a311692a114360b7bd3037534a5ec839f33 Mon Sep 17 00:00:00 2001
-> From: Lynn Lin <Lin_Lynn@emc.com>
-> Date: Sun, 21 Jun 2009 18:15:06 +0800
-> Subject: [PATCH] update IMAGE_ROOTFS variable to fix inconsistent
-IMAGE_ROOTFS variable content in apt-native package
->
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=3D2343808f7=
-3
-86cbd4c7b43f1b24e65e173f5ddf15
-> This commit change IMAGE_ROOTFS from "${TMPDIR}/rootfs" to
-"${TMPDIR}/rootfs/${PN},so it cause
-> that it expand IMAGE_ROOTFS to ${TMPDIR}/rootfs/apt-native in
-apt.conf.sample,however rootfs_deb.class use
-> apt.conf.sample to generate apt-rootfs.conf ,here IMAGE_ROOTFS is
-different from that in apt-native package
-
-Acked-by: Tom Rini <trini@embeddedalley.com>
-
-Tangentally, have you checked the apt.conf that's used for any other
-variables we should be setting or that are wrong?  Thanks!
-
-I don't find any more variables need to be reset in apt.conf
-
---=20
-Tom Rini
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
