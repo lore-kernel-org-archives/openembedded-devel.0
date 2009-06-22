@@ -1,23 +1,22 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MIpbg-0001Tj-Rk
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Jun 2009 21:55:11 +0200
-Received: from 79-71-239-25.dynamic.dsl.as9105.com ([79.71.239.25]
-	helo=[192.168.2.175])
-	by crown.reciva.com with esmtpsa (TLS-1.0:RSA_ARCFOUR_MD5:16)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MIpR3-0004bb-Kh
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Jun 2009 20:44:09 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MIpgH-0001bp-SG
+	for openembedded-devel@openembedded.org; Mon, 22 Jun 2009 21:59:54 +0200
+Received: (qmail 20258 invoked by uid 813007); 22 Jun 2009 19:48:54 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Jun 2009 19:48:54 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1245698893.7001.18.camel@utx.utx.cz>
-References: <1245698893.7001.18.camel@utx.utx.cz>
-Date: Mon, 22 Jun 2009 20:37:40 +0100
-Message-Id: <1245699460.3521.17.camel@kc.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.10.1 
-Subject: Re: Is RDEPENDS = "foo" supported?
+Date: Mon, 22 Jun 2009 21:47:54 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.30-00002-g9396b7b; KDE/4.2.4; x86_64; ; )
+References: <1245692685-21173-1-git-send-email-denis@denix.org>
+	<h1oimu$5gd$2@ger.gmane.org>
+In-Reply-To: <h1oimu$5gd$2@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200906222148.14411.marcin@juszkiewicz.com.pl>
+Subject: Re: RFC: [PATCH] /etc/profile: stricter root PATH - require absolute pathname for bins in cwd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,40 +30,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 19:55:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 22 Jun 2009 19:59:55 -0000
+X-Groupsio-MsgNum: 11525
+Content-Type: multipart/signed; boundary="nextPart2060085.DZe5vsQNzJ";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-06-22 at 21:28 +0200, Stanislav Brabec wrote:
-> Is RDEPENDS = "foo" allowed in recipes? If yes, then it does not work.
+--nextPart2060085.DZe5vsQNzJ
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-It is allowed, and in at least some situations it will even work, but in
-the vast majority of cases it is not the right thing to do.  There are
-two problems with it: both of them have been discussed here on the list
-quite recently, but to recap:
+Dnia poniedzia=C5=82ek, 22 czerwca 2009 o 20:31:58 Koen Kooi napisa=C5=82(a=
+):
+> > Having current directory (either '.' or empty string) in PATH is
+> > considered dangerous for root.
+> >
+> > Signed-off-by: Denys Dmytriyenko<denis@denix.org>
+>
+> Acked-by: Koen Kooi <koen@openembedded.org>
 
-1) ${RDEPENDS} will apply to all the output subpackages, i.e. ${PN}-dev,
-${PN}-doc and various ${PN}-locale-* things.  In most cases, ${PN} is
-the only one that you actually want to receive the dependency.
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-2) ${RDEPENDS} will be overridden by ${RDEPENDS_${PN}} if the latter is
-set.  This is sometimes done by .bbclass files and the like, in which
-case any dependencies you set in ${RDEPENDS} will be ineffective.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-> I have been searching for a reason, why my image does not set keymap.
-> Reason: console-tools were missing. Replacing RDEPENDS by RDEPENDS_${PN}
-> in the keymaps recipe fixed it.
+--nextPart2060085.DZe5vsQNzJ
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-In this particular case, update-rc.d.bbclass sets RDEPENDS_${PN} and
-hence (2) above will apply.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
-> Does it mean, that this and another 622 recipes use invalid syntax of
-> RDEPENDS or is it a bug in the toolchain?
+iEYEABECAAYFAko/3/oACgkQeQ6MlGH/2qtXMwCfbWRwSujt3jDST7M5caIyCzFa
+VWEAnj8uguadPoWmaE1pAszgE22Ke8IQ
+=I6XF
+-----END PGP SIGNATURE-----
 
-It's probably true that almost all of those 623 recipes should be using
-RDEPENDS_${PN} or something similar instead of plain RDEPENDS.
-
-p.
-
-
-
+--nextPart2060085.DZe5vsQNzJ--
