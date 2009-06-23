@@ -1,26 +1,26 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MIvcQ-0003Dj-0X
+	(envelope-from <denis@denix.org>) id 1MIvcW-0003Ds-Gj
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 04:20:25 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173019.mailsrvcs.net
+	Tue, 23 Jun 2009 04:20:27 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KLO004P75ZEEER1@vms173019.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KLO005FM5Z1MV32@vms173011.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	22 Jun 2009 21:09:15 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B43ED14AF5F; Mon,
-	22 Jun 2009 22:09:14 -0400 (EDT)
-Date: Mon, 22 Jun 2009 22:09:14 -0400
+	22 Jun 2009 21:09:01 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id ECD5A14AF5F; Mon,
+	22 Jun 2009 22:09:00 -0400 (EDT)
+Date: Mon, 22 Jun 2009 22:09:00 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090623020914.GO14716@denix.org>
+Message-id: <20090623020900.GN14716@denix.org>
 References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-12-git-send-email-marcin@juszkiewicz.com.pl>
-	<h1noff$af4$1@ger.gmane.org>
+	<1245664435-30183-11-git-send-email-marcin@juszkiewicz.com.pl>
+	<h1nofq$af4$2@ger.gmane.org>
 MIME-version: 1.0
-In-reply-to: <h1noff$af4$1@ger.gmane.org>
+In-reply-to: <h1nofq$af4$2@ger.gmane.org>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [STABLE][PATCH 035/125] atd: fix spelling of LICENSE
+Subject: Re: [STABLE][PATCH 034/125] fixes wrong license value usage	for GPLv2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,11 +38,11 @@ X-List-Received-Date: Tue, 23 Jun 2009 02:20:34 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Jun 22, 2009 at 01:04:15PM +0200, Koen Kooi wrote:
+On Mon, Jun 22, 2009 at 01:04:26PM +0200, Koen Kooi wrote:
 > On 22-06-09 11:53, Marcin Juszkiewicz wrote:
->> From: Rolf Leggewie<oe-devel@rolf.leggewie.biz>
+>> From: Otavio Salvador<otavio@ossystems.com.br>
 >>
->>
+>> Signed-off-by: Otavio Salvador<otavio@ossystems.com.br>
 >> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
 >
 > Acked-by: Koen Kooi <koen@openembedded.org>
@@ -50,44 +50,68 @@ On Mon, Jun 22, 2009 at 01:04:15PM +0200, Koen Kooi wrote:
 Acked-by: Denys Dmytriyenko <denis@denix.org>
 
 >> ---
->>   recipes/atd/atd_0.70.bb |    4 ++--
->>   recipes/atd/atd_0.80.bb |    4 ++--
->>   2 files changed, 4 insertions(+), 4 deletions(-)
+>>   classes/xfce.bbclass                  |    2 +-
+>>   recipes/gnash/gnash-minimal.inc       |    2 +-
+>>   recipes/gnash/gnash.inc               |    2 +-
+>>   recipes/linphone/linphone_1.3.99.8.bb |    2 +-
+>>   4 files changed, 4 insertions(+), 4 deletions(-)
 >>
->> diff --git a/recipes/atd/atd_0.70.bb b/recipes/atd/atd_0.70.bb
->> index 9862fac..7f2193d 100644
->> --- a/recipes/atd/atd_0.70.bb
->> +++ b/recipes/atd/atd_0.70.bb
->> @@ -1,10 +1,10 @@
->>   DESCRIPTION = "Lightweight At Daemon"
->>   SECTION = "base"
->> -LICENSE = "GPLV2"
+>> diff --git a/classes/xfce.bbclass b/classes/xfce.bbclass
+>> index 48e012e..b18313f 100644
+>> --- a/classes/xfce.bbclass
+>> +++ b/classes/xfce.bbclass
+>> @@ -5,7 +5,7 @@
+>>   # Global class to make it easier to maintain XFCE packages
+>>
+>>   HOMEPAGE = "http://www.xfce.org"
+>> -LICENSE = "LGPL-2"
+>> +LICENSE = "LGPLv2"
+>>   DEPENDS += "startup-notification"
+>>
+>>   XFCE_VERSION = ${PV}
+>> diff --git a/recipes/gnash/gnash-minimal.inc 
+>> b/recipes/gnash/gnash-minimal.inc
+>> index a8e5229..5a8a91e 100644
+>> --- a/recipes/gnash/gnash-minimal.inc
+>> +++ b/recipes/gnash/gnash-minimal.inc
+>> @@ -1,6 +1,6 @@
+>>   DESCRIPTION = "Gnash is a GNU Flash movie player that supports many SWF 
+>> v7 features"
+>>   HOMEPAGE = "http://www.gnu.org/software/gnash"
+>> -LICENSE = "GPL-2"
 >> +LICENSE = "GPLv2"
->>   RCONFLICTS = "at"
->>   RREPLACES = "at"
 >>
->> -PR = "r4"
->> +PR = "r5"
->>
->>   SRC_URI = "${HANDHELDS_CVS};module=apps/atd;tag=ATD-0_70 \
->>   			file://atd-startup.patch;patch=1;pnum=0"
->> diff --git a/recipes/atd/atd_0.80.bb b/recipes/atd/atd_0.80.bb
->> index f3adbd7..23cf7c4 100644
->> --- a/recipes/atd/atd_0.80.bb
->> +++ b/recipes/atd/atd_0.80.bb
->> @@ -1,10 +1,10 @@
->>   DESCRIPTION = "Lightweight At Daemon"
->>   SECTION = "base"
->> -LICENSE = "GPLV2"
+>>   DEPENDS = "virtual/libiconv virtual/libintl libtool agg libxml2 zlib 
+>> boost jpeg pango curl freetype \
+>>              ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'ffmpeg 
+>> libmad', d)}"
+>> diff --git a/recipes/gnash/gnash.inc b/recipes/gnash/gnash.inc
+>> index 3602f6f..ea20524 100644
+>> --- a/recipes/gnash/gnash.inc
+>> +++ b/recipes/gnash/gnash.inc
+>> @@ -1,6 +1,6 @@
+>>   DESCRIPTION = "Gnash is a GNU Flash movie player that supports many SWF 
+>> v7 features"
+>>   HOMEPAGE = "http://www.gnu.org/software/gnash"
+>> -LICENSE = "GPL-2"
 >> +LICENSE = "GPLv2"
->>   RCONFLICTS = "at"
->>   RREPLACES = "at"
+>>   DEPENDS = "giflib libtool gtk+ cairo libxml2 libsdl-mixer zlib boost 
+>> jpeg pango curl freetype \
+>>              ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'ffmpeg 
+>> libmad', d)}"
 >>
->> -PR = "r0"
->> +PR = "r1"
->>
->>   SRC_URI = 
->> "http://projects.linuxtogo.org/frs/download.php/222/${P}.tar.gz"
+>> diff --git a/recipes/linphone/linphone_1.3.99.8.bb 
+>> b/recipes/linphone/linphone_1.3.99.8.bb
+>> index f96bd66..4e9b130 100644
+>> --- a/recipes/linphone/linphone_1.3.99.8.bb
+>> +++ b/recipes/linphone/linphone_1.3.99.8.bb
+>> @@ -1,6 +1,6 @@
+>>   DESCRIPTION = "SIP-based IP phone (Console edition)"
+>>   HOMEPAGE = "http://www.linphone.org/?lang=us"
+>> -LICENSE = "GPL-2"
+>> +LICENSE = "GPLv2"
+>>   DEPENDS = "libosip2 speex libogg alsa-lib readline"
+>>   PR = "r0"
 >>
 >
 >
