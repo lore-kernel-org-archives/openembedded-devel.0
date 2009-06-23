@@ -1,26 +1,26 @@
 Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MIvZu-00038u-Ue
+	(envelope-from <denis@denix.org>) id 1MIvaP-0003A4-86
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 04:17:45 +0200
+	Tue, 23 Jun 2009 04:18:15 +0200
 Received: from gandalf.denix.org ([71.251.63.232]) by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KLO0042X5UXS5D1@vms173003.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KLO00J1R5VYOF52@vms173003.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	22 Jun 2009 21:06:33 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2645614AF5F; Mon,
-	22 Jun 2009 22:06:33 -0400 (EDT)
-Date: Mon, 22 Jun 2009 22:06:33 -0400
+	22 Jun 2009 21:07:10 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id F212814AF5F; Mon,
+	22 Jun 2009 22:07:09 -0400 (EDT)
+Date: Mon, 22 Jun 2009 22:07:09 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090623020633.GF14716@denix.org>
+Message-id: <20090623020709.GH14716@denix.org>
 References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-3-git-send-email-marcin@juszkiewicz.com.pl>
-	<h1nkuu$vdi$3@ger.gmane.org>
+	<1245664435-30183-5-git-send-email-marcin@juszkiewicz.com.pl>
+	<h1nogs$af4$8@ger.gmane.org>
 MIME-version: 1.0
-In-reply-to: <h1nkuu$vdi$3@ger.gmane.org>
+In-reply-to: <h1nogs$af4$8@ger.gmane.org>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [STABLE][PATCH 026/125] gettext: 0.17 is GPLv3
+Subject: Re: [STABLE][PATCH 028/125] gdb: 6.8 is GPLv3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,11 +34,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 02:17:49 -0000
+X-List-Received-Date: Tue, 23 Jun 2009 02:18:20 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Jun 22, 2009 at 12:04:14PM +0200, Koen Kooi wrote:
+On Mon, Jun 22, 2009 at 01:05:00PM +0200, Koen Kooi wrote:
 > On 22-06-09 11:53, Marcin Juszkiewicz wrote:
 >> From: Tom Rini<trini@embeddedalley.com>
 >>
@@ -50,23 +50,19 @@ On Mon, Jun 22, 2009 at 12:04:14PM +0200, Koen Kooi wrote:
 Acked-by: Denys Dmytriyenko <denis@denix.org>
 
 >> ---
->>   recipes/gettext/gettext_0.17.bb |    2 +-
->>   1 files changed, 1 insertions(+), 1 deletions(-)
+>>   recipes/gdb/gdb_6.8.bb |    1 +
+>>   1 files changed, 1 insertions(+), 0 deletions(-)
 >>
->> diff --git a/recipes/gettext/gettext_0.17.bb 
->> b/recipes/gettext/gettext_0.17.bb
->> index 55ffb7d..29cd58a 100644
->> --- a/recipes/gettext/gettext_0.17.bb
->> +++ b/recipes/gettext/gettext_0.17.bb
->> @@ -1,7 +1,7 @@
->>   DESCRIPTION = "The GNU internationalization library."
->>   HOMEPAGE = "http://www.gnu.org/software/gettext/gettext.html"
->>   SECTION = "libs"
->> -LICENSE = "GPL"
+>> diff --git a/recipes/gdb/gdb_6.8.bb b/recipes/gdb/gdb_6.8.bb
+>> index a969651..afa4286 100644
+>> --- a/recipes/gdb/gdb_6.8.bb
+>> +++ b/recipes/gdb/gdb_6.8.bb
+>> @@ -1,4 +1,5 @@
+>>   require gdb.inc
 >> +LICENSE = "GPLv3"
->>   PR = "r2"
->>   DEPENDS = "gettext-native virtual/libiconv ncurses expat"
->>   PROVIDES = "virtual/libintl"
+>>
+>>   SRC_URI += "file://gcc-4.3-build-error.patch;patch=1;pnum=0"
+>>
 >
 >
 >
