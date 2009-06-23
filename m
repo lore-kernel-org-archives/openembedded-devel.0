@@ -1,23 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MJ261-0007xW-At
-	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 11:15:18 +0200
-Received: (qmail 25013 invoked by uid 813007); 23 Jun 2009 09:04:14 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Jun 2009 09:04:14 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Jun 2009 11:03:30 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.30-00002-g9396b7b; KDE/4.2.4; x86_64; ; )
-References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-5-git-send-email-marcin@juszkiewicz.com.pl>
-	<20090623015138.GB14716@denix.org>
-In-Reply-To: <20090623015138.GB14716@denix.org>
-MIME-Version: 1.0
-Message-Id: <200906231103.33374.marcin@juszkiewicz.com.pl>
-Subject: Re: [STABLE][PATCH 028/125] gdb: 6.8 is GPLv3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MJ2D4-00063Y-A4
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 11:22:34 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MJ22N-0008Fd-1U
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 09:11:31 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 23 Jun 2009 09:11:31 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 23 Jun 2009 09:11:31 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 23 Jun 2009 11:11:14 +0200
+Message-ID: <h1q67i$a5v$1@ger.gmane.org>
+References: <4A4097CA.9040207@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
+In-Reply-To: <4A4097CA.9040207@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,27 +41,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 09:15:20 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Jun 2009 09:22:34 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 23 czerwca 2009 o 03:51:38 Denys Dmytriyenko napisa=C5=82(a):
-> On Mon, Jun 22, 2009 at 11:53:48AM +0200, Marcin Juszkiewicz wrote:
-> >  recipes/gdb/gdb_6.8.bb |    1 +
-> > +LICENSE =3D "GPLv3"
+On 23-06-09 10:52, Marco Cavallini wrote:
+>  From 182247f1699cd20c442bcb0d1f34bf6b4a555313 Mon Sep 17 00:00:00 2001
+> From: koan<koan@mozart.(none)>
+
+That's not a valid email address
+
+> Date: Tue, 23 Jun 2009 10:49:25 +0200
+> Subject: [PATCH] Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro
+>    with contribution of Ronetix (www.ronetix.at)
 >
-> By the way, do we care about older recipes? For example, gdb 6.7.1
-> was also GPLv3, while 6.6 and older were still GPLv2...
+>
+> Signed-off-by: koan<koan@mozart.(none)>
 
-I cherry picked recipes from .dev so patches welcome :)
+That's not a valid email address
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+> ---
+>   conf/distro/kaeilos.conf |    7 +++++--
+>   1 files changed, 5 insertions(+), 2 deletions(-)
+>
+> diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
+> index 2b3aae8..1d75976 100644
+> --- a/conf/distro/kaeilos.conf
+> +++ b/conf/distro/kaeilos.conf
+> @@ -3,7 +3,7 @@
+>   #@NAME: KaeilOS(R) -http://www.kaeilos.com
+>   #@DESCRIPTION: KaeilOS Linux Distribution for Kernel 2.6 based devices
+>   #@MAINTAINER: Marco Cavallini<m.cavallini@koansoftware.com>
+> -#@VERSION: 28-04-2009
+> +#@VERSION: 23-04-2009
+>   #
+>   # Use this at your own risk, we welcome bugreports filed at
+>   #http://bugs.openembedded.net
+> @@ -12,7 +12,7 @@
+>   #DISTRO_VERSION = "2009.1"
+>   DISTRO_VERSION = "2009.1-test-${DATE}"
+>   DISTRO_REVISION = "1"
+> -DISTRO_PR = ".1"
+> +DISTRO_PR = ".2"
+>
+>   #build staging from packages
+>   INHERIT += "packaged-staging"
+> @@ -130,6 +130,9 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
+>   PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
+>   PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+>
+> +#Other packages version
+> +PREFERRED_VERSION_classpath ?= "0.97.2"
+> +
+>   # Virtuals:
+>   PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "binutils-cross"
+>   PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "gcc-cross-initial"
+> -- 1.5.4.3
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
