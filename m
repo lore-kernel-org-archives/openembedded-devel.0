@@ -1,26 +1,22 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MIvcW-0003Ds-Gj
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 04:20:27 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KLO005FM5Z1MV32@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	22 Jun 2009 21:09:01 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id ECD5A14AF5F; Mon,
-	22 Jun 2009 22:09:00 -0400 (EDT)
-Date: Mon, 22 Jun 2009 22:09:00 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090623020900.GN14716@denix.org>
-References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-11-git-send-email-marcin@juszkiewicz.com.pl>
-	<h1nofq$af4$2@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <h1nofq$af4$2@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [STABLE][PATCH 034/125] fixes wrong license value usage	for GPLv2
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MIxHN-0000Ko-9t
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 06:06:42 +0200
+Received: (qmail 22132 invoked from network); 23 Jun 2009 03:55:39 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 22 Jun 2009 20:55:39 -0700
+Date: Mon, 22 Jun 2009 20:55:38 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20090623035538.GC23935@smtp.west.cox.net>
+References: <20090505164137.GJ7973@smtp.west.cox.net>
+	<200906121255.32105.raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <200906121255.32105.raj.khem@gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Fix staging of binutils static libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,91 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 02:20:34 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 23 Jun 2009 04:06:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Jun 22, 2009 at 01:04:26PM +0200, Koen Kooi wrote:
-> On 22-06-09 11:53, Marcin Juszkiewicz wrote:
->> From: Otavio Salvador<otavio@ossystems.com.br>
->>
->> Signed-off-by: Otavio Salvador<otavio@ossystems.com.br>
->> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
->
-> Acked-by: Koen Kooi <koen@openembedded.org>
+On Fri, Jun 12, 2009 at 12:55:27PM -0700, Khem Raj wrote:
+> On Tuesday 05 May 2009 09:41:38 am Tom Rini wrote:
+> > binutils-cross: Stage libbfd/opcodes/iberty correctly, bump PR
+> > 
+> > Changes the staging path for libbfd and libopcodes to ${CROSS_DIR}/lib.
+> > Disables staging native libiberty.a to ${STAGING_DIR_TARGET} as this doesn't
+> > make sense to do.  Cleans up empty directories.
+> > 
+> > Signed-off-by: Nikita Shulga <nshulga@embeddedalley.com>
+> > Signed-off-by: Tom Rini <trini@embeddedalley.com>
+[snip]
+> seems ok. I hope you have tested it on 64 bit hosts as well.
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+OK, found a problem.  gcc-configure-cross.inc's do_stage will go and
+delete the libiberty.a we put here, after overwriting it with
+libiberty.a from gcc.  There's a comment about wanting libiberty.a from
+binutils.  Anyone recall why?
 
->> ---
->>   classes/xfce.bbclass                  |    2 +-
->>   recipes/gnash/gnash-minimal.inc       |    2 +-
->>   recipes/gnash/gnash.inc               |    2 +-
->>   recipes/linphone/linphone_1.3.99.8.bb |    2 +-
->>   4 files changed, 4 insertions(+), 4 deletions(-)
->>
->> diff --git a/classes/xfce.bbclass b/classes/xfce.bbclass
->> index 48e012e..b18313f 100644
->> --- a/classes/xfce.bbclass
->> +++ b/classes/xfce.bbclass
->> @@ -5,7 +5,7 @@
->>   # Global class to make it easier to maintain XFCE packages
->>
->>   HOMEPAGE = "http://www.xfce.org"
->> -LICENSE = "LGPL-2"
->> +LICENSE = "LGPLv2"
->>   DEPENDS += "startup-notification"
->>
->>   XFCE_VERSION = ${PV}
->> diff --git a/recipes/gnash/gnash-minimal.inc 
->> b/recipes/gnash/gnash-minimal.inc
->> index a8e5229..5a8a91e 100644
->> --- a/recipes/gnash/gnash-minimal.inc
->> +++ b/recipes/gnash/gnash-minimal.inc
->> @@ -1,6 +1,6 @@
->>   DESCRIPTION = "Gnash is a GNU Flash movie player that supports many SWF 
->> v7 features"
->>   HOMEPAGE = "http://www.gnu.org/software/gnash"
->> -LICENSE = "GPL-2"
->> +LICENSE = "GPLv2"
->>
->>   DEPENDS = "virtual/libiconv virtual/libintl libtool agg libxml2 zlib 
->> boost jpeg pango curl freetype \
->>              ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'ffmpeg 
->> libmad', d)}"
->> diff --git a/recipes/gnash/gnash.inc b/recipes/gnash/gnash.inc
->> index 3602f6f..ea20524 100644
->> --- a/recipes/gnash/gnash.inc
->> +++ b/recipes/gnash/gnash.inc
->> @@ -1,6 +1,6 @@
->>   DESCRIPTION = "Gnash is a GNU Flash movie player that supports many SWF 
->> v7 features"
->>   HOMEPAGE = "http://www.gnu.org/software/gnash"
->> -LICENSE = "GPL-2"
->> +LICENSE = "GPLv2"
->>   DEPENDS = "giflib libtool gtk+ cairo libxml2 libsdl-mixer zlib boost 
->> jpeg pango curl freetype \
->>              ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'ffmpeg 
->> libmad', d)}"
->>
->> diff --git a/recipes/linphone/linphone_1.3.99.8.bb 
->> b/recipes/linphone/linphone_1.3.99.8.bb
->> index f96bd66..4e9b130 100644
->> --- a/recipes/linphone/linphone_1.3.99.8.bb
->> +++ b/recipes/linphone/linphone_1.3.99.8.bb
->> @@ -1,6 +1,6 @@
->>   DESCRIPTION = "SIP-based IP phone (Console edition)"
->>   HOMEPAGE = "http://www.linphone.org/?lang=us"
->> -LICENSE = "GPL-2"
->> +LICENSE = "GPLv2"
->>   DEPENDS = "libosip2 speex libogg alsa-lib readline"
->>   PR = "r0"
->>
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Tom Rini
 
 
