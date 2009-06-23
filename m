@@ -1,28 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MJ2hk-0007W5-KV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 11:54:16 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MJ2X3-0002ES-UX
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 10:43:14 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1MJ2X3-00027V-N9
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 10:43:13 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A409A30.6070806@gmail.com>
-References: <4A409A30.6070806@gmail.com>
-Date: Tue, 23 Jun 2009 10:43:13 +0100
-Message-Id: <1245750193.6690.16.camel@mill.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MJ2jV-0007aN-23
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 11:56:05 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MJ2Yo-0001Lw-O6
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 09:45:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 23 Jun 2009 09:45:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 23 Jun 2009 09:45:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 23 Jun 2009 11:12:14 +0200
+Message-ID: <h1q69e$a5v$4@ger.gmane.org>
+References: <200906230939.34062.marcin@juszkiewicz.com.pl>
+	<1245747353-27218-4-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro (II)
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
+In-Reply-To: <1245747353-27218-4-git-send-email-marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [STABLE][PATCH 050/125] docs: fix URL for bitbake manual. (Closes: #5122)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,19 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 09:54:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 23 Jun 2009 09:56:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-06-23 at 11:02 +0200, Marco Cavallini wrote:
-> From: Marco Cavallini <m.cavallini@koansoftware.com>
-> Date: Tue, 23 Jun 2009 10:59:50 +0200
-> Subject: [PATCH] Added PREFERRED_VERSION_classpath to support JVM in
-KaeilOS distro
+On 23-06-09 10:55, Marcin Juszkiewicz wrote:
+> From: Rolf Leggewie<oe-devel@rolf.leggewie.biz>
+>
+>
+> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
 
-Thanks for the patch.  I checked this in.
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-p.
+
+> ---
+>   docs/usermanual/chapters/getting_oe.xml |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
+> index a04e233..83fbad1 100644
+> --- a/docs/usermanual/chapters/getting_oe.xml
+> +++ b/docs/usermanual/chapters/getting_oe.xml
+> @@ -244,7 +244,7 @@ MACHINE = "om-gta01"</screen>
+>
+>       <para>The primary interface to the build system is
+>         the<command>bitbake</command>  command (see
+> -      the<ulink url="http://subversion.tigris.org/faq.html#proxy">BitBake
+> +      the<ulink url="http://bitbake.berlios.de/manual/">BitBake
+>         users manual</ulink>). BitBake will download and patch files from the
+>         internet, so it helps if you are on a well connected machine.
+>       </para>
 
 
 
