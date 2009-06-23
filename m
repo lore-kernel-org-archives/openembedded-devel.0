@@ -1,24 +1,25 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MIreo-0000aL-W8
+	(envelope-from <denis@denix.org>) id 1MIvGQ-0002Y4-5M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 00:06:31 +0200
-Received: from [95.89.44.245] (helo=[192.168.0.101])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MIrcH-0005xL-DF
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 00:03:53 +0200
-Message-ID: <4A3FFDD1.4030107@kernelconcepts.de>
-Date: Mon, 22 Jun 2009 23:55:29 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-MIME-Version: 1.0
+	Tue, 23 Jun 2009 03:57:34 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KLO00MQ14WYA891@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	22 Jun 2009 20:46:16 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5C98714AF5F; Mon,
+	22 Jun 2009 21:46:10 -0400 (EDT)
+Date: Mon, 22 Jun 2009 21:46:10 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4A3E4502.5000908@balister.org>
-In-Reply-To: <4A3E4502.5000908@balister.org>
-X-Enigmail-Version: 0.95.7
-Subject: Re: Linuxtag booth setup
+Message-id: <20090623014610.GA14716@denix.org>
+References: <1245698893.7001.18.camel@utx.utx.cz>
+	<1245699460.3521.17.camel@kc.internal.reciva.com>
+MIME-version: 1.0
+In-reply-to: <1245699460.3521.17.camel@kc.internal.reciva.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Is RDEPENDS = "foo" supported?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,40 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2009 22:06:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Jun 2009 01:57:35 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi,
+On Mon, Jun 22, 2009 at 08:37:40PM +0100, Phil Blundell wrote:
+> On Mon, 2009-06-22 at 21:28 +0200, Stanislav Brabec wrote:
+> > Is RDEPENDS = "foo" allowed in recipes? If yes, then it does not work.
+> 
+> It is allowed, and in at least some situations it will even work, but in
+> the vast majority of cases it is not the right thing to do.  There are
+> two problems with it: both of them have been discussed here on the list
+> quite recently, but to recap:
 
-missed you again via irc. I hope you had a good flight.
+Here is the original thread, for reference:
+http://thread.gmane.org/gmane.comp.handhelds.openembedded/24663
 
-Philip Balister schrieb:
-> What are the plans for setting up the OE booth at Linuxtag? I'm arriving
-> in Berlin Tuesday afternoon and can help out if needed. Mind you, I
-> might be sort of incoherent, but it will help me stay awake.
+> 1) ${RDEPENDS} will apply to all the output subpackages, i.e. ${PN}-dev,
+> ${PN}-doc and various ${PN}-locale-* things.  In most cases, ${PN} is
+> the only one that you actually want to receive the dependency.
+> 
+> 2) ${RDEPENDS} will be overridden by ${RDEPENDS_${PN}} if the latter is
+> set.  This is sometimes done by .bbclass files and the like, in which
+> case any dependencies you set in ${RDEPENDS} will be ineffective.
+> 
+> > I have been searching for a reason, why my image does not set keymap.
+> > Reason: console-tools were missing. Replacing RDEPENDS by RDEPENDS_${PN}
+> > in the keymaps recipe fixed it.
+> 
+> In this particular case, update-rc.d.bbclass sets RDEPENDS_${PN} and
+> hence (2) above will apply.
+> 
+> > Does it mean, that this and another 622 recipes use invalid syntax of
+> > RDEPENDS or is it a bug in the toolchain?
+> 
+> It's probably true that almost all of those 623 recipes should be using
+> RDEPENDS_${PN} or something similar instead of plain RDEPENDS.
 
-I guess there is not much we can do apart from visiting the booth, picking up
-the exhibitor passes and maybe taping a poster to some wall.
-
-I have no idea when I'll make it there but the plan is to be there early in the
-afternoon. Maybe drop me a mail when you have the chance to do so, I'll read
-mail be fore I leave for ICC.
-If we don't meet tomorrow we should try to meet outside on Wednesday morning. I
-guess I should write another email about this to all of us... need some sleep
-before doing this.
-If we somehow miss each other Wednesday please call me to get in. +49 176 63311063
-
-Greetings
-
-Florian
-
+Yeah, I had to fix some of my recipes in the overlay here...
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Denys
 
 
