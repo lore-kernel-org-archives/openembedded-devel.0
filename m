@@ -1,26 +1,26 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [206.46.173.13] (helo=vms173013pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MIvaP-0003A4-86
+	(envelope-from <denis@denix.org>) id 1MIvaQ-0003AB-TI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 04:18:15 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173003.mailsrvcs.net
+	Tue, 23 Jun 2009 04:18:17 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173013.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KLO00J1R5VYOF52@vms173003.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KLO00FZ65VFBDF1@vms173013.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	22 Jun 2009 21:07:10 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id F212814AF5F; Mon,
-	22 Jun 2009 22:07:09 -0400 (EDT)
-Date: Mon, 22 Jun 2009 22:07:09 -0400
+	22 Jun 2009 21:06:56 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 46BA114AF5F; Mon,
+	22 Jun 2009 22:06:51 -0400 (EDT)
+Date: Mon, 22 Jun 2009 22:06:51 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090623020709.GH14716@denix.org>
+Message-id: <20090623020651.GG14716@denix.org>
 References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<1245664435-30183-5-git-send-email-marcin@juszkiewicz.com.pl>
-	<h1nogs$af4$8@ger.gmane.org>
+	<1245664435-30183-4-git-send-email-marcin@juszkiewicz.com.pl>
+	<h1nkuo$vdi$2@ger.gmane.org>
 MIME-version: 1.0
-In-reply-to: <h1nogs$af4$8@ger.gmane.org>
+In-reply-to: <h1nkuo$vdi$2@ger.gmane.org>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [STABLE][PATCH 028/125] gdb: 6.8 is GPLv3
+Subject: Re: [STABLE][PATCH 027/125] gmp: 4.2.4 is GPLv3 LGPLv3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,7 +38,7 @@ X-List-Received-Date: Tue, 23 Jun 2009 02:18:20 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Jun 22, 2009 at 01:05:00PM +0200, Koen Kooi wrote:
+On Mon, Jun 22, 2009 at 12:04:08PM +0200, Koen Kooi wrote:
 > On 22-06-09 11:53, Marcin Juszkiewicz wrote:
 >> From: Tom Rini<trini@embeddedalley.com>
 >>
@@ -50,19 +50,18 @@ On Mon, Jun 22, 2009 at 01:05:00PM +0200, Koen Kooi wrote:
 Acked-by: Denys Dmytriyenko <denis@denix.org>
 
 >> ---
->>   recipes/gdb/gdb_6.8.bb |    1 +
+>>   recipes/gmp/gmp_4.2.4.bb |    1 +
 >>   1 files changed, 1 insertions(+), 0 deletions(-)
 >>
->> diff --git a/recipes/gdb/gdb_6.8.bb b/recipes/gdb/gdb_6.8.bb
->> index a969651..afa4286 100644
->> --- a/recipes/gdb/gdb_6.8.bb
->> +++ b/recipes/gdb/gdb_6.8.bb
->> @@ -1,4 +1,5 @@
->>   require gdb.inc
->> +LICENSE = "GPLv3"
->>
->>   SRC_URI += "file://gcc-4.3-build-error.patch;patch=1;pnum=0"
->>
+>> diff --git a/recipes/gmp/gmp_4.2.4.bb b/recipes/gmp/gmp_4.2.4.bb
+>> index b37c266..a7aa712 100644
+>> --- a/recipes/gmp/gmp_4.2.4.bb
+>> +++ b/recipes/gmp/gmp_4.2.4.bb
+>> @@ -3,3 +3,4 @@ PR = "r0"
+>>   SRC_URI_append += "file://sh4-asmfix.patch;patch=1 \
+>>   		  "
+>>   require gmp.inc
+>> +LICENSE = "GPLv3 LGPLv3"
 >
 >
 >
