@@ -1,33 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MJALR-0007Sj-8j
-	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 20:03:46 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MJAAj-0005pm-45
-	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 17:52:41 +0000
-Received: from p5b3b27d3.dip.t-dialin.net ([91.59.39.211])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Jun 2009 17:52:41 +0000
-Received: from no2spam by p5b3b27d3.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Jun 2009 17:52:41 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 24 Jun 2009 02:52:23 +0900
-Message-ID: <h1r4op$fhs$1@ger.gmane.org>
-References: <E1MIlyT-00014Z-0q@melo.nslu2-linux.org>	<4A40ACCA.7050707@nospam.arcornews.de>
-	<h1qni9$vpq$1@ger.gmane.org>
+	(envelope-from <philb@gnu.org>) id 1MJAMI-0007UV-QY
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jun 2009 20:04:38 +0200
+Received: from 79-71-239-25.dynamic.dsl.as9105.com ([79.71.239.25]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MJA59-00026Z-TQ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jun 2009 18:46:57 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <19c1b8a90906231030i3e810672j13ca95b56c647022@mail.gmail.com>
+References: <1244836535.4151.140.camel@lenovo.internal.reciva.com>
+	<1244838263.5958.34.camel@dax.rpnet.com>
+	<f96d234e0906181109y4ee832bcu7b53037c917709be@mail.gmail.com>
+	<19c1b8a90906231030i3e810672j13ca95b56c647022@mail.gmail.com>
+Date: Tue, 23 Jun 2009 18:46:54 +0100
+Message-Id: <1245779214.29153.376.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b27d3.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-In-Reply-To: <h1qni9$vpq$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Koen Kooi : bluez4: add 4.42
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [rfc] change default for BUILD_OPTIMIZATION, remove	spurious 	assignments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,21 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 18:03:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 23 Jun 2009 18:04:39 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> Sorry about that, I remember now you asked me before :) 
+On Tue, 2009-06-23 at 10:30 -0700, Khem Raj wrote:
+>  -frename-registers was a workaround to get past a ARM GCC ICE in 4.2 IIRC
+> we should get rid of it.
 
-no problem.  I pushed a very simple form of unification that only took 
-into account the last three versions of bluez4.  That should take care 
-of new versions going forward.
+No, -frename-registers is an optimisation in its own right.  I think we
+probably want to keep that.  You might be thinking of the
+-fno-rename-registers that we do use for some packages to avoid an ice
+on arm with gcc 3.4.
 
-> I think it would be safe to drop a few 4.x versions as well.
+> -fexpensive-optimizations and -fomit-frame-pointer are passed by
+> default at O2 so we should get rid of them too.
 
-Feel free, you know you certainly have my blessing ;-)  You'd better 
-know which versions that are.
+Is that true on all targets?  I didn't think that -O2 implied
+-fomit-frame-pointer on arm.
+
+p.
+
 
 
 
