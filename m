@@ -1,34 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MJ2ek-0007Md-1J
-	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 11:51:10 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MJ2Tz-0001At-6s
-	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 09:40:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Jun 2009 09:40:03 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Jun 2009 09:40:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 23 Jun 2009 11:13:30 +0200
-Message-ID: <h1q6bq$a5v$7@ger.gmane.org>
-References: <200906230940.05121.marcin@juszkiewicz.com.pl>
-	<1245747417-11163-1-git-send-email-marcin@juszkiewicz.com.pl>
+	(envelope-from <philb@gnu.org>) id 1MJ2hk-0007W5-KV
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jun 2009 11:54:16 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MJ2X3-0002ES-UX
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jun 2009 10:43:14 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MJ2X3-00027V-N9
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Jun 2009 10:43:13 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A409A30.6070806@gmail.com>
+References: <4A409A30.6070806@gmail.com>
+Date: Tue, 23 Jun 2009 10:43:13 +0100
+Message-Id: <1245750193.6690.16.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <1245747417-11163-1-git-send-email-marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH 052/125] evtest: Fixed GNU_HASH QA error.
+X-Mailer: Evolution 2.26.2 
+Subject: Re: Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro (II)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,38 +36,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 09:51:10 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 23 Jun 2009 09:54:16 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 23-06-09 10:56, Marcin Juszkiewicz wrote:
-> From: Theodore A. Roth<taroth@gmail.com>
->
-> Signed-off-by: Theodore A. Roth<taroth@gmail.com>
-> Acked-by: Denys Dmytriyenko<denis@denix.org>
-> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+On Tue, 2009-06-23 at 11:02 +0200, Marco Cavallini wrote:
+> From: Marco Cavallini <m.cavallini@koansoftware.com>
+> Date: Tue, 23 Jun 2009 10:59:50 +0200
+> Subject: [PATCH] Added PREFERRED_VERSION_classpath to support JVM in
+KaeilOS distro
 
-Even though it lacks a PR bump:
-Acked-by: Koen Kooi <koen@openembedded.org>
+Thanks for the patch.  I checked this in.
 
-
-> ---
->   recipes/evtest/evtest_1.23.bb |    2 ++
->   1 files changed, 2 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/evtest/evtest_1.23.bb b/recipes/evtest/evtest_1.23.bb
-> index 4c5d195..6cf87be 100644
-> --- a/recipes/evtest/evtest_1.23.bb
-> +++ b/recipes/evtest/evtest_1.23.bb
-> @@ -11,6 +11,8 @@ PR = "r0"
->   SRC_URI = "http://beagleboard.googlecode.com/files/evtest.c"
->   S = "${WORKDIR}"
->
-> +TARGET_CC_ARCH += "${LDFLAGS}"
-> +
->   do_compile() {
->       ${CC} evtest.c -o evtest -I${STAGING_INCDIR} -L${STAGING_LIBDIR}
->   }
+p.
 
 
 
