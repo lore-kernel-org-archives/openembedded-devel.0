@@ -1,33 +1,34 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MJ2D4-00063Y-A4
-	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 11:22:34 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MJ22N-0008Fd-1U
-	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 09:11:31 +0000
+	id 1MJ2GV-0006DR-6O
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 11:26:07 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MJ25m-000087-Sn
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 09:15:03 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 23 Jun 2009 09:11:31 +0000
+	Tue, 23 Jun 2009 09:15:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 23 Jun 2009 09:11:31 +0000
+	Tue, 23 Jun 2009 09:15:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 23 Jun 2009 11:11:14 +0200
-Message-ID: <h1q67i$a5v$1@ger.gmane.org>
-References: <4A4097CA.9040207@gmail.com>
+Date: Tue, 23 Jun 2009 11:14:46 +0200
+Message-ID: <h1q6e6$a5v$13@ger.gmane.org>
+References: <200906230941.30107.marcin@juszkiewicz.com.pl>
+	<1245747394-31806-4-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1pre) Gecko/20090610 Shredder/3.0b3pre
-In-Reply-To: <4A4097CA.9040207@gmail.com>
+In-Reply-To: <1245747394-31806-4-git-send-email-marcin@juszkiewicz.com.pl>
 Sender: news <news@ger.gmane.org>
-Subject: Re: Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro
+Subject: Re: [STABLE][PATCH 024/125] tinderclient: support sitting behind proxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,71 +42,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 09:22:34 -0000
+X-List-Received-Date: Tue, 23 Jun 2009 09:26:07 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 23-06-09 10:52, Marco Cavallini wrote:
->  From 182247f1699cd20c442bcb0d1f34bf6b4a555313 Mon Sep 17 00:00:00 2001
-> From: koan<koan@mozart.(none)>
-
-That's not a valid email address
-
-> Date: Tue, 23 Jun 2009 10:49:25 +0200
-> Subject: [PATCH] Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro
->    with contribution of Ronetix (www.ronetix.at)
+On 23-06-09 10:56, Marcin Juszkiewicz wrote:
+> From: Dmitry Eremin-Solenikov<dbaryshkov@gmail.com>
 >
->
-> Signed-off-by: koan<koan@mozart.(none)>
+> Signed-off-by: Dmitry Eremin-Solenikov<dbaryshkov@gmail.com>
+> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
 
-That's not a valid email address
-
+Acked-by: Koen Kooi <koen@openembedded.org>
 
 > ---
->   conf/distro/kaeilos.conf |    7 +++++--
->   1 files changed, 5 insertions(+), 2 deletions(-)
+>   classes/tinderclient.bbclass |   24 +++++++++++++++++-------
+>   1 files changed, 17 insertions(+), 7 deletions(-)
 >
-> diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
-> index 2b3aae8..1d75976 100644
-> --- a/conf/distro/kaeilos.conf
-> +++ b/conf/distro/kaeilos.conf
-> @@ -3,7 +3,7 @@
->   #@NAME: KaeilOS(R) -http://www.kaeilos.com
->   #@DESCRIPTION: KaeilOS Linux Distribution for Kernel 2.6 based devices
->   #@MAINTAINER: Marco Cavallini<m.cavallini@koansoftware.com>
-> -#@VERSION: 28-04-2009
-> +#@VERSION: 23-04-2009
->   #
->   # Use this at your own risk, we welcome bugreports filed at
->   #http://bugs.openembedded.net
-> @@ -12,7 +12,7 @@
->   #DISTRO_VERSION = "2009.1"
->   DISTRO_VERSION = "2009.1-test-${DATE}"
->   DISTRO_REVISION = "1"
-> -DISTRO_PR = ".1"
-> +DISTRO_PR = ".2"
+> diff --git a/classes/tinderclient.bbclass b/classes/tinderclient.bbclass
+> index 0b7fc1d..d2b2b33 100644
+> --- a/classes/tinderclient.bbclass
+> +++ b/classes/tinderclient.bbclass
+> @@ -1,10 +1,20 @@
+> -def tinder_http_post(server, selector, content_type, body):
+> +def tinder_http_post(d, server, selector, content_type, body):
+>       import httplib
+> +    from bb import data
+>       # now post it
+>       for i in range(0,5):
+>          try:
+> -           h = httplib.HTTP(server)
+> -           h.putrequest('POST', selector)
+> +	   proxy = data.getVar('HTTP_PROXY', d, True )
+> +	   if (proxy):
+> +		   if (proxy.endswith('/')):
+> +			   proxy = proxy[:-1]
+> +		   if (proxy.startswith('http://')):
+> +			   proxy = proxy[7:]
+> +		   h = httplib.HTTP(proxy)
+> +		   h.putrequest('POST', 'http://%s%s' % (server, selector))
+> +	   else:
+> +		   h = httplib.HTTP(server)
+> +		   h.putrequest('POST', selector)
+>              h.putheader('content-type', content_type)
+>              h.putheader('content-length', str(len(body)))
+>              h.endheaders()
+> @@ -12,8 +22,8 @@ def tinder_http_post(server, selector, content_type, body):
+>              errcode, errmsg, headers = h.getreply()
+>              #print errcode, errmsg, headers
+>              return (errcode,errmsg, headers, h.file)
+> -       except:
+> -           print "Error sending the report!"
+> +       except Exception, e:
+> +           print "Error sending the report! ", e
+>              # try again
+>              pass
 >
->   #build staging from packages
->   INHERIT += "packaged-staging"
-> @@ -130,6 +130,9 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
->   PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
->   PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+> @@ -116,7 +126,7 @@ def tinder_build_start(d):
+>       #print "selector %s and url %s" % (selector, url)
 >
-> +#Other packages version
-> +PREFERRED_VERSION_classpath ?= "0.97.2"
-> +
->   # Virtuals:
->   PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "binutils-cross"
->   PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "gcc-cross-initial"
-> -- 1.5.4.3
+>       # now post it
+> -    errcode, errmsg, headers, h_file = tinder_http_post(server,selector,content_type, body)
+> +    errcode, errmsg, headers, h_file = tinder_http_post(d,server,selector,content_type, body)
+>       #print errcode, errmsg, headers
+>       report = h_file.read()
 >
->
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> @@ -151,7 +161,7 @@ def tinder_send_http(d, status, _log):
+>       new_log = _log
+>       while len(new_log)>  0:
+>           content_type, body = tinder_format_http_post(d,status,new_log[0:18000])
+> -        errcode, errmsg, headers, h_file = tinder_http_post(server,selector,content_type, body)
+> +        errcode, errmsg, headers, h_file = tinder_http_post(d,server,selector,content_type, body)
+>           #print errcode, errmsg, headers
+>           #print h.file.read()
+>           new_log = new_log[18000:]
 
 
 
