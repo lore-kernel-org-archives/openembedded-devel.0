@@ -1,26 +1,26 @@
-Received: from [206.46.173.13] (helo=vms173013pub.verizon.net)
+Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MJFnX-00088T-PV
+	(envelope-from <denis@denix.org>) id 1MJFnn-00088f-AB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Jun 2009 01:53:08 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173013.mailsrvcs.net
+	Wed, 24 Jun 2009 01:53:23 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KLP002P9TT24XM3@vms173013.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KLP006X6TU7CFI2@vms173011.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	23 Jun 2009 18:41:26 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id F38CA14AF5F; Tue,
-	23 Jun 2009 19:41:25 -0400 (EDT)
-Date: Tue, 23 Jun 2009 19:41:25 -0400
+	23 Jun 2009 18:42:08 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3B13714AF5F; Tue,
+	23 Jun 2009 19:42:07 -0400 (EDT)
+Date: Tue, 23 Jun 2009 19:42:07 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090623234125.GG32082@denix.org>
+Message-id: <20090623234207.GH32082@denix.org>
 References: <200906230941.30107.marcin@juszkiewicz.com.pl>
-	<1245747394-31806-6-git-send-email-marcin@juszkiewicz.com.pl>
-	<h1q6ft$a5v$15@ger.gmane.org>
+	<1245747394-31806-7-git-send-email-marcin@juszkiewicz.com.pl>
+	<h1q6gb$a5v$16@ger.gmane.org>
 MIME-version: 1.0
-In-reply-to: <h1q6ft$a5v$15@ger.gmane.org>
+In-reply-to: <h1q6gb$a5v$16@ger.gmane.org>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [STABLE][PATCH 045/125] First pass of cleanup of messages	outputted to the user.
+Subject: Re: [STABLE][PATCH 046/125] Shorten some full paths printed	to the user.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,18 +34,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 23:53:08 -0000
+X-List-Received-Date: Tue, 23 Jun 2009 23:53:23 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, Jun 23, 2009 at 11:15:40AM +0200, Koen Kooi wrote:
+On Tue, Jun 23, 2009 at 11:15:55AM +0200, Koen Kooi wrote:
 > On 23-06-09 10:56, Marcin Juszkiewicz wrote:
 >> From: Chris Larson<clarson@mvista.com>
 >>
->> OpenEmbedded outputs a lot of messages that the user is likely to never
->> care about.  We should only output something when it reflects upon their
->> recipe (i.e. unpacking their sources, applying their patches), or is quite
->> significant or unusual.
+>> Adds a base_path_out convenience function, which prepares a full path for
+>> display to the user.  The initial implementation just makes it relative to
+>> ${TOPDIR}.  This function is then used for some messages outputted to the
+>> user (packaged-staging, patch application, clean, unpack tasks).
 >>
 >> Signed-off-by: Chris Larson<clarson@mvista.com>
 >> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
@@ -55,159 +55,102 @@ On Tue, Jun 23, 2009 at 11:15:40AM +0200, Koen Kooi wrote:
 Acked-by: Denys Dmytriyenko <denis@denix.org>
 
 >> ---
->>   classes/base.bbclass             |   17 +++--------------
->>   classes/insane.bbclass           |   14 +++++++-------
->>   classes/package.bbclass          |    4 ++--
->>   classes/packaged-staging.bbclass |    6 +++---
->>   4 files changed, 15 insertions(+), 26 deletions(-)
+>>   classes/base.bbclass             |   17 +++++++++++++----
+>>   classes/packaged-staging.bbclass |    2 +-
+>>   classes/patch.bbclass            |    2 +-
+>>   3 files changed, 15 insertions(+), 6 deletions(-)
 >>
 >> diff --git a/classes/base.bbclass b/classes/base.bbclass
->> index a901f02..3d4a426 100644
+>> index 3d4a426..e622aee 100644
 >> --- a/classes/base.bbclass
 >> +++ b/classes/base.bbclass
->> @@ -896,22 +896,11 @@ python base_eventhandler() {
->>   	from bb.event import Handled, NotHandled, getName
->>   	import os
+>> @@ -39,6 +39,14 @@ def base_path_relative(src, dest):
 >>
->> -	messages = {}
->> -	messages["Completed"] = "completed"
->> -	messages["Succeeded"] = "completed"
->> -	messages["Started"] = "started"
->> -	messages["Failed"] = "failed"
->> -
->>   	name = getName(e)
->> -	msg = ""
->> -	if name.startswith("Task"):
->> -		msg += "package %s: task %s: " % (data.getVar("PF", e.data, 1), e.task)
->> -		msg += messages.get(name[4:]) or name[4:]
->> -	elif name.startswith("Build"):
->> -		msg += "build %s: " % e.name
->> -		msg += messages.get(name[5:]) or name[5:]
->> +	if name == "TaskCompleted":
->> +		msg = "package %s: task %s is complete." % (data.getVar("PF", e.data, 
->> 1), e.task)
->>   	elif name == "UnsatisfiedDep":
->> -		msg += "package %s: dependency %s %s" % (e.pkg, e.dep, 
->> name[:-3].lower())
->> +		msg = "package %s: dependency %s %s" % (e.pkg, e.dep, 
->> name[:-3].lower())
->>   	else:
->>   		return NotHandled
+>>       return sep.join(relpath)
 >>
->> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
->> index 3e519c3..ede049a 100644
->> --- a/classes/insane.bbclass
->> +++ b/classes/insane.bbclass
->> @@ -216,7 +216,7 @@ def package_qa_write_error(error_class, name, path, 
->> d):
+>> +def base_path_out(path, d):
+>> +    """ Prepare a path for display to the user. """
+>> +    rel = base_path_relative(d.getVar("TOPDIR", 1), path)
+>> +    if len(rel)>  len(path):
+>> +        return path
+>> +    else:
+>> +        return rel
+>> +
+>>   # for MD5/SHA handling
+>>   def base_chk_load_parser(config_paths):
+>>       import ConfigParser, os, bb
+>> @@ -69,6 +77,7 @@ def base_chk_file(parser, pn, pv, src_uri, localpath, 
+>> data):
 >>
->>   def package_qa_handle_error(error_class, error_msg, name, path, d):
->>       import bb
->> -    bb.error("QA Issue: %s" % error_msg)
->> +    bb.error("QA Issue with %s: %s" % (name, error_msg))
->>       package_qa_write_error(error_class, name, path, d)
->>       return not package_qa_make_fatal_error(error_class, name, path, d)
+>>       # md5 and sha256 should be valid now
+>>       if not os.path.exists(localpath):
+>> +        localpath = base_path_out(localpath, data)
+>>           bb.note("The localpath does not exist '%s'" % localpath)
+>>           raise Exception("The path does not exist '%s'" % localpath)
 >>
->> @@ -482,7 +482,7 @@ def package_qa_check_rdepends(pkg, workdir, d):
->>   # The PACKAGE FUNC to scan each package
->>   python do_package_qa () {
->>       import bb
->> -    bb.note("DO PACKAGE QA")
->> +    bb.debug(2, "DO PACKAGE QA")
->>       workdir = bb.data.getVar('WORKDIR', d, True)
->>       packages = bb.data.getVar('PACKAGES',d, True)
+>> @@ -497,11 +506,11 @@ python base_do_clean() {
+>>   	"""clear the build and temp directories"""
+>>   	dir = bb.data.expand("${WORKDIR}", d)
+>>   	if dir == '//': raise bb.build.FuncFailed("wrong DATADIR")
+>> -	bb.note("removing " + dir)
+>> +	bb.note("removing " + base_path_out(dir, d))
+>>   	os.system('rm -rf ' + dir)
 >>
->> @@ -497,10 +497,10 @@ python do_package_qa () {
->>       rdepends_sane = True
->>       for package in packages.split():
->>           if bb.data.getVar('INSANE_SKIP_' + package, d, True):
->> -            bb.note("Package: %s (skipped)" % package)
->> +            bb.note("package %s skipped" % package)
->>               continue
->>
->> -        bb.note("Checking Package: %s" % package)
->> +        bb.debug(1, "Checking Package: %s" % package)
->>           path = "%s/install/%s" % (workdir, package)
->>           if not package_qa_walk(path, checks, package, d):
->>               walk_sane  = False
->> @@ -509,14 +509,14 @@ python do_package_qa () {
->>
->>       if not walk_sane or not rdepends_sane:
->>           bb.fatal("QA run found fatal errors. Please consider fixing 
->> them.")
->> -    bb.note("DONE with PACKAGE QA")
->> +    bb.debug(2, "DONE with PACKAGE QA")
+>>   	dir = "%s.*" % bb.data.expand(bb.data.getVar('STAMP', d), d)
+>> -	bb.note("removing " + dir)
+>> +	bb.note("removing " + base_path_out(dir, d))
+>>   	os.system('rm -f '+ dir)
 >>   }
 >>
+>> @@ -556,7 +565,7 @@ python base_do_distclean() {
+>>   		except bb.MalformedUrl, e:
+>>   			bb.debug(1, 'Unable to generate local path for malformed uri: %s' % 
+>> e)
+>>   		else:
+>> -			bb.note("removing %s" % local)
+>> +			bb.note("removing %s" % base_path_out(local, d))
+>>   			try:
+>>   				if os.path.exists(local + ".md5"):
+>>   					os.remove(local + ".md5")
+>> @@ -777,7 +786,7 @@ def oe_unpack_file(file, data, url = None):
+>>   		os.chdir(newdir)
 >>
->>   # The Staging Func, to check all staging
->>   addtask qa_staging after do_populate_staging before do_build
->>   python do_qa_staging() {
->> -    bb.note("QA checking staging")
->> +    bb.debug(2, "QA checking staging")
+>>   	cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', data, 1), cmd)
+>> -	bb.note("Unpacking %s to %s/" % (file, os.getcwd()))
+>> +	bb.note("Unpacking %s to %s/" % (base_path_out(file, data), 
+>> base_path_out(os.getcwd(), data)))
+>>   	ret = os.system(cmd)
 >>
->>       if not 
->> package_qa_check_staged(bb.data.getVar('STAGING_LIBDIR',d,True), d):
->>           bb.fatal("QA staging was broken by the package built above")
->> @@ -525,7 +525,7 @@ python do_qa_staging() {
->>   # Check broken config.log files
->>   addtask qa_configure after do_configure before do_compile
->>   python do_qa_configure() {
->> -    bb.note("Checking sanity of the config.log file")
->> +    bb.debug(1, "Checking sanity of the config.log file")
->>       import os
->>       for root, dirs, files in os.walk(bb.data.getVar('WORKDIR', d, 
->> True)):
->>           statement = "grep 'CROSS COMPILE Badness:' %s>  /dev/null" % \
->> diff --git a/classes/package.bbclass b/classes/package.bbclass
->> index 7a61c5a..3a30d38 100644
->> --- a/classes/package.bbclass
->> +++ b/classes/package.bbclass
->> @@ -166,7 +166,7 @@ def runstrip(file, d):
->>       # If the file is in a .debug directory it was already stripped,
->>       # don't do it again...
->>       if os.path.dirname(file).endswith(".debug"):
->> -        bb.note("Already ran strip")
->> +        bb.debug(2, "Already ran strip on %s" % file)
->>           return 0
->>
->>       strip = bb.data.getVar("STRIP", d, 1)
->> @@ -560,7 +560,7 @@ python package_do_shlibs() {
->>
->>   	exclude_shlibs = bb.data.getVar('EXCLUDE_FROM_SHLIBS', d, 0)
->>   	if exclude_shlibs:
->> -		bb.note("not generating shlibs")
->> +		bb.debug(1, "not generating shlibs")
->>   		return
->>   		
->>   	lib_re = re.compile("^lib.*\.so")
+>>   	os.chdir(save_cwd)
 >> diff --git a/classes/packaged-staging.bbclass 
 >> b/classes/packaged-staging.bbclass
->> index 849f60c..82c1a0d 100644
+>> index 82c1a0d..bd7b9ea 100644
 >> --- a/classes/packaged-staging.bbclass
 >> +++ b/classes/packaged-staging.bbclass
->> @@ -109,17 +109,17 @@ def pstage_cleanpackage(pkgname, d):
->>   	pstage_set_pkgmanager(d)
->>   	list_cmd = bb.data.getVar("PSTAGE_LIST_CMD", d, True)
+>> @@ -135,7 +135,7 @@ do_clean_prepend() {
+>>   	pstage_cleanpackage(removepkg, d)
 >>
->> -	bb.note("Checking if staging package installed")
->> +	bb.debug(2, "Checking if staging package installed")
->>   	lf = bb.utils.lockfile(bb.data.expand("${STAGING_DIR}/staging.lock", 
->> d))
->>   	ret = os.system("PATH=\"%s\" %s | grep %s" % (path, list_cmd, pkgname))
->>   	if ret == 0:
->> -		bb.note("Yes. Uninstalling package from staging...")
->> +		bb.debug(1, "Uninstalling package from staging...")
->>   		removecmd = bb.data.getVar("PSTAGE_REMOVE_CMD", d, 1)
->>   		ret = os.system("PATH=\"%s\" %s %s" % (path, removecmd, pkgname))
->>   		if ret != 0:
->>   			bb.note("Failure removing staging package")
->>   	else:
->> -		bb.note("No. Manually removing any installed files")
->> +		bb.debug(1, "Manually removing any installed files from staging...")
->>   		pstage_manualclean("staging", "STAGING_DIR", d)
->>   		pstage_manualclean("cross", "CROSS_DIR", d)
->>   		pstage_manualclean("deploy", "DEPLOY_DIR", d)
+>>   	stagepkg = bb.data.expand("${PSTAGE_PKG}", d)
+>> -	bb.note("Removing staging package %s" % stagepkg)
+>> +	bb.note("Removing staging package %s" % base_path_out(stagepkg, d))
+>>   	os.system('rm -rf ' + stagepkg)
+>>   }
+>>
+>> diff --git a/classes/patch.bbclass b/classes/patch.bbclass
+>> index 8d2bde0..2f99e4c 100644
+>> --- a/classes/patch.bbclass
+>> +++ b/classes/patch.bbclass
+>> @@ -527,7 +527,7 @@ python patch_do_patch() {
+>>   				bb.note("Patch '%s' applies to earlier revisions" % pname)
+>>   				continue
+>>
+>> -		bb.note("Applying patch '%s' (%s)" % (pname, unpacked))
+>> +		bb.note("Applying patch '%s' (%s)" % (pname, base_path_out(unpacked, 
+>> d)))
+>>   		try:
+>>   			patchset.Import({"file":unpacked, "remote":url, "strippath": pnum}, 
+>> True)
+>>   		except:
 >
 >
 >
