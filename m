@@ -1,26 +1,21 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1MJ1uF-00065H-NE
-	for Openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 11:03:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id EBF5B2C81F;
-	Tue, 23 Jun 2009 08:51:43 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FX5-SFau4zTx; Tue, 23 Jun 2009 08:51:42 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTP id 8AC2E2C81D;
-	Tue, 23 Jun 2009 08:51:40 +0000 (UTC)
-Message-ID: <4A4097CA.9040207@gmail.com>
-Date: Tue, 23 Jun 2009 10:52:26 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.21 (X11/20090318)
-MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MJ1yc-0006C0-Pi
+	for openembedded-devel@openembedded.org; Tue, 23 Jun 2009 11:07:38 +0200
+Received: (qmail 32454 invoked by uid 813007); 23 Jun 2009 08:56:36 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Jun 2009 08:56:36 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Jun 2009 10:55:50 +0200
+Message-Id: <1245747353-27218-2-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.1
+In-Reply-To: <200906230939.34062.marcin@juszkiewicz.com.pl>
+References: <200906230939.34062.marcin@juszkiewicz.com.pl>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [STABLE][PATCH 048/125] s/IPKG_INSTALL/PACKAGE_INSTALL/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,59 +29,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 09:03:07 -0000
-Content-Type: text/x-diff;
-	name="0001-Added-PREFERRED_VERSION_classpath-to-support-JVM-in.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
-	filename*0="0001-Added-PREFERRED_VERSION_classpath-to-support-JVM-in.pat";
-	filename*1="ch"
+X-List-Received-Date: Tue, 23 Jun 2009 09:07:39 -0000
 
-From 182247f1699cd20c442bcb0d1f34bf6b4a555313 Mon Sep 17 00:00:00 2001
-From: koan <koan@mozart.(none)>
-Date: Tue, 23 Jun 2009 10:49:25 +0200
-Subject: [PATCH] Added PREFERRED_VERSION_classpath to support JVM in KaeilOS distro
-  with contribution of Ronetix (www.ronetix.at)
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 
+According to the git log (e.g.,
+7302c6263934c237da66719bd42505b6c05d10cc), there was a change in the
+variable naming.  IPKG_INSTALL was renamed to PACKAGE_INSTALL some time
+ago. classes/rootfs_ipk.bbclass currently uses PACKAGE_INSTALL instead
+of IPKG_INSTALL.
 
-Signed-off-by: koan <koan@mozart.(none)>
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 ---
- conf/distro/kaeilos.conf |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
+ docs/usermanual/reference/class_rootfs_ipkg.xml |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
-index 2b3aae8..1d75976 100644
---- a/conf/distro/kaeilos.conf
-+++ b/conf/distro/kaeilos.conf
-@@ -3,7 +3,7 @@
- #@NAME: KaeilOS(R) - http://www.kaeilos.com
- #@DESCRIPTION: KaeilOS Linux Distribution for Kernel 2.6 based devices
- #@MAINTAINER: Marco Cavallini <m.cavallini@koansoftware.com>
--#@VERSION: 28-04-2009
-+#@VERSION: 23-04-2009
- #
- # Use this at your own risk, we welcome bugreports filed at 
- #    http://bugs.openembedded.net
-@@ -12,7 +12,7 @@
- #DISTRO_VERSION = "2009.1"
- DISTRO_VERSION = "2009.1-test-${DATE}"
- DISTRO_REVISION = "1"
--DISTRO_PR = ".1"
-+DISTRO_PR = ".2"
+diff --git a/docs/usermanual/reference/class_rootfs_ipkg.xml b/docs/usermanual/reference/class_rootfs_ipkg.xml
+index b60adf8..98e6e25 100644
+--- a/docs/usermanual/reference/class_rootfs_ipkg.xml
++++ b/docs/usermanual/reference/class_rootfs_ipkg.xml
+@@ -41,7 +41,7 @@
  
- #build staging from packages
- INHERIT += "packaged-staging"
-@@ -130,6 +130,9 @@ PREFERRED_VERSION_binutils_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross_avr32 = "2.17"
- PREFERRED_VERSION_binutils-cross-sdk_avr32 = "2.17"
+     <listitem>
+       <para>Installs the list of requested <command>.ipkg</command> packages,
+-      <command>${IPKG_INSTALL}</command>;</para>
++      <command>${PACKAGE_INSTALL}</command>;</para>
+     </listitem>
  
-+#Other packages version
-+PREFERRED_VERSION_classpath ?= "0.97.2"
-+
- # Virtuals:
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "binutils-cross"
- PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "gcc-cross-initial"
+     <listitem>
+@@ -89,7 +89,7 @@
+ 
+   <variablelist>
+     <varlistentry>
+-      <term>IPKG_INSTALL</term>
++      <term>PACKAGE_INSTALL</term>
+ 
+       <listitem>
+         <para>The list of packages which will be installed into the root
+@@ -212,4 +212,4 @@
+   which is executed without <xref linkend="fakeroot" /> and therefore can be
+   used from other classes, such as <xref linkend="image_class" />, that
+   are already running under the control of <xref linkend="fakeroot" />.</para>
+-</section>
+\ No newline at end of file
++</section>
 -- 
-1.5.4.3
+1.6.3.1
+
+
+
 
 
