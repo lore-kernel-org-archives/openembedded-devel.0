@@ -1,22 +1,26 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [206.46.173.13] (helo=vms173013pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MJDQN-0004VQ-Ss
+	(envelope-from <denis@denix.org>) id 1MJEZs-0000QM-GH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 23:21:03 +0200
-Received: from [95.89.44.245] (helo=[192.168.0.101])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MJDNr-0002wu-Pv
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Jun 2009 23:18:27 +0200
-Message-ID: <4A4144A3.2030805@kernelconcepts.de>
-Date: Tue, 23 Jun 2009 23:09:55 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-MIME-Version: 1.0
+	Wed, 24 Jun 2009 00:34:56 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KLP0024KQ6U4XA3@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	23 Jun 2009 17:23:19 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8836B14AF5F; Tue,
+	23 Jun 2009 18:23:18 -0400 (EDT)
+Date: Tue, 23 Jun 2009 18:23:18 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.7
-Subject: Some LinuxTag Tickets
+Message-id: <20090623222318.GB32082@denix.org>
+References: <200906230940.05121.marcin@juszkiewicz.com.pl>
+	<1245747417-11163-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<h1q6bq$a5v$7@ger.gmane.org>
+MIME-version: 1.0
+In-reply-to: <h1q6bq$a5v$7@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [STABLE][PATCH 052/125] evtest: Fixed GNU_HASH QA error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,24 +34,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2009 21:21:04 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Jun 2009 22:34:56 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi,
+On Tue, Jun 23, 2009 at 11:13:30AM +0200, Koen Kooi wrote:
+> On 23-06-09 10:56, Marcin Juszkiewicz wrote:
+>> From: Theodore A. Roth<taroth@gmail.com>
+>>
+>> Signed-off-by: Theodore A. Roth<taroth@gmail.com>
+>> Acked-by: Denys Dmytriyenko<denis@denix.org>
+>> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+>
+> Even though it lacks a PR bump:
+> Acked-by: Koen Kooi <koen@openembedded.org>
 
-we still have a few free tickets left for LinuxTag. If you need one please drop
-me a mail (and try to avoid to reply to the list). :)
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+>> ---
+>>   recipes/evtest/evtest_1.23.bb |    2 ++
+>>   1 files changed, 2 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/recipes/evtest/evtest_1.23.bb b/recipes/evtest/evtest_1.23.bb
+>> index 4c5d195..6cf87be 100644
+>> --- a/recipes/evtest/evtest_1.23.bb
+>> +++ b/recipes/evtest/evtest_1.23.bb
+>> @@ -11,6 +11,8 @@ PR = "r0"
+>>   SRC_URI = "http://beagleboard.googlecode.com/files/evtest.c"
+>>   S = "${WORKDIR}"
+>>
+>> +TARGET_CC_ARCH += "${LDFLAGS}"
+>> +
+>>   do_compile() {
+>>       ${CC} evtest.c -o evtest -I${STAGING_INCDIR} -L${STAGING_LIBDIR}
+>>   }
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
