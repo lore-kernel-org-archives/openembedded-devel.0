@@ -1,38 +1,22 @@
-Received: from [202.37.96.11] (helo=gatekeeper.tait.co.nz)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1MJLcY-0008MP-MM
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Jun 2009 08:06:11 +0200
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id 2E75846752
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2009 17:55:01 +1200 (NZST)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])by 
-	gatekeeper.tait.co.nz (Postfix) with ESMTP id 1DB0846749for 
-	<openembedded-devel@lists.openembedded.org>; Wed, 24 Jun 2009 17:54:58 
-	+1200 (NZST)
-Received: from conversion-daemon.sunstrike.tait.co.nz by 
-	sunstrike.tait.co.nz(Sun Java System Messaging Server 6.1 (built Apr 28
-	2004))id <0KLQ00E019KEJY00@sunstrike.tait.co.nz>(original mail from 
-	douglas.royds@tait.co.nz)for openembedded-devel@lists.openembedded.org; 
-	Wed,24 Jun 2009 17:54:58 +1200 (NZST)
-Received: from [172.25.114.21] by sunstrike.tait.co.nz(Sun Java System 
-	Messaging Server 6.1 (built Apr 28 2004))with ESMTP id 
-	<0KLQ00EU6B3M1G10@sunstrike.tait.co.nz> 
-	foropenembedded-devel@lists.openembedded.org; Wed,24 Jun 2009 17:54:58 
-	+1200 (NZST)
-Date: Wed, 24 Jun 2009 17:56:27 +1200
-From: Douglas Royds <douglas.royds@tait.co.nz>
-In-reply-to: <1245692685-21173-1-git-send-email-denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <4A41C00B.3030409@tait.co.nz>
-MIME-version: 1.0
-References: <1245692685-21173-1-git-send-email-denis@denix.org>
+Received: from [128.178.224.226] (helo=smtp3.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1MJRch-00062g-0Q
+	for openembedded-devel@openembedded.org; Wed, 24 Jun 2009 14:30:43 +0200
+Received: (qmail 32716 invoked by uid 107); 24 Jun 2009 12:19:21 -0000
+X-Virus-Scanned: ClamAV
+Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
+	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Wed, 24 Jun 2009 14:19:21 +0200
+Message-ID: <4A4219C9.2090306@epfl.ch>
+Date: Wed, 24 Jun 2009 14:19:21 +0200
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
 User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
-X-imss-version: 2.054
-X-imss-result: Passed
-X-imss-approveListMatch: *@tait.co.nz
-Subject: Re: RFC: [PATCH] /etc/profile: stricter root PATH -requireabsolute pathname for bins in cwd
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <4A3BB88C.5010504@epfl.ch> <4A41BE26.3040102@tait.co.nz>
+In-Reply-To: <4A41BE26.3040102@tait.co.nz>
+Subject: Re: [RFC] cmake cross-compilation paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,51 +30,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jun 2009 06:06:11 -0000
-Content-type: text/plain;
-	format=flowed;
-	charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Wed, 24 Jun 2009 12:30:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Should this find its way back into Stable?
+Douglas Royds wrote:
+> Perhaps you need:
+> 
+>     -DCMAKE_FIND_ROOT_PATH="${STAGING_DIR_HOST};${STAGING_DIR_NATIVE}" 
+
+Thank you for your input, I had come to the same value. I think this 
+should be the default behaviour for cmake, and this should be pushed to 
+cmake.bbclass.
+
+It still does not work for the FindQt4 module, but this is due to the 
+fact that the PATHS qmake searches for libraries and headers in are 
+define at COMPILE time and cannot be changed with this value.
+
+Val
+
+> 
+> Douglas.
+> 
+> 
+> Valentin Longchamp wrote:
+>> Hello,
+>>
+>> I am trying to build cmake based programs that use QT with 
+>> Openembedded. The actual support for cmake in OE worked until now that 
+>> I only had "simple" dependencies. Now with QT as as dependency, I use 
+>> the cmake FindQt4 Module that strongly relies on qmake to find the 
+>> different QT cmake variables (try to run ${STAGINGBINDIR}/qmake4 -query).
+>>
+>> The problem is that FindQt4 does not find the qmake4 (as I have 
+>> proposed to rename it like that in my patch from yesterday) since the 
+>> CMAKE_FIND_ROOT_PATH given to the cmake cmd in the 
+>> classes/cmake.bbclass only is set to
+>>
+>> -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR_HOST}
+>>
+>> that does not include ${STAGING_BIN_DIR}. Setting it to
+>>
+>> -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR}
+>>
+>> makes configure fail (it cannot find the needed header files); and with
+>>
+>> -DCMAKE_FIND_ROOT_PATH="${STAGING_DIR_HOST};${STAGING_DIR}"
+>>
+>> qmake4 is not found either.
+>>
+>> So if someone who knows cmake better than me can tell me how to give 
+>> two paths to a cmd -DPATH_NAME=VALUE1 VALUE2 for cmake (and what would 
+>> be the equivalent to STAGING_DIR_HOST for ${STAGING_DIR}/i686-linux in 
+>> my case) that would help a lot (I am not sure it can be achieved).
+>>
+>> All the inputs are greatly appreciated and if you could help me for 
+>> the OE var names (especially for the equivalent to ${STAGING_DIR_HOST} 
+>> that would point to ${STAGING_DIR}/i686-linux, that would already be a 
+>> good start)
+>>
+>> Thanks a lot
+>>
 
 
-Denys Dmytriyenko wrote:
-> Having current directory (either '.' or empty string) in PATH is considered
-> dangerous for root.
->
-> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-> ---
->  recipes/base-files/base-files/profile |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/base-files/base-files/profile b/recipes/base-files/base-files/profile
-> index 5797535..b5ce69d 100644
-> --- a/recipes/base-files/base-files/profile
-> +++ b/recipes/base-files/base-files/profile
-> @@ -12,7 +12,7 @@ if [ ! -e /etc/localtime ]; then
->  fi
->  
->  if [ "`id -u`" -eq 0 ]; then
-> -   PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin:
-> +   PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
->  fi
->  if [ "$PS1" ]; then
->  # works for bash and ash (no other shells known to be in use here)
->   
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
-
+-- 
+Valentin Longchamp, PhD Student, EPFL-STI-LSRO1
+valentin.longchamp@epfl.ch, Phone: +41216937827
+http://people.epfl.ch/valentin.longchamp
+MEA3485, Station 9, CH-1015 Lausanne
 
 
