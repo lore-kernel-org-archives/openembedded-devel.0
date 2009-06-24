@@ -1,22 +1,23 @@
-Received: from [128.178.224.226] (helo=smtp3.epfl.ch)
+Received: from [128.178.224.219] (helo=smtp0.epfl.ch)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1MJRch-00062g-0Q
-	for openembedded-devel@openembedded.org; Wed, 24 Jun 2009 14:30:43 +0200
-Received: (qmail 32716 invoked by uid 107); 24 Jun 2009 12:19:21 -0000
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1MJSMv-0007D8-1D
+	for openembedded-devel@openembedded.org; Wed, 24 Jun 2009 15:18:29 +0200
+Received: (qmail 11430 invoked by uid 107); 24 Jun 2009 13:07:13 -0000
 X-Virus-Scanned: ClamAV
 Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
-	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Wed, 24 Jun 2009 14:19:21 +0200
-Message-ID: <4A4219C9.2090306@epfl.ch>
-Date: Wed, 24 Jun 2009 14:19:21 +0200
+	by smtp0.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Wed, 24 Jun 2009 15:07:14 +0200
+Message-ID: <4A422501.9070504@epfl.ch>
+Date: Wed, 24 Jun 2009 15:07:13 +0200
 From: Valentin Longchamp <valentin.longchamp@epfl.ch>
 User-Agent: Thunderbird 2.0.0.21 (X11/20090409)
 MIME-Version: 1.0
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-References: <4A3BB88C.5010504@epfl.ch> <4A41BE26.3040102@tait.co.nz>
-In-Reply-To: <4A41BE26.3040102@tait.co.nz>
-Subject: Re: [RFC] cmake cross-compilation paths
+References: <1245344715-22415-1-git-send-email-valentin.longchamp@epfl.ch>
+	<4A41BA29.3000007@tait.co.nz>
+In-Reply-To: <4A41BA29.3000007@tait.co.nz>
+Subject: Re: [PATCH] render cmake search path stricter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,22 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jun 2009 12:30:43 -0000
+X-List-Received-Date: Wed, 24 Jun 2009 13:18:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Douglas Royds wrote:
-> Perhaps you need:
+> Any particular reason not to include CMAKE_FIND_ROOT_PATH_MODE_PACKAGE?
+
+Simply because I did not know about it as I based myself on the this 
+doc: http://www.cmake.org/Wiki/CMake_Cross_Compiling and they never talk 
+about this variable. I do not see a lot of references to that variable 
+so I don't think we should set it here.
+
 > 
->     -DCMAKE_FIND_ROOT_PATH="${STAGING_DIR_HOST};${STAGING_DIR_NATIVE}" 
+> Normally this won't have any effect, as CMake will look in the CMake 
+> installation for FindSomething.cmake ("module" mode). But if a package 
+> installs a SomethingConfig.cmake in /usr/share/cmake (the "config" mode 
+> of find_package) we should be looking only in staging, not trawling 
+> around on the host PC.
 
-Thank you for your input, I had come to the same value. I think this 
-should be the default behaviour for cmake, and this should be pushed to 
-cmake.bbclass.
-
-It still does not work for the FindQt4 module, but this is due to the 
-fact that the PATHS qmake searches for libraries and headers in are 
-define at COMPILE time and cannot be changed with this value.
+I agree with you, we should be looking only in staging. But the problem 
+is that with the below proposed option 
+DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=ONLY, the OE buids do not work well. 
+You certainly need a few tools from the host PC. That's why I now have 
+CMAKE_FIND_ROOT_PATH_MODE_PROGRAM=BOTH. But the default behaviour with 
+cmake is that the directories listed in CMAKE_FIND_ROOT_PATH are 
+searched for, which is what we want.
 
 Val
 
@@ -54,45 +65,31 @@ Val
 > 
 > 
 > Valentin Longchamp wrote:
->> Hello,
+>> The search is only done in the STAGING directy: all the needed tools
+>> should be there (already built) and all the libs and header are there
+>> too. With this, we are sure that we do not mix with the host libs,
+>> headers or tools.
 >>
->> I am trying to build cmake based programs that use QT with 
->> Openembedded. The actual support for cmake in OE worked until now that 
->> I only had "simple" dependencies. Now with QT as as dependency, I use 
->> the cmake FindQt4 Module that strongly relies on qmake to find the 
->> different QT cmake variables (try to run ${STAGINGBINDIR}/qmake4 -query).
+>> Signed-off-by: Valentin Longchamp <valentin.longchamp@epfl.ch>
+>> ---
+>>  classes/cmake.bbclass |    3 +++
+>>  1 files changed, 3 insertions(+), 0 deletions(-)
 >>
->> The problem is that FindQt4 does not find the qmake4 (as I have 
->> proposed to rename it like that in my patch from yesterday) since the 
->> CMAKE_FIND_ROOT_PATH given to the cmake cmd in the 
->> classes/cmake.bbclass only is set to
->>
->> -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR_HOST}
->>
->> that does not include ${STAGING_BIN_DIR}. Setting it to
->>
->> -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR}
->>
->> makes configure fail (it cannot find the needed header files); and with
->>
->> -DCMAKE_FIND_ROOT_PATH="${STAGING_DIR_HOST};${STAGING_DIR}"
->>
->> qmake4 is not found either.
->>
->> So if someone who knows cmake better than me can tell me how to give 
->> two paths to a cmd -DPATH_NAME=VALUE1 VALUE2 for cmake (and what would 
->> be the equivalent to STAGING_DIR_HOST for ${STAGING_DIR}/i686-linux in 
->> my case) that would help a lot (I am not sure it can be achieved).
->>
->> All the inputs are greatly appreciated and if you could help me for 
->> the OE var names (especially for the equivalent to ${STAGING_DIR_HOST} 
->> that would point to ${STAGING_DIR}/i686-linux, that would already be a 
->> good start)
->>
->> Thanks a lot
->>
-
-
+>> diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
+>> index b5b7b86..af8f3a9 100644
+>> --- a/classes/cmake.bbclass
+>> +++ b/classes/cmake.bbclass
+>> @@ -21,6 +21,9 @@ cmake_do_configure() {
+>>    cmake ${OECMAKE_SOURCEPATH} \
+>>      -DCMAKE_INSTALL_PREFIX:PATH=${prefix} \
+>>      -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR_HOST} \
+>> +    -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=ONLY \
+>> +    -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
+>> +    -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
+>>      ${EXTRA_OECMAKE} \
+>>      -Wno-dev
+>>  }
+>>   
 -- 
 Valentin Longchamp, PhD Student, EPFL-STI-LSRO1
 valentin.longchamp@epfl.ch, Phone: +41216937827
