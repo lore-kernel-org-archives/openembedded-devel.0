@@ -1,38 +1,20 @@
-Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1MJuzf-0001lO-Oa
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Jun 2009 21:52:23 +0200
-Received: by ewy21 with SMTP id 21so494610ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2009 12:41:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=YDBr7o+nTfl6dVS5HZVf+clvQ9dAnBw5lgq8QTSgUKc=;
-	b=s7EfWlY6pdR74OiRoiec/C3FpSBrCB58pgbL7S7TRyVCU+1lC3YnHxWBRT9H6/IEpt
-	KHHRkS3y3X8HI/waMuBXBbOHXnCDsiTotnrJwQDR2jnnCTXC/+rv/OEAnkG9fCtw1EKF
-	0SplT2Erq7zzldIlBRuCBXnGXGtqrfw0FP+v4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=M8hIRcUdyI0z4uwfBYGj09c3J5M5TPOYK+SX89qzrqwq/4rM51P5oq/NAJJG0lj2Hc
-	UEFkmw+TAirYYvLZOib0jJjxeNdihijr0Np+bdkKrfywHpf7IQvsx36eo/KdHRfSZuK3
-	1xFMWStXRWXwh74tBjafF9Sw4yE/emoEjlLZo=
+	(envelope-from <philip@balister.org>) id 1MJv8J-0001zL-Hw
+	for openembedded-devel@openembedded.org; Thu, 25 Jun 2009 22:01:20 +0200
+Received: (qmail 29566 invoked by uid 1003); 25 Jun 2009 19:49:59 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 25 Jun 2009 19:49:58 -0000
+Message-ID: <4A43D4E4.90409@balister.org>
+Date: Thu, 25 Jun 2009 21:49:56 +0200
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
-Received: by 10.210.40.10 with SMTP id n10mr901774ebn.49.1245958863708; Thu, 
-	25 Jun 2009 12:41:03 -0700 (PDT)
-In-Reply-To: <20090625182849.GL32082@denix.org>
-References: <48239d390906251050w5f84947dy6c7490ab51d34983@mail.gmail.com>
-	<20090625182849.GL32082@denix.org>
-Date: Thu, 25 Jun 2009 23:41:03 +0400
-Message-ID: <48239d390906251241p73ff7f5rcdae350df20ef41c@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
-To: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] OMAP3530 bring-up (and installation of Angstrom)
+To: openembedded-devel@lists.openembedded.org
+References: <1245871136.5939.3.camel@utx.utx.cz> <h1u7s2$b8l$1@ger.gmane.org>
+In-Reply-To: <h1u7s2$b8l$1@ger.gmane.org>
+Subject: Re: [PATCH] introduction of virtual/libusb0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,47 +28,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2009 19:52:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 25 Jun 2009 20:01:21 -0000
+X-Groupsio-MsgNum: 11632
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms020805060206030705000604"
+
+--------------ms020805060206030705000604
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, Jun 25, 2009 at 10:28 PM, Denys Dmytriyenko<denis@denix.org> wrote:
-> On Thu, Jun 25, 2009 at 09:50:41PM +0400, Sergey Lapin wrote:
->> Hi, all!
+Koen Kooi wrote:
+> On 24-06-09 21:18, Stanislav Brabec wrote:
+>> Hallo.
 >>
->> I have a new OMAP3530-based board which is totally empty.
->> omapzoom tools recognize ASIC ID on serial port, so I think it should
->> be possible
->> to bring it up this way. Do anybody have some minimal testing program
->> to flip some GPIO,
->> or character on serial?
->> I can't get any output from x-loader on either UART1 or UART3.. How
->> should I build binary for
->> it to be recognized by boot loader over serial?
->> No JTAG is here for this processor, and I have some troubles with
->> understanding of
->> Windows tools.
->
-> Does your board have any buttons or DIP-switches to select boot order? You may
-> need to select the serial boot in order for the BootROM to send a handshake
-> sequence on the UART3. The handshake on the therminal looks like several
-> characters of garbage, starting with '40T'. The boot order is selected by a
-> DIP-switch on OMAP3EVM and by a "User" button on BeagleBoard.
-I probably skipped some details on last email, sorry. I see ASIC ID
-pattern (some garbage containing 40T).
-I use pserial from omapzoom and try to upload self-built x-loader
-binary, it reports success,
-but I see no output on either of serial ports. No error messages,
-nothing at all. That's why I'm interested in
-minimal test program to use oscilloscope on some pins. I see that GPIO
-configuration on OMAP3 is a lot
-more complex than on AT91 and PXA, so I look for samples to check what
-debugging could be inserted into
-x-loader to look what happens. Also, a question remains - is it needed
-for binary to be signed
-befor uploading to serial, or not?
+>> I plan to submit attached patch to oe.dev to fix clash of libusb-compat
+>> and libusb in recipes by introduction of virtual/libusb0.
+>>
+>> libusb-compat and libusb provide exactly the same API and ABI using a
+>> different back-end, and applications should work with both of them
+>> without recompilation.
+> 
+> Why not statically link in the old libusb0 to those broken apps? We do 
+> that for gnuradio (in a hacky way, but it can be made generic) and it 
+> works well.
 
-Thanks a lot,
-S.
++1
 
+We have made gnuradio build with a private copy of libusb-0.12 and it is 
+staically linked against this copy. Further clubbing was needed to stop 
+libtool trying to link apps that used the USRP from linking to the library.
 
+I think there are only a small handful of apps that do not use the 
+public libusb interface.
+
+Do you have a specific package you are having issues with? Take a look 
+at the gnuradio.inc file to see how we solved the problem there.
+
+Philip
+
+PS: By solved I mean it builds, I had to leave for Linuxtag before I 
+could test extensively :)
+
+--------------ms020805060206030705000604
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
+OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
+Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
+MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
+EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
+V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
+ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
+ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
+SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
+n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
+R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
+/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
+kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
+Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
+urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYyNTE5
+NDk1NlowIwYJKoZIhvcNAQkEMRYEFNkqLqoEqZcjoh+wy7q52+fImFbFMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
+/DANBgkqhkiG9w0BAQEFAASCAQBVSNxpdbHlSzEadBug6rxXb2KDP7MWL62nOerB9FfVq2Ep7pOa
+7O7B2PB9pPi1Z3YHOJgI3OmKJ2tKLVNNp4+BbUQwZjRmnXXvI4P82YdBH7qsSYNYANsEecEHPHED
+aFlICABKc1Y+jG3+RtW03CSJ5qGaSmWedmgzVjOJa6R/suxDLqWt9sqRKpG1t/mHaNMnoQjGA3Ua
+S1sSD/dNfJxKnXHXEczVcWEjyENKmTN34mbakHC4ftaKMof1yqMY3McMwIoO6XHcMX8VA60ooxKi
+FDMxupq89AowDDfJzBK75NtYPs5Kg8gWaV4f6jGGd4amqnW2MZgyKnDTqDQM13maAAAAAAAA
+
+--------------ms020805060206030705000604--
