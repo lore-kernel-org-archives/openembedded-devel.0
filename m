@@ -1,26 +1,34 @@
-Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
+Received: from [74.125.78.147] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1MJszw-0004AV-GZ
+	(envelope-from <slapinid@gmail.com>) id 1MJtGq-0004dF-Br
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Jun 2009 19:44:32 +0200
-Received: from [10.50.1.165] (unknown [10.50.1.165])
-	by hermes.mvista.com (Postfix) with ESMTP id 3EFE11ADAE
+	Thu, 25 Jun 2009 20:02:00 +0200
+Received: by ey-out-1920.google.com with SMTP id 3so190627eyh.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2009 10:33:12 -0700 (PDT)
-Message-Id: <0396D012-255F-40C1-8A8E-C715B1FA9EDA@mvista.com>
-From: Christopher Larson <clarson@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1245949964.25917.13.camel@hammer.suse.cz>
-Mime-Version: 1.0 (Apple Message framework v935.3)
-Date: Thu, 25 Jun 2009 10:33:11 -0700
-References: <1245871136.5939.3.camel@utx.utx.cz>
-	<b6ebd0a50906241244hb9331c6nb22d82f6f04d004c@mail.gmail.com>
-	<1245875929.5939.17.camel@utx.utx.cz>
-	<b6ebd0a50906241347g1667f13cy83f7dc49f6e7ce86@mail.gmail.com>
-	<1245880813.5939.46.camel@utx.utx.cz>
-	<1245949964.25917.13.camel@hammer.suse.cz>
-X-Mailer: Apple Mail (2.935.3)
-Subject: Re: [PATCH] introduction of virtual/libusb0
+	Thu, 25 Jun 2009 10:50:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=N2zM6VeJC99Vkb4PflYU/yPFoiUtOxRgqG2e28GTRVY=;
+	b=P+AILfPridA+xJTVE7BfUei0X2NWBHOU8R5GK6ySvslda+Lp+a86dvbqCpXwbtejdv
+	iF0RLE2ARnoR4B0Nv4KtHgjwczdPz2832BPOwjKscM7VlNeA64kUVJ1iDATMpRRqH5/n
+	o45ScM/xVS2ym0oU0NbHM/429SXg5at4vGkJs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=cfT5CWZDR6I+IKygajNDDMNh3Lt/BRxdhggMygMxFSeqsj4489f/9zqQqU25wYWgBx
+	iiZHqAXpsY+u3yhHMLD4QnbLAhE6rBVNYZILgsm8LuZL9Fq4O7/q/a60UwyHc2t3lt79
+	r7OE2RRfm91t+p4VdaLZ6q51X7c6y7+swFaVE=
+MIME-Version: 1.0
+Received: by 10.210.113.16 with SMTP id l16mr2477519ebc.29.1245952242325; Thu, 
+	25 Jun 2009 10:50:42 -0700 (PDT)
+Date: Thu, 25 Jun 2009 21:50:41 +0400
+Message-ID: <48239d390906251050w5f84947dy6c7490ab51d34983@mail.gmail.com>
+From: Sergey Lapin <slapinid@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+Subject: OMAP3530 bring-up (and installation of Angstrom)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,39 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2009 17:44:33 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Thu, 25 Jun 2009 18:02:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+Hi, all!
 
-On Jun 25, 2009, at 10:12 AM, Stanislav Brabec wrote:
+I have a new OMAP3530-based board which is totally empty.
+omapzoom tools recognize ASIC ID on serial port, so I think it should
+be possible
+to bring it up this way. Do anybody have some minimal testing program
+to flip some GPIO,
+or character on serial?
+I can't get any output from x-loader on either UART1 or UART3.. How
+should I build binary for
+it to be recognized by boot loader over serial?
+No JTAG is here for this processor, and I have some troubles with
+understanding of
+Windows tools.
 
-> Stanislav Brabec wrote:
->> Chris Larson wrote:
->>
->>> DEFAULT_PREFERENCE is just default behavior when no  
->>> PREFERRED_PROVIDER
->>> is set by the distro.
->
-> It seems that it is not true. First in order it selects ordered  
-> package
-> name list for the requirement (using only PREFERRED_PROVIDER),  
-> second in
-> order it decides about best version for each package name (using
-> DEFAULT_PREFERENCE and PREFERRED_VERSION variables). When no explicit
-> dependence or conflict is found, best version for the package first in
-> order will be selected.
-
-Aye, good catch.  It seems that it always prefers the recipe whose PN  
-is the same as the provider even when there are DEFAULT_PREFERENCE's  
-in either direction in the recipes that provide it.  This seems like a  
-bug to me.
--- 
-Chris Larson
-Software Engineer
-MontaVista Software, Inc.
-Email: clarson AT mvista DOT com
-Email: clarson AT kergoth DOT com
-
+All the best,
+S.
 
 
