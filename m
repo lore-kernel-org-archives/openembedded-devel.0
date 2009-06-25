@@ -1,19 +1,20 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MJv8J-0001zL-Hw
-	for openembedded-devel@openembedded.org; Thu, 25 Jun 2009 22:01:20 +0200
-Received: (qmail 29566 invoked by uid 1003); 25 Jun 2009 19:49:59 -0000
+	(envelope-from <philip@balister.org>) id 1MJvCy-0002FB-0m
+	for openembedded-devel@openembedded.org; Thu, 25 Jun 2009 22:06:08 +0200
+Received: (qmail 20770 invoked by uid 1003); 25 Jun 2009 19:54:47 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 25 Jun 2009 19:49:58 -0000
-Message-ID: <4A43D4E4.90409@balister.org>
-Date: Thu, 25 Jun 2009 21:49:56 +0200
+	by mail.geekisp.com with SMTP; 25 Jun 2009 19:54:47 -0000
+Message-ID: <4A43D604.8060606@balister.org>
+Date: Thu, 25 Jun 2009 21:54:44 +0200
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1245871136.5939.3.camel@utx.utx.cz> <h1u7s2$b8l$1@ger.gmane.org>
-In-Reply-To: <h1u7s2$b8l$1@ger.gmane.org>
+	<1245912746.4156.12.camel@utx.utx.cz>
+In-Reply-To: <1245912746.4156.12.camel@utx.utx.cz>
 Subject: Re: [PATCH] introduction of virtual/libusb0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -28,48 +29,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2009 20:01:21 -0000
-X-Groupsio-MsgNum: 11632
+X-List-Received-Date: Thu, 25 Jun 2009 20:06:08 -0000
+X-Groupsio-MsgNum: 11633
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms020805060206030705000604"
+	micalg=sha1; boundary="------------ms010406000507020500050009"
 
---------------ms020805060206030705000604
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+--------------ms010406000507020500050009
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Koen Kooi wrote:
-> On 24-06-09 21:18, Stanislav Brabec wrote:
->> Hallo.
->>
->> I plan to submit attached patch to oe.dev to fix clash of libusb-compat
->> and libusb in recipes by introduction of virtual/libusb0.
->>
->> libusb-compat and libusb provide exactly the same API and ABI using a
->> different back-end, and applications should work with both of them
->> without recompilation.
-> 
-> Why not statically link in the old libusb0 to those broken apps? We do 
-> that for gnuradio (in a hacky way, but it can be made generic) and it 
-> works well.
+Stanislav Brabec wrote:
+> Koen Kooi wrote:
+>=20
+>>> libusb-compat and libusb provide exactly the same API and ABI using a=
 
-+1
+>>> different back-end, and applications should work with both of them
+>>> without recompilation.
+>> Why not statically link in the old libusb0 to those broken apps? We do=
+=20
+>> that for gnuradio (in a hacky way, but it can be made generic) and it =
 
-We have made gnuradio build with a private copy of libusb-0.12 and it is 
-staically linked against this copy. Further clubbing was needed to stop 
-libtool trying to link apps that used the USRP from linking to the library.
+>> works well.
+>=20
+> =EF=BB=BFReverting to libusb-0 (even statically linked) is a quick
+> fix. =EF=BB=BFDebugging of libusb-compat, fixing it and sending patch u=
+pstream
+> is a correct way.
+>=20
+> =EF=BB=BFUp to now it worked in all cases except gnuradio, which uses i=
+nternal
+> functions of libusb-0. All other applications should work with
+> libusb-compat and no static linking should be needed.
+>=20
+> Maybe few years from now on we can drop libusb-0 recipes completely (an=
+d
+> keep gnuradio with statically linked old library maybe forever)
+> altogether with the virtual. Now it is useful for quick fixing and for
+> debugging of problems of libusb-compat.
 
-I think there are only a small handful of apps that do not use the 
-public libusb interface.
+I would love to see gnuradio use libusb1 or something. Until mainstream=20
+distros go libusb1 + libusb-compat, there is not much motivation to=20
+resolve the issue in gnuradio. I have looked at the code, and going to=20
+statically linked route was the least time consuming solution.
 
-Do you have a specific package you are having issues with? Take a look 
-at the gnuradio.inc file to see how we solved the problem there.
+Basically, I want to do actual interesting work, and not hack arounf at=20
+the usb layer :)
 
-Philip
+Phiip
 
-PS: By solved I mean it builds, I had to leave for Linuxtag before I 
-could test extensively :)
 
---------------ms020805060206030705000604
+--------------ms010406000507020500050009
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -121,17 +130,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDYyNTE5
-NDk1NlowIwYJKoZIhvcNAQkEMRYEFNkqLqoEqZcjoh+wy7q52+fImFbFMFIGCSqGSIb3DQEJDzFF
+NTQ0NFowIwYJKoZIhvcNAQkEMRYEFPKkcru0NkmSoTFSjNsqA/KZoAw3MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBVSNxpdbHlSzEadBug6rxXb2KDP7MWL62nOerB9FfVq2Ep7pOa
-7O7B2PB9pPi1Z3YHOJgI3OmKJ2tKLVNNp4+BbUQwZjRmnXXvI4P82YdBH7qsSYNYANsEecEHPHED
-aFlICABKc1Y+jG3+RtW03CSJ5qGaSmWedmgzVjOJa6R/suxDLqWt9sqRKpG1t/mHaNMnoQjGA3Ua
-S1sSD/dNfJxKnXHXEczVcWEjyENKmTN34mbakHC4ftaKMof1yqMY3McMwIoO6XHcMX8VA60ooxKi
-FDMxupq89AowDDfJzBK75NtYPs5Kg8gWaV4f6jGGd4amqnW2MZgyKnDTqDQM13maAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQAb0bVeptUE6NmghwKaPSeYMh3iJtNRfN1so4d7rrGYZ2pYvUpP
+PF1XFghrZVoT0CHAwgu96DfsLZ2vqG3Ea5nQmP4GnD293RtATBAxyIAbBF5VQlVyj9ZXUMrclWsr
+PIMJ1zObPvpEWAJ2eBJ/yLjW/ZvFA15HP0sGao82bq03O7V7FhsjpzM4crYE9x5o9N6r+puCoOJq
+BcI1kjYPXfEWIxsrdxrKKvsUAy8idrTMf1LUfnzhqOu2H9cJMlvP6LA4clWsJJrQ9FEyNgD27Xib
+kyslxkLrhvpAGDl8cpK9+RChvKbhr925ykqfZ88UKIvwbcGfAgsJN6fJJNpMW3AYAAAAAAAA
 
---------------ms020805060206030705000604--
+--------------ms010406000507020500050009--
