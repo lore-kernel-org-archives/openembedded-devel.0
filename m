@@ -1,23 +1,32 @@
-Received: from [64.202.165.30] (helo=smtpauth19.prod.mesa1.secureserver.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <ronald@sysrealtime.com>) id 1MJze1-0003oU-5F
-	for openembedded-devel@openembedded.org; Fri, 26 Jun 2009 02:50:21 +0200
-Received: (qmail 25133 invoked from network); 26 Jun 2009 00:38:57 -0000
-Received: from unknown (71.138.155.177)
-	by smtpauth19.prod.mesa1.secureserver.net (64.202.165.30) with ESMTP;
-	26 Jun 2009 00:38:55 -0000
-Message-ID: <9220ACA993BF4B17ADA77AB934CFA607@ronaldlatd600>
-From: "Ronald Chu" <ronald@sysrealtime.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 Jun 2009 17:38:46 -0700
-MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-Importance: Normal
-X-Mailer: Microsoft Windows Live Mail 14.0.8064.206
-X-MimeOLE: Produced By Microsoft MimeOLE V14.0.8064.206
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: SH4A on OpenEmbedded
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <utx@penguin.cz>) id 1MK6NM-0003t3-7X
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Jun 2009 10:01:36 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 8C77C1409724
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Jun 2009 09:51:49 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UhhEPWDXgC7y
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Jun 2009 09:51:49 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 626AE1416BA2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Jun 2009 09:51:49 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A43D4E4.90409@balister.org>
+References: <1245871136.5939.3.camel@utx.utx.cz>
+	<h1u7s2$b8l$1@ger.gmane.org>  <4A43D4E4.90409@balister.org>
+Date: Fri, 26 Jun 2009 09:50:13 +0200
+Message-Id: <1246002613.3974.12.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: [PATCH] introduction of virtual/libusb0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,19 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2009 00:50:21 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Fri, 26 Jun 2009 08:01:36 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Philip Balister wrote:
+=EF=BB=BF
+>Until mainstream=20
+>distros go libusb1 + libusb-compat, there is not much motivation to=20
+>resolve the issue in gnuradio.
 
-I wonder if OE have the TARGET_ARCH as sh4a? It only contain sh4 (titan...=
- etc)
+openSUSE 11.2 will probably do it.
 
-Is there possible to add sh4a? How would I do that?
+> I think there are only a small handful of apps that do not use the=20
+> public libusb interface.
+>=20
+> Do you have a specific package you are having issues with? Take a look=20
+> at the gnuradio.inc file to see how we solved the problem there.
+
+I did never touch gnuradio, but I seen mails in the list.
+
+There were problems in past with libusb-compat and:
+
+gphoto, f-spot: Problems were fixed before libusb-compat-0.1.0.
+
+gpsbabel + Garmin GPS =3D depended on undocumented libusb0 USB endpoint
+direction sanitization. Fixed in libusb-compat-0.1.1.
+
+gphoto + no USB subsystem: Crash after initialization failure. Fixed
+in =EF=BB=BFlibusb-compat-0.1.2.
+
+There are no known issues with =EF=BB=BF=EF=BB=BFlibusb-compat-0.1.2 yet.
 
 
-Ronald Chu <Ronald@SysRealTime.com>
-From msmith@cbnco.com Fri Jun 26 03:38:42 2009
-Received: from [207.164.182.72] (helo
+To resume my plan:
+
+Introduce virtual/libusb0 for now and set is as default to
+libusb-compat.
+
+When all problems of libusb-compat will be fixed, drop libusb-0
+completely and optionally replace virtual/libusb0 by libusb-compat.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
+
+
