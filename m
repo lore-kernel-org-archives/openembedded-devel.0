@@ -1,20 +1,23 @@
-Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MKEAX-0003dA-Ap
+	(envelope-from <pb@reciva.com>) id 1MKFQv-0008Ip-BD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Jun 2009 18:20:53 +0200
-MIME-version: 1.0
-Received: from [87.201.169.194] by asmtp019.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KLU00KV7SV2TA70@asmtp019.mac.com> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	26 Jun 2009 09:09:07 -0700 (PDT)
-Message-id: <7D58AE12-9642-4B1C-97F4-075F1E7447D3@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Jun 2009 20:08:41 +0400
-X-Mailer: Apple Mail (2.935.3)
-Subject: Incorrect PR number appended to /tmp/work/ recipe folder
+	Fri, 26 Jun 2009 19:41:53 +0200
+Received: from 79-71-239-25.dynamic.dsl.as9105.com ([79.71.239.25]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MKFFs-0000Ql-CH
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Jun 2009 18:30:28 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <7D58AE12-9642-4B1C-97F4-075F1E7447D3@mac.com>
+References: <7D58AE12-9642-4B1C-97F4-075F1E7447D3@mac.com>
+Date: Fri, 26 Jun 2009 18:30:27 +0100
+Message-Id: <1246037427.8887.73.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Incorrect PR number appended to /tmp/work/ recipe folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,37 +31,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2009 16:20:53 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Fri, 26 Jun 2009 17:41:53 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
-          In my linux-omap3-2.6.29.bb recipe file, I have set PR =  
-"r45" as follows:
+On Fri, 2009-06-26 at 20:08 +0400, Elvis Dowson wrote:
+> NOTE: Unpacking /usr/share/sources/ 
+> git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux- 
+> omap-2.6.git_90e758af52ba803cba233fabee81176d99589f09.tar.gz to tmp/ 
+> work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.29-r37/
 
-PN = "linux-omap3"
-PV = "2.6.29"
-PR = "r45"
+I think you have fallen foul of MACHINE_KERNEL_PR.  See the various
+threads on that subject in the archives for this list over the past
+month or two.
 
-but when I run bitbake, it is appending r37 to the file folder:
-
-NOTE: Running task 950 of 2941 (ID: 841, /tool/overo-oe/ 
-user.collection/recipes/linux/linux-omap3_2.6.29.bb, do_setscene)
-NOTE: Running task 2858 of 2941 (ID: 842, /tool/overo-oe/ 
-user.collection/recipes/linux/linux-omap3_2.6.29.bb, do_fetch)
-NOTE: Running task 2859 of 2941 (ID: 843, /tool/overo-oe/ 
-user.collection/recipes/linux/linux-omap3_2.6.29.bb, do_unpack)
-NOTE: Unpacking /usr/share/sources/ 
-git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux- 
-omap-2.6.git_90e758af52ba803cba233fabee81176d99589f09.tar.gz to tmp/ 
-work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.29-r37/
-
-This shouldn't be happening.
-
-Best regards,
-
-Elvis
-
+p.
 
 
 
