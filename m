@@ -1,28 +1,20 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [17.148.16.94] (helo=asmtpout019.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MKDnL-0002zr-8s
+	(envelope-from <elvis.dowson@mac.com>) id 1MKEAX-0003dA-Ap
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Jun 2009 17:56:55 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MKDKz-0002gm-AA
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Jun 2009 16:27:37 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1MKDKz-0002QE-0p
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Jun 2009 16:27:37 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1246027189-26894-1-git-send-email-msmith@cbnco.com>
-References: <1246027189-26894-1-git-send-email-msmith@cbnco.com>
-Date: Fri, 26 Jun 2009 16:27:36 +0100
-Message-Id: <1246030056.6690.291.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: [PATCH] Add fping 2.4b2_to, plus patch from SourceForge.
+	Fri, 26 Jun 2009 18:20:53 +0200
+MIME-version: 1.0
+Received: from [87.201.169.194] by asmtp019.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLU00KV7SV2TA70@asmtp019.mac.com> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	26 Jun 2009 09:09:07 -0700 (PDT)
+Message-id: <7D58AE12-9642-4B1C-97F4-075F1E7447D3@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+Date: Fri, 26 Jun 2009 20:08:41 +0400
+X-Mailer: Apple Mail (2.935.3)
+Subject: Incorrect PR number appended to /tmp/work/ recipe folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,21 +28,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2009 15:56:55 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Jun 2009 16:20:53 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-On Fri, 2009-06-26 at 10:39 -0400, Michael Smith wrote:
->  conf/checksums.ini                              |    4 +
->  conf/licenses.conf                              |    2 +-
->  recipes/fping/files/sourceforge-truckload.patch |  257 +++++++++++++++++++++++
->  recipes/fping/fping_2.3+2.4b2to.bb              |   12 +
+Hi,
+          In my linux-omap3-2.6.29.bb recipe file, I have set PR =  
+"r45" as follows:
 
-Thanks, I checked this in.  The SRC_URI looks a bit dubious but, given
-that the code doesn't seem to have changed since January 2002, I'm not
-too worried about it.
+PN = "linux-omap3"
+PV = "2.6.29"
+PR = "r45"
 
-p.
+but when I run bitbake, it is appending r37 to the file folder:
+
+NOTE: Running task 950 of 2941 (ID: 841, /tool/overo-oe/ 
+user.collection/recipes/linux/linux-omap3_2.6.29.bb, do_setscene)
+NOTE: Running task 2858 of 2941 (ID: 842, /tool/overo-oe/ 
+user.collection/recipes/linux/linux-omap3_2.6.29.bb, do_fetch)
+NOTE: Running task 2859 of 2941 (ID: 843, /tool/overo-oe/ 
+user.collection/recipes/linux/linux-omap3_2.6.29.bb, do_unpack)
+NOTE: Unpacking /usr/share/sources/ 
+git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux- 
+omap-2.6.git_90e758af52ba803cba233fabee81176d99589f09.tar.gz to tmp/ 
+work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.29-r37/
+
+This shouldn't be happening.
+
+Best regards,
+
+Elvis
+
 
 
 
