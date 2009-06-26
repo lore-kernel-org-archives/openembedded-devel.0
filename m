@@ -1,32 +1,33 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MK6NM-0003t3-7X
+	(envelope-from <michael@sles10-64.ott.cti.com>) id 1MKAUq-0005BE-9y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Jun 2009 10:01:36 +0200
+	Fri, 26 Jun 2009 14:25:36 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 8C77C1409724
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2009 09:51:49 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UhhEPWDXgC7y
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2009 09:51:49 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 626AE1416BA2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2009 09:51:49 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	by smtp.cbnco.com (Postfix) with ESMTP id A4D5B4EE261;
+	Fri, 26 Jun 2009 08:14:13 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 25940-07; Fri, 26 Jun 2009 08:14:13 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 83E0A4EE2CC; Fri, 26 Jun 2009 08:14:13 -0400 (EDT)
+X-Spam-Score: 
+X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.1.8
+Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id A2F634EE257;
+	Fri, 26 Jun 2009 08:14:12 -0400 (EDT)
+Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
+	id 7F14F4147E; Fri, 26 Jun 2009 08:14:12 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A43D4E4.90409@balister.org>
-References: <1245871136.5939.3.camel@utx.utx.cz>
-	<h1u7s2$b8l$1@ger.gmane.org>  <4A43D4E4.90409@balister.org>
-Date: Fri, 26 Jun 2009 09:50:13 +0200
-Message-Id: <1246002613.3974.12.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: [PATCH] introduction of virtual/libusb0
+Date: Fri, 26 Jun 2009 08:14:10 -0400
+Message-Id: <1246018450-23097-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.6.3
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: [PATCH][resend] glibc-initial.inc: remove FILESPATHPKG setting to fix glibc-initial_2.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,51 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2009 08:01:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 26 Jun 2009 12:25:36 -0000
 
-Philip Balister wrote:
-=EF=BB=BF
->Until mainstream=20
->distros go libusb1 + libusb-compat, there is not much motivation to=20
->resolve the issue in gnuradio.
+All v2.5+ recipes add glibc-2.4 as a FILESDIR or FILESPATHPKG if they
+need it, so it's not required in the inc anymore.
 
-openSUSE 11.2 will probably do it.
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/glibc/glibc-initial.inc |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-> I think there are only a small handful of apps that do not use the=20
-> public libusb interface.
->=20
-> Do you have a specific package you are having issues with? Take a look=20
-> at the gnuradio.inc file to see how we solved the problem there.
-
-I did never touch gnuradio, but I seen mails in the list.
-
-There were problems in past with libusb-compat and:
-
-gphoto, f-spot: Problems were fixed before libusb-compat-0.1.0.
-
-gpsbabel + Garmin GPS =3D depended on undocumented libusb0 USB endpoint
-direction sanitization. Fixed in libusb-compat-0.1.1.
-
-gphoto + no USB subsystem: Crash after initialization failure. Fixed
-in =EF=BB=BFlibusb-compat-0.1.2.
-
-There are no known issues with =EF=BB=BF=EF=BB=BFlibusb-compat-0.1.2 yet.
-
-
-To resume my plan:
-
-Introduce virtual/libusb0 for now and set is as default to
-libusb-compat.
-
-When all problems of libusb-compat will be fixed, drop libusb-0
-completely and optionally replace virtual/libusb0 by libusb-compat.
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+diff --git a/recipes/glibc/glibc-initial.inc b/recipes/glibc/glibc-initial.inc
+index cd65924..6468f0d 100644
+--- a/recipes/glibc/glibc-initial.inc
++++ b/recipes/glibc/glibc-initial.inc
+@@ -1,7 +1,6 @@
+ SECTION = "libs"
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial linux-libc-headers"
+ PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+-FILESPATHPKG =. "glibc-2.4:"
+ 
+ PACKAGES = ""
+ PACKAGES_DYNAMIC = ""
+-- 
+1.6.3
 
 
 
