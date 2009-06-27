@@ -1,42 +1,23 @@
-Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
+Received: from [17.148.16.93] (helo=asmtpout018.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MKNpz-00036z-BS
+	(envelope-from <elvis.dowson@mac.com>) id 1MKPQ2-0004sI-H0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Jun 2009 04:40:19 +0200
-Received: by wa-out-1112.google.com with SMTP id j4so611290wah.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2009 19:28:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:organization:to:subject
-	:date:user-agent:cc:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=8GPTZOGl0YtLqdnQ2Btz796STGszE1N7YTYSC/eayMI=;
-	b=c/BnFF7SIpG0UA1B4lBiSB/b1Bs53IsZ7h+lVmQpiVM50dGEzJG6A0zkV5VlGyH/rp
-	4u7RPCt6Pt8V8EpNnR6Ye8DLr/9d5dxGW1aTDuQEbesSqgf5JmlgOnyEwnQymwhV5VdD
-	NO04Jrj9bHbTn8geQTZ8JMlrh++sT+BIZb5CY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:organization:to:subject:date:user-agent:cc:references
-	:in-reply-to:mime-version:content-type:content-transfer-encoding
-	:message-id;
-	b=Z1ur07TrsDb/IOmOidDJKvgqvfqindu6V6Rez/ffFmOGq6HotWdhzQSUTk7XgkxUF4
-	cplSyyN+P5ulA32PC/M4XzBvkjWzKfRidjgV1IIY+7diDylOhQWLOxzrFRCUg6BkqBhe
-	vI0ZV+Sg4HgCVVLxNWK8gYv8mHLX5pzME5sUQ=
-Received: by 10.114.130.15 with SMTP id c15mr6905889wad.59.1246069732279;
-	Fri, 26 Jun 2009 19:28:52 -0700 (PDT)
-Received: from morpheus (adsl-71-146-23-253.dsl.pltn13.sbcglobal.net
-	[71.146.23.253])
-	by mx.google.com with ESMTPS id m34sm7037470waf.57.2009.06.26.19.28.50
-	(version=SSLv3 cipher=RC4-MD5); Fri, 26 Jun 2009 19:28:51 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Organization: Home Inc.
+	Sat, 27 Jun 2009 06:21:38 +0200
+MIME-version: 1.0
+Received: from [87.201.169.54] by asmtp018.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KLV00KZIQ8Q6V10@asmtp018.mac.com> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	26 Jun 2009 21:10:09 -0700 (PDT)
+Message-id: <385B45B4-00BE-45E6-BDD1-81EE7DBF7B83@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jun 2009 19:28:39 -0700
-User-Agent: KMail/1.11.90 (Linux/2.6.28-13-generic; KDE/4.2.90; x86_64; ; )
-References: <9220ACA993BF4B17ADA77AB934CFA607@ronaldlatd600>
-In-Reply-To: <9220ACA993BF4B17ADA77AB934CFA607@ronaldlatd600>
-MIME-Version: 1.0
-Message-Id: <200906261928.47276.raj.khem@gmail.com>
-Subject: Re: SH4A on OpenEmbedded
+In-reply-to: <1246037427.8887.73.camel@lenovo.internal.reciva.com>
+Date: Sat, 27 Jun 2009 08:09:41 +0400
+References: <7D58AE12-9642-4B1C-97F4-075F1E7447D3@mac.com>
+	<1246037427.8887.73.camel@lenovo.internal.reciva.com>
+X-Mailer: Apple Mail (2.935.3)
+Subject: Re: Incorrect PR number appended to /tmp/work/ recipe folder
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,66 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jun 2009 02:40:19 -0000
-X-Groupsio-MsgNum: 11654
-Content-Type: multipart/signed; boundary="nextPart5798425.oqzi331m23";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 27 Jun 2009 04:21:38 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
---nextPart5798425.oqzi331m23
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Hi Phil,
+		I took a look at those threads, but was unclear about the  
+resolution. I did a git pull of the oe repository to update it with  
+the latest changes, also deleted my entire tmp folder and built the  
+recipe again, but same problem persists.
 
-On Thursday 25 June 2009 05:38:46 pm Ronald Chu wrote:
-> Hello,
->=20
-> I wonder if OE have the TARGET_ARCH as sh4a? It only contain sh4 (titan..=
-=2E etc)
->=20
-> Is there possible to add sh4a? How would I do that?
+Why would it pick r37 of all the PV series for that particular  
+recipe? :-)
 
-You need to add machine conf for whatever board/device that
-has sh4a that you are interested in.=20
+Elvis
 
-i.e.
 
-machine/<yourmachine>.conf
+On Jun 26, 2009, at 9:30 PM, Phil Blundell wrote:
 
-If you want to add special
-tuning for toolchains then you might also want to add
-machine/include/tune-sh4a.inc
-
-after that you can chose a distro in your local.conf (like angstrom or some=
-thing) and machine
-DISTRO=3Dangstrom-2008.1
-MACHINE=3D<yourmachine>
-
-Thats should be a start
-
-Thanks
-
-=2DKhem
-
->=20
->=20
-> Ronald Chu <Ronald@SysRealTime.com>
+> On Fri, 2009-06-26 at 20:08 +0400, Elvis Dowson wrote:
+>> NOTE: Unpacking /usr/share/sources/
+>> git_git.kernel.org.pub.scm.linux.kernel.git.tmlind.linux-
+>> omap-2.6.git_90e758af52ba803cba233fabee81176d99589f09.tar.gz to tmp/
+>> work/overo-angstrom-linux-gnueabi/linux-omap3-2.6.29-r37/
+>
+> I think you have fallen foul of MACHINE_KERNEL_PR.  See the various
+> threads on that subject in the archives for this list over the past
+> month or two.
+>
+> p.
+>
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
 
---nextPart5798425.oqzi331m23
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEABECAAYFAkpFg9gACgkQHnJKy6V6em71agCeICaPf12eDMVQU2S++st0qO/q
-fp4Anif93cHZ18WiH2XXOP7VNKHIC5BU
-=RAm+
------END PGP SIGNATURE-----
-
---nextPart5798425.oqzi331m23--
