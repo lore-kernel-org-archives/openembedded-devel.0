@@ -1,35 +1,27 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [85.37.17.114] (helo=smtp-out114.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1MKfeT-0008IA-20
+	(envelope-from <GNUtoo@no-log.org>) id 1MKjeX-0002Dm-AJ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Jun 2009 23:41:37 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 996A34F096B;
-	Sat, 27 Jun 2009 17:30:05 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 29949-02; Sat, 27 Jun 2009 17:30:05 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 5E23D4F0969; Sat, 27 Jun 2009 17:30:05 -0400 (EDT)
-X-Spam-Score: 
-X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 5D2FB4F0969;
-	Sat, 27 Jun 2009 17:30:03 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id 53CF84147E; Sat, 27 Jun 2009 17:30:03 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
+	Sun, 28 Jun 2009 03:57:57 +0200
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out114.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 28 Jun 2009 03:46:22 +0200
+Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.1830); 
+	Sun, 28 Jun 2009 03:46:22 +0200
+Received: from [192.168.1.171] ([79.51.163.91]) by FBCMCL01B04.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sun, 28 Jun 2009 03:46:22 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Jun 2009 17:29:39 -0400
-Message-Id: <1246138179-23626-2-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-In-Reply-To: <1246138179-23626-1-git-send-email-msmith@cbnco.com>
-References: <1246138179-23626-1-git-send-email-msmith@cbnco.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH 2/2] oe-checksums-sorter.py: speed up about 4X using a hash
+In-Reply-To: <6a1b49480906251521w364bce23o2dd5f921a468474c@mail.gmail.com>
+References: <6a1b49480906251521w364bce23o2dd5f921a468474c@mail.gmail.com>
+Date: Sun, 28 Jun 2009 03:46:13 +0200
+Message-Id: <1246153579.32326.3.camel@port4>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 28 Jun 2009 01:46:22.0515 (UTC)
+	FILETIME=[3D754030:01C9F792]
+Subject: Re: patch to boost package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +35,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jun 2009 21:41:37 -0000
+X-List-Received-Date: Sun, 28 Jun 2009 01:57:57 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-OK, this saves a grand total of one second a few times a week, but it
-was bugging me...
-
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- contrib/source-checker/oe-checksums-sorter.py |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/contrib/source-checker/oe-checksums-sorter.py b/contrib/source-checker/oe-checksums-sorter.py
-index 7388c62..821d247 100755
---- a/contrib/source-checker/oe-checksums-sorter.py
-+++ b/contrib/source-checker/oe-checksums-sorter.py
-@@ -85,14 +85,17 @@ item = 1;
- files_total   = len(checksums_parser.sections())
- 
- new_list = []
-+seen = {}
- 
- for source in checksums_parser.sections():
-     archive = source.split("/")[-1]
-     md5 = checksums_parser.get(source, "md5")
-     sha = checksums_parser.get(source, "sha256")
- 
--    if new_list.count([archive, source, md5, sha]) < 1:
--        new_list += [[archive, source, md5, sha]]
-+    tup = (archive, source, md5, sha)
-+    if not seen.has_key(tup):
-+        new_list.append(tup)
-+        seen[tup] = 1
- 
- new_list.sort()
- 
--- 
-1.6.3
+On Fri, 2009-06-26 at 00:21 +0200, Frank Black wrote:
+> I tried building boost 1.36.0 for my armv5te processor. Problem is there is
+> no support for the function "__sync_add_and_fetch" called from
+> detail/atomic_count_sync.hpp. There are two patches which both fails to
+> resolve this for me.
+> 
+> 1: arm-instrinct.patch. This requires __ARM_ARCH_7A__ to be defined, which
+> is not good for me on an armv5te.
+> 2: atomic_count_gcc_atomicity.patch: Works, however problem is that
+> atomic_count.hpp contains #defines that always #includes
+> atomic_count_sync.hpp instead of atomic_count_gcc.hpp, so the patch has no
+> effect
+> 
+> I solved this by applying a really ugly patch (see below) that makes sure
+> atomic_count_sync.hpp is never used. Im sure therre is a better way to do it
+> but I'm not at all familiar what kind of ARM-specific defines you got to
+> play around with. Maybe someone has more in-depth knowledge abot this?
+> 
+> 
+> 
+>  --- boost_1_33_1.orig/boost/detail/atomic_count.hpp    2007-11-23
+> 18:03:14.000000000 +0100
+> +++ boost_1_33_1/boost/detail/atomic_count.hpp        2009-06-25
+> 23:07:10.000000000 +0200
+> @@ -101,10 +101,10 @@
+> 
+>  #  include <boost/detail/atomic_count_win32.hpp>
+> 
+> -#elif defined( __GNUC__ ) && ( __GNUC__ * 100 + __GNUC_MINOR__ >= 401 )
+> +/*#elif defined( __GNUC__ ) && ( __GNUC__ * 100 + __GNUC_MINOR__ >= 401 )
+> 
+>  #  include <boost/detail/atomic_count_sync.hpp>
+> -
+> +*/
+>  #elif defined(__GLIBCPP__) || defined(__GLIBCXX__)
+> 
+>  #  include <boost/detail/atomic_count_gcc.hpp>
+> 
+> 
+> / Rolle
+yes there is:
+I've put the boost work I did with the help of other people here:
+http://gnutoo.homelinux.org/open_embedded/boost.tar.bz2
+I didn't have the time to finish my work because I had a segmentation
+fault in boost with wesnoth-1.6x so I didn't commit it yet because of
+the lack of skills and time to debug it(I don't know C++,I just learned
+it a bit for this precise problem)
+Denis.
 
 
 
