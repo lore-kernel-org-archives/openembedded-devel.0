@@ -1,21 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [65.55.34.205] (helo=col0-omc4-s3.col0.hotmail.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MLDuE-00050p-M7
-	for openembedded-devel@openembedded.org; Mon, 29 Jun 2009 12:16:10 +0200
-Received: (qmail 6033 invoked by uid 813007); 29 Jun 2009 10:04:29 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 29 Jun 2009 10:04:29 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Jun 2009 12:04:18 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.30-00002-g9396b7b; KDE/4.2.4; x86_64; ; )
-References: <1246138179-23626-1-git-send-email-msmith@cbnco.com>
-In-Reply-To: <1246138179-23626-1-git-send-email-msmith@cbnco.com>
+	(envelope-from <pascal_kesseli@hotmail.com>) id 1MLH2C-0006tu-0L
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Jun 2009 15:36:36 +0200
+Received: from COL109-DS16 ([65.55.34.200]) by col0-omc4-s3.col0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 29 Jun 2009 06:24:51 -0700
+X-Originating-IP: [213.3.31.124]
+X-Originating-Email: [pascal_kesseli@hotmail.com]
+Message-ID: <COL109-DS1646B10617396513D8E822F2300@phx.gbl>
+From: "Pascal Kesseli" <pascal_kesseli@hotmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 29 Jun 2009 15:24:48 +0200
 MIME-Version: 1.0
-Message-Id: <200906291204.20912.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH 1/2] source-checker: usability tweaks
+X-Mailer: Microsoft Office Outlook 12.0
+thread-index: Acn4vPnBzPA4RlKFTSmlvwdSYcElUA==
+X-OriginalArrivalTime: 29 Jun 2009 13:24:51.0416 (UTC)
+	FILETIME=[FB85CD80:01C9F8BC]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Preferred gcc version ignored
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,56 +32,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jun 2009 10:16:10 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Mon, 29 Jun 2009 13:36:36 -0000
+Content-Language: de-ch
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 27 czerwca 2009 o 23:29:38 Michael Smith napisa=C5=82(a):
+Hi everyone
 
-> checksum sorter, source checker:=20
+ 
 
-> exit(1) on failure;=20
+Recently, I tried building helloworld without providing a precompiled
+toolchain for the MOXA UC-7408+. It worked as expected with OpenEmbedded
+first compiling the cross-compiler and glibc. To do so, I used the following
+machine config:
 
-OK with it
+ 
 
-> send usage to stderr;=20
+TARGET_ARCH = arm
 
-NACK - most of tools which I use use stdout for --help/usage stuff.
+PACKAGE_ARCH = xscale
 
-> make executable
+TARGET_CC_ARCH = "-mcpu=xscale"
 
-OK
+#ASSUME_PROVIDED += virtual/arm-linux-gcc virtual/libc
 
-> checksum sorter:=20
+PREFERRED_PROVIDER_virtual/kernel = "linux-2.6"
 
-> read from stdin if no arg;=20
+BOOTSTRAP_EXTRA_DEPENDS += " virtual/kernel"
 
-OK
+BOOTSTRAP_EXTRA_RDEPENDS += " kernel kernel-modules"
 
-> accept --inplace option to read and write from the same file.
+IMAGE_FSTYPE = "ext2"
 
-Idea nice but:
+EXTRA_IMGECMD_ext2 = " -b 2097152"
 
-12:00 hrw@home:openembedded$ contrib/source-checker/oe-checksums-
-sorter.py -i conf/checksums.ini
-Traceback (most recent call last):
-  File "contrib/source-checker/oe-checksums-sorter.py", line 104, in=20
-<module>
-    os.rename(outfn, args[0])
-OSError: [Errno 18] Invalid cross-device link
+ 
 
-/tmp/ is tmpfs, /home/ is ext3 and Python documentation says "The=20
-operation may fail on some Unix flavors if src and dst are on different=20
-filesystems".
+PREFERRED_PROVIDER_virtual/arm-linux-libc-for-gcc = glibc
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+PREFERRED_VERSION_arm-linux-gcc = "3.4.4"
 
+PREFERRED_VERSION_gcc = "3.4.4"
 
+PREFERRED_VERSION_gcc-cross = "3.4.4"
+
+PREFERRED_VERSION_glibc = "2.3.3"
+
+ 
+
+ 
+
+Nevetheless, the compilation failed with the following error:
+
+ 
+
+| checking for pwd... /opt/openembedded/tmp/staging/i686-linux/usr/bin/pwd
+
+| checking for arm-linux-gcc... (cached) arm-linux-gcc -mcpu=xscale
+
+| checking version of arm-linux-gcc -mcpu=xscale... 4.2.4, bad
+
+| checking for gnumake... make
+
+| checking version of make... 3.81, ok
+
+| checking for gnumsgfmt... no
+
+| checking for gmsgfmt... no
+
+| checking for msgfmt... msgfmt
+
+| checking version of msgfmt... 0.17, ok
+
+| checking for makeinfo... makeinfo
+
+| checking version of makeinfo... 4.11, ok
+
+| checking for sed... sed
+
+| checking version of sed... 4.1.5, ok
+
+| checking for autoconf... autoconf
+
+| checking whether autoconf works... yes
+
+| configure: error:
+
+| *** These critical programs are missing or too old: gcc
+
+| *** Check the INSTALL file for required versions.
+
+| FATAL: oe_runconf failed
+
+NOTE: Task failed:
+/opt/openembedded/tmp/work/xscale-linux/glibc-2.3.3-r17/temp/log.do_configur
+e.5110
+
+ERROR: TaskFailed event exception, aborting
+
+ERROR: Build of /opt/openembedded/recipes/glibc/glibc_2.3.3.bb do_configure
+failed
+
+ERROR: Task 75 (/opt/openembedded/recipes/glibc/glibc_2.3.3.bb,
+do_configure) failed
+
+NOTE: Tasks Summary: Attempted 159 tasks of which 159 didn't need to be
+rerun and 1 failed.
+
+ERROR: '/opt/openembedded/recipes/glibc/glibc_2.3.3.bb' failed
+
+ 
+
+ 
+
+It seems as if gcc version 4.2.4 was created and used by OpenEmbedded, which
+is too new for building glibc 2.3.3. Which PREFERRED_VERSION statement did I
+miss to advise OpenEmbedded to use an earlier gcc version to build the
+glibc?
+
+ 
+
+Thanks for any help and best regards
+
+Kessi
+
+ 
 
 
