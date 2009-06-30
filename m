@@ -1,32 +1,36 @@
-Received: from [209.85.221.172] (helo=mail-qy0-f172.google.com)
+Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bjorn.forsman@gmail.com>) id 1MLc2q-0002CF-Bv
+	(envelope-from <koen.kooi@gmail.com>) id 1MLgXY-0004By-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jun 2009 14:02:40 +0200
-Received: by qyk2 with SMTP id 2so64263qyk.24
+	Tue, 30 Jun 2009 18:50:40 +0200
+Received: by ewy21 with SMTP id 21so342212ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2009 04:50:40 -0700 (PDT)
+	Tue, 30 Jun 2009 09:38:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=LhQEFTku05fQnrukuahGDj8oDcEFwKi2vcABAaorGlw=;
-	b=V/nPWDYPNEgDv7fNlDTzp+EMXCbFb7SDXVVn5ORAOzkWWV4X2KE/4CesC2mb1iIurB
-	b8QnE4lrpPrnJspACM/p14x6E2woEl5sSR7PrHWVwEtConeuwcqr+BS50qTkORoQD+6R
-	R2TcA1gNfD3MfK5VtDWP+CnoE4ICUYAF0v5hU=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=PjdtLKz+pah9067Qv0CaDFryWSBYE8PIQHgp+yjsnO4=;
+	b=WF6QFSKLsClc3lFUTDymPIMh4AB7yBVcCaEbAB8obCnojknqaGaz87wEDYC9NnIh8O
+	9NP1B+F2ImCOR9Xz8onDT0w/JxqoLPK10iMS1nuRpEQYlPgEamsoRETZMVIqZmhr0/Qc
+	ER5WgcpHHDsrTlKPnwOK9/rIbXLVMBmzH+BmY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=t3aS0SJqXu5q4aqizixmZdKmkvmQHN+W6Kv+4fr0opiNEinOxiNO09DNPhI/54CpDY
-	lbkSw9D/V03OQAZRhw2kxSMztmu3zU0W0g1VUDrnz0ifI6bpcyQC0M+xOPiqsLp9WKDy
-	wcmwmUYSOVtBj6cACYFSNk5RGdqxcseCpGDBs=
-MIME-Version: 1.0
-Received: by 10.229.110.6 with SMTP id l6mr1723689qcp.52.1246362283990; Tue, 
-	30 Jun 2009 04:44:43 -0700 (PDT)
-Date: Tue, 30 Jun 2009 13:44:43 +0200
-Message-ID: <5f2b60906300444w31cdcf67o6b3eeab0d1fb85ab@mail.gmail.com>
-From: =?UTF-8?Q?Bj=C3=B8rn_Forsman?= <bjorn.forsman@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=kHpgM/91jKm/6h4LLCRfL8fLrtWV0X4NDNs0yr0ojuf0uXIr2pIrMdej7S1x83bQM4
+	KbBaxtPCiHWVNKNVDlx8VzOIBplT7o8WJvflKPNI6033fyk1klzY+kjfJOZDjOwfrzaL
+	KGDu/f3zSOPoAOcgsZBC5SGXMoJp574q6WZwE=
+Received: by 10.210.139.12 with SMTP id m12mr398023ebd.18.1246379929487;
+	Tue, 30 Jun 2009 09:38:49 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id 24sm278090eyx.13.2009.06.30.09.38.47
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 30 Jun 2009 09:38:48 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: bitbake virtual/kernel fails for davinci
+Date: Tue, 30 Jun 2009 18:38:45 +0200
+Message-Id: <1246379925-1377-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.6.1
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] lirc: update to 0.8.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,75 +44,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2009 12:02:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Jun 2009 16:50:41 -0000
 
-Hi,
+From: Koen Kooi <koen@openembedded.org>
 
-I am a bit new to OpenEmbedded, but have successfully built angstrom
-for davinci and qemu in the past. Today I tried to "bitbake
-virtual/kernel" for a davinci (dm6446) system. The build fails during
-unpack of linux-davinci kernel because git cannot find a given object
-hash (see output below). Has anybody else experienced this? How come
-OE references a non-existent git object?
 
-The non-existent git object hash is specified in
-"recipes/linux/linux-davinci_git.bb" and was lastly modified by commit
-160616d5f2a57ba828ed5ec06e37fc1cd4713af7.
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ conf/checksums.ini                 |    8 ++++
+ recipes/lirc/lirc-modules_0.8.5.bb |   30 ++++++++++++++++
+ recipes/lirc/lirc_0.8.5.bb         |   67 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 105 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/lirc/lirc-modules_0.8.5.bb
+ create mode 100644 recipes/lirc/lirc_0.8.5.bb
 
----------------------------------------------------------------
-$ bitbake virtual/kernel
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 066b442..bb1224c 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -15150,6 +15150,10 @@ sha256=8bc1c6cfc6a9c312c8f5b8cc79b501e26b438c96a2d245f42e50bfb353617716
+ md5=1101c44d542807a4f9f5e33349b5bf56
+ sha256=d6e68935e69c82bba091cb102bbc4b63428eb8deb94c7d00e14ea3b673e10712
+ 
++[http://downloads.sourceforge.net/lirc/lirc-0.8.5.tar.gz]
++md5=a9e44df2adbd71be586e0df6304605cc
++sha256=ab5752e9af2df5f4cd2bd6d4f13872fbb519d7fa1bd3f187cc14dcb163440234
++
+ [http://lisa-home.sourceforge.net/src/lisa-0.2.2.tar.bz2]
+ md5=cba116a4880f77205e0813d93bf14310
+ sha256=986a923a5247468db1d2a03e93268f4025ae5dc27e911dafc7b37e6a802122db
+@@ -17094,6 +17098,10 @@ sha256=e42d3b3f30de0c1ad0a86aa039b35cf2bf64c7f64c29ee333cbf934784639973
+ md5=0e942f22864e601406a994420231075b
+ sha256=28e76af491ea3696885e4558ae2f5628a4b9ebdbefc2f1d9cf1b35db2813e497
+ 
++[ftp://ftp.netperf.org/netperf/netperf-2.4.4.tar.bz2]
++md5=0e942f22864e601406a994420231075b
++sha256=28e76af491ea3696885e4558ae2f5628a4b9ebdbefc2f1d9cf1b35db2813e497
++
+ [ftp://ftp.debian.org/debian/pool/non-free/n/netperf/netperf_2.3.orig.tar.gz]
+ md5=b50e49d5f0d3780438af0027a182b997
+ sha256=0578f4fafb309adf3413c9f56076b1b16476cb71e83c02ff7efafad172d91adb
+diff --git a/recipes/lirc/lirc-modules_0.8.5.bb b/recipes/lirc/lirc-modules_0.8.5.bb
+new file mode 100644
+index 0000000..e077775
+--- /dev/null
++++ b/recipes/lirc/lirc-modules_0.8.5.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "LIRC is a package that allows you to decode and send infra-red signals of many commonly used remote controls. This package contains the lirc kernel modules."
++SECTION = "base"
++PRIORITY = "optional"
++HOMEPAGE = "http://www.lirc.org"
++LICENSE = "GPL"
++DEPENDS = "virtual/kernel fakeroot-native setserial"
++
++SRCDATE=${@bb.data.getVar('PV', d, 1)[9:]}
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/lirc/lirc-${PV}.tar.gz"
++S = "${WORKDIR}/lirc-${PV}"
++
++
++inherit autotools module
++
++require lirc-config.inc
++
++MAKE_TARGETS = "KERNEL_PATH=${STAGING_KERNEL_DIR} MAKE='make V=1' -C drivers"
++
++fakeroot do_install() {
++	oe_runmake -C drivers DESTDIR="${D}" moduledir="/lib/modules/${KERNEL_VERSION}/lirc" install
++	rm -rf ${D}/dev
++}
++
++# this is for distributions that don't use udev
++pkg_postinst_append() {
++if [ ! -c $D/dev/lirc -a ! -f /sbin/udevd ]; then mknod $D/dev/lirc c 61 0; fi
++}
++
++FILES_${PN} = "/lib/modules"
+diff --git a/recipes/lirc/lirc_0.8.5.bb b/recipes/lirc/lirc_0.8.5.bb
+new file mode 100644
+index 0000000..34a40ff
+--- /dev/null
++++ b/recipes/lirc/lirc_0.8.5.bb
+@@ -0,0 +1,67 @@
++DESCRIPTION = "LIRC is a package that allows you to decode and send infra-red signals of many commonly used remote controls."
++DESCRIPTION_append_lirc = " This package contains the lirc daemon, libraries and tools."
++DESCRIPTION_append_lirc-x = " This package contains lirc tools for X11."
++DESCRIPTION_append_lirc-exec = " This package contains a daemon that runs programs on IR signals."
++DESCRIPTION_append_lirc-remotes = " This package contains some config files for remotes."
++DESCRIPTION_append_lirc-nslu2example = " This package contains a working config for RC5 remotes and a modified NSLU2."
++SECTION = "console/network"
++PRIORITY = "optional"
++HOMEPAGE = "http://www.lirc.org"
++LICENSE = "GPL"
++DEPENDS = "virtual/kernel virtual/libx11 libxau libsm libice"
++DEPENDS_nslu2 = "virtual/kernel lirc-modules"
++RDEPENDS = "lirc-modules"
++RDEPENDS_lirc-x = "lirc"
++RDEPENDS_lirc-exec = "lirc"
++RDEPENDS_lirc-nslu2example = "lirc lirc-exec"
++RRECOMMENDS_lirc = "lirc-exec"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/lirc/lirc-${PV}.tar.gz \
++           file://lircd.init file://lircmd.init file://lircexec.init"
++SRC_URI_append_nslu2 = " file://lircd.conf_nslu2 file://lircrc_nslu2"
++
++S = "${WORKDIR}/lirc-${PV}"
++
++inherit autotools module-base update-rc.d
++
++INITSCRIPT_PACKAGES = "lirc lirc-exec"
++INITSCRIPT_NAME = "lircd"
++INITSCRIPT_PARAMS = "defaults 20"
++INITSCRIPT_NAME_lirc-exec = "lircexec"
++INITSCRIPT_PARAMS_lirc-exec = "defaults 21"
++
++require lirc-config.inc
++
++EXTRA_OEMAKE = 'SUBDIRS="daemons tools"'
++
++do_stage() {
++        oe_libinstall -so -C tools liblirc_client ${STAGING_LIBDIR}
++	install -d ${STAGING_INCDIR}/lirc/
++	install -m 0644 tools/lirc_client.h ${STAGING_INCDIR}/lirc/
++}
++
++do_install_append() {
++	install -d ${D}${sysconfdir}/init.d
++	install ${WORKDIR}/lircd.init ${D}${sysconfdir}/init.d/lircd
++	install ${WORKDIR}/lircexec.init ${D}${sysconfdir}/init.d/lircexec
++        install -d ${D}${datadir}/lirc/
++        cp -pPR ${S}/remotes ${D}${datadir}/lirc/
++	rm -rf ${D}/dev
++}
++
++do_install_append_nslu2() {
++	install -d ${D}${sysconfdir}
++	install ${WORKDIR}/lircd.conf_nslu2 ${D}${sysconfdir}/lircd.conf
++	install ${WORKDIR}/lircrc_nslu2 ${D}${sysconfdir}/lircrc
++}
++
++PACKAGES =+ "lirc-x lirc-exec lirc-remotes"
++PACKAGES_prepend_nslu2 = "lirc-nslu2example "
++
++FILES_${PN}-dbg += "${bindir}/.debug ${sbindir}/.debug"
++FILES_${PN} = "${bindir} ${sbindir} ${libdir} ${sysconfdir}/init.d"
++FILES_lirc-x = "${bindir}/irxevent ${bindir}/xmode2"
++FILES_lirc-exec = "${bindir}/irexec ${sysconfdir}/init.d/lircexec"
++FILES_lirc-remotes = "${datadir}/lirc/remotes"
++FILES_lirc-nslu2example = "${sysconfdir}/lircd.conf ${sysconfdir}/lircrc"
++CONFFILES_lirc-nslu2example = "${FILES_lirc-nslu2example}"
+-- 
+1.6.1
 
-[snipped]
-
-From git://git.kernel.org/pub/scm/linux/kernel/git/khilman/linux-davinci
- * [new tag]         v2.6.29    -> v2.6.29
- * [new tag]         v2.6.29-davinci1 -> v2.6.29-davinci1
- * [new tag]         v2.6.29-omap1 -> v2.6.29-omap1
- * [new tag]         v2.6.29-rc5 -> v2.6.29-rc5
- * [new tag]         v2.6.29-rc6 -> v2.6.29-rc6
- * [new tag]         v2.6.29-rc7 -> v2.6.29-rc7
- * [new tag]         v2.6.29-rc8 -> v2.6.29-rc8
- * [new tag]         v2.6.30    -> v2.6.30
- * [new tag]         v2.6.30-davinci1 -> v2.6.30-davinci1
- * [new tag]         v2.6.30-rc1 -> v2.6.30-rc1
- * [new tag]         v2.6.30-rc2 -> v2.6.30-rc2
- * [new tag]         v2.6.30-rc3 -> v2.6.30-rc3
- * [new tag]         v2.6.30-rc4 -> v2.6.30-rc4
- * [new tag]         v2.6.30-rc5 -> v2.6.30-rc5
- * [new tag]         v2.6.30-rc6 -> v2.6.30-rc6
- * [new tag]         v2.6.30-rc7 -> v2.6.30-rc7
- * [new tag]         v2.6.30-rc8 -> v2.6.30-rc8
-NOTE: Creating tarball of git repository
-fatal: failed to unpack tree object 03022e38318bef016836dae71c70b9ea975723e=
-7
-NOTE: Task failed: Fetch failed: Fetch command export
-HOME=3D/home/bjornfor; export
-SSH_AUTH_SOCK=3D/tmp/keyring-f2gNsd/socket.ssh; export
-PATH=3D/home/bjornfor/dev/oe-stuff/build/tmp/staging/i686-linux/usr/bin/dm6=
-446-evm-angstrom-linux-gnueabi:/home/bjornfor/dev/oe-stuff/build/tmp/stagin=
-g/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/home/bjornfor/dev/oe-s=
-tuff/build/tmp/staging/i686-linux/usr/sbin:/home/bjornfor/dev/oe-stuff/buil=
-d/tmp/staging/i686-linux/usr/bin:/home/bjornfor/dev/oe-stuff/build/tmp/cros=
-s/armv5te/bin:/home/bjornfor/dev/oe-stuff/build/tmp/staging/i686-linux/sbin=
-:/home/bjornfor/dev/oe-stuff/build/tmp/staging/i686-linux/bin:/home/bjornfo=
-r/dev/oe-stuff/bitbake/bin:/home/bjornfor/dev/sb2/bin:/home/bjornfor/bin:/u=
-sr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home=
-/bjornfor/dev/arm-2008q3/bin:/opt/mv_pro_5.0/montavista/pro/devkit/arm/v5t_=
-le/bin:/home/bjornfor/bin;
-git read-tree 03022e38318bef016836dae71c70b9ea975723e7 failed with
-signal 128, output:
-fatal: failed to unpack tree object 03022e38318bef016836dae71c70b9ea975723e=
-7
-
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/bjornfor/dev/oe-stuff/openembedded/recipes/linux/linux-davinci_git.bb
-do_fetch failed
----------------------------------------------------------------
-
-Regards,
-Bj=C3=B8rn Forsman
 
 
