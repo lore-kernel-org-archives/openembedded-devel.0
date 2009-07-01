@@ -1,21 +1,21 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM58U-0003A1-1Q
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM58U-0003AA-BO
 	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 21:06:26 +0200
-Received: (qmail 30478 invoked by uid 813007); 1 Jul 2009 18:54:30 -0000
+Received: (qmail 30509 invoked by uid 813007); 1 Jul 2009 18:54:30 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 1 Jul 2009 18:54:29 -0000
+	by 195.149.226.213 with ESMTPA; 1 Jul 2009 18:54:30 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jul 2009 20:54:17 +0200
-Message-Id: <1246474461-16671-11-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Wed,  1 Jul 2009 20:54:18 +0200
+Message-Id: <1246474461-16671-12-git-send-email-marcin@juszkiewicz.com.pl>
 X-Mailer: git-send-email 1.6.3.3
 In-Reply-To: <200907011817.02564.marcin@juszkiewicz.com.pl>
 References: <200907011817.02564.marcin@juszkiewicz.com.pl>
 Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH 016/125] bitbake.conf: weakly assign OLDEST_KERNEL ?= "2.4.0" *after* machine and distro configs are included
+Subject: [STABLE][PATCH 017/125] angstrom 2009.X: weakly assign OLDEST_KERNEL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,30 +36,22 @@ From: Koen Kooi <koen@openembedded.org>
 
 Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 ---
- conf/bitbake.conf |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ conf/distro/angstrom-2008.1.conf |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index c411b95..2226d5c 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -310,7 +310,6 @@ SDK_PATH = "/usr/local/${SDK_NAME}"
- # Kernel info.
- ##################################################################
+diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+index 203e01d..de69c48 100644
+--- a/conf/distro/angstrom-2008.1.conf
++++ b/conf/distro/angstrom-2008.1.conf
+@@ -20,6 +20,8 @@ DISTRO_VERSION = "2009.X-stable"
+ DISTRO_REVISION = "1"
+ DISTRO_PR = ".1"
  
--OLDEST_KERNEL = "2.4.0"
- STAGING_KERNEL_DIR = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/kernel"
- 
- ##################################################################
-@@ -644,6 +643,8 @@ require conf/enterprise.conf
- # Weak variables (usually to retain backwards compatibility)
- ##################################################################
- 
-+OLDEST_KERNEL ?= "2.4.0"
++OLDEST_KERNEL ?= "2.6.18"
 +
- DL_DIR ?= "${TMPDIR}/downloads"
- IMAGE_FSTYPES ?= "tar.gz"
- PCMCIA_MANAGER ?= "pcmcia-cs"
+ #build staging from packages
+ INHERIT += "packaged-staging"
+ 
 -- 
 1.6.3.1
 
