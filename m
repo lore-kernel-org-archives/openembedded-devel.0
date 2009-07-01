@@ -1,26 +1,17 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [147.162.13.20] (helo=pcimg12.dei.unipd.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MLjbP-0004t9-VE
+	(envelope-from <bott@pcimg12.dei.unipd.it>) id 1MLyfJ-0002PO-MV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jun 2009 22:06:52 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KM2002E4HZ6SLZ7@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	30 Jun 2009 14:54:42 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D9A4614AF5F; Tue,
-	30 Jun 2009 15:54:41 -0400 (EDT)
-Date: Tue, 30 Jun 2009 15:54:41 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 01 Jul 2009 14:12:15 +0200
+Received: by pcimg12.dei.unipd.it (Postfix, from userid 1000)
+	id 17FD4801C439; Wed,  1 Jul 2009 13:59:59 +0200 (CEST)
+Date: Wed, 1 Jul 2009 13:59:59 +0200
+From: Ottavio Campana <ottavio@campana.vi.it>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090630195441.GF6573@denix.org>
-References: <5f2b60906300444w31cdcf67o6b3eeab0d1fb85ab@mail.gmail.com>
-	<20090630170533.GC6573@denix.org>
-	<5f2b60906301214u229a7095ne17b77afa08c8656@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <5f2b60906301214u229a7095ne17b77afa08c8656@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: bitbake virtual/kernel fails for davinci
+Message-ID: <20090701115959.GA10962@pcimg12.dei.unipd.it>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.13 (2006-08-11)
+Subject: looking for an arm-based board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,43 +25,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2009 20:06:52 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 01 Jul 2009 12:12:53 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 30, 2009 at 09:14:30PM +0200, Bj??rn Forsman wrote:
-> 2009/6/30 Denys Dmytriyenko <denis@denix.org>:
-> > Since then linux-davinci tree was updated to 2.6.30 final and more
-> > specifically, staging/vpfe branch was rebased from v2 to v3 vpfe patches.
-> > Unfortunately, rebase rewrites the history and changes commit numbers, hence
-> > the old commit cannot be found any more...
-> 
-> Ok. Thanks for explaining.
-> 
-> > I'll update the recipe with the latest state of the linux-davinci tree. But,
-> > it may brake in the future again, as this is a moving target. If you want
-> > something, which does not break that often, I'd suggest you don't use the
-> > "git" version of the recipe - try setting PREFFERED_PROVIDER/VERSION for
-> > 2.6.28 or 2.6.29...
-> 
-> Ok. I'll try setting PREFERRED_PROVIDER/VERSION next thing tomorrow.
+Hi,
 
-I guess I should also add 2.6.30 version of the recipe. Although I've seen 
-Kevin updating/moving the "v2.6.30-davinci1" tag...
+I'm starting  a new  project based  on linux embedded.  This time  I can
+choose the platform to  use, and I'd like to use  an arm based solution,
+because I previously used TI davinci soc  and I was satisfied by the arm
+(a bit less by montavista...).
 
-> BTW, the currently missing git object was specified as a SHA1 hash in
-> a variable called SRCREV. Could this variable be used for specifying
-> git objects in other formats? For example "staging/vpfe" or "HEAD"? Or
-> is it unwise to have recipes which uses "floating" revisions?
+This time  I need a  small arm with  standard peripherals (UART,  SPI or
+I2C) and ethernet.  The task it has  to do is controlling  a few devices
+with the commands received over TCP/IP.
 
-The branch "staging/vpfe" is already specified in the SRC_URI. As of pointing 
-to the HEAD, you can check the comments in the linux-davinci_2.6.27.bb, if it 
-still works. But it is not recommended, as it would be hard to manage 
-different builds and support the correct upgrade path. You can still do it 
-locally, as long as you keep updating the MACHINE_KERNEL_PR in the 
-conf/machine/include/davinci.inc
+Since I don't know all the supported machines, can you suggest me a cost
+effective ARM7 or ARM9 board that works well with OE stable/2009?
 
--- 
-Denys
+Thank you,
+
+Ottavio
+
+--=20
+Non c'=E8 pi=F9 forza nella normalit=E0, c'=E8 solo monotonia.
 
 
