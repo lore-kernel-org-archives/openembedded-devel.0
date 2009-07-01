@@ -1,34 +1,34 @@
 Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MM6Em-0006aS-2l
-	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 22:17:00 +0200
+	id 1MM6Je-0003wW-SI
+	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 22:22:02 +0200
 Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MM63C-0007J6-SB
-	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 20:05:03 +0000
+	id 1MM682-0007V4-LC
+	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 20:10:02 +0000
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 01 Jul 2009 20:05:02 +0000
+	Wed, 01 Jul 2009 20:10:02 +0000
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Wed, 01 Jul 2009 20:05:02 +0000
+	Wed, 01 Jul 2009 20:10:02 +0000
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 01 Jul 2009 21:16:24 +0200
-Message-ID: <h2gcm8$bts$8@ger.gmane.org>
+Date: Wed, 01 Jul 2009 21:15:56 +0200
+Message-ID: <h2gclc$bts$4@ger.gmane.org>
 References: <200907011817.02564.marcin@juszkiewicz.com.pl>
-	<1246474461-16671-2-git-send-email-marcin@juszkiewicz.com.pl>
+	<1246474461-16671-6-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
 	rv:1.9.1pre) Gecko/20090622 Shredder/3.0b3pre
-In-Reply-To: <1246474461-16671-2-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1246474461-16671-6-git-send-email-marcin@juszkiewicz.com.pl>
 Sender: news <news@ger.gmane.org>
-Subject: Re: [STABLE][PATCH 007/125] base.bbclass: added 'gcc-3.4' to list of gcc3 versions (Debian systems)
+Subject: Re: [STABLE][PATCH 011/125] (e)glibc-package: set LD_LIBRARY_PATH on binary locale generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +42,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 20:17:00 -0000
+X-List-Received-Date: Wed, 01 Jul 2009 20:22:03 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 01-07-09 20:54, Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz<marcin@buglabs.net>
+> From: Roman I Khimov<khimov@altell.ru>
 >
+> Locale generation might fail with SIGSEGV if host libs get messed with target
+> libs, that might easily happen via /etc/ld.so.cache when building x86(_64)
+> target on x86(_64) host. So explicitly specify LD_LIBRARY_PATH to prevent that.
 >
+> Acked-by: Tom Rini<trini@embeddedalley.com>
 > Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
 
 Acked-by: Koen Kooi <koen@openembedded.org>
 
 
 > ---
->   classes/base.bbclass |    2 +-
->   1 files changed, 1 insertions(+), 1 deletions(-)
+>   recipes/eglibc/eglibc-package.bbclass |    3 ++-
+>   recipes/glibc/glibc-package.bbclass   |    3 ++-
+>   2 files changed, 4 insertions(+), 2 deletions(-)
 >
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index 0baf0e0..a901f02 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -1240,7 +1240,7 @@ def check_gcc3(data):
->   	# Start by checking for the program name as we build it, was not
->   	# all host-provided gcc-3.4's will work.
+> diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
+> index 01f698a..241499f 100644
+> --- a/recipes/eglibc/eglibc-package.bbclass
+> +++ b/recipes/eglibc/eglibc-package.bbclass
+> @@ -309,11 +309,12 @@ python package_do_split_gconvs () {
+>   		bb.data.setVar('PACKAGES', '%s %s' % (pkgname, bb.data.getVar('PACKAGES', d, 1)), d)
 >
-> -	gcc3_versions = 'gcc-3.4.6 gcc-3.4.4 gcc34 gcc-3.4.7 gcc-3.3 gcc33 gcc-3.3.6 gcc-3.2 gcc32'
-> +	gcc3_versions = 'gcc-3.4.6 gcc-3.4.4 gcc34 gcc-3.4 gcc-3.4.7 gcc-3.3 gcc33 gcc-3.3.6 gcc-3.2 gcc32'
+>   		treedir = base_path_join(bb.data.getVar("WORKDIR", d, 1), "locale-tree")
+> +		ldlibdir = "%s/lib" % treedir
+>   		path = bb.data.getVar("PATH", d, 1)
+>   		i18npath = base_path_join(treedir, datadir, "i18n")
 >
->   	for gcc3 in gcc3_versions.split():
->   		if check_app_exists(gcc3, data):
+>   		localedef_opts = "--force --old-style --no-archive --prefix=%s --inputfile=%s/i18n/locales/%s --charmap=%s %s" % (treedir, datadir, locale, encoding, name)
+> -		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, treedir, localedef_opts)
+> +		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s -E LD_LIBRARY_PATH=%s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, ldlibdir, treedir, localedef_opts)
+>   		bb.note("generating locale %s (%s)" % (locale, encoding))
+>   		if os.system(cmd):
+>   			raise bb.build.FuncFailed("localedef returned an error (command was %s)." % cmd)
+> diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
+> index 8db8c5c..46f809e 100644
+> --- a/recipes/glibc/glibc-package.bbclass
+> +++ b/recipes/glibc/glibc-package.bbclass
+> @@ -273,6 +273,7 @@ python package_do_split_gconvs () {
+>   		bb.data.setVar('PACKAGES', '%s %s' % (pkgname, bb.data.getVar('PACKAGES', d, 1)), d)
+>
+>   		treedir = base_path_join(bb.data.getVar("WORKDIR", d, 1), "locale-tree")
+> +		ldlibdir = "%s/lib" % treedir
+>   		path = bb.data.getVar("PATH", d, 1)
+>   		i18npath = base_path_join(treedir, datadir, "i18n")
+>
+> @@ -282,7 +283,7 @@ python package_do_split_gconvs () {
+>   		if not qemu_options:
+>   			qemu_options = bb.data.getVar('QEMU_OPTIONS', d, 1)
+>   		
+> -		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s %s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, qemu_options, treedir, localedef_opts)
+> +		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s -E LD_LIBRARY_PATH=%s %s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, ldlibdir, qemu_options, treedir, localedef_opts)
+>   		bb.note("generating locale %s (%s)" % (locale, encoding))
+>   		if os.system(cmd):
+>   			raise bb.build.FuncFailed("localedef returned an error (command was %s)." % cmd)
 
 
 
