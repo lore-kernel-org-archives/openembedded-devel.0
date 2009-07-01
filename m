@@ -1,25 +1,29 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MM5H7-0003qp-2U
+	(envelope-from <msmith@cbnco.com>) id 1MM5IB-00041n-Gl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 21:15:21 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KM4004V5A8HIFW8@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	01 Jul 2009 14:02:48 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id DB35E14AF5F; Wed,
-	01 Jul 2009 15:02:38 -0400 (EDT)
-Date: Wed, 01 Jul 2009 15:02:38 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090701190238.GC20815@denix.org>
-References: <200907011817.02564.marcin@juszkiewicz.com.pl>
-	<1246474461-16671-4-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-version: 1.0
-In-reply-to: <1246474461-16671-4-git-send-email-marcin@juszkiewicz.com.pl>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [STABLE][PATCH 009/125] qemu: add version 0.10.3, initial
+	Wed, 01 Jul 2009 21:16:27 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 28DDA4F5963;
+	Wed,  1 Jul 2009 15:04:31 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 10747-05; Wed,  1 Jul 2009 15:04:31 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id F02C84F572C;
+	Wed,  1 Jul 2009 15:04:30 -0400 (EDT)
+Date: Wed, 1 Jul 2009 15:04:30 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
+To: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+In-Reply-To: <1246474496-16704-4-git-send-email-marcin@juszkiewicz.com.pl>
+Message-ID: <Pine.LNX.4.64.0907011500230.3731@juice.ott.cti.com>
+References: <200907011818.18407.marcin@juszkiewicz.com.pl>
+	<1246474496-16704-4-git-send-email-marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [STABLE][PATCH 039/125] glibc/eglibc: remove calls to obsolete base_set_filespath()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,131 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 19:15:21 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 01 Jul 2009 19:16:27 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Wed, Jul 01, 2009 at 08:54:10PM +0200, Marcin Juszkiewicz wrote:
-> From: Roman I Khimov <khimov@altell.ru>
-> 
-> Finally not requiring GCC3. Added with masked preference, need to carefully
-> sort out and apply OE's patches.
-> 
-> Acked-by: Tom Rini <trini@embeddedalley.com>
-> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+Hi Marcin,
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+On Wed, 1 Jul 2009, Marcin Juszkiewicz wrote:
 
-> ---
->  recipes/qemu/qemu-native.inc         |    5 +----
->  recipes/qemu/qemu-native_0.10.3.bb   |    2 ++
->  recipes/qemu/qemu-native_0.9.1.bb    |    3 +++
->  recipes/qemu/qemu-native_20070613.bb |    3 ++-
->  recipes/qemu/qemu-native_cvs.bb      |    3 +++
->  recipes/qemu/qemu-native_svn.bb      |    3 +++
->  recipes/qemu/qemu_0.10.3.bb          |   22 ++++++++++++++++++++++
->  7 files changed, 36 insertions(+), 5 deletions(-)
->  create mode 100644 recipes/qemu/qemu-native_0.10.3.bb
->  create mode 100644 recipes/qemu/qemu_0.10.3.bb
-> 
-> diff --git a/recipes/qemu/qemu-native.inc b/recipes/qemu/qemu-native.inc
-> index 3e6433c..e4064a2 100644
-> --- a/recipes/qemu/qemu-native.inc
-> +++ b/recipes/qemu/qemu-native.inc
-> @@ -1,6 +1,3 @@
->  inherit native
+> From: Michael Smith <msmith@cbnco.com>
+> --- a/recipes/glibc/glibc-initial.inc
+> +++ b/recipes/glibc/glibc-initial.inc
+> @@ -1,7 +1,7 @@
+>  SECTION = "libs"
+>  DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial linux-libc-headers"
+>  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
+> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.4', '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
+> +FILESPATHPKG =. "glibc-2.4:"
 >  
-> -DEPENDS = "libsdl-native zlib-native gcc3-native"
-> -
-> -require qemu-gcc3-check.inc
-> -
-> +DEPENDS = "libsdl-native zlib-native"
-> diff --git a/recipes/qemu/qemu-native_0.10.3.bb b/recipes/qemu/qemu-native_0.10.3.bb
-> new file mode 100644
-> index 0000000..16984a3
-> --- /dev/null
-> +++ b/recipes/qemu/qemu-native_0.10.3.bb
-> @@ -0,0 +1,2 @@
-> +require qemu_${PV}.bb
-> +require qemu-native.inc
-> diff --git a/recipes/qemu/qemu-native_0.9.1.bb b/recipes/qemu/qemu-native_0.9.1.bb
-> index 16984a3..4c418f6 100644
-> --- a/recipes/qemu/qemu-native_0.9.1.bb
-> +++ b/recipes/qemu/qemu-native_0.9.1.bb
-> @@ -1,2 +1,5 @@
->  require qemu_${PV}.bb
->  require qemu-native.inc
-> +require qemu-gcc3-check.inc
-> +
-> +DEPENDS += "gcc3-native"
-> diff --git a/recipes/qemu/qemu-native_20070613.bb b/recipes/qemu/qemu-native_20070613.bb
-> index dc9852b..4c418f6 100644
-> --- a/recipes/qemu/qemu-native_20070613.bb
-> +++ b/recipes/qemu/qemu-native_20070613.bb
-> @@ -1,4 +1,5 @@
->  require qemu_${PV}.bb
->  require qemu-native.inc
-> +require qemu-gcc3-check.inc
->  
-> -
-> +DEPENDS += "gcc3-native"
-> diff --git a/recipes/qemu/qemu-native_cvs.bb b/recipes/qemu/qemu-native_cvs.bb
-> index c9db5e3..51e6028 100644
-> --- a/recipes/qemu/qemu-native_cvs.bb
-> +++ b/recipes/qemu/qemu-native_cvs.bb
-> @@ -1,2 +1,5 @@
->  require qemu_cvs.bb
->  require qemu-native.inc
-> +require qemu-gcc3-check.inc
-> +
-> +DEPENDS += "gcc3-native"
-> diff --git a/recipes/qemu/qemu-native_svn.bb b/recipes/qemu/qemu-native_svn.bb
-> index 1e3a4db..b530bbd 100644
-> --- a/recipes/qemu/qemu-native_svn.bb
-> +++ b/recipes/qemu/qemu-native_svn.bb
-> @@ -1,2 +1,5 @@
->  require qemu_svn.bb
->  require qemu-native.inc
-> +require qemu-gcc3-check.inc
-> +
-> +DEPENDS += "gcc3-native"
-> diff --git a/recipes/qemu/qemu_0.10.3.bb b/recipes/qemu/qemu_0.10.3.bb
-> new file mode 100644
-> index 0000000..d6ad1d7
-> --- /dev/null
-> +++ b/recipes/qemu/qemu_0.10.3.bb
-> @@ -0,0 +1,22 @@
-> +LICENSE = "GPL"
-> +DEPENDS = "zlib"
-> +
-> +# Need to port OE patches there
-> +DEFAULT_PREFERENCE = "-1"
-> +
-> +FILESPATH = "${FILE_DIRNAME}/qemu-${PV}"
-> +FILESDIR = "${WORKDIR}"
-> +
-> +SRC_URI = "\
-> +    http://download.savannah.gnu.org/releases/qemu/qemu-${PV}.tar.gz \
-> +    "
-> +
-> +S = "${WORKDIR}/qemu-${PV}"
-> +
-> +EXTRA_OECONF += "--disable-gfx-check"
-> +
-> +inherit autotools
-> +
-> +do_configure() {
-> +	${S}/configure --prefix=${prefix} ${EXTRA_OECONF}
-> +}
-> -- 
-> 1.6.3.1
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>  PACKAGES = ""
+>  PACKAGES_DYNAMIC = ""
+
+The FILESPATHPKG =. "glibc-2.4:" broke glibc-initial-2.3.2.
+
+I sent a patch for dev, but it's not applied. It's in patchwork:
+http://patchwork.openembedded.org/patch/707/
+
+Here's the thread that prompted it:
+
+http://projects.linuxtogo.org/pipermail/openembedded-devel/2009-June/011692.html
+
+Mike
 
 
