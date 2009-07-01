@@ -1,22 +1,21 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MM0B8-0007Mo-UI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 15:48:53 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MLzz7-00068W-GQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 15:36:25 +0200
-Message-ID: <4A4B6679.4010107@kernelconcepts.de>
-Date: Wed, 01 Jul 2009 15:36:57 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM0WN-0007sX-Jj
+	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 16:10:58 +0200
+Received: (qmail 20039 invoked by uid 813007); 1 Jul 2009 13:58:52 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Jul 2009 13:58:52 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Wed, 1 Jul 2009 15:58:51 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
+	)
 References: <20090701115959.GA10962@pcimg12.dei.unipd.it>
 In-Reply-To: <20090701115959.GA10962@pcimg12.dei.unipd.it>
-X-Enigmail-Version: 0.95.7
+MIME-Version: 1.0
+Message-Id: <200907011558.52497.marcin@juszkiewicz.com.pl>
 Subject: Re: looking for an arm-based board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,33 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 13:49:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Jul 2009 14:11:16 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Dnia =C5=9Broda, 1 lipca 2009 o 13:59:59 Ottavio Campana napisa=C5=82(a):
 
-Ottavio Campana schrieb:
-> Since I don't know all the supported machines, can you suggest me a cost
-> effective ARM7 or ARM9 board that works well with OE stable/2009?
+> This time  I need a  small arm with  standard peripherals (UART,  SPI
+> or I2C) and ethernet.  The task it has  to do is controlling  a few
+> devices with the commands received over TCP/IP.
+>
+> Since I don't know all the supported machines, can you suggest me a
+> cost effective ARM7 or ARM9 board that works well with OE
+> stable/2009?
 
-the FriendlyARM stuff (http://www.friendlyarm.net) is quite cheap (using a
-Samsung ARM9). Its supported out of the box in .dev and adding the necessary
-files to stable should be trivial. There is a forked OE stable repository that
-can be used as well.
+Check FriendlyARM devices on http://friendlyarm.eu/ - they costs 125=E2=82=
+=AC=20
+for qvga and 160=E2=82=AC for wvga version. You get Samsung s3c2440, 64MB r=
+am,=20
+ethernet, 3 rs232 ports, usb host/device, audio in/out and extra signals=20
+at connectors.
 
-If it turns out that you need more CPU power you can always use a BeagleBoard
-and add an USB Ethernet adapter.
+This is one of cheapest solution for embedded devices.
 
-Greetings
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Florian
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
 
 
