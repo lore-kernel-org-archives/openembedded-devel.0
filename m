@@ -1,20 +1,20 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM58S-00039V-Bc
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM58S-00039a-LV
 	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 21:06:24 +0200
-Received: (qmail 30315 invoked by uid 813007); 1 Jul 2009 18:54:28 -0000
+Received: (qmail 30343 invoked by uid 813007); 1 Jul 2009 18:54:28 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
 	by 195.149.226.213 with ESMTPA; 1 Jul 2009 18:54:28 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jul 2009 20:54:11 +0200
-Message-Id: <1246474461-16671-5-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Wed,  1 Jul 2009 20:54:12 +0200
+Message-Id: <1246474461-16671-6-git-send-email-marcin@juszkiewicz.com.pl>
 X-Mailer: git-send-email 1.6.3.3
 In-Reply-To: <200907011817.02564.marcin@juszkiewicz.com.pl>
 References: <200907011817.02564.marcin@juszkiewicz.com.pl>
-Subject: [STABLE][PATCH 010/125] (e)glibc-package: fix kernel version passed to qemu
+Subject: [STABLE][PATCH 011/125] (e)glibc-package: set LD_LIBRARY_PATH on binary locale generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,58 +32,56 @@ X-List-Received-Date: Wed, 01 Jul 2009 19:06:24 -0000
 
 From: Roman I Khimov <khimov@altell.ru>
 
-Binary locale generation fails with
-
-FATAL: kernel too old
-
-if (e)glibc is configured for kernels newer than 2.6.16. This comes from
-kernel version check in sysdeps/unix/sysv/linux/dl-osinfo.h. We configure
-(e)glibc with "--enable-kernel=${OLDEST_KERNEL}", so to pass this check we
-need kernel version reported from QEMU to (e)glibc be $OLDEST_KERNEL or higher.
-
-Fix qemu "-r" parameter to match OLDEST_KERNEL.
+Locale generation might fail with SIGSEGV if host libs get messed with target
+libs, that might easily happen via /etc/ld.so.cache when building x86(_64)
+target on x86(_64) host. So explicitly specify LD_LIBRARY_PATH to prevent that.
 
 Acked-by: Tom Rini <trini@embeddedalley.com>
 Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 ---
- recipes/eglibc/eglibc-package.bbclass |    6 +++++-
- recipes/glibc/glibc-package.bbclass   |    6 +++++-
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ recipes/eglibc/eglibc-package.bbclass |    3 ++-
+ recipes/glibc/glibc-package.bbclass   |    3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
-index 7fcb558..01f698a 100644
+index 01f698a..241499f 100644
 --- a/recipes/eglibc/eglibc-package.bbclass
 +++ b/recipes/eglibc/eglibc-package.bbclass
-@@ -287,7 +287,11 @@ python package_do_split_gconvs () {
+@@ -309,11 +309,12 @@ python package_do_split_gconvs () {
+ 		bb.data.setVar('PACKAGES', '%s %s' % (pkgname, bb.data.getVar('PACKAGES', d, 1)), d)
  
- 	def output_locale_binary(name, locale, encoding):
- 		target_arch = bb.data.getVar("TARGET_ARCH", d, 1)
--		qemu = "qemu-%s -r 2.6.16" % target_arch
-+		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
-+		if kernel_ver is None:
-+			qemu = "qemu-%s  -s 1048576" % target_arch
-+		else:
-+			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
- 		pkgname = 'locale-base-' + legitimize_package_name(name)
- 		m = re.match("(.*)\.(.*)", name)
- 		if m:
+ 		treedir = base_path_join(bb.data.getVar("WORKDIR", d, 1), "locale-tree")
++		ldlibdir = "%s/lib" % treedir
+ 		path = bb.data.getVar("PATH", d, 1)
+ 		i18npath = base_path_join(treedir, datadir, "i18n")
+ 
+ 		localedef_opts = "--force --old-style --no-archive --prefix=%s --inputfile=%s/i18n/locales/%s --charmap=%s %s" % (treedir, datadir, locale, encoding, name)
+-		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, treedir, localedef_opts)
++		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s -E LD_LIBRARY_PATH=%s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, ldlibdir, treedir, localedef_opts)
+ 		bb.note("generating locale %s (%s)" % (locale, encoding))
+ 		if os.system(cmd):
+ 			raise bb.build.FuncFailed("localedef returned an error (command was %s)." % cmd)
 diff --git a/recipes/glibc/glibc-package.bbclass b/recipes/glibc/glibc-package.bbclass
-index 89fbd1c..8db8c5c 100644
+index 8db8c5c..46f809e 100644
 --- a/recipes/glibc/glibc-package.bbclass
 +++ b/recipes/glibc/glibc-package.bbclass
-@@ -252,7 +252,11 @@ python package_do_split_gconvs () {
- 		if target_arch in ("i486", "i586", "i686"):
- 		   target_arch = "i386"
+@@ -273,6 +273,7 @@ python package_do_split_gconvs () {
+ 		bb.data.setVar('PACKAGES', '%s %s' % (pkgname, bb.data.getVar('PACKAGES', d, 1)), d)
  
--		qemu = "qemu-%s  -s 1048576 -r 2.6.16" % target_arch
-+		kernel_ver = bb.data.getVar("OLDEST_KERNEL", d, 1)
-+		if kernel_ver is None:
-+			qemu = "qemu-%s  -s 1048576" % target_arch
-+		else:
-+			qemu = "qemu-%s  -s 1048576 -r %s" % (target_arch, kernel_ver)
- 		pkgname = 'locale-base-' + legitimize_package_name(name)
- 		m = re.match("(.*)\.(.*)", name)
- 		if m:
+ 		treedir = base_path_join(bb.data.getVar("WORKDIR", d, 1), "locale-tree")
++		ldlibdir = "%s/lib" % treedir
+ 		path = bb.data.getVar("PATH", d, 1)
+ 		i18npath = base_path_join(treedir, datadir, "i18n")
+ 
+@@ -282,7 +283,7 @@ python package_do_split_gconvs () {
+ 		if not qemu_options:
+ 			qemu_options = bb.data.getVar('QEMU_OPTIONS', d, 1)
+ 		
+-		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s %s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, qemu_options, treedir, localedef_opts)
++		cmd = "PATH=\"%s\" I18NPATH=\"%s\" %s -L %s -E LD_LIBRARY_PATH=%s %s %s/bin/localedef %s" % (path, i18npath, qemu, treedir, ldlibdir, qemu_options, treedir, localedef_opts)
+ 		bb.note("generating locale %s (%s)" % (locale, encoding))
+ 		if os.system(cmd):
+ 			raise bb.build.FuncFailed("localedef returned an error (command was %s)." % cmd)
 -- 
 1.6.3.1
 
