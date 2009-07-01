@@ -1,17 +1,31 @@
-Received: from [147.162.13.20] (helo=pcimg12.dei.unipd.it)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bott@pcimg12.dei.unipd.it>) id 1MLyfJ-0002PO-MV
+	(envelope-from <koansoftware@gmail.com>) id 1MLzCt-0000Na-Pz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 14:12:15 +0200
-Received: by pcimg12.dei.unipd.it (Postfix, from userid 1000)
-	id 17FD4801C439; Wed,  1 Jul 2009 13:59:59 +0200 (CEST)
-Date: Wed, 1 Jul 2009 13:59:59 +0200
-From: Ottavio Campana <ottavio@campana.vi.it>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090701115959.GA10962@pcimg12.dei.unipd.it>
+	Wed, 01 Jul 2009 14:46:38 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 8059E2C825
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Jul 2009 12:34:26 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id g3VXyGbCBEFY
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Jul 2009 12:34:25 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 97D1B2C81E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Jul 2009 12:34:24 +0000 (UTC)
+Message-ID: <4A4B5804.705@gmail.com>
+Date: Wed, 01 Jul 2009 14:35:16 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.13 (2006-08-11)
-Subject: looking for an arm-based board
+To: openembedded-devel@lists.openembedded.org
+References: <20090701115959.GA10962@pcimg12.dei.unipd.it>
+In-Reply-To: <20090701115959.GA10962@pcimg12.dei.unipd.it>
+Subject: Re: looking for an arm-based board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -25,30 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 12:12:53 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Jul 2009 12:46:57 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Ottavio Campana ha scritto:
+> Hi,
+>=20
+> I'm starting  a new  project based  on linux embedded.  This time  I ca=
+n
+> choose the platform to  use, and I'd like to use  an arm based solution=
+,
+> because I previously used TI davinci soc  and I was satisfied by the ar=
+m
+> (a bit less by montavista...).
+>=20
+> This time  I need a  small arm with  standard peripherals (UART,  SPI o=
+r
+> I2C) and ethernet.  The task it has  to do is controlling  a few device=
+s
+> with the commands received over TCP/IP.
+>=20
+> Since I don't know all the supported machines, can you suggest me a cos=
+t
+> effective ARM7 or ARM9 board that works well with OE stable/2009?
+>=20
+> Thank you,
+>=20
 
-I'm starting  a new  project based  on linux embedded.  This time  I can
-choose the platform to  use, and I'd like to use  an arm based solution,
-because I previously used TI davinci soc  and I was satisfied by the arm
-(a bit less by montavista...).
+Ottavio,
+we at KOAN are currently supporting Ronetix' board PM9263 with in OE
+main tree and stable/2009 with KaeilOS distro.
 
-This time  I need a  small arm with  standard peripherals (UART,  SPI or
-I2C) and ethernet.  The task it has  to do is controlling  a few devices
-with the commands received over TCP/IP.
+http://www.ronetix.at/pm9263.html
+http://www.kaeilos.com/?q=3Ddownload
 
-Since I don't know all the supported machines, can you suggest me a cost
-effective ARM7 or ARM9 board that works well with OE stable/2009?
+Further supported boards from other producers are on the way, stay tuned =
+;-)
 
-Thank you,
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
-Ottavio
 
---=20
-Non c'=E8 pi=F9 forza nella normalit=E0, c'=E8 solo monotonia.
+
 
 
