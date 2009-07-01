@@ -1,21 +1,21 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM59H-0003CI-JE
-	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 21:07:15 +0200
-Received: (qmail 32388 invoked by uid 813007); 1 Jul 2009 18:55:19 -0000
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM59I-0003CS-9h
+	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 21:07:16 +0200
+Received: (qmail 32419 invoked by uid 813007); 1 Jul 2009 18:55:20 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
 	by 195.149.226.213 with ESMTPA; 1 Jul 2009 18:55:19 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jul 2009 20:55:08 +0200
-Message-Id: <1246474518-16737-10-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Wed,  1 Jul 2009 20:55:09 +0200
+Message-Id: <1246474518-16737-11-git-send-email-marcin@juszkiewicz.com.pl>
 X-Mailer: git-send-email 1.6.3.3
 In-Reply-To: <200907011819.54127.marcin@juszkiewicz.com.pl>
 References: <200907011819.54127.marcin@juszkiewicz.com.pl>
 Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [STABLE][PATCH 115/125] Add recipe for at91bootstrap-2.10
+Subject: [STABLE][PATCH 116/125] Add recipe for u-boot-2009.01
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,582 +29,1191 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 19:07:15 -0000
+X-List-Received-Date: Wed, 01 Jul 2009 19:07:16 -0000
 
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 
 
 Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 ---
- .../at91bootstrap-2.10/at91cap9adk/defconfig       |   68 +++++++++++++++++++
- .../at91bootstrap-2.10/at91sam9260ek/defconfig     |   68 +++++++++++++++++++
- .../at91bootstrap-2.10/at91sam9261ek/defconfig     |   68 +++++++++++++++++++
- .../at91bootstrap-2.10/at91sam9263ek/defconfig     |   68 +++++++++++++++++++
- .../at91bootstrap-2.10/at91sam9g20ek/defconfig     |   70 ++++++++++++++++++++
- .../at91bootstrap-2.10/at91sam9rlek/defconfig      |   68 +++++++++++++++++++
- .../at91bootstrap-2.10/at91sam9xeek/defconfig      |   68 +++++++++++++++++++
- recipes/at91bootstrap/at91bootstrap_2.10.bb        |   26 +++++++
- 8 files changed, 504 insertions(+), 0 deletions(-)
- create mode 100644 recipes/at91bootstrap/at91bootstrap-2.10/at91cap9adk/defconfig
- create mode 100644 recipes/at91bootstrap/at91bootstrap-2.10/at91sam9260ek/defconfig
- create mode 100644 recipes/at91bootstrap/at91bootstrap-2.10/at91sam9261ek/defconfig
- create mode 100644 recipes/at91bootstrap/at91bootstrap-2.10/at91sam9263ek/defconfig
- create mode 100644 recipes/at91bootstrap/at91bootstrap-2.10/at91sam9g20ek/defconfig
- create mode 100644 recipes/at91bootstrap/at91bootstrap-2.10/at91sam9rlek/defconfig
- create mode 100644 recipes/at91bootstrap/at91bootstrap-2.10/at91sam9xeek/defconfig
- create mode 100644 recipes/at91bootstrap/at91bootstrap_2.10.bb
+ .../u-boot-2009.01-exp-001-config.patch            |  266 +++++++
+ .../u-boot-2009.01-exp-002-at91sam9g20ek.patch     |  802 ++++++++++++++++++++
+ ...u-boot-2009.01-exp-003-drivers-net-macb.c.patch |   28 +
+ ...boot-2009.01-include_asm-avr32_io.h.patch.avr32 |   13 +
+ recipes/u-boot/u-boot_2009.01.bb                   |   28 +
+ 5 files changed, 1137 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-001-config.patch
+ create mode 100644 recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-002-at91sam9g20ek.patch
+ create mode 100644 recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-003-drivers-net-macb.c.patch
+ create mode 100644 recipes/u-boot/u-boot-2009.01/u-boot-2009.01-include_asm-avr32_io.h.patch.avr32
+ create mode 100644 recipes/u-boot/u-boot_2009.01.bb
 
-diff --git a/recipes/at91bootstrap/at91bootstrap-2.10/at91cap9adk/defconfig b/recipes/at91bootstrap/at91bootstrap-2.10/at91cap9adk/defconfig
+diff --git a/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-001-config.patch b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-001-config.patch
 new file mode 100644
-index 0000000..169c58e
+index 0000000..f1c30aa
 --- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap-2.10/at91cap9adk/defconfig
-@@ -0,0 +1,68 @@
-+#
-+# Automatically generated make config: don't edit
-+# Sat Dec 27 17:12:57 2008
-+#
-+HAVE_DOT_CONFIG=y
-+CONFIG_BOARDNAME="at91cap9adk"
-+# CONFIG_AT91SAM9260EK is not set
-+# CONFIG_AT91SAM9261EK is not set
-+# CONFIG_AT91SAM9263EK is not set
-+# CONFIG_AT91SAM9RLEK is not set
-+# CONFIG_AT91SAM9XEEK is not set
-+# CONFIG_AT91SAM9G20EK is not set
-+CONFIG_AT91CAP9ADK=y
-+CONFIG_CHIP="AT91CAP9"
-+CONFIG_BOARD="at91cap9adk"
-+CONFIG_MACH_TYPE="1442"
-+CONFIG_LINK_ADDR="0x000000"
-+CONFIG_TOP_OF_MEMORY="0x108000"
-+# CONFIG_CRYSTAL_16_000MHZ is not set
-+# CONFIG_CRYSTAL_16_36766MHZ is not set
-+CONFIG_CRYSTAL_18_432MHZ=y
-+CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
-+
-+#
-+# Memory selection
-+#
-+# CONFIG_SDRAM is not set
-+CONFIG_SDDRC=y
-+ALLOW_DATAFLASH=y
-+ALLOW_FLASH=y
-+# ALLOW_NANDFLASH is not set
-+# ALLOW_SDCARD is not set
-+CONFIG_DATAFLASH=y
-+# CONFIG_FLASH is not set
-+# CONFIG_NANDFLASH is not set
-+# CONFIG_SDCARD is not set
-+CONFIG_MEMORY="dataflash"
-+
-+#
-+# SPI configuration
-+#
-+CONFIG_SPI_CLK=33000000
-+CONFIG_SPI_BOOT_CS0=y
-+# CONFIG_SPI_BOOT_CS1 is not set
-+DATAFLASHCARD_ON_CS0=y
-+# DATAFLASHCARD_ON_CS1 is not set
-+# DATAFLASHCARD_ON_CS2 is not set
-+# DATAFLASHCARD_ON_CS3 is not set
-+CONFIG_DATAFLASHCARD=y
-+CONFIG_CARD_SUFFIX="card"
-+CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
-+CONFIG_SPI_MODE_0=y
-+# CONFIG_SPI_MODE_1 is not set
-+# CONFIG_SPI_MODE_2 is not set
-+# CONFIG_SPI_MODE_3 is not set
-+CONFIG_SPI_MODE=0
-+CONFIG_PROJECT="dataflash"
-+CONFIG_LOAD_UBOOT=y
-+# CONFIG_LOAD_EXAMPLE is not set
-+# CONFIG_LOAD_SMALL_APP is not set
-+# CONFIG_LOAD_LARGE_APP is not set
-+CONFIG_IMG_ADDRESS="0x00008400"
-+CONFIG_IMG_SIZE="0x00040000"
-+CONFIG_JUMP_ADDR="0x73F00000"
-+CONFIG_APP_CHECK=y
-+# CONFIG_LONG_TEST is not set
-+CONFIG_DEBUG=y
-+CONFIG_HW_INIT=y
-diff --git a/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9260ek/defconfig b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9260ek/defconfig
++++ b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-001-config.patch
+@@ -0,0 +1,266 @@
++diff -urN u-boot-2008.10-0rig//doc/README.at91 u-boot-2008.10/doc/README.at91
++--- u-boot-2008.10-0rig//doc/README.at91	1970-01-01 01:00:00.000000000 +0100
+++++ u-boot-2008.10/doc/README.at91	2008-12-31 12:16:34.000000000 +0100
++@@ -0,0 +1,88 @@
+++Atmel AT91 Evaluation kits
+++
+++http://atmel.com/dyn/products/tools.asp?family_id=605#1443
+++
+++------------------------------------------------------------------------------
+++AT91SAM9260EK
+++------------------------------------------------------------------------------
+++
+++Memory map
+++	0x20000000 - 23FFFFFF	SDRAM (64 MB)
+++	0xC0000000 - Cxxxxxxx	Atmel Dataflash card (J13)
+++	0xD0000000 - Dxxxxxxx	Soldered Atmel Dataflash 
+++
+++Environment variables
+++
+++	U-Boot environment variables can be stored at different places:
+++		- Dataflash on SPI chip select 1 (default)
+++		- Dataflash on SPI chip select 0 (dataflash card)
+++		- Nand flash.
+++
+++	You can choose your storage location at config step (here for at91sam9260ek) :
+++		make at91sam9260ek_config		- use data flash (spi cs1) (default)
+++		make at91sam9260ek_nandflash_config	- use nand flash 
+++		make at91sam9260ek_dataflash_cs0_config	- use data flash (spi cs0)
+++		make at91sam9260ek_dataflash_cs1_config	- use data flash (spi cs1)
+++
+++
+++------------------------------------------------------------------------------
+++AT91SAM9261EK
+++------------------------------------------------------------------------------
+++
+++Memory map
+++	0x20000000 - 23FFFFFF	SDRAM (64 MB)
+++	0xC0000000 - Cxxxxxxx	Soldered Atmel Dataflash 
+++	0xD0000000 - Dxxxxxxx	Atmel Dataflash card (J22)
+++
+++Environment variables
+++
+++	U-Boot environment variables can be stored at different places:
+++		- Dataflash on SPI chip select 0 (default)
+++		- Dataflash on SPI chip select 3 (dataflash card)
+++		- Nand flash.
+++
+++	You can choose your storage location at config step (here for at91sam9260ek) :
+++		make at91sam9261ek_config		- use data flash (spi cs0) (default)
+++		make at91sam9261ek_nandflash_config	- use nand flash 
+++		make at91sam9261ek_dataflash_cs0_config	- use data flash (spi cs0)
+++		make at91sam9261ek_dataflash_cs3_config	- use data flash (spi cs3)
+++
+++
+++------------------------------------------------------------------------------
+++AT91SAM9263EK
+++------------------------------------------------------------------------------
+++
+++Memory map
+++	0x20000000 - 23FFFFFF	SDRAM (64 MB)
+++	0xC0000000 - Cxxxxxxx	Atmel Dataflash card (J9)
+++
+++Environment variables
+++
+++	U-Boot environment variables can be stored at different places:
+++		- Dataflash on SPI chip select 0 (dataflash card)
+++		- Nand flash.
+++
+++	You can choose your storage location at config step (here for at91sam9260ek) :
+++		make at91sam9263ek_config		- use data flash (spi cs0) (default)
+++		make at91sam9263ek_nandflash_config	- use nand flash 
+++		make at91sam9263ek_dataflash_cs0_config	- use data flash (spi cs0)
+++
+++
+++------------------------------------------------------------------------------
+++AT91SAM9RLEK
+++------------------------------------------------------------------------------
+++
+++Memory map
+++	0x20000000 - 23FFFFFF	SDRAM (64 MB)
+++	0xC0000000 - Cxxxxxxx	Soldered Atmel Dataflash
+++
+++Environment variables
+++
+++	U-Boot environment variables can be stored at different places:
+++		- Dataflash on SPI chip select 0
+++		- Nand flash.
+++
+++	You can choose your storage location at config step (here for at91sam9260ek) :
+++		make at91sam9263ek_config		- use data flash (spi cs0) (default)
+++		make at91sam9263ek_nandflash_config	- use nand flash 
+++		make at91sam9263ek_dataflash_cs0_config	- use data flash (spi cs0)
++diff -urN u-boot-2008.10-0rig//include/configs/at91sam9260ek.h u-boot-2008.10/include/configs/at91sam9260ek.h
++--- u-boot-2008.10-0rig//include/configs/at91sam9260ek.h	2008-12-31 12:15:59.000000000 +0100
+++++ u-boot-2008.10/include/configs/at91sam9260ek.h	2008-12-31 12:16:34.000000000 +0100
++@@ -127,10 +127,6 @@
++ #define CFG_MEMTEST_START		PHYS_SDRAM
++ #define CFG_MEMTEST_END			0x23e00000
++ 
++-#undef CFG_USE_DATAFLASH_CS0
++-#define CFG_USE_DATAFLASH_CS1		1
++-#undef CFG_USE_NANDFLASH
++-
++ #ifdef CFG_USE_DATAFLASH_CS0
++ 
++ /* bootstrap + u-boot + env + linux in dataflash on CS0 */
++diff -urN u-boot-2008.10-0rig//include/configs/at91sam9261ek.h u-boot-2008.10/include/configs/at91sam9261ek.h
++--- u-boot-2008.10-0rig//include/configs/at91sam9261ek.h	2008-12-31 12:15:59.000000000 +0100
+++++ u-boot-2008.10/include/configs/at91sam9261ek.h	2008-12-31 12:16:34.000000000 +0100
++@@ -142,9 +142,6 @@
++ #define CFG_MEMTEST_START		PHYS_SDRAM
++ #define CFG_MEMTEST_END			0x23e00000
++ 
++-#define CFG_USE_DATAFLASH_CS0		1
++-#undef CFG_USE_NANDFLASH
++-
++ #ifdef CFG_USE_DATAFLASH_CS0
++ 
++ /* bootstrap + u-boot + env + linux in dataflash on CS0 */
++@@ -157,6 +154,20 @@
++ #define CONFIG_BOOTARGS		"console=ttyS0,115200 "			\
++ 				"root=/dev/mtdblock0 "			\
++ 				"mtdparts=at91_nand:-(root) "		\
+++				"rw rootfstype=jffs2"
+++
+++#elif CFG_USE_DATAFLASH_CS3
+++
+++/* bootstrap + u-boot + env + linux in dataflash on CS3 */
+++#define CFG_ENV_IS_IN_DATAFLASH	1
+++#define CFG_MONITOR_BASE	(CFG_DATAFLASH_LOGIC_ADDR_CS3 + 0x8400)
+++#define CFG_ENV_OFFSET		0x4200
+++#define CFG_ENV_ADDR		(CFG_DATAFLASH_LOGIC_ADDR_CS3 + CFG_ENV_OFFSET)
+++#define CFG_ENV_SIZE		0x4200
+++#define CONFIG_BOOTCOMMAND	"cp.b 0xD0042000 0x22000000 0x210000; bootm"
+++#define CONFIG_BOOTARGS		"console=ttyS0,115200 "			\
+++				"root=/dev/mtdblock0 "			\
+++				"mtdparts=at91_nand:-(root) "		\
++ 				"rw rootfstype=jffs2"
++ 
++ #else /* CFG_USE_NANDFLASH */
++diff -urN u-boot-2008.10-0rig//include/configs/at91sam9263ek.h u-boot-2008.10/include/configs/at91sam9263ek.h
++--- u-boot-2008.10-0rig//include/configs/at91sam9263ek.h	2008-12-31 12:15:59.000000000 +0100
+++++ u-boot-2008.10/include/configs/at91sam9263ek.h	2008-12-31 12:16:34.000000000 +0100
++@@ -148,9 +148,6 @@
++ #define CFG_MEMTEST_START		PHYS_SDRAM
++ #define CFG_MEMTEST_END			0x23e00000
++ 
++-#define CFG_USE_DATAFLASH		1
++-#undef CFG_USE_NANDFLASH
++-
++ #ifdef CFG_USE_DATAFLASH
++ 
++ /* bootstrap + u-boot + env + linux in dataflash on CS0 */
++diff -urN u-boot-2008.10-0rig//include/configs/at91sam9rlek.h u-boot-2008.10/include/configs/at91sam9rlek.h
++--- u-boot-2008.10-0rig//include/configs/at91sam9rlek.h	2008-12-31 12:15:59.000000000 +0100
+++++ u-boot-2008.10/include/configs/at91sam9rlek.h	2008-12-31 12:16:34.000000000 +0100
++@@ -117,9 +117,6 @@
++ #define CFG_MEMTEST_START		PHYS_SDRAM
++ #define CFG_MEMTEST_END			0x23e00000
++ 
++-#define CFG_USE_DATAFLASH		1
++-#undef CFG_USE_NANDFLASH
++-
++ #ifdef CFG_USE_DATAFLASH
++ 
++ /* bootstrap + u-boot + env + linux in dataflash on CS0 */
++diff -urN u-boot-2008.10-0rig//Makefile u-boot-2008.10/Makefile
++--- u-boot-2008.10-0rig//Makefile	2008-12-31 12:15:55.000000000 +0100
+++++ u-boot-2008.10/Makefile	2008-12-31 12:18:31.000000000 +0100
++@@ -2487,15 +2487,6 @@
++ at91rm9200dk_config	:	unconfig
++ 	@$(MKCONFIG) $(@:_config=) arm arm920t at91rm9200dk atmel at91rm9200
++ 
++-at91sam9261ek_config	:	unconfig
++-	@$(MKCONFIG) $(@:_config=) arm arm926ejs at91sam9261ek atmel at91
++-
++-at91sam9263ek_config	:	unconfig
++-	@$(MKCONFIG) $(@:_config=) arm arm926ejs at91sam9263ek atmel at91
++-
++-at91sam9rlek_config	:	unconfig
++-	@$(MKCONFIG) $(@:_config=) arm arm926ejs at91sam9rlek atmel at91
++-
++ cmc_pu2_config	:	unconfig
++ 	@$(MKCONFIG) $(@:_config=) arm arm920t cmc_pu2 NULL at91rm9200
++ 
++@@ -2518,8 +2509,79 @@
++ at91cap9adk_config	:	unconfig
++ 	@$(MKCONFIG) $(@:_config=) arm arm926ejs at91cap9adk atmel at91
++ 
+++at91sam9260ek_nandflash_config \
+++at91sam9260ek_dataflash_cs0_config \
+++at91sam9260ek_dataflash_cs1_config \
++ at91sam9260ek_config	:	unconfig
++-	@$(MKCONFIG) $(@:_config=) arm arm926ejs at91sam9260ek atmel at91
+++	@if [ "$(findstring _nandflash,$@)" ] ; then \
+++		echo "#define CFG_USE_NANDFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in NAND FLASH" ; \
+++	elif [ "$(findstring dataflash_cs0,$@)" ] ; then \
+++		echo "#define CFG_USE_DATAFLASH_CS0 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS0" ; \
+++	else \
+++		echo "#define CFG_USE_DATAFLASH_CS1 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS1" ; \
+++	fi;
+++	@$(MKCONFIG) -a at91sam9260ek arm arm926ejs at91sam9260ek atmel at91
+++
+++at91sam9xeek_nandflash_config \
+++at91sam9xeek_dataflash_cs0_config \
+++at91sam9xeek_dataflash_cs1_config \
+++at91sam9xeek_config	:	unconfig
+++	@if [ "$(findstring _nandflash,$@)" ] ; then \
+++		echo "#define CFG_USE_NANDFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in NAND FLASH" ; \
+++	elif [ "$(findstring dataflash_cs0,$@)" ] ; then \
+++		echo "#define CFG_USE_DATAFLASH_CS0 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS0" ; \
+++	else \
+++		echo "#define CFG_USE_DATAFLASH_CS1 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS1" ; \
+++	fi;
+++	@$(MKCONFIG) -n at91sam9xeek -a at91sam9260ek arm arm926ejs at91sam9260ek atmel at91
+++
+++at91sam9261ek_nandflash_config \
+++at91sam9261ek_dataflash_cs0_config \
+++at91sam9261ek_dataflash_cs3_config \
+++at91sam9261ek_config	:	unconfig
+++	@if [ "$(findstring _nandflash,$@)" ] ; then \
+++		echo "#define CFG_USE_NANDFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in NAND FLASH" ; \
+++	elif [ "$(findstring dataflash_cs3,$@)" ] ; then \
+++		echo "#define CFG_USE_DATAFLASH_CS3 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS3" ; \
+++	else \
+++		echo "#define CFG_USE_DATAFLASH_CS0 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS0" ; \
+++	fi;
+++	@$(MKCONFIG) -a at91sam9261ek arm arm926ejs at91sam9261ek atmel at91
+++
+++at91sam9263ek_nandflash_config \
+++at91sam9263ek_dataflash_config \
+++at91sam9263ek_dataflash_cs0_config \
+++at91sam9263ek_config	:	unconfig
+++	@if [ "$(findstring _nandflash,$@)" ] ; then \
+++		echo "#define CFG_USE_NANDFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in NAND FLASH" ; \
+++	else \
+++		echo "#define CFG_USE_DATAFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS0" ; \
+++	fi;
+++	@$(MKCONFIG) -a at91sam9263ek arm arm926ejs at91sam9263ek atmel at91
+++
+++at91sam9rlek_nandflash_config \
+++at91sam9rlek_dataflash_config \
+++at91sam9rlek_dataflash_cs0_config \
+++at91sam9rlek_config	:	unconfig
+++	@if [ "$(findstring _nandflash,$@)" ] ; then \
+++		echo "#define CFG_USE_NANDFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in NAND FLASH" ; \
+++	else \
+++		echo "#define CFG_USE_DATAFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS0" ; \
+++	fi;
+++	@$(MKCONFIG) -a at91sam9rlek arm arm926ejs at91sam9rlek atmel at91
++ 
++ ########################################################################
++ ## ARM Integrator boards - see doc/README-integrator for more info.
+diff --git a/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-002-at91sam9g20ek.patch b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-002-at91sam9g20ek.patch
 new file mode 100644
-index 0000000..9f1d450
+index 0000000..bb7e6b1
 --- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9260ek/defconfig
-@@ -0,0 +1,68 @@
-+#
-+# Automatically generated make config: don't edit
-+# Sat Dec 27 17:12:18 2008
-+#
-+HAVE_DOT_CONFIG=y
-+CONFIG_BOARDNAME="at91sam9260ek"
-+CONFIG_AT91SAM9260EK=y
-+# CONFIG_AT91SAM9261EK is not set
-+# CONFIG_AT91SAM9263EK is not set
-+# CONFIG_AT91SAM9RLEK is not set
-+# CONFIG_AT91SAM9XEEK is not set
-+# CONFIG_AT91SAM9G20EK is not set
-+# CONFIG_AT91CAP9ADK is not set
-+CONFIG_CHIP="AT91SAM9260"
-+CONFIG_BOARD="at91sam9260ek"
-+CONFIG_MACH_TYPE="0x44B"
-+CONFIG_LINK_ADDR="0x200000"
-+CONFIG_TOP_OF_MEMORY="0x301000"
-+# CONFIG_CRYSTAL_16_000MHZ is not set
-+# CONFIG_CRYSTAL_16_36766MHZ is not set
-+CONFIG_CRYSTAL_18_432MHZ=y
-+CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
-+
-+#
-+# Memory selection
-+#
-+CONFIG_SDRAM=y
-+# CONFIG_SDDRC is not set
-+ALLOW_DATAFLASH=y
-+# ALLOW_FLASH is not set
-+ALLOW_NANDFLASH=y
-+# ALLOW_SDCARD is not set
-+CONFIG_DATAFLASH=y
-+# CONFIG_FLASH is not set
-+# CONFIG_NANDFLASH is not set
-+# CONFIG_SDCARD is not set
-+CONFIG_MEMORY="dataflash"
-+
-+#
-+# SPI configuration
-+#
-+CONFIG_SPI_CLK=33000000
-+CONFIG_SPI_BOOT_CS0=y
-+# CONFIG_SPI_BOOT_CS1 is not set
-+DATAFLASHCARD_ON_CS0=y
-+# DATAFLASHCARD_ON_CS1 is not set
-+# DATAFLASHCARD_ON_CS2 is not set
-+# DATAFLASHCARD_ON_CS3 is not set
-+CONFIG_DATAFLASHCARD=y
-+CONFIG_CARD_SUFFIX="card"
-+CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
-+CONFIG_SPI_MODE_0=y
-+# CONFIG_SPI_MODE_1 is not set
-+# CONFIG_SPI_MODE_2 is not set
-+# CONFIG_SPI_MODE_3 is not set
-+CONFIG_SPI_MODE=0
-+CONFIG_PROJECT="dataflash"
-+CONFIG_LOAD_UBOOT=y
-+# CONFIG_LOAD_EXAMPLE is not set
-+# CONFIG_LOAD_SMALL_APP is not set
-+# CONFIG_LOAD_LARGE_APP is not set
-+CONFIG_IMG_ADDRESS="0x00008400"
-+CONFIG_IMG_SIZE="0x00040000"
-+CONFIG_JUMP_ADDR="0x23F00000"
-+CONFIG_APP_CHECK=y
-+# CONFIG_LONG_TEST is not set
-+CONFIG_DEBUG=y
-+CONFIG_HW_INIT=y
-diff --git a/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9261ek/defconfig b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9261ek/defconfig
++++ b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-002-at91sam9g20ek.patch
+@@ -0,0 +1,802 @@
++diff -urN u-boot-2008.10-0rig/Makefile u-boot-2008.10/Makefile
++--- u-boot-2008.10-0rig/Makefile	2008-12-28 14:07:30.000000000 +0100
+++++ u-boot-2008.10/Makefile	2008-12-28 14:06:28.000000000 +0100
++@@ -2541,6 +2541,22 @@
++ 	fi;
++ 	@$(MKCONFIG) -n at91sam9xeek -a at91sam9260ek arm arm926ejs at91sam9260ek atmel at91
++ 
+++at91sam9g20ek_nandflash_config \
+++at91sam9g20ek_dataflash_cs0_config \
+++at91sam9g20ek_dataflash_cs1_config \
+++at91sam9g20ek_config	:	unconfig
+++	@if [ "$(findstring _nandflash,$@)" ] ; then \
+++		echo "#define CFG_USE_NANDFLASH 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in NAND FLASH" ; \
+++	elif [ "$(findstring dataflash_cs0,$@)" ] ; then \
+++		echo "#define CFG_USE_DATAFLASH_CS0 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS0" ; \
+++	else \
+++		echo "#define CFG_USE_DATAFLASH_CS1 1"	>>$(obj)include/config.h ; \
+++		$(XECHO) "... with environment variable in SPI DATAFLASH CS1" ; \
+++	fi;
+++	@$(MKCONFIG) -a at91sam9g20ek arm arm926ejs at91sam9g20ek atmel at91
+++
++ at91sam9261ek_nandflash_config \
++ at91sam9261ek_dataflash_cs0_config \
++ at91sam9261ek_dataflash_cs3_config \
++Index: include/configs/at91sam9g20ek.h
++===================================================================
++--- a/include/configs/at91sam9g20ek.h	(.../u-boot-1.3.4)	(revision 0)
+++++ b/include/configs/at91sam9g20ek.h	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -0,0 +1,198 @@
+++/*
+++ * (C) Copyright 2007-2008
+++ * Stelian Pop <stelian.pop@leadtechdesign.com>
+++ * Lead Tech Design <www.leadtechdesign.com>
+++ *
+++ * Configuation settings for the AT91SAM9G20EK board.
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#ifndef __CONFIG_H
+++#define __CONFIG_H
+++
+++/* ARM asynchronous clock */
+++#define AT91_MAIN_CLOCK		396288000	/* from 18.432 MHz crystal */
+++#define AT91_MASTER_CLOCK	132096000	/* peripheral = main / 3 */
+++#define CFG_HZ			1000000		/* 1us resolution */
+++
+++#define AT91_SLOW_CLOCK		32768	/* slow clock */
+++
+++#define CONFIG_ARM926EJS	1	/* This is an ARM926EJS Core	*/
+++#define CONFIG_AT91SAM9G20	1	/* It's an Atmel AT91SAM9G20 SoC*/
+++#define CONFIG_AT91SAM9G20EK	1	/* on an AT91SAM9G20EK Board	*/
+++#undef CONFIG_USE_IRQ			/* we don't need IRQ/FIQ stuff	*/
+++
+++#define CONFIG_CMDLINE_TAG	1	/* enable passing of ATAGs	*/
+++#define CONFIG_SETUP_MEMORY_TAGS 1
+++#define CONFIG_INITRD_TAG	1
+++
+++#define CONFIG_SKIP_LOWLEVEL_INIT
+++#define CONFIG_SKIP_RELOCATE_UBOOT
+++
+++/*
+++ * Hardware drivers
+++ */
+++#define CONFIG_ATMEL_USART	1
+++#undef CONFIG_USART0
+++#undef CONFIG_USART1
+++#undef CONFIG_USART2
+++#define CONFIG_USART3		1	/* USART 3 is DBGU */
+++
+++#define CONFIG_BOOTDELAY	3
+++
+++/*
+++ * BOOTP options
+++ */
+++#define CONFIG_BOOTP_BOOTFILESIZE	1
+++#define CONFIG_BOOTP_BOOTPATH		1
+++#define CONFIG_BOOTP_GATEWAY		1
+++#define CONFIG_BOOTP_HOSTNAME		1
+++
+++/*
+++ * Command line configuration.
+++ */
+++#include <config_cmd_default.h>
+++#undef CONFIG_CMD_BDI
+++#undef CONFIG_CMD_IMI
+++#undef CONFIG_CMD_AUTOSCRIPT
+++#undef CONFIG_CMD_FPGA
+++#undef CONFIG_CMD_LOADS
+++#undef CONFIG_CMD_IMLS
+++
+++#define CONFIG_CMD_PING		1
+++#define CONFIG_CMD_DHCP		1
+++#define CONFIG_CMD_NAND		1
+++#define CONFIG_CMD_USB		1
+++
+++/* SDRAM */
+++#define CONFIG_NR_DRAM_BANKS		1
+++#define PHYS_SDRAM			0x20000000
+++#define PHYS_SDRAM_SIZE			0x04000000	/* 64 megs */
+++
+++/* DataFlash */
+++#define CONFIG_HAS_DATAFLASH		1
+++#define CFG_SPI_WRITE_TOUT		(5*CFG_HZ)
+++#define CFG_MAX_DATAFLASH_BANKS		2
+++#define CFG_DATAFLASH_LOGIC_ADDR_CS0	0xC0000000	/* CS0 */
+++#define CFG_DATAFLASH_LOGIC_ADDR_CS1	0xD0000000	/* CS1 */
+++#define AT91_SPI_CLK			15000000
+++#define DATAFLASH_TCSS			(0x22 << 16)
+++#define DATAFLASH_TCHS			(0x1 << 24)
+++
+++/* NAND flash */
+++#define NAND_MAX_CHIPS			1
+++#define CFG_MAX_NAND_DEVICE		1
+++#define CFG_NAND_BASE			0x40000000
+++#define CFG_NAND_DBW_8			1
+++
+++/* NOR flash - no real flash on this board */
+++#define CFG_NO_FLASH			1
+++
+++/* Ethernet */
+++#define CONFIG_MACB			1
+++#define CONFIG_RMII			1
+++#define CONFIG_NET_MULTI		1
+++#define CONFIG_NET_RETRY_COUNT		20
+++#define CONFIG_RESET_PHY_R		1
+++
+++/* USB */
+++#define CONFIG_USB_OHCI_NEW		1
+++#define LITTLEENDIAN			1
+++#define CONFIG_DOS_PARTITION		1
+++#define CFG_USB_OHCI_CPU_INIT		1
+++#define CFG_USB_OHCI_REGS_BASE		0x00500000	/* AT91SAM9G20_UHP_BASE */
+++#define CFG_USB_OHCI_SLOT_NAME		"at91sam9g20"
+++#define CFG_USB_OHCI_MAX_ROOT_PORTS	2
+++#define CONFIG_USB_STORAGE		1
+++
+++#define CFG_LOAD_ADDR			0x22000000	/* load address */
+++
+++#define CFG_MEMTEST_START		PHYS_SDRAM
+++#define CFG_MEMTEST_END			0x23e00000
+++
+++#ifdef CFG_USE_DATAFLASH_CS0
+++
+++/* bootstrap + u-boot + env + linux in dataflash on CS0 */
+++#define CFG_ENV_IS_IN_DATAFLASH	1
+++#define CFG_MONITOR_BASE	(CFG_DATAFLASH_LOGIC_ADDR_CS0 + 0x8400)
+++#define CFG_ENV_OFFSET		0x4200
+++#define CFG_ENV_ADDR		(CFG_DATAFLASH_LOGIC_ADDR_CS0 + CFG_ENV_OFFSET)
+++#define CFG_ENV_SIZE		0x4200
+++#define CONFIG_BOOTCOMMAND	"cp.b 0xC0042000 0x22000000 0x210000; bootm"
+++#define CONFIG_BOOTARGS		"console=ttyS0,115200 "			\
+++				"root=/dev/mtdblock0 "			\
+++				"mtdparts=at91_nand:-(root) "		\
+++				"rw rootfstype=jffs2"
+++
+++#elif CFG_USE_DATAFLASH_CS1
+++
+++/* bootstrap + u-boot + env + linux in dataflash on CS1 */
+++#define CFG_ENV_IS_IN_DATAFLASH	1
+++#define CFG_MONITOR_BASE	(CFG_DATAFLASH_LOGIC_ADDR_CS1 + 0x8400)
+++#define CFG_ENV_OFFSET		0x4200
+++#define CFG_ENV_ADDR		(CFG_DATAFLASH_LOGIC_ADDR_CS1 + CFG_ENV_OFFSET)
+++#define CFG_ENV_SIZE		0x4200
+++#define CONFIG_BOOTCOMMAND	"cp.b 0xD0042000 0x22000000 0x210000; bootm"
+++#define CONFIG_BOOTARGS		"console=ttyS0,115200 "			\
+++				"root=/dev/mtdblock0 "			\
+++				"mtdparts=at91_nand:-(root) "		\
+++				"rw rootfstype=jffs2"
+++
+++#else /* CFG_USE_NANDFLASH */
+++
+++/* bootstrap + u-boot + env + linux in nandflash */
+++#define CFG_ENV_IS_IN_NAND	1
+++#define CFG_ENV_OFFSET		0x60000
+++#define CFG_ENV_OFFSET_REDUND	0x80000
+++#define CFG_ENV_SIZE		0x20000		/* 1 sector = 128 kB */
+++#define CONFIG_BOOTCOMMAND	"nand read 0x22000000 0xA0000 0x200000; bootm"
+++#define CONFIG_BOOTARGS		"console=ttyS0,115200 "			\
+++				"root=/dev/mtdblock5 "			\
+++				"mtdparts=at91_nand:128k(bootstrap)ro,"	\
+++				"256k(uboot)ro,128k(env1)ro,"		\
+++				"128k(env2)ro,2M(linux),-(root) "	\
+++				"rw rootfstype=jffs2"
+++
+++#endif
+++
+++#define CONFIG_BAUDRATE		115200
+++#define CFG_BAUDRATE_TABLE	{115200 , 19200, 38400, 57600, 9600 }
+++
+++#define CFG_PROMPT		"U-Boot> "
+++#define CFG_CBSIZE		256
+++#define CFG_MAXARGS		16
+++#define CFG_PBSIZE		(CFG_CBSIZE + sizeof(CFG_PROMPT) + 16)
+++#define CFG_LONGHELP		1
+++#define CONFIG_CMDLINE_EDITING	1
+++
+++#define ROUND(A, B)		(((A) + (B)) & ~((B) - 1))
+++/*
+++ * Size of malloc() pool
+++ */
+++#define CFG_MALLOC_LEN		ROUND(3 * CFG_ENV_SIZE + 128*1024, 0x1000)
+++#define CFG_GBL_DATA_SIZE	128	/* 128 bytes for initial data */
+++
+++#define CONFIG_STACKSIZE	(32*1024)	/* regular stack */
+++
+++#ifdef CONFIG_USE_IRQ
+++#error CONFIG_USE_IRQ not supported
+++#endif
+++
+++#endif
++Index: board/atmel/at91sam9g20ek/nand.c
++===================================================================
++--- a/board/atmel/at91sam9g20ek/nand.c	(.../u-boot-1.3.4)	(revision 0)
+++++ b/board/atmel/at91sam9g20ek/nand.c	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -0,0 +1,79 @@
+++/*
+++ * (C) Copyright 2007-2008
+++ * Stelian Pop <stelian.pop@leadtechdesign.com>
+++ * Lead Tech Design <www.leadtechdesign.com>
+++ *
+++ * (C) Copyright 2006 ATMEL Rousset, Lacressonniere Nicolas
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#include <common.h>
+++#include <asm/arch/at91sam9260.h>
+++#include <asm/arch/gpio.h>
+++#include <asm/arch/at91_pio.h>
+++
+++#include <nand.h>
+++
+++/*
+++ *	hardware specific access to control-lines
+++ */
+++#define	MASK_ALE	(1 << 21)	/* our ALE is AD21 */
+++#define	MASK_CLE	(1 << 22)	/* our CLE is AD22 */
+++
+++static void at91sam9g20ek_nand_hwcontrol(struct mtd_info *mtd, int cmd)
+++{
+++	struct nand_chip *this = mtd->priv;
+++	ulong IO_ADDR_W = (ulong) this->IO_ADDR_W;
+++
+++	IO_ADDR_W &= ~(MASK_ALE|MASK_CLE);
+++	switch (cmd) {
+++	case NAND_CTL_SETCLE:
+++		IO_ADDR_W |= MASK_CLE;
+++		break;
+++	case NAND_CTL_SETALE:
+++		IO_ADDR_W |= MASK_ALE;
+++		break;
+++	case NAND_CTL_CLRNCE:
+++		at91_set_gpio_value(AT91_PIN_PC14, 1);
+++		break;
+++	case NAND_CTL_SETNCE:
+++		at91_set_gpio_value(AT91_PIN_PC14, 0);
+++		break;
+++	}
+++	this->IO_ADDR_W = (void *) IO_ADDR_W;
+++}
+++
+++static int at91sam9g20ek_nand_ready(struct mtd_info *mtd)
+++{
+++	return at91_get_gpio_value(AT91_PIN_PC13);
+++}
+++
+++int board_nand_init(struct nand_chip *nand)
+++{
+++	nand->eccmode = NAND_ECC_SOFT;
+++#ifdef CFG_NAND_DBW_16
+++	nand->options = NAND_BUSWIDTH_16;
+++#endif
+++	nand->hwcontrol = at91sam9g20ek_nand_hwcontrol;
+++	nand->dev_ready = at91sam9g20ek_nand_ready;
+++	nand->chip_delay = 20;
+++
+++	return 0;
+++}
++Index: board/atmel/at91sam9g20ek/at91sam9g20ek.c
++===================================================================
++--- a/board/atmel/at91sam9g20ek/at91sam9g20ek.c	(.../u-boot-1.3.4)	(revision 0)
+++++ b/board/atmel/at91sam9g20ek/at91sam9g20ek.c	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -0,0 +1,250 @@
+++/*
+++ * (C) Copyright 2007-2008
+++ * Stelian Pop <stelian.pop@leadtechdesign.com>
+++ * Lead Tech Design <www.leadtechdesign.com>
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#include <common.h>
+++#include <asm/arch/at91sam9260.h>
+++#include <asm/arch/at91sam9260_matrix.h>
+++#include <asm/arch/at91sam9_smc.h>
+++#include <asm/arch/at91_pmc.h>
+++#include <asm/arch/at91_rstc.h>
+++#include <asm/arch/gpio.h>
+++#include <asm/arch/io.h>
+++#if defined(CONFIG_RESET_PHY_R) && defined(CONFIG_MACB)
+++#include <net.h>
+++#endif
+++
+++DECLARE_GLOBAL_DATA_PTR;
+++
+++/* ------------------------------------------------------------------------- */
+++/*
+++ * Miscelaneous platform dependent initialisations
+++ */
+++
+++static void at91sam9g20ek_serial_hw_init(void)
+++{
+++#ifdef CONFIG_USART0
+++	at91_set_A_periph(AT91_PIN_PB4, 1);		/* TXD0 */
+++	at91_set_A_periph(AT91_PIN_PB5, 0);		/* RXD0 */
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91_ID_US0);
+++#endif
+++
+++#ifdef CONFIG_USART1
+++	at91_set_A_periph(AT91_PIN_PB6, 1);		/* TXD1 */
+++	at91_set_A_periph(AT91_PIN_PB7, 0);		/* RXD1 */
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91_ID_US1);
+++#endif
+++
+++#ifdef CONFIG_USART2
+++	at91_set_A_periph(AT91_PIN_PB8, 1);		/* TXD2 */
+++	at91_set_A_periph(AT91_PIN_PB9, 0);		/* RXD2 */
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91_ID_US2);
+++#endif
+++
+++#ifdef CONFIG_USART3	/* DBGU */
+++	at91_set_A_periph(AT91_PIN_PB14, 0);		/* DRXD */
+++	at91_set_A_periph(AT91_PIN_PB15, 1);		/* DTXD */
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91_ID_SYS);
+++#endif
+++}
+++
+++#ifdef CONFIG_CMD_NAND
+++static void at91sam9g20ek_nand_hw_init(void)
+++{
+++	unsigned long csa;
+++
+++	/* Enable CS3 */
+++	csa = at91_sys_read(AT91_MATRIX_EBICSA);
+++	at91_sys_write(AT91_MATRIX_EBICSA,
+++		       csa | AT91_MATRIX_CS3A_SMC_SMARTMEDIA);
+++
+++	/* Configure SMC CS3 for NAND/SmartMedia */
+++	at91_sys_write(AT91_SMC_SETUP(3),
+++		       AT91_SMC_NWESETUP_(2) | AT91_SMC_NCS_WRSETUP_(0) |
+++		       AT91_SMC_NRDSETUP_(2) | AT91_SMC_NCS_RDSETUP_(0));
+++	at91_sys_write(AT91_SMC_PULSE(3),
+++		       AT91_SMC_NWEPULSE_(4) | AT91_SMC_NCS_WRPULSE_(3) |
+++		       AT91_SMC_NRDPULSE_(4) | AT91_SMC_NCS_RDPULSE_(3));
+++	at91_sys_write(AT91_SMC_CYCLE(3),
+++		       AT91_SMC_NWECYCLE_(7) | AT91_SMC_NRDCYCLE_(7));
+++	at91_sys_write(AT91_SMC_MODE(3),
+++		       AT91_SMC_READMODE | AT91_SMC_WRITEMODE |
+++		       AT91_SMC_EXNWMODE_DISABLE |
+++#ifdef CFG_NAND_DBW_16
+++		       AT91_SMC_DBW_16 |
+++#else /* CFG_NAND_DBW_8 */
+++		       AT91_SMC_DBW_8 |
+++#endif
+++		       AT91_SMC_TDF_(3));
+++
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91SAM9260_ID_PIOC);
+++
+++	/* Configure RDY/BSY */
+++	at91_set_gpio_input(AT91_PIN_PC13, 1);
+++
+++	/* Enable NandFlash */
+++	at91_set_gpio_output(AT91_PIN_PC14, 1);
+++}
+++#endif
+++
+++#ifdef CONFIG_HAS_DATAFLASH
+++static void at91sam9g20ek_spi_hw_init(void)
+++{
+++	at91_set_A_periph(AT91_PIN_PA3, 0);	/* SPI0_NPCS0 */
+++	at91_set_B_periph(AT91_PIN_PC11, 0);	/* SPI0_NPCS1 */
+++
+++	at91_set_A_periph(AT91_PIN_PA0, 0);	/* SPI0_MISO */
+++	at91_set_A_periph(AT91_PIN_PA1, 0);	/* SPI0_MOSI */
+++	at91_set_A_periph(AT91_PIN_PA2, 0);	/* SPI0_SPCK */
+++
+++	/* Enable clock */
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91SAM9260_ID_SPI0);
+++}
+++#endif
+++
+++#ifdef CONFIG_MACB
+++static void at91sam9g20ek_macb_hw_init(void)
+++{
+++	/* Enable clock */
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91SAM9260_ID_EMAC);
+++
+++	/*
+++	 * Disable pull-up on:
+++	 *	RXDV (PA17) => PHY normal mode (not Test mode)
+++	 *	ERX0 (PA14) => PHY ADDR0
+++	 *	ERX1 (PA15) => PHY ADDR1
+++	 *	ERX2 (PA25) => PHY ADDR2
+++	 *	ERX3 (PA26) => PHY ADDR3
+++	 *	ECRS (PA28) => PHY ADDR4  => PHYADDR = 0x0
+++	 *
+++	 * PHY has internal pull-down
+++	 */
+++	writel(pin_to_mask(AT91_PIN_PA14) |
+++	       pin_to_mask(AT91_PIN_PA15) |
+++	       pin_to_mask(AT91_PIN_PA17) |
+++	       pin_to_mask(AT91_PIN_PA25) |
+++	       pin_to_mask(AT91_PIN_PA26) |
+++	       pin_to_mask(AT91_PIN_PA28),
+++	       pin_to_controller(AT91_PIN_PA0) + PIO_PUDR);
+++
+++	/* Need to reset PHY -> 500ms reset */
+++	at91_sys_write(AT91_RSTC_MR, AT91_RSTC_KEY |
+++				     (AT91_RSTC_ERSTL & (0x0D << 8)) |
+++				     AT91_RSTC_URSTEN);
+++
+++	at91_sys_write(AT91_RSTC_CR, AT91_RSTC_KEY | AT91_RSTC_EXTRST);
+++
+++	/* Wait for end hardware reset */
+++	while (!(at91_sys_read(AT91_RSTC_SR) & AT91_RSTC_NRSTL));
+++
+++	/* Restore NRST value */
+++	at91_sys_write(AT91_RSTC_MR, AT91_RSTC_KEY |
+++				     (AT91_RSTC_ERSTL & (0x0 << 8)) |
+++				     AT91_RSTC_URSTEN);
+++
+++	/* Re-enable pull-up */
+++	writel(pin_to_mask(AT91_PIN_PA14) |
+++	       pin_to_mask(AT91_PIN_PA15) |
+++	       pin_to_mask(AT91_PIN_PA17) |
+++	       pin_to_mask(AT91_PIN_PA25) |
+++	       pin_to_mask(AT91_PIN_PA26) |
+++	       pin_to_mask(AT91_PIN_PA28),
+++	       pin_to_controller(AT91_PIN_PA0) + PIO_PUER);
+++
+++	at91_set_A_periph(AT91_PIN_PA19, 0);	/* ETXCK_EREFCK */
+++	at91_set_A_periph(AT91_PIN_PA17, 0);	/* ERXDV */
+++	at91_set_A_periph(AT91_PIN_PA14, 0);	/* ERX0 */
+++	at91_set_A_periph(AT91_PIN_PA15, 0);	/* ERX1 */
+++	at91_set_A_periph(AT91_PIN_PA18, 0);	/* ERXER */
+++	at91_set_A_periph(AT91_PIN_PA16, 0);	/* ETXEN */
+++	at91_set_A_periph(AT91_PIN_PA12, 0);	/* ETX0 */
+++	at91_set_A_periph(AT91_PIN_PA13, 0);	/* ETX1 */
+++	at91_set_A_periph(AT91_PIN_PA21, 0);	/* EMDIO */
+++	at91_set_A_periph(AT91_PIN_PA20, 0);	/* EMDC */
+++
+++#ifndef CONFIG_RMII
+++	at91_set_B_periph(AT91_PIN_PA28, 0);	/* ECRS */
+++	at91_set_B_periph(AT91_PIN_PA29, 0);	/* ECOL */
+++	at91_set_B_periph(AT91_PIN_PA25, 0);	/* ERX2 */
+++	at91_set_B_periph(AT91_PIN_PA26, 0);	/* ERX3 */
+++	at91_set_B_periph(AT91_PIN_PA27, 0);	/* ERXCK */
+++#if defined(CONFIG_AT91SAM9G20EK)
+++	/*
+++	 * use PA10, PA11 for ETX2, ETX3.
+++	 * PA23 and PA24 are for TWI EEPROM
+++	 */
+++	at91_set_B_periph(AT91_PIN_PA10, 0);    /* ETX2 */
+++	at91_set_B_periph(AT91_PIN_PA11, 0);    /* ETX3 */
+++#else
+++	at91_set_B_periph(AT91_PIN_PA23, 0);    /* ETX2 */
+++	at91_set_B_periph(AT91_PIN_PA24, 0);    /* ETX3 */
+++#endif
+++	at91_set_B_periph(AT91_PIN_PA22, 0);	/* ETXER */
+++#endif
+++
+++}
+++#endif
+++
+++int board_init(void)
+++{
+++	/* Enable Ctrlc */
+++	console_init_f();
+++
+++	/* arch number of AT91SAM9G20EK-Board */
+++	gd->bd->bi_arch_number = MACH_TYPE_AT91SAM9G20EK;
+++	/* adress of boot parameters */
+++	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+++
+++	at91sam9g20ek_serial_hw_init();
+++#ifdef CONFIG_CMD_NAND
+++	at91sam9g20ek_nand_hw_init();
+++#endif
+++#ifdef CONFIG_HAS_DATAFLASH
+++	at91sam9g20ek_spi_hw_init();
+++#endif
+++#ifdef CONFIG_MACB
+++	at91sam9g20ek_macb_hw_init();
+++#endif
+++
+++	return 0;
+++}
+++
+++int dram_init(void)
+++{
+++	gd->bd->bi_dram[0].start = PHYS_SDRAM;
+++	gd->bd->bi_dram[0].size = PHYS_SDRAM_SIZE;
+++	return 0;
+++}
+++
+++#ifdef CONFIG_RESET_PHY_R
+++void reset_phy(void)
+++{
+++#ifdef CONFIG_MACB
+++	/*
+++	 * Initialize ethernet HW addr prior to starting Linux,
+++	 * needed for nfsroot
+++	 */
+++	eth_init(gd->bd);
+++#endif
+++}
+++#endif
++Index: board/atmel/at91sam9g20ek/led.c
++===================================================================
++--- a/board/atmel/at91sam9g20ek/led.c	(.../u-boot-1.3.4)	(revision 0)
+++++ b/board/atmel/at91sam9g20ek/led.c	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -0,0 +1,64 @@
+++/*
+++ * (C) Copyright 2007-2008
+++ * Stelian Pop <stelian.pop@leadtechdesign.com>
+++ * Lead Tech Design <www.leadtechdesign.com>
+++ *
+++ * See file CREDITS for list of people who contributed to this
+++ * project.
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ */
+++
+++#include <common.h>
+++#include <asm/arch/at91sam9260.h>
+++#include <asm/arch/at91_pmc.h>
+++#include <asm/arch/gpio.h>
+++#include <asm/arch/io.h>
+++
+++#define	RED_LED		AT91_PIN_PA9	/* this is the power led */
+++#define	GREEN_LED	AT91_PIN_PA6	/* this is the user led */
+++
+++void red_LED_on(void)
+++{
+++	at91_set_gpio_value(RED_LED, 1);
+++}
+++
+++void red_LED_off(void)
+++{
+++	at91_set_gpio_value(RED_LED, 0);
+++}
+++
+++void green_LED_on(void)
+++{
+++	at91_set_gpio_value(GREEN_LED, 0);
+++}
+++
+++void green_LED_off(void)
+++{
+++	at91_set_gpio_value(GREEN_LED, 1);
+++}
+++
+++void coloured_LED_init(void)
+++{
+++	/* Enable clock */
+++	at91_sys_write(AT91_PMC_PCER, 1 << AT91SAM9260_ID_PIOA);
+++
+++	at91_set_gpio_output(RED_LED, 1);
+++	at91_set_gpio_output(GREEN_LED, 1);
+++
+++	at91_set_gpio_value(RED_LED, 0);
+++	at91_set_gpio_value(GREEN_LED, 1);
+++}
++Index: board/atmel/at91sam9g20ek/partition.c
++===================================================================
++--- a/board/atmel/at91sam9g20ek/partition.c	(.../u-boot-1.3.4)	(revision 0)
+++++ b/board/atmel/at91sam9g20ek/partition.c	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -0,0 +1,40 @@
+++/*
+++ * (C) Copyright 2008
+++ * Ulf Samuelsson <ulf@atmel.com>
+++ *
+++ * This program is free software; you can redistribute it and/or
+++ * modify it under the terms of the GNU General Public License as
+++ * published by the Free Software Foundation; either version 2 of
+++ * the License, or (at your option) any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License
+++ * along with this program; if not, write to the Free Software
+++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++ * MA 02111-1307 USA
+++ *
+++ */
+++#include <common.h>
+++#include <config.h>
+++#include <asm/hardware.h>
+++#include <dataflash.h>
+++
+++AT91S_DATAFLASH_INFO dataflash_info[CFG_MAX_DATAFLASH_BANKS];
+++
+++struct dataflash_addr cs[CFG_MAX_DATAFLASH_BANKS] = {
+++	{CFG_DATAFLASH_LOGIC_ADDR_CS0, 0},	/* Logical adress, CS */
+++	{CFG_DATAFLASH_LOGIC_ADDR_CS1, 1}
+++};
+++
+++/*define the area offsets*/
+++dataflash_protect_t area_list[NB_DATAFLASH_AREA] = {
+++	{0x00000000, 0x000041FF, FLAG_PROTECT_SET,   0, "Bootstrap"},
+++	{0x00004200, 0x000083FF, FLAG_PROTECT_CLEAR, 0, "Environment"},
+++	{0x00008400, 0x00041FFF, FLAG_PROTECT_SET,   0, "U-Boot"},
+++	{0x00042000, 0x00251FFF, FLAG_PROTECT_CLEAR, 0,	"Kernel"},
+++	{0x00252000, 0xFFFFFFFF, FLAG_PROTECT_CLEAR, 0,	"FS"},
+++};
++Index: board/atmel/at91sam9g20ek/config.mk
++===================================================================
++--- a/board/atmel/at91sam9g20ek/config.mk	(.../u-boot-1.3.4)	(revision 0)
+++++ b/board/atmel/at91sam9g20ek/config.mk	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -0,0 +1 @@
+++TEXT_BASE = 0x23f00000
++Index: board/atmel/at91sam9g20ek/Makefile
++===================================================================
++--- a/board/atmel/at91sam9g20ek/Makefile	(.../u-boot-1.3.4)	(revision 0)
+++++ b/board/atmel/at91sam9g20ek/Makefile	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -0,0 +1,57 @@
+++#
+++# (C) Copyright 2003-2008
+++# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+++#
+++# (C) Copyright 2008
+++# Stelian Pop <stelian.pop@leadtechdesign.com>
+++# Lead Tech Design <www.leadtechdesign.com>
+++#
+++# See file CREDITS for list of people who contributed to this
+++# project.
+++#
+++# This program is free software; you can redistribute it and/or
+++# modify it under the terms of the GNU General Public License as
+++# published by the Free Software Foundation; either version 2 of
+++# the License, or (at your option) any later version.
+++#
+++# This program is distributed in the hope that it will be useful,
+++# but WITHOUT ANY WARRANTY; without even the implied warranty of
+++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+++# GNU General Public License for more details.
+++#
+++# You should have received a copy of the GNU General Public License
+++# along with this program; if not, write to the Free Software
+++# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+++# MA 02111-1307 USA
+++#
+++
+++include $(TOPDIR)/config.mk
+++
+++LIB	= $(obj)lib$(BOARD).a
+++
+++COBJS-y	+= at91sam9g20ek.o
+++COBJS-y	+= led.o
+++COBJS-y	+= partition.o
+++COBJS-$(CONFIG_CMD_NAND) += nand.o
+++
+++SRCS	:= $(SOBJS:.o=.S) $(COBJS-y:.o=.c)
+++OBJS	:= $(addprefix $(obj),$(COBJS-y))
+++SOBJS	:= $(addprefix $(obj),$(SOBJS))
+++
+++$(LIB):	$(obj).depend $(OBJS) $(SOBJS)
+++	$(AR) $(ARFLAGS) $@ $(OBJS) $(SOBJS)
+++
+++clean:
+++	rm -f $(SOBJS) $(OBJS)
+++
+++distclean:	clean
+++	rm -f $(LIB) core *.bak $(obj).depend
+++
+++#########################################################################
+++
+++# defines $(obj).depend target
+++include $(SRCTREE)/rules.mk
+++
+++sinclude $(obj).depend
+++
+++#########################################################################
++Index: include/asm-arm/arch-at91/hardware.h
++===================================================================
++--- a/include/asm-arm/arch-at91/hardware.h	(.../u-boot-1.3.4)	(revision 8417)
+++++ b/include/asm-arm/arch-at91/hardware.h	(.../u-boot-1.3.4-exp)	(revision 8417)
++@@ -18,7 +18,7 @@
++ 
++ #if defined(CONFIG_AT91RM9200)
++ #include <asm/arch/at91rm9200.h>
++-#elif defined(CONFIG_AT91SAM9260)
+++#elif defined(CONFIG_AT91SAM9260) || defined(CONFIG_AT91SAM9G20)
++ #include <asm/arch/at91sam9260.h>
++ #define AT91_BASE_EMAC	AT91SAM9260_BASE_EMAC
++ #define AT91_BASE_SPI	AT91SAM9260_BASE_SPI0
++diff -urN u-boot-2008.10-0rig/include/asm-arm/mach-types.h u-boot-2008.10/include/asm-arm/mach-types.h
++--- u-boot-2008.10-0rig/include/asm-arm/mach-types.h	2008-10-18 21:30:31.000000000 +0200
+++++ u-boot-2008.10/include/asm-arm/mach-types.h	2008-12-28 23:40:55.000000000 +0100
++@@ -23998,6 +23998,18 @@
++ # define machine_is_geneva()	(0)
++ #endif
++ 
+++#ifdef CONFIG_MACH_AT91SAM9G20EK
+++# ifdef machine_arch_type
+++#  undef machine_arch_type
+++#  define machine_arch_type __machine_arch_type
+++# else
+++#  define machine_arch_type MACH_TYPE_AT91SAM9G20EK
+++# endif
+++# define machine_is_at91sam9g20ek() (machine_arch_type == MACH_TYPE_AT91SAM9G20EK)
+++#else
+++# define machine_is_at91sam9g20ek() (0)
+++#endif
+++
++ /*
++  * These have not yet been registered
++  */
++diff -urN u-boot-2008.10-0rig/board/atmel/at91sam9g20ek/at91sam9g20ek.c u-boot-2008.10/board/atmel/at91sam9g20ek/at91sam9g20ek.c
++--- u-boot-2008.10-0rig/board/atmel/at91sam9g20ek/at91sam9g20ek.c	2008-12-28 14:09:52.000000000 +0100
+++++ u-boot-2008.10/board/atmel/at91sam9g20ek/at91sam9g20ek.c	2008-12-28 23:56:09.000000000 +0100
++@@ -248,3 +248,13 @@
++ #endif
++ }
++ #endif
+++
+++int board_eth_init(bd_t *bis)
+++{
+++	int rc = 0;
+++#ifdef CONFIG_MACB
+++	rc = macb_eth_initialize(0, (void *)AT91_BASE_EMAC, 0x00);
+++#endif
+++	return rc;
+++}
+++
+diff --git a/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-003-drivers-net-macb.c.patch b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-003-drivers-net-macb.c.patch
 new file mode 100644
-index 0000000..3e8824d
+index 0000000..81ab7c6
 --- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9261ek/defconfig
-@@ -0,0 +1,68 @@
-+#
-+# Automatically generated make config: don't edit
-+# Sat Dec 27 17:16:48 2008
-+#
-+HAVE_DOT_CONFIG=y
-+CONFIG_BOARDNAME="at91sam9261ek"
-+# CONFIG_AT91SAM9260EK is not set
-+CONFIG_AT91SAM9261EK=y
-+# CONFIG_AT91SAM9263EK is not set
-+# CONFIG_AT91SAM9RLEK is not set
-+# CONFIG_AT91SAM9XEEK is not set
-+# CONFIG_AT91SAM9G20EK is not set
-+# CONFIG_AT91CAP9ADK is not set
-+CONFIG_CHIP="AT91SAM9261"
-+CONFIG_BOARD="at91sam9261ek"
-+CONFIG_MACH_TYPE="0x350"
-+CONFIG_LINK_ADDR="0x300000"
-+CONFIG_TOP_OF_MEMORY="0x328000"
-+# CONFIG_CRYSTAL_16_000MHZ is not set
-+# CONFIG_CRYSTAL_16_36766MHZ is not set
-+CONFIG_CRYSTAL_18_432MHZ=y
-+CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
-+
-+#
-+# Memory selection
-+#
-+CONFIG_SDRAM=y
-+# CONFIG_SDDRC is not set
-+ALLOW_DATAFLASH=y
-+# ALLOW_FLASH is not set
-+ALLOW_NANDFLASH=y
-+# ALLOW_SDCARD is not set
-+CONFIG_DATAFLASH=y
-+# CONFIG_FLASH is not set
-+# CONFIG_NANDFLASH is not set
-+# CONFIG_SDCARD is not set
-+CONFIG_MEMORY="dataflash"
-+
-+#
-+# SPI configuration
-+#
-+CONFIG_SPI_CLK=33000000
-+CONFIG_SPI_BOOT_CS0=y
-+# CONFIG_SPI_BOOT_CS1 is not set
-+# DATAFLASHCARD_ON_CS0 is not set
-+# DATAFLASHCARD_ON_CS1 is not set
-+# DATAFLASHCARD_ON_CS2 is not set
-+# DATAFLASHCARD_ON_CS3 is not set
-+# CONFIG_DATAFLASHCARD is not set
-+CONFIG_CARD_SUFFIX=""
-+CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
-+CONFIG_SPI_MODE_0=y
-+# CONFIG_SPI_MODE_1 is not set
-+# CONFIG_SPI_MODE_2 is not set
-+# CONFIG_SPI_MODE_3 is not set
-+CONFIG_SPI_MODE=0
-+CONFIG_PROJECT="dataflash"
-+CONFIG_LOAD_UBOOT=y
-+# CONFIG_LOAD_EXAMPLE is not set
-+# CONFIG_LOAD_SMALL_APP is not set
-+# CONFIG_LOAD_LARGE_APP is not set
-+CONFIG_IMG_ADDRESS="0x00008400"
-+CONFIG_IMG_SIZE="0x00040000"
-+CONFIG_JUMP_ADDR="0x23F00000"
-+CONFIG_APP_CHECK=y
-+# CONFIG_LONG_TEST is not set
-+CONFIG_DEBUG=y
-+CONFIG_HW_INIT=y
-diff --git a/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9263ek/defconfig b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9263ek/defconfig
++++ b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-exp-003-drivers-net-macb.c.patch
+@@ -0,0 +1,28 @@
++diff -urN u-boot-2008.10-0rig/drivers/net/macb.c u-boot-2008.10/drivers/net/macb.c
++--- u-boot-2008.10-0rig/drivers/net/macb.c	2008-10-18 21:30:31.000000000 +0200
+++++ u-boot-2008.10/drivers/net/macb.c	2008-12-28 23:44:11.000000000 +0100
++@@ -415,18 +415,16 @@
++ 
++ 	/* choose RMII or MII mode. This depends on the board */
++ #ifdef CONFIG_RMII
++-#if defined(CONFIG_AT91CAP9) || defined(CONFIG_AT91SAM9260) || \
++-    defined(CONFIG_AT91SAM9263)
++-	macb_writel(macb, USRIO, MACB_BIT(RMII) | MACB_BIT(CLKEN));
++-#else
+++#if defined(CONFIG_AVR32)
++ 	macb_writel(macb, USRIO, 0);
++-#endif
++ #else
++-#if defined(CONFIG_AT91CAP9) || defined(CONFIG_AT91SAM9260) || \
++-    defined(CONFIG_AT91SAM9263)
++-	macb_writel(macb, USRIO, MACB_BIT(CLKEN));
+++	macb_writel(macb, USRIO, MACB_BIT(RMII) | MACB_BIT(CLKEN));
+++#endif
++ #else
+++#if defined(CONFIG_AVR32)
++ 	macb_writel(macb, USRIO, MACB_BIT(MII));
+++#else
+++	macb_writel(macb, USRIO, MACB_BIT(CLKEN));
++ #endif
++ #endif /* CONFIG_RMII */
++ 
+diff --git a/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-include_asm-avr32_io.h.patch.avr32 b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-include_asm-avr32_io.h.patch.avr32
 new file mode 100644
-index 0000000..9724ee2
+index 0000000..07cddb0
 --- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9263ek/defconfig
-@@ -0,0 +1,68 @@
-+#
-+# Automatically generated make config: don't edit
-+# Sat Dec 27 17:11:38 2008
-+#
-+HAVE_DOT_CONFIG=y
-+CONFIG_BOARDNAME="at91sam9263ek"
-+# CONFIG_AT91SAM9260EK is not set
-+# CONFIG_AT91SAM9261EK is not set
-+CONFIG_AT91SAM9263EK=y
-+# CONFIG_AT91SAM9RLEK is not set
-+# CONFIG_AT91SAM9XEEK is not set
-+# CONFIG_AT91SAM9G20EK is not set
-+# CONFIG_AT91CAP9ADK is not set
-+CONFIG_CHIP="AT91SAM9263"
-+CONFIG_BOARD="at91sam9263ek"
-+CONFIG_MACH_TYPE="0x4B2"
-+CONFIG_LINK_ADDR="0x300000"
-+CONFIG_TOP_OF_MEMORY="0x314000"
-+# CONFIG_CRYSTAL_16_000MHZ is not set
-+CONFIG_CRYSTAL_16_36766MHZ=y
-+# CONFIG_CRYSTAL_18_432MHZ is not set
-+CONFIG_CRYSTAL="CRYSTAL_16_36766MHZ"
-+
-+#
-+# Memory selection
-+#
-+CONFIG_SDRAM=y
-+# CONFIG_SDDRC is not set
-+ALLOW_DATAFLASH=y
-+# ALLOW_FLASH is not set
-+ALLOW_NANDFLASH=y
-+# ALLOW_SDCARD is not set
-+CONFIG_DATAFLASH=y
-+# CONFIG_FLASH is not set
-+# CONFIG_NANDFLASH is not set
-+# CONFIG_SDCARD is not set
-+CONFIG_MEMORY="dataflash"
-+
-+#
-+# SPI configuration
-+#
-+CONFIG_SPI_CLK=33000000
-+CONFIG_SPI_BOOT_CS0=y
-+# CONFIG_SPI_BOOT_CS1 is not set
-+DATAFLASHCARD_ON_CS0=y
-+# DATAFLASHCARD_ON_CS1 is not set
-+# DATAFLASHCARD_ON_CS2 is not set
-+# DATAFLASHCARD_ON_CS3 is not set
-+CONFIG_DATAFLASHCARD=y
-+CONFIG_CARD_SUFFIX="card"
-+CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
-+CONFIG_SPI_MODE_0=y
-+# CONFIG_SPI_MODE_1 is not set
-+# CONFIG_SPI_MODE_2 is not set
-+# CONFIG_SPI_MODE_3 is not set
-+CONFIG_SPI_MODE=0
-+CONFIG_PROJECT="dataflash"
-+CONFIG_LOAD_UBOOT=y
-+# CONFIG_LOAD_EXAMPLE is not set
-+# CONFIG_LOAD_SMALL_APP is not set
-+# CONFIG_LOAD_LARGE_APP is not set
-+CONFIG_IMG_ADDRESS="0x00008400"
-+CONFIG_IMG_SIZE="0x00040000"
-+CONFIG_JUMP_ADDR="0x23F00000"
-+CONFIG_APP_CHECK=y
-+# CONFIG_LONG_TEST is not set
-+CONFIG_DEBUG=y
-+CONFIG_HW_INIT=y
-diff --git a/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9g20ek/defconfig b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9g20ek/defconfig
++++ b/recipes/u-boot/u-boot-2009.01/u-boot-2009.01-include_asm-avr32_io.h.patch.avr32
+@@ -0,0 +1,13 @@
++diff -urN u-boot-2009.01-rc3/include/asm-avr32/io.h u-boot-avr32//include/asm-avr32/io.h
++--- u-boot-2009.01-rc3/include/asm-avr32/io.h	2009-01-18 21:37:48.000000000 +0100
+++++ u-boot-avr32//include/asm-avr32/io.h	2009-01-22 07:14:38.000000000 +0100
++@@ -125,9 +125,4 @@
++ 
++ }
++ 
++-static inline phys_addr_t virt_to_phys(void * vaddr)
++-{
++-	return (phys_addr_t)(vaddr);
++-}
++-
++ #endif /* __ASM_AVR32_IO_H */
+diff --git a/recipes/u-boot/u-boot_2009.01.bb b/recipes/u-boot/u-boot_2009.01.bb
 new file mode 100644
-index 0000000..7951ce2
+index 0000000..fd1801a
 --- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9g20ek/defconfig
-@@ -0,0 +1,70 @@
-+#
-+# Automatically generated make config: don't edit
-+# Sat Dec 27 17:13:52 2008
-+#
-+HAVE_DOT_CONFIG=y
-+CONFIG_BOARDNAME="at91sam9g20ek"
-+# CONFIG_AT91SAM9260EK is not set
-+# CONFIG_AT91SAM9261EK is not set
-+# CONFIG_AT91SAM9263EK is not set
-+# CONFIG_AT91SAM9RLEK is not set
-+# CONFIG_AT91SAM9XEEK is not set
-+CONFIG_AT91SAM9G20EK=y
-+# CONFIG_AT91CAP9ADK is not set
-+CONFIG_CHIP="AT91SAM9G20"
-+CONFIG_BOARD="at91sam9g20ek"
-+CONFIG_MACH_TYPE="0x658"
-+CONFIG_LINK_ADDR="0x200000"
-+CONFIG_TOP_OF_MEMORY="0x301000"
-+# CONFIG_BUS_SPEED_100MHZ is not set
-+CONFIG_BUS_SPEED_133MHZ=y
-+# CONFIG_CRYSTAL_16_000MHZ is not set
-+# CONFIG_CRYSTAL_16_36766MHZ is not set
-+CONFIG_CRYSTAL_18_432MHZ=y
-+CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++++ b/recipes/u-boot/u-boot_2009.01.bb
+@@ -0,0 +1,28 @@
++require u-boot.inc
 +
-+#
-+# Memory selection
-+#
-+CONFIG_SDRAM=y
-+# CONFIG_SDDRC is not set
-+ALLOW_DATAFLASH=y
-+# ALLOW_FLASH is not set
-+ALLOW_NANDFLASH=y
-+# ALLOW_SDCARD is not set
-+CONFIG_DATAFLASH=y
-+# CONFIG_FLASH is not set
-+# CONFIG_NANDFLASH is not set
-+# CONFIG_SDCARD is not set
-+CONFIG_MEMORY="dataflash"
++PV = "2009.01"
 +
-+#
-+# SPI configuration
-+#
-+CONFIG_SPI_CLK=33000000
-+CONFIG_SPI_BOOT_CS0=y
-+# CONFIG_SPI_BOOT_CS1 is not set
-+DATAFLASHCARD_ON_CS0=y
-+# DATAFLASHCARD_ON_CS1 is not set
-+# DATAFLASHCARD_ON_CS2 is not set
-+# DATAFLASHCARD_ON_CS3 is not set
-+CONFIG_DATAFLASHCARD=y
-+CONFIG_CARD_SUFFIX="card"
-+CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
-+CONFIG_SPI_MODE_0=y
-+# CONFIG_SPI_MODE_1 is not set
-+# CONFIG_SPI_MODE_2 is not set
-+# CONFIG_SPI_MODE_3 is not set
-+CONFIG_SPI_MODE=0
-+CONFIG_PROJECT="dataflash"
-+CONFIG_LOAD_UBOOT=y
-+# CONFIG_LOAD_EXAMPLE is not set
-+# CONFIG_LOAD_SMALL_APP is not set
-+# CONFIG_LOAD_LARGE_APP is not set
-+CONFIG_IMG_ADDRESS="0x00008400"
-+CONFIG_IMG_SIZE="0x00040000"
-+CONFIG_JUMP_ADDR="0x23F00000"
-+CONFIG_APP_CHECK=y
-+# CONFIG_LONG_TEST is not set
-+CONFIG_DEBUG=y
-+CONFIG_HW_INIT=y
-diff --git a/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9rlek/defconfig b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9rlek/defconfig
-new file mode 100644
-index 0000000..ca9a796
---- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9rlek/defconfig
-@@ -0,0 +1,68 @@
-+#
-+# Automatically generated make config: don't edit
-+# Sat Dec 27 17:14:48 2008
-+#
-+HAVE_DOT_CONFIG=y
-+CONFIG_BOARDNAME="at91sam9rlek"
-+# CONFIG_AT91SAM9260EK is not set
-+# CONFIG_AT91SAM9261EK is not set
-+# CONFIG_AT91SAM9263EK is not set
-+CONFIG_AT91SAM9RLEK=y
-+# CONFIG_AT91SAM9XEEK is not set
-+# CONFIG_AT91SAM9G20EK is not set
-+# CONFIG_AT91CAP9ADK is not set
-+CONFIG_CHIP="AT91SAM9RL"
-+CONFIG_BOARD="at91sam9rlek"
-+CONFIG_MACH_TYPE="1326"
-+CONFIG_LINK_ADDR="0x300000"
-+CONFIG_TOP_OF_MEMORY="0x310000"
-+# CONFIG_CRYSTAL_16_000MHZ is not set
-+# CONFIG_CRYSTAL_16_36766MHZ is not set
-+CONFIG_CRYSTAL_18_432MHZ=y
-+CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++DEFAULT_PREFERENCE = "-1"
 +
-+#
-+# Memory selection
-+#
-+CONFIG_SDRAM=y
-+# CONFIG_SDDRC is not set
-+ALLOW_DATAFLASH=y
-+# ALLOW_FLASH is not set
-+ALLOW_NANDFLASH=y
-+# ALLOW_SDCARD is not set
-+CONFIG_DATAFLASH=y
-+# CONFIG_FLASH is not set
-+# CONFIG_NANDFLASH is not set
-+# CONFIG_SDCARD is not set
-+CONFIG_MEMORY="dataflash"
++DEFAULT_PREFERENCE_at91rm9200dk	 = "1"
++DEFAULT_PREFERENCE_at91sam9rlek	 = "1"
++DEFAULT_PREFERENCE_at91sam9260ek = "1"
++DEFAULT_PREFERENCE_at91sam9261ek = "1"
++DEFAULT_PREFERENCE_at91sam9g20ek = "1"
++DEFAULT_PREFERENCE_at91sam9263ek = "1"
++DEFAULT_PREFERENCE_at91cap9adk	 = "1"
++DEFAULT_PREFERENCE_atngw100	 = "1"
++DEFAULT_PREFERENCE_atstk1000	 = "1"
 +
-+#
-+# SPI configuration
-+#
-+CONFIG_SPI_CLK=33000000
-+CONFIG_SPI_BOOT_CS0=y
-+# CONFIG_SPI_BOOT_CS1 is not set
-+# DATAFLASHCARD_ON_CS0 is not set
-+# DATAFLASHCARD_ON_CS1 is not set
-+# DATAFLASHCARD_ON_CS2 is not set
-+# DATAFLASHCARD_ON_CS3 is not set
-+# CONFIG_DATAFLASHCARD is not set
-+CONFIG_CARD_SUFFIX=""
-+CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
-+CONFIG_SPI_MODE_0=y
-+# CONFIG_SPI_MODE_1 is not set
-+# CONFIG_SPI_MODE_2 is not set
-+# CONFIG_SPI_MODE_3 is not set
-+CONFIG_SPI_MODE=0
-+CONFIG_PROJECT="dataflash"
-+CONFIG_LOAD_UBOOT=y
-+# CONFIG_LOAD_EXAMPLE is not set
-+# CONFIG_LOAD_SMALL_APP is not set
-+# CONFIG_LOAD_LARGE_APP is not set
-+CONFIG_IMG_ADDRESS="0x00008400"
-+CONFIG_IMG_SIZE="0x00040000"
-+CONFIG_JUMP_ADDR="0x23F00000"
-+CONFIG_APP_CHECK=y
-+# CONFIG_LONG_TEST is not set
-+CONFIG_DEBUG=y
-+CONFIG_HW_INIT=y
-diff --git a/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9xeek/defconfig b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9xeek/defconfig
-new file mode 100644
-index 0000000..298b53f
---- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap-2.10/at91sam9xeek/defconfig
-@@ -0,0 +1,68 @@
-+#
-+# Automatically generated make config: don't edit
-+# Sat Dec 27 17:15:15 2008
-+#
-+HAVE_DOT_CONFIG=y
-+CONFIG_BOARDNAME="at91sam9xeek"
-+# CONFIG_AT91SAM9260EK is not set
-+# CONFIG_AT91SAM9261EK is not set
-+# CONFIG_AT91SAM9263EK is not set
-+# CONFIG_AT91SAM9RLEK is not set
-+CONFIG_AT91SAM9XEEK=y
-+# CONFIG_AT91SAM9G20EK is not set
-+# CONFIG_AT91CAP9ADK is not set
-+CONFIG_CHIP="AT91SAM9XE"
-+CONFIG_BOARD="at91sam9xeek"
-+CONFIG_MACH_TYPE="0x44B"
-+CONFIG_LINK_ADDR="0x200000"
-+CONFIG_TOP_OF_MEMORY="0x301000"
-+# CONFIG_CRYSTAL_16_000MHZ is not set
-+# CONFIG_CRYSTAL_16_36766MHZ is not set
-+CONFIG_CRYSTAL_18_432MHZ=y
-+CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++PR = "r1"
 +
-+#
-+# Memory selection
-+#
-+CONFIG_SDRAM=y
-+# CONFIG_SDDRC is not set
-+ALLOW_DATAFLASH=y
-+# ALLOW_FLASH is not set
-+ALLOW_NANDFLASH=y
-+# ALLOW_SDCARD is not set
-+CONFIG_DATAFLASH=y
-+# CONFIG_FLASH is not set
-+# CONFIG_NANDFLASH is not set
-+# CONFIG_SDCARD is not set
-+CONFIG_MEMORY="dataflash"
++SRC_URI = "ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2"
 +
-+#
-+# SPI configuration
-+#
-+CONFIG_SPI_CLK=33000000
-+CONFIG_SPI_BOOT_CS0=y
-+# CONFIG_SPI_BOOT_CS1 is not set
-+DATAFLASHCARD_ON_CS0=y
-+# DATAFLASHCARD_ON_CS1 is not set
-+# DATAFLASHCARD_ON_CS2 is not set
-+# DATAFLASHCARD_ON_CS3 is not set
-+CONFIG_DATAFLASHCARD=y
-+CONFIG_CARD_SUFFIX="card"
-+CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
-+CONFIG_SPI_MODE_0=y
-+# CONFIG_SPI_MODE_1 is not set
-+# CONFIG_SPI_MODE_2 is not set
-+# CONFIG_SPI_MODE_3 is not set
-+CONFIG_SPI_MODE=0
-+CONFIG_PROJECT="dataflash"
-+CONFIG_LOAD_UBOOT=y
-+# CONFIG_LOAD_EXAMPLE is not set
-+# CONFIG_LOAD_SMALL_APP is not set
-+# CONFIG_LOAD_LARGE_APP is not set
-+CONFIG_IMG_ADDRESS="0x00008400"
-+CONFIG_IMG_SIZE="0x00040000"
-+CONFIG_JUMP_ADDR="0x23F00000"
-+CONFIG_APP_CHECK=y
-+# CONFIG_LONG_TEST is not set
-+CONFIG_DEBUG=y
-+CONFIG_HW_INIT=y
-diff --git a/recipes/at91bootstrap/at91bootstrap_2.10.bb b/recipes/at91bootstrap/at91bootstrap_2.10.bb
-new file mode 100644
-index 0000000..a652f1b
---- /dev/null
-+++ b/recipes/at91bootstrap/at91bootstrap_2.10.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION = "at91bootstrap: loaded into internal SRAM by AT91 BootROM"
-+SECTION = "bootloaders"
-+
-+SRC_URI = "ftp://www.at91.com/pub/buildroot/${PN}-${PV}.tar.bz2 \
-+	   file://defconfig \
++SRC_URI_append_at91sam9263ek = "\
++	   file://u-boot-2009.01-exp-002-at91sam9g20ek.patch;patch=1 \
++	   file://u-boot-2009.01-exp-003-drivers-net-macb.c.patch;patch=1 \
 +           "
 +
-+AT91BOOTSTRAP_FLAGS ?= ""
-+
-+S = "${WORKDIR}/${PN}-${PV}"
-+
 +PACKAGE_ARCH = "${MACHINE_ARCH}"
-+EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} DESTDIR=${DEPLOY_DIR_IMAGE} REVISION=${PR}"
-+
-+do_compile () {
-+	unset LDFLAGS
-+	unset CFLAGS
-+	unset CPPFLAGS
-+
-+	rm -Rf ${S}/binaries
-+	cp ${S}/../defconfig ${S}/.config
-+	oe_runmake AT91_CUSTOM_FLAGS="${AT91BOOTSTRAP_FLAGS}"
-+	oe_runmake AT91_CUSTOM_FLAGS="${AT91BOOTSTRAP_FLAGS}" boot
-+	oe_runmake AT91_CUSTOM_FLAGS="${AT91BOOTSTRAP_FLAGS}" install
-+}
++PARALLEL_MAKE = ""
 +
 -- 
 1.6.3.1
