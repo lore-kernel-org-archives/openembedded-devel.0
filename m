@@ -1,32 +1,20 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MM4cH-0002Kv-Ny
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 20:33:09 +0200
-Received: by fxm3 with SMTP id 3so988803fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jul 2009 11:21:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=9OWFl+NgcMvH6FKOupfVWiATqHhgG2wnkYhNaQWubWA=;
-	b=v6klKqlb3FqATOosGg8m5MJbCeUyu+NisEEYqXliVTCu8FbKfSuLaf57UO7VpdiIUV
-	7KAtTQ/Thl2teG8e42GeWTNu7kcw6czSqanOAjr+us1pqYFi/n+f2OXYBla0WKxmPvhu
-	lMdFqzm2dHKDEN4mH8RKgqrBav2KGRzE7ESfM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=UdV/HWMFxQFhFrkJKXmKwu6pl68bzLwwfUIhXMHAZxfOVqBm3ItYGd09gw9+KKPgCD
-	ldO1rEqq7ZWSdlVXjDtYipKV+DLQ61RkXqpLm4JWZLO1RpPSV48ic/pt2QQZ2RZbDgNt
-	tFrQo54knugNbVpgiMNKQgy2ZVX+K8orb9Glc=
-MIME-Version: 1.0
-Received: by 10.103.197.14 with SMTP id z14mr5763424mup.92.1246472471504; Wed, 
-	01 Jul 2009 11:21:11 -0700 (PDT)
-Date: Wed, 1 Jul 2009 21:21:11 +0300
-Message-ID: <fce2a370907011121k3d082889xc6910fda9c21aee4@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	(envelope-from <mickey@vanille-media.de>)
+	id 1MM4cp-0002MA-Hx; Wed, 01 Jul 2009 20:33:43 +0200
+Received: from andromeda.vanille.de (e180176235.adsl.alicedsl.de
+	[85.180.176.235])
+	by drlauer-research.com (Postfix) with ESMTP id 1EEAB58411C;
+	Wed,  1 Jul 2009 20:56:31 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-Subject: Qt4 recipes and sql drivers
+Date: Wed, 1 Jul 2009 20:21:55 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.28-11-generic; KDE/4.2.2; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <200907012021.55416.mickey@vanille-media.de>
+Cc: openembedded-members@lists.openembedded.org
+Subject: State of e.V.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,20 +28,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 18:33:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Jul 2009 18:33:43 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello guys!
-For my work project, I need to use Qt with Postgres and possibly
-Sqlite. For this I modified current qt4.inc configure options and
-DEPENDS. Seems to work fine.
-The question is: should I enable functional sql drivers (as plugins of
-course) in-tree? The only problem I see here is that compile time for
-qt4 recipes will be a little longer (to build postgres and sqlite),
-but runtime dependencies are not bloated with postgres/sqlite things
-unless you really install the affected sqldrivers packages. If you
-will approve this change then I'll send a patch to ML.
-Thanks.
+Hi folks,
+
+some days ago on LinuxTag, 3/4 of the OpenEmbedded e.V. board had an ad-hoc-
+assembly together with some members. I volunteered to take notes and compile 
+this letter for you guys.
+
+There were only three major points on the agenda:
+I.) Current legal status.
+II.) The member situation a.k.a. who can read the statutes ;)
+III.) The next OEDEM.
+
+I.) We are finally registered as e.V., we have tax excemption status (yay!), we 
+are in the process of opening a bank account.
+
+II.) The member situation.
+We read the germans statutes again and the translation as provided by KDE e.V. 
+We agreed that the facts are clearly stated there and leave no room for 
+interpretation. I will explain now for non-lawyers how -- according to the 
+statutes -- the e.V. can recruit members:
+
+==============
+Acquiring a new member is a two phase process. First phase is 'proposal', 
+second phase is 'approval'. For the proposal phase to succeed, an aspirant has 
+to be proposed by an active member with two more members supporting the 
+proposal.
+
+For the second phase to succeed, there are two ways to approve a new member:
+a) per accepted request in a general assembly,
+b) per internet voting. The modalities are up to the bylaws as agreed by the 
+members during a general assembly (note the scent of recursion here ;)
+==============
+
+This means that our previous member acquiring procedure was not compliant w/ 
+our statutes, hence it is void.
+
+To move forward with the e.V. we need to:
+
+1.) Rollback the member situation back to the state of the founding assembly. 
+I will remove everyone but said members from the openembedded-members list.
+
+2.) Decide on the internet voting system. Our recommendation is to use the KDE 
+voting system which is pretty sane. As our internet voting is not done yet 
+(note the chicken and egg problem here), this _has_ to be decided in a general 
+assembly.
+
+4.) To escape the chicken and egg problem we will have to hold a general 
+assembly asap.
+
+5.) The general assembly will elect a voting officer who will take the already 
+porposed members, so that we can vote for all of them in one round.
+
+6.) Then we can move on with deciding about membership fees, newspaper, 
+raisung funds, etc.
+
+III) OEDEM.
+
+It's been a while since we had the last OE Developers Meeting. A lot of things 
+have happened and decisions have to be made. It's very important that we hold 
+this asap. To get the most out of it, we will also hold this in conjunction 
+with the 2nd general assembly.
+
+We have proposed three weekends. If anyone of you could open a doodle for 
+that, I'd be grateful:
+
+* 12/13 Sept.
+* 17/18 Oct.
+* 7/8 Nov.
+
+We also do not have a place yet. Berlin, Frankfurt, or somewhere else?
+
+Cheers,
+
+:M:
 
 
