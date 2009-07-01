@@ -1,37 +1,23 @@
-Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1MLzxv-00073a-4F
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1MM0B8-0007Mo-UI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 15:35:12 +0200
-Received: by mail-ew0-f221.google.com with SMTP id 21so1037793ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jul 2009 06:23:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=CUZpkjb8vx49U6iY1adJ6X/jgZMbRO0Jb7NMkbh5X8E=;
-	b=NzwBPDw1arGCn5/Pj1hN22ktKEKt+dkL0wyNY6J2keKe4lbfx4kXbr1WKaMXAh5FTM
-	wi9bFg/Aapj2yOYqAGBNGOyA4K/bwHGNxPoNWXIm02pJd/e/U0PiKCgKo2026jBhuY0K
-	aRDjVe0PkTub5V5AH7lNqWdYMUkPoDDA7sutg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Ac+ScqaBfL4C/RC2SyODILOHRNzgfm03fxQPSOVSL50Yi94XxOqwEc4maZCw3Rhd0V
-	2qU9iTOw0B2kFo3Kc6FHxqpCsVY6oDJTeo+11BzMvsNsFSgnnv7qvrgXnM5q5qJNt63E
-	slz34q3PK23/L4mAdVPzKgjNwv0yQb8vF3HhI=
-Received: by 10.216.25.209 with SMTP id z59mr2769058wez.204.1246454596905;
-	Wed, 01 Jul 2009 06:23:16 -0700 (PDT)
-Received: from localhost.localdomain
-	(host56-7-static.30-87-b.business.telecomitalia.it [87.30.7.56])
-	by mx.google.com with ESMTPS id i34sm2881887gve.28.2009.07.01.06.23.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Jul 2009 06:23:16 -0700 (PDT)
-From: Marco Cavallini <koansoftware@gmail.com>
+	Wed, 01 Jul 2009 15:48:53 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1MLzz7-00068W-GQ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Jul 2009 15:36:25 +0200
+Message-ID: <4A4B6679.4010107@kernelconcepts.de>
+Date: Wed, 01 Jul 2009 15:36:57 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jul 2009 15:23:49 +0200
-Message-Id: <1246454629-20512-1-git-send-email-m.cavallini@koansoftware.com>
-X-Mailer: git-send-email 1.6.3.3
-Cc: Marco Cavallini <m.cavallini@koansoftware.com>
-Subject: [PATCH 2/2] Added recipes/psplash/files/ronetix-pm9263/psplash-default
+References: <20090701115959.GA10962@pcimg12.dei.unipd.it>
+In-Reply-To: <20090701115959.GA10962@pcimg12.dei.unipd.it>
+X-Enigmail-Version: 0.95.7
+Subject: Re: looking for an arm-based board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 13:35:19 -0000
+X-List-Received-Date: Wed, 01 Jul 2009 13:49:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
+Hi,
 
-Signed-off-by: Marco Cavallini <m.cavallini@koansoftware.com>
----
- .../psplash/files/ronetix-pm9263/psplash-default   |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
- create mode 100644 recipes/psplash/files/ronetix-pm9263/psplash-default
+Ottavio Campana schrieb:
+> Since I don't know all the supported machines, can you suggest me a cost
+> effective ARM7 or ARM9 board that works well with OE stable/2009?
 
-diff --git a/recipes/psplash/files/ronetix-pm9263/psplash-default b/recipes/psplash/files/ronetix-pm9263/psplash-default
-new file mode 100644
-index 0000000..c57d040
---- /dev/null
-+++ b/recipes/psplash/files/ronetix-pm9263/psplash-default
-@@ -0,0 +1,2 @@
-+# Parameters to pass to psplash
-+PARAMS="--angle 90"
+the FriendlyARM stuff (http://www.friendlyarm.net) is quite cheap (using a
+Samsung ARM9). Its supported out of the box in .dev and adding the necessary
+files to stable should be trivial. There is a forked OE stable repository that
+can be used as well.
+
+If it turns out that you need more CPU power you can always use a BeagleBoard
+and add an USB Ethernet adapter.
+
+Greetings
+
+Florian
+
 -- 
-1.6.3.3
-
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
