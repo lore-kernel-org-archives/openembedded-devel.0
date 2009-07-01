@@ -1,25 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>)
-	id 1MM6NL-000464-Qn; Wed, 01 Jul 2009 22:25:53 +0200
-Received: from 79-71-239-25.dynamic.dsl.as9105.com ([79.71.239.25]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>)
-	id 1MM6BI-00036F-35; Wed, 01 Jul 2009 21:13:26 +0100
-From: Phil Blundell <philb@gnu.org>
-To: Liam Girdwood <lrg@slimlogic.co.uk>
-In-Reply-To: <1246475214.30631.743.camel@vega.slimlogic.co.uk>
-References: <200907012021.55416.mickey@vanille-media.de>
-	<1246475214.30631.743.camel@vega.slimlogic.co.uk>
-Date: Wed, 01 Jul 2009 21:13:05 +0100
-Message-Id: <1246479185.8887.232.camel@lenovo.internal.reciva.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MM6OX-00048W-Ka
+	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 22:27:05 +0200
+Received: from root by ciao.gmane.org with local (Exim 4.43)
+	id 1MM6Cs-0007gM-Gs
+	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 20:15:02 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 01 Jul 2009 20:15:02 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 01 Jul 2009 20:15:02 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 01 Jul 2009 21:16:47 +0200
+Message-ID: <h2gcmv$bts$9@ger.gmane.org>
+References: <200907011819.54127.marcin@juszkiewicz.com.pl>
+	<1246474518-16737-5-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: openembedded-members@lists.openembedded.org,
-	Michael 'Mickey' Lauer <mickey@vanille-media.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [Openembedded-members] State of e.V.
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1pre) Gecko/20090622 Shredder/3.0b3pre
+In-Reply-To: <1246474518-16737-5-git-send-email-marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [STABLE][PATCH 105/125] at2440evb.conf: Add AT2440EVB machine config.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,27 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 20:25:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 01 Jul 2009 20:27:06 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-07-01 at 20:06 +0100, Liam Girdwood wrote:
-> Speaking wrt the current economic climate, I would like to suggest
-> FOSDEM 2010 as another alternative weekend. I know atm some folks are
-> finding it difficult to justify any travel (esp when there is pressure
-> on reducing costs atm). We could schedule a day before or after FOSDEM
-> and save on travel costs and it would make any management sign off
-> easier too.
+On 01-07-09 20:55, Marcin Juszkiewicz wrote:
+> From: Ramax Lo<ramaxlo@gmail.com>
+>
+> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
 
-FOSDEM 2010 is still six months away.  I think it'd be a shame to leave
-the e.V. in its current, partially-paralysed state until then.
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-Anyway, I created a doodle poll for the three dates that Mickey
-suggested:
 
-http://doodle.com/gzyqwa9ia4zw7vf4
-
-p.
+> ---
+>   conf/machine/at2440evb.conf |   19 +++++++++++++++++++
+>   1 files changed, 19 insertions(+), 0 deletions(-)
+>   create mode 100644 conf/machine/at2440evb.conf
+>
+> diff --git a/conf/machine/at2440evb.conf b/conf/machine/at2440evb.conf
+> new file mode 100644
+> index 0000000..f3fa5ed
+> --- /dev/null
+> +++ b/conf/machine/at2440evb.conf
+> @@ -0,0 +1,19 @@
+> +#@TYPE: Machine
+> +#@Name: Avantech AT2440EVB Dev Board
+> +#@DESCRIPTION: Machine configuration for Avantech AT2440EVB Dev Board
+> +
+> +
+> +TARGET_ARCH = "arm"
+> +
+> +PREFERRED_PROVIDER_virtual/kernel = "linux"
+> +
+> +# used by sysvinit_2
+> +SERIAL_CONSOLE = "115200 ttySAC0"
+> +
+> +IMAGE_FSTYPES = "tar.gz"
+> +KERNEL_IMAGETYPE = "uImage"
+> +UBOOT_ENTRYPOINT = "30008000"
+> +
+> +MACHINE_FEATURES = "kernel26 screen touchscreen"
+> +
+> +require conf/machine/include/tune-arm920t.inc
 
 
 
