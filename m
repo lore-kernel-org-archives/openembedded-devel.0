@@ -1,34 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MM3gU-00039Y-7V
-	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 19:33:26 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MM3Ux-0000PE-5q
-	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 17:21:31 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 01 Jul 2009 17:21:31 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 01 Jul 2009 17:21:31 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 01 Jul 2009 19:21:18 +0200
-Message-ID: <h2g5ue$lav$1@ger.gmane.org>
-References: <200906041838.05838.marcin@juszkiewicz.com.pl>
-	<200907011817.02564.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1pre) Gecko/20090622 Shredder/3.0b3pre
-In-Reply-To: <200907011817.02564.marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: QEMU and OLDEST_KERNEL related changes
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MM4cH-0002Kv-Ny
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Jul 2009 20:33:09 +0200
+Received: by fxm3 with SMTP id 3so988803fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Jul 2009 11:21:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=9OWFl+NgcMvH6FKOupfVWiATqHhgG2wnkYhNaQWubWA=;
+	b=v6klKqlb3FqATOosGg8m5MJbCeUyu+NisEEYqXliVTCu8FbKfSuLaf57UO7VpdiIUV
+	7KAtTQ/Thl2teG8e42GeWTNu7kcw6czSqanOAjr+us1pqYFi/n+f2OXYBla0WKxmPvhu
+	lMdFqzm2dHKDEN4mH8RKgqrBav2KGRzE7ESfM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=UdV/HWMFxQFhFrkJKXmKwu6pl68bzLwwfUIhXMHAZxfOVqBm3ItYGd09gw9+KKPgCD
+	ldO1rEqq7ZWSdlVXjDtYipKV+DLQ61RkXqpLm4JWZLO1RpPSV48ic/pt2QQZ2RZbDgNt
+	tFrQo54knugNbVpgiMNKQgy2ZVX+K8orb9Glc=
+MIME-Version: 1.0
+Received: by 10.103.197.14 with SMTP id z14mr5763424mup.92.1246472471504; Wed, 
+	01 Jul 2009 11:21:11 -0700 (PDT)
+Date: Wed, 1 Jul 2009 21:21:11 +0300
+Message-ID: <fce2a370907011121k3d082889xc6910fda9c21aee4@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Qt4 recipes and sql drivers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 17:33:26 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 01 Jul 2009 18:33:09 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 01-07-09 18:17, Marcin Juszkiewicz wrote:
->
-> I know that it takes more time then it should but I had other things to
-> do too.
->
-> This patchset updates QEMU to 0.10.3, adds misc versions of gcc3 for
-> those who use QEMU 0.9.x and adds OLDEST_KERNEL thing to get binary
-> locales working.
->
-> I also enable binary locales for armv6/7 in Angstrom with this set.
-
-I have this setup locally as well, so feel free to add my Acks :)
-
-
+Hello guys!
+For my work project, I need to use Qt with Postgres and possibly
+Sqlite. For this I modified current qt4.inc configure options and
+DEPENDS. Seems to work fine.
+The question is: should I enable functional sql drivers (as plugins of
+course) in-tree? The only problem I see here is that compile time for
+qt4 recipes will be a little longer (to build postgres and sqlite),
+but runtime dependencies are not bloated with postgres/sqlite things
+unless you really install the affected sqldrivers packages. If you
+will approve this change then I'll send a patch to ML.
+Thanks.
 
 
