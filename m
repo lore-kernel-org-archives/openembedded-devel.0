@@ -1,29 +1,22 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MM5IB-00041n-Gl
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 21:16:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 28DDA4F5963;
-	Wed,  1 Jul 2009 15:04:31 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 10747-05; Wed,  1 Jul 2009 15:04:31 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id F02C84F572C;
-	Wed,  1 Jul 2009 15:04:30 -0400 (EDT)
-Date: Wed, 1 Jul 2009 15:04:30 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-In-Reply-To: <1246474496-16704-4-git-send-email-marcin@juszkiewicz.com.pl>
-Message-ID: <Pine.LNX.4.64.0907011500230.3731@juice.ott.cti.com>
-References: <200907011818.18407.marcin@juszkiewicz.com.pl>
-	<1246474496-16704-4-git-send-email-marcin@juszkiewicz.com.pl>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MM5M1-0004WH-7Y
+	for openembedded-devel@openembedded.org; Wed, 01 Jul 2009 21:20:25 +0200
+Received: (qmail 22375 invoked by uid 813007); 1 Jul 2009 19:08:29 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Jul 2009 19:08:29 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 1 Jul 2009 21:08:27 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
+	)
+References: <200907012021.55416.mickey@vanille-media.de>
+In-Reply-To: <200907012021.55416.mickey@vanille-media.de>
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [STABLE][PATCH 039/125] glibc/eglibc: remove calls to obsolete base_set_filespath()
+Message-Id: <200907012108.31983.marcin@juszkiewicz.com.pl>
+Subject: Re: State of e.V.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,35 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 19:16:27 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 01 Jul 2009 19:20:26 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi Marcin,
+Dnia =C5=9Broda, 1 lipca 2009 o 20:21:55 Michael 'Mickey' Lauer napisa=C5=
+=82(a):
 
-On Wed, 1 Jul 2009, Marcin Juszkiewicz wrote:
+> III) OEDEM.
 
-> From: Michael Smith <msmith@cbnco.com>
-> --- a/recipes/glibc/glibc-initial.inc
-> +++ b/recipes/glibc/glibc-initial.inc
-> @@ -1,7 +1,7 @@
->  SECTION = "libs"
->  DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial linux-libc-headers"
->  PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
-> -FILESPATH = "${@base_set_filespath([ '${FILE_DIRNAME}/glibc-2.4', '${FILE_DIRNAME}/glibc-${PV}', '${FILE_DIRNAME}/glibc', '${FILE_DIRNAME}/files', '${FILE_DIRNAME}' ], d)}"
-> +FILESPATHPKG =. "glibc-2.4:"
->  
->  PACKAGES = ""
->  PACKAGES_DYNAMIC = ""
+> We have proposed three weekends. If anyone of you could open a doodle
+> for that, I'd be grateful:
 
-The FILESPATHPKG =. "glibc-2.4:" broke glibc-initial-2.3.2.
+> * 17/18 Oct.
 
-I sent a patch for dev, but it's not applied. It's in patchwork:
-http://patchwork.openembedded.org/patch/707/
+This one will be tricky for those who plans to attend ELC which is 15-16=20
+Oct in Grenoble, France.
 
-Here's the thread that prompted it:
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-http://projects.linuxtogo.org/pipermail/openembedded-devel/2009-June/011692.html
 
-Mike
 
 
