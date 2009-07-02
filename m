@@ -1,24 +1,26 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MM6Vs-0004Pn-5O
+	(envelope-from <denis@denix.org>) id 1MMCoL-00056d-Hf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 22:34:40 +0200
-Received: from [78.48.144.41] (helo=[192.168.1.6])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MM6Jr-00034t-Us
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jul 2009 22:22:16 +0200
-Message-ID: <4A4BC58E.9080707@kernelconcepts.de>
-Date: Wed, 01 Jul 2009 22:22:38 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-MIME-Version: 1.0
+	Thu, 02 Jul 2009 05:18:09 +0200
+Received: from gandalf.denix.org ([71.251.63.232]) by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KM4009GQWM8CL98@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	01 Jul 2009 22:06:09 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8D84014AF5F; Wed,
+	01 Jul 2009 23:06:08 -0400 (EDT)
+Date: Wed, 01 Jul 2009 23:06:08 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <200907012021.55416.mickey@vanille-media.de>
-	<200907012108.31983.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200907012108.31983.marcin@juszkiewicz.com.pl>
-Subject: Re: State of e.V.
+Message-id: <20090702030608.GM20815@denix.org>
+References: <200907011819.54127.marcin@juszkiewicz.com.pl>
+	<1246474518-16737-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<h2gdab$e8d$1@ger.gmane.org>
+MIME-version: 1.0
+In-reply-to: <h2gdab$e8d$1@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [STABLE][PATCH 077/125] kexecboot: require	../linux/linux.inc, not recipes/linux/linux.inc.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,30 +34,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2009 20:34:40 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jul 2009 03:18:10 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi,
+On Wed, Jul 01, 2009 at 09:27:06PM +0200, Koen Kooi wrote:
+> On 01-07-09 20:54, Marcin Juszkiewicz wrote:
+>> From: Chris Larson<clarson@mvista.com>
+>>
+>> linux-kexecboot.inc does a 'require recipes/linux/linux.inc', but it 
+>> really
+>> depends on how the upstream OpenEmbedded linux/linux.inc behaves, not 
+>> whatever
+>> the first one it finds in BBPATH does.  This broke builds for me combining
+>> upstream OpenEmbedded with some local collections that do different things
+>> with their kernels.
+>>
+>> Signed-off-by: Chris Larson<clarson@mvista.com>
+>> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+>
+> Acked-by: Koen Kooi <koen@openembedded.org>
 
-Marcin Juszkiewicz schrieb:
-> This one will be tricky for those who plans to attend ELC which is 15-16 
-> Oct in Grenoble, France.
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
-it might be worth to consider combining these events. Of course we would have to 
-find someone to host OEDEM in or close to Grenoble-
-
-Greetings
-
-Florian
-
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+>> ---
+>>   recipes/kexecboot/linux-kexecboot.inc |    2 +-
+>>   1 files changed, 1 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/kexecboot/linux-kexecboot.inc 
+>> b/recipes/kexecboot/linux-kexecboot.inc
+>> index 31b6377..eba5d66 100644
+>> --- a/recipes/kexecboot/linux-kexecboot.inc
+>> +++ b/recipes/kexecboot/linux-kexecboot.inc
+>> @@ -6,7 +6,7 @@ SRC_URI = "file://defconfig"
+>>   LOGO_SIZE = '${@base_conditional("GUI_MACHINE_CLASS", "bigscreen", 
+>> "vga", "qvga", d)}'
+>>   SRC_URI += "file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2"
+>>
+>> -require recipes/linux/linux.inc
+>> +require ../linux/linux.inc
+>>
+>>   DONT_CHECK_KERNELSIZE = ""
+>>   INITRAMFS_IMAGE = "initramfs-kexecboot-image"
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
