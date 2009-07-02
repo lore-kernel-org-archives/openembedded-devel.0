@@ -1,37 +1,36 @@
-Received: from [209.85.217.220] (helo=mail-gx0-f220.google.com)
+Received: from [209.85.210.193] (helo=mail-yx0-f193.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MMPw5-0001CZ-3O
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MMPzw-0006vE-2B
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jul 2009 19:19:01 +0200
-Received: by gxk20 with SMTP id 20so2414922gxk.12
+	Thu, 02 Jul 2009 19:23:00 +0200
+Received: by yxe31 with SMTP id 31so2490325yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jul 2009 10:06:56 -0700 (PDT)
+	Thu, 02 Jul 2009 10:10:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=pHo6BnCbqeofcHEaSTlPa9+id5ygFoqye56H82j+Lx8=;
-	b=Gwx2qq8aAS0cUP2ht/igugoGh259KRVox/piBmBQbKLBDL7XWfEt3pY/D/mhyvve7Y
-	G8ih1/K/vqbepKQg1jfDy5NMDJco0bVExmbq8FGYHQB6Fj/X+tfewhOXsJtp9ugARrmr
-	SAzojAfbeJTmhYnQF6JRpzM2DPeJ0X4/qH6VY=
+	bh=7/fL826BI2K0fVW40U2MnYQolHAGJ5KVrf3aj9qwxaw=;
+	b=ZFj1/29SsjKDibik6GcQp6lQV78EOm4jS37qFvXziseIT6oQFPuSuvKCXZ68BnF15e
+	7PjxlS0uHfaOkpmKH5uS1a7/NvS3XXMx4bpfZejZdk0QBcQwm6VaD6j5R3eN5ht8dfDY
+	cB4KTZPT9267/Ys+CAVsm+HhmCmy6iSXmp2FE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=UZmgRgsD411GypxYYDMdOQTcrIwjd3g1tY2tInmU0fLPFlxU9ZX6m1y+3RgUcafHbZ
-	7sDfz9mILSdoFunIcit3jErG2og3djt8Vzn3dDDDJi5nPsHN64YpHwCCYDlqob0Ucohr
-	78fYhe3C4yQWjNGwNGAa49qt6CRIbzUcqrlBo=
+	b=XWtl0NlR/22Uq7Ku84Am7J+u3NhsGT1u/rHbBxPiAyFXYGZwIzT8EyFpMOXdS5uKlI
+	GBO/Yl5u1yteu2ZT5ic8kBrBifuAVmyhRosneoLVaXr5dF9RC8KG53yG/A7X+zH7gOHl
+	r/mfD7ZtVUln6uCcT/4IWejinr5K37ldRTPO0=
 MIME-Version: 1.0
-Received: by 10.100.178.4 with SMTP id a4mr355727anf.161.1246554415958; Thu, 
-	02 Jul 2009 10:06:55 -0700 (PDT)
-In-Reply-To: <ac9c93b10907010924y2a480b01t47c983c1d80a89b4@mail.gmail.com>
-References: <20090701115959.GA10962@pcimg12.dei.unipd.it>
-	<200907011558.52497.marcin@juszkiewicz.com.pl>
-	<ac9c93b10907010924y2a480b01t47c983c1d80a89b4@mail.gmail.com>
-Date: Thu, 2 Jul 2009 19:06:55 +0200
-Message-ID: <ac9c93b10907021006k45cfccacv48d38da3c4665f53@mail.gmail.com>
+Received: by 10.100.12.17 with SMTP id 17mr467089anl.2.1246554655695; Thu, 02 
+	Jul 2009 10:10:55 -0700 (PDT)
+In-Reply-To: <ac9c93b10905281044m82d0125jd395a9229bcabea5@mail.gmail.com>
+References: <ac9c93b10905281044m82d0125jd395a9229bcabea5@mail.gmail.com>
+Date: Thu, 2 Jul 2009 19:10:55 +0200
+Message-ID: <ac9c93b10907021010p3e0653fpa469e77db4511506@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: looking for an arm-based board
+To: "beagleboard@googlegroups.com" <beagleboard@googlegroups.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: DUTCH: Seminar 'Embedded Linux voor het MKB - 2', Vrijdagmiddag 3 	Juli 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,14 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2009 17:19:01 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Thu, 02 Jul 2009 17:23:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-btw the friendlyarm boards are a lot cheaper on ebay than on the european shop.
-See e.g. http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=110381626767
-search for s3c2440
+Anyone from our community showing up on this event (apart from me)?
 
 Frans
+
+2009/5/28 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> Dear all.
+>
+> Fontys hogescholen has an afternoon seminar on embedded linux for
+> small businesses on friday afternoon jul 3, 2009.
+> The event is probably in dutch. A dutch web page can be found at
+> http://www.fontys.nl/embeddedsystems/default.asp?idsitestructurenode=306637
+> This page contains the schedule and how to register (free of charge).
+> Locaion is Fontys Hogeschool ICT in Eindhoven (Rachelsmolen).
+>
+> I will most likely attend, but if there are other OE or beagleboard
+> developers or users that would like to visit, please let me know.
+> Maybe we can grab some food or so afterwards.
+>
+> Best regards, Frans
+>
 
 
