@@ -1,20 +1,19 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MMNyz-0003Ri-QM
-	for openembedded-devel@openembedded.org; Thu, 02 Jul 2009 17:13:54 +0200
-Received: (qmail 5192 invoked from network); 2 Jul 2009 15:01:50 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 2 Jul 2009 08:01:50 -0700
-Date: Thu, 2 Jul 2009 08:01:49 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MMOdT-0001la-4J
+	for openembedded-devel@openembedded.org; Thu, 02 Jul 2009 17:55:43 +0200
+Received: (qmail 23669 invoked by uid 813007); 2 Jul 2009 15:43:41 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 2 Jul 2009 15:43:41 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090702150148.GH27822@smtp.west.cox.net>
-References: <200907020914.04919.holger+oe@freyther.de>
-MIME-Version: 1.0
-In-Reply-To: <200907020914.04919.holger+oe@freyther.de>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: uclibc questions and impressions
+Date: Thu,  2 Jul 2009 17:43:49 +0200
+Message-Id: <1246549429-13756-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.3.3
+Cc: Marcin Juszkiewicz <marcin@buglabs.net>
+Subject: [STABLE][PATCH] classpath: depend on gmp (for libjavamath) and do not use system one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,31 +27,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2009 15:13:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Jul 2009 15:55:43 -0000
 
-On Thu, Jul 02, 2009 at 09:14:04AM +0200, Holger Hans Peter Freyther wrote:
+From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-[snip]
-> 2.) libc-uclibc unawareness...
-> 
-> What:
-> conf/distro/include/uclibc.inc at least sets the OVERRIDES .= ":libc-uclibc" 
-> but is only included by angstrom and not minimal-uclibc, micro-uclibc...
+Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
 
-This isn't quite right.  minimal uses sane-toolchain which in turn
-brings in uclibc.inc.  micro had a bug until recently that was causing
-it to not set LIBC but PREFERRED_LIBC and thus didn't bring in
-uclibc.inc.
+---
+ recipes/classpath/classpath.inc       |    2 +-
+ recipes/classpath/classpath_0.98.bb   |    3 ++-
+ recipes/classpath/files/fix-gmp.patch |   19 +++++++++++++++++++
+ 3 files changed, 22 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/classpath/files/fix-gmp.patch
 
-> Proposal:
-> Kill linux-uclibc and linux-uclibcgnueabi in favor for the libc-uclibc 
-> override
-
-Please do.
-
+diff --git a/recipes/classpath/classpath.inc b/recipes/classpath/classpath.inc
+index da3273b..bf630bf 100644
+--- a/recipes/classpath/classpath.inc
++++ b/recipes/classpath/classpath.inc
+@@ -5,7 +5,7 @@ PRIORITY = "optional"
+ LICENSE = "Classpath"
+ PBN = "classpath"
+ 
+-DEPENDS = "virtual/javac-native fastjar-native zip-native"
++DEPENDS = "virtual/javac-native fastjar-native zip-native gmp"
+ RPROVIDES = ""
+ 
+ RDEPENDS_${PN} = "${PBN}-common (>= ${PV})"
+diff --git a/recipes/classpath/classpath_0.98.bb b/recipes/classpath/classpath_0.98.bb
+index 292c49f..13f7a72 100644
+--- a/recipes/classpath/classpath_0.98.bb
++++ b/recipes/classpath/classpath_0.98.bb
+@@ -4,9 +4,10 @@ SRC_URI += "\
+   file://SimpleName.diff;patch=1;pnum=0 \
+   file://ecj_java_dir.patch;patch=1 \
+   file://autotools.patch;patch=1 \
++  file://fix-gmp.patch;patch=1 \
+   "
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ DEPENDS += "gtk+ gconf libxtst"
+ 
+diff --git a/recipes/classpath/files/fix-gmp.patch b/recipes/classpath/files/fix-gmp.patch
+new file mode 100644
+index 0000000..3f0dfbe
+--- /dev/null
++++ b/recipes/classpath/files/fix-gmp.patch
+@@ -0,0 +1,19 @@
++---
++ configure.ac |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- classpath-0.98.orig/configure.ac
+++++ classpath-0.98/configure.ac
++@@ -766,11 +766,11 @@ if test "x${COMPILE_JNI}" = xyes; then
++   dnl __gmpz_mul_si for earlier versions (>= 3.1).
++   dnl IMPORTANT: if you decide to look for __gmpz_combit, don't forget to
++   dnl change the name of the corresponding ac_ variable on lines 860...
++   if test "x${COMPILE_GMP}" = xyes; then
++     AC_CHECK_LIB(gmp, __gmpz_mul_si,
++-      [GMP_CFLAGS=-I/usr/include
+++      [GMP_CFLAGS=
++        GMP_LIBS=-lgmp ],
++       [GMP_CFLAGS=
++        GMP_LIBS= ])
++     AC_SUBST(GMP_CFLAGS)
++     AC_SUBST(GMP_LIBS)
 -- 
-Tom Rini
+1.6.3.3
+
+
+
 
 
