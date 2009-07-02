@@ -1,36 +1,23 @@
-Received: from [209.85.210.193] (helo=mail-yx0-f193.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MMPzw-0006vE-2B
+	(envelope-from <philb@gnu.org>) id 1MMRIh-0006KT-Vo
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jul 2009 19:23:00 +0200
-Received: by yxe31 with SMTP id 31so2490325yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jul 2009 10:10:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7/fL826BI2K0fVW40U2MnYQolHAGJ5KVrf3aj9qwxaw=;
-	b=ZFj1/29SsjKDibik6GcQp6lQV78EOm4jS37qFvXziseIT6oQFPuSuvKCXZ68BnF15e
-	7PjxlS0uHfaOkpmKH5uS1a7/NvS3XXMx4bpfZejZdk0QBcQwm6VaD6j5R3eN5ht8dfDY
-	cB4KTZPT9267/Ys+CAVsm+HhmCmy6iSXmp2FE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=XWtl0NlR/22Uq7Ku84Am7J+u3NhsGT1u/rHbBxPiAyFXYGZwIzT8EyFpMOXdS5uKlI
-	GBO/Yl5u1yteu2ZT5ic8kBrBifuAVmyhRosneoLVaXr5dF9RC8KG53yG/A7X+zH7gOHl
-	r/mfD7ZtVUln6uCcT/4IWejinr5K37ldRTPO0=
-MIME-Version: 1.0
-Received: by 10.100.12.17 with SMTP id 17mr467089anl.2.1246554655695; Thu, 02 
-	Jul 2009 10:10:55 -0700 (PDT)
-In-Reply-To: <ac9c93b10905281044m82d0125jd395a9229bcabea5@mail.gmail.com>
-References: <ac9c93b10905281044m82d0125jd395a9229bcabea5@mail.gmail.com>
-Date: Thu, 2 Jul 2009 19:10:55 +0200
-Message-ID: <ac9c93b10907021010p3e0653fpa469e77db4511506@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: "beagleboard@googlegroups.com" <beagleboard@googlegroups.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: DUTCH: Seminar 'Embedded Linux voor het MKB - 2', Vrijdagmiddag 3 	Juli 2009
+	Thu, 02 Jul 2009 20:46:28 +0200
+Received: from 79-71-239-25.dynamic.dsl.as9105.com ([79.71.239.25]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MMR72-0000QX-Bu
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jul 2009 19:34:24 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200907021504.13248.holger+oe@freyther.de>
+References: <200907021504.13248.holger+oe@freyther.de>
+Date: Thu, 02 Jul 2009 19:34:22 +0100
+Message-Id: <1246559662.8887.287.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Questions regarding DISTRO = "minimal"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,29 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2009 17:23:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 02 Jul 2009 18:46:28 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Anyone from our community showing up on this event (apart from me)?
+On Thu, 2009-07-02 at 15:04 +0200, Holger Hans Peter Freyther wrote:
+> I have some questions to help me building a opinion regarding "minimal". What 
+> is the differentiation between minimal and micro, minimal and angstrom. What 
+> niche is minimal trying to solve? And is minimal the right name for it?
 
-Frans
+I think the old name of "generic" was probably a better reflection on
+what I understood as the intended purpose of this distro.  That is, a
+fairly plain system which imposes the minimum amount of policy
+consistent with getting a working image.  As a result, what you'd get
+would be more or less a vanilla Unix system, albeit a small one.  I
+think this is still a worthy goal.
 
-2009/5/28 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> Dear all.
->
-> Fontys hogescholen has an afternoon seminar on embedded linux for
-> small businesses on friday afternoon jul 3, 2009.
-> The event is probably in dutch. A dutch web page can be found at
-> http://www.fontys.nl/embeddedsystems/default.asp?idsitestructurenode=306637
-> This page contains the schedule and how to register (free of charge).
-> Locaion is Fontys Hogeschool ICT in Eindhoven (Rachelsmolen).
->
-> I will most likely attend, but if there are other OE or beagleboard
-> developers or users that would like to visit, please let me know.
-> Maybe we can grab some food or so afterwards.
->
-> Best regards, Frans
->
+This is fairly different from the policy goals of "micro", which are
+basically to produce an embedded system that's as small as possible,
+with few concessions to providing a comfortable shell experience.  As a
+result, the system that you get is less of a traditionally Unix-like
+thing: it doesn't, for example, have the distinction between /usr/bin
+and /bin since this is fairly meaningless if you just have a single
+filesystem image.  Nor does it install a lot of the traditional
+Unix-type utilities that are mostly or only used for interactive shell
+sessions, things like "w", "mesg" and the like.
+
+p.
+
+
 
 
