@@ -1,19 +1,37 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.217.220] (helo=mail-gx0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MMOdT-0001la-4J
-	for openembedded-devel@openembedded.org; Thu, 02 Jul 2009 17:55:43 +0200
-Received: (qmail 23669 invoked by uid 813007); 2 Jul 2009 15:43:41 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO localhost.localdomain)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 2 Jul 2009 15:43:41 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MMPw5-0001CZ-3O
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Jul 2009 19:19:01 +0200
+Received: by gxk20 with SMTP id 20so2414922gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jul 2009 10:06:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=pHo6BnCbqeofcHEaSTlPa9+id5ygFoqye56H82j+Lx8=;
+	b=Gwx2qq8aAS0cUP2ht/igugoGh259KRVox/piBmBQbKLBDL7XWfEt3pY/D/mhyvve7Y
+	G8ih1/K/vqbepKQg1jfDy5NMDJco0bVExmbq8FGYHQB6Fj/X+tfewhOXsJtp9ugARrmr
+	SAzojAfbeJTmhYnQF6JRpzM2DPeJ0X4/qH6VY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=UZmgRgsD411GypxYYDMdOQTcrIwjd3g1tY2tInmU0fLPFlxU9ZX6m1y+3RgUcafHbZ
+	7sDfz9mILSdoFunIcit3jErG2og3djt8Vzn3dDDDJi5nPsHN64YpHwCCYDlqob0Ucohr
+	78fYhe3C4yQWjNGwNGAa49qt6CRIbzUcqrlBo=
+MIME-Version: 1.0
+Received: by 10.100.178.4 with SMTP id a4mr355727anf.161.1246554415958; Thu, 
+	02 Jul 2009 10:06:55 -0700 (PDT)
+In-Reply-To: <ac9c93b10907010924y2a480b01t47c983c1d80a89b4@mail.gmail.com>
+References: <20090701115959.GA10962@pcimg12.dei.unipd.it>
+	<200907011558.52497.marcin@juszkiewicz.com.pl>
+	<ac9c93b10907010924y2a480b01t47c983c1d80a89b4@mail.gmail.com>
+Date: Thu, 2 Jul 2009 19:06:55 +0200
+Message-ID: <ac9c93b10907021006k45cfccacv48d38da3c4665f53@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jul 2009 17:43:49 +0200
-Message-Id: <1246549429-13756-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-Mailer: git-send-email 1.6.3.3
-Cc: Marcin Juszkiewicz <marcin@buglabs.net>
-Subject: [STABLE][PATCH] classpath: depend on gmp (for libjavamath) and do not use system one
+Subject: Re: looking for an arm-based board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,77 +45,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2009 15:55:43 -0000
+X-List-Received-Date: Thu, 02 Jul 2009 17:19:01 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: 7bit
 
-From: Marcin Juszkiewicz <marcin@buglabs.net>
+btw the friendlyarm boards are a lot cheaper on ebay than on the european shop.
+See e.g. http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=110381626767
+search for s3c2440
 
-Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
-
----
- recipes/classpath/classpath.inc       |    2 +-
- recipes/classpath/classpath_0.98.bb   |    3 ++-
- recipes/classpath/files/fix-gmp.patch |   19 +++++++++++++++++++
- 3 files changed, 22 insertions(+), 2 deletions(-)
- create mode 100644 recipes/classpath/files/fix-gmp.patch
-
-diff --git a/recipes/classpath/classpath.inc b/recipes/classpath/classpath.inc
-index da3273b..bf630bf 100644
---- a/recipes/classpath/classpath.inc
-+++ b/recipes/classpath/classpath.inc
-@@ -5,7 +5,7 @@ PRIORITY = "optional"
- LICENSE = "Classpath"
- PBN = "classpath"
- 
--DEPENDS = "virtual/javac-native fastjar-native zip-native"
-+DEPENDS = "virtual/javac-native fastjar-native zip-native gmp"
- RPROVIDES = ""
- 
- RDEPENDS_${PN} = "${PBN}-common (>= ${PV})"
-diff --git a/recipes/classpath/classpath_0.98.bb b/recipes/classpath/classpath_0.98.bb
-index 292c49f..13f7a72 100644
---- a/recipes/classpath/classpath_0.98.bb
-+++ b/recipes/classpath/classpath_0.98.bb
-@@ -4,9 +4,10 @@ SRC_URI += "\
-   file://SimpleName.diff;patch=1;pnum=0 \
-   file://ecj_java_dir.patch;patch=1 \
-   file://autotools.patch;patch=1 \
-+  file://fix-gmp.patch;patch=1 \
-   "
- 
--PR = "r0"
-+PR = "r1"
- 
- DEPENDS += "gtk+ gconf libxtst"
- 
-diff --git a/recipes/classpath/files/fix-gmp.patch b/recipes/classpath/files/fix-gmp.patch
-new file mode 100644
-index 0000000..3f0dfbe
---- /dev/null
-+++ b/recipes/classpath/files/fix-gmp.patch
-@@ -0,0 +1,19 @@
-+---
-+ configure.ac |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- classpath-0.98.orig/configure.ac
-++++ classpath-0.98/configure.ac
-+@@ -766,11 +766,11 @@ if test "x${COMPILE_JNI}" = xyes; then
-+   dnl __gmpz_mul_si for earlier versions (>= 3.1).
-+   dnl IMPORTANT: if you decide to look for __gmpz_combit, don't forget to
-+   dnl change the name of the corresponding ac_ variable on lines 860...
-+   if test "x${COMPILE_GMP}" = xyes; then
-+     AC_CHECK_LIB(gmp, __gmpz_mul_si,
-+-      [GMP_CFLAGS=-I/usr/include
-++      [GMP_CFLAGS=
-+        GMP_LIBS=-lgmp ],
-+       [GMP_CFLAGS=
-+        GMP_LIBS= ])
-+     AC_SUBST(GMP_CFLAGS)
-+     AC_SUBST(GMP_LIBS)
--- 
-1.6.3.3
-
-
-
+Frans
 
 
