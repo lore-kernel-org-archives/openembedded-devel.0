@@ -1,22 +1,19 @@
 Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MMKlB-00068E-7C
+	(envelope-from <holger+oe@freyther.de>) id 1MMM9b-0005Z1-DI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jul 2009 13:47:25 +0200
+	Thu, 02 Jul 2009 15:16:43 +0200
 Received: from tamarin.localnet (unknown [92.117.147.223])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 59D111B10C04
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id ABC6E1B10C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jul 2009 11:35:16 +0000 (UTC)
+	Thu,  2 Jul 2009 13:04:22 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 2 Jul 2009 13:35:03 +0200
+Date: Thu, 2 Jul 2009 15:04:12 +0200
 User-Agent: KMail/1.11.90 (Linux/2.6.31-rc1; KDE/4.2.90; i686; ; )
-References: <fce2a370907020424q5797bc98x6fa4653ecc2977f7@mail.gmail.com>
-	<1246533923-5560-1-git-send-email-ihar.hrachyshka@gmail.com>
-In-Reply-To: <1246533923-5560-1-git-send-email-ihar.hrachyshka@gmail.com>
 MIME-Version: 1.0
-Message-Id: <200907021335.03959.holger+oe@freyther.de>
-Subject: Re: [PATCH] qt4: updated version to 4.5.2.
+Message-Id: <200907021504.13248.holger+oe@freyther.de>
+Subject: Questions regarding DISTRO = "minimal"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,16 +27,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2009 11:47:25 -0000
+X-List-Received-Date: Thu, 02 Jul 2009 13:16:43 -0000
 Content-Type: Text/Plain;
-  charset="iso-8859-1"
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thursday 02 July 2009 13:25:23 Ihar Hrachyshka wrote:
-> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+Hey Guys,
 
-Acked-By: Holger Freyther <zecke@selfish.org>
+I'm currently toying with creating a "minimal" uclibc image and while using 
+minimal-uclibc I got several questions in #oe along the line claiming 
+"minimal" is current unmaintained.
 
-z.
+I have some questions to help me building a opinion regarding "minimal". What 
+is the differentiation between minimal and micro, minimal and angstrom. What 
+niche is minimal trying to solve? And is minimal the right name for it?
+
+I hope you guys have some light for me
+	z.
 
 
