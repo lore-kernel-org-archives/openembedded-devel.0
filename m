@@ -1,25 +1,32 @@
-Received: from [65.55.116.16] (helo=blu0-omc1-s5.blu0.hotmail.com)
+Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <phunge0@hotmail.com>) id 1MMYRE-0003Uh-B7
+	(envelope-from <jhautbois@gmail.com>) id 1MMg3B-0000zR-29
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Jul 2009 04:23:44 +0200
-Received: from BLU0-SMTP9 ([65.55.116.8]) by blu0-omc1-s5.blu0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 2 Jul 2009 19:11:37 -0700
-X-Originating-IP: [71.167.240.36]
-X-Originating-Email: [phunge0@hotmail.com]
-Message-ID: <BLU0-SMTP98D83F56BE537D7A28DC6FE2C0@phx.gbl>
-Received: from [192.168.1.9] ([71.167.240.36]) by BLU0-SMTP9.blu0.hotmail.com
-	over TLS secured channel with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 2 Jul 2009 19:11:36 -0700
-Date: Thu, 02 Jul 2009 22:10:36 -0400
-From: Brian Bloniarz <phunge0@hotmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+	Fri, 03 Jul 2009 12:31:25 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so1091800qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 Jul 2009 03:19:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=sHgnfwDK38zCFP2tiL8l8pMYaCd0oCOvQ5H+gxZ80gs=;
+	b=aZMwlfnzbOo6Hputtwuq+UzrSO/hauzqXTVhA+CeE54EJsc2jft8q0102iR7+IntSo
+	Gv3nKtvZCR6reWSTSF2oMThka6GcNFA030D/ix2dlrIJOBUfqqreDC1uTeGOuNa2rnmc
+	Ab4cQ5P06chAF2X3YdLRjFpFjjanWw9m66R0Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=SEQm/J3c0c27X/Uuviy/KfiUWInVeh8JYrtXOSPJIoPtolAnpU8JipI9dNSgv1rTvM
+	ik8IPKLPdlyItX7vfctedIoxBs7Y3V7o2mFMfiM6DccyDk56LH/MOMtm26cfgel46Rhn
+	Y63jut7RuR0ivmq7kafUml6Vsl9BEigTmBDGg=
 MIME-Version: 1.0
-To: philb@gnu.org, openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 03 Jul 2009 02:11:36.0941 (UTC)
-	FILETIME=[983111D0:01C9FB83]
-Subject: [PATCH] initscripts: correct checkroot rootfs read-write check
+Received: by 10.224.11.20 with SMTP id r20mr1496221qar.192.1246616358279; Fri, 
+	03 Jul 2009 03:19:18 -0700 (PDT)
+Date: Fri, 3 Jul 2009 12:19:18 +0200
+Message-ID: <8cad0aa0907030319m60d8da2awa7a5f1685db0ee9a@mail.gmail.com>
+From: Jean-Michel Hautbois <jhautbois@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [GLibc]Version 2.8 and timerfd_* syscalls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,56 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jul 2009 02:23:44 -0000
+X-List-Received-Date: Fri, 03 Jul 2009 10:31:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-initscripts: correct checkroot rootfs read-write check
+Hi there,
 
-Fixes a regexp typo when checking whether the rootfs needs
-to be remounted. Also alters the remount logic to not
-assume that the root will be mounted RW.
+I am currently using openembedded and a DISTRO angstrom.
+I wish to use the timerfd_create() syscall and this is only usable
+with a GLibC >= 2.8, AFAIK.
 
-Signed-off-by: Brian Bloniarz <phunge0@hotmail.com>
+When I modify my local.conf file, specifying:
+PREFERRED_VERSION_glibc                 ?= "2.8"
+PREFERRED_VERSION_glibc-initial         ?= "2.8"
 
- recipes/initscripts/initscripts-1.0/checkroot |   18 +++++++++---------
- 1 files changed, 9 insertions(+), 9 deletions(-)
+I have these messages:
 
-diff --git a/recipes/initscripts/initscripts-1.0/checkroot b/recipes/initscripts/initscripts-1.0/checkroot
-index e5aa9aa..7ad00d0 100755
---- a/recipes/initscripts/initscripts-1.0/checkroot
-+++ b/recipes/initscripts/initscripts-1.0/checkroot
-@@ -182,6 +182,15 @@ else
-   fi
- fi
- 
-+ROOTFSDEV="/dev/root"
-+if ! grep -q "^$ROOTFSDEV\>" /proc/mounts; then
-+  ROOTFSDEV="rootfs"
-+fi
-+if [ x$(grep "^$ROOTFSDEV\>" /proc/mounts | awk '{print $4}') = "x$rootmode" ]; then
-+	echo "Root filesystem already $rootmode, not remounting"
-+	exit 0
-+fi
-+
- #
- #	If the root filesystem was not marked as read-only in /etc/fstab,
- #	remount the rootfs rw but do not try to change mtab because it
-@@ -189,15 +198,6 @@ fi
- #	and finally write the new mtab.
- #	This part is only needed if the rootfs was mounted ro.
- #
--ROOTFSDEV="/dev/root"
--if ! grep -q "^$ROOTFSDEV\w" /proc/mounts; then
--  ROOTFSDEV="rootfs"
--fi
--if [ x$(grep "^$ROOTFSDEV\w" /proc/mounts | awk '{print $4}') = "xrw" ]; then
--	echo "Root filesystem already read-write, not remounting"
--	exit 0
--fi
--
- echo "Remounting root file system..."
- mount -n -o remount,$rootmode /
- if test "$rootmode" = rw
+NOTE: preferred version 2.8 of glibc not available (for item virtual/libc)
+NOTE: preferred version 2.8 of glibc not available (for item libsegfault)
+NOTE: preferred version 2.8 of glibc not available (for item glibc)
+NOTE: preferred version 2.8 of glibc not available (for item
+virtual/i586-angstrom-linux-libc-for-gcc)
+NOTE: preferred version 2.8 of glibc-initial not available (for item
+virtual/i586-angstrom-linux-libc-initial)
+
+And it is downloading and generating a GLibC 2.7.
+And this GLib doesn't offer me what I am lloking for... :-).
+
+How can I upgrade for using a 2.8 ?
+Is there any way to be able to use these timerfd_* syscalls ?
+
+Thanks in advance !
+
+--
+Best Regards.
+JM
 
 
