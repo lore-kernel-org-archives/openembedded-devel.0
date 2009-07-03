@@ -1,35 +1,29 @@
-Received: from [209.85.221.172] (helo=mail-qy0-f172.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jhautbois@gmail.com>) id 1MMhfF-0000yh-LN
+	(envelope-from <philb@gnu.org>) id 1MMhu3-0006zm-8j
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Jul 2009 14:14:49 +0200
-Received: by qyk2 with SMTP id 2so2438156qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jul 2009 05:02:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=87cKptzQCPTzfekvVgp3Mtj0OrxCIj+2Gwp3xe0WlI4=;
-	b=AKlzqFfoCNInWFU2elQ0Jom4xsjq+c5SRQEc/1nxX3DcPknAxl9zhqo8sl/y4bh9vk
-	/5oAIw+r0hHWqocKEv/H26XszOZfSqWXrQzSmSRdWMIei2FNL5bP4xwPGkKX6xqaCOIs
-	+2woqD3BBoz5RMOYF7PgeONpCO3raZ6yctI0Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=VvUSllLaw4ufKsqKDDUW5U/8v3Rr/ctrZIdBbzYBYfLBFjI4O92pu7iFthEQBpmIpa
-	pRB4h7YNi65aj0RWaTbOvM49wLWa2V1mimj6eNJD2z+PfewuxaoH25Ixi74qGn+rhWk1
-	0EsU0013JAYYZMwmh5H3tZIKkBsgArye6fYs4=
-MIME-Version: 1.0
-Received: by 10.224.28.81 with SMTP id l17mr1779590qac.301.1246622560376; Fri, 
-	03 Jul 2009 05:02:40 -0700 (PDT)
-In-Reply-To: <1246617033.26610.65.camel@mill.internal.reciva.com>
+	Fri, 03 Jul 2009 14:30:07 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MMhiK-00063v-E8
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Jul 2009 13:18:00 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MMhiK-0006S6-5f
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Jul 2009 13:18:00 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <8cad0aa0907030502o2d6c494cq76adf8ea124161b9@mail.gmail.com>
 References: <8cad0aa0907030319m60d8da2awa7a5f1685db0ee9a@mail.gmail.com>
 	<1246617033.26610.65.camel@mill.internal.reciva.com>
-Date: Fri, 3 Jul 2009 14:02:40 +0200
-Message-ID: <8cad0aa0907030502o2d6c494cq76adf8ea124161b9@mail.gmail.com>
-From: Jean-Michel Hautbois <jhautbois@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	<8cad0aa0907030502o2d6c494cq76adf8ea124161b9@mail.gmail.com>
+Date: Fri, 03 Jul 2009 13:17:59 +0100
+Message-Id: <1246623479.2136.15.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
 Subject: Re: [GLibc]Version 2.8 and timerfd_* syscalls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,28 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jul 2009 12:14:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 03 Jul 2009 12:30:07 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-2009/7/3 Phil Blundell <philb@gnu.org>:
-> On Fri, 2009-07-03 at 12:19 +0200, Jean-Michel Hautbois wrote:
->> When I modify my local.conf file, specifying:
->> PREFERRED_VERSION_glibc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 ?=3D "2.8"
->> PREFERRED_VERSION_glibc-initial =A0 =A0 =A0 =A0 ?=3D "2.8"
->
-> There doesn't appear to be any recipe for glibc 2.8 in the repository.
-> Maybe you could try using 2.9 instead. =A0If this isn't suitable then
-> perhaps you would like to contribute a recipe for 2.8.
->
+On Fri, 2009-07-03 at 14:02 +0200, Jean-Michel Hautbois wrote:
+> How can I know which recipes are are in the repository ?
 
-OK, I have the same message with 2.9.
-I could try to contribute a recipe, but for that, I will need some
-help, because I don't know how to do this in a short time ?
+Something like this:
 
-How can I know which recipes are are in the repository ?
+pb@mill:~/oe/org.openembedded.dev$ ls recipes/glibc/glibc_*.bb
+recipes/glibc/glibc_2.2.5.bb              recipes/glibc/glibc_2.3.6.bb
+recipes/glibc/glibc_2.3.2.bb              recipes/glibc/glibc_2.4.bb
+recipes/glibc/glibc_2.3.2+cvs20040726.bb  recipes/glibc/glibc_2.5.bb
+recipes/glibc/glibc_2.3.3.bb              recipes/glibc/glibc_2.6.1.bb
+recipes/glibc/glibc_2.3.3+cvs20041128.bb  recipes/glibc/glibc_2.7.bb
+recipes/glibc/glibc_2.3.3+cvs20050221.bb  recipes/glibc/glibc_2.9.bb
+recipes/glibc/glibc_2.3.3+cvs20050420.bb  recipes/glibc/glibc_cvs.bb
+recipes/glibc/glibc_2.3.5+cvs20050627.bb
+pb@mill:~/oe/org.openembedded.dev$ 
 
-Thx and Regards.
-JM
+p.
+
+
 
 
