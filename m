@@ -1,33 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MMzt3-0005fD-52
-	for openembedded-devel@openembedded.org; Sat, 04 Jul 2009 09:42:17 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MMzhC-0004kr-KM
-	for openembedded-devel@openembedded.org; Sat, 04 Jul 2009 07:30:02 +0000
-Received: from 117.254.13.113 ([117.254.13.113])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 04 Jul 2009 07:30:02 +0000
-Received: from kirtibr by 117.254.13.113 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 04 Jul 2009 07:30:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Kirtika Ruchandani <kirtibr@gmail.com>
-Date: Sat, 4 Jul 2009 07:27:34 +0000 (UTC)
-Message-ID: <loom.20090704T072427-524@post.gmane.org>
-References: <64d5b90a0907032223t749b13ffy95305639fcf3e654@mail.gmail.com>
-	<1246691571.16040.20.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: main.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 117.254.13.113 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.0.11) Gecko/2009060310 Ubuntu/8.10 (intrepid) Firefox/3.0.11)
-Sender: news <news@ger.gmane.org>
-Subject: Re: (Possibly grave) error with Busybox recipe ?
+	(envelope-from <msmith@cbnco.com>) id 1MN619-00078U-RA
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Jul 2009 16:15:04 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id C740F4F9499
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  4 Jul 2009 10:02:49 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 26349-02 for <openembedded-devel@lists.openembedded.org>; 
+	Sat,  4 Jul 2009 10:02:49 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 98BAC4F9457
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  4 Jul 2009 10:02:49 -0400 (EDT)
+Date: Sat, 4 Jul 2009 10:02:49 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
+Message-ID: <Pine.LNX.4.64.0907040946320.3731@juice.ott.cti.com>
+References: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: OpenEmbedded goals?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +38,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Jul 2009 07:42:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 04 Jul 2009 14:15:04 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="346837782-1613558282-1246716169=:3731"
 
-Phil Blundell <philb <at> gnu.org> writes:
+--346837782-1613558282-1246716169=:3731
+Content-Type: TEXT/PLAIN; charset=utf-8
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
+On Sat, 4 Jul 2009, Mart R. wrote:
 
-> 
-> It's intentional that busybox doesn't ship most of those files.  Was
-> there a particular one that was causing you a problem?
- 
-Ok. I haven't tested my image as yet but I posted here because I saw ls,mv,cp
-and other utilities under /busybox/bin being excluded out of the packages as
-seen in the pastebin, apart from the ones which look like they have been
-intentionally left out.
+> I have been exploring =C3=85ngstr=C3=B6m and thus OpenEmbedded lately. Th=
+e
+> building process works nicely out of the box, but running it on some
+> low end embedded system is out of the question because it is just too
+> slow and bloated for my taste. Stripping it down is not an easy job
+> either as I would have to edit countless of *.bb files.
 
+Hi Mart,
 
+If you create an overlay, you can fairly easily tweak individual .bb files=
+=20
+to strip them down without rewriting the entire recipe.
 
+You can list your overlay dir before the OE recipe dir in COLLECTIONS. Set=
+=20
+FILESPATHBASE to look in your COLLECTIONS for extra patches and files,=20
+include amend-recipes.inc from your distro conf, and create amend.inc in=20
+your overlay for any recipes you want to mangle.
 
+This is what the COLLECTIONS and FILESPATHBASE setting looks like:
 
+http://jrz.cbnco.com/git/?p=3Dtoastix/toastix.git;a=3Dblob;f=3Dpublic/conf/=
+site.conf;h=3Dee1a6d9ce60f65d37dca293c5c4ded04bbb03ff4;hb=3DHEAD
 
+amend-recipes.inc:
+
+http://projects.linuxtogo.org/pipermail/openembedded-devel/2009-May/011181.=
+html
+
+An amended recipe:
+
+http://jrz.cbnco.com/git/?p=3Dtoastix/toastix.git;a=3Dblob;f=3Dpublic/recip=
+es/diffutils/amend.inc;h=3D09b24cf568bea5311c1f0a2d154a710752d4e24e;hb=3DHE=
+AD
+
+(Don't expect much in that repo to work...)
+
+Mike
+
+--346837782-1613558282-1246716169=:3731--
