@@ -1,32 +1,23 @@
-Received: from [209.85.212.188] (helo=mail-vw0-f188.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kirtibr@gmail.com>) id 1MMxu8-0007ts-Ia
+	(envelope-from <philb@gnu.org>) id 1MMzcZ-00055P-CD
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Jul 2009 07:35:16 +0200
-Received: by vwj26 with SMTP id 26so1635138vwj.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jul 2009 22:23:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=umKRmI9T3lHgCx/NVHFIGTtHWtZYtnboq156prgN25I=;
-	b=yEegrIZ6A14NxlrdNGkZP2YqQO7raFVbmcCE9KVL74Du1uKOckQS0eWyc2Djinf4L8
-	XrmoKKncnIHBP+nomA8k9LR031Q7rZD8J/RyTvuL8Wo3Y1nD5UwM/LpXKS9S3ljyjp1z
-	7ZBS7itEN8/np3tHrPbkHUOT8OIq/Z9ybfe9I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=hLIkIpj3sqwIn2SHnmIJ2IOJLc9oXyeUBcKazGZME15gEHVoUQFRMI/aiOEj6ouVIl
-	tGmrHcXNinFrdB1P5B2fd0yYCENPo5SVy2msQlAav7cx3i9lu2XsTaDzPKL1wmCYDc/o
-	V6ap0Y6C6jF+elV/eDDtiXlHxIhchWRjjxDgM=
-MIME-Version: 1.0
-Received: by 10.220.77.84 with SMTP id f20mr4205061vck.109.1246684982513; Fri, 
-	03 Jul 2009 22:23:02 -0700 (PDT)
-Date: Sat, 4 Jul 2009 10:53:02 +0530
-Message-ID: <64d5b90a0907032223t749b13ffy95305639fcf3e654@mail.gmail.com>
-From: Kirtika Ruchandani <kirtibr@gmail.com>
+	Sat, 04 Jul 2009 09:25:15 +0200
+Received: from 79-71-239-25.dynamic.dsl.as9105.com ([79.71.239.25]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MMzQj-0008Mm-JY
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 04 Jul 2009 08:13:02 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: (Possibly grave) error with Busybox recipe ?
+In-Reply-To: <64d5b90a0907032223t749b13ffy95305639fcf3e654@mail.gmail.com>
+References: <64d5b90a0907032223t749b13ffy95305639fcf3e654@mail.gmail.com>
+Date: Sat, 04 Jul 2009 08:12:50 +0100
+Message-Id: <1246691571.16040.20.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: (Possibly grave) error with Busybox recipe ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,22 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Jul 2009 05:35:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 04 Jul 2009 07:25:16 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello,
-I was building an image for the beagleboard and happened to notice that the
-busybox recipe doesn't ship a whole lot of files under
-/busybox/bin,/busybox/sbin in any package.
-Details here: http://pastebin.com/f35154815
+On Sat, 2009-07-04 at 10:53 +0530, Kirtika Ruchandani wrote:
+> Hello,
+> I was building an image for the beagleboard and happened to notice that the
+> busybox recipe doesn't ship a whole lot of files under
+> /busybox/bin,/busybox/sbin in any package.
+> Details here: http://pastebin.com/f35154815
+> 
+> Am I mistaken somewhere, or is it a bug?
 
-Am I mistaken somewhere, or is it a bug?
+It's intentional that busybox doesn't ship most of those files.  Was
+there a particular one that was causing you a problem?
 
--- 
-Kirtika Ruchandani
-Maemo Google Summer of Code  student
-Sophomore, CS&E @ IIT-Madras
-IRC: rkirti / oespirit
-http://rkirti.wordpress.com
+p.
+
+
+
 
