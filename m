@@ -1,29 +1,23 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MN619-00078U-RA
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1MNYia-00071K-VT
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Jul 2009 16:15:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id C740F4F9499
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Jul 2009 10:02:49 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 26349-02 for <openembedded-devel@lists.openembedded.org>; 
-	Sat,  4 Jul 2009 10:02:49 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 98BAC4F9457
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Jul 2009 10:02:49 -0400 (EDT)
-Date: Sat, 4 Jul 2009 10:02:49 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
-Message-ID: <Pine.LNX.4.64.0907040946320.3731@juice.ott.cti.com>
-References: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
+	Sun, 05 Jul 2009 22:53:50 +0200
+Received: from [92.227.209.84] (helo=[192.168.1.177])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1MNYWd-0007HW-Es
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 05 Jul 2009 22:41:28 +0200
+Message-ID: <4A510FDA.7010103@kernelconcepts.de>
+Date: Sun, 05 Jul 2009 22:40:58 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
+To: openembedded-devel@lists.openembedded.org
+References: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
+In-Reply-To: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
+X-Enigmail-Version: 0.95.7
 Subject: Re: OpenEmbedded goals?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,52 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Jul 2009 14:15:04 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="346837782-1613558282-1246716169=:3731"
+X-List-Received-Date: Sun, 05 Jul 2009 20:53:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---346837782-1613558282-1246716169=:3731
-Content-Type: TEXT/PLAIN; charset=utf-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+Hi,
 
-On Sat, 4 Jul 2009, Mart R. wrote:
-
-> I have been exploring =C3=85ngstr=C3=B6m and thus OpenEmbedded lately. Th=
-e
+Mart R. wrote:
+> I have been exploring CEngstrC6m and thus OpenEmbedded lately. The
 > building process works nicely out of the box, but running it on some
 > low end embedded system is out of the question because it is just too
 > slow and bloated for my taste. Stripping it down is not an easy job
 > either as I would have to edit countless of *.bb files.
 
-Hi Mart,
+you might want to take a look at the "micro" distribution in OE and its
+images. The initrd images are another example for tiny images.
 
-If you create an overlay, you can fairly easily tweak individual .bb files=
-=20
-to strip them down without rewriting the entire recipe.
+> - Out of the box cross-compile environment to whatever system you can
+> - imagine,
 
-You can list your overlay dir before the OE recipe dir in COLLECTIONS. Set=
-=20
-FILESPATHBASE to look in your COLLECTIONS for extra patches and files,=20
-include amend-recipes.inc from your distro conf, and create amend.inc in=20
-your overlay for any recipes you want to mangle.
+> - Vanilla *.bb files for distributions to use, so they would not have
+> to duplicate all that work that has already been put into creating
+> those rules.
+> It would also mean scrapping all the distribution configurations out
+> of OE, doing away with all non-essential patches from the BitBake
+> recipes, etc.
 
-This is what the COLLECTIONS and FILESPATHBASE setting looks like:
+I don't see a reason to do this. OE summarizes a lot of knowledge about how
+to (cross-) build whole distributions. Why should we strip away a part of
+this?
+I see it takes a while to get along with the complexity of OE.... but would
+you be happier with less know how and less examples how to do things
+correctly?
 
-http://jrz.cbnco.com/git/?p=3Dtoastix/toastix.git;a=3Dblob;f=3Dpublic/conf/=
-site.conf;h=3Dee1a6d9ce60f65d37dca293c5c4ded04bbb03ff4;hb=3DHEAD
+Greetings
 
-amend-recipes.inc:
+Florian
 
-http://projects.linuxtogo.org/pipermail/openembedded-devel/2009-May/011181.=
-html
 
-An amended recipe:
 
-http://jrz.cbnco.com/git/?p=3Dtoastix/toastix.git;a=3Dblob;f=3Dpublic/recip=
-es/diffutils/amend.inc;h=3D09b24cf568bea5311c1f0a2d154a710752d4e24e;hb=3DHE=
-AD
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
-(Don't expect much in that repo to work...)
 
-Mike
-
---346837782-1613558282-1246716169=:3731--
