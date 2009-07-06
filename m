@@ -1,29 +1,23 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1MNisy-00015b-1c
+	(envelope-from <philb@gnu.org>) id 1MNjDF-0001hy-Pe
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Jul 2009 09:45:12 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id D8F9B2C827
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jul 2009 07:32:21 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id n-nwg7bE8tv1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jul 2009 07:32:19 +0000 (UTC)
-Received: from [151.80.10.35] (unknown [151.80.10.35])
-	by wiki.koala.it (Postfix) with ESMTPSA id 374752C81E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jul 2009 07:32:17 +0000 (UTC)
-Message-ID: <4A51A88D.8020107@gmail.com>
-Date: Mon, 06 Jul 2009 09:32:29 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-MIME-Version: 1.0
+	Mon, 06 Jul 2009 10:06:09 +0200
+Received: from 88-110-39-246.dynamic.dsl.as9105.com ([88.110.39.246]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MNj1E-0001Fm-No
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Jul 2009 08:53:44 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Xserver file generation
+In-Reply-To: <4A51A88D.8020107@gmail.com>
+References: <4A51A88D.8020107@gmail.com>
+Date: Mon, 06 Jul 2009 08:53:43 +0100
+Message-Id: <1246866823.16040.102.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Xserver file generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,32 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jul 2009 07:45:12 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Mon, 06 Jul 2009 08:06:10 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi, I need your help to solvea problem with Xserver file generation
+On Mon, 2009-07-06 at 09:32 +0200, Marco Cavallini wrote:
+> At last my questions and doubts are the following:
+> 1. Is it correct to consider xserver-xcommon the recipe responsible for
+> creating such file?
+> 2. How would be created the Xserver file?
+> 3. WHich patches flow is involved into its creation?
+> 
+> 
+> The file I get on the target contains the following :
+> http://pastebin.com/m42ba5037
 
-Distro:kaeilos
-Machine:ronetix-pm9263
-Image: x11-image
+That file does look like the one from xserver-common.  (There's also a
+competing version of Xserver in xserver-kdrive-common; I don't think
+this is what you have, but "opkg search" would tell you for sure.)
 
-I am trying to figure out how the /etc/X11/Xserver file is generated,
-because when I read such file in the target system I find something that
-I haven't defined and that looks neither defined from any of the patches
-related to the proper recipe package xserver-common_1.22.bb
+I'm not quite sure I understand your questions 2 and 3.  Xserver is just
+copied from the source directory into the output package; it isn't
+really "created" inside OE.  As for the patches, I don't know offhand
+which ones are applied but again, there is nothing special about the
+Xserver file; OE will use the same rules as for everything else.
 
-At last my questions and doubts are the following:
-1. Is it correct to consider xserver-xcommon the recipe responsible for
-creating such file?
-2. How would be created the Xserver file?
-3. WHich patches flow is involved into its creation?
+What's the actual problem that you're trying to solve here?
+
+p.
 
 
-The file I get on the target contains the following :
-http://pastebin.com/m42ba5037
-
-TIA
-/marco
 
 
