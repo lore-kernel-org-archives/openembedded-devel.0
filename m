@@ -1,38 +1,29 @@
-Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MNhmW-0001nz-1g
+	(envelope-from <koansoftware@gmail.com>) id 1MNisy-00015b-1c
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Jul 2009 08:34:28 +0200
-Received: by wa-out-1112.google.com with SMTP id j4so585874wah.12
+	Mon, 06 Jul 2009 09:45:12 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id D8F9B2C827
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Jul 2009 23:22:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=INVsgtIn2s1TA83bZMqQHMQuVmcm+27PAukGz3+8dUA=;
-	b=qDEli/b3t+G4MrqgBUGh306uWyzTulE9hUxWfkGUSgXjaj0A+MHo7aCWF7imL/lZSh
-	EuAbWk8AaRbeJKVFVpJ9oAvOfB8ms+DcaATXW+xZHIEUPN2kJ8o4hmBwJzcnt78WIw7k
-	Kwxl9DTZsDpgyb3vuboJjt8w9KY9kSr993azE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=O84UQTeY/xZgEXXZYASX8rc6+ExxqL9SDeBuJfpDTg00k8uGT4899U4gczIKQE31mz
-	57SBMiv04ds6l6WZCouJVSD3SV0BUXpzHhd6EtWqWRMoZKakFVCSc0MIWkg1knCNzcH2
-	izgsBe1YMoE0jz8xwucWuRiOFxnZdR+G1aEiU=
+	Mon,  6 Jul 2009 07:32:21 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id n-nwg7bE8tv1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Jul 2009 07:32:19 +0000 (UTC)
+Received: from [151.80.10.35] (unknown [151.80.10.35])
+	by wiki.koala.it (Postfix) with ESMTPSA id 374752C81E
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Jul 2009 07:32:17 +0000 (UTC)
+Message-ID: <4A51A88D.8020107@gmail.com>
+Date: Mon, 06 Jul 2009 09:32:29 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-Received: by 10.115.106.14 with SMTP id i14mr6995040wam.77.1246861322443; Sun, 
-	05 Jul 2009 23:22:02 -0700 (PDT)
-In-Reply-To: <loom.20090704T072427-524@post.gmane.org>
-References: <64d5b90a0907032223t749b13ffy95305639fcf3e654@mail.gmail.com>
-	<1246691571.16040.20.camel@lenovo.internal.reciva.com>
-	<loom.20090704T072427-524@post.gmane.org>
-Date: Sun, 5 Jul 2009 23:22:02 -0700
-Message-ID: <19c1b8a90907052322w2f2e590ch8498331b1608539c@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: (Possibly grave) error with Busybox recipe ?
+Subject: Xserver file generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jul 2009 06:34:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 06 Jul 2009 07:45:12 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
-On 7/4/09, Kirtika Ruchandani <kirtibr@gmail.com> wrote:
-> Phil Blundell <philb <at> gnu.org> writes:
->
->
->>
->> It's intentional that busybox doesn't ship most of those files.  Was
->> there a particular one that was causing you a problem?
->
-> Ok. I haven't tested my image as yet but I posted here because I saw
-> ls,mv,cp
-> and other utilities under /busybox/bin being excluded out of the packages as
-> seen in the pastebin,
+Hi, I need your help to solvea problem with Xserver file generation
 
-They are also provided by coreutils. Is coreutils being included in your image ?
+Distro:kaeilos
+Machine:ronetix-pm9263
+Image: x11-image
 
--Khem
+I am trying to figure out how the /etc/X11/Xserver file is generated,
+because when I read such file in the target system I find something that
+I haven't defined and that looks neither defined from any of the patches
+related to the proper recipe package xserver-common_1.22.bb
+
+At last my questions and doubts are the following:
+1. Is it correct to consider xserver-xcommon the recipe responsible for
+creating such file?
+2. How would be created the Xserver file?
+3. WHich patches flow is involved into its creation?
+
+
+The file I get on the target contains the following :
+http://pastebin.com/m42ba5037
+
+TIA
+/marco
 
 
