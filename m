@@ -1,24 +1,38 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MNYia-00071K-VT
+	(envelope-from <raj.khem@gmail.com>) id 1MNhmW-0001nz-1g
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Jul 2009 22:53:50 +0200
-Received: from [92.227.209.84] (helo=[192.168.1.177])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MNYWd-0007HW-Es
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Jul 2009 22:41:28 +0200
-Message-ID: <4A510FDA.7010103@kernelconcepts.de>
-Date: Sun, 05 Jul 2009 22:40:58 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+	Mon, 06 Jul 2009 08:34:28 +0200
+Received: by wa-out-1112.google.com with SMTP id j4so585874wah.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 Jul 2009 23:22:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=INVsgtIn2s1TA83bZMqQHMQuVmcm+27PAukGz3+8dUA=;
+	b=qDEli/b3t+G4MrqgBUGh306uWyzTulE9hUxWfkGUSgXjaj0A+MHo7aCWF7imL/lZSh
+	EuAbWk8AaRbeJKVFVpJ9oAvOfB8ms+DcaATXW+xZHIEUPN2kJ8o4hmBwJzcnt78WIw7k
+	Kwxl9DTZsDpgyb3vuboJjt8w9KY9kSr993azE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=O84UQTeY/xZgEXXZYASX8rc6+ExxqL9SDeBuJfpDTg00k8uGT4899U4gczIKQE31mz
+	57SBMiv04ds6l6WZCouJVSD3SV0BUXpzHhd6EtWqWRMoZKakFVCSc0MIWkg1knCNzcH2
+	izgsBe1YMoE0jz8xwucWuRiOFxnZdR+G1aEiU=
 MIME-Version: 1.0
+Received: by 10.115.106.14 with SMTP id i14mr6995040wam.77.1246861322443; Sun, 
+	05 Jul 2009 23:22:02 -0700 (PDT)
+In-Reply-To: <loom.20090704T072427-524@post.gmane.org>
+References: <64d5b90a0907032223t749b13ffy95305639fcf3e654@mail.gmail.com>
+	<1246691571.16040.20.camel@lenovo.internal.reciva.com>
+	<loom.20090704T072427-524@post.gmane.org>
+Date: Sun, 5 Jul 2009 23:22:02 -0700
+Message-ID: <19c1b8a90907052322w2f2e590ch8498331b1608539c@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
-In-Reply-To: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
-X-Enigmail-Version: 0.95.7
-Subject: Re: OpenEmbedded goals?
+Cc: openembedded-devel@openembedded.org
+Subject: Re: (Possibly grave) error with Busybox recipe ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,50 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Jul 2009 20:53:50 -0000
+X-List-Received-Date: Mon, 06 Jul 2009 06:34:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On 7/4/09, Kirtika Ruchandani <kirtibr@gmail.com> wrote:
+> Phil Blundell <philb <at> gnu.org> writes:
+>
+>
+>>
+>> It's intentional that busybox doesn't ship most of those files.  Was
+>> there a particular one that was causing you a problem?
+>
+> Ok. I haven't tested my image as yet but I posted here because I saw
+> ls,mv,cp
+> and other utilities under /busybox/bin being excluded out of the packages as
+> seen in the pastebin,
 
-Mart R. wrote:
-> I have been exploring CEngstrC6m and thus OpenEmbedded lately. The
-> building process works nicely out of the box, but running it on some
-> low end embedded system is out of the question because it is just too
-> slow and bloated for my taste. Stripping it down is not an easy job
-> either as I would have to edit countless of *.bb files.
+They are also provided by coreutils. Is coreutils being included in your image ?
 
-you might want to take a look at the "micro" distribution in OE and its
-images. The initrd images are another example for tiny images.
-
-> - Out of the box cross-compile environment to whatever system you can
-> - imagine,
-
-> - Vanilla *.bb files for distributions to use, so they would not have
-> to duplicate all that work that has already been put into creating
-> those rules.
-> It would also mean scrapping all the distribution configurations out
-> of OE, doing away with all non-essential patches from the BitBake
-> recipes, etc.
-
-I don't see a reason to do this. OE summarizes a lot of knowledge about how
-to (cross-) build whole distributions. Why should we strip away a part of
-this?
-I see it takes a while to get along with the complexity of OE.... but would
-you be happier with less know how and less examples how to do things
-correctly?
-
-Greetings
-
-Florian
-
-
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+-Khem
 
 
