@@ -1,32 +1,28 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MOWBj-0005Yk-Vq
-	for openembedded-devel@openembedded.org; Wed, 08 Jul 2009 14:23:52 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MOVzU-0001BX-Ju
-	for openembedded-devel@openembedded.org; Wed, 08 Jul 2009 12:11:12 +0000
-Received: from p5b3b3d88.dip.t-dialin.net ([91.59.61.136])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 08 Jul 2009 12:11:12 +0000
-Received: from no2spam by p5b3b3d88.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 08 Jul 2009 12:11:12 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 08 Jul 2009 14:10:57 +0200
-Message-ID: <h322cj$kbm$1@ger.gmane.org>
+	(envelope-from <philb@gnu.org>) id 1MOXws-0006NP-R3
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jul 2009 16:16:39 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MOXkY-0004Rj-Ci
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jul 2009 15:03:54 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MOXkV-0006vy-I2
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jul 2009 15:03:51 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1247034015.4669.25.camel@opal>
 References: <200907021504.13248.holger+oe@freyther.de>
 	<1247034015.4669.25.camel@opal>
+Date: Wed, 08 Jul 2009 15:03:50 +0100
+Message-Id: <1247061830.23305.25.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b3d88.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-In-Reply-To: <1247034015.4669.25.camel@opal>
-Sender: news <news@ger.gmane.org>
+X-Mailer: Evolution 2.26.2 
 Subject: Re: Questions regarding DISTRO = "minimal"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,21 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jul 2009 12:23:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 08 Jul 2009 14:16:39 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On Wed, 2009-07-08 at 08:20 +0200, Michael 'Mickey' Lauer wrote:
+> The question now is how do we move from here? We could rename minimal
+> back to generic -- in fact that's what it was for right from the start.
 
-let me jump in here and say that for the last few months, I've been 
-mainly compiling against "minimal", fixing a few bugs in minimal and OE 
-in general along the way.  I would not say this warrants to label it 
-"maintained", but it's not unmaintained, either.  There is no doubt the 
-existence of "minimal" has been beneficial to OE even lately.
+Yes, I think that'd be a good idea.  Or "vanilla" :-)
 
-Regards
+> Whatever we decide on, it's important that we do not rely on one
+> distro to rule them all -- this will inevitably lower the metadata
+> quality hence the usability of OE.
 
-Rolf
+Agreed, certainly.
+
+p.
+
 
 
 
