@@ -1,21 +1,22 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1MOPm4-00018Y-Mm
+	(envelope-from <mickey@vanille-media.de>) id 1MOQiA-0002cy-1Z
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Jul 2009 07:32:57 +0200
-Received: by fxm3 with SMTP id 3so1939318fxm.12
+	Wed, 08 Jul 2009 08:32:58 +0200
+Received: from [192.168.0.20] (unknown [92.116.61.182])
+	by drlauer-research.com (Postfix) with ESMTP id 5D31A584A91
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jul 2009 22:20:17 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.126.66 with SMTP id b2mr3053086fas.18.1247030417663; Tue, 
-	07 Jul 2009 22:20:17 -0700 (PDT)
-In-Reply-To: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
-References: <c2a08bbd0907040026s1d7d617fg95537e865b254761@mail.gmail.com>
-Date: Wed, 8 Jul 2009 02:20:17 -0300
-Message-ID: <ae9c9a1c0907072220h2db6bbdan9492bab843afc8a@mail.gmail.com>
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+	Wed,  8 Jul 2009 08:55:31 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: OpenEmbedded goals?
+In-Reply-To: <200907021504.13248.holger+oe@freyther.de>
+References: <200907021504.13248.holger+oe@freyther.de>
+Organization: Vanille-Media
+Date: Wed, 08 Jul 2009 08:20:15 +0200
+Message-Id: <1247034015.4669.25.camel@opal>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+Subject: Re: Questions regarding DISTRO = "minimal"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,50 +30,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jul 2009 05:32:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 Jul 2009 06:32:58 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jul 4, 2009 at 4:26 AM, Mart R.<roosmaa+list@gmail.com> wrote:
-> I have been exploring =C5ngstr=F6m and thus OpenEmbedded lately. The
-> building process works nicely out of the box, but running it on some
-> low end embedded system is out of the question because it is just too
-> slow and bloated for my taste. Stripping it down is not an easy job
-> either as I would have to edit countless of *.bb files.
->
-> Knowing that Portage has USE flags I was interested to see why they
-> haven't been implemented to at least some extent in
-> BitBake/OpenEmbedded. Having found my answer [1] it still kept nagging
-> me why have they not at least enabled such USE flags at distribution
-> level?! Sure one can just create a new repository of metadata, but why
-> duplicate all that work?
+Hi Holger,
 
-You can somehow use the USE flags in current OE, but I don't know if
-it's the best way to go.
+> I'm currently toying with creating a "minimal" uclibc image and while using 
+> minimal-uclibc I got several questions in #oe along the line claiming 
+> "minimal" is current unmaintained.
 
-I know we already have long discussions about it at this mailing list,
-but here are some problems that I think we'll have if we go to this
-direction:
- - Much more hard to debug and reproduce the errors (need more
-community support, and we already have a quite long list of bugs)
- - When you start to differentiate a lot at the current OE code base,
-you'll have recipes that are quite long with many different options,
-one for each distro or etc. In the end the reuse of the meta data is
-not so good, as people start to get more used to add specific changes
-than fixing and changing the meta data in a way everyone could use it.
+Not really, it's just falling under my temporary (until we have a TSC in
+place) org.oe.dev boycott.
 
-What I see is that the current OE solution seems to be a valid base
-meta data (that can be shared and used by everyone, letting the debug
-easier), and most of the differentiation going when selecting the
-packages and configuration for the distros.
+> I have some questions to help me building a opinion regarding "minimal". What 
+> is the differentiation between minimal and micro, minimal and angstrom. What 
+> niche is minimal trying to solve? And is minimal the right name for it?
 
-Maybe selecting better the packages and how you use them at your
-distro can help you get a better image. Of course, you could also
-create overlays for specific changes if you want to change it more
-than just the selection of the packages.
+Here's the story:
+
+First, there was the "generic" distro -- an attempt to create a simple
+distro config that builds for a few very common targets without
+including too many policies, so that people could understand it and use
+it as a starting point when they felt the need to create an own distro
+config.
+
+Alas, people misunderstood that, thinking that 'generic' meant it would
+build for all targets and complained. To make it more clear that it was
+about a minimal amount of distro policies, it had been renamed to
+'minimal' (sic!).
+
+A bit later, when Angstrom started to become the best maintained distro
+in OE, I was worrying about the quality of our metadata. Angstrom
+included many configurations that hided actual bugs in our metadata
+(such as inconsistent versioning and bogus default providers etc.)
+At some point of time, before Angstrom would be the _only_ distro that
+built in OE (thus compromising an important distinction), I took the
+plunge and refactored many (good) settings from Angstrom into generic
+include and configuration files, so that all distros would benefit from
+the toolchain knowledge that went into Angstrom.
+
+There was the hope that eventually the Angstrom folks would realize the
+benefit of that and would also move to more reusable config files. Alas,
+due to the social problems in our community this didn't happend and will
+probably never.
+
+The question now is how do we move from here? We could rename minimal
+back to generic -- in fact that's what it was for right from the start.
+
+Whatever we decide on, it's important that we do not rely on one distro
+to rule them all -- this will inevitably lower the metadata quality
+hence the usability of OE.
 
 Cheers,
---=20
-Ricardo Salveti de Araujo
+
+:M:
+
 
 
