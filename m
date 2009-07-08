@@ -1,22 +1,25 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MOTVO-00058P-0M
-	for openembedded-devel@openembedded.org; Wed, 08 Jul 2009 11:31:58 +0200
-Received: (qmail 694 invoked by uid 813007); 8 Jul 2009 09:19:19 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 8 Jul 2009 09:19:19 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 8 Jul 2009 11:19:05 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
-	)
-References: <022254FBC8645942BBF88A022862CDD33C60BA@3putt.int.lantronix.com>
-In-Reply-To: <022254FBC8645942BBF88A022862CDD33C60BA@3putt.int.lantronix.com>
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1MOVOg-0006Xk-2K
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Jul 2009 13:33:10 +0200
+Received: (qmail invoked by alias); 08 Jul 2009 11:20:29 -0000
+Received: from p5DDC73E4.dip.t-dialin.net (EHLO [192.168.4.78])
+	[93.220.115.228]
+	by mail.gmx.net (mp026) with SMTP; 08 Jul 2009 13:20:29 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX18G32BfwCYGv7Zul3b4RI0GpEy5e2HoEslGA3ymIS
+	aDP0E8DUBJqkR9
+Message-ID: <4A5480F5.7050002@gmx.net>
+Date: Wed, 08 Jul 2009 13:20:21 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-Message-Id: <200907081119.06148.marcin@juszkiewicz.com.pl>
-Subject: Re: How does OE determine the kernel version that gets build?
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.7
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.7
+Subject: proposing Xerces Ranby
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,31 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jul 2009 09:31:59 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 08 Jul 2009 11:33:12 -0000
+X-Groupsio-MsgNum: 11823
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig064CD01E6033C0DC00E2F10D"
+
+--------------enig064CD01E6033C0DC00E2F10D
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-Dnia =C5=9Broda, 8 lipca 2009 o 00:13:56 Lars Holowko napisa=C5=82(a):
-> Now I want to switch to a 2.6.30 kernel (for better wireless support)
-> but bitbake linux or bitbake console-image always builds 2.6.28
-> instead. I copied a defconfig to
-> recipies/linux/linux-2.6.30/at91sam9g20ek, copied the AT91 patches
-> for 2.6.30 in its place and added a
-> DEFAULT_PREFERENCE_at91sam9g20ek =3D "30" line to
-> recipies/linux/linux_2.6.30.bb hoping to make the 2.6.30 kernel
-> active.
+Hi,
+I would like to propose giving commit rights to Xerxes Ranby[0][1]. He
+has been helping me with Java- & Java-related recipes (e.g. llvm). There
+is also a number of successfully dealt bug reports on his account.
 
-I will work on updating Atmel devboards to 2.6.30 this week. Thanks for=20
-information that 2.6.30-at91 is already present.
+Regards
+Robert
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+[0] - Xerxes R=E5nby <xerxes@zafena.se>
+[1] - Blog http://labb.zafena.se/
 
 
+--------------enig064CD01E6033C0DC00E2F10D
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEYEARECAAYFAkpUgPUACgkQG9cfwmwwEtpm1wCeIbZTdUEMPvcLP1JBT3UpQo+Y
+KroAoJyaqMV3S9IsTLC0jX5zfpjD9rUe
+=if3l
+-----END PGP SIGNATURE-----
+
+--------------enig064CD01E6033C0DC00E2F10D--
