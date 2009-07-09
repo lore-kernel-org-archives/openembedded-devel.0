@@ -1,22 +1,21 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MOyCi-00041V-BP
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jul 2009 20:18:44 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MOy0z-0001ER-1E
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jul 2009 20:06:37 +0200
-Message-ID: <4A56318A.6080102@kernelconcepts.de>
-Date: Thu, 09 Jul 2009 20:06:02 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MOys9-0002O2-Kl
+	for openembedded-devel@openembedded.org; Thu, 09 Jul 2009 21:01:33 +0200
+Received: (qmail 15794 invoked by uid 813007); 9 Jul 2009 18:48:46 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 9 Jul 2009 18:48:46 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Thu, 9 Jul 2009 20:48:06 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
+	)
 References: <4A55F5AF.4070801@gmail.com>
 In-Reply-To: <4A55F5AF.4070801@gmail.com>
-X-Enigmail-Version: 0.95.7
+MIME-Version: 1.0
+Message-Id: <200907092048.14113.marcin@juszkiewicz.com.pl>
 Subject: Re: Commit access to mckoan
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,27 +30,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2009 18:18:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Jul 2009 19:01:33 -0000
+X-Groupsio-MsgNum: 11852
+Content-Type: multipart/signed; boundary="nextPart9407519.4DKCNoHch1";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+--nextPart9407519.4DKCNoHch1
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Marco Cavallini schrieb:
+Dnia czwartek, 9 lipca 2009 o 15:50:39 Marco Cavallini napisa=C5=82(a):
 > Hi all OE developers,
-> I am politely asking if would be possible to allow me OE commit access.
+> I am politely asking if would be possible to allow me OE commit
+> access.
 
-+1 from me
++1
 
-Greetings
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Florian
+--nextPart9407519.4DKCNoHch1
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
+iEYEABECAAYFAkpWO2kACgkQeQ6MlGH/2quU/ACeNiZ15Gw2Ju7Y3ct4ifiq8UqM
+l8cAnRakRLZtC8OxhaLu8UYMHG2v4SXJ
+=SLWX
+-----END PGP SIGNATURE-----
 
+--nextPart9407519.4DKCNoHch1--
