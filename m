@@ -1,39 +1,23 @@
-Received: from [209.85.210.193] (helo=mail-yx0-f193.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MOut4-0004jL-EV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jul 2009 16:46:14 +0200
-Received: by yxe31 with SMTP id 31so273756yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jul 2009 07:33:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=hWmNgTpq1StA/JJ/Z9JyOxaSS2oI0WsOvdCMO7tzv8o=;
-	b=anN4mAn2q7VUcqYGdMIqYlPZaC7kWxmqIr4wJ5uMBek6NrH2MK0vsZHFoseiFhHFl1
-	/3WbVeGB3ivuX9hu2aV3r6QzAiXTzRNi4IyqtUd6bZ2jD9Gy9hdrFJ5RoykPI7xI4rAT
-	x2QzRTR9PMBt859+f9zkWD9jhdWapJfhR544o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=crXWQ24Yte1PRAbU9SxToZrNM6tQtnTRWbyh2Olx5lEiod6mcbGQm0REB1vIGVg1be
-	4fVhtUFjEdBkw2HsIfIkdX92GdlKop+nCk+HwvLJ2gAur+0UQFbts9QkMSYaHT3njds/
-	ZLNCrs7B4FdBowJIyuVhA1TJF1lwAC9ui25j8=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.154.17 with SMTP id b17mr1190028ane.45.1247150004646; Thu, 
-	09 Jul 2009 07:33:24 -0700 (PDT)
-In-Reply-To: <be7a9f3d0907090708n76b215d0id9b0ab7364f5b61e@mail.gmail.com>
-References: <be7a9f3d0907090612k3babae30h64d0424a4fe8dcc0@mail.gmail.com>
-	<be7a9f3d0907090708n76b215d0id9b0ab7364f5b61e@mail.gmail.com>
-Date: Thu, 9 Jul 2009 11:33:24 -0300
-X-Google-Sender-Auth: 97ba3de10a2b508e
-Message-ID: <be7a9f3d0907090733l2bf493a2mfc63118844705ced@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MOvUJ-0003pC-FH
+	for openembedded-devel@openembedded.org; Thu, 09 Jul 2009 17:24:43 +0200
+Received: (qmail 18206 invoked by uid 813007); 9 Jul 2009 15:11:57 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 9 Jul 2009 15:11:57 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFH] Stable qemu-native BROKEN
+Date: Thu, 9 Jul 2009 17:11:26 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
+	)
+References: <200907091522.22285.marcin@juszkiewicz.com.pl>
+	<4A55FF61.8020501@gmail.com>
+In-Reply-To: <4A55FF61.8020501@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200907091711.27475.marcin@juszkiewicz.com.pl>
+Subject: Re: [RFC] Updating stable patches in linux recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2009 14:46:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Jul 2009 15:24:43 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello,
+Dnia czwartek, 9 lipca 2009 o 16:32:01 Marco Cavallini napisa=C5=82(a):
 
-On Thu, Jul 9, 2009 at 11:08 AM, Otavio Salvador<otavio@ossystems.com.br> wrote:
-> http://pastebin.ca/1489573
+> that's a good idea, but could drive to a huge overhead.
+> What do you mean exactly with latest stable updates?
+> How frequently would you check the stable patch availability?
 
-I've found two important issues regarting qemu and glibc changes in stable:
+I track kernel version RSS daily but work on kernel recipes less often.=20
+But when I work on them I would like to know is it ok to bump it or=20
+should I contact each developer who use recipe to get Ack from them.
 
-qemu-native 0.10.3 doesn't compile in my host system but 0.9.1 does fine.
-last change to pass LD_LIBRARY_PATH to qemu during locale generation
-ONLY works with 0.10.3.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+
 
 
