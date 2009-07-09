@@ -1,20 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MOtmj-0004va-8b
-	for openembedded-devel@openembedded.org; Thu, 09 Jul 2009 15:35:43 +0200
-Received: (qmail 14371 invoked by uid 813007); 9 Jul 2009 13:22:51 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 9 Jul 2009 13:22:51 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 9 Jul 2009 15:22:21 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
-	)
+	(envelope-from <koansoftware@gmail.com>) id 1MOuCw-0005pL-08
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 09 Jul 2009 16:02:46 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 348E72CA01
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Jul 2009 13:49:24 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id PYrxpeS4NX5i
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Jul 2009 13:49:22 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 753862C9FF
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Jul 2009 13:49:22 +0000 (UTC)
+Message-ID: <4A55F5AF.4070801@gmail.com>
+Date: Thu, 09 Jul 2009 15:50:39 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-Message-Id: <200907091522.22285.marcin@juszkiewicz.com.pl>
-Subject: [RFC] Updating stable patches in linux recipes
+To: Openembedded-devel@lists.openembedded.org
+Subject: Commit access to mckoan
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,29 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2009 13:35:58 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 09 Jul 2009 14:02:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+Hi all OE developers,
+I am politely asking if would be possible to allow me OE commit access.
 
-Hi
+Thank you
 
-We have many Linux recipes in OE. Those which are used for many targets 
-(so mainly linux_2.6.xx ones) are usually using first release of kernel 
-without any stable updates. 
-
-I would like to know what do you think about updating them to latest 
-stable updates (so 2.6.30.1, 2.6.29.6 etc) when new stable patch gets 
-released.
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
 
