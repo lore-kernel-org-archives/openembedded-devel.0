@@ -1,40 +1,35 @@
-Received: from [209.85.210.193] (helo=mail-yx0-f193.google.com)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MOvqW-0004ds-Rz
+	(envelope-from <khimov@altell.ru>) id 1MOwOR-0002wE-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Jul 2009 17:47:41 +0200
-Received: by yxe31 with SMTP id 31so336146yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jul 2009 08:34:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=5CObPqCTuhXry4HsE5P2Kckfm0BUfW20X/ksrijchGQ=;
-	b=WRQPnHlGOXCAIkqC4StbzRfcHJ1DZ+G2/No0jf426jNoZSoS04Z63LMq0WEwil05xm
-	OqT7MxZSk1bRQ+L6VIsW20Ix+kSq9FZsCpxKh4gWBIaJ1ubFbi1zvW3wxVAI5eYu0K8k
-	Fij2vZfrgRVi7RJJEiB6sR3wzqEjrGqx/eF4E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=fWXQfBeJVP13r0zQUH8SiYmEHn4dz2X4Bn5BVWcpQiEe/p1RD2/XrMLjw/kIrydiIv
-	3HQEjJeASwxp5WqCcZ0hXT3Hil4t4nViGuyZepAQSztfqQX1QoLesUxEqZiGW8vNsqse
-	WMedeHAuiF2rAiJt5htoZj4QwFvxQZrpdOLpk=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.171.13 with SMTP id t13mr1260597ane.94.1247153692222; Thu, 
-	09 Jul 2009 08:34:52 -0700 (PDT)
-In-Reply-To: <200907091919.56858.khimov@altell.ru>
-References: <be7a9f3d0907090612k3babae30h64d0424a4fe8dcc0@mail.gmail.com>
-	<be7a9f3d0907090708n76b215d0id9b0ab7364f5b61e@mail.gmail.com>
-	<be7a9f3d0907090733l2bf493a2mfc63118844705ced@mail.gmail.com>
-	<200907091919.56858.khimov@altell.ru>
-Date: Thu, 9 Jul 2009 12:34:52 -0300
-X-Google-Sender-Auth: 6774cdfd3f3ee375
-Message-ID: <be7a9f3d0907090834q3e1a57b2s6723e15b5f3a9fa6@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Thu, 09 Jul 2009 18:22:43 +0200
+Received: from [UNAVAILABLE] ([217.74.249.19] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1MOwC0-000CVW-MK
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Jul 2009 20:09:55 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
+Date: Thu, 9 Jul 2009 20:09:28 +0400
+User-Agent: KMail/1.11.4 (Linux/2.6.29; KDE/4.2.4; x86_64; ; )
+References: <be7a9f3d0907090612k3babae30h64d0424a4fe8dcc0@mail.gmail.com>
+	<200907091919.56858.khimov@altell.ru>
+	<be7a9f3d0907090834q3e1a57b2s6723e15b5f3a9fa6@mail.gmail.com>
+In-Reply-To: <be7a9f3d0907090834q3e1a57b2s6723e15b5f3a9fa6@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200907092009.28507.khimov@altell.ru>
+X-SpamTest-Envelope-From: khimov@altell.ru
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 8986 [Jul 09 2009]
+X-SpamTest-Info: {UDS BL}
+X-SpamTest-Info: {DNSBL Rate: low}
+X-SpamTest-Method: none
+X-SpamTest-Rate: 30
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
 Subject: Re: [RFH] Stable qemu-native BROKEN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -49,31 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2009 15:47:41 -0000
-Content-Type: text/plain; charset=KOI8-R
+X-List-Received-Date: Thu, 09 Jul 2009 16:22:43 -0000
+Content-Type: Text/Plain;
+  charset="koi8-r"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hello Roman,
-
-Thanks by looking at it :-D
-
-On Thu, Jul 9, 2009 at 12:19 PM, Roman I Khimov<khimov@altell.ru> wrote:
-> On =FE=C5=D4=D7=C5=D2=C7 09 =C9=C0=CC=D1 2009 18:33:24 Otavio Salvador wr=
-ote:
->> qemu-native 0.10.3 doesn't compile in my host system but 0.9.1 does fine=
-.
+On =FE=C5=D4=D7=C5=D2=C7 09 =C9=C0=CC=D1 2009 19:34:52 Otavio Salvador wrot=
+e:
+> On Thu, Jul 9, 2009 at 12:19 PM, Roman I Khimov<khimov@altell.ru> wrote:
+> > What do you have on host system? And could you also send qemu build log
+> > (which fails), please.
 >
-> What do you have on host system? And could you also send qemu build log (=
-which
-> fails), please.
+> It is available at http://pastebin.com/f4bb04943
 
-It is available at http://pastebin.com/f4bb04943
+I think you can try to limit supported targets as a temporary measure, like:
 
-amd64 (running in 64 bit) with Sid.
+EXTRA_OECONF +=3D "--target-list=3Darm-linux-user,arm-softmmu"
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+> amd64 (running in 64 bit) with Sid.
+
+Same here. Although I'm something like 3 weeks behind with sid currently an=
+d=20
+will only be able to update and try latest on Sunday.
 
 
