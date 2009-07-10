@@ -1,36 +1,32 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1MP9jH-0006t8-Ie
+	(envelope-from <koansoftware@gmail.com>) id 1MPBEi-0001zc-WA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jul 2009 08:37:07 +0200
-Received: by fxm3 with SMTP id 3so562743fxm.12
+	Fri, 10 Jul 2009 10:13:41 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 673112CA01
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jul 2009 23:24:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=dOIoY5/SYzj2NcYQkIH6pk7a55osg6W5RCMD/g/5QAk=;
-	b=epT9ahRr2kVR/UoSMw7oE3ESV+tfpNdOmojFbT9nI1iAzGmBbV099XvNpWlNyQiJ0i
-	vLLjxIif9ABL1cvdJFT8Hv5Les0Zji1dzH0Polqx1nKPfgh+XGcxP/dlwGSxJhyx+Das
-	sCBb3idGJROobqVKMVCyo2lSXoOsAx2Ix80o0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=SK3zAp10/zmHgC2lEogGmwcnWy5/SkccsWHzlLauKKJLhcF87YZ3uYZlsbQkxglBTp
-	sBPNcTOHn1eRmVMkwkqDXyQMmw/elpNARSyItkF1sfwLToy6lPU4wxcoeiapRRIQFxl1
-	db7uWE2L9neEtExuL2U5Oh6SOIzIidIsRqcb4=
-Received: by 10.103.131.18 with SMTP id i18mr855375mun.107.1247207055564;
-	Thu, 09 Jul 2009 23:24:15 -0700 (PDT)
-Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id g1sm3418533muf.56.2009.07.09.23.24.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 09 Jul 2009 23:24:12 -0700 (PDT)
-From: Koen Kooi <koen.kooi@gmail.com>
+	Fri, 10 Jul 2009 08:00:16 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id z5jS+tImBIJO
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jul 2009 08:00:15 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id BB1842C9FF
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jul 2009 08:00:14 +0000 (UTC)
+Message-ID: <4A56F55E.8010000@gmail.com>
+Date: Fri, 10 Jul 2009 10:01:34 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Jul 2009 08:24:09 +0200
-Message-Id: <1247207049-7291-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.6.1
-Cc: Koen Kooi <koen@openembedded.org>
-Subject: [STABLE][PATCH] opkg*: bump to r215 to fix segfaults on upgrade
+References: <200907091522.22285.marcin@juszkiewicz.com.pl>	<4A55FF61.8020501@gmail.com>
+	<200907091711.27475.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200907091711.27475.marcin@juszkiewicz.com.pl>
+Subject: Re: [RFC] Updating stable patches in linux recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2009 06:37:09 -0000
+X-List-Received-Date: Fri, 10 Jul 2009 08:13:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Koen Kooi <koen@openembedded.org>
+Marcin Juszkiewicz ha scritto:
+> Dnia czwartek, 9 lipca 2009 o 16:32:01 Marco Cavallini napisa=C5=82(a):
+>=20
+>> that's a good idea, but could drive to a huge overhead.
+>> What do you mean exactly with latest stable updates?
+>> How frequently would you check the stable patch availability?
+>=20
+> I track kernel version RSS daily but work on kernel recipes less often.=
+=20
+> But when I work on them I would like to know is it ok to bump it or=20
+> should I contact each developer who use recipe to get Ack from them.
 
++1 from me,
+although I still have some doubts
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- conf/distro/include/sane-srcrevs.inc |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+1. how do you know who is responsible for each recipe, considering that
+many of them haven't a proper header showing that.
 
-diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-index 6369462..7116c22 100644
---- a/conf/distro/include/sane-srcrevs.inc
-+++ b/conf/distro/include/sane-srcrevs.inc
-@@ -185,9 +185,9 @@ SRCREV_pn-openmoko-toolchain-scripts ?= "4913"
- SRCREV_pn-openmoko-worldclock2 ?= "3365"
- SRCREV_pn-openocd ?= "517"
- SRCREV_pn-openocd-native ?= "517"
--SRCREV_pn-opkg ?= "209"
--SRCREV_pn-opkg-native ?= "209"
--SRCREV_pn-opkg-sdk ?= "209"
-+SRCREV_pn-opkg ?= "215"
-+SRCREV_pn-opkg-native ?= "215"
-+SRCREV_pn-opkg-sdk ?= "215"
- SRCREV_pn-opkg-utils ?= "4578"
- SRCREV_pn-opkg-utils-native ?= "4595"
- SRCREV_pn-oprofileui ?= "173"
--- 
-1.6.1
+2. many recipes are often used by other recipes, how can you check all
+possibilities?
 
+thx
+
+/marco
 
 
