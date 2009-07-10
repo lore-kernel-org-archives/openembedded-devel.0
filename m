@@ -1,35 +1,28 @@
-Received: from [209.85.217.227] (helo=mail-gx0-f227.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MPKGm-0000XE-1C
+	(envelope-from <msmith@cbnco.com>) id 1MPL4s-0007jB-3g
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jul 2009 19:52:24 +0200
-Received: by gxk27 with SMTP id 27so1588269gxk.12
+	Fri, 10 Jul 2009 20:44:10 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 3A7BF505325
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2009 10:39:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=kDbDswpQZaXjjP/0nBxARDGIxPwEXYamSD4x6ZhrYXc=;
-	b=GsHSep/+6odo5hraZktQVs3B32ZsDsQohpUFnGvs4uYkvUa5ppzVrNat7BCsd9fpgu
-	286kkob+HfsSPy7+m34x2lpYv2lCy6AQdzfHzUDd6CUoxr4gGHamAlqHrvaknRpw0aGv
-	t2Y5QXslTtR2XUaGZUeoItArjH5OrwdGI9hhs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	b=TFh4h6nlI/SYeDmeAKyeI3BvO7Gvi7pofqqV3YVmFTFo5WbCzCvwijdD/xyQYw8bqS
-	EYpR9v65ms01U3/zAp48KU2qeJiyPELcVrrTodpzBehjER7iH+33nSkgRlMOz71bCPv+
-	+BGJZ6t1QT/7SOFR0lNUMBM7ftothufu24lXU=
+	Fri, 10 Jul 2009 14:31:16 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 05591-06 for <openembedded-devel@lists.openembedded.org>; 
+	Fri, 10 Jul 2009 14:31:16 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 04DE1505657
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jul 2009 14:31:16 -0400 (EDT)
+Message-ID: <4A5788F3.2080805@cbnco.com>
+Date: Fri, 10 Jul 2009 14:31:15 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.228.6 with SMTP id a6mr3020211anh.15.1247247559830; Fri, 
-	10 Jul 2009 10:39:19 -0700 (PDT)
-Date: Fri, 10 Jul 2009 14:39:19 -0300
-X-Google-Sender-Auth: 285f1107702e1ef4
-Message-ID: <be7a9f3d0907101039i6a58c3aeof2fc3e1f40d24dd0@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Mistakenly pushed changes without review, specially 6633c4c95a
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Building xserver-xorg 1.6.1 for i686: libtool error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +36,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2009 17:52:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 10 Jul 2009 18:44:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi,
 
-I did a push by mistake while preparing to send the request for review
-to the mailing list.
+On my x86_64 build box, xserver-xorg's configure is generating 
+i686-oe-linux-libtool instead of libtool, but the doltlibtool script is 
+still looking for plain old libtool.
 
-I'm sorry by this :(
+I worked around it with a symlink.
 
-I'm specially interested to know about 6633c4c95a. If people objects
-on it I can revert it but I think it is not necessary to revert it if
-people agrees with it.
+Wondering if anyone has a pointer where I can look to solve it 
+permanently. It looks like libtool.m4 is setting 
+ofile=${host_alias}-libtool, but xserver-xorg's acinclude.m4 is "dolt, a 
+replacement for libtool" and it doesn't have the same ideas about what 
+libtool should be called.
 
-So could people ack on it or nack? In case of nacks, I revert it later today.
+Thanks,
+Mike
 
-Sorry again,
+../doltlibtool --tag=CC   --mode=link i686-oe-linux-gcc 
+-march=pentiumpro -DHAVE_DIX_CONFIG_H -Wall -Wpointer-arith 
+-Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations 
+-Wnested-externs -fno-strict-aliasing -D_BSD_SOURCE -DHAS_FCHOWN 
+-DHAS_STICKY_DIR_BIT -DDBUS_API_SUBJECT_TO_CHANGE
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+[blah blah blah]
+
+-Wl,-O1 -Wl,--hash-style=gnu  -ldl -o libdix.la  atom.lo colormap.lo
+
+[blah blah]
+
+../doltlibtool: line 17: 
+/home/michael/startitup/tmp/work/i686-oe-linux/xserver-xorg-2_1.6.1-r1/xorg-server-1.6.1/dix/../libtool: 
+No such file or directory
+../doltlibtool: line 17: exec: 
+/home/michael/startitup/tmp/work/i686-oe-linux/xserver-xorg-2_1.6.1-r1/xorg-server-1.6.1/dix/../libtool: 
+cannot execute: No such file or directory
+make[2]: *** [libdix.la] Error 126
+
+
+
+$ cat doltlibtool
+#!/bin/bash
+top_builddir_slash="${0%%doltlibtool}"
+: ${top_builddir_slash:=./}
+args=()
+modeok=false
+tagok=false
+for arg in "$@"; do
+     case "$arg" in
+         --mode=compile) modeok=true ;;
+         --tag=CC|--tag=CXX) tagok=true ;;
+         *) args[${#args[@]}]="$arg" ;;
+     esac
+done
+if $modeok && $tagok ; then
+     . ${top_builddir_slash}doltcompile "${args[@]}"
+else
+     exec ${top_builddir_slash}libtool "$@"
+fi
 
 
