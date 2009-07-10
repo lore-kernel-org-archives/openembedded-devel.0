@@ -1,26 +1,24 @@
-Received: from [66.39.3.87] (helo=wbm9.pair.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bluelightning@bluelightning.org>) id 1MPECQ-0005zH-A6
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jul 2009 13:23:31 +0200
-Received: by wbm9.pair.net (Postfix, from userid 65534)
-	id DAB5A88877; Fri, 10 Jul 2009 07:10:38 -0400 (EDT)
-Received: from 78.86.188.127 ([78.86.188.127])
-	(SquirrelMail authenticated user blueligh@bluelightning.org)
-	by webmail9.pair.com with HTTP; Fri, 10 Jul 2009 12:10:38 +0100 (BST)
-Message-ID: <3083.78.86.188.127.1247224238.squirrel@webmail9.pair.com>
-In-Reply-To: <4A56FEE3.3040604@hlfslinux.hu>
-References: <4A49FFF8.6020008@hlfslinux.hu>	<044601c9f9a6$6ef9ecd0$4cedc670$@Willis@Distant-earth.com>	<4A4A7A4C.2000409@hlfslinux.hu>	<200906302319.31632.bluelightning@bluelightning.org>
-	<4A56E022.9090705@hlfslinux.hu> <4A56FEE3.3040604@hlfslinux.hu>
-Date: Fri, 10 Jul 2009 12:10:38 +0100 (BST)
-From: "Paul Eggleton" <bluelightning@bluelightning.org>
-To: angstrom-distro-devel@linuxtogo.org
-User-Agent: SquirrelMail/1.4.5
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MPIJz-0001gD-CI
+	for openembedded-devel@openembedded.org; Fri, 10 Jul 2009 17:47:35 +0200
+Received: (qmail 13268 invoked by uid 813007); 10 Jul 2009 15:34:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 10 Jul 2009 15:34:42 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Jul 2009 17:33:56 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
+	)
+References: <200907091522.22285.marcin@juszkiewicz.com.pl>
+	<200907091711.27475.marcin@juszkiewicz.com.pl>
+	<4A56F55E.8010000@gmail.com>
+In-Reply-To: <4A56F55E.8010000@gmail.com>
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] Opie image compiles
+Message-Id: <200907101733.59059.marcin@juszkiewicz.com.pl>
+Subject: Re: [RFC] Updating stable patches in linux recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,45 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2009 11:23:36 -0000
-Content-Type: text/plain;charset=iso-8859-1
+X-List-Received-Date: Fri, 10 Jul 2009 15:47:35 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Zimler Attila Tam=E1s wrote:
-> I masked out all bluez4 recipe and it turned out that
-> DISTRO_BLUETOOTH_MANAGER is the source for the problem. When I changed
-> it from bluez4 to bluez-utils, opie-image compiles correctly. But this
-> change is in opposite direction as Koen changed it on 2009. march 31.
-> How should we solve this correctly?
+Dnia pi=C4=85tek, 10 lipca 2009 o 10:01:34 Marco Cavallini napisa=C5=82(a):
+
+> I still have some doubts
 >
-> I see two possible solution:
-> 1) The best would be to migrate opie-image to bluez4, for this I don't
-> know if softwares in opie-image are ready for bluez4.
-> 2) If the above is impossible then conditionally replace the
-> DISTRO_BLUETOOTH_MANAGER in opie-image to bluez-utils. But in this case
-> the possibility of forgetting old bluez-utils in opie-image after
-> softwares are ready for bluez4 still exists.
+> 1. how do you know who is responsible for each recipe, considering
+> that many of them haven't a proper header showing that.
 
-I am not yet clear on whether there are issues with using bluez4 together
-with Opie, I have not yet tested it (I imagine there probably are problem=
-s
-- help here would be very welcome). However I will state categorically
-that from what I have found checking through the recipes, nothing in Opie
-specifically requests bluez3 - it only depends on bluez-libs and
-bluez-utils. If bluez4 does not provide both of these then it needs to be
-fixed, or at least we should work out the changes to the Opie recipes tha=
-t
-are needed such that it correctly follows the version selected in the
-configuration.
+recipes/linux/linux_* recipes are generic ones and can be used by any=20
+machine basically. They are also suggested to be used for any new=20
+device.
 
-Allow me to rant for a second: this is not the first time that a change
-has been introduced into OE that causes severe breakage for other users,
-where the person(s) responsible for the change have shown little interest
-in sorting out the problems that they have caused. I would hope that
-everyone agrees that we should try to minimise (or at the very least
-explain clearly) the impact of such changes in the future.
+> 2. many recipes are often used by other recipes, how can you check
+> all possibilities?
 
-Kind regards,
-Paul
+recipes/linux/linux_*.bb are not used by other recipes as far as I know.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
