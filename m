@@ -1,41 +1,26 @@
-Received: from [209.85.132.242] (helo=an-out-0708.google.com)
+Received: from [66.39.3.87] (helo=wbm9.pair.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MPDz9-0008Kg-3B
+	(envelope-from <bluelightning@bluelightning.org>) id 1MPECQ-0005zH-A6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jul 2009 13:09:47 +0200
-Received: by an-out-0708.google.com with SMTP id c5so391083anc.42
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2009 03:56:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=bYRPqRXsa76bHHhitKg0qE6ycXzgILkr5WDjOp04Sgo=;
-	b=saBbvZLnR2MaV6OWDvCvX5nyz6BPL2hLkOA5AolD/uYSDaPhYyGTz7t7BVWMvp4Da3
-	hkVfhdrZ7OWuBfj1gc6A5Y17B7Wgk9SKR3v+26v+rEA+pQd0SK3/QxGWWyM43C//Ic7B
-	rnu0o5Qk2qgPpshmzLkixSHDIN9l2cGdY+AtY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=hCPoIRigVCIV4wuXUrp886zvhHP8CKMF0sqUSgu0fcynnE5sIFvEppt6uVZo9Q22qP
-	L8nLAOn2i3UtiVPpnbVqWzFEFIZtIIrjRmCw/ur5G6TYKlo6edlirZutt4m/AQVQ1RT6
-	D1iuSEX5yWf1BlZKVdDMkEviZ1OVZeM8Momxw=
+	Fri, 10 Jul 2009 13:23:31 +0200
+Received: by wbm9.pair.net (Postfix, from userid 65534)
+	id DAB5A88877; Fri, 10 Jul 2009 07:10:38 -0400 (EDT)
+Received: from 78.86.188.127 ([78.86.188.127])
+	(SquirrelMail authenticated user blueligh@bluelightning.org)
+	by webmail9.pair.com with HTTP; Fri, 10 Jul 2009 12:10:38 +0100 (BST)
+Message-ID: <3083.78.86.188.127.1247224238.squirrel@webmail9.pair.com>
+In-Reply-To: <4A56FEE3.3040604@hlfslinux.hu>
+References: <4A49FFF8.6020008@hlfslinux.hu>	<044601c9f9a6$6ef9ecd0$4cedc670$@Willis@Distant-earth.com>	<4A4A7A4C.2000409@hlfslinux.hu>	<200906302319.31632.bluelightning@bluelightning.org>
+	<4A56E022.9090705@hlfslinux.hu> <4A56FEE3.3040604@hlfslinux.hu>
+Date: Fri, 10 Jul 2009 12:10:38 +0100 (BST)
+From: "Paul Eggleton" <bluelightning@bluelightning.org>
+To: angstrom-distro-devel@linuxtogo.org
+User-Agent: SquirrelMail/1.4.5
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.100.231.8 with SMTP id d8mr2375967anh.196.1247223415399; Fri, 
-	10 Jul 2009 03:56:55 -0700 (PDT)
-In-Reply-To: <200907092009.28507.khimov@altell.ru>
-References: <be7a9f3d0907090612k3babae30h64d0424a4fe8dcc0@mail.gmail.com>
-	<200907091919.56858.khimov@altell.ru>
-	<be7a9f3d0907090834q3e1a57b2s6723e15b5f3a9fa6@mail.gmail.com>
-	<200907092009.28507.khimov@altell.ru>
-Date: Fri, 10 Jul 2009 07:56:55 -0300
-X-Google-Sender-Auth: 47850e019dd6d4a6
-Message-ID: <be7a9f3d0907100356y171913cjbfa203cd83a7b7b0@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFH] Stable qemu-native BROKEN
+X-Priority: 3 (Normal)
+Importance: Normal
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] Opie image compiles
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,21 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2009 11:09:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 Jul 2009 11:23:36 -0000
+Content-Type: text/plain;charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Zimler Attila Tam=E1s wrote:
+> I masked out all bluez4 recipe and it turned out that
+> DISTRO_BLUETOOTH_MANAGER is the source for the problem. When I changed
+> it from bluez4 to bluez-utils, opie-image compiles correctly. But this
+> change is in opposite direction as Koen changed it on 2009. march 31.
+> How should we solve this correctly?
+>
+> I see two possible solution:
+> 1) The best would be to migrate opie-image to bluez4, for this I don't
+> know if softwares in opie-image are ready for bluez4.
+> 2) If the above is impossible then conditionally replace the
+> DISTRO_BLUETOOTH_MANAGER in opie-image to bluez-utils. But in this case
+> the possibility of forgetting old bluez-utils in opie-image after
+> softwares are ready for bluez4 still exists.
 
-2009/7/9 Roman I Khimov <khimov@altell.ru>:
-> EXTRA_OECONF += "--target-list=arm-linux-user,arm-softmmu"
+I am not yet clear on whether there are issues with using bluez4 together
+with Opie, I have not yet tested it (I imagine there probably are problem=
+s
+- help here would be very welcome). However I will state categorically
+that from what I have found checking through the recipes, nothing in Opie
+specifically requests bluez3 - it only depends on bluez-libs and
+bluez-utils. If bluez4 does not provide both of these then it needs to be
+fixed, or at least we should work out the changes to the Opie recipes tha=
+t
+are needed such that it correctly follows the version selected in the
+configuration.
 
-I got it fixed without the workaround; it was a failure in the sid's
-toolchain, already fixed.
+Allow me to rant for a second: this is not the first time that a change
+has been introduced into OE that causes severe breakage for other users,
+where the person(s) responsible for the change have shown little interest
+in sorting out the problems that they have caused. I would hope that
+everyone agrees that we should try to minimise (or at the very least
+explain clearly) the impact of such changes in the future.
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Kind regards,
+Paul
 
 
