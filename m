@@ -1,24 +1,35 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.217.227] (helo=mail-gx0-f227.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MPIJz-0001gD-CI
-	for openembedded-devel@openembedded.org; Fri, 10 Jul 2009 17:47:35 +0200
-Received: (qmail 13268 invoked by uid 813007); 10 Jul 2009 15:34:42 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 10 Jul 2009 15:34:42 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Jul 2009 17:33:56 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
-	)
-References: <200907091522.22285.marcin@juszkiewicz.com.pl>
-	<200907091711.27475.marcin@juszkiewicz.com.pl>
-	<4A56F55E.8010000@gmail.com>
-In-Reply-To: <4A56F55E.8010000@gmail.com>
+	(envelope-from <otavio.salvador@gmail.com>) id 1MPKGm-0000XE-1C
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Jul 2009 19:52:24 +0200
+Received: by gxk27 with SMTP id 27so1588269gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jul 2009 10:39:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=kDbDswpQZaXjjP/0nBxARDGIxPwEXYamSD4x6ZhrYXc=;
+	b=GsHSep/+6odo5hraZktQVs3B32ZsDsQohpUFnGvs4uYkvUa5ppzVrNat7BCsd9fpgu
+	286kkob+HfsSPy7+m34x2lpYv2lCy6AQdzfHzUDd6CUoxr4gGHamAlqHrvaknRpw0aGv
+	t2Y5QXslTtR2XUaGZUeoItArjH5OrwdGI9hhs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	b=TFh4h6nlI/SYeDmeAKyeI3BvO7Gvi7pofqqV3YVmFTFo5WbCzCvwijdD/xyQYw8bqS
+	EYpR9v65ms01U3/zAp48KU2qeJiyPELcVrrTodpzBehjER7iH+33nSkgRlMOz71bCPv+
+	+BGJZ6t1QT/7SOFR0lNUMBM7ftothufu24lXU=
 MIME-Version: 1.0
-Message-Id: <200907101733.59059.marcin@juszkiewicz.com.pl>
-Subject: Re: [RFC] Updating stable patches in linux recipes
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.228.6 with SMTP id a6mr3020211anh.15.1247247559830; Fri, 
+	10 Jul 2009 10:39:19 -0700 (PDT)
+Date: Fri, 10 Jul 2009 14:39:19 -0300
+X-Google-Sender-Auth: 285f1107702e1ef4
+Message-ID: <be7a9f3d0907101039i6a58c3aeof2fc3e1f40d24dd0@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Mistakenly pushed changes without review, specially 6633c4c95a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,34 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2009 15:47:35 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Fri, 10 Jul 2009 17:52:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=C4=85tek, 10 lipca 2009 o 10:01:34 Marco Cavallini napisa=C5=82(a):
+Hello,
 
-> I still have some doubts
->
-> 1. how do you know who is responsible for each recipe, considering
-> that many of them haven't a proper header showing that.
+I did a push by mistake while preparing to send the request for review
+to the mailing list.
 
-recipes/linux/linux_* recipes are generic ones and can be used by any=20
-machine basically. They are also suggested to be used for any new=20
-device.
+I'm sorry by this :(
 
-> 2. many recipes are often used by other recipes, how can you check
-> all possibilities?
+I'm specially interested to know about 6633c4c95a. If people objects
+on it I can revert it but I think it is not necessary to revert it if
+people agrees with it.
 
-recipes/linux/linux_*.bb are not used by other recipes as far as I know.
+So could people ack on it or nack? In case of nacks, I revert it later today.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Sorry again,
 
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
