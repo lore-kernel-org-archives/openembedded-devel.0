@@ -1,26 +1,21 @@
-Received: from [209.85.219.223] (helo=mail-ew0-f223.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1MPNbn-0003T9-L3
+	(envelope-from <holger+oe@freyther.de>) id 1MPPYV-0001MN-2J
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jul 2009 23:26:19 +0200
-Received: by ewy23 with SMTP id 23so818403ewy.12
+	Sat, 11 Jul 2009 01:31:03 +0200
+Received: from tamarin.localnet (unknown [92.116.133.186])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 866051B10C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2009 14:13:23 -0700 (PDT)
-Received: by 10.210.142.6 with SMTP id p6mr2930561ebd.24.1247260402616;
-	Fri, 10 Jul 2009 14:13:22 -0700 (PDT)
-Received: from ?192.168.1.10? (94-193-93-235.zone7.bethere.co.uk
-	[94.193.93.235])
-	by mx.google.com with ESMTPS id 22sm3249725ewy.64.2009.07.10.14.13.21
-	(version=SSLv3 cipher=RC4-MD5); Fri, 10 Jul 2009 14:13:21 -0700 (PDT)
-From: Graeme Gregory <dp@xora.org.uk>
+	Fri, 10 Jul 2009 23:18:41 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <E1MPNOF-0006xK-2i@melo.openembedded.org>
-References: <E1MPNOF-0006xK-2i@melo.openembedded.org>
-Date: Fri, 10 Jul 2009 22:13:20 +0100
-Message-Id: <1247260400.3455.2.camel@xora-desktop.xora.org.uk>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 (2.26.2-1.fc11) 
-Subject: Re: [oe-commits] Graeme Gregory : Revert "base.bbclass: add support for machine configuration fallback"
+Date: Sat, 11 Jul 2009 01:17:31 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-2-generic; KDE/4.2.95; i686; ; )
+References: <fce2a370907011121k3d082889xc6910fda9c21aee4@mail.gmail.com>
+In-Reply-To: <fce2a370907011121k3d082889xc6910fda9c21aee4@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200907110117.32106.holger+oe@freyther.de>
+Subject: Re: Qt4 recipes and sql drivers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,26 +29,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2009 21:26:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 10 Jul 2009 23:31:04 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-07-10 at 21:12 +0000, git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 0b207488de111a97eabcaeefa9a904431407ecff
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=0b207488de111a97eabcaeefa9a904431407ecff
-> 
-> Author: Graeme Gregory <dp@xora.org.uk>
-> Date:   Fri Jul 10 22:11:52 2009 +0100
-> 
-> Revert "base.bbclass: add support for machine configuration fallback"
-> 
-> This reverts commit 6633c4c95a713bc365f5d87acc4a94621ed50034.
-> 
-Change totally broke parsing here!
+On Wednesday 01 July 2009 20:21:11 Ihar Hrachyshka wrote:
+> Hello guys!
+> For my work project, I need to use Qt with Postgres and possibly
+> Sqlite.
 
-Graeme
+Do you have a pg_config in your staging directory? For me the host pg_config is 
+used and my QtE build started to fail?
+
+z.
+
 
 
 
