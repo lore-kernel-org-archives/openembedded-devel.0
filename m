@@ -1,24 +1,24 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MPXEZ-0006VU-C4
-	for openembedded-devel@openembedded.org; Sat, 11 Jul 2009 09:42:59 +0200
-Received: (qmail 32591 invoked by uid 813007); 11 Jul 2009 07:30:02 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 11 Jul 2009 07:30:02 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <philb@gnu.org>) id 1MPY5a-0005GE-3W
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Jul 2009 10:37:46 +0200
+Received: from 88-109-135-155.dynamic.dsl.as9105.com ([88.109.135.155]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MPXt2-0002nY-Hz
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Jul 2009 09:24:48 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Jul 2009 09:29:53 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
-	)
+In-Reply-To: <1247272621-26730-2-git-send-email-msmith@cbnco.com>
 References: <1247272621-26730-1-git-send-email-msmith@cbnco.com>
-	<1247272621-26730-3-git-send-email-msmith@cbnco.com>
-	<h39dju$tfg$1@ger.gmane.org>
-In-Reply-To: <h39dju$tfg$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200907110929.56270.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH 3/4] hicolor-icon-theme: don't inherit gnome
+	<1247272621-26730-2-git-send-email-msmith@cbnco.com>
+Date: Sat, 11 Jul 2009 09:24:46 +0100
+Message-Id: <1247300686.16040.150.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH 2/4] xf86-video-vesa: add 2.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,27 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2009 07:42:59 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Sat, 11 Jul 2009 08:37:46 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 11 lipca 2009 o 09:05:34 Koen Kooi napisa=C5=82(a):
-> On 11-07-09 02:37, Michael Smith wrote:
-> > inherit autotools instead, so the theme doesn't end up depending
-> > on gconf and gnome-common.
->
-> NAK, it's dragging gnome for gtk-icon-cache.bbclass to update the
-> theme cache files, your change would break that.
+On Fri, 2009-07-10 at 20:36 -0400, Michael Smith wrote:
+>  conf/checksums.ini                                 |    4 ++++
+>  ...ideo-vesa_2.0.0.bb => xf86-video-vesa_2.2.0.bb} |    0
+>  2 files changed, 4 insertions(+), 0 deletions(-)
+>  copy recipes/xorg-driver/{xf86-video-vesa_2.0.0.bb => xf86-video-vesa_2.2.0.bb} (100%)
 
-So maybe it should inherit autotools and gtk-icon-cache?
+Thanks, I checked this in.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+p.
 
 
 
