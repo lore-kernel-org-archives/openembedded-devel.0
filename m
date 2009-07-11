@@ -1,33 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MPWr6-0000Mg-UH
-	for openembedded-devel@openembedded.org; Sat, 11 Jul 2009 09:18:44 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MPWeY-0006F4-99
-	for openembedded-devel@openembedded.org; Sat, 11 Jul 2009 07:05:46 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 11 Jul 2009 07:05:46 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 11 Jul 2009 07:05:46 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 11 Jul 2009 09:05:34 +0200
-Message-ID: <h39dju$tfg$1@ger.gmane.org>
-References: <1247272621-26730-1-git-send-email-msmith@cbnco.com>	<1247272621-26730-2-git-send-email-msmith@cbnco.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MPXEZ-0006VU-C4
+	for openembedded-devel@openembedded.org; Sat, 11 Jul 2009 09:42:59 +0200
+Received: (qmail 32591 invoked by uid 813007); 11 Jul 2009 07:30:02 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 11 Jul 2009 07:30:02 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 11 Jul 2009 09:29:53 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.31-rc1-00272-g404d6df; KDE/4.2.4; x86_64; ;
+	)
+References: <1247272621-26730-1-git-send-email-msmith@cbnco.com>
 	<1247272621-26730-3-git-send-email-msmith@cbnco.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090708 Shredder/3.0b3pre
-In-Reply-To: <1247272621-26730-3-git-send-email-msmith@cbnco.com>
-Sender: news <news@ger.gmane.org>
+	<h39dju$tfg$1@ger.gmane.org>
+In-Reply-To: <h39dju$tfg$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200907110929.56270.marcin@juszkiewicz.com.pl>
 Subject: Re: [PATCH 3/4] hicolor-icon-theme: don't inherit gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,20 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2009 07:18:45 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 11 Jul 2009 07:42:59 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On 11-07-09 02:37, Michael Smith wrote:
-> inherit autotools instead, so the theme doesn't end up depending
-> on gconf and gnome-common.
+Dnia sobota, 11 lipca 2009 o 09:05:34 Koen Kooi napisa=C5=82(a):
+> On 11-07-09 02:37, Michael Smith wrote:
+> > inherit autotools instead, so the theme doesn't end up depending
+> > on gconf and gnome-common.
+>
+> NAK, it's dragging gnome for gtk-icon-cache.bbclass to update the
+> theme cache files, your change would break that.
 
-NAK, it's dragging gnome for gtk-icon-cache.bbclass to update the theme 
-cache files, your change would break that.
+So maybe it should inherit autotools and gtk-icon-cache?
 
-regards,
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Koen
 
 
 
