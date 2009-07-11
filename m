@@ -1,24 +1,26 @@
 Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MPY5a-0005GE-3W
+	(envelope-from <pb@reciva.com>) id 1MPY5s-0005Gl-FY
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Jul 2009 10:37:46 +0200
+	Sat, 11 Jul 2009 10:38:04 +0200
 Received: from 88-109-135-155.dynamic.dsl.as9105.com ([88.109.135.155]
 	helo=[192.168.2.154])
 	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MPXt2-0002nY-Hz
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MPXtL-0002ni-8v
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Jul 2009 09:24:48 +0100
-From: Phil Blundell <philb@gnu.org>
+	Sat, 11 Jul 2009 09:25:07 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1247272621-26730-2-git-send-email-msmith@cbnco.com>
+In-Reply-To: <1247272621-26730-4-git-send-email-msmith@cbnco.com>
 References: <1247272621-26730-1-git-send-email-msmith@cbnco.com>
 	<1247272621-26730-2-git-send-email-msmith@cbnco.com>
-Date: Sat, 11 Jul 2009 09:24:46 +0100
-Message-Id: <1247300686.16040.150.camel@lenovo.internal.reciva.com>
+	<1247272621-26730-3-git-send-email-msmith@cbnco.com>
+	<1247272621-26730-4-git-send-email-msmith@cbnco.com>
+Date: Sat, 11 Jul 2009 09:25:05 +0100
+Message-Id: <1247300706.16040.152.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH 2/4] xf86-video-vesa: add 2.2.0
+Subject: Re: [PATCH 4/4] xf86-video-intel: add 2.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,17 +34,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2009 08:37:46 -0000
+X-List-Received-Date: Sat, 11 Jul 2009 08:38:04 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-07-10 at 20:36 -0400, Michael Smith wrote:
+On Fri, 2009-07-10 at 20:37 -0400, Michael Smith wrote:
 >  conf/checksums.ini                                 |    4 ++++
->  ...ideo-vesa_2.0.0.bb => xf86-video-vesa_2.2.0.bb} |    0
+>  ...deo-i810_1.7.4.bb => xf86-video-intel_2.6.3.bb} |    0
 >  2 files changed, 4 insertions(+), 0 deletions(-)
->  copy recipes/xorg-driver/{xf86-video-vesa_2.0.0.bb => xf86-video-vesa_2.2.0.bb} (100%)
+>  copy recipes/xorg-driver/{xf86-video-i810_1.7.4.bb => xf86-video-intel_2.6.3.bb} (100%)
 
-Thanks, I checked this in.
+Thanks for the patch.  I checked this in.
 
 p.
 
