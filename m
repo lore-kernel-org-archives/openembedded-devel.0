@@ -1,35 +1,31 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1MQ6Vl-0004SN-3j
+	(envelope-from <msmith@cbnco.com>) id 1MQ6XQ-0004X9-Va
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Jul 2009 23:23:05 +0200
+	Sun, 12 Jul 2009 23:24:49 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 147CB506B8D;
-	Sun, 12 Jul 2009 17:09:58 -0400 (EDT)
+	by smtp.cbnco.com (Postfix) with ESMTP id 05C615074BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 12 Jul 2009 17:11:42 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 22254-04; Sun, 12 Jul 2009 17:09:58 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id E861C506DE7; Sun, 12 Jul 2009 17:09:57 -0400 (EDT)
-X-Spam-Score: 
-X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 08F52506B8D;
-	Sun, 12 Jul 2009 17:09:55 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id F0B3C416FD; Sun, 12 Jul 2009 17:09:54 -0400 (EDT)
+	with ESMTP id 22254-10 for <openembedded-devel@lists.openembedded.org>; 
+	Sun, 12 Jul 2009 17:11:41 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id DB1255061E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 12 Jul 2009 17:11:41 -0400 (EDT)
+Date: Sun, 12 Jul 2009 17:11:41 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Jul 2009 17:09:53 -0400
-Message-Id: <1247432993-31708-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-In-Reply-To: <Pine.LNX.4.64.0907121701300.3621@juice.ott.cti.com>
-References: <Pine.LNX.4.64.0907121701300.3621@juice.ott.cti.com>
+In-Reply-To: <1247428960.24399.6.camel@port4>
+Message-ID: <Pine.LNX.4.64.0907121710150.3621@juice.ott.cti.com>
+References: <1247149089-23480-1-git-send-email-msmith@cbnco.com>
+	<1247428960.24399.6.camel@port4>
+MIME-Version: 1.0
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH v2] hicolor-icon-theme: don't inherit gnome
+Subject: Re: [PATCH] openssh.inc: cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Jul 2009 21:23:06 -0000
+X-List-Received-Date: Sun, 12 Jul 2009 21:24:49 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-inherit autotools and gtk-icon-cache instead, so the theme doesn't
-depend on gconf.
+On Sun, 12 Jul 2009, GNUtoo wrote:
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- .../hicolor-icon-theme/hicolor-icon-theme_0.10.bb  |    6 +++++-
- 1 files changed, 5 insertions(+), 1 deletions(-)
+> On Thu, 2009-07-09 at 10:18 -0400, Michael Smith wrote:
 
-diff --git a/recipes/hicolor-icon-theme/hicolor-icon-theme_0.10.bb b/recipes/hicolor-icon-theme/hicolor-icon-theme_0.10.bb
-index a1cb41b..db13279 100644
---- a/recipes/hicolor-icon-theme/hicolor-icon-theme_0.10.bb
-+++ b/recipes/hicolor-icon-theme/hicolor-icon-theme_0.10.bb
-@@ -1,6 +1,10 @@
- SECTION = "unknown"
- LICENSE = "GPL"
--inherit gnome
-+inherit autotools gtk-icon-cache
-+
-+# Override RDEPENDS = hicolor-icon-theme from gtk-icon-cache
-+RDEPENDS = ""
-+RDEPENDS_${PN} = ""
- 
- SRC_URI = "http://icon-theme.freedesktop.org/releases/${P}.tar.gz"
- 
--- 
-1.6.3
+> > Tested with 5.2p1.
 
+> Did you test it at runtime?
+> if so maybe we should remove that line(that was added because I didn't
+> have time to test it extensively I only tested the ssh client...):
+> DEFAULT_PREFERENCE = "-1" 
+> in 5.2p1
+
+Yes, I've been using the client, server, keygen and scp on x86.
+
+I needed the second patch from here to remove some whining about 
+setlogin() from syslog.
+
+http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/glibc_tweaks/
+
+Mike
 
 
