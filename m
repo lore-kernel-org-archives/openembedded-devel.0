@@ -1,31 +1,31 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MQ6XQ-0004X9-Va
+	(envelope-from <msmith@cbnco.com>) id 1MQ7DO-0005xA-Jm
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Jul 2009 23:24:49 +0200
+	Mon, 13 Jul 2009 00:08:11 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 05C615074BB
+	by smtp.cbnco.com (Postfix) with ESMTP id 40387507934
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jul 2009 17:11:42 -0400 (EDT)
+	Sun, 12 Jul 2009 17:55:03 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 22254-10 for <openembedded-devel@lists.openembedded.org>; 
-	Sun, 12 Jul 2009 17:11:41 -0400 (EDT)
+	with ESMTP id 25262-01 for <openembedded-devel@lists.openembedded.org>; 
+	Sun, 12 Jul 2009 17:55:03 -0400 (EDT)
 Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id DB1255061E8
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 0CF1A5069F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jul 2009 17:11:41 -0400 (EDT)
-Date: Sun, 12 Jul 2009 17:11:41 -0400 (EDT)
+	Sun, 12 Jul 2009 17:55:03 -0400 (EDT)
+Date: Sun, 12 Jul 2009 17:55:02 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
 X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1247428960.24399.6.camel@port4>
-Message-ID: <Pine.LNX.4.64.0907121710150.3621@juice.ott.cti.com>
-References: <1247149089-23480-1-git-send-email-msmith@cbnco.com>
-	<1247428960.24399.6.camel@port4>
+In-Reply-To: <be7a9f3d0907111340p20b792ecod3874d59a8a0f183@mail.gmail.com>
+Message-ID: <Pine.LNX.4.64.0907121752260.3621@juice.ott.cti.com>
+References: <4A5788F3.2080805@cbnco.com>
+	<be7a9f3d0907111340p20b792ecod3874d59a8a0f183@mail.gmail.com>
 MIME-Version: 1.0
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH] openssh.inc: cleanup
+Subject: Re: Building xserver-xorg 1.6.1 for i686: libtool error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,27 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Jul 2009 21:24:49 -0000
+X-List-Received-Date: Sun, 12 Jul 2009 22:08:14 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Sun, 12 Jul 2009, GNUtoo wrote:
+On Sat, 11 Jul 2009, Otavio Salvador wrote:
 
-> On Thu, 2009-07-09 at 10:18 -0400, Michael Smith wrote:
+> http://lists.freedesktop.org/archives/xorg/2009-May/045835.html
+> 
+> Above goes the patch we have sent for inclusion on dolt GIT. I'll
+> pester upstream about it again ;-)
 
-> > Tested with 5.2p1.
+Thanks! In the meantime I'll update the 1.6.1 recipe to use your patch.
 
-> Did you test it at runtime?
-> if so maybe we should remove that line(that was added because I didn't
-> have time to test it extensively I only tested the ssh client...):
-> DEFAULT_PREFERENCE = "-1" 
-> in 5.2p1
-
-Yes, I've been using the client, server, keygen and scp on x86.
-
-I needed the second patch from here to remove some whining about 
-setlogin() from syslog.
-
-http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/glibc_tweaks/
+BTW, there's a separate dolt mailing list 
+(http://lists.freedesktop.org/mailman/listinfo/dolt). Maybe the dolt
+maintainer lurks there but not on xorg...
 
 Mike
 
