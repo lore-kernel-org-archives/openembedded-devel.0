@@ -1,29 +1,35 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [209.85.132.248] (helo=an-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1MQ2dj-00031h-QV
-	for Openembedded-devel@lists.openembedded.org;
-	Sun, 12 Jul 2009 19:15:05 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id B2DF52C9FF
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jul 2009 17:01:17 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0W9su5HfNwNG
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jul 2009 17:01:16 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id E363C2C829
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jul 2009 17:01:15 +0000 (UTC)
-Message-ID: <4A5A1705.5050302@gmail.com>
-Date: Sun, 12 Jul 2009 19:01:57 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MQ3n7-0007po-6w
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Jul 2009 20:28:49 +0200
+Received: by an-out-0708.google.com with SMTP id c5so966273anc.42
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 12 Jul 2009 11:15:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=+gIJ4ATAhjCxZyua/g4OH3UZxcjxp4lCjvqtdyl7o3c=;
+	b=AsvRRWGnTBqYkwLK/Ba1XaGQb7ZL3FjTihq8Qn5PCQcbyuXwTyfa2wB+7UBlFTvx8B
+	D5sOHF5QH5XCtaj6YVAmXhK57I6P1r3AaW/JqdtykjnPMr7cGs5z64KEIvGBVorLizSX
+	pn2yeL0lHZZT+MPeIDEpBak4HzxKH0b7vXzsg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Lje6AThx560gKs6EqVHvViVZXFaADm9K7BZgPfEchh2zB5qTFNq18iFChfRQof9w6b
+	G2mj+S2O6fBW5rrVLmh1aGazqDmGI1yBpHaqDsUa9/txYdgC6vSiwNA2/rZ/22uauND3
+	SV3Chibl4HrnimxsEMuJNk3eYJhafpcTPXC7g=
 MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-Subject: Using git tags with OE
+Received: by 10.231.33.137 with SMTP id h9mr846951ibd.15.1247422542637; Sun, 
+	12 Jul 2009 11:15:42 -0700 (PDT)
+In-Reply-To: <4A5A1705.5050302@gmail.com>
+References: <4A5A1705.5050302@gmail.com>
+Date: Sun, 12 Jul 2009 20:15:42 +0200
+Message-ID: <c384c5ea0907121115p4d30e756he86bba75c66cc9e5@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Using git tags with OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Jul 2009 17:15:10 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 12 Jul 2009 18:28:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
 Hello,
-anybody knows if is possible to use git tags with OE ?
 
-I'd like to tag a patch (SHA-1) identifying a particular 'state of the
-art' like it was a 'stable' version.
-At the moment I save the last patch SHA-1 and I use it as reference.
-For example if I successfully build just now a particular version, then
-I tag it mck-0.0.1 into OE so everybody can refer to such tag in the futu=
-re.
+On Sun, Jul 12, 2009 at 7:01 PM, Marco Cavallini<koansoftware@gmail.com> wrote:
+> Hello,
+> anybody knows if is possible to use git tags with OE ?
+>
+> I'd like to tag a patch (SHA-1) identifying a particular 'state of the
+> art' like it was a 'stable' version.
+> At the moment I save the last patch SHA-1 and I use it as reference.
+> For example if I successfully build just now a particular version, then
+> I tag it mck-0.0.1 into OE so everybody can refer to such tag in the future.
+>
+> I thought it could be a good idea, what do you think?
+>
+Hmm, I think it would clutter up too much.
 
-I thought it could be a good idea, what do you think?
+And if we use it, the tag should be self-describing.
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=FCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+If you built a particular version succesfully, it doesn't mean someone
+else also can build that version
+succesfully; anything outside GIT is also a dependence for a succesful build.
+
+For example, today we have some packages that sometimes break a build
+(probably due to a race condition).
+
+I'ld say, keep with the commit hash for a known-good-build.
+
+Regards,
+-- 
+Leon
 
 
