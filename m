@@ -1,24 +1,34 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MQCsI-0007dv-Pw
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Jul 2009 06:10:46 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KMP00JV0CBE6FU1@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	12 Jul 2009 22:57:20 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5A84114AF5F; Sun,
-	12 Jul 2009 23:57:13 -0400 (EDT)
-Date: Sun, 12 Jul 2009 23:57:13 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090713035713.GA21203@denix.org>
-References: <200907121334.38852.raj.khem@gmail.com>
-MIME-version: 1.0
-In-reply-to: <200907121334.38852.raj.khem@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: e2fsprogs-libs build failure analysis
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MQG8g-000254-NY
+	for openembedded-devel@openembedded.org; Mon, 13 Jul 2009 09:39:54 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MQFvw-0004dL-Mf
+	for openembedded-devel@openembedded.org; Mon, 13 Jul 2009 07:26:44 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 13 Jul 2009 07:26:44 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 13 Jul 2009 07:26:44 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 13 Jul 2009 09:26:32 +0200
+Message-ID: <h3enj9$3t3$1@ger.gmane.org>
+References: <1247272621-26730-1-git-send-email-msmith@cbnco.com>	<1247272621-26730-2-git-send-email-msmith@cbnco.com>	<1247272621-26730-3-git-send-email-msmith@cbnco.com>	<h39dju$tfg$1@ger.gmane.org>
+	<Pine.LNX.4.64.0907121701300.3621@juice.ott.cti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090708 Shredder/3.0b3pre
+In-Reply-To: <Pine.LNX.4.64.0907121701300.3621@juice.ott.cti.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH 3/4] hicolor-icon-theme: don't inherit gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,117 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2009 04:10:47 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 13 Jul 2009 07:39:54 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Jul 12, 2009 at 01:34:34PM -0700, Khem Raj wrote:
-> Hi
-> 
-> Like many others I was also getting this problem reported on this mailing list in past 
-> 
-> http://article.gmane.org/gmane.comp.handhelds.openembedded/24445/match=e2fsprogs+libs
-> 
-> I looked a bit into this and the problem is that PN gets overwritten when 
-> do_package_write_ipk -> read_subpackage_metadata 
+On 12-07-09 23:05, Michael Smith wrote:
+> On Sat, 11 Jul 2009, Koen Kooi wrote:
 
-Khem,
+> I'm also setting RDEPENDS_${PN} = "" because I think the RDEPENDS in
+> gtk-icon-cache should probably be RDEPENDS_${PN},
 
-Have you seen this thread several months ago with the same analysis:
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/22376/focus=22556
+it indeed should be RDEPENDS_${PN}
 
-As I said before, pkgdata/runtime handling needs fixing - if multiple recipes 
-(or even target vs. native/sdk of the same package, like it was with curl) 
-provide the identically named .so library (libblkid in this case) during the 
-build, there may be a conflict in the pkgdata/runtime files.
+regards,
 
-What are the pkgdata files are used for ultimately? Do they need to contain 
-PN/PV/PR? That was introduced by the commit mentioned in the thread above... 
-Should it be reverted?
-
-Lets ask Richard - he made this change in Poky, maybe he has a better fix for 
-it... :)
-
--- 
-Denys
-
-> this loop below reads the subpkgdata also reads PV PN and PR which are then overwritten
-> by bb.data.setVar(key, sdata[key], d)
-> 
->        for pkg in bb.data.getVar('PACKAGES', d, 1).split():
->                 sdata = read_subpkgdata(pkg, d)
->                 for key in sdata.keys():
->                         bb.data.setVar(key, sdata[key], d)
-> 
-> 
-> when this loop exits the last subpackage it read is build/eglibc/omap5912osk/pkgdata/armv5te-angstrom-linux-gnueabi/runtime/libblkid
-> 
-> which says that PN is util-linux-ng
-> and this value of PN is updated last into the bb.data for e2fsprogs-libs
-> so when do_package_ipk () is called it wants to get WORKDIR
-> 
-> workdir = bb.data.getVar('WORKDIR', d, 1)
-> 
-> but WORKDIR consits of PN PV and PR so it calculates it wrongly
-> 
-> So I think problem is caused because of emitting PV, PN and PR into pkgdata files
-> which is then read and updated into bb.data
-> 
-> I added a workaround in base.bbclass
-> 
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index bc50c67..5eefdb7 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -1090,7 +1090,9 @@ def read_pkgdata(pn, d):
->  python read_subpackage_metadata () {
->         import bb
->         data = read_pkgdata(bb.data.getVar('PN', d, 1), d)
-> -
-> +       pn = bb.data.getVar('PN', d, 1)
-> +       pv = bb.data.getVar('PV', d, 1)
-> +       pr = bb.data.getVar('PR', d, 1)
->         for key in data.keys():
->                 bb.data.setVar(key, data[key], d)
-> 
-> @@ -1098,6 +1100,9 @@ python read_subpackage_metadata () {
->                 sdata = read_subpkgdata(pkg, d)
->                 for key in sdata.keys():
->                         bb.data.setVar(key, sdata[key], d)
-> +       bb.data.setVar('PN', pn, d)
-> +       bb.data.setVar('PV', pv, d)
-> +       bb.data.setVar('PR', pr, d)
->  }
-> 
-> 
-> and it works now but I feel this is not the right fix. 
-> 
-> util-linux-ng.inc has
-> 
-> PACKAGES_DYNAMIC = "libblkid*"
-> 
-> and e2fsprogs-libs.inc has
-> 
-> do_stage () {
->         for i in libcom_err libss libuuid libblkid; do
->                 oe_libinstall -a -C lib $i ${STAGING_LIBDIR}
-> .....
-> }
-> 
-> probably this also needs some thought.
-> 
-> Thanks
-> 
-> -Khem
-> 
-> 
-
-
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Koen
 
 
 
