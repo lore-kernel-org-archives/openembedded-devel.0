@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MQKNt-00080S-Eg
-	for openembedded-devel@openembedded.org; Mon, 13 Jul 2009 14:11:53 +0200
-Received: (qmail 23667 invoked by uid 1003); 13 Jul 2009 11:58:40 -0000
+	(envelope-from <philip@balister.org>) id 1MQKOX-00081Z-0n
+	for openembedded-devel@openembedded.org; Mon, 13 Jul 2009 14:12:33 +0200
+Received: (qmail 7735 invoked by uid 1003); 13 Jul 2009 11:59:20 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 Jul 2009 11:58:39 -0000
-Message-ID: <4A5B216E.6050105@balister.org>
-Date: Mon, 13 Jul 2009 07:58:38 -0400
+	by mail.geekisp.com with SMTP; 13 Jul 2009 11:59:19 -0000
+Message-ID: <4A5B2195.9050101@balister.org>
+Date: Mon, 13 Jul 2009 07:59:17 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1247207049-7291-1-git-send-email-k.kooi@student.utwente.nl>
-	<h3f65f$f0j$2@ger.gmane.org>
-In-Reply-To: <h3f65f$f0j$2@ger.gmane.org>
-Subject: Re: [STABLE][PATCH] opkg*: bump to r215 to fix segfaults on upgrade
+References: <1247173768-5707-1-git-send-email-k.kooi@student.utwente.nl>
+	<h3f654$f0j$1@ger.gmane.org>
+In-Reply-To: <h3f654$f0j$1@ger.gmane.org>
+Subject: Re: [STABLE][PATCH] julius: add 4.1.2 of julius speech	recognizer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,48 +29,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2009 12:11:53 -0000
-X-Groupsio-MsgNum: 11902
+X-List-Received-Date: Mon, 13 Jul 2009 12:12:33 -0000
+X-Groupsio-MsgNum: 11903
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms010105060601010006000408"
+	micalg=sha1; boundary="------------ms060205060308010103020608"
 
---------------ms010105060601010006000408
+--------------ms060205060308010103020608
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister <philip@balister.org>
 
 Koen Kooi wrote:
-> On 10-07-09 08:24, Koen Kooi wrote:
+> On 09-07-09 23:09, Koen Kooi wrote:
 >> From: Koen Kooi<koen@openembedded.org>
 > 
 > ping
+> 
 > 
 >>
 >>
 >> Signed-off-by: Koen Kooi<koen@openembedded.org>
 >> ---
->>   conf/distro/include/sane-srcrevs.inc |    6 +++---
->>   1 files changed, 3 insertions(+), 3 deletions(-)
+>>   conf/checksums.ini             |    4 ++
+>>   recipes/julius/julius_4.1.2.bb |   63 
+>> ++++++++++++++++++++++++++++++++++++++++
+>>   2 files changed, 67 insertions(+), 0 deletions(-)
+>>   create mode 100644 recipes/julius/julius_4.1.2.bb
 >>
->> diff --git a/conf/distro/include/sane-srcrevs.inc 
->> b/conf/distro/include/sane-srcrevs.inc
->> index 6369462..7116c22 100644
->> --- a/conf/distro/include/sane-srcrevs.inc
->> +++ b/conf/distro/include/sane-srcrevs.inc
->> @@ -185,9 +185,9 @@ SRCREV_pn-openmoko-toolchain-scripts ?= "4913"
->>   SRCREV_pn-openmoko-worldclock2 ?= "3365"
->>   SRCREV_pn-openocd ?= "517"
->>   SRCREV_pn-openocd-native ?= "517"
->> -SRCREV_pn-opkg ?= "209"
->> -SRCREV_pn-opkg-native ?= "209"
->> -SRCREV_pn-opkg-sdk ?= "209"
->> +SRCREV_pn-opkg ?= "215"
->> +SRCREV_pn-opkg-native ?= "215"
->> +SRCREV_pn-opkg-sdk ?= "215"
->>   SRCREV_pn-opkg-utils ?= "4578"
->>   SRCREV_pn-opkg-utils-native ?= "4595"
->>   SRCREV_pn-oprofileui ?= "173"
+>> diff --git a/conf/checksums.ini b/conf/checksums.ini
+>> index bb1224c..152afb1 100644
+>> --- a/conf/checksums.ini
+>> +++ b/conf/checksums.ini
+>> @@ -11338,6 +11338,10 @@ 
+>> sha256=bc4f62cbac4716c2c1a25cf53b73343a03883964576d9dd590a9e4c7a70f465a
+>>   md5=a746183ea41aebc27a0f771036f668e1
+>>   sha256=1b8f50169bc2d827c6efe6bc98bbef2161f615219e4e8921e68227888fd50a9e
+>>
+>> +[http://iij.dl.sourceforge.jp/julius/37582/julius-4.1.2.tar.gz]
+>> +md5=886a114b391aa1992567019213efc63e
+>> +sha256=542c7f1042679c8484dc2f5f5536ed0c79fa79b2b9dd6cf6881278a6fdb37a84
+>> +
+>>   [http://osdn.dl.sourceforge.jp/julius/37582/julius-4.1.2.tar.gz]
+>>   md5=886a114b391aa1992567019213efc63e
+>>   sha256=542c7f1042679c8484dc2f5f5536ed0c79fa79b2b9dd6cf6881278a6fdb37a84
+>> diff --git a/recipes/julius/julius_4.1.2.bb 
+>> b/recipes/julius/julius_4.1.2.bb
+>> new file mode 100644
+>> index 0000000..d528357
+>> --- /dev/null
+>> +++ b/recipes/julius/julius_4.1.2.bb
+>> @@ -0,0 +1,63 @@
+>> +DESCRIPTION = "Julius is a high-performance, two-pass large 
+>> vocabulary continuous speech recognition (LVCSR) decoder software for 
+>> speech-related researchers and developers."
+>> +LICENSE = "julius"
+>> +DEPENDS = "libsndfile1 flex zlib alsa-lib"
+>> +
+>> +SRC_URI = 
+>> "http://iij.dl.sourceforge.jp/julius/37582/julius-${PV}.tar.gz"
+>> +
+>> +inherit autotools
+>> +
+>> +TARGET_CC_ARCH += "${LDFLAGS}"
+>> +
+>> +EXTRA_OECONF = "--with-mictype=alsa --enable-julian"
+>> +
+>> +do_configure() {
+>> +    libtoolize --force
+>> +    gnu-configize
+>> +    oe_runconf
+>> +}
+>> +
+>> +do_install() {
+>> +    export prefix=${D}${prefix}
+>> +    export libdir=${D}${libdir}
+>> +    export bindir=${D}${bindir}
+>> +    export includedir=${D}${includedir}
+>> +    export mandir=${D}${mandir}
+>> +    export exec_prefix=${D}${exec_prefix}
+>> +    export datadir=${D}${datadir}
+>> +
+>> +    for i in libsent libjulius julius mkbingram mkbinhmm adinrec 
+>> adintool mkgshmm mkss jcontrol generate-ngram jclient-perl man ; do
+>> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g  -e s:\ /usr/share:\ 
+>> \$\{datadir\}:g ${S}/$i/Makefile   
+>> +        cd ${S}/$i
+>> +        oe_runmake -e install
+>> +    done
+>> +
+>> +    for i in mkdfa/mkfa-1.44-flex mkdfa dfa_minimize generate 
+>> accept_check nextword yomi2voca gram2sapixml dfa_determinize ; do
+>> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g 
+>> ${S}/gramtools/$i/Makefile
+>> +        cd ${S}/gramtools/$i
+>> +        oe_runmake -e install
+>> +    done
+>> +
+>> +    for i in ${D}${bindir}/*.pl ; do
+>> +        sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
+>> +        echo sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i>>  
+>> /tmp/k
+>> +    done
+>> +}
+>> +
+>> +do_stage() {
+>> +    export libdir=${STAGING_LIBDIR}
+>> +    export bindir=${STAGING_BINDIR}
+>> +    export includedir=${STAGING_INCDIR}
+>> +    export datadir=${STAGING_DATADIR}
+>> +
+>> +    for i in libsent libjulius julius mkbingram mkbinhmm adinrec 
+>> adintool mkgshmm mkss jcontrol generate-ngram jclient-perl man ; do
+>> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g  -e s:\ /usr/share:\ 
+>> \$\{datadir\}:g ${S}/$i/Makefile
+>> +        cd ${S}/$i
+>> +        oe_runmake -e install
+>> +    done
+>> +
+>> +    for i in mkdfa/mkfa-1.44-flex mkdfa dfa_minimize generate 
+>> accept_check nextword yomi2voca gram2sapixml dfa_determinize ; do
+>> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g 
+>> ${S}/gramtools/$i/Makefile
+>> +        cd ${S}/gramtools/$i
+>> +        oe_runmake -e install
+>> +    done
+>> +}
 > 
 > 
 > 
@@ -80,7 +164,7 @@ Koen Kooi wrote:
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 > 
 
---------------ms010105060601010006000408
+--------------ms060205060308010103020608
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -132,17 +216,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDcxMzEx
-NTgzOVowIwYJKoZIhvcNAQkEMRYEFDi0dwCufXq0OU/jk3flQiqT0L9gMFIGCSqGSIb3DQEJDzFF
+NTkxN1owIwYJKoZIhvcNAQkEMRYEFCeYf7nkXNIFFne9uTsBJolEb6NtMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAj++0vW9HCJ3nkwqsLkPnSDzHhBYpe1A/Q1mRK0HPYcvH5g2ht
-6ozG6bKoRdOF4YoFINW8oAkCeHzpYtYPaTbikKSMP78K85Ovv0O7/N94/asPZL7yMQfVYja7DoU5
-PGnxocUtkFkYElUFnfzQMzf0k4tvi11Op1w28hcLPP079l/BSSa5ucWLNZE3zPPjkT6mgbxjRgJW
-pSfgvuTXR6Qad0EXhzyvr9WV71viI2JEep20twHkU4t4h4KBIxYCZbo8cYsnqKfG3qGorB1bFisb
-+PusirC3u38QMCVh4kouhMQrBBFNPAKzTC0lnKqefsRfDwy6Fr1YUl2j7ZFsaJ52AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQCx8h3r3hmjjpuw2fazFwjIFShYCNtSScNERq0sKZB1OmAH6XDM
+YhsQnSmtPeL2M5D94GyT4cJvy5d00O09fEHea/6/WQiNlcJ5rhH6UDzk59aimTlWOFxOaoU8LCNO
+ah6PWoTvTH/sMglrf0MRPeClZJL+ftck7LY4vZW9GYX28gM5k6r7adXno9oUf+nJHVWgY/b5YEUE
+Q8/cAVtALzOkfaTA74sgnJNYzxo88ziPn6tVL/eoM/YWY2UOAQ1iodlQRE/Xy7lv0w53xJ4f7C1p
+vPbrOuAslI0wH60EudiH0eaX1yxrKA8y+iELd0RmS/2IlNbOzq2CKnbWrwMgoPBaAAAAAAAA
 
---------------ms010105060601010006000408--
+--------------ms060205060308010103020608--
