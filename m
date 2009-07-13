@@ -1,21 +1,32 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.212.182] (helo=mail-vw0-f182.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MQKOX-00081Z-0n
-	for openembedded-devel@openembedded.org; Mon, 13 Jul 2009 14:12:33 +0200
-Received: (qmail 7735 invoked by uid 1003); 13 Jul 2009 11:59:20 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 Jul 2009 11:59:19 -0000
-Message-ID: <4A5B2195.9050101@balister.org>
-Date: Mon, 13 Jul 2009 07:59:17 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <cliff.brake@gmail.com>) id 1MQNn4-0004AG-Oj
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Jul 2009 17:50:07 +0200
+Received: by vwj12 with SMTP id 12so294646vwj.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Jul 2009 08:36:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=p210o8O2ifWsCiug+hwXv+qn2wnCg+ZRwOwz5iOHGrQ=;
+	b=tIswPsaaiV7TSFydSpVvo0kJn6tAZ6kgjaQfWUvyaZXFCFmKYl3Rzi+mX/8xM6W8JN
+	2xqskpbySc3LFP1EerItMxyVvgFtRrYoF852zGWlBKsKedE+JIqyIIHADlrXSLw9OeaS
+	tkFlHx6uO++A1DuRXdBcxf4vGzqa9jhycpH/0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=bSogS5JcNPhcv60RQOUFKj850bn+DgiQkZGhbvF98TBDYvRqnJ5jt+EsGiwfx2VyuI
+	+X9SapR4Smm6SALJzUWR8+B+untQTmtfOA5iu8DvZXhFjxAcQNRYxn3lyaZk/y3HABls
+	QeQhkFuJdh3OI8Bgh10rgr4T29wRZT7vaSWGc=
 MIME-Version: 1.0
+Received: by 10.150.158.21 with SMTP id g21mr8359065ybe.46.1247499411952; Mon, 
+	13 Jul 2009 08:36:51 -0700 (PDT)
+Date: Mon, 13 Jul 2009 11:36:51 -0400
+Message-ID: <f96d234e0907130836y530c759dk9f16f8714d9e95e6@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1247173768-5707-1-git-send-email-k.kooi@student.utwente.nl>
-	<h3f654$f0j$1@ger.gmane.org>
-In-Reply-To: <h3f654$f0j$1@ger.gmane.org>
-Subject: Re: [STABLE][PATCH] julius: add 4.1.2 of julius speech	recognizer
+Subject: OE weekly changelog 2009-07-06 to 2009-07-13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,204 +40,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2009 12:12:33 -0000
-X-Groupsio-MsgNum: 11903
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060205060308010103020608"
-
---------------ms060205060308010103020608
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 13 Jul 2009 15:50:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Acked-by: Philip Balister <philip@balister.org>
+OE weekly changelog 2009-07-06 to 2009-07-13
 
-Koen Kooi wrote:
-> On 09-07-09 23:09, Koen Kooi wrote:
->> From: Koen Kooi<koen@openembedded.org>
-> 
-> ping
-> 
-> 
->>
->>
->> Signed-off-by: Koen Kooi<koen@openembedded.org>
->> ---
->>   conf/checksums.ini             |    4 ++
->>   recipes/julius/julius_4.1.2.bb |   63 
->> ++++++++++++++++++++++++++++++++++++++++
->>   2 files changed, 67 insertions(+), 0 deletions(-)
->>   create mode 100644 recipes/julius/julius_4.1.2.bb
->>
->> diff --git a/conf/checksums.ini b/conf/checksums.ini
->> index bb1224c..152afb1 100644
->> --- a/conf/checksums.ini
->> +++ b/conf/checksums.ini
->> @@ -11338,6 +11338,10 @@ 
->> sha256=bc4f62cbac4716c2c1a25cf53b73343a03883964576d9dd590a9e4c7a70f465a
->>   md5=a746183ea41aebc27a0f771036f668e1
->>   sha256=1b8f50169bc2d827c6efe6bc98bbef2161f615219e4e8921e68227888fd50a9e
->>
->> +[http://iij.dl.sourceforge.jp/julius/37582/julius-4.1.2.tar.gz]
->> +md5=886a114b391aa1992567019213efc63e
->> +sha256=542c7f1042679c8484dc2f5f5536ed0c79fa79b2b9dd6cf6881278a6fdb37a84
->> +
->>   [http://osdn.dl.sourceforge.jp/julius/37582/julius-4.1.2.tar.gz]
->>   md5=886a114b391aa1992567019213efc63e
->>   sha256=542c7f1042679c8484dc2f5f5536ed0c79fa79b2b9dd6cf6881278a6fdb37a84
->> diff --git a/recipes/julius/julius_4.1.2.bb 
->> b/recipes/julius/julius_4.1.2.bb
->> new file mode 100644
->> index 0000000..d528357
->> --- /dev/null
->> +++ b/recipes/julius/julius_4.1.2.bb
->> @@ -0,0 +1,63 @@
->> +DESCRIPTION = "Julius is a high-performance, two-pass large 
->> vocabulary continuous speech recognition (LVCSR) decoder software for 
->> speech-related researchers and developers."
->> +LICENSE = "julius"
->> +DEPENDS = "libsndfile1 flex zlib alsa-lib"
->> +
->> +SRC_URI = 
->> "http://iij.dl.sourceforge.jp/julius/37582/julius-${PV}.tar.gz"
->> +
->> +inherit autotools
->> +
->> +TARGET_CC_ARCH += "${LDFLAGS}"
->> +
->> +EXTRA_OECONF = "--with-mictype=alsa --enable-julian"
->> +
->> +do_configure() {
->> +    libtoolize --force
->> +    gnu-configize
->> +    oe_runconf
->> +}
->> +
->> +do_install() {
->> +    export prefix=${D}${prefix}
->> +    export libdir=${D}${libdir}
->> +    export bindir=${D}${bindir}
->> +    export includedir=${D}${includedir}
->> +    export mandir=${D}${mandir}
->> +    export exec_prefix=${D}${exec_prefix}
->> +    export datadir=${D}${datadir}
->> +
->> +    for i in libsent libjulius julius mkbingram mkbinhmm adinrec 
->> adintool mkgshmm mkss jcontrol generate-ngram jclient-perl man ; do
->> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g  -e s:\ /usr/share:\ 
->> \$\{datadir\}:g ${S}/$i/Makefile   
->> +        cd ${S}/$i
->> +        oe_runmake -e install
->> +    done
->> +
->> +    for i in mkdfa/mkfa-1.44-flex mkdfa dfa_minimize generate 
->> accept_check nextword yomi2voca gram2sapixml dfa_determinize ; do
->> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g 
->> ${S}/gramtools/$i/Makefile
->> +        cd ${S}/gramtools/$i
->> +        oe_runmake -e install
->> +    done
->> +
->> +    for i in ${D}${bindir}/*.pl ; do
->> +        sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
->> +        echo sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i>>  
->> /tmp/k
->> +    done
->> +}
->> +
->> +do_stage() {
->> +    export libdir=${STAGING_LIBDIR}
->> +    export bindir=${STAGING_BINDIR}
->> +    export includedir=${STAGING_INCDIR}
->> +    export datadir=${STAGING_DATADIR}
->> +
->> +    for i in libsent libjulius julius mkbingram mkbinhmm adinrec 
->> adintool mkgshmm mkss jcontrol generate-ngram jclient-perl man ; do
->> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g  -e s:\ /usr/share:\ 
->> \$\{datadir\}:g ${S}/$i/Makefile
->> +        cd ${S}/$i
->> +        oe_runmake -e install
->> +    done
->> +
->> +    for i in mkdfa/mkfa-1.44-flex mkdfa dfa_minimize generate 
->> accept_check nextword yomi2voca gram2sapixml dfa_determinize ; do
->> +        sed -i -e s:\ /usr/bin:\ \$\{bindir\}:g 
->> ${S}/gramtools/$i/Makefile
->> +        cd ${S}/gramtools/$i
->> +        oe_runmake -e install
->> +    done
->> +}
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Cliff Brake (1):
+  net-tools: unexport TOPDIR in recipe as it is used by the makefile
 
---------------ms060205060308010103020608
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Denis 'Gnutoo' Carikli (2):
+  udev 118 : fix GNU hash
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDcxMzEx
-NTkxN1owIwYJKoZIhvcNAQkEMRYEFCeYf7nkXNIFFne9uTsBJolEb6NtMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCx8h3r3hmjjpuw2fazFwjIFShYCNtSScNERq0sKZB1OmAH6XDM
-YhsQnSmtPeL2M5D94GyT4cJvy5d00O09fEHea/6/WQiNlcJ5rhH6UDzk59aimTlWOFxOaoU8LCNO
-ah6PWoTvTH/sMglrf0MRPeClZJL+ftck7LY4vZW9GYX28gM5k6r7adXno9oUf+nJHVWgY/b5YEUE
-Q8/cAVtALzOkfaTA74sgnJNYzxo88ziPn6tVL/eoM/YWY2UOAQ1iodlQRE/Xy7lv0w53xJ4f7C1p
-vPbrOuAslI0wH60EudiH0eaX1yxrKA8y+iELd0RmS/2IlNbOzq2CKnbWrwMgoPBaAAAAAAAA
+Dmitry Eremin-Solenikov (10):
+  linux-mainstone: fix building with current gcc
+  sort.sh: add mainstone and at91sam9g20ek to the list of armv5te machines
+  sort.sh: add ppce500 arch and tqm8540 as one of machines
+  build-release.sh: add at91sam9g20ek
+  build-feeds.sh: it's now lowpan-tools, not lowpan-utils
 
---------------ms060205060308010103020608--
+Florian Boor (1):
+  linux: Update 2.6.30-rc4 with more tx25 patches.
+
+Graeme Gregory (5):
+  omapzoom2.conf : add new zoom2 machine file
+  u-boot_git.bb : add zoom2 support to u-boot git
+  linux-omapandroid_2.6.29.bb : android kernel for zoom2, seems to be the
+  Revert "base.bbclass: add support for machine configuration fallback"
+
+Henning Heinold (7):
+  glibc: fix build for i486 arch at version 2.9
+  pulseaudio: use right gettext automake macro for generating locales or not
+  pulseaudio: fix building of bluez_ipc stuff
+  pulseaudio: fix detection of tls for shared libraries
+  pmount: fix gettext suppoprt now for real
+  pmount: update to version 0.9.19
+  uclibc: put SRC_URI = http://www.uclibc.org/downloads/uClibc-${PV}.tar.bz2
+
+Holger Hans Peter Freyther (1):
+  qt4.inc: Work with DISTRO=micro where local_prefix is ""
+
+Ihar Hrachyshka (2):
+  qt4: updated version to 4.5.2.
+  qt4: added postgres, mysql, and sqlite2/3 support.
+
+Koen Kooi (12):
+  qt4: package demos and examples as well
+  ffmpeg git: bump SRCREV to get decode_video2 api
+  omapfbplay: add xv version with netsync option
+  omapfbplay-xv: fix typo in recipe
+  linux-omap 2.6.29: fix some vfp and neon bugs
+  omapfbplay-xv: enable omapfb driver as well
+  qt4: add extra hook into configure to munge some qmake stuff
+  omap3.inc: bump PR for kernel change
+  qt4-x11-free-gles: add an OopenGL ES1 version of qt4-x11-free
+  opkg*: bump to r215 to fix segfaults on upgrade
+  julius: add 4.1.2 of julius speech recognizer
+
+Leon Woestenberg (2):
+  linux: updated 2.6.25 and 2.6.27 for mpc8315e-rdb.
+  calamari.conf: New machine (MPC8536DS development system).
+
+Marcin Juszkiewicz (3):
+  package_rpm.bbclass: be more quiet
+  linux: added AT91 patch to SRC_URI for all devices
+  checksums.ini: added 2.6.30-at91 patch
+
+Marco Cavallini (2):
+  New conf/distro/kaeilos.conf with customized include files
+  Added recipes/psplash/files/ronetix-pm9263/psplash-default
+
+Mario Domenech Goulart (1):
+  opkg-native: use OE's libdir instead of hardcoded /usr/lib for update-altern
+
+Michael Smith (4):
+  xf86-video-intel: add 2.6.3
+  xf86-video-vesa: add 2.2.0
+  xf86-input-elographics: add 1.2.3
+  package classes: count dotfiles as non-empty
+
+Mike Westerhof (1):
+  SlugOS: slugos.inc - switch from diet-x11 libs to standard x11 libs
+
+Otavio Salvador (12):
+  skype: add static and dynamic versions
+  rdesktop: use INC_PR in recipes
+  rdesktop (1.6.0): fix audio redirection for Windows 2008 Server/Vista
+  rdesktop (1.6.0): add addin support
+  read-edid: add get-edid package
+  mesa: add version 7.4
+  libdrm: add 2.4.11
+  preferred-xorg-versions-X11R7.5.inc: started
+  base.bbclass: add support for machine configuration fallback
+  checkums.ini: add termcap 1.3.1
+  checksums.ini add gnu ghostscript 8.64
+  libgpg-error: convert to INC_PR usage
+
+Philip Balister (2):
+  gnuradio : Add bb file for GNURadio 3.2.1.
+  gnuradio : Update subversion recipe. GNURadio trunk now includes NEON suppor
+
+Robert Schuster (2):
+  antlr-native 2.7.7: Use proper variable.
+  classpath: Depend on antlr-native, increased resp. PRs.
+
+Tom Rini (1):
+  gmp: Fix a problem when ${exec_prefix} != ${includedir}, switch to INC_PR
+
+ Bugs fixed:
+
+bug_id resolution        short_desc
+
+Bugs opened:
+
+bug_id resolution        short_desc
+
+
