@@ -1,37 +1,32 @@
-Received: from [65.182.109.74] (helo=mta5.brinkster.com)
+Received: from [209.85.218.224] (helo=mail-bw0-f224.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1MQdBb-0004MQ-PU
+	(envelope-from <piero.pezzin@gmail.com>) id 1MQdzo-0003V8-3C
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jul 2009 10:16:27 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta5.brinkster.com (Postfix) with ESMTP id 1D92A32817A
+	Tue, 14 Jul 2009 11:08:20 +0200
+Received: by bwz24 with SMTP id 24so2726721bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jul 2009 04:03:08 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at 
-X-Spam-Flag: NO
-X-Spam-Score: 0.563
-X-Spam-Level: 
-X-Spam-Status: No, score=0.563 tagged_above=-10 required=5 tests=[AWL=-0.753, 
-	BAYES_05=-1.11, MSGID_MULTIPLE_AT=1.449, RCVD_IN_SORBS_DUL=0.877,
-	RDNS_DYNAMIC=0.1]
-Received: from mta5.brinkster.com ([127.0.0.1])
-	by localhost (mta5.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ayMcI0YRJFj2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jul 2009 04:03:02 -0400 (EDT)
-Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
-	[82.46.19.72])
-	by mta5.brinkster.com (Postfix) with ESMTP id 4D2CA32853C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jul 2009 04:03:00 -0400 (EDT)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 14 Jul 2009 09:02:46 +0100
-Message-ID: <049101ca0459$7a27f580$6e77e080$@Willis@Distant-earth.com>
+	Tue, 14 Jul 2009 01:55:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=khWfvZdrDfHrDIstbCxv6wSBBe9VT5gHX6SrCKS8qxM=;
+	b=o33gASSpcJKv8S5Ff+1oLtibTP5/cgO6yqGPCuUTOl42mUfIoXfIRn294/lce1ZMxv
+	wN5FRyAKfxVUsiWcwf7rkd00noKG18nOqE0PrLfj2zM1qCj0R07h1lIHG0sn3IrF5fUH
+	ay/yfAkXHLS94wFF5WTSdHfKBUj4UlUnY6IWs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=RXW9abS88gnWXC2FO/T+YGWZV1p2BYczY51ZGvSORQpTE1BQxfpveTpp447C0U4JnL
+	IUH3bADpihInNNX8CidxNhisZTvebh657u50w97oZlP0XMemBPMiANs3FTdD3t55+sTq
+	AmU2S49c+R57qYEt3fsSy5cK/PzsYbBr3S0OI=
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AcoEWXicRNGi/gjtRGq4HDQH/7RaLQ==
-Subject: [PATCH] Fix build issue with rdesktop_1.6.0.bb
+Received: by 10.204.118.138 with SMTP id v10mr6166127bkq.40.1247561701651; 
+	Tue, 14 Jul 2009 01:55:01 -0700 (PDT)
+Date: Tue, 14 Jul 2009 10:55:01 +0200
+Message-ID: <49bdfd00907140155j339465f9q620c9546688c75a2@mail.gmail.com>
+From: Piero Pezzin <piero.pezzin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Mount root file system via NFS with usb-eth adapter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,38 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2009 08:16:28 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Tue, 14 Jul 2009 09:08:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Language: en-us
 
-Remove duplicate audio-2008.patch patch line from recipe (fixes build issue
-introduced with 013c006d11a59269b9d3adc6cbb6fb8091144965).
+Hi all,
 
-Signed-off-by: David-John Willis <John.Willis@Distant-earth.com>
----
- recipes/rdesktop/rdesktop_1.6.0.bb |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
+with the Beagleboard, I tried mounting the root file system via NFS using a
+usb-ethernet adapter. But there is a little problem because the ethernet
+interface is configured before the usb-ethernet is discovered and the mount
+fails.
 
-diff --git a/recipes/rdesktop/rdesktop_1.6.0.bb
-b/recipes/rdesktop/rdesktop_1.6.0.bb
-index 1959200..93d46bd 100755
---- a/recipes/rdesktop/rdesktop_1.6.0.bb
-+++ b/recipes/rdesktop/rdesktop_1.6.0.bb
-@@ -5,8 +5,6 @@ PR = "${INC_PR}.2"
- SRC_URI += " file://audio-2008.patch;patch=1"
- SRC_URI_append_ossystems = " file://rdesktop-addin.patch;patch=1"
- 
--SRC_URI += " file://audio-2008.patch;patch=1"
--
- inherit autotools
- 
- EXTRA_OECONF = "--with-openssl=${STAGING_EXECPREFIXDIR} "
--- 
-1.6.3.1
+So I edited the net/ipv4/ipconfig.c file modifying the #define CONF_PRE_OPEN
+increasing it from 500 to 2500.
 
+Once rebuilt the kernel, everything work perfectly.
 
+I think this is just a workaround, I'll let you find the proper solution.
 
+Regards,
 
+Piero
 
