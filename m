@@ -1,27 +1,24 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [85.37.17.112] (helo=smtp-out112.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MQqVp-0000mT-OM
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 00:30:13 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KMS00D79LUYZHHE@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	14 Jul 2009 17:16:15 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3E71814AF5F; Tue,
-	14 Jul 2009 18:16:10 -0400 (EDT)
-Date: Tue, 14 Jul 2009 18:16:10 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090714221610.GA31558@denix.org>
-References: <200907121334.38852.raj.khem@gmail.com>
-	<20090713035713.GA21203@denix.org>
-	<1247600832.29960.18.camel@dax.rpnet.com>
-	<20090714203551.GA8460@gmail.com>
-MIME-version: 1.0
-In-reply-to: <20090714203551.GA8460@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: e2fsprogs-libs build failure analysis
+	(envelope-from <GNUtoo@no-log.org>) id 1MQrJs-0007u1-5H
+	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 01:21:56 +0200
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out112.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 15 Jul 2009 01:08:34 +0200
+Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 15 Jul 2009 01:08:14 +0200
+Received: from localhost.localdomain ([79.51.85.54]) by FBCMCL01B08.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 15 Jul 2009 01:08:14 +0200
+From: Denis 'Gnutoo' Carikli <GNUtoo@no-log.org>
+To: openembedded-devel@openembedded.org
+Date: Wed, 15 Jul 2009 01:08:11 +0200
+Message-Id: <1247612892-19937-1-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.6.0.6
+X-OriginalArrivalTime: 14 Jul 2009 23:08:14.0199 (UTC)
+	FILETIME=[F700E070:01CA04D7]
+Subject: mdev.sh: permit serial console login and permit correct runlevel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,51 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2009 22:30:14 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 14 Jul 2009 23:21:56 -0000
 
-On Tue, Jul 14, 2009 at 01:35:51PM -0700, Khem Raj wrote:
-> On (14/07/09 20:47), Richard Purdie wrote:
-> > Hi,
-> > 
-> > On Sun, 2009-07-12 at 23:57 -0400, Denys Dmytriyenko wrote:
-> > > On Sun, Jul 12, 2009 at 01:34:34PM -0700, Khem Raj wrote:
-> > > > Like many others I was also getting this problem reported on this mailing list in past 
-> > > > 
-> > > > http://article.gmane.org/gmane.comp.handhelds.openembedded/24445/match=e2fsprogs+libs
-> > > > 
-> > > > I looked a bit into this and the problem is that PN gets overwritten when 
-> > > > do_package_write_ipk -> read_subpackage_metadata 
-> > >
-> > > Have you seen this thread several months ago with the same analysis:
-> > > http://thread.gmane.org/gmane.comp.handhelds.openembedded/22376/focus=22556
-> > > 
-> > > As I said before, pkgdata/runtime handling needs fixing - if multiple recipes 
-> > > (or even target vs. native/sdk of the same package, like it was with curl) 
-> > > provide the identically named .so library (libblkid in this case) during the 
-> > > build, there may be a conflict in the pkgdata/runtime files.
-> > > 
-> > > What are the pkgdata files are used for ultimately? Do they need to contain 
-> > > PN/PV/PR? That was introduced by the commit mentioned in the thread above... 
-> > > Should it be reverted?
-> > > 
-> > > Lets ask Richard - he made this change in Poky, maybe he has a better fix for 
-> > > it... :)
-> > 
-> > The real problem here is two packages providing the same library. This
-> > is actually a critical error and means your distro is screwed unless
-> > handled very carefully. Rather than hacking around the problem, I'd much
-> > rather we detect and abort in this case and warn the user something is
-> > about to break and that any package feeds will need careful attention.
-> 
-> yeah I would agree on both counts.
+Hi, This patch is permit the login via serial console,and to go to the correct runlevel(2345),
+without this patch init is blocked at the last script of runlevelS and we can never login via serial console
+(the patch created /dev/null and /dev/console)
+I send it for review because it touch a core part and that I'm not shure how the others distro handle that.
+Here I used:
+*wrt54.conf
+*micro-base-image
+*micro-uclibc
 
-Sorry, this might be a stupid question, but can update-alternatives handle 
-libraries? Would that solve the issue of multiple packages providing the same 
-library?
+Denis
 
--- 
-Denys
+
 
 
