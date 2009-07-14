@@ -1,23 +1,26 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MQnbS-0001vI-Gi
+	(envelope-from <utx@penguin.cz>) id 1MQnpE-0002G5-1m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jul 2009 21:23:59 +0200
-Received: from [92.227.178.176] (helo=[192.168.1.6])
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MQnPt-0007du-1L
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jul 2009 21:11:53 +0200
-Message-ID: <4A5CD81F.4090304@kernelconcepts.de>
-Date: Tue, 14 Jul 2009 21:10:23 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-MIME-Version: 1.0
+	Tue, 14 Jul 2009 21:38:04 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 6F44F1416BC5;
+	Tue, 14 Jul 2009 21:27:15 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id p3LXj9NCxALt; Tue, 14 Jul 2009 21:27:15 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id ADD2B1416BA8;
+	Tue, 14 Jul 2009 21:27:14 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <20090714170415.GA24919@rhein.zuhause.netz>
-In-Reply-To: <20090714170415.GA24919@rhein.zuhause.netz>
-Subject: Re: Broken git-native in dev
+Date: Tue, 14 Jul 2009 21:24:43 +0200
+Message-Id: <1247599483.7178.11.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: [PATCH] glibc: install correct stubs (fixes midori crash)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,27 +34,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2009 19:24:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 14 Jul 2009 19:38:04 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Attached patch prevents overwriting of a real stub include file by a
+dummy stub file. Patch is tested only with the latest glibc from the
+angstrom.
 
-Henning Heinold schrieb:
-> Maybee we should put a test in the native class which checks if the executables are striped.
+Dummy stub include causes mis-compilation of undefined number of
+packages, increment of DISTRO_PR may be considered as useful.
 
-+1
+I am not sure, why this line was there. Correct stub file is generated
+by make install, at least in the current version of glibc.
 
-Greetings
+--- a/recipes/glibc/glibc-stage.inc
++++ b/recipes/glibc/glibc-stage.inc
+@@ -8,7 +8,6 @@ do_stage() {
+ 	install -d ${STAGING_INCDIR}/gnu \
+ 		   ${STAGING_INCDIR}/bits \
+ 		   ${STAGING_INCDIR}/rpcsvc
+-	install -m 0644 ${S}/include/gnu/stubs.h ${STAGING_INCDIR}/gnu/
+ 	install -m 0644 ${B}/bits/stdio_lim.h ${STAGING_INCDIR}/bits/
+ 	install -m 0644 misc/syscall-list.h ${STAGING_INCDIR}/bits/syscall.h
+ 	for r in ${rpcsvc}; do
 
-Florian
+Review of compilation logs shows that at least following packages are
+referring stub functions: glib-2.0, coreutils, module-init-tools,
+openssh, rsync, e2fsprogs, libpcap, pth, python, rxvt-unicode, tar,
+tcpdump.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+Example of mis-compiled package:
 
-1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
+midori fails due to GIO mis-compilation. GIO (glib-2.0) incorrectly
+thinks, that inotify_init1 is implemented. But it is not true on systems
+compiled with kernel headers < 2.6.27. GIO fails to initialize change
+notification, which normally never happens.
+
+Note:
+
+Kernel added several new functions since 2.6.23 (e. g. inotify_init1).
+It would be nice to reflect it somehow: update linux-libc-headers and
+either keep minimal supported kernel in the build as low as possible
+(makes a bit slower glibc), move affected packages from platform to
+machine feeds or create different repos with different minimal kernel
+version. What do you think about it?
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
