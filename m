@@ -1,37 +1,30 @@
-Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MQpWA-0001Oz-2g
-	for openembedded-devel@openembedded.org; Tue, 14 Jul 2009 23:26:30 +0200
-Received: by qw-out-1920.google.com with SMTP id 5so1100754qwc.6
-	for <openembedded-devel@openembedded.org>;
-	Tue, 14 Jul 2009 14:13:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=x6jww+q83D3vrMeI3bbmb9bT8dwwGt6/UFkGYbXxYXQ=;
-	b=nvITU5eWZGf192h9pysWasU0rC4Mpm13SX3GxEO8mti2TBKCFPgFTW2OcPJClIM+3e
-	SxAnHTC6DfV2MyQR79xOLJmylT8iAS+VljRmVoGmfedoLbZIt9Zj0l6ULvMm/Lrj77ni
-	f2rHl/piuiVLMHQZlyknjY+Sc9zbF/WCaW98o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=unrJDvDPvifu93FViBLcivUdw7L6eFpq82PdZq2y0crxVG7co0ifzDb+YMwroD9m99
-	3rJnZTA5O8MIfHW0SibnkHjbNcoPHxVIX5wAOyG+BiDBdB8pOc6qJN+oFKK+i1tnUltK
-	wVn1guulNxdovAOpVzfo0XeYow8+LirIrFcy4=
+	(envelope-from <msmith@cbnco.com>) id 1MQpjq-0001uN-N3
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Jul 2009 23:40:39 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id BEA4050A99D
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jul 2009 17:27:18 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 26564-05 for <openembedded-devel@lists.openembedded.org>; 
+	Tue, 14 Jul 2009 17:27:18 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 9D0474DBBA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jul 2009 17:27:18 -0400 (EDT)
+Message-ID: <4A5CF836.6000309@cbnco.com>
+Date: Tue, 14 Jul 2009 17:27:18 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Received: by 10.231.37.73 with SMTP id w9mr1742396ibd.2.1247605989827; Tue, 14 
-	Jul 2009 14:13:09 -0700 (PDT)
-In-Reply-To: <h3iq36$riq$1@ger.gmane.org>
-References: <200907121334.38852.raj.khem@gmail.com>
-	<20090713035713.GA21203@denix.org>
-	<1247600832.29960.18.camel@dax.rpnet.com> <h3iq36$riq$1@ger.gmane.org>
-Date: Tue, 14 Jul 2009 23:13:09 +0200
-Message-ID: <c384c5ea0907141413p49b39706t95e7b426d0d276a8@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: e2fsprogs-libs build failure analysis
+References: <1247599483.7178.11.camel@utx.utx.cz>
+In-Reply-To: <1247599483.7178.11.camel@utx.utx.cz>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH] glibc: install correct stubs (fixes midori crash)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2009 21:26:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 14 Jul 2009 21:40:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Stanislav Brabec wrote:
+ > Attached patch prevents overwriting of a real stub include file by a
+ > dummy stub file. Patch is tested only with the latest glibc from the
+ > angstrom.
 
-On Tue, Jul 14, 2009 at 10:33 PM, Koen Kooi<k.kooi@student.utwente.nl> wrote:
-> On 14-07-09 21:47, Richard Purdie wrote:
->
->> The real problem here is two packages providing the same library. This
->> is actually a critical error and means your distro is screwed unless
->> handled very carefully. Rather than hacking around the problem, I'd much
->> rather we detect and abort in this case and warn the user something is
->> about to break and that any package feeds will need careful attention.
->
-> In this case it works as intended, at least in angstrom :)
->
-Not sure, I get build errors on both packages.
+Hi Stanislav,
 
-http://bugs.openembedded.org/show_bug.cgi?id=5149
+Patch 2/3 here fixes it:
 
-Regards,
--- 
-Leon
+http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/glibc_tweaks/
+
+Also cleans some of the other lines that aren't needed.
+
+Mike
 
 
