@@ -1,26 +1,32 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MQnpE-0002G5-1m
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Jul 2009 21:38:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 6F44F1416BC5;
-	Tue, 14 Jul 2009 21:27:15 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id p3LXj9NCxALt; Tue, 14 Jul 2009 21:27:15 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id ADD2B1416BA8;
-	Tue, 14 Jul 2009 21:27:14 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Jul 2009 21:24:43 +0200
-Message-Id: <1247599483.7178.11.camel@utx.utx.cz>
+	(envelope-from <rpurdie@rpsys.net>) id 1MQoCx-0003NF-4K
+	for openembedded-devel@openembedded.org; Tue, 14 Jul 2009 22:02:35 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6EJmMJp004260 for <openembedded-devel@openembedded.org>;
+	Tue, 14 Jul 2009 20:48:22 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id xlIPZlzPRUGq for <openembedded-devel@openembedded.org>;
+	Tue, 14 Jul 2009 20:48:22 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6EJmJTD004237
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>;
+	Tue, 14 Jul 2009 20:48:21 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20090713035713.GA21203@denix.org>
+References: <200907121334.38852.raj.khem@gmail.com>
+	<20090713035713.GA21203@denix.org>
+Date: Tue, 14 Jul 2009 20:47:12 +0100
+Message-Id: <1247600832.29960.18.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: [PATCH] glibc: install correct stubs (fixes midori crash)
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: e2fsprogs-libs build failure analysis
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,56 +40,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2009 19:38:04 -0000
+X-List-Received-Date: Tue, 14 Jul 2009 20:02:35 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Attached patch prevents overwriting of a real stub include file by a
-dummy stub file. Patch is tested only with the latest glibc from the
-angstrom.
+Hi,
 
-Dummy stub include causes mis-compilation of undefined number of
-packages, increment of DISTRO_PR may be considered as useful.
+On Sun, 2009-07-12 at 23:57 -0400, Denys Dmytriyenko wrote:
+> On Sun, Jul 12, 2009 at 01:34:34PM -0700, Khem Raj wrote:
+> > Like many others I was also getting this problem reported on this mailing list in past 
+> > 
+> > http://article.gmane.org/gmane.comp.handhelds.openembedded/24445/match=e2fsprogs+libs
+> > 
+> > I looked a bit into this and the problem is that PN gets overwritten when 
+> > do_package_write_ipk -> read_subpackage_metadata 
+>
+> Have you seen this thread several months ago with the same analysis:
+> http://thread.gmane.org/gmane.comp.handhelds.openembedded/22376/focus=22556
+> 
+> As I said before, pkgdata/runtime handling needs fixing - if multiple recipes 
+> (or even target vs. native/sdk of the same package, like it was with curl) 
+> provide the identically named .so library (libblkid in this case) during the 
+> build, there may be a conflict in the pkgdata/runtime files.
+> 
+> What are the pkgdata files are used for ultimately? Do they need to contain 
+> PN/PV/PR? That was introduced by the commit mentioned in the thread above... 
+> Should it be reverted?
+> 
+> Lets ask Richard - he made this change in Poky, maybe he has a better fix for 
+> it... :)
 
-I am not sure, why this line was there. Correct stub file is generated
-by make install, at least in the current version of glibc.
+The real problem here is two packages providing the same library. This
+is actually a critical error and means your distro is screwed unless
+handled very carefully. Rather than hacking around the problem, I'd much
+rather we detect and abort in this case and warn the user something is
+about to break and that any package feeds will need careful attention.
 
---- a/recipes/glibc/glibc-stage.inc
-+++ b/recipes/glibc/glibc-stage.inc
-@@ -8,7 +8,6 @@ do_stage() {
- 	install -d ${STAGING_INCDIR}/gnu \
- 		   ${STAGING_INCDIR}/bits \
- 		   ${STAGING_INCDIR}/rpcsvc
--	install -m 0644 ${S}/include/gnu/stubs.h ${STAGING_INCDIR}/gnu/
- 	install -m 0644 ${B}/bits/stdio_lim.h ${STAGING_INCDIR}/bits/
- 	install -m 0644 misc/syscall-list.h ${STAGING_INCDIR}/bits/syscall.h
- 	for r in ${rpcsvc}; do
+Cheers,
 
-Review of compilation logs shows that at least following packages are
-referring stub functions: glib-2.0, coreutils, module-init-tools,
-openssh, rsync, e2fsprogs, libpcap, pth, python, rxvt-unicode, tar,
-tcpdump.
-
-Example of mis-compiled package:
-
-midori fails due to GIO mis-compilation. GIO (glib-2.0) incorrectly
-thinks, that inotify_init1 is implemented. But it is not true on systems
-compiled with kernel headers < 2.6.27. GIO fails to initialize change
-notification, which normally never happens.
-
-Note:
-
-Kernel added several new functions since 2.6.23 (e. g. inotify_init1).
-It would be nice to reflect it somehow: update linux-libc-headers and
-either keep minimal supported kernel in the build as low as possible
-(makes a bit slower glibc), move affected packages from platform to
-machine feeds or create different repos with different minimal kernel
-version. What do you think about it?
+Richard
 
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+-- 
+Richard Purdie
+Intel Open Source Technology Centre
 
 
 
