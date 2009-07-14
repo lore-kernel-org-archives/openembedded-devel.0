@@ -1,33 +1,32 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MQoHd-0003YJ-Rq
-	for openembedded-devel@openembedded.org; Tue, 14 Jul 2009 22:07:26 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MQo4k-0006M4-Fh
-	for openembedded-devel@openembedded.org; Tue, 14 Jul 2009 19:54:06 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Tue, 14 Jul 2009 19:54:06 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <rpurdie@rpsys.net>) id 1MQoU6-0004Cq-D3
+	for openembedded-devel@openembedded.org; Tue, 14 Jul 2009 22:20:23 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6EK657g006494 for <openembedded-devel@openembedded.org>;
+	Tue, 14 Jul 2009 21:06:05 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id DLf0ZCnI5cPm for <openembedded-devel@openembedded.org>;
+	Tue, 14 Jul 2009 21:06:05 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6EK60nR006475
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@openembedded.org>;
-	Tue, 14 Jul 2009 19:54:06 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 14 Jul 2009 21:06:03 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 14 Jul 2009 21:53:51 +0200
-Message-ID: <h3inof$jm9$1@ger.gmane.org>
-References: <1247599483.7178.11.camel@utx.utx.cz>
+In-Reply-To: <4A5CD81F.4090304@kernelconcepts.de>
+References: <20090714170415.GA24919@rhein.zuhause.netz>
+	<4A5CD81F.4090304@kernelconcepts.de>
+Date: Tue, 14 Jul 2009 21:04:53 +0100
+Message-Id: <1247601894.29960.21.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090708 Shredder/3.0b3pre
-In-Reply-To: <1247599483.7178.11.camel@utx.utx.cz>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] glibc: install correct stubs (fixes midori crash)
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: Broken git-native in dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,58 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2009 20:07:27 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 14 Jul 2009 20:20:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 14-07-09 21:24, Stanislav Brabec wrote:
-> Attached patch prevents overwriting of a real stub include file by a
-> dummy stub file. Patch is tested only with the latest glibc from the
-> angstrom.
->
-> Dummy stub include causes mis-compilation of undefined number of
-> packages, increment of DISTRO_PR may be considered as useful.
->
-> I am not sure, why this line was there. Correct stub file is generated
-> by make install, at least in the current version of glibc.
->
-> --- a/recipes/glibc/glibc-stage.inc
-> +++ b/recipes/glibc/glibc-stage.inc
-> @@ -8,7 +8,6 @@ do_stage() {
->   	install -d ${STAGING_INCDIR}/gnu \
->   		   ${STAGING_INCDIR}/bits \
->   		   ${STAGING_INCDIR}/rpcsvc
-> -	install -m 0644 ${S}/include/gnu/stubs.h ${STAGING_INCDIR}/gnu/
->   	install -m 0644 ${B}/bits/stdio_lim.h ${STAGING_INCDIR}/bits/
->   	install -m 0644 misc/syscall-list.h ${STAGING_INCDIR}/bits/syscall.h
->   	for r in ${rpcsvc}; do
->
-> Review of compilation logs shows that at least following packages are
-> referring stub functions: glib-2.0, coreutils, module-init-tools,
-> openssh, rsync, e2fsprogs, libpcap, pth, python, rxvt-unicode, tar,
-> tcpdump.
->
-> Example of mis-compiled package:
->
-> midori fails due to GIO mis-compilation. GIO (glib-2.0) incorrectly
-> thinks, that inotify_init1 is implemented. But it is not true on systems
-> compiled with kernel headers<  2.6.27. GIO fails to initialize change
-> notification, which normally never happens.
->
-> Note:
->
-> Kernel added several new functions since 2.6.23 (e. g. inotify_init1).
-> It would be nice to reflect it somehow: update linux-libc-headers and
-> either keep minimal supported kernel in the build as low as possible
-> (makes a bit slower glibc), move affected packages from platform to
-> machine feeds or create different repos with different minimal kernel
-> version. What do you think about it?
+On Tue, 2009-07-14 at 21:10 +0200, Florian Boor wrote:
+> Hi,
+> 
+> Henning Heinold schrieb:
+> > Maybee we should put a test in the native class which checks if the executables are striped.
+> 
+> +1
 
-Apply the patch, bump glibc PR and angstrom distro PR.
+We should be stripping native binaries and the optimisation flags sound
+wrong for native builds. That should be straightforward to fix.
 
-regards,
+Sanity checks should go into insane.bbclass though.
 
-Koen
+Cheers,
+
+Richard
+
+-- 
+Richard Purdie
+Intel Open Source Technology Centre
 
 
 
