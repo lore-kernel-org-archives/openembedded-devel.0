@@ -1,34 +1,23 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MR9lJ-0002Eo-2C
-	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 21:03:29 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MR9YI-0005PV-L2
-	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 18:50:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Jul 2009 18:50:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Jul 2009 18:50:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 15 Jul 2009 20:46:58 +0200
-Message-ID: <h3l873$h5m$2@ger.gmane.org>
-References: <200907151607.19897.mok@mnet-online.de>	<1247667373.6648.290.camel@mill.internal.reciva.com>
-	<200907151924.52172.mok@mnet-online.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090708 Shredder/3.0b3pre
-In-Reply-To: <200907151924.52172.mok@mnet-online.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [RFC] patch for bluetooth audio.conf
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MR9zI-0002tt-RY
+	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 21:17:57 +0200
+Received: (qmail 19572 invoked from network); 15 Jul 2009 19:04:30 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 15 Jul 2009 12:04:30 -0700
+Date: Wed, 15 Jul 2009 12:04:29 -0700
+From: Tom Rini <trini@embeddedalley.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090715190429.GD19826@smtp.west.cox.net>
+References: <1247612892-19937-1-git-send-email-GNUtoo@no-log.org>
+	<20090714233712.GM15944@smtp.west.cox.net>
+	<20090714234205.GN15944@smtp.west.cox.net>
+	<1247652638.6648.202.camel@mill.internal.reciva.com>
+MIME-Version: 1.0
+In-Reply-To: <1247652638.6648.202.camel@mill.internal.reciva.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: mdev.sh: permit serial console login and permit correct	runlevel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 19:03:30 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Jul 2009 19:17:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 15-07-09 19:24, Klaus 'mrmoku' Kurzmann wrote:
-> Am Mittwoch 15 Juli 2009 16:16:13 schrieb Phil Blundell:
->> On Wed, 2009-07-15 at 16:07 +0200, Klaus 'mrmoku' Kurzmann wrote:
->>> to get audio routing for bluetooth headsets correct on OpenMoko phones we
->>> need the attached patch to bluez.inc which changes audio.conf to enables
->>> the SCORouting=PCM option.
->>>
->>> Is this something that can be done globally? Or will it break on other
->>> hardware?
->>
->> It will break on (some) other hardware.  SCORouting is a binary setting:
->> you can send audio over the HCI, or through a dedicated port (PCM) but
->> not both.  This change would lose on machines where the PCM interface
->> isn't connected to anything: in particular that probably means any
->> machine where the bluetooth hardware is on a usb dongle or CF card.
->>
->>> If it cannot be done globally, what is the correct way to do that?
->>> We (SHR distro) could do that with a distro override, but if it has the
->>> possibility to break other hardware we would not want that ;) We would
->>> rather add a machine override then. Right now bluez4 is *not* machine
->>> dependent and the config files are included in the base package. I see
->>> two ways to do that:
->>>
->>> a) make bluez4 machine dependent and add overrides for om-gta01/2
->>> b) extract the config files into some bluez4-config package and provide a
->>> different one for om-gta01/2
->>
->> Option (a) sounds fairly unattractive.  My first preference would be to
->> figure this out at runtime (eg by extending blueprobe to do it) rather
->> than in a static file; if that's impossible or impractical then your
->> option (b) is probably fine.
-> As I'm told that making bluez autodetect that is difficult...
+On Wed, Jul 15, 2009 at 11:10:38AM +0100, Phil Blundell wrote:
+> On Tue, 2009-07-14 at 16:42 -0700, Tom Rini wrote:
+> > To follow up to myself, the 'mdev' package should just go away really.
+> > This particular bug is because 'mdev' has an empty mdev.conf while
+> > busybox's mdev does not, and it contains console/null/etc entries.
+> 
+> Ah yes, right.  It looks like the immediate bug is that micro-base-image
+> is setting IMAGE_DEV_MANAGER = "mdev", which is causing the bogus
+> package to get dragged in.  I guess that variable should probably just
+> be left empty to use busybox mdev.
 
-Blueprobe can already do autodetection and more, so I don't see what the 
-problem is.
+No, I think it needs to be set to busybox-mdev, as busybox and udev can
+coexist.
 
+-- 
+Tom Rini
 
 
