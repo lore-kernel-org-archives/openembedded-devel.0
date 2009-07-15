@@ -1,15 +1,15 @@
 Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MR4B9-0005zN-G8
+	(envelope-from <khimov@altell.ru>) id 1MR4Ba-0005zu-3m
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 15:05:48 +0200
+	Wed, 15 Jul 2009 15:06:15 +0200
 Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id 2C50868803;
-	Wed, 15 Jul 2009 16:52:11 +0400 (MSD)
+	by mail.altell.local (Postfix) with ESMTP id 6302268803;
+	Wed, 15 Jul 2009 16:52:44 +0400 (MSD)
 From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jul 2009 16:52:01 +0400
-Message-Id: <1247662322-20408-1-git-send-email-khimov@altell.ru>
+Date: Wed, 15 Jul 2009 16:52:40 +0400
+Message-Id: <1247662361-20485-1-git-send-email-khimov@altell.ru>
 X-Mailer: git-send-email 1.6.3.3
 X-Altell-MailScanner: Found to be clean
 X-Altell-MailScanner-From: khimov@altell.ru
@@ -28,7 +28,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 13:05:51 -0000
+X-List-Received-Date: Wed, 15 Jul 2009 13:06:19 -0000
 
 Building things with icecc and BB_NUMBER_THREADS more then 1 you could see
 a lot of messages:
