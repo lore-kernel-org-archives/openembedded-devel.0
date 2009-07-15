@@ -1,41 +1,36 @@
-Received: from [209.85.216.204] (helo=mail-px0-f204.google.com)
+Received: from [212.18.0.9] (helo=mail-out.m-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MR8Hw-0001ZH-Al
+	(envelope-from <mok@mnet-online.de>) id 1MR8Qw-0001zW-Vn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 19:29:04 +0200
-Received: by pxi42 with SMTP id 42so2839605pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 10:15:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=sRBbQHDE8A4IvEHzpSjRBm8GmNa00i2XRR6dP80GRpM=;
-	b=XKJ4NJYrscKiJ2usCsFuBTdIkP2iJSZXyz2eQjl1sD9D2IK/vkiHCgjOWympHURofG
-	sHBnrw9HUXkKlUB6f+5CnyVxF1mErfB2SpeQPFaq1odxqxCVWeO+jD6r8jN31iFGt4ew
-	QQJCsaPH6iFHLmY7XH1v0RrntNgJa7c6QMQys=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=wgAk23Yd058HRCM3+tbb8KckaQre5daK9L+LPRzOU3a+F3dkEUFrrf+n0NlUltMhew
-	hi83/3jKEoqMdlNOzsE3yNVje44Nz5Q9jIi/5C3aFeQOj4GezyQFFfDuAJU4Kf2SCvGJ
-	qF2hHGmcGMrUaqgrZnGYlM53YbOH5TbW9e1t8=
-Received: by 10.140.178.6 with SMTP id a6mr3527326rvf.180.1247678136829;
-	Wed, 15 Jul 2009 10:15:36 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-11-93.dsl.pltn13.sbcglobal.net
-	[71.146.11.93])
-	by mx.google.com with ESMTPS id k41sm12059703rvb.47.2009.07.15.10.15.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 15 Jul 2009 10:15:35 -0700 (PDT)
-Date: Wed, 15 Jul 2009 10:15:30 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 15 Jul 2009 19:38:23 +0200
+Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
+	by mail-out.m-online.net (Postfix) with ESMTP id 6CD481C154E0;
+	Wed, 15 Jul 2009 19:24:56 +0200 (CEST)
+Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
+	by mail.m-online.net (Postfix) with ESMTP id 5CE9590258;
+	Wed, 15 Jul 2009 19:24:56 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.3.149])
+	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
+	port 10024)
+	with ESMTP id M5VNd1sApbeO; Wed, 15 Jul 2009 19:24:55 +0200 (CEST)
+Received: from mrdenker.localdomain (ppp-93-104-40-112.dynamic.mnet-online.de
+	[93.104.40.112])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTP;
+	Wed, 15 Jul 2009 19:24:55 +0200 (CEST)
+From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090715171503.GA15057@gmail.com>
-References: <1247662361-20485-1-git-send-email-khimov@altell.ru>
+Date: Wed, 15 Jul 2009 19:24:51 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.29.5-191.fc11.x86_64; KDE/4.2.4; x86_64; ;
+	)
+References: <200907151607.19897.mok@mnet-online.de>
+	<1247667373.6648.290.camel@mill.internal.reciva.com>
+In-Reply-To: <1247667373.6648.290.camel@mill.internal.reciva.com>
 MIME-Version: 1.0
-In-Reply-To: <1247662361-20485-1-git-send-email-khimov@altell.ru>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: [PATCH 1/2] icecc: remove bb.errors on un-built compilers
+Message-Id: <200907151924.52172.mok@mnet-online.de>
+Subject: Re: [RFC] patch for bluetooth audio.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,63 +44,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 17:29:04 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 15 Jul 2009 17:38:23 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-On (15/07/09 16:52), Roman I Khimov wrote:
-> Building things with icecc and BB_NUMBER_THREADS more then 1 you could see
-> a lot of messages:
-> 
-> ERROR: no cross compiler built yet?
-> 
-> before gcc-cross would be properly built. There is technically nothing wrong,
-> cross compiler is not there yet and it's not needed when bitbake does
-> fetch-unpack-patch and other things to prepare package build. But it makes
-> people uncomfortable.
-> 
-> We can safely kill this messages.
+Am Mittwoch 15 Juli 2009 16:16:13 schrieb Phil Blundell:
+> On Wed, 2009-07-15 at 16:07 +0200, Klaus 'mrmoku' Kurzmann wrote:
+> > to get audio routing for bluetooth headsets correct on OpenMoko phones we
+> > need the attached patch to bluez.inc which changes audio.conf to enables
+> > the SCORouting=PCM option.
+> >
+> > Is this something that can be done globally? Or will it break on other
+> > hardware?
+>
+> It will break on (some) other hardware.  SCORouting is a binary setting:
+> you can send audio over the HCI, or through a dedicated port (PCM) but
+> not both.  This change would lose on machines where the PCM interface
+> isn't connected to anything: in particular that probably means any
+> machine where the bluetooth hardware is on a usb dongle or CF card.
+>
+> > If it cannot be done globally, what is the correct way to do that?
+> > We (SHR distro) could do that with a distro override, but if it has the
+> > possibility to break other hardware we would not want that ;) We would
+> > rather add a machine override then. Right now bluez4 is *not* machine
+> > dependent and the config files are included in the base package. I see
+> > two ways to do that:
+> >
+> > a) make bluez4 machine dependent and add overrides for om-gta01/2
+> > b) extract the config files into some bluez4-config package and provide a
+> > different one for om-gta01/2
+>
+> Option (a) sounds fairly unattractive.  My first preference would be to
+> figure this out at runtime (eg by extending blueprobe to do it) rather
+> than in a static file; if that's impossible or impractical then your
+> option (b) is probably fine.
+As I'm told that making bluez autodetect that is difficult... Will take route b) 
+then and split out the config files into a bluez4-config package. Would it be ok 
+to make that package depend on the machine? First I wanted to do an extra 
+package (something like a machine dependent bluez4-config-shr), but maybe it is 
+of general interest to be able to have different bluez config for different 
+machines...
 
-provided that this part of code is not executed again when cross
-compiler is really needed because then we will not get the warning
-where we should get it legitimately.
+>
+> p.
 
 Thanks
 
--Khem
-
-
-> ---
->  classes/icecc.bbclass |    2 --
->  1 files changed, 0 insertions(+), 2 deletions(-)
-> 
-> diff --git a/classes/icecc.bbclass b/classes/icecc.bbclass
-> index 0eb2d9f..27e0e56 100644
-> --- a/classes/icecc.bbclass
-> +++ b/classes/icecc.bbclass
-> @@ -62,7 +62,6 @@ def create_cross_env(bb,d):
->          os.stat(os.path.join(ice_dir, target_sys, 'lib', 'libstdc++.so'))
->          os.stat(os.path.join(ice_dir, target_sys, 'bin', 'g++'))
->      except: # no cross compiler built yet
-> -        bb.error('no cross compiler built yet?')
->          return ""
->  
->      VERSION = icc_determine_gcc_version( os.path.join(ice_dir,target_sys,"bin","g++") )
-> @@ -159,7 +158,6 @@ def create_cross_kernel_env(bb,d):
->      try:
->          os.stat(os.path.join(ice_dir, 'bin', kernel_cc))
->      except: # no cross compiler built yet
-> -        bb.error('no kernel cross compiler built yet')
->          return ""
->  
->      VERSION = icc_determine_gcc_version( os.path.join(ice_dir,"bin",kernel_cc) )
-> -- 
-> 1.6.3.3
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Klaus 'mrmoku' Kurzmann
 
 
