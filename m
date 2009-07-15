@@ -1,22 +1,37 @@
-Received: from [80.246.246.162] (helo=office.altell.ru)
+Received: from [212.18.0.10] (helo=mail-out.m-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MR4Ba-0005zv-50
+	(envelope-from <mok@mnet-online.de>) id 1MR5Lj-0005vG-A9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 15:06:16 +0200
-Received: from localhost.localdomain (unknown [192.168.1.115])
-	by mail.altell.local (Postfix) with ESMTP id A96EC68804;
-	Wed, 15 Jul 2009 16:52:44 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
+	Wed, 15 Jul 2009 16:20:47 +0200
+Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
+	by mail-out.m-online.net (Postfix) with ESMTP id B6EA51C0018B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2009 16:07:23 +0200 (CEST)
+Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
+	by mail.m-online.net (Postfix) with ESMTP id 5F2F190193
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2009 16:07:23 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.3.149])
+	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
+	port 10024) with ESMTP id VNNPaa2SuH6W
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2009 16:07:22 +0200 (CEST)
+Received: from mrdenker.localdomain (ppp-93-104-40-112.dynamic.mnet-online.de
+	[93.104.40.112])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2009 16:07:22 +0200 (CEST)
+From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jul 2009 16:52:41 +0400
-Message-Id: <1247662361-20485-2-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1247662361-20485-1-git-send-email-khimov@altell.ru>
-References: <1247662361-20485-1-git-send-email-khimov@altell.ru>
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-Spam-Status: No
-Subject: [PATCH 2/2] icecc: introduce ICECC_FALLBACK_PARALLEL
+Date: Wed, 15 Jul 2009 16:07:19 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.29.5-191.fc11.x86_64; KDE/4.2.4; x86_64; ;
+	)
+MIME-Version: 1.0
+Message-Id: <200907151607.19897.mok@mnet-online.de>
+Subject: [RFC] patch for bluetooth audio.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,38 +45,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 13:06:19 -0000
+X-List-Received-Date: Wed, 15 Jul 2009 14:20:47 -0000
+X-Groupsio-MsgNum: 11951
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_XKeXKjizpzq7EVS"
 
-icecc-blacklisted packages currently built not only without icecc environment
-set but also without any parallel options enabled. The original intention was
-not to kill the build machine, I guess, since having a good icecc cluster it's
-easy to set '-j16' or '-j32' or whatever else which could do so. However as
-the toolchain packages are blacklisted for icecc they're becoming a
-bottleneck in the build process, while they can be built with local-machine
-parallelism.
+--Boundary-00=_XKeXKjizpzq7EVS
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-So, in order to solve it, introducing ICECC_FALLBACK_PARALLEL option. It's
-simply used as PARALLEL_MAKE for icecc-blacklisted packages.
----
- classes/icecc.bbclass |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Hello all,
 
-diff --git a/classes/icecc.bbclass b/classes/icecc.bbclass
-index 27e0e56..f8855b6 100644
---- a/classes/icecc.bbclass
-+++ b/classes/icecc.bbclass
-@@ -261,7 +261,8 @@ def icc_path(bb,d):
-     for black in package_blacklist:
-         if black in package_tmp:
-             bb.note(package_tmp, ' found in blacklist, disable icecc')
--            bb.data.setVar("PARALLEL_MAKE" , "", d) 
-+            fallback_parallel = bb.data.getVar('ICECC_FALLBACK_PARALLEL', d) or ""
-+            bb.data.setVar("PARALLEL_MAKE", fallback_parallel, d)
-             return ""
- 
-     prefix = bb.data.expand('${HOST_PREFIX}', d)
+to get audio routing for bluetooth headsets correct on OpenMoko phones we need 
+the attached patch to bluez.inc which changes audio.conf to enables the 
+SCORouting=PCM option.
+
+Is this something that can be done globally? Or will it break on other 
+hardware? If it cannot be done globally, what is the correct way to do that? 
+We (SHR distro) could do that with a distro override, but if it has the 
+possibility to break other hardware we would not want that ;) We would rather 
+add a machine override then. Right now bluez4 is *not* machine dependent and 
+the config files are included in the base package. I see two ways to do that:
+
+a) make bluez4 machine dependent and add overrides for om-gta01/2
+b) extract the config files into some bluez4-config package and provide a 
+different one for om-gta01/2
+
+Thoughts?
 -- 
-1.6.3.3
+
+Klaus 'mrmoku' Kurzmann
 
 
 
+--Boundary-00=_XKeXKjizpzq7EVS
+Content-Type: text/x-patch;
+  charset="UTF-8";
+  name="bluez4.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="bluez4.patch"
+
+diff --git a/recipes/bluez/bluez4.inc b/recipes/bluez/bluez4.inc
+index 4c3bfb8..4cb3bc8 100644
+--- a/recipes/bluez/bluez4.inc
++++ b/recipes/bluez/bluez4.inc
+@@ -41,6 +41,7 @@ EXTRA_OECONF = "\
+ "
+ 
+ do_install_append() {
++        sed -i 's/#SCORouting=PCM/SCORouting=PCM/' ${S}/audio/audio.conf
+         install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
+         install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetooth/
+         install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
+
+--Boundary-00=_XKeXKjizpzq7EVS--
