@@ -1,28 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MR5UP-0003SN-6I
+	(envelope-from <khimov@altell.ru>) id 1MR5vL-0004Rq-Cd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 16:29:45 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MR5HO-0002QA-IU
+	Wed, 15 Jul 2009 16:57:35 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1MR5iI-000AYO-HK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 15:16:18 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MR5HN-0001sE-IY
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 15:16:17 +0100
-From: Phil Blundell <pb@reciva.com>
+	Wed, 15 Jul 2009 18:44:08 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200907151607.19897.mok@mnet-online.de>
-References: <200907151607.19897.mok@mnet-online.de>
-Date: Wed, 15 Jul 2009 15:16:13 +0100
-Message-Id: <1247667373.6648.290.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: [RFC] patch for bluetooth audio.conf
+Date: Wed, 15 Jul 2009 18:43:48 +0400
+User-Agent: KMail/1.11.4 (Linux/2.6.29; KDE/4.2.4; x86_64; ; )
+References: <1247662361-20485-1-git-send-email-khimov@altell.ru>
+	<1247662361-20485-2-git-send-email-khimov@altell.ru>
+	<1247666943.6648.285.camel@mill.internal.reciva.com>
+In-Reply-To: <1247666943.6648.285.camel@mill.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <200907151843.49208.khimov@altell.ru>
+X-SpamTest-Envelope-From: khimov@altell.ru
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9036 [Jul 15 2009]
+X-SpamTest-Method: none
+X-SpamTest-Rate: 0
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+Subject: Re: [PATCH 2/2] icecc: introduce ICECC_FALLBACK_PARALLEL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,41 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 14:29:45 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Jul 2009 14:57:35 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Wed, 2009-07-15 at 16:07 +0200, Klaus 'mrmoku' Kurzmann wrote:
-> to get audio routing for bluetooth headsets correct on OpenMoko phones we need 
-> the attached patch to bluez.inc which changes audio.conf to enables the 
-> SCORouting=PCM option.
-> 
-> Is this something that can be done globally? Or will it break on other 
-> hardware? 
+On =D0=A1=D1=80=D0=B5=D0=B4=D0=B0 15 =D0=B8=D1=8E=D0=BB=D1=8F 2009 18:09:03=
+ Phil Blundell wrote:
+> On Wed, 2009-07-15 at 16:52 +0400, Roman I Khimov wrote:
+> > icecc-blacklisted packages currently built not only without icecc
+> > environment set but also without any parallel options enabled. The
+> > original intention was not to kill the build machine, I guess, since
+> > having a good icecc cluster it's easy to set '-j16' or '-j32' or whatev=
+er
+> > else which could do so. However as the toolchain packages are blacklist=
+ed
+> > for icecc they're becoming a bottleneck in the build process, while they
+> > can be built with local-machine parallelism.
+> >
+> > So, in order to solve it, introducing ICECC_FALLBACK_PARALLEL option.
+> > It's simply used as PARALLEL_MAKE for icecc-blacklisted packages.
+>
+> Maybe it would be better to do this the other way around: have an
+> ICECC_PARALLEL_MAKE which is used instead of PARALLEL_MAKE when icecc is
+> selected, and make this be the one that you set to "-j1024".  Then, if
+> icecc is disabled for any reason (blacklisted package, or just because
+> you stop inheriting the class) it would go back to using the regular
+> PARALLEL_MAKE setting.
 
-It will break on (some) other hardware.  SCORouting is a binary setting:
-you can send audio over the HCI, or through a dedicated port (PCM) but
-not both.  This change would lose on machines where the PCM interface
-isn't connected to anything: in particular that probably means any
-machine where the bluetooth hardware is on a usb dongle or CF card.
-
-> If it cannot be done globally, what is the correct way to do that? 
-> We (SHR distro) could do that with a distro override, but if it has the 
-> possibility to break other hardware we would not want that ;) We would rather 
-> add a machine override then. Right now bluez4 is *not* machine dependent and 
-> the config files are included in the base package. I see two ways to do that:
-> 
-> a) make bluez4 machine dependent and add overrides for om-gta01/2
-> b) extract the config files into some bluez4-config package and provide a 
-> different one for om-gta01/2
-
-Option (a) sounds fairly unattractive.  My first preference would be to
-figure this out at runtime (eg by extending blueprobe to do it) rather
-than in a static file; if that's impossible or impractical then your
-option (b) is probably fine.
-
-p.
-
-
+Yep, thought of that, should be a better solution, but I have a doubt about=
+=20
+recipes intentionally setting PARALLEL_MAKE to nothing (thus avoiding paral=
+lel=20
+build bugs in package). If we'll forcibly set PARALLEL_MAKE to=20
+ICECC_PARALLEL_MAKE in icecc.bbclass, it might break such packages.
 
 
