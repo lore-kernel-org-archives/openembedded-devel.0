@@ -1,37 +1,29 @@
-Received: from [212.18.0.10] (helo=mail-out.m-online.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1MR5Lj-0005vG-A9
+	(envelope-from <pb@reciva.com>) id 1MR5NW-0003Qu-2k
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 16:20:47 +0200
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id B6EA51C0018B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 16:07:23 +0200 (CEST)
-Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
-	by mail.m-online.net (Postfix) with ESMTP id 5F2F190193
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 16:07:23 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.3.149])
-	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
-	port 10024) with ESMTP id VNNPaa2SuH6W
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 16:07:22 +0200 (CEST)
-Received: from mrdenker.localdomain (ppp-93-104-40-112.dynamic.mnet-online.de
-	[93.104.40.112])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 16:07:22 +0200 (CEST)
-From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
+	Wed, 15 Jul 2009 16:22:38 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MR5AS-0002AA-3H
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jul 2009 15:09:11 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MR5AR-0001nd-Dz
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jul 2009 15:09:07 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jul 2009 16:07:19 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.29.5-191.fc11.x86_64; KDE/4.2.4; x86_64; ;
-	)
-MIME-Version: 1.0
-Message-Id: <200907151607.19897.mok@mnet-online.de>
-Subject: [RFC] patch for bluetooth audio.conf
+In-Reply-To: <1247662361-20485-2-git-send-email-khimov@altell.ru>
+References: <1247662361-20485-1-git-send-email-khimov@altell.ru>
+	<1247662361-20485-2-git-send-email-khimov@altell.ru>
+Date: Wed, 15 Jul 2009 15:09:03 +0100
+Message-Id: <1247666943.6648.285.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: Re: [PATCH 2/2] icecc: introduce ICECC_FALLBACK_PARALLEL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,60 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 14:20:47 -0000
-X-Groupsio-MsgNum: 11951
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_XKeXKjizpzq7EVS"
-
---Boundary-00=_XKeXKjizpzq7EVS
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Wed, 15 Jul 2009 14:22:38 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Hello all,
+On Wed, 2009-07-15 at 16:52 +0400, Roman I Khimov wrote:
+> icecc-blacklisted packages currently built not only without icecc environment
+> set but also without any parallel options enabled. The original intention was
+> not to kill the build machine, I guess, since having a good icecc cluster it's
+> easy to set '-j16' or '-j32' or whatever else which could do so. However as
+> the toolchain packages are blacklisted for icecc they're becoming a
+> bottleneck in the build process, while they can be built with local-machine
+> parallelism.
+> 
+> So, in order to solve it, introducing ICECC_FALLBACK_PARALLEL option. It's
+> simply used as PARALLEL_MAKE for icecc-blacklisted packages.
 
-to get audio routing for bluetooth headsets correct on OpenMoko phones we need 
-the attached patch to bluez.inc which changes audio.conf to enables the 
-SCORouting=PCM option.
+Maybe it would be better to do this the other way around: have an
+ICECC_PARALLEL_MAKE which is used instead of PARALLEL_MAKE when icecc is
+selected, and make this be the one that you set to "-j1024".  Then, if
+icecc is disabled for any reason (blacklisted package, or just because
+you stop inheriting the class) it would go back to using the regular
+PARALLEL_MAKE setting.
 
-Is this something that can be done globally? Or will it break on other 
-hardware? If it cannot be done globally, what is the correct way to do that? 
-We (SHR distro) could do that with a distro override, but if it has the 
-possibility to break other hardware we would not want that ;) We would rather 
-add a machine override then. Right now bluez4 is *not* machine dependent and 
-the config files are included in the base package. I see two ways to do that:
-
-a) make bluez4 machine dependent and add overrides for om-gta01/2
-b) extract the config files into some bluez4-config package and provide a 
-different one for om-gta01/2
-
-Thoughts?
--- 
-
-Klaus 'mrmoku' Kurzmann
+p.
 
 
 
---Boundary-00=_XKeXKjizpzq7EVS
-Content-Type: text/x-patch;
-  charset="UTF-8";
-  name="bluez4.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename="bluez4.patch"
 
-diff --git a/recipes/bluez/bluez4.inc b/recipes/bluez/bluez4.inc
-index 4c3bfb8..4cb3bc8 100644
---- a/recipes/bluez/bluez4.inc
-+++ b/recipes/bluez/bluez4.inc
-@@ -41,6 +41,7 @@ EXTRA_OECONF = "\
- "
- 
- do_install_append() {
-+        sed -i 's/#SCORouting=PCM/SCORouting=PCM/' ${S}/audio/audio.conf
-         install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
-         install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetooth/
-         install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
-
---Boundary-00=_XKeXKjizpzq7EVS--
