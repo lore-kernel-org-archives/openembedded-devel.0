@@ -1,35 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MQyqF-0008DC-99
-	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 09:23:51 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MQydF-00067C-Sq
-	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 07:10:26 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 15 Jul 2009 07:10:25 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 15 Jul 2009 07:10:25 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 15 Jul 2009 09:10:14 +0200
-Message-ID: <h3jvcm$d6e$1@ger.gmane.org>
-References: <200907121334.38852.raj.khem@gmail.com>	<20090713035713.GA21203@denix.org>	<1247600832.29960.18.camel@dax.rpnet.com>
-	<h3iq36$riq$1@ger.gmane.org>
-	<c384c5ea0907141413p49b39706t95e7b426d0d276a8@mail.gmail.com>
+	(envelope-from <utx@penguin.cz>) id 1MR1dg-0005f6-NS
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jul 2009 12:23:04 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 04CAA1417193
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2009 12:12:14 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YiUsjrB1LgX2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2009 12:12:13 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id C32BA1416BA9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2009 12:12:13 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A5CF836.6000309@cbnco.com>
+References: <1247599483.7178.11.camel@utx.utx.cz> <4A5CF836.6000309@cbnco.com>
+Date: Wed, 15 Jul 2009 12:09:40 +0200
+Message-Id: <1247652580.14441.5.camel@utx.utx.cz>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090708 Shredder/3.0b3pre
-In-Reply-To: <c384c5ea0907141413p49b39706t95e7b426d0d276a8@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: e2fsprogs-libs build failure analysis
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: [PATCH] glibc: install correct stubs (fixes midori crash)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +39,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 07:23:52 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Jul 2009 10:23:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 14-07-09 23:13, Leon Woestenberg wrote:
-> Hello,
->
-> On Tue, Jul 14, 2009 at 10:33 PM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
->> On 14-07-09 21:47, Richard Purdie wrote:
->>
->>> The real problem here is two packages providing the same library. This
->>> is actually a critical error and means your distro is screwed unless
->>> handled very carefully. Rather than hacking around the problem, I'd much
->>> rather we detect and abort in this case and warn the user something is
->>> about to break and that any package feeds will need careful attention.
->>
->> In this case it works as intended, at least in angstrom :)
->>
-> Not sure, I get build errors on both packages.
->
-> http://bugs.openembedded.org/show_bug.cgi?id=5149
+Michael Smith wrote:
+> Stanislav Brabec wrote:
+>  > Attached patch prevents overwriting of a real stub include file by a
+>  > dummy stub file. Patch is tested only with the latest glibc from the
+>  > angstrom.
+>=20
+> Hi Stanislav,
+>=20
+> Patch 2/3 here fixes it:
+>=20
+> http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/glibc_tweak=
+s/
+>=20
+> Also cleans some of the other lines that aren't needed.
 
-I wasn't talking about build errors, I was getting at the "any package 
-feeds will need careful attention" bit
+Your patch is better.
+
+And INC_PR seems to be a good idea for any .inc file. I have been
+thinking about a generic feature setting revision to
+inc_revision+bb_revision.
+
+=EF=BB=BFWell, I am not a core team member, but you have my ACK. The bug =
+is
+apparent and debugging of subsequent errors take a lot of time.
+
+Acked-by: Stanislav Brabec <utx@penguin.cz>
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
