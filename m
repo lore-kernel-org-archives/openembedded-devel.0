@@ -1,28 +1,20 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.246.246.162] (helo=office.altell.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MR3Bb-0006KF-9S
+	(envelope-from <khimov@altell.ru>) id 1MR4B9-0005zN-G8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 14:02:12 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MR2yd-0006tQ-Lw
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 12:48:47 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MR2yd-0000di-DO
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 12:48:47 +0100
-From: Phil Blundell <pb@reciva.com>
+	Wed, 15 Jul 2009 15:05:48 +0200
+Received: from localhost.localdomain (unknown [192.168.1.115])
+	by mail.altell.local (Postfix) with ESMTP id 2C50868803;
+	Wed, 15 Jul 2009 16:52:11 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200907151316.33659.thebohemian@gmx.net>
-References: <200907151316.33659.thebohemian@gmx.net>
-Date: Wed, 15 Jul 2009 12:48:43 +0100
-Message-Id: <1247658523.6648.233.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-Subject: Re: remove guile-native 1.8.2, switch to 1.8.6
+Date: Wed, 15 Jul 2009 16:52:01 +0400
+Message-Id: <1247662322-20408-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.3.3
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-Spam-Status: No
+Subject: [PATCH 1/2] icecc: remove bb.errors on un-built compilers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,30 +28,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 12:02:16 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Jul 2009 13:05:51 -0000
 
-On Wed, 2009-07-15 at 13:16 +0200, Robert Schuster wrote:
-> guile-native 1.8.2 fails for me with distribution 'openmoko'. I get the same 
-> error as this one: http://tinderbox.openembedded.net/packages/96906/
-> 
-> guile-native 1.8.6 builds fine though. anyone unhappy about dumping 1.8.2 ?
+Building things with icecc and BB_NUMBER_THREADS more then 1 you could see
+a lot of messages:
 
-I guess you should take this up with the openmoko people.  Presumably
-they have set 1.8.2 as their preferred version for a reason and it would
-be worth checking that 1.8.6 really does work (rather than just build)
-for them before changing it.
+ERROR: no cross compiler built yet?
 
-As a general rule I am not in favour of removing old recipes unless they
-are obviously and grossly broken in such a way that nobody could
-possibly be using them.  In other words, the fact that the recipe
-happens not to build in one particular configuration is not, in itself,
-a compelling reason to delete it.  I haven't looked at the 1.8.2 error
-closely enough to say whether that's the case here or not.
+before gcc-cross would be properly built. There is technically nothing wrong,
+cross compiler is not there yet and it's not needed when bitbake does
+fetch-unpack-patch and other things to prepare package build. But it makes
+people uncomfortable.
 
-p.
+We can safely kill this messages.
+---
+ classes/icecc.bbclass |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
+diff --git a/classes/icecc.bbclass b/classes/icecc.bbclass
+index 0eb2d9f..27e0e56 100644
+--- a/classes/icecc.bbclass
++++ b/classes/icecc.bbclass
+@@ -62,7 +62,6 @@ def create_cross_env(bb,d):
+         os.stat(os.path.join(ice_dir, target_sys, 'lib', 'libstdc++.so'))
+         os.stat(os.path.join(ice_dir, target_sys, 'bin', 'g++'))
+     except: # no cross compiler built yet
+-        bb.error('no cross compiler built yet?')
+         return ""
+ 
+     VERSION = icc_determine_gcc_version( os.path.join(ice_dir,target_sys,"bin","g++") )
+@@ -159,7 +158,6 @@ def create_cross_kernel_env(bb,d):
+     try:
+         os.stat(os.path.join(ice_dir, 'bin', kernel_cc))
+     except: # no cross compiler built yet
+-        bb.error('no kernel cross compiler built yet')
+         return ""
+ 
+     VERSION = icc_determine_gcc_version( os.path.join(ice_dir,"bin",kernel_cc) )
+-- 
+1.6.3.3
 
 
 
