@@ -1,24 +1,28 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1MR2gm-0005AA-8a
+Received: from [82.71.203.194] (helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <pb@reciva.com>) id 1MR3Bb-0006KF-9S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 13:30:20 +0200
-Received: (qmail invoked by alias); 15 Jul 2009 11:16:53 -0000
-Received: from p5DDC6558.dip.t-dialin.net (EHLO entw2.localnet) [93.220.101.88]
-	by mail.gmx.net (mp065) with SMTP; 15 Jul 2009 13:16:53 +0200
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/r+kMWiErrslbZQTPLZocKXmow7L2oOg5r2YVnv0
-	btatEITK0GqaYJ
-From: Robert Schuster <thebohemian@gmx.net>
+	Wed, 15 Jul 2009 14:02:12 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MR2yd-0006tQ-Lw
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jul 2009 12:48:47 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MR2yd-0000di-DO
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jul 2009 12:48:47 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jul 2009 13:16:32 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.28-13-generic; KDE/4.2.4; x86_64; ; )
-MIME-Version: 1.0
-Message-Id: <200907151316.33659.thebohemian@gmx.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.71,0.71
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: remove guile-native 1.8.2, switch to 1.8.6
+In-Reply-To: <200907151316.33659.thebohemian@gmx.net>
+References: <200907151316.33659.thebohemian@gmx.net>
+Date: Wed, 15 Jul 2009 12:48:43 +0100
+Message-Id: <1247658523.6648.233.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: Re: remove guile-native 1.8.2, switch to 1.8.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +36,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 11:30:22 -0000
-X-Groupsio-MsgNum: 11946
-Content-Type: multipart/signed; boundary="nextPart1323167.n3Mc0nKLHF";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 15 Jul 2009 12:02:16 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
---nextPart1323167.n3Mc0nKLHF
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+On Wed, 2009-07-15 at 13:16 +0200, Robert Schuster wrote:
+> guile-native 1.8.2 fails for me with distribution 'openmoko'. I get the same 
+> error as this one: http://tinderbox.openembedded.net/packages/96906/
+> 
+> guile-native 1.8.6 builds fine though. anyone unhappy about dumping 1.8.2 ?
 
-Hi,
-guile-native 1.8.2 fails for me with distribution 'openmoko'. I get the sam=
-e=20
-error as this one: http://tinderbox.openembedded.net/packages/96906/
+I guess you should take this up with the openmoko people.  Presumably
+they have set 1.8.2 as their preferred version for a reason and it would
+be worth checking that 1.8.6 really does work (rather than just build)
+for them before changing it.
 
-guile-native 1.8.6 builds fine though. anyone unhappy about dumping 1.8.2 ?
+As a general rule I am not in favour of removing old recipes unless they
+are obviously and grossly broken in such a way that nobody could
+possibly be using them.  In other words, the fact that the recipe
+happens not to build in one particular configuration is not, in itself,
+a compelling reason to delete it.  I haven't looked at the 1.8.2 error
+closely enough to say whether that's the case here or not.
 
-Regards
-Robert
+p.
 
---nextPart1323167.n3Mc0nKLHF
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEABECAAYFAkpdupEACgkQG9cfwmwwEtrgwACeL0v3bHsH+5Kb7HJ6mPkU8Cjx
-1n4AnjR4fgi3lKq48HTrGleOX9Fl4kKz
-=z4FW
------END PGP SIGNATURE-----
 
---nextPart1323167.n3Mc0nKLHF--
