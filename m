@@ -1,25 +1,34 @@
-Received: from [17.148.16.87] (helo=asmtpout012.mac.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MQtjw-0006rO-Af
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 03:57:00 +0200
-MIME-version: 1.0
-Received: from [87.201.169.211] by asmtp012.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KMS007VKVGLM570@asmtp012.mac.com> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	14 Jul 2009 18:43:37 -0700 (PDT)
-Message-id: <EB4716C3-2217-4C37-AF5F-2A12B1D14254@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: openembedded-devel@lists.openembedded.org
-In-reply-to: <c384c5ea0907141413p49b39706t95e7b426d0d276a8@mail.gmail.com>
-Date: Wed, 15 Jul 2009 05:43:04 +0400
-References: <200907121334.38852.raj.khem@gmail.com>
-	<20090713035713.GA21203@denix.org>
-	<1247600832.29960.18.camel@dax.rpnet.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MQyqF-0008DC-99
+	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 09:23:51 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MQydF-00067C-Sq
+	for openembedded-devel@openembedded.org; Wed, 15 Jul 2009 07:10:26 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 15 Jul 2009 07:10:25 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 15 Jul 2009 07:10:25 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 15 Jul 2009 09:10:14 +0200
+Message-ID: <h3jvcm$d6e$1@ger.gmane.org>
+References: <200907121334.38852.raj.khem@gmail.com>	<20090713035713.GA21203@denix.org>	<1247600832.29960.18.camel@dax.rpnet.com>
 	<h3iq36$riq$1@ger.gmane.org>
 	<c384c5ea0907141413p49b39706t95e7b426d0d276a8@mail.gmail.com>
-X-Mailer: Apple Mail (2.935.3)
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090708 Shredder/3.0b3pre
+In-Reply-To: <c384c5ea0907141413p49b39706t95e7b426d0d276a8@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: e2fsprogs-libs build failure analysis
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,23 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 01:57:00 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Wed, 15 Jul 2009 07:23:52 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
-
-> On Tue, Jul 14, 2009 at 10:33 PM, Koen  
-> Kooi<k.kooi@student.utwente.nl> wrote:
+On 14-07-09 23:13, Leon Woestenberg wrote:
+> Hello,
+>
+> On Tue, Jul 14, 2009 at 10:33 PM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>> On 14-07-09 21:47, Richard Purdie wrote:
+>>
+>>> The real problem here is two packages providing the same library. This
+>>> is actually a critical error and means your distro is screwed unless
+>>> handled very carefully. Rather than hacking around the problem, I'd much
+>>> rather we detect and abort in this case and warn the user something is
+>>> about to break and that any package feeds will need careful attention.
 >>
 >> In this case it works as intended, at least in angstrom :)
+>>
+> Not sure, I get build errors on both packages.
+>
+> http://bugs.openembedded.org/show_bug.cgi?id=5149
 
-I'm using overo-oe, angstrom release, and I get this error if I build  
-the environment from the beginning.
-
-Best regards,
-
-Elvis
+I wasn't talking about build errors, I was getting at the "any package 
+feeds will need careful attention" bit
 
 
 
