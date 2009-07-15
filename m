@@ -1,31 +1,30 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MR1dg-0005f6-NS
+	(envelope-from <pb@reciva.com>) id 1MR1eg-0005gA-3Q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Jul 2009 12:23:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 04CAA1417193
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 12:12:14 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YiUsjrB1LgX2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 12:12:13 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id C32BA1416BA9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2009 12:12:13 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 15 Jul 2009 12:24:06 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MR1Ri-0004FX-Mk
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jul 2009 11:10:42 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MR1Ri-0008N8-8R
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Jul 2009 11:10:42 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A5CF836.6000309@cbnco.com>
-References: <1247599483.7178.11.camel@utx.utx.cz> <4A5CF836.6000309@cbnco.com>
-Date: Wed, 15 Jul 2009 12:09:40 +0200
-Message-Id: <1247652580.14441.5.camel@utx.utx.cz>
+In-Reply-To: <20090714234205.GN15944@smtp.west.cox.net>
+References: <1247612892-19937-1-git-send-email-GNUtoo@no-log.org>
+	<20090714233712.GM15944@smtp.west.cox.net>
+	<20090714234205.GN15944@smtp.west.cox.net>
+Date: Wed, 15 Jul 2009 11:10:38 +0100
+Message-Id: <1247652638.6648.202.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: [PATCH] glibc: install correct stubs (fixes midori crash)
+X-Mailer: Evolution 2.26.2 
+Subject: Re: mdev.sh: permit serial console login and permit correct runlevel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +38,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2009 10:23:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Jul 2009 10:24:06 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Michael Smith wrote:
-> Stanislav Brabec wrote:
->  > Attached patch prevents overwriting of a real stub include file by a
->  > dummy stub file. Patch is tested only with the latest glibc from the
->  > angstrom.
->=20
-> Hi Stanislav,
->=20
-> Patch 2/3 here fixes it:
->=20
-> http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/glibc_tweak=
-s/
->=20
-> Also cleans some of the other lines that aren't needed.
+On Tue, 2009-07-14 at 16:42 -0700, Tom Rini wrote:
+> To follow up to myself, the 'mdev' package should just go away really.
+> This particular bug is because 'mdev' has an empty mdev.conf while
+> busybox's mdev does not, and it contains console/null/etc entries.
 
-Your patch is better.
+Ah yes, right.  It looks like the immediate bug is that micro-base-image
+is setting IMAGE_DEV_MANAGER = "mdev", which is causing the bogus
+package to get dragged in.  I guess that variable should probably just
+be left empty to use busybox mdev.
 
-And INC_PR seems to be a good idea for any .inc file. I have been
-thinking about a generic feature setting revision to
-inc_revision+bb_revision.
+p.
 
-=EF=BB=BFWell, I am not a core team member, but you have my ACK. The bug =
-is
-apparent and debugging of subsequent errors take a lot of time.
-
-Acked-by: Stanislav Brabec <utx@penguin.cz>
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
 
 
 
