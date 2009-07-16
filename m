@@ -1,31 +1,27 @@
 Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MRRZQ-0007tH-KD
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Jul 2009 16:04:24 +0200
+	(envelope-from <sledz@DResearch.DE>) id 1MRS3f-0006Im-Pu
+	for openembedded-devel@openembedded.org; Thu, 16 Jul 2009 16:35:39 +0200
 Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
 	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id E803416DE84
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2009 15:54:44 +0200 (CEST)
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 38D5016DE84
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Jul 2009 16:26:00 +0200 (CEST)
 Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 1B6572A4227
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2009 15:50:53 +0200 (CEST)
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 50FD72A4226
+	for <openembedded-devel@openembedded.org>;
+	Thu, 16 Jul 2009 16:22:09 +0200 (CEST)
 X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Date: Thu, 16 Jul 2009 15:50:16 +0200
-Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF92C@hiob.intern.dresearch.de>
-In-Reply-To: <h3n7jb$il3$1@ger.gmane.org>
+Date: Thu, 16 Jul 2009 16:21:31 +0200
+Message-ID: <69E6C70090A0A14498CC98FAE5E06B6E3CF92D@hiob.intern.dresearch.de>
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Baking coreutils-native-7.2-r0 fails
-Thread-Index: AcoGF6uf1i6njldVSj6YPkc9lLeNIAABI5QA
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF928@hiob.intern.dresearch.de>
-	<h3n7jb$il3$1@ger.gmane.org>
+Thread-Topic: Copyright?
+Thread-Index: AcoGILjdNT6VTq/HRzCnovCkI7BA9w==
 From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Re: Baking coreutils-native-7.2-r0 fails
+To: <openembedded-devel@openembedded.org>
+Subject: Copyright?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,17 +35,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2009 14:04:24 -0000
+X-List-Received-Date: Thu, 16 Jul 2009 14:35:40 -0000
 Content-class: urn:content-classes:message
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-> Sounds like your builddir is either on nfs or contains a symlink.
-
-You're right. Buildir path contained a symlink.
-
-Thx
+SnVzdCBhIHNob3J0IG9mZiB0b3BpYyBxdWVzdGlvbjogV2hvIG93bnMgdGhlIGNvcHlyaWdodCBm
+b3IgdGhlIE9wZW5FbWJlZGRlZCBsb2dvPw0KDQpJJ2RlIGxpa2UgdG8gdXBsb2FkIHRoZSBpbWFn
+ZSB0byB0aGUgd2lraXBlZGlhIHRvIGJlYXV0aWZ5IHRoZSBPRSBhcnRpY2xlLiA6KQ0K
 
 
 
