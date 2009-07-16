@@ -1,33 +1,33 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MRI0J-0001um-T0
-	for openembedded-devel@openembedded.org; Thu, 16 Jul 2009 05:51:31 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MRHnI-0000Xd-Mv
-	for openembedded-devel@openembedded.org; Thu, 16 Jul 2009 03:38:04 +0000
-Received: from p5b3b3402.dip.t-dialin.net ([91.59.52.2])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Thu, 16 Jul 2009 03:38:04 +0000
-Received: from no2spam by p5b3b3402.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Thu, 16 Jul 2009 03:38:04 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 16 Jul 2009 05:37:52 +0200
-Message-ID: <4A5EA090.6040902@nospam.arcornews.de>
-References: <E1MQNDW-0007ur-Rm@melo.openembedded.org>	<200907132005.09088.marcin@juszkiewicz.com.pl>	<20090713185246.GB8275@denix.org>
-	<f96d234e0907131307q462bc083h3cf25bfe6d4492fd@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b3402.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.22 (X11/20090710)
-In-Reply-To: <f96d234e0907131307q462bc083h3cf25bfe6d4492fd@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [oe-commits] Marco Cavallini : Added linux version recipes/linux/linux-2.6. 29 for taskit Stamp9G20 Evaluation Board
+	(envelope-from <khimov@altell.ru>) id 1MRPFj-0000C2-Pb
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Jul 2009 13:35:55 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1MRP2d-000OYW-Co
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Jul 2009 15:22:23 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Jul 2009 15:22:14 +0400
+User-Agent: KMail/1.11.4 (Linux/2.6.29; KDE/4.2.4; x86_64; ; )
+References: <1247662361-20485-1-git-send-email-khimov@altell.ru>
+	<20090715171503.GA15057@gmail.com>
+In-Reply-To: <20090715171503.GA15057@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200907161522.15171.khimov@altell.ru>
+X-SpamTest-Envelope-From: khimov@altell.ru
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9050 [Jul 16 2009]
+X-SpamTest-Method: none
+X-SpamTest-Rate: 0
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+Subject: Re: [PATCH 1/2] icecc: remove bb.errors on un-built compilers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,18 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2009 03:51:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Jul 2009 11:35:56 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Cliff Brake wrote:
-> I have not seen such a message, but I suggest that
-> http://wiki.openembedded.net/index.php/New_commit_rights be updated to
-> contain any relevant information.  I'll start sending a link to this
-> page with new commit rights that I add.
+On =D0=A1=D1=80=D0=B5=D0=B4=D0=B0 15 =D0=B8=D1=8E=D0=BB=D1=8F 2009 21:15:30=
+ Khem Raj wrote:
+> On (15/07/09 16:52), Roman I Khimov wrote:
+> > Building things with icecc and BB_NUMBER_THREADS more then 1 you could
+> > see a lot of messages:
+> >
+> > ERROR: no cross compiler built yet?
+> >
+> > before gcc-cross would be properly built. There is technically nothing
+> > wrong, cross compiler is not there yet and it's not needed when bitbake
+> > does fetch-unpack-patch and other things to prepare package build. But =
+it
+> > makes people uncomfortable.
+> >
+> > We can safely kill this messages.
+>
+> provided that this part of code is not executed again when cross
+> compiler is really needed because then we will not get the warning
+> where we should get it legitimately.
 
-Actually, that page should eventually be folded into 
-http://wiki.openembedded.net/index.php/New_Dev and then die.
-
+It's needed on configure-compile stages as usual, so if there'll be no cros=
+s-
+compiler at this stages you'll notice it anyway, I guess.
 
 
