@@ -1,24 +1,27 @@
-Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MRaaS-00062M-UE
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Jul 2009 01:42:05 +0200
-Received: from gandalf.denix.org ([71.251.63.232]) by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KMW0079VEIU0V1A@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	16 Jul 2009 18:28:07 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 73B7E14AF5F; Thu,
-	16 Jul 2009 19:28:06 -0400 (EDT)
-Date: Thu, 16 Jul 2009 19:28:06 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+Received: from [206.190.48.166] (helo=web52403.mail.re2.yahoo.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <lucian_ion_2000@yahoo.com>) id 1MRhpq-0005nk-4P
+	for openembedded-devel@openembedded.org; Fri, 17 Jul 2009 09:26:26 +0200
+Received: (qmail 86111 invoked by uid 60001); 17 Jul 2009 07:12:48 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1247814768; bh=gOoa26eLu+fVp9j6/EOOx46X/QMd+afUc1ZR5ebQlw0=;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:References:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=EScCeNtQbMcxEahjH8WZU4hYEl6HK6+fHpNhL/KrZyiWiZlZUnZnrdBMQUvb9TxUtgV0z7SFwZAf6seG1Evkri1NwHpC8Bax1cRGjxDbWBj5Mx70OtU1KCWTwvzFStqCK3Nj4bFAIzyEwGBYfsWdwFaArvqpuo5PqnQtfm74jEw=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:References:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=oTf/y9W45ALWwyYSDM4HxpMoYlvWGzJAY4BKUk2Mth2drz3tnDrLzg3x51NPj0eLa7rVMQpV8uMggJFqwgIVJfyhQYNT2ekU3aVJX2zGmyPIzOk607X6oypolSZgMAkxpdWu5M7RFVJNVCVZnNllbHnf5jRvT1DWK/qrwQLjM2Q=;
+Message-ID: <736225.85365.qm@web52403.mail.re2.yahoo.com>
+X-YMail-OSG: ufFW1HEVM1mJJcX4HIEoqXYGva7dRfX0.gcMYVPlT7icRpHjWNeRxK0U7w6RW2jU1wkzLbdF.nQASnLK9Jl9pCgjW_c_k_HjR3CsOJidhsZ3OF1mm8kxVhbiY4FHadEPL.dEBf.2Tl2OO07Ty_YHqVanBJtP3V.pEEIQQq03BMPH.3XpqKYMFcXPoiFbmhvvU8B8.S6Tzq.SktiwsWQHBjdbM3beUiEWI6VkXiOYrH_fdFaZup6fp3_H8mo5bxING4OJE7Ix0F6LrpsgqKbxzP.Ayoq.pKIHdrVMt3Wipo1gAhhR7V2HqVBb.73n2lKbsf9EZiWJCOM8FzEJLz1VtMM96BYpA68c
+Received: from [87.198.251.22] by web52403.mail.re2.yahoo.com via HTTP;
+	Fri, 17 Jul 2009 00:12:48 PDT
+X-Mailer: YahooMailRC/1358.21 YahooMailWebService/0.7.289.15
+References: <E1MRRlx-0004ks-DE@melo.openembedded.org>
+Date: Fri, 17 Jul 2009 00:12:48 -0700 (PDT)
+From: Lucian Ion <lucian_ion_2000@yahoo.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090716232806.GD32273@denix.org>
-References: <1247779880-31274-1-git-send-email-raj.khem@gmail.com>
-MIME-version: 1.0
-In-reply-to: <1247779880-31274-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] util-linux-ng: Do not provide libblkid.
+In-Reply-To: <E1MRRlx-0004ks-DE@melo.openembedded.org>
+MIME-Version: 1.0
+Subject: After updating today it fails to build angstrom gpe-image.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,115 +35,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2009 23:42:05 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 17 Jul 2009 07:26:26 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 16, 2009 at 02:31:20PM -0700, Khem Raj wrote:
-> 	Currently we let utils-linux-ng provide
-> 	libblkid package which then ends up being
-> 	provided twice once from e2fsprogs-libs and
-> 	once from util-linux-ng. Future versions might
-> 	move libblkid and libuuid to utils-linux-ng
-> 	till then we will use e2fsprogs-libs provided one
-> 	on the system
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-May I co-sign it with you? :) If not, then change it to ack...
-
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-
-> ---
->  recipes/util-linux-ng/util-linux-ng.inc       |   15 ++-------------
->  recipes/util-linux-ng/util-linux-ng_2.13.1.bb |    1 +
->  recipes/util-linux-ng/util-linux-ng_2.14.bb   |    1 +
->  recipes/util-linux-ng/util-linux-ng_2.15.bb   |    1 +
->  4 files changed, 5 insertions(+), 13 deletions(-)
-> 
-> diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
-> index 59d2f08..44cd94c 100644
-> --- a/recipes/util-linux-ng/util-linux-ng.inc
-> +++ b/recipes/util-linux-ng/util-linux-ng.inc
-> @@ -1,14 +1,14 @@
->  DESCRIPTION = "Util-linux-ng is a suite of essential utilities for any Linux system."
->  SECTION = "base"
->  LICENSE = "GPL"
-> -DEPENDS = "udev zlib ncurses virtual/libintl e2fsprogs-libs"
-> +DEPENDS = "udev zlib ncurses virtual/libintl"
->  
->  inherit autotools_stage
->  AUTOTOOLS_STAGE_PKGCONFIG = "1"
->  
->  DEFAULT_PREFERENCE = "-1"
->  
-> -INC_PR = "r6"
-> +INC_PR = "r7"
->  
->  # allows for a release candidate
->  RC ?= ""
-> @@ -16,7 +16,6 @@ RC ?= ""
->  SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/util-linux-ng/v${PV}/util-linux-ng-${PV}${RC}.tar.bz2"
->  
->  PACKAGES =+ "util-linux-ng-fdisk util-linux-ng-cfdisk util-linux-ng-sfdisk util-linux-ng-swaponoff util-linux-ng-losetup util-linux-ng-umount util-linux-ng-mount util-linux-ng-readprofile "
-> -PACKAGES_DYNAMIC = "libblkid*"
->  
->  FILES_${PN}-doc += "/usr/share/misc/getopt/getopt-*.*"
->  FILES_${PN} = "${bindir} ${sbindir} ${base_bindir} ${base_sbindir}"
-> @@ -139,16 +138,6 @@ do_install () {
->  	ln -sf ${sbindir}/shutdown ${D}${sbindir}/fasthalt
->  }
->  
-> -python populate_packages_prepend () {
-> -	ulinxng_libdir = bb.data.expand('${libdir}', d)
-> -	ulinxng_libdir_dbg = bb.data.expand('${libdir}/.debug', d)
-> -	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev', allow_links=True)
-> -	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev')
-> -	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'util-linux-ng %s development package', extra_depends='${PN}-dev')
-> -	do_split_packages(d, ulinxng_libdir, '^lib(.*)\.so\.*', 'lib%s', 'util-linux-ng %s library', extra_depends='', allow_links=True)
-> -}
-> -
-> -
->  pkg_postinst_${PN} () {
->  	update-alternatives --install ${base_bindir}/dmesg dmesg dmesg.${PN} 100
->  	update-alternatives --install ${base_bindir}/kill kill kill.${PN} 100
-> diff --git a/recipes/util-linux-ng/util-linux-ng_2.13.1.bb b/recipes/util-linux-ng/util-linux-ng_2.13.1.bb
-> index c239b15..73e6023 100644
-> --- a/recipes/util-linux-ng/util-linux-ng_2.13.1.bb
-> +++ b/recipes/util-linux-ng/util-linux-ng_2.13.1.bb
-> @@ -1,4 +1,5 @@
->  require util-linux-ng.inc
-> +DEPENDS += "e2fsprogs-libs"
->  
->  SRC_URI = "${KERNELORG_MIRROR}/pub/linux/utils/util-linux-ng/v2.13/util-linux-ng-${PV}${RC}.tar.bz2"
->  #SRC_URI += "file://util-linux_2.12r-12.diff.gz;patch=1"
-> diff --git a/recipes/util-linux-ng/util-linux-ng_2.14.bb b/recipes/util-linux-ng/util-linux-ng_2.14.bb
-> index d7eafd3..b5972a9 100644
-> --- a/recipes/util-linux-ng/util-linux-ng_2.14.bb
-> +++ b/recipes/util-linux-ng/util-linux-ng_2.14.bb
-> @@ -1,4 +1,5 @@
->  require util-linux-ng.inc
-> +DEPENDS += "e2fsprogs-libs"
->  
->  PR = "${INC_PR}"
->  
-> diff --git a/recipes/util-linux-ng/util-linux-ng_2.15.bb b/recipes/util-linux-ng/util-linux-ng_2.15.bb
-> index 0c2416f..396b41d 100644
-> --- a/recipes/util-linux-ng/util-linux-ng_2.15.bb
-> +++ b/recipes/util-linux-ng/util-linux-ng_2.15.bb
-> @@ -1,4 +1,5 @@
->  require util-linux-ng.inc
-> +DEPENDS += "e2fsprogs-libs"
->  
->  PR = "${INC_PR}"
->  
-> -- 
-> 1.5.4.3
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+My build fails:=0A=0Abitbake gpe-image=0AWARNING: No matches in filesystem =
+for /home/luciani/stuff/openembedded/build/ in COLLECTIONS=0A__builtin__:74=
+: DeprecationWarning: the sets module is deprecated=0A__builtin__:74: Depre=
+cationWarning: the sets module is deprecated=0ANOTE: Handling BitBake files=
+: - (6985/6985) [100 %]=0ANOTE: Parsing finished. 6693 cached, 0 parsed, 29=
+2 skipped, 0 masked.=0ANOTE: Cache is clean, not saving.=0ANOTE: Resolving =
+any missing task queue dependencies=0ANOTE: Runtime target 'bluez-utils-dbu=
+s' is unbuildable, removing...=0AMissing or unbuildable dependency chain wa=
+s: ['bluez-utils-dbus', 'bluez-libs-3.36']=0AERROR: Required build target '=
+gpe-image' has no buildable providers.=0AMissing or unbuildable dependency =
+chain was: ['gpe-image', 'task-gpe-base', 'bluez-utils-dbus', 'bluez-libs-3=
+.36']=0A=0A=0ALatest update today:=0A=0ARemoved recipes/linux/linux-omap-2.=
+6.29/isp/base/0001-omap3-Add-base-address-definitions-and-resources-fo.patc=
+h                                             =0ARemoved recipes/linux/linu=
+x-omap-2.6.29/isp/standalone/0001-Resizer-and-Previewer-driver-added-to-com=
+mit.patch                                              =0ARemoved recipes/l=
+inux/linux-omap_2.6.30+2.6.31-rc1.bb                                       =
+                                                                =0AMerge ma=
+de by recursive.                                                           =
+                                                                         =
+=0A classes/angstrom.bbclass                           |   19 +            =
+                                                                           =
+         =0A conf/distro/angstrom-2008.1.conf                   |    3 +   =
+                                                                           =
+                  =0A conf/distro/include/angstrom.inc                   | =
+   3 +                                                                     =
+                           =0A conf/machine/include/omap3.inc              =
+       |    2 +-                                                           =
+                                    =0A recipes/libopie/libopie2_cvs.bb    =
+                |   15 +-                                                  =
+                                             =0A recipes/libqpe/libqpe-opie=
+_cvs.bb                  |    4 +-                                         =
+                                                      =0A .../linux/linux-2=
+.6.29+2.6.30-rc4/tx25/defconfig   |  255 ++-                               =
+                                                               =0A .../linu=
+x/linux-omap-2.6.29/beagleboard/defconfig  |   58 +-                       =
+                                                                        =0A=
+ ...base-address-definitions-and-resources-fo.patch |  153 -               =
+                                                                           =
+      =0A ...er-Basic-Resizer-refreshed-with-latest-gi.patch | 1890 +++++++=
+++++++                                                                     =
+               =0A ...MAP3-Resizer-V4L2-buf-layer-issues-fixed.patch} |   3=
+5 +-                                                                       =
+                        =0A .../0025-OMAP3-Resizer-Build-issues-fixed.patch=
+    |   36 +                                                               =
+                                 =0A ...izer-and-Previewer-driver-added-to-=
+commit.patch | 2915 --------------------=0A recipes/linux/linux-omap_2.6.29=
+.bb                 |    6 +-=0A recipes/linux/linux-omap_2.6.30+2.6.31-rc1=
+.bb      |   28 -=0A recipes/linux/linux_2.6.29+2.6.30-rc4.bb           |  =
+  2 +-=0A recipes/mythtv/mythtv_svn.bb                       |   41 +-=0A .=
+../opie-taskbar/opie-taskbar/server-pro-cvs.patch |   68 +=0A recipes/opie-=
+taskbar/opie-taskbar_cvs.bb           |    4 +-=0A 19 files changed, 2365 i=
+nsertions(+), 3172 deletions(-)=0A create mode 100644 classes/angstrom.bbcl=
+ass=0A delete mode 100644 recipes/linux/linux-omap-2.6.29/isp/base/0001-oma=
+p3-Add-base-address-definitions-and-resources-fo.patch=0A create mode 10064=
+4 recipes/linux/linux-omap-2.6.29/isp/resizer/0023-OMAP-Resizer-Basic-Resiz=
+er-refreshed-with-latest-gi.patch=0A rename recipes/linux/linux-omap-2.6.29=
+/isp/{standalone/0002-Resizer-bug-fixes-on-top-of-1.0.2-release.patch =3D> =
+resizer/0024-OMAP3-Resizer-V4L2-buf-layer-issues-fixed.patch} (96%)=0A crea=
+te mode 100644 recipes/linux/linux-omap-2.6.29/isp/resizer/0025-OMAP3-Resiz=
+er-Build-issues-fixed.patch=0A delete mode 100644 recipes/linux/linux-omap-=
+2.6.29/isp/standalone/0001-Resizer-and-Previewer-driver-added-to-commit.pat=
+ch=0A delete mode 100644 recipes/linux/linux-omap_2.6.30+2.6.31-rc1.bb=0A c=
+reate mode 100644 recipes/opie-taskbar/opie-taskbar/server-pro-cvs.patch=0A=
+=0A=0A=0ARegards,=0ALucian=0A=0A=0A      
 
 
