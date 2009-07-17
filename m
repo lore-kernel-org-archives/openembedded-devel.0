@@ -1,34 +1,40 @@
-Received: from [209.85.219.223] (helo=mail-ew0-f223.google.com)
+Received: from [209.85.216.171] (helo=mail-px0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1MRmfK-0002Jh-1q
+	(envelope-from <raj.khem@gmail.com>) id 1MRp6k-00024O-U1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Jul 2009 14:35:54 +0200
-Received: by ewy23 with SMTP id 23so803011ewy.12
+	Fri, 17 Jul 2009 17:12:23 +0200
+Received: by pxi1 with SMTP id 1so378687pxi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2009 05:22:15 -0700 (PDT)
+	Fri, 17 Jul 2009 07:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=bPwcwcKL8H+ZrBT1ux9RkTlCq1coZ6FpIyesMmCESAo=;
-	b=NDpaYKc3FQsurCOwgYMhbO23D1Fkw6QbTvezd8cDWa/U1OF7hibwj5jikoBf5ifeQr
-	7Xy6T1JjE65b0I2hNgLe1s9piKITjf5RVGTgZoZWLMDrASlY4RfRZdf6xv12jfsMVEL9
-	5SpR+3c/BTH8UsaPrz+KoPeOMfsiYapOi2Q4I=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=CbUKfbAi7nnl/6HPq7/86MCEdFKnLgDKTwjD2SqcjEs=;
+	b=stZ4sl1V52shgapj+Kjj2BFkpRexOuFUwQWccUl5EhslUkZSHhbsqu7Zjp8E/S73fV
+	FuAmx37GHgbAuwJwUCJ2xYUzJE5gSkmZCOyBPc4GvsWMCrbzt7BAyzrl0NugH1NkuFOM
+	PCF8mUtAgDYR50htMyMFi4yBcaYTJGJdeZGBA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=DOfFryhWSEJh0qsj8xJtSqZ7EZ8eMQHKi8z7tdg/gaXwvTzBkIzRwrou2Mit7KQ1Tx
-	C7ibrsQ7NsSM6e1tyLGLr2ECvBPNUQlyn4vYRvRSxP+YStEB5FS4N0KkMZSul2iby+Id
-	n7ep1WXR6bGdqT6HLeeWYoF6gIa3p0DThoIuk=
-MIME-Version: 1.0
-Received: by 10.216.13.194 with SMTP id b44mr289687web.139.1247833334627; Fri, 
-	17 Jul 2009 05:22:14 -0700 (PDT)
-In-Reply-To: <1247829612-9310-1-git-send-email-khimov@altell.ru>
-References: <1247829612-9310-1-git-send-email-khimov@altell.ru>
-Date: Fri, 17 Jul 2009 14:22:14 +0200
-Message-ID: <d1b08f940907170522k35cc3024q11647beb4fa45f1c@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=F2j0izFNElubG9ckX4aiW+xBrh8/4CU/PsI7gp/bInSJcP2R/xmbcSY/FcQ9nm7R8N
+	KN60jTVnuac5xIa4Pt0pkD5DzvFkdgfIxowY9/Fc9+yicQyreImpjylESm5U5zRthaZe
+	LUCncshZNqazhtlXv5pn70QMljcPLDAqJsm4I=
+Received: by 10.114.53.1 with SMTP id b1mr1700582waa.173.1247842723260;
+	Fri, 17 Jul 2009 07:58:43 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-11-93.dsl.pltn13.sbcglobal.net
+	[71.146.11.93])
+	by mx.google.com with ESMTPS id k21sm2886746waf.59.2009.07.17.07.58.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 17 Jul 2009 07:58:42 -0700 (PDT)
+Date: Fri, 17 Jul 2009 07:58:37 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090717145837.GA567@gmail.com>
+References: <1247829612-9310-1-git-send-email-khimov@altell.ru>
+MIME-Version: 1.0
+In-Reply-To: <1247829612-9310-1-git-send-email-khimov@altell.ru>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
 Subject: Re: [PATCH] package.bbclass: introduce KEEP_GNU_DEBUGLINK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,17 +49,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jul 2009 12:35:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Jul 2009 15:12:23 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Ah, that's explain the different checksums then...
-Nice catch, thx.
+On (17/07/09 15:20), Roman I Khimov wrote:
+> Currently we're keeping .gnu_debuglink section in files after stripping them.
+> It makes binaries from successive builds a bit different, which is not good
+> in situations where you want them to be exactly the same (identical checksums).
+> 
+> So, introducing KEEP_GNU_DEBUGLINK which can be set to zero to disable this
+> behavior and get identical result on successive builds for most of the
+> packages.
 
-BTW Gentoo offers the interesting "splitdebug" option see:
-http://www.gentoo.org/proj/en/qa/backtraces.xml
+you lose debugging these binaries if you remove this section. So may be
+there should be options like DEBUG_STRIP, STRIP and NO_STRIP and only one of
+which could be used.
 
-Regards
-Andrea
+Thx
+
+-Khem
 
 
