@@ -1,32 +1,39 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MSTjx-0004gO-8V
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MSY1W-0002NP-Uh
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Jul 2009 12:35:34 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 9D79316DE88
+	Sun, 19 Jul 2009 17:09:58 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id EDD352200144
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jul 2009 12:25:42 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 9DE2B2A4247
+	Sun, 19 Jul 2009 16:56:08 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E97C22200122
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jul 2009 12:21:44 +0200 (CEST)
-Received: from [10.24.0.58] ([10.24.0.58]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Sun, 19 Jul 2009 12:21:08 +0200
-Message-ID: <4A62F3B2.9090401@dresearch.de>
-Date: Sun, 19 Jul 2009 12:21:38 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Sun, 19 Jul 2009 16:56:07 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (g225005209.adsl.alicedsl.de
+	[92.225.5.209]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Jul 2009 16:56:07 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 37E1F3C082; Sun, 19 Jul 2009 16:56:07 +0200 (CEST)
+Date: Sun, 19 Jul 2009 16:56:07 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4A62DF07.8000804@dresearch.de>
-	<h3unsp$1cs$1@ger.gmane.org>	<4A62E981.40607@dresearch.de>
-	<1247997652.3356.0.camel@xora-desktop.xora.org.uk>
-In-Reply-To: <1247997652.3356.0.camel@xora-desktop.xora.org.uk>
-X-OriginalArrivalTime: 19 Jul 2009 10:21:09.0984 (UTC)
-	FILETIME=[A27FBE00:01CA085A]
-Subject: Re: do_qa_configure apr-util_1.3.4 fails
+Message-ID: <20090719145606.GA7131@rhein.zuhause.netz>
+References: <E1MRnPa-00054l-4v@melo.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <E1MRnPa-00054l-4v@melo.openembedded.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [oe-commits] Koen Kooi : schroedinger: fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,24 +47,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jul 2009 10:35:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 19 Jul 2009 15:09:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Graeme Gregory wrote:
-> The message is pretty self explanatory and 10 secs with google would
-> have given you the answer.
+On Fri, Jul 17, 2009 at 01:23:42PM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 852d21c0369f8b499931098fdc55eea59116402f
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=852d21c0369f8b499931098fdc55eea59116402f
 > 
-> The configure script is referencing /usr/include in the include
-> directorys. This is always an error.
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Fri Jul 17 13:53:28 2009 +0200
+> 
+> schroedinger: fix packaging
+> 
+> ---
+> 
+>  recipes/schroedinger/schroedinger_1.0.5.bb |    6 +++++-
+>  1 files changed, 5 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/schroedinger/schroedinger_1.0.5.bb b/recipes/schroedinger/schroedinger_1.0.5.bb
+> index 66d24c1..476c296 100644
+> --- a/recipes/schroedinger/schroedinger_1.0.5.bb
+> +++ b/recipes/schroedinger/schroedinger_1.0.5.bb
+> @@ -1,8 +1,12 @@
+>  require schroedinger.inc
+>  
+> -PR = "r2"
+> +PR = "r3"
+>  
+>  inherit autotools_stage
+>  
+>  AUTOTOOLS_STAGE_PKGCONFIG = "1"
+>  
+> +PACKAGES =+ "gst-plugin-schroedinger-dbg gst-plugin-schroedinger-dev gst-plugin-schroedinger"
+> +FILES_gst-plugin-schroedinger = "${libdir}/gstreamer-0.10/*.so"
+> +FILES_gst-plugin-schroedinger-dbg = "${libdir}/gstreamer-0.10/.debug"
+> +FILES_gst-plugin-schroedinger-dev = "${libdir}/gstreamer-0.10/*.*a"
 
-That's the proof. I'm definitely no autoconf specialist. 
+Hi,
 
-Anybody able to fix this problem in 10 seconds? I believe that i have no chance to do this in less than 10 days. ;-)
+why you are switching this stuff back? If you want gst-plugins from schroedinger, please use gst-plugin-schroedinger recipe. If
+gst-plugin-schroedinger recipe dont work you can blame me. I split the recipe because it made no sin when you build ffmpeg only,
+that half of gnome and gstreamer is build because of this dependency.
 
-Steffen
-
-PS: Is there somebody maintaining apr/apr-utils?
-
+Bye Henning
 
 
