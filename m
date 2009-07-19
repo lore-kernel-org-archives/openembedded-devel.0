@@ -1,32 +1,37 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.217.227] (helo=mail-gx0-f227.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MScby-0006Vj-3S
-	for openembedded-devel@openembedded.org; Sun, 19 Jul 2009 22:03:54 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MScOY-0003f4-L7
-	for openembedded-devel@openembedded.org; Sun, 19 Jul 2009 19:50:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sun, 19 Jul 2009 19:50:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sun, 19 Jul 2009 19:50:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 19 Jul 2009 21:49:47 +0200
-Message-ID: <h3vtcr$td5$1@ger.gmane.org>
-References: <4A6374DB.8020901@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090712 Shredder/3.0b3pre
+	(envelope-from <otavio.salvador@gmail.com>) id 1MSewY-0002md-Nn
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Jul 2009 00:33:18 +0200
+Received: by gxk27 with SMTP id 27so2879443gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Jul 2009 15:19:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=CwjFfv84HvZMFZ2d5TG4QVKg4opkBJPCPaksGOxWcU4=;
+	b=A+MomZsrCp4Gl9Fu6El1hdZKr9XGgJZ/Gkc7fmFIMAV+ywhGcw4pjs0tEXaA7MpRSB
+	BQBsTGBvgdazc7a4GN4/R7RbzS4tfrxh4RD57q6kU1A3KyfZhNYSdZBTPZj9PLvTv/NR
+	/CGviCwKJHhZ4KOo5MdpSgjuy2qAdPFsMLIjs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=ELknc4z7k3hCzn/n3Du5q/6fdlmNGmK+yNwCs8FdQymiv/sPcZzpHOPJhgrA3JmMim
+	KhMh4nT4ajqBCeNtNnbmkLfjjEC+TH3tUiIMWBVPEhLBhR2hqzPTcCmJCy7pswBDDpxQ
+	8+qLOHiokDAevJOMEl/KwT5KbmiNpCYFwXB7A=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.100.138.7 with SMTP id l7mr5318879and.141.1248041964498; Sun, 
+	19 Jul 2009 15:19:24 -0700 (PDT)
 In-Reply-To: <4A6374DB.8020901@balister.org>
-Sender: news <news@ger.gmane.org>
+References: <4A6374DB.8020901@balister.org>
+Date: Sun, 19 Jul 2009 19:19:24 -0300
+X-Google-Sender-Auth: d9d41f0daed1eeb5
+Message-ID: <be7a9f3d0907191519w1d7c6179u178e27c10cc09697@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: sqlite3 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,61 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jul 2009 20:03:54 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 19 Jul 2009 22:33:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 19-07-09 21:32, Philip Balister wrote:
-> Does anyone mind if I push this change? I ran across a package that
-> needed an additional header not staged by the current inc file.
+Hello,
 
-Go ahead, the currunt do_stage is obviously wrong.
+On Sun, Jul 19, 2009 at 4:32 PM, Philip Balister<philip@balister.org> wrote:
+> Does anyone mind if I push this change? I ran across a package that needed
+> an additional header not staged by the current inc file.
 
-regards,
+It looks like you've forgotten the PR bump. In this case would be nice
+to move it to INC_PR stuff.
 
-Koen
-
->
-> Philip
->
-> diff --git a/recipes/sqlite/sqlite3.inc b/recipes/sqlite/sqlite3.inc
-> index 93a536e..ae20ff5 100644
-> --- a/recipes/sqlite/sqlite3.inc
-> +++ b/recipes/sqlite/sqlite3.inc
-> @@ -9,7 +9,7 @@ SRC_URI = "http://www.sqlite.org/sqlite-${PV}.tar.gz \
->
-> S = "${WORKDIR}/sqlite-${PV}"
->
-> -inherit autotools pkgconfig
-> +inherit autotools_stage pkgconfig
->
-> EXTRA_OECONF = "--disable-tcl --enable-shared \
-> --enable-threadsafe"
-> @@ -26,15 +26,6 @@ do_compile_prepend() {
-> install -m 0644 sqlite3.h ${STAGING_INCDIR}
-> }
->
-> -do_stage() {
-> - oe_libinstall -so libsqlite3 ${STAGING_LIBDIR}
-> - install -m 0644 sqlite3.h ${STAGING_INCDIR}
-> -}
-> -
-> -#do_install() {
-> -# oe_runmake install DESTDIR=${D} prefix=${prefix} exec_prefix=${exec_pref
-> -#}
-> -
-> PACKAGES = "libsqlite libsqlite-dev libsqlite-doc sqlite3 sqlite3-dbg"
-> FILES_sqlite3 = "${bindir}/*"
-> FILES_libsqlite = "${libdir}/*.so.*"
->
->
-> ------------------------------------------------------------------------
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
