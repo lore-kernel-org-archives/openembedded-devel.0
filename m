@@ -1,19 +1,32 @@
-Received: from [216.183.121.77] (helo=comail.pinpointtech.com)
+Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jsoller@zolldata.com>) id 1MT0SX-0005NU-2f
+	(envelope-from <jackpot51@gmail.com>) id 1MT0fk-000619-6W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Jul 2009 23:31:46 +0200
-x-mimeole: Produced By Microsoft Exchange V6.5
+	Mon, 20 Jul 2009 23:45:24 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so819534qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jul 2009 14:31:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:from:date:message-id
+	:subject:to:content-type:content-transfer-encoding;
+	bh=PV1Xzk1/VYj4yUWd00YREZqdx7R3knDUb4PpONJqSbw=;
+	b=X51QU0WJrxGoUv9H7gV2tKhgyct659TYuMwoWXx46b9ee6Q4HlE/3jKujxVO9TuMN3
+	Zv79H8L4/yVD31OAzfnwxTWnwAgZ/nZn15xprnW1KzVv/rZiPmElI7/ZDyS5oEv8AmwK
+	ucQz1cEdDTPWLZ7TjL0mDfJ18/DayCcv5AWxs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=bAwoYwOmL/qk19zrv40SWVxZRot6JjRV1Gjf3In7JsB9wLdxnHYhn24vZmDcHXmxoz
+	ySeyqsTjIQrvwmX6FEvHyn7KSp9Nk0aB0aGl9M0Gnd8VxEJywl5fYp0HpM++kn4AzbXw
+	mr/YfGuieAMpQW1+5aOJYca6S1IF8J8rJV5UM=
 MIME-Version: 1.0
-Date: Mon, 20 Jul 2009 15:17:44 -0600
-Message-ID: <EA599B2E50F3FB4B95E48B584DBF5E801BFE1BAB@COMAIL.pinpointtech.com>
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: <EA599B2E50F3FB4B95E48B584DBF5E801BFE1BAB@COMAIL.pinpointtech.com>
-Thread-Topic: Mono 2.4.2.2 Patches
-Thread-Index: AcoJf4XoJVmxsxMyR5yx39sMDKqkhQ==
-From: "Soller, Jeremy" <jsoller@zolldata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: Mono 2.4.2.2 Patches
+Received: by 10.231.13.141 with SMTP id c13mr399871iba.56.1248125485244; Mon, 
+	20 Jul 2009 14:31:25 -0700 (PDT)
+From: Jeremy Soller <jackpot51@gmail.com>
+Date: Mon, 20 Jul 2009 15:31:05 -0600
+Message-ID: <40c7baa30907201431q6183f0afob5286a19464f71c6@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Mono 2.4.2.2 Yet Again-someone delete my dupes please
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,2010 +40,2786 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jul 2009 21:31:46 -0000
-X-Groupsio-MsgNum: 12010
-Content-class: urn:content-classes:message
-Content-Type: multipart/mixed; boundary="----_=_NextPart_001_01CA097F.85E8D960"
+X-List-Received-Date: Mon, 20 Jul 2009 21:45:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-------_=_NextPart_001_01CA097F.85E8D960
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+diff -uprN a/conf/checksums.ini b/conf/checksums.ini
+--- a/conf/checksums.ini	2009-07-20 12:50:37.019558572 -0600
++++ b/conf/checksums.ini	2009-07-20 12:54:05.916682718 -0600
+@@ -28270,3 +28270,7 @@ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340
+ md5=5f7b88ebb2bcd7e8044328482d079661
+ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
 
-Maybe this will work this time.
++[http://ftp.novell.com/pub/mono/sources/mono/mono-2.4.2.2.tar.bz2]
++md5=54aac9b914c5a4dc81c2bfd058df1c93
++sha256=e3b965c56a669c3012856dcc17b7400d28505dd4bb8a3c6eb3e653bb41b5e6ba
++
+diff -uprN a/recipes/mono/files/mono-fix-libdir-path.patch
+b/recipes/mono/files/mono-fix-libdir-path.patch
+--- a/recipes/mono/files/mono-fix-libdir-path.patch	2009-07-20
+12:50:48.099681989 -0600
++++ b/recipes/mono/files/mono-fix-libdir-path.patch	2009-07-16
+09:02:36.979601000 -0600
+@@ -1,5 +1,5 @@
+---- mono-1.2.5/scripts/Makefile.am.orig	2007-09-27 04:23:39.000000000 +0200
+-+++ mono-1.2.5/scripts/Makefile.am	2007-09-27 04:24:19.000000000 +0200
++--- mono-2.4.2/scripts/Makefile.am.orig	2007-09-27 04:23:39.000000000 +0200
+++++ mono-2.4.2/scripts/Makefile.am	2007-09-27 04:24:19.000000000 +0200
+ @@ -92,7 +92,7 @@
+  mono_instdir = $(shell cygpath -m $(libdir))/mono
+  else
+diff -uprN a/recipes/mono/mono-1.2.5.1/configure.patch
+b/recipes/mono/mono-1.2.5.1/configure.patch
+--- a/recipes/mono/mono-1.2.5.1/configure.patch	2009-07-20
+12:50:48.100684122 -0600
++++ b/recipes/mono/mono-1.2.5.1/configure.patch	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,67 +0,0 @@
+-Index: mono-1.2.5/configure.in
+-===================================================================
+---- mono-1.2.5.orig/configure.in
+-+++ mono-1.2.5/configure.in
+-@@ -1134,6 +1134,8 @@ if test x$platform_win32 = xno; then
+- 		], [
+- 				AC_MSG_RESULT(no)
+- 				with_tls=pthread
+-+		], [
+-+				AC_MSG_RESULT(yes)
+- 		])
+- 	fi
+-
+-@@ -1236,6 +1238,9 @@ if test x$platform_win32 = xno; then
+- 		], [
+- 				with_sigaltstack=no
+- 				AC_MSG_RESULT(no)
+-+		], [
+-+				AC_MSG_RESULT(yes)
+-+				AC_DEFINE(HAVE_WORKING_SIGALTSTACK)
+- 		])
+- 	fi
+-
+-@@ -1893,24 +1898,26 @@ if test "x$with_tls" = "x__thread"; then
+- 	])
+- fi
+-
+--if test ${TARGET} = ARM; then
+--	dnl ******************************************
+--	dnl *** Check to see what FPU is available ***
+--	dnl ******************************************
+--	AC_MSG_CHECKING(which FPU to use)
+--
+--	AC_TRY_COMPILE([], [
+--		__asm__ ("ldfd f0, [r0]");
+--		], fpu=FPA, [
+--			AC_TRY_COMPILE([], [
+--				__asm__ ("fldd d0, [r0]");
+--			], fpu=VFP, fpu=NONE)
+--		])
+-+#if test ${TARGET} = ARM; then
+-+#	dnl ******************************************
+-+#	dnl *** Check to see what FPU is available ***
+-+#	dnl ******************************************
+-+#	AC_MSG_CHECKING(which FPU to use)
+-+#
+-+#	AC_TRY_COMPILE([], [
+-+#		__asm__ ("ldfd f0, [r0]");
+-+#		], fpu=FPA, [
+-+#			AC_TRY_COMPILE([], [
+-+#				__asm__ ("fldd d0, [r0]");
+-+#			], fpu=VFP, fpu=NONE)
+-+#		])
+-+#
+-+#	AC_MSG_RESULT($fpu)
+-+#	CPPFLAGS="$CPPFLAGS -DARM_FPU_$fpu=1"
+-+#	unset fpu
+-+#fi
+-
+--	AC_MSG_RESULT($fpu)
+--	CPPFLAGS="$CPPFLAGS -DARM_FPU_$fpu=1"
+--	unset fpu
+--fi
+-+	CPPFLAGS="$CPPFLAGS -DARM_FPU_NONE=1"
+-
+- if test ${TARGET} = unknown; then
+- 	CPPFLAGS="$CPPFLAGS -DNO_PORT"
+diff -uprN a/recipes/mono/mono-1.2.5.1/disable-monoburg.patch
+b/recipes/mono/mono-1.2.5.1/disable-monoburg.patch
+--- a/recipes/mono/mono-1.2.5.1/disable-monoburg.patch	2009-07-20
+12:50:48.100684122 -0600
++++ b/recipes/mono/mono-1.2.5.1/disable-monoburg.patch	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,22 +0,0 @@
+-Index: mono-1.2.5.1/mono/Makefile.am
+-===================================================================
+---- mono-1.2.5.1.orig/mono/Makefile.am	2008-03-05 15:52:06.000000000 +0800
+-+++ mono-1.2.5.1/mono/Makefile.am	2008-03-05 15:52:23.000000000 +0800
+-@@ -1,3 +1,3 @@
+-
+--SUBDIRS = utils io-layer monoburg os cil metadata \
+-+SUBDIRS = utils io-layer os cil metadata \
+-       arch interpreter mini dis monograph tests benchmark profiler
+-Index: mono-1.2.5.1/mono/mini/Makefile.am
+-===================================================================
+---- mono-1.2.5.1.orig/mono/mini/Makefile.am	2008-03-05 16:02:51.000000000 +0800
+-+++ mono-1.2.5.1/mono/mini/Makefile.am	2008-03-05 16:02:57.000000000 +0800
+-@@ -436,7 +436,7 @@
+- 	$(GENMDESC_PRG) $(srcdir)/cpu-mips.md cpu-mips.h mips_desc
+-
+- inssel.c inssel.h: $(BURGSRC)
+--	$(monodir)/mono/monoburg/monoburg -c 1 -p -e $(BURGSRC) -d inssel.h
+-s inssel.c
+-+	monoburg -c 1 -p -e $(BURGSRC) -d inssel.h -s inssel.c
+-
+- testi: mono test.exe
+- 	$(RUNTIME) -v -v --ncompile 1 --compile Test:$(mtest) test.exe
+diff -uprN a/recipes/mono/mono_1.2.5.1.bb b/recipes/mono/mono_1.2.5.1.bb
+--- a/recipes/mono/mono_1.2.5.1.bb	2009-07-20 12:50:48.104680933 -0600
++++ b/recipes/mono/mono_1.2.5.1.bb	1969-12-31 17:00:00.000000000 -0700
+@@ -1,83 +0,0 @@
+-require mono_1.2.5.inc
+-
+-DEPENDS = "mono-native mono-mcs-intermediate glib-2.0 perl-native"
+-
+-PR = "r5"
+-
+-# mono makes use of non-thumb-compatible inline asm.
+-ARM_INSTRUCTION_SET = "arm"
+-
+-SRC_URI += "file://configure.patch;patch=1 \
+-	file://genmdesc-cpp.patch;patch=1 \
+-	file://disable-monoburg.patch;patch=1"
+-
+-# Per http://www.mono-project.com/Mono:ARM
+-EXTRA_OECONF += " --disable-mcs-build "
+-# Instead, get the mcs tree from a different build (see mono-mcs-intermediate)
+-
+-do_install_prepend() {
+-	install -d ${D}
+-	cd ${D}
+-	tar -xzf ${STAGING_DATADIR_NATIVE}/mono-mcs/mono-mcs-${PV}.tar.gz
+-	cd ${S}
+-}
+-
+-do_install_append() {
+-	# mono-mcs-intermediate builds and installs jay (a Yacc for Java and C#),
+-	# however, jay is not being cross-compiled and thus only
+-	# available for the buildhost architecture, so remove it
+-	# entirely
+-	cd ${D}
+-	rm -rf ./usr/share/man/man1/jay.1 ./usr/share/jay \
+-	    ./usr/share/jay/README.jay \
+-	    ./usr/bin/jay
+-	cd ${S}
+-
+-	# Not packaged with the default rules and apparently
+-	# not used for anything
+-	rm -rf ${D}${datadir}/mono-1.0/mono/cil/cil-opcodes.xml
+-}
+-
+-inherit mono
+-
+-# Import file definitions from Debian
+-require mono_1.2.5.1-files.inc
+-
+-# Add some packages
+-PACKAGES_append = " mono-doc mono mono-runtime"
+-
+-FILES_mono-doc_append = " /usr/share/libgc-mono/ "
+-
+-FILES_mono = ""
+-ALLOW_EMPTY_mono = "1"
+-RDEPENDS_mono = "mono-common mono-jit"
+-
+-FILES_mono-runtime = ""
+-ALLOW_EMPTY_mono-runtime = "1"
+-RDEPENDS_mono-runtime = "mono-jit mono-gac"
+-
+-RDEPENDS_mono-jit = "mono-common"
+-
+-FILES_libmono-dev =+ " /usr/lib/libmono.la
+/usr/lib/libmono-profiler-cov.la /usr/lib/libmono-profiler-aot.la \
+-	/usr/lib/libMonoPosixHelper.la /usr/lib/libMonoSupportW.la"
+-FILES_libmono-dbg =+ " /usr/lib/.debug/libmono*.so.*
+/usr/lib/.debug/libikvm-native.so \
+-	/usr/lib/.debug/libMonoPosixHelper.so /usr/lib/.debug/libMonoSupportW.so"
+-
+-# Packages not included in Debian
+-PACKAGES_prepend = "libnunit2.2-cil-dbg libnunit2.2-cil-dev libnunit2.2-cil \
+-	libmono-cecil0.5-cil-dbg libmono-cecil0.5-cil-dev libmono-cecil0.5-cil \
+-	libmono-db2-1.0-cil-dbg libmono-db2-1.0-cil-dev libmono-db2-1.0-cil"
+-
+-FILES_libnunit2.2-cil = "/usr/lib/mono/gac/nunit.*/2.2.*
+/usr/lib/mono/1.0/nunit.*.dll"
+-FILES_libnunit2.2-cil-dev = "/usr/lib/pkgconfig/mono-nunit.pc"
+-FILES_libnunit2.2-cil-dbg = "/usr/lib/mono/gac/nunit*/2.2.*/nunit.*.dll.mdb"
+-
+-FILES_libmono-cecil0.5-cil = "/usr/lib/mono/gac/Mono.Cecil/0.5.*"
+-FILES_libmono-cecil0.5-cil-dbg =
+"/usr/lib/mono/gac/Mono.Cecil/0.5.0.1__0738eb9f132ed756/Mono.Cecil.dll.mdb"
+-
+-FILES_libmono-db2-1.0-cil = "/usr/lib/mono/gac/IBM.Data.DB2/1.0*
+/usr/lib/mono/1.0/IBM.Data.DB2.dll"
+-FILES_libmono-db2-1.0-cil-dbg =
+"/usr/lib/mono/gac/IBM.Data.DB2/1.0*/IBM.Data.DB2.dll.mdb"
+-
+-# Move .pc files
+-FILES_libmono-cairo1.0-cil-dev = "/usr/lib/pkgconfig/mono-cairo.pc"
+-PACKAGES =+ " libmono-cairo1.0-cil-dev "
+diff -uprN a/recipes/mono/mono_1.2.5.1-files.inc
+b/recipes/mono/mono_1.2.5.1-files.inc
+--- a/recipes/mono/mono_1.2.5.1-files.inc	2009-07-20 12:50:48.103680893 -0600
++++ b/recipes/mono/mono_1.2.5.1-files.inc	1969-12-31 17:00:00.000000000 -0700
+@@ -1,1634 +0,0 @@
+-# This is a generated file, please do not edit directly
+-# Use collect-files.py instead. -- Henryk <henryk@openmoko.org>
+-FILES_mono-jit-dbg += "/usr/bin/mono*.mdb \
+-	/usr/bin/mono*/*.mdb"
+-FILES_mono-jit = "/usr/bin/mono"
+-FILES_mono-gac-dbg += "/usr/bin/gacutil*.mdb \
+-	/usr/bin/gacutil*/*.mdb \
+-	/usr/lib/mono/1.0/gacutil.exe*.mdb \
+-	/usr/lib/mono/1.0/gacutil.exe*/*.mdb"
+-FILES_mono-gac = "/usr/bin/gacutil \
+-	/usr/lib/mono/1.0/gacutil.exe"
+-FILES_mono-mjs-dbg += "/usr/bin/mjs*.mdb \
+-	/usr/bin/mjs*/*.mdb \
+-	/usr/lib/mono/1.0/mjs.exe*.mdb \
+-	/usr/lib/mono/1.0/mjs.exe*/*.mdb"
+-FILES_mono-mjs = "/usr/bin/mjs \
+-	/usr/lib/mono/1.0/mjs.exe*"
+-FILES_mono-gmcs-dbg += "/usr/bin/gmcs*.mdb \
+-	/usr/bin/gmcs*/*.mdb \
+-	/usr/bin/wsdl2*.mdb \
+-	/usr/bin/wsdl2*/*.mdb \
+-	/usr/bin/monop2*.mdb \
+-	/usr/bin/monop2*/*.mdb \
+-	/usr/bin/ilasm2*.mdb \
+-	/usr/bin/ilasm2*/*.mdb \
+-	/usr/bin/resgen2*.mdb \
+-	/usr/bin/resgen2*/*.mdb \
+-	/usr/bin/mono-api-info2*.mdb \
+-	/usr/bin/mono-api-info2*/*.mdb \
+-	/usr/bin/mono-service2*.mdb \
+-	/usr/bin/mono-service2*/*.mdb \
+-	/usr/bin/mkbundle2*.mdb \
+-	/usr/bin/mkbundle2*/*.mdb \
+-	/usr/bin/xbuild*.mdb \
+-	/usr/bin/xbuild*/*.mdb \
+-	/usr/bin/sgen*.mdb \
+-	/usr/bin/sgen*/*.mdb \
+-	/usr/bin/al2*.mdb \
+-	/usr/bin/al2*/*.mdb \
+-	/usr/bin/httpcfg*.mdb \
+-	/usr/bin/httpcfg*/*.mdb \
+-	/usr/lib/mono/2.0/*.exe*.mdb \
+-	/usr/lib/mono/2.0/*.exe*/*.mdb \
+-	/usr/lib/mono/2.0/xbuild.rsp*.mdb \
+-	/usr/lib/mono/2.0/xbuild.rsp*/*.mdb \
+-	/usr/lib/mono/2.0/MSBuild/*.mdb \
+-	/usr/lib/mono/2.0/MSBuild/*/*.mdb \
+-	/usr/lib/mono/2.0/MSBuild/.debug/ \
+-	/usr/lib/mono/2.0/MSBuild/../.debug/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.xsd*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Build.xsd*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.CSharp.targets*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.CSharp.targets*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.tasks*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.tasks*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.targets*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.targets*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualBasic.targets*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualBasic.targets*/*.mdb"
+-FILES_mono-gmcs = "/usr/bin/gmcs \
+-	/usr/bin/wsdl2 \
+-	/usr/bin/monop2 \
+-	/usr/bin/ilasm2 \
+-	/usr/bin/resgen2 \
+-	/usr/bin/mono-api-info2 \
+-	/usr/bin/mono-service2 \
+-	/usr/bin/mkbundle2 \
+-	/usr/bin/xbuild \
+-	/usr/bin/sgen \
+-	/usr/bin/al2 \
+-	/usr/bin/httpcfg \
+-	/usr/lib/mono/2.0/*.exe* \
+-	/usr/lib/mono/2.0/xbuild.rsp \
+-	/usr/lib/mono/2.0/MSBuild/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.xsd \
+-	/usr/lib/mono/2.0/Microsoft.CSharp.targets \
+-	/usr/lib/mono/2.0/Microsoft.Common.tasks \
+-	/usr/lib/mono/2.0/Microsoft.Common.targets \
+-	/usr/lib/mono/2.0/Microsoft.VisualBasic.targets"
+-FILES_mono-utils-dbg += "/usr/bin/pedump*.mdb \
+-	/usr/bin/pedump*/*.mdb \
+-	/usr/bin/monodis*.mdb \
+-	/usr/bin/monodis*/*.mdb \
+-	/usr/bin/monograph*.mdb \
+-	/usr/bin/monograph*/*.mdb \
+-	/usr/bin/mono-find-provides*.mdb \
+-	/usr/bin/mono-find-provides*/*.mdb \
+-	/usr/bin/mono-find-requires*.mdb \
+-	/usr/bin/mono-find-requires*/*.mdb"
+-FILES_mono-utils = "/usr/bin/pedump \
+-	/usr/bin/monodis \
+-	/usr/bin/monograph \
+-	/usr/bin/mono-find-provides \
+-	/usr/bin/mono-find-requires"
+-FILES_libmono-peapi1.0-cil-dbg += "/usr/lib/mono/gac/PEAPI/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/PEAPI/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/PEAPI.dll*.mdb \
+-	/usr/lib/mono/1.0/PEAPI.dll*/*.mdb"
+-FILES_libmono-peapi1.0-cil = "/usr/lib/mono/gac/PEAPI/1.0.*/ \
+-	/usr/lib/mono/1.0/PEAPI.dll"
+-FILES_libmono-cairo1.0-cil-dbg += "/usr/lib/mono/gac/Mono.Cairo/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Cairo/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Cairo.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Cairo.dll*/*.mdb \
+-	/usr/lib/pkgconfig/mono-cairo.pc*.mdb \
+-	/usr/lib/pkgconfig/mono-cairo.pc*/*.mdb"
+-FILES_libmono-cairo1.0-cil = "/usr/lib/mono/gac/Mono.Cairo/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Cairo.dll \
+-	/usr/lib/pkgconfig/mono-cairo.pc"
+-FILES_libmono-system-web2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Web/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Web.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Web.dll*/*.mdb \
+-	/usr/lib/mono/2.0/System.Web.Services.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Web.Services.dll*/*.mdb"
+-FILES_libmono-system-web2.0-cil = "/usr/lib/mono/gac/System.Web/2.0.*/ \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Web.dll \
+-	/usr/lib/mono/2.0/System.Web.Services.dll"
+-FILES_libmono-accessibility2.0-cil-dbg +=
+"/usr/lib/mono/gac/Accessibility/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Accessibility/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Accessibility.dll*.mdb \
+-	/usr/lib/mono/2.0/Accessibility.dll*/*.mdb"
+-FILES_libmono-accessibility2.0-cil = "/usr/lib/mono/gac/Accessibility/2.0.*/ \
+-	/usr/lib/mono/2.0/Accessibility.dll"
+-FILES_libmono-microsoft7.0-cil-dbg +=
+"/usr/lib/mono/gac/Microsoft.JScript/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.JScript/7.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Microsoft.JScript.dll*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.JScript.dll*/*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.VisualC.dll*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.VisualC.dll*/*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.Vsa.dll*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.Vsa.dll*/*.mdb"
+-FILES_libmono-microsoft7.0-cil = "/usr/lib/mono/gac/Microsoft.JScript/7.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/ \
+-	/usr/lib/mono/1.0/Microsoft.JScript.dll \
+-	/usr/lib/mono/1.0/Microsoft.VisualC.dll \
+-	/usr/lib/mono/1.0/Microsoft.Vsa.dll"
+-FILES_libmono-winforms2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Windows.Forms/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Windows.Forms/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Design/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Design/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Windows.Forms.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Windows.Forms.dll*/*.mdb \
+-	/usr/lib/mono/2.0/System.Drawing.Design.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Drawing.Design.dll*/*.mdb \
+-	/usr/lib/mono/2.0/System.Design.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Design.dll*/*.mdb"
+-FILES_libmono-winforms2.0-cil =
+"/usr/lib/mono/gac/System.Windows.Forms/2.0.*/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/ \
+-	/usr/lib/mono/gac/System.Design/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Windows.Forms.dll \
+-	/usr/lib/mono/2.0/System.Drawing.Design.dll \
+-	/usr/lib/mono/2.0/System.Design.dll"
+-FILES_libmono-ldap1.0-cil-dbg +=
+"/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Novell.Directory.Ldap.dll*.mdb \
+-	/usr/lib/mono/1.0/Novell.Directory.Ldap.dll*/*.mdb"
+-FILES_libmono-ldap1.0-cil = "/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/ \
+-	/usr/lib/mono/1.0/Novell.Directory.Ldap.dll"
+-FILES_libmono-sharpzip2.84-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/../.debug/ \
+-	/usr/lib/mono/2.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/2.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip2.84-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/ \
+-	/usr/lib/mono/2.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-system-data2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Data.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Data.dll*/*.mdb"
+-FILES_libmono-system-data2.0-cil = "/usr/lib/mono/gac/System.Data/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Data.dll"
+-FILES_libmono-corlib2.0-cil-dbg += "/usr/lib/mono/gac/I18N*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/I18N*/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/I18N*.dll*.mdb \
+-	/usr/lib/mono/2.0/I18N*.dll*/*.mdb \
+-	/usr/lib/mono/2.0/mscorlib.dll*.mdb \
+-	/usr/lib/mono/2.0/mscorlib.dll*/*.mdb"
+-FILES_libmono-corlib2.0-cil = "/usr/lib/mono/gac/I18N*/2.0.*/ \
+-	/usr/lib/mono/2.0/I18N*.dll \
+-	/usr/lib/mono/2.0/mscorlib.dll*"
+-FILES_libmono-winforms1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Windows.Forms/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Windows.Forms/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Design/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Design/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Windows.Forms.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Windows.Forms.dll*/*.mdb \
+-	/usr/lib/mono/1.0/System.Drawing.Design.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Drawing.Design.dll*/*.mdb \
+-	/usr/lib/mono/1.0/System.Design.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Design.dll*/*.mdb"
+-FILES_libmono-winforms1.0-cil =
+"/usr/lib/mono/gac/System.Windows.Forms/1.0.*/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/ \
+-	/usr/lib/mono/gac/System.Design/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Windows.Forms.dll \
+-	/usr/lib/mono/1.0/System.Drawing.Design.dll \
+-	/usr/lib/mono/1.0/System.Design.dll"
+-FILES_libmono-microsoft8.0-cil-dbg +=
+"/usr/lib/mono/gac/Microsoft.JScript/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.JScript/8.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Microsoft.JScript.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.JScript.dll*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualC.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualC.dll*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Vsa.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Vsa.dll*/*.mdb"
+-FILES_libmono-microsoft8.0-cil = "/usr/lib/mono/gac/Microsoft.JScript/8.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/ \
+-	/usr/lib/mono/2.0/Microsoft.JScript.dll \
+-	/usr/lib/mono/2.0/Microsoft.VisualC.dll \
+-	/usr/lib/mono/2.0/Microsoft.Vsa.dll"
+-FILES_libmono-corlib1.0-cil-dbg += "/usr/lib/mono/gac/I18N*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/I18N*/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/I18N*.dll*.mdb \
+-	/usr/lib/mono/1.0/I18N*.dll*/*.mdb \
+-	/usr/lib/mono/1.0/mscorlib.dll*.mdb \
+-	/usr/lib/mono/1.0/mscorlib.dll*/*.mdb"
+-FILES_libmono-corlib1.0-cil = "/usr/lib/mono/gac/I18N*/1.0.*/ \
+-	/usr/lib/mono/1.0/I18N*.dll \
+-	/usr/lib/mono/1.0/mscorlib.dll*"
+-FILES_libmono-system-web1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Web/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Web.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Web.dll*/*.mdb \
+-	/usr/lib/mono/1.0/System.Web.Services.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Web.Services.dll*/*.mdb"
+-FILES_libmono-system-web1.0-cil = "/usr/lib/mono/gac/System.Web/1.0.*/ \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Web.dll \
+-	/usr/lib/mono/1.0/System.Web.Services.dll"
+-FILES_libmono-system-runtime2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Runtime.*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Runtime.*/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Runtime.*.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Runtime.*.dll*/*.mdb"
+-FILES_libmono-system-runtime2.0-cil =
+"/usr/lib/mono/gac/System.Runtime.*/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Runtime.*.dll"
+-FILES_libmono-cscompmgd8.0-cil-dbg +=
+"/usr/lib/mono/gac/cscompmgd/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/cscompmgd/8.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/cscompmgd.dll*.mdb \
+-	/usr/lib/mono/2.0/cscompmgd.dll*/*.mdb"
+-FILES_libmono-cscompmgd8.0-cil = "/usr/lib/mono/gac/cscompmgd/8.0.*/ \
+-	/usr/lib/mono/2.0/cscompmgd.dll"
+-FILES_libmono-cscompmgd7.0-cil-dbg +=
+"/usr/lib/mono/gac/cscompmgd/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/cscompmgd/7.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/cscompmgd.dll*.mdb \
+-	/usr/lib/mono/1.0/cscompmgd.dll*/*.mdb"
+-FILES_libmono-cscompmgd7.0-cil = "/usr/lib/mono/gac/cscompmgd/7.0.*/ \
+-	/usr/lib/mono/1.0/cscompmgd.dll"
+-FILES_libmono-firebirdsql1.7-cil-dbg +=
+"/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/*.mdb \
+-	/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/*/*.mdb \
+-	/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/.debug/ \
+-	/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/../.debug/ \
+-	/usr/lib/mono/1.0/FirebirdSql.Data.Firebird.dll*.mdb \
+-	/usr/lib/mono/1.0/FirebirdSql.Data.Firebird.dll*/*.mdb"
+-FILES_libmono-firebirdsql1.7-cil =
+"/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/ \
+-	/usr/lib/mono/1.0/FirebirdSql.Data.Firebird.dll"
+-FILES_mono-jay-dbg += "/usr/bin/jay*.mdb \
+-	/usr/bin/jay*/*.mdb"
+-FILES_mono-jay = "/usr/bin/jay"
+-FILES_libmono-data-tds1.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Data.Tds.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.Tds.dll*/*.mdb"
+-FILES_libmono-data-tds1.0-cil = "/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Data.Tds.dll"
+-FILES_libmono-sqlite1.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Data.Sqlite.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.Sqlite.dll*/*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.SqliteClient.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.SqliteClient.dll*/*.mdb"
+-FILES_libmono-sqlite1.0-cil = "/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Data.Sqlite.dll \
+-	/usr/lib/mono/1.0/Mono.Data.SqliteClient.dll"
+-FILES_libmono-relaxng1.0-cil-dbg +=
+"/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Commons.Xml.Relaxng.dll*.mdb \
+-	/usr/lib/mono/1.0/Commons.Xml.Relaxng.dll*/*.mdb"
+-FILES_libmono-relaxng1.0-cil = "/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/ \
+-	/usr/lib/mono/1.0/Commons.Xml.Relaxng.dll"
+-FILES_libmono-dev-dbg += "/usr/lib/libmono*.a*.mdb \
+-	/usr/lib/libmono*.a*/*.mdb \
+-	/usr/lib/libMono*.a*.mdb \
+-	/usr/lib/libMono*.a*/*.mdb \
+-	/usr/lib/libmono*.so*.mdb \
+-	/usr/lib/libmono*.so*/*.mdb \
+-	/usr/lib/libMonoSupportW.a*.mdb \
+-	/usr/lib/libMonoSupportW.a*/*.mdb \
+-	/usr/lib/pkgconfig/mono.pc*.mdb \
+-	/usr/lib/pkgconfig/mono.pc*/*.mdb \
+-	/usr/lib/pkgconfig/dotnet.pc*.mdb \
+-	/usr/lib/pkgconfig/dotnet.pc*/*.mdb \
+-	/usr/include/*.mdb \
+-	/usr/include/*/*.mdb \
+-	/usr/include/.debug/ \
+-	/usr/include/../.debug/"
+-FILES_libmono-dev = "/usr/lib/libmono*.a \
+-	/usr/lib/libMono*.a \
+-	/usr/lib/libmono*.so \
+-	/usr/lib/libMonoSupportW.a \
+-	/usr/lib/pkgconfig/mono.pc \
+-	/usr/lib/pkgconfig/dotnet.pc \
+-	/usr/include/"
+-FILES_libmono-accessibility1.0-cil-dbg +=
+"/usr/lib/mono/gac/Accessibility/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Accessibility/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Accessibility.dll*.mdb \
+-	/usr/lib/mono/1.0/Accessibility.dll*/*.mdb"
+-FILES_libmono-accessibility1.0-cil = "/usr/lib/mono/gac/Accessibility/1.0.*/ \
+-	/usr/lib/mono/1.0/Accessibility.dll"
+-FILES_mono-common-dbg += "/etc/mono*.mdb \
+-	/etc/mono*/*.mdb \
+-	/usr/share/mono-1.0/mono/cil/cil-opcodes.xml*.mdb \
+-	/usr/share/mono-1.0/mono/cil/cil-opcodes.xml*/*.mdb"
+-FILES_mono-common = "/etc/mono \
+-	/usr/share/mono-1.0/mono/cil/cil-opcodes.xml"
+-FILES_libmono-oracle1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Data.OracleClient.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Data.OracleClient.dll*/*.mdb"
+-FILES_libmono-oracle1.0-cil =
+"/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Data.OracleClient.dll"
+-FILES_libmono-system-data1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Data.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Data.dll*/*.mdb"
+-FILES_libmono-system-data1.0-cil = "/usr/lib/mono/gac/System.Data/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Data.dll"
+-FILES_libmono-bytefx0.7.6.2-cil-dbg +=
+"/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/.debug/ \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/../.debug/ \
+-	/usr/lib/mono/2.0/ByteFX.Data.dll*.mdb \
+-	/usr/lib/mono/2.0/ByteFX.Data.dll*/*.mdb"
+-FILES_libmono-bytefx0.7.6.2-cil = "/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/ \
+-	/usr/lib/mono/2.0/ByteFX.Data.dll"
+-FILES_libmono0-dbg += "/usr/lib/libmono*.so.*.mdb \
+-	/usr/lib/libmono*.so.*/*.mdb \
+-	/usr/lib/libMonoPosixHelper.so*.mdb \
+-	/usr/lib/libMonoPosixHelper.so*/*.mdb \
+-	/usr/lib/libMonoSupportW.so*.mdb \
+-	/usr/lib/libMonoSupportW.so*/*.mdb"
+-FILES_libmono0 = "/usr/lib/libmono*.so.* \
+-	/usr/lib/libMonoPosixHelper.so \
+-	/usr/lib/libMonoSupportW.so"
+-FILES_libmono-sharpzip0.6-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/../.debug/ \
+-	/usr/lib/mono/compat-1.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/compat-1.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip0.6-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/ \
+-	/usr/lib/mono/compat-1.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-data-tds2.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Data.Tds.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.Tds.dll*/*.mdb"
+-FILES_libmono-data-tds2.0-cil = "/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Data.Tds.dll"
+-FILES_libmono-system-messaging1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Messaging/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Messaging/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Messaging.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Messaging.dll*/*.mdb"
+-FILES_libmono-system-messaging1.0-cil =
+"/usr/lib/mono/gac/System.Messaging/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Messaging.dll"
+-FILES_libmono-npgsql1.0-cil-dbg += "/usr/lib/mono/gac/Npgsql/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Npgsql/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Npgsql.dll*.mdb \
+-	/usr/lib/mono/1.0/Npgsql.dll*/*.mdb"
+-FILES_libmono-npgsql1.0-cil = "/usr/lib/mono/gac/Npgsql/1.0.*/ \
+-	/usr/lib/mono/1.0/Npgsql.dll"
+-FILES_libmono-security2.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Security/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Security/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Security.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Security.dll*/*.mdb"
+-FILES_libmono-security2.0-cil = "/usr/lib/mono/gac/Mono.Security/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Security.dll"
+-FILES_libmono-security1.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Security/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Security/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Security.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Security.dll*/*.mdb"
+-FILES_libmono-security1.0-cil = "/usr/lib/mono/gac/Mono.Security/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Security.dll"
+-FILES_libmono-bytefx0.7.6.1-cil-dbg +=
+"/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/.debug/ \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/../.debug/ \
+-	/usr/lib/mono/1.0/ByteFX.Data.dll*.mdb \
+-	/usr/lib/mono/1.0/ByteFX.Data.dll*/*.mdb"
+-FILES_libmono-bytefx0.7.6.1-cil = "/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/ \
+-	/usr/lib/mono/1.0/ByteFX.Data.dll"
+-FILES_libmono-microsoft-build2.0-cil-dbg +=
+"/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.*.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Build.*.dll*/*.mdb"
+-FILES_libmono-microsoft-build2.0-cil =
+"/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.*.dll"
+-FILES_libmono-system-ldap1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.DirectoryServices/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.DirectoryServices/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.DirectoryServices.dll*.mdb \
+-	/usr/lib/mono/1.0/System.DirectoryServices.dll*/*.mdb"
+-FILES_libmono-system-ldap1.0-cil =
+"/usr/lib/mono/gac/System.DirectoryServices/1.0.*/ \
+-	/usr/lib/mono/1.0/System.DirectoryServices.dll"
+-FILES_libmono-relaxng2.0-cil-dbg +=
+"/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Commons.Xml.Relaxng.dll*.mdb \
+-	/usr/lib/mono/2.0/Commons.Xml.Relaxng.dll*/*.mdb"
+-FILES_libmono-relaxng2.0-cil = "/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/ \
+-	/usr/lib/mono/2.0/Commons.Xml.Relaxng.dll"
+-FILES_libmono-system-ldap2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.DirectoryServices/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.DirectoryServices/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.DirectoryServices.dll*.mdb \
+-	/usr/lib/mono/2.0/System.DirectoryServices.dll*/*.mdb"
+-FILES_libmono-system-ldap2.0-cil =
+"/usr/lib/mono/gac/System.DirectoryServices/2.0.*/ \
+-	/usr/lib/mono/2.0/System.DirectoryServices.dll"
+-FILES_libmono-system-messaging2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Messaging/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Messaging/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Messaging.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Messaging.dll*/*.mdb"
+-FILES_libmono-system-messaging2.0-cil =
+"/usr/lib/mono/gac/System.Messaging/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Messaging.dll"
+-FILES_libmono-sharpzip0.84-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/../.debug/ \
+-	/usr/lib/mono/1.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/1.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip0.84-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/ \
+-	/usr/lib/mono/1.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-sqlite2.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Data.Sqlite.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.Sqlite.dll*/*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.SqliteClient.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.SqliteClient.dll*/*.mdb"
+-FILES_libmono-sqlite2.0-cil = "/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Data.Sqlite.dll \
+-	/usr/lib/mono/2.0/Mono.Data.SqliteClient.dll"
+-FILES_libmono-ldap2.0-cil-dbg +=
+"/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Novell.Directory.Ldap.dll*.mdb \
+-	/usr/lib/mono/2.0/Novell.Directory.Ldap.dll*/*.mdb"
+-FILES_libmono-ldap2.0-cil = "/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/ \
+-	/usr/lib/mono/2.0/Novell.Directory.Ldap.dll"
+-FILES_libmono-npgsql2.0-cil-dbg += "/usr/lib/mono/gac/Npgsql/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Npgsql/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Npgsql.dll*.mdb \
+-	/usr/lib/mono/2.0/Npgsql.dll*/*.mdb"
+-FILES_libmono-npgsql2.0-cil = "/usr/lib/mono/gac/Npgsql/2.0.*/ \
+-	/usr/lib/mono/2.0/Npgsql.dll"
+-FILES_libmono-system-runtime1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Runtime.*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Runtime.*/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Runtime.*.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Runtime.*.dll*/*.mdb"
+-FILES_libmono-system-runtime1.0-cil =
+"/usr/lib/mono/gac/System.Runtime.*/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Runtime.*.dll"
+-FILES_libmono-oracle2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Data.OracleClient.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Data.OracleClient.dll*/*.mdb"
+-FILES_libmono-oracle2.0-cil =
+"/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Data.OracleClient.dll"
+-FILES_libmono-c5-1.0-cil-dbg += "/usr/lib/mono/gac/Mono.C5/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.C5/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.C5/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.C5/1.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.C5.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.C5.dll*/*.mdb"
+-FILES_libmono-c5-1.0-cil = "/usr/lib/mono/gac/Mono.C5/1.0.*/ \
+-	/usr/lib/mono/2.0/Mono.C5.dll"
+-FILES_libmono-sharpzip2.6-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/../.debug/ \
+-	/usr/lib/mono/compat-2.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/compat-2.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip2.6-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/ \
+-	/usr/lib/mono/compat-2.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-cairo2.0-cil-dbg += "/usr/lib/mono/gac/Mono.Cairo/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Cairo/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Cairo.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Cairo.dll*/*.mdb"
+-FILES_libmono-cairo2.0-cil = "/usr/lib/mono/gac/Mono.Cairo/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Cairo.dll"
+-FILES_libmono-peapi2.0-cil-dbg += "/usr/lib/mono/gac/PEAPI/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/PEAPI/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/PEAPI.dll*.mdb \
+-	/usr/lib/mono/2.0/PEAPI.dll*/*.mdb"
+-FILES_libmono-peapi2.0-cil = "/usr/lib/mono/gac/PEAPI/2.0.*/ \
+-	/usr/lib/mono/2.0/PEAPI.dll"
+-FILES_mono-mcs-dbg += "/usr/bin/*.mdb \
+-	/usr/bin/*/*.mdb \
+-	/usr/bin/.debug/ \
+-	/usr/bin/../.debug/ \
+-	/usr/lib/mono/1.0/*.exe*.mdb \
+-	/usr/lib/mono/1.0/*.exe*/*.mdb"
+-FILES_mono-mcs = "/usr/bin/ \
+-	/usr/lib/mono/1.0/*.exe*"
+-FILES_libmono-system1.0-cil-dbg += "/usr/lib/mono/gac/System*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System*/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System*.dll*.mdb \
+-	/usr/lib/mono/1.0/System*.dll*/*.mdb \
+-	/usr/lib/mono/1.0/CustomMarshalers.dll*.mdb \
+-	/usr/lib/mono/1.0/CustomMarshalers.dll*/*.mdb"
+-FILES_libmono-system1.0-cil = "/usr/lib/mono/gac/System*/1.0.*/ \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/ \
+-	/usr/lib/mono/1.0/System*.dll \
+-	/usr/lib/mono/1.0/CustomMarshalers.dll*"
+-FILES_libmono-system2.0-cil-dbg += "/usr/lib/mono/gac/System*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System*/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System*.dll*.mdb \
+-	/usr/lib/mono/2.0/System*.dll*/*.mdb \
+-	/usr/lib/mono/2.0/CustomMarshalers.dll*.mdb \
+-	/usr/lib/mono/2.0/CustomMarshalers.dll*/*.mdb"
+-FILES_libmono-system2.0-cil = "/usr/lib/mono/gac/System*/2.0.*/ \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/ \
+-	/usr/lib/mono/2.0/System*.dll \
+-	/usr/lib/mono/2.0/CustomMarshalers.dll*"
+-FILES_libmono1.0-cil-dbg += "/usr/lib/mono/gac/Mono.*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.*/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/OpenSystem.C/1.0.*.mdb \
+-	/usr/lib/mono/gac/OpenSystem.C/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/mono-service/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.*.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.*.dll*/*.mdb \
+-	/usr/lib/mono/1.0/OpenSystem.C.dll*.mdb \
+-	/usr/lib/mono/1.0/OpenSystem.C.dll*/*.mdb"
+-FILES_libmono1.0-cil = "/usr/lib/mono/gac/Mono.*/1.0.*/ \
+-	/usr/lib/mono/gac/OpenSystem.C/1.0.* \
+-	/usr/lib/mono/gac/mono-service/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.*.dll \
+-	/usr/lib/mono/1.0/OpenSystem.C.dll"
+-FILES_libmono2.0-cil-dbg += "/usr/lib/mono/gac/Mono.*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.*/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/OpenSystem.C/2.0.*.mdb \
+-	/usr/lib/mono/gac/OpenSystem.C/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/mono-service/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.*.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.*.dll*/*.mdb \
+-	/usr/lib/mono/2.0/OpenSystem.C.dll*.mdb \
+-	/usr/lib/mono/2.0/OpenSystem.C.dll*/*.mdb"
+-FILES_libmono2.0-cil = "/usr/lib/mono/gac/Mono.*/2.0.*/ \
+-	/usr/lib/mono/gac/OpenSystem.C/2.0.* \
+-	/usr/lib/mono/gac/mono-service/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.*.dll \
+-	/usr/lib/mono/2.0/OpenSystem.C.dll"
+-
+-PACKAGES = "mono-jit-dbg \
+-	mono-jit \
+-	mono-gac-dbg \
+-	mono-gac \
+-	mono-mjs-dbg \
+-	mono-mjs \
+-	mono-gmcs-dbg \
+-	mono-gmcs \
+-	mono-utils-dbg \
+-	mono-utils \
+-	libmono-peapi1.0-cil-dbg \
+-	libmono-peapi1.0-cil \
+-	libmono-cairo1.0-cil-dbg \
+-	libmono-cairo1.0-cil \
+-	libmono-system-web2.0-cil-dbg \
+-	libmono-system-web2.0-cil \
+-	libmono-accessibility2.0-cil-dbg \
+-	libmono-accessibility2.0-cil \
+-	libmono-microsoft7.0-cil-dbg \
+-	libmono-microsoft7.0-cil \
+-	libmono-winforms2.0-cil-dbg \
+-	libmono-winforms2.0-cil \
+-	libmono-ldap1.0-cil-dbg \
+-	libmono-ldap1.0-cil \
+-	libmono-sharpzip2.84-cil-dbg \
+-	libmono-sharpzip2.84-cil \
+-	libmono-system-data2.0-cil-dbg \
+-	libmono-system-data2.0-cil \
+-	libmono-corlib2.0-cil-dbg \
+-	libmono-corlib2.0-cil \
+-	libmono-winforms1.0-cil-dbg \
+-	libmono-winforms1.0-cil \
+-	libmono-microsoft8.0-cil-dbg \
+-	libmono-microsoft8.0-cil \
+-	libmono-corlib1.0-cil-dbg \
+-	libmono-corlib1.0-cil \
+-	libmono-system-web1.0-cil-dbg \
+-	libmono-system-web1.0-cil \
+-	libmono-system-runtime2.0-cil-dbg \
+-	libmono-system-runtime2.0-cil \
+-	libmono-cscompmgd8.0-cil-dbg \
+-	libmono-cscompmgd8.0-cil \
+-	libmono-cscompmgd7.0-cil-dbg \
+-	libmono-cscompmgd7.0-cil \
+-	libmono-firebirdsql1.7-cil-dbg \
+-	libmono-firebirdsql1.7-cil \
+-	mono-jay-dbg \
+-	mono-jay \
+-	libmono-data-tds1.0-cil-dbg \
+-	libmono-data-tds1.0-cil \
+-	libmono-sqlite1.0-cil-dbg \
+-	libmono-sqlite1.0-cil \
+-	libmono-relaxng1.0-cil-dbg \
+-	libmono-relaxng1.0-cil \
+-	libmono-dev-dbg \
+-	libmono-dev \
+-	libmono-accessibility1.0-cil-dbg \
+-	libmono-accessibility1.0-cil \
+-	mono-common-dbg \
+-	mono-common \
+-	libmono-oracle1.0-cil-dbg \
+-	libmono-oracle1.0-cil \
+-	libmono-system-data1.0-cil-dbg \
+-	libmono-system-data1.0-cil \
+-	libmono-bytefx0.7.6.2-cil-dbg \
+-	libmono-bytefx0.7.6.2-cil \
+-	libmono0-dbg \
+-	libmono0 \
+-	libmono-sharpzip0.6-cil-dbg \
+-	libmono-sharpzip0.6-cil \
+-	libmono-data-tds2.0-cil-dbg \
+-	libmono-data-tds2.0-cil \
+-	libmono-system-messaging1.0-cil-dbg \
+-	libmono-system-messaging1.0-cil \
+-	libmono-npgsql1.0-cil-dbg \
+-	libmono-npgsql1.0-cil \
+-	libmono-security2.0-cil-dbg \
+-	libmono-security2.0-cil \
+-	libmono-security1.0-cil-dbg \
+-	libmono-security1.0-cil \
+-	libmono-bytefx0.7.6.1-cil-dbg \
+-	libmono-bytefx0.7.6.1-cil \
+-	libmono-microsoft-build2.0-cil-dbg \
+-	libmono-microsoft-build2.0-cil \
+-	libmono-system-ldap1.0-cil-dbg \
+-	libmono-system-ldap1.0-cil \
+-	libmono-relaxng2.0-cil-dbg \
+-	libmono-relaxng2.0-cil \
+-	libmono-system-ldap2.0-cil-dbg \
+-	libmono-system-ldap2.0-cil \
+-	libmono-system-messaging2.0-cil-dbg \
+-	libmono-system-messaging2.0-cil \
+-	libmono-sharpzip0.84-cil-dbg \
+-	libmono-sharpzip0.84-cil \
+-	libmono-sqlite2.0-cil-dbg \
+-	libmono-sqlite2.0-cil \
+-	libmono-ldap2.0-cil-dbg \
+-	libmono-ldap2.0-cil \
+-	libmono-npgsql2.0-cil-dbg \
+-	libmono-npgsql2.0-cil \
+-	libmono-system-runtime1.0-cil-dbg \
+-	libmono-system-runtime1.0-cil \
+-	libmono-oracle2.0-cil-dbg \
+-	libmono-oracle2.0-cil \
+-	libmono-c5-1.0-cil-dbg \
+-	libmono-c5-1.0-cil \
+-	libmono-sharpzip2.6-cil-dbg \
+-	libmono-sharpzip2.6-cil \
+-	libmono-cairo2.0-cil-dbg \
+-	libmono-cairo2.0-cil \
+-	libmono-peapi2.0-cil-dbg \
+-	libmono-peapi2.0-cil \
+-	mono-mcs-dbg \
+-	mono-mcs \
+-	libmono-system1.0-cil-dbg \
+-	libmono-system1.0-cil \
+-	libmono-system2.0-cil-dbg \
+-	libmono-system2.0-cil \
+-	libmono1.0-cil-dbg \
+-	libmono1.0-cil \
+-	libmono2.0-cil-dbg \
+-	libmono2.0-cil"
+-# This is a generated file, please do not edit directly
+-# Use collect-files.py instead. -- Henryk <henryk@openmoko.org>
+-FILES_mono-jit-dbg += "/usr/bin/mono*.mdb \
+-	/usr/bin/mono*/*.mdb"
+-FILES_mono-jit = "/usr/bin/mono"
+-FILES_mono-gac-dbg += "/usr/bin/gacutil*.mdb \
+-	/usr/bin/gacutil*/*.mdb \
+-	/usr/lib/mono/1.0/gacutil.exe*.mdb \
+-	/usr/lib/mono/1.0/gacutil.exe*/*.mdb"
+-FILES_mono-gac = "/usr/bin/gacutil \
+-	/usr/lib/mono/1.0/gacutil.exe"
+-FILES_mono-mjs-dbg += "/usr/bin/mjs*.mdb \
+-	/usr/bin/mjs*/*.mdb \
+-	/usr/lib/mono/1.0/mjs.exe*.mdb \
+-	/usr/lib/mono/1.0/mjs.exe*/*.mdb"
+-FILES_mono-mjs = "/usr/bin/mjs \
+-	/usr/lib/mono/1.0/mjs.exe*"
+-FILES_mono-gmcs-dbg += "/usr/bin/gmcs*.mdb \
+-	/usr/bin/gmcs*/*.mdb \
+-	/usr/bin/wsdl2*.mdb \
+-	/usr/bin/wsdl2*/*.mdb \
+-	/usr/bin/monop2*.mdb \
+-	/usr/bin/monop2*/*.mdb \
+-	/usr/bin/ilasm2*.mdb \
+-	/usr/bin/ilasm2*/*.mdb \
+-	/usr/bin/resgen2*.mdb \
+-	/usr/bin/resgen2*/*.mdb \
+-	/usr/bin/mono-api-info2*.mdb \
+-	/usr/bin/mono-api-info2*/*.mdb \
+-	/usr/bin/mono-service2*.mdb \
+-	/usr/bin/mono-service2*/*.mdb \
+-	/usr/bin/mkbundle2*.mdb \
+-	/usr/bin/mkbundle2*/*.mdb \
+-	/usr/bin/xbuild*.mdb \
+-	/usr/bin/xbuild*/*.mdb \
+-	/usr/bin/sgen*.mdb \
+-	/usr/bin/sgen*/*.mdb \
+-	/usr/bin/al2*.mdb \
+-	/usr/bin/al2*/*.mdb \
+-	/usr/bin/httpcfg*.mdb \
+-	/usr/bin/httpcfg*/*.mdb \
+-	/usr/lib/mono/2.0/*.exe*.mdb \
+-	/usr/lib/mono/2.0/*.exe*/*.mdb \
+-	/usr/lib/mono/2.0/xbuild.rsp*.mdb \
+-	/usr/lib/mono/2.0/xbuild.rsp*/*.mdb \
+-	/usr/lib/mono/2.0/MSBuild/*.mdb \
+-	/usr/lib/mono/2.0/MSBuild/*/*.mdb \
+-	/usr/lib/mono/2.0/MSBuild/.debug/ \
+-	/usr/lib/mono/2.0/MSBuild/../.debug/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.xsd*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Build.xsd*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.CSharp.targets*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.CSharp.targets*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.tasks*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.tasks*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.targets*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Common.targets*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualBasic.targets*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualBasic.targets*/*.mdb"
+-FILES_mono-gmcs = "/usr/bin/gmcs \
+-	/usr/bin/wsdl2 \
+-	/usr/bin/monop2 \
+-	/usr/bin/ilasm2 \
+-	/usr/bin/resgen2 \
+-	/usr/bin/mono-api-info2 \
+-	/usr/bin/mono-service2 \
+-	/usr/bin/mkbundle2 \
+-	/usr/bin/xbuild \
+-	/usr/bin/sgen \
+-	/usr/bin/al2 \
+-	/usr/bin/httpcfg \
+-	/usr/lib/mono/2.0/*.exe* \
+-	/usr/lib/mono/2.0/xbuild.rsp \
+-	/usr/lib/mono/2.0/MSBuild/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.xsd \
+-	/usr/lib/mono/2.0/Microsoft.CSharp.targets \
+-	/usr/lib/mono/2.0/Microsoft.Common.tasks \
+-	/usr/lib/mono/2.0/Microsoft.Common.targets \
+-	/usr/lib/mono/2.0/Microsoft.VisualBasic.targets"
+-FILES_mono-utils-dbg += "/usr/bin/pedump*.mdb \
+-	/usr/bin/pedump*/*.mdb \
+-	/usr/bin/monodis*.mdb \
+-	/usr/bin/monodis*/*.mdb \
+-	/usr/bin/monograph*.mdb \
+-	/usr/bin/monograph*/*.mdb \
+-	/usr/bin/mono-find-provides*.mdb \
+-	/usr/bin/mono-find-provides*/*.mdb \
+-	/usr/bin/mono-find-requires*.mdb \
+-	/usr/bin/mono-find-requires*/*.mdb"
+-FILES_mono-utils = "/usr/bin/pedump \
+-	/usr/bin/monodis \
+-	/usr/bin/monograph \
+-	/usr/bin/mono-find-provides \
+-	/usr/bin/mono-find-requires"
+-FILES_libmono-peapi1.0-cil-dbg += "/usr/lib/mono/gac/PEAPI/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/PEAPI/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/PEAPI.dll*.mdb \
+-	/usr/lib/mono/1.0/PEAPI.dll*/*.mdb"
+-FILES_libmono-peapi1.0-cil = "/usr/lib/mono/gac/PEAPI/1.0.*/ \
+-	/usr/lib/mono/1.0/PEAPI.dll"
+-FILES_libmono-cairo1.0-cil-dbg += "/usr/lib/mono/gac/Mono.Cairo/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Cairo/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Cairo.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Cairo.dll*/*.mdb \
+-	/usr/lib/pkgconfig/mono-cairo.pc*.mdb \
+-	/usr/lib/pkgconfig/mono-cairo.pc*/*.mdb"
+-FILES_libmono-cairo1.0-cil = "/usr/lib/mono/gac/Mono.Cairo/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Cairo.dll \
+-	/usr/lib/pkgconfig/mono-cairo.pc"
+-FILES_libmono-system-web2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Web/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Web.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Web.dll*/*.mdb \
+-	/usr/lib/mono/2.0/System.Web.Services.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Web.Services.dll*/*.mdb"
+-FILES_libmono-system-web2.0-cil = "/usr/lib/mono/gac/System.Web/2.0.*/ \
+-	/usr/lib/mono/gac/System.Web.Services/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Web.dll \
+-	/usr/lib/mono/2.0/System.Web.Services.dll"
+-FILES_libmono-accessibility2.0-cil-dbg +=
+"/usr/lib/mono/gac/Accessibility/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Accessibility/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Accessibility.dll*.mdb \
+-	/usr/lib/mono/2.0/Accessibility.dll*/*.mdb"
+-FILES_libmono-accessibility2.0-cil = "/usr/lib/mono/gac/Accessibility/2.0.*/ \
+-	/usr/lib/mono/2.0/Accessibility.dll"
+-FILES_libmono-microsoft7.0-cil-dbg +=
+"/usr/lib/mono/gac/Microsoft.JScript/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.JScript/7.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Microsoft.JScript.dll*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.JScript.dll*/*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.VisualC.dll*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.VisualC.dll*/*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.Vsa.dll*.mdb \
+-	/usr/lib/mono/1.0/Microsoft.Vsa.dll*/*.mdb"
+-FILES_libmono-microsoft7.0-cil = "/usr/lib/mono/gac/Microsoft.JScript/7.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/7.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/7.0.*/ \
+-	/usr/lib/mono/1.0/Microsoft.JScript.dll \
+-	/usr/lib/mono/1.0/Microsoft.VisualC.dll \
+-	/usr/lib/mono/1.0/Microsoft.Vsa.dll"
+-FILES_libmono-winforms2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Windows.Forms/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Windows.Forms/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Design/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Design/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Windows.Forms.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Windows.Forms.dll*/*.mdb \
+-	/usr/lib/mono/2.0/System.Drawing.Design.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Drawing.Design.dll*/*.mdb \
+-	/usr/lib/mono/2.0/System.Design.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Design.dll*/*.mdb"
+-FILES_libmono-winforms2.0-cil =
+"/usr/lib/mono/gac/System.Windows.Forms/2.0.*/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/2.0.*/ \
+-	/usr/lib/mono/gac/System.Design/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Windows.Forms.dll \
+-	/usr/lib/mono/2.0/System.Drawing.Design.dll \
+-	/usr/lib/mono/2.0/System.Design.dll"
+-FILES_libmono-ldap1.0-cil-dbg +=
+"/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Novell.Directory.Ldap.dll*.mdb \
+-	/usr/lib/mono/1.0/Novell.Directory.Ldap.dll*/*.mdb"
+-FILES_libmono-ldap1.0-cil = "/usr/lib/mono/gac/Novell.Directory.Ldap/1.0.*/ \
+-	/usr/lib/mono/1.0/Novell.Directory.Ldap.dll"
+-FILES_libmono-sharpzip2.84-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/../.debug/ \
+-	/usr/lib/mono/2.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/2.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip2.84-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.84.*/ \
+-	/usr/lib/mono/2.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-system-data2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Data.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Data.dll*/*.mdb"
+-FILES_libmono-system-data2.0-cil = "/usr/lib/mono/gac/System.Data/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Data.dll"
+-FILES_libmono-corlib2.0-cil-dbg += "/usr/lib/mono/gac/I18N*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/I18N*/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/I18N*.dll*.mdb \
+-	/usr/lib/mono/2.0/I18N*.dll*/*.mdb \
+-	/usr/lib/mono/2.0/mscorlib.dll*.mdb \
+-	/usr/lib/mono/2.0/mscorlib.dll*/*.mdb"
+-FILES_libmono-corlib2.0-cil = "/usr/lib/mono/gac/I18N*/2.0.*/ \
+-	/usr/lib/mono/2.0/I18N*.dll \
+-	/usr/lib/mono/2.0/mscorlib.dll*"
+-FILES_libmono-winforms1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Windows.Forms/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Windows.Forms/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Windows.Forms/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Design/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Design/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Design/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Windows.Forms.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Windows.Forms.dll*/*.mdb \
+-	/usr/lib/mono/1.0/System.Drawing.Design.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Drawing.Design.dll*/*.mdb \
+-	/usr/lib/mono/1.0/System.Design.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Design.dll*/*.mdb"
+-FILES_libmono-winforms1.0-cil =
+"/usr/lib/mono/gac/System.Windows.Forms/1.0.*/ \
+-	/usr/lib/mono/gac/System.Drawing.Design/1.0.*/ \
+-	/usr/lib/mono/gac/System.Design/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Windows.Forms.dll \
+-	/usr/lib/mono/1.0/System.Drawing.Design.dll \
+-	/usr/lib/mono/1.0/System.Design.dll"
+-FILES_libmono-microsoft8.0-cil-dbg +=
+"/usr/lib/mono/gac/Microsoft.JScript/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.JScript/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.JScript/8.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Microsoft.JScript.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.JScript.dll*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualC.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.VisualC.dll*/*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Vsa.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Vsa.dll*/*.mdb"
+-FILES_libmono-microsoft8.0-cil = "/usr/lib/mono/gac/Microsoft.JScript/8.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.VisualC/8.0.*/ \
+-	/usr/lib/mono/gac/Microsoft.Vsa/8.0.*/ \
+-	/usr/lib/mono/2.0/Microsoft.JScript.dll \
+-	/usr/lib/mono/2.0/Microsoft.VisualC.dll \
+-	/usr/lib/mono/2.0/Microsoft.Vsa.dll"
+-FILES_libmono-corlib1.0-cil-dbg += "/usr/lib/mono/gac/I18N*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/I18N*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/I18N*/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/I18N*.dll*.mdb \
+-	/usr/lib/mono/1.0/I18N*.dll*/*.mdb \
+-	/usr/lib/mono/1.0/mscorlib.dll*.mdb \
+-	/usr/lib/mono/1.0/mscorlib.dll*/*.mdb"
+-FILES_libmono-corlib1.0-cil = "/usr/lib/mono/gac/I18N*/1.0.*/ \
+-	/usr/lib/mono/1.0/I18N*.dll \
+-	/usr/lib/mono/1.0/mscorlib.dll*"
+-FILES_libmono-system-web1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Web/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Web.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Web.dll*/*.mdb \
+-	/usr/lib/mono/1.0/System.Web.Services.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Web.Services.dll*/*.mdb"
+-FILES_libmono-system-web1.0-cil = "/usr/lib/mono/gac/System.Web/1.0.*/ \
+-	/usr/lib/mono/gac/System.Web.Services/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Web.dll \
+-	/usr/lib/mono/1.0/System.Web.Services.dll"
+-FILES_libmono-system-runtime2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Runtime.*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Runtime.*/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Runtime.*.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Runtime.*.dll*/*.mdb"
+-FILES_libmono-system-runtime2.0-cil =
+"/usr/lib/mono/gac/System.Runtime.*/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Runtime.*.dll"
+-FILES_libmono-cscompmgd8.0-cil-dbg +=
+"/usr/lib/mono/gac/cscompmgd/8.0.*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/8.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/8.0.*/.debug/ \
+-	/usr/lib/mono/gac/cscompmgd/8.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/cscompmgd.dll*.mdb \
+-	/usr/lib/mono/2.0/cscompmgd.dll*/*.mdb"
+-FILES_libmono-cscompmgd8.0-cil = "/usr/lib/mono/gac/cscompmgd/8.0.*/ \
+-	/usr/lib/mono/2.0/cscompmgd.dll"
+-FILES_libmono-cscompmgd7.0-cil-dbg +=
+"/usr/lib/mono/gac/cscompmgd/7.0.*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/7.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/cscompmgd/7.0.*/.debug/ \
+-	/usr/lib/mono/gac/cscompmgd/7.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/cscompmgd.dll*.mdb \
+-	/usr/lib/mono/1.0/cscompmgd.dll*/*.mdb"
+-FILES_libmono-cscompmgd7.0-cil = "/usr/lib/mono/gac/cscompmgd/7.0.*/ \
+-	/usr/lib/mono/1.0/cscompmgd.dll"
+-FILES_libmono-firebirdsql1.7-cil-dbg +=
+"/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/*.mdb \
+-	/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/*/*.mdb \
+-	/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/.debug/ \
+-	/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/../.debug/ \
+-	/usr/lib/mono/1.0/FirebirdSql.Data.Firebird.dll*.mdb \
+-	/usr/lib/mono/1.0/FirebirdSql.Data.Firebird.dll*/*.mdb"
+-FILES_libmono-firebirdsql1.7-cil =
+"/usr/lib/mono/gac/FirebirdSql.Data.Firebird/1.7.*/ \
+-	/usr/lib/mono/1.0/FirebirdSql.Data.Firebird.dll"
+-FILES_mono-jay-dbg += "/usr/bin/jay*.mdb \
+-	/usr/bin/jay*/*.mdb"
+-FILES_mono-jay = "/usr/bin/jay"
+-FILES_libmono-data-tds1.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Data.Tds.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.Tds.dll*/*.mdb"
+-FILES_libmono-data-tds1.0-cil = "/usr/lib/mono/gac/Mono.Data.Tds/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Data.Tds.dll"
+-FILES_libmono-sqlite1.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Data.Sqlite.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.Sqlite.dll*/*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.SqliteClient.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Data.SqliteClient.dll*/*.mdb"
+-FILES_libmono-sqlite1.0-cil = "/usr/lib/mono/gac/Mono.Data.Sqlite/1.0.*/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Data.Sqlite.dll \
+-	/usr/lib/mono/1.0/Mono.Data.SqliteClient.dll"
+-FILES_libmono-relaxng1.0-cil-dbg +=
+"/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Commons.Xml.Relaxng.dll*.mdb \
+-	/usr/lib/mono/1.0/Commons.Xml.Relaxng.dll*/*.mdb"
+-FILES_libmono-relaxng1.0-cil = "/usr/lib/mono/gac/Commons.Xml.Relaxng/1.0.*/ \
+-	/usr/lib/mono/1.0/Commons.Xml.Relaxng.dll"
+-FILES_libmono-dev-dbg += "/usr/lib/libmono*.a*.mdb \
+-	/usr/lib/libmono*.a*/*.mdb \
+-	/usr/lib/libMono*.a*.mdb \
+-	/usr/lib/libMono*.a*/*.mdb \
+-	/usr/lib/libmono*.so*.mdb \
+-	/usr/lib/libmono*.so*/*.mdb \
+-	/usr/lib/libMonoSupportW.a*.mdb \
+-	/usr/lib/libMonoSupportW.a*/*.mdb \
+-	/usr/lib/pkgconfig/mono.pc*.mdb \
+-	/usr/lib/pkgconfig/mono.pc*/*.mdb \
+-	/usr/lib/pkgconfig/dotnet.pc*.mdb \
+-	/usr/lib/pkgconfig/dotnet.pc*/*.mdb \
+-	/usr/include/*.mdb \
+-	/usr/include/*/*.mdb \
+-	/usr/include/.debug/ \
+-	/usr/include/../.debug/"
+-FILES_libmono-dev = "/usr/lib/libmono*.a \
+-	/usr/lib/libMono*.a \
+-	/usr/lib/libmono*.so \
+-	/usr/lib/libMonoSupportW.a \
+-	/usr/lib/pkgconfig/mono.pc \
+-	/usr/lib/pkgconfig/dotnet.pc \
+-	/usr/include/"
+-FILES_libmono-accessibility1.0-cil-dbg +=
+"/usr/lib/mono/gac/Accessibility/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Accessibility/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Accessibility/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Accessibility.dll*.mdb \
+-	/usr/lib/mono/1.0/Accessibility.dll*/*.mdb"
+-FILES_libmono-accessibility1.0-cil = "/usr/lib/mono/gac/Accessibility/1.0.*/ \
+-	/usr/lib/mono/1.0/Accessibility.dll"
+-FILES_mono-common-dbg += "/etc/mono*.mdb \
+-	/etc/mono*/*.mdb \
+-	/usr/share/mono-1.0/mono/cil/cil-opcodes.xml*.mdb \
+-	/usr/share/mono-1.0/mono/cil/cil-opcodes.xml*/*.mdb"
+-FILES_mono-common = "/etc/mono \
+-	/usr/share/mono-1.0/mono/cil/cil-opcodes.xml"
+-FILES_libmono-oracle1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Data.OracleClient.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Data.OracleClient.dll*/*.mdb"
+-FILES_libmono-oracle1.0-cil =
+"/usr/lib/mono/gac/System.Data.OracleClient/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Data.OracleClient.dll"
+-FILES_libmono-system-data1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Data.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Data.dll*/*.mdb"
+-FILES_libmono-system-data1.0-cil = "/usr/lib/mono/gac/System.Data/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Data.dll"
+-FILES_libmono-bytefx0.7.6.2-cil-dbg +=
+"/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/.debug/ \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/../.debug/ \
+-	/usr/lib/mono/2.0/ByteFX.Data.dll*.mdb \
+-	/usr/lib/mono/2.0/ByteFX.Data.dll*/*.mdb"
+-FILES_libmono-bytefx0.7.6.2-cil = "/usr/lib/mono/gac/ByteFX.Data/0.7.6.2*/ \
+-	/usr/lib/mono/2.0/ByteFX.Data.dll"
+-FILES_libmono0-dbg += "/usr/lib/libmono*.so.*.mdb \
+-	/usr/lib/libmono*.so.*/*.mdb \
+-	/usr/lib/libMonoPosixHelper.so*.mdb \
+-	/usr/lib/libMonoPosixHelper.so*/*.mdb \
+-	/usr/lib/libMonoSupportW.so*.mdb \
+-	/usr/lib/libMonoSupportW.so*/*.mdb"
+-FILES_libmono0 = "/usr/lib/libmono*.so.* \
+-	/usr/lib/libMonoPosixHelper.so \
+-	/usr/lib/libMonoSupportW.so"
+-FILES_libmono-sharpzip0.6-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/../.debug/ \
+-	/usr/lib/mono/compat-1.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/compat-1.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip0.6-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.6.*/ \
+-	/usr/lib/mono/compat-1.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-data-tds2.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Data.Tds.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.Tds.dll*/*.mdb"
+-FILES_libmono-data-tds2.0-cil = "/usr/lib/mono/gac/Mono.Data.Tds/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Data.Tds.dll"
+-FILES_libmono-system-messaging1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Messaging/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Messaging/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Messaging.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Messaging.dll*/*.mdb"
+-FILES_libmono-system-messaging1.0-cil =
+"/usr/lib/mono/gac/System.Messaging/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Messaging.dll"
+-FILES_libmono-npgsql1.0-cil-dbg += "/usr/lib/mono/gac/Npgsql/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Npgsql/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Npgsql.dll*.mdb \
+-	/usr/lib/mono/1.0/Npgsql.dll*/*.mdb"
+-FILES_libmono-npgsql1.0-cil = "/usr/lib/mono/gac/Npgsql/1.0.*/ \
+-	/usr/lib/mono/1.0/Npgsql.dll"
+-FILES_libmono-security2.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Security/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Security/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Security.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Security.dll*/*.mdb"
+-FILES_libmono-security2.0-cil = "/usr/lib/mono/gac/Mono.Security/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Security.dll"
+-FILES_libmono-security1.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Security/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Security/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Security/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.Security.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.Security.dll*/*.mdb"
+-FILES_libmono-security1.0-cil = "/usr/lib/mono/gac/Mono.Security/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.Security.dll"
+-FILES_libmono-bytefx0.7.6.1-cil-dbg +=
+"/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/*/*.mdb \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/.debug/ \
+-	/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/../.debug/ \
+-	/usr/lib/mono/1.0/ByteFX.Data.dll*.mdb \
+-	/usr/lib/mono/1.0/ByteFX.Data.dll*/*.mdb"
+-FILES_libmono-bytefx0.7.6.1-cil = "/usr/lib/mono/gac/ByteFX.Data/0.7.6.1*/ \
+-	/usr/lib/mono/1.0/ByteFX.Data.dll"
+-FILES_libmono-microsoft-build2.0-cil-dbg +=
+"/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.*.dll*.mdb \
+-	/usr/lib/mono/2.0/Microsoft.Build.*.dll*/*.mdb"
+-FILES_libmono-microsoft-build2.0-cil =
+"/usr/lib/mono/gac/Microsoft.Build.*/2.0.*/ \
+-	/usr/lib/mono/2.0/Microsoft.Build.*.dll"
+-FILES_libmono-system-ldap1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.DirectoryServices/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.DirectoryServices/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.DirectoryServices.dll*.mdb \
+-	/usr/lib/mono/1.0/System.DirectoryServices.dll*/*.mdb"
+-FILES_libmono-system-ldap1.0-cil =
+"/usr/lib/mono/gac/System.DirectoryServices/1.0.*/ \
+-	/usr/lib/mono/1.0/System.DirectoryServices.dll"
+-FILES_libmono-relaxng2.0-cil-dbg +=
+"/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Commons.Xml.Relaxng.dll*.mdb \
+-	/usr/lib/mono/2.0/Commons.Xml.Relaxng.dll*/*.mdb"
+-FILES_libmono-relaxng2.0-cil = "/usr/lib/mono/gac/Commons.Xml.Relaxng/2.0.*/ \
+-	/usr/lib/mono/2.0/Commons.Xml.Relaxng.dll"
+-FILES_libmono-system-ldap2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.DirectoryServices/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.DirectoryServices/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.DirectoryServices/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.DirectoryServices.dll*.mdb \
+-	/usr/lib/mono/2.0/System.DirectoryServices.dll*/*.mdb"
+-FILES_libmono-system-ldap2.0-cil =
+"/usr/lib/mono/gac/System.DirectoryServices/2.0.*/ \
+-	/usr/lib/mono/2.0/System.DirectoryServices.dll"
+-FILES_libmono-system-messaging2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Messaging/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Messaging/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Messaging/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Messaging.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Messaging.dll*/*.mdb"
+-FILES_libmono-system-messaging2.0-cil =
+"/usr/lib/mono/gac/System.Messaging/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Messaging.dll"
+-FILES_libmono-sharpzip0.84-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/../.debug/ \
+-	/usr/lib/mono/1.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/1.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip0.84-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/0.84.*/ \
+-	/usr/lib/mono/1.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-sqlite2.0-cil-dbg +=
+"/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Data.Sqlite.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.Sqlite.dll*/*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.SqliteClient.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Data.SqliteClient.dll*/*.mdb"
+-FILES_libmono-sqlite2.0-cil = "/usr/lib/mono/gac/Mono.Data.Sqlite/2.0.*/ \
+-	/usr/lib/mono/gac/Mono.Data.SqliteClient/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Data.Sqlite.dll \
+-	/usr/lib/mono/2.0/Mono.Data.SqliteClient.dll"
+-FILES_libmono-ldap2.0-cil-dbg +=
+"/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Novell.Directory.Ldap.dll*.mdb \
+-	/usr/lib/mono/2.0/Novell.Directory.Ldap.dll*/*.mdb"
+-FILES_libmono-ldap2.0-cil = "/usr/lib/mono/gac/Novell.Directory.Ldap/2.0.*/ \
+-	/usr/lib/mono/2.0/Novell.Directory.Ldap.dll"
+-FILES_libmono-npgsql2.0-cil-dbg += "/usr/lib/mono/gac/Npgsql/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Npgsql/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Npgsql/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Npgsql.dll*.mdb \
+-	/usr/lib/mono/2.0/Npgsql.dll*/*.mdb"
+-FILES_libmono-npgsql2.0-cil = "/usr/lib/mono/gac/Npgsql/2.0.*/ \
+-	/usr/lib/mono/2.0/Npgsql.dll"
+-FILES_libmono-system-runtime1.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Runtime.*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Runtime.*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Runtime.*/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System.Runtime.*.dll*.mdb \
+-	/usr/lib/mono/1.0/System.Runtime.*.dll*/*.mdb"
+-FILES_libmono-system-runtime1.0-cil =
+"/usr/lib/mono/gac/System.Runtime.*/1.0.*/ \
+-	/usr/lib/mono/1.0/System.Runtime.*.dll"
+-FILES_libmono-oracle2.0-cil-dbg +=
+"/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System.Data.OracleClient.dll*.mdb \
+-	/usr/lib/mono/2.0/System.Data.OracleClient.dll*/*.mdb"
+-FILES_libmono-oracle2.0-cil =
+"/usr/lib/mono/gac/System.Data.OracleClient/2.0.*/ \
+-	/usr/lib/mono/2.0/System.Data.OracleClient.dll"
+-FILES_libmono-c5-1.0-cil-dbg += "/usr/lib/mono/gac/Mono.C5/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.C5/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.C5/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.C5/1.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.C5.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.C5.dll*/*.mdb"
+-FILES_libmono-c5-1.0-cil = "/usr/lib/mono/gac/Mono.C5/1.0.*/ \
+-	/usr/lib/mono/2.0/Mono.C5.dll"
+-FILES_libmono-sharpzip2.6-cil-dbg +=
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/*/*.mdb \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/.debug/ \
+-	/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/../.debug/ \
+-	/usr/lib/mono/compat-2.0/ICSharpCode.SharpZipLib.dll*.mdb \
+-	/usr/lib/mono/compat-2.0/ICSharpCode.SharpZipLib.dll*/*.mdb"
+-FILES_libmono-sharpzip2.6-cil =
+"/usr/lib/mono/gac/ICSharpCode.SharpZipLib/2.6.*/ \
+-	/usr/lib/mono/compat-2.0/ICSharpCode.SharpZipLib.dll"
+-FILES_libmono-cairo2.0-cil-dbg += "/usr/lib/mono/gac/Mono.Cairo/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.Cairo/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.Cairo/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.Cairo.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.Cairo.dll*/*.mdb"
+-FILES_libmono-cairo2.0-cil = "/usr/lib/mono/gac/Mono.Cairo/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.Cairo.dll"
+-FILES_libmono-peapi2.0-cil-dbg += "/usr/lib/mono/gac/PEAPI/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/PEAPI/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/PEAPI/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/PEAPI.dll*.mdb \
+-	/usr/lib/mono/2.0/PEAPI.dll*/*.mdb"
+-FILES_libmono-peapi2.0-cil = "/usr/lib/mono/gac/PEAPI/2.0.*/ \
+-	/usr/lib/mono/2.0/PEAPI.dll"
+-FILES_mono-mcs-dbg += "/usr/bin/*.mdb \
+-	/usr/bin/*/*.mdb \
+-	/usr/bin/.debug/ \
+-	/usr/bin/../.debug/ \
+-	/usr/lib/mono/1.0/*.exe*.mdb \
+-	/usr/lib/mono/1.0/*.exe*/*.mdb"
+-FILES_mono-mcs = "/usr/bin/ \
+-	/usr/lib/mono/1.0/*.exe*"
+-FILES_libmono-system1.0-cil-dbg += "/usr/lib/mono/gac/System*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/System*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/System*/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/System*.dll*.mdb \
+-	/usr/lib/mono/1.0/System*.dll*/*.mdb \
+-	/usr/lib/mono/1.0/CustomMarshalers.dll*.mdb \
+-	/usr/lib/mono/1.0/CustomMarshalers.dll*/*.mdb"
+-FILES_libmono-system1.0-cil = "/usr/lib/mono/gac/System*/1.0.*/ \
+-	/usr/lib/mono/gac/CustomMarshalers/1.0.*/ \
+-	/usr/lib/mono/1.0/System*.dll \
+-	/usr/lib/mono/1.0/CustomMarshalers.dll*"
+-FILES_libmono-system2.0-cil-dbg += "/usr/lib/mono/gac/System*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/System*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/System*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/System*/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/System*.dll*.mdb \
+-	/usr/lib/mono/2.0/System*.dll*/*.mdb \
+-	/usr/lib/mono/2.0/CustomMarshalers.dll*.mdb \
+-	/usr/lib/mono/2.0/CustomMarshalers.dll*/*.mdb"
+-FILES_libmono-system2.0-cil = "/usr/lib/mono/gac/System*/2.0.*/ \
+-	/usr/lib/mono/gac/CustomMarshalers/2.0.*/ \
+-	/usr/lib/mono/2.0/System*.dll \
+-	/usr/lib/mono/2.0/CustomMarshalers.dll*"
+-FILES_libmono1.0-cil-dbg += "/usr/lib/mono/gac/Mono.*/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.*/1.0.*/../.debug/ \
+-	/usr/lib/mono/gac/OpenSystem.C/1.0.*.mdb \
+-	/usr/lib/mono/gac/OpenSystem.C/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/1.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/1.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/1.0.*/.debug/ \
+-	/usr/lib/mono/gac/mono-service/1.0.*/../.debug/ \
+-	/usr/lib/mono/1.0/Mono.*.dll*.mdb \
+-	/usr/lib/mono/1.0/Mono.*.dll*/*.mdb \
+-	/usr/lib/mono/1.0/OpenSystem.C.dll*.mdb \
+-	/usr/lib/mono/1.0/OpenSystem.C.dll*/*.mdb"
+-FILES_libmono1.0-cil = "/usr/lib/mono/gac/Mono.*/1.0.*/ \
+-	/usr/lib/mono/gac/OpenSystem.C/1.0.* \
+-	/usr/lib/mono/gac/mono-service/1.0.*/ \
+-	/usr/lib/mono/1.0/Mono.*.dll \
+-	/usr/lib/mono/1.0/OpenSystem.C.dll"
+-FILES_libmono2.0-cil-dbg += "/usr/lib/mono/gac/Mono.*/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/Mono.*/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/Mono.*/2.0.*/../.debug/ \
+-	/usr/lib/mono/gac/OpenSystem.C/2.0.*.mdb \
+-	/usr/lib/mono/gac/OpenSystem.C/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/2.0.*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/2.0.*/*/*.mdb \
+-	/usr/lib/mono/gac/mono-service/2.0.*/.debug/ \
+-	/usr/lib/mono/gac/mono-service/2.0.*/../.debug/ \
+-	/usr/lib/mono/2.0/Mono.*.dll*.mdb \
+-	/usr/lib/mono/2.0/Mono.*.dll*/*.mdb \
+-	/usr/lib/mono/2.0/OpenSystem.C.dll*.mdb \
+-	/usr/lib/mono/2.0/OpenSystem.C.dll*/*.mdb"
+-FILES_libmono2.0-cil = "/usr/lib/mono/gac/Mono.*/2.0.*/ \
+-	/usr/lib/mono/gac/OpenSystem.C/2.0.* \
+-	/usr/lib/mono/gac/mono-service/2.0.*/ \
+-	/usr/lib/mono/2.0/Mono.*.dll \
+-	/usr/lib/mono/2.0/OpenSystem.C.dll"
+-
+-PACKAGES = "mono-jit-dbg \
+-	mono-jit \
+-	mono-gac-dbg \
+-	mono-gac \
+-	mono-mjs-dbg \
+-	mono-mjs \
+-	mono-gmcs-dbg \
+-	mono-gmcs \
+-	mono-utils-dbg \
+-	mono-utils \
+-	libmono-peapi1.0-cil-dbg \
+-	libmono-peapi1.0-cil \
+-	libmono-cairo1.0-cil-dbg \
+-	libmono-cairo1.0-cil \
+-	libmono-system-web2.0-cil-dbg \
+-	libmono-system-web2.0-cil \
+-	libmono-accessibility2.0-cil-dbg \
+-	libmono-accessibility2.0-cil \
+-	libmono-microsoft7.0-cil-dbg \
+-	libmono-microsoft7.0-cil \
+-	libmono-winforms2.0-cil-dbg \
+-	libmono-winforms2.0-cil \
+-	libmono-ldap1.0-cil-dbg \
+-	libmono-ldap1.0-cil \
+-	libmono-sharpzip2.84-cil-dbg \
+-	libmono-sharpzip2.84-cil \
+-	libmono-system-data2.0-cil-dbg \
+-	libmono-system-data2.0-cil \
+-	libmono-corlib2.0-cil-dbg \
+-	libmono-corlib2.0-cil \
+-	libmono-winforms1.0-cil-dbg \
+-	libmono-winforms1.0-cil \
+-	libmono-microsoft8.0-cil-dbg \
+-	libmono-microsoft8.0-cil \
+-	libmono-corlib1.0-cil-dbg \
+-	libmono-corlib1.0-cil \
+-	libmono-system-web1.0-cil-dbg \
+-	libmono-system-web1.0-cil \
+-	libmono-system-runtime2.0-cil-dbg \
+-	libmono-system-runtime2.0-cil \
+-	libmono-cscompmgd8.0-cil-dbg \
+-	libmono-cscompmgd8.0-cil \
+-	libmono-cscompmgd7.0-cil-dbg \
+-	libmono-cscompmgd7.0-cil \
+-	libmono-firebirdsql1.7-cil-dbg \
+-	libmono-firebirdsql1.7-cil \
+-	mono-jay-dbg \
+-	mono-jay \
+-	libmono-data-tds1.0-cil-dbg \
+-	libmono-data-tds1.0-cil \
+-	libmono-sqlite1.0-cil-dbg \
+-	libmono-sqlite1.0-cil \
+-	libmono-relaxng1.0-cil-dbg \
+-	libmono-relaxng1.0-cil \
+-	libmono-dev-dbg \
+-	libmono-dev \
+-	libmono-accessibility1.0-cil-dbg \
+-	libmono-accessibility1.0-cil \
+-	mono-common-dbg \
+-	mono-common \
+-	libmono-oracle1.0-cil-dbg \
+-	libmono-oracle1.0-cil \
+-	libmono-system-data1.0-cil-dbg \
+-	libmono-system-data1.0-cil \
+-	libmono-bytefx0.7.6.2-cil-dbg \
+-	libmono-bytefx0.7.6.2-cil \
+-	libmono0-dbg \
+-	libmono0 \
+-	libmono-sharpzip0.6-cil-dbg \
+-	libmono-sharpzip0.6-cil \
+-	libmono-data-tds2.0-cil-dbg \
+-	libmono-data-tds2.0-cil \
+-	libmono-system-messaging1.0-cil-dbg \
+-	libmono-system-messaging1.0-cil \
+-	libmono-npgsql1.0-cil-dbg \
+-	libmono-npgsql1.0-cil \
+-	libmono-security2.0-cil-dbg \
+-	libmono-security2.0-cil \
+-	libmono-security1.0-cil-dbg \
+-	libmono-security1.0-cil \
+-	libmono-bytefx0.7.6.1-cil-dbg \
+-	libmono-bytefx0.7.6.1-cil \
+-	libmono-microsoft-build2.0-cil-dbg \
+-	libmono-microsoft-build2.0-cil \
+-	libmono-system-ldap1.0-cil-dbg \
+-	libmono-system-ldap1.0-cil \
+-	libmono-relaxng2.0-cil-dbg \
+-	libmono-relaxng2.0-cil \
+-	libmono-system-ldap2.0-cil-dbg \
+-	libmono-system-ldap2.0-cil \
+-	libmono-system-messaging2.0-cil-dbg \
+-	libmono-system-messaging2.0-cil \
+-	libmono-sharpzip0.84-cil-dbg \
+-	libmono-sharpzip0.84-cil \
+-	libmono-sqlite2.0-cil-dbg \
+-	libmono-sqlite2.0-cil \
+-	libmono-ldap2.0-cil-dbg \
+-	libmono-ldap2.0-cil \
+-	libmono-npgsql2.0-cil-dbg \
+-	libmono-npgsql2.0-cil \
+-	libmono-system-runtime1.0-cil-dbg \
+-	libmono-system-runtime1.0-cil \
+-	libmono-oracle2.0-cil-dbg \
+-	libmono-oracle2.0-cil \
+-	libmono-c5-1.0-cil-dbg \
+-	libmono-c5-1.0-cil \
+-	libmono-sharpzip2.6-cil-dbg \
+-	libmono-sharpzip2.6-cil \
+-	libmono-cairo2.0-cil-dbg \
+-	libmono-cairo2.0-cil \
+-	libmono-peapi2.0-cil-dbg \
+-	libmono-peapi2.0-cil \
+-	mono-mcs-dbg \
+-	mono-mcs \
+-	libmono-system1.0-cil-dbg \
+-	libmono-system1.0-cil \
+-	libmono-system2.0-cil-dbg \
+-	libmono-system2.0-cil \
+-	libmono1.0-cil-dbg \
+-	libmono1.0-cil \
+-	libmono2.0-cil-dbg \
+-	libmono2.0-cil"
+diff -uprN a/recipes/mono/mono_1.2.5.inc b/recipes/mono/mono_1.2.5.inc
+--- a/recipes/mono/mono_1.2.5.inc	2009-07-20 12:50:48.104680933 -0600
++++ b/recipes/mono/mono_1.2.5.inc	1969-12-31 17:00:00.000000000 -0700
+@@ -1,12 +0,0 @@
+-DESCRIPTION = "Mono Programming Language"
+-SECTION = "devel/mono"
+-LICENSE = "GPL LGPL X11"
+-
+-SRC_URI = "http://go-mono.com/sources/mono/mono-${PV}.tar.bz2"
+-
+-S = "${WORKDIR}/mono-${PV}"
+-
+-inherit autotools
+-EXTRA_OECONF_arm = "--without-tls"
+-EXTRA_OECONF_mipsel = "--without-tls"
+-
+diff -uprN a/recipes/mono/mono-1.2.6/configure.patch
+b/recipes/mono/mono-1.2.6/configure.patch
+--- a/recipes/mono/mono-1.2.6/configure.patch	2009-07-20
+12:50:48.101686853 -0600
++++ b/recipes/mono/mono-1.2.6/configure.patch	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,23 +0,0 @@
+-Index: mono-1.2.6/configure.in
+-===================================================================
+---- mono-1.2.6.orig/configure.in	2007-11-08 17:07:57.000000000 -0500
+-+++ mono-1.2.6/configure.in	2007-12-12 15:27:52.000000000 -0500
+-@@ -1150,6 +1150,8 @@
+- 		], [
+- 				AC_MSG_RESULT(no)
+- 				with_tls=pthread
+-+		], [
+-+				AC_MSG_RESULT(yes)
+- 		])
+- 	fi
+-
+-@@ -1252,6 +1254,9 @@
+- 		], [
+- 				with_sigaltstack=no
+- 				AC_MSG_RESULT(no)
+-+		], [
+-+				AC_MSG_RESULT(yes)
+-+				AC_DEFINE(HAVE_WORKING_SIGALTSTACK)
+- 		])
+- 	fi
+-
+diff -uprN a/recipes/mono/mono_1.2.6.bb b/recipes/mono/mono_1.2.6.bb
+--- a/recipes/mono/mono_1.2.6.bb	2009-07-20 12:50:48.104680933 -0600
++++ b/recipes/mono/mono_1.2.6.bb	1969-12-31 17:00:00.000000000 -0700
+@@ -1,81 +0,0 @@
+-require mono_1.2.6.inc
+-
+-DEPENDS = "mono-native mono-mcs-intermediate glib-2.0 perl-native"
+-
+-PR = "r2"
+-
+-# mono makes use of non-thumb-compatible inline asm.
+-ARM_INSTRUCTION_SET = "arm"
+-
+-SRC_URI += "file://configure.patch;patch=1"
+-
+-# Per http://www.mono-project.com/Mono:ARM
+-EXTRA_OECONF += " --disable-mcs-build "
+-# Instead, get the mcs tree from a different build (see mono-mcs-intermediate)
+-
+-do_install_prepend() {
+-	install -d ${D}
+-	cd ${D}
+-	tar -xzf ${STAGING_DATADIR_NATIVE}/mono-mcs/mono-mcs-${PV}.tar.gz
+-	cd ${S}
+-}
+-
+-do_install_append() {
+-	# mono-mcs-intermediate builds and installs jay (a Yacc for Java and C#),
+-	# however, jay is not being cross-compiled and thus only
+-	# available for the buildhost architecture, so remove it
+-	# entirely
+-	cd ${D}
+-	rm -rf ./usr/share/man/man1/jay.1 ./usr/share/jay \
+-	    ./usr/share/jay/README.jay \
+-	    ./usr/bin/jay
+-	cd ${S}
+-
+-	# Not packaged with the default rules and apparently
+-	# not used for anything
+-	rm -rf ${D}${datadir}/mono-1.0/mono/cil/cil-opcodes.xml
+-}
+-
+-inherit mono
+-
+-# Import file definitions from Debian
+-require mono_1.2.5.1-files.inc
+-
+-# Add some packages
+-PACKAGES_append = " mono-doc mono mono-runtime"
+-
+-FILES_mono-doc_append = " /usr/share/libgc-mono/ "
+-
+-FILES_mono = ""
+-ALLOW_EMPTY_mono = "1"
+-RDEPENDS_mono = "mono-common mono-jit"
+-
+-FILES_mono-runtime = ""
+-ALLOW_EMPTY_mono-runtime = "1"
+-RDEPENDS_mono-runtime = "mono-jit mono-gac"
+-
+-RDEPENDS_mono-jit = "mono-common"
+-
+-FILES_libmono-dev =+ " /usr/lib/libmono.la
+/usr/lib/libmono-profiler-cov.la /usr/lib/libmono-profiler-aot.la \
+-	/usr/lib/libMonoPosixHelper.la /usr/lib/libMonoSupportW.la"
+-FILES_libmono-dbg =+ " /usr/lib/.debug/libmono*.so.*
+/usr/lib/.debug/libikvm-native.so \
+-	/usr/lib/.debug/libMonoPosixHelper.so /usr/lib/.debug/libMonoSupportW.so"
+-
+-# Packages not included in Debian
+-PACKAGES_prepend = "libnunit2.2-cil-dbg libnunit2.2-cil-dev libnunit2.2-cil \
+-	libmono-cecil0.5-cil-dbg libmono-cecil0.5-cil-dev libmono-cecil0.5-cil \
+-	libmono-db2-1.0-cil-dbg libmono-db2-1.0-cil-dev libmono-db2-1.0-cil"
+-
+-FILES_libnunit2.2-cil = "/usr/lib/mono/gac/nunit.*/2.2.*
+/usr/lib/mono/1.0/nunit.*.dll"
+-FILES_libnunit2.2-cil-dev = "/usr/lib/pkgconfig/mono-nunit.pc"
+-FILES_libnunit2.2-cil-dbg = "/usr/lib/mono/gac/nunit*/2.2.*/nunit.*.dll.mdb"
+-
+-FILES_libmono-cecil0.5-cil = "/usr/lib/mono/gac/Mono.Cecil/0.5.*"
+-FILES_libmono-cecil0.5-cil-dbg =
+"/usr/lib/mono/gac/Mono.Cecil/0.5.0.1__0738eb9f132ed756/Mono.Cecil.dll.mdb"
+-
+-FILES_libmono-db2-1.0-cil = "/usr/lib/mono/gac/IBM.Data.DB2/1.0*
+/usr/lib/mono/1.0/IBM.Data.DB2.dll"
+-FILES_libmono-db2-1.0-cil-dbg =
+"/usr/lib/mono/gac/IBM.Data.DB2/1.0*/IBM.Data.DB2.dll.mdb"
+-
+-# Move .pc files
+-FILES_libmono-cairo1.0-cil-dev = "/usr/lib/pkgconfig/mono-cairo.pc"
+-PACKAGES =+ " libmono-cairo1.0-cil-dev "
+diff -uprN a/recipes/mono/mono_1.2.6.inc b/recipes/mono/mono_1.2.6.inc
+--- a/recipes/mono/mono_1.2.6.inc	2009-07-20 12:50:48.104680933 -0600
++++ b/recipes/mono/mono_1.2.6.inc	1969-12-31 17:00:00.000000000 -0700
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "Mono Programming Language"
+-SECTION = "devel/mono"
+-LICENSE = "GPL LGPL X11"
+-
+-SRC_URI = "http://go-mono.com/sources/mono/mono-1.2.6.tar.bz2 \
+-	   file://mono-libgc-configure.patch;patch=1"
+-
+-S = "${WORKDIR}/mono-1.2.6"
+-
+-inherit autotools
+-ARM_INSTRUCTION_SET = "arm"
+-EXTRA_OECONF_arm = "--without-tls"
+-EXTRA_OECONF_mipsel = "--without-tls"
+-
+diff -uprN a/recipes/mono/mono-1.9.1+2.2-rc1/configure.patch
+b/recipes/mono/mono-1.9.1+2.2-rc1/configure.patch
+--- a/recipes/mono/mono-1.9.1+2.2-rc1/configure.patch	2009-07-20
+12:50:48.101686853 -0600
++++ b/recipes/mono/mono-1.9.1+2.2-rc1/configure.patch	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,44 +0,0 @@
+-Index: mono-2.2/configure.in
+-===================================================================
+---- mono-2.2.orig/configure.in	2008-11-13 18:22:29.000000000 -0500
+-+++ mono-2.2/configure.in	2008-12-10 16:03:11.000000000 -0500
+-@@ -1155,6 +1155,8 @@
+- 		], [
+- 				AC_MSG_RESULT(no)
+- 				with_tls=pthread
+-+		], [
+-+				AC_MSG_RESULT(yes)
+- 		])
+- 	fi
+-
+-@@ -1257,6 +1259,9 @@
+- 		], [
+- 				with_sigaltstack=no
+- 				AC_MSG_RESULT(no)
+-+		], [
+-+				AC_MSG_RESULT(yes)
+-+				AC_DEFINE(HAVE_WORKING_SIGALTSTACK)
+- 		])
+- 	fi
+-
+-@@ -1746,6 +1751,7 @@
+-
+- jit_wanted=false
+- interp_wanted=false
+-+echo "CLIFF: checking host = $host"
+- case "$host" in
+- #	mips-sgi-irix5.* | mips-sgi-irix6.*)
+- #		TARGET=MIPS;
+-@@ -1882,10 +1888,12 @@
+- 		jit_wanted=true
+- 		;;
+- 	arm*-linux*)
+-+    echo "CLIFF: found arm linux"
+- 		TARGET=ARM;
+- 		arch_target=arm;
+- 		ACCESS_UNALIGNED="no"
+- 		JIT_SUPPORTED=yes
+-+		CPPFLAGS="$CPPFLAGS -DARM_FPU_VFP=1"
+- 		jit_wanted=true
+- 		;;
+- 	s390-*-linux*)
+diff -uprN a/recipes/mono/mono-1.9.1+2.2-rc1/disable-docs.patch
+b/recipes/mono/mono-1.9.1+2.2-rc1/disable-docs.patch
+--- a/recipes/mono/mono-1.9.1+2.2-rc1/disable-docs.patch	2009-07-20
+12:50:48.101686853 -0600
++++ b/recipes/mono/mono-1.9.1+2.2-rc1/disable-docs.patch	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,13 +0,0 @@
+-Index: mono-2.2/Makefile.am
+-===================================================================
+---- mono-2.2.orig/Makefile.am	2008-12-10 16:25:14.000000000 -0500
+-+++ mono-2.2/Makefile.am	2008-12-10 16:25:24.000000000 -0500
+-@@ -1,7 +1,7 @@
+- AUTOMAKE_OPTIONS = foreign
+- ACLOCAL_AMFLAGS = -I .
+-
+--SUBDIRS = po $(libgc_dir) $(eglib_dir) mono $(ikvm_native_dir)
+support data runtime scripts man samples web msvc docs
+-+SUBDIRS = po $(libgc_dir) $(eglib_dir) mono $(ikvm_native_dir)
+support data runtime scripts man samples web msvc
+-
+- # Keep in sync with SUBDIRS
+- ## 'tools' is not normally built
+diff -uprN a/recipes/mono/mono-1.9.1+2.2-rc1/disable-monoburg.patch
+b/recipes/mono/mono-1.9.1+2.2-rc1/disable-monoburg.patch
+--- a/recipes/mono/mono-1.9.1+2.2-rc1/disable-monoburg.patch	2009-07-20
+12:50:48.101686853 -0600
++++ b/recipes/mono/mono-1.9.1+2.2-rc1/disable-monoburg.patch	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,22 +0,0 @@
+-Index: mono-2.2/mono/Makefile.am
+-===================================================================
+---- mono-2.2.orig/mono/Makefile.am	2008-12-10 15:38:30.000000000 -0500
+-+++ mono-2.2/mono/Makefile.am	2008-12-10 15:38:37.000000000 -0500
+-@@ -1,3 +1,3 @@
+-
+--SUBDIRS = utils io-layer monoburg os cil metadata \
+-+SUBDIRS = utils io-layer os cil metadata \
+-       arch interpreter mini dis monograph tests benchmark profiler
+-Index: mono-2.2/mono/mini/Makefile.am
+-===================================================================
+---- mono-2.2.orig/mono/mini/Makefile.am	2008-12-10 15:44:11.000000000 -0500
+-+++ mono-2.2/mono/mini/Makefile.am	2008-12-10 15:44:22.000000000 -0500
+-@@ -482,7 +482,7 @@
+- 	$(GENMDESC_PRG) $(srcdir)/cpu-mips.md cpu-mips.h mips_desc
+-
+- inssel.c inssel.h: $(BURGSRC)
+--	$(monodir)/mono/monoburg/monoburg -c 1 -p -e $(BURGSRC) -d inssel.h
+-s inssel.c
+-+	monoburg -c 1 -p -e $(BURGSRC) -d inssel.h -s inssel.c
+-
+- testi: mono test.exe
+- 	$(RUNTIME) -v -v --ncompile 1 --compile Test:$(mtest) test.exe
+diff -uprN a/recipes/mono/mono-1.9.1+2.2-rc1/fix-eabi-syscall.patch
+b/recipes/mono/mono-1.9.1+2.2-rc1/fix-eabi-syscall.patch
+--- a/recipes/mono/mono-1.9.1+2.2-rc1/fix-eabi-syscall.patch	2009-07-20
+12:50:48.101686853 -0600
++++ b/recipes/mono/mono-1.9.1+2.2-rc1/fix-eabi-syscall.patch	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,12 +0,0 @@
+---- mono.orig/mono/mini/mini-arm.c	2008/12/12 19:49:41	121457
+-+++ mono/mono/mini/mini-arm.c	2009/01/05 08:58:47	122416
+-@@ -581,6 +581,8 @@
+- {
+- #if __APPLE__
+- 	sys_icache_invalidate (code, size);
+-+#elif ((__GNUC__ >= 4) && (__GNUC_MINOR__ >= 1))
+-+	__clear_cache (code, code + size);
+- #else
+- 	__asm __volatile ("mov r0, %0\n"
+- 			"mov r1, %1\n"
+-
+diff -uprN a/recipes/mono/mono_1.9.1+2.2-rc1.bb
+b/recipes/mono/mono_1.9.1+2.2-rc1.bb
+--- a/recipes/mono/mono_1.9.1+2.2-rc1.bb	2009-07-20 12:50:48.104680933 -0600
++++ b/recipes/mono/mono_1.9.1+2.2-rc1.bb	1969-12-31 17:00:00.000000000 -0700
+@@ -1,87 +0,0 @@
+-require mono_2.2.0.inc
+-
+-DEPENDS = "mono-native mono-mcs-intermediate glib-2.0 perl-native"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-PR = "r3"
+-
+-# mono makes use of non-thumb-compatible inline asm.
+-ARM_INSTRUCTION_SET = "arm"
+-
+-SRC_URI += "file://configure.patch;patch=1 \
+-            file://disable-docs.patch;patch=1 \
+-            file://disable-monoburg.patch;patch=1 \
+-            file://fix-eabi-syscall.patch;patch=1 \
+-	   "
+-
+-# Per http://www.mono-project.com/Mono:ARM
+-EXTRA_OECONF += " --disable-mcs-build "
+-# Instead, get the mcs tree from a different build (see mono-mcs-intermediate)
+-
+-do_install_prepend() {
+-	install -d ${D}
+-	pushd ${D}
+-	tar -xzf ${STAGING_DATADIR_NATIVE}/mono-mcs/mono-mcs-${PV}.tar.gz
+-	popd
+-}
+-
+-do_install_append() {
+-	# mono-mcs-intermediate builds and installs jay (a Yacc for Java and C#),
+-	# however, jay is not being cross-compiled and thus only
+-	# available for the buildhost architecture, so remove it
+-	# entirely
+-	pushd ${D}
+-	rm -rf ./usr/share/man/man1/jay.1 ./usr/share/jay \
+-	    ./usr/share/jay/README.jay \
+-	    ./usr/bin/jay
+-	popd
+-
+-	# Not packaged with the default rules and apparently
+-	# not used for anything
+-	rm -rf ${D}${datadir}/mono-1.0/mono/cil/cil-opcodes.xml
+-}
+-
+-inherit mono
+-
+-# Import file definitions from Debian
+-require mono_2.x-files.inc
+-
+-# Add some packages
+-PACKAGES_append = " mono-doc mono mono-runtime"
+-
+-FILES_mono-doc_append = " /usr/share/libgc-mono/ "
+-
+-FILES_mono = ""
+-ALLOW_EMPTY_mono = "1"
+-RDEPENDS_mono = "mono-common mono-jit"
+-
+-FILES_mono-runtime = ""
+-ALLOW_EMPTY_mono-runtime = "1"
+-RDEPENDS_mono-runtime = "mono-jit mono-gac"
+-
+-RDEPENDS_mono-jit = "mono-common"
+-
+-FILES_libmono-dev =+ " /usr/lib/libmono.la
+/usr/lib/libmono-profiler-cov.la /usr/lib/libmono-profiler-aot.la \
+-	/usr/lib/libMonoPosixHelper.la /usr/lib/libMonoSupportW.la"
+-FILES_libmono-dbg =+ " /usr/lib/.debug/libmono*.so.*
+/usr/lib/.debug/libikvm-native.so \
+-	/usr/lib/.debug/libMonoPosixHelper.so /usr/lib/.debug/libMonoSupportW.so"
+-
+-# Packages not included in Debian
+-PACKAGES_prepend = "libnunit2.2-cil-dbg libnunit2.2-cil-dev libnunit2.2-cil \
+-	libmono-cecil0.5-cil-dbg libmono-cecil0.5-cil-dev libmono-cecil0.5-cil \
+-	libmono-db2-1.0-cil-dbg libmono-db2-1.0-cil-dev libmono-db2-1.0-cil"
+-
+-FILES_libnunit2.2-cil = "/usr/lib/mono/gac/nunit.*/2.2.*
+/usr/lib/mono/1.0/nunit.*.dll"
+-FILES_libnunit2.2-cil-dev = "/usr/lib/pkgconfig/mono-nunit.pc"
+-FILES_libnunit2.2-cil-dbg = "/usr/lib/mono/gac/nunit*/2.2.*/nunit.*.dll.mdb"
+-
+-FILES_libmono-cecil0.5-cil = "/usr/lib/mono/gac/Mono.Cecil/0.5.*"
+-FILES_libmono-cecil0.5-cil-dbg =
+"/usr/lib/mono/gac/Mono.Cecil/0.5.0.1__0738eb9f132ed756/Mono.Cecil.dll.mdb"
+-
+-FILES_libmono-db2-1.0-cil = "/usr/lib/mono/gac/IBM.Data.DB2/1.0*
+/usr/lib/mono/1.0/IBM.Data.DB2.dll"
+-FILES_libmono-db2-1.0-cil-dbg =
+"/usr/lib/mono/gac/IBM.Data.DB2/1.0*/IBM.Data.DB2.dll.mdb"
+-
+-# Move .pc files
+-FILES_libmono-cairo1.0-cil-dev = "/usr/lib/pkgconfig/mono-cairo.pc"
+-PACKAGES =+ " libmono-cairo1.0-cil-dev "
+diff -uprN a/recipes/mono/mono_2.2.0.inc b/recipes/mono/mono_2.2.0.inc
+--- a/recipes/mono/mono_2.2.0.inc	2009-07-20 12:50:48.104680933 -0600
++++ b/recipes/mono/mono_2.2.0.inc	1969-12-31 17:00:00.000000000 -0700
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "Mono Programming Language"
+-SECTION = "devel/mono"
+-LICENSE = "GPL LGPL X11"
+-
+-SRC_URI = "http://bec-systems.com/pub/mono/mono-2.2-rc1.tar.bz2 \
+-		"
+-
+-#	   file://mono-libgc-configure.patch;patch=1"
+-
+-S = "${WORKDIR}/mono-2.2"
+-
+-do_fix_dolt_libtool() {
+-	# look for libtool prefixed with HOST_SYS
+-	sed -e "s/slash\}libtool/slash\}${HOST_SYS}-libtool/" -i acinclude.m4
+-}
+-
+-inherit autotools
+-EXTRA_OECONF_arm = "--without-tls"
+-EXTRA_OECONF_mipsel = "--without-tls"
+-
+-addtask fix_dolt_libtool after do_patch before do_configure
+-
+diff -uprN a/recipes/mono/mono-2.4/configure.patch
+b/recipes/mono/mono-2.4/configure.patch
+--- a/recipes/mono/mono-2.4/configure.patch	1969-12-31 17:00:00.000000000 -0700
++++ b/recipes/mono/mono-2.4/configure.patch	2009-07-16 09:02:37.111475000 -0600
+@@ -0,0 +1,44 @@
++Index: mono-2.4.2.1/configure.in
++===================================================================
++--- mono-2.4.2.1.orig/configure.in	2008-11-13 18:22:29.000000000 -0500
+++++ mono-2.4.2.1/configure.in	2008-12-10 16:03:11.000000000 -0500
++@@ -1155,6 +1155,8 @@
++ 		], [
++ 				AC_MSG_RESULT(no)
++ 				with_tls=pthread
+++		], [
+++				AC_MSG_RESULT(yes)
++ 		])
++ 	fi
++
++@@ -1257,6 +1259,9 @@
++ 		], [
++ 				with_sigaltstack=no
++ 				AC_MSG_RESULT(no)
+++		], [
+++				AC_MSG_RESULT(yes)
+++				AC_DEFINE(HAVE_WORKING_SIGALTSTACK)
++ 		])
++ 	fi
++
++@@ -1746,6 +1751,7 @@
++
++ jit_wanted=false
++ interp_wanted=false
+++echo "CLIFF: checking host = $host"
++ case "$host" in
++ #	mips-sgi-irix5.* | mips-sgi-irix6.*)
++ #		TARGET=MIPS;
++@@ -1882,10 +1888,12 @@
++ 		jit_wanted=true
++ 		;;
++ 	arm*-linux*)
+++    echo "CLIFF: found arm linux"
++ 		TARGET=ARM;
++ 		arch_target=arm;
++ 		ACCESS_UNALIGNED="no"
++ 		JIT_SUPPORTED=yes
+++		CPPFLAGS="$CPPFLAGS -DARM_FPU_VFP=1"
++ 		jit_wanted=true
++ 		;;
++ 	s390-*-linux*)
+diff -uprN a/recipes/mono/mono-2.4/Makefile.patch
+b/recipes/mono/mono-2.4/Makefile.patch
+--- a/recipes/mono/mono-2.4/Makefile.patch	1969-12-31 17:00:00.000000000 -0700
++++ b/recipes/mono/mono-2.4/Makefile.patch	2009-07-16 09:02:37.112476000 -0600
+@@ -0,0 +1,24 @@
++--- mono-2.4.2.1/docs/Makefile	2009-06-03 14:51:18.000000000 -0600
+++++ mono-2.4.2.1/docs/Makefile	2009-06-03 14:51:53.000000000 -0600
++@@ -400,7 +400,8 @@ distdir: $(DISTFILES)
++ 	  dist-hook
++ check-am: all-am
++ check: check-am
++-all-am: Makefile $(DATA)
+++all-am: Makefile
+++# $(DATA)
++ installdirs:
++ 	for dir in "$(DESTDIR)$(sourcesdir)"; do \
++ 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
++@@ -410,8 +411,9 @@ install-exec: install-exec-am
++ install-data: install-data-am
++ uninstall: uninstall-am
++
++-install-am: all-am
++-	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+++install-am:
+++#all-am
+++#	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
++
++ installcheck: installcheck-am
++ install-strip:
+diff -uprN a/recipes/mono/mono-2.4/mini-arm.patch
+b/recipes/mono/mono-2.4/mini-arm.patch
+--- a/recipes/mono/mono-2.4/mini-arm.patch	1969-12-31 17:00:00.000000000 -0700
++++ b/recipes/mono/mono-2.4/mini-arm.patch	2009-07-16 09:02:37.112476000 -0600
+@@ -0,0 +1,11 @@
++--- mono-2.4.2.1/mono/mini/mini-arm.h	2009-06-23 09:41:00.000000000 -0600
+++++ mono-2.4.2.1/mono/mini/mini-arm.h	2009-06-23 09:40:27.000000000 -0600
++@@ -9,7 +9,7 @@
++ #endif
++
++ #ifdef ARM_FPU_VFP
++-#error "VFP support is not complete, try mono SVN for that."
+++//#error "VFP support is not complete, try mono SVN for that."
++ #endif
++
++ #if defined(__ARM_EABI__)
+diff -uprN a/recipes/mono/mono_2.4.2.2.inc b/recipes/mono/mono_2.4.2.2.inc
+--- a/recipes/mono/mono_2.4.2.2.inc	1969-12-31 17:00:00.000000000 -0700
++++ b/recipes/mono/mono_2.4.2.2.inc	2009-07-20 12:42:33.661683000 -0600
+@@ -0,0 +1,20 @@
++DESCRIPTION = "Mono Programming Language"
++SECTION = "devel/mono"
++LICENSE = "GPL LGPL X11"
++
++SRC_URI = "http://mono.ximian.com/monobuild/preview/sources/mono/mono-2.4.2.2.tar.bz2
+\
++		"
++
++S = "${WORKDIR}/mono-2.4.2.2"
++
++do_fix_dolt_libtool() {
++	# look for libtool prefixed with HOST_SYS
++	sed -e "s/slash\}libtool/slash\}${HOST_SYS}-libtool/" -i acinclude.m4
++	echo No acinclude!
++}
++
++inherit autotools
++EXTRA_OECONF_arm = "--without-tls"
++EXTRA_OECONF_mipsel = "--without-tls"
++
++addtask fix_dolt_libtool after do_patch before do_configure
+diff -uprN a/recipes/mono/mono_2.4.bb b/recipes/mono/mono_2.4.bb
+--- a/recipes/mono/mono_2.4.bb	1969-12-31 17:00:00.000000000 -0700
++++ b/recipes/mono/mono_2.4.bb	2009-07-20 12:20:30.784684000 -0600
+@@ -0,0 +1,91 @@
++require mono_2.4.2.2.inc
++
++DEPENDS = "mono-native mono-mcs-intermediate glib-2.0 perl-native"
++
++DEFAULT_PREFERENCE = "-1"
++
++PR = "r3"
++
++# mono makes use of non-thumb-compatible inline asm.
++ARM_INSTRUCTION_SET = "arm"
++
++SRC_URI += "file://configure.patch;patch=1\
++	    file://mini-arm.patch;patch=1"
++
++# Per http://www.mono-project.com/Mono:ARM
++EXTRA_OECONF += " --disable-mcs-build "
++# Instead, get the mcs tree from a different build (see mono-mcs-intermediate)
++
++do_patch_stuff() {
++	    cd ${WORKDIR}/mono-2.4.2.2/
++	    patch -p1 < ${USERBRANCH}/recipes/mono/mono-2.4/Makefile.patch
++}
++
++addtask patch_stuff after do_configure before do_compile
++
++do_install_prepend() {
++	install -d ${D}
++	pushd ${D}
++	tar -xzf ${STAGING_DATADIR_NATIVE}/mono-mcs/mono-mcs-${PV}.tar.gz
++	popd
++}
++
++do_install_append() {
++	# mono-mcs-intermediate builds and installs jay (a Yacc for Java and C#),
++	# however, jay is not being cross-compiled and thus only
++	# available for the buildhost architecture, so remove it
++	# entirely
++	pushd ${D}
++	rm -rf ./usr/share/man/man1/jay.1 ./usr/share/jay \
++	    ./usr/share/jay/README.jay \
++	    ./usr/bin/jay
++	popd
++
++	# Not packaged with the default rules and apparently
++	# not used for anything
++	rm -rf ${D}${datadir}/mono-1.0/mono/cil/cil-opcodes.xml
++}
++
++inherit mono
++
++# Import file definitions from Debian
++require mono_2.x-files.inc
++
++# Add some packages
++PACKAGES_append = "mono-doc mono mono-runtime"
++
++#FILES_mono-doc_append = " /usr/share/libgc-mono/ "
++
++FILES_mono = ""
++ALLOW_EMPTY_mono = "1"
++RDEPENDS_mono = "mono-common mono-jit"
++
++FILES_mono-runtime = ""
++ALLOW_EMPTY_mono-runtime = "1"
++RDEPENDS_mono-runtime = "mono-jit mono-gac"
++
++RDEPENDS_mono-jit = "mono-common"
++
++FILES_libmono-dev =+ " /usr/lib/libmono.la
+/usr/lib/libmono-profiler-cov.la /usr/lib/libmono-profiler-aot.la \
++	/usr/lib/libMonoPosixHelper.la /usr/lib/libMonoSupportW.la"
++FILES_libmono-dbg =+ " /usr/lib/.debug/libmono*.so.*
+/usr/lib/.debug/libikvm-native.so \
++	/usr/lib/.debug/libMonoPosixHelper.so /usr/lib/.debug/libMonoSupportW.so"
++
++# Packages not included in Debian
++PACKAGES_prepend = "libnunit2.2-cil-dbg libnunit2.2-cil-dev libnunit2.2-cil \
++	libmono-cecil0.5-cil-dbg libmono-cecil0.5-cil-dev libmono-cecil0.5-cil \
++	libmono-db2-1.0-cil-dbg libmono-db2-1.0-cil-dev libmono-db2-1.0-cil"
++
++FILES_libnunit2.2-cil = "/usr/lib/mono/gac/nunit.*/2.2.*
+/usr/lib/mono/1.0/nunit.*.dll"
++FILES_libnunit2.2-cil-dev = "/usr/lib/pkgconfig/mono-nunit.pc"
++FILES_libnunit2.2-cil-dbg = "/usr/lib/mono/gac/nunit*/2.2.*/nunit.*.dll.mdb"
++
++FILES_libmono-cecil0.5-cil = "/usr/lib/mono/gac/Mono.Cecil/0.5.*"
++FILES_libmono-cecil0.5-cil-dbg =
+"/usr/lib/mono/gac/Mono.Cecil/0.5.0.1__0738eb9f132ed756/Mono.Cecil.dll.mdb"
++
++FILES_libmono-db2-1.0-cil = "/usr/lib/mono/gac/IBM.Data.DB2/1.0*
+/usr/lib/mono/1.0/IBM.Data.DB2.dll"
++FILES_libmono-db2-1.0-cil-dbg =
+"/usr/lib/mono/gac/IBM.Data.DB2/1.0*/IBM.Data.DB2.dll.mdb"
++
++# Move .pc files
++FILES_libmono-cairo1.0-cil-dev = "/usr/lib/pkgconfig/mono-cairo.pc"
++PACKAGES =+ " libmono-cairo1.0-cil-dev "
+diff -uprN a/recipes/mono/mono-mcs-intermediate_1.2.5.1.bb
+b/recipes/mono/mono-mcs-intermediate_1.2.5.1.bb
+--- a/recipes/mono/mono-mcs-intermediate_1.2.5.1.bb	2009-07-20
+12:50:48.102681229 -0600
++++ b/recipes/mono/mono-mcs-intermediate_1.2.5.1.bb	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,12 +0,0 @@
+-# This is a straw-man recipe for step 1 in the two-step build of
+-# mono. Because it's impossible to build the mcs directory
+-# in cross-compile mode, this recipe will do a native build,
+-# then tar the resulting install tree for usage by the mono
+-# package in step 2.
+-# See http://www.mono-project.com/Mono:ARM
+-
+-require mono_1.2.5.inc
+-require mono-mcs-intermediate.inc
+-
+-PARALLEL_MAKE = ""
+-
+diff -uprN a/recipes/mono/mono-mcs-intermediate_1.2.6.bb
+b/recipes/mono/mono-mcs-intermediate_1.2.6.bb
+--- a/recipes/mono/mono-mcs-intermediate_1.2.6.bb	2009-07-20
+12:50:48.102681229 -0600
++++ b/recipes/mono/mono-mcs-intermediate_1.2.6.bb	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,13 +0,0 @@
+-# This is a straw-man recipe for step 1 in the two-step build of
+-# mono. Because it's impossible to build the mcs directory
+-# in cross-compile mode, this recipe will do a native build,
+-# then tar the resulting install tree for usage by the mono
+-# package in step 2.
+-# See http://www.mono-project.com/Mono:ARM
+-
+-require mono_1.2.6.inc
+-require mono-mcs-intermediate.inc
+-
+-PARALLEL_MAKE = ""
+-
+-
+diff -uprN a/recipes/mono/mono-mcs-intermediate_1.9.1+2.2-rc1.bb
+b/recipes/mono/mono-mcs-intermediate_1.9.1+2.2-rc1.bb
+--- a/recipes/mono/mono-mcs-intermediate_1.9.1+2.2-rc1.bb	2009-07-20
+12:50:48.102681229 -0600
++++ b/recipes/mono/mono-mcs-intermediate_1.9.1+2.2-rc1.bb	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,15 +0,0 @@
+-# This is a straw-man recipe for step 1 in the two-step build of
+-# mono. Because it's impossible to build the mcs directory
+-# in cross-compile mode, this recipe will do a native build,
+-# then tar the resulting install tree for usage by the mono
+-# package in step 2.
+-# See http://www.mono-project.com/Mono:ARM
+-
+-require mono_2.2.0.inc
+-require mono-mcs-intermediate.inc
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-#SRC_URI += "file://libgc_cppflags.patch;patch=1"
+-
+-
+diff -uprN a/recipes/mono/mono-mcs-intermediate_2.4.bb
+b/recipes/mono/mono-mcs-intermediate_2.4.bb
+--- a/recipes/mono/mono-mcs-intermediate_2.4.bb	1969-12-31
+17:00:00.000000000 -0700
++++ b/recipes/mono/mono-mcs-intermediate_2.4.bb	2009-07-20
+12:13:58.920683000 -0600
+@@ -0,0 +1,15 @@
++# This is a straw-man recipe for step 1 in the two-step build of
++# mono. Because it's impossible to build the mcs directory
++# in cross-compile mode, this recipe will do a native build,
++# then tar the resulting install tree for usage by the mono
++# package in step 2.
++# See http://www.mono-project.com/Mono:ARM
++
++require mono_2.4.2.2.inc
++require mono-mcs-intermediate.inc
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI += ""
++
++
+diff -uprN a/recipes/mono/mono-native_1.2.5.1.bb
+b/recipes/mono/mono-native_1.2.5.1.bb
+--- a/recipes/mono/mono-native_1.2.5.1.bb	2009-07-20 12:50:48.102681229 -0600
++++ b/recipes/mono/mono-native_1.2.5.1.bb	1969-12-31 17:00:00.000000000 -0700
+@@ -1,23 +0,0 @@
+-require mono_1.2.5.inc
+-PR = "r2"
+-DEPENDS = "glib-2.0-native perl-native"
+-
+-SRC_URI += "file://mono-fix-libdir-path.patch;patch=1"
+-
+-PARALLEL_MAKE = ""
+-
+-inherit native
+-
+-do_stage_prepend() {
+-	install -m 755 ${S}/mono/monoburg/monoburg ${STAGING_BINDIR}
+-}
+-
+-do_fix_libtool_name() {
+-	# inherit native will make that all native tools that are being
+-	# built are prefixed with something like "i686-linux-",
+-	# including libtool. Fix up some hardcoded libtool names:
+-	for i in "${S}"/runtime/*-wrapper.in; do
+-		sed -e "s/libtool/${BUILD_SYS}-libtool/" -i "${i}"
+-	done
+-}
+-addtask fix_libtool_name after do_patch before do_configure
+diff -uprN a/recipes/mono/mono-native_1.9.1+2.2-rc1.bb
+b/recipes/mono/mono-native_1.9.1+2.2-rc1.bb
+--- a/recipes/mono/mono-native_1.9.1+2.2-rc1.bb	2009-07-20
+12:50:48.102681229 -0600
++++ b/recipes/mono/mono-native_1.9.1+2.2-rc1.bb	1969-12-31
+17:00:00.000000000 -0700
+@@ -1,25 +0,0 @@
+-require mono_2.2.0.inc
+-PR = "r3"
+-DEPENDS = "glib-2.0-native perl-native"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-#SRC_URI += "file://mono-fix-libdir-path.patch;patch=1 \
+-#	    file://libgc_cppflags.patch;patch=1 \
+-#           "
+-
+-inherit native
+-
+-do_stage_prepend() {
+-	install -m 755 ${S}/mono/monoburg/monoburg ${STAGING_BINDIR}
+-}
+-
+-do_fix_libtool_name() {
+-	# inherit native will make that all native tools that are being
+-	# built are prefixed with something like "i686-linux-",
+-	# including libtool. Fix up some hardcoded libtool names:
+-	for i in "${S}"/runtime/*-wrapper.in; do
+-		sed -e "s/libtool/${BUILD_SYS}-libtool/" -i "${i}"
+-	done
+-}
+-addtask fix_libtool_name after do_patch before do_configure
+diff -uprN a/recipes/mono/mono-native_2.4.bb b/recipes/mono/mono-native_2.4.bb
+--- a/recipes/mono/mono-native_2.4.bb	1969-12-31 17:00:00.000000000 -0700
++++ b/recipes/mono/mono-native_2.4.bb	2009-07-20 12:42:45.998682000 -0600
+@@ -0,0 +1,19 @@
++require mono_2.4.2.2.inc
++PR = "r0"
++DEPENDS = "glib-2.0-native perl-native"
++
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI += ""
++
++inherit native
++
++do_fix_libtool_name() {
++	# inherit native will make that all native tools that are being
++	# built are prefixed with something like "i686-linux-",
++	# including libtool. Fix up some hardcoded libtool names:
++	for i in "${S}"/runtime/*-wrapper.in; do
++		sed -e "s/libtool/${BUILD_SYS}-libtool/" -i "${i}"
++	done
++}
++addtask fix_libtool_name after do_patch before do_configure
+diff -uprN a/recipes/mono/mono_svn.bb b/recipes/mono/mono_svn.bb
+--- a/recipes/mono/mono_svn.bb	2009-07-20 12:50:48.105681043 -0600
++++ b/recipes/mono/mono_svn.bb	2009-07-20 12:41:36.471683000 -0600
+@@ -5,7 +5,7 @@ DEPENDS = "mono-native mono-mcs-intermed
+ PR = "r0"
+ DEFAULT_PREFERENCE = "-1"
 
-------_=_NextPart_001_01CA097F.85E8D960
-Content-Type: application/ms-tnef;
-	name="winmail.dat"
-Content-Transfer-Encoding: base64
+-SRC_URI += "file://configure-svnr87352.patch;patch=1"
++SRC_URI += ""
 
-eJ8+Ii0VAQaQCAAEAAAAAAABAAEAAQeQBgAIAAAA5AQAAAAAAADoAAEIgAcAGAAAAElQTS5NaWNy
-b3NvZnQgTWFpbC5Ob3RlADEIAQ2ABAACAAAAAgACAAEEgAEAFQAAAE1vbm8gMi40LjIuMiBQYXRj
-aGVzAPUFAQWAAwAOAAAA2QcHABQADwARACwAAQBIAQEggAMADgAAANkHBwAUAA8AEQAsAAEASAEB
-CYABAB8AAAA1REQ5MTMzQkU4QkE0N0I1MzlEMjdDNzQyMzBCQTIAwgYBA5AGAEAEAAAjAAAAAwA2
-AAAAAABAADkACHfmhX8JygECAUcAAQAAADoAAABjPVVTO2E9IDtwPVBpbnBvaW50IFRlY2hub2w7
-bD1DT01BSUwtMDkwNzIwMjExNzQ0Wi0yMzYzOTEAAAAeAHAAAQAAABUAAABNb25vIDIuNC4yLjIg
-UGF0Y2hlcwAAAAACAXEAAQAAABYAAAABygl/heglWbGzEzJHnLHf2wwMqqSFAAAeABoMAQAAAA8A
-AABTb2xsZXIsIEplcmVteQAAHgAdDgEAAAAVAAAATW9ubyAyLjQuMi4yIFBhdGNoZXMAAAAAAgEJ
-EAEAAACiAAAAngAAACYBAABMWkZ1wFEoVAMACgByY3BnMTI14jIDQ3RleAVBAQMB9/8KgAKkA+QH
-EwKAD/MAUARWPwhVB7IRJQ5RAwECAGNo4QrAc2V0MgYABsMRJfYzBEYTtzASLBEzCO8J97Y7GB8O
-MDURIgxgYwBQcwsJAWQzNhZQC6YF0GFAeWJlIHRoBAAgVQPwbAMgdwWwax1EdC0HcS4KogqAfR9Q
-AAAeADUQAQAAAEMAAAA8RUE1OTlCMkU1MEYzRkI0Qjk1RTQ4QjU4NERCRjVFODAxQkZFMUJBQkBD
-T01BSUwucGlucG9pbnR0ZWNoLmNvbT4AAAsA8hABAAAAHwDzEAEAAAAyAAAATQBvAG4AbwAgADIA
-LgA0AC4AMgAuADIAIABQAGEAdABjAGgAZQBzAC4ARQBNAEwAAAAAAAsA9hAAAAAAQAAHMCChr4V/
-CcoBQAAIMBjF9IV/CcoBAwDxPwkEAAAeAPg/AQAAAA8AAABTb2xsZXIsIEplcmVteQAAAgH5PwEA
-AABZAAAAAAAAANynQMjAQhAatLkIACsv4YIBAAAAAAAAAC9PPVBJTlBPSU5UIFRFQ0hOT0xPR0lF
-Uy9PVT1QSU5QT05UL0NOPVJFQ0lQSUVOVFMvQ049SlNPTExFUgAAAAAeAPo/AQAAABUAAABTeXN0
-ZW0gQWRtaW5pc3RyYXRvcgAAAAACAfs/AQAAAB4AAAAAAAAA3KdAyMBCEBq0uQgAKy/hggEAAAAA
-AAAALgAAAAMA/T/kBAAAAwAZQAAAAAADABpAAAAAAB4AMEABAAAACAAAAEpTT0xMRVIAHgAxQAEA
-AAAIAAAASlNPTExFUgAeADhAAQAAAAgAAABKU09MTEVSAB4AOUABAAAAAgAAAC4AAAADAHZA////
-/wsAKQAAAAAACwAjAAAAAAADAAYQiYAwSAMABxAZAAAAAwAQEAAAAAADABEQAQAAAB4ACBABAAAA
-GgAAAE1BWUJFVEhJU1dJTExXT1JLVEhJU1RJTUUAAAACAX8AAQAAAEMAAAA8RUE1OTlCMkU1MEYz
-RkI0Qjk1RTQ4QjU4NERCRjVFODAxQkZFMUJBQkBDT01BSUwucGlucG9pbnR0ZWNoLmNvbT4AACDl
-AgKQBgAOAAAAAQD/////IAAgAAAAAAA9BAISgAMADgAAANkHBwAUAA8AEQAsAAEASAECE4ADAA4A
-AADZBwcAFAAPABEALAABAEgBAhCAAQAPAAAAbW9uby0yLjQucGF0Y2gAuAQCD4AGAGy0AQBkaWZm
-IC11cHJOIGEvY29uZi9jaGVja3N1bXMuaW5pIGIvY29uZi9jaGVja3N1bXMuaW5pCi0tLSBhL2Nv
-bmYvY2hlY2tzdW1zLmluaQkyMDA5LTA3LTIwIDEyOjUwOjM3LjAxOTU1ODU3MiAtMDYwMAorKysg
-Yi9jb25mL2NoZWNrc3Vtcy5pbmkJMjAwOS0wNy0yMCAxMjo1NDowNS45MTY2ODI3MTggLTA2MDAK
-QEAgLTI4MjcwLDMgKzI4MjcwLDcgQEAgc2hhMjU2PWY1N2M0ZTMzZWIyY2RkODdhNmMyZjAxYmZh
-NDc5NDM0MAogbWQ1PTVmN2I4OGViYjJiY2Q3ZTgwNDQzMjg0ODJkMDc5NjYxCiBzaGEyNTY9ZjU3
-YzRlMzNlYjJjZGQ4N2E2YzJmMDFiZmE0Nzk0MzQwZmJlNjFlYTFhMWNmYzdkYWMzYjY2NzFlMWRk
-MjJhZgogCitbaHR0cDovL2Z0cC5ub3ZlbGwuY29tL3B1Yi9tb25vL3NvdXJjZXMvbW9uby9tb25v
-LTIuNC4yLjIudGFyLmJ6Ml0KK21kNT01NGFhYzliOTE0YzVhNGRjODFjMmJmZDA1OGRmMWM5Mwor
-c2hhMjU2PWUzYjk2NWM1NmE2NjljMzAxMjg1NmRjYzE3Yjc0MDBkMjg1MDVkZDRiYjhhM2M2ZWIz
-ZTY1M2JiNDFiNWU2YmEKKwpkaWZmIC11cHJOIGEvcmVjaXBlcy9tb25vL2ZpbGVzL21vbm8tZml4
-LWxpYmRpci1wYXRoLnBhdGNoIGIvcmVjaXBlcy9tb25vL2ZpbGVzL21vbm8tZml4LWxpYmRpci1w
-YXRoLnBhdGNoCi0tLSBhL3JlY2lwZXMvbW9uby9maWxlcy9tb25vLWZpeC1saWJkaXItcGF0aC5w
-YXRjaAkyMDA5LTA3LTIwIDEyOjUwOjQ4LjA5OTY4MTk4OSAtMDYwMAorKysgYi9yZWNpcGVzL21v
-bm8vZmlsZXMvbW9uby1maXgtbGliZGlyLXBhdGgucGF0Y2gJMjAwOS0wNy0xNiAwOTowMjozNi45
-Nzk2MDEwMDAgLTA2MDAKQEAgLTEsNSArMSw1IEBACi0tLS0gbW9uby0xLjIuNS9zY3JpcHRzL01h
-a2VmaWxlLmFtLm9yaWcJMjAwNy0wOS0yNyAwNDoyMzozOS4wMDAwMDAwMDAgKzAyMDAKLSsrKyBt
-b25vLTEuMi41L3NjcmlwdHMvTWFrZWZpbGUuYW0JMjAwNy0wOS0yNyAwNDoyNDoxOS4wMDAwMDAw
-MDAgKzAyMDAKKy0tLSBtb25vLTIuNC4yL3NjcmlwdHMvTWFrZWZpbGUuYW0ub3JpZwkyMDA3LTA5
-LTI3IDA0OjIzOjM5LjAwMDAwMDAwMCArMDIwMAorKysrIG1vbm8tMi40LjIvc2NyaXB0cy9NYWtl
-ZmlsZS5hbQkyMDA3LTA5LTI3IDA0OjI0OjE5LjAwMDAwMDAwMCArMDIwMAogQEAgLTkyLDcgKzky
-LDcgQEAKICBtb25vX2luc3RkaXIgPSAkKHNoZWxsIGN5Z3BhdGggLW0gJChsaWJkaXIpKS9tb25v
-CiAgZWxzZQpkaWZmIC11cHJOIGEvcmVjaXBlcy9tb25vL21vbm8tMS4yLjUuMS9jb25maWd1cmUu
-cGF0Y2ggYi9yZWNpcGVzL21vbm8vbW9uby0xLjIuNS4xL2NvbmZpZ3VyZS5wYXRjaAotLS0gYS9y
-ZWNpcGVzL21vbm8vbW9uby0xLjIuNS4xL2NvbmZpZ3VyZS5wYXRjaAkyMDA5LTA3LTIwIDEyOjUw
-OjQ4LjEwMDY4NDEyMiAtMDYwMAorKysgYi9yZWNpcGVzL21vbm8vbW9uby0xLjIuNS4xL2NvbmZp
-Z3VyZS5wYXRjaAkxOTY5LTEyLTMxIDE3OjAwOjAwLjAwMDAwMDAwMCAtMDcwMApAQCAtMSw2NyAr
-MCwwIEBACi1JbmRleDogbW9uby0xLjIuNS9jb25maWd1cmUuaW4KLT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KLS0tLSBt
-b25vLTEuMi41Lm9yaWcvY29uZmlndXJlLmluCi0rKysgbW9uby0xLjIuNS9jb25maWd1cmUuaW4K
-LUBAIC0xMTM0LDYgKzExMzQsOCBAQCBpZiB0ZXN0IHgkcGxhdGZvcm1fd2luMzIgPSB4bm87IHRo
-ZW4KLSAJCV0sIFsKLSAJCQkJQUNfTVNHX1JFU1VMVChubykKLSAJCQkJd2l0aF90bHM9cHRocmVh
-ZAotKwkJXSwgWwotKwkJCQlBQ19NU0dfUkVTVUxUKHllcykKLSAJCV0pCi0gCWZpCi0gCi1AQCAt
-MTIzNiw2ICsxMjM4LDkgQEAgaWYgdGVzdCB4JHBsYXRmb3JtX3dpbjMyID0geG5vOyB0aGVuCi0g
-CQldLCBbCi0gCQkJCXdpdGhfc2lnYWx0c3RhY2s9bm8KLSAJCQkJQUNfTVNHX1JFU1VMVChubykK
-LSsJCV0sIFsKLSsJCQkJQUNfTVNHX1JFU1VMVCh5ZXMpCi0rCQkJCUFDX0RFRklORShIQVZFX1dP
-UktJTkdfU0lHQUxUU1RBQ0spCi0gCQldKQotIAlmaQotIAotQEAgLTE4OTMsMjQgKzE4OTgsMjYg
-QEAgaWYgdGVzdCAieCR3aXRoX3RscyIgPSAieF9fdGhyZWFkIjsgdGhlbgotIAldKQotIGZpCi0g
-Ci0taWYgdGVzdCAke1RBUkdFVH0gPSBBUk07IHRoZW4KLS0JZG5sICoqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKgotLQlkbmwgKioqIENoZWNrIHRvIHNlZSB3aGF0IEZQ
-VSBpcyBhdmFpbGFibGUgKioqCi0tCWRubCAqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioKLS0JQUNfTVNHX0NIRUNLSU5HKHdoaWNoIEZQVSB0byB1c2UpCi0tCi0tCUFD
-X1RSWV9DT01QSUxFKFtdLCBbCi0tCQlfX2FzbV9fICgibGRmZCBmMCwgW3IwXSIpOwotLQkJXSwg
-ZnB1PUZQQSwgWwotLQkJCUFDX1RSWV9DT01QSUxFKFtdLCBbCi0tCQkJCV9fYXNtX18gKCJmbGRk
-IGQwLCBbcjBdIik7Ci0tCQkJXSwgZnB1PVZGUCwgZnB1PU5PTkUpCi0tCQldKQotKyNpZiB0ZXN0
-ICR7VEFSR0VUfSA9IEFSTTsgdGhlbgotKyMJZG5sICoqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKgotKyMJZG5sICoqKiBDaGVjayB0byBzZWUgd2hhdCBGUFUgaXMgYXZh
-aWxhYmxlICoqKgotKyMJZG5sICoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKgotKyMJQUNfTVNHX0NIRUNLSU5HKHdoaWNoIEZQVSB0byB1c2UpCi0rIwotKyMJQUNfVFJZ
-X0NPTVBJTEUoW10sIFsKLSsjCQlfX2FzbV9fICgibGRmZCBmMCwgW3IwXSIpOwotKyMJCV0sIGZw
-dT1GUEEsIFsKLSsjCQkJQUNfVFJZX0NPTVBJTEUoW10sIFsKLSsjCQkJCV9fYXNtX18gKCJmbGRk
-IGQwLCBbcjBdIik7Ci0rIwkJCV0sIGZwdT1WRlAsIGZwdT1OT05FKQotKyMJCV0pCi0rIwotKyMJ
-QUNfTVNHX1JFU1VMVCgkZnB1KQotKyMJQ1BQRkxBR1M9IiRDUFBGTEFHUyAtREFSTV9GUFVfJGZw
-dT0xIgotKyMJdW5zZXQgZnB1Ci0rI2ZpCi0gCi0tCUFDX01TR19SRVNVTFQoJGZwdSkKLS0JQ1BQ
-RkxBR1M9IiRDUFBGTEFHUyAtREFSTV9GUFVfJGZwdT0xIgotLQl1bnNldCBmcHUKLS1maQotKwlD
-UFBGTEFHUz0iJENQUEZMQUdTIC1EQVJNX0ZQVV9OT05FPTEiCi0gCi0gaWYgdGVzdCAke1RBUkdF
-VH0gPSB1bmtub3duOyB0aGVuCi0gCUNQUEZMQUdTPSIkQ1BQRkxBR1MgLUROT19QT1JUIgpkaWZm
-IC11cHJOIGEvcmVjaXBlcy9tb25vL21vbm8tMS4yLjUuMS9kaXNhYmxlLW1vbm9idXJnLnBhdGNo
-IGIvcmVjaXBlcy9tb25vL21vbm8tMS4yLjUuMS9kaXNhYmxlLW1vbm9idXJnLnBhdGNoCi0tLSBh
-L3JlY2lwZXMvbW9uby9tb25vLTEuMi41LjEvZGlzYWJsZS1tb25vYnVyZy5wYXRjaAkyMDA5LTA3
-LTIwIDEyOjUwOjQ4LjEwMDY4NDEyMiAtMDYwMAorKysgYi9yZWNpcGVzL21vbm8vbW9uby0xLjIu
-NS4xL2Rpc2FibGUtbW9ub2J1cmcucGF0Y2gJMTk2OS0xMi0zMSAxNzowMDowMC4wMDAwMDAwMDAg
-LTA3MDAKQEAgLTEsMjIgKzAsMCBAQAotSW5kZXg6IG1vbm8tMS4yLjUuMS9tb25vL01ha2VmaWxl
-LmFtCi09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09Ci0tLS0gbW9uby0xLjIuNS4xLm9yaWcvbW9uby9NYWtlZmlsZS5hbQky
-MDA4LTAzLTA1IDE1OjUyOjA2LjAwMDAwMDAwMCArMDgwMAotKysrIG1vbm8tMS4yLjUuMS9tb25v
-L01ha2VmaWxlLmFtCTIwMDgtMDMtMDUgMTU6NTI6MjMuMDAwMDAwMDAwICswODAwCi1AQCAtMSwz
-ICsxLDMgQEAKLSAKLS1TVUJESVJTID0gdXRpbHMgaW8tbGF5ZXIgbW9ub2J1cmcgb3MgY2lsIG1l
-dGFkYXRhIFwKLStTVUJESVJTID0gdXRpbHMgaW8tbGF5ZXIgb3MgY2lsIG1ldGFkYXRhIFwKLSAg
-ICAgICBhcmNoIGludGVycHJldGVyIG1pbmkgZGlzIG1vbm9ncmFwaCB0ZXN0cyBiZW5jaG1hcmsg
-cHJvZmlsZXIKLUluZGV4OiBtb25vLTEuMi41LjEvbW9uby9taW5pL01ha2VmaWxlLmFtCi09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09Ci0tLS0gbW9uby0xLjIuNS4xLm9yaWcvbW9uby9taW5pL01ha2VmaWxlLmFtCTIwMDgt
-MDMtMDUgMTY6MDI6NTEuMDAwMDAwMDAwICswODAwCi0rKysgbW9uby0xLjIuNS4xL21vbm8vbWlu
-aS9NYWtlZmlsZS5hbQkyMDA4LTAzLTA1IDE2OjAyOjU3LjAwMDAwMDAwMCArMDgwMAotQEAgLTQz
-Niw3ICs0MzYsNyBAQAotIAkkKEdFTk1ERVNDX1BSRykgJChzcmNkaXIpL2NwdS1taXBzLm1kIGNw
-dS1taXBzLmggbWlwc19kZXNjCi0gCi0gaW5zc2VsLmMgaW5zc2VsLmg6ICQoQlVSR1NSQykKLS0J
-JChtb25vZGlyKS9tb25vL21vbm9idXJnL21vbm9idXJnIC1jIDEgLXAgLWUgJChCVVJHU1JDKSAt
-ZCBpbnNzZWwuaCAtcyBpbnNzZWwuYwotKwltb25vYnVyZyAtYyAxIC1wIC1lICQoQlVSR1NSQykg
-LWQgaW5zc2VsLmggLXMgaW5zc2VsLmMKLSAKLSB0ZXN0aTogbW9ubyB0ZXN0LmV4ZQotIAkkKFJV
-TlRJTUUpIC12IC12IC0tbmNvbXBpbGUgMSAtLWNvbXBpbGUgVGVzdDokKG10ZXN0KSB0ZXN0LmV4
-ZQpkaWZmIC11cHJOIGEvcmVjaXBlcy9tb25vL21vbm9fMS4yLjUuMS5iYiBiL3JlY2lwZXMvbW9u
-by9tb25vXzEuMi41LjEuYmIKLS0tIGEvcmVjaXBlcy9tb25vL21vbm9fMS4yLjUuMS5iYgkyMDA5
-LTA3LTIwIDEyOjUwOjQ4LjEwNDY4MDkzMyAtMDYwMAorKysgYi9yZWNpcGVzL21vbm8vbW9ub18x
-LjIuNS4xLmJiCTE5NjktMTItMzEgMTc6MDA6MDAuMDAwMDAwMDAwIC0wNzAwCkBAIC0xLDgzICsw
-LDAgQEAKLXJlcXVpcmUgbW9ub18xLjIuNS5pbmMKLQotREVQRU5EUyA9ICJtb25vLW5hdGl2ZSBt
-b25vLW1jcy1pbnRlcm1lZGlhdGUgZ2xpYi0yLjAgcGVybC1uYXRpdmUiCi0KLVBSID0gInI1Igot
-Ci0jIG1vbm8gbWFrZXMgdXNlIG9mIG5vbi10aHVtYi1jb21wYXRpYmxlIGlubGluZSBhc20uCi1B
-Uk1fSU5TVFJVQ1RJT05fU0VUID0gImFybSIKLQotU1JDX1VSSSArPSAiZmlsZTovL2NvbmZpZ3Vy
-ZS5wYXRjaDtwYXRjaD0xIFwKLQlmaWxlOi8vZ2VubWRlc2MtY3BwLnBhdGNoO3BhdGNoPTEgXAot
-CWZpbGU6Ly9kaXNhYmxlLW1vbm9idXJnLnBhdGNoO3BhdGNoPTEiCi0KLSMgUGVyIGh0dHA6Ly93
-d3cubW9uby1wcm9qZWN0LmNvbS9Nb25vOkFSTQotRVhUUkFfT0VDT05GICs9ICIgLS1kaXNhYmxl
-LW1jcy1idWlsZCAiCi0jIEluc3RlYWQsIGdldCB0aGUgbWNzIHRyZWUgZnJvbSBhIGRpZmZlcmVu
-dCBidWlsZCAoc2VlIG1vbm8tbWNzLWludGVybWVkaWF0ZSkKLQotZG9faW5zdGFsbF9wcmVwZW5k
-KCkgewotCWluc3RhbGwgLWQgJHtEfQotCWNkICR7RH0KLQl0YXIgLXh6ZiAke1NUQUdJTkdfREFU
-QURJUl9OQVRJVkV9L21vbm8tbWNzL21vbm8tbWNzLSR7UFZ9LnRhci5negotCWNkICR7U30KLX0K
-LQotZG9faW5zdGFsbF9hcHBlbmQoKSB7Ci0JIyBtb25vLW1jcy1pbnRlcm1lZGlhdGUgYnVpbGRz
-IGFuZCBpbnN0YWxscyBqYXkgKGEgWWFjYyBmb3IgSmF2YSBhbmQgQyMpLAotCSMgaG93ZXZlciwg
-amF5IGlzIG5vdCBiZWluZyBjcm9zcy1jb21waWxlZCBhbmQgdGh1cyBvbmx5Ci0JIyBhdmFpbGFi
-bGUgZm9yIHRoZSBidWlsZGhvc3QgYXJjaGl0ZWN0dXJlLCBzbyByZW1vdmUgaXQKLQkjIGVudGly
-ZWx5Ci0JY2QgJHtEfQotCXJtIC1yZiAuL3Vzci9zaGFyZS9tYW4vbWFuMS9qYXkuMSAuL3Vzci9z
-aGFyZS9qYXkgXAotCSAgICAuL3Vzci9zaGFyZS9qYXkvUkVBRE1FLmpheSBcCi0JICAgIC4vdXNy
-L2Jpbi9qYXkKLQljZCAke1N9Ci0KLQkjIE5vdCBwYWNrYWdlZCB3aXRoIHRoZSBkZWZhdWx0IHJ1
-bGVzIGFuZCBhcHBhcmVudGx5Ci0JIyBub3QgdXNlZCBmb3IgYW55dGhpbmcKLQlybSAtcmYgJHtE
-fSR7ZGF0YWRpcn0vbW9uby0xLjAvbW9uby9jaWwvY2lsLW9wY29kZXMueG1sCi19Ci0KLWluaGVy
-aXQgbW9ubwotCi0jIEltcG9ydCBmaWxlIGRlZmluaXRpb25zIGZyb20gRGViaWFuCi1yZXF1aXJl
-IG1vbm9fMS4yLjUuMS1maWxlcy5pbmMKLQotIyBBZGQgc29tZSBwYWNrYWdlcwotUEFDS0FHRVNf
-YXBwZW5kID0gIiBtb25vLWRvYyBtb25vIG1vbm8tcnVudGltZSIKLQotRklMRVNfbW9uby1kb2Nf
-YXBwZW5kID0gIiAvdXNyL3NoYXJlL2xpYmdjLW1vbm8vICIKLQotRklMRVNfbW9ubyA9ICIiCi1B
-TExPV19FTVBUWV9tb25vID0gIjEiCi1SREVQRU5EU19tb25vID0gIm1vbm8tY29tbW9uIG1vbm8t
-aml0IgotCi1GSUxFU19tb25vLXJ1bnRpbWUgPSAiIgotQUxMT1dfRU1QVFlfbW9uby1ydW50aW1l
-ID0gIjEiCi1SREVQRU5EU19tb25vLXJ1bnRpbWUgPSAibW9uby1qaXQgbW9uby1nYWMiCi0KLVJE
-RVBFTkRTX21vbm8taml0ID0gIm1vbm8tY29tbW9uIgotCi1GSUxFU19saWJtb25vLWRldiA9KyAi
-IC91c3IvbGliL2xpYm1vbm8ubGEgL3Vzci9saWIvbGlibW9uby1wcm9maWxlci1jb3YubGEgL3Vz
-ci9saWIvbGlibW9uby1wcm9maWxlci1hb3QubGEgXAotCS91c3IvbGliL2xpYk1vbm9Qb3NpeEhl
-bHBlci5sYSAvdXNyL2xpYi9saWJNb25vU3VwcG9ydFcubGEiCi1GSUxFU19saWJtb25vLWRiZyA9
-KyAiIC91c3IvbGliLy5kZWJ1Zy9saWJtb25vKi5zby4qIC91c3IvbGliLy5kZWJ1Zy9saWJpa3Zt
-LW5hdGl2ZS5zbyBcCi0JL3Vzci9saWIvLmRlYnVnL2xpYk1vbm9Qb3NpeEhlbHBlci5zbyAvdXNy
-L2xpYi8uZGVidWcvbGliTW9ub1N1cHBvcnRXLnNvIgotCi0jIFBhY2thZ2VzIG5vdCBpbmNsdWRl
-ZCBpbiBEZWJpYW4KLVBBQ0tBR0VTX3ByZXBlbmQgPSAibGlibnVuaXQyLjItY2lsLWRiZyBsaWJu
-dW5pdDIuMi1jaWwtZGV2IGxpYm51bml0Mi4yLWNpbCBcCi0JbGlibW9uby1jZWNpbDAuNS1jaWwt
-ZGJnIGxpYm1vbm8tY2VjaWwwLjUtY2lsLWRldiBsaWJtb25vLWNlY2lsMC41LWNpbCBcCi0JbGli
-bW9uby1kYjItMS4wLWNpbC1kYmcgbGlibW9uby1kYjItMS4wLWNpbC1kZXYgbGlibW9uby1kYjIt
-MS4wLWNpbCIKLQotRklMRVNfbGlibnVuaXQyLjItY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL251
-bml0LiovMi4yLiogL3Vzci9saWIvbW9uby8xLjAvbnVuaXQuKi5kbGwiCi1GSUxFU19saWJudW5p
-dDIuMi1jaWwtZGV2ID0gIi91c3IvbGliL3BrZ2NvbmZpZy9tb25vLW51bml0LnBjIgotRklMRVNf
-bGlibnVuaXQyLjItY2lsLWRiZyA9ICIvdXNyL2xpYi9tb25vL2dhYy9udW5pdCovMi4yLiovbnVu
-aXQuKi5kbGwubWRiIgotCi1GSUxFU19saWJtb25vLWNlY2lsMC41LWNpbCA9ICIvdXNyL2xpYi9t
-b25vL2dhYy9Nb25vLkNlY2lsLzAuNS4qIgotRklMRVNfbGlibW9uby1jZWNpbDAuNS1jaWwtZGJn
-ID0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uQ2VjaWwvMC41LjAuMV9fMDczOGViOWYxMzJlZDc1
-Ni9Nb25vLkNlY2lsLmRsbC5tZGIiCi0KLUZJTEVTX2xpYm1vbm8tZGIyLTEuMC1jaWwgPSAiL3Vz
-ci9saWIvbW9uby9nYWMvSUJNLkRhdGEuREIyLzEuMCogL3Vzci9saWIvbW9uby8xLjAvSUJNLkRh
-dGEuREIyLmRsbCIKLUZJTEVTX2xpYm1vbm8tZGIyLTEuMC1jaWwtZGJnID0gIi91c3IvbGliL21v
-bm8vZ2FjL0lCTS5EYXRhLkRCMi8xLjAqL0lCTS5EYXRhLkRCMi5kbGwubWRiIgotCi0jIE1vdmUg
-LnBjIGZpbGVzCi1GSUxFU19saWJtb25vLWNhaXJvMS4wLWNpbC1kZXYgPSAiL3Vzci9saWIvcGtn
-Y29uZmlnL21vbm8tY2Fpcm8ucGMiCi1QQUNLQUdFUyA9KyAiIGxpYm1vbm8tY2Fpcm8xLjAtY2ls
-LWRldiAiCmRpZmYgLXVwck4gYS9yZWNpcGVzL21vbm8vbW9ub18xLjIuNS4xLWZpbGVzLmluYyBi
-L3JlY2lwZXMvbW9uby9tb25vXzEuMi41LjEtZmlsZXMuaW5jCi0tLSBhL3JlY2lwZXMvbW9uby9t
-b25vXzEuMi41LjEtZmlsZXMuaW5jCTIwMDktMDctMjAgMTI6NTA6NDguMTAzNjgwODkzIC0wNjAw
-CisrKyBiL3JlY2lwZXMvbW9uby9tb25vXzEuMi41LjEtZmlsZXMuaW5jCTE5NjktMTItMzEgMTc6
-MDA6MDAuMDAwMDAwMDAwIC0wNzAwCkBAIC0xLDE2MzQgKzAsMCBAQAotIyBUaGlzIGlzIGEgZ2Vu
-ZXJhdGVkIGZpbGUsIHBsZWFzZSBkbyBub3QgZWRpdCBkaXJlY3RseQotIyBVc2UgY29sbGVjdC1m
-aWxlcy5weSBpbnN0ZWFkLiAtLSBIZW5yeWsgPGhlbnJ5a0BvcGVubW9rby5vcmc+Ci1GSUxFU19t
-b25vLWppdC1kYmcgKz0gIi91c3IvYmluL21vbm8qLm1kYiBcCi0JL3Vzci9iaW4vbW9ubyovKi5t
-ZGIiCi1GSUxFU19tb25vLWppdCA9ICIvdXNyL2Jpbi9tb25vIgotRklMRVNfbW9uby1nYWMtZGJn
-ICs9ICIvdXNyL2Jpbi9nYWN1dGlsKi5tZGIgXAotCS91c3IvYmluL2dhY3V0aWwqLyoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vLzEuMC9nYWN1dGlsLmV4ZSoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEu
-MC9nYWN1dGlsLmV4ZSovKi5tZGIiCi1GSUxFU19tb25vLWdhYyA9ICIvdXNyL2Jpbi9nYWN1dGls
-IFwKLQkvdXNyL2xpYi9tb25vLzEuMC9nYWN1dGlsLmV4ZSIKLUZJTEVTX21vbm8tbWpzLWRiZyAr
-PSAiL3Vzci9iaW4vbWpzKi5tZGIgXAotCS91c3IvYmluL21qcyovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vMS4wL21qcy5leGUqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvbWpzLmV4ZSovKi5t
-ZGIiCi1GSUxFU19tb25vLW1qcyA9ICIvdXNyL2Jpbi9tanMgXAotCS91c3IvbGliL21vbm8vMS4w
-L21qcy5leGUqIgotRklMRVNfbW9uby1nbWNzLWRiZyArPSAiL3Vzci9iaW4vZ21jcyoubWRiIFwK
-LQkvdXNyL2Jpbi9nbWNzKi8qLm1kYiBcCi0JL3Vzci9iaW4vd3NkbDIqLm1kYiBcCi0JL3Vzci9i
-aW4vd3NkbDIqLyoubWRiIFwKLQkvdXNyL2Jpbi9tb25vcDIqLm1kYiBcCi0JL3Vzci9iaW4vbW9u
-b3AyKi8qLm1kYiBcCi0JL3Vzci9iaW4vaWxhc20yKi5tZGIgXAotCS91c3IvYmluL2lsYXNtMiov
-Ki5tZGIgXAotCS91c3IvYmluL3Jlc2dlbjIqLm1kYiBcCi0JL3Vzci9iaW4vcmVzZ2VuMiovKi5t
-ZGIgXAotCS91c3IvYmluL21vbm8tYXBpLWluZm8yKi5tZGIgXAotCS91c3IvYmluL21vbm8tYXBp
-LWluZm8yKi8qLm1kYiBcCi0JL3Vzci9iaW4vbW9uby1zZXJ2aWNlMioubWRiIFwKLQkvdXNyL2Jp
-bi9tb25vLXNlcnZpY2UyKi8qLm1kYiBcCi0JL3Vzci9iaW4vbWtidW5kbGUyKi5tZGIgXAotCS91
-c3IvYmluL21rYnVuZGxlMiovKi5tZGIgXAotCS91c3IvYmluL3hidWlsZCoubWRiIFwKLQkvdXNy
-L2Jpbi94YnVpbGQqLyoubWRiIFwKLQkvdXNyL2Jpbi9zZ2VuKi5tZGIgXAotCS91c3IvYmluL3Nn
-ZW4qLyoubWRiIFwKLQkvdXNyL2Jpbi9hbDIqLm1kYiBcCi0JL3Vzci9iaW4vYWwyKi8qLm1kYiBc
-Ci0JL3Vzci9iaW4vaHR0cGNmZyoubWRiIFwKLQkvdXNyL2Jpbi9odHRwY2ZnKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvKi5leGUqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvKi5leGUq
-LyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC94YnVpbGQucnNwKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vMi4wL3hidWlsZC5yc3AqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NU0J1aWxk
-LyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NU0J1aWxkLyovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vMi4wL01TQnVpbGQvLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTVNCdWlsZC8u
-Li8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuQnVpbGQueHNkKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5CdWlsZC54c2QqLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuQ1NoYXJwLnRhcmdldHMqLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvTWljcm9zb2Z0LkNTaGFycC50YXJnZXRzKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by8yLjAvTWljcm9zb2Z0LkNvbW1vbi50YXNrcyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9N
-aWNyb3NvZnQuQ29tbW9uLnRhc2tzKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9z
-b2Z0LkNvbW1vbi50YXJnZXRzKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5D
-b21tb24udGFyZ2V0cyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5WaXN1
-YWxCYXNpYy50YXJnZXRzKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5WaXN1
-YWxCYXNpYy50YXJnZXRzKi8qLm1kYiIKLUZJTEVTX21vbm8tZ21jcyA9ICIvdXNyL2Jpbi9nbWNz
-IFwKLQkvdXNyL2Jpbi93c2RsMiBcCi0JL3Vzci9iaW4vbW9ub3AyIFwKLQkvdXNyL2Jpbi9pbGFz
-bTIgXAotCS91c3IvYmluL3Jlc2dlbjIgXAotCS91c3IvYmluL21vbm8tYXBpLWluZm8yIFwKLQkv
-dXNyL2Jpbi9tb25vLXNlcnZpY2UyIFwKLQkvdXNyL2Jpbi9ta2J1bmRsZTIgXAotCS91c3IvYmlu
-L3hidWlsZCBcCi0JL3Vzci9iaW4vc2dlbiBcCi0JL3Vzci9iaW4vYWwyIFwKLQkvdXNyL2Jpbi9o
-dHRwY2ZnIFwKLQkvdXNyL2xpYi9tb25vLzIuMC8qLmV4ZSogXAotCS91c3IvbGliL21vbm8vMi4w
-L3hidWlsZC5yc3AgXAotCS91c3IvbGliL21vbm8vMi4wL01TQnVpbGQvIFwKLQkvdXNyL2xpYi9t
-b25vLzIuMC9NaWNyb3NvZnQuQnVpbGQueHNkIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3Nv
-ZnQuQ1NoYXJwLnRhcmdldHMgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5Db21tb24u
-dGFza3MgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5Db21tb24udGFyZ2V0cyBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LlZpc3VhbEJhc2ljLnRhcmdldHMiCi1GSUxFU19t
-b25vLXV0aWxzLWRiZyArPSAiL3Vzci9iaW4vcGVkdW1wKi5tZGIgXAotCS91c3IvYmluL3BlZHVt
-cCovKi5tZGIgXAotCS91c3IvYmluL21vbm9kaXMqLm1kYiBcCi0JL3Vzci9iaW4vbW9ub2Rpcyov
-Ki5tZGIgXAotCS91c3IvYmluL21vbm9ncmFwaCoubWRiIFwKLQkvdXNyL2Jpbi9tb25vZ3JhcGgq
-LyoubWRiIFwKLQkvdXNyL2Jpbi9tb25vLWZpbmQtcHJvdmlkZXMqLm1kYiBcCi0JL3Vzci9iaW4v
-bW9uby1maW5kLXByb3ZpZGVzKi8qLm1kYiBcCi0JL3Vzci9iaW4vbW9uby1maW5kLXJlcXVpcmVz
-Ki5tZGIgXAotCS91c3IvYmluL21vbm8tZmluZC1yZXF1aXJlcyovKi5tZGIiCi1GSUxFU19tb25v
-LXV0aWxzID0gIi91c3IvYmluL3BlZHVtcCBcCi0JL3Vzci9iaW4vbW9ub2RpcyBcCi0JL3Vzci9i
-aW4vbW9ub2dyYXBoIFwKLQkvdXNyL2Jpbi9tb25vLWZpbmQtcHJvdmlkZXMgXAotCS91c3IvYmlu
-L21vbm8tZmluZC1yZXF1aXJlcyIKLUZJTEVTX2xpYm1vbm8tcGVhcGkxLjAtY2lsLWRiZyArPSAi
-L3Vzci9saWIvbW9uby9nYWMvUEVBUEkvMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2Fj
-L1BFQVBJLzEuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1BFQVBJLzEuMC4qLy5k
-ZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1BFQVBJLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vMS4wL1BFQVBJLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9QRUFQ
-SS5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1wZWFwaTEuMC1jaWwgPSAiL3Vzci9saWIvbW9u
-by9nYWMvUEVBUEkvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9QRUFQSS5kbGwiCi1GSUxF
-U19saWJtb25vLWNhaXJvMS4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uQ2Fp
-cm8vMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uQ2Fpcm8vMS4wLiovKi8q
-Lm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5DYWlyby8xLjAuKi8uZGVidWcvIFwKLQkv
-dXNyL2xpYi9tb25vL2dhYy9Nb25vLkNhaXJvLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vMS4wL01vbm8uQ2Fpcm8uZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL01vbm8u
-Q2Fpcm8uZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvcGtnY29uZmlnL21vbm8tY2Fpcm8ucGMqLm1k
-YiBcCi0JL3Vzci9saWIvcGtnY29uZmlnL21vbm8tY2Fpcm8ucGMqLyoubWRiIgotRklMRVNfbGli
-bW9uby1jYWlybzEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DYWlyby8xLjAuKi8g
-XAotCS91c3IvbGliL21vbm8vMS4wL01vbm8uQ2Fpcm8uZGxsIFwKLQkvdXNyL2xpYi9wa2djb25m
-aWcvbW9uby1jYWlyby5wYyIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLXdlYjIuMC1jaWwtZGJnICs9
-ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9TeXN0ZW0uV2ViLzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5
-c3RlbS5XZWIvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldlYi8y
-LjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLlNlcnZpY2Vz
-LzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLlNlcnZpY2VzLzIu
-MC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIuU2VydmljZXMvMi4w
-LiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldlYi5TZXJ2aWNlcy8yLjAu
-Ki8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uV2ViLmRsbCoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uV2ViLmRsbCovKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vMi4wL1N5c3RlbS5XZWIuU2VydmljZXMuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4w
-L1N5c3RlbS5XZWIuU2VydmljZXMuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLXdl
-YjIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldlYi8yLjAuKi8gXAotCS91c3Iv
-bGliL21vbm8vZ2FjL1N5c3RlbS5XZWIuU2VydmljZXMvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25v
-LzIuMC9TeXN0ZW0uV2ViLmRsbCBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLldlYi5TZXJ2
-aWNlcy5kbGwiCi1GSUxFU19saWJtb25vLWFjY2Vzc2liaWxpdHkyLjAtY2lsLWRiZyArPSAiL3Vz
-ci9saWIvbW9uby9nYWMvQWNjZXNzaWJpbGl0eS8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvQWNjZXNzaWJpbGl0eS8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9B
-Y2Nlc3NpYmlsaXR5LzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0FjY2Vzc2li
-aWxpdHkvMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvQWNjZXNzaWJpbGl0
-eS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvQWNjZXNzaWJpbGl0eS5kbGwqLyoubWRi
-IgotRklMRVNfbGlibW9uby1hY2Nlc3NpYmlsaXR5Mi4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dh
-Yy9BY2Nlc3NpYmlsaXR5LzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvQWNjZXNzaWJpbGl0
-eS5kbGwiCi1GSUxFU19saWJtb25vLW1pY3Jvc29mdDcuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9t
-b25vL2dhYy9NaWNyb3NvZnQuSlNjcmlwdC83LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvTWljcm9zb2Z0LkpTY3JpcHQvNy4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-TWljcm9zb2Z0LkpTY3JpcHQvNy4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWlj
-cm9zb2Z0LkpTY3JpcHQvNy4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWlj
-cm9zb2Z0LlZpc3VhbEMvNy4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29m
-dC5WaXN1YWxDLzcuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5W
-aXN1YWxDLzcuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5WaXN1
-YWxDLzcuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5Wc2Ev
-Ny4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5Wc2EvNy4wLiovKi8q
-Lm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZzYS83LjAuKi8uZGVidWcvIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuVnNhLzcuMC4qLy4uLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vMS4wL01pY3Jvc29mdC5KU2NyaXB0LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vLzEuMC9NaWNyb3NvZnQuSlNjcmlwdC5kbGwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEu
-MC9NaWNyb3NvZnQuVmlzdWFsQy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvTWljcm9z
-b2Z0LlZpc3VhbEMuZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvTWljcm9zb2Z0LlZz
-YS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvTWljcm9zb2Z0LlZzYS5kbGwqLyoubWRi
-IgotRklMRVNfbGlibW9uby1taWNyb3NvZnQ3LjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL01p
-Y3Jvc29mdC5KU2NyaXB0LzcuMC4qLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZp
-c3VhbEMvNy4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuVnNhLzcuMC4qLyBc
-Ci0JL3Vzci9saWIvbW9uby8xLjAvTWljcm9zb2Z0LkpTY3JpcHQuZGxsIFwKLQkvdXNyL2xpYi9t
-b25vLzEuMC9NaWNyb3NvZnQuVmlzdWFsQy5kbGwgXAotCS91c3IvbGliL21vbm8vMS4wL01pY3Jv
-c29mdC5Wc2EuZGxsIgotRklMRVNfbGlibW9uby13aW5mb3JtczIuMC1jaWwtZGJnICs9ICIvdXNy
-L2xpYi9tb25vL2dhYy9TeXN0ZW0uV2luZG93cy5Gb3Jtcy8yLjAuKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby9nYWMvU3lzdGVtLkRyYXdpbmcuRGVzaWduLzIuMC4qLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vL2dhYy9TeXN0ZW0uRHJhd2luZy5EZXNpZ24vMi4wLiovKi8qLm1kYiBcCi0JL3Vz
-ci9saWIvbW9uby9nYWMvU3lzdGVtLkRyYXdpbmcuRGVzaWduLzIuMC4qLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EcmF3aW5nLkRlc2lnbi8yLjAuKi8uLi8uZGVidWcvIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGVzaWduLzIuMC4qLyoubWRiIFwKLQkvdXNyL2xp
-Yi9tb25vL2dhYy9TeXN0ZW0uRGVzaWduLzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-Z2FjL1N5c3RlbS5EZXNpZ24vMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lz
-dGVtLkRlc2lnbi8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0u
-V2luZG93cy5Gb3Jtcy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLldpbmRv
-d3MuRm9ybXMuZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLkRyYXdpbmcu
-RGVzaWduLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uRHJhd2luZy5EZXNp
-Z24uZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLkRlc2lnbi5kbGwqLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLkRlc2lnbi5kbGwqLyoubWRiIgotRklMRVNf
-bGlibW9uby13aW5mb3JtczIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRv
-d3MuRm9ybXMvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRHJhd2luZy5EZXNp
-Z24vMi4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGVzaWduLzIuMC4qLyBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLldpbmRvd3MuRm9ybXMuZGxsIFwKLQkvdXNyL2xpYi9t
-b25vLzIuMC9TeXN0ZW0uRHJhd2luZy5EZXNpZ24uZGxsIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9T
-eXN0ZW0uRGVzaWduLmRsbCIKLUZJTEVTX2xpYm1vbm8tbGRhcDEuMC1jaWwtZGJnICs9ICIvdXNy
-L2xpYi9tb25vL2dhYy9Ob3ZlbGwuRGlyZWN0b3J5LkxkYXAvMS4wLiovKi5tZGIgXAotCS91c3Iv
-bGliL21vbm8vZ2FjL05vdmVsbC5EaXJlY3RvcnkuTGRhcC8xLjAuKi8qLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vL2dhYy9Ob3ZlbGwuRGlyZWN0b3J5LkxkYXAvMS4wLiovLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby9nYWMvTm92ZWxsLkRpcmVjdG9yeS5MZGFwLzEuMC4qLy4uLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vMS4wL05vdmVsbC5EaXJlY3RvcnkuTGRhcC5kbGwqLm1kYiBcCi0JL3Vz
-ci9saWIvbW9uby8xLjAvTm92ZWxsLkRpcmVjdG9yeS5MZGFwLmRsbCovKi5tZGIiCi1GSUxFU19s
-aWJtb25vLWxkYXAxLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL05vdmVsbC5EaXJlY3Rvcnku
-TGRhcC8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMS4wL05vdmVsbC5EaXJlY3RvcnkuTGRhcC5k
-bGwiCi1GSUxFU19saWJtb25vLXNoYXJwemlwMi44NC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25v
-L2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8yLjg0LiovKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzIuODQuKi8qLyoubWRiIFwKLQkvdXNyL2xp
-Yi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8yLjg0LiovLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMi44NC4qLy4uLy5kZWJ1Zy8g
-XAotCS91c3IvbGliL21vbm8vMi4wL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLmRsbCoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vLzIuMC9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi5kbGwqLyoubWRiIgot
-RklMRVNfbGlibW9uby1zaGFycHppcDIuODQtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL0lDU2hh
-cnBDb2RlLlNoYXJwWmlwTGliLzIuODQuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL0lDU2hhcnBD
-b2RlLlNoYXJwWmlwTGliLmRsbCIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLWRhdGEyLjAtY2lsLWRi
-ZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRhdGEvMi4wLiovKi5tZGIgXAotCS91c3Iv
-bGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-Z2FjL1N5c3RlbS5EYXRhLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3Rl
-bS5EYXRhLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5EYXRh
-LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uRGF0YS5kbGwqLyoubWRiIgot
-RklMRVNfbGlibW9uby1zeXN0ZW0tZGF0YTIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lz
-dGVtLkRhdGEvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uRGF0YS5kbGwiCi1G
-SUxFU19saWJtb25vLWNvcmxpYjIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9JMThO
-Ki8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSTE4TiovMi4wLiovKi8qLm1kYiBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvSTE4TiovMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvSTE4TiovMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvSTE4Tiou
-ZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL0kxOE4qLmRsbCovKi5tZGIgXAotCS91c3Iv
-bGliL21vbm8vMi4wL21zY29ybGliLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9tc2Nv
-cmxpYi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1jb3JsaWIyLjAtY2lsID0gIi91c3IvbGli
-L21vbm8vZ2FjL0kxOE4qLzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvSTE4TiouZGxsIFwK
-LQkvdXNyL2xpYi9tb25vLzIuMC9tc2NvcmxpYi5kbGwqIgotRklMRVNfbGlibW9uby13aW5mb3Jt
-czEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2luZG93cy5Gb3Jtcy8x
-LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMS4w
-LiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMS4w
-LiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMS4w
-LiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRyYXdpbmcuRGVzaWdu
-LzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRHJhd2luZy5EZXNpZ24v
-MS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRyYXdpbmcuRGVzaWdu
-LzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EcmF3aW5nLkRlc2ln
-bi8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGVzaWduLzEu
-MC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGVzaWduLzEuMC4qLyovKi5t
-ZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EZXNpZ24vMS4wLiovLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRlc2lnbi8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNy
-L2xpYi9tb25vLzEuMC9TeXN0ZW0uV2luZG93cy5Gb3Jtcy5kbGwqLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby8xLjAvU3lzdGVtLldpbmRvd3MuRm9ybXMuZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by8xLjAvU3lzdGVtLkRyYXdpbmcuRGVzaWduLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEu
-MC9TeXN0ZW0uRHJhd2luZy5EZXNpZ24uZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAv
-U3lzdGVtLkRlc2lnbi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLkRlc2ln
-bi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby13aW5mb3JtczEuMC1jaWwgPSAiL3Vzci9saWIv
-bW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uRHJhd2luZy5EZXNpZ24vMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0
-ZW0uRGVzaWduLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLldpbmRvd3MuRm9y
-bXMuZGxsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uRHJhd2luZy5EZXNpZ24uZGxsIFwK
-LQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uRGVzaWduLmRsbCIKLUZJTEVTX2xpYm1vbm8tbWlj
-cm9zb2Z0OC4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5KU2NyaXB0
-LzguMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuSlNjcmlwdC84LjAu
-Ki8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuSlNjcmlwdC84LjAuKi8u
-ZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuSlNjcmlwdC84LjAuKi8uLi8u
-ZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuVmlzdWFsQy84LjAuKi8qLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZpc3VhbEMvOC4wLiovKi8qLm1kYiBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZpc3VhbEMvOC4wLiovLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZpc3VhbEMvOC4wLiovLi4vLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZzYS84LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvTWljcm9zb2Z0LlZzYS84LjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9NaWNyb3NvZnQuVnNhLzguMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jv
-c29mdC5Wc2EvOC4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0
-LkpTY3JpcHQuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5KU2NyaXB0
-LmRsbCovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5WaXN1YWxDLmRsbCou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuVmlzdWFsQy5kbGwqLyoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuVnNhLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vLzIuMC9NaWNyb3NvZnQuVnNhLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLW1pY3Jvc29m
-dDguMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LkpTY3JpcHQvOC4wLiovIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuVmlzdWFsQy84LjAuKi8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL01pY3Jvc29mdC5Wc2EvOC4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNy
-b3NvZnQuSlNjcmlwdC5kbGwgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5WaXN1YWxD
-LmRsbCBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LlZzYS5kbGwiCi1GSUxFU19saWJt
-b25vLWNvcmxpYjEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9JMThOKi8xLjAuKi8q
-Lm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSTE4TiovMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvSTE4TiovMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvSTE4
-TiovMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvSTE4TiouZGxsKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vMS4wL0kxOE4qLmRsbCovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-MS4wL21zY29ybGliLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9tc2NvcmxpYi5kbGwq
-LyoubWRiIgotRklMRVNfbGlibW9uby1jb3JsaWIxLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2Fj
-L0kxOE4qLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvSTE4TiouZGxsIFwKLQkvdXNyL2xp
-Yi9tb25vLzEuMC9tc2NvcmxpYi5kbGwqIgotRklMRVNfbGlibW9uby1zeXN0ZW0td2ViMS4wLWNp
-bC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIvMS4wLiovKi5tZGIgXAotCS91
-c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIvMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvU3lzdGVtLldlYi8xLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0
-ZW0uV2ViLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIu
-U2VydmljZXMvMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIuU2Vy
-dmljZXMvMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldlYi5TZXJ2
-aWNlcy8xLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLlNlcnZp
-Y2VzLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3RlbS5XZWIuZGxs
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3RlbS5XZWIuZGxsKi8qLm1kYiBcCi0JL3Vz
-ci9saWIvbW9uby8xLjAvU3lzdGVtLldlYi5TZXJ2aWNlcy5kbGwqLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby8xLjAvU3lzdGVtLldlYi5TZXJ2aWNlcy5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1z
-eXN0ZW0td2ViMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLzEuMC4qLyBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldlYi5TZXJ2aWNlcy8xLjAuKi8gXAotCS91c3Iv
-bGliL21vbm8vMS4wL1N5c3RlbS5XZWIuZGxsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0u
-V2ViLlNlcnZpY2VzLmRsbCIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLXJ1bnRpbWUyLjAtY2lsLWRi
-ZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUuKi8yLjAuKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUuKi8yLjAuKi8qLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vL2dhYy9TeXN0ZW0uUnVudGltZS4qLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL1N5c3RlbS5SdW50aW1lLiovMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvU3lzdGVtLlJ1bnRpbWUuKi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAv
-U3lzdGVtLlJ1bnRpbWUuKi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1zeXN0ZW0tcnVudGlt
-ZTIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUuKi8yLjAuKi8gXAot
-CS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5SdW50aW1lLiouZGxsIgotRklMRVNfbGlibW9uby1j
-c2NvbXBtZ2Q4LjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvY3Njb21wbWdkLzguMC4q
-LyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9jc2NvbXBtZ2QvOC4wLiovKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvY3Njb21wbWdkLzguMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21v
-bm8vZ2FjL2NzY29tcG1nZC84LjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9j
-c2NvbXBtZ2QuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL2NzY29tcG1nZC5kbGwqLyou
-bWRiIgotRklMRVNfbGlibW9uby1jc2NvbXBtZ2Q4LjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2Fj
-L2NzY29tcG1nZC84LjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL2NzY29tcG1nZC5kbGwiCi1G
-SUxFU19saWJtb25vLWNzY29tcG1nZDcuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9j
-c2NvbXBtZ2QvNy4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL2NzY29tcG1nZC83LjAu
-Ki8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9jc2NvbXBtZ2QvNy4wLiovLmRlYnVnLyBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvY3Njb21wbWdkLzcuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3Iv
-bGliL21vbm8vMS4wL2NzY29tcG1nZC5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvY3Nj
-b21wbWdkLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLWNzY29tcG1nZDcuMC1jaWwgPSAiL3Vz
-ci9saWIvbW9uby9nYWMvY3Njb21wbWdkLzcuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvY3Nj
-b21wbWdkLmRsbCIKLUZJTEVTX2xpYm1vbm8tZmlyZWJpcmRzcWwxLjctY2lsLWRiZyArPSAiL3Vz
-ci9saWIvbW9uby9nYWMvRmlyZWJpcmRTcWwuRGF0YS5GaXJlYmlyZC8xLjcuKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvRmlyZWJpcmRTcWwuRGF0YS5GaXJlYmlyZC8xLjcuKi8qLyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vL2dhYy9GaXJlYmlyZFNxbC5EYXRhLkZpcmViaXJkLzEuNy4qLy5k
-ZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0ZpcmViaXJkU3FsLkRhdGEuRmlyZWJpcmQvMS43
-LiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvRmlyZWJpcmRTcWwuRGF0YS5GaXJl
-YmlyZC5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvRmlyZWJpcmRTcWwuRGF0YS5GaXJl
-YmlyZC5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1maXJlYmlyZHNxbDEuNy1jaWwgPSAiL3Vz
-ci9saWIvbW9uby9nYWMvRmlyZWJpcmRTcWwuRGF0YS5GaXJlYmlyZC8xLjcuKi8gXAotCS91c3Iv
-bGliL21vbm8vMS4wL0ZpcmViaXJkU3FsLkRhdGEuRmlyZWJpcmQuZGxsIgotRklMRVNfbW9uby1q
-YXktZGJnICs9ICIvdXNyL2Jpbi9qYXkqLm1kYiBcCi0JL3Vzci9iaW4vamF5Ki8qLm1kYiIKLUZJ
-TEVTX21vbm8tamF5ID0gIi91c3IvYmluL2pheSIKLUZJTEVTX2xpYm1vbm8tZGF0YS10ZHMxLjAt
-Y2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlRkcy8xLjAuKi8qLm1kYiBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlRkcy8xLjAuKi8qLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuVGRzLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21v
-bm8vZ2FjL01vbm8uRGF0YS5UZHMvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8x
-LjAvTW9uby5EYXRhLlRkcy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvTW9uby5EYXRh
-LlRkcy5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1kYXRhLXRkczEuMC1jaWwgPSAiL3Vzci9s
-aWIvbW9uby9nYWMvTW9uby5EYXRhLlRkcy8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMS4wL01v
-bm8uRGF0YS5UZHMuZGxsIgotRklMRVNfbGlibW9uby1zcWxpdGUxLjAtY2lsLWRiZyArPSAiL3Vz
-ci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZS8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZS8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25v
-L2dhYy9Nb25vLkRhdGEuU3FsaXRlLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2Fj
-L01vbm8uRGF0YS5TcWxpdGUvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-TW9uby5EYXRhLlNxbGl0ZUNsaWVudC8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-TW9uby5EYXRhLlNxbGl0ZUNsaWVudC8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9Nb25vLkRhdGEuU3FsaXRlQ2xpZW50LzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8v
-Z2FjL01vbm8uRGF0YS5TcWxpdGVDbGllbnQvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIv
-bW9uby8xLjAvTW9uby5EYXRhLlNxbGl0ZS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAv
-TW9uby5EYXRhLlNxbGl0ZS5kbGwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9Nb25vLkRh
-dGEuU3FsaXRlQ2xpZW50LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9Nb25vLkRhdGEu
-U3FsaXRlQ2xpZW50LmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXNxbGl0ZTEuMC1jaWwgPSAi
-L3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZS8xLjAuKi8gXAotCS91c3IvbGliL21v
-bm8vZ2FjL01vbm8uRGF0YS5TcWxpdGVDbGllbnQvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEu
-MC9Nb25vLkRhdGEuU3FsaXRlLmRsbCBcCi0JL3Vzci9saWIvbW9uby8xLjAvTW9uby5EYXRhLlNx
-bGl0ZUNsaWVudC5kbGwiCi1GSUxFU19saWJtb25vLXJlbGF4bmcxLjAtY2lsLWRiZyArPSAiL3Vz
-ci9saWIvbW9uby9nYWMvQ29tbW9ucy5YbWwuUmVsYXhuZy8xLjAuKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvQ29tbW9ucy5YbWwuUmVsYXhuZy8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xp
-Yi9tb25vL2dhYy9Db21tb25zLlhtbC5SZWxheG5nLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL0NvbW1vbnMuWG1sLlJlbGF4bmcvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvQ29tbW9ucy5YbWwuUmVsYXhuZy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by8xLjAvQ29tbW9ucy5YbWwuUmVsYXhuZy5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1yZWxh
-eG5nMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9Db21tb25zLlhtbC5SZWxheG5nLzEuMC4q
-LyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQ29tbW9ucy5YbWwuUmVsYXhuZy5kbGwiCi1GSUxFU19s
-aWJtb25vLWRldi1kYmcgKz0gIi91c3IvbGliL2xpYm1vbm8qLmEqLm1kYiBcCi0JL3Vzci9saWIv
-bGlibW9ubyouYSovKi5tZGIgXAotCS91c3IvbGliL2xpYk1vbm8qLmEqLm1kYiBcCi0JL3Vzci9s
-aWIvbGliTW9ubyouYSovKi5tZGIgXAotCS91c3IvbGliL2xpYm1vbm8qLnNvKi5tZGIgXAotCS91
-c3IvbGliL2xpYm1vbm8qLnNvKi8qLm1kYiBcCi0JL3Vzci9saWIvbGliTW9ub1N1cHBvcnRXLmEq
-Lm1kYiBcCi0JL3Vzci9saWIvbGliTW9ub1N1cHBvcnRXLmEqLyoubWRiIFwKLQkvdXNyL2xpYi9w
-a2djb25maWcvbW9uby5wYyoubWRiIFwKLQkvdXNyL2xpYi9wa2djb25maWcvbW9uby5wYyovKi5t
-ZGIgXAotCS91c3IvbGliL3BrZ2NvbmZpZy9kb3RuZXQucGMqLm1kYiBcCi0JL3Vzci9saWIvcGtn
-Y29uZmlnL2RvdG5ldC5wYyovKi5tZGIgXAotCS91c3IvaW5jbHVkZS8qLm1kYiBcCi0JL3Vzci9p
-bmNsdWRlLyovKi5tZGIgXAotCS91c3IvaW5jbHVkZS8uZGVidWcvIFwKLQkvdXNyL2luY2x1ZGUv
-Li4vLmRlYnVnLyIKLUZJTEVTX2xpYm1vbm8tZGV2ID0gIi91c3IvbGliL2xpYm1vbm8qLmEgXAot
-CS91c3IvbGliL2xpYk1vbm8qLmEgXAotCS91c3IvbGliL2xpYm1vbm8qLnNvIFwKLQkvdXNyL2xp
-Yi9saWJNb25vU3VwcG9ydFcuYSBcCi0JL3Vzci9saWIvcGtnY29uZmlnL21vbm8ucGMgXAotCS91
-c3IvbGliL3BrZ2NvbmZpZy9kb3RuZXQucGMgXAotCS91c3IvaW5jbHVkZS8iCi1GSUxFU19saWJt
-b25vLWFjY2Vzc2liaWxpdHkxLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvQWNjZXNz
-aWJpbGl0eS8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQWNjZXNzaWJpbGl0eS8x
-LjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9BY2Nlc3NpYmlsaXR5LzEuMC4qLy5k
-ZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0FjY2Vzc2liaWxpdHkvMS4wLiovLi4vLmRlYnVn
-LyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQWNjZXNzaWJpbGl0eS5kbGwqLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvQWNjZXNzaWJpbGl0eS5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1hY2Nl
-c3NpYmlsaXR5MS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9BY2Nlc3NpYmlsaXR5LzEuMC4q
-LyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQWNjZXNzaWJpbGl0eS5kbGwiCi1GSUxFU19tb25vLWNv
-bW1vbi1kYmcgKz0gIi9ldGMvbW9ubyoubWRiIFwKLQkvZXRjL21vbm8qLyoubWRiIFwKLQkvdXNy
-L3NoYXJlL21vbm8tMS4wL21vbm8vY2lsL2NpbC1vcGNvZGVzLnhtbCoubWRiIFwKLQkvdXNyL3No
-YXJlL21vbm8tMS4wL21vbm8vY2lsL2NpbC1vcGNvZGVzLnhtbCovKi5tZGIiCi1GSUxFU19tb25v
-LWNvbW1vbiA9ICIvZXRjL21vbm8gXAotCS91c3Ivc2hhcmUvbW9uby0xLjAvbW9uby9jaWwvY2ls
-LW9wY29kZXMueG1sIgotRklMRVNfbGlibW9uby1vcmFjbGUxLjAtY2lsLWRiZyArPSAiL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLkRhdGEuT3JhY2xlQ2xpZW50LzEuMC4qLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vL2dhYy9TeXN0ZW0uRGF0YS5PcmFjbGVDbGllbnQvMS4wLiovKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRhdGEuT3JhY2xlQ2xpZW50LzEuMC4qLy5kZWJ1Zy8g
-XAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC8xLjAuKi8uLi8u
-ZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uRGF0YS5PcmFjbGVDbGllbnQuZGxs
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC5kbGwq
-LyoubWRiIgotRklMRVNfbGlibW9uby1vcmFjbGUxLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2Fj
-L1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMS4wL1N5
-c3RlbS5EYXRhLk9yYWNsZUNsaWVudC5kbGwiCi1GSUxFU19saWJtb25vLXN5c3RlbS1kYXRhMS4w
-LWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLzEuMC4qLyoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGF0YS8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xp
-Yi9tb25vL2dhYy9TeXN0ZW0uRGF0YS8xLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uRGF0YS8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0
-ZW0uRGF0YS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLkRhdGEuZGxsKi8q
-Lm1kYiIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLWRhdGExLjAtY2lsID0gIi91c3IvbGliL21vbm8v
-Z2FjL1N5c3RlbS5EYXRhLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLkRhdGEu
-ZGxsIgotRklMRVNfbGlibW9uby1ieXRlZngwLjcuNi4yLWNpbC1kYmcgKz0gIi91c3IvbGliL21v
-bm8vZ2FjL0J5dGVGWC5EYXRhLzAuNy42LjIqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9C
-eXRlRlguRGF0YS8wLjcuNi4yKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9CeXRlRlgu
-RGF0YS8wLjcuNi4yKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9CeXRlRlguRGF0YS8w
-LjcuNi4yKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9CeXRlRlguRGF0YS5kbGwq
-Lm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvQnl0ZUZYLkRhdGEuZGxsKi8qLm1kYiIKLUZJTEVT
-X2xpYm1vbm8tYnl0ZWZ4MC43LjYuMi1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvQnl0ZUZYLkRh
-dGEvMC43LjYuMiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9CeXRlRlguRGF0YS5kbGwiCi1GSUxF
-U19saWJtb25vMC1kYmcgKz0gIi91c3IvbGliL2xpYm1vbm8qLnNvLioubWRiIFwKLQkvdXNyL2xp
-Yi9saWJtb25vKi5zby4qLyoubWRiIFwKLQkvdXNyL2xpYi9saWJNb25vUG9zaXhIZWxwZXIuc28q
-Lm1kYiBcCi0JL3Vzci9saWIvbGliTW9ub1Bvc2l4SGVscGVyLnNvKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbGliTW9ub1N1cHBvcnRXLnNvKi5tZGIgXAotCS91c3IvbGliL2xpYk1vbm9TdXBwb3J0Vy5z
-byovKi5tZGIiCi1GSUxFU19saWJtb25vMCA9ICIvdXNyL2xpYi9saWJtb25vKi5zby4qIFwKLQkv
-dXNyL2xpYi9saWJNb25vUG9zaXhIZWxwZXIuc28gXAotCS91c3IvbGliL2xpYk1vbm9TdXBwb3J0
-Vy5zbyIKLUZJTEVTX2xpYm1vbm8tc2hhcnB6aXAwLjYtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9u
-by9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMC42LiovKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzAuNi4qLyovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzAuNi4qLy5kZWJ1Zy8gXAotCS91c3Iv
-bGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzAuNi4qLy4uLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vY29tcGF0LTEuMC9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi5kbGwqLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby9jb21wYXQtMS4wL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLmRs
-bCovKi5tZGIiCi1GSUxFU19saWJtb25vLXNoYXJwemlwMC42LWNpbCA9ICIvdXNyL2xpYi9tb25v
-L2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8wLjYuKi8gXAotCS91c3IvbGliL21vbm8vY29t
-cGF0LTEuMC9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi5kbGwiCi1GSUxFU19saWJtb25vLWRhdGEt
-dGRzMi4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5UZHMvMi4wLiov
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5UZHMvMi4wLiovKi8qLm1kYiBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlRkcy8yLjAuKi8uZGVidWcvIFwKLQkvdXNy
-L2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuVGRzLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vMi4wL01vbm8uRGF0YS5UZHMuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01v
-bm8uRGF0YS5UZHMuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tZGF0YS10ZHMyLjAtY2lsID0g
-Ii91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5UZHMvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25v
-LzIuMC9Nb25vLkRhdGEuVGRzLmRsbCIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLW1lc3NhZ2luZzEu
-MC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uTWVzc2FnaW5nLzEuMC4qLyou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uTWVzc2FnaW5nLzEuMC4qLyovKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5NZXNzYWdpbmcvMS4wLiovLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLk1lc3NhZ2luZy8xLjAuKi8uLi8uZGVidWcvIFwKLQkv
-dXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uTWVzc2FnaW5nLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vLzEuMC9TeXN0ZW0uTWVzc2FnaW5nLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXN5c3Rl
-bS1tZXNzYWdpbmcxLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5NZXNzYWdpbmcv
-MS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uTWVzc2FnaW5nLmRsbCIKLUZJTEVT
-X2xpYm1vbm8tbnBnc3FsMS4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL05wZ3NxbC8x
-LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTnBnc3FsLzEuMC4qLyovKi5tZGIgXAot
-CS91c3IvbGliL21vbm8vZ2FjL05wZ3NxbC8xLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25v
-L2dhYy9OcGdzcWwvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvTnBnc3Fs
-LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9OcGdzcWwuZGxsKi8qLm1kYiIKLUZJTEVT
-X2xpYm1vbm8tbnBnc3FsMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9OcGdzcWwvMS4wLiov
-IFwKLQkvdXNyL2xpYi9tb25vLzEuMC9OcGdzcWwuZGxsIgotRklMRVNfbGlibW9uby1zZWN1cml0
-eTIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLlNlY3VyaXR5LzIuMC4qLyou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLlNlY3VyaXR5LzIuMC4qLyovKi5tZGIgXAot
-CS91c3IvbGliL21vbm8vZ2FjL01vbm8uU2VjdXJpdHkvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvTW9uby5TZWN1cml0eS8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9t
-b25vLzIuMC9Nb25vLlNlY3VyaXR5LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25v
-LlNlY3VyaXR5LmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXNlY3VyaXR5Mi4wLWNpbCA9ICIv
-dXNyL2xpYi9tb25vL2dhYy9Nb25vLlNlY3VyaXR5LzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8y
-LjAvTW9uby5TZWN1cml0eS5kbGwiCi1GSUxFU19saWJtb25vLXNlY3VyaXR5MS4wLWNpbC1kYmcg
-Kz0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uU2VjdXJpdHkvMS4wLiovKi5tZGIgXAotCS91c3Iv
-bGliL21vbm8vZ2FjL01vbm8uU2VjdXJpdHkvMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvTW9uby5TZWN1cml0eS8xLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9N
-b25vLlNlY3VyaXR5LzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL01vbm8u
-U2VjdXJpdHkuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL01vbm8uU2VjdXJpdHkuZGxs
-Ki8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc2VjdXJpdHkxLjAtY2lsID0gIi91c3IvbGliL21vbm8v
-Z2FjL01vbm8uU2VjdXJpdHkvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9Nb25vLlNlY3Vy
-aXR5LmRsbCIKLUZJTEVTX2xpYm1vbm8tYnl0ZWZ4MC43LjYuMS1jaWwtZGJnICs9ICIvdXNyL2xp
-Yi9tb25vL2dhYy9CeXRlRlguRGF0YS8wLjcuNi4xKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvQnl0ZUZYLkRhdGEvMC43LjYuMSovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQnl0
-ZUZYLkRhdGEvMC43LjYuMSovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvQnl0ZUZYLkRh
-dGEvMC43LjYuMSovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQnl0ZUZYLkRhdGEu
-ZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL0J5dGVGWC5EYXRhLmRsbCovKi5tZGIiCi1G
-SUxFU19saWJtb25vLWJ5dGVmeDAuNy42LjEtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL0J5dGVG
-WC5EYXRhLzAuNy42LjEqLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQnl0ZUZYLkRhdGEuZGxsIgot
-RklMRVNfbGlibW9uby1taWNyb3NvZnQtYnVpbGQyLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9u
-by9nYWMvTWljcm9zb2Z0LkJ1aWxkLiovMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2Fj
-L01pY3Jvc29mdC5CdWlsZC4qLzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01p
-Y3Jvc29mdC5CdWlsZC4qLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jv
-c29mdC5CdWlsZC4qLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jv
-c29mdC5CdWlsZC4qLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuQnVp
-bGQuKi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1taWNyb3NvZnQtYnVpbGQyLjAtY2lsID0g
-Ii91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5CdWlsZC4qLzIuMC4qLyBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvTWljcm9zb2Z0LkJ1aWxkLiouZGxsIgotRklMRVNfbGlibW9uby1zeXN0ZW0tbGRh
-cDEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5U2Vydmlj
-ZXMvMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EaXJlY3RvcnlTZXJ2
-aWNlcy8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5
-U2VydmljZXMvMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRpcmVj
-dG9yeVNlcnZpY2VzLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3Rl
-bS5EaXJlY3RvcnlTZXJ2aWNlcy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVt
-LkRpcmVjdG9yeVNlcnZpY2VzLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXN5c3RlbS1sZGFw
-MS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMvMS4w
-LiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMuZGxsIgot
-RklMRVNfbGlibW9uby1yZWxheG5nMi4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL0Nv
-bW1vbnMuWG1sLlJlbGF4bmcvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL0NvbW1v
-bnMuWG1sLlJlbGF4bmcvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQ29tbW9u
-cy5YbWwuUmVsYXhuZy8yLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Db21tb25z
-LlhtbC5SZWxheG5nLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL0NvbW1v
-bnMuWG1sLlJlbGF4bmcuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL0NvbW1vbnMuWG1s
-LlJlbGF4bmcuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tcmVsYXhuZzIuMC1jaWwgPSAiL3Vz
-ci9saWIvbW9uby9nYWMvQ29tbW9ucy5YbWwuUmVsYXhuZy8yLjAuKi8gXAotCS91c3IvbGliL21v
-bm8vMi4wL0NvbW1vbnMuWG1sLlJlbGF4bmcuZGxsIgotRklMRVNfbGlibW9uby1zeXN0ZW0tbGRh
-cDIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5U2Vydmlj
-ZXMvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EaXJlY3RvcnlTZXJ2
-aWNlcy8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5
-U2VydmljZXMvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRpcmVj
-dG9yeVNlcnZpY2VzLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3Rl
-bS5EaXJlY3RvcnlTZXJ2aWNlcy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVt
-LkRpcmVjdG9yeVNlcnZpY2VzLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXN5c3RlbS1sZGFw
-Mi4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMvMi4w
-LiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMuZGxsIgot
-RklMRVNfbGlibW9uby1zeXN0ZW0tbWVzc2FnaW5nMi4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21v
-bm8vZ2FjL1N5c3RlbS5NZXNzYWdpbmcvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2Fj
-L1N5c3RlbS5NZXNzYWdpbmcvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lz
-dGVtLk1lc3NhZ2luZy8yLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0u
-TWVzc2FnaW5nLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5N
-ZXNzYWdpbmcuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5NZXNzYWdpbmcu
-ZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLW1lc3NhZ2luZzIuMC1jaWwgPSAiL3Vz
-ci9saWIvbW9uby9nYWMvU3lzdGVtLk1lc3NhZ2luZy8yLjAuKi8gXAotCS91c3IvbGliL21vbm8v
-Mi4wL1N5c3RlbS5NZXNzYWdpbmcuZGxsIgotRklMRVNfbGlibW9uby1zaGFycHppcDAuODQtY2ls
-LWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMC44NC4q
-LyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8wLjg0
-LiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIv
-MC44NC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlw
-TGliLzAuODQuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9JQ1NoYXJwQ29kZS5T
-aGFycFppcExpYi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvSUNTaGFycENvZGUuU2hh
-cnBaaXBMaWIuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc2hhcnB6aXAwLjg0LWNpbCA9ICIv
-dXNyL2xpYi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8wLjg0LiovIFwKLQkvdXNy
-L2xpYi9tb25vLzEuMC9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi5kbGwiCi1GSUxFU19saWJtb25v
-LXNxbGl0ZTIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuU3FsaXRl
-LzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuU3FsaXRlLzIuMC4q
-LyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5TcWxpdGUvMi4wLiovLmRl
-YnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZS8yLjAuKi8uLi8uZGVi
-dWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuU3FsaXRlQ2xpZW50LzIuMC4qLyou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuU3FsaXRlQ2xpZW50LzIuMC4qLyov
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5TcWxpdGVDbGllbnQvMi4wLiov
-LmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZUNsaWVudC8yLjAu
-Ki8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLkRhdGEuU3FsaXRlLmRsbCou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLkRhdGEuU3FsaXRlLmRsbCovKi5tZGIgXAot
-CS91c3IvbGliL21vbm8vMi4wL01vbm8uRGF0YS5TcWxpdGVDbGllbnQuZGxsKi5tZGIgXAotCS91
-c3IvbGliL21vbm8vMi4wL01vbm8uRGF0YS5TcWxpdGVDbGllbnQuZGxsKi8qLm1kYiIKLUZJTEVT
-X2xpYm1vbm8tc3FsaXRlMi4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuU3Fs
-aXRlLzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZUNsaWVudC8y
-LjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uRGF0YS5TcWxpdGUuZGxsIFwKLQkvdXNy
-L2xpYi9tb25vLzIuMC9Nb25vLkRhdGEuU3FsaXRlQ2xpZW50LmRsbCIKLUZJTEVTX2xpYm1vbm8t
-bGRhcDIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9Ob3ZlbGwuRGlyZWN0b3J5Lkxk
-YXAvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL05vdmVsbC5EaXJlY3RvcnkuTGRh
-cC8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Ob3ZlbGwuRGlyZWN0b3J5Lkxk
-YXAvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTm92ZWxsLkRpcmVjdG9yeS5M
-ZGFwLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL05vdmVsbC5EaXJlY3Rv
-cnkuTGRhcC5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvTm92ZWxsLkRpcmVjdG9yeS5M
-ZGFwLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLWxkYXAyLjAtY2lsID0gIi91c3IvbGliL21v
-bm8vZ2FjL05vdmVsbC5EaXJlY3RvcnkuTGRhcC8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4w
-L05vdmVsbC5EaXJlY3RvcnkuTGRhcC5kbGwiCi1GSUxFU19saWJtb25vLW5wZ3NxbDIuMC1jaWwt
-ZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9OcGdzcWwvMi4wLiovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vZ2FjL05wZ3NxbC8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9OcGdz
-cWwvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTnBnc3FsLzIuMC4qLy4uLy5k
-ZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL05wZ3NxbC5kbGwqLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvTnBnc3FsLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLW5wZ3NxbDIuMC1jaWwg
-PSAiL3Vzci9saWIvbW9uby9nYWMvTnBnc3FsLzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8yLjAv
-TnBnc3FsLmRsbCIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLXJ1bnRpbWUxLjAtY2lsLWRiZyArPSAi
-L3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUuKi8xLjAuKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUuKi8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9TeXN0ZW0uUnVudGltZS4qLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8v
-Z2FjL1N5c3RlbS5SdW50aW1lLiovMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8x
-LjAvU3lzdGVtLlJ1bnRpbWUuKi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVt
-LlJ1bnRpbWUuKi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1zeXN0ZW0tcnVudGltZTEuMC1j
-aWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUuKi8xLjAuKi8gXAotCS91c3Iv
-bGliL21vbm8vMS4wL1N5c3RlbS5SdW50aW1lLiouZGxsIgotRklMRVNfbGlibW9uby1vcmFjbGUy
-LjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRhdGEuT3JhY2xlQ2xpZW50
-LzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGF0YS5PcmFjbGVDbGll
-bnQvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRhdGEuT3JhY2xl
-Q2xpZW50LzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLk9y
-YWNsZUNsaWVudC8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0u
-RGF0YS5PcmFjbGVDbGllbnQuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5E
-YXRhLk9yYWNsZUNsaWVudC5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1vcmFjbGUyLjAtY2ls
-ID0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC8yLjAuKi8gXAot
-CS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC5kbGwiCi1GSUxFU19s
-aWJtb25vLWM1LTEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkM1LzEuMC4q
-LyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkM1LzEuMC4qLyovKi5tZGIgXAotCS91
-c3IvbGliL21vbm8vZ2FjL01vbm8uQzUvMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvTW9uby5DNS8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLkM1
-LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLkM1LmRsbCovKi5tZGIiCi1GSUxF
-U19saWJtb25vLWM1LTEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DNS8xLjAuKi8g
-XAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uQzUuZGxsIgotRklMRVNfbGlibW9uby1zaGFycHpp
-cDIuNi1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExp
-Yi8yLjYuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBM
-aWIvMi42LiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBa
-aXBMaWIvMi42LiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hh
-cnBaaXBMaWIvMi42LiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9jb21wYXQtMi4wL0lD
-U2hhcnBDb2RlLlNoYXJwWmlwTGliLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2NvbXBhdC0y
-LjAvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc2hh
-cnB6aXAyLjYtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGli
-LzIuNi4qLyBcCi0JL3Vzci9saWIvbW9uby9jb21wYXQtMi4wL0lDU2hhcnBDb2RlLlNoYXJwWmlw
-TGliLmRsbCIKLUZJTEVTX2xpYm1vbm8tY2Fpcm8yLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9u
-by9nYWMvTW9uby5DYWlyby8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5D
-YWlyby8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkNhaXJvLzIuMC4q
-Ly5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uQ2Fpcm8vMi4wLiovLi4vLmRlYnVn
-LyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTW9uby5DYWlyby5kbGwqLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvTW9uby5DYWlyby5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1jYWlybzIuMC1j
-aWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DYWlyby8yLjAuKi8gXAotCS91c3IvbGliL21v
-bm8vMi4wL01vbm8uQ2Fpcm8uZGxsIgotRklMRVNfbGlibW9uby1wZWFwaTIuMC1jaWwtZGJnICs9
-ICIvdXNyL2xpYi9tb25vL2dhYy9QRUFQSS8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvUEVBUEkvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvUEVBUEkvMi4wLiov
-LmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvUEVBUEkvMi4wLiovLi4vLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvUEVBUEkuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL1BF
-QVBJLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXBlYXBpMi4wLWNpbCA9ICIvdXNyL2xpYi9t
-b25vL2dhYy9QRUFQSS8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL1BFQVBJLmRsbCIKLUZJ
-TEVTX21vbm8tbWNzLWRiZyArPSAiL3Vzci9iaW4vKi5tZGIgXAotCS91c3IvYmluLyovKi5tZGIg
-XAotCS91c3IvYmluLy5kZWJ1Zy8gXAotCS91c3IvYmluLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vMS4wLyouZXhlKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wLyouZXhlKi8qLm1kYiIK
-LUZJTEVTX21vbm8tbWNzID0gIi91c3IvYmluLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvKi5leGUq
-IgotRklMRVNfbGlibW9uby1zeXN0ZW0xLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMv
-U3lzdGVtKi8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtKi8xLjAuKi8q
-LyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0qLzEuMC4qLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vZ2FjL1N5c3RlbSovMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvQ3VzdG9tTWFyc2hhbGVycy8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-Q3VzdG9tTWFyc2hhbGVycy8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9DdXN0
-b21NYXJzaGFsZXJzLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0N1c3RvbU1h
-cnNoYWxlcnMvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtKi5k
-bGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtKi5kbGwqLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vLzEuMC9DdXN0b21NYXJzaGFsZXJzLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25v
-LzEuMC9DdXN0b21NYXJzaGFsZXJzLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXN5c3RlbTEu
-MC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtKi8xLjAuKi8gXAotCS91c3IvbGliL21v
-bm8vZ2FjL0N1c3RvbU1hcnNoYWxlcnMvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0
-ZW0qLmRsbCBcCi0JL3Vzci9saWIvbW9uby8xLjAvQ3VzdG9tTWFyc2hhbGVycy5kbGwqIgotRklM
-RVNfbGlibW9uby1zeXN0ZW0yLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVt
-Ki8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtKi8yLjAuKi8qLyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0qLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL1N5c3RlbSovMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-Q3VzdG9tTWFyc2hhbGVycy8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQ3VzdG9t
-TWFyc2hhbGVycy8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9DdXN0b21NYXJz
-aGFsZXJzLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0N1c3RvbU1hcnNoYWxl
-cnMvMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtKi5kbGwqLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtKi5kbGwqLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vLzIuMC9DdXN0b21NYXJzaGFsZXJzLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9D
-dXN0b21NYXJzaGFsZXJzLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXN5c3RlbTIuMC1jaWwg
-PSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtKi8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vZ2Fj
-L0N1c3RvbU1hcnNoYWxlcnMvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0qLmRs
-bCBcCi0JL3Vzci9saWIvbW9uby8yLjAvQ3VzdG9tTWFyc2hhbGVycy5kbGwqIgotRklMRVNfbGli
-bW9ubzEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLiovMS4wLiovKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uKi8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9Nb25vLiovMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby4q
-LzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL09wZW5TeXN0ZW0uQy8xLjAu
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL09wZW5TeXN0ZW0uQy8xLjAuKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvbW9uby1zZXJ2aWNlLzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9tb25vLXNlcnZpY2UvMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-bW9uby1zZXJ2aWNlLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL21vbm8tc2Vy
-dmljZS8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9Nb25vLiouZGxsKi5t
-ZGIgXAotCS91c3IvbGliL21vbm8vMS4wL01vbm8uKi5kbGwqLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vLzEuMC9PcGVuU3lzdGVtLkMuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL09wZW5T
-eXN0ZW0uQy5kbGwqLyoubWRiIgotRklMRVNfbGlibW9ubzEuMC1jaWwgPSAiL3Vzci9saWIvbW9u
-by9nYWMvTW9uby4qLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvT3BlblN5c3RlbS5DLzEu
-MC4qIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9tb25vLXNlcnZpY2UvMS4wLiovIFwKLQkvdXNyL2xp
-Yi9tb25vLzEuMC9Nb25vLiouZGxsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9PcGVuU3lzdGVtLkMu
-ZGxsIgotRklMRVNfbGlibW9ubzIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25v
-LiovMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uKi8yLjAuKi8qLyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLiovMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvTW9uby4qLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL09w
-ZW5TeXN0ZW0uQy8yLjAuKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL09wZW5TeXN0ZW0uQy8y
-LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvbW9uby1zZXJ2aWNlLzIuMC4qLyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vL2dhYy9tb25vLXNlcnZpY2UvMi4wLiovKi8qLm1kYiBcCi0JL3Vz
-ci9saWIvbW9uby9nYWMvbW9uby1zZXJ2aWNlLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21v
-bm8vZ2FjL21vbm8tc2VydmljZS8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIu
-MC9Nb25vLiouZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uKi5kbGwqLyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vLzIuMC9PcGVuU3lzdGVtLkMuZGxsKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vMi4wL09wZW5TeXN0ZW0uQy5kbGwqLyoubWRiIgotRklMRVNfbGlibW9ubzIuMC1jaWwg
-PSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby4qLzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-T3BlblN5c3RlbS5DLzIuMC4qIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9tb25vLXNlcnZpY2UvMi4w
-LiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLiouZGxsIFwKLQkvdXNyL2xpYi9tb25vLzIu
-MC9PcGVuU3lzdGVtLkMuZGxsIgotCi1QQUNLQUdFUyA9ICJtb25vLWppdC1kYmcgXAotCW1vbm8t
-aml0IFwKLQltb25vLWdhYy1kYmcgXAotCW1vbm8tZ2FjIFwKLQltb25vLW1qcy1kYmcgXAotCW1v
-bm8tbWpzIFwKLQltb25vLWdtY3MtZGJnIFwKLQltb25vLWdtY3MgXAotCW1vbm8tdXRpbHMtZGJn
-IFwKLQltb25vLXV0aWxzIFwKLQlsaWJtb25vLXBlYXBpMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8t
-cGVhcGkxLjAtY2lsIFwKLQlsaWJtb25vLWNhaXJvMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tY2Fp
-cm8xLjAtY2lsIFwKLQlsaWJtb25vLXN5c3RlbS13ZWIyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1z
-eXN0ZW0td2ViMi4wLWNpbCBcCi0JbGlibW9uby1hY2Nlc3NpYmlsaXR5Mi4wLWNpbC1kYmcgXAot
-CWxpYm1vbm8tYWNjZXNzaWJpbGl0eTIuMC1jaWwgXAotCWxpYm1vbm8tbWljcm9zb2Z0Ny4wLWNp
-bC1kYmcgXAotCWxpYm1vbm8tbWljcm9zb2Z0Ny4wLWNpbCBcCi0JbGlibW9uby13aW5mb3JtczIu
-MC1jaWwtZGJnIFwKLQlsaWJtb25vLXdpbmZvcm1zMi4wLWNpbCBcCi0JbGlibW9uby1sZGFwMS4w
-LWNpbC1kYmcgXAotCWxpYm1vbm8tbGRhcDEuMC1jaWwgXAotCWxpYm1vbm8tc2hhcnB6aXAyLjg0
-LWNpbC1kYmcgXAotCWxpYm1vbm8tc2hhcnB6aXAyLjg0LWNpbCBcCi0JbGlibW9uby1zeXN0ZW0t
-ZGF0YTIuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXN5c3RlbS1kYXRhMi4wLWNpbCBcCi0JbGlibW9u
-by1jb3JsaWIyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1jb3JsaWIyLjAtY2lsIFwKLQlsaWJtb25v
-LXdpbmZvcm1zMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8td2luZm9ybXMxLjAtY2lsIFwKLQlsaWJt
-b25vLW1pY3Jvc29mdDguMC1jaWwtZGJnIFwKLQlsaWJtb25vLW1pY3Jvc29mdDguMC1jaWwgXAot
-CWxpYm1vbm8tY29ybGliMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tY29ybGliMS4wLWNpbCBcCi0J
-bGlibW9uby1zeXN0ZW0td2ViMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3lzdGVtLXdlYjEuMC1j
-aWwgXAotCWxpYm1vbm8tc3lzdGVtLXJ1bnRpbWUyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1zeXN0
-ZW0tcnVudGltZTIuMC1jaWwgXAotCWxpYm1vbm8tY3Njb21wbWdkOC4wLWNpbC1kYmcgXAotCWxp
-Ym1vbm8tY3Njb21wbWdkOC4wLWNpbCBcCi0JbGlibW9uby1jc2NvbXBtZ2Q3LjAtY2lsLWRiZyBc
-Ci0JbGlibW9uby1jc2NvbXBtZ2Q3LjAtY2lsIFwKLQlsaWJtb25vLWZpcmViaXJkc3FsMS43LWNp
-bC1kYmcgXAotCWxpYm1vbm8tZmlyZWJpcmRzcWwxLjctY2lsIFwKLQltb25vLWpheS1kYmcgXAot
-CW1vbm8tamF5IFwKLQlsaWJtb25vLWRhdGEtdGRzMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tZGF0
-YS10ZHMxLjAtY2lsIFwKLQlsaWJtb25vLXNxbGl0ZTEuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXNx
-bGl0ZTEuMC1jaWwgXAotCWxpYm1vbm8tcmVsYXhuZzEuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXJl
-bGF4bmcxLjAtY2lsIFwKLQlsaWJtb25vLWRldi1kYmcgXAotCWxpYm1vbm8tZGV2IFwKLQlsaWJt
-b25vLWFjY2Vzc2liaWxpdHkxLjAtY2lsLWRiZyBcCi0JbGlibW9uby1hY2Nlc3NpYmlsaXR5MS4w
-LWNpbCBcCi0JbW9uby1jb21tb24tZGJnIFwKLQltb25vLWNvbW1vbiBcCi0JbGlibW9uby1vcmFj
-bGUxLjAtY2lsLWRiZyBcCi0JbGlibW9uby1vcmFjbGUxLjAtY2lsIFwKLQlsaWJtb25vLXN5c3Rl
-bS1kYXRhMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3lzdGVtLWRhdGExLjAtY2lsIFwKLQlsaWJt
-b25vLWJ5dGVmeDAuNy42LjItY2lsLWRiZyBcCi0JbGlibW9uby1ieXRlZngwLjcuNi4yLWNpbCBc
-Ci0JbGlibW9ubzAtZGJnIFwKLQlsaWJtb25vMCBcCi0JbGlibW9uby1zaGFycHppcDAuNi1jaWwt
-ZGJnIFwKLQlsaWJtb25vLXNoYXJwemlwMC42LWNpbCBcCi0JbGlibW9uby1kYXRhLXRkczIuMC1j
-aWwtZGJnIFwKLQlsaWJtb25vLWRhdGEtdGRzMi4wLWNpbCBcCi0JbGlibW9uby1zeXN0ZW0tbWVz
-c2FnaW5nMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3lzdGVtLW1lc3NhZ2luZzEuMC1jaWwgXAot
-CWxpYm1vbm8tbnBnc3FsMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tbnBnc3FsMS4wLWNpbCBcCi0J
-bGlibW9uby1zZWN1cml0eTIuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXNlY3VyaXR5Mi4wLWNpbCBc
-Ci0JbGlibW9uby1zZWN1cml0eTEuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXNlY3VyaXR5MS4wLWNp
-bCBcCi0JbGlibW9uby1ieXRlZngwLjcuNi4xLWNpbC1kYmcgXAotCWxpYm1vbm8tYnl0ZWZ4MC43
-LjYuMS1jaWwgXAotCWxpYm1vbm8tbWljcm9zb2Z0LWJ1aWxkMi4wLWNpbC1kYmcgXAotCWxpYm1v
-bm8tbWljcm9zb2Z0LWJ1aWxkMi4wLWNpbCBcCi0JbGlibW9uby1zeXN0ZW0tbGRhcDEuMC1jaWwt
-ZGJnIFwKLQlsaWJtb25vLXN5c3RlbS1sZGFwMS4wLWNpbCBcCi0JbGlibW9uby1yZWxheG5nMi4w
-LWNpbC1kYmcgXAotCWxpYm1vbm8tcmVsYXhuZzIuMC1jaWwgXAotCWxpYm1vbm8tc3lzdGVtLWxk
-YXAyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1zeXN0ZW0tbGRhcDIuMC1jaWwgXAotCWxpYm1vbm8t
-c3lzdGVtLW1lc3NhZ2luZzIuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXN5c3RlbS1tZXNzYWdpbmcy
-LjAtY2lsIFwKLQlsaWJtb25vLXNoYXJwemlwMC44NC1jaWwtZGJnIFwKLQlsaWJtb25vLXNoYXJw
-emlwMC44NC1jaWwgXAotCWxpYm1vbm8tc3FsaXRlMi4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3Fs
-aXRlMi4wLWNpbCBcCi0JbGlibW9uby1sZGFwMi4wLWNpbC1kYmcgXAotCWxpYm1vbm8tbGRhcDIu
-MC1jaWwgXAotCWxpYm1vbm8tbnBnc3FsMi4wLWNpbC1kYmcgXAotCWxpYm1vbm8tbnBnc3FsMi4w
-LWNpbCBcCi0JbGlibW9uby1zeXN0ZW0tcnVudGltZTEuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXN5
-c3RlbS1ydW50aW1lMS4wLWNpbCBcCi0JbGlibW9uby1vcmFjbGUyLjAtY2lsLWRiZyBcCi0JbGli
-bW9uby1vcmFjbGUyLjAtY2lsIFwKLQlsaWJtb25vLWM1LTEuMC1jaWwtZGJnIFwKLQlsaWJtb25v
-LWM1LTEuMC1jaWwgXAotCWxpYm1vbm8tc2hhcnB6aXAyLjYtY2lsLWRiZyBcCi0JbGlibW9uby1z
-aGFycHppcDIuNi1jaWwgXAotCWxpYm1vbm8tY2Fpcm8yLjAtY2lsLWRiZyBcCi0JbGlibW9uby1j
-YWlybzIuMC1jaWwgXAotCWxpYm1vbm8tcGVhcGkyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1wZWFw
-aTIuMC1jaWwgXAotCW1vbm8tbWNzLWRiZyBcCi0JbW9uby1tY3MgXAotCWxpYm1vbm8tc3lzdGVt
-MS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3lzdGVtMS4wLWNpbCBcCi0JbGlibW9uby1zeXN0ZW0y
-LjAtY2lsLWRiZyBcCi0JbGlibW9uby1zeXN0ZW0yLjAtY2lsIFwKLQlsaWJtb25vMS4wLWNpbC1k
-YmcgXAotCWxpYm1vbm8xLjAtY2lsIFwKLQlsaWJtb25vMi4wLWNpbC1kYmcgXAotCWxpYm1vbm8y
-LjAtY2lsIgotIyBUaGlzIGlzIGEgZ2VuZXJhdGVkIGZpbGUsIHBsZWFzZSBkbyBub3QgZWRpdCBk
-aXJlY3RseQotIyBVc2UgY29sbGVjdC1maWxlcy5weSBpbnN0ZWFkLiAtLSBIZW5yeWsgPGhlbnJ5
-a0BvcGVubW9rby5vcmc+Ci1GSUxFU19tb25vLWppdC1kYmcgKz0gIi91c3IvYmluL21vbm8qLm1k
-YiBcCi0JL3Vzci9iaW4vbW9ubyovKi5tZGIiCi1GSUxFU19tb25vLWppdCA9ICIvdXNyL2Jpbi9t
-b25vIgotRklMRVNfbW9uby1nYWMtZGJnICs9ICIvdXNyL2Jpbi9nYWN1dGlsKi5tZGIgXAotCS91
-c3IvYmluL2dhY3V0aWwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9nYWN1dGlsLmV4ZSou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9nYWN1dGlsLmV4ZSovKi5tZGIiCi1GSUxFU19tb25v
-LWdhYyA9ICIvdXNyL2Jpbi9nYWN1dGlsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9nYWN1dGlsLmV4
-ZSIKLUZJTEVTX21vbm8tbWpzLWRiZyArPSAiL3Vzci9iaW4vbWpzKi5tZGIgXAotCS91c3IvYmlu
-L21qcyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL21qcy5leGUqLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvbWpzLmV4ZSovKi5tZGIiCi1GSUxFU19tb25vLW1qcyA9ICIvdXNyL2Jpbi9t
-anMgXAotCS91c3IvbGliL21vbm8vMS4wL21qcy5leGUqIgotRklMRVNfbW9uby1nbWNzLWRiZyAr
-PSAiL3Vzci9iaW4vZ21jcyoubWRiIFwKLQkvdXNyL2Jpbi9nbWNzKi8qLm1kYiBcCi0JL3Vzci9i
-aW4vd3NkbDIqLm1kYiBcCi0JL3Vzci9iaW4vd3NkbDIqLyoubWRiIFwKLQkvdXNyL2Jpbi9tb25v
-cDIqLm1kYiBcCi0JL3Vzci9iaW4vbW9ub3AyKi8qLm1kYiBcCi0JL3Vzci9iaW4vaWxhc20yKi5t
-ZGIgXAotCS91c3IvYmluL2lsYXNtMiovKi5tZGIgXAotCS91c3IvYmluL3Jlc2dlbjIqLm1kYiBc
-Ci0JL3Vzci9iaW4vcmVzZ2VuMiovKi5tZGIgXAotCS91c3IvYmluL21vbm8tYXBpLWluZm8yKi5t
-ZGIgXAotCS91c3IvYmluL21vbm8tYXBpLWluZm8yKi8qLm1kYiBcCi0JL3Vzci9iaW4vbW9uby1z
-ZXJ2aWNlMioubWRiIFwKLQkvdXNyL2Jpbi9tb25vLXNlcnZpY2UyKi8qLm1kYiBcCi0JL3Vzci9i
-aW4vbWtidW5kbGUyKi5tZGIgXAotCS91c3IvYmluL21rYnVuZGxlMiovKi5tZGIgXAotCS91c3Iv
-YmluL3hidWlsZCoubWRiIFwKLQkvdXNyL2Jpbi94YnVpbGQqLyoubWRiIFwKLQkvdXNyL2Jpbi9z
-Z2VuKi5tZGIgXAotCS91c3IvYmluL3NnZW4qLyoubWRiIFwKLQkvdXNyL2Jpbi9hbDIqLm1kYiBc
-Ci0JL3Vzci9iaW4vYWwyKi8qLm1kYiBcCi0JL3Vzci9iaW4vaHR0cGNmZyoubWRiIFwKLQkvdXNy
-L2Jpbi9odHRwY2ZnKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvKi5leGUqLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvKi5leGUqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC94YnVp
-bGQucnNwKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL3hidWlsZC5yc3AqLyoubWRiIFwKLQkv
-dXNyL2xpYi9tb25vLzIuMC9NU0J1aWxkLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NU0J1
-aWxkLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01TQnVpbGQvLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby8yLjAvTVNCdWlsZC8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9N
-aWNyb3NvZnQuQnVpbGQueHNkKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5C
-dWlsZC54c2QqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuQ1NoYXJwLnRh
-cmdldHMqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LkNTaGFycC50YXJnZXRz
-Ki8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LkNvbW1vbi50YXNrcyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuQ29tbW9uLnRhc2tzKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LkNvbW1vbi50YXJnZXRzKi5tZGIgXAotCS91c3Iv
-bGliL21vbm8vMi4wL01pY3Jvc29mdC5Db21tb24udGFyZ2V0cyovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vMi4wL01pY3Jvc29mdC5WaXN1YWxCYXNpYy50YXJnZXRzKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vMi4wL01pY3Jvc29mdC5WaXN1YWxCYXNpYy50YXJnZXRzKi8qLm1kYiIKLUZJTEVTX21v
-bm8tZ21jcyA9ICIvdXNyL2Jpbi9nbWNzIFwKLQkvdXNyL2Jpbi93c2RsMiBcCi0JL3Vzci9iaW4v
-bW9ub3AyIFwKLQkvdXNyL2Jpbi9pbGFzbTIgXAotCS91c3IvYmluL3Jlc2dlbjIgXAotCS91c3Iv
-YmluL21vbm8tYXBpLWluZm8yIFwKLQkvdXNyL2Jpbi9tb25vLXNlcnZpY2UyIFwKLQkvdXNyL2Jp
-bi9ta2J1bmRsZTIgXAotCS91c3IvYmluL3hidWlsZCBcCi0JL3Vzci9iaW4vc2dlbiBcCi0JL3Vz
-ci9iaW4vYWwyIFwKLQkvdXNyL2Jpbi9odHRwY2ZnIFwKLQkvdXNyL2xpYi9tb25vLzIuMC8qLmV4
-ZSogXAotCS91c3IvbGliL21vbm8vMi4wL3hidWlsZC5yc3AgXAotCS91c3IvbGliL21vbm8vMi4w
-L01TQnVpbGQvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuQnVpbGQueHNkIFwKLQkv
-dXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuQ1NoYXJwLnRhcmdldHMgXAotCS91c3IvbGliL21v
-bm8vMi4wL01pY3Jvc29mdC5Db21tb24udGFza3MgXAotCS91c3IvbGliL21vbm8vMi4wL01pY3Jv
-c29mdC5Db21tb24udGFyZ2V0cyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LlZpc3Vh
-bEJhc2ljLnRhcmdldHMiCi1GSUxFU19tb25vLXV0aWxzLWRiZyArPSAiL3Vzci9iaW4vcGVkdW1w
-Ki5tZGIgXAotCS91c3IvYmluL3BlZHVtcCovKi5tZGIgXAotCS91c3IvYmluL21vbm9kaXMqLm1k
-YiBcCi0JL3Vzci9iaW4vbW9ub2RpcyovKi5tZGIgXAotCS91c3IvYmluL21vbm9ncmFwaCoubWRi
-IFwKLQkvdXNyL2Jpbi9tb25vZ3JhcGgqLyoubWRiIFwKLQkvdXNyL2Jpbi9tb25vLWZpbmQtcHJv
-dmlkZXMqLm1kYiBcCi0JL3Vzci9iaW4vbW9uby1maW5kLXByb3ZpZGVzKi8qLm1kYiBcCi0JL3Vz
-ci9iaW4vbW9uby1maW5kLXJlcXVpcmVzKi5tZGIgXAotCS91c3IvYmluL21vbm8tZmluZC1yZXF1
-aXJlcyovKi5tZGIiCi1GSUxFU19tb25vLXV0aWxzID0gIi91c3IvYmluL3BlZHVtcCBcCi0JL3Vz
-ci9iaW4vbW9ub2RpcyBcCi0JL3Vzci9iaW4vbW9ub2dyYXBoIFwKLQkvdXNyL2Jpbi9tb25vLWZp
-bmQtcHJvdmlkZXMgXAotCS91c3IvYmluL21vbm8tZmluZC1yZXF1aXJlcyIKLUZJTEVTX2xpYm1v
-bm8tcGVhcGkxLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvUEVBUEkvMS4wLiovKi5t
-ZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1BFQVBJLzEuMC4qLyovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vZ2FjL1BFQVBJLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1BFQVBJ
-LzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL1BFQVBJLmRsbCoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vLzEuMC9QRUFQSS5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1wZWFw
-aTEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvUEVBUEkvMS4wLiovIFwKLQkvdXNyL2xpYi9t
-b25vLzEuMC9QRUFQSS5kbGwiCi1GSUxFU19saWJtb25vLWNhaXJvMS4wLWNpbC1kYmcgKz0gIi91
-c3IvbGliL21vbm8vZ2FjL01vbm8uQ2Fpcm8vMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-Z2FjL01vbm8uQ2Fpcm8vMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5D
-YWlyby8xLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkNhaXJvLzEuMC4q
-Ly4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL01vbm8uQ2Fpcm8uZGxsKi5tZGIgXAot
-CS91c3IvbGliL21vbm8vMS4wL01vbm8uQ2Fpcm8uZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvcGtn
-Y29uZmlnL21vbm8tY2Fpcm8ucGMqLm1kYiBcCi0JL3Vzci9saWIvcGtnY29uZmlnL21vbm8tY2Fp
-cm8ucGMqLyoubWRiIgotRklMRVNfbGlibW9uby1jYWlybzEuMC1jaWwgPSAiL3Vzci9saWIvbW9u
-by9nYWMvTW9uby5DYWlyby8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMS4wL01vbm8uQ2Fpcm8u
-ZGxsIFwKLQkvdXNyL2xpYi9wa2djb25maWcvbW9uby1jYWlyby5wYyIKLUZJTEVTX2xpYm1vbm8t
-c3lzdGVtLXdlYjIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLzIu
-MC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLzIuMC4qLyovKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLldlYi8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25v
-L2dhYy9TeXN0ZW0uV2ViLlNlcnZpY2VzLzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uV2ViLlNlcnZpY2VzLzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2Fj
-L1N5c3RlbS5XZWIuU2VydmljZXMvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-U3lzdGVtLldlYi5TZXJ2aWNlcy8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIu
-MC9TeXN0ZW0uV2ViLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uV2ViLmRs
-bCovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5XZWIuU2VydmljZXMuZGxsKi5t
-ZGIgXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5XZWIuU2VydmljZXMuZGxsKi8qLm1kYiIK
-LUZJTEVTX2xpYm1vbm8tc3lzdGVtLXdlYjIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lz
-dGVtLldlYi8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIuU2VydmljZXMv
-Mi4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uV2ViLmRsbCBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvU3lzdGVtLldlYi5TZXJ2aWNlcy5kbGwiCi1GSUxFU19saWJtb25vLWFjY2Vzc2li
-aWxpdHkyLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvQWNjZXNzaWJpbGl0eS8yLjAu
-Ki8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQWNjZXNzaWJpbGl0eS8yLjAuKi8qLyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vL2dhYy9BY2Nlc3NpYmlsaXR5LzIuMC4qLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vZ2FjL0FjY2Vzc2liaWxpdHkvMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby8yLjAvQWNjZXNzaWJpbGl0eS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAv
-QWNjZXNzaWJpbGl0eS5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1hY2Nlc3NpYmlsaXR5Mi4w
-LWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9BY2Nlc3NpYmlsaXR5LzIuMC4qLyBcCi0JL3Vzci9s
-aWIvbW9uby8yLjAvQWNjZXNzaWJpbGl0eS5kbGwiCi1GSUxFU19saWJtb25vLW1pY3Jvc29mdDcu
-MC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuSlNjcmlwdC83LjAuKi8q
-Lm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LkpTY3JpcHQvNy4wLiovKi8qLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LkpTY3JpcHQvNy4wLiovLmRlYnVnLyBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LkpTY3JpcHQvNy4wLiovLi4vLmRlYnVnLyBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZpc3VhbEMvNy4wLiovKi5tZGIgXAotCS91
-c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5WaXN1YWxDLzcuMC4qLyovKi5tZGIgXAotCS91c3Iv
-bGliL21vbm8vZ2FjL01pY3Jvc29mdC5WaXN1YWxDLzcuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL01pY3Jvc29mdC5WaXN1YWxDLzcuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL01pY3Jvc29mdC5Wc2EvNy4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2Fj
-L01pY3Jvc29mdC5Wc2EvNy4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9z
-b2Z0LlZzYS83LjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuVnNh
-LzcuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL01pY3Jvc29mdC5KU2NyaXB0
-LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9NaWNyb3NvZnQuSlNjcmlwdC5kbGwqLyou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9NaWNyb3NvZnQuVmlzdWFsQy5kbGwqLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby8xLjAvTWljcm9zb2Z0LlZpc3VhbEMuZGxsKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvTWljcm9zb2Z0LlZzYS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAv
-TWljcm9zb2Z0LlZzYS5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1taWNyb3NvZnQ3LjAtY2ls
-ID0gIi91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5KU2NyaXB0LzcuMC4qLyBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvTWljcm9zb2Z0LlZpc3VhbEMvNy4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9NaWNyb3NvZnQuVnNhLzcuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvTWljcm9zb2Z0LkpT
-Y3JpcHQuZGxsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9NaWNyb3NvZnQuVmlzdWFsQy5kbGwgXAot
-CS91c3IvbGliL21vbm8vMS4wL01pY3Jvc29mdC5Wc2EuZGxsIgotRklMRVNfbGlibW9uby13aW5m
-b3JtczIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2luZG93cy5Gb3Jt
-cy8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMv
-Mi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMv
-Mi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMv
-Mi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRyYXdpbmcuRGVz
-aWduLzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRHJhd2luZy5EZXNp
-Z24vMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRyYXdpbmcuRGVz
-aWduLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EcmF3aW5nLkRl
-c2lnbi8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGVzaWdu
-LzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGVzaWduLzIuMC4qLyov
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EZXNpZ24vMi4wLiovLmRlYnVnLyBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRlc2lnbi8yLjAuKi8uLi8uZGVidWcvIFwKLQkv
-dXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uV2luZG93cy5Gb3Jtcy5kbGwqLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby8yLjAvU3lzdGVtLldpbmRvd3MuRm9ybXMuZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvU3lzdGVtLkRyYXdpbmcuRGVzaWduLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25v
-LzIuMC9TeXN0ZW0uRHJhd2luZy5EZXNpZ24uZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8y
-LjAvU3lzdGVtLkRlc2lnbi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLkRl
-c2lnbi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby13aW5mb3JtczIuMC1jaWwgPSAiL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25v
-L2dhYy9TeXN0ZW0uRHJhd2luZy5EZXNpZ24vMi4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9T
-eXN0ZW0uRGVzaWduLzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLldpbmRvd3Mu
-Rm9ybXMuZGxsIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uRHJhd2luZy5EZXNpZ24uZGxs
-IFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uRGVzaWduLmRsbCIKLUZJTEVTX2xpYm1vbm8t
-bGRhcDEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9Ob3ZlbGwuRGlyZWN0b3J5Lkxk
-YXAvMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL05vdmVsbC5EaXJlY3RvcnkuTGRh
-cC8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Ob3ZlbGwuRGlyZWN0b3J5Lkxk
-YXAvMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTm92ZWxsLkRpcmVjdG9yeS5M
-ZGFwLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL05vdmVsbC5EaXJlY3Rv
-cnkuTGRhcC5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvTm92ZWxsLkRpcmVjdG9yeS5M
-ZGFwLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLWxkYXAxLjAtY2lsID0gIi91c3IvbGliL21v
-bm8vZ2FjL05vdmVsbC5EaXJlY3RvcnkuTGRhcC8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMS4w
-L05vdmVsbC5EaXJlY3RvcnkuTGRhcC5kbGwiCi1GSUxFU19saWJtb25vLXNoYXJwemlwMi44NC1j
-aWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8yLjg0
-LiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzIu
-ODQuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExp
-Yi8yLjg0LiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBa
-aXBMaWIvMi44NC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL0lDU2hhcnBDb2Rl
-LlNoYXJwWmlwTGliLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9JQ1NoYXJwQ29kZS5T
-aGFycFppcExpYi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1zaGFycHppcDIuODQtY2lsID0g
-Ii91c3IvbGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzIuODQuKi8gXAotCS91
-c3IvbGliL21vbm8vMi4wL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLmRsbCIKLUZJTEVTX2xpYm1v
-bm8tc3lzdGVtLWRhdGEyLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRh
-dGEvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLzIuMC4qLyov
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLzIuMC4qLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3Iv
-bGliL21vbm8vMi4wL1N5c3RlbS5EYXRhLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9T
-eXN0ZW0uRGF0YS5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1zeXN0ZW0tZGF0YTIuMC1jaWwg
-PSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRhdGEvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25v
-LzIuMC9TeXN0ZW0uRGF0YS5kbGwiCi1GSUxFU19saWJtb25vLWNvcmxpYjIuMC1jaWwtZGJnICs9
-ICIvdXNyL2xpYi9tb25vL2dhYy9JMThOKi8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvSTE4TiovMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSTE4TiovMi4wLiov
-LmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvSTE4TiovMi4wLiovLi4vLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvSTE4TiouZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL0kx
-OE4qLmRsbCovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL21zY29ybGliLmRsbCoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vLzIuMC9tc2NvcmxpYi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1j
-b3JsaWIyLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL0kxOE4qLzIuMC4qLyBcCi0JL3Vzci9s
-aWIvbW9uby8yLjAvSTE4TiouZGxsIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9tc2NvcmxpYi5kbGwq
-IgotRklMRVNfbGlibW9uby13aW5mb3JtczEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uV2luZG93cy5Gb3Jtcy8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-U3lzdGVtLldpbmRvd3MuRm9ybXMvMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-U3lzdGVtLldpbmRvd3MuRm9ybXMvMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-U3lzdGVtLldpbmRvd3MuRm9ybXMvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvU3lzdGVtLkRyYXdpbmcuRGVzaWduLzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uRHJhd2luZy5EZXNpZ24vMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvU3lzdGVtLkRyYXdpbmcuRGVzaWduLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8v
-Z2FjL1N5c3RlbS5EcmF3aW5nLkRlc2lnbi8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9TeXN0ZW0uRGVzaWduLzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9T
-eXN0ZW0uRGVzaWduLzEuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5E
-ZXNpZ24vMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRlc2lnbi8x
-LjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uV2luZG93cy5Gb3Jt
-cy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLldpbmRvd3MuRm9ybXMuZGxs
-Ki8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLkRyYXdpbmcuRGVzaWduLmRsbCou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uRHJhd2luZy5EZXNpZ24uZGxsKi8qLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLkRlc2lnbi5kbGwqLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvU3lzdGVtLkRlc2lnbi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby13aW5m
-b3JtczEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldpbmRvd3MuRm9ybXMvMS4w
-LiovIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRHJhd2luZy5EZXNpZ24vMS4wLiovIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGVzaWduLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9u
-by8xLjAvU3lzdGVtLldpbmRvd3MuRm9ybXMuZGxsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0
-ZW0uRHJhd2luZy5EZXNpZ24uZGxsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uRGVzaWdu
-LmRsbCIKLUZJTEVTX2xpYm1vbm8tbWljcm9zb2Z0OC4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21v
-bm8vZ2FjL01pY3Jvc29mdC5KU2NyaXB0LzguMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9NaWNyb3NvZnQuSlNjcmlwdC84LjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9N
-aWNyb3NvZnQuSlNjcmlwdC84LjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNy
-b3NvZnQuSlNjcmlwdC84LjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNy
-b3NvZnQuVmlzdWFsQy84LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0
-LlZpc3VhbEMvOC4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZp
-c3VhbEMvOC4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZpc3Vh
-bEMvOC4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZzYS84
-LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LlZzYS84LjAuKi8qLyou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuVnNhLzguMC4qLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5Wc2EvOC4wLiovLi4vLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LkpTY3JpcHQuZGxsKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vMi4wL01pY3Jvc29mdC5KU2NyaXB0LmRsbCovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4w
-L01pY3Jvc29mdC5WaXN1YWxDLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3Nv
-ZnQuVmlzdWFsQy5kbGwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuVnNh
-LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuVnNhLmRsbCovKi5tZGIi
-Ci1GSUxFU19saWJtb25vLW1pY3Jvc29mdDguMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTWlj
-cm9zb2Z0LkpTY3JpcHQvOC4wLiovIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9NaWNyb3NvZnQuVmlz
-dWFsQy84LjAuKi8gXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5Wc2EvOC4wLiovIFwK
-LQkvdXNyL2xpYi9tb25vLzIuMC9NaWNyb3NvZnQuSlNjcmlwdC5kbGwgXAotCS91c3IvbGliL21v
-bm8vMi4wL01pY3Jvc29mdC5WaXN1YWxDLmRsbCBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9z
-b2Z0LlZzYS5kbGwiCi1GSUxFU19saWJtb25vLWNvcmxpYjEuMC1jaWwtZGJnICs9ICIvdXNyL2xp
-Yi9tb25vL2dhYy9JMThOKi8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSTE4Tiov
-MS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvSTE4TiovMS4wLiovLmRlYnVnLyBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvSTE4TiovMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIv
-bW9uby8xLjAvSTE4TiouZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL0kxOE4qLmRsbCov
-Ki5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL21zY29ybGliLmRsbCoubWRiIFwKLQkvdXNyL2xp
-Yi9tb25vLzEuMC9tc2NvcmxpYi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1jb3JsaWIxLjAt
-Y2lsID0gIi91c3IvbGliL21vbm8vZ2FjL0kxOE4qLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8x
-LjAvSTE4TiouZGxsIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9tc2NvcmxpYi5kbGwqIgotRklMRVNf
-bGlibW9uby1zeXN0ZW0td2ViMS4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3Rl
-bS5XZWIvMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5XZWIvMS4wLiov
-Ki8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldlYi8xLjAuKi8uZGVidWcvIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uV2ViLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3Iv
-bGliL21vbm8vZ2FjL1N5c3RlbS5XZWIuU2VydmljZXMvMS4wLiovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vZ2FjL1N5c3RlbS5XZWIuU2VydmljZXMvMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvU3lzdGVtLldlYi5TZXJ2aWNlcy8xLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9TeXN0ZW0uV2ViLlNlcnZpY2VzLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vMS4wL1N5c3RlbS5XZWIuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3Rl
-bS5XZWIuZGxsKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLldlYi5TZXJ2aWNl
-cy5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLldlYi5TZXJ2aWNlcy5kbGwq
-LyoubWRiIgotRklMRVNfbGlibW9uby1zeXN0ZW0td2ViMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25v
-L2dhYy9TeXN0ZW0uV2ViLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLldlYi5T
-ZXJ2aWNlcy8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3RlbS5XZWIuZGxsIFwKLQkv
-dXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uV2ViLlNlcnZpY2VzLmRsbCIKLUZJTEVTX2xpYm1vbm8t
-c3lzdGVtLXJ1bnRpbWUyLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1
-bnRpbWUuKi8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUu
-Ki8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uUnVudGltZS4qLzIu
-MC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5SdW50aW1lLiovMi4wLiov
-Li4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLlJ1bnRpbWUuKi5kbGwqLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLlJ1bnRpbWUuKi5kbGwqLyoubWRiIgotRklM
-RVNfbGlibW9uby1zeXN0ZW0tcnVudGltZTIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lz
-dGVtLlJ1bnRpbWUuKi8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5SdW50aW1l
-LiouZGxsIgotRklMRVNfbGlibW9uby1jc2NvbXBtZ2Q4LjAtY2lsLWRiZyArPSAiL3Vzci9saWIv
-bW9uby9nYWMvY3Njb21wbWdkLzguMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9jc2Nv
-bXBtZ2QvOC4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvY3Njb21wbWdkLzguMC4q
-Ly5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL2NzY29tcG1nZC84LjAuKi8uLi8uZGVidWcv
-IFwKLQkvdXNyL2xpYi9tb25vLzIuMC9jc2NvbXBtZ2QuZGxsKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vMi4wL2NzY29tcG1nZC5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1jc2NvbXBtZ2Q4LjAt
-Y2lsID0gIi91c3IvbGliL21vbm8vZ2FjL2NzY29tcG1nZC84LjAuKi8gXAotCS91c3IvbGliL21v
-bm8vMi4wL2NzY29tcG1nZC5kbGwiCi1GSUxFU19saWJtb25vLWNzY29tcG1nZDcuMC1jaWwtZGJn
-ICs9ICIvdXNyL2xpYi9tb25vL2dhYy9jc2NvbXBtZ2QvNy4wLiovKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vZ2FjL2NzY29tcG1nZC83LjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9j
-c2NvbXBtZ2QvNy4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvY3Njb21wbWdkLzcu
-MC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wL2NzY29tcG1nZC5kbGwqLm1kYiBc
-Ci0JL3Vzci9saWIvbW9uby8xLjAvY3Njb21wbWdkLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25v
-LWNzY29tcG1nZDcuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvY3Njb21wbWdkLzcuMC4qLyBc
-Ci0JL3Vzci9saWIvbW9uby8xLjAvY3Njb21wbWdkLmRsbCIKLUZJTEVTX2xpYm1vbm8tZmlyZWJp
-cmRzcWwxLjctY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvRmlyZWJpcmRTcWwuRGF0YS5G
-aXJlYmlyZC8xLjcuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvRmlyZWJpcmRTcWwuRGF0
-YS5GaXJlYmlyZC8xLjcuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9GaXJlYmlyZFNx
-bC5EYXRhLkZpcmViaXJkLzEuNy4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0ZpcmVi
-aXJkU3FsLkRhdGEuRmlyZWJpcmQvMS43LiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8x
-LjAvRmlyZWJpcmRTcWwuRGF0YS5GaXJlYmlyZC5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8x
-LjAvRmlyZWJpcmRTcWwuRGF0YS5GaXJlYmlyZC5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1m
-aXJlYmlyZHNxbDEuNy1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvRmlyZWJpcmRTcWwuRGF0YS5G
-aXJlYmlyZC8xLjcuKi8gXAotCS91c3IvbGliL21vbm8vMS4wL0ZpcmViaXJkU3FsLkRhdGEuRmly
-ZWJpcmQuZGxsIgotRklMRVNfbW9uby1qYXktZGJnICs9ICIvdXNyL2Jpbi9qYXkqLm1kYiBcCi0J
-L3Vzci9iaW4vamF5Ki8qLm1kYiIKLUZJTEVTX21vbm8tamF5ID0gIi91c3IvYmluL2pheSIKLUZJ
-TEVTX2xpYm1vbm8tZGF0YS10ZHMxLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvTW9u
-by5EYXRhLlRkcy8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlRk
-cy8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuVGRzLzEuMC4q
-Ly5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5UZHMvMS4wLiovLi4vLmRl
-YnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvTW9uby5EYXRhLlRkcy5kbGwqLm1kYiBcCi0JL3Vz
-ci9saWIvbW9uby8xLjAvTW9uby5EYXRhLlRkcy5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1k
-YXRhLXRkczEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlRkcy8xLjAuKi8g
-XAotCS91c3IvbGliL21vbm8vMS4wL01vbm8uRGF0YS5UZHMuZGxsIgotRklMRVNfbGlibW9uby1z
-cWxpdGUxLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZS8x
-LjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZS8xLjAuKi8q
-LyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuU3FsaXRlLzEuMC4qLy5kZWJ1
-Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5TcWxpdGUvMS4wLiovLi4vLmRlYnVn
-LyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZUNsaWVudC8xLjAuKi8qLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0ZUNsaWVudC8xLjAuKi8qLyou
-bWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuU3FsaXRlQ2xpZW50LzEuMC4qLy5k
-ZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5TcWxpdGVDbGllbnQvMS4wLiov
-Li4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvTW9uby5EYXRhLlNxbGl0ZS5kbGwqLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby8xLjAvTW9uby5EYXRhLlNxbGl0ZS5kbGwqLyoubWRiIFwKLQkv
-dXNyL2xpYi9tb25vLzEuMC9Nb25vLkRhdGEuU3FsaXRlQ2xpZW50LmRsbCoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vLzEuMC9Nb25vLkRhdGEuU3FsaXRlQ2xpZW50LmRsbCovKi5tZGIiCi1GSUxFU19s
-aWJtb25vLXNxbGl0ZTEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlNxbGl0
-ZS8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5TcWxpdGVDbGllbnQvMS4w
-LiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9Nb25vLkRhdGEuU3FsaXRlLmRsbCBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvTW9uby5EYXRhLlNxbGl0ZUNsaWVudC5kbGwiCi1GSUxFU19saWJtb25vLXJl
-bGF4bmcxLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvQ29tbW9ucy5YbWwuUmVsYXhu
-Zy8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQ29tbW9ucy5YbWwuUmVsYXhuZy8x
-LjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Db21tb25zLlhtbC5SZWxheG5nLzEu
-MC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0NvbW1vbnMuWG1sLlJlbGF4bmcvMS4w
-LiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQ29tbW9ucy5YbWwuUmVsYXhuZy5k
-bGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvQ29tbW9ucy5YbWwuUmVsYXhuZy5kbGwqLyou
-bWRiIgotRklMRVNfbGlibW9uby1yZWxheG5nMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9D
-b21tb25zLlhtbC5SZWxheG5nLzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQ29tbW9ucy5Y
-bWwuUmVsYXhuZy5kbGwiCi1GSUxFU19saWJtb25vLWRldi1kYmcgKz0gIi91c3IvbGliL2xpYm1v
-bm8qLmEqLm1kYiBcCi0JL3Vzci9saWIvbGlibW9ubyouYSovKi5tZGIgXAotCS91c3IvbGliL2xp
-Yk1vbm8qLmEqLm1kYiBcCi0JL3Vzci9saWIvbGliTW9ubyouYSovKi5tZGIgXAotCS91c3IvbGli
-L2xpYm1vbm8qLnNvKi5tZGIgXAotCS91c3IvbGliL2xpYm1vbm8qLnNvKi8qLm1kYiBcCi0JL3Vz
-ci9saWIvbGliTW9ub1N1cHBvcnRXLmEqLm1kYiBcCi0JL3Vzci9saWIvbGliTW9ub1N1cHBvcnRX
-LmEqLyoubWRiIFwKLQkvdXNyL2xpYi9wa2djb25maWcvbW9uby5wYyoubWRiIFwKLQkvdXNyL2xp
-Yi9wa2djb25maWcvbW9uby5wYyovKi5tZGIgXAotCS91c3IvbGliL3BrZ2NvbmZpZy9kb3RuZXQu
-cGMqLm1kYiBcCi0JL3Vzci9saWIvcGtnY29uZmlnL2RvdG5ldC5wYyovKi5tZGIgXAotCS91c3Iv
-aW5jbHVkZS8qLm1kYiBcCi0JL3Vzci9pbmNsdWRlLyovKi5tZGIgXAotCS91c3IvaW5jbHVkZS8u
-ZGVidWcvIFwKLQkvdXNyL2luY2x1ZGUvLi4vLmRlYnVnLyIKLUZJTEVTX2xpYm1vbm8tZGV2ID0g
-Ii91c3IvbGliL2xpYm1vbm8qLmEgXAotCS91c3IvbGliL2xpYk1vbm8qLmEgXAotCS91c3IvbGli
-L2xpYm1vbm8qLnNvIFwKLQkvdXNyL2xpYi9saWJNb25vU3VwcG9ydFcuYSBcCi0JL3Vzci9saWIv
-cGtnY29uZmlnL21vbm8ucGMgXAotCS91c3IvbGliL3BrZ2NvbmZpZy9kb3RuZXQucGMgXAotCS91
-c3IvaW5jbHVkZS8iCi1GSUxFU19saWJtb25vLWFjY2Vzc2liaWxpdHkxLjAtY2lsLWRiZyArPSAi
-L3Vzci9saWIvbW9uby9nYWMvQWNjZXNzaWJpbGl0eS8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvQWNjZXNzaWJpbGl0eS8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9BY2Nlc3NpYmlsaXR5LzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0FjY2Vz
-c2liaWxpdHkvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQWNjZXNzaWJp
-bGl0eS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvQWNjZXNzaWJpbGl0eS5kbGwqLyou
-bWRiIgotRklMRVNfbGlibW9uby1hY2Nlc3NpYmlsaXR5MS4wLWNpbCA9ICIvdXNyL2xpYi9tb25v
-L2dhYy9BY2Nlc3NpYmlsaXR5LzEuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvQWNjZXNzaWJp
-bGl0eS5kbGwiCi1GSUxFU19tb25vLWNvbW1vbi1kYmcgKz0gIi9ldGMvbW9ubyoubWRiIFwKLQkv
-ZXRjL21vbm8qLyoubWRiIFwKLQkvdXNyL3NoYXJlL21vbm8tMS4wL21vbm8vY2lsL2NpbC1vcGNv
-ZGVzLnhtbCoubWRiIFwKLQkvdXNyL3NoYXJlL21vbm8tMS4wL21vbm8vY2lsL2NpbC1vcGNvZGVz
-LnhtbCovKi5tZGIiCi1GSUxFU19tb25vLWNvbW1vbiA9ICIvZXRjL21vbm8gXAotCS91c3Ivc2hh
-cmUvbW9uby0xLjAvbW9uby9jaWwvY2lsLW9wY29kZXMueG1sIgotRklMRVNfbGlibW9uby1vcmFj
-bGUxLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRhdGEuT3JhY2xlQ2xp
-ZW50LzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGF0YS5PcmFjbGVD
-bGllbnQvMS4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLkRhdGEuT3Jh
-Y2xlQ2xpZW50LzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRh
-Lk9yYWNsZUNsaWVudC8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0
-ZW0uRGF0YS5PcmFjbGVDbGllbnQuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3Rl
-bS5EYXRhLk9yYWNsZUNsaWVudC5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1vcmFjbGUxLjAt
-Y2lsID0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC8xLjAuKi8g
-XAotCS91c3IvbGliL21vbm8vMS4wL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC5kbGwiCi1GSUxF
-U19saWJtb25vLXN5c3RlbS1kYXRhMS4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL1N5
-c3RlbS5EYXRhLzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGF0YS8x
-LjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGF0YS8xLjAuKi8uZGVi
-dWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uRGF0YS8xLjAuKi8uLi8uZGVidWcvIFwK
-LQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uRGF0YS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by8xLjAvU3lzdGVtLkRhdGEuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc3lzdGVtLWRhdGEx
-LjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRhLzEuMC4qLyBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvU3lzdGVtLkRhdGEuZGxsIgotRklMRVNfbGlibW9uby1ieXRlZngwLjcuNi4y
-LWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL0J5dGVGWC5EYXRhLzAuNy42LjIqLyoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vL2dhYy9CeXRlRlguRGF0YS8wLjcuNi4yKi8qLyoubWRiIFwKLQkv
-dXNyL2xpYi9tb25vL2dhYy9CeXRlRlguRGF0YS8wLjcuNi4yKi8uZGVidWcvIFwKLQkvdXNyL2xp
-Yi9tb25vL2dhYy9CeXRlRlguRGF0YS8wLjcuNi4yKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9t
-b25vLzIuMC9CeXRlRlguRGF0YS5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvQnl0ZUZY
-LkRhdGEuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tYnl0ZWZ4MC43LjYuMi1jaWwgPSAiL3Vz
-ci9saWIvbW9uby9nYWMvQnl0ZUZYLkRhdGEvMC43LjYuMiovIFwKLQkvdXNyL2xpYi9tb25vLzIu
-MC9CeXRlRlguRGF0YS5kbGwiCi1GSUxFU19saWJtb25vMC1kYmcgKz0gIi91c3IvbGliL2xpYm1v
-bm8qLnNvLioubWRiIFwKLQkvdXNyL2xpYi9saWJtb25vKi5zby4qLyoubWRiIFwKLQkvdXNyL2xp
-Yi9saWJNb25vUG9zaXhIZWxwZXIuc28qLm1kYiBcCi0JL3Vzci9saWIvbGliTW9ub1Bvc2l4SGVs
-cGVyLnNvKi8qLm1kYiBcCi0JL3Vzci9saWIvbGliTW9ub1N1cHBvcnRXLnNvKi5tZGIgXAotCS91
-c3IvbGliL2xpYk1vbm9TdXBwb3J0Vy5zbyovKi5tZGIiCi1GSUxFU19saWJtb25vMCA9ICIvdXNy
-L2xpYi9saWJtb25vKi5zby4qIFwKLQkvdXNyL2xpYi9saWJNb25vUG9zaXhIZWxwZXIuc28gXAot
-CS91c3IvbGliL2xpYk1vbm9TdXBwb3J0Vy5zbyIKLUZJTEVTX2xpYm1vbm8tc2hhcnB6aXAwLjYt
-Y2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMC42
-LiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzAu
-Ni4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGli
-LzAuNi4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlw
-TGliLzAuNi4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vY29tcGF0LTEuMC9JQ1NoYXJw
-Q29kZS5TaGFycFppcExpYi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby9jb21wYXQtMS4wL0lD
-U2hhcnBDb2RlLlNoYXJwWmlwTGliLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXNoYXJwemlw
-MC42LWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8wLjYu
-Ki8gXAotCS91c3IvbGliL21vbm8vY29tcGF0LTEuMC9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi5k
-bGwiCi1GSUxFU19saWJtb25vLWRhdGEtdGRzMi4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8v
-Z2FjL01vbm8uRGF0YS5UZHMvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8u
-RGF0YS5UZHMvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5EYXRhLlRk
-cy8yLjAuKi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRhdGEuVGRzLzIuMC4q
-Ly4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uRGF0YS5UZHMuZGxsKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uRGF0YS5UZHMuZGxsKi8qLm1kYiIKLUZJTEVTX2xp
-Ym1vbm8tZGF0YS10ZHMyLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uRGF0YS5UZHMv
-Mi4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLkRhdGEuVGRzLmRsbCIKLUZJTEVTX2xp
-Ym1vbm8tc3lzdGVtLW1lc3NhZ2luZzEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9T
-eXN0ZW0uTWVzc2FnaW5nLzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0u
-TWVzc2FnaW5nLzEuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5NZXNz
-YWdpbmcvMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLk1lc3NhZ2lu
-Zy8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uTWVzc2FnaW5n
-LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0uTWVzc2FnaW5nLmRsbCovKi5t
-ZGIiCi1GSUxFU19saWJtb25vLXN5c3RlbS1tZXNzYWdpbmcxLjAtY2lsID0gIi91c3IvbGliL21v
-bm8vZ2FjL1N5c3RlbS5NZXNzYWdpbmcvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0
-ZW0uTWVzc2FnaW5nLmRsbCIKLUZJTEVTX2xpYm1vbm8tbnBnc3FsMS4wLWNpbC1kYmcgKz0gIi91
-c3IvbGliL21vbm8vZ2FjL05wZ3NxbC8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-TnBnc3FsLzEuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL05wZ3NxbC8xLjAuKi8u
-ZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9OcGdzcWwvMS4wLiovLi4vLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby8xLjAvTnBnc3FsLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9O
-cGdzcWwuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tbnBnc3FsMS4wLWNpbCA9ICIvdXNyL2xp
-Yi9tb25vL2dhYy9OcGdzcWwvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9OcGdzcWwuZGxs
-IgotRklMRVNfbGlibW9uby1zZWN1cml0eTIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dh
-Yy9Nb25vLlNlY3VyaXR5LzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLlNl
-Y3VyaXR5LzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uU2VjdXJpdHkv
-Mi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5TZWN1cml0eS8yLjAuKi8u
-Li8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLlNlY3VyaXR5LmRsbCoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLlNlY3VyaXR5LmRsbCovKi5tZGIiCi1GSUxFU19saWJt
-b25vLXNlY3VyaXR5Mi4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLlNlY3VyaXR5LzIu
-MC4qLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTW9uby5TZWN1cml0eS5kbGwiCi1GSUxFU19saWJt
-b25vLXNlY3VyaXR5MS4wLWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uU2VjdXJp
-dHkvMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uU2VjdXJpdHkvMS4wLiov
-Ki8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5TZWN1cml0eS8xLjAuKi8uZGVidWcv
-IFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLlNlY3VyaXR5LzEuMC4qLy4uLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vMS4wL01vbm8uU2VjdXJpdHkuZGxsKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vMS4wL01vbm8uU2VjdXJpdHkuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc2VjdXJpdHkx
-LjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uU2VjdXJpdHkvMS4wLiovIFwKLQkvdXNy
-L2xpYi9tb25vLzEuMC9Nb25vLlNlY3VyaXR5LmRsbCIKLUZJTEVTX2xpYm1vbm8tYnl0ZWZ4MC43
-LjYuMS1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9CeXRlRlguRGF0YS8wLjcuNi4xKi8q
-Lm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQnl0ZUZYLkRhdGEvMC43LjYuMSovKi8qLm1kYiBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvQnl0ZUZYLkRhdGEvMC43LjYuMSovLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby9nYWMvQnl0ZUZYLkRhdGEvMC43LjYuMSovLi4vLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby8xLjAvQnl0ZUZYLkRhdGEuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL0J5
-dGVGWC5EYXRhLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLWJ5dGVmeDAuNy42LjEtY2lsID0g
-Ii91c3IvbGliL21vbm8vZ2FjL0J5dGVGWC5EYXRhLzAuNy42LjEqLyBcCi0JL3Vzci9saWIvbW9u
-by8xLjAvQnl0ZUZYLkRhdGEuZGxsIgotRklMRVNfbGlibW9uby1taWNyb3NvZnQtYnVpbGQyLjAt
-Y2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvTWljcm9zb2Z0LkJ1aWxkLiovMi4wLiovKi5t
-ZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5CdWlsZC4qLzIuMC4qLyovKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5CdWlsZC4qLzIuMC4qLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5CdWlsZC4qLzIuMC4qLy4uLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vMi4wL01pY3Jvc29mdC5CdWlsZC4qLmRsbCoubWRiIFwKLQkvdXNyL2xp
-Yi9tb25vLzIuMC9NaWNyb3NvZnQuQnVpbGQuKi5kbGwqLyoubWRiIgotRklMRVNfbGlibW9uby1t
-aWNyb3NvZnQtYnVpbGQyLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL01pY3Jvc29mdC5CdWls
-ZC4qLzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTWljcm9zb2Z0LkJ1aWxkLiouZGxsIgot
-RklMRVNfbGlibW9uby1zeXN0ZW0tbGRhcDEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMvMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-Z2FjL1N5c3RlbS5EaXJlY3RvcnlTZXJ2aWNlcy8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMvMS4wLiovLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLkRpcmVjdG9yeVNlcnZpY2VzLzEuMC4qLy4uLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vMS4wL1N5c3RlbS5EaXJlY3RvcnlTZXJ2aWNlcy5kbGwqLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLkRpcmVjdG9yeVNlcnZpY2VzLmRsbCovKi5tZGIiCi1G
-SUxFU19saWJtb25vLXN5c3RlbS1sZGFwMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0
-ZW0uRGlyZWN0b3J5U2VydmljZXMvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0u
-RGlyZWN0b3J5U2VydmljZXMuZGxsIgotRklMRVNfbGlibW9uby1yZWxheG5nMi4wLWNpbC1kYmcg
-Kz0gIi91c3IvbGliL21vbm8vZ2FjL0NvbW1vbnMuWG1sLlJlbGF4bmcvMi4wLiovKi5tZGIgXAot
-CS91c3IvbGliL21vbm8vZ2FjL0NvbW1vbnMuWG1sLlJlbGF4bmcvMi4wLiovKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvQ29tbW9ucy5YbWwuUmVsYXhuZy8yLjAuKi8uZGVidWcvIFwKLQkv
-dXNyL2xpYi9tb25vL2dhYy9Db21tb25zLlhtbC5SZWxheG5nLzIuMC4qLy4uLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vMi4wL0NvbW1vbnMuWG1sLlJlbGF4bmcuZGxsKi5tZGIgXAotCS91c3Iv
-bGliL21vbm8vMi4wL0NvbW1vbnMuWG1sLlJlbGF4bmcuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1v
-bm8tcmVsYXhuZzIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvQ29tbW9ucy5YbWwuUmVsYXhu
-Zy8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL0NvbW1vbnMuWG1sLlJlbGF4bmcuZGxsIgot
-RklMRVNfbGlibW9uby1zeXN0ZW0tbGRhcDIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-Z2FjL1N5c3RlbS5EaXJlY3RvcnlTZXJ2aWNlcy8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9TeXN0ZW0uRGlyZWN0b3J5U2VydmljZXMvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvU3lzdGVtLkRpcmVjdG9yeVNlcnZpY2VzLzIuMC4qLy4uLy5kZWJ1Zy8gXAot
-CS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5EaXJlY3RvcnlTZXJ2aWNlcy5kbGwqLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby8yLjAvU3lzdGVtLkRpcmVjdG9yeVNlcnZpY2VzLmRsbCovKi5tZGIiCi1G
-SUxFU19saWJtb25vLXN5c3RlbS1sZGFwMi4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9TeXN0
-ZW0uRGlyZWN0b3J5U2VydmljZXMvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0u
-RGlyZWN0b3J5U2VydmljZXMuZGxsIgotRklMRVNfbGlibW9uby1zeXN0ZW0tbWVzc2FnaW5nMi4w
-LWNpbC1kYmcgKz0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5NZXNzYWdpbmcvMi4wLiovKi5t
-ZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5NZXNzYWdpbmcvMi4wLiovKi8qLm1kYiBc
-Ci0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLk1lc3NhZ2luZy8yLjAuKi8uZGVidWcvIFwKLQkv
-dXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uTWVzc2FnaW5nLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vMi4wL1N5c3RlbS5NZXNzYWdpbmcuZGxsKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vMi4wL1N5c3RlbS5NZXNzYWdpbmcuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc3lzdGVt
-LW1lc3NhZ2luZzIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLk1lc3NhZ2luZy8y
-LjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5NZXNzYWdpbmcuZGxsIgotRklMRVNf
-bGlibW9uby1zaGFycHppcDAuODQtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvSUNTaGFy
-cENvZGUuU2hhcnBaaXBMaWIvMC44NC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9JQ1No
-YXJwQ29kZS5TaGFycFppcExpYi8wLjg0LiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-SUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMC44NC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8v
-Z2FjL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzAuODQuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xp
-Yi9tb25vLzEuMC9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi5kbGwqLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby8xLjAvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1v
-bm8tc2hhcnB6aXAwLjg0LWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9JQ1NoYXJwQ29kZS5TaGFy
-cFppcExpYi8wLjg0LiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9JQ1NoYXJwQ29kZS5TaGFycFpp
-cExpYi5kbGwiCi1GSUxFU19saWJtb25vLXNxbGl0ZTIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9t
-b25vL2dhYy9Nb25vLkRhdGEuU3FsaXRlLzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9Nb25vLkRhdGEuU3FsaXRlLzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01v
-bm8uRGF0YS5TcWxpdGUvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5E
-YXRhLlNxbGl0ZS8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRh
-dGEuU3FsaXRlQ2xpZW50LzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkRh
-dGEuU3FsaXRlQ2xpZW50LzIuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8u
-RGF0YS5TcWxpdGVDbGllbnQvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9u
-by5EYXRhLlNxbGl0ZUNsaWVudC8yLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xpYi9tb25vLzIu
-MC9Nb25vLkRhdGEuU3FsaXRlLmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLkRh
-dGEuU3FsaXRlLmRsbCovKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uRGF0YS5TcWxp
-dGVDbGllbnQuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uRGF0YS5TcWxpdGVD
-bGllbnQuZGxsKi8qLm1kYiIKLUZJTEVTX2xpYm1vbm8tc3FsaXRlMi4wLWNpbCA9ICIvdXNyL2xp
-Yi9tb25vL2dhYy9Nb25vLkRhdGEuU3FsaXRlLzIuMC4qLyBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-TW9uby5EYXRhLlNxbGl0ZUNsaWVudC8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8u
-RGF0YS5TcWxpdGUuZGxsIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLkRhdGEuU3FsaXRlQ2xp
-ZW50LmRsbCIKLUZJTEVTX2xpYm1vbm8tbGRhcDIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25v
-L2dhYy9Ob3ZlbGwuRGlyZWN0b3J5LkxkYXAvMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-Z2FjL05vdmVsbC5EaXJlY3RvcnkuTGRhcC8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25v
-L2dhYy9Ob3ZlbGwuRGlyZWN0b3J5LkxkYXAvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvTm92ZWxsLkRpcmVjdG9yeS5MZGFwLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vMi4wL05vdmVsbC5EaXJlY3RvcnkuTGRhcC5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by8yLjAvTm92ZWxsLkRpcmVjdG9yeS5MZGFwLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLWxk
-YXAyLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL05vdmVsbC5EaXJlY3RvcnkuTGRhcC8yLjAu
-Ki8gXAotCS91c3IvbGliL21vbm8vMi4wL05vdmVsbC5EaXJlY3RvcnkuTGRhcC5kbGwiCi1GSUxF
-U19saWJtb25vLW5wZ3NxbDIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9OcGdzcWwv
-Mi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL05wZ3NxbC8yLjAuKi8qLyoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9OcGdzcWwvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvTnBnc3FsLzIuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMi4wL05wZ3Nx
-bC5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvTnBnc3FsLmRsbCovKi5tZGIiCi1GSUxF
-U19saWJtb25vLW5wZ3NxbDIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTnBnc3FsLzIuMC4q
-LyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTnBnc3FsLmRsbCIKLUZJTEVTX2xpYm1vbm8tc3lzdGVt
-LXJ1bnRpbWUxLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUu
-Ki8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1bnRpbWUuKi8xLjAu
-Ki8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0uUnVudGltZS4qLzEuMC4qLy5k
-ZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5SdW50aW1lLiovMS4wLiovLi4vLmRl
-YnVnLyBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLlJ1bnRpbWUuKi5kbGwqLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby8xLjAvU3lzdGVtLlJ1bnRpbWUuKi5kbGwqLyoubWRiIgotRklMRVNfbGli
-bW9uby1zeXN0ZW0tcnVudGltZTEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtLlJ1
-bnRpbWUuKi8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMS4wL1N5c3RlbS5SdW50aW1lLiouZGxs
-IgotRklMRVNfbGlibW9uby1vcmFjbGUyLjAtY2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMv
-U3lzdGVtLkRhdGEuT3JhY2xlQ2xpZW50LzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dh
-Yy9TeXN0ZW0uRGF0YS5PcmFjbGVDbGllbnQvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvU3lzdGVtLkRhdGEuT3JhY2xlQ2xpZW50LzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC8yLjAuKi8uLi8uZGVidWcvIFwKLQkv
-dXNyL2xpYi9tb25vLzIuMC9TeXN0ZW0uRGF0YS5PcmFjbGVDbGllbnQuZGxsKi5tZGIgXAotCS91
-c3IvbGliL21vbm8vMi4wL1N5c3RlbS5EYXRhLk9yYWNsZUNsaWVudC5kbGwqLyoubWRiIgotRklM
-RVNfbGlibW9uby1vcmFjbGUyLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL1N5c3RlbS5EYXRh
-Lk9yYWNsZUNsaWVudC8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL1N5c3RlbS5EYXRhLk9y
-YWNsZUNsaWVudC5kbGwiCi1GSUxFU19saWJtb25vLWM1LTEuMC1jaWwtZGJnICs9ICIvdXNyL2xp
-Yi9tb25vL2dhYy9Nb25vLkM1LzEuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25v
-LkM1LzEuMC4qLyovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uQzUvMS4wLiovLmRl
-YnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby5DNS8xLjAuKi8uLi8uZGVidWcvIFwKLQkv
-dXNyL2xpYi9tb25vLzIuMC9Nb25vLkM1LmRsbCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9N
-b25vLkM1LmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLWM1LTEuMC1jaWwgPSAiL3Vzci9saWIv
-bW9uby9nYWMvTW9uby5DNS8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uQzUuZGxs
-IgotRklMRVNfbGlibW9uby1zaGFycHppcDIuNi1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dh
-Yy9JQ1NoYXJwQ29kZS5TaGFycFppcExpYi8yLjYuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMi42LiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9u
-by9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMi42LiovLmRlYnVnLyBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIvMi42LiovLi4vLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby9jb21wYXQtMi4wL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLmRsbCoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vL2NvbXBhdC0yLjAvSUNTaGFycENvZGUuU2hhcnBaaXBMaWIuZGxsKi8q
-Lm1kYiIKLUZJTEVTX2xpYm1vbm8tc2hhcnB6aXAyLjYtY2lsID0gIi91c3IvbGliL21vbm8vZ2Fj
-L0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLzIuNi4qLyBcCi0JL3Vzci9saWIvbW9uby9jb21wYXQt
-Mi4wL0lDU2hhcnBDb2RlLlNoYXJwWmlwTGliLmRsbCIKLUZJTEVTX2xpYm1vbm8tY2Fpcm8yLjAt
-Y2lsLWRiZyArPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DYWlyby8yLjAuKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvTW9uby5DYWlyby8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9Nb25vLkNhaXJvLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL01v
-bm8uQ2Fpcm8vMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvTW9uby5DYWly
-by5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvTW9uby5DYWlyby5kbGwqLyoubWRiIgot
-RklMRVNfbGlibW9uby1jYWlybzIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DYWly
-by8yLjAuKi8gXAotCS91c3IvbGliL21vbm8vMi4wL01vbm8uQ2Fpcm8uZGxsIgotRklMRVNfbGli
-bW9uby1wZWFwaTIuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25vL2dhYy9QRUFQSS8yLjAuKi8q
-Lm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvUEVBUEkvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9s
-aWIvbW9uby9nYWMvUEVBUEkvMi4wLiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvUEVB
-UEkvMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby8yLjAvUEVBUEkuZGxsKi5tZGIg
-XAotCS91c3IvbGliL21vbm8vMi4wL1BFQVBJLmRsbCovKi5tZGIiCi1GSUxFU19saWJtb25vLXBl
-YXBpMi4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9QRUFQSS8yLjAuKi8gXAotCS91c3IvbGli
-L21vbm8vMi4wL1BFQVBJLmRsbCIKLUZJTEVTX21vbm8tbWNzLWRiZyArPSAiL3Vzci9iaW4vKi5t
-ZGIgXAotCS91c3IvYmluLyovKi5tZGIgXAotCS91c3IvYmluLy5kZWJ1Zy8gXAotCS91c3IvYmlu
-Ly4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vMS4wLyouZXhlKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vMS4wLyouZXhlKi8qLm1kYiIKLUZJTEVTX21vbm8tbWNzID0gIi91c3IvYmluLyBcCi0J
-L3Vzci9saWIvbW9uby8xLjAvKi5leGUqIgotRklMRVNfbGlibW9uby1zeXN0ZW0xLjAtY2lsLWRi
-ZyArPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtKi8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvU3lzdGVtKi8xLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0
-ZW0qLzEuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbSovMS4wLiovLi4v
-LmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvQ3VzdG9tTWFyc2hhbGVycy8xLjAuKi8qLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby9nYWMvQ3VzdG9tTWFyc2hhbGVycy8xLjAuKi8qLyoubWRiIFwK
-LQkvdXNyL2xpYi9tb25vL2dhYy9DdXN0b21NYXJzaGFsZXJzLzEuMC4qLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vZ2FjL0N1c3RvbU1hcnNoYWxlcnMvMS4wLiovLi4vLmRlYnVnLyBcCi0JL3Vz
-ci9saWIvbW9uby8xLjAvU3lzdGVtKi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8xLjAvU3lz
-dGVtKi5kbGwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9DdXN0b21NYXJzaGFsZXJzLmRs
-bCoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9DdXN0b21NYXJzaGFsZXJzLmRsbCovKi5tZGIi
-Ci1GSUxFU19saWJtb25vLXN5c3RlbTEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVt
-Ki8xLjAuKi8gXAotCS91c3IvbGliL21vbm8vZ2FjL0N1c3RvbU1hcnNoYWxlcnMvMS4wLiovIFwK
-LQkvdXNyL2xpYi9tb25vLzEuMC9TeXN0ZW0qLmRsbCBcCi0JL3Vzci9saWIvbW9uby8xLjAvQ3Vz
-dG9tTWFyc2hhbGVycy5kbGwqIgotRklMRVNfbGlibW9uby1zeXN0ZW0yLjAtY2lsLWRiZyArPSAi
-L3Vzci9saWIvbW9uby9nYWMvU3lzdGVtKi8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9n
-YWMvU3lzdGVtKi8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9TeXN0ZW0qLzIu
-MC4qLy5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL1N5c3RlbSovMi4wLiovLi4vLmRlYnVn
-LyBcCi0JL3Vzci9saWIvbW9uby9nYWMvQ3VzdG9tTWFyc2hhbGVycy8yLjAuKi8qLm1kYiBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvQ3VzdG9tTWFyc2hhbGVycy8yLjAuKi8qLyoubWRiIFwKLQkvdXNy
-L2xpYi9tb25vL2dhYy9DdXN0b21NYXJzaGFsZXJzLzIuMC4qLy5kZWJ1Zy8gXAotCS91c3IvbGli
-L21vbm8vZ2FjL0N1c3RvbU1hcnNoYWxlcnMvMi4wLiovLi4vLmRlYnVnLyBcCi0JL3Vzci9saWIv
-bW9uby8yLjAvU3lzdGVtKi5kbGwqLm1kYiBcCi0JL3Vzci9saWIvbW9uby8yLjAvU3lzdGVtKi5k
-bGwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9DdXN0b21NYXJzaGFsZXJzLmRsbCoubWRi
-IFwKLQkvdXNyL2xpYi9tb25vLzIuMC9DdXN0b21NYXJzaGFsZXJzLmRsbCovKi5tZGIiCi1GSUxF
-U19saWJtb25vLXN5c3RlbTIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvU3lzdGVtKi8yLjAu
-Ki8gXAotCS91c3IvbGliL21vbm8vZ2FjL0N1c3RvbU1hcnNoYWxlcnMvMi4wLiovIFwKLQkvdXNy
-L2xpYi9tb25vLzIuMC9TeXN0ZW0qLmRsbCBcCi0JL3Vzci9saWIvbW9uby8yLjAvQ3VzdG9tTWFy
-c2hhbGVycy5kbGwqIgotRklMRVNfbGlibW9ubzEuMC1jaWwtZGJnICs9ICIvdXNyL2xpYi9tb25v
-L2dhYy9Nb25vLiovMS4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL01vbm8uKi8xLjAu
-Ki8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLiovMS4wLiovLmRlYnVnLyBcCi0J
-L3Vzci9saWIvbW9uby9nYWMvTW9uby4qLzEuMC4qLy4uLy5kZWJ1Zy8gXAotCS91c3IvbGliL21v
-bm8vZ2FjL09wZW5TeXN0ZW0uQy8xLjAuKi5tZGIgXAotCS91c3IvbGliL21vbm8vZ2FjL09wZW5T
-eXN0ZW0uQy8xLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvbW9uby1zZXJ2aWNlLzEu
-MC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9tb25vLXNlcnZpY2UvMS4wLiovKi8qLm1k
-YiBcCi0JL3Vzci9saWIvbW9uby9nYWMvbW9uby1zZXJ2aWNlLzEuMC4qLy5kZWJ1Zy8gXAotCS91
-c3IvbGliL21vbm8vZ2FjL21vbm8tc2VydmljZS8xLjAuKi8uLi8uZGVidWcvIFwKLQkvdXNyL2xp
-Yi9tb25vLzEuMC9Nb25vLiouZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMS4wL01vbm8uKi5k
-bGwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9PcGVuU3lzdGVtLkMuZGxsKi5tZGIgXAot
-CS91c3IvbGliL21vbm8vMS4wL09wZW5TeXN0ZW0uQy5kbGwqLyoubWRiIgotRklMRVNfbGlibW9u
-bzEuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby4qLzEuMC4qLyBcCi0JL3Vzci9saWIv
-bW9uby9nYWMvT3BlblN5c3RlbS5DLzEuMC4qIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9tb25vLXNl
-cnZpY2UvMS4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzEuMC9Nb25vLiouZGxsIFwKLQkvdXNyL2xp
-Yi9tb25vLzEuMC9PcGVuU3lzdGVtLkMuZGxsIgotRklMRVNfbGlibW9ubzIuMC1jaWwtZGJnICs9
-ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLiovMi4wLiovKi5tZGIgXAotCS91c3IvbGliL21vbm8v
-Z2FjL01vbm8uKi8yLjAuKi8qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9Nb25vLiovMi4w
-LiovLmRlYnVnLyBcCi0JL3Vzci9saWIvbW9uby9nYWMvTW9uby4qLzIuMC4qLy4uLy5kZWJ1Zy8g
-XAotCS91c3IvbGliL21vbm8vZ2FjL09wZW5TeXN0ZW0uQy8yLjAuKi5tZGIgXAotCS91c3IvbGli
-L21vbm8vZ2FjL09wZW5TeXN0ZW0uQy8yLjAuKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMv
-bW9uby1zZXJ2aWNlLzIuMC4qLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vL2dhYy9tb25vLXNlcnZp
-Y2UvMi4wLiovKi8qLm1kYiBcCi0JL3Vzci9saWIvbW9uby9nYWMvbW9uby1zZXJ2aWNlLzIuMC4q
-Ly5kZWJ1Zy8gXAotCS91c3IvbGliL21vbm8vZ2FjL21vbm8tc2VydmljZS8yLjAuKi8uLi8uZGVi
-dWcvIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLiouZGxsKi5tZGIgXAotCS91c3IvbGliL21v
-bm8vMi4wL01vbm8uKi5kbGwqLyoubWRiIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9PcGVuU3lzdGVt
-LkMuZGxsKi5tZGIgXAotCS91c3IvbGliL21vbm8vMi4wL09wZW5TeXN0ZW0uQy5kbGwqLyoubWRi
-IgotRklMRVNfbGlibW9ubzIuMC1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby4qLzIuMC4q
-LyBcCi0JL3Vzci9saWIvbW9uby9nYWMvT3BlblN5c3RlbS5DLzIuMC4qIFwKLQkvdXNyL2xpYi9t
-b25vL2dhYy9tb25vLXNlcnZpY2UvMi4wLiovIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9Nb25vLiou
-ZGxsIFwKLQkvdXNyL2xpYi9tb25vLzIuMC9PcGVuU3lzdGVtLkMuZGxsIgotCi1QQUNLQUdFUyA9
-ICJtb25vLWppdC1kYmcgXAotCW1vbm8taml0IFwKLQltb25vLWdhYy1kYmcgXAotCW1vbm8tZ2Fj
-IFwKLQltb25vLW1qcy1kYmcgXAotCW1vbm8tbWpzIFwKLQltb25vLWdtY3MtZGJnIFwKLQltb25v
-LWdtY3MgXAotCW1vbm8tdXRpbHMtZGJnIFwKLQltb25vLXV0aWxzIFwKLQlsaWJtb25vLXBlYXBp
-MS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tcGVhcGkxLjAtY2lsIFwKLQlsaWJtb25vLWNhaXJvMS4w
-LWNpbC1kYmcgXAotCWxpYm1vbm8tY2Fpcm8xLjAtY2lsIFwKLQlsaWJtb25vLXN5c3RlbS13ZWIy
-LjAtY2lsLWRiZyBcCi0JbGlibW9uby1zeXN0ZW0td2ViMi4wLWNpbCBcCi0JbGlibW9uby1hY2Nl
-c3NpYmlsaXR5Mi4wLWNpbC1kYmcgXAotCWxpYm1vbm8tYWNjZXNzaWJpbGl0eTIuMC1jaWwgXAot
-CWxpYm1vbm8tbWljcm9zb2Z0Ny4wLWNpbC1kYmcgXAotCWxpYm1vbm8tbWljcm9zb2Z0Ny4wLWNp
-bCBcCi0JbGlibW9uby13aW5mb3JtczIuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXdpbmZvcm1zMi4w
-LWNpbCBcCi0JbGlibW9uby1sZGFwMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tbGRhcDEuMC1jaWwg
-XAotCWxpYm1vbm8tc2hhcnB6aXAyLjg0LWNpbC1kYmcgXAotCWxpYm1vbm8tc2hhcnB6aXAyLjg0
-LWNpbCBcCi0JbGlibW9uby1zeXN0ZW0tZGF0YTIuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXN5c3Rl
-bS1kYXRhMi4wLWNpbCBcCi0JbGlibW9uby1jb3JsaWIyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1j
-b3JsaWIyLjAtY2lsIFwKLQlsaWJtb25vLXdpbmZvcm1zMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8t
-d2luZm9ybXMxLjAtY2lsIFwKLQlsaWJtb25vLW1pY3Jvc29mdDguMC1jaWwtZGJnIFwKLQlsaWJt
-b25vLW1pY3Jvc29mdDguMC1jaWwgXAotCWxpYm1vbm8tY29ybGliMS4wLWNpbC1kYmcgXAotCWxp
-Ym1vbm8tY29ybGliMS4wLWNpbCBcCi0JbGlibW9uby1zeXN0ZW0td2ViMS4wLWNpbC1kYmcgXAot
-CWxpYm1vbm8tc3lzdGVtLXdlYjEuMC1jaWwgXAotCWxpYm1vbm8tc3lzdGVtLXJ1bnRpbWUyLjAt
-Y2lsLWRiZyBcCi0JbGlibW9uby1zeXN0ZW0tcnVudGltZTIuMC1jaWwgXAotCWxpYm1vbm8tY3Nj
-b21wbWdkOC4wLWNpbC1kYmcgXAotCWxpYm1vbm8tY3Njb21wbWdkOC4wLWNpbCBcCi0JbGlibW9u
-by1jc2NvbXBtZ2Q3LjAtY2lsLWRiZyBcCi0JbGlibW9uby1jc2NvbXBtZ2Q3LjAtY2lsIFwKLQls
-aWJtb25vLWZpcmViaXJkc3FsMS43LWNpbC1kYmcgXAotCWxpYm1vbm8tZmlyZWJpcmRzcWwxLjct
-Y2lsIFwKLQltb25vLWpheS1kYmcgXAotCW1vbm8tamF5IFwKLQlsaWJtb25vLWRhdGEtdGRzMS4w
-LWNpbC1kYmcgXAotCWxpYm1vbm8tZGF0YS10ZHMxLjAtY2lsIFwKLQlsaWJtb25vLXNxbGl0ZTEu
-MC1jaWwtZGJnIFwKLQlsaWJtb25vLXNxbGl0ZTEuMC1jaWwgXAotCWxpYm1vbm8tcmVsYXhuZzEu
-MC1jaWwtZGJnIFwKLQlsaWJtb25vLXJlbGF4bmcxLjAtY2lsIFwKLQlsaWJtb25vLWRldi1kYmcg
-XAotCWxpYm1vbm8tZGV2IFwKLQlsaWJtb25vLWFjY2Vzc2liaWxpdHkxLjAtY2lsLWRiZyBcCi0J
-bGlibW9uby1hY2Nlc3NpYmlsaXR5MS4wLWNpbCBcCi0JbW9uby1jb21tb24tZGJnIFwKLQltb25v
-LWNvbW1vbiBcCi0JbGlibW9uby1vcmFjbGUxLjAtY2lsLWRiZyBcCi0JbGlibW9uby1vcmFjbGUx
-LjAtY2lsIFwKLQlsaWJtb25vLXN5c3RlbS1kYXRhMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3lz
-dGVtLWRhdGExLjAtY2lsIFwKLQlsaWJtb25vLWJ5dGVmeDAuNy42LjItY2lsLWRiZyBcCi0JbGli
-bW9uby1ieXRlZngwLjcuNi4yLWNpbCBcCi0JbGlibW9ubzAtZGJnIFwKLQlsaWJtb25vMCBcCi0J
-bGlibW9uby1zaGFycHppcDAuNi1jaWwtZGJnIFwKLQlsaWJtb25vLXNoYXJwemlwMC42LWNpbCBc
-Ci0JbGlibW9uby1kYXRhLXRkczIuMC1jaWwtZGJnIFwKLQlsaWJtb25vLWRhdGEtdGRzMi4wLWNp
-bCBcCi0JbGlibW9uby1zeXN0ZW0tbWVzc2FnaW5nMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3lz
-dGVtLW1lc3NhZ2luZzEuMC1jaWwgXAotCWxpYm1vbm8tbnBnc3FsMS4wLWNpbC1kYmcgXAotCWxp
-Ym1vbm8tbnBnc3FsMS4wLWNpbCBcCi0JbGlibW9uby1zZWN1cml0eTIuMC1jaWwtZGJnIFwKLQls
-aWJtb25vLXNlY3VyaXR5Mi4wLWNpbCBcCi0JbGlibW9uby1zZWN1cml0eTEuMC1jaWwtZGJnIFwK
-LQlsaWJtb25vLXNlY3VyaXR5MS4wLWNpbCBcCi0JbGlibW9uby1ieXRlZngwLjcuNi4xLWNpbC1k
-YmcgXAotCWxpYm1vbm8tYnl0ZWZ4MC43LjYuMS1jaWwgXAotCWxpYm1vbm8tbWljcm9zb2Z0LWJ1
-aWxkMi4wLWNpbC1kYmcgXAotCWxpYm1vbm8tbWljcm9zb2Z0LWJ1aWxkMi4wLWNpbCBcCi0JbGli
-bW9uby1zeXN0ZW0tbGRhcDEuMC1jaWwtZGJnIFwKLQlsaWJtb25vLXN5c3RlbS1sZGFwMS4wLWNp
-bCBcCi0JbGlibW9uby1yZWxheG5nMi4wLWNpbC1kYmcgXAotCWxpYm1vbm8tcmVsYXhuZzIuMC1j
-aWwgXAotCWxpYm1vbm8tc3lzdGVtLWxkYXAyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1zeXN0ZW0t
-bGRhcDIuMC1jaWwgXAotCWxpYm1vbm8tc3lzdGVtLW1lc3NhZ2luZzIuMC1jaWwtZGJnIFwKLQls
-aWJtb25vLXN5c3RlbS1tZXNzYWdpbmcyLjAtY2lsIFwKLQlsaWJtb25vLXNoYXJwemlwMC44NC1j
-aWwtZGJnIFwKLQlsaWJtb25vLXNoYXJwemlwMC44NC1jaWwgXAotCWxpYm1vbm8tc3FsaXRlMi4w
-LWNpbC1kYmcgXAotCWxpYm1vbm8tc3FsaXRlMi4wLWNpbCBcCi0JbGlibW9uby1sZGFwMi4wLWNp
-bC1kYmcgXAotCWxpYm1vbm8tbGRhcDIuMC1jaWwgXAotCWxpYm1vbm8tbnBnc3FsMi4wLWNpbC1k
-YmcgXAotCWxpYm1vbm8tbnBnc3FsMi4wLWNpbCBcCi0JbGlibW9uby1zeXN0ZW0tcnVudGltZTEu
-MC1jaWwtZGJnIFwKLQlsaWJtb25vLXN5c3RlbS1ydW50aW1lMS4wLWNpbCBcCi0JbGlibW9uby1v
-cmFjbGUyLjAtY2lsLWRiZyBcCi0JbGlibW9uby1vcmFjbGUyLjAtY2lsIFwKLQlsaWJtb25vLWM1
-LTEuMC1jaWwtZGJnIFwKLQlsaWJtb25vLWM1LTEuMC1jaWwgXAotCWxpYm1vbm8tc2hhcnB6aXAy
-LjYtY2lsLWRiZyBcCi0JbGlibW9uby1zaGFycHppcDIuNi1jaWwgXAotCWxpYm1vbm8tY2Fpcm8y
-LjAtY2lsLWRiZyBcCi0JbGlibW9uby1jYWlybzIuMC1jaWwgXAotCWxpYm1vbm8tcGVhcGkyLjAt
-Y2lsLWRiZyBcCi0JbGlibW9uby1wZWFwaTIuMC1jaWwgXAotCW1vbm8tbWNzLWRiZyBcCi0JbW9u
-by1tY3MgXAotCWxpYm1vbm8tc3lzdGVtMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8tc3lzdGVtMS4w
-LWNpbCBcCi0JbGlibW9uby1zeXN0ZW0yLjAtY2lsLWRiZyBcCi0JbGlibW9uby1zeXN0ZW0yLjAt
-Y2lsIFwKLQlsaWJtb25vMS4wLWNpbC1kYmcgXAotCWxpYm1vbm8xLjAtY2lsIFwKLQlsaWJtb25v
-Mi4wLWNpbC1kYmcgXAotCWxpYm1vbm8yLjAtY2lsIgpkaWZmIC11cHJOIGEvcmVjaXBlcy9tb25v
-L21vbm9fMS4yLjUuaW5jIGIvcmVjaXBlcy9tb25vL21vbm9fMS4yLjUuaW5jCi0tLSBhL3JlY2lw
-ZXMvbW9uby9tb25vXzEuMi41LmluYwkyMDA5LTA3LTIwIDEyOjUwOjQ4LjEwNDY4MDkzMyAtMDYw
-MAorKysgYi9yZWNpcGVzL21vbm8vbW9ub18xLjIuNS5pbmMJMTk2OS0xMi0zMSAxNzowMDowMC4w
-MDAwMDAwMDAgLTA3MDAKQEAgLTEsMTIgKzAsMCBAQAotREVTQ1JJUFRJT04gPSAiTW9ubyBQcm9n
-cmFtbWluZyBMYW5ndWFnZSIKLVNFQ1RJT04gPSAiZGV2ZWwvbW9ubyIKLUxJQ0VOU0UgPSAiR1BM
-IExHUEwgWDExIgotCi1TUkNfVVJJID0gImh0dHA6Ly9nby1tb25vLmNvbS9zb3VyY2VzL21vbm8v
-bW9uby0ke1BWfS50YXIuYnoyIgotCi1TID0gIiR7V09SS0RJUn0vbW9uby0ke1BWfSIKLQotaW5o
-ZXJpdCBhdXRvdG9vbHMKLUVYVFJBX09FQ09ORl9hcm0gPSAiLS13aXRob3V0LXRscyIKLUVYVFJB
-X09FQ09ORl9taXBzZWwgPSAiLS13aXRob3V0LXRscyIKLQpkaWZmIC11cHJOIGEvcmVjaXBlcy9t
-b25vL21vbm8tMS4yLjYvY29uZmlndXJlLnBhdGNoIGIvcmVjaXBlcy9tb25vL21vbm8tMS4yLjYv
-Y29uZmlndXJlLnBhdGNoCi0tLSBhL3JlY2lwZXMvbW9uby9tb25vLTEuMi42L2NvbmZpZ3VyZS5w
-YXRjaAkyMDA5LTA3LTIwIDEyOjUwOjQ4LjEwMTY4Njg1MyAtMDYwMAorKysgYi9yZWNpcGVzL21v
-bm8vbW9uby0xLjIuNi9jb25maWd1cmUucGF0Y2gJMTk2OS0xMi0zMSAxNzowMDowMC4wMDAwMDAw
-MDAgLTA3MDAKQEAgLTEsMjMgKzAsMCBAQAotSW5kZXg6IG1vbm8tMS4yLjYvY29uZmlndXJlLmlu
-Ci09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09Ci0tLS0gbW9uby0xLjIuNi5vcmlnL2NvbmZpZ3VyZS5pbgkyMDA3LTExLTA4
-IDE3OjA3OjU3LjAwMDAwMDAwMCAtMDUwMAotKysrIG1vbm8tMS4yLjYvY29uZmlndXJlLmluCTIw
-MDctMTItMTIgMTU6Mjc6NTIuMDAwMDAwMDAwIC0wNTAwCi1AQCAtMTE1MCw2ICsxMTUwLDggQEAK
-LSAJCV0sIFsKLSAJCQkJQUNfTVNHX1JFU1VMVChubykKLSAJCQkJd2l0aF90bHM9cHRocmVhZAot
-KwkJXSwgWwotKwkJCQlBQ19NU0dfUkVTVUxUKHllcykKLSAJCV0pCi0gCWZpCi0gCi1AQCAtMTI1
-Miw2ICsxMjU0LDkgQEAKLSAJCV0sIFsKLSAJCQkJd2l0aF9zaWdhbHRzdGFjaz1ubwotIAkJCQlB
-Q19NU0dfUkVTVUxUKG5vKQotKwkJXSwgWwotKwkJCQlBQ19NU0dfUkVTVUxUKHllcykKLSsJCQkJ
-QUNfREVGSU5FKEhBVkVfV09SS0lOR19TSUdBTFRTVEFDSykKLSAJCV0pCi0gCWZpCi0gCmRpZmYg
-LXVwck4gYS9yZWNpcGVzL21vbm8vbW9ub18xLjIuNi5iYiBiL3JlY2lwZXMvbW9uby9tb25vXzEu
-Mi42LmJiCi0tLSBhL3JlY2lwZXMvbW9uby9tb25vXzEuMi42LmJiCTIwMDktMDctMjAgMTI6NTA6
-NDguMTA0NjgwOTMzIC0wNjAwCisrKyBiL3JlY2lwZXMvbW9uby9tb25vXzEuMi42LmJiCTE5Njkt
-MTItMzEgMTc6MDA6MDAuMDAwMDAwMDAwIC0wNzAwCkBAIC0xLDgxICswLDAgQEAKLXJlcXVpcmUg
-bW9ub18xLjIuNi5pbmMKLQotREVQRU5EUyA9ICJtb25vLW5hdGl2ZSBtb25vLW1jcy1pbnRlcm1l
-ZGlhdGUgZ2xpYi0yLjAgcGVybC1uYXRpdmUiCi0KLVBSID0gInIyIgotCi0jIG1vbm8gbWFrZXMg
-dXNlIG9mIG5vbi10aHVtYi1jb21wYXRpYmxlIGlubGluZSBhc20uCi1BUk1fSU5TVFJVQ1RJT05f
-U0VUID0gImFybSIKLQotU1JDX1VSSSArPSAiZmlsZTovL2NvbmZpZ3VyZS5wYXRjaDtwYXRjaD0x
-IgotCi0jIFBlciBodHRwOi8vd3d3Lm1vbm8tcHJvamVjdC5jb20vTW9ubzpBUk0KLUVYVFJBX09F
-Q09ORiArPSAiIC0tZGlzYWJsZS1tY3MtYnVpbGQgIgotIyBJbnN0ZWFkLCBnZXQgdGhlIG1jcyB0
-cmVlIGZyb20gYSBkaWZmZXJlbnQgYnVpbGQgKHNlZSBtb25vLW1jcy1pbnRlcm1lZGlhdGUpCi0K
-LWRvX2luc3RhbGxfcHJlcGVuZCgpIHsKLQlpbnN0YWxsIC1kICR7RH0KLQljZCAke0R9Ci0JdGFy
-IC14emYgJHtTVEFHSU5HX0RBVEFESVJfTkFUSVZFfS9tb25vLW1jcy9tb25vLW1jcy0ke1BWfS50
-YXIuZ3oKLQljZCAke1N9Ci19Ci0KLWRvX2luc3RhbGxfYXBwZW5kKCkgewotCSMgbW9uby1tY3Mt
-aW50ZXJtZWRpYXRlIGJ1aWxkcyBhbmQgaW5zdGFsbHMgamF5IChhIFlhY2MgZm9yIEphdmEgYW5k
-IEMjKSwKLQkjIGhvd2V2ZXIsIGpheSBpcyBub3QgYmVpbmcgY3Jvc3MtY29tcGlsZWQgYW5kIHRo
-dXMgb25seQotCSMgYXZhaWxhYmxlIGZvciB0aGUgYnVpbGRob3N0IGFyY2hpdGVjdHVyZSwgc28g
-cmVtb3ZlIGl0Ci0JIyBlbnRpcmVseQotCWNkICR7RH0KLQlybSAtcmYgLi91c3Ivc2hhcmUvbWFu
-L21hbjEvamF5LjEgLi91c3Ivc2hhcmUvamF5IFwKLQkgICAgLi91c3Ivc2hhcmUvamF5L1JFQURN
-RS5qYXkgXAotCSAgICAuL3Vzci9iaW4vamF5Ci0JY2QgJHtTfQotCi0JIyBOb3QgcGFja2FnZWQg
-d2l0aCB0aGUgZGVmYXVsdCBydWxlcyBhbmQgYXBwYXJlbnRseQotCSMgbm90IHVzZWQgZm9yIGFu
-eXRoaW5nCi0Jcm0gLXJmICR7RH0ke2RhdGFkaXJ9L21vbm8tMS4wL21vbm8vY2lsL2NpbC1vcGNv
-ZGVzLnhtbAotfQotCi1pbmhlcml0IG1vbm8KLQotIyBJbXBvcnQgZmlsZSBkZWZpbml0aW9ucyBm
-cm9tIERlYmlhbgotcmVxdWlyZSBtb25vXzEuMi41LjEtZmlsZXMuaW5jCi0KLSMgQWRkIHNvbWUg
-cGFja2FnZXMKLVBBQ0tBR0VTX2FwcGVuZCA9ICIgbW9uby1kb2MgbW9ubyBtb25vLXJ1bnRpbWUi
-Ci0KLUZJTEVTX21vbm8tZG9jX2FwcGVuZCA9ICIgL3Vzci9zaGFyZS9saWJnYy1tb25vLyAiCi0K
-LUZJTEVTX21vbm8gPSAiIgotQUxMT1dfRU1QVFlfbW9ubyA9ICIxIgotUkRFUEVORFNfbW9ubyA9
-ICJtb25vLWNvbW1vbiBtb25vLWppdCIKLQotRklMRVNfbW9uby1ydW50aW1lID0gIiIKLUFMTE9X
-X0VNUFRZX21vbm8tcnVudGltZSA9ICIxIgotUkRFUEVORFNfbW9uby1ydW50aW1lID0gIm1vbm8t
-aml0IG1vbm8tZ2FjIgotCi1SREVQRU5EU19tb25vLWppdCA9ICJtb25vLWNvbW1vbiIKLQotRklM
-RVNfbGlibW9uby1kZXYgPSsgIiAvdXNyL2xpYi9saWJtb25vLmxhIC91c3IvbGliL2xpYm1vbm8t
-cHJvZmlsZXItY292LmxhIC91c3IvbGliL2xpYm1vbm8tcHJvZmlsZXItYW90LmxhIFwKLQkvdXNy
-L2xpYi9saWJNb25vUG9zaXhIZWxwZXIubGEgL3Vzci9saWIvbGliTW9ub1N1cHBvcnRXLmxhIgot
-RklMRVNfbGlibW9uby1kYmcgPSsgIiAvdXNyL2xpYi8uZGVidWcvbGlibW9ubyouc28uKiAvdXNy
-L2xpYi8uZGVidWcvbGliaWt2bS1uYXRpdmUuc28gXAotCS91c3IvbGliLy5kZWJ1Zy9saWJNb25v
-UG9zaXhIZWxwZXIuc28gL3Vzci9saWIvLmRlYnVnL2xpYk1vbm9TdXBwb3J0Vy5zbyIKLQotIyBQ
-YWNrYWdlcyBub3QgaW5jbHVkZWQgaW4gRGViaWFuCi1QQUNLQUdFU19wcmVwZW5kID0gImxpYm51
-bml0Mi4yLWNpbC1kYmcgbGlibnVuaXQyLjItY2lsLWRldiBsaWJudW5pdDIuMi1jaWwgXAotCWxp
-Ym1vbm8tY2VjaWwwLjUtY2lsLWRiZyBsaWJtb25vLWNlY2lsMC41LWNpbC1kZXYgbGlibW9uby1j
-ZWNpbDAuNS1jaWwgXAotCWxpYm1vbm8tZGIyLTEuMC1jaWwtZGJnIGxpYm1vbm8tZGIyLTEuMC1j
-aWwtZGV2IGxpYm1vbm8tZGIyLTEuMC1jaWwiCi0KLUZJTEVTX2xpYm51bml0Mi4yLWNpbCA9ICIv
-dXNyL2xpYi9tb25vL2dhYy9udW5pdC4qLzIuMi4qIC91c3IvbGliL21vbm8vMS4wL251bml0Liou
-ZGxsIgotRklMRVNfbGlibnVuaXQyLjItY2lsLWRldiA9ICIvdXNyL2xpYi9wa2djb25maWcvbW9u
-by1udW5pdC5wYyIKLUZJTEVTX2xpYm51bml0Mi4yLWNpbC1kYmcgPSAiL3Vzci9saWIvbW9uby9n
-YWMvbnVuaXQqLzIuMi4qL251bml0LiouZGxsLm1kYiIKLQotRklMRVNfbGlibW9uby1jZWNpbDAu
-NS1jaWwgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DZWNpbC8wLjUuKiIKLUZJTEVTX2xpYm1v
-bm8tY2VjaWwwLjUtY2lsLWRiZyA9ICIvdXNyL2xpYi9tb25vL2dhYy9Nb25vLkNlY2lsLzAuNS4w
-LjFfXzA3MzhlYjlmMTMyZWQ3NTYvTW9uby5DZWNpbC5kbGwubWRiIgotCi1GSUxFU19saWJtb25v
-LWRiMi0xLjAtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL0lCTS5EYXRhLkRCMi8xLjAqIC91c3Iv
-bGliL21vbm8vMS4wL0lCTS5EYXRhLkRCMi5kbGwiCi1GSUxFU19saWJtb25vLWRiMi0xLjAtY2ls
-LWRiZyA9ICIvdXNyL2xpYi9tb25vL2dhYy9JQk0uRGF0YS5EQjIvMS4wKi9JQk0uRGF0YS5EQjIu
-ZGxsLm1kYiIKLQotIyBNb3ZlIC5wYyBmaWxlcwotRklMRVNfbGlibW9uby1jYWlybzEuMC1jaWwt
-ZGV2ID0gIi91c3IvbGliL3BrZ2NvbmZpZy9tb25vLWNhaXJvLnBjIgotUEFDS0FHRVMgPSsgIiBs
-aWJtb25vLWNhaXJvMS4wLWNpbC1kZXYgIgpkaWZmIC11cHJOIGEvcmVjaXBlcy9tb25vL21vbm9f
-MS4yLjYuaW5jIGIvcmVjaXBlcy9tb25vL21vbm9fMS4yLjYuaW5jCi0tLSBhL3JlY2lwZXMvbW9u
-by9tb25vXzEuMi42LmluYwkyMDA5LTA3LTIwIDEyOjUwOjQ4LjEwNDY4MDkzMyAtMDYwMAorKysg
-Yi9yZWNpcGVzL21vbm8vbW9ub18xLjIuNi5pbmMJMTk2OS0xMi0zMSAxNzowMDowMC4wMDAwMDAw
-MDAgLTA3MDAKQEAgLTEsMTQgKzAsMCBAQAotREVTQ1JJUFRJT04gPSAiTW9ubyBQcm9ncmFtbWlu
-ZyBMYW5ndWFnZSIKLVNFQ1RJT04gPSAiZGV2ZWwvbW9ubyIKLUxJQ0VOU0UgPSAiR1BMIExHUEwg
-WDExIgotCi1TUkNfVVJJID0gImh0dHA6Ly9nby1tb25vLmNvbS9zb3VyY2VzL21vbm8vbW9uby0x
-LjIuNi50YXIuYnoyIFwKLQkgICBmaWxlOi8vbW9uby1saWJnYy1jb25maWd1cmUucGF0Y2g7cGF0
-Y2g9MSIKLQotUyA9ICIke1dPUktESVJ9L21vbm8tMS4yLjYiCi0KLWluaGVyaXQgYXV0b3Rvb2xz
-Ci1BUk1fSU5TVFJVQ1RJT05fU0VUID0gImFybSIKLUVYVFJBX09FQ09ORl9hcm0gPSAiLS13aXRo
-b3V0LXRscyIKLUVYVFJBX09FQ09ORl9taXBzZWwgPSAiLS13aXRob3V0LXRscyIKLQpkaWZmIC11
-cHJOIGEvcmVjaXBlcy9tb25vL21vbm8tMS45LjErMi4yLXJjMS9jb25maWd1cmUucGF0Y2ggYi9y
-ZWNpcGVzL21vbm8vbW9uby0xLjkuMSsyLjItcmMxL2NvbmZpZ3VyZS5wYXRjaAotLS0gYS9yZWNp
-cGVzL21vbm8vbW9uby0xLjkuMSsyLjItcmMxL2NvbmZpZ3VyZS5wYXRjaAkyMDA5LTA3LTIwIDEy
-OjUwOjQ4LjEwMTY4Njg1MyAtMDYwMAorKysgYi9yZWNpcGVzL21vbm8vbW9uby0xLjkuMSsyLjIt
-cmMxL2NvbmZpZ3VyZS5wYXRjaAkxOTY5LTEyLTMxIDE3OjAwOjAwLjAwMDAwMDAwMCAtMDcwMApA
-QCAtMSw0NCArMCwwIEBACi1JbmRleDogbW9uby0yLjIvY29uZmlndXJlLmluCi09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-Ci0tLS0gbW9uby0yLjIub3JpZy9jb25maWd1cmUuaW4JMjAwOC0xMS0xMyAxODoyMjoyOS4wMDAw
-MDAwMDAgLTA1MDAKLSsrKyBtb25vLTIuMi9jb25maWd1cmUuaW4JMjAwOC0xMi0xMCAxNjowMzox
-MS4wMDAwMDAwMDAgLTA1MDAKLUBAIC0xMTU1LDYgKzExNTUsOCBAQAotIAkJXSwgWwotIAkJCQlB
-Q19NU0dfUkVTVUxUKG5vKQotIAkJCQl3aXRoX3Rscz1wdGhyZWFkCi0rCQldLCBbCi0rCQkJCUFD
-X01TR19SRVNVTFQoeWVzKQotIAkJXSkKLSAJZmkKLSAKLUBAIC0xMjU3LDYgKzEyNTksOSBAQAot
-IAkJXSwgWwotIAkJCQl3aXRoX3NpZ2FsdHN0YWNrPW5vCi0gCQkJCUFDX01TR19SRVNVTFQobm8p
-Ci0rCQldLCBbCi0rCQkJCUFDX01TR19SRVNVTFQoeWVzKQotKwkJCQlBQ19ERUZJTkUoSEFWRV9X
-T1JLSU5HX1NJR0FMVFNUQUNLKQotIAkJXSkKLSAJZmkKLSAKLUBAIC0xNzQ2LDYgKzE3NTEsNyBA
-QAotIAotIGppdF93YW50ZWQ9ZmFsc2UKLSBpbnRlcnBfd2FudGVkPWZhbHNlCi0rZWNobyAiQ0xJ
-RkY6IGNoZWNraW5nIGhvc3QgPSAkaG9zdCIKLSBjYXNlICIkaG9zdCIgaW4KLSAjCW1pcHMtc2dp
-LWlyaXg1LiogfCBtaXBzLXNnaS1pcml4Ni4qKQotICMJCVRBUkdFVD1NSVBTOwotQEAgLTE4ODIs
-MTAgKzE4ODgsMTIgQEAKLSAJCWppdF93YW50ZWQ9dHJ1ZQotIAkJOzsKLSAJYXJtKi1saW51eCop
-Ci0rICAgIGVjaG8gIkNMSUZGOiBmb3VuZCBhcm0gbGludXgiCi0gCQlUQVJHRVQ9QVJNOwotIAkJ
-YXJjaF90YXJnZXQ9YXJtOwotIAkJQUNDRVNTX1VOQUxJR05FRD0ibm8iCi0gCQlKSVRfU1VQUE9S
-VEVEPXllcwotKwkJQ1BQRkxBR1M9IiRDUFBGTEFHUyAtREFSTV9GUFVfVkZQPTEiCi0gCQlqaXRf
-d2FudGVkPXRydWUKLSAJCTs7Ci0gCXMzOTAtKi1saW51eCopCmRpZmYgLXVwck4gYS9yZWNpcGVz
-L21vbm8vbW9uby0xLjkuMSsyLjItcmMxL2Rpc2FibGUtZG9jcy5wYXRjaCBiL3JlY2lwZXMvbW9u
-by9tb25vLTEuOS4xKzIuMi1yYzEvZGlzYWJsZS1kb2NzLnBhdGNoCi0tLSBhL3JlY2lwZXMvbW9u
-by9tb25vLTEuOS4xKzIuMi1yYzEvZGlzYWJsZS1kb2NzLnBhdGNoCTIwMDktMDctMjAgMTI6NTA6
-NDguMTAxNjg2ODUzIC0wNjAwCisrKyBiL3JlY2lwZXMvbW9uby9tb25vLTEuOS4xKzIuMi1yYzEv
-ZGlzYWJsZS1kb2NzLnBhdGNoCTE5NjktMTItMzEgMTc6MDA6MDAuMDAwMDAwMDAwIC0wNzAwCkBA
-IC0xLDEzICswLDAgQEAKLUluZGV4OiBtb25vLTIuMi9NYWtlZmlsZS5hbQotPT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQot
-LS0tIG1vbm8tMi4yLm9yaWcvTWFrZWZpbGUuYW0JMjAwOC0xMi0xMCAxNjoyNToxNC4wMDAwMDAw
-MDAgLTA1MDAKLSsrKyBtb25vLTIuMi9NYWtlZmlsZS5hbQkyMDA4LTEyLTEwIDE2OjI1OjI0LjAw
-MDAwMDAwMCAtMDUwMAotQEAgLTEsNyArMSw3IEBACi0gQVVUT01BS0VfT1BUSU9OUyA9IGZvcmVp
-Z24KLSBBQ0xPQ0FMX0FNRkxBR1MgPSAtSSAuCi0gCi0tU1VCRElSUyA9IHBvICQobGliZ2NfZGly
-KSAkKGVnbGliX2RpcikgbW9ubyAkKGlrdm1fbmF0aXZlX2Rpcikgc3VwcG9ydCBkYXRhIHJ1bnRp
-bWUgc2NyaXB0cyBtYW4gc2FtcGxlcyB3ZWIgbXN2YyBkb2NzCi0rU1VCRElSUyA9IHBvICQobGli
-Z2NfZGlyKSAkKGVnbGliX2RpcikgbW9ubyAkKGlrdm1fbmF0aXZlX2Rpcikgc3VwcG9ydCBkYXRh
-IHJ1bnRpbWUgc2NyaXB0cyBtYW4gc2FtcGxlcyB3ZWIgbXN2YyAKLSAKLSAjIEtlZXAgaW4gc3lu
-YyB3aXRoIFNVQkRJUlMKLSAjIyAndG9vbHMnIGlzIG5vdCBub3JtYWxseSBidWlsdApkaWZmIC11
-cHJOIGEvcmVjaXBlcy9tb25vL21vbm8tMS45LjErMi4yLXJjMS9kaXNhYmxlLW1vbm9idXJnLnBh
-dGNoIGIvcmVjaXBlcy9tb25vL21vbm8tMS45LjErMi4yLXJjMS9kaXNhYmxlLW1vbm9idXJnLnBh
-dGNoCi0tLSBhL3JlY2lwZXMvbW9uby9tb25vLTEuOS4xKzIuMi1yYzEvZGlzYWJsZS1tb25vYnVy
-Zy5wYXRjaAkyMDA5LTA3LTIwIDEyOjUwOjQ4LjEwMTY4Njg1MyAtMDYwMAorKysgYi9yZWNpcGVz
-L21vbm8vbW9uby0xLjkuMSsyLjItcmMxL2Rpc2FibGUtbW9ub2J1cmcucGF0Y2gJMTk2OS0xMi0z
-MSAxNzowMDowMC4wMDAwMDAwMDAgLTA3MDAKQEAgLTEsMjIgKzAsMCBAQAotSW5kZXg6IG1vbm8t
-Mi4yL21vbm8vTWFrZWZpbGUuYW0KLT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KLS0tLSBtb25vLTIuMi5vcmlnL21vbm8v
-TWFrZWZpbGUuYW0JMjAwOC0xMi0xMCAxNTozODozMC4wMDAwMDAwMDAgLTA1MDAKLSsrKyBtb25v
-LTIuMi9tb25vL01ha2VmaWxlLmFtCTIwMDgtMTItMTAgMTU6Mzg6MzcuMDAwMDAwMDAwIC0wNTAw
-Ci1AQCAtMSwzICsxLDMgQEAKLSAKLS1TVUJESVJTID0gdXRpbHMgaW8tbGF5ZXIgbW9ub2J1cmcg
-b3MgY2lsIG1ldGFkYXRhIFwKLStTVUJESVJTID0gdXRpbHMgaW8tbGF5ZXIgb3MgY2lsIG1ldGFk
-YXRhIFwKLSAgICAgICBhcmNoIGludGVycHJldGVyIG1pbmkgZGlzIG1vbm9ncmFwaCB0ZXN0cyBi
-ZW5jaG1hcmsgcHJvZmlsZXIKLUluZGV4OiBtb25vLTIuMi9tb25vL21pbmkvTWFrZWZpbGUuYW0K
-LT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT0KLS0tLSBtb25vLTIuMi5vcmlnL21vbm8vbWluaS9NYWtlZmlsZS5hbQkyMDA4
-LTEyLTEwIDE1OjQ0OjExLjAwMDAwMDAwMCAtMDUwMAotKysrIG1vbm8tMi4yL21vbm8vbWluaS9N
-YWtlZmlsZS5hbQkyMDA4LTEyLTEwIDE1OjQ0OjIyLjAwMDAwMDAwMCAtMDUwMAotQEAgLTQ4Miw3
-ICs0ODIsNyBAQAotIAkkKEdFTk1ERVNDX1BSRykgJChzcmNkaXIpL2NwdS1taXBzLm1kIGNwdS1t
-aXBzLmggbWlwc19kZXNjCi0gCi0gaW5zc2VsLmMgaW5zc2VsLmg6ICQoQlVSR1NSQykKLS0JJCht
-b25vZGlyKS9tb25vL21vbm9idXJnL21vbm9idXJnIC1jIDEgLXAgLWUgJChCVVJHU1JDKSAtZCBp
-bnNzZWwuaCAtcyBpbnNzZWwuYwotKwltb25vYnVyZyAtYyAxIC1wIC1lICQoQlVSR1NSQykgLWQg
-aW5zc2VsLmggLXMgaW5zc2VsLmMKLSAKLSB0ZXN0aTogbW9ubyB0ZXN0LmV4ZQotIAkkKFJVTlRJ
-TUUpIC12IC12IC0tbmNvbXBpbGUgMSAtLWNvbXBpbGUgVGVzdDokKG10ZXN0KSB0ZXN0LmV4ZQpk
-aWZmIC11cHJOIGEvcmVjaXBlcy9tb25vL21vbm8tMS45LjErMi4yLXJjMS9maXgtZWFiaS1zeXNj
-YWxsLnBhdGNoIGIvcmVjaXBlcy9tb25vL21vbm8tMS45LjErMi4yLXJjMS9maXgtZWFiaS1zeXNj
-YWxsLnBhdGNoCi0tLSBhL3JlY2lwZXMvbW9uby9tb25vLTEuOS4xKzIuMi1yYzEvZml4LWVhYmkt
-c3lzY2FsbC5wYXRjaAkyMDA5LTA3LTIwIDEyOjUwOjQ4LjEwMTY4Njg1MyAtMDYwMAorKysgYi9y
-ZWNpcGVzL21vbm8vbW9uby0xLjkuMSsyLjItcmMxL2ZpeC1lYWJpLXN5c2NhbGwucGF0Y2gJMTk2
-OS0xMi0zMSAxNzowMDowMC4wMDAwMDAwMDAgLTA3MDAKQEAgLTEsMTIgKzAsMCBAQAotLS0tIG1v
-bm8ub3JpZy9tb25vL21pbmkvbWluaS1hcm0uYwkyMDA4LzEyLzEyIDE5OjQ5OjQxCTEyMTQ1Nwot
-KysrIG1vbm8vbW9uby9taW5pL21pbmktYXJtLmMJMjAwOS8wMS8wNSAwODo1ODo0NwkxMjI0MTYK
-LUBAIC01ODEsNiArNTgxLDggQEAKLSB7Ci0gI2lmIF9fQVBQTEVfXwotIAlzeXNfaWNhY2hlX2lu
-dmFsaWRhdGUgKGNvZGUsIHNpemUpOwotKyNlbGlmICgoX19HTlVDX18gPj0gNCkgJiYgKF9fR05V
-Q19NSU5PUl9fID49IDEpKQotKwlfX2NsZWFyX2NhY2hlIChjb2RlLCBjb2RlICsgc2l6ZSk7Ci0g
-I2Vsc2UKLSAJX19hc20gX192b2xhdGlsZSAoIm1vdiByMCwgJTBcbiIKLSAJCQkibW92IHIxLCAl
-MVxuIgotCmRpZmYgLXVwck4gYS9yZWNpcGVzL21vbm8vbW9ub18xLjkuMSsyLjItcmMxLmJiIGIv
-cmVjaXBlcy9tb25vL21vbm9fMS45LjErMi4yLXJjMS5iYgotLS0gYS9yZWNpcGVzL21vbm8vbW9u
-b18xLjkuMSsyLjItcmMxLmJiCTIwMDktMDctMjAgMTI6NTA6NDguMTA0NjgwOTMzIC0wNjAwCisr
-KyBiL3JlY2lwZXMvbW9uby9tb25vXzEuOS4xKzIuMi1yYzEuYmIJMTk2OS0xMi0zMSAxNzowMDow
-MC4wMDAwMDAwMDAgLTA3MDAKQEAgLTEsODcgKzAsMCBAQAotcmVxdWlyZSBtb25vXzIuMi4wLmlu
-YwotCi1ERVBFTkRTID0gIm1vbm8tbmF0aXZlIG1vbm8tbWNzLWludGVybWVkaWF0ZSBnbGliLTIu
-MCBwZXJsLW5hdGl2ZSIKLQotREVGQVVMVF9QUkVGRVJFTkNFID0gIi0xIgotCi1QUiA9ICJyMyIK
-LQotIyBtb25vIG1ha2VzIHVzZSBvZiBub24tdGh1bWItY29tcGF0aWJsZSBpbmxpbmUgYXNtLgot
-QVJNX0lOU1RSVUNUSU9OX1NFVCA9ICJhcm0iCi0KLVNSQ19VUkkgKz0gImZpbGU6Ly9jb25maWd1
-cmUucGF0Y2g7cGF0Y2g9MSBcCi0gICAgICAgICAgICBmaWxlOi8vZGlzYWJsZS1kb2NzLnBhdGNo
-O3BhdGNoPTEgXAotICAgICAgICAgICAgZmlsZTovL2Rpc2FibGUtbW9ub2J1cmcucGF0Y2g7cGF0
-Y2g9MSBcCi0gICAgICAgICAgICBmaWxlOi8vZml4LWVhYmktc3lzY2FsbC5wYXRjaDtwYXRjaD0x
-IFwKLQkgICAiCi0KLSMgUGVyIGh0dHA6Ly93d3cubW9uby1wcm9qZWN0LmNvbS9Nb25vOkFSTQot
-RVhUUkFfT0VDT05GICs9ICIgLS1kaXNhYmxlLW1jcy1idWlsZCAiCi0jIEluc3RlYWQsIGdldCB0
-aGUgbWNzIHRyZWUgZnJvbSBhIGRpZmZlcmVudCBidWlsZCAoc2VlIG1vbm8tbWNzLWludGVybWVk
-aWF0ZSkKLQotZG9faW5zdGFsbF9wcmVwZW5kKCkgewotCWluc3RhbGwgLWQgJHtEfQotCXB1c2hk
-ICR7RH0KLQl0YXIgLXh6ZiAke1NUQUdJTkdfREFUQURJUl9OQVRJVkV9L21vbm8tbWNzL21vbm8t
-bWNzLSR7UFZ9LnRhci5negotCXBvcGQKLX0KLQotZG9faW5zdGFsbF9hcHBlbmQoKSB7Ci0JIyBt
-b25vLW1jcy1pbnRlcm1lZGlhdGUgYnVpbGRzIGFuZCBpbnN0YWxscyBqYXkgKGEgWWFjYyBmb3Ig
-SmF2YSBhbmQgQyMpLAotCSMgaG93ZXZlciwgamF5IGlzIG5vdCBiZWluZyBjcm9zcy1jb21waWxl
-ZCBhbmQgdGh1cyBvbmx5Ci0JIyBhdmFpbGFibGUgZm9yIHRoZSBidWlsZGhvc3QgYXJjaGl0ZWN0
-dXJlLCBzbyByZW1vdmUgaXQKLQkjIGVudGlyZWx5Ci0JcHVzaGQgJHtEfQotCXJtIC1yZiAuL3Vz
-ci9zaGFyZS9tYW4vbWFuMS9qYXkuMSAuL3Vzci9zaGFyZS9qYXkgXAotCSAgICAuL3Vzci9zaGFy
-ZS9qYXkvUkVBRE1FLmpheSBcCi0JICAgIC4vdXNyL2Jpbi9qYXkKLQlwb3BkCi0KLQkjIE5vdCBw
-YWNrYWdlZCB3aXRoIHRoZSBkZWZhdWx0IHJ1bGVzIGFuZCBhcHBhcmVudGx5Ci0JIyBub3QgdXNl
-ZCBmb3IgYW55dGhpbmcKLQlybSAtcmYgJHtEfSR7ZGF0YWRpcn0vbW9uby0xLjAvbW9uby9jaWwv
-Y2lsLW9wY29kZXMueG1sCi19Ci0KLWluaGVyaXQgbW9ubwotCi0jIEltcG9ydCBmaWxlIGRlZmlu
-aXRpb25zIGZyb20gRGViaWFuCi1yZXF1aXJlIG1vbm9fMi54LWZpbGVzLmluYwotCi0jIEFkZCBz
-b21lIHBhY2thZ2VzCi1QQUNLQUdFU19hcHBlbmQgPSAiIG1vbm8tZG9jIG1vbm8gbW9uby1ydW50
-aW1lIgotCi1GSUxFU19tb25vLWRvY19hcHBlbmQgPSAiIC91c3Ivc2hhcmUvbGliZ2MtbW9uby8g
-IgotCi1GSUxFU19tb25vID0gIiIKLUFMTE9XX0VNUFRZX21vbm8gPSAiMSIKLVJERVBFTkRTX21v
-bm8gPSAibW9uby1jb21tb24gbW9uby1qaXQiCi0KLUZJTEVTX21vbm8tcnVudGltZSA9ICIiCi1B
-TExPV19FTVBUWV9tb25vLXJ1bnRpbWUgPSAiMSIKLVJERVBFTkRTX21vbm8tcnVudGltZSA9ICJt
-b25vLWppdCBtb25vLWdhYyIKLQotUkRFUEVORFNfbW9uby1qaXQgPSAibW9uby1jb21tb24iCi0K
-LUZJTEVTX2xpYm1vbm8tZGV2ID0rICIgL3Vzci9saWIvbGlibW9uby5sYSAvdXNyL2xpYi9saWJt
-b25vLXByb2ZpbGVyLWNvdi5sYSAvdXNyL2xpYi9saWJtb25vLXByb2ZpbGVyLWFvdC5sYSBcCi0J
-L3Vzci9saWIvbGliTW9ub1Bvc2l4SGVscGVyLmxhIC91c3IvbGliL2xpYk1vbm9TdXBwb3J0Vy5s
-YSIKLUZJTEVTX2xpYm1vbm8tZGJnID0rICIgL3Vzci9saWIvLmRlYnVnL2xpYm1vbm8qLnNvLiog
-L3Vzci9saWIvLmRlYnVnL2xpYmlrdm0tbmF0aXZlLnNvIFwKLQkvdXNyL2xpYi8uZGVidWcvbGli
-TW9ub1Bvc2l4SGVscGVyLnNvIC91c3IvbGliLy5kZWJ1Zy9saWJNb25vU3VwcG9ydFcuc28iCi0K
-LSMgUGFja2FnZXMgbm90IGluY2x1ZGVkIGluIERlYmlhbgotUEFDS0FHRVNfcHJlcGVuZCA9ICJs
-aWJudW5pdDIuMi1jaWwtZGJnIGxpYm51bml0Mi4yLWNpbC1kZXYgbGlibnVuaXQyLjItY2lsIFwK
-LQlsaWJtb25vLWNlY2lsMC41LWNpbC1kYmcgbGlibW9uby1jZWNpbDAuNS1jaWwtZGV2IGxpYm1v
-bm8tY2VjaWwwLjUtY2lsIFwKLQlsaWJtb25vLWRiMi0xLjAtY2lsLWRiZyBsaWJtb25vLWRiMi0x
-LjAtY2lsLWRldiBsaWJtb25vLWRiMi0xLjAtY2lsIgotCi1GSUxFU19saWJudW5pdDIuMi1jaWwg
-PSAiL3Vzci9saWIvbW9uby9nYWMvbnVuaXQuKi8yLjIuKiAvdXNyL2xpYi9tb25vLzEuMC9udW5p
-dC4qLmRsbCIKLUZJTEVTX2xpYm51bml0Mi4yLWNpbC1kZXYgPSAiL3Vzci9saWIvcGtnY29uZmln
-L21vbm8tbnVuaXQucGMiCi1GSUxFU19saWJudW5pdDIuMi1jaWwtZGJnID0gIi91c3IvbGliL21v
-bm8vZ2FjL251bml0Ki8yLjIuKi9udW5pdC4qLmRsbC5tZGIiCi0KLUZJTEVTX2xpYm1vbm8tY2Vj
-aWwwLjUtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uQ2VjaWwvMC41LioiCi1GSUxFU19s
-aWJtb25vLWNlY2lsMC41LWNpbC1kYmcgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DZWNpbC8w
-LjUuMC4xX18wNzM4ZWI5ZjEzMmVkNzU2L01vbm8uQ2VjaWwuZGxsLm1kYiIKLQotRklMRVNfbGli
-bW9uby1kYjItMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9JQk0uRGF0YS5EQjIvMS4wKiAv
-dXNyL2xpYi9tb25vLzEuMC9JQk0uRGF0YS5EQjIuZGxsIgotRklMRVNfbGlibW9uby1kYjItMS4w
-LWNpbC1kYmcgPSAiL3Vzci9saWIvbW9uby9nYWMvSUJNLkRhdGEuREIyLzEuMCovSUJNLkRhdGEu
-REIyLmRsbC5tZGIiCi0KLSMgTW92ZSAucGMgZmlsZXMKLUZJTEVTX2xpYm1vbm8tY2Fpcm8xLjAt
-Y2lsLWRldiA9ICIvdXNyL2xpYi9wa2djb25maWcvbW9uby1jYWlyby5wYyIKLVBBQ0tBR0VTID0r
-ICIgbGlibW9uby1jYWlybzEuMC1jaWwtZGV2ICIKZGlmZiAtdXByTiBhL3JlY2lwZXMvbW9uby9t
-b25vXzIuMi4wLmluYyBiL3JlY2lwZXMvbW9uby9tb25vXzIuMi4wLmluYwotLS0gYS9yZWNpcGVz
-L21vbm8vbW9ub18yLjIuMC5pbmMJMjAwOS0wNy0yMCAxMjo1MDo0OC4xMDQ2ODA5MzMgLTA2MDAK
-KysrIGIvcmVjaXBlcy9tb25vL21vbm9fMi4yLjAuaW5jCTE5NjktMTItMzEgMTc6MDA6MDAuMDAw
-MDAwMDAwIC0wNzAwCkBAIC0xLDIyICswLDAgQEAKLURFU0NSSVBUSU9OID0gIk1vbm8gUHJvZ3Jh
-bW1pbmcgTGFuZ3VhZ2UiCi1TRUNUSU9OID0gImRldmVsL21vbm8iCi1MSUNFTlNFID0gIkdQTCBM
-R1BMIFgxMSIKLQotU1JDX1VSSSA9ICJodHRwOi8vYmVjLXN5c3RlbXMuY29tL3B1Yi9tb25vL21v
-bm8tMi4yLXJjMS50YXIuYnoyIFwKLQkJIgotCi0jCSAgIGZpbGU6Ly9tb25vLWxpYmdjLWNvbmZp
-Z3VyZS5wYXRjaDtwYXRjaD0xIgotCi1TID0gIiR7V09SS0RJUn0vbW9uby0yLjIiCi0KLWRvX2Zp
-eF9kb2x0X2xpYnRvb2woKSB7Ci0JIyBsb29rIGZvciBsaWJ0b29sIHByZWZpeGVkIHdpdGggSE9T
-VF9TWVMKLQlzZWQgLWUgInMvc2xhc2hcfWxpYnRvb2wvc2xhc2hcfSR7SE9TVF9TWVN9LWxpYnRv
-b2wvIiAtaSBhY2luY2x1ZGUubTQKLX0KLQotaW5oZXJpdCBhdXRvdG9vbHMKLUVYVFJBX09FQ09O
-Rl9hcm0gPSAiLS13aXRob3V0LXRscyIKLUVYVFJBX09FQ09ORl9taXBzZWwgPSAiLS13aXRob3V0
-LXRscyIKLQotYWRkdGFzayBmaXhfZG9sdF9saWJ0b29sIGFmdGVyIGRvX3BhdGNoIGJlZm9yZSBk
-b19jb25maWd1cmUKLQpkaWZmIC11cHJOIGEvcmVjaXBlcy9tb25vL21vbm8tMi40L2NvbmZpZ3Vy
-ZS5wYXRjaCBiL3JlY2lwZXMvbW9uby9tb25vLTIuNC9jb25maWd1cmUucGF0Y2gKLS0tIGEvcmVj
-aXBlcy9tb25vL21vbm8tMi40L2NvbmZpZ3VyZS5wYXRjaAkxOTY5LTEyLTMxIDE3OjAwOjAwLjAw
-MDAwMDAwMCAtMDcwMAorKysgYi9yZWNpcGVzL21vbm8vbW9uby0yLjQvY29uZmlndXJlLnBhdGNo
-CTIwMDktMDctMTYgMDk6MDI6MzcuMTExNDc1MDAwIC0wNjAwCkBAIC0wLDAgKzEsNDQgQEAKK0lu
-ZGV4OiBtb25vLTIuNC4yLjEvY29uZmlndXJlLmluCis9PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CistLS0gbW9uby0yLjQu
-Mi4xLm9yaWcvY29uZmlndXJlLmluCTIwMDgtMTEtMTMgMTg6MjI6MjkuMDAwMDAwMDAwIC0wNTAw
-CisrKysgbW9uby0yLjQuMi4xL2NvbmZpZ3VyZS5pbgkyMDA4LTEyLTEwIDE2OjAzOjExLjAwMDAw
-MDAwMCAtMDUwMAorQEAgLTExNTUsNiArMTE1NSw4IEBACisgCQldLCBbCisgCQkJCUFDX01TR19S
-RVNVTFQobm8pCisgCQkJCXdpdGhfdGxzPXB0aHJlYWQKKysJCV0sIFsKKysJCQkJQUNfTVNHX1JF
-U1VMVCh5ZXMpCisgCQldKQorIAlmaQorIAorQEAgLTEyNTcsNiArMTI1OSw5IEBACisgCQldLCBb
-CisgCQkJCXdpdGhfc2lnYWx0c3RhY2s9bm8KKyAJCQkJQUNfTVNHX1JFU1VMVChubykKKysJCV0s
-IFsKKysJCQkJQUNfTVNHX1JFU1VMVCh5ZXMpCisrCQkJCUFDX0RFRklORShIQVZFX1dPUktJTkdf
-U0lHQUxUU1RBQ0spCisgCQldKQorIAlmaQorIAorQEAgLTE3NDYsNiArMTc1MSw3IEBACisgCisg
-aml0X3dhbnRlZD1mYWxzZQorIGludGVycF93YW50ZWQ9ZmFsc2UKKytlY2hvICJDTElGRjogY2hl
-Y2tpbmcgaG9zdCA9ICRob3N0IgorIGNhc2UgIiRob3N0IiBpbgorICMJbWlwcy1zZ2ktaXJpeDUu
-KiB8IG1pcHMtc2dpLWlyaXg2LiopCisgIwkJVEFSR0VUPU1JUFM7CitAQCAtMTg4MiwxMCArMTg4
-OCwxMiBAQAorIAkJaml0X3dhbnRlZD10cnVlCisgCQk7OworIAlhcm0qLWxpbnV4KikKKysgICAg
-ZWNobyAiQ0xJRkY6IGZvdW5kIGFybSBsaW51eCIKKyAJCVRBUkdFVD1BUk07CisgCQlhcmNoX3Rh
-cmdldD1hcm07CisgCQlBQ0NFU1NfVU5BTElHTkVEPSJubyIKKyAJCUpJVF9TVVBQT1JURUQ9eWVz
-CisrCQlDUFBGTEFHUz0iJENQUEZMQUdTIC1EQVJNX0ZQVV9WRlA9MSIKKyAJCWppdF93YW50ZWQ9
-dHJ1ZQorIAkJOzsKKyAJczM5MC0qLWxpbnV4KikKZGlmZiAtdXByTiBhL3JlY2lwZXMvbW9uby9t
-b25vLTIuNC9NYWtlZmlsZS5wYXRjaCBiL3JlY2lwZXMvbW9uby9tb25vLTIuNC9NYWtlZmlsZS5w
-YXRjaAotLS0gYS9yZWNpcGVzL21vbm8vbW9uby0yLjQvTWFrZWZpbGUucGF0Y2gJMTk2OS0xMi0z
-MSAxNzowMDowMC4wMDAwMDAwMDAgLTA3MDAKKysrIGIvcmVjaXBlcy9tb25vL21vbm8tMi40L01h
-a2VmaWxlLnBhdGNoCTIwMDktMDctMTYgMDk6MDI6MzcuMTEyNDc2MDAwIC0wNjAwCkBAIC0wLDAg
-KzEsMjQgQEAKKy0tLSBtb25vLTIuNC4yLjEvZG9jcy9NYWtlZmlsZQkyMDA5LTA2LTAzIDE0OjUx
-OjE4LjAwMDAwMDAwMCAtMDYwMAorKysrIG1vbm8tMi40LjIuMS9kb2NzL01ha2VmaWxlCTIwMDkt
-MDYtMDMgMTQ6NTE6NTMuMDAwMDAwMDAwIC0wNjAwCitAQCAtNDAwLDcgKzQwMCw4IEBAIGRpc3Rk
-aXI6ICQoRElTVEZJTEVTKQorIAkgIGRpc3QtaG9vaworIGNoZWNrLWFtOiBhbGwtYW0KKyBjaGVj
-azogY2hlY2stYW0KKy1hbGwtYW06IE1ha2VmaWxlICQoREFUQSkKKythbGwtYW06IE1ha2VmaWxl
-CisrIyAkKERBVEEpCisgaW5zdGFsbGRpcnM6CisgCWZvciBkaXIgaW4gIiQoREVTVERJUikkKHNv
-dXJjZXNkaXIpIjsgZG8gXAorIAkgIHRlc3QgLXogIiQkZGlyIiB8fCAkKE1LRElSX1ApICIkJGRp
-ciI7IFwKK0BAIC00MTAsOCArNDExLDkgQEAgaW5zdGFsbC1leGVjOiBpbnN0YWxsLWV4ZWMtYW0K
-KyBpbnN0YWxsLWRhdGE6IGluc3RhbGwtZGF0YS1hbQorIHVuaW5zdGFsbDogdW5pbnN0YWxsLWFt
-CisgCistaW5zdGFsbC1hbTogYWxsLWFtCistCUAkKE1BS0UpICQoQU1fTUFLRUZMQUdTKSBpbnN0
-YWxsLWV4ZWMtYW0gaW5zdGFsbC1kYXRhLWFtCisraW5zdGFsbC1hbTogCisrI2FsbC1hbQorKyMJ
-QCQoTUFLRSkgJChBTV9NQUtFRkxBR1MpIGluc3RhbGwtZXhlYy1hbSBpbnN0YWxsLWRhdGEtYW0K
-KyAKKyBpbnN0YWxsY2hlY2s6IGluc3RhbGxjaGVjay1hbQorIGluc3RhbGwtc3RyaXA6CmRpZmYg
-LXVwck4gYS9yZWNpcGVzL21vbm8vbW9uby0yLjQvbWluaS1hcm0ucGF0Y2ggYi9yZWNpcGVzL21v
-bm8vbW9uby0yLjQvbWluaS1hcm0ucGF0Y2gKLS0tIGEvcmVjaXBlcy9tb25vL21vbm8tMi40L21p
-bmktYXJtLnBhdGNoCTE5NjktMTItMzEgMTc6MDA6MDAuMDAwMDAwMDAwIC0wNzAwCisrKyBiL3Jl
-Y2lwZXMvbW9uby9tb25vLTIuNC9taW5pLWFybS5wYXRjaAkyMDA5LTA3LTE2IDA5OjAyOjM3LjEx
-MjQ3NjAwMCAtMDYwMApAQCAtMCwwICsxLDExIEBACistLS0gbW9uby0yLjQuMi4xL21vbm8vbWlu
-aS9taW5pLWFybS5oCTIwMDktMDYtMjMgMDk6NDE6MDAuMDAwMDAwMDAwIC0wNjAwCisrKysgbW9u
-by0yLjQuMi4xL21vbm8vbWluaS9taW5pLWFybS5oCTIwMDktMDYtMjMgMDk6NDA6MjcuMDAwMDAw
-MDAwIC0wNjAwCitAQCAtOSw3ICs5LDcgQEAKKyAjZW5kaWYKKyAKKyAjaWZkZWYgQVJNX0ZQVV9W
-RlAKKy0jZXJyb3IgIlZGUCBzdXBwb3J0IGlzIG5vdCBjb21wbGV0ZSwgdHJ5IG1vbm8gU1ZOIGZv
-ciB0aGF0LiIKKysvLyNlcnJvciAiVkZQIHN1cHBvcnQgaXMgbm90IGNvbXBsZXRlLCB0cnkgbW9u
-byBTVk4gZm9yIHRoYXQuIgorICNlbmRpZgorIAorICNpZiBkZWZpbmVkKF9fQVJNX0VBQklfXykK
-ZGlmZiAtdXByTiBhL3JlY2lwZXMvbW9uby9tb25vXzIuNC4yLjIuaW5jIGIvcmVjaXBlcy9tb25v
-L21vbm9fMi40LjIuMi5pbmMKLS0tIGEvcmVjaXBlcy9tb25vL21vbm9fMi40LjIuMi5pbmMJMTk2
-OS0xMi0zMSAxNzowMDowMC4wMDAwMDAwMDAgLTA3MDAKKysrIGIvcmVjaXBlcy9tb25vL21vbm9f
-Mi40LjIuMi5pbmMJMjAwOS0wNy0yMCAxMjo0MjozMy42NjE2ODMwMDAgLTA2MDAKQEAgLTAsMCAr
-MSwyMCBAQAorREVTQ1JJUFRJT04gPSAiTW9ubyBQcm9ncmFtbWluZyBMYW5ndWFnZSIKK1NFQ1RJ
-T04gPSAiZGV2ZWwvbW9ubyIKK0xJQ0VOU0UgPSAiR1BMIExHUEwgWDExIgorCitTUkNfVVJJID0g
-Imh0dHA6Ly9tb25vLnhpbWlhbi5jb20vbW9ub2J1aWxkL3ByZXZpZXcvc291cmNlcy9tb25vL21v
-bm8tMi40LjIuMi50YXIuYnoyIFwKKwkJIgorCitTID0gIiR7V09SS0RJUn0vbW9uby0yLjQuMi4y
-IgorCitkb19maXhfZG9sdF9saWJ0b29sKCkgeworCSMgbG9vayBmb3IgbGlidG9vbCBwcmVmaXhl
-ZCB3aXRoIEhPU1RfU1lTCisJc2VkIC1lICJzL3NsYXNoXH1saWJ0b29sL3NsYXNoXH0ke0hPU1Rf
-U1lTfS1saWJ0b29sLyIgLWkgYWNpbmNsdWRlLm00CisJZWNobyBObyBhY2luY2x1ZGUhCit9CisK
-K2luaGVyaXQgYXV0b3Rvb2xzCitFWFRSQV9PRUNPTkZfYXJtID0gIi0td2l0aG91dC10bHMiCitF
-WFRSQV9PRUNPTkZfbWlwc2VsID0gIi0td2l0aG91dC10bHMiCisKK2FkZHRhc2sgZml4X2RvbHRf
-bGlidG9vbCBhZnRlciBkb19wYXRjaCBiZWZvcmUgZG9fY29uZmlndXJlCmRpZmYgLXVwck4gYS9y
-ZWNpcGVzL21vbm8vbW9ub18yLjQuYmIgYi9yZWNpcGVzL21vbm8vbW9ub18yLjQuYmIKLS0tIGEv
-cmVjaXBlcy9tb25vL21vbm9fMi40LmJiCTE5NjktMTItMzEgMTc6MDA6MDAuMDAwMDAwMDAwIC0w
-NzAwCisrKyBiL3JlY2lwZXMvbW9uby9tb25vXzIuNC5iYgkyMDA5LTA3LTIwIDEyOjIwOjMwLjc4
-NDY4NDAwMCAtMDYwMApAQCAtMCwwICsxLDkxIEBACityZXF1aXJlIG1vbm9fMi40LjIuMi5pbmMK
-KworREVQRU5EUyA9ICJtb25vLW5hdGl2ZSBtb25vLW1jcy1pbnRlcm1lZGlhdGUgZ2xpYi0yLjAg
-cGVybC1uYXRpdmUiCisKK0RFRkFVTFRfUFJFRkVSRU5DRSA9ICItMSIKKworUFIgPSAicjMiCisK
-KyMgbW9ubyBtYWtlcyB1c2Ugb2Ygbm9uLXRodW1iLWNvbXBhdGlibGUgaW5saW5lIGFzbS4KK0FS
-TV9JTlNUUlVDVElPTl9TRVQgPSAiYXJtIgorCitTUkNfVVJJICs9ICJmaWxlOi8vY29uZmlndXJl
-LnBhdGNoO3BhdGNoPTFcCisJICAgIGZpbGU6Ly9taW5pLWFybS5wYXRjaDtwYXRjaD0xIgorCisj
-IFBlciBodHRwOi8vd3d3Lm1vbm8tcHJvamVjdC5jb20vTW9ubzpBUk0KK0VYVFJBX09FQ09ORiAr
-PSAiIC0tZGlzYWJsZS1tY3MtYnVpbGQgIgorIyBJbnN0ZWFkLCBnZXQgdGhlIG1jcyB0cmVlIGZy
-b20gYSBkaWZmZXJlbnQgYnVpbGQgKHNlZSBtb25vLW1jcy1pbnRlcm1lZGlhdGUpCisKK2RvX3Bh
-dGNoX3N0dWZmKCkgeworCSAgICBjZCAke1dPUktESVJ9L21vbm8tMi40LjIuMi8KKwkgICAgcGF0
-Y2ggLXAxIDwgJHtVU0VSQlJBTkNIfS9yZWNpcGVzL21vbm8vbW9uby0yLjQvTWFrZWZpbGUucGF0
-Y2gKK30KKworYWRkdGFzayBwYXRjaF9zdHVmZiBhZnRlciBkb19jb25maWd1cmUgYmVmb3JlIGRv
-X2NvbXBpbGUKKworZG9faW5zdGFsbF9wcmVwZW5kKCkgeworCWluc3RhbGwgLWQgJHtEfQorCXB1
-c2hkICR7RH0KKwl0YXIgLXh6ZiAke1NUQUdJTkdfREFUQURJUl9OQVRJVkV9L21vbm8tbWNzL21v
-bm8tbWNzLSR7UFZ9LnRhci5negorCXBvcGQKK30KKworZG9faW5zdGFsbF9hcHBlbmQoKSB7CisJ
-IyBtb25vLW1jcy1pbnRlcm1lZGlhdGUgYnVpbGRzIGFuZCBpbnN0YWxscyBqYXkgKGEgWWFjYyBm
-b3IgSmF2YSBhbmQgQyMpLAorCSMgaG93ZXZlciwgamF5IGlzIG5vdCBiZWluZyBjcm9zcy1jb21w
-aWxlZCBhbmQgdGh1cyBvbmx5CisJIyBhdmFpbGFibGUgZm9yIHRoZSBidWlsZGhvc3QgYXJjaGl0
-ZWN0dXJlLCBzbyByZW1vdmUgaXQKKwkjIGVudGlyZWx5CisJcHVzaGQgJHtEfQorCXJtIC1yZiAu
-L3Vzci9zaGFyZS9tYW4vbWFuMS9qYXkuMSAuL3Vzci9zaGFyZS9qYXkgXAorCSAgICAuL3Vzci9z
-aGFyZS9qYXkvUkVBRE1FLmpheSBcCisJICAgIC4vdXNyL2Jpbi9qYXkKKwlwb3BkCisKKwkjIE5v
-dCBwYWNrYWdlZCB3aXRoIHRoZSBkZWZhdWx0IHJ1bGVzIGFuZCBhcHBhcmVudGx5CisJIyBub3Qg
-dXNlZCBmb3IgYW55dGhpbmcKKwlybSAtcmYgJHtEfSR7ZGF0YWRpcn0vbW9uby0xLjAvbW9uby9j
-aWwvY2lsLW9wY29kZXMueG1sCit9CisKK2luaGVyaXQgbW9ubworCisjIEltcG9ydCBmaWxlIGRl
-ZmluaXRpb25zIGZyb20gRGViaWFuCityZXF1aXJlIG1vbm9fMi54LWZpbGVzLmluYworCisjIEFk
-ZCBzb21lIHBhY2thZ2VzCitQQUNLQUdFU19hcHBlbmQgPSAibW9uby1kb2MgbW9ubyBtb25vLXJ1
-bnRpbWUiCisKKyNGSUxFU19tb25vLWRvY19hcHBlbmQgPSAiIC91c3Ivc2hhcmUvbGliZ2MtbW9u
-by8gIgorCitGSUxFU19tb25vID0gIiIKK0FMTE9XX0VNUFRZX21vbm8gPSAiMSIKK1JERVBFTkRT
-X21vbm8gPSAibW9uby1jb21tb24gbW9uby1qaXQiCisKK0ZJTEVTX21vbm8tcnVudGltZSA9ICIi
-CitBTExPV19FTVBUWV9tb25vLXJ1bnRpbWUgPSAiMSIKK1JERVBFTkRTX21vbm8tcnVudGltZSA9
-ICJtb25vLWppdCBtb25vLWdhYyIKKworUkRFUEVORFNfbW9uby1qaXQgPSAibW9uby1jb21tb24i
-CisKK0ZJTEVTX2xpYm1vbm8tZGV2ID0rICIgL3Vzci9saWIvbGlibW9uby5sYSAvdXNyL2xpYi9s
-aWJtb25vLXByb2ZpbGVyLWNvdi5sYSAvdXNyL2xpYi9saWJtb25vLXByb2ZpbGVyLWFvdC5sYSBc
-CisJL3Vzci9saWIvbGliTW9ub1Bvc2l4SGVscGVyLmxhIC91c3IvbGliL2xpYk1vbm9TdXBwb3J0
-Vy5sYSIKK0ZJTEVTX2xpYm1vbm8tZGJnID0rICIgL3Vzci9saWIvLmRlYnVnL2xpYm1vbm8qLnNv
-LiogL3Vzci9saWIvLmRlYnVnL2xpYmlrdm0tbmF0aXZlLnNvIFwKKwkvdXNyL2xpYi8uZGVidWcv
-bGliTW9ub1Bvc2l4SGVscGVyLnNvIC91c3IvbGliLy5kZWJ1Zy9saWJNb25vU3VwcG9ydFcuc28i
-CisKKyMgUGFja2FnZXMgbm90IGluY2x1ZGVkIGluIERlYmlhbgorUEFDS0FHRVNfcHJlcGVuZCA9
-ICJsaWJudW5pdDIuMi1jaWwtZGJnIGxpYm51bml0Mi4yLWNpbC1kZXYgbGlibnVuaXQyLjItY2ls
-IFwKKwlsaWJtb25vLWNlY2lsMC41LWNpbC1kYmcgbGlibW9uby1jZWNpbDAuNS1jaWwtZGV2IGxp
-Ym1vbm8tY2VjaWwwLjUtY2lsIFwKKwlsaWJtb25vLWRiMi0xLjAtY2lsLWRiZyBsaWJtb25vLWRi
-Mi0xLjAtY2lsLWRldiBsaWJtb25vLWRiMi0xLjAtY2lsIgorCitGSUxFU19saWJudW5pdDIuMi1j
-aWwgPSAiL3Vzci9saWIvbW9uby9nYWMvbnVuaXQuKi8yLjIuKiAvdXNyL2xpYi9tb25vLzEuMC9u
-dW5pdC4qLmRsbCIKK0ZJTEVTX2xpYm51bml0Mi4yLWNpbC1kZXYgPSAiL3Vzci9saWIvcGtnY29u
-ZmlnL21vbm8tbnVuaXQucGMiCitGSUxFU19saWJudW5pdDIuMi1jaWwtZGJnID0gIi91c3IvbGli
-L21vbm8vZ2FjL251bml0Ki8yLjIuKi9udW5pdC4qLmRsbC5tZGIiCisKK0ZJTEVTX2xpYm1vbm8t
-Y2VjaWwwLjUtY2lsID0gIi91c3IvbGliL21vbm8vZ2FjL01vbm8uQ2VjaWwvMC41LioiCitGSUxF
-U19saWJtb25vLWNlY2lsMC41LWNpbC1kYmcgPSAiL3Vzci9saWIvbW9uby9nYWMvTW9uby5DZWNp
-bC8wLjUuMC4xX18wNzM4ZWI5ZjEzMmVkNzU2L01vbm8uQ2VjaWwuZGxsLm1kYiIKKworRklMRVNf
-bGlibW9uby1kYjItMS4wLWNpbCA9ICIvdXNyL2xpYi9tb25vL2dhYy9JQk0uRGF0YS5EQjIvMS4w
-KiAvdXNyL2xpYi9tb25vLzEuMC9JQk0uRGF0YS5EQjIuZGxsIgorRklMRVNfbGlibW9uby1kYjIt
-MS4wLWNpbC1kYmcgPSAiL3Vzci9saWIvbW9uby9nYWMvSUJNLkRhdGEuREIyLzEuMCovSUJNLkRh
-dGEuREIyLmRsbC5tZGIiCisKKyMgTW92ZSAucGMgZmlsZXMKK0ZJTEVTX2xpYm1vbm8tY2Fpcm8x
-LjAtY2lsLWRldiA9ICIvdXNyL2xpYi9wa2djb25maWcvbW9uby1jYWlyby5wYyIKK1BBQ0tBR0VT
-ID0rICIgbGlibW9uby1jYWlybzEuMC1jaWwtZGV2ICIKZGlmZiAtdXByTiBhL3JlY2lwZXMvbW9u
-by9tb25vLW1jcy1pbnRlcm1lZGlhdGVfMS4yLjUuMS5iYiBiL3JlY2lwZXMvbW9uby9tb25vLW1j
-cy1pbnRlcm1lZGlhdGVfMS4yLjUuMS5iYgotLS0gYS9yZWNpcGVzL21vbm8vbW9uby1tY3MtaW50
-ZXJtZWRpYXRlXzEuMi41LjEuYmIJMjAwOS0wNy0yMCAxMjo1MDo0OC4xMDI2ODEyMjkgLTA2MDAK
-KysrIGIvcmVjaXBlcy9tb25vL21vbm8tbWNzLWludGVybWVkaWF0ZV8xLjIuNS4xLmJiCTE5Njkt
-MTItMzEgMTc6MDA6MDAuMDAwMDAwMDAwIC0wNzAwCkBAIC0xLDEyICswLDAgQEAKLSMgVGhpcyBp
-cyBhIHN0cmF3LW1hbiByZWNpcGUgZm9yIHN0ZXAgMSBpbiB0aGUgdHdvLXN0ZXAgYnVpbGQgb2YK
-LSMgbW9uby4gQmVjYXVzZSBpdCdzIGltcG9zc2libGUgdG8gYnVpbGQgdGhlIG1jcyBkaXJlY3Rv
-cnkKLSMgaW4gY3Jvc3MtY29tcGlsZSBtb2RlLCB0aGlzIHJlY2lwZSB3aWxsIGRvIGEgbmF0aXZl
-IGJ1aWxkLAotIyB0aGVuIHRhciB0aGUgcmVzdWx0aW5nIGluc3RhbGwgdHJlZSBmb3IgdXNhZ2Ug
-YnkgdGhlIG1vbm8KLSMgcGFja2FnZSBpbiBzdGVwIDIuCi0jIFNlZSBodHRwOi8vd3d3Lm1vbm8t
-cHJvamVjdC5jb20vTW9ubzpBUk0KLQotcmVxdWlyZSBtb25vXzEuMi41LmluYwotcmVxdWlyZSBt
-b25vLW1jcy1pbnRlcm1lZGlhdGUuaW5jCi0KLVBBUkFMTEVMX01BS0UgPSAiIgotCmRpZmYgLXVw
-ck4gYS9yZWNpcGVzL21vbm8vbW9uby1tY3MtaW50ZXJtZWRpYXRlXzEuMi42LmJiIGIvcmVjaXBl
-cy9tb25vL21vbm8tbWNzLWludGVybWVkaWF0ZV8xLjIuNi5iYgotLS0gYS9yZWNpcGVzL21vbm8v
-bW9uby1tY3MtaW50ZXJtZWRpYXRlXzEuMi42LmJiCTIwMDktMDctMjAgMTI6NTA6NDguMTAyNjgx
-MjI5IC0wNjAwCisrKyBiL3JlY2lwZXMvbW9uby9tb25vLW1jcy1pbnRlcm1lZGlhdGVfMS4yLjYu
-YmIJMTk2OS0xMi0zMSAxNzowMDowMC4wMDAwMDAwMDAgLTA3MDAKQEAgLTEsMTMgKzAsMCBAQAot
-IyBUaGlzIGlzIGEgc3RyYXctbWFuIHJlY2lwZSBmb3Igc3RlcCAxIGluIHRoZSB0d28tc3RlcCBi
-dWlsZCBvZgotIyBtb25vLiBCZWNhdXNlIGl0J3MgaW1wb3NzaWJsZSB0byBidWlsZCB0aGUgbWNz
-IGRpcmVjdG9yeQotIyBpbiBjcm9zcy1jb21waWxlIG1vZGUsIHRoaXMgcmVjaXBlIHdpbGwgZG8g
-YSBuYXRpdmUgYnVpbGQsCi0jIHRoZW4gdGFyIHRoZSByZXN1bHRpbmcgaW5zdGFsbCB0cmVlIGZv
-ciB1c2FnZSBieSB0aGUgbW9ubwotIyBwYWNrYWdlIGluIHN0ZXAgMi4KLSMgU2VlIGh0dHA6Ly93
-d3cubW9uby1wcm9qZWN0LmNvbS9Nb25vOkFSTQotCi1yZXF1aXJlIG1vbm9fMS4yLjYuaW5jCi1y
-ZXF1aXJlIG1vbm8tbWNzLWludGVybWVkaWF0ZS5pbmMKLQotUEFSQUxMRUxfTUFLRSA9ICIiCi0K
-LQpkaWZmIC11cHJOIGEvcmVjaXBlcy9tb25vL21vbm8tbWNzLWludGVybWVkaWF0ZV8xLjkuMSsy
-LjItcmMxLmJiIGIvcmVjaXBlcy9tb25vL21vbm8tbWNzLWludGVybWVkaWF0ZV8xLjkuMSsyLjIt
-cmMxLmJiCi0tLSBhL3JlY2lwZXMvbW9uby9tb25vLW1jcy1pbnRlcm1lZGlhdGVfMS45LjErMi4y
-LXJjMS5iYgkyMDA5LTA3LTIwIDEyOjUwOjQ4LjEwMjY4MTIyOSAtMDYwMAorKysgYi9yZWNpcGVz
-L21vbm8vbW9uby1tY3MtaW50ZXJtZWRpYXRlXzEuOS4xKzIuMi1yYzEuYmIJMTk2OS0xMi0zMSAx
-NzowMDowMC4wMDAwMDAwMDAgLTA3MDAKQEAgLTEsMTUgKzAsMCBAQAotIyBUaGlzIGlzIGEgc3Ry
-YXctbWFuIHJlY2lwZSBmb3Igc3RlcCAxIGluIHRoZSB0d28tc3RlcCBidWlsZCBvZgotIyBtb25v
-LiBCZWNhdXNlIGl0J3MgaW1wb3NzaWJsZSB0byBidWlsZCB0aGUgbWNzIGRpcmVjdG9yeQotIyBp
-biBjcm9zcy1jb21waWxlIG1vZGUsIHRoaXMgcmVjaXBlIHdpbGwgZG8gYSBuYXRpdmUgYnVpbGQs
-Ci0jIHRoZW4gdGFyIHRoZSByZXN1bHRpbmcgaW5zdGFsbCB0cmVlIGZvciB1c2FnZSBieSB0aGUg
-bW9ubwotIyBwYWNrYWdlIGluIHN0ZXAgMi4KLSMgU2VlIGh0dHA6Ly93d3cubW9uby1wcm9qZWN0
-LmNvbS9Nb25vOkFSTQotCi1yZXF1aXJlIG1vbm9fMi4yLjAuaW5jCi1yZXF1aXJlIG1vbm8tbWNz
-LWludGVybWVkaWF0ZS5pbmMKLQotREVGQVVMVF9QUkVGRVJFTkNFID0gIi0xIgotCi0jU1JDX1VS
-SSArPSAiZmlsZTovL2xpYmdjX2NwcGZsYWdzLnBhdGNoO3BhdGNoPTEiCi0KLQpkaWZmIC11cHJO
-IGEvcmVjaXBlcy9tb25vL21vbm8tbWNzLWludGVybWVkaWF0ZV8yLjQuYmIgYi9yZWNpcGVzL21v
-bm8vbW9uby1tY3MtaW50ZXJtZWRpYXRlXzIuNC5iYgotLS0gYS9yZWNpcGVzL21vbm8vbW9uby1t
-Y3MtaW50ZXJtZWRpYXRlXzIuNC5iYgkxOTY5LTEyLTMxIDE3OjAwOjAwLjAwMDAwMDAwMCAtMDcw
-MAorKysgYi9yZWNpcGVzL21vbm8vbW9uby1tY3MtaW50ZXJtZWRpYXRlXzIuNC5iYgkyMDA5LTA3
-LTIwIDEyOjEzOjU4LjkyMDY4MzAwMCAtMDYwMApAQCAtMCwwICsxLDE1IEBACisjIFRoaXMgaXMg
-YSBzdHJhdy1tYW4gcmVjaXBlIGZvciBzdGVwIDEgaW4gdGhlIHR3by1zdGVwIGJ1aWxkIG9mCisj
-IG1vbm8uIEJlY2F1c2UgaXQncyBpbXBvc3NpYmxlIHRvIGJ1aWxkIHRoZSBtY3MgZGlyZWN0b3J5
-CisjIGluIGNyb3NzLWNvbXBpbGUgbW9kZSwgdGhpcyByZWNpcGUgd2lsbCBkbyBhIG5hdGl2ZSBi
-dWlsZCwKKyMgdGhlbiB0YXIgdGhlIHJlc3VsdGluZyBpbnN0YWxsIHRyZWUgZm9yIHVzYWdlIGJ5
-IHRoZSBtb25vCisjIHBhY2thZ2UgaW4gc3RlcCAyLgorIyBTZWUgaHR0cDovL3d3dy5tb25vLXBy
-b2plY3QuY29tL01vbm86QVJNCisKK3JlcXVpcmUgbW9ub18yLjQuMi4yLmluYworcmVxdWlyZSBt
-b25vLW1jcy1pbnRlcm1lZGlhdGUuaW5jCisKK0RFRkFVTFRfUFJFRkVSRU5DRSA9ICItMSIKKwor
-U1JDX1VSSSArPSAiIgorCisKZGlmZiAtdXByTiBhL3JlY2lwZXMvbW9uby9tb25vLW5hdGl2ZV8x
-LjIuNS4xLmJiIGIvcmVjaXBlcy9tb25vL21vbm8tbmF0aXZlXzEuMi41LjEuYmIKLS0tIGEvcmVj
-aXBlcy9tb25vL21vbm8tbmF0aXZlXzEuMi41LjEuYmIJMjAwOS0wNy0yMCAxMjo1MDo0OC4xMDI2
-ODEyMjkgLTA2MDAKKysrIGIvcmVjaXBlcy9tb25vL21vbm8tbmF0aXZlXzEuMi41LjEuYmIJMTk2
-OS0xMi0zMSAxNzowMDowMC4wMDAwMDAwMDAgLTA3MDAKQEAgLTEsMjMgKzAsMCBAQAotcmVxdWly
-ZSBtb25vXzEuMi41LmluYwotUFIgPSAicjIiCi1ERVBFTkRTID0gImdsaWItMi4wLW5hdGl2ZSBw
-ZXJsLW5hdGl2ZSIKLQotU1JDX1VSSSArPSAiZmlsZTovL21vbm8tZml4LWxpYmRpci1wYXRoLnBh
-dGNoO3BhdGNoPTEiCi0KLVBBUkFMTEVMX01BS0UgPSAiIgotCi1pbmhlcml0IG5hdGl2ZQotCi1k
-b19zdGFnZV9wcmVwZW5kKCkgewotCWluc3RhbGwgLW0gNzU1ICR7U30vbW9uby9tb25vYnVyZy9t
-b25vYnVyZyAke1NUQUdJTkdfQklORElSfQotfQotCi1kb19maXhfbGlidG9vbF9uYW1lKCkgewot
-CSMgaW5oZXJpdCBuYXRpdmUgd2lsbCBtYWtlIHRoYXQgYWxsIG5hdGl2ZSB0b29scyB0aGF0IGFy
-ZSBiZWluZwotCSMgYnVpbHQgYXJlIHByZWZpeGVkIHdpdGggc29tZXRoaW5nIGxpa2UgImk2ODYt
-bGludXgtIiwKLQkjIGluY2x1ZGluZyBsaWJ0b29sLiBGaXggdXAgc29tZSBoYXJkY29kZWQgbGli
-dG9vbCBuYW1lczoKLQlmb3IgaSBpbiAiJHtTfSIvcnVudGltZS8qLXdyYXBwZXIuaW47IGRvCi0J
-CXNlZCAtZSAicy9saWJ0b29sLyR7QlVJTERfU1lTfS1saWJ0b29sLyIgLWkgIiR7aX0iCi0JZG9u
-ZQotfQotYWRkdGFzayBmaXhfbGlidG9vbF9uYW1lIGFmdGVyIGRvX3BhdGNoIGJlZm9yZSBkb19j
-b25maWd1cmUKZGlmZiAtdXByTiBhL3JlY2lwZXMvbW9uby9tb25vLW5hdGl2ZV8xLjkuMSsyLjIt
-cmMxLmJiIGIvcmVjaXBlcy9tb25vL21vbm8tbmF0aXZlXzEuOS4xKzIuMi1yYzEuYmIKLS0tIGEv
-cmVjaXBlcy9tb25vL21vbm8tbmF0aXZlXzEuOS4xKzIuMi1yYzEuYmIJMjAwOS0wNy0yMCAxMjo1
-MDo0OC4xMDI2ODEyMjkgLTA2MDAKKysrIGIvcmVjaXBlcy9tb25vL21vbm8tbmF0aXZlXzEuOS4x
-KzIuMi1yYzEuYmIJMTk2OS0xMi0zMSAxNzowMDowMC4wMDAwMDAwMDAgLTA3MDAKQEAgLTEsMjUg
-KzAsMCBAQAotcmVxdWlyZSBtb25vXzIuMi4wLmluYwotUFIgPSAicjMiCi1ERVBFTkRTID0gImds
-aWItMi4wLW5hdGl2ZSBwZXJsLW5hdGl2ZSIKLQotREVGQVVMVF9QUkVGRVJFTkNFID0gIi0xIgot
-Ci0jU1JDX1VSSSArPSAiZmlsZTovL21vbm8tZml4LWxpYmRpci1wYXRoLnBhdGNoO3BhdGNoPTEg
-XAotIwkgICAgZmlsZTovL2xpYmdjX2NwcGZsYWdzLnBhdGNoO3BhdGNoPTEgXAotIyAgICAgICAg
-ICAgIgotCi1pbmhlcml0IG5hdGl2ZQotCi1kb19zdGFnZV9wcmVwZW5kKCkgewotCWluc3RhbGwg
-LW0gNzU1ICR7U30vbW9uby9tb25vYnVyZy9tb25vYnVyZyAke1NUQUdJTkdfQklORElSfQotfQot
-Ci1kb19maXhfbGlidG9vbF9uYW1lKCkgewotCSMgaW5oZXJpdCBuYXRpdmUgd2lsbCBtYWtlIHRo
-YXQgYWxsIG5hdGl2ZSB0b29scyB0aGF0IGFyZSBiZWluZwotCSMgYnVpbHQgYXJlIHByZWZpeGVk
-IHdpdGggc29tZXRoaW5nIGxpa2UgImk2ODYtbGludXgtIiwKLQkjIGluY2x1ZGluZyBsaWJ0b29s
-LiBGaXggdXAgc29tZSBoYXJkY29kZWQgbGlidG9vbCBuYW1lczoKLQlmb3IgaSBpbiAiJHtTfSIv
-cnVudGltZS8qLXdyYXBwZXIuaW47IGRvCi0JCXNlZCAtZSAicy9saWJ0b29sLyR7QlVJTERfU1lT
-fS1saWJ0b29sLyIgLWkgIiR7aX0iCi0JZG9uZQotfQotYWRkdGFzayBmaXhfbGlidG9vbF9uYW1l
-IGFmdGVyIGRvX3BhdGNoIGJlZm9yZSBkb19jb25maWd1cmUKZGlmZiAtdXByTiBhL3JlY2lwZXMv
-bW9uby9tb25vLW5hdGl2ZV8yLjQuYmIgYi9yZWNpcGVzL21vbm8vbW9uby1uYXRpdmVfMi40LmJi
-Ci0tLSBhL3JlY2lwZXMvbW9uby9tb25vLW5hdGl2ZV8yLjQuYmIJMTk2OS0xMi0zMSAxNzowMDow
-MC4wMDAwMDAwMDAgLTA3MDAKKysrIGIvcmVjaXBlcy9tb25vL21vbm8tbmF0aXZlXzIuNC5iYgky
-MDA5LTA3LTIwIDEyOjQyOjQ1Ljk5ODY4MjAwMCAtMDYwMApAQCAtMCwwICsxLDE5IEBACityZXF1
-aXJlIG1vbm9fMi40LjIuMi5pbmMKK1BSID0gInIwIgorREVQRU5EUyA9ICJnbGliLTIuMC1uYXRp
-dmUgcGVybC1uYXRpdmUiCisKK0RFRkFVTFRfUFJFRkVSRU5DRSA9ICItMSIKKworU1JDX1VSSSAr
-PSAiIgorCitpbmhlcml0IG5hdGl2ZQorCitkb19maXhfbGlidG9vbF9uYW1lKCkgeworCSMgaW5o
-ZXJpdCBuYXRpdmUgd2lsbCBtYWtlIHRoYXQgYWxsIG5hdGl2ZSB0b29scyB0aGF0IGFyZSBiZWlu
-ZworCSMgYnVpbHQgYXJlIHByZWZpeGVkIHdpdGggc29tZXRoaW5nIGxpa2UgImk2ODYtbGludXgt
-IiwKKwkjIGluY2x1ZGluZyBsaWJ0b29sLiBGaXggdXAgc29tZSBoYXJkY29kZWQgbGlidG9vbCBu
-YW1lczoKKwlmb3IgaSBpbiAiJHtTfSIvcnVudGltZS8qLXdyYXBwZXIuaW47IGRvCisJCXNlZCAt
-ZSAicy9saWJ0b29sLyR7QlVJTERfU1lTfS1saWJ0b29sLyIgLWkgIiR7aX0iCisJZG9uZQorfQor
-YWRkdGFzayBmaXhfbGlidG9vbF9uYW1lIGFmdGVyIGRvX3BhdGNoIGJlZm9yZSBkb19jb25maWd1
-cmUKZGlmZiAtdXByTiBhL3JlY2lwZXMvbW9uby9tb25vX3N2bi5iYiBiL3JlY2lwZXMvbW9uby9t
-b25vX3N2bi5iYgotLS0gYS9yZWNpcGVzL21vbm8vbW9ub19zdm4uYmIJMjAwOS0wNy0yMCAxMjo1
-MDo0OC4xMDU2ODEwNDMgLTA2MDAKKysrIGIvcmVjaXBlcy9tb25vL21vbm9fc3ZuLmJiCTIwMDkt
-MDctMjAgMTI6NDE6MzYuNDcxNjgzMDAwIC0wNjAwCkBAIC01LDcgKzUsNyBAQCBERVBFTkRTID0g
-Im1vbm8tbmF0aXZlIG1vbm8tbWNzLWludGVybWVkCiBQUiA9ICJyMCIKIERFRkFVTFRfUFJFRkVS
-RU5DRSA9ICItMSIKIAotU1JDX1VSSSArPSAiZmlsZTovL2NvbmZpZ3VyZS1zdm5yODczNTIucGF0
-Y2g7cGF0Y2g9MSIKK1NSQ19VUkkgKz0gIiIKIAogIyBQZXIgaHR0cDovL3d3dy5tb25vLXByb2pl
-Y3QuY29tL01vbm86QVJNCiBFWFRSQV9PRUNPTkYgKz0gIiAtLWRpc2FibGUtbWNzLWJ1aWxkICIK
-QEAgLTM3LDcgKzM3LDcgQEAgZG9faW5zdGFsbF9hcHBlbmQoKSB7CiBpbmhlcml0IG1vbm8KIAog
-IyBJbXBvcnQgZmlsZSBkZWZpbml0aW9ucyBmcm9tIERlYmlhbgotcmVxdWlyZSBtb25vXzEuMi41
-LjEtZmlsZXMuaW5jCityZXF1aXJlIG1vbm9fMi54LWZpbGVzLmluYwogCiAjIEFkZCBzb21lIHBh
-Y2thZ2VzCiBQQUNLQUdFU19hcHBlbmQgPSAiIG1vbm8tZG9jIG1vbm8gbW9uby1ydW50aW1lIgoA
-zgoCBZAGAHwAAAAJAAAAAwAgDqy0AQADACEOAAAAAAMA9w8AAAAAAgH5DwEAAAAQAAAACGyYzS71
-QkqcH7f3FVjCNEAABzB4A7KFfwnKAUAACDB4A7KFfwnKAQMABTcBAAAAHgAHNwEAAAAPAAAAbW9u
-by0yLjQucGF0Y2gAAAMACzf/////5Bs=
+ # Per http://www.mono-project.com/Mono:ARM
+ EXTRA_OECONF += " --disable-mcs-build "
+@@ -37,7 +37,7 @@ do_install_append() {
+ inherit mono
 
-------_=_NextPart_001_01CA097F.85E8D960--
+ # Import file definitions from Debian
+-require mono_1.2.5.1-files.inc
++require mono_2.x-files.inc
+
+ # Add some packages
+ PACKAGES_append = " mono-doc mono mono-runtime"
+
+
