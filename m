@@ -1,33 +1,20 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [81.228.8.164] (helo=pne-smtpout2-sn2.hy.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <josh@sles10-64.ott.cti.com>) id 1MT0q7-0006My-FT
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MTB1Y-0007hN-VB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Jul 2009 23:56:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 0FECE3BFA68;
-	Mon, 20 Jul 2009 17:42:09 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 30714-02; Mon, 20 Jul 2009 17:42:08 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id D9EC14ECC92; Mon, 20 Jul 2009 17:42:08 -0400 (EDT)
-X-Spam-Score: 
-X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.2 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 9C4722709B8;
-	Mon, 20 Jul 2009 17:42:07 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1001)
-	id 7FE2BA843D4; Mon, 20 Jul 2009 17:42:07 -0400 (EDT)
-From: Josh Mahonin <jmahonin@cbnco.com>
+	Tue, 21 Jul 2009 10:48:45 +0200
+Received: from [10.175.196.247] (213.66.88.59) by
+	pne-smtpout2-sn2.hy.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A5BC8BE0007CCE5 for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Jul 2009 10:34:34 +0200
+Message-ID: <4A657D58.4070404@atmel.com>
+Date: Tue, 21 Jul 2009 10:33:28 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jul 2009 17:41:00 -0400
-Message-Id: <1248126060-4365-1-git-send-email-jmahonin@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH] pciutils_3.1.2.bb: Make sure lspci reads pci.ids.gz from right location
+Subject: [RFC] hal-0.5.12 requires blkid >= 1.43
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,66 +28,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jul 2009 21:56:07 -0000
+X-List-Received-Date: Tue, 21 Jul 2009 08:49:31 -0000
+Content-Type: multipart/mixed; boundary="------------000300020207000604000605"
 
-Previously this version of 'lspci' would attempt to open pci.ids, because of
-incorrect paths at configure-time.  New pciutils Makefile makes use of a
-'DESTDIR' flag that we can set as the staging directory, and an 'IDSDIR' flag
-which holds the location of the pci.ids{.gz} files.  Also bumped PR.
+--------------000300020207000604000605
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Josh Mahonin <jmahonin@cbnco.com>
+hal does not build when bitbaking gpe-image,since
+blkid is 1.41.8 and hal requires >= 1.43.
+1.41.8 seems to be the latest!
+The attached patch fixes configure and configure.in in the hal
+
+First the patch to the recipe.
+
+diff --git a/recipes/hal/hal_0.5.12.bb b/recipes/hal/hal_0.5.12.bb
+index b6531e8..155c2e3 100644
+--- a/recipes/hal/hal_0.5.12.bb
++++ b/recipes/hal/hal_0.5.12.bb
+@@ -2,6 +2,10 @@ require hal.inc
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
++PR = "r1"
++
++SRC_URI += " file://hal-0.5.12-blkid-1.41.patch;patch=1"
++
+ # The following code finds the right linux/input.h,
+ # which also works with external-toolchain/SDK
+ do_configure() {
+
+
 ---
- recipes/pciutils/pciutils_3.1.2.bb |   18 ++++++++++--------
- 1 files changed, 10 insertions(+), 8 deletions(-)
-
-diff --git a/recipes/pciutils/pciutils_3.1.2.bb b/recipes/pciutils/pciutils_3.1.2.bb
-index d7458a1..ae7317e 100644
---- a/recipes/pciutils/pciutils_3.1.2.bb
-+++ b/recipes/pciutils/pciutils_3.1.2.bb
-@@ -12,7 +12,7 @@ SRC_URI_append_nylon = "file://gcc-3-compatibility.patch;patch=1 "
- 
- PARALLEL_MAKE = ""
- 
--PR ="r2"
-+PR ="r3"
- 
- EXTRA_OEMAKE += "'STRIP = '"
- export SHARED=yes
-@@ -21,18 +21,20 @@ do_configure () {
- 	(cd lib && ./configure ${datadir} ${PV} ${TARGET_OS} 2.4.21 ${TARGET_ARCH})
- }
- 
--export PREFIX = "${D}${prefix}"
--export SBINDIR = "${D}${sbindir}"
--export SHAREDIR = "${D}${datadir}"
--export MANDIR = "${D}${mandir}"
-+export DESTDIR = "${D}"
-+export PREFIX = "${prefix}"
-+export SBINDIR = "${sbindir}"
-+export SHAREDIR = "${datadir}"
-+export MANDIR = "${mandir}"
-+export IDSDIR = "${datadir}"
- 
- do_install () {
- 	oe_runmake install
- }
- 
- do_install_append () {
--	install -d ${D}/${prefix}/share
--	install -m 6440 ${WORKDIR}/${PN}-${PV}/pci.ids ${D}/${prefix}/share
-+	install -d ${D}/${datadir}
-+	install -m 6440 ${WORKDIR}/${PN}-${PV}/pci.ids.gz ${D}/${datadir}
- 
- 	# The makefile does not install the development files:
- 	# libpci.so pci.h header.h config.h types.h
-@@ -57,4 +59,4 @@ do_stage () {
- 
- 
- PACKAGES =+ "pciutils-ids"
--FILES_pciutils-ids="${prefix}/share/pci.ids"
-+FILES_pciutils-ids="${datadir}/pci.ids.gz"
--- 
-1.6.3
+Then the patch which should reside in the
+"recipe/hal/hal-0.5.12/hal-0.5.12-blkid-1.41.patch"
 
 
+diff -urN a/configure b/configure
+--- a/configure    2009-07-21 10:02:37.000000000 +0200
++++ b/configure    2009-07-21 10:06:27.000000000 +0200
+@@ -2791,7 +2791,7 @@
+ 
+ glib_module="glib-2.0 >= 2.10.0 gobject-2.0 > 2.10.0 dbus-glib-1 >= 0.61"
+ dbus_module="dbus-1 >= 0.61"
+-blkid_module="blkid >= 1.43"
++blkid_module="blkid >= 1.41"
+ polkit_module="polkit >= 0.5"
+ 
+ # libtool versioning - this applies to libhal and libhal-storage
+diff -urN a/configure.in b/configure.in
+--- a/configure.in    2009-05-10 21:43:52.000000000 +0200
++++ b/configure.in    2009-07-21 10:06:51.000000000 +0200
+@@ -13,7 +13,7 @@
+ 
+ glib_module="glib-2.0 >= 2.10.0 gobject-2.0 > 2.10.0 dbus-glib-1 >= 0.61"
+ dbus_module="dbus-1 >= 0.61"
+-blkid_module="blkid >= 1.43"
++blkid_module="blkid >= 1.41"
+ polkit_module="polkit >= 0.5"
+ 
+ # libtool versioning - this applies to libhal and libhal-storage
 
+
+Comments?
+
+Best Regards
+Ulf Samuelsson
+
+
+--------------000300020207000604000605
+Content-Type: text/x-patch;
+ name="hal-0.5.12-blkid-1.41.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="hal-0.5.12-blkid-1.41.patch"
+
+diff -urN a/configure b/configure
+--- a/configure	2009-07-21 10:02:37.000000000 +0200
++++ b/configure	2009-07-21 10:06:27.000000000 +0200
+@@ -2791,7 +2791,7 @@
+ 
+ glib_module="glib-2.0 >= 2.10.0 gobject-2.0 > 2.10.0 dbus-glib-1 >= 0.61"
+ dbus_module="dbus-1 >= 0.61"
+-blkid_module="blkid >= 1.43"
++blkid_module="blkid >= 1.41"
+ polkit_module="polkit >= 0.5"
+ 
+ # libtool versioning - this applies to libhal and libhal-storage
+diff -urN a/configure.in b/configure.in
+--- a/configure.in	2009-05-10 21:43:52.000000000 +0200
++++ b/configure.in	2009-07-21 10:06:51.000000000 +0200
+@@ -13,7 +13,7 @@
+ 
+ glib_module="glib-2.0 >= 2.10.0 gobject-2.0 > 2.10.0 dbus-glib-1 >= 0.61"
+ dbus_module="dbus-1 >= 0.61"
+-blkid_module="blkid >= 1.43"
++blkid_module="blkid >= 1.41"
+ polkit_module="polkit >= 0.5"
+ 
+ # libtool versioning - this applies to libhal and libhal-storage
+
+--------------000300020207000604000605--
