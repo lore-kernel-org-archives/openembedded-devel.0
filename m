@@ -1,30 +1,25 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MTJMk-00088X-MT
+	(envelope-from <philb@gnu.org>) id 1MTJr3-0000pg-6G
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Jul 2009 19:43:02 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 0F4DA518105
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2009 13:28:59 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 04191-06 for <openembedded-devel@lists.openembedded.org>; 
-	Tue, 21 Jul 2009 13:28:58 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id DB6C15180F8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jul 2009 13:28:58 -0400 (EDT)
-Message-ID: <4A65FADA.4070604@cbnco.com>
-Date: Tue, 21 Jul 2009 13:28:58 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Tue, 21 Jul 2009 20:14:21 +0200
+Received: from 79-79-174-216.dynamic.dsl.as9105.com ([79.79.174.216]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MTJdP-0003Q1-My
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Jul 2009 19:00:16 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4A65F5D8.6060503@atmel.com>
-In-Reply-To: <4A65F5D8.6060503@atmel.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [RFC] Fix native perl so it builds on x64 OpenSuSE 11.1
+In-Reply-To: <4A65EF53.1080508@atmel.com>
+References: <4A657D58.4070404@atmel.com>
+	<1248173048.28930.59.camel@mill.internal.reciva.com>
+	<4A65EF53.1080508@atmel.com>
+Date: Tue, 21 Jul 2009 19:00:14 +0100
+Message-Id: <1248199214.16040.450.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [RFC] hal-0.5.12 requires blkid >= 1.43
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,24 +33,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jul 2009 17:43:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 21 Jul 2009 18:14:21 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Ulf Samuelsson wrote:
-> The native perl build  fails on my x64  OpenSuSE 11.1 machine.
-> People suggest that disabling ODBM_File will fix this problem.
-> It works for me...
+On Tue, 2009-07-21 at 18:39 +0200, Ulf Samuelsson wrote:
+> Looks like "gpe-image" should be updated to use "util-linux-ng"
+> instead of my proposed patch.
 
-Yeah, this looks like it would fix it.
+I don't think this is a gpe-image issue as such; it sounds more like a
+case of wrong dependencies on the hal package.
 
-The problem is SuSE 11's gdbm-devel 1.8.3 installs some hacked-up 
-include file in /usr/include/dbm.h (it's not the one from stock gdbm 
-1.8.3), and Perl looks there. Meanwhile, gdbm-native 1.8.3 in OE doesn't 
-stage dbm.h, so even if perl-native looked in the right place, the 
-module wouldn't build. So both perl-native and gdbm-native need a fix, 
-or this (afaik unused) module can just be disabled.
+p.
 
-Mike
+
 
 
