@@ -1,30 +1,31 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MTXpR-0002n3-4d
-	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 11:09:37 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6M8sQKc013407; Wed, 22 Jul 2009 09:54:26 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 5J8H+u3i18Dw; Wed, 22 Jul 2009 09:54:26 +0100 (BST)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6M8sL2P013394
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Wed, 22 Jul 2009 09:54:25 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MTY7l-0000pK-4X
+	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 11:28:33 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MTXu5-00069M-Ac
+	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 09:14:25 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 22 Jul 2009 09:14:25 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Wed, 22 Jul 2009 09:14:25 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <4A66482B.6010304@cbnco.com>
-References: <1248201134.26475.15.camel@dax.rpnet.com>
-	<1248212992.26475.35.camel@dax.rpnet.com> <4A66482B.6010304@cbnco.com>
-Date: Wed, 22 Jul 2009 09:53:19 +0100
-Message-Id: <1248252799.10252.5.camel@dax.rpnet.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 22 Jul 2009 11:14:11 +0200
+Message-ID: <h46l93$4ng$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090712 Shredder/3.0b3pre
+Sender: news <news@ger.gmane.org>
+Subject: Buildsummary, where did it go?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,61 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2009 09:09:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 22 Jul 2009 09:28:33 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-07-21 at 18:58 -0400, Michael Smith wrote:
-> I've been playing around with this and it seems to be creating some 
-> problems, unless it's just finding problems in my overlay that the old 
-> code didn't see.
-> 
-> With the latest fix, it finds dependency loops, but I'm not sure how to 
-> track them down as the dependencies are identified only by numbers:
+Hi,
 
-Thanks for testing. It is actually telling you the problem and decoding
-the information:
+I just noticed that /etc/angstrom-version didn't have the git revision 
+and branch any more, so I looked into base.bbclass and after 2 hours I 
+did this:
 
-> Dependency loop #1 found:
->    Task 7 
-> (/home/michael/startitup/public/recipes/images/toastix-image.bb, 
-> do_install) (depends: set([9, 6]))
->    Task 8 
-> (/home/michael/startitup/public/recipes/images/toastix-image.bb, 
-> do_populate_staging) (depends: set([7]))
->    Task 9 
-> (/home/michael/startitup/public/recipes/images/toastix-image.bb, 
-> do_rootfs) (depends: set([1024, 6, 2049, 8, 2057, 2059, 13, 791, 2067, 
-> 21, 23, 2077, 31, 33, 2087, 41, 43, 2097, 51, 53, 2107,
+-	branch = os.popen('cd %s; PATH=%s git symbolic-ref HEAD 2>/dev/null' % 
+(path, d.getVar("BBPATH", 1))).read().rstrip()
++	branch = os.popen('cd %s; PATH=%s git symbolic-ref HEAD 2>/dev/null' % 
+(path, d.getVar("PATH", 1))).read().rstrip()
 
-So task 7 depends on task 9 which depends on task 8 which depends on
-task 7. Its lists what tasks 7, 8 and 9 are.
+-	rev = os.popen("cd %s; PATH=%s git show-ref HEAD 2>/dev/null" % (path, 
+d.getVar("BBPATH", 1))).read().split(" ")[0].rstrip()
++	rev = os.popen("cd %s; PATH=%s git show-ref HEAD 2>/dev/null" % (path, 
+d.getVar("PATH", 1))).read().split(" ")[0].rstrip()
 
-Is it just this image recipe thats causing problems or are there others?
-Can you point me at a copy of the recipe?
+That bug went largely unnoticed due to the build summary not being 
+displayed anymore.
 
-> Before the fix from 502bd2e, it was dropping some do_package_write_deb 
-> dependencies that are needed to ensure .debs are built for packages that 
-> are not listed in IMAGE_INSTALL, but are required by other packages. My 
-> task-depends.dot was missing about 1000 entries. So was my depends.dot.
+How do I get it back? I like it very much. Sadly the stable/2009 branch 
+is missing it as well due to kergoths patches.
 
-Yes, without the fix it would do that.
+regards,
 
-> BTW, is there any chance of getting Bitbake officially moved to a Git 
-> repo? I think a few people are working out of git-svn trees, or subdirs 
-> inside larger git trees, but it takes some gymnastics to merge between 
-> them as Git doesn't know they're related.
-
-As Chris replied, he's looking at this. I admit I'd like to see bitbake
-moved to git.
-
-Cheers,
-
-Richard
-
--- 
-Richard Purdie
-Intel Open Source Technology Centre
+Koen
 
 
 
