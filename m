@@ -1,41 +1,34 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MTR5W-0008V3-1Z
-	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 03:57:46 +0200
-Received: by qw-out-1920.google.com with SMTP id 5so1265284qwc.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MTW9R-0008AF-03
+	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 09:22:09 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MTVvj-0008Kh-Ih
+	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 07:07:59 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Wed, 22 Jul 2009 07:07:59 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@openembedded.org>;
-	Tue, 21 Jul 2009 18:43:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to:cc
-	:content-type:content-transfer-encoding;
-	bh=q66eMwdTIIya6mK1W139Ck6qjPLYh/jfiy5s4zFuAVM=;
-	b=qbJLS0frOKJmN4FfzbN7eQKYyopYjPMsWlxl/H6Y+HWxjNfIUwDTLDa97I6AqcPqGX
-	ulLfCP/vAjc0QciSkkFuiznMhN5be5qUYocu50FDJ9n90qjiHw/w1d3+A8O3l+Dy21UP
-	MYAXbWMMWEcN0cus5zZdK8gmnkWaiB7Cbac4s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	b=IBYnI8dgfXZhnybGLcWGXWYDWwHav809V2+VdpaWm9GFY2iZOEnRhd78mr6innu04h
-	837egm56Q8y+AQ7wE7nFVYmQqZ7MLO3DM3UdmA3msmNTBhMnqjqrU/M27HJqDtPhkons
-	NSfP1TV+IFt6vz9o0e6ttrDCd2tfrnQqttupI=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.220.46.20 with SMTP id h20mr290125vcf.55.1248227020066; Tue, 
-	21 Jul 2009 18:43:40 -0700 (PDT)
-In-Reply-To: <4A66482B.6010304@cbnco.com>
-References: <1248201134.26475.15.camel@dax.rpnet.com>
-	<1248212992.26475.35.camel@dax.rpnet.com> 
-	<4A66482B.6010304@cbnco.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 21 Jul 2009 18:43:20 -0700
-X-Google-Sender-Auth: 881096f18d16fe32
-Message-ID: <b6ebd0a50907211843w2f5d0c64w3e01630c947f6227@mail.gmail.com>
-To: Michael Smith <msmith@cbnco.com>
-Cc: openembedded-devel <openembedded-devel@openembedded.org>,
-	bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
+	Wed, 22 Jul 2009 07:07:59 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 22 Jul 2009 09:07:46 +0200
+Message-ID: <h46ds3$etn$1@ger.gmane.org>
+References: <f96d234e0907210900t23a05722v7b37c78b0ea3ceed@mail.gmail.com>
+	<4A6627C9.9090801@atmel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090712 Shredder/3.0b3pre
+In-Reply-To: <4A6627C9.9090801@atmel.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: OE weekly changelog 2009-07-13 to 2009-07-20 - Bluetooth still not working
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,34 +42,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2009 01:57:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Jul 2009 07:22:10 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 21, 2009 at 3:58 PM, Michael Smith<msmith@cbnco.com> wrote:
-> BTW, is there any chance of getting Bitbake officially moved to a Git
-> repo? I think a few people are working out of git-svn trees, or subdirs
-> inside larger git trees, but it takes some gymnastics to merge between
-> them as Git doesn't know they're related.
+On 21-07-09 22:40, Ulf Samuelsson wrote:
+> Cliff Brake skrev:
+>> OE weekly changelog 2009-07-13 to 2009-07-20
+>>
+>> Dmitry Eremin-Solenikov (5):
+>>    bluez4: make bluez4-dev rprovide bluez-libs-dev to fix SDK building
+>>
+>> Graeme Gregory (10):
+>>    Revert "bluez3: blacklist for angstrom, bluez4 should be used instead"
+>>    angstrom-2008.1.conf : add bluez3 blacklist
+>>
+>> Koen Kooi (31):
+>>    bluez3: blacklist for angstrom, bluez4 should be used instead
+>>    bluez4: provide bluez-utils-dbus as well
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+> Seems Bluetooth support still is not healthy.
+> Building Angstrom gpe-image for sam9263:
+>
+> ++++++++++++++++
+> ulf@grond:~/projects/OE_atmel/build>  bitbake gpe-image
+> /home/ulf/projects/OE_atmel/bitbake/lib/bb/COW.py:29:
+> DeprecationWarning: the sets module is deprecated
+>    import types, sets
+> NOTE: Handling BitBake files: / (4928/6992) [70 %]NOTE: Angstrom DOES
+> NOT support bluez-utils because bluez3 has been replace by bluez4
+> NOTE: Angstrom DOES NOT support bluez-utils because bluez3 has been
+> replace by bluez4
+> NOTE: Handling BitBake files: \ (4932/6992) [70 %]NOTE: Angstrom DOES
+> NOT support bluez-libs because bluez3 has been replace by bluez4
+> NOTE: Handling BitBake files: | (4940/6992) [70 %]NOTE: Angstrom DOES
+> NOT support bluez-libs because bluez3 has been replace by bluez4
+> NOTE: Angstrom DOES NOT support bluez-libs because bluez3 has been
+> replace by bluez4
+> NOTE: Handling BitBake files: \ (6992/6992) [100 %]
+> NOTE: Parsing finished. 0 cached, 6699 parsed, 293 skipped, 0 masked.
+> NOTE: Resolving any missing task queue dependencies
+> NOTE: Runtime target 'bluez-utils-dbus' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['bluez-utils-dbus',
+> 'bluez-libs-3.36']
+> ERROR: Required build target 'gpe-image' has no buildable providers.
+> Missing or unbuildable dependency chain was: ['gpe-image',
+> 'task-gpe-base', 'bluez-utils-dbus', 'bluez-libs-3.36']
+> -----------------------------
+>
+> Do we want to disable bluetooth in Angstrom,  until this is fixed,
+> or is it just gpe-image that has a problem with bluetooth?
 
-I'm working on that now, Mike.  I have my current version at
-http://github.com/kergoth/BitBake/ -
-git://github.com/kergoth/BitBake.git.  It is 1) old bkcvs history, 2)
-pre-reorg layout on the svn, 3) post-reorg layout on the svn, with the
-OE metadata history mostly ripped out, as well as the old test recipes
-and stuff, so its down to just bitbake.  There are still some minor
-annoyances in commit log message formatting, but those are difficult
-to fix automatically, and are generally cosmetic, so I think I won't
-bother with those.  If this repo seems sane to people, we can see
-about getting it onto the OE git server.
+A few things:
 
--- 
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+1) don't use gpe-image with angstrom, but x11-image or x11-gpe-image
+2) 
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=165ddf1987723725ab49189a3533b8ae65100bfa
+3) No, don't disable bluetooth in angstrom when some crufty old recipe 
+depends on stuff we removed years ago from OE.
+
 
 
