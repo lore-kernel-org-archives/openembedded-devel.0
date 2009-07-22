@@ -1,34 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MTW9R-0008AF-03
-	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 09:22:09 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MTVvj-0008Kh-Ih
-	for openembedded-devel@openembedded.org; Wed, 22 Jul 2009 07:07:59 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 22 Jul 2009 07:07:59 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 22 Jul 2009 07:07:59 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 22 Jul 2009 09:07:46 +0200
-Message-ID: <h46ds3$etn$1@ger.gmane.org>
-References: <f96d234e0907210900t23a05722v7b37c78b0ea3ceed@mail.gmail.com>
-	<4A6627C9.9090801@atmel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090712 Shredder/3.0b3pre
-In-Reply-To: <4A6627C9.9090801@atmel.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: OE weekly changelog 2009-07-13 to 2009-07-20 - Bluetooth still not working
+	(envelope-from <stefan@datenfreihafen.org>) id 1MTWLB-0001NB-S4
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Jul 2009 09:34:17 +0200
+Received: from w1722.wlan.rz.tu-bs.de ([134.169.206.198] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1MTW7H-0002xH-Mt by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jul 2009 09:20:10 +0200
+Received: from stefan by excalibur.local with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1MTW7H-0000g0-Ev
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 22 Jul 2009 09:19:55 +0200
+Date: Wed, 22 Jul 2009 09:19:55 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090722071955.GA1523@excalibur.local>
+References: <20090721144752.GA26047@excalibur.local>
+	<4A65D66B.8050108@balister.org>
+	<20090721151040.GB26047@excalibur.local>
+MIME-Version: 1.0
+In-Reply-To: <20090721151040.GB26047@excalibur.local>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: devmem2 checksum mismatch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,69 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jul 2009 07:22:10 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Jul 2009 07:34:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 21-07-09 22:40, Ulf Samuelsson wrote:
-> Cliff Brake skrev:
->> OE weekly changelog 2009-07-13 to 2009-07-20
->>
->> Dmitry Eremin-Solenikov (5):
->>    bluez4: make bluez4-dev rprovide bluez-libs-dev to fix SDK building
->>
->> Graeme Gregory (10):
->>    Revert "bluez3: blacklist for angstrom, bluez4 should be used instead"
->>    angstrom-2008.1.conf : add bluez3 blacklist
->>
->> Koen Kooi (31):
->>    bluez3: blacklist for angstrom, bluez4 should be used instead
->>    bluez4: provide bluez-utils-dbus as well
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> Seems Bluetooth support still is not healthy.
-> Building Angstrom gpe-image for sam9263:
->
-> ++++++++++++++++
-> ulf@grond:~/projects/OE_atmel/build>  bitbake gpe-image
-> /home/ulf/projects/OE_atmel/bitbake/lib/bb/COW.py:29:
-> DeprecationWarning: the sets module is deprecated
->    import types, sets
-> NOTE: Handling BitBake files: / (4928/6992) [70 %]NOTE: Angstrom DOES
-> NOT support bluez-utils because bluez3 has been replace by bluez4
-> NOTE: Angstrom DOES NOT support bluez-utils because bluez3 has been
-> replace by bluez4
-> NOTE: Handling BitBake files: \ (4932/6992) [70 %]NOTE: Angstrom DOES
-> NOT support bluez-libs because bluez3 has been replace by bluez4
-> NOTE: Handling BitBake files: | (4940/6992) [70 %]NOTE: Angstrom DOES
-> NOT support bluez-libs because bluez3 has been replace by bluez4
-> NOTE: Angstrom DOES NOT support bluez-libs because bluez3 has been
-> replace by bluez4
-> NOTE: Handling BitBake files: \ (6992/6992) [100 %]
-> NOTE: Parsing finished. 0 cached, 6699 parsed, 293 skipped, 0 masked.
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: Runtime target 'bluez-utils-dbus' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['bluez-utils-dbus',
-> 'bluez-libs-3.36']
-> ERROR: Required build target 'gpe-image' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['gpe-image',
-> 'task-gpe-base', 'bluez-utils-dbus', 'bluez-libs-3.36']
-> -----------------------------
->
-> Do we want to disable bluetooth in Angstrom,  until this is fixed,
-> or is it just gpe-image that has a problem with bluetooth?
+Hello.
 
-A few things:
+On Tue, 2009-07-21 at 17:10, Stefan Schmidt wrote:
+> 
+> On Tue, 2009-07-21 at 10:53, Philip Balister wrote:
+> > Stefan Schmidt wrote:
+> > >
+> > >I just run into this one:
+> > >NOTE: The MD5Sums did not match. Wanted: 'be12c0132a1ae118cbf5e79d98427c1d' and Got: 'e23f236e94be4c429aa1ceac0f01544b'
+> > >NOTE: Task failed: Checksum of 'http://www.lartmaker.nl/lartware/port/devmem2.c' failed
+> > >
+> > >Seems they changed the file. Version control is really nothing for everybody. ;)
+> > 
+> > Change the checksum after looking over the file a bit to make sure
+> > there is no funny business.
+> 
+> Will do this in the evening, have to run now. But I expect no real problems.
+> Especially as we have this checksum for the file already, just on a different
+> URI. Means OE already used that version at some point. :)
 
-1) don't use gpe-image with angstrom, but x11-image or x11-gpe-image
-2) 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=165ddf1987723725ab49189a3533b8ae65100bfa
-3) No, don't disable bluetooth in angstrom when some crufty old recipe 
-depends on stuff we removed years ago from OE.
+I just reviewed the file and pushed the chages to checksums.ini. The file itself
+was small and easy enough to understand for a fast review.
 
+regards
+Stefan Schmidt
 
 
