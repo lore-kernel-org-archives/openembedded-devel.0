@@ -1,29 +1,24 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MTyBO-0006mW-VE
-	for openembedded-devel@openembedded.org; Thu, 23 Jul 2009 15:18:08 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6ND2h64020305; Thu, 23 Jul 2009 14:02:43 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id dQ7dOg-Gd+n0; Thu, 23 Jul 2009 14:02:43 +0100 (BST)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6ND2dv9020291
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Thu, 23 Jul 2009 14:02:41 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <b6ebd0a50907221506k6b4bfd66gd79ff202232576b1@mail.gmail.com>
-References: <b6ebd0a50907221506k6b4bfd66gd79ff202232576b1@mail.gmail.com>
-Date: Thu, 23 Jul 2009 14:01:46 +0100
-Message-Id: <1248354106.14790.31.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>
-Subject: Re: BitBake is now in git [cross-posted]
+	(envelope-from <holger+oe@freyther.de>) id 1MTyDW-0006qA-W9
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jul 2009 15:20:20 +0200
+Received: from tamarin.localnet (123-192-186-20.dynamic.kbronet.com.tw
+	[123.192.186.20])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DB87F1B10C0C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jul 2009 13:07:30 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Jul 2009 15:05:03 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc2; KDE/4.2.96; i686; ; )
+References: <1248201134.26475.15.camel@dax.rpnet.com>
+	<200907231246.26866.khimov@altell.ru>
+	<1248351596.14790.28.camel@dax.rpnet.com>
+In-Reply-To: <1248351596.14790.28.camel@dax.rpnet.com>
+MIME-Version: 1.0
+Message-Id: <200907231505.03473.holger+oe@freyther.de>
+Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,24 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2009 13:18:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 23 Jul 2009 13:20:31 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-07-22 at 15:06 -0700, Chris Larson wrote:
-> Just an fyi that a (imo) fairly sane bitbake git repo is up on
-> git.openembedded.org now.  The cgit is acting up, but cbrake will take
-> care of that eventually :)
+On Thursday 23 July 2009 14:19:56 Richard Purdie wrote:
+> On Thu, 2009-07-23 at 12:46 +0400, Roman I Khimov wrote:
 
-I realised I've seen that problem before and was able to point zecke at
-how to fix it. I've taken a look at the history and am happy with it so
-I'd say we should make this official. Thanks for the hard work in making
-it happen, its overdue and much appreciated!
+> Also note that DEPENDS only gets its magical meaning from the entry in
+> base.bbclass which says:
+>
+> do_configure[deptask] = "do_populate_staging"
+>
+> and these forms are what bitbake actually works with, not the shorthand
+> convenience forms of DEPENDS and RDEPENDS.
 
-Cheers,
+I agree with Richard that the mentioned commit should be reverted and that 
+inter rootfs dependencies need to be handled with task dependencies[1].
 
-Richard
+love
+	z.
 
 
+[1] given the current bitbake implementation
 
 
