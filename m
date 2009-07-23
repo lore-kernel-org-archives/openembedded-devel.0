@@ -1,19 +1,22 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MTvfn-0005YD-Oo
-	for openembedded-devel@openembedded.org; Thu, 23 Jul 2009 12:37:15 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MTvRI-0001VO-FM
-	for openembedded-devel@openembedded.org; Thu, 23 Jul 2009 12:22:16 +0200
-Message-ID: <4A683A05.7060204@kernelconcepts.de>
-Date: Thu, 23 Jul 2009 12:23:01 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MTwho-0006Wj-FA
+	for openembedded-devel@openembedded.org; Thu, 23 Jul 2009 13:43:24 +0200
+Received: (qmail 16559 invoked by uid 813007); 23 Jul 2009 11:29:09 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Jul 2009 11:29:09 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Jul 2009 13:29:00 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc3-00104-g3553fe1; KDE/4.2.96; x86_64; ;
+	)
+References: <1248266770-24788-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1248266770-24788-1-git-send-email-k.kooi@student.utwente.nl>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@openembedded.org>
-X-Enigmail-Version: 0.95.7
-Subject: RFC: eglibc libc6 and tzdata
+Message-Id: <200907231329.00754.marcin@juszkiewicz.com.pl>
+Subject: Re: [STABLE][PATCH] dhcp 3.0.2: fix QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,61 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2009 10:37:16 -0000
-Content-Type: multipart/mixed; boundary="------------090700080101090401090202"
+X-List-Received-Date: Thu, 23 Jul 2009 11:43:26 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------090700080101090401090202
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+Dnia =C5=9Broda, 22 lipca 2009 o 14:46:10 Koen Kooi napisa=C5=82(a):
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
 
-Hi,
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-the eglibc libc6 package provides tzdata. The applied patch add this knowledge
-to the eglibc-package class.
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
-
---------------090700080101090401090202
-Content-Type: text/x-patch;
- name="0001-eglibc-libc6-package-provides-tzdata.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="0001-eglibc-libc6-package-provides-tzdata.patch"
-
-From 30d75e2580414498c86c6c1e023d35631019c370 Mon Sep 17 00:00:00 2001
-From: Florian Boor <florian.boor@kernelconcepts.de>
-Date: Thu, 23 Jul 2009 12:17:33 +0200
-Subject: [PATCH] eglibc: libc6 package provides tzdata
- Avoids conflict with tzdata package.
-
----
- recipes/eglibc/eglibc-package.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
-index d8ac4f4..11311b6 100644
---- a/recipes/eglibc/eglibc-package.bbclass
-+++ b/recipes/eglibc/eglibc-package.bbclass
-@@ -29,7 +29,7 @@ BINARY_LOCALE_ARCHES ?= "arm.* i[3-6]86 x86_64 powerpc"
- PACKAGES = "eglibc-dbg eglibc catchsegv sln nscd ldd localedef eglibc-utils eglibc-dev eglibc-doc eglibc-locale libsegfault eglibc-extra-nss eglibc-thread-db eglibc-pcprofile"
- PACKAGES_DYNAMIC = "glibc-gconv-* glibc-charmap-* glibc-localedata-* glibc-binary-localedata-* eglibc-gconv-* eglibc-charmap-* eglibc-localedata-* eglibc-binary-localedata-* locale-base-*"
- 
--RPROVIDES_eglibc = "glibc"
-+RPROVIDES_eglibc = "glibc tzdata"
- RPROVIDES_eglibc-utils = "glibc-utils"
- RPROVIDES_eglibc-dev = "glibc-dev"
- RPROVIDES_eglibc-doc = "glibc-doc"
--- 
-1.5.6.5
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
---------------090700080101090401090202--
+
+
