@@ -1,36 +1,34 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [209.85.220.228] (helo=mail-fx0-f228.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MU2Vz-0002GJ-Ti
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jul 2009 19:55:35 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1MU2I8-000Hbr-T4
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jul 2009 21:41:17 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jul 2009 21:41:13 +0400
-User-Agent: KMail/1.11.4 (Linux/2.6.30-1-amd64; KDE/4.2.4; x86_64; ; )
-References: <1248201134.26475.15.camel@dax.rpnet.com>
-	<200907231246.26866.khimov@altell.ru>
-	<1248351596.14790.28.camel@dax.rpnet.com>
-In-Reply-To: <1248351596.14790.28.camel@dax.rpnet.com>
+	(envelope-from <kergoth@gmail.com>) id 1MU2o3-0002oo-1L
+	for openembedded-devel@openembedded.org; Thu, 23 Jul 2009 20:14:15 +0200
+Received: by fxm28 with SMTP id 28so1035358fxm.12
+	for <openembedded-devel@openembedded.org>;
+	Thu, 23 Jul 2009 10:59:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=jo0ie+/4Oxrxng7xqGZ2ZlFZa8PeSBKuxXunUchIhBE=;
+	b=DzIYLLmM+DXd1Zyp5y7mqtyzN9yhq/miQyBt/7obIlTMhY9CNFsPkgu5XkVp+1o0Tv
+	XgteELEswVbpeiD98ADeDu3+SIFsasXCDclPBwomWFjBS2egswhvYl9wyHBxQazkYpDJ
+	XCHH0LNvahe+xtI84l2z0m3u9HVveprX8Sdac=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type:content-transfer-encoding;
+	b=lUWMElcrSv+QuhoA1vt1DEdG0m0f+a1SpP1dXrE/ldYysooSfUH9Xo0cp1j0ZO7I53
+	p2irLVIdVVmmH5N2vY/+eRYqjySdcoINHx8KjP1fljTOKJkT8dL5oVNLpB7+CYHvuh7G
+	+PSXxFwAoJm6BIWlGklmKAyDaSc8EntqjnvGs=
 MIME-Version: 1.0
-Message-Id: <200907232141.13597.khimov@altell.ru>
-X-SpamTest-Envelope-From: khimov@altell.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 9140 [Jul 23 2009]
-X-SpamTest-Info: {UDS BL}
-X-SpamTest-Info: {DNSBL Rate: medium}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 50
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
+Sender: kergoth@gmail.com
+Received: by 10.223.119.5 with SMTP id x5mr1357022faq.40.1248371996192; Thu, 
+	23 Jul 2009 10:59:56 -0700 (PDT)
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 23 Jul 2009 10:59:36 -0700
+X-Google-Sender-Auth: 4e692066493fd009
+Message-ID: <b6ebd0a50907231059p27e821edlf3c7f92838ba4cac@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: UserVoice for feature/enhancement requests rather than bugzilla?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,19 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2009 17:55:36 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Jul 2009 18:14:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 23 =D0=B8=D1=8E=D0=BB=D1=8F 2=
-009 16:19:56 Richard Purdie wrote:
-> The whole point is that we want the dependencies to be clear. Your
-> approach is anything but clear IMO.
-
-Well, using DEPENDS for dependencies still looks way better to me, but feel=
-=20
-free to revert it.
+I set up http://openembedded.uservoice.com/ ages ago, when I first
+heard about uservoice, when it was beta.  The interface is much nicer
+than bugzilla for users to request features, and has a nice easy
+voting mechanism to determine what users find to be the most important
+features.  I think we should play around with it, and see if it's
+worth using for that purpose.  I think it is, personally.  Leon
+Woestenberg just had a bitbake feature request, which brought this to
+mind.
+-- 
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
