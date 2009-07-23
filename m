@@ -1,35 +1,33 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MTrP4-0002kE-Tw
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jul 2009 08:03:44 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1MTrBG-000IQf-Rn
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 23 Jul 2009 09:49:27 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jul 2009 09:48:13 +0400
-User-Agent: KMail/1.11.4 (Linux/2.6.30-1-amd64; KDE/4.2.4; x86_64; ; )
+	(envelope-from <rpurdie@rpsys.net>) id 1MTtY5-0000t7-O7
+	for openembedded-devel@openembedded.org; Thu, 23 Jul 2009 10:21:10 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6N85q7a016047 for <openembedded-devel@openembedded.org>;
+	Thu, 23 Jul 2009 09:05:52 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id Ur7x15jFiUpT for <openembedded-devel@openembedded.org>;
+	Thu, 23 Jul 2009 09:05:52 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6N85lso016025
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 23 Jul 2009 09:05:49 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200907230948.13502.khimov@altell.ru>
 References: <1248201134.26475.15.camel@dax.rpnet.com>
 	<Pine.LNX.4.64.0907220859010.3621@juice.ott.cti.com>
 	<1248301473.14790.5.camel@dax.rpnet.com>
-In-Reply-To: <1248301473.14790.5.camel@dax.rpnet.com>
-MIME-Version: 1.0
-Message-Id: <200907230948.13502.khimov@altell.ru>
-X-SpamTest-Envelope-From: khimov@altell.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 9124 [Jul 23 2009]
-X-SpamTest-Info: {UDS BL}
-X-SpamTest-Info: {DNSBL Rate: low}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 30
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+	<200907230948.13502.khimov@altell.ru>
+Date: Thu, 23 Jul 2009 09:04:51 +0100
+Message-Id: <1248336291.14790.19.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,63 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2009 06:03:48 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Jul 2009 08:21:11 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 23 =D0=B8=D1=8E=D0=BB=D1=8F 2=
-009 02:24:33 Richard Purdie wrote:
-> Our rootfs_ipk class has:
->
-> do_rootfs[recrdeptask] +=3D "do_package_write_ipk"
->
-> which means do_rootfs runs after every do_package_write_ipk task that
-> do_rootfs can recursively depend on.
->
-> do_package_write_ipk depends on do_package which depends on do_install.
->
-> The image.bb file itself actually has a do_package_write_ipk task just
-> like any other .bb file and do_rootfs should come after it yet we insert
-> it before do_install.
+On Thu, 2009-07-23 at 09:48 +0400, Roman I Khimov wrote:
+> If recrdeptask is supposed to apply to the package that wants recrdeps, then 
+> it's wrong, sure. How to fix that is the question, we can't do
+> 
+> do_rootfs[recrdeptask] += "do_rootfs"
+> 
+> And yet we want to run do_rootfs for image after do_rootfs's for dependencies 
+> were made.
 
-If recrdeptask is supposed to apply to the package that wants recrdeps, the=
-n=20
-it's wrong, sure. How to fix that is the question, we can't do
+Ok, I understand what you're trying to solve.
 
-do_rootfs[recrdeptask] +=3D "do_rootfs"
+> It can't or we're talking about different multiimage situations.
 
-And yet we want to run do_rootfs for image after do_rootfs's for dependenci=
-es=20
-were made.
+It does work and its not really so different. For example:
 
-> Multiple image generation works fine in Poky without that FWIW too.
+http://git.pokylinux.org/cgit.cgi/poky/tree/meta/packages/images/poky-image-live.inc
 
-It can't or we're talking about different multiimage situations. I've writt=
-en=20
-already here, suppose you need different images that depend like this (real=
-=20
-example, BTW):
+>  I've written 
+> already here, suppose you need different images that depend like this (real 
+> example, BTW):
+> 
+>        /-8
+>   /-2--+
+> 1-+    +-9
+>   |    |
+>   +-3  \-10
+>   |
+>   +-4
+>   |
+>   \-5-6-7
+> 
+> So when I'm building image number 2, I need to have images 8, 9, 10 to be 
+> built to place that images on image number 2. Same with 6-7, 5-6 and 1 to 2, 
+> 3, 4, 5. Without that patch bitbake started do_rootfs for image number 2 
+> before do_rootfs for 8, 9, 10 was done.
+> 
+> In order to solve it using standard package deps mechanism that commit was 
+> made.
 
-       /-8
-  /-2--+
-1-+    +-9
-  |    |
-  +-3  \-10
-  |
-  +-4
-  |
-  \-5-6-7
+Images 1,2,5 and 6 need to specify they have dependencies on other image
+rootfs tasks with something like:
 
-So when I'm building image number 2, I need to have images 8, 9, 10 to be=20
-built to place that images on image number 2. Same with 6-7, 5-6 and 1 to 2=
-,=20
-3, 4, 5. Without that patch bitbake started do_rootfs for image number 2=20
-before do_rootfs for 8, 9, 10 was done.
+do_rootfs[depends] += "some-other-image-task:do_rootfs"
 
-In order to solve it using standard package deps mechanism that commit was=
-=20
-made.
+Is there some reason this doesn't work?
+
+Cheers,
+
+Richard
+
+
 
 
