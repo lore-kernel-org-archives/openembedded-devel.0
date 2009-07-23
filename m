@@ -1,34 +1,39 @@
-Received: from [209.85.220.228] (helo=mail-fx0-f228.google.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MU2o3-0002oo-1L
-	for openembedded-devel@openembedded.org; Thu, 23 Jul 2009 20:14:15 +0200
-Received: by fxm28 with SMTP id 28so1035358fxm.12
-	for <openembedded-devel@openembedded.org>;
-	Thu, 23 Jul 2009 10:59:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=jo0ie+/4Oxrxng7xqGZ2ZlFZa8PeSBKuxXunUchIhBE=;
-	b=DzIYLLmM+DXd1Zyp5y7mqtyzN9yhq/miQyBt/7obIlTMhY9CNFsPkgu5XkVp+1o0Tv
-	XgteELEswVbpeiD98ADeDu3+SIFsasXCDclPBwomWFjBS2egswhvYl9wyHBxQazkYpDJ
-	XCHH0LNvahe+xtI84l2z0m3u9HVveprX8Sdac=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type:content-transfer-encoding;
-	b=lUWMElcrSv+QuhoA1vt1DEdG0m0f+a1SpP1dXrE/ldYysooSfUH9Xo0cp1j0ZO7I53
-	p2irLVIdVVmmH5N2vY/+eRYqjySdcoINHx8KjP1fljTOKJkT8dL5oVNLpB7+CYHvuh7G
-	+PSXxFwAoJm6BIWlGklmKAyDaSc8EntqjnvGs=
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MU46j-00084t-04
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jul 2009 21:37:37 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 3ABA02200156
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jul 2009 21:23:20 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 1F5AE220012A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jul 2009 21:23:18 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.8 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (unknown [78.52.234.197])
+	by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jul 2009 21:23:18 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id A6FCD3C082; Thu, 23 Jul 2009 21:23:05 +0200 (CEST)
+Date: Thu, 23 Jul 2009 21:23:05 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090723192301.GA7115@rhein.zuhause.netz>
+References: <d405a6580907230951t3bdccfd5h9f6c5b862c65831f@mail.gmail.com>
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.223.119.5 with SMTP id x5mr1357022faq.40.1248371996192; Thu, 
-	23 Jul 2009 10:59:56 -0700 (PDT)
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 23 Jul 2009 10:59:36 -0700
-X-Google-Sender-Auth: 4e692066493fd009
-Message-ID: <b6ebd0a50907231059p27e821edlf3c7f92838ba4cac@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: UserVoice for feature/enhancement requests rather than bugzilla?
+In-Reply-To: <d405a6580907230951t3bdccfd5h9f6c5b862c65831f@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [PATCH] [Stable/2009] ti-dmai omapfb.h include path fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +47,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2009 18:14:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 23 Jul 2009 19:37:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I set up http://openembedded.uservoice.com/ ages ago, when I first
-heard about uservoice, when it was beta.  The interface is much nicer
-than bugzilla for users to request features, and has a nice easy
-voting mechanism to determine what users find to be the most important
-features.  I think we should play around with it, and see if it's
-worth using for that purpose.  I think it is, personally.  Leon
-Woestenberg just had a bitbake feature request, which brought this to
-mind.
--- 
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+Hi,
+
+are these patches already into dev? If not please make a patch for dev and after they are checked in a proposal for
+integrate them into stable.
+
+Bye Henning
 
 
