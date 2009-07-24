@@ -1,35 +1,30 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MUOD5-0008RT-K7
-	for openembedded-devel@openembedded.org; Fri, 24 Jul 2009 19:05:33 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6OGo4WN012862 for <openembedded-devel@openembedded.org>;
-	Fri, 24 Jul 2009 17:50:04 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id mVokkP5TKvC2 for <openembedded-devel@openembedded.org>;
-	Fri, 24 Jul 2009 17:50:04 +0100 (BST)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6OGo0GY012832
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@openembedded.org>;
-	Fri, 24 Jul 2009 17:50:02 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200907240900.52746.khimov@altell.ru>
-References: <1248201134.26475.15.camel@dax.rpnet.com>
-	<200907232141.13597.khimov@altell.ru>
-	<1248386615.14790.43.camel@dax.rpnet.com>
-	<200907240900.52746.khimov@altell.ru>
-Date: Fri, 24 Jul 2009 17:49:14 +0100
-Message-Id: <1248454154.20755.13.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-MIME-Autoconverted: from 8bit to quoted-printable by dan.rpsys.net id
-	n6OGo4WN012862
+	(envelope-from <msmith@cbnco.com>) id 1MUOwN-0007Ll-MW
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Jul 2009 19:52:19 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id C367651A7EC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jul 2009 13:37:56 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 20076-01 for <openembedded-devel@lists.openembedded.org>; 
+	Fri, 24 Jul 2009 13:37:56 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 9F18C4F526C
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jul 2009 13:37:56 -0400 (EDT)
+Message-ID: <4A69F174.3020006@cbnco.com>
+Date: Fri, 24 Jul 2009 13:37:56 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1248201134.26475.15.camel@dax.rpnet.com>	<200907232141.13597.khimov@altell.ru>	<1248386615.14790.43.camel@dax.rpnet.com>	<200907240900.52746.khimov@altell.ru>
+	<1248454154.20755.13.camel@dax.rpnet.com>
+In-Reply-To: <1248454154.20755.13.camel@dax.rpnet.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
 Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,37 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2009 17:05:36 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Jul 2009 17:52:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-07-24 at 09:00 +0400, Roman I Khimov wrote:
-> On =D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 24 =D0=B8=D1=8E=D0=BB=D1=8F=
- 2009 02:03:35 Richard Purdie wrote:
-> > On Thu, 2009-07-23 at 21:41 +0400, Roman I Khimov wrote:
-> > > On =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 23 =D0=B8=D1=8E=D0=BB=
-=D1=8F 2009 16:19:56 Richard Purdie wrote:
-> > > > The whole point is that we want the dependencies to be clear. You=
-r
-> > > > approach is anything but clear IMO.
-> > >
-> > > Well, using DEPENDS for dependencies still looks way better to me, =
-but
-> > > feel free to revert it.
-> >
-> > Are there recipes in OE which need fixing prior to that happening?
->=20
-> I don't think so, at least I've not pushed any inter-image dependencies=
- via=20
-> DEPENDS myself.
+Richard Purdie wrote:
 
-Ok, I've committed a revert of that patch.
+> Is there any other feedback on the bitbake patch?
 
-Is there any other feedback on the bitbake patch?
+For me, it makes preparing the runqueue at least twice as fast (from ~2 
+to ~1 second for a small console image, ~14 to ~6 for something with X11).
 
-Cheers,
+My task dependencies look identical before and after the patch, except 
+for the new harmless <image>.do_rootfs -> 
+<image>.do_package_write_deb,do_populate_staging that you wrote about at 
+the start of the thread.
 
-Richard
+Now if only "Resolving any missing task queue dependencies" were a 
+little faster :) That part's running about 40 seconds for me on a large 
+image.
 
+Mike
 
 
