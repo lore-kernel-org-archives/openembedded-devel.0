@@ -1,36 +1,23 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MU6dh-0007Ce-SO
-	for openembedded-devel@openembedded.org; Fri, 24 Jul 2009 00:19:50 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6NM4SpH019596 for <openembedded-devel@openembedded.org>;
-	Thu, 23 Jul 2009 23:04:28 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id lz2XxPdjbY1U for <openembedded-devel@openembedded.org>;
-	Thu, 23 Jul 2009 23:04:28 +0100 (BST)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n6NM4O5F019580
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@openembedded.org>;
-	Thu, 23 Jul 2009 23:04:26 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200907232141.13597.khimov@altell.ru>
-References: <1248201134.26475.15.camel@dax.rpnet.com>
-	<200907231246.26866.khimov@altell.ru>
-	<1248351596.14790.28.camel@dax.rpnet.com>
-	<200907232141.13597.khimov@altell.ru>
-Date: Thu, 23 Jul 2009 23:03:35 +0100
-Message-Id: <1248386615.14790.43.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-MIME-Autoconverted: from 8bit to quoted-printable by dan.rpsys.net id
-	n6NM4SpH019596
-Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
+	(envelope-from <holger+oe@freyther.de>) id 1MUBWu-0006cY-FC
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 24 Jul 2009 05:33:08 +0200
+Received: from tamarin.localnet (123-192-186-20.dynamic.kbronet.com.tw
+	[123.192.186.20])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 9C9241B10C0D
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jul 2009 03:20:27 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Jul 2009 05:17:58 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc2; KDE/4.2.96; i686; ; )
+References: <200907231733.14601.holger+oe@freyther.de>
+	<h4a435$9sd$1@ger.gmane.org>
+In-Reply-To: <h4a435$9sd$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200907240517.58524.holger+oe@freyther.de>
+Subject: Re: [PATCH] Fix qt4-embedded compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,25 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jul 2009 22:19:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Jul 2009 03:33:08 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-07-23 at 21:41 +0400, Roman I Khimov wrote:
-> On =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 23 =D0=B8=D1=8E=D0=BB=D1=8F=
- 2009 16:19:56 Richard Purdie wrote:
-> > The whole point is that we want the dependencies to be clear. Your
-> > approach is anything but clear IMO.
->=20
-> Well, using DEPENDS for dependencies still looks way better to me, but =
-feel=20
-> free to revert it.
+On Thursday 23 July 2009 18:45:24 Koen Kooi wrote:
+> On 23-07-09 17:33, Holger Hans Peter Freyther wrote:
+> > Hey,
+> >
+> > I need the below patch to be able to compile qt4-embedded without trying
+> > to download a PowerVR sdk for the OMAP when building on x86...
+>
+> Can't you just bbmask it out?
 
-Are there recipes in OE which need fixing prior to that happening?
+I would prefer if qt4-embedded is buildable out of the box. The problem is the 
+following. qt4-embedded.inc is setting QT_BASE_NAME to qt4-embedded. This 
+means that the various -dbg packages start to depend on qt4-embedded-gles.
 
-Cheers,
+Is this wanted? maybe we should set QT_BASE_NAME to ${PN} in qt4-embedded?
 
-Richard
+what do you think?
 
+	holger
 
 
