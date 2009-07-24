@@ -1,32 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MUJCC-0003Dx-Px
-	for openembedded-devel@openembedded.org; Fri, 24 Jul 2009 13:44:16 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MUIyI-0003ax-Vv
-	for openembedded-devel@openembedded.org; Fri, 24 Jul 2009 11:29:55 +0000
-Received: from iap-pxy-mow1.siemens.ru ([212.248.25.26])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 24 Jul 2009 11:29:54 +0000
-Received: from dbaryshkov by iap-pxy-mow1.siemens.ru with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <rpurdie@rpsys.net>) id 1MUOD5-0008RT-K7
+	for openembedded-devel@openembedded.org; Fri, 24 Jul 2009 19:05:33 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6OGo4WN012862 for <openembedded-devel@openembedded.org>;
+	Fri, 24 Jul 2009 17:50:04 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id mVokkP5TKvC2 for <openembedded-devel@openembedded.org>;
+	Fri, 24 Jul 2009 17:50:04 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n6OGo0GY012832
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@openembedded.org>;
-	Fri, 24 Jul 2009 11:29:54 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 24 Jul 2009 17:50:02 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@openembedded.org
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Fri, 24 Jul 2009 11:29:44 +0000 (UTC)
-Message-ID: <h4c5v8$6a2$1@ger.gmane.org>
-References: <20090109155223.GF400@smtp.west.cox.net>
-	<gk7tkl$p1o$1@ger.gmane.org> <200907082008.01202.vapier@gentoo.org>
+In-Reply-To: <200907240900.52746.khimov@altell.ru>
+References: <1248201134.26475.15.camel@dax.rpnet.com>
+	<200907232141.13597.khimov@altell.ru>
+	<1248386615.14790.43.camel@dax.rpnet.com>
+	<200907240900.52746.khimov@altell.ru>
+Date: Fri, 24 Jul 2009 17:49:14 +0100
+Message-Id: <1248454154.20755.13.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: iap-pxy-mow1.siemens.ru
-User-Agent: Pan/0.132 (Waxed in Black)
-Sender: news <news@ger.gmane.org>
-Subject: Re: Blackfin support
+X-Mailer: Evolution 2.22.3.1 
+X-MIME-Autoconverted: from 8bit to quoted-printable by dan.rpsys.net id
+	n6OGo4WN012862
+Subject: Re: [Bitbake-dev] Bitbake runqueue performance improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,39 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jul 2009 11:44:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 24 Jul 2009 17:05:36 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Mike Frysinger wrote:
+On Fri, 2009-07-24 at 09:00 +0400, Roman I Khimov wrote:
+> On =D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 24 =D0=B8=D1=8E=D0=BB=D1=8F=
+ 2009 02:03:35 Richard Purdie wrote:
+> > On Thu, 2009-07-23 at 21:41 +0400, Roman I Khimov wrote:
+> > > On =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 23 =D0=B8=D1=8E=D0=BB=
+=D1=8F 2009 16:19:56 Richard Purdie wrote:
+> > > > The whole point is that we want the dependencies to be clear. You=
+r
+> > > > approach is anything but clear IMO.
+> > >
+> > > Well, using DEPENDS for dependencies still looks way better to me, =
+but
+> > > feel free to revert it.
+> >
+> > Are there recipes in OE which need fixing prior to that happening?
+>=20
+> I don't think so, at least I've not pushed any inter-image dependencies=
+ via=20
+> DEPENDS myself.
 
-> On Friday 09 January 2009 11:22:43 Koen Kooi wrote:
->> On 09-01-09 16:52, Tom Rini wrote:
->> > Hey all.  Has anyone built any of the blackfin boards recently?  I'm
->> > finding things like uClibc 0.9.29+ require -mfdpic which isn't in our
->> > gcc 4.1.x, is in gcc 4.2.x (but requires a patch to define __FDPIC__
->> > rather than __BFIN_FDPIC__) and other issues still.  Just seeing if
->> > anyone else has these things working before I start getting down and
->> > dirty.
-> 
-> the FDPIC change is already in mainline gcc and has been for a while
-> 
->> I keep starting anew with blackfin support due to the current problems:
-> 
-> let's fix this wrong info shall we ...
+Ok, I've committed a revert of that patch.
 
-I've started preparing update for bfin in OE. However I'm currently a bit stuck
-due to the lack of time. I've pushed parts of it to the shared/blackfin branch.
+Is there any other feedback on the bitbake patch?
 
-Anybody is free to update/comment/fix, etc.
+Cheers,
 
-One of the problems I'm still facing is the lack of real fork() (i.e. not the
-one from uClibc STUBS).
-
--- 
-With best wishes
-Dmitry
-
+Richard
 
 
 
