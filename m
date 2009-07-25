@@ -1,32 +1,35 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1MUh8o-0000EJ-Q4
-	for openembedded-devel@openembedded.org; Sat, 25 Jul 2009 15:18:23 +0200
-Received: from [12.42.230.2] (helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1MUgum-0000FL-2l
-	for openembedded-devel@openembedded.org; Sat, 25 Jul 2009 09:03:52 -0400
-Date: Sat, 25 Jul 2009 09:01:20 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200907251452.41374.holger+oe@freyther.de>
-Message-ID: <alpine.LFD.2.00.0907250858080.9674@localhost>
-References: <alpine.LFD.2.00.0907250800110.9021@localhost>
-	<200907251452.41374.holger+oe@freyther.de>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	(envelope-from <stefan@datenfreihafen.org>) id 1MUhM7-0006FM-K3
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jul 2009 15:32:09 +0200
+Received: from p5b03667c.dip.t-dialin.net ([91.3.102.124] helo=dodger)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1MUh85-0003gg-Ck by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Jul 2009 15:17:40 +0200
+Received: from stefan by dodger with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1MUhAD-0005ZB-Cb for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jul 2009 15:19:49 +0200
+Date: Sat, 25 Jul 2009 15:19:49 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090725131949.GB16892@dodger.lab.datenfreihafen.org>
+References: <20090725122923.GA16892@dodger.lab.datenfreihafen.org>
+	<20090725125602.GA17461@sirena.org.uk>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: Re: getting bitbake-1.8.12 for the org.openembedded.dev branch?
+In-Reply-To: <20090725125602.GA17461@sirena.org.uk>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: Mailling list bounces was: [openembedded-commits-request@lists.openembedded.org: confirm ddf18811e06bf856ec990ab63ede87b5f7eced57]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2009 13:18:24 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sat, 25 Jul 2009 13:32:10 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, 25 Jul 2009, Holger Hans Peter Freyther wrote:
+Hello.
 
-> On Saturday 25 July 2009 14:15:08 Robert P. J. Day wrote:
->
-> >   would it not make more sense to have even the "dev" branch come
-> > with the required version of bitbake embedded in the checkout?
-> > or, failing that, just toss that incomplete bitbake directory
-> > entirely?
->
-> If you look into this directory it will only contain *.pyc files and
-> I don't think it makes any sense to put bitbake into the
-> OpenEmbedded repository.
+On Sat, 2009-07-25 at 13:56, Mark Brown wrote:
+> On Sat, Jul 25, 2009 at 02:29:24PM +0200, Stefan Schmidt wrote:
+> 
+> > IIRC correctly it is the third time this occurred to my account. Am I the only
+> > one getting this? If yes, could the admins please provide me some logs so we can
+> > try to find the reason for it?
+> 
+> Not that I'm on that list but do you have size limits on mails on your
+> mail server, or possibly expensive spam filtering which might get upset
+> with large mails?  That has caused problems with some other commit lists
+> I'm on.
 
-  in a sense, i agree with that.  the problem is that the precedent
-has already been set by having bitbake in the stable/2009 branch and,
-based on the principle of least surprise, you shouldn't suddenly yank
-something out of a branch if developers are used to seeing it there.
+No size limits, but of course spam checks. Still this is the only list I have
+problems with. Other commit-lists I'm on sometimes send out > 3MB mails with
+diffs from git merges. No problems with them.
 
-  for consistency, either bitbake should be included in an OE
-checkout, or it shouldn't.  it shouldn't depend on which branch you're
-working with.  that way lies confusion.
+A logfile would really help here.
 
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-        Linux Consulting, Training and Annoying Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-"Kernel Newbie Corner" column @ linux.com:          http://cli.gs/WG6WYX
-========================================================================
+regards
+Stefan Schmidt
 
 
