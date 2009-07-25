@@ -1,24 +1,41 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MUipb-0006qr-Mt
+	(envelope-from <kergoth@gmail.com>) id 1MUjhF-0005Ta-1C
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Jul 2009 17:06:40 +0200
-Received: from tamarin.localnet (123-192-154-148.dynamic.kbronet.com.tw
-	[123.192.154.148])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 1A1CB1B10C04
+	Sat, 25 Jul 2009 18:02:05 +0200
+Received: by qyk35 with SMTP id 35so2788641qyk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jul 2009 14:53:56 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Jul 2009 16:51:19 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc2; KDE/4.2.96; i686; ; )
-References: <alpine.LFD.2.00.0907250800110.9021@localhost>
-	<200907251452.41374.holger+oe@freyther.de>
-	<alpine.LFD.2.00.0907250858080.9674@localhost>
-In-Reply-To: <alpine.LFD.2.00.0907250858080.9674@localhost>
+	Sat, 25 Jul 2009 08:47:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=R8HtL8LBLVqWXb8IC8KXtBzjpOUnP4eh8UNaJYLioWE=;
+	b=GbccqppjvkuZUs6eoVJQex4+s+JJRkNObiyKJ7aiy81Nk/CcAt/7bV70SA1FvCkI2w
+	nx/KNJsS7nV1EcXnYnWOWy8YTzNX0lVB14a0ZCS9XJFaBtG6BvKMsoHSXLXWNeG+YsQk
+	MdoSxMj/3tEpw1eFr7b0Lmp7CgQ2F1pCV+/PI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=xt/TBZ2mXY03tYv9haigDc1pW54CN6LMYip5h1YZviRcTykiVfQXvuYu7rNPcY651f
+	jK+6kqNGg5+DPQiKGSSayZrdPbJoq4yZuf50TjIpsuq5jzNJZamaSinQUZchYryRjfKE
+	Qk8TgFULj84EwVdAw0xPuADPx+V5A1tM/yxfI=
 MIME-Version: 1.0
-Message-Id: <200907251651.19932.holger+oe@freyther.de>
-Subject: Re: getting bitbake-1.8.12 for the org.openembedded.dev branch?
+Sender: kergoth@gmail.com
+Received: by 10.220.95.212 with SMTP id e20mr2941668vcn.4.1248536854064; Sat, 
+	25 Jul 2009 08:47:34 -0700 (PDT)
+In-Reply-To: <h4dsuk$m68$1@ger.gmane.org>
+References: <b6ebd0a50907231059p27e821edlf3c7f92838ba4cac@mail.gmail.com> 
+	<h4dcgb$lip$1@ger.gmane.org>
+	<b6ebd0a50907241540t251641dapb13e0aafa9822eb4@mail.gmail.com> 
+	<h4dsuk$m68$1@ger.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sat, 25 Jul 2009 08:47:14 -0700
+X-Google-Sender-Auth: 6933523769eeaf07
+Message-ID: <b6ebd0a50907250847p7bf597fehe055cf7546f3bc01@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: UserVoice for feature/enhancement requests rather than bugzilla?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,23 +49,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2009 15:06:41 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 25 Jul 2009 16:02:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Saturday 25 July 2009 15:01:20 Robert P. J. Day wrote:
+I'm not going to advocate for something I've used for all of 10
+minutes.  I proposed that it was something we should look at and
+determine if it's worth using.  I'd suggest you re-read the initial
+mail that started this thread, as clearly you failed to grasp it the
+first time around.
 
->   for consistency, either bitbake should be included in an OE
-> checkout, or it shouldn't.  it shouldn't depend on which branch you're
-> working with.  that way lies confusion.
+On Fri, Jul 24, 2009 at 8:07 PM, Rolf
+Leggewie<no2spam@nospam.arcornews.de> wrote:
+> Chris Larson wrote:
+>>
+>> On Fri, Jul 24, 2009 at 3:27 PM, Rolf
+>> Leggewie<no2spam@nospam.arcornews.de> wrote:
+>>>
+>>> OE as a community has a tendency of "Let's throw a new tool at it and
+>>> everything will be pie". =C2=A0Will we ever learn that is not the case?
+>
+> That being said, I thought http://bugseverywhere.org which I stumbled acr=
+oss
+> today sounded like an interesting concept.
+>
+>> Bugzilla is lovely for tracking *bugs*. =C2=A0Just as with wikis, it's
+>> often overloaded for things it's not at all good for.
+>
+> Well, it was you who you managed to throw bugzilla into the discussion ;-=
+)
+> =C2=A0And it was you who failed to somehow explain the void and how userv=
+oice is
+> the best tool to fill that void.
+>
+> I guess, what I'm trying to say is, please elaborate and advocate a bit.
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
-In which way do you see breakage? bin/bitbake is gone when you switch from 
-stable to dev? So you executed the host bitbake (which you said was bitbake 
-1.8.10). What error happened?
 
-
-z.
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
