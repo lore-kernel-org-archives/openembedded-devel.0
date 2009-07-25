@@ -1,41 +1,36 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+Received: from [209.85.146.180] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MUjhF-0005Ta-1C
+	(envelope-from <raj.khem@gmail.com>) id 1MUlfu-00046V-TX
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Jul 2009 18:02:05 +0200
-Received: by qyk35 with SMTP id 35so2788641qyk.24
+	Sat, 25 Jul 2009 20:08:52 +0200
+Received: by wa-out-1112.google.com with SMTP id m34so293102wag.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jul 2009 08:47:34 -0700 (PDT)
+	Sat, 25 Jul 2009 10:54:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=R8HtL8LBLVqWXb8IC8KXtBzjpOUnP4eh8UNaJYLioWE=;
-	b=GbccqppjvkuZUs6eoVJQex4+s+JJRkNObiyKJ7aiy81Nk/CcAt/7bV70SA1FvCkI2w
-	nx/KNJsS7nV1EcXnYnWOWy8YTzNX0lVB14a0ZCS9XJFaBtG6BvKMsoHSXLXWNeG+YsQk
-	MdoSxMj/3tEpw1eFr7b0Lmp7CgQ2F1pCV+/PI=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=CcuuvZF0FernXFl77pWz9SwO5W3yuUQz/VKbNCCUMG8=;
+	b=XDm9ZOLt2w+NqsiEwwU43+FMHIHXdk7TJyDQ2dSqBHxH5Pqf7ELYEOcyqcJBvJxxIK
+	NSE5RMlsRMz8L/RHuSKR2bYgxmXJYT3ReHgHiCxqDEWdipEFKU5+hvXNKEeXk9rwKIpg
+	36wwEx40Ufaoa3CP6vD+BaWTZv9yw+9fd6Ry4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=xt/TBZ2mXY03tYv9haigDc1pW54CN6LMYip5h1YZviRcTykiVfQXvuYu7rNPcY651f
-	jK+6kqNGg5+DPQiKGSSayZrdPbJoq4yZuf50TjIpsuq5jzNJZamaSinQUZchYryRjfKE
-	Qk8TgFULj84EwVdAw0xPuADPx+V5A1tM/yxfI=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.220.95.212 with SMTP id e20mr2941668vcn.4.1248536854064; Sat, 
-	25 Jul 2009 08:47:34 -0700 (PDT)
-In-Reply-To: <h4dsuk$m68$1@ger.gmane.org>
-References: <b6ebd0a50907231059p27e821edlf3c7f92838ba4cac@mail.gmail.com> 
-	<h4dcgb$lip$1@ger.gmane.org>
-	<b6ebd0a50907241540t251641dapb13e0aafa9822eb4@mail.gmail.com> 
-	<h4dsuk$m68$1@ger.gmane.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sat, 25 Jul 2009 08:47:14 -0700
-X-Google-Sender-Auth: 6933523769eeaf07
-Message-ID: <b6ebd0a50907250847p7bf597fehe055cf7546f3bc01@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=WvIGi050BhvizrCmEYcryn4fDKopg8RuXYXqrkRX8NlJQ5XoyafJ2KnGNiDjH3JpCr
+	0L5H4Pf6Oc4X9Y8Chi+0694G4nKdpytHnZ0OT0aRRYBAsjzB3CTrzkaNKiuwG8w+hG6A
+	Mn0Aimk7ZHXruyAAHsxwbRv/85518akVC9uWU=
+Received: by 10.115.18.7 with SMTP id v7mr6632909wai.185.1248544461117;
+	Sat, 25 Jul 2009 10:54:21 -0700 (PDT)
+Received: from localhost (adsl-71-146-0-187.dsl.pltn13.sbcglobal.net
+	[71.146.0.187])
+	by mx.google.com with ESMTPS id m17sm9432876waf.3.2009.07.25.10.54.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 25 Jul 2009 10:54:19 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: UserVoice for feature/enhancement requests rather than bugzilla?
+Date: Sat, 25 Jul 2009 10:53:52 -0700
+Message-Id: <1248544432-5221-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+Subject: [PATCH] shell.py: Quash python warning: DeprecationWarning: the sets module is deprecated.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,57 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2009 16:02:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 25 Jul 2009 18:08:54 -0000
 
-I'm not going to advocate for something I've used for all of 10
-minutes.  I proposed that it was something we should look at and
-determine if it's worth using.  I'd suggest you re-read the initial
-mail that started this thread, as clearly you failed to grasp it the
-first time around.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ lib/bb/shell.py |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-On Fri, Jul 24, 2009 at 8:07 PM, Rolf
-Leggewie<no2spam@nospam.arcornews.de> wrote:
-> Chris Larson wrote:
->>
->> On Fri, Jul 24, 2009 at 3:27 PM, Rolf
->> Leggewie<no2spam@nospam.arcornews.de> wrote:
->>>
->>> OE as a community has a tendency of "Let's throw a new tool at it and
->>> everything will be pie". =C2=A0Will we ever learn that is not the case?
->
-> That being said, I thought http://bugseverywhere.org which I stumbled acr=
-oss
-> today sounded like an interesting concept.
->
->> Bugzilla is lovely for tracking *bugs*. =C2=A0Just as with wikis, it's
->> often overloaded for things it's not at all good for.
->
-> Well, it was you who you managed to throw bugzilla into the discussion ;-=
-)
-> =C2=A0And it was you who failed to somehow explain the void and how userv=
-oice is
-> the best tool to fill that void.
->
-> I guess, what I'm trying to say is, please elaborate and advocate a bit.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/lib/bb/shell.py b/lib/bb/shell.py
+index 2ab855b..1e532c0 100644
+--- a/lib/bb/shell.py
++++ b/lib/bb/shell.py
+@@ -55,7 +55,6 @@ PROBLEMS:
+ try:
+     set
+ except NameError:
+-    from sets import Set as set
+ import sys, os, readline, socket, httplib, urllib, commands, popen2, copy, shlex, Queue, fnmatch
+ from bb import data, parse, build, fatal, cache, taskdata, runqueue, providers as Providers
+ 
+-- 
+1.6.3.3
 
-
-
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
 
 
