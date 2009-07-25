@@ -1,31 +1,31 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1MUgQ5-0007AW-Ha
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Jul 2009 14:32:09 +0200
-Received: from [12.42.230.2] (helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1MUgC4-00041g-Qu for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Jul 2009 08:17:40 -0400
-Date: Sat, 25 Jul 2009 08:15:08 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0907250800110.9021@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	(envelope-from <stefan@datenfreihafen.org>) id 1MUgZZ-0007JY-Bc
+	for openembedded-devel@openembedded.org; Sat, 25 Jul 2009 14:41:57 +0200
+Received: from p5b03667c.dip.t-dialin.net ([91.3.102.124] helo=dodger)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1MUgLI-0002H8-SV by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@openembedded.org>;
+	Sat, 25 Jul 2009 14:27:28 +0200
+Received: from stefan by dodger with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1MUgNQ-0005K4-Fq
+	for openembedded-devel@openembedded.org; Sat, 25 Jul 2009 14:29:24 +0200
+Date: Sat, 25 Jul 2009 14:29:24 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@openembedded.org
+Message-ID: <20090725122923.GA16892@dodger.lab.datenfreihafen.org>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: getting bitbake-1.8.12 for the org.openembedded.dev branch?
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Mailling list bounces was: [openembedded-commits-request@lists.openembedded.org: confirm ddf18811e06bf856ec990ab63ede87b5f7eced57]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,47 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2009 12:32:09 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sat, 25 Jul 2009 12:41:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hello.
+
+IIRC correctly it is the third time this occurred to my account. Am I the only
+one getting this? If yes, could the admins please provide me some logs so we can
+try to find the reason for it?
+
+regards
+Stefan Schmidt
+
+----- Forwarded message from openembedded-commits-request@lists.openembedded.org -----
+
+Date: Sat, 25 Jul 2009 14:22:24 +0200
+From: openembedded-commits-request@lists.openembedded.org
+To: stefan@datenfreihafen.org
+Subject: confirm ddf18811e06bf856ec990ab63ede87b5f7eced57
+
+Your membership in the mailing list Openembedded-commits has been
+disabled due to excessive bounces The last bounce received from you
+was dated 25-Jul-2009.  You will not get any more messages from this
+list until you re-enable your membership.  You will receive 3 more
+reminders like this before your membership in the list is deleted.
+
+To re-enable your membership, you can simply respond to this message
+(leaving the Subject: line intact), or visit the confirmation page at
+
+    http://lists.linuxtogo.org/cgi-bin/mailman/confirm/openembedded-commits/ddf18811e06bf856ec990ab63ede87b5f7eced57
 
 
-  i wasn't sure of the proper ML to post this on, but the OE devel
-list seems like a good bet.  i was building angstrom for the
-beagleboard on my fedora 11 system, and it was working fine with the
-"stable/2009" branch since that branch comes with bitbake-1.8.12
-embedded in the checkout under the bitbake/ directory.  so far, so
-good.
+You can also visit your membership page at
 
-  however, when i switch to the org.openembedded.dev branch, *that*
-branch comes (weirdly?) with an incomplete bitbake directory (no bin/,
-just lib/) so, suddenly, i have no bitbake anymore.  there *is* a
-bitbake in the fedora repo, but it's only 1.8.10 so it's not
-sufficient.  and i can always download the 1.8.12 tarball but
-installing a straight tarball is not something i'm crazy about since i
-like to go thru the package manager to keep things organized.
+    http://lists.linuxtogo.org/cgi-bin/mailman/options/openembedded-commits/stefan%40datenfreihafen.org
 
-  would it not make more sense to have even the "dev" branch come with
-the required version of bitbake embedded in the checkout?  or, failing
-that, just toss that incomplete bitbake directory entirely?
 
-p.s.  i put in a bugzilla request some time ago to get the newest
-bitbake in the fedora repo:
+On your membership page, you can change various delivery options such
+as your email address and whether you get digests or not.  As a
+reminder, your membership password is
 
-  https://bugzilla.redhat.com/show_bug.cgi?id=503226
+    asfateda
 
-so far, no action.  maybe i'll poke someone again.
+If you have any questions or problems, you can contact the list owner
+at
 
-rday
---
+    openembedded-commits-owner@lists.openembedded.org
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-        Linux Consulting, Training and Annoying Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-"Kernel Newbie Corner" column @ linux.com:          http://cli.gs/WG6WYX
-========================================================================
+----- End forwarded message -----
 
 
