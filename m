@@ -1,34 +1,34 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MUXqO-00064G-9p
-	for openembedded-devel@openembedded.org; Sat, 25 Jul 2009 05:22:44 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MUXcQ-0006cW-9B
-	for openembedded-devel@openembedded.org; Sat, 25 Jul 2009 03:08:18 +0000
-Received: from p5b3b35c0.dip.t-dialin.net ([91.59.53.192])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Sat, 25 Jul 2009 03:08:18 +0000
-Received: from no2spam by p5b3b35c0.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Sat, 25 Jul 2009 03:08:18 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 25 Jul 2009 05:07:55 +0200
-Message-ID: <h4dsuk$m68$1@ger.gmane.org>
-References: <b6ebd0a50907231059p27e821edlf3c7f92838ba4cac@mail.gmail.com>
-	<h4dcgb$lip$1@ger.gmane.org>
-	<b6ebd0a50907241540t251641dapb13e0aafa9822eb4@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b35c0.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.22 (X11/20090710)
-In-Reply-To: <b6ebd0a50907241540t251641dapb13e0aafa9822eb4@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: UserVoice for feature/enhancement requests rather than bugzilla?
+	(envelope-from <stefan@datenfreihafen.org>) id 1MUdPl-0003vY-J4
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jul 2009 11:19:37 +0200
+Received: from p5b0340dc.dip.t-dialin.net ([91.3.64.220] helo=dodger)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1MUdBk-0005Km-3w by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Jul 2009 11:05:10 +0200
+Received: from stefan by dodger with local (Exim 4.69)
+	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
+	id 1MUdDr-00021g-P6 for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jul 2009 11:07:19 +0200
+Date: Sat, 25 Jul 2009 11:07:19 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090725090719.GA4800@dodger.lab.datenfreihafen.org>
+References: <20090722195130.GE5337@dodger.lab.datenfreihafen.org>
+MIME-Version: 1.0
+In-Reply-To: <20090722195130.GE5337@dodger.lab.datenfreihafen.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam-Checker-Version: SpamAssassin 3.2.3 (2007-08-08) on sirius.lasnet.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-4.2 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.3
+Subject: Re: [RFC] fakeroot: Add 1.12.4 as 1.12.1 is now longer available on debian mirrors.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,27 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2009 03:22:44 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 25 Jul 2009 09:19:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Chris Larson wrote:
-> On Fri, Jul 24, 2009 at 3:27 PM, Rolf
-> Leggewie<no2spam@nospam.arcornews.de> wrote:
->> OE as a community has a tendency of "Let's throw a new tool at it and
->> everything will be pie".  Will we ever learn that is not the case?
+Hello.
 
-That being said, I thought http://bugseverywhere.org which I stumbled 
-across today sounded like an interesting concept.
+On Wed, 2009-07-22 at 21:51, Stefan Schmidt wrote:
+> 
+> Fakeroot 1.12.1 fetch fails as the debian mirrors now longer carry that file.
+> 1.12.4 is still available, use this.
+> 
+> Comments? Fine to commit?
 
-> Bugzilla is lovely for tracking *bugs*.  Just as with wikis, it's
-> often overloaded for things it's not at all good for.
+Can be ignored now. No comments, but Otavio commited the same fix.
 
-Well, it was you who you managed to throw bugzilla into the discussion 
-;-)  And it was you who failed to somehow explain the void and how 
-uservoice is the best tool to fill that void.
-
-I guess, what I'm trying to say is, please elaborate and advocate a bit.
-
+regards
+Stefan Schmidt
 
 
