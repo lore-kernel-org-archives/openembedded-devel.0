@@ -1,22 +1,37 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [80.68.93.111] (helo=cassiel.sirena.org.uk ident=Debian-exim)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MUgyj-0008HW-Sj
+	(envelope-from <broonie@sirena.org.uk>) id 1MUh1I-0008Ot-Dn
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 25 Jul 2009 15:07:57 +0200
-Received: from tamarin.localnet (123-192-154-148.dynamic.kbronet.com.tw
-	[123.192.154.148])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 96F5A1B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jul 2009 12:55:16 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Sat, 25 Jul 2009 15:10:36 +0200
+Received: from 82-41-28-43.cable.ubr04.sgyl.blueyonder.co.uk ([82.41.28.43]
+	helo=finisterre.sirena.org.uk)
+	by cassiel.sirena.org.uk with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <broonie@sirena.org.uk>)
+	id 1MUgnI-0004PH-Js for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jul 2009 13:56:08 +0100
+Received: from broonie by finisterre.sirena.org.uk with local (Exim 4.69)
+	(envelope-from <broonie@sirena.org.uk>) id 1MUgnC-0004Z6-TF
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 25 Jul 2009 13:56:03 +0100
+Date: Sat, 25 Jul 2009 13:56:02 +0100
+From: Mark Brown <broonie@sirena.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Jul 2009 14:52:41 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc2; KDE/4.2.96; i686; ; )
-References: <alpine.LFD.2.00.0907250800110.9021@localhost>
-In-Reply-To: <alpine.LFD.2.00.0907250800110.9021@localhost>
+Message-ID: <20090725125602.GA17461@sirena.org.uk>
+References: <20090725122923.GA16892@dodger.lab.datenfreihafen.org>
 MIME-Version: 1.0
-Message-Id: <200907251452.41374.holger+oe@freyther.de>
-Subject: Re: getting bitbake-1.8.12 for the org.openembedded.dev branch?
+In-Reply-To: <20090725122923.GA16892@dodger.lab.datenfreihafen.org>
+X-Cookie: Your step will soil many countries.
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 82.41.28.43
+X-SA-Exim-Mail-From: broonie@sirena.org.uk
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	cassiel.sirena.org.uk
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	TVD_RCVD_IP autolearn=no version=3.2.5
+X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:14:11 +0000)
+X-SA-Exim-Scanned: Yes (on cassiel.sirena.org.uk)
+Subject: Re: Mailling list bounces was: [openembedded-commits-request@lists.openembedded.org: confirm ddf18811e06bf856ec990ab63ede87b5f7eced57]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,20 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2009 13:07:58 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 25 Jul 2009 13:10:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Saturday 25 July 2009 14:15:08 Robert P. J. Day wrote:
+On Sat, Jul 25, 2009 at 02:29:24PM +0200, Stefan Schmidt wrote:
 
->   would it not make more sense to have even the "dev" branch come with
-> the required version of bitbake embedded in the checkout?  or, failing
-> that, just toss that incomplete bitbake directory entirely?
+> IIRC correctly it is the third time this occurred to my account. Am I the only
+> one getting this? If yes, could the admins please provide me some logs so we can
+> try to find the reason for it?
 
-If you look into this directory it will only contain *.pyc files and I don't 
-think it makes any sense to put bitbake into the OpenEmbedded repository.
-
-z.
+Not that I'm on that list but do you have size limits on mails on your
+mail server, or possibly expensive spam filtering which might get upset
+with large mails?  That has caused problems with some other commit lists
+I'm on.
 
 
