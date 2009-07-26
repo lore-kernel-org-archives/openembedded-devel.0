@@ -1,33 +1,33 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1MUpHy-0008AA-84
-	for openembedded-devel@openembedded.org; Sun, 26 Jul 2009 00:00:22 +0200
-Received: from [64.208.221.2] (helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1MUp3v-0005Bi-BH
-	for openembedded-devel@openembedded.org; Sat, 25 Jul 2009 17:45:51 -0400
-Date: Sat, 25 Jul 2009 17:43:09 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MUzuM-0006yD-Ba
+	for openembedded-devel@openembedded.org; Sun, 26 Jul 2009 11:20:42 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MUzgG-0002yp-1b
+	for openembedded-devel@openembedded.org; Sun, 26 Jul 2009 09:06:08 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Sun, 26 Jul 2009 09:06:08 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Sun, 26 Jul 2009 09:06:08 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@openembedded.org
-In-Reply-To: <200907251651.19932.holger+oe@freyther.de>
-Message-ID: <alpine.LFD.2.00.0907251719260.3720@localhost>
-References: <alpine.LFD.2.00.0907250800110.9021@localhost>
-	<200907251452.41374.holger+oe@freyther.de>
-	<alpine.LFD.2.00.0907250858080.9674@localhost>
-	<200907251651.19932.holger+oe@freyther.de>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 26 Jul 2009 11:05:56 +0200
+Message-ID: <h4h69k$tof$1@ger.gmane.org>
+References: <alpine.LFD.2.00.0907250800110.9021@localhost>	<200907251452.41374.holger+oe@freyther.de>	<alpine.LFD.2.00.0907250858080.9674@localhost>	<200907251651.19932.holger+oe@freyther.de>
+	<alpine.LFD.2.00.0907251719260.3720@localhost>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090712 Shredder/3.0b3pre
+In-Reply-To: <alpine.LFD.2.00.0907251719260.3720@localhost>
+Sender: news <news@ger.gmane.org>
 Subject: Re: getting bitbake-1.8.12 for the org.openembedded.dev branch?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -42,37 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jul 2009 22:00:22 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 26 Jul 2009 09:20:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, 25 Jul 2009, Holger Hans Peter Freyther wrote:
+On 25-07-09 23:43, Robert P. J. Day wrote:
 
-> On Saturday 25 July 2009 15:01:20 Robert P. J. Day wrote:
 >
-> >   for consistency, either bitbake should be included in an OE
-> > checkout, or it shouldn't.  it shouldn't depend on which branch
-> > you're working with.  that way lies confusion.
->
-> In which way do you see breakage? bin/bitbake is gone when you
-> switch from stable to dev? So you executed the host bitbake (which
-> you said was bitbake 1.8.10). What error happened?
+>    it was temporary breakage since, when i switched to the dev branch,
+> the invocation of bitbake reverted to the fedora-installed package,
+> which was 1.8.10, which was rejected as being too old for the dev
+> branch.  it just took a few seconds to realize what had happened.
 
-  it was temporary breakage since, when i switched to the dev branch,
-the invocation of bitbake reverted to the fedora-installed package,
-which was 1.8.10, which was rejected as being too old for the dev
-branch.  it just took a few seconds to realize what had happened.
+Quoted from a bitbake developer: "I wish people would stop installing 
+bitbake, there's no need to do that".
 
-rday
---
+regards,
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Koen
 
-        Linux Consulting, Training and Annoying Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-"Kernel Newbie Corner" column @ linux.com:          http://cli.gs/WG6WYX
-========================================================================
 
 
