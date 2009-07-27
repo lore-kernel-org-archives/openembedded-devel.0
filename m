@@ -1,36 +1,26 @@
-Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
+Received: from [64.18.0.20] (helo=exprod5og110.obsmtp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MVNKE-0001hq-Dm
+	(envelope-from <martyn.welch@gefanuc.com>) id 1MVNvR-00007d-0M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jul 2009 12:20:58 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so1421269qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jul 2009 03:06:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=0V+cOiQ/aAVpHGmF+0I9nQnM+MoDlD5LZ9HybapODm4=;
-	b=NAlvXrjmgpObAKAFFJk2KhQ0ph4SoR7dduS5KODBIWU5l8JXeyP7pnWWbtPgu8WzDl
-	f2BAEMtZvMxi4IEfCsCeXTNSpMwZPkiH0Gi/WYNA//kc5o8bLGWVUDfbrHX8fJISszz6
-	ma0FZzLMAWwuSULV0GRiwsg/HnqP72D3KOBfA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Lof9Whl0QLO437KZ9dDzAkEXjLHRWoIFbi6wbuVHspx5gZqMwUizy0p62vUf446ZtW
-	B1nSNhNlFAC1wwThoqPvRrTtDSYCsoa+4jVc4hc5ap6fPZRwyyiFuoxz94CbF+ufZL0l
-	mwEwioubgx09fRPZ3E4tioOXJdi+zGOxi6A54=
+	Mon, 27 Jul 2009 12:59:25 +0200
+Received: from source ([12.71.149.1]) (using TLSv1) by
+	exprod5ob110.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKSm2FG2qZOKqHelJGsyGloN8DS7yKXdFd@postini.com;
+	Mon, 27 Jul 2009 03:44:45 PDT
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Cinmlip09.e2k.ad.ge.com with ESMTP; 27 Jul 2009 06:44:42 -0400
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 27 Jul 2009 06:44:41 -0400
+Message-ID: <4A6D853E.3020008@gefanuc.com>
+Date: Mon, 27 Jul 2009 11:45:18 +0100
+From: Martyn Welch <martyn.welch@gefanuc.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-Received: by 10.229.97.80 with SMTP id k16mr1377695qcn.17.1248689178130; Mon, 
-	27 Jul 2009 03:06:18 -0700 (PDT)
-In-Reply-To: <aa8983610907270146n6c3f6fe8ucc2f63b3ff32aa@mail.gmail.com>
-References: <4A6D5C5A.2010003@gmail.com>
-	<aa8983610907270146n6c3f6fe8ucc2f63b3ff32aa@mail.gmail.com>
-Date: Mon, 27 Jul 2009 19:36:18 +0930
-Message-ID: <6ec4247d0907270306n6892c3b4g9da71f8e5f60add9@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: linux recipe selected despite ASSUME_PROVIDED += "virtual/kernel"
+References: <4A6D5C5A.2010003@gmail.com>
+In-Reply-To: <4A6D5C5A.2010003@gmail.com>
+Subject: Re: linux recipe selected despite ASSUME_PROVIDED +=	"virtual/kernel"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2009 10:20:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 27 Jul 2009 10:59:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-2009/7/27 Patrick Bellasi <derkling@gmail.com>:
-> On Mon, Jul 27, 2009 at 09:50, Graham Gower<graham.gower@gmail.com> wrote:
->> Hi,
->> I wish to build an Angstrom based console-image for mipsel from the
->> org.openembedded.dev branch. I maintain a kernel for the device but am
->> not yet ready to integrate this into an OE recipe. The default
->> linux_2.6.30.bb
->> fails to build for me, thus I wish to not build the kernel at this point
->> in time.
->>
->> My local.conf contains the following lines,
->> STAGING_KERNEL_DIR = "/home/grg/jz/linux"
->> ASSUME_PROVIDED += "virtual/kernel"
+Graham Gower wrote:
+> Hi,
+> I wish to build an Angstrom based console-image for mipsel from the
+> org.openembedded.dev branch. I maintain a kernel for the device but am
+> not yet ready to integrate this into an OE recipe. The default 
+> linux_2.6.30.bb
+> fails to build for me, thus I wish to not build the kernel at this point
+> in time.
 >
-> I guess that a kernel is required to build an image: in instance to
-> compile libc which relay on some kernel headers.
+> My local.conf contains the following lines,
+> STAGING_KERNEL_DIR = "/home/grg/jz/linux"
+> ASSUME_PROVIDED += "virtual/kernel"
 >
->> However, when i run 'bitbake console-image the default linux_2.6.30.bb
->> recipe
->> is still selected and the build procedes to fail.
->>
->> Is this the correct procedure to avoid building a kernel? If so, what else
->> could I be doing wrongly?
-> So: if you ASSUME_PROVIDED a kernel, at least you should provide a
-> reference to you kernel tree... but the main poin is: is it possible
-> to reference a kernel outside OE?
+> However, when i run 'bitbake console-image the default linux_2.6.30.bb 
+> recipe
+> is still selected and the build procedes to fail.
+>
+> Is this the correct procedure to avoid building a kernel? If so, what 
+> else
+> could I be doing wrongly?
 
-Yes, I had hoped setting the STAGING_KERNEL_DIR would do what you say.
+I tend to create a bitbake recipe to build my kernel and put it in an 
+overlay, otherwise known as a collection[1] and setting the 
+"DEFAULT_PREFERENCE"[2] to a large positive number to cause the build to 
+prefer that kernel. That way it's building your kernel, but it's not yet 
+in the org.openembedded.dev branch.
+
+Martyn
+
+[1] 
+http://docs.openembedded.org/usermanual/usermanual.html#special_bitbake_collections
+[2] 
+http://docs.openembedded.org/usermanual/usermanual.html#recipes_defaultpreference
+
+-- 
+Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
+GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
+Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
+Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 927559189
 
 
