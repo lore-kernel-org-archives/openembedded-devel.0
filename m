@@ -1,34 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MVOi8-0007Og-0J
-	for openembedded-devel@openembedded.org; Mon, 27 Jul 2009 13:49:44 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MVOTu-00060w-Oh
-	for openembedded-devel@openembedded.org; Mon, 27 Jul 2009 11:35:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Mon, 27 Jul 2009 11:35:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Mon, 27 Jul 2009 11:35:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 27 Jul 2009 13:34:44 +0200
-Message-ID: <h4k3ck$1o1$2@ger.gmane.org>
-References: <4A6D5C5A.2010003@gmail.com>
-	<aa8983610907270146n6c3f6fe8ucc2f63b3ff32aa@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090712 Shredder/3.0b3pre
-In-Reply-To: <aa8983610907270146n6c3f6fe8ucc2f63b3ff32aa@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: linux recipe selected despite ASSUME_PROVIDED += "virtual/kernel"
+	(envelope-from <holger+oe@freyther.de>) id 1MVP9q-0008P8-BV
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Jul 2009 14:18:22 +0200
+Received: from tamarin.localnet (123-192-154-148.dynamic.kbronet.com.tw
+	[123.192.154.148])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3D8DC1B10C06
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jul 2009 12:05:14 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Jul 2009 12:03:05 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.2.98; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200907271203.05641.holger+oe@freyther.de>
+Subject: [PATCH] gcc: Pass --enable-tls=no on uclibc builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +28,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2009 11:49:44 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Jul 2009 12:18:22 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 27-07-09 10:46, Patrick Bellasi wrote:
-> On Mon, Jul 27, 2009 at 09:50, Graham Gower<graham.gower@gmail.com>  wrote:
->> Hi,
->> I wish to build an Angstrom based console-image for mipsel from the
->> org.openembedded.dev branch. I maintain a kernel for the device but am
->> not yet ready to integrate this into an OE recipe. The default
->> linux_2.6.30.bb
->> fails to build for me, thus I wish to not build the kernel at this point
->> in time.
->>
->> My local.conf contains the following lines,
->> STAGING_KERNEL_DIR = "/home/grg/jz/linux"
->> ASSUME_PROVIDED += "virtual/kernel"
->
-> I guess that a kernel is required to build an image: in instance to
-> compile libc which relay on some kernel headers.
+=46rom 9edbdfdb41d61fc07e0d3e17cfde500e8ac40a4b Mon Sep 17 00:00:00 2001
+=46rom: Holger Hans Peter Freyther <zecke@selfish.org>
+Date: Mon, 27 Jul 2009 11:31:32 +0200
+Subject: [PATCH] gcc: Pass --enable-tls=3Dno on uclibc builds
 
-Bzzzt! Wrong! OE builds the libc headers from a different recipe called 
-linux-libc-headers.
+gcc is checking if GNU as supports TLS for the platform and then
+turns on tls support on the compiler. The result is that __thread
+is recognized and tls code gets emitted. This will lead to configure
+scripts detecting tls (e.g. util-linux-ng) and the build breaking
+with an undefined reference to ___tls_get_addr.
 
-regards,
+Introduce a get_gcc_uclibc_tls_setting python function, call it for
+uclibc. A function is picked to support turning on TLS support once
+uclibc is gaining a stable implementation.
+=2D--
+ recipes/gcc/gcc-common.inc           |    7 +++++++
+ recipes/gcc/gcc-configure-common.inc |    4 ++--
+ 2 files changed, 9 insertions(+), 2 deletions(-)
 
-Koen
+diff --git a/recipes/gcc/gcc-common.inc b/recipes/gcc/gcc-common.inc
+index 6e777e6..9d6d04f 100644
+=2D-- a/recipes/gcc/gcc-common.inc
++++ b/recipes/gcc/gcc-common.inc
+@@ -15,6 +15,13 @@ def get_gcc_fpu_setting(bb, d):
+         return "--with-float=3Dsoft"
+     return ""
+=20
++# The tls/ntpl support in uclibc is work in progress. For the current
++# targets we should build gcc with --enable-tls=3Dno. In the future we
++# might want to enable TLS for certain architectures and uclibc versions
++# so this is why this method exists.
++def get_gcc_uclibc_tls_setting(bb, d):
++    return "--enable-tls=3Dno"
++
+ # We really need HOST_SYS here for some packages and TARGET_SYS for others.
+ # For now, libgcc is most important so we fix for that - RP.
+ SHLIBSDIR =3D "${STAGING_DIR_TARGET}/shlibs"
+diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configu=
+re-
+common.inc
+index 9363585..bcc1c4f 100644
+=2D-- a/recipes/gcc/gcc-configure-common.inc
++++ b/recipes/gcc/gcc-configure-common.inc
+@@ -40,8 +40,8 @@ EXTRA_OECONF =3D "${@['--enable-clocale=3Dgeneric', '']
+[bb.data.getVar('USE_NLS', d,
+ # Build uclibc compilers without cxa_atexit support
+ EXTRA_OECONF_append_linux               =3D " --enable-__cxa_atexit"
+ EXTRA_OECONF_append_linux-gnueabi       =3D " --enable-__cxa_atexit"
+=2DEXTRA_OECONF_append_linux-uclibc        =3D " --disable-__cxa_atexit"
+=2DEXTRA_OECONF_append_linux-uclibcgnueabi =3D " --disable-__cxa_atexit"
++EXTRA_OECONF_append_linux-uclibc        =3D " --disable-__cxa_atexit=20
+${@get_gcc_uclibc_tls_setting(bb, d)}"
++EXTRA_OECONF_append_linux-uclibcgnueabi =3D " --disable-__cxa_atexit=20
+${@get_gcc_uclibc_tls_setting(bb, d)}"
+ EXTRA_OECONF_FPU =3D "${@get_gcc_fpu_setting(bb, d)}"
+ CPPFLAGS =3D ""
+=20
+=2D-=20
+1.6.3.3
 
 
 
