@@ -1,24 +1,35 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.220.228] (helo=mail-fx0-f228.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MVM3o-0001Re-3X
-	for openembedded-devel@openembedded.org; Mon, 27 Jul 2009 10:59:56 +0200
-Received: (qmail 32250 invoked by uid 813007); 27 Jul 2009 08:45:16 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 27 Jul 2009 08:45:16 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jul 2009 10:44:39 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc3-00104-g3553fe1; KDE/4.2.96; x86_64; ;
-	)
-References: <alpine.LFD.2.00.0907250800110.9021@localhost>
-	<alpine.LFD.2.00.0907251719260.3720@localhost>
-	<200907270743.12287.holger+oe@freyther.de>
-In-Reply-To: <200907270743.12287.holger+oe@freyther.de>
+	(envelope-from <derkling@gmail.com>) id 1MVM4Z-0001TG-1C
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 27 Jul 2009 11:00:43 +0200
+Received: by fxm28 with SMTP id 28so2576435fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jul 2009 01:46:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=c69iHRGubtH5NP6/B4vkSshAvLHSQYswzJEWdV3vAuo=;
+	b=dRWNqGsnhq2vG7mZLAfgXPqv05grjttdsE7FlDQ0SSWjCOhdKRbNa+IU2dNl42+zQl
+	SwvFRSNms/NgLufRCLbkDQo6bC1iYEy0k00XRCLD8RRpcFkNBmugYWeO99YRSfGZnKzH
+	3XMXlyyQta3265z2E4XiBDXXnFoqPEHSJsIJc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=JEkqzwS6cVjIsbvgfocdbW1yD9ty4qoUhT2HCZHIlM//69BO4IRhzSheTypfXTPRwk
+	rWDXc3Z2JP4XN4tn00odZAQ8xWp7zX4pa4DxHIb5aL7kqtKYtE3EgUFzsgG0sdlNRfv0
+	7ZXTu5vKjlHqGPl89hUMYrpiFuTbwOEzMEZVg=
 MIME-Version: 1.0
-Message-Id: <200907271044.40262.marcin@juszkiewicz.com.pl>
-Subject: Re: getting bitbake-1.8.12 for the org.openembedded.dev branch?
+Received: by 10.223.127.8 with SMTP id e8mr2289731fas.81.1248684361284; Mon, 
+	27 Jul 2009 01:46:01 -0700 (PDT)
+In-Reply-To: <4A6D5C5A.2010003@gmail.com>
+References: <4A6D5C5A.2010003@gmail.com>
+Date: Mon, 27 Jul 2009 10:46:01 +0200
+Message-ID: <aa8983610907270146n6c3f6fe8ucc2f63b3ff32aa@mail.gmail.com>
+From: Patrick Bellasi <derkling@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: linux recipe selected despite ASSUME_PROVIDED += "virtual/kernel"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2009 08:59:56 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Jul 2009 09:00:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=C5=82ek, 27 lipca 2009 o 07:43:12 Holger Hans Peter Freyther=
-=20
-napisa=C5=82(a):
+On Mon, Jul 27, 2009 at 09:50, Graham Gower<graham.gower@gmail.com> wrote:
+> Hi,
+> I wish to build an Angstrom based console-image for mipsel from the
+> org.openembedded.dev branch. I maintain a kernel for the device but am
+> not yet ready to integrate this into an OE recipe. The default
+> linux_2.6.30.bb
+> fails to build for me, thus I wish to not build the kernel at this point
+> in time.
+>
+> My local.conf contains the following lines,
+> STAGING_KERNEL_DIR = "/home/grg/jz/linux"
+> ASSUME_PROVIDED += "virtual/kernel"
 
-> Marcin, Koen. Do you switch from dev to stable? How do you do that?
-> Do you have two complete build trees for stable/dev?
+I guess that a kernel is required to build an image: in instance to
+compile libc which relay on some kernel headers.
 
-I have OE metadata in ~/devel/oe/openembedded/ and use it to any builds=20
-which use .dev branch. I also use that directory for all pushing stuff=20
-(for .dev, stable/2009 and others).
+> However, when i run 'bitbake console-image the default linux_2.6.30.bb
+> recipe
+> is still selected and the build procedes to fail.
+>
+> Is this the correct procedure to avoid building a kernel? If so, what else
+> could I be doing wrongly?
+So: if you ASSUME_PROVIDED a kernel, at least you should provide a
+reference to you kernel tree... but the main poin is: is it possible
+to reference a kernel outside OE?
 
-Builds are stored in ~/devel/build/NAME-OF-BUILD/ directory. They are=20
-mostly from .dev tree.
+>
+> -Graham
 
-To build from stable/2009 I have ~/devel/build/stable/ directory which=20
-contains copy of OE metadata (without pushing).
+Patrick
 
-=46or .dev builds I use Bitbake from ~/devel/bitbake/ which contains GIT=20
-tree with master (1.9.x) branch selected.
+-- 
+#include <best/regards.h>
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+DERKLING
+LRU 338214 (http://counter.li.org)
 
+<---------------------------------------------------------------------------------------------------------->
+   Patrick Bellasi <bellasi at elet dot polimi dot it>
+   PhD student at Politecnico di Milano
 
+   Contacts:
+    - ICQ         344672588
+    - MSN       derkling at yahoo dot it
+    - Skype     derkling
+
+   Personal Sites:
+    - Bookmarks
+           http://del.icio.us/derkling
+    - Bibliography
+           http://www.bibsonomy.org/user/derkling
+
+   Privacy:
+    - GnuPG     0x72ABC1EE (keyserver.linux.it)
+       pub      1024D/72ABC1EE 2003-12-04
+       Key fingerprint = 3958 7B5F 36EC D1F8 C752
+                                9589 C3B7 FD49 72AB C1EE
+<---------------------------------------------------------------------------------------------------------->
 
 
