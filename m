@@ -1,39 +1,24 @@
-Received: from [209.85.216.171] (helo=mail-px0-f171.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MVLDN-0002BZ-KY
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jul 2009 10:05:46 +0200
-Received: by pxi1 with SMTP id 1so2131024pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jul 2009 00:51:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=gwPvs6DOp24goatXme8OBHDnq7Te5qhsvVrCvY2HhJY=;
-	b=TZzLhV5/tV6FLgZdVQauzfjCzBB0MIBj8hiBKccLeaNCGq5DJQFoHYfbqWRgNf0j/S
-	KOdyZKlYuB2EBSnDaFhsY84vjTZTISUHQRxjiMj1icAkL4leK4kxTBp4ikOD2cnDe55k
-	LSja+nnSeAOykvxdHsOVblwQFJYSmLiKfunhg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=GYjVyRbppjVkL/yuYOaVzP2HEq+tKjai0My6iuNDNOhy+l6iEXbiqyq8ylQCFHp1Vz
-	M19ZG60iKnXblFqfpAK6uHpXS++X16sFT9uFSVfJkxnBaIrKi/yun1mi2mZ3jj3e3PM8
-	xmCgAzqa1gI71YmWPPH9UR/E2RQETLrO3mau4=
-Received: by 10.114.183.4 with SMTP id g4mr9252510waf.0.1248681063633;
-	Mon, 27 Jul 2009 00:51:03 -0700 (PDT)
-Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	17sm11238650pzk.66.2009.07.27.00.51.00
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 27 Jul 2009 00:51:02 -0700 (PDT)
-Message-ID: <4A6D5C5A.2010003@gmail.com>
-Date: Mon, 27 Jul 2009 17:20:50 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MVM3o-0001Re-3X
+	for openembedded-devel@openembedded.org; Mon, 27 Jul 2009 10:59:56 +0200
+Received: (qmail 32250 invoked by uid 813007); 27 Jul 2009 08:45:16 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 Jul 2009 08:45:16 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: linux recipe selected despite ASSUME_PROVIDED += "virtual/kernel"
+Date: Mon, 27 Jul 2009 10:44:39 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc3-00104-g3553fe1; KDE/4.2.96; x86_64; ;
+	)
+References: <alpine.LFD.2.00.0907250800110.9021@localhost>
+	<alpine.LFD.2.00.0907251719260.3720@localhost>
+	<200907270743.12287.holger+oe@freyther.de>
+In-Reply-To: <200907270743.12287.holger+oe@freyther.de>
+MIME-Version: 1.0
+Message-Id: <200907271044.40262.marcin@juszkiewicz.com.pl>
+Subject: Re: getting bitbake-1.8.12 for the org.openembedded.dev branch?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,27 +32,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2009 08:05:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Jul 2009 08:59:56 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
-I wish to build an Angstrom based console-image for mipsel from the
-org.openembedded.dev branch. I maintain a kernel for the device but am
-not yet ready to integrate this into an OE recipe. The default linux_2.6.30.bb
-fails to build for me, thus I wish to not build the kernel at this point
-in time.
+Dnia poniedzia=C5=82ek, 27 lipca 2009 o 07:43:12 Holger Hans Peter Freyther=
+=20
+napisa=C5=82(a):
 
-My local.conf contains the following lines,
-STAGING_KERNEL_DIR = "/home/grg/jz/linux"
-ASSUME_PROVIDED += "virtual/kernel"
+> Marcin, Koen. Do you switch from dev to stable? How do you do that?
+> Do you have two complete build trees for stable/dev?
 
-However, when i run 'bitbake console-image the default linux_2.6.30.bb recipe
-is still selected and the build procedes to fail.
+I have OE metadata in ~/devel/oe/openembedded/ and use it to any builds=20
+which use .dev branch. I also use that directory for all pushing stuff=20
+(for .dev, stable/2009 and others).
 
-Is this the correct procedure to avoid building a kernel? If so, what else
-could I be doing wrongly?
+Builds are stored in ~/devel/build/NAME-OF-BUILD/ directory. They are=20
+mostly from .dev tree.
 
--Graham
+To build from stable/2009 I have ~/devel/build/stable/ directory which=20
+contains copy of OE metadata (without pushing).
+
+=46or .dev builds I use Bitbake from ~/devel/bitbake/ which contains GIT=20
+tree with master (1.9.x) branch selected.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
