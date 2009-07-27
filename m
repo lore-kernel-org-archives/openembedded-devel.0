@@ -1,20 +1,34 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MVP9q-0008P8-BV
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Jul 2009 14:18:22 +0200
-Received: from tamarin.localnet (123-192-154-148.dynamic.kbronet.com.tw
-	[123.192.154.148])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3D8DC1B10C06
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jul 2009 12:05:14 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jul 2009 12:03:05 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.2.98; i686; ; )
+	(envelope-from <rpjday@crashcourse.ca>) id 1MVS3I-00033N-PC
+	for openembedded-devel@openembedded.org; Mon, 27 Jul 2009 17:23:49 +0200
+Received: from [64.208.221.2] (helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1MVRp4-00086f-IW
+	for openembedded-devel@openembedded.org; Mon, 27 Jul 2009 11:09:07 -0400
+Date: Mon, 27 Jul 2009 11:06:18 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200907270743.12287.holger+oe@freyther.de>
+Message-ID: <alpine.LFD.2.00.0907271103390.5449@localhost>
+References: <alpine.LFD.2.00.0907250800110.9021@localhost>
+	<200907251651.19932.holger+oe@freyther.de>
+	<alpine.LFD.2.00.0907251719260.3720@localhost>
+	<200907270743.12287.holger+oe@freyther.de>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <200907271203.05641.holger+oe@freyther.de>
-Subject: [PATCH] gcc: Pass --enable-tls=no on uclibc builds
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: Re: getting bitbake-1.8.12 for the org.openembedded.dev branch?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,70 +42,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jul 2009 12:18:22 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Jul 2009 15:23:49 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-=46rom 9edbdfdb41d61fc07e0d3e17cfde500e8ac40a4b Mon Sep 17 00:00:00 2001
-=46rom: Holger Hans Peter Freyther <zecke@selfish.org>
-Date: Mon, 27 Jul 2009 11:31:32 +0200
-Subject: [PATCH] gcc: Pass --enable-tls=3Dno on uclibc builds
+On Mon, 27 Jul 2009, Holger Hans Peter Freyther wrote:
 
-gcc is checking if GNU as supports TLS for the platform and then
-turns on tls support on the compiler. The result is that __thread
-is recognized and tls code gets emitted. This will lead to configure
-scripts detecting tls (e.g. util-linux-ng) and the build breaking
-with an undefined reference to ___tls_get_addr.
+> On Saturday 25 July 2009 23:43:09 Robert P. J. Day wrote:
+> > On Sat, 25 Jul 2009, Holger Hans Peter Freyther wrote:
+> > > On Saturday 25 July 2009 15:01:20 Robert P. J. Day wrote:
+> > > >   for consistency, either bitbake should be included in an OE
+> > > > checkout, or it shouldn't.  it shouldn't depend on which
+> > > > branch you're working with.  that way lies confusion.
+> > >
+> > > In which way do you see breakage? bin/bitbake is gone when you
+> > > switch from stable to dev? So you executed the host bitbake
+> > > (which you said was bitbake 1.8.10). What error happened?
+> >
+> >   it was temporary breakage since, when i switched to the dev
+> > branch, the invocation of bitbake reverted to the fedora-installed
+> > package, which was 1.8.10, which was rejected as being too old for
+> > the dev branch.  it just took a few seconds to realize what had
+> > happened.
+>
+> Looking at this. First of all the answers were not as friendly as
+> they should have been. Second, I think you have a point that there
+> is a inconsistency with stable and dev.
+>
+> Personally I'm not using stable so I have no idea.
+>
+> Marcin, Koen. Do you switch from dev to stable? How do you do that?
+> Do you have two complete build trees for stable/dev?
 
-Introduce a get_gcc_uclibc_tls_setting python function, call it for
-uclibc. A function is picked to support turning on TLS support once
-uclibc is gaining a stable implementation.
-=2D--
- recipes/gcc/gcc-common.inc           |    7 +++++++
- recipes/gcc/gcc-configure-common.inc |    4 ++--
- 2 files changed, 9 insertions(+), 2 deletions(-)
+  i wasn't trying to make a big deal of this, only pointing out that
+there was some definite confusion in switching from the stable branch
+to the dev branch and having bitbake suddenly "stop working."  i
+understand how it works now, but it's possible others will trip over
+that same issue.
 
-diff --git a/recipes/gcc/gcc-common.inc b/recipes/gcc/gcc-common.inc
-index 6e777e6..9d6d04f 100644
-=2D-- a/recipes/gcc/gcc-common.inc
-+++ b/recipes/gcc/gcc-common.inc
-@@ -15,6 +15,13 @@ def get_gcc_fpu_setting(bb, d):
-         return "--with-float=3Dsoft"
-     return ""
-=20
-+# The tls/ntpl support in uclibc is work in progress. For the current
-+# targets we should build gcc with --enable-tls=3Dno. In the future we
-+# might want to enable TLS for certain architectures and uclibc versions
-+# so this is why this method exists.
-+def get_gcc_uclibc_tls_setting(bb, d):
-+    return "--enable-tls=3Dno"
-+
- # We really need HOST_SYS here for some packages and TARGET_SYS for others.
- # For now, libgcc is most important so we fix for that - RP.
- SHLIBSDIR =3D "${STAGING_DIR_TARGET}/shlibs"
-diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configu=
-re-
-common.inc
-index 9363585..bcc1c4f 100644
-=2D-- a/recipes/gcc/gcc-configure-common.inc
-+++ b/recipes/gcc/gcc-configure-common.inc
-@@ -40,8 +40,8 @@ EXTRA_OECONF =3D "${@['--enable-clocale=3Dgeneric', '']
-[bb.data.getVar('USE_NLS', d,
- # Build uclibc compilers without cxa_atexit support
- EXTRA_OECONF_append_linux               =3D " --enable-__cxa_atexit"
- EXTRA_OECONF_append_linux-gnueabi       =3D " --enable-__cxa_atexit"
-=2DEXTRA_OECONF_append_linux-uclibc        =3D " --disable-__cxa_atexit"
-=2DEXTRA_OECONF_append_linux-uclibcgnueabi =3D " --disable-__cxa_atexit"
-+EXTRA_OECONF_append_linux-uclibc        =3D " --disable-__cxa_atexit=20
-${@get_gcc_uclibc_tls_setting(bb, d)}"
-+EXTRA_OECONF_append_linux-uclibcgnueabi =3D " --disable-__cxa_atexit=20
-${@get_gcc_uclibc_tls_setting(bb, d)}"
- EXTRA_OECONF_FPU =3D "${@get_gcc_fpu_setting(bb, d)}"
- CPPFLAGS =3D ""
-=20
-=2D-=20
-1.6.3.3
+rday
+--
 
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+        Linux Consulting, Training and Annoying Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+"Kernel Newbie Corner" column @ linux.com:          http://cli.gs/WG6WYX
+========================================================================
 
 
