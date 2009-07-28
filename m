@@ -1,41 +1,20 @@
-Received: from [209.85.198.244] (helo=rv-out-0708.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MVs2n-0003bL-6I
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jul 2009 21:09:01 +0200
-Received: by rv-out-0708.google.com with SMTP id l33so879281rvb.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jul 2009 11:54:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=fwr5Ct1xSktBwl1TkUXTPRBd2tMVZue7oX/sX8yfN2M=;
-	b=p4pFLai0Q5DW4A8Q3KO3C5Dk4WTCZnBsjQAZSiRPCLHPbzwIhos7YhiZEzspFPN+Ma
-	a7QZxqnPqXN+vPp+Y3qYsTAVm0fWGzBCJcIYoEXtjXpmyZGjXO9OCzHOFQKTL2XOyktl
-	L7Gv20WmmXhJ58rNxkfuBa/yJ43k/p3DoLwrg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=lFZ0WHytJP+hBIepekfE6opeFrj8+6VAQ2Hu5segBAlTfWpk3xXVUcf6OTCv4TsUdC
-	hsPcjKYh2BHvH52upZe922uJfH/VFQHF4T+SMpqgAtUZAzkV6/s7MhHQWa/mn/9QVuWr
-	UazBTEg2ekp8NMbk4B4isZkhRFF9F31FeAGq4=
-Received: by 10.141.27.7 with SMTP id e7mr5220332rvj.257.1248807251793;
-	Tue, 28 Jul 2009 11:54:11 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-0-187.dsl.pltn13.sbcglobal.net
-	[71.146.0.187])
-	by mx.google.com with ESMTPS id g14sm756587rvb.40.2009.07.28.11.54.10
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 28 Jul 2009 11:54:10 -0700 (PDT)
-Date: Tue, 28 Jul 2009 11:54:05 -0700
-From: Khem Raj <raj.khem@gmail.com>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MVsYy-00020l-9Y
+	for openembedded-devel@openembedded.org; Tue, 28 Jul 2009 21:42:16 +0200
+Received: (qmail 29776 invoked from network); 28 Jul 2009 19:27:26 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 28 Jul 2009 12:27:26 -0700
+Date: Tue, 28 Jul 2009 12:27:26 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090728185405.GA25883@gmail.com>
-References: <64d5b90a0907280737i72902f27s65aa0c9a4e351a97@mail.gmail.com>
+Message-ID: <20090728192725.GN13724@smtp.west.cox.net>
+References: <20090716202438.GC32273@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <64d5b90a0907280737i72902f27s65aa0c9a4e351a97@mail.gmail.com>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: Patch to get wvstreams recipe functional
+In-Reply-To: <20090716202438.GC32273@denix.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: Busybox ifupdown usage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,61 +28,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2009 19:09:01 -0000
+X-List-Received-Date: Tue, 28 Jul 2009 19:42:17 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (28/07/09 20:07), Kirtika Ruchandani wrote:
-> Greetings,
-> Please find attached the quilt patches for the wvstreams 4.4.1 recipe.
-> The one in the OE tree currently doesn't build correctly.
-> It would be great if someone could test the above patches and check if the
-> build goes fine.
-> Regards,
+On Thu, Jul 16, 2009 at 04:24:38PM -0400, Denys Dmytriyenko wrote:
+
+> Busybox has the following warning about using ifupdown:
 > 
-> -- 
-> Kirtika Ruchandani
-> Maemo Google Summer of Code  student
-> Sophomore, CS&E @ IIT-Madras
-> IRC: rkirti / oespirit
-> http://rkirti.wordpress.com
+> http://git.busybox.net/busybox/tree/docs/ifupdown_design.txt
+> 
+> AFAICS, ifupdown from Busybox is used in most of the images. Are there any 
+> concerns? How valid is the warning above?
 
-> Index: wvstreams-4.4.1/include/wvserialize.h
-> ===================================================================
-> --- wvstreams-4.4.1.orig/include/wvserialize.h	2009-07-28 17:46:50.000000000 +0530
-> +++ wvstreams-4.4.1/include/wvserialize.h	2009-07-28 17:48:30.000000000 +0530
-> @@ -348,8 +348,9 @@
->   * (zero) character.  Serialized WvStrings are guaranteed not to contain nul
->   * except as the last character.
->   */
-> +/*No storage class allowed here as per gcc 4.3 specs*/
->  template <>
-> -extern WvString _wv_deserialize<WvString>(WvBuf &buf);
-> +WvString _wv_deserialize<WvString>(WvBuf &buf);
->  
->  
->  /** Deserialize a WvBuf. */
+In all 5 defconfigs for 1.13.2 FEATURE_IFUPDOWN_EXTERNAL_DHCP is
+disabled and UDHCPC is enabled.  So yes, if busybox ifupdown is used
+rather than the ifupdown package (and I don't see runtime update
+alternatives magic in ifupdown_0.6.8.bb) only udhcpc is going to be a
+working client.  It's probably luck then that people either use busybox
+or they use not-busybox and some other dhcp client and real ifupdown.
 
-> Index: wvstreams-4.4.1/include/uniconfkey.h
-> ===================================================================
-> --- wvstreams-4.4.1.orig/include/uniconfkey.h	2009-07-28 17:42:39.000000000 +0530
-> +++ wvstreams-4.4.1/include/uniconfkey.h	2009-07-28 17:42:55.000000000 +0530
-> @@ -9,7 +9,7 @@
->  
->  #include "wvstring.h"
->  #include "wvlinklist.h"
-> -
-> +#include <limits.h>
->  
->  // The Python headers try to #define ANY as void.  If we're building Python
->  // wrappers, get rid of that.
-
-
-FWIW patch looks ok. Can you send it with recipe changes ?
-so it can be applied 
-Thx
-
--Khem
-
+-- 
+Tom Rini
 
 
