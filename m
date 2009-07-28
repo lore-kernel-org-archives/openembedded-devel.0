@@ -1,20 +1,20 @@
 Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MVsYy-00020l-9Y
-	for openembedded-devel@openembedded.org; Tue, 28 Jul 2009 21:42:16 +0200
-Received: (qmail 29776 invoked from network); 28 Jul 2009 19:27:26 -0000
+	(envelope-from <trini@embeddedalley.com>) id 1MVtIL-0000ps-R0
+	for openembedded-devel@openembedded.org; Tue, 28 Jul 2009 22:29:10 +0200
+Received: (qmail 30126 invoked from network); 28 Jul 2009 20:14:19 -0000
 Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 28 Jul 2009 12:27:26 -0700
-Date: Tue, 28 Jul 2009 12:27:26 -0700
+	by easi.embeddedalley.com with SMTP; 28 Jul 2009 13:14:19 -0700
+Date: Tue, 28 Jul 2009 13:14:19 -0700
 From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090728192725.GN13724@smtp.west.cox.net>
-References: <20090716202438.GC32273@denix.org>
+Message-ID: <20090728201418.GO13724@smtp.west.cox.net>
+References: <20090728072202.GA5422@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20090716202438.GC32273@denix.org>
+In-Reply-To: <20090728072202.GA5422@gmail.com>
 Organization: Embedded Alley Solutions, Inc
 User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Busybox ifupdown usage
+Subject: Re: [RFC] Adding TLS selection choice to metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,25 +28,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2009 19:42:17 -0000
+X-List-Received-Date: Tue, 28 Jul 2009 20:29:10 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, Jul 16, 2009 at 04:24:38PM -0400, Denys Dmytriyenko wrote:
+On Tue, Jul 28, 2009 at 12:22:02AM -0700, Khem Raj wrote:
 
-> Busybox has the following warning about using ifupdown:
+> I thought of putting it in metadata like TARGET_FPU and which can then be set from various other 
+> conf files.
 > 
-> http://git.busybox.net/busybox/tree/docs/ifupdown_design.txt
-> 
-> AFAICS, ifupdown from Busybox is used in most of the images. Are there any 
-> concerns? How valid is the warning above?
+> A cheap workaround is that we could assume that TLS is only supported for glibc and disable it
+> for other libc variants but then NPTL is coming (whenever it comes) in uclibc so some architectures
+> in uclibc will support NPTL and some wont. Therefore defining it in metadata will give us the 
+> fine granularity to set it.
 
-In all 5 defconfigs for 1.13.2 FEATURE_IFUPDOWN_EXTERNAL_DHCP is
-disabled and UDHCPC is enabled.  So yes, if busybox ifupdown is used
-rather than the ifupdown package (and I don't see runtime update
-alternatives magic in ifupdown_0.6.8.bb) only udhcpc is going to be a
-working client.  It's probably luck then that people either use busybox
-or they use not-busybox and some other dhcp client and real ifupdown.
+For the sake of other libcs, I like TARGET_TLS or whatever it's called.
 
 -- 
 Tom Rini
