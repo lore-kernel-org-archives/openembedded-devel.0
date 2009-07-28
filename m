@@ -1,38 +1,33 @@
-Received: from [209.85.222.197] (helo=mail-pz0-f197.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MVhF3-00033r-Tk
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 28 Jul 2009 09:36:58 +0200
-Received: by pzk35 with SMTP id 35so102382pzk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jul 2009 00:22:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=dDaIRTcEmSo7L6c74Gt509MPly4n4MEHYaFOWbatUt0=;
-	b=YwNGhvreeZtWfQSdWL3LwIhOblfDDWuqer8sFV6ly0cQh6EhmQkEzZv6+SZYwrDtEs
-	kLTq1tRfEgz/IYBgRz9hz5lO1id2MCByeQUtXZXUT91/P4pSYvCtVcvLktSi9AOg9OUt
-	zyU3o7eMRNpxnFekApCz9ZyvQsLUYnn4+prx4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=UAl9i48H4LGFoOWuYBt/Cau6iK5j0ONgtmEa3T/2ZoZPDKpONLyUmi1V6XNoM6J+hs
-	cZNSAslZm1EZbmFMU/pQ1g4jGLqfFGkE1+X1IEwTWqeeNwFTpgBe+U+hf6mKsDFzx2LN
-	Ftl0GNKn29ooaB/eRsx5uvoHSX7LrGoLhtvoQ=
-Received: by 10.114.185.20 with SMTP id i20mr11380955waf.62.1248765729601;
-	Tue, 28 Jul 2009 00:22:09 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-0-187.dsl.pltn13.sbcglobal.net
-	[71.146.0.187])
-	by mx.google.com with ESMTPS id v9sm15273909wah.36.2009.07.28.00.22.08
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 28 Jul 2009 00:22:08 -0700 (PDT)
-Date: Tue, 28 Jul 2009 00:22:02 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090728072202.GA5422@gmail.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: [RFC] Adding TLS selection choice to metadata
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MVhTY-0003jP-SH
+	for openembedded-devel@openembedded.org; Tue, 28 Jul 2009 09:51:56 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MVhFG-0006XY-C3
+	for openembedded-devel@openembedded.org; Tue, 28 Jul 2009 07:37:10 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Tue, 28 Jul 2009 07:37:10 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Tue, 28 Jul 2009 07:37:10 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 28 Jul 2009 09:36:59 +0200
+Message-ID: <h4m9qr$9bc$1@ger.gmane.org>
+References: <5e088bd90907271310o13787c35j5412c20fa1039912@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090712 Shredder/3.0b3pre
+In-Reply-To: <5e088bd90907271310o13787c35j5412c20fa1039912@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] policykit: install missing PolicyKit.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,40 +41,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jul 2009 07:36:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Jul 2009 07:51:57 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi
+I applied all three patches, but I noticed some problems:
 
-Enabling TLS support on uclibc/glibc is not sound enough in out build. Reason is we depend upon
-various autotools tests to find out if the software combination we chose can support it or not
-and these tests are not doing the correct think many times.
+* patch 3 was linewrapped
+* patchwork hates the gitweb-export-pasted-into-gmail and duplicated 
+descriptions
 
-TLS is a libc feature from software POV. Implementation also depends upon hardware if there is
-some special support available. 
+I fixed those manually, could you next time try using git-format-patch 
+and git-send-email? I use the following to send my patches using gmail: 
+http://git.or.cz/gitwiki/GitTips#Usingmsmtptosendyourpatches
 
-Right now we have TLS support enabled by default in toolchain which works ok for newer glibc which have
-TLS support in both Linuxthreads as well as nptl but it does not work so well with uclibc
-and I think same will be case with klibc.
+regards,
 
-We need to disable it in the cross compiler while building the compiler so the TLS tests in 
-subsequent applications which only tests for __thread acceptence dont assume that TLS support
-is available in the system. 
+Koen
 
-I thought of putting it in metadata like TARGET_FPU and which can then be set from various other 
-conf files.
 
-A cheap workaround is that we could assume that TLS is only supported for glibc and disable it
-for other libc variants but then NPTL is coming (whenever it comes) in uclibc so some architectures
-in uclibc will support NPTL and some wont. Therefore defining it in metadata will give us the 
-fine granularity to set it.
-
-Ideas ?
-
-Thanks
-
--Khem
+On 27-07-09 22:10, Steve Sakoman wrote:
+> From: Steve Sakoman<steve@sakoman.com>
+> Date: Mon, 27 Jul 2009 19:38:05 +0000 (-0700)
+> Subject: policykit: install missing PolicyKit.conf
+> X-Git-Url: http://www.sakoman.net/cgi-bin/gitweb.cgi?p=openembedded.git;a=commitdiff_plain;h=98b71f9ab5b8578b77bb45887e72681ce16a2910
+>
+> policykit: install missing PolicyKit.conf
+> ---
+>
+> diff --git a/recipes/policykit/policykit/PolicyKit.conf
+> b/recipes/policykit/policykit/PolicyKit.conf
+> new file mode 100644
+> index 0000000..ed502ac
+> --- /dev/null
+> +++ b/recipes/policykit/policykit/PolicyKit.conf
+> @@ -0,0 +1,13 @@
+> +<?xml version="1.0" encoding="UTF-8"?>  <!-- -*- XML -*- -->
+> +
+> +<!DOCTYPE pkconfig PUBLIC "-//freedesktop//DTD PolicyKit Configuration 1.0//EN"
+> +"http://hal.freedesktop.org/releases/PolicyKit/1.0/config.dtd">
+> +
+> +<!-- See the manual page PolicyKit.conf(5) for file format -->
+> +
+> +<config version="0.1">
+> +<match user="root">
+> +<return result="yes"/>
+> +</match>
+> +<define_admin_auth group="admin"/>
+> +</config>
+> diff --git a/recipes/policykit/policykit_0.9.bb
+> b/recipes/policykit/policykit_0.9.bb
+> index 28cbb11..2a31701 100644
+> --- a/recipes/policykit/policykit_0.9.bb
+> +++ b/recipes/policykit/policykit_0.9.bb
+> @@ -1,9 +1,11 @@
+>   HOMEPAGE = "http://www.packagekit.org/"
+>   DEPENDS = "libpam expat dbus-glib"
+>
+> -PR = "r4"
+> +PR = "r5"
+>
+> -SRC_URI = "http://hal.freedesktop.org/releases/PolicyKit-${PV}.tar.gz"
+> +SRC_URI = "http://hal.freedesktop.org/releases/PolicyKit-${PV}.tar.gz \
+> +           file://PolicyKit.conf \
+> +          "
+>
+>   EXTRA_OECONF = "--with-authfw=pam --with-os-type=moblin
+> --disable-man-pages --disable-gtk-doc"
+>
+> @@ -11,6 +13,10 @@ S = "${WORKDIR}/PolicyKit-${PV}"
+>
+>   inherit autotools pkgconfig
+>
+> +do_install_append () {
+> +	install -m 0644 ${WORKDIR}/PolicyKit.conf
+> ${D}${sysconfdir}/PolicyKit/PolicyKit.conf
+> +}
+> +
+>   do_stage() {
+>           autotools_stage_all
+>   }
 
 
 
