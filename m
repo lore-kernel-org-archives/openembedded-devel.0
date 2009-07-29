@@ -1,38 +1,22 @@
-Received: from [209.85.216.171] (helo=mail-px0-f171.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MW139-0000fa-0T
+	(envelope-from <holger+oe@freyther.de>) id 1MW2fT-0007jW-NE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jul 2009 06:45:59 +0200
-Received: by pxi1 with SMTP id 1so366662pxi.24
+	Wed, 29 Jul 2009 08:29:39 +0200
+Received: from tamarin.localnet (123-192-154-148.dynamic.kbronet.com.tw
+	[123.192.154.148])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7B4A41B10C0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jul 2009 21:31:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=mWnJSKCb8bGAed9ZD5CL7ADV34McPSz6YsR3pvEJedE=;
-	b=jDXoH8n3nzf2o32qG+BJ43jR4ZrbQ/v0pVskuZ8ILgmjCbtC9rHkM4TJylFRTAQG8J
-	Ti9zRilU6WFuDLzeaWPh7QtP7dOa3WnymH8XF+h+IG74+B68xrXLpgYHN9q7MxQDYLcG
-	CtwN+C5ENGro4StGnkAnMBhXkiAbhQYWFIjgw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=caQ8XGUmQYDEVcaPd0/mIDhmcKdJJEWgCC3bHs4T9PmIlHNtsUDiT3UaAVZQObb81k
-	vHtGTvf3fSdDiyAT8svzWSfmZgd7zVTjsagDAJCEo+iA5DJVV9Rk+lYf0ELLhyWrNTTb
-	/4bS6aFYWcbExWwBx0PoVh+RzwkIpR44VQiho=
-Received: by 10.114.204.6 with SMTP id b6mr12976403wag.93.1248841865098;
-	Tue, 28 Jul 2009 21:31:05 -0700 (PDT)
-Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id 41sm1097185pzk.23.2009.07.28.21.31.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 28 Jul 2009 21:31:03 -0700 (PDT)
-Message-ID: <4A6FD077.1060001@gmail.com>
-Date: Wed, 29 Jul 2009 14:00:47 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Wed, 29 Jul 2009 06:16:51 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] remove duplicated code from linux.inc
+Date: Wed, 29 Jul 2009 06:14:40 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.2.98; i686; ; )
+References: <20090728072202.GA5422@gmail.com>
+In-Reply-To: <20090728072202.GA5422@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200907290614.40124.holger+oe@freyther.de>
+Subject: Re: [RFC] Adding TLS selection choice to metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,47 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2009 04:45:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 29 Jul 2009 06:29:39 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hello,
+On Tuesday 28 July 2009 09:22:02 Khem Raj wrote:
+> Hi
+>
+> Enabling TLS support on uclibc/glibc is not sound enough in out build.
+> Reason is we depend upon various autotools tests to find out if the
+> software combination we chose can support it or not and these tests are not
+> doing the correct think many times.
 
-The contents of the do_compile_append() function below can also be found in 
-kernel.bbclass: do_deploy().
+Have you seen the patch I sent? The title was 
+[oe] [PATCH] gcc: Pass --enable-tls=no on uclibc builds...
 
-I've removed it from linux.inc because I want to dynamically set
-UBOOT_ENTRYPOINT in my linux-blah.bb based upon the resultant kernel binary
-and this makes it easier.
 
--Graham
+z.
 
-diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
-index 96feba6..3dbb1ec 100644
---- a/recipes/linux/linux.inc
-+++ b/recipes/linux/linux.inc
-@@ -158,22 +158,6 @@ do_configure_append() {
- 	fi
- }
- 
--do_compile_append() {
--    if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
--        if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
--            ${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
--            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
--            rm -f linux.bin
--        else
--            ${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
--            rm -f linux.bin.gz
--            gzip -9 linux.bin
--            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
--            rm -f linux.bin.gz
--        fi
--    fi
--}
--
- do_devicetree_image() {
-     if test -n "${KERNEL_DEVICETREE}" ; then
-         dtc -I dts -O dtb ${KERNEL_DEVICETREE_FLAGS} -o devicetree ${KERNEL_DEVICETREE}
+
 
 
