@@ -1,33 +1,24 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MW3vC-0000F9-A3
-	for openembedded-devel@openembedded.org; Wed, 29 Jul 2009 09:49:58 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MW3gl-0002DB-2O
-	for openembedded-devel@openembedded.org; Wed, 29 Jul 2009 07:35:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Wed, 29 Jul 2009 07:35:03 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Wed, 29 Jul 2009 07:35:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 29 Jul 2009 09:34:05 +0200
-Message-ID: <h4ou1e$s42$1@ger.gmane.org>
-References: <4A6FD077.1060001@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
-In-Reply-To: <4A6FD077.1060001@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] remove duplicated code from linux.inc
+	(envelope-from <holger+oe@freyther.de>) id 1MW4K7-00012w-Qs
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Jul 2009 10:15:43 +0200
+Received: from tamarin.localnet (123-192-154-148.dynamic.kbronet.com.tw
+	[123.192.154.148])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 00CF21B10C0E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Jul 2009 08:02:56 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Jul 2009 08:00:39 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.2.98; i686; ; )
+References: <20090728072202.GA5422@gmail.com>
+	<200907290614.40124.holger+oe@freyther.de>
+	<19c1b8a90907290002i1a80a99fqfbb42128472f3299@mail.gmail.com>
+In-Reply-To: <19c1b8a90907290002i1a80a99fqfbb42128472f3299@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200907290800.39598.holger+oe@freyther.de>
+Subject: Re: [RFC] Adding TLS selection choice to metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,57 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2009 07:49:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 29 Jul 2009 08:15:43 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-NAK, this breaks the resulting kernel-image ipk
+On Wednesday 29 July 2009 09:02:39 Khem Raj wrote:
+> On Tue, Jul 28, 2009 at 9:14 PM, Holger Hans Peter
+>
+> Freyther<holger+oe@freyther.de> wrote:
+> > On Tuesday 28 July 2009 09:22:02 Khem Raj wrote:
+> >> Hi
+> >>
+> >> Enabling TLS support on uclibc/glibc is not sound enough in out build.
+> >> Reason is we depend upon various autotools tests to find out if the
+> >> software combination we chose can support it or not and these tests are
+> >> not doing the correct think many times.
+> >
+> > Have you seen the patch I sent? The title was
+> > [oe] [PATCH] gcc: Pass --enable-tls=no on uclibc builds...
+>
+> I did however nptl/uclibc builds we need TLS support to be enabled
+> and there is no way to differentiate the triplets for a NPTL uclibc
+> toolchain from non NPTL toolchain. In future not all arches will get
+> NPTL support
+> on uclibc at once so we wil have few arches where NPTL will be there and
+> that will require TLS whereas others will use Linux Threads and will
+> have to disable TLS.
 
-On 29-07-09 06:30, Graham Gower wrote:
+To cite my patch:
 
-> The contents of the do_compile_append() function below can also be found
-> in kernel.bbclass: do_deploy().
->
-> I've removed it from linux.inc because I want to dynamically set
-> UBOOT_ENTRYPOINT in my linux-blah.bb based upon the resultant kernel binary
-> and this makes it easier.
->
-> -Graham
->
-> diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
-> index 96feba6..3dbb1ec 100644
-> --- a/recipes/linux/linux.inc
-> +++ b/recipes/linux/linux.inc
-> @@ -158,22 +158,6 @@ do_configure_append() {
-> fi
-> }
->
-> -do_compile_append() {
-> - if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then - if test -e
-> arch/${ARCH}/boot/compressed/vmlinux ; then
-> - ${OBJCOPY} -O binary -R .note -R .comment -S
-> arch/${ARCH}/boot/compressed/vmlinux linux.bin
-> - uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a
-> ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n
-> "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
-> - rm -f linux.bin
-> - else
-> - ${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
-> - rm -f linux.bin.gz
-> - gzip -9 linux.bin
-> - uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a
-> ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n
-> "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
-> - rm -f linux.bin.gz
-> - fi
-> - fi
-> -}
-> -
-> do_devicetree_image() {
-> if test -n "${KERNEL_DEVICETREE}" ; then
-> dtc -I dts -O dtb ${KERNEL_DEVICETREE_FLAGS} -o devicetree
-> ${KERNEL_DEVICETREE}
++# The tls/ntpl support in uclibc is work in progress. For the current
++# targets we should build gcc with --enable-tls=no. In the future we
++# might want to enable TLS for certain architectures and uclibc versions
++# so this is why this method exists.
++def get_gcc_uclibc_tls_setting(bb, d):
++    return "--enable-tls=no"
 
 
+we are basically talking about the same thing? e.g. with the proposed 
+TARGET_TLS you would add a if to the above and return "". right?
+
+z.
 
 
