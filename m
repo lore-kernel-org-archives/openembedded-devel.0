@@ -1,25 +1,39 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MW4Pq-0001iD-1v
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jul 2009 10:21:38 +0200
-Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MW3ay-0005vy-Bb
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jul 2009 08:29:04 +0100
-From: Phil Blundell <pb@reciva.com>
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1MW4gc-0007R5-FD
+	for openembedded-devel@openembedded.org; Wed, 29 Jul 2009 10:38:58 +0200
+Received: (qmail 26329 invoked from network); 29 Jul 2009 10:23:46 +0200
+Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
+	by leibniz.math.fu-berlin.de with SMTP; 29 Jul 2009 10:23:46 +0200
+Received: (qmail 11215 invoked by uid 9804); 29 Jul 2009 10:23:45 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 29 Jul 2009 10:23:39 +0200
+Received: (qmail 11207 invoked by uid 9804); 29 Jul 2009 10:23:39 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by luzin.mi.fu-berlin.de with SMTP; 29 Jul 2009 10:23:39 +0200
+Received: (qmail 26318 invoked from network); 29 Jul 2009 10:23:39 +0200
+Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
+	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
+	29 Jul 2009 08:23:39 -0000
+Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1MW4Rn-0007tk-1c
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Jul 2009 10:23:39 +0200
+Date: Wed, 29 Jul 2009 10:23:39 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90907290002i1a80a99fqfbb42128472f3299@mail.gmail.com>
-References: <20090728072202.GA5422@gmail.com>
-	<200907290614.40124.holger+oe@freyther.de>
-	<19c1b8a90907290002i1a80a99fqfbb42128472f3299@mail.gmail.com>
-Date: Wed, 29 Jul 2009 08:29:02 +0100
-Message-Id: <1248852543.4187.40.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [RFC] Adding TLS selection choice to metadata
+Message-ID: <20090729082338.GA30288@mi.fu-berlin.de>
+References: <200907271203.05641.holger+oe@freyther.de>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[11210](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.206
+MIME-Version: 1.0
+In-Reply-To: <200907271203.05641.holger+oe@freyther.de>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: [PATCH] gcc: Pass --enable-tls=no on uclibc builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,24 +47,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2009 08:21:38 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Jul 2009 08:38:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2009-07-29 at 00:02 -0700, Khem Raj wrote:
-> I did however nptl/uclibc builds we need TLS support to be enabled
-> and there is no way to differentiate the triplets for a NPTL uclibc
-> toolchain from non NPTL toolchain. In future not all arches will get
-> NPTL support
-> on uclibc at once so we wil have few arches where NPTL will be there and
-> that will require TLS whereas others will use Linux Threads and will
-> have to disable TLS.
+Hm.
 
-Is it so hard to add the missing tls bits to uclibc's linuxthreads?
-That sounds like the best way to solve that problem.
+might we easier we relay on the tls.m4 marco as before which finds out if the libc is tls-aware. It was broken for cross-compiling and shared library,
+but there are fixes now available according to this thread:
+http://www.nabble.com/Improve-TLS-link-test-for-cross-compiling-td24312975.html
 
-p.
+I have adopted this patch to fix the tls.m4 macro for pulseaudio which now works nice.
 
-
+Bye Henning
 
 
