@@ -1,39 +1,22 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1MW4gc-0007R5-FD
-	for openembedded-devel@openembedded.org; Wed, 29 Jul 2009 10:38:58 +0200
-Received: (qmail 26329 invoked from network); 29 Jul 2009 10:23:46 +0200
-Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
-	by leibniz.math.fu-berlin.de with SMTP; 29 Jul 2009 10:23:46 +0200
-Received: (qmail 11215 invoked by uid 9804); 29 Jul 2009 10:23:45 +0200
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 29 Jul 2009 10:23:39 +0200
-Received: (qmail 11207 invoked by uid 9804); 29 Jul 2009 10:23:39 +0200
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by luzin.mi.fu-berlin.de with SMTP; 29 Jul 2009 10:23:39 +0200
-Received: (qmail 26318 invoked from network); 29 Jul 2009 10:23:39 +0200
-Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
-	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
-	29 Jul 2009 08:23:39 -0000
-Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1MW4Rn-0007tk-1c
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2009 10:23:39 +0200
-Date: Wed, 29 Jul 2009 10:23:39 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MW4sp-0007oi-FF
+	for openembedded-devel@openembedded.org; Wed, 29 Jul 2009 10:51:35 +0200
+Received: (qmail 27205 invoked by uid 813007); 29 Jul 2009 08:36:42 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 29 Jul 2009 08:36:41 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090729082338.GA30288@mi.fu-berlin.de>
-References: <200907271203.05641.holger+oe@freyther.de>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[11210](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.206
+Date: Wed, 29 Jul 2009 10:36:33 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4-00009-g83a3792-dirty; KDE/4.2.96;
+	x86_64; ; )
+References: <4A6FD077.1060001@gmail.com> <h4ou1e$s42$1@ger.gmane.org>
+In-Reply-To: <h4ou1e$s42$1@ger.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <200907271203.05641.holger+oe@freyther.de>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-Subject: Re: [PATCH] gcc: Pass --enable-tls=no on uclibc builds
+Message-Id: <200907291036.35562.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] remove duplicated code from linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,18 +30,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jul 2009 08:38:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 29 Jul 2009 08:51:35 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hm.
+Dnia =C5=9Broda, 29 lipca 2009 o 09:34:05 Koen Kooi napisa=C5=82(a):
+> NAK, this breaks the resulting kernel-image ipk
 
-might we easier we relay on the tls.m4 marco as before which finds out if the libc is tls-aware. It was broken for cross-compiling and shared library,
-but there are fixes now available according to this thread:
-http://www.nabble.com/Improve-TLS-link-test-for-cross-compiling-td24312975.html
+So we have to check why this code has to be duplicated.
 
-I have adopted this patch to fix the tls.m4 macro for pulseaudio which now works nice.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Bye Henning
+
 
 
