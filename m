@@ -1,24 +1,28 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [209.85.219.223] (helo=mail-ew0-f223.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zecke@selfish.org>) id 1MWQie-0006uy-Lg
+	(envelope-from <dp@xora.org.uk>) id 1MWRif-0006Cn-SG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jul 2009 10:10:33 +0200
-Received: from tamarin.localnet (static.233.147.46.78.clients.your-server.de
-	[78.46.147.233])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DD94E1B10C13
+	Thu, 30 Jul 2009 11:14:37 +0200
+Received: by ewy23 with SMTP id 23so548153ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2009 07:57:38 +0000 (UTC)
-From: Holger Freyther <zecke@selfish.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Jul 2009 09:35:16 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.2.98; i686; ; )
-References: <20090728072202.GA5422@gmail.com>
-	<200907290800.39598.holger+oe@freyther.de>
-	<19c1b8a90907291055n67d716dh60fba8f064d99932@mail.gmail.com>
-In-Reply-To: <19c1b8a90907291055n67d716dh60fba8f064d99932@mail.gmail.com>
+	Thu, 30 Jul 2009 01:59:36 -0700 (PDT)
+Received: by 10.210.79.3 with SMTP id c3mr1385205ebb.16.1248944376822;
+	Thu, 30 Jul 2009 01:59:36 -0700 (PDT)
+Received: from ?192.168.1.64? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 28sm1279623eyg.40.2009.07.30.01.59.35
+	(version=SSLv3 cipher=RC4-MD5); Thu, 30 Jul 2009 01:59:35 -0700 (PDT)
+Message-ID: <4A7160F2.8030000@xora.org.uk>
+Date: Thu, 30 Jul 2009 09:59:30 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
 MIME-Version: 1.0
-Message-Id: <200907300935.16945.zecke@selfish.org>
-Subject: Re: [RFC] Adding TLS selection choice to metadata
+To: openembedded-devel@lists.openembedded.org
+References: <4A6FD077.1060001@gmail.com>
+	<h4ou1e$s42$1@ger.gmane.org>	<4A700A74.7040507@xora.org.uk>	<200907291131.04967.marcin@juszkiewicz.com.pl>	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>	<20090730053353.GF25691@smtp.west.cox.net>
+	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>
+In-Reply-To: <6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>
+Subject: Re: [PATCH] remove duplicated code from linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 08:10:34 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 30 Jul 2009 09:14:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 29 July 2009 19:55:38 Khem Raj wrote:
-
-> > To cite my patch:
-> >
-> > +# The tls/ntpl support in uclibc is work in progress. For the current
-> > +# targets we should build gcc with --enable-tls=no. In the future we
-> > +# might want to enable TLS for certain architectures and uclibc versions
-> > +# so this is why this method exists.
-> > +def get_gcc_uclibc_tls_setting(bb, d):
-> > +    return "--enable-tls=no"
+Graham Gower wrote:
+> 2009/7/30 Tom Rini <trini@embeddedalley.com>:
+>   
+>> That should work.
+>>     
 >
-> I was thinking of a case when say nptl is supported on mips
-> but someone still wants to build with linuxthreads. In your patch you
-> rely upon the target triplet to decide where to enable it and where
-> not to. 
+> Could you show me how?
+> I have tried, but the ${UBOOT_ENTRYPOINT} used by either linux.inc or
+> kernel.bbclass is parsed and put into the run.do_foo file before the
+> symbol searching occurs.
+>
+>   
+Why dont you prepend it to the current uImage creation code running only 
+conditionally on UBOOT_ENTRYSYMBOL being set? As its in the same bit of 
+shell code your resetting of UBOOT_ENTRYPOINT will take precedence! Also 
+means other machines can use it.
 
-In my patch I solely rely on the power of a turing complete language called 
-python. In this python method you can place a:
-
-      if bb.data.getVar("TARGET_TLS", d, True)
-           return ""
-
-and be done, in analogue to the FPU setting (hence it is right below the FPU 
-code). do you agree?
-
-z.
+Graeme
 
 
 
