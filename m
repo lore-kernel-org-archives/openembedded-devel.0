@@ -1,16 +1,30 @@
-Received: from [85.17.141.90] (helo=mzh.zlo.nu)
+Received: from [209.85.220.216] (helo=mail-fx0-f216.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1MWVJf-0003Gg-UP
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MWVow-0001WY-HH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jul 2009 15:05:03 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id CF5551402C; Thu, 30 Jul 2009 14:50:01 +0200 (CEST)
-Date: Thu, 30 Jul 2009 14:50:01 +0200
-From: Marc Olzheim <zlo@zlo.nu>
-To: Stanislav Brabec <utx@penguin.cz>
-Message-ID: <20090730125001.GA30052@zlo.nu>
+	Thu, 30 Jul 2009 15:37:24 +0200
+Received: by fxm12 with SMTP id 12so39526fxm.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jul 2009 06:22:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=cA8oFl8Lgh3B/c8vO3WTCb/8QAgZPXhdSGbNGvhjXh0=;
+	b=nruujT5W9XAwPYMSXAVnaeCGu110mu84dYuTDkH0xl0U8AO9XDDCxV3VVaJW3wYuOT
+	6fJi4P2ep2KCPittzs7Odg1aDCzRjcLVqRy5qy5mKVSoQbcJOJf8G1I9dBPu+CwvgX/v
+	PsJQ/XwxJkaj0CDmpo8arzgwu9nBs8BSS6ywY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=mWY5wQ+WqYLqx7C5NAiCYsb4XLVsoXh9NHTn9m4vA/4kvbTC+XFuyqRF9Yzbge6Gv3
+	FKO6fKYdyxiaTu4zkFxlXW+cLbDksNo+8XRRW4dE797fiP7cKMPpDOg/+dXtYAMdwtJY
+	0NQjdlKu/u7sGmV4ZAuA8z46bvQdF9Bbw/bgc=
+MIME-Version: 1.0
+Received: by 10.239.130.194 with SMTP id 2mr121907hbk.100.1248960139163; Thu, 
+	30 Jul 2009 06:22:19 -0700 (PDT)
+In-Reply-To: <20090730125001.GA30052@zlo.nu>
 References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
-	<1244144325.6678.0.camel@port4>
 	<BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>
 	<1244206438.6643.46.camel@port4>
 	<BLU137-W29570FDEF1300363D893E4D4450@phx.gbl>
@@ -19,11 +33,12 @@ References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
 	<1248952464.21030.110.camel@hammer.suse.cz>
 	<20090730114922.GA29793@zlo.nu>
 	<1248956053.21030.133.camel@hammer.suse.cz>
-MIME-Version: 1.0
-In-Reply-To: <1248956053.21030.133.camel@hammer.suse.cz>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Commit 2e0fa4918d643ce6ec0299cd31cfe1c346e4bce3 breaks	libtool's do_configure [PATCH]
+	<20090730125001.GA30052@zlo.nu>
+Date: Thu, 30 Jul 2009 15:22:19 +0200
+Message-ID: <c384c5ea0907300622k5ab4bc15yeae9f448312fb887@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: Commit 2e0fa4918d643ce6ec0299cd31cfe1c346e4bce3 breaks libtool's do_configure [PATCH]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,52 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 13:05:04 -0000
-X-Groupsio-MsgNum: 12146
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TB36FDmn/VVEgNH/"
-Content-Disposition: inline
-
---TB36FDmn/VVEgNH/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Jul 2009 13:37:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 30, 2009 at 02:14:13PM +0200, Stanislav Brabec wrote:
-> Just curious, is your /bin/sh link to bash? I am not able to reproduce:
->=20
-> ~> sh --version
-> malloc: using debugging hooks
-> GNU bash, version 3.2.39(1)-release (x86_64-suse-linux-gnu)
-> Copyright (C) 2007 Free Software Foundation, Inc.
-> ~> export a=3D${a=3Db c}
-> ~> echo $a
-> b c
+Hello,
 
-Ah, *doh*...
+On Thu, Jul 30, 2009 at 2:50 PM, Marc Olzheim<zlo@zlo.nu> wrote:
 
-My /bin/sh is a dash, I should have known, my apologies.  I have a patch
-in place that allows dash as /bin/sh as well, as that works just as well
-for me (and /bin/bash for /bin/sh breaks other scripts for me), up until
-now.
+> My /bin/sh is a dash, I should have known, my apologies. =A0I have a patc=
+h
+>
+Testing with dash rather than bash is GOOD due to it adhering to POSIX
+without much of the bash-specifics.
 
-Building the micro-image, the libtool build was suddenly failing though.
+So please do not introduce 'bashisms'  (dependencies on bash behaviour).
 
-Still I should have known that this would be the issue.
+Regards,
+--=20
+Leon
 
-Marc
 
---TB36FDmn/VVEgNH/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iEYEARECAAYFAkpxlvkACgkQezjnobFOgrGnkQCgmioSOLVrW3tjjF7HLhQD5xSZ
-idAAnRa+lfupXjru9ZxF5rtvjyjPxWSs
-=Jh0r
------END PGP SIGNATURE-----
-
---TB36FDmn/VVEgNH/--
