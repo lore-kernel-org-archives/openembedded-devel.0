@@ -1,22 +1,38 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MWOVZ-0007Lm-1l
-	for openembedded-devel@openembedded.org; Thu, 30 Jul 2009 07:48:53 +0200
-Received: (qmail 12663 invoked from network); 30 Jul 2009 05:33:53 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 29 Jul 2009 22:33:53 -0700
-Date: Wed, 29 Jul 2009 22:33:53 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090730053353.GF25691@smtp.west.cox.net>
+Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <graham.gower@gmail.com>) id 1MWOkb-0007vl-8x
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Jul 2009 08:04:26 +0200
+Received: by qyk35 with SMTP id 35so1726268qyk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Jul 2009 22:49:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=VQuOtevkLpGtiCyI3AW6QYCSaHsW1KXyXRqCXGtkdS0=;
+	b=W6X647B/ckIeuz3lzhgf7SlDRsLE4Tj37vqvS2Z8OkBNyoCqjSpiBQOaIi7OYGLRpW
+	c0GTQWtlY2caS8aQ1nRnwqaD/zPLMdwzC4gemhVFlpul3JI/OoOgRlklPcsVyvkirUnF
+	q4A/Cr4YYr4xnU/6sdD1rkNFR9mWjw+cCCOBQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=exObF6KN3D7wO0qpoxSylg6WF6YAEYBcImghiUVy6pUsCmmbdzKWbJwM12Pexj15gz
+	TsoQVFEhPXL7kSNULjgDQTBKE3L4r4uSLR/8GDakGxUcb210qPzD0FmLc7Thv+bsRwb4
+	WxAyKXCA1wxZ7a2Lo0iqa/ziWbk1PKee5sJk8=
+MIME-Version: 1.0
+Received: by 10.229.85.11 with SMTP id m11mr135944qcl.96.1248932964860; Wed, 
+	29 Jul 2009 22:49:24 -0700 (PDT)
+In-Reply-To: <20090730053353.GF25691@smtp.west.cox.net>
 References: <4A6FD077.1060001@gmail.com> <h4ou1e$s42$1@ger.gmane.org>
 	<4A700A74.7040507@xora.org.uk>
 	<200907291131.04967.marcin@juszkiewicz.com.pl>
 	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
+	<20090730053353.GF25691@smtp.west.cox.net>
+Date: Thu, 30 Jul 2009 15:19:24 +0930
+Message-ID: <6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] remove duplicated code from linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -31,27 +47,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 05:48:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Jul 2009 06:04:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 30, 2009 at 02:41:30PM +0930, Graham Gower wrote:
-[snip]
-> The real issue is that my kernel entry point is not fixed. The entry
-> point can be found by searching for the 'kernel_entry' symbol in the
-> vmlinux. And unfortunately, I can't search for this at an appropriate
-> time to be able to set UBOOT_ENTRYPOINT.
-> 
-> What I would need is something like the following, post do_compile.
-> 
-> UBOOT_ENTRYPOINT=`${NM} ${S}/vmlinux | \
-> 		awk '$3=="${UBOOT_ENTRYSYMBOL}" {print $1}'
-> 
-> Where UBOOT_ENTRYSYMBOL="kernel_entry" could be set from the ${MACHINE}.conf.
+2009/7/30 Tom Rini <trini@embeddedalley.com>:
+> That should work.
 
-That should work.
-
--- 
-Tom Rini
+Could you show me how?
+I have tried, but the ${UBOOT_ENTRYPOINT} used by either linux.inc or
+kernel.bbclass is parsed and put into the run.do_foo file before the
+symbol searching occurs.
 
 
