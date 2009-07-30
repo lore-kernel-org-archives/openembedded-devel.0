@@ -1,33 +1,39 @@
-Received: from [209.85.218.221] (helo=mail-bw0-f221.google.com)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stuart68@gmail.com>) id 1MWPHZ-0006Ty-KQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jul 2009 08:38:29 +0200
-Received: by bwz21 with SMTP id 21so383168bwz.12
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1MWQFH-0005nH-Tk
+	for openembedded-devel@openembedded.org; Thu, 30 Jul 2009 09:40:11 +0200
+Received: (qmail 28272 invoked from network); 30 Jul 2009 09:24:52 +0200
+Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
+	by leibniz.math.fu-berlin.de with SMTP; 30 Jul 2009 09:24:52 +0200
+Received: (qmail 21581 invoked by uid 9804); 30 Jul 2009 09:24:52 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 30 Jul 2009 09:24:45 +0200
+Received: (qmail 21573 invoked by uid 9804); 30 Jul 2009 09:24:45 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by luzin.mi.fu-berlin.de with SMTP; 30 Jul 2009 09:24:45 +0200
+Received: (qmail 28262 invoked from network); 30 Jul 2009 09:24:45 +0200
+Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
+	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
+	30 Jul 2009 07:24:45 -0000
+Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1MWQ0L-0003qp-Gl
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2009 23:23:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=eJ6Jsmvb2K1sH7i/79iU9eqb+1w8xnt/AZKQn6Bfttk=;
-	b=XtUVShJ7B+ahmszGr3mTf9N0xs4rhalM1NDdA7d7mhyMzrFJcL7+lV0ItLq2AzQ7Fy
-	AaF6pdMLgeLQv+g3bSM3ENkK7F4rJyy/B9Sv6js4CXkv7w6idORsU7R15A+LmAwOZ68y
-	UjdNKQOPFfxdsQkPCRXNPgeNfuPNCPKasInWw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=TEgJM4m8UyjJbHc98rN8gozHoLJlxshyioKHSQFSDkf/3w9j3pqI+hml3ZJlrMCVWX
-	h4KLEKJOXYymW7daQ5bMGN6aQ+hWonyiVpdG7REtkG/MZpKBGpekinOwBrNZsWBSuDzP
-	+qAvi0wAGjz280TRaQEMHP64D5cO3AzbrX6m8=
+	Thu, 30 Jul 2009 09:24:45 +0200
+Date: Thu, 30 Jul 2009 09:24:45 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090730072445.GA14703@mi.fu-berlin.de>
+References: <91283b620907292323k97f58c8tab25fd987265d64e@mail.gmail.com>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[21576](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.206
 MIME-Version: 1.0
-Received: by 10.204.66.69 with SMTP id m5mr627019bki.174.1248935009213; Wed, 
-	29 Jul 2009 23:23:29 -0700 (PDT)
-Date: Thu, 30 Jul 2009 07:23:29 +0100
-Message-ID: <91283b620907292323k97f58c8tab25fd987265d64e@mail.gmail.com>
-From: Stuart Gray <stuart68@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Advice needed on using Bitbake to make qt project (.pro) Click to flag this post
+In-Reply-To: <91283b620907292323k97f58c8tab25fd987265d64e@mail.gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+Subject: Re: Advice needed on using Bitbake to make qt project (.pro)	Click to flag this post
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 06:38:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Jul 2009 07:40:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
+On Thu, Jul 30, 2009 at 07:23:29AM +0100, Stuart Gray wrote:
+> Hi,
+> 
+> I am new to using Bitbake and would like to ask if anyone has links to
+> examples on how to get Bitbake to build Qt projects.
 
-I am new to using Bitbake and would like to ask if anyone has links to
-examples on how to get Bitbake to build Qt projects.
+Bitbake is not enough to have qt support you also need the openembedded-dev or stable repository.
 
-I have successfully used Bitbake to add firmware files to my image, but I am
-about to look at building Qt projects into the image. I have already added
-the Qt Embedded package to the image.
+Here is a short introduction http://wiki.openembedded.net/index.php/Getting_started
 
-Any advice would be great as I have very tight project timescales and I am
-trying to reduce risk as far as possible. I have been through the Bitbake
-example and searched online for examples. From what I understand I should
-just be able to add the .cpp, .h and .pro files to the SRC_URI list. Now I
-know from reading up on Bitbake that if the SRC_URI contains a makefile that
-Bitbake will recognise this and use it to compile the code, but is the same
-true if it contains a .pro file. Will it call qmake and then make?
+Than have a look at classes/qt4e.bbclass inside the openembedded directory and
+to get in touch how it works look into my qtnx recipe under recipes/qtnx/qtnx-qte_0.9.bb
 
-Regards,
-Stuart
+Bye Henning
+
 
