@@ -1,39 +1,33 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+Received: from [209.85.218.221] (helo=mail-bw0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MWOkb-0007vl-8x
+	(envelope-from <stuart68@gmail.com>) id 1MWPHZ-0006Ty-KQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jul 2009 08:04:26 +0200
-Received: by qyk35 with SMTP id 35so1726268qyk.24
+	Thu, 30 Jul 2009 08:38:29 +0200
+Received: by bwz21 with SMTP id 21so383168bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jul 2009 22:49:24 -0700 (PDT)
+	Wed, 29 Jul 2009 23:23:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=VQuOtevkLpGtiCyI3AW6QYCSaHsW1KXyXRqCXGtkdS0=;
-	b=W6X647B/ckIeuz3lzhgf7SlDRsLE4Tj37vqvS2Z8OkBNyoCqjSpiBQOaIi7OYGLRpW
-	c0GTQWtlY2caS8aQ1nRnwqaD/zPLMdwzC4gemhVFlpul3JI/OoOgRlklPcsVyvkirUnF
-	q4A/Cr4YYr4xnU/6sdD1rkNFR9mWjw+cCCOBQ=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=eJ6Jsmvb2K1sH7i/79iU9eqb+1w8xnt/AZKQn6Bfttk=;
+	b=XtUVShJ7B+ahmszGr3mTf9N0xs4rhalM1NDdA7d7mhyMzrFJcL7+lV0ItLq2AzQ7Fy
+	AaF6pdMLgeLQv+g3bSM3ENkK7F4rJyy/B9Sv6js4CXkv7w6idORsU7R15A+LmAwOZ68y
+	UjdNKQOPFfxdsQkPCRXNPgeNfuPNCPKasInWw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=exObF6KN3D7wO0qpoxSylg6WF6YAEYBcImghiUVy6pUsCmmbdzKWbJwM12Pexj15gz
-	TsoQVFEhPXL7kSNULjgDQTBKE3L4r4uSLR/8GDakGxUcb210qPzD0FmLc7Thv+bsRwb4
-	WxAyKXCA1wxZ7a2Lo0iqa/ziWbk1PKee5sJk8=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=TEgJM4m8UyjJbHc98rN8gozHoLJlxshyioKHSQFSDkf/3w9j3pqI+hml3ZJlrMCVWX
+	h4KLEKJOXYymW7daQ5bMGN6aQ+hWonyiVpdG7REtkG/MZpKBGpekinOwBrNZsWBSuDzP
+	+qAvi0wAGjz280TRaQEMHP64D5cO3AzbrX6m8=
 MIME-Version: 1.0
-Received: by 10.229.85.11 with SMTP id m11mr135944qcl.96.1248932964860; Wed, 
-	29 Jul 2009 22:49:24 -0700 (PDT)
-In-Reply-To: <20090730053353.GF25691@smtp.west.cox.net>
-References: <4A6FD077.1060001@gmail.com> <h4ou1e$s42$1@ger.gmane.org>
-	<4A700A74.7040507@xora.org.uk>
-	<200907291131.04967.marcin@juszkiewicz.com.pl>
-	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>
-	<20090730053353.GF25691@smtp.west.cox.net>
-Date: Thu, 30 Jul 2009 15:19:24 +0930
-Message-ID: <6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] remove duplicated code from linux.inc
+Received: by 10.204.66.69 with SMTP id m5mr627019bki.174.1248935009213; Wed, 
+	29 Jul 2009 23:23:29 -0700 (PDT)
+Date: Thu, 30 Jul 2009 07:23:29 +0100
+Message-ID: <91283b620907292323k97f58c8tab25fd987265d64e@mail.gmail.com>
+From: Stuart Gray <stuart68@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Advice needed on using Bitbake to make qt project (.pro) Click to flag this post
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,16 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 06:04:28 -0000
+X-List-Received-Date: Thu, 30 Jul 2009 06:38:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-2009/7/30 Tom Rini <trini@embeddedalley.com>:
-> That should work.
+Hi,
 
-Could you show me how?
-I have tried, but the ${UBOOT_ENTRYPOINT} used by either linux.inc or
-kernel.bbclass is parsed and put into the run.do_foo file before the
-symbol searching occurs.
+I am new to using Bitbake and would like to ask if anyone has links to
+examples on how to get Bitbake to build Qt projects.
 
+I have successfully used Bitbake to add firmware files to my image, but I am
+about to look at building Qt projects into the image. I have already added
+the Qt Embedded package to the image.
+
+Any advice would be great as I have very tight project timescales and I am
+trying to reduce risk as far as possible. I have been through the Bitbake
+example and searched online for examples. From what I understand I should
+just be able to add the .cpp, .h and .pro files to the SRC_URI list. Now I
+know from reading up on Bitbake that if the SRC_URI contains a makefile that
+Bitbake will recognise this and use it to compile the code, but is the same
+true if it contains a .pro file. Will it call qmake and then make?
+
+Regards,
+Stuart
 
