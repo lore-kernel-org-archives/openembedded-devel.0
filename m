@@ -1,21 +1,14 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [85.17.141.90] (helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MWUl0-00025c-Fa
+	(envelope-from <marcolz@zlo.nu>) id 1MWVJf-0003Gg-UP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jul 2009 14:29:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 810FF1409713;
-	Thu, 30 Jul 2009 14:17:32 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FNy18VHmxe49; Thu, 30 Jul 2009 14:17:32 +0200 (CEST)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id 3CA2C1416BA2;
-	Thu, 30 Jul 2009 14:17:32 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Marc Olzheim <zlo@zlo.nu>
-In-Reply-To: <20090730114922.GA29793@zlo.nu>
+	Thu, 30 Jul 2009 15:05:03 +0200
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id CF5551402C; Thu, 30 Jul 2009 14:50:01 +0200 (CEST)
+Date: Thu, 30 Jul 2009 14:50:01 +0200
+From: Marc Olzheim <zlo@zlo.nu>
+To: Stanislav Brabec <utx@penguin.cz>
+Message-ID: <20090730125001.GA30052@zlo.nu>
 References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
 	<1244144325.6678.0.camel@port4>
 	<BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>
@@ -25,12 +18,12 @@ References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>
 	<20090730105711.GA29595@zlo.nu>
 	<1248952464.21030.110.camel@hammer.suse.cz>
 	<20090730114922.GA29793@zlo.nu>
-Date: Thu, 30 Jul 2009 14:14:13 +0200
-Message-Id: <1248956053.21030.133.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.27.2 
+	<1248956053.21030.133.camel@hammer.suse.cz>
+MIME-Version: 1.0
+In-Reply-To: <1248956053.21030.133.camel@hammer.suse.cz>
+User-Agent: Mutt/1.5.18 (2008-05-17)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Commit 2e0fa4918d643ce6ec0299cd31cfe1c346e4bce3 breaks libtool's do_configure [PATCH]
+Subject: Re: Commit 2e0fa4918d643ce6ec0299cd31cfe1c346e4bce3 breaks	libtool's do_configure [PATCH]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 12:29:14 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Jul 2009 13:05:04 -0000
+X-Groupsio-MsgNum: 12146
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="TB36FDmn/VVEgNH/"
+Content-Disposition: inline
 
-Marc Olzheim wrote:
+--TB36FDmn/VVEgNH/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> (/home/marcolz/src/iphion-new-oe3/embbuild/tmp/work/i686-oe-linux/libtool-cross-2.2.6a-r0/temp/log.do_configure.22690)
-> | export: 929: -E: bad variable name
+On Thu, Jul 30, 2009 at 02:14:13PM +0200, Stanislav Brabec wrote:
+> Just curious, is your /bin/sh link to bash? I am not able to reproduce:
+>=20
+> ~> sh --version
+> malloc: using debugging hooks
+> GNU bash, version 3.2.39(1)-release (x86_64-suse-linux-gnu)
+> Copyright (C) 2007 Free Software Foundation, Inc.
+> ~> export a=3D${a=3Db c}
+> ~> echo $a
+> b c
 
-> My local bash version is:
-> 
-> GNU bash, version 3.2.39(1)-release (i486-pc-linux-gnu)
+Ah, *doh*...
 
-OK. Next time I will not use unquoted ${a=b c}. Some shells don't like
-it.
+My /bin/sh is a dash, I should have known, my apologies.  I have a patch
+in place that allows dash as /bin/sh as well, as that works just as well
+for me (and /bin/bash for /bin/sh breaks other scripts for me), up until
+now.
 
-Committed-By: Stanislav Brabec <utx@penguin.cz>
+Building the micro-image, the libtool build was suddenly failing though.
 
-Just curious, is your /bin/sh link to bash? I am not able to reproduce:
+Still I should have known that this would be the issue.
 
-~> sh --version
-malloc: using debugging hooks
-GNU bash, version 3.2.39(1)-release (x86_64-suse-linux-gnu)
-Copyright (C) 2007 Free Software Foundation, Inc.
-~> export a=${a=b c}
-~> echo $a
-b c
+Marc
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+--TB36FDmn/VVEgNH/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
+iEYEARECAAYFAkpxlvkACgkQezjnobFOgrGnkQCgmioSOLVrW3tjjF7HLhQD5xSZ
+idAAnRa+lfupXjru9ZxF5rtvjyjPxWSs
+=Jh0r
+-----END PGP SIGNATURE-----
 
+--TB36FDmn/VVEgNH/--
