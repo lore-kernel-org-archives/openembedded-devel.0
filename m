@@ -1,39 +1,22 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1MWQFH-0005nH-Tk
-	for openembedded-devel@openembedded.org; Thu, 30 Jul 2009 09:40:11 +0200
-Received: (qmail 28272 invoked from network); 30 Jul 2009 09:24:52 +0200
-Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
-	by leibniz.math.fu-berlin.de with SMTP; 30 Jul 2009 09:24:52 +0200
-Received: (qmail 21581 invoked by uid 9804); 30 Jul 2009 09:24:52 +0200
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 30 Jul 2009 09:24:45 +0200
-Received: (qmail 21573 invoked by uid 9804); 30 Jul 2009 09:24:45 +0200
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by luzin.mi.fu-berlin.de with SMTP; 30 Jul 2009 09:24:45 +0200
-Received: (qmail 28262 invoked from network); 30 Jul 2009 09:24:45 +0200
-Received: from leningrad.mi.fu-berlin.de (160.45.45.206)
-	by leibniz.math.fu-berlin.de with (AES256-SHA encrypted) SMTP;
-	30 Jul 2009 07:24:45 -0000
-Received: from heinold by leningrad.mi.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1MWQ0L-0003qp-Gl
+	(envelope-from <holger+oe@freyther.de>) id 1MWQiY-0006uo-0O
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Jul 2009 10:10:26 +0200
+Received: from tamarin.localnet (static.233.147.46.78.clients.your-server.de
+	[78.46.147.233])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 756B91B10C10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2009 09:24:45 +0200
-Date: Thu, 30 Jul 2009 09:24:45 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Thu, 30 Jul 2009 07:57:37 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090730072445.GA14703@mi.fu-berlin.de>
+Date: Thu, 30 Jul 2009 09:22:10 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.2.98; i686; ; )
 References: <91283b620907292323k97f58c8tab25fd987265d64e@mail.gmail.com>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[21576](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.206
-MIME-Version: 1.0
 In-Reply-To: <91283b620907292323k97f58c8tab25fd987265d64e@mail.gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-Subject: Re: Advice needed on using Bitbake to make qt project (.pro)	Click to flag this post
+MIME-Version: 1.0
+Message-Id: <200907300922.10602.holger+oe@freyther.de>
+Subject: Re: Advice needed on using Bitbake to make qt project (.pro) Click to flag this post
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 07:40:12 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Jul 2009 08:10:26 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 30, 2009 at 07:23:29AM +0100, Stuart Gray wrote:
+On Thursday 30 July 2009 08:23:29 Stuart Gray wrote:
 > Hi,
-> 
+>
 > I am new to using Bitbake and would like to ask if anyone has links to
 > examples on how to get Bitbake to build Qt projects.
+>
+> I have successfully used Bitbake to add firmware files to my image, but I
+> am about to look at building Qt projects into the image. I have already
+> added the Qt Embedded package to the image.
+>
+> Any advice would be great as I have very tight project timescales and I am
+> trying to reduce risk as far as possible. I have been through the Bitbake
+> example and searched online for examples. From what I understand I should
+> just be able to add the .cpp, .h and .pro files to the SRC_URI list. Now I
+> know from reading up on Bitbake that if the SRC_URI contains a makefile
+> that Bitbake will recognise this and use it to compile the code, but is the
+> same true if it contains a .pro file. Will it call qmake and then make?
 
-Bitbake is not enough to have qt support you also need the openembedded-dev or stable repository.
 
-Here is a short introduction http://wiki.openembedded.net/index.php/Getting_started
+The most simple example of a qmake based Qt4 project would be qsvn. The simple 
+line of inherit qt4x11 will make sure your dependencies (Qt4 X11, qmake) get 
+installed.
 
-Than have a look at classes/qt4e.bbclass inside the openembedded directory and
-to get in touch how it works look into my qtnx recipe under recipes/qtnx/qtnx-qte_0.9.bb
+On the SRC_URI. Normally you either fetch a tarball, or from a SCM. If you 
+want to pass all source files individually with SRC_URI you need to adjust the 
+S variable to make qmake, etc. find the sources. Examples for that is 
+shasum/shasum.inc. (Not the S = "${WORKDIR}").
 
-Bye Henning
+Normally I encourage people to either fetch from a SCM or to use tarballs.
+
+kind regards
+	holger
 
 
