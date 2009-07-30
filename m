@@ -1,44 +1,18 @@
-Received: from [209.85.222.197] (helo=mail-pz0-f197.google.com)
+Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MWaYZ-0006up-91
+	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1MWdVS-0005Js-JD
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jul 2009 20:40:47 +0200
-Received: by pzk35 with SMTP id 35so1202655pzk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2009 11:25:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=drhIiZ5qtrb5JjCqU/qn7GI0zMXLs77iC8GYtvY86uk=;
-	b=PIMko8muYSvbvVKRnuTVFO+j60h8rSBZdHIL5hShraQQbbyvYWskl/duT+q5JP3Ahb
-	7Wz71mgcRVuaKExu9IdQkLqKG09jcDkrpCVHubYH8b9KYmvq+LQHXrs8a5z/CAtOT9Lr
-	QZmBeh55SXNmxVycTQk7IegK3KScs6vp5mgAE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=gSzGhhvnUPDOSfbfkfTcOW66uumDvmbNW1IMH7k/AkfXA6wcxO8lCKAADeGZLwC76F
-	IHijQWl26Oi2Ctm3r0UBrRcv5AgMAmFUuIUz+gu82Ogk0E7s8SPPjDTDhtyNsTUQYpJd
-	FfiUvfbudXG6F6J+aQnvjq+a736n/oe8jRMU8=
-Received: by 10.114.182.5 with SMTP id e5mr869907waf.169.1248978342500;
-	Thu, 30 Jul 2009 11:25:42 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-25-49.dsl.pltn13.sbcglobal.net
-	[71.146.25.49])
-	by mx.google.com with ESMTPS id k21sm3574575waf.59.2009.07.30.11.25.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 30 Jul 2009 11:25:41 -0700 (PDT)
-Date: Thu, 30 Jul 2009 11:25:36 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 30 Jul 2009 23:49:47 +0200
+X-AuditID: 0a1e000a-b7b2dae000000dcf-e7-4a7211f12199
+From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090730182536.GA14686@gmail.com>
-References: <20090728072202.GA5422@gmail.com>
-	<200907290800.39598.holger+oe@freyther.de>
-	<19c1b8a90907291055n67d716dh60fba8f064d99932@mail.gmail.com>
-	<200907300935.16945.zecke@selfish.org>
-MIME-Version: 1.0
-In-Reply-To: <200907300935.16945.zecke@selfish.org>
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Re: [RFC] Adding TLS selection choice to metadata
+Date: Thu, 30 Jul 2009 17:34:31 -0400
+Message-Id: <1248989671.3629.1358.camel@conroy-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-Brightmail-Tracker: AAAAAA==
+Cc: Phil Black <Phil.Black@hillcrestlabs.com>
+Subject: Packaged-staging and RPATH with native/cross/sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,45 +26,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 18:40:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Jul 2009 21:49:47 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On (30/07/09 09:35), Holger Freyther wrote:
-> On Wednesday 29 July 2009 19:55:38 Khem Raj wrote:
-> 
-> > > To cite my patch:
-> > >
-> > > +# The tls/ntpl support in uclibc is work in progress. For the current
-> > > +# targets we should build gcc with --enable-tls=no. In the future we
-> > > +# might want to enable TLS for certain architectures and uclibc versions
-> > > +# so this is why this method exists.
-> > > +def get_gcc_uclibc_tls_setting(bb, d):
-> > > +    return "--enable-tls=no"
-> >
-> > I was thinking of a case when say nptl is supported on mips
-> > but someone still wants to build with linuxthreads. In your patch you
-> > rely upon the target triplet to decide where to enable it and where
-> > not to. 
-> 
-> In my patch I solely rely on the power of a turing complete language called 
-> python. In this python method you can place a:
-> 
->       if bb.data.getVar("TARGET_TLS", d, True)
->            return ""
-> 
-> and be done, in analogue to the FPU setting (hence it is right below the FPU 
-> code). do you agree?
+I'm trying to use packaged-staging to set up a sane prebuilt toolchain
+environment to share with other developers. I view packaged-staging as a
+promising route of creating a "Stage 3" version of OE (to use some
+Gentoo parlance). While building the toolchain isn't all that painful,
+even on a decent system it can add 1-2 hours to the build process, and
+every individual developer needs to redo the toolchain and base
+libraries for every feature branch. This is all needlessly wasted time
+since they're all ultimately building the same things if on the same
+arch.
 
-yes that will be ok. 
+Packaged-staging seems to give me everything we need in order to
+accomplish this except for the way RPATH is handled. This is a known
+issue which is worked around in packaged-staging with the following
+snippet:
 
-> 
-> z.
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+    # These classes encode staging paths into the binary data so can
+only be
+    # reused if the path doesn't change/
+    if bb.data.inherits_class('native', d) or
+bb.data.inherits_class('cross', d) or bb.data.inherits_class('sdk', d):
+        path = bb.data.getVar('PSTAGE_PKGPATH', d, 1)
+        path = path + bb.data.getVar('TMPDIR', d, 1).replace('/', '-')
+        bb.data.setVar('PSTAGE_PKGPATH', path, d)
+
+
+I'm currently toying with changing the references to rpath in
+bitbake.conf to use $ORIGIN rather than an absolute path, but perhaps
+some of you have better ideas. (I have a feeling this is going to run
+into some nasty edge cases).
+
+(The other, less elegant idea I am toying with is: modify the
+packaged-staging install to hotfix the binary data to point at the new
+install location, but this seems uglier and possibly harder to
+implement)
+
+If this special case is taken away, then distributions can much more
+easily share a prebuilt toolchain and set of system libraries for
+potential developers or with a team. It also gives us some other nice
+properties (e.g. you want to relocate your OE directory because your
+disk is filling up, but you don't want to have to do a full rebuild)
+
+
+Thoughts, suggestions, reasons this won't ever possibly work?
+
+--Chris Conroy
 
 
