@@ -1,41 +1,22 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MWrZ6-0008LC-A3
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Jul 2009 14:50:28 +0200
-Received: by qyk35 with SMTP id 35so2659199qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2009 05:35:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=HgqbhzYl7zEJKySLyVYb6Ah7DX3SWuSuAFmiaN1qLpU=;
-	b=WGNN99QqQTeNPKS5P29uMJHDlnWNinLz5PcAS33gzktK9RtQCLgopCkspw8Ggy/hvZ
-	UcOlYOXHGqz+vcNRB+O44bore2zDWegc0U1WyNiLjv41f6yV3n8PTkW7hUKUU+yQxVEr
-	j0Kf3Hxb2rnUrO9As9o44yISKDm314tOgfK0c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=W9BBVoLdIQ1C08yS3LBA/yoAQtijvRyLO2TbApk8OXKwTytLaJG3Wie//kYHw7QUaI
-	jpxeggmA5bEBjZlLmexTKDjXHEi9gMHJEeVVu+q+d0RSF9a2NxDIJ08yZIR1vSWCsw2b
-	5w4X9cJ4PF66Bp2cXaDW4+elynNYqjXQm7FNo=
-MIME-Version: 1.0
-Received: by 10.229.96.15 with SMTP id f15mr459924qcn.91.1249043719620; Fri, 
-	31 Jul 2009 05:35:19 -0700 (PDT)
-In-Reply-To: <4A72D676.6060304@xora.org.uk>
-References: <4A6FD077.1060001@gmail.com>
-	<200907291131.04967.marcin@juszkiewicz.com.pl>
-	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>
-	<20090730053353.GF25691@smtp.west.cox.net>
-	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>
-	<4A7160F2.8030000@xora.org.uk> <4A7255D3.9020703@gmail.com>
-	<4A729943.4060200@xora.org.uk> <4A729FF4.3040600@gmail.com>
-	<4A72D676.6060304@xora.org.uk>
-Date: Fri, 31 Jul 2009 22:05:19 +0930
-Message-ID: <6ec4247d0907310535h345a22a9sfe98c6cae8336aaf@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MWsL0-00075e-Cx
+	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 15:39:58 +0200
+Received: (qmail 28959 invoked by uid 813007); 31 Jul 2009 13:24:46 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 31 Jul 2009 13:24:46 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
+Date: Fri, 31 Jul 2009 15:24:41 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4-00009-g83a3792-dirty; KDE/4.2.96;
+	x86_64; ; )
+References: <4A6FD077.1060001@gmail.com> <4A72D676.6060304@xora.org.uk>
+	<6ec4247d0907310535h345a22a9sfe98c6cae8336aaf@mail.gmail.com>
+In-Reply-To: <6ec4247d0907310535h345a22a9sfe98c6cae8336aaf@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200907311524.44818.marcin@juszkiewicz.com.pl>
 Subject: Re: [PATCH] remove duplicated code from linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,14 +31,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2009 12:50:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 31 Jul 2009 13:39:59 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-And for those playing at home, the value to assign to UBOOT_ENTRYSYM
-for a given arch can be found by grepping
-linux/arch/${ARCH}/kernel/vmlinux.lds.S for 'ENTRY'.
+Dnia pi=C4=85tek, 31 lipca 2009 o 14:35:19 Graham Gower napisa=C5=82(a):
+> And for those playing at home, the value to assign to UBOOT_ENTRYSYM
+> for a given arch can be found by grepping
+> linux/arch/${ARCH}/kernel/vmlinux.lds.S for 'ENTRY'.
 
--Graham
+So according to your post for ARM it will be 'stext':
+
+15:10 hrw@home:linux-2.6.30$ grep ^ENTRY arch/arm/kernel/vmlinux.lds.S
+ENTRY(stext)
+
+=46or AT91SAM9263-EK we get:
+
+15:10 hrw@home:linux-2.6.30$ arm-angstrom-linux-gnueabi-nm vmlinux|grep=20
+stext
+c0008000 T _stext
+c0008000 T stext
+
+But when I boot this device I have:
+
+## Booting kernel from Legacy Image at 22200000 ...                        =
+                                                                           =
+    =20
+   Image Name:   Angstrom/2.6.30/at91sam9263ek                             =
+                                                                           =
+    =20
+   Image Type:   ARM Linux Kernel Image (uncompressed)                     =
+                                                                           =
+    =20
+   Data Size:    2074384 Bytes =3D  2 MB                                   =
+                                                                           =
+      =20
+   Load Address: 20008000                                                  =
+                                                                           =
+    =20
+   Entry Point:  20008000                                                  =
+                                                                           =
+    =20
+   Verifying Checksum ... OK                                               =
+                                                                           =
+    =20
+   Loading Kernel Image ... OK                                             =
+                                                                           =
+    =20
+
+So entry point is different.
+
+=46or NHK15 which runs kernel 2.6.20 I got "stext" same as Entry point=20
+used by U-Boot:
+
+15:12 hrw@home:linux-2.6.20$ arm-angstrom-linux-gnueabi-nm vmlinux|grep=20
+stext
+c0008000 T _stext
+c02bcba0 t snstext
+c0008000 T stext
+
+## Booting image at 00100000 ...
+   Image Name:   Linux-2.6.20  =20
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1714260 Bytes =3D  1.6 MB             =20
+   Load Address: 00008000                            =20
+   Entry Point:  00008000                            =20
+OK         =20
+
+=46or BUG which runs 2.6.27.2 I got:
+
+15:16 hrw@home:bug-linux-2.6.27.2$ arm-angstrom-linux-gnueabi-nm=20
+vmlinux|grep stext
+c0008000 T _stext
+c0008000 T stext
+
+When U-Boot says:
+
+## Booting kernel from Legacy Image at 80800000 ...
+   Image Name:   Linux-2.6.27.2
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1722736 Bytes =3D  1.6 MB
+   Load Address: 80008000
+   Entry Point:  80008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+
+I also have avr32 NGW100 but lack kernel tree for it to check values.=20
+Can test will those devices boot with entry point set to 0x00080000=20
+address.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
