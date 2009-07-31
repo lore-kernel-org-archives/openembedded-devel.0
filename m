@@ -1,34 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.222.197] (helo=mail-pz0-f197.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MWwPF-0006kX-Cn
-	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 20:00:42 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MWwAZ-0004Wu-Oc
-	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 17:45:27 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 31 Jul 2009 17:45:27 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 31 Jul 2009 17:45:27 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 31 Jul 2009 19:45:16 +0200
-Message-ID: <h4vajd$vh7$1@ger.gmane.org>
-References: <4A6FD077.1060001@gmail.com>	<h4ou1e$s42$1@ger.gmane.org>	<4A700A74.7040507@xora.org.uk>	<200907291131.04967.marcin@juszkiewicz.com.pl>	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>	<20090730053353.GF25691@smtp.west.cox.net>	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>	<4A7160F2.8030000@xora.org.uk>	<4A7255D3.9020703@gmail.com>	<4A729943.4060200@xora.org.uk>	<4A729FF4.3040600@gmail.com>
-	<4A72D676.6060304@xora.org.uk>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
-In-Reply-To: <4A72D676.6060304@xora.org.uk>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] remove duplicated code from linux.inc
+	(envelope-from <raj.khem@gmail.com>) id 1MWwaZ-00079Q-4d
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 31 Jul 2009 20:12:27 +0200
+Received: by pzk35 with SMTP id 35so1694962pzk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jul 2009 10:57:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=PJOvE/8ANafNAeuR5FfNOfyJRHlKD/kJ38tM2wLXloA=;
+	b=curd8R5ded5UI3N0Qj7OfgQ4fOZLLqtKKj8e12JjM489AH55CEU7s43202f+HW6QCZ
+	nKXwWarN16bceRHozEV63QyTZYAKzfoS/eDR/uv6Pv4KmOeGeqaX9AObt5nZe6MIIVgx
+	xAonv+Js/UZ37PDE73ARoi0EvbGFe7KkBg/SI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ja1yMPad+D5dvyKjznvNVKr3lGavEq1lTTf/KxGA1yhXumShh0p6pF5l0J8u/LW4QN
+	EG/rMcBI2XkXT8mYbrvdVA5kPGfQnvTw89hj1lb0ngsNrb7Bkr/YTRUwpS1Mm3hF/EV6
+	aPI8H8JbRBDYD1HXmKgsWRFjH/Zv8fQFsifrk=
+Received: by 10.115.107.12 with SMTP id j12mr3925972wam.94.1249063028755;
+	Fri, 31 Jul 2009 10:57:08 -0700 (PDT)
+Received: from localhost (adsl-71-146-25-49.dsl.pltn13.sbcglobal.net
+	[71.146.25.49])
+	by mx.google.com with ESMTPS id l30sm5555958waf.0.2009.07.31.10.57.06
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 31 Jul 2009 10:57:07 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 31 Jul 2009 10:56:50 -0700
+Message-Id: <1249063010-19157-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+Subject: [PATCH] minimal.conf: Add PREFERRED_PROVIDER for libusb0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,26 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2009 18:00:48 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 31 Jul 2009 18:12:34 -0000
 
-On 31-07-09 13:33, Graeme Gregory wrote:
-> Graham Gower wrote:
->> Graeme Gregory wrote:
->>> Looks good to me, do you fancy moving that do_compile_append into
->>> kernel.bbclass? You can then have the added kudos of fixing OE core
->>> files :-)
->>
->> Kudos sound tasty.
->>
-> Thanks for your hard work, have now applied to OE.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/minimal.conf |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-"Oh nooooes! My build fails!" -> bitbake -c clean virtual/kernel
-
-regards,
-
-Koen
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index 8b834d0..9212aa1 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -93,6 +93,7 @@ PREFERRED_PROVIDER_virtual/db = "db3"
+ PREFERRED_PROVIDER_virtual/db-native = "db3-native"
+ PREFERRED_PROVIDER_virtual/libsdl = "libsdl-x11"
+ PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
++PREFERRED_PROVIDER_virtual/libusb0 ?= "libusb"
+ 
+ #############################################################################
+ # PREFERRED VERSIONS
+-- 
+1.6.3.3
 
 
 
