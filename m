@@ -1,38 +1,42 @@
-Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
+Received: from [209.85.222.193] (helo=mail-pz0-f193.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MWeAf-00043T-8A
+	(envelope-from <graham.gower@gmail.com>) id 1MWi2C-0008DV-4w
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Jul 2009 00:32:21 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so928188qwk.36
+	Fri, 31 Jul 2009 04:39:52 +0200
+Received: by pzk31 with SMTP id 31so2205127pzk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jul 2009 15:17:18 -0700 (PDT)
+	Thu, 30 Jul 2009 19:24:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	bh=eXmj7w7KT/d0R0TjEqHuXzf2rqa+8Ux2ZFQoznlUfxs=;
-	b=ECb5W6u30XgMYHxyp64D47glixvH/NTZYQ2NdJZImPkV8wAWBTRSEm71RopAtLucTe
-	PAocSjZizarhWKpjXL8VlpMSMNM5DDDE/sla1R5B5/7R2eyb3PcWUw8VUsPsxWYO/GLH
-	mD3UDa+LHGZMUyV22Z0T9bdOdtXAcJtJg4ge0=
+	bh=ANGCWh3zACZVcZ8J9JJXd4m7qT+7UPxZmvvLPY01DpU=;
+	b=CykU4EnP/CN6adBVAtIbGSBgOQxzPbRB2zwDI5u17vyN+EJ1a1WxHq/2XWmvGcrkcj
+	9xp/i2AFlZ7gNly11f4MOQoAN4RyrJ0HAwoXdkbNT2Y20toALmeI2s/by7pDHmfnJRn3
+	/+orYmzZC8L1G/twB7XNZ0TnuOa5exoiOXe4s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=Zwl7U6GvQtz299c3k8wbHXxqapwk7cRJVucECCnURBS3KyLnagMQdI8b3Z8BbSESoh
-	pqMCUrl7VJ7zvIJsZ4ywXthLXCljwBwMrwcn65VwH2HhodXwdoZUJBBkJpBYTCNCRgJv
-	c4HzzFuMQLwRBS4UaVoVwYvayDxAOehcNCNaM=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=bSHO/RSkwH+qmMC1b1aqtXD+N833tnRiaxq1JFAK4peZ24QJfOtxeD3X4mO/hNhBJL
+	FQ6ch18p2o1L8iqtwRwI5iucwvbefC3LKVC9od/JFQUrPS0f0TvEgf4e/ABVXdj2eznS
+	2Ienk/cjcU6HSZG5WuHUbyHhGToFOUgyUHuI4=
+Received: by 10.114.76.1 with SMTP id y1mr1475886waa.58.1249007076508;
+	Thu, 30 Jul 2009 19:24:36 -0700 (PDT)
+Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	g25sm4100232wag.43.2009.07.30.19.24.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 30 Jul 2009 19:24:34 -0700 (PDT)
+Message-ID: <4A7255D3.9020703@gmail.com>
+Date: Fri, 31 Jul 2009 11:54:19 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.220.95.5 with SMTP id b5mr2304541vcn.22.1248992238125; Thu, 30 
-	Jul 2009 15:17:18 -0700 (PDT)
-In-Reply-To: <1248989671.3629.1358.camel@conroy-linux>
-References: <1248989671.3629.1358.camel@conroy-linux>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 30 Jul 2009 15:16:58 -0700
-X-Google-Sender-Auth: 0f6906d65b1302a6
-Message-ID: <b6ebd0a50907301516i2ba54f1cif687e5b76f675862@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Packaged-staging and RPATH with native/cross/sdk
+References: <4A6FD077.1060001@gmail.com>	<h4ou1e$s42$1@ger.gmane.org>	<4A700A74.7040507@xora.org.uk>	<200907291131.04967.marcin@juszkiewicz.com.pl>	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>	<20090730053353.GF25691@smtp.west.cox.net>	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>
+	<4A7160F2.8030000@xora.org.uk>
+In-Reply-To: <4A7160F2.8030000@xora.org.uk>
+Subject: Re: [PATCH] remove duplicated code from linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,88 +50,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jul 2009 22:32:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 31 Jul 2009 02:39:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I've been using a $ORIGIN rpath in my builds, and it's definitely a
-step in the right direction.  Iirc there are a few quirks with things
-like perl modules and such, but you can work around those.
+Graeme Gregory wrote:
+> Why dont you prepend it to the current uImage creation code running only 
+> conditionally on UBOOT_ENTRYSYMBOL being set? As its in the same bit of 
+> shell code your resetting of UBOOT_ENTRYPOINT will take precedence! Also 
+> means other machines can use it.
 
-There are a lot of relocation issues with stuff we stage that need to
-be fixed one by one to use those particular staging packages with tmp
-in a different location, though.  Sadly, few upstream packages are
-really relocatable.  Some of it can be worked around by exporting env
-vars.. for example, you can point 'file' at its data with an env var,
-and you can override nearly all the paths used in autoconf/automake
-via env vars (the autotools branch i started work on does that).
+Once I realised that ${FOO} is replaced before the shell function is run,
+while $FOO is not, things made a lot more sense.
 
-On Thu, Jul 30, 2009 at 2:34 PM, Chris
-Conroy<Chris.Conroy@hillcrestlabs.com> wrote:
-> I'm trying to use packaged-staging to set up a sane prebuilt toolchain
-> environment to share with other developers. I view packaged-staging as a
-> promising route of creating a "Stage 3" version of OE (to use some
-> Gentoo parlance). While building the toolchain isn't all that painful,
-> even on a decent system it can add 1-2 hours to the build process, and
-> every individual developer needs to redo the toolchain and base
-> libraries for every feature branch. This is all needlessly wasted time
-> since they're all ultimately building the same things if on the same
-> arch.
->
-> Packaged-staging seems to give me everything we need in order to
-> accomplish this except for the way RPATH is handled. This is a known
-> issue which is worked around in packaged-staging with the following
-> snippet:
->
-> =C2=A0 =C2=A0# These classes encode staging paths into the binary data so=
- can
-> only be
-> =C2=A0 =C2=A0# reused if the path doesn't change/
-> =C2=A0 =C2=A0if bb.data.inherits_class('native', d) or
-> bb.data.inherits_class('cross', d) or bb.data.inherits_class('sdk', d):
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0path =3D bb.data.getVar('PSTAGE_PKGPATH', d, 1=
-)
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0path =3D path + bb.data.getVar('TMPDIR', d, 1)=
-.replace('/', '-')
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.setVar('PSTAGE_PKGPATH', path, d)
->
->
-> I'm currently toying with changing the references to rpath in
-> bitbake.conf to use $ORIGIN rather than an absolute path, but perhaps
-> some of you have better ideas. (I have a feeling this is going to run
-> into some nasty edge cases).
->
-> (The other, less elegant idea I am toying with is: modify the
-> packaged-staging install to hotfix the binary data to point at the new
-> install location, but this seems uglier and possibly harder to
-> implement)
->
-> If this special case is taken away, then distributions can much more
-> easily share a prebuilt toolchain and set of system libraries for
-> potential developers or with a team. It also gives us some other nice
-> properties (e.g. you want to relocate your OE directory because your
-> disk is filling up, but you don't want to have to do a full rebuild)
->
->
-> Thoughts, suggestions, reasons this won't ever possibly work?
->
-> --Chris Conroy
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Allow a dynamic entry point via UBOOT_ENTRYSYMBOL and remove redundant
+uboot-mkimage code in kernel.bbclass.
 
+-Graham
 
-
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index ef16669..94c73a5 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -497,21 +497,6 @@ do_deploy() {
+ 	tar -cvzf ${DEPLOY_DIR_IMAGE}/modules-${PV}-${PR}-${MACHINE}.tgz -C ${D} lib
+ 	fi
+ 
+-	if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
+-		if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
+-			${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
+-			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+-			rm -f linux.bin
+-		else
+-			${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
+-			rm -f linux.bin.gz
+-			gzip -9 linux.bin
+-			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+-			rm -f linux.bin.gz
+-		fi
+-		package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+-	fi
+-
+ 	cd ${DEPLOY_DIR_IMAGE}
+ 	rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+ 	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
+index 96feba6..02243ca 100644
+--- a/recipes/linux/linux.inc
++++ b/recipes/linux/linux.inc
+@@ -159,16 +159,21 @@ do_configure_append() {
+ }
+ 
+ do_compile_append() {
++    ENTRYPOINT=${UBOOT_ENTRYPOINT}
++    if test -n "${UBOOT_ENTRYSYMBOL}"; then
++        ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
++               awk '$3=="${UBOOT_ENTRYSYMBOL}" {print $1}'`
++    fi
+     if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
+         if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
+             ${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
+-            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
++            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
+             rm -f linux.bin
+         else
+             ${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
+             rm -f linux.bin.gz
+             gzip -9 linux.bin
+-            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
++            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
+             rm -f linux.bin.gz
+         fi
+     fi
 
 
