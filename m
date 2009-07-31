@@ -1,34 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [58.185.154.238] (helo=cassis-intl.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MWp87-0003CE-21
-	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 12:14:28 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MWotU-0001FA-Q1
-	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 09:59:20 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
-	Fri, 31 Jul 2009 09:59:20 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@openembedded.org>;
-	Fri, 31 Jul 2009 09:59:20 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 31 Jul 2009 11:59:09 +0200
-Message-ID: <h4uf9d$cfg$1@ger.gmane.org>
-References: <4A6FD077.1060001@gmail.com>	<h4ou1e$s42$1@ger.gmane.org>	<4A700A74.7040507@xora.org.uk>	<200907291131.04967.marcin@juszkiewicz.com.pl>	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>	<20090730053353.GF25691@smtp.west.cox.net>	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>	<4A7160F2.8030000@xora.org.uk>	<4A7255D3.9020703@gmail.com>	<4A729943.4060200@xora.org.uk>
-	<4A729FF4.3040600@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
-In-Reply-To: <4A729FF4.3040600@gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] remove duplicated code from linux.inc
+	(envelope-from <galvez.andy@cassis-intl.com>) id 1MWprq-0001mW-TE
+	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 13:01:44 +0200
+Received: (qmail 16938 invoked by uid 509); 31 Jul 2009 18:40:58 +0800
+Received: from 10.65.9.1 by postman.cassis-intl.com (envelope-from
+	<galvez.andy@cassis-intl.com>,
+	uid 501) with qmail-scanner-1.25-st-qms 
+	(clamdscan: 0.83/1213. spamassassin: 3.0.4. perlscan: 1.25-st-qms.  
+	Clear:RC:1(10.65.9.1):. 
+	Processed in 0.049152 secs); 31 Jul 2009 10:40:58 -0000
+X-Antivirus-MYDOMAIN-Mail-From: galvez.andy@cassis-intl.com via
+	postman.cassis-intl.com
+X-Antivirus-MYDOMAIN: 1.25-st-qms (Clear:RC:1(10.65.9.1):. Processed in
+	0.049152 secs Process 16931)
+Received: from unknown (HELO galvezljxpdt1) (10.65.9.1)
+	by cassis-intl.com with SMTP; 31 Jul 2009 18:40:58 +0800
+Message-ID: <ADE69874790445368C1FAACEA5FF1B82@sg01.cassis>
+From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 31 Jul 2009 18:55:08 +0800
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5512
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: libtool/libltdl problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,19 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2009 10:14:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 31 Jul 2009 11:01:45 -0000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 31-07-09 09:40, Graham Gower wrote:
-> Graeme Gregory wrote:
->> Looks good to me, do you fancy moving that do_compile_append into
->> kernel.bbclass? You can then have the added kudos of fixing OE core
->> files :-)
->
-> Kudos sound tasty.
+Hi,
 
-Acked-by: Koen Kooi <koen@openembedded.org>
+    I am trying to compile opie-image from a newly fetched sources from op=
+enembedded. But I hit this stumbling block that prevented me to make any pr=
+ogress for the whole day. My openembedded environment already built the lib=
+tool 2.2.4-r16 based on the dependency requirements of the opie-image recei=
+pe. But when the build process reached pulseaudio 0.9.15-r8.4, the process =
+stopped with an error about liltdl not being found. searched through the di=
+rectory and I confirmed that all the install and devel files are in the sta=
+ging/../user/lib folder. Searched through the net and all the hits point th=
+at libtool 2.2 is required for this pulseaudio version. But all the files a=
+re there. Can anybody help me through this?
+
+exact message:
+checking for lt_dladvise_init in -lltdl... no
+configure: error: Unable to find libltdl
+FATAL: oe_runconf failed
 
 
-
+Thanks and best regards,
+Andy
+From utx@penguin.cz Fri Jul 31 13:31:46 2009
+Received: from [84.21.108.25] (helo
