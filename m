@@ -1,21 +1,34 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MWuX4-0006vH-Ei
-	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 18:00:34 +0200
-Received: (qmail 10016 invoked from network); 31 Jul 2009 15:45:26 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 31 Jul 2009 08:45:26 -0700
-Date: Fri, 31 Jul 2009 08:45:25 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090731154525.GL25691@smtp.west.cox.net>
-References: <1248989671.3629.1358.camel@conroy-linux>
-	<b6ebd0a50907301516i2ba54f1cif687e5b76f675862@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <b6ebd0a50907301516i2ba54f1cif687e5b76f675862@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: Packaged-staging and RPATH with native/cross/sdk
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MWwPF-0006kX-Cn
+	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 20:00:42 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MWwAZ-0004Wu-Oc
+	for openembedded-devel@openembedded.org; Fri, 31 Jul 2009 17:45:27 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Fri, 31 Jul 2009 17:45:27 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Fri, 31 Jul 2009 17:45:27 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 31 Jul 2009 19:45:16 +0200
+Message-ID: <h4vajd$vh7$1@ger.gmane.org>
+References: <4A6FD077.1060001@gmail.com>	<h4ou1e$s42$1@ger.gmane.org>	<4A700A74.7040507@xora.org.uk>	<200907291131.04967.marcin@juszkiewicz.com.pl>	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>	<20090730053353.GF25691@smtp.west.cox.net>	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>	<4A7160F2.8030000@xora.org.uk>	<4A7255D3.9020703@gmail.com>	<4A729943.4060200@xora.org.uk>	<4A729FF4.3040600@gmail.com>
+	<4A72D676.6060304@xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
+In-Reply-To: <4A72D676.6060304@xora.org.uk>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] remove duplicated code from linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,30 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2009 16:00:35 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 31 Jul 2009 18:00:48 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 30, 2009 at 03:16:58PM -0700, Chris Larson wrote:
+On 31-07-09 13:33, Graeme Gregory wrote:
+> Graham Gower wrote:
+>> Graeme Gregory wrote:
+>>> Looks good to me, do you fancy moving that do_compile_append into
+>>> kernel.bbclass? You can then have the added kudos of fixing OE core
+>>> files :-)
+>>
+>> Kudos sound tasty.
+>>
+> Thanks for your hard work, have now applied to OE.
 
-> I've been using a $ORIGIN rpath in my builds, and it's definitely a
-> step in the right direction.  Iirc there are a few quirks with things
-> like perl modules and such, but you can work around those.
-> 
-> There are a lot of relocation issues with stuff we stage that need to
-> be fixed one by one to use those particular staging packages with tmp
-> in a different location, though.  Sadly, few upstream packages are
-> really relocatable.  Some of it can be worked around by exporting env
-> vars.. for example, you can point 'file' at its data with an env var,
-> and you can override nearly all the paths used in autoconf/automake
-> via env vars (the autotools branch i started work on does that).
+"Oh nooooes! My build fails!" -> bitbake -c clean virtual/kernel
 
-Perhaps we need to whitelist some cross/native/sdk packages?  What
-people really notice is building gcc a few times, and that stuff is
-relocatible (and if these aren't, it's a recipe bug).  Might be a few
-others too, but just not rebuilding gcc will be noticed.
+regards,
 
--- 
-Tom Rini
+Koen
+
 
 
