@@ -1,41 +1,26 @@
-Received: from [74.125.78.147] (helo=ey-out-1920.google.com)
+Received: from [209.85.219.223] (helo=mail-ew0-f223.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1MWn7E-00042g-Tr
+	(envelope-from <dp@xora.org.uk>) id 1MWo8F-0003km-LT
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Jul 2009 10:05:24 +0200
-Received: by ey-out-1920.google.com with SMTP id 3so465621eyh.36
+	Fri, 31 Jul 2009 11:10:31 +0200
+Received: by ewy23 with SMTP id 23so1297377ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2009 00:50:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=e8cVkvNonb10cIR4KldAgE/k3M6QX9o+Hrfp3qa+4wo=;
-	b=Yt3gdCNCcg8DM9vu4FcZmRTNpK8+jaAObJOVKLFn36GsUsvg0ImdXqIFNA0ynB4tp7
-	s6E1j18qdWhGKsQVX/CF9zwdw5QnVOqrn1GpH1BejkmKeu6vGl3Tu5FhaAzgn6t9ts7V
-	cbEh1Dhhp9cGvV0Bb+dNk7mlxTS01YoGNZXr0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=qQ8bFEPCvFgn3gLpoUa0O3b123nyyNRfFhGVA5VRXNZNpvMNeAYKIqBGMpQhPfS88n
-	dKJbnDJlEfXfLRLpw4Pl9vt1ajmD9Rn6K139cQGey5UqAsoSm40C3TK752eEcyoe6x+E
-	0SjKMICbOtSp14ORj8os+I4aK9duTXGqcQIhs=
+	Fri, 31 Jul 2009 01:55:24 -0700 (PDT)
+Received: by 10.210.61.8 with SMTP id j8mr2824455eba.2.1249030524084;
+	Fri, 31 Jul 2009 01:55:24 -0700 (PDT)
+Received: from ?192.168.1.64? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 10sm3473345eyz.31.2009.07.31.01.55.22
+	(version=SSLv3 cipher=RC4-MD5); Fri, 31 Jul 2009 01:55:23 -0700 (PDT)
+Message-ID: <4A72B172.4050908@xora.org.uk>
+Date: Fri, 31 Jul 2009 09:55:14 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
 MIME-Version: 1.0
-Received: by 10.216.24.206 with SMTP id x56mr450407wex.39.1249026619350; Fri, 
-	31 Jul 2009 00:50:19 -0700 (PDT)
-In-Reply-To: <4A729943.4060200@xora.org.uk>
-References: <4A6FD077.1060001@gmail.com> <h4ou1e$s42$1@ger.gmane.org>
-	<4A700A74.7040507@xora.org.uk>
-	<200907291131.04967.marcin@juszkiewicz.com.pl>
-	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>
-	<20090730053353.GF25691@smtp.west.cox.net>
-	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>
-	<4A7160F2.8030000@xora.org.uk> <4A7255D3.9020703@gmail.com>
-	<4A729943.4060200@xora.org.uk>
-Date: Fri, 31 Jul 2009 09:50:19 +0200
-Message-ID: <d1b08f940907310050s59fa5675ud222f117a7a49468@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+References: <4A6FD077.1060001@gmail.com>	<h4ou1e$s42$1@ger.gmane.org>	<4A700A74.7040507@xora.org.uk>	<200907291131.04967.marcin@juszkiewicz.com.pl>	<6ec4247d0907292211w6afc1f60s9fcf21bc7b2d56d3@mail.gmail.com>	<20090730053353.GF25691@smtp.west.cox.net>	<6ec4247d0907292249k42c582ddid3d53e847c5f835d@mail.gmail.com>	<4A7160F2.8030000@xora.org.uk>	<4A7255D3.9020703@gmail.com>	<4A729943.4060200@xora.org.uk>
+	<4A729FF4.3040600@gmail.com>
+In-Reply-To: <4A729FF4.3040600@gmail.com>
 Subject: Re: [PATCH] remove duplicated code from linux.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,25 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2009 08:05:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 31 Jul 2009 09:10:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
->> Graeme Gregory wrote:
-> Looks good to me, do you fancy moving that do_compile_append into
-> kernel.bbclass? You can then have the added kudos of fixing OE core files
+Graham Gower wrote:
+> Graeme Gregory wrote:
+>> Looks good to me, do you fancy moving that do_compile_append into 
+>> kernel.bbclass? You can then have the added kudos of fixing OE core 
+>> files :-)
+>
+> Kudos sound tasty.
+>
+Works in my testing thanks for your work.
 
-Graeme, do you remember "[oe] [PATCH] Automate uboot entry/load
-addresses detection" [*] from Ihar (booxter) ?
-Perhaps Graham could try it.
+Acked-by: Graeme Gregory <dp@xora.org.uk>
 
-I tested it but had strange results...
-
-Regards
-
-Andrea
-
-
-[*] http://thread.gmane.org/gmane.comp.handhelds.openembedded/20843/focus=25154
 
 
