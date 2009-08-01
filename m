@@ -1,36 +1,22 @@
-Received: from [209.85.222.197] (helo=mail-pz0-f197.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MWwaZ-00079Q-4d
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 31 Jul 2009 20:12:27 +0200
-Received: by pzk35 with SMTP id 35so1694962pzk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jul 2009 10:57:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=PJOvE/8ANafNAeuR5FfNOfyJRHlKD/kJ38tM2wLXloA=;
-	b=curd8R5ded5UI3N0Qj7OfgQ4fOZLLqtKKj8e12JjM489AH55CEU7s43202f+HW6QCZ
-	nKXwWarN16bceRHozEV63QyTZYAKzfoS/eDR/uv6Pv4KmOeGeqaX9AObt5nZe6MIIVgx
-	xAonv+Js/UZ37PDE73ARoi0EvbGFe7KkBg/SI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=ja1yMPad+D5dvyKjznvNVKr3lGavEq1lTTf/KxGA1yhXumShh0p6pF5l0J8u/LW4QN
-	EG/rMcBI2XkXT8mYbrvdVA5kPGfQnvTw89hj1lb0ngsNrb7Bkr/YTRUwpS1Mm3hF/EV6
-	aPI8H8JbRBDYD1HXmKgsWRFjH/Zv8fQFsifrk=
-Received: by 10.115.107.12 with SMTP id j12mr3925972wam.94.1249063028755;
-	Fri, 31 Jul 2009 10:57:08 -0700 (PDT)
-Received: from localhost (adsl-71-146-25-49.dsl.pltn13.sbcglobal.net
-	[71.146.25.49])
-	by mx.google.com with ESMTPS id l30sm5555958waf.0.2009.07.31.10.57.06
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 31 Jul 2009 10:57:07 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+Received: from [72.167.82.89] (helo=p3plsmtpa01-09.prod.phx3.secureserver.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1MX7RT-0001c4-OG
+	for openembedded-devel@openembedded.org; Sat, 01 Aug 2009 07:47:41 +0200
+Received: (qmail 18649 invoked from network); 1 Aug 2009 05:32:26 -0000
+Received: from unknown (75.49.209.3)
+	by p3plsmtpa01-09.prod.phx3.secureserver.net (72.167.82.89) with ESMTP;
+	01 Aug 2009 05:32:25 -0000
+Message-ID: <4A73D370.3050104@mwester.net>
+Date: Sat, 01 Aug 2009 00:32:32 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.22) Gecko/20090605 Thunderbird/2.0.0.22 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Jul 2009 10:56:50 -0700
-Message-Id: <1249063010-19157-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-Subject: [PATCH] minimal.conf: Add PREFERRED_PROVIDER for libusb0.
+References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>	<1244144325.6678.0.camel@port4>	<BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>	<1244206438.6643.46.camel@port4>	<BLU137-W29570FDEF1300363D893E4D4450@phx.gbl>	<1244635240.28486.7.camel@hammer.suse.cz>	<20090730105711.GA29595@zlo.nu>
+	<1248952464.21030.110.camel@hammer.suse.cz>
+In-Reply-To: <1248952464.21030.110.camel@hammer.suse.cz>
+Subject: Re: Commit 2e0fa4918d643ce6ec0299cd31cfe1c346e4bce3 breaks libtool's do_configure [PATCH]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,27 +30,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jul 2009 18:12:34 -0000
+X-List-Received-Date: Sat, 01 Aug 2009 05:47:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/distro/minimal.conf |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+Stanislav Brabec wrote:
+> Marc Olzheim wrote:
+>> I'm not sure how you tested this, but there are quotes missing, so that
+>> the "-E" argument to "grep" is passed to "export" instead. I guess some
+>> shells have a "-E" flag to "export", so it is silently ignored, but mine
+>> don't.
+> 
+> I tried both versions - quoted and unquoted - before the commit. Both
+> worked for me, that is why I committed the shorter one.
+> 
+> Well, adding quotes is safe. Can you check your configure output and
+> host shell version?
+> 
+> My configure output:
+> 
+> checking for a sed that does not truncate output... (cached) /bin/sed
+> checking for grep that handles long lines and -e... (cached) /bin/sed
+> checking for egrep... (cached) /bin/grep -E
+> checking for fgrep... (cached) /bin/grep -F
+> 
+> It indicates, that it worked correctly.
+> 
+> My native shell is:
+> 
+> /OE/openembedded/build> sh --version
+> GNU bash, version 4.0.24(1)-release (x86_64-suse-linux-gnu)
+> 
 
-diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-index 8b834d0..9212aa1 100644
---- a/conf/distro/minimal.conf
-+++ b/conf/distro/minimal.conf
-@@ -93,6 +93,7 @@ PREFERRED_PROVIDER_virtual/db = "db3"
- PREFERRED_PROVIDER_virtual/db-native = "db3-native"
- PREFERRED_PROVIDER_virtual/libsdl = "libsdl-x11"
- PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
-+PREFERRED_PROVIDER_virtual/libusb0 ?= "libusb"
- 
- #############################################################################
- # PREFERRED VERSIONS
--- 
-1.6.3.3
+The original commit seems to break libltdl.so as well (which was not
+fixed by the subsequent patch to add quotes).  Libtool builds, but
+certain dependencies fail.  Host platforms affected include Fedora and
+Ubuntu, and neither uses dash.
 
+Failing packages fail in do_configure, with a missing symbol in libltdl:
+logs from the nslu2 autobuilder are up on tinderbox:
+
+http://tinderbox.openembedded.net/public/logs/task/2207578.txt
+
+Here's the message in config.log from that build:
+
+configure:16081: checking for lt_dlinit in -lltdl
+configure:16116: arm-linux-gnueabi-gcc -march=armv5te -mtune=xscale
+-mno-thumb-interwork -mno-thumb -mno-thumb-interwork -mno-thumb -o
+conftest
+-isystem/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/include
+-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
+-Wall -Wmissing-declarations -Wmissing-prototypes
+-isystem/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/include
+-I$(top_srcdir) -I$(top_builddir) -I$(top_srcdir)/libgphoto2_port
+-I$(top_srcdir)/libgphoto2 -I$(top_builddir)/libgphoto2
+-isystem/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/include
+-Wall -g -D_GPHOTO2_INTERNAL_CODE
+-L/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/lib
+-Wl,-rpath-link,/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/lib
+-Wl,-O1 -Wl,--hash-style=gnu conftest.c -lltdl   >&5
+/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/lib/libltdl.so:
+undefined reference to `lt_libltdl_LTX_preloaded_symbols'
+collect2: ld returned 1 exit status
+configure:16122: $? = 1
+
+
+Mike (mwester)
 
 
