@@ -1,25 +1,34 @@
-Received: from [213.165.64.20] (helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <s_buschmann@gmx.de>) id 1MXYtL-0007p1-7p
+Received: from [212.18.0.9] (helo=mail-out.m-online.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mok@mnet-online.de>) id 1MXZ6h-0008Jd-6y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Aug 2009 13:06:15 +0200
-Received: (qmail invoked by alias); 02 Aug 2009 10:50:54 -0000
-Received: from p5481CCFE.dip.t-dialin.net (EHLO [192.168.2.107])
-	[84.129.204.254]
-	by mail.gmx.net (mp025) with SMTP; 02 Aug 2009 12:50:54 +0200
-X-Authenticated: #1404922
-X-Provags-ID: V01U2FsdGVkX19O+hsdRU9OAk5kN2MK8CxbM7oxx/SxFXNQVmkitO
-	+RAx8bLy0WVpgE
-Message-ID: <4A756F8F.30405@gmx.de>
-Date: Sun, 02 Aug 2009 12:50:55 +0200
-From: Stefan Buschmann <s_buschmann@gmx.de>
-User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
-MIME-Version: 1.0
+	Sun, 02 Aug 2009 13:20:05 +0200
+Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
+	by mail-out.m-online.net (Postfix) with ESMTP id D39B41C1522B;
+	Sun,  2 Aug 2009 13:04:42 +0200 (CEST)
+Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
+	by mail.m-online.net (Postfix) with ESMTP id B9EE890226;
+	Sun,  2 Aug 2009 13:04:42 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.3.149])
+	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
+	port 10024)
+	with ESMTP id oZh99xWJS7Xv; Sun,  2 Aug 2009 13:04:41 +0200 (CEST)
+Received: from mrdenker.localdomain (ppp-93-104-102-209.dynamic.mnet-online.de
+	[93.104.102.209])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTP;
+	Sun,  2 Aug 2009 13:04:41 +0200 (CEST)
+From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-References: <200908021211.14793.mok@mnet-online.de>
-In-Reply-To: <200908021211.14793.mok@mnet-online.de>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.73
+Date: Sun, 2 Aug 2009 13:04:42 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.29.6-213.fc11.x86_64; KDE/4.2.4; x86_64; ;
+	)
+References: <200908021211.14793.mok@mnet-online.de> <4A756F8F.30405@gmx.de>
+In-Reply-To: <4A756F8F.30405@gmx.de>
+MIME-Version: 1.0
+Message-Id: <200908021304.43335.mok@mnet-online.de>
 Subject: Re: some RRECOMMENDed packages do not get included into the image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,34 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Aug 2009 11:06:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 02 Aug 2009 11:20:08 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
+Am Sonntag 02 August 2009 12:50:55 schrieb Stefan Buschmann:
+> I'm experiencing problems with current SHR images as well. In my case,
+> everything gets built and the image is created successfully, but when I
+> boot into the system on my device, I get a few error messages like "no
+> sound device" for alsa, "no network card" etc., and the X server fails
+> to start. However the fso-daemons etc. seem to be working, or at least
+> starting, correctly.
+yeah, thats exactly what happens to me too.
 
-I'm experiencing problems with current SHR images as well. In my case, 
-everything gets built and the image is created successfully, but when I 
-boot into the system on my device, I get a few error messages like "no 
-sound device" for alsa, "no network card" etc., and the X server fails 
-to start. However the fso-daemons etc. seem to be working, or at least 
-starting, correctly.
+I just gave the 1.8-parser-rework a shot and it looks like it builds correct 
+images with all needed stuff included. Did not boot it yet, but I checked that 
+the missing packages are included.
 
-I haven't been able to understand what is going wrong here, as I'm still 
-starting to learn how the whole openembedded/bitbake system works. I 
-turned on logging in the hope that I would find out why e.g. the 
-X-server is not starting, but found no helpful error messages in the 
-logs. I first thought it was a fault in my build system, but than I 
-started completely from scratch with the SHR-Makefile, and got the same 
-non-working image in the end. So, any tips on how to debug this?
+Is 1.8-parser-rework prime time ready? 
+-- 
 
-Currently I'm working on the fso/milestone5.5 branch again, as this 
-still results in a working image. But I know that this is going to be 
-abandoned, soon...
-
-Bye,
-
-Stefan
-
+Klaus 'mrmoku' Kurzmann
 
 
