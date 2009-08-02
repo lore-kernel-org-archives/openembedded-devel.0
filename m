@@ -1,37 +1,22 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MXBO4-0006hQ-HK
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 Aug 2009 12:00:24 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so1254361qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Aug 2009 02:45:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ZgFMx7AgjMXCc3wPb00ckSZVRXUKlZXGQsP7H2gaf2A=;
-	b=kQz1yBZXhezfGd8azBiJCsYFNF6JP6SXaIHOboVc3NlfKYahDByJdWXVcFlmTOxd2t
-	1edOxfry877/gyZxwVi1AFIOlklBbyA2Gu2Edm3jUgFZ+uNsbr0lQeIrdrqwVr36+Jh8
-	0+1BJin2Yr9ikAy33OzHbsia6hCCdNKUhtwh0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=xKNh34eZkiZ0pvtvTcO1lb8WCnPkCFY9+M37zbFsvWAQ5ZUcCGItW6PKtMhvMXDMGP
-	O7XTzY8Zcf2B9YnyOX+CK2s8rSVLnRV5zyVYkmgrql1MYaDsyV4JIK3hlOb07nnEXr9c
-	JMNU+dXsTDw2QVaSV4tIsAIJuhye801ebSBQs=
+Received: from [72.167.82.83] (helo=p3plsmtpa01-03.prod.phx3.secureserver.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1MXQAy-0003Wd-IN
+	for openembedded-devel@openembedded.org; Sun, 02 Aug 2009 03:47:52 +0200
+Received: (qmail 15362 invoked from network); 2 Aug 2009 01:32:33 -0000
+Received: from unknown (209.242.7.133)
+	by p3plsmtpa01-03.prod.phx3.secureserver.net (72.167.82.83) with ESMTP;
+	02 Aug 2009 01:32:29 -0000
+Message-ID: <4A74ECAA.6020308@mwester.net>
+Date: Sat, 01 Aug 2009 20:32:26 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.22) Gecko/20090605 Thunderbird/2.0.0.22 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Received: by 10.229.95.4 with SMTP id b4mr652706qcn.40.1249119912181; Sat, 01 
-	Aug 2009 02:45:12 -0700 (PDT)
-In-Reply-To: <200907311524.44818.marcin@juszkiewicz.com.pl>
-References: <4A6FD077.1060001@gmail.com> <4A72D676.6060304@xora.org.uk>
-	<6ec4247d0907310535h345a22a9sfe98c6cae8336aaf@mail.gmail.com>
-	<200907311524.44818.marcin@juszkiewicz.com.pl>
-Date: Sat, 1 Aug 2009 19:15:12 +0930
-Message-ID: <6ec4247d0908010245y69aa6830n36f9ceca0e9211ff@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] remove duplicated code from linux.inc
+References: <BLU137-W15C50162BE2D466B2B3182D44C0@phx.gbl>	<1244144325.6678.0.camel@port4>	<BLU137-W9D00E1434DB12273A400AD4480@phx.gbl>	<1244206438.6643.46.camel@port4>	<BLU137-W29570FDEF1300363D893E4D4450@phx.gbl>	<1244635240.28486.7.camel@hammer.suse.cz>	<20090730105711.GA29595@zlo.nu>	<1248952464.21030.110.camel@hammer.suse.cz>
+	<4A73D370.3050104@mwester.net>
+In-Reply-To: <4A73D370.3050104@mwester.net>
+Subject: Re: Commit 2e0fa4918d643ce6ec0299cd31cfe1c346e4bce3 breaks libtool's do_configure [PATCH]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,50 +30,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Aug 2009 10:00:24 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 02 Aug 2009 01:47:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-2009/7/31 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
-> Dnia pi=B1tek, 31 lipca 2009 o 14:35:19 Graham Gower napisa=B3(a):
->> And for those playing at home, the value to assign to UBOOT_ENTRYSYM
+[top-posting] Any thoughts, anyone?  Should I revert the original change
+(and the follow-on)?  Or is this unique to SlugOS again, and I should
+add an override to the change?  Or might anyone who knows libtool and
+libltdl have any suggestions on where to look?  It would even be helpful
+if anyone else can tell me if libgphoto2 and pulseaudio build correctly
+for their distro!
 
-Of course, that should have read UBOOT_ENTRYSYMBOL.
+Thanks.
+Mike (mwester)
 
->> for a given arch can be found by grepping
->> linux/arch/${ARCH}/kernel/vmlinux.lds.S for 'ENTRY'.
->
-> So according to your post for ARM it will be 'stext':
->
-> 15:10 hrw@home:linux-2.6.30$ grep ^ENTRY arch/arm/kernel/vmlinux.lds.S
-> ENTRY(stext)
->
-> For AT91SAM9263-EK we get:
->
-> 15:10 hrw@home:linux-2.6.30$ arm-angstrom-linux-gnueabi-nm vmlinux|grep
-> stext
-> c0008000 T _stext
-> c0008000 T stext
->
-> But when I boot this device I have:
->
-> ## Booting kernel from Legacy Image at 22200000 ...
-> =A0 Image Name: =A0 Angstrom/2.6.30/at91sam9263ek
-> =A0 Image Type: =A0 ARM Linux Kernel Image (uncompressed)
-> =A0 Data Size: =A0 =A02074384 Bytes =3D =A02 MB
-> =A0 Load Address: 20008000
-> =A0 Entry Point: =A020008000
-> =A0 Verifying Checksum ... OK
-> =A0 Loading Kernel Image ... OK
->
-> So entry point is different.
 
-Yes, the linux kernel links to a virtual address. If u-boot leaves the
-MMU disabled on your platform then you will need to use a physical
-address. I haven't checked u-boot to see if this is common or not.
+Mike Westerhof wrote:
+> Stanislav Brabec wrote:
+>> Marc Olzheim wrote:
+>>> I'm not sure how you tested this, but there are quotes missing, so that
+>>> the "-E" argument to "grep" is passed to "export" instead. I guess some
+>>> shells have a "-E" flag to "export", so it is silently ignored, but mine
+>>> don't.
+>> I tried both versions - quoted and unquoted - before the commit. Both
+>> worked for me, that is why I committed the shorter one.
+>>
+>> Well, adding quotes is safe. Can you check your configure output and
+>> host shell version?
+>>
+>> My configure output:
+>>
+>> checking for a sed that does not truncate output... (cached) /bin/sed
+>> checking for grep that handles long lines and -e... (cached) /bin/sed
+>> checking for egrep... (cached) /bin/grep -E
+>> checking for fgrep... (cached) /bin/grep -F
+>>
+>> It indicates, that it worked correctly.
+>>
+>> My native shell is:
+>>
+>> /OE/openembedded/build> sh --version
+>> GNU bash, version 4.0.24(1)-release (x86_64-suse-linux-gnu)
+>>
+> 
+> The original commit seems to break libltdl.so as well (which was not
+> fixed by the subsequent patch to add quotes).  Libtool builds, but
+> certain dependencies fail.  Host platforms affected include Fedora and
+> Ubuntu, and neither uses dash.
+> 
+> Failing packages fail in do_configure, with a missing symbol in libltdl:
+> logs from the nslu2 autobuilder are up on tinderbox:
+> 
+> http://tinderbox.openembedded.net/public/logs/task/2207578.txt
+> 
+> Here's the message in config.log from that build:
+> 
+> configure:16081: checking for lt_dlinit in -lltdl
+> configure:16116: arm-linux-gnueabi-gcc -march=armv5te -mtune=xscale
+> -mno-thumb-interwork -mno-thumb -mno-thumb-interwork -mno-thumb -o
+> conftest
+> -isystem/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/include
+> -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
+> -Wall -Wmissing-declarations -Wmissing-prototypes
+> -isystem/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/include
+> -I$(top_srcdir) -I$(top_builddir) -I$(top_srcdir)/libgphoto2_port
+> -I$(top_srcdir)/libgphoto2 -I$(top_builddir)/libgphoto2
+> -isystem/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/include
+> -Wall -g -D_GPHOTO2_INTERNAL_CODE
+> -L/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/lib
+> -Wl,-rpath-link,/home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/lib
+> -Wl,-O1 -Wl,--hash-style=gnu conftest.c -lltdl   >&5
+> /home/slug/slugos/tmp/staging/armv5te-linux-gnueabi/usr/lib/libltdl.so:
+> undefined reference to `lt_libltdl_LTX_preloaded_symbols'
+> collect2: ld returned 1 exit status
+> configure:16122: $? = 1
+> 
+> 
+> Mike (mwester)
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> 
 
-Does the resulting uImage with entry point c0008000 boot for you?
-
--Graham
 
 
