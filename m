@@ -1,35 +1,32 @@
-Received: from [212.18.0.9] (helo=mail-out.m-online.net)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1MXZ6h-0008Jd-6y
+	(envelope-from <rpjday@crashcourse.ca>) id 1MXfvI-0005c6-KJ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 Aug 2009 13:20:05 +0200
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id D39B41C1522B;
-	Sun,  2 Aug 2009 13:04:42 +0200 (CEST)
-Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
-	by mail.m-online.net (Postfix) with ESMTP id B9EE890226;
-	Sun,  2 Aug 2009 13:04:42 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.3.149])
-	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
-	port 10024)
-	with ESMTP id oZh99xWJS7Xv; Sun,  2 Aug 2009 13:04:41 +0200 (CEST)
-Received: from mrdenker.localdomain (ppp-93-104-102-209.dynamic.mnet-online.de
-	[93.104.102.209])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTP;
-	Sun,  2 Aug 2009 13:04:41 +0200 (CEST)
-From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 2 Aug 2009 13:04:42 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.29.6-213.fc11.x86_64; KDE/4.2.4; x86_64; ;
-	)
-References: <200908021211.14793.mok@mnet-online.de> <4A756F8F.30405@gmx.de>
-In-Reply-To: <4A756F8F.30405@gmx.de>
+	Sun, 02 Aug 2009 20:36:44 +0200
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1MXfgR-0000NL-DO for openembedded-devel@lists.openembedded.org;
+	Sun, 02 Aug 2009 14:21:23 -0400
+Date: Sun, 2 Aug 2009 14:18:41 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.0908021414100.8299@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <200908021304.43335.mok@mnet-online.de>
-Subject: Re: some RRECOMMENDed packages do not get included into the image
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: "bitbake -c fetch" and bluez4 warnings?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +40,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Aug 2009 11:20:08 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sun, 02 Aug 2009 18:36:44 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Am Sonntag 02 August 2009 12:50:55 schrieb Stefan Buschmann:
-> I'm experiencing problems with current SHR images as well. In my case,
-> everything gets built and the image is created successfully, but when I
-> boot into the system on my device, I get a few error messages like "no
-> sound device" for alsa, "no network card" etc., and the X server fails
-> to start. However the fso-daemons etc. seem to be working, or at least
-> starting, correctly.
-yeah, thats exactly what happens to me too.
 
-I just gave the 1.8-parser-rework a shot and it looks like it builds correct 
-images with all needed stuff included. Did not boot it yet, but I checked that 
-the missing packages are included.
+  probably simple answers to these questions, but ...
 
-Is 1.8-parser-rework prime time ready? 
--- 
+1) after setting up for angstrom for beagleboard, i wanted to
+pre-fetch all necessary packages so i ran
 
-Klaus 'mrmoku' Kurzmann
+  $ bitbake -c fetch base-image
+
+didn't notice anything downloaded, but when i ran
+
+  $ bitbake base-image
+
+the build was interrupted several times by a package download.  isn't
+"-c fetch" the command option to do pre-fetching of all necessary
+packages?
+
+
+2)
+
+Parsing .bb files, please wait...NOTE: Angstrom DOES NOT support
+bluez-libs because bluez-libs 3.x has been replaced by bluez4
+NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has
+been replaced by bluez4
+NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has
+been replaced by bluez4
+NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x
+has been replaced by bluez4
+NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x
+has been replaced by bluez4
+done.
+
+  i'm not sure what i'm supposed to take away from the above.  i
+*have* the bluez4 tarballs in my downloads directory.  is that just a
+FYI warning?  a sign of a problem?  what?  it doesn't seem like i need
+to do anything about it.  or do i?
+
+  thanks.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+        Linux Consulting, Training and Annoying Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+"Kernel Newbie Corner" column @ linux.com:          http://cli.gs/WG6WYX
+========================================================================
 
 
