@@ -1,24 +1,33 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MXrfU-0000It-25
-	for openembedded-devel@openembedded.org; Mon, 03 Aug 2009 09:09:12 +0200
-Received: (qmail 26145 invoked by uid 813007); 3 Aug 2009 06:53:47 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 3 Aug 2009 06:53:47 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 3 Aug 2009 08:54:13 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4-00009-g83a3792-dirty; KDE/4.2.96;
-	x86_64; ; )
-References: <4A6FD077.1060001@gmail.com>
-	<200907311524.44818.marcin@juszkiewicz.com.pl>
-	<6ec4247d0908010245y69aa6830n36f9ceca0e9211ff@mail.gmail.com>
-In-Reply-To: <6ec4247d0908010245y69aa6830n36f9ceca0e9211ff@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200908030854.14145.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH] remove duplicated code from linux.inc
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MXrxj-0007xK-H3
+	for openembedded-devel@openembedded.org; Mon, 03 Aug 2009 09:28:03 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MXrio-00039T-Ln
+	for openembedded-devel@openembedded.org; Mon, 03 Aug 2009 07:12:38 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@openembedded.org>;
+	Mon, 03 Aug 2009 07:12:38 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@openembedded.org>;
+	Mon, 03 Aug 2009 07:12:38 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 03 Aug 2009 09:12:21 +0200
+Message-ID: <h562kl$iuf$1@ger.gmane.org>
+References: <DAE7325AE217459DAF9E0769B867ED98@sg01.cassis>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
+In-Reply-To: <DAE7325AE217459DAF9E0769B867ED98@sg01.cassis>
+Sender: news <news@ger.gmane.org>
+Subject: Re: libtool/libltdl problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,65 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2009 07:09:12 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 03 Aug 2009 07:28:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia sobota, 1 sierpnia 2009 o 11:45:12 Graham Gower napisa=B3(a):
-> 2009/7/31 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
-
-> > For AT91SAM9263-EK we get:
-> >
-> > 15:10 hrw@home:linux-2.6.30$ arm-angstrom-linux-gnueabi-nm
-> > vmlinux|grep stext
-> > c0008000 T _stext
-> > c0008000 T stext
-> >
-> > But when I boot this device I have:
-> >
-> > ## Booting kernel from Legacy Image at 22200000 ...
-> >   Image Name:   Angstrom/2.6.30/at91sam9263ek
-> >   Image Type:   ARM Linux Kernel Image (uncompressed)
-> >   Data Size:    2074384 Bytes =3D  2 MB
-> >   Load Address: 20008000
-> >   Entry Point:  20008000
-> >   Verifying Checksum ... OK
-> >   Loading Kernel Image ... OK
-> >
-> > So entry point is different.
+On 03-08-09 06:12, Leandro Q. Galvez wrote:
 >
-> Yes, the linux kernel links to a virtual address. If u-boot leaves
-> the MMU disabled on your platform then you will need to use a
-> physical address. I haven't checked u-boot to see if this is common
-> or not.
+> Hi,
+>
+> I am trying to compile opie-image from a newly fetched sources from
+> openembedded.
 
-> Does the resulting uImage with entry point c0008000 boot for you?
+Please update, this was fixed for libtool 2.2.4 last week and for 2.2.6a 
+yesterday.
 
-## Booting kernel from Legacy Image at 22200000 ...
-   Image Name:   Angstrom/2.6.30/at91sam9263ek
-   Image Type:   ARM Linux Kernel Image (uncompressed)
-   Data Size:    2074380 Bytes =3D  2 MB
-   Load Address: 20008000
-   Entry Point:  c0008000
-   Verifying Checksum ... OK
-   Loading Kernel Image ... OK
-OK
+regards,
 
-Starting kernel ...
-
-And HANG...
-
-Then I changed kernel.bbclass so LoadAddress =3D=3D EntryPoint and that=20
-hangs at loading kernel (which was expected). So it looks like that=20
-patch is not so safe to use...
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+Koen
 
 
 
