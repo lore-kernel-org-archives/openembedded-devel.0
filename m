@@ -1,20 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.220.224] (helo=mail-fx0-f224.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MXxa4-0003Rx-Iz
-	for openembedded-devel@openembedded.org; Mon, 03 Aug 2009 15:28:00 +0200
-Received: (qmail 11634 invoked by uid 813007); 3 Aug 2009 13:12:34 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 3 Aug 2009 13:12:34 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 3 Aug 2009 15:13:04 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4-00009-g83a3792-dirty; KDE/4.2.96;
-	x86_64; ; )
+	(envelope-from <maxilos@gmail.com>) id 1MXxgF-0003fk-Hu
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Aug 2009 15:34:23 +0200
+Received: by fxm24 with SMTP id 24so2389344fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Aug 2009 06:18:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=IhMny+MI7p0QHSRr5j0WcobhO84HKDwbK4Sc7QPN5kE=;
+	b=OwWKs1gcD52CTaOO4d5Sq+oYwOZbOVPNLjJ7CSd/0RgRUAhyNOIaBBYLboDEdLZ9Dv
+	9+GQwVk2XZkrRaali43+dlZnjbSkf/OspLEaErUA9UMO+Bgv8uWG4megpIlIXNb1lTEv
+	dMEHqJp0ASAqQZo4su7XXZRGbNHhoxpayUTB8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=sNgKXlHQhDjFqFIuGPmv1kFQ0U2UuNj2EvG0gPbsNDELV33zNrSmUJLKLqjT7S7Rrh
+	Ay6XxYvTOgmCmA7zPbo2O0wFjf3iiwntEwFllpskfDYK9rrSm9IJSaHDZFWu9n/6myxt
+	TGGga5r6H8nI85Ypt/l+EnItS4DpF1Pw2WeGE=
 MIME-Version: 1.0
-Message-Id: <200908031513.05326.marcin@juszkiewicz.com.pl>
-Subject: [RFC] Xserver-common 1.30
+Received: by 10.103.231.8 with SMTP id i8mr3482441mur.65.1249305535537; Mon, 
+	03 Aug 2009 06:18:55 -0700 (PDT)
+Date: Mon, 3 Aug 2009 16:18:55 +0300
+Message-ID: <24aa85dc0908030618ib31d99bnad7a3b7234ff03f9@mail.gmail.com>
+From: Gregory Machairidis <maxilos@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,87 +40,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2009 13:28:00 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Mon, 03 Aug 2009 13:34:23 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
+php.inc have an error on the URI
 
-Hi
+this is the correct for a working task, us2.php.net dont have that file
+anymore...
 
-We have two packages which do similar things: 
-
-- xserver-common from GPE
-- xserver-kdrive-common from Poky
-
-Basically they do the same -- select proper XServer, arguments to pass 
-for it and have session scripts. Kdrive version uses 'xinit' to 
-initialize X11 session as root user, GPE version is expected to be used 
-with gpe-dm/gpe-login combo which handles user login.
-
-This gave us few mistakes in past - some developers patched one of them 
-for their device but the other one was used in image etc.
-
-Some time ago I looked at xserver-common 1.25 and created over 20 
-patches for it:
-
-- moved xmodmap files to xmodmap/ dir
-- use machine_id from init.d/functions
-- xserver: at91 boards have RGB screen with recent kernels
-- xserver: atmel boards do not need setup - defaults are fine
-- xserver: set DPI in variable
-- xserver: merge nokia n800 and n810
-- xserver: use /etc/default/xserver if present and fallback to old way 
-           if not
-- xserver: added example /etc/default/xserver file (for poodle)
-- xserver: added some devices from xserver-kdrive-common
-- xserver: added Ronetix PM9261/3 boards
-- xserver: no need to set "-mouse tslib" as this is set for all devices
-           with touchscreen
-- xserver: if we have unknown device then give it's screen parameters
-           for x11 (from fbset output)
-- xserver: introduced MOUSE variable for "-mouse" argument (KDrive only)
-
-Most of patches were used to create 1.30 version which is available as 
-tarball from GPE project. But due to my fault this version is broken...
-
-Today I pushed 1.30 into OE metadata with few other patches which are 
-expected to fix errors left in 1.30 release. It was not too much tested 
-on devices so beware if your target do not works properly with it.
-
-In short my patching ideas were:
-
-- set DPI in separate variable instead of being part of ARGS
-  + some devices needs only DPI setting
-  + default ARGS are usually fine for devices
-
-- use /etc/default/xserver for setting ARGS/DPI for new devices
-  + no need to patch Xserver anymore
-  + easy to tweak on device itself
-
-- xmodmap stuff should be machine dependent so only one xmodmap is
-  present on device
-  (this part was not done yet)
-
-- zaurusd, devmand should provide session scripts instead of being
-  called from Ts_calibrate script
-  (this part was not done yet)
-
-I would like other developers to use it and test does it work on their 
-devices.
-
-In future I would like to add support for using "xinit" in 
-/etc/X11/Xserver so 'xserver-common' package could be used for rootmode 
-X11 systems (which would eliminate 'xserver-kdrive-common' package).
-
-What do you think about it?
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+SRC_URI =     "http://museum.php.net/php5/php-${PV}.tar.bz2\
+               file://acinclude-xml2-config.patch;patch=1"
 
 
+NOTE: Running task 365 of 921 (ID: 525, /stuff/openembedded/recipes/php/
+php-native_5.2.6.bb, do_fetch)
+NOTE: fetch http://us2.php.net/distributions/php-5.2.6.tar.bz2
+--15:31:22--  http://us2.php.net/distributions/php-5.2.6.tar.bz2
+Resolving us2.php.net... 64.71.164.5, 2001:470:0:b9::4047:a405
+Connecting to us2.php.net|64.71.164.5|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location:
+http://us2.php.net/search.php?show=quickref&lang=en&pattern=distributions%2Fphp-5.2.6.tar.bz2[following]
+--15:31:23--
+http://us2.php.net/search.php?show=quickref&lang=en&pattern=distributions%2Fphp-5.2.6.tar.bz2
+Reusing existing connection to us2.php.net:80.
+HTTP request sent, awaiting response... 302 Found
+Location:
+http://us2.php.net/manual-lookup.php?pattern=distributions%2Fphp-5.2.6.tar.bz2&lang=en[following]
+--15:31:23--
+http://us2.php.net/manual-lookup.php?pattern=distributions%2Fphp-5.2.6.tar.bz2&lang=en
+Reusing existing connection to us2.php.net:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 6310 (6.2K) [text/html]
+Saving to:
+`/stuff/sources/manual-lookup.php?pattern=distributions%2Fphp-5.2.6.tar.bz2&lang=en'
 
+100%[=====================================================================================================================>]
+6,310       26.0K/s   in 0.2s
+
+15:31:24 (26.0 KB/s) -
+`/stuff/sources/manual-lookup.php?pattern=distributions%2Fphp-5.2.6.tar.bz2&lang=en'
+saved [6310/6310]
+
+NOTE: Task failed: Fetch failed:
+http://us2.php.net/distributions/php-5.2.6.tar.bz2
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /stuff/openembedded/recipes/php/php-native_5.2.6.bb do_fetch
+failed
 
