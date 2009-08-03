@@ -1,31 +1,20 @@
-Received: from [58.185.154.238] (helo=cassis-intl.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <galvez.andy@cassis-intl.com>) id 1MXvN7-0006sw-Lk
-	for openembedded-devel@openembedded.org; Mon, 03 Aug 2009 13:06:30 +0200
-Received: (qmail 22020 invoked by uid 509); 3 Aug 2009 18:45:08 +0800
-Received: from 10.65.9.1 by postman.cassis-intl.com (envelope-from
-	<galvez.andy@cassis-intl.com>,
-	uid 501) with qmail-scanner-1.25-st-qms 
-	(clamdscan: 0.83/1213. spamassassin: 3.0.4. perlscan: 1.25-st-qms.  
-	Clear:RC:1(10.65.9.1):. 
-	Processed in 0.04424 secs); 03 Aug 2009 10:45:08 -0000
-X-Antivirus-MYDOMAIN-Mail-From: galvez.andy@cassis-intl.com via
-	postman.cassis-intl.com
-X-Antivirus-MYDOMAIN: 1.25-st-qms (Clear:RC:1(10.65.9.1):. Processed in
-	0.04424 secs Process 22014)
-Received: from unknown (HELO galvezljxpdt1) (10.65.9.1)
-	by cassis-intl.com with SMTP; 3 Aug 2009 18:45:07 +0800
-Message-ID: <576338E6E56E404D801ACFEEF7A09CCE@sg01.cassis>
-From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 3 Aug 2009 18:59:35 +0800
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MXxBt-00058q-BP
+	for openembedded-devel@openembedded.org; Mon, 03 Aug 2009 15:03:01 +0200
+Received: (qmail 23049 invoked by uid 813007); 3 Aug 2009 12:47:35 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 3 Aug 2009 12:47:34 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 3 Aug 2009 14:48:04 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4-00009-g83a3792-dirty; KDE/4.2.96;
+	x86_64; ; )
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5512
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: t1lib QA Issues
+Message-Id: <200908031448.05525.marcin@juszkiewicz.com.pl>
+Subject: update-modules is broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,21 +28,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2009 11:06:30 -0000
+X-List-Received-Date: Mon, 03 Aug 2009 13:03:02 -0000
 Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Hi,
 
-    I am trying to build opie-image using openembedded. I am receiving =
-QA Issues with the t1lib having "no GNU_HASH in the elf binary: =
-.../usr/lib/libt1.so.5.0.2" and "no GNU_HASH in the elf binary: =
-.../usr/lib/libt1x.so.5.0.2" and having "non -dev package contains =
-symlink .so: .../usr/lib/libt1x.so" and "non -dev package contains =
-symlink .so: .../usr/lib/libt1.so". Does anybody have any solution for =
-this?
+Hi
 
-Thanks and best regards,
-Andy=20
+Today Marco Cavallini pointed me to his failed build: 
+http://tinderbox.openembedded.net/builds/21533/?page=1
+
+Image was not created due to lack of 'modutils-depmod' package. But 
+where from it took this dependency...
+
+I took a look and found. Our 'update-modules' recipe has 
+PACKAGE_ARCH=all but relies on MACHINE_FEATURES to check between 2.4 and 
+2.6 behaviour (modutils-depmod contra module-init-tools-depmod). So if 
+you do build for target which does not have 'kernel26' feature listed 
+(for example: vortex86sx) you will get 'update-modules' package 
+(ARCH:all) which depends on 'modutils-depmod' which will not be built 
+for other targets.
+
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
+
 
