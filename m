@@ -1,38 +1,39 @@
-Received: from [209.85.198.249] (helo=rv-out-0708.google.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MY4rj-00009c-R2
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MY4xU-0000Qw-18
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Aug 2009 23:14:44 +0200
-Received: by rv-out-0708.google.com with SMTP id l33so1009978rvb.12
+	Mon, 03 Aug 2009 23:20:40 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id D114A2200118
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Aug 2009 13:59:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=S635yfkGLWnbgTVwmgC3COWmQCyPGal+a6ZGs/F7fxg=;
-	b=DOP5JgO5Ul65yAakLfaOXhqLa086nxOdE40guMOyt/Q8D2DIvqQn/ke1i2+/Em/Qe/
-	r7RzhBnPv/hk4CGodUMQ9uYIrB8e6DdyzlVEUwmvqOf1JN5fa7OyVTU5wH5VMj5ZUHQT
-	Ge48PYZ1pMT+gCRT9d1ryOYHukHCjXK5ITDwA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=dv1ruoObTW40iWQ3HG7QJ7cUCcGWHhsf4OaEEPM6tiS9isWr2g9uoSTt6+prTgyLl6
-	KJAXMCKwb5e6q4UotZwhZkIsIzovos0pLhXh57xCO7Aj78BvETnY/W5HFsvMGDXadN3i
-	bZCXlPFGPim7wL05X7IA1QFyI1mwOYYd5zBW0=
-Received: by 10.140.225.9 with SMTP id x9mr1658112rvg.175.1249333155248;
-	Mon, 03 Aug 2009 13:59:15 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-25-49.dsl.pltn13.sbcglobal.net
-	[71.146.25.49])
-	by mx.google.com with ESMTPS id k37sm1362358rvb.2.2009.08.03.13.59.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 03 Aug 2009 13:59:14 -0700 (PDT)
-Date: Mon, 3 Aug 2009 13:59:09 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Mon,  3 Aug 2009 23:05:11 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 5C41A2200114
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  3 Aug 2009 23:04:57 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (g225073218.adsl.alicedsl.de
+	[92.225.73.218]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  3 Aug 2009 23:04:57 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 817CF3C324; Mon,  3 Aug 2009 23:04:56 +0200 (CEST)
+Date: Mon, 3 Aug 2009 23:04:56 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090803205909.GA24609@gmail.com>
+Message-ID: <20090803210456.GA7093@rhein.zuhause.netz>
+References: <20090803205143.GA19457@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: Renaming gcc 4.4.0 to 4.4.1
+In-Reply-To: <20090803205143.GA19457@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [RFC] Removing uclibc recipes older than 0.9.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2009 21:14:44 -0000
+X-List-Received-Date: Mon, 03 Aug 2009 21:20:40 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi
+On Mon, Aug 03, 2009 at 01:51:43PM -0700, Khem Raj wrote:
+> Hi
+> 
+> I would like to propose to remove uclibc recipes which are older than
+> 0.9.28. If no one objects then I will go ahead with the deletion next
+> week.
+> 
+> Thanks
+> 
+> -Khem
+> 
+ACK ACK ACK
 
-Now that gcc 4.4.1 is out I would like to add the recipe but if gcc
-4.4.0 is not been used then I would prefer to move gcc 4.4.0 to 4.4.1 
-and reduce a few recipes.
-
-If no one objects I will go ahead with moving them next week
-
-Thanks
-
--Khem
-
-
+Bye Henning
 
 
