@@ -1,39 +1,24 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1MY4xU-0000Qw-18
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 Aug 2009 23:20:40 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id D114A2200118
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Aug 2009 23:05:11 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 5C41A2200114
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Aug 2009 23:04:57 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (g225073218.adsl.alicedsl.de
-	[92.225.73.218]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Aug 2009 23:04:57 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 817CF3C324; Mon,  3 Aug 2009 23:04:56 +0200 (CEST)
-Date: Mon, 3 Aug 2009 23:04:56 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <denis@denix.org>)
+	id 1MY5nN-00080p-CQ; Tue, 04 Aug 2009 00:14:17 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit))
+	with ESMTPA id <0KNT00LVAMDATXL5@vms173005.mailsrvcs.net>; Mon,
+	03 Aug 2009 16:58:27 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 05C0914AF5F; Mon,
+	03 Aug 2009 17:58:22 -0400 (EDT)
+Date: Mon, 03 Aug 2009 17:58:21 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090803210456.GA7093@rhein.zuhause.netz>
-References: <20090803205143.GA19457@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20090803205143.GA19457@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [RFC] Removing uclibc recipes older than 0.9.28
+Message-id: <20090803215821.GA25660@denix.org>
+References: <4A5F451C.6000103@balister.org>
+MIME-version: 1.0
+In-reply-to: <4A5F451C.6000103@balister.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Cc: openembedded-members@lists.openembedded.org
+Subject: Re: OE eV General Assembly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +32,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Aug 2009 21:20:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 03 Aug 2009 22:14:18 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Mon, Aug 03, 2009 at 01:51:43PM -0700, Khem Raj wrote:
-> Hi
-> 
-> I would like to propose to remove uclibc recipes which are older than
-> 0.9.28. If no one objects then I will go ahead with the deletion next
-> week.
-> 
-> Thanks
-> 
-> -Khem
-> 
-ACK ACK ACK
+On Thu, Jul 16, 2009 at 11:19:56AM -0400, Philip Balister wrote:
+> This meeting does not take the place of the OEDEM also under discussion.
 
-Bye Henning
+Are there any updates regarding the OEDEM timeframe?
+
+-- 
+Denys
 
 
