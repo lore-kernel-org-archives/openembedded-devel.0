@@ -1,31 +1,32 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.218.221] (helo=mail-bw0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MYK9q-0002Bo-8s
+	(envelope-from <stuart68@gmail.com>) id 1MYKWt-000325-AX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Aug 2009 15:34:26 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id DAA441409713
+	Tue, 04 Aug 2009 15:58:15 +0200
+Received: by bwz21 with SMTP id 21so2972299bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2009 15:22:26 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OCg7i2S-DB+R
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2009 15:22:26 +0200 (CEST)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id A3C651416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2009 15:22:26 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Tue, 04 Aug 2009 06:42:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=FY1KVcV/MtDrecz/gheeHW4evM5sec2ekq5Sv6vFhFI=;
+	b=epVOP9iax/FHJ+gzXAx/GngzKSG+R2DjAXrCoMCLsJES93yo7oauOCdMRn8dj+8r7p
+	1cUD12CMOl8UxOcosA1ZObmo1LFBwiLewUr2CrvWuP/CXzjeaTGEHdketgul8JtMcAxH
+	d0M0tv1a3hXw7Lb6O6eM+6BZ39H4tJa9OedlY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=fx9wsSt2QUtTVEPqLrt1RmCg6La6g2ZyoWyuOMjTbi+Ie4RXfbJSBfD0yFRseb5Bxc
+	6ZhMjrSv/wgJcFY5hZmIAGj0cKEgKT3X1DPgckWTrJYaN3BewF5v/RHAd8t62/O771AR
+	nxCiRTvjfbHeVwjJCHH69hMSfqy23Tknog2gs=
+MIME-Version: 1.0
+Received: by 10.204.60.133 with SMTP id p5mr6699425bkh.143.1249393360663; Tue, 
+	04 Aug 2009 06:42:40 -0700 (PDT)
+Date: Tue, 4 Aug 2009 14:42:40 +0100
+Message-ID: <91283b620908040642t174a21baif74f986ff3b00f7c@mail.gmail.com>
+From: Stuart Gray <stuart68@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200908031513.05326.marcin@juszkiewicz.com.pl>
-References: <200908031513.05326.marcin@juszkiewicz.com.pl>
-Date: Tue, 04 Aug 2009 15:18:53 +0200
-Message-Id: <1249391933.21103.58.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.27.2 
-Subject: Re: [RFC] Xserver-common 1.30
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Trying to build a console image with qt4-embedded without gles being included
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,126 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 13:34:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 04 Aug 2009 13:58:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz wrote:
-> Hi
-> 
-> We have two packages which do similar things: 
-> 
-> - xserver-common from GPE
-> - xserver-kdrive-common from Poky
-> 
-> Basically they do the same -- select proper XServer, arguments to pass 
-> for it and have session scripts. Kdrive version uses 'xinit' to 
-> initialize X11 session as root user, GPE version is expected to be used 
-> with gpe-dm/gpe-login combo which handles user login.
-> 
-> This gave us few mistakes in past - some developers patched one of them 
-> for their device but the other one was used in image etc.
+Hi,
 
-Yes semi-pseudo-universal files makes it hardly maintainable.
-Maintainers of different platforms afraid or removing obsolete hacks for
-a different platform and add their own hack instead.
+I am trying to build an image with qt4 embedded support. Using recipe qt4/
+qt4-embedded_4.5.2.bb as I have no graphics capabilities on my target
+hardware I do not want to include open GL (gles).
 
-> Some time ago I looked at xserver-common 1.25 and created over 20 
-> patches for it:
-> 
-> - moved xmodmap files to xmodmap/ dir
-> - use machine_id from init.d/functions
+Can anyone tell me how I achieve this as each time I build it is using the
+recipe qt4/qt4-embedded-gles_4.5.2.bb.
 
-What about /etc/default/machine_id (possibly generated on the first
-boot)? It would save several launching of AWK interpreter in scripts.
+I have tried to rebuild using -c clean and -c rebuild. Then deleting all qt4
+directories from my tmp/work folder to force the rebuild of the code. Each
+time it comes back to build gles.
 
-> - xserver:
+I have deleted my tmp directory and started the build from scratch, but if
+anyone has any suggestions I'd really appreciate it. Already the nummber of
+tasks has greatly reduced after deleting tmp and starting the build again.
 
-Well, universal simple wrapper using machine-specific
-/etc/default/xserver would make sense. I can imagine arguments like:
-XSERVER_TYPE, KDRIVE_EXTRA_ARGS, XORG_EXTRA_ARGS, DPI,
-DISPLAY_ORIENTATION, INPUT_ORIENTATION and others, if they will be
-needed.
+Why is this? Is there something within tmp that can be deleted to ensure
+that there is a clean build.
 
-In particular, Xserver script tries to cover both xorg and kdrive, but
-xorg/kdrive switch is installed-packages-based, but machine detection is
-hardware based.
-
-As a result, installing xorg on a machine configured for kdrive causes a
-Xorg syntax error - xorg does not understand most of the arguments, just
-only -dpi.
-
-> - xserver: introduced MOUSE variable for "-mouse" argument (KDrive only)
-Or KDRIVE_MOUSE= in /etc/default/display?
-
-> Most of patches were used to create 1.30 version which is available as 
-> tarball from GPE project. But due to my fault this version is broken...
-> 
-> Today I pushed 1.30 into OE metadata with few other patches which are 
-> expected to fix errors left in 1.30 release. It was not too much tested 
-> on devices so beware if your target do not works properly with it.
-> 
-> In short my patching ideas were:
-> 
-> - set DPI in separate variable instead of being part of ARGS
->   + some devices needs only DPI setting
->   + default ARGS are usually fine for devices
-> - use /etc/default/xserver for setting ARGS/DPI for new devices
->   + no need to patch Xserver anymore
->   + easy to tweak on device itself
-
-Yes, it's a good idea.
-
-> - xmodmap stuff should be machine dependent so only one xmodmap is
->   present on device
-
-Yes, and skip checks for platform in 12keymap
-
->   (this part was not done yet)
-
-Agree, but:
-
-- the keymap-fixup multiple load hack should be moved to kdrive >= 1.4
-packages.
-
-- XKB-less kdrive installations may even live completely without X
-keyboard map
-
-- Xorg installations may live without calling xmodmap explicitly
-
-Other notes:
-
-setdpi looks like a black magic, making X resources file machine
-specific would make more sense
-
-40xmodmap. What is the purpose? Which platform has /proc/hal?
-
-01xrandr (set the default default orientation) seems to be obsolete
-
-> - zaurusd, devmand should provide session scripts instead of being
->   called from Ts_calibrate script
->   (this part was not done yet)
-
-zaurusd should be started during boot. There is no need to start it in X
-session scripts (well, the way zaurusd accesses DISPLAY is incredibly
-ugly). I don't know devmand.
-
-> I would like other developers to use it and test does it work on their 
-> devices.
-> 
-> In future I would like to add support for using "xinit" in 
-> /etc/X11/Xserver so 'xserver-common' package could be used for rootmode 
-> X11 systems (which would eliminate 'xserver-kdrive-common' package).
-> 
-> What do you think about it?
-
-Yes, everything that gets rid mix of common code, platform specific
-hacks, hardware specific hacks and software specific hacks makes a lot
-of sense.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
-
+Regards,
+Stuart
 
