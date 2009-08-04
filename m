@@ -1,21 +1,28 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MYKiw-0003Yu-4T
+	(envelope-from <msmith@cbnco.com>) id 1MYL8o-0001Uf-Q0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Aug 2009 16:11:22 +0200
-Received: from tamarin.localnet (unknown [211.48.194.125])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 033F61B10C08
+	Tue, 04 Aug 2009 16:37:28 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 903581FB496
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2009 13:57:45 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 4 Aug 2009 15:54:56 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.2.98; i686; ; )
-References: <91283b620908040642t174a21baif74f986ff3b00f7c@mail.gmail.com>
-In-Reply-To: <91283b620908040642t174a21baif74f986ff3b00f7c@mail.gmail.com>
+	Tue,  4 Aug 2009 10:21:53 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 05497-07 for <openembedded-devel@lists.openembedded.org>; 
+	Tue,  4 Aug 2009 10:21:52 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 814A852CAF9
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 10:21:52 -0400 (EDT)
+Message-ID: <4A784400.7010200@cbnco.com>
+Date: Tue, 04 Aug 2009 10:21:52 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Message-Id: <200908041554.56093.holger+oe@freyther.de>
-Subject: Re: Trying to build a console image with qt4-embedded without gles being included
+To: openembedded-devel@lists.openembedded.org
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Kernel staging on x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,26 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 14:12:22 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 04 Aug 2009 14:37:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tuesday 04 August 2009 15:42:40 Stuart Gray wrote:
-> Hi,
->
-> I am trying to build an image with qt4 embedded support. Using recipe qt4/
-> qt4-embedded_4.5.2.bb as I have no graphics capabilities on my target
-> hardware I do not want to include open GL (gles).
+Hi,
 
-Update?
+There have been a couple of patches to fix asm-x86 header staging:
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/qt4
+http://patchwork.openembedded.org/patch/455/
 
-has the gles versions moved to disabled... so they should not be used.
+http://patchwork.openembedded.org/patch/746/
 
+Could someone please apply one of them?
 
-z.
+I've been using the first patch to fix builds of nvidia-display and 
+madwifi. I haven't tested the second patch; I think it does exactly the 
+same thing on x86, although I'm not sure what it will do on a non-x86 
+platform (e.g. on arm would it copy x86 files into 
+${STAGING_KERNEL_DIR}/include/asm-arm?).
 
+Thanks,
+Mike
 
 
