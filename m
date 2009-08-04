@@ -1,21 +1,39 @@
-Received: from [17.148.16.93] (helo=asmtpout018.mac.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1MYMNj-0001Uo-1M
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MYOBt-0000XX-TT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Aug 2009 17:56:59 +0200
-MIME-version: 1.0
-Received: from [87.201.169.28] by asmtp018.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KNU002ALZK2HBA0@asmtp018.mac.com> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	04 Aug 2009 08:41:01 -0700 (PDT)
-Message-id: <03CA8FE8-A2BC-4B25-B4DC-812309A65456@mac.com>
-From: Elvis Dowson <elvis.dowson@mac.com>
-To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
-In-reply-to: <13DFAA6B-CB0C-4A52-97FF-8B57A362F1D9@mac.com>
-Date: Tue, 04 Aug 2009 19:40:10 +0400
+	Tue, 04 Aug 2009 19:52:55 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 44F452200144
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 19:37:16 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7CABF2200118
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 19:37:15 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (g225145220.adsl.alicedsl.de
+	[92.225.145.220]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 19:37:15 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 9B4723C324; Tue,  4 Aug 2009 19:37:14 +0200 (CEST)
+Date: Tue, 4 Aug 2009 19:37:14 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090804173714.GA11596@rhein.zuhause.netz>
 References: <13DFAA6B-CB0C-4A52-97FF-8B57A362F1D9@mac.com>
-X-Mailer: Apple Mail (2.935.3)
+	<03CA8FE8-A2BC-4B25-B4DC-812309A65456@mac.com>
+MIME-Version: 1.0
+In-Reply-To: <03CA8FE8-A2BC-4B25-B4DC-812309A65456@mac.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: No more e2fsprogs and other package build errors with latest oe update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,27 +48,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 15:57:09 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Tue, 04 Aug 2009 17:53:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Oh, and another bit of good news, the new updates require 6GB less of  
-total hard disk space, compare to what it used to take earlier.
-
-Elvis
-
-On Aug 4, 2009, at 4:30 PM, Elvis Dowson wrote:
-
-> Hi Guys,
->                  I just did a update of my overo-oe repository today  
-> and I'm pleased to find that those pesky intermittent build failures  
-> with e2fsprogs and a couple of other recipes don't happen anymore  
-> when building the omap3-console-image.
->
-> Best regards,
->
+On Tue, Aug 04, 2009 at 07:40:10PM +0400, Elvis Dowson wrote:
+> Oh, and another bit of good news, the new updates require 6GB less
+> of total hard disk space, compare to what it used to take earlier.
+> 
 > Elvis
->
 
+Problem was, that angstroem used debug options for native/host binary too.
+
+Bye Henning
 
 
