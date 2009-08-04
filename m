@@ -1,31 +1,39 @@
-Received: from [58.185.154.238] (helo=cassis-intl.com)
+Received: from [209.85.216.196] (helo=mail-px0-f196.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <galvez.andy@cassis-intl.com>) id 1MY99I-0002un-Lr
-	for openembedded-devel@openembedded.org; Tue, 04 Aug 2009 03:49:12 +0200
-Received: (qmail 23690 invoked by uid 509); 4 Aug 2009 09:27:27 +0800
-Received: from 10.65.9.1 by postman.cassis-intl.com (envelope-from
-	<galvez.andy@cassis-intl.com>,
-	uid 501) with qmail-scanner-1.25-st-qms 
-	(clamdscan: 0.83/1213. spamassassin: 3.0.4. perlscan: 1.25-st-qms.  
-	Clear:RC:1(10.65.9.1):. 
-	Processed in 0.023598 secs); 04 Aug 2009 01:27:27 -0000
-X-Antivirus-MYDOMAIN-Mail-From: galvez.andy@cassis-intl.com via
-	postman.cassis-intl.com
-X-Antivirus-MYDOMAIN: 1.25-st-qms (Clear:RC:1(10.65.9.1):. Processed in
-	0.023598 secs Process 23684)
-Received: from unknown (HELO galvezljxpdt1) (10.65.9.1)
-	by cassis-intl.com with SMTP; 4 Aug 2009 09:27:26 +0800
-Message-ID: <5D625D5E41684E69BBA0964CAD4FAC65@sg01.cassis>
-From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <576338E6E56E404D801ACFEEF7A09CCE@sg01.cassis>
-Date: Tue, 4 Aug 2009 09:41:57 +0800
+	(envelope-from <graham.gower@gmail.com>) id 1MY9rX-0001P7-M2
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Aug 2009 04:34:52 +0200
+Received: by pxi34 with SMTP id 34so5432883pxi.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Aug 2009 19:19:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=6+tCa9e0CN7VSMV+Kj1/XIruBvI1zwtElCSK6SQHBWo=;
+	b=Fo/mExdiuSF6JYllCNf1WcWlCR0BiGhKmsXTF5NnztDTDknfGuCOHXSRtwziGFj07Y
+	1APgn4dVNZnNm/lSZVIhkXTKwOrJPfQPG44NOZvt/ZCCmCejsS/wFJwo4TAOjpOw4daD
+	5zNgQ1HKIAfOrpddjpQz2H+MAmZ3WpN5XgRkk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=Z3ahMnxJbLoxZxmKruLUh0dWPpYpYqagE6ZrXecUMeUiv8TDZQTLCrgiHj/wKgUrhS
+	bvh1LU9IwVZYHgYbXNvSRqsoWLeZMsT9/tdOsiKodMpi+rYkWuxhOmje226l8qDAwcht
+	0fJn5GzMRQUIS8vtfjSPanluHO3x4oPp1w9R8=
+Received: by 10.140.134.10 with SMTP id h10mr4350538rvd.7.1249352355791;
+	Mon, 03 Aug 2009 19:19:15 -0700 (PDT)
+Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	g31sm3545816rvb.56.2009.08.03.19.19.13
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 03 Aug 2009 19:19:15 -0700 (PDT)
+Message-ID: <4A779A94.6080305@gmail.com>
+Date: Tue, 04 Aug 2009 11:49:00 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5512
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-Subject: Re: t1lib QA Issues
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] Fix libgcrypt compilation with GCC-4.4 on mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +47,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 01:49:12 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=original
+X-List-Received-Date: Tue, 04 Aug 2009 02:34:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello guys,
+01234567890123456789012345678901234567890123456789012345678901234567890123456789
 
-    Any ideas on this matter?
+Patch taken from https://forum.openwrt.org/viewtopic.php?id=20520
+Makes sense and seems to work ok.
 
-Thanks and best regards,
-Andy
+libgcrypt.inc has --disable-asm in EXTRA_OECONF, yet strangely the configure
+script does nothing with this information beyond parsing it. Assembler is
+certainly still being used.
 
------ Original Message ----- 
-From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
-To: <openembedded-devel@lists.openembedded.org>
-Sent: Monday, August 03, 2009 6:59 PM
-Subject: [oe] t1lib QA Issues
+-Graham
 
-
-> Hi,
->
->    I am trying to build opie-image using openembedded. I am receiving QA 
-> Issues with the t1lib having "no GNU_HASH in the elf binary: 
-> .../usr/lib/libt1.so.5.0.2" and "no GNU_HASH in the elf binary: 
-> .../usr/lib/libt1x.so.5.0.2" and having "non -dev package contains symlink 
-> .so: .../usr/lib/libt1x.so" and "non -dev package contains symlink .so: 
-> .../usr/lib/libt1.so". Does anybody have any solution for this?
->
-> Thanks and best regards,
-> Andy
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
+diff --git a/recipes/libgcrypt/files/mips-h-constraint.patch b/recipes/libgcrypt/files/mips-h-constraint.patch
+new file mode 100644
+index 0000000..20566bc
+--- /dev/null
++++ b/recipes/libgcrypt/files/mips-h-constraint.patch
+@@ -0,0 +1,70 @@
++The MIPS port for GCC-4.4 no longer recognizes the h asm constraint.
++Patch from: https://forum.openwrt.org/viewtopic.php?id=20520
++
++--- libgcrypt/mpi/longlong.h-asdf	2009-08-04 09:58:51.000000000 +0930
+++++ libgcrypt/mpi/longlong.h	2009-08-04 10:10:27.000000000 +0930
++@@ -710,18 +710,35 @@
++ #endif /* __m88110__ */
++ #endif /* __m88000__ */
++ 
+++/* Test for gcc >= maj.min, as per __GNUC_PREREQ in glibc */
+++#if defined (__GNUC__) && defined (__GNUC_MINOR__)
+++#define __GNUC_PREREQ(maj, min) \
+++	((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))
+++#else
+++#define __GNUC_PREREQ(maj, min)  0
+++#endif
+++
++ /***************************************
++  **************  MIPS  *****************
++  ***************************************/
++ #if defined (__mips__) && W_TYPE_SIZE == 32
++-#if __GNUC__ > 2 || __GNUC_MINOR__ >= 7
+++#if __GNUC_PREREQ (4,4)
+++#define umul_ppmm(w1, w0, u, v) \
+++  do {                                                                 \
+++    UDItype __ll = (UDItype)(u) * (v);                                 \
+++    w1 = __ll >> 32;                                                   \
+++    w0 = __ll;                                                         \
+++  } while (0)
+++#endif
+++#if !defined (umul_ppmm) && __GNUC_PREREQ (2,7)
++ #define umul_ppmm(w1, w0, u, v) \
++   __asm__ ("multu %2,%3"                                                \
++ 	   : "=l" ((USItype)(w0)),                                      \
++ 	     "=h" ((USItype)(w1))                                       \
++ 	   : "d" ((USItype)(u)),                                        \
++ 	     "d" ((USItype)(v)))
++-#else
+++#endif
+++#if !defined (umul_ppmm)
++ #define umul_ppmm(w1, w0, u, v) \
++   __asm__ ("multu %2,%3 \n" \
++ 	   "mflo %0 \n"     \
++@@ -739,14 +756,24 @@
++  **************  MIPS/64  **************
++  ***************************************/
++ #if (defined (__mips) && __mips >= 3) && W_TYPE_SIZE == 64
++-#if __GNUC__ > 2 || __GNUC_MINOR__ >= 7
+++#if __GNUC_PREREQ (4,4)
+++#define umul_ppmm(w1, w0, u, v) \
+++  do {                                                                 \
+++    typedef unsigned int __ll_UTItype __attribute__((mode(TI)));       \
+++    __ll_UTItype __ll = (__ll_UTItype)(u) * (v);                       \
+++    w1 = __ll >> 64;                                                   \
+++    w0 = __ll;                                                         \
+++  } while (0)
+++#endif
+++#if !defined (umul_ppmm) && __GNUC_PREREQ (2,7)
++ #define umul_ppmm(w1, w0, u, v) \
++   __asm__ ("dmultu %2,%3"                                               \
++ 	   : "=l" ((UDItype)(w0)),                                      \
++ 	     "=h" ((UDItype)(w1))                                       \
++ 	   : "d" ((UDItype)(u)),                                        \
++ 	     "d" ((UDItype)(v)))
++-#else
+++#endif
+++#if !defined (umul_ppmm)
++ #define umul_ppmm(w1, w0, u, v) \
++   __asm__ ("dmultu %2,%3 \n"    \
++ 	   "mflo %0 \n"         \
+diff --git a/recipes/libgcrypt/libgcrypt.inc b/recipes/libgcrypt/libgcrypt.inc
+index 691f4fe..4f78a0f 100644
+--- a/recipes/libgcrypt/libgcrypt.inc
++++ b/recipes/libgcrypt/libgcrypt.inc
+@@ -5,7 +5,8 @@ LICENSE = "GPL LGPL FDL"
+ DEPENDS = "libgpg-error"
+ 
+ SRC_URI = "ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-${PV}.tar.gz \
+-           file://add-pkgconfig-support.patch;patch=1"
++           file://add-pkgconfig-support.patch;patch=1 \
++	   file://mips-h-constraint.patch;patch=1"
+ 
+ inherit autotools binconfig pkgconfig lib_package
+ 
 
 
