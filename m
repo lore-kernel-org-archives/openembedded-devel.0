@@ -1,28 +1,22 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [17.148.16.93] (helo=asmtpout018.mac.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MYLok-000334-QF
+	(envelope-from <elvis.dowson@mac.com>) id 1MYMNj-0001Uo-1M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Aug 2009 17:20:49 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 7D6FA52CF1D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2009 11:05:13 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 16437-02 for <openembedded-devel@lists.openembedded.org>; 
-	Tue,  4 Aug 2009 11:05:13 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id DDC3E52CF12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Aug 2009 11:05:12 -0400 (EDT)
-Message-ID: <4A784E25.7040709@cbnco.com>
-Date: Tue, 04 Aug 2009 11:05:09 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Misc patches - openssh, etc.
+	Tue, 04 Aug 2009 17:56:59 +0200
+MIME-version: 1.0
+Received: from [87.201.169.28] by asmtp018.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KNU002ALZK2HBA0@asmtp018.mac.com> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	04 Aug 2009 08:41:01 -0700 (PDT)
+Message-id: <03CA8FE8-A2BC-4B25-B4DC-812309A65456@mac.com>
+From: Elvis Dowson <elvis.dowson@mac.com>
+To: OpenEmbedded Developers <openembedded-devel@lists.openembedded.org>
+In-reply-to: <13DFAA6B-CB0C-4A52-97FF-8B57A362F1D9@mac.com>
+Date: Tue, 04 Aug 2009 19:40:10 +0400
+References: <13DFAA6B-CB0C-4A52-97FF-8B57A362F1D9@mac.com>
+X-Mailer: Apple Mail (2.935.3)
+Subject: Re: No more e2fsprogs and other package build errors with latest oe update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,40 +30,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 15:21:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 04 Aug 2009 15:57:09 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 
-Hi,
+Oh, and another bit of good news, the new updates require 6GB less of  
+total hard disk space, compare to what it used to take earlier.
 
-I've got a few patches pending. I'm wondering if someone could take some 
-time and look into applying them.
+Elvis
 
-source-checker: usability tweaks;
-oe-checksums-sorter.py: speed up about 4X using a hash
-http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/source-checker/
+On Aug 4, 2009, at 4:30 PM, Elvis Dowson wrote:
 
-openssh.inc: cleanup
-http://patchwork.openembedded.org/patch/860/
+> Hi Guys,
+>                  I just did a update of my overo-oe repository today  
+> and I'm pleased to find that those pesky intermittent build failures  
+> with e2fsprogs and a couple of other recipes don't happen anymore  
+> when building the omap3-console-image.
+>
+> Best regards,
+>
+> Elvis
+>
 
-hicolor-icon-theme: don't inherit gnome
-http://patchwork.openembedded.org/patch/870/
-(discussion & old patch here:
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/25224/focus=25230)
-
-mesa-dri and xorg-xserver-common tls fixes:
-http://patchwork.openembedded.org/bundle/msmith%40cbnco.com/mesa-tls/
-
-
-You can also pull these from:
-
-git://jrz.cbnco.com/toastix/openembedded-mike.git
-
-
-(but that tree also contains an unsubmitted patch to remove 
-DEFAULT_PREFERENCE="-1" from openssh 5.2, as suggested by Denis)
-
-Thanks,
-Mike
 
 
