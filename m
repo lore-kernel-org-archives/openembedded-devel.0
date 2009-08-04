@@ -1,35 +1,28 @@
-Received: from [209.85.218.221] (helo=mail-bw0-f221.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MYOGa-0000iU-1M
+	(envelope-from <jmahonin@cbnco.com>) id 1MYPSw-0000q7-I2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Aug 2009 19:57:44 +0200
-Received: by bwz21 with SMTP id 21so3110716bwz.12
+	Tue, 04 Aug 2009 21:14:30 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 2B7BC52D5F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Aug 2009 10:42:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=UAtgxT5IEJYzm+A6SCGzR/HHqYZhzKhN96pO6XsnYf4=;
-	b=YRCYci9UWObOsnRr877hDxZdsg2Tpj/OTrwhnHqzigzDyAQyB+NqRznhfq++cQ2ker
-	6KhEPDimSFfk8KVGGH0hDMUfb9UG6fz+8X3VvN8lCCENir1K4irtxEx2aXzsFWXqyuNQ
-	mKeKFOTgwPUGUPTaI6KT5fD2ys+NDjSvurA48=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=qHh9VKa38ek6wDFhXt28MKG7uf5cMbPekyxFEDKp2I295RGZhq3u5CoYGJ+BXQoaAO
-	FUUpxwRBSyrvw35H7xCe1vVcUDnlK0eTNfuBf1GzyRxn4W+8LHGfLmPj2mYO+ypk7SfC
-	zWjweJlGcDSkovYM/8DCbM3qIS1Pj7PSCkgdc=
+	Tue,  4 Aug 2009 14:58:56 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 27862-07 for <openembedded-devel@lists.openembedded.org>; 
+	Tue,  4 Aug 2009 14:58:56 -0400 (EDT)
+Received: from [172.20.22.81] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id DCF4652D5EF
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 14:58:55 -0400 (EDT)
+Message-ID: <4A7884EA.7070104@cbnco.com>
+Date: Tue, 04 Aug 2009 14:58:50 -0400
+From: Josh Mahonin <jmahonin@cbnco.com>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081112)
 MIME-Version: 1.0
-Received: by 10.239.160.84 with SMTP id b20mr687776hbd.149.1249407724044; Tue, 
-	04 Aug 2009 10:42:04 -0700 (PDT)
-In-Reply-To: <4A784400.7010200@cbnco.com>
-References: <4A784400.7010200@cbnco.com>
-Date: Tue, 4 Aug 2009 19:42:04 +0200
-Message-ID: <c384c5ea0908041042q1c4e3fe8i2f553c3746ddb978@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Kernel staging on x86
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: [RFC] Issues with 'RDEPENDS kernel' in module.bbclass using .deb packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +36,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 17:57:58 -0000
+X-List-Received-Date: Tue, 04 Aug 2009 19:14:30 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi all,
 
-On Tue, Aug 4, 2009 at 4:21 PM, Michael Smith<msmith@cbnco.com> wrote:
-> There have been a couple of patches to fix asm-x86 header staging:
->
-> http://patchwork.openembedded.org/patch/455/
->
-> http://patchwork.openembedded.org/patch/746/
->
-> Could someone please apply one of them?
->
-> I've been using the first patch to fix builds of nvidia-display and madwifi.
->
-Sure, I would like to test it first, I was looking into updating
-nvidia-display a while back, but got distracted with non-x86 work
-again.
-
-What MACHINE/DISTRO/IMAGE combo did you test on? i686/angstrom/minimal?
+I'm working on an updated recipe for nvidia-display, but unfortunately
+during the rootfs stage of building an image it errors out on :
+---
+The following packages have unmet dependencies:
+  nvidia-display: Depends: kernel (= 2.6.30) but 2.6.30-r1 is to be
+installed
+---
 
 
-Regards,
--- 
-Leon
+Now I'm building debian style packages, so when I check /var/dpkg/status
+under the rootfs (which classes/rootfs_deb.bbclass uses) , sure enough I
+have an entry for the kernel, with both the PV and PR in the 'Version'
+field:
+---
+Package: kernel
+Status: install ok unpacked
+...
+Version: 2.6.30-r1
+...
+---
+
+
+In classes/module.bbclass, however, we have the RDEPENDS which matches
+only on PV, without the PR:
+---
+RDEPENDS += "kernel (${KERNEL_VERSION}) update-modules"
+---
+
+In the meantime I've worked around it by removing the KERNEL_VERSION
+requirement in module.bbclass, although I don't think that's really the
+right way to do it.
+
+I suppose I could remove writing the PR to the status file, although
+that might be useful to keep as a reference when upgrading packages
+later.  It looks IPK-style packages also keep the PR in the version
+field - is this an issue for those users as well, or is this DEB specific?
+
+Are there any thoughts as to the right way to fix this issue?
+
+Thanks in advance,
+
+Josh
 
 
