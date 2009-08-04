@@ -1,32 +1,40 @@
-Received: from [58.185.154.238] (helo=cassis-intl.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <galvez.andy@cassis-intl.com>) id 1MYF7r-0007YK-Vx
-	for openembedded-devel@openembedded.org; Tue, 04 Aug 2009 10:12:04 +0200
-Received: (qmail 616 invoked by uid 509); 4 Aug 2009 15:50:31 +0800
-Received: from 10.65.9.1 by postman.cassis-intl.com (envelope-from
-	<galvez.andy@cassis-intl.com>,
-	uid 501) with qmail-scanner-1.25-st-qms 
-	(clamdscan: 0.83/1213. spamassassin: 3.0.4. perlscan: 1.25-st-qms.  
-	Clear:RC:1(10.65.9.1):. 
-	Processed in 0.028914 secs); 04 Aug 2009 07:50:31 -0000
-X-Antivirus-MYDOMAIN-Mail-From: galvez.andy@cassis-intl.com via
-	postman.cassis-intl.com
-X-Antivirus-MYDOMAIN: 1.25-st-qms (Clear:RC:1(10.65.9.1):. Processed in
-	0.028914 secs Process 607)
-Received: from unknown (HELO galvezljxpdt1) (10.65.9.1)
-	by cassis-intl.com with SMTP; 4 Aug 2009 15:50:31 +0800
-Message-ID: <692E39F5C0F84D57B815E444BA48113E@sg01.cassis>
-From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <BE93AD82B8E74B89970AC1E6DFDE5F41@sg01.cassis>
-	<90E363457108403A8D1661019AF822FA@sg01.cassis>
-Date: Tue, 4 Aug 2009 16:05:04 +0800
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MYFBo-0007sS-0p
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 Aug 2009 10:16:08 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7D509220010A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 10:00:35 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id AD8F52200108
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 10:00:34 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (g225074247.adsl.alicedsl.de
+	[92.225.74.247]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Aug 2009 10:00:34 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id DD00B3C324; Tue,  4 Aug 2009 10:00:33 +0200 (CEST)
+Date: Tue, 4 Aug 2009 10:00:33 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20090804080033.GA22504@rhein.zuhause.netz>
+References: <576338E6E56E404D801ACFEEF7A09CCE@sg01.cassis>
+	<5D625D5E41684E69BBA0964CAD4FAC65@sg01.cassis>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5512
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-Subject: Re: Cannot find package angstrom-version.
+In-Reply-To: <5D625D5E41684E69BBA0964CAD4FAC65@sg01.cassis>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: t1lib QA Issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,74 +48,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 08:12:05 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=response
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 04 Aug 2009 08:16:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
-
-    Anybody can help me through this issue?
-
-Thanks and best regards,
-Andy
-
------ Original Message ----- 
-From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
-To: <openembedded-devel@lists.openembedded.org>
-Sent: Tuesday, August 04, 2009 1:23 PM
-Subject: Re: [oe] Cannot find package angstrom-version.
-
-
-> Also, I am getting a lot of "opkg: Cannot create directory 
-> `/var/lib/opkg': Permission denied" in my opkg-cl commands based on the 
-> log.do_rootfs logfile.
->
-> ----- Original Message ----- 
-> From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
-> To: <openembedded-devel@lists.openembedded.org>
-> Sent: Tuesday, August 04, 2009 1:10 PM
-> Subject: [oe] Cannot find package angstrom-version.
->
->
->> Hi,
->>
->>    I am trying to build opie-image using openembedded. while doing the 
->> do_rootfs stage, my build encountered the error below.  Anybody knows how 
->> I can get around with it? I even manually issued bitbake angstrom-version 
->> to get around it thinking that the dependency is somehow broken, it built 
->> it and it finished the build for the angstrom-version but when I re 
->> issued the bitbake opie-image, again it failed with the same error as 
->> shown below. Anybody can help?
->>
->> log_check: There were error messages in the logfile
->> log_check: Matched keyword: [Cannot find package]
->>  *  angstrom-version *
->> * Cannot find package angstrom-version.
->> + export D=/media/OpieDrive/oebase/dragon/tmp/rootfs/opie-image
->>
->> log_check: There were error messages in the logfile
->> log_check: Matched keyword: [Cannot satisfy the following dependencies]
->> Collected errors:
->> * ERROR: Cannot satisfy the following dependencies for 
->> task-base-extended:
->>  *  angstrom-version
->>
->> Thanks and best regards,
->> Andy
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On Tue, Aug 04, 2009 at 09:41:57AM +0800, Leandro Q. Galvez wrote:
+> Hello guys,
+> 
+>    Any ideas on this matter?
+> 
+> Thanks and best regards,
+> Andy
 > 
 
+You must convince the buildsystem to accept our LDFLAGS.
+
+Searching either the dev-mailing list or git log with program like qgit,
+you would have find the answer your self.
+
+Bye Henning
+
+
+> <galvez.andy@cassis-intl.com>
+> To: <openembedded-devel@lists.openembedded.org>
+> Sent: Monday, August 03, 2009 6:59 PM
+> Subject: [oe] t1lib QA Issues
+> 
+> 
+> >Hi,
+> >
+> >   I am trying to build opie-image using openembedded. I am
+> >receiving QA Issues with the t1lib having "no GNU_HASH in the elf
+> >binary: .../usr/lib/libt1.so.5.0.2" and "no GNU_HASH in the elf
+> >binary: .../usr/lib/libt1x.so.5.0.2" and having "non -dev package
+> >contains symlink .so: .../usr/lib/libt1x.so" and "non -dev package
+> >contains symlink .so: .../usr/lib/libt1.so". Does anybody have any
+> >solution for this?
+> >
+> >Thanks and best regards,
+> >Andy
+> >_______________________________________________
+> >Openembedded-devel mailing list
+> >Openembedded-devel@lists.openembedded.org
+> >http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
 
 
