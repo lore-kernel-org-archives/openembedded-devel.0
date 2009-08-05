@@ -1,39 +1,30 @@
-Received: from [209.85.222.193] (helo=mail-pz0-f193.google.com)
+Received: from [58.185.154.238] (helo=cassis-intl.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MYUce-0003hZ-Us
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Aug 2009 02:44:53 +0200
-Received: by pzk31 with SMTP id 31so4673203pzk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Aug 2009 17:29:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=mtNlmJsq87TAFh5KS56YuVa0wII315MU/DAlp+9xi20=;
-	b=abr6tLny1+0hSyAITTG6yvfPjtXUaST0IOaL3XNQpFz4W7GAXlI9GUaGDH/AkRx7Ox
-	oyZbvJvY2+k4NV15s8q8wHWLfJzOOFlh7oN/RKLhMxQIxgzBu1niG6Rp/lf9sjXoRYph
-	SQB0FpHV4fLo7Fc2Ur6tmdVWBDo7Bweiv71Uw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=FQ0aR+ulzoGnnjzkw8S3O7A2gghSgMYT8aY4lKqOprubXK5E810DtTx6bTNXQU7C/6
-	Qo2AqKrPitkdZkP4kNDhhCqMUtWwyr1CmucrZEroN5HHhwR4RFlnoatjeFjuFXwpQgpk
-	9NH6jujAhtYUUZdz1cbyCdWHltIPlwfSVbii8=
-Received: by 10.115.22.14 with SMTP id z14mr9514036wai.130.1249432154995;
-	Tue, 04 Aug 2009 17:29:14 -0700 (PDT)
-Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	k21sm6691643waf.24.2009.08.04.17.29.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 04 Aug 2009 17:29:13 -0700 (PDT)
-Message-ID: <4A78D247.7090605@gmail.com>
-Date: Wed, 05 Aug 2009 09:58:55 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+	(envelope-from <galvez.andy@cassis-intl.com>) id 1MYVa8-0002ol-9a
+	for openembedded-devel@openembedded.org; Wed, 05 Aug 2009 03:46:28 +0200
+Received: (qmail 17648 invoked by uid 509); 5 Aug 2009 09:24:31 +0800
+Received: from 10.65.9.1 by postman.cassis-intl.com (envelope-from
+	<galvez.andy@cassis-intl.com>,
+	uid 501) with qmail-scanner-1.25-st-qms 
+	(clamdscan: 0.83/1213. spamassassin: 3.0.4. perlscan: 1.25-st-qms.  
+	Clear:RC:1(10.65.9.1):. 
+	Processed in 0.022843 secs); 05 Aug 2009 01:24:31 -0000
+X-Antivirus-MYDOMAIN-Mail-From: galvez.andy@cassis-intl.com via
+	postman.cassis-intl.com
+X-Antivirus-MYDOMAIN: 1.25-st-qms (Clear:RC:1(10.65.9.1):. Processed in
+	0.022843 secs Process 17642)
+Received: from unknown (HELO galvezljxpdt1) (10.65.9.1)
+	by cassis-intl.com with SMTP; 5 Aug 2009 09:24:31 +0800
+Message-ID: <5C32738B30114A07A0B8DCEFF3CC92AB@sg01.cassis>
+From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 5 Aug 2009 09:39:08 +0800
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] fix libicu compilation with GCC-4.4 on mips
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5512
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+Subject: Openembedded Angstrom Distro Rootfs Creation Problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,32 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2009 00:44:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 05 Aug 2009 01:46:28 -0000
+Content-Type: text/plain; format=flowed; charset="iso-8859-1";
+	reply-type=original
 Content-Transfer-Encoding: 7bit
 
-Not sure if this one is mips specific or not, but linking fails due to
-missing -fPIC on rematch.o.
-| /home/grg/oe/tmp/cross/mipsel/lib/gcc/mipsel-angstrom-linux/4.4.1/../../../../mipsel-angstrom-linux/bin/ld: rematch.o: relocation R_MIPS_HI16 against `__gnu_local_gp' can not be used when making a shared object; recompile with -fPIC
+Hi,
 
-Perhaps someone who experienced the (arm specific?) gcc bug mentioned in
-commit 798c780a3a016e56d9b8849cf8a07521b6e402a9 can confirm this fix does
-not trigger the same bug?
+My opie-image is failing due to missing angstrom-version ipk file. When I 
+tried to rebuild the angdtrom-version recipe, I noticed that I have a 
+notification "NOTE: Not creating empty archive for 
+angstrom-version-2009.X-test-20090804-r2.3". Further, the opie-image build 
+is throwing "Cannot find package angstrom-version. ERROR:Cannot satisfy the 
+following dependencies for task-base-extended: angstrom-version" Hope 
+somebody can help me here.
 
--Graham
+Thanks and best regards,
+Andy
 
-diff --git a/recipes/icu/files/rematch-gcc-bug.patch b/recipes/icu/files/rematch-gcc-bug.patch
-index 4d47056..5f516e3 100644
---- a/recipes/icu/files/rematch-gcc-bug.patch
-+++ b/recipes/icu/files/rematch-gcc-bug.patch
-@@ -5,7 +5,7 @@
-  all-local: $(ALL_TARGETS)
-  
- +rematch.o: $(srcdir)/rematch.cpp
--+	$(CXX) $(CPPFLAGS) $(DEFS) -c -o $@ $<
-++	$(CXX) -fPIC $(CPPFLAGS) $(DEFS) -c -o $@ $<
- +
-  install-local: install-headers install-library
-  
 
 
