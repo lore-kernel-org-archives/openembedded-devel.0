@@ -1,31 +1,39 @@
-Received: from [193.252.22.31] (helo=smtp20.orange.fr)
+Received: from [209.85.146.176] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <c.romain@laposte.net>) id 1MYZdU-0007m4-5p
+	(envelope-from <graham.gower@gmail.com>) id 1MYa8Z-0005tB-A3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Aug 2009 08:06:06 +0200
-Received: from me-wanadoo.net (localhost [127.0.0.1])
-	by mwinf2023.orange.fr (SMTP Server) with ESMTP id 9A7FB20000A4
+	Wed, 05 Aug 2009 08:38:13 +0200
+Received: by wa-out-1112.google.com with SMTP id m34so583481wag.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2009 07:50:25 +0200 (CEST)
-Received: from me-wanadoo.net (localhost [127.0.0.1])
-	by mwinf2023.orange.fr (SMTP Server) with ESMTP id 8B6E220000AC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2009 07:50:25 +0200 (CEST)
-Received: from [192.168.2.2] (AToulouse-554-1-77-238.w90-50.abo.wanadoo.fr
-	[90.50.220.238])
-	by mwinf2023.orange.fr (SMTP Server) with ESMTP id 517D820000A4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Aug 2009 07:50:25 +0200 (CEST)
-X-ME-UUID: 20090805055025333.517D820000A4@mwinf2023.orange.fr
-Message-ID: <4A791000.3060304@laposte.net>
-Date: Wed, 05 Aug 2009 06:52:16 +0200
-From: cyril Romain <c.romain@laposte.net>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090719)
+	Tue, 04 Aug 2009 23:22:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=Vtb2Y0ays3qsJxjHCYi9sQQnsqB5DcW5AAGc1Lqm3XI=;
+	b=wzS/iSV+5Amj+2fShpu8bVHe+pKbw8eiK4dEugkP1Fwt5rIkkD/edyBPCa+uvV3OT+
+	tdI6/CDyEMUS4Y0kwFi4YMFZKrRpK6bbHFCvafBwkkhR2LH8VbzuDIl67bpMNNldslvv
+	LvIvS5r3Ex3sBIywDkdBfaDp2nIwRrVU9Q5+M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=v8gyDgMIx/Y42e/i3+6T7c3zDZk2fpzX1i3VByYhVvhv6UDdI18wPmoxaXfVm6UssK
+	itO8EfveSUOf4Wj5J7sRivRSlFavUx9e+n1/CEAdeEG8/PTyMc6gEEBgq2FqyUmTNPVw
+	OWBwP1U3IeJJ4CmG3O2Lw5+qVRGoDYhl2EXPI=
+Received: by 10.115.48.5 with SMTP id a5mr11138397wak.132.1249453352728;
+	Tue, 04 Aug 2009 23:22:32 -0700 (PDT)
+Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	j31sm12797722waf.49.2009.08.04.23.22.30
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 04 Aug 2009 23:22:32 -0700 (PDT)
+Message-ID: <4A792519.20506@gmail.com>
+Date: Wed, 05 Aug 2009 15:52:17 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <91283b620908042134h67b41257s2754633a771bf6ca@mail.gmail.com>
-In-Reply-To: <91283b620908042134h67b41257s2754633a771bf6ca@mail.gmail.com>
-Subject: Re: Error compiling qt4-embedded-gles-4.5.2-r13.1
+Subject: [PATCH] fix portmap on mips, remove old slugos workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,29 +47,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2009 06:06:10 -0000
+X-List-Received-Date: Wed, 05 Aug 2009 06:38:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Stuart Gray wrote:
-> pvrqwswsegl.c:53: error: 'WSEGL_CAP_WINDOWS_USE_MBX_SYNC' undeclared here
-> (not in a function)
-> pvrqwswsegl.c:54: error: 'WSEGL_CAP_PIXMAPS_USE_MBX_SYNC' undeclared here
-> (not in a function
+Portmap built for mipsel with gcc-4.3.3 segfaults instantly, fails to build
+with gcc-4.4 and provides the following:
 
-There is some information in the following thread: see [1].
-Another guy did a similar patch [2], as well as some other omap3-support 
-patches for Qt that you might need.
+| /home/grg/oe/tmp/cross/mipsel/lib/gcc/mipsel-angstrom-linux/4.4.1/../../../../mipsel-angstrom-linux/bin/ld: portmap.o: relocation R_MIPS_HI16 against `__gnu_local_gp' can not be used when making a shared object; recompile with -fPIC
 
-Regards,
+The CFLAGS in portmap's Makefile contains -fpie, but is ignored. The
+CFLAGS I've added below are constructed from portmap's Makefile. When
+built with gcc-4.3.3 the resultant binary no longer segfaults.
 
-      Cyril
+RE: Remove this patch when SlugOS upgrades to binutils 1.18
+It looks like this is now the case, so I've removed the slugos workaround.
 
-[1] http://markmail.org/thread/jpl6btzqehnwehb4
-[2] 
-http://qt.gitorious.org/~rambo83/qt/rambo83s-clone/commit/15fa3b0fb140af9a1ae5e51a95fe3cf97cfa69eb
-[3] http://qt.gitorious.org/~rambo83/qt/rambo83s-clone
+-Graham
 
-
+diff --git a/recipes/portmap/portmap-6.0/no-pie.patch b/recipes/portmap/portmap-6.0/no-pie.patch
+deleted file mode 100644
+index 4d7e2da..0000000
+--- a/recipes/portmap/portmap-6.0/no-pie.patch
++++ /dev/null
+@@ -1,14 +0,0 @@
+---- portmap_6.0/Makefile.orig	2007-11-21 00:35:52.000000000 -0600
+-+++ portmap_6.0/Makefile	2007-11-21 00:37:23.000000000 -0600
+-@@ -125,9 +125,9 @@
+- all:	portmap pmap_dump pmap_set portmap.man
+- 
+- CPPFLAGS += $(HOSTS_ACCESS)
+--portmap: CFLAGS   += -fpie
+-+#portmap: CFLAGS   += -fpie
+- portmap: LDLIBS   += $(WRAP_LIB)
+--portmap: LDFLAGS  += -pie
+-+#portmap: LDFLAGS  += -pie
+- portmap: portmap.o pmap_check.o from_local.o
+- 
+- from_local: CPPFLAGS += -DTEST
+diff --git a/recipes/portmap/portmap_6.0.bb b/recipes/portmap/portmap_6.0.bb
+index cb94a48..501aa5d 100644
+--- a/recipes/portmap/portmap_6.0.bb
++++ b/recipes/portmap/portmap_6.0.bb
+@@ -1,6 +1,6 @@
+ require portmap.inc
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "http://www.sourcefiles.org/Networking/Tools/Miscellanenous/portmap-6.0.tgz \
+            file://destdir-no-strip.patch;patch=1 \
+@@ -8,12 +8,10 @@ SRC_URI = "http://www.sourcefiles.org/Networking/Tools/Miscellanenous/portmap-6.
+            file://no-libwrap.patch;patch=1;pnum=0 \
+            file://portmap.init "
+ 
+-# Remove this patch when SlugOS upgrades to binutils 1.18
+-SRC_URI_append_slugos = " file://no-pie.patch;patch=1 "
+-
+ S = "${WORKDIR}/${PN}_${PV}/"
+ 
+ CPPFLAGS += "-DFACILITY=LOG_DAEMON -DENABLE_DNS"
++CFLAGS += "-O2 -Wall -Wstrict-prototypes -fpie"
+ 
+ fakeroot do_install() {
+     install -d ${D}${mandir}/man8/ ${D}${base_sbindir} ${D}${sysconfdir}/init.d
 
 
