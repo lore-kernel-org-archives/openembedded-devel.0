@@ -1,36 +1,39 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [209.85.222.193] (helo=mail-pz0-f193.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MYTrg-0004zm-0X
+	(envelope-from <graham.gower@gmail.com>) id 1MYUce-0003hZ-Us
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Aug 2009 01:56:20 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so2041898qwk.36
+	Wed, 05 Aug 2009 02:44:53 +0200
+Received: by pzk31 with SMTP id 31so4673203pzk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Aug 2009 16:40:44 -0700 (PDT)
+	Tue, 04 Aug 2009 17:29:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
 	:content-transfer-encoding;
-	bh=IYPnhfdIqWxNDD6YjdFCNLu6C4AprAbYe0pWkTQaVFc=;
-	b=DQg7cPxhDD1pzoWsSQSH2Irk7bkD63oErIjeb3y1F5eIgplOnnbjjlRtPj+4QpqMxg
-	1SfSTAtZne2wAjmim7YlpqQNVGefiNQvrKYZJaAJWSjTnE9q43++ltT1pJkGhI+Mix/C
-	pIAxjNWqh1fd9PWr2gzJsLnMfXhDZ3disDLpU=
+	bh=mtNlmJsq87TAFh5KS56YuVa0wII315MU/DAlp+9xi20=;
+	b=abr6tLny1+0hSyAITTG6yvfPjtXUaST0IOaL3XNQpFz4W7GAXlI9GUaGDH/AkRx7Ox
+	oyZbvJvY2+k4NV15s8q8wHWLfJzOOFlh7oN/RKLhMxQIxgzBu1niG6Rp/lf9sjXoRYph
+	SQB0FpHV4fLo7Fc2Ur6tmdVWBDo7Bweiv71Uw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=Ld5UC9CQHolEIrtl/iDNNhoM+4N9W2PTzTjy/aMUBHPp/NOqDQLdJkG8ATjd6IDPbk
-	Co4nRAH8x9HmzEyjLUweTEoYKY6oGTu+EkLR/aB0nYnsjA0KWEAX+v97iNppy3Nce8AM
-	2Da/wZX3N5cytDPypbONcsqiqZVYElTShbjoI=
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=FQ0aR+ulzoGnnjzkw8S3O7A2gghSgMYT8aY4lKqOprubXK5E810DtTx6bTNXQU7C/6
+	Qo2AqKrPitkdZkP4kNDhhCqMUtWwyr1CmucrZEroN5HHhwR4RFlnoatjeFjuFXwpQgpk
+	9NH6jujAhtYUUZdz1cbyCdWHltIPlwfSVbii8=
+Received: by 10.115.22.14 with SMTP id z14mr9514036wai.130.1249432154995;
+	Tue, 04 Aug 2009 17:29:14 -0700 (PDT)
+Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	k21sm6691643waf.24.2009.08.04.17.29.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 04 Aug 2009 17:29:13 -0700 (PDT)
+Message-ID: <4A78D247.7090605@gmail.com>
+Date: Wed, 05 Aug 2009 09:58:55 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Received: by 10.229.85.21 with SMTP id m21mr2108009qcl.9.1249429244437; Tue, 
-	04 Aug 2009 16:40:44 -0700 (PDT)
-In-Reply-To: <h58kp7$h6o$1@ger.gmane.org>
-References: <20090803205909.GA24609@gmail.com> <h58kp7$h6o$1@ger.gmane.org>
-Date: Tue, 4 Aug 2009 16:40:44 -0700
-Message-ID: <19c1b8a90908041640r33d06e12gae1e7cf36e99cda1@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: Renaming gcc 4.4.0 to 4.4.1
+Subject: [PATCH] fix libicu compilation with GCC-4.4 on mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,36 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Aug 2009 23:56:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 05 Aug 2009 00:44:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 3, 2009 at 11:34 PM, Koen Kooi<k.kooi@student.utwente.nl> wrote:
-> On 03-08-09 22:59, Khem Raj wrote:
->>
->> Hi
->>
->> Now that gcc 4.4.1 is out I would like to add the recipe but if gcc
->> 4.4.0 is not been used then I would prefer to move gcc 4.4.0 to 4.4.1
->> and reduce a few recipes.
->>
->> If no one objects I will go ahead with moving them next week
->
-> Don't forget to add the patch from
-> http://gcc.gnu.org/bugzilla/show_bug.cgi?id=40887 if you do.
->
+Not sure if this one is mips specific or not, but linking fails due to
+missing -fPIC on rematch.o.
+| /home/grg/oe/tmp/cross/mipsel/lib/gcc/mipsel-angstrom-linux/4.4.1/../../../../mipsel-angstrom-linux/bin/ld: rematch.o: relocation R_MIPS_HI16 against `__gnu_local_gp' can not be used when making a shared object; recompile with -fPIC
 
-sure once it get approved.
+Perhaps someone who experienced the (arm specific?) gcc bug mentioned in
+commit 798c780a3a016e56d9b8849cf8a07521b6e402a9 can confirm this fix does
+not trigger the same bug?
 
-> regards,
->
-> Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-Graham
+
+diff --git a/recipes/icu/files/rematch-gcc-bug.patch b/recipes/icu/files/rematch-gcc-bug.patch
+index 4d47056..5f516e3 100644
+--- a/recipes/icu/files/rematch-gcc-bug.patch
++++ b/recipes/icu/files/rematch-gcc-bug.patch
+@@ -5,7 +5,7 @@
+  all-local: $(ALL_TARGETS)
+  
+ +rematch.o: $(srcdir)/rematch.cpp
+-+	$(CXX) $(CPPFLAGS) $(DEFS) -c -o $@ $<
+++	$(CXX) -fPIC $(CPPFLAGS) $(DEFS) -c -o $@ $<
+ +
+  install-local: install-headers install-library
+  
 
 
