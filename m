@@ -1,22 +1,30 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [58.185.154.238] (helo=cassis-intl.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MYkFW-0005lc-Hs
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 Aug 2009 19:26:02 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KNW00LB7YCMQZ6B@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	05 Aug 2009 12:10:04 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 964B114AF1F; Wed,
-	05 Aug 2009 13:09:58 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 05 Aug 2009 13:09:07 -0400
-Message-id: <1249492147-7452-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.6.3.3
-Subject: [PATCH] kernel.bbclass: introduce MODULES_IMAGE_BASE_NAME
+	(envelope-from <galvez.andy@cassis-intl.com>) id 1MYtOe-00068h-V1
+	for openembedded-devel@openembedded.org; Thu, 06 Aug 2009 05:12:08 +0200
+Received: (qmail 32139 invoked by uid 509); 6 Aug 2009 10:50:06 +0800
+Received: from 10.65.9.1 by postman.cassis-intl.com (envelope-from
+	<galvez.andy@cassis-intl.com>,
+	uid 501) with qmail-scanner-1.25-st-qms 
+	(clamdscan: 0.83/1213. spamassassin: 3.0.4. perlscan: 1.25-st-qms.  
+	Clear:RC:1(10.65.9.1):. 
+	Processed in 1.477003 secs); 06 Aug 2009 02:50:06 -0000
+X-Antivirus-MYDOMAIN-Mail-From: galvez.andy@cassis-intl.com via
+	postman.cassis-intl.com
+X-Antivirus-MYDOMAIN: 1.25-st-qms (Clear:RC:1(10.65.9.1):. Processed in
+	1.477003 secs Process 32103)
+Received: from unknown (HELO galvezljxpdt1) (10.65.9.1)
+	by cassis-intl.com with SMTP; 6 Aug 2009 10:50:02 +0800
+Message-ID: <FDF2CEED02AD4A1C9DF39E3B80C07BB3@sg01.cassis>
+From: "Leandro Q. Galvez" <galvez.andy@cassis-intl.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 6 Aug 2009 11:04:48 +0800
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5512
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+Subject: Cursor Displayed and Touchscreen Input Rotated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,38 +38,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Aug 2009 17:26:02 -0000
+X-List-Received-Date: Thu, 06 Aug 2009 03:12:15 -0000
+Content-Type: text/plain; format=flowed; charset="iso-8859-1";
+	reply-type=original
+Content-Transfer-Encoding: 7bit
 
-Similar to KERNEL_IMAGE_BASE_NAME, allow overwriting from a recipe
+Hi,
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- classes/kernel.bbclass |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+    I built opie 1.2.4 successfully using openembedded build environment. My
+build included mediaplayer2. I noticed that there were cases that when I
+start my phone, the opie phone is showing a mouse cursor and the touchscreen
+input is rotated. This happens like around 50 percent of the time. It can
+return to normal state just be restaterting the system, and I observed that
+the touchscreen input interpretation is normal when the mouse is not being
+displayed. This only happened when I rebuilt the opie system integrated with
+mediaplayer2. I hope somebody can help me through this.
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index b498760..3ee7f53 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -510,6 +510,7 @@ addtask uboot_mkimage before do_install after do_compile
- 
- KERNEL_IMAGE_BASE_NAME ?= "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}"
- KERNEL_IMAGE_SYMLINK_NAME ?= "${KERNEL_IMAGETYPE}-${MACHINE}"
-+MODULES_IMAGE_BASE_NAME ?= modules-${PV}-${PR}-${MACHINE}
- 
- do_deploy() {
- 	install -d ${DEPLOY_DIR_IMAGE}
-@@ -517,7 +518,7 @@ do_deploy() {
- 	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
- 
- 	if [ -d "${D}/lib" ]; then
--	tar -cvzf ${DEPLOY_DIR_IMAGE}/modules-${PV}-${PR}-${MACHINE}.tgz -C ${D} lib
-+	tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tgz -C ${D} lib
- 	fi
- 
- 	cd ${DEPLOY_DIR_IMAGE}
--- 
-1.6.3.3
+Thanks and best regards,
+Andy
 
 
 
