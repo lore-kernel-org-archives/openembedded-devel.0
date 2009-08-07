@@ -1,35 +1,35 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sakoman@gmail.com>) id 1MZHRb-00057W-R5
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MZO5W-0004oN-ML
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Aug 2009 06:52:44 +0200
-Received: by qyk35 with SMTP id 35so1373121qyk.24
+	Fri, 07 Aug 2009 13:58:22 +0200
+Received: by ewy8 with SMTP id 8so983085ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Aug 2009 21:36:52 -0700 (PDT)
+	Fri, 07 Aug 2009 04:42:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Qc0FaxGq2tHqCli5hnHLRl7SviHtnV4Zkb9Th6GyklI=;
-	b=f4VaE0oOKI2vyMG5MfftxPeVkQWEENNuh8IEzfi9xP8NfKk9AMC4sMF0wXa4ve91PI
-	3hP9rh/Uf82nqJ4q7nJpzlY5QjjfxsaT5nentAe3KtPLPxQzjuzvJO8Dk4AMvkuzCUuW
-	hyM5f+vJPvjn4ZcOriDcCvKXoXAn9TupV1OQM=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=qxSZ/3wGcbXWD3J5bYkAgsRa2vc6kLSExf55E1nmzSA=;
+	b=prr7KTlnxueN6GpnKxYvXlWUYp6dhJWvylZqLUIiLWIC2HMQoK/OC50DAJ3nVrdATz
+	0jPeV06SRFU47xa5teqoD5I1rXGy4+POqm9xowKwjJT/uT0aeMeetyTAsH7aCNac/gOE
+	9bdN9q+1sZXfpi0leVEbGMf9sgzc+oja9W8m8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=GgS+AnbzLwr17jV8rhkhLsKIs8kAEzywvMbpdAeRJZ0ZI3KTUzFjjo6L5A5UpcGbdi
-	IpXt5RiDsi85swXlHxLpVfPelBif5WUA2a+MdWlTdj38jw626wGG7RfJu4KK2yVQISHr
-	Pab6FF6F6wA5vSVjHZ66s68WK7B0ozcRZ9Xf4=
-MIME-Version: 1.0
-Received: by 10.229.70.141 with SMTP id d13mr476707qcj.70.1249619811858; Thu, 
-	06 Aug 2009 21:36:51 -0700 (PDT)
-In-Reply-To: <gup1vi$sjq$1@ger.gmane.org>
-References: <gup1vi$sjq$1@ger.gmane.org>
-Date: Thu, 6 Aug 2009 21:36:51 -0700
-Message-ID: <5e088bd90908062136t20f3426xdce62e015dae987a@mail.gmail.com>
-From: Steve Sakoman <sakoman@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=h8zbh78MMOBjgsFgel+ODFpPM+CIv72gcF34FJYFPsVdMkvZ4AVh74PIZiB1cG0Rlq
+	eU7Vdo/Tm2IXcVMOe10jy83Ubjt0JdC65Y4vsrNtqTaA0DB4sUoR4qDKyFTWML/PH0nA
+	5yeVri1WaiqoDmiphuIt68L0ctkaMExVQOCPA=
+Received: by 10.210.68.17 with SMTP id q17mr1276560eba.58.1249645348873;
+	Fri, 07 Aug 2009 04:42:28 -0700 (PDT)
+Received: from localhost (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id 10sm2616109eyd.27.2009.08.07.04.42.27
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 07 Aug 2009 04:42:28 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: uim and scim recipes - request for help
+Date: Fri,  7 Aug 2009 14:42:00 +0300
+Message-Id: <1249645320-4423-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+Subject: [PATCH] Added rcc (resource compiler) utility setup for QTE toolchain environment.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,52 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Aug 2009 04:52:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Aug 2009 11:58:22 -0000
 
-2009/5/17 Rolf Leggewie <no2spam@nospam.arcornews.de>:
-> Hi,
->
-> it seems like bitrot has crept in to the uim and scim recipes. =C2=A0uim
-> 1.3.1 is in OE and used to compile fine. =C2=A0scim has never been a part=
- of
-> OE thus far, but 1.4.6 used to compile fine when I tried about a year
-> ago=E3=80=80(had some other trouble with it then, so I never pushed the b=
-b). =C2=A0I
-> have published the scim recipe in a private branch in the OE git server n=
-ow.
->
-> http://cgit.openembedded.net/cgit.cgi?url=3Dopenembedded/tree/recipes/sci=
-m&h=3Dlaibsch/scim
->
-> I asked in IRC for help (thanks RP and pb_) and it looks like this
-> problem is related to libtool, which AFAIK has recently been updated.
->
-> http://www.hentges.net/irclogs/%23oe/2009/May/20090517_oe.log#[20090517%2=
-014:23:19]
->
-> Build logs (the successful ones are usually do_clean only):
-> uim: http://tinderbox.openembedded.net/packages/uim
-> scim: http://tinderbox.openembedded.net/packages/scim
->
-> Any help to get these compile again is greatly appreciated. =C2=A0Latest =
-uim
-> version is 1.5.5. =C2=A0While we're at it, I guess it makes sense to get =
-that
-> into OE. =C2=A0I'll push a WIP bb to the laibsch/scim branch.
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+---
+ recipes/meta/meta-toolchain-qte.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-I too have a need for uim/scim.
+diff --git a/recipes/meta/meta-toolchain-qte.bb b/recipes/meta/meta-toolchain-qte.bb
+index 70c4087..699f053 100644
+--- a/recipes/meta/meta-toolchain-qte.bb
++++ b/recipes/meta/meta-toolchain-qte.bb
+@@ -19,6 +19,7 @@ do_populate_sdk_append() {
+        echo 'export OE_QMAKE_INCDIR_QT=${prefix}/${TARGET_SYS}/${layout_includedir}/${QT_DIR_NAME}' >> $script
+        echo 'export OE_QMAKE_MOC=${prefix}/${layout_bindir}/moc4' >> $script
+        echo 'export OE_QMAKE_UIC=${prefix}/${layout_bindir}/uic4' >> $script
++       echo 'export OE_QMAKE_RCC=${prefix}/${layout_bindir}/rcc4' >> $script
+ 
+        # Repack SDK with new environment-setup
+        cd ${SDK_OUTPUT}
+-- 
+1.6.3.3
 
-I noticed a couple of commits in June for the uim recipe. Did these
-commits fix the known issues?
-
-When I tried the current recipe, both uim-native and uim failed to
-build, so I suspect not.
-
-Just wanted to check in for the current status before spending any
-time on debugging.
-
-Steve
 
 
