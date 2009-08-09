@@ -1,32 +1,35 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Ma5ad-0007I8-Qm
+	(envelope-from <methril@gmail.com>) id 1Ma67X-0008Mp-Bv
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Aug 2009 12:25:23 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 0B48D14171A0
+	Sun, 09 Aug 2009 12:59:23 +0200
+Received: by ewy8 with SMTP id 8so1857115ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Aug 2009 12:00:24 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lfwTVI+EihyO
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Aug 2009 12:00:23 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id A85F51417181
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Aug 2009 12:00:23 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Sun, 09 Aug 2009 03:43:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=YVlVev70CwvdUFOYG2EnE03qMz4LvU+7BD2YoNMf/ww=;
+	b=tmVh77tggn04FSKwqFZ580fLTf2yaCwB86uJqBzajnENxqSjXGMIiEl2Aqx+SOtnmo
+	FN6Ovd6LUme1XtwbR5Tl3JTJB/nNcbaJNPXeSFl11bYjruVSL4VXt+BByfEpa4SFQUrr
+	VSQsJA3JVY9K6n2p24Ja8jUVFOYl5BYmGyDqw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=v4wAubunmqae2xE5nFMqjliKc/35s5DtztTEUtPYX3aqpIIpsK/u5C7WYtqVUaGw4i
+	hZPbICyMCFIKET5U4octzZJ+1ftYM2KIuH25kNf1DhOMEqPWEd+XDMHuipV13aHu7fE0
+	4dUBUizFtapIRUDXDqcdw9YMTNGZ1ZmZ/P8p0=
+MIME-Version: 1.0
+Received: by 10.210.129.6 with SMTP id b6mr1638831ebd.70.1249814597189; Sun, 
+	09 Aug 2009 03:43:17 -0700 (PDT)
+In-Reply-To: <1248208656-9496-1-git-send-email-methril@gmail.com>
+References: <1248208656-9496-1-git-send-email-methril@gmail.com>
+From: Rafael Campos <methril@gmail.com>
+Date: Sun, 9 Aug 2009 12:42:57 +0200
+Message-ID: <b84dee3a0908090342h2e6cecf7v812be48974d049ab@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200908081606.16406.mickey@vanille-media.de>
-References: <1249737204.8277.22.camel@utx.utx.cz>
-	<200908081606.16406.mickey@vanille-media.de>
-Date: Sun, 09 Aug 2009 12:09:17 +0200
-Message-Id: <1249812557.4334.11.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: libgtkstylus: working on new version
+Subject: Re: [PATCH 1/1] Update the em-x270 machine to work with linux_2.6.23.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Aug 2009 10:25:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 09 Aug 2009 10:59:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Michael 'Mickey' Lauer wrote:
-> Wow, that's pretty good news.
->=20
-> The thing that always put me off of using libgtkstylus was that it intr=
-oduces=20
-> additional delay for single (left) keypresses -- is that fixed with you=
-r=20
-> version?
+Ping
 
-=EF=BB=BFCould you tell me, which applications are affected by this probl=
-em?
+have this message some issues  to not being included into the OE repo?
 
-I am not aware of any delay of a single left keypress, even in version
-0.3. Looking at the code, they are sent directly to the application
-without any delay and start right press emulation timer.
+Regards
 
-The delays I experience (e. g. in multi-tab browsing in midori) seems to
-have nothing with gtkstylus, but it is a simple consequence of slow CPU.
-
-Well, rc4 still has problems in these situations - timer seems to have
-highest priority, then midori callbacks, then next event processing.
-Even if you release stylus after <500ms, release event is processed
-later than 500ms after press, timer expires, right press is emulated.
-Fix would need deeper study of the main loop priorities.
-
-Another delays are I experienced are caused by motion hint processing
-bug GTK+ and many applications:
-http://bugzilla.gnome.org/show_bug.cgi?id=3D587714 (and dependent bugs)
-
-As it needs to be re-implemented, I just prepared work-arounds in some
-applications: gqview (committed), viking (in their tracker).
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+On Tue, Jul 21, 2009 at 10:37 PM, Rafael Campos Las
+Heras<methril@gmail.com> wrote:
+> * Use of generic linux_2.6.23 recipe
+> * remove em-x270_2.6.23 recipe (ugly).
+> * Add a patch that gives with gcc 4.1 compiler.
+>
+> Signed-off-by: Rafael Campos Las Heras
+> ---
+> conf/machine/em-x270.conf | 6 +-
+> recipes/linux/em-x270-2.6.23/defconfig | 1354 ---
+> recipes/linux/em-x270-2.6.23/em-x270.patch |12063 --------------------
+> recipes/linux/em-x270_2.6.23.bb | 29 -
+> .../em-x270/01-prevet_loop_timespec_add_ns.patch | 19 +
+> recipes/linux/linux-2.6.23/em-x270/defconfig | 1354 +++
+> recipes/linux/linux-2.6.23/em-x270/em-x270.patch |12063 ++++++++++++++++++++
+> recipes/linux/linux_2.6.23.bb | 4 +
+> 8 files changed, 13443 insertions(+), 13449 deletions(-)
+> delete mode 100644 recipes/linux/em-x270-2.6.23/defconfig
+> delete mode 100644 recipes/linux/em-x270-2.6.23/em-x270.patch
+> delete mode 100644 recipes/linux/em-x270_2.6.23.bb
+> create mode 100644 recipes/linux/linux-2.6.23/em-x270/01-prevet_loop_timespec_add_ns.patch
+> create mode 100644 recipes/linux/linux-2.6.23/em-x270/defconfig
+> create mode 100644 recipes/linux/linux-2.6.23/em-x270/em-x270.patch
+>
+> diff --git a/conf/machine/em-x270.conf b/conf/machine/em-x270.conf
+> index f8a5c95..1255ba0 100644
+> --- a/conf/machine/em-x270.conf
+> +++ b/conf/machine/em-x270.conf
+> @@ -9,7 +9,7 @@ TARGET_ARCH = "arm" --
+<snip>
+___________
+Rafael Campos
+o0 Methril 0o
+http://openblog.methril.net/
 
 
