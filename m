@@ -1,22 +1,22 @@
-Received: from [72.167.82.90] (helo=p3plsmtpa01-10.prod.phx3.secureserver.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1MaA53-000664-3K
-	for openembedded-devel@openembedded.org; Sun, 09 Aug 2009 17:13:05 +0200
-Received: (qmail 9444 invoked from network); 9 Aug 2009 14:56:56 -0000
-Received: from unknown (75.49.209.3)
-	by p3plsmtpa01-10.prod.phx3.secureserver.net (72.167.82.90) with ESMTP;
-	09 Aug 2009 14:56:56 -0000
-Message-ID: <4A7EE3BF.9060406@mwester.net>
-Date: Sun, 09 Aug 2009 09:57:03 -0500
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.22) Gecko/20090605 Thunderbird/2.0.0.22 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MaDFH-0001MV-SK
+	for openembedded-devel@openembedded.org; Sun, 09 Aug 2009 20:35:52 +0200
+Received: (qmail 8091 invoked by uid 813007); 9 Aug 2009 18:19:45 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 9 Aug 2009 18:19:45 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <4A792519.20506@gmail.com>
-	<200908091530.20800.holger+oe@freyther.de>
-In-Reply-To: <200908091530.20800.holger+oe@freyther.de>
-Subject: Re: [PATCH] fix portmap on mips, remove old slugos workaround
+Date: Sun, 9 Aug 2009 20:19:41 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc5-00256-g8e6bcae; KDE/4.3.0; x86_64; ;
+	)
+References: <19c1b8a90908090213x1aea00dfj343f2314282a9129@mail.gmail.com>
+In-Reply-To: <19c1b8a90908090213x1aea00dfj343f2314282a9129@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200908092019.45974.marcin@juszkiewicz.com.pl>
+Subject: Re: Initialize PACKAGE_EXTRA_ARCHS if not done in tune files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,23 +30,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Aug 2009 15:13:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 09 Aug 2009 18:35:52 -0000
+X-Groupsio-MsgNum: 12272
+Content-Type: multipart/signed; boundary="nextPart7942521.1WpKKk8jlX";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Holger Hans Peter Freyther wrote:
-> On Wednesday 05 August 2009 08:22:17 Graham Gower wrote:
->> Portmap built for mipsel with gcc-4.3.3 segfaults instantly, fails to build
-> 
-> Great, I would like to hear something from SlugOS people though...
+--nextPart7942521.1WpKKk8jlX
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Graham's patch builds for SlugOS, and the resultant binary runs without
-problem.
+Dnia niedziela, 9 sierpnia 2009 o 11:13:33 Khem Raj napisa=C5=82(a):
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -107,6 +107,7 @@ EXEEXT =3D "${HOST_EXEEXT}"
+>
+>  BASE_PACKAGE_ARCH =3D "${HOST_ARCH}"
+>  PACKAGE_ARCH =3D "${BASE_PACKAGE_ARCH}"
+> +PACKAGE_EXTRA_ARCHS ?=3D ""
+>  MACHINE_ARCH =3D "${@[bb.data.getVar('HOST_ARCH', d, 1),
+> bb.data.getVar('MACHINE', d, 1)][bool(bb.data.getVar('MACHINE', d,
+> 1))]}"
+>  PACKAGE_ARCHS =3D "all any noarch ${TARGET_ARCH}
+> ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
 
-BTW, the portmap-unslung_5-9.bb recipe can be removed; it's obsolete.
-I'm not in a position to push that change right now, so let's just add
-that to the SlugOS cleanup in Graham's original patch.
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-Mike (mwester)
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
+--nextPart7942521.1WpKKk8jlX
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEABECAAYFAkp/Ez4ACgkQeQ6MlGH/2qvqQwCfWY5nb7HL9ON/CyUgqqvT1Guk
+DmwAnAqWH3iV3bcMh9CRmZmeGZGmk6rk
+=qG2U
+-----END PGP SIGNATURE-----
+
+--nextPart7942521.1WpKKk8jlX--
