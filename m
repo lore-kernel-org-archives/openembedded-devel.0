@@ -1,32 +1,32 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ma4ih-0008Jr-Qw
-	for Openembedded-devel@lists.openembedded.org;
-	Sun, 09 Aug 2009 11:29:39 +0200
-Received: by qyk35 with SMTP id 35so2322174qyk.24
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Aug 2009 02:13:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=3xyakF3DEwupo5ydzpAr6y/QsXoW8UdkA39x2U6mflg=;
-	b=W90O4wmtldyWxLya253bHreMeksIIk6GnKxjzhTNqbAtO63C5l/XCugnqd2JJAM31G
-	kQ1TLiuYvpJGIUFofD0p8loClkxrKRVfb9hXkNXMwwNzUBmpwIhpQ+XrPhifKjaEnawB
-	bHnwwUPgDaBtZ3zJb8gHF/6atZK6HjoCLsTIQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=bwe7bkt43VZydh83u+p6U7J9eD+ZBEqULTDZBtNuZimHVbNHvAcwGv0bcQCO9h1T3P
-	mBMuDt1itXpROT/usloKqHk2d/J1ThNpyNF5H3GhPFQ+i8OjhOU5Fht9Nv8ZLYdFjIjw
-	2oRkBRDPa+XI6mUBj/eXhiS41J2A0W8JZR5pg=
-MIME-Version: 1.0
-Received: by 10.229.99.210 with SMTP id v18mr1036059qcn.34.1249809213842; Sun, 
-	09 Aug 2009 02:13:33 -0700 (PDT)
-Date: Sun, 9 Aug 2009 02:13:33 -0700
-Message-ID: <19c1b8a90908090213x1aea00dfj343f2314282a9129@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-Subject: Initialize PACKAGE_EXTRA_ARCHS if not done in tune files.
+	(envelope-from <utx@penguin.cz>) id 1Ma5ad-0007I8-Qm
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Aug 2009 12:25:23 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 0B48D14171A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  9 Aug 2009 12:00:24 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id lfwTVI+EihyO
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  9 Aug 2009 12:00:23 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id A85F51417181
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  9 Aug 2009 12:00:23 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200908081606.16406.mickey@vanille-media.de>
+References: <1249737204.8277.22.camel@utx.utx.cz>
+	<200908081606.16406.mickey@vanille-media.de>
+Date: Sun, 09 Aug 2009 12:09:17 +0200
+Message-Id: <1249812557.4334.11.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: libgtkstylus: working on new version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,45 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Aug 2009 09:29:40 -0000
+X-List-Received-Date: Sun, 09 Aug 2009 10:25:24 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-hi
+Michael 'Mickey' Lauer wrote:
+> Wow, that's pretty good news.
+>=20
+> The thing that always put me off of using libgtkstylus was that it intr=
+oduces=20
+> additional delay for single (left) keypresses -- is that fixed with you=
+r=20
+> version?
 
-Building for titan machine I was hitting this error. Found out that
-PACKAGE_EXTRA_ARCHS is not defined in tune-sh4.inc
-Would it be ok if we initialize it conditionally to empty string in
-conf/bitbake.conf
+=EF=BB=BFCould you tell me, which applications are affected by this probl=
+em?
+
+I am not aware of any delay of a single left keypress, even in version
+0.3. Looking at the code, they are sent directly to the application
+without any delay and start right press emulation timer.
+
+The delays I experience (e. g. in multi-tab browsing in midori) seems to
+have nothing with gtkstylus, but it is a simple consequence of slow CPU.
+
+Well, rc4 still has problems in these situations - timer seems to have
+highest priority, then midori callbacks, then next event processing.
+Even if you release stylus after <500ms, release event is processed
+later than 500ms after press, timer expires, right press is emulated.
+Fix would need deeper study of the main loop priorities.
+
+Another delays are I experienced are caused by motion hint processing
+bug GTK+ and many applications:
+http://bugzilla.gnome.org/show_bug.cgi?id=3D587714 (and dependent bugs)
+
+As it needs to be re-implemented, I just prepared work-arounds in some
+applications: gqview (committed), viking (in their tracker).
 
 
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
-  File "/home/kraj/work/oe/bitbake/lib/bb/data_smart.py", line 70, in
-python_sub
-    s = eval(code)
-
-                              File "<string>", line 1
-    " ".join( [ ( "/etc/opkg/%s-feed.conf" % feed ) for feed in "all
-${PACKAGE_EXTRA_ARCHS
-
-                 ^
-SyntaxError: EOL while scanning string literal
-
-
-
-Something like below. Does anybody sees any issues doing this ?
-
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -107,6 +107,7 @@ EXEEXT = "${HOST_EXEEXT}"
-
- BASE_PACKAGE_ARCH = "${HOST_ARCH}"
- PACKAGE_ARCH = "${BASE_PACKAGE_ARCH}"
-+PACKAGE_EXTRA_ARCHS ?= ""
- MACHINE_ARCH = "${@[bb.data.getVar('HOST_ARCH', d, 1),
-bb.data.getVar('MACHINE', d, 1)][bool(bb.data.getVar('MACHINE', d,
-1))]}"
- PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS}
-${MACHINE}"
 
 
