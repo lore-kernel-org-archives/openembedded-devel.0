@@ -1,22 +1,33 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Ma8xu-0006NT-JQ
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Aug 2009 16:01:38 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C09221B10C05
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ma9Mf-0004tz-59 for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Aug 2009 16:27:13 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Ma971-0002i6-C9 for openembedded-devel@lists.openembedded.org;
+	Sun, 09 Aug 2009 14:11:03 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Aug 2009 14:11:03 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Aug 2009 13:48:34 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Sun, 09 Aug 2009 14:11:03 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 9 Aug 2009 15:45:01 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <4A78D247.7090605@gmail.com>
-In-Reply-To: <4A78D247.7090605@gmail.com>
-MIME-Version: 1.0
-Message-Id: <200908091545.01663.holger+oe@freyther.de>
-Subject: Re: [PATCH] fix libicu compilation with GCC-4.4 on mips
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 09 Aug 2009 16:10:52 +0200
+Message-ID: <h5mldc$l6$1@ger.gmane.org>
+References: <200908091526.39270.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
+In-Reply-To: <200908091526.39270.holger+oe@freyther.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Patchwork work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,27 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Aug 2009 14:01:38 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sun, 09 Aug 2009 14:27:13 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 05 August 2009 02:28:55 Graham Gower wrote:
-> Not sure if this one is mips specific or not, but linking fails due to
-> missing -fPIC on rematch.o.
+On 09-08-09 15:26, Holger Hans Peter Freyther wrote:
+> Hey Guys,
 >
-> | /home/grg/oe/tmp/cross/mipsel/lib/gcc/mipsel-angstrom-linux/4.4.1/../../.
-> |./../mipsel-angstrom-linux/bin/ld: rematch.o: relocation R_MIPS_HI16
-> | against `__gnu_local_gp' can not be used when making a shared object;
-> | recompile with -fPIC
->
-> Perhaps someone who experienced the (arm specific?) gcc bug mentioned in
-> commit 798c780a3a016e56d9b8849cf8a07521b6e402a9 can confirm this fix does
-> not trigger the same bug?
+> I just spent some time going through landed patches. We are down to one page
+> on the patchwork site.
 
+Awesome work!
 
-i will test an arm build for you.
+> It would be nice if people could remove patches that
+> already got landed or tell me which one to remove.
 
-Signed-Off-By: Holger Hans Peter Freyther <holger@freyther.de>
+I try :)
+
+regards,
+
+Koen
+
 
 
