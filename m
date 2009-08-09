@@ -1,33 +1,22 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ma9Mf-0004tz-59 for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Aug 2009 16:27:13 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1Ma971-0002i6-C9 for openembedded-devel@lists.openembedded.org;
-	Sun, 09 Aug 2009 14:11:03 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Aug 2009 14:11:03 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Aug 2009 14:11:03 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from [72.167.82.90] (helo=p3plsmtpa01-10.prod.phx3.secureserver.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1MaA53-000664-3K
+	for openembedded-devel@openembedded.org; Sun, 09 Aug 2009 17:13:05 +0200
+Received: (qmail 9444 invoked from network); 9 Aug 2009 14:56:56 -0000
+Received: from unknown (75.49.209.3)
+	by p3plsmtpa01-10.prod.phx3.secureserver.net (72.167.82.90) with ESMTP;
+	09 Aug 2009 14:56:56 -0000
+Message-ID: <4A7EE3BF.9060406@mwester.net>
+Date: Sun, 09 Aug 2009 09:57:03 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.22) Gecko/20090605 Thunderbird/2.0.0.22 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 09 Aug 2009 16:10:52 +0200
-Message-ID: <h5mldc$l6$1@ger.gmane.org>
-References: <200908091526.39270.holger+oe@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
-In-Reply-To: <200908091526.39270.holger+oe@freyther.de>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Patchwork work
+References: <4A792519.20506@gmail.com>
+	<200908091530.20800.holger+oe@freyther.de>
+In-Reply-To: <200908091530.20800.holger+oe@freyther.de>
+Subject: Re: [PATCH] fix portmap on mips, remove old slugos workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Aug 2009 14:27:13 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 09 Aug 2009 15:13:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 09-08-09 15:26, Holger Hans Peter Freyther wrote:
-> Hey Guys,
->
-> I just spent some time going through landed patches. We are down to one page
-> on the patchwork site.
+Holger Hans Peter Freyther wrote:
+> On Wednesday 05 August 2009 08:22:17 Graham Gower wrote:
+>> Portmap built for mipsel with gcc-4.3.3 segfaults instantly, fails to build
+> 
+> Great, I would like to hear something from SlugOS people though...
 
-Awesome work!
+Graham's patch builds for SlugOS, and the resultant binary runs without
+problem.
 
-> It would be nice if people could remove patches that
-> already got landed or tell me which one to remove.
+BTW, the portmap-unslung_5-9.bb recipe can be removed; it's obsolete.
+I'm not in a position to push that change right now, so let's just add
+that to the SlugOS cleanup in Graham's original patch.
 
-I try :)
-
-regards,
-
-Koen
-
+Mike (mwester)
 
 
