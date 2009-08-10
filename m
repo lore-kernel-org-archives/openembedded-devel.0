@@ -1,36 +1,37 @@
 Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <methril@gmail.com>) id 1MaUYY-0005IH-Ag
+	(envelope-from <methril@gmail.com>) id 1MaUZZ-0005Jc-6N
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Aug 2009 15:04:54 +0200
-Received: by ewy8 with SMTP id 8so2338167ewy.12
+	Mon, 10 Aug 2009 15:05:57 +0200
+Received: by ewy8 with SMTP id 8so2338757ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2009 05:48:41 -0700 (PDT)
+	Mon, 10 Aug 2009 05:49:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=0aul5rguc+8rg9+olfg/ktTL75Bl+EQ3meA2qcEp+rw=;
-	b=Zis4GZPGvRHL0c1Sc0JoiyQbPXXvaoopeTibibjuwFSu1tncqqTKTaP5C1O287iX2Q
-	JablOQPhWK3qDTCBHTbg4Z1AXSBgIxMHBD67kK7ITMGr9tPdQTgaPiWi6RxU9ePDvtxi
-	PgdDT7wpH7O3kQqpun99zL+8mV08wSjVkJtzw=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=bxW+vwJEtNGcfxpf2gNeMKsptT6D0tBb8LjibtzXDgo=;
+	b=qrbLyvLSJtCnM5OwLO3BQUZHEqnpgvOyGlWexN7jzQCGj+UOB7Bpi4tKSRExZkaFv+
+	UVAcui4izIkHNFj7iOfy23SmM7hK7n7KMyZmIEZYt2V9mm4QUkfGtS4el/cp3ogAvWvq
+	C0i7gd0ma9ja3GTg69jcwpipzjA+KmkNZ8LWs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=d+3bS7CK5vemgMOebTf9Fzr0lH8ZOub/AqJngY/pdHAL50qah6p6JM+YuH1liRom1k
-	jxpo5tLI85R/n7599pXLS4sa0bdidzzbNxucfoxJPECJu77N9yXMScyymDcKLmmIVW7W
-	MbgpV22OAaTelktEa9Lib1qCA1RLc6zxhqXIk=
-Received: by 10.216.20.67 with SMTP id o45mr927837weo.106.1249908520321;
-	Mon, 10 Aug 2009 05:48:40 -0700 (PDT)
-Received: from localhost.localdomain (36.73.220.87.dynamic.jazztel.es
-	[87.220.73.36])
-	by mx.google.com with ESMTPS id 28sm11159384eyg.32.2009.08.10.05.48.38
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 10 Aug 2009 05:48:39 -0700 (PDT)
-From: Rafael Campos Las Heras <methril@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=sjQHSvJ1L3u7OPXrwQncfVvftE/cd6cimnGqL+JCVCHEshn3Gr+qR0yeIPnbULdzhJ
+	eF0xW/0BpZoiJKGXa/jyAHiFB1MYSmjIHvYUrIskNMAVheIFIW6qbD3fPqK+7LoEu0CH
+	EqspR0KzdhvCtVIoVBVAI+AX+E9LNIk8Qaa9w=
+MIME-Version: 1.0
+Received: by 10.216.88.6 with SMTP id z6mr912526wee.52.1249908583772; Mon, 10 
+	Aug 2009 05:49:43 -0700 (PDT)
+In-Reply-To: <200908091516.11483.holger+oe@freyther.de>
+References: <1248208656-9496-1-git-send-email-methril@gmail.com> 
+	<b84dee3a0908090342h2e6cecf7v812be48974d049ab@mail.gmail.com> 
+	<200908091516.11483.holger+oe@freyther.de>
+From: Rafael Campos <methril@gmail.com>
+Date: Mon, 10 Aug 2009 14:49:23 +0200
+Message-ID: <b84dee3a0908100549te9101a3l86b5b85b325f6dde@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Aug 2009 14:48:18 +0200
-Message-Id: <1249908498-24405-1-git-send-email-methril@gmail.com>
-X-Mailer: git-send-email 1.6.0.4
-Subject: [PATCH] [Updated] Update the em-x270 machine to work with linux_2.6.23.
+Subject: Re: [PATCH 1/1] Update the em-x270 machine to work with linux_2.6.23.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,138 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 13:04:54 -0000
+X-List-Received-Date: Mon, 10 Aug 2009 13:05:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
- * Use of generic linux_2.6.23 recipe
- * remove em-x270_2.6.23 recipe (ugly).
- * Add a patch that gives with gcc 4.1 compiler.
+On Sun, Aug 9, 2009 at 3:16 PM, Holger Hans Peter
+Freyther<holger+oe@freyther.de> wrote:
+> On Sunday 09 August 2009 12:42:57 Rafael Campos wrote:
+>> Ping
+>>
+>> have this message some issues =A0to not being included into the OE repo?
+>
+> No problem, just hard to review. Could you use git format-patch -MC --fin=
+d-
+> copies-harder? This should reduce the defconfig change and patch to a mov=
+e?
+>
+> z.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Signed-off-by: Rafael Campos Las Heras <methril@gmail.com>
----
- conf/machine/em-x270.conf                          |    4 +-
- recipes/linux/em-x270_2.6.23.bb                    |   29 --------------------
- .../em-x270/01-prevet_loop_timespec_add_ns.patch}  |   12 +++++---
- .../em-x270}/defconfig                             |    0
- .../em-x270}/em-x270.patch                         |    0
- recipes/linux/linux_2.6.23.bb                      |    3 ++
- 6 files changed, 13 insertions(+), 35 deletions(-)
- delete mode 100644 recipes/linux/em-x270_2.6.23.bb
- copy recipes/linux/{linux-rp-2.6.24/0001-time-prevent-the-loop-in-timespec_add_ns-from-bei.patch => linux-2.6.23/em-x270/01-prevet_loop_timespec_add_ns.patch} (55%)
- rename recipes/linux/{em-x270-2.6.23 => linux-2.6.23/em-x270}/defconfig (100%)
- rename recipes/linux/{em-x270-2.6.23 => linux-2.6.23/em-x270}/em-x270.patch (100%)
+New patch sended as you sugested.
 
-diff --git a/conf/machine/em-x270.conf b/conf/machine/em-x270.conf
-index f8a5c95..efcf104 100644
---- a/conf/machine/em-x270.conf
-+++ b/conf/machine/em-x270.conf
-@@ -9,7 +9,7 @@ TARGET_ARCH = "arm"
- GUI_MACHINE_CLASS ?= "bigscreen"
- 
- PACKAGE_EXTRA_ARCHS = "iwmmxt "
--PREFERRED_PROVIDER_virtual/kernel = "${MACHINE}"
-+PREFERRED_PROVIDER_virtual/kernel = "linux"
- 
- # Use tune-xscale per default. Machine independent feeds should be built with tune-strongarm.
- #require conf/machine/include/tune-xscale.inc
-@@ -43,7 +43,7 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa bluetooth wifi usbhost usbgadg
- #
- 
- #PCMCIA_MANAGER = "pcmciautils"
--PREFERRED_VERSION_em-x270 = "2.6.23"
-+PREFERRED_VERSION_linux = "2.6.23"
- MODUTILS = "26"	
- PREFERRED_PROVIDER_xserver = "xserver-kdrive"
- 
-diff --git a/recipes/linux/em-x270_2.6.23.bb b/recipes/linux/em-x270_2.6.23.bb
-deleted file mode 100644
-index fcef728..0000000
---- a/recipes/linux/em-x270_2.6.23.bb
-+++ /dev/null
-@@ -1,29 +0,0 @@
--require linux.inc
--
--SECTION = "kernel"
--DESCRIPTION = "Linux kernel for the Compulab EM-X270 system"
--LICENSE = "GPL"
--DEPENDS = "u-boot-utils-native"
--PR = "r1"
--
--KERNEL_IMAGETYPE = "uImage"
--
--SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
--	   file://em-x270.patch;patch=1 \
--           file://defconfig \
--	  "
--
--S = "${WORKDIR}/linux-${PV}"
--
--COMPATIBLE_HOST = 'arm.*-linux'
--COMPATIBLE_MACHINE = "em-x270"
--
--inherit kernel
--inherit package
--
--ARCH = "arm"
--
--FILES_kernel-image = ""
--
--S = "${WORKDIR}/linux-${PV}"
--
-diff --git a/recipes/linux/linux-rp-2.6.24/0001-time-prevent-the-loop-in-timespec_add_ns-from-bei.patch b/recipes/linux/linux-2.6.23/em-x270/01-prevet_loop_timespec_add_ns.patch
-similarity index 55%
-copy from recipes/linux/linux-rp-2.6.24/0001-time-prevent-the-loop-in-timespec_add_ns-from-bei.patch
-copy to recipes/linux/linux-2.6.23/em-x270/01-prevet_loop_timespec_add_ns.patch
-index 9d7020d..a2f6e17 100644
---- a/recipes/linux/linux-rp-2.6.24/0001-time-prevent-the-loop-in-timespec_add_ns-from-bei.patch
-+++ b/recipes/linux/linux-2.6.23/em-x270/01-prevet_loop_timespec_add_ns.patch
-@@ -1,15 +1,19 @@
--Index: linux-2.6.24/include/linux/time.h
--===================================================================
-+---
-+ include/linux/time.h |    4 ++++
-+ 1 files changed, 4 insertions(+), 0 deletions(-)
-+diff --git a/include/linux/time.h b/include/linux/time.h
-+index 2091a19..d32ef0a 100644
- --- a/include/linux/time.h
- +++ b/include/linux/time.h
--@@ -172,6 +172,10 @@ static inline void timespec_add_ns(struct timespec *a, u64 ns)
-+@@ -173,6 +173,10 @@ static inline void timespec_add_ns(struct timespec *a, u64 ns)
-  {
- 	ns += a->tv_nsec;
- 	while(unlikely(ns >= NSEC_PER_SEC)) {
- +		/* The following asm() prevents the compiler from
- +		 * optimising this loop into a modulo operation.  */
- +		asm("" : "+r"(ns));
--+
-++		
- 		ns -= NSEC_PER_SEC;
- 		a->tv_sec++;
- 	}
-+
-diff --git a/recipes/linux/em-x270-2.6.23/defconfig b/recipes/linux/linux-2.6.23/em-x270/defconfig
-similarity index 100%
-rename from recipes/linux/em-x270-2.6.23/defconfig
-rename to recipes/linux/linux-2.6.23/em-x270/defconfig
-diff --git a/recipes/linux/em-x270-2.6.23/em-x270.patch b/recipes/linux/linux-2.6.23/em-x270/em-x270.patch
-similarity index 100%
-rename from recipes/linux/em-x270-2.6.23/em-x270.patch
-rename to recipes/linux/linux-2.6.23/em-x270/em-x270.patch
-diff --git a/recipes/linux/linux_2.6.23.bb b/recipes/linux/linux_2.6.23.bb
-index 76ebbbe..c6c547a 100644
---- a/recipes/linux/linux_2.6.23.bb
-+++ b/recipes/linux/linux_2.6.23.bb
-@@ -28,6 +28,9 @@ SRC_URI_avr32 = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.23.tar.bz2
-                  file://defconfig \
-                  http://avr32linux.org/twiki/pub/Main/LinuxPatches/linux-2.6.23.atmel.3.patch.bz2;patch=1 \
-                 "
-+SRC_URI_append_em-x270 = "\
-+	file://em-x270.patch;patch=1 \
-+	file://01-prevet_loop_timespec_add_ns.patch;patch=1"
- 
- SRC_URI_append_cm-x270 = "\
- 	file://0001-cm-x270-base2.patch;patch=1 \
--- 
-1.6.0.4
+Regards,
 
+--=20
+___________
+Rafael Campos
+o0 Methril 0o
+http://openblog.methril.net/
 
 
