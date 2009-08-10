@@ -1,21 +1,17 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [85.17.141.90] (helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MaTIJ-0005R1-B1
-	for openembedded-devel@openembedded.org; Mon, 10 Aug 2009 13:44:04 +0200
-Received: (qmail 20338 invoked by uid 1003); 10 Aug 2009 11:27:50 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 10 Aug 2009 11:27:49 -0000
-Message-ID: <4A800434.4050603@balister.org>
-Date: Mon, 10 Aug 2009 07:27:48 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+	(envelope-from <marcolz@zlo.nu>) id 1MaTzb-0004CB-DO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Aug 2009 14:28:47 +0200
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id 9DB9C14030; Mon, 10 Aug 2009 14:12:34 +0200 (CEST)
+Date: Mon, 10 Aug 2009 14:12:34 +0200
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-References: <4A7D824D.7080103@balister.org>
-	<1249899969.8248.95.camel@mill.internal.reciva.com>
-In-Reply-To: <1249899969.8248.95.camel@mill.internal.reciva.com>
-Subject: Re: OEDEM scheduling
+Message-ID: <20090810121234.GB28304@zlo.nu>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: curl 7.19.5 openssl algorithm problem [PATCH]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,130 +25,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 11:44:06 -0000
-X-Groupsio-MsgNum: 12280
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050504030803090605090504"
+X-List-Received-Date: Mon, 10 Aug 2009 12:28:48 -0000
+X-Groupsio-MsgNum: 12281
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="8w3uRX/HFJGApMzv"
+Content-Disposition: inline
 
---------------ms050504030803090605090504
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+--8w3uRX/HFJGApMzv
+Content-Type: multipart/mixed; boundary="ctP54qlpMx3WjD+/"
+Content-Disposition: inline
 
-Phil Blundell wrote:
-> The November date had 100% approval among those who responded to the
-> doodle poll.  (October was second best; September was least favoured,
-> and in any case the proposed September date is only four weeks away
-> which is probably too close for a lot of folks.)  So, I would suggest
-> that we just go ahead with the November date rather than introducing new
-> alternatives at this stage. 
-> 
-> Either way, it'd be good to try to get the date nailed down within the
-> next week or two so that everyone has adequate notice.  Obviously
-> there's no statutory minimum notice period for this but you probably
-> need at least 6-8 weeks to avoid a large number of diary clashes.
+--ctP54qlpMx3WjD+/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Agreed. Do we have a place to meet for those dates?
+=46rom curl's CVS log: http://cool.haxx.se/cvs.cgi/curl/lib/ssluse.c#rev1.2=
+29
 
-Philip
+you [curl] replaced the old SSLeay_add_ssl_algorithms() call
+with OpenSSL_add_all_algorithms(), however unlike the name suggests,
+the second function is not a superset of the first. When using SSL
+both these functions will need to be called in order to offer complete
+functionality.
 
+This patch fixes the 7.19 breakage of secure (no -k or --insecure flags
+passed) https invocations of the curl binary when connecting to a server
+with certificates with a non-MD5 or SHA-1 signature algorithm, like
+SHA-2. The older curl recipes are unaffected by this.
 
-> 
-> p.
-> 
-> On Sat, 2009-08-08 at 09:49 -0400, Philip Balister wrote:
->> From Mickey's earlier email:
->>
->> We have proposed three weekends. If anyone of you could open a doodle for
->> that, I'd be grateful:
->>
->> * 12/13 Sept.
->> * 17/18 Oct.
->> * 7/8 Nov.
->>
->> I don't like the September weekend :) (but airfare is still OK)
->>
->> For the other two weekends, airfare from .us is not great, but not 
->> ridiculous either.
->>
->> The October data is designed for people who may come from .us for ELC 
->> Europe (http://www.embeddedlinuxconference.com/elc_europe09/), so a 
->> location "near" Grenoble would be helpful. Anyone have any ideas on that?
->>
->> For November I would assume Berlin.
->>
->> Thoughts? Any other weekends that would work well for people?
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Marc
 
---------------ms050504030803090605090504
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+--ctP54qlpMx3WjD+/
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="curl.patch"
+Content-Transfer-Encoding: quoted-printable
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDgxMDEx
-Mjc0OFowIwYJKoZIhvcNAQkEMRYEFIcFhBtJCBfXdWkC/3rjvyqrXRUbMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBYF1ijl2vKfQ0cxB/J7UiA83pK35ysrCHRrpo8DBrjD4cf3lwd
-dIgHITnpGn+0J0q1XrlKatU12piR53no2axadfRcPCxaQw6S7CRnRMkfI8a8VekHtmusCoeMZPGK
-QxYwcuKdJhVcYguA/HYQ7vmV7AxdSR2gNWzFo29UTVbm7T6d12cwWRCMQhqbfEhKlebRxan+mtWC
-6P8xmOXfVMS6ZUX8z1OUY1RSj7QYmEu/y4lRL2f8+/+ynP2gSc3z7idgVjS6F9PEMXpUEs/QlGD8
-8beiE9qFvdblCwWxNvlOPW4Yx87M+T31ntUJxCBUzMs6w5mBQkQ6yzRuTSsMnM4ZAAAAAAAA
+commit 9644286f7de51577ba8e2348d4c1ab37f9a1657c
+Author: Marc Olzheim <marc@iphion.nl>
+Date:   Mon Aug 10 11:14:06 2009 +0200
 
---------------ms050504030803090605090504--
+    Add curl-add_all_algorithms.patch to 7.19.5 recipe. Fixes curl artifact=
+ id 2825989
+    https://sourceforge.net/tracker/index.php?func=3Ddetail&aid=3D2825989&g=
+roup_id=3D976&atid=3D100976
+
+diff --git a/recipes/curl/curl_7.19.5.bb b/recipes/curl/curl_7.19.5.bb
+index df83fe8..f6c1f89 100644
+--- a/recipes/curl/curl_7.19.5.bb
++++ b/recipes/curl/curl_7.19.5.bb
+@@ -1,5 +1,6 @@
+ require curl-common.inc
+ require curl-target.inc
+=20
+-SRC_URI +=3D "file://off_t_abi_fix.patch;patch=3D1;pnum=3D0"
++SRC_URI +=3D "file://off_t_abi_fix.patch;patch=3D1;pnum=3D0 \
++		file://curl-add_all_algorithms.patch;patch=3D1"
+ PR =3D "r0"
+diff --git a/recipes/curl/files/curl-add_all_algorithms.patch b/recipes/cur=
+l/files/curl-add_all_algorithms.patch
+new file mode 100644
+index 0000000..99557f5
+--- /dev/null
++++ b/recipes/curl/files/curl-add_all_algorithms.patch
+@@ -0,0 +1,22 @@
++--- curl-7.19.5/lib/ssluse.c	2009-01-26 15:36:22.000000000 +0100
+++++ curl-7.19.5/lib/ssluse.c	2009-07-23 15:44:12.000000000 +0200
++@@ -58,6 +58,7 @@
++ #ifdef USE_SSLEAY
++=20
++ #ifdef USE_OPENSSL
+++#include <openssl/evp.h>
++ #include <openssl/rand.h>
++ #include <openssl/x509v3.h>
++ #else
++@@ -627,6 +628,11 @@
++   /* Lets get nice error messages */
++   SSL_load_error_strings();
++=20
+++#ifdef USE_OPENSSL
+++  /* Load all algorithms (including SHA2) */
+++  OpenSSL_add_all_algorithms();
+++#endif /* USE_OPENSSL */
+++
++   /* Setup all the global SSL stuff */
++   if(!SSLeay_add_ssl_algorithms())
++     return 0;
+
+--ctP54qlpMx3WjD+/--
+
+--8w3uRX/HFJGApMzv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEARECAAYFAkqADrIACgkQezjnobFOgrGb1QCfYBRzN7UgkDJn6F6OwJdUoOav
+++MAn01i7CU+j0evcm9LoiBeYrTJKOuQ
+=p0Vq
+-----END PGP SIGNATURE-----
+
+--8w3uRX/HFJGApMzv--
