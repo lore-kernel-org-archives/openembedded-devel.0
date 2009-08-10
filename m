@@ -1,31 +1,26 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [76.96.53.9] (helo=qmta02.westchester.pa.hmc1.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MacTL-0007Gn-8K
+	(envelope-from <john@soundmetrics.com>) id 1Mad6A-0001Ac-Nf
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Aug 2009 23:32:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 89B925348E8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2009 17:15:49 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 20282-07 for <openembedded-devel@lists.openembedded.org>; 
-	Mon, 10 Aug 2009 17:15:49 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 5F3C053372F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2009 17:15:49 -0400 (EDT)
-Message-ID: <4A808E05.8070302@cbnco.com>
-Date: Mon, 10 Aug 2009 17:15:49 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+	Tue, 11 Aug 2009 00:12:10 +0200
+Received: from omta02.westchester.pa.hmc1.comcast.net ([76.96.53.7])
+	by qmta02.westchester.pa.hmc1.comcast.net with comcast
+	id Sj721c00D09Ku2s09lvvqT; Mon, 10 Aug 2009 21:55:55 +0000
+Received: from [192.168.10.129] ([75.147.191.205])
+	by omta02.westchester.pa.hmc1.comcast.net with bizsmtp
+	id Slvv1c0014SLwm307lvvnp; Mon, 10 Aug 2009 21:55:55 +0000
+Message-ID: <4A80976B.6020108@soundmetrics.com>
+Date: Mon, 10 Aug 2009 14:55:55 -0700
+From: John Faith <john@soundmetrics.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.21) Gecko/20090303 SeaMonkey/1.1.15
+	(Ubuntu-1.1.15+nobinonly-0ubuntu0.8.04.2)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1249923716-19141-1-git-send-email-msmith@cbnco.com>
-	<20090810192932.GA8142@gmail.com>
-In-Reply-To: <20090810192932.GA8142@gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH] pciutils: fix generation of pci.ids.gz
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <20090810205124.GA15812@gmail.com>
+In-Reply-To: <20090810205124.GA15812@gmail.com>
+Subject: Re: Missing OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin during libgles-omap3_3.00.00.08.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 21:32:39 -0000
+X-List-Received-Date: Mon, 10 Aug 2009 22:12:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Khem Raj wrote:
-> Some older versions of hal could only use uncompressed version. So may be you
-> could package both versions or leave a possiblity to package
-> uncompressed version somehow.
+> ...
+> It seems like this file
+> /home/kraj/work/oe/openembedded/recipes/powervr-drivers/libgles-omap3/OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin
+> is missing in my case.
+>
+> Where should it come from
+>
+> Thx
+>
+> -Khem
+> ...
 
-Hi Khem,
+Hi,
 
-I could put pci.ids into pciutils-ids-uncompressed, would that work? I 
-don't see a reference to pciutils-ids in any recipe or image outside 
-pciutils, so I'm guessing this is something a hal user would install 
-manually after installation?
+The Graphics SDK installer must be downloaded from Ti and manually put 
+in place before building libgles:
+http://code.google.com/p/beagleboard/wiki/HowtoUseSGXunderAngstrom
 
-Thanks,
-Mike
+,
+John
+
+
 
 
