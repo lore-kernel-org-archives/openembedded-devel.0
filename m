@@ -1,33 +1,35 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.217.227] (helo=mail-gx0-f227.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MaWrM-0002Dg-Fd for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Aug 2009 17:32:29 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MaWbf-0006wu-Dc for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Aug 2009 15:16:15 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2009 15:16:15 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <cliff.brake@gmail.com>) id 1MaXYb-0005e0-Lh
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Aug 2009 18:17:09 +0200
+Received: by gxk27 with SMTP id 27so3582751gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2009 15:16:15 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 10 Aug 2009 09:00:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=DILeE9Ka9HLhTlYpglzMZ1R0v7CgJXLfrUo61B+1d28=;
+	b=frZ+/1gj3gZZMEZI1f0gOrXeb0n3nwInFm5YAELYtJPlT/vLIIP8qOlgaoaZXgLPZa
+	/qHBjFxF8S32k5nyoe2d0Gvgv6XOmtcmn/ZumAJEYfQIEP+qafVdZw2hl7colnOyY3lw
+	t5sKTIA/e937kQn0dL3q8J8kdKnP10aYKbWMk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=WpFTNRofXjMSA+ngZ0ri1FgNrdnI52pm3Vjt+Eo5ZsNsDj1qdTFwCJzazjdgVI3ifQ
+	WlesTxVlbRSjLSlluNjtyKzshxxU+Ug80C4d2z52kTtv3NUIn83tIvbywaDejbYnlHYX
+	uEye62nY9fjfUMkOZfp3hMfubOXffQshVBENc=
+MIME-Version: 1.0
+Received: by 10.151.146.21 with SMTP id y21mr8444102ybn.304.1249920055304; 
+	Mon, 10 Aug 2009 09:00:55 -0700 (PDT)
+In-Reply-To: <4A7D861F.6020308@balister.org>
+References: <4A7D861F.6020308@balister.org>
+Date: Mon, 10 Aug 2009 12:00:55 -0400
+Message-ID: <f96d234e0908100900n2374989ib5ed0f7ec519e9ec@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 10 Aug 2009 17:16:02 +0200
-Message-ID: <h5pdjj$1sp$1@ger.gmane.org>
-References: <200908101645.25246.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.1pre) Gecko/20090716 Shredder/3.0b4pre
-In-Reply-To: <200908101645.25246.marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-Subject: Re: State of Perl in OpenEmbedded
+Subject: Re: User Voice page
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +43,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 15:32:33 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 10 Aug 2009 16:17:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 10-08-09 16:45, Marcin Juszkiewicz wrote:
+On Sat, Aug 8, 2009 at 10:05 AM, Philip Balister<philip@balister.org> wrote:
+> Can we add a link from the OE website to the user voice page?
 >
-> Hi
->
-> It is over 2 years since we got Perl 5.8.8 from Jamie Lenehan. We are
-> able to cross-compile Perl, we can build CPAN modules but thats all.
->
-> I wanted to run irssi on sheevaplug (under Angstrom). But this IRC
-> client is more usable when compiled with Perl support. It is not
-> possible at all with OpenEmbedded. Why?
->
-> 1. We do not stage libperl at all. Fix is simple but see next point.
-> 2. Software checks for perl cflags/ldflags by calling Perl. This means
->     that on my system x86-64 libraries/headers are used nevermind for
->     which target I try to build. Result is disaster.
->
-> Any ideas how to solve that? I gave up.
+> http://openembedded.uservoice.com/pages/6963-general
 
-One could try to teach perl-native to support sysroot.....
+Added to home page.
 
-
+Cliff
 
 
