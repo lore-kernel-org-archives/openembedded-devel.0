@@ -1,38 +1,41 @@
-Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
+Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1MaZ8A-00040K-Vl
+	(envelope-from <raj.khem@gmail.com>) id 1Maaoa-0001MF-NW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Aug 2009 19:57:59 +0200
-Received: by ewy8 with SMTP id 8so2543867ewy.12
+	Mon, 10 Aug 2009 21:45:56 +0200
+Received: by rv-out-0708.google.com with SMTP id l33so949316rvb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Aug 2009 10:41:44 -0700 (PDT)
+	Mon, 10 Aug 2009 12:29:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=mSmFYPFXSxV1mA0hrQffnjLsoHomu6iWgiHku5d03Kw=;
-	b=tDc2ZtBinL1oXL0TRRPy8v0EHdh8QAOCWUiV5omeO0klQs3hM0aaitZ8WEH3Hc2Wan
-	QN8MMAw/UJ9QJba07dQYdA7Any7J9DoyMLDE+Z6hwfMOVwTU+B7Vi5tIw2FmPomZu+IO
-	kAV9Xm5XXhbqbo07nyN+mp6fUm5JnFbHyxE8g=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=r/qIHa+tPb8KJR0AA8f389aAixsa1S39EyBCNCUg6to=;
+	b=F1ALTTb35M0UuEGbaukkoIa4sy8jPuFCKfAgcbLy6sd3OPmJlpZhuhSl1HILDHUslg
+	GZu4RgLnEqodA23EsFFtcPD5esiVGPtcJI3jklOmR7nc8Ow6pQYAepVeITqZL3zC0rF4
+	/EUSJHRccJfP0fvjFQoOYPP4AKz86gebrwrVU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=A8pwEAJ1TQULcX5NyBxy0KEJ3z1KvuZqhyZRUU1u9Oxv+sbgDoaU/Qiv2J9wUieuR8
-	/s4yNbhXqe6SJw8NHKuxF2CrLCtJ0wVZ1X8UI8+orSCg1ANCT0zVMvhvHiiBOC125qB7
-	e4qzjcros3pqOwllsmAw7IqtACXv/pplkXg9g=
-Received: by 10.210.20.6 with SMTP id 6mr3106291ebt.73.1249926104371;
-	Mon, 10 Aug 2009 10:41:44 -0700 (PDT)
-Received: from ?192.168.0.7? ([94.180.23.68])
-	by mx.google.com with ESMTPS id 5sm788983eyf.28.2009.08.10.10.41.43
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=xw2907LgvXDz4qm9TtKwiYFsmD9Zj5ic/dLc+SilLpvex1x4/DuLQFd4j9hGaR4dYV
+	wmA5/eYrI/1Yiu2C+G5kTKEOOsuvaiSXZX6nuJvmVodm5tJbCRuVeWhKnGNjD6Q/uXIo
+	yuzE6/DLgz19ZJTbyQEDWxy+7181QTGfYnovs=
+Received: by 10.140.208.15 with SMTP id f15mr1818229rvg.49.1249932579138;
+	Mon, 10 Aug 2009 12:29:39 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-8-242.dsl.pltn13.sbcglobal.net
+	[71.146.8.242])
+	by mx.google.com with ESMTPS id g22sm24419395rvb.52.2009.08.10.12.29.37
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 10 Aug 2009 10:41:43 -0700 (PDT)
-Message-ID: <4A805BF0.8050805@gmail.com>
-Date: Mon, 10 Aug 2009 23:42:08 +0600
-From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
+	Mon, 10 Aug 2009 12:29:37 -0700 (PDT)
+Date: Mon, 10 Aug 2009 12:29:32 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Building OE for LPC3250
+Message-ID: <20090810192932.GA8142@gmail.com>
+References: <1249923716-19141-1-git-send-email-msmith@cbnco.com>
+MIME-Version: 1.0
+In-Reply-To: <1249923716-19141-1-git-send-email-msmith@cbnco.com>
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: Re: [PATCH] pciutils: fix generation of pci.ids.gz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +49,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 17:57:59 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 10 Aug 2009 19:46:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
+On (10/08/09 13:01), Michael Smith wrote:
+> Set ZLIB=yes to prevent auto-detection by the lib/configure script,
+> which only looks in /usr/include.
 
-I work with ARM9 Phytec LPC3250 RDK now and decided to try using OE as 
-building system for my project (hard real-time, industrial). Have 
-anybody among OE developers worked with this board earlier?
+Some older versions of hal could only use uncompressed version. So may be you
+could package both versions or leave a possiblity to package
+uncompressed version somehow.
 
-Thanks in advance.
+Thx
 
--- 
-Best Regards, 
-Dmitry Vinokurov 
-<d.vinokuroff@gmail.com>
-
+-Khem
 
 
