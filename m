@@ -1,19 +1,28 @@
-Received: from [85.17.141.90] (helo=mzh.zlo.nu)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1MaQDh-0004ir-Qy
+	(envelope-from <philb@gnu.org>) id 1MaSKe-0005U2-2P
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Aug 2009 10:27:05 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id 48FA21402F; Mon, 10 Aug 2009 10:10:54 +0200 (CEST)
-Date: Mon, 10 Aug 2009 10:10:54 +0200
-From: Marc Olzheim <zlo@zlo.nu>
+	Mon, 10 Aug 2009 12:42:24 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MaS4z-0004cn-3b
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Aug 2009 11:26:13 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MaS4y-0003d8-SU
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 Aug 2009 11:26:12 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090810081054.GA27215@zlo.nu>
-References: <200908091526.39270.holger+oe@freyther.de>
-MIME-Version: 1.0
-In-Reply-To: <200908091526.39270.holger+oe@freyther.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: Patchwork work
+In-Reply-To: <4A7D824D.7080103@balister.org>
+References: <4A7D824D.7080103@balister.org>
+Date: Mon, 10 Aug 2009 11:26:09 +0100
+Message-Id: <1249899969.8248.95.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+Subject: Re: OEDEM scheduling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,47 +36,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 08:27:06 -0000
-X-Groupsio-MsgNum: 12277
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gBBFr7Ir9EOA20Yy"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 10 Aug 2009 10:42:24 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---gBBFr7Ir9EOA20Yy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The November date had 100% approval among those who responded to the
+doodle poll.  (October was second best; September was least favoured,
+and in any case the proposed September date is only four weeks away
+which is probably too close for a lot of folks.)  So, I would suggest
+that we just go ahead with the November date rather than introducing new
+alternatives at this stage. 
 
-On Sun, Aug 09, 2009 at 03:26:39PM +0200, Holger Hans Peter Freyther wrote:
-> Hey Guys,
->=20
-> I just spent some time going through landed patches. We are down to one p=
-age=20
-> on the patchwork site. It would be nice if people could remove patches th=
-at=20
-> already got landed or tell me which one to remove.
->=20
-> love
-> 	z.
+Either way, it'd be good to try to get the date nailed down within the
+next week or two so that everyone has adequate notice.  Obviously
+there's no statutory minimum notice period for this but you probably
+need at least 6-8 weeks to avoid a large number of diary clashes.
 
-Nice work ;)
+p.
 
-I have no idea how to remove my patches, so I probably can't.
-913 and 918 were applied and can be removed for sure.
+On Sat, 2009-08-08 at 09:49 -0400, Philip Balister wrote:
+> From Mickey's earlier email:
+> 
+> We have proposed three weekends. If anyone of you could open a doodle for
+> that, I'd be grateful:
+> 
+> * 12/13 Sept.
+> * 17/18 Oct.
+> * 7/8 Nov.
+> 
+> I don't like the September weekend :) (but airfare is still OK)
+> 
+> For the other two weekends, airfare from .us is not great, but not 
+> ridiculous either.
+> 
+> The October data is designed for people who may come from .us for ELC 
+> Europe (http://www.embeddedlinuxconference.com/elc_europe09/), so a 
+> location "near" Grenoble would be helpful. Anyone have any ideas on that?
+> 
+> For November I would assume Berlin.
+> 
+> Thoughts? Any other weekends that would work well for people?
 
-Marc
 
---gBBFr7Ir9EOA20Yy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEARECAAYFAkp/1g4ACgkQezjnobFOgrGr3ACfQrwkamSlgFBjoQMr5ps9qSM3
-mE4AoM9u4RzKV8DO9ePjwaXBDA63w5Fw
-=VgeO
------END PGP SIGNATURE-----
-
---gBBFr7Ir9EOA20Yy--
