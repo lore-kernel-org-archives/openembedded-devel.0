@@ -1,33 +1,38 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1MaYVh-0005BH-8N
+	(envelope-from <d.vinokuroff@gmail.com>) id 1MaZ8A-00040K-Vl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 Aug 2009 19:18:13 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id BA6C95315EF;
-	Mon, 10 Aug 2009 13:02:00 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 13620-06; Mon, 10 Aug 2009 13:02:00 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 9B53752730D; Mon, 10 Aug 2009 13:02:00 -0400 (EDT)
-X-Spam-Score: 
-X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.1.8
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 94CA7531B8D;
-	Mon, 10 Aug 2009 13:01:59 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id 7AFBA416FF; Mon, 10 Aug 2009 13:01:59 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
+	Mon, 10 Aug 2009 19:57:59 +0200
+Received: by ewy8 with SMTP id 8so2543867ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Aug 2009 10:41:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=mSmFYPFXSxV1mA0hrQffnjLsoHomu6iWgiHku5d03Kw=;
+	b=tDc2ZtBinL1oXL0TRRPy8v0EHdh8QAOCWUiV5omeO0klQs3hM0aaitZ8WEH3Hc2Wan
+	QN8MMAw/UJ9QJba07dQYdA7Any7J9DoyMLDE+Z6hwfMOVwTU+B7Vi5tIw2FmPomZu+IO
+	kAV9Xm5XXhbqbo07nyN+mp6fUm5JnFbHyxE8g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=A8pwEAJ1TQULcX5NyBxy0KEJ3z1KvuZqhyZRUU1u9Oxv+sbgDoaU/Qiv2J9wUieuR8
+	/s4yNbhXqe6SJw8NHKuxF2CrLCtJ0wVZ1X8UI8+orSCg1ANCT0zVMvhvHiiBOC125qB7
+	e4qzjcros3pqOwllsmAw7IqtACXv/pplkXg9g=
+Received: by 10.210.20.6 with SMTP id 6mr3106291ebt.73.1249926104371;
+	Mon, 10 Aug 2009 10:41:44 -0700 (PDT)
+Received: from ?192.168.0.7? ([94.180.23.68])
+	by mx.google.com with ESMTPS id 5sm788983eyf.28.2009.08.10.10.41.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 10 Aug 2009 10:41:43 -0700 (PDT)
+Message-ID: <4A805BF0.8050805@gmail.com>
+Date: Mon, 10 Aug 2009 23:42:08 +0600
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Aug 2009 13:01:56 -0400
-Message-Id: <1249923716-19141-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH] pciutils: fix generation of pci.ids.gz
+Subject: Building OE for LPC3250
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,54 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 17:18:13 -0000
+X-List-Received-Date: Mon, 10 Aug 2009 17:57:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Set ZLIB=yes to prevent auto-detection by the lib/configure script,
-which only looks in /usr/include.
+Hello,
 
-Also fix perms for pci.ids.gz.
+I work with ARM9 Phytec LPC3250 RDK now and decided to try using OE as 
+building system for my project (hard real-time, industrial). Have 
+anybody among OE developers worked with this board earlier?
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/pciutils/pciutils_3.1.2.bb |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+Thanks in advance.
 
-diff --git a/recipes/pciutils/pciutils_3.1.2.bb b/recipes/pciutils/pciutils_3.1.2.bb
-index f23e6dd..914fdf7 100644
---- a/recipes/pciutils/pciutils_3.1.2.bb
-+++ b/recipes/pciutils/pciutils_3.1.2.bb
-@@ -12,12 +12,13 @@ SRC_URI_append_nylon = "file://gcc-3-compatibility.patch;patch=1 "
- 
- PARALLEL_MAKE = ""
- 
--PR ="r4"
-+PR ="r5"
- 
- EXTRA_OEMAKE += "'STRIP = '"
- export SHARED=yes
- 
- do_configure () {
-+	export ZLIB=yes
- 	(cd lib && ./configure ${datadir} ${PV} ${TARGET_OS} 2.4.21 ${TARGET_ARCH})
- }
- 
-@@ -34,7 +35,7 @@ do_install () {
- 
- do_install_append () {
- 	install -d ${D}/${datadir}
--	install -m 6440 ${WORKDIR}/${PN}-${PV}/pci.ids ${D}/${datadir}
-+	install -m 0644 ${WORKDIR}/${PN}-${PV}/pci.ids.gz ${D}/${datadir}
- 
- 	# The makefile does not install the development files:
- 	# libpci.so pci.h header.h config.h types.h
-@@ -59,4 +60,4 @@ do_stage () {
- 
- 
- PACKAGES =+ "pciutils-ids"
--FILES_pciutils-ids="${datadir}/pci.ids"
-+FILES_pciutils-ids="${datadir}/pci.ids.gz"
 -- 
-1.6.3
+Best Regards, 
+Dmitry Vinokurov 
+<d.vinokuroff@gmail.com>
 
 
 
