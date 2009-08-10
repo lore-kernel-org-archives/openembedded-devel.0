@@ -1,21 +1,21 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MaTHX-0005QR-1X
-	for openembedded-devel@openembedded.org; Mon, 10 Aug 2009 13:43:15 +0200
-Received: (qmail 20107 invoked by uid 1003); 10 Aug 2009 11:27:00 -0000
+	(envelope-from <philip@balister.org>) id 1MaTIJ-0005R1-B1
+	for openembedded-devel@openembedded.org; Mon, 10 Aug 2009 13:44:04 +0200
+Received: (qmail 20338 invoked by uid 1003); 10 Aug 2009 11:27:50 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 10 Aug 2009 11:27:00 -0000
-Message-ID: <4A800403.8040607@balister.org>
-Date: Mon, 10 Aug 2009 07:26:59 -0400
+	by mail.geekisp.com with SMTP; 10 Aug 2009 11:27:49 -0000
+Message-ID: <4A800434.4050603@balister.org>
+Date: Mon, 10 Aug 2009 07:27:48 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <200908091526.39270.holger+oe@freyther.de>
-	<20090810081054.GA27215@zlo.nu>
-In-Reply-To: <20090810081054.GA27215@zlo.nu>
-Subject: Re: Patchwork work
+References: <4A7D824D.7080103@balister.org>
+	<1249899969.8248.95.camel@mill.internal.reciva.com>
+In-Reply-To: <1249899969.8248.95.camel@mill.internal.reciva.com>
+Subject: Re: OEDEM scheduling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,48 +29,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Aug 2009 11:43:15 -0000
-X-Groupsio-MsgNum: 12279
+X-List-Received-Date: Mon, 10 Aug 2009 11:44:06 -0000
+X-Groupsio-MsgNum: 12280
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms010306060503080804030108"
+	micalg=sha1; boundary="------------ms050504030803090605090504"
 
---------------ms010306060503080804030108
+--------------ms050504030803090605090504
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Marc Olzheim wrote:
-> On Sun, Aug 09, 2009 at 03:26:39PM +0200, Holger Hans Peter Freyther wrote:
->> Hey Guys,
->>
->> I just spent some time going through landed patches. We are down to one page 
->> on the patchwork site. It would be nice if people could remove patches that 
->> already got landed or tell me which one to remove.
->>
->> love
->> 	z.
+Phil Blundell wrote:
+> The November date had 100% approval among those who responded to the
+> doodle poll.  (October was second best; September was least favoured,
+> and in any case the proposed September date is only four weeks away
+> which is probably too close for a lot of folks.)  So, I would suggest
+> that we just go ahead with the November date rather than introducing new
+> alternatives at this stage. 
 > 
-> Nice work ;)
-> 
-> I have no idea how to remove my patches, so I probably can't.
-> 913 and 918 were applied and can be removed for sure.
+> Either way, it'd be good to try to get the date nailed down within the
+> next week or two so that everyone has adequate notice.  Obviously
+> there's no statutory minimum notice period for this but you probably
+> need at least 6-8 weeks to avoid a large number of diary clashes.
 
-Create an account and remind me to give you admin rights, then you can 
-remove your patches.
+Agreed. Do we have a place to meet for those dates?
 
 Philip
 
+
 > 
-> Marc
+> p.
+> 
+> On Sat, 2009-08-08 at 09:49 -0400, Philip Balister wrote:
+>> From Mickey's earlier email:
+>>
+>> We have proposed three weekends. If anyone of you could open a doodle for
+>> that, I'd be grateful:
+>>
+>> * 12/13 Sept.
+>> * 17/18 Oct.
+>> * 7/8 Nov.
+>>
+>> I don't like the September weekend :) (but airfare is still OK)
+>>
+>> For the other two weekends, airfare from .us is not great, but not 
+>> ridiculous either.
+>>
+>> The October data is designed for people who may come from .us for ELC 
+>> Europe (http://www.embeddedlinuxconference.com/elc_europe09/), so a 
+>> location "near" Grenoble would be helpful. Anyone have any ideas on that?
+>>
+>> For November I would assume Berlin.
+>>
+>> Thoughts? Any other weekends that would work well for people?
 > 
 > 
-> ------------------------------------------------------------------------
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
---------------ms010306060503080804030108
+--------------ms050504030803090605090504
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -122,17 +142,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDgxMDEx
-MjY1OVowIwYJKoZIhvcNAQkEMRYEFPlW6PuQESoicBoaV73XyIM+Fyz2MFIGCSqGSIb3DQEJDzFF
+Mjc0OFowIwYJKoZIhvcNAQkEMRYEFIcFhBtJCBfXdWkC/3rjvyqrXRUbMFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQA59KgCWQs8U7B8ZQm6O0Ioeg95iQmbPgvjwbeS1kLIcTSO5qTs
-teniZhRdJZFvZ1YpQl8docSuabIz93mO2L/LP+sOzKM7i+K1j5k2NrLgwMCr/pSlKiWkAOBV/i1K
-TSE5FnXUjkN9oUQayDFRMPcQSZjQxahpSvS40HyjBU2CjnaJDttt499t952F7/gpt36Vi9jXZz+F
-TB42xKqIisbt2F6oZjxmVgOTdgOtbubTxhS4uNgEngBXEzmgoBDQnmIihdCHHmLQO3+WYlrtNuJl
-dBlumOgCNL/NWHRYOkMS7ref47VB6Y/MFP3PO8uZYMH1boUVSyBhGrFn+ox+SO+3AAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQBYF1ijl2vKfQ0cxB/J7UiA83pK35ysrCHRrpo8DBrjD4cf3lwd
+dIgHITnpGn+0J0q1XrlKatU12piR53no2axadfRcPCxaQw6S7CRnRMkfI8a8VekHtmusCoeMZPGK
+QxYwcuKdJhVcYguA/HYQ7vmV7AxdSR2gNWzFo29UTVbm7T6d12cwWRCMQhqbfEhKlebRxan+mtWC
+6P8xmOXfVMS6ZUX8z1OUY1RSj7QYmEu/y4lRL2f8+/+ynP2gSc3z7idgVjS6F9PEMXpUEs/QlGD8
+8beiE9qFvdblCwWxNvlOPW4Yx87M+T31ntUJxCBUzMs6w5mBQkQ6yzRuTSsMnM4ZAAAAAAAA
 
---------------ms010306060503080804030108--
+--------------ms050504030803090605090504--
