@@ -1,26 +1,27 @@
-Received: from [80.67.172.39] (helo=webmail.no-log.org)
+Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Mandx-0000Nt-TA
+	(envelope-from <denis@denix.org>) id 1Manlg-0000dV-Tu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Aug 2009 11:27:45 +0200
-Received: by webmail.no-log.org (Postfix, from userid 33)
-	id 2F48D4C327; Tue, 11 Aug 2009 11:11:28 +0200 (CEST)
-X-Squirrel-UserHash: c3wyGAAN
-X-Squirrel-FromHash: AQQEWAkADC8=
-Message-ID: <56726.AQQEWAkADC8=.1249981888.squirrel@webmail.no-log.org>
-In-Reply-To: <19c1b8a90908110109x6f2bf329ib8794224b1ee98a@mail.gmail.com>
-References: <1248042838-7496-1-git-send-email-otavio@ossystems.com.br>
-	<1248042838-7496-2-git-send-email-otavio@ossystems.com.br>
-	<200908110501.11808.holger+oe@freyther.de>
-	<19c1b8a90908110109x6f2bf329ib8794224b1ee98a@mail.gmail.com>
-Date: Tue, 11 Aug 2009 11:11:28 +0200 (CEST)
-From: "GNUtoo" <GNUtoo@no-log.org>
+	Tue, 11 Aug 2009 11:35:45 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KO700DNLGKD6W42@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	11 Aug 2009 04:19:25 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4028A14AF5F; Tue,
+	11 Aug 2009 05:19:25 -0400 (EDT)
+Date: Tue, 11 Aug 2009 05:19:25 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.9a
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-Subject: Re: [PATCH 2/3] uClibc: use __always_inline instead of __inline__
+Message-id: <20090811091925.GA11120@denix.org>
+References: <20090810205124.GA15812@gmail.com>
+	<4A80976B.6020108@soundmetrics.com> <20090811014358.GA8250@denix.org>
+	<19c1b8a90908110034j73e16bacqcf7c7c8c1d3a3607@mail.gmail.com>
+	<fce2a370908110100m2347b6fag409721b7f024b847@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <fce2a370908110100m2347b6fag409721b7f024b847@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Missing OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin	during libgles-omap3_3.00.00.08.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2009 09:27:46 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 Aug 2009 09:35:45 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-> On Mon, Aug 10, 2009 at 8:01 PM, Holger Hans Peter
-> Freyther<holger+oe@freyther.de> wrote:
->> On Monday 20 July 2009 00:33:57 Otavio Salvador wrote:
->>> From: Mario Domenech Goulart <mario@ossystems.com.br>
->>>
->>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->>
->> Why? what does it fix?
->
-> For now I think it fixes nothing. just replaces __inline__ with
-> __inline which essentially has same semantics
-> but probably  it is intended to have a 'must inline' semantics for
-> these functions. in this case we need to fix
-> the defines in uclibc. I will see to it
-There was a problem with some gcc version + uclibc on MIPS
-basically some functions should have been inlined and they weren't
-that made all programs using shared libs segfault in ld-uClibc.so.0
-Denis.
+On Tue, Aug 11, 2009 at 11:00:47AM +0300, Ihar Hrachyshka wrote:
+> On Tue, Aug 11, 2009 at 10:34 AM, Khem Raj<raj.khem@gmail.com> wrote:
+> > On Mon, Aug 10, 2009 at 6:43 PM, Denys Dmytriyenko<denis@denix.org> wrote:
+> >> On Mon, Aug 10, 2009 at 02:55:55PM -0700, John Faith wrote:
+> >>> Khem Raj wrote:
+> >>>> ...
+> >>>> It seems like this file
+> >>>> /home/kraj/work/oe/openembedded/recipes/powervr-drivers/libgles-omap3/OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin
+> >>>> is missing in my case.
+> >>>>
+> >>>> Where should it come from
+> >>>
+> >>> The Graphics SDK installer must be downloaded from Ti and manually put in
+> >>> place before building libgles:
+> >>> http://code.google.com/p/beagleboard/wiki/HowtoUseSGXunderAngstrom
+> >>
+> >> By the way, should it be done the same way as DVSDK - i.e. expect the
+> >> installer in the downloads/ instead of the recipes/? Which way is better?
+> >
+> > FWIW I would prefer if it downloads the file for me somehow
+> 
+> Texas Instruments doesn't allow it.
 
+For now, but it is being addressed and should be better in the future...
+
+Denys
 
 
