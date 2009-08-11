@@ -1,22 +1,25 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MagTJ-0006Bu-1T
+	(envelope-from <denis@denix.org>) id 1MagfG-0006de-N3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Aug 2009 03:48:17 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id CF3EC1B10C0A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2009 01:35:09 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Tue, 11 Aug 2009 04:00:38 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KO600BICVHA0WN3@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	10 Aug 2009 20:44:04 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 22FAC14AF5F; Mon,
+	10 Aug 2009 21:43:58 -0400 (EDT)
+Date: Mon, 10 Aug 2009 21:43:58 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Aug 2009 03:31:23 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <20090810121234.GB28304@zlo.nu>
-In-Reply-To: <20090810121234.GB28304@zlo.nu>
-MIME-Version: 1.0
-Message-Id: <200908110331.23768.holger+oe@freyther.de>
-Subject: Re: curl 7.19.5 openssl algorithm problem [PATCH]
+Message-id: <20090811014358.GA8250@denix.org>
+References: <20090810205124.GA15812@gmail.com>
+	<4A80976B.6020108@soundmetrics.com>
+MIME-version: 1.0
+In-reply-to: <4A80976B.6020108@soundmetrics.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: Missing OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin	during libgles-omap3_3.00.00.08.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,30 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2009 01:48:19 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Aug 2009 02:00:38 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Monday 10 August 2009 14:12:34 Marc Olzheim wrote:
-> From curl's CVS log: http://cool.haxx.se/cvs.cgi/curl/lib/ssluse.c#rev1.229
+On Mon, Aug 10, 2009 at 02:55:55PM -0700, John Faith wrote:
+> Khem Raj wrote:
+>> ...
+>> It seems like this file
+>> /home/kraj/work/oe/openembedded/recipes/powervr-drivers/libgles-omap3/OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin
+>> is missing in my case.
+>>
+>> Where should it come from
 >
-> you [curl] replaced the old SSLeay_add_ssl_algorithms() call
-> with OpenSSL_add_all_algorithms(), however unlike the name suggests,
-> the second function is not a superset of the first. When using SSL
-> both these functions will need to be called in order to offer complete
-> functionality.
->
-> This patch fixes the 7.19 breakage of secure (no -k or --insecure flags
-> passed) https invocations of the curl binary when connecting to a server
-> with certificates with a non-MD5 or SHA-1 signature algorithm, like
-> SHA-2. The older curl recipes are unaffected by this.
+> The Graphics SDK installer must be downloaded from Ti and manually put in 
+> place before building libgles:
+> http://code.google.com/p/beagleboard/wiki/HowtoUseSGXunderAngstrom
 
-Great. You should have bumped the PR of the recipe as well. If the content of 
-the package change, the PR should be bumped so people could upgrade the 
-resulting packages.
+By the way, should it be done the same way as DVSDK - i.e. expect the 
+installer in the downloads/ instead of the recipes/? Which way is better?
 
-
-Signed-Off-By: Holger Freyther <holger+oe@freyther.de>
+Denys
 
 
