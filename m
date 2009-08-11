@@ -1,34 +1,35 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+Received: from [209.85.220.216] (helo=mail-fx0-f216.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mam7m-0001Qt-Fp
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MamXb-0002E5-Dh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Aug 2009 09:50:26 +0200
-Received: by qyk35 with SMTP id 35so3200419qyk.24
+	Tue, 11 Aug 2009 10:17:08 +0200
+Received: by fxm12 with SMTP id 12so2927074fxm.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2009 00:34:08 -0700 (PDT)
+	Tue, 11 Aug 2009 01:00:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=JNkjeZkbN3yTa8ZbK5n9g1kTHo0UmRv63FrHPUhC0XU=;
-	b=KlIvXWMut35Z/wi9OOysweOvQhlFyg7yPPZ/nCTLqZifYw1atQHxDvmmGmTuxM/XKv
-	l3R83/iLrT69ejGx8ewA3UmeQd5/3EK+9X5VEwYkVMQXyEY5dB2VKrnKL/SATi8+RxBV
-	oI3j7CJ4Qt0kXshCW3xXG8kE5broP/dvYSirk=
+	bh=z3xjEEfIul6pgv5urS6MjVWnaD4ojToWsn6APqG+HIA=;
+	b=qzHNTsm2ONMtT+yGdWUJOlBnoPy5pEr+QYwPxnw3rDkfQd0V73ZlE3LLwS8+pkXf2B
+	NzBai+3drmF7LmYiNelKkmN+bBYHswxxjsu3GRjeFnUukECckZkF6rxkat162emqduGa
+	XDX372mFgCIGOQY7mhygUuP7f62jZsDEADYf4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=qs0OtWkA8JA2Bclr07wdWI+4kxgNZqviddDHy6or/UwpTUEniYHXVIb7v6dN8FG5q1
-	v8Kro85+CD3ahgQryw4E51dhfxV1JqBpAlO0nh4RngUVZ7M7v5ocazWibCtOf4yUq8On
-	DxHlbQIW5RjoRT6IQ4Bj1Kl147z/aESM2Gwog=
+	b=wvotJA5/zZmrLEgQco5ztZXc+1guKgXakNJG1gkI2PxeDLoNtSzLExKlf+u241M1QM
+	LYlpNkxbrg3Sd2ua1rLmwzsUktyTyHXhGfKX4z7Zk0CkvER2N0sSu6kjYenM/un6/Gm5
+	IdaSagKoT9Mnl0J7tIvMfXvwSXA8mt+KuecUw=
 MIME-Version: 1.0
-Received: by 10.229.99.210 with SMTP id v18mr1730775qcn.34.1249976047929; Tue, 
-	11 Aug 2009 00:34:07 -0700 (PDT)
-In-Reply-To: <20090811014358.GA8250@denix.org>
+Received: by 10.103.6.18 with SMTP id j18mr2294752mui.117.1249977647108; Tue, 
+	11 Aug 2009 01:00:47 -0700 (PDT)
+In-Reply-To: <19c1b8a90908110034j73e16bacqcf7c7c8c1d3a3607@mail.gmail.com>
 References: <20090810205124.GA15812@gmail.com>
 	<4A80976B.6020108@soundmetrics.com> <20090811014358.GA8250@denix.org>
-Date: Tue, 11 Aug 2009 00:34:07 -0700
-Message-ID: <19c1b8a90908110034j73e16bacqcf7c7c8c1d3a3607@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	<19c1b8a90908110034j73e16bacqcf7c7c8c1d3a3607@mail.gmail.com>
+Date: Tue, 11 Aug 2009 11:00:47 +0300
+Message-ID: <fce2a370908110100m2347b6fag409721b7f024b847@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: Missing OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin during libgles-omap3_3.00.00.08.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -44,30 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2009 07:50:27 -0000
+X-List-Received-Date: Tue, 11 Aug 2009 08:17:09 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 10, 2009 at 6:43 PM, Denys Dmytriyenko<denis@denix.org> wrote:
-> On Mon, Aug 10, 2009 at 02:55:55PM -0700, John Faith wrote:
->> Khem Raj wrote:
->>> ...
->>> It seems like this file
->>> /home/kraj/work/oe/openembedded/recipes/powervr-drivers/libgles-omap3/OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin
->>> is missing in my case.
+On Tue, Aug 11, 2009 at 10:34 AM, Khem Raj<raj.khem@gmail.com> wrote:
+> On Mon, Aug 10, 2009 at 6:43 PM, Denys Dmytriyenko<denis@denix.org> wrote:
+>> On Mon, Aug 10, 2009 at 02:55:55PM -0700, John Faith wrote:
+>>> Khem Raj wrote:
+>>>> ...
+>>>> It seems like this file
+>>>> /home/kraj/work/oe/openembedded/recipes/powervr-drivers/libgles-omap3/OMAP35x_Graphics_SDK_setuplinux_3_00_00_08.bin
+>>>> is missing in my case.
+>>>>
+>>>> Where should it come from
 >>>
->>> Where should it come from
+>>> The Graphics SDK installer must be downloaded from Ti and manually put in
+>>> place before building libgles:
+>>> http://code.google.com/p/beagleboard/wiki/HowtoUseSGXunderAngstrom
 >>
->> The Graphics SDK installer must be downloaded from Ti and manually put in
->> place before building libgles:
->> http://code.google.com/p/beagleboard/wiki/HowtoUseSGXunderAngstrom
+>> By the way, should it be done the same way as DVSDK - i.e. expect the
+>> installer in the downloads/ instead of the recipes/? Which way is better?
 >
-> By the way, should it be done the same way as DVSDK - i.e. expect the
-> installer in the downloads/ instead of the recipes/? Which way is better?
+> FWIW I would prefer if it downloads the file for me somehow
 
-FWIW I would prefer if it downloads the file for me somehow
->
-> Denys
+Texas Instruments doesn't allow it.
+
+>>
+>> Denys
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
