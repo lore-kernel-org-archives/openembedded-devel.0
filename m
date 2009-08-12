@@ -1,34 +1,27 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [151.189.21.45] (helo=mail-in-05.arcor-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MbL58-0004Yu-MP for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 23:10:03 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MbKpB-00078r-ET for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 20:53:33 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2009 20:53:33 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2009 20:53:33 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <no2spam@nospam.arcornews.de>) id 1MbM6c-0004ji-Ii
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 00:15:38 +0200
+Received: from mail-in-15-z2.arcor-online.net (mail-in-15-z2.arcor-online.net
+	[151.189.8.32]) by mx.arcor.de (Postfix) with ESMTP id 2944B332A3B;
+	Wed, 12 Aug 2009 23:59:09 +0200 (CEST)
+Received: from mail-in-10.arcor-online.net (mail-in-10.arcor-online.net
+	[151.189.21.50])
+	by mail-in-15-z2.arcor-online.net (Postfix) with ESMTP id 1B35A724750; 
+	Wed, 12 Aug 2009 23:59:09 +0200 (CEST)
+Received: from localhost.localdomain (p5B3B1B4E.dip.t-dialin.net [91.59.27.78])
+	(Authenticated sender: leggewie@arcor.de)
+	by mail-in-10.arcor-online.net (Postfix) with ESMTPSA id 6A52828EE56;
+	Wed, 12 Aug 2009 23:59:07 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-10.arcor-online.net 6A52828EE56
+From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 12 Aug 2009 22:53:19 +0200
-Message-ID: <h5va41$k5j$1@ger.gmane.org>
-References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>	<h5um2o$ioq$1@ger.gmane.org>
-	<5f2b60908121224k50e975e5xe710a94ff0c94871@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
-In-Reply-To: <5f2b60908121224k50e975e5xe710a94ff0c94871@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: gstreamer-ti fails for target dm6446-evm (TI davinci)
+Date: Wed, 12 Aug 2009 23:58:53 +0200
+Message-Id: <1250114333-22259-1-git-send-email-oe-devel@rolf.leggewie.biz>
+X-Mailer: git-send-email 1.6.3.3
+Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+Subject: [PATCH] base.bbclass: ftp.matrix.com.br no longer exists
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2009 21:10:04 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 Aug 2009 22:15:38 -0000
 
-On 12-08-09 21:24, Bjørn Forsman wrote:
-> 2009/8/12 Koen Kooi<k.kooi@student.utwente.nl>:
->> On 12-08-09 14:49, Bjørn Forsman wrote:
->>
->>> Any suggestions for a fix?
->>
->> I'm cleaning up the arago updates and plan to push them into OE this week:
->> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/dvsdk
->
-> That sounds great!
->
->> When that's in it should give you something that at least builds for
->> dm6446-evm.
->
-> What are the chances that it will _run_ on the dm6446-evm?
+---
+ classes/base.bbclass |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-The chances are quite good, but I won't have access to an actual 
-dm6446-evm for another 3 weeks, so I can't give a solid garantee till 
-then. I do have another dm6446 based board here, though.
-
-regards,
-
-Koen
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index ef6c0ab..5363e5c 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -1279,7 +1279,6 @@ ${DEBIAN_MIRROR}	ftp://ftp.es.debian.org/debian/pool
+ ${DEBIAN_MIRROR}	ftp://ftp.se.debian.org/debian/pool
+ ${DEBIAN_MIRROR}	ftp://ftp.tr.debian.org/debian/pool
+ ${GNU_MIRROR}	ftp://mirrors.kernel.org/gnu
+-${GNU_MIRROR}	ftp://ftp.matrix.com.br/pub/gnu
+ ${GNU_MIRROR}	ftp://ftp.cs.ubc.ca/mirror2/gnu
+ ${GNU_MIRROR}	ftp://sunsite.ust.hk/pub/gnu
+ ${GNU_MIRROR}	ftp://ftp.ayamura.org/pub/gnu
+-- 
+1.5.4.3
 
 
 
