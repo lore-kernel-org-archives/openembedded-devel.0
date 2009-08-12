@@ -1,32 +1,33 @@
-Received: from [209.85.220.216] (helo=mail-fx0-f216.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stuart68@gmail.com>) id 1MbAZ4-00026x-4o
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 11:56:14 +0200
-Received: by fxm12 with SMTP id 12so3594872fxm.20
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MbAjC-0002lS-Oj for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Aug 2009 12:06:45 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MbATJ-00044H-K8 for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Aug 2009 09:50:17 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Aug 2009 09:50:17 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2009 02:39:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=RXkB/olgmPhv5kDTuG9EQVnmh/Yxlgm1XEwsgK9mprA=;
-	b=fyhWUtS+ooGXbvypM7mXqLoVprSggZ5tqJgIYZLLjsSVUeCk+zRCRPBUJcZsdNFSxc
-	q6hZ91h9DmA1Ih7aymKRYFElor2S+a7xpgLwh8j08lvQKHKmH29i/CJaBGxVXEsCF3RC
-	G/oNtqydSUjd79GlIsWRONDvCSFiM4L+9QiBo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=pE58FW2quZBBhxgUcZ3tFaEfgBkYeDbGpDy/PIPP+zOxi8EOMHr837MCvnPTqSG45G
-	GYvDq6JAAJ0LaGLf274SxwXgl9UmJT/U9DdXL68n0LYoqdmnF0tTfFF03g7I+epW4MZQ
-	HCkVNEdmNiVozbGH9UNj9w3gOYNEqib9HYnM0=
-MIME-Version: 1.0
-Received: by 10.204.117.141 with SMTP id r13mr7604199bkq.122.1250069988111; 
-	Wed, 12 Aug 2009 02:39:48 -0700 (PDT)
-Date: Wed, 12 Aug 2009 10:39:48 +0100
-Message-ID: <91283b620908120239t3d70a9e7sd2e3d6822d3203fb@mail.gmail.com>
-From: Stuart Gray <stuart68@gmail.com>
+	Wed, 12 Aug 2009 09:50:17 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: ip route add nat - returns RTNETLINK answers: Invalid argument
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 12 Aug 2009 11:50:02 +0200
+Message-ID: <h5u38c$htr$1@ger.gmane.org>
+References: <4A826FF3.9030501@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
+In-Reply-To: <4A826FF3.9030501@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: why does glibc_2.9.bb use glibc-ports-2.7?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2009 09:56:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 Aug 2009 10:06:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On 12-08-09 09:32, Graham Gower wrote:
+> This combination of glibc-2.9 with glibc-ports-2.7 fails to build on
+> mipsel.
+>
+> I assume there is either a problem with the glibc-ports-2.9 on arm, or the
+> recipe was simply copied from glibc_2.7.bb without noticing that the ports
+> version was hardcoded.
 
-I am trying to set up routing between my wireless (wlan0) to my eth0 port.
+Actually there was no 2.9 ports release on the gnu mirror when I did 
+that recipe. Feel free to fix :)
 
-I have set up the wlan0 as follows:
+regards,
 
-allow-hotplug wlan0
-iface wlan0 inet static
-        address 192.168.10.100
-        netmask 255.255.255.0
-        wireless-mode ad-hoc
-        wireless-essid dock-amp
-
-eth0 as:
-
-auto eth0
-iface eth0 inet dhcp
+Koen
 
 
-Both interfaces have been proven to work.
-
-Within sysctl.conf net.ipv4.ip_forward=1
-
-eth0 has ip address 192.168.2.207, wlan0 is as above, I want to allow
-devices connected wireless to access the web so I have tried to set up nat
-to allow packets to get routed through to 192.168.2.207.
-
-I used the following command:
-
-ip route add nat 192.168.2.207 via 192.168.10.100
-
-To this I get the following error        RTNETLINK answers: Invalid argument
-
-I have looked at www.policyrouting.org, but I cannot see what I am doing
-wrong. Any help would be great.
-
-Thanks,
-Stuart
 
