@@ -1,35 +1,33 @@
-Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bjorn.forsman@gmail.com>) id 1MbJhA-00043H-Th
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 21:41:13 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so91160qwk.36
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MbL58-0004Yu-MP for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Aug 2009 23:10:03 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MbKpB-00078r-ET for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Aug 2009 20:53:33 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Aug 2009 20:53:33 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2009 12:24:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=+OiHP01lYIVaswnejBjYl5gUouBFzphJ2h22szv51QA=;
-	b=NY0Z9Ta+mDgjESMmxlVGLP53bersUZCXh9mJNTRL/vKWCKIktoh+1s01zyiFQ0esLV
-	YFLokykCK1XFOR8QljSLPxH5OhJysySYGbKK0KL/a1C28OFDeHtwlgqX1zZj+VZ7DVSq
-	5Dc+fUK37xwLQpjhb4/bXNGpOXjnAcyqRV5UE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=swxPORsXx8lW30LZnJcEmNMhORBYP2eHftRT/neeDrXFmSJ/cQvIqUALRzyQJ32GwV
-	0lPfBaHMxyw0v7evs9lEekoq9WPbqTjFCwAeEKg/1h03VOChdwt6UtIEydpjN0HFogrZ
-	XgPWzlFCrAW68SqDzjApWiBpO+GWRrG2oUYfE=
-MIME-Version: 1.0
-Received: by 10.229.2.23 with SMTP id 23mr575920qch.87.1250105085887; Wed, 12 
-	Aug 2009 12:24:45 -0700 (PDT)
-In-Reply-To: <h5um2o$ioq$1@ger.gmane.org>
-References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>
-	<h5um2o$ioq$1@ger.gmane.org>
-Date: Wed, 12 Aug 2009 21:24:45 +0200
-Message-ID: <5f2b60908121224k50e975e5xe710a94ff0c94871@mail.gmail.com>
-From: =?UTF-8?Q?Bj=C3=B8rn_Forsman?= <bjorn.forsman@gmail.com>
+	Wed, 12 Aug 2009 20:53:33 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 12 Aug 2009 22:53:19 +0200
+Message-ID: <h5va41$k5j$1@ger.gmane.org>
+References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>	<h5um2o$ioq$1@ger.gmane.org>
+	<5f2b60908121224k50e975e5xe710a94ff0c94871@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
+In-Reply-To: <5f2b60908121224k50e975e5xe710a94ff0c94871@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: gstreamer-ti fails for target dm6446-evm (TI davinci)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,28 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2009 19:41:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Aug 2009 21:10:04 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-2009/8/12 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 12-08-09 14:49, Bj=C3=B8rn Forsman wrote:
+On 12-08-09 21:24, Bjørn Forsman wrote:
+> 2009/8/12 Koen Kooi<k.kooi@student.utwente.nl>:
+>> On 12-08-09 14:49, Bjørn Forsman wrote:
+>>
+>>> Any suggestions for a fix?
+>>
+>> I'm cleaning up the arago updates and plan to push them into OE this week:
+>> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/dvsdk
 >
->> Any suggestions for a fix?
+> That sounds great!
 >
-> I'm cleaning up the arago updates and plan to push them into OE this week=
-:
-> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=3Dkoen/dvsd=
-k
+>> When that's in it should give you something that at least builds for
+>> dm6446-evm.
+>
+> What are the chances that it will _run_ on the dm6446-evm?
 
-That sounds great!
+The chances are quite good, but I won't have access to an actual 
+dm6446-evm for another 3 weeks, so I can't give a solid garantee till 
+then. I do have another dm6446 based board here, though.
 
-> When that's in it should give you something that at least builds for
-> dm6446-evm.
+regards,
 
-What are the chances that it will _run_ on the dm6446-evm?
+Koen
 
-Regards,
-Bj=C3=B8rn Forsman
 
 
