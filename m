@@ -1,33 +1,36 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MbJB4-0005rh-8K for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 21:08:12 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MbIv6-0001uh-C6 for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 18:51:32 +0000
-Received: from p5b3b1b4e.dip.t-dialin.net ([91.59.27.78])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2009 18:51:32 +0000
-Received: from no2spam by p5b3b1b4e.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <bjorn.forsman@gmail.com>) id 1MbJhA-00043H-Th
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Aug 2009 21:41:13 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so91160qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2009 18:51:32 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 12 Aug 2009 12:24:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=+OiHP01lYIVaswnejBjYl5gUouBFzphJ2h22szv51QA=;
+	b=NY0Z9Ta+mDgjESMmxlVGLP53bersUZCXh9mJNTRL/vKWCKIktoh+1s01zyiFQ0esLV
+	YFLokykCK1XFOR8QljSLPxH5OhJysySYGbKK0KL/a1C28OFDeHtwlgqX1zZj+VZ7DVSq
+	5Dc+fUK37xwLQpjhb4/bXNGpOXjnAcyqRV5UE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=swxPORsXx8lW30LZnJcEmNMhORBYP2eHftRT/neeDrXFmSJ/cQvIqUALRzyQJ32GwV
+	0lPfBaHMxyw0v7evs9lEekoq9WPbqTjFCwAeEKg/1h03VOChdwt6UtIEydpjN0HFogrZ
+	XgPWzlFCrAW68SqDzjApWiBpO+GWRrG2oUYfE=
+MIME-Version: 1.0
+Received: by 10.229.2.23 with SMTP id 23mr575920qch.87.1250105085887; Wed, 12 
+	Aug 2009 12:24:45 -0700 (PDT)
+In-Reply-To: <h5um2o$ioq$1@ger.gmane.org>
+References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>
+	<h5um2o$ioq$1@ger.gmane.org>
+Date: Wed, 12 Aug 2009 21:24:45 +0200
+Message-ID: <5f2b60908121224k50e975e5xe710a94ff0c94871@mail.gmail.com>
+From: =?UTF-8?Q?Bj=C3=B8rn_Forsman?= <bjorn.forsman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 12 Aug 2009 20:51:17 +0200
-Message-ID: <h5v2va$ts1$1@ger.gmane.org>
-References: <4A7D861F.6020308@balister.org>
-	<f96d234e0908100900n2374989ib5ed0f7ec519e9ec@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b1b4e.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.22 (X11/20090804)
-In-Reply-To: <f96d234e0908100900n2374989ib5ed0f7ec519e9ec@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: User Voice page
+Subject: Re: gstreamer-ti fails for target dm6446-evm (TI davinci)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,34 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2009 19:08:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Aug 2009 19:41:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Cliff Brake wrote:
-> On Sat, Aug 8, 2009 at 10:05 AM, Philip Balister<philip@balister.org> wrote:
->> Can we add a link from the OE website to the user voice page?
->>
->> http://openembedded.uservoice.com/pages/6963-general
-> 
-> Added to home page.
+2009/8/12 Koen Kooi <k.kooi@student.utwente.nl>:
+> On 12-08-09 14:49, Bj=C3=B8rn Forsman wrote:
+>
+>> Any suggestions for a fix?
+>
+> I'm cleaning up the arago updates and plan to push them into OE this week=
+:
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=3Dkoen/dvsd=
+k
 
+That sounds great!
 
-Hi,
+> When that's in it should give you something that at least builds for
+> dm6446-evm.
 
-when the Uservoice service was put forward I asked for reasons why we
-need that tool.  The answer was "We're just testing, nobody is
-advocating".  The link from the top page now makes it "official" and I
-think, if anything, that is too early.
+What are the chances that it will _run_ on the dm6446-evm?
 
-Generally speaking, I'm wary of yet another tool that essentially
-duplicates what the bug tracker should be used for (yes, you can even
-vote there, if you want).  I don't want the open task list to be split
-into yet another tool.
-
-Regards
-
-Rolf
-
+Regards,
+Bj=C3=B8rn Forsman
 
 
