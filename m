@@ -1,21 +1,38 @@
-Received: from [81.228.8.83] (helo=pne-smtpout1-sn2.hy.skanova.net)
+Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Mawkk-0005Ye-5O
+	(envelope-from <raj.khem@gmail.com>) id 1Mb1kv-0008VX-8D
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Aug 2009 21:11:22 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn2.hy.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A7285AE000FF445 for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Aug 2009 20:55:01 +0200
-Message-ID: <4A81BE84.6010607@atmel.com>
-Date: Tue, 11 Aug 2009 20:55:00 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+	Wed, 12 Aug 2009 02:31:53 +0200
+Received: by qyk35 with SMTP id 35so3653511qyk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Aug 2009 17:15:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=BPU1vWryk6R+d1jrUKuMzvEnE4O86urejzQ6V9dJDTU=;
+	b=cM+Pfp75PDQwsLqX3acxL2M3rv6XfLJrPClE9a6VAU9E+gKVa2ToNeKUteY3Nf5rS5
+	44rtCHTLVh+N9Lqe6MfxdqLVzjAAys0bV77qeXQavmzICB6g8BD7Aq9oNG0TMQQu8C6L
+	BS9icDDDpyiSifl6q/bIisQNhftIwgCyR8ojg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=N71Q6/cvhuVi76hjR2TlPafZRalwTbFehOt7SWH51t9SeFhrx95QRjelJ+fBLYgYhD
+	Iu17Fk/p4i1W8wH4GUWC8ibXM8D9lsXH2icksvBtqblUFsT+D/WXhRCOfikqAhQZbitp
+	nfqwEZINiyJh/cR3n4vNXBQFYtGutWvvrB53A=
 MIME-Version: 1.0
+Received: by 10.229.83.213 with SMTP id g21mr1978765qcl.86.1250036129907; Tue, 
+	11 Aug 2009 17:15:29 -0700 (PDT)
+In-Reply-To: <1249984289.1608.29.camel@mill.internal.reciva.com>
+References: <1248042838-7496-1-git-send-email-otavio@ossystems.com.br>
+	<1248042838-7496-2-git-send-email-otavio@ossystems.com.br>
+	<200908110501.11808.holger+oe@freyther.de>
+	<1249984289.1608.29.camel@mill.internal.reciva.com>
+Date: Tue, 11 Aug 2009 17:15:29 -0700
+Message-ID: <19c1b8a90908111715h51cc0060lfd228d1a6db3c52f@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Contents of the "origin/ulf/linux-2.6.30.2" branch. Help with testing wanted.
+Subject: Re: [PATCH 2/3] uClibc: use __always_inline instead of __inline__
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,204 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Aug 2009 19:11:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Aug 2009 00:31:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The goal of this branch is to update the AT91 support.
+On Tue, Aug 11, 2009 at 2:51 AM, Phil Blundell<philb@gnu.org> wrote:
+> On Tue, 2009-08-11 at 05:01 +0200, Holger Hans Peter Freyther wrote:
+>> On Monday 20 July 2009 00:33:57 Otavio Salvador wrote:
+>> > From: Mario Domenech Goulart <mario@ossystems.com.br>
+>> >
+>> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>>
+>> Why? what does it fix?
+>
+> There are some functions in the dynamic linker bootstrap code that must
+> (for a variety of reasons) be inlined to operate correctly. =C2=A0Under s=
+ome
+> circumstances, particularly on MIPS for some reason, gcc decided to
+> disregard the normal "inline" qualifier and put these functions out of
+> line which led to disaster.
 
-1) Fix AT91bootstrap, which is currently non-functional
-2) Update to the latest u-boot (2009.08-rc2)
-3) Update the kernel (2.6.30.2)
-   with many AT91 patches not yet in mainstream kernel.
-   MCI patches still lacking...
+Which particular gcc version is in question here ?
 
-I have so far managed to build everything and load
-on an AT91SAM9263EK which has a dataflash
-containing at91bootstrap, u-boot and linux.
+Looking at the code I think if it is gcc 3.2 then it would use the
+'must align' semantics
+but I would be surprised for other gcc versions because for other versoins
+__always_inline is simply defined as __inline which is equivalent to __inli=
+ne__
 
-0x0     at91bootstrap
-0x8400  u-boot
-0x84000 linux
+Thx
 
-The NAND flash is programmed with a root file system
-
-0x400000 JFFS2 root file system.
-
-AT91BOOTSTRAP
-v2.10 was completely wrong due to bad linkaddr.
-v2.12 and v2.13 boots properly from dataflash.
-
-Supported boards:
-afeb9260
-cap9adk
-cap9stk
-sam9g10ek
-sam9g20ek
-sam9g45ekes
-sam9rlek
-sam9xeek
-sam9260ek
-sam9261ek
-sam9263ek
-
-
-df	dataflash
-dfc	dataflashcard
-nf	nandflash
-f	parallel flash
-
-No support for SD-Card boot yet
-
-All boards compile, but only the SAM9263EK has been tested on H/W.
-Only dataflashcard boot that is...
-Boot from NAND flash not tested.
-
-The updated at91bootstrap changes the recipe
-so that the normal way to configure is to do
-
-oe_runmake <board>_defconfig
-
-instead of copying a defconfig file to the toplevel .config
-
-Since AT91bootstrap-2.12 supports KConfig, it is easy to
-create your own board support by entering the builddirectory
-and run make menuconfig.
-
-Copy the resulting .config to one of the board directories
-and create a patch which will generate this file.
-This way, supported boards will not need a defconfig file
-in the recipies/at91bootstrap directory.
-
-The at91bootstrap-2.13-rc1 will attempt to init the bus-matrix of
-the sam9263, which is neccessary for large screens,
-but I have no large screen to test on.
-If the CONFIG_PSRAM is enabled (which it is), then
-LCD access to the 32 bit bus has low priority which
-can cause problems.
-
-The priority is also set so that the MACB has
-high priority to the 80 kB SRAM and the OHCI
-has high priority to the 16 kB SRAM.
-
-The LCD and 2DACC has high priority to the EBI1.
-
-2.13-rc1 also adds support for the AFEB9260.
-(Compiled, but not tested on a board)
-
-U-BOOT
-Updated to 2009.08-rc2 with patches.
-I use the same patches as in Buildroot
-so some are not 100% applicable.
-
-Supported at91 boards in the atmel directory:
-cap9adk
-rm9200dk
-rm9200ek
-sam9g45ekes
-sam9m10g45ek
-sam9rlek
-sam9260ek	used for 	sam9xeek	sam9g20ek
-sam9261ek	used for	sam9g10ek
-sam9263ek
-
-
-Some patches:
-Disables -msoftfloat
-Adds some downloads tools for minicom (sx-at91/sx-raw)
-Some extra commands to set up a scripts which
-will make it easier for newbies.
-"factory" command will generate the default environment
-even if a newbie has overwritten the environment.
-"ethinit" will init the ethernet mac
-Support for commands handling the LEDs.
-Update of configs
-gcc-4.4 does not like the combination of weak and inline
-Increase the area for u-boot to both sector 1 and 2.
-A dataflash is divided mostly into sectors of 256 pages (1056 bytes)
-but the first 256 pages are divided into an 8 page parameter area
-and a 248 page sector for other things.
-The patch adds another 256 page sector.
-When compiling with late gcc compilers, which uses
-their own libgcc, div0 calls "raise" which is
-not part of libgcc, but rather part of glibc.
-The patch adds a raise in libarm/board.c which
-calls the "hang" routine.
-Use -mabi=aapcs-linux instead of -mabi=apcs-gnu
-
-In the tested configuration, U-BOOT 2009.08-rc2
-is loaded by at91bootstrap and can tftp
-down a kernel which is programmed to dataflash.
-The kernel boots.
-
-The last time I bitbaked this, U-Boot did not build
-for some reason.
-When I bitbaked u-boot directly, it built.
-Will rebuild again and see if problem repeats.
-
-LINUX
-A kernel is generated, with the defconfig taken
-from Marcin's 2.6.30, slightly updated.
-
-Added a lot of patches from the ARM mailing list,
-but the MCI is missing.
-Hope to get that later.
-
-linux boots and you can communicate with the console,
-but gpe is not started properly.
-
-I introduced the possibility to build linux using
-make <board>_defconfig, instead of using a
-defconfig in a board directory under linux.
-LINUX26_DEFCONFIG needs to be defined.
-
-
-BOARD SUPPORT
-Since there are plenty of AT91 chips with more coming,
-I decided to make two include files.
-conf/machine/include/AT91.inc
-conf/machine/include/AT91-LCD.inc
-
-An AT91 board can include one of the two
-files simplifying the maintenance.
-
-The latter includes the former, and adds
-some extra support for screens.
-
-Since the sam9rl does not have an usbhost,
-each board will have to supply this in the board support file.
-Typically each file is now reduced to:
-
-include conf/machine/include/AT91-LCD.inc
-LINUX26_CONFIG = "at91sam9263ek_defconfig"
-UBOOT_MACHINE = "at91sam9263ek_config"
-AT91BOOTSTRAP_BOARD = "at91sam9263ek"
-MACHINE_FEATURES += "usbhost"
-
-There are board configs for:
-cap9adk
-cap9stk
-sam9g10ek
-sam9g20ek
-sam9g45ekes
-sam9m10ek
-sam9rlek
-sam9xeek
-sam9260ek
-sam9261ek
-sam9263ek
-at572d940hf (diopsis ARM9 + 1 Gflops Floating Point DSP)
-
-Again, only the sam926e3k has been tested.
-
-Checksums are updated of course.
-
-I will spend some time testing this, but
-I hope I will get some help from interested parties.
-
--- 
-Best Regards
-Ulf Samuelsson
-
+-Khem
 
 
