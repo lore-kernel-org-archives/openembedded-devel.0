@@ -1,38 +1,24 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mb1kv-0008VX-8D
+Received: from [213.165.64.20] (helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <buchner.johannes@gmx.at>) id 1Mb6Vp-0003uV-GN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 02:31:53 +0200
-Received: by qyk35 with SMTP id 35so3653511qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Aug 2009 17:15:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=BPU1vWryk6R+d1jrUKuMzvEnE4O86urejzQ6V9dJDTU=;
-	b=cM+Pfp75PDQwsLqX3acxL2M3rv6XfLJrPClE9a6VAU9E+gKVa2ToNeKUteY3Nf5rS5
-	44rtCHTLVh+N9Lqe6MfxdqLVzjAAys0bV77qeXQavmzICB6g8BD7Aq9oNG0TMQQu8C6L
-	BS9icDDDpyiSifl6q/bIisQNhftIwgCyR8ojg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=N71Q6/cvhuVi76hjR2TlPafZRalwTbFehOt7SWH51t9SeFhrx95QRjelJ+fBLYgYhD
-	Iu17Fk/p4i1W8wH4GUWC8ibXM8D9lsXH2icksvBtqblUFsT+D/WXhRCOfikqAhQZbitp
-	nfqwEZINiyJh/cR3n4vNXBQFYtGutWvvrB53A=
+	Wed, 12 Aug 2009 07:36:38 +0200
+Received: (qmail invoked by alias); 12 Aug 2009 05:20:12 -0000
+Received: from unknown (EHLO [10.1.1.2]) [121.98.210.253]
+	by mail.gmx.net (mp064) with SMTP; 12 Aug 2009 07:20:12 +0200
+X-Authenticated: #25574588
+X-Provags-ID: V01U2FsdGVkX1+Io2YXW0WIm8Be4NriprwjflFBjvkFS6BbfAOKUL
+	k1+8DYTP9cwFq8
+Message-ID: <4A82DF34.7050408@gmx.at>
+Date: Wed, 12 Aug 2009 17:26:44 +0200
+From: Johannes Buchner <buchner.johannes@gmx.at>
+User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
 MIME-Version: 1.0
-Received: by 10.229.83.213 with SMTP id g21mr1978765qcl.86.1250036129907; Tue, 
-	11 Aug 2009 17:15:29 -0700 (PDT)
-In-Reply-To: <1249984289.1608.29.camel@mill.internal.reciva.com>
-References: <1248042838-7496-1-git-send-email-otavio@ossystems.com.br>
-	<1248042838-7496-2-git-send-email-otavio@ossystems.com.br>
-	<200908110501.11808.holger+oe@freyther.de>
-	<1249984289.1608.29.camel@mill.internal.reciva.com>
-Date: Tue, 11 Aug 2009 17:15:29 -0700
-Message-ID: <19c1b8a90908111715h51cc0060lfd228d1a6db3c52f@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/3] uClibc: use __always_inline instead of __inline__
+X-Enigmail-Version: 0.95.7
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.5,0.44
+Subject: [PATCH] hx2750 compile errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +32,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2009 00:31:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Aug 2009 05:36:38 -0000
+Content-Type: multipart/mixed; boundary="------------060701060700020108060902"
 
-On Tue, Aug 11, 2009 at 2:51 AM, Phil Blundell<philb@gnu.org> wrote:
-> On Tue, 2009-08-11 at 05:01 +0200, Holger Hans Peter Freyther wrote:
->> On Monday 20 July 2009 00:33:57 Otavio Salvador wrote:
->> > From: Mario Domenech Goulart <mario@ossystems.com.br>
->> >
->> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->>
->> Why? what does it fix?
->
-> There are some functions in the dynamic linker bootstrap code that must
-> (for a variety of reasons) be inlined to operate correctly. =C2=A0Under s=
-ome
-> circumstances, particularly on MIPS for some reason, gcc decided to
-> disregard the normal "inline" qualifier and put these functions out of
-> line which led to disaster.
+--------------060701060700020108060902
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Which particular gcc version is in question here ?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Looking at the code I think if it is gcc 3.2 then it would use the
-'must align' semantics
-but I would be surprised for other gcc versions because for other versoins
-__always_inline is simply defined as __inline which is equivalent to __inli=
-ne__
+Hi.
 
-Thx
+I noticed the linux-rp-2.6.23 on angstrom (MACHINE=hx2000) doesn't
+compile on stable/2009 because of errors in the hx2750 code (probably
+was not updated).
 
--Khem
+The attached patch makes it compile again. Not tested yet, might not
+have full pm functionality (if it ever had).
+
+Cheers,
+Johannes
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2 (MingW32)
+
+iD8DBQFKgt8y7X1+MfqVcr0RAvvaAKCROYtxVIS4ypC/nQ3s2vpDLgA0KwCeO4Er
+p/KH4Gu9dm5jQ7qMNrEVv58=
+=tN91
+-----END PGP SIGNATURE-----
+From ef0a00966367a5d5fcda5c468dabb0a62c510c41 Mon Sep 17 00:00:00 2001
+From: user <user@oebuild.localdomain>
+Date: Wed, 12 Aug 2009 10:55:30 -0400
+Subject: [PATCH] made hx2750 compile again
+
+note that the hx2750_pm_ops struct now is quite crippled, I don't really
+know where all the functionality went.
+---
+ recipes/linux/linux-rp-2.6.23/hx2750-make.patch |   77 +++++++++++++++++++++++
+ recipes/linux/linux-rp_2.6.23.bb                |    1 +
+ 2 files changed, 78 insertions(+), 0 deletions(-)
+ create mode 100755 recipes/linux/linux-rp-2.6.23/hx2750-make.patch
+
+diff --git a/recipes/linux/linux-rp-2.6.23/hx2750-make.patch b/recipes/linux/linux-rp-2.6.23/hx2750-make.patch
+new file mode 100755
+index 0000000..c40d725
+--- /dev/null
++++ b/recipes/linux/linux-rp-2.6.23/hx2750-make.patch
+@@ -0,0 +1,77 @@
++Index: linux-2.6.23/arch/arm/mach-pxa/hx2750.c
++===================================================================
++--- linux-2.6.23.orig/arch/arm/mach-pxa/hx2750.c	2009-08-12 10:37:26.000000000 -0400
+++++ linux-2.6.23/arch/arm/mach-pxa/hx2750.c	2009-08-12 10:38:53.000000000 -0400
++@@ -443,7 +443,7 @@
++ 	.io_pg_offst	= (io_p2v(0x40000000) >> 18) & 0xfffc,
++ 	.boot_params	= 0xa0000100,
++ 	.map_io		= pxa_map_io,
++-        .init_irq 	= pxa_init_irq,
+++        .init_irq 	= pxa27x_init_irq,
++         .timer		= &pxa_timer,
++ 	.init_machine 	= hx2750_init,
++ MACHINE_END
++Index: linux-2.6.23/arch/arm/mach-pxa/hx2750_test.c
++===================================================================
++--- linux-2.6.23.orig/arch/arm/mach-pxa/hx2750_test.c	2009-08-12 10:37:26.000000000 -0400
+++++ linux-2.6.23/arch/arm/mach-pxa/hx2750_test.c	2009-08-12 10:40:35.000000000 -0400
++@@ -203,14 +203,15 @@
++ 
++ static DEVICE_ATTR(ssp2write, 0200, NULL, ssp2write_store);
++ 
++-+static ssize_t sspr_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+++static ssize_t sspr_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
++ {
++-	unsigned long val,ret;
+++	unsigned long val;
+++	int ret;
++ 	val = simple_strtoul(buf, NULL, 0);
++ 
++ 	hx2750_tsc2101_send(1<<15,val,&ret,1);
++ 
++-	printk("Response: %lx\n",ret);
+++	printk("Response: %x\n",ret);
++ 
++ 	return count;
++ }
++@@ -219,8 +220,9 @@
++ 
++ static ssize_t sspw_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
++ {
++-	unsigned long val,ret;
++-	sscanf(buf, "%lx %lx", &val, &ret);
+++	unsigned long val;
+++	int ret;
+++	sscanf(buf, "%lx %x", &val, &ret);
++ 
++ 	hx2750_tsc2101_send(0,val,&ret,1);
++ 
++@@ -336,10 +338,10 @@
++ }
++ 
++ static struct pm_ops hx2750_pm_ops = {
++-	.pm_disk_mode	= PM_DISK_FIRMWARE,
++-	.prepare	= pxa_pm_prepare,
+++	/* .pm_disk_mode	= PM_DISK_FIRMWARE,  ** not sure why this element doesn't exist anymore and what replaced it **  */
+++	/* .prepare	= pxa_pm_prepare, */
++ 	.enter		= hx2750_pxa_pm_enter,
++-	.finish		= pxa_pm_finish,
+++	/* .finish		= pxa_pm_finish, */
++ };
++ 
++ 
++Index: linux-2.6.23/include/asm/arch/hx2750.h
++===================================================================
++--- linux-2.6.23.orig/include/asm/arch/hx2750.h	2009-08-12 10:42:15.000000000 -0400
+++++ linux-2.6.23/include/asm/arch/hx2750.h	2009-08-12 10:42:24.000000000 -0400
++@@ -85,6 +85,10 @@
++ void hx2750_set_egpio(unsigned int gpio);
++ void hx2750_clear_egpio(unsigned int gpio);
++ 
+++/* for _test.c */
+++void hx2750_ssp_init2(void);
+++void hx2750_tsc2101_send(int read, int command, int *values, int numval);
+++
++ 
++ #endif /* __ASM_ARCH_HX2750_H  */
++ 
+diff --git a/recipes/linux/linux-rp_2.6.23.bb b/recipes/linux/linux-rp_2.6.23.bb
+index 460ac53..e45006a 100644
+--- a/recipes/linux/linux-rp_2.6.23.bb
++++ b/recipes/linux/linux-rp_2.6.23.bb
+@@ -28,6 +28,7 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.23.tar.bz2 \
+            ${RPSRC}/hx2750_base-r29.patch;patch=1 \
+            ${RPSRC}/hx2750_bl-r9.patch;patch=1 \
+            ${RPSRC}/hx2750_pcmcia-r2.patch;patch=1 \
++           ${RPSRC}/hx2750_make.patch;patch=1 \
+            ${RPSRC}/pxa_keys-r7.patch;patch=1 \
+            ${RPSRC}/tsc2101-r16.patch;patch=1 \
+            ${RPSRC}/hx2750_test1-r7.patch;patch=1 \
+-- 
+1.6.0.4
 
 
+
+--------------060701060700020108060902--
