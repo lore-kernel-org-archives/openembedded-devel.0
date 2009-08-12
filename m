@@ -1,27 +1,24 @@
-Received: from [151.189.21.45] (helo=mail-in-05.arcor-online.net)
+Received: from [81.228.8.83] (helo=pne-smtpout1-sn2.hy.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <no2spam@nospam.arcornews.de>) id 1MbM6c-0004ji-Ii
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MbMGj-0002Hr-0p
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 00:15:38 +0200
-Received: from mail-in-15-z2.arcor-online.net (mail-in-15-z2.arcor-online.net
-	[151.189.8.32]) by mx.arcor.de (Postfix) with ESMTP id 2944B332A3B;
-	Wed, 12 Aug 2009 23:59:09 +0200 (CEST)
-Received: from mail-in-10.arcor-online.net (mail-in-10.arcor-online.net
-	[151.189.21.50])
-	by mail-in-15-z2.arcor-online.net (Postfix) with ESMTP id 1B35A724750; 
-	Wed, 12 Aug 2009 23:59:09 +0200 (CEST)
-Received: from localhost.localdomain (p5B3B1B4E.dip.t-dialin.net [91.59.27.78])
-	(Authenticated sender: leggewie@arcor.de)
-	by mail-in-10.arcor-online.net (Postfix) with ESMTPSA id 6A52828EE56;
-	Wed, 12 Aug 2009 23:59:07 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-10.arcor-online.net 6A52828EE56
-From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
+	Thu, 13 Aug 2009 00:26:05 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout1-sn2.hy.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A7285AE00122AFF for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 00:09:36 +0200
+Message-ID: <4A833D9F.1090608@atmel.com>
+Date: Thu, 13 Aug 2009 00:09:35 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Aug 2009 23:58:53 +0200
-Message-Id: <1250114333-22259-1-git-send-email-oe-devel@rolf.leggewie.biz>
-X-Mailer: git-send-email 1.6.3.3
-Cc: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Subject: [PATCH] base.bbclass: ftp.matrix.com.br no longer exists
+References: <4A81BE84.6010607@atmel.com>	<200908121433.31479.marcin@juszkiewicz.com.pl>
+	<1250092579.12282.73.camel@mill.internal.reciva.com>
+In-Reply-To: <1250092579.12282.73.camel@mill.internal.reciva.com>
+Subject: Re: Contents of the "origin/ulf/linux-2.6.30.2" branch. Help with testing wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,26 +32,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2009 22:15:38 -0000
+X-List-Received-Date: Wed, 12 Aug 2009 22:26:05 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: Quoted-Printable
 
----
- classes/base.bbclass |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
+Phil Blundell skrev:
+> On Wed, 2009-08-12 at 14:33 +0200, Marcin Juszkiewicz wrote:
+>> Dnia wtorek, 11 sierpnia 2009 o 20:55:00 Ulf Samuelsson napisa=C5=82(a=
+):
+>>> I introduced the possibility to build linux using
+>>> make <board>_defconfig, instead of using a
+>>> defconfig in a board directory under linux.
+>>> LINUX26_DEFCONFIG needs to be defined.
+>> Interesting, will check. I see a problem anyway because linux_*.bb=20
+>> recipes by default use defconfig as part of SRC_URI. But we can use=20
+>> empty file to satisfy it.
+>=20
+> We've tried this kind of thing before on various platforms and it
+> generally seems to be a losing proposition.  Even if your kernel source=
+s
+> are targetting just a single MACHINE, the kernel isn't quite modular
+> enough yet that you can truly have a "one size fits all" configuration
+> to suit all DISTROs.
+>=20
+> Also, if you are relying on the defconfig from upstream, any
+> configuration change at all requires that you either patch it, or
+> re-issue the upstream tarball.  Neither of those are as convenient as
+> just editing the defconfig locally in OE.
+>=20
+> So, in general, I think you're probably better off sticking with the
+> "defconfig in FILESDIR" paradigm.  That's not to say I'm completely
+> opposed to adding the option to use the one from upstream, but I think
+> you would need to be a bit careful about where you use it.
+>=20
+> p.
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index ef6c0ab..5363e5c 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -1279,7 +1279,6 @@ ${DEBIAN_MIRROR}	ftp://ftp.es.debian.org/debian/pool
- ${DEBIAN_MIRROR}	ftp://ftp.se.debian.org/debian/pool
- ${DEBIAN_MIRROR}	ftp://ftp.tr.debian.org/debian/pool
- ${GNU_MIRROR}	ftp://mirrors.kernel.org/gnu
--${GNU_MIRROR}	ftp://ftp.matrix.com.br/pub/gnu
- ${GNU_MIRROR}	ftp://ftp.cs.ubc.ca/mirror2/gnu
- ${GNU_MIRROR}	ftp://sunsite.ust.hk/pub/gnu
- ${GNU_MIRROR}	ftp://ftp.ayamura.org/pub/gnu
--- 
-1.5.4.3
+Initially, this is to allow easy test of a new board where a config
+exists in the kernel.
+When there is a configured/tested board, then there will be a defconfig.
+Long term plan would make sure that the board defconfig is optimized for
+openembedded.
+
+
+I really don't like calling the stuff "defconfig" though.
+Much rather call it "linux-2.6.30.2-at91sam9263nf.config"
+or similar so I can tell what it is all about...
+
+Also, why are we copying defconfig to the toplevel.
+Why not copy to arch/<ARCH>/config/<BOARD>_defconfig
+do the make <BOARD>_defconfig and then SED the contents?
+
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+--=20
+Best Regards
+Ulf Samuelsson
 
 
 
