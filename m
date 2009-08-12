@@ -1,35 +1,24 @@
-Received: from [74.125.92.144] (helo=qw-out-1920.google.com)
+Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MbB8b-0001Lu-5G
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MbCNs-0000h0-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 Aug 2009 12:32:57 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so1490970qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Aug 2009 03:16:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=PGRr8x02r37uBVNqQ3VJkZbGAbEw1PEAYTu2K5A8n0U=;
-	b=l3aUx9wO2tILkQ/tlCTpiuJLRgTX1HHt7Sm5MzQeii4uH0W2j6LCm/iQRZuUYANQG6
-	/sCDXSeZ2OVWruL6dLyKbbgHuKEsdQtSc5F0WwAu6evTMtYIaH4mIUw3tBLC7YJ4VgmI
-	RxGX1/82VoYZ8hGQqUnYs6Qu1PO3b164p7Krs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Eo/Y5nqesFaJFbvbAY3k1Hut0xrP/EplgBhe5hWr8npk3e9Qdx6JcFODk60mjvJ2W7
-	u0c4QIAbqiXGV1oD/9u0cfBqjFkOVROVyAY+dXjFZPC4KnVy9tkUGdDadPxoEo77HDPZ
-	9yvDp36ZkAkdZjWURmTsZGx8MGiJ1Lml50L6w=
+	Wed, 12 Aug 2009 13:52:49 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout2-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A2D61FD00543475 for openembedded-devel@lists.openembedded.org;
+	Wed, 12 Aug 2009 13:36:22 +0200
+Message-ID: <4A82A936.3020101@atmel.com>
+Date: Wed, 12 Aug 2009 13:36:22 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Received: by 10.229.80.78 with SMTP id s14mr2142130qck.101.1250072193145; Wed, 
-	12 Aug 2009 03:16:33 -0700 (PDT)
-In-Reply-To: <h5u38c$htr$1@ger.gmane.org>
-References: <4A826FF3.9030501@gmail.com> <h5u38c$htr$1@ger.gmane.org>
-Date: Wed, 12 Aug 2009 19:46:33 +0930
-Message-ID: <6ec4247d0908120316k595cf5eeobbe64aa31ab99f8@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: why does glibc_2.9.bb use glibc-ports-2.7?
+References: <4A828368.5030100@atmel.com>
+	<fce2a370908120214o3b6893b0lfc515b0874f5afd3@mail.gmail.com>
+In-Reply-To: <fce2a370908120214o3b6893b0lfc515b0874f5afd3@mail.gmail.com>
+Subject: Re: U-Boot not copied into tmp/deploy/glibc/<board>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,36 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Aug 2009 10:32:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 Aug 2009 11:52:55 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-I currently don't have resources to test arm builds (or other
-architectures...). mipsel builds take 16hrs on my workstation as it
-is.
+Ihar Hrachyshka skrev:
+> On Wed, Aug 12, 2009 at 11:55 AM, Ulf
+> Samuelsson<ulf.samuelsson@atmel.com> wrote:
+>> Right now, u-boot is built in my private git tree,
+>> when I do bitbake x11-gpe-image,
+>>
+>> It is not copied to tmp/deploy/glibc/<board>
+>>
+>> If I do
+>> bitbake u-boot, the stuff IS copied.
+>>
+>> Anyone can think of a reason for this problem?
+>>
+>> I have modified the git tree since the first build
+>> to fix some problems. Can old junk be the trouble?
+> 
+> I've seen the behaviour yesterday on my tree.
+> 
 
-2009/8/12 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 12-08-09 09:32, Graham Gower wrote:
->>
->> This combination of glibc-2.9 with glibc-ports-2.7 fails to build on
->> mipsel.
->>
->> I assume there is either a problem with the glibc-ports-2.9 on arm, or the
->> recipe was simply copied from glibc_2.7.bb without noticing that the ports
->> version was hardcoded.
->
-> Actually there was no 2.9 ports release on the gnu mirror when I did that
-> recipe. Feel free to fix :)
->
-> regards,
->
-> Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I see some traces of u-boot in
+"tmp/deploy/glibc/ipk/<board>/mourge"
+"tmp/deploy/glibc/sources/GPL" (links to the downloaded packages)
+
+./glibc/ipk/at91sam9263ek/morgue/u-boot-dbg_2009.08-rc2-r0.3_at91sam9263ek.ipk
+./glibc/ipk/at91sam9263ek/morgue/u-boot-dev_2009.08-rc2-r0.3_at91sam9263ek.ipk
+./glibc/pstage/angstromglibc/staging-u-boot-at91sam9263ek-angstrom-linux-gnueabi_2009.08-rc2-r0_x86_64-linux.ipk
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
