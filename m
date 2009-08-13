@@ -1,31 +1,23 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MbVFO-0004E0-4E
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 10:01:19 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 0AA5A16DFA6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 09:49:48 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 9B0912A424C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 09:44:48 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 13 Aug 2009 09:44:16 +0200
-Message-ID: <4A83C454.3010001@dresearch.de>
-Date: Thu, 13 Aug 2009 09:44:20 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
+Received: from [128.178.224.226] (helo=smtp3.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1MbVrr-00031P-7N
+	for openembedded-devel@openembedded.org; Thu, 13 Aug 2009 10:41:03 +0200
+Received: (qmail 22012 invoked by uid 107); 13 Aug 2009 08:24:21 -0000
+X-Virus-Scanned: ClamAV
+Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
+	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Thu, 13 Aug 2009 10:24:21 +0200
+Message-ID: <4A83CDB4.2000008@epfl.ch>
+Date: Thu, 13 Aug 2009 10:24:20 +0200
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF94F@hiob.intern.dresearch.de>
-	<4A7960FC.6030608@dresearch.de>
-In-Reply-To: <4A7960FC.6030608@dresearch.de>
-X-OriginalArrivalTime: 13 Aug 2009 07:44:16.0140 (UTC)
-	FILETIME=[DBBCE4C0:01CA1BE9]
-Subject: Re: confusing qemu-native problem
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1245344614-22213-1-git-send-email-valentin.longchamp@epfl.ch>
+	<200908121119.43689.holger+oe@freyther.de>
+In-Reply-To: <200908121119.43689.holger+oe@freyther.de>
+Subject: Re: [RFC] change qmake2 to qmake4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,64 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 08:01:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 13 Aug 2009 08:41:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Steffen Sledz schrieb:
-> Sledz, Steffen schrieb:
->> I've seen a very confusing, indetermined behaviour of the qemu-native build in the last time (current dev branch).
+Holger Hans Peter Freyther wrote:
+> On Thursday 18 June 2009 19:03:33 Valentin Longchamp wrote:
+>> As I have already explained in an email earlier today, some tools
+>> (cmake for instance, with its FindQt4 Module) look for a qmake under
+>> a certain name (that can be qmake or qmake4 ... but not qmake2).
 >>
->> When calling the following three commands back-to-back the first and the second fail with something like "/bin/sh: .../staging/i686-linux/usr/bin/pod2man: ...bad interpreter: Permission denied" but the third call succeeds (details see below).
+>> This patch proposes to change this name. With this, all the other qt
+>> tools consistently have the 4 at the end of their name.
 >>
->>  bitbake hydraip-hipox-devimage
->>  bitbake qemu-native
->>  bitbake qemu-native
->>
->> In general it looks like the success of the qemu-native is really randomly.
->>
->> Why does the one call of "bitbake qemu-native" fails and the second succeeds?
->> ...
+>> Of course, all the recipes that inherit qmake2 should be changed, but
+>> this is not done here since it's only a RFC to start a discussion
 > 
-> No more ideas here?
+> nack for now. qmake4 is worse than calling it qmake2. The current major qmake 
+> version is "2". We can talk about calling it "qmake" or "qmake-qt4".
 > 
-> Such indetermined behaviour is really a horror!
 
-My google searches result in some possible causes for a behaviour like this, but none of them matches my case. :(
+Ok, fine for me. The other way could be to patch cmake to make it look 
+for qmake2 instead of qmake.
 
-1. DOS line endings -> checked: none
+With this, qmake would be found by the FindQt.cmake module. However, the 
+problem would not be solved yet (there is another thing that comes in 
+the way, please see my other email to the list, coming in a few minutes).
 
-2. noexec mount option -> checked: exec
+Val
 
-3. acl or user_xattr effects -> checked: not used
-
-Looking into the logs and playing with the devshell i found these interesting points:
-
-> /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man --help
-bash: /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man: /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595: bad interpreter: Permission denied
-
-> head -n1 /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man
-#!/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/perl
-
-> /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/perl --version
-
-This is perl, v5.8.8 built for i686-linux-thread-multi
-...
-
-So the perl interpreter seems not to be the problem. Confusing for me is the original error message:
-
-"/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595: bad interpreter: Permission denied"
-
-I would expect something like:
-
-"/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man: bad interpreter: Permission denied"
-
-It looks like someone cut the path to the pod2man script.
-
-I would be really grateful for some help.
-
-Steffen
-
-
+-- 
+Valentin Longchamp, PhD Student, EPFL-STI-LSRO1
+valentin.longchamp@epfl.ch, Phone: +41216937827
+http://people.epfl.ch/valentin.longchamp
+MEA3485, Station 9, CH-1015 Lausanne
 
 
