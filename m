@@ -1,24 +1,24 @@
 Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MbbPn-0008Qq-Lp
+	(envelope-from <holger+oe@freyther.de>) id 1MbbTR-000061-03
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 16:36:27 +0200
+	Thu, 13 Aug 2009 16:40:13 +0200
 Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
 	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 318511B10C0E
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 9B8D31B10C10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 14:23:17 +0000 (UTC)
+	Thu, 13 Aug 2009 14:27:02 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2009 16:19:21 +0200
+Date: Thu, 13 Aug 2009 16:23:07 +0200
 User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <4A83BD15.7070006@atmel.com>
-	<200908131456.10488.holger+oe@freyther.de>
-	<h615vm$15q$1@ger.gmane.org>
-In-Reply-To: <h615vm$15q$1@ger.gmane.org>
+References: <4A83D8D4.7060206@epfl.ch>
+	<200908131134.50432.holger+oe@freyther.de>
+	<4A841382.7070909@epfl.ch>
+In-Reply-To: <4A841382.7070909@epfl.ch>
 MIME-Version: 1.0
-Message-Id: <200908131619.21133.holger+oe@freyther.de>
-Subject: Re: Ideas for scripts, to save work, when building several boards
+Message-Id: <200908131623.07998.holger+oe@freyther.de>
+Subject: Re: Cross-compiling qt based programs with cmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,30 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 14:36:27 -0000
+X-List-Received-Date: Thu, 13 Aug 2009 14:40:13 -0000
 Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Thursday 13 August 2009 15:55:02 Koen Kooi wrote:
-> On 13-08-09 14:56, Holger Hans Peter Freyther wrote:
-> > On Thursday 13 August 2009 14:10:24 Ulf Samuelsson wrote:
-> >> Thanks for helping out, but it does not work as expected.
+On Thursday 13 August 2009 15:22:10 Valentin Longchamp wrote:
+> Holger Hans Peter Freyther wrote:
+> > On Thursday 13 August 2009 11:11:48 Valentin Longchamp wrote:
+> >> Hello,
 > >>
-> >> I first create a local.conf for the at91sam9261df
-> >> and bitbake x11-image.
-> >> Then I do "MACHINE=at91sam9g20dfc bitbake console-image".
-> >> A console-image is built,but for the at91sam9261df,
-> >> which is stored in "tmp/deploy/glibc/images/at91sam9261df"
-> >>
-> >> The bitbake does not generate u-boot/kernel or at91bootstrap
-> >> for the at91sam9260dfc
-> >
-> > Stupid question. The task that should pull in u-boot/kernel or
-> > at91bootstrap is not machine specific?
+> >> I am trying to build cmake based programs that use QT with Openembedded.
+> >> The actual support for cmake in OE worked until now because I only had
+> >> "simple" dependencies. Now with QT as as dependency, I use the cmake
+> >> FindQt4 Module that strongly relies on qmake to find the different QT
+> >> cmake variables (try to run ${STAGINGBINDIR}/qmake2 -query). The cmake
+> >> FindQt4 Module uses the values given by qmake to determine where all the
+> >> libraries and tools are installed (and if installed).
 >
-> Hey, you spoilt the punchline to my teach-a-man-to-fish routine :)
+> Thanks for your feedback zecke.
+>
+> > Let me throw in some (pseudo) facts:
+> > 	- We want to use one qmake2 for Qt/X11, Qt/Embedded Linux builds
+> > 	- qmake is reading a qt.conf from the directory of the binary. In Qt/X11
+> > 	 and Qt/E build we write a custom one.
+>
+> What do you mean by the binary ? The qmake binary ? Is the custom file
+> you mention the linux.conf file (like
+> openembedded/recipes/qt4/files/linux.conf, with some parts defined in
+> openembedded/classes/qt4e.bbclass) ?
 
-sorry :}
+
+binary = qmake2
+path = /usr/foo/bin/qmake2
+strace /usr/foo/bin/qmek2 | grep qt.conf
+ lstat("/usr/foo/bin/qt.conf")
+
+just look at qt4.inc. With a "qt.conf" you can define every value of qmake2 -
+query. So when building Qt we put qmake2 into a special place and put the 
+qt.conf we want (X11 or Embedded Linux next to it).
+
+You seem to be a bit confused. qmake.conf etc. are part of the QMAKESPEC, 
+qt.conf is something different for deployment...
+
+z.
+
 
 
