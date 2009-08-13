@@ -1,34 +1,31 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MbYf6-0000ph-D3 for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 13:40:05 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MbYP4-0007DC-DX for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 11:23:30 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 11:23:30 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <msmith@cbnco.com>) id 1MbYoA-0001B0-KZ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 13:49:33 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id C5B5153A20A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 11:23:30 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 13581-10 for <openembedded-devel@lists.openembedded.org>; 
+	Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id A5488539E87
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
+Date: Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 13 Aug 2009 13:23:16 +0200
-Message-ID: <h60t34$5kl$1@ger.gmane.org>
-References: <4A83BD15.7070006@atmel.com> <h60je5$992$1@ger.gmane.org>
-	<4A83E5FC.2020002@atmel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
-In-Reply-To: <4A83E5FC.2020002@atmel.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Ideas for scripts, to save work, when building several boards
+In-Reply-To: <4A83C454.3010001@dresearch.de>
+Message-ID: <Pine.LNX.4.64.0908130730390.3621@juice.ott.cti.com>
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF94F@hiob.intern.dresearch.de>
+	<4A7960FC.6030608@dresearch.de> <4A83C454.3010001@dresearch.de>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: confusing qemu-native problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,48 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 11:40:06 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Aug 2009 11:49:41 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 13-08-09 12:07, Ulf Samuelsson wrote:
-> Koen Kooi skrev:
->> On 13-08-09 09:13, Ulf Samuelsson wrote:
->>> Since I will need to test multiple boards,
->>> I decided to write some scripts which I will
->>> check in later today in origin/ulf/linux-2.6.30.2
->>>
->>> I generated a "MAKEALL" script which will
->>> source a file "board_list.sh" with board build commands
->>>
->>> <SOF>
->>> build_board    sam9263dfc    x11-gpe-image
->>> build_board    sam9g45ek    opie-image
->>> build_board    sam9g10df    x11-gpe-image
->>> build_board    sam9g20dfc    console-image
->>> build_board    sam9260dfc    console-image
->>> build_board    sam9261df    x11-image
->>> build_board    sam9xedfc    console-image
->>> <EOF>
->>
->> You do know that you can do that with MACHINE=foo bitbake bar, right?
->>
->
-> Didn't try that.
-> I assume this means that the cross compiler is not rebuilt,
+On Thu, 13 Aug 2009, Steffen Sledz wrote:
 
-Unless you poked at the gcc recipes, no, it won't get rebuilt.
+> Steffen Sledz schrieb:
+> > head -n1 /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man
 
-> Is the root fs assembled from ipks then?
+> #!/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/perl
 
-if you use rootfs_ipk.bbclass, yes.
+> It looks like someone cut the path to the pod2man script.
 
-Note that the official angstrom buildguide has mentioned that for years: 
-http://www.angstrom-distribution.org/building-angstrom
+Heh, I guess there's a limit on #! line length.
 
-regards,
+include/linux/binfmts.h:#define BINPRM_BUF_SIZE 128
 
-Koen
+I guess you could try to make your build directory name a bit shorter, or 
+hack up pod2man to use #!/usr/bin/env perl.
 
+Mike
 
 
