@@ -1,23 +1,17 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MbcEB-0001TK-9x
+	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1MbcLZ-0001qO-OH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 17:28:33 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 11E111B10C11
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 15:15:20 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu, 13 Aug 2009 17:36:11 +0200
+X-AuditID: 0a1e000a-b7ba8ae000000dd5-d9-4a842f06da5c
+From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2009 17:11:25 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <19c1b8a90908101812v662e21b4h54683ac6fe4380b1@mail.gmail.com>
-	<20090812221317.GA13386@gmail.com> <4A842816.3000504@cbnco.com>
-In-Reply-To: <4A842816.3000504@cbnco.com>
-MIME-Version: 1.0
-Message-Id: <200908131711.26079.holger+oe@freyther.de>
-Subject: Re: [PATCH v2] pciutils: fix generation of pci.ids.gz
+Date: Thu, 13 Aug 2009 11:19:10 -0400
+Message-Id: <1250176750.29049.1003.camel@conroy-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-Brightmail-Tracker: AAAAAA==
+Subject: gcc-cross-sdk (GCC 4.2.3) limits.h woes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,23 +25,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 15:28:42 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 13 Aug 2009 15:36:13 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Thursday 13 August 2009 16:49:58 Michael Smith wrote:
-> Khem Raj wrote:
-> > On (12/08/09 09:17), Michael Smith wrote:
-> >> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> >
-> > Acked-by: Khem Raj <raj.khem@gmail.com>
->
-> Thanks Khem. Could you please apply it? I don't have commit rights.
+I've spent a pretty good chunk of time this past week trying to get a
+working external toolchain, but I've hit a bit of a wall and can't
+figure out how to fix this last problem.
 
-Do you want to change that? How many of your patches are still not 
-applied/pushed?
+I'm trying to build a gcc-cross-sdk with GCC 4.2.3, and for a while I
+faced a chicken-and-egg problem of finding limits.h where the creation
+of the cross-sdk would succeed only if the eventual install location
+(in /usr/local/path/to/toolchain/ existed). By pulling in the
+sdk-libstdc++-includes.patch from poky, I was able to remove this issue
+during the creation of gcc-cross-sdk.
 
-z.
+Now, chicken and egg fixed (properly?) using the external toolchain
+results in cross packages failing to find limits.h (specifically, the
+#include_next<limits.h> in ${prefix}/usr/include/limits.h. It's unclear
+to me which (if any) limits.h should be installed (and where).
+
+I've run through the gcc-cross-sdk work directory and was unable to find
+any obvious choices (all of the copies there also asked for an
+include_next).
+
+If I make the assumption that this is just an erroneous include_next, I
+can successfully compile and run some packages. However, I cannot build
+the kernel because it fails on the assembly inside asm_offsets.c. This
+leads me to believe that removing that include_next was not a valid fix
+(no surprise there), and perhaps fixing this limits.h issue properly
+will be the last step in creating a working external toolchain. I don't
+see any obvious choices within gcc, but perhaps I need to pull from
+glibc, glibc-initial, or perhaps a particular host file?
+
+Note that this is NOT GCC 4.3.x which moved the fixincludes directory
+and made some issues with finding limits.h. Most of the references I've
+found to this bug indicate that people had this working before upgrading
+to 4.3.x, and therefore I'm a bit surprised to be running into a similar
+issue with 4.2.x
+
+(For reference, this is with glibc 2.7 and binutils 2.19 for a
+mipsel-linux target building on an x86_64 host)
+
+--Chris Conroy
+
+
 
 
