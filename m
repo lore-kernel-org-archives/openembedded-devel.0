@@ -1,21 +1,40 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [209.85.198.247] (helo=rv-out-0708.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MbcsY-00053S-3z
+	(envelope-from <raj.khem@gmail.com>) id 1Mbcxv-0005Ga-Qs
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 18:10:15 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id CA4341B10C0E
+	Thu, 13 Aug 2009 18:15:48 +0200
+Received: by rv-out-0708.google.com with SMTP id l33so1491317rvb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 15:56:53 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu, 13 Aug 2009 08:59:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=fFo3qE6RVj7Ql8UDOlAfwl5h8BkS/f6scmE1PKQgKl4=;
+	b=Qa1NmoXEn6OlgCG1Xx7nIK6TCnPr1CrTGMn80MEMUmDB9R8u4fjsZyEOab5Ec+ocmR
+	6qrhIpyfil3v+qxsdPk6K2pNk7c80IK2uSMwHANePbA4if/Z4gFYiCYu7J5DcMsaJH3A
+	Df8vBW8Yk/J6RyLp4wd10aG0mZhzOxElv0z3w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=om4HWceJLjDadxtBjN5X7rgv+CcWGXjlc0pSUHaqugL0zjDMuQz5BbWRqxrYkulTj+
+	tcCKcmx+H7PXmyb3FNN4MiEaJ+KQ0HeyD3KVF00SAqpevLd1z0Ph5rIdfLgcvL4FeLxB
+	YABTVyNlRUjQoMVspyoU8q/kfELyLCeZYXiVo=
+Received: by 10.141.28.2 with SMTP id f2mr581788rvj.119.1250179155542;
+	Thu, 13 Aug 2009 08:59:15 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-8-242.dsl.pltn13.sbcglobal.net
+	[71.146.8.242])
+	by mx.google.com with ESMTPS id g14sm2649432rvb.10.2009.08.13.08.59.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 13 Aug 2009 08:59:14 -0700 (PDT)
+Date: Thu, 13 Aug 2009 08:59:09 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2009 17:52:57 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+Message-ID: <20090813155909.GC8906@gmail.com>
 References: <1250176750.29049.1003.camel@conroy-linux>
-In-Reply-To: <1250176750.29049.1003.camel@conroy-linux>
 MIME-Version: 1.0
-Message-Id: <200908131752.57975.holger+oe@freyther.de>
+In-Reply-To: <1250176750.29049.1003.camel@conroy-linux>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Subject: Re: gcc-cross-sdk (GCC 4.2.3) limits.h woes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,46 +49,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 16:10:17 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Aug 2009 16:15:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thursday 13 August 2009 17:19:10 Chris Conroy wrote:
+On (13/08/09 11:19), Chris Conroy wrote:
 > I've spent a pretty good chunk of time this past week trying to get a
 > working external toolchain, but I've hit a bit of a wall and can't
 > figure out how to fix this last problem.
+> 
+> I'm trying to build a gcc-cross-sdk with GCC 4.2.3, and for a while I
+> faced a chicken-and-egg problem of finding limits.h where the creation
+> of the cross-sdk would succeed only if the eventual install location
+> (in /usr/local/path/to/toolchain/ existed). By pulling in the
+> sdk-libstdc++-includes.patch from poky, I was able to remove this issue
+> during the creation of gcc-cross-sdk.
+> 
+> Now, chicken and egg fixed (properly?) using the external toolchain
+> results in cross packages failing to find limits.h (specifically, the
+> #include_next<limits.h> in ${prefix}/usr/include/limits.h. It's unclear
+> to me which (if any) limits.h should be installed (and where).
 
-I'm a bit hungry so here is just my config:
-
-conf/local.conf
-DL_DIR = "${HOME}/source/sources/"
-DISTRO = "angstrom-2008.1"
-MACHINE="db1200"
-IMAGE_FSTYPES += " ext2 "
-
-BB_NUMBER_THREADS = "4"
-PARALLEL_MAKE = "-j4"
-ENABLE_BINARY_LOCALE_GENERATION="0"
-ENTERPRISE_DISTRO = "1"
-
-BBFILES="${HOME}/source/embedded/openembedded/recipes"
-
-$ bitbake meta-toolchain-qte
-
-just passed today (thanks to Graham's work).. on my i686..
-
-
-     binutils: 2.18
-     gcc: 4.3.3
-     glibc: 2.9
-
-
-maybe that is useful?
-
-
-PS: For gcc4.2.x we need to pass more include dirs... the error with 
-#include_next is that it runs out of search paths.... With poky I pushed it a 
-bit but didn't manage to build a working version
+limits.h should come from glibc. which should include the one provided
+by gcc in include-fixed gcc-cross-sdk should have done that.
+Deleting include_next is not the correct thing to do.
+> 
+> I've run through the gcc-cross-sdk work directory and was unable to find
+> any obvious choices (all of the copies there also asked for an
+> include_next).
+> 
+> If I make the assumption that this is just an erroneous include_next, I
+> can successfully compile and run some packages. However, I cannot build
+> the kernel because it fails on the assembly inside asm_offsets.c. This
+> leads me to believe that removing that include_next was not a valid fix
+> (no surprise there), and perhaps fixing this limits.h issue properly
+> will be the last step in creating a working external toolchain. I don't
+> see any obvious choices within gcc, but perhaps I need to pull from
+> glibc, glibc-initial, or perhaps a particular host file?
+> 
+> Note that this is NOT GCC 4.3.x which moved the fixincludes directory
+> and made some issues with finding limits.h. Most of the references I've
+> found to this bug indicate that people had this working before upgrading
+> to 4.3.x, and therefore I'm a bit surprised to be running into a similar
+> issue with 4.2.x
+> 
+> (For reference, this is with glibc 2.7 and binutils 2.19 for a
+> mipsel-linux target building on an x86_64 host)
+> 
+> --Chris Conroy
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
