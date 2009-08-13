@@ -1,22 +1,23 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [81.228.11.98] (helo=pne-smtpout1-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MbWyT-0002HM-0R
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MbXTw-0000rD-Te
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 11:51:57 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C1B901B10C06
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 09:38:46 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2009 11:34:50 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <4A83D8D4.7060206@epfl.ch>
-In-Reply-To: <4A83D8D4.7060206@epfl.ch>
+	Thu, 13 Aug 2009 12:24:28 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout1-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A683C78001BA2A7 for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 12:07:57 +0200
+Message-ID: <4A83E5FC.2020002@atmel.com>
+Date: Thu, 13 Aug 2009 12:07:56 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Message-Id: <200908131134.50432.holger+oe@freyther.de>
-Subject: Re: Cross-compiling qt based programs with cmake
+To: openembedded-devel@lists.openembedded.org
+References: <4A83BD15.7070006@atmel.com> <h60je5$992$1@ger.gmane.org>
+In-Reply-To: <h60je5$992$1@ger.gmane.org>
+Subject: Re: Ideas for scripts, to save work, when building several boards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,37 +31,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 09:51:57 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 13 Aug 2009 10:24:29 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Thursday 13 August 2009 11:11:48 Valentin Longchamp wrote:
-> Hello,
->
-> I am trying to build cmake based programs that use QT with Openembedded.
-> The actual support for cmake in OE worked until now because I only had
-> "simple" dependencies. Now with QT as as dependency, I use the cmake
-> FindQt4 Module that strongly relies on qmake to find the different QT
-> cmake variables (try to run ${STAGINGBINDIR}/qmake2 -query). The cmake
-> FindQt4 Module uses the values given by qmake to determine where all the
-> libraries and tools are installed (and if installed).
+Koen Kooi skrev:
+> On 13-08-09 09:13, Ulf Samuelsson wrote:
+>> Since I will need to test multiple boards,
+>> I decided to write some scripts which I will
+>> check in later today in origin/ulf/linux-2.6.30.2
+>>
+>> I generated a "MAKEALL" script which will
+>> source a file "board_list.sh" with board build commands
+>>
+>> <SOF>
+>> build_board    sam9263dfc    x11-gpe-image
+>> build_board    sam9g45ek    opie-image
+>> build_board    sam9g10df    x11-gpe-image
+>> build_board    sam9g20dfc    console-image
+>> build_board    sam9260dfc    console-image
+>> build_board    sam9261df    x11-image
+>> build_board    sam9xedfc    console-image
+>> <EOF>
+> 
+> You do know that you can do that with MACHINE=foo bitbake bar, right?
+> 
 
-Let me throw in some (pseudo) facts:
-	- We want to use one qmake2 for Qt/X11, Qt/Embedded Linux builds
-	- qmake is reading a qt.conf from the directory of the binary. In Qt/X11
-	 and Qt/E build we write a custom one.
-	- the pkg-config files for Qt should be correct.
+Didn't try that.
+I assume this means that the cross compiler is not rebuilt,
+Is the root fs assembled from ipks then?
 
 
-So my proposals include:
-	- Consider renaming qmake2 to qmake or qmake-qt4 (and move qt3 to qmake-qt3)
-	- for X11/Embedded create a separate bin dir for qmake, create a symlink and
-	  place a qt.conf in it.
-	- maybe convince Alexander Neuendorf to use pkg-config to find Qt too..
+> regards,
+> 
+> Koen
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-what do you think?
-	z.
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
