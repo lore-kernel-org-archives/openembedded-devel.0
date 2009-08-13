@@ -1,33 +1,21 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Mbi3G-0000CP-Iv for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 23:41:38 +0200
-Received: from root by ciao.gmane.org with local (Exim 4.43)
-	id 1MbhnC-00086o-K1 for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 21:25:02 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 21:25:02 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 21:25:02 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Mbk5E-0008GY-SA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 01:51:48 +0200
+Received: from [85.179.110.203] (helo=[192.168.1.6])
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1MbjrR-0001Va-5c
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 01:37:33 +0200
+Message-ID: <4A84A333.4060701@kernelconcepts.de>
+Date: Fri, 14 Aug 2009 01:35:15 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 13 Aug 2009 23:23:18 +0200
-Message-ID: <h62087$ns5$1@ger.gmane.org>
-References: <4A847C46.7090306@atmel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
-In-Reply-To: <4A847C46.7090306@atmel.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Common patch directory for a set of boards.
+Subject: Commercial Support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,82 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 21:41:38 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 13 Aug 2009 23:51:49 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 13-08-09 22:49, Ulf Samuelsson wrote:
-> Is there a way to store a patch which is applied to a list of boards,
-> but not every board, in a common directory?
->
-> SRC_URI_append_at91sam9263ek += "file://atmel.patch;patch=1"
-> SRC_URI_append_at32stk1000 += "file://atmel.patch;patch=1"
-> SRC_URI_append_at572d940hf += "file://atmel.patch;patch=1"
-> SRC_URI_append_beta1 += "file://beta.patch;patch=1"
-> SRC_URI_append_beta2 += "file://beta.patch;patch=1"
-> SRC_URI_append_beta3 += "file://beta.patch;patch=1"
-> SRC_URI_append_caesar1 += "file://caesar.patch;patch=1"
-> SRC_URI_append_caesar2 += "file://caesar.patch;patch=1"
->
-> with a file system like:
->
-> <recipe>
-> 	recipe-1.0/atmel/atmel.patch
-> 	recipe-1.0/beta/beta.patch
-> 	recipe-1.0/caesar/caesar.patch
-> 	recipe-1.0.bb
+Hi,
 
-Sort of, for the above you would do:
+we had a discussion about creating a list of companies and individuals providing 
+commercial OE support. I'm not sure how and when this discussion ended, but I 
+have created a page in the wiki for this purpose.
 
-SRC_URI_append_at91sam9263ek = " file://atmel/atmel.patch;patch=1"
-SRC_URI_append_at32stk1000 = " file://atmel/atmel.patch;patch=1"
-SRC_URI_append_at572d940hf = " file://atmel/atmel.patch;patch=1"
-SRC_URI_append_beta1 = " file://beta/beta.patch;patch=1"
-SRC_URI_append_beta2 = " file://beta/beta.patch;patch=1"
-SRC_URI_append_beta3 = " file://beta/beta.patch;patch=1"
-SRC_URI_append_caesar1 = " file://caesar/caesar.patch;patch=1"
-SRC_URI_append_caesar2 = " file://caesar/caesar.patch;patch=1"
+http://wiki.openembedded.net/index.php/CommercialSupport
 
-The linux-omap_2.6.29.bb recipe has something like that since I had to 
-find a way to retain my sanity with that amount of patches.
+Feel free to fill it with some information...
 
-regards,
-
-Koen
+I suggest to use a layout like this: http://elinux.org/Companies
 
 
->
->
-> instead of
->
-> <recipe>
-> 	recipe-1.0/at91sam9263ek/atmel.patch
-> 	recipe-1.0/at32stk1000/atmel.patch
-> 	recipe-1.0/at572d940hf/atmel.patch
-> 	recipe-1.0/beta1/beta.patch
-> 	recipe-1.0/beta2/beta.patch
-> 	recipe-1.0/beta3/beta.patch
-> 	recipe-1.0/caesar1/caesar.patch
-> 	recipe-1.0/caesar2/caesar.patch
-> 	recipe-1.0.bb
->
->
-> I can think of symlinking at91sam9263ek to at572d940hf
-> but then you cannot have a defconfig file per board.
->
-> Maybe you can specify:
->
-> SRC_URI_append_at91sam9263ek += "file://../atmel/atmel.patch;patch=1"
->
-> but this has a fould look about it.
->
-> FOr the at91 patches, I took the easy way out and put all the patches
-> on www.at91.com, which is no good, since it has been down for
-> almost two days :-(
->
->
->
+Greetings
 
+Florian
 
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+
+1D78 2D4D 6C53 1CA4 5588  D07B A8E7 940C 25B7 9A76
 
 
