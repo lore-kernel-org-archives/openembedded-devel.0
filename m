@@ -1,23 +1,33 @@
-Received: from [128.178.224.226] (helo=smtp3.epfl.ch)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1MbVrr-00031P-7N
-	for openembedded-devel@openembedded.org; Thu, 13 Aug 2009 10:41:03 +0200
-Received: (qmail 22012 invoked by uid 107); 13 Aug 2009 08:24:21 -0000
-X-Virus-Scanned: ClamAV
-Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
-	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Thu, 13 Aug 2009 10:24:21 +0200
-Message-ID: <4A83CDB4.2000008@epfl.ch>
-Date: Thu, 13 Aug 2009 10:24:20 +0200
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <1245344614-22213-1-git-send-email-valentin.longchamp@epfl.ch>
-	<200908121119.43689.holger+oe@freyther.de>
-In-Reply-To: <200908121119.43689.holger+oe@freyther.de>
-Subject: Re: [RFC] change qmake2 to qmake4
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MbW5U-0003UP-DJ for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 10:55:08 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MbVpW-0008AI-7q for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 08:38:38 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Aug 2009 08:38:38 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Aug 2009 08:38:38 +0000
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 13 Aug 2009 10:38:27 +0200
+Message-ID: <h60je5$992$1@ger.gmane.org>
+References: <4A83BD15.7070006@atmel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
+In-Reply-To: <4A83BD15.7070006@atmel.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Ideas for scripts, to save work, when building several boards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,39 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 08:41:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 13 Aug 2009 08:55:08 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Holger Hans Peter Freyther wrote:
-> On Thursday 18 June 2009 19:03:33 Valentin Longchamp wrote:
->> As I have already explained in an email earlier today, some tools
->> (cmake for instance, with its FindQt4 Module) look for a qmake under
->> a certain name (that can be qmake or qmake4 ... but not qmake2).
->>
->> This patch proposes to change this name. With this, all the other qt
->> tools consistently have the 4 at the end of their name.
->>
->> Of course, all the recipes that inherit qmake2 should be changed, but
->> this is not done here since it's only a RFC to start a discussion
-> 
-> nack for now. qmake4 is worse than calling it qmake2. The current major qmake 
-> version is "2". We can talk about calling it "qmake" or "qmake-qt4".
-> 
+On 13-08-09 09:13, Ulf Samuelsson wrote:
+> Since I will need to test multiple boards,
+> I decided to write some scripts which I will
+> check in later today in origin/ulf/linux-2.6.30.2
+>
+> I generated a "MAKEALL" script which will
+> source a file "board_list.sh" with board build commands
+>
+> <SOF>
+> build_board	sam9263dfc	x11-gpe-image
+> build_board	sam9g45ek	opie-image
+> build_board	sam9g10df	x11-gpe-image
+> build_board	sam9g20dfc	console-image
+> build_board	sam9260dfc	console-image
+> build_board	sam9261df	x11-image
+> build_board	sam9xedfc	console-image
+> <EOF>
 
-Ok, fine for me. The other way could be to patch cmake to make it look 
-for qmake2 instead of qmake.
+You do know that you can do that with MACHINE=foo bitbake bar, right?
 
-With this, qmake would be found by the FindQt.cmake module. However, the 
-problem would not be solved yet (there is another thing that comes in 
-the way, please see my other email to the list, coming in a few minutes).
+regards,
 
-Val
+Koen
 
--- 
-Valentin Longchamp, PhD Student, EPFL-STI-LSRO1
-valentin.longchamp@epfl.ch, Phone: +41216937827
-http://people.epfl.ch/valentin.longchamp
-MEA3485, Station 9, CH-1015 Lausanne
 
 
