@@ -1,22 +1,24 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MbPf8-0000xM-V0
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MbUiK-0002pO-7N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 04:03:31 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 4C5651B10C06
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 01:50:20 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Aug 2009 03:46:22 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <1250114333-22259-1-git-send-email-oe-devel@rolf.leggewie.biz>
-In-Reply-To: <1250114333-22259-1-git-send-email-oe-devel@rolf.leggewie.biz>
+	Thu, 13 Aug 2009 09:27:08 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout2-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A2D61FD005584BF for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 09:10:37 +0200
+Message-ID: <4A83BC6C.3090308@atmel.com>
+Date: Thu, 13 Aug 2009 09:10:36 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Message-Id: <200908130346.22163.holger+oe@freyther.de>
-Subject: Re: [PATCH] base.bbclass: ftp.matrix.com.br no longer exists
+To: openembedded-devel@lists.openembedded.org
+References: <4A81BE84.6010607@atmel.com>	<200908121433.31479.marcin@juszkiewicz.com.pl>
+	<1250092579.12282.73.camel@mill.internal.reciva.com>
+In-Reply-To: <1250092579.12282.73.camel@mill.internal.reciva.com>
+Subject: Re: Contents of the "origin/ulf/linux-2.6.30.2" branch. Help with testing wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,32 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 02:03:34 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 13 Aug 2009 07:27:09 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 12 August 2009 23:58:53 Rolf Leggewie wrote:
-> ---
+Status of build:
+I tried building some boards overnight.
 
-Signed-off-by:  Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Acked-By: Holger Freyther <zecke@selfish.org>
+sam9263dfc:	x11-gpe-image
+	I had
+	GLIBC_GENERATE_LOCALES = "en_GB.UTF-8 de_DE.UTF-8"
+	from an old local.conf.sample
+	This should be
+	GLIBC_GENERATE_LOCALES = "en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8"
+
+sam9261df:
+	Same as sam9263dfc
+
+sam9g45ek:	x11-gpe-image
+	I enabled power management for the linux kernel.
+	This does not work, so I will change the linux config.
+
+sam9260dfc:	console_image
+	compiles, but bitbake u-boot is needed to complete the build
+
+sam9g20dfc:	console_image
+	compiles, but bitbake u-boot is needed to complete the build
 
 
->  classes/base.bbclass |    1 -
->  1 files changed, 0 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index ef6c0ab..5363e5c 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -1279,7 +1279,6 @@ ${DEBIAN_MIRROR}	ftp://ftp.es.debian.org/debian/pool
->  ${DEBIAN_MIRROR}	ftp://ftp.se.debian.org/debian/pool
->  ${DEBIAN_MIRROR}	ftp://ftp.tr.debian.org/debian/pool
->  ${GNU_MIRROR}	ftp://mirrors.kernel.org/gnu
-> -${GNU_MIRROR}	ftp://ftp.matrix.com.br/pub/gnu
->  ${GNU_MIRROR}	ftp://ftp.cs.ubc.ca/mirror2/gnu
->  ${GNU_MIRROR}	ftp://sunsite.ust.hk/pub/gnu
->  ${GNU_MIRROR}	ftp://ftp.ayamura.org/pub/gnu
+....
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
