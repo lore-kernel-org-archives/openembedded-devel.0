@@ -1,31 +1,25 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [81.228.8.164] (helo=pne-smtpout2-sn2.hy.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MbYoA-0001B0-KZ
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MbZOU-0008Al-2Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 13:49:33 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id C5B5153A20A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 13581-10 for <openembedded-devel@lists.openembedded.org>; 
-	Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id A5488539E87
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
-Date: Thu, 13 Aug 2009 07:32:55 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A83C454.3010001@dresearch.de>
-Message-ID: <Pine.LNX.4.64.0908130730390.3621@juice.ott.cti.com>
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF94F@hiob.intern.dresearch.de>
-	<4A7960FC.6030608@dresearch.de> <4A83C454.3010001@dresearch.de>
+	Thu, 13 Aug 2009 14:26:58 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout2-sn2.hy.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A5BC8BE0025BD05 for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Aug 2009 14:10:25 +0200
+Message-ID: <4A8402B0.1000308@atmel.com>
+Date: Thu, 13 Aug 2009 14:10:24 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: confusing qemu-native problem
+To: openembedded-devel@lists.openembedded.org
+References: <4A83BD15.7070006@atmel.com>
+	<h60je5$992$1@ger.gmane.org>	<4A83E5FC.2020002@atmel.com>
+	<h60t34$5kl$1@ger.gmane.org>
+In-Reply-To: <h60t34$5kl$1@ger.gmane.org>
+Subject: Re: Ideas for scripts, to save work, when building several boards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +33,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 11:49:41 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 13 Aug 2009 12:26:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-On Thu, 13 Aug 2009, Steffen Sledz wrote:
+Koen Kooi skrev:
+> On 13-08-09 12:07, Ulf Samuelsson wrote:
+>> Koen Kooi skrev:
+>>> On 13-08-09 09:13, Ulf Samuelsson wrote:
+>>>> Since I will need to test multiple boards,
+>>>> I decided to write some scripts which I will
+>>>> check in later today in origin/ulf/linux-2.6.30.2
+>>>>
+>>>> I generated a "MAKEALL" script which will
+>>>> source a file "board_list.sh" with board build commands
+>>>>
+>>>> <SOF>
+>>>> build_board    sam9263dfc    x11-gpe-image
+>>>> build_board    sam9g45ek    opie-image
+>>>> build_board    sam9g10df    x11-gpe-image
+>>>> build_board    sam9g20dfc    console-image
+>>>> build_board    sam9260dfc    console-image
+>>>> build_board    sam9261df    x11-image
+>>>> build_board    sam9xedfc    console-image
+>>>> <EOF>
+>>>
+>>> You do know that you can do that with MACHINE=foo bitbake bar, right?
+>>>
+>>
+>> Didn't try that.
+>> I assume this means that the cross compiler is not rebuilt,
+> 
+> Unless you poked at the gcc recipes, no, it won't get rebuilt.
+> 
+>> Is the root fs assembled from ipks then?
+> 
+> if you use rootfs_ipk.bbclass, yes.
+> 
+> Note that the official angstrom buildguide has mentioned that for years:
+> http://www.angstrom-distribution.org/building-angstrom
+> 
 
-> Steffen Sledz schrieb:
-> > head -n1 /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man
+Thanks for helping out, but it does not work as expected.
 
-> #!/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/perl
+I first create a local.conf for the at91sam9261df
+and bitbake x11-image.
+Then I do "MACHINE=at91sam9g20dfc bitbake console-image".
+A console-image is built,but for the at91sam9261df,
+which is stored in "tmp/deploy/glibc/images/at91sam9261df"
 
-> It looks like someone cut the path to the pod2man script.
+The bitbake does not generate u-boot/kernel or at91bootstrap
+for the at91sam9260dfc
 
-Heh, I guess there's a limit on #! line length.
 
-include/linux/binfmts.h:#define BINPRM_BUF_SIZE 128
+I believe that most at91 chips can use the same file system,
+so it makes sense to do it this way anyway.
 
-I guess you could try to make your build directory name a bit shorter, or 
-hack up pod2man to use #!/usr/bin/env perl.
+I assume that the at91sam9261df setup is used for the console-image.
+There could be a few cases where this is ineffient or simply wrong.
 
-Mike
+
+
+
+> regards,
+> 
+> Koen
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
