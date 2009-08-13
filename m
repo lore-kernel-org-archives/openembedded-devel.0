@@ -1,21 +1,31 @@
-Received: from [81.228.8.164] (helo=pne-smtpout2-sn2.hy.skanova.net)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1MbUl3-0002tY-Oy
+	(envelope-from <sledz@DResearch.DE>) id 1MbVFO-0004E0-4E
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 09:29:57 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout2-sn2.hy.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A5BC8BE002517BC for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 09:13:26 +0200
-Message-ID: <4A83BD15.7070006@atmel.com>
-Date: Thu, 13 Aug 2009 09:13:25 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+	Thu, 13 Aug 2009 10:01:19 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 0AA5A16DFA6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Aug 2009 09:49:48 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 9B0912A424C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Aug 2009 09:44:48 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 13 Aug 2009 09:44:16 +0200
+Message-ID: <4A83C454.3010001@dresearch.de>
+Date: Thu, 13 Aug 2009 09:44:20 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Ideas for scripts, to save work, when building several boards
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF94F@hiob.intern.dresearch.de>
+	<4A7960FC.6030608@dresearch.de>
+In-Reply-To: <4A7960FC.6030608@dresearch.de>
+X-OriginalArrivalTime: 13 Aug 2009 07:44:16.0140 (UTC)
+	FILETIME=[DBBCE4C0:01CA1BE9]
+Subject: Re: confusing qemu-native problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,58 +39,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 07:29:57 -0000
+X-List-Received-Date: Thu, 13 Aug 2009 08:01:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Since I will need to test multiple boards,
-I decided to write some scripts which I will
-check in later today in origin/ulf/linux-2.6.30.2
+Steffen Sledz schrieb:
+> Sledz, Steffen schrieb:
+>> I've seen a very confusing, indetermined behaviour of the qemu-native build in the last time (current dev branch).
+>>
+>> When calling the following three commands back-to-back the first and the second fail with something like "/bin/sh: .../staging/i686-linux/usr/bin/pod2man: ...bad interpreter: Permission denied" but the third call succeeds (details see below).
+>>
+>>  bitbake hydraip-hipox-devimage
+>>  bitbake qemu-native
+>>  bitbake qemu-native
+>>
+>> In general it looks like the success of the qemu-native is really randomly.
+>>
+>> Why does the one call of "bitbake qemu-native" fails and the second succeeds?
+>> ...
+> 
+> No more ideas here?
+> 
+> Such indetermined behaviour is really a horror!
 
-I generated a "MAKEALL" script which will
-source a file "board_list.sh" with board build commands
+My google searches result in some possible causes for a behaviour like this, but none of them matches my case. :(
 
-<SOF>
-build_board	sam9263dfc	x11-gpe-image
-build_board	sam9g45ek	opie-image
-build_board	sam9g10df	x11-gpe-image
-build_board	sam9g20dfc	console-image
-build_board	sam9260dfc	console-image
-build_board	sam9261df	x11-image
-build_board	sam9xedfc	console-image
-<EOF>
+1. DOS line endings -> checked: none
 
-The script assumes the existance of a "build-<board>"
-directory with a configuration file in "build-<board>/conf".
-"build-<board>/conf/local.conf" is a link to
-"build-<board>/conf/<board>.conf"
+2. noexec mount option -> checked: exec
 
-I have also generated a script "scripts/make-local.conf.sh"
-to automatically generate the "build-<board>" directory
-with updates taken from definitions in "environment.sh"
-in the topdirectory
+3. acl or user_xattr effects -> checked: not used
 
-<SOF>
-#/bin/sh
-# Example environment.sh
+Looking into the logs and playing with the devshell i found these interesting points:
 
-DOWNLOAD=/usr/local/install/downloads
-MAKEJOBS=4
-THREADS=4
-KERNEL=2.6.30
-<EOF>
+> /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man --help
+bash: /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man: /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595: bad interpreter: Permission denied
 
-You call
-openembedded/scripts/make-local.conf.sh at91sam9263ek
-to create the build-at91sam9263ek directory.
+> head -n1 /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man
+#!/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/perl
 
-The MAKEALL script will prepare this directory
-for full or incremental build and create
-the symbolic link "build" before bitbake starts
+> /home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/perl --version
 
--- 
-Best Regards
-Ulf Samuelsson
+This is perl, v5.8.8 built for i686-linux-thread-multi
+...
+
+So the perl interpreter seems not to be the problem. Confusing for me is the original error message:
+
+"/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595: bad interpreter: Permission denied"
+
+I would expect something like:
+
+"/home/DRESEARCH/production/METABUILD/2009-08-03-15-24-27--hydraip-build--28595/OpenEmbedded/tmp.3/staging/i686-linux/usr/bin/pod2man: bad interpreter: Permission denied"
+
+It looks like someone cut the path to the pod2man script.
+
+I would be really grateful for some help.
+
+Steffen
+
 
 
 
