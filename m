@@ -1,33 +1,20 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MbW5U-0003UP-DJ for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 10:55:08 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MbVpW-0008AI-7q for openembedded-devel@lists.openembedded.org;
-	Thu, 13 Aug 2009 08:38:38 +0000
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 08:38:38 +0000
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Aug 2009 08:38:38 +0000
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 13 Aug 2009 10:38:27 +0200
-Message-ID: <h60je5$992$1@ger.gmane.org>
-References: <4A83BD15.7070006@atmel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
-In-Reply-To: <4A83BD15.7070006@atmel.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: Ideas for scripts, to save work, when building several boards
+Received: from [128.178.224.226] (helo=smtp3.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1MbWbc-0001XD-Ry
+	for openembedded-devel@openembedded.org; Thu, 13 Aug 2009 11:28:21 +0200
+Received: (qmail 29247 invoked by uid 107); 13 Aug 2009 09:11:49 -0000
+X-Virus-Scanned: ClamAV
+Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
+	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Thu, 13 Aug 2009 11:11:49 +0200
+Message-ID: <4A83D8D4.7060206@epfl.ch>
+Date: Thu, 13 Aug 2009 11:11:48 +0200
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Cross-compiling qt based programs with cmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,33 +28,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Aug 2009 08:55:08 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 13 Aug 2009 09:28:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 13-08-09 09:13, Ulf Samuelsson wrote:
-> Since I will need to test multiple boards,
-> I decided to write some scripts which I will
-> check in later today in origin/ulf/linux-2.6.30.2
->
-> I generated a "MAKEALL" script which will
-> source a file "board_list.sh" with board build commands
->
-> <SOF>
-> build_board	sam9263dfc	x11-gpe-image
-> build_board	sam9g45ek	opie-image
-> build_board	sam9g10df	x11-gpe-image
-> build_board	sam9g20dfc	console-image
-> build_board	sam9260dfc	console-image
-> build_board	sam9261df	x11-image
-> build_board	sam9xedfc	console-image
-> <EOF>
+Hello,
 
-You do know that you can do that with MACHINE=foo bitbake bar, right?
+I am trying to build cmake based programs that use QT with Openembedded.
+The actual support for cmake in OE worked until now because I only had
+"simple" dependencies. Now with QT as as dependency, I use the cmake
+FindQt4 Module that strongly relies on qmake to find the different QT
+cmake variables (try to run ${STAGINGBINDIR}/qmake2 -query). The cmake 
+FindQt4 Module uses the values given by qmake to determine where all the 
+libraries and tools are installed (and if installed).
 
-regards,
+The problem is that all the variables defined by qmake2 -query point to 
+the ${STAGING_DIR}/${HOST_SYS}/ as you can se below:
 
-Koen
+> valentin@lsro1arena:~/OE/angstrom/staging$ x86_64-linux/usr/bin/qmake2 -query
+> QT_INSTALL_PREFIX:/home/valentin/OE/angstrom/staging/x86_64-linux/usr
+> QT_INSTALL_DATA:/home/valentin/OE/angstrom/staging/x86_64-linux/usr
+> QT_INSTALL_DOCS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/doc
+> QT_INSTALL_HEADERS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/include
+> QT_INSTALL_LIBS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/lib
+> QT_INSTALL_BINS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/bin
+> QT_INSTALL_PLUGINS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/plugins
+> QT_INSTALL_TRANSLATIONS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/translations
+> QT_INSTALL_CONFIGURATION:/etc/xdg
+> QT_INSTALL_EXAMPLES:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/examples
+> QT_INSTALL_DEMOS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/demos
+> QMAKE_MKSPECS:/home/valentin/OE/angstrom/staging/x86_64-linux/usr/mkspecs
+> QMAKE_VERSION:2.01a
+> QT_VERSION:4.5.1
 
+
+But in order to be used, these values should point to a place that is 
+more like ${STAGING_INCDIR}. If we take the includes example, 
+QT_INSTALL_HEADERS is 
+/home/valentin/OE/angstrom/staging/x86_64-linux/usr/include ( 
+${STAGING_DIR}/${HOST_SYS}/include) but it should be 
+/home/valentin/OE/angstrom/staging/armv6-angstrom-linux-gnueabi/usr/include/qtopia/ 
+(that corresponds to ${STAGING_INCDIR}/qtopia) as you can see below.
+
+> valentin@lsro1arena:~/OE/angstrom$ ll staging/armv6-angstrom-linux-gnueabi/usr/include/qtopia/
+> total 160K
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 phonon
+> drwxr-xr-x 2 valentin valentin  32K 2009-06-17 20:43 Qt
+> drwxr-xr-x 2 valentin valentin  16K 2009-06-17 20:43 Qt3Support
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtAssistant
+> drwxr-xr-x 2 valentin valentin  20K 2009-06-17 20:43 QtCore
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtDBus
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtDesigner
+> drwxr-xr-x 2 valentin valentin  36K 2009-06-17 20:43 QtGui
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtHelp
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtNetwork
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtScript
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtScriptTools
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtSql
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtSvg
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtTest
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtUiTools
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtWebKit
+> drwxr-xr-x 2 valentin valentin 4.0K 2009-06-17 20:43 QtXml
+
+The problem is that these QT_INSTALL_* values are determined at 
+configure time, and it is hard to change them.
+
+An inelegant but efficient way to resolve this problem would be to 
+"double install" the headers and libs of qt (or qtopia) also in 
+${STAGING_DIR}/${HOST_SYS}.
+
+But I am pretty sure there is a more elegant way to do it, especially 
+using qt4e.bbclass where all the releveant paths are used.
+
+Is there a qt4 wizard in OE that could help me ?
+
+Val
+
+-- 
+Valentin Longchamp, PhD Student, EPFL-STI-LSRO1
+valentin.longchamp@epfl.ch, Phone: +41216937827
+http://people.epfl.ch/valentin.longchamp
+MEA3485, Station 9, CH-1015 Lausanne
 
 
