@@ -1,30 +1,32 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1Mbwk0-0000M1-52
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 15:22:44 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id ED43553B8FA
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Mbwkf-0000NG-R2 for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 15:23:25 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1MbwUY-0000xa-Hu for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 13:06:46 +0000
+Received: from p5b3b193c.dip.t-dialin.net ([91.59.25.60])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Aug 2009 13:06:46 +0000
+Received: from no2spam by p5b3b193c.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2009 09:06:05 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 11590-08 for <openembedded-devel@lists.openembedded.org>; 
-	Fri, 14 Aug 2009 09:06:05 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 9927A53B825
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2009 09:06:05 -0400 (EDT)
-Message-ID: <4A85613D.6050108@cbnco.com>
-Date: Fri, 14 Aug 2009 09:06:05 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Fri, 14 Aug 2009 13:06:46 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 14 Aug 2009 15:06:31 +0200
+Message-ID: <h63ngq$s80$1@ger.gmane.org>
 References: <1250175641-4869-1-git-send-email-msmith@cbnco.com>	<1250175641-4869-2-git-send-email-msmith@cbnco.com>
-	<20090813154310.GB8906@gmail.com>
-In-Reply-To: <20090813154310.GB8906@gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
+	<4A84B3E7.4070602@tait.co.nz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b193c.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.22 (X11/20090804)
+In-Reply-To: <4A84B3E7.4070602@tait.co.nz>
+Sender: news <news@ger.gmane.org>
 Subject: Re: [PATCH 2/4] gcc: fix libstdc/libgcc packaging on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,19 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2009 13:22:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 14 Aug 2009 13:23:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Khem Raj wrote:
-> On (13/08/09 11:00), Michael Smith wrote:
- >> Bump INC_PR for recent gccs (4.3.3, 4.4.1). Hopefully no one is using
- >> older gcc for x86_64.
+Douglas Royds wrote:
+> FWIW, Ubuntu Hardy LTS 8.04 is on GCC 4.2.3:
+> 
+>     http://packages.ubuntu.com/search?keywords=gcc
+> 
+> Hardy LTS is the "Long-Term Support" version of Ubuntu, that they 
+> support for 2 years. It will be replaced in April 2010, which isn't 
+> tooooo far away.
 
-> this one looks ok. you need to install same for 4.3.4 atleast.
+Hardy is my main build machine.  I hope OE will continue to work with it.
 
-OK, I'll bump PR for 4.1.2, 4.2.[34], 4.3.[34], 4.4.1 in the next patch ver.
+Hardy will be EOL'd on the desktop in April 2011.  Support for the
+console/server version will run another two years after that.
 
-Mike
+https://wiki.ubuntu.com/Releases
+
 
 
