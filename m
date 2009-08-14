@@ -1,26 +1,38 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.222.193] (helo=mail-pz0-f193.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1Mc4HE-0002Pr-VE
+	(envelope-from <raj.khem@gmail.com>) id 1Mc4wi-0003k1-OG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 23:25:34 +0200
-Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Mc40u-00036o-DI
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 22:08:42 +0100
-From: Phil Blundell <pb@reciva.com>
+	Sat, 15 Aug 2009 00:08:25 +0200
+Received: by pzk31 with SMTP id 31so1307348pzk.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Aug 2009 14:51:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=UUfJhfX95xzGelR0SKzpFXkoo1qj8DGYA6I1cu2IPgY=;
+	b=ZrkTzm/253HgLtfX0MIQtrvVJkSJp5rRGB8iH8xbIZPQ6t9etmupQtYe7JT8r1atPQ
+	6qrVawCkZr1rSjSYmIkg5FjuEk6gg8BMa/26E8Qv5TlSNMB8Q4/hQIzlriAaJhl6VXiM
+	riUxqu+7LFd5lJtPbizjKYhgrW6x05sTNt34g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=d/YZA0H3+89BvLBzDB5lvSHvU9F7T8E0TPM4DE5vbwd+K6+D5V5D29MZQZO/JfAriq
+	v37rErbd6YWOUb1P9O5OQgwPcJ9xQ/hXdHs1WGvt5ayImSbTnb5KTT54TdJw0LRaSpDK
+	jGnZFNrR2PLj6U7HB8UbPXj9ZyCpKX4Gim4U8=
+Received: by 10.114.37.6 with SMTP id k6mr2225095wak.221.1250286702261;
+	Fri, 14 Aug 2009 14:51:42 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-8-242.dsl.pltn13.sbcglobal.net
+	[71.146.8.242])
+	by mx.google.com with ESMTPS id j34sm2915298waf.26.2009.08.14.14.51.40
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 14 Aug 2009 14:51:40 -0700 (PDT)
+Date: Fri, 14 Aug 2009 14:51:38 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A85C292.9030605@atmel.com>
-References: <4A8516BF.9080405@atmel.com> <h63h7v$8pk$1@ger.gmane.org>
-	<4A8581D9.9010205@atmel.com>
-	<1250264545.12282.1271.camel@mill.internal.reciva.com>
-	<4A85C292.9030605@atmel.com>
-Date: Fri, 14 Aug 2009 22:08:25 +0100
-Message-Id: <1250284105.4215.144.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: No graphic when loading "x11-gpe-image"
+Message-ID: <20090814215138.GB31011@gmail.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
+Subject: [RFC] Adding eglibc versions of minimal and micro distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,22 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2009 21:25:34 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Aug 2009 22:08:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, 2009-08-14 at 22:01 +0200, Ulf Samuelsson wrote:
-> The full command line is:
-> exec Xorg -br -pn  -dpi 100 -rgba bgr -screen 240x320 :0 -noreset
-> 
-> It complains about an unrecognized option "-rgba"
+Hi
 
-Yeah, that looks like the startup scripts are trying to pass kdrive
-options to Xorg.  I guess you need to either install kdrive, or patch
-the scripts to do the right thing for Xorg.
+I would like to add minimal-eglibc and micro-eglibc distros on same
+lines as -uclibc one's
 
-p.
+Any objections ?
 
+Thanks
+
+-Khem
 
 
 
