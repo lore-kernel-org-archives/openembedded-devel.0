@@ -1,28 +1,31 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MbweX-0002vl-EC
+	(envelope-from <msmith@cbnco.com>) id 1Mbwk0-0000M1-52
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 15:17:05 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>)
-	id 1MbwOL-0007i9-EP; Fri, 14 Aug 2009 14:00:23 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>)
-	id 1MbwOL-0008IW-44; Fri, 14 Aug 2009 14:00:21 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org,
-	Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-In-Reply-To: <200908130346.22163.holger+oe@freyther.de>
-References: <1250114333-22259-1-git-send-email-oe-devel@rolf.leggewie.biz>
-	<200908130346.22163.holger+oe@freyther.de>
-Date: Fri, 14 Aug 2009 14:00:17 +0100
-Message-Id: <1250254817.12282.1231.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-Subject: Re: [PATCH] base.bbclass: ftp.matrix.com.br no longer exists
+	Fri, 14 Aug 2009 15:22:44 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id ED43553B8FA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Aug 2009 09:06:05 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 11590-08 for <openembedded-devel@lists.openembedded.org>; 
+	Fri, 14 Aug 2009 09:06:05 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 9927A53B825
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Aug 2009 09:06:05 -0400 (EDT)
+Message-ID: <4A85613D.6050108@cbnco.com>
+Date: Fri, 14 Aug 2009 09:06:05 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <1250175641-4869-1-git-send-email-msmith@cbnco.com>	<1250175641-4869-2-git-send-email-msmith@cbnco.com>
+	<20090813154310.GB8906@gmail.com>
+In-Reply-To: <20090813154310.GB8906@gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH 2/4] gcc: fix libstdc/libgcc packaging on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,41 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2009 13:17:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 14 Aug 2009 13:22:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-08-13 at 03:46 +0200, Holger Hans Peter Freyther wrote:
-> On Wednesday 12 August 2009 23:58:53 Rolf Leggewie wrote:
-> > ---
-> 
-> Signed-off-by:  Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-> Acked-By: Holger Freyther <zecke@selfish.org>
+Khem Raj wrote:
+> On (13/08/09 11:00), Michael Smith wrote:
+ >> Bump INC_PR for recent gccs (4.3.3, 4.4.1). Hopefully no one is using
+ >> older gcc for x86_64.
 
-Acked-by: Phil Blundell <philb@gnu.org>
+> this one looks ok. you need to install same for 4.3.4 atleast.
 
-> 
-> 
-> >  classes/base.bbclass |    1 -
-> >  1 files changed, 0 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/classes/base.bbclass b/classes/base.bbclass
-> > index ef6c0ab..5363e5c 100644
-> > --- a/classes/base.bbclass
-> > +++ b/classes/base.bbclass
-> > @@ -1279,7 +1279,6 @@ ${DEBIAN_MIRROR}	ftp://ftp.es.debian.org/debian/pool
-> >  ${DEBIAN_MIRROR}	ftp://ftp.se.debian.org/debian/pool
-> >  ${DEBIAN_MIRROR}	ftp://ftp.tr.debian.org/debian/pool
-> >  ${GNU_MIRROR}	ftp://mirrors.kernel.org/gnu
-> > -${GNU_MIRROR}	ftp://ftp.matrix.com.br/pub/gnu
-> >  ${GNU_MIRROR}	ftp://ftp.cs.ubc.ca/mirror2/gnu
-> >  ${GNU_MIRROR}	ftp://sunsite.ust.hk/pub/gnu
-> >  ${GNU_MIRROR}	ftp://ftp.ayamura.org/pub/gnu
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+OK, I'll bump PR for 4.1.2, 4.2.[34], 4.3.[34], 4.4.1 in the next patch ver.
 
+Mike
 
 
