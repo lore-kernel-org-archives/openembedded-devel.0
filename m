@@ -1,32 +1,30 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MbyCZ-0001Hu-QV for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 16:56:19 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1MbxwS-0004fu-DJ for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 14:39:40 +0000
-Received: from p5b3b193c.dip.t-dialin.net ([91.59.25.60])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2009 14:39:40 +0000
-Received: from no2spam by p5b3b193c.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2009 14:39:40 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from [67.222.39.32] (helo=outbound-mail-152.bluehost.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <chow.ming@linuxbj.com>) id 1MbySN-0001fX-4v
+	for openembedded-devel@openembedded.org; Fri, 14 Aug 2009 17:12:39 +0200
+Received: (qmail 9074 invoked by uid 0); 14 Aug 2009 14:56:00 -0000
+Received: from unknown (HELO host285.hostmonster.com) (74.220.215.85)
+	by outboundproxy5.bluehost.com with SMTP; 14 Aug 2009 14:56:00 -0000
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=default; d=linuxbj.com;
+	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-Identified-User;
+	b=GOqDUDGk7yyT/73oHvFc1A4CNm0kMEDooAzpNew1c8mDMUZ9L/DzVeLQhgo3WGermOx9OUPQRI7m48ItjPZRWd4gnK9LQC2yItBbK6/10B0GD1Ua0+7W6FGmsMW5C2cf;
+Received: from [222.131.143.214] (helo=[192.168.200.199])
+	by host285.hostmonster.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <chow.ming@linuxbj.com>)
+	id 1MbyCF-0003e6-Er for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 08:56:00 -0600
+Message-ID: <4A857AFC.5040509@linuxbj.com>
+Date: Fri, 14 Aug 2009 22:55:56 +0800
+From: =?UTF-8?B?TWluZyBDaG93IOWRqOaYjg==?= <chow.ming@linuxbj.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 14 Aug 2009 16:39:24 +0200
-Message-ID: <h63suv$dje$1@ger.gmane.org>
-References: <4A84650F.1080902@linuxbj.com>	<200908140406.00714.holger+oe@freyther.de>
-	<4A850430.6060809@linuxbj.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b193c.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.22 (X11/20090804)
-In-Reply-To: <4A850430.6060809@linuxbj.com>
-Sender: news <news@ger.gmane.org>
+References: <4A84650F.1080902@linuxbj.com>	<200908140406.00714.holger+oe@freyther.de>	<4A850430.6060809@linuxbj.com>
+	<h63suv$dje$1@ger.gmane.org>
+In-Reply-To: <h63suv$dje$1@ger.gmane.org>
+X-Identified-User: {2055:host285.hostmonster.com:linuxbjc:linuxbj.com}
+	{sentby:smtp auth 222.131.143.214 authed with
+	chow.ming@linuxbj.com}
 Subject: Re: patch for compcache recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,22 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2009 14:56:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 14 Aug 2009 15:12:39 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Ming Chow 周明 wrote:
-> BTW. I had experienced some checksum mismatch before. A few packages 
-> which just work can not pass checksum matching. I guess it may be caused 
-> by hosting or tarball changing without notice. For I am not very clear 
-> how the global checksum.ini is maintained. I lazily set 
-> OE_ALLOW_INSECURE_DOWNLOADS.
+Got it, thank you.
+I will try the checksum stuff.
 
-Take a look at
-http://wiki.openembedded.net/index.php/Dealing_with_checksum_mismatch
-
-Let us know about the packages failing the checksum test so we can fix
-things.
+Rolf Leggewie wrote:
+> Ming Chow 周明 wrote:
+>   
+>> BTW. I had experienced some checksum mismatch before. A few packages 
+>> which just work can not pass checksum matching. I guess it may be caused 
+>> by hosting or tarball changing without notice. For I am not very clear 
+>> how the global checksum.ini is maintained. I lazily set 
+>> OE_ALLOW_INSECURE_DOWNLOADS.
+>>     
+>
+> Take a look at
+> http://wiki.openembedded.net/index.php/Dealing_with_checksum_mismatch
+>
+> Let us know about the packages failing the checksum test so we can fix
+> things.
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
 
 
 
