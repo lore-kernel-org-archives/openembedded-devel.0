@@ -1,21 +1,33 @@
-Received: from [81.228.8.83] (helo=pne-smtpout1-sn2.hy.skanova.net)
+Received: from [80.91.229.2] (helo=ciao.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1MbrmQ-0004gN-Pk
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 10:04:56 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn2.hy.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A7285AE0014589E for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 09:48:17 +0200
-Message-ID: <4A8516BF.9080405@atmel.com>
-Date: Fri, 14 Aug 2009 09:48:15 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Mbv52-0002SV-Pp for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 13:36:20 +0200
+Received: from list by ciao.gmane.org with local (Exim 4.43)
+	id 1Mbuos-0005I8-Ls for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 11:19:38 +0000
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Aug 2009 11:19:38 +0000
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Aug 2009 11:19:38 +0000
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: No graphic when loading "x11-gpe-image"
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 14 Aug 2009 13:19:27 +0200
+Message-ID: <h63h7v$8pk$1@ger.gmane.org>
+References: <4A8516BF.9080405@atmel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
+In-Reply-To: <4A8516BF.9080405@atmel.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: No graphic when loading "x11-gpe-image"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,20 +41,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2009 08:04:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 14 Aug 2009 11:36:21 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-I have tried opie-image which boots properly and I get a screen
+On 14-08-09 09:48, Ulf Samuelsson wrote:
+> I have tried opie-image which boots properly and I get a screen
+>
+> x11-gpe-image does not start properly.
+> Only a black screen.
 
-x11-gpe-image does not start properly.
-Only a black screen.
-
-Anyone gotten this to work with a late git?
-
--- 
-Best Regards
-Ulf Samuelsson
+My crystal ball is broken, without some log files or output we can't 
+help you
 
 
 
