@@ -1,38 +1,23 @@
-Received: from [209.85.222.193] (helo=mail-pz0-f193.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mc4wi-0003k1-OG
+	(envelope-from <pb@reciva.com>) id 1Mc5CJ-0001Yq-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Aug 2009 00:08:25 +0200
-Received: by pzk31 with SMTP id 31so1307348pzk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2009 14:51:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=UUfJhfX95xzGelR0SKzpFXkoo1qj8DGYA6I1cu2IPgY=;
-	b=ZrkTzm/253HgLtfX0MIQtrvVJkSJp5rRGB8iH8xbIZPQ6t9etmupQtYe7JT8r1atPQ
-	6qrVawCkZr1rSjSYmIkg5FjuEk6gg8BMa/26E8Qv5TlSNMB8Q4/hQIzlriAaJhl6VXiM
-	riUxqu+7LFd5lJtPbizjKYhgrW6x05sTNt34g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=d/YZA0H3+89BvLBzDB5lvSHvU9F7T8E0TPM4DE5vbwd+K6+D5V5D29MZQZO/JfAriq
-	v37rErbd6YWOUb1P9O5OQgwPcJ9xQ/hXdHs1WGvt5ayImSbTnb5KTT54TdJw0LRaSpDK
-	jGnZFNrR2PLj6U7HB8UbPXj9ZyCpKX4Gim4U8=
-Received: by 10.114.37.6 with SMTP id k6mr2225095wak.221.1250286702261;
-	Fri, 14 Aug 2009 14:51:42 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-8-242.dsl.pltn13.sbcglobal.net
-	[71.146.8.242])
-	by mx.google.com with ESMTPS id j34sm2915298waf.26.2009.08.14.14.51.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 14 Aug 2009 14:51:40 -0700 (PDT)
-Date: Fri, 14 Aug 2009 14:51:38 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 15 Aug 2009 00:24:31 +0200
+Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Mc4wA-0004gH-VS
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 Aug 2009 23:07:51 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090814215138.GB31011@gmail.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.17+20080114 (2008-01-14)
-Subject: [RFC] Adding eglibc versions of minimal and micro distro
+In-Reply-To: <20090814215138.GB31011@gmail.com>
+References: <20090814215138.GB31011@gmail.com>
+Date: Fri, 14 Aug 2009 23:07:43 +0100
+Message-Id: <1250287663.4215.164.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,20 +31,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2009 22:08:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 14 Aug 2009 22:24:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi
+On Fri, 2009-08-14 at 14:51 -0700, Khem Raj wrote:
+> I would like to add minimal-eglibc and micro-eglibc distros on same
+> lines as -uclibc one's
 
-I would like to add minimal-eglibc and micro-eglibc distros on same
-lines as -uclibc one's
+How different is eglibc's API and ABI from regular glibc?  I wonder if
+it really needs a separate DISTRO of its own.
 
-Any objections ?
+p.
 
-Thanks
-
--Khem
 
 
 
