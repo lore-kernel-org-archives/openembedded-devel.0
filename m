@@ -1,22 +1,38 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [209.85.216.177] (helo=mail-px0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MbnC5-0007ED-IF
+	(envelope-from <raj.khem@gmail.com>) id 1Mbq43-0005Fc-7b
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 Aug 2009 05:11:05 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7D2C71B10C13
+	Fri, 14 Aug 2009 08:14:59 +0200
+Received: by pxi7 with SMTP id 7so209387pxi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Aug 2009 02:57:54 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu, 13 Aug 2009 22:58:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=OZVRhmF00PkUW+L5YLbcU79LmVBzidgod+tasO+o0rw=;
+	b=VGJaPzAcIZpVy3EKTxCBZ3UsC/A0ifbxiFMN6mT/7YSI8GyXJ/T4KdoCow3Wke2JEp
+	Ia/UEo1Kf5um+1IqDLhorimJGrt82PW9P1XAarRW8XH0z3t0Owiducp6eC6lR1lRJ/Vh
+	FjlbenqmrcuXK+csRyWzKYMKRShc7tWLsia7g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=gJ/Q7LboS6g+p1zWB+8cUqji9hgif2V5O1Kksh9OMwRSgKrwCBcGxK7UQ+Mfvq/iQc
+	yek3QHq3yKHn1ZhQBgCqwQNCJDRFUhzZsbMAJ9+0ROfMcwL9xGt8sVEPowrlZHCTpoZB
+	DxMrUWP3qg2rIy1N9YbV3OgZDzxDn4AZBKMeg=
+Received: by 10.115.15.2 with SMTP id s2mr1615683wai.66.1250229501177;
+	Thu, 13 Aug 2009 22:58:21 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-8-242.dsl.pltn13.sbcglobal.net
+	[71.146.8.242])
+	by mx.google.com with ESMTPS id l38sm1551933waf.18.2009.08.13.22.58.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 13 Aug 2009 22:58:20 -0700 (PDT)
+Date: Thu, 13 Aug 2009 22:58:13 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Aug 2009 04:53:51 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <003d01ca049a$43702c60$ca508520$@Willis@Distant-earth.com>
-In-Reply-To: <003d01ca049a$43702c60$ca508520$@Willis@Distant-earth.com>
+Message-ID: <20090814055813.GA13133@gmail.com>
 MIME-Version: 1.0
-Message-Id: <200908140453.51789.holger+oe@freyther.de>
-Subject: Re: [PATCH] Fix build issue with gamin_0.1.8.bb and recent GCC/GLibC combos.
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: New patches not appearing in patchwork since 8/12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,63 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Aug 2009 03:11:05 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 Aug 2009 06:14:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tuesday 14 July 2009 17:46:31 John Willis wrote:
-> Update gamin_0.1.8.bb to build with recent GCC and GLibC 2.8 > via addition
-> of configure.in patch (use AC_USE_SYSTEM_EXTENSIONS instead of
-> AC_ISC_POSIX).
->
-> Signed-off-by: David-John Willis <John.Willis@Distant-earth.com>
+Hi
 
-Signed-off-by: Holger Freyther <zecke@selfish.org>
+I am not seeing new patches on patchwork. Is there something wrong with
+it or is there some setting messed up on my end.
 
+Can you see patches posted after 8/12
 
-the patch can not be applied because your mailer decided to wrap the lines. :)
+Thx
 
-z.
-
-> ---
->  recipes/gamin/files/configure_ucred.patch |   11 +++++++++++
->  recipes/gamin/gamin_0.1.8.bb              |    3 ++-
->  2 files changed, 13 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/gamin/files/configure_ucred.patch
->
-> diff --git a/recipes/gamin/files/configure_ucred.patch
-> b/recipes/gamin/files/configure_ucred.patch
-> new file mode 100644
-> index 0000000..016c4df
-> --- /dev/null
-> +++ b/recipes/gamin/files/configure_ucred.patch
-> @@ -0,0 +1,11 @@
-> +--- trunk/configure.in	2007/08/06 08:35:56	326
-> ++++ trunk/configure.in	2008/06/03 15:34:24	330
-> +@@ -29,7 +29,7 @@
-> +
-> + AM_PROG_LIBTOOL
-> +
-> +-AC_ISC_POSIX
-> ++AC_USE_SYSTEM_EXTENSIONS
-> + AC_PROG_CC
-> + AM_PROG_CC_STDC
-> + AC_HEADER_STDC
-> diff --git a/recipes/gamin/gamin_0.1.8.bb b/recipes/gamin/gamin_0.1.8.bb
-> index 754f47d..2f35392
-> --- a/recipes/gamin/gamin_0.1.8.bb
-> +++ b/recipes/gamin/gamin_0.1.8.bb
-> @@ -2,7 +2,8 @@ DESCRIPTION = "Gamin is a file and directory monitoring
-> system defined to be a s
->  LICENSE = "LGPL"
->
->  SRC_URI = "http://www.gnome.org/~veillard/gamin/sources/gamin-${PV}.tar.gz
-> \
-> -           file://no-abstract-sockets.patch;patch=1"
-> +           file://no-abstract-sockets.patch;patch=1 \
-> +           file://configure_ucred.patch;patch=1"
->
->  EXTRA_OECONF = " --without-python "
+-Khem
 
 
