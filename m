@@ -1,36 +1,32 @@
-Received: from [74.125.92.144] (helo=qw-out-1920.google.com)
+Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1McNCr-0000zd-3P
+	(envelope-from <andrea.adami@gmail.com>) id 1McRNz-0005ak-NS
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Aug 2009 19:38:19 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so668820qwk.36
+	Sun, 16 Aug 2009 00:06:04 +0200
+Received: by ewy8 with SMTP id 8so329602ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Aug 2009 10:21:31 -0700 (PDT)
+	Sat, 15 Aug 2009 14:49:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=PIrAn8WzWJJT9cCOTjYsX28E9gmLO8HPoqSYjf9EP7Y=;
-	b=TlmQhvGyj9EzvpmkvJEmesEFBuHBdIvxfgLvfH28zsrgO/bdZlEF5iiJuFaTapDESE
-	2MRVHX6jrIs82BdkDelczBUjAFkb9lsRlGIfeaP6winZpwDyxdmc4aRFB/JkA4c5Tpy/
-	Ot/Bq4EFoSQL6H5o5S3wT8X5zlPdzx+J+O7EY=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=Mc5/xyWge3gkB4knfdJoXrzs13l/L1djFm8XoAX+3ZQ=;
+	b=fWFaxvbBfN+9YynzXAdjzhBwYs7Ws2IfZe/RvUM799Y+RiWB04gXDl3rwpY84N672Y
+	dMu4ACh1IKStlLjZWUHMhigAD7ldhUu7fED7QQp++OyfJ7i+ILO2NjVDs/RzHiRI4qwh
+	lab9kUk5ThQKlFHEJhPrkvtfZyA/mCUavOys4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ai+/xdtqaFSPghk/Uki7GjB/BIsx4UIlopBwBWKiXYuDGAL8MFah2kn2ocG91b3uW+
-	a+WRkPu/x2s5AKqMKjmW077befgbcc42ioyUWXpZoE/inG5fPgQDtppHJN/927/CUGOu
-	LBPKFKwWVT7XM6AfT9522Blk33ewBOv79cMA8=
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=f5ZNAYWExPsGp2EgDqmPGT8kJjy7idaeyfCZh8FtfBkpG6T539MZzdMI/TlHxs8EUI
+	W0fNJ27TnUY2oepSxKJaRizlpvy5IEfcMJXvuOucNWp97iYX9WG7BJ/ojsoGGylBHdaD
+	2bSCW3gvpPuDCdtT8OkJlrD2uQ6ZOad5/yFcA=
 MIME-Version: 1.0
-Received: by 10.229.112.139 with SMTP id w11mr1523523qcp.8.1250356891551; Sat, 
-	15 Aug 2009 10:21:31 -0700 (PDT)
-In-Reply-To: <20090815022703.GH14883@smtp.west.cox.net>
-References: <20090814215138.GB31011@gmail.com>
-	<20090815022703.GH14883@smtp.west.cox.net>
-Date: Sat, 15 Aug 2009 10:21:31 -0700
-Message-ID: <19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+Received: by 10.216.30.5 with SMTP id j5mr732728wea.209.1250372955050; Sat, 15 
+	Aug 2009 14:49:15 -0700 (PDT)
+Date: Sat, 15 Aug 2009 23:49:15 +0200
+Message-ID: <d1b08f940908151449x3365f27cl5700731a008e2617@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
+Subject: Wrong crosscompilers path after rebuild from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,39 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2009 17:38:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 15 Aug 2009 22:06:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 14, 2009 at 7:27 PM, Tom Rini<trini@embeddedalley.com> wrote:
-> On Fri, Aug 14, 2009 at 02:51:38PM -0700, Khem Raj wrote:
->
->> Hi
->>
->> I would like to add minimal-eglibc and micro-eglibc distros on same
->> lines as -uclibc one's
->>
->> Any objections ?
->
-> minimal-uclibc and micro-uclibc should go away and just pickup from LIBC
-> being passed in / set.
+I can consistently document an unexpected failure after rebuilding
+from packaged staging (wiping /tmp, leaving only /pstage dir).
 
-Ideally yes but there are other things like libintl libiconv etc which
-needs special handling
-for uclibc. So having uclibc counterparts is good.
+FWIW I use Angstrom, which sets
+./distro/include/angstrom.inc:DEPLOY_DIR = "${TMPDIR}/deploy/${LIBC}
+overriding
+./bitbake.conf:DEPLOY_DIR ?= "${TMPDIR}/deploy"
 
-But I think for micro and minimal I propose that we should chose
-eglibc. It fits in better
-IMO
+After build from scratch I have following tree:
 
->
-> --
-> Tom Rini
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+andrea@mizar /oe/build/tmp/cross/armv5te $ ls -l
+total 24
+drwxr-xr-x 5 andrea users 4096 Aug 15 10:32 arm-angstrom-linux-gnueabi
+drwxr-xr-x 2 andrea users 4096 Aug 15 11:44 bin
+drwxr-xr-x 3 andrea users 4096 Aug 15 10:24 i686-linux
+drwxr-xr-x 3 andrea users 4096 Aug 15 11:03 lib
+drwxr-xr-x 3 andrea users 4096 Aug 15 10:32 libexec
+drwxr-xr-x 3 andrea users 4096 Aug 15 11:19 share
+
+
+BUT packaged staging recreates  /oe/build/tmp/cross/bin and
+/oe/build/tmp/cross/arm-angstrom-linux-gnueabi/bin
+
+The problem is when you try to build smthg: in run.do_configure I have
+export PATH="...:/oe/build/tmp/cross/armv5te/bin:..."
+
+So, the 'armv5te' part is lost...crosscompiler not found :/
+
+Can someone reproduce / help to diagnose the issue?
+
+TIA
+
+Andrea
 
 
