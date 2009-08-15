@@ -1,24 +1,25 @@
-Received: from [81.228.8.83] (helo=pne-smtpout1-sn2.hy.skanova.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1McFcu-0006Uf-2M
+	(envelope-from <pb@reciva.com>) id 1McFxw-0007FW-NV
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Aug 2009 11:32:40 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn2.hy.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A7285AE0015CBC1 for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Aug 2009 11:15:55 +0200
-Message-ID: <4A867CCA.7060609@atmel.com>
-Date: Sat, 15 Aug 2009 11:15:54 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Sat, 15 Aug 2009 11:54:24 +0200
+Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1McFhj-0003uJ-OY
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Aug 2009 10:37:40 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A867CCA.7060609@atmel.com>
 References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
 	<1242507547.4226.1.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1242507547.4226.1.camel@lenovo.internal.reciva.com>
-Subject: xtscal fails + other Xorg init problems.
+	<4A867CCA.7060609@atmel.com>
+Date: Sat, 15 Aug 2009 10:37:31 +0100
+Message-Id: <1250329051.4215.167.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,84 +33,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2009 09:32:40 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 15 Aug 2009 09:54:24 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Looks like xtscal in x11-image fails.
+On Sat, 2009-08-15 at 11:15 +0200, Ulf Samuelsson wrote:
+> Looks like xtscal in x11-image fails.
+> 
+> $ DISPLAY=":0.0" xtscal
+> XCALIBRATE extension missing
 
-$ DISPLAY=":0.0" xtscal
-XCALIBRATE extension missing
+That error is fairly self-explanatory: your xserver lacks the XCALIBRATE
+extension.  Xtscal won't work if this is missing.
 
+p.
 
-
-When I look at /usr/lib/xorg/modules
-I find
-	libdri.la, but no libdri.so
-	libglx.la, but no libglx.so
-
-so they are not loaded.
-Should they be there and loaded?
-
-
--------------------------------
-
-Have gotten the touchscreen to work,
-by
-
-Section "ServerFlags"
-	Option "AllowEmptyInput" "off"
-EndSection
-in xorg.conf
-
-The touchscreen cursor travels in the x direction
-when the pen moves in the y-direction,
-but I think this is because the Linux config
-specifies that the screen should be rotated 90',
-which is does not do.
-That is probably an fb driver problem,
-which can be workaround by clearing the config.
-
-------------------------------
-
-But now the keyboard behaves in a strange manner
-I get three chararcters per press.
-I first through that the repeat rate was too
-high, but the problem remained after
-xset -r
-
-I just realized that I get two characters
-when I press the key, and the third character
-when I release the key.
-
-I think the driver reports key press, and something
-else when I press, and key release when I release the button
-and each event is interpreted as one character.
-
-Any clues?
-
-----------------------------------------------
-
-BTW: You cannot set the repeat rate using
-	Option "AutoRepeat" "500" "30"
-since XFree86-Misc is no longer available.
-
-"xset r rate 500" fails as well due to this.
-
-Any alternative methods to turn off the repeat?
-
-
-
-
-
-
-
-
-
-
--- 
-Best Regards
-Ulf Samuelsson
 
 
 
