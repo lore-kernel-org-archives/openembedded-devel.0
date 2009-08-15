@@ -1,32 +1,35 @@
-Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1McRX8-0005x3-KP
+	(envelope-from <utx@penguin.cz>) id 1McRvI-0003zi-Lt
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Aug 2009 00:15:30 +0200
-Received: by ewy8 with SMTP id 8so331775ewy.12
+	Sun, 16 Aug 2009 00:40:28 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id D25EC1417196
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Aug 2009 14:58:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=cvy+HKEiCF98OXwhPyd1UT5lDmTGRZrTDVnsNGYnr9k=;
-	b=TrFhT3eBtn1087tvAN4Mla/d8hEj/+13gOsU2CqvGjbi8zrP0N8U931guIGunO5l8L
-	TnzkH2bb4fh52DBK82RTB3fv3w99XQnEXWwW6Nha+Oil+Ngiye60zdYsXkrt9RnX/1sy
-	jCWYmenlZSM+rVq8Se5vxsrFqTYVVqEqB9Oxw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=d4EkDO57DMndxE9Rmhl9jgq3/BgRNLPHBahvrKGycIAoELagE+UVppyR0zesZDW9tI
-	uPfJq8VVuLoNV2Wi/urNDy1WqAexrpMpsPUC9jH6NqtjpsyokTEiPPivJrlmuw89SOIx
-	ULSGPjzvG4lOMZbzgN3QkiLatfSUL0nohvQ/g=
-MIME-Version: 1.0
-Received: by 10.216.71.19 with SMTP id q19mr718385wed.65.1250373522207; Sat, 
-	15 Aug 2009 14:58:42 -0700 (PDT)
-Date: Sat, 15 Aug 2009 23:58:42 +0200
-Message-ID: <d1b08f940908151458q6402d54akc9b00f6687261f19@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sun, 16 Aug 2009 00:15:13 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YE94Aqx9kIku
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Aug 2009 00:15:13 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id A69FB1417184
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Aug 2009 00:15:13 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Subject: Rebuild from packaged staging: issues with do_package_update_index_ipk
+In-Reply-To: <4A86A13E.6020402@atmel.com>
+References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1242507547.4226.1.camel@lenovo.internal.reciva.com>
+	<4A867CCA.7060609@atmel.com>
+	<1250329051.4215.167.camel@lenovo.internal.reciva.com>
+	<1250330779.4406.9.camel@utx.utx.cz>  <4A86A13E.6020402@atmel.com>
+Date: Sun, 16 Aug 2009 00:23:40 +0200
+Message-Id: <1250375020.5033.7.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2009 22:15:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 15 Aug 2009 22:40:28 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-I'm testing rebuild from packaged staging (cleaning all in /tmp but
-/pstage) and I was stopped by a new issue with package_ipk.bbclass:
+Ulf Samuelsson wrote:
+> Stanislav Brabec skrev:
+> > Well, there may be a problem in recipes. There is xcalibrate and
+> > libxcalibrate. Both provide the same library. Some recipes use
+> > xcalibrate in DEPENDS, some use libxcalibrate. libxcalibrate does not
+> > compile on images with xserver-kdrive.
+> > 
+> I have looked through the code.
+> x11-image uses Xorg and libxcalibrate.
+> 
+> There can be several reasons for this error message:
+> 
+> 1) Xmalloc fails
+> 2) There is no extension XCALIBRATE
+> 3) There is an extension, but with different casing
+>    XCALIBRATE is used by libxcalibrate.
+>    if another name is used when it is added,
+>    then there is a problem when queried.
+>    The library is called libXcalibrate.so.
 
-+ ipkgarchs='all any noarch arm  armv4 armv4t armv5te c7x0'
-+ '[' '!' -z '' ']'
-+ touch /oe/build/tmp/deploy/glibc/ipk/Packages
-touch: cannot touch `/oe/build/tmp/deploy/glibc/ipk/Packages': No such
-file or directory
+4) Both xcalibrate and libxcalibrate were populated to staging and one
+overwrites the other. .la files from one could "poison" the other.
+To identify this possible problem, please look at your build logs or
+check your tmp/work. If both xcalibrate and libxcalibrate were staged,
+you may expect problem.
 
-Basically if you remove the /ipk dir the script will fail...perhaps
-adding a mkdir -p would help.
+If only one of the was built, it is a different problem.
 
-Any opinion?
 
-Regards
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
-Andrea
 
 
