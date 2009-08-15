@@ -1,24 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1McFzr-0007Ip-ES
+	(envelope-from <utx@penguin.cz>) id 1McGPf-0005or-O8
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Aug 2009 11:56:24 +0200
-Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1McFjT-0003y3-8B
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 Aug 2009 10:39:29 +0100
-From: Phil Blundell <pb@reciva.com>
+	Sat, 15 Aug 2009 12:23:05 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id E20881409735
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Aug 2009 11:57:49 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id c5TSct3sqUGL
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Aug 2009 11:57:49 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id BB6B71416BC5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Aug 2009 11:57:49 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A867CCA.7060609@atmel.com>
+In-Reply-To: <1250329051.4215.167.camel@lenovo.internal.reciva.com>
 References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
 	<1242507547.4226.1.camel@lenovo.internal.reciva.com>
 	<4A867CCA.7060609@atmel.com>
-Date: Sat, 15 Aug 2009 10:39:12 +0100
-Message-Id: <1250329152.4215.169.camel@lenovo.internal.reciva.com>
+	<1250329051.4215.167.camel@lenovo.internal.reciva.com>
+Date: Sat, 15 Aug 2009 12:06:19 +0200
+Message-Id: <1250330779.4406.9.camel@utx.utx.cz>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
+X-Mailer: Evolution 2.22.1.1 
 Subject: Re: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,27 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2009 09:56:24 -0000
+X-List-Received-Date: Sat, 15 Aug 2009 10:23:12 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2009-08-15 at 11:15 +0200, Ulf Samuelsson wrote:
-> When I look at /usr/lib/xorg/modules
-> I find
-> 	libdri.la, but no libdri.so
-> 	libglx.la, but no libglx.so
+Phil Blundell wrote:
+> On Sat, 2009-08-15 at 11:15 +0200, Ulf Samuelsson wrote:
+> > Looks like xtscal in x11-image fails.
+> > 
+> > $ DISPLAY=":0.0" xtscal
+> > XCALIBRATE extension missing
 > 
-> so they are not loaded.
-> Should they be there and loaded?
+> That error is fairly self-explanatory: your xserver lacks the XCALIBRATE
+> extension.  Xtscal won't work if this is missing.
 
-I think the .la files are definitely spurious: you wouldn't want them
-installed on the target system under any circumstances I can think of.
-As to whether you should have DRI and GLX in the first place, that
-rather depends on your hardware capabilities.  Does a DRI driver exist
-for your video card?
+Well, there may be a problem in recipes. There is xcalibrate and
+libxcalibrate. Both provide the same library. Some recipes use
+xcalibrate in DEPENDS, some use libxcalibrate. libxcalibrate does not
+compile on images with xserver-kdrive.
 
-p.
+I think that the fix will require complete removal of xcalibrate:
+- xcalibrate_20060312.bb and xcalibrate_cvs.bb seems to be no more used.
+- xcalibrate_git.bb needs to be moved to libxcalibrate_git.bb using its
+version.
+- libxcalibrate probably needs to be moved to model specific directories
+(kdrive images need different version than xorg versions).
+- Update preferred versions for particular image.
+- and finally libxcalibrate should use standard git PV/PR allowing
+future upgrade.
 
+Alternative solution: Fix the latest libxcalibrate to work with bothe
+Xorg and kdrive.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
