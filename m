@@ -1,20 +1,24 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1Mc9FC-0006Ac-8A
-	for openembedded-devel@openembedded.org; Sat, 15 Aug 2009 04:43:46 +0200
-Received: (qmail 3558 invoked from network); 15 Aug 2009 02:27:04 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 14 Aug 2009 19:27:04 -0700
-Date: Fri, 14 Aug 2009 19:27:03 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090815022703.GH14883@smtp.west.cox.net>
-References: <20090814215138.GB31011@gmail.com>
+Received: from [81.228.8.83] (helo=pne-smtpout1-sn2.hy.skanova.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1McFcu-0006Uf-2M
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Aug 2009 11:32:40 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout1-sn2.hy.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A7285AE0015CBC1 for openembedded-devel@lists.openembedded.org;
+	Sat, 15 Aug 2009 11:15:55 +0200
+Message-ID: <4A867CCA.7060609@atmel.com>
+Date: Sat, 15 Aug 2009 11:15:54 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-In-Reply-To: <20090814215138.GB31011@gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
+To: openembedded-devel@lists.openembedded.org
+References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1242507547.4226.1.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1242507547.4226.1.camel@lenovo.internal.reciva.com>
+Subject: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,23 +32,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2009 02:43:46 -0000
+X-List-Received-Date: Sat, 15 Aug 2009 09:32:40 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 14, 2009 at 02:51:38PM -0700, Khem Raj wrote:
+Looks like xtscal in x11-image fails.
 
-> Hi
-> 
-> I would like to add minimal-eglibc and micro-eglibc distros on same
-> lines as -uclibc one's
-> 
-> Any objections ?
+$ DISPLAY=":0.0" xtscal
+XCALIBRATE extension missing
 
-minimal-uclibc and micro-uclibc should go away and just pickup from LIBC
-being passed in / set.
+
+
+When I look at /usr/lib/xorg/modules
+I find
+	libdri.la, but no libdri.so
+	libglx.la, but no libglx.so
+
+so they are not loaded.
+Should they be there and loaded?
+
+
+-------------------------------
+
+Have gotten the touchscreen to work,
+by
+
+Section "ServerFlags"
+	Option "AllowEmptyInput" "off"
+EndSection
+in xorg.conf
+
+The touchscreen cursor travels in the x direction
+when the pen moves in the y-direction,
+but I think this is because the Linux config
+specifies that the screen should be rotated 90',
+which is does not do.
+That is probably an fb driver problem,
+which can be workaround by clearing the config.
+
+------------------------------
+
+But now the keyboard behaves in a strange manner
+I get three chararcters per press.
+I first through that the repeat rate was too
+high, but the problem remained after
+xset -r
+
+I just realized that I get two characters
+when I press the key, and the third character
+when I release the key.
+
+I think the driver reports key press, and something
+else when I press, and key release when I release the button
+and each event is interpreted as one character.
+
+Any clues?
+
+----------------------------------------------
+
+BTW: You cannot set the repeat rate using
+	Option "AutoRepeat" "500" "30"
+since XFree86-Misc is no longer available.
+
+"xset r rate 500" fails as well due to this.
+
+Any alternative methods to turn off the repeat?
+
+
+
+
+
+
+
+
+
 
 -- 
-Tom Rini
+Best Regards
+Ulf Samuelsson
+
 
 
