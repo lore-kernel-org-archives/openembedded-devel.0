@@ -1,32 +1,26 @@
-Received: from [80.91.229.2] (helo=ciao.gmane.org)
+Received: from [209.85.219.212] (helo=mail-ew0-f212.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Mchut-00047C-Iw for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Aug 2009 17:45:07 +0200
-Received: from list by ciao.gmane.org with local (Exim 4.43)
-	id 1McheW-00018T-Uu for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Aug 2009 15:28:13 +0000
-Received: from p5b3b24ac.dip.t-dialin.net ([91.59.36.172])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2009 15:28:12 +0000
-Received: from no2spam by p5b3b24ac.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dp@xora.org.uk>) id 1MciSY-0005OQ-BS
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 16 Aug 2009 18:19:54 +0200
+Received: by ewy8 with SMTP id 8so557383ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2009 15:28:12 +0000
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 16 Aug 2009 09:03:00 -0700 (PDT)
+Received: by 10.210.141.9 with SMTP id o9mr2066031ebd.59.1250438580177;
+	Sun, 16 Aug 2009 09:03:00 -0700 (PDT)
+Received: from ?192.168.1.64? (94-193-93-235.zone7.bethere.co.uk
+	[94.193.93.235])
+	by mx.google.com with ESMTPS id 24sm7272627eyx.43.2009.08.16.09.02.59
+	(version=SSLv3 cipher=RC4-MD5); Sun, 16 Aug 2009 09:02:59 -0700 (PDT)
+Message-ID: <4A882DA9.10208@xora.org.uk>
+Date: Sun, 16 Aug 2009 17:02:49 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 16 Aug 2009 17:27:55 +0200
-Message-ID: <h698ht$k4v$1@ger.gmane.org>
-References: <540809eb0908100042n74d61d41s6336bea61546dfb@mail.gmail.com>	<4A881398.4070709@nospam.arcornews.de>
-	<h6951i$4gi$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b24ac.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.22 (X11/20090804)
-In-Reply-To: <h6951i$4gi$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
+References: <540809eb0908100042n74d61d41s6336bea61546dfb@mail.gmail.com>	<4A881398.4070709@nospam.arcornews.de>	<h6951i$4gi$1@ger.gmane.org>
+	<h698ht$k4v$1@ger.gmane.org>
+In-Reply-To: <h698ht$k4v$1@ger.gmane.org>
 Subject: Re: [PATCH] python-sip: update 4.7.9 -> 4.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,24 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Aug 2009 15:45:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 16 Aug 2009 16:19:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> On 16-08-09 16:11, Rolf Leggewie wrote:
->> Hi,
->>
->> your commit 68233bb284d82040087b7d265ad3ad93c0cab475 broke "bitbake
->> python-pyqt" and possibly others.  See bug 5297.  Please fix or revert.
-> 
-> That's not his commit if you had bothered to check:
+Rolf Leggewie wrote:
+> Koen Kooi wrote:
+>   
+>> On 16-08-09 16:11, Rolf Leggewie wrote:
+>>     
+>>> Hi,
+>>>
+>>> your commit 68233bb284d82040087b7d265ad3ad93c0cab475 broke "bitbake
+>>> python-pyqt" and possibly others.  See bug 5297.  Please fix or revert.
+>>>       
+>> That's not his commit if you had bothered to check:
+>>     
+>
+> Koen, if you had bothered to check instead of simply assuming, you'd
+> know that I'm well aware of who did what.  And that I contacted all the
+> appropriate people.
+>
+> So, just be quiet.
+>
+>   
+You might have addressed it better though, I was left wondering why I 
+would have broken python :-)
 
-Koen, if you had bothered to check instead of simply assuming, you'd
-know that I'm well aware of who did what.  And that I contacted all the
-appropriate people.
-
-So, just be quiet.
+Graeme
 
 
 
