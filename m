@@ -1,29 +1,22 @@
-Received: from [130.89.2.13] (helo=mx.utwente.nl)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <k.kooi@student.utwente.nl>) id 1McbBZ-0000l2-I0
-	for openembedded-devel@openembedded.org; Sun, 16 Aug 2009 10:33:53 +0200
-Received: from Powerbook-3.local (vpn006011.vpn.utwente.nl [130.89.6.11])
-	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id n7G8GxR7016830
+	(envelope-from <holger+oe@freyther.de>) id 1McbKQ-00016k-QL
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 16 Aug 2009 10:43:02 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C76451B10C0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2009 10:16:59 +0200
-Message-ID: <4A87C07A.7020206@student.utwente.nl>
-Date: Sun, 16 Aug 2009 10:16:58 +0200
-From: Koen Kooi <k.kooi@student.utwente.nl>
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
+	Sun, 16 Aug 2009 08:29:47 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 16 Aug 2009 10:25:38 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <800a98740908151812r65a3c267h104241a2e32a1222@mail.gmail.com>
+In-Reply-To: <800a98740908151812r65a3c267h104241a2e32a1222@mail.gmail.com>
 MIME-Version: 1.0
-Newsgroups: gmane.comp.handhelds.openembedded
-To: openembedded-devel@openembedded.org
-References: <4A8516BF.9080405@atmel.com>
-	<h63h7v$8pk$1@ger.gmane.org>	<4A8581D9.9010205@atmel.com>	<1250264545.12282.1271.camel@mill.internal.reciva.com>	<4A85C292.9030605@atmel.com>	<1250284105.4215.144.camel@lenovo.internal.reciva.com>
-	<1250377221.5033.16.camel@utx.utx.cz>
-In-Reply-To: <1250377221.5033.16.camel@utx.utx.cz>
-X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
-	icts.servicedesk@utwente.nl for more information.
-X-UTwente-MailScanner: Found to be clean
-X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
-X-Spam-Status: No
-Subject: Re: No graphic when loading "x11-gpe-image"
+Message-Id: <200908161025.38803.holger+oe@freyther.de>
+Subject: Re: [patch] add 18 bpp support to psplash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,18 +30,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Aug 2009 08:33:53 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 16 Aug 2009 08:43:02 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 16-08-09 01:00, Stanislav Brabec wrote:
-(Future versions of Xorg may be able to start without xorg.conf,
-> just with auto-detection.)
+On Sunday 16 August 2009 03:12:35 Ilya Petrov wrote:
+> Hi!
+>
+> Here is small patch to add 18bpp support to psplash.
+> This needed for motorola ezx gen2 machines (like moto a1200).
 
-The current one in OE already does, works great on all the hw I have here.
+did you send the patch upstream? Do you have a bug report or commit to point 
+to?
 
-regards,
-
-Koen
+z.
 
 
