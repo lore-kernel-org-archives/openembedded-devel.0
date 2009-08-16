@@ -1,37 +1,24 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MclKG-0000Cq-TS
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MclpA-0001P8-SN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Aug 2009 21:23:33 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so776313qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2009 12:06:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=8jr5bHn2wqb+JiBsMlnRpemQgzdVlj7jTnbyznbpPsI=;
-	b=ij+3qJi3QukLxlGeOfyDfJC7P7hib4bTVy79b0wj+7pjoM+7RVe40kyvjbaJbpLTqP
-	7vYZ4Lv9eh81BVtgVxwhlF37FADySZNP/2so8EpzERqbtWjabh0jGrCuOiMbk+7e5beE
-	2E5jtrDKCJPAHefxR4Q3aZxizcegkV0AjAy3I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=F/cGQfwcq+ojmzPaMuT0xVA3lzT2chglIrLrUhMQeqPLdzrMt7ukJAvqhkQpd4BInt
-	8Vnf9Rqov4zlFMQ1F6W9VJXoLzSezN9dAh5s7amva4tdmxWJdGC4YqWb0dP6CY+FMlAC
-	FrLtGS997VHYLhlZUZOh+Ps10GZQ3Df3M2HJ4=
+	Sun, 16 Aug 2009 21:55:29 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout2-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A2D61FD005A80C3 for openembedded-devel@lists.openembedded.org;
+	Sun, 16 Aug 2009 21:38:34 +0200
+Message-ID: <4A886039.5050508@atmel.com>
+Date: Sun, 16 Aug 2009 21:38:33 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Received: by 10.229.43.68 with SMTP id v4mr1736681qce.95.1250449599810; Sun, 
-	16 Aug 2009 12:06:39 -0700 (PDT)
-In-Reply-To: <19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
-References: <20090814215138.GB31011@gmail.com>
-	<20090815022703.GH14883@smtp.west.cox.net>
-	<19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
-Date: Sun, 16 Aug 2009 12:06:39 -0700
-Message-ID: <19c1b8a90908161206i4da9939dsa914d4cb6f5feecb@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
+References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>	<1242507547.4226.1.camel@lenovo.internal.reciva.com>	<4A867CCA.7060609@atmel.com>	<1250329051.4215.167.camel@lenovo.internal.reciva.com>	<1250330779.4406.9.camel@utx.utx.cz>
+	<4A86A13E.6020402@atmel.com> <1250375020.5033.7.camel@utx.utx.cz>
+In-Reply-To: <1250375020.5033.7.camel@utx.utx.cz>
+Subject: Re: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,49 +32,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Aug 2009 19:23:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 16 Aug 2009 19:55:33 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Sat, Aug 15, 2009 at 10:21 AM, Khem Raj<raj.khem@gmail.com> wrote:
-> On Fri, Aug 14, 2009 at 7:27 PM, Tom Rini<trini@embeddedalley.com> wrote:
->> On Fri, Aug 14, 2009 at 02:51:38PM -0700, Khem Raj wrote:
->>
->>> Hi
+Stanislav Brabec skrev:
+> Ulf Samuelsson wrote:
+>> Stanislav Brabec skrev:
+>>> Well, there may be a problem in recipes. There is xcalibrate and
+>>> libxcalibrate. Both provide the same library. Some recipes use
+>>> xcalibrate in DEPENDS, some use libxcalibrate. libxcalibrate does not
+>>> compile on images with xserver-kdrive.
 >>>
->>> I would like to add minimal-eglibc and micro-eglibc distros on same
->>> lines as -uclibc one's
->>>
->>> Any objections ?
+>> I have looked through the code.
+>> x11-image uses Xorg and libxcalibrate.
 >>
->> minimal-uclibc and micro-uclibc should go away and just pickup from LIBC
->> being passed in / set.
->
-> Ideally yes but there are other things like libintl libiconv etc which
-> needs special handling
-> for uclibc. So having uclibc counterparts is good.
->
-> But I think for micro and minimal I propose that we should chose
-> eglibc. It fits in better
-> IMO
-
-If no one has objections then I will switch minimal and micro distros
-to use eglibc by default (2.10 atm)
-
-Thanks
-
--Khem
-
->
+>> There can be several reasons for this error message:
 >>
->> --
->> Tom Rini
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
+>> 1) Xmalloc fails
+>> 2) There is no extension XCALIBRATE
+>> 3) There is an extension, but with different casing
+>>    XCALIBRATE is used by libxcalibrate.
+>>    if another name is used when it is added,
+>>    then there is a problem when queried.
+>>    The library is called libXcalibrate.so.
+> 
+> 4) Both xcalibrate and libxcalibrate were populated to staging and one
+> overwrites the other. .la files from one could "poison" the other.
+> To identify this possible problem, please look at your build logs or
+> check your tmp/work. If both xcalibrate and libxcalibrate were staged,
+> you may expect problem.
+> 
+> If only one of the was built, it is a different problem.
+> 
+I did a patch to xtscal to print out all X11 Extensions
+if the XInitExtension fails, and there is no XCALIBRATE
+extension loaded.
+
+
+The at91 confs have:
+PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+This should be:
+PREFERRED_PROVIDER_xserver = "xserver-kdrive-common"
+
+Instead of kdrive, I am using the xorg server, and I saw
+a comment that libXcalibrate does not work on xorg.
+
+I will try with xerver-krive-common and see how it goes...
+
+
+> 
+> ________________________________________________________________________
+> Stanislav Brabec
+> http://www.penguin.cz/~utx/zaurus
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
