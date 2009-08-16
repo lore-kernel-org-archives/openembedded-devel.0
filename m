@@ -1,19 +1,29 @@
-Received: from [72.167.82.81] (helo=p3plsmtpa01-01.prod.phx3.secureserver.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1McVQE-00080H-Ho
-	for openembedded-devel@openembedded.org; Sun, 16 Aug 2009 04:24:38 +0200
-Received: (qmail 1695 invoked from network); 16 Aug 2009 02:07:48 -0000
-Received: from unknown (75.49.209.10)
-	by p3plsmtpa01-01.prod.phx3.secureserver.net (72.167.82.81) with ESMTP;
-	16 Aug 2009 02:07:48 -0000
-Message-ID: <4A8769E6.5090801@mwester.net>
-Date: Sat, 15 Aug 2009 21:07:34 -0500
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.22) Gecko/20090605 Thunderbird/2.0.0.22 Mnenhy/0.7.6.0
+Received: from [130.89.2.13] (helo=mx.utwente.nl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <k.kooi@student.utwente.nl>) id 1McbBZ-0000l2-I0
+	for openembedded-devel@openembedded.org; Sun, 16 Aug 2009 10:33:53 +0200
+Received: from Powerbook-3.local (vpn006011.vpn.utwente.nl [130.89.6.11])
+	by mx.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id n7G8GxR7016830
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Aug 2009 10:16:59 +0200
+Message-ID: <4A87C07A.7020206@student.utwente.nl>
+Date: Sun, 16 Aug 2009 10:16:58 +0200
+From: Koen Kooi <k.kooi@student.utwente.nl>
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: fuse - missing checksums
+Newsgroups: gmane.comp.handhelds.openembedded
+To: openembedded-devel@openembedded.org
+References: <4A8516BF.9080405@atmel.com>
+	<h63h7v$8pk$1@ger.gmane.org>	<4A8581D9.9010205@atmel.com>	<1250264545.12282.1271.camel@mill.internal.reciva.com>	<4A85C292.9030605@atmel.com>	<1250284105.4215.144.camel@lenovo.internal.reciva.com>
+	<1250377221.5033.16.camel@utx.utx.cz>
+In-Reply-To: <1250377221.5033.16.camel@utx.utx.cz>
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	icts.servicedesk@utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-Spam-Status: No
+Subject: Re: No graphic when loading "x11-gpe-image"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,18 +37,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Aug 2009 02:24:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 16 Aug 2009 08:33:53 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Can whomever added the fuse 2.7.4 recipe earlier this week please add
-the missing checksum entry so that it's buildable?
+On 16-08-09 01:00, Stanislav Brabec wrote:
+(Future versions of Xorg may be able to start without xorg.conf,
+> just with auto-detection.)
 
-(I am traveling at the moment and do not have access to a host with my
-OE key on it to push the fix myself - sorry.)
+The current one in OE already does, works great on all the hw I have here.
 
-Thanks,
-Mike (mwester)
+regards,
 
+Koen
 
 
