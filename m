@@ -1,35 +1,33 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1McSUm-0005KB-V1
+	(envelope-from <ilya.muromec@gmail.com>) id 1McUYn-0000u0-Lh
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 Aug 2009 01:17:09 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 29E621417196
+	Sun, 16 Aug 2009 03:29:25 +0200
+Received: by bwz17 with SMTP id 17so1673674bwz.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2009 00:51:54 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NhDtSZIq0aYv
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2009 00:51:54 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id F2DE01417184
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Aug 2009 00:51:53 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1250284105.4215.144.camel@lenovo.internal.reciva.com>
-References: <4A8516BF.9080405@atmel.com> <h63h7v$8pk$1@ger.gmane.org>
-	<4A8581D9.9010205@atmel.com>
-	<1250264545.12282.1271.camel@mill.internal.reciva.com>
-	<4A85C292.9030605@atmel.com>
-	<1250284105.4215.144.camel@lenovo.internal.reciva.com>
-Date: Sun, 16 Aug 2009 01:00:21 +0200
-Message-Id: <1250377221.5033.16.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: No graphic when loading "x11-gpe-image"
+	Sat, 15 Aug 2009 18:12:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=j8PH1qIzzbH0+5bSOZRL78z1lDFyG7n94/M7SFI9+KI=;
+	b=nuOxXY8bCZdDHnOoJMX6YBwc/ljMcIk4XuekbbzuiMlmaWgiEMwJ9L7PhI5kxzYM5L
+	1UlJzXmYZqWD1Z4kcXUHudLCCeqxhyYCH0DiBi54MhWeSlvYPAQAKKSDazaZjm96LUEr
+	suG61UctkLScD/eqCxkqkFuhriCAtopPulk7E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=DKULRyHcQscvu2ax5tc87RR4Z2l8O0Hmp+A863WrwUbbFLnOC6Hzu5269f+I+6ALPI
+	GLEWiluGKM6PqO6aYAIZ/59xhNEVmhWTR7VFBIVPQonSTfPgFvqpCrreC0PPDicEwCFq
+	So9zigiVLDPoFbLCIml7w/qMQfYBt+s+PwAMw=
+MIME-Version: 1.0
+Received: by 10.204.19.138 with SMTP id a10mr1921796bkb.68.1250385155990; Sat, 
+	15 Aug 2009 18:12:35 -0700 (PDT)
+Date: Sun, 16 Aug 2009 04:12:35 +0300
+Message-ID: <800a98740908151812r65a3c267h104241a2e32a1222@mail.gmail.com>
+From: Ilya Petrov <ilya.muromec@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	OpenEzx <openezx-devel@lists.openezx.org>
+Subject: [patch] add 18 bpp support to psplash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,35 +41,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Aug 2009 23:17:09 -0000
+X-List-Received-Date: Sun, 16 Aug 2009 01:29:25 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Phil Blundell p=C3=AD=C5=A1e v P=C3=A1 14. 08. 2009 v 22:08 +0100:
-> On Fri, 2009-08-14 at 22:01 +0200, Ulf Samuelsson wrote:
-> > The full command line is:
-> > exec Xorg -br -pn  -dpi 100 -rgba bgr -screen 240x320 :0 -noreset
-> >=20
-> > It complains about an unrecognized option "-rgba"
->=20
-> Yeah, that looks like the startup scripts are trying to pass kdrive
-> options to Xorg.  I guess you need to either install kdrive, or patch
-> the scripts to do the right thing for Xorg.
+Hi!
 
-Yes, this script is broken - it checks, whether Xorg is installed. If it
-is, but the platform was originally designed for kdrive, it breaks.
-
-There was a thread "=EF=BB=BF[RFC] Xserver-common 1.30" about it few week=
-s ago.
-
-Maybe a new platform specific package with a working xorg.conf will be
-useful. (Future versions of Xorg may be able to start without xorg.conf,
-just with auto-detection.)
+Here is small patch to add 18bpp support to psplash.
+This needed for motorola ezx gen2 machines (like moto a1200).
 
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+diff --git a/recipes/psplash/files/psplash-18bpp.patch
+b/recipes/psplash/files/psplash-18bpp.patch
+new file mode 100644
+index 0000000..b043f56
+--- /dev/null
++++ b/recipes/psplash/files/psplash-18bpp.patch
+@@ -0,0 +1,42 @@
++--- psplash/psplash-fb.c        2007-08-29 21:27:49.000000000 +0300
+++++ /home/muromec/psplash/psplash-fb.c  2009-08-16 03:59:07.000000000 +0300
++@@ -72,6 +72,7 @@
++   fb->real_width  = fb->width  = fb_var.xres;
++   fb->real_height = fb->height = fb_var.yres;
++   fb->bpp    = fb_var.bits_per_pixel;
+++  fb->color  = fb_var.red.length + fb_var.green.length + fb_var.blue.length;
++   fb->stride = fb_fix.line_length;
++   fb->type   = fb_fix.type;
++   fb->visual = fb_fix.visual;
++@@ -176,7 +177,7 @@
++     }
++
++   /* FIXME: handle no RGB orderings */
++-  switch (fb->bpp)
+++  switch (fb->color)
++     {
++     case 24:
++     case 32:
++@@ -184,6 +185,10 @@
++       *(fb->data + off + 1) = green;
++       *(fb->data + off + 2) = blue;
++       break;
+++    case 18:
+++      *(fb->data + off)     = (red>>2) | ((green&0x0C)<<4);
+++      *(fb->data + off + 1) = ((green&0xF0)>>4) | ((blue&0x3C)<<2);
+++      *(fb->data + off + 2) = (blue&0xC0)>>6;
++     case 16:
++       *(volatile uint16 *) (fb->data + off)
++        = ((red >> 3) << 11) | ((green >> 2) << 5) | (blue >> 3);
++diff -ru psplash/psplash-fb.h /home/muromec/psplash/psplash-fb.h
++--- psplash/psplash-fb.h        2007-08-29 21:27:49.000000000 +0300
+++++ /home/muromec/psplash/psplash-fb.h  2009-08-16 03:58:20.000000000 +0300
++@@ -26,6 +26,7 @@
++   int            visual;
++   int            width, height;
++   int            bpp;
+++  int            color;
++   int            stride;
++   char         *data;
++   char         *base;
++
+diff --git a/recipes/psplash/psplash-angstrom_svn.bb
+b/recipes/psplash/psplash-angstrom_svn.bb
 
+-- index f65fb81..fc5e4c2 100644
+--- a/recipes/psplash/psplash-angstrom_svn.bb
++++ b/recipes/psplash/psplash-angstrom_svn.bb
+@@ -10,6 +10,7 @@ ALTERNATIVE_PRIORITY = "20"
+ # You might also want to patch the colors (see patch)
+
+ SRC_URI = "svn://svn.o-hand.com/repos/misc/trunk;module=psplash;proto=http \
++          file://psplash-18bpp.patch;patch=1 \
+           file://logo-math.patch;patch=1 \
+           file://psplash-hand-img.h \
+           file://psplash-bar-img.h \
+ wbr, Ilya
+ ICQ: none, Jabber: ilya.muromec@jabber.ru
 
 
