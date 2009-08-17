@@ -1,33 +1,22 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1Md27X-0008H7-Uc
+	(envelope-from <holger+oe@freyther.de>) id 1Md2C4-0005bw-BW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 15:19:32 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id D861B2C817
+	Mon, 17 Aug 2009 15:24:13 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 6AE271B10C07
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 13:00:40 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HDs-psWDzaQG
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 13:00:39 +0000 (UTC)
-Received: from [10.2.10.2]
-	(host112-217-dynamic.117-80-r.retail.telecomitalia.it
-	[80.117.217.112])
-	by wiki.koala.it (Postfix) with ESMTPSA id 977C92C80B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 13:00:38 +0000 (UTC)
-Message-ID: <4A8954F2.6080809@gmail.com>
-Date: Mon, 17 Aug 2009 15:02:42 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
-MIME-Version: 1.0
+	Mon, 17 Aug 2009 13:10:55 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4A84A333.4060701@kernelconcepts.de>
-In-Reply-To: <4A84A333.4060701@kernelconcepts.de>
-Subject: Re: Commercial Support
+Date: Mon, 17 Aug 2009 15:06:38 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <1250503985-9277-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1250503985-9277-1-git-send-email-khimov@altell.ru>
+MIME-Version: 1.0
+Message-Id: <200908171506.38214.holger+oe@freyther.de>
+Subject: Re: [PATCH] site/ix86-common: fix grave bug in ac_cv_sizeof_unsigned_char
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +30,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 13:19:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 17 Aug 2009 13:24:22 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Florian Boor ha scritto, Il 14/08/2009 01:35:
-> Hi,
-> 
-> we had a discussion about creating a list of companies and individuals
-> providing commercial OE support. I'm not sure how and when this
-> discussion ended, but I have created a page in the wiki for this purpose.
-> 
-> http://wiki.openembedded.net/index.php/CommercialSupport
-> 
-> Feel free to fill it with some information...
-> 
-> I suggest to use a layout like this: http://elinux.org/Companies
-> 
+On Monday 17 August 2009 12:13:05 Roman I Khimov wrote:
+> ac_cv_sizeof_unsigned_char definition accidentally redefines
+> ac_cv_sizeof_unsigned_int to 1. Luckily, not many packages are using that
+> but for example it completely breakes gnutls.
 
-+1 from me
+Acked-by: Holger Freyther <zecke@selfish.org>
 
-/marco
+
+>
+> Fix that.
+> ---
+>  site/ix86-common |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/site/ix86-common b/site/ix86-common
+> index a5c4b60..281ab91 100644
+> --- a/site/ix86-common
+> +++ b/site/ix86-common
+> @@ -1,5 +1,5 @@
+>  ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
+> -ac_cv_sizeof_unsigned_char=${ac_cv_sizeof_unsigned_int=1}
+> +ac_cv_sizeof_unsigned_char=${ac_cv_sizeof_unsigned_char=1}
+>  ac_cv_sizeof_char_p=${ac_cv_sizeof_char_p=4}
+>  ac_cv_sizeof_unsigned_char_p=${ac_cv_sizeof_unsigned_char_p=4}
+>  ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
 
 
