@@ -1,19 +1,33 @@
-Received: from [82.195.155.133] (helo=mail.techworks.ie)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cgagneraud@techworks.ie>) id 1Md7fH-0003qn-Q3
+	(envelope-from <michael@sles10-64.ott.cti.com>) id 1Md81q-0001uU-Ib
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 21:14:44 +0200
-Received: from archeopterix.techworks.local (unknown [86.43.120.173])
-	by mail.techworks.ie (Postfix) with ESMTP id 189903AB66
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 19:57:45 +0100 (IST)
-Message-ID: <4A89A884.6030904@techworks.ie>
-Date: Mon, 17 Aug 2009 19:59:16 +0100
-From: Christian Gagneraud <cgagneraud@techworks.ie>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
-MIME-Version: 1.0
+	Mon, 17 Aug 2009 21:38:02 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 7620C4F5F46;
+	Mon, 17 Aug 2009 15:21:03 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 21576-05; Mon, 17 Aug 2009 15:21:03 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 4DE6D5150D2; Mon, 17 Aug 2009 15:21:03 -0400 (EDT)
+X-Spam-Score: 
+X-Spam-Checker-Version: SpamAssassin 3.1.8 (2007-02-13) on sid.cbnco.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.8 required=7.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.1.8
+Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id DD5A74E99CF;
+	Mon, 17 Aug 2009 15:21:01 -0400 (EDT)
+Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
+	id C7F9CA0C0D6; Mon, 17 Aug 2009 15:21:01 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Documentation update about machine conf files
+Date: Mon, 17 Aug 2009 15:21:00 -0400
+Message-Id: <1250536860-9140-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.6.3
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: [PATCH] package_deb: create md5sums control files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,124 +41,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 19:14:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Aug 2009 19:38:03 -0000
 
-Hi all,
+These are created with the package and get installed in
+/var/dpkg/info. Afterward it's a great way to find modified files
+for backup with a little shell script magic.
 
-I'm willing to update the manual, especially the section "Adding a new 
-Machine". I would like to update the list or required variables (if it 
-needs to) and add a list of optional but useful variables (see my 
-previous post as well).
-But i'm wondering if the the file conf/documentation.conf is a better 
-place and/or a new conf/machine/machine.conf.sample could be written 
-in the same way as the conf/local.conf.sample one.
+It feels a bit weird to still use MD5, but that seems to be the
+convention in the Debian world.
 
-Here is a list of things i would like to add for now:
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ classes/package.bbclass     |   45 +++++++++++++++++++++++++++++++++++++++++++
+ classes/package_deb.bbclass |    7 ++++++
+ 2 files changed, 52 insertions(+), 0 deletions(-)
 
-  * PACKAGE_EXTRA_ARCHS
-By default your machine will support the following package 
-architectures: "all", "any", "noarch", "${TARGET_ARCH}" and 
-"${MACHINE}". If you machine support more architectures, add them to 
-this variable in order of priority
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index f6bd7c5..e3f55b5 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -202,6 +202,51 @@ def runstrip(file, d):
+ 
+     return 1
+ 
++def write_package_md5sums (root, outfile, ignorepaths):
++    # For each regular file under root, writes an md5sum to outfile.
++    # With thanks to patch.bbclass.
++    import bb, os
++
++    try:
++        # Python 2.5+
++        import hashlib
++        ctor = hashlib.md5
++    except ImportError:
++        import md5
++        ctor = md5.new
++
++    outf = file(outfile, 'w')
++
++    # Each output line looks like: "<hex...>  <filename without leading slash>"
++    striplen = len(root)
++    if not root.endswith('/'):
++        striplen += 1
++
++    for walkroot, dirs, files in os.walk(root):
++        # Skip e.g. the DEBIAN directory
++        if walkroot[striplen:] in ignorepaths:
++            dirs[:] = []
++            continue
++
++        for name in files:
++            fullpath = os.path.join(walkroot, name)
++            if os.path.islink(fullpath) or (not os.path.isfile(fullpath)):
++                continue
++
++            m = ctor()
++            f = file(fullpath, 'rb')
++            while True:
++                d = f.read(8192)
++                if not d:
++                    break
++                m.update(d)
++            f.close()
++
++            print >> outf, "%s  %s" % (m.hexdigest(), fullpath[striplen:])
++            
++    outf.close()
++
++
+ #
+ # Package data handling routines
+ #
+diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
+index e5339a9..4a17010 100644
+--- a/classes/package_deb.bbclass
++++ b/classes/package_deb.bbclass
+@@ -243,6 +243,13 @@ python do_package_deb () {
+                 conffiles.write('%s\n' % f)
+             conffiles.close()
+ 
++        try:
++            write_package_md5sums(root, os.path.join(controldir, 'md5sums'),
++                                  ['DEBIAN'])
++        except:
++            bb.utils.unlockfile(lf)
++            raise
++
+         os.chdir(basedir)
+         ret = os.system("PATH=\"%s\" fakeroot dpkg-deb -b %s %s" % (bb.data.getVar("PATH", localdata, 1), root, pkgoutdir))
+         if ret != 0:
+-- 
+1.6.3
 
-Default: empty
-
-Example in conf/machine/at91sam9260ek.conf:
-TARGET_ARCH = "arm"
-PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
-
-  * KERNEL_CONSOLE:
-Specify if and where you want a kernel serial console (passed on the 
-kernel command line). The syntax is "<serial_device>,<speed>".
-
-Default: "ttyS0"
-
-Example in conf/machine/triton.conf:
-KERNEL_CONSOLE = "ttys0,38400"
-
-  * SERIAL_CONSOLE:
-Specify if and where you want a serial console (inittab), the syntax 
-is "<speed> <serial_device>".
-TODO: it is supported by sysvinit, but is it still the case when 
-busybox is used for init?
-
-Default: empty
-
-Example in conf/machine/fic-gta02.conf:
-SERIAL_CONSOLE = "115200 ttySAC2"
-
-  * USE_VT:
-Specify if you want virtual consoles (/etc/inittab), 1 if you want, 
-empty or anything else if you don't.
-TODO: it is supported by sysvinit, but is it still the case when 
-busybox is used for init?
-
-Default: "1"
-
-Example in conf/machine/htcblueangel.conf:
-USE_VT = "0"
-
-  * UBOOT_MACHINE, UBOOT_ENTRYPOINT:
-If your machine use das u-boot, set UBOOT_MACHINE to the name of your 
-machine as known by u-boot. UBOOT_ENTRYPOINT is used to generate your 
-linux kernel image with uboot-mkimage.
-
-Example in conf/machine/include/gumstix.inc:
-UBOOT_ENTRYPOINT = "a0008000"
-
-Default value for UBOOT_ENTRYPOINT: 20008000
-Default value for UBOOT_MACHINE: ${MACHINE}_config
-
-
-  * GUI_MACHINE_CLASS:
-Specify if you machine has a big one or not! ;)
-So use "bigscreen" if your machine has a big screen or "smallscreen" 
-if our machine has a small screen.
-TODO: Guidelines for the definition of big or small.
-
-Default value: empty
-
-Example in conf/machine/nokia800.conf:
-GUI_MACHINE_CLASS = "bigscreen"
-
-
-  * CMDLINE and CMDLINE_<machine>
-TODO
-
-  * KERNEL_IMAGETYPE
-Depending of what kind of kernel image your machine is using, the 
-distro you are running and the color of the 25369th pixel on your 
-screen, some voodoo incantation will happen.
-Possible values are: "bzImage", "uImage", "zImage", "vmlinux", 
-"image", "linux"
-
-Default: "zImage"
-
-Example in conf/machine/epia.conf:
-KERNEL_IMAGETYPE = "bzImage"
-
-  * KERNEL_IMAGE_MAXSIZE
-Use this variable if your kernel has to fit within a maximum sixe. if 
-the generated kernel image is bigger than that you will get an error.
-TODO: used only in linux.inc, does that mean that it's not checked
-Default: empty
-
-No example.
-
-  * module_autoload_<module_name>
-TODO, not sure the machine.conf is a place for this kind of things.
-
-  * IMAGE_DEVICE_TABLES, IMAGE_DEVICE_TABLES:
-TODO, already documented in image_class
-
-  * USE_DEVFS:
-TODO
-
-Any comments are welcome! :)
-
-Regards,
-Chris
 
 
