@@ -1,31 +1,19 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [82.195.155.133] (helo=mail.techworks.ie)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1Md7Tc-0003Kc-E2
+	(envelope-from <cgagneraud@techworks.ie>) id 1Md7fH-0003qn-Q3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 21:02:41 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 4499A5362BB
+	Mon, 17 Aug 2009 21:14:44 +0200
+Received: from archeopterix.techworks.local (unknown [86.43.120.173])
+	by mail.techworks.ie (Postfix) with ESMTP id 189903AB66
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 14:45:41 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 15567-05 for <openembedded-devel@lists.openembedded.org>; 
-	Mon, 17 Aug 2009 14:45:41 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 19EFE535049
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 14:45:41 -0400 (EDT)
-Message-ID: <4A89A554.2030201@cbnco.com>
-Date: Mon, 17 Aug 2009 14:45:40 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+	Mon, 17 Aug 2009 19:57:45 +0100 (IST)
+Message-ID: <4A89A884.6030904@techworks.ie>
+Date: Mon, 17 Aug 2009 19:59:16 +0100
+From: Christian Gagneraud <cgagneraud@techworks.ie>
+User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>	<200908171612.13311.holger+oe@freyther.de>	<4A8978CD.8060607@cbnco.com>
-	<200908172229.32840.khimov@altell.ru>
-In-Reply-To: <200908172229.32840.khimov@altell.ru>
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH 3/3] syslinux: upgrade to 3.82 and split into a few packages
+Subject: Documentation update about machine conf files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +27,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 19:02:42 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Aug 2009 19:14:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Roman I Khimov wrote:
-> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA 17=
- =D0=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=B0 2009 19:35:41 =D0=B0=D0=B2=D1=
-=82=D0=BE=D1=80 Michael Smith =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+Hi all,
 
-> You can also do bootable USB drive images with GRUB (not GRUB2, unfortu=
-nately)
-> with something like this added to standard ext2 image for drive FS:
+I'm willing to update the manual, especially the section "Adding a new 
+Machine". I would like to update the list or required variables (if it 
+needs to) and add a list of optional but useful variables (see my 
+previous post as well).
+But i'm wondering if the the file conf/documentation.conf is a better 
+place and/or a new conf/machine/machine.conf.sample could be written 
+in the same way as the conf/local.conf.sample one.
 
-I've been running into some odd behaviour with GRUB and a lot of newer=20
-(read: cheaper) USB sticks on HP servers. For some reason GRUB can only=20
-access some tiny portion of the device (e.g. first 100 MB out of 2000).
+Here is a list of things i would like to add for now:
 
-That alone probably wouldn't have stopped me (SanDisk Cruzers always=20
-work :) but it's not really possible to build GRUB for x86_64, and GRUB2=20
-will only build with a fight.
+  * PACKAGE_EXTRA_ARCHS
+By default your machine will support the following package 
+architectures: "all", "any", "noarch", "${TARGET_ARCH}" and 
+"${MACHINE}". If you machine support more architectures, add them to 
+this variable in order of priority
 
-extlinux definitely lacks all the command-line troubleshooting features=20
-that make me like GRUB... but so far it hasn't needed any=20
-troubleshooting, it just works :)
+Default: empty
 
-Mike
+Example in conf/machine/at91sam9260ek.conf:
+TARGET_ARCH = "arm"
+PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
+
+  * KERNEL_CONSOLE:
+Specify if and where you want a kernel serial console (passed on the 
+kernel command line). The syntax is "<serial_device>,<speed>".
+
+Default: "ttyS0"
+
+Example in conf/machine/triton.conf:
+KERNEL_CONSOLE = "ttys0,38400"
+
+  * SERIAL_CONSOLE:
+Specify if and where you want a serial console (inittab), the syntax 
+is "<speed> <serial_device>".
+TODO: it is supported by sysvinit, but is it still the case when 
+busybox is used for init?
+
+Default: empty
+
+Example in conf/machine/fic-gta02.conf:
+SERIAL_CONSOLE = "115200 ttySAC2"
+
+  * USE_VT:
+Specify if you want virtual consoles (/etc/inittab), 1 if you want, 
+empty or anything else if you don't.
+TODO: it is supported by sysvinit, but is it still the case when 
+busybox is used for init?
+
+Default: "1"
+
+Example in conf/machine/htcblueangel.conf:
+USE_VT = "0"
+
+  * UBOOT_MACHINE, UBOOT_ENTRYPOINT:
+If your machine use das u-boot, set UBOOT_MACHINE to the name of your 
+machine as known by u-boot. UBOOT_ENTRYPOINT is used to generate your 
+linux kernel image with uboot-mkimage.
+
+Example in conf/machine/include/gumstix.inc:
+UBOOT_ENTRYPOINT = "a0008000"
+
+Default value for UBOOT_ENTRYPOINT: 20008000
+Default value for UBOOT_MACHINE: ${MACHINE}_config
+
+
+  * GUI_MACHINE_CLASS:
+Specify if you machine has a big one or not! ;)
+So use "bigscreen" if your machine has a big screen or "smallscreen" 
+if our machine has a small screen.
+TODO: Guidelines for the definition of big or small.
+
+Default value: empty
+
+Example in conf/machine/nokia800.conf:
+GUI_MACHINE_CLASS = "bigscreen"
+
+
+  * CMDLINE and CMDLINE_<machine>
+TODO
+
+  * KERNEL_IMAGETYPE
+Depending of what kind of kernel image your machine is using, the 
+distro you are running and the color of the 25369th pixel on your 
+screen, some voodoo incantation will happen.
+Possible values are: "bzImage", "uImage", "zImage", "vmlinux", 
+"image", "linux"
+
+Default: "zImage"
+
+Example in conf/machine/epia.conf:
+KERNEL_IMAGETYPE = "bzImage"
+
+  * KERNEL_IMAGE_MAXSIZE
+Use this variable if your kernel has to fit within a maximum sixe. if 
+the generated kernel image is bigger than that you will get an error.
+TODO: used only in linux.inc, does that mean that it's not checked
+Default: empty
+
+No example.
+
+  * module_autoload_<module_name>
+TODO, not sure the machine.conf is a place for this kind of things.
+
+  * IMAGE_DEVICE_TABLES, IMAGE_DEVICE_TABLES:
+TODO, already documented in image_class
+
+  * USE_DEVFS:
+TODO
+
+Any comments are welcome! :)
+
+Regards,
+Chris
 
 
