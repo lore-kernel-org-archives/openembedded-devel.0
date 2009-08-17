@@ -1,24 +1,28 @@
-Received: from [81.228.11.98] (helo=pne-smtpout1-sn1.fre.skanova.net)
+Received: from [131.111.8.135] (helo=ppsw-5.csi.cam.ac.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Mczb2-0000aQ-I2
+	(envelope-from <jic23@cam.ac.uk>) id 1Md0q7-0000Df-KD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 12:37:48 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn1.fre.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A683C7800211CA5 for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 12:20:50 +0200
-Message-ID: <4A892F01.9080707@atmel.com>
-Date: Mon, 17 Aug 2009 12:20:49 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+	Mon, 17 Aug 2009 13:57:28 +0200
+X-Cam-AntiVirus: no malware found
+X-Cam-SpamDetails: not scanned
+X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
+Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:59982)
+	by ppsw-5.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.155]:25)
+	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
+	id 1Md0Zi-0008Ur-JB (Exim 4.70) for
+	openembedded-devel@lists.openembedded.org
+	(return-path <jic23@cam.ac.uk>); Mon, 17 Aug 2009 12:40:30 +0100
+Message-ID: <4A8941B7.1020508@cam.ac.uk>
+Date: Mon, 17 Aug 2009 12:40:39 +0100
+From: Jonathan Cameron <jic23@cam.ac.uk>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090803)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>	<1242507547.4226.1.camel@lenovo.internal.reciva.com>	<4A867CCA.7060609@atmel.com>	<1250329051.4215.167.camel@lenovo.internal.reciva.com>	<1250330779.4406.9.camel@utx.utx.cz>
-	<1250458415.4215.178.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1250458415.4215.178.camel@lenovo.internal.reciva.com>
-Subject: Re: xtscal fails + other Xorg init problems.
+References: <4A892A41.6070702@cam.ac.uk>
+	<200908171219.14115.holger+oe@freyther.de>
+In-Reply-To: <200908171219.14115.holger+oe@freyther.de>
+X-Enigmail-Version: 0.95.7
+Subject: Re: [PATCH] glibc 2.9: Remove unnecessary asm/page.h include, not present in recent headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,65 +36,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 10:37:48 -0000
+X-List-Received-Date: Mon, 17 Aug 2009 11:57:29 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Phil Blundell skrev:
-> On Sat, 2009-08-15 at 12:06 +0200, Stanislav Brabec wrote:
->> Phil Blundell wrote:
->>> On Sat, 2009-08-15 at 11:15 +0200, Ulf Samuelsson wrote:
->>>> Looks like xtscal in x11-image fails.
->>>>
->>>> $ DISPLAY=":0.0" xtscal
->>>> XCALIBRATE extension missing
->>> That error is fairly self-explanatory: your xserver lacks the XCALIBRATE
->>> extension.  Xtscal won't work if this is missing.
->> Well, there may be a problem in recipes. There is xcalibrate and
->> libxcalibrate. Both provide the same library. Some recipes use
->> xcalibrate in DEPENDS, some use libxcalibrate.
-> 
-> Although it might be true that there is an issue there, I don't think
-> this would be likely to cause the problem at hand.  If you get as far as
-> running xtscal then you must have at least some version of
-> libxcalibrate.so on hand, and as far as I know all recent-ish versions
-> of that library are wire-compatible so it shouldn't matter very much
-> which one you have.
-> 
-> It seems more likely that the xserver in question simply doesn't include
-> the extension.  Checking with xdpyinfo would quickly reveal whether or
-> not that's actually the case, anyway.
-> 
->> libxcalibrate does not compile on images with xserver-kdrive.
-> 
-> I can't think offhand why libxcalibrate should care what xserver is in
-> your image.  What's the error you get?
-> 
-> p.
-> 
-This problem seems to be much simpler to solve than expected.
-You just have to look at the right place
-
-OE_EXTRA_CONF += "--enable_xcalibrate --enable-tslib"
-
-in the Xserver's bb file!
-Disabled by default.
-
-Have not tested this yet, but if it walks like a duck ...
-
-
-
+Holger Hans Peter Freyther wrote:
+> On Monday 17 August 2009 12:00:33 Jonathan Cameron wrote:
+>> Only applies to arm.  The bug may also exist for alpha.
+>> The include doesn't appear to be necessary anyway.
+>>
+>> Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
+>> ---
+>> First oe patch. Please tell me if I got any of the patch formatting
+>> wrong etc. Lots more to follow ;)
 > 
 > 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> In the future we will ask us why is this patch necessary. 
+I'll put more detail in future.
 
+In this particular case though, the patch title gives you most info.
+The header doesn't exist so the error message is the somewhat obvious:
+../ports/sysdeps/unix/sysv/linux/arm/ioperm.c:48:22: error: asm/page.h: No such file or directory 
 
--- 
-Best Regards
-Ulf Samuelsson
+So to ease answering 
+> the question the patch itself should include the build error you are seeing, a 
+> post to a mailinglist or even better a ticket in the glibc bugzilla.
 
+There are reports of related issues with older glibc (2.7)
+http://www.mail-archive.com/debian-glibc@lists.debian.org/msg38393.html
+http://sourceware.org/ml/crossgcc/2008-05/msg00014.html
+
+Not sure which version this one refers to.
+http://sourceware.org/ml/libc-ports/2008-04/msg00005.html
+For some reason the problem is still there despite (I think) the last one claiming
+a check in to the glibc ports tree well before the 2.9 release.
+(not sure if it was a branch or the mainline tree though).
+
+Sorry for the lack of original info, the bug fix seemed so trivial I didn't bother
+chasing down other references to it.
+
+Anyhow, just after I sent this out, khem told me (on irc)
+that the patch was already there for 2.4.
+ 
+Alternate patch to follow shortly, please ignore original one.
+
+Also the bug no longer exists at the head of the glibc tree.
+
+Thanks,
+
+Jonathan
 
 
