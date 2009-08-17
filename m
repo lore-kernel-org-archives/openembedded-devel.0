@@ -1,27 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [131.111.8.135] (helo=ppsw-5.csi.cam.ac.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1McyCQ-0003fT-Lc
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 11:08:23 +0200
-Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Mcxw2-0008U3-0z
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 09:51:22 +0100
-From: Phil Blundell <pb@reciva.com>
+	(envelope-from <jic23@cam.ac.uk>)
+	id 1MczHF-0002gx-38; Mon, 17 Aug 2009 12:17:21 +0200
+X-Cam-AntiVirus: no malware found
+X-Cam-SpamDetails: not scanned
+X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
+Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:45054)
+	by ppsw-5.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.155]:25)
+	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
+	id 1Mcz0q-0003Ym-If (Exim 4.70)
+	(return-path <jic23@cam.ac.uk>); Mon, 17 Aug 2009 11:00:24 +0100
+Message-ID: <4A892A41.6070702@cam.ac.uk>
+Date: Mon, 17 Aug 2009 11:00:33 +0100
+From: Jonathan Cameron <jic23@cam.ac.uk>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090803)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A86A13E.6020402@atmel.com>
-References: <1242504969-15764-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1242507547.4226.1.camel@lenovo.internal.reciva.com>
-	<4A867CCA.7060609@atmel.com>
-	<1250329051.4215.167.camel@lenovo.internal.reciva.com>
-	<1250330779.4406.9.camel@utx.utx.cz>  <4A86A13E.6020402@atmel.com>
-Date: Mon, 17 Aug 2009 09:51:20 +0100
-Message-Id: <1250499080.4215.211.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: xtscal fails + other Xorg init problems.
+X-Enigmail-Version: 0.95.7
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [PATCH] glibc 2.9: Remove unnecessary asm/page.h include, not present in recent headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +32,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 09:08:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 17 Aug 2009 10:17:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2009-08-15 at 13:51 +0200, Ulf Samuelsson wrote:
-> 3) There is an extension, but with different casing
->    XCALIBRATE is used by libxcalibrate.
->    if another name is used when it is added,
->    then there is a problem when queried.
->    The library is called libXcalibrate.so.
-> 
->    How does it get its name?
+Only applies to arm.  The bug may also exist for alpha.
+The include doesn't appear to be necessary anyway.
 
-There's no direct linkage between the name of the library and the name
-of the extension: they're completely independent at a technical level,
-although obviously the name of the library has been chosen to reflect
-the extension that it relates to.  
+Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
+---
+First oe patch. Please tell me if I got any of the patch formatting
+wrong etc. Lots more to follow ;)
 
-The extension has always been named "XCALIBRATE" and it doesn't seem
-very likely that its case has changed all of a sudden.  I don't expect
-that this is the cause of your problem.
+Initial copy seems to have bounced due to my first subscription
+attempt going wrong. Sorry Koen if you get this twice.
 
-p.
+ recipes/glibc/glibc-2.9/remove_page_header.patch |   10 ++++++++++
+ recipes/glibc/glibc_2.9.bb                       |    3 ++-
+ 2 files changed, 12 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/glibc/glibc-2.9/remove_page_header.patch b/recipes/glibc/glibc-2.9/remove_page_header.patch
+new file mode 100644
+index 0000000..0c446bc
+--- /dev/null
++++ b/recipes/glibc/glibc-2.9/remove_page_header.patch
+@@ -0,0 +1,10 @@
++--- glibc-2.9-old/ports/sysdeps/unix/sysv/linux/arm/ioperm.c	2009-08-13 17:00:08.000000000 +0100
+++++ glibc-2.9/ports/sysdeps/unix/sysv/linux/arm/ioperm.c	2009-08-13 17:01:02.000000000 +0100
++@@ -45,7 +45,6 @@
++ #include <sys/mman.h>
++ 
++ #include <linux/version.h>
++-#include <asm/page.h>
++ #include <sys/sysctl.h>
++ 
++ #define PATH_ARM_SYSTYPE	"/etc/arm_systype"
+diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
+index 6e323aa..f3592dc 100644
+--- a/recipes/glibc/glibc_2.9.bb
++++ b/recipes/glibc/glibc_2.9.bb
+@@ -5,7 +5,7 @@ ARM_INSTRUCTION_SET = "arm"
+ PACKAGES_DYNAMIC = "libc6*"
+ RPROVIDES_${PN}-dev = "libc6-dev virtual-libc-dev"
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ # the -isystem in bitbake.conf screws up glibc do_stage
+ BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
+@@ -65,6 +65,7 @@ SRC_URI = "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.tar.bz2 \
+            file://generate-supported.mk \
+            file://march-i686.patch;patch=1;pnum=0 \
+ 	   file://tls_i486.patch;patch=1 \
++	   file://remove_page_header.patch;patch=1 \
+            "
+ 
+ 
+-- 
+1.6.3.3
 
 
 
