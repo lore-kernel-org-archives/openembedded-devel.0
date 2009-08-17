@@ -1,19 +1,31 @@
-Received: from [82.195.155.133] (helo=mail.techworks.ie)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cgagneraud@techworks.ie>) id 1Md7Pz-0003EK-U7
+	(envelope-from <msmith@cbnco.com>) id 1Md7Tc-0003Kc-E2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 20:58:58 +0200
-Received: from archeopterix.techworks.local (unknown [86.43.120.173])
-	by mail.techworks.ie (Postfix) with ESMTP id 34F6F3AB65
+	Mon, 17 Aug 2009 21:02:41 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 4499A5362BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 19:41:56 +0100 (IST)
-Message-ID: <4A89A4D0.2000002@techworks.ie>
-Date: Mon, 17 Aug 2009 19:43:28 +0100
-From: Christian Gagneraud <cgagneraud@techworks.ie>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
+	Mon, 17 Aug 2009 14:45:41 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 15567-05 for <openembedded-devel@lists.openembedded.org>; 
+	Mon, 17 Aug 2009 14:45:41 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 19EFE535049
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2009 14:45:41 -0400 (EDT)
+Message-ID: <4A89A554.2030201@cbnco.com>
+Date: Mon, 17 Aug 2009 14:45:40 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Few questions about <machine>.conf
+References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>	<200908171612.13311.holger+oe@freyther.de>	<4A8978CD.8060607@cbnco.com>
+	<200908172229.32840.khimov@altell.ru>
+In-Reply-To: <200908172229.32840.khimov@altell.ru>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH 3/3] syslinux: upgrade to 3.82 and split into a few packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,68 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 18:58:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Aug 2009 19:02:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Roman I Khimov wrote:
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA 17=
+ =D0=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=B0 2009 19:35:41 =D0=B0=D0=B2=D1=
+=82=D0=BE=D1=80 Michael Smith =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
 
-I'm trying to find the best way to add machine specific dependencies 
-packages to the various images i can build (i'm mainly interested in 
-base-image and console-image). I'm using the origin/stable/2009 branch 
-with angstrom-2008.1 distro.
+> You can also do bootable USB drive images with GRUB (not GRUB2, unfortu=
+nately)
+> with something like this added to standard ext2 image for drive FS:
 
-To find what oe offered to me, i went through the oe user's manual, 
-conf/documentation.conf and start greping all around the place.
+I've been running into some odd behaviour with GRUB and a lot of newer=20
+(read: cheaper) USB sticks on HP servers. For some reason GRUB can only=20
+access some tiny portion of the device (e.g. first 100 MB out of 2000).
 
-The list of variables I get by greping the machine conf files was 
-really bigger than what i could find in the documentation, so to 
-clarify my mind and the user manual if it needs too, here are some 
-simple questions:
+That alone probably wouldn't have stopped me (SanDisk Cruzers always=20
+work :) but it's not really possible to build GRUB for x86_64, and GRUB2=20
+will only build with a fight.
 
-When writing a new machine conf file, are these variable the only ones 
-which are required?
-TARGET_ARCH
-MACHINE_FEATURES
-PREFERRED_PROVIDER_virtual/kernel
+extlinux definitely lacks all the command-line troubleshooting features=20
+that make me like GRUB... but so far it hasn't needed any=20
+troubleshooting, it just works :)
 
-When writing a new machine conf file, are these variable allowed, do 
-they really have effect, does that make sense to use them here, and 
-finally can/should we use "=", "+=" or "?="  to set them?
-
-  * Extra image commands
-EXTRA_IMAGECMD_<image_type>
-EXTRA_IMAGECMD_<image_type>_<machine>
-
-The first one is documented in the manual, but is the second form 
-allowed? if so is it recommended to use this form?
-
-  * Image dependency
-EXTRA_IMAGEDEPENDS
-EXTRA_IMAGE_DEPENDS
-BOOTSTRAP_EXTRA_RDEPENDS
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS
-MACHINE_EXTRA_RDEPENDS
-MACHINE_EXTRA_RDEPENDS_append
-MACHINE_EXTRA_RRECOMMENDS
-
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS sounds like the best one to use for 
-machine specific dependencies, what about the other ones?
-
-  * PREFERRED_VERSION_<package>
-
-Can this one be used to force a specific linux kernel version for 
-example? Or does it have to be managed in linux-<version> recipe via 
-DEFAULT_PREFERENCE_<machine>?
-
-  * VENDOR, VOLATILE_STORAGE_SIZE
-
-These 2 ones seems useless
-
-
-Any comments welcome!
-
-Regards,
-Chris
+Mike
 
 
