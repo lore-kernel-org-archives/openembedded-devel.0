@@ -1,45 +1,36 @@
-Received: from [209.85.198.245] (helo=rv-out-0708.google.com)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Md5cZ-0004Ls-53
+	(envelope-from <khimov@altell.ru>) id 1Md7E9-0002qB-2h
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 19:03:47 +0200
-Received: by rv-out-0708.google.com with SMTP id l33so711653rvb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 09:46:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=/jESLD6Cd0tnvlrr24LtcwJKQMai/q0gfwnhS7YTNYY=;
-	b=o/oRzsF496Y3DlCpgm06+xfZZzTbuAEPRIGTArYd9rBry6Vov2OsMLlTwYmBfbJEo+
-	jlKdmLeimemamLmQaiW0z2ItWBqZqQlISQrJsR2yRdwmileGV79jkN9qgn82FnpZATfo
-	kbmRtFiDlmgGAIWxyLQOnptNZy92VjrlBZ+Qo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=XdTPpHC0jLO8WUqK4Nlz4UPMny7OpmL6TKRSfF4HrqZhN3tXT1JRKDHCi1PtBzwjlq
-	+ex9bHPtYiXx4I3DDQrGjIYhXc5IoPxm0eKHnOeXCLbw0yx815C1lQawrV1gLSme5Ksg
-	GJCaBkTbXf3KOmIEq7nkk+mcEOZppg5oTrcbI=
-Received: by 10.141.1.7 with SMTP id d7mr2407335rvi.221.1250527608027;
-	Mon, 17 Aug 2009 09:46:48 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-8-242.dsl.pltn13.sbcglobal.net
-	[71.146.8.242])
-	by mx.google.com with ESMTPS id k37sm26499972rvb.7.2009.08.17.09.46.45
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 Aug 2009 09:46:46 -0700 (PDT)
-Date: Mon, 17 Aug 2009 09:46:38 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 17 Aug 2009 20:46:43 +0200
+Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1Md6xf-0002uF-HH
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Aug 2009 22:29:39 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090817164638.GA31404@gmail.com>
-References: <540809eb0908100042n74d61d41s6336bea61546dfb@mail.gmail.com>
-	<4A881398.4070709@nospam.arcornews.de> <h6951i$4gi$1@ger.gmane.org>
-	<h698ht$k4v$1@ger.gmane.org> <4A882DA9.10208@xora.org.uk>
-	<20090817072128.efc69473.manuel.pietschmann@googlemail.com>
-	<h6bj3p$86h$1@ger.gmane.org>
+Date: Mon, 17 Aug 2009 22:29:32 +0400
+User-Agent: KMail/1.12.0 (Linux/2.6.30-1-amd64; KDE/4.3.0; x86_64; ; )
+References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>
+	<200908171612.13311.holger+oe@freyther.de>
+	<4A8978CD.8060607@cbnco.com>
+In-Reply-To: <4A8978CD.8060607@cbnco.com>
 MIME-Version: 1.0
-In-Reply-To: <h6bj3p$86h$1@ger.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] python-sip: update 4.7.9 -> 4.8.2
+Message-Id: <200908172229.32840.khimov@altell.ru>
+X-SpamTest-Envelope-From: khimov@altell.ru
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9377 [Aug 17 2009]
+X-SpamTest-Info: {UDS BL}
+X-SpamTest-Info: {DNSBL Rate: low}
+X-SpamTest-Method: none
+X-SpamTest-Rate: 30
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+Subject: Re: [PATCH 3/3] syslinux: upgrade to 3.82 and split into a few packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,24 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 17:03:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Aug 2009 18:46:45 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On (17/08/09 14:40), Rolf Leggewie wrote:
-> Manuel Pietschmann wrote:
-> > i think moving python-pyqt from 4.4.3 to 4.5.4 will get it working again.
-> 
-> I agree that is likely.  Please test.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA 17 =D0=
+=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=B0 2009 19:35:41 =D0=B0=D0=B2=D1=82=D0=
+=BE=D1=80 Michael Smith =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> Sure, I can take a look at that later. I'm really only using extlinux
+> for USB sticks; for everything else I still like GRUB best.
 
-It will take some time I guess I gave it a try and it does not work out
-of the box. Until then I have lowered priority of python-sip_4.8.2.bb
+You can also do bootable USB drive images with GRUB (not GRUB2, unfortunate=
+ly)
+with something like this added to standard ext2 image for drive FS:
 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+HDDIMG =3D "${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.img"
+IMAGE_POSTPROCESS_COMMAND =3D " \
+        dd if=3D/dev/zero of=3D${HDDIMG} bs=3D512 count=3D63; \
+        dd if=3D"${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.ext2" of=3D${HDDIMG=
+} bs=3D512 seek=3D63; \
+        head -c 8388608 /dev/zero >> ${HDDIMG}; \
+        cat ${WORKDIR}/sfdisk.one_partition | /sbin/sfdisk ${HDDIMG}; \
+        echo -e "device (hd0) ${HDDIMG} \n root (hd0,0) \n setup (hd0)" | q=
+emu-i386 ${IMAGE_ROOTFS}/usr/sbin/grub --device-map=3D/dev/null --batch ; \
+        rm "${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.ext2" "${DEPLOY_DIR_IMAG=
+E}/${IMAGE_NAME}.rootfs.ext2"; \
+        "
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+
+where "sfdisk.one_partition" is
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+# partition table of test
+unit: sectors
+
+    test1 : start=3D       63, size=3D         , Id=3D83
+    test2 : start=3D        0, size=3D        0, Id=3D 0
+    test3 : start=3D        0, size=3D        0, Id=3D 0
+    test4 : start=3D        0, size=3D        0, Id=3D 0
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+
+A bit hacky-whacky may be, but works good here for USB installer images.
 
 
