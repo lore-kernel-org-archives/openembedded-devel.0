@@ -1,28 +1,32 @@
-Received: from [131.111.8.135] (helo=ppsw-5.csi.cam.ac.uk)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jic23@cam.ac.uk>) id 1Md0q7-0000Df-KD
+	(envelope-from <sledz@DResearch.DE>) id 1Md1ba-0007B7-Lx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 13:57:28 +0200
-X-Cam-AntiVirus: no malware found
-X-Cam-SpamDetails: not scanned
-X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
-Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:59982)
-	by ppsw-5.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.155]:25)
-	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
-	id 1Md0Zi-0008Ur-JB (Exim 4.70) for
-	openembedded-devel@lists.openembedded.org
-	(return-path <jic23@cam.ac.uk>); Mon, 17 Aug 2009 12:40:30 +0100
-Message-ID: <4A8941B7.1020508@cam.ac.uk>
-Date: Mon, 17 Aug 2009 12:40:39 +0100
-From: Jonathan Cameron <jic23@cam.ac.uk>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090803)
+	Mon, 17 Aug 2009 14:46:31 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id CEE2E16E233
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2009 14:29:33 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 8E0FE2A4271
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2009 14:29:33 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Mon, 17 Aug 2009 14:29:09 +0200
+Message-ID: <4A894D0A.2080105@dresearch.de>
+Date: Mon, 17 Aug 2009 14:28:58 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4A892A41.6070702@cam.ac.uk>
-	<200908171219.14115.holger+oe@freyther.de>
-In-Reply-To: <200908171219.14115.holger+oe@freyther.de>
-X-Enigmail-Version: 0.95.7
-Subject: Re: [PATCH] glibc 2.9: Remove unnecessary asm/page.h include, not present in recent headers
+References: <69E6C70090A0A14498CC98FAE5E06B6E3CF94F@hiob.intern.dresearch.de>	<4A7960FC.6030608@dresearch.de>
+	<4A83C454.3010001@dresearch.de>
+	<Pine.LNX.4.64.0908130730390.3621@juice.ott.cti.com>
+In-Reply-To: <Pine.LNX.4.64.0908130730390.3621@juice.ott.cti.com>
+X-OriginalArrivalTime: 17 Aug 2009 12:29:09.0421 (UTC)
+	FILETIME=[51C795D0:01CA1F36]
+Subject: Re: confusing qemu-native problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,54 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 11:57:29 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 17 Aug 2009 12:46:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Holger Hans Peter Freyther wrote:
-> On Monday 17 August 2009 12:00:33 Jonathan Cameron wrote:
->> Only applies to arm.  The bug may also exist for alpha.
->> The include doesn't appear to be necessary anyway.
->>
->> Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
->> ---
->> First oe patch. Please tell me if I got any of the patch formatting
->> wrong etc. Lots more to follow ;)
+Michael Smith schrieb:
+> Heh, I guess there's a limit on #! line length.
 > 
-> 
-> In the future we will ask us why is this patch necessary. 
-I'll put more detail in future.
+> include/linux/binfmts.h:#define BINPRM_BUF_SIZE 128
 
-In this particular case though, the patch title gives you most info.
-The header doesn't exist so the error message is the somewhat obvious:
-../ports/sysdeps/unix/sysv/linux/arm/ioperm.c:48:22: error: asm/page.h: No such file or directory 
+<grrrrrr> This looks like a limit from the last millenium. </grrrrrr>
 
-So to ease answering 
-> the question the patch itself should include the build error you are seeing, a 
-> post to a mailinglist or even better a ticket in the glibc bugzilla.
+But you're rigth. This seems to be the problem.
 
-There are reports of related issues with older glibc (2.7)
-http://www.mail-archive.com/debian-glibc@lists.debian.org/msg38393.html
-http://sourceware.org/ml/crossgcc/2008-05/msg00014.html
+> I guess you could try to make your build directory name a bit shorter, or 
+> hack up pod2man to use #!/usr/bin/env perl.
 
-Not sure which version this one refers to.
-http://sourceware.org/ml/libc-ports/2008-04/msg00005.html
-For some reason the problem is still there despite (I think) the last one claiming
-a check in to the glibc ports tree well before the 2.9 release.
-(not sure if it was a branch or the mainline tree though).
+I choose to shrink my directory path names, because a short look throught the staging area should, that there are a some other scripts with the same problem.
 
-Sorry for the lack of original info, the bug fix seemed so trivial I didn't bother
-chasing down other references to it.
+But that's really really ugly. Especially this undetermined behaviour.
 
-Anyhow, just after I sent this out, khem told me (on irc)
-that the patch was already there for 2.4.
- 
-Alternate patch to follow shortly, please ignore original one.
+Steffen
 
-Also the bug no longer exists at the head of the glibc tree.
 
-Thanks,
-
-Jonathan
 
 
