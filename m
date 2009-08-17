@@ -1,20 +1,31 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1Md4KZ-0004am-N6
-	for openembedded-devel@openembedded.org; Mon, 17 Aug 2009 17:41:08 +0200
-Received: (qmail 9752 invoked from network); 17 Aug 2009 15:24:09 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 17 Aug 2009 08:24:09 -0700
-Date: Mon, 17 Aug 2009 08:24:08 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090817152407.GA2227@smtp.west.cox.net>
-References: <E1Md2kK-0008Uz-Fd@melo.openembedded.org>
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <msmith@cbnco.com>) id 1Md4Vl-0004vW-Ox
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Aug 2009 17:52:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 03C5553FB87
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2009 11:35:42 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 14895-10 for <openembedded-devel@lists.openembedded.org>; 
+	Mon, 17 Aug 2009 11:35:41 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 9E2D953FB63
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2009 11:35:41 -0400 (EDT)
+Message-ID: <4A8978CD.8060607@cbnco.com>
+Date: Mon, 17 Aug 2009 11:35:41 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-In-Reply-To: <E1Md2kK-0008Uz-Fd@melo.openembedded.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [oe-commits] Holger Hans Peter Freyther : site: Add ac value	for mipsel-linux and mipsel-linux-uclibc
+To: openembedded-devel@lists.openembedded.org
+References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>	<1250515743-10823-2-git-send-email-msmith@cbnco.com>	<1250515743-10823-3-git-send-email-msmith@cbnco.com>
+	<200908171612.13311.holger+oe@freyther.de>
+In-Reply-To: <200908171612.13311.holger+oe@freyther.de>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH 3/3] syslinux: upgrade to 3.82 and split into a few packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,68 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 15:41:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Aug 2009 15:52:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 17, 2009 at 01:59:36PM +0000, git version control wrote:
+Holger Hans Peter Freyther wrote:
+> On Monday 17 August 2009 15:29:03 Michael Smith wrote:
+>> 3.63 is no longer available.
 
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 0907be2124ae3ca7b80dfc60d7632504339f00bd
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=0907be2124ae3ca7b80dfc60d7632504339f00bd
-> 
-> Author: Holger Hans Peter Freyther <zecke@selfish.org>
-> Date:   Thu Aug 13 06:55:59 2009 +0200
-> 
-> site: Add ac value for mipsel-linux and mipsel-linux-uclibc
-> 
-> The results were found using google and applying
-> common sense.
-> 
-> ---
-> 
->  site/mipsel-linux        |    4 ++++
->  site/mipsel-linux-uclibc |    4 ++++
->  2 files changed, 8 insertions(+), 0 deletions(-)
-> 
-> diff --git a/site/mipsel-linux b/site/mipsel-linux
-> index 06602ca..ef7612b 100644
-> --- a/site/mipsel-linux
-> +++ b/site/mipsel-linux
-> @@ -6,6 +6,10 @@ ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
->  # tslib, others
->  ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
->  
-> +# mysql
-> +ac_cv_sys_restartable_syscalls=${ac_cv_sys_restartable_syscalls=yes}
-> +ac_cv_conv_longlong_to_float=${ac_cv_conv_longlong_to_float=yes}
-> +
->  # bash
->  ac_cv_c_long_double=${ac_cv_c_long_double=no}
->  bash_cv_have_mbstate_t=${bash_cv_have_mbstate_t=yes}
-> diff --git a/site/mipsel-linux-uclibc b/site/mipsel-linux-uclibc
-> index 9545fea..9fdfe3a 100644
-> --- a/site/mipsel-linux-uclibc
-> +++ b/site/mipsel-linux-uclibc
-> @@ -6,6 +6,10 @@ ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
->  # tslib, others
->  ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
->  
-> +# mysql
-> +ac_cv_sys_restartable_syscalls=${ac_cv_sys_restartable_syscalls=yes}
-> +ac_cv_conv_longlong_to_float=${ac_cv_conv_longlong_to_float=yes}
-> +
->  # bash
->  ac_cv_c_long_double=${ac_cv_c_long_double=no}
->  bash_cv_have_mbstate_t=${bash_cv_have_mbstate_t=yes}
+> Haha, this might sound weird... Could you write a section for our usermanual 
+> on how to use syslinux?
 
-Given that the answer is the same for mipsel-linux and
-mipsel-linux-uclibc, this is probably the wrong place.  The right place
-is either a mips common one or a linux common one (if it's also the same
-for every other linux platform).
+Sure, I can take a look at that later. I'm really only using extlinux 
+for USB sticks; for everything else I still like GRUB best.
 
--- 
-Tom Rini
+Mike
 
 
