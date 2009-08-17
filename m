@@ -1,32 +1,35 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Md1ba-0007B7-Lx
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Md1mQ-0007Yu-9X for openembedded-devel@lists.openembedded.org;
+	Mon, 17 Aug 2009 14:57:43 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1Md1Vu-0006to-EA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Aug 2009 14:46:31 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id CEE2E16E233
+	Mon, 17 Aug 2009 14:40:38 +0200
+Received: from p5b3b15ca.dip.t-dialin.net ([91.59.21.202])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Aug 2009 14:40:38 +0200
+Received: from no2spam by p5b3b15ca.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 14:29:33 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 8E0FE2A4271
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Aug 2009 14:29:33 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Mon, 17 Aug 2009 14:29:09 +0200
-Message-ID: <4A894D0A.2080105@dresearch.de>
-Date: Mon, 17 Aug 2009 14:28:58 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
-MIME-Version: 1.0
+	Mon, 17 Aug 2009 14:40:38 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <69E6C70090A0A14498CC98FAE5E06B6E3CF94F@hiob.intern.dresearch.de>	<4A7960FC.6030608@dresearch.de>
-	<4A83C454.3010001@dresearch.de>
-	<Pine.LNX.4.64.0908130730390.3621@juice.ott.cti.com>
-In-Reply-To: <Pine.LNX.4.64.0908130730390.3621@juice.ott.cti.com>
-X-OriginalArrivalTime: 17 Aug 2009 12:29:09.0421 (UTC)
-	FILETIME=[51C795D0:01CA1F36]
-Subject: Re: confusing qemu-native problem
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 17 Aug 2009 14:40:18 +0200
+Message-ID: <h6bj3p$86h$1@ger.gmane.org>
+References: <540809eb0908100042n74d61d41s6336bea61546dfb@mail.gmail.com>	<4A881398.4070709@nospam.arcornews.de>
+	<h6951i$4gi$1@ger.gmane.org>	<h698ht$k4v$1@ger.gmane.org>
+	<4A882DA9.10208@xora.org.uk>
+	<20090817072128.efc69473.manuel.pietschmann@googlemail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b15ca.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.22 (X11/20090804)
+In-Reply-To: <20090817072128.efc69473.manuel.pietschmann@googlemail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] python-sip: update 4.7.9 -> 4.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +43,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 12:46:35 -0000
+X-List-Received-Date: Mon, 17 Aug 2009 12:57:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Michael Smith schrieb:
-> Heh, I guess there's a limit on #! line length.
-> 
-> include/linux/binfmts.h:#define BINPRM_BUF_SIZE 128
+Manuel Pietschmann wrote:
+> i think moving python-pyqt from 4.4.3 to 4.5.4 will get it working again.
 
-<grrrrrr> This looks like a limit from the last millenium. </grrrrrr>
-
-But you're rigth. This seems to be the problem.
-
-> I guess you could try to make your build directory name a bit shorter, or 
-> hack up pod2man to use #!/usr/bin/env perl.
-
-I choose to shrink my directory path names, because a short look throught the staging area should, that there are a some other scripts with the same problem.
-
-But that's really really ugly. Especially this undetermined behaviour.
-
-Steffen
-
+I agree that is likely.  Please test.
 
 
 
