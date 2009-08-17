@@ -1,30 +1,22 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MdBnT-00066Y-Lv
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 01:39:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id E6EC81422AA6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 01:14:07 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LVOldHHxMj3O
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 01:14:07 +0200 (CEST)
-Received: from zaurus (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id AACD91416BAB
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 01:14:07 +0200 (CEST)
-Date: Tue, 18 Aug 2009 01:22:26 +0200
-From: Stanislav Brabec <utx@penguin.cz>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MdC5H-0006X2-RO
+	for openembedded-devel@openembedded.org; Tue, 18 Aug 2009 01:57:52 +0200
+Received: (qmail 13119 invoked from network); 17 Aug 2009 23:40:50 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 17 Aug 2009 16:40:50 -0700
+Date: Mon, 17 Aug 2009 16:40:50 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1250526646.4956.43.camel@utx.utx.cz>
-X-Mailer: Balsa 2.4.1
-Message-Id: <1250551346.5083.3@zaurus>
+Message-ID: <20090817234049.GH2227@smtp.west.cox.net>
+References: <20090814215138.GB31011@gmail.com>
+	<20090815022703.GH14883@smtp.west.cox.net>
+	<19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: xtscal fails + other Xorg init problems.
+In-Reply-To: <19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,41 +30,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Aug 2009 23:39:27 -0000
+X-List-Received-Date: Mon, 17 Aug 2009 23:57:52 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Stanislav Brabec wrote:
-> Phil Blundell wrote:
-> > On Sat, 2009-08-15 at 12:06 +0200, Stanislav Brabec wrote:
-> >=20
-> > > libxcalibrate does not compile on images with xserver-kdrive.
-> >=20
-> > I can't think offhand why libxcalibrate should care what xserver is
-> in
-> > your image.  What's the error you get?
->=20
+On Sat, Aug 15, 2009 at 10:21:31AM -0700, Khem Raj wrote:
+> On Fri, Aug 14, 2009 at 7:27 PM, Tom Rini<trini@embeddedalley.com> wrote:
+> > On Fri, Aug 14, 2009 at 02:51:38PM -0700, Khem Raj wrote:
+> >
+> >> Hi
+> >>
+> >> I would like to add minimal-eglibc and micro-eglibc distros on same
+> >> lines as -uclibc one's
+> >>
+> >> Any objections ?
+> >
+> > minimal-uclibc and micro-uclibc should go away and just pickup from LIBC
+> > being passed in / set.
+> 
+> Ideally yes but there are other things like libintl libiconv etc which
+> needs special handling
+> for uclibc. So having uclibc counterparts is good.
 
-Well, the problem is located in the level between:
+I don't follow.  LIBC, and the associated inc file set the preferred
+providers correctly.  Or are you talking about sharing the same TMPDIR
+for > 1 distro ?
 
-There are two recipes for the calibrate library: libxcalibrate and=20
-xcalibrate
-
-There are two recipes that provide prototypes: calibrateproto=20
-and xcalibrabrateext
-
-Only some of these combinations result in a working environment.
-
-I'll test, whether latest library version works with xserver-
-kdrive-1300.
-
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
-
-
-
+-- 
+Tom Rini
 
 
