@@ -1,25 +1,32 @@
-Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1MdPh0-0007SX-0r
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MdPoE-0007gf-2H for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 16:37:11 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MdPXf-000370-1Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 16:29:42 +0200
-Received: by ewy21 with SMTP id 21so3698504ewy.21
+	Tue, 18 Aug 2009 16:20:03 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2009 16:20:03 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 07:12:36 -0700 (PDT)
-Received: by 10.210.119.5 with SMTP id r5mr1673374ebc.50.1250604755864;
-	Tue, 18 Aug 2009 07:12:35 -0700 (PDT)
-Received: from ?192.168.1.10? (94-193-242-65.zone7.bethere.co.uk
-	[94.193.242.65])
-	by mx.google.com with ESMTPS id 24sm19028eyx.53.2009.08.18.07.12.34
-	(version=SSLv3 cipher=RC4-MD5); Tue, 18 Aug 2009 07:12:34 -0700 (PDT)
-Message-ID: <4A8AB6C4.8040805@xora.org.uk>
-Date: Tue, 18 Aug 2009 15:12:20 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
-MIME-Version: 1.0
+	Tue, 18 Aug 2009 16:20:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 18 Aug 2009 16:17:49 +0200
+Message-ID: <h6ed6d$r1l$2@ger.gmane.org>
 References: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
 In-Reply-To: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
 Subject: Re: Create dir with 700 permissions from recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -34,11 +41,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 14:29:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 18 Aug 2009 14:37:34 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-s hakkesteegt wrote:
+On 18-08-09 15:52, s hakkesteegt wrote:
 > Hi,
 >
 > For a recipe I want to use locally to enable public key authentication on my
@@ -46,45 +53,15 @@ s hakkesteegt wrote:
 > doesn't seem to work. It ends up in the rootfs and in the ipk with 775
 > permissions, although in the work dir it has the correct 700 permissions.
 > This is the recipe I created:
->
->
-> SRC_URI=" \
->                     file://authorized_keys \
->        "
->
-> FILES_${PN}=" /home/root/.ssh \
->                        /home/root/.ssh/authorized_keys \
->            "
->
-> do_install(){
->        install -m 0700 -d ${D}/home/root/.ssh
->        install -m 0600 ${WORKDIR}/authorized_keys
-> ${D}/home/root/.ssh/authorized_keys
-> }
->
->
-> On irc was suggested to use postinst script. So I tried to add the next at
-> the end of the recipe.:
->
->
-> pkg_postinst_${PN}-chmodsshdir () {
->         chmod 700 /home/root/.ssh
-> }
->
->   
-You above recipe doesnt create a package called.
 
-${PN}-chmodsshdir
+1) never ever install something into $HOME
+2) fakeroot do_install() {}
 
-you also need to add something like
+regards,
 
-if test "x$D" != "x"; then
-    exit
-fi
+Koen
 
-to the beginning of the postinst to stop it running during image creation.
 
-Graeme
 
 
 
