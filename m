@@ -1,30 +1,30 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [67.134.254.86] (helo=ltrxmail.lantronix.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MdWYw-0001rl-Vn
+	(envelope-from <Lars.Holowko@lantronix.com>) id 1MdWf7-00029m-Tk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 23:49:51 +0200
-Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MdWIN-00073T-Jt
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 22:32:43 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90908181425jca25c63ia12b7d9a9793636f@mail.gmail.com>
-References: <1250176750.29049.1003.camel@conroy-linux>
-	<20090813155909.GC8906@gmail.com>
-	<1250612879.6785.12.camel@conroy-linux>
+	Tue, 18 Aug 2009 23:56:14 +0200
+X-MessageTextProcessor: DisclaimIt (2.00.201) on draw.int.lantronix.com
+Received: from 2putt.int.lantronix.com ([172.16.1.22]) by
+	ltrxmail.lantronix.com with Microsoft SMTPSVC(6.0.3790.1830);
+	Tue, 18 Aug 2009 14:39:05 -0700
+MIME-Version: 1.0
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.2992
+Date: Tue, 18 Aug 2009 14:39:04 -0700
+Message-ID: <8128F0FD6C26E14C8EB4BFDB92B8D6B201B3E4@2putt.int.lantronix.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Is there an easy way to get a minimalist image without I18n
+	libraries?
+thread-index: AcogLNeReOhI4nmfTLmmwZpQC/bB4AAAxjOg
+Importance: normal
+Priority: normal
+References: <1250176750.29049.1003.camel@conroy-linux><20090813155909.GC8906@gmail.com><1250612879.6785.12.camel@conroy-linux>
 	<20090818174157.GB25000@denix.org>
-	<1250620212.6785.43.camel@conroy-linux>
-	<20090818195028.GU2227@smtp.west.cox.net>
-	<1250626236.6785.50.camel@conroy-linux>
-	<19c1b8a90908181425jca25c63ia12b7d9a9793636f@mail.gmail.com>
-Date: Tue, 18 Aug 2009 22:32:42 +0100
-Message-Id: <1250631162.4215.233.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: gcc-cross-sdk (GCC 4.2.3) limits.h woes
+From: "Lars Holowko" <Lars.Holowko@lantronix.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 18 Aug 2009 21:39:05.0090 (UTC)
+	FILETIME=[4F24DE20:01CA204C]
+Subject: Is there an easy way to get a minimalist image without I18n libraries?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,24 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 21:49:51 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Aug 2009 21:56:14 -0000
+Content-Class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2009-08-18 at 14:25 -0700, Khem Raj wrote:
-> Do you have to use glibc built externally ? I would think that use
-> external compiler
-> and tools but build everything else that goes on target which is also libc.
+Hi there,
 
-I think that, for most folks, avoiding the epic glibc build process is
-probably one of the main attractions of an external toolchain.
+I am playing with the minimal-image on this configuration:
 
-In any case, building glibc from source wouldn't actually remove this
-problem since you would then just have the same trouble with libgcc,
-libobjc and suchlike.
+MACHINE =3D "at91sam9g20ek"
+DISTRO =3D "angstrom-2008.1"
+ANGSTROMLIBC =3D "uclibc"
 
-p.
+and now I am wondeering if in order to save some flash space there is a
+way to build a minimal-image without libiconv, gettext and friends? That
+would save me about 2.5MB of flash space!!!
+
+If I check USE_NLS with bitbake -I; getvar USE_NLS reposrts "no". So I
+would assume all the NLS would be disabled.
+
+To save even more flash space, is there also a way to disable the
+installation of opkg and its dependencies like: libgnutls26, libcurl4?
 
 
+Regards,
+
+Lars
+=20
+**********************************************************************
+This e-mail is the property of Lantronix. It is intended only for the =
+person or entity to which it is addressed and may contain information =
+that is privileged, confidential, or otherwise protected from =
+disclosure. Distribution or copying of this e-mail, or the information =
+contained herein, to anyone other than the intended recipient is =
+prohibited.
 
 
