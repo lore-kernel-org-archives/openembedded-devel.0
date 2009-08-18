@@ -1,28 +1,20 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MdNPE-0002yC-9D
+	(envelope-from <holger+oe@freyther.de>) id 1MdOJn-00020N-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 14:03:13 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MdN8W-0001NN-NM
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 12:45:56 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MdN8T-0003ct-PT
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 12:45:54 +0100
-From: Phil Blundell <pb@reciva.com>
+	Tue, 18 Aug 2009 15:01:39 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DA5C11B10C07
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2009 12:48:17 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1250591188.3555.5.camel@utx.utx.cz>
-References: <1250551346.5083.3@zaurus>  <1250591188.3555.5.camel@utx.utx.cz>
-Date: Tue, 18 Aug 2009 12:45:50 +0100
-Message-Id: <1250595950.27980.68.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-Subject: Re: xtscal fails + other Xorg init problems.
+Date: Tue, 18 Aug 2009 14:43:54 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200908181443.54240.holger+oe@freyther.de>
+Subject: ADMIN: git gc on git.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,25 +28,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 12:03:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 18 Aug 2009 13:01:40 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-08-18 at 12:26 +0200, Stanislav Brabec wrote:
-> That is why I would like to propose:
-> - remove all xcalibrate and xcalibrabrateext recipes
-> - find recipes and images that need them and migrate them to
-> libxcalibrate and calibrateproto.
-> - fix git versioning of libxcalibrate and calibrateproto, maybe
-> increment PE.
+Hey,
 
-Yes, that sounds reasonable enough.  I'm not quite sure how we ended up
-with these multiple competing recipes for the same thing but clearly
-there is no benefit to having them.  The only thing to watch out for
-would be the backwards compatibility symlink for the pkgconfig data.
+just a quick note. When migrating the git from the old to new place a simple 
+cronjob was lost.
 
-p.
+I have recreated this cronjob. Using crontab -e, I have added a @monthly 
+/home/git/git_gc.sh script that will iterate through the repositories and call 
+git gc --aggressive.
 
+It is my understanding that git gc is nowadays race free and can be used on 
+servers.
 
+z.
 
 
