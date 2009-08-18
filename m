@@ -1,33 +1,41 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MdKsY-000772-2F
+	(envelope-from <otavio.salvador@gmail.com>) id 1MdKuR-0002oo-HU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 11:21:18 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1MdKc0-000GCa-Oy
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 13:04:13 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Aug 2009 13:04:08 +0400
-User-Agent: KMail/1.12.0 (Linux/2.6.30-1-amd64; KDE/4.3.0; x86_64; ; )
-References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>
-	<200908172229.32840.khimov@altell.ru> <4A89A554.2030201@cbnco.com>
-In-Reply-To: <4A89A554.2030201@cbnco.com>
+	Tue, 18 Aug 2009 11:23:15 +0200
+Received: by bwz17 with SMTP id 17so2665601bwz.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2009 02:06:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=BiolMbMGgmziGjZjRfBgBIx43ymamEfRkxkifdAd/LQ=;
+	b=LAxxLByqDwfYfeJRjUwPknSwMOEoFS7T6hz1e6bF/Qgp4zJ5otc4TpAlU6PLRNv2/y
+	t7973NQanHH68oh+weL5OnmHMD6ogBOj1v1vjtFz7ZASsfCpiw5APplzwp1dfC+xNzB4
+	L9yHHbfwgrvWM4uizMPknD7acs+q9SDFY2Byw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=l5FtI/bae+B9Ck3LqHEtxQB19MK0z0nmeTeHY4DrP3JLTl/DygZZ888rAItSXAgu00
+	BgNzDsDv1d52fcJuEgZYZcVFOPacP+xrSWmPZ3Y3s7/foCzxRh0TtE5BGNGeQ6QAH5Xz
+	1Xp01oqMLjZAyo9CGIaC8ypIGGbfZwR9TDsOM=
 MIME-Version: 1.0
-Message-Id: <200908181304.08654.khimov@altell.ru>
-X-SpamTest-Envelope-From: khimov@altell.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 9382 [Aug 18 2009]
-X-SpamTest-Method: none
-X-SpamTest-Rate: 0
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Subject: Re: [PATCH 3/3] syslinux: upgrade to 3.82 and split into a few packages
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.179.94 with SMTP id c30mr422653hbg.159.1250586369398; Tue, 
+	18 Aug 2009 02:06:09 -0700 (PDT)
+In-Reply-To: <1250521375.27980.8.camel@mill.internal.reciva.com>
+References: <4A8960BC.4000603@cam.ac.uk>
+	<200908171606.57153.holger+oe@freyther.de>
+	<1250521270.27980.6.camel@mill.internal.reciva.com>
+	<1250521375.27980.8.camel@mill.internal.reciva.com>
+Date: Tue, 18 Aug 2009 06:06:09 -0300
+X-Google-Sender-Auth: d27755b911b4acdb
+Message-ID: <be7a9f3d0908180206g1fcf4d48w79b05a8f4dd78c04@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] glibc 2.7 and 2.9 (arm): Remove unnecessary asm/page.h include
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,25 +49,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 09:21:18 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 18 Aug 2009 09:23:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAxNyDQsNCy
-0LPRg9GB0YLQsCAyMDA5IDIyOjQ1OjQwINCw0LLRgtC+0YAgTWljaGFlbCBTbWl0aCAK0L3QsNC/
-0LjRgdCw0Ls6Cj4gUm9tYW4gSSBLaGltb3Ygd3JvdGU6Cj4gPiDQkiDRgdC+0L7QsdGJ0LXQvdC4
-0Lgg0L7RgiDQn9C+0L3QtdC00LXQu9GM0L3QuNC6IDE3INCw0LLQs9GD0YHRgtCwIDIwMDkgMTk6
-MzU6NDEg0LDQstGC0L7RgCBNaWNoYWVsIFNtaXRoCj4gPiDQvdCw0L/QuNGB0LDQuzoKPiA+Cj4g
-PiBZb3UgY2FuIGFsc28gZG8gYm9vdGFibGUgVVNCIGRyaXZlIGltYWdlcyB3aXRoIEdSVUIgKG5v
-dCBHUlVCMiwKPiA+IHVuZm9ydHVuYXRlbHkpIHdpdGggc29tZXRoaW5nIGxpa2UgdGhpcyBhZGRl
-ZCB0byBzdGFuZGFyZCBleHQyIGltYWdlIGZvcgo+ID4gZHJpdmUgRlM6Cj4KPiAuLi4uLgo+IFRo
-YXQgYWxvbmUgcHJvYmFibHkgd291bGRuJ3QgaGF2ZSBzdG9wcGVkIG1lIChTYW5EaXNrIENydXpl
-cnMgYWx3YXlzCj4gd29yayA6KSBidXQgaXQncyBub3QgcmVhbGx5IHBvc3NpYmxlIHRvIGJ1aWxk
-IEdSVUIgZm9yIHg4Nl82NCwgYW5kIEdSVUIyCj4gd2lsbCBvbmx5IGJ1aWxkIHdpdGggYSBmaWdo
-dC4KCldlbGwsIGZvciB4ODZfNjQgd2UgYnVpbGQgR1JVQiBsaWtlIHRoaXM6Cgo9PT09PT09PQpM
-REZMQUdTICs9ICItc3RhdGljIgpDRkxBR1MgKz0gIiR7Q0ZMQUdTX01VTFRJTElCfSIKPT09PT09
-PT0KCndoZXJlCgo9PT09PT09PT09CkNGTEFHU19NVUxUSUxJQiA9ICItbWFyY2g9aTY4NiAtbTMy
-Igo9PT09PT09PT09Cg==
+Hello Phil
+
+On Mon, Aug 17, 2009 at 12:02 PM, Phil Blundell<pb@reciva.com> wrote:
+> Oh, and, as for bumping PR: in this case I would suggest not doing it.
+> The output binaries should be identical with and without that header,
+> and for folks doing online upgrades it is a bit of a pain to have glibc
+> rebuild unnecessarily.
+
+I disagree and think it ought to be bumped so it gets deployed and
+tested as soon as possible.
+
+People that cares about online updates are supposed to be using stable
+to reduce it.
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
