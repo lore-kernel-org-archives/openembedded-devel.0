@@ -1,38 +1,26 @@
-Received: from [209.85.221.197] (helo=mail-qy0-f197.google.com)
+Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MdSgh-0004oa-0n
+	(envelope-from <denis@denix.org>) id 1MdSy3-0005eJ-Mh
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 19:41:36 +0200
-Received: by qyk35 with SMTP id 35so2848856qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 10:24:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=R2EBSZG5SOBO0XmOcXGL9cDgLUnta+BdQdrAyXtIPiY=;
-	b=o8piH5RE8WT8fvs8sw2FRijjwStcdTDIwgmY6iwwwn/80ctrTeJ9NRLia6tWxwpo8A
-	2SGwgfsimxEABT6fBtGgKiIjaXk0tXwUCVqtgeOz5NPGF24ydv5o6nm7mGTB5Qn5YpV9
-	bzXHOtJaHlHemcIKSP2U1z5UdlV4jIjQnMjZQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=crU2TnkyOGsZ7xC0hPKbb1v8lZ8I1c7YbOSwVLxTKY1zp3Czb6XGgTFcxqN2GY2A63
-	Wfbd+0jKPgoK0ob6BZGTft1kyubJTX36A2ZIhI68kPjZmoMX26/wNEf07O6YQCJueNTh
-	6TzEEpaY+yqX1I44r40PHqav2K1OHuAGBHwTA=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.54.137 with SMTP id q9mr2600242qcg.56.1250616267679; Tue, 
-	18 Aug 2009 10:24:27 -0700 (PDT)
-In-Reply-To: <1250260162-9541-1-git-send-email-oe-devel@rolf.leggewie.biz>
-References: <1250260162-9541-1-git-send-email-oe-devel@rolf.leggewie.biz>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 18 Aug 2009 10:24:01 -0700
-X-Google-Sender-Auth: a17a373c99ceafe9
-Message-ID: <b6ebd0a50908181024p6ad06490q108638a35c0dca82@mail.gmail.com>
+	Tue, 18 Aug 2009 19:59:31 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KOL00LUW2HY4UL1@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	18 Aug 2009 12:42:05 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9B26D14AF5F; Tue,
+	18 Aug 2009 13:41:57 -0400 (EDT)
+Date: Tue, 18 Aug 2009 13:41:57 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] base.bbclass: introduce OE source mirror network as last resort for do_fetch
+Message-id: <20090818174157.GB25000@denix.org>
+References: <1250176750.29049.1003.camel@conroy-linux>
+	<20090813155909.GC8906@gmail.com>
+	<1250612879.6785.12.camel@conroy-linux>
+MIME-version: 1.0
+In-reply-to: <1250612879.6785.12.camel@conroy-linux>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: gcc-cross-sdk (GCC 4.2.3) limits.h woes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 17:41:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Aug 2009 17:59:31 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Fri, Aug 14, 2009 at 7:29 AM, Rolf
-Leggewie<oe-devel@rolf.leggewie.biz> wrote:
-> Updating recipes and checksums.ini for vanishing upstream hosts or simple
-> restructuring can quickly become a chore for OE devs if taken seriously.
-> The OE user experience suffers severely when at any given point in time 4
-> to 5 recipes on average fail do_fetch for a simple image.
->
-> The solution is for OE to provide its own caching of upstream sources.
-> mirrors.openembedded.org is a swarm of possibly incomplete source mirrors
-> provided by the community and load-balanced via DNS round robin. =C2=A0Th=
-ey
-> act as a first line of defense and lower bandwidth load on melo which
-> hosts sources.openembedded.org. =C2=A0The melo mirror aims to have a comp=
-lete
-> copy of free-to-publish sources used by the current org.oe.dev branch.
->
-> Some distributions have provided source mirrors in the past for their
-> users. I think it's time for a general and all-encompassing solution.
->
-> The infrastructure is being currently put in place. =C2=A0This patch will
-> turn on the OE sources mirror network by default.
+On Tue, Aug 18, 2009 at 12:27:59PM -0400, Chris Conroy wrote:
+> However, I've run in to a different problem. It seems that Debian
+> Renaming does not play nicely with the external toolchain. Digging into
+> the code, it seems that Debian renaming relies on the package being in
+> the workdir to do its magic, which for any prebuilt SDK packages will
+> not hold true. Any thoughts on the proper route to fix this aside from
+> just turning of Debian Renaming?
 
-Looks like a good idea to me.  404s cause a great deal of difficulty
-for the userbase.
+Can you please provide more details on the problem? Thanks.
 
-Acked-by: Chris Larson <clarson@kergoth.com>
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+-- 
+Denys
 
 
