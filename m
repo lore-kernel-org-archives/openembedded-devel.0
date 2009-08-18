@@ -1,29 +1,23 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MdQ8W-0008KI-M4
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MdQn9-0006xb-B1
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 16:58:12 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MdPro-0002jz-Bk
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 15:40:52 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1MdPrl-0005Al-HW
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 15:40:49 +0100
-From: Phil Blundell <pb@reciva.com>
+	Tue, 18 Aug 2009 17:40:10 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout2-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A2D61FD005E861F for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 17:23:00 +0200
+Message-ID: <4A8AC753.8000008@atmel.com>
+Date: Tue, 18 Aug 2009 17:22:59 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A8AB6C4.8040805@xora.org.uk>
-References: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com>
-	<4A8AB6C4.8040805@xora.org.uk>
-Date: Tue, 18 Aug 2009 15:40:45 +0100
-Message-Id: <1250606446.7556.16.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-Subject: Re: Create dir with 700 permissions from recipe
+References: <1250551346.5083.3@zaurus> <1250591188.3555.5.camel@utx.utx.cz>
+In-Reply-To: <1250591188.3555.5.camel@utx.utx.cz>
+Subject: Re: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,35 +31,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 14:58:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 18 Aug 2009 15:40:23 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-08-18 at 15:12 +0100, Graeme Gregory wrote:
-> > pkg_postinst_${PN}-chmodsshdir () {
-> >         chmod 700 /home/root/.ssh
-> > }
-> >
-> >   
-> You above recipe doesnt create a package called.
+Stanislav Brabec skrev:
+> Stanislav Brabec wrote:
 > 
-> ${PN}-chmodsshdir
+>> There are two recipes for the calibrate library: libxcalibrate and 
+>> xcalibrate
+>>
+>> There are two recipes that provide prototypes: calibrateproto 
+>> and xcalibrabrateext
+>>
+>> Only some of these combinations result in a working environment.
+>>
+>> I'll test, whether latest library version works with xserver-
+>> kdrive-1300.
 > 
-> you also need to add something like
+> Yes, xtscal works with xserver-kdrive-1300 and latest libxcalibrate and
+> calibrateproto.
 > 
-> if test "x$D" != "x"; then
->     exit
-> fi
-> 
-> to the beginning of the postinst to stop it running during image creation.
+> It didn't work for kdrive based builds, because kdrive recipe wants
+> libxcalibrate, but xtscal wants xcalibrate. One dependency chain
+> overwrites the another with undefined result depending on the build
+> order.
 
-Or, perhaps even better, add ${D} to the chmod command's argument so
-that it can run correctly during image creation.  Deferring this to boot
-time would work, but it'd slow down the initial "ipkg configure" run for
-no real gain.
+What is the difference between "xserver-kdrive-1300" and
+"kdrive based builds" ?
+Do you mean it does not work with later revisions of xserver-kdrive?
 
-p.
 
+
+> 
+> That is why I would like to propose:
+> - remove all xcalibrate and xcalibrabrateext recipes
+> - find recipes and images that need them and migrate them to
+> libxcalibrate and calibrateproto.
+
+Angstrom prefers another version of xserver-kdrive.
+
+Should we try to focus on xorg-xserver-1.6.1 which seems to have kdrive
+support?
+
+
+
+> - fix git versioning of libxcalibrate and calibrateproto, maybe
+> increment PE.
+> 
+> 
+> ________________________________________________________________________
+> Stanislav Brabec
+> http://www.penguin.cz/~utx/zaurus
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+-- 
+Best Regards
+Ulf Samuelsson
 
 
 
