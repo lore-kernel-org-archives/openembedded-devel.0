@@ -1,34 +1,30 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MdMNG-0003Kp-M5 for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 12:57:06 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1MdM6k-0006uf-ED
+	(envelope-from <philb@gnu.org>) id 1MdNH1-0002cP-Te
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 12:40:02 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 12:40:02 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 12:40:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 18 Aug 2009 13:54:45 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MdN0I-00015v-JG
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 12:37:26 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MdN0F-0003Xd-7i
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 12:37:23 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 18 Aug 2009 12:35:57 +0200
-Message-ID: <h6e06e$h0m$2@ger.gmane.org>
-References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>	<1250515743-10823-2-git-send-email-msmith@cbnco.com>	<200908171611.08535.holger+oe@freyther.de>
-	<be7a9f3d0908180202t125e5c21tf77ed80c0ab07d22@mail.gmail.com>
+In-Reply-To: <20090818014359.GC18879@denix.org>
+References: <4A7D824D.7080103@balister.org>
+	<1249899969.8248.95.camel@mill.internal.reciva.com>
+	<4A800434.4050603@balister.org>  <20090818014359.GC18879@denix.org>
+Date: Tue, 18 Aug 2009 12:37:19 +0100
+Message-Id: <1250595439.27980.66.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.3pre) Gecko/20090730 Shredder/3.0b4pre
-In-Reply-To: <be7a9f3d0908180202t125e5c21tf77ed80c0ab07d22@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH 2/3] mtools: don't install-info; fixes build on non-Debian hosts
+X-Mailer: Evolution 2.26.3 
+Subject: Re: OEDEM scheduling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 10:57:06 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Tue, 18 Aug 2009 11:54:45 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 18-08-09 11:02, Otavio Salvador wrote:
-> Hello Holger,
->
-> On Mon, Aug 17, 2009 at 11:11 AM, Holger Hans Peter
-> Freyther<holger+oe@freyther.de>  wrote:
->> again, no need to bump the PR.
->
-> I completely disagree with changes landing without PR bump.
->
-> Not bumping them can cause a change, that breaks something, to not be
-> noticed for long time.
->
-> In my opinion we ought to _always_ bump PR when changing the recipe.
-> This ensure it is widely tested and deployed.
+On Mon, 2009-08-17 at 21:43 -0400, Denys Dmytriyenko wrote:
+> On Mon, Aug 10, 2009 at 07:27:48AM -0400, Philip Balister wrote:
+> > Phil Blundell wrote:
+> >> The November date had 100% approval among those who responded to the
+> >> doodle poll.  (October was second best; September was least favoured,
+> >> and in any case the proposed September date is only four weeks away
+> >> which is probably too close for a lot of folks.)  So, I would suggest
+> >> that we just go ahead with the November date rather than introducing new
+> >> alternatives at this stage. Either way, it'd be good to try to get the 
+> >> date nailed down within the
+> >> next week or two so that everyone has adequate notice.  Obviously
+> >> there's no statutory minimum notice period for this but you probably
+> >> need at least 6-8 weeks to avoid a large number of diary clashes.
+> >
+> > Agreed. Do we have a place to meet for those dates?
+> 
+> Any updates on this item?
 
-It also makes it easier to spot patterns in tinderbox.
+I think the original proposal was for either Berlin or Frankfurt.
+Failing that I could probably arrange to host something in Cambridge so
+long as the number of attendees isn't too enormous.
 
-regards,
-
-Koen
+p.
 
 
 
