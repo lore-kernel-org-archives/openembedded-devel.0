@@ -1,26 +1,23 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MdE0w-0004A6-Ob
+	(envelope-from <holger+oe@freyther.de>) id 1MdE6u-0004Uj-Kp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 04:01:30 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KOJ00IOYU5C3UH6@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	17 Aug 2009 20:44:06 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8D5C914AF5F; Mon,
-	17 Aug 2009 21:43:59 -0400 (EDT)
-Date: Mon, 17 Aug 2009 21:43:59 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 18 Aug 2009 04:07:40 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id A4BBD1B10C0C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2009 01:54:22 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090818014359.GC18879@denix.org>
-References: <4A7D824D.7080103@balister.org>
-	<1249899969.8248.95.camel@mill.internal.reciva.com>
-	<4A800434.4050603@balister.org>
-MIME-version: 1.0
-In-reply-to: <4A800434.4050603@balister.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: OEDEM scheduling
+Date: Tue, 18 Aug 2009 03:50:02 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <E1Md2kK-0008Uz-Fd@melo.openembedded.org>
+	<20090817152407.GA2227@smtp.west.cox.net>
+In-Reply-To: <20090817152407.GA2227@smtp.west.cox.net>
+MIME-Version: 1.0
+Message-Id: <200908180350.02392.holger+oe@freyther.de>
+Subject: Re: [oe-commits] Holger Hans Peter Freyther : site: Add ac value	for mipsel-linux and mipsel-linux-uclibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,28 +31,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 02:01:31 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 18 Aug 2009 02:07:40 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 10, 2009 at 07:27:48AM -0400, Philip Balister wrote:
-> Phil Blundell wrote:
->> The November date had 100% approval among those who responded to the
->> doodle poll.  (October was second best; September was least favoured,
->> and in any case the proposed September date is only four weeks away
->> which is probably too close for a lot of folks.)  So, I would suggest
->> that we just go ahead with the November date rather than introducing new
->> alternatives at this stage. Either way, it'd be good to try to get the 
->> date nailed down within the
->> next week or two so that everyone has adequate notice.  Obviously
->> there's no statutory minimum notice period for this but you probably
->> need at least 6-8 weeks to avoid a large number of diary clashes.
->
-> Agreed. Do we have a place to meet for those dates?
+On Monday 17 August 2009 17:24:08 Tom Rini wrote:
 
-Any updates on this item?
+> Given that the answer is the same for mipsel-linux and
+> mipsel-linux-uclibc, this is probably the wrong place.  The right place
+> is either a mips common one or a linux common one (if it's also the same
+> for every other linux platform).
 
--- 
-Denys
+To be honest CONFIG_SITE is always a bit of black magic to me. Can I just 
+create mipsel-common and it will be picked up? Actually I should just try it.
+
+z.
 
 
