@@ -1,21 +1,31 @@
-Received: from [82.195.155.133] (helo=mail.techworks.ie)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cgagneraud@techworks.ie>) id 1MdLq7-00028u-Ut
+	(envelope-from <utx@penguin.cz>) id 1MdMA9-0002qK-0P
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 12:22:52 +0200
-Received: from archeopterix.techworks.local (unknown [86.43.120.173])
-	by mail.techworks.ie (Postfix) with ESMTP id CC2073AB65
+	Tue, 18 Aug 2009 12:43:33 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 249481409713
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 11:05:48 +0100 (IST)
-Message-ID: <4A8A7D58.9000305@techworks.ie>
-Date: Tue, 18 Aug 2009 11:07:20 +0100
-From: Christian Gagneraud <cgagneraud@techworks.ie>
-User-Agent: Thunderbird 2.0.0.21 (X11/20090320)
-MIME-Version: 1.0
+	Tue, 18 Aug 2009 12:18:12 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id jqbk4uOFXRze
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2009 12:18:12 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id E83B41416BAB
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2009 12:18:11 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <4A88450A.8030609@techworks.ie> <20090818013941.GB18879@denix.org>
-In-Reply-To: <20090818013941.GB18879@denix.org>
-Subject: Re: [stable][patch] git: Add missing patch, apply it only	when version >= 1.5.3
+In-Reply-To: <1250551346.5083.3@zaurus>
+References: <1250551346.5083.3@zaurus>
+Date: Tue, 18 Aug 2009 12:26:28 +0200
+Message-Id: <1250591188.3555.5.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,31 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 10:22:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 18 Aug 2009 10:43:33 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Denys Dmytriyenko wrote:
-> On Sun, Aug 16, 2009 at 06:42:34PM +0100, Christian Gagneraud wrote:
->> Hi,
->>
->> Git-native fails to build (angstrom-2008.1 on stable branch) because aa 
->> patch is missing in the packages/git/files folder.
->> According to this message [1], the missing patch is not needed for the 
->> version being build, but is needed for newer version
-> 
-> 1.6.0.4 is the only version of git available from both .dev and stable 
-> branches for quite some time now and it does not require that patch. All the 
-> older versions were removed. Please make sure you are looking at the right 
-> stable branch - stable/2009:
-> 
-> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=stable/2009
+Stanislav Brabec wrote:
 
-Damned! I picked up the wrong one! Thanks for pointing that.
-
-Chris
-
+> There are two recipes for the calibrate library: libxcalibrate and 
+> xcalibrate
 > 
+> There are two recipes that provide prototypes: calibrateproto 
+> and xcalibrabrateext
+> 
+> Only some of these combinations result in a working environment.
+> 
+> I'll test, whether latest library version works with xserver-
+> kdrive-1300.
+
+Yes, xtscal works with xserver-kdrive-1300 and latest libxcalibrate and
+calibrateproto.
+
+It didn't work for kdrive based builds, because kdrive recipe wants
+libxcalibrate, but xtscal wants xcalibrate. One dependency chain
+overwrites the another with undefined result depending on the build
+order.
+
+That is why I would like to propose:
+- remove all xcalibrate and xcalibrabrateext recipes
+- find recipes and images that need them and migrate them to
+libxcalibrate and calibrateproto.
+- fix git versioning of libxcalibrate and calibrateproto, maybe
+increment PE.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
