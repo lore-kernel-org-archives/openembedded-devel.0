@@ -1,29 +1,28 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MdQ0w-00084t-5R
+	(envelope-from <pb@reciva.com>) id 1MdQ8W-0008KI-M4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 16:50:22 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 6BEDB541005
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 10:33:13 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 26913-08 for <openembedded-devel@lists.openembedded.org>; 
-	Tue, 18 Aug 2009 10:33:13 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id A82AD2987CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 10:33:12 -0400 (EDT)
-Message-ID: <4A8ABBA8.8030504@cbnco.com>
-Date: Tue, 18 Aug 2009 10:33:12 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Tue, 18 Aug 2009 16:58:12 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MdPro-0002jz-Bk
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 15:40:52 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MdPrl-0005Al-HW
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 15:40:49 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A8AB6C4.8040805@xora.org.uk>
 References: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com>
-In-Reply-To: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
+	<4A8AB6C4.8040805@xora.org.uk>
+Date: Tue, 18 Aug 2009 15:40:45 +0100
+Message-Id: <1250606446.7556.16.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
 Subject: Re: Create dir with 700 permissions from recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,37 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 14:50:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 18 Aug 2009 14:58:31 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-s hakkesteegt wrote:
+On Tue, 2009-08-18 at 15:12 +0100, Graeme Gregory wrote:
+> > pkg_postinst_${PN}-chmodsshdir () {
+> >         chmod 700 /home/root/.ssh
+> > }
+> >
+> >   
+> You above recipe doesnt create a package called.
+> 
+> ${PN}-chmodsshdir
+> 
+> you also need to add something like
+> 
+> if test "x$D" != "x"; then
+>     exit
+> fi
+> 
+> to the beginning of the postinst to stop it running during image creation.
 
-> For a recipe I want to use locally to enable public key authentication on my
-> images, I'm trying to create the .ssh dir with 700 permissions. But this
-> doesn't seem to work. It ends up in the rootfs and in the ipk with 775
-> permissions, although in the work dir it has the correct 700 permissions.
+Or, perhaps even better, add ${D} to the chmod command's argument so
+that it can run correctly during image creation.  Deferring this to boot
+time would work, but it'd slow down the initial "ipkg configure" run for
+no real gain.
 
-Hi Siebren,
+p.
 
-Try adding something like this to your recipe:
 
-python populate_packages_append () {
-         # Non-empty directory permissions don't get preserved by the
-         # normal populate process.
-         def dirperm_hack(d):
-                 pkgdest = bb.data.getVar('PKGDEST', d, 1)
-                 pn = bb.data.getVar('PN', d, 1)
-                 os.chmod(os.path.join(pkgdest, pn, '/home/root/.ssh'), 
-0700)
-
-         dirperm_hack(d)
-}
-
-I made a failed attempt at fixing this in package_deb.bbclass, but it 
-caused other problems; in the end I figured it was easier to work around 
-it in the one recipe where I needed a non-empty directory with 0700 perms.
-
-Mike
 
 
