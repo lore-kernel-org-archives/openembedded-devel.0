@@ -1,23 +1,28 @@
-Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1MdVI4-0002Ng-DU
+	(envelope-from <pb@reciva.com>) id 1MdWOl-0001Pe-Ct
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 22:28:21 +0200
-X-AuditID: 0a1e000a-b7ba8ae000000dd5-f7-4a8b0ae0cdf1
-From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
+	Tue, 18 Aug 2009 23:39:19 +0200
+Received: from 79-79-178-204.dynamic.dsl.as9105.com ([79.79.178.204]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MdW8A-0006mE-4G
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 22:22:11 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090818195028.GU2227@smtp.west.cox.net>
+In-Reply-To: <1250626236.6785.50.camel@conroy-linux>
 References: <1250176750.29049.1003.camel@conroy-linux>
 	<20090813155909.GC8906@gmail.com>
 	<1250612879.6785.12.camel@conroy-linux>
 	<20090818174157.GB25000@denix.org>
 	<1250620212.6785.43.camel@conroy-linux>
 	<20090818195028.GU2227@smtp.west.cox.net>
-Date: Tue, 18 Aug 2009 16:10:36 -0400
-Message-Id: <1250626236.6785.50.camel@conroy-linux>
+	<1250626236.6785.50.camel@conroy-linux>
+Date: Tue, 18 Aug 2009 22:21:56 +0100
+Message-Id: <1250630516.4215.230.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-Brightmail-Tracker: AAAAAA==
+X-Mailer: Evolution 2.22.3.1 
 Subject: Re: gcc-cross-sdk (GCC 4.2.3) limits.h woes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,39 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 20:28:22 -0000
+X-List-Received-Date: Tue, 18 Aug 2009 21:39:19 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2009-08-18 at 12:50 -0700, Tom Rini wrote:
-> 
-> OK, here's the problem, I think.  You're trying to make an image for say
-> i686-armv6-sdk-linux-gnueabi?  What are you expecting to be in this raw
-> image however, the contents of say meta-toolchain, extracted and put
-> into a ext2?  For most people, meta-toolchain, and the resulting tarball
-> are the output that gets used.
-> 
+On Tue, 2009-08-18 at 16:10 -0400, Chris Conroy wrote:
+> I don't see any easy path to change debian.bbclass since it requires
+> introspection on the TMPDIR which does not exist for users of an
+> external toolchain.
 
-The problem is the dependencies get satisfied during the build because
-package X depends on glibc, but external-toolchain.bb chimes in and says
-"Hi, I provide virtual/libc." Package X builds and links just fine since
-the external-toolchain dropped everything in the right place.
+There shouldn't be any need to change debian.bbclass; its work is
+already done at the point where your problem is occurring.  It sounds
+like your external toolchain is simply failing to ship the appropriate
+pkgdata files, and/or package.bbclass is failing to read them in for
+some reason.
 
-The problem comes whenever opkg needs to deal with dependencies since it
-doesn't know about 'virtual/libc'. It sees that Package X wants glibc
-and it can't find it since it only knows about the debian-named version
-called 'libc6'. Glibc never gets built (since it's already been built)
-and thus never gets debian renamed.
+p.
 
-I don't see any easy path to change debian.bbclass since it requires
-introspection on the TMPDIR which does not exist for users of an
-external toolchain.
 
-I hope this is clear. Let me know if there are any points of confusion.
-
-In the meantime, turning off the renaming successfully works around this
-bug.
-
---Chris Conroy
 
 
