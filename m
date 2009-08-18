@@ -1,31 +1,24 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MdUtQ-0004Cd-CX
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 22:02:54 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1MdUcq-000GG7-TM
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 23:45:45 +0400
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MdUxz-0004Jy-Jq
+	for openembedded-devel@openembedded.org; Tue, 18 Aug 2009 22:07:36 +0200
+Received: (qmail 22477 invoked from network); 18 Aug 2009 19:50:28 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 18 Aug 2009 12:50:28 -0700
+Date: Tue, 18 Aug 2009 12:50:28 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-Date: Tue, 18 Aug 2009 23:45:42 +0400
+Message-ID: <20090818195028.GU2227@smtp.west.cox.net>
+References: <1250176750.29049.1003.camel@conroy-linux>
+	<20090813155909.GC8906@gmail.com>
+	<1250612879.6785.12.camel@conroy-linux>
+	<20090818174157.GB25000@denix.org>
+	<1250620212.6785.43.camel@conroy-linux>
 MIME-Version: 1.0
-Message-Id: <200908182345.42184.khimov@altell.ru>
-X-SpamTest-Envelope-From: khimov@altell.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 9399 [Aug 18 2009]
-X-SpamTest-Info: {UDS BL}
-X-SpamTest-Info: {DNSBL Rate: low}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 30
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Subject: Re: x86_64 multilib
+In-Reply-To: <1250620212.6785.43.camel@conroy-linux>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: gcc-cross-sdk (GCC 4.2.3) limits.h woes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,19 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 20:02:56 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 18 Aug 2009 20:07:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0JLRgtC+0YDQvdC40LogMTgg0LDQstCz0YPRgdGC
-0LAgMjAwOSAyMzo0MjozNSDQsNCy0YLQvtGAIFJvbWFuIEkgS2hpbW92INC90LDQv9C40YHQsNC7
-Ogo+IEknbGwgcHJvYmFibHkgdHJ5IHRvIGFkZCBzb21lIG5ldyBnbGliYyB2ZXJzaW9ucyBvbiB3
-ZWVrZW5kLCBpZiB0aW1lCj4gcGVybWl0cy4gSSB0aGluayB0aGUgZmlyc3QgNCBwYXRjaGVzIGFy
-ZSByZWFkeSBmb3IgcmV2aWV3L3B1c2ggKGFsdGhvdWdoCj4gbmVlZCB0byB0ZXN0IGFmdGVyIHJl
-YmFzZSksIGFuZCBvdGhlcnMgbW9zdGx5IG5lZWQgcG9ydGluZyB0byBvdGhlcgo+IHZlcnNpb25z
-LgoKQWx0aG91Z2ggdGhlcmUgYXJlIHNvbWUgaGFpcnkgdGhpbmdzIGxpa2UgZ2NjLWZpeC1nbGli
-Yy1keW5hbWljLWxpbmtlci0KYW1kNjQucGF0Y2ggYW5kIHBhY2thZ2UuYmJjbGFzcyBjaGFuZ2Vz
-LiA6KQo=
+On Tue, Aug 18, 2009 at 02:30:12PM -0400, Chris Conroy wrote:
+
+> Sorry for not providing more detail at first...
+> 
+> With debian renaming on, glibc, for example, gets renamed to 'libc6' and
+> packaged as such. Normally, this works because the other packages pick
+> up the rename at some point along the way. The comment at the top of
+> debian.bbclass states:
+> 
+> # Debian package renaming only occurs when a package is built
+> # We therefore have to make sure we build all runtime packages
+> # before building the current package to make the packages runtime
+> # depends are correct
+> 
+> So, glibc is packaged as part of my toolchain's sdk. Building
+> meta-toolchain works just fine. Then, I go to build an image using the
+> external-toolchain. It fails because opkg cannot satisfy the dependency
+
+OK, here's the problem, I think.  You're trying to make an image for say
+i686-armv6-sdk-linux-gnueabi?  What are you expecting to be in this raw
+image however, the contents of say meta-toolchain, extracted and put
+into a ext2?  For most people, meta-toolchain, and the resulting tarball
+are the output that gets used.
+
+-- 
+Tom Rini
 
 
