@@ -1,28 +1,32 @@
-Received: from [131.111.8.131] (helo=ppsw-1.csi.cam.ac.uk)
+Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jic23@cam.ac.uk>) id 1MdOyb-0000Zl-HP
+	(envelope-from <brandhetlampje@gmail.com>) id 1MdPNm-0001CE-OQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 15:43:49 +0200
-X-Cam-AntiVirus: no malware found
-X-Cam-SpamDetails: not scanned
-X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
-Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:58114)
-	by ppsw-1.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.151]:25)
-	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
-	id 1MdOi5-0001Kr-69 (Exim 4.70) for
-	openembedded-devel@lists.openembedded.org
-	(return-path <jic23@cam.ac.uk>); Tue, 18 Aug 2009 14:26:46 +0100
-Message-ID: <4A8AAC1F.10604@cam.ac.uk>
-Date: Tue, 18 Aug 2009 14:26:55 +0100
-From: Jonathan Cameron <jic23@cam.ac.uk>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090803)
+	Tue, 18 Aug 2009 16:09:50 +0200
+Received: by ewy21 with SMTP id 21so3680551ewy.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Aug 2009 06:52:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=bNY0POSzF/sqsniv0Mr4TVoBvmS53AJlFSeFFI8B2+M=;
+	b=KqAQnim2vMr4S5fF+mDLpDGkLyEHRQEKkKXVU1uJ/a+KeJpUqggZWpQal4a29sb1EP
+	5zdHZYabUnTbjmmRNpNl1rxzfc80+ru1dkqnc9210jrrwbmLJ0kiQIkMljkJrYsKjV/o
+	uJiDTXE01m5uBgoVfRV7PMTkmHHbxtUoJ0St4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=OsavG+dfVIIjSSMaaCcXgLYl8Buo875NfRcPYbqg/vRo3FNgGTUejyqHIOJs7wMDcX
+	1cdzSEP20+i/scEzrQFnK3kDR8r6nW9L73aRztg9knimXzE2j4BfKUJd+p/n78umcvH3
+	tCmv2IN+28WN/JwhuXcwfBbtK3eY+NQHKIRWI=
 MIME-Version: 1.0
+Received: by 10.216.11.137 with SMTP id 9mr1281683wex.180.1250603564427; Tue, 
+	18 Aug 2009 06:52:44 -0700 (PDT)
+Date: Tue, 18 Aug 2009 15:52:44 +0200
+Message-ID: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com>
+From: s hakkesteegt <brandhetlampje@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4A8960BC.4000603@cam.ac.uk>
-	<200908171606.57153.holger+oe@freyther.de>
-In-Reply-To: <200908171606.57153.holger+oe@freyther.de>
-X-Enigmail-Version: 0.95.7
-Subject: Re: [PATCH] glibc 2.7 and 2.9 (arm): Remove unnecessary	asm/page.h include
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Create dir with 700 permissions from recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,133 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 13:43:49 -0000
+X-List-Received-Date: Tue, 18 Aug 2009 14:09:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Holger Hans Peter Freyther wrote:
-> On Monday 17 August 2009 15:53:00 you wrote:
->> Fix compile bug for arm with recent kernel headers
->> ../ports/sysdeps/unix/sysv/linux/arm/ioperm.c:48:22: error: asm/page.h: No
->> such file or directory
->>
->> Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
-> 
-> Signed-off-by: Holger Hans Peter Freyther <zecke@selfish.org>
-> 
-> One note worthy comment. Normally we only bump the PR when the packaged 
-> content is changing. In one way we had a build error so the packaging didn't 
-> change at all, in another way we do have existing glibc packages...
-Cool, hadn't realized that. 
-> 
-> To be honest I wonder why you are triggering this area, and why other builds 
-> don't do that... it is  a bit frightening.
-My guess is the majority of distros haven't bumped up either one of the kernel
-header or glibc. Either that or I'm just unlucky in picking combinations!
+Hi,
 
-Quick browse of those in the repository:  (headers will cause trouble form 2.6.25
-onwards, I think).
-
-angstrom-2008.1.conf headers = 2.6.23
-chinook-compat.conf headers = 2.6.20
-jlime2-2009.1 headers headers = 2.6.18
-jlime-donkey.conf  glibc 2.6.1 (the fixed version) headers 2.6.23 (so don't need it)
-jlime-henchman.conf headers = 2.6.23
-jlime-mongo.conf headers = 2.6.18
-kaeilos.conf glibc = 2.6.1 (fixed) headers =2.6.23 (fine anyway)
-mamona.conf headers 2.6.22
-nylon.conf headers 2.6.18
-openprotium headers 2.6.11.1
-oplinux.conf headers 2.6.18
-
-Normally people don't care about kernel header versions, but I need some netlink stuff
-that only just went in.
-
-Thanks,
-
-Jonathan
+For a recipe I want to use locally to enable public key authentication on my
+images, I'm trying to create the .ssh dir with 700 permissions. But this
+doesn't seem to work. It ends up in the rootfs and in the ipk with 775
+permissions, although in the work dir it has the correct 700 permissions.
+This is the recipe I created:
 
 
+SRC_URI=" \
+                    file://authorized_keys \
+       "
+
+FILES_${PN}=" /home/root/.ssh \
+                       /home/root/.ssh/authorized_keys \
+           "
+
+do_install(){
+       install -m 0700 -d ${D}/home/root/.ssh
+       install -m 0600 ${WORKDIR}/authorized_keys
+${D}/home/root/.ssh/authorized_keys
+}
 
 
+On irc was suggested to use postinst script. So I tried to add the next at
+the end of the recipe.:
 
 
-
-> 
-> 
-> 
->> ---
->> Update to previous posting under
->> [PATCH] glibc 2.9: Remove unnecessary asm/page.h include, not present in
->> recent headers
->>
->> This patch is already included by the 2.6.1 recipe (thanks Khem)
->> Prevents the following error with recent kernel headers
->> ../ports/sysdeps/unix/sysv/linux/arm/ioperm.c:48:22: error: asm/page.h: No
->> such file or directory
->>
->> Fixes problem with 2.6.29 headers against both glibc 2.7 and 2.9
->>
->> Related bug reports (with equivalent solutions)
->> http://www.mail-archive.com/debian-glibc@lists.debian.org/msg38393.html
->> http://sourceware.org/ml/crossgcc/2008-05/msg00014.html
->> http://sourceware.org/ml/libc-ports/2008-04/msg00005.html
->>
->> Bug no longer exists at head of glibc ports tree. May effect other
->> versions.
->>
->>  recipes/glibc/glibc_2.7.bb |    3 ++-
->>  recipes/glibc/glibc_2.9.bb |    3 ++-
->>  2 files changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/recipes/glibc/glibc_2.7.bb b/recipes/glibc/glibc_2.7.bb
->> index f152756..dcea69c 100644
->> --- a/recipes/glibc/glibc_2.7.bb
->> +++ b/recipes/glibc/glibc_2.7.bb
->> @@ -5,7 +5,7 @@ ARM_INSTRUCTION_SET = "arm"
->>  PACKAGES_DYNAMIC = "libc6*"
->>  RPROVIDES_${PN}-dev = "libc6-dev virtual-libc-dev"
->>
->> -PR = "${INC_PR}.0"
->> +PR = "${INC_PR}.1"
->>
->>  # the -isystem in bitbake.conf screws up glibc do_stage
->>  BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
->> @@ -68,6 +68,7 @@ SRC_URI =
->> "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.tar.bz2 \
->> file://etc/ld.so.conf \
->>             file://generate-supported.mk \
->>             file://march-i686.patch;patch=1;pnum=0 \
->> +	   file://glibc-arm-no-asm-page.patch;patch=1 \
->>             "
->>
->>
->> diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
->> index 6e323aa..9849c0a 100644
->> --- a/recipes/glibc/glibc_2.9.bb
->> +++ b/recipes/glibc/glibc_2.9.bb
->> @@ -5,7 +5,7 @@ ARM_INSTRUCTION_SET = "arm"
->>  PACKAGES_DYNAMIC = "libc6*"
->>  RPROVIDES_${PN}-dev = "libc6-dev virtual-libc-dev"
->>
->> -PR = "${INC_PR}.0"
->> +PR = "${INC_PR}.1"
->>
->>  # the -isystem in bitbake.conf screws up glibc do_stage
->>  BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
->> @@ -65,6 +65,7 @@ SRC_URI =
->> "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.tar.bz2 \
->> file://generate-supported.mk \
->>             file://march-i686.patch;patch=1;pnum=0 \
->>  	   file://tls_i486.patch;patch=1 \
->> +	   file://glibc-arm-no-asm-page.patch;patch=1 \
->>             "
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+pkg_postinst_${PN}-chmodsshdir () {
+        chmod 700 /home/root/.ssh
+}
 
 
+1. Do I understand it correct that this postinst script will run on the
+target machine (after first boot)? Or is that wrong?
+
+2. This doesn't seem to work either. Am I doing something wrong and is there
+a better / right way to add my public key my created images.
+
+
+Thanks in advance for a reaction,
+
+Siebren
 
