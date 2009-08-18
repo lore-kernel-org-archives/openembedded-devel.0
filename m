@@ -1,32 +1,35 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MdTnu-0004sL-A0
+	(envelope-from <khimov@altell.ru>) id 1MdUqV-00049D-La
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 20:53:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 99F561417193
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 20:27:44 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NRyyV51DbF4t
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 20:27:44 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 7084C1417182
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 20:27:44 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Tue, 18 Aug 2009 21:59:52 +0200
+Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1MdUZv-000FE8-Bz
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 23:42:43 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A8AC753.8000008@atmel.com>
-References: <1250551346.5083.3@zaurus> <1250591188.3555.5.camel@utx.utx.cz>
-	<4A8AC753.8000008@atmel.com>
-Date: Tue, 18 Aug 2009 20:35:59 +0200
-Message-Id: <1250620560.4550.17.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: xtscal fails + other Xorg init problems.
+Date: Tue, 18 Aug 2009 23:42:35 +0400
+User-Agent: KMail/1.12.0 (Linux/2.6.30-1-amd64; KDE/4.3.0; x86_64; ; )
+References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>
+	<200908181304.08654.khimov@altell.ru> <4A8AEFDE.6020601@cbnco.com>
+In-Reply-To: <4A8AEFDE.6020601@cbnco.com>
+MIME-Version: 1.0
+Message-Id: <200908182342.35155.khimov@altell.ru>
+X-SpamTest-Envelope-From: khimov@altell.ru
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9399 [Aug 18 2009]
+X-SpamTest-Info: {UDS BL}
+X-SpamTest-Info: {DNSBL Rate: low}
+X-SpamTest-Method: none
+X-SpamTest-Rate: 30
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+Subject: Re: x86_64 multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,64 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 18:53:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Aug 2009 19:59:59 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Ulf Samuelsson wrote:
-> Stanislav Brabec skrev:
-> > Stanislav Brabec wrote:
-
-> > It didn't work for kdrive based builds, because kdrive recipe wants
-> > libxcalibrate, but xtscal wants xcalibrate. One dependency chain
-> > overwrites the another with undefined result depending on the build
-> > order.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 18 =D0=B0=D0=B2=D0=B3=D1=83=D1=
+=81=D1=82=D0=B0 2009 22:15:58 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Michael Smith =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> Roman I Khimov wrote:
+> I had to build my gcc-cross with --disable-multilib because my glibc is
+> not multilib. In April you posted a patch series to add multilib support
+> for x86_64, but I'm not sure how much of it made it into the tree:
 >=20
-> What is the difference between "xserver-kdrive-1300" and
-> "kdrive based builds" ?
+> http://thread.gmane.org/gmane.comp.handhelds.openembedded/22737
 
-Just a package selection for particular target that causes different
-order of overwriting of staged files.
+Just the binutils patch, as far as I remember.
 
-> Do you mean it does not work with later revisions of xserver-kdrive?
+> Are you still using that patchset to get working gcc -m32?
 
-xserver-kdrive-1300 is the oldest version in the tree. If=EF=BB=BF the la=
-test
-libxcalibrate works with it, I guess that it will work with any newer
-version.
+Evolved a bit, but most of it should be correct.
 
-> Should we try to focus on xorg-xserver-1.6.1 which seems to have kdrive
-> support?
+OK, I've rebased what I'd had in OE branch and if I've not messed up someth=
+ing=20
+it should be currently in "rik/amd64" branch. Will check if there is anythi=
+ng=20
+interesting left in overlay of x86_64 project which from this patchset=20
+originated (project itself was released in May and almost not touched since=
+,=20
+so I had little incentive to continue pushing this changes, unfortunately).=
+=20
 
-Are you sure that it is "kdrive support" and not just "kdrive in the
-source tree", as it was in past (i. e. deprecated and without support)?
-
-Well, anything newer than ancient xserver-kdrive-1300 working on
-machines like spitz would be a win.
-
-With a highly modularized Xorg, upgrade to full Xorg may be an option,
-as it could support modern desktop extensions.
-
-It also seems, that Xorg has much better performance in rotated fbdev
-driver than xserver-kdrive-1300.
-
-I was even able to run Xorg with OpenGL (Mesa emulated) on my Zaurus
-(5-8FPS in glxgears).
-
-Problems that block upgrage:
-
-- broken keyboard driver (keyboard map loads only sometimes, some keys
-or autorepeat doesn't load, kdrive > 1.3.0.0)
-- support for different orientation of touchscreen and display (both
-kdrive > 1.3.0.0 and xorg)
-- working XRandR in fbdev driver (xorg, last time I tested it, just a
-code for runtime rotation was missing, rotation itself was already
-implemented)
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+=46eel free to try/test/enhance with new glibc/gcc versions/corrections, et=
+c.=20
+I'll probably try to add some new glibc versions on weekend, if time permit=
+s.=20
+I think the first 4 patches are ready for review/push (although need to tes=
+t=20
+after rebase), and others mostly need porting to other versions.
 
 
