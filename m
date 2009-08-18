@@ -1,23 +1,23 @@
-Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1MdQn9-0006xb-B1
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 17:40:10 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout2-sn1.fre.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A2D61FD005E861F for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 17:23:00 +0200
-Message-ID: <4A8AC753.8000008@atmel.com>
-Date: Tue, 18 Aug 2009 17:22:59 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MdR5y-0007RB-Ci
+	for openembedded-devel@openembedded.org; Tue, 18 Aug 2009 17:59:38 +0200
+Received: (qmail 20242 invoked from network); 18 Aug 2009 15:42:29 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 18 Aug 2009 08:42:29 -0700
+Date: Tue, 18 Aug 2009 08:42:28 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1250551346.5083.3@zaurus> <1250591188.3555.5.camel@utx.utx.cz>
-In-Reply-To: <1250591188.3555.5.camel@utx.utx.cz>
-Subject: Re: xtscal fails + other Xorg init problems.
+Message-ID: <20090818154228.GP2227@smtp.west.cox.net>
+References: <19c1b8a90908101812v662e21b4h54683ac6fe4380b1@mail.gmail.com>
+	<20090812221317.GA13386@gmail.com> <4A842816.3000504@cbnco.com>
+	<200908131711.26079.holger+oe@freyther.de>
+	<4A84314E.4030408@cbnco.com> <20090814064439.GG22344@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20090814064439.GG22344@denix.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [PATCH v2] pciutils: fix generation of pci.ids.gz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,69 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 15:40:23 -0000
+X-List-Received-Date: Tue, 18 Aug 2009 15:59:46 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Stanislav Brabec skrev:
-> Stanislav Brabec wrote:
+On Fri, Aug 14, 2009 at 02:44:39AM -0400, Denys Dmytriyenko wrote:
+> On Thu, Aug 13, 2009 at 11:29:18AM -0400, Michael Smith wrote:
+> > Holger Hans Peter Freyther wrote:
+> >> On Thursday 13 August 2009 16:49:58 Michael Smith wrote:
+> >>> Thanks Khem. Could you please apply it? I don't have commit rights.
+> >> Do you want to change that? How many of your patches are still not 
+> >> applied/pushed?
+> >
+> > I think it's down to about a dozen now. But yeah, that would be great!
 > 
->> There are two recipes for the calibrate library: libxcalibrate and 
->> xcalibrate
->>
->> There are two recipes that provide prototypes: calibrateproto 
->> and xcalibrabrateext
->>
->> Only some of these combinations result in a working environment.
->>
->> I'll test, whether latest library version works with xserver-
->> kdrive-1300.
-> 
-> Yes, xtscal works with xserver-kdrive-1300 and latest libxcalibrate and
-> calibrateproto.
-> 
-> It didn't work for kdrive based builds, because kdrive recipe wants
-> libxcalibrate, but xtscal wants xcalibrate. One dependency chain
-> overwrites the another with undefined result depending on the build
-> order.
+> +1 to give Michael commit rights.
 
-What is the difference between "xserver-kdrive-1300" and
-"kdrive based builds" ?
-Do you mean it does not work with later revisions of xserver-kdrive?
-
-
-
-> 
-> That is why I would like to propose:
-> - remove all xcalibrate and xcalibrabrateext recipes
-> - find recipes and images that need them and migrate them to
-> libxcalibrate and calibrateproto.
-
-Angstrom prefers another version of xserver-kdrive.
-
-Should we try to focus on xorg-xserver-1.6.1 which seems to have kdrive
-support?
-
-
-
-> - fix git versioning of libxcalibrate and calibrateproto, maybe
-> increment PE.
-> 
-> 
-> ________________________________________________________________________
-> Stanislav Brabec
-> http://www.penguin.cz/~utx/zaurus
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+I'll +1 Michael for commit rights as well.
 
 -- 
-Best Regards
-Ulf Samuelsson
-
+Tom Rini
 
 
