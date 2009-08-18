@@ -1,40 +1,33 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MdKrE-0005WV-GL
+	(envelope-from <khimov@altell.ru>) id 1MdKsY-000772-2F
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Aug 2009 11:19:56 +0200
-Received: by bwz17 with SMTP id 17so2662824bwz.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Aug 2009 02:02:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=Pw6uGySlFgfpAYQa6QUs4o1iIV0GbraQ34KUl4UgG7Q=;
-	b=k23Yf7U1g11e7qbFZxTdLy+N7btz9zokmTDos4zrF92Btjzdcdsc0i9T7kW+QR9xo8
-	j0PbIUsDF/ZRoeApQXx7WGdQ9PZumvTzRXJRAThIedsHpIKqI/KQ1HwSlXP7GGXGeq1q
-	mrG068l+69QAwZcmK3+wjQJE3++GUDMuOR4pc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=wXNnW1CV8PtepMSaWFrgfj6G1I97R6KG99m6LrYkOwV6dt9P9+oFMyQsa6j0R8/NOC
-	v34B42REJYkFxX0WkCDfNueFA6XZbJn0eLeDQ/7q3sW120bOw9T7oO4KthiglcSOrGbB
-	XYAH4a4JLunWbbr7p3xKxPQ/RoUXe0a2XSxIc=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.179.94 with SMTP id c30mr422371hbg.159.1250586171578; Tue, 
-	18 Aug 2009 02:02:51 -0700 (PDT)
-In-Reply-To: <200908171611.08535.holger+oe@freyther.de>
-References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>
-	<1250515743-10823-2-git-send-email-msmith@cbnco.com>
-	<200908171611.08535.holger+oe@freyther.de>
-Date: Tue, 18 Aug 2009 06:02:51 -0300
-X-Google-Sender-Auth: e8c89724aff21fe1
-Message-ID: <be7a9f3d0908180202t125e5c21tf77ed80c0ab07d22@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Tue, 18 Aug 2009 11:21:18 +0200
+Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
+	message id 1MdKc0-000GCa-Oy
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 Aug 2009 13:04:13 +0400
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/3] mtools: don't install-info; fixes build on 	non-Debian hosts
+Date: Tue, 18 Aug 2009 13:04:08 +0400
+User-Agent: KMail/1.12.0 (Linux/2.6.30-1-amd64; KDE/4.3.0; x86_64; ; )
+References: <1250515743-10823-1-git-send-email-msmith@cbnco.com>
+	<200908172229.32840.khimov@altell.ru> <4A89A554.2030201@cbnco.com>
+In-Reply-To: <4A89A554.2030201@cbnco.com>
+MIME-Version: 1.0
+Message-Id: <200908181304.08654.khimov@altell.ru>
+X-SpamTest-Envelope-From: khimov@altell.ru
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9382 [Aug 18 2009]
+X-SpamTest-Method: none
+X-SpamTest-Rate: 0
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+Subject: Re: [PATCH 3/3] syslinux: upgrade to 3.82 and split into a few packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,27 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Aug 2009 09:19:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Aug 2009 09:21:18 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hello Holger,
-
-On Mon, Aug 17, 2009 at 11:11 AM, Holger Hans Peter
-Freyther<holger+oe@freyther.de> wrote:
-> again, no need to bump the PR.
-
-I completely disagree with changes landing without PR bump.
-
-Not bumping them can cause a change, that breaks something, to not be
-noticed for long time.
-
-In my opinion we ought to _always_ bump PR when changing the recipe.
-This ensure it is widely tested and deployed.
-
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAxNyDQsNCy
+0LPRg9GB0YLQsCAyMDA5IDIyOjQ1OjQwINCw0LLRgtC+0YAgTWljaGFlbCBTbWl0aCAK0L3QsNC/
+0LjRgdCw0Ls6Cj4gUm9tYW4gSSBLaGltb3Ygd3JvdGU6Cj4gPiDQkiDRgdC+0L7QsdGJ0LXQvdC4
+0Lgg0L7RgiDQn9C+0L3QtdC00LXQu9GM0L3QuNC6IDE3INCw0LLQs9GD0YHRgtCwIDIwMDkgMTk6
+MzU6NDEg0LDQstGC0L7RgCBNaWNoYWVsIFNtaXRoCj4gPiDQvdCw0L/QuNGB0LDQuzoKPiA+Cj4g
+PiBZb3UgY2FuIGFsc28gZG8gYm9vdGFibGUgVVNCIGRyaXZlIGltYWdlcyB3aXRoIEdSVUIgKG5v
+dCBHUlVCMiwKPiA+IHVuZm9ydHVuYXRlbHkpIHdpdGggc29tZXRoaW5nIGxpa2UgdGhpcyBhZGRl
+ZCB0byBzdGFuZGFyZCBleHQyIGltYWdlIGZvcgo+ID4gZHJpdmUgRlM6Cj4KPiAuLi4uLgo+IFRo
+YXQgYWxvbmUgcHJvYmFibHkgd291bGRuJ3QgaGF2ZSBzdG9wcGVkIG1lIChTYW5EaXNrIENydXpl
+cnMgYWx3YXlzCj4gd29yayA6KSBidXQgaXQncyBub3QgcmVhbGx5IHBvc3NpYmxlIHRvIGJ1aWxk
+IEdSVUIgZm9yIHg4Nl82NCwgYW5kIEdSVUIyCj4gd2lsbCBvbmx5IGJ1aWxkIHdpdGggYSBmaWdo
+dC4KCldlbGwsIGZvciB4ODZfNjQgd2UgYnVpbGQgR1JVQiBsaWtlIHRoaXM6Cgo9PT09PT09PQpM
+REZMQUdTICs9ICItc3RhdGljIgpDRkxBR1MgKz0gIiR7Q0ZMQUdTX01VTFRJTElCfSIKPT09PT09
+PT0KCndoZXJlCgo9PT09PT09PT09CkNGTEFHU19NVUxUSUxJQiA9ICItbWFyY2g9aTY4NiAtbTMy
+Igo9PT09PT09PT09Cg==
 
 
