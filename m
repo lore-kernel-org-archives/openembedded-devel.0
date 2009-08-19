@@ -1,21 +1,23 @@
-Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1MdmPC-000178-7D
+	(envelope-from <holger+oe@freyther.de>) id 1Mdn6B-00089h-PL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Aug 2009 16:44:53 +0200
-X-AuditID: 0a1e000a-b7ba8ae000000dd5-96-4a8c0bd9b769
-From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
+	Wed, 19 Aug 2009 17:29:16 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 740C91B10C09
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Aug 2009 15:15:54 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200908190517.21656.holger+oe@freyther.de>
+Date: Wed, 19 Aug 2009 17:11:22 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
 References: <1250176750.29049.1003.camel@conroy-linux>
-	<20090818174157.GB25000@denix.org>
-	<1250620212.6785.43.camel@conroy-linux>
 	<200908190517.21656.holger+oe@freyther.de>
-Date: Wed, 19 Aug 2009 10:26:59 -0400
-Message-Id: <1250692019.6785.61.camel@conroy-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-Brightmail-Tracker: AAAAAA==
+	<1250692019.6785.61.camel@conroy-linux>
+In-Reply-To: <1250692019.6785.61.camel@conroy-linux>
+MIME-Version: 1.0
+Message-Id: <200908191711.22652.holger+oe@freyther.de>
 Subject: Re: gcc-cross-sdk (GCC 4.2.3) limits.h woes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -30,35 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2009 14:44:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 19 Aug 2009 15:29:16 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-08-19 at 05:17 +0200, Holger Hans Peter Freyther wrote:
-> Have you seen this:
->    http://docs.openembedded.org/usermanual/html/commonuse_prebuilt_toolchain.html#id388796
-> 
-> 
-> does it help in any way? To be honest I'm still missing how you try to create 
-> the image and if you rebuilt glibc or application or such..
-> 
-> 	z.
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+On Wednesday 19 August 2009 16:26:59 Chris Conroy wrote:
+> On Wed, 2009-08-19 at 05:17 +0200, Holger Hans Peter Freyther wrote:
+> > Have you seen this:
+> >   
+> > http://docs.openembedded.org/usermanual/html/commonuse_prebuilt_toolchain
+> >.html#id388796
+> >
+> >
+> > does it help in any way? To be honest I'm still missing how you try to
+> > create the image and if you rebuilt glibc or application or such..
+> >
+> > 	z.
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> Yes, but I get the sense (perhaps wrongly) that these directions are a
+> bit out of date since they don't mention the meta-toolchain or
+> external-toolchain. I'm trying to both build and use a toolchain
+> entirely within OE.
 
-Yes, but I get the sense (perhaps wrongly) that these directions are a
-bit out of date since they don't mention the meta-toolchain or
-external-toolchain. I'm trying to both build and use a toolchain
-entirely within OE.
+meta-toolchain is a bit irrelevant as this page doesn't care for where the 
+toolchain comes from, you are right about the external-toolchain part and the 
+documentation needs to be updated. ASSUME_SHLIBS will still help you to hint 
+OE which package contains libc6.so
 
-I have a feeling that Phil's suggestion to look into what's going on
-with pkgdata is the right approach since I think a few things were
-slightly out of place there when I started to work on this.
-
---Chris Conroy
+regards
+	holger
 
 
