@@ -1,31 +1,30 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1Mdk78-00041x-Ek
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Aug 2009 14:18:08 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 9602853FC2F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2009 08:00:51 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 18380-05 for <openembedded-devel@lists.openembedded.org>; 
-	Wed, 19 Aug 2009 08:00:51 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 3F99753CA12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2009 08:00:51 -0400 (EDT)
-Date: Wed, 19 Aug 2009 08:00:51 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <6978a1740908190155n44f55df1k40ce20162caa73ae@mail.gmail.com>
-Message-ID: <Pine.LNX.4.64.0908190757250.3621@juice.ott.cti.com>
-References: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com>
-	<4A8AB6C4.8040805@xora.org.uk>
-	<6978a1740908190155n44f55df1k40ce20162caa73ae@mail.gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MdkOs-0001eI-P7
+	for openembedded-devel@openembedded.org; Wed, 19 Aug 2009 14:36:25 +0200
+Received: (qmail 17903 invoked by uid 813007); 19 Aug 2009 12:19:12 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO host4.kei.pl)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 Aug 2009 12:19:12 -0000
+References: <6978a1740908180652y36467f0evcfc467153cf9ac64@mail.gmail.com><h6ed6d$r1l$2@ger.gmane.org>
+	<6978a1740908182358l69cf380awefdf8d966f75678a@mail.gmail.com>
+In-Reply-To: <6978a1740908182358l69cf380awefdf8d966f75678a@mail.gmail.com>
+Received: from 83.22.159.1
+	(Poczta WWW KEI.pl authenticated user marcin@juszkiewicz.com.pl)
+	by poczta813.kei.pl with HTTP; Wed, 19 Aug 2009 14:19:12 +0200 (CEST)
+Message-ID: <8d7a1face05be6d40b10e2449a443196.marcin@juszkiewicz.com.pl>
+From: <marcin@juszkiewicz.com.pl>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Aug 2009 14:19:12 +0200
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
+X-Priority: 3
+X-Mailer-Version: 1.0
+X-Mailer: Poczta WWW KEI.pl
+X-Organisation: KEI Provider
+X-User-IP: 83.22.159.1
+X-Http-User-Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.5; pl;
+	rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2
 Subject: Re: Create dir with 700 permissions from recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,34 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2009 12:18:16 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 19 Aug 2009 12:36:43 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, 19 Aug 2009, s hakkesteegt wrote:
+Dnia Wed, 19 Aug 2009 08:58:25 +0200 napisales[as]:
 
-> pkg_postinst_${PN}  () {
->   if [ test x"$D" != "x" ]; then
->     chmod 700 ${D}/home/root/.ssh
->   fi
-> }
+> > 1) never ever in=
+stall something into $HOME
+=20
+> 1) Is there possibly something written w=
+hy not to do that?
 
-> pkg_postinst_${PN}  () {
->     chmod 700 ${D}/home/root/.ssh
-> }
-> 
-> But that didn't change the permissions in the rootfs either.
+Not every device has $HOME on same partition as / (fo=
+r example most of Zaurus devices). And as those files ends in package what =
+will happen if user will change file in $HOME and then package will overwri=
+te it with other contents? What with users other then root?
 
-Well, that's odd. I'd think one of those would do the trick. But:
+I know that =
+in your situation most of those reasons are nothing to worry about but this=
+ is why we do not touch anything in $HOME.
 
-> By the way: I rechecked the result in the workdir and there the result in
-> the image/ dir has the correct 700 permissions, but the result in the
-> install/${PN}/ has the 'wrong' 775 permissions already.
 
-It's a buglet in the populate_packages process: permissions of 
-non-empty directories are not preserved. You can work around it in your 
-recipe with the hack I posted to the thread yesterday. It's how I create 
-my ssh key package for deb (not tested with ipk).
 
-Mike
 
 
