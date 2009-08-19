@@ -1,33 +1,31 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MdkXe-0001xK-WC for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Aug 2009 14:45:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1MdkH2-0008OW-Sq
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Aug 2009 14:28:16 +0200
-Received: from p5b3b16f4.dip.t-dialin.net ([91.59.22.244])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2009 14:28:16 +0200
-Received: from no2spam by p5b3b16f4.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2009 14:28:16 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 19 Aug 2009 14:27:45 +0200
-Message-ID: <h6gr4a$kj6$1@ger.gmane.org>
-References: <1250260162-9541-1-git-send-email-oe-devel@rolf.leggewie.biz>	<b6ebd0a50908181024p6ad06490q108638a35c0dca82@mail.gmail.com>
-	<4A8BB046.9030206@gefanuc.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b16f4.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.22 (X11/20090804)
-In-Reply-To: <4A8BB046.9030206@gefanuc.com>
-Sender: news <news@ger.gmane.org>
-Subject: Re: [PATCH] base.bbclass: introduce OE source mirror network as last resort for do_fetch
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Mdked-0002Gw-AJ
+	for openembedded-devel@openembedded.org; Wed, 19 Aug 2009 14:52:43 +0200
+Received: (qmail 4623 invoked by uid 813007); 19 Aug 2009 12:35:28 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO host4.kei.pl)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 Aug 2009 12:35:28 -0000
+References: <1250515743-10823-1-git-send-email-msmith@cbnco.com><1250515743-10823-2-git-send-email-msmith@cbnco.com><1250515743-10823-3-git-send-email-msmith@cbnco.com>
+	<200908171612.13311.holger+oe@freyther.de>
+In-Reply-To: <200908171612.13311.holger+oe@freyther.de>
+Received: from 83.22.159.1
+	(Poczta WWW KEI.pl authenticated user marcin@juszkiewicz.com.pl)
+	by poczta813.kei.pl with HTTP; Wed, 19 Aug 2009 14:35:28 +0200 (CEST)
+Message-ID: <d57bdce1dd0da9c8c6e7caf3f9da7e3f.marcin@juszkiewicz.com.pl>
+From: <marcin@juszkiewicz.com.pl>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Aug 2009 14:35:28 +0200
+MIME-Version: 1.0
+X-Priority: 3
+X-Mailer-Version: 1.0
+X-Mailer: Poczta WWW KEI.pl
+X-Organisation: KEI Provider
+X-User-IP: 83.22.159.1
+X-Http-User-Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.5; pl;
+	rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2
+Subject: Re: [PATCH 3/3] syslinux: upgrade to 3.82 and split into a fewPackages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,14 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2009 12:45:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Aug 2009 12:52:51 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Martyn Welch wrote:
-> On that note we just ran a "quick" test on OE
+Dnia Mon, 17 Aug 2009 16:12:13 +0200 napisano:
 
-Thanks for testing.  Did you test this against the stable or the dev branch?
+> Haha, this might sound =
+weird... Could you
+> write a section for our usermanual=20
+> on how to us=
+e syslinux?
+
+Check classes/bootimg.bbclass for code. It was imported from=
+ Poky some time ago.
+
+
 
 
 
