@@ -1,36 +1,30 @@
-Received: from [74.125.92.146] (helo=qw-out-1920.google.com)
+Received: from [67.134.254.86] (helo=ltrxmail.lantronix.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mdqe2-00071J-D7
+	(envelope-from <Lars.Holowko@lantronix.com>) id 1Mds6g-0004Dn-Se
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Aug 2009 21:16:26 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so1414994qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Aug 2009 11:59:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=xN54hmsQXkxG5azSR3bCEyWvz3jJoOmO0U7io+Bc5DY=;
-	b=nMab+0rfsNyp2XNDGXlM4ISEfGlr9KR8GMdk2AYH+rPG9sYxbA51qrPOy3dkUPP1vf
-	EG2BC5UkZK9tN7OP5mYCkNfXShDg9X+jEG4sHF05dwxJ/BawHb2Ony4JmsdykPFc8sAC
-	KHv6fYF1v3994GCKsfJZe+sDURBJTiqbBwqJg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=vhdRa+nhHxEmo1iZVgxSWtzU2lIHE590EmbwYdjI08607n5So24nhPGGm/L/n8GMtd
-	8F0rVISJndLV/z7TZAP6p+Uqok33B+jlbw97/x72BR+CoiqIyajjzemiD7DMc7X1oqey
-	l4ULiI8mcLiTxcZBiLCOt1/rr+iqpKlYJwISs=
+	Wed, 19 Aug 2009 22:50:07 +0200
+X-MessageTextProcessor: DisclaimIt (2.00.201) on draw.int.lantronix.com
+Received: from 2putt.int.lantronix.com ([172.16.1.22]) by
+	ltrxmail.lantronix.com with Microsoft SMTPSVC(6.0.3790.1830);
+	Wed, 19 Aug 2009 13:32:51 -0700
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.2992
 MIME-Version: 1.0
-Received: by 10.229.20.206 with SMTP id g14mr2954717qcb.32.1250708353954; Wed, 
-	19 Aug 2009 11:59:13 -0700 (PDT)
-In-Reply-To: <4580C4E7-8991-46E7-AC1A-1DEDEF9A9F65@kernel.crashing.org>
-References: <4580C4E7-8991-46E7-AC1A-1DEDEF9A9F65@kernel.crashing.org>
-Date: Wed, 19 Aug 2009 11:59:13 -0700
-Message-ID: <19c1b8a90908191159m30f5ad49h7e7da478bef9c50c@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: openembedded-devel@openembedded.org
-Subject: Re: fedora 11 package list on wiki
+Date: Wed, 19 Aug 2009 13:32:50 -0700
+Message-ID: <8128F0FD6C26E14C8EB4BFDB92B8D6B201B3E7@2putt.int.lantronix.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe]Is there an easy way to get a minimalist image without
+	I18nLibraries?
+thread-index: AcogzN8NkO2t/fh5Q0a9FOVaBiNmOQAOND4g
+References: <1250176750.29049.1003.camel@conroy-linux><20090813155909.GC8906@gmail.com><1250612879.6785.12.camel@conroy-linux><20090818174157.GB25000@denix.org><8128F0FD6C26E14C8EB4BFDB92B8D6B201B3E4@2putt.int.lantronix.com>
+	<19c81808ecdbf92546b395d4df864830.marcin@juszkiewicz.com.pl>
+From: "Lars Holowko" <Lars.Holowko@lantronix.com>
+Importance: normal
+Priority: normal
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 19 Aug 2009 20:32:51.0535 (UTC)
+	FILETIME=[39223DF0:01CA210C]
+Subject: Re: Is there an easy way to get a minimalist image without I18nLibraries?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +38,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2009 19:16:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Aug 2009 20:50:08 -0000
+Content-Class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 19, 2009 at 11:32 AM, Kumar Gala<galak@kernel.crashing.org> wro=
-te:
-> The wiki page:
+>> I am playing with the minimal-image on this configuration:
+>>
+>> To save even more flash space, is there also a way to disable the=20
+>> installation of opkg and its dependencies like: libgnutls26,
+libcurl4?
 >
-> http://wiki.openembedded.net/index.php/OEandYourDistro
+> # Disable online package management
+> ONLINE_PACKAGE_MANAGEMENT =3D "none"
 >
-> lists:
->
-> python-psyco
->
-> as one of the packages to install on fedora 11. =C2=A0however this packag=
-e does
-> not exist. =C2=A0I'm not sure exactly which of the following should repla=
-ce it:
->
-> python-psycopg.x86_64 : PostgreSQL database adapter for Python
-> python-psycopg2.x86_64 : A PostgreSQL database adapter for Python
-> python-psycopg2-doc.x86_64 : Documentation for psycopg python PostgreSQL
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 : database adapter
+> Add this into your image recipe.
 
-psyco is not available for 64bit. So don't worry about it.
+Thanks a lot, that got rid off the package management.
 
->
-> - k
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+If anyone knows how I can get rid off the internationalization stuff,
+I'll be compeletly happy..
+
+Lars
+=20
+**********************************************************************
+This e-mail is the property of Lantronix. It is intended only for the =
+person or entity to which it is addressed and may contain information =
+that is privileged, confidential, or otherwise protected from =
+disclosure. Distribution or copying of this e-mail, or the information =
+contained herein, to anyone other than the intended recipient is =
+prohibited.
 
 
