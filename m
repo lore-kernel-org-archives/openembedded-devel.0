@@ -1,24 +1,25 @@
-Received: from [81.228.11.98] (helo=pne-smtpout1-sn1.fre.skanova.net)
+Received: from [81.228.11.159] (helo=pne-smtpout2-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1MdnSr-0000f5-8T
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MdnXd-0000oL-21
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Aug 2009 17:52:41 +0200
+	Wed, 19 Aug 2009 17:57:37 +0200
 Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	pne-smtpout2-sn1.fre.skanova.net (7.3.140.3) (authenticated as
 	u82406562)
-	id 4A683C780026541E for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Aug 2009 17:35:28 +0200
-Message-ID: <4A8C1BBF.3060209@atmel.com>
-Date: Wed, 19 Aug 2009 17:35:27 +0200
+	id 4A2D61FD0060C8EA for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Aug 2009 17:40:24 +0200
+Message-ID: <4A8C1CE7.1050106@atmel.com>
+Date: Wed, 19 Aug 2009 17:40:23 +0200
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 Organization: Atmel Nordic AB
 User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4A8516BF.9080405@atmel.com>	<h63h7v$8pk$1@ger.gmane.org><4A8581D9.9010205@atmel.com><1250264545.12282.1271.camel@mill.internal.reciva.com><4A85C292.9030605@atmel.com><1250284105.4215.144.camel@lenovo.internal.reciva.com>	<1250377221.5033.16.camel@utx.utx.cz>
-	<7241d4b698883690f3f63d1c022d63fe.marcin@juszkiewicz.com.pl>
-In-Reply-To: <7241d4b698883690f3f63d1c022d63fe.marcin@juszkiewicz.com.pl>
-Subject: Re: No graphic when loading "x11-gpe-image"
+References: <1250551346.5083.3@zaurus>
+	<1250591188.3555.5.camel@utx.utx.cz>	<4A8AC753.8000008@atmel.com>
+	<1250620560.4550.17.camel@utx.utx.cz>
+In-Reply-To: <1250620560.4550.17.camel@utx.utx.cz>
+Subject: Re: xtscal fails + other Xorg init problems.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,56 +33,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2009 15:52:41 -0000
+X-List-Received-Date: Wed, 19 Aug 2009 15:57:37 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: Quoted-Printable
 
-marcin@juszkiewicz.com.pl skrev:
-> Dnia Sun, 16 Aug 2009 01:00:21 +0200 napisano:
+Stanislav Brabec skrev:
+> Ulf Samuelsson wrote:
+>> Stanislav Brabec skrev:
+>>> Stanislav Brabec wrote:
 >=20
->> Phil Blundell p=C3=AD=C5=A1e v P=C3=A1 14. 08. 2009 v 22:08 +0100:
->>> On Fri, 2009-08-14 at 22:01 +0200, Ulf Samuelsson wrote:
->>>> The full command line is:
->>>> exec Xorg -br -pn  -dpi 100 -rgba bgr
->> -screen 240x320 :0 -noreset
->>>> It complains about an unrecognized option "-rgba"
->>> Yeah, that looks like the startup scripts are trying to pass kdrive
->>> options
->> to Xorg.  I guess you need to either install kdrive, or patch
->>> the scripts to do the right thing for Xorg.
->> Yes, this script is broken - it checks, whether Xorg is installed. If =
-it
->> is, but the
->> platform was originally designed for kdrive, it breaks.
->>
->> There was a thread "?[RFC] Xserver-common 1.30" about it few weeks ago=
-=2E
->>
->> Maybe a new platform specific package with a working
->> xorg.conf will be useful.
+>>> It didn't work for kdrive based builds, because kdrive recipe wants
+>>> libxcalibrate, but xtscal wants xcalibrate. One dependency chain
+>>> overwrites the another with undefined result depending on the build
+>>> order.
+>> What is the difference between "xserver-kdrive-1300" and
+>> "kdrive based builds" ?
 >=20
-> There is a xorg.conf for at91sam9263ek present in metadata - you need x=
-server-xorg-conf package installed with xserver-xorg 1.6.1 and evdev driv=
-er. No keyboard/mouse/tslib drivers are needed - evdev handles touchscree=
-n on at91sam923ek just fine (even do not require calibration).
+> Just a package selection for particular target that causes different
+> order of overwriting of staged files.
 >=20
-> If there will be a problem with start then use xserver-common 1.30 inst=
-ead of 1.25 (default one).
+>> Do you mean it does not work with later revisions of xserver-kdrive?
 >=20
+> xserver-kdrive-1300 is the oldest version in the tree. If=EF=BB=BF the =
+latest
+> libxcalibrate works with it, I guess that it will work with any newer
+> version.
+>=20
+>> Should we try to focus on xorg-xserver-1.6.1 which seems to have kdriv=
+e
+>> support?
+>=20
+> Are you sure that it is "kdrive support" and not just "kdrive in the
+> source tree", as it was in past (i. e. deprecated and without support)?
 >=20
 
+No, I am on really deep water here.
+This weekend was the first time I ever looked at X-Windows source.
+Thankfully there are competent people here to answer questions.
+Phil Blundell seems to have written most of the files I looked at!
 
-I have it running after some time, and I have resolve all the issues,
-with the SAM9263EK except the touchscreen.
 
-It is not fully integrated with my openembedded branch yet.
-I put another jffs2 filesystem in the upper 128 MB
-and patch up the stuff built by embedded by running a script
-right after login which mounts the other filesystem
-and copies over a lot of stuff.
+> Well, anything newer than ancient xserver-kdrive-1300 working on
+> machines like spitz would be a win.
+>=20
+> With a highly modularized Xorg, upgrade to full Xorg may be an option,
+> as it could support modern desktop extensions.
+>=20
+> It also seems, that Xorg has much better performance in rotated fbdev
+> driver than xserver-kdrive-1300.
+>=20
+> I was even able to run Xorg with OpenGL (Mesa emulated) on my Zaurus
+> (5-8FPS in glxgears).
+>=20
+> Problems that block upgrage:
+>=20
+> - broken keyboard driver (keyboard map loads only sometimes, some keys
+> or autorepeat doesn't load, kdrive > 1.3.0.0)
 
-Will integrate this into openembedded eventually.
+I think I saw that Autorepeat requires an extension which has been remove=
+d
 
+> - support for different orientation of touchscreen and display (both
+> kdrive > 1.3.0.0 and xorg)
+> - working XRandR in fbdev driver (xorg, last time I tested it, just a
+> code for runtime rotation was missing, rotation itself was already
+> implemented)
+>=20
+>=20
+> _______________________________________________________________________=
+_
+> Stanislav Brabec
+> http://www.penguin.cz/~utx/zaurus
 >=20
 >=20
 > _______________________________________________
