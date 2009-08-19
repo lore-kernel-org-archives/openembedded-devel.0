@@ -1,32 +1,27 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.18.0.180] (helo=exprod5og105.obsmtp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MdktU-00033R-N3
-	for openembedded-devel@openembedded.org; Wed, 19 Aug 2009 15:08:02 +0200
-Received: (qmail 23642 invoked by uid 813007); 19 Aug 2009 12:50:49 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO host4.kei.pl)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 19 Aug 2009 12:50:49 -0000
-References: <4A8516BF.9080405@atmel.com>
-	<h63h7v$8pk$1@ger.gmane.org><4A8581D9.9010205@atmel.com><1250264545.12282.1271.camel@mill.internal.reciva.com><4A85C292.9030605@atmel.com><1250284105.4215.144.camel@lenovo.internal.reciva.com>
-	<1250377221.5033.16.camel@utx.utx.cz>
-In-Reply-To: <1250377221.5033.16.camel@utx.utx.cz>
-Received: from 83.22.159.1
-	(Poczta WWW KEI.pl authenticated user marcin@juszkiewicz.com.pl)
-	by poczta813.kei.pl with HTTP; Wed, 19 Aug 2009 14:50:49 +0200 (CEST)
-Message-ID: <7241d4b698883690f3f63d1c022d63fe.marcin@juszkiewicz.com.pl>
-From: <marcin@juszkiewicz.com.pl>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 19 Aug 2009 14:50:49 +0200
+	(envelope-from <martyn.welch@gefanuc.com>) id 1MdlCT-0001AP-Hy
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 19 Aug 2009 15:27:39 +0200
+Received: from source ([12.71.149.1]) (using TLSv1) by
+	exprod5ob105.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKSov5wiDr5Hm2T4sCmvq//ilq+Z106IwO@postini.com;
+	Wed, 19 Aug 2009 06:10:27 PDT
+Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
+	by Cinmlip09.e2k.ad.ge.com with ESMTP; 19 Aug 2009 09:10:25 -0400
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by cinmlip01.e2k.ad.ge.com with ESMTP; 19 Aug 2009 09:10:25 -0400
+Message-ID: <4A8BF9FB.9040003@gefanuc.com>
+Date: Wed, 19 Aug 2009 14:11:23 +0100
+From: Martyn Welch <martyn.welch@gefanuc.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
 MIME-Version: 1.0
-X-Priority: 3
-X-Mailer-Version: 1.0
-X-Mailer: Poczta WWW KEI.pl
-X-Organisation: KEI Provider
-X-User-IP: 83.22.159.1
-X-Http-User-Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.5; pl;
-	rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2
-Subject: Re: No graphic when loading "x11-gpe-image"
+To: openembedded-devel@lists.openembedded.org
+References: <1250260162-9541-1-git-send-email-oe-devel@rolf.leggewie.biz>	<b6ebd0a50908181024p6ad06490q108638a35c0dca82@mail.gmail.com>	<4A8BB046.9030206@gefanuc.com>
+	<h6gr4a$kj6$1@ger.gmane.org>
+In-Reply-To: <h6gr4a$kj6$1@ger.gmane.org>
+Subject: Re: [PATCH] base.bbclass: introduce OE source mirror network as last resort for do_fetch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,56 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Aug 2009 13:08:05 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Aug 2009 13:27:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia Sun, 16 Aug 2009 01:00:21 +0200 napisano:
+Rolf Leggewie wrote:
+> Martyn Welch wrote:
+>   
+>> On that note we just ran a "quick" test on OE
+>>     
+>
+> Thanks for testing.  Did you test this against the stable or the dev branch?
+>
+>   
+I believe it was the stable branch,
 
-> Phil Blundell p=C3=AD=
-=C5=A1e v P=C3=A1 14. 08. 2009 v 22:08 +0100:
-> > On Fri, 2009-08-14 at 22=
-:01 +0200, Ulf Samuelsson wrote:
-> > > The full command line is:
-> > > ex=
-ec Xorg -br -pn  -dpi 100 -rgba bgr
-> -screen 240x320 :0 -noreset
-> > >=
-=20
-> > > It complains about an unrecognized option "-rgba"
-> >=20
-> > Y=
-eah, that looks like the startup scripts are trying to pass kdrive
-> > opt=
-ions
-> to Xorg.  I guess you need to either install kdrive, or patch
-> > =
-the scripts to do the right thing for Xorg.
->=20
-> Yes, this script is br=
-oken - it checks, whether Xorg is installed. If it
-> is, but the
-> platfo=
-rm was originally designed for kdrive, it breaks.
->=20
-> There was a thre=
-ad "?[RFC] Xserver-common 1.30" about it few weeks ago.
->=20
-> Maybe a ne=
-w platform specific package with a working
-> xorg.conf will be useful.
+Martyn
 
-=
-There is a xorg.conf for at91sam9263ek present in metadata - you need xserv=
-er-xorg-conf package installed with xserver-xorg 1.6.1 and evdev driver. No=
- keyboard/mouse/tslib drivers are needed - evdev handles touchscreen on at9=
-1sam923ek just fine (even do not require calibration).
-
-If there will be =
-a problem with start then use xserver-common 1.30 instead of 1.25 (default =
-one).
-
-
-
+-- 
+Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
+GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
+Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
+Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 927559189
 
 
