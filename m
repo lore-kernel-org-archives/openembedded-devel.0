@@ -1,28 +1,24 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1Me0Vs-0003Sw-9L
-	for openembedded-devel@openembedded.org; Thu, 20 Aug 2009 07:48:40 +0200
-Received: (qmail 19839 invoked from network); 20 Aug 2009 05:31:22 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 19 Aug 2009 22:31:22 -0700
-Date: Wed, 19 Aug 2009 22:31:23 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <holger+oe@freyther.de>) id 1Me0nf-00042f-N2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Aug 2009 08:07:08 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 34ACB1B10C0B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 05:53:42 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090820053123.GD4952@smtp.west.cox.net>
-References: <20090814215138.GB31011@gmail.com>
-	<20090815022703.GH14883@smtp.west.cox.net>
-	<19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
-	<20090817234049.GH2227@smtp.west.cox.net>
-	<19c1b8a90908172329p55250179od552cd94fa4cbff5@mail.gmail.com>
-	<20090818154440.GQ2227@smtp.west.cox.net>
-	<20090818212827.GA26614@gmail.com>
-	<20090818232002.GZ2227@smtp.west.cox.net>
-	<19c1b8a90908181648nb43120bg978baa4ac0faa2cb@mail.gmail.com>
+Date: Thu, 20 Aug 2009 07:49:07 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
+	<1250738680-20274-5-git-send-email-clarson@mvista.com>
+	<1250738680-20274-6-git-send-email-clarson@mvista.com>
+In-Reply-To: <1250738680-20274-6-git-send-email-clarson@mvista.com>
 MIME-Version: 1.0
-In-Reply-To: <19c1b8a90908181648nb43120bg978baa4ac0faa2cb@mail.gmail.com>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
+Message-Id: <200908200749.07494.holger+oe@freyther.de>
+Subject: Re: [PATCH] bitbake.conf: Kill CCACHE. Implicit, automatic use of things which can fail is bad.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,22 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 05:48:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Aug 2009 06:07:14 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 18, 2009 at 04:48:20PM -0700, Khem Raj wrote:
-[snip]
-> > So are we on the same page again, micro/minimal-uclibc can go away and
-> > micro/minimal can ?= LIBC? :)
-> 
-> no. LIBC provides other packages too which is different for uclibc
-> its same for glibc and eglibc so having same for glibc and eglibc is ok but not
-> for uclibc
+On Thursday 20 August 2009 05:24:37 Chris Larson wrote:
+> To re-enable, set CCACHE = "ccache ".
+>
+> Signed-off-by: Chris Larson <clarson@mvista.com>
 
-You've lost me, again.  What does uclibc.inc not set correct for uclibc?
+Could you elaborate on the need of that? Which platforms do you deal with that 
+break due the usage of ccache?
 
--- 
-Tom Rini
+And technically I think you should make it CCACHE = "", out of legacy I think 
+we can not really remove keys from bitbake.conf
 
 
