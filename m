@@ -1,22 +1,21 @@
 Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1MdyYN-0003jS-H2
+	(envelope-from <clarson@mvista.com>) id 1MdyYN-0003jQ-1J
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 05:43:10 +0200
+	Thu, 20 Aug 2009 05:43:09 +0200
 Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
 	by hermes.mvista.com (Postfix) with ESMTP
-	id AB0A91B7A0; Wed, 19 Aug 2009 20:25:50 -0700 (PDT)
+	id E3FCC1B79E; Wed, 19 Aug 2009 20:25:49 -0700 (PDT)
 From: Chris Larson <clarson@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Aug 2009 20:24:36 -0700
-Message-Id: <1250738680-20274-5-git-send-email-clarson@mvista.com>
+Date: Wed, 19 Aug 2009 20:24:34 -0700
+Message-Id: <1250738680-20274-3-git-send-email-clarson@mvista.com>
 X-Mailer: git-send-email 1.6.0
-In-Reply-To: <1250738680-20274-4-git-send-email-clarson@mvista.com>
+In-Reply-To: <1250738680-20274-2-git-send-email-clarson@mvista.com>
 References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
 	<1250738680-20274-2-git-send-email-clarson@mvista.com>
-	<1250738680-20274-3-git-send-email-clarson@mvista.com>
-	<1250738680-20274-4-git-send-email-clarson@mvista.com>
-Subject: [PATCH] kernel.bbclass: Install & package symvers as /boot/Module.symvers-<ver>.
+Cc: Dale Farnsworth <dfarnsworth@mvista.com>
+Subject: [PATCH] patch.bbclass: Add "git" patchtool mechanism, which uses git-apply
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,32 +31,64 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 20 Aug 2009 03:43:14 -0000
 
+From: Dale Farnsworth <dfarnsworth@mvista.com>
+
+It can be selected by setting PATCHTOOL = "git".
+
+This is useful because git-apply honors the permissions information
+produced by git-format-patch.
+
+Signed-off-by: Dale Farnsworth <dfarnsworth@mvista.com>
 Signed-off-by: Chris Larson <clarson@mvista.com>
 ---
- classes/kernel.bbclass |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ classes/patch.bbclass |   20 ++++++++++++++++++++
+ 1 files changed, 20 insertions(+), 0 deletions(-)
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 2947d4d..a8b2b0d 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -179,6 +179,7 @@ kernel_do_install() {
- 	install -m 0644 System.map ${D}/boot/System.map-${KERNEL_VERSION}
- 	install -m 0644 .config ${D}/boot/config-${KERNEL_VERSION}
- 	install -m 0644 vmlinux ${D}/boot/vmlinux-${KERNEL_VERSION}
-+	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/boot/Module.symvers-${KERNEL_VERSION}
- 	install -d ${D}/etc/modutils
- 	if [ "${KERNEL_MAJOR_VERSION}" = "2.6" ]; then
- 		install -d ${D}/etc/modprobe.d
-@@ -229,7 +230,7 @@ EXPORT_FUNCTIONS do_compile do_install do_stage do_configure
- PACKAGES = "kernel kernel-base kernel-image kernel-dev kernel-vmlinux"
- FILES = ""
- FILES_kernel-image = "/boot/${KERNEL_IMAGETYPE}*"
--FILES_kernel-dev = "/boot/System.map* /boot/config*"
-+FILES_kernel-dev = "/boot/System.map* /boot/Module.symvers* /boot/config*"
- FILES_kernel-vmlinux = "/boot/vmlinux*"
- RDEPENDS_kernel = "kernel-base"
- RRECOMMENDS_kernel-module-hostap-cs += '${@base_version_less_or_equal("KERNEL_VERSION", "2.6.17", "", "apm-wifi-suspendfix", d)}'
+diff --git a/classes/patch.bbclass b/classes/patch.bbclass
+index 2aa63c0..650d9c1 100644
+--- a/classes/patch.bbclass
++++ b/classes/patch.bbclass
+@@ -189,6 +189,24 @@ def patch_init(d):
+ 		def Clean(self):
+ 			""""""
+ 
++	class GitApplyTree(PatchTree):
++		def __init__(self, dir, d):
++			PatchTree.__init__(self, dir, d)
++
++		def _applypatch(self, patch, force = False, reverse = False, run = True):
++			shellcmd = ["git", "--git-dir=.", "apply", "-p%s" % patch['strippath']]
++
++			if reverse:
++				shellcmd.append('-R')
++
++			shellcmd.append(patch['file'])
++
++			if not run:
++				return "sh" + "-c" + " ".join(shellcmd)
++
++			return runcmd(["sh", "-c", " ".join(shellcmd)], self.dir)
++
++
+ 	class QuiltTree(PatchSet):
+ 		def _runcmd(self, args, run = True):
+ 			quiltrc = bb.data.getVar('QUILTRCFILE', self.d, 1)
+@@ -424,6 +442,7 @@ def patch_init(d):
+ 	g["PatchSet"] = PatchSet
+ 	g["PatchTree"] = PatchTree
+ 	g["QuiltTree"] = QuiltTree
++	g["GitApplyTree"] = GitApplyTree
+ 	g["Resolver"] = Resolver
+ 	g["UserResolver"] = UserResolver
+ 	g["NOOPResolver"] = NOOPResolver
+@@ -449,6 +468,7 @@ python patch_do_patch() {
+ 	patchsetmap = {
+ 		"patch": PatchTree,
+ 		"quilt": QuiltTree,
++		"git": GitApplyTree,
+ 	}
+ 
+ 	cls = patchsetmap[bb.data.getVar('PATCHTOOL', d, 1) or 'quilt']
 -- 
 1.6.0
 
