@@ -1,29 +1,28 @@
-Received: from [206.46.173.7] (helo=vms173007pub.verizon.net)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MdzBR-0002Ur-8G
+	(envelope-from <msmith@cbnco.com>) id 1MdzCX-0002b1-Pf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 06:23:29 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KON007PEQ26WUJ2@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	19 Aug 2009 23:06:06 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D294C14AF5F; Thu,
-	20 Aug 2009 00:06:05 -0400 (EDT)
-Date: Thu, 20 Aug 2009 00:06:05 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 20 Aug 2009 06:24:37 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id E96FC52D9CF
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 03043-01 for <openembedded-devel@lists.openembedded.org>; 
+	Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id C3D6A4FA003
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
+Date: Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090820040605.GF32010@denix.org>
-References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
-	<1250738680-20274-2-git-send-email-clarson@mvista.com>
-	<1250738680-20274-3-git-send-email-clarson@mvista.com>
-	<1250738680-20274-4-git-send-email-clarson@mvista.com>
-	<1250738680-20274-5-git-send-email-clarson@mvista.com>
-	<1250738680-20274-6-git-send-email-clarson@mvista.com>
-MIME-version: 1.0
-In-reply-to: <1250738680-20274-6-git-send-email-clarson@mvista.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] bitbake.conf: Kill CCACHE. Implicit, automatic	use of things which can fail is bad.
+Message-ID: <Pine.LNX.4.64.0908200004070.3621@juice.ott.cti.com>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Patchwork XML-RPC interface
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,42 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 04:23:29 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 20 Aug 2009 04:24:38 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Wed, Aug 19, 2009 at 08:24:37PM -0700, Chris Larson wrote:
-> To re-enable, set CCACHE = "ccache ".
-> 
-> Signed-off-by: Chris Larson <clarson@mvista.com>
+Hi,
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Is there any chance of getting the XML-RPC interface enabled in Patchwork?
 
-CCACHE-related issues are one of the most commonly reported...
+It'd take "ENABLE_XMLRPC = True" in local_settings.py.
 
-> ---
->  conf/bitbake.conf |    1 -
->  1 files changed, 0 insertions(+), 1 deletions(-)
-> 
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index c4af34e..0b35ea8 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -390,7 +390,6 @@ export PATH
->  # Build utility info.
->  ##################################################################
->  
-> -CCACHE = "${@bb.which(bb.data.getVar('PATH', d, 1), 'ccache') and 'ccache '}"
->  TOOLCHAIN_OPTIONS = ""
->  
->  export CC = "${CCACHE}${HOST_PREFIX}gcc ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
-> -- 
-> 1.6.0
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I'm thinking it might be possible to troll the last month or so of 
+commits, generate patchwork hashes for each, and then use the XML-RPC 
+interface to search by hash and mark anything matching as Applied if it's 
+not already.
+
+Mike
 
 
