@@ -1,31 +1,20 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MdzNO-00038Y-Qp
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 06:35:52 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KON00AQ6QMXQ1QF@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	19 Aug 2009 23:18:34 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8B95D14AF5F; Thu,
-	20 Aug 2009 00:18:33 -0400 (EDT)
-Date: Thu, 20 Aug 2009 00:18:33 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1MdzS4-0003L3-SS
+	for openembedded-devel@openembedded.org; Thu, 20 Aug 2009 06:40:41 +0200
+Received: (qmail 18850 invoked from network); 20 Aug 2009 04:23:23 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 19 Aug 2009 21:23:23 -0700
+Date: Wed, 19 Aug 2009 21:23:25 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090820041833.GG32010@denix.org>
-References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
-	<1250738680-20274-2-git-send-email-clarson@mvista.com>
-	<1250738680-20274-3-git-send-email-clarson@mvista.com>
-	<1250738680-20274-4-git-send-email-clarson@mvista.com>
-	<1250738680-20274-5-git-send-email-clarson@mvista.com>
-	<1250738680-20274-6-git-send-email-clarson@mvista.com>
-	<1250738680-20274-7-git-send-email-clarson@mvista.com>
-	<1250738680-20274-8-git-send-email-clarson@mvista.com>
-MIME-version: 1.0
-In-reply-to: <1250738680-20274-8-git-send-email-clarson@mvista.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] bitbake.conf: BUILD_LDFLAGS: use $ORIGIN in the	-rpath rather than a full path.
+Message-ID: <20090820042324.GC4952@smtp.west.cox.net>
+References: <4A8C1EB7.4050500@atmel.com> <20090820033157.GB32010@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20090820033157.GB32010@denix.org>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: fbv neutered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,40 +28,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 04:35:55 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 20 Aug 2009 04:40:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Aug 19, 2009 at 08:24:39PM -0700, Chris Larson wrote:
-> Signed-off-by: Chris Larson <clarson@mvista.com>
+On Wed, Aug 19, 2009 at 11:31:57PM -0400, Denys Dmytriyenko wrote:
 
-Hmm, interesting. I didn't know about $ORIGIN...
-But what is the benefit here? To be able to move $TMPDIR?
+> On Wed, Aug 19, 2009 at 05:48:07PM +0200, Ulf Samuelsson wrote:
+> > I added "fbv" "frame buffer viewer" to the file system,
+> > and happily tried to watch my Mustang rental car.
+> > 
+> > -- fbv did not recognize the file format.
+> > 
+> > Generated a nice bmp file and tried this...
+> > 
+> > --  fbv did not recognize the file format.
+> > 
+> > I then checked the recipe:
+> > 
+> > 
+> > ---------------------------------
+> > 	CC="${CC}" ./configure --without-libungif --without-bmp \
+> > 		--without-libjpeg
+> > ---------------------------------
+> > 
+> > Beats me why someone would want to have it built this way.
 
-> ---
->  conf/bitbake.conf |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
+Yes, I pushed it that way as I only needed it as a png viewer (we needed
+a simple "can we display graphics?" test program) and someone on IRC
+also only needed PNGs, I guess.
+
+Of course, it'd be pretty easy to add ungif/bmp/jpeg to the dependancies
+list and recompile if you wanted more support.
+
+> > Is there another application one should use?
 > 
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 371bf8e..9cb6039 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -447,7 +447,7 @@ export SDK_CXXFLAGS = "${SDK_CFLAGS} -fpermissive"
->  
->  export BUILD_LDFLAGS = "-L${STAGING_LIBDIR_NATIVE} \
->                          -Wl,-rpath-link,${STAGING_LIBDIR_NATIVE} \
-> -                        -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-O1"
-> +                        -Wl,-rpath,\\\$\$ORIGIN/${@base_path_relative(d.getVar('STAGING_BINDIR_NATIVE', 1), d.getVar('STAGING_LIBDIR_NATIVE', 1))} -Wl,-O1"
->  
->  export LDFLAGS = "${TARGET_LDFLAGS}"
->  export TARGET_LDFLAGS = "-L${STAGING_DIR_TARGET}${layout_libdir} \
-> -- 
-> 1.6.0
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Try fbida - worked for me just fine
+
+It didn't when I tried, way way back when.  It also wanted way more
+stuff :)
+
+-- 
+Tom Rini
 
 
