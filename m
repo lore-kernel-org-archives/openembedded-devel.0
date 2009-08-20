@@ -1,23 +1,17 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MdxMj-0004cR-CQ
+	(envelope-from <clarson@mvista.com>) id 1MdyYM-0003jO-An
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 04:27:01 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 4CF8C1B10C09
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2009 02:13:40 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu, 20 Aug 2009 05:43:07 +0200
+Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
+	by hermes.mvista.com (Postfix) with ESMTP
+	id D1B581B2D1; Wed, 19 Aug 2009 20:25:48 -0700 (PDT)
+From: Chris Larson <clarson@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2009 04:09:01 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <4A84650F.1080902@linuxbj.com> <h6hagb$afd$1@ger.gmane.org>
-	<4A8CA8B3.2090300@linuxbj.com>
-In-Reply-To: <4A8CA8B3.2090300@linuxbj.com>
-MIME-Version: 1.0
-Message-Id: <200908200409.01482.holger+oe@freyther.de>
-Subject: Re: patch for compcache recipe
+Date: Wed, 19 Aug 2009 20:24:32 -0700
+Message-Id: <1250738680-20274-1-git-send-email-clarson@mvista.com>
+X-Mailer: git-send-email 1.6.0
+Subject: [PATCH] cross.bbclass: keep TARGET_SYS & TARGET_PREFIX independent.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,29 +25,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 02:27:01 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 20 Aug 2009 03:43:14 -0000
 
-On Thursday 20 August 2009 03:36:51 Ming Chow =E5=91=A8=E6=98=8E wrote:
-> Signed-off-by: Zhou Ming <chow.ming@linuxbj.com>
->
-> Thank you for your kind advice. 4 commits due to the modifications.
+Signed-off-by: Chris Larson <clarson@mvista.com>
+---
+ classes/cross.bbclass |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
 
-Great! Our wishes might sound a bit weird... quite you squash them in one=20
-commit with one good commit message and add a Signed-off-by to the end of t=
-he=20
-commit?
-
-The reason is that patchwork does not like more than one patch in a mail, a=
-nd=20
-I love to use git-am to apply your patch and having one patch is more effic=
-ient=20
-for me.
-
-thanks a lot
-	z.
+diff --git a/classes/cross.bbclass b/classes/cross.bbclass
+index 7debde6..72a0fb7 100644
+--- a/classes/cross.bbclass
++++ b/classes/cross.bbclass
+@@ -2,6 +2,11 @@
+ # no need for them to be a direct target of 'world'
+ EXCLUDE_FROM_WORLD = "1"
+ 
++# In order to keep TARGET_PREFIX decoupled from TARGET_SYS, let's force the
++# binary names to match the former, rather than relying on autoconf's implicit
++# prefixing based on the latter.
++EXTRA_OECONF_append = " --program-prefix=${TARGET_PREFIX}"
++
+ # Save PACKAGE_ARCH before changing HOST_ARCH
+ OLD_PACKAGE_ARCH := "${PACKAGE_ARCH}"
+ PACKAGE_ARCH = "${OLD_PACKAGE_ARCH}"
+-- 
+1.6.0
 
 
 
