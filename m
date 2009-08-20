@@ -1,22 +1,17 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MeDXM-000123-LP
-	for openembedded-devel@openembedded.org; Thu, 20 Aug 2009 21:43:04 +0200
-Received: (qmail 20774 invoked by uid 813007); 20 Aug 2009 19:25:44 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 20 Aug 2009 19:25:44 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <clarson@mvista.com>) id 1MeDd1-00018l-Kv
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Aug 2009 21:48:55 +0200
+Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
+	by hermes.mvista.com (Postfix) with ESMTP
+	id E705C1B32A; Thu, 20 Aug 2009 12:31:33 -0700 (PDT)
+From: Chris Larson <clarson@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2009 21:25:42 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc5-00256-g8e6bcae; KDE/4.3.0; x86_64; ;
-	)
-References: <4A89A884.6030904@techworks.ie> <4A8A697D.9080105@dresearch.de>
-In-Reply-To: <4A8A697D.9080105@dresearch.de>
-MIME-Version: 1.0
-Message-Id: <200908202125.43641.marcin@juszkiewicz.com.pl>
-Subject: Re: Documentation update about machine conf files
+Date: Thu, 20 Aug 2009 12:30:18 -0700
+Message-Id: <1250796618-4437-1-git-send-email-clarson@mvista.com>
+X-Mailer: git-send-email 1.6.1.rc3.354.g332d31
+Subject: [PATCH] distutils-common-base.bbclass: only raise missing python-native error if python-native isn't in DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,29 +25,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 19:43:04 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Aug 2009 19:48:55 -0000
 
+Signed-off-by: Chris Larson <clarson@mvista.com>
+---
+ classes/distutils-common-base.bbclass |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-> I would be really happy about an index of all variables usable in the
-> recipes together with a desciption or a reference to it. I would
-> prefer such an index in the wiki, but manual or documentation.conf
-> would be fine too.
-
-Something like that you mean?
-
-http://pokylinux.org/doc/poky-handbook.html#ref-variables-glossary
-
-Poky manual license do not allows to copy from it to OE one ;(
-
-Regards, 
+diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-common-base.bbclass
+index 9ca392b..01bf9ea 100644
+--- a/classes/distutils-common-base.bbclass
++++ b/classes/distutils-common-base.bbclass
+@@ -8,7 +8,9 @@ def python_dir(d):
+ 	staging_incdir = bb.data.getVar( "STAGING_INCDIR", d, 1 )
+ 	for majmin in "2.6 2.5 2.4 2.3".split():
+ 		if os.path.exists( "%s/python%s" % ( staging_incdir, majmin ) ): return "python%s" % majmin
+-	raise "No Python in STAGING_INCDIR. Forgot to build python-native ?"
++	if not "python-native" in bb.data.getVar( "DEPENDS", d, 1 ).split():
++		raise "No Python in STAGING_INCDIR. Forgot to build python-native ?"
++	return "INVALID"
+ 
+ PYTHON_DIR = "${@python_dir(d)}"
+ 
 -- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+1.6.1.rc3.354.g332d31
 
 
 
