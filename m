@@ -1,22 +1,24 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Mdyaq-0003mv-2D
+	(envelope-from <denis@denix.org>) id 1Mdyem-0003sl-9e
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 05:45:41 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
+	Thu, 20 Aug 2009 05:49:45 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KON00J8TOAQFU84@vms173019.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KON000DFOH95IU0@vms173017.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Wed,
-	19 Aug 2009 22:28:08 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6B8CF14AF5F; Wed,
-	19 Aug 2009 23:28:02 -0400 (EDT)
-Date: Wed, 19 Aug 2009 23:28:02 -0400
+	19 Aug 2009 22:32:03 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 21D9814AF5F; Wed,
+	19 Aug 2009 23:31:57 -0400 (EDT)
+Date: Wed, 19 Aug 2009 23:31:57 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090820032802.GA32010@denix.org>
+Message-id: <20090820033157.GB32010@denix.org>
+References: <4A8C1EB7.4050500@atmel.com>
 MIME-version: 1.0
+In-reply-to: <4A8C1EB7.4050500@atmel.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Use AUTOREV and have revision/commit number in package name?
+Subject: Re: fbv neutered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,35 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 03:45:42 -0000
+X-List-Received-Date: Thu, 20 Aug 2009 03:49:46 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-All,
+On Wed, Aug 19, 2009 at 05:48:07PM +0200, Ulf Samuelsson wrote:
+> I added "fbv" "frame buffer viewer" to the file system,
+> and happily tried to watch my Mustang rental car.
+> 
+> -- fbv did not recognize the file format.
+> 
+> Generated a nice bmp file and tried this...
+> 
+> --  fbv did not recognize the file format.
+> 
+> I then checked the recipe:
+> 
+> 
+> ---------------------------------
+> 	CC="${CC}" ./configure --without-libungif --without-bmp \
+> 		--without-libjpeg
+> ---------------------------------
+> 
+> Beats me why someone would want to have it built this way.
+> 
+> Is there another application one should use?
 
-I've been playing with AUTOREV for some time now and also asked this question 
-before on the IRC, but so far there seems to be no easy solution to the 
-problem in subject.
-
-Usually, when a package is built from an SCM repository, SRCREV is set to a 
-specific commit#/tag etc. And SRCREV is also usually referenced from PV (like 
-PV = "X.Y.Z-scmr${SRCREV}") to have the revision/commit number in the package 
-name, to easily track different builds.
-
-Now, when SRCREV = "${AUTOREV}", AUTOREV gets resolved into a Python function, 
-which does the magic of fetching the latest snapshot from a repository. But 
-now if PV contains references to SRCREV, it breaks (undesrandably), since 
-SRCREV gets resolved in do_fetch and PV needs to be resolved early on.
-
-Are there any standard ways to work around this limitation?
-
-I was thinking this maybe quite tricky, since the actual revision number used, 
-is not known until do_fetch runs the actual checkout, at which time changing 
-PV is too late, as temp/work is already created and so on. So, would it be 
-possible to hack one of the do_package tasks to add the actual revision/commit 
-number to a final package name, bypassing changing PV/PR?
-
-Any thoughts? Feel free to throw ideas. Thanks.
+Try fbida - worked for me just fine
 
 -- 
 Denys
