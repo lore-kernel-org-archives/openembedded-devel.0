@@ -1,22 +1,24 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [81.228.11.98] (helo=pne-smtpout1-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Me7wd-0006hy-0y
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1Me8pb-0005Rj-1W
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 15:44:47 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 2C7AC1B10C0C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2009 13:31:25 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2009 15:26:46 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <4A8D4947.5030108@gmail.com>
-In-Reply-To: <4A8D4947.5030108@gmail.com>
+	Thu, 20 Aug 2009 16:41:35 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout1-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A683C780028440A for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Aug 2009 16:24:15 +0200
+Message-ID: <4A8D5C8E.8030806@atmel.com>
+Date: Thu, 20 Aug 2009 16:24:14 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Message-Id: <200908201526.46349.holger+oe@freyther.de>
-Subject: Re: LPC3250, helloworld-image, configure: error: cannot run C compiled programs
+To: openembedded-devel@lists.openembedded.org
+References: <4A8C1EB7.4050500@atmel.com> <20090820033157.GB32010@denix.org>
+	<20090820042324.GC4952@smtp.west.cox.net>
+In-Reply-To: <20090820042324.GC4952@smtp.west.cox.net>
+Subject: Re: fbv neutered
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,29 +32,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 13:44:47 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
+X-List-Received-Date: Thu, 20 Aug 2009 14:41:35 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Thursday 20 August 2009 15:01:59 Dmitry Vinokurov wrote:
+Tom Rini skrev:
+> On Wed, Aug 19, 2009 at 11:31:57PM -0400, Denys Dmytriyenko wrote:
+> 
+>> On Wed, Aug 19, 2009 at 05:48:07PM +0200, Ulf Samuelsson wrote:
+>>> I added "fbv" "frame buffer viewer" to the file system,
+>>> and happily tried to watch my Mustang rental car.
+>>>
+>>> -- fbv did not recognize the file format.
+>>>
+>>> Generated a nice bmp file and tried this...
+>>>
+>>> --  fbv did not recognize the file format.
+>>>
+>>> I then checked the recipe:
+>>>
+>>>
+>>> ---------------------------------
+>>> 	CC="${CC}" ./configure --without-libungif --without-bmp \
+>>> 		--without-libjpeg
+>>> ---------------------------------
+>>>
+>>> Beats me why someone would want to have it built this way.
+> 
+> Yes, I pushed it that way as I only needed it as a png viewer (we needed
+> a simple "can we display graphics?" test program) and someone on IRC
+> also only needed PNGs, I guess.
+> 
+> Of course, it'd be pretty easy to add ungif/bmp/jpeg to the dependancies
+> list and recompile if you wanted more support.
+> 
 
-> By the way, I don't understand why bitbake build gcc-cross-initial when
-> I use external toolchain. Maybe I've configured something wrong and OE
-> tries to build it's own toolchain, but seems like config is correct
-> according to manual.
+Anyone mind if I make it the default?
+ungif breaks, so I might skip this for simplicity right now.
 
-To figure out why OE is building the toolchain you can do
 
-bitbake -g helloworld
+>>> Is there another application one should use?
+>> Try fbida - worked for me just fine
+> 
+> It didn't when I tried, way way back when.  It also wanted way more
+> stuff :)
+> 
 
-and then look at the generated depends.dot. Looking at slugos.inc you will 
-need to set more ASSUMED_PROVIDED or go the external-toolchain route (which 
-sadly has not much documentation...)
 
-z.
+-- 
+Best Regards
+Ulf Samuelsson
 
->
-> Thanks in advance.
 
 
