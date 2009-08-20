@@ -1,33 +1,28 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Me07n-0002W3-AY
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 07:23:47 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KON005SGSU7AFG1@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	20 Aug 2009 00:06:08 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 794E114AF5F; Thu,
-	20 Aug 2009 01:06:07 -0400 (EDT)
-Date: Thu, 20 Aug 2009 01:06:07 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <b6ebd0a50908192153i2dbd6a74ve0e4337d76e9a474@mail.gmail.com>
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <trini@embeddedalley.com>) id 1Me0Vs-0003Sw-9L
+	for openembedded-devel@openembedded.org; Thu, 20 Aug 2009 07:48:40 +0200
+Received: (qmail 19839 invoked from network); 20 Aug 2009 05:31:22 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 19 Aug 2009 22:31:22 -0700
+Date: Wed, 19 Aug 2009 22:31:23 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090820050607.GJ32010@denix.org>
-MIME-version: 1.0
-References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
-	<1250738680-20274-2-git-send-email-clarson@mvista.com>
-	<1250738680-20274-3-git-send-email-clarson@mvista.com>
-	<1250738680-20274-4-git-send-email-clarson@mvista.com>
-	<1250738680-20274-5-git-send-email-clarson@mvista.com>
-	<1250738680-20274-6-git-send-email-clarson@mvista.com>
-	<1250738680-20274-7-git-send-email-clarson@mvista.com>
-	<1250738680-20274-8-git-send-email-clarson@mvista.com>
-	<20090820041833.GG32010@denix.org>
-	<b6ebd0a50908192153i2dbd6a74ve0e4337d76e9a474@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] bitbake.conf: BUILD_LDFLAGS: use $ORIGIN in the	-rpath rather than a full path.
+Message-ID: <20090820053123.GD4952@smtp.west.cox.net>
+References: <20090814215138.GB31011@gmail.com>
+	<20090815022703.GH14883@smtp.west.cox.net>
+	<19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
+	<20090817234049.GH2227@smtp.west.cox.net>
+	<19c1b8a90908172329p55250179od552cd94fa4cbff5@mail.gmail.com>
+	<20090818154440.GQ2227@smtp.west.cox.net>
+	<20090818212827.GA26614@gmail.com>
+	<20090818232002.GZ2227@smtp.west.cox.net>
+	<19c1b8a90908181648nb43120bg978baa4ac0faa2cb@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <19c1b8a90908181648nb43120bg978baa4ac0faa2cb@mail.gmail.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,97 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 05:23:47 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
-Content-disposition: inline
+X-List-Received-Date: Thu, 20 Aug 2009 05:48:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Aug 19, 2009 at 09:53:49PM -0700, Chris Larson wrote:
-> Yeah, its one of many changes needed to get things relocatable enou=
-gh
-> to be able to use prebuilt binaries / packaged staging packages
-> amongst a group of developers, for example.  This is just one piece=
- of
-> the puzzle, of course.  Ideally, more open source projects would be
-> properly relocatable, and we wouldn't need so many hacks.  We ended=
- up
-> doing a lot of things to work around reloc issues in native/cross
-> recipes, for MVL6.  Everything from exporting a pile of new env var=
-s
-> to writing wrapper scripts and the like.. yech.  Still, it's a wort=
-hy
-> goal, and the benefits would be worthwhile, so I think we should st=
-art
-> taking the steps in that direction.
+On Tue, Aug 18, 2009 at 04:48:20PM -0700, Khem Raj wrote:
+[snip]
+> > So are we on the same page again, micro/minimal-uclibc can go away and
+> > micro/minimal can ?= LIBC? :)
+> 
+> no. LIBC provides other packages too which is different for uclibc
+> its same for glibc and eglibc so having same for glibc and eglibc is ok but not
+> for uclibc
 
-Ah, relocatable pstage - a worthy goal! :)
+You've lost me, again.  What does uclibc.inc not set correct for uclibc?
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
-
-> On Wed, Aug 19, 2009 at 9:18 PM, Denys Dmytriyenko<denis@denix.org>=
- wrote:
-> > On Wed, Aug 19, 2009 at 08:24:39PM -0700, Chris Larson wrote:
-> >> Signed-off-by: Chris Larson <clarson@mvista.com>
-> >
-> > Hmm, interesting. I didn't know about $ORIGIN...
-> > But what is the benefit here? To be able to move $TMPDIR?
-> >
-> >> ---
-> >> =A0conf/bitbake.conf | =A0 =A02 +-
-> >> =A01 files changed, 1 insertions(+), 1 deletions(-)
-> >>
-> >> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> >> index 371bf8e..9cb6039 100644
-> >> --- a/conf/bitbake.conf
-> >> +++ b/conf/bitbake.conf
-> >> @@ -447,7 +447,7 @@ export SDK_CXXFLAGS =3D "${SDK_CFLAGS} -fper=
-missive"
-> >>
-> >> =A0export BUILD_LDFLAGS =3D "-L${STAGING_LIBDIR_NATIVE} \
-> >> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0-Wl,-rpath-li=
-nk,${STAGING_LIBDIR_NATIVE} \
-> >> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0-Wl,-rpath,${ST=
-AGING_LIBDIR_NATIVE} -Wl,-O1"
-> >> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0-Wl,-rpath,\\\$=
-\$ORIGIN/${@base_path_relative(d.getVar('STAGING_BINDIR_NATIVE', 1), =
-d.getVar('STAGING_LIBDIR_NATIVE', 1))} -Wl,-O1"
-> >>
-> >> =A0export LDFLAGS =3D "${TARGET_LDFLAGS}"
-> >> =A0export TARGET_LDFLAGS =3D "-L${STAGING_DIR_TARGET}${layout_li=
-bdir} \
-> >> --
-> >> 1.6.0
-> >>
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded=
--devel
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-=
-devel
-> >
->=20
->=20
->=20
-> --=20
-> Chris Larson
-> clarson at kergoth dot com
-> clarson at mvista dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Maintainer - Tslib
-> Software Engineer
-> MontaVista Software, Inc.
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
-
+-- 
+Tom Rini
 
 
