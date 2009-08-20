@@ -1,26 +1,27 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Me3no-0002KF-C1
+	(envelope-from <dp@xora.org.uk>) id 1Me3yj-0008LA-Ns
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 11:19:27 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KOO001QS3QOBCD1@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	20 Aug 2009 04:01:37 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 54F1214AF5F; Thu,
-	20 Aug 2009 05:01:36 -0400 (EDT)
-Date: Thu, 20 Aug 2009 05:01:36 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 20 Aug 2009 11:30:46 +0200
+Received: by ewy21 with SMTP id 21so4879293ewy.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 02:13:23 -0700 (PDT)
+Received: by 10.211.178.14 with SMTP id f14mr6883601ebp.10.1250759603696;
+	Thu, 20 Aug 2009 02:13:23 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-242-65.zone7.bethere.co.uk
+	[94.193.242.65])
+	by mx.google.com with ESMTPS id 10sm2030981eyd.54.2009.08.20.02.13.22
+	(version=SSLv3 cipher=RC4-MD5); Thu, 20 Aug 2009 02:13:23 -0700 (PDT)
+Message-ID: <4A8D13A1.1060007@xora.org.uk>
+Date: Thu, 20 Aug 2009 10:13:05 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.22 (Windows/20090605)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090820090136.GD459@denix.org>
 References: <20090820032802.GA32010@denix.org>
 	<200908200752.58210.holger+oe@freyther.de>
-	<20090820071052.GA459@denix.org> <h6j1rj$nvf$1@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <h6j1rj$nvf$1@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Use AUTOREV and have revision/commit number in package	name?
+In-Reply-To: <200908200752.58210.holger+oe@freyther.de>
+Subject: Re: Use AUTOREV and have revision/commit number in package name?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,55 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 09:19:41 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 20 Aug 2009 09:31:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Aug 20, 2009 at 10:34:58AM +0200, Koen Kooi wrote:
-> On 20-08-09 09:10, Denys Dmytriyenko wrote:
->> On Thu, Aug 20, 2009 at 07:52:58AM +0200, Holger Hans Peter Freyther 
->> wrote:
->>> On Thursday 20 August 2009 05:28:02 Denys Dmytriyenko wrote:
->>>> Now, when SRCREV = "${AUTOREV}", AUTOREV gets resolved into a Python
->>>> function, which does the magic of fetching the latest snapshot from a
->>>> repository. But now if PV contains references to SRCREV, it breaks
->>>> (undesrandably), since SRCREV gets resolved in do_fetch and PV needs to 
->>>> be
->>>> resolved early on.
->>>>
->>>> Are there any standard ways to work around this limitation?
->>>
->>> Check the mailinglist archives... Openmoko has deployed a solution that 
->>> has
->>> fixed that about 1 1/2 years ago.
->>>
->>> Short answer:
->>> 	- Do not put SRCREV into PV, e.g. create a new var called SRCPV
->>> 	- Populate SRCPV with something based on the SRCREV..
+Holger Hans Peter Freyther wrote:
+> On Thursday 20 August 2009 05:28:02 Denys Dmytriyenko wrote:
+>   
+>> All,
 >>
->> Ah, thanks! I was able to find your RFC message from last year on the 
->> Openmoko
->> mailing list:
->> http://markmail.org/message/v3s32gmxxqcaxpph
+>> I've been playing with AUTOREV for some time now and also asked this
+>> question before on the IRC, but so far there seems to be no easy solution
+>> to the problem in subject.
 >>
->> I'll give it a try. Thanks.
+>> Usually, when a package is built from an SCM repository, SRCREV is set to a
+>> specific commit#/tag etc. And SRCREV is also usually referenced from PV
+>> (like PV = "X.Y.Z-scmr${SRCREV}") to have the revision/commit number in the
+>> package name, to easily track different builds.
 >>
->> To be clear - it's not used in OE. While there is a single 
->> python-phoneutils
->> recipe, which references SRCPV, it is not being set anywhere, 
->> apparently...
+>> Now, when SRCREV = "${AUTOREV}", AUTOREV gets resolved into a Python
+>> function, which does the magic of fetching the latest snapshot from a
+>> repository. But now if PV contains references to SRCREV, it breaks
+>> (undesrandably), since SRCREV gets resolved in do_fetch and PV needs to be
+>> resolved early on.
+>>
+>> Are there any standard ways to work around this limitation?
+>>     
 >
-> Take a look at 
-> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=xora/angstrom-srcpv 
-> :)
+> Check the mailinglist archives... Openmoko has deployed a solution that has 
+> fixed that about 1 1/2 years ago.
+>
+> Short answer:
+> 	- Do not put SRCREV into PV, e.g. create a new var called SRCPV
+> 	- Populate SRCPV with something based on the SRCREV..
+>
+>
+>   
+Holger, I have been trying to maintain a branch with your SRCPV work in 
+it, xora/angstrom-srcpv in git. Unfortuneately as I only get to do it in 
+spare time I never seem to be able to quite keep up with OE mainline.
 
-Thanks! More specifically:
+But it would be good to start merging this into mainline, probably 
+package by package.
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?h=xora/angstrom-srcpv&id=453a13c7a68087895f4048410aba1a519ec99897
+Graeme
 
-Any ETA for the merge back to .dev? :)
-
--- 
-Denys
 
 
