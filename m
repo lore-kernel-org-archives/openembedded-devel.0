@@ -1,18 +1,23 @@
 Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Mdx1s-0006YM-C7
+	(envelope-from <holger+oe@freyther.de>) id 1MdxMj-0004cR-CQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 04:05:28 +0200
+	Thu, 20 Aug 2009 04:27:01 +0200
 Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
 	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id CCDFA1B10C09;
-	Thu, 20 Aug 2009 01:52:06 +0000 (UTC)
-To: openembedded-devel@lists.openembedded.org
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 4CF8C1B10C09
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 02:13:40 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-Date: Thu, 20 Aug 2009 03:43:28 +0200
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 20 Aug 2009 04:09:01 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <4A84650F.1080902@linuxbj.com> <h6hagb$afd$1@ger.gmane.org>
+	<4A8CA8B3.2090300@linuxbj.com>
+In-Reply-To: <4A8CA8B3.2090300@linuxbj.com>
 MIME-Version: 1.0
-Message-Id: <200908200343.29071.holger+oe@freyther.de>
-Subject: Re: [Gumstix-users] Problem passing environment variables
+Message-Id: <200908200409.01482.holger+oe@freyther.de>
+Subject: Re: patch for compcache recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -26,92 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 02:05:28 -0000
+X-List-Received-Date: Thu, 20 Aug 2009 02:27:01 -0000
 Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 19 August 2009 11:51:11 Stuart Gray wrote:
-> Hi,
+On Thursday 20 August 2009 03:36:51 Ming Chow =E5=91=A8=E6=98=8E wrote:
+> Signed-off-by: Zhou Ming <chow.ming@linuxbj.com>
 >
-> Here is what I had tried within the recipe to export:
->
-> do_configure_prepend () {
->         export WORKING_DIR=~/overo-oe/SA/trunk
->         export JSONHOME=$WORKING_DIR/JSON
->         export
-> QTSTATE_DIR=$WORKING_DIR/build_dependencies/qtstatemachine-1.1-opensource
-> }
->
-> My qmake files are as follows:
->
-> within my user.collections/recipes/dockamp/files I have the follwoing:
->
->
-> TEMPLATE =subdirs
-> COMFIG   +=ordered
-> SUBDIRS  = \
->     ~/overo-oe/SA/trunk/JSON/trunk \
->     ~/overo-oe/SA/trunk/dockamp
->
-> This is the first place where I would like to use the environment
-> variables.
->
-> Then within the ~/overo-oe/SA/trunk/dockamp/dockamp I have another
-> dockamp.pro file
->
-> TEMPLATE = app
-> TARGET = dockamp
->
-> include( $${WORKING_DIR}/settings.pri )
-> include( $${WORKING_DIR}/util/util.pri )
-> include( $${QTSTATE_DIR}/src/qtstatemachine.pri )
->
-> DEPENDPATH += \
->     . \
->     $$(WORKING_DIR)
->
-> INCLUDEPATH += \
->     . \
->     $$(WORKING_DIR)
->
->
-> When qmake gets to compiling my cpp files it fails as it cannot find the
-> .hpp file which is included, util.pri.
->
-> Previously I had hard coded the paths and it was compiling, but now it
-> fails no matter what I do. We had tried to add a do_compile as follows:
->
-> do_configure() {
->     oenote Running our qmake work dir is $WORKING_DIR
->     WORKING_DIR=${WORKING_DIR} JSONHOME=${JSONHOME}
-> QTSTATE_DIR=${QTSTATE_DIR} qmake2
-> ~/overo-oe/user.collection/recipes/dockamp/files/dockamp.pro
->     oenote Finished our qmake
-> }
->
-> But again we get the same result of .hpp files not found.
->
-> If the call to qmake2 can be made to pass the varaiable could you please
-> show the complete example. I am new to Linux and OE and it gets confusing
-> pretty quickly.
+> Thank you for your kind advice. 4 commits due to the modifications.
 
-I have no real answer just some hints regarding qmake. include() can fail and 
-there will be no error printed, variables are always a bit messy and I can't 
-remember if $(FOO) $$FOO, $$[FOO] or $FOO should be used.
+Great! Our wishes might sound a bit weird... quite you squash them in one=20
+commit with one good commit message and add a Signed-off-by to the end of t=
+he=20
+commit?
 
-My two hints for debugging this are:
-	- Use strace -f and run the "run.do_configure.OLD_PID" script by hand and see 
-which files qmake tries to open.
-	- Use "message" inside the pro files and see what gets printed when you run 
-the above run.do_configure script from $WORKDIR/temp/.
+The reason is that patchwork does not like more than one patch in a mail, a=
+nd=20
+I love to use git-am to apply your patch and having one patch is more effic=
+ient=20
+for me.
 
-
-
-your approach to change do_configure_prepend should work, you could skip that 
-by using: export WORKING_DIR = "some/dir" inside the bb file... this should 
-export variables too.
-
+thanks a lot
 	z.
+
 
 
