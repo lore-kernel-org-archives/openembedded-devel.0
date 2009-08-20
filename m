@@ -1,26 +1,22 @@
-Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
+Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1MdyYU-0003jY-72
+	(envelope-from <denis@denix.org>) id 1Mdyaq-0003mv-2D
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 05:43:16 +0200
-Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
-	by hermes.mvista.com (Postfix) with ESMTP
-	id CFBA41B7A4; Wed, 19 Aug 2009 20:25:51 -0700 (PDT)
-From: Chris Larson <clarson@mvista.com>
+	Thu, 20 Aug 2009 05:45:41 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KON00J8TOAQFU84@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	19 Aug 2009 22:28:08 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6B8CF14AF5F; Wed,
+	19 Aug 2009 23:28:02 -0400 (EDT)
+Date: Wed, 19 Aug 2009 23:28:02 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Aug 2009 20:24:40 -0700
-Message-Id: <1250738680-20274-9-git-send-email-clarson@mvista.com>
-X-Mailer: git-send-email 1.6.0
-In-Reply-To: <1250738680-20274-8-git-send-email-clarson@mvista.com>
-References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
-	<1250738680-20274-2-git-send-email-clarson@mvista.com>
-	<1250738680-20274-3-git-send-email-clarson@mvista.com>
-	<1250738680-20274-4-git-send-email-clarson@mvista.com>
-	<1250738680-20274-5-git-send-email-clarson@mvista.com>
-	<1250738680-20274-6-git-send-email-clarson@mvista.com>
-	<1250738680-20274-7-git-send-email-clarson@mvista.com>
-	<1250738680-20274-8-git-send-email-clarson@mvista.com>
-Subject: [PATCH] bitbake.conf: only pass --no-check-certificate if wget supports it.
+Message-id: <20090820032802.GA32010@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Use AUTOREV and have revision/commit number in package name?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,35 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 03:43:20 -0000
+X-List-Received-Date: Thu, 20 Aug 2009 03:45:42 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Chris Larson <clarson@mvista.com>
----
- conf/bitbake.conf |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+All,
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 9cb6039..b849a85 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -530,12 +530,13 @@ FETCHCMD_wget = "/usr/bin/env wget -t 5 --no-check-certificate"
- FETCHCMD_bzr = "/usr/bin/env bzr"
- FETCHCMD_hg = "/usr/bin/env hg"
- 
-+__wget_nocheckcert := "${@['--no-check-certificate', '']['unrecognized option' in os.popen3("wget --no-check-certificate")[2].read()]}"
- FETCHCOMMAND = "ERROR, this must be a BitBake bug"
--FETCHCOMMAND_wget = "/usr/bin/env 'PATH=${PATH}' wget -t 5 --passive-ftp --no-check-certificate -P ${DL_DIR} ${URI}"
-+FETCHCOMMAND_wget = "/usr/bin/env 'PATH=${PATH}' wget -t 5 --passive-ftp ${__wget_nocheckcert} -P ${DL_DIR} ${URI}"
- FETCHCOMMAND_cvs = "/usr/bin/env 'PATH=${PATH}' cvs '-d${CVSROOT}' co ${CVSCOOPTS} ${CVSMODULE}"
- FETCHCOMMAND_svn = "/usr/bin/env svn co ${SVNCOOPTS} ${SVNROOT} ${SVNMODULE}"
- RESUMECOMMAND = "ERROR, this must be a BitBake bug"
--RESUMECOMMAND_wget = "/usr/bin/env 'PATH=${PATH}' wget -c -t 5 --passive-ftp --no-check-certificate -P ${DL_DIR} ${URI}"
-+RESUMECOMMAND_wget = "/usr/bin/env 'PATH=${PATH}' wget -c -t 5 --passive-ftp ${__wget_nocheckcert} -P ${DL_DIR} ${URI}"
- UPDATECOMMAND = "ERROR, this must be a BitBake bug"
- UPDATECOMMAND_cvs = "/usr/bin/env 'PATH=${PATH}' cvs -d${CVSROOT} update -d -P ${CVSCOOPTS}"
- UPDATECOMMAND_svn = "/usr/bin/env svn update ${SVNCOOPTS}"
+I've been playing with AUTOREV for some time now and also asked this question 
+before on the IRC, but so far there seems to be no easy solution to the 
+problem in subject.
+
+Usually, when a package is built from an SCM repository, SRCREV is set to a 
+specific commit#/tag etc. And SRCREV is also usually referenced from PV (like 
+PV = "X.Y.Z-scmr${SRCREV}") to have the revision/commit number in the package 
+name, to easily track different builds.
+
+Now, when SRCREV = "${AUTOREV}", AUTOREV gets resolved into a Python function, 
+which does the magic of fetching the latest snapshot from a repository. But 
+now if PV contains references to SRCREV, it breaks (undesrandably), since 
+SRCREV gets resolved in do_fetch and PV needs to be resolved early on.
+
+Are there any standard ways to work around this limitation?
+
+I was thinking this maybe quite tricky, since the actual revision number used, 
+is not known until do_fetch runs the actual checkout, at which time changing 
+PV is too late, as temp/work is already created and so on. So, would it be 
+possible to hack one of the do_package tasks to add the actual revision/commit 
+number to a final package name, bypassing changing PV/PR?
+
+Any thoughts? Feel free to throw ideas. Thanks.
+
 -- 
-1.6.0
-
+Denys
 
 
