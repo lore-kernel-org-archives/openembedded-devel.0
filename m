@@ -1,29 +1,41 @@
-Received: from [67.222.38.35] (helo=outbound-mail-145.bluehost.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <chow.ming@linuxbj.com>) id 1MeCMr-0001GL-Hy
-	for openembedded-devel@openembedded.org; Thu, 20 Aug 2009 20:28:11 +0200
-Received: (qmail 26637 invoked by uid 0); 20 Aug 2009 18:10:50 -0000
-Received: from unknown (HELO host285.hostmonster.com) (74.220.215.85)
-	by outboundproxy5.bluehost.com with SMTP; 20 Aug 2009 18:10:50 -0000
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=default; d=linuxbj.com;
-	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:Content-Type:Content-Transfer-Encoding:X-Identified-User;
-	b=Cou3pGAJqbAFCZGsNH2n4e4wElvO8uK++WKROhYeynZ1SldHHBN188iP438Ywr0r53LT/MHEslYfDd1i2l9Oc9if4+snzw/KzEJ1BR17JTc6PgXUBd1MShIFvPL9pFnV;
-Received: from [125.33.189.198] (helo=[192.168.200.199])
-	by host285.hostmonster.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <chow.ming@linuxbj.com>)
-	id 1MeC65-0004uc-3r for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 12:10:50 -0600
-Message-ID: <4A8D91A2.1080602@linuxbj.com>
-Date: Fri, 21 Aug 2009 02:10:42 +0800
-From: =?UTF-8?B?TWluZyBDaG93IOWRqOaYjg==?= <chow.ming@linuxbj.com>
-User-Agent: Thunderbird 2.0.0.22 (X11/20090608)
+Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <d.vinokuroff@gmail.com>) id 1MeCqZ-0002Ab-4K
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Aug 2009 20:58:51 +0200
+Received: by ewy21 with SMTP id 21so125419ewy.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 11:41:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=FLc7/MMhowCujpOsaVKWZfPlippO1XxH6O9UFrAAZOE=;
+	b=YTAFImMnRm0LfB/OaR4hRl5uSNlcW+4wv72VM/f+EM1CDqEFv6F3A1S6V2//Ug2wWZ
+	ZOe5kAJaLhTowgLAJZTvnj5IZl3UK7mG90ZqRHFV+idKCc8xA4OlB19mNAxpf3IrpZZq
+	Cu4Xpbt3Q8qdnb7rRXChsnxuZFEtngh6atSjo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=UnZXHFZgPoPHDhunZwfCJ3H/6RadMtR8uPqWyMqivIMPd57YcwpyHe6pD/eQUKse06
+	jt7holtbAfGGMfb7v1g8UZ0Zw2iRxwP3AG0B4cW4fMMd2LFR3i4VrQ7ECuw3JMTqyB6O
+	q0j++YD4UPQLJye1HN9UcYaWnkNAshR8PWxE0=
+Received: by 10.210.140.11 with SMTP id n11mr403017ebd.88.1250793690478;
+	Thu, 20 Aug 2009 11:41:30 -0700 (PDT)
+Received: from ?192.168.0.7? ([92.255.146.220])
+	by mx.google.com with ESMTPS id 7sm200011eyg.35.2009.08.20.11.41.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 20 Aug 2009 11:41:30 -0700 (PDT)
+Message-ID: <4A8D98FB.5000400@gmail.com>
+Date: Fri, 21 Aug 2009 00:42:03 +0600
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Identified-User: {2055:host285.hostmonster.com:linuxbjc:linuxbj.com}
-	{sentby:smtp auth 125.33.189.198 authed with
-	chow.ming@linuxbj.com}
-Subject: [PATCH] linux-nokia800-2.6.21-osso71.bb fixed undefined reference to __aeabi_uldivmod problem when using gcc-4.3 compile linux-nokia800-2.6.21-osso71
+To: openembedded-devel@lists.openembedded.org
+References: <4A8D4947.5030108@gmail.com>
+	<200908201526.46349.holger+oe@freyther.de>
+In-Reply-To: <200908201526.46349.holger+oe@freyther.de>
+Subject: Re: LPC3250, helloworld-image, configure: error: cannot run C compiled programs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,105 +49,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 18:28:14 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 20 Aug 2009 18:58:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
- From bc8990dbee051e9f36a2b90761ce1f405f8dabc6 Mon Sep 17 00:00:00 2001
-From: Ming Zhou <chow.ming@linuxbj.com>
-Date: Fri, 21 Aug 2009 02:04:15 +0800
-Subject: [PATCH] linux-nokia800-2.6.21-osso71.bb fixed undefined 
-reference to __aeabi_uldivmod problem when using gcc-4.3 compile 
-linux-nokia800-2.6.21-osso71
+Holger Hans Peter Freyther wrote:
+
+> I think you should explore using the external-toolchain. This way you will 
+> have to set the PATH to the toolchain and make "external-toolchain" the 
+> default provider...
+> 
+> And for the old way have you seen this: 
+> http://docs.openembedded.org/usermanual/html/commonuse_prebuilt_toolchain.html?
+> 
+> z.
+
+Yes, I've seen manual and seems like I did everything that was told
+there. By the way I meant that I want to use exactly external toolchain.
+I used LTIB building system earlier and wanted to use toolchain from there.
+
+> On Thursday 20 August 2009 15:01:59 Dmitry Vinokurov wrote:
+>
+>   
+>> By the way, I don't understand why bitbake build gcc-cross-initial when
+>> I use external toolchain. Maybe I've configured something wrong and OE
+>> tries to build it's own toolchain, but seems like config is correct
+>> according to manual.
+>>     
+>
+> To figure out why OE is building the toolchain you can do
+>
+> bitbake -g helloworld
+>
+> and then look at the generated depends.dot. Looking at slugos.inc you will 
+> need to set more ASSUMED_PROVIDED or go the external-toolchain route (which 
+> sadly has not much documentation...)
+>
+> z.
+>   
+
+I've tested it (removed tmp dir and built from scratch): 'bitbake
+helloworld' doesn't try to build toolchain, looks like it use toolchain
+that I pointed. At least at the build log (I used -D) I can see
+'CC=/opt/nxp/gcc-4.3.2-glibc-2.7/arm-vfp-linux-gnu/../bin/arm-vfp-linux-gnu-gcc', 
 
 
-Signed-off-by: Ming Zhou <chow.ming@linuxbj.com>
----
- ...x-gcc-4.3-false-modulo-optimization.patch.patch |   48 
-++++++++++++++++++++
- recipes/linux/linux-nokia800_2.6.21-osso71.bb      |    1 +
- 2 files changed, 49 insertions(+), 0 deletions(-)
- create mode 100644 
-recipes/linux/linux-nokia800-2.6.21-osso71/1300-fix-gcc-4.3-false-modulo-optimization.patch.patch
+build commands with this compiler and similar. Configure scripts found
+toolchain too. But the way how toolchain is used is really strange,
+strings like following are in many packages (binutils-cross-2.18-r8.1, 
+gcc-cross-initial-4.2.4-r7.1 and maybe some other, that I haven't seen):
+--------
+checking for i686-linux-ar... ar
+checking for i686-linux-strip...
+/opt/nxp/gcc-4.3.2-glibc-2.7/arm-vfp-linux-gnu/../bin/arm-vfp-linux-gnu-strip
+checking for i686-linux-ranlib... ranlib
+--------
+or
+--------
+checking for i686-linux-gcc... 
+/opt/nxp/gcc-4.3.2-glibc-2.7/arm-vfp-linux-gnu/../bin/arm-vfp-linux-gnu-gcc
+--------
 
-diff --git 
-a/recipes/linux/linux-nokia800-2.6.21-osso71/1300-fix-gcc-4.3-false-modulo-optimization.patch.patch 
-b/recipes/linux/linux-nokia800-2.6.21-osso71/1300-fix-gcc-4.3-false-modulo-optimization.patch.patch
-new file mode 100644
-index 0000000..3ff0c07
---- /dev/null
-+++ 
-b/recipes/linux/linux-nokia800-2.6.21-osso71/1300-fix-gcc-4.3-false-modulo-optimization.patch.patch
-@@ -0,0 +1,48 @@
-+From f5b973489beb1a1239dfad53e3ad6e36ff7ee958 Mon Sep 17 00:00:00 2001
-+From: Segher Boessenkool <segher@kernel.crashing.org>
-+Date: Thu, 9 Oct 2008 21:18:27 +0100
-+Subject: [PATCH] fix-gcc-4.3-false-modulo-optimization.patch
-+
-+I tried to compile the current stable kernel
-+(a2ef813d2f439a3e9f377d33a2e5baad098afb7e)
-+and get the following errors:
-+
-+kernel/built-in.o: In function `timespec_add_ns':
-+/mnt/data/Freerunner/Gentoo/rootinstall/usr/src/linux/include/linux/time.h:174:
-+undefined reference to `__aeabi_uldivmod'
-+/mnt/data/Freerunner/Gentoo/rootinstall/usr/src/linux/include/linux/time.h:179:
-+undefined reference to `__aeabi_uldivmod'
-+/mnt/data/Freerunner/Gentoo/rootinstall/usr/src/linux/include/linux/time.h:174:
-+undefined reference to `__aeabi_uldivmod'
-+/mnt/data/Freerunner/Gentoo/rootinstall/usr/src/linux/include/linux/time.h:179:
-+undefined reference to `__aeabi_uldivmod'
-+
-+applying the following patch solved the problem:
-+--------
-+Prevent gcc-4.3 form "optimizing" the while loop into a costly modulo 
-operation.
-+Patch found at http://lkml.org/lkml/2008/2/22/464.
-+
-+Reported-by: Sven Rebhan <odinshorse@googlemail.com>
-+Signed-off-by: Segher Boessenkool <segher@kernel.crashing.org>
-+---
-+ include/linux/time.h |    4 ++++
-+ 1 files changed, 4 insertions(+), 0 deletions(-)
-+
-+diff --git a/include/linux/time.h b/include/linux/time.h
-+index b04136d..3e8fd9e 100644
-+--- a/include/linux/time.h
-++++ b/include/linux/time.h
-+@@ -173,6 +173,10 @@ static inline void timespec_add_ns(struct timespec 
-*a, u64 ns)
-+ {
-+     ns += a->tv_nsec;
-+     while(unlikely(ns >= NSEC_PER_SEC)) {
-++        /* The following asm() prevents the compiler from
-++         * optimising this loop into a modulo operation.  */
-++        asm("" : "+r"(ns));
-++
-+         ns -= NSEC_PER_SEC;
-+         a->tv_sec++;
-+     }
-+--
-+1.5.6.5
-+
-diff --git a/recipes/linux/linux-nokia800_2.6.21-osso71.bb 
-b/recipes/linux/linux-nokia800_2.6.21-osso71.bb
-index 1ac4cf1..388df4f 100644
---- a/recipes/linux/linux-nokia800_2.6.21-osso71.bb
-+++ b/recipes/linux/linux-nokia800_2.6.21-osso71.bb
-@@ -8,6 +8,7 @@ SRC_URI = 
-"${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.21.tar.bz2 \
-            
-http://www.rpsys.net/openzaurus/patches/archive/input_power-r7.patch;patch=1 
-\
-        file://suspend-button.patch;patch=1 \
-            file://linux-2.6-limits.patch;patch=1 \
-+           
-file://1300-fix-gcc-4.3-false-modulo-optimization.patch.patch;patch=1 \
-        file://defconfig"
- 
- S = "${WORKDIR}/linux-2.6.21"
--- 
-1.5.4.3
+I.e. some utils are X86-native, other are cross. In the first example 
+above configure use ARM strip, though I've got strip on my Debian system.
+
+This mess lead to error, that I described in first letter of this chain:
+--------
+checking for i686-linux-gcc... 
+/opt/nxp/gcc-4.3.2-glibc-2.7/arm-vfp-linux-gnu/../bin/arm-vfp-linux-gnu-gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... configure: error: cannot run C 
+compiled programs.
+--------
+
+--
+Best Regards,
+Dmitry Vinokurov
+<d.vinokuroff@gmail.com>
+
+
+
 
 
 
