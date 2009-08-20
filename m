@@ -1,24 +1,23 @@
 Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1MdyYT-0003jW-TY
+	(envelope-from <clarson@mvista.com>) id 1MdyYT-0003jV-TF
 	for openembedded-devel@lists.openembedded.org;
 	Thu, 20 Aug 2009 05:43:16 +0200
 Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
 	by hermes.mvista.com (Postfix) with ESMTP
-	id 3496A1B7A2; Wed, 19 Aug 2009 20:25:51 -0700 (PDT)
+	id E7B6F1B7A1; Wed, 19 Aug 2009 20:25:50 -0700 (PDT)
 From: Chris Larson <clarson@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Aug 2009 20:24:38 -0700
-Message-Id: <1250738680-20274-7-git-send-email-clarson@mvista.com>
+Date: Wed, 19 Aug 2009 20:24:37 -0700
+Message-Id: <1250738680-20274-6-git-send-email-clarson@mvista.com>
 X-Mailer: git-send-email 1.6.0
-In-Reply-To: <1250738680-20274-6-git-send-email-clarson@mvista.com>
+In-Reply-To: <1250738680-20274-5-git-send-email-clarson@mvista.com>
 References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
 	<1250738680-20274-2-git-send-email-clarson@mvista.com>
 	<1250738680-20274-3-git-send-email-clarson@mvista.com>
 	<1250738680-20274-4-git-send-email-clarson@mvista.com>
 	<1250738680-20274-5-git-send-email-clarson@mvista.com>
-	<1250738680-20274-6-git-send-email-clarson@mvista.com>
-Subject: [PATCH] bitbake.conf: Add export for cross NM.
+Subject: [PATCH] bitbake.conf: Kill CCACHE. Implicit, automatic use of things which can fail is bad.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,30 +33,25 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 20 Aug 2009 03:43:19 -0000
 
-From: Jeremy Puhlman <jpuhlman@mvista.com>
+To re-enable, set CCACHE = "ccache ".
 
-When not providing a cross nm, the configure for libtool-cross falls back to
-the system nm. This can lead to empty "global_symbol_pipe" and
-"global_symbol_to_cdeclvarble" variables in the generated libtool script.
-
-Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
 Signed-off-by: Chris Larson <clarson@mvista.com>
 ---
- conf/bitbake.conf |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ conf/bitbake.conf |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
 diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 0b35ea8..371bf8e 100644
+index c4af34e..0b35ea8 100644
 --- a/conf/bitbake.conf
 +++ b/conf/bitbake.conf
-@@ -404,6 +404,7 @@ export RANLIB = "${HOST_PREFIX}ranlib"
- export STRIP = "${HOST_PREFIX}strip"
- export OBJCOPY = "${HOST_PREFIX}objcopy"
- export OBJDUMP = "${HOST_PREFIX}objdump"
-+export NM = "${HOST_PREFIX}nm"
- PYTHON = "${@sys.executable}"
+@@ -390,7 +390,6 @@ export PATH
+ # Build utility info.
+ ##################################################################
  
- export BUILD_CC = "${CCACHE}${BUILD_PREFIX}gcc ${BUILD_CC_ARCH}"
+-CCACHE = "${@bb.which(bb.data.getVar('PATH', d, 1), 'ccache') and 'ccache '}"
+ TOOLCHAIN_OPTIONS = ""
+ 
+ export CC = "${CCACHE}${HOST_PREFIX}gcc ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
 -- 
 1.6.0
 
