@@ -1,28 +1,34 @@
-Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Me2aa-0002V9-Uh
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Me3Ny-0001Uj-K3 for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Aug 2009 10:52:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1Me37F-0000hP-VV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 10:01:41 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KOO00IG1059EF83@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	20 Aug 2009 02:44:10 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5268514AF5F; Thu,
-	20 Aug 2009 03:43:57 -0400 (EDT)
-Date: Thu, 20 Aug 2009 03:43:57 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 20 Aug 2009 10:35:25 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 10:35:25 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 10:35:25 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090820074357.GC459@denix.org>
-References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
-	<1250738680-20274-5-git-send-email-clarson@mvista.com>
-	<1250738680-20274-6-git-send-email-clarson@mvista.com>
-	<200908200749.07494.holger+oe@freyther.de>
-	<6ec4247d0908200032s44cd3230s9b3e0d06777116c3@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <6ec4247d0908200032s44cd3230s9b3e0d06777116c3@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: [PATCH] bitbake.conf: Kill CCACHE. Implicit, automatic	use of things which can fail is bad.
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 20 Aug 2009 10:34:58 +0200
+Message-ID: <h6j1rj$nvf$1@ger.gmane.org>
+References: <20090820032802.GA32010@denix.org>	<200908200752.58210.holger+oe@freyther.de>
+	<20090820071052.GA459@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <20090820071052.GA459@denix.org>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Use AUTOREV and have revision/commit number in package name?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,30 +42,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 08:01:42 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 20 Aug 2009 08:52:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Aug 20, 2009 at 05:02:31PM +0930, Graham Gower wrote:
-> 2009/8/20 Holger Hans Peter Freyther <holger+oe@freyther.de>:
-> > On Thursday 20 August 2009 05:24:37 Chris Larson wrote:
-> >> To re-enable, set CCACHE = "ccache ".
-> >>
-> >> Signed-off-by: Chris Larson <clarson@mvista.com>
-> >
-> > Could you elaborate on the need of that? Which platforms do you deal with that
-> > break due the usage of ccache?
-> 
-> I run Slackware 12.2, whose build of ccache does not seem to be
-> accepted. I don't recall the exact mechanism of failure, but
-> shasum-native fails before getting to any other pacakges. Currently I
-> have to move the ccache binary out of my $PATH or OE tries to use it.
+On 20-08-09 09:10, Denys Dmytriyenko wrote:
+> On Thu, Aug 20, 2009 at 07:52:58AM +0200, Holger Hans Peter Freyther wrote:
+>> On Thursday 20 August 2009 05:28:02 Denys Dmytriyenko wrote:
+>>> All,
+>>>
+>>> I've been playing with AUTOREV for some time now and also asked this
+>>> question before on the IRC, but so far there seems to be no easy solution
+>>> to the problem in subject.
+>>>
+>>> Usually, when a package is built from an SCM repository, SRCREV is set to a
+>>> specific commit#/tag etc. And SRCREV is also usually referenced from PV
+>>> (like PV = "X.Y.Z-scmr${SRCREV}") to have the revision/commit number in the
+>>> package name, to easily track different builds.
+>>>
+>>> Now, when SRCREV = "${AUTOREV}", AUTOREV gets resolved into a Python
+>>> function, which does the magic of fetching the latest snapshot from a
+>>> repository. But now if PV contains references to SRCREV, it breaks
+>>> (undesrandably), since SRCREV gets resolved in do_fetch and PV needs to be
+>>> resolved early on.
+>>>
+>>> Are there any standard ways to work around this limitation?
+>>
+>> Check the mailinglist archives... Openmoko has deployed a solution that has
+>> fixed that about 1 1/2 years ago.
+>>
+>> Short answer:
+>> 	- Do not put SRCREV into PV, e.g. create a new var called SRCPV
+>> 	- Populate SRCPV with something based on the SRCREV..
+>
+> Ah, thanks! I was able to find your RFC message from last year on the Openmoko
+> mailing list:
+> http://markmail.org/message/v3s32gmxxqcaxpph
+>
+> I'll give it a try. Thanks.
+>
+> To be clear - it's not used in OE. While there is a single python-phoneutils
+> recipe, which references SRCPV, it is not being set anywhere, apparently...
 
-Same exact problem has been reported many times with RedHat-based distros as 
-well - it just fails to build shasum-native (the very first package) w/o any 
-meaningful messages...
+Take a look at 
+http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=xora/angstrom-srcpv 
+:)
 
--- 
-Denys
+regards,
+
+Koen
+
+
 
 
