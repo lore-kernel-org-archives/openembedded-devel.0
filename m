@@ -1,23 +1,44 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MeDmF-0001Tg-Nl
-	for openembedded-devel@openembedded.org; Thu, 20 Aug 2009 21:58:29 +0200
-Received: (qmail 19331 invoked by uid 813007); 20 Aug 2009 19:41:08 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 20 Aug 2009 19:41:08 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2009 21:41:06 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc5-00256-g8e6bcae; KDE/4.3.0; x86_64; ;
-	)
-References: <4A83BD15.7070006@atmel.com> <h61vvo$n4v$1@ger.gmane.org>
-	<4A8515F3.3070502@atmel.com>
-In-Reply-To: <4A8515F3.3070502@atmel.com>
+	(envelope-from <raj.khem@gmail.com>) id 1MeE3G-0001zR-Jh
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Aug 2009 22:16:03 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so106593qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Aug 2009 12:58:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=vmvI0ShbSqxD2GNsp+PmNiS6fFHc9dNdZq0LWxIyIC8=;
+	b=J9YvJ1oT/JdZbO9tlEQ7F0i7B3gFvBBViG2+co312cRdUyLP3TRB86vLu8qDQ8Dy/9
+	HGeCohhpAulNqVUoDvLoV9xBEczIz6db8EIkXqcNaOsbwCD74OwGFsMf3joRnKDW4lxq
+	M1OCAnOayasliNX0VOqCTkxyl+1AQqnDi6Fhk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=h3IQUf02gj1RlTDJYfW+e9ev7ddMNpc1bShrGiYkZ47bfAS5r9dGgnFcbqbu6kdj1j
+	6LTjLOr5XGvu7UJzQ7dAaVXxXPjqVDkmnQPXGnecnuyMcnb0l/S5fQOYFVufl7hHclmr
+	OjW93QAmdgWUNge1E8N/2x/E3e7fTsa1TLa8c=
 MIME-Version: 1.0
-Message-Id: <200908202141.07520.marcin@juszkiewicz.com.pl>
-Subject: Re: Ideas for scripts, to save work, when building several boards
+Received: by 10.229.27.19 with SMTP id g19mr43305qcc.11.1250798323290; Thu, 20 
+	Aug 2009 12:58:43 -0700 (PDT)
+In-Reply-To: <20090820053123.GD4952@smtp.west.cox.net>
+References: <20090814215138.GB31011@gmail.com>
+	<20090815022703.GH14883@smtp.west.cox.net>
+	<19c1b8a90908151021s67bbdd9fh52a07dce6d51ace8@mail.gmail.com>
+	<20090817234049.GH2227@smtp.west.cox.net>
+	<19c1b8a90908172329p55250179od552cd94fa4cbff5@mail.gmail.com>
+	<20090818154440.GQ2227@smtp.west.cox.net>
+	<20090818212827.GA26614@gmail.com>
+	<20090818232002.GZ2227@smtp.west.cox.net>
+	<19c1b8a90908181648nb43120bg978baa4ac0faa2cb@mail.gmail.com>
+	<20090820053123.GD4952@smtp.west.cox.net>
+Date: Thu, 20 Aug 2009 12:58:43 -0700
+Message-ID: <19c1b8a90908201258s1d1ba49aice5020132e2e5ba0@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC] Adding eglibc versions of minimal and micro distro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,47 +52,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 19:58:32 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 20 Aug 2009 20:16:05 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Dnia pi=C4=85tek, 14 sierpnia 2009 o 09:44:51 Ulf Samuelsson napisa=C5=82(a=
-):
-> The reason for doing a script is to allow building multiple stuff
-> when I am sleeping or travelling, and as long as things complete
-> I do not mind the 10 minute pauses.
+On Wed, Aug 19, 2009 at 10:31 PM, Tom Rini<trini@embeddedalley.com> wrote:
+> On Tue, Aug 18, 2009 at 04:48:20PM -0700, Khem Raj wrote:
+> [snip]
+>> > So are we on the same page again, micro/minimal-uclibc can go away and
+>> > micro/minimal can ?=3D LIBC? :)
+>>
+>> no. LIBC provides other packages too which is different for uclibc
+>> its same for glibc and eglibc so having same for glibc and eglibc is ok =
+but not
+>> for uclibc
 >
-> When I am working interactively, I do not want to specify MACHINE
-> everytime I do something
+> You've lost me, again. =C2=A0What does uclibc.inc not set correct for ucl=
+ibc?
 >
-> Maybe this is something that would work...
-> alias bitbake=3D"MACHINE=3D${BB_MACHINE} /path/to/bitbake"
 
-I do that in this style:
+e.g.
 
-for mach in LIST-OF-BOARDS;do MACHINE=3D$mach bitbake something;done
+PREFERRED_PROVIDER_virtual/libintl      =3D "proxy-libintl"
+PREFERRED_PROVIDER_virtual/libiconv     =3D "libiconv"
 
-This works fine in Bash and allow to do anything from remote etc.
+but if we move these to sane-toolchain-uclibc inc then yes
+we could basically use LIBC knob with some little work
 
-My last use was:
-
-for mach in `ls openembedded/conf/machine/at91*`;do export MACHINE=3D`basen=
-ame=20
-$mach .conf`; bitbake -cclean base-files sysvinit task-base task-boot; bitb=
-ake=20
-console-image;done
-
-To make it work you should have to use MACHINE ?=3D "machinename" in conf/*=
-=2Econf=20
-files or just not set MACHINE there at all.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+> --
+> Tom Rini
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
