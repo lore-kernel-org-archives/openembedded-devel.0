@@ -1,25 +1,27 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Me24F-0001Mj-1i
+	(envelope-from <denis@denix.org>) id 1Me27I-0001QN-12
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 09:28:15 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173003.mailsrvcs.net
+	Thu, 20 Aug 2009 09:31:24 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KON00CRBYM7XZBA@vms173003.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KON00AN5YRHDY05@vms173019.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	20 Aug 2009 02:10:57 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5184714AF5F; Thu,
-	20 Aug 2009 03:10:52 -0400 (EDT)
-Date: Thu, 20 Aug 2009 03:10:52 -0400
+	20 Aug 2009 02:14:06 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5252714AF5F; Thu,
+	20 Aug 2009 03:14:02 -0400 (EDT)
+Date: Thu, 20 Aug 2009 03:14:02 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090820071052.GA459@denix.org>
-References: <20090820032802.GA32010@denix.org>
-	<200908200752.58210.holger+oe@freyther.de>
+Message-id: <20090820071402.GB459@denix.org>
+References: <4A7D824D.7080103@balister.org>
+	<1249899969.8248.95.camel@mill.internal.reciva.com>
+	<4A800434.4050603@balister.org> <20090818014359.GC18879@denix.org>
+	<1250595439.27980.66.camel@mill.internal.reciva.com>
 MIME-version: 1.0
-In-reply-to: <200908200752.58210.holger+oe@freyther.de>
+In-reply-to: <1250595439.27980.66.camel@mill.internal.reciva.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: Use AUTOREV and have revision/commit number in package	name?
+Subject: Re: OEDEM scheduling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,46 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 07:28:15 -0000
+X-List-Received-Date: Thu, 20 Aug 2009 07:31:24 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Aug 20, 2009 at 07:52:58AM +0200, Holger Hans Peter Freyther wrote:
-> On Thursday 20 August 2009 05:28:02 Denys Dmytriyenko wrote:
-> > All,
-> >
-> > I've been playing with AUTOREV for some time now and also asked this
-> > question before on the IRC, but so far there seems to be no easy solution
-> > to the problem in subject.
-> >
-> > Usually, when a package is built from an SCM repository, SRCREV is set to a
-> > specific commit#/tag etc. And SRCREV is also usually referenced from PV
-> > (like PV = "X.Y.Z-scmr${SRCREV}") to have the revision/commit number in the
-> > package name, to easily track different builds.
-> >
-> > Now, when SRCREV = "${AUTOREV}", AUTOREV gets resolved into a Python
-> > function, which does the magic of fetching the latest snapshot from a
-> > repository. But now if PV contains references to SRCREV, it breaks
-> > (undesrandably), since SRCREV gets resolved in do_fetch and PV needs to be
-> > resolved early on.
-> >
-> > Are there any standard ways to work around this limitation?
+On Tue, Aug 18, 2009 at 12:37:19PM +0100, Phil Blundell wrote:
+> On Mon, 2009-08-17 at 21:43 -0400, Denys Dmytriyenko wrote:
+> > On Mon, Aug 10, 2009 at 07:27:48AM -0400, Philip Balister wrote:
+> > > Phil Blundell wrote:
+> > >> The November date had 100% approval among those who responded to the
+> > >> doodle poll.  (October was second best; September was least favoured,
+> > >> and in any case the proposed September date is only four weeks away
+> > >> which is probably too close for a lot of folks.)  So, I would suggest
+> > >> that we just go ahead with the November date rather than introducing new
+> > >> alternatives at this stage. Either way, it'd be good to try to get the 
+> > >> date nailed down within the
+> > >> next week or two so that everyone has adequate notice.  Obviously
+> > >> there's no statutory minimum notice period for this but you probably
+> > >> need at least 6-8 weeks to avoid a large number of diary clashes.
+> > >
+> > > Agreed. Do we have a place to meet for those dates?
+> > 
+> > Any updates on this item?
 > 
-> Check the mailinglist archives... Openmoko has deployed a solution that has 
-> fixed that about 1 1/2 years ago.
-> 
-> Short answer:
-> 	- Do not put SRCREV into PV, e.g. create a new var called SRCPV
-> 	- Populate SRCPV with something based on the SRCREV..
+> I think the original proposal was for either Berlin or Frankfurt.
+> Failing that I could probably arrange to host something in Cambridge so
+> long as the number of attendees isn't too enormous.
 
-Ah, thanks! I was able to find your RFC message from last year on the Openmoko 
-mailing list:
-http://markmail.org/message/v3s32gmxxqcaxpph
-
-I'll give it a try. Thanks.
-
-To be clear - it's not used in OE. While there is a single python-phoneutils 
-recipe, which references SRCPV, it is not being set anywhere, apparently...
+I was trying to find out about the actual place, rather than location... :)
 
 -- 
 Denys
