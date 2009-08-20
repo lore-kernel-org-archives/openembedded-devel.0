@@ -1,17 +1,22 @@
 Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1MdyYM-0003jO-An
+	(envelope-from <clarson@mvista.com>) id 1MdyYN-0003jR-AP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 05:43:07 +0200
+	Thu, 20 Aug 2009 05:43:09 +0200
 Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
 	by hermes.mvista.com (Postfix) with ESMTP
-	id D1B581B2D1; Wed, 19 Aug 2009 20:25:48 -0700 (PDT)
+	id 685AE1B79D; Wed, 19 Aug 2009 20:25:50 -0700 (PDT)
 From: Chris Larson <clarson@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Aug 2009 20:24:32 -0700
-Message-Id: <1250738680-20274-1-git-send-email-clarson@mvista.com>
+Date: Wed, 19 Aug 2009 20:24:35 -0700
+Message-Id: <1250738680-20274-4-git-send-email-clarson@mvista.com>
 X-Mailer: git-send-email 1.6.0
-Subject: [PATCH] cross.bbclass: keep TARGET_SYS & TARGET_PREFIX independent.
+In-Reply-To: <1250738680-20274-3-git-send-email-clarson@mvista.com>
+References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
+	<1250738680-20274-2-git-send-email-clarson@mvista.com>
+	<1250738680-20274-3-git-send-email-clarson@mvista.com>
+Cc: Dale Farnsworth <dfarnsworth@mvista.com>
+Subject: [PATCH] kernel.bbclass: Set EXTRA_OEMAKE to null for kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,27 +32,33 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 20 Aug 2009 03:43:14 -0000
 
+From: Dale Farnsworth <dfarnsworth@mvista.com>
+
+Currently the only thing in EXTRA_OEMAKE is '-e MAKEFLAGS='.  We don't
+want to overide the kernel's Makefile variables from the environment.
+It caused the passed -j<N> parameter from PARALLEL_MAKE to be ignored.
+
+Signed-off-by: Dale Farnsworth <dfarnsworth@mvista.com>
 Signed-off-by: Chris Larson <clarson@mvista.com>
 ---
- classes/cross.bbclass |    5 +++++
- 1 files changed, 5 insertions(+), 0 deletions(-)
+ classes/kernel.bbclass |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/classes/cross.bbclass b/classes/cross.bbclass
-index 7debde6..72a0fb7 100644
---- a/classes/cross.bbclass
-+++ b/classes/cross.bbclass
-@@ -2,6 +2,11 @@
- # no need for them to be a direct target of 'world'
- EXCLUDE_FROM_WORLD = "1"
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 3ee7f53..2947d4d 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -78,6 +78,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ UBOOT_ENTRYPOINT ?= "20008000"
+ UBOOT_LOADADDRESS ?= "${UBOOT_ENTRYPOINT}"
  
-+# In order to keep TARGET_PREFIX decoupled from TARGET_SYS, let's force the
-+# binary names to match the former, rather than relying on autoconf's implicit
-+# prefixing based on the latter.
-+EXTRA_OECONF_append = " --program-prefix=${TARGET_PREFIX}"
++# For the kernel, we don't want the '-e MAKEFLAGS=' in EXTRA_OEMAKE.
++# We don't want to override kernel Makefile variables from the environment
++EXTRA_OEMAKE = ""
 +
- # Save PACKAGE_ARCH before changing HOST_ARCH
- OLD_PACKAGE_ARCH := "${PACKAGE_ARCH}"
- PACKAGE_ARCH = "${OLD_PACKAGE_ARCH}"
+ kernel_do_compile() {
+ 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
+ 	oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
 -- 
 1.6.0
 
