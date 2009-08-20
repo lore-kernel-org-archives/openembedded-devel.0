@@ -1,28 +1,31 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MdzCX-0002b1-Pf
+	(envelope-from <denis@denix.org>) id 1MdzNO-00038Y-Qp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 06:24:37 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id E96FC52D9CF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 03043-01 for <openembedded-devel@lists.openembedded.org>; 
-	Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id C3D6A4FA003
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
-Date: Thu, 20 Aug 2009 00:07:22 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
+	Thu, 20 Aug 2009 06:35:52 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KON00AQ6QMXQ1QF@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	19 Aug 2009 23:18:34 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 8B95D14AF5F; Thu,
+	20 Aug 2009 00:18:33 -0400 (EDT)
+Date: Thu, 20 Aug 2009 00:18:33 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <Pine.LNX.4.64.0908200004070.3621@juice.ott.cti.com>
-MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Patchwork XML-RPC interface
+Message-id: <20090820041833.GG32010@denix.org>
+References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
+	<1250738680-20274-2-git-send-email-clarson@mvista.com>
+	<1250738680-20274-3-git-send-email-clarson@mvista.com>
+	<1250738680-20274-4-git-send-email-clarson@mvista.com>
+	<1250738680-20274-5-git-send-email-clarson@mvista.com>
+	<1250738680-20274-6-git-send-email-clarson@mvista.com>
+	<1250738680-20274-7-git-send-email-clarson@mvista.com>
+	<1250738680-20274-8-git-send-email-clarson@mvista.com>
+MIME-version: 1.0
+In-reply-to: <1250738680-20274-8-git-send-email-clarson@mvista.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: [PATCH] bitbake.conf: BUILD_LDFLAGS: use $ORIGIN in the	-rpath rather than a full path.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,20 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 04:24:38 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 20 Aug 2009 04:35:55 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi,
+On Wed, Aug 19, 2009 at 08:24:39PM -0700, Chris Larson wrote:
+> Signed-off-by: Chris Larson <clarson@mvista.com>
 
-Is there any chance of getting the XML-RPC interface enabled in Patchwork?
+Hmm, interesting. I didn't know about $ORIGIN...
+But what is the benefit here? To be able to move $TMPDIR?
 
-It'd take "ENABLE_XMLRPC = True" in local_settings.py.
-
-I'm thinking it might be possible to troll the last month or so of 
-commits, generate patchwork hashes for each, and then use the XML-RPC 
-interface to search by hash and mark anything matching as Applied if it's 
-not already.
-
-Mike
+> ---
+>  conf/bitbake.conf |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 371bf8e..9cb6039 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -447,7 +447,7 @@ export SDK_CXXFLAGS = "${SDK_CFLAGS} -fpermissive"
+>  
+>  export BUILD_LDFLAGS = "-L${STAGING_LIBDIR_NATIVE} \
+>                          -Wl,-rpath-link,${STAGING_LIBDIR_NATIVE} \
+> -                        -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-O1"
+> +                        -Wl,-rpath,\\\$\$ORIGIN/${@base_path_relative(d.getVar('STAGING_BINDIR_NATIVE', 1), d.getVar('STAGING_LIBDIR_NATIVE', 1))} -Wl,-O1"
+>  
+>  export LDFLAGS = "${TARGET_LDFLAGS}"
+>  export TARGET_LDFLAGS = "-L${STAGING_DIR_TARGET}${layout_libdir} \
+> -- 
+> 1.6.0
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
