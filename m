@@ -1,24 +1,22 @@
 Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Me0oA-00043o-Bl
+	(envelope-from <holger+oe@freyther.de>) id 1Me0rO-0004I0-V2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 Aug 2009 08:07:35 +0200
+	Thu, 20 Aug 2009 08:10:54 +0200
 Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
 	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id E50431B10C0B
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 6F0DA1B10C0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2009 05:54:12 +0000 (UTC)
+	Thu, 20 Aug 2009 05:57:33 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Aug 2009 07:49:39 +0200
+Date: Thu, 20 Aug 2009 07:52:58 +0200
 User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
-	<1250738680-20274-6-git-send-email-clarson@mvista.com>
-	<1250738680-20274-7-git-send-email-clarson@mvista.com>
-In-Reply-To: <1250738680-20274-7-git-send-email-clarson@mvista.com>
+References: <20090820032802.GA32010@denix.org>
+In-Reply-To: <20090820032802.GA32010@denix.org>
 MIME-Version: 1.0
-Message-Id: <200908200749.39432.holger+oe@freyther.de>
-Subject: Re: [PATCH] bitbake.conf: Add export for cross NM.
+Message-Id: <200908200752.58210.holger+oe@freyther.de>
+Subject: Re: Use AUTOREV and have revision/commit number in package name?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,39 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 06:07:35 -0000
+X-List-Received-Date: Thu, 20 Aug 2009 06:10:55 -0000
 Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Thursday 20 August 2009 05:24:38 Chris Larson wrote:
-> From: Jeremy Puhlman <jpuhlman@mvista.com>
+On Thursday 20 August 2009 05:28:02 Denys Dmytriyenko wrote:
+> All,
 >
-> When not providing a cross nm, the configure for libtool-cross falls back
-> to the system nm. This can lead to empty "global_symbol_pipe" and
-> "global_symbol_to_cdeclvarble" variables in the generated libtool script.
+> I've been playing with AUTOREV for some time now and also asked this
+> question before on the IRC, but so far there seems to be no easy solution
+> to the problem in subject.
 >
-> Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
-> Signed-off-by: Chris Larson <clarson@mvista.com>
+> Usually, when a package is built from an SCM repository, SRCREV is set to a
+> specific commit#/tag etc. And SRCREV is also usually referenced from PV
+> (like PV = "X.Y.Z-scmr${SRCREV}") to have the revision/commit number in the
+> package name, to easily track different builds.
+>
+> Now, when SRCREV = "${AUTOREV}", AUTOREV gets resolved into a Python
+> function, which does the magic of fetching the latest snapshot from a
+> repository. But now if PV contains references to SRCREV, it breaks
+> (undesrandably), since SRCREV gets resolved in do_fetch and PV needs to be
+> resolved early on.
+>
+> Are there any standard ways to work around this limitation?
 
-Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
+Check the mailinglist archives... Openmoko has deployed a solution that has 
+fixed that about 1 1/2 years ago.
+
+Short answer:
+	- Do not put SRCREV into PV, e.g. create a new var called SRCPV
+	- Populate SRCPV with something based on the SRCREV..
 
 
-> ---
->  conf/bitbake.conf |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 0b35ea8..371bf8e 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -404,6 +404,7 @@ export RANLIB = "${HOST_PREFIX}ranlib"
->  export STRIP = "${HOST_PREFIX}strip"
->  export OBJCOPY = "${HOST_PREFIX}objcopy"
->  export OBJDUMP = "${HOST_PREFIX}objdump"
-> +export NM = "${HOST_PREFIX}nm"
->  PYTHON = "${@sys.executable}"
->
->  export BUILD_CC = "${CCACHE}${BUILD_PREFIX}gcc ${BUILD_CC_ARCH}"
+z.
+
+
+
 
 
