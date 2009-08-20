@@ -1,20 +1,38 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MdzS4-0003L3-SS
-	for openembedded-devel@openembedded.org; Thu, 20 Aug 2009 06:40:41 +0200
-Received: (qmail 18850 invoked from network); 20 Aug 2009 04:23:23 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 19 Aug 2009 21:23:23 -0700
-Date: Wed, 19 Aug 2009 21:23:25 -0700
-From: Tom Rini <trini@embeddedalley.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090820042324.GC4952@smtp.west.cox.net>
-References: <4A8C1EB7.4050500@atmel.com> <20090820033157.GB32010@denix.org>
+Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <d.vinokuroff@gmail.com>) id 1Mdzhl-0003zY-Hs
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 Aug 2009 06:56:56 +0200
+Received: by ewy21 with SMTP id 21so4755734ewy.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Aug 2009 21:39:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=Wl8OpKyfVg+ja1g0qZWaE62K8+qDfnsVarO0AqXhgqc=;
+	b=dOwv5iCN7vjUi8gG+VlEaV7V4RBTNdQQ7KeJnITqnUfR/jRFmUtJ58RRPkw9hxLOvC
+	kHfvVp71o8NMavxMQj/EhT5RvcxUsvvQUNM2HhqK/w7HiIRVtiwK2ilqViRfc4XR5EHd
+	8rV+AJqGrabg3XClA3YyrMWqnchJVx3h4PZ0I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=sQKMKgLImz9fOyMevMnBsEn4vWL40uCeYzeTcT+mcEqMbCFRR8nvT+IhThVrYd0ZjB
+	egUy++DbbU/JJGM/5MLNXrQKQyX0zrDR+tE0I8btsTgU8eFWpS9LilVNIfMJrl0Jhpnu
+	rXvPu4p8BKvBWL7Rh1DuCF0ezdMpCSWCjc5g8=
+Received: by 10.210.88.3 with SMTP id l3mr6408979ebb.96.1250743176751;
+	Wed, 19 Aug 2009 21:39:36 -0700 (PDT)
+Received: from ?192.168.0.7? ([92.255.146.220])
+	by mx.google.com with ESMTPS id 10sm556782eyz.41.2009.08.19.21.39.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 19 Aug 2009 21:39:36 -0700 (PDT)
+Message-ID: <4A8CD3A8.900@gmail.com>
+Date: Thu, 20 Aug 2009 10:40:08 +0600
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
-In-Reply-To: <20090820033157.GB32010@denix.org>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Subject: Re: fbv neutered
+To: openembedded-devel@lists.openembedded.org
+Subject: bitbake ignores DEFAULT_PREFERENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,47 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Aug 2009 04:40:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Aug 2009 04:56:56 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Aug 19, 2009 at 11:31:57PM -0400, Denys Dmytriyenko wrote:
+Hello,
 
-> On Wed, Aug 19, 2009 at 05:48:07PM +0200, Ulf Samuelsson wrote:
-> > I added "fbv" "frame buffer viewer" to the file system,
-> > and happily tried to watch my Mustang rental car.
-> > 
-> > -- fbv did not recognize the file format.
-> > 
-> > Generated a nice bmp file and tried this...
-> > 
-> > --  fbv did not recognize the file format.
-> > 
-> > I then checked the recipe:
-> > 
-> > 
-> > ---------------------------------
-> > 	CC="${CC}" ./configure --without-libungif --without-bmp \
-> > 		--without-libjpeg
-> > ---------------------------------
-> > 
-> > Beats me why someone would want to have it built this way.
+I want to port OE to LPC3250 board and now I'm trying to build 
+helloworld-image.
 
-Yes, I pushed it that way as I only needed it as a png viewer (we needed
-a simple "can we display graphics?" test program) and someone on IRC
-also only needed PNGs, I guess.
+I've created lpc3250.conf in conf/machine:
+TARGET_ARCH = "arm"
+PACKAGE_EXTRA_ARCHS = "armv5te"
+TARGET_CC_ARCH = "-fsigned-char -mfpu=vfp -mfloat-abi=softfp"
 
-Of course, it'd be pretty easy to add ungif/bmp/jpeg to the dependancies
-list and recompile if you wanted more support.
+Then I've added DEFAULT_PREFERENCE_lpc3250 = "1" to 
+'recipes/linux/linux_2.6.27.bb', but 'bitbake -v helloworld-image' 
+downloads 2.6.23 kernel all the same. Re-reading all recipes database 
+make no sense.
 
-> > Is there another application one should use?
-> 
-> Try fbida - worked for me just fine
+Could anybody advise, how this can be solved? I need to use exactly 
+2.6.27 kernel as I know that it definitely works.
 
-It didn't when I tried, way way back when.  It also wanted way more
-stuff :)
+Thanks in advance.
 
 -- 
-Tom Rini
+Best Regards, 
+Dmitry Vinokurov 
+<d.vinokuroff@gmail.com>
+
 
 
