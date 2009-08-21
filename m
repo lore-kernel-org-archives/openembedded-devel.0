@@ -1,24 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MeSxn-0002y6-8n
-	for openembedded-devel@openembedded.org; Fri, 21 Aug 2009 14:11:23 +0200
-Received: (qmail 27547 invoked by uid 813007); 21 Aug 2009 11:53:59 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 21 Aug 2009 11:53:59 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <msmith@cbnco.com>) id 1MeTnQ-00020S-9w
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 Aug 2009 15:04:44 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 5C4C1545A06
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Aug 2009 08:47:20 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 00784-09 for <openembedded-devel@lists.openembedded.org>; 
+	Fri, 21 Aug 2009 08:47:20 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 1B723545A03
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Aug 2009 08:47:20 -0400 (EDT)
+Date: Fri, 21 Aug 2009 08:47:20 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Aug 2009 13:53:56 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc5-00256-g8e6bcae; KDE/4.3.0; x86_64; ;
-	)
-References: <4A81BE84.6010607@atmel.com>
-	<200908121433.31479.marcin@juszkiewicz.com.pl>
-	<4A82C482.6060008@atmel.com>
-In-Reply-To: <4A82C482.6060008@atmel.com>
+In-Reply-To: <200908210825.32355.khimov@altell.ru>
+Message-ID: <Pine.LNX.4.64.0908210701430.3621@juice.ott.cti.com>
+References: <1241617115-21929-1-git-send-email-msmith@cbnco.com>
+	<Pine.LNX.4.64.0908202146030.3621@juice.ott.cti.com>
+	<200908210825.32355.khimov@altell.ru>
 MIME-Version: 1.0
-Message-Id: <200908211353.59344.marcin@juszkiewicz.com.pl>
-Subject: Re: Contents of the "origin/ulf/linux-2.6.30.2" branch. Help with testing wanted.
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH] kernel.bbclass: stage more include files for x86 in	2.6.27+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,54 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2009 12:11:23 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Aug 2009 13:04:46 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Dnia =C5=9Broda, 12 sierpnia 2009 o 15:32:50 Ulf Samuelsson napisa=C5=82(a):
-> > I had to add patch to 2.12 to get rid of -fno-dwarf2-cfi-asm parametr
-> > passed to GCC. Did not tested with 2.13-rc1 as at91.com is not
-> > reachable.
->
-> Yes, fixed in 2.13-rc1
-> Will send you the source file.
+On Fri, 21 Aug 2009, Roman I Khimov wrote:
 
-2.13-rc1 gaves me non-booting board:
+>> OK to commit?
+>>> -	rm -f $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
+>>> +
+>>> +	rm -f ${STAGING_KERNEL_DIR}/include/asm
 
-RomBOOT                                                                    =
-                                                                           =
-             =20
-> *** AT91Bootstrap-2.13-rc1                                               =
-                                                                           =
-             =20
-> AT45DB642D detected                                                      =
-                                                                           =
-             =20
-> invalidboot                                                              =
-                                                                           =
-             =20
-> AT45DB642D detected                                                      =
-                                                                           =
-             =20
-> invalidboot                                                              =
-                                                                           =
-             =20
-> AT45DB642D detected                                                      =
-                                                                           =
-             =20
-> invalidboot                                                              =
-                                                                           =
-             =20
+> Not sure why this is needed
 
-Any ideas? I have same problem when 2.12 is used. 1.14 works still.
+$ASMDIR is a directory name like "asm-x86" meant to be relative to 
+"include". It doesn't exist under the work directory, so "rm -f $ASMDIR" 
+tries to remove a file that isn't there. Doesn't hurt anything, but I had 
+to stare at it for a bit, so I took it out. :)
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+> though you copy to asm-x86 and mine was to $ASMDIR:
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-June/011945.html
 
+Yeah, I think in your patch you did:
 
+cp -fR arch/x86/include/asm/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
+
+But on another platform, let's say arm, wouldn't that copy 
+arch/x86/include/* to include/asm-arm? The x86 files should only go to 
+asm-x86.
+
+Mike
 
 
