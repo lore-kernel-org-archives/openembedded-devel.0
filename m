@@ -1,35 +1,22 @@
-Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1MeQoh-0003vu-MV
+	(envelope-from <holger+oe@freyther.de>) id 1MeSpf-0002cc-8p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Aug 2009 11:53:51 +0200
-Received: by ewy21 with SMTP id 21so581898ewy.21
+	Fri, 21 Aug 2009 14:02:59 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7BA021B10C0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2009 02:36:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=0rh6tfZTitoBzGQrtAkHrf4R5Iaazf0QcC0AY+sTv0Q=;
-	b=xSbKCtStFHCBTQrzxifYvyZSGaRawHyt54eagcR/aYl0FF588KzL42tVqION7lWOg1
-	VFeqlDS0ShGC1lv6B9FdUw9YzGI1MgGGymvK4vg77IrdCPiYWwrTTXX70WthQYDsOO4G
-	lyGBZlXnaLG0EuoFm4yvrRNXuyh2xgKT1H85Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=H+iGWGipS9T0jK5nA56NCFbD3ioWBSDQaba68i7Seq0Ez87HqTY+1BBAnzk2bjqex0
-	8pd20/qdUmPX0AgI0XU3XtxQyYxNN7DyS+Sisml1YeyuZ9Qs5mzMMHodVn0+kNx8n+Xp
-	Y6Wdp3qw85uOXRKmfiRz/MTvBDncloNIWY/8I=
-MIME-Version: 1.0
-Received: by 10.216.29.201 with SMTP id i51mr161555wea.214.1250847385977; Fri, 
-	21 Aug 2009 02:36:25 -0700 (PDT)
-In-Reply-To: <d1b08f940908210231v1ab08454j6db9e15c4ac43389@mail.gmail.com>
-References: <d1b08f940908210231v1ab08454j6db9e15c4ac43389@mail.gmail.com>
-Date: Fri, 21 Aug 2009 11:36:25 +0200
-Message-ID: <d1b08f940908210236u5b0ad12ne292d8eb860062f6@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 21 Aug 2009 11:49:34 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: Wrong crosscompilers path after rebuild from PSTAGE + fix
+Date: Fri, 21 Aug 2009 13:44:53 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <4A8E3AA6.10609@dresearch.de>
+In-Reply-To: <4A8E3AA6.10609@dresearch.de>
+MIME-Version: 1.0
+Message-Id: <200908211344.53306.holger+oe@freyther.de>
+Subject: Re: Variable reference (was: Documentation update about machine conf files)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,36 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2009 09:53:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 21 Aug 2009 12:02:59 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-REPOST under right subject:
+On Friday 21 August 2009 08:11:50 Steffen Sledz wrote:
+> [start new thread because of the more common subject]
+>
+> >> I would be really happy about an index of all variables usable in the
+> >> recipes together with a desciption or a reference to it. I would
+> >> prefer such an index in the wiki, but manual or documentation.conf
+> >> would be fine too.
+> >
+> > Something like that you mean?
+> >
+> > http://pokylinux.org/doc/poky-handbook.html#ref-variables-glossary
+>
+> Yes.
+>
+> Would be nice if it is not a glossary only but contains additional info
+> (e.g. exact usage, restrictions, dependencies, examples). This may be
+> realized by references to an own (wiki) page for each variable which needs
+> more than a one liner.
+>
+> What's the community opinion? Should we start such an index in the wiki?
 
-Ok, the issue is the staging-* packages are created without BASE_PACKAGE_ARCH
-This patch (thx ReaperOfSouls) seems to fix it:
+Long time ago, I created conf/documentation.conf. For every variable back then 
+we have used VAR[doc] = "Documentation" to describe the semantic of this 
+variable. A utility like bitdoc spit out a HTML page...
 
+I would like to see this updated.
 
-diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bbclass
-index 33acb90..3b97f59 100644
---- a/classes/packaged-staging.bbclass
-+++ b/classes/packaged-staging.bbclass
-@@ -284,7 +284,7 @@ populate_staging_postamble () {
-               if [ "$exitcode" != "5" -a "$exitcode" != "0" ]; then
-                       exit $exitcode
-               fi
--               stage-manager -p ${CROSS_DIR} -c
-${DEPLOY_DIR_PSTAGE}/stamp-cache-cross -u -d
-${PSTAGE_TMPDIR_STAGE}/cross
-+               stage-manager -p ${CROSS_DIR} -c
-${DEPLOY_DIR_PSTAGE}/stamp-cache-cross -u -d
-${PSTAGE_TMPDIR_STAGE}/cross/${BASE_PACKAGE_ARCH}
-               if [ "$exitcode" != "5" -a "$exitcode" != "0" ]; then
-                       exit $exitcode
-               fi
-
-
-
-Andrea
+z.
 
 
