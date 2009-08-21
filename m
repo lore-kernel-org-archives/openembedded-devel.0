@@ -1,28 +1,35 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MeNdH-00069j-35
+	(envelope-from <andrea.adami@gmail.com>) id 1MePSF-0004IT-43
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Aug 2009 08:29:51 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 7617F16DFDD
+	Fri, 21 Aug 2009 10:26:35 +0200
+Received: by ewy21 with SMTP id 21so530965ewy.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2009 08:12:29 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 334002A4245
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Aug 2009 08:12:29 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 21 Aug 2009 08:12:12 +0200
-Message-ID: <4A8E3AA6.10609@dresearch.de>
-Date: Fri, 21 Aug 2009 08:11:50 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Fri, 21 Aug 2009 01:09:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=qV5kYHVytUnlv57aX3s+VIGiD8MdjsjeaHuZjkfneBQ=;
+	b=f+5ChEJ6wtvOIiwSiajlsvTBH7ObjdQSGDLZGjYq6r4V+JAoyD9EXcm04v+vPfurZA
+	OsSVu1o+OQSV63BqbuM7j5elOlZnoZQYQVloEsWcddtZwSEzq5KwMK4WaRBeP/01VB43
+	3drXWeUNwBy/r6Xdm5AsWEuqKsAJaHXog9KxI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=UWAgLbGhr4h8VL03yFD5iWt3aT3Oy/x/p8mvjN/YevwdiyBIssAbUDPTAxeXfmNS/7
+	TH/v4frC27gqauPMIBYbn18ulXvLaM47ZoIWBSjW4wWTBKySoRzBaWuUw4MfAzxKqnc8
+	33w51Ld/sIDKIEd9YcSuCtVIuS9JEp8Yhikk0=
 MIME-Version: 1.0
+Received: by 10.216.86.1 with SMTP id v1mr147671wee.97.1250842150772; Fri, 21 
+	Aug 2009 01:09:10 -0700 (PDT)
+In-Reply-To: <d1b08f940908151449x3365f27cl5700731a008e2617@mail.gmail.com>
+References: <d1b08f940908151449x3365f27cl5700731a008e2617@mail.gmail.com>
+Date: Fri, 21 Aug 2009 10:09:10 +0200
+Message-ID: <d1b08f940908210109s16c313c5v224422ccdb56ffa@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 21 Aug 2009 06:12:12.0875 (UTC)
-	FILETIME=[52EB89B0:01CA2226]
-Subject: Variable reference (was: Documentation update about machine conf files)
+Subject: Re: Wrong crosscompilers path after rebuild from scratch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,29 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2009 06:29:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Aug 2009 08:26:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-[start new thread because of the more common subject]
-
->> I would be really happy about an index of all variables usable in the
->> recipes together with a desciption or a reference to it. I would
->> prefer such an index in the wiki, but manual or documentation.conf
->> would be fine too.
-> 
-> Something like that you mean?
-> 
-> http://pokylinux.org/doc/poky-handbook.html#ref-variables-glossary
-
-Yes.
-
-Would be nice if it is not a glossary only but contains additional info (e.g. exact usage, restrictions, dependencies, examples). This may be realized by references to an own (wiki) page for each variable which needs more than a one liner.
-
-What's the community opinion? Should we start such an index in the wiki?
-
-Steffen
+Ok, the issue is the staging-* packages are created without BASE_PACKAGE_ARCH
+This patch (thx ReaperOfSouls) seems to fix it:
 
 
+
+diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bbclass
+index 33acb90..3b97f59 100644
+--- a/classes/packaged-staging.bbclass
++++ b/classes/packaged-staging.bbclass
+@@ -284,7 +284,7 @@ populate_staging_postamble () {
+ 		if [ "$exitcode" != "5" -a "$exitcode" != "0" ]; then
+ 			exit $exitcode
+ 		fi
+-		stage-manager -p ${CROSS_DIR} -c
+${DEPLOY_DIR_PSTAGE}/stamp-cache-cross -u -d
+${PSTAGE_TMPDIR_STAGE}/cross
++		stage-manager -p ${CROSS_DIR} -c
+${DEPLOY_DIR_PSTAGE}/stamp-cache-cross -u -d
+${PSTAGE_TMPDIR_STAGE}/cross/${BASE_PACKAGE_ARCH}
+ 		if [ "$exitcode" != "5" -a "$exitcode" != "0" ]; then
+ 			exit $exitcode
+ 		fi
+
+
+
+Andrea
 
 
