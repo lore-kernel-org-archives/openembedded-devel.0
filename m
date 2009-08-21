@@ -1,30 +1,35 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MeJTY-0003XO-NG
+	(envelope-from <raj.khem@gmail.com>) id 1MeKQ6-0002XV-Et
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Aug 2009 04:03:32 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id D6129543A2A
+	Fri, 21 Aug 2009 05:04:02 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so252470qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2009 21:46:11 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 12975-08 for <openembedded-devel@lists.openembedded.org>; 
-	Thu, 20 Aug 2009 21:46:11 -0400 (EDT)
-Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id A92F43BE448
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Aug 2009 21:46:11 -0400 (EDT)
-Date: Thu, 20 Aug 2009 21:46:11 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-X-X-Sender: michael@juice.ott.cti.com
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1241617115-21929-1-git-send-email-msmith@cbnco.com>
-Message-ID: <Pine.LNX.4.64.0908202146030.3621@juice.ott.cti.com>
-References: <1241617115-21929-1-git-send-email-msmith@cbnco.com>
+	Thu, 20 Aug 2009 19:46:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=fbOvMcVY/k63hBeqnGQED01+PbuelCietmGaz5faVOs=;
+	b=gz4Bnd0XxpU7bYigQMk+UbzCkHkogMguQ3yEt2xmDW07jvd2p0B3SvES5qnvHe4v8N
+	Y8U+vsjn9a0J8SLYpWWO93LYy87RwmvnoPgpnEJDGk6mGtqxdJ+xIGWW9UEJ5F+5vVNz
+	EUTsyRTTfuVOo2KhMjj1jNfAn4m640Ru18vrU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=AmgZ4vsiBFatyaWvJhIjWQRC5jAgp69e94S8jDqudOmPvZ+dlfpMSK7gbZWzXtnytm
+	NWoRsI+k2fk7cPhUcvHG+ndrsDKB799waZvEcGGWA+xOnJPoUQduvUT4QDGi6s4ALxG/
+	OteFA/wEDshe7F0XyywWyGuuMSubEB3cwPuxs=
 MIME-Version: 1.0
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH] kernel.bbclass: stage more include files for x86 in	2.6.27+
+Received: by 10.229.93.4 with SMTP id t4mr96091qcm.93.1250822801346; Thu, 20 
+	Aug 2009 19:46:41 -0700 (PDT)
+In-Reply-To: <20090820050404.GI32010@denix.org>
+References: <4A8CD3A8.900@gmail.com> <20090820050404.GI32010@denix.org>
+Date: Thu, 20 Aug 2009 19:46:41 -0700
+Message-ID: <19c1b8a90908201946o18975addyfd8f8194661620eb@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: bitbake ignores DEFAULT_PREFERENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,45 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Aug 2009 02:03:32 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Fri, 21 Aug 2009 03:04:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-OK to commit?
+On Wed, Aug 19, 2009 at 10:04 PM, Denys Dmytriyenko<denis@denix.org> wrote:
+> On Thu, Aug 20, 2009 at 10:40:08AM +0600, Dmitry Vinokurov wrote:
+>> Hello,
+>>
+>> I want to port OE to LPC3250 board and now I'm trying to build
+>> helloworld-image.
+>>
+>> I've created lpc3250.conf in conf/machine:
+>> TARGET_ARCH = "arm"
+>> PACKAGE_EXTRA_ARCHS = "armv5te"
+>> TARGET_CC_ARCH = "-fsigned-char -mfpu=vfp -mfloat-abi=softfp"
+>>
+>> Then I've added DEFAULT_PREFERENCE_lpc3250 = "1" to
+>> 'recipes/linux/linux_2.6.27.bb', but 'bitbake -v helloworld-image'
+>> downloads 2.6.23 kernel all the same. Re-reading all recipes database make
+>> no sense.
 
-On Wed, 6 May 2009, Michael Smith wrote:
+It could be downloading it for linux-libc-headers package too. bitbake -g
+can help you here.
 
-> Some packages include <linux/types.h>, which requires <asm/types.h>.
-> Supplement b6220af33a70d96345dea130005ce842eeadfdf5 to copy files
-> from arch/x86/include/asm to include/asm-x86.
-> 
-> Signed-off-by: Michael Smith <msmith@cbnco.com>
-> ---
->  classes/kernel.bbclass |    9 ++++++++-
->  1 files changed, 8 insertions(+), 1 deletions(-)
-> 
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index 954c407..2153424 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -102,8 +102,15 @@ kernel_do_stage() {
->  		cp -fR arch/${ARCH}/include/asm/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
->  		install -d ${STAGING_KERNEL_DIR}/arch/${ARCH}/include
->  		cp -fR arch/${ARCH}/* ${STAGING_KERNEL_DIR}/arch/${ARCH}/	
-> +
-> +	# Check for arch/x86 on i386
-> +	elif [ -d arch/x86/include/asm/ ]; then
-> +		cp -fR arch/x86/include/asm/* ${STAGING_KERNEL_DIR}/include/asm-x86/
-> +		install -d ${STAGING_KERNEL_DIR}/arch/x86/include
-> +		cp -fR arch/x86/* ${STAGING_KERNEL_DIR}/arch/x86/
->  	fi
-> -	rm -f $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
-> +
-> +	rm -f ${STAGING_KERNEL_DIR}/include/asm
->  	ln -sf $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
->  
->  	mkdir -p ${STAGING_KERNEL_DIR}/include/asm-generic
-> -- 
-> 1.5.6.5
-> 
+>>
+>> Could anybody advise, how this can be solved? I need to use exactly 2.6.27
+>> kernel as I know that it definitely works.
+>
+> Are you sure it downloads 2.6.23 to build your kernel and not the
+> linux-libc-headers? Check the dependencies and what it's going to build by
+> executing "bitbake <target> -g" and then poking into depends.dot...
+>
+> Otherwise you can try setting PREFERRED_VERSION_virtual/kernel = "2.6.23" to
+> override DEFAULT_PREFERENCE...
+>
+> --
+> Denys
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
