@@ -1,24 +1,45 @@
-Received: from [81.228.11.98] (helo=pne-smtpout1-sn1.fre.skanova.net)
+Received: from [209.85.216.177] (helo=mail-px0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Meuw2-0006FZ-8V
+	(envelope-from <raj.khem@gmail.com>) id 1Mf07C-0007AV-Il
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 20:03:26 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn1.fre.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A683C78002B7F7F for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 19:45:53 +0200
-Message-ID: <4A902ECF.3090909@atmel.com>
-Date: Sat, 22 Aug 2009 19:45:51 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Sun, 23 Aug 2009 01:35:18 +0200
+Received: by pxi7 with SMTP id 7so4972413pxi.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Aug 2009 16:17:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=E5CMgrXPhfexUhKiYq27L0pFAwpgiEvccwP7+nbHIKU=;
+	b=RgTAybRKzn214fq+Ta6NX9r2RWeqObWs0LKBzx2VJtfhrSSHIOXJM8UQYpQdnFzCmp
+	kWP/XONWRLQs7jonZDqp6eOdpwaEVVVcRDgWRkTdAfr53UazMT1AVlAfHGqZ/y3awQ/o
+	a4Svzw0n+DhpKlFMuWhNZ8ciQ1uWlbkeDnLRg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=aVMgOZoDSwqugCjpNJhpXraPGK1xrxASkKxVyjdcYu95jl2DkBTbx43/wl5/sSvFfC
+	unH84i+9UHa+og3UpnymcO8MiG3KNcccc7E3d6aP50JLjyIr+UOWknMpyir/31LNrNyo
+	kvcz9j+TqVRr/ys06Uz7Hm6jYd6celhXOodhg=
+Received: by 10.114.214.22 with SMTP id m22mr4223791wag.218.1250983062973;
+	Sat, 22 Aug 2009 16:17:42 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
+	[71.146.29.169])
+	by mx.google.com with ESMTPS id j26sm5133718waf.63.2009.08.22.16.17.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 22 Aug 2009 16:17:41 -0700 (PDT)
+Date: Sat, 22 Aug 2009 16:17:35 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4A81BE84.6010607@atmel.com>	<200908121433.31479.marcin@juszkiewicz.com.pl>	<4A82C482.6060008@atmel.com>
-	<200908211353.59344.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200908211353.59344.marcin@juszkiewicz.com.pl>
-Subject: Re: Contents of the "origin/ulf/linux-2.6.30.2" branch. Help with testing wanted.
+Message-ID: <20090822231735.GA12848@gmail.com>
+References: <4A8D4947.5030108@gmail.com>
+	<200908201526.46349.holger+oe@freyther.de>
+	<4A8D98FB.5000400@gmail.com>
+	<200908210343.48652.holger+oe@freyther.de>
+	<4A8F9BE3.1020606@gmail.com> <4A8FA20F.5050401@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <4A8FA20F.5050401@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: LPC3250, helloworld-image, configure: error: cannot run C compiled programs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,111 +53,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2009 18:03:26 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Sat, 22 Aug 2009 23:35:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Marcin Juszkiewicz skrev:
-> Dnia =C5=9Broda, 12 sierpnia 2009 o 15:32:50 Ulf Samuelsson napisa=C5=82=
-(a):
->>> I had to add patch to 2.12 to get rid of -fno-dwarf2-cfi-asm parametr
->>> passed to GCC. Did not tested with 2.13-rc1 as at91.com is not
->>> reachable.
->> Yes, fixed in 2.13-rc1
->> Will send you the source file.
->=20
-> 2.13-rc1 gaves me non-booting board:
->=20
-> RomBOOT                                                                =
-                                                                         =
-                   =20
->> *** AT91Bootstrap-2.13-rc1                                            =
-                                                                         =
-                  =20
->> AT45DB642D detected                                                   =
-                                                                         =
-                  =20
->> invalidboot                                                           =
-                                                                         =
-                  =20
->> AT45DB642D detected                                                   =
-                                                                         =
-                  =20
->> invalidboot                                                           =
-                                                                         =
-                  =20
->> AT45DB642D detected                                                   =
-                                                                         =
-                  =20
->> invalidboot                                                           =
-                                                                         =
-                  =20
->=20
-> Any ideas? I have same problem when 2.12 is used. 1.14 works still.
->=20
-This is the code that will block your progress.
-Can you provide the first 8 dwords of the image you ae trying to load?
-Maybe you have not initialized all the trap vectors
-or you are doing something valid, but unexpected.
+On (22/08/09 13:45), Dmitry Vinokurov wrote:
+> Dmitry Vinokurov wrote:
+> >Holger Hans Peter Freyther wrote:
+> >>On Thursday 20 August 2009 20:42:03 Dmitry Vinokurov wrote:
+> >>
+> >>I will update the documentation with these bits:
+> >>
+> >>
+> >>ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc "
+> >>ASSUME_PROVIDED += " virtual/libc "
+> >>ASSUME_PROVIDED += "linux-libc-headers "
+> >>ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}gcc "
+> >>ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}gcc-initial "
+> >>ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}gcc-intermediate "
+> >>ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}binutils "
+> >>ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}libc-for-gcc "
+> >>ASSUME_PROVIDED += "virtual/libintl "
+> >>ASSUME_PROVIDED += "virtual/libiconv "
+> >>
+> >>TARGET_PREFIX = "arm-linux-gnueabi-"
+> >>ASSUME_SHLIBS = "libc.so.6:libc"
+> >>
+> >>
+> >>The main difference are. Assume provided more
+> >>binaries/libraries, use the TARGET_PREFIX instead of CC, CXX,
+> >>NM....
+> >>
+> >>
+> >>does this work any better?
+> >>    z.
+> >>
+> >I changed my config according to your advises, final version
+> >attached. Tried to build helloworld application: 'bitbake -v -DDD
+> >helloworld', it compiles and runs on target board fine. Tried to
+> >build linux kernel: 'bitbake -v -DDD linux-2.6.27', it fails with
+> >--------
+> >checking build system type... i686-pc-linux-gnu
+> >checking host system type... i686-pc-linux-gnu
+> >checking target system type... arm-oe-linux-gnueabi
+> >checking for a BSD-compatible install... /home/raydan/work/oe/build-linux/tmp/staging/i686-linux/usr/bin/install
+> >-c
+> >checking whether build environment is sane... yes
+> >checking for a thread-safe mkdir -p... /home/raydan/work/oe/build-linux/tmp/staging/i686-linux/usr/bin/mkdir
+> >-p
+> >checking for gawk... gawk
+> >checking whether make sets $(MAKE)... yes
+> >checking for i686-linux-gcc... /opt/nxp/gcc-4.3.2-glibc-2.7/arm-vfp-linux-gnu/../bin/arm-vfp-linux-gnu-gcc
+> >
+> >checking for C compiler default output file name... a.out
+> >checking whether the C compiler works... configure: error: cannot
+> >run C compiled programs.
+> >If you meant to cross compile, use `--host'.
+> >See `config.log' for more details.
+> >+ oefatal 'oe_runconf failed'
+> >+ echo FATAL: 'oe_runconf failed'
+> >FATAL: oe_runconf failed
+> >+ exit 1
+> >ERROR: function do_configure failed
+> >ERROR: see log in /home/raydan/work/oe/build-linux/tmp/work/arm-oe-linux-gnueabi/module-init-tools-cross-3.2.2-r5/temp/log.do_configure.30320
+> >
+> >NOTE: Task failed: /home/raydan/work/oe/build-linux/tmp/work/arm-oe-linux-gnueabi/module-init-tools-cross-3.2.2-r5/temp/log.do_configure.30320
+> >
+> >ERROR: TaskFailed event exception, aborting
+> >ERROR: Build of /home/raydan/work/oe/openembedded/recipes/module-init-tools/module-init-tools-cross_3.2.2.bb
+> >do_configure failed
+> >ERROR: Task 107 (/home/raydan/work/oe/openembedded/recipes/module-init-tools/module-init-tools-cross_3.2.2.bb,
+> >do_configure) failed
+> >NOTE: Tasks Summary: Attempted 86 tasks of which 21 didn't need to
+> >be rerun and 1 failed.
+> >ERROR: '/home/raydan/work/oe/openembedded/recipes/module-init-tools/module-init-tools-cross_3.2.2.bb'
+> >failed
+> >--------
+> >
+> >I.e. bitbake again confused cross-gcc and x86-gcc. Updated my OE
+> >with git pull, removed tmp/ and made rebuild -- same result.
+> Looks like error is in wrong ./configure parameter:
+> --host=i686-linux instead of --host=arm-oe-linux-gnueabi .
+> Now I'm trying to find, why --host was set to i686 and where it can
+> be changed.
 
-Are you loading something else than U-Boot?
+its a cross package so host being i686-linux (I suppose you are building
+on i686 box) is ok. Look into the config.log error message should be in
+there
 
-As you see, you can disable the check in your configuration file.
-
-#if	defined(CONFIG_APP_CHECK)
-/*-----------------------------------------------------------------------=
--------*/
-/* \fn    df_is_boot_valid							*/
-/* \brief Check that the first bytes of the buffer are valid ARM vectors	=
-*/
-/*-----------------------------------------------------------------------=
--------*/
-static unsigned int df_is_boot_valid(unsigned char *buffer)
-{
-	int i =3D 3;
- 	/* Verify if the 28 first bytes of the sram correspond to ARM vectors
-	   The sixth ARM vector contain the size of the code */
-    	while(i < 28)
-    	{
-		if (i !=3D 23)
-		{
-			if ((buffer[i] !=3D 0xEA) && (buffer[i] !=3D 0xE5) )
-				return FAILURE;
-		}
-		i+=3D4;
-    	}
-	return SUCCESS;
-}
-#endif
-
-> Regards,=20
-
-Have now checked the source:
-
-The 2.13 is based on the 1.13 sources.
-=09
-The 1,14 source code is not available on the Atmel.
-I will point that out.
-
-	Differences between the 1 series and the 2 series are:
-	1) Kconfig - You can do make <board>_config from OpenEmbedded
-		If you want to modify something it is much harder
-	2) Init of EBI1 of SAM9263
-	3) Bus Matrix Initialization
-	4) User reset enabled -but it does not work on the G45!
-	5) Not depending on a c library.
-		Can be compiled with any gcc compiler,
-		not just somehing with newlib.
-	etc.
-
-	The 1 series is provided by Atmel in Rousset,
-	and I have done the 2 series.
-=09
-
-
---=20
-Best Regards
-Ulf Samuelsson
-
+-Khem
 
 
