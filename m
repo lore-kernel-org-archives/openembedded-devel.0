@@ -1,31 +1,32 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MeteV-0006Jr-UH
+	(envelope-from <msmith@cbnco.com>) id 1Metgc-0006Nh-Hm
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 18:41:16 +0200
+	Sat, 22 Aug 2009 18:43:26 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 83F1651B1F2
+	by smtp.cbnco.com (Postfix) with ESMTP id 28F08547981
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
+	Sat, 22 Aug 2009 12:25:55 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 10395-09 for <openembedded-devel@lists.openembedded.org>; 
-	Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
+	with ESMTP id 11312-03 for <openembedded-devel@lists.openembedded.org>; 
+	Sat, 22 Aug 2009 12:25:55 -0400 (EDT)
 Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 5EFFE494472
+	by smtp.cbnco.com (Postfix) with ESMTPSA id C00A9547976
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
-Date: Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
+	Sat, 22 Aug 2009 12:25:53 -0400 (EDT)
+Date: Sat, 22 Aug 2009 12:25:53 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
 X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1247540261-4537-2-git-send-email-msmith@cbnco.com>
-Message-ID: <Pine.LNX.4.64.0908221223240.3621@juice.ott.cti.com>
+In-Reply-To: <1247540261-4537-3-git-send-email-msmith@cbnco.com>
+Message-ID: <Pine.LNX.4.64.0908221224480.3621@juice.ott.cti.com>
 References: <1247540261-4537-1-git-send-email-msmith@cbnco.com>
 	<1247540261-4537-2-git-send-email-msmith@cbnco.com>
+	<1247540261-4537-3-git-send-email-msmith@cbnco.com>
 MIME-Version: 1.0
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH 2/4] mesa-dri: set PACKAGE_ARCH to ${MACHINE}
+Subject: Re: [PATCH 3/4] mesa-dri: move tls configure logic to a class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,120 +40,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2009 16:41:16 -0000
+X-List-Received-Date: Sat, 22 Aug 2009 16:43:26 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-OK to commit?
+
+... OK to commit?
 
 On Mon, 13 Jul 2009, Michael Smith wrote:
 
-> ${MACHINE_DRI_MODULES} is passed to configure, so the package output
-> depends on MACHINE. As foretold by commit f06119fc :)
-> 
-> Also switch to INC_PR and fix built of mesa-xprogs when prefix != /usr.
+> Will allow reuse by xorg-xserver.
 > 
 > Signed-off-by: Michael Smith <msmith@cbnco.com>
 > ---
->  recipes/mesa/mesa-common.inc |   10 +++++++++-
->  recipes/mesa/mesa-dri_7.2.bb |    7 +------
->  recipes/mesa/mesa-dri_7.4.bb |    7 +------
->  recipes/mesa/mesa-dri_git.bb |    3 +--
->  4 files changed, 12 insertions(+), 15 deletions(-)
+>  .../mesa-tls.inc => classes/glx-use-tls.bbclass    |    3 ++-
+>  recipes/mesa/mesa-common.inc                       |    3 +--
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+>  rename recipes/mesa/mesa-tls.inc => classes/glx-use-tls.bbclass (81%)
 > 
+> diff --git a/recipes/mesa/mesa-tls.inc b/classes/glx-use-tls.bbclass
+> similarity index 81%
+> rename from recipes/mesa/mesa-tls.inc
+> rename to classes/glx-use-tls.bbclass
+> index 1472aa7..7530872 100644
+> --- a/recipes/mesa/mesa-tls.inc
+> +++ b/classes/glx-use-tls.bbclass
+> @@ -1,6 +1,7 @@
+> -
+>  def get_tls_setting(bb, d):
+>      # until we have no prober TLS support in uclibc disable it
+>      if bb.data.getVar('TARGET_OS', d, 1).find('uclibc') >= 0 :
+>          return ""
+>      return "--enable-glx-tls"
+> +
+> +EXTRA_OECONF += "${@get_tls_setting(bb, d)}"
 > diff --git a/recipes/mesa/mesa-common.inc b/recipes/mesa/mesa-common.inc
-> index 9cd10eb..4f18c2f 100644
+> index 4f18c2f..d7bfc14 100644
 > --- a/recipes/mesa/mesa-common.inc
 > +++ b/recipes/mesa/mesa-common.inc
-> @@ -4,6 +4,8 @@ DESCRIPTION = "An open source implementation of the OpenGL spec"
->  HOMEPAGE = "http://mesa3d.org"
->  LICENSE = "MIT"
+> @@ -19,8 +19,7 @@ EXTRA_OECONF = "--enable-glu \
+>                  --disable-glut \
+>  	       "
 >  
-> +INC_PR = "r7"
-> +
->  SRC_URI = "${SOURCEFORGE_MIRROR}/mesa3d/MesaLib-${PV}.tar.bz2 \
->             ${SOURCEFORGE_MIRROR}/mesa3d/MesaDemos-${PV}.tar.bz2 "
->  S = "${WORKDIR}/Mesa-${PV}"
-> @@ -20,6 +22,9 @@ EXTRA_OECONF = "--enable-glu \
->  require mesa-tls.inc
->  EXTRA_OECONF += "${@get_tls_setting(bb, d)} "
+> -require mesa-tls.inc
+> -EXTRA_OECONF += "${@get_tls_setting(bb, d)} "
+> +inherit glx-use-tls
 >  
-> +# Package contents vary according to ${MACHINE_DRI_MODULES}.
-> +PACKAGE_ARCH = "${MACHINE}"
-> +
->  PACKAGES =+ "libglu libglu-dev libosmesa libosmesa-dev libgl libgl-dev"
->  FILES_libgl = "${libdir}/libGL.so.*"
->  FILES_libglu = "${libdir}/libGLU.so.*"
-> @@ -36,4 +41,7 @@ do_stage() {
->  		cp -pPr ${S}/include/GL/internal* ${STAGING_INCDIR}/GL/
->  }
->  
-> -
-> +do_install_append () {
-> +    install -d ${D}/${bindir}
-> +    install -m 0755 ${S}/progs/xdemos/{glxdemo,glxgears,glxheads,glxinfo} ${D}/${bindir}
-> +}
-> diff --git a/recipes/mesa/mesa-dri_7.2.bb b/recipes/mesa/mesa-dri_7.2.bb
-> index 296a254..9356843 100644
-> --- a/recipes/mesa/mesa-dri_7.2.bb
-> +++ b/recipes/mesa/mesa-dri_7.2.bb
-> @@ -6,7 +6,7 @@ LIB_DEPS = "libdrm virtual/libx11 libxext libxxf86vm libxdamage libxfixes"
->  DEPENDS = "${PROTO_DEPS}  ${LIB_DEPS}"
->  
->  PE = "1"
-> -PR = "r6"
-> +PR = "${INC_PR}.0"
->  
->  # most of our targets do not have DRI so will use mesa-xlib
->  DEFAULT_PREFERENCE = "-1"
-> @@ -21,8 +21,3 @@ FILES_${PN}-dbg += "${libdir}/dri/.debug/*"
->  FILES_${PN}-xprogs = "${bindir}/glxdemo ${bindir}/glxgears ${bindir}/glxheads ${bindir}/glxinfo"
->  
->  EXTRA_OECONF += "--with-driver=dri --with-dri-drivers=swrast,${MACHINE_DRI_MODULES}"
-> -
-> -do_install_append () {
-> -    install -d ${D}/usr/bin
-> -    install -m 0755 ${S}/progs/xdemos/{glxdemo,glxgears,glxheads,glxinfo} ${D}/usr/bin/
-> -}
-> diff --git a/recipes/mesa/mesa-dri_7.4.bb b/recipes/mesa/mesa-dri_7.4.bb
-> index 296a254..9356843 100644
-> --- a/recipes/mesa/mesa-dri_7.4.bb
-> +++ b/recipes/mesa/mesa-dri_7.4.bb
-> @@ -6,7 +6,7 @@ LIB_DEPS = "libdrm virtual/libx11 libxext libxxf86vm libxdamage libxfixes"
->  DEPENDS = "${PROTO_DEPS}  ${LIB_DEPS}"
->  
->  PE = "1"
-> -PR = "r6"
-> +PR = "${INC_PR}.0"
->  
->  # most of our targets do not have DRI so will use mesa-xlib
->  DEFAULT_PREFERENCE = "-1"
-> @@ -21,8 +21,3 @@ FILES_${PN}-dbg += "${libdir}/dri/.debug/*"
->  FILES_${PN}-xprogs = "${bindir}/glxdemo ${bindir}/glxgears ${bindir}/glxheads ${bindir}/glxinfo"
->  
->  EXTRA_OECONF += "--with-driver=dri --with-dri-drivers=swrast,${MACHINE_DRI_MODULES}"
-> -
-> -do_install_append () {
-> -    install -d ${D}/usr/bin
-> -    install -m 0755 ${S}/progs/xdemos/{glxdemo,glxgears,glxheads,glxinfo} ${D}/usr/bin/
-> -}
-> diff --git a/recipes/mesa/mesa-dri_git.bb b/recipes/mesa/mesa-dri_git.bb
-> index bca681c..4ca1b73 100644
-> --- a/recipes/mesa/mesa-dri_git.bb
-> +++ b/recipes/mesa/mesa-dri_git.bb
-> @@ -6,7 +6,7 @@ LIB_DEPS = "libdrm virtual/libx11 libxext libxxf86vm libxdamage libxfixes"
->  DEPENDS = "${PROTO_DEPS}  ${LIB_DEPS}"
->  
->  PV = "7.2+gitr${SRCREV}"
-> -PR = "r1"
-> +PR = "${INC_PR}.0"
->  PE = "1"
->  
->  DEFAULT_PREFERENCE = "-1"
-> @@ -18,4 +18,3 @@ FILES_${PN} += "${libdir}/dri/*.so"
->  FILES_${PN}-dbg += "${libdir}/dri/.debug/*"
->  
->  EXTRA_OECONF += "--with-driver=dri --with-dri-drivers=swrast,${MACHINE_DRI_MODULES}"
-> -
+>  # Package contents vary according to ${MACHINE_DRI_MODULES}.
+>  PACKAGE_ARCH = "${MACHINE}"
 > -- 
 > 1.6.3
 > 
