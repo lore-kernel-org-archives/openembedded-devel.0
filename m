@@ -1,38 +1,23 @@
-Received: from [151.189.21.46] (helo=mail-in-06.arcor-online.net)
+Received: from [81.228.11.98] (helo=pne-smtpout1-sn1.fre.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martinator.de@arcor.de>) id 1MerOc-0001Cl-49
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MerP6-0001DJ-Tq
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 16:16:42 +0200
-Received: from mail-in-12-z2.arcor-online.net (mail-in-12-z2.arcor-online.net
-	[151.189.8.29]) by mx.arcor.de (Postfix) with ESMTP id 28DF539A5CB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 15:59:09 +0200 (CEST)
-Received: from mail-in-17.arcor-online.net (mail-in-17.arcor-online.net
-	[151.189.21.57])
-	by mail-in-12-z2.arcor-online.net (Postfix) with ESMTP id 0F371279455
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 15:59:09 +0200 (CEST)
-Received: from [192.168.178.27] (e179143172.adsl.alicedsl.de [85.179.143.172])
-	(Authenticated sender: martinator.de@arcor.de)
-	by mail-in-17.arcor-online.net (Postfix) with ESMTPSA id ADB673B24C8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 15:59:08 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-17.arcor-online.net ADB673B24C8
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arcor.de; s=mail-in;
-	t=1250949548; bh=PWAlzNFfMEi75m/2Kiubl3UnmQ3XxYH2iTqBYLGSB8Q=;
-	h=Message-ID:Date:From:MIME-Version:To:Subject:Content-Type:
-	Content-Transfer-Encoding;
-	b=V/0TkqDR0sGFunCOawD6XrBUYL7Vm8jYCPiwY7M9Fjydq6tf0WvdpNN6zXjImVLgq
-	I+H/mvBUx9Z+wnmqwb3L7zGx4Hk9w8+D6zh9A3DxgBrR7U/yDnXcK8BgwwNslm1ph5
-	nGOmAWZLPDAjjJyZQwo29KNZFiDkPQDj6nNx10Zk=
-Message-ID: <4A8FF9A1.8050800@arcor.de>
-Date: Sat, 22 Aug 2009 15:58:57 +0200
-From: Martin Wegner <martinator.de@arcor.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Sat, 22 Aug 2009 16:17:12 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout1-sn1.fre.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A683C78002B5491 for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Aug 2009 15:59:40 +0200
+Message-ID: <4A8FF9CB.6020607@atmel.com>
+Date: Sat, 22 Aug 2009 15:59:39 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.96.0
-Subject: bitbake error "The type package-info is already defined" :(
+References: <4A8FBCA1.9050601@atmel.com>
+In-Reply-To: <4A8FBCA1.9050601@atmel.com>
+Subject: Re: Cleaning up the "linux" directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,152 +31,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2009 14:16:42 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Sat, 22 Aug 2009 14:17:13 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Ulf Samuelsson skrev:
+> As everyone knows, the kernel directory is a mess:
+> I have been thinking about what to do about this,
+> and with the ability to include files in subdirectories,
+> I think I have found a nice solution.
+> 
+> New variables
+> 
+> CPU_FAMILY
+> KERNEL_MAJOR
+> KERNEL_MINOR
+> 
+> For future kernels,
+> 
+> Did not try this, yet but this looks promising...
+> 
+I have tested a recipe which configures itself based on CPU_FAMILY.
+The recipe is totally CPU/Architecure independent!
 
-I try to cross compile jalimo/icedtea but I get an "The type
-package-info is already defined" error and google is not my friend :(
 
-Who can help me please? Here is the log:
+----------------------------------------------------------------------------
+linux-2.6.30.2.bb contains:
 
-martin@martin-desktop:/stuff/sources$ bitbake openjdk-6
-/var/lib/python-support/python2.6/bb/COW.py:29: DeprecationWarning: the
-sets module is deprecated
-import types, sets
-WARNING: No matches in filesystem for /stuff/jalimo-trunk/oe-overlay in
-COLLECTIONS
-/var/lib/python-support/python2.6/bb/COW.py:29: DeprecationWarning: the
-sets module is deprecated
-import types, sets
-NOTE: Handling BitBake files: \ (7184/7184) [100 %]
-NOTE: Parsing finished. 6899 cached, 0 parsed, 285 skipped, 2 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-ERROR: Multiple .bb files are due to be built which each provide
-virtual/javac-native
-(/stuff/openembedded/recipes/ecj/ecj-bootstrap-native.bb
-/stuff/openembedded/recipes/openjdk-langtools/openjdk-javac-native_0.0+jdk7-b31.bb).
-This usually means one provides something the other doesn't and should.
-NOTE: Executing runqueue
-NOTE: Running task 1481 of 2097 (ID: 259,
-/stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb,
-do_compile)
-ERROR: function do_compile failed
-ERROR: log data follows
-(/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/temp/log.do_compile.28821)
-| 1/2 Building Hotspot
-| NOTE: make hotspot
-OE_PATH=/stuff/tmp/staging/i686-linux/usr/bin:/stuff/tmp/staging/i686-linux/usr/bin/i686-linux:/stuff/tmp/staging/i686-linux/usr/sbin:/stuff/tmp/staging/i686-linux/usr/bin:/stuff/tmp/cross/i686/bin:/stuff/tmp/staging/i686-linux/sbin:/stuff/tmp/staging/i686-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-| rm -f stamps/bootstrap-directory-symlink-ecj.stamp
-| rm -f stamps/icedtea-ecj.stamp
-| rm -f stamps/icedtea-against-ecj.stamp
-| /usr/bin/make hotspot-helper
-| make[1]: Entering directory
-`/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1'
-| rm -f bootstrap/jdk1.6.0
-| ln -sf ecj bootstrap/jdk1.6.0
-| mkdir -p stamps
-| touch stamps/bootstrap-directory-symlink-ecj.stamp
-| if ! test -d
-/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/bootstrap/jdk1.6.0
-; \
-| then \
-| /stuff/tmp/staging/i686-linux/usr/bin/ecj-bootstrap -g -d
-lib/hotspot-tools \
-| -source 1.5 \
-| -sourcepath \
-|
-'hotspot-tools:openjdk/jdk/src/share/classes:openjdk/jdk/src/solaris/classes:openjdk/langtools/src/share/classes:openjdk/jaxp/src/share/classes:openjdk/corba/src/share/classes:openjdk/jaxws/src/share/classes:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/generated:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/rt'
-\
-| -bootclasspath '' @hotspot-tools-source-files.txt ; \
-| else \
-|
-/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/bootstrap/jdk1.6.0/bin/javac
+SECTION = "kernel"
+DESCRIPTION = "Linux kernel 2.6.30.2"
+LICENSE = "GPL"
 
--g \
-| -d lib/hotspot-tools \
-| -source 1.5 \
-| -sourcepath \
-|
-'hotspot-tools:openjdk/jdk/src/share/classes:openjdk/jdk/src/solaris/classes:openjdk/langtools/src/share/classes:openjdk/jaxp/src/share/classes:openjdk/corba/src/share/classes:openjdk/jaxws/src/share/classes:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/generated:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/rt'
-\
-| -bootclasspath '' @hotspot-tools-source-files.txt ; \
-| fi
-| incorrect classpath:
-hotspot-tools/com/sun/codemodel/internal/ClassType.java
-| ----------
-| 1. ERROR in hotspot-tools/com/sun/codemodel/internal/package-info.java
-(at line 1)
-| /*
-| ^
-| The type package-info is already defined
-| ----------
-| ----------
-| 2. ERROR in hotspot-tools/com/sun/source/tree/package-info.java (at
-line 1)
-| /*
-| ^
-| The type package-info is already defined
-| ----------
-| ----------
-| 3. ERROR in hotspot-tools/com/sun/source/util/package-info.java (at
-line 1)
-| /*
-| ^
-| The type package-info is already defined
-| ----------
-| ----------
-| 4. ERROR in
-hotspot-tools/com/sun/tools/internal/xjc/model/package-info.java (at line 1)
-| /*
-| ^
-| The type package-info is already defined
-| ----------
-| ----------
-| 5. ERROR in hotspot-tools/com/sun/tools/internal/xjc/package-info.java
-(at line 1)
-| /*
-| ^
-| The type package-info is already defined
-| ----------
-| ----------
-| 6. ERROR in
-hotspot-tools/com/sun/tools/internal/xjc/reader/xmlschema/bindinfo/package-info.java
-(at line 1)
-| /*
-| ^
-| The type package-info is already defined
-| ----------
-| 6 problems (6 errors)make[1]: ***
-[stamps/hotspot-tools-class-files.stamp] Error 255
-| make[1]: Leaving directory
-`/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1'
-| make: *** [hotspot] Error 2
-| FATAL: oe_runmake failed
-NOTE: Task failed:
-/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/temp/log.do_compile.28821
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb
-do_compile failed
-ERROR: Task 259
-(/stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb,
-do_compile) failed
-NOTE: Tasks Summary: Attempted 1480 tasks of which 1480 didn't need to
-be rerun and 1 failed.
-ERROR:
-'/stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb'
-failed
-martin@martin-desktop:/stuff/sources$
+KERNEL_MAJOR = "2.6.30"
+KERNEL_MINOR = "2"
+PR = "r0"
 
-Thank you so much!
+DEFAULT_PREFERENCE = "-1"
 
-Greetings!
+require all-linux-v2.inc
 
-Martin
+----------------------------------------------------------------------------
+As you can see, there is only ONE require/include,
+and that is to a totally generic file,
+which configures the build based on
+
+CPU_FAMILY
+KERNEL_MAJOR
+KERNEL_MINOR
+
+The directory structure used to support the at91 for 2.6.30.2:
+
+2.6.30
+	2.6.30.2		# common , currently does nothing...
+		linux.inc
+		patches
+			network_files
+			SRC_URI_append.inc
+	at91			# at91 specific
+		at91.inc
+		logo_linux_clut224.ppm
+		2.6.30.2
+			patch-sets	# Not called "patches" by design
+				network_files
+				SRC_URI_append.inc
+				<patches>
+			boards
+				at91sam9g45ek
+					defconfig
+					logo_linux_clut224.ppm
+	The "2.6.30/2.6.30.2" directory can normally be copied to
+	"2.6.30/2.6.30.3" and renamed if the next kernel version is
+	needed. No need to edit, if this is pristine.
+
+
+It supports adding yet another level of directory in the "patch-sets"
+directory, so that you can have one directory per patch-set.
+
+
+
+
+----------------------------------------------------------------------------
+all-linux-v2.inc contains:
+
+require	linux.inc
+CPU_FAMILY ?= "dummy-arch"
+KERNEL_MAJOR  ?= "${PV}"
+#${FILE_DIRNAME}/
+KERNEL_MAJOR_DIR = "linux-${KERNEL_MAJOR}"
+require ${KERNEL_MAJOR_DIR}/version.inc
+
+KERNEL_VERSION_DIR = ${KERNEL_MAJOR_DIR}/${KERNEL_VERSION}
+KERNEL_CPU_FAMILY_DIR=${KERNEL_MAJOR_DIR}/${CPU_FAMILY}
+
+S = "${WORKDIR}/linux-${KERNEL_MAJOR}"
+
+KERNEL_SOURCE_DIR="${KERNELORG_MIRROR}/pub/linux/kernel/v2.6"
+SRC_URI = "${KERNEL_SOURCE_DIR}/linux-${KERNEL_MAJOR}.tar.bz2 "
+MINOR_PATCH=${KERNEL_SOURCE_DIR}/patch-${KERNEL_MAJOR}.${KERNEL_MINOR}.bz2
+
+# Include ${MINOR_PATCH} and any other common patches for this minor version
+require	${KERNEL_VERSION_DIR}/patches/SRC_URI_append.inc
+# Any customizations for this minor version
+require	${KERNEL_VERSION_DIR}/linux.inc
+
+# Customize for the CPU_FAMILY
+# Note that this can contain further includes for minor versions
+require	${KERNEL_CPU_FAMILY_DIR}/${CPU_FAMILY}.inc
+require	${KERNEL_CPU_FAMILY_DIR}/${KERNEL_VERSION}/${KERNEL_VERSION}.inc
+require
+${KERNEL_CPU_FAMILY_DIR}/${KERNEL_VERSION}/patch-sets/SRC_URI_append.inc
+
+
+----------------------------------------------------------------------------
+I ran into one problem:
+SRC_URI_append_at91sam9g45ek =         "
+file://linux-2.6.30/at91/2.6.30.2/boards/at91sam9g45ek/defconfig "
+
+moves the file to ${S} and not to ${WORKDIR}
+
+
+I took the easy way out with a workaround:
+
+	mv ${S}/defconfig ${WORKDIR}/defconfig
+
+What do I do wrong?
+
+-- 
+Best Regards
+Ulf Samuelsson
+
 
 
