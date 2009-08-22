@@ -1,32 +1,33 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1Metgc-0006Nh-Hm
+	(envelope-from <msmith@cbnco.com>) id 1MetiJ-0006Qd-FK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 18:43:26 +0200
+	Sat, 22 Aug 2009 18:45:13 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 28F08547981
+	by smtp.cbnco.com (Postfix) with ESMTP id 2E04F5478F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 12:25:55 -0400 (EDT)
+	Sat, 22 Aug 2009 12:27:40 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 11312-03 for <openembedded-devel@lists.openembedded.org>; 
-	Sat, 22 Aug 2009 12:25:55 -0400 (EDT)
+	with ESMTP id 11312-05 for <openembedded-devel@lists.openembedded.org>; 
+	Sat, 22 Aug 2009 12:27:40 -0400 (EDT)
 Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id C00A9547976
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 0CD135473E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 12:25:53 -0400 (EDT)
-Date: Sat, 22 Aug 2009 12:25:53 -0400 (EDT)
+	Sat, 22 Aug 2009 12:27:40 -0400 (EDT)
+Date: Sat, 22 Aug 2009 12:27:40 -0400 (EDT)
 From: Michael Smith <msmith@cbnco.com>
 X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1247540261-4537-3-git-send-email-msmith@cbnco.com>
-Message-ID: <Pine.LNX.4.64.0908221224480.3621@juice.ott.cti.com>
+In-Reply-To: <1247540261-4537-4-git-send-email-msmith@cbnco.com>
+Message-ID: <Pine.LNX.4.64.0908221227320.3621@juice.ott.cti.com>
 References: <1247540261-4537-1-git-send-email-msmith@cbnco.com>
 	<1247540261-4537-2-git-send-email-msmith@cbnco.com>
 	<1247540261-4537-3-git-send-email-msmith@cbnco.com>
+	<1247540261-4537-4-git-send-email-msmith@cbnco.com>
 MIME-Version: 1.0
 X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: Re: [PATCH 3/4] mesa-dri: move tls configure logic to a class
+Subject: Re: [PATCH 4/4] xorg-xserver-common: pass --enable-glx-tls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,53 +41,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2009 16:43:26 -0000
+X-List-Received-Date: Sat, 22 Aug 2009 16:45:16 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-... OK to commit?
+... and this one?
+
+Thanks,
+Mike
 
 On Mon, 13 Jul 2009, Michael Smith wrote:
 
-> Will allow reuse by xorg-xserver.
+> Uses the same inherit as mesa-dri, so they both get the same answer.
+> 
+> Also switch to INC_PR.
 > 
 > Signed-off-by: Michael Smith <msmith@cbnco.com>
 > ---
->  .../mesa-tls.inc => classes/glx-use-tls.bbclass    |    3 ++-
->  recipes/mesa/mesa-common.inc                       |    3 +--
->  2 files changed, 3 insertions(+), 3 deletions(-)
->  rename recipes/mesa/mesa-tls.inc => classes/glx-use-tls.bbclass (81%)
+>  recipes/xorg-xserver/xorg-xserver-common.inc |    4 +++-
+>  recipes/xorg-xserver/xserver-xorg_1.2.0.bb   |    2 +-
+>  recipes/xorg-xserver/xserver-xorg_1.3.0.0.bb |    2 +-
+>  recipes/xorg-xserver/xserver-xorg_1.4.2.bb   |    2 +-
+>  recipes/xorg-xserver/xserver-xorg_1.4.bb     |    2 +-
+>  recipes/xorg-xserver/xserver-xorg_1.5.1.bb   |    2 +-
+>  recipes/xorg-xserver/xserver-xorg_1.5.3.bb   |    2 +-
+>  recipes/xorg-xserver/xserver-xorg_1.6.1.bb   |    2 +-
+>  8 files changed, 10 insertions(+), 8 deletions(-)
 > 
-> diff --git a/recipes/mesa/mesa-tls.inc b/classes/glx-use-tls.bbclass
-> similarity index 81%
-> rename from recipes/mesa/mesa-tls.inc
-> rename to classes/glx-use-tls.bbclass
-> index 1472aa7..7530872 100644
-> --- a/recipes/mesa/mesa-tls.inc
-> +++ b/classes/glx-use-tls.bbclass
-> @@ -1,6 +1,7 @@
-> -
->  def get_tls_setting(bb, d):
->      # until we have no prober TLS support in uclibc disable it
->      if bb.data.getVar('TARGET_OS', d, 1).find('uclibc') >= 0 :
->          return ""
->      return "--enable-glx-tls"
+> diff --git a/recipes/xorg-xserver/xorg-xserver-common.inc b/recipes/xorg-xserver/xorg-xserver-common.inc
+> index ec56515..cfd350e 100644
+> --- a/recipes/xorg-xserver/xorg-xserver-common.inc
+> +++ b/recipes/xorg-xserver/xorg-xserver-common.inc
+> @@ -2,6 +2,8 @@ HOMEPAGE = "http://www.x.org"
+>  SECTION = "x11/base"
+>  LICENSE = "MIT-X"
+>  
+> +INC_PR = "r12"
 > +
-> +EXTRA_OECONF += "${@get_tls_setting(bb, d)}"
-> diff --git a/recipes/mesa/mesa-common.inc b/recipes/mesa/mesa-common.inc
-> index 4f18c2f..d7bfc14 100644
-> --- a/recipes/mesa/mesa-common.inc
-> +++ b/recipes/mesa/mesa-common.inc
-> @@ -19,8 +19,7 @@ EXTRA_OECONF = "--enable-glu \
->                  --disable-glut \
->  	       "
+>  PROVIDES = "virtual/xserver"
 >  
-> -require mesa-tls.inc
-> -EXTRA_OECONF += "${@get_tls_setting(bb, d)} "
-> +inherit glx-use-tls
+>  DEPENDS = "hal fontconfig freetype flex-native lbxutil kbproto \ 
+> @@ -21,7 +23,7 @@ SRC_URI = "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${PV}.tar.bz2"
 >  
->  # Package contents vary according to ${MACHINE_DRI_MODULES}.
->  PACKAGE_ARCH = "${MACHINE}"
+>  S = "${WORKDIR}/${XORG_PN}-${PV}"
+>  
+> -inherit autotools pkgconfig
+> +inherit autotools pkgconfig glx-use-tls
+>  
+>  EXTRA_OECONF += " --enable-xcalibrate \
+>                    --enable-kdrive \
+> diff --git a/recipes/xorg-xserver/xserver-xorg_1.2.0.bb b/recipes/xorg-xserver/xserver-xorg_1.2.0.bb
+> index 61f73b3..50d182c 100644
+> --- a/recipes/xorg-xserver/xserver-xorg_1.2.0.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg_1.2.0.bb
+> @@ -2,7 +2,7 @@ MESA_VER = "6.5.2"
+>  
+>  require xorg-xserver-common.inc
+>  PE = "1"
+> -PR = "r4"
+> +PR = "${INC_PR}.0"
+>  
+>  export LDFLAGS += " -ldl "
+>  
+> diff --git a/recipes/xorg-xserver/xserver-xorg_1.3.0.0.bb b/recipes/xorg-xserver/xserver-xorg_1.3.0.0.bb
+> index 9d6dca4..1efea75 100644
+> --- a/recipes/xorg-xserver/xserver-xorg_1.3.0.0.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg_1.3.0.0.bb
+> @@ -2,7 +2,7 @@ MESA_VER = "6.5.2"
+>  
+>  require xorg-xserver-common.inc
+>  PE = "1"
+> -PR = "r8"
+> +PR = "${INC_PR}.0"
+>  
+>  SRC_URI += "file://drmfix.patch;patch=1 \
+>              file://glyphstr.patch;patch=1"
+> diff --git a/recipes/xorg-xserver/xserver-xorg_1.4.2.bb b/recipes/xorg-xserver/xserver-xorg_1.4.2.bb
+> index 2c4f3d8..13cceb9 100644
+> --- a/recipes/xorg-xserver/xserver-xorg_1.4.2.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg_1.4.2.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION = "the X.Org X server"
+>  DEPENDS += "pixman"
+>  RDEPENDS += "hal"
+>  PE = "1"
+> -PR = "r11"
+> +PR = "${INC_PR}.0"
+>  
+>  SRC_URI += "file://drmfix.patch;patch=1 \
+>              file://pkgconfig_fix.patch;patch=1 \
+> diff --git a/recipes/xorg-xserver/xserver-xorg_1.4.bb b/recipes/xorg-xserver/xserver-xorg_1.4.bb
+> index cb9ddcd..edd1ac0 100644
+> --- a/recipes/xorg-xserver/xserver-xorg_1.4.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg_1.4.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION = "the X.Org X server"
+>  DEPENDS += "pixman"
+>  RDEPENDS += "hal"
+>  PE = "1"
+> -PR = "r9"
+> +PR = "${INC_PR}.0"
+>  
+>  SRC_URI += "file://drmfix.patch;patch=1 \
+>              file://pkgconfig_fix.patch;patch=1 \
+> diff --git a/recipes/xorg-xserver/xserver-xorg_1.5.1.bb b/recipes/xorg-xserver/xserver-xorg_1.5.1.bb
+> index d4b8caf..4c2efd5 100644
+> --- a/recipes/xorg-xserver/xserver-xorg_1.5.1.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg_1.5.1.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION = "the X.Org X server"
+>  DEPENDS += "pixman libpciaccess openssl"
+>  RDEPENDS += "hal"
+>  PE = "1"
+> -PR = "r3"
+> +PR = "${INC_PR}.0"
+>  
+>  SRC_URI += "file://drmfix.patch;patch=1 \
+>              file://sysroot_fix.patch;patch=1"
+> diff --git a/recipes/xorg-xserver/xserver-xorg_1.5.3.bb b/recipes/xorg-xserver/xserver-xorg_1.5.3.bb
+> index 74ea3c4..3969724 100644
+> --- a/recipes/xorg-xserver/xserver-xorg_1.5.3.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg_1.5.3.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION = "the X.Org X server"
+>  DEPENDS += "pixman libpciaccess openssl"
+>  RDEPENDS += "hal"
+>  PE = "2"
+> -PR = "r5"
+> +PR = "${INC_PR}.0"
+>  
+>  SRC_URI += "file://drmfix.patch;patch=1 \
+>              file://sysroot_fix.patch;patch=1 \
+> diff --git a/recipes/xorg-xserver/xserver-xorg_1.6.1.bb b/recipes/xorg-xserver/xserver-xorg_1.6.1.bb
+> index f2902cf..0c5a304 100644
+> --- a/recipes/xorg-xserver/xserver-xorg_1.6.1.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg_1.6.1.bb
+> @@ -4,7 +4,7 @@ DESCRIPTION = "the X.Org X server"
+>  DEPENDS += "pixman libpciaccess openssl xineramaproto libxinerama"
+>  RDEPENDS += "hal"
+>  PE = "2"
+> -PR = "r2"
+> +PR = "${INC_PR}.0"
+>  
+>  SRC_URI += " \
+>  	file://sysroot_fix.patch;patch=1 \
 > -- 
 > 1.6.3
 > 
