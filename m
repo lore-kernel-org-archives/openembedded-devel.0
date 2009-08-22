@@ -1,34 +1,41 @@
-Received: from [209.85.220.224] (helo=mail-fx0-f224.google.com)
+Received: from [151.189.21.49] (helo=mail-in-09.arcor-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stuart68@gmail.com>) id 1Meng1-0004NP-Lu
+	(envelope-from <martinator.de@arcor.de>) id 1Mer12-0000JE-Jj
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 12:18:26 +0200
-Received: by fxm24 with SMTP id 24so736465fxm.12
+	Sat, 22 Aug 2009 15:52:20 +0200
+Received: from mail-in-10-z2.arcor-online.net (mail-in-10-z2.arcor-online.net
+	[151.189.8.27]) by mx.arcor.de (Postfix) with ESMTP id A17771AF797
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Aug 2009 03:00:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=XaP4vqt5qDoONbTt+LjmFJNXwIcmQhIispsMXOoR2WA=;
-	b=eOyb9kuxe7cszYfw+0GoExfQCg03dLH0qecwguO8/KbvOlZU6hDPYpdVGRweE7LJ+s
-	Ai0WdQYCQCHuG/0Z5AuvEwhnrwBcLxdr/rx6yVOfgd2rpL0vHGsUTGvLz4gvQzJPk+9r
-	kRUfKxGUAN4E4Qr0AbU+pvjrP3BQCKOr3rARc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Cn4m5PmAMkUCHeH2iC9xuw7HM4g03zg2faoakvfFKNx0CoaN/0it5MmH4uc+Y7PHC2
-	okmQheIA/pHRdLmD5NwV1N36tgn/ewGADm0yATJO8NxADyS7+POz2iwvmBIQXONtvYJh
-	6W4pj051sjyZG74dFwB6OU5e1UcQ+63qvvqGU=
+	Sat, 22 Aug 2009 15:34:47 +0200 (CEST)
+Received: from mail-in-04.arcor-online.net (mail-in-04.arcor-online.net
+	[151.189.21.44])
+	by mail-in-10-z2.arcor-online.net (Postfix) with ESMTP id 814DE23D885
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Aug 2009 15:34:47 +0200 (CEST)
+Received: from [192.168.178.27] (e179143172.adsl.alicedsl.de [85.179.143.172])
+	(Authenticated sender: martinator.de@arcor.de)
+	by mail-in-04.arcor-online.net (Postfix) with ESMTPSA id 3B1DE33A941
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Aug 2009 15:34:47 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mail-in-04.arcor-online.net 3B1DE33A941
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arcor.de; s=mail-in;
+	t=1250948087; bh=KWUh8UCUgg0/3OdKtg22enzP2tKbObVlHIApI0A/cqk=;
+	h=Message-ID:Date:From:MIME-Version:To:Subject:References:
+	In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	b=fLQvFD2T4vSU4VBDe9yhyBZYi93lKzpTiTw0ynzP+Qk+OOSdmdB3KaQW7YL81LJin
+	4EuLTWFwp5fQXNRc1Lv5Dr9nVpMNdIraHSVq9qzZDwQGBaCYori9XwR8TEAWGPErq5
+	W4r0BgbZjg+OAFEZa+md6lm4M37toGF94zqHIlbI=
+Message-ID: <4A8FF3EB.3010709@arcor.de>
+Date: Sat, 22 Aug 2009 15:34:35 +0200
+From: Martin Wegner <martinator.de@arcor.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Received: by 10.102.226.17 with SMTP id y17mr894154mug.67.1250935254425; Sat, 
-	22 Aug 2009 03:00:54 -0700 (PDT)
-Date: Sat, 22 Aug 2009 11:00:54 +0100
-Message-ID: <91283b620908220300u6770aaebo7aa89b1b1b91e2fd@mail.gmail.com>
-From: Stuart Gray <stuart68@gmail.com>
-To: "General mailing list for gumstix users."
-	<gumstix-users@lists.sourceforge.net>, 
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Musicbrainz
+To: openembedded-devel@lists.openembedded.org
+References: <4A8F6FE3.5080901@arcor.de>
+	<1250927519.4215.321.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1250927519.4215.321.camel@lenovo.internal.reciva.com>
+X-Enigmail-Version: 0.96.0
+Subject: Re: bitbake source fetch problem :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,61 +49,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2009 10:18:27 -0000
+X-List-Received-Date: Sat, 22 Aug 2009 13:52:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-hi,
+Hi Phil,
 
-Has any one successfully compiled libmusicbrainz_3.0.2.
+thank you for your quick answer. Now I installed mecurial but I found a
+bug...
 
-I have this compiling but it fails at the linking stage as it cannot find
-the library libstdc++.so.6.
+NOTE: Fetch hg://icedtea.classpath.org;module=hg/icedtea6;rev=bb7ad7d43804
+abort: No such file or directory: hg/icedtea6
+NOTE: Task failed: Fetch failed: Fetch command export
+SSH_AUTH_SOCK=/tmp/keyring-J8gFA7/socket.ssh; export
+PATH=/stuff/tmp/staging/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/stuff/tmp/staging/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/stuff/tmp/staging/i686-linux/usr/sbin:/stuff/tmp/staging/i686-linux/usr/bin:/stuff/tmp/cross/armv5te/bin:/stuff/tmp/staging/i686-linux/sbin:/stuff/tmp/staging/i686-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;
+/usr/bin/env hg clone -r bb7ad7d43804
+http://icedtea.classpath.org/hg/icedtea6 hg/icedtea6 failed with signal
+255, output:
+abort: No such file or directory: hg/icedtea6
 
-I have tried various EXTRA_OEMAKE, OECONF, OECMAKE, but none will add the
-option to the linking stage. Can anyone give me some pointers.
+When I create the hg/icedtea6 directory at
+/stuff/sources/hg/icedtea.classpath.org/ I got this log
 
+NOTE: Fetch hg://icedtea.classpath.org;module=hg/icedtea6;rev=bb7ad7d43804
+abort: destination 'hg/icedtea6' already exists
+NOTE: Task failed: Fetch failed: Fetch command export
+SSH_AUTH_SOCK=/tmp/keyring-J8gFA7/socket.ssh; export
+PATH=/stuff/tmp/staging/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/stuff/tmp/staging/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/stuff/tmp/staging/i686-linux/usr/sbin:/stuff/tmp/staging/i686-linux/usr/bin:/stuff/tmp/cross/armv5te/bin:/stuff/tmp/staging/i686-linux/sbin:/stuff/tmp/staging/i686-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;
+/usr/bin/env hg clone -r bb7ad7d43804
+http://icedtea.classpath.org/hg/icedtea6 hg/icedtea6 failed with signal
+255, output:
+abort: destination 'hg/icedtea6' already exists
 
-|
-/home/stuart/overo-oe/tmp/cross/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-warning: libstdc++.so.6, needed by ../src/libmusicbrainz3.so.6.2.0, not
-found (try using -rpath or -rpath-link)
-| ../src/libmusicbrainz3.so.6.2.0: undefined reference to
-`__cxa_allocate_exception@CXXABI_1.3'
-| ../src/libmusicbrainz3.so.6.2.0: undefined reference to
-`__gnu_cxx::__exchange_and_add(int volatile*, int)@GLIBCXX_3.4'
-| ../src/libmusicbrainz3.so.6.2.0: undefined reference to
-`std::basic_string<char, std::char_traits<char>, std::allocator<char>
->::rfind(char, unsigned int) const@GLIBCXX_3.4'
-| ../src/libmusicbrainz3.so.6.2.0: undefined reference to
-`std::basic_string<char, std::char_traits<char>, std::allocator<char>
->::assign(std::basic_string<char, std::char_traits<char>,
-std::allocator<char> > const&)@GLIBCXX_3.4'
+It only works when I delete the hg/icedtea6 directory I added before and
+create only the hg directory at /stuff/sources/hg/icedtea.classpath.org/
 
+I posted this bug to the jalimo mailing list.
 
-I thoungth this should the place where I could add the linrary
+Greetings!
 
-oe_soinstall() {
-    # Purpose: Install shared library file and
-    #          create the necessary links
-    # Example:
-    #
-    # oe_
-    #
-    #oenote installing shared library $1 to $2
-    #
-    libname=`basename $1`
-    install -m 755 $1 $2/$libname
-    sonamelink=`arm-angstrom-linux-gnueabi-readelf -d $1 |grep 'Library
-soname:' |sed -e 's/.*\[\(.*\)\].*/\1/'`
-    solink=`echo $libname | sed -e 's/\.so\..*/.so/'`
-    ln -sf $libname $2/$sonamelink
-    ln -sf $libname $2/$solink
+Martin
 
-}
+Phil Blundell schrieb:
+> On Sat, 2009-08-22 at 06:11 +0200, Martin Wegner wrote:
+>   
+>> PATH=/stuff/tmp/staging/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/stuff/tmp/staging/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/stuff/tmp/staging/i686-linux/usr/sbin:/stuff/tmp/staging/i686-linux/usr/bin:/stuff/tmp/cross/armv5te/bin:/stuff/tmp/staging/i686-linux/sbin:/stuff/tmp/staging/i686-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;
+>> /usr/bin/env hg clone -r bb7ad7d43804
+>> http://icedtea.classpath.org/hg/icedtea6 hg/icedtea6 failed with signal
+>> 127, output:
+>> /usr/bin/env: hg: No such file or directory
+>>     
+>
+> This error seems fairly self-explanatory: it would appear that you are
+> trying to check out from a mercurial repository without having the
+> mercurial client installed.
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>   
 
-Please let me know if this is the correct way to proceed.
-
-Thanks,
-Stuart
 
