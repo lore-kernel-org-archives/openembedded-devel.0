@@ -1,23 +1,31 @@
-Received: from [81.228.8.83] (helo=pne-smtpout1-sn2.hy.skanova.net)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1MesKj-0000an-8M
+	(envelope-from <msmith@cbnco.com>) id 1MeteV-0006Jr-UH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 17:16:45 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn2.hy.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A7285AE0022B2AE for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 16:59:12 +0200
-Message-ID: <4A9007BF.8060904@atmel.com>
-Date: Sat, 22 Aug 2009 16:59:11 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
-MIME-Version: 1.0
+	Sat, 22 Aug 2009 18:41:16 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 83F1651B1F2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 10395-09 for <openembedded-devel@lists.openembedded.org>; 
+	Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 5EFFE494472
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
+Date: Sat, 22 Aug 2009 12:23:44 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-References: <4A8FBCA1.9050601@atmel.com> <4A8FF9CB.6020607@atmel.com>
-In-Reply-To: <4A8FF9CB.6020607@atmel.com>
-Subject: Re: Cleaning up the "linux" directory - Available in origin/ulf/linux-2.6.30.2
+In-Reply-To: <1247540261-4537-2-git-send-email-msmith@cbnco.com>
+Message-ID: <Pine.LNX.4.64.0908221223240.3621@juice.ott.cti.com>
+References: <1247540261-4537-1-git-send-email-msmith@cbnco.com>
+	<1247540261-4537-2-git-send-email-msmith@cbnco.com>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH 2/4] mesa-dri: set PACKAGE_ARCH to ${MACHINE}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,147 +39,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2009 15:16:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 22 Aug 2009 16:41:16 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Ulf Samuelsson skrev:
+OK to commit?
 
-Just pushed this stuff to my private branch
-Also added at91bootstrap-2.14-rc4 (which enables user reset)
-a tftpboot recipe, which copies the results to /tftpboot/Angstrom/${MACHINE}
-Added the gnome scripts to the scripts/nautilus-scripts directory.
+On Mon, 13 Jul 2009, Michael Smith wrote:
 
-BR
-Ulf Samuelsson
-
-
-> Ulf Samuelsson skrev:
->> As everyone knows, the kernel directory is a mess:
->> I have been thinking about what to do about this,
->> and with the ability to include files in subdirectories,
->> I think I have found a nice solution.
->>
->> New variables
->>
->> CPU_FAMILY
->> KERNEL_MAJOR
->> KERNEL_MINOR
->>
->> For future kernels,
->>
->> Did not try this, yet but this looks promising...
->>
-> I have tested a recipe which configures itself based on CPU_FAMILY.
-> The recipe is totally CPU/Architecure independent!
+> ${MACHINE_DRI_MODULES} is passed to configure, so the package output
+> depends on MACHINE. As foretold by commit f06119fc :)
 > 
+> Also switch to INC_PR and fix built of mesa-xprogs when prefix != /usr.
 > 
-> ----------------------------------------------------------------------------
-> linux-2.6.30.2.bb contains:
+> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> ---
+>  recipes/mesa/mesa-common.inc |   10 +++++++++-
+>  recipes/mesa/mesa-dri_7.2.bb |    7 +------
+>  recipes/mesa/mesa-dri_7.4.bb |    7 +------
+>  recipes/mesa/mesa-dri_git.bb |    3 +--
+>  4 files changed, 12 insertions(+), 15 deletions(-)
 > 
-> SECTION = "kernel"
-> DESCRIPTION = "Linux kernel 2.6.30.2"
-> LICENSE = "GPL"
+> diff --git a/recipes/mesa/mesa-common.inc b/recipes/mesa/mesa-common.inc
+> index 9cd10eb..4f18c2f 100644
+> --- a/recipes/mesa/mesa-common.inc
+> +++ b/recipes/mesa/mesa-common.inc
+> @@ -4,6 +4,8 @@ DESCRIPTION = "An open source implementation of the OpenGL spec"
+>  HOMEPAGE = "http://mesa3d.org"
+>  LICENSE = "MIT"
+>  
+> +INC_PR = "r7"
+> +
+>  SRC_URI = "${SOURCEFORGE_MIRROR}/mesa3d/MesaLib-${PV}.tar.bz2 \
+>             ${SOURCEFORGE_MIRROR}/mesa3d/MesaDemos-${PV}.tar.bz2 "
+>  S = "${WORKDIR}/Mesa-${PV}"
+> @@ -20,6 +22,9 @@ EXTRA_OECONF = "--enable-glu \
+>  require mesa-tls.inc
+>  EXTRA_OECONF += "${@get_tls_setting(bb, d)} "
+>  
+> +# Package contents vary according to ${MACHINE_DRI_MODULES}.
+> +PACKAGE_ARCH = "${MACHINE}"
+> +
+>  PACKAGES =+ "libglu libglu-dev libosmesa libosmesa-dev libgl libgl-dev"
+>  FILES_libgl = "${libdir}/libGL.so.*"
+>  FILES_libglu = "${libdir}/libGLU.so.*"
+> @@ -36,4 +41,7 @@ do_stage() {
+>  		cp -pPr ${S}/include/GL/internal* ${STAGING_INCDIR}/GL/
+>  }
+>  
+> -
+> +do_install_append () {
+> +    install -d ${D}/${bindir}
+> +    install -m 0755 ${S}/progs/xdemos/{glxdemo,glxgears,glxheads,glxinfo} ${D}/${bindir}
+> +}
+> diff --git a/recipes/mesa/mesa-dri_7.2.bb b/recipes/mesa/mesa-dri_7.2.bb
+> index 296a254..9356843 100644
+> --- a/recipes/mesa/mesa-dri_7.2.bb
+> +++ b/recipes/mesa/mesa-dri_7.2.bb
+> @@ -6,7 +6,7 @@ LIB_DEPS = "libdrm virtual/libx11 libxext libxxf86vm libxdamage libxfixes"
+>  DEPENDS = "${PROTO_DEPS}  ${LIB_DEPS}"
+>  
+>  PE = "1"
+> -PR = "r6"
+> +PR = "${INC_PR}.0"
+>  
+>  # most of our targets do not have DRI so will use mesa-xlib
+>  DEFAULT_PREFERENCE = "-1"
+> @@ -21,8 +21,3 @@ FILES_${PN}-dbg += "${libdir}/dri/.debug/*"
+>  FILES_${PN}-xprogs = "${bindir}/glxdemo ${bindir}/glxgears ${bindir}/glxheads ${bindir}/glxinfo"
+>  
+>  EXTRA_OECONF += "--with-driver=dri --with-dri-drivers=swrast,${MACHINE_DRI_MODULES}"
+> -
+> -do_install_append () {
+> -    install -d ${D}/usr/bin
+> -    install -m 0755 ${S}/progs/xdemos/{glxdemo,glxgears,glxheads,glxinfo} ${D}/usr/bin/
+> -}
+> diff --git a/recipes/mesa/mesa-dri_7.4.bb b/recipes/mesa/mesa-dri_7.4.bb
+> index 296a254..9356843 100644
+> --- a/recipes/mesa/mesa-dri_7.4.bb
+> +++ b/recipes/mesa/mesa-dri_7.4.bb
+> @@ -6,7 +6,7 @@ LIB_DEPS = "libdrm virtual/libx11 libxext libxxf86vm libxdamage libxfixes"
+>  DEPENDS = "${PROTO_DEPS}  ${LIB_DEPS}"
+>  
+>  PE = "1"
+> -PR = "r6"
+> +PR = "${INC_PR}.0"
+>  
+>  # most of our targets do not have DRI so will use mesa-xlib
+>  DEFAULT_PREFERENCE = "-1"
+> @@ -21,8 +21,3 @@ FILES_${PN}-dbg += "${libdir}/dri/.debug/*"
+>  FILES_${PN}-xprogs = "${bindir}/glxdemo ${bindir}/glxgears ${bindir}/glxheads ${bindir}/glxinfo"
+>  
+>  EXTRA_OECONF += "--with-driver=dri --with-dri-drivers=swrast,${MACHINE_DRI_MODULES}"
+> -
+> -do_install_append () {
+> -    install -d ${D}/usr/bin
+> -    install -m 0755 ${S}/progs/xdemos/{glxdemo,glxgears,glxheads,glxinfo} ${D}/usr/bin/
+> -}
+> diff --git a/recipes/mesa/mesa-dri_git.bb b/recipes/mesa/mesa-dri_git.bb
+> index bca681c..4ca1b73 100644
+> --- a/recipes/mesa/mesa-dri_git.bb
+> +++ b/recipes/mesa/mesa-dri_git.bb
+> @@ -6,7 +6,7 @@ LIB_DEPS = "libdrm virtual/libx11 libxext libxxf86vm libxdamage libxfixes"
+>  DEPENDS = "${PROTO_DEPS}  ${LIB_DEPS}"
+>  
+>  PV = "7.2+gitr${SRCREV}"
+> -PR = "r1"
+> +PR = "${INC_PR}.0"
+>  PE = "1"
+>  
+>  DEFAULT_PREFERENCE = "-1"
+> @@ -18,4 +18,3 @@ FILES_${PN} += "${libdir}/dri/*.so"
+>  FILES_${PN}-dbg += "${libdir}/dri/.debug/*"
+>  
+>  EXTRA_OECONF += "--with-driver=dri --with-dri-drivers=swrast,${MACHINE_DRI_MODULES}"
+> -
+> -- 
+> 1.6.3
 > 
-> KERNEL_MAJOR = "2.6.30"
-> KERNEL_MINOR = "2"
-> PR = "r0"
-> 
-> DEFAULT_PREFERENCE = "-1"
-> 
-> require all-linux-v2.inc
-> 
-> ----------------------------------------------------------------------------
-> As you can see, there is only ONE require/include,
-> and that is to a totally generic file,
-> which configures the build based on
-> 
-> CPU_FAMILY
-> KERNEL_MAJOR
-> KERNEL_MINOR
-> 
-> The directory structure used to support the at91 for 2.6.30.2:
-> 
-> 2.6.30
-> 	2.6.30.2		# common , currently does nothing...
-> 		linux.inc
-> 		patches
-> 			network_files
-> 			SRC_URI_append.inc
-> 	at91			# at91 specific
-> 		at91.inc
-> 		logo_linux_clut224.ppm
-> 		2.6.30.2
-> 			patch-sets	# Not called "patches" by design
-> 				network_files
-> 				SRC_URI_append.inc
-> 				<patches>
-> 			boards
-> 				at91sam9g45ek
-> 					defconfig
-> 					logo_linux_clut224.ppm
-> 	The "2.6.30/2.6.30.2" directory can normally be copied to
-> 	"2.6.30/2.6.30.3" and renamed if the next kernel version is
-> 	needed. No need to edit, if this is pristine.
-> 
-> 
-> It supports adding yet another level of directory in the "patch-sets"
-> directory, so that you can have one directory per patch-set.
-> 
-> 
-> 
-> 
-> ----------------------------------------------------------------------------
-> all-linux-v2.inc contains:
-> 
-> require	linux.inc
-> CPU_FAMILY ?= "dummy-arch"
-> KERNEL_MAJOR  ?= "${PV}"
-> #${FILE_DIRNAME}/
-> KERNEL_MAJOR_DIR = "linux-${KERNEL_MAJOR}"
-> require ${KERNEL_MAJOR_DIR}/version.inc
-> 
-> KERNEL_VERSION_DIR = ${KERNEL_MAJOR_DIR}/${KERNEL_VERSION}
-> KERNEL_CPU_FAMILY_DIR=${KERNEL_MAJOR_DIR}/${CPU_FAMILY}
-> 
-> S = "${WORKDIR}/linux-${KERNEL_MAJOR}"
-> 
-> KERNEL_SOURCE_DIR="${KERNELORG_MIRROR}/pub/linux/kernel/v2.6"
-> SRC_URI = "${KERNEL_SOURCE_DIR}/linux-${KERNEL_MAJOR}.tar.bz2 "
-> MINOR_PATCH=${KERNEL_SOURCE_DIR}/patch-${KERNEL_MAJOR}.${KERNEL_MINOR}.bz2
-> 
-> # Include ${MINOR_PATCH} and any other common patches for this minor version
-> require	${KERNEL_VERSION_DIR}/patches/SRC_URI_append.inc
-> # Any customizations for this minor version
-> require	${KERNEL_VERSION_DIR}/linux.inc
-> 
-> # Customize for the CPU_FAMILY
-> # Note that this can contain further includes for minor versions
-> require	${KERNEL_CPU_FAMILY_DIR}/${CPU_FAMILY}.inc
-> require	${KERNEL_CPU_FAMILY_DIR}/${KERNEL_VERSION}/${KERNEL_VERSION}.inc
-> require
-> ${KERNEL_CPU_FAMILY_DIR}/${KERNEL_VERSION}/patch-sets/SRC_URI_append.inc
-> 
-> 
-> ----------------------------------------------------------------------------
-> I ran into one problem:
-> SRC_URI_append_at91sam9g45ek =         "
-> file://linux-2.6.30/at91/2.6.30.2/boards/at91sam9g45ek/defconfig "
-> 
-> moves the file to ${S} and not to ${WORKDIR}
-> 
-> 
-> I took the easy way out with a workaround:
-> 
-> 	mv ${S}/defconfig ${WORKDIR}/defconfig
-> 
-> What do I do wrong?
-> 
-
-
--- 
-Best Regards
-Ulf Samuelsson
-
 
 
